@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Фильмы и сериалы — лучшие 5000</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Фильмы и сериалы</h1>
+      <p id="statusText">Загрузка базы...</p>
+    </div>
+    <div class="top-actions">
+      <button id="themeBtn" class="small-btn">Тема</button>
+      <button id="reloadBtn" class="small-btn">Обновить</button>
+    </div>
+  </header>
+
+  <section class="controls">
+    <input id="searchInput" type="search" placeholder="Поиск: матрица, breaking bad, 2024..." autocomplete="off" />
+
+    <select id="typeFilter">
+      <option value="">Все типы</option>
+      <option value="Фильм">Фильмы</option>
+      <option value="Сериал">Сериалы</option>
+    </select>
+
+    <select id="genreFilter">
+      <option value="">Все жанры</option>
+    </select>
+
+    <select id="yearFilter">
+      <option value="">Все годы</option>
+    </select>
+
+    <select id="ratingFilter">
+      <option value="0">Любой рейтинг</option>
+      <option value="7">от 7.0</option>
+      <option value="8">от 8.0</option>
+      <option value="9">от 9.0</option>
+    </select>
+  </section>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="all">Все</button>
+    <button class="tab" data-tab="new">Новые</button>
+    <button class="tab" data-tab="fav">Избранное</button>
+    <button class="tab" data-tab="history">История</button>
+    <button class="tab" data-tab="random">Случайное</button>
+  </nav>
+
+  <main>
+    <div id="countText" class="count"></div>
+    <div id="grid" class="grid"></div>
+    <div class="pager">
+      <button id="prevBtn">Назад</button>
+      <span id="pageText"></span>
+      <button id="nextBtn">Вперёд</button>
+    </div>
+  </main>
+
+  <dialog id="detailsDialog">
+    <div class="dialog-content">
+      <button id="closeDialog" class="close">×</button>
+      <div class="details">
+        <img id="detailPoster" alt="" />
+        <div>
+          <h2 id="detailTitle"></h2>
+          <p id="detailMeta"></p>
+          <p id="detailGenres"></p>
+          <p id="detailOverview"></p>
+
+          <div class="detail-buttons">
+            <button id="favBtn">В избранное</button>
+            <a id="kinopoiskLink" target="_blank" rel="noreferrer">Кинопоиск</a>
+            <a id="youtubeLink" target="_blank" rel="noreferrer">YouTube</a>
+            <a id="vkLink" target="_blank" rel="noreferrer">VK Видео</a>
+            <a id="rutubeLink" target="_blank" rel="noreferrer">Rutube</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
