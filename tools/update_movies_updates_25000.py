@@ -205,7 +205,7 @@ def score(item):
     pop_score = min(4, pop / 80)
     fresh_score = 0.3 if year and year >= 2020 else 0
     penalty = 0
-    if votes < 30:
+    if votes < 1:
         penalty += 5
     elif votes < 100:
         penalty += 2
