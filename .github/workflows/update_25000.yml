@@ -11,7 +11,7 @@ permissions:
 jobs:
   update-25000:
     runs-on: ubuntu-latest
-    timeout-minutes: 55
+    timeout-minutes: 120
 
     steps:
       - name: Checkout repository
@@ -28,7 +28,7 @@ jobs:
           TARGET_COUNT: "100000"
         run: python tools/update_movies_updates_25000.py
 
-            - name: Commit database
+      - name: Commit database
         run: |
           git config user.name "movies-25000-bot"
           git config user.email "actions@github.com"
