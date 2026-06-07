@@ -38,6 +38,16 @@ function getRating(m) {
   return Number(m.rating || 0);
 }
 
+function rankOf(m) {
+  const r = getRating(m);
+
+  if (r >= 9) return { rank: "S", label: "S-класс" };
+  if (r >= 8) return { rank: "A", label: "A-класс" };
+  if (r >= 7) return { rank: "B", label: "B-класс" };
+  if (r >= 6) return { rank: "C", label: "C-класс" };
+
+  return { rank: "D", label: "D-класс" };
+}
 function getVotes(m) {
   return Number(m.votes || 0);
 }
@@ -248,7 +258,9 @@ function cardHtml(m) {
         <p class="card-title">${escapeHtml(titleOf(m))}</p>
         <p class="meta">${escapeHtml(m.year || "—")} · ${escapeHtml(m.type || "—")}</p>
         <p class="meta">${escapeHtml(genres)}</p>
-        <span class="rating">${getRating(m).toFixed(1)}</span>
+       <span class="rating rank-${rankOf(m).rank.toLowerCase()}">
+  ${rankOf(m).rank}-класс · ${getRating(m).toFixed(1)}
+</span>
       </div>
     </article>
   `;
