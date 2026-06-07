@@ -304,6 +304,11 @@ if (catalogLinksBlock) {
   $("youtubeLink").href = `https://www.youtube.com/results?search_query=${q}+трейлер`;
   $("vkLink").href = `https://vk.com/video?q=${q}`;
   $("rutubeLink").href = `https://rutube.ru/search/?query=${q}`;
+  if ($("shikimoriLink")) $("shikimoriLink").href = `https://shikimori.one/animes?search=${q}`;
+if ($("malLink")) $("malLink").href = `https://myanimelist.net/anime.php?q=${q}`;
+if ($("anilistLink")) $("anilistLink").href = `https://anilist.co/search/anime?search=${q}`;
+if ($("animePlanetLink")) $("animePlanetLink").href = `https://www.anime-planet.com/anime/all?name=${q}`;
+if ($("anidbLink")) $("anidbLink").href = `https://anidb.net/anime/?adb.search=${q}`;
 
   updateFavBtn();
   $("detailsDialog").showModal();
