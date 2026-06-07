@@ -1,0 +1,34 @@
+name: Generate SEO movie pages
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "movies_updates.json"
+      - "tools/generate_seo_pages.py"
+
+permissions:
+  contents: write
+
+jobs:
+  generate-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Generate static SEO pages
+        run: python tools/generate_seo_pages.py
+
+      - name: Commit generated pages
+        run: |
+          git config user.name "seo-pages-bot"
+          git config user.email "actions@github.com"
+          git add film sitemap.xml
+          git diff --cached --quiet && echo "No changes" || git commit -m "Generate SEO pages"
+          git push
