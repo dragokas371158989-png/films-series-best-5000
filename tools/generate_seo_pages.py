@@ -34,6 +34,14 @@ def genres_of(item):
     g = item.get("genres") or []
     return [str(x) for x in g if x] if isinstance(g, list) else []
 
+def is_anime(item):
+    hay = " ".join([
+        text(item.get("ru")), text(item.get("en")), text(item.get("type")),
+        text(item.get("category")), text(item.get("studio")),
+        text(item.get("overview")), " ".join(genres_of(item))
+    ]).lower()
+    return any(x in hay for x in ["аниме", "anime", "manga", "ova"])
+
 def make_page(item):
     item_id = text(item.get("id"), "0")
     title = title_of(item)
@@ -59,6 +67,19 @@ def make_page(item):
     if rating:
         ld["aggregateRating"] = {"@type":"AggregateRating","ratingValue":rating,"bestRating":10,"ratingCount":max(votes,1)}
     json_ld = json.dumps(ld, ensure_ascii=False)
+
+    anime_block = ""
+    if is_anime(item):
+        anime_block = f'''
+        <h2 class="section-title">Аниме-сайты</h2>
+        <div class="buttons">
+          <a href="https://shikimori.one/animes?search={escape(q)}" target="_blank" rel="noreferrer">Shikimori</a>
+          <a href="https://myanimelist.net/anime.php?q={escape(q)}" target="_blank" rel="noreferrer">MyAnimeList</a>
+          <a href="https://anilist.co/search/anime?search={escape(q)}" target="_blank" rel="noreferrer">AniList</a>
+          <a href="https://www.anime-planet.com/anime/all?name={escape(q)}" target="_blank" rel="noreferrer">Anime-Planet</a>
+          <a href="https://anidb.net/anime/?adb.search={escape(q)}" target="_blank" rel="noreferrer">AniDB</a>
+        </div>'''
+
     return f'''<!doctype html>
 <html lang="ru">
 <head>
@@ -98,6 +119,8 @@ def make_page(item):
         <p class="genres">{escape(" · ".join(genres))}</p>
         <div class="rating">{rating:.1f}</div>
         <p class="overview">{escape(overview)}</p>
+
+        {anime_block}
 
         <h2 class="section-title">Найти на сайтах-каталогах</h2>
         <div class="buttons">
