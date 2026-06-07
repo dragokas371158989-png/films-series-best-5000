@@ -1,0 +1,41 @@
+name: Anime booster
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 4 * * 2"
+
+permissions:
+  contents: write
+
+jobs:
+  anime-booster:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Add anime to movies_updates.json
+        run: python tools/update_anime_booster.py
+
+      - name: Rebuild chunked database
+        run: |
+          if [ -f tools/build_chunked_database.py ]; then
+            python tools/build_chunked_database.py
+          else
+            echo "tools/build_chunked_database.py not found, skip chunk build"
+          fi
+
+      - name: Commit anime database
+        run: |
+          git config user.name "anime-booster-bot"
+          git config user.email "anime-booster-bot@users.noreply.github.com"
+          git add movies_updates.json data || true
+          git diff --cached --quiet || git commit -m "Add anime booster database"
+          git push
