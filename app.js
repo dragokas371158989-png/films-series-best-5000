@@ -6,6 +6,7 @@ let allMovies = [];
 let filtered = [];
 let currentPage = 1;
 let currentTab = "all";
+let currentAnimeSection = "";
 let selectedMovie = null;
 const chunkCache = new Map();
 
@@ -48,6 +49,7 @@ function rankOf(m) {
 
   return { rank: "D", label: "D-класс" };
 }
+
 function getVotes(m) {
   return Number(m.votes || 0);
 }
@@ -76,6 +78,152 @@ function scoreSmart(m) {
 
   return rating * 10 + voteBonus + yearBonus;
 }
+
+/* ===== РАЗДЕЛЫ АНИМЕ ===== */
+
+const ANIME_SECTIONS = [
+  { id: "isekai", name: "Исекай", keys: ["исекай", "isekai", "попадан", "попаданец", "перерождение", "reincarnation", "другой мир", "parallel world"] },
+  { id: "shounen", name: "Сёнэн", keys: ["сёнэн", "shounen", "shonen"] },
+  { id: "seinen", name: "Сэйнэн", keys: ["сэйнэн", "seinen"] },
+  { id: "shoujo", name: "Сёдзё", keys: ["сёдзё", "shoujo", "shojo"] },
+  { id: "josei", name: "Дзёсэй", keys: ["дзёсэй", "josei"] },
+  { id: "fantasy", name: "Фэнтези", keys: ["фэнтези", "fantasy"] },
+  { id: "action", name: "Экшен", keys: ["экшен", "action", "боевик", "приключения", "adventure"] },
+  { id: "romance", name: "Романтика", keys: ["романтика", "romance", "любов"] },
+  { id: "school", name: "Школа", keys: ["школа", "school"] },
+  { id: "magic", name: "Магия", keys: ["магия", "magic", "mahou", "волшеб", "волшебник", "волшебница"] },
+  { id: "demons", name: "Демоны", keys: ["демон", "демоны", "demons", "demon"] },
+  { id: "vampire", name: "Вампиры", keys: ["вампир", "вампиры", "vampire"] },
+  { id: "mecha", name: "Меха", keys: ["меха", "mecha", "робот", "robot"] },
+  { id: "harem", name: "Гарем", keys: ["гарем", "harem"] },
+  { id: "slice", name: "Повседневность", keys: ["повседневность", "slice of life"] },
+  { id: "sport", name: "Спорт", keys: ["спорт", "sports"] },
+  { id: "comedy", name: "Комедия", keys: ["комедия", "comedy"] },
+  { id: "drama", name: "Драма", keys: ["драма", "drama"] },
+  { id: "detective", name: "Детектив", keys: ["детектив", "detective", "mystery", "тайна", "загад"] },
+  { id: "horror", name: "Ужасы", keys: ["ужасы", "horror"] },
+  { id: "supernatural", name: "Сверхъестественное", keys: ["сверхъестественное", "supernatural"] },
+  { id: "psychological", name: "Психология", keys: ["психолог", "psychological"] },
+  { id: "martial", name: "Боевые искусства", keys: ["боевые искусства", "martial arts"] },
+  { id: "military", name: "Военное", keys: ["военное", "military"] },
+  { id: "samurai", name: "Самураи", keys: ["самурай", "самураи", "samurai"] },
+  { id: "music", name: "Музыка", keys: ["музыка", "music", "idol", "айдол"] },
+  { id: "game", name: "Игры", keys: ["игра", "игры", "game", "video game", "strategy game"] }
+];
+
+function isAnimeItem(m) {
+  return m.type === "Аниме" || getGenres(m).some(g => normalize(g).includes("аниме"));
+}
+
+function animeSectionMatch(m, sectionId) {
+  if (!sectionId) return true;
+
+  const section = ANIME_SECTIONS.find(s => s.id === sectionId);
+  if (!section) return true;
+
+  const text = normalize([
+    m.ru,
+    m.en,
+    m.title,
+    m.name,
+    m.type,
+    m.status,
+    m.overview,
+    ...getGenres(m)
+  ].join(" "));
+
+  return section.keys.some(k => text.includes(normalize(k)));
+}
+
+function injectAnimeSectionsStyle() {
+  if (document.getElementById("animeSectionsStyle")) return;
+
+  const style = document.createElement("style");
+  style.id = "animeSectionsStyle";
+  style.textContent = `
+    #animeSectionsPanel {
+      display: none;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px 22px 16px;
+      border-bottom: 1px solid rgba(130, 70, 255, 0.45);
+    }
+
+    .anime-section-btn {
+      border: 1px solid rgba(0, 220, 255, 0.6);
+      background: linear-gradient(180deg, #4d22d8, #24106f);
+      color: white;
+      border-radius: 12px;
+      padding: 10px 16px;
+      cursor: pointer;
+      box-shadow: 0 0 14px rgba(119, 0, 255, 0.35);
+      font-weight: 700;
+      transition: .15s ease;
+    }
+
+    .anime-section-btn:hover {
+      border-color: #20e7ff;
+      box-shadow: 0 0 18px rgba(32, 231, 255, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .anime-section-btn.active {
+      background: linear-gradient(180deg, #00d4ff, #5b21ff);
+      color: #020617;
+      border-color: #5cf4ff;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function createAnimeSectionsPanel() {
+  if (document.getElementById("animeSectionsPanel")) return;
+
+  injectAnimeSectionsStyle();
+
+  const tabs = document.querySelector(".tabs") || document.querySelector("nav");
+  if (!tabs) return;
+
+  const panel = document.createElement("div");
+  panel.id = "animeSectionsPanel";
+  panel.innerHTML = `
+    <button class="anime-section-btn active" data-anime-section="">Все аниме</button>
+    ${ANIME_SECTIONS.map(s => `<button class="anime-section-btn" data-anime-section="${s.id}">${s.name}</button>`).join("")}
+  `;
+
+  tabs.insertAdjacentElement("afterend", panel);
+
+  panel.querySelectorAll(".anime-section-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      panel.querySelectorAll(".anime-section-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      currentAnimeSection = btn.dataset.animeSection || "";
+      currentTab = "anime";
+
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      const animeTab = document.querySelector('.tab[data-tab="anime"]');
+      if (animeTab) animeTab.classList.add("active");
+
+      applyFilters();
+    });
+  });
+}
+
+function syncAnimePanel() {
+  createAnimeSectionsPanel();
+
+  const panel = document.getElementById("animeSectionsPanel");
+  if (!panel) return;
+
+  panel.style.display = currentTab === "anime" ? "flex" : "none";
+
+  panel.querySelectorAll(".anime-section-btn").forEach(btn => {
+    btn.classList.toggle("active", (btn.dataset.animeSection || "") === currentAnimeSection);
+  });
+}
+
+/* ===== ЗАГРУЗКА БАЗЫ ===== */
 
 async function loadData() {
   $("statusText").textContent = "Загрузка базы...";
@@ -112,6 +260,7 @@ async function loadChunkedData(index) {
     if (!url) continue;
 
     let part = chunkCache.get(url);
+
     if (!part) {
       const res = await fetch(url + "?v=" + Date.now(), { cache: "no-store" });
       if (!res.ok) continue;
@@ -147,6 +296,8 @@ function fillFilters() {
 }
 
 function applyFilters() {
+  syncAnimePanel();
+
   const q = normalize($("searchInput").value);
   const type = $("typeFilter").value;
   const genre = $("genreFilter").value;
@@ -159,19 +310,25 @@ function applyFilters() {
   if (currentTab === "movies") list = list.filter(m => m.type === "Фильм");
   if (currentTab === "series") list = list.filter(m => m.type === "Сериал");
   if (currentTab === "cartoons") list = list.filter(m => getGenres(m).some(g => normalize(g).includes("мульт")));
-  if (currentTab === "anime") list = list.filter(m => getGenres(m).some(g => normalize(g).includes("аниме")) || m.type === "Аниме");
+  if (currentTab === "anime") {
+    list = list.filter(m => isAnimeItem(m));
+    list = list.filter(m => animeSectionMatch(m, currentAnimeSection));
+  }
   if (currentTab === "top") list = list.filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP).slice(0, 250);
   if (currentTab === "new") list = list.filter(m => Number(getYear(m)) >= 2024);
   if (currentTab === "popular") list = list.filter(m => getVotes(m) >= 1000);
+
   if (currentTab === "fav") {
     const fav = loadSet(favKey);
     list = list.filter(m => fav.has(String(m.id)));
   }
+
   if (currentTab === "history") {
     const hist = [...loadSet(historyKey)];
     const map = new Map(allMovies.map(m => [String(m.id), m]));
     list = hist.map(id => map.get(id)).filter(Boolean);
   }
+
   if (currentTab === "random") {
     list = shuffle(list).slice(0, 200);
   }
@@ -187,6 +344,7 @@ function applyFilters() {
         m.overview,
         ...getGenres(m)
       ].join(" "));
+
       return hay.includes(q);
     });
   }
@@ -258,9 +416,9 @@ function cardHtml(m) {
         <p class="card-title">${escapeHtml(titleOf(m))}</p>
         <p class="meta">${escapeHtml(m.year || "—")} · ${escapeHtml(m.type || "—")}</p>
         <p class="meta">${escapeHtml(genres)}</p>
-       <span class="rating rank-${rankOf(m).rank.toLowerCase()}">
-  ${rankOf(m).rank}-класс · ${getRating(m).toFixed(1)}
-</span>
+        <span class="rating rank-${rankOf(m).rank.toLowerCase()}">
+          ${rankOf(m).rank}-класс · ${getRating(m).toFixed(1)}
+        </span>
       </div>
     </article>
   `;
@@ -286,29 +444,30 @@ function openDetails(m) {
 
   const q = queryOf(m);
   const isAnime =
-  m.type === "Аниме" ||
-  getGenres(m).some(g => normalize(g).includes("аниме"));
+    m.type === "Аниме" ||
+    getGenres(m).some(g => normalize(g).includes("аниме"));
 
-const animeLinksBlock = document.getElementById("animeLinksBlock");
-const catalogLinksBlock = document.getElementById("catalogLinksBlock");
+  const animeLinksBlock = document.getElementById("animeLinksBlock");
+  const catalogLinksBlock = document.getElementById("catalogLinksBlock");
 
-if (animeLinksBlock) {
-  animeLinksBlock.style.display = isAnime ? "block" : "none";
-}
+  if (animeLinksBlock) {
+    animeLinksBlock.style.display = isAnime ? "block" : "none";
+  }
 
-if (catalogLinksBlock) {
-  catalogLinksBlock.style.display = isAnime ? "none" : "block";
-}
+  if (catalogLinksBlock) {
+    catalogLinksBlock.style.display = isAnime ? "none" : "block";
+  }
 
   $("kinopoiskLink").href = `https://www.kinopoisk.ru/index.php?kp_query=${q}`;
   $("youtubeLink").href = `https://www.youtube.com/results?search_query=${q}+трейлер`;
   $("vkLink").href = `https://vk.com/video?q=${q}`;
   $("rutubeLink").href = `https://rutube.ru/search/?query=${q}`;
+
   if ($("shikimoriLink")) $("shikimoriLink").href = `https://shikimori.one/animes?search=${q}`;
-if ($("malLink")) $("malLink").href = `https://myanimelist.net/anime.php?q=${q}`;
-if ($("anilistLink")) $("anilistLink").href = `https://anilist.co/search/anime?search=${q}`;
-if ($("animePlanetLink")) $("animePlanetLink").href = `https://www.anime-planet.com/anime/all?name=${q}`;
-if ($("anidbLink")) $("anidbLink").href = `https://anidb.net/anime/?adb.search=${q}`;
+  if ($("malLink")) $("malLink").href = `https://myanimelist.net/anime.php?q=${q}`;
+  if ($("anilistLink")) $("anilistLink").href = `https://anilist.co/search/anime?search=${q}`;
+  if ($("animePlanetLink")) $("animePlanetLink").href = `https://www.anime-planet.com/anime/all?name=${q}`;
+  if ($("anidbLink")) $("anidbLink").href = `https://anidb.net/anime/?adb.search=${q}`;
 
   updateFavBtn();
   $("detailsDialog").showModal();
@@ -345,6 +504,7 @@ function resetFilters() {
   if ($("sortFilter")) $("sortFilter").value = "smart";
 
   currentTab = "all";
+  currentAnimeSection = "";
 
   document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
   const allTab = document.querySelector('.tab[data-tab="all"]');
@@ -369,7 +529,7 @@ function escapeHtml(s) {
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
-    '"': "&quot;",
+    "\"": "&quot;",
     "'": "&#039;"
   }[ch]));
 }
@@ -403,7 +563,13 @@ function setupEvents() {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
       btn.classList.add("active");
+
       currentTab = btn.dataset.tab;
+
+      if (currentTab !== "anime") {
+        currentAnimeSection = "";
+      }
+
       applyFilters();
     });
   });
