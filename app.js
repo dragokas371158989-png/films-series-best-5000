@@ -285,6 +285,20 @@ function openDetails(m) {
   $("detailPoster").style.display = m.poster ? "block" : "none";
 
   const q = queryOf(m);
+  const isAnime =
+  m.type === "Аниме" ||
+  getGenres(m).some(g => normalize(g).includes("аниме"));
+
+const animeLinksBlock = document.getElementById("animeLinksBlock");
+const catalogLinksBlock = document.getElementById("catalogLinksBlock");
+
+if (animeLinksBlock) {
+  animeLinksBlock.style.display = isAnime ? "block" : "none";
+}
+
+if (catalogLinksBlock) {
+  catalogLinksBlock.style.display = isAnime ? "none" : "block";
+}
 
   $("kinopoiskLink").href = `https://www.kinopoisk.ru/index.php?kp_query=${q}`;
   $("youtubeLink").href = `https://www.youtube.com/results?search_query=${q}+трейлер`;
