@@ -3,14 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Фильмы, сериалы и аниме</title>
-  <meta name="description" content="Каталог фильмов, сериалов и аниме с постерами, жанрами, поиском и избранным." />
+  <title>Фильмы и сериалы — лучшие 5000</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="topbar">
     <div>
-      <h1>Фильмы, сериалы и аниме</h1>
+      <h1>Фильмы и сериалы</h1>
       <p id="statusText">Загрузка базы...</p>
     </div>
     <div class="top-actions">
@@ -20,13 +19,12 @@
   </header>
 
   <section class="controls">
-    <input id="searchInput" type="search" placeholder="Поиск: матрица, breaking bad, наруто..." autocomplete="off" />
+    <input id="searchInput" type="search" placeholder="Поиск: матрица, breaking bad, 2024..." autocomplete="off" />
 
     <select id="typeFilter">
       <option value="">Все типы</option>
       <option value="Фильм">Фильмы</option>
       <option value="Сериал">Сериалы</option>
-      <option value="Аниме">Аниме</option>
     </select>
 
     <select id="genreFilter">
@@ -47,40 +45,11 @@
 
   <nav class="tabs">
     <button class="tab active" data-tab="all">Все</button>
-    <button class="tab" data-tab="movies">Фильмы</button>
-    <button class="tab" data-tab="series">Сериалы</button>
-    <button class="tab" data-tab="anime">Аниме</button>
-    <button class="tab" data-tab="animeGenres">Жанры аниме</button>
     <button class="tab" data-tab="new">Новые</button>
     <button class="tab" data-tab="fav">Избранное</button>
     <button class="tab" data-tab="history">История</button>
     <button class="tab" data-tab="random">Случайное</button>
   </nav>
-
-  <section id="animeGenrePage" class="anime-page hidden">
-    <div class="anime-page-head">
-      <div>
-        <h2>Жанры аниме</h2>
-        <p>Отдельный каталог жанров аниме. Хентай и 18+ исключены.</p>
-      </div>
-      <button id="clearAnimeGenreBtn" class="small-btn">Сбросить жанр</button>
-    </div>
-
-    <div class="anime-groups">
-      <div>
-        <h3>Основные жанры</h3>
-        <div id="animeGenresList" class="chips"></div>
-      </div>
-      <div>
-        <h3>Темы</h3>
-        <div id="animeThemesList" class="chips"></div>
-      </div>
-      <div>
-        <h3>Демография</h3>
-        <div id="animeDemographicsList" class="chips"></div>
-      </div>
-    </div>
-  </section>
 
   <main>
     <div id="countText" class="count"></div>
@@ -96,10 +65,7 @@
     <div class="dialog-content">
       <button id="closeDialog" class="close">×</button>
       <div class="details">
-        <div class="detail-poster-wrap">
-          <img id="detailPoster" alt="" />
-          <div id="detailNoPoster" class="no-poster">Нет постера</div>
-        </div>
+        <img id="detailPoster" alt="" />
         <div>
           <h2 id="detailTitle"></h2>
           <p id="detailMeta"></p>
@@ -118,7 +84,6 @@
     </div>
   </dialog>
 
-  <script src="anime_genres.json.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
