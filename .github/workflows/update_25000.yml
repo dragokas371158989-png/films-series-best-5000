@@ -25,7 +25,7 @@ jobs:
       - name: Update movies_updates.json to 25000
         env:
           TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
-          TARGET_COUNT: "25000"
+          TARGET_COUNT: "100000"
         run: python tools/update_movies_updates_25000.py
 
       - name: Commit database
