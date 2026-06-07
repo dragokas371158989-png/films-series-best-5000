@@ -3,7 +3,7 @@ name: Update 25000 movies series anime
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 3 * * 0"
+    - cron: "0 3 * * *"
 
 permissions:
   contents: write
@@ -22,17 +22,17 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Update movies_updates.json to 25000
+      - name: Update movies_updates.json to 100000
         env:
           TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
           TARGET_COUNT: "100000"
         run: python tools/update_movies_updates_25000.py
 
       - name: Commit database
-  run: |
-    git config user.name "movies-25000-bot"
-    git config user.email "actions@github.com"
-    git add movies_updates.json
-    git diff --cached --quiet && echo "No changes" || git commit -m "Update database to 100000 movies series anime"
-    git pull --rebase origin main
-    git push
+        run: |
+          git config user.name "movies-25000-bot"
+          git config user.email "actions@github.com"
+          git pull --rebase origin main
+          git add movies_updates.json
+          git diff --cached --quiet && echo "No changes" || git commit -m "Update database to 100000 movies series anime"
+          git push
