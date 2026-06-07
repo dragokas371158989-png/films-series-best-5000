@@ -3,87 +3,141 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Фильмы и сериалы — лучшие 5000</title>
+  <link rel="icon" type="image/png" href="favicon.png.png">
+<link rel="shortcut icon" type="image/png" href="favicon.png.png">
+<link rel="apple-touch-icon" href="favicon.png.png">
+  <title>Голубь Каталог Мира — фильмы, сериалы, аниме и мультфильмы онлайн каталог</title>
+<meta name="description" content="Голубь Каталог Мира — большой каталог фильмов, сериалов, аниме и мультфильмов. Лучшие фильмы, популярные сериалы, топ аниме, рейтинги, жанры, постеры, быстрый поиск и подборки что посмотреть." />
+<meta name="keywords" content="фильмы, сериалы, аниме, мультфильмы, каталог фильмов, каталог сериалов, лучшие фильмы, лучшие сериалы, лучшее аниме, топ фильмов, топ сериалов, что посмотреть, смотреть фильмы, смотреть сериалы, Голубь Каталог Мира" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://dragokas371158989-png.github.io/films-series-best-5000/" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <h1>Фильмы и сериалы</h1>
-      <p id="statusText">Загрузка базы...</p>
-    </div>
-    <div class="top-actions">
-      <button id="themeBtn" class="small-btn">Тема</button>
-      <button id="reloadBtn" class="small-btn">Обновить</button>
-    </div>
-  </header>
+<header class="topbar">
+  <div>
+    <div class="site-logo-wrap">
+  <img class="site-logo" src="logo-banner.png.png" alt="Голубь Каталог Мира">
+</div>
+    <p id="statusText">Загрузка индекса...</p>
+  </div>
+  <div class="top-actions">
+    <button id="themeBtn" class="small-btn">Тема</button>
+    <button id="reloadBtn" class="small-btn">Обновить</button>
+  </div>
+</header>
 
-  <section class="controls">
-    <input id="searchInput" type="search" placeholder="Поиск: матрица, breaking bad, 2024..." autocomplete="off" />
+<section class="controls">
+  <input id="searchInput" type="search" placeholder="Поиск: Матрица, Наруто, Во все тяжкие..." autocomplete="off" />
+  <select id="typeFilter">
+    <option value="">Все типы</option>
+    <option value="Фильм">Фильмы</option>
+    <option value="Сериал">Сериалы</option>
+    <option value="Аниме">Аниме</option>
+  </select>
+  <select id="genreFilter"><option value="">Все жанры</option></select>
+  <select id="yearFilter"><option value="">Все годы</option></select>
+  <select id="ratingFilter">
+    <option value="0">Любой рейтинг</option>
+    <option value="7">от 7.0</option>
+    <option value="8">от 8.0</option>
+    <option value="9">от 9.0</option>
+  </select>
+  <select id="sortFilter">
+    <option value="smart">Умный топ</option>
+    <option value="rating">По рейтингу</option>
+    <option value="votes">По голосам</option>
+    <option value="year">По году</option>
+    <option value="title">По названию</option>
+  </select>
+  <button id="resetFiltersBtn" class="reset-btn">Сброс</button>
+</section>
 
-    <select id="typeFilter">
-      <option value="">Все типы</option>
-      <option value="Фильм">Фильмы</option>
-      <option value="Сериал">Сериалы</option>
-    </select>
+<nav class="tabs">
+  <button class="tab active" data-tab="all">Все</button>
+  <button class="tab" data-tab="movies">Фильмы</button>
+  <button class="tab" data-tab="series">Сериалы</button>
+  <button class="tab" data-tab="cartoons">Мультфильмы</button>
+  <button class="tab" data-tab="anime">Аниме</button>
+  <button class="tab" data-tab="top">Топ 250</button>
+  <button class="tab" data-tab="new">Новинки</button>
+  <button class="tab" data-tab="popular">Популярное</button>
+  <button class="tab" data-tab="fav">Избранное</button>
+  <button class="tab" data-tab="history">История</button>
+  <button class="tab" data-tab="random">Случайное</button>
+</nav>
+<section class="seo-text">
+  <h2>Голубь Каталог Мира — каталог фильмов, сериалов, аниме и мультфильмов</h2>
+  <p>
+    Голубь Каталог Мира — это удобный онлайн-каталог, где собраны фильмы,
+    сериалы, аниме и мультфильмы с постерами, рейтингами, жанрами и годами выхода.
+    Здесь можно быстро найти лучшие фильмы, популярные сериалы, топ аниме,
+    новинки кино, мультфильмы и подборки для просмотра.
+  </p>
+  <p>
+    Используйте поиск по названию, фильтры по жанрам, годам, рейтингу и типу:
+    фильмы, сериалы, аниме, мультфильмы. Каталог помогает выбрать, что посмотреть
+    вечером, найти интересный сериал, популярное аниме или фильм с высоким рейтингом.
+  </p>
+</section>
 
-    <select id="genreFilter">
-      <option value="">Все жанры</option>
-    </select>
+<main>
+  <div id="countText" class="count"></div>
+  <div id="grid" class="grid"></div>
+  <div class="pager">
+    <button id="prevBtn">Назад</button>
+    <span id="pageText"></span>
+    <button id="nextBtn">Вперёд</button>
+  </div>
+</main>
 
-    <select id="yearFilter">
-      <option value="">Все годы</option>
-    </select>
+<dialog id="detailsDialog">
+  <div class="dialog-content">
+    <button id="closeDialog" class="close">×</button>
+    <div class="details">
+      <img id="detailPoster" alt="" />
+      <div>
+        <h2 id="detailTitle"></h2>
+        <p id="detailMeta"></p>
+        <p id="detailGenres"></p>
+        <p id="detailOverview"></p>
+        </div>
+        <section id="animeLinksBlock" class="links-block">
+  <h3 class="links-title">Аниме-сайты</h3>
+  <div class="detail-buttons">
+    <a id="shikimoriLink" target="_blank" rel="noreferrer">Shikimori</a>
+    <a id="malLink" target="_blank" rel="noreferrer">MyAnimeList</a>
+    <a id="anilistLink" target="_blank" rel="noreferrer">AniList</a>
+    <a id="animePlanetLink" target="_blank" rel="noreferrer">Anime-Planet</a>
+    <a id="anidbLink" target="_blank" rel="noreferrer">AniDB</a>
+  </div>
+</section>
 
-    <select id="ratingFilter">
-      <option value="0">Любой рейтинг</option>
-      <option value="7">от 7.0</option>
-      <option value="8">от 8.0</option>
-      <option value="9">от 9.0</option>
-    </select>
-  </section>
+<section id="catalogLinksBlock" class="links-block">
+  <h3 class="links-title">Найти на сайтах-каталогах</h3>
+  <div class="detail-buttons">
+    <a id="myshowsLink" target="_blank" rel="noreferrer">MyShows</a>
+    <a id="kinoforumLink" target="_blank" rel="noreferrer">Кинофорум</a>
+    <a id="kinoMailLink" target="_blank" rel="noreferrer">Кино Mail</a>
+    <a id="filmRuLink" target="_blank" rel="noreferrer">Film.ru</a>
+    <a id="kinoafishaLink" target="_blank" rel="noreferrer">Киноафиша</a>
+  </div>
+</section>
 
-  <nav class="tabs">
-    <button class="tab active" data-tab="all">Все</button>
-    <button class="tab" data-tab="new">Новые</button>
-    <button class="tab" data-tab="fav">Избранное</button>
-    <button class="tab" data-tab="history">История</button>
-    <button class="tab" data-tab="random">Случайное</button>
-  </nav>
-
-  <main>
-    <div id="countText" class="count"></div>
-    <div id="grid" class="grid"></div>
-    <div class="pager">
-      <button id="prevBtn">Назад</button>
-      <span id="pageText"></span>
-      <button id="nextBtn">Вперёд</button>
-    </div>
-  </main>
-
-  <dialog id="detailsDialog">
-    <div class="dialog-content">
-      <button id="closeDialog" class="close">×</button>
-      <div class="details">
-        <img id="detailPoster" alt="" />
-        <div>
-          <h2 id="detailTitle"></h2>
-          <p id="detailMeta"></p>
-          <p id="detailGenres"></p>
-          <p id="detailOverview"></p>
-
-          <div class="detail-buttons">
-            <button id="favBtn">В избранное</button>
-            <a id="kinopoiskLink" target="_blank" rel="noreferrer">Кинопоиск</a>
-            <a id="youtubeLink" target="_blank" rel="noreferrer">YouTube</a>
-            <a id="vkLink" target="_blank" rel="noreferrer">VK Видео</a>
-            <a id="rutubeLink" target="_blank" rel="noreferrer">Rutube</a>
-          </div>
+        <h3 class="links-title">Видео и поиск</h3>
+        <div class="detail-buttons">
+          <button id="favBtn">В избранное</button>
+          <a id="kinopoiskLink" target="_blank" rel="noreferrer">Кинопоиск</a>
+          <a id="youtubeLink" target="_blank" rel="noreferrer">YouTube</a>
+          <a id="vkLink" target="_blank" rel="noreferrer">VK Видео</a>
+          <a id="rutubeLink" target="_blank" rel="noreferrer">Rutube</a>
+          <a id="googleLink" target="_blank" rel="noreferrer">Google</a>
         </div>
       </div>
     </div>
-  </dialog>
+  </div>
+</dialog>
 
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
