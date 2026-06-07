@@ -1,0 +1,38 @@
+name: Добавление 20000 аниме
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-anime-20000:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+
+    steps:
+      - name: Получить доступ к репозиторию
+        uses: actions/checkout@v4
+
+      - name: Настройка Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Добавить аниме в базу
+        env:
+          TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
+          TARGET_ANIME_ADD: "20000"
+        run: python tools/add_anime_20000.py
+
+      - name: Сохранить базу
+        run: |
+          git config user.name "anime-20000-bot"
+          git config user.email "actions@github.com"
+
+          git add movies_updates.json
+          git diff --cached --quiet && echo "Нет изменений" || git commit -m "Добавить аниме-базу"
+
+          git pull --rebase origin main
+          git push origin main
