@@ -5,27 +5,19 @@ import urllib.parse
 from pathlib import Path
 from datetime import datetime, timezone
 
-# Сколько аниме хотим держать в общей базе.
-# Можно поставить 5000, 10000, 15000.
 TARGET_ANIME_COUNT = 12000
 
-DB_FILE = Path("movies_updates.json")
+INDEX_FILE = Path("data/index.json")
+MOVIES_FILE = Path("movies_updates.json")
 
 HEADERS = {
-    "User-Agent": "GolubCatalogAnimeBooster/1.0",
+    "User-Agent": "GolubCatalogAnimeBoosterFixed/1.0",
     "Accept": "application/json",
 }
 
-# Хентай / эротика не добавляем
-EXCLUDED_GENRE_NAMES = {
-    "hentai",
-    "erotica",
-    "adult cast hentai",
-}
-
+EXCLUDED_GENRE_NAMES = {"hentai", "erotica"}
 EXCLUDED_GENRE_IDS = {12, 49}
 
-# Русские названия жанров для сайта
 GENRE_RU = {
     "Action": "Экшен",
     "Adventure": "Приключения",
@@ -113,21 +105,95 @@ IMPORTANT_GENRE_IDS = [
 ]
 
 
-def get_json(url, retries=5):
-    last_error = None
+def read_json_file(path):
+    return json.loads(path.read_text(encoding="utf-8"))
 
+
+def write_json_file(path, data):
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def load_site_database():
+    """
+    ВАЖНО:
+    Сначала читаем настоящую базу сайта из data/index.json и чанков.
+    Если её нет — только тогда fallback на movies_updates.json.
+    """
+    movies = []
+    version = 1
+    generated_at = ""
+
+    if INDEX_FILE.exists():
+        print("Reading real site database from data/index.json")
+        index = read_json_file(INDEX_FILE)
+        version = index.get("version") or 1
+        generated_at = index.get("generatedAt") or ""
+
+        chunks = index.get("chunks") or []
+        for chunk in chunks:
+            rel = chunk.get("file") or chunk.get("url")
+            if not rel:
+                continue
+
+            chunk_path = Path(rel)
+            if not chunk_path.exists():
+                chunk_path = Path(".") / rel
+
+            if not chunk_path.exists():
+                print(f"Skip missing chunk: {rel}")
+                continue
+
+            part = read_json_file(chunk_path)
+            if isinstance(part, list):
+                movies.extend(part)
+            elif isinstance(part, dict):
+                movies.extend(part.get("movies") or part.get("items") or part.get("data") or [])
+
+        print(f"Loaded from chunks: {len(movies)} records")
+        return {
+            "version": version,
+            "generatedAt": generated_at,
+            "movies": movies
+        }
+
+    if MOVIES_FILE.exists():
+        print("Reading fallback movies_updates.json")
+        data = read_json_file(MOVIES_FILE)
+
+        if isinstance(data, list):
+            return {"version": 1, "movies": data}
+
+        if "movies" not in data:
+            data["movies"] = data.get("items") or data.get("data") or []
+
+        print(f"Loaded from movies_updates.json: {len(data.get('movies') or [])} records")
+        return data
+
+    print("No database found, starting empty")
+    return {"version": 1, "movies": []}
+
+
+def save_master_database(data):
+    data["version"] = int(data.get("version") or 1) + 1
+    data["generatedAt"] = datetime.now(timezone.utc).isoformat()
+    data["count"] = len(data.get("movies", []))
+    write_json_file(MOVIES_FILE, data)
+    print(f"Saved master database to movies_updates.json: {data['count']} records")
+
+
+def get_json(url, retries=5):
+    last = None
     for attempt in range(retries):
         try:
             req = urllib.request.Request(url, headers=HEADERS)
             with urllib.request.urlopen(req, timeout=45) as response:
                 return json.loads(response.read().decode("utf-8"))
         except Exception as error:
-            last_error = error
+            last = error
             wait = 2 + attempt * 3
-            print(f"Retry {attempt + 1}/{retries}: {url} -> {error}. Wait {wait}s")
+            print(f"Retry {attempt + 1}/{retries}: {error}. Wait {wait}s")
             time.sleep(wait)
-
-    raise last_error
+    raise last
 
 
 def jikan(path, params=None):
@@ -139,31 +205,9 @@ def jikan(path, params=None):
     return get_json(url)
 
 
-def load_database():
-    if not DB_FILE.exists():
-        return {"version": 1, "movies": []}
-
-    data = json.loads(DB_FILE.read_text(encoding="utf-8"))
-
-    if isinstance(data, list):
-        return {"version": 1, "movies": data}
-
-    if "movies" not in data:
-        data["movies"] = data.get("items") or data.get("data") or []
-
-    return data
-
-
-def save_database(data):
-    data["version"] = int(data.get("version") or 1) + 1
-    data["generatedAt"] = datetime.now(timezone.utc).isoformat()
-    data["count"] = len(data.get("movies", []))
-    DB_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-
-
 def genre_names(item):
     out = []
-    out_ids = []
+    ids = []
 
     for block in ("genres", "explicit_genres", "themes", "demographics"):
         for genre in item.get(block) or []:
@@ -172,12 +216,12 @@ def genre_names(item):
             if name:
                 out.append(name)
             if gid:
-                out_ids.append(int(gid))
+                ids.append(int(gid))
 
-    return out, out_ids
+    return out, ids
 
 
-def is_bad_anime(item):
+def is_bad_anime_raw(item):
     names, ids = genre_names(item)
 
     if any(gid in EXCLUDED_GENRE_IDS for gid in ids):
@@ -191,6 +235,15 @@ def is_bad_anime(item):
     if "rx" in rating or "hentai" in rating:
         return True
 
+    return False
+
+
+def is_bad_existing_item(item):
+    genres = {str(x).strip().lower() for x in item.get("genres", [])}
+    if "hentai" in genres or "хентай" in genres:
+        return True
+    if "erotica" in genres or "эротика" in genres:
+        return True
     return False
 
 
@@ -229,27 +282,22 @@ def get_studio(item):
 
 def build_genres(item):
     names, _ = genre_names(item)
-
     result = ["Аниме"]
 
     for name in names:
-        if not name:
-            continue
-
         ru = GENRE_RU.get(name)
+
         if ru and ru not in result:
             result.append(ru)
 
-        # Английские названия тоже оставляем,
-        # чтобы фильтр Исекай/Shounen/Fantasy работал лучше
-        if name not in result:
+        if name and name not in result:
             result.append(name)
 
     return result
 
 
 def convert_anime(item):
-    if is_bad_anime(item):
+    if is_bad_anime_raw(item):
         return None
 
     mal_id = item.get("mal_id")
@@ -269,14 +317,8 @@ def convert_anime(item):
     score = item.get("score") or 0
     scored_by = item.get("scored_by") or 0
 
-    # совсем пустые/мусорные записи отсекаем
     if not score and not scored_by:
         return None
-
-    overview = item.get("synopsis") or ""
-    episodes = item.get("episodes") or ""
-    status = item.get("status") or ""
-    anime_type = item.get("type") or ""
 
     return {
         "id": f"mal_{mal_id}",
@@ -285,14 +327,14 @@ def convert_anime(item):
         "en": title,
         "year": get_year(item),
         "type": "Аниме",
-        "animeType": anime_type,
-        "episodes": episodes,
-        "status": status,
+        "animeType": item.get("type") or "",
+        "episodes": item.get("episodes") or "",
+        "status": item.get("status") or "",
         "studio": get_studio(item),
         "rating": round(float(score or 0), 1),
         "votes": int(scored_by or 0),
         "poster": poster,
-        "overview": overview,
+        "overview": item.get("synopsis") or "",
         "genres": build_genres(item),
         "source": "Jikan / MyAnimeList"
     }
@@ -356,14 +398,17 @@ def anime_score(item):
 
 
 def main():
-    db = load_database()
+    db = load_site_database()
     movies = db.get("movies") or []
 
     known = set()
-    kept_movies = []
-    old_anime = []
+    kept_records = []
+    old_booster_anime = []
 
     for item in movies:
+        if is_bad_existing_item(item):
+            continue
+
         item_id = str(item.get("id", ""))
         mal_id = item.get("malId")
 
@@ -373,68 +418,64 @@ def main():
         if mal_id:
             known.add(f"mal_{mal_id}")
 
-        # старые аниме из нашей добавки пока отдельно
-        if item.get("type") == "Аниме" and (str(item.get("id", "")).startswith("mal_") or item.get("source") == "Jikan / MyAnimeList"):
-            old_anime.append(item)
+        is_booster = item.get("type") == "Аниме" and (
+            str(item.get("id", "")).startswith("mal_")
+            or item.get("source") == "Jikan / MyAnimeList"
+        )
+
+        if is_booster:
+            old_booster_anime.append(item)
         else:
-            kept_movies.append(item)
+            kept_records.append(item)
 
     print(f"Base before: {len(movies)}")
-    print(f"Kept non-booster records: {len(kept_movies)}")
-    print(f"Old booster anime: {len(old_anime)}")
+    print(f"Kept site records: {len(kept_records)}")
+    print(f"Old booster anime: {len(old_booster_anime)}")
 
     collected = []
 
-    # 1. Самые популярные и любимые
     collect_from_endpoint("/top/anime", {"filter": "bypopularity"}, 120, known, collected)
     collect_from_endpoint("/top/anime", {"filter": "favorite"}, 80, known, collected)
     collect_from_endpoint("/top/anime", {"filter": "airing"}, 40, known, collected)
     collect_from_endpoint("/top/anime", {"filter": "upcoming"}, 40, known, collected)
 
-    # 2. По типам
     collect_from_endpoint("/top/anime", {"type": "tv"}, 80, known, collected)
     collect_from_endpoint("/top/anime", {"type": "movie"}, 40, known, collected)
     collect_from_endpoint("/top/anime", {"type": "ova"}, 30, known, collected)
     collect_from_endpoint("/top/anime", {"type": "ona"}, 30, known, collected)
 
-    # 3. Текущий и будущий сезон
     collect_from_endpoint("/seasons/now", {}, 12, known, collected)
     collect_from_endpoint("/seasons/upcoming", {}, 12, known, collected)
 
-    # 4. Важные жанры и темы, включая исекай/сёнэн/сэйнэн/школу/гарем/меха
     for gid in IMPORTANT_GENRE_IDS:
         collect_from_endpoint("/anime", {"genres": gid, "order_by": "score", "sort": "desc"}, 8, known, collected)
         time.sleep(0.9)
 
-    merged_anime = old_anime + collected
+    merged_anime = old_booster_anime + collected
 
-    # Убираем дубли и мусор
-    clean = []
+    clean_anime = []
     seen = set()
 
     for item in merged_anime:
-        if is_bad_anime({
-            "genres": [{"name": g} for g in item.get("genres", [])],
-            "rating": item.get("rating", "")
-        }):
-            continue
-
         key = str(item.get("id") or item.get("malId") or "")
         if not key or key in seen:
             continue
 
+        if is_bad_existing_item(item):
+            continue
+
         seen.add(key)
-        clean.append(item)
+        clean_anime.append(item)
 
-    clean.sort(key=anime_score, reverse=True)
-    clean = clean[:TARGET_ANIME_COUNT]
+    clean_anime.sort(key=anime_score, reverse=True)
+    clean_anime = clean_anime[:TARGET_ANIME_COUNT]
 
-    db["movies"] = kept_movies + clean
-    db["animeCount"] = len(clean)
+    db["movies"] = kept_records + clean_anime
+    db["animeCount"] = len(clean_anime)
 
-    save_database(db)
+    save_master_database(db)
 
-    print(f"Anime added/kept: {len(clean)}")
+    print(f"Anime added/kept: {len(clean_anime)}")
     print(f"Base after: {len(db['movies'])}")
 
 
