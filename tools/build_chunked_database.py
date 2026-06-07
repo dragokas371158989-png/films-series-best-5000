@@ -57,116 +57,201 @@ def norm_poster(value):
     if not value:
         return ""
 
-    # Берём только конец пути, чтобы одинаковые постеры считались дублем
-    return value.split("/")[-1].lower()
+    return value.split("/")[-1].lower().strip()
+
+
+def get_year(m):
+    try:
+        return int(m.get("year") or 0)
+    except Exception:
+        return 0
+
+
+def get_rating(m):
+    try:
+        return float(m.get("rating") or 0)
+    except Exception:
+        return 0
+
+
+def get_votes(m):
+    try:
+        return int(m.get("votes") or 0)
+    except Exception:
+        return 0
+
+
+def get_popularity(m):
+    try:
+        return float(m.get("popularity") or 0)
+    except Exception:
+        return 0
+
+
+def is_anime(m):
+    item_type = str(m.get("type") or "").lower()
+    category = str(m.get("category") or "").lower()
+    genres = m.get("genres") or []
+    genres_text = " ".join(str(g).lower() for g in genres)
+
+    return (
+        "аниме" in item_type
+        or "аниме" in category
+        or "аниме" in genres_text
+    )
 
 
 def item_score(m):
-    rating = float(m.get("rating") or 0)
-    votes = int(m.get("votes") or 0)
-    popularity = float(m.get("popularity") or 0)
-    year = int(m.get("year") or 0)
+    rating = get_rating(m)
+    votes = get_votes(m)
+    popularity = get_popularity(m)
+    year = get_year(m)
 
     score = rating * 10
-    score += min(votes / 1000, 20)
-    score += min(popularity / 50, 10)
+    score += min(votes / 1000, 25)
+    score += min(popularity / 40, 15)
 
-    # Чуть выше приоритет нормальным категориям
-    category = str(m.get("category") or m.get("type") or "").lower()
-    if "аниме" in category:
-        score += 3
-    if "фильм" in category:
-        score += 2
-    if "сериал" in category:
-        score += 1
+    if is_anime(m):
+        score += 5
 
     if year >= 2020:
+        score += 2
+
+    if m.get("overview"):
+        score += 1
+
+    if m.get("backdrop"):
         score += 1
 
     return score
 
 
-def dedupe_movies(movies):
+def all_keys(m):
+    keys = []
+
+    item_id = str(m.get("id") or "").strip()
+    ru = norm_text(m.get("ru") or m.get("title") or m.get("name"))
+    en = norm_text(m.get("en") or m.get("original_title") or m.get("original_name"))
+    year = get_year(m)
+    poster = norm_poster(m.get("poster"))
+
+    # Самое жёсткое: одинаковый TMDB id считаем дублем даже если тип разный
+    if item_id:
+        keys.append(f"id:{item_id}")
+
+    # Название + год
+    if ru and year:
+        keys.append(f"ru:{ru}:{year}")
+        keys.append(f"ru:{ru}:{year - 1}")
+        keys.append(f"ru:{ru}:{year + 1}")
+
+    if en and year:
+        keys.append(f"en:{en}:{year}")
+        keys.append(f"en:{en}:{year - 1}")
+        keys.append(f"en:{en}:{year + 1}")
+
+    # Постер — самый надёжный признак дубля
+    if poster:
+        keys.append(f"poster:{poster}")
+
+    # Название без года тоже добавляем, но только если оно достаточно длинное
+    if ru and len(ru) >= 6:
+        keys.append(f"ru_only:{ru}")
+
+    if en and len(en) >= 6:
+        keys.append(f"en_only:{en}")
+
+    return keys
+
+
+def merge_items(old, new):
     """
-    Убирает дубли:
-    1. одинаковый id + тип
-    2. одинаковое русское/английское название + год
-    3. одинаковый постер + год
+    Объединяем дубль: оставляем более качественную запись,
+    но сохраняем аниме-тип, если одна из версий была аниме.
     """
 
-    best = {}
+    best = new if item_score(new) > item_score(old) else old
+
+    old_is_anime = is_anime(old)
+    new_is_anime = is_anime(new)
+
+    if old_is_anime or new_is_anime:
+        best["type"] = "Аниме"
+        best["category"] = "Аниме"
+
+        genres = best.get("genres") or []
+        if not isinstance(genres, list):
+            genres = []
+
+        if "Аниме" not in genres:
+            genres.append("Аниме")
+
+        best["genres"] = genres
+
+    # Если у лучшей версии нет описания/постера/бекдропа, берём из другой
+    for field in ["overview", "poster", "backdrop", "ru", "en"]:
+        if not best.get(field):
+            best[field] = old.get(field) or new.get(field) or ""
+
+    return best
+
+
+def dedupe_movies(movies):
+    key_to_item = {}
+    result = []
 
     for m in movies:
         if not isinstance(m, dict):
             continue
 
-        ru = norm_text(m.get("ru") or m.get("title") or m.get("name"))
-        en = norm_text(m.get("en") or m.get("original_title") or m.get("original_name"))
-        year = str(m.get("year") or "").strip()
-        poster = norm_poster(m.get("poster"))
-
-        keys = []
-
-        if ru and year:
-            keys.append(f"title_ru:{ru}:{year}")
-
-        if en and year:
-            keys.append(f"title_en:{en}:{year}")
-
-        if poster and year:
-            keys.append(f"poster:{poster}:{year}")
-
-        # Если нет нормального ключа, используем id
-        if not keys:
-            item_id = str(m.get("id") or "").strip()
-            item_type = str(m.get("type") or m.get("category") or "").strip()
-            if item_id:
-                keys.append(f"id:{item_type}:{item_id}")
-
+        keys = all_keys(m)
         if not keys:
             continue
 
-        main_key = keys[0]
+        found = None
 
-        # Если какой-то из ключей уже есть — считаем дублем
-        existing_key = None
         for key in keys:
-            if key in best:
-                existing_key = key
+            if key in key_to_item:
+                found = key_to_item[key]
                 break
 
-        if existing_key is None:
-            best[main_key] = m
-
-            # Привязываем все ключи к этой же записи
+        if found is None:
+            result.append(m)
             for key in keys:
-                best[key] = m
+                key_to_item[key] = m
         else:
-            old = best[existing_key]
+            merged = merge_items(found, m)
 
-            # Оставляем более качественную версию
-            if item_score(m) > item_score(old):
-                for key in keys:
-                    best[key] = m
+            if merged is not found:
+                try:
+                    index = result.index(found)
+                    result[index] = merged
+                except ValueError:
+                    result.append(merged)
 
-                # Обновляем старые ключи, которые ссылались на old
-                for key, value in list(best.items()):
-                    if value is old:
-                        best[key] = m
+            # Все ключи старой и новой версии цепляем к merged
+            for key in all_keys(found) + keys + all_keys(merged):
+                key_to_item[key] = merged
 
-    # Убираем повторные ссылки на один и тот же объект
-    result = []
-    seen_objects = set()
+            # Если found заменился, обновляем result
+            if merged is found:
+                pass
 
-    for m in best.values():
-        object_id = id(m)
-        if object_id in seen_objects:
+    # Второй проход: убираем одинаковые объекты/одинаковые постеры
+    final = []
+    seen = set()
+
+    for m in result:
+        keys = all_keys(m)
+        signature = "|".join(keys[:5])
+
+        if signature in seen:
             continue
 
-        seen_objects.add(object_id)
-        result.append(m)
+        seen.add(signature)
+        final.append(m)
 
-    return result
+    return final
 
 
 def compact_movie(m):
@@ -180,22 +265,22 @@ def compact_movie(m):
     item_type = m.get("type") or m.get("category") or ""
     category = m.get("category") or item_type
 
-    # Если в жанрах есть Аниме, тип тоже делаем Аниме
-    genres_text = " ".join(str(g).lower() for g in genres)
-    if "аниме" in genres_text:
+    if is_anime(m):
         item_type = "Аниме"
         category = "Аниме"
+        if "Аниме" not in genres:
+            genres.append("Аниме")
 
     return {
         "id": m.get("id"),
         "ru": ru,
         "en": en,
-        "year": m.get("year") or 0,
+        "year": get_year(m),
         "type": item_type,
         "category": category,
-        "rating": m.get("rating") or 0,
-        "votes": m.get("votes") or 0,
-        "popularity": m.get("popularity") or 0,
+        "rating": get_rating(m),
+        "votes": get_votes(m),
+        "popularity": get_popularity(m),
         "genres": genres,
         "overview": m.get("overview") or "",
         "poster": m.get("poster") or "",
@@ -215,7 +300,11 @@ def main():
     movies = [m for m in movies if m.get("poster")]
 
     before = len(movies)
+
     movies = dedupe_movies(movies)
+
+    movies.sort(key=item_score, reverse=True)
+
     after = len(movies)
 
     DATA_DIR.mkdir(exist_ok=True)
