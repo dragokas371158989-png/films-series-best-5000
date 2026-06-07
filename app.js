@@ -1,1 +1,421 @@
-const INDEX_URL="data/index.json";const PAGE_SIZE=40;const MIN_VOTES_FOR_TOP=300;let allMovies=[],filtered=[],currentPage=1,currentTab="all",selectedMovie=null;const chunkCache=new Map();const $=id=>document.getElementById(id);const favKey="filmsSeriesFav",historyKey="filmsSeriesHistory";function loadSet(k){try{return new Set(JSON.parse(localStorage.getItem(k)||"[]"))}catch{return new Set}}function saveSet(k,s){localStorage.setItem(k,JSON.stringify([...s]))}function titleOf(m){return m.ru||m.en||"Без названия"}function queryOf(m){return encodeURIComponent(titleOf(m))}function normalize(s){return String(s||"").toLowerCase().replace(/ё/g,"е").replace(/[\u0300-\u036f]/g,"").replace(/[^\p{L}\p{N}\s]/gu," ").replace(/\s+/g," ").trim()}function latinToRus(s){const map={q:"й",w:"ц",e:"у",r:"к",t:"е",y:"н",u:"г",i:"ш",o:"щ",p:"з","[":"х","]":"ъ",a:"ф",s:"ы",d:"в",f:"а",g:"п",h:"р",j:"о",k:"л",l:"д",";":"ж","'":"э",z:"я",x:"ч",c:"с",v:"м",b:"и",n:"т",m:"ь",",":"б",".":"ю"};return String(s||"").toLowerCase().split("").map(ch=>map[ch]||ch).join("")}function rusToLatin(s){const map={"й":"q","ц":"w","у":"e","к":"r","е":"t","н":"y","г":"u","ш":"i","щ":"o","з":"p","х":"[","ъ":"]","ф":"a","ы":"s","в":"d","а":"f","п":"g","р":"h","о":"j","л":"k","д":"l","ж":";","э":"'","я":"z","ч":"x","с":"c","м":"v","и":"b","т":"n","ь":"m","б":",","ю":"."};return String(s||"").toLowerCase().split("").map(ch=>map[ch]||ch).join("")}function getYear(m){return Number(m.year||0)}function getRating(m){return Number(m.rating||0)}function getVotes(m){return Number(m.votes||0)}function getGenres(m){return Array.isArray(m.genres)?m.genres.filter(Boolean):[]}function isMovie(m){return m.type==="Фильм"}function isSeries(m){return m.type==="Сериал"}function isCartoon(m){const g=getGenres(m).join(" ").toLowerCase(),t=[m.ru,m.en,m.type].join(" ").toLowerCase();return g.includes("мульт")||g.includes("animation")||t.includes("мульт")}function isAnime(m){if(m.type==="Аниме")return true;const h=normalize([m.ru,m.en,m.type,...getGenres(m),m.category].join(" "));return h.includes("аниме")||h.includes("anime")||h.includes("manga")||h.includes("ova")}function smartScore(m){const r=getRating(m),v=getVotes(m),y=getYear(m),vs=Math.log10(Math.max(v,1))*1.35,rs=r*1.9,fs=y?Math.max(0,Math.min(1.2,(y-1990)/40)):0,p=v<100?4.5:v<300?2.3:v<1000?.8:0;return rs+vs+fs-p}function levenshtein(a,b,max=3){a=normalize(a);b=normalize(b);if(Math.abs(a.length-b.length)>max)return max+1;const dp=Array(b.length+1).fill(0).map((_,i)=>i);for(let i=1;i<=a.length;i++){let prev=dp[0];dp[0]=i;let rowMin=dp[0];for(let j=1;j<=b.length;j++){const temp=dp[j];dp[j]=Math.min(dp[j]+1,dp[j-1]+1,prev+(a[i-1]===b[j-1]?0:1));prev=temp;rowMin=Math.min(rowMin,dp[j])}if(rowMin>max)return max+1}return dp[b.length]}function searchText(m){return normalize([m.ru,m.en,m.year,m.type,m.category,...getGenres(m)].join(" "))}function titleText(m){return normalize([m.ru,m.en].join(" "))}function searchScore(m,rawQuery){const q0=normalize(rawQuery);if(!q0)return 999999;const variants=[q0,normalize(latinToRus(rawQuery)),normalize(rusToLatin(rawQuery))].filter(Boolean);const text=searchText(m),title=titleText(m),tokens=title.split(" ").filter(Boolean),allTokens=text.split(" ").filter(Boolean);let best=-1;for(const q of variants){if(title===q)best=Math.max(best,10000);if(title.startsWith(q))best=Math.max(best,9000);if(tokens.some(t=>t===q))best=Math.max(best,8500);if(tokens.some(t=>t.startsWith(q)))best=Math.max(best,8200);if(title.includes(q))best=Math.max(best,7600);if(text.includes(q))best=Math.max(best,6000);const qParts=q.split(" ").filter(Boolean);if(qParts.length>1&&qParts.every(p=>text.includes(p)||allTokens.some(t=>t.startsWith(p))))best=Math.max(best,7200+qParts.length*100);if(q.length>=3){for(const t of tokens){const part=t.slice(0,Math.max(q.length,3));const d=levenshtein(q,part,2);if(d<=1)best=Math.max(best,7000-d*700);else if(q.length>=5&&d<=2)best=Math.max(best,6200)}}}if(best<0)return -1;return best+smartScore(m)*10+Math.min(getVotes(m),50000)/10000}function sortList(list){const sort=$("sortFilter").value||"smart",a=[...list];if(currentTab==="random")return shuffle(a);if(sort==="rating")return a.sort((x,y)=>getRating(y)-getRating(x)||getVotes(y)-getVotes(x));if(sort==="votes")return a.sort((x,y)=>getVotes(y)-getVotes(x)||getRating(y)-getRating(x));if(sort==="year")return a.sort((x,y)=>getYear(y)-getYear(x)||smartScore(y)-smartScore(x));if(sort==="title")return a.sort((x,y)=>titleOf(x).localeCompare(titleOf(y),"ru"));return a.sort((x,y)=>smartScore(y)-smartScore(x))}async function loadData(){statusText.textContent="Загрузка data/index.json...";const res=await fetch(INDEX_URL+"?v="+Date.now(),{cache:"no-store"});if(!res.ok)throw new Error("Не удалось загрузить data/index.json: "+res.status);const data=await res.json();allMovies=data.items||[];statusText.textContent=`База: ${allMovies.length} записей · чанков: ${data.chunks||"?"} · ${data.generatedAt||""}`;fillFilters();applyFilters()}function fillFilters(){const years=[...new Set(allMovies.map(getYear).filter(Boolean))].sort((a,b)=>b-a),genres=[...new Set(allMovies.flatMap(getGenres))].sort((a,b)=>a.localeCompare(b,"ru"));yearFilter.innerHTML=`<option value="">Все годы</option>`+years.map(y=>`<option value="${y}">${y}</option>`).join("");genreFilter.innerHTML=`<option value="">Все жанры</option>`+genres.map(g=>`<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`).join("")}function applyFilters(){const q=searchInput.value,type=typeFilter.value,genre=genreFilter.value,year=Number(yearFilter.value||0),minRating=Number(ratingFilter.value||0);let list=[...allMovies];if(currentTab==="movies")list=list.filter(isMovie);else if(currentTab==="series")list=list.filter(isSeries);else if(currentTab==="cartoons")list=list.filter(isCartoon);else if(currentTab==="anime")list=list.filter(isAnime);else if(currentTab==="top")list=list.filter(m=>getVotes(m)>=MIN_VOTES_FOR_TOP).sort((a,b)=>smartScore(b)-smartScore(a)).slice(0,250);else if(currentTab==="new"){const maxYear=Math.max(...allMovies.map(getYear).filter(Boolean));list=list.filter(m=>getYear(m)>=maxYear-1)}else if(currentTab==="popular")list=list.filter(m=>getVotes(m)>=500).sort((a,b)=>getVotes(b)-getVotes(a)).slice(0,500);else if(currentTab==="fav"){const fav=loadSet(favKey);list=list.filter(m=>fav.has(String(m.id)))}else if(currentTab==="history"){const hist=JSON.parse(localStorage.getItem(historyKey)||"[]"),map=new Map(allMovies.map(m=>[String(m.id),m]));list=hist.map(id=>map.get(id)).filter(Boolean)}else if(currentTab==="random")list=shuffle(list).slice(0,200);if(type==="Аниме")list=list.filter(isAnime);else if(type)list=list.filter(m=>m.type===type);if(genre)list=list.filter(m=>getGenres(m).includes(genre));if(year)list=list.filter(m=>getYear(m)===year);if(minRating)list=list.filter(m=>getRating(m)>=minRating);const nq=normalize(q);if(nq)list=list.map(m=>({m,score:searchScore(m,q)})).filter(x=>x.score>=0).sort((a,b)=>b.score-a.score).map(x=>x.m);else if(!["top","popular","history","random"].includes(currentTab))list=sortList(list);else if(currentTab!=="history"&&currentTab!=="random")list=sortList(list);filtered=list;currentPage=1;render()}function render(){const pages=Math.max(1,Math.ceil(filtered.length/PAGE_SIZE));currentPage=Math.min(currentPage,pages);const start=(currentPage-1)*PAGE_SIZE,pageItems=filtered.slice(start,start+PAGE_SIZE);countText.textContent=`Найдено: ${filtered.length} · Страница ${currentPage} из ${pages}`;grid.innerHTML=pageItems.map(cardHtml).join("");document.querySelectorAll(".card").forEach(card=>card.addEventListener("click",async e=>{const id=card.getAttribute("data-id"),movie=allMovies.find(m=>String(m.id)===id);if(movie)await openDetails(movie)}));prevBtn.disabled=currentPage<=1;nextBtn.disabled=currentPage>=pages;pageText.textContent=`${currentPage} / ${pages}`}function cardHtml(m){const poster=m.poster?`<img loading="lazy" src="${escapeAttr(m.poster)}" alt="${escapeAttr(titleOf(m))}">`:`<div class="no-poster">Нет постера</div>`,genres=getGenres(m).slice(0,3).join(" · "),votes=getVotes(m),rating=getRating(m),badges=[votes>=1000?`<span class="badge good">топ</span>`:"",getYear(m)>=2025?`<span class="badge warn">новинка</span>`:"",isAnime(m)?`<span class="badge anime">аниме</span>`:""].join("");return`<article class="card" data-id="${escapeAttr(m.id)}"><div class="poster-wrap"><div class="badges">${badges}</div>${poster}</div><div class="card-body"><p class="card-title">${escapeHtml(titleOf(m))}</p><p class="meta">${escapeHtml(m.year||"—")} · ${escapeHtml(isAnime(m)?"Аниме":m.type||"—")}</p><p class="meta">${escapeHtml(genres)}</p><span class="rating">${rating.toFixed(1)}</span><span class="votes">${votes?`${formatNum(votes)} голосов`:""}</span></div></article>`}async function loadFullItem(m){if(!m.chunk)return m;if(chunkCache.has(m.chunk)){return chunkCache.get(m.chunk).find(x=>String(x.id)===String(m.id))||m}const res=await fetch(`data/chunks/${m.chunk}.json?v=${Date.now()}`,{cache:"no-store"});if(!res.ok)return m;const data=await res.json();const items=data.items||[];chunkCache.set(m.chunk,items);return items.find(x=>String(x.id)===String(m.id))||m}function setLink(id,url){const el=$(id);if(el)el.href=url}async function openDetails(shortItem){const m=await loadFullItem(shortItem);selectedMovie=m;const hist=JSON.parse(localStorage.getItem(historyKey)||"[]").filter(id=>id!==String(m.id));hist.unshift(String(m.id));localStorage.setItem(historyKey,JSON.stringify(hist.slice(0,300)));detailTitle.textContent=titleOf(m);detailMeta.textContent=`${m.year||"—"} · ${isAnime(m)?"Аниме":m.type||"—"} · рейтинг ${getRating(m).toFixed(1)} · голосов ${getVotes(m)||0}`;detailGenres.textContent=getGenres(m).join(" · ");detailOverview.textContent=m.overview||"Описание пока не добавлено.";detailPoster.src=m.poster||"";detailPoster.style.display=m.poster?"block":"none";const q=queryOf(m),anime=isAnime(m);animeSitesBlock.style.display=anime?"block":"none";setLink("shikimoriLink",`https://shikimori.one/animes?search=${q}`);setLink("malLink",`https://myanimelist.net/anime.php?q=${q}`);setLink("anilistLink",`https://anilist.co/search/anime?search=${q}`);setLink("animePlanetLink",`https://www.anime-planet.com/anime/all?name=${q}`);setLink("anidbLink",`https://anidb.net/anime/?adb.search=${q}`);setLink("myshowsLink",`https://myshows.me/search/?q=${q}`);setLink("kinoriumLink",`https://ru.kinorium.com/search/?q=${q}`);setLink("kinoMailLink",`https://kino.mail.ru/search/?q=${q}`);setLink("filmRuLink",`https://www.film.ru/search?text=${q}`);setLink("kinoafishaLink",`https://www.kinoafisha.info/search/?q=${q}`);setLink("kinopoiskLink",`https://www.kinopoisk.ru/index.php?kp_query=${q}`);setLink("youtubeLink",`https://www.youtube.com/results?search_query=${q}+трейлер`);setLink("vkLink",`https://vk.com/video?q=${q}`);setLink("rutubeLink",`https://rutube.ru/search/?query=${q}`);setLink("googleLink",`https://www.google.com/search?q=${q}+фильм+сериал`);updateFavBtn();detailsDialog.showModal()}function updateFavBtn(){const fav=loadSet(favKey),yes=selectedMovie&&fav.has(String(selectedMovie.id));favBtn.textContent=yes?"Убрать из избранного":"В избранное"}function toggleFav(){if(!selectedMovie)return;const fav=loadSet(favKey),id=String(selectedMovie.id);fav.has(id)?fav.delete(id):fav.add(id);saveSet(favKey,fav);updateFavBtn();if(currentTab==="fav")applyFilters()}function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}function formatNum(n){if(!n)return"";if(n>=1e6)return(n/1e6).toFixed(1)+"м";if(n>=1e3)return Math.round(n/1e3)+"к";return String(n)}function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]))}function escapeAttr(s){return escapeHtml(s)}function setupEvents(){let searchTimer=null;searchInput.addEventListener("input",()=>{clearTimeout(searchTimer);searchTimer=setTimeout(applyFilters,90)});["typeFilter","genreFilter","yearFilter","ratingFilter","sortFilter"].forEach(id=>{$(id).addEventListener("change",applyFilters)});document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));btn.classList.add("active");currentTab=btn.dataset.tab;applyFilters()}));prevBtn.addEventListener("click",()=>{if(currentPage>1){currentPage--;render();scrollTo({top:0,behavior:"smooth"})}});nextBtn.addEventListener("click",()=>{const pages=Math.max(1,Math.ceil(filtered.length/PAGE_SIZE));if(currentPage<pages){currentPage++;render();scrollTo({top:0,behavior:"smooth"})}});closeDialog.addEventListener("click",()=>detailsDialog.close());favBtn.addEventListener("click",toggleFav);reloadBtn.addEventListener("click",()=>loadData().catch(showError));themeBtn.addEventListener("click",()=>{document.body.classList.toggle("light");localStorage.setItem("filmsTheme",document.body.classList.contains("light")?"light":"dark")});if(localStorage.getItem("filmsTheme")==="light")document.body.classList.add("light")}function showError(e){console.error(e);statusText.textContent="Ошибка: "+e.message;grid.innerHTML=`<div class="card"><div class="card-body">Не удалось загрузить базу. Проверь, что создан data/index.json.</div></div>`}setupEvents();loadData().catch(showError);
+const INDEX_URL = "data/index.json";
+const PAGE_SIZE = 40;
+const MIN_VOTES_FOR_TOP = 300;
+
+let allMovies = [];
+let filtered = [];
+let currentPage = 1;
+let currentTab = "all";
+let selectedMovie = null;
+const chunkCache = new Map();
+
+const $ = (id) => document.getElementById(id);
+
+const favKey = "gkm_favorites";
+const historyKey = "gkm_history";
+
+function loadSet(key) {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(key) || "[]"));
+  } catch {
+    return new Set();
+  }
+}
+
+function saveSet(key, set) {
+  localStorage.setItem(key, JSON.stringify([...set]));
+}
+
+function titleOf(m) {
+  return m.ru || m.en || "Без названия";
+}
+
+function getYear(m) {
+  return String(m.year || "").trim();
+}
+
+function getRating(m) {
+  return Number(m.rating || 0);
+}
+
+function getVotes(m) {
+  return Number(m.votes || 0);
+}
+
+function getGenres(m) {
+  return Array.isArray(m.genres) ? m.genres.filter(Boolean) : [];
+}
+
+function normalize(s) {
+  return String(s || "").toLowerCase().trim();
+}
+
+function queryOf(m) {
+  return encodeURIComponent(titleOf(m));
+}
+
+function scoreSmart(m) {
+  const rating = getRating(m);
+  const votes = getVotes(m);
+  const year = Number(getYear(m) || 0);
+
+  if (votes < 30) return -1;
+
+  const voteBonus = Math.min(votes, 50000) / 50000 * 4;
+  const yearBonus = year >= 2010 ? 0.4 : 0;
+
+  return rating * 10 + voteBonus + yearBonus;
+}
+
+async function loadData() {
+  $("statusText").textContent = "Загрузка базы...";
+
+  let data;
+
+  try {
+    const indexRes = await fetch(INDEX_URL + "?v=" + Date.now(), { cache: "no-store" });
+    if (indexRes.ok) {
+      data = await loadChunkedData(await indexRes.json());
+    }
+  } catch {}
+
+  if (!data) {
+    const res = await fetch("movies_updates.json?v=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("Не удалось загрузить movies_updates.json");
+    data = await res.json();
+  }
+
+  allMovies = data.movies || data.items || [];
+
+  $("statusText").textContent = `База: ${allMovies.length} записей · версия ${data.version || "?"} · ${data.generatedAt || ""}`;
+
+  fillFilters();
+  applyFilters();
+}
+
+async function loadChunkedData(index) {
+  const chunks = index.chunks || [];
+  const movies = [];
+
+  for (const chunk of chunks) {
+    const url = chunk.file || chunk.url;
+    if (!url) continue;
+
+    let part = chunkCache.get(url);
+    if (!part) {
+      const res = await fetch(url + "?v=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) continue;
+      part = await res.json();
+      chunkCache.set(url, part);
+    }
+
+    if (Array.isArray(part.movies)) movies.push(...part.movies);
+    else if (Array.isArray(part)) movies.push(...part);
+  }
+
+  return {
+    version: index.version || 1,
+    generatedAt: index.generatedAt || "",
+    movies
+  };
+}
+
+function fillFilters() {
+  const years = [...new Set(allMovies.map(getYear).filter(Boolean))]
+    .sort((a, b) => Number(b) - Number(a));
+
+  const genres = [...new Set(allMovies.flatMap(getGenres))]
+    .sort((a, b) => a.localeCompare(b, "ru"));
+
+  $("yearFilter").innerHTML =
+    `<option value="">Все годы</option>` +
+    years.map(y => `<option value="${escapeHtml(y)}">${escapeHtml(y)}</option>`).join("");
+
+  $("genreFilter").innerHTML =
+    `<option value="">Все жанры</option>` +
+    genres.map(g => `<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`).join("");
+}
+
+function applyFilters() {
+  const q = normalize($("searchInput").value);
+  const type = $("typeFilter").value;
+  const genre = $("genreFilter").value;
+  const year = $("yearFilter").value;
+  const minRating = Number($("ratingFilter").value || 0);
+  const sort = $("sortFilter") ? $("sortFilter").value : "smart";
+
+  let list = [...allMovies];
+
+  if (currentTab === "movies") list = list.filter(m => m.type === "Фильм");
+  if (currentTab === "series") list = list.filter(m => m.type === "Сериал");
+  if (currentTab === "cartoons") list = list.filter(m => getGenres(m).some(g => normalize(g).includes("мульт")));
+  if (currentTab === "anime") list = list.filter(m => getGenres(m).some(g => normalize(g).includes("аниме")) || m.type === "Аниме");
+  if (currentTab === "top") list = list.filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP).slice(0, 250);
+  if (currentTab === "new") list = list.filter(m => Number(getYear(m)) >= 2024);
+  if (currentTab === "popular") list = list.filter(m => getVotes(m) >= 1000);
+  if (currentTab === "fav") {
+    const fav = loadSet(favKey);
+    list = list.filter(m => fav.has(String(m.id)));
+  }
+  if (currentTab === "history") {
+    const hist = [...loadSet(historyKey)];
+    const map = new Map(allMovies.map(m => [String(m.id), m]));
+    list = hist.map(id => map.get(id)).filter(Boolean);
+  }
+  if (currentTab === "random") {
+    list = shuffle(list).slice(0, 200);
+  }
+
+  if (q) {
+    list = list.filter(m => {
+      const hay = normalize([
+        m.ru,
+        m.en,
+        m.year,
+        m.type,
+        m.status,
+        m.overview,
+        ...getGenres(m)
+      ].join(" "));
+      return hay.includes(q);
+    });
+  }
+
+  if (type) list = list.filter(m => m.type === type);
+  if (genre) list = list.filter(m => getGenres(m).includes(genre));
+  if (year) list = list.filter(m => getYear(m) === year);
+  if (minRating) list = list.filter(m => getRating(m) >= minRating);
+
+  list = sortList(list, sort);
+
+  filtered = list;
+  currentPage = 1;
+  render();
+}
+
+function sortList(list, sort) {
+  const a = [...list];
+
+  if (sort === "rating") {
+    a.sort((x, y) => getRating(y) - getRating(x));
+  } else if (sort === "votes") {
+    a.sort((x, y) => getVotes(y) - getVotes(x));
+  } else if (sort === "year") {
+    a.sort((x, y) => Number(getYear(y) || 0) - Number(getYear(x) || 0));
+  } else if (sort === "title") {
+    a.sort((x, y) => titleOf(x).localeCompare(titleOf(y), "ru"));
+  } else {
+    a.sort((x, y) => scoreSmart(y) - scoreSmart(x));
+  }
+
+  return a;
+}
+
+function render() {
+  const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  currentPage = Math.min(currentPage, pages);
+
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageItems = filtered.slice(start, start + PAGE_SIZE);
+
+  $("countText").textContent = `Найдено: ${filtered.length} · Страница ${currentPage} из ${pages}`;
+  $("grid").innerHTML = pageItems.map(cardHtml).join("");
+
+  document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", () => {
+      const id = card.getAttribute("data-id");
+      const movie = allMovies.find(m => String(m.id) === id);
+      if (movie) openDetails(movie);
+    });
+  });
+
+  $("prevBtn").disabled = currentPage <= 1;
+  $("nextBtn").disabled = currentPage >= pages;
+  $("pageText").textContent = `${currentPage} / ${pages}`;
+}
+
+function cardHtml(m) {
+  const poster = m.poster
+    ? `<img loading="lazy" src="${escapeAttr(m.poster)}" alt="${escapeAttr(titleOf(m))}">`
+    : `<div class="no-poster">Нет постера</div>`;
+
+  const genres = getGenres(m).slice(0, 3).join(" · ");
+
+  return `
+    <article class="card" data-id="${escapeAttr(m.id)}">
+      <div class="poster-wrap">${poster}</div>
+      <div class="card-body">
+        <p class="card-title">${escapeHtml(titleOf(m))}</p>
+        <p class="meta">${escapeHtml(m.year || "—")} · ${escapeHtml(m.type || "—")}</p>
+        <p class="meta">${escapeHtml(genres)}</p>
+        <span class="rating">${getRating(m).toFixed(1)}</span>
+      </div>
+    </article>
+  `;
+}
+
+function openDetails(m) {
+  selectedMovie = m;
+
+  const hist = loadSet(historyKey);
+  hist.delete(String(m.id));
+  const arr = [String(m.id), ...hist].slice(0, 300);
+  localStorage.setItem(historyKey, JSON.stringify(arr));
+
+  $("detailTitle").textContent = titleOf(m);
+  $("detailMeta").textContent =
+    `${m.year || "—"} · ${m.type || "—"} · рейтинг ${getRating(m).toFixed(1)} · голосов ${m.votes || 0}`;
+
+  $("detailGenres").textContent = getGenres(m).join(" · ");
+  $("detailOverview").textContent = m.overview || "Описание пока не добавлено.";
+
+  $("detailPoster").src = m.poster || "";
+  $("detailPoster").style.display = m.poster ? "block" : "none";
+
+  const q = queryOf(m);
+
+  $("kinopoiskLink").href = `https://www.kinopoisk.ru/index.php?kp_query=${q}`;
+  $("youtubeLink").href = `https://www.youtube.com/results?search_query=${q}+трейлер`;
+  $("vkLink").href = `https://vk.com/video?q=${q}`;
+  $("rutubeLink").href = `https://rutube.ru/search/?query=${q}`;
+
+  updateFavBtn();
+  $("detailsDialog").showModal();
+}
+
+function updateFavBtn() {
+  const fav = loadSet(favKey);
+  const yes = selectedMovie && fav.has(String(selectedMovie.id));
+  $("favBtn").textContent = yes ? "Убрать из избранного" : "В избранное";
+}
+
+function toggleFav() {
+  if (!selectedMovie) return;
+
+  const fav = loadSet(favKey);
+  const id = String(selectedMovie.id);
+
+  if (fav.has(id)) fav.delete(id);
+  else fav.add(id);
+
+  saveSet(favKey, fav);
+  updateFavBtn();
+
+  if (currentTab === "fav") applyFilters();
+}
+
+function resetFilters() {
+  $("searchInput").value = "";
+  $("typeFilter").value = "";
+  $("genreFilter").value = "";
+  $("yearFilter").value = "";
+  $("ratingFilter").value = "0";
+
+  if ($("sortFilter")) $("sortFilter").value = "smart";
+
+  currentTab = "all";
+
+  document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+  const allTab = document.querySelector('.tab[data-tab="all"]');
+  if (allTab) allTab.classList.add("active");
+
+  applyFilters();
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+
+  return a;
+}
+
+function escapeHtml(s) {
+  return String(s ?? "").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  }[ch]));
+}
+
+function escapeAttr(s) {
+  return escapeHtml(s);
+}
+
+function setupEvents() {
+  [
+    "searchInput",
+    "typeFilter",
+    "genreFilter",
+    "yearFilter",
+    "ratingFilter",
+    "sortFilter"
+  ].forEach(id => {
+    const el = $(id);
+    if (!el) return;
+
+    el.addEventListener("input", applyFilters);
+    el.addEventListener("change", applyFilters);
+  });
+
+  const resetBtn = $("resetFiltersBtn");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", resetFilters);
+  }
+
+  document.querySelectorAll(".tab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+      btn.classList.add("active");
+      currentTab = btn.dataset.tab;
+      applyFilters();
+    });
+  });
+
+  $("prevBtn").addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+
+  $("nextBtn").addEventListener("click", () => {
+    const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+
+    if (currentPage < pages) {
+      currentPage++;
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+
+  $("closeDialog").addEventListener("click", () => $("detailsDialog").close());
+  $("favBtn").addEventListener("click", toggleFav);
+
+  $("reloadBtn").addEventListener("click", () => loadData().catch(showError));
+
+  $("themeBtn").addEventListener("click", () => {
+    document.body.classList.toggle("light");
+    localStorage.setItem("gkm_theme", document.body.classList.contains("light") ? "light" : "dark");
+  });
+
+  if (localStorage.getItem("gkm_theme") === "light") {
+    document.body.classList.add("light");
+  }
+}
+
+function showError(e) {
+  console.error(e);
+  $("statusText").textContent = "Ошибка: " + e.message;
+  $("grid").innerHTML =
+    `<div class="card"><div class="card-body">Не удалось загрузить базу. Проверь data/index.json или movies_updates.json.</div></div>`;
+}
+
+setupEvents();
+loadData().catch(showError);
