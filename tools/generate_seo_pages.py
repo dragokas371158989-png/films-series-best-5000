@@ -46,7 +46,7 @@ def make_page(item):
     rating = rating_of(item)
     votes = votes_of(item)
     url = f"{BASE_URL}/film/{item_id}.html"
-    q = re.sub(r"\\s+", "+", title)
+    q = re.sub(r"\s+", "+", title)
     desc = f"{title} — {kind} {year}, рейтинг {rating:.1f}. Жанры: {', '.join(genres[:4])}."[:250]
     schema_type = "TVSeries" if kind == "Сериал" else "Movie"
     ld = {"@context":"https://schema.org","@type":schema_type,"name":title,"description":overview,"url":url,"genre":genres}
@@ -81,8 +81,9 @@ def make_page(item):
     img{{width:260px;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.45);background:#0d1d33}}
     h1{{margin:0 0 10px;font-size:36px}}.meta,.genres{{color:#aac0d7;line-height:1.5}}
     .rating{{display:inline-block;background:#00d4a7;color:#031012;font-weight:900;padding:8px 12px;border-radius:12px;margin:12px 0}}
-    .overview{{line-height:1.65;font-size:18px}}.buttons{{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}}
+    .overview{{line-height:1.65;font-size:18px}}.buttons{{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;margin-bottom:20px}}
     .buttons a{{background:#176dd8;color:#fff;text-decoration:none;padding:12px 16px;border-radius:12px}}.back{{display:inline-block;margin-bottom:20px;text-decoration:none}}
+    .section-title{{margin-top:22px;margin-bottom:8px;color:#aac0d7;font-size:18px}}
     @media(max-width:720px){{.hero{{grid-template-columns:1fr}}img{{width:220px}}h1{{font-size:28px}}}}
   </style>
 </head>
@@ -97,11 +98,23 @@ def make_page(item):
         <p class="genres">{escape(" · ".join(genres))}</p>
         <div class="rating">{rating:.1f}</div>
         <p class="overview">{escape(overview)}</p>
+
+        <h2 class="section-title">Найти на сайтах-каталогах</h2>
+        <div class="buttons">
+          <a href="https://myshows.me/search/?q={escape(q)}" target="_blank" rel="noreferrer">MyShows</a>
+          <a href="https://ru.kinorium.com/search/?q={escape(q)}" target="_blank" rel="noreferrer">Кинориум</a>
+          <a href="https://kino.mail.ru/search/?q={escape(q)}" target="_blank" rel="noreferrer">Кино Mail</a>
+          <a href="https://www.film.ru/search?text={escape(q)}" target="_blank" rel="noreferrer">Film.ru</a>
+          <a href="https://www.kinoafisha.info/search/?q={escape(q)}" target="_blank" rel="noreferrer">Киноафиша</a>
+        </div>
+
+        <h2 class="section-title">Видео и поиск</h2>
         <div class="buttons">
           <a href="https://www.kinopoisk.ru/index.php?kp_query={escape(q)}" target="_blank" rel="noreferrer">Кинопоиск</a>
-          <a href="https://www.youtube.com/results?search_query={escape(q)}+трейлер" target="_blank" rel="noreferrer">Трейлер YouTube</a>
+          <a href="https://www.youtube.com/results?search_query={escape(q)}+трейлер" target="_blank" rel="noreferrer">YouTube</a>
           <a href="https://vk.com/video?q={escape(q)}" target="_blank" rel="noreferrer">VK Видео</a>
           <a href="https://rutube.ru/search/?query={escape(q)}" target="_blank" rel="noreferrer">Rutube</a>
+          <a href="https://www.google.com/search?q={escape(q)}+фильм+сериал" target="_blank" rel="noreferrer">Google</a>
         </div>
       </div>
     </section>
