@@ -1,5 +1,6 @@
 import json
 import math
+import re
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -32,11 +33,140 @@ def extract_movies(data):
         )
 
         version = data.get("version", 1)
-        generated_at = data.get("generatedAt") or data.get("generated_at") or datetime.now(timezone.utc).isoformat()
+        generated_at = (
+            data.get("generatedAt")
+            or data.get("generated_at")
+            or datetime.now(timezone.utc).isoformat()
+        )
 
         return movies, version, generated_at
 
     return [], 1, datetime.now(timezone.utc).isoformat()
+
+
+def norm_text(value):
+    value = str(value or "").lower().strip()
+    value = value.replace("ё", "е")
+    value = re.sub(r"[^\wа-яa-z0-9]+", " ", value, flags=re.IGNORECASE)
+    value = re.sub(r"\s+", " ", value).strip()
+    return value
+
+
+def norm_poster(value):
+    value = str(value or "").strip()
+    if not value:
+        return ""
+
+    # Берём только конец пути, чтобы одинаковые постеры считались дублем
+    return value.split("/")[-1].lower()
+
+
+def item_score(m):
+    rating = float(m.get("rating") or 0)
+    votes = int(m.get("votes") or 0)
+    popularity = float(m.get("popularity") or 0)
+    year = int(m.get("year") or 0)
+
+    score = rating * 10
+    score += min(votes / 1000, 20)
+    score += min(popularity / 50, 10)
+
+    # Чуть выше приоритет нормальным категориям
+    category = str(m.get("category") or m.get("type") or "").lower()
+    if "аниме" in category:
+        score += 3
+    if "фильм" in category:
+        score += 2
+    if "сериал" in category:
+        score += 1
+
+    if year >= 2020:
+        score += 1
+
+    return score
+
+
+def dedupe_movies(movies):
+    """
+    Убирает дубли:
+    1. одинаковый id + тип
+    2. одинаковое русское/английское название + год
+    3. одинаковый постер + год
+    """
+
+    best = {}
+
+    for m in movies:
+        if not isinstance(m, dict):
+            continue
+
+        ru = norm_text(m.get("ru") or m.get("title") or m.get("name"))
+        en = norm_text(m.get("en") or m.get("original_title") or m.get("original_name"))
+        year = str(m.get("year") or "").strip()
+        poster = norm_poster(m.get("poster"))
+
+        keys = []
+
+        if ru and year:
+            keys.append(f"title_ru:{ru}:{year}")
+
+        if en and year:
+            keys.append(f"title_en:{en}:{year}")
+
+        if poster and year:
+            keys.append(f"poster:{poster}:{year}")
+
+        # Если нет нормального ключа, используем id
+        if not keys:
+            item_id = str(m.get("id") or "").strip()
+            item_type = str(m.get("type") or m.get("category") or "").strip()
+            if item_id:
+                keys.append(f"id:{item_type}:{item_id}")
+
+        if not keys:
+            continue
+
+        main_key = keys[0]
+
+        # Если какой-то из ключей уже есть — считаем дублем
+        existing_key = None
+        for key in keys:
+            if key in best:
+                existing_key = key
+                break
+
+        if existing_key is None:
+            best[main_key] = m
+
+            # Привязываем все ключи к этой же записи
+            for key in keys:
+                best[key] = m
+        else:
+            old = best[existing_key]
+
+            # Оставляем более качественную версию
+            if item_score(m) > item_score(old):
+                for key in keys:
+                    best[key] = m
+
+                # Обновляем старые ключи, которые ссылались на old
+                for key, value in list(best.items()):
+                    if value is old:
+                        best[key] = m
+
+    # Убираем повторные ссылки на один и тот же объект
+    result = []
+    seen_objects = set()
+
+    for m in best.values():
+        object_id = id(m)
+        if object_id in seen_objects:
+            continue
+
+        seen_objects.add(object_id)
+        result.append(m)
+
+    return result
 
 
 def compact_movie(m):
@@ -44,13 +174,25 @@ def compact_movie(m):
     if not isinstance(genres, list):
         genres = []
 
+    ru = m.get("ru") or m.get("title") or m.get("name") or ""
+    en = m.get("en") or m.get("original_title") or m.get("original_name") or ""
+
+    item_type = m.get("type") or m.get("category") or ""
+    category = m.get("category") or item_type
+
+    # Если в жанрах есть Аниме, тип тоже делаем Аниме
+    genres_text = " ".join(str(g).lower() for g in genres)
+    if "аниме" in genres_text:
+        item_type = "Аниме"
+        category = "Аниме"
+
     return {
         "id": m.get("id"),
-        "ru": m.get("ru") or m.get("title") or m.get("name") or "",
-        "en": m.get("en") or m.get("original_title") or m.get("original_name") or "",
+        "ru": ru,
+        "en": en,
         "year": m.get("year") or 0,
-        "type": m.get("type") or m.get("category") or "",
-        "category": m.get("category") or m.get("type") or "",
+        "type": item_type,
+        "category": category,
         "rating": m.get("rating") or 0,
         "votes": m.get("votes") or 0,
         "popularity": m.get("popularity") or 0,
@@ -71,6 +213,10 @@ def main():
 
     movies = [m for m in movies if isinstance(m, dict)]
     movies = [m for m in movies if m.get("poster")]
+
+    before = len(movies)
+    movies = dedupe_movies(movies)
+    after = len(movies)
 
     DATA_DIR.mkdir(exist_ok=True)
     CHUNKS_DIR.mkdir(parents=True, exist_ok=True)
@@ -97,8 +243,6 @@ def main():
         chunk_data = {
             "chunk": i + 1,
             "count": len(compact_items),
-
-            # Делаем сразу все варианты, чтобы app.js точно понял
             "items": compact_items,
             "films": compact_items,
             "movies": compact_items,
@@ -120,16 +264,14 @@ def main():
     index_data = {
         "version": version,
         "generatedAt": generated_at,
-
-        # Делаем сразу несколько названий количества, чтобы сайт точно прочитал
         "count": total,
         "total": total,
         "totalCount": total,
-
+        "beforeDedupe": before,
+        "afterDedupe": after,
+        "removedDuplicates": before - after,
         "chunkSize": CHUNK_SIZE,
         "chunksCount": chunk_count,
-
-        # Делаем сразу несколько названий списка чанков
         "chunks": chunks,
         "files": chunks,
         "parts": chunks,
@@ -142,7 +284,9 @@ def main():
 
     print("DONE")
     print("Source:", SOURCE_FILE)
-    print("Total movies:", total)
+    print("Before dedupe:", before)
+    print("After dedupe:", after)
+    print("Removed duplicates:", before - after)
     print("Chunks:", chunk_count)
     print("Index:", INDEX_FILE)
 
