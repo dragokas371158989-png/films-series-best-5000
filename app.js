@@ -1,149 +1,95 @@
-const INDEX_URL = "data/index.json";
+const MOVIES_URL = "movies_updates.json";
+const ANIME_URL = "anime_updates.json";
 const PAGE_SIZE = 40;
-const MIN_VOTES_FOR_TOP = 300;
 
-let allMovies = [];
+let movies = [];
+let anime = [];
+let allItems = [];
 let filtered = [];
 let currentPage = 1;
 let currentTab = "all";
-let selectedMovie = null;
-const chunkCache = new Map();
+let selectedItem = null;
+let selectedAnimeGenre = "";
 
 const $ = (id) => document.getElementById(id);
-
-const favKey = "gkm_favorites";
-const historyKey = "gkm_history";
+const favKey = "mediaFav";
+const historyKey = "mediaHistory";
 
 function loadSet(key) {
-  try {
-    return new Set(JSON.parse(localStorage.getItem(key) || "[]"));
-  } catch {
-    return new Set();
-  }
+  try { return new Set(JSON.parse(localStorage.getItem(key) || "[]")); }
+  catch { return new Set(); }
 }
 
 function saveSet(key, set) {
   localStorage.setItem(key, JSON.stringify([...set]));
 }
 
-function titleOf(m) {
-  return m.ru || m.en || "Без названия";
+function titleOf(m) { return m.ru || m.en || "Без названия"; }
+function queryOf(m) { return encodeURIComponent(titleOf(m)); }
+function normalize(s) { return String(s || "").toLowerCase().trim(); }
+function getYear(m) { return String(m.year || "").trim(); }
+function getRating(m) { return Number(m.rating || 0); }
+function getGenres(m) { return Array.isArray(m.genres) ? m.genres.filter(Boolean) : []; }
+
+function mapMovie(m) {
+  return {...m, kind: m.type === "Сериал" ? "series" : "movie"};
 }
 
-function getYear(m) {
-  return String(m.year || "").trim();
-}
-
-function getRating(m) {
-  return Number(m.rating || 0);
-}
-
-function rankOf(m) {
-  const r = getRating(m);
-
-  if (r >= 9) return { rank: "S", label: "S-класс" };
-  if (r >= 8) return { rank: "A", label: "A-класс" };
-  if (r >= 7) return { rank: "B", label: "B-класс" };
-  if (r >= 6) return { rank: "C", label: "C-класс" };
-
-  return { rank: "D", label: "D-класс" };
-}
-function getVotes(m) {
-  return Number(m.votes || 0);
-}
-
-function getGenres(m) {
-  return Array.isArray(m.genres) ? m.genres.filter(Boolean) : [];
-}
-
-function normalize(s) {
-  return String(s || "").toLowerCase().trim();
-}
-
-function queryOf(m) {
-  return encodeURIComponent(titleOf(m));
-}
-
-function scoreSmart(m) {
-  const rating = getRating(m);
-  const votes = getVotes(m);
-  const year = Number(getYear(m) || 0);
-
-  if (votes < 30) return -1;
-
-  const voteBonus = Math.min(votes, 50000) / 50000 * 4;
-  const yearBonus = year >= 2010 ? 0.4 : 0;
-
-  return rating * 10 + voteBonus + yearBonus;
-}
-
-async function loadData() {
-  $("statusText").textContent = "Загрузка базы...";
-
-  let data;
-
-  try {
-    const indexRes = await fetch(INDEX_URL + "?v=" + Date.now(), { cache: "no-store" });
-    if (indexRes.ok) {
-      data = await loadChunkedData(await indexRes.json());
-    }
-  } catch {}
-
-  if (!data) {
-    const res = await fetch("movies_updates.json?v=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) throw new Error("Не удалось загрузить movies_updates.json");
-    data = await res.json();
-  }
-
-  allMovies = data.movies || data.items || [];
-
-  $("statusText").textContent = `База: ${allMovies.length} записей · версия ${data.version || "?"} · ${data.generatedAt || ""}`;
-
-  fillFilters();
-  applyFilters();
-}
-
-async function loadChunkedData(index) {
-  const chunks = index.chunks || [];
-  const movies = [];
-
-  for (const chunk of chunks) {
-    const url = chunk.file || chunk.url;
-    if (!url) continue;
-
-    let part = chunkCache.get(url);
-    if (!part) {
-      const res = await fetch(url + "?v=" + Date.now(), { cache: "no-store" });
-      if (!res.ok) continue;
-      part = await res.json();
-      chunkCache.set(url, part);
-    }
-
-    if (Array.isArray(part.movies)) movies.push(...part.movies);
-    else if (Array.isArray(part)) movies.push(...part);
-  }
-
+function mapAnime(a) {
   return {
-    version: index.version || 1,
-    generatedAt: index.generatedAt || "",
-    movies
+    id: "anime_" + (a.id || a.mal_id || Math.abs((a.ru || a.en || "").split("").reduce((x,c)=>x+c.charCodeAt(0),0))),
+    sourceId: a.id || a.mal_id,
+    ru: a.ru || a.title_ru || a.title || a.en || "",
+    en: a.en || a.title_en || a.title_english || a.title || "",
+    year: a.year || "",
+    type: "Аниме",
+    kind: "anime",
+    episodes: a.episodes || "",
+    status: a.status || "",
+    rating: a.rating || a.score || 0,
+    votes: a.votes || 0,
+    poster: a.poster || "",
+    overview: a.overview || a.synopsis || "",
+    genres: getGenres(a),
+    studio: a.studio || ""
   };
 }
 
+async function fetchJsonSafe(url) {
+  try {
+    const r = await fetch(url + "?v=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) return null;
+    return await r.json();
+  } catch {
+    return null;
+  }
+}
+
+async function loadData() {
+  $("statusText").textContent = "Загрузка баз...";
+
+  const [movieData, animeData] = await Promise.all([
+    fetchJsonSafe(MOVIES_URL),
+    fetchJsonSafe(ANIME_URL)
+  ]);
+
+  movies = ((movieData && (movieData.movies || movieData.items)) || []).map(mapMovie);
+  anime = ((animeData && (animeData.anime || animeData.data || animeData.items)) || []).map(mapAnime);
+
+  allItems = [...movies, ...anime];
+
+  $("statusText").textContent = `Фильмы/сериалы: ${movies.length} · Аниме: ${anime.length}`;
+  fillFilters();
+  renderAnimeGenresPage();
+  applyFilters();
+}
+
 function fillFilters() {
-  const years = [...new Set(allMovies.map(getYear).filter(Boolean))]
-    .sort((a, b) => Number(b) - Number(a));
+  const years = [...new Set(allItems.map(getYear).filter(Boolean))].sort((a,b) => Number(b)-Number(a));
+  const genres = [...new Set(allItems.flatMap(getGenres))].sort((a,b) => a.localeCompare(b, "ru"));
 
-  const genres = [...new Set(allMovies.flatMap(getGenres))]
-    .sort((a, b) => a.localeCompare(b, "ru"));
-
-  $("yearFilter").innerHTML =
-    `<option value="">Все годы</option>` +
-    years.map(y => `<option value="${escapeHtml(y)}">${escapeHtml(y)}</option>`).join("");
-
-  $("genreFilter").innerHTML =
-    `<option value="">Все жанры</option>` +
-    genres.map(g => `<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`).join("");
+  $("yearFilter").innerHTML = `<option value="">Все годы</option>` + years.map(y => `<option value="${y}">${y}</option>`).join("");
+  $("genreFilter").innerHTML = `<option value="">Все жанры</option>` + genres.map(g => `<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`).join("");
 }
 
 function applyFilters() {
@@ -152,41 +98,27 @@ function applyFilters() {
   const genre = $("genreFilter").value;
   const year = $("yearFilter").value;
   const minRating = Number($("ratingFilter").value || 0);
-  const sort = $("sortFilter") ? $("sortFilter").value : "smart";
 
-  let list = [...allMovies];
+  let list = [...allItems];
 
-  if (currentTab === "movies") list = list.filter(m => m.type === "Фильм");
-  if (currentTab === "series") list = list.filter(m => m.type === "Сериал");
-  if (currentTab === "cartoons") list = list.filter(m => getGenres(m).some(g => normalize(g).includes("мульт")));
-  if (currentTab === "anime") list = list.filter(m => getGenres(m).some(g => normalize(g).includes("аниме")) || m.type === "Аниме");
-  if (currentTab === "top") list = list.filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP).slice(0, 250);
-  if (currentTab === "new") list = list.filter(m => Number(getYear(m)) >= 2024);
-  if (currentTab === "popular") list = list.filter(m => getVotes(m) >= 1000);
-  if (currentTab === "fav") {
+  if (currentTab === "movies") list = list.filter(m => m.kind === "movie");
+  else if (currentTab === "series") list = list.filter(m => m.kind === "series");
+  else if (currentTab === "anime" || currentTab === "animeGenres") list = list.filter(m => m.kind === "anime");
+  else if (currentTab === "new") list = list.slice(0, 500);
+  else if (currentTab === "fav") {
     const fav = loadSet(favKey);
     list = list.filter(m => fav.has(String(m.id)));
-  }
-  if (currentTab === "history") {
+  } else if (currentTab === "history") {
     const hist = [...loadSet(historyKey)];
-    const map = new Map(allMovies.map(m => [String(m.id), m]));
+    const map = new Map(allItems.map(m => [String(m.id), m]));
     list = hist.map(id => map.get(id)).filter(Boolean);
-  }
-  if (currentTab === "random") {
+  } else if (currentTab === "random") {
     list = shuffle(list).slice(0, 200);
   }
 
   if (q) {
     list = list.filter(m => {
-      const hay = normalize([
-        m.ru,
-        m.en,
-        m.year,
-        m.type,
-        m.status,
-        m.overview,
-        ...getGenres(m)
-      ].join(" "));
+      const hay = normalize([m.ru, m.en, m.year, m.type, m.status, m.overview, ...getGenres(m)].join(" "));
       return hay.includes(q);
     });
   }
@@ -195,30 +127,33 @@ function applyFilters() {
   if (genre) list = list.filter(m => getGenres(m).includes(genre));
   if (year) list = list.filter(m => getYear(m) === year);
   if (minRating) list = list.filter(m => getRating(m) >= minRating);
-
-  list = sortList(list, sort);
+  if (selectedAnimeGenre) list = list.filter(m => m.kind === "anime" && animeGenreMatch(m, selectedAnimeGenre));
 
   filtered = list;
   currentPage = 1;
   render();
 }
 
-function sortList(list, sort) {
-  const a = [...list];
-
-  if (sort === "rating") {
-    a.sort((x, y) => getRating(y) - getRating(x));
-  } else if (sort === "votes") {
-    a.sort((x, y) => getVotes(y) - getVotes(x));
-  } else if (sort === "year") {
-    a.sort((x, y) => Number(getYear(y) || 0) - Number(getYear(x) || 0));
-  } else if (sort === "title") {
-    a.sort((x, y) => titleOf(x).localeCompare(titleOf(y), "ru"));
-  } else {
-    a.sort((x, y) => scoreSmart(y) - scoreSmart(x));
-  }
-
-  return a;
+function animeGenreMatch(m, selected) {
+  const q = normalize(selected);
+  const hay = normalize(getGenres(m).join(" ") + " " + (m.ru || "") + " " + (m.en || "") + " " + (m.overview || ""));
+  const aliases = {
+    "экшен": ["экшен","action","боевик"],
+    "фантастика": ["фантастика","sci-fi","science fiction"],
+    "фэнтези": ["фэнтези","fantasy"],
+    "романтика": ["романтика","romance"],
+    "мистика / загадки": ["мистика","mystery","загад"],
+    "повседневность": ["повседневность","slice of life"],
+    "сверхъестественное": ["сверхъестественное","supernatural"],
+    "исекай": ["исекай","isekai"],
+    "сёнэн": ["сёнэн","shounen","shonen"],
+    "сэйнэн": ["сэйнэн","seinen"],
+    "сёдзё": ["сёдзё","shoujo","shojo"],
+    "дзёсэй": ["дзёсэй","josei"],
+    "меха / роботы": ["меха","mecha","робот"]
+  };
+  const arr = aliases[q] || [q];
+  return arr.some(x => hay.includes(normalize(x)));
 }
 
 function render() {
@@ -234,8 +169,8 @@ function render() {
   document.querySelectorAll(".card").forEach(card => {
     card.addEventListener("click", () => {
       const id = card.getAttribute("data-id");
-      const movie = allMovies.find(m => String(m.id) === id);
-      if (movie) openDetails(movie);
+      const item = allItems.find(m => String(m.id) === id);
+      if (item) openDetails(item);
     });
   });
 
@@ -245,12 +180,8 @@ function render() {
 }
 
 function cardHtml(m) {
-  const poster = m.poster
-    ? `<img loading="lazy" src="${escapeAttr(m.poster)}" alt="${escapeAttr(titleOf(m))}">`
-    : `<div class="no-poster">Нет постера</div>`;
-
+  const poster = m.poster ? `<img loading="lazy" src="${escapeAttr(m.poster)}" alt="${escapeAttr(titleOf(m))}">` : `<div class="no-poster">Нет постера</div>`;
   const genres = getGenres(m).slice(0, 3).join(" · ");
-
   return `
     <article class="card" data-id="${escapeAttr(m.id)}">
       <div class="poster-wrap">${poster}</div>
@@ -258,16 +189,14 @@ function cardHtml(m) {
         <p class="card-title">${escapeHtml(titleOf(m))}</p>
         <p class="meta">${escapeHtml(m.year || "—")} · ${escapeHtml(m.type || "—")}</p>
         <p class="meta">${escapeHtml(genres)}</p>
-       <span class="rating rank-${rankOf(m).rank.toLowerCase()}">
-  ${rankOf(m).rank}-класс · ${getRating(m).toFixed(1)}
-</span>
+        <span class="rating">${getRating(m).toFixed(1)}</span>
       </div>
     </article>
   `;
 }
 
 function openDetails(m) {
-  selectedMovie = m;
+  selectedItem = m;
 
   const hist = loadSet(historyKey);
   hist.delete(String(m.id));
@@ -275,40 +204,24 @@ function openDetails(m) {
   localStorage.setItem(historyKey, JSON.stringify(arr));
 
   $("detailTitle").textContent = titleOf(m);
-  $("detailMeta").textContent =
-    `${m.year || "—"} · ${m.type || "—"} · рейтинг ${getRating(m).toFixed(1)} · голосов ${m.votes || 0}`;
-
+  $("detailMeta").textContent = `${m.year || "—"} · ${m.type || "—"} · рейтинг ${getRating(m).toFixed(1)} · ${m.episodes ? "эпизодов: " + m.episodes : "голосов: " + (m.votes || 0)}`;
   $("detailGenres").textContent = getGenres(m).join(" · ");
   $("detailOverview").textContent = m.overview || "Описание пока не добавлено.";
 
-  $("detailPoster").src = m.poster || "";
-  $("detailPoster").style.display = m.poster ? "block" : "none";
+  if (m.poster) {
+    $("detailPoster").src = m.poster;
+    $("detailPoster").style.display = "block";
+    $("detailNoPoster").style.display = "none";
+  } else {
+    $("detailPoster").style.display = "none";
+    $("detailNoPoster").style.display = "block";
+  }
 
   const q = queryOf(m);
-  const isAnime =
-  m.type === "Аниме" ||
-  getGenres(m).some(g => normalize(g).includes("аниме"));
-
-const animeLinksBlock = document.getElementById("animeLinksBlock");
-const catalogLinksBlock = document.getElementById("catalogLinksBlock");
-
-if (animeLinksBlock) {
-  animeLinksBlock.style.display = isAnime ? "block" : "none";
-}
-
-if (catalogLinksBlock) {
-  catalogLinksBlock.style.display = isAnime ? "none" : "block";
-}
-
   $("kinopoiskLink").href = `https://www.kinopoisk.ru/index.php?kp_query=${q}`;
   $("youtubeLink").href = `https://www.youtube.com/results?search_query=${q}+трейлер`;
   $("vkLink").href = `https://vk.com/video?q=${q}`;
   $("rutubeLink").href = `https://rutube.ru/search/?query=${q}`;
-  if ($("shikimoriLink")) $("shikimoriLink").href = `https://shikimori.one/animes?search=${q}`;
-if ($("malLink")) $("malLink").href = `https://myanimelist.net/anime.php?q=${q}`;
-if ($("anilistLink")) $("anilistLink").href = `https://anilist.co/search/anime?search=${q}`;
-if ($("animePlanetLink")) $("animePlanetLink").href = `https://www.anime-planet.com/anime/all?name=${q}`;
-if ($("anidbLink")) $("anidbLink").href = `https://anidb.net/anime/?adb.search=${q}`;
 
   updateFavBtn();
   $("detailsDialog").showModal();
@@ -316,136 +229,114 @@ if ($("anidbLink")) $("anidbLink").href = `https://anidb.net/anime/?adb.search=$
 
 function updateFavBtn() {
   const fav = loadSet(favKey);
-  const yes = selectedMovie && fav.has(String(selectedMovie.id));
+  const yes = selectedItem && fav.has(String(selectedItem.id));
   $("favBtn").textContent = yes ? "Убрать из избранного" : "В избранное";
 }
 
 function toggleFav() {
-  if (!selectedMovie) return;
-
+  if (!selectedItem) return;
   const fav = loadSet(favKey);
-  const id = String(selectedMovie.id);
-
+  const id = String(selectedItem.id);
   if (fav.has(id)) fav.delete(id);
   else fav.add(id);
-
   saveSet(favKey, fav);
   updateFavBtn();
-
   if (currentTab === "fav") applyFilters();
 }
 
-function resetFilters() {
-  $("searchInput").value = "";
-  $("typeFilter").value = "";
-  $("genreFilter").value = "";
-  $("yearFilter").value = "";
-  $("ratingFilter").value = "0";
+function renderAnimeGenresPage() {
+  if (typeof ANIME_GENRES === "undefined") return;
 
-  if ($("sortFilter")) $("sortFilter").value = "smart";
+  const renderGroup = (id, arr) => {
+    $(id).innerHTML = arr.map(x => `<button class="chip" data-anime-genre="${escapeAttr(x.ru)}" title="${escapeAttr(x.en)}">${escapeHtml(x.ru)}</button>`).join("");
+  };
 
-  currentTab = "all";
+  renderGroup("animeGenresList", ANIME_GENRES.groups.genres || []);
+  renderGroup("animeThemesList", ANIME_GENRES.groups.themes || []);
+  renderGroup("animeDemographicsList", ANIME_GENRES.groups.demographics || []);
 
-  document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
-  const allTab = document.querySelector('.tab[data-tab="all"]');
-  if (allTab) allTab.classList.add("active");
+  document.querySelectorAll(".chip[data-anime-genre]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      selectedAnimeGenre = btn.getAttribute("data-anime-genre") || "";
+      currentTab = "animeGenres";
+      document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+      const t = document.querySelector('.tab[data-tab="animeGenres"]');
+      if (t) t.classList.add("active");
+      $("animeGenrePage").classList.remove("hidden");
 
-  applyFilters();
+      document.querySelectorAll(".chip").forEach(x => x.classList.remove("active"));
+      btn.classList.add("active");
+      applyFilters();
+    });
+  });
 }
 
 function shuffle(arr) {
   const a = [...arr];
-
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
-
   return a;
 }
 
 function escapeHtml(s) {
   return String(s ?? "").replace(/[&<>"']/g, ch => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
   }[ch]));
 }
 
-function escapeAttr(s) {
-  return escapeHtml(s);
-}
+function escapeAttr(s) { return escapeHtml(s); }
 
 function setupEvents() {
-  [
-    "searchInput",
-    "typeFilter",
-    "genreFilter",
-    "yearFilter",
-    "ratingFilter",
-    "sortFilter"
-  ].forEach(id => {
-    const el = $(id);
-    if (!el) return;
-
-    el.addEventListener("input", applyFilters);
-    el.addEventListener("change", applyFilters);
+  ["searchInput", "typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(id => {
+    $(id).addEventListener("input", applyFilters);
+    $(id).addEventListener("change", applyFilters);
   });
-
-  const resetBtn = $("resetFiltersBtn");
-  if (resetBtn) {
-    resetBtn.addEventListener("click", resetFilters);
-  }
 
   document.querySelectorAll(".tab").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
       btn.classList.add("active");
       currentTab = btn.dataset.tab;
+      selectedAnimeGenre = "";
+      document.querySelectorAll(".chip").forEach(x => x.classList.remove("active"));
+      $("animeGenrePage").classList.toggle("hidden", currentTab !== "animeGenres");
       applyFilters();
     });
   });
 
+  $("clearAnimeGenreBtn").addEventListener("click", () => {
+    selectedAnimeGenre = "";
+    document.querySelectorAll(".chip").forEach(x => x.classList.remove("active"));
+    applyFilters();
+  });
+
   $("prevBtn").addEventListener("click", () => {
-    if (currentPage > 1) {
-      currentPage--;
-      render();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    if (currentPage > 1) { currentPage--; render(); window.scrollTo({ top: 0, behavior: "smooth" }); }
   });
 
   $("nextBtn").addEventListener("click", () => {
     const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-
-    if (currentPage < pages) {
-      currentPage++;
-      render();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    if (currentPage < pages) { currentPage++; render(); window.scrollTo({ top: 0, behavior: "smooth" }); }
   });
 
   $("closeDialog").addEventListener("click", () => $("detailsDialog").close());
   $("favBtn").addEventListener("click", toggleFav);
-
   $("reloadBtn").addEventListener("click", () => loadData().catch(showError));
 
   $("themeBtn").addEventListener("click", () => {
     document.body.classList.toggle("light");
-    localStorage.setItem("gkm_theme", document.body.classList.contains("light") ? "light" : "dark");
+    localStorage.setItem("mediaTheme", document.body.classList.contains("light") ? "light" : "dark");
   });
 
-  if (localStorage.getItem("gkm_theme") === "light") {
-    document.body.classList.add("light");
-  }
+  if (localStorage.getItem("mediaTheme") === "light") document.body.classList.add("light");
 }
 
 function showError(e) {
   console.error(e);
   $("statusText").textContent = "Ошибка: " + e.message;
-  $("grid").innerHTML =
-    `<div class="card"><div class="card-body">Не удалось загрузить базу. Проверь data/index.json или movies_updates.json.</div></div>`;
+  $("grid").innerHTML = `<div class="card"><div class="card-body">Не удалось загрузить базу. Проверь movies_updates.json и anime_updates.json.</div></div>`;
 }
 
 setupEvents();
