@@ -3,36 +3,111 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Лучшие фильмы и сериалы 5000 — каталог с постерами и рейтингами</title>
-  <meta name="description" content="Каталог лучших фильмов и сериалов: 5000 популярных фильмов, сериалов, мультфильмов и новинок. Постеры, рейтинги, жанры, годы выпуска, поиск, избранное и история просмотров." />
-  <meta name="keywords" content="лучшие фильмы, лучшие сериалы, каталог фильмов, каталог сериалов, топ фильмов, топ сериалов, фильмы с высоким рейтингом, сериалы с высоким рейтингом, фильмы 2026, сериалы 2026, смотреть трейлеры, MovieCatalogTV" />
+  <title>Лучшие фильмы и сериалы — каталог с постерами и рейтингами</title>
+  <meta name="description" content="Каталог фильмов, сериалов, мультфильмов и аниме. Постеры, рейтинги, жанры, годы выпуска, поиск, избранное и история просмотров." />
   <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Лучшие фильмы и сериалы 5000" />
-  <meta property="og:description" content="Большой каталог фильмов и сериалов с постерами, рейтингами, жанрами и поиском." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://dragokas371158989-png.github.io/films-series-best-5000/" />
   <link rel="canonical" href="https://dragokas371158989-png.github.io/films-series-best-5000/" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <section style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;">
-  <h1>Лучшие фильмы и сериалы 5000</h1>
-  <p>Онлайн-каталог лучших фильмов и сериалов с постерами, рейтингами, жанрами, годами выпуска и удобным поиском.</p>
+  <h1>Лучшие фильмы, сериалы, мультфильмы и аниме</h1>
+  <p>Онлайн-каталог фильмов, сериалов, мультфильмов и аниме с постерами, рейтингами, жанрами и поиском.</p>
 </section>
-<header class="topbar"><div><h1>Фильмы и сериалы</h1><p id="statusText">Загрузка базы...</p></div><div class="top-actions"><button id="themeBtn" class="small-btn">Тема</button><button id="reloadBtn" class="small-btn">Обновить</button></div></header>
+
+<header class="topbar">
+  <div>
+    <h1>Фильмы и сериалы</h1>
+    <p id="statusText">Загрузка базы...</p>
+  </div>
+  <div class="top-actions">
+    <button id="themeBtn" class="small-btn">Тема</button>
+    <button id="reloadBtn" class="small-btn">Обновить</button>
+  </div>
+</header>
+
 <section class="controls">
-<input id="searchInput" type="search" placeholder="Поиск: Матрица, Во все тяжкие, 2024..." autocomplete="off" />
-<select id="typeFilter"><option value="">Все типы</option><option value="Фильм">Фильмы</option><option value="Сериал">Сериалы</option></select>
-<select id="genreFilter"><option value="">Все жанры</option></select>
-<select id="yearFilter"><option value="">Все годы</option></select>
-<select id="ratingFilter"><option value="0">Любой рейтинг</option><option value="7">от 7.0</option><option value="8">от 8.0</option><option value="9">от 9.0</option></select>
-<select id="sortFilter"><option value="smart">Умный топ</option><option value="rating">По рейтингу</option><option value="votes">По голосам</option><option value="year">По году</option><option value="title">По названию</option></select>
+  <input id="searchInput" type="search" placeholder="Поиск: Матрица, Во все тяжкие, 2024..." autocomplete="off" />
+  <select id="typeFilter">
+    <option value="">Все типы</option>
+    <option value="Фильм">Фильмы</option>
+    <option value="Сериал">Сериалы</option>
+  </select>
+  <select id="genreFilter"><option value="">Все жанры</option></select>
+  <select id="yearFilter"><option value="">Все годы</option></select>
+  <select id="ratingFilter">
+    <option value="0">Любой рейтинг</option>
+    <option value="7">от 7.0</option>
+    <option value="8">от 8.0</option>
+    <option value="9">от 9.0</option>
+  </select>
+  <select id="sortFilter">
+    <option value="smart">Умный топ</option>
+    <option value="rating">По рейтингу</option>
+    <option value="votes">По голосам</option>
+    <option value="year">По году</option>
+    <option value="title">По названию</option>
+  </select>
 </section>
+
 <nav class="tabs">
-<button class="tab active" data-tab="all">Все</button><button class="tab" data-tab="movies">Фильмы</button><button class="tab" data-tab="series">Сериалы</button><button class="tab" data-tab="cartoons">Мультфильмы</button><button class="tab" data-tab="anime">Аниме</button><button class="tab" data-tab="top">Топ 250</button><button class="tab" data-tab="new">Новинки</button><button class="tab" data-tab="popular">Популярное</button><button class="tab" data-tab="fav">Избранное</button><button class="tab" data-tab="history">История</button><button class="tab" data-tab="random">Случайное</button>
+  <button class="tab active" data-tab="all">Все</button>
+  <button class="tab" data-tab="movies">Фильмы</button>
+  <button class="tab" data-tab="series">Сериалы</button>
+  <button class="tab" data-tab="cartoons">Мультфильмы</button>
+  <button class="tab" data-tab="anime">Аниме</button>
+  <button class="tab" data-tab="top">Топ 250</button>
+  <button class="tab" data-tab="new">Новинки</button>
+  <button class="tab" data-tab="popular">Популярное</button>
+  <button class="tab" data-tab="fav">Избранное</button>
+  <button class="tab" data-tab="history">История</button>
+  <button class="tab" data-tab="random">Случайное</button>
 </nav>
-<main><div id="countText" class="count"></div><div id="grid" class="grid"></div><div class="pager"><button id="prevBtn">Назад</button><span id="pageText"></span><button id="nextBtn">Вперёд</button></div></main>
-<dialog id="detailsDialog"><div class="dialog-content"><button id="closeDialog" class="close">×</button><div class="details"><img id="detailPoster" alt="" /><div><h2 id="detailTitle"></h2><p id="detailMeta"></p><p id="detailGenres"></p><p id="detailOverview"></p><div class="detail-buttons"><button id="favBtn">В избранное</button><a id="seoPageLink" target="_blank" rel="noreferrer">Страница фильма</a><a id="kinopoiskLink" target="_blank" rel="noreferrer">Кинопоиск</a><a id="youtubeLink" target="_blank" rel="noreferrer">YouTube</a><a id="vkLink" target="_blank" rel="noreferrer">VK Видео</a><a id="rutubeLink" target="_blank" rel="noreferrer">Rutube</a><a id="googleLink" target="_blank" rel="noreferrer">Google</a></div></div></div></div></dialog>
+
+<main>
+  <div id="countText" class="count"></div>
+  <div id="grid" class="grid"></div>
+  <div class="pager">
+    <button id="prevBtn">Назад</button>
+    <span id="pageText"></span>
+    <button id="nextBtn">Вперёд</button>
+  </div>
+</main>
+
+<dialog id="detailsDialog">
+  <div class="dialog-content">
+    <button id="closeDialog" class="close">×</button>
+    <div class="details">
+      <img id="detailPoster" alt="" />
+      <div>
+        <h2 id="detailTitle"></h2>
+        <p id="detailMeta"></p>
+        <p id="detailGenres"></p>
+        <p id="detailOverview"></p>
+
+        <h3 class="links-title">Найти на сайтах-каталогах</h3>
+        <div class="detail-buttons">
+          <a id="myshowsLink" target="_blank" rel="noreferrer">MyShows</a>
+          <a id="kinoriumLink" target="_blank" rel="noreferrer">Кинориум</a>
+          <a id="kinoMailLink" target="_blank" rel="noreferrer">Кино Mail</a>
+          <a id="filmRuLink" target="_blank" rel="noreferrer">Film.ru</a>
+          <a id="kinoafishaLink" target="_blank" rel="noreferrer">Киноафиша</a>
+        </div>
+
+        <h3 class="links-title">Видео и поиск</h3>
+        <div class="detail-buttons">
+          <button id="favBtn">В избранное</button>
+          <a id="kinopoiskLink" target="_blank" rel="noreferrer">Кинопоиск</a>
+          <a id="youtubeLink" target="_blank" rel="noreferrer">YouTube</a>
+          <a id="vkLink" target="_blank" rel="noreferrer">VK Видео</a>
+          <a id="rutubeLink" target="_blank" rel="noreferrer">Rutube</a>
+          <a id="googleLink" target="_blank" rel="noreferrer">Google</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
 <script src="app.js"></script>
 </body>
 </html>
