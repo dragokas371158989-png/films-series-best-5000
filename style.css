@@ -250,3 +250,36 @@ dialog {
   box-shadow:
     0 0 10px rgba(156,163,175,.35) !important;
 }
+.site-logo-wrap {
+  width: 100%;
+  max-width: 920px;
+}
+
+.site-logo {
+  display: block;
+  width: 100%;
+  max-height: 190px;
+  object-fit: contain;
+  object-position: left center;
+  filter:
+    drop-shadow(0 0 16px rgba(123, 44, 255, .85))
+    drop-shadow(0 0 28px rgba(0, 229, 255, .25));
+}
+
+.topbar {
+  min-height: 210px;
+  align-items: flex-start;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(123,44,255,.35), transparent 32%),
+    linear-gradient(90deg, rgba(4,4,14,.98), rgba(17,7,38,.94), rgba(4,4,14,.98)) !important;
+}
+
+@media (max-width: 700px) {
+  .topbar {
+    min-height: 135px;
+  }
+
+  .site-logo {
+    max-height: 110px;
+  }
+}
