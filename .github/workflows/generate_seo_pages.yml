@@ -1,4 +1,4 @@
-name: Generate SEO movie pages
+name: Создание SEO-страниц для фильмов
 
 on:
   workflow_dispatch:
@@ -13,22 +13,26 @@ permissions:
 jobs:
   generate-pages:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: Получить доступ к репозиторию
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Настройка Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
-      - name: Generate static SEO pages
+      - name: Создание статических SEO-страниц
         run: python tools/generate_seo_pages.py
 
-      - name: Commit generated pages
+      - name: Сгенерированные страницы
         run: |
           git config user.name "seo-pages-bot"
           git config user.email "actions@github.com"
+
           git add film sitemap.xml
-          git diff --cached --quiet && echo "No changes" || git commit -m "Generate SEO pages"
-          git push
+          git diff --cached --quiet && echo "Нет изменений" || git commit -m "Создать SEO-страницы"
+
+          git pull --rebase origin main
+          git push origin main
