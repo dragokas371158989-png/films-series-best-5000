@@ -199,3 +199,54 @@ dialog {
 .count {
   color: #b9c4ff !important;
 }
+/* === S/A/B/C/D ранги === */
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  padding: 7px 11px;
+  font-weight: 1000;
+  letter-spacing: .4px;
+  color: #02030a !important;
+  text-shadow: none !important;
+}
+
+.rating::before {
+  content: none !important;
+}
+
+.rank-s {
+  background: linear-gradient(180deg, #ffffff, #00e5ff 45%, #7b2cff) !important;
+  box-shadow:
+    0 0 16px rgba(255,255,255,.7),
+    0 0 28px rgba(0,229,255,.85),
+    0 0 42px rgba(123,44,255,.65) !important;
+}
+
+.rank-a {
+  background: linear-gradient(180deg, #00ffb3, #00c8ff) !important;
+  box-shadow:
+    0 0 18px rgba(0,255,179,.65),
+    0 0 26px rgba(0,200,255,.45) !important;
+}
+
+.rank-b {
+  background: linear-gradient(180deg, #ffe66d, #ff9f1c) !important;
+  box-shadow:
+    0 0 18px rgba(255,214,80,.55) !important;
+}
+
+.rank-c {
+  background: linear-gradient(180deg, #b9c4ff, #6474d9) !important;
+  box-shadow:
+    0 0 14px rgba(130,150,255,.45) !important;
+}
+
+.rank-d {
+  background: linear-gradient(180deg, #9ca3af, #4b5563) !important;
+  color: white !important;
+  box-shadow:
+    0 0 10px rgba(156,163,175,.35) !important;
+}
