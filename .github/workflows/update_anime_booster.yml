@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Add anime to movies_updates.json
+      - name: Add anime to current chunked database
         run: python tools/update_anime_booster.py
 
       - name: Rebuild chunked database
