@@ -29,9 +29,10 @@ jobs:
         run: python tools/update_movies_updates_25000.py
 
       - name: Commit database
-        run: |
-          git config user.name "movies-25000-bot"
-          git config user.email "actions@github.com"
-          git add movies_updates.json
-          git diff --cached --quiet && echo "No changes" || git commit -m "Update database to 25000 movies series anime"
-          git push
+  run: |
+    git config user.name "movies-25000-bot"
+    git config user.email "actions@github.com"
+    git add movies_updates.json
+    git diff --cached --quiet && echo "No changes" || git commit -m "Update database to 100000 movies series anime"
+    git pull --rebase origin main
+    git push
