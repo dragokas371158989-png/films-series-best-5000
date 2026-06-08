@@ -3,7 +3,6 @@ const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
 
 // ВАЖНО: сюда вставь свой TMDB Bearer Token
-// Пример: const TMDB_TOKEN = "eyJhbGciOiJIUzI1NiJ9....";
 const TMDB_TOKEN = "ВСТАВЬ_СЮДА_СВОЙ_TMDB_BEARER_TOKEN";
 
 // Быстрая загрузка большой базы чанками
@@ -185,10 +184,7 @@ function tmdbTypeOf(m, resultType = "") {
 
   if (type.includes("сериал")) return "tv";
   if (type.includes("фильм")) return "movie";
-
-  if (genres.includes("мульт")) {
-    return "movie";
-  }
+  if (genres.includes("мульт")) return "movie";
 
   return "movie";
 }
@@ -219,10 +215,9 @@ async function findRussianDescriptionFromTmdb(m) {
     let results = searchData.results.filter(r => r.media_type === "movie" || r.media_type === "tv");
 
     const type = normalize(m.type);
+
     if (type.includes("сериал")) {
       results = results.filter(r => r.media_type === "tv");
-    } else if (type.includes("фильм") || type.includes("аниме")) {
-      results = results.filter(r => r.media_type === "movie" || r.media_type === "tv");
     }
 
     const best = results[0];
@@ -1384,9 +1379,134 @@ function scheduleApplyFilters() {
   }, FILTER_DEBOUNCE_MS);
 }
 
+/* ===== МОБИЛЬНЫЕ ФИЛЬТРЫ ===== */
+
+function findFiltersPanel() {
+  return (
+    document.querySelector(".filters") ||
+    document.querySelector(".controls") ||
+    document.querySelector(".filter-panel") ||
+    document.querySelector(".search-panel") ||
+    document.getElementById("filtersPanel")
+  );
+}
+
+function injectMobileFiltersStyle() {
+  if (document.getElementById("mobileFiltersStyle")) return;
+
+  const style = document.createElement("style");
+  style.id = "mobileFiltersStyle";
+  style.textContent = `
+    .mobile-filters-toggle {
+      display: none;
+      width: calc(100% - 32px);
+      margin: 12px 16px;
+      border: 1px solid rgba(0, 220, 255, 0.7);
+      background: linear-gradient(180deg, #00d4ff, #5b21ff);
+      color: white;
+      border-radius: 14px;
+      padding: 13px 16px;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 15px;
+      box-shadow: 0 0 20px rgba(0, 220, 255, 0.25);
+    }
+
+    @media (max-width: 700px) {
+      .mobile-filters-toggle {
+        display: block;
+      }
+
+      .filters.mobile-collapsed,
+      .controls.mobile-collapsed,
+      .filter-panel.mobile-collapsed,
+      .search-panel.mobile-collapsed,
+      #filtersPanel.mobile-collapsed {
+        display: none !important;
+      }
+
+      .filters.mobile-open,
+      .controls.mobile-open,
+      .filter-panel.mobile-open,
+      .search-panel.mobile-open,
+      #filtersPanel.mobile-open {
+        display: grid !important;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 12px 16px;
+      }
+
+      .filters.mobile-open input,
+      .filters.mobile-open select,
+      .controls.mobile-open input,
+      .controls.mobile-open select,
+      .filter-panel.mobile-open input,
+      .filter-panel.mobile-open select,
+      .search-panel.mobile-open input,
+      .search-panel.mobile-open select,
+      #filtersPanel.mobile-open input,
+      #filtersPanel.mobile-open select {
+        width: 100%;
+        min-height: 42px;
+        font-size: 15px;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+function setupMobileFilters() {
+  injectMobileFiltersStyle();
+
+  const panel = findFiltersPanel();
+  if (!panel) return;
+
+  if (document.getElementById("mobileFiltersToggle")) return;
+
+  const btn = document.createElement("button");
+  btn.id = "mobileFiltersToggle";
+  btn.className = "mobile-filters-toggle";
+  btn.type = "button";
+  btn.textContent = "☰ Фильтры";
+
+  panel.insertAdjacentElement("beforebegin", btn);
+
+  function closeOnMobile() {
+    if (window.innerWidth <= 700) {
+      panel.classList.add("mobile-collapsed");
+      panel.classList.remove("mobile-open");
+      btn.textContent = "☰ Фильтры";
+    } else {
+      panel.classList.remove("mobile-collapsed");
+      panel.classList.remove("mobile-open");
+      btn.textContent = "☰ Фильтры";
+    }
+  }
+
+  btn.addEventListener("click", () => {
+    const isOpen = panel.classList.contains("mobile-open");
+
+    if (isOpen) {
+      panel.classList.remove("mobile-open");
+      panel.classList.add("mobile-collapsed");
+      btn.textContent = "☰ Фильтры";
+    } else {
+      panel.classList.remove("mobile-collapsed");
+      panel.classList.add("mobile-open");
+      btn.textContent = "✕ Скрыть фильтры";
+    }
+  });
+
+  window.addEventListener("resize", closeOnMobile);
+  closeOnMobile();
+}
+
 /* ===== СОБЫТИЯ ===== */
 
 function setupEvents() {
+  setupMobileFilters();
+
   [
     "searchInput",
     "typeFilter",
