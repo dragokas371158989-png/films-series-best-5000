@@ -1448,8 +1448,6 @@ function similarScore(base, item) {
 
   return score;
 }
-  return score;
-}
 
 function findSimilarItems(base, limit = 10) {
   if (!base || !allMovies.length) return [];
