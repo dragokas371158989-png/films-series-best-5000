@@ -1418,19 +1418,20 @@ function similarScore(base, item) {
 
   const baseGenres = getGenres(base).map(normalize);
   const itemGenres = getGenres(item).map(normalize);
-  const sharedGenres = baseGenres.filter(g => itemGenres.includes(g));
 
-  score += sharedGenres.length * 8;
+  for (const g of baseGenres) {
+    if (itemGenres.includes(g)) score += 10;
+  }
 
   if (base.type && item.type && base.type === item.type) {
-    score += 5;
+    score += 8;
   }
 
   const baseAnime = isAnimeItem(base);
   const itemAnime = isAnimeItem(item);
 
-  if (baseAnime && itemAnime) score += 8;
-  if (baseAnime !== itemAnime) score -= 10;
+  if (baseAnime && itemAnime) score += 10;
+  if (baseAnime !== itemAnime) score -= 20;
 
   const by = Number(getYear(base) || 0);
   const iy = Number(getYear(item) || 0);
@@ -1438,40 +1439,54 @@ function similarScore(base, item) {
   if (by && iy) {
     const diff = Math.abs(by - iy);
 
-    if (diff === 0) score += 4;
-    else if (diff <= 2) score += 3;
+    if (diff === 0) score += 5;
+    else if (diff <= 2) score += 4;
     else if (diff <= 5) score += 2;
-    else if (diff <= 10) score += 1;
   }
 
-  score += Math.min(getRating(item), 10) * 1.5;
-  score += Math.min(getVotes(item), 50000) / 50000 * 4;
+  score += Math.min(getRating(item), 10);
 
-  const baseText = normalize([base.ru, base.en, overviewOf(base), ...getGenres(base)].join(" "));
-  const itemText = normalize([item.ru, item.en, overviewOf(item), ...getGenres(item)].join(" "));
-
-  if (typeof ANIME_SECTIONS !== "undefined") {
-    ANIME_SECTIONS.forEach(section => {
-      const baseHas = section.keys.some(k => baseText.includes(normalize(k)));
-      const itemHas = section.keys.some(k => itemText.includes(normalize(k)));
-
-      if (baseHas && itemHas) score += 3;
-    });
-  }
-
+  return score;
+}
   return score;
 }
 
 function findSimilarItems(base, limit = 10) {
   if (!base || !allMovies.length) return [];
 
-  return allMovies
-    .filter(item => String(item.id) !== String(base.id))
+  const baseGenres = getGenres(base).map(normalize);
+  const baseAnime = isAnimeItem(base);
+  const baseType = base.type;
+
+  let candidates = allMovies.filter(item => {
+    if (String(item.id) === String(base.id)) return false;
+
+    const itemAnime = isAnimeItem(item);
+
+    if (baseAnime !== itemAnime) return false;
+
+    if (baseType && item.type && baseType !== item.type) {
+      return false;
+    }
+
+    const itemGenres = getGenres(item).map(normalize);
+    const hasSharedGenre = baseGenres.some(g => itemGenres.includes(g));
+
+    return hasSharedGenre;
+  });
+
+  if (candidates.length > 1200) {
+    candidates = candidates
+      .sort((a, b) => scoreSmart(b) - scoreSmart(a))
+      .slice(0, 1200);
+  }
+
+  return candidates
     .map(item => ({
       item,
       score: similarScore(base, item)
     }))
-    .filter(x => x.score > 8)
+    .filter(x => x.score > 10)
     .sort((a, b) => b.score - a.score)
     .slice(0, limit)
     .map(x => x.item);
