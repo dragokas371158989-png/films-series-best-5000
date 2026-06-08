@@ -799,14 +799,24 @@ function render() {
 
 function bindCardClicks(root = document) {
   root.querySelectorAll(".card").forEach(card => {
-    card.addEventListener("click", () => {
+    card.addEventListener("click", (e) => {
+      const favBtn = e.target.closest(".card-fav-btn");
+
+      if (favBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const id = favBtn.getAttribute("data-fav-id");
+        toggleCardFavorite(id, favBtn);
+        return;
+      }
+
       const id = card.getAttribute("data-id");
       const movie = allMovies.find(m => String(m.id) === id);
       if (movie) openDetails(movie);
     });
   });
 }
-
 function hasActiveFilters() {
   return Boolean(
     normalize($("searchInput").value) ||
@@ -1114,8 +1124,14 @@ function injectHomeStyle() {
 }
 
 /* ===== КАРТОЧКИ ===== */
-
+function injectCardFavoriteStyle() { ... }
+function toggleCardFavorite(id, btn) { ... }
 function cardHtml(m) {
+  injectCardFavoriteStyle();
+
+  const fav = loadSet(favKey);
+  const isFav = fav.has(String(m.id));
+
   const poster = m.poster
     ? `<img loading="lazy" src="${escapeAttr(m.poster)}" alt="${escapeAttr(titleOf(m))}">`
     : `<div class="no-poster">Нет постера</div>`;
@@ -1124,7 +1140,17 @@ function cardHtml(m) {
 
   return `
     <article class="card" data-id="${escapeAttr(m.id)}">
-      <div class="poster-wrap">${poster}</div>
+      <div class="poster-wrap">
+        <button
+          class="card-fav-btn ${isFav ? "active" : ""}"
+          data-fav-id="${escapeAttr(m.id)}"
+          title="${isFav ? "Убрать из избранного" : "Добавить в избранное"}"
+          type="button"
+        >
+          ${isFav ? "❤️" : "🤍"}
+        </button>
+        ${poster}
+      </div>
       <div class="card-body">
         <p class="card-title">${escapeHtml(titleOf(m))}</p>
         <p class="meta">${escapeHtml(m.year || "—")} · ${escapeHtml(m.type || "—")}</p>
