@@ -1284,9 +1284,142 @@ function injectHomeStyle() {
 }
 
 /* ===== КАРТОЧКИ ===== */
+function getBadges(m) {
+  const badges = [];
+  const fav = loadSet(favKey);
+  const genresText = getGenres(m).map(normalize).join(" ");
+  const year = Number(getYear(m) || 0);
 
+  if (isAnimeItem(m)) {
+    badges.push({ text: "🐉 Аниме", cls: "anime" });
+  } else if (genresText.includes("мульт")) {
+    badges.push({ text: "🧸 Мультфильм", cls: "cartoon" });
+  } else if (m.type === "Сериал") {
+    badges.push({ text: "📺 Сериал", cls: "series" });
+  } else if (m.type === "Фильм") {
+    badges.push({ text: "🎬 Фильм", cls: "movie" });
+  }
+
+  if (getVotes(m) >= MIN_VOTES_FOR_TOP && getRating(m) >= 8) {
+    badges.push({ text: "⭐ Топ", cls: "top" });
+  }
+
+  if (year >= 2024) {
+    badges.push({ text: "🆕 Новинка", cls: "new" });
+  }
+
+  if (fav.has(String(m.id))) {
+    badges.push({ text: "❤️ Избранное", cls: "fav" });
+  }
+
+  return badges.slice(0, 3);
+}
+
+function badgesHtml(m) {
+  const badges = getBadges(m);
+
+  if (!badges.length) return "";
+
+  return `
+    <div class="card-badges">
+      ${badges.map(b => `<span class="card-badge badge-${b.cls}">${escapeHtml(b.text)}</span>`).join("")}
+    </div>
+  `;
+}
+
+function injectBadgesStyle() {
+  if (document.getElementById("badgesStyle")) return;
+
+  const style = document.createElement("style");
+  style.id = "badgesStyle";
+  style.textContent = `
+    .card-badges {
+      position: absolute;
+      left: 7px;
+      top: 7px;
+      z-index: 6;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      max-width: calc(100% - 50px);
+      pointer-events: none;
+    }
+
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+      color: white;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(2, 6, 23, .82);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 12px rgba(0,0,0,.35);
+      text-shadow: 0 1px 2px rgba(0,0,0,.45);
+    }
+
+    .badge-anime {
+      background: linear-gradient(180deg, rgba(124,58,237,.95), rgba(49,46,129,.95));
+      border-color: rgba(167,139,250,.9);
+    }
+
+    .badge-movie {
+      background: linear-gradient(180deg, rgba(37,99,235,.95), rgba(30,64,175,.95));
+      border-color: rgba(96,165,250,.9);
+    }
+
+    .badge-series {
+      background: linear-gradient(180deg, rgba(14,165,233,.95), rgba(12,74,110,.95));
+      border-color: rgba(125,211,252,.9);
+    }
+
+    .badge-cartoon {
+      background: linear-gradient(180deg, rgba(236,72,153,.95), rgba(157,23,77,.95));
+      border-color: rgba(249,168,212,.9);
+    }
+
+    .badge-top {
+      background: linear-gradient(180deg, rgba(245,158,11,.98), rgba(180,83,9,.98));
+      border-color: rgba(253,230,138,.95);
+      color: #111827;
+      text-shadow: none;
+    }
+
+    .badge-new {
+      background: linear-gradient(180deg, rgba(34,197,94,.95), rgba(21,128,61,.95));
+      border-color: rgba(134,239,172,.9);
+    }
+
+    .badge-fav {
+      background: linear-gradient(180deg, rgba(244,63,94,.98), rgba(159,18,57,.98));
+      border-color: rgba(253,164,175,.95);
+    }
+
+    @media (max-width: 700px) {
+      .card-badges {
+        left: 5px;
+        top: 5px;
+        gap: 4px;
+        max-width: calc(100% - 42px);
+      }
+
+      .card-badge {
+        font-size: 10px;
+        padding: 3px 6px;
+        min-height: 20px;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
 function cardHtml(m) {
   injectHomeStyle();
+  injectBadgesStyle();
 
   const fav = loadSet(favKey);
   const isFav = fav.has(String(m.id));
@@ -1300,6 +1433,8 @@ function cardHtml(m) {
   return `
     <article class="card" data-id="${escapeAttr(m.id)}">
       <div class="poster-wrap">
+        ${badgesHtml(m)}
+
         <button
           class="card-fav-btn ${isFav ? "active" : ""}"
           data-fav-id="${escapeAttr(m.id)}"
@@ -1308,8 +1443,10 @@ function cardHtml(m) {
         >
           ${isFav ? "❤️" : "🤍"}
         </button>
+
         ${poster}
       </div>
+
       <div class="card-body">
         <p class="card-title">${escapeHtml(titleOf(m))}</p>
         <p class="meta">${escapeHtml(m.year || "—")} · ${escapeHtml(m.type || "—")}</p>
