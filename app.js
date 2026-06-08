@@ -1352,7 +1352,182 @@ function toggleCardFavorite(id, btn) {
     applyFilters();
   }
 }
+/* ===== ПОХОЖИЕ ===== */
 
+function injectSimilarStyle() {
+  if (document.getElementById("similarStyle")) return;
+
+  const style = document.createElement("style");
+  style.id = "similarStyle";
+  style.textContent = `
+    .similar-block {
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(130, 70, 255, 0.45);
+    }
+
+    .similar-block h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .similar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      gap: 12px;
+    }
+
+    .similar-grid .card {
+      min-width: 0;
+    }
+
+    .similar-grid .card-title {
+      font-size: 13px;
+    }
+
+    .similar-grid .meta {
+      font-size: 11px;
+    }
+
+    .similar-empty {
+      color: rgba(255,255,255,.7);
+      font-size: 14px;
+      padding: 8px 0;
+    }
+
+    @media (max-width: 700px) {
+      .similar-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .similar-block h3 {
+        font-size: 18px;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+function similarScore(base, item) {
+  if (!base || !item) return 0;
+  if (String(base.id) === String(item.id)) return -9999;
+
+  let score = 0;
+
+  const baseGenres = getGenres(base).map(normalize);
+  const itemGenres = getGenres(item).map(normalize);
+  const sharedGenres = baseGenres.filter(g => itemGenres.includes(g));
+
+  score += sharedGenres.length * 8;
+
+  if (base.type && item.type && base.type === item.type) {
+    score += 5;
+  }
+
+  const baseAnime = isAnimeItem(base);
+  const itemAnime = isAnimeItem(item);
+
+  if (baseAnime && itemAnime) score += 8;
+  if (baseAnime !== itemAnime) score -= 10;
+
+  const by = Number(getYear(base) || 0);
+  const iy = Number(getYear(item) || 0);
+
+  if (by && iy) {
+    const diff = Math.abs(by - iy);
+
+    if (diff === 0) score += 4;
+    else if (diff <= 2) score += 3;
+    else if (diff <= 5) score += 2;
+    else if (diff <= 10) score += 1;
+  }
+
+  score += Math.min(getRating(item), 10) * 1.5;
+  score += Math.min(getVotes(item), 50000) / 50000 * 4;
+
+  const baseText = normalize([base.ru, base.en, overviewOf(base), ...getGenres(base)].join(" "));
+  const itemText = normalize([item.ru, item.en, overviewOf(item), ...getGenres(item)].join(" "));
+
+  if (typeof ANIME_SECTIONS !== "undefined") {
+    ANIME_SECTIONS.forEach(section => {
+      const baseHas = section.keys.some(k => baseText.includes(normalize(k)));
+      const itemHas = section.keys.some(k => itemText.includes(normalize(k)));
+
+      if (baseHas && itemHas) score += 3;
+    });
+  }
+
+  return score;
+}
+
+function findSimilarItems(base, limit = 10) {
+  if (!base || !allMovies.length) return [];
+
+  return allMovies
+    .filter(item => String(item.id) !== String(base.id))
+    .map(item => ({
+      item,
+      score: similarScore(base, item)
+    }))
+    .filter(x => x.score > 8)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(x => x.item);
+}
+
+function ensureSimilarBlock() {
+  const dialog = $("detailsDialog");
+  if (!dialog) return null;
+
+  let block = document.getElementById("similarBlock");
+
+  if (!block) {
+    block = document.createElement("section");
+    block.id = "similarBlock";
+    block.className = "similar-block";
+    block.innerHTML = `
+      <h3>Похожие</h3>
+      <div id="similarGrid" class="similar-grid"></div>
+    `;
+
+    const target =
+      dialog.querySelector(".detail-body") ||
+      dialog.querySelector(".details-body") ||
+      dialog.querySelector(".modal-body") ||
+      dialog.querySelector(".dialog-body") ||
+      dialog.querySelector(".content") ||
+      dialog;
+
+    target.appendChild(block);
+  }
+
+  return block;
+}
+
+function renderSimilarItems(m) {
+  injectSimilarStyle();
+
+  const block = ensureSimilarBlock();
+  if (!block) return;
+
+  const grid = document.getElementById("similarGrid");
+  if (!grid) return;
+
+  const similar = findSimilarItems(m, 10);
+
+  if (!similar.length) {
+    block.style.display = "block";
+    grid.innerHTML = `<div class="similar-empty">Похожих пока не нашёл.</div>`;
+    return;
+  }
+
+  block.style.display = "block";
+  grid.innerHTML = similar.map(cardHtml).join("");
+
+  bindCardClicks(grid);
+}
 /* ===== ЧТО ПОСМОТРЕТЬ ===== */
 
 function openWhatToWatch() {
@@ -1487,7 +1662,9 @@ function openDetails(m) {
       `${m.year || "—"} · ${m.type || "—"} · рейтинг ${getRating(m).toFixed(1)} · голосов ${m.votes || 0}`;
   }
 
-  if ($("detailGenres")) $("detailGenres").textContent = getGenres(m).join(" · ");
+  if ($("detailGenres")) {
+    $("detailGenres").textContent = getGenres(m).join(" · ");
+  }
 
   if ($("detailOverview")) {
     $("detailOverview").textContent = overviewOf(m);
@@ -1521,11 +1698,13 @@ function openDetails(m) {
 
   updateFavBtn();
 
-  if ($("detailsDialog")) {
-    $("detailsDialog").showModal();
+  renderSimilarItems(m);
+
+  const dialog = $("detailsDialog");
+  if (dialog && !dialog.open) {
+    dialog.showModal();
   }
 }
-
 function updateFavBtn() {
   const favBtn = $("favBtn");
   if (!favBtn) return;
