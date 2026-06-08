@@ -1284,6 +1284,148 @@ function injectHomeStyle() {
 }
 
 /* ===== КАРТОЧКИ ===== */
+function injectCardFixStyle() {
+  if (document.getElementById("cardFixStyle")) return;
+
+  const style = document.createElement("style");
+  style.id = "cardFixStyle";
+  style.textContent = `
+    .card {
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      min-width: 0 !important;
+    }
+
+    .poster-wrap {
+      position: relative !important;
+      width: 100% !important;
+      aspect-ratio: 2 / 3 !important;
+      overflow: hidden !important;
+      background:
+        radial-gradient(circle at center, rgba(124,58,237,.22), transparent 45%),
+        linear-gradient(180deg, #12072d, #050816) !important;
+      flex-shrink: 0 !important;
+    }
+
+    .poster-wrap img {
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+      object-fit: cover !important;
+      object-position: center center !important;
+      font-size: 0 !important;
+      color: transparent !important;
+      text-indent: -9999px !important;
+    }
+
+    .poster-wrap img.poster-broken {
+      display: none !important;
+    }
+
+    .poster-placeholder {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      padding: 12px !important;
+      color: rgba(255,255,255,.45) !important;
+      font-weight: 800 !important;
+      font-size: 13px !important;
+      background:
+        radial-gradient(circle at center, rgba(124,58,237,.28), transparent 45%),
+        linear-gradient(180deg, #160b38, #060817) !important;
+    }
+
+    .card-body {
+      display: flex !important;
+      flex-direction: column !important;
+      flex: 1 !important;
+      min-height: 170px !important;
+      min-width: 0 !important;
+      overflow: hidden !important;
+    }
+
+    .card-title {
+      min-height: 38px !important;
+      max-height: 44px !important;
+      overflow: hidden !important;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2 !important;
+      -webkit-box-orient: vertical !important;
+      line-height: 1.15 !important;
+    }
+
+    .meta {
+      overflow: hidden !important;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2 !important;
+      -webkit-box-orient: vertical !important;
+    }
+
+    .rating {
+      margin-top: auto !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      font-size: clamp(14px, 1.15vw, 18px) !important;
+      padding-left: 8px !important;
+      padding-right: 8px !important;
+    }
+
+    @media (max-width: 700px) {
+      .card-body {
+        min-height: 155px !important;
+      }
+
+      .card-title {
+        font-size: 13px !important;
+        min-height: 34px !important;
+        max-height: 38px !important;
+      }
+
+      .meta {
+        font-size: 11px !important;
+      }
+
+      .rating {
+        font-size: 15px !important;
+        min-height: 42px !important;
+        border-radius: 12px !important;
+      }
+
+      .poster-placeholder {
+        font-size: 12px !important;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+function handlePosterError(img) {
+  if (!img) return;
+
+  img.classList.add("poster-broken");
+
+  const wrap = img.closest(".poster-wrap");
+  if (!wrap) return;
+
+  if (!wrap.querySelector(".poster-placeholder")) {
+    const placeholder = document.createElement("div");
+    placeholder.className = "poster-placeholder";
+    placeholder.textContent = "Нет постера";
+    wrap.appendChild(placeholder);
+  }
+}
 function getBadges(m) {
   const badges = [];
   const fav = loadSet(favKey);
@@ -1420,13 +1562,14 @@ function injectBadgesStyle() {
 function cardHtml(m) {
   injectHomeStyle();
   injectBadgesStyle();
+  injectCardFixStyle();
 
   const fav = loadSet(favKey);
   const isFav = fav.has(String(m.id));
 
   const poster = m.poster
-    ? `<img loading="lazy" src="${escapeAttr(m.poster)}" alt="${escapeAttr(titleOf(m))}">`
-    : `<div class="no-poster">Нет постера</div>`;
+    ? `<img loading="lazy" src="${escapeAttr(m.poster)}" alt="" onerror="handlePosterError(this)">`
+    : `<div class="poster-placeholder">Нет постера</div>`;
 
   const genres = getGenres(m).slice(0, 3).join(" · ");
 
