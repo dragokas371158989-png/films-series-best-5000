@@ -8,6 +8,9 @@ const BACKGROUND_RENDER_EVERY = 12;
 const BACKGROUND_PAUSE_MS = 80;
 const FILTER_DEBOUNCE_MS = 180;
 
+// Главная страница с подборками
+const HOME_SECTION_LIMIT = 12;
+
 let allMovies = [];
 let filtered = [];
 let currentPage = 1;
@@ -36,7 +39,7 @@ function saveSet(key, set) {
 }
 
 function titleOf(m) {
-  return m.ru || m.en || "Без названия";
+  return m.ru || m.en || m.title || m.name || "Без названия";
 }
 
 function getYear(m) {
@@ -141,6 +144,7 @@ function isAnimeItem(m) {
   ].join(" "));
 
   const hasAnimeWord = text.includes("аниме") || text.includes("anime");
+
   const hasAnimeSource =
     source.includes("anime") ||
     source.includes("аниме") ||
@@ -515,7 +519,14 @@ function sortList(list, sort) {
   return a;
 }
 
+/* ===== РЕНДЕР ===== */
+
 function render() {
+  if (currentTab === "all" && !hasActiveFilters()) {
+    renderHomeSections();
+    return;
+  }
+
   const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   currentPage = Math.min(currentPage, pages);
 
@@ -525,18 +536,330 @@ function render() {
   $("countText").textContent = `Найдено: ${filtered.length} · Страница ${currentPage} из ${pages}`;
   $("grid").innerHTML = pageItems.map(cardHtml).join("");
 
-  document.querySelectorAll(".card").forEach(card => {
+  bindCardClicks();
+
+  $("prevBtn").disabled = currentPage <= 1;
+  $("nextBtn").disabled = currentPage >= pages;
+  $("pageText").textContent = `${currentPage} / ${pages}`;
+}
+
+function bindCardClicks(root = document) {
+  root.querySelectorAll(".card").forEach(card => {
     card.addEventListener("click", () => {
       const id = card.getAttribute("data-id");
       const movie = allMovies.find(m => String(m.id) === id);
       if (movie) openDetails(movie);
     });
   });
-
-  $("prevBtn").disabled = currentPage <= 1;
-  $("nextBtn").disabled = currentPage >= pages;
-  $("pageText").textContent = `${currentPage} / ${pages}`;
 }
+
+function hasActiveFilters() {
+  return Boolean(
+    normalize($("searchInput").value) ||
+    $("typeFilter").value ||
+    $("genreFilter").value ||
+    $("yearFilter").value ||
+    Number($("ratingFilter").value || 0)
+  );
+}
+
+/* ===== ГЛАВНАЯ СТРАНИЦА ===== */
+
+function renderHomeSections() {
+  injectHomeStyle();
+
+  const anime = allMovies
+    .filter(isAnimeItem)
+    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
+    .slice(0, HOME_SECTION_LIMIT);
+
+  const movies = allMovies
+    .filter(m => m.type === "Фильм")
+    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
+    .slice(0, HOME_SECTION_LIMIT);
+
+  const series = allMovies
+    .filter(m => m.type === "Сериал")
+    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
+    .slice(0, HOME_SECTION_LIMIT);
+
+  const cartoons = allMovies
+    .filter(m => getGenres(m).some(g => normalize(g).includes("мульт")) && !isAnimeItem(m))
+    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
+    .slice(0, HOME_SECTION_LIMIT);
+
+  const newItems = allMovies
+    .filter(m => Number(getYear(m)) >= 2024)
+    .sort((a, b) => Number(getYear(b) || 0) - Number(getYear(a) || 0))
+    .slice(0, HOME_SECTION_LIMIT);
+
+  const popular = allMovies
+    .filter(m => getVotes(m) >= 1000)
+    .sort((a, b) => getVotes(b) - getVotes(a))
+    .slice(0, HOME_SECTION_LIMIT);
+
+  const top = allMovies
+    .filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP)
+    .sort((a, b) => getRating(b) - getRating(a))
+    .slice(0, HOME_SECTION_LIMIT);
+
+  $("countText").textContent = `ГОЛУБЬ Каталог Мира · всего записей: ${allMovies.length}`;
+
+  $("grid").innerHTML = `
+    <section class="home-hero">
+      <div>
+        <h2>ГОЛУБЬ Каталог Мира</h2>
+        <p>Фильмы, сериалы, мультфильмы и аниме в одном месте.</p>
+      </div>
+      <button id="whatToWatchBtn" class="what-watch-main-btn">🎲 Что посмотреть?</button>
+    </section>
+
+    ${homeSectionHtml("🔥 Популярное", popular, "popular")}
+    ${homeSectionHtml("⭐ Лучший рейтинг", top, "top")}
+    ${homeSectionHtml("🆕 Новинки", newItems, "new")}
+    ${homeSectionHtml("🐉 Аниме", anime, "anime")}
+    ${homeSectionHtml("🎬 Фильмы", movies, "movies")}
+    ${homeSectionHtml("📺 Сериалы", series, "series")}
+    ${homeSectionHtml("🧸 Мультфильмы", cartoons, "cartoons")}
+  `;
+
+  bindCardClicks();
+
+  document.querySelectorAll("[data-open-tab]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tabName = btn.dataset.openTab;
+      const tab = document.querySelector(`.tab[data-tab="${tabName}"]`);
+
+      if (tab) {
+        document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+        tab.classList.add("active");
+      }
+
+      currentTab = tabName;
+      currentAnimeSection = "";
+      applyFilters();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  const whatBtn = document.getElementById("whatToWatchBtn");
+  if (whatBtn) {
+    whatBtn.addEventListener("click", openWhatToWatch);
+  }
+
+  $("prevBtn").disabled = true;
+  $("nextBtn").disabled = true;
+  $("pageText").textContent = `Главная`;
+}
+
+function homeSectionHtml(title, items, tabName) {
+  if (!items.length) return "";
+
+  return `
+    <section class="home-section">
+      <div class="home-section-head">
+        <h3>${escapeHtml(title)}</h3>
+        <button class="home-more-btn" data-open-tab="${escapeAttr(tabName)}">Смотреть все</button>
+      </div>
+      <div class="home-row">
+        ${items.map(cardHtml).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function injectHomeStyle() {
+  if (document.getElementById("homeStyle")) return;
+
+  const style = document.createElement("style");
+  style.id = "homeStyle";
+  style.textContent = `
+    .home-hero {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid rgba(0, 220, 255, 0.35);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at top left, rgba(0, 220, 255, 0.18), transparent 35%),
+        linear-gradient(135deg, rgba(91, 33, 255, 0.42), rgba(2, 6, 23, 0.96));
+      box-shadow: 0 0 28px rgba(91, 33, 255, 0.25);
+    }
+
+    .home-hero h2 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    .home-hero p {
+      margin: 0;
+      opacity: .82;
+    }
+
+    .what-watch-main-btn {
+      border: 1px solid rgba(0, 220, 255, 0.7);
+      background: linear-gradient(180deg, #00d4ff, #5b21ff);
+      color: white;
+      border-radius: 14px;
+      padding: 13px 18px;
+      cursor: pointer;
+      font-weight: 800;
+      white-space: nowrap;
+      box-shadow: 0 0 22px rgba(0, 220, 255, 0.3);
+    }
+
+    .home-section {
+      grid-column: 1 / -1;
+      margin-top: 10px;
+    }
+
+    .home-section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 6px 0 14px;
+    }
+
+    .home-section-head h3 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .home-more-btn {
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+      color: white;
+      border-radius: 12px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .home-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 16px;
+    }
+
+    .what-dialog-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,.72);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .what-dialog {
+      width: min(720px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: 22px;
+      border: 1px solid rgba(0, 220, 255, .45);
+      background: #020617;
+      color: white;
+      box-shadow: 0 0 35px rgba(91, 33, 255, .45);
+      padding: 18px;
+    }
+
+    .what-dialog-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .what-dialog-head h3 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .what-close-btn {
+      border: 0;
+      background: rgba(255,255,255,.1);
+      color: white;
+      border-radius: 10px;
+      padding: 8px 11px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .mood-btn {
+      border: 1px solid rgba(0, 220, 255, .35);
+      background: linear-gradient(180deg, #24106f, #0f172a);
+      color: white;
+      border-radius: 14px;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .mood-btn:hover {
+      border-color: #20e7ff;
+    }
+
+    .what-result {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 700px) {
+      .home-hero {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 18px;
+      }
+
+      .home-hero h2 {
+        font-size: 23px;
+      }
+
+      .what-watch-main-btn {
+        width: 100%;
+      }
+
+      .home-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .home-section-head h3 {
+        font-size: 18px;
+      }
+
+      .home-more-btn {
+        padding: 7px 10px;
+        font-size: 13px;
+      }
+
+      .card-title {
+        font-size: 13px;
+      }
+
+      .meta {
+        font-size: 12px;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+/* ===== КАРТОЧКИ ===== */
 
 function cardHtml(m) {
   const poster = m.poster
@@ -559,6 +882,126 @@ function cardHtml(m) {
     </article>
   `;
 }
+
+/* ===== ЧТО ПОСМОТРЕТЬ ===== */
+
+function openWhatToWatch() {
+  injectHomeStyle();
+
+  const old = document.getElementById("whatDialogBackdrop");
+  if (old) old.remove();
+
+  const backdrop = document.createElement("div");
+  backdrop.id = "whatDialogBackdrop";
+  backdrop.className = "what-dialog-backdrop";
+
+  backdrop.innerHTML = `
+    <div class="what-dialog">
+      <div class="what-dialog-head">
+        <h3>🎲 Что посмотреть?</h3>
+        <button class="what-close-btn" id="whatCloseBtn">×</button>
+      </div>
+
+      <div class="mood-grid">
+        <button class="mood-btn" data-mood="action">🔥 Хочу мясо</button>
+        <button class="mood-btn" data-mood="comedy">😂 Хочу поржать</button>
+        <button class="mood-btn" data-mood="romance">💘 Хочу романтику</button>
+        <button class="mood-btn" data-mood="magic">✨ Хочу магию</button>
+        <button class="mood-btn" data-mood="anime">🐉 Хочу аниме</button>
+        <button class="mood-btn" data-mood="top">⭐ Хочу топовое</button>
+        <button class="mood-btn" data-mood="new">🆕 Хочу новое</button>
+        <button class="mood-btn" data-mood="random">🎯 Дай случайное</button>
+      </div>
+
+      <div id="whatResult" class="what-result"></div>
+    </div>
+  `;
+
+  document.body.appendChild(backdrop);
+
+  document.getElementById("whatCloseBtn").addEventListener("click", () => {
+    backdrop.remove();
+  });
+
+  backdrop.addEventListener("click", e => {
+    if (e.target === backdrop) backdrop.remove();
+  });
+
+  backdrop.querySelectorAll(".mood-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      renderMoodResult(btn.dataset.mood);
+    });
+  });
+
+  renderMoodResult("top");
+}
+
+function renderMoodResult(mood) {
+  const result = document.getElementById("whatResult");
+  if (!result) return;
+
+  let list = [...allMovies];
+
+  if (mood === "action") {
+    list = list.filter(m => {
+      const text = normalize([m.ru, m.en, m.overview, ...getGenres(m)].join(" "));
+      return text.includes("боевик") || text.includes("экшен") || text.includes("action") || text.includes("приключ");
+    });
+  }
+
+  if (mood === "comedy") {
+    list = list.filter(m => {
+      const text = normalize([m.ru, m.en, m.overview, ...getGenres(m)].join(" "));
+      return text.includes("комедия") || text.includes("comedy");
+    });
+  }
+
+  if (mood === "romance") {
+    list = list.filter(m => {
+      const text = normalize([m.ru, m.en, m.overview, ...getGenres(m)].join(" "));
+      return text.includes("романтика") || text.includes("romance") || text.includes("любов");
+    });
+  }
+
+  if (mood === "magic") {
+    list = list.filter(m => {
+      const text = normalize([m.ru, m.en, m.overview, ...getGenres(m)].join(" "));
+      return text.includes("магия") || text.includes("magic") || text.includes("фэнтези") || text.includes("fantasy");
+    });
+  }
+
+  if (mood === "anime") {
+    list = list.filter(isAnimeItem);
+  }
+
+  if (mood === "top") {
+    list = list.filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP);
+  }
+
+  if (mood === "new") {
+    list = list.filter(m => Number(getYear(m)) >= 2024);
+  }
+
+  list = list
+    .filter(m => getRating(m) > 0)
+    .sort((a, b) => scoreSmart(b) - scoreSmart(a));
+
+  if (mood === "random") {
+    list = shuffle(allMovies).slice(0, 8);
+  } else {
+    list = shuffle(list.slice(0, 80)).slice(0, 8);
+  }
+
+  if (!list.length) {
+    result.innerHTML = `<p>Ничего не нашёл под это настроение. Попробуй другой вариант.</p>`;
+    return;
+  }
+
+  result.innerHTML = list.map(cardHtml).join("");
+  bindCardClicks(result);
+}
+
+/* ===== ДЕТАЛЬНАЯ КАРТОЧКА ===== */
 
 function openDetails(m) {
   selectedMovie = m;
@@ -628,6 +1071,8 @@ function toggleFav() {
   if (currentTab === "fav") applyFilters();
 }
 
+/* ===== СБРОС, УТИЛИТЫ ===== */
+
 function resetFilters() {
   $("searchInput").value = "";
   $("typeFilter").value = "";
@@ -678,6 +1123,8 @@ function scheduleApplyFilters() {
     applyFilters();
   }, FILTER_DEBOUNCE_MS);
 }
+
+/* ===== СОБЫТИЯ ===== */
 
 function setupEvents() {
   [
