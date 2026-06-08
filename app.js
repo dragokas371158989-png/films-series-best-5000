@@ -1668,7 +1668,6 @@ function openDetails(m) {
 
   if ($("detailOverview")) {
     $("detailOverview").textContent = overviewOf(m);
-    loadRussianDescriptionIntoDialog(m);
   }
 
   if ($("detailPoster")) {
@@ -1698,12 +1697,25 @@ function openDetails(m) {
 
   updateFavBtn();
 
-  renderSimilarItems(m);
-
   const dialog = $("detailsDialog");
   if (dialog && !dialog.open) {
     dialog.showModal();
   }
+
+  const similarGrid = document.getElementById("similarGrid");
+  if (similarGrid) {
+    similarGrid.innerHTML = `<div class="similar-empty">Подбираю похожие...</div>`;
+  }
+
+  setTimeout(() => {
+    if (!selectedMovie || String(selectedMovie.id) !== String(m.id)) return;
+    renderSimilarItems(m);
+  }, 50);
+
+  setTimeout(() => {
+    if (!selectedMovie || String(selectedMovie.id) !== String(m.id)) return;
+    loadRussianDescriptionIntoDialog(m);
+  }, 100);
 }
 function updateFavBtn() {
   const favBtn = $("favBtn");
