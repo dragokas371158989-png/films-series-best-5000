@@ -76,7 +76,36 @@ function normalize(s) {
 function queryOf(m) {
   return encodeURIComponent(titleOf(m));
 }
+function isMostlyEnglish(text) {
+  const s = String(text || "").trim();
+  if (!s) return false;
 
+  const latin = (s.match(/[a-zA-Z]/g) || []).length;
+  const cyrillic = (s.match(/[а-яА-ЯёЁ]/g) || []).length;
+
+  return latin > cyrillic * 2 && latin > 20;
+}
+
+function overviewOf(m) {
+  const candidates = [
+    m.overview_ru,
+    m.ruOverview,
+    m.description_ru,
+    m.descriptionRu,
+    m.description,
+    m.overview
+  ];
+
+  const found = candidates.find(x => String(x || "").trim());
+
+  if (!found) return "Описание на русском пока не добавлено.";
+
+  if (isMostlyEnglish(found)) {
+    return "Описание на русском пока не добавлено.";
+  }
+
+  return found;
+}
 function scoreSmart(m) {
   const rating = getRating(m);
   const votes = getVotes(m);
@@ -1016,7 +1045,7 @@ function openDetails(m) {
     `${m.year || "—"} · ${m.type || "—"} · рейтинг ${getRating(m).toFixed(1)} · голосов ${m.votes || 0}`;
 
   $("detailGenres").textContent = getGenres(m).join(" · ");
-  $("detailOverview").textContent = m.overview || "Описание пока не добавлено.";
+$("detailOverview").textContent = overviewOf(m);
 
   $("detailPoster").src = m.poster || "";
   $("detailPoster").style.display = m.poster ? "block" : "none";
