@@ -2,16 +2,12 @@ const INDEX_URL = "data/index.json";
 const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
 
-// ВАЖНО: сюда вставь свой TMDB Bearer Token
-const TMDB_TOKEN = "ВСТАВЬ_СЮДА_СВОЙ_TMDB_BEARER_TOKEN";
+const TMDB_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzIyNGQ4YzcwMmRkYTIzNjA4MzhhY2UxY2M2OWYyMiIsIm5iZiI6MTc4MDc1MjI0OC44MDE5OTk4LCJzdWIiOiI2YTI0MWY3ODliOWVkZGRjMTUzODU4MTIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.NLC1CjRTfRJpOpZ2mlXZRSpFuWI2zHDFT6IEQnlD4IM";
 
-// Быстрая загрузка большой базы чанками
 const INITIAL_CHUNKS = 2;
 const BACKGROUND_RENDER_EVERY = 12;
 const BACKGROUND_PAUSE_MS = 80;
 const FILTER_DEBOUNCE_MS = 180;
-
-// Главная страница с подборками
 const HOME_SECTION_LIMIT = 12;
 
 let allMovies = [];
@@ -20,10 +16,10 @@ let currentPage = 1;
 let currentTab = "all";
 let currentAnimeSection = "";
 let selectedMovie = null;
-const chunkCache = new Map();
 let filterTimer = null;
 let isBackgroundLoading = false;
 
+const chunkCache = new Map();
 const $ = (id) => document.getElementById(id);
 
 const favKey = "gkm_favorites";
@@ -53,17 +49,6 @@ function getRating(m) {
   return Number(m.rating || 0);
 }
 
-function rankOf(m) {
-  const r = getRating(m);
-
-  if (r >= 9) return { rank: "S", label: "S-класс" };
-  if (r >= 8) return { rank: "A", label: "A-класс" };
-  if (r >= 7) return { rank: "B", label: "B-класс" };
-  if (r >= 6) return { rank: "C", label: "C-класс" };
-
-  return { rank: "D", label: "D-класс" };
-}
-
 function getVotes(m) {
   return Number(m.votes || 0);
 }
@@ -78,6 +63,59 @@ function normalize(s) {
 
 function queryOf(m) {
   return encodeURIComponent(titleOf(m));
+}
+
+function rankOf(m) {
+  const r = getRating(m);
+
+  if (r >= 9) return { rank: "S", label: "S-класс" };
+  if (r >= 8) return { rank: "A", label: "A-класс" };
+  if (r >= 7) return { rank: "B", label: "B-класс" };
+  if (r >= 6) return { rank: "C", label: "C-класс" };
+
+  return { rank: "D", label: "D-класс" };
+}
+
+function scoreSmart(m) {
+  const rating = getRating(m);
+  const votes = getVotes(m);
+  const year = Number(getYear(m) || 0);
+
+  if (votes < 30) return -1;
+
+  const voteBonus = Math.min(votes, 50000) / 50000 * 4;
+  const yearBonus = year >= 2010 ? 0.4 : 0;
+
+  return rating * 10 + voteBonus + yearBonus;
+}
+
+function escapeHtml(s) {
+  return String(s ?? "").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#039;"
+  }[ch]));
+}
+
+function escapeAttr(s) {
+  return escapeHtml(s);
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+
+  return a;
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /* ===== РУССКИЕ ОПИСАНИЯ ===== */
@@ -230,9 +268,7 @@ async function findRussianDescriptionFromTmdb(m) {
     }
 
     const mediaType = tmdbTypeOf(m, best.media_type);
-    const detailUrl =
-      `https://api.themoviedb.org/3/${mediaType}/${best.id}?language=ru-RU`;
-
+    const detailUrl = `https://api.themoviedb.org/3/${mediaType}/${best.id}?language=ru-RU`;
     const detail = await fetchJsonWithTimeout(detailUrl, tmdbHeaders());
 
     if (detail) {
@@ -251,9 +287,7 @@ async function findRussianAnimeDescriptionFromShikimori(m) {
   if (!isAnimeItem(m)) return "";
 
   const searchTitle = m.en || m.ru || m.title || m.name || titleOf(m);
-  const searchUrl =
-    `https://shikimori.one/api/animes?search=${encodeURIComponent(searchTitle)}&limit=1`;
-
+  const searchUrl = `https://shikimori.one/api/animes?search=${encodeURIComponent(searchTitle)}&limit=1`;
   const searchData = await fetchJsonWithTimeout(searchUrl);
 
   if (!Array.isArray(searchData) || !searchData.length || !searchData[0].id) {
@@ -331,20 +365,7 @@ async function loadRussianDescriptionIntoDialog(m) {
   }
 }
 
-function scoreSmart(m) {
-  const rating = getRating(m);
-  const votes = getVotes(m);
-  const year = Number(getYear(m) || 0);
-
-  if (votes < 30) return -1;
-
-  const voteBonus = Math.min(votes, 50000) / 50000 * 4;
-  const yearBonus = year >= 2010 ? 0.4 : 0;
-
-  return rating * 10 + voteBonus + yearBonus;
-}
-
-/* ===== РАЗДЕЛЫ АНИМЕ ===== */
+/* ===== АНИМЕ ===== */
 
 const ANIME_SECTIONS = [
   { id: "isekai", name: "Исекай", keys: ["исекай", "isekai", "попадан", "попаданец", "перерождение", "reincarnation", "другой мир", "parallel world"] },
@@ -661,35 +682,51 @@ async function fetchChunkMovies(chunk) {
   return [];
 }
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+/* ===== ФИЛЬТРЫ ===== */
 
 function fillFilters() {
+  const yearFilter = $("yearFilter");
+  const genreFilter = $("genreFilter");
+
+  if (!yearFilter || !genreFilter) return;
+
+  const currentYear = yearFilter.value;
+  const currentGenre = genreFilter.value;
+
   const years = [...new Set(allMovies.map(getYear).filter(Boolean))]
     .sort((a, b) => Number(b) - Number(a));
 
   const genres = [...new Set(allMovies.flatMap(getGenres))]
     .sort((a, b) => a.localeCompare(b, "ru"));
 
-  $("yearFilter").innerHTML =
+  yearFilter.innerHTML =
     `<option value="">Все годы</option>` +
     years.map(y => `<option value="${escapeHtml(y)}">${escapeHtml(y)}</option>`).join("");
 
-  $("genreFilter").innerHTML =
+  genreFilter.innerHTML =
     `<option value="">Все жанры</option>` +
     genres.map(g => `<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`).join("");
+
+  if (currentYear) yearFilter.value = currentYear;
+  if (currentGenre) genreFilter.value = currentGenre;
 }
 
 function applyFilters() {
   syncAnimePanel();
 
-  const q = normalize($("searchInput").value);
-  const type = $("typeFilter").value;
-  const genre = $("genreFilter").value;
-  const year = $("yearFilter").value;
-  const minRating = Number($("ratingFilter").value || 0);
-  const sort = $("sortFilter") ? $("sortFilter").value : "smart";
+  const searchInput = $("searchInput");
+  const typeFilter = $("typeFilter");
+  const genreFilter = $("genreFilter");
+  const yearFilter = $("yearFilter");
+  const ratingFilter = $("ratingFilter");
+  const sortFilter = $("sortFilter");
+
+  const q = normalize(searchInput ? searchInput.value : "");
+  const type = typeFilter ? typeFilter.value : "";
+  const genre = genreFilter ? genreFilter.value : "";
+  const year = yearFilter ? yearFilter.value : "";
+  const minRating = Number(ratingFilter ? ratingFilter.value || 0 : 0);
+  const sort = sortFilter ? sortFilter.value : "smart";
 
   let list = [...allMovies];
 
@@ -773,6 +810,22 @@ function sortList(list, sort) {
   return a;
 }
 
+function hasActiveFilters() {
+  const searchInput = $("searchInput");
+  const typeFilter = $("typeFilter");
+  const genreFilter = $("genreFilter");
+  const yearFilter = $("yearFilter");
+  const ratingFilter = $("ratingFilter");
+
+  return Boolean(
+    normalize(searchInput ? searchInput.value : "") ||
+    (typeFilter && typeFilter.value) ||
+    (genreFilter && genreFilter.value) ||
+    (yearFilter && yearFilter.value) ||
+    Number(ratingFilter ? ratingFilter.value || 0 : 0)
+  );
+}
+
 /* ===== РЕНДЕР ===== */
 
 function render() {
@@ -787,14 +840,20 @@ function render() {
   const start = (currentPage - 1) * PAGE_SIZE;
   const pageItems = filtered.slice(start, start + PAGE_SIZE);
 
-  $("countText").textContent = `Найдено: ${filtered.length} · Страница ${currentPage} из ${pages}`;
-  $("grid").innerHTML = pageItems.map(cardHtml).join("");
+  const countText = $("countText");
+  const grid = $("grid");
+  const prevBtn = $("prevBtn");
+  const nextBtn = $("nextBtn");
+  const pageText = $("pageText");
+
+  if (countText) countText.textContent = `Найдено: ${filtered.length} · Страница ${currentPage} из ${pages}`;
+  if (grid) grid.innerHTML = pageItems.map(cardHtml).join("");
 
   bindCardClicks();
 
-  $("prevBtn").disabled = currentPage <= 1;
-  $("nextBtn").disabled = currentPage >= pages;
-  $("pageText").textContent = `${currentPage} / ${pages}`;
+  if (prevBtn) prevBtn.disabled = currentPage <= 1;
+  if (nextBtn) nextBtn.disabled = currentPage >= pages;
+  if (pageText) pageText.textContent = `${currentPage} / ${pages}`;
 }
 
 function bindCardClicks(root = document) {
@@ -817,17 +876,8 @@ function bindCardClicks(root = document) {
     });
   });
 }
-function hasActiveFilters() {
-  return Boolean(
-    normalize($("searchInput").value) ||
-    $("typeFilter").value ||
-    $("genreFilter").value ||
-    $("yearFilter").value ||
-    Number($("ratingFilter").value || 0)
-  );
-}
 
-/* ===== ГЛАВНАЯ СТРАНИЦА ===== */
+/* ===== ГЛАВНАЯ ===== */
 
 function renderHomeSections() {
   injectHomeStyle();
@@ -867,25 +917,35 @@ function renderHomeSections() {
     .sort((a, b) => getRating(b) - getRating(a))
     .slice(0, HOME_SECTION_LIMIT);
 
-  $("countText").textContent = `ГОЛУБЬ Каталог Мира · всего записей: ${allMovies.length}`;
+  const countText = $("countText");
+  const grid = $("grid");
+  const prevBtn = $("prevBtn");
+  const nextBtn = $("nextBtn");
+  const pageText = $("pageText");
 
-  $("grid").innerHTML = `
-    <section class="home-hero">
-      <div>
-        <h2>ГОЛУБЬ Каталог Мира</h2>
-        <p>Фильмы, сериалы, мультфильмы и аниме в одном месте.</p>
-      </div>
-      <button id="whatToWatchBtn" class="what-watch-main-btn">🎲 Что посмотреть?</button>
-    </section>
+  if (countText) {
+    countText.textContent = `ГОЛУБЬ Каталог Мира · всего записей: ${allMovies.length}`;
+  }
 
-    ${homeSectionHtml("🔥 Популярное", popular, "popular")}
-    ${homeSectionHtml("⭐ Лучший рейтинг", top, "top")}
-    ${homeSectionHtml("🆕 Новинки", newItems, "new")}
-    ${homeSectionHtml("🐉 Аниме", anime, "anime")}
-    ${homeSectionHtml("🎬 Фильмы", movies, "movies")}
-    ${homeSectionHtml("📺 Сериалы", series, "series")}
-    ${homeSectionHtml("🧸 Мультфильмы", cartoons, "cartoons")}
-  `;
+  if (grid) {
+    grid.innerHTML = `
+      <section class="home-hero">
+        <div>
+          <h2>ГОЛУБЬ Каталог Мира</h2>
+          <p>Фильмы, сериалы, мультфильмы и аниме в одном месте.</p>
+        </div>
+        <button id="whatToWatchBtn" class="what-watch-main-btn" type="button">🎲 Что посмотреть?</button>
+      </section>
+
+      ${homeSectionHtml("🔥 Популярное", popular, "popular")}
+      ${homeSectionHtml("⭐ Лучший рейтинг", top, "top")}
+      ${homeSectionHtml("🆕 Новинки", newItems, "new")}
+      ${homeSectionHtml("🐉 Аниме", anime, "anime")}
+      ${homeSectionHtml("🎬 Фильмы", movies, "movies")}
+      ${homeSectionHtml("📺 Сериалы", series, "series")}
+      ${homeSectionHtml("🧸 Мультфильмы", cartoons, "cartoons")}
+    `;
+  }
 
   bindCardClicks();
 
@@ -911,9 +971,9 @@ function renderHomeSections() {
     whatBtn.addEventListener("click", openWhatToWatch);
   }
 
-  $("prevBtn").disabled = true;
-  $("nextBtn").disabled = true;
-  $("pageText").textContent = `Главная`;
+  if (prevBtn) prevBtn.disabled = true;
+  if (nextBtn) nextBtn.disabled = true;
+  if (pageText) pageText.textContent = "Главная";
 }
 
 function homeSectionHtml(title, items, tabName) {
@@ -923,7 +983,7 @@ function homeSectionHtml(title, items, tabName) {
     <section class="home-section">
       <div class="home-section-head">
         <h3>${escapeHtml(title)}</h3>
-        <button class="home-more-btn" data-open-tab="${escapeAttr(tabName)}">Смотреть все</button>
+        <button class="home-more-btn" data-open-tab="${escapeAttr(tabName)}" type="button">Смотреть все</button>
       </div>
       <div class="home-row">
         ${items.map(cardHtml).join("")}
@@ -931,6 +991,8 @@ function homeSectionHtml(title, items, tabName) {
     </section>
   `;
 }
+
+/* ===== СТИЛИ ===== */
 
 function injectHomeStyle() {
   if (document.getElementById("homeStyle")) return;
@@ -1008,6 +1070,43 @@ function injectHomeStyle() {
       gap: 16px;
     }
 
+    .poster-wrap {
+      position: relative;
+    }
+
+    .card-fav-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 5;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      background: rgba(2, 6, 23, 0.78);
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 14px rgba(0, 0, 0, 0.35);
+      transition: .15s ease;
+    }
+
+    .card-fav-btn:hover {
+      transform: scale(1.08);
+      border-color: rgba(255, 80, 150, 0.95);
+      box-shadow: 0 0 18px rgba(255, 80, 150, 0.45);
+    }
+
+    .card-fav-btn.active {
+      background: linear-gradient(180deg, #ff2f7d, #6d28d9);
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+
     .what-dialog-backdrop {
       position: fixed;
       inset: 0;
@@ -1081,6 +1180,21 @@ function injectHomeStyle() {
       gap: 14px;
     }
 
+    .mobile-filters-toggle {
+      display: none;
+      width: calc(100% - 32px);
+      margin: 12px 16px;
+      border: 1px solid rgba(0, 220, 255, 0.7);
+      background: linear-gradient(180deg, #00d4ff, #5b21ff);
+      color: white;
+      border-radius: 14px;
+      padding: 13px 16px;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 15px;
+      box-shadow: 0 0 20px rgba(0, 220, 255, 0.25);
+    }
+
     @media (max-width: 700px) {
       .home-hero {
         flex-direction: column;
@@ -1117,6 +1231,52 @@ function injectHomeStyle() {
       .meta {
         font-size: 12px;
       }
+
+      .card-fav-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        top: 6px;
+        right: 6px;
+      }
+
+      .mobile-filters-toggle {
+        display: block;
+      }
+
+      .filters.mobile-collapsed,
+      .controls.mobile-collapsed,
+      .filter-panel.mobile-collapsed,
+      .search-panel.mobile-collapsed,
+      #filtersPanel.mobile-collapsed {
+        display: none !important;
+      }
+
+      .filters.mobile-open,
+      .controls.mobile-open,
+      .filter-panel.mobile-open,
+      .search-panel.mobile-open,
+      #filtersPanel.mobile-open {
+        display: grid !important;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 12px 16px;
+      }
+
+      .filters.mobile-open input,
+      .filters.mobile-open select,
+      .controls.mobile-open input,
+      .controls.mobile-open select,
+      .filter-panel.mobile-open input,
+      .filter-panel.mobile-open select,
+      .search-panel.mobile-open input,
+      .search-panel.mobile-open select,
+      #filtersPanel.mobile-open input,
+      #filtersPanel.mobile-open select {
+        width: 100%;
+        min-height: 42px;
+        font-size: 15px;
+      }
     }
   `;
 
@@ -1124,10 +1284,9 @@ function injectHomeStyle() {
 }
 
 /* ===== КАРТОЧКИ ===== */
-function injectCardFavoriteStyle() { ... }
-function toggleCardFavorite(id, btn) { ... }
+
 function cardHtml(m) {
-  injectCardFavoriteStyle();
+  injectHomeStyle();
 
   const fav = loadSet(favKey);
   const isFav = fav.has(String(m.id));
@@ -1163,6 +1322,37 @@ function cardHtml(m) {
   `;
 }
 
+function toggleCardFavorite(id, btn) {
+  if (!id) return;
+
+  const fav = loadSet(favKey);
+  const key = String(id);
+
+  if (fav.has(key)) {
+    fav.delete(key);
+
+    if (btn) {
+      btn.classList.remove("active");
+      btn.textContent = "🤍";
+      btn.title = "Добавить в избранное";
+    }
+  } else {
+    fav.add(key);
+
+    if (btn) {
+      btn.classList.add("active");
+      btn.textContent = "❤️";
+      btn.title = "Убрать из избранного";
+    }
+  }
+
+  saveSet(favKey, fav);
+
+  if (currentTab === "fav") {
+    applyFilters();
+  }
+}
+
 /* ===== ЧТО ПОСМОТРЕТЬ ===== */
 
 function openWhatToWatch() {
@@ -1179,18 +1369,18 @@ function openWhatToWatch() {
     <div class="what-dialog">
       <div class="what-dialog-head">
         <h3>🎲 Что посмотреть?</h3>
-        <button class="what-close-btn" id="whatCloseBtn">×</button>
+        <button class="what-close-btn" id="whatCloseBtn" type="button">×</button>
       </div>
 
       <div class="mood-grid">
-        <button class="mood-btn" data-mood="action">🔥 Хочу мясо</button>
-        <button class="mood-btn" data-mood="comedy">😂 Хочу поржать</button>
-        <button class="mood-btn" data-mood="romance">💘 Хочу романтику</button>
-        <button class="mood-btn" data-mood="magic">✨ Хочу магию</button>
-        <button class="mood-btn" data-mood="anime">🐉 Хочу аниме</button>
-        <button class="mood-btn" data-mood="top">⭐ Хочу топовое</button>
-        <button class="mood-btn" data-mood="new">🆕 Хочу новое</button>
-        <button class="mood-btn" data-mood="random">🎯 Дай случайное</button>
+        <button class="mood-btn" data-mood="action" type="button">🔥 Хочу мясо</button>
+        <button class="mood-btn" data-mood="comedy" type="button">😂 Хочу поржать</button>
+        <button class="mood-btn" data-mood="romance" type="button">💘 Хочу романтику</button>
+        <button class="mood-btn" data-mood="magic" type="button">✨ Хочу магию</button>
+        <button class="mood-btn" data-mood="anime" type="button">🐉 Хочу аниме</button>
+        <button class="mood-btn" data-mood="top" type="button">⭐ Хочу топовое</button>
+        <button class="mood-btn" data-mood="new" type="button">🆕 Хочу новое</button>
+        <button class="mood-btn" data-mood="random" type="button">🎯 Дай случайное</button>
       </div>
 
       <div id="whatResult" class="what-result"></div>
@@ -1199,9 +1389,8 @@ function openWhatToWatch() {
 
   document.body.appendChild(backdrop);
 
-  document.getElementById("whatCloseBtn").addEventListener("click", () => {
-    backdrop.remove();
-  });
+  const closeBtn = document.getElementById("whatCloseBtn");
+  if (closeBtn) closeBtn.addEventListener("click", () => backdrop.remove());
 
   backdrop.addEventListener("click", e => {
     if (e.target === backdrop) backdrop.remove();
@@ -1281,7 +1470,7 @@ function renderMoodResult(mood) {
   bindCardClicks(result);
 }
 
-/* ===== ДЕТАЛЬНАЯ КАРТОЧКА ===== */
+/* ===== ДЕТАЛИ ===== */
 
 function openDetails(m) {
   selectedMovie = m;
@@ -1291,16 +1480,24 @@ function openDetails(m) {
   const arr = [String(m.id), ...hist].slice(0, 300);
   localStorage.setItem(historyKey, JSON.stringify(arr));
 
-  $("detailTitle").textContent = titleOf(m);
-  $("detailMeta").textContent =
-    `${m.year || "—"} · ${m.type || "—"} · рейтинг ${getRating(m).toFixed(1)} · голосов ${m.votes || 0}`;
+  if ($("detailTitle")) $("detailTitle").textContent = titleOf(m);
 
-  $("detailGenres").textContent = getGenres(m).join(" · ");
-  $("detailOverview").textContent = overviewOf(m);
-  loadRussianDescriptionIntoDialog(m);
+  if ($("detailMeta")) {
+    $("detailMeta").textContent =
+      `${m.year || "—"} · ${m.type || "—"} · рейтинг ${getRating(m).toFixed(1)} · голосов ${m.votes || 0}`;
+  }
 
-  $("detailPoster").src = m.poster || "";
-  $("detailPoster").style.display = m.poster ? "block" : "none";
+  if ($("detailGenres")) $("detailGenres").textContent = getGenres(m).join(" · ");
+
+  if ($("detailOverview")) {
+    $("detailOverview").textContent = overviewOf(m);
+    loadRussianDescriptionIntoDialog(m);
+  }
+
+  if ($("detailPoster")) {
+    $("detailPoster").src = m.poster || "";
+    $("detailPoster").style.display = m.poster ? "block" : "none";
+  }
 
   const q = queryOf(m);
   const isAnime = isAnimeItem(m);
@@ -1308,18 +1505,13 @@ function openDetails(m) {
   const animeLinksBlock = document.getElementById("animeLinksBlock");
   const catalogLinksBlock = document.getElementById("catalogLinksBlock");
 
-  if (animeLinksBlock) {
-    animeLinksBlock.style.display = isAnime ? "block" : "none";
-  }
+  if (animeLinksBlock) animeLinksBlock.style.display = isAnime ? "block" : "none";
+  if (catalogLinksBlock) catalogLinksBlock.style.display = isAnime ? "none" : "block";
 
-  if (catalogLinksBlock) {
-    catalogLinksBlock.style.display = isAnime ? "none" : "block";
-  }
-
-  $("kinopoiskLink").href = `https://www.kinopoisk.ru/index.php?kp_query=${q}`;
-  $("youtubeLink").href = `https://www.youtube.com/results?search_query=${q}+трейлер`;
-  $("vkLink").href = `https://vk.com/video?q=${q}`;
-  $("rutubeLink").href = `https://rutube.ru/search/?query=${q}`;
+  if ($("kinopoiskLink")) $("kinopoiskLink").href = `https://www.kinopoisk.ru/index.php?kp_query=${q}`;
+  if ($("youtubeLink")) $("youtubeLink").href = `https://www.youtube.com/results?search_query=${q}+трейлер`;
+  if ($("vkLink")) $("vkLink").href = `https://vk.com/video?q=${q}`;
+  if ($("rutubeLink")) $("rutubeLink").href = `https://rutube.ru/search/?query=${q}`;
 
   if ($("shikimoriLink")) $("shikimoriLink").href = `https://shikimori.one/animes?search=${q}`;
   if ($("malLink")) $("malLink").href = `https://myanimelist.net/anime.php?q=${q}`;
@@ -1328,13 +1520,19 @@ function openDetails(m) {
   if ($("anidbLink")) $("anidbLink").href = `https://anidb.net/anime/?adb.search=${q}`;
 
   updateFavBtn();
-  $("detailsDialog").showModal();
+
+  if ($("detailsDialog")) {
+    $("detailsDialog").showModal();
+  }
 }
 
 function updateFavBtn() {
+  const favBtn = $("favBtn");
+  if (!favBtn) return;
+
   const fav = loadSet(favKey);
   const yes = selectedMovie && fav.has(String(selectedMovie.id));
-  $("favBtn").textContent = yes ? "Убрать из избранного" : "В избранное";
+  favBtn.textContent = yes ? "Убрать из избранного" : "В избранное";
 }
 
 function toggleFav() {
@@ -1352,59 +1550,6 @@ function toggleFav() {
   if (currentTab === "fav") applyFilters();
 }
 
-/* ===== СБРОС, УТИЛИТЫ ===== */
-
-function resetFilters() {
-  $("searchInput").value = "";
-  $("typeFilter").value = "";
-  $("genreFilter").value = "";
-  $("yearFilter").value = "";
-  $("ratingFilter").value = "0";
-
-  if ($("sortFilter")) $("sortFilter").value = "smart";
-
-  currentTab = "all";
-  currentAnimeSection = "";
-
-  document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
-  const allTab = document.querySelector('.tab[data-tab="all"]');
-  if (allTab) allTab.classList.add("active");
-
-  applyFilters();
-}
-
-function shuffle(arr) {
-  const a = [...arr];
-
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-
-  return a;
-}
-
-function escapeHtml(s) {
-  return String(s ?? "").replace(/[&<>"']/g, ch => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    "\"": "&quot;",
-    "'": "&#039;"
-  }[ch]));
-}
-
-function escapeAttr(s) {
-  return escapeHtml(s);
-}
-
-function scheduleApplyFilters() {
-  clearTimeout(filterTimer);
-  filterTimer = setTimeout(() => {
-    applyFilters();
-  }, FILTER_DEBOUNCE_MS);
-}
-
 /* ===== МОБИЛЬНЫЕ ФИЛЬТРЫ ===== */
 
 function findFiltersPanel() {
@@ -1417,73 +1562,8 @@ function findFiltersPanel() {
   );
 }
 
-function injectMobileFiltersStyle() {
-  if (document.getElementById("mobileFiltersStyle")) return;
-
-  const style = document.createElement("style");
-  style.id = "mobileFiltersStyle";
-  style.textContent = `
-    .mobile-filters-toggle {
-      display: none;
-      width: calc(100% - 32px);
-      margin: 12px 16px;
-      border: 1px solid rgba(0, 220, 255, 0.7);
-      background: linear-gradient(180deg, #00d4ff, #5b21ff);
-      color: white;
-      border-radius: 14px;
-      padding: 13px 16px;
-      cursor: pointer;
-      font-weight: 900;
-      font-size: 15px;
-      box-shadow: 0 0 20px rgba(0, 220, 255, 0.25);
-    }
-
-    @media (max-width: 700px) {
-      .mobile-filters-toggle {
-        display: block;
-      }
-
-      .filters.mobile-collapsed,
-      .controls.mobile-collapsed,
-      .filter-panel.mobile-collapsed,
-      .search-panel.mobile-collapsed,
-      #filtersPanel.mobile-collapsed {
-        display: none !important;
-      }
-
-      .filters.mobile-open,
-      .controls.mobile-open,
-      .filter-panel.mobile-open,
-      .search-panel.mobile-open,
-      #filtersPanel.mobile-open {
-        display: grid !important;
-        grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 12px 16px;
-      }
-
-      .filters.mobile-open input,
-      .filters.mobile-open select,
-      .controls.mobile-open input,
-      .controls.mobile-open select,
-      .filter-panel.mobile-open input,
-      .filter-panel.mobile-open select,
-      .search-panel.mobile-open input,
-      .search-panel.mobile-open select,
-      #filtersPanel.mobile-open input,
-      #filtersPanel.mobile-open select {
-        width: 100%;
-        min-height: 42px;
-        font-size: 15px;
-      }
-    }
-  `;
-
-  document.head.appendChild(style);
-}
-
 function setupMobileFilters() {
-  injectMobileFiltersStyle();
+  injectHomeStyle();
 
   const panel = findFiltersPanel();
   if (!panel) return;
@@ -1528,7 +1608,32 @@ function setupMobileFilters() {
   closeOnMobile();
 }
 
-/* ===== СОБЫТИЯ ===== */
+/* ===== СБРОС И СОБЫТИЯ ===== */
+
+function resetFilters() {
+  if ($("searchInput")) $("searchInput").value = "";
+  if ($("typeFilter")) $("typeFilter").value = "";
+  if ($("genreFilter")) $("genreFilter").value = "";
+  if ($("yearFilter")) $("yearFilter").value = "";
+  if ($("ratingFilter")) $("ratingFilter").value = "0";
+  if ($("sortFilter")) $("sortFilter").value = "smart";
+
+  currentTab = "all";
+  currentAnimeSection = "";
+
+  document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+  const allTab = document.querySelector('.tab[data-tab="all"]');
+  if (allTab) allTab.classList.add("active");
+
+  applyFilters();
+}
+
+function scheduleApplyFilters() {
+  clearTimeout(filterTimer);
+  filterTimer = setTimeout(() => {
+    applyFilters();
+  }, FILTER_DEBOUNCE_MS);
+}
 
 function setupEvents() {
   setupMobileFilters();
@@ -1549,9 +1654,7 @@ function setupEvents() {
   });
 
   const resetBtn = $("resetFiltersBtn");
-  if (resetBtn) {
-    resetBtn.addEventListener("click", resetFilters);
-  }
+  if (resetBtn) resetBtn.addEventListener("click", resetFilters);
 
   document.querySelectorAll(".tab").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -1568,33 +1671,49 @@ function setupEvents() {
     });
   });
 
-  $("prevBtn").addEventListener("click", () => {
-    if (currentPage > 1) {
-      currentPage--;
-      render();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  });
+  const prevBtn = $("prevBtn");
+  const nextBtn = $("nextBtn");
 
-  $("nextBtn").addEventListener("click", () => {
-    const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+  }
 
-    if (currentPage < pages) {
-      currentPage++;
-      render();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  });
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
 
-  $("closeDialog").addEventListener("click", () => $("detailsDialog").close());
-  $("favBtn").addEventListener("click", toggleFav);
+      if (currentPage < pages) {
+        currentPage++;
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+  }
 
-  $("reloadBtn").addEventListener("click", () => loadData().catch(showError));
+  if ($("closeDialog")) {
+    $("closeDialog").addEventListener("click", () => $("detailsDialog").close());
+  }
 
-  $("themeBtn").addEventListener("click", () => {
-    document.body.classList.toggle("light");
-    localStorage.setItem("gkm_theme", document.body.classList.contains("light") ? "light" : "dark");
-  });
+  if ($("favBtn")) {
+    $("favBtn").addEventListener("click", toggleFav);
+  }
+
+  if ($("reloadBtn")) {
+    $("reloadBtn").addEventListener("click", () => loadData().catch(showError));
+  }
+
+  if ($("themeBtn")) {
+    $("themeBtn").addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      localStorage.setItem("gkm_theme", document.body.classList.contains("light") ? "light" : "dark");
+    });
+  }
 
   if (localStorage.getItem("gkm_theme") === "light") {
     document.body.classList.add("light");
@@ -1603,9 +1722,15 @@ function setupEvents() {
 
 function showError(e) {
   console.error(e);
-  $("statusText").textContent = "Ошибка: " + e.message;
-  $("grid").innerHTML =
-    `<div class="card"><div class="card-body">Не удалось загрузить базу. Проверь data/index.json или movies_updates.json.</div></div>`;
+
+  if ($("statusText")) {
+    $("statusText").textContent = "Ошибка: " + e.message;
+  }
+
+  if ($("grid")) {
+    $("grid").innerHTML =
+      `<div class="card"><div class="card-body">Не удалось загрузить базу. Проверь data/index.json или movies_updates.json.</div></div>`;
+  }
 }
 
 setupEvents();
