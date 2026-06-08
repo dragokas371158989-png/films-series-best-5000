@@ -2,6 +2,10 @@ const INDEX_URL = "data/index.json";
 const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
 
+// ВАЖНО: сюда вставь свой TMDB Bearer Token
+// Пример: const TMDB_TOKEN = "eyJhbGciOiJIUzI1NiJ9....";
+const TMDB_TOKEN = "ВСТАВЬ_СЮДА_СВОЙ_TMDB_BEARER_TOKEN";
+
 // Быстрая загрузка большой базы чанками
 const INITIAL_CHUNKS = 2;
 const BACKGROUND_RENDER_EVERY = 12;
@@ -76,6 +80,9 @@ function normalize(s) {
 function queryOf(m) {
   return encodeURIComponent(titleOf(m));
 }
+
+/* ===== РУССКИЕ ОПИСАНИЯ ===== */
+
 function isMostlyEnglish(text) {
   const s = String(text || "").trim();
   if (!s) return false;
@@ -84,6 +91,16 @@ function isMostlyEnglish(text) {
   const cyrillic = (s.match(/[а-яА-ЯёЁ]/g) || []).length;
 
   return latin > cyrillic * 2 && latin > 20;
+}
+
+function isRussianText(text) {
+  const s = String(text || "").trim();
+  if (!s) return false;
+
+  const cyrillic = (s.match(/[а-яА-ЯёЁ]/g) || []).length;
+  const latin = (s.match(/[a-zA-Z]/g) || []).length;
+
+  return cyrillic > 40 && cyrillic >= latin;
 }
 
 function overviewOf(m) {
@@ -106,6 +123,219 @@ function overviewOf(m) {
 
   return found;
 }
+
+function cleanDescription(text) {
+  return String(text || "")
+    .replace(/\[.*?\]/g, "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/\r/g, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .replace(/Источник:.*/gi, "")
+    .replace(/Описание:.*/gi, "")
+    .trim();
+}
+
+function russianDescriptionCacheKey(m) {
+  return "gkm_ru_description_" + String(m.id || titleOf(m));
+}
+
+async function fetchJsonWithTimeout(url, options = {}, timeoutMs = 8000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const res = await fetch(url, {
+      ...options,
+      cache: "force-cache",
+      signal: controller.signal
+    });
+
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (e) {
+    console.warn("Не удалось получить описание:", e);
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function hasTmdbToken() {
+  return (
+    TMDB_TOKEN &&
+    TMDB_TOKEN !== "ВСТАВЬ_СЮДА_СВОЙ_TMDB_BEARER_TOKEN" &&
+    TMDB_TOKEN.length > 30
+  );
+}
+
+function tmdbHeaders() {
+  return {
+    headers: {
+      Authorization: `Bearer ${TMDB_TOKEN}`,
+      accept: "application/json"
+    }
+  };
+}
+
+function tmdbTypeOf(m, resultType = "") {
+  if (resultType === "movie" || resultType === "tv") return resultType;
+
+  const type = normalize(m.type);
+  const genres = getGenres(m).map(normalize).join(" ");
+
+  if (type.includes("сериал")) return "tv";
+  if (type.includes("фильм")) return "movie";
+
+  if (genres.includes("мульт")) {
+    return "movie";
+  }
+
+  return "movie";
+}
+
+async function findRussianDescriptionFromTmdb(m) {
+  if (!hasTmdbToken()) return "";
+
+  const titleCandidates = [
+    m.ru,
+    m.en,
+    m.title,
+    m.name,
+    titleOf(m)
+  ].filter(Boolean);
+
+  const uniqueTitles = [...new Set(titleCandidates.map(x => String(x).trim()).filter(Boolean))];
+
+  for (const title of uniqueTitles) {
+    const searchUrl =
+      `https://api.themoviedb.org/3/search/multi?query=${encodeURIComponent(title)}&include_adult=false&language=ru-RU&page=1`;
+
+    const searchData = await fetchJsonWithTimeout(searchUrl, tmdbHeaders());
+
+    if (!searchData || !Array.isArray(searchData.results) || !searchData.results.length) {
+      continue;
+    }
+
+    let results = searchData.results.filter(r => r.media_type === "movie" || r.media_type === "tv");
+
+    const type = normalize(m.type);
+    if (type.includes("сериал")) {
+      results = results.filter(r => r.media_type === "tv");
+    } else if (type.includes("фильм") || type.includes("аниме")) {
+      results = results.filter(r => r.media_type === "movie" || r.media_type === "tv");
+    }
+
+    const best = results[0];
+    if (!best || !best.id) continue;
+
+    let overview = cleanDescription(best.overview);
+
+    if (isRussianText(overview)) {
+      return overview;
+    }
+
+    const mediaType = tmdbTypeOf(m, best.media_type);
+    const detailUrl =
+      `https://api.themoviedb.org/3/${mediaType}/${best.id}?language=ru-RU`;
+
+    const detail = await fetchJsonWithTimeout(detailUrl, tmdbHeaders());
+
+    if (detail) {
+      overview = cleanDescription(detail.overview);
+
+      if (isRussianText(overview)) {
+        return overview;
+      }
+    }
+  }
+
+  return "";
+}
+
+async function findRussianAnimeDescriptionFromShikimori(m) {
+  if (!isAnimeItem(m)) return "";
+
+  const searchTitle = m.en || m.ru || m.title || m.name || titleOf(m);
+  const searchUrl =
+    `https://shikimori.one/api/animes?search=${encodeURIComponent(searchTitle)}&limit=1`;
+
+  const searchData = await fetchJsonWithTimeout(searchUrl);
+
+  if (!Array.isArray(searchData) || !searchData.length || !searchData[0].id) {
+    return "";
+  }
+
+  const animeId = searchData[0].id;
+  const detailUrl = `https://shikimori.one/api/animes/${animeId}`;
+  const detail = await fetchJsonWithTimeout(detailUrl);
+
+  if (!detail) return "";
+
+  const candidates = [
+    detail.description,
+    detail.description_html
+  ];
+
+  for (const item of candidates) {
+    const cleaned = cleanDescription(item);
+
+    if (isRussianText(cleaned)) {
+      return cleaned;
+    }
+  }
+
+  return "";
+}
+
+async function findRussianDescription(m) {
+  const cacheKey = russianDescriptionCacheKey(m);
+  const cached = localStorage.getItem(cacheKey);
+
+  if (cached && isRussianText(cached)) {
+    return cached;
+  }
+
+  let ruDescription = "";
+
+  if (isAnimeItem(m)) {
+    ruDescription = await findRussianAnimeDescriptionFromShikimori(m);
+  }
+
+  if (!ruDescription) {
+    ruDescription = await findRussianDescriptionFromTmdb(m);
+  }
+
+  if (ruDescription && isRussianText(ruDescription)) {
+    localStorage.setItem(cacheKey, ruDescription);
+    return ruDescription;
+  }
+
+  return "";
+}
+
+async function loadRussianDescriptionIntoDialog(m) {
+  const placeholder = "Описание на русском пока не добавлено.";
+  const currentText = overviewOf(m);
+
+  if (currentText && currentText !== placeholder) return;
+
+  const detailOverview = $("detailOverview");
+  if (!detailOverview) return;
+
+  detailOverview.textContent = "Ищу описание на русском...";
+
+  const ruDescription = await findRussianDescription(m);
+
+  if (!selectedMovie || String(selectedMovie.id) !== String(m.id)) return;
+
+  if (ruDescription) {
+    m.overview_ru = ruDescription;
+    detailOverview.textContent = ruDescription;
+  } else {
+    detailOverview.textContent = placeholder;
+  }
+}
+
 function scoreSmart(m) {
   const rating = getRating(m);
   const votes = getVotes(m);
@@ -218,7 +448,7 @@ function animeSectionMatch(m, sectionId) {
     m.name,
     m.type,
     m.status,
-    m.overview,
+    overviewOf(m),
     ...getGenres(m)
   ].join(" "));
 
@@ -510,7 +740,7 @@ function applyFilters() {
         m.year,
         m.type,
         m.status,
-        m.overview,
+        overviewOf(m),
         ...getGenres(m)
       ].join(" "));
 
@@ -973,28 +1203,28 @@ function renderMoodResult(mood) {
 
   if (mood === "action") {
     list = list.filter(m => {
-      const text = normalize([m.ru, m.en, m.overview, ...getGenres(m)].join(" "));
+      const text = normalize([m.ru, m.en, overviewOf(m), ...getGenres(m)].join(" "));
       return text.includes("боевик") || text.includes("экшен") || text.includes("action") || text.includes("приключ");
     });
   }
 
   if (mood === "comedy") {
     list = list.filter(m => {
-      const text = normalize([m.ru, m.en, m.overview, ...getGenres(m)].join(" "));
+      const text = normalize([m.ru, m.en, overviewOf(m), ...getGenres(m)].join(" "));
       return text.includes("комедия") || text.includes("comedy");
     });
   }
 
   if (mood === "romance") {
     list = list.filter(m => {
-      const text = normalize([m.ru, m.en, m.overview, ...getGenres(m)].join(" "));
+      const text = normalize([m.ru, m.en, overviewOf(m), ...getGenres(m)].join(" "));
       return text.includes("романтика") || text.includes("romance") || text.includes("любов");
     });
   }
 
   if (mood === "magic") {
     list = list.filter(m => {
-      const text = normalize([m.ru, m.en, m.overview, ...getGenres(m)].join(" "));
+      const text = normalize([m.ru, m.en, overviewOf(m), ...getGenres(m)].join(" "));
       return text.includes("магия") || text.includes("magic") || text.includes("фэнтези") || text.includes("fantasy");
     });
   }
@@ -1045,7 +1275,8 @@ function openDetails(m) {
     `${m.year || "—"} · ${m.type || "—"} · рейтинг ${getRating(m).toFixed(1)} · голосов ${m.votes || 0}`;
 
   $("detailGenres").textContent = getGenres(m).join(" · ");
-$("detailOverview").textContent = overviewOf(m);
+  $("detailOverview").textContent = overviewOf(m);
+  loadRussianDescriptionIntoDialog(m);
 
   $("detailPoster").src = m.poster || "";
   $("detailPoster").style.display = m.poster ? "block" : "none";
