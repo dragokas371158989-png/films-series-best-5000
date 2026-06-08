@@ -2,6 +2,12 @@ const INDEX_URL = "data/index.json";
 const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
 
+// Быстрая загрузка большой базы чанками
+const INITIAL_CHUNKS = 2;
+const BACKGROUND_RENDER_EVERY = 12;
+const BACKGROUND_PAUSE_MS = 80;
+const FILTER_DEBOUNCE_MS = 180;
+
 let allMovies = [];
 let filtered = [];
 let currentPage = 1;
@@ -9,6 +15,8 @@ let currentTab = "all";
 let currentAnimeSection = "";
 let selectedMovie = null;
 const chunkCache = new Map();
+let filterTimer = null;
+let isBackgroundLoading = false;
 
 const $ = (id) => document.getElementById(id);
 
@@ -112,7 +120,56 @@ const ANIME_SECTIONS = [
 ];
 
 function isAnimeItem(m) {
-  return m.type === "Аниме" || getGenres(m).some(g => normalize(g).includes("аниме"));
+  const type = normalize(m.type);
+  const source = normalize(m.source || m.category || m.provider || m.kind);
+  const genres = getGenres(m).map(normalize);
+
+  const text = normalize([
+    m.ru,
+    m.en,
+    m.title,
+    m.name,
+    m.originalTitle,
+    m.type,
+    m.kind,
+    m.status,
+    m.source,
+    m.category,
+    m.provider,
+    m.overview,
+    ...getGenres(m)
+  ].join(" "));
+
+  const hasAnimeWord = text.includes("аниме") || text.includes("anime");
+  const hasAnimeSource =
+    source.includes("anime") ||
+    source.includes("аниме") ||
+    source.includes("shikimori") ||
+    source.includes("myanimelist") ||
+    source.includes("anilist");
+
+  const hasAnimeId = Boolean(
+    m.mal_id ||
+    m.malId ||
+    m.anilist_id ||
+    m.anilistId ||
+    m.shikimori_id ||
+    m.shikimoriId
+  );
+
+  const hasAnimeType = [
+    "аниме",
+    "ova",
+    "ona",
+    "tv",
+    "tv anime",
+    "special",
+    "спешл"
+  ].includes(type);
+
+  const hasAnimeGenre = genres.some(g => g.includes("аниме") || g.includes("anime"));
+
+  return m.isAnime === true || hasAnimeWord || hasAnimeSource || hasAnimeId || hasAnimeType || hasAnimeGenre;
 }
 
 function animeSectionMatch(m, sectionId) {
@@ -226,57 +283,128 @@ function syncAnimePanel() {
 /* ===== ЗАГРУЗКА БАЗЫ ===== */
 
 async function loadData() {
-  $("statusText").textContent = "Загрузка базы...";
+  const status = $("statusText");
+  if (status) status.textContent = "Загрузка базы...";
 
-  let data;
+  allMovies = [];
+  filtered = [];
+  currentPage = 1;
+  chunkCache.clear();
 
   try {
     const indexRes = await fetch(INDEX_URL + "?v=" + Date.now(), { cache: "no-store" });
-    if (indexRes.ok) {
-      data = await loadChunkedData(await indexRes.json());
-    }
-  } catch {}
 
-  if (!data) {
-    const res = await fetch("movies_updates.json?v=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) throw new Error("Не удалось загрузить movies_updates.json");
-    data = await res.json();
+    if (indexRes.ok) {
+      const index = await indexRes.json();
+      const chunks = Array.isArray(index.chunks) ? index.chunks : [];
+
+      if (chunks.length) {
+        await loadChunkedDataFast(index);
+        return;
+      }
+    }
+  } catch (e) {
+    console.warn("data/index.json не загрузился, пробую movies_updates.json", e);
   }
 
+  const res = await fetch("movies_updates.json?v=" + Date.now(), { cache: "no-store" });
+  if (!res.ok) throw new Error("Не удалось загрузить movies_updates.json");
+
+  const data = await res.json();
   allMovies = data.movies || data.items || [];
 
-  $("statusText").textContent = `База: ${allMovies.length} записей · версия ${data.version || "?"} · ${data.generatedAt || ""}`;
+  if (status) {
+    status.textContent = `База: ${allMovies.length} записей · версия ${data.version || "?"} · ${data.generatedAt || ""}`;
+  }
 
   fillFilters();
   applyFilters();
 }
 
-async function loadChunkedData(index) {
-  const chunks = index.chunks || [];
+async function loadChunkedDataFast(index) {
+  const status = $("statusText");
+  const chunks = Array.isArray(index.chunks) ? index.chunks : [];
   const movies = [];
 
-  for (const chunk of chunks) {
-    const url = chunk.file || chunk.url;
-    if (!url) continue;
+  const firstChunks = chunks.slice(0, INITIAL_CHUNKS);
+  const restChunks = chunks.slice(INITIAL_CHUNKS);
 
-    let part = chunkCache.get(url);
-
-    if (!part) {
-      const res = await fetch(url + "?v=" + Date.now(), { cache: "no-store" });
-      if (!res.ok) continue;
-      part = await res.json();
-      chunkCache.set(url, part);
-    }
-
-    if (Array.isArray(part.movies)) movies.push(...part.movies);
-    else if (Array.isArray(part)) movies.push(...part);
+  for (const chunk of firstChunks) {
+    const partMovies = await fetchChunkMovies(chunk);
+    movies.push(...partMovies);
   }
 
-  return {
-    version: index.version || 1,
-    generatedAt: index.generatedAt || "",
-    movies
-  };
+  allMovies = movies;
+
+  if (status) {
+    status.textContent = `База грузится: ${allMovies.length} записей из ${chunks.length} чанков · версия ${index.version || "?"}`;
+  }
+
+  fillFilters();
+  applyFilters();
+
+  if (restChunks.length) {
+    loadRemainingChunksInBackground(index, restChunks, movies).catch(showError);
+  } else if (status) {
+    status.textContent = `База: ${allMovies.length} записей · версия ${index.version || "?"} · ${index.generatedAt || ""}`;
+  }
+}
+
+async function loadRemainingChunksInBackground(index, chunks, movies) {
+  const status = $("statusText");
+  isBackgroundLoading = true;
+
+  let loadedChunksCount = INITIAL_CHUNKS;
+
+  for (const chunk of chunks) {
+    const partMovies = await fetchChunkMovies(chunk);
+    movies.push(...partMovies);
+    loadedChunksCount++;
+
+    if (status) {
+      status.textContent = `База грузится: ${movies.length} записей · чанков ${loadedChunksCount}/${INITIAL_CHUNKS + chunks.length}`;
+    }
+
+    if (loadedChunksCount % BACKGROUND_RENDER_EVERY === 0) {
+      allMovies = movies;
+      applyFilters();
+      await sleep(BACKGROUND_PAUSE_MS);
+    }
+  }
+
+  allMovies = movies;
+  isBackgroundLoading = false;
+
+  if (status) {
+    status.textContent = `База: ${allMovies.length} записей · версия ${index.version || "?"} · ${index.generatedAt || ""}`;
+  }
+
+  fillFilters();
+  applyFilters();
+}
+
+async function fetchChunkMovies(chunk) {
+  const url = chunk.file || chunk.url;
+  if (!url) return [];
+
+  let part = chunkCache.get(url);
+
+  if (!part) {
+    const res = await fetch(url + "?v=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) return [];
+    part = await res.json();
+    chunkCache.set(url, part);
+  }
+
+  if (Array.isArray(part.movies)) return part.movies;
+  if (Array.isArray(part.items)) return part.items;
+  if (Array.isArray(part)) return part;
+
+  return [];
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function fillFilters() {
@@ -309,11 +437,19 @@ function applyFilters() {
 
   if (currentTab === "movies") list = list.filter(m => m.type === "Фильм");
   if (currentTab === "series") list = list.filter(m => m.type === "Сериал");
-  if (currentTab === "cartoons") list = list.filter(m => getGenres(m).some(g => normalize(g).includes("мульт")));
+
+  if (currentTab === "cartoons") {
+    list = list.filter(m =>
+      getGenres(m).some(g => normalize(g).includes("мульт")) &&
+      !isAnimeItem(m)
+    );
+  }
+
   if (currentTab === "anime") {
     list = list.filter(m => isAnimeItem(m));
     list = list.filter(m => animeSectionMatch(m, currentAnimeSection));
   }
+
   if (currentTab === "top") list = list.filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP).slice(0, 250);
   if (currentTab === "new") list = list.filter(m => Number(getYear(m)) >= 2024);
   if (currentTab === "popular") list = list.filter(m => getVotes(m) >= 1000);
@@ -443,9 +579,7 @@ function openDetails(m) {
   $("detailPoster").style.display = m.poster ? "block" : "none";
 
   const q = queryOf(m);
-  const isAnime =
-    m.type === "Аниме" ||
-    getGenres(m).some(g => normalize(g).includes("аниме"));
+  const isAnime = isAnimeItem(m);
 
   const animeLinksBlock = document.getElementById("animeLinksBlock");
   const catalogLinksBlock = document.getElementById("catalogLinksBlock");
@@ -538,6 +672,13 @@ function escapeAttr(s) {
   return escapeHtml(s);
 }
 
+function scheduleApplyFilters() {
+  clearTimeout(filterTimer);
+  filterTimer = setTimeout(() => {
+    applyFilters();
+  }, FILTER_DEBOUNCE_MS);
+}
+
 function setupEvents() {
   [
     "searchInput",
@@ -550,8 +691,8 @@ function setupEvents() {
     const el = $(id);
     if (!el) return;
 
-    el.addEventListener("input", applyFilters);
-    el.addEventListener("change", applyFilters);
+    el.addEventListener("input", scheduleApplyFilters);
+    el.addEventListener("change", scheduleApplyFilters);
   });
 
   const resetBtn = $("resetFiltersBtn");
