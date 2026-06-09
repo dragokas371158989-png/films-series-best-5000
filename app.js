@@ -2768,6 +2768,194 @@ loadData().catch(showError);
 ========================================================= */
 
 const OFFICIAL_EMBEDS = {
+    "Ванпанчмен": [
+    {
+      name: "Rutube — 1 сезон 1 серия",
+      src: "https://rutube.ru/play/embed/d6b0a760d96b6ac2d6bed2193e95f5e0/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 2 серия",
+      src: "https://rutube.ru/play/embed/8c395fcf43a371d4f1338f5a51a5f46f/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 3 серия",
+      src: "https://rutube.ru/play/embed/7b030425b69390b80170fd4e52e9ac1b/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 4 серия",
+      src: "https://rutube.ru/play/embed/045b1d3f176b8db48ce8a5fd3c57c8b6/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 5 серия",
+      src: "https://rutube.ru/play/embed/40ccd7778428998005221a70057c6d0b/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 6 серия",
+      src: "https://rutube.ru/play/embed/563d1ee3e68b3993f933eed1d9158cef/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 7 серия",
+      src: "https://rutube.ru/play/embed/f14286dccb2c4a6598768803331d8112/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 8 серия",
+      src: "https://rutube.ru/play/embed/725962e3357a8aed00378d8f3f8182ee/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 9 серия",
+      src: "https://rutube.ru/play/embed/45564aad021444f37f4883e517b96fcb/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 10 серия",
+      src: "https://rutube.ru/play/embed/562b3d68af589ea5bc1cb56a43e98c14/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 11 серия",
+      src: "https://rutube.ru/play/embed/94070cec15f39b7f9f3a8db0243a19db/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 12 серия",
+      src: "https://rutube.ru/play/embed/40307b2e324ddb314cde0333b1eeab8d/",
+      source: "rutube"
+    }
+  ],
+
+  "One Punch Man": [
+    {
+      name: "Rutube — 1 сезон 1 серия",
+      src: "https://rutube.ru/play/embed/d6b0a760d96b6ac2d6bed2193e95f5e0/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 2 серия",
+      src: "https://rutube.ru/play/embed/8c395fcf43a371d4f1338f5a51a5f46f/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 3 серия",
+      src: "https://rutube.ru/play/embed/7b030425b69390b80170fd4e52e9ac1b/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 4 серия",
+      src: "https://rutube.ru/play/embed/045b1d3f176b8db48ce8a5fd3c57c8b6/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 5 серия",
+      src: "https://rutube.ru/play/embed/40ccd7778428998005221a70057c6d0b/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 6 серия",
+      src: "https://rutube.ru/play/embed/563d1ee3e68b3993f933eed1d9158cef/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 7 серия",
+      src: "https://rutube.ru/play/embed/f14286dccb2c4a6598768803331d8112/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 8 серия",
+      src: "https://rutube.ru/play/embed/725962e3357a8aed00378d8f3f8182ee/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 9 серия",
+      src: "https://rutube.ru/play/embed/45564aad021444f37f4883e517b96fcb/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 10 серия",
+      src: "https://rutube.ru/play/embed/562b3d68af589ea5bc1cb56a43e98c14/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 11 серия",
+      src: "https://rutube.ru/play/embed/94070cec15f39b7f9f3a8db0243a19db/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 12 серия",
+      src: "https://rutube.ru/play/embed/40307b2e324ddb314cde0333b1eeab8d/",
+      source: "rutube"
+    }
+  ],
+
+  "Wanpanman": [
+    {
+      name: "Rutube — 1 сезон 1 серия",
+      src: "https://rutube.ru/play/embed/d6b0a760d96b6ac2d6bed2193e95f5e0/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 2 серия",
+      src: "https://rutube.ru/play/embed/8c395fcf43a371d4f1338f5a51a5f46f/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 3 серия",
+      src: "https://rutube.ru/play/embed/7b030425b69390b80170fd4e52e9ac1b/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 4 серия",
+      src: "https://rutube.ru/play/embed/045b1d3f176b8db48ce8a5fd3c57c8b6/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 5 серия",
+      src: "https://rutube.ru/play/embed/40ccd7778428998005221a70057c6d0b/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 6 серия",
+      src: "https://rutube.ru/play/embed/563d1ee3e68b3993f933eed1d9158cef/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 7 серия",
+      src: "https://rutube.ru/play/embed/f14286dccb2c4a6598768803331d8112/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 8 серия",
+      src: "https://rutube.ru/play/embed/725962e3357a8aed00378d8f3f8182ee/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 9 серия",
+      src: "https://rutube.ru/play/embed/45564aad021444f37f4883e517b96fcb/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 10 серия",
+      src: "https://rutube.ru/play/embed/562b3d68af589ea5bc1cb56a43e98c14/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 11 серия",
+      src: "https://rutube.ru/play/embed/94070cec15f39b7f9f3a8db0243a19db/",
+      source: "rutube"
+    },
+    {
+      name: "Rutube — 1 сезон 12 серия",
+      src: "https://rutube.ru/play/embed/40307b2e324ddb314cde0333b1eeab8d/",
+      source: "rutube"
+    }
+  ],
   "Первородный грех Такопи": [
     {
       name: "Rutube — 1 серия «Спасение Такопи»",
