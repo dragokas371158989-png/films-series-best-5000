@@ -391,20 +391,6 @@ body {
 }
 
 /* Логотип */
-body img:first-of-type {
-  display: block !important;
-  width: auto !important;
-  max-width: calc(100vw - 32px) !important;
-  height: auto !important;
-  max-height: 105px !important;
-  object-fit: contain !important;
-  margin: 10px auto 14px auto !important;
-  float: none !important;
-  position: relative !important;
-  left: auto !important;
-  right: auto !important;
-  transform: none !important;
-}
 
 /* Сетка */
 #grid,
@@ -472,11 +458,7 @@ body img:first-of-type {
     padding-bottom: 160px !important;
   }
 
-  body img:first-of-type {
-    max-width: calc(100vw - 34px) !important;
-    max-height: 95px !important;
-    margin: 8px auto 12px auto !important;
-  }
+  
 
   .card-title {
     font-size: 13px !important;
@@ -502,4 +484,35 @@ body img:first-of-type {
     max-width: calc(100% - 12px) !important;
     font-size: 12px !important;
   }
+}
+/* ===== ФИКС ПОСТЕРОВ ПОСЛЕ ЖЁСТКОГО ФИКСА ===== */
+
+.poster-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+/* Логотип трогаем только по имени файла */
+img[src*="логотип"],
+img[src*="баннер"],
+img[src*="logo"],
+img[src*="banner"] {
+  display: block !important;
+  width: auto !important;
+  max-width: calc(100vw - 32px) !important;
+  height: auto !important;
+  max-height: 105px !important;
+  object-fit: contain !important;
+  margin: 10px auto 14px auto !important;
+  float: none !important;
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
 }
