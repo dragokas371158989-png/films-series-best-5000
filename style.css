@@ -516,3 +516,76 @@ img[src*="banner"] {
   right: auto !important;
   transform: none !important;
 }
+/* ===== НОРМАЛЬНЫЙ РАЗМЕР ПОСТЕРОВ НА ТЕЛЕФОНЕ ===== */
+
+.poster-wrap {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 2 / 3 !important;
+  overflow: hidden !important;
+}
+
+.poster-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  transform: none !important;
+}
+
+.card .poster-wrap img,
+.home-row .poster-wrap img,
+.similar-grid .poster-wrap img,
+#grid .poster-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+}
+
+/* Логотип отдельно, постеры не трогаем */
+img[src*="логотип"],
+img[src*="баннер"],
+img[src*="logo"],
+img[src*="banner"] {
+  display: block !important;
+  width: auto !important;
+  max-width: calc(100vw - 32px) !important;
+  height: auto !important;
+  max-height: 105px !important;
+  object-fit: contain !important;
+  margin: 10px auto 14px auto !important;
+}
+
+/* Телефон */
+@media (max-width: 700px) {
+  .poster-wrap {
+    aspect-ratio: 2 / 3 !important;
+  }
+
+  .poster-wrap img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: cover !important;
+  }
+
+  .card .poster-wrap img,
+  .home-row .poster-wrap img,
+  .similar-grid .poster-wrap img,
+  #grid .poster-wrap img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+  }
+}
