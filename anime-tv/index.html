@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ГОЛУБЬ Anime TV</title>
+
+  <meta name="description" content="ГОЛУБЬ Anime TV — ТВ-версия каталога аниме для Android TV, телефона и браузера.">
+  <meta name="robots" content="index, follow">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="tv-app">
+    <header class="tv-header">
+      <div>
+        <h1>ГОЛУБЬ Anime TV</h1>
+        <p id="statusText">Загрузка базы аниме...</p>
+      </div>
+
+      <a class="home-link" href="../index.html">← На главный сайт</a>
+    </header>
+
+    <section class="tv-search-panel">
+      <input id="searchInput" type="search" placeholder="Поиск: наруто, фрирен, атака титанов..." />
+
+      <select id="yearFilter">
+        <option value="">Все годы</option>
+      </select>
+
+      <select id="typeFilter">
+        <option value="">Все типы</option>
+      </select>
+
+      <button id="searchBtn">ПОИСК</button>
+      <button id="resetBtn">СБРОС</button>
+    </section>
+
+    <nav class="tv-tabs">
+      <button class="tab active" data-tab="all">Все</button>
+      <button class="tab" data-tab="new">Новые</button>
+      <button class="tab" data-tab="top">Топ</button>
+      <button class="tab" data-tab="fav">Избранное</button>
+      <button class="tab" data-tab="history">История</button>
+      <button class="tab" data-tab="random">Случайное</button>
+    </nav>
+
+    <section class="tv-info">
+      <span id="countText">Найдено: 0</span>
+      <span id="pageText">Страница 1</span>
+      <span>OK / Enter — детали</span>
+    </section>
+
+    <section id="grid" class="anime-grid"></section>
+
+    <section class="pager">
+      <button id="prevBtn">НАЗАД</button>
+      <button id="nextBtn">ВПЕРЁД</button>
+    </section>
+  </main>
+
+  <dialog id="detailDialog" class="detail-dialog">
+    <div class="detail-box">
+      <button id="closeDialog" class="close-btn">✕</button>
+
+      <div class="detail-layout">
+        <img id="detailPoster" class="detail-poster" alt="Постер" />
+
+        <div class="detail-content">
+          <h2 id="detailTitle"></h2>
+          <p id="detailMeta"></p>
+          <p id="detailGenres"></p>
+          <p id="detailOverview"></p>
+
+          <div class="detail-actions">
+            <button id="favBtn">★ В избранное</button>
+            <button id="watchBtn">▶ Где смотреть</button>
+            <button id="similarBtn">Похожие</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
