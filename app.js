@@ -2694,8 +2694,11 @@ function addOfficialEmbedButtonsToDetails(movie) {
 addRutubeSeasonFromText({
   titles: [
     "Ванпанчмен",
+    "Ванпанчмен 2 сезон",
     "One Punch Man",
     "One-Punch Man",
+    "One-Punch Man Season 2",
+    "One Punch Man Season 2",
     "Wanpanman"
   ],
   season: 2,
