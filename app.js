@@ -1,6 +1,7 @@
 const INDEX_URL = "data/index.json";
 const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
+const PLAYER_API_URL = "https://divine-wildflower-20ef.dragokas371158989.workers.dev";
 
 const TMDB_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzIyNGQ4YzcwMmRkYTIzNjA4MzhhY2UxY2M2OWYyMiIsIm5iZiI6MTc4MDc1MjI0OC44MDE5OTk4LCJzdWIiOiI2YTI0MWY3ODliOWVkZGRjMTUzODU4MTIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.NLC1CjRTfRJpOpZ2mlXZRSpFuWI2zHDFT6IEQnlD4IM";
 
@@ -2772,27 +2773,118 @@ function findVideoAndSearchBlock() {
   );
 }
 
-function addOfficialEmbedButtonsToDetails(movie) {
+async function fetchOfficialEmbedsFromWorker(movie) {
+  if (!movie || !PLAYER_API_URL) return [];
+
+  const titles = getMovieTitleCandidates(movie);
+
+  for (const title of titles) {
+    try {
+      const url = `${PLAYER_API_URL}/player?title=${encodeURIComponent(title)}`;
+      const res = await fetch(url, { cache: "no-store" });
+
+      if (!res.ok) continue;
+
+      const data = await res.json();
+      const player = data && data.player;
+
+      if (!data || !data.ok || !data.found || !player) continue;
+
+      const embeds = [];
+
+      if (Array.isArray(player.players)) {
+        player.players.forEach(item => {
+          if (!item || !item.src) return;
+
+          embeds.push({
+            name: item.name || "Rutube — смотреть",
+            src: item.src,
+            source: item.source || "rutube"
+          });
+        });
+      }
+
+      if (Array.isArray(player.seasons)) {
+        player.seasons.forEach(seasonItem => {
+          const seasonNumber = Number(seasonItem.season || 1);
+          const episodes = Array.isArray(seasonItem.episodes) ? seasonItem.episodes : [];
+
+          episodes.forEach(ep => {
+            if (!ep || !ep.src) return;
+
+            embeds.push({
+              name: ep.name || `${seasonNumber} сезон ${ep.episode || ""} серия`,
+              season: seasonNumber,
+              episode: ep.episode || 0,
+              src: ep.src,
+              source: ep.source || "rutube"
+            });
+          });
+        });
+      }
+
+      if (embeds.length) {
+        console.log("Rutube API: найден плеер", title, embeds.length);
+        return embeds;
+      }
+    } catch (e) {
+      console.warn("Rutube API: ошибка запроса", title, e);
+    }
+  }
+
+  return [];
+}
+
+async function getOfficialEmbedsForMovieAsync(movie) {
+  const apiEmbeds = await fetchOfficialEmbedsFromWorker(movie);
+
+  if (apiEmbeds.length) {
+    return apiEmbeds;
+  }
+
+  return getOfficialEmbedsForMovie(movie);
+}
+
+function getOfficialEmbedsBoxTitle(embeds) {
+  const hasEpisodes = embeds.some(x => x && (x.episode || x.season || /сезон|серия/i.test(String(x.name || ""))));
+
+  return hasEpisodes ? "Серии Rutube" : "Видео Rutube";
+}
+
+async function addOfficialEmbedButtonsToDetails(movie) {
   injectOfficialEmbedStyles();
 
-  const embeds = getOfficialEmbedsForMovie(movie);
-
   document.querySelectorAll(".official-episodes-box").forEach(el => el.remove());
-
-  if (!embeds.length) {
-    console.warn("Rutube: для карточки не найдены серии", getMovieTitleCandidates(movie));
-    return;
-  }
 
   const videoBlock = findVideoAndSearchBlock();
   if (!videoBlock) return;
 
   const episodesBox = document.createElement("div");
   episodesBox.className = "official-episodes-box";
+  episodesBox.innerHTML = `
+    <h3 class="official-episodes-title">Rutube</h3>
+    <div class="official-episodes-loading">Ищу плеер...</div>
+  `;
+  videoBlock.appendChild(episodesBox);
+
+  const embeds = await getOfficialEmbedsForMovieAsync(movie);
+
+  if (selectedMovie && movie && String(selectedMovie.id) !== String(movie.id)) {
+    episodesBox.remove();
+    return;
+  }
+
+  if (!embeds.length) {
+    episodesBox.remove();
+    console.warn("Rutube: для карточки не найдены серии", getMovieTitleCandidates(movie));
+    return;
+  }
+
+  episodesBox.innerHTML = "";
 
   const title = document.createElement("h3");
   title.className = "official-episodes-title";
-  title.textContent = "Серии Rutube";
+  title.textContent = getOfficialEmbedsBoxTitle(embeds);
 
   const grid = document.createElement("div");
   grid.className = "official-episodes-grid";
@@ -2801,7 +2893,7 @@ function addOfficialEmbedButtonsToDetails(movie) {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "official-embed-btn";
-    btn.textContent = embed.name
+    btn.textContent = String(embed.name || "Смотреть")
       .replace(/^Rutube\s*—\s*/i, "")
       .replace(/^Рутуб\s*—\s*/i, "");
 
@@ -2815,7 +2907,6 @@ function addOfficialEmbedButtonsToDetails(movie) {
 
   episodesBox.appendChild(title);
   episodesBox.appendChild(grid);
-  videoBlock.appendChild(episodesBox);
 }
 
 
