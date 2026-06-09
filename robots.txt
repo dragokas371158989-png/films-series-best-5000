@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dragokas371158989-png.github.io/films-series-best-5000/sitemap.xml
