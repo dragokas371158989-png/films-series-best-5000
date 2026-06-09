@@ -3205,6 +3205,57 @@ function addOfficialEmbedButtonsToDetails(movie) {
   const embeds = getOfficialEmbedsForMovie(movie);
   if (!embeds.length) return;
 
+  document.querySelectorAll(".official-episodes-box").forEach(el => el.remove());
+
+  let videoBlock = null;
+
+  document.querySelectorAll("section, div").forEach(el => {
+    const h = el.querySelector("h3, h2");
+    if (h && h.textContent.trim().toLowerCase().includes("видео")) {
+      videoBlock = el;
+    }
+  });
+
+  if (!videoBlock) {
+    videoBlock =
+      document.querySelector("#catalogLinksBlock") ||
+      document.querySelector(".detail-links") ||
+      document.querySelector(".details-body") ||
+      document.querySelector("#detailsDialog") ||
+      document.body;
+  }
+
+  const episodesBox = document.createElement("div");
+  episodesBox.className = "official-episodes-box";
+
+  const title = document.createElement("h3");
+  title.className = "official-episodes-title";
+  title.textContent = "Серии Rutube";
+
+  const grid = document.createElement("div");
+  grid.className = "official-episodes-grid";
+
+  embeds.forEach((embed, index) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "official-embed-btn";
+    btn.textContent = `${index + 1} серия`;
+
+    btn.addEventListener("click", () => {
+      closeDetailsBeforePlayer();
+      openOfficialEmbedPlayer(embed);
+    });
+
+    grid.appendChild(btn);
+  });
+
+  episodesBox.appendChild(title);
+  episodesBox.appendChild(grid);
+  videoBlock.appendChild(episodesBox);
+}
+  const embeds = getOfficialEmbedsForMovie(movie);
+  if (!embeds.length) return;
+
   const detailButtons =
     document.querySelector(".detail-buttons") ||
     document.querySelector(".watch-links") ||
