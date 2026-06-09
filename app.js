@@ -2326,5 +2326,409 @@ function showError(e) {
   }
 }
 
+
+/* =========================================================
+   RUTUBE ПЛЕЕР И СЕЗОНЫ
+   Добавлено: Ванпанчмен / One Punch Man — 2 сезон
+========================================================= */
+
+window.OFFICIAL_EMBEDS = window.OFFICIAL_EMBEDS || {};
+
+function extractRutubeEmbedLinks(text) {
+  const raw = String(text || "");
+  const links = [];
+
+  const embedRegex = /https:\/\/rutube\.ru\/play\/embed\/[a-zA-Z0-9_-]+\/?/g;
+  const videoRegex = /https:\/\/rutube\.ru\/video\/([a-zA-Z0-9_-]+)\/?/g;
+
+  const embedMatches = raw.match(embedRegex) || [];
+
+  embedMatches.forEach(link => {
+    const clean = link.endsWith("/") ? link : link + "/";
+    if (!links.includes(clean)) links.push(clean);
+  });
+
+  let match;
+
+  while ((match = videoRegex.exec(raw)) !== null) {
+    const id = match[1];
+    const embed = `https://rutube.ru/play/embed/${id}/`;
+
+    if (!links.includes(embed)) links.push(embed);
+  }
+
+  return links;
+}
+
+function addRutubeSeasonFromText(config) {
+  const titles = config.titles || [];
+  const season = config.season || 1;
+  const text = config.text || "";
+
+  const links = extractRutubeEmbedLinks(text);
+
+  const episodes = links.map((src, index) => {
+    return {
+      name: `Rutube — ${season} сезон ${index + 1} серия`,
+      src,
+      source: "rutube"
+    };
+  });
+
+  titles.forEach(title => {
+    if (!window.OFFICIAL_EMBEDS[title]) {
+      window.OFFICIAL_EMBEDS[title] = [];
+    }
+
+    const exists = new Set(window.OFFICIAL_EMBEDS[title].map(x => x.src));
+    episodes.forEach(ep => {
+      if (!exists.has(ep.src)) {
+        window.OFFICIAL_EMBEDS[title].push(ep);
+      }
+    });
+  });
+
+  console.log(`Rutube: добавлено серий ${episodes.length}`, titles);
+}
+
+function normalizeEmbedTitle(text) {
+  return String(text || "")
+    .toLowerCase()
+    .replace(/ё/g, "е")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function getOfficialEmbedsForMovie(movie) {
+  if (!movie) return [];
+
+  const candidates = [
+    movie.ru,
+    movie.en,
+    movie.title,
+    movie.name,
+    movie.title_ru,
+    movie.name_ru,
+    movie.title_en,
+    movie.name_en,
+    movie.russian,
+    movie.english,
+    movie.originalTitle,
+    typeof titleOf === "function" ? titleOf(movie) : ""
+  ]
+    .filter(Boolean)
+    .map(x => String(x).trim());
+
+  const normalizedCandidates = new Set(candidates.map(normalizeEmbedTitle));
+
+  for (const key of Object.keys(window.OFFICIAL_EMBEDS)) {
+    const normalizedKey = normalizeEmbedTitle(key);
+
+    if (normalizedCandidates.has(normalizedKey)) {
+      return window.OFFICIAL_EMBEDS[key] || [];
+    }
+  }
+
+  return [];
+}
+
+function injectOfficialEmbedStyles() {
+  if (document.getElementById("officialEmbedStyles")) return;
+
+  const style = document.createElement("style");
+  style.id = "officialEmbedStyles";
+  style.textContent = `
+    .official-episodes-box {
+      width: 100%;
+      max-width: 820px;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(2, 6, 23, 0.76);
+      border: 1px solid rgba(34, 211, 238, 0.35);
+      box-shadow: 0 0 18px rgba(59, 130, 246, 0.18);
+      box-sizing: border-box;
+    }
+
+    .official-episodes-title {
+      margin: 0 0 12px;
+      color: #facc15;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .official-episodes-grid {
+      display: grid !important;
+      grid-template-columns: repeat(4, minmax(100px, 1fr));
+      gap: 10px;
+      width: 100%;
+    }
+
+    .official-embed-btn {
+      min-height: 46px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      background: linear-gradient(135deg, #7c3aed, #312e81);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 0 14px rgba(124, 58, 237, 0.25);
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    .official-embed-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.14);
+    }
+
+    .official-embed-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.82);
+      box-sizing: border-box;
+    }
+
+    .official-embed-modal {
+      width: min(1100px, 100%);
+      background: #020617;
+      border: 1px solid rgba(34, 211, 238, 0.45);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 36px rgba(124, 58, 237, 0.55);
+    }
+
+    .official-embed-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      color: white;
+      font-weight: 900;
+      border-bottom: 1px solid rgba(34, 211, 238, 0.22);
+    }
+
+    .official-embed-close {
+      border: 0;
+      border-radius: 10px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .official-embed-frame-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .official-embed-frame-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    @media (max-width: 900px) {
+      .official-episodes-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .official-episodes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .official-embed-backdrop {
+        padding: 8px;
+      }
+
+      .official-embed-modal {
+        border-radius: 14px;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+function closeDetailsBeforePlayer() {
+  const dialog = document.getElementById("detailsDialog");
+
+  if (dialog) {
+    if (typeof dialog.close === "function" && dialog.open) {
+      try {
+        dialog.close();
+      } catch (e) {}
+    }
+
+    dialog.classList.remove("open", "active", "show");
+  }
+
+  document.body.classList.remove("modal-open", "dialog-open");
+}
+
+function openOfficialEmbedPlayer(embed) {
+  injectOfficialEmbedStyles();
+
+  const old = document.getElementById("officialEmbedPlayer");
+  if (old) old.remove();
+
+  const backdrop = document.createElement("div");
+  backdrop.id = "officialEmbedPlayer";
+  backdrop.className = "official-embed-backdrop";
+
+  backdrop.innerHTML = `
+    <div class="official-embed-modal">
+      <div class="official-embed-head">
+        <span>${escapeHtml(embed.name || "Rutube")}</span>
+        <button class="official-embed-close" type="button" aria-label="Закрыть">×</button>
+      </div>
+      <div class="official-embed-frame-wrap">
+        <iframe
+          src="${escapeAttr(embed.src)}"
+          allow="clipboard-write; autoplay; fullscreen"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(backdrop);
+
+  const close = () => backdrop.remove();
+
+  backdrop.querySelector(".official-embed-close").addEventListener("click", close);
+  backdrop.addEventListener("click", e => {
+    if (e.target === backdrop) close();
+  });
+
+  document.addEventListener("keydown", function escClose(e) {
+    if (e.key === "Escape") {
+      close();
+      document.removeEventListener("keydown", escClose);
+    }
+  });
+}
+
+function findVideoAndSearchBlock() {
+  let videoBlock = null;
+
+  document.querySelectorAll("section, div").forEach(el => {
+    const h = el.querySelector("h3, h2");
+    const text = h ? h.textContent.trim().toLowerCase() : "";
+
+    if (text.includes("видео")) {
+      videoBlock = el;
+    }
+  });
+
+  return (
+    videoBlock ||
+    document.querySelector("#catalogLinksBlock") ||
+    document.querySelector(".detail-links") ||
+    document.querySelector(".details-body") ||
+    document.querySelector("#detailsDialog")
+  );
+}
+
+function addOfficialEmbedButtonsToDetails(movie) {
+  injectOfficialEmbedStyles();
+
+  const embeds = getOfficialEmbedsForMovie(movie);
+
+  document.querySelectorAll(".official-episodes-box").forEach(el => el.remove());
+
+  if (!embeds.length) return;
+
+  const videoBlock = findVideoAndSearchBlock();
+  if (!videoBlock) return;
+
+  const episodesBox = document.createElement("div");
+  episodesBox.className = "official-episodes-box";
+
+  const title = document.createElement("h3");
+  title.className = "official-episodes-title";
+  title.textContent = "Серии Rutube";
+
+  const grid = document.createElement("div");
+  grid.className = "official-episodes-grid";
+
+  embeds.forEach((embed, index) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "official-embed-btn";
+    btn.textContent = embed.name
+      .replace(/^Rutube\s*—\s*/i, "")
+      .replace(/^Рутуб\s*—\s*/i, "");
+
+    btn.addEventListener("click", () => {
+      closeDetailsBeforePlayer();
+      openOfficialEmbedPlayer(embed);
+    });
+
+    grid.appendChild(btn);
+  });
+
+  episodesBox.appendChild(title);
+  episodesBox.appendChild(grid);
+  videoBlock.appendChild(episodesBox);
+}
+
+/* ===== ВАНПАНЧМЕН — 2 СЕЗОН ===== */
+
+addRutubeSeasonFromText({
+  titles: [
+    "Ванпанчмен",
+    "One Punch Man",
+    "One-Punch Man",
+    "Wanpanman"
+  ],
+  season: 2,
+  text: `
+https://rutube.ru/video/356fa10c37e612bdecc66231ac8b6498/?playlist=349758
+https://rutube.ru/video/bfb824cc997a4fe83f9cddbd387c8c4d/?playlist=349758
+https://rutube.ru/video/3c60c6485c81e9b0298645e804693995/?playlist=349758
+https://rutube.ru/video/2d10e011fd785e2738233b50b1438fb1/?playlist=349758
+https://rutube.ru/video/8e0f6733d56967506917476abcc5e61d/?playlist=349758
+https://rutube.ru/video/7ca15b521c53aa484f1edfd5734dcc92/?playlist=349758
+https://rutube.ru/video/05ddc67f6abad10539de0f203d8d421f/?playlist=349758
+https://rutube.ru/video/c45ae818dda7caa276a86adb91ad85bc/?playlist=349758
+https://rutube.ru/video/7ea3e33b1cc749e25d6d280eff6e0e4a/?playlist=349758
+https://rutube.ru/video/5f5ece953b9cfe1c69cf2ede933be862/?playlist=349758
+https://rutube.ru/video/a9d0753888e19fd7955c6436f2d033f1/?playlist=349758
+https://rutube.ru/video/714734c6c2bd1bf445febc0d88decaec/?playlist=349758
+  `
+});
+
+if (typeof openDetails === "function" && !window.__officialEmbedOpenDetailsPatched) {
+  window.__officialEmbedOpenDetailsPatched = true;
+  const originalOpenDetails = openDetails;
+
+  openDetails = function patchedOpenDetails(movie) {
+    originalOpenDetails(movie);
+
+    setTimeout(() => {
+      if (!selectedMovie || String(selectedMovie.id) !== String(movie.id)) return;
+      addOfficialEmbedButtonsToDetails(movie);
+    }, 0);
+  };
+}
+
+
 setupEvents();
 loadData().catch(showError);
