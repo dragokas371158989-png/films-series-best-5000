@@ -1130,3 +1130,66 @@ button[data-reset],
   transform: translateY(-1px);
   filter: brightness(1.12);
 }
+/* ===== КНОПКИ СЕРИЙ RUTUBE НОРМАЛЬНОЙ СЕТКОЙ ===== */
+
+.official-episodes-box {
+  width: 100%;
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(2, 6, 23, 0.72);
+  border: 1px solid rgba(34, 211, 238, 0.32);
+  box-shadow: 0 0 18px rgba(59, 130, 246, 0.18);
+}
+
+.official-episodes-title {
+  margin: 0 0 12px;
+  color: #facc15;
+  font-size: 18px;
+}
+
+.official-episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.official-embed-btn {
+  min-height: 46px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(103, 232, 249, 0.55);
+  background: linear-gradient(135deg, #7c3aed, #312e81);
+  color: white;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(124, 58, 237, 0.25);
+  text-align: center;
+  line-height: 1.15;
+}
+
+.official-embed-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.14);
+}
+
+/* чтобы кнопки не растягивались одной колонкой */
+.detail-buttons .official-episodes-box {
+  flex-basis: 100%;
+}
+
+.detail-buttons .official-episodes-grid {
+  display: grid !important;
+}
+
+@media (max-width: 700px) {
+  .official-episodes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .official-embed-btn {
+    font-size: 14px;
+    min-height: 44px;
+  }
+}
