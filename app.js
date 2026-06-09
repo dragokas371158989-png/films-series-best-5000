@@ -126,7 +126,181 @@ function getGenres(m) {
 function normalize(s) {
   return String(s || "").toLowerCase().trim();
 }
+/* ===== УМНЫЙ ПОИСК С ОШИБКАМИ ===== */
 
+const KEYBOARD_RU_TO_EN = {
+  "й": "q", "ц": "w", "у": "e", "к": "r", "е": "t", "н": "y", "г": "u", "ш": "i", "щ": "o", "з": "p", "х": "[", "ъ": "]",
+  "ф": "a", "ы": "s", "в": "d", "а": "f", "п": "g", "р": "h", "о": "j", "л": "k", "д": "l", "ж": ";", "э": "'",
+  "я": "z", "ч": "x", "с": "c", "м": "v", "и": "b", "т": "n", "ь": "m", "б": ",", "ю": ".", "ё": "`"
+};
+
+const KEYBOARD_EN_TO_RU = Object.fromEntries(
+  Object.entries(KEYBOARD_RU_TO_EN).map(([ru, en]) => [en, ru])
+);
+
+function switchKeyboardLayout(text, map) {
+  return String(text || "")
+    .toLowerCase()
+    .split("")
+    .map(ch => map[ch] || ch)
+    .join("");
+}
+
+function simpleSearchNormalize(text) {
+  return normalize(text)
+    .replace(/ё/g, "е")
+    .replace(/[^\p{L}\p{N}\s]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function levenshteinDistance(a, b) {
+  a = simpleSearchNormalize(a);
+  b = simpleSearchNormalize(b);
+
+  if (a === b) return 0;
+  if (!a || !b) return Math.max(a.length, b.length);
+
+  const diff = Math.abs(a.length - b.length);
+  if (diff > 3) return 99;
+
+  const dp = Array(b.length + 1);
+
+  for (let j = 0; j <= b.length; j++) dp[j] = j;
+
+  for (let i = 1; i <= a.length; i++) {
+    let prev = dp[0];
+    dp[0] = i;
+
+    for (let j = 1; j <= b.length; j++) {
+      const temp = dp[j];
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+
+      dp[j] = Math.min(
+        dp[j] + 1,
+        dp[j - 1] + 1,
+        prev + cost
+      );
+
+      prev = temp;
+    }
+  }
+
+  return dp[b.length];
+}
+
+function allowedTypoDistance(q) {
+  const len = simpleSearchNormalize(q).length;
+
+  if (len <= 2) return 0;
+  if (len <= 4) return 1;
+  if (len <= 8) return 2;
+
+  return 3;
+}
+
+function smartSearchVariants(q) {
+  const base = simpleSearchNormalize(q);
+  const variants = new Set();
+
+  if (base) variants.add(base);
+
+  const ruToEn = simpleSearchNormalize(switchKeyboardLayout(base, KEYBOARD_RU_TO_EN));
+  const enToRu = simpleSearchNormalize(switchKeyboardLayout(base, KEYBOARD_EN_TO_RU));
+
+  if (ruToEn) variants.add(ruToEn);
+  if (enToRu) variants.add(enToRu);
+
+  return [...variants].filter(Boolean);
+}
+
+function movieSearchFields(m) {
+  return [
+    m.ru,
+    m.en,
+    m.title,
+    m.name,
+    m.originalTitle,
+    m.russianTitle,
+    m.englishTitle,
+    titleOf(m),
+    getYear(m),
+    m.type,
+    ...getGenres(m)
+  ]
+    .filter(Boolean)
+    .map(simpleSearchNormalize)
+    .filter(Boolean);
+}
+
+function smartMovieSearchScore(m, qVariants) {
+  if (!qVariants.length) return 0;
+
+  const fields = movieSearchFields(m);
+  const joined = fields.join(" ");
+
+  let bestScore = 0;
+
+  for (const q of qVariants) {
+    if (!q) continue;
+
+    if (joined.includes(q)) {
+      bestScore = Math.max(bestScore, 1000 + q.length);
+      continue;
+    }
+
+    const qWords = q.split(" ").filter(Boolean);
+
+    for (const field of fields) {
+      if (!field) continue;
+
+      if (field.startsWith(q)) {
+        bestScore = Math.max(bestScore, 900 + q.length);
+      }
+
+      const fieldWords = field.split(" ").filter(Boolean);
+
+      for (const qw of qWords) {
+        if (qw.length < 3) continue;
+
+        for (const fw of fieldWords) {
+          if (fw.length < 3) continue;
+
+          if (fw.includes(qw) || qw.includes(fw)) {
+            bestScore = Math.max(bestScore, 750 + Math.min(qw.length, fw.length));
+            continue;
+          }
+
+          const dist = levenshteinDistance(qw, fw);
+          const allowed = allowedTypoDistance(qw);
+
+          if (dist <= allowed) {
+            bestScore = Math.max(bestScore, 650 - dist * 60 + qw.length);
+          }
+        }
+      }
+
+      if (q.length >= 4) {
+        const distFull = levenshteinDistance(q, field);
+        const allowedFull = allowedTypoDistance(q);
+
+        if (distFull <= allowedFull) {
+          bestScore = Math.max(bestScore, 700 - distFull * 60 + q.length);
+        }
+      }
+    }
+  }
+
+  if (bestScore > 0) {
+    bestScore += Math.min(getRating(m), 10);
+  }
+
+  return bestScore;
+}
+
+function smartMovieMatch(m, qVariants) {
+  return smartMovieSearchScore(m, qVariants) > 0;
+}
 function queryOf(m) {
   return encodeURIComponent(titleOf(m));
 }
@@ -833,20 +1007,23 @@ list = list.filter(hasRuOrEnTitle);
   }
 
   if (q) {
-    list = list.filter(m => {
-      const hay = normalize([
-        m.ru,
-        m.en,
-        m.year,
-        m.type,
-        m.status,
-        overviewOf(m),
-        ...getGenres(m)
-      ].join(" "));
+  const qVariants = smartSearchVariants(q);
 
-      return hay.includes(q);
-    });
-  }
+  list = list
+    .map(m => ({
+      movie: m,
+      searchScore: smartMovieSearchScore(m, qVariants)
+    }))
+    .filter(x => x.searchScore > 0)
+    .sort((a, b) => {
+      if (b.searchScore !== a.searchScore) {
+        return b.searchScore - a.searchScore;
+      }
+
+      return scoreSmart(b.movie) - scoreSmart(a.movie);
+    })
+    .map(x => x.movie);
+}
 
   if (type) list = list.filter(m => m.type === type);
   if (genre) list = list.filter(m => getGenres(m).includes(genre));
