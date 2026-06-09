@@ -2353,14 +2353,14 @@ function extractRutubeEmbedLinks(text) {
   const embedMatches = raw.match(embedRegex) || [];
 
   embedMatches.forEach(link => {
-    const clean = link.endsWith("/") ? link : link + "/";
+    const clean = link.replace(/\/+$/, "");
     if (!links.includes(clean)) links.push(clean);
   });
 
   let match;
   while ((match = videoRegex.exec(raw)) !== null) {
     const id = match[1];
-    const embed = `https://rutube.ru/play/embed/${id}/`;
+    const embed = `https://rutube.ru/play/embed/${id}`;
     if (!links.includes(embed)) links.push(embed);
   }
 
@@ -2800,7 +2800,7 @@ function openOfficialEmbedPlayer(embed) {
       </div>
       <div class="official-embed-frame-wrap">
         <iframe
-          src="${escapeAttr(embed.src)}"
+          src="${escapeAttr(String(embed.src || "").replace(/\/+$/, ""))}"
           allow="clipboard-write; autoplay; fullscreen"
           allowfullscreen
         ></iframe>
