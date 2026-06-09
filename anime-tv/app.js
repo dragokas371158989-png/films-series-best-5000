@@ -509,6 +509,54 @@ function setupEvents() {
     }
   });
 }
+/* ===== КНОПКА ANIME TV НА ГЛАВНОЙ — АВТОДОБАВЛЕНИЕ ===== */
 
+function addAnimeTvButtonToMainSite() {
+  if (document.getElementById("animeTvMainLink")) return;
+
+  const link = document.createElement("a");
+  link.id = "animeTvMainLink";
+  link.href = "anime-tv/";
+  link.textContent = "🐉 Anime TV";
+  link.className = "tab anime-tv-main-link";
+
+  link.style.display = "inline-flex";
+  link.style.alignItems = "center";
+  link.style.justifyContent = "center";
+  link.style.gap = "8px";
+  link.style.textDecoration = "none";
+  link.style.color = "#fff";
+  link.style.fontWeight = "900";
+  link.style.background = "linear-gradient(135deg, #7c3aed, #06b6d4)";
+  link.style.border = "1px solid rgba(0, 229, 255, 0.55)";
+  link.style.boxShadow = "0 0 18px rgba(124, 58, 237, 0.45)";
+  link.style.borderRadius = "14px";
+  link.style.padding = "10px 16px";
+  link.style.minHeight = "44px";
+  link.style.cursor = "pointer";
+
+  const tabBar =
+    document.querySelector(".tabs") ||
+    document.querySelector(".tabbar") ||
+    document.querySelector(".nav-tabs") ||
+    document.querySelector(".filters") ||
+    document.querySelector("nav") ||
+    document.querySelector("header");
+
+  if (tabBar) {
+    tabBar.appendChild(link);
+  } else {
+    link.style.position = "fixed";
+    link.style.right = "16px";
+    link.style.bottom = "16px";
+    link.style.zIndex = "9999";
+    document.body.appendChild(link);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", addAnimeTvButtonToMainSite);
+
+setTimeout(addAnimeTvButtonToMainSite, 500);
+setTimeout(addAnimeTvButtonToMainSite, 1500);
 setupEvents();
 loadData();
