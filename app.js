@@ -971,6 +971,7 @@ function applyFilters() {
   const sort = sortFilter ? sortFilter.value : "smart";
 
   let list = [...allMovies];
+  
 list = list.filter(hasRuOrEnTitle);
   if (currentTab === "movies") list = list.filter(m => m.type === "Фильм");
   if (currentTab === "series") list = list.filter(m => m.type === "Сериал");
@@ -1030,7 +1031,9 @@ list = list.filter(hasRuOrEnTitle);
   if (year) list = list.filter(m => getYear(m) === year);
   if (minRating) list = list.filter(m => getRating(m) >= minRating);
 
+if (!q) {
   list = sortList(list, sort);
+}
 
   filtered = list;
   currentPage = 1;
