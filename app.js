@@ -1292,12 +1292,48 @@ function injectCardFixStyle() {
   style.id = "cardFixStyle";
   style.textContent = `
     body {
-      padding-bottom: 110px !important;
+      padding-bottom: 120px !important;
+      overflow-x: hidden !important;
     }
 
     #grid {
-      padding-bottom: 150px !important;
+      padding-bottom: 170px !important;
+      overflow-x: hidden !important;
     }
+
+    /* ===== ЛОГОТИП ===== */
+
+    img[src*="логотип"],
+    img[src*="баннер"],
+    img[src*="logo"],
+    img[src*="banner"],
+    header img:first-child,
+    .header img:first-child {
+      display: block !important;
+      width: auto !important;
+      max-width: min(620px, calc(100vw - 28px)) !important;
+      height: auto !important;
+      max-height: 130px !important;
+      object-fit: contain !important;
+      margin: 10px auto 12px auto !important;
+      float: none !important;
+      position: relative !important;
+      left: auto !important;
+      right: auto !important;
+      transform: none !important;
+    }
+
+    header,
+    .header,
+    .top,
+    .topbar {
+      width: 100% !important;
+      box-sizing: border-box !important;
+      text-align: center !important;
+      overflow: hidden !important;
+    }
+
+    /* ===== КАРТОЧКИ ===== */
 
     .card {
       overflow: hidden !important;
@@ -1305,6 +1341,7 @@ function injectCardFixStyle() {
       flex-direction: column !important;
       min-width: 0 !important;
       height: 100% !important;
+      box-sizing: border-box !important;
     }
 
     .poster-wrap {
@@ -1344,6 +1381,7 @@ function injectCardFixStyle() {
       color: rgba(255,255,255,.45) !important;
       font-weight: 800 !important;
       font-size: 13px !important;
+      box-sizing: border-box !important;
       background:
         radial-gradient(circle at center, rgba(124,58,237,.28), transparent 45%),
         linear-gradient(180deg, #160b38, #060817) !important;
@@ -1353,9 +1391,10 @@ function injectCardFixStyle() {
       display: flex !important;
       flex-direction: column !important;
       flex: 1 !important;
-      min-height: 165px !important;
+      min-height: 168px !important;
       min-width: 0 !important;
       overflow: hidden !important;
+      box-sizing: border-box !important;
       padding-bottom: 12px !important;
     }
 
@@ -1378,8 +1417,11 @@ function injectCardFixStyle() {
 
     .rating {
       margin-top: auto !important;
-      width: 100% !important;
-      max-width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      width: calc(100% - 16px) !important;
+      max-width: calc(100% - 16px) !important;
+      min-width: 0 !important;
       min-height: 44px !important;
       box-sizing: border-box !important;
       display: flex !important;
@@ -1388,22 +1430,60 @@ function injectCardFixStyle() {
       white-space: nowrap !important;
       overflow: hidden !important;
       text-overflow: ellipsis !important;
-      font-size: clamp(14px, 1.15vw, 18px) !important;
-      padding: 9px 8px !important;
+      font-size: 16px !important;
+      line-height: 1 !important;
+      padding: 8px 6px !important;
       flex-shrink: 0 !important;
+      align-self: center !important;
+      transform: none !important;
+      left: auto !important;
+      right: auto !important;
+    }
+
+    .rating-short {
+      display: none;
     }
 
     .similar-block {
-      padding-bottom: 120px !important;
+      padding-bottom: 160px !important;
+    }
+
+    .similar-grid {
+      overflow: hidden !important;
+    }
+
+    .similar-grid .card {
+      min-width: 0 !important;
+    }
+
+    .similar-grid .rating {
+      width: calc(100% - 14px) !important;
+      max-width: calc(100% - 14px) !important;
+      font-size: 14px !important;
+      min-height: 40px !important;
+      padding: 7px 5px !important;
     }
 
     @media (max-width: 700px) {
       body {
-        padding-bottom: 140px !important;
+        padding-bottom: 150px !important;
       }
 
       #grid {
-        padding-bottom: 170px !important;
+        padding-bottom: 190px !important;
+      }
+
+      img[src*="логотип"],
+      img[src*="баннер"],
+      img[src*="logo"],
+      img[src*="banner"],
+      header img:first-child,
+      .header img:first-child {
+        max-width: calc(100vw - 30px) !important;
+        max-height: 105px !important;
+        margin: 8px auto 10px auto !important;
+        display: block !important;
+        object-fit: contain !important;
       }
 
       .home-row,
@@ -1412,7 +1492,7 @@ function injectCardFixStyle() {
       }
 
       .card-body {
-        min-height: 150px !important;
+        min-height: 154px !important;
         padding: 10px 10px 12px !important;
       }
 
@@ -1428,10 +1508,27 @@ function injectCardFixStyle() {
       }
 
       .rating {
+        width: calc(100% - 14px) !important;
+        max-width: calc(100% - 14px) !important;
         font-size: 15px !important;
         min-height: 42px !important;
         border-radius: 12px !important;
-        padding: 8px 6px !important;
+        padding: 8px 5px !important;
+      }
+
+      .rating-full {
+        display: none !important;
+      }
+
+      .rating-short {
+        display: inline !important;
+      }
+
+      .similar-grid .rating {
+        font-size: 13px !important;
+        min-height: 38px !important;
+        width: calc(100% - 12px) !important;
+        max-width: calc(100% - 12px) !important;
       }
 
       .poster-placeholder {
@@ -1439,14 +1536,13 @@ function injectCardFixStyle() {
       }
 
       .similar-block {
-        padding-bottom: 170px !important;
+        padding-bottom: 190px !important;
       }
     }
   `;
 
   document.head.appendChild(style);
 }
-
 function handlePosterError(img) {
   if (!img) return;
 
@@ -1604,6 +1700,9 @@ function cardHtml(m) {
   const fav = loadSet(favKey);
   const isFav = fav.has(String(m.id));
 
+  const ratingRank = rankOf(m).rank;
+  const ratingValue = getRating(m).toFixed(1);
+
   const poster = m.poster
     ? `<img loading="lazy" src="${escapeAttr(m.poster)}" alt="" onerror="handlePosterError(this)">`
     : `<div class="poster-placeholder">Нет постера</div>`;
@@ -1631,8 +1730,9 @@ function cardHtml(m) {
         <p class="card-title">${escapeHtml(titleOf(m))}</p>
         <p class="meta">${escapeHtml(m.year || "—")} · ${escapeHtml(m.type || "—")}</p>
         <p class="meta">${escapeHtml(genres)}</p>
-        <span class="rating rank-${rankOf(m).rank.toLowerCase()}">
-          ${rankOf(m).rank}-класс · ${getRating(m).toFixed(1)}
+        <span class="rating rank-${ratingRank.toLowerCase()}">
+          <span class="rating-full">${ratingRank}-класс · ${ratingValue}</span>
+          <span class="rating-short">${ratingRank} · ${ratingValue}</span>
         </span>
       </div>
     </article>
