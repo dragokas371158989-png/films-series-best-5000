@@ -3133,8 +3133,73 @@ function openOfficialEmbedPlayer(embed) {
     }
   });
 }
+function closeDetailsBeforePlayer() {
+  const possibleDetails = [
+    document.getElementById("detailsDialog"),
+    document.getElementById("detailsModal"),
+    document.getElementById("detailModal"),
+    document.querySelector(".details-dialog"),
+    document.querySelector(".detail-dialog"),
+    document.querySelector(".modal"),
+    document.querySelector(".dialog")
+  ];
 
+  possibleDetails.forEach(el => {
+    if (!el) return;
+
+    if (typeof el.close === "function") {
+      try {
+        el.close();
+      } catch (e) {}
+    }
+
+    el.classList.remove("open", "active", "show");
+    el.style.display = "none";
+  });
+
+  document.body.classList.remove("modal-open", "dialog-open");
+}
 function addOfficialEmbedButtonsToDetails(movie) {
+  const embeds = getOfficialEmbedsForMovie(movie);
+  if (!embeds.length) return;
+
+  const detailButtons =
+    document.querySelector(".detail-buttons") ||
+    document.querySelector(".watch-links") ||
+    document.querySelector("#catalogLinksBlock .detail-buttons");
+
+  if (!detailButtons) return;
+
+  detailButtons.querySelectorAll(".official-embed-btn").forEach(btn => btn.remove());
+
+  const episodesBox = document.createElement("div");
+  episodesBox.className = "official-episodes-box";
+
+  const title = document.createElement("h3");
+  title.className = "official-episodes-title";
+  title.textContent = "Серии Rutube";
+
+  const grid = document.createElement("div");
+  grid.className = "official-episodes-grid";
+
+  embeds.forEach((embed, index) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "official-embed-btn";
+    btn.textContent = `${index + 1} серия`;
+
+    btn.addEventListener("click", () => {
+      closeDetailsBeforePlayer();
+      openOfficialEmbedPlayer(embed);
+    });
+
+    grid.appendChild(btn);
+  });
+
+  episodesBox.appendChild(title);
+  episodesBox.appendChild(grid);
+  detailButtons.appendChild(episodesBox);
+}
   injectOfficialEmbedStyle();
 
   const embeds = getOfficialEmbedsForMovie(movie);
