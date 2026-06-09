@@ -5,8 +5,8 @@ const MIN_VOTES_FOR_TOP = 300;
 const TMDB_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzIyNGQ4YzcwMmRkYTIzNjA4MzhhY2UxY2M2OWYyMiIsIm5iZiI6MTc4MDc1MjI0OC44MDE5OTk4LCJzdWIiOiI2YTI0MWY3ODliOWVkZGRjMTUzODU4MTIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.NLC1CjRTfRJpOpZ2mlXZRSpFuWI2zHDFT6IEQnlD4IM";
 
 const INITIAL_CHUNKS = 2;
-const BACKGROUND_RENDER_EVERY = 12;
-const BACKGROUND_PAUSE_MS = 80;
+const BACKGROUND_RENDER_EVERY = 999999;
+const BACKGROUND_PAUSE_MS = 20;
 const FILTER_DEBOUNCE_MS = 180;
 const HOME_SECTION_LIMIT = 12;
 
@@ -396,7 +396,6 @@ const ANIME_SECTIONS = [
   { id: "music", name: "Музыка", keys: ["музыка", "music", "idol", "айдол"] },
   { id: "game", name: "Игры", keys: ["игра", "игры", "game", "video game", "strategy game"] }
 ];
-
 function isAnimeItem(m) {
   const type = normalize(m.type);
   const source = normalize(m.source || m.category || m.provider || m.kind);
@@ -509,6 +508,7 @@ function injectAnimeSectionsStyle() {
       border-color: #5cf4ff;
     }
   `;
+
   document.head.appendChild(style);
 }
 
@@ -634,21 +634,21 @@ async function loadRemainingChunksInBackground(index, chunks, movies) {
   isBackgroundLoading = true;
 
   let loadedChunksCount = INITIAL_CHUNKS;
+  let lastStatusUpdate = 0;
 
   for (const chunk of chunks) {
     const partMovies = await fetchChunkMovies(chunk);
     movies.push(...partMovies);
     loadedChunksCount++;
 
-    if (status) {
+    const now = Date.now();
+
+    if (status && now - lastStatusUpdate > 700) {
+      lastStatusUpdate = now;
       status.textContent = `База грузится: ${movies.length} записей · чанков ${loadedChunksCount}/${INITIAL_CHUNKS + chunks.length}`;
     }
 
-    if (loadedChunksCount % BACKGROUND_RENDER_EVERY === 0) {
-      allMovies = movies;
-      applyFilters();
-      await sleep(BACKGROUND_PAUSE_MS);
-    }
+    await sleep(BACKGROUND_PAUSE_MS);
   }
 
   allMovies = movies;
@@ -658,8 +658,10 @@ async function loadRemainingChunksInBackground(index, chunks, movies) {
     status.textContent = `База: ${allMovies.length} записей · версия ${index.version || "?"} · ${index.generatedAt || ""}`;
   }
 
-  fillFilters();
-  applyFilters();
+  setTimeout(() => {
+    fillFilters();
+    applyFilters();
+  }, 250);
 }
 
 async function fetchChunkMovies(chunk) {
@@ -825,7 +827,6 @@ function hasActiveFilters() {
     Number(ratingFilter ? ratingFilter.value || 0 : 0)
   );
 }
-
 /* ===== РЕНДЕР ===== */
 
 function render() {
@@ -1282,8 +1283,8 @@ function injectHomeStyle() {
 
   document.head.appendChild(style);
 }
-
 /* ===== КАРТОЧКИ ===== */
+
 function injectCardFixStyle() {
   if (document.getElementById("cardFixStyle")) return;
 
@@ -1291,51 +1292,11 @@ function injectCardFixStyle() {
   style.id = "cardFixStyle";
   style.textContent = `
     body {
-      padding-bottom: 90px !important;
+      padding-bottom: 110px !important;
     }
 
-   header,
-.header,
-.top,
-.topbar {
-  overflow: hidden !important;
-  display: flex !important;
-  flex-wrap: wrap !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  gap: 12px !important;
-  padding: 8px 14px 14px !important;
-}
-
-.logo,
-.brand,
-.site-logo {
-  width: 100% !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  text-align: center !important;
-}
-
-header img,
-.header img,
-.logo img,
-.brand img,
-.site-logo img,
-img.logo {
-  display: block !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  width: auto !important;
-  max-width: min(360px, 100%) !important;
-  max-height: 120px !important;
-  height: auto !important;
-  object-fit: contain !important;
-}
-
     #grid {
-      padding-bottom: 110px !important;
+      padding-bottom: 150px !important;
     }
 
     .card {
@@ -1433,49 +1394,16 @@ img.logo {
     }
 
     .similar-block {
-      padding-bottom: 110px !important;
+      padding-bottom: 120px !important;
     }
 
     @media (max-width: 700px) {
       body {
-        padding-bottom: 120px !important;
+        padding-bottom: 140px !important;
       }
 
-      header,
-.header,
-.top,
-.topbar {
-  justify-content: center !important;
-  align-items: center !important;
-  text-align: center !important;
-  padding: 8px 10px 12px !important;
-}
-
-.logo,
-.brand,
-.site-logo {
-  width: 100% !important;
-  justify-content: center !important;
-}
-
-header img,
-.header img,
-.logo img,
-.brand img,
-.site-logo img,
-img.logo {
-  display: block !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  width: auto !important;
-  max-width: min(320px, 96vw) !important;
-  max-height: 105px !important;
-  height: auto !important;
-  object-fit: contain !important;
-}
-
       #grid {
-        padding-bottom: 140px !important;
+        padding-bottom: 170px !important;
       }
 
       .home-row,
@@ -1511,13 +1439,9 @@ img.logo {
       }
 
       .similar-block {
-        padding-bottom: 150px !important;
+        padding-bottom: 170px !important;
       }
     }
-  `;
-
-  document.head.appendChild(style);
-}
   `;
 
   document.head.appendChild(style);
@@ -1538,6 +1462,7 @@ function handlePosterError(img) {
     wrap.appendChild(placeholder);
   }
 }
+
 function getBadges(m) {
   const badges = [];
   const fav = loadSet(favKey);
@@ -1571,7 +1496,6 @@ function getBadges(m) {
 
 function badgesHtml(m) {
   const badges = getBadges(m);
-
   if (!badges.length) return "";
 
   return `
@@ -1671,6 +1595,7 @@ function injectBadgesStyle() {
 
   document.head.appendChild(style);
 }
+
 function cardHtml(m) {
   injectHomeStyle();
   injectBadgesStyle();
@@ -1744,6 +1669,7 @@ function toggleCardFavorite(id, btn) {
     applyFilters();
   }
 }
+
 /* ===== ПОХОЖИЕ ===== */
 
 function injectSimilarStyle() {
@@ -1933,6 +1859,7 @@ function renderSimilarItems(m) {
 
   bindCardClicks(grid);
 }
+
 /* ===== ЧТО ПОСМОТРЕТЬ ===== */
 
 function openWhatToWatch() {
@@ -2115,13 +2042,14 @@ function openDetails(m) {
   setTimeout(() => {
     if (!selectedMovie || String(selectedMovie.id) !== String(m.id)) return;
     renderSimilarItems(m);
-  }, 50);
+  }, 300);
 
   setTimeout(() => {
     if (!selectedMovie || String(selectedMovie.id) !== String(m.id)) return;
     loadRussianDescriptionIntoDialog(m);
   }, 100);
 }
+
 function updateFavBtn() {
   const favBtn = $("favBtn");
   if (!favBtn) return;
@@ -2142,6 +2070,15 @@ function toggleFav() {
 
   saveSet(favKey, fav);
   updateFavBtn();
+
+  document.querySelectorAll(".card-fav-btn").forEach(btn => {
+    if (String(btn.getAttribute("data-fav-id")) === id) {
+      const isFav = fav.has(id);
+      btn.classList.toggle("active", isFav);
+      btn.textContent = isFav ? "❤️" : "🤍";
+      btn.title = isFav ? "Убрать из избранного" : "Добавить в избранное";
+    }
+  });
 
   if (currentTab === "fav") applyFilters();
 }
