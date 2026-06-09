@@ -2458,6 +2458,45 @@ function addRutubeSeasonFromText(config) {
   console.log(`Rutube: добавлено серий ${episodes.length}`, [...allTitles]);
 }
 
+
+function addRutubeVideoFromText(config) {
+  const titles = config.titles || [];
+  const name = config.name || "Rutube — смотреть";
+  const text = config.text || "";
+
+  const links = extractRutubeEmbedLinks(text);
+  if (!links.length) {
+    console.warn("Rutube: ссылка на видео не найдена", config);
+    return;
+  }
+
+  const item = {
+    name,
+    src: links[0],
+    source: "rutube"
+  };
+
+  const allTitles = new Set();
+
+  titles.forEach(title => {
+    addTitleAliasSet(title).forEach(alias => allTitles.add(alias));
+  });
+
+  allTitles.forEach(title => {
+    if (!window.OFFICIAL_EMBEDS[title]) {
+      window.OFFICIAL_EMBEDS[title] = [];
+    }
+
+    const exists = new Set(window.OFFICIAL_EMBEDS[title].map(x => x.src));
+
+    if (!exists.has(item.src)) {
+      window.OFFICIAL_EMBEDS[title].push(item);
+    }
+  });
+
+  console.log("Rutube: добавлен фильм", name, [...allTitles]);
+}
+
 function getMovieTitleCandidates(movie) {
   const candidates = [
     movie && movie.ru,
@@ -2841,6 +2880,25 @@ https://rutube.ru/video/7ea3e33b1cc749e25d6d280eff6e0e4a/?playlist=349758
 https://rutube.ru/video/5f5ece953b9cfe1c69cf2ede933be862/?playlist=349758
 https://rutube.ru/video/a9d0753888e19fd7955c6436f2d033f1/?playlist=349758
 https://rutube.ru/video/714734c6c2bd1bf445febc0d88decaec/?playlist=349758
+  `
+});
+
+/* ===== МОРТАЛ КОМБАТ 2 (2026) ===== */
+
+addRutubeVideoFromText({
+  titles: [
+    "Мортал Комбат 2",
+    "Мортал Комбат 2 (2026)",
+    "Мортал Комбат II",
+    "Мортал Комбат II (2026)",
+    "Mortal Kombat II",
+    "Mortal Kombat II 2026",
+    "Mortal Kombat 2",
+    "Mortal Kombat 2 2026"
+  ],
+  name: "Rutube — смотреть",
+  text: `
+https://rutube.ru/video/4cc2b1eb0945443150f622c3419edf66/
   `
 });
 
