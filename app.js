@@ -3108,10 +3108,11 @@ https://rutube.ru/video/714734c6c2bd1bf445febc0d88decaec/?playlist=349758
 
 /* ===== ВАНПАНЧМЕН — 3 СЕЗОН ===== */
 
-addRutubeSeasonFromText({
-  titles: [
+(function addOnePunchManSeason3FixedRutube() {
+  const titles = [
     "Ванпанчмен 3 сезон",
     "Ванпанчмен 3",
+    "Сериал Ванпанчмен / One Punch Man — 3 сезон",
     "One-Punch Man Season 3",
     "One Punch Man Season 3",
     "One Punch Man 3rd Season",
@@ -3119,23 +3120,40 @@ addRutubeSeasonFromText({
     "One Punch Man 3",
     "One-Punch Man 3",
     "Wanpanman 3"
-  ],
-  season: 3,
-  text: `
-https://rutube.ru/video/04c118fab6a345f7b4009aafe33d8b52/
-https://rutube.ru/video/130e6b0e89a06bbc260764471a58b252/
-https://rutube.ru/video/44eaec21cbeb740f19d56faa20956e83/
-https://rutube.ru/video/1b85ae0939d9a6734bf8085f8bf770cc/
-https://rutube.ru/video/3e0096323d8dac7f47942cbf8d1eaa69/
-https://rutube.ru/video/d4e6706e28d6c5385bd3f81c937370f9/
-https://rutube.ru/video/4fd0e483fb5b3ba066b7bf5ca4ff60bd/
-https://rutube.ru/video/0fd5f0a1fd30039b2394f111393d0b15/
-https://rutube.ru/video/6aafceaf0b61fa3ab87a8204dd337d53/
-https://rutube.ru/video/970285dc2b2e55c1efdebc770a46ea65/
-https://rutube.ru/video/6137dd2bd8eee139b213c0c4da34c00d/
-https://rutube.ru/video/223dddb919342bce9791b6fd31a8fa19/
-  `
-});
+  ];
+
+  // Реальные ссылки из плейлиста Rutube: https://rutube.ru/plst/1324026/
+  // В плейлисте сейчас есть 0, 1, 2, 3, 4, 5 и 7 серия. 6 серии там нет.
+  const episodes = [
+    { episode: 0, id: "76aec24b54c469f135629f0a0f436380" },
+    { episode: 1, id: "4e9a5746b7c99a0b4a9ee668a24cae24" },
+    { episode: 2, id: "831e2003f962c3ed01597533dc21e0f7" },
+    { episode: 3, id: "be73e3f823178fa53b41d47665d63cba" },
+    { episode: 4, id: "129be222a0fd669a8db146ead5abba4b" },
+    { episode: 5, id: "a72b8bcb654b6f1f6fdc1ea159057df4" },
+    { episode: 7, id: "1e36649bfef46d8b846a9d455506f7fe" }
+  ].map(item => ({
+    name: `Rutube — 3 сезон ${item.episode} серия`,
+    season: 3,
+    episode: item.episode,
+    src: `https://rutube.ru/play/embed/${item.id}`,
+    source: "rutube"
+  }));
+
+  const allTitles = new Set();
+
+  titles.forEach(title => {
+    allTitles.add(title);
+    addTitleAliasSet(title).forEach(alias => allTitles.add(alias));
+  });
+
+  allTitles.forEach(title => {
+    // Для 3 сезона перезаписываем старые битые ссылки полностью.
+    window.OFFICIAL_EMBEDS[title] = episodes.map(x => ({ ...x }));
+  });
+
+  console.log("Rutube: Ванпанчмен 3 сезон исправлен", episodes.length, [...allTitles]);
+})();
 
 /* ===== МОРТАЛ КОМБАТ 2 (2026) ===== */
 
