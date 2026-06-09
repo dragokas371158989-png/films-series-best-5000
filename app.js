@@ -1290,11 +1290,60 @@ function injectCardFixStyle() {
   const style = document.createElement("style");
   style.id = "cardFixStyle";
   style.textContent = `
+    body {
+      padding-bottom: 90px !important;
+    }
+
+   header,
+.header,
+.top,
+.topbar {
+  overflow: hidden !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 12px !important;
+  padding: 8px 14px 14px !important;
+}
+
+.logo,
+.brand,
+.site-logo {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+header img,
+.header img,
+.logo img,
+.brand img,
+.site-logo img,
+img.logo {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: auto !important;
+  max-width: min(360px, 100%) !important;
+  max-height: 120px !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+    #grid {
+      padding-bottom: 110px !important;
+    }
+
     .card {
       overflow: hidden !important;
       display: flex !important;
       flex-direction: column !important;
       min-width: 0 !important;
+      height: 100% !important;
     }
 
     .poster-wrap {
@@ -1343,9 +1392,10 @@ function injectCardFixStyle() {
       display: flex !important;
       flex-direction: column !important;
       flex: 1 !important;
-      min-height: 170px !important;
+      min-height: 165px !important;
       min-width: 0 !important;
       overflow: hidden !important;
+      padding-bottom: 12px !important;
     }
 
     .card-title {
@@ -1369,6 +1419,7 @@ function injectCardFixStyle() {
       margin-top: auto !important;
       width: 100% !important;
       max-width: 100% !important;
+      min-height: 44px !important;
       box-sizing: border-box !important;
       display: flex !important;
       align-items: center !important;
@@ -1377,35 +1428,96 @@ function injectCardFixStyle() {
       overflow: hidden !important;
       text-overflow: ellipsis !important;
       font-size: clamp(14px, 1.15vw, 18px) !important;
-      padding-left: 8px !important;
-      padding-right: 8px !important;
+      padding: 9px 8px !important;
+      flex-shrink: 0 !important;
+    }
+
+    .similar-block {
+      padding-bottom: 110px !important;
     }
 
     @media (max-width: 700px) {
+      body {
+        padding-bottom: 120px !important;
+      }
+
+      header,
+.header,
+.top,
+.topbar {
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  padding: 8px 10px 12px !important;
+}
+
+.logo,
+.brand,
+.site-logo {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+header img,
+.header img,
+.logo img,
+.brand img,
+.site-logo img,
+img.logo {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: auto !important;
+  max-width: min(320px, 96vw) !important;
+  max-height: 105px !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+      #grid {
+        padding-bottom: 140px !important;
+      }
+
+      .home-row,
+      #grid {
+        gap: 12px !important;
+      }
+
       .card-body {
-        min-height: 155px !important;
+        min-height: 150px !important;
+        padding: 10px 10px 12px !important;
       }
 
       .card-title {
         font-size: 13px !important;
         min-height: 34px !important;
-        max-height: 38px !important;
+        max-height: 40px !important;
       }
 
       .meta {
         font-size: 11px !important;
+        line-height: 1.25 !important;
       }
 
       .rating {
         font-size: 15px !important;
         min-height: 42px !important;
         border-radius: 12px !important;
+        padding: 8px 6px !important;
       }
 
       .poster-placeholder {
         font-size: 12px !important;
       }
+
+      .similar-block {
+        padding-bottom: 150px !important;
+      }
     }
+  `;
+
+  document.head.appendChild(style);
+}
   `;
 
   document.head.appendChild(style);
