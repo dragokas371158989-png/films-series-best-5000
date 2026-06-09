@@ -422,3 +422,39 @@ select:focus,
     min-width: 140px;
   }
 }
+/* ===== ЛОГОТИП ГОЛУБЬ ANIME TV ===== */
+
+.brand-block {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.tv-logo {
+  width: 300px;
+  max-width: 28vw;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  object-fit: contain;
+  box-shadow: 0 0 28px rgba(124, 58, 237, 0.38);
+}
+
+@media (max-width: 900px) {
+  .brand-block {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tv-logo {
+    width: 260px;
+    max-width: 90vw;
+  }
+}
+
+@media (max-width: 700px) {
+  .tv-logo {
+    width: 220px;
+  }
+}
