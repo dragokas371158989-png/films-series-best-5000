@@ -2476,6 +2476,10 @@ function openDetails(m) {
 
   updateFavBtn();
 
+  if (typeof addOfficialEmbedButtonsToDetails === "function") {
+    addOfficialEmbedButtonsToDetails(m);
+  }
+
   const dialog = $("detailsDialog");
   if (dialog && !dialog.open) {
     dialog.showModal();
@@ -2811,7 +2815,99 @@ function getOfficialEmbedsForMovie(movie) {
   return [];
 }
 
+
+function injectOfficialEmbedStyle() {
+  if (document.getElementById("officialEmbedStyle")) return;
+
+  const style = document.createElement("style");
+  style.id = "officialEmbedStyle";
+  style.textContent = `
+    .official-embed-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(0, 0, 0, 0.82);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .official-embed-modal {
+      width: min(1100px, 100%);
+      background: #020617;
+      border-radius: 22px;
+      border: 1px solid rgba(34, 211, 238, 0.45);
+      box-shadow: 0 0 35px rgba(59, 130, 246, 0.38);
+      overflow: hidden;
+    }
+
+    .official-embed-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #111827, #0f172a);
+      color: white;
+    }
+
+    .official-embed-head h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    #closeOfficialEmbedBtn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .official-embed-frame-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: black;
+    }
+
+    .official-embed-frame-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .official-embed-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 15px;
+      border-radius: 14px;
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      background: linear-gradient(135deg, #ef4444, #7c3aed);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 0 16px rgba(124, 58, 237, 0.25);
+    }
+
+    .official-embed-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.12);
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
 function openOfficialEmbedPlayer(embed) {
+  injectOfficialEmbedStyle();
+
   const old = document.getElementById("officialEmbedBackdrop");
   if (old) old.remove();
 
@@ -2851,6 +2947,8 @@ function openOfficialEmbedPlayer(embed) {
 }
 
 function addOfficialEmbedButtonsToDetails(movie) {
+  injectOfficialEmbedStyle();
+
   const embeds = getOfficialEmbedsForMovie(movie);
   if (!embeds.length) return;
 
