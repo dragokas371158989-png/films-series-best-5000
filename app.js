@@ -37,173 +37,8 @@ function saveSet(key, set) {
   localStorage.setItem(key, JSON.stringify([...set]));
 }
 
-function hasRussianLetters(text) {
-  return /[а-яА-ЯёЁ]/.test(String(text || ""));
-}
-
-function hasEnglishLetters(text) {
-  return /[a-zA-Z]/.test(String(text || ""));
-}
-
-function hasRuOrEnTitle(m) {
-  const candidates = [
-    m.ru,
-    m.en,
-    m.title_ru,
-    m.name_ru,
-    m.title_en,
-    m.name_en,
-    m.russian,
-    m.english,
-    m.russianTitle,
-    m.englishTitle,
-    m.originalTitle,
-    m.title,
-    m.name
-  ];
-
-  return candidates.some(x => {
-    const s = String(x || "").trim();
-    if (!s) return false;
-
-    return hasRussianLetters(s) || hasEnglishLetters(s);
-  });
-}
-
-
-/* ===== ПЕРЕВОД АНГЛИЙСКИХ НАЗВАНИЙ АНИМЕ ===== */
-
-const TITLE_TRANSLATE_MAP = {
-  "Sousou no Frieren": "Провожающая в последний путь Фрирен",
-  "Frieren: Beyond Journey's End": "Провожающая в последний путь Фрирен",
-
-  "Chainsaw Man": "Человек-бензопила",
-
-  "Steel Ball Run: JoJo no Kimyou na Bouken": "Невероятное приключение ДжоДжо: Steel Ball Run",
-  "Steel Ball Run": "Невероятное приключение ДжоДжо: Steel Ball Run",
-  "JoJo no Kimyou na Bouken": "Невероятное приключение ДжоДжо",
-
-  "Gintama: The Final": "Гинтама: Финал",
-  "Gintama The Final": "Гинтама: Финал",
-  "Gintama°": "Гинтама",
-  "Gintama": "Гинтама",
-
-  "Steins;Gate": "Врата Штейна",
-  "Steins Gate": "Врата Штейна",
-
-  "Attack on Titan Season 3 Part 2": "Атака титанов: 3 сезон, часть 2",
-  "Shingeki no Kyojin Season 3 Part 2": "Атака титанов: 3 сезон, часть 2",
-  "Attack on Titan": "Атака титанов",
-  "Shingeki no Kyojin": "Атака титанов",
-
-  "Fullmetal Alchemist: Brotherhood": "Стальной алхимик: Братство",
-  "Fullmetal Alchemist": "Стальной алхимик",
-
-  "Bleach: Sennen Kessen-hen": "Блич: Тысячелетняя кровавая война",
-  "Bleach: Thousand-Year Blood War": "Блич: Тысячелетняя кровавая война",
-  "Bleach": "Блич",
-
-  "One Piece Fan Letter": "Ван-Пис: Письмо фаната",
-  "Ван-Пис Fan Letter": "Ван-Пис: Письмо фаната",
-  "One Piece": "Ван-Пис",
-
-  "Initial D": "Инициал Ди",
-  "Initial D First Stage": "Инициал Ди: Первая стадия",
-  "Initial D Second Stage": "Инициал Ди: Вторая стадия",
-  "Initial D Third Stage": "Инициал Ди: Третья стадия",
-  "Initial D Fourth Stage": "Инициал Ди: Четвёртая стадия",
-  "Initial D Fifth Stage": "Инициал Ди: Пятая стадия",
-  "Initial D Final Stage": "Инициал Ди: Финальная стадия",
-
-  "Naruto": "Наруто",
-  "Naruto Shippuden": "Наруто: Ураганные хроники",
-  "Boruto: Naruto Next Generations": "Боруто: Новое поколение Наруто",
-  "Demon Slayer: Kimetsu no Yaiba": "Истребитель демонов",
-  "Kimetsu no Yaiba": "Истребитель демонов",
-  "Jujutsu Kaisen": "Магическая битва",
-  "Solo Leveling": "Поднятие уровня в одиночку",
-  "Ore dake Level Up na Ken": "Поднятие уровня в одиночку",
-  "Death Note": "Тетрадь смерти",
-  "Black Clover": "Чёрный клевер",
-  "Tokyo Ghoul": "Токийский гуль",
-  "Hunter x Hunter": "Охотник х Охотник",
-  "My Hero Academia": "Моя геройская академия",
-  "Boku no Hero Academia": "Моя геройская академия",
-
-  "Dragon Ball": "Драконий жемчуг",
-  "Dragon Ball Z": "Драконий жемчуг Z",
-  "Dragon Ball Super": "Драконий жемчуг Супер",
-
-  "Sword Art Online": "Мастера меча онлайн",
-  "Re:ZERO -Starting Life in Another World-": "Re:Zero — жизнь с нуля в другом мире",
-  "Overlord": "Повелитель",
-  "That Time I Got Reincarnated as a Slime": "О моём перерождении в слизь",
-  "Tensei shitara Slime Datta Ken": "О моём перерождении в слизь",
-
-  "The Daily Life of the Immortal King": "Повседневная жизнь бессмертного короля",
-  "The World's Finest Assassin Gets Reincarnated in Another World as an Aristocrat": "Лучший в мире ассасин, переродившийся в другом мире аристократом",
-  "Inuyashiki": "Инуясики",
-  "The Greatest Demon Lord Is Reborn as a Typical Nobody": "Величайший Повелитель Демонов перерождается как типичное ничтожество",
-  "Death March to the Parallel World Rhapsody": "Марш смерти под рапсодию параллельного мира",
-  "The Strongest Sage with the Weakest Crest": "Сильнейший мудрец низшей эмблемы",
-  "The Aesthetic of a Rogue Hero": "Эстетика заблудшего героя"
-};
-
-function translateAnimeTitleToRu(title) {
-  if (!title) return title;
-
-  let result = String(title).trim();
-
-  if (TITLE_TRANSLATE_MAP[result]) {
-    return TITLE_TRANSLATE_MAP[result];
-  }
-
-  Object.keys(TITLE_TRANSLATE_MAP)
-    .sort((a, b) => b.length - a.length)
-    .forEach((enTitle) => {
-      if (result.includes(enTitle)) {
-        result = result.replaceAll(enTitle, TITLE_TRANSLATE_MAP[enTitle]);
-      }
-    });
-
-  return result;
-}
-
 function titleOf(m) {
-  const ruCandidates = [
-    m.ru,
-    m.title_ru,
-    m.name_ru,
-    m.russian,
-    m.russianTitle
-  ];
-
-  const enCandidates = [
-    m.en,
-    m.title_en,
-    m.name_en,
-    m.english,
-    m.englishTitle,
-    m.originalTitle,
-    m.title,
-    m.name
-  ];
-
-  const ru = ruCandidates.find(x => {
-    const s = String(x || "").trim();
-    return s && hasRussianLetters(s);
-  });
-
-  if (ru) return String(ru).trim();
-
-  const en = enCandidates.find(x => {
-    const s = String(x || "").trim();
-    return s && hasEnglishLetters(s);
-  });
-
-  if (en) return translateAnimeTitleToRu(String(en).trim());
-
-  return "Название пока не переведено";
+  return m.ru || m.en || m.title || m.name || "Без названия";
 }
 
 function getYear(m) {
@@ -225,181 +60,7 @@ function getGenres(m) {
 function normalize(s) {
   return String(s || "").toLowerCase().trim();
 }
-/* ===== УМНЫЙ ПОИСК С ОШИБКАМИ ===== */
 
-const KEYBOARD_RU_TO_EN = {
-  "й": "q", "ц": "w", "у": "e", "к": "r", "е": "t", "н": "y", "г": "u", "ш": "i", "щ": "o", "з": "p", "х": "[", "ъ": "]",
-  "ф": "a", "ы": "s", "в": "d", "а": "f", "п": "g", "р": "h", "о": "j", "л": "k", "д": "l", "ж": ";", "э": "'",
-  "я": "z", "ч": "x", "с": "c", "м": "v", "и": "b", "т": "n", "ь": "m", "б": ",", "ю": ".", "ё": "`"
-};
-
-const KEYBOARD_EN_TO_RU = Object.fromEntries(
-  Object.entries(KEYBOARD_RU_TO_EN).map(([ru, en]) => [en, ru])
-);
-
-function switchKeyboardLayout(text, map) {
-  return String(text || "")
-    .toLowerCase()
-    .split("")
-    .map(ch => map[ch] || ch)
-    .join("");
-}
-
-function simpleSearchNormalize(text) {
-  return normalize(text)
-    .replace(/ё/g, "е")
-    .replace(/[^\p{L}\p{N}\s]+/gu, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function levenshteinDistance(a, b) {
-  a = simpleSearchNormalize(a);
-  b = simpleSearchNormalize(b);
-
-  if (a === b) return 0;
-  if (!a || !b) return Math.max(a.length, b.length);
-
-  const diff = Math.abs(a.length - b.length);
-  if (diff > 3) return 99;
-
-  const dp = Array(b.length + 1);
-
-  for (let j = 0; j <= b.length; j++) dp[j] = j;
-
-  for (let i = 1; i <= a.length; i++) {
-    let prev = dp[0];
-    dp[0] = i;
-
-    for (let j = 1; j <= b.length; j++) {
-      const temp = dp[j];
-      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-
-      dp[j] = Math.min(
-        dp[j] + 1,
-        dp[j - 1] + 1,
-        prev + cost
-      );
-
-      prev = temp;
-    }
-  }
-
-  return dp[b.length];
-}
-
-function allowedTypoDistance(q) {
-  const len = simpleSearchNormalize(q).length;
-
-  if (len <= 2) return 0;
-  if (len <= 4) return 1;
-  if (len <= 8) return 2;
-
-  return 3;
-}
-
-function smartSearchVariants(q) {
-  const base = simpleSearchNormalize(q);
-  const variants = new Set();
-
-  if (base) variants.add(base);
-
-  const ruToEn = simpleSearchNormalize(switchKeyboardLayout(base, KEYBOARD_RU_TO_EN));
-  const enToRu = simpleSearchNormalize(switchKeyboardLayout(base, KEYBOARD_EN_TO_RU));
-
-  if (ruToEn) variants.add(ruToEn);
-  if (enToRu) variants.add(enToRu);
-
-  return [...variants].filter(Boolean);
-}
-
-function movieSearchFields(m) {
-  return [
-    m.ru,
-    m.en,
-    m.title,
-    m.name,
-    m.originalTitle,
-    m.russianTitle,
-    m.englishTitle,
-    titleOf(m),
-    getYear(m),
-    m.type,
-    ...getGenres(m)
-  ]
-    .filter(Boolean)
-    .map(simpleSearchNormalize)
-    .filter(Boolean);
-}
-
-function smartMovieSearchScore(m, qVariants) {
-  if (!qVariants.length) return 0;
-
-  const fields = movieSearchFields(m);
-  const joined = fields.join(" ");
-
-  let bestScore = 0;
-
-  for (const q of qVariants) {
-    if (!q) continue;
-
-    if (joined.includes(q)) {
-      bestScore = Math.max(bestScore, 1000 + q.length);
-      continue;
-    }
-
-    const qWords = q.split(" ").filter(Boolean);
-
-    for (const field of fields) {
-      if (!field) continue;
-
-      if (field.startsWith(q)) {
-        bestScore = Math.max(bestScore, 900 + q.length);
-      }
-
-      const fieldWords = field.split(" ").filter(Boolean);
-
-      for (const qw of qWords) {
-        if (qw.length < 3) continue;
-
-        for (const fw of fieldWords) {
-          if (fw.length < 3) continue;
-
-          if (fw.includes(qw) || qw.includes(fw)) {
-            bestScore = Math.max(bestScore, 750 + Math.min(qw.length, fw.length));
-            continue;
-          }
-
-          const dist = levenshteinDistance(qw, fw);
-          const allowed = allowedTypoDistance(qw);
-
-          if (dist <= allowed) {
-            bestScore = Math.max(bestScore, 650 - dist * 60 + qw.length);
-          }
-        }
-      }
-
-      if (q.length >= 4) {
-        const distFull = levenshteinDistance(q, field);
-        const allowedFull = allowedTypoDistance(q);
-
-        if (distFull <= allowedFull) {
-          bestScore = Math.max(bestScore, 700 - distFull * 60 + q.length);
-        }
-      }
-    }
-  }
-
-  if (bestScore > 0) {
-    bestScore += Math.min(getRating(m), 10);
-  }
-
-  return bestScore;
-}
-
-function smartMovieMatch(m, qVariants) {
-  return smartMovieSearchScore(m, qVariants) > 0;
-}
 function queryOf(m) {
   return encodeURIComponent(titleOf(m));
 }
@@ -735,6 +396,7 @@ const ANIME_SECTIONS = [
   { id: "music", name: "Музыка", keys: ["музыка", "music", "idol", "айдол"] },
   { id: "game", name: "Игры", keys: ["игра", "игры", "game", "video game", "strategy game"] }
 ];
+
 function isAnimeItem(m) {
   const type = normalize(m.type);
   const source = normalize(m.source || m.category || m.provider || m.kind);
@@ -847,7 +509,6 @@ function injectAnimeSectionsStyle() {
       border-color: #5cf4ff;
     }
   `;
-
   document.head.appendChild(style);
 }
 
@@ -1070,8 +731,7 @@ function applyFilters() {
   const sort = sortFilter ? sortFilter.value : "smart";
 
   let list = [...allMovies];
-  
-list = list.filter(hasRuOrEnTitle);
+
   if (currentTab === "movies") list = list.filter(m => m.type === "Фильм");
   if (currentTab === "series") list = list.filter(m => m.type === "Сериал");
 
@@ -1107,32 +767,27 @@ list = list.filter(hasRuOrEnTitle);
   }
 
   if (q) {
-  const qVariants = smartSearchVariants(q);
+    list = list.filter(m => {
+      const hay = normalize([
+        m.ru,
+        m.en,
+        m.year,
+        m.type,
+        m.status,
+        overviewOf(m),
+        ...getGenres(m)
+      ].join(" "));
 
-  list = list
-    .map(m => ({
-      movie: m,
-      searchScore: smartMovieSearchScore(m, qVariants)
-    }))
-    .filter(x => x.searchScore > 0)
-    .sort((a, b) => {
-      if (b.searchScore !== a.searchScore) {
-        return b.searchScore - a.searchScore;
-      }
-
-      return scoreSmart(b.movie) - scoreSmart(a.movie);
-    })
-    .map(x => x.movie);
-}
+      return hay.includes(q);
+    });
+  }
 
   if (type) list = list.filter(m => m.type === type);
   if (genre) list = list.filter(m => getGenres(m).includes(genre));
   if (year) list = list.filter(m => getYear(m) === year);
   if (minRating) list = list.filter(m => getRating(m) >= minRating);
 
-if (!q) {
   list = sortList(list, sort);
-}
 
   filtered = list;
   currentPage = 1;
@@ -1172,6 +827,7 @@ function hasActiveFilters() {
     Number(ratingFilter ? ratingFilter.value || 0 : 0)
   );
 }
+
 /* ===== РЕНДЕР ===== */
 
 function render() {
@@ -1225,43 +881,40 @@ function bindCardClicks(root = document) {
 
 /* ===== ГЛАВНАЯ ===== */
 
-
 function renderHomeSections() {
   injectHomeStyle();
 
-  const cleanMovies = allMovies.filter(hasRuOrEnTitle);
-
-  const anime = cleanMovies
+  const anime = allMovies
     .filter(isAnimeItem)
     .sort((a, b) => scoreSmart(b) - scoreSmart(a))
     .slice(0, HOME_SECTION_LIMIT);
 
- const movies = cleanMovies
+  const movies = allMovies
     .filter(m => m.type === "Фильм")
     .sort((a, b) => scoreSmart(b) - scoreSmart(a))
     .slice(0, HOME_SECTION_LIMIT);
 
-  const series = cleanMovies
+  const series = allMovies
     .filter(m => m.type === "Сериал")
     .sort((a, b) => scoreSmart(b) - scoreSmart(a))
     .slice(0, HOME_SECTION_LIMIT);
 
-  const cartoons = cleanMovies
+  const cartoons = allMovies
     .filter(m => getGenres(m).some(g => normalize(g).includes("мульт")) && !isAnimeItem(m))
     .sort((a, b) => scoreSmart(b) - scoreSmart(a))
     .slice(0, HOME_SECTION_LIMIT);
 
-  const newItems = cleanMovies
+  const newItems = allMovies
     .filter(m => Number(getYear(m)) >= 2024)
     .sort((a, b) => Number(getYear(b) || 0) - Number(getYear(a) || 0))
     .slice(0, HOME_SECTION_LIMIT);
 
-  const popular = cleanMovies
+  const popular = allMovies
     .filter(m => getVotes(m) >= 1000)
     .sort((a, b) => getVotes(b) - getVotes(a))
     .slice(0, HOME_SECTION_LIMIT);
 
-  const top = cleanMovies
+  const top = allMovies
     .filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP)
     .sort((a, b) => getRating(b) - getRating(a))
     .slice(0, HOME_SECTION_LIMIT);
@@ -1345,7 +998,6 @@ function homeSectionHtml(title, items, tabName) {
 
 function injectHomeStyle() {
   if (document.getElementById("homeStyle")) return;
-
   const style = document.createElement("style");
   style.id = "homeStyle";
   style.textContent = `
@@ -1631,8 +1283,8 @@ function injectHomeStyle() {
 
   document.head.appendChild(style);
 }
-/* ===== КАРТОЧКИ ===== */
 
+/* ===== КАРТОЧКИ ===== */
 function injectCardFixStyle() {
   if (document.getElementById("cardFixStyle")) return;
 
@@ -1640,48 +1292,52 @@ function injectCardFixStyle() {
   style.id = "cardFixStyle";
   style.textContent = `
     body {
-      padding-bottom: 120px !important;
-      overflow-x: hidden !important;
+      padding-bottom: 90px !important;
     }
+
+   header,
+.header,
+.top,
+.topbar {
+  overflow: hidden !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 12px !important;
+  padding: 8px 14px 14px !important;
+}
+
+.logo,
+.brand,
+.site-logo {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+header img,
+.header img,
+.logo img,
+.brand img,
+.site-logo img,
+img.logo {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: auto !important;
+  max-width: min(360px, 100%) !important;
+  max-height: 120px !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
 
     #grid {
-      padding-bottom: 170px !important;
-      overflow-x: hidden !important;
+      padding-bottom: 110px !important;
     }
-
-    /* ===== ЛОГОТИП ===== */
-
-    img[src*="логотип"],
-    img[src*="баннер"],
-    img[src*="logo"],
-    img[src*="banner"],
-    header img:first-child,
-    .header img:first-child {
-      display: block !important;
-      width: auto !important;
-      max-width: min(620px, calc(100vw - 28px)) !important;
-      height: auto !important;
-      max-height: 130px !important;
-      object-fit: contain !important;
-      margin: 10px auto 12px auto !important;
-      float: none !important;
-      position: relative !important;
-      left: auto !important;
-      right: auto !important;
-      transform: none !important;
-    }
-
-    header,
-    .header,
-    .top,
-    .topbar {
-      width: 100% !important;
-      box-sizing: border-box !important;
-      text-align: center !important;
-      overflow: hidden !important;
-    }
-
-    /* ===== КАРТОЧКИ ===== */
 
     .card {
       overflow: hidden !important;
@@ -1689,7 +1345,6 @@ function injectCardFixStyle() {
       flex-direction: column !important;
       min-width: 0 !important;
       height: 100% !important;
-      box-sizing: border-box !important;
     }
 
     .poster-wrap {
@@ -1729,7 +1384,6 @@ function injectCardFixStyle() {
       color: rgba(255,255,255,.45) !important;
       font-weight: 800 !important;
       font-size: 13px !important;
-      box-sizing: border-box !important;
       background:
         radial-gradient(circle at center, rgba(124,58,237,.28), transparent 45%),
         linear-gradient(180deg, #160b38, #060817) !important;
@@ -1739,10 +1393,9 @@ function injectCardFixStyle() {
       display: flex !important;
       flex-direction: column !important;
       flex: 1 !important;
-      min-height: 168px !important;
+      min-height: 165px !important;
       min-width: 0 !important;
       overflow: hidden !important;
-      box-sizing: border-box !important;
       padding-bottom: 12px !important;
     }
 
@@ -1765,11 +1418,8 @@ function injectCardFixStyle() {
 
     .rating {
       margin-top: auto !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      width: calc(100% - 16px) !important;
-      max-width: calc(100% - 16px) !important;
-      min-width: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
       min-height: 44px !important;
       box-sizing: border-box !important;
       display: flex !important;
@@ -1778,60 +1428,55 @@ function injectCardFixStyle() {
       white-space: nowrap !important;
       overflow: hidden !important;
       text-overflow: ellipsis !important;
-      font-size: 16px !important;
-      line-height: 1 !important;
-      padding: 8px 6px !important;
+      font-size: clamp(14px, 1.15vw, 18px) !important;
+      padding: 9px 8px !important;
       flex-shrink: 0 !important;
-      align-self: center !important;
-      transform: none !important;
-      left: auto !important;
-      right: auto !important;
-    }
-
-    .rating-short {
-      display: none;
     }
 
     .similar-block {
-      padding-bottom: 160px !important;
-    }
-
-    .similar-grid {
-      overflow: hidden !important;
-    }
-
-    .similar-grid .card {
-      min-width: 0 !important;
-    }
-
-    .similar-grid .rating {
-      width: calc(100% - 14px) !important;
-      max-width: calc(100% - 14px) !important;
-      font-size: 14px !important;
-      min-height: 40px !important;
-      padding: 7px 5px !important;
+      padding-bottom: 110px !important;
     }
 
     @media (max-width: 700px) {
       body {
-        padding-bottom: 150px !important;
+        padding-bottom: 120px !important;
       }
+
+      header,
+.header,
+.top,
+.topbar {
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  padding: 8px 10px 12px !important;
+}
+
+.logo,
+.brand,
+.site-logo {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+header img,
+.header img,
+.logo img,
+.brand img,
+.site-logo img,
+img.logo {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: auto !important;
+  max-width: min(320px, 96vw) !important;
+  max-height: 105px !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
 
       #grid {
-        padding-bottom: 190px !important;
-      }
-
-      img[src*="логотип"],
-      img[src*="баннер"],
-      img[src*="logo"],
-      img[src*="banner"],
-      header img:first-child,
-      .header img:first-child {
-        max-width: calc(100vw - 30px) !important;
-        max-height: 105px !important;
-        margin: 8px auto 10px auto !important;
-        display: block !important;
-        object-fit: contain !important;
+        padding-bottom: 140px !important;
       }
 
       .home-row,
@@ -1840,7 +1485,7 @@ function injectCardFixStyle() {
       }
 
       .card-body {
-        min-height: 154px !important;
+        min-height: 150px !important;
         padding: 10px 10px 12px !important;
       }
 
@@ -1856,27 +1501,10 @@ function injectCardFixStyle() {
       }
 
       .rating {
-        width: calc(100% - 14px) !important;
-        max-width: calc(100% - 14px) !important;
         font-size: 15px !important;
         min-height: 42px !important;
         border-radius: 12px !important;
-        padding: 8px 5px !important;
-      }
-
-      .rating-full {
-        display: none !important;
-      }
-
-      .rating-short {
-        display: inline !important;
-      }
-
-      .similar-grid .rating {
-        font-size: 13px !important;
-        min-height: 38px !important;
-        width: calc(100% - 12px) !important;
-        max-width: calc(100% - 12px) !important;
+        padding: 8px 6px !important;
       }
 
       .poster-placeholder {
@@ -1884,13 +1512,14 @@ function injectCardFixStyle() {
       }
 
       .similar-block {
-        padding-bottom: 190px !important;
+        padding-bottom: 150px !important;
       }
     }
   `;
 
   document.head.appendChild(style);
 }
+
 function handlePosterError(img) {
   if (!img) return;
 
@@ -1906,7 +1535,6 @@ function handlePosterError(img) {
     wrap.appendChild(placeholder);
   }
 }
-
 function getBadges(m) {
   const badges = [];
   const fav = loadSet(favKey);
@@ -1940,6 +1568,7 @@ function getBadges(m) {
 
 function badgesHtml(m) {
   const badges = getBadges(m);
+
   if (!badges.length) return "";
 
   return `
@@ -1998,6 +1627,7 @@ function injectBadgesStyle() {
       background: linear-gradient(180deg, rgba(14,165,233,.95), rgba(12,74,110,.95));
       border-color: rgba(125,211,252,.9);
     }
+
     .badge-cartoon {
       background: linear-gradient(180deg, rgba(236,72,153,.95), rgba(157,23,77,.95));
       border-color: rgba(249,168,212,.9);
@@ -2038,7 +1668,6 @@ function injectBadgesStyle() {
 
   document.head.appendChild(style);
 }
-
 function cardHtml(m) {
   injectHomeStyle();
   injectBadgesStyle();
@@ -2046,9 +1675,6 @@ function cardHtml(m) {
 
   const fav = loadSet(favKey);
   const isFav = fav.has(String(m.id));
-
-  const ratingRank = rankOf(m).rank;
-  const ratingValue = getRating(m).toFixed(1);
 
   const poster = m.poster
     ? `<img loading="lazy" src="${escapeAttr(m.poster)}" alt="" onerror="handlePosterError(this)">`
@@ -2077,9 +1703,8 @@ function cardHtml(m) {
         <p class="card-title">${escapeHtml(titleOf(m))}</p>
         <p class="meta">${escapeHtml(m.year || "—")} · ${escapeHtml(m.type || "—")}</p>
         <p class="meta">${escapeHtml(genres)}</p>
-        <span class="rating rank-${ratingRank.toLowerCase()}">
-          <span class="rating-full">${ratingRank}-класс · ${ratingValue}</span>
-          <span class="rating-short">${ratingRank} · ${ratingValue}</span>
+        <span class="rating rank-${rankOf(m).rank.toLowerCase()}">
+          ${rankOf(m).rank}-класс · ${getRating(m).toFixed(1)}
         </span>
       </div>
     </article>
@@ -2116,7 +1741,6 @@ function toggleCardFavorite(id, btn) {
     applyFilters();
   }
 }
-
 /* ===== ПОХОЖИЕ ===== */
 
 function injectSimilarStyle() {
@@ -2306,7 +1930,6 @@ function renderSimilarItems(m) {
 
   bindCardClicks(grid);
 }
-
 /* ===== ЧТО ПОСМОТРЕТЬ ===== */
 
 function openWhatToWatch() {
@@ -2476,10 +2099,6 @@ function openDetails(m) {
 
   updateFavBtn();
 
-  if (typeof addOfficialEmbedButtonsToDetails === "function") {
-    addOfficialEmbedButtonsToDetails(m);
-  }
-
   const dialog = $("detailsDialog");
   if (dialog && !dialog.open) {
     dialog.showModal();
@@ -2500,7 +2119,6 @@ function openDetails(m) {
     loadRussianDescriptionIntoDialog(m);
   }, 100);
 }
-
 function updateFavBtn() {
   const favBtn = $("favBtn");
   if (!favBtn) return;
@@ -2521,15 +2139,6 @@ function toggleFav() {
 
   saveSet(favKey, fav);
   updateFavBtn();
-
-  document.querySelectorAll(".card-fav-btn").forEach(btn => {
-    if (String(btn.getAttribute("data-fav-id")) === id) {
-      const isFav = fav.has(id);
-      btn.classList.toggle("active", isFav);
-      btn.textContent = isFav ? "❤️" : "🤍";
-      btn.title = isFav ? "Убрать из избранного" : "Добавить в избранное";
-    }
-  });
 
   if (currentTab === "fav") applyFilters();
 }
@@ -2562,34 +2171,11 @@ function setupMobileFilters() {
 
   panel.insertAdjacentElement("beforebegin", btn);
 
-  function isTypingNow() {
-    const active = document.activeElement;
-    if (!active) return false;
-
-    const tag = active.tagName ? active.tagName.toLowerCase() : "";
-
-    return (
-      tag === "input" ||
-      tag === "textarea" ||
-      tag === "select" ||
-      active.isContentEditable
-    );
-  }
-
   function closeOnMobile() {
     if (window.innerWidth <= 700) {
-      /*
-        ВАЖНО:
-        На телефоне при открытии клавиатуры срабатывает resize.
-        Если человек сейчас пишет в поиск — фильтры НЕ сворачиваем.
-      */
-      if (isTypingNow()) return;
-
-      if (!panel.classList.contains("mobile-open")) {
-        panel.classList.add("mobile-collapsed");
-        panel.classList.remove("mobile-open");
-        btn.textContent = "☰ Фильтры";
-      }
+      panel.classList.add("mobile-collapsed");
+      panel.classList.remove("mobile-open");
+      btn.textContent = "☰ Фильтры";
     } else {
       panel.classList.remove("mobile-collapsed");
       panel.classList.remove("mobile-open");
@@ -2611,31 +2197,10 @@ function setupMobileFilters() {
     }
   });
 
-  /*
-    Не даём фильтрам закрываться, когда человек тыкает внутрь поиска/селектов.
-  */
-  panel.querySelectorAll("input, textarea, select").forEach(el => {
-    el.addEventListener("focus", () => {
-      if (window.innerWidth <= 700) {
-        panel.classList.remove("mobile-collapsed");
-        panel.classList.add("mobile-open");
-        btn.textContent = "✕ Скрыть фильтры";
-      }
-    });
-  });
-
   window.addEventListener("resize", closeOnMobile);
-
-  if (window.innerWidth <= 700) {
-    panel.classList.add("mobile-collapsed");
-    panel.classList.remove("mobile-open");
-    btn.textContent = "☰ Фильтры";
-  } else {
-    panel.classList.remove("mobile-collapsed");
-    panel.classList.remove("mobile-open");
-    btn.textContent = "☰ Фильтры";
-  }
+  closeOnMobile();
 }
+
 /* ===== СБРОС И СОБЫТИЯ ===== */
 
 function resetFilters() {
@@ -2763,800 +2328,3 @@ function showError(e) {
 
 setupEvents();
 loadData().catch(showError);
-/* =========================================================
-   ОФИЦИАЛЬНЫЕ EMBED-ПЛЕЕРЫ RUTUBE
-========================================================= */
-
-const OFFICIAL_EMBEDS = {
-    "Ванпанчмен": [
-    {
-      name: "Rutube — 1 сезон 1 серия",
-      src: "https://rutube.ru/play/embed/d6b0a760d96b6ac2d6bed2193e95f5e0/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 2 серия",
-      src: "https://rutube.ru/play/embed/8c395fcf43a371d4f1338f5a51a5f46f/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 3 серия",
-      src: "https://rutube.ru/play/embed/7b030425b69390b80170fd4e52e9ac1b/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 4 серия",
-      src: "https://rutube.ru/play/embed/045b1d3f176b8db48ce8a5fd3c57c8b6/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 5 серия",
-      src: "https://rutube.ru/play/embed/40ccd7778428998005221a70057c6d0b/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 6 серия",
-      src: "https://rutube.ru/play/embed/563d1ee3e68b3993f933eed1d9158cef/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 7 серия",
-      src: "https://rutube.ru/play/embed/f14286dccb2c4a6598768803331d8112/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 8 серия",
-      src: "https://rutube.ru/play/embed/725962e3357a8aed00378d8f3f8182ee/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 9 серия",
-      src: "https://rutube.ru/play/embed/45564aad021444f37f4883e517b96fcb/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 10 серия",
-      src: "https://rutube.ru/play/embed/562b3d68af589ea5bc1cb56a43e98c14/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 11 серия",
-      src: "https://rutube.ru/play/embed/94070cec15f39b7f9f3a8db0243a19db/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 12 серия",
-      src: "https://rutube.ru/play/embed/40307b2e324ddb314cde0333b1eeab8d/",
-      source: "rutube"
-    }
-  ],
-
-  "One Punch Man": [
-    {
-      name: "Rutube — 1 сезон 1 серия",
-      src: "https://rutube.ru/play/embed/d6b0a760d96b6ac2d6bed2193e95f5e0/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 2 серия",
-      src: "https://rutube.ru/play/embed/8c395fcf43a371d4f1338f5a51a5f46f/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 3 серия",
-      src: "https://rutube.ru/play/embed/7b030425b69390b80170fd4e52e9ac1b/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 4 серия",
-      src: "https://rutube.ru/play/embed/045b1d3f176b8db48ce8a5fd3c57c8b6/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 5 серия",
-      src: "https://rutube.ru/play/embed/40ccd7778428998005221a70057c6d0b/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 6 серия",
-      src: "https://rutube.ru/play/embed/563d1ee3e68b3993f933eed1d9158cef/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 7 серия",
-      src: "https://rutube.ru/play/embed/f14286dccb2c4a6598768803331d8112/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 8 серия",
-      src: "https://rutube.ru/play/embed/725962e3357a8aed00378d8f3f8182ee/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 9 серия",
-      src: "https://rutube.ru/play/embed/45564aad021444f37f4883e517b96fcb/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 10 серия",
-      src: "https://rutube.ru/play/embed/562b3d68af589ea5bc1cb56a43e98c14/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 11 серия",
-      src: "https://rutube.ru/play/embed/94070cec15f39b7f9f3a8db0243a19db/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 12 серия",
-      src: "https://rutube.ru/play/embed/40307b2e324ddb314cde0333b1eeab8d/",
-      source: "rutube"
-    }
-  ],
-
-  "Wanpanman": [
-    {
-      name: "Rutube — 1 сезон 1 серия",
-      src: "https://rutube.ru/play/embed/d6b0a760d96b6ac2d6bed2193e95f5e0/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 2 серия",
-      src: "https://rutube.ru/play/embed/8c395fcf43a371d4f1338f5a51a5f46f/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 3 серия",
-      src: "https://rutube.ru/play/embed/7b030425b69390b80170fd4e52e9ac1b/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 4 серия",
-      src: "https://rutube.ru/play/embed/045b1d3f176b8db48ce8a5fd3c57c8b6/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 5 серия",
-      src: "https://rutube.ru/play/embed/40ccd7778428998005221a70057c6d0b/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 6 серия",
-      src: "https://rutube.ru/play/embed/563d1ee3e68b3993f933eed1d9158cef/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 7 серия",
-      src: "https://rutube.ru/play/embed/f14286dccb2c4a6598768803331d8112/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 8 серия",
-      src: "https://rutube.ru/play/embed/725962e3357a8aed00378d8f3f8182ee/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 9 серия",
-      src: "https://rutube.ru/play/embed/45564aad021444f37f4883e517b96fcb/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 10 серия",
-      src: "https://rutube.ru/play/embed/562b3d68af589ea5bc1cb56a43e98c14/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 11 серия",
-      src: "https://rutube.ru/play/embed/94070cec15f39b7f9f3a8db0243a19db/",
-      source: "rutube"
-    },
-    {
-      name: "Rutube — 1 сезон 12 серия",
-      src: "https://rutube.ru/play/embed/40307b2e324ddb314cde0333b1eeab8d/",
-      source: "rutube"
-    }
-  ],
-  "Первородный грех Такопи": [
-    {
-      name: "Rutube — 1 серия «Спасение Такопи»",
-      src: "https://rutube.ru/play/embed/358a77c35a6c49d3d1a6afd9f317c1fe/",
-      source: "rutube"
-    }
-  ],
-
-  "Takopi's Original Sin": [
-    {
-      name: "Rutube — 1 серия «Спасение Такопи»",
-      src: "https://rutube.ru/play/embed/358a77c35a6c49d3d1a6afd9f317c1fe/",
-      source: "rutube"
-    }
-  ],
-
-  "Takopii no Genzai": [
-    {
-      name: "Rutube — 1 серия «Спасение Такопи»",
-      src: "https://rutube.ru/play/embed/358a77c35a6c49d3d1a6afd9f317c1fe/",
-      source: "rutube"
-    }
-  ]
-};
-
-function getOfficialEmbedsForMovie(movie) {
-  if (!movie) return [];
-
-  const titles = [
-    movie.ru,
-    movie.en,
-    movie.title,
-    movie.name,
-    typeof titleOf === "function" ? titleOf(movie) : ""
-  ]
-    .filter(Boolean)
-    .map(x => String(x).trim());
-
-  for (const title of titles) {
-    if (OFFICIAL_EMBEDS[title]) {
-      return OFFICIAL_EMBEDS[title];
-    }
-  }
-
-  return [];
-}
-
-
-function injectOfficialEmbedStyle() {
-  if (document.getElementById("officialEmbedStyle")) return;
-
-  const style = document.createElement("style");
-  style.id = "officialEmbedStyle";
-  style.textContent = `
-    .official-embed-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      background: rgba(0, 0, 0, 0.82);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-    }
-
-    .official-embed-modal {
-      width: min(1100px, 100%);
-      background: #020617;
-      border-radius: 22px;
-      border: 1px solid rgba(34, 211, 238, 0.45);
-      box-shadow: 0 0 35px rgba(59, 130, 246, 0.38);
-      overflow: hidden;
-    }
-
-    .official-embed-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 14px 16px;
-      background: linear-gradient(135deg, #111827, #0f172a);
-      color: white;
-    }
-
-    .official-embed-head h3 {
-      margin: 0;
-      font-size: 18px;
-    }
-
-    #closeOfficialEmbedBtn {
-      width: 40px;
-      height: 40px;
-      border: none;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.12);
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    .official-embed-frame-wrap {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: black;
-    }
-
-    .official-embed-frame-wrap iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
-    }
-
-    .official-embed-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 10px 15px;
-      border-radius: 14px;
-      border: 1px solid rgba(103, 232, 249, 0.55);
-      background: linear-gradient(135deg, #ef4444, #7c3aed);
-      color: white;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 0 16px rgba(124, 58, 237, 0.25);
-    }
-
-    .official-embed-btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.12);
-    }
-
-    .official-episodes-box {
-      width: 100%;
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(2, 6, 23, 0.72);
-      border: 1px solid rgba(34, 211, 238, 0.32);
-      box-shadow: 0 0 18px rgba(59, 130, 246, 0.18);
-      flex-basis: 100%;
-    }
-
-    .official-episodes-title {
-      margin: 0 0 12px;
-      color: #facc15;
-      font-size: 18px;
-    }
-
-    .official-episodes-grid {
-      display: grid !important;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 10px;
-      width: 100%;
-    }
-
-    .official-episodes-grid .official-embed-btn {
-      min-height: 46px;
-      padding: 10px 12px;
-      text-align: center;
-      line-height: 1.15;
-    }
-
-    @media (max-width: 700px) {
-      .official-episodes-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .official-episodes-grid .official-embed-btn {
-        font-size: 14px;
-        min-height: 44px;
-      }
-    }
-  `;
-
-  document.head.appendChild(style);
-}
-
-function openOfficialEmbedPlayer(embed) {
-  injectOfficialEmbedStyle();
-
-  const old = document.getElementById("officialEmbedBackdrop");
-  if (old) old.remove();
-
-  const backdrop = document.createElement("div");
-  backdrop.id = "officialEmbedBackdrop";
-  backdrop.className = "official-embed-backdrop";
-
-  backdrop.innerHTML = `
-    <div class="official-embed-modal">
-      <div class="official-embed-head">
-        <h3>${embed.name}</h3>
-        <button id="closeOfficialEmbedBtn" type="button">✕</button>
-      </div>
-
-      <div class="official-embed-frame-wrap">
-        <iframe
-          src="${embed.src}"
-          allow="clipboard-write; autoplay"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(backdrop);
-
-  document.getElementById("closeOfficialEmbedBtn").addEventListener("click", () => {
-    backdrop.remove();
-  });
-
-  backdrop.addEventListener("click", (e) => {
-    if (e.target === backdrop) {
-      backdrop.remove();
-    }
-  });
-}
-function closeDetailsBeforePlayer() {
-  const possibleDetails = [
-    document.getElementById("detailsDialog"),
-    document.getElementById("detailsModal"),
-    document.getElementById("detailModal"),
-    document.querySelector(".details-dialog"),
-    document.querySelector(".detail-dialog"),
-    document.querySelector(".modal"),
-    document.querySelector(".dialog")
-  ];
-
-  possibleDetails.forEach(el => {
-    if (!el) return;
-
-    if (typeof el.close === "function") {
-      try {
-        el.close();
-      } catch (e) {}
-    }
-
-    el.classList.remove("open", "active", "show");
-    el.style.display = "none";
-  });
-
-  document.body.classList.remove("modal-open", "dialog-open");
-}
-function addOfficialEmbedButtonsToDetails(movie) {
-  const embeds = getOfficialEmbedsForMovie(movie);
-  if (!embeds.length) return;
-
-  document.querySelectorAll(".official-episodes-box").forEach(el => el.remove());
-
-  let videoBlock = null;
-
-  document.querySelectorAll("section, div").forEach(el => {
-    const h = el.querySelector("h3, h2");
-    if (h && h.textContent.trim().toLowerCase().includes("видео")) {
-      videoBlock = el;
-    }
-  });
-
-  if (!videoBlock) {
-    videoBlock =
-      document.querySelector("#catalogLinksBlock") ||
-      document.querySelector(".detail-links") ||
-      document.querySelector(".details-body") ||
-      document.querySelector("#detailsDialog") ||
-      document.body;
-  }
-
-  const episodesBox = document.createElement("div");
-  episodesBox.className = "official-episodes-box";
-
-  const title = document.createElement("h3");
-  title.className = "official-episodes-title";
-  title.textContent = "Серии Rutube";
-
-  const grid = document.createElement("div");
-  grid.className = "official-episodes-grid";
-
-  embeds.forEach((embed, index) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "official-embed-btn";
-    btn.textContent = `${index + 1} серия`;
-
-    btn.addEventListener("click", () => {
-      closeDetailsBeforePlayer();
-      openOfficialEmbedPlayer(embed);
-    });
-
-    grid.appendChild(btn);
-  });
-
-  episodesBox.appendChild(title);
-  episodesBox.appendChild(grid);
-  videoBlock.appendChild(episodesBox);
-}
-  const embeds = getOfficialEmbedsForMovie(movie);
-  if (!embeds.length) return;
-
-  const detailButtons =
-    document.querySelector(".detail-buttons") ||
-    document.querySelector(".watch-links") ||
-    document.querySelector("#catalogLinksBlock .detail-buttons");
-
-  if (!detailButtons) return;
-
-  detailButtons.querySelectorAll(".official-episodes-box").forEach(box => box.remove());
-  detailButtons.querySelectorAll(".official-embed-btn").forEach(btn => btn.remove());
-
-  const episodesBox = document.createElement("div");
-  episodesBox.className = "official-episodes-box";
-
-  const title = document.createElement("h3");
-  title.className = "official-episodes-title";
-  title.textContent = "Серии Rutube";
-
-  const grid = document.createElement("div");
-  grid.className = "official-episodes-grid";
-
-  embeds.forEach((embed, index) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "official-embed-btn";
-    btn.textContent = `${index + 1} серия`;
-
-    btn.addEventListener("click", () => {
-      closeDetailsBeforePlayer();
-      openOfficialEmbedPlayer(embed);
-    });
-
-    grid.appendChild(btn);
-  });
-
-  episodesBox.appendChild(title);
-  episodesBox.appendChild(grid);
-  detailButtons.appendChild(episodesBox);
-}
-/* ===== БЕЗОПАСНЫЙ ПЛЕЕР: НЕ ЛОМАЕТ КАТАЛОГ, ЕСЛИ HTML-ПЛЕЕРА НЕТ ===== */
-
-(function initAnimePlayerSafe() {
-  const animePlayerSection = document.getElementById("animePlayerSection");
-  const animeVideo = document.getElementById("animeVideo");
-  const animeVideoSource = document.getElementById("animeVideoSource");
-  const animePlayerTitle = document.getElementById("animePlayerTitle");
-  const playPauseBtn = document.getElementById("playPauseBtn");
-  const bigPlayBtn = document.getElementById("bigPlayBtn");
-  const progressBar = document.getElementById("progressBar");
-  const currentTimeText = document.getElementById("currentTime");
-  const durationTimeText = document.getElementById("durationTime");
-  const muteBtn = document.getElementById("muteBtn");
-  const volumeBar = document.getElementById("volumeBar");
-  const fullscreenBtn = document.getElementById("fullscreenBtn");
-  const prevEpisodeBtn = document.getElementById("prevEpisodeBtn");
-  const nextEpisodeBtn = document.getElementById("nextEpisodeBtn");
-  const episodesList = document.getElementById("episodesList");
-  const closePlayerBtn = document.getElementById("closePlayerBtn");
-
-  if (
-    !animePlayerSection ||
-    !animeVideo ||
-    !animeVideoSource ||
-    !animePlayerTitle ||
-    !playPauseBtn ||
-    !bigPlayBtn ||
-    !progressBar ||
-    !currentTimeText ||
-    !durationTimeText ||
-    !muteBtn ||
-    !volumeBar ||
-    !fullscreenBtn ||
-    !prevEpisodeBtn ||
-    !nextEpisodeBtn ||
-    !episodesList ||
-    !closePlayerBtn
-  ) {
-    console.warn("Плеер не запущен: HTML-блок плеера не найден. Каталог работает дальше.");
-    return;
-  }
-
-  const animeEpisodes = [
-    {
-      title: "Initial D — 1 сезон, 1 серия",
-      src: "videos/initial-d/s1/e1.mp4",
-      type: "video/mp4"
-    },
-    {
-      title: "Initial D — 1 сезон, 2 серия",
-      src: "videos/initial-d/s1/e2.mp4",
-      type: "video/mp4"
-    },
-    {
-      title: "Initial D — 1 сезон, 3 серия",
-      src: "videos/initial-d/s1/e3.mp4",
-      type: "video/mp4"
-    }
-  ];
-
-  let currentEpisodeIndex = 0;
-
-  function formatTime(seconds) {
-    if (isNaN(seconds)) return "00:00";
-
-    const minutes = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-
-    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
-  }
-
-  function renderEpisodes() {
-    episodesList.innerHTML = "";
-
-    animeEpisodes.forEach((episode, index) => {
-      const button = document.createElement("button");
-      button.textContent = `${index + 1} серия`;
-
-      if (index === currentEpisodeIndex) {
-        button.classList.add("active");
-      }
-
-      button.addEventListener("click", () => {
-        loadEpisode(index, true);
-      });
-
-      episodesList.appendChild(button);
-    });
-  }
-
-  function loadEpisode(index, autoplay = true) {
-    if (index < 0 || index >= animeEpisodes.length) return;
-
-    currentEpisodeIndex = index;
-    const episode = animeEpisodes[index];
-
-    animePlayerTitle.textContent = episode.title;
-    animeVideoSource.src = episode.src;
-    animeVideoSource.type = episode.type;
-
-    animeVideo.load();
-
-    if (autoplay) {
-      animeVideo.play().catch(() => {});
-    }
-
-    localStorage.setItem("lastAnimeEpisodeIndex", String(index));
-    renderEpisodes();
-
-    animePlayerSection.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
-
-  function togglePlay() {
-    if (animeVideo.paused) {
-      animeVideo.play();
-    } else {
-      animeVideo.pause();
-    }
-  }
-
-  function updatePlayButtons() {
-    if (animeVideo.paused) {
-      playPauseBtn.textContent = "▶";
-      bigPlayBtn.classList.remove("hidden");
-    } else {
-      playPauseBtn.textContent = "⏸";
-      bigPlayBtn.classList.add("hidden");
-    }
-  }
-
-  playPauseBtn.addEventListener("click", togglePlay);
-  bigPlayBtn.addEventListener("click", togglePlay);
-  animeVideo.addEventListener("click", togglePlay);
-  animeVideo.addEventListener("play", updatePlayButtons);
-  animeVideo.addEventListener("pause", updatePlayButtons);
-
-  animeVideo.addEventListener("loadedmetadata", () => {
-    durationTimeText.textContent = formatTime(animeVideo.duration);
-  });
-
-  animeVideo.addEventListener("timeupdate", () => {
-    const progress = (animeVideo.currentTime / animeVideo.duration) * 100;
-    progressBar.value = isNaN(progress) ? 0 : progress;
-    currentTimeText.textContent = formatTime(animeVideo.currentTime);
-
-    localStorage.setItem(
-      `animeProgress_${currentEpisodeIndex}`,
-      String(animeVideo.currentTime)
-    );
-  });
-
-  progressBar.addEventListener("input", () => {
-    const newTime = (progressBar.value / 100) * animeVideo.duration;
-    animeVideo.currentTime = newTime;
-  });
-
-  muteBtn.addEventListener("click", () => {
-    animeVideo.muted = !animeVideo.muted;
-    muteBtn.textContent = animeVideo.muted ? "🔇" : "🔊";
-  });
-
-  volumeBar.addEventListener("input", () => {
-    animeVideo.volume = Number(volumeBar.value);
-
-    if (animeVideo.volume === 0) {
-      animeVideo.muted = true;
-      muteBtn.textContent = "🔇";
-    } else {
-      animeVideo.muted = false;
-      muteBtn.textContent = "🔊";
-    }
-  });
-
-  fullscreenBtn.addEventListener("click", () => {
-    const wrapper = document.querySelector(".custom-video-wrapper");
-    if (!wrapper) return;
-
-    if (!document.fullscreenElement) {
-      wrapper.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
-  });
-
-  nextEpisodeBtn.addEventListener("click", () => {
-    loadEpisode(currentEpisodeIndex + 1, true);
-  });
-
-  prevEpisodeBtn.addEventListener("click", () => {
-    loadEpisode(currentEpisodeIndex - 1, true);
-  });
-
-  animeVideo.addEventListener("ended", () => {
-    if (currentEpisodeIndex < animeEpisodes.length - 1) {
-      loadEpisode(currentEpisodeIndex + 1, true);
-    }
-  });
-
-  animeVideo.addEventListener("loadeddata", () => {
-    const savedProgress = localStorage.getItem(`animeProgress_${currentEpisodeIndex}`);
-
-    if (savedProgress && Number(savedProgress) > 5) {
-      animeVideo.currentTime = Number(savedProgress);
-    }
-  });
-
-  closePlayerBtn.addEventListener("click", () => {
-    animeVideo.pause();
-    animePlayerSection.style.display = "none";
-  });
-
-  const savedEpisodeIndex = localStorage.getItem("lastAnimeEpisodeIndex");
-
-  if (savedEpisodeIndex !== null) {
-    loadEpisode(Number(savedEpisodeIndex), false);
-  } else {
-    renderEpisodes();
-    updatePlayButtons();
-  }
-})();
-/* =========================================================
-   ФОН ПО РАЗДЕЛАМ
-========================================================= */
-
-(function () {
-  const BACKGROUNDS_BY_TAB = {
-    all: "linear-gradient(rgba(3,7,18,.86), rgba(3,7,18,.94)), url('logo-banner.png.png')",
-    anime: "linear-gradient(rgba(3,7,18,.76), rgba(3,7,18,.94)), url('anime-tv/anime-bg.jpg')",
-    movies: "linear-gradient(rgba(3,7,18,.78), rgba(3,7,18,.95)), url('film/movie-bg.jpg')",
-    series: "linear-gradient(rgba(3,7,18,.78), rgba(3,7,18,.95)), url('film/series-bg.jpg')",
-    cartoons: "linear-gradient(rgba(3,7,18,.78), rgba(3,7,18,.95)), url('film/cartoon-bg.jpg')",
-    top: "linear-gradient(rgba(3,7,18,.80), rgba(3,7,18,.95)), url('logo-banner.png.png')",
-    new: "linear-gradient(rgba(3,7,18,.80), rgba(3,7,18,.95)), url('logo-banner.png.png')",
-    popular: "linear-gradient(rgba(3,7,18,.80), rgba(3,7,18,.95)), url('logo-banner.png.png')",
-    fav: "linear-gradient(rgba(3,7,18,.80), rgba(3,7,18,.95)), url('logo-banner.png.png')",
-    history: "linear-gradient(rgba(3,7,18,.80), rgba(3,7,18,.95)), url('logo-banner.png.png')",
-    random: "linear-gradient(rgba(3,7,18,.80), rgba(3,7,18,.95)), url('logo-banner.png.png')"
-  };
-
-  function setBackgroundByTab(tabName) {
-    const bg = BACKGROUNDS_BY_TAB[tabName] || BACKGROUNDS_BY_TAB.all;
-
-    document.body.style.backgroundImage = bg;
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundAttachment = "fixed";
-    document.body.style.backgroundPosition = "center top";
-  }
-
-  document.addEventListener("click", function (e) {
-    const tab = e.target.closest(".tab");
-
-    if (!tab) return;
-
-    const tabName = tab.dataset.tab || "all";
-
-    setBackgroundByTab(tabName);
-  });
-
-  window.addEventListener("load", function () {
-    const activeTab = document.querySelector(".tab.active");
-    setBackgroundByTab(activeTab ? activeTab.dataset.tab : "all");
-  });
-})();
