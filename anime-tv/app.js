@@ -1,4 +1,4 @@
-const DATA_URL = "../anime_updates.json";
+const DATA_URL = "https://raw.githubusercontent.com/dragokas371158989-png/anime-tv-updates/main/anime_updates.json";
 
 const PAGE_SIZE = 24;
 
