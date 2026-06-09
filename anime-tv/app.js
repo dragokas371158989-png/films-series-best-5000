@@ -1,4 +1,4 @@
-const DATA_URL = "https://raw.githubusercontent.com/dragokas371158989-png/films-series-best-5000/main/movies_updates.json";
+const DATA_URL = "anime_data.json";
 
 const PAGE_SIZE = 24;
 
