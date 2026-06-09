@@ -3034,3 +3034,117 @@ animeTitleObserver.observe(document.body, {
   childList: true,
   subtree: true
 });
+/* =========================================================
+   ДОПОЛНИТЕЛЬНЫЙ ПЕРЕВОД НАЗВАНИЙ АНИМЕ
+   Вставить в самый низ app.js
+========================================================= */
+
+(function () {
+  const EXTRA_ANIME_RU_TITLES = {
+    "Sousou no Frieren": "Провожающая в последний путь Фрирен",
+    "Frieren: Beyond Journey's End": "Провожающая в последний путь Фрирен",
+
+    "Chainsaw Man": "Человек-бензопила",
+
+    "Steel Ball Run: JoJo no Kimyou na Bouken": "Невероятное приключение ДжоДжо: Steel Ball Run",
+    "Steel Ball Run": "Невероятное приключение ДжоДжо: Steel Ball Run",
+    "JoJo no Kimyou na Bouken": "Невероятное приключение ДжоДжо",
+
+    "Gintama: The Final": "Гинтама: Финал",
+    "Gintama The Final": "Гинтама: Финал",
+    "Gintama°": "Гинтама",
+    "Gintama": "Гинтама",
+
+    "Steins;Gate": "Врата Штейна",
+    "Steins Gate": "Врата Штейна",
+
+    "Attack on Titan Season 3 Part 2": "Атака титанов: 3 сезон, часть 2",
+    "Attack on Titan": "Атака титанов",
+    "Shingeki no Kyojin Season 3 Part 2": "Атака титанов: 3 сезон, часть 2",
+    "Shingeki no Kyojin": "Атака титанов",
+
+    "Fullmetal Alchemist: Brotherhood": "Стальной алхимик: Братство",
+    "Fullmetal Alchemist": "Стальной алхимик",
+
+    "Bleach: Sennen Kessen-hen": "Блич: Тысячелетняя кровавая война",
+    "Bleach: Thousand-Year Blood War": "Блич: Тысячелетняя кровавая война",
+    "Bleach": "Блич",
+
+    "One Piece Fan Letter": "Ван-Пис: Письмо фаната",
+    "Ван-Пис Fan Letter": "Ван-Пис: Письмо фаната",
+    "One Piece": "Ван-Пис"
+  };
+
+  function extraTranslateTitle(text) {
+    if (!text) return text;
+
+    let result = String(text).trim();
+
+    // Сначала точное совпадение
+    if (EXTRA_ANIME_RU_TITLES[result]) {
+      return EXTRA_ANIME_RU_TITLES[result];
+    }
+
+    // Потом замена внутри строки, от длинных названий к коротким
+    Object.keys(EXTRA_ANIME_RU_TITLES)
+      .sort((a, b) => b.length - a.length)
+      .forEach((enTitle) => {
+        if (result.includes(enTitle)) {
+          result = result.replaceAll(enTitle, EXTRA_ANIME_RU_TITLES[enTitle]);
+        }
+      });
+
+    return result;
+  }
+
+  function extraTranslateAnimeTitlesOnPage() {
+    const elements = document.querySelectorAll(`
+      h1,
+      h2,
+      h3,
+      h4,
+      .title,
+      .movie-title,
+      .anime-title,
+      .card-title,
+      .film-title,
+      .name,
+      .movie-card *,
+      .anime-card *,
+      .card *
+    `);
+
+    elements.forEach((el) => {
+      if (!el || !el.textContent) return;
+
+      // Не трогаем большие блоки с кучей текста
+      if (el.children.length > 0) return;
+
+      const oldText = el.textContent.trim();
+      if (!oldText) return;
+
+      const newText = extraTranslateTitle(oldText);
+
+      if (newText !== oldText) {
+        el.textContent = newText;
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", extraTranslateAnimeTitlesOnPage);
+
+  setTimeout(extraTranslateAnimeTitlesOnPage, 300);
+  setTimeout(extraTranslateAnimeTitlesOnPage, 1000);
+  setTimeout(extraTranslateAnimeTitlesOnPage, 2500);
+  setTimeout(extraTranslateAnimeTitlesOnPage, 5000);
+
+  const extraAnimeObserver = new MutationObserver(() => {
+    extraTranslateAnimeTitlesOnPage();
+  });
+
+  extraAnimeObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+})();
