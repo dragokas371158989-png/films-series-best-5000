@@ -164,21 +164,26 @@ async function loadData() {
 
 allAnime = rawList.filter(item => {
   const title = getTitle(item);
-  const type = normalize(getType(item));
-  const genres = getGenres(item).map(g => normalize(g)).join(" ");
-  const text = normalize([
-    title,
-    getEnTitle(item),
-    type,
-    genres
-  ].join(" "));
 
   if (title === "Без названия") return false;
+
+  const type = normalize(getType(item));
+  const genres = getGenres(item).map(g => normalize(g)).join(" ");
+
+  const fullText = normalize(JSON.stringify(item));
 
   return (
     type.includes("аниме") ||
     genres.includes("аниме") ||
-    text.includes("anime")
+    fullText.includes("anime") ||
+    fullText.includes("myanimelist") ||
+    fullText.includes("shikimori") ||
+    fullText.includes("jikan") ||
+    fullText.includes("mal_id") ||
+    fullText.includes("anidb") ||
+    fullText.includes("kitsu") ||
+    fullText.includes("ova") ||
+    fullText.includes("ona")
   );
 });
 
