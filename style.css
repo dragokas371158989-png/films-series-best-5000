@@ -383,3 +383,123 @@ dialog {
   white-space: nowrap;
   text-align: center;
 }
+/* ===== ЖЁСТКИЙ ФИКС МОБИЛЬНОЙ ВЕРСИИ ===== */
+
+html,
+body {
+  overflow-x: hidden !important;
+}
+
+/* Логотип */
+body img:first-of-type {
+  display: block !important;
+  width: auto !important;
+  max-width: calc(100vw - 32px) !important;
+  height: auto !important;
+  max-height: 105px !important;
+  object-fit: contain !important;
+  margin: 10px auto 14px auto !important;
+  float: none !important;
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+}
+
+/* Сетка */
+#grid,
+.grid,
+.home-row,
+.similar-grid {
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Карточки */
+.card {
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+}
+
+.poster-wrap {
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.card-body {
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Рейтинг */
+.rating {
+  width: calc(100% - 16px) !important;
+  max-width: calc(100% - 16px) !important;
+  min-width: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  align-self: center !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+}
+
+/* Похожие */
+.similar-grid .card {
+  overflow: hidden !important;
+  min-width: 0 !important;
+}
+
+.similar-grid .rating {
+  width: calc(100% - 14px) !important;
+  max-width: calc(100% - 14px) !important;
+  font-size: 13px !important;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+}
+
+/* Телефон */
+@media (max-width: 700px) {
+  body {
+    padding-bottom: 160px !important;
+  }
+
+  body img:first-of-type {
+    max-width: calc(100vw - 34px) !important;
+    max-height: 95px !important;
+    margin: 8px auto 12px auto !important;
+  }
+
+  .card-title {
+    font-size: 13px !important;
+    line-height: 1.15 !important;
+  }
+
+  .meta {
+    font-size: 11px !important;
+    line-height: 1.25 !important;
+  }
+
+  .rating {
+    width: calc(100% - 14px) !important;
+    max-width: calc(100% - 14px) !important;
+    font-size: 14px !important;
+    min-height: 40px !important;
+    padding: 7px 4px !important;
+    border-radius: 12px !important;
+  }
+
+  .similar-grid .rating {
+    width: calc(100% - 12px) !important;
+    max-width: calc(100% - 12px) !important;
+    font-size: 12px !important;
+  }
+}
