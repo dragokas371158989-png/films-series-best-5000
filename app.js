@@ -37,8 +37,74 @@ function saveSet(key, set) {
   localStorage.setItem(key, JSON.stringify([...set]));
 }
 
+function hasRussianLetters(text) {
+  return /[а-яА-ЯёЁ]/.test(String(text || ""));
+}
+
+function hasEnglishLetters(text) {
+  return /[a-zA-Z]/.test(String(text || ""));
+}
+
+function hasRuOrEnTitle(m) {
+  const candidates = [
+    m.ru,
+    m.en,
+    m.title_ru,
+    m.name_ru,
+    m.title_en,
+    m.name_en,
+    m.russian,
+    m.english,
+    m.russianTitle,
+    m.englishTitle,
+    m.originalTitle,
+    m.title,
+    m.name
+  ];
+
+  return candidates.some(x => {
+    const s = String(x || "").trim();
+    if (!s) return false;
+
+    return hasRussianLetters(s) || hasEnglishLetters(s);
+  });
+}
+
 function titleOf(m) {
-  return m.ru || m.en || m.title || m.name || "Без названия";
+  const ruCandidates = [
+    m.ru,
+    m.title_ru,
+    m.name_ru,
+    m.russian,
+    m.russianTitle
+  ];
+
+  const enCandidates = [
+    m.en,
+    m.title_en,
+    m.name_en,
+    m.english,
+    m.englishTitle,
+    m.originalTitle,
+    m.title,
+    m.name
+  ];
+
+  const ru = ruCandidates.find(x => {
+    const s = String(x || "").trim();
+    return s && hasRussianLetters(s);
+  });
+
+  if (ru) return String(ru).trim();
+
+  const en = enCandidates.find(x => {
+    const s = String(x || "").trim();
+    return s && hasEnglishLetters(s);
+  });
+
+  if (en) return String(en).trim();
+
+  return "Название пока не переведено";
 }
 
 function getYear(m) {
@@ -731,7 +797,7 @@ function applyFilters() {
   const sort = sortFilter ? sortFilter.value : "smart";
 
   let list = [...allMovies];
-
+list = list.filter(hasRuOrEnTitle);
   if (currentTab === "movies") list = list.filter(m => m.type === "Фильм");
   if (currentTab === "series") list = list.filter(m => m.type === "Сериал");
 
@@ -880,40 +946,43 @@ function bindCardClicks(root = document) {
 
 /* ===== ГЛАВНАЯ ===== */
 
+
 function renderHomeSections() {
   injectHomeStyle();
 
-  const anime = allMovies
+  const cleanMovies = allMovies.filter(hasRuOrEnTitle);
+
+  const anime = cleanMovies
     .filter(isAnimeItem)
     .sort((a, b) => scoreSmart(b) - scoreSmart(a))
     .slice(0, HOME_SECTION_LIMIT);
 
-  const movies = allMovies
+ const movies = cleanMovies
     .filter(m => m.type === "Фильм")
     .sort((a, b) => scoreSmart(b) - scoreSmart(a))
     .slice(0, HOME_SECTION_LIMIT);
 
-  const series = allMovies
+  const series = cleanMovies
     .filter(m => m.type === "Сериал")
     .sort((a, b) => scoreSmart(b) - scoreSmart(a))
     .slice(0, HOME_SECTION_LIMIT);
 
-  const cartoons = allMovies
+  const cartoons = cleanMovies
     .filter(m => getGenres(m).some(g => normalize(g).includes("мульт")) && !isAnimeItem(m))
     .sort((a, b) => scoreSmart(b) - scoreSmart(a))
     .slice(0, HOME_SECTION_LIMIT);
 
-  const newItems = allMovies
+  const newItems = cleanMovies
     .filter(m => Number(getYear(m)) >= 2024)
     .sort((a, b) => Number(getYear(b) || 0) - Number(getYear(a) || 0))
     .slice(0, HOME_SECTION_LIMIT);
 
-  const popular = allMovies
+  const popular = cleanMovies
     .filter(m => getVotes(m) >= 1000)
     .sort((a, b) => getVotes(b) - getVotes(a))
     .slice(0, HOME_SECTION_LIMIT);
 
-  const top = allMovies
+  const top = cleanMovies
     .filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP)
     .sort((a, b) => getRating(b) - getRating(a))
     .slice(0, HOME_SECTION_LIMIT);
