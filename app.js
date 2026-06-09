@@ -2892,3 +2892,145 @@ function getRussianAnimeTitle(title) {
 
   return cleanTitle;
 }
+/* =========================================================
+   АВТО-ПЕРЕВОД НАЗВАНИЙ АНИМЕ НА РУССКИЙ
+   Вставить в самый низ app.js
+========================================================= */
+
+const ANIME_RU_TITLES = {
+  "Initial D": "Инициал Ди",
+  "Initial D First Stage": "Инициал Ди: Первая стадия",
+  "Initial D Second Stage": "Инициал Ди: Вторая стадия",
+  "Initial D Third Stage": "Инициал Ди: Третья стадия",
+  "Initial D Fourth Stage": "Инициал Ди: Четвёртая стадия",
+  "Initial D Fifth Stage": "Инициал Ди: Пятая стадия",
+  "Initial D Final Stage": "Инициал Ди: Финальная стадия",
+
+  "One Piece": "Ван-Пис",
+  "Naruto": "Наруто",
+  "Naruto Shippuden": "Наруто: Ураганные хроники",
+  "Boruto: Naruto Next Generations": "Боруто: Новое поколение Наруто",
+
+  "Demon Slayer: Kimetsu no Yaiba": "Истребитель демонов",
+  "Kimetsu no Yaiba": "Истребитель демонов",
+  "Attack on Titan": "Атака титанов",
+  "Shingeki no Kyojin": "Атака титанов",
+  "Jujutsu Kaisen": "Магическая битва",
+  "Solo Leveling": "Поднятие уровня в одиночку",
+  "Ore dake Level Up na Ken": "Поднятие уровня в одиночку",
+
+  "Death Note": "Тетрадь смерти",
+  "Chainsaw Man": "Человек-бензопила",
+  "Black Clover": "Чёрный клевер",
+  "Bleach": "Блич",
+  "My Hero Academia": "Моя геройская академия",
+  "Boku no Hero Academia": "Моя геройская академия",
+
+  "Tokyo Ghoul": "Токийский гуль",
+  "Hunter x Hunter": "Охотник х Охотник",
+  "Fullmetal Alchemist: Brotherhood": "Стальной алхимик: Братство",
+  "Fullmetal Alchemist": "Стальной алхимик",
+
+  "Dragon Ball": "Драконий жемчуг",
+  "Dragon Ball Z": "Драконий жемчуг Z",
+  "Dragon Ball Super": "Драконий жемчуг Супер",
+
+  "Sword Art Online": "Мастера меча онлайн",
+  "Re:ZERO -Starting Life in Another World-": "Re:Zero — жизнь с нуля в другом мире",
+  "Overlord": "Повелитель",
+  "That Time I Got Reincarnated as a Slime": "О моём перерождении в слизь",
+  "Tensei shitara Slime Datta Ken": "О моём перерождении в слизь",
+
+  "The Daily Life of the Immortal King": "Повседневная жизнь бессмертного короля",
+  "The World's Finest Assassin Gets Reincarnated in Another World as an Aristocrat": "Лучший в мире ассасин, переродившийся в другом мире аристократом",
+  "Inuyashiki": "Инуясики",
+  "The Greatest Demon Lord Is Reborn as a Typical Nobody": "Величайший Повелитель Демонов перерождается как типичное ничтожество",
+  "Death March to the Parallel World Rhapsody": "Марш смерти под рапсодию параллельного мира",
+  "The Strongest Sage with the Weakest Crest": "Сильнейший мудрец низшей эмблемы",
+  "Chillin' in Another World with Level 2 Super Cheat Powers": "Неспешная жизнь уволенного тёмного солдата",
+  "The Aesthetic of a Rogue Hero": "Эстетика заблудшего героя"
+};
+
+function translateAnimeTitleText(text) {
+  if (!text) return text;
+
+  let result = String(text).trim();
+
+  if (ANIME_RU_TITLES[result]) {
+    return ANIME_RU_TITLES[result];
+  }
+
+  Object.keys(ANIME_RU_TITLES).forEach((enTitle) => {
+    if (result.includes(enTitle)) {
+      result = result.replaceAll(enTitle, ANIME_RU_TITLES[enTitle]);
+    }
+  });
+
+  return result;
+}
+
+function getAnimeTitleRu(movie) {
+  if (!movie) return "Без названия";
+
+  const ru = movie.ru ? String(movie.ru).trim() : "";
+  const en = movie.en ? String(movie.en).trim() : "";
+  const title = movie.title ? String(movie.title).trim() : "";
+  const name = movie.name ? String(movie.name).trim() : "";
+  const originalName = movie.original_name ? String(movie.original_name).trim() : "";
+  const originalTitle = movie.original_title ? String(movie.original_title).trim() : "";
+
+  if (ru) return ru;
+
+  const candidate = en || title || name || originalName || originalTitle;
+
+  if (!candidate) return "Без названия";
+
+  return translateAnimeTitleText(candidate);
+}
+
+function translateAnimeTitlesOnPage() {
+  const selectors = [
+    "h1",
+    "h2",
+    "h3",
+    ".title",
+    ".movie-title",
+    ".anime-title",
+    ".card-title",
+    ".film-title",
+    ".name"
+  ];
+
+  const elements = document.querySelectorAll(selectors.join(","));
+
+  elements.forEach((el) => {
+    if (!el || !el.textContent) return;
+
+    const oldText = el.textContent.trim();
+    const newText = translateAnimeTitleText(oldText);
+
+    if (newText !== oldText) {
+      el.textContent = newText;
+    }
+  });
+}
+
+/* Запускаем перевод сразу после загрузки страницы */
+document.addEventListener("DOMContentLoaded", () => {
+  translateAnimeTitlesOnPage();
+});
+
+/* Запускаем ещё раз через задержку, если карточки грузятся позже */
+setTimeout(translateAnimeTitlesOnPage, 500);
+setTimeout(translateAnimeTitlesOnPage, 1500);
+setTimeout(translateAnimeTitlesOnPage, 3000);
+
+/* Следим за сайтом: если появились новые карточки — переводим */
+const animeTitleObserver = new MutationObserver(() => {
+  translateAnimeTitlesOnPage();
+});
+
+animeTitleObserver.observe(document.body, {
+  childList: true,
+  subtree: true
+});
