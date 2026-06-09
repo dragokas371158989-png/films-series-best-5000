@@ -2983,3 +2983,46 @@ loadData().catch(showError);
     updatePlayButtons();
   }
 })();
+/* =========================================================
+   ФОН ПО РАЗДЕЛАМ
+========================================================= */
+
+(function () {
+  const BACKGROUNDS_BY_TAB = {
+    all: "linear-gradient(rgba(3,7,18,.86), rgba(3,7,18,.94)), url('logo-banner.png.png')",
+    anime: "linear-gradient(rgba(3,7,18,.76), rgba(3,7,18,.94)), url('anime-tv/anime-bg.jpg')",
+    movies: "linear-gradient(rgba(3,7,18,.78), rgba(3,7,18,.95)), url('film/movie-bg.jpg')",
+    series: "linear-gradient(rgba(3,7,18,.78), rgba(3,7,18,.95)), url('film/series-bg.jpg')",
+    cartoons: "linear-gradient(rgba(3,7,18,.78), rgba(3,7,18,.95)), url('film/cartoon-bg.jpg')",
+    top: "linear-gradient(rgba(3,7,18,.80), rgba(3,7,18,.95)), url('logo-banner.png.png')",
+    new: "linear-gradient(rgba(3,7,18,.80), rgba(3,7,18,.95)), url('logo-banner.png.png')",
+    popular: "linear-gradient(rgba(3,7,18,.80), rgba(3,7,18,.95)), url('logo-banner.png.png')",
+    fav: "linear-gradient(rgba(3,7,18,.80), rgba(3,7,18,.95)), url('logo-banner.png.png')",
+    history: "linear-gradient(rgba(3,7,18,.80), rgba(3,7,18,.95)), url('logo-banner.png.png')",
+    random: "linear-gradient(rgba(3,7,18,.80), rgba(3,7,18,.95)), url('logo-banner.png.png')"
+  };
+
+  function setBackgroundByTab(tabName) {
+    const bg = BACKGROUNDS_BY_TAB[tabName] || BACKGROUNDS_BY_TAB.all;
+
+    document.body.style.backgroundImage = bg;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundAttachment = "fixed";
+    document.body.style.backgroundPosition = "center top";
+  }
+
+  document.addEventListener("click", function (e) {
+    const tab = e.target.closest(".tab");
+
+    if (!tab) return;
+
+    const tabName = tab.dataset.tab || "all";
+
+    setBackgroundByTab(tabName);
+  });
+
+  window.addEventListener("load", function () {
+    const activeTab = document.querySelector(".tab.active");
+    setBackgroundByTab(activeTab ? activeTab.dataset.tab : "all");
+  });
+})();
