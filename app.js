@@ -2759,7 +2759,123 @@ function showError(e) {
 
 setupEvents();
 loadData().catch(showError);
+/* =========================================================
+   ОФИЦИАЛЬНЫЕ EMBED-ПЛЕЕРЫ RUTUBE
+========================================================= */
 
+const OFFICIAL_EMBEDS = {
+  "Первородный грех Такопи": [
+    {
+      name: "Rutube — 1 серия «Спасение Такопи»",
+      src: "https://rutube.ru/play/embed/358a77c35a6c49d3d1a6afd9f317c1fe/",
+      source: "rutube"
+    }
+  ],
+
+  "Takopi's Original Sin": [
+    {
+      name: "Rutube — 1 серия «Спасение Такопи»",
+      src: "https://rutube.ru/play/embed/358a77c35a6c49d3d1a6afd9f317c1fe/",
+      source: "rutube"
+    }
+  ],
+
+  "Takopii no Genzai": [
+    {
+      name: "Rutube — 1 серия «Спасение Такопи»",
+      src: "https://rutube.ru/play/embed/358a77c35a6c49d3d1a6afd9f317c1fe/",
+      source: "rutube"
+    }
+  ]
+};
+
+function getOfficialEmbedsForMovie(movie) {
+  if (!movie) return [];
+
+  const titles = [
+    movie.ru,
+    movie.en,
+    movie.title,
+    movie.name,
+    typeof titleOf === "function" ? titleOf(movie) : ""
+  ]
+    .filter(Boolean)
+    .map(x => String(x).trim());
+
+  for (const title of titles) {
+    if (OFFICIAL_EMBEDS[title]) {
+      return OFFICIAL_EMBEDS[title];
+    }
+  }
+
+  return [];
+}
+
+function openOfficialEmbedPlayer(embed) {
+  const old = document.getElementById("officialEmbedBackdrop");
+  if (old) old.remove();
+
+  const backdrop = document.createElement("div");
+  backdrop.id = "officialEmbedBackdrop";
+  backdrop.className = "official-embed-backdrop";
+
+  backdrop.innerHTML = `
+    <div class="official-embed-modal">
+      <div class="official-embed-head">
+        <h3>${embed.name}</h3>
+        <button id="closeOfficialEmbedBtn" type="button">✕</button>
+      </div>
+
+      <div class="official-embed-frame-wrap">
+        <iframe
+          src="${embed.src}"
+          allow="clipboard-write; autoplay"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(backdrop);
+
+  document.getElementById("closeOfficialEmbedBtn").addEventListener("click", () => {
+    backdrop.remove();
+  });
+
+  backdrop.addEventListener("click", (e) => {
+    if (e.target === backdrop) {
+      backdrop.remove();
+    }
+  });
+}
+
+function addOfficialEmbedButtonsToDetails(movie) {
+  const embeds = getOfficialEmbedsForMovie(movie);
+  if (!embeds.length) return;
+
+  const detailButtons =
+    document.querySelector(".detail-buttons") ||
+    document.querySelector(".watch-links") ||
+    document.querySelector("#catalogLinksBlock .detail-buttons");
+
+  if (!detailButtons) return;
+
+  detailButtons.querySelectorAll(".official-embed-btn").forEach(btn => btn.remove());
+
+  embeds.forEach(embed => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "official-embed-btn";
+    btn.textContent = "▶ " + embed.name;
+
+    btn.addEventListener("click", () => {
+      openOfficialEmbedPlayer(embed);
+    });
+
+    detailButtons.appendChild(btn);
+  });
+}
 /* ===== БЕЗОПАСНЫЙ ПЛЕЕР: НЕ ЛОМАЕТ КАТАЛОГ, ЕСЛИ HTML-ПЛЕЕРА НЕТ ===== */
 
 (function initAnimePlayerSafe() {
