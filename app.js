@@ -2118,6 +2118,14 @@ function openDetails(m) {
     if (!selectedMovie || String(selectedMovie.id) !== String(m.id)) return;
     loadRussianDescriptionIntoDialog(m);
   }, 100);
+
+  setTimeout(() => {
+    if (!selectedMovie || String(selectedMovie.id) !== String(m.id)) return;
+    if (typeof addOfficialEmbedButtonsToDetails === "function") {
+      addOfficialEmbedButtonsToDetails(m);
+    }
+  }, 160);
+
 }
 function updateFavBtn() {
   const favBtn = $("favBtn");
@@ -2326,10 +2334,10 @@ function showError(e) {
   }
 }
 
-
 /* =========================================================
    RUTUBE ПЛЕЕР И СЕЗОНЫ
-   Добавлено: Ванпанчмен / One Punch Man — 2 сезон
+   Работает с обычными ссылками Rutube вида:
+   https://rutube.ru/video/ID/?playlist=...
 ========================================================= */
 
 window.OFFICIAL_EMBEDS = window.OFFICIAL_EMBEDS || {};
@@ -2349,84 +2357,168 @@ function extractRutubeEmbedLinks(text) {
   });
 
   let match;
-
   while ((match = videoRegex.exec(raw)) !== null) {
     const id = match[1];
     const embed = `https://rutube.ru/play/embed/${id}/`;
-
     if (!links.includes(embed)) links.push(embed);
   }
 
   return links;
 }
 
-function addRutubeSeasonFromText(config) {
-  const titles = config.titles || [];
-  const season = config.season || 1;
-  const text = config.text || "";
-
-  const links = extractRutubeEmbedLinks(text);
-
-  const episodes = links.map((src, index) => {
-    return {
-      name: `Rutube — ${season} сезон ${index + 1} серия`,
-      src,
-      source: "rutube"
-    };
-  });
-
-  titles.forEach(title => {
-    if (!window.OFFICIAL_EMBEDS[title]) {
-      window.OFFICIAL_EMBEDS[title] = [];
-    }
-
-    const exists = new Set(window.OFFICIAL_EMBEDS[title].map(x => x.src));
-    episodes.forEach(ep => {
-      if (!exists.has(ep.src)) {
-        window.OFFICIAL_EMBEDS[title].push(ep);
-      }
-    });
-  });
-
-  console.log(`Rutube: добавлено серий ${episodes.length}`, titles);
-}
-
 function normalizeEmbedTitle(text) {
   return String(text || "")
     .toLowerCase()
     .replace(/ё/g, "е")
+    .replace(/&/g, " and ")
+    .replace(/[‐‑‒–—―-]/g, " ")
     .replace(/[^\p{L}\p{N}]+/gu, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
 
-function getOfficialEmbedsForMovie(movie) {
-  if (!movie) return [];
+function addTitleAliasSet(title) {
+  const t = String(title || "").trim();
+  if (!t) return [];
 
+  const result = new Set([t]);
+  const norm = normalizeEmbedTitle(t);
+
+  if (norm.includes("one punch man")) {
+    result.add("One Punch Man");
+    result.add("One-Punch Man");
+    result.add("Wanpanman");
+    result.add("Ванпанчмен");
+
+    if (norm.includes("2") || norm.includes("season 2")) {
+      result.add("One-Punch Man Season 2");
+      result.add("One Punch Man Season 2");
+      result.add("One Punch Man 2");
+      result.add("One-Punch Man 2");
+      result.add("One Punch Man 2nd Season");
+      result.add("One-Punch Man 2nd Season");
+      result.add("Ванпанчмен 2 сезон");
+      result.add("Ванпанчмен 2");
+    }
+  }
+
+  if (norm.includes("ванпанчмен")) {
+    result.add("Ванпанчмен");
+    result.add("One Punch Man");
+    result.add("One-Punch Man");
+    result.add("Wanpanman");
+
+    if (norm.includes("2")) {
+      result.add("Ванпанчмен 2 сезон");
+      result.add("One-Punch Man Season 2");
+      result.add("One Punch Man Season 2");
+      result.add("One Punch Man 2");
+    }
+  }
+
+  return [...result];
+}
+
+function addRutubeSeasonFromText(config) {
+  const titles = config.titles || [];
+  const season = Number(config.season || 1);
+  const text = config.text || "";
+
+  const links = extractRutubeEmbedLinks(text);
+
+  const episodes = links.map((src, index) => ({
+    name: `Rutube — ${season} сезон ${index + 1} серия`,
+    season,
+    episode: index + 1,
+    src,
+    source: "rutube"
+  }));
+
+  const allTitles = new Set();
+
+  titles.forEach(title => {
+    addTitleAliasSet(title).forEach(alias => allTitles.add(alias));
+  });
+
+  allTitles.forEach(title => {
+    if (!window.OFFICIAL_EMBEDS[title]) {
+      window.OFFICIAL_EMBEDS[title] = [];
+    }
+
+    const exists = new Set(window.OFFICIAL_EMBEDS[title].map(x => x.src));
+
+    episodes.forEach(ep => {
+      if (!exists.has(ep.src)) {
+        window.OFFICIAL_EMBEDS[title].push(ep);
+        exists.add(ep.src);
+      }
+    });
+  });
+
+  console.log(`Rutube: добавлено серий ${episodes.length}`, [...allTitles]);
+}
+
+function getMovieTitleCandidates(movie) {
   const candidates = [
-    movie.ru,
-    movie.en,
-    movie.title,
-    movie.name,
-    movie.title_ru,
-    movie.name_ru,
-    movie.title_en,
-    movie.name_en,
-    movie.russian,
-    movie.english,
-    movie.originalTitle,
-    typeof titleOf === "function" ? titleOf(movie) : ""
+    movie && movie.ru,
+    movie && movie.en,
+    movie && movie.title,
+    movie && movie.name,
+    movie && movie.title_ru,
+    movie && movie.name_ru,
+    movie && movie.title_en,
+    movie && movie.name_en,
+    movie && movie.russian,
+    movie && movie.english,
+    movie && movie.originalTitle,
+    movie && movie.russianTitle,
+    movie && movie.englishTitle,
+    typeof titleOf === "function" && movie ? titleOf(movie) : "",
+    document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
   ]
     .filter(Boolean)
-    .map(x => String(x).trim());
+    .map(x => String(x).trim())
+    .filter(Boolean);
 
-  const normalizedCandidates = new Set(candidates.map(normalizeEmbedTitle));
+  const expanded = new Set();
 
-  for (const key of Object.keys(window.OFFICIAL_EMBEDS)) {
-    const normalizedKey = normalizeEmbedTitle(key);
+  candidates.forEach(title => {
+    expanded.add(title);
+    addTitleAliasSet(title).forEach(alias => expanded.add(alias));
+  });
 
-    if (normalizedCandidates.has(normalizedKey)) {
-      return window.OFFICIAL_EMBEDS[key] || [];
+  return [...expanded];
+}
+
+function getOfficialEmbedsForMovie(movie) {
+  if (!movie || !window.OFFICIAL_EMBEDS) return [];
+
+  const movieTitles = getMovieTitleCandidates(movie);
+  const movieNorms = movieTitles.map(normalizeEmbedTitle).filter(Boolean);
+  const entries = Object.entries(window.OFFICIAL_EMBEDS);
+
+  for (const [key, embeds] of entries) {
+    const keyNorm = normalizeEmbedTitle(key);
+
+    if (movieNorms.includes(keyNorm)) {
+      return embeds || [];
+    }
+  }
+
+  for (const [key, embeds] of entries) {
+    const keyNorm = normalizeEmbedTitle(key);
+
+    if (movieNorms.some(t => {
+      if (!t || !keyNorm) return false;
+      if (t === keyNorm) return true;
+      if (t.includes(keyNorm) || keyNorm.includes(t)) return true;
+
+      const tNoSeason = t.replace(/\bseason\b/g, "").replace(/\b2nd\b/g, "2").replace(/\s+/g, " ").trim();
+      const kNoSeason = keyNorm.replace(/\bseason\b/g, "").replace(/\b2nd\b/g, "2").replace(/\s+/g, " ").trim();
+
+      return tNoSeason === kNoSeason || tNoSeason.includes(kNoSeason) || kNoSeason.includes(tNoSeason);
+    })) {
+      return embeds || [];
     }
   }
 
@@ -2441,13 +2533,13 @@ function injectOfficialEmbedStyles() {
   style.textContent = `
     .official-episodes-box {
       width: 100%;
-      max-width: 820px;
+      max-width: 860px;
       margin-top: 18px;
       padding: 16px;
       border-radius: 18px;
-      background: rgba(2, 6, 23, 0.76);
-      border: 1px solid rgba(34, 211, 238, 0.35);
-      box-shadow: 0 0 18px rgba(59, 130, 246, 0.18);
+      background: rgba(2, 6, 23, 0.78);
+      border: 1px solid rgba(34, 211, 238, 0.38);
+      box-shadow: 0 0 18px rgba(59, 130, 246, 0.20);
       box-sizing: border-box;
     }
 
@@ -2460,7 +2552,7 @@ function injectOfficialEmbedStyles() {
 
     .official-episodes-grid {
       display: grid !important;
-      grid-template-columns: repeat(4, minmax(100px, 1fr));
+      grid-template-columns: repeat(4, minmax(110px, 1fr));
       gap: 10px;
       width: 100%;
     }
@@ -2469,7 +2561,7 @@ function injectOfficialEmbedStyles() {
       min-height: 46px;
       padding: 10px 12px;
       border-radius: 14px;
-      border: 1px solid rgba(103, 232, 249, 0.55);
+      border: 1px solid rgba(103, 232, 249, 0.58);
       background: linear-gradient(135deg, #7c3aed, #312e81);
       color: white;
       font-weight: 900;
@@ -2488,11 +2580,11 @@ function injectOfficialEmbedStyles() {
       position: fixed;
       inset: 0;
       z-index: 999999;
+      background: rgba(0, 0, 0, 0.82);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
-      background: rgba(0, 0, 0, 0.82);
+      padding: 18px;
       box-sizing: border-box;
     }
 
@@ -2502,7 +2594,7 @@ function injectOfficialEmbedStyles() {
       border: 1px solid rgba(34, 211, 238, 0.45);
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 0 36px rgba(124, 58, 237, 0.55);
+      box-shadow: 0 0 40px rgba(91, 33, 255, 0.55);
     }
 
     .official-embed-head {
@@ -2513,33 +2605,33 @@ function injectOfficialEmbedStyles() {
       padding: 12px 14px;
       color: white;
       font-weight: 900;
-      border-bottom: 1px solid rgba(34, 211, 238, 0.22);
+      background: linear-gradient(135deg, rgba(91, 33, 255, 0.55), rgba(2, 6, 23, 0.95));
     }
 
     .official-embed-close {
-      border: 0;
-      border-radius: 10px;
-      padding: 8px 12px;
-      background: rgba(255, 255, 255, 0.12);
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      border-radius: 12px;
       color: white;
+      background: linear-gradient(135deg, #7c3aed, #312e81);
       cursor: pointer;
-      font-size: 20px;
+      font-size: 24px;
+      font-weight: 900;
       line-height: 1;
     }
 
     .official-embed-frame-wrap {
-      position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
       background: #000;
     }
 
     .official-embed-frame-wrap iframe {
-      position: absolute;
-      inset: 0;
       width: 100%;
       height: 100%;
       border: 0;
+      display: block;
     }
 
     @media (max-width: 900px) {
@@ -2555,10 +2647,6 @@ function injectOfficialEmbedStyles() {
 
       .official-embed-backdrop {
         padding: 8px;
-      }
-
-      .official-embed-modal {
-        border-radius: 14px;
       }
     }
   `;
@@ -2613,6 +2701,7 @@ function openOfficialEmbedPlayer(embed) {
   const close = () => backdrop.remove();
 
   backdrop.querySelector(".official-embed-close").addEventListener("click", close);
+
   backdrop.addEventListener("click", e => {
     if (e.target === backdrop) close();
   });
@@ -2626,22 +2715,20 @@ function openOfficialEmbedPlayer(embed) {
 }
 
 function findVideoAndSearchBlock() {
-  let videoBlock = null;
+  const dialog = document.getElementById("detailsDialog") || document;
 
-  document.querySelectorAll("section, div").forEach(el => {
-    const h = el.querySelector("h3, h2");
-    const text = h ? h.textContent.trim().toLowerCase() : "";
+  const headings = [...dialog.querySelectorAll("h2, h3")];
+  const videoHeading = headings.find(h => normalizeEmbedTitle(h.textContent).includes("видео"));
 
-    if (text.includes("видео")) {
-      videoBlock = el;
-    }
-  });
+  if (videoHeading) {
+    return videoHeading.parentElement || videoHeading.closest("section, div") || dialog;
+  }
 
   return (
-    videoBlock ||
     document.querySelector("#catalogLinksBlock") ||
     document.querySelector(".detail-links") ||
     document.querySelector(".details-body") ||
+    document.querySelector(".detail-body") ||
     document.querySelector("#detailsDialog")
   );
 }
@@ -2653,7 +2740,10 @@ function addOfficialEmbedButtonsToDetails(movie) {
 
   document.querySelectorAll(".official-episodes-box").forEach(el => el.remove());
 
-  if (!embeds.length) return;
+  if (!embeds.length) {
+    console.warn("Rutube: для карточки не найдены серии", getMovieTitleCandidates(movie));
+    return;
+  }
 
   const videoBlock = findVideoAndSearchBlock();
   if (!videoBlock) return;
@@ -2668,7 +2758,7 @@ function addOfficialEmbedButtonsToDetails(movie) {
   const grid = document.createElement("div");
   grid.className = "official-episodes-grid";
 
-  embeds.forEach((embed, index) => {
+  embeds.forEach((embed) => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "official-embed-btn";
@@ -2695,10 +2785,15 @@ addRutubeSeasonFromText({
   titles: [
     "Ванпанчмен",
     "Ванпанчмен 2 сезон",
+    "Ванпанчмен 2",
     "One Punch Man",
     "One-Punch Man",
+    "One Punch Man 2",
+    "One-Punch Man 2",
     "One-Punch Man Season 2",
     "One Punch Man Season 2",
+    "One Punch Man 2nd Season",
+    "One-Punch Man 2nd Season",
     "Wanpanman"
   ],
   season: 2,
@@ -2728,10 +2823,9 @@ if (typeof openDetails === "function" && !window.__officialEmbedOpenDetailsPatch
     setTimeout(() => {
       if (!selectedMovie || String(selectedMovie.id) !== String(movie.id)) return;
       addOfficialEmbedButtonsToDetails(movie);
-    }, 0);
+    }, 180);
   };
 }
-
 
 setupEvents();
 loadData().catch(showError);
