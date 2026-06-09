@@ -2661,6 +2661,208 @@ function showError(e) {
 
 setupEvents();
 loadData().catch(showError);
-/* ===== БЛОК СКАЧИВАНИЯ ANIME TV APK НА ГЛАВНОЙ ===== */
 
+const animeEpisodes = [
+  {
+    title: "Initial D — 1 сезон, 1 серия",
+    src: "videos/initial-d/s1/e1.mp4",
+    type: "video/mp4"
+  },
+  {
+    title: "Initial D — 1 сезон, 2 серия",
+    src: "videos/initial-d/s1/e2.mp4",
+    type: "video/mp4"
+  },
+  {
+    title: "Initial D — 1 сезон, 3 серия",
+    src: "videos/initial-d/s1/e3.mp4",
+    type: "video/mp4"
+  }
+];
+
+let currentEpisodeIndex = 0;
+
+const animePlayerSection = document.getElementById("animePlayerSection");
+const animeVideo = document.getElementById("animeVideo");
+const animeVideoSource = document.getElementById("animeVideoSource");
+const animePlayerTitle = document.getElementById("animePlayerTitle");
+
+const playPauseBtn = document.getElementById("playPauseBtn");
+const bigPlayBtn = document.getElementById("bigPlayBtn");
+const progressBar = document.getElementById("progressBar");
+const currentTimeText = document.getElementById("currentTime");
+const durationTimeText = document.getElementById("durationTime");
+const muteBtn = document.getElementById("muteBtn");
+const volumeBar = document.getElementById("volumeBar");
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+
+const prevEpisodeBtn = document.getElementById("prevEpisodeBtn");
+const nextEpisodeBtn = document.getElementById("nextEpisodeBtn");
+const episodesList = document.getElementById("episodesList");
+const closePlayerBtn = document.getElementById("closePlayerBtn");
+
+function formatTime(seconds) {
+  if (isNaN(seconds)) return "00:00";
+
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+
+  return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+}
+
+function loadEpisode(index, autoplay = true) {
+  if (index < 0 || index >= animeEpisodes.length) return;
+
+  currentEpisodeIndex = index;
+
+  const episode = animeEpisodes[index];
+
+  animePlayerTitle.textContent = episode.title;
+  animeVideoSource.src = episode.src;
+  animeVideoSource.type = episode.type;
+
+  animeVideo.load();
+
+  if (autoplay) {
+    animeVideo.play().catch(() => {});
+  }
+
+  localStorage.setItem("lastAnimeEpisodeIndex", String(index));
+
+  renderEpisodes();
+
+  animePlayerSection.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function renderEpisodes() {
+  episodesList.innerHTML = "";
+
+  animeEpisodes.forEach((episode, index) => {
+    const button = document.createElement("button");
+    button.textContent = `${index + 1} серия`;
+
+    if (index === currentEpisodeIndex) {
+      button.classList.add("active");
+    }
+
+    button.addEventListener("click", () => {
+      loadEpisode(index, true);
+    });
+
+    episodesList.appendChild(button);
+  });
+}
+
+function togglePlay() {
+  if (animeVideo.paused) {
+    animeVideo.play();
+  } else {
+    animeVideo.pause();
+  }
+}
+
+function updatePlayButtons() {
+  if (animeVideo.paused) {
+    playPauseBtn.textContent = "▶";
+    bigPlayBtn.classList.remove("hidden");
+  } else {
+    playPauseBtn.textContent = "⏸";
+    bigPlayBtn.classList.add("hidden");
+  }
+}
+
+playPauseBtn.addEventListener("click", togglePlay);
+bigPlayBtn.addEventListener("click", togglePlay);
+animeVideo.addEventListener("click", togglePlay);
+
+animeVideo.addEventListener("play", updatePlayButtons);
+animeVideo.addEventListener("pause", updatePlayButtons);
+
+animeVideo.addEventListener("loadedmetadata", () => {
+  durationTimeText.textContent = formatTime(animeVideo.duration);
+});
+
+animeVideo.addEventListener("timeupdate", () => {
+  const progress = (animeVideo.currentTime / animeVideo.duration) * 100;
+
+  progressBar.value = isNaN(progress) ? 0 : progress;
+
+  currentTimeText.textContent = formatTime(animeVideo.currentTime);
+
+  localStorage.setItem(
+    `animeProgress_${currentEpisodeIndex}`,
+    String(animeVideo.currentTime)
+  );
+});
+
+progressBar.addEventListener("input", () => {
+  const newTime = (progressBar.value / 100) * animeVideo.duration;
+  animeVideo.currentTime = newTime;
+});
+
+muteBtn.addEventListener("click", () => {
+  animeVideo.muted = !animeVideo.muted;
+  muteBtn.textContent = animeVideo.muted ? "🔇" : "🔊";
+});
+
+volumeBar.addEventListener("input", () => {
+  animeVideo.volume = Number(volumeBar.value);
+
+  if (animeVideo.volume === 0) {
+    animeVideo.muted = true;
+    muteBtn.textContent = "🔇";
+  } else {
+    animeVideo.muted = false;
+    muteBtn.textContent = "🔊";
+  }
+});
+
+fullscreenBtn.addEventListener("click", () => {
+  const wrapper = document.querySelector(".custom-video-wrapper");
+
+  if (!document.fullscreenElement) {
+    wrapper.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+});
+
+nextEpisodeBtn.addEventListener("click", () => {
+  loadEpisode(currentEpisodeIndex + 1, true);
+});
+
+prevEpisodeBtn.addEventListener("click", () => {
+  loadEpisode(currentEpisodeIndex - 1, true);
+});
+
+animeVideo.addEventListener("ended", () => {
+  if (currentEpisodeIndex < animeEpisodes.length - 1) {
+    loadEpisode(currentEpisodeIndex + 1, true);
+  }
+});
+
+animeVideo.addEventListener("loadeddata", () => {
+  const savedProgress = localStorage.getItem(`animeProgress_${currentEpisodeIndex}`);
+
+  if (savedProgress && Number(savedProgress) > 5) {
+    animeVideo.currentTime = Number(savedProgress);
+  }
+});
+
+closePlayerBtn.addEventListener("click", () => {
+  animeVideo.pause();
+  animePlayerSection.style.display = "none";
+});
+
+const savedEpisodeIndex = localStorage.getItem("lastAnimeEpisodeIndex");
+
+if (savedEpisodeIndex !== null) {
+  loadEpisode(Number(savedEpisodeIndex), false);
+} else {
+  renderEpisodes();
+  updatePlayButtons();
+}
 
