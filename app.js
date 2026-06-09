@@ -2661,3 +2661,52 @@ function showError(e) {
 
 setupEvents();
 loadData().catch(showError);
+/* ===== ЖЁСТКАЯ КНОПКА ANIME TV НА ГЛАВНОЙ ===== */
+
+function addAnimeTvFloatingButton() {
+  const oldBtn = document.getElementById("animeTvFloatingBtn");
+  if (oldBtn) oldBtn.remove();
+
+  const btn = document.createElement("a");
+
+  btn.id = "animeTvFloatingBtn";
+  btn.href = "anime-tv/";
+  btn.textContent = "🐉 Anime TV";
+
+  btn.style.position = "fixed";
+  btn.style.right = "18px";
+  btn.style.top = "128px";
+  btn.style.zIndex = "999999";
+  btn.style.display = "inline-flex";
+  btn.style.alignItems = "center";
+  btn.style.justifyContent = "center";
+  btn.style.minWidth = "150px";
+  btn.style.minHeight = "48px";
+  btn.style.padding = "12px 18px";
+  btn.style.borderRadius = "16px";
+  btn.style.textDecoration = "none";
+  btn.style.color = "#ffffff";
+  btn.style.fontWeight = "900";
+  btn.style.fontSize = "16px";
+  btn.style.background = "linear-gradient(135deg, #7c3aed, #00d4ff)";
+  btn.style.border = "1px solid rgba(0, 229, 255, 0.65)";
+  btn.style.boxShadow = "0 0 24px rgba(0, 229, 255, 0.45)";
+  btn.style.cursor = "pointer";
+
+  btn.addEventListener("mouseenter", () => {
+    btn.style.transform = "scale(1.04)";
+    btn.style.boxShadow = "0 0 34px rgba(0, 229, 255, 0.65)";
+  });
+
+  btn.addEventListener("mouseleave", () => {
+    btn.style.transform = "scale(1)";
+    btn.style.boxShadow = "0 0 24px rgba(0, 229, 255, 0.45)";
+  });
+
+  document.body.appendChild(btn);
+}
+
+document.addEventListener("DOMContentLoaded", addAnimeTvFloatingButton);
+setTimeout(addAnimeTvFloatingButton, 500);
+setTimeout(addAnimeTvFloatingButton, 1500);
+setTimeout(addAnimeTvFloatingButton, 3000);
