@@ -2280,11 +2280,34 @@ function setupMobileFilters() {
 
   panel.insertAdjacentElement("beforebegin", btn);
 
+  function isTypingNow() {
+    const active = document.activeElement;
+    if (!active) return false;
+
+    const tag = active.tagName ? active.tagName.toLowerCase() : "";
+
+    return (
+      tag === "input" ||
+      tag === "textarea" ||
+      tag === "select" ||
+      active.isContentEditable
+    );
+  }
+
   function closeOnMobile() {
     if (window.innerWidth <= 700) {
-      panel.classList.add("mobile-collapsed");
-      panel.classList.remove("mobile-open");
-      btn.textContent = "☰ Фильтры";
+      /*
+        ВАЖНО:
+        На телефоне при открытии клавиатуры срабатывает resize.
+        Если человек сейчас пишет в поиск — фильтры НЕ сворачиваем.
+      */
+      if (isTypingNow()) return;
+
+      if (!panel.classList.contains("mobile-open")) {
+        panel.classList.add("mobile-collapsed");
+        panel.classList.remove("mobile-open");
+        btn.textContent = "☰ Фильтры";
+      }
     } else {
       panel.classList.remove("mobile-collapsed");
       panel.classList.remove("mobile-open");
@@ -2306,10 +2329,31 @@ function setupMobileFilters() {
     }
   });
 
-  window.addEventListener("resize", closeOnMobile);
-  closeOnMobile();
-}
+  /*
+    Не даём фильтрам закрываться, когда человек тыкает внутрь поиска/селектов.
+  */
+  panel.querySelectorAll("input, textarea, select").forEach(el => {
+    el.addEventListener("focus", () => {
+      if (window.innerWidth <= 700) {
+        panel.classList.remove("mobile-collapsed");
+        panel.classList.add("mobile-open");
+        btn.textContent = "✕ Скрыть фильтры";
+      }
+    });
+  });
 
+  window.addEventListener("resize", closeOnMobile);
+
+  if (window.innerWidth <= 700) {
+    panel.classList.add("mobile-collapsed");
+    panel.classList.remove("mobile-open");
+    btn.textContent = "☰ Фильтры";
+  } else {
+    panel.classList.remove("mobile-collapsed");
+    panel.classList.remove("mobile-open");
+    btn.textContent = "☰ Фильтры";
+  }
+}
 /* ===== СБРОС И СОБЫТИЯ ===== */
 
 function resetFilters() {
