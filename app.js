@@ -2907,14 +2907,76 @@ async function fetchOfficialEmbedsFromWorker(movie) {
   return [];
 }
 
+function detectWantedSeasonFromMovie(movie) {
+  const text = normalizeEmbedTitle([
+    movie && movie.ru,
+    movie && movie.en,
+    movie && movie.title,
+    movie && movie.name,
+    movie && movie.originalTitle,
+    typeof titleOf === "function" && movie ? titleOf(movie) : "",
+    document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+  ].filter(Boolean).join(" "));
+
+  if (/season\s*3/i.test(text) || /3\s*сезон/i.test(text) || /3rd/i.test(text)) return 3;
+  if (/season\s*2/i.test(text) || /2\s*сезон/i.test(text) || /2nd/i.test(text)) return 2;
+  if (/season\s*1/i.test(text) || /1\s*сезон/i.test(text) || /1st/i.test(text)) return 1;
+
+  return 0;
+}
+
+function isOnePunchManMovie(movie) {
+  const text = normalizeEmbedTitle([
+    movie && movie.ru,
+    movie && movie.en,
+    movie && movie.title,
+    movie && movie.name,
+    movie && movie.originalTitle,
+    typeof titleOf === "function" && movie ? titleOf(movie) : "",
+    document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+  ].filter(Boolean).join(" "));
+
+  return text.includes("one punch man") || text.includes("ванпанчмен") || text.includes("wanpanman");
+}
+
 async function getOfficialEmbedsForMovieAsync(movie) {
+  // Жёсткая защита для Ванпанчмена: если открыта карточка 3 сезона,
+  // нельзя брать 1 сезон из внешнего API по общему названию "One Punch Man".
+  const wantedSeason = detectWantedSeasonFromMovie(movie);
+
+  if (isOnePunchManMovie(movie) && wantedSeason) {
+    const seasonKeyMap = {
+      1: "One-Punch Man Season 1",
+      2: "One-Punch Man Season 2",
+      3: "One-Punch Man Season 3"
+    };
+
+    const key = seasonKeyMap[wantedSeason];
+    const strictEmbeds = (window.OFFICIAL_EMBEDS && window.OFFICIAL_EMBEDS[key]) || [];
+
+    if (strictEmbeds.length) {
+      return strictEmbeds.filter(x => Number(x.season || wantedSeason) === wantedSeason);
+    }
+  }
+
+  // Сначала берём серии, которые вручную добавлены в app.js.
+  const localEmbeds = getOfficialEmbedsForMovie(movie);
+
+  if (localEmbeds.length) {
+    return wantedSeason
+      ? localEmbeds.filter(x => !x.season || Number(x.season) === wantedSeason)
+      : localEmbeds;
+  }
+
   const apiEmbeds = await fetchOfficialEmbedsFromWorker(movie);
 
   if (apiEmbeds.length) {
-    return apiEmbeds;
+    return wantedSeason
+      ? apiEmbeds.filter(x => !x.season || Number(x.season) === wantedSeason)
+      : apiEmbeds;
   }
 
-  return getOfficialEmbedsForMovie(movie);
+  return [];
 }
 
 function getOfficialEmbedsBoxTitle(embeds) {
@@ -2986,16 +3048,13 @@ async function addOfficialEmbedButtonsToDetails(movie) {
 
 addRutubeSeasonFromText({
   titles: [
-    "Ванпанчмен",
     "Ванпанчмен 1 сезон",
     "Ванпанчмен 1",
-    "One Punch Man",
-    "One-Punch Man",
     "One Punch Man Season 1",
     "One-Punch Man Season 1",
     "One Punch Man 1",
     "One-Punch Man 1",
-    "Wanpanman"
+    "Wanpanman 1"
   ],
   season: 1,
   text: `
