@@ -2391,7 +2391,7 @@ function addTitleAliasSet(title) {
     result.add("Wanpanman");
     result.add("Ванпанчмен");
 
-    if (norm.includes("2") || norm.includes("season 2")) {
+    if (norm.includes("2") || norm.includes("season 2") || norm.includes("2nd")) {
       result.add("One-Punch Man Season 2");
       result.add("One Punch Man Season 2");
       result.add("One Punch Man 2");
@@ -2400,6 +2400,17 @@ function addTitleAliasSet(title) {
       result.add("One-Punch Man 2nd Season");
       result.add("Ванпанчмен 2 сезон");
       result.add("Ванпанчмен 2");
+    }
+
+    if (norm.includes("3") || norm.includes("season 3") || norm.includes("3rd")) {
+      result.add("One-Punch Man Season 3");
+      result.add("One Punch Man Season 3");
+      result.add("One Punch Man 3");
+      result.add("One-Punch Man 3");
+      result.add("One Punch Man 3rd Season");
+      result.add("One-Punch Man 3rd Season");
+      result.add("Ванпанчмен 3 сезон");
+      result.add("Ванпанчмен 3");
     }
   }
 
@@ -2414,6 +2425,13 @@ function addTitleAliasSet(title) {
       result.add("One-Punch Man Season 2");
       result.add("One Punch Man Season 2");
       result.add("One Punch Man 2");
+    }
+
+    if (norm.includes("3")) {
+      result.add("Ванпанчмен 3 сезон");
+      result.add("One-Punch Man Season 3");
+      result.add("One Punch Man Season 3");
+      result.add("One Punch Man 3");
     }
   }
 
@@ -2533,28 +2551,82 @@ function getMovieTitleCandidates(movie) {
 function getOfficialEmbedsForMovie(movie) {
   if (!movie || !window.OFFICIAL_EMBEDS) return [];
 
-  const movieTitles = getMovieTitleCandidates(movie);
-  const movieNorms = movieTitles.map(normalizeEmbedTitle).filter(Boolean);
+  const directTitles = [
+    movie && movie.ru,
+    movie && movie.en,
+    movie && movie.title,
+    movie && movie.name,
+    movie && movie.title_ru,
+    movie && movie.name_ru,
+    movie && movie.title_en,
+    movie && movie.name_en,
+    movie && movie.russian,
+    movie && movie.english,
+    movie && movie.originalTitle,
+    movie && movie.russianTitle,
+    movie && movie.englishTitle,
+    typeof titleOf === "function" && movie ? titleOf(movie) : "",
+    document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+  ]
+    .filter(Boolean)
+    .map(x => String(x).trim())
+    .filter(Boolean);
+
+  const directNorms = [...new Set(directTitles.map(normalizeEmbedTitle).filter(Boolean))];
+  const expandedNorms = [...new Set(getMovieTitleCandidates(movie).map(normalizeEmbedTitle).filter(Boolean))];
   const entries = Object.entries(window.OFFICIAL_EMBEDS);
 
+  const getSeasonFromNorm = (norm) => {
+    const s = String(norm || "");
+    if (/(^|\s)(3|iii|third|3rd)(\s|$)/i.test(s) || /season\s*3/i.test(s) || /3\s*сезон/i.test(s)) return 3;
+    if (/(^|\s)(2|ii|second|2nd)(\s|$)/i.test(s) || /season\s*2/i.test(s) || /2\s*сезон/i.test(s)) return 2;
+    if (/(^|\s)(1|i|first|1st)(\s|$)/i.test(s) || /season\s*1/i.test(s) || /1\s*сезон/i.test(s)) return 1;
+    return 0;
+  };
+
+  const wantedSeason = directNorms.map(getSeasonFromNorm).find(Boolean) || 0;
+  const sameSeason = ([key]) => !wantedSeason || getSeasonFromNorm(normalizeEmbedTitle(key)) === wantedSeason;
+
+  // 1) Сначала ищем точное совпадение по настоящему названию из базы, без общих алиасов.
   for (const [key, embeds] of entries) {
     const keyNorm = normalizeEmbedTitle(key);
-
-    if (movieNorms.includes(keyNorm)) {
+    if (directNorms.includes(keyNorm) && sameSeason([key])) {
       return embeds || [];
     }
   }
 
+  // 2) Потом точное совпадение по алиасам, но если в названии есть сезон — не отдаём другой сезон.
   for (const [key, embeds] of entries) {
     const keyNorm = normalizeEmbedTitle(key);
+    if (expandedNorms.includes(keyNorm) && sameSeason([key])) {
+      return embeds || [];
+    }
+  }
 
-    if (movieNorms.some(t => {
+  // 3) Потом мягкое совпадение, тоже с проверкой сезона.
+  for (const [key, embeds] of entries) {
+    if (!sameSeason([key])) continue;
+
+    const keyNorm = normalizeEmbedTitle(key);
+
+    if (expandedNorms.some(t => {
       if (!t || !keyNorm) return false;
       if (t === keyNorm) return true;
       if (t.includes(keyNorm) || keyNorm.includes(t)) return true;
 
-      const tNoSeason = t.replace(/\bseason\b/g, "").replace(/\b2nd\b/g, "2").replace(/\s+/g, " ").trim();
-      const kNoSeason = keyNorm.replace(/\bseason\b/g, "").replace(/\b2nd\b/g, "2").replace(/\s+/g, " ").trim();
+      const tNoSeason = t
+        .replace(/\bseason\b/g, "")
+        .replace(/\b2nd\b/g, "2")
+        .replace(/\b3rd\b/g, "3")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      const kNoSeason = keyNorm
+        .replace(/\bseason\b/g, "")
+        .replace(/\b2nd\b/g, "2")
+        .replace(/\b3rd\b/g, "3")
+        .replace(/\s+/g, " ")
+        .trim();
 
       return tNoSeason === kNoSeason || tNoSeason.includes(kNoSeason) || kNoSeason.includes(tNoSeason);
     })) {
@@ -2971,6 +3043,38 @@ https://rutube.ru/video/7ea3e33b1cc749e25d6d280eff6e0e4a/?playlist=349758
 https://rutube.ru/video/5f5ece953b9cfe1c69cf2ede933be862/?playlist=349758
 https://rutube.ru/video/a9d0753888e19fd7955c6436f2d033f1/?playlist=349758
 https://rutube.ru/video/714734c6c2bd1bf445febc0d88decaec/?playlist=349758
+  `
+});
+
+
+/* ===== ВАНПАНЧМЕН — 3 СЕЗОН ===== */
+
+addRutubeSeasonFromText({
+  titles: [
+    "Ванпанчмен 3 сезон",
+    "Ванпанчмен 3",
+    "One-Punch Man Season 3",
+    "One Punch Man Season 3",
+    "One Punch Man 3rd Season",
+    "One-Punch Man 3rd Season",
+    "One Punch Man 3",
+    "One-Punch Man 3",
+    "Wanpanman 3"
+  ],
+  season: 3,
+  text: `
+https://rutube.ru/video/04c118fab6a345f7b4009aafe33d8b52/
+https://rutube.ru/video/130e6b0e89a06bbc260764471a58b252/
+https://rutube.ru/video/44eaec21cbeb740f19d56faa20956e83/
+https://rutube.ru/video/1b85ae0939d9a6734bf8085f8bf770cc/
+https://rutube.ru/video/3e0096323d8dac7f47942cbf8d1eaa69/
+https://rutube.ru/video/d4e6706e28d6c5385bd3f81c937370f9/
+https://rutube.ru/video/4fd0e483fb5b3ba066b7bf5ca4ff60bd/
+https://rutube.ru/video/0fd5f0a1fd30039b2394f111393d0b15/
+https://rutube.ru/video/6aafceaf0b61fa3ab87a8204dd337d53/
+https://rutube.ru/video/970285dc2b2e55c1efdebc770a46ea65/
+https://rutube.ru/video/6137dd2bd8eee139b213c0c4da34c00d/
+https://rutube.ru/video/223dddb919342bce9791b6fd31a8fa19/
   `
 });
 
