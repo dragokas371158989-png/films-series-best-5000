@@ -2779,22 +2779,53 @@ function addOfficialEmbedButtonsToDetails(movie) {
   videoBlock.appendChild(episodesBox);
 }
 
-/* ===== ВАНПАНЧМЕН — 2 СЕЗОН ===== */
+
+/* ===== ВАНПАНЧМЕН — 1 СЕЗОН ===== */
 
 addRutubeSeasonFromText({
   titles: [
     "Ванпанчмен",
-    "Ванпанчмен 2 сезон",
-    "Ванпанчмен 2",
+    "Ванпанчмен 1 сезон",
+    "Ванпанчмен 1",
     "One Punch Man",
     "One-Punch Man",
-    "One Punch Man 2",
-    "One-Punch Man 2",
+    "One Punch Man Season 1",
+    "One-Punch Man Season 1",
+    "One Punch Man 1",
+    "One-Punch Man 1",
+    "Wanpanman"
+  ],
+  season: 1,
+  text: `
+https://rutube.ru/play/embed/d6b0a760d96b6ac2d6bed2193e95f5e0/
+https://rutube.ru/play/embed/8c395fcf43a371d4f1338f5a51a5f46f/
+https://rutube.ru/play/embed/7b030425b69390b80170fd4e52e9ac1b/
+https://rutube.ru/play/embed/045b1d3f176b8db48ce8a5fd3c57c8b6/
+https://rutube.ru/play/embed/40ccd7778428998005221a70057c6d0b/
+https://rutube.ru/play/embed/563d1ee3e68b3993f933eed1d9158cef/
+https://rutube.ru/play/embed/f14286dccb2c4a6598768803331d8112/
+https://rutube.ru/play/embed/725962e3357a8aed00378d8f3f8182ee/
+https://rutube.ru/play/embed/45564aad021444f37f4883e517b96fcb/
+https://rutube.ru/play/embed/562b3d68af589ea5bc1cb56a43e98c14/
+https://rutube.ru/play/embed/94070cec15f39b7f9f3a8db0243a19db/
+https://rutube.ru/play/embed/40307b2e324ddb314cde0333b1eeab8d/
+  `
+});
+
+/* ===== ВАНПАНЧМЕН — 2 СЕЗОН ===== */
+
+addRutubeSeasonFromText({
+  titles: [
+    "Ванпанчмен 2 сезон",
+    "Ванпанчмен 2",
     "One-Punch Man Season 2",
     "One Punch Man Season 2",
     "One Punch Man 2nd Season",
     "One-Punch Man 2nd Season",
-    "Wanpanman"
+    "One Punch Man 2",
+    "One-Punch Man 2",
+    "Wanpanman 2"
+  
   ],
   season: 2,
   text: `
