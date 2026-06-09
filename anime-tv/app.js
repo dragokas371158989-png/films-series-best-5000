@@ -1,4 +1,4 @@
-const DATA_URL = "https://raw.githubusercontent.com/dragokas371158989-png/anime-tv-updates/main/anime_updates.json";
+const DATA_URL = "https://raw.githubusercontent.com/dragokas371158989-png/films-series-best-5000/main/movies_updates.json";
 
 const PAGE_SIZE = 24;
 
@@ -152,13 +152,35 @@ async function loadData() {
 
     const data = await response.json();
 
-    allAnime = Array.isArray(data)
-      ? data
-      : Array.isArray(data.anime)
-        ? data.anime
+   let rawList = Array.isArray(data)
+  ? data
+  : Array.isArray(data.anime)
+    ? data.anime
+    : Array.isArray(data.movies)
+      ? data.movies
+      : Array.isArray(data.items)
+        ? data.items
         : [];
 
-    allAnime = allAnime.filter(item => getTitle(item) !== "Без названия");
+allAnime = rawList.filter(item => {
+  const title = getTitle(item);
+  const type = normalize(getType(item));
+  const genres = getGenres(item).map(g => normalize(g)).join(" ");
+  const text = normalize([
+    title,
+    getEnTitle(item),
+    type,
+    genres
+  ].join(" "));
+
+  if (title === "Без названия") return false;
+
+  return (
+    type.includes("аниме") ||
+    genres.includes("аниме") ||
+    text.includes("anime")
+  );
+});
 
     fillFilters();
 
