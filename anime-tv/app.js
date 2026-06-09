@@ -23,11 +23,11 @@ function normalize(text) {
 }
 
 function getTitle(item) {
-  return item.ru || item.title_ru || item.name_ru || item.en || item.title || item.name || "Без названия";
+  return item.ru || item.title_ru || item.name_ru || item.title || item.name || item.en || "Без названия";
 }
 
 function getEnTitle(item) {
-  return item.en || item.title_en || item.name_en || "";
+  return item.en || item.title_en || item.name_en || item.english || "";
 }
 
 function getYear(item) {
@@ -51,18 +51,20 @@ function getStudio(item) {
 }
 
 function getRating(item) {
-  const rating = Number(item["рейтинг"] || item.rating || 0);
+  const rating = Number(item["рейтинг"] || item.rating || item.score || 0);
   return Number.isFinite(rating) ? rating : 0;
 }
 
 function getPoster(item) {
-  return item["постер"] || item.poster || item.image || "";
+  return item["постер"] || item.poster || item.image || item.image_url || "";
 }
 
 function getGenres(item) {
   const genres = item["жанры"] || item.genres || [];
 
-  if (Array.isArray(genres)) return genres.filter(Boolean);
+  if (Array.isArray(genres)) {
+    return genres.filter(Boolean);
+  }
 
   if (typeof genres === "string") {
     return genres
@@ -75,11 +77,20 @@ function getGenres(item) {
 }
 
 function getOverview(item) {
-  return item["описание"] || item.description || item.overview || "Описание пока не добавлено.";
+  return item["описание"] || item.description || item.overview || item.synopsis || "Описание пока не добавлено.";
 }
 
 function getId(item) {
-  return String(item.id || `${getTitle(item)}-${getYear(item)}`);
+  return String(item.id || item.mal_id || `${getTitle(item)}-${getYear(item)}`);
+}
+
+function escapeHtml(text) {
+  return String(text || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function loadSet(key) {
@@ -100,7 +111,11 @@ function addToHistory(item) {
 
   history.unshift(id);
 
-  localStorage.setItem(historyKey, JSON.stringify(history.slice(0, 120)));
+  localStorage.setItem(historyKey, JSON.stringify(history.slice(0, 150)));
+}
+
+function isFavorite(item) {
+  return loadSet(favKey).has(getId(item));
 }
 
 function toggleFavorite(item) {
@@ -114,23 +129,8 @@ function toggleFavorite(item) {
   }
 
   saveSet(favKey, fav);
-
   updateFavButton();
-
   applyFilters();
-}
-
-function isFavorite(item) {
-  return loadSet(favKey).has(getId(item));
-}
-
-function escapeHtml(text) {
-  return String(text || "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
 }
 
 function scoreSmart(item) {
@@ -140,6 +140,17 @@ function scoreSmart(item) {
   return rating * 1000 + year;
 }
 
+function shuffle(arr) {
+  const copy = [...arr];
+
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+
+  return copy;
+}
+
 async function loadData() {
   try {
     $("statusText").textContent = "Загрузка базы аниме...";
@@ -147,54 +158,30 @@ async function loadData() {
     const response = await fetch(DATA_URL + "?v=" + Date.now());
 
     if (!response.ok) {
-      throw new Error("Не удалось загрузить anime_updates.json");
+      throw new Error("Не удалось загрузить anime_data.json");
     }
 
     const data = await response.json();
 
-   let rawList = Array.isArray(data)
-  ? data
-  : Array.isArray(data.anime)
-    ? data.anime
-    : Array.isArray(data.movies)
-      ? data.movies
-      : Array.isArray(data.items)
-        ? data.items
-        : [];
+    const rawList = Array.isArray(data)
+      ? data
+      : Array.isArray(data.anime)
+        ? data.anime
+        : Array.isArray(data.items)
+          ? data.items
+          : Array.isArray(data.movies)
+            ? data.movies
+            : [];
 
-allAnime = rawList.filter(item => {
-  const title = getTitle(item);
-
-  if (title === "Без названия") return false;
-
-  const type = normalize(getType(item));
-  const genres = getGenres(item).map(g => normalize(g)).join(" ");
-
-  const fullText = normalize(JSON.stringify(item));
-
-  return (
-    type.includes("аниме") ||
-    genres.includes("аниме") ||
-    fullText.includes("anime") ||
-    fullText.includes("myanimelist") ||
-    fullText.includes("shikimori") ||
-    fullText.includes("jikan") ||
-    fullText.includes("mal_id") ||
-    fullText.includes("anidb") ||
-    fullText.includes("kitsu") ||
-    fullText.includes("ova") ||
-    fullText.includes("ona")
-  );
-});
+    allAnime = rawList.filter(item => getTitle(item) !== "Без названия");
 
     fillFilters();
-
     applyFilters();
 
     $("statusText").textContent = `База загружена: ${allAnime.length} аниме`;
   } catch (error) {
     console.error(error);
-    $("statusText").textContent = "Ошибка загрузки базы. Проверь anime_updates.json";
+    $("statusText").textContent = "Ошибка загрузки базы. Проверь anime_data.json";
     $("grid").innerHTML = `<div class="empty">Не удалось загрузить базу аниме</div>`;
   }
 }
@@ -216,9 +203,13 @@ function fillFilters() {
 }
 
 function applyFilters() {
-  const q = normalize($("searchInput").value);
-  const year = $("yearFilter").value;
-  const type = $("typeFilter").value;
+  const searchInput = $("searchInput");
+  const yearFilter = $("yearFilter");
+  const typeFilter = $("typeFilter");
+
+  const q = normalize(searchInput ? searchInput.value : "");
+  const year = yearFilter ? yearFilter.value : "";
+  const type = typeFilter ? typeFilter.value : "";
 
   let list = [...allAnime];
 
@@ -227,7 +218,9 @@ function applyFilters() {
   }
 
   if (currentTab === "top") {
-    list = list.filter(item => getRating(item) >= 8).sort((a, b) => getRating(b) - getRating(a));
+    list = list
+      .filter(item => getRating(item) >= 7.5)
+      .sort((a, b) => getRating(b) - getRating(a));
   }
 
   if (currentTab === "fav") {
@@ -259,6 +252,9 @@ function applyFilters() {
 
     list = list
       .map(item => {
+        const title = normalize(getTitle(item));
+        const en = normalize(getEnTitle(item));
+
         const hay = normalize([
           getTitle(item),
           getEnTitle(item),
@@ -273,13 +269,12 @@ function applyFilters() {
         let score = 0;
 
         if (hay.includes(q)) score += 1000;
+        if (title.startsWith(q)) score += 700;
+        if (en.startsWith(q)) score += 600;
 
         for (const word of words) {
-          if (hay.includes(word)) score += 200;
+          if (hay.includes(word)) score += 220;
         }
-
-        if (normalize(getTitle(item)).startsWith(q)) score += 500;
-        if (normalize(getEnTitle(item)).startsWith(q)) score += 400;
 
         score += getRating(item);
 
@@ -288,7 +283,7 @@ function applyFilters() {
       .filter(x => x.score > 0)
       .sort((a, b) => b.score - a.score)
       .map(x => x.item);
-  } else if (currentTab !== "history" && currentTab !== "random") {
+  } else if (currentTab !== "history" && currentTab !== "random" && currentTab !== "top") {
     list = list.sort((a, b) => scoreSmart(b) - scoreSmart(a));
   }
 
@@ -296,17 +291,6 @@ function applyFilters() {
   currentPage = 1;
 
   render();
-}
-
-function shuffle(arr) {
-  const copy = [...arr];
-
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-
-  return copy;
 }
 
 function render() {
@@ -371,7 +355,7 @@ function cardHtml(item) {
   return `
     <article class="card" tabindex="0" data-id="${id}">
       <div class="card-poster-wrap">
-        <img class="card-poster" src="${poster}" alt="${title}" loading="lazy" onerror="this.src=''; this.alt='Нет постера';">
+        <img class="card-poster" src="${poster}" alt="${title}" loading="lazy" onerror="this.style.display='none';">
         <div class="card-rating">${ratingText}</div>
       </div>
 
@@ -395,6 +379,7 @@ function openDetails(item) {
   $("detailPoster").alt = getTitle(item);
 
   $("detailTitle").textContent = getTitle(item);
+
   $("detailMeta").textContent = [
     getEnTitle(item),
     getYear(item),
@@ -521,14 +506,6 @@ function setupEvents() {
         event.preventDefault();
         closeDetails();
       }
-    }
-
-    if (event.key === "ArrowRight" && document.activeElement === $("nextBtn")) {
-      goPage(1);
-    }
-
-    if (event.key === "ArrowLeft" && document.activeElement === $("prevBtn")) {
-      goPage(-1);
     }
   });
 }
