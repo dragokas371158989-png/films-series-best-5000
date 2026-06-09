@@ -1193,3 +1193,38 @@ button[data-reset],
     min-height: 44px;
   }
 }
+/* ===== ФИЛЬТРЫ В ОДНУ СТРОКУ ===== */
+
+.filters,
+.controls,
+.filter-panel,
+.search-panel,
+#filtersPanel {
+  grid-template-columns: minmax(320px, 2fr) repeat(5, minmax(130px, 1fr)) 120px !important;
+}
+
+#resetBtn,
+.reset-btn,
+button[data-reset] {
+  width: 100% !important;
+  min-width: 110px !important;
+}
+
+/* если кнопка сброса сейчас растягивается на всю строку */
+.filters button,
+.controls button {
+  grid-column: auto !important;
+}
+
+/* меньше пустоты между блоками */
+.tabs {
+  margin-top: 8px !important;
+}
+
+.info-block,
+.description-block,
+.about-block,
+.seo-block {
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
+}
