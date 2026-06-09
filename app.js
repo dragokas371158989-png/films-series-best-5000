@@ -3088,6 +3088,48 @@ function injectOfficialEmbedStyle() {
       transform: translateY(-1px);
       filter: brightness(1.12);
     }
+
+    .official-episodes-box {
+      width: 100%;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(2, 6, 23, 0.72);
+      border: 1px solid rgba(34, 211, 238, 0.32);
+      box-shadow: 0 0 18px rgba(59, 130, 246, 0.18);
+      flex-basis: 100%;
+    }
+
+    .official-episodes-title {
+      margin: 0 0 12px;
+      color: #facc15;
+      font-size: 18px;
+    }
+
+    .official-episodes-grid {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+      width: 100%;
+    }
+
+    .official-episodes-grid .official-embed-btn {
+      min-height: 46px;
+      padding: 10px 12px;
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    @media (max-width: 700px) {
+      .official-episodes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .official-episodes-grid .official-embed-btn {
+        font-size: 14px;
+        min-height: 44px;
+      }
+    }
   `;
 
   document.head.appendChild(style);
@@ -3170,6 +3212,7 @@ function addOfficialEmbedButtonsToDetails(movie) {
 
   if (!detailButtons) return;
 
+  detailButtons.querySelectorAll(".official-episodes-box").forEach(box => box.remove());
   detailButtons.querySelectorAll(".official-embed-btn").forEach(btn => btn.remove());
 
   const episodesBox = document.createElement("div");
@@ -3199,33 +3242,6 @@ function addOfficialEmbedButtonsToDetails(movie) {
   episodesBox.appendChild(title);
   episodesBox.appendChild(grid);
   detailButtons.appendChild(episodesBox);
-}
-  injectOfficialEmbedStyle();
-
-  const embeds = getOfficialEmbedsForMovie(movie);
-  if (!embeds.length) return;
-
-  const detailButtons =
-    document.querySelector(".detail-buttons") ||
-    document.querySelector(".watch-links") ||
-    document.querySelector("#catalogLinksBlock .detail-buttons");
-
-  if (!detailButtons) return;
-
-  detailButtons.querySelectorAll(".official-embed-btn").forEach(btn => btn.remove());
-
-  embeds.forEach(embed => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "official-embed-btn";
-    btn.textContent = "▶ " + embed.name;
-
-    btn.addEventListener("click", () => {
-      openOfficialEmbedPlayer(embed);
-    });
-
-    detailButtons.appendChild(btn);
-  });
 }
 /* ===== БЕЗОПАСНЫЙ ПЛЕЕР: НЕ ЛОМАЕТ КАТАЛОГ, ЕСЛИ HTML-ПЛЕЕРА НЕТ ===== */
 
