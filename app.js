@@ -2865,4 +2865,30 @@ if (savedEpisodeIndex !== null) {
   renderEpisodes();
   updatePlayButtons();
 }
+const animeTitleTranslations = {
+  "Initial D": "Инициал Ди",
+  "One Piece": "Ван-Пис",
+  "Naruto": "Наруто",
+  "Boruto: Naruto Next Generations": "Боруто: Новое поколение Наруто",
+  "Demon Slayer: Kimetsu no Yaiba": "Истребитель демонов",
+  "Attack on Titan": "Атака титанов",
+  "Jujutsu Kaisen": "Магическая битва",
+  "Solo Leveling": "Поднятие уровня в одиночку",
+  "Death Note": "Тетрадь смерти",
+  "Chainsaw Man": "Человек-бензопила",
+  "Black Clover": "Чёрный клевер",
+  "Bleach": "Блич",
+  "My Hero Academia": "Моя геройская академия"
+};
 
+function getRussianAnimeTitle(title) {
+  if (!title) return "Без названия";
+
+  const cleanTitle = title.trim();
+
+  if (animeTitleTranslations[cleanTitle]) {
+    return animeTitleTranslations[cleanTitle];
+  }
+
+  return cleanTitle;
+}
