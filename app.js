@@ -70,6 +70,105 @@ function hasRuOrEnTitle(m) {
   });
 }
 
+
+/* ===== ПЕРЕВОД АНГЛИЙСКИХ НАЗВАНИЙ АНИМЕ ===== */
+
+const TITLE_TRANSLATE_MAP = {
+  "Sousou no Frieren": "Провожающая в последний путь Фрирен",
+  "Frieren: Beyond Journey's End": "Провожающая в последний путь Фрирен",
+
+  "Chainsaw Man": "Человек-бензопила",
+
+  "Steel Ball Run: JoJo no Kimyou na Bouken": "Невероятное приключение ДжоДжо: Steel Ball Run",
+  "Steel Ball Run": "Невероятное приключение ДжоДжо: Steel Ball Run",
+  "JoJo no Kimyou na Bouken": "Невероятное приключение ДжоДжо",
+
+  "Gintama: The Final": "Гинтама: Финал",
+  "Gintama The Final": "Гинтама: Финал",
+  "Gintama°": "Гинтама",
+  "Gintama": "Гинтама",
+
+  "Steins;Gate": "Врата Штейна",
+  "Steins Gate": "Врата Штейна",
+
+  "Attack on Titan Season 3 Part 2": "Атака титанов: 3 сезон, часть 2",
+  "Shingeki no Kyojin Season 3 Part 2": "Атака титанов: 3 сезон, часть 2",
+  "Attack on Titan": "Атака титанов",
+  "Shingeki no Kyojin": "Атака титанов",
+
+  "Fullmetal Alchemist: Brotherhood": "Стальной алхимик: Братство",
+  "Fullmetal Alchemist": "Стальной алхимик",
+
+  "Bleach: Sennen Kessen-hen": "Блич: Тысячелетняя кровавая война",
+  "Bleach: Thousand-Year Blood War": "Блич: Тысячелетняя кровавая война",
+  "Bleach": "Блич",
+
+  "One Piece Fan Letter": "Ван-Пис: Письмо фаната",
+  "Ван-Пис Fan Letter": "Ван-Пис: Письмо фаната",
+  "One Piece": "Ван-Пис",
+
+  "Initial D": "Инициал Ди",
+  "Initial D First Stage": "Инициал Ди: Первая стадия",
+  "Initial D Second Stage": "Инициал Ди: Вторая стадия",
+  "Initial D Third Stage": "Инициал Ди: Третья стадия",
+  "Initial D Fourth Stage": "Инициал Ди: Четвёртая стадия",
+  "Initial D Fifth Stage": "Инициал Ди: Пятая стадия",
+  "Initial D Final Stage": "Инициал Ди: Финальная стадия",
+
+  "Naruto": "Наруто",
+  "Naruto Shippuden": "Наруто: Ураганные хроники",
+  "Boruto: Naruto Next Generations": "Боруто: Новое поколение Наруто",
+  "Demon Slayer: Kimetsu no Yaiba": "Истребитель демонов",
+  "Kimetsu no Yaiba": "Истребитель демонов",
+  "Jujutsu Kaisen": "Магическая битва",
+  "Solo Leveling": "Поднятие уровня в одиночку",
+  "Ore dake Level Up na Ken": "Поднятие уровня в одиночку",
+  "Death Note": "Тетрадь смерти",
+  "Black Clover": "Чёрный клевер",
+  "Tokyo Ghoul": "Токийский гуль",
+  "Hunter x Hunter": "Охотник х Охотник",
+  "My Hero Academia": "Моя геройская академия",
+  "Boku no Hero Academia": "Моя геройская академия",
+
+  "Dragon Ball": "Драконий жемчуг",
+  "Dragon Ball Z": "Драконий жемчуг Z",
+  "Dragon Ball Super": "Драконий жемчуг Супер",
+
+  "Sword Art Online": "Мастера меча онлайн",
+  "Re:ZERO -Starting Life in Another World-": "Re:Zero — жизнь с нуля в другом мире",
+  "Overlord": "Повелитель",
+  "That Time I Got Reincarnated as a Slime": "О моём перерождении в слизь",
+  "Tensei shitara Slime Datta Ken": "О моём перерождении в слизь",
+
+  "The Daily Life of the Immortal King": "Повседневная жизнь бессмертного короля",
+  "The World's Finest Assassin Gets Reincarnated in Another World as an Aristocrat": "Лучший в мире ассасин, переродившийся в другом мире аристократом",
+  "Inuyashiki": "Инуясики",
+  "The Greatest Demon Lord Is Reborn as a Typical Nobody": "Величайший Повелитель Демонов перерождается как типичное ничтожество",
+  "Death March to the Parallel World Rhapsody": "Марш смерти под рапсодию параллельного мира",
+  "The Strongest Sage with the Weakest Crest": "Сильнейший мудрец низшей эмблемы",
+  "The Aesthetic of a Rogue Hero": "Эстетика заблудшего героя"
+};
+
+function translateAnimeTitleToRu(title) {
+  if (!title) return title;
+
+  let result = String(title).trim();
+
+  if (TITLE_TRANSLATE_MAP[result]) {
+    return TITLE_TRANSLATE_MAP[result];
+  }
+
+  Object.keys(TITLE_TRANSLATE_MAP)
+    .sort((a, b) => b.length - a.length)
+    .forEach((enTitle) => {
+      if (result.includes(enTitle)) {
+        result = result.replaceAll(enTitle, TITLE_TRANSLATE_MAP[enTitle]);
+      }
+    });
+
+  return result;
+}
+
 function titleOf(m) {
   const ruCandidates = [
     m.ru,
@@ -102,7 +201,7 @@ function titleOf(m) {
     return s && hasEnglishLetters(s);
   });
 
-  if (en) return String(en).trim();
+  if (en) return translateAnimeTitleToRu(String(en).trim());
 
   return "Название пока не переведено";
 }
@@ -1899,7 +1998,6 @@ function injectBadgesStyle() {
       background: linear-gradient(180deg, rgba(14,165,233,.95), rgba(12,74,110,.95));
       border-color: rgba(125,211,252,.9);
     }
-
     .badge-cartoon {
       background: linear-gradient(180deg, rgba(236,72,153,.95), rgba(157,23,77,.95));
       border-color: rgba(249,168,212,.9);
@@ -2662,235 +2760,226 @@ function showError(e) {
 setupEvents();
 loadData().catch(showError);
 
-const animeEpisodes = [
-  {
-    title: "Initial D — 1 сезон, 1 серия",
-    src: "videos/initial-d/s1/e1.mp4",
-    type: "video/mp4"
-  },
-  {
-    title: "Initial D — 1 сезон, 2 серия",
-    src: "videos/initial-d/s1/e2.mp4",
-    type: "video/mp4"
-  },
-  {
-    title: "Initial D — 1 сезон, 3 серия",
-    src: "videos/initial-d/s1/e3.mp4",
-    type: "video/mp4"
-  }
-];
+/* ===== БЕЗОПАСНЫЙ ПЛЕЕР: НЕ ЛОМАЕТ КАТАЛОГ, ЕСЛИ HTML-ПЛЕЕРА НЕТ ===== */
 
-let currentEpisodeIndex = 0;
+(function initAnimePlayerSafe() {
+  const animePlayerSection = document.getElementById("animePlayerSection");
+  const animeVideo = document.getElementById("animeVideo");
+  const animeVideoSource = document.getElementById("animeVideoSource");
+  const animePlayerTitle = document.getElementById("animePlayerTitle");
+  const playPauseBtn = document.getElementById("playPauseBtn");
+  const bigPlayBtn = document.getElementById("bigPlayBtn");
+  const progressBar = document.getElementById("progressBar");
+  const currentTimeText = document.getElementById("currentTime");
+  const durationTimeText = document.getElementById("durationTime");
+  const muteBtn = document.getElementById("muteBtn");
+  const volumeBar = document.getElementById("volumeBar");
+  const fullscreenBtn = document.getElementById("fullscreenBtn");
+  const prevEpisodeBtn = document.getElementById("prevEpisodeBtn");
+  const nextEpisodeBtn = document.getElementById("nextEpisodeBtn");
+  const episodesList = document.getElementById("episodesList");
+  const closePlayerBtn = document.getElementById("closePlayerBtn");
 
-const animePlayerSection = document.getElementById("animePlayerSection");
-const animeVideo = document.getElementById("animeVideo");
-const animeVideoSource = document.getElementById("animeVideoSource");
-const animePlayerTitle = document.getElementById("animePlayerTitle");
-
-const playPauseBtn = document.getElementById("playPauseBtn");
-const bigPlayBtn = document.getElementById("bigPlayBtn");
-const progressBar = document.getElementById("progressBar");
-const currentTimeText = document.getElementById("currentTime");
-const durationTimeText = document.getElementById("durationTime");
-const muteBtn = document.getElementById("muteBtn");
-const volumeBar = document.getElementById("volumeBar");
-const fullscreenBtn = document.getElementById("fullscreenBtn");
-
-const prevEpisodeBtn = document.getElementById("prevEpisodeBtn");
-const nextEpisodeBtn = document.getElementById("nextEpisodeBtn");
-const episodesList = document.getElementById("episodesList");
-const closePlayerBtn = document.getElementById("closePlayerBtn");
-
-function formatTime(seconds) {
-  if (isNaN(seconds)) return "00:00";
-
-  const minutes = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-
-  return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
-}
-
-function loadEpisode(index, autoplay = true) {
-  if (index < 0 || index >= animeEpisodes.length) return;
-
-  currentEpisodeIndex = index;
-
-  const episode = animeEpisodes[index];
-
-  animePlayerTitle.textContent = episode.title;
-  animeVideoSource.src = episode.src;
-  animeVideoSource.type = episode.type;
-
-  animeVideo.load();
-
-  if (autoplay) {
-    animeVideo.play().catch(() => {});
+  if (
+    !animePlayerSection ||
+    !animeVideo ||
+    !animeVideoSource ||
+    !animePlayerTitle ||
+    !playPauseBtn ||
+    !bigPlayBtn ||
+    !progressBar ||
+    !currentTimeText ||
+    !durationTimeText ||
+    !muteBtn ||
+    !volumeBar ||
+    !fullscreenBtn ||
+    !prevEpisodeBtn ||
+    !nextEpisodeBtn ||
+    !episodesList ||
+    !closePlayerBtn
+  ) {
+    console.warn("Плеер не запущен: HTML-блок плеера не найден. Каталог работает дальше.");
+    return;
   }
 
-  localStorage.setItem("lastAnimeEpisodeIndex", String(index));
+  const animeEpisodes = [
+    {
+      title: "Initial D — 1 сезон, 1 серия",
+      src: "videos/initial-d/s1/e1.mp4",
+      type: "video/mp4"
+    },
+    {
+      title: "Initial D — 1 сезон, 2 серия",
+      src: "videos/initial-d/s1/e2.mp4",
+      type: "video/mp4"
+    },
+    {
+      title: "Initial D — 1 сезон, 3 серия",
+      src: "videos/initial-d/s1/e3.mp4",
+      type: "video/mp4"
+    }
+  ];
 
-  renderEpisodes();
+  let currentEpisodeIndex = 0;
 
-  animePlayerSection.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-}
+  function formatTime(seconds) {
+    if (isNaN(seconds)) return "00:00";
 
-function renderEpisodes() {
-  episodesList.innerHTML = "";
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
 
-  animeEpisodes.forEach((episode, index) => {
-    const button = document.createElement("button");
-    button.textContent = `${index + 1} серия`;
+    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  }
 
-    if (index === currentEpisodeIndex) {
-      button.classList.add("active");
+  function renderEpisodes() {
+    episodesList.innerHTML = "";
+
+    animeEpisodes.forEach((episode, index) => {
+      const button = document.createElement("button");
+      button.textContent = `${index + 1} серия`;
+
+      if (index === currentEpisodeIndex) {
+        button.classList.add("active");
+      }
+
+      button.addEventListener("click", () => {
+        loadEpisode(index, true);
+      });
+
+      episodesList.appendChild(button);
+    });
+  }
+
+  function loadEpisode(index, autoplay = true) {
+    if (index < 0 || index >= animeEpisodes.length) return;
+
+    currentEpisodeIndex = index;
+    const episode = animeEpisodes[index];
+
+    animePlayerTitle.textContent = episode.title;
+    animeVideoSource.src = episode.src;
+    animeVideoSource.type = episode.type;
+
+    animeVideo.load();
+
+    if (autoplay) {
+      animeVideo.play().catch(() => {});
     }
 
-    button.addEventListener("click", () => {
-      loadEpisode(index, true);
+    localStorage.setItem("lastAnimeEpisodeIndex", String(index));
+    renderEpisodes();
+
+    animePlayerSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
     });
+  }
 
-    episodesList.appendChild(button);
+  function togglePlay() {
+    if (animeVideo.paused) {
+      animeVideo.play();
+    } else {
+      animeVideo.pause();
+    }
+  }
+
+  function updatePlayButtons() {
+    if (animeVideo.paused) {
+      playPauseBtn.textContent = "▶";
+      bigPlayBtn.classList.remove("hidden");
+    } else {
+      playPauseBtn.textContent = "⏸";
+      bigPlayBtn.classList.add("hidden");
+    }
+  }
+
+  playPauseBtn.addEventListener("click", togglePlay);
+  bigPlayBtn.addEventListener("click", togglePlay);
+  animeVideo.addEventListener("click", togglePlay);
+  animeVideo.addEventListener("play", updatePlayButtons);
+  animeVideo.addEventListener("pause", updatePlayButtons);
+
+  animeVideo.addEventListener("loadedmetadata", () => {
+    durationTimeText.textContent = formatTime(animeVideo.duration);
   });
-}
 
-function togglePlay() {
-  if (animeVideo.paused) {
-    animeVideo.play();
-  } else {
-    animeVideo.pause();
-  }
-}
+  animeVideo.addEventListener("timeupdate", () => {
+    const progress = (animeVideo.currentTime / animeVideo.duration) * 100;
+    progressBar.value = isNaN(progress) ? 0 : progress;
+    currentTimeText.textContent = formatTime(animeVideo.currentTime);
 
-function updatePlayButtons() {
-  if (animeVideo.paused) {
-    playPauseBtn.textContent = "▶";
-    bigPlayBtn.classList.remove("hidden");
-  } else {
-    playPauseBtn.textContent = "⏸";
-    bigPlayBtn.classList.add("hidden");
-  }
-}
+    localStorage.setItem(
+      `animeProgress_${currentEpisodeIndex}`,
+      String(animeVideo.currentTime)
+    );
+  });
 
-playPauseBtn.addEventListener("click", togglePlay);
-bigPlayBtn.addEventListener("click", togglePlay);
-animeVideo.addEventListener("click", togglePlay);
+  progressBar.addEventListener("input", () => {
+    const newTime = (progressBar.value / 100) * animeVideo.duration;
+    animeVideo.currentTime = newTime;
+  });
 
-animeVideo.addEventListener("play", updatePlayButtons);
-animeVideo.addEventListener("pause", updatePlayButtons);
+  muteBtn.addEventListener("click", () => {
+    animeVideo.muted = !animeVideo.muted;
+    muteBtn.textContent = animeVideo.muted ? "🔇" : "🔊";
+  });
 
-animeVideo.addEventListener("loadedmetadata", () => {
-  durationTimeText.textContent = formatTime(animeVideo.duration);
-});
+  volumeBar.addEventListener("input", () => {
+    animeVideo.volume = Number(volumeBar.value);
 
-animeVideo.addEventListener("timeupdate", () => {
-  const progress = (animeVideo.currentTime / animeVideo.duration) * 100;
+    if (animeVideo.volume === 0) {
+      animeVideo.muted = true;
+      muteBtn.textContent = "🔇";
+    } else {
+      animeVideo.muted = false;
+      muteBtn.textContent = "🔊";
+    }
+  });
 
-  progressBar.value = isNaN(progress) ? 0 : progress;
+  fullscreenBtn.addEventListener("click", () => {
+    const wrapper = document.querySelector(".custom-video-wrapper");
+    if (!wrapper) return;
 
-  currentTimeText.textContent = formatTime(animeVideo.currentTime);
+    if (!document.fullscreenElement) {
+      wrapper.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  });
 
-  localStorage.setItem(
-    `animeProgress_${currentEpisodeIndex}`,
-    String(animeVideo.currentTime)
-  );
-});
-
-progressBar.addEventListener("input", () => {
-  const newTime = (progressBar.value / 100) * animeVideo.duration;
-  animeVideo.currentTime = newTime;
-});
-
-muteBtn.addEventListener("click", () => {
-  animeVideo.muted = !animeVideo.muted;
-  muteBtn.textContent = animeVideo.muted ? "🔇" : "🔊";
-});
-
-volumeBar.addEventListener("input", () => {
-  animeVideo.volume = Number(volumeBar.value);
-
-  if (animeVideo.volume === 0) {
-    animeVideo.muted = true;
-    muteBtn.textContent = "🔇";
-  } else {
-    animeVideo.muted = false;
-    muteBtn.textContent = "🔊";
-  }
-});
-
-fullscreenBtn.addEventListener("click", () => {
-  const wrapper = document.querySelector(".custom-video-wrapper");
-
-  if (!document.fullscreenElement) {
-    wrapper.requestFullscreen();
-  } else {
-    document.exitFullscreen();
-  }
-});
-
-nextEpisodeBtn.addEventListener("click", () => {
-  loadEpisode(currentEpisodeIndex + 1, true);
-});
-
-prevEpisodeBtn.addEventListener("click", () => {
-  loadEpisode(currentEpisodeIndex - 1, true);
-});
-
-animeVideo.addEventListener("ended", () => {
-  if (currentEpisodeIndex < animeEpisodes.length - 1) {
+  nextEpisodeBtn.addEventListener("click", () => {
     loadEpisode(currentEpisodeIndex + 1, true);
+  });
+
+  prevEpisodeBtn.addEventListener("click", () => {
+    loadEpisode(currentEpisodeIndex - 1, true);
+  });
+
+  animeVideo.addEventListener("ended", () => {
+    if (currentEpisodeIndex < animeEpisodes.length - 1) {
+      loadEpisode(currentEpisodeIndex + 1, true);
+    }
+  });
+
+  animeVideo.addEventListener("loadeddata", () => {
+    const savedProgress = localStorage.getItem(`animeProgress_${currentEpisodeIndex}`);
+
+    if (savedProgress && Number(savedProgress) > 5) {
+      animeVideo.currentTime = Number(savedProgress);
+    }
+  });
+
+  closePlayerBtn.addEventListener("click", () => {
+    animeVideo.pause();
+    animePlayerSection.style.display = "none";
+  });
+
+  const savedEpisodeIndex = localStorage.getItem("lastAnimeEpisodeIndex");
+
+  if (savedEpisodeIndex !== null) {
+    loadEpisode(Number(savedEpisodeIndex), false);
+  } else {
+    renderEpisodes();
+    updatePlayButtons();
   }
-});
-
-animeVideo.addEventListener("loadeddata", () => {
-  const savedProgress = localStorage.getItem(`animeProgress_${currentEpisodeIndex}`);
-
-  if (savedProgress && Number(savedProgress) > 5) {
-    animeVideo.currentTime = Number(savedProgress);
-  }
-});
-
-closePlayerBtn.addEventListener("click", () => {
-  animeVideo.pause();
-  animePlayerSection.style.display = "none";
-});
-
-const savedEpisodeIndex = localStorage.getItem("lastAnimeEpisodeIndex");
-
-if (savedEpisodeIndex !== null) {
-  loadEpisode(Number(savedEpisodeIndex), false);
-} else {
-  renderEpisodes();
-  updatePlayButtons();
-}
-const animeTitleTranslations = {
-  "Initial D": "Инициал Ди",
-  "One Piece": "Ван-Пис",
-  "Naruto": "Наруто",
-  "Boruto: Naruto Next Generations": "Боруто: Новое поколение Наруто",
-  "Demon Slayer: Kimetsu no Yaiba": "Истребитель демонов",
-  "Attack on Titan": "Атака титанов",
-  "Jujutsu Kaisen": "Магическая битва",
-  "Solo Leveling": "Поднятие уровня в одиночку",
-  "Death Note": "Тетрадь смерти",
-  "Chainsaw Man": "Человек-бензопила",
-  "Black Clover": "Чёрный клевер",
-  "Bleach": "Блич",
-  "My Hero Academia": "Моя геройская академия"
-};
-
-function getRussianAnimeTitle(title) {
-  if (!title) return "Без названия";
-
-  const cleanTitle = title.trim();
-
-  if (animeTitleTranslations[cleanTitle]) {
-    return animeTitleTranslations[cleanTitle];
-  }
-
-  return cleanTitle;
-}
-
- 
+})();
