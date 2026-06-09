@@ -458,3 +458,43 @@ select:focus,
     width: 220px;
   }
 }
+/* ===== ФИКС НИЖНЕЙ ПАГИНАЦИИ ===== */
+
+.tv-app {
+  padding-bottom: 160px;
+}
+
+.pager {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  padding: 18px 0 22px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(7, 11, 20, 0.88) 22%,
+    rgba(7, 11, 20, 0.98) 100%
+  );
+}
+
+.pager button {
+  min-width: 230px;
+  min-height: 62px;
+}
+
+@media (max-width: 700px) {
+  .tv-app {
+    padding-bottom: 140px;
+  }
+
+  .pager {
+    padding: 14px 12px 18px;
+  }
+
+  .pager button {
+    min-width: 140px;
+    min-height: 56px;
+  }
+}
