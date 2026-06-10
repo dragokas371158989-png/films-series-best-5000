@@ -3263,6 +3263,867 @@ addRutubeSeasonExactList({
   } catch (e) {}
 })();
 
+/* ===== ИСТРЕБИТЕЛЬ ДЕМОНОВ / DEMON SLAYER ===== */
+
+addRutubeSeasonExactList({
+  titles: [
+    "Истребитель демонов",
+    "Клинок, рассекающий демонов",
+    "Клинок рассекающий демонов",
+    "Demon Slayer",
+    "Demon Slayer: Kimetsu no Yaiba",
+    "Kimetsu no Yaiba",
+    "Kimetsu no Yaiba Season 1",
+    "鬼滅の刃"
+  ],
+  season: 1,
+  episodes: [
+    {
+        "name": "Истребитель демонов — 1 серия",
+        "season": 1,
+        "episode": 1,
+        "src": "https://rutube.ru/play/embed/359397109c59446349f875593032675c",
+        "url": "https://rutube.ru/video/359397109c59446349f875593032675c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 2 серия",
+        "season": 1,
+        "episode": 2,
+        "src": "https://rutube.ru/play/embed/96a112022b6d6483b2c8503edecb5227",
+        "url": "https://rutube.ru/video/96a112022b6d6483b2c8503edecb5227/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 3 серия",
+        "season": 1,
+        "episode": 3,
+        "src": "https://rutube.ru/play/embed/2f9fbdc4047ebb170ef4ac060ab12470",
+        "url": "https://rutube.ru/video/2f9fbdc4047ebb170ef4ac060ab12470/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 4 серия",
+        "season": 1,
+        "episode": 4,
+        "src": "https://rutube.ru/play/embed/46a915ee250175bb98220f1f1e418cc9",
+        "url": "https://rutube.ru/video/46a915ee250175bb98220f1f1e418cc9/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 5 серия",
+        "season": 1,
+        "episode": 5,
+        "src": "https://rutube.ru/play/embed/af1d917a84dd810b4d398a96b6ac0154",
+        "url": "https://rutube.ru/video/af1d917a84dd810b4d398a96b6ac0154/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 6 серия",
+        "season": 1,
+        "episode": 6,
+        "src": "https://rutube.ru/play/embed/0dcfbd4a6e839aa65fbb37247d59d7bb",
+        "url": "https://rutube.ru/video/0dcfbd4a6e839aa65fbb37247d59d7bb/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 7 серия",
+        "season": 1,
+        "episode": 7,
+        "src": "https://rutube.ru/play/embed/d04ad061a1741b75ade327e700312b17",
+        "url": "https://rutube.ru/video/d04ad061a1741b75ade327e700312b17/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 8 серия",
+        "season": 1,
+        "episode": 8,
+        "src": "https://rutube.ru/play/embed/7033568db48a85f8b7ebc7aef96982c4",
+        "url": "https://rutube.ru/video/7033568db48a85f8b7ebc7aef96982c4/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 9 серия",
+        "season": 1,
+        "episode": 9,
+        "src": "https://rutube.ru/play/embed/d6c3b1a436410d638285896d541480ba",
+        "url": "https://rutube.ru/video/d6c3b1a436410d638285896d541480ba/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 10 серия",
+        "season": 1,
+        "episode": 10,
+        "src": "https://rutube.ru/play/embed/982c5c6b552d1f48231476c03eb7acbc",
+        "url": "https://rutube.ru/video/982c5c6b552d1f48231476c03eb7acbc/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 11 серия",
+        "season": 1,
+        "episode": 11,
+        "src": "https://rutube.ru/play/embed/f52ae2f0ce99bf410d1278fc41e1a49b",
+        "url": "https://rutube.ru/video/f52ae2f0ce99bf410d1278fc41e1a49b/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 12 серия",
+        "season": 1,
+        "episode": 12,
+        "src": "https://rutube.ru/play/embed/34b2db24136ba631e6c6eab4b4749247",
+        "url": "https://rutube.ru/video/34b2db24136ba631e6c6eab4b4749247/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 13 серия",
+        "season": 1,
+        "episode": 13,
+        "src": "https://rutube.ru/play/embed/f7f8a746be702d055b5681d5c06ec29c",
+        "url": "https://rutube.ru/video/f7f8a746be702d055b5681d5c06ec29c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 14 серия",
+        "season": 1,
+        "episode": 14,
+        "src": "https://rutube.ru/play/embed/a1e05df653277815393ad5565d9cba4c",
+        "url": "https://rutube.ru/video/a1e05df653277815393ad5565d9cba4c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 15 серия",
+        "season": 1,
+        "episode": 15,
+        "src": "https://rutube.ru/play/embed/e88f9ac5b526b9921d12bf501a5ceb5b",
+        "url": "https://rutube.ru/video/e88f9ac5b526b9921d12bf501a5ceb5b/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 16 серия",
+        "season": 1,
+        "episode": 16,
+        "src": "https://rutube.ru/play/embed/234d3b374b133e18a0484f082cd314eb",
+        "url": "https://rutube.ru/video/234d3b374b133e18a0484f082cd314eb/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 17 серия",
+        "season": 1,
+        "episode": 17,
+        "src": "https://rutube.ru/play/embed/12cbacfaee514aa648c0a573bd90c795",
+        "url": "https://rutube.ru/video/12cbacfaee514aa648c0a573bd90c795/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 18 серия",
+        "season": 1,
+        "episode": 18,
+        "src": "https://rutube.ru/play/embed/8bfabcef7237e08cfe0c0a262ca6a3b1",
+        "url": "https://rutube.ru/video/8bfabcef7237e08cfe0c0a262ca6a3b1/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 19 серия",
+        "season": 1,
+        "episode": 19,
+        "src": "https://rutube.ru/play/embed/b6e6f90d940ac23a17060c7fbfedd694",
+        "url": "https://rutube.ru/video/b6e6f90d940ac23a17060c7fbfedd694/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 20 серия",
+        "season": 1,
+        "episode": 20,
+        "src": "https://rutube.ru/play/embed/bf61b471d48588b04f1e4c58e4930798",
+        "url": "https://rutube.ru/video/bf61b471d48588b04f1e4c58e4930798/",
+        "source": "rutube"
+    }
+]
+});
+
+
+/* ===== FORCE FIX: DEMON SLAYER / ИСТРЕБИТЕЛЬ ДЕМОНОВ ===== */
+(function () {
+  const demonSlayerEpisodes = [
+    {
+        "name": "Истребитель демонов — 1 серия",
+        "season": 1,
+        "episode": 1,
+        "src": "https://rutube.ru/play/embed/359397109c59446349f875593032675c",
+        "url": "https://rutube.ru/video/359397109c59446349f875593032675c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 2 серия",
+        "season": 1,
+        "episode": 2,
+        "src": "https://rutube.ru/play/embed/96a112022b6d6483b2c8503edecb5227",
+        "url": "https://rutube.ru/video/96a112022b6d6483b2c8503edecb5227/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 3 серия",
+        "season": 1,
+        "episode": 3,
+        "src": "https://rutube.ru/play/embed/2f9fbdc4047ebb170ef4ac060ab12470",
+        "url": "https://rutube.ru/video/2f9fbdc4047ebb170ef4ac060ab12470/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 4 серия",
+        "season": 1,
+        "episode": 4,
+        "src": "https://rutube.ru/play/embed/46a915ee250175bb98220f1f1e418cc9",
+        "url": "https://rutube.ru/video/46a915ee250175bb98220f1f1e418cc9/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 5 серия",
+        "season": 1,
+        "episode": 5,
+        "src": "https://rutube.ru/play/embed/af1d917a84dd810b4d398a96b6ac0154",
+        "url": "https://rutube.ru/video/af1d917a84dd810b4d398a96b6ac0154/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 6 серия",
+        "season": 1,
+        "episode": 6,
+        "src": "https://rutube.ru/play/embed/0dcfbd4a6e839aa65fbb37247d59d7bb",
+        "url": "https://rutube.ru/video/0dcfbd4a6e839aa65fbb37247d59d7bb/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 7 серия",
+        "season": 1,
+        "episode": 7,
+        "src": "https://rutube.ru/play/embed/d04ad061a1741b75ade327e700312b17",
+        "url": "https://rutube.ru/video/d04ad061a1741b75ade327e700312b17/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 8 серия",
+        "season": 1,
+        "episode": 8,
+        "src": "https://rutube.ru/play/embed/7033568db48a85f8b7ebc7aef96982c4",
+        "url": "https://rutube.ru/video/7033568db48a85f8b7ebc7aef96982c4/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 9 серия",
+        "season": 1,
+        "episode": 9,
+        "src": "https://rutube.ru/play/embed/d6c3b1a436410d638285896d541480ba",
+        "url": "https://rutube.ru/video/d6c3b1a436410d638285896d541480ba/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 10 серия",
+        "season": 1,
+        "episode": 10,
+        "src": "https://rutube.ru/play/embed/982c5c6b552d1f48231476c03eb7acbc",
+        "url": "https://rutube.ru/video/982c5c6b552d1f48231476c03eb7acbc/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 11 серия",
+        "season": 1,
+        "episode": 11,
+        "src": "https://rutube.ru/play/embed/f52ae2f0ce99bf410d1278fc41e1a49b",
+        "url": "https://rutube.ru/video/f52ae2f0ce99bf410d1278fc41e1a49b/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 12 серия",
+        "season": 1,
+        "episode": 12,
+        "src": "https://rutube.ru/play/embed/34b2db24136ba631e6c6eab4b4749247",
+        "url": "https://rutube.ru/video/34b2db24136ba631e6c6eab4b4749247/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 13 серия",
+        "season": 1,
+        "episode": 13,
+        "src": "https://rutube.ru/play/embed/f7f8a746be702d055b5681d5c06ec29c",
+        "url": "https://rutube.ru/video/f7f8a746be702d055b5681d5c06ec29c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 14 серия",
+        "season": 1,
+        "episode": 14,
+        "src": "https://rutube.ru/play/embed/a1e05df653277815393ad5565d9cba4c",
+        "url": "https://rutube.ru/video/a1e05df653277815393ad5565d9cba4c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 15 серия",
+        "season": 1,
+        "episode": 15,
+        "src": "https://rutube.ru/play/embed/e88f9ac5b526b9921d12bf501a5ceb5b",
+        "url": "https://rutube.ru/video/e88f9ac5b526b9921d12bf501a5ceb5b/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 16 серия",
+        "season": 1,
+        "episode": 16,
+        "src": "https://rutube.ru/play/embed/234d3b374b133e18a0484f082cd314eb",
+        "url": "https://rutube.ru/video/234d3b374b133e18a0484f082cd314eb/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 17 серия",
+        "season": 1,
+        "episode": 17,
+        "src": "https://rutube.ru/play/embed/12cbacfaee514aa648c0a573bd90c795",
+        "url": "https://rutube.ru/video/12cbacfaee514aa648c0a573bd90c795/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 18 серия",
+        "season": 1,
+        "episode": 18,
+        "src": "https://rutube.ru/play/embed/8bfabcef7237e08cfe0c0a262ca6a3b1",
+        "url": "https://rutube.ru/video/8bfabcef7237e08cfe0c0a262ca6a3b1/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 19 серия",
+        "season": 1,
+        "episode": 19,
+        "src": "https://rutube.ru/play/embed/b6e6f90d940ac23a17060c7fbfedd694",
+        "url": "https://rutube.ru/video/b6e6f90d940ac23a17060c7fbfedd694/",
+        "source": "rutube"
+    },
+    {
+        "name": "Истребитель демонов — 20 серия",
+        "season": 1,
+        "episode": 20,
+        "src": "https://rutube.ru/play/embed/bf61b471d48588b04f1e4c58e4930798",
+        "url": "https://rutube.ru/video/bf61b471d48588b04f1e4c58e4930798/",
+        "source": "rutube"
+    }
+];
+
+  const keys = [
+    "Истребитель демонов",
+    "Клинок, рассекающий демонов",
+    "Клинок рассекающий демонов",
+    "Demon Slayer",
+    "Demon Slayer: Kimetsu no Yaiba",
+    "Kimetsu no Yaiba",
+    "鬼滅の刃"
+  ];
+
+  window.OFFICIAL_EMBEDS = window.OFFICIAL_EMBEDS || {};
+
+  keys.forEach(k => {
+    window.OFFICIAL_EMBEDS[k] = demonSlayerEpisodes;
+    if (typeof normalizeEmbedTitle === "function") {
+      window.OFFICIAL_EMBEDS[normalizeEmbedTitle(k)] = demonSlayerEpisodes;
+    }
+  });
+
+  function isDemonSlayerRaw(raw) {
+    const s = String(raw || "").toLowerCase();
+    return s.includes("demon slayer") ||
+           s.includes("kimetsu no yaiba") ||
+           s.includes("истребитель демонов") ||
+           s.includes("клинок рассекающий демонов") ||
+           s.includes("клинок, рассекающий демонов") ||
+           s.includes("鬼滅の刃");
+  }
+
+  try {
+    const oldSync = typeof getOfficialEmbedsForMovie === "function" ? getOfficialEmbedsForMovie : null;
+    getOfficialEmbedsForMovie = function(movie) {
+      const raw = [
+        movie && movie.ru,
+        movie && movie.en,
+        movie && movie.title,
+        movie && movie.name,
+        movie && movie.originalTitle,
+        document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+      ].filter(Boolean).join(" ");
+
+      if (isDemonSlayerRaw(raw)) return demonSlayerEpisodes;
+      return oldSync ? oldSync(movie) : [];
+    };
+  } catch (e) {}
+
+  try {
+    const oldAsync = typeof getOfficialEmbedsForMovieAsync === "function" ? getOfficialEmbedsForMovieAsync : null;
+    getOfficialEmbedsForMovieAsync = async function(movie) {
+      const raw = [
+        movie && movie.ru,
+        movie && movie.en,
+        movie && movie.title,
+        movie && movie.name,
+        movie && movie.originalTitle,
+        document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+      ].filter(Boolean).join(" ");
+
+      if (isDemonSlayerRaw(raw)) return demonSlayerEpisodes;
+      return oldAsync ? oldAsync(movie) : [];
+    };
+  } catch (e) {}
+})();
+
+/* ===== МАГИЧЕСКАЯ БИТВА / JUJUTSU KAISEN ===== */
+
+addRutubeSeasonExactList({
+  titles: [
+    "Магическая битва 1 сезон",
+    "Магическая битва",
+    "Jujutsu Kaisen Season 1",
+    "Jujutsu Kaisen 1",
+    "Jujutsu Kaisen",
+    "呪術廻戦"
+  ],
+  season: 1,
+  episodes: [
+    {
+        "name": "Магическая битва — 1 серия",
+        "season": 1,
+        "episode": 1,
+        "src": "https://rutube.ru/play/embed/f2910dcbe135717a6f5e90141592bb22",
+        "url": "https://rutube.ru/video/f2910dcbe135717a6f5e90141592bb22/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 2 серия",
+        "season": 1,
+        "episode": 2,
+        "src": "https://rutube.ru/play/embed/05ddcd99c893d0f5629086de7bc9e0d7",
+        "url": "https://rutube.ru/video/05ddcd99c893d0f5629086de7bc9e0d7/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 3 серия",
+        "season": 1,
+        "episode": 3,
+        "src": "https://rutube.ru/play/embed/b0256744812e417a8a76398191fa6af3",
+        "url": "https://rutube.ru/video/b0256744812e417a8a76398191fa6af3/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 4 серия",
+        "season": 1,
+        "episode": 4,
+        "src": "https://rutube.ru/play/embed/56dc7b3d5985f3a2a623b4847f0cd1d1",
+        "url": "https://rutube.ru/video/56dc7b3d5985f3a2a623b4847f0cd1d1/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 5 серия",
+        "season": 1,
+        "episode": 5,
+        "src": "https://rutube.ru/play/embed/cd3821a8cac74b3fec2767be1bbad6d8",
+        "url": "https://rutube.ru/video/cd3821a8cac74b3fec2767be1bbad6d8/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 6 серия",
+        "season": 1,
+        "episode": 6,
+        "src": "https://rutube.ru/play/embed/170d3049afe80370126d6d1dcb45b49f",
+        "url": "https://rutube.ru/video/170d3049afe80370126d6d1dcb45b49f/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 7 серия",
+        "season": 1,
+        "episode": 7,
+        "src": "https://rutube.ru/play/embed/f178fd43500c546125afb37a05ee3b7e",
+        "url": "https://rutube.ru/video/f178fd43500c546125afb37a05ee3b7e/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 8 серия",
+        "season": 1,
+        "episode": 8,
+        "src": "https://rutube.ru/play/embed/bd660bf07876871af7538a89e1b4f141",
+        "url": "https://rutube.ru/video/bd660bf07876871af7538a89e1b4f141/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 9 серия",
+        "season": 1,
+        "episode": 9,
+        "src": "https://rutube.ru/play/embed/6b06a64d628fb1ba8028b018a56f2350",
+        "url": "https://rutube.ru/video/6b06a64d628fb1ba8028b018a56f2350/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 10 серия",
+        "season": 1,
+        "episode": 10,
+        "src": "https://rutube.ru/play/embed/9beedcf9bfa74f84f3714649536f0a9d",
+        "url": "https://rutube.ru/video/9beedcf9bfa74f84f3714649536f0a9d/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 11 серия",
+        "season": 1,
+        "episode": 11,
+        "src": "https://rutube.ru/play/embed/626f28f3959c86393b28943c7e64760e",
+        "url": "https://rutube.ru/video/626f28f3959c86393b28943c7e64760e/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 12 серия",
+        "season": 1,
+        "episode": 12,
+        "src": "https://rutube.ru/play/embed/bf741061179bfe3f50d046a3adecc5b8",
+        "url": "https://rutube.ru/video/bf741061179bfe3f50d046a3adecc5b8/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 13 серия",
+        "season": 1,
+        "episode": 13,
+        "src": "https://rutube.ru/play/embed/a08e76dd4ec3a740e2c01cdae22dc843",
+        "url": "https://rutube.ru/video/a08e76dd4ec3a740e2c01cdae22dc843/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 14 серия",
+        "season": 1,
+        "episode": 14,
+        "src": "https://rutube.ru/play/embed/09af5a5dddc4ce80d7095a53f2b03346",
+        "url": "https://rutube.ru/video/09af5a5dddc4ce80d7095a53f2b03346/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 15 серия",
+        "season": 1,
+        "episode": 15,
+        "src": "https://rutube.ru/play/embed/25dedf5299f50f3a512132aa66ff64a3",
+        "url": "https://rutube.ru/video/25dedf5299f50f3a512132aa66ff64a3/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 16 серия",
+        "season": 1,
+        "episode": 16,
+        "src": "https://rutube.ru/play/embed/64829b8c88bb34221fa62a2f389e2cfe",
+        "url": "https://rutube.ru/video/64829b8c88bb34221fa62a2f389e2cfe/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 17 серия",
+        "season": 1,
+        "episode": 17,
+        "src": "https://rutube.ru/play/embed/b1dc468aadec7b9d3b0d5a45e171ec70",
+        "url": "https://rutube.ru/video/b1dc468aadec7b9d3b0d5a45e171ec70/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 18 серия",
+        "season": 1,
+        "episode": 18,
+        "src": "https://rutube.ru/play/embed/320a9a645b4ac7dcb88aafd782a803c8",
+        "url": "https://rutube.ru/video/320a9a645b4ac7dcb88aafd782a803c8/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 19 серия",
+        "season": 1,
+        "episode": 19,
+        "src": "https://rutube.ru/play/embed/6d7c274f30b73b1461edab6b5d6d917c",
+        "url": "https://rutube.ru/video/6d7c274f30b73b1461edab6b5d6d917c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 20 серия",
+        "season": 1,
+        "episode": 20,
+        "src": "https://rutube.ru/play/embed/925f753fe79d61a898220fbfd0a1c59d",
+        "url": "https://rutube.ru/video/925f753fe79d61a898220fbfd0a1c59d/",
+        "source": "rutube"
+    }
+]
+});
+
+
+/* ===== FORCE FIX: JUJUTSU KAISEN / МАГИЧЕСКАЯ БИТВА ===== */
+(function () {
+  const jujutsuEpisodes = [
+    {
+        "name": "Магическая битва — 1 серия",
+        "season": 1,
+        "episode": 1,
+        "src": "https://rutube.ru/play/embed/f2910dcbe135717a6f5e90141592bb22",
+        "url": "https://rutube.ru/video/f2910dcbe135717a6f5e90141592bb22/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 2 серия",
+        "season": 1,
+        "episode": 2,
+        "src": "https://rutube.ru/play/embed/05ddcd99c893d0f5629086de7bc9e0d7",
+        "url": "https://rutube.ru/video/05ddcd99c893d0f5629086de7bc9e0d7/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 3 серия",
+        "season": 1,
+        "episode": 3,
+        "src": "https://rutube.ru/play/embed/b0256744812e417a8a76398191fa6af3",
+        "url": "https://rutube.ru/video/b0256744812e417a8a76398191fa6af3/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 4 серия",
+        "season": 1,
+        "episode": 4,
+        "src": "https://rutube.ru/play/embed/56dc7b3d5985f3a2a623b4847f0cd1d1",
+        "url": "https://rutube.ru/video/56dc7b3d5985f3a2a623b4847f0cd1d1/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 5 серия",
+        "season": 1,
+        "episode": 5,
+        "src": "https://rutube.ru/play/embed/cd3821a8cac74b3fec2767be1bbad6d8",
+        "url": "https://rutube.ru/video/cd3821a8cac74b3fec2767be1bbad6d8/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 6 серия",
+        "season": 1,
+        "episode": 6,
+        "src": "https://rutube.ru/play/embed/170d3049afe80370126d6d1dcb45b49f",
+        "url": "https://rutube.ru/video/170d3049afe80370126d6d1dcb45b49f/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 7 серия",
+        "season": 1,
+        "episode": 7,
+        "src": "https://rutube.ru/play/embed/f178fd43500c546125afb37a05ee3b7e",
+        "url": "https://rutube.ru/video/f178fd43500c546125afb37a05ee3b7e/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 8 серия",
+        "season": 1,
+        "episode": 8,
+        "src": "https://rutube.ru/play/embed/bd660bf07876871af7538a89e1b4f141",
+        "url": "https://rutube.ru/video/bd660bf07876871af7538a89e1b4f141/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 9 серия",
+        "season": 1,
+        "episode": 9,
+        "src": "https://rutube.ru/play/embed/6b06a64d628fb1ba8028b018a56f2350",
+        "url": "https://rutube.ru/video/6b06a64d628fb1ba8028b018a56f2350/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 10 серия",
+        "season": 1,
+        "episode": 10,
+        "src": "https://rutube.ru/play/embed/9beedcf9bfa74f84f3714649536f0a9d",
+        "url": "https://rutube.ru/video/9beedcf9bfa74f84f3714649536f0a9d/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 11 серия",
+        "season": 1,
+        "episode": 11,
+        "src": "https://rutube.ru/play/embed/626f28f3959c86393b28943c7e64760e",
+        "url": "https://rutube.ru/video/626f28f3959c86393b28943c7e64760e/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 12 серия",
+        "season": 1,
+        "episode": 12,
+        "src": "https://rutube.ru/play/embed/bf741061179bfe3f50d046a3adecc5b8",
+        "url": "https://rutube.ru/video/bf741061179bfe3f50d046a3adecc5b8/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 13 серия",
+        "season": 1,
+        "episode": 13,
+        "src": "https://rutube.ru/play/embed/a08e76dd4ec3a740e2c01cdae22dc843",
+        "url": "https://rutube.ru/video/a08e76dd4ec3a740e2c01cdae22dc843/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 14 серия",
+        "season": 1,
+        "episode": 14,
+        "src": "https://rutube.ru/play/embed/09af5a5dddc4ce80d7095a53f2b03346",
+        "url": "https://rutube.ru/video/09af5a5dddc4ce80d7095a53f2b03346/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 15 серия",
+        "season": 1,
+        "episode": 15,
+        "src": "https://rutube.ru/play/embed/25dedf5299f50f3a512132aa66ff64a3",
+        "url": "https://rutube.ru/video/25dedf5299f50f3a512132aa66ff64a3/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 16 серия",
+        "season": 1,
+        "episode": 16,
+        "src": "https://rutube.ru/play/embed/64829b8c88bb34221fa62a2f389e2cfe",
+        "url": "https://rutube.ru/video/64829b8c88bb34221fa62a2f389e2cfe/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 17 серия",
+        "season": 1,
+        "episode": 17,
+        "src": "https://rutube.ru/play/embed/b1dc468aadec7b9d3b0d5a45e171ec70",
+        "url": "https://rutube.ru/video/b1dc468aadec7b9d3b0d5a45e171ec70/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 18 серия",
+        "season": 1,
+        "episode": 18,
+        "src": "https://rutube.ru/play/embed/320a9a645b4ac7dcb88aafd782a803c8",
+        "url": "https://rutube.ru/video/320a9a645b4ac7dcb88aafd782a803c8/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 19 серия",
+        "season": 1,
+        "episode": 19,
+        "src": "https://rutube.ru/play/embed/6d7c274f30b73b1461edab6b5d6d917c",
+        "url": "https://rutube.ru/video/6d7c274f30b73b1461edab6b5d6d917c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Магическая битва — 20 серия",
+        "season": 1,
+        "episode": 20,
+        "src": "https://rutube.ru/play/embed/925f753fe79d61a898220fbfd0a1c59d",
+        "url": "https://rutube.ru/video/925f753fe79d61a898220fbfd0a1c59d/",
+        "source": "rutube"
+    }
+];
+
+  const keys = [
+    "Магическая битва 1 сезон",
+    "Jujutsu Kaisen Season 1",
+    "Jujutsu Kaisen 1",
+    "Jujutsu Kaisen",
+    "呪術廻戦"
+  ];
+
+  window.OFFICIAL_EMBEDS = window.OFFICIAL_EMBEDS || {};
+
+  keys.forEach(k => {
+    window.OFFICIAL_EMBEDS[k] = jujutsuEpisodes;
+    if (typeof normalizeEmbedTitle === "function") {
+      window.OFFICIAL_EMBEDS[normalizeEmbedTitle(k)] = jujutsuEpisodes;
+    }
+  });
+
+  function isJujutsuRaw(raw) {
+    const s = String(raw || "").toLowerCase();
+    return s.includes("jujutsu kaisen") ||
+           s.includes("магическая битва") ||
+           s.includes("呪術廻戦");
+  }
+
+  function detectSeason(raw) {
+    const s = String(raw || "").toLowerCase();
+
+    if (
+      s.includes("season 2") ||
+      s.includes("2 season") ||
+      s.includes("2nd season") ||
+      s.includes("s2") ||
+      s.includes("2 сезон") ||
+      s.includes("сезон 2") ||
+      s.includes("второй сезон") ||
+      s.includes("shibuya") ||
+      s.includes("shibuya incident") ||
+      s.includes("инцидент в сибуе") ||
+      s.includes("инцидент в шибуе")
+    ) return 2;
+
+    if (
+      s.includes("season 3") ||
+      s.includes("3 season") ||
+      s.includes("3rd season") ||
+      s.includes("s3") ||
+      s.includes("3 сезон") ||
+      s.includes("сезон 3") ||
+      s.includes("третий сезон")
+    ) return 3;
+
+    if (
+      s.includes("season 1") ||
+      s.includes("1 season") ||
+      s.includes("1st season") ||
+      s.includes("s1") ||
+      s.includes("1 сезон") ||
+      s.includes("сезон 1") ||
+      s.includes("первый сезон")
+    ) return 1;
+
+    return 0;
+  }
+
+  function shouldUseJujutsuSeason1(raw) {
+    if (!isJujutsuRaw(raw)) return false;
+
+    const season = detectSeason(raw);
+
+    // Главное: 1 сезон не должен попадать во 2 сезон и дальше.
+    if (season >= 2) return false;
+
+    // Если сезон не указан, считаем это основной карточкой 2020/1 сезона.
+    return true;
+  }
+
+  try {
+    const oldSync = typeof getOfficialEmbedsForMovie === "function" ? getOfficialEmbedsForMovie : null;
+    getOfficialEmbedsForMovie = function(movie) {
+      const raw = [
+        movie && movie.ru,
+        movie && movie.en,
+        movie && movie.title,
+        movie && movie.name,
+        movie && movie.originalTitle,
+        document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+      ].filter(Boolean).join(" ");
+
+      if (shouldUseJujutsuSeason1(raw)) return jujutsuEpisodes;
+      return oldSync ? oldSync(movie) : [];
+    };
+  } catch (e) {}
+
+  try {
+    const oldAsync = typeof getOfficialEmbedsForMovieAsync === "function" ? getOfficialEmbedsForMovieAsync : null;
+    getOfficialEmbedsForMovieAsync = async function(movie) {
+      const raw = [
+        movie && movie.ru,
+        movie && movie.en,
+        movie && movie.title,
+        movie && movie.name,
+        movie && movie.originalTitle,
+        document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+      ].filter(Boolean).join(" ");
+
+      if (shouldUseJujutsuSeason1(raw)) return jujutsuEpisodes;
+      return oldAsync ? oldAsync(movie) : [];
+    };
+  } catch (e) {}
+})();
+
 
 /* ===== CORE FORCE PLAYERS FIX ===== */
 const FORCE_EMBEDS_BY_TITLE = [
@@ -3997,6 +4858,7 @@ async function getOfficialEmbedsForMovieAsync(movie) {
 
 function getOfficialEmbedsBoxTitle(embeds) {
   const hasEpisodes = embeds.some(x => x && (x.episode || x.season || /сезон|серия/i.test(String(x.name || ""))));
+
   return hasEpisodes ? "Серии / Плеер" : "Плеер";
 }
 
