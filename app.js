@@ -1,4 +1,4 @@
-=// FIX: OPM season matching by year, prevents Season 1 card from showing Season 3 players.
+// FIX: OPM season matching by year, prevents Season 1 card from showing Season 3 players.
 const INDEX_URL = "data/index.json";
 const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
@@ -2697,7 +2697,262 @@ function getMovieTitleCandidates(movie) {
   return [...expanded];
 }
 
+
+/* ===== CORE FORCE PLAYERS FIX ===== */
+const FORCE_EMBEDS_BY_TITLE = [
+  {
+    keys: ["sword art online", "sao", "s.a.o", "мастера меча онлайн", "мастер меча онлайн", "ソードアート"],
+    embeds: [
+    {
+        "name": "Мастера меча онлайн — 1 серия",
+        "season": 1,
+        "episode": 1,
+        "src": "https://rutube.ru/play/embed/cc395a0135d14b100d5a87b431d6f8a1",
+        "url": "https://rutube.ru/video/cc395a0135d14b100d5a87b431d6f8a1/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 2 серия",
+        "season": 1,
+        "episode": 2,
+        "src": "https://rutube.ru/play/embed/1523d746b5bf81ade41c37c26cf707f1",
+        "url": "https://rutube.ru/video/1523d746b5bf81ade41c37c26cf707f1/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 3 серия",
+        "season": 1,
+        "episode": 3,
+        "src": "https://rutube.ru/play/embed/d60c9b674367da045d663e600c003fc1",
+        "url": "https://rutube.ru/video/d60c9b674367da045d663e600c003fc1/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 4 серия",
+        "season": 1,
+        "episode": 4,
+        "src": "https://rutube.ru/play/embed/9e6904e419d6778728bc2b2ae94a6c67",
+        "url": "https://rutube.ru/video/9e6904e419d6778728bc2b2ae94a6c67/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 5 серия",
+        "season": 1,
+        "episode": 5,
+        "src": "https://rutube.ru/play/embed/4a23d50875d8b9e16472d220c8e3db6a",
+        "url": "https://rutube.ru/video/4a23d50875d8b9e16472d220c8e3db6a/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 6 серия",
+        "season": 1,
+        "episode": 6,
+        "src": "https://rutube.ru/play/embed/b794cf4d175b9ef3258008a201caa9a5",
+        "url": "https://rutube.ru/video/b794cf4d175b9ef3258008a201caa9a5/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 7 серия",
+        "season": 1,
+        "episode": 7,
+        "src": "https://rutube.ru/play/embed/4615d84c49dfee0f569fe39a72fe787e",
+        "url": "https://rutube.ru/video/4615d84c49dfee0f569fe39a72fe787e/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 8 серия",
+        "season": 1,
+        "episode": 8,
+        "src": "https://rutube.ru/play/embed/ddd66472657b0b4f9bae3738313f8ace",
+        "url": "https://rutube.ru/video/ddd66472657b0b4f9bae3738313f8ace/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 9 серия",
+        "season": 1,
+        "episode": 9,
+        "src": "https://rutube.ru/play/embed/2373e497a102d27466709dc67fdca177",
+        "url": "https://rutube.ru/video/2373e497a102d27466709dc67fdca177/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 10 серия",
+        "season": 1,
+        "episode": 10,
+        "src": "https://rutube.ru/play/embed/7b420e6651028b82e07df18b764eac2d",
+        "url": "https://rutube.ru/video/7b420e6651028b82e07df18b764eac2d/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 11 серия",
+        "season": 1,
+        "episode": 11,
+        "src": "https://rutube.ru/play/embed/0644a97e1d550d77ef065cb8e86cab92",
+        "url": "https://rutube.ru/video/0644a97e1d550d77ef065cb8e86cab92/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 12 серия",
+        "season": 1,
+        "episode": 12,
+        "src": "https://rutube.ru/play/embed/09e783dd41c8a690e057e48337e8f6d4",
+        "url": "https://rutube.ru/video/09e783dd41c8a690e057e48337e8f6d4/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 13 серия",
+        "season": 1,
+        "episode": 13,
+        "src": "https://rutube.ru/play/embed/1c629b2e70df8956a6473dbe107b73e1",
+        "url": "https://rutube.ru/video/1c629b2e70df8956a6473dbe107b73e1/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 14 серия",
+        "season": 1,
+        "episode": 14,
+        "src": "https://rutube.ru/play/embed/ddc1fc0d6debe9f958d9f21dfe5d156f",
+        "url": "https://rutube.ru/video/ddc1fc0d6debe9f958d9f21dfe5d156f/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 15 серия",
+        "season": 1,
+        "episode": 15,
+        "src": "https://rutube.ru/play/embed/c34e09790e95dc38b36599fe5fa67fed",
+        "url": "https://rutube.ru/video/c34e09790e95dc38b36599fe5fa67fed/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 16 серия",
+        "season": 1,
+        "episode": 16,
+        "src": "https://rutube.ru/play/embed/ba79314ad8e5960a5b79a79b18470b1e",
+        "url": "https://rutube.ru/video/ba79314ad8e5960a5b79a79b18470b1e/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 17 серия",
+        "season": 1,
+        "episode": 17,
+        "src": "https://rutube.ru/play/embed/092f5f531757e30942638ba2f31b1c07",
+        "url": "https://rutube.ru/video/092f5f531757e30942638ba2f31b1c07/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 18 серия",
+        "season": 1,
+        "episode": 18,
+        "src": "https://rutube.ru/play/embed/2fced8938c3778bd936487bfff3faefb",
+        "url": "https://rutube.ru/video/2fced8938c3778bd936487bfff3faefb/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 19 серия",
+        "season": 1,
+        "episode": 19,
+        "src": "https://rutube.ru/play/embed/0a02dab2631dbb5ebd07a0a26a48fa1d",
+        "url": "https://rutube.ru/video/0a02dab2631dbb5ebd07a0a26a48fa1d/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 20 серия",
+        "season": 1,
+        "episode": 20,
+        "src": "https://rutube.ru/play/embed/baf81a9fb8da91f7bb008b56966aeccf",
+        "url": "https://rutube.ru/video/baf81a9fb8da91f7bb008b56966aeccf/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 21 серия",
+        "season": 1,
+        "episode": 21,
+        "src": "https://rutube.ru/play/embed/924d4415780283484e47300cc156a03d",
+        "url": "https://rutube.ru/video/924d4415780283484e47300cc156a03d/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 22 серия",
+        "season": 1,
+        "episode": 22,
+        "src": "https://rutube.ru/play/embed/87f303df23d90a19f1350df88819b5c9",
+        "url": "https://rutube.ru/video/87f303df23d90a19f1350df88819b5c9/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 23 серия",
+        "season": 1,
+        "episode": 23,
+        "src": "https://rutube.ru/play/embed/2c687f8a4742318bf5cb824af44912e9",
+        "url": "https://rutube.ru/video/2c687f8a4742318bf5cb824af44912e9/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 24 серия",
+        "season": 1,
+        "episode": 24,
+        "src": "https://rutube.ru/play/embed/388f3ddb30bbed6b6573c4cc182f9c35",
+        "url": "https://rutube.ru/video/388f3ddb30bbed6b6573c4cc182f9c35/",
+        "source": "rutube"
+    },
+    {
+        "name": "Мастера меча онлайн — 25 серия",
+        "season": 1,
+        "episode": 25,
+        "src": "https://rutube.ru/play/embed/0e386965c1aeda99933939626c6064de",
+        "url": "https://rutube.ru/video/0e386965c1aeda99933939626c6064de/",
+        "source": "rutube"
+    }
+]
+  },
+  {
+    keys: ["attack on titan", "shingeki no kyojin", "атака титанов", "進撃の巨人"],
+    embeds: [
+    {
+        "name": "Атака титанов — смотреть",
+        "season": 1,
+        "episode": 1,
+        "src": "https://frontend.vh.yandex.ru/player/4521041827197602696?autoplay=1&event_prefix=sandbox:&restore_mute_state=1&init_timeout=15000&counters=%7B%22duration%22%3A1565%2C%22reqid%22%3A%221781132506693846-14550417896480300177-balancer-l7leveler-kubr-yp-klg-39-BAL%22%2C%22table%22%3A%22video_tech%22%2C%22heartbeats%22%3A%7B%22singlePath%22%3A%22heartbeat.single.fserp%22%2C%22noRepeat%22%3Atrue%7D%2C%22live%22%3Afalse%2C%22videoUrl%22%3A%22http%3A%2F%2Ffrontend.vh.yandex.ru%2Fplayer%2F4521041827197602696%22%2C%22extraParams%22%3A%7B%22from%22%3A%22yavideo%22%7D%7D&service=ya-video&from=yavideo",
+        "url": "https://frontend.vh.yandex.ru/player/4521041827197602696?autoplay=1&event_prefix=sandbox:&restore_mute_state=1&init_timeout=15000&counters=%7B%22duration%22%3A1565%2C%22reqid%22%3A%221781132506693846-14550417896480300177-balancer-l7leveler-kubr-yp-klg-39-BAL%22%2C%22table%22%3A%22video_tech%22%2C%22heartbeats%22%3A%7B%22singlePath%22%3A%22heartbeat.single.fserp%22%2C%22noRepeat%22%3Atrue%7D%2C%22live%22%3Afalse%2C%22videoUrl%22%3A%22http%3A%2F%2Ffrontend.vh.yandex.ru%2Fplayer%2F4521041827197602696%22%2C%22extraParams%22%3A%7B%22from%22%3A%22yavideo%22%7D%7D&service=ya-video&from=yavideo",
+        "source": "iframe"
+    }
+]
+  }
+];
+
+function getForcedEmbedsForMovie(movie) {
+  const raw = [
+    movie && movie.ru,
+    movie && movie.en,
+    movie && movie.title,
+    movie && movie.name,
+    movie && movie.title_ru,
+    movie && movie.name_ru,
+    movie && movie.title_en,
+    movie && movie.name_en,
+    movie && movie.originalTitle,
+    movie && movie.russianTitle,
+    movie && movie.englishTitle,
+    typeof titleOf === "function" && movie ? titleOf(movie) : "",
+    document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+  ].filter(Boolean).join(" ").toLowerCase();
+
+  const norm = typeof normalizeEmbedTitle === "function" ? normalizeEmbedTitle(raw) : raw;
+
+  for (const item of FORCE_EMBEDS_BY_TITLE) {
+    if (item.keys.some(k => norm.includes(String(k).toLowerCase()) || raw.includes(String(k).toLowerCase()))) {
+      return item.embeds || [];
+    }
+  }
+
+  return [];
+}
+
+
 function getOfficialEmbedsForMovie(movie) {
+  const forcedEmbeds = typeof getForcedEmbedsForMovie === "function" ? getForcedEmbedsForMovie(movie) : [];
+  if (forcedEmbeds && forcedEmbeds.length) return forcedEmbeds;
+
   if (!movie || !window.OFFICIAL_EMBEDS) return [];
 
   const directTitles = [
@@ -3133,6 +3388,9 @@ function isOnePunchManMovie(movie) {
 }
 
 async function getOfficialEmbedsForMovieAsync(movie) {
+  const forcedEmbeds = typeof getForcedEmbedsForMovie === "function" ? getForcedEmbedsForMovie(movie) : [];
+  if (forcedEmbeds && forcedEmbeds.length) return forcedEmbeds;
+
   // Жёсткая защита для Ванпанчмена: если открыта карточка 3 сезона,
   // нельзя брать 1 сезон из внешнего API по общему названию "One Punch Man".
   const wantedSeason = detectWantedSeasonFromMovie(movie);
