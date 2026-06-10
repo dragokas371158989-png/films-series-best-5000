@@ -52,6 +52,10 @@ function translateKnownTitle(title) {
     return "Стальной алхимик: Братство";
   }
 
+  if (norm === "one piece" || norm === "onepiece") {
+    return "Ван-Пис";
+  }
+
   return raw || "Без названия";
 }
 
@@ -994,7 +998,6 @@ function renderHomeSections() {
 
 function homeSectionHtml(title, items, tabName) {
   if (!items.length) return "";
-
   return `
     <section class="home-section">
       <div class="home-section-head">
@@ -2873,7 +2876,7 @@ function openOfficialEmbedPlayer(embed) {
           allowfullscreen
         ></iframe>
       </div>
-      ${embed.url ? `<a href="${escapeAttr(embed.url)}" target="_blank" rel="noreferrer" style="display:block;padding:12px 16px;color:#fff;background:#1d4ed8;text-align:center;font-weight:800;text-decoration:none;">Открыть на Rutube, если плеер не запустился</a>` : ""}
+      ${embed.url ? `<a href="${escapeAttr(embed.url)}" target="_blank" rel="noreferrer" style="display:block;padding:12px 16px;color:#fff;background:#1d4ed8;text-align:center;font-weight:800;text-decoration:none;">Открыть источник, если плеер не запустился</a>` : ""}
     </div>
   `;
 
@@ -2998,6 +3001,7 @@ function detectWantedSeasonFromMovie(movie) {
   // Из-за этого раньше срабатывал общий алиас и карточка 2015 года получала кнопки 3 сезона.
   if (text.includes("one punch man") || text.includes("ванпанчмен") || text.includes("wanpanman")) {
     const year = Number(movie && (movie.year || movie.release_year || movie.aired_on || movie.released) || 0);
+
     if (year && year <= 2016) return 1;
     if (year >= 2019 && year < 2025) return 2;
     if (year >= 2025) return 3;
@@ -3334,6 +3338,32 @@ addRutubeSeasonExactList({
     }
   ]
 });
+
+
+/* ===== ВАН-ПИС / ONE PIECE — 1 СЕЗОН ===== */
+
+addRutubeSeasonExactList({
+  titles: [
+    "Ван-Пис",
+    "Ван Пис",
+    "One Piece",
+    "ONE PIECE",
+    "OnePiece",
+    "Большой куш"
+  ],
+  season: 1,
+  episodes: [
+    {
+      name: "Ван-Пис — смотреть",
+      season: 1,
+      episode: 1,
+      src: "https://kodikplayer.com/season/27820/3e3faaa6e23abed7947b1f371b60b7c5/720p?translations=false&only_episode=true&only_season=true&episode=1&skip_button=%5Bending%5D1368-1467",
+      url: "https://kodikplayer.com/season/27820/3e3faaa6e23abed7947b1f371b60b7c5/720p?translations=false&only_episode=true&only_season=true&episode=1&skip_button=%5Bending%5D1368-1467",
+      source: "iframe"
+    }
+  ]
+});
+
 
 /* ===== МОРТАЛ КОМБАТ 2 (2026) ===== */
 
