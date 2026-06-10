@@ -2478,6 +2478,34 @@ function addRutubeSeasonFromText(config) {
 }
 
 
+
+function addRutubeSeasonExactList(config) {
+  const titles = config.titles || [];
+  const episodes = Array.isArray(config.episodes) ? config.episodes : [];
+  const allTitles = new Set();
+
+  titles.forEach(title => {
+    addTitleAliasSet(title).forEach(alias => allTitles.add(alias));
+  });
+
+  const cleanEpisodes = episodes
+    .filter(ep => ep && ep.src)
+    .map(ep => ({
+      name: ep.name || `Rutube — ${ep.season || ""} сезон ${ep.episode || ""} серия`,
+      season: Number(ep.season || config.season || 0),
+      episode: Number(ep.episode || 0),
+      src: String(ep.src).replace(/\/+$/, ""),
+      url: ep.url || "",
+      source: "rutube"
+    }));
+
+  allTitles.forEach(title => {
+    window.OFFICIAL_EMBEDS[title] = cleanEpisodes.slice();
+  });
+
+  console.log(`Rutube: точный список серий ${cleanEpisodes.length}`, [...allTitles]);
+}
+
 function addRutubeVideoFromText(config) {
   const titles = config.titles || [];
   const name = config.name || "Rutube — смотреть";
@@ -2805,6 +2833,7 @@ function openOfficialEmbedPlayer(embed) {
           allowfullscreen
         ></iframe>
       </div>
+      ${embed.url ? `<a href="${escapeAttr(embed.url)}" target="_blank" rel="noreferrer" style="display:block;padding:12px 16px;color:#fff;background:#1d4ed8;text-align:center;font-weight:800;text-decoration:none;">Открыть на Rutube, если плеер не запустился</a>` : ""}
     </div>
   `;
 
@@ -2969,7 +2998,6 @@ async function getOfficialEmbedsForMovieAsync(movie) {
   }
 
   const apiEmbeds = await fetchOfficialEmbedsFromWorker(movie);
-
   if (apiEmbeds.length) {
     return wantedSeason
       ? apiEmbeds.filter(x => !x.season || Number(x.season) === wantedSeason)
@@ -3108,11 +3136,10 @@ https://rutube.ru/video/714734c6c2bd1bf445febc0d88decaec/?playlist=349758
 
 /* ===== ВАНПАНЧМЕН — 3 СЕЗОН ===== */
 
-(function addOnePunchManSeason3FixedRutube() {
-  const titles = [
+addRutubeSeasonExactList({
+  titles: [
     "Ванпанчмен 3 сезон",
     "Ванпанчмен 3",
-    "Сериал Ванпанчмен / One Punch Man — 3 сезон",
     "One-Punch Man Season 3",
     "One Punch Man Season 3",
     "One Punch Man 3rd Season",
@@ -3120,40 +3147,60 @@ https://rutube.ru/video/714734c6c2bd1bf445febc0d88decaec/?playlist=349758
     "One Punch Man 3",
     "One-Punch Man 3",
     "Wanpanman 3"
-  ];
-
-  // Реальные ссылки из плейлиста Rutube: https://rutube.ru/plst/1324026/
-  // В плейлисте сейчас есть 0, 1, 2, 3, 4, 5 и 7 серия. 6 серии там нет.
-  const episodes = [
-    { episode: 0, id: "76aec24b54c469f135629f0a0f436380" },
-    { episode: 1, id: "4e9a5746b7c99a0b4a9ee668a24cae24" },
-    { episode: 2, id: "831e2003f962c3ed01597533dc21e0f7" },
-    { episode: 3, id: "be73e3f823178fa53b41d47665d63cba" },
-    { episode: 4, id: "129be222a0fd669a8db146ead5abba4b" },
-    { episode: 5, id: "a72b8bcb654b6f1f6fdc1ea159057df4" },
-    { episode: 7, id: "1e36649bfef46d8b846a9d455506f7fe" }
-  ].map(item => ({
-    name: `Rutube — 3 сезон ${item.episode} серия`,
-    season: 3,
-    episode: item.episode,
-    src: `https://rutube.ru/play/embed/${item.id}`,
-    source: "rutube"
-  }));
-
-  const allTitles = new Set();
-
-  titles.forEach(title => {
-    allTitles.add(title);
-    addTitleAliasSet(title).forEach(alias => allTitles.add(alias));
-  });
-
-  allTitles.forEach(title => {
-    // Для 3 сезона перезаписываем старые битые ссылки полностью.
-    window.OFFICIAL_EMBEDS[title] = episodes.map(x => ({ ...x }));
-  });
-
-  console.log("Rutube: Ванпанчмен 3 сезон исправлен", episodes.length, [...allTitles]);
-})();
+  ],
+  season: 3,
+  episodes: [
+    {
+      name: "Rutube — 3 сезон 1 серия",
+      season: 3,
+      episode: 1,
+      src: "https://rutube.ru/play/embed/4e9a5746b7c99a0b4a9ee668a24cae24",
+      url: "https://rutube.ru/video/4e9a5746b7c99a0b4a9ee668a24cae24/?playlist=1324026"
+    },
+    {
+      name: "Rutube — 3 сезон 2 серия",
+      season: 3,
+      episode: 2,
+      src: "https://rutube.ru/play/embed/831e2003f962c3ed01597533dc21e0f7",
+      url: "https://rutube.ru/video/831e2003f962c3ed01597533dc21e0f7/?playlist=1324026"
+    },
+    {
+      name: "Rutube — 3 сезон 3 серия",
+      season: 3,
+      episode: 3,
+      src: "https://rutube.ru/play/embed/be73e3f823178fa53b41d47665d63cba",
+      url: "https://rutube.ru/video/be73e3f823178fa53b41d47665d63cba/?playlist=1324026"
+    },
+    {
+      name: "Rutube — 3 сезон 4 серия",
+      season: 3,
+      episode: 4,
+      src: "https://rutube.ru/play/embed/129be222a0fd669a8db146ead5abba4b",
+      url: "https://rutube.ru/video/129be222a0fd669a8db146ead5abba4b/?playlist=1324026"
+    },
+    {
+      name: "Rutube — 3 сезон 5 серия",
+      season: 3,
+      episode: 5,
+      src: "https://rutube.ru/play/embed/a72b8bcb654b6f1f6fdc1ea159057df4",
+      url: "https://rutube.ru/video/a72b8bcb654b6f1f6fdc1ea159057df4/?playlist=1324026"
+    },
+    {
+      name: "Rutube — 3 сезон 7 серия",
+      season: 3,
+      episode: 7,
+      src: "https://rutube.ru/play/embed/1e36649bfef46d8b846a9d455506f7fe",
+      url: "https://rutube.ru/video/1e36649bfef46d8b846a9d455506f7fe/?playlist=1324026"
+    },
+    {
+      name: "Rutube — 3 сезон 0 серия",
+      season: 3,
+      episode: 0,
+      src: "https://rutube.ru/play/embed/76aec24b54c469f135629f0a0f436380",
+      url: "https://rutube.ru/video/76aec24b54c469f135629f0a0f436380/?playlist=1324026"
+    }
+  ]
+});
 
 /* ===== МОРТАЛ КОМБАТ 2 (2026) ===== */
 
