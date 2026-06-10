@@ -2697,6 +2697,572 @@ function getMovieTitleCandidates(movie) {
   return [...expanded];
 }
 
+/* ===== FORCE FIX: DEATH NOTE / ТЕТРАДЬ СМЕРТИ ===== */
+(function () {
+  const deathNoteEpisodes = [
+    {
+        "name": "Тетрадь смерти — 1 серия",
+        "season": 1,
+        "episode": 1,
+        "src": "https://rutube.ru/play/embed/91aa850286a0c9eeb8bb71018f058e4b",
+        "url": "https://rutube.ru/video/91aa850286a0c9eeb8bb71018f058e4b/",
+        "source": "rutube"
+    },
+    {
+        "name": "Тетрадь смерти — 2 серия",
+        "season": 1,
+        "episode": 2,
+        "src": "https://rutube.ru/play/embed/d614b901cfe922bbbd16466c0ff0528e",
+        "url": "https://rutube.ru/video/d614b901cfe922bbbd16466c0ff0528e/",
+        "source": "rutube"
+    },
+    {
+        "name": "Тетрадь смерти — 3 серия",
+        "season": 1,
+        "episode": 3,
+        "src": "https://rutube.ru/play/embed/c44c89adb5f8b20848c32cc00e0a1505",
+        "url": "https://rutube.ru/video/c44c89adb5f8b20848c32cc00e0a1505/",
+        "source": "rutube"
+    }
+];
+
+  const keys = [
+    "Тетрадь смерти",
+    "Death Note",
+    "Desu Nōto",
+    "デスノート"
+  ];
+
+  window.OFFICIAL_EMBEDS = window.OFFICIAL_EMBEDS || {};
+
+  keys.forEach(k => {
+    window.OFFICIAL_EMBEDS[k] = deathNoteEpisodes;
+    if (typeof normalizeEmbedTitle === "function") {
+      window.OFFICIAL_EMBEDS[normalizeEmbedTitle(k)] = deathNoteEpisodes;
+    }
+  });
+
+  function isDeathNoteRaw(raw) {
+    const s = String(raw || "").toLowerCase();
+    return s.includes("death note") ||
+           s.includes("тетрадь смерти") ||
+           s.includes("desu nōto") ||
+           s.includes("デスノート");
+  }
+
+  try {
+    const oldSync = typeof getOfficialEmbedsForMovie === "function" ? getOfficialEmbedsForMovie : null;
+    getOfficialEmbedsForMovie = function(movie) {
+      const raw = [
+        movie && movie.ru,
+        movie && movie.en,
+        movie && movie.title,
+        movie && movie.name,
+        movie && movie.originalTitle,
+        document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+      ].filter(Boolean).join(" ");
+
+      if (isDeathNoteRaw(raw)) return deathNoteEpisodes;
+      return oldSync ? oldSync(movie) : [];
+    };
+  } catch (e) {}
+
+  try {
+    const oldAsync = typeof getOfficialEmbedsForMovieAsync === "function" ? getOfficialEmbedsForMovieAsync : null;
+    getOfficialEmbedsForMovieAsync = async function(movie) {
+      const raw = [
+        movie && movie.ru,
+        movie && movie.en,
+        movie && movie.title,
+        movie && movie.name,
+        movie && movie.originalTitle,
+        document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+      ].filter(Boolean).join(" ");
+
+      if (isDeathNoteRaw(raw)) return deathNoteEpisodes;
+      return oldAsync ? oldAsync(movie) : [];
+    };
+  } catch (e) {}
+})();
+
+/* ===== ТЕТРАДЬ СМЕРТИ / DEATH NOTE ===== */
+
+addRutubeSeasonExactList({
+  titles: [
+    "Тетрадь смерти",
+    "Death Note",
+    "Desu Nōto",
+    "デスノート"
+  ],
+  season: 1,
+  episodes: [
+    {
+        "name": "Тетрадь смерти — 1 серия",
+        "season": 1,
+        "episode": 1,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239023&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239023",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 2 серия",
+        "season": 1,
+        "episode": 2,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239024&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239024",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 3 серия",
+        "season": 1,
+        "episode": 3,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239025&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239025",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 4 серия",
+        "season": 1,
+        "episode": 4,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239026&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239026",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 5 серия",
+        "season": 1,
+        "episode": 5,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239027&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239027",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 6 серия",
+        "season": 1,
+        "episode": 6,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239028&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239028",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 7 серия",
+        "season": 1,
+        "episode": 7,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239029&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239029",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 8 серия",
+        "season": 1,
+        "episode": 8,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239030&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239030",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 9 серия",
+        "season": 1,
+        "episode": 9,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239031&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239031",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 10 серия",
+        "season": 1,
+        "episode": 10,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239032&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239032",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 11 серия",
+        "season": 1,
+        "episode": 11,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239033&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239033",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 12 серия",
+        "season": 1,
+        "episode": 12,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239034&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239034",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 13 серия",
+        "season": 1,
+        "episode": 13,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239035&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239035",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 14 серия",
+        "season": 1,
+        "episode": 14,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239036&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239036",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 15 серия",
+        "season": 1,
+        "episode": 15,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239037&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239037",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 16 серия",
+        "season": 1,
+        "episode": 16,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239038&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239038",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 17 серия",
+        "season": 1,
+        "episode": 17,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239040&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239040",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 18 серия",
+        "season": 1,
+        "episode": 18,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239042&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239042",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 19 серия",
+        "season": 1,
+        "episode": 19,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239045&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239045",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 20 серия",
+        "season": 1,
+        "episode": 20,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239047&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239047",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 21 серия",
+        "season": 1,
+        "episode": 21,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239049&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239049",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 22 серия",
+        "season": 1,
+        "episode": 22,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239051&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239051",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 23 серия",
+        "season": 1,
+        "episode": 23,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239053&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239053",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 24 серия",
+        "season": 1,
+        "episode": 24,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239055&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239055",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 25 серия",
+        "season": 1,
+        "episode": 25,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239057&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239057",
+        "source": "iframe"
+    }
+]
+});
+
+/* ===== FORCE FIX: DEATH NOTE / ТЕТРАДЬ СМЕРТИ VK ===== */
+(function () {
+  const deathNoteEpisodes = [
+    {
+        "name": "Тетрадь смерти — 1 серия",
+        "season": 1,
+        "episode": 1,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239023&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239023",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 2 серия",
+        "season": 1,
+        "episode": 2,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239024&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239024",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 3 серия",
+        "season": 1,
+        "episode": 3,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239025&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239025",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 4 серия",
+        "season": 1,
+        "episode": 4,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239026&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239026",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 5 серия",
+        "season": 1,
+        "episode": 5,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239027&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239027",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 6 серия",
+        "season": 1,
+        "episode": 6,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239028&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239028",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 7 серия",
+        "season": 1,
+        "episode": 7,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239029&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239029",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 8 серия",
+        "season": 1,
+        "episode": 8,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239030&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239030",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 9 серия",
+        "season": 1,
+        "episode": 9,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239031&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239031",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 10 серия",
+        "season": 1,
+        "episode": 10,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239032&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239032",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 11 серия",
+        "season": 1,
+        "episode": 11,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239033&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239033",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 12 серия",
+        "season": 1,
+        "episode": 12,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239034&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239034",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 13 серия",
+        "season": 1,
+        "episode": 13,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239035&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239035",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 14 серия",
+        "season": 1,
+        "episode": 14,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239036&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239036",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 15 серия",
+        "season": 1,
+        "episode": 15,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239037&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239037",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 16 серия",
+        "season": 1,
+        "episode": 16,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239038&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239038",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 17 серия",
+        "season": 1,
+        "episode": 17,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239040&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239040",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 18 серия",
+        "season": 1,
+        "episode": 18,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239042&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239042",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 19 серия",
+        "season": 1,
+        "episode": 19,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239045&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239045",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 20 серия",
+        "season": 1,
+        "episode": 20,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239047&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239047",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 21 серия",
+        "season": 1,
+        "episode": 21,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239049&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239049",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 22 серия",
+        "season": 1,
+        "episode": 22,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239051&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239051",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 23 серия",
+        "season": 1,
+        "episode": 23,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239053&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239053",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 24 серия",
+        "season": 1,
+        "episode": 24,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239055&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239055",
+        "source": "iframe"
+    },
+    {
+        "name": "Тетрадь смерти — 25 серия",
+        "season": 1,
+        "episode": 25,
+        "src": "https://vk.com/video_ext.php?oid=-196980150&id=456239057&hd=2",
+        "url": "https://vkvideo.ru/video-196980150_456239057",
+        "source": "iframe"
+    }
+];
+
+  const keys = [
+    "Тетрадь смерти",
+    "Death Note",
+    "Desu Nōto",
+    "デスノート"
+  ];
+
+  window.OFFICIAL_EMBEDS = window.OFFICIAL_EMBEDS || {};
+
+  keys.forEach(k => {
+    window.OFFICIAL_EMBEDS[k] = deathNoteEpisodes;
+    if (typeof normalizeEmbedTitle === "function") {
+      window.OFFICIAL_EMBEDS[normalizeEmbedTitle(k)] = deathNoteEpisodes;
+    }
+  });
+
+  function isDeathNoteRaw(raw) {
+    const s = String(raw || "").toLowerCase();
+    return s.includes("death note") ||
+           s.includes("тетрадь смерти") ||
+           s.includes("desu nōto") ||
+           s.includes("デスノート");
+  }
+
+  try {
+    const oldSync = typeof getOfficialEmbedsForMovie === "function" ? getOfficialEmbedsForMovie : null;
+    getOfficialEmbedsForMovie = function(movie) {
+      const raw = [
+        movie && movie.ru,
+        movie && movie.en,
+        movie && movie.title,
+        movie && movie.name,
+        movie && movie.originalTitle,
+        document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+      ].filter(Boolean).join(" ");
+
+      if (isDeathNoteRaw(raw)) return deathNoteEpisodes;
+      return oldSync ? oldSync(movie) : [];
+    };
+  } catch (e) {}
+
+  try {
+    const oldAsync = typeof getOfficialEmbedsForMovieAsync === "function" ? getOfficialEmbedsForMovieAsync : null;
+    getOfficialEmbedsForMovieAsync = async function(movie) {
+      const raw = [
+        movie && movie.ru,
+        movie && movie.en,
+        movie && movie.title,
+        movie && movie.name,
+        movie && movie.originalTitle,
+        document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+      ].filter(Boolean).join(" ");
+
+      if (isDeathNoteRaw(raw)) return deathNoteEpisodes;
+      return oldAsync ? oldAsync(movie) : [];
+    };
+  } catch (e) {}
+})();
+
 
 /* ===== CORE FORCE PLAYERS FIX ===== */
 const FORCE_EMBEDS_BY_TITLE = [
@@ -3431,7 +3997,6 @@ async function getOfficialEmbedsForMovieAsync(movie) {
 
 function getOfficialEmbedsBoxTitle(embeds) {
   const hasEpisodes = embeds.some(x => x && (x.episode || x.season || /сезон|серия/i.test(String(x.name || ""))));
-
   return hasEpisodes ? "Серии / Плеер" : "Плеер";
 }
 
