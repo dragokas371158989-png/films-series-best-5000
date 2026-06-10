@@ -3357,8 +3357,8 @@ addRutubeSeasonExactList({
       name: "Ван-Пис — смотреть",
       season: 1,
       episode: 1,
-      src: "https://kodikplayer.com/season/27820/3e3faaa6e23abed7947b1f371b60b7c5/720p?translations=false&only_episode=true&only_season=true&episode=1&skip_button=%5Bending%5D1368-1467",
-      url: "https://kodikplayer.com/season/27820/3e3faaa6e23abed7947b1f371b60b7c5/720p?translations=false&only_episode=true&only_season=true&episode=1&skip_button=%5Bending%5D1368-1467",
+      src: "https://naruto-base.su/mchat/",
+      url: "https://naruto-base.su/mchat/",
       source: "iframe"
     }
   ]
@@ -3407,8 +3407,8 @@ loadData().catch(showError);
     name: "Ван-Пис — смотреть",
     season: 1,
     episode: 1,
-    src: "https://kodikplayer.com/season/27820/3e3faaa6e23abed7947b1f371b60b7c5/720p?translations=false&only_episode=true&only_season=true&episode=1&skip_button=%5Bending%5D1368-1467",
-    url: "https://kodikplayer.com/season/27820/3e3faaa6e23abed7947b1f371b60b7c5/720p?translations=false&only_episode=true&only_season=true&episode=1&skip_button=%5Bending%5D1368-1467",
+    src: "https://naruto-base.su/mchat/",
+    url: "https://naruto-base.su/mchat/",
     source: "iframe"
   };
 
@@ -3479,3 +3479,4 @@ loadData().catch(showError);
     return oldGetOfficialEmbedsForMovieAsync ? oldGetOfficialEmbedsForMovieAsync(movie) : [];
   };
 })();
+
