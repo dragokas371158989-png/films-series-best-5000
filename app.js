@@ -2506,6 +2506,37 @@ function addRutubeSeasonExactList(config) {
   console.log(`Rutube: точный список серий ${cleanEpisodes.length}`, [...allTitles]);
 }
 
+
+function addIframeSeasonExactList(config) {
+  const titles = config.titles || [];
+  const episodes = Array.isArray(config.episodes) ? config.episodes : [];
+  const provider = config.provider || config.source || "Плеер";
+  const source = config.source || provider.toLowerCase();
+  const allTitles = new Set();
+
+  titles.forEach(title => {
+    addTitleAliasSet(title).forEach(alias => allTitles.add(alias));
+  });
+
+  const cleanEpisodes = episodes
+    .filter(ep => ep && ep.src)
+    .map(ep => ({
+      name: ep.name || `${provider} — ${ep.season || config.season || ""} сезон ${ep.episode || ""} серия`,
+      season: Number(ep.season || config.season || 0),
+      episode: Number(ep.episode || 0),
+      src: String(ep.src).trim(),
+      url: ep.url || ep.src || "",
+      source,
+      provider
+    }));
+
+  allTitles.forEach(title => {
+    window.OFFICIAL_EMBEDS[title] = cleanEpisodes.slice();
+  });
+
+  console.log(`${provider}: точный список серий ${cleanEpisodes.length}`, [...allTitles]);
+}
+
 function addRutubeVideoFromText(config) {
   const titles = config.titles || [];
   const name = config.name || "Rutube — смотреть";
@@ -2833,7 +2864,7 @@ function openOfficialEmbedPlayer(embed) {
           allowfullscreen
         ></iframe>
       </div>
-      ${embed.url ? `<a href="${escapeAttr(embed.url)}" target="_blank" rel="noreferrer" style="display:block;padding:12px 16px;color:#fff;background:#1d4ed8;text-align:center;font-weight:800;text-decoration:none;">Открыть на Rutube, если плеер не запустился</a>` : ""}
+      ${embed.url ? `<a href="${escapeAttr(embed.url)}" target="_blank" rel="noreferrer" style="display:block;padding:12px 16px;color:#fff;background:#1d4ed8;text-align:center;font-weight:800;text-decoration:none;">Открыть ${escapeHtml(embed.provider || embed.source || "плеер")}, если плеер не запустился</a>` : ""}
     </div>
   `;
 
@@ -2967,7 +2998,6 @@ function isOnePunchManMovie(movie) {
 
   return text.includes("one punch man") || text.includes("ванпанчмен") || text.includes("wanpanman");
 }
-
 async function getOfficialEmbedsForMovieAsync(movie) {
   // Жёсткая защита для Ванпанчмена: если открыта карточка 3 сезона,
   // нельзя брать 1 сезон из внешнего API по общему названию "One Punch Man".
@@ -3009,8 +3039,11 @@ async function getOfficialEmbedsForMovieAsync(movie) {
 
 function getOfficialEmbedsBoxTitle(embeds) {
   const hasEpisodes = embeds.some(x => x && (x.episode || x.season || /сезон|серия/i.test(String(x.name || ""))));
+  const providerItem = embeds.find(x => x && (x.provider || x.source)) || {};
+  const provider = providerItem.provider || providerItem.source || "плеер";
+  const prettyProvider = String(provider).replace(/^rutube$/i, "Rutube").replace(/^kodik$/i, "Kodik");
 
-  return hasEpisodes ? "Серии Rutube" : "Видео Rutube";
+  return hasEpisodes ? `Серии ${prettyProvider}` : `Видео ${prettyProvider}`;
 }
 
 async function addOfficialEmbedButtonsToDetails(movie) {
@@ -3024,7 +3057,7 @@ async function addOfficialEmbedButtonsToDetails(movie) {
   const episodesBox = document.createElement("div");
   episodesBox.className = "official-episodes-box";
   episodesBox.innerHTML = `
-    <h3 class="official-episodes-title">Rutube</h3>
+    <h3 class="official-episodes-title">Плеер</h3>
     <div class="official-episodes-loading">Ищу плеер...</div>
   `;
   videoBlock.appendChild(episodesBox);
@@ -3057,7 +3090,9 @@ async function addOfficialEmbedButtonsToDetails(movie) {
     btn.className = "official-embed-btn";
     btn.textContent = String(embed.name || "Смотреть")
       .replace(/^Rutube\s*—\s*/i, "")
-      .replace(/^Рутуб\s*—\s*/i, "");
+      .replace(/^Рутуб\s*—\s*/i, "")
+      .replace(/^Kodik\s*—\s*/i, "")
+      .replace(/^Кодик\s*—\s*/i, "");
 
     btn.addEventListener("click", () => {
       closeDetailsBeforePlayer();
@@ -3198,6 +3233,117 @@ addRutubeSeasonExactList({
       episode: 0,
       src: "https://rutube.ru/play/embed/76aec24b54c469f135629f0a0f436380",
       url: "https://rutube.ru/video/76aec24b54c469f135629f0a0f436380/?playlist=1324026"
+    }
+  ]
+});
+
+/* ===== АТЕЛЬЕ КОЛДОВСКИХ КОЛПАКОВ — 1 СЕЗОН ===== */
+
+addIframeSeasonExactList({
+  titles: [
+    "Ателье колдовских колпаков",
+    "Ателье колдовских колпаков 1 сезон",
+    "Ателье колдовских колпаков, Сезон 1",
+    "Ателье колдовских колпаков, Сезон 1 (2026)",
+    "Tongari Boushi no Atelier",
+    "Tongari Boushi no Atelier Season 1",
+    "Witch Hat Atelier",
+    "Witch Hat Atelier Season 1"
+  ],
+  season: 1,
+  provider: "Kodik",
+  source: "kodik",
+  episodes: [
+    {
+      name: "Kodik — 1 сезон 1 серия",
+      season: 1,
+      episode: 1,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=1",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=1"
+    },
+    {
+      name: "Kodik — 1 сезон 2 серия",
+      season: 1,
+      episode: 2,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=2",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=2"
+    },
+    {
+      name: "Kodik — 1 сезон 3 серия",
+      season: 1,
+      episode: 3,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=3",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=3"
+    },
+    {
+      name: "Kodik — 1 сезон 4 серия",
+      season: 1,
+      episode: 4,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=4",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=4"
+    },
+    {
+      name: "Kodik — 1 сезон 5 серия",
+      season: 1,
+      episode: 5,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=5",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=5"
+    },
+    {
+      name: "Kodik — 1 сезон 6 серия",
+      season: 1,
+      episode: 6,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=6",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=6"
+    },
+    {
+      name: "Kodik — 1 сезон 7 серия",
+      season: 1,
+      episode: 7,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=7",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=7"
+    },
+    {
+      name: "Kodik — 1 сезон 8 серия",
+      season: 1,
+      episode: 8,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=8",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=8"
+    },
+    {
+      name: "Kodik — 1 сезон 9 серия",
+      season: 1,
+      episode: 9,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=9",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=9"
+    },
+    {
+      name: "Kodik — 1 сезон 10 серия",
+      season: 1,
+      episode: 10,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=10",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=10"
+    },
+    {
+      name: "Kodik — 1 сезон 11 серия",
+      season: 1,
+      episode: 11,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=11",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=11"
+    },
+    {
+      name: "Kodik — 1 сезон 12 серия",
+      season: 1,
+      episode: 12,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=12",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=12"
+    },
+    {
+      name: "Kodik — 1 сезон 13 серия",
+      season: 1,
+      episode: 13,
+      src: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=13",
+      url: "https://kodikplayer.com/serial/74114/c34ea66fe24ae7da48bc8f631d40e0b0/720p?season=1&episode=13"
     }
   ]
 });
