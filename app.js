@@ -1,3 +1,4 @@
+// FIX: OPM season matching by year, prevents Season 1 card from showing Season 3 players.
 const INDEX_URL = "data/index.json";
 const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
@@ -2604,6 +2605,30 @@ function getOfficialEmbedsForMovie(movie) {
   const expandedNorms = [...new Set(getMovieTitleCandidates(movie).map(normalizeEmbedTitle).filter(Boolean))];
   const entries = Object.entries(window.OFFICIAL_EMBEDS);
 
+  const isNarutoShippudenNorm = (norm) => {
+    const s = String(norm || "");
+    return (s.includes("naruto") && (s.includes("shippuden") || s.includes("shippuuden"))) || s.includes("ураганные хроники");
+  };
+
+  const isNarutoOriginalNorm = (norm) => {
+    const s = String(norm || "");
+    return (s === "naruto" || s === "наруто" || s.includes("naruto season 1") || s.includes("наруто 1 сезон")) && !isNarutoShippudenNorm(s);
+  };
+
+  const movieIsNarutoShippuden = directNorms.some(isNarutoShippudenNorm);
+  const movieIsNarutoOriginal = directNorms.some(isNarutoOriginalNorm) && !movieIsNarutoShippuden;
+
+  const narutoKeyAllowed = (keyNorm) => {
+    const keyIsShippuden = isNarutoShippudenNorm(keyNorm);
+    const keyIsOriginal = isNarutoOriginalNorm(keyNorm);
+
+    // Защита: обычный Naruto и Naruto Shippuden не должны цеплять друг друга по слову "Naruto".
+    if (movieIsNarutoOriginal && keyIsShippuden) return false;
+    if (movieIsNarutoShippuden && keyIsOriginal) return false;
+
+    return true;
+  };
+
   const getSeasonFromNorm = (norm) => {
     const s = String(norm || "");
     if (/(^|\s)(3|iii|third|3rd)(\s|$)/i.test(s) || /season\s*3/i.test(s) || /3\s*сезон/i.test(s)) return 3;
@@ -2618,6 +2643,7 @@ function getOfficialEmbedsForMovie(movie) {
   // 1) Сначала ищем точное совпадение по настоящему названию из базы, без общих алиасов.
   for (const [key, embeds] of entries) {
     const keyNorm = normalizeEmbedTitle(key);
+    if (!narutoKeyAllowed(keyNorm)) continue;
     if (directNorms.includes(keyNorm) && sameSeason([key])) {
       return embeds || [];
     }
@@ -2626,6 +2652,7 @@ function getOfficialEmbedsForMovie(movie) {
   // 2) Потом точное совпадение по алиасам, но если в названии есть сезон — не отдаём другой сезон.
   for (const [key, embeds] of entries) {
     const keyNorm = normalizeEmbedTitle(key);
+    if (!narutoKeyAllowed(keyNorm)) continue;
     if (expandedNorms.includes(keyNorm) && sameSeason([key])) {
       return embeds || [];
     }
@@ -2636,6 +2663,7 @@ function getOfficialEmbedsForMovie(movie) {
     if (!sameSeason([key])) continue;
 
     const keyNorm = normalizeEmbedTitle(key);
+    if (!narutoKeyAllowed(keyNorm)) continue;
 
     if (expandedNorms.some(t => {
       if (!t || !keyNorm) return false;
@@ -2937,7 +2965,7 @@ async function fetchOfficialEmbedsFromWorker(movie) {
 }
 
 function detectWantedSeasonFromMovie(movie) {
-  const text = normalizeEmbedTitle([
+  const rawText = [
     movie && movie.ru,
     movie && movie.en,
     movie && movie.title,
@@ -2945,11 +2973,27 @@ function detectWantedSeasonFromMovie(movie) {
     movie && movie.originalTitle,
     typeof titleOf === "function" && movie ? titleOf(movie) : "",
     document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
-  ].filter(Boolean).join(" "));
+  ].filter(Boolean).join(" ");
 
-  if (/season\s*3/i.test(text) || /3\s*сезон/i.test(text) || /3rd/i.test(text)) return 3;
-  if (/season\s*2/i.test(text) || /2\s*сезон/i.test(text) || /2nd/i.test(text)) return 2;
-  if (/season\s*1/i.test(text) || /1\s*сезон/i.test(text) || /1st/i.test(text)) return 1;
+  const text = normalizeEmbedTitle(rawText);
+
+  if (/season\s*3/i.test(rawText) || /3\s*сезон/i.test(rawText) || /\b3rd\b/i.test(rawText)) return 3;
+  if (/season\s*2/i.test(rawText) || /2\s*сезон/i.test(rawText) || /\b2nd\b/i.test(rawText)) return 2;
+  if (/season\s*1/i.test(rawText) || /1\s*сезон/i.test(rawText) || /\b1st\b/i.test(rawText)) return 1;
+
+  // ВАЖНО ДЛЯ ВАНПАНЧМЕНА:
+  // В базе 1 сезон часто называется просто "One-Punch Man" без "Season 1".
+  // Из-за этого раньше срабатывал общий алиас и карточка 2015 года получала кнопки 3 сезона.
+  if (text.includes("one punch man") || text.includes("ванпанчмен") || text.includes("wanpanman")) {
+    const year = Number(movie && (movie.year || movie.release_year || movie.aired_on || movie.released) || 0);
+
+    if (year && year <= 2016) return 1;
+    if (year >= 2019 && year < 2025) return 2;
+    if (year >= 2025) return 3;
+
+    // Если год не найден, обычная карточка без номера сезона — это 1 сезон.
+    return 1;
+  }
 
   return 0;
 }
@@ -3202,6 +3246,29 @@ addRutubeSeasonExactList({
   ]
 });
 
+
+
+/* ===== НАРУТО — 1 СЕЗОН ===== */
+
+addRutubeSeasonExactList({
+  titles: [
+    "Наруто",
+    "Наруто 1 сезон",
+    "Наруто, Сезон 1",
+    "Naruto",
+    "Naruto Season 1"
+  ],
+  season: 1,
+  episodes: [
+    {
+      name: "Наруто — 1 сезон",
+      season: 1,
+      episode: 1,
+      src: "https://play.hideogenius.com/?token_movie=f174d1e9bc42d32d073a2914fd1334&token=dd04704e1a13e780de505738b5ed20&season=1",
+      url: "https://play.hideogenius.com/?token_movie=f174d1e9bc42d32d073a2914fd1334&token=dd04704e1a13e780de505738b5ed20&season=1"
+    }
+  ]
+});
 
 /* ===== НАРУТО: УРАГАННЫЕ ХРОНИКИ — 2 СЕЗОН ===== */
 
