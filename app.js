@@ -2833,7 +2833,7 @@ function openOfficialEmbedPlayer(embed) {
           allowfullscreen
         ></iframe>
       </div>
-      ${embed.url ? `<a href="${escapeAttr(embed.url)}" target="_blank" rel="noreferrer" style="display:block;padding:12px 16px;color:#fff;background:#1d4ed8;text-align:center;font-weight:800;text-decoration:none;">Открыть в отдельной вкладке, если плеер не запустился</a>` : ""}
+      ${embed.url ? `<a href="${escapeAttr(embed.url)}" target="_blank" rel="noreferrer" style="display:block;padding:12px 16px;color:#fff;background:#1d4ed8;text-align:center;font-weight:800;text-decoration:none;">Открыть на Rutube, если плеер не запустился</a>` : ""}
     </div>
   `;
 
@@ -3010,7 +3010,7 @@ async function getOfficialEmbedsForMovieAsync(movie) {
 function getOfficialEmbedsBoxTitle(embeds) {
   const hasEpisodes = embeds.some(x => x && (x.episode || x.season || /сезон|серия/i.test(String(x.name || ""))));
 
-  return hasEpisodes ? "Серии / плеер" : "Видео / плеер";
+  return hasEpisodes ? "Серии / Плеер" : "Плеер";
 }
 
 async function addOfficialEmbedButtonsToDetails(movie) {
@@ -3038,7 +3038,7 @@ async function addOfficialEmbedButtonsToDetails(movie) {
 
   if (!embeds.length) {
     episodesBox.remove();
-    console.warn("Плеер: для карточки не найдены серии", getMovieTitleCandidates(movie));
+    console.warn("Rutube: для карточки не найдены серии", getMovieTitleCandidates(movie));
     return;
   }
 
@@ -3202,6 +3202,37 @@ addRutubeSeasonExactList({
   ]
 });
 
+
+/* ===== НАРУТО: УРАГАННЫЕ ХРОНИКИ — 2 СЕЗОН ===== */
+
+addRutubeSeasonExactList({
+  titles: [
+    "Наруто: Ураганные хроники",
+    "Наруто Ураганные хроники",
+    "Наруто: Ураганные хроники 2 сезон",
+    "Наруто Ураганные хроники 2 сезон",
+    "Наруто: Ураганные хроники, Сезон 2 (2007)",
+    "Наруто: Ураганные хроники Сезон 2",
+    "Naruto: Shippuden",
+    "Naruto Shippuden",
+    "Naruto: Shippuuden",
+    "Naruto Shippuuden",
+    "Naruto Shippuden Season 2",
+    "Naruto: Shippuden Season 2",
+    "Naruto Shippuuden Season 2"
+  ],
+  season: 2,
+  episodes: [
+    {
+      name: "Наруто: Ураганные хроники — 2 сезон",
+      season: 2,
+      episode: 1,
+      src: "https://play.hideogenius.com/?token_movie=f174d1e9bc42d32d073a2914fd1334&token=dd04704e1a13e780de505738b5ed20&season=2",
+      url: "https://play.hideogenius.com/?token_movie=f174d1e9bc42d32d073a2914fd1334&token=dd04704e1a13e780de505738b5ed20&season=2"
+    }
+  ]
+});
+
 /* ===== МОРТАЛ КОМБАТ 2 (2026) ===== */
 
 addRutubeVideoFromText({
@@ -3220,33 +3251,6 @@ addRutubeVideoFromText({
 https://rutube.ru/video/4cc2b1eb0945443150f622c3419edf66/
   `
 });
-
-
-
-/* ===== НАРУТО — ПЛЕЕР HIDEOGENIUS ===== */
-
-(function addNarutoHideogeniusPlayer() {
-  const titles = [
-    "Наруто",
-    "Нарруто",
-    "Naruto",
-    "Наруто 1 сезон",
-    "Naruto Season 1"
-  ];
-
-  const item = {
-    name: "Наруто — смотреть",
-    season: 1,
-    episode: 1,
-    src: "https://play.hideogenius.com/?token_movie=f174d1e9bc42d32d073a2914fd1334&token=dd04704e1a13e780de505738b5ed20&season=1",
-    url: "https://play.hideogenius.com/?token_movie=f174d1e9bc42d32d073a2914fd1334&token=dd04704e1a13e780de505738b5ed20&season=1",
-    source: "hideogenius"
-  };
-
-  titles.forEach(title => {
-    window.OFFICIAL_EMBEDS[title] = [item];
-  });
-})();
 
 if (typeof openDetails === "function" && !window.__officialEmbedOpenDetailsPatched) {
   window.__officialEmbedOpenDetailsPatched = true;
