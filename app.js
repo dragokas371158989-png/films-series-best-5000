@@ -4376,7 +4376,166 @@ function getForcedEmbedsForMovie(movie) {
 }
 
 
+/* ===== EXTERNAL PLAYERS JSON LOADER ===== */
+window.EXTERNAL_PLAYER_PACKS = window.EXTERNAL_PLAYER_PACKS || [];
+window.EXTERNAL_PLAYERS_READY = null;
+
+function normalizePlayerText(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/ё/g, "е")
+    .replace(/[,:;'"`«»()[\]{}.!?]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function getMovieRawTitleText(movie) {
+  return [
+    movie && movie.ru,
+    movie && movie.en,
+    movie && movie.title,
+    movie && movie.name,
+    movie && movie.title_ru,
+    movie && movie.name_ru,
+    movie && movie.title_en,
+    movie && movie.name_en,
+    movie && movie.originalTitle,
+    movie && movie.russianTitle,
+    movie && movie.englishTitle,
+    typeof titleOf === "function" && movie ? titleOf(movie) : "",
+    document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+  ].filter(Boolean).join(" ");
+}
+
+function detectMovieSeasonFromText(raw) {
+  const s = normalizePlayerText(raw);
+
+  if (
+    s.includes("season 3") || s.includes("3 season") || s.includes("3rd season") ||
+    s.includes("s3") || s.includes("3 сезон") || s.includes("сезон 3") ||
+    s.includes("третий сезон")
+  ) return 3;
+
+  if (
+    s.includes("season 2") || s.includes("2 season") || s.includes("2nd season") ||
+    s.includes("s2") || s.includes("2 сезон") || s.includes("сезон 2") ||
+    s.includes("второй сезон") || s.includes("shibuya incident") ||
+    s.includes("инцидент в сибуе") || s.includes("инцидент в шибуе")
+  ) return 2;
+
+  if (
+    s.includes("season 1") || s.includes("1 season") || s.includes("1st season") ||
+    s.includes("s1") || s.includes("1 сезон") || s.includes("сезон 1") ||
+    s.includes("первый сезон")
+  ) return 1;
+
+  return 0;
+}
+
+function normalizeEpisodeListFromPack(pack) {
+  const list = Array.isArray(pack.episodes) ? pack.episodes : (Array.isArray(pack.embeds) ? pack.embeds : []);
+  return list.map((ep, idx) => ({
+    name: ep.name || ep.title || `${(pack.titles && pack.titles[0]) || "Плеер"} — ${ep.episode || idx + 1} серия`,
+    season: ep.season || pack.season || 1,
+    episode: ep.episode || idx + 1,
+    src: ep.src || ep.embedUrl || ep.url,
+    url: ep.url || ep.src || ep.embedUrl,
+    source: ep.source || ep.type || (String(ep.src || ep.embedUrl || ep.url || "").includes("rutube") ? "rutube" : "iframe")
+  })).filter(ep => ep.src || ep.url);
+}
+
+function externalPackMatchesMovie(pack, movie) {
+  const raw = getMovieRawTitleText(movie);
+  const normRaw = normalizePlayerText(raw);
+  const titles = Array.isArray(pack.titles) ? pack.titles : [];
+
+  const titleMatch = titles.some(t => {
+    const nt = normalizePlayerText(t);
+    return nt && (normRaw.includes(nt) || nt.includes(normRaw));
+  });
+
+  if (!titleMatch) return false;
+
+  const season = detectMovieSeasonFromText(raw);
+  const blockSeasons = Array.isArray(pack.blockSeasons) ? pack.blockSeasons.map(Number) : [];
+
+  if (season && blockSeasons.includes(season)) return false;
+
+  if (pack.season && season && Number(pack.season) !== Number(season)) return false;
+
+  return true;
+}
+
+function getExternalEmbedsForMovie(movie) {
+  const packs = window.EXTERNAL_PLAYER_PACKS || [];
+  for (const pack of packs) {
+    if (externalPackMatchesMovie(pack, movie)) {
+      const embeds = normalizeEpisodeListFromPack(pack);
+      if (embeds.length) return embeds;
+    }
+  }
+  return [];
+}
+
+async function loadExternalPlayersJson() {
+  if (window.EXTERNAL_PLAYERS_READY) return window.EXTERNAL_PLAYERS_READY;
+
+  window.EXTERNAL_PLAYERS_READY = (async () => {
+    try {
+      const root = "data/players/";
+      const res = await fetch(root + "players-list.json", { cache: "no-store" });
+      if (!res.ok) throw new Error("players-list.json " + res.status);
+      const list = await res.json();
+
+      const tasks = [];
+
+      function addFiles(group) {
+        (list[group] || []).forEach(file => {
+          tasks.push(
+            fetch(root + group + "/" + file, { cache: "no-store" })
+              .then(r => r.ok ? r.json() : null)
+              .catch(() => null)
+          );
+        });
+      }
+
+      addFiles("anime");
+      addFiles("movies");
+      addFiles("series");
+
+      const packs = (await Promise.all(tasks)).filter(Boolean);
+      window.EXTERNAL_PLAYER_PACKS = packs;
+      window.OFFICIAL_EMBEDS = window.OFFICIAL_EMBEDS || {};
+
+      packs.forEach(pack => {
+        const embeds = normalizeEpisodeListFromPack(pack);
+        (pack.titles || []).forEach(t => {
+          window.OFFICIAL_EMBEDS[t] = embeds;
+          if (typeof normalizeEmbedTitle === "function") {
+            window.OFFICIAL_EMBEDS[normalizeEmbedTitle(t)] = embeds;
+          }
+        });
+      });
+
+      console.log("External players loaded:", packs.length, packs.map(p => (p.titles || [])[0]));
+      return packs;
+    } catch (err) {
+      console.warn("External players load failed:", err);
+      window.EXTERNAL_PLAYER_PACKS = [];
+      return [];
+    }
+  })();
+
+  return window.EXTERNAL_PLAYERS_READY;
+}
+
+loadExternalPlayersJson();
+
+
 function getOfficialEmbedsForMovie(movie) {
+  const externalEmbeds = typeof getExternalEmbedsForMovie === "function" ? getExternalEmbedsForMovie(movie) : [];
+  if (externalEmbeds && externalEmbeds.length) return externalEmbeds;
+
   const forcedEmbeds = typeof getForcedEmbedsForMovie === "function" ? getForcedEmbedsForMovie(movie) : [];
   if (forcedEmbeds && forcedEmbeds.length) return forcedEmbeds;
 
@@ -4815,6 +4974,10 @@ function isOnePunchManMovie(movie) {
 }
 
 async function getOfficialEmbedsForMovieAsync(movie) {
+  if (typeof loadExternalPlayersJson === "function") await loadExternalPlayersJson();
+  const externalEmbeds = typeof getExternalEmbedsForMovie === "function" ? getExternalEmbedsForMovie(movie) : [];
+  if (externalEmbeds && externalEmbeds.length) return externalEmbeds;
+
   const forcedEmbeds = typeof getForcedEmbedsForMovie === "function" ? getForcedEmbedsForMovie(movie) : [];
   if (forcedEmbeds && forcedEmbeds.length) return forcedEmbeds;
 
