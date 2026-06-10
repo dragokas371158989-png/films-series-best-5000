@@ -4144,3 +4144,343 @@ addRutubeSeasonExactList({
     return oldGetOfficialEmbedsForMovieAsync ? oldGetOfficialEmbedsForMovieAsync(movie) : [];
   };
 })();
+
+/* ===== FORCE FIX V2: MY HERO ACADEMIA DIRECT OVERRIDE ===== */
+(function () {
+  const mhaEpisodesV2 = [
+    {
+        "name": "Моя геройская академия — 1 серия",
+        "season": 1,
+        "episode": 1,
+        "src": "https://rutube.ru/play/embed/d87472b06db060da2c9a3721420e97d0",
+        "url": "https://rutube.ru/video/d87472b06db060da2c9a3721420e97d0/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 2 серия",
+        "season": 1,
+        "episode": 2,
+        "src": "https://rutube.ru/play/embed/0385df001f450bf36693a2585d12f280",
+        "url": "https://rutube.ru/video/0385df001f450bf36693a2585d12f280/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 3 серия",
+        "season": 1,
+        "episode": 3,
+        "src": "https://rutube.ru/play/embed/445407e39c739e288156df8214a8a806",
+        "url": "https://rutube.ru/video/445407e39c739e288156df8214a8a806/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 4 серия",
+        "season": 1,
+        "episode": 4,
+        "src": "https://rutube.ru/play/embed/e4dad21cc8b16a616583dbf98a7b8dec",
+        "url": "https://rutube.ru/video/e4dad21cc8b16a616583dbf98a7b8dec/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 5 серия",
+        "season": 1,
+        "episode": 5,
+        "src": "https://rutube.ru/play/embed/5e07b9cf7789f2f095a114183c685e8c",
+        "url": "https://rutube.ru/video/5e07b9cf7789f2f095a114183c685e8c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 6 серия",
+        "season": 1,
+        "episode": 6,
+        "src": "https://rutube.ru/play/embed/9d12f96ceec35ed84717658813cea42c",
+        "url": "https://rutube.ru/video/9d12f96ceec35ed84717658813cea42c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 7 серия",
+        "season": 1,
+        "episode": 7,
+        "src": "https://rutube.ru/play/embed/a615a42ccaeefab909886cbffbb45309",
+        "url": "https://rutube.ru/video/a615a42ccaeefab909886cbffbb45309/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 8 серия",
+        "season": 1,
+        "episode": 8,
+        "src": "https://rutube.ru/play/embed/337d600d13f2603f169b2bbe94195082",
+        "url": "https://rutube.ru/video/337d600d13f2603f169b2bbe94195082/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 9 серия",
+        "season": 1,
+        "episode": 9,
+        "src": "https://rutube.ru/play/embed/5c28b231fe1639dadad1f34931d5d9bf",
+        "url": "https://rutube.ru/video/5c28b231fe1639dadad1f34931d5d9bf/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 10 серия",
+        "season": 1,
+        "episode": 10,
+        "src": "https://rutube.ru/play/embed/b83679b3514faa2f14b0768d58fd0304",
+        "url": "https://rutube.ru/video/b83679b3514faa2f14b0768d58fd0304/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 11 серия",
+        "season": 1,
+        "episode": 11,
+        "src": "https://rutube.ru/play/embed/c3a051d0bdf670a8595e2af41a1a1a5f",
+        "url": "https://rutube.ru/video/c3a051d0bdf670a8595e2af41a1a1a5f/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 12 серия",
+        "season": 1,
+        "episode": 12,
+        "src": "https://rutube.ru/play/embed/eb89689fb0b8850cb57456f2905a428e",
+        "url": "https://rutube.ru/video/eb89689fb0b8850cb57456f2905a428e/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 13 серия",
+        "season": 1,
+        "episode": 13,
+        "src": "https://rutube.ru/play/embed/c4d2a0b9a6d3f9caaed3787a4bacbfdc",
+        "url": "https://rutube.ru/video/c4d2a0b9a6d3f9caaed3787a4bacbfdc/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 14 серия",
+        "season": 1,
+        "episode": 14,
+        "src": "https://rutube.ru/play/embed/601f9a82fe16c9c1ed34df232c4f59c2",
+        "url": "https://rutube.ru/video/601f9a82fe16c9c1ed34df232c4f59c2/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 15 серия",
+        "season": 1,
+        "episode": 15,
+        "src": "https://rutube.ru/play/embed/bdcf0e244418f169699d7577ed3361d7",
+        "url": "https://rutube.ru/video/bdcf0e244418f169699d7577ed3361d7/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 16 серия",
+        "season": 1,
+        "episode": 16,
+        "src": "https://rutube.ru/play/embed/14d779298ea251ecdad6f1d68f4d8963",
+        "url": "https://rutube.ru/video/14d779298ea251ecdad6f1d68f4d8963/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 17 серия",
+        "season": 1,
+        "episode": 17,
+        "src": "https://rutube.ru/play/embed/d35bb8f4e3b31fcb27ba010495c2e652",
+        "url": "https://rutube.ru/video/d35bb8f4e3b31fcb27ba010495c2e652/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 18 серия",
+        "season": 1,
+        "episode": 18,
+        "src": "https://rutube.ru/play/embed/7867bb2df1e2e8ffe39d01b8d46b5a25",
+        "url": "https://rutube.ru/video/7867bb2df1e2e8ffe39d01b8d46b5a25/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 19 серия",
+        "season": 1,
+        "episode": 19,
+        "src": "https://rutube.ru/play/embed/37181a7c3632dbcbda327f649b38685c",
+        "url": "https://rutube.ru/video/37181a7c3632dbcbda327f649b38685c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 20 серия",
+        "season": 1,
+        "episode": 20,
+        "src": "https://rutube.ru/play/embed/8bcc94e63eb01e85c8a8c9f691e78249",
+        "url": "https://rutube.ru/video/8bcc94e63eb01e85c8a8c9f691e78249/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 21 серия",
+        "season": 1,
+        "episode": 21,
+        "src": "https://rutube.ru/play/embed/47c2fc393fe05169ba0f54bdfe5d6d2e",
+        "url": "https://rutube.ru/video/47c2fc393fe05169ba0f54bdfe5d6d2e/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 22 серия",
+        "season": 1,
+        "episode": 22,
+        "src": "https://rutube.ru/play/embed/baf1be0576af2307d64d33ceef190cbd",
+        "url": "https://rutube.ru/video/baf1be0576af2307d64d33ceef190cbd/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 23 серия",
+        "season": 1,
+        "episode": 23,
+        "src": "https://rutube.ru/play/embed/af6968e916ca90a00b82e358b38f75c5",
+        "url": "https://rutube.ru/video/af6968e916ca90a00b82e358b38f75c5/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 24 серия",
+        "season": 1,
+        "episode": 24,
+        "src": "https://rutube.ru/play/embed/b0c2542204b90e5a39dfb305b81f5292",
+        "url": "https://rutube.ru/video/b0c2542204b90e5a39dfb305b81f5292/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 25 серия",
+        "season": 1,
+        "episode": 25,
+        "src": "https://rutube.ru/play/embed/f1037d2a45234810f8e9a28eb968d6a9",
+        "url": "https://rutube.ru/video/f1037d2a45234810f8e9a28eb968d6a9/",
+        "source": "rutube"
+    }
+];
+
+  function isMhaMovieV2(movie) {
+    const raw = [
+      movie && movie.ru,
+      movie && movie.en,
+      movie && movie.title,
+      movie && movie.name,
+      movie && movie.originalTitle,
+      movie && movie.russianTitle,
+      movie && movie.englishTitle,
+      document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+    ].filter(Boolean).join(" ").toLowerCase();
+
+    return raw.includes("my hero academia") ||
+           raw.includes("boku no hero academia") ||
+           raw.includes("boku no hīrō akademia") ||
+           raw.includes("моя геройская академия") ||
+           raw.includes("геройская академия");
+  }
+
+  window.OFFICIAL_EMBEDS = window.OFFICIAL_EMBEDS || {};
+  [
+    "Моя геройская академия",
+    "My Hero Academia",
+    "Boku no Hero Academia",
+    "Boku no Hīrō Akademia",
+    "僕のヒーローアカデミア"
+  ].forEach(k => {
+    window.OFFICIAL_EMBEDS[k] = mhaEpisodesV2;
+    if (typeof normalizeEmbedTitle === "function") {
+      window.OFFICIAL_EMBEDS[normalizeEmbedTitle(k)] = mhaEpisodesV2;
+    }
+  });
+
+  try {
+    const oldSync = typeof getOfficialEmbedsForMovie === "function" ? getOfficialEmbedsForMovie : null;
+    getOfficialEmbedsForMovie = function(movie) {
+      if (isMhaMovieV2(movie)) return mhaEpisodesV2;
+      return oldSync ? oldSync(movie) : [];
+    };
+  } catch (e) {}
+
+  try {
+    const oldAsync = typeof getOfficialEmbedsForMovieAsync === "function" ? getOfficialEmbedsForMovieAsync : null;
+    getOfficialEmbedsForMovieAsync = async function(movie) {
+      if (isMhaMovieV2(movie)) return mhaEpisodesV2;
+      return oldAsync ? oldAsync(movie) : [];
+    };
+  } catch (e) {}
+
+  // Дополнительная защита: если карточка уже открылась, но блок плеера не появился,
+  // через секунду пробуем вставить его ещё раз.
+  document.addEventListener("click", function () {
+    setTimeout(function () {
+      try {
+        if (window.selectedMovie && isMhaMovieV2(window.selectedMovie) && typeof addOfficialEmbedButtonsToDetails === "function") {
+          const hasBox = document.querySelector(".official-episodes-box");
+          if (!hasBox) addOfficialEmbedButtonsToDetails(window.selectedMovie);
+        }
+      } catch (e) {}
+    }, 1000);
+  }, true);
+})();
+
+/* ===== АТАКА ТИТАНОВ / ATTACK ON TITAN — YANDEX PLAYER ===== */
+(function () {
+  const aotPlayer = {
+    name: "Атака титанов — смотреть",
+    season: 1,
+    episode: 1,
+    src: "https://frontend.vh.yandex.ru/player/4521041827197602696?autoplay=1&event_prefix=sandbox:&restore_mute_state=1&init_timeout=15000&counters=%7B%22duration%22%3A1565%2C%22reqid%22%3A%221781132506693846-14550417896480300177-balancer-l7leveler-kubr-yp-klg-39-BAL%22%2C%22table%22%3A%22video_tech%22%2C%22heartbeats%22%3A%7B%22singlePath%22%3A%22heartbeat.single.fserp%22%2C%22noRepeat%22%3Atrue%7D%2C%22live%22%3Afalse%2C%22videoUrl%22%3A%22http%3A%2F%2Ffrontend.vh.yandex.ru%2Fplayer%2F4521041827197602696%22%2C%22extraParams%22%3A%7B%22from%22%3A%22yavideo%22%7D%7D&service=ya-video&from=yavideo",
+    url: "https://frontend.vh.yandex.ru/player/4521041827197602696?autoplay=1&event_prefix=sandbox:&restore_mute_state=1&init_timeout=15000&counters=%7B%22duration%22%3A1565%2C%22reqid%22%3A%221781132506693846-14550417896480300177-balancer-l7leveler-kubr-yp-klg-39-BAL%22%2C%22table%22%3A%22video_tech%22%2C%22heartbeats%22%3A%7B%22singlePath%22%3A%22heartbeat.single.fserp%22%2C%22noRepeat%22%3Atrue%7D%2C%22live%22%3Afalse%2C%22videoUrl%22%3A%22http%3A%2F%2Ffrontend.vh.yandex.ru%2Fplayer%2F4521041827197602696%22%2C%22extraParams%22%3A%7B%22from%22%3A%22yavideo%22%7D%7D&service=ya-video&from=yavideo",
+    source: "iframe"
+  };
+
+  const keys = [
+    "Атака титанов",
+    "Attack on Titan",
+    "Shingeki no Kyojin",
+    "Shingeki no Kyojin Season 1",
+    "Attack on Titan Season 1",
+    "進撃の巨人"
+  ];
+
+  window.OFFICIAL_EMBEDS = window.OFFICIAL_EMBEDS || {};
+
+  keys.forEach(k => {
+    window.OFFICIAL_EMBEDS[k] = [aotPlayer];
+    if (typeof normalizeEmbedTitle === "function") {
+      window.OFFICIAL_EMBEDS[normalizeEmbedTitle(k)] = [aotPlayer];
+    }
+  });
+
+  function isAotRaw(raw) {
+    const s = String(raw || "").toLowerCase();
+    return s.includes("attack on titan") ||
+           s.includes("shingeki no kyojin") ||
+           s.includes("атака титанов");
+  }
+
+  try {
+    const oldSync = typeof getOfficialEmbedsForMovie === "function" ? getOfficialEmbedsForMovie : null;
+    getOfficialEmbedsForMovie = function(movie) {
+      const raw = [
+        movie && movie.ru,
+        movie && movie.en,
+        movie && movie.title,
+        movie && movie.name,
+        movie && movie.originalTitle,
+        document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+      ].filter(Boolean).join(" ");
+
+      if (isAotRaw(raw)) return [aotPlayer];
+      return oldSync ? oldSync(movie) : [];
+    };
+  } catch (e) {}
+
+  try {
+    const oldAsync = typeof getOfficialEmbedsForMovieAsync === "function" ? getOfficialEmbedsForMovieAsync : null;
+    getOfficialEmbedsForMovieAsync = async function(movie) {
+      const raw = [
+        movie && movie.ru,
+        movie && movie.en,
+        movie && movie.title,
+        movie && movie.name,
+        movie && movie.originalTitle,
+        document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+      ].filter(Boolean).join(" ");
+
+      if (isAotRaw(raw)) return [aotPlayer];
+      return oldAsync ? oldAsync(movie) : [];
+    };
+  } catch (e) {}
+})();
+
