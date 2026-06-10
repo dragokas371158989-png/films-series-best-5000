@@ -3357,8 +3357,8 @@ addRutubeSeasonExactList({
       name: "Ван-Пис — смотреть",
       season: 1,
       episode: 1,
-      src: "https://naruto-base.su/mchat/",
-      url: "https://naruto-base.su/mchat/",
+      src: "https://kodikplayer.com/serial/4277/b1108a88309da7c36fe632b47937eb3c/720p",
+      url: "https://kodikplayer.com/serial/4277/b1108a88309da7c36fe632b47937eb3c/720p",
       source: "iframe"
     }
   ]
@@ -3401,14 +3401,14 @@ if (typeof openDetails === "function" && !window.__officialEmbedOpenDetailsPatch
 setupEvents();
 loadData().catch(showError);
 
-/* ===== FORCE FIX: ONE PIECE / ВАН-ПИС KODIK ===== */
+/* ===== FORCE FIX: ONE PIECE / ВАН-ПИС KODIK SERIAL ===== */
 (function () {
   const onePiecePlayer = {
     name: "Ван-Пис — смотреть",
     season: 1,
     episode: 1,
-    src: "https://naruto-base.su/mchat/",
-    url: "https://naruto-base.su/mchat/",
+    src: "https://kodikplayer.com/serial/4277/b1108a88309da7c36fe632b47937eb3c/720p",
+    url: "https://kodikplayer.com/serial/4277/b1108a88309da7c36fe632b47937eb3c/720p",
     source: "iframe"
   };
 
@@ -3426,22 +3426,13 @@ loadData().catch(showError);
   ];
 
   window.OFFICIAL_EMBEDS = window.OFFICIAL_EMBEDS || {};
+
   keys.forEach(k => {
     window.OFFICIAL_EMBEDS[k] = [onePiecePlayer];
     if (typeof normalizeEmbedTitle === "function") {
       window.OFFICIAL_EMBEDS[normalizeEmbedTitle(k)] = [onePiecePlayer];
     }
   });
-
-  if (typeof translateKnownTitle === "function") {
-    const oldTranslateKnownTitle = translateKnownTitle;
-    window.translateKnownTitle = function(title) {
-      const raw = String(title || "").trim();
-      const norm = raw.toLowerCase().replace(/[‐‑‒–—―-]/g, "-").replace(/\s+/g, " ").trim();
-      if (norm === "one piece" || norm === "onepiece") return "Ван-Пис";
-      return oldTranslateKnownTitle(title);
-    };
-  }
 
   const oldGetOfficialEmbedsForMovie = typeof getOfficialEmbedsForMovie === "function" ? getOfficialEmbedsForMovie : null;
   window.getOfficialEmbedsForMovie = function(movie) {
@@ -3479,4 +3470,3 @@ loadData().catch(showError);
     return oldGetOfficialEmbedsForMovieAsync ? oldGetOfficialEmbedsForMovieAsync(movie) : [];
   };
 })();
-
