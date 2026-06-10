@@ -40,7 +40,19 @@ function saveSet(key, set) {
 }
 
 function titleOf(m) {
-  return m.ru || m.en || m.title || m.name || "Без названия";
+  const rawTitle = m.ru || m.en || m.title || m.name || "Без названия";
+  return translateKnownTitle(rawTitle);
+}
+
+function translateKnownTitle(title) {
+  const raw = String(title || "").trim();
+  const norm = raw.toLowerCase().replace(/[‐‑‒–—―-]/g, "-").replace(/\s+/g, " ").trim();
+
+  if (norm === "fullmetal alchemist: brotherhood" || norm === "fullmetal alchemist brotherhood") {
+    return "Стальной алхимик: Братство";
+  }
+
+  return raw || "Без названия";
 }
 
 function getYear(m) {
@@ -2986,7 +2998,6 @@ function detectWantedSeasonFromMovie(movie) {
   // Из-за этого раньше срабатывал общий алиас и карточка 2015 года получала кнопки 3 сезона.
   if (text.includes("one punch man") || text.includes("ванпанчмен") || text.includes("wanpanman")) {
     const year = Number(movie && (movie.year || movie.release_year || movie.aired_on || movie.released) || 0);
-
     if (year && year <= 2016) return 1;
     if (year >= 2019 && year < 2025) return 2;
     if (year >= 2025) return 3;
@@ -3296,6 +3307,30 @@ addRutubeSeasonExactList({
       episode: 1,
       src: "https://play.hideogenius.com/?token_movie=f174d1e9bc42d32d073a2914fd1334&token=dd04704e1a13e780de505738b5ed20&season=2",
       url: "https://play.hideogenius.com/?token_movie=f174d1e9bc42d32d073a2914fd1334&token=dd04704e1a13e780de505738b5ed20&season=2"
+    }
+  ]
+});
+
+/* ===== СТАЛЬНОЙ АЛХИМИК: БРАТСТВО ===== */
+
+addRutubeSeasonExactList({
+  titles: [
+    "Стальной алхимик: Братство",
+    "Стальной алхимик Братство",
+    "Fullmetal Alchemist: Brotherhood",
+    "Fullmetal Alchemist Brotherhood",
+    "Hagane no Renkinjutsushi: Fullmetal Alchemist",
+    "FMA Brotherhood"
+  ],
+  season: 1,
+  episodes: [
+    {
+      name: "Стальной алхимик: Братство — смотреть",
+      season: 1,
+      episode: 1,
+      src: "https://gencit.info/tvb/452838",
+      url: "https://gencit.info/tvb/452838",
+      source: "iframe"
     }
   ]
 });
