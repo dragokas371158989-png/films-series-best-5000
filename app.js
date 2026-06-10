@@ -3328,8 +3328,8 @@ addRutubeSeasonExactList({
       name: "Стальной алхимик: Братство — смотреть",
       season: 1,
       episode: 1,
-      src: "https://gencit.info/tvb/452838",
-      url: "https://gencit.info/tvb/452838",
+      src: "https://polynoy-as.newplayjj.com:9443/?kp=452838&token=e9a962df5e96874972bd776d247fa6",
+      url: "https://polynoy-as.newplayjj.com:9443/?kp=452838&token=e9a962df5e96874972bd776d247fa6",
       source: "iframe"
     }
   ]
