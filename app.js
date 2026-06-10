@@ -3506,6 +3506,80 @@ if (typeof openDetails === "function" && !window.__officialEmbedOpenDetailsPatch
 setupEvents();
 loadData().catch(showError);
 
+/* ===== ТВОЁ ИМЯ / YOUR NAME ===== */
+
+addRutubeSeasonExactList({
+  titles: [
+    "Твоё имя",
+    "Твое имя",
+    "Your Name",
+    "Your Name.",
+    "Kimi no Na wa",
+    "Kimi no Na wa.",
+    "君の名は"
+  ],
+  season: 1,
+  episodes: [
+    {
+        "name": "Твоё имя — смотреть 1",
+        "season": 1,
+        "episode": 1,
+        "src": "https://rutube.ru/play/embed/779300d33a00c2cdce1c7a7d07c4206b",
+        "url": "https://rutube.ru/video/779300d33a00c2cdce1c7a7d07c4206b/",
+        "source": "rutube"
+    },
+    {
+        "name": "Твоё имя — смотреть 2",
+        "season": 1,
+        "episode": 15,
+        "src": "https://rutube.ru/play/embed/9295b36dda51851ef37fa257f2ff4336",
+        "url": "https://rutube.ru/video/9295b36dda51851ef37fa257f2ff4336/",
+        "source": "rutube"
+    },
+    {
+        "name": "Твоё имя — смотреть 3",
+        "season": 1,
+        "episode": 16,
+        "src": "https://rutube.ru/play/embed/57a4882e7ea15bafadfd3d74563380cc",
+        "url": "https://rutube.ru/video/57a4882e7ea15bafadfd3d74563380cc/",
+        "source": "rutube"
+    },
+    {
+        "name": "Твоё имя — смотреть 4",
+        "season": 1,
+        "episode": 17,
+        "src": "https://rutube.ru/play/embed/b240375fefe352b526f127f89cb37b4c",
+        "url": "https://rutube.ru/video/b240375fefe352b526f127f89cb37b4c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Твоё имя — смотреть 5",
+        "season": 1,
+        "episode": 18,
+        "src": "https://rutube.ru/play/embed/8254f209e11f3f7c2d9989d134e3ff54",
+        "url": "https://rutube.ru/video/8254f209e11f3f7c2d9989d134e3ff54/",
+        "source": "rutube"
+    },
+    {
+        "name": "Твоё имя — смотреть 6",
+        "season": 1,
+        "episode": 19,
+        "src": "https://rutube.ru/play/embed/a483ae3de30bd3ee7deb279f18687302",
+        "url": "https://rutube.ru/video/a483ae3de30bd3ee7deb279f18687302/",
+        "source": "rutube"
+    },
+    {
+        "name": "Твоё имя — смотреть 7",
+        "season": 1,
+        "episode": 20,
+        "src": "https://rutube.ru/play/embed/dc1a085d25aebf2508b27377a41cdb5a",
+        "url": "https://rutube.ru/video/dc1a085d25aebf2508b27377a41cdb5a/",
+        "source": "rutube"
+    }
+]
+});
+
+
 /* ===== FORCE FIX: ONE PIECE / ВАН-ПИС KODIK SERIAL ===== */
 (function () {
   const onePiecePlayer = {
@@ -3573,5 +3647,67 @@ loadData().catch(showError);
     }
 
     return oldGetOfficialEmbedsForMovieAsync ? oldGetOfficialEmbedsForMovieAsync(movie) : [];
+  };
+})();
+
+/* ===== FIX: ПОХОЖИЕ КАРТОЧКИ НЕ ЗАКРЫВАЮТСЯ ===== */
+(function () {
+  if (window.__similarCardsClickFix) return;
+  window.__similarCardsClickFix = true;
+
+  if (typeof renderSimilarItems !== "function") return;
+
+  renderSimilarItems = function fixedRenderSimilarItems(m) {
+    injectSimilarStyle();
+
+    const block = ensureSimilarBlock();
+    if (!block) return;
+
+    const grid = document.getElementById("similarGrid");
+    if (!grid) return;
+
+    const similar = findSimilarItems(m, 10);
+
+    if (!similar.length) {
+      block.style.display = "block";
+      grid.innerHTML = `<div class="similar-empty">Похожих пока не нашёл.</div>`;
+      return;
+    }
+
+    block.style.display = "block";
+    grid.innerHTML = similar.map(cardHtml).join("");
+
+    grid.querySelectorAll(".card").forEach(card => {
+      card.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const favBtn = e.target.closest(".card-fav-btn");
+        if (favBtn) {
+          const id = favBtn.getAttribute("data-fav-id");
+          toggleCardFavorite(id, favBtn);
+          return;
+        }
+
+        const id = card.getAttribute("data-id");
+        const movie = allMovies.find(x => String(x.id) === String(id));
+        if (!movie) return;
+
+        const dialog = document.getElementById("detailsDialog");
+
+        openDetails(movie);
+
+        if (dialog) {
+          if (!dialog.open) dialog.showModal();
+          setTimeout(() => {
+            try {
+              dialog.scrollTop = 0;
+              const body = dialog.querySelector(".detail-body, .details-body, .modal-body, .dialog-body");
+              if (body) body.scrollTop = 0;
+            } catch (err) {}
+          }, 30);
+        }
+      });
+    });
   };
 })();
