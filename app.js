@@ -3400,3 +3400,82 @@ if (typeof openDetails === "function" && !window.__officialEmbedOpenDetailsPatch
 
 setupEvents();
 loadData().catch(showError);
+
+/* ===== FORCE FIX: ONE PIECE / ВАН-ПИС KODIK ===== */
+(function () {
+  const onePiecePlayer = {
+    name: "Ван-Пис — смотреть",
+    season: 1,
+    episode: 1,
+    src: "https://kodikplayer.com/season/27820/3e3faaa6e23abed7947b1f371b60b7c5/720p?translations=false&only_episode=true&only_season=true&episode=1&skip_button=%5Bending%5D1368-1467",
+    url: "https://kodikplayer.com/season/27820/3e3faaa6e23abed7947b1f371b60b7c5/720p?translations=false&only_episode=true&only_season=true&episode=1&skip_button=%5Bending%5D1368-1467",
+    source: "iframe"
+  };
+
+  const keys = [
+    "One Piece",
+    "ONE PIECE",
+    "one piece",
+    "OnePiece",
+    "onepiece",
+    "Ван-Пис",
+    "Ван Пис",
+    "ван-пис",
+    "ван пис",
+    "Большой куш"
+  ];
+
+  window.OFFICIAL_EMBEDS = window.OFFICIAL_EMBEDS || {};
+  keys.forEach(k => {
+    window.OFFICIAL_EMBEDS[k] = [onePiecePlayer];
+    if (typeof normalizeEmbedTitle === "function") {
+      window.OFFICIAL_EMBEDS[normalizeEmbedTitle(k)] = [onePiecePlayer];
+    }
+  });
+
+  if (typeof translateKnownTitle === "function") {
+    const oldTranslateKnownTitle = translateKnownTitle;
+    window.translateKnownTitle = function(title) {
+      const raw = String(title || "").trim();
+      const norm = raw.toLowerCase().replace(/[‐‑‒–—―-]/g, "-").replace(/\s+/g, " ").trim();
+      if (norm === "one piece" || norm === "onepiece") return "Ван-Пис";
+      return oldTranslateKnownTitle(title);
+    };
+  }
+
+  const oldGetOfficialEmbedsForMovie = typeof getOfficialEmbedsForMovie === "function" ? getOfficialEmbedsForMovie : null;
+  window.getOfficialEmbedsForMovie = function(movie) {
+    const raw = [
+      movie && movie.ru,
+      movie && movie.en,
+      movie && movie.title,
+      movie && movie.name,
+      movie && movie.originalTitle,
+      document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+    ].filter(Boolean).join(" ").toLowerCase();
+
+    if (raw.includes("one piece") || raw.includes("onepiece") || raw.includes("ван-пис") || raw.includes("ван пис")) {
+      return [onePiecePlayer];
+    }
+
+    return oldGetOfficialEmbedsForMovie ? oldGetOfficialEmbedsForMovie(movie) : [];
+  };
+
+  const oldGetOfficialEmbedsForMovieAsync = typeof getOfficialEmbedsForMovieAsync === "function" ? getOfficialEmbedsForMovieAsync : null;
+  window.getOfficialEmbedsForMovieAsync = async function(movie) {
+    const raw = [
+      movie && movie.ru,
+      movie && movie.en,
+      movie && movie.title,
+      movie && movie.name,
+      movie && movie.originalTitle,
+      document.getElementById("detailTitle") ? document.getElementById("detailTitle").textContent : ""
+    ].filter(Boolean).join(" ").toLowerCase();
+
+    if (raw.includes("one piece") || raw.includes("onepiece") || raw.includes("ван-пис") || raw.includes("ван пис")) {
+      return [onePiecePlayer];
+    }
+
+    return oldGetOfficialEmbedsForMovieAsync ? oldGetOfficialEmbedsForMovieAsync(movie) : [];
+  };
+})();
