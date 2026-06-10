@@ -48,12 +48,116 @@ function translateKnownTitle(title) {
   const raw = String(title || "").trim();
   const norm = raw.toLowerCase().replace(/[‐‑‒–—―-]/g, "-").replace(/\s+/g, " ").trim();
 
-  if (norm === "fullmetal alchemist: brotherhood" || norm === "fullmetal alchemist brotherhood") {
-    return "Стальной алхимик: Братство";
-  }
+  const RU_TITLE_MAP = {
+    "attack on titan": "Атака титанов",
+    "shingeki no kyojin": "Атака титанов",
+    "one piece": "Ван-Пис",
+    "onepiece": "Ван-Пис",
+    "naruto": "Наруто",
+    "naruto shippuden": "Наруто: Ураганные хроники",
+    "fullmetal alchemist: brotherhood": "Стальной алхимик: Братство",
+    "fullmetal alchemist brotherhood": "Стальной алхимик: Братство",
+    "one-punch man": "Ванпанчмен",
+    "one punch man": "Ванпанчмен",
+    "demon slayer": "Истребитель демонов",
+    "kimetsu no yaiba": "Истребитель демонов",
+    "jujutsu kaisen": "Магическая битва",
+    "death note": "Тетрадь смерти",
+    "bleach": "Блич",
+    "hunter x hunter": "Охотник х Охотник",
+    "dragon ball": "Драконий жемчуг",
+    "dragon ball z": "Драконий жемчуг Z",
+    "dragon ball super": "Драконий жемчуг Супер",
+    "my hero academia": "Моя геройская академия",
+    "boku no hero academia": "Моя геройская академия",
+    "tokyo ghoul": "Токийский гуль",
+    "chainsaw man": "Человек-бензопила",
+    "black clover": "Чёрный клевер",
+    "fairy tail": "Хвост Феи",
+    "sword art online": "Мастера меча онлайн",
+    "solo leveling": "Поднятие уровня в одиночку",
+    "blue lock": "Синяя тюрьма: Блю Лок",
+    "spy x family": "Семья шпиона",
+    "vinland saga": "Сага о Винланде",
+    "berserk": "Берсерк",
+    "cowboy bebop": "Ковбой Бибоп",
+    "neon genesis evangelion": "Евангелион",
+    "code geass": "Код Гиас",
+    "steins;gate": "Врата Штейна",
+    "mob psycho 100": "Моб Психо 100",
+    "haikyu!!": "Волейбол!!",
+    "haikyuu!!": "Волейбол!!",
+    "kuroko's basketball": "Баскетбол Куроко",
+    "the seven deadly sins": "Семь смертных грехов",
+    "nanatsu no taizai": "Семь смертных грехов",
+    "dr. stone": "Доктор Стоун",
+    "fire force": "Пламенная бригада пожарных",
+    "the promised neverland": "Обещанный Неверленд",
+    "made in abyss": "Созданный в Бездне",
+    "re:zero": "Re:Zero. Жизнь с нуля в альтернативном мире",
+    "re zero": "Re:Zero. Жизнь с нуля в альтернативном мире",
+    "mushoku tensei": "Реинкарнация безработного",
+    "overlord": "Повелитель",
+    "that time i got reincarnated as a slime": "О моём перерождении в слизь",
+    "tensei shitara slime datta ken": "О моём перерождении в слизь",
+    "konosuba": "Этот замечательный мир!",
+    "gintama": "Гинтама",
+    "jojo's bizarre adventure": "Невероятные приключения ДжоДжо",
+    "jojos bizarre adventure": "Невероятные приключения ДжоДжо",
+    "parasyte": "Паразит",
+    "akira": "Акира",
+    "spirited away": "Унесённые призраками",
+    "howl's moving castle": "Ходячий замок",
+    "princess mononoke": "Принцесса Мононоке",
+    "your name.": "Твоё имя",
+    "your name": "Твоё имя",
+    "a silent voice": "Форма голоса",
+    "weathering with you": "Дитя погоды",
+    "suzume": "Судзумэ, закрывающая двери",
+    "the witch and the beast": "Ведьма и чудовище",
+    "witch hat atelier": "Ателье колдовских колпаков",
+    "atelier of witch hat": "Ателье колдовских колпаков",
+    "game of thrones": "Игра престолов",
+    "house of the dragon": "Дом Дракона",
+    "breaking bad": "Во все тяжкие",
+    "better call saul": "Лучше звоните Солу",
+    "the walking dead": "Ходячие мертвецы",
+    "stranger things": "Очень странные дела",
+    "the boys": "Пацаны",
+    "supernatural": "Сверхъестественное",
+    "the last of us": "Одни из нас",
+    "the witcher": "Ведьмак",
+    "squid game": "Игра в кальмара",
+    "dark": "Тьма",
+    "lost": "Остаться в живых",
+    "friends": "Друзья",
+    "sherlock": "Шерлок",
+    "peaky blinders": "Острые козырьки",
+    "vikings": "Викинги",
+    "the mandalorian": "Мандалорец",
+    "the lord of the rings": "Властелин колец",
+    "the hobbit": "Хоббит",
+    "harry potter": "Гарри Поттер",
+    "interstellar": "Интерстеллар",
+    "inception": "Начало",
+    "the matrix": "Матрица",
+    "avatar": "Аватар",
+    "joker": "Джокер",
+    "fight club": "Бойцовский клуб",
+    "the godfather": "Крёстный отец",
+    "pulp fiction": "Криминальное чтиво",
+    "the dark knight": "Тёмный рыцарь",
+    "forrest gump": "Форрест Гамп",
+    "gladiator": "Гладиатор",
+    "titanic": "Титаник",
+    "john wick": "Джон Уик",
+    "deadpool": "Дэдпул",
+    "venom": "Веном",
+    "dune": "Дюна"
+  };
 
-  if (norm === "one piece" || norm === "onepiece") {
-    return "Ван-Пис";
+  if (RU_TITLE_MAP[norm]) {
+    return RU_TITLE_MAP[norm];
   }
 
   return raw || "Без названия";
@@ -998,6 +1102,7 @@ function renderHomeSections() {
 
 function homeSectionHtml(title, items, tabName) {
   if (!items.length) return "";
+
   return `
     <section class="home-section">
       <div class="home-section-head">
