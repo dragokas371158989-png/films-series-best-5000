@@ -3579,6 +3579,221 @@ addRutubeSeasonExactList({
 ]
 });
 
+/* ===== МОЯ ГЕРОЙСКАЯ АКАДЕМИЯ / MY HERO ACADEMIA ===== */
+
+addRutubeSeasonExactList({
+  titles: [
+    "Моя геройская академия",
+    "My Hero Academia",
+    "Boku no Hero Academia",
+    "Boku no Hīrō Akademia",
+    "僕のヒーローアカデミア"
+  ],
+  season: 1,
+  episodes: [
+    {
+        "name": "Моя геройская академия — 1 серия",
+        "season": 1,
+        "episode": 1,
+        "src": "https://rutube.ru/play/embed/d87472b06db060da2c9a3721420e97d0",
+        "url": "https://rutube.ru/video/d87472b06db060da2c9a3721420e97d0/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 2 серия",
+        "season": 1,
+        "episode": 2,
+        "src": "https://rutube.ru/play/embed/0385df001f450bf36693a2585d12f280",
+        "url": "https://rutube.ru/video/0385df001f450bf36693a2585d12f280/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 3 серия",
+        "season": 1,
+        "episode": 3,
+        "src": "https://rutube.ru/play/embed/445407e39c739e288156df8214a8a806",
+        "url": "https://rutube.ru/video/445407e39c739e288156df8214a8a806/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 4 серия",
+        "season": 1,
+        "episode": 4,
+        "src": "https://rutube.ru/play/embed/e4dad21cc8b16a616583dbf98a7b8dec",
+        "url": "https://rutube.ru/video/e4dad21cc8b16a616583dbf98a7b8dec/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 5 серия",
+        "season": 1,
+        "episode": 5,
+        "src": "https://rutube.ru/play/embed/5e07b9cf7789f2f095a114183c685e8c",
+        "url": "https://rutube.ru/video/5e07b9cf7789f2f095a114183c685e8c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 6 серия",
+        "season": 1,
+        "episode": 6,
+        "src": "https://rutube.ru/play/embed/9d12f96ceec35ed84717658813cea42c",
+        "url": "https://rutube.ru/video/9d12f96ceec35ed84717658813cea42c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 7 серия",
+        "season": 1,
+        "episode": 7,
+        "src": "https://rutube.ru/play/embed/a615a42ccaeefab909886cbffbb45309",
+        "url": "https://rutube.ru/video/a615a42ccaeefab909886cbffbb45309/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 8 серия",
+        "season": 1,
+        "episode": 8,
+        "src": "https://rutube.ru/play/embed/337d600d13f2603f169b2bbe94195082",
+        "url": "https://rutube.ru/video/337d600d13f2603f169b2bbe94195082/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 9 серия",
+        "season": 1,
+        "episode": 9,
+        "src": "https://rutube.ru/play/embed/5c28b231fe1639dadad1f34931d5d9bf",
+        "url": "https://rutube.ru/video/5c28b231fe1639dadad1f34931d5d9bf/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 10 серия",
+        "season": 1,
+        "episode": 10,
+        "src": "https://rutube.ru/play/embed/b83679b3514faa2f14b0768d58fd0304",
+        "url": "https://rutube.ru/video/b83679b3514faa2f14b0768d58fd0304/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 11 серия",
+        "season": 1,
+        "episode": 11,
+        "src": "https://rutube.ru/play/embed/c3a051d0bdf670a8595e2af41a1a1a5f",
+        "url": "https://rutube.ru/video/c3a051d0bdf670a8595e2af41a1a1a5f/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 12 серия",
+        "season": 1,
+        "episode": 12,
+        "src": "https://rutube.ru/play/embed/eb89689fb0b8850cb57456f2905a428e",
+        "url": "https://rutube.ru/video/eb89689fb0b8850cb57456f2905a428e/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 13 серия",
+        "season": 1,
+        "episode": 13,
+        "src": "https://rutube.ru/play/embed/c4d2a0b9a6d3f9caaed3787a4bacbfdc",
+        "url": "https://rutube.ru/video/c4d2a0b9a6d3f9caaed3787a4bacbfdc/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 14 серия",
+        "season": 1,
+        "episode": 14,
+        "src": "https://rutube.ru/play/embed/601f9a82fe16c9c1ed34df232c4f59c2",
+        "url": "https://rutube.ru/video/601f9a82fe16c9c1ed34df232c4f59c2/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 15 серия",
+        "season": 1,
+        "episode": 15,
+        "src": "https://rutube.ru/play/embed/bdcf0e244418f169699d7577ed3361d7",
+        "url": "https://rutube.ru/video/bdcf0e244418f169699d7577ed3361d7/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 16 серия",
+        "season": 1,
+        "episode": 16,
+        "src": "https://rutube.ru/play/embed/14d779298ea251ecdad6f1d68f4d8963",
+        "url": "https://rutube.ru/video/14d779298ea251ecdad6f1d68f4d8963/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 17 серия",
+        "season": 1,
+        "episode": 17,
+        "src": "https://rutube.ru/play/embed/d35bb8f4e3b31fcb27ba010495c2e652",
+        "url": "https://rutube.ru/video/d35bb8f4e3b31fcb27ba010495c2e652/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 18 серия",
+        "season": 1,
+        "episode": 18,
+        "src": "https://rutube.ru/play/embed/7867bb2df1e2e8ffe39d01b8d46b5a25",
+        "url": "https://rutube.ru/video/7867bb2df1e2e8ffe39d01b8d46b5a25/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 19 серия",
+        "season": 1,
+        "episode": 19,
+        "src": "https://rutube.ru/play/embed/37181a7c3632dbcbda327f649b38685c",
+        "url": "https://rutube.ru/video/37181a7c3632dbcbda327f649b38685c/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 20 серия",
+        "season": 1,
+        "episode": 20,
+        "src": "https://rutube.ru/play/embed/8bcc94e63eb01e85c8a8c9f691e78249",
+        "url": "https://rutube.ru/video/8bcc94e63eb01e85c8a8c9f691e78249/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 21 серия",
+        "season": 1,
+        "episode": 21,
+        "src": "https://rutube.ru/play/embed/47c2fc393fe05169ba0f54bdfe5d6d2e",
+        "url": "https://rutube.ru/video/47c2fc393fe05169ba0f54bdfe5d6d2e/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 22 серия",
+        "season": 1,
+        "episode": 22,
+        "src": "https://rutube.ru/play/embed/baf1be0576af2307d64d33ceef190cbd",
+        "url": "https://rutube.ru/video/baf1be0576af2307d64d33ceef190cbd/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 23 серия",
+        "season": 1,
+        "episode": 23,
+        "src": "https://rutube.ru/play/embed/af6968e916ca90a00b82e358b38f75c5",
+        "url": "https://rutube.ru/video/af6968e916ca90a00b82e358b38f75c5/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 24 серия",
+        "season": 1,
+        "episode": 24,
+        "src": "https://rutube.ru/play/embed/b0c2542204b90e5a39dfb305b81f5292",
+        "url": "https://rutube.ru/video/b0c2542204b90e5a39dfb305b81f5292/",
+        "source": "rutube"
+    },
+    {
+        "name": "Моя геройская академия — 25 серия",
+        "season": 1,
+        "episode": 25,
+        "src": "https://rutube.ru/play/embed/f1037d2a45234810f8e9a28eb968d6a9",
+        "url": "https://rutube.ru/video/f1037d2a45234810f8e9a28eb968d6a9/",
+        "source": "rutube"
+    }
+]
+});
+
 
 /* ===== FORCE FIX: ONE PIECE / ВАН-ПИС KODIK SERIAL ===== */
 (function () {
