@@ -149,7 +149,7 @@ def add_items(items, movies, known, conv, gmap, source):
             continue
 
         k1 = str(x["id"])
-       k2 = "|".join(str(x.get(f) or "") for f in ("ru", "en", "year", "type")).lower()
+           k2 = "|".join(str(x.get(f) or "") for f in ("ru", "en", "year", "type")).lower()
         if k1 not in known and k2 not in known:
             movies.append(x)
             known.add(k1)
