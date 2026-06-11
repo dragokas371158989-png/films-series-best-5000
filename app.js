@@ -9107,4 +9107,62 @@ addRutubeSeasonExactList({
 
   console.log("GKM AUTO RU TRANSLATE DESCRIPTIONS установлен");
 })();
+/* ===== GKM FORCE TRANSLATE CHARACTER DESCRIPTION ===== */
+(function () {
+  if (window.__gkmForceTranslateCharacterDescription) return;
+  window.__gkmForceTranslateCharacterDescription = true;
 
+  function isEnglish(text) {
+    const s = String(text || "").trim();
+    const latin = (s.match(/[a-zA-Z]/g) || []).length;
+    const cyr = (s.match(/[а-яА-ЯёЁ]/g) || []).length;
+    return latin > 40 && latin > cyr * 3;
+  }
+
+  async function translateToRu(text) {
+    const url =
+      "https://api.mymemory.translated.net/get?q=" +
+      encodeURIComponent(text.slice(0, 480)) +
+      "&langpair=en|ru";
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      return data?.responseData?.translatedText || "";
+    } catch (e) {
+      console.warn("Translate failed", e);
+      return "";
+    }
+  }
+
+  async function checkCharacterDesc() {
+    const el = document.querySelector("#gkmNativeCharacterDesc");
+    if (!el) return;
+
+    const text = el.textContent.trim();
+
+    if (!text || text.includes("Загружаю") || text.includes("Перевожу")) return;
+    if (!isEnglish(text)) return;
+    if (el.dataset.ruDone === "1") return;
+
+    el.dataset.ruDone = "1";
+    el.dataset.originalText = text;
+    el.textContent = "Перевожу описание на русский...";
+
+    const ru = await translateToRu(text);
+
+    if (ru) {
+      el.textContent = ru;
+    } else {
+      el.textContent = text;
+      el.dataset.ruDone = "0";
+    }
+  }
+
+  setInterval(checkCharacterDesc, 1000);
+
+  document.addEventListener("click", function () {
+    setTimeout(checkCharacterDesc, 1000);
+    setTimeout(checkCharacterDesc, 2500);
+  }, true);
+})();
