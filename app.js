@@ -7427,10 +7427,23 @@ addRutubeSeasonExactList({
       }
     }
 
-    box.innerHTML = '<div class="gkm-pro-empty">Ищу персонажей...</div>';
+    if (isMovieOrSeriesForCast(m)) {
+  box.innerHTML = '<div class="gkm-pro-empty">Ищу актёров и роли...</div>';
 
-    var jikanCharacters = await loadJikanCharacters(m);
+  var movieCast = await loadMovieTvCast(m);
 
+  if (!movieCast.length) {
+    box.innerHTML = '<div class="gkm-pro-empty">Актёры и роли для этого тайтла пока не найдены.</div>';
+    return;
+  }
+
+  box.innerHTML = movieCast.map(movieCastCard).join("");
+  return;
+}
+
+box.innerHTML = '<div class="gkm-pro-empty">Ищу персонажей...</div>';
+
+var jikanCharacters = await loadJikanCharacters(m);
     if (!jikanCharacters.length) {
       box.innerHTML = '<div class="gkm-pro-empty">Персонажи для этого тайтла пока не найдены.</div>';
       return;
