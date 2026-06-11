@@ -4998,7 +4998,6 @@ async function getOfficialEmbedsForMovieAsync(movie) {
       return strictEmbeds.filter(x => Number(x.season || wantedSeason) === wantedSeason);
     }
   }
-
   // Сначала берём серии, которые вручную добавлены в app.js.
   const localEmbeds = getOfficialEmbedsForMovie(movie);
 
@@ -5350,8 +5349,16 @@ if (typeof openDetails === "function" && !window.__officialEmbedOpenDetailsPatch
   };
 }
 
-setupEvents();
-loadData().catch(showError);
+function gkmStartApp() {
+  setupEvents();
+  loadData().catch(showError);
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", gkmStartApp);
+} else {
+  gkmStartApp();
+}
 
 /* ===== ТВОЁ ИМЯ / YOUR NAME ===== */
 
