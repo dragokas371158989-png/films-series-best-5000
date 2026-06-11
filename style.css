@@ -1784,3 +1784,67 @@ button[data-reset] {
     font-size: 11px !important;
   }
 }
+/* ===== ШАПКА НА ВЕСЬ ЭКРАН С БАННЕРОМ ===== */
+
+.topbar {
+  width: 100vw;
+  min-height: 240px;
+  height: 240px;
+  margin: 0 0 16px 0;
+  margin-left: calc(50% - 50vw);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #050816;
+  background-image: url("logo-banner.png.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; /* растягиваем по максимуму */
+  border-bottom: 1px solid rgba(0, 229, 255, 0.18);
+}
+
+/* старую картинку внутри шапки скрываем */
+.site-logo-wrap,
+.site-logo {
+  display: none !important;
+}
+
+/* кнопки Тема / Обновить убираем */
+.top-actions,
+#themeBtn,
+#reloadBtn {
+  display: none !important;
+}
+
+/* статус загрузки по центру снизу */
+#statusText {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  margin: 0;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
+  z-index: 2;
+}
+
+/* на мобиле чуть ниже высоту */
+@media (max-width: 700px) {
+  .topbar {
+    min-height: 160px;
+    height: 160px;
+  }
+
+  #statusText {
+    font-size: 12px;
+    bottom: 8px;
+  }
+}
