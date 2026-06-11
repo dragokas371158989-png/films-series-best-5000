@@ -7057,3 +7057,210 @@ if (typeof openDetails === "function") {
     }, 50);
   };
 }
+/* =========================================================
+   GKM PRO CATALOG DETAILS
+   Страна, год, студия, персонажи, отзывы, темы
+========================================================= */
+
+let gkmCharactersCache = null;
+
+async function gkmLoadCharacters() {
+  if (gkmCharactersCache) return gkmCharactersCache;
+
+  try {
+    const res = await fetch("data/characters.json?v=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("characters.json not found");
+
+    const data = await res.json();
+    gkmCharactersCache = Array.isArray(data) ? data : (data.characters || []);
+    return gkmCharactersCache;
+  } catch (e) {
+    console.warn("Персонажи пока не загружены:", e);
+    gkmCharactersCache = [];
+    return [];
+  }
+}
+
+function gkmValue(value, fallback = "—") {
+  if (Array.isArray(value)) return value.filter(Boolean).join(" · ") || fallback;
+  return String(value || "").trim() || fallback;
+}
+
+function gkmInfoCard(label, value) {
+  return `
+    <div class="gkm-pro-info-card">
+      <p class="gkm-pro-info-label">${escapeHtml(label)}</p>
+      <p class="gkm-pro-info-value">${escapeHtml(gkmValue(value))}</p>
+    </div>
+  `;
+}
+
+function gkmTagsHtml(items) {
+  const list = Array.isArray(items) ? items.filter(Boolean) : [];
+
+  if (!list.length) {
+    return `<div class="gkm-pro-empty">Пока не добавлено.</div>`;
+  }
+
+  return `
+    <div class="gkm-pro-tags">
+      ${list.map(x => `<span class="gkm-pro-tag">${escapeHtml(x)}</span>`).join("")}
+    </div>
+  `;
+}
+
+function gkmGetType(m) {
+  if (typeof isAnimeItem === "function" && isAnimeItem(m)) return "Аниме";
+  return m.type || "Тайтл";
+}
+
+function gkmGetCharacterIds(m) {
+  if (Array.isArray(m.characters)) return m.characters.map(String);
+  if (Array.isArray(m.characterIds)) return m.characterIds.map(String);
+  return [];
+}
+
+function gkmCharacterCard(ch) {
+  const img = ch.image || ch.poster || ch.photo || "";
+
+  return `
+    <article class="gkm-pro-character-card">
+      ${
+        img
+          ? `<img class="gkm-pro-character-img" src="${escapeAttr(img)}" alt="" loading="lazy">`
+          : `<div class="gkm-pro-character-img"></div>`
+      }
+      <div class="gkm-pro-character-body">
+        <p class="gkm-pro-character-name">${escapeHtml(ch.nameRu || ch.ru || ch.name || ch.nameOriginal || "Без имени")}</p>
+        <p class="gkm-pro-character-role">${escapeHtml(ch.role || "Персонаж")}</p>
+      </div>
+    </article>
+  `;
+}
+
+async function gkmRenderCharacters(m) {
+  const box = document.getElementById("gkmProCharacters");
+  if (!box) return;
+
+  const ids = gkmGetCharacterIds(m);
+
+  if (!ids.length) {
+    box.innerHTML = `<div class="gkm-pro-empty">Персонажи для этого тайтла пока не добавлены.</div>`;
+    return;
+  }
+
+  const allCharacters = await gkmLoadCharacters();
+  const map = new Map(allCharacters.map(ch => [String(ch.id), ch]));
+
+  const characters = ids.map(id => map.get(id)).filter(Boolean);
+
+  if (!characters.length) {
+    box.innerHTML = `<div class="gkm-pro-empty">ID персонажей есть, но карточки ещё не заполнены в data/characters.json.</div>`;
+    return;
+  }
+
+  box.innerHTML = characters.map(gkmCharacterCard).join("");
+}
+
+function gkmReviewsHtml(m) {
+  const reviews = Array.isArray(m.reviews) ? m.reviews : [];
+
+  if (!reviews.length) {
+    return `
+      <div class="gkm-pro-review">
+        <strong>Отзывы пока не добавлены</strong>
+        <p>Позже здесь будут оценки, плюсы, минусы и мнения пользователей.</p>
+      </div>
+    `;
+  }
+
+  return reviews.slice(0, 3).map(r => `
+    <div class="gkm-pro-review">
+      <strong>${escapeHtml(r.author || "Пользователь")} · ${escapeHtml(r.score || "—")}/10</strong>
+      <p>${escapeHtml(r.text || "")}</p>
+    </div>
+  `).join("");
+}
+
+function gkmCreateProDetailsBlock(m) {
+  const rating = Number(getRating(m) || 0);
+  const votes = Number(getVotes(m) || 0);
+
+  return `
+    <section id="gkmProTitlePage" class="gkm-pro-title-page">
+      <div class="gkm-pro-head">
+        <div class="gkm-pro-title-main">
+          <h3>${escapeHtml(titleOf(m))}</h3>
+          <p class="gkm-pro-subtitle">
+            ${escapeHtml(gkmValue(m.en || m.titleOriginal || m.originalTitle || m.nameOriginal, "Оригинальное название пока не добавлено"))}
+          </p>
+        </div>
+
+        <div class="gkm-pro-score">
+          <div class="gkm-pro-score-value">${rating ? rating.toFixed(1) : "—"}</div>
+          <div class="gkm-pro-score-label">${votes ? votes + " оценок" : "нет оценок"}</div>
+        </div>
+      </div>
+
+      <section class="gkm-pro-section">
+        <h4>Информация</h4>
+        <div class="gkm-pro-info-grid">
+          ${gkmInfoCard("Тип", gkmGetType(m))}
+          ${gkmInfoCard("Год", m.year)}
+          ${gkmInfoCard("Страна", m.country || m.countries)}
+          ${gkmInfoCard("Статус", m.status)}
+          ${gkmInfoCard("Эпизоды", m.episodes || m.episodeCount)}
+          ${gkmInfoCard("Длительность", m.duration || m.runtime)}
+          ${gkmInfoCard("Студия", m.studio || m.studios)}
+          ${gkmInfoCard("Первоисточник", m.source)}
+          ${gkmInfoCard("Возраст", m.ageRating || m.age)}
+          ${gkmInfoCard("Сезон", m.season)}
+        </div>
+      </section>
+
+      <section class="gkm-pro-section">
+        <h4>Жанры</h4>
+        ${gkmTagsHtml(getGenres(m))}
+      </section>
+
+      <section class="gkm-pro-section">
+        <h4>Темы и настроение</h4>
+        ${gkmTagsHtml(m.themes || m.tags || m.keywords)}
+      </section>
+
+      <section class="gkm-pro-section">
+        <h4>Персонажи</h4>
+        <div id="gkmProCharacters" class="gkm-pro-character-grid">
+          <div class="gkm-pro-empty">Загружаю персонажей...</div>
+        </div>
+      </section>
+
+      <section class="gkm-pro-section">
+        <h4>Отзывы</h4>
+        <div class="gkm-pro-review-box">
+          ${gkmReviewsHtml(m)}
+        </div>
+      </section>
+    </section>
+  `;
+}
+
+function gkmRenderProDetails(m) {
+  const slot = document.getElementById("gkmProSlot");
+  if (!slot) return;
+
+  slot.innerHTML = gkmCreateProDetailsBlock(m);
+  gkmRenderCharacters(m);
+}
+
+if (typeof openDetails === "function") {
+  const gkmOldOpenDetails = openDetails;
+
+  openDetails = function(m) {
+    gkmOldOpenDetails(m);
+
+    setTimeout(() => {
+      gkmRenderProDetails(m);
+    }, 80);
+  };
+}
