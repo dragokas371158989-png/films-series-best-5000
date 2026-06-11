@@ -8785,29 +8785,88 @@ addRutubeSeasonExactList({
     }
   }, 2500);
 })();
-/* ===== GKM SCROLL DETAIL TO TOP ON NEW CARD ===== */
+
+/* ===== GKM DETAIL MODAL TOP FIX FINAL ===== */
 (function () {
-  if (window.__gkmScrollDetailTopFix) return;
-  window.__gkmScrollDetailTopFix = true;
+  if (window.__gkmDetailModalTopFixFinal) return;
+  window.__gkmDetailModalTopFixFinal = true;
 
-  function scrollDetailsTop() {
-    setTimeout(function () {
-      const dialog = document.getElementById("detailsDialog");
-      if (!dialog) return;
+  function getDetailScrollTargets() {
+    const dialog = document.getElementById("detailsDialog");
 
-      dialog.scrollTop = 0;
-
-      const content =
-        dialog.querySelector(".dialog-content") ||
-        dialog.querySelector(".details") ||
-        dialog;
-
-      if (content) {
-        content.scrollTop = 0;
-        content.scrollIntoView({ behavior: "auto", block: "start" });
-      }
-    }, 80);
+    return [
+      dialog,
+      dialog && dialog.querySelector(".dialog-content"),
+      dialog && dialog.querySelector(".details"),
+      dialog && dialog.querySelector("#gkmProSlot"),
+      document.scrollingElement,
+      document.documentElement,
+      document.body
+    ].filter(Boolean);
   }
+
+  function setTopNow() {
+    const dialog = document.getElementById("detailsDialog");
+    if (!dialog) return;
+
+    getDetailScrollTargets().forEach(function (el) {
+      try {
+        el.scrollTop = 0;
+      } catch (e) {}
+    });
+
+    try {
+      dialog.scrollTo(0, 0);
+    } catch (e) {}
+
+    const content =
+      dialog.querySelector(".dialog-content") ||
+      dialog.querySelector(".details");
+
+    if (content) {
+      try {
+        content.scrollTop = 0;
+      } catch (e) {}
+    }
+  }
+
+  function forceDetailTop() {
+    setTopNow();
+    requestAnimationFrame(setTopNow);
+    setTimeout(setTopNow, 0);
+    setTimeout(setTopNow, 80);
+    setTimeout(setTopNow, 250);
+    setTimeout(setTopNow, 600);
+    setTimeout(setTopNow, 1000);
+  }
+
+  function patchOpenDetails() {
+    if (typeof window.openDetails !== "function") return false;
+    if (window.openDetails.__gkmTopPatched) return true;
+
+    const originalOpenDetails = window.openDetails;
+
+    window.openDetails = function () {
+      const result = originalOpenDetails.apply(this, arguments);
+      forceDetailTop();
+      return result;
+    };
+
+    window.openDetails.__gkmTopPatched = true;
+    return true;
+  }
+
+  patchOpenDetails();
+
+  const patchTimer = setInterval(function () {
+    if (patchOpenDetails()) {
+      clearInterval(patchTimer);
+    }
+  }, 300);
+
+  setTimeout(function () {
+    clearInterval(patchTimer);
+  }, 10000);
 
   document.addEventListener("click", function (e) {
     const card = e.target.closest(".card");
@@ -8816,6 +8875,17 @@ addRutubeSeasonExactList({
     const dialog = document.getElementById("detailsDialog");
     if (!dialog || !dialog.open) return;
 
-    scrollDetailsTop();
+    forceDetailTop();
+  }, true);
+
+  document.addEventListener("click", function (e) {
+    const card = e.target.closest(".similar-grid .card, #similarGrid .card, .home-row .card");
+    if (!card) return;
+
+    const dialog = document.getElementById("detailsDialog");
+    if (!dialog || !dialog.open) return;
+
+    forceDetailTop();
   }, true);
 })();
+
