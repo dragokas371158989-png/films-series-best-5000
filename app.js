@@ -7714,3 +7714,190 @@ addRutubeSeasonExactList({
 
   console.log("GKM RU PATCH установлен");
 })();
+/* =========================================================
+   GKM RU CLEAN PATCH v2
+   Убирает дубли, переводит Military/Jikan/R-17 и чистит жанры
+========================================================= */
+
+(function () {
+  if (window.__gkmRuCleanPatchV2) return;
+  window.__gkmRuCleanPatchV2 = true;
+
+  const MAP = {
+    "Action": "Экшен",
+    "Adventure": "Приключения",
+    "Drama": "Драма",
+    "Fantasy": "Фэнтези",
+    "Military": "Военное",
+    "Shounen": "Сёнэн",
+    "Shonen": "Сёнэн",
+    "Anime": "Аниме",
+    "Manga": "Манга",
+    "Main": "Главный персонаж",
+    "Supporting": "Второстепенный персонаж",
+    "Jikan / MyAnimeList": "Манга",
+    "Finished Airing": "Вышло",
+    "Currently Airing": "Выходит",
+    "Not yet aired": "Анонс"
+  };
+
+  function ruText(text) {
+    let s = String(text || "").trim();
+
+    if (!s) return s;
+
+    if (MAP[s]) return MAP[s];
+
+    if (s.includes("Jikan / MyAnimeList")) {
+      s = s.replace(/Jikan\s*\/\s*MyAnimeList/g, "Манга");
+    }
+
+    if (s.includes("R - 17+")) {
+      s = "17+";
+    }
+
+    if (s.includes("PG-13")) {
+      s = "13+";
+    }
+
+    if (s.includes("PG - Children")) {
+      s = "6+";
+    }
+
+    if (s.includes("G - All Ages")) {
+      s = "0+";
+    }
+
+    if (s.includes("Rx")) {
+      s = "18+";
+    }
+
+    s = s
+      .replace(/\bAction\b/g, "Экшен")
+      .replace(/\bAdventure\b/g, "Приключения")
+      .replace(/\bDrama\b/g, "Драма")
+      .replace(/\bFantasy\b/g, "Фэнтези")
+      .replace(/\bMilitary\b/g, "Военное")
+      .replace(/\bShounen\b/g, "Сёнэн")
+      .replace(/\bShonen\b/g, "Сёнэн")
+      .replace(/\bManga\b/g, "Манга")
+      .replace(/\bMain\b/g, "Главный персонаж")
+      .replace(/\bSupporting\b/g, "Второстепенный персонаж")
+      .replace(/per ep/gi, "за серию")
+      .replace(/min/gi, "мин");
+
+    return s;
+  }
+
+  function uniqueList(list) {
+    const seen = new Set();
+    const result = [];
+
+    list.forEach(item => {
+      const clean = ruText(item).trim();
+
+      if (!clean) return;
+
+      const key = clean.toLowerCase();
+
+      if (!seen.has(key)) {
+        seen.add(key);
+        result.push(clean);
+      }
+    });
+
+    return result;
+  }
+
+  function cleanSeparatedText(el) {
+    if (!el) return;
+
+    const text = el.textContent || "";
+
+    if (!text.includes("·")) {
+      el.textContent = ruText(text);
+      return;
+    }
+
+    const parts = text
+      .split("·")
+      .map(x => x.trim())
+      .filter(Boolean);
+
+    el.textContent = uniqueList(parts).join(" · ");
+  }
+
+  function cleanTags(root) {
+    const tags = root.querySelectorAll(".gkm-pro-tag");
+
+    const seen = new Set();
+
+    tags.forEach(tag => {
+      const clean = ruText(tag.textContent);
+      const key = clean.toLowerCase();
+
+      if (seen.has(key)) {
+        tag.remove();
+        return;
+      }
+
+      seen.add(key);
+      tag.textContent = clean;
+    });
+  }
+
+  function cleanInfoValues(root) {
+    root.querySelectorAll(".gkm-pro-info-value").forEach(el => {
+      el.textContent = ruText(el.textContent);
+    });
+  }
+
+  function cleanCharacters(root) {
+    root.querySelectorAll(".gkm-pro-character-role").forEach(el => {
+      el.textContent = ruText(el.textContent);
+    });
+  }
+
+  function cleanDetailTop() {
+    cleanSeparatedText(document.getElementById("detailGenres"));
+    cleanSeparatedText(document.getElementById("detailMeta"));
+  }
+
+  function cleanAll() {
+    const dialog = document.getElementById("detailsDialog");
+
+    if (!dialog) return;
+
+    cleanDetailTop();
+    cleanInfoValues(dialog);
+    cleanTags(dialog);
+    cleanCharacters(dialog);
+  }
+
+  const observer = new MutationObserver(() => {
+    clearTimeout(window.__gkmRuCleanTimer);
+    window.__gkmRuCleanTimer = setTimeout(cleanAll, 80);
+  });
+
+  const start = () => {
+    const dialog = document.getElementById("detailsDialog");
+
+    if (!dialog) return;
+
+    observer.observe(dialog, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+
+    cleanAll();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
+
+  console.log("GKM RU CLEAN PATCH v2 установлен");
+})();
