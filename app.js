@@ -8889,3 +8889,222 @@ addRutubeSeasonExactList({
   }, true);
 })();
 
+/* ===== GKM AUTO RU TRANSLATE DESCRIPTIONS ===== */
+(function () {
+  if (window.__gkmAutoRuTranslateDescriptions) return;
+  window.__gkmAutoRuTranslateDescriptions = true;
+
+  const TRANSLATE_CACHE_PREFIX = "gkm_translate_ru_";
+
+  function gkmIsEnglishText(text) {
+    const s = String(text || "").trim();
+    if (!s) return false;
+
+    const latin = (s.match(/[a-zA-Z]/g) || []).length;
+    const cyrillic = (s.match(/[а-яА-ЯёЁ]/g) || []).length;
+
+    return latin > 40 && latin > cyrillic * 3;
+  }
+
+  function gkmHashText(text) {
+    let h = 0;
+    const s = String(text || "");
+
+    for (let i = 0; i < s.length; i++) {
+      h = ((h << 5) - h) + s.charCodeAt(i);
+      h |= 0;
+    }
+
+    return String(Math.abs(h));
+  }
+
+  function gkmSplitText(text, maxLen) {
+    const s = String(text || "").trim();
+    const chunks = [];
+    let current = "";
+
+    s.split(/(?<=[.!?])\s+/).forEach(function (part) {
+      if ((current + " " + part).trim().length > maxLen) {
+        if (current.trim()) chunks.push(current.trim());
+        current = part;
+      } else {
+        current = (current + " " + part).trim();
+      }
+    });
+
+    if (current.trim()) chunks.push(current.trim());
+
+    return chunks.length ? chunks : [s.slice(0, maxLen)];
+  }
+
+  async function gkmTranslateChunkToRu(text) {
+    const url =
+      "https://api.mymemory.translated.net/get?q=" +
+      encodeURIComponent(text) +
+      "&langpair=en|ru";
+
+    try {
+      const res = await fetch(url, { cache: "force-cache" });
+      if (!res.ok) return "";
+
+      const data = await res.json();
+      const translated =
+        data &&
+        data.responseData &&
+        data.responseData.translatedText
+          ? data.responseData.translatedText
+          : "";
+
+      return String(translated || "").trim();
+    } catch (e) {
+      console.warn("GKM translate error:", e);
+      return "";
+    }
+  }
+
+  async function gkmTranslateToRu(text) {
+    const original = String(text || "").trim();
+
+    if (!gkmIsEnglishText(original)) return "";
+
+    const key = TRANSLATE_CACHE_PREFIX + gkmHashText(original);
+
+    try {
+      const cached = localStorage.getItem(key);
+      if (cached) return cached;
+    } catch (e) {}
+
+    const chunks = gkmSplitText(original, 430);
+    const translatedParts = [];
+
+    for (const chunk of chunks) {
+      const translated = await gkmTranslateChunkToRu(chunk);
+      translatedParts.push(translated || chunk);
+
+      // не долбим API слишком быстро
+      await new Promise(resolve => setTimeout(resolve, 180));
+    }
+
+    const result = translatedParts.join(" ").trim();
+
+    if (result && result !== original) {
+      try {
+        localStorage.setItem(key, result);
+      } catch (e) {}
+
+      return result;
+    }
+
+    return "";
+  }
+
+  function gkmShouldTranslateElement(el) {
+    if (!el) return false;
+
+    const id = el.id || "";
+    const cls = el.className || "";
+    const text = String(el.textContent || "").trim();
+
+    if (!text || text.length < 40) return false;
+    if (!gkmIsEnglishText(text)) return false;
+
+    const marker = (id + " " + cls).toLowerCase();
+
+    return (
+      id === "detailOverview" ||
+      id === "gkmNativeCharacterDesc" ||
+      marker.includes("description") ||
+      marker.includes("desc") ||
+      marker.includes("overview") ||
+      marker.includes("character-desc") ||
+      marker.includes("gkm-native-character-desc")
+    );
+  }
+
+  async function gkmTranslateElement(el) {
+    if (!el || el.dataset.gkmTranslating === "1" || el.dataset.gkmTranslatedRu === "1") return;
+
+    const original = String(el.textContent || "").trim();
+
+    if (!gkmIsEnglishText(original)) return;
+
+    el.dataset.gkmTranslating = "1";
+
+    const before = original;
+    el.textContent = "Перевожу описание на русский...";
+
+    const translated = await gkmTranslateToRu(before);
+
+    if (translated) {
+      el.textContent = translated;
+      el.dataset.gkmTranslatedRu = "1";
+    } else {
+      el.textContent = before;
+    }
+
+    el.dataset.gkmTranslating = "0";
+  }
+
+  function gkmScanDescriptions(root) {
+    const scope = root || document;
+
+    const nodes = [];
+
+    if (scope.nodeType === 1 && gkmShouldTranslateElement(scope)) {
+      nodes.push(scope);
+    }
+
+    if (scope.querySelectorAll) {
+      scope.querySelectorAll(
+        "#detailOverview, #gkmNativeCharacterDesc, .gkm-native-character-desc, .description, .desc, .overview"
+      ).forEach(function (el) {
+        if (gkmShouldTranslateElement(el)) nodes.push(el);
+      });
+    }
+
+    nodes.forEach(gkmTranslateElement);
+  }
+
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (m) {
+      if (m.type === "childList") {
+        m.addedNodes.forEach(function (node) {
+          gkmScanDescriptions(node);
+        });
+
+        if (m.target) {
+          gkmScanDescriptions(m.target);
+        }
+      }
+
+      if (m.type === "characterData" && m.target && m.target.parentElement) {
+        gkmScanDescriptions(m.target.parentElement);
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  document.addEventListener("click", function () {
+    setTimeout(function () {
+      gkmScanDescriptions(document);
+    }, 300);
+
+    setTimeout(function () {
+      gkmScanDescriptions(document);
+    }, 1200);
+  }, true);
+
+  setInterval(function () {
+    gkmScanDescriptions(document);
+  }, 2500);
+
+  gkmScanDescriptions(document);
+
+  console.log("GKM AUTO RU TRANSLATE DESCRIPTIONS установлен");
+})();
+
