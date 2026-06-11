@@ -8785,4 +8785,37 @@ addRutubeSeasonExactList({
     }
   }, 2500);
 })();
+/* ===== GKM SCROLL DETAIL TO TOP ON NEW CARD ===== */
+(function () {
+  if (window.__gkmScrollDetailTopFix) return;
+  window.__gkmScrollDetailTopFix = true;
 
+  function scrollDetailsTop() {
+    setTimeout(function () {
+      const dialog = document.getElementById("detailsDialog");
+      if (!dialog) return;
+
+      dialog.scrollTop = 0;
+
+      const content =
+        dialog.querySelector(".dialog-content") ||
+        dialog.querySelector(".details") ||
+        dialog;
+
+      if (content) {
+        content.scrollTop = 0;
+        content.scrollIntoView({ behavior: "auto", block: "start" });
+      }
+    }, 80);
+  }
+
+  document.addEventListener("click", function (e) {
+    const card = e.target.closest(".card");
+    if (!card) return;
+
+    const dialog = document.getElementById("detailsDialog");
+    if (!dialog || !dialog.open) return;
+
+    scrollDetailsTop();
+  }, true);
+})();
