@@ -5350,8 +5350,21 @@ if (typeof openDetails === "function" && !window.__officialEmbedOpenDetailsPatch
 }
 
 function gkmStartApp() {
-  setupEvents();
-  loadData().catch(showError);
+  if (window.__gkmAppStarted) return;
+  window.__gkmAppStarted = true;
+
+  const status = document.getElementById("statusText");
+  if (status && status.textContent === "Загрузка индекса...") {
+    status.textContent = "app.js загружен, запускаю базу...";
+  }
+
+  try {
+    setupEvents();
+    loadData().catch(showError);
+  } catch (e) {
+    console.error(e);
+    if (status) status.textContent = "Ошибка запуска app.js: " + (e.message || e);
+  }
 }
 
 if (document.readyState === "loading") {
@@ -8352,13 +8365,13 @@ addRutubeSeasonExactList({
 
 
 /* =========================================================
-   GKM CHARACTER NATIVE DIALOG + DESCRIPTION STABLE
+   GKM CHARACTER NATIVE DIALOG + DESCRIPTION STABLE v3
    Один стабильный блок: персонаж поверх основной карточки + описание
 ========================================================= */
 
 (function () {
-  if (window.__gkmCharacterNativeStableInstalled) return;
-  window.__gkmCharacterNativeStableInstalled = true;
+  if (window.__gkmCharacterNativeStableV3Installed) return;
+  window.__gkmCharacterNativeStableV3Installed = true;
 
   const gkmCharDescCache = new Map();
 
@@ -8416,7 +8429,7 @@ addRutubeSeasonExactList({
     const q = gkmClearCharacterName(name);
     if (!q) return "";
 
-    const key = "gkm_char_desc_" + q.toLowerCase();
+    const key = "gkm_char_desc_v3_" + q.toLowerCase();
 
     if (gkmCharDescCache.has(key)) {
       return gkmCharDescCache.get(key);
@@ -8477,10 +8490,10 @@ addRutubeSeasonExactList({
   }
 
   function gkmInjectCharacterDialogStyle() {
-    if (document.getElementById("gkmNativeCharacterStableStyle")) return;
+    if (document.getElementById("gkmNativeCharacterStableV3Style")) return;
 
     const style = document.createElement("style");
-    style.id = "gkmNativeCharacterStableStyle";
+    style.id = "gkmNativeCharacterStableV3Style";
     style.textContent = `
       .gkm-pro-character-card {
         cursor: pointer !important;
@@ -8753,43 +8766,23 @@ addRutubeSeasonExactList({
 
   gkmInjectCharacterDialogStyle();
 
-  console.log("GKM CHARACTER NATIVE STABLE установлен");
+  console.log("GKM CHARACTER NATIVE STABLE v3 установлен");
 })();
-/* ===== GKM EMERGENCY START FIX ===== */
+
+/* =========================================================
+   GKM FINAL EMERGENCY START
+   Показывает ошибку на экране, если запуск не состоялся
+========================================================= */
+
 (function () {
-  if (window.__gkmEmergencyStartFix) return;
-  window.__gkmEmergencyStartFix = true;
+  setTimeout(function () {
+    const status = document.getElementById("statusText");
 
-  function start() {
-    try {
-      if (typeof setupEvents === "function") {
-        setupEvents();
-      }
+    if (!status) return;
 
-      if (typeof loadData === "function") {
-        loadData().catch(function (e) {
-          if (typeof showError === "function") {
-            showError(e);
-          } else {
-            console.error(e);
-            const status = document.getElementById("statusText");
-            if (status) status.textContent = "Ошибка: " + (e.message || e);
-          }
-        });
-      } else {
-        const status = document.getElementById("statusText");
-        if (status) status.textContent = "Ошибка: loadData не найден в app.js";
-      }
-    } catch (e) {
-      console.error(e);
-      const status = document.getElementById("statusText");
-      if (status) status.textContent = "Ошибка запуска: " + (e.message || e);
+    if (status.textContent === "Загрузка индекса...") {
+      status.textContent = "app.js загружен, но запуск не стартовал. Открой F12 → Console.";
     }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", start);
-  } else {
-    start();
-  }
+  }, 2500);
 })();
+
