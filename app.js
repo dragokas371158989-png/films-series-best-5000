@@ -8729,3 +8729,145 @@ addRutubeSeasonExactList({
 
   console.log("GKM FAST MODAL PATCH установлен");
 })();
+/* =========================================================
+   GKM CHARACTER MODAL FINAL FIX
+   Исправляет пустой тёмный экран при открытии персонажа
+========================================================= */
+
+(function () {
+  if (window.__gkmCharacterFinalFixInstalled) return;
+  window.__gkmCharacterFinalFixInstalled = true;
+
+  function injectFinalFixStyle() {
+    let old1 = document.getElementById("gkmCharacterOverlayFixStyle");
+    if (old1) old1.remove();
+
+    let old2 = document.getElementById("gkmFastModalStyle");
+    if (old2) old2.remove();
+
+    if (document.getElementById("gkmCharacterFinalFixStyle")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkmCharacterFinalFixStyle";
+    style.textContent = `
+      body.gkm-character-open #detailsDialog .dialog-content {
+        opacity: 1 !important;
+        filter: none !important;
+        pointer-events: auto !important;
+      }
+
+      body.gkm-character-open {
+        overflow: hidden !important;
+      }
+
+      .gkm-character-backdrop {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 2147483647 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 18px !important;
+        background: rgba(0, 0, 0, 0.88) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+
+      .gkm-character-modal {
+        position: relative !important;
+        z-index: 2147483647 !important;
+        opacity: 1 !important;
+        filter: none !important;
+        transform: none !important;
+        width: min(420px, calc(100vw - 28px)) !important;
+        max-height: calc(100vh - 28px) !important;
+        overflow: auto !important;
+        border-radius: 24px !important;
+        background:
+          radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 38%),
+          radial-gradient(circle at top right, rgba(124, 58, 237, 0.26), transparent 40%),
+          #050816 !important;
+        border: 1px solid rgba(34, 211, 238, 0.55) !important;
+        color: white !important;
+        box-shadow: 0 0 28px rgba(124, 58, 237, 0.45) !important;
+      }
+
+      .gkm-character-img-wrap {
+        width: 100% !important;
+        height: 360px !important;
+        background: #020617 !important;
+        overflow: hidden !important;
+      }
+
+      .gkm-character-img-wrap img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: top center !important;
+        display: block !important;
+      }
+
+      .gkm-character-close {
+        position: absolute !important;
+        right: 12px !important;
+        top: 12px !important;
+        z-index: 2147483647 !important;
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 14px !important;
+        border: 1px solid rgba(34, 211, 238, 0.55) !important;
+        background: linear-gradient(180deg, #7c3aed, #312e81) !important;
+        color: white !important;
+        font-size: 26px !important;
+        cursor: pointer !important;
+      }
+
+      .gkm-character-body {
+        padding: 18px !important;
+      }
+
+      .gkm-character-body h3 {
+        margin: 0 0 12px !important;
+        color: white !important;
+        font-size: 24px !important;
+        line-height: 1.15 !important;
+      }
+
+      @media (max-width: 700px) {
+        .gkm-character-img-wrap {
+          height: 300px !important;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  function updateState() {
+    if (document.getElementById("gkmCharacterBackdrop")) {
+      document.body.classList.add("gkm-character-open");
+    } else {
+      document.body.classList.remove("gkm-character-open");
+    }
+  }
+
+  injectFinalFixStyle();
+
+  const observer = new MutationObserver(function () {
+    setTimeout(updateState, 10);
+  });
+
+  observer.observe(document.body, {
+    childList: true
+  });
+
+  document.addEventListener("click", function () {
+    setTimeout(updateState, 30);
+  });
+
+  document.addEventListener("keydown", function () {
+    setTimeout(updateState, 30);
+  });
+
+  console.log("GKM CHARACTER FINAL FIX установлен");
+})();
