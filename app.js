@@ -7901,3 +7901,451 @@ addRutubeSeasonExactList({
 
   console.log("GKM RU CLEAN PATCH v2 установлен");
 })();
+/* =========================================================
+   GKM NEXT WATCH PATCH
+   Улучшенный блок "Что посмотреть после этого?"
+========================================================= */
+
+(function () {
+  if (window.__gkmNextWatchPatchInstalled) return;
+  window.__gkmNextWatchPatchInstalled = true;
+
+  function gkmSafeNormalize(value) {
+    if (typeof normalize === "function") return normalize(value);
+    return String(value || "").toLowerCase().trim();
+  }
+
+  function gkmSafeGenres(item) {
+    if (typeof getGenres === "function") return getGenres(item);
+    return Array.isArray(item.genres) ? item.genres.filter(Boolean) : [];
+  }
+
+  function gkmSafeRating(item) {
+    if (typeof getRating === "function") return getRating(item);
+    return Number(item.rating || 0);
+  }
+
+  function gkmSafeVotes(item) {
+    if (typeof getVotes === "function") return getVotes(item);
+    return Number(item.votes || 0);
+  }
+
+  function gkmSafeYear(item) {
+    if (typeof getYear === "function") return getYear(item);
+    return String(item.year || "").trim();
+  }
+
+  function gkmIsAnime(item) {
+    if (typeof isAnimeItem === "function") return isAnimeItem(item);
+
+    const text = [
+      item.type,
+      item.source,
+      item.category,
+      item.provider,
+      ...(Array.isArray(item.genres) ? item.genres : [])
+    ].join(" ").toLowerCase();
+
+    return text.includes("аниме") || text.includes("anime");
+  }
+
+  function gkmTitle(item) {
+    if (typeof titleOf === "function") return titleOf(item);
+    return item.ru || item.en || item.title || item.name || "Без названия";
+  }
+
+  function gkmScoreSmart(item) {
+    if (typeof scoreSmart === "function") return scoreSmart(item);
+
+    const rating = gkmSafeRating(item);
+    const votes = gkmSafeVotes(item);
+
+    return rating * 10 + Math.min(votes, 50000) / 50000 * 4;
+  }
+
+  function gkmSharedGenres(base, item) {
+    const baseGenres = gkmSafeGenres(base).map(gkmSafeNormalize);
+    const itemGenres = gkmSafeGenres(item).map(gkmSafeNormalize);
+
+    return baseGenres.filter(g => itemGenres.includes(g));
+  }
+
+  function gkmTextBag(item) {
+    return [
+      item.ru,
+      item.en,
+      item.title,
+      item.name,
+      item.type,
+      item.status,
+      item.source,
+      item.studio,
+      item.studios,
+      item.country,
+      item.season,
+      item.overview,
+      item.description,
+      ...(Array.isArray(item.genres) ? item.genres : []),
+      ...(Array.isArray(item.themes) ? item.themes : []),
+      ...(Array.isArray(item.tags) ? item.tags : []),
+      ...(Array.isArray(item.keywords) ? item.keywords : [])
+    ].join(" ").toLowerCase();
+  }
+
+  function gkmMoodScore(base, item) {
+    const baseText = gkmTextBag(base);
+    const itemText = gkmTextBag(item);
+
+    const moodGroups = [
+      ["магия", "magic", "волшеб", "wizard", "mage"],
+      ["демон", "demons", "demon", "devil"],
+      ["военное", "military", "война", "war", "армия"],
+      ["школа", "school", "академия", "academy"],
+      ["романтика", "romance", "любов"],
+      ["мрач", "dark", "ужасы", "horror", "gore"],
+      ["исекай", "isekai", "перерождение", "reincarnation", "другой мир"],
+      ["спорт", "sports"],
+      ["боевые искусства", "martial arts", "martial"],
+      ["психолог", "psychological", "mind game"],
+      ["приключения", "adventure", "путешествие"],
+      ["фэнтези", "fantasy"]
+    ];
+
+    let score = 0;
+
+    moodGroups.forEach(group => {
+      const baseHas = group.some(word => baseText.includes(word));
+      const itemHas = group.some(word => itemText.includes(word));
+
+      if (baseHas && itemHas) score += 12;
+    });
+
+    return score;
+  }
+
+  function gkmNextScore(base, item) {
+    if (!base || !item) return -9999;
+    if (String(base.id) === String(item.id)) return -9999;
+
+    let score = 0;
+
+    const baseAnime = gkmIsAnime(base);
+    const itemAnime = gkmIsAnime(item);
+
+    if (baseAnime === itemAnime) score += 25;
+    else score -= 50;
+
+    const shared = gkmSharedGenres(base, item);
+    score += shared.length * 14;
+
+    if (base.type && item.type && base.type === item.type) score += 10;
+
+    const baseYear = Number(gkmSafeYear(base) || 0);
+    const itemYear = Number(gkmSafeYear(item) || 0);
+
+    if (baseYear && itemYear) {
+      const diff = Math.abs(baseYear - itemYear);
+
+      if (diff === 0) score += 7;
+      else if (diff <= 2) score += 5;
+      else if (diff <= 5) score += 3;
+    }
+
+    const baseStudio = String(base.studio || base.studios || "").toLowerCase();
+    const itemStudio = String(item.studio || item.studios || "").toLowerCase();
+
+    if (baseStudio && itemStudio && baseStudio === itemStudio) {
+      score += 12;
+    }
+
+    score += gkmMoodScore(base, item);
+
+    score += Math.min(gkmSafeRating(item), 10);
+    score += Math.min(gkmSafeVotes(item), 50000) / 10000;
+
+    return score;
+  }
+
+  function gkmFindNextItems(base, filterFn, limit) {
+    if (!Array.isArray(allMovies)) return [];
+
+    return allMovies
+      .filter(item => String(item.id) !== String(base.id))
+      .filter(item => {
+        if (gkmIsAnime(base) !== gkmIsAnime(item)) return false;
+        if (base.type && item.type && base.type !== item.type) return false;
+        return true;
+      })
+      .filter(filterFn || (() => true))
+      .map(item => ({
+        item,
+        score: gkmNextScore(base, item)
+      }))
+      .filter(x => x.score > 10)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit || 8)
+      .map(x => x.item);
+  }
+
+  function gkmUniqueById(items) {
+    const seen = new Set();
+
+    return items.filter(item => {
+      const id = String(item.id || gkmTitle(item));
+
+      if (seen.has(id)) return false;
+
+      seen.add(id);
+      return true;
+    });
+  }
+
+  function gkmSection(title, items, className) {
+    if (!items || !items.length) return "";
+
+    return `
+      <section class="gkm-next-section ${className || ""}">
+        <div class="gkm-next-section-head">
+          <h4>${title}</h4>
+        </div>
+        <div class="gkm-next-row">
+          ${items.map(cardHtml).join("")}
+        </div>
+      </section>
+    `;
+  }
+
+  function gkmBuildNextWatchHtml(base) {
+    const baseGenres = gkmSafeGenres(base).map(gkmSafeNormalize);
+
+    const byGenres = gkmFindNextItems(base, item => {
+      const shared = gkmSharedGenres(base, item);
+      return shared.length >= 2 || shared.length >= Math.min(1, baseGenres.length);
+    }, 8);
+
+    const byMood = gkmFindNextItems(base, item => {
+      return gkmMoodScore(base, item) > 0;
+    }, 8);
+
+    const best = gkmFindNextItems(base, item => {
+      return gkmSafeRating(item) >= 8 || gkmSafeVotes(item) >= 1000;
+    }, 8);
+
+    const unexpected = gkmUniqueById(
+      gkmFindNextItems(base, item => true, 30)
+        .sort(() => Math.random() - 0.5)
+    ).slice(0, 6);
+
+    const all = gkmUniqueById([
+      ...byGenres,
+      ...byMood,
+      ...best,
+      ...unexpected
+    ]);
+
+    if (!all.length) {
+      return `
+        <section id="gkmNextWatch" class="gkm-next-watch">
+          <div class="gkm-next-head">
+            <div>
+              <p class="gkm-next-label">Рекомендации</p>
+              <h3>Что посмотреть после этого?</h3>
+            </div>
+          </div>
+          <div class="gkm-next-empty">Пока не нашёл похожие тайтлы.</div>
+        </section>
+      `;
+    }
+
+    return `
+      <section id="gkmNextWatch" class="gkm-next-watch">
+        <div class="gkm-next-head">
+          <div>
+            <p class="gkm-next-label">Рекомендации</p>
+            <h3>Что посмотреть после этого?</h3>
+            <p class="gkm-next-subtitle">
+              Подборка строится по жанрам, типу, году, рейтингу и настроению тайтла.
+            </p>
+          </div>
+        </div>
+
+        ${gkmSection("🔥 Похоже по жанрам", byGenres.slice(0, 6), "genres")}
+        ${gkmSection("🎭 Похожая атмосфера", byMood.slice(0, 6), "mood")}
+        ${gkmSection("⭐ Лучшее из похожего", best.slice(0, 6), "best")}
+        ${gkmSection("🎲 Неожиданная рекомендация", unexpected.slice(0, 6), "random")}
+      </section>
+    `;
+  }
+
+  function gkmInjectNextWatchStyle() {
+    if (document.getElementById("gkmNextWatchStyle")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkmNextWatchStyle";
+    style.textContent = `
+      .gkm-next-watch {
+        margin-top: 28px;
+        padding: 20px;
+        border-radius: 22px;
+        border: 1px solid rgba(34, 211, 238, 0.38);
+        background:
+          radial-gradient(circle at top left, rgba(34, 211, 238, 0.12), transparent 32%),
+          radial-gradient(circle at top right, rgba(124, 58, 237, 0.20), transparent 36%),
+          rgba(2, 6, 23, 0.76);
+        box-shadow:
+          0 0 28px rgba(34, 211, 238, 0.12),
+          inset 0 0 24px rgba(124, 58, 237, 0.08);
+      }
+
+      .gkm-next-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: flex-start;
+        margin-bottom: 16px;
+      }
+
+      .gkm-next-label {
+        margin: 0 0 5px;
+        color: #38bdf8;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 1.4px;
+      }
+
+      .gkm-next-head h3 {
+        margin: 0;
+        color: #fff;
+        font-size: 24px;
+        text-shadow: 0 0 14px rgba(124, 58, 237, 0.65);
+      }
+
+      .gkm-next-subtitle {
+        margin: 8px 0 0;
+        color: #a5b4fc;
+        line-height: 1.45;
+        font-size: 14px;
+      }
+
+      .gkm-next-section {
+        margin-top: 22px;
+      }
+
+      .gkm-next-section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .gkm-next-section h4 {
+        margin: 0;
+        color: #facc15;
+        font-size: 18px;
+      }
+
+      .gkm-next-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+        gap: 12px;
+      }
+
+      .gkm-next-row .card {
+        min-width: 0;
+      }
+
+      .gkm-next-row .card-title {
+        font-size: 13px !important;
+      }
+
+      .gkm-next-row .meta {
+        font-size: 11px !important;
+      }
+
+      .gkm-next-row .rating {
+        font-size: 12px !important;
+        min-height: 38px !important;
+        padding: 6px 4px !important;
+      }
+
+      .gkm-next-empty {
+        padding: 14px;
+        border-radius: 16px;
+        background: rgba(15, 23, 42, 0.65);
+        color: #cbd5e1;
+      }
+
+      #similarBlock {
+        display: none !important;
+      }
+
+      @media (max-width: 700px) {
+        .gkm-next-watch {
+          padding: 14px;
+          border-radius: 18px;
+        }
+
+        .gkm-next-head h3 {
+          font-size: 20px;
+        }
+
+        .gkm-next-row {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+        }
+
+        .gkm-next-section h4 {
+          font-size: 16px;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  function gkmRenderNextWatch(base) {
+    if (!base) return;
+
+    gkmInjectNextWatchStyle();
+
+    const dialog = document.getElementById("detailsDialog");
+    if (!dialog) return;
+
+    let old = document.getElementById("gkmNextWatch");
+    if (old) old.remove();
+
+    const similarBlock = document.getElementById("similarBlock");
+
+    if (similarBlock) {
+      similarBlock.insertAdjacentHTML("beforebegin", gkmBuildNextWatchHtml(base));
+    } else {
+      const target =
+        dialog.querySelector(".dialog-content") ||
+        dialog;
+
+      target.insertAdjacentHTML("beforeend", gkmBuildNextWatchHtml(base));
+    }
+
+    const nextBlock = document.getElementById("gkmNextWatch");
+
+    if (nextBlock && typeof bindCardClicks === "function") {
+      bindCardClicks(nextBlock);
+    }
+  }
+
+  if (typeof openDetails === "function") {
+    const oldOpenDetailsForNextWatch = openDetails;
+
+    openDetails = function (m) {
+      oldOpenDetailsForNextWatch(m);
+
+      setTimeout(function () {
+        gkmRenderNextWatch(m);
+      }, 300);
+    };
+  }
+
+  console.log("GKM NEXT WATCH PATCH установлен");
+})();
