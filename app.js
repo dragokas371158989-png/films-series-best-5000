@@ -1,5 +1,5 @@
 // FIX: OPM season matching by year, prevents Season 1 card from showing Season 3 players.
-const GKM_APP_CLEAN_VERSION = "clean-cast-2026-06-12";
+const GKM_APP_CLEAN_VERSION = "clean-cast-v2-direct-tmdb-2026-06-12";
 const INDEX_URL = "data/index.json";
 const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
@@ -7563,51 +7563,53 @@ return (
 }
 
 async function loadMovieTvCast(m) {
-var found = await findTmdbIdForCast(m);
+    var found = await findTmdbIdForCast(m);
 
-if (!found || !found.id) return [];
+    if (!found || !found.id) return [];
 
-var cacheKey = "gkm_movie_tv_cast_" + found.kind + "_" + found.id;
+    var cacheKey = "gkm_movie_tv_cast_v2_" + found.kind + "_" + found.id;
 
-try {
-var cached = localStorage.getItem(cacheKey);
-if (cached) {
-var parsed = JSON.parse(cached);
-if (Array.isArray(parsed)) return parsed;
-}
-} catch (e) {}
+    try {
+      var cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        var parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length) return parsed;
+      }
+    } catch (e) {}
 
-var url =
-"https://api.themoviedb.org/3/" +
-found.kind +
-"/" +
-found.id +
-"/credits?language=ru-RU";
+    var url =
+      "https://api.themoviedb.org/3/" +
+      found.kind +
+      "/" +
+      found.id +
+      "/credits?language=ru-RU";
 
-var data = await tmdbCastFetch(url);
-var cast = data && Array.isArray(data.cast) ? data.cast : [];
+    var data = await tmdbCastFetch(url);
+    var cast = data && Array.isArray(data.cast) ? data.cast : [];
 
-cast = cast
-.filter(function (p) {
-return p && (p.name || p.original_name);
-})
-.slice(0, 14)
-.map(function (p) {
-return {
-name: p.name || p.original_name || "",
-original_name: p.original_name || "",
-character: p.character || "",
-profile_path: p.profile_path || "",
-order: p.order || 0
-};
-});
+    cast = cast
+      .filter(function (p) {
+        return p && (p.name || p.original_name);
+      })
+      .slice(0, 14)
+      .map(function (p) {
+        return {
+          name: p.name || p.original_name || "",
+          original_name: p.original_name || "",
+          character: p.character || "",
+          profile_path: p.profile_path || "",
+          order: p.order || 0
+        };
+      });
 
-try {
-localStorage.setItem(cacheKey, JSON.stringify(cast));
-} catch (e) {}
+    if (cast.length) {
+      try {
+        localStorage.setItem(cacheKey, JSON.stringify(cast));
+      } catch (e) {}
+    }
 
-return cast;
-}
+    return cast;
+  }
 
   function reviewsHtml(m) {
     var reviews = Array.isArray(m.reviews) ? m.reviews : [];
