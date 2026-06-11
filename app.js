@@ -9364,3 +9364,173 @@ addRutubeSeasonExactList({
 
   console.log("GKM CHARACTER DESCRIPTION PATCH установлен");
 })();
+/* =========================================================
+   GKM CHARACTER DESCRIPTION FINAL
+   Надёжно добавляет описание в dialog персонажа
+========================================================= */
+
+(function () {
+  if (window.__gkmCharacterDescriptionFinalInstalled) return;
+  window.__gkmCharacterDescriptionFinalInstalled = true;
+
+  const descCache = new Map();
+
+  function clean(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+  }
+
+  function clearName(name) {
+    return clean(name)
+      .replace(/\(.*?\)/g, "")
+      .replace(/,/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function crop(text) {
+    let s = String(text || "")
+      .replace(/\\n/g, "\n")
+      .replace(/\r/g, "")
+      .replace(/\n{3,}/g, "\n\n")
+      .replace(/No biography written.*$/gi, "")
+      .trim();
+
+    if (s.length > 850) s = s.slice(0, 850).trim() + "...";
+
+    return s;
+  }
+
+  async function getJson(url) {
+    try {
+      const res = await fetch(url, { cache: "force-cache" });
+      if (!res.ok) return null;
+      return await res.json();
+    } catch (e) {
+      console.warn("character desc error", e);
+      return null;
+    }
+  }
+
+  async function loadDesc(name) {
+    const q = clearName(name);
+    if (!q) return "";
+
+    const key = "char_desc_" + q.toLowerCase();
+
+    if (descCache.has(key)) return descCache.get(key);
+
+    const saved = localStorage.getItem(key);
+    if (saved) {
+      descCache.set(key, saved);
+      return saved;
+    }
+
+    const search = await getJson(
+      "https://api.jikan.moe/v4/characters?q=" + encodeURIComponent(q) + "&limit=3"
+    );
+
+    if (!search || !Array.isArray(search.data) || !search.data.length) {
+      descCache.set(key, "");
+      return "";
+    }
+
+    const first = search.data[0];
+
+    if (!first || !first.mal_id) {
+      descCache.set(key, "");
+      return "";
+    }
+
+    const full = await getJson(
+      "https://api.jikan.moe/v4/characters/" + first.mal_id + "/full"
+    );
+
+    const about = full && full.data && full.data.about ? full.data.about : "";
+    const desc = crop(about);
+
+    if (desc) localStorage.setItem(key, desc);
+
+    descCache.set(key, desc);
+
+    return desc;
+  }
+
+  function injectStyle() {
+    if (document.getElementById("gkmCharDescFinalStyle")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkmCharDescFinalStyle";
+    style.textContent = `
+      .gkm-char-desc-final {
+        margin-top: 10px;
+        padding: 12px;
+        border-radius: 16px;
+        background: rgba(15, 23, 42, 0.82);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        max-height: 220px;
+        overflow: auto;
+      }
+
+      .gkm-char-desc-final-label {
+        margin: 0 0 6px;
+        color: #94a3b8;
+        font-size: 12px;
+      }
+
+      .gkm-char-desc-final-text {
+        margin: 0;
+        color: #dbeafe;
+        font-size: 13px;
+        line-height: 1.45;
+        font-weight: 600;
+        white-space: pre-line;
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  async function addDesc() {
+    injectStyle();
+
+    const dialog = document.getElementById("gkmCharacterDialog");
+    if (!dialog || !dialog.open) return;
+
+    const body = dialog.querySelector(".gkm-native-character-body");
+    const title = dialog.querySelector(".gkm-native-character-body h3");
+
+    if (!body || !title) return;
+
+    let box = dialog.querySelector(".gkm-char-desc-final");
+
+    if (!box) {
+      box = document.createElement("div");
+      box.className = "gkm-char-desc-final";
+      box.innerHTML = `
+        <p class="gkm-char-desc-final-label">Описание</p>
+        <p class="gkm-char-desc-final-text">Загружаю описание...</p>
+      `;
+      body.appendChild(box);
+    }
+
+    const textEl = box.querySelector(".gkm-char-desc-final-text");
+    const name = clean(title.textContent);
+
+    textEl.textContent = "Загружаю описание...";
+
+    const desc = await loadDesc(name);
+
+    if (!dialog.open) return;
+
+    textEl.textContent = desc || "Описание персонажа пока не найдено.";
+  }
+
+  document.addEventListener("click", function (e) {
+    if (e.target.closest(".gkm-pro-character-card")) {
+      setTimeout(addDesc, 500);
+      setTimeout(addDesc, 1200);
+    }
+  }, true);
+
+  console.log("GKM CHARACTER DESCRIPTION FINAL установлен");
+})();
