@@ -9132,3 +9132,235 @@ addRutubeSeasonExactList({
 
   console.log("GKM CHARACTER NATIVE DIALOG FIX установлен");
 })();
+/* =========================================================
+   GKM CHARACTER DESCRIPTION PATCH
+   Добавляет описание персонажа в карточку персонажа
+========================================================= */
+
+(function () {
+  if (window.__gkmCharacterDescriptionPatchInstalled) return;
+  window.__gkmCharacterDescriptionPatchInstalled = true;
+
+  const characterDescCache = new Map();
+
+  function cleanText(value) {
+    return String(value || "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function cleanCharacterName(name) {
+    return cleanText(name)
+      .replace(/\(.*?\)/g, "")
+      .replace(/,/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function shortDescription(text) {
+    let s = String(text || "")
+      .replace(/\r/g, "")
+      .replace(/\n{3,}/g, "\n\n")
+      .replace(/\\n/g, "\n")
+      .replace(/No voice actors have been added.*$/gi, "")
+      .replace(/No biography written.*$/gi, "")
+      .trim();
+
+    if (!s) return "";
+
+    if (s.length > 950) {
+      s = s.slice(0, 950).trim() + "...";
+    }
+
+    return s;
+  }
+
+  async function fetchJsonSafe(url) {
+    try {
+      const res = await fetch(url, { cache: "force-cache" });
+      if (!res.ok) return null;
+      return await res.json();
+    } catch (e) {
+      console.warn("GKM character description fetch error:", e);
+      return null;
+    }
+  }
+
+  async function findCharacterDescription(name) {
+    const cleanName = cleanCharacterName(name);
+
+    if (!cleanName) return "";
+
+    const cacheKey = "gkm_character_desc_" + cleanName.toLowerCase();
+
+    if (characterDescCache.has(cacheKey)) {
+      return characterDescCache.get(cacheKey);
+    }
+
+    const saved = localStorage.getItem(cacheKey);
+
+    if (saved) {
+      characterDescCache.set(cacheKey, saved);
+      return saved;
+    }
+
+    const searchUrl =
+      "https://api.jikan.moe/v4/characters?q=" +
+      encodeURIComponent(cleanName) +
+      "&limit=5";
+
+    const searchData = await fetchJsonSafe(searchUrl);
+
+    if (!searchData || !Array.isArray(searchData.data) || !searchData.data.length) {
+      characterDescCache.set(cacheKey, "");
+      return "";
+    }
+
+    let best = searchData.data[0];
+
+    const lower = cleanName.toLowerCase();
+
+    const exact = searchData.data.find(item => {
+      const itemName = cleanCharacterName(item.name).toLowerCase();
+      return itemName === lower || itemName.includes(lower) || lower.includes(itemName);
+    });
+
+    if (exact) best = exact;
+
+    if (!best || !best.mal_id) {
+      characterDescCache.set(cacheKey, "");
+      return "";
+    }
+
+    const fullData = await fetchJsonSafe(
+      "https://api.jikan.moe/v4/characters/" + best.mal_id + "/full"
+    );
+
+    const about =
+      fullData &&
+      fullData.data &&
+      fullData.data.about
+        ? fullData.data.about
+        : best.about || "";
+
+    const desc = shortDescription(about);
+
+    if (desc) {
+      localStorage.setItem(cacheKey, desc);
+    }
+
+    characterDescCache.set(cacheKey, desc);
+
+    return desc;
+  }
+
+  function addDescriptionBox(dialog) {
+    if (!dialog) return null;
+
+    let box = dialog.querySelector("#gkmCharacterDescriptionBox");
+
+    if (box) return box;
+
+    const info = dialog.querySelector(".gkm-native-character-info");
+
+    if (!info) return null;
+
+    box = document.createElement("div");
+    box.id = "gkmCharacterDescriptionBox";
+    box.className = "gkm-native-character-info-item";
+    box.innerHTML = `
+      <p class="gkm-native-character-label">Описание</p>
+      <p class="gkm-native-character-value gkm-character-description-text">
+        Загружаю описание...
+      </p>
+    `;
+
+    info.appendChild(box);
+
+    return box;
+  }
+
+  async function hydrateCharacterDescription() {
+    const dialog = document.getElementById("gkmCharacterDialog");
+
+    if (!dialog || !dialog.open) return;
+
+    const title = dialog.querySelector(".gkm-native-character-body h3");
+
+    if (!title) return;
+
+    const name = cleanText(title.textContent);
+
+    if (!name) return;
+
+    const box = addDescriptionBox(dialog);
+
+    if (!box) return;
+
+    const textEl = box.querySelector(".gkm-character-description-text");
+
+    if (!textEl) return;
+
+    textEl.textContent = "Загружаю описание...";
+
+    const desc = await findCharacterDescription(name);
+
+    if (!document.getElementById("gkmCharacterDialog")?.open) return;
+
+    if (desc) {
+      textEl.textContent = desc;
+    } else {
+      textEl.textContent = "Описание персонажа пока не найдено.";
+    }
+  }
+
+  function injectDescriptionStyle() {
+    if (document.getElementById("gkmCharacterDescriptionStyle")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkmCharacterDescriptionStyle";
+    style.textContent = `
+      #gkmCharacterDescriptionBox {
+        max-height: 240px;
+        overflow: auto;
+      }
+
+      .gkm-character-description-text {
+        white-space: pre-line;
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+        color: #dbeafe !important;
+        font-weight: 600 !important;
+      }
+
+      #gkmCharacterDescriptionBox::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      #gkmCharacterDescriptionBox::-webkit-scrollbar-thumb {
+        background: rgba(34, 211, 238, 0.45);
+        border-radius: 999px;
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  injectDescriptionStyle();
+
+  const observer = new MutationObserver(function () {
+    clearTimeout(window.__gkmCharacterDescriptionTimer);
+    window.__gkmCharacterDescriptionTimer = setTimeout(hydrateCharacterDescription, 250);
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+  document.addEventListener("click", function () {
+    setTimeout(hydrateCharacterDescription, 350);
+  });
+
+  console.log("GKM CHARACTER DESCRIPTION PATCH установлен");
+})();
