@@ -8785,88 +8785,29 @@ addRutubeSeasonExactList({
     }
   }, 2500);
 })();
-
-/* ===== GKM DETAIL MODAL TOP FIX FINAL ===== */
+/* ===== GKM SCROLL DETAIL TO TOP ON NEW CARD ===== */
 (function () {
-  if (window.__gkmDetailModalTopFixFinal) return;
-  window.__gkmDetailModalTopFixFinal = true;
+  if (window.__gkmScrollDetailTopFix) return;
+  window.__gkmScrollDetailTopFix = true;
 
-  function getDetailScrollTargets() {
-    const dialog = document.getElementById("detailsDialog");
+  function scrollDetailsTop() {
+    setTimeout(function () {
+      const dialog = document.getElementById("detailsDialog");
+      if (!dialog) return;
 
-    return [
-      dialog,
-      dialog && dialog.querySelector(".dialog-content"),
-      dialog && dialog.querySelector(".details"),
-      dialog && dialog.querySelector("#gkmProSlot"),
-      document.scrollingElement,
-      document.documentElement,
-      document.body
-    ].filter(Boolean);
-  }
+      dialog.scrollTop = 0;
 
-  function setTopNow() {
-    const dialog = document.getElementById("detailsDialog");
-    if (!dialog) return;
+      const content =
+        dialog.querySelector(".dialog-content") ||
+        dialog.querySelector(".details") ||
+        dialog;
 
-    getDetailScrollTargets().forEach(function (el) {
-      try {
-        el.scrollTop = 0;
-      } catch (e) {}
-    });
-
-    try {
-      dialog.scrollTo(0, 0);
-    } catch (e) {}
-
-    const content =
-      dialog.querySelector(".dialog-content") ||
-      dialog.querySelector(".details");
-
-    if (content) {
-      try {
+      if (content) {
         content.scrollTop = 0;
-      } catch (e) {}
-    }
+        content.scrollIntoView({ behavior: "auto", block: "start" });
+      }
+    }, 80);
   }
-
-  function forceDetailTop() {
-    setTopNow();
-    requestAnimationFrame(setTopNow);
-    setTimeout(setTopNow, 0);
-    setTimeout(setTopNow, 80);
-    setTimeout(setTopNow, 250);
-    setTimeout(setTopNow, 600);
-    setTimeout(setTopNow, 1000);
-  }
-
-  function patchOpenDetails() {
-    if (typeof window.openDetails !== "function") return false;
-    if (window.openDetails.__gkmTopPatched) return true;
-
-    const originalOpenDetails = window.openDetails;
-
-    window.openDetails = function () {
-      const result = originalOpenDetails.apply(this, arguments);
-      forceDetailTop();
-      return result;
-    };
-
-    window.openDetails.__gkmTopPatched = true;
-    return true;
-  }
-
-  patchOpenDetails();
-
-  const patchTimer = setInterval(function () {
-    if (patchOpenDetails()) {
-      clearInterval(patchTimer);
-    }
-  }, 300);
-
-  setTimeout(function () {
-    clearInterval(patchTimer);
-  }, 10000);
 
   document.addEventListener("click", function (e) {
     const card = e.target.closest(".card");
@@ -8875,38 +8816,26 @@ addRutubeSeasonExactList({
     const dialog = document.getElementById("detailsDialog");
     if (!dialog || !dialog.open) return;
 
-    forceDetailTop();
-  }, true);
-
-  document.addEventListener("click", function (e) {
-    const card = e.target.closest(".similar-grid .card, #similarGrid .card, .home-row .card");
-    if (!card) return;
-
-    const dialog = document.getElementById("detailsDialog");
-    if (!dialog || !dialog.open) return;
-
-    forceDetailTop();
+    scrollDetailsTop();
   }, true);
 })();
 
-/* ===== GKM AUTO RU TRANSLATE DESCRIPTIONS ===== */
+/* ===== GKM FORCE TRANSLATE CHARACTER DESCRIPTION ===== */
 (function () {
-  if (window.__gkmAutoRuTranslateDescriptions) return;
-  window.__gkmAutoRuTranslateDescriptions = true;
+  if (window.__gkmForceTranslateCharacterDescription) return;
+  window.__gkmForceTranslateCharacterDescription = true;
 
-  const TRANSLATE_CACHE_PREFIX = "gkm_translate_ru_";
-
-  function gkmIsEnglishText(text) {
+  function isEnglish(text) {
     const s = String(text || "").trim();
     if (!s) return false;
 
     const latin = (s.match(/[a-zA-Z]/g) || []).length;
-    const cyrillic = (s.match(/[а-яА-ЯёЁ]/g) || []).length;
+    const cyr = (s.match(/[а-яА-ЯёЁ]/g) || []).length;
 
-    return latin > 40 && latin > cyrillic * 3;
+    return latin > 40 && latin > cyr * 3;
   }
 
-  function gkmHashText(text) {
+  function hashText(text) {
     let h = 0;
     const s = String(text || "");
 
@@ -8918,26 +8847,26 @@ addRutubeSeasonExactList({
     return String(Math.abs(h));
   }
 
-  function gkmSplitText(text, maxLen) {
+  function splitText(text, maxLen) {
     const s = String(text || "").trim();
     const chunks = [];
-    let current = "";
+    let cur = "";
 
     s.split(/(?<=[.!?])\s+/).forEach(function (part) {
-      if ((current + " " + part).trim().length > maxLen) {
-        if (current.trim()) chunks.push(current.trim());
-        current = part;
+      if ((cur + " " + part).trim().length > maxLen) {
+        if (cur.trim()) chunks.push(cur.trim());
+        cur = part;
       } else {
-        current = (current + " " + part).trim();
+        cur = (cur + " " + part).trim();
       }
     });
 
-    if (current.trim()) chunks.push(current.trim());
+    if (cur.trim()) chunks.push(cur.trim());
 
     return chunks.length ? chunks : [s.slice(0, maxLen)];
   }
 
-  async function gkmTranslateChunkToRu(text) {
+  async function translateChunkToRu(text) {
     const url =
       "https://api.mymemory.translated.net/get?q=" +
       encodeURIComponent(text) +
@@ -8948,44 +8877,36 @@ addRutubeSeasonExactList({
       if (!res.ok) return "";
 
       const data = await res.json();
-      const translated =
-        data &&
-        data.responseData &&
-        data.responseData.translatedText
-          ? data.responseData.translatedText
-          : "";
-
-      return String(translated || "").trim();
+      return data && data.responseData && data.responseData.translatedText
+        ? String(data.responseData.translatedText).trim()
+        : "";
     } catch (e) {
-      console.warn("GKM translate error:", e);
+      console.warn("GKM character translate failed:", e);
       return "";
     }
   }
 
-  async function gkmTranslateToRu(text) {
+  async function translateToRu(text) {
     const original = String(text || "").trim();
+    if (!isEnglish(original)) return "";
 
-    if (!gkmIsEnglishText(original)) return "";
-
-    const key = TRANSLATE_CACHE_PREFIX + gkmHashText(original);
+    const key = "gkm_force_char_ru_" + hashText(original);
 
     try {
       const cached = localStorage.getItem(key);
       if (cached) return cached;
     } catch (e) {}
 
-    const chunks = gkmSplitText(original, 430);
-    const translatedParts = [];
+    const chunks = splitText(original, 430);
+    const parts = [];
 
     for (const chunk of chunks) {
-      const translated = await gkmTranslateChunkToRu(chunk);
-      translatedParts.push(translated || chunk);
-
-      // не долбим API слишком быстро
-      await new Promise(resolve => setTimeout(resolve, 180));
+      const ru = await translateChunkToRu(chunk);
+      parts.push(ru || chunk);
+      await new Promise(resolve => setTimeout(resolve, 220));
     }
 
-    const result = translatedParts.join(" ").trim();
+    const result = parts.join(" ").trim();
 
     if (result && result !== original) {
       try {
@@ -8998,154 +8919,22 @@ addRutubeSeasonExactList({
     return "";
   }
 
-  function gkmShouldTranslateElement(el) {
-    if (!el) return false;
-
-    const id = el.id || "";
-    const cls = el.className || "";
-    const text = String(el.textContent || "").trim();
-
-    if (!text || text.length < 40) return false;
-    if (!gkmIsEnglishText(text)) return false;
-
-    const marker = (id + " " + cls).toLowerCase();
-
-    return (
-      id === "detailOverview" ||
-      id === "gkmNativeCharacterDesc" ||
-      marker.includes("description") ||
-      marker.includes("desc") ||
-      marker.includes("overview") ||
-      marker.includes("character-desc") ||
-      marker.includes("gkm-native-character-desc")
-    );
-  }
-
-  async function gkmTranslateElement(el) {
-    if (!el || el.dataset.gkmTranslating === "1" || el.dataset.gkmTranslatedRu === "1") return;
-
-    const original = String(el.textContent || "").trim();
-
-    if (!gkmIsEnglishText(original)) return;
-
-    el.dataset.gkmTranslating = "1";
-
-    const before = original;
-    el.textContent = "Перевожу описание на русский...";
-
-    const translated = await gkmTranslateToRu(before);
-
-    if (translated) {
-      el.textContent = translated;
-      el.dataset.gkmTranslatedRu = "1";
-    } else {
-      el.textContent = before;
-    }
-
-    el.dataset.gkmTranslating = "0";
-  }
-
-  function gkmScanDescriptions(root) {
-    const scope = root || document;
-
-    const nodes = [];
-
-    if (scope.nodeType === 1 && gkmShouldTranslateElement(scope)) {
-      nodes.push(scope);
-    }
-
-    if (scope.querySelectorAll) {
-      scope.querySelectorAll(
-        "#detailOverview, #gkmNativeCharacterDesc, .gkm-native-character-desc, .description, .desc, .overview"
-      ).forEach(function (el) {
-        if (gkmShouldTranslateElement(el)) nodes.push(el);
-      });
-    }
-
-    nodes.forEach(gkmTranslateElement);
-  }
-
-  const observer = new MutationObserver(function (mutations) {
-    mutations.forEach(function (m) {
-      if (m.type === "childList") {
-        m.addedNodes.forEach(function (node) {
-          gkmScanDescriptions(node);
-        });
-
-        if (m.target) {
-          gkmScanDescriptions(m.target);
-        }
-      }
-
-      if (m.type === "characterData" && m.target && m.target.parentElement) {
-        gkmScanDescriptions(m.target.parentElement);
-      }
-    });
-  });
-
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-    characterData: true
-  });
-
-  document.addEventListener("click", function () {
-    setTimeout(function () {
-      gkmScanDescriptions(document);
-    }, 300);
-
-    setTimeout(function () {
-      gkmScanDescriptions(document);
-    }, 1200);
-  }, true);
-
-  setInterval(function () {
-    gkmScanDescriptions(document);
-  }, 2500);
-
-  gkmScanDescriptions(document);
-
-  console.log("GKM AUTO RU TRANSLATE DESCRIPTIONS установлен");
-})();
-/* ===== GKM FORCE TRANSLATE CHARACTER DESCRIPTION ===== */
-(function () {
-  if (window.__gkmForceTranslateCharacterDescription) return;
-  window.__gkmForceTranslateCharacterDescription = true;
-
-  function isEnglish(text) {
-    const s = String(text || "").trim();
-    const latin = (s.match(/[a-zA-Z]/g) || []).length;
-    const cyr = (s.match(/[а-яА-ЯёЁ]/g) || []).length;
-    return latin > 40 && latin > cyr * 3;
-  }
-
-  async function translateToRu(text) {
-    const url =
-      "https://api.mymemory.translated.net/get?q=" +
-      encodeURIComponent(text.slice(0, 480)) +
-      "&langpair=en|ru";
-
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-      return data?.responseData?.translatedText || "";
-    } catch (e) {
-      console.warn("Translate failed", e);
-      return "";
-    }
-  }
-
   async function checkCharacterDesc() {
     const el = document.querySelector("#gkmNativeCharacterDesc");
     if (!el) return;
 
-    const text = el.textContent.trim();
+    const text = String(el.textContent || "").trim();
 
-    if (!text || text.includes("Загружаю") || text.includes("Перевожу")) return;
+    if (!text) return;
+    if (text.includes("Загружаю")) return;
+    if (text.includes("Перевожу")) return;
     if (!isEnglish(text)) return;
-    if (el.dataset.ruDone === "1") return;
 
-    el.dataset.ruDone = "1";
+    const currentHash = hashText(text);
+
+    if (el.dataset.ruDoneHash === currentHash) return;
+
+    el.dataset.ruDoneHash = currentHash;
     el.dataset.originalText = text;
     el.textContent = "Перевожу описание на русский...";
 
@@ -9155,14 +8944,35 @@ addRutubeSeasonExactList({
       el.textContent = ru;
     } else {
       el.textContent = text;
-      el.dataset.ruDone = "0";
+      el.dataset.ruDoneHash = "";
     }
   }
 
-  setInterval(checkCharacterDesc, 1000);
+  function scheduleChecks() {
+    setTimeout(checkCharacterDesc, 300);
+    setTimeout(checkCharacterDesc, 900);
+    setTimeout(checkCharacterDesc, 1800);
+    setTimeout(checkCharacterDesc, 3200);
+  }
+
+  setInterval(checkCharacterDesc, 1200);
 
   document.addEventListener("click", function () {
-    setTimeout(checkCharacterDesc, 1000);
-    setTimeout(checkCharacterDesc, 2500);
+    scheduleChecks();
   }, true);
+
+  const observer = new MutationObserver(function () {
+    scheduleChecks();
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  scheduleChecks();
+
+  console.log("GKM FORCE TRANSLATE CHARACTER DESCRIPTION установлен");
 })();
+
