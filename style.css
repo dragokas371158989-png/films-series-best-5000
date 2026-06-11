@@ -1941,3 +1941,112 @@ header.topbar #statusText {
     font-size: 11px !important;
   }
 }
+/* ===== GKM HEADER RESTORE WITHOUT BUTTONS ===== */
+
+header.topbar,
+.topbar {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 190px !important;
+  margin: 0 !important;
+  margin-left: 0 !important;
+  padding: 10px 16px 18px !important;
+  position: relative !important;
+  overflow: visible !important;
+
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  text-align: center !important;
+
+  background: #020617 !important;
+  background-image: none !important;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.18) !important;
+}
+
+header.topbar > div:first-child,
+.topbar > div:first-child {
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+.site-logo-wrap {
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+}
+
+.site-logo,
+header.topbar img.site-logo {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 460px !important;
+  max-height: 150px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  border-radius: 0 !important;
+  box-shadow: 0 0 28px rgba(124, 58, 237, 0.55) !important;
+}
+
+/* кнопки НЕ возвращаем */
+.top-actions,
+header.topbar .top-actions,
+#themeBtn,
+#reloadBtn {
+  display: none !important;
+}
+
+#statusText,
+header.topbar #statusText {
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  margin: 10px 0 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  text-align: center !important;
+  color: #c7d2fe !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  white-space: normal !important;
+  text-shadow: none !important;
+  z-index: auto !important;
+}
+
+@media (max-width: 700px) {
+  header.topbar,
+  .topbar {
+    min-height: 145px !important;
+    padding: 8px 10px 14px !important;
+  }
+
+  .site-logo,
+  header.topbar img.site-logo {
+    max-width: 320px !important;
+    max-height: 105px !important;
+  }
+
+  #statusText,
+  header.topbar #statusText {
+    font-size: 11px !important;
+    margin-top: 8px !important;
+  }
+}
