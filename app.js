@@ -8976,3 +8976,173 @@ addRutubeSeasonExactList({
   console.log("GKM FORCE TRANSLATE CHARACTER DESCRIPTION установлен");
 })();
 
+/* ===== GKM RU LABELS CLEANUP FINAL ===== */
+(function () {
+  if (window.__gkmRuLabelsCleanupFinal) return;
+  window.__gkmRuLabelsCleanupFinal = true;
+
+  const RU_MAP = {
+    "Action": "Экшен",
+    "Adventure": "Приключения",
+    "Comedy": "Комедия",
+    "Drama": "Драма",
+    "Fantasy": "Фэнтези",
+    "Romance": "Романтика",
+    "Sci-Fi": "Фантастика",
+    "Science Fiction": "Фантастика",
+    "Horror": "Ужасы",
+    "Mystery": "Детектив",
+    "Supernatural": "Сверхъестественное",
+    "Psychological": "Психология",
+    "Martial Arts": "Боевые искусства",
+    "Military": "Военное",
+    "School": "Школа",
+    "Magic": "Магия",
+    "Demons": "Демоны",
+    "Vampire": "Вампиры",
+    "Samurai": "Самураи",
+    "Sports": "Спорт",
+    "Music": "Музыка",
+    "Game": "Игры",
+    "Slice of Life": "Повседневность",
+    "Shounen": "Сёнэн",
+    "Shonen": "Сёнэн",
+    "Seinen": "Сэйнэн",
+    "Shoujo": "Сёдзё",
+    "Shojo": "Сёдзё",
+    "Josei": "Дзёсэй",
+    "Main": "Главный персонаж",
+    "Supporting": "Второстепенный персонаж",
+    "Source": "Источник",
+    "Wikipedia": "Википедия",
+    "Manga": "Манга",
+    "Original": "Оригинал",
+    "Light novel": "Ранобэ",
+    "Novel": "Роман",
+    "Web manga": "Веб-манга",
+    "4-koma manga": "Ёнкома-манга",
+    "Other": "Другое",
+    "Unknown": "Неизвестно"
+  };
+
+  function replaceWords(text) {
+    let s = String(text || "");
+
+    Object.keys(RU_MAP)
+      .sort(function (a, b) { return b.length - a.length; })
+      .forEach(function (key) {
+        const safe = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const re = new RegExp("(^|[^A-Za-zА-Яа-яЁё])" + safe + "([^A-Za-zА-Яа-яЁё]|$)", "g");
+
+        s = s.replace(re, function (_, left, right) {
+          return left + RU_MAP[key] + right;
+        });
+      });
+
+    s = s
+      .replace(/Сейю\s*:\s*/gi, "Сейю: ")
+      .replace(/Источник\s*:\s*Википедия/gi, "Источник: Википедия")
+      .replace(/\bR-17\b/g, "17+")
+      .replace(/\bPG-13\b/g, "13+")
+      .replace(/\bPG\b/g, "6+")
+      .replace(/\bG\b/g, "0+")
+      .replace(/Экшен\s*·\s*Экшен/gi, "Экшен")
+      .replace(/Приключения\s*·\s*Приключения/gi, "Приключения")
+      .replace(/Комедия\s*·\s*Комедия/gi, "Комедия")
+      .replace(/Фэнтези\s*·\s*Фэнтези/gi, "Фэнтези")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+
+    return s;
+  }
+
+  function cleanupTextNode(el) {
+    if (!el) return;
+
+    const tag = (el.tagName || "").toLowerCase();
+
+    if (["script", "style", "textarea", "input"].includes(tag)) return;
+
+    if (el.childNodes && el.childNodes.length) {
+      el.childNodes.forEach(function (node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const oldText = node.nodeValue;
+          const newText = replaceWords(oldText);
+
+          if (oldText !== newText) {
+            node.nodeValue = newText;
+          }
+        }
+      });
+    }
+  }
+
+  function cleanupAttributes(el) {
+    if (!el || !el.getAttribute) return;
+
+    ["title", "aria-label"].forEach(function (attr) {
+      const value = el.getAttribute(attr);
+
+      if (value) {
+        const next = replaceWords(value);
+
+        if (next !== value) {
+          el.setAttribute(attr, next);
+        }
+      }
+    });
+  }
+
+  function cleanupRoot(root) {
+    const scope = root || document;
+
+    if (scope.nodeType === 1) {
+      cleanupTextNode(scope);
+      cleanupAttributes(scope);
+    }
+
+    if (!scope.querySelectorAll) return;
+
+    scope.querySelectorAll(
+      ".gkm-pro-chip, .gkm-pro-character-role, .gkm-native-character-value, .gkm-native-character-label, .meta, .card-title, #detailGenres, #detailMeta, #detailOverview, .links-title, .gkm-pro-info-value, .gkm-pro-info-label, p, span, div"
+    ).forEach(function (el) {
+      cleanupTextNode(el);
+      cleanupAttributes(el);
+    });
+  }
+
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (m) {
+      if (m.type === "childList") {
+        m.addedNodes.forEach(function (node) {
+          cleanupRoot(node);
+        });
+      }
+
+      if (m.type === "characterData" && m.target && m.target.parentElement) {
+        cleanupRoot(m.target.parentElement);
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  document.addEventListener("click", function () {
+    setTimeout(function () { cleanupRoot(document); }, 100);
+    setTimeout(function () { cleanupRoot(document); }, 700);
+    setTimeout(function () { cleanupRoot(document); }, 1500);
+  }, true);
+
+  setInterval(function () {
+    cleanupRoot(document);
+  }, 2500);
+
+  cleanupRoot(document);
+
+  console.log("GKM RU LABELS CLEANUP FINAL установлен");
+})();
+
