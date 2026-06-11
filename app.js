@@ -2998,7 +2998,6 @@ addRutubeSeasonExactList({
     }
 ]
 });
-
 /* ===== FORCE FIX: DEATH NOTE / ТЕТРАДЬ СМЕРТИ VK ===== */
 (function () {
   const deathNoteEpisodes = [
@@ -6817,951 +6816,678 @@ addRutubeSeasonExactList({
 })();
 
 
-let gkmCharactersCache = null;
+/* =========================================================
+   GKM PRO SAFE DETAILS — не ломает загрузку индекса
+   Информация, персонажи, отзывы + автоданные Jikan
+========================================================= */
+(function () {
+  if (window.__gkmProSafeDetailsInstalled) return;
+  window.__gkmProSafeDetailsInstalled = true;
 
-async function gkmLoadCharacters() {
-  if (gkmCharactersCache) return gkmCharactersCache;
+  var charactersCache = null;
+  var animeCache = new Map();
+  var animeCharactersCache = new Map();
 
-  try {
-    const res = await fetch("data/characters.json?v=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) throw new Error("characters.json not found");
+  function injectProDetailsStyle() {
+    if (document.getElementById("gkmProSafeStyle")) return;
 
-    const data = await res.json();
-    gkmCharactersCache = Array.isArray(data) ? data : (data.characters || []);
-    return gkmCharactersCache;
-  } catch (e) {
-    console.warn("Персонажи пока не загружены:", e);
-    gkmCharactersCache = [];
-    return [];
-  }
-}
-
-function gkmValue(value, fallback = "—") {
-  if (Array.isArray(value)) return value.filter(Boolean).join(" · ") || fallback;
-  return String(value || "").trim() || fallback;
-}
-
-function gkmTypeLabel(m) {
-  if (typeof isAnimeItem === "function" && isAnimeItem(m)) return "Аниме";
-  if (m.type) return m.type;
-  return "Тайтл";
-}
-
-function gkmInfoCard(label, value) {
-  return `
-    <div class="gkm-pro-info-card">
-      <p class="gkm-pro-info-label">${escapeHtml(label)}</p>
-      <p class="gkm-pro-info-value">${escapeHtml(gkmValue(value))}</p>
-    </div>
-  `;
-}
-
-function gkmTagsHtml(items) {
-  const list = Array.isArray(items) ? items.filter(Boolean) : [];
-
-  if (!list.length) {
-    return `<div class="gkm-pro-empty">Пока не добавлено.</div>`;
-  }
-
-  return `
-    <div class="gkm-pro-tags">
-      ${list.map(x => `<span class="gkm-pro-tag">${escapeHtml(x)}</span>`).join("")}
-    </div>
-  `;
-}
-
-function gkmGetTitleCharacterIds(m) {
-  if (Array.isArray(m.characters)) return m.characters.map(String);
-
-  if (Array.isArray(m.characterIds)) return m.characterIds.map(String);
-
-  return [];
-}
-
-function gkmCharacterCard(ch) {
-  const img = ch.image || ch.poster || ch.photo || "";
-
-  return `
-    <article class="gkm-pro-character-card">
-      ${
-        img
-          ? `<img class="gkm-pro-character-img" src="${escapeAttr(img)}" alt="" loading="lazy" onerror="handlePosterError && handlePosterError(this)">`
-          : `<div class="gkm-pro-character-img"></div>`
+    var style = document.createElement("style");
+    style.id = "gkmProSafeStyle";
+    style.textContent = `
+      #gkmProSlot {
+        width: 100%;
+        display: block;
+        margin-top: 18px;
       }
 
-      <div class="gkm-pro-character-body">
-        <p class="gkm-pro-character-name">
-          ${escapeHtml(ch.nameRu || ch.ru || ch.name || ch.nameOriginal || "Без имени")}
-        </p>
-        <p class="gkm-pro-character-role">
-          ${escapeHtml(ch.role || "Персонаж")}
-        </p>
-      </div>
-    </article>
-  `;
-}
-
-async function gkmRenderCharacters(m) {
-  const box = document.getElementById("gkmProCharacters");
-  if (!box) return;
-
-  const ids = gkmGetTitleCharacterIds(m);
-
-  if (!ids.length) {
-    box.innerHTML = `<div class="gkm-pro-empty">Персонажи для этого тайтла пока не добавлены.</div>`;
-    return;
-  }
-
-  const allCharacters = await gkmLoadCharacters();
-  const map = new Map(allCharacters.map(ch => [String(ch.id), ch]));
-
-  const characters = ids
-    .map(id => map.get(String(id)))
-    .filter(Boolean);
-
-  if (!characters.length) {
-    box.innerHTML = `<div class="gkm-pro-empty">Персонажи указаны, но их карточки ещё не заполнены в data/characters.json.</div>`;
-    return;
-  }
-
-  box.innerHTML = characters.map(gkmCharacterCard).join("");
-}
-
-function gkmRenderReviews(m) {
-  const reviews = Array.isArray(m.reviews) ? m.reviews : [];
-
-  if (!reviews.length) {
-    return `
-      <div class="gkm-pro-review-box">
-        <div class="gkm-pro-review">
-          <strong>Отзывы пока не добавлены</strong>
-          <p>Позже здесь будут пользовательские отзывы, оценки, плюсы и минусы тайтла.</p>
-        </div>
-      </div>
-    `;
-  }
-
-  return `
-    <div class="gkm-pro-review-box">
-      ${reviews.slice(0, 3).map(r => `
-        <div class="gkm-pro-review">
-          <strong>${escapeHtml(r.author || "Пользователь")} · ${escapeHtml(r.score || "—")}/10</strong>
-          <p>${escapeHtml(r.text || "")}</p>
-        </div>
-      `).join("")}
-    </div>
-  `;
-}
-
-function gkmCreateProDetailsBlock(m) {
-  const rating = Number(getRating(m) || 0);
-  const votes = Number(getVotes(m) || 0);
-
-  return `
-    <section id="gkmProTitlePage" class="gkm-pro-title-page">
-      <div class="gkm-pro-head">
-        <div class="gkm-pro-title-main">
-          <h3>${escapeHtml(titleOf(m))}</h3>
-          <p class="gkm-pro-subtitle">
-            ${escapeHtml(gkmValue(m.en || m.titleOriginal || m.originalTitle || m.nameOriginal, "Оригинальное название пока не добавлено"))}
-          </p>
-        </div>
-
-        <div class="gkm-pro-score">
-          <div class="gkm-pro-score-value">${rating ? rating.toFixed(1) : "—"}</div>
-          <div class="gkm-pro-score-label">${votes ? votes + " оценок" : "нет оценок"}</div>
-        </div>
-      </div>
-
-      <section class="gkm-pro-section">
-        <h4>Информация</h4>
-        <div class="gkm-pro-info-grid">
-          ${gkmInfoCard("Тип", gkmTypeLabel(m))}
-          ${gkmInfoCard("Год", m.year)}
-          ${gkmInfoCard("Страна", m.country || m.countries)}
-          ${gkmInfoCard("Статус", m.status)}
-          ${gkmInfoCard("Эпизоды", m.episodes || m.episodeCount)}
-          ${gkmInfoCard("Длительность", m.duration || m.runtime)}
-          ${gkmInfoCard("Студия", m.studio || m.studios)}
-          ${gkmInfoCard("Первоисточник", m.source)}
-          ${gkmInfoCard("Возраст", m.ageRating || m.age)}
-          ${gkmInfoCard("Сезон", m.season)}
-        </div>
-      </section>
-
-      <section class="gkm-pro-section">
-        <h4>Жанры</h4>
-        ${gkmTagsHtml(getGenres(m))}
-      </section>
-
-      <section class="gkm-pro-section">
-        <h4>Темы и настроение</h4>
-        ${gkmTagsHtml(m.themes || m.tags || m.keywords)}
-      </section>
-
-      <section class="gkm-pro-section">
-        <h4>Персонажи</h4>
-        <div id="gkmProCharacters" class="gkm-pro-character-grid">
-          <div class="gkm-pro-empty">Загружаю персонажей...</div>
-        </div>
-      </section>
-
-      <section class="gkm-pro-section">
-        <h4>Отзывы</h4>
-        ${gkmRenderReviews(m)}
-      </section>
-    </section>
-  `;
-}
-
-function gkmRenderProDetails(m) {
-  const dialog = document.getElementById("detailsDialog");
-  if (!dialog) return;
-
-  const old = document.getElementById("gkmProTitlePage");
-  if (old) old.remove();
-
-  const target =
-    dialog.querySelector(".dialog-content") ||
-    dialog.querySelector(".detail-body") ||
-    dialog.querySelector(".details-body") ||
-    dialog;
-
-  const similarBlock = document.getElementById("similarBlock");
-
-  if (similarBlock) {
-    similarBlock.insertAdjacentHTML("beforebegin", gkmCreateProDetailsBlock(m));
-  } else {
-    target.insertAdjacentHTML("beforeend", gkmCreateProDetailsBlock(m));
-  }
-
-  gkmRenderCharacters(m);
-}
-
-/* 
-   Оборачиваем старую openDetails:
-   старая функция продолжает делать всё как раньше,
-   а мы после неё добавляем новый энциклопедический блок.
-*/
-if (typeof openDetails === "function") {
-  const gkmOldOpenDetails = openDetails;
-
-  openDetails = function(m) {
-    gkmOldOpenDetails(m);
-
-    setTimeout(() => {
-      gkmRenderProDetails(m);
-    }, 50);
-  };
-}
-
-
-let gkmCharactersCache = null;
-
-async function gkmLoadCharacters() {
-  if (gkmCharactersCache) return gkmCharactersCache;
-
-  try {
-    const res = await fetch("data/characters.json?v=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) throw new Error("characters.json not found");
-
-    const data = await res.json();
-    gkmCharactersCache = Array.isArray(data) ? data : (data.characters || []);
-    return gkmCharactersCache;
-  } catch (e) {
-    console.warn("Персонажи пока не загружены:", e);
-    gkmCharactersCache = [];
-    return [];
-  }
-}
-
-function gkmValue(value, fallback = "—") {
-  if (Array.isArray(value)) return value.filter(Boolean).join(" · ") || fallback;
-  return String(value || "").trim() || fallback;
-}
-
-function gkmInfoCard(label, value) {
-  return `
-    <div class="gkm-pro-info-card">
-      <p class="gkm-pro-info-label">${escapeHtml(label)}</p>
-      <p class="gkm-pro-info-value">${escapeHtml(gkmValue(value))}</p>
-    </div>
-  `;
-}
-
-function gkmTagsHtml(items) {
-  const list = Array.isArray(items) ? items.filter(Boolean) : [];
-
-  if (!list.length) {
-    return `<div class="gkm-pro-empty">Пока не добавлено.</div>`;
-  }
-
-  return `
-    <div class="gkm-pro-tags">
-      ${list.map(x => `<span class="gkm-pro-tag">${escapeHtml(x)}</span>`).join("")}
-    </div>
-  `;
-}
-
-function gkmGetType(m) {
-  if (typeof isAnimeItem === "function" && isAnimeItem(m)) return "Аниме";
-  return m.type || "Тайтл";
-}
-
-function gkmGetCharacterIds(m) {
-  if (Array.isArray(m.characters)) return m.characters.map(String);
-  if (Array.isArray(m.characterIds)) return m.characterIds.map(String);
-  return [];
-}
-
-function gkmCharacterCard(ch) {
-  const img = ch.image || ch.poster || ch.photo || "";
-
-  return `
-    <article class="gkm-pro-character-card">
-      ${
-        img
-          ? `<img class="gkm-pro-character-img" src="${escapeAttr(img)}" alt="" loading="lazy">`
-          : `<div class="gkm-pro-character-img"></div>`
+      .gkm-pro-title-page {
+        margin-top: 20px;
+        padding: 18px;
+        border-radius: 22px;
+        border: 1px solid rgba(34, 211, 238, 0.35);
+        background:
+          radial-gradient(circle at top left, rgba(34, 211, 238, 0.12), transparent 34%),
+          radial-gradient(circle at top right, rgba(124, 58, 237, 0.18), transparent 36%),
+          rgba(2, 6, 23, 0.78);
+        box-shadow:
+          0 0 26px rgba(34, 211, 238, 0.12),
+          inset 0 0 22px rgba(124, 58, 237, 0.08);
       }
-      <div class="gkm-pro-character-body">
-        <p class="gkm-pro-character-name">${escapeHtml(ch.nameRu || ch.ru || ch.name || ch.nameOriginal || "Без имени")}</p>
-        <p class="gkm-pro-character-role">${escapeHtml(ch.role || "Персонаж")}</p>
-      </div>
-    </article>
-  `;
-}
 
-async function gkmRenderCharacters(m) {
-  const box = document.getElementById("gkmProCharacters");
-  if (!box) return;
+      .gkm-pro-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: flex-start;
+        margin-bottom: 18px;
+      }
 
-  const ids = gkmGetCharacterIds(m);
+      .gkm-pro-title-main h3 {
+        margin: 0 0 8px;
+        font-size: 24px;
+        color: #fff;
+        text-shadow: 0 0 14px rgba(124, 58, 237, 0.75);
+      }
 
-  if (!ids.length) {
-    box.innerHTML = `<div class="gkm-pro-empty">Персонажи для этого тайтла пока не добавлены.</div>`;
-    return;
-  }
+      .gkm-pro-subtitle {
+        margin: 0;
+        color: #a5b4fc;
+        font-size: 14px;
+      }
 
-  const allCharacters = await gkmLoadCharacters();
-  const map = new Map(allCharacters.map(ch => [String(ch.id), ch]));
+      .gkm-pro-score {
+        min-width: 116px;
+        padding: 12px;
+        border-radius: 18px;
+        text-align: center;
+        background: linear-gradient(180deg, #00e5ff, #7b2cff);
+        color: #020617;
+        font-weight: 1000;
+        box-shadow: 0 0 24px rgba(34, 211, 238, 0.35);
+      }
 
-  const characters = ids.map(id => map.get(id)).filter(Boolean);
+      .gkm-pro-score-value {
+        font-size: 28px;
+        line-height: 1;
+      }
 
-  if (!characters.length) {
-    box.innerHTML = `<div class="gkm-pro-empty">ID персонажей есть, но карточки ещё не заполнены в data/characters.json.</div>`;
-    return;
-  }
+      .gkm-pro-score-label {
+        margin-top: 5px;
+        font-size: 12px;
+      }
 
-  box.innerHTML = characters.map(gkmCharacterCard).join("");
-}
+      .gkm-pro-section {
+        margin-top: 20px;
+      }
 
-function gkmReviewsHtml(m) {
-  const reviews = Array.isArray(m.reviews) ? m.reviews : [];
+      .gkm-pro-section h4 {
+        margin: 0 0 12px;
+        font-size: 18px;
+        color: #facc15;
+      }
 
-  if (!reviews.length) {
-    return `
-      <div class="gkm-pro-review">
-        <strong>Отзывы пока не добавлены</strong>
-        <p>Позже здесь будут оценки, плюсы, минусы и мнения пользователей.</p>
-      </div>
+      .gkm-pro-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 10px;
+      }
+
+      .gkm-pro-info-card {
+        padding: 12px;
+        border-radius: 16px;
+        background: rgba(15, 23, 42, 0.75);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+      }
+
+      .gkm-pro-info-label {
+        margin: 0 0 5px;
+        color: #94a3b8;
+        font-size: 12px;
+      }
+
+      .gkm-pro-info-value {
+        margin: 0;
+        color: #fff;
+        font-weight: 800;
+        line-height: 1.35;
+      }
+
+      .gkm-pro-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .gkm-pro-tag {
+        padding: 8px 11px;
+        border-radius: 999px;
+        background: rgba(124, 58, 237, 0.22);
+        border: 1px solid rgba(34, 211, 238, 0.25);
+        color: #e0f2fe;
+        font-weight: 800;
+        font-size: 13px;
+      }
+
+      .gkm-pro-character-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+        gap: 12px;
+      }
+
+      .gkm-pro-character-card {
+        overflow: hidden;
+        border-radius: 18px;
+        background: rgba(15, 23, 42, 0.82);
+        border: 1px solid rgba(124, 58, 237, 0.35);
+        box-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
+      }
+
+      .gkm-pro-character-img {
+        width: 100%;
+        aspect-ratio: 2 / 2.45;
+        object-fit: cover;
+        display: block;
+        background: #020617;
+      }
+
+      .gkm-pro-character-body {
+        padding: 10px;
+      }
+
+      .gkm-pro-character-name {
+        margin: 0 0 5px;
+        color: white;
+        font-weight: 900;
+        font-size: 14px;
+        line-height: 1.2;
+      }
+
+      .gkm-pro-character-role {
+        margin: 0;
+        color: #a5b4fc;
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .gkm-pro-empty {
+        padding: 12px;
+        border-radius: 16px;
+        background: rgba(15, 23, 42, 0.55);
+        color: #94a3b8;
+      }
+
+      .gkm-pro-review-box {
+        display: grid;
+        gap: 10px;
+      }
+
+      .gkm-pro-review {
+        padding: 13px;
+        border-radius: 16px;
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+      }
+
+      .gkm-pro-review strong {
+        color: #fff;
+      }
+
+      .gkm-pro-review p {
+        margin: 6px 0 0;
+        color: #cbd5e1;
+        line-height: 1.45;
+      }
+
+      @media (max-width: 700px) {
+        .gkm-pro-title-page {
+          padding: 14px;
+          border-radius: 18px;
+        }
+
+        .gkm-pro-head {
+          flex-direction: column;
+        }
+
+        .gkm-pro-title-main h3 {
+          font-size: 19px;
+        }
+
+        .gkm-pro-score {
+          width: 100%;
+        }
+
+        .gkm-pro-character-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
     `;
+
+    document.head.appendChild(style);
   }
 
-  return reviews.slice(0, 3).map(r => `
-    <div class="gkm-pro-review">
-      <strong>${escapeHtml(r.author || "Пользователь")} · ${escapeHtml(r.score || "—")}/10</strong>
-      <p>${escapeHtml(r.text || "")}</p>
-    </div>
-  `).join("");
-}
+  function val(value, fallback) {
+    fallback = fallback || "—";
 
-function gkmCreateProDetailsBlock(m) {
-  const rating = Number(getRating(m) || 0);
-  const votes = Number(getVotes(m) || 0);
+    if (Array.isArray(value)) {
+      return value.filter(Boolean).join(" · ") || fallback;
+    }
 
-  return `
-    <section id="gkmProTitlePage" class="gkm-pro-title-page">
-      <div class="gkm-pro-head">
-        <div class="gkm-pro-title-main">
-          <h3>${escapeHtml(titleOf(m))}</h3>
-          <p class="gkm-pro-subtitle">
-            ${escapeHtml(gkmValue(m.en || m.titleOriginal || m.originalTitle || m.nameOriginal, "Оригинальное название пока не добавлено"))}
-          </p>
-        </div>
-
-        <div class="gkm-pro-score">
-          <div class="gkm-pro-score-value">${rating ? rating.toFixed(1) : "—"}</div>
-          <div class="gkm-pro-score-label">${votes ? votes + " оценок" : "нет оценок"}</div>
-        </div>
-      </div>
-
-      <section class="gkm-pro-section">
-        <h4>Информация</h4>
-        <div class="gkm-pro-info-grid">
-          ${gkmInfoCard("Тип", gkmGetType(m))}
-          ${gkmInfoCard("Год", m.year)}
-          ${gkmInfoCard("Страна", m.country || m.countries)}
-          ${gkmInfoCard("Статус", m.status)}
-          ${gkmInfoCard("Эпизоды", m.episodes || m.episodeCount)}
-          ${gkmInfoCard("Длительность", m.duration || m.runtime)}
-          ${gkmInfoCard("Студия", m.studio || m.studios)}
-          ${gkmInfoCard("Первоисточник", m.source)}
-          ${gkmInfoCard("Возраст", m.ageRating || m.age)}
-          ${gkmInfoCard("Сезон", m.season)}
-        </div>
-      </section>
-
-      <section class="gkm-pro-section">
-        <h4>Жанры</h4>
-        ${gkmTagsHtml(getGenres(m))}
-      </section>
-
-      <section class="gkm-pro-section">
-        <h4>Темы и настроение</h4>
-        ${gkmTagsHtml(m.themes || m.tags || m.keywords)}
-      </section>
-
-      <section class="gkm-pro-section">
-        <h4>Персонажи</h4>
-        <div id="gkmProCharacters" class="gkm-pro-character-grid">
-          <div class="gkm-pro-empty">Загружаю персонажей...</div>
-        </div>
-      </section>
-
-      <section class="gkm-pro-section">
-        <h4>Отзывы</h4>
-        <div class="gkm-pro-review-box">
-          ${gkmReviewsHtml(m)}
-        </div>
-      </section>
-    </section>
-  `;
-}
-
-function gkmRenderProDetails(m) {
-  const slot = document.getElementById("gkmProSlot");
-  if (!slot) return;
-
-  slot.innerHTML = gkmCreateProDetailsBlock(m);
-  gkmRenderCharacters(m);
-}
-
-if (typeof openDetails === "function") {
-  const gkmOldOpenDetails = openDetails;
-
-  openDetails = function(m) {
-    gkmOldOpenDetails(m);
-
-    setTimeout(() => {
-      gkmRenderProDetails(m);
-    }, 80);
-  };
-}
-
-
-var gkmCharactersCache = null;
-var gkmJikanAnimeCache = new Map();
-var gkmJikanCharactersCache = new Map();
-
-function gkmValue(value, fallback = "—") {
-  if (Array.isArray(value)) {
-    return value.filter(Boolean).join(" · ") || fallback;
+    return String(value || "").trim() || fallback;
   }
 
-  return String(value || "").trim() || fallback;
-}
+  function trStatus(status) {
+    var s = String(status || "").toLowerCase();
 
-function gkmTranslateStatus(status) {
-  const s = String(status || "").toLowerCase();
+    if (!s) return "";
 
-  if (!s) return "";
+    if (s.indexOf("finished") !== -1) return "Вышло";
+    if (s.indexOf("currently") !== -1) return "Выходит";
+    if (s.indexOf("not yet") !== -1) return "Анонс";
+    if (s.indexOf("airing") !== -1) return "Выходит";
 
-  if (s.includes("finished")) return "Вышло";
-  if (s.includes("currently")) return "Выходит";
-  if (s.includes("not yet")) return "Анонс";
-  if (s.includes("airing")) return "Выходит";
+    return status;
+  }
 
-  return status;
-}
+  function trSeason(season) {
+    var s = String(season || "").toLowerCase();
 
-function gkmTranslateSeason(season) {
-  const s = String(season || "").toLowerCase();
+    if (s === "winter") return "Зима";
+    if (s === "spring") return "Весна";
+    if (s === "summer") return "Лето";
+    if (s === "fall") return "Осень";
 
-  const map = {
-    winter: "Зима",
-    spring: "Весна",
-    summer: "Лето",
-    fall: "Осень"
-  };
+    return season;
+  }
 
-  return map[s] || season;
-}
+  function trDuration(duration) {
+    return String(duration || "")
+      .replace(/per ep/gi, "за серию")
+      .replace(/min/gi, "мин")
+      .replace(/hr/gi, "ч");
+  }
 
-function gkmTranslateDuration(duration) {
-  return String(duration || "")
-    .replace("per ep", "за серию")
-    .replace("min", "мин")
-    .replace("hr", "ч");
-}
+  function trRole(role) {
+    var s = String(role || "").toLowerCase();
 
-function gkmTranslateRole(role) {
-  const s = String(role || "").toLowerCase();
+    if (s === "main") return "Главный персонаж";
+    if (s === "supporting") return "Второстепенный персонаж";
 
-  if (s === "main") return "Главный персонаж";
-  if (s === "supporting") return "Второстепенный персонаж";
+    return role || "Персонаж";
+  }
 
-  return role || "Персонаж";
-}
+  function getMalId(m) {
+    return m.mal_id || m.malId || m.malID || m.idMal || "";
+  }
 
-function gkmGetMalId(m) {
-  return m.mal_id || m.malId || m.malID || m.idMal || "";
-}
+  async function fetchJson(url) {
+    try {
+      var res = await fetch(url, { cache: "force-cache" });
 
-async function gkmFetchJson(url) {
-  try {
-    const res = await fetch(url, { cache: "force-cache" });
+      if (!res.ok) return null;
 
-    if (!res.ok) {
+      return await res.json();
+    } catch (e) {
+      console.warn("GKM fetch error:", e);
       return null;
     }
-
-    return await res.json();
-  } catch (e) {
-    console.warn("GKM fetch error:", e);
-    return null;
-  }
-}
-
-async function gkmLoadCharacters() {
-  if (gkmCharactersCache) {
-    return gkmCharactersCache;
   }
 
-  try {
-    const res = await fetch("data/characters.json?v=" + Date.now(), {
-      cache: "no-store"
-    });
+  async function loadCharactersFile() {
+    if (charactersCache) return charactersCache;
 
-    if (!res.ok) {
-      throw new Error("characters.json not found");
+    try {
+      var res = await fetch("data/characters.json?v=" + Date.now(), {
+        cache: "no-store"
+      });
+
+      if (!res.ok) throw new Error("characters.json not found");
+
+      var data = await res.json();
+
+      charactersCache = Array.isArray(data) ? data : data.characters || [];
+
+      return charactersCache;
+    } catch (e) {
+      console.warn("characters.json не найден или пустой:", e);
+      charactersCache = [];
+      return [];
+    }
+  }
+
+  async function findAnime(m) {
+    var malId = getMalId(m);
+
+    if (malId) {
+      var idKey = "id:" + malId;
+
+      if (animeCache.has(idKey)) return animeCache.get(idKey);
+
+      var byId = await fetchJson(
+        "https://api.jikan.moe/v4/anime/" + encodeURIComponent(malId)
+      );
+
+      var animeById = byId && byId.data ? byId.data : null;
+
+      animeCache.set(idKey, animeById);
+
+      return animeById;
     }
 
-    const data = await res.json();
+    var title = m.en || m.ru || m.title || m.name || (typeof titleOf === "function" ? titleOf(m) : "");
+    var searchKey = "search:" + String(title).toLowerCase();
 
-    gkmCharactersCache = Array.isArray(data) ? data : data.characters || [];
+    if (animeCache.has(searchKey)) return animeCache.get(searchKey);
 
-    return gkmCharactersCache;
-  } catch (e) {
-    console.warn("Персонажи из data/characters.json пока не загружены:", e);
-
-    gkmCharactersCache = [];
-
-    return [];
-  }
-}
-
-async function gkmFindAnimeOnJikan(m) {
-  const malId = gkmGetMalId(m);
-
-  if (malId) {
-    const key = "id:" + malId;
-
-    if (gkmJikanAnimeCache.has(key)) {
-      return gkmJikanAnimeCache.get(key);
-    }
-
-    const data = await gkmFetchJson(
-      "https://api.jikan.moe/v4/anime/" + encodeURIComponent(malId)
+    var search = await fetchJson(
+      "https://api.jikan.moe/v4/anime?q=" + encodeURIComponent(title) + "&limit=1"
     );
 
-    const anime = data && data.data ? data.data : null;
+    var anime =
+      search && Array.isArray(search.data) && search.data.length
+        ? search.data[0]
+        : null;
 
-    gkmJikanAnimeCache.set(key, anime);
+    animeCache.set(searchKey, anime);
 
     return anime;
   }
 
-  const title = m.en || m.ru || m.title || m.name || titleOf(m);
-  const key = "search:" + String(title).toLowerCase();
+  async function hydrateAnimeInfo(m) {
+    if (!m) return m;
 
-  if (gkmJikanAnimeCache.has(key)) {
-    return gkmJikanAnimeCache.get(key);
-  }
+    if (typeof isAnimeItem === "function" && !isAnimeItem(m)) {
+      return m;
+    }
 
-  const search = await gkmFetchJson(
-    "https://api.jikan.moe/v4/anime?q=" + encodeURIComponent(title) + "&limit=1"
-  );
+    var anime = await findAnime(m);
 
-  const anime =
-    search && Array.isArray(search.data) && search.data.length
-      ? search.data[0]
-      : null;
+    if (!anime) return m;
 
-  gkmJikanAnimeCache.set(key, anime);
+    if (!m.episodes && anime.episodes) m.episodes = anime.episodes;
+    if (!m.status && anime.status) m.status = trStatus(anime.status);
+    if (!m.duration && anime.duration) m.duration = trDuration(anime.duration);
+    if (!m.ageRating && anime.rating) m.ageRating = anime.rating;
 
-  return anime;
-}
+    if (!m.season && anime.season && anime.year) {
+      m.season = trSeason(anime.season) + " " + anime.year;
+    }
 
-async function gkmHydrateAnimeInfo(m) {
-  if (!m) return m;
+    if (!m.studio && Array.isArray(anime.studios) && anime.studios.length) {
+      m.studio = anime.studios.map(function (x) {
+        return x.name;
+      }).filter(Boolean).join(" · ");
+    }
 
-  if (typeof isAnimeItem === "function" && !isAnimeItem(m)) {
+    if (!m.source && anime.source) m.source = anime.source;
+    if (!m.country) m.country = "Япония";
+    if (!m.en && anime.title) m.en = anime.title;
+    if (!m.titleOriginal && anime.title_japanese) m.titleOriginal = anime.title_japanese;
+
+    if ((!m.themes || !m.themes.length) && Array.isArray(anime.themes)) {
+      m.themes = anime.themes.map(function (x) {
+        return x.name;
+      }).filter(Boolean);
+    }
+
+    if ((!m.genres || !m.genres.length) && Array.isArray(anime.genres)) {
+      m.genres = anime.genres.map(function (x) {
+        return x.name;
+      }).filter(Boolean);
+    }
+
     return m;
   }
 
-  const anime = await gkmFindAnimeOnJikan(m);
+  async function loadJikanCharacters(m) {
+    if (!m) return [];
 
-  if (!anime) {
-    return m;
+    if (typeof isAnimeItem === "function" && !isAnimeItem(m)) {
+      return [];
+    }
+
+    var anime = await findAnime(m);
+
+    if (!anime || !anime.mal_id) return [];
+
+    var key = String(anime.mal_id);
+
+    if (animeCharactersCache.has(key)) {
+      return animeCharactersCache.get(key);
+    }
+
+    var data = await fetchJson(
+      "https://api.jikan.moe/v4/anime/" + anime.mal_id + "/characters"
+    );
+
+    var characters =
+      data && Array.isArray(data.data)
+        ? data.data.slice(0, 12).map(function (item) {
+            var ch = item.character || {};
+            var voiceActors = Array.isArray(item.voice_actors)
+              ? item.voice_actors
+              : [];
+
+            var jpVoice =
+              voiceActors.find(function (x) {
+                return x.language === "Japanese";
+              }) ||
+              voiceActors[0] ||
+              null;
+
+            return {
+              id: "jikan-" + ch.mal_id,
+              nameRu: ch.name || "Без имени",
+              nameOriginal: ch.name || "",
+              image:
+                ch.images && ch.images.jpg
+                  ? ch.images.jpg.image_url
+                  : "",
+              role: trRole(item.role),
+              voice:
+                jpVoice && jpVoice.person
+                  ? jpVoice.person.name
+                  : ""
+            };
+          })
+        : [];
+
+    animeCharactersCache.set(key, characters);
+
+    return characters;
   }
 
-  if (!m.episodes && anime.episodes) {
-    m.episodes = anime.episodes;
+  function infoCard(label, value) {
+    return (
+      '<div class="gkm-pro-info-card">' +
+      '<p class="gkm-pro-info-label">' + escapeHtml(label) + '</p>' +
+      '<p class="gkm-pro-info-value">' + escapeHtml(val(value)) + '</p>' +
+      '</div>'
+    );
   }
 
-  if (!m.status && anime.status) {
-    m.status = gkmTranslateStatus(anime.status);
+  function tagsHtml(items) {
+    var list = Array.isArray(items) ? items.filter(Boolean) : [];
+
+    if (!list.length) {
+      return '<div class="gkm-pro-empty">Пока не добавлено.</div>';
+    }
+
+    return (
+      '<div class="gkm-pro-tags">' +
+      list.map(function (x) {
+        return '<span class="gkm-pro-tag">' + escapeHtml(x) + '</span>';
+      }).join("") +
+      '</div>'
+    );
   }
 
-  if (!m.duration && anime.duration) {
-    m.duration = gkmTranslateDuration(anime.duration);
+  function getType(m) {
+    if (typeof isAnimeItem === "function" && isAnimeItem(m)) return "Аниме";
+    return m.type || "Тайтл";
   }
 
-  if (!m.ageRating && anime.rating) {
-    m.ageRating = anime.rating;
-  }
-
-  if (!m.season && anime.season && anime.year) {
-    m.season = gkmTranslateSeason(anime.season) + " " + anime.year;
-  }
-
-  if (!m.studio && Array.isArray(anime.studios) && anime.studios.length) {
-    m.studio = anime.studios.map(x => x.name).filter(Boolean).join(" · ");
-  }
-
-  if (!m.source && anime.source) {
-    m.source = anime.source;
-  }
-
-  if (!m.country) {
-    m.country = "Япония";
-  }
-
-  if (!m.en && anime.title) {
-    m.en = anime.title;
-  }
-
-  if (!m.titleOriginal && anime.title_japanese) {
-    m.titleOriginal = anime.title_japanese;
-  }
-
-  if ((!m.themes || !m.themes.length) && Array.isArray(anime.themes)) {
-    m.themes = anime.themes.map(x => x.name).filter(Boolean);
-  }
-
-  if ((!m.genres || !m.genries) && Array.isArray(anime.genres) && anime.genres.length) {
-    m.genres = anime.genres.map(x => x.name).filter(Boolean);
-  }
-
-  return m;
-}
-
-async function gkmLoadJikanCharacters(m) {
-  if (!m) return [];
-
-  if (typeof isAnimeItem === "function" && !isAnimeItem(m)) {
+  function getCharacterIds(m) {
+    if (Array.isArray(m.characters)) return m.characters.map(String);
+    if (Array.isArray(m.characterIds)) return m.characterIds.map(String);
     return [];
   }
 
-  const anime = await gkmFindAnimeOnJikan(m);
+  function characterCard(ch) {
+    var img = ch.image || ch.poster || ch.photo || "";
 
-  if (!anime || !anime.mal_id) {
-    return [];
-  }
-
-  const key = String(anime.mal_id);
-
-  if (gkmJikanCharactersCache.has(key)) {
-    return gkmJikanCharactersCache.get(key);
-  }
-
-  const data = await gkmFetchJson(
-    "https://api.jikan.moe/v4/anime/" + anime.mal_id + "/characters"
-  );
-
-  const characters =
-    data && Array.isArray(data.data)
-      ? data.data.slice(0, 12).map(item => {
-          const ch = item.character || {};
-
-          const voiceActors = Array.isArray(item.voice_actors)
-            ? item.voice_actors
-            : [];
-
-          const jpVoice =
-            voiceActors.find(x => x.language === "Japanese") ||
-            voiceActors[0] ||
-            null;
-
-          return {
-            id: "jikan-" + ch.mal_id,
-            nameRu: ch.name || "Без имени",
-            nameOriginal: ch.name || "",
-            image:
-              ch.images && ch.images.jpg
-                ? ch.images.jpg.image_url
-                : "",
-            role: gkmTranslateRole(item.role),
-            voice:
-              jpVoice && jpVoice.person
-                ? jpVoice.person.name
-                : ""
-          };
-        })
-      : [];
-
-  gkmJikanCharactersCache.set(key, characters);
-
-  return characters;
-}
-
-function gkmInfoCard(label, value) {
-  return `
-    <div class="gkm-pro-info-card">
-      <p class="gkm-pro-info-label">${escapeHtml(label)}</p>
-      <p class="gkm-pro-info-value">${escapeHtml(gkmValue(value))}</p>
-    </div>
-  `;
-}
-
-function gkmTagsHtml(items) {
-  const list = Array.isArray(items) ? items.filter(Boolean) : [];
-
-  if (!list.length) {
-    return `<div class="gkm-pro-empty">Пока не добавлено.</div>`;
-  }
-
-  return `
-    <div class="gkm-pro-tags">
-      ${list
-        .map(x => `<span class="gkm-pro-tag">${escapeHtml(x)}</span>`)
-        .join("")}
-    </div>
-  `;
-}
-
-function gkmGetType(m) {
-  if (typeof isAnimeItem === "function" && isAnimeItem(m)) {
-    return "Аниме";
-  }
-
-  return m.type || "Тайтл";
-}
-
-function gkmGetCharacterIds(m) {
-  if (Array.isArray(m.characters)) {
-    return m.characters.map(String);
-  }
-
-  if (Array.isArray(m.characterIds)) {
-    return m.characterIds.map(String);
-  }
-
-  return [];
-}
-
-function gkmCharacterCard(ch) {
-  const img = ch.image || ch.poster || ch.photo || "";
-
-  return `
-    <article class="gkm-pro-character-card">
-      ${
+    return (
+      '<article class="gkm-pro-character-card">' +
+      (
         img
-          ? `<img class="gkm-pro-character-img" src="${escapeAttr(img)}" alt="" loading="lazy">`
-          : `<div class="gkm-pro-character-img"></div>`
+          ? '<img class="gkm-pro-character-img" src="' + escapeAttr(img) + '" alt="" loading="lazy">'
+          : '<div class="gkm-pro-character-img"></div>'
+      ) +
+      '<div class="gkm-pro-character-body">' +
+      '<p class="gkm-pro-character-name">' +
+      escapeHtml(ch.nameRu || ch.ru || ch.name || ch.nameOriginal || "Без имени") +
+      '</p>' +
+      '<p class="gkm-pro-character-role">' +
+      escapeHtml(ch.role || "Персонаж") +
+      '</p>' +
+      (
+        ch.voice
+          ? '<p class="gkm-pro-character-role">Сейю: ' + escapeHtml(ch.voice) + '</p>'
+          : ''
+      ) +
+      '</div>' +
+      '</article>'
+    );
+  }
+
+  async function renderCharacters(m) {
+    var box = document.getElementById("gkmProCharacters");
+
+    if (!box) return;
+
+    var ids = getCharacterIds(m);
+
+    if (ids.length) {
+      var allCharacters = await loadCharactersFile();
+      var map = new Map(allCharacters.map(function (ch) {
+        return [String(ch.id), ch];
+      }));
+
+      var characters = ids.map(function (id) {
+        return map.get(id);
+      }).filter(Boolean);
+
+      if (characters.length) {
+        box.innerHTML = characters.map(characterCard).join("");
+        return;
       }
+    }
 
-      <div class="gkm-pro-character-body">
-        <p class="gkm-pro-character-name">
-          ${escapeHtml(ch.nameRu || ch.ru || ch.name || ch.nameOriginal || "Без имени")}
-        </p>
+    box.innerHTML = '<div class="gkm-pro-empty">Ищу персонажей...</div>';
 
-        <p class="gkm-pro-character-role">
-          ${escapeHtml(ch.role || "Персонаж")}
-        </p>
+    var jikanCharacters = await loadJikanCharacters(m);
 
-        ${
-          ch.voice
-            ? `<p class="gkm-pro-character-role">Сейю: ${escapeHtml(ch.voice)}</p>`
-            : ""
-        }
-      </div>
-    </article>
-  `;
-}
-
-async function gkmRenderCharacters(m) {
-  const box = document.getElementById("gkmProCharacters");
-
-  if (!box) return;
-
-  const ids = gkmGetCharacterIds(m);
-
-  if (ids.length) {
-    const allCharacters = await gkmLoadCharacters();
-    const map = new Map(allCharacters.map(ch => [String(ch.id), ch]));
-
-    const characters = ids.map(id => map.get(id)).filter(Boolean);
-
-    if (characters.length) {
-      box.innerHTML = characters.map(gkmCharacterCard).join("");
+    if (!jikanCharacters.length) {
+      box.innerHTML = '<div class="gkm-pro-empty">Персонажи для этого тайтла пока не найдены.</div>';
       return;
     }
+
+    box.innerHTML = jikanCharacters.map(characterCard).join("");
   }
 
-  box.innerHTML = `<div class="gkm-pro-empty">Ищу персонажей...</div>`;
+  function reviewsHtml(m) {
+    var reviews = Array.isArray(m.reviews) ? m.reviews : [];
 
-  const jikanCharacters = await gkmLoadJikanCharacters(m);
+    if (!reviews.length) {
+      return (
+        '<div class="gkm-pro-review">' +
+        '<strong>Отзывы пока не добавлены</strong>' +
+        '<p>Позже здесь будут оценки, плюсы, минусы и мнения пользователей.</p>' +
+        '</div>'
+      );
+    }
 
-  if (!jikanCharacters.length) {
-    box.innerHTML = `<div class="gkm-pro-empty">Персонажи для этого тайтла пока не найдены.</div>`;
-    return;
+    return reviews.slice(0, 3).map(function (r) {
+      return (
+        '<div class="gkm-pro-review">' +
+        '<strong>' +
+        escapeHtml(r.author || "Пользователь") +
+        ' · ' +
+        escapeHtml(r.score || "—") +
+        '/10</strong>' +
+        '<p>' + escapeHtml(r.text || "") + '</p>' +
+        '</div>'
+      );
+    }).join("");
   }
 
-  box.innerHTML = jikanCharacters.map(gkmCharacterCard).join("");
-}
+  function createBlock(m) {
+    var rating = Number(getRating(m) || 0);
+    var votes = Number(getVotes(m) || 0);
 
-function gkmReviewsHtml(m) {
-  const reviews = Array.isArray(m.reviews) ? m.reviews : [];
+    return (
+      '<section id="gkmProTitlePage" class="gkm-pro-title-page">' +
 
-  if (!reviews.length) {
-    return `
-      <div class="gkm-pro-review">
-        <strong>Отзывы пока не добавлены</strong>
-        <p>Позже здесь будут оценки, плюсы, минусы и мнения пользователей.</p>
-      </div>
-    `;
+      '<div class="gkm-pro-head">' +
+      '<div class="gkm-pro-title-main">' +
+      '<h3>' + escapeHtml(titleOf(m)) + '</h3>' +
+      '<p class="gkm-pro-subtitle">' +
+      escapeHtml(val(m.en || m.titleOriginal || m.originalTitle || m.nameOriginal, "Оригинальное название пока не добавлено")) +
+      '</p>' +
+      '</div>' +
+
+      '<div class="gkm-pro-score">' +
+      '<div class="gkm-pro-score-value">' + (rating ? rating.toFixed(1) : "—") + '</div>' +
+      '<div class="gkm-pro-score-label">' + (votes ? votes + " оценок" : "нет оценок") + '</div>' +
+      '</div>' +
+      '</div>' +
+
+      '<section class="gkm-pro-section">' +
+      '<h4>Информация</h4>' +
+      '<div class="gkm-pro-info-grid">' +
+      infoCard("Тип", getType(m)) +
+      infoCard("Год", m.year) +
+      infoCard("Страна", m.country || m.countries) +
+      infoCard("Статус", m.status) +
+      infoCard("Эпизоды", m.episodes || m.episodeCount) +
+      infoCard("Длительность", m.duration || m.runtime) +
+      infoCard("Студия", m.studio || m.studios) +
+      infoCard("Первоисточник", m.source) +
+      infoCard("Возраст", m.ageRating || m.age) +
+      infoCard("Сезон", m.season) +
+      '</div>' +
+      '</section>' +
+
+      '<section class="gkm-pro-section">' +
+      '<h4>Жанры</h4>' +
+      tagsHtml(typeof getGenres === "function" ? getGenres(m) : m.genres) +
+      '</section>' +
+
+      '<section class="gkm-pro-section">' +
+      '<h4>Темы и настроение</h4>' +
+      tagsHtml(m.themes || m.tags || m.keywords) +
+      '</section>' +
+
+      '<section class="gkm-pro-section">' +
+      '<h4>Персонажи</h4>' +
+      '<div id="gkmProCharacters" class="gkm-pro-character-grid">' +
+      '<div class="gkm-pro-empty">Загружаю персонажей...</div>' +
+      '</div>' +
+      '</section>' +
+
+      '<section class="gkm-pro-section">' +
+      '<h4>Отзывы</h4>' +
+      '<div class="gkm-pro-review-box">' +
+      reviewsHtml(m) +
+      '</div>' +
+      '</section>' +
+
+      '</section>'
+    );
   }
 
-  return reviews
-    .slice(0, 3)
-    .map(
-      r => `
-        <div class="gkm-pro-review">
-          <strong>${escapeHtml(r.author || "Пользователь")} · ${escapeHtml(r.score || "—")}/10</strong>
-          <p>${escapeHtml(r.text || "")}</p>
-        </div>
-      `
-    )
-    .join("");
-}
+  function renderProDetails(m) {
+    var slot = document.getElementById("gkmProSlot");
 
-function gkmCreateProDetailsBlock(m) {
-  const rating = Number(getRating(m) || 0);
-  const votes = Number(getVotes(m) || 0);
+    if (!slot) {
+      console.warn("Не найден #gkmProSlot в index.html");
+      return;
+    }
 
-  return `
-    <section id="gkmProTitlePage" class="gkm-pro-title-page">
-      <div class="gkm-pro-head">
-        <div class="gkm-pro-title-main">
-          <h3>${escapeHtml(titleOf(m))}</h3>
-
-          <p class="gkm-pro-subtitle">
-            ${escapeHtml(
-              gkmValue(
-                m.en || m.titleOriginal || m.originalTitle || m.nameOriginal,
-                "Оригинальное название пока не добавлено"
-              )
-            )}
-          </p>
-        </div>
-
-        <div class="gkm-pro-score">
-          <div class="gkm-pro-score-value">
-            ${rating ? rating.toFixed(1) : "—"}
-          </div>
-
-          <div class="gkm-pro-score-label">
-            ${votes ? votes + " оценок" : "нет оценок"}
-          </div>
-        </div>
-      </div>
-
-      <section class="gkm-pro-section">
-        <h4>Информация</h4>
-
-        <div class="gkm-pro-info-grid">
-          ${gkmInfoCard("Тип", gkmGetType(m))}
-          ${gkmInfoCard("Год", m.year)}
-          ${gkmInfoCard("Страна", m.country || m.countries)}
-          ${gkmInfoCard("Статус", m.status)}
-          ${gkmInfoCard("Эпизоды", m.episodes || m.episodeCount)}
-          ${gkmInfoCard("Длительность", m.duration || m.runtime)}
-          ${gkmInfoCard("Студия", m.studio || m.studios)}
-          ${gkmInfoCard("Первоисточник", m.source)}
-          ${gkmInfoCard("Возраст", m.ageRating || m.age)}
-          ${gkmInfoCard("Сезон", m.season)}
-        </div>
-      </section>
-
-      <section class="gkm-pro-section">
-        <h4>Жанры</h4>
-        ${gkmTagsHtml(getGenres(m))}
-      </section>
-
-      <section class="gkm-pro-section">
-        <h4>Темы и настроение</h4>
-        ${gkmTagsHtml(m.themes || m.tags || m.keywords)}
-      </section>
-
-      <section class="gkm-pro-section">
-        <h4>Персонажи</h4>
-
-        <div id="gkmProCharacters" class="gkm-pro-character-grid">
-          <div class="gkm-pro-empty">Загружаю персонажей...</div>
-        </div>
-      </section>
-
-      <section class="gkm-pro-section">
-        <h4>Отзывы</h4>
-
-        <div class="gkm-pro-review-box">
-          ${gkmReviewsHtml(m)}
-        </div>
-      </section>
-    </section>
-  `;
-}
-
-function gkmRenderProDetails(m) {
-  const slot = document.getElementById("gkmProSlot");
-
-  if (!slot) {
-    console.warn("Не найден #gkmProSlot в index.html");
-    return;
+    injectProDetailsStyle();
+    slot.innerHTML = createBlock(m);
+    renderCharacters(m);
   }
 
-  slot.innerHTML = gkmCreateProDetailsBlock(m);
+  if (typeof openDetails === "function") {
+    var oldOpenDetails = openDetails;
 
-  gkmRenderCharacters(m);
-}
+    openDetails = function (m) {
+      oldOpenDetails(m);
 
-/* =========================================================
-   Подключение к старой функции openDetails
-========================================================= */
-
-if (typeof openDetails === "function" && !window.__gkmProDetailsInstalled) {
-  window.__gkmProDetailsInstalled = true;
-
-  const oldOpenDetails = openDetails;
-
-  openDetails = function(m) {
-    oldOpenDetails(m);
-
-    setTimeout(async function() {
-      await gkmHydrateAnimeInfo(m);
-      gkmRenderProDetails(m);
-    }, 150);
-  };
-}
+      setTimeout(async function () {
+        await hydrateAnimeInfo(m);
+        renderProDetails(m);
+      }, 150);
+    };
+  }
+})();
