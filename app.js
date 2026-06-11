@@ -1,5 +1,5 @@
 // FIX: OPM season matching by year, prevents Season 1 card from showing Season 3 players.
-const GKM_APP_CLEAN_VERSION = "clean-cast-v4-local-cache-2026-06-12";
+const GKM_APP_CLEAN_VERSION = "clean-cast-v5-fix-chunk-paths-2026-06-12";
 const INDEX_URL = "data/index.json";
 const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
@@ -833,14 +833,33 @@ async function loadRemainingChunksInBackground(index, chunks, movies) {
 }
 
 async function fetchChunkMovies(chunk) {
-  const url = chunk.file || chunk.url;
+  let url = "";
+
+  if (typeof chunk === "string") {
+    url = chunk;
+  } else if (chunk && typeof chunk === "object") {
+    url = chunk.file || chunk.url || chunk.path || chunk.src || "";
+  }
+
   if (!url) return [];
+
+  url = String(url).trim().replace(/^\/+/, "");
+
+  // Если в data/index.json указано просто "chunk_001.json",
+  // то файл реально лежит в data/chunk_001.json.
+  if (!url.startsWith("data/") && !url.startsWith("http")) {
+    url = "data/" + url;
+  }
 
   let part = chunkCache.get(url);
 
   if (!part) {
     const res = await fetch(url + "?v=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) return [];
+    if (!res.ok) {
+      console.warn("Не загрузился чанк:", url, res.status);
+      return [];
+    }
+
     part = await res.json();
     chunkCache.set(url, part);
   }
