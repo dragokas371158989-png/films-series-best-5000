@@ -7438,6 +7438,162 @@ addRutubeSeasonExactList({
 
     box.innerHTML = jikanCharacters.map(characterCard).join("");
   }
+function isMovieOrSeriesForCast(m) {
+var type = String(getType(m) || m.type || "").toLowerCase();
+return type.includes("фильм") || type.includes("сериал");
+}
+
+function tmdbKindForCast(m) {
+var type = String(getType(m) || m.type || "").toLowerCase();
+return type.includes("сериал") ? "tv" : "movie";
+}
+
+async function tmdbCastFetch(url) {
+try {
+if (typeof fetchJsonWithTimeout === "function" && typeof tmdbHeaders === "function") {
+return await fetchJsonWithTimeout(url, tmdbHeaders());
+}
+
+```
+if (typeof TMDB_TOKEN === "undefined" || !TMDB_TOKEN) {
+  return null;
+}
+
+var res = await fetch(url, {
+  headers: {
+    Authorization: "Bearer " + TMDB_TOKEN,
+    accept: "application/json"
+  }
+});
+
+if (!res.ok) return null;
+return await res.json();
+```
+
+} catch (e) {
+console.warn("TMDB cast error:", e);
+return null;
+}
+}
+
+async function findTmdbIdForCast(m) {
+var directId = m.tmdbId || m.tmdb_id;
+
+if (directId) {
+return {
+id: directId,
+kind: tmdbKindForCast(m)
+};
+}
+
+var kind = tmdbKindForCast(m);
+var title = m.en || m.originalTitle || m.titleOriginal || titleOf(m);
+var year = String(m.year || "").trim();
+
+if (!title) return null;
+
+var url =
+"https://api.themoviedb.org/3/search/" +
+kind +
+"?query=" +
+encodeURIComponent(title) +
+"&language=ru-RU&include_adult=false&page=1";
+
+var data = await tmdbCastFetch(url);
+
+if (!data || !Array.isArray(data.results) || !data.results.length) {
+return null;
+}
+
+var best = data.results[0];
+
+if (year) {
+var sameYear = data.results.find(function (x) {
+var d = x.release_date || x.first_air_date || "";
+return String(d).slice(0, 4) === year;
+});
+
+```
+if (sameYear) best = sameYear;
+```
+
+}
+
+if (!best || !best.id) return null;
+
+return {
+id: best.id,
+kind: kind
+};
+}
+
+function movieCastCard(p) {
+var img = p.profile_path
+? "https://image.tmdb.org/t/p/w185" + p.profile_path
+: "";
+
+var name = p.name || p.original_name || "Актёр";
+var role = p.character || "роль не указана";
+
+return (
+'<div class="gkm-pro-character-card">' +
+(img
+? '<img class="gkm-pro-character-img" src="' + escapeHtml(img) + '" loading="lazy" alt="' + escapeHtml(name) + '">'
+: '<div class="gkm-pro-character-img" style="display:flex;align-items:center;justify-content:center;color:#94a3b8;">Нет фото</div>') +
+'<div class="gkm-pro-character-body">' +
+'<p class="gkm-pro-character-name">' + escapeHtml(name) + '</p>' +
+'<p class="gkm-pro-character-role">' + escapeHtml(role) + '</p>' +
+'</div>' +
+'</div>'
+);
+}
+
+async function loadMovieTvCast(m) {
+var found = await findTmdbIdForCast(m);
+
+if (!found || !found.id) return [];
+
+var cacheKey = "gkm_movie_tv_cast_" + found.kind + "_" + found.id;
+
+try {
+var cached = localStorage.getItem(cacheKey);
+if (cached) {
+var parsed = JSON.parse(cached);
+if (Array.isArray(parsed)) return parsed;
+}
+} catch (e) {}
+
+var url =
+"https://api.themoviedb.org/3/" +
+found.kind +
+"/" +
+found.id +
+"/credits?language=ru-RU";
+
+var data = await tmdbCastFetch(url);
+var cast = data && Array.isArray(data.cast) ? data.cast : [];
+
+cast = cast
+.filter(function (p) {
+return p && (p.name || p.original_name);
+})
+.slice(0, 14)
+.map(function (p) {
+return {
+name: p.name || p.original_name || "",
+original_name: p.original_name || "",
+character: p.character || "",
+profile_path: p.profile_path || "",
+order: p.order || 0
+};
+});
+
+try {
+localStorage.setItem(cacheKey, JSON.stringify(cast));
+} catch (e) {}
+
+return cast;
+}
 
   function reviewsHtml(m) {
     var reviews = Array.isArray(m.reviews) ? m.reviews : [];
@@ -7513,9 +7669,9 @@ addRutubeSeasonExactList({
       '</section>' +
 
       '<section class="gkm-pro-section">' +
-      '<h4>Персонажи</h4>' +
+      '<h4>' + (isMovieOrSeriesForCast(m) ? 'Актёры и роли' : 'Персонажи') + '</h4>' +
       '<div id="gkmProCharacters" class="gkm-pro-character-grid">' +
-      '<div class="gkm-pro-empty">Загружаю персонажей...</div>' +
+      '<div class="gkm-pro-empty">' + (isMovieOrSeriesForCast(m) ? 'Загружаю актёров...' : 'Загружаю персонажей...') + '</div>' +
       '</div>' +
       '</section>' +
 
