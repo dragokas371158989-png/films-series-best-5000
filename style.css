@@ -1285,3 +1285,206 @@ button[data-reset] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+/* =========================================================
+   GKM PRO TITLE PAGE — ЭНЦИКЛОПЕДИЯ ТАЙТЛА
+========================================================= */
+
+.gkm-pro-title-page {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  background:
+    radial-gradient(circle at top left, rgba(34, 211, 238, 0.12), transparent 34%),
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.18), transparent 36%),
+    rgba(2, 6, 23, 0.78);
+  box-shadow:
+    0 0 26px rgba(34, 211, 238, 0.12),
+    inset 0 0 22px rgba(124, 58, 237, 0.08);
+}
+
+.gkm-pro-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.gkm-pro-title-main h3 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  color: #fff;
+  text-shadow: 0 0 14px rgba(124, 58, 237, 0.75);
+}
+
+.gkm-pro-subtitle {
+  margin: 0;
+  color: #a5b4fc;
+  font-size: 14px;
+}
+
+.gkm-pro-score {
+  min-width: 116px;
+  padding: 12px;
+  border-radius: 18px;
+  text-align: center;
+  background: linear-gradient(180deg, #00e5ff, #7b2cff);
+  color: #020617;
+  font-weight: 1000;
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.35);
+}
+
+.gkm-pro-score-value {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.gkm-pro-score-label {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.gkm-pro-section {
+  margin-top: 20px;
+}
+
+.gkm-pro-section h4 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: #facc15;
+}
+
+.gkm-pro-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.gkm-pro-info-card {
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.gkm-pro-info-label {
+  margin: 0 0 5px;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.gkm-pro-info-value {
+  margin: 0;
+  color: #fff;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.gkm-pro-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gkm-pro-tag {
+  padding: 8px 11px;
+  border-radius: 999px;
+  background: rgba(124, 58, 237, 0.22);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  color: #e0f2fe;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.gkm-pro-character-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+  gap: 12px;
+}
+
+.gkm-pro-character-card {
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.82);
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
+}
+
+.gkm-pro-character-img {
+  width: 100%;
+  aspect-ratio: 2 / 2.45;
+  object-fit: cover;
+  display: block;
+  background: #020617;
+}
+
+.gkm-pro-character-body {
+  padding: 10px;
+}
+
+.gkm-pro-character-name {
+  margin: 0 0 5px;
+  color: white;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.gkm-pro-character-role {
+  margin: 0;
+  color: #a5b4fc;
+  font-size: 12px;
+}
+
+.gkm-pro-empty {
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.55);
+  color: #94a3b8;
+}
+
+.gkm-pro-review-box {
+  display: grid;
+  gap: 10px;
+}
+
+.gkm-pro-review {
+  padding: 13px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.gkm-pro-review strong {
+  color: #fff;
+}
+
+.gkm-pro-review p {
+  margin: 6px 0 0;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+@media (max-width: 700px) {
+  .gkm-pro-title-page {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .gkm-pro-head {
+    flex-direction: column;
+  }
+
+  .gkm-pro-title-main h3 {
+    font-size: 19px;
+  }
+
+  .gkm-pro-score {
+    width: 100%;
+  }
+
+  .gkm-pro-character-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
