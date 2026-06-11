@@ -8755,4 +8755,41 @@ addRutubeSeasonExactList({
 
   console.log("GKM CHARACTER NATIVE STABLE установлен");
 })();
+/* ===== GKM EMERGENCY START FIX ===== */
+(function () {
+  if (window.__gkmEmergencyStartFix) return;
+  window.__gkmEmergencyStartFix = true;
 
+  function start() {
+    try {
+      if (typeof setupEvents === "function") {
+        setupEvents();
+      }
+
+      if (typeof loadData === "function") {
+        loadData().catch(function (e) {
+          if (typeof showError === "function") {
+            showError(e);
+          } else {
+            console.error(e);
+            const status = document.getElementById("statusText");
+            if (status) status.textContent = "Ошибка: " + (e.message || e);
+          }
+        });
+      } else {
+        const status = document.getElementById("statusText");
+        if (status) status.textContent = "Ошибка: loadData не найден в app.js";
+      }
+    } catch (e) {
+      console.error(e);
+      const status = document.getElementById("statusText");
+      if (status) status.textContent = "Ошибка запуска: " + (e.message || e);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
+})();
