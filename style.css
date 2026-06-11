@@ -1691,3 +1691,45 @@ button[data-reset] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+/* ===== GKM FIX PERSONAGES CARDS ===== */
+
+.gkm-pro-character-grid {
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important;
+  gap: 14px !important;
+}
+
+.gkm-pro-character-card {
+  max-width: 160px !important;
+}
+
+.gkm-pro-character-img {
+  width: 100% !important;
+  height: 180px !important;
+  aspect-ratio: auto !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.25);
+}
+
+.gkm-pro-character-name {
+  font-size: 13px !important;
+}
+
+.gkm-pro-character-role {
+  font-size: 11px !important;
+  line-height: 1.25 !important;
+}
+
+@media (max-width: 700px) {
+  .gkm-pro-character-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .gkm-pro-character-card {
+    max-width: none !important;
+  }
+
+  .gkm-pro-character-img {
+    height: 170px !important;
+  }
+}
