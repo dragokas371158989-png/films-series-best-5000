@@ -1,5 +1,5 @@
 // FIX: OPM season matching by year, prevents Season 1 card from showing Season 3 players.
-const GKM_APP_CLEAN_VERSION = "clean-cast-v5-fix-chunk-paths-2026-06-12";
+const GKM_APP_CLEAN_VERSION = "clean-cast-v6-no-browser-tmdb-fallback-2026-06-12";
 const INDEX_URL = "data/index.json";
 const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
@@ -7453,11 +7453,11 @@ addRutubeSeasonExactList({
   var movieCast = await loadMovieTvCastFromLocal(m);
 
       if (!movieCast.length) {
-        movieCast = await loadMovieTvCast(m);
+        movieCast = await loadEmbeddedCast(m);
       }
 
   if (!movieCast.length) {
-    box.innerHTML = '<div class="gkm-pro-empty">Актёры и роли для этого тайтла пока не найдены.</div>';
+    box.innerHTML = '<div class="gkm-pro-empty">Актёры пока не попали в локальный кеш. Нужно обновить data/cast_cache.json.</div>';
     return;
   }
 
@@ -7600,9 +7600,13 @@ async function findTmdbIdForCast(m) {
   }
 
   function movieCastCard(p) {
-var img = p.profile_path
-? "https://image.tmdb.org/t/p/w185" + p.profile_path
-: "";
+var img = "";
+
+if (p.profile_path) {
+  img = String(p.profile_path).startsWith("http")
+    ? p.profile_path
+    : "https://image.tmdb.org/t/p/w185" + p.profile_path;
+}
 
 var name = p.name || p.original_name || "Актёр";
 var role = p.character || "роль не указана";
@@ -7618,6 +7622,69 @@ return (
 '</div>' +
 '</div>'
 );
+}
+
+
+
+var GKM_EMBEDDED_CAST = {
+  "movie:155": [
+    { name: "Кристиан Бэйл", role: "Брюс Уэйн / Бэтмен", profile: "" },
+    { name: "Хит Леджер", role: "Джокер", profile: "" },
+    { name: "Аарон Экхарт", role: "Харви Дент / Двуликий", profile: "" },
+    { name: "Майкл Кейн", role: "Альфред", profile: "" },
+    { name: "Гэри Олдман", role: "Джеймс Гордон", profile: "" },
+    { name: "Морган Фримен", role: "Люциус Фокс", profile: "" },
+    { name: "Мэгги Джилленхол", role: "Рэйчел Доуз", profile: "" }
+  ],
+  "movie:157336": [
+    { name: "Мэттью Макконахи", role: "Купер", profile: "" },
+    { name: "Энн Хэтэуэй", role: "Амелия Брэнд", profile: "" },
+    { name: "Джессика Честейн", role: "Мёрф", profile: "" },
+    { name: "Майкл Кейн", role: "Профессор Брэнд", profile: "" },
+    { name: "Маккензи Фой", role: "Мёрф в детстве", profile: "" },
+    { name: "Мэтт Деймон", role: "Доктор Манн", profile: "" }
+  ],
+  "movie:13": [
+    { name: "Том Хэнкс", role: "Форрест Гамп", profile: "" },
+    { name: "Робин Райт", role: "Дженни Карран", profile: "" },
+    { name: "Гэри Синиз", role: "Лейтенант Дэн Тейлор", profile: "" },
+    { name: "Салли Филд", role: "Миссис Гамп", profile: "" }
+  ],
+  "movie:238": [
+    { name: "Марлон Брандо", role: "Дон Вито Корлеоне", profile: "" },
+    { name: "Аль Пачино", role: "Майкл Корлеоне", profile: "" },
+    { name: "Джеймс Каан", role: "Сонни Корлеоне", profile: "" },
+    { name: "Роберт Дюваль", role: "Том Хейген", profile: "" }
+  ],
+  "movie:27205": [
+    { name: "Леонардо ДиКаприо", role: "Дом Кобб", profile: "" },
+    { name: "Джозеф Гордон-Левитт", role: "Артур", profile: "" },
+    { name: "Эллиот Пейдж", role: "Ариадна", profile: "" },
+    { name: "Том Харди", role: "Имс", profile: "" },
+    { name: "Киллиан Мёрфи", role: "Роберт Фишер", profile: "" }
+  ],
+  "movie:603": [
+    { name: "Киану Ривз", role: "Нео", profile: "" },
+    { name: "Лоренс Фишбёрн", role: "Морфеус", profile: "" },
+    { name: "Кэрри-Энн Мосс", role: "Тринити", profile: "" },
+    { name: "Хьюго Уивинг", role: "Агент Смит", profile: "" }
+  ]
+};
+
+async function loadEmbeddedCast(m) {
+  var found = await findTmdbIdForCast(m);
+  if (!found || !found.id) return [];
+
+  var list = GKM_EMBEDDED_CAST[found.kind + ":" + found.id] || [];
+  return list.map(function (p) {
+    return {
+      name: p.name || "",
+      original_name: p.name || "",
+      character: p.role || "",
+      profile_path: p.profile || "",
+      order: 0
+    };
+  });
 }
 
 
