@@ -1,5 +1,5 @@
 // FIX: OPM season matching by year, prevents Season 1 card from showing Season 3 players.
-const GKM_APP_CLEAN_VERSION = "clean-cast-v2-direct-tmdb-2026-06-12";
+const GKM_APP_CLEAN_VERSION = "clean-cast-v3-direct-small-tmdb-id-2026-06-12";
 const INDEX_URL = "data/index.json";
 const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
@@ -7491,57 +7491,92 @@ return null;
 }
 
 async function findTmdbIdForCast(m) {
-var directId = m.tmdbId || m.tmdb_id;
+    var kind = tmdbKindForCast(m);
+    var directId = m.tmdbId || m.tmdb_id || m.tmdbID;
+    var numericId = Number(m.id || 0);
+    var sourceText = String(m.source || m.provider || m.category || "").toLowerCase();
 
-if (directId) {
-return {
-id: directId,
-kind: tmdbKindForCast(m)
-};
-}
+    // В базе TMDB-фильм может быть прямо id: 155, source: tmdb.
+    if (!directId && sourceText.includes("tmdb") && numericId > 0 && numericId < 2000000) {
+      directId = numericId;
+    }
 
-var kind = tmdbKindForCast(m);
-var title = m.en || m.originalTitle || m.titleOriginal || titleOf(m);
-var year = String(m.year || "").trim();
+    // Или как смещённый id.
+    if (!directId && kind === "movie" && numericId > 7000000 && numericId < 8000000) {
+      directId = numericId - 7000000;
+    }
 
-if (!title) return null;
+    if (!directId && kind === "tv" && numericId > 8000000 && numericId < 9000000) {
+      directId = numericId - 8000000;
+    }
 
-var url =
-"https://api.themoviedb.org/3/search/" +
-kind +
-"?query=" +
-encodeURIComponent(title) +
-"&language=ru-RU&include_adult=false&page=1";
+    if (directId) {
+      return {
+        id: directId,
+        kind: kind
+      };
+    }
 
-var data = await tmdbCastFetch(url);
+    var titleCandidates = [
+      m.en,
+      m.originalTitle,
+      m.titleOriginal,
+      m.original_name,
+      m.original_title,
+      titleOf(m),
+      m.ru,
+      m.title,
+      m.name
+    ].filter(Boolean);
 
-if (!data || !Array.isArray(data.results) || !data.results.length) {
-return null;
-}
+    var titles = [];
 
-var best = data.results[0];
+    titleCandidates.forEach(function (t) {
+      t = String(t || "").trim();
+      if (t && !titles.includes(t)) titles.push(t);
+    });
 
-if (year) {
-var sameYear = data.results.find(function (x) {
-var d = x.release_date || x.first_air_date || "";
-return String(d).slice(0, 4) === year;
-});
+    var year = String(m.year || "").trim();
 
-```
-if (sameYear) best = sameYear;
-```
+    for (var i = 0; i < titles.length; i++) {
+      var title = titles[i];
 
-}
+      var url =
+        "https://api.themoviedb.org/3/search/" +
+        kind +
+        "?query=" +
+        encodeURIComponent(title) +
+        "&language=ru-RU&include_adult=false&page=1";
 
-if (!best || !best.id) return null;
+      var data = await tmdbCastFetch(url);
 
-return {
-id: best.id,
-kind: kind
-};
-}
+      if (!data || !Array.isArray(data.results) || !data.results.length) {
+        continue;
+      }
 
-function movieCastCard(p) {
+      var best = data.results[0];
+
+      if (year) {
+        var sameYear = data.results.find(function (x) {
+          var d = x.release_date || x.first_air_date || "";
+          return String(d).slice(0, 4) === year;
+        });
+
+        if (sameYear) best = sameYear;
+      }
+
+      if (best && best.id) {
+        return {
+          id: best.id,
+          kind: kind
+        };
+      }
+    }
+
+    return null;
+  }
+
+  function movieCastCard(p) {
 var img = p.profile_path
 ? "https://image.tmdb.org/t/p/w185" + p.profile_path
 : "";
@@ -7567,7 +7602,7 @@ async function loadMovieTvCast(m) {
 
     if (!found || !found.id) return [];
 
-    var cacheKey = "gkm_movie_tv_cast_v2_" + found.kind + "_" + found.id;
+    var cacheKey = "gkm_movie_tv_cast_v3_" + found.kind + "_" + found.id;
 
     try {
       var cached = localStorage.getItem(cacheKey);
