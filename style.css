@@ -1533,3 +1533,74 @@ button[data-reset] {
     height: 170px !important;
   }
 }
+/* ===== GKM FULL WIDTH LOGO HEADER ===== */
+
+.topbar {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  min-height: 180px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  text-align: center !important;
+  background: #020617 !important;
+}
+
+/* убираем кнопки Тема / Обновить */
+.top-actions {
+  display: none !important;
+}
+
+/* блок с логотипом на всю ширину */
+.site-logo-wrap {
+  width: 100% !important;
+  height: 160px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+/* сам баннер */
+.site-logo {
+  width: 100% !important;
+  max-width: none !important;
+  height: 160px !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* текст загрузки под баннером */
+#statusText {
+  margin: 6px 0 10px !important;
+  text-align: center !important;
+  font-size: 13px !important;
+  color: #c7d2fe !important;
+}
+
+/* мобильная версия */
+@media (max-width: 700px) {
+  .topbar {
+    min-height: 135px !important;
+  }
+
+  .site-logo-wrap {
+    height: 115px !important;
+  }
+
+  .site-logo {
+    height: 115px !important;
+  }
+
+  #statusText {
+    font-size: 11px !important;
+    margin: 5px 0 8px !important;
+  }
+}
