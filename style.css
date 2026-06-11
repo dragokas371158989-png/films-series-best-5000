@@ -1848,3 +1848,96 @@ button[data-reset] {
     bottom: 8px;
   }
 }
+/* ===== GKM HEADER REAL FULL IMAGE FIX ===== */
+
+/* шапка */
+header.topbar {
+  width: 100vw !important;
+  height: 360px !important;
+  min-height: 360px !important;
+  margin: 0 !important;
+  margin-left: calc(50% - 50vw) !important;
+  padding: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: block !important;
+  background: #020617 !important;
+}
+
+/* первый div внутри header растягиваем */
+header.topbar > div:first-child {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+/* обёртка логотипа */
+header.topbar .site-logo-wrap {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  overflow: hidden !important;
+}
+
+/* сама картинка — на всю ширину и высоту */
+header.topbar img.site-logo {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* кнопки убрать */
+header.topbar .top-actions,
+header.topbar #themeBtn,
+header.topbar #reloadBtn {
+  display: none !important;
+}
+
+/* статус строго по центру снизу */
+header.topbar #statusText {
+  position: absolute !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: 18px !important;
+  transform: translateX(-50%) !important;
+  margin: 0 !important;
+  padding: 4px 10px !important;
+  width: auto !important;
+  max-width: 95vw !important;
+  text-align: center !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  z-index: 5 !important;
+  white-space: nowrap !important;
+  text-shadow: 0 0 8px #000, 0 0 14px #000 !important;
+}
+
+/* телефон */
+@media (max-width: 700px) {
+  header.topbar {
+    height: 190px !important;
+    min-height: 190px !important;
+  }
+
+  header.topbar #statusText {
+    bottom: 10px !important;
+    font-size: 11px !important;
+  }
+}
