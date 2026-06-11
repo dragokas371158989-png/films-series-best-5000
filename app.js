@@ -8349,3 +8349,240 @@ addRutubeSeasonExactList({
 
   console.log("GKM NEXT WATCH PATCH установлен");
 })();
+/* =========================================================
+   GKM CHARACTER MODAL PATCH
+   Клик по персонажу → карточка персонажа
+========================================================= */
+
+(function () {
+  if (window.__gkmCharacterModalPatchInstalled) return;
+  window.__gkmCharacterModalPatchInstalled = true;
+
+  function injectCharacterModalStyle() {
+    if (document.getElementById("gkmCharacterModalStyle")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkmCharacterModalStyle";
+    style.textContent = `
+      .gkm-pro-character-card {
+        cursor: pointer !important;
+        transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+      }
+
+      .gkm-pro-character-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(34, 211, 238, 0.85) !important;
+        box-shadow:
+          0 0 22px rgba(34, 211, 238, 0.25),
+          0 18px 38px rgba(0, 0, 0, 0.45) !important;
+      }
+
+      .gkm-character-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        background: rgba(0, 0, 0, 0.78);
+        backdrop-filter: blur(8px);
+      }
+
+      .gkm-character-modal {
+        width: min(420px, 100%);
+        border-radius: 24px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top left, rgba(34, 211, 238, 0.18), transparent 38%),
+          radial-gradient(circle at top right, rgba(124, 58, 237, 0.28), transparent 40%),
+          #050816;
+        border: 1px solid rgba(34, 211, 238, 0.5);
+        color: white;
+        box-shadow:
+          0 0 34px rgba(124, 58, 237, 0.45),
+          0 30px 80px rgba(0, 0, 0, 0.75);
+        position: relative;
+      }
+
+      .gkm-character-close {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        z-index: 3;
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        border: 1px solid rgba(34, 211, 238, 0.55);
+        background: linear-gradient(180deg, #7c3aed, #312e81);
+        color: white;
+        font-size: 26px;
+        cursor: pointer;
+        box-shadow: 0 0 18px rgba(124, 58, 237, 0.45);
+      }
+
+      .gkm-character-img-wrap {
+        width: 100%;
+        height: 390px;
+        background: #020617;
+        overflow: hidden;
+      }
+
+      .gkm-character-img-wrap img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: top center;
+      }
+
+      .gkm-character-body {
+        padding: 18px;
+      }
+
+      .gkm-character-body h3 {
+        margin: 0 0 10px;
+        font-size: 24px;
+        line-height: 1.15;
+        color: white;
+        text-shadow: 0 0 14px rgba(124, 58, 237, 0.75);
+      }
+
+      .gkm-character-info {
+        display: grid;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .gkm-character-info-item {
+        padding: 12px;
+        border-radius: 16px;
+        background: rgba(15, 23, 42, 0.78);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+      }
+
+      .gkm-character-info-label {
+        margin: 0 0 5px;
+        color: #94a3b8;
+        font-size: 12px;
+      }
+
+      .gkm-character-info-value {
+        margin: 0;
+        color: #fff;
+        font-weight: 900;
+        line-height: 1.35;
+      }
+
+      @media (max-width: 700px) {
+        .gkm-character-img-wrap {
+          height: 330px;
+        }
+
+        .gkm-character-body h3 {
+          font-size: 21px;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  function cleanText(text) {
+    return String(text || "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function openCharacterModal(card) {
+    if (!card) return;
+
+    injectCharacterModalStyle();
+
+    const old = document.getElementById("gkmCharacterBackdrop");
+    if (old) old.remove();
+
+    const img = card.querySelector(".gkm-pro-character-img");
+    const name = cleanText(
+      card.querySelector(".gkm-pro-character-name")?.textContent || "Персонаж"
+    );
+
+    const roleLines = Array.from(card.querySelectorAll(".gkm-pro-character-role"))
+      .map(el => cleanText(el.textContent))
+      .filter(Boolean);
+
+    let role = roleLines.find(x => !x.toLowerCase().includes("сейю")) || "Персонаж";
+    let voice = roleLines.find(x => x.toLowerCase().includes("сейю")) || "";
+
+    voice = voice.replace(/^Сейю:\s*/i, "").trim();
+
+    const imgSrc = img ? img.getAttribute("src") : "";
+
+    const backdrop = document.createElement("div");
+    backdrop.id = "gkmCharacterBackdrop";
+    backdrop.className = "gkm-character-backdrop";
+
+    backdrop.innerHTML = `
+      <article class="gkm-character-modal">
+        <button class="gkm-character-close" type="button">×</button>
+
+        <div class="gkm-character-img-wrap">
+          ${
+            imgSrc
+              ? `<img src="${imgSrc}" alt="">`
+              : `<div style="height:100%;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-weight:900;">Нет изображения</div>`
+          }
+        </div>
+
+        <div class="gkm-character-body">
+          <h3>${name}</h3>
+
+          <div class="gkm-character-info">
+            <div class="gkm-character-info-item">
+              <p class="gkm-character-info-label">Роль</p>
+              <p class="gkm-character-info-value">${role}</p>
+            </div>
+
+            <div class="gkm-character-info-item">
+              <p class="gkm-character-info-label">Сейю</p>
+              <p class="gkm-character-info-value">${voice || "Пока не указано"}</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    `;
+
+    document.body.appendChild(backdrop);
+
+    const closeBtn = backdrop.querySelector(".gkm-character-close");
+
+    closeBtn.addEventListener("click", function () {
+      backdrop.remove();
+    });
+
+    backdrop.addEventListener("click", function (e) {
+      if (e.target === backdrop) {
+        backdrop.remove();
+      }
+    });
+
+    document.addEventListener("keydown", function escClose(e) {
+      if (e.key === "Escape") {
+        backdrop.remove();
+        document.removeEventListener("keydown", escClose);
+      }
+    });
+  }
+
+  document.addEventListener("click", function (e) {
+    const card = e.target.closest(".gkm-pro-character-card");
+
+    if (!card) return;
+
+    openCharacterModal(card);
+  });
+
+  injectCharacterModalStyle();
+
+  console.log("GKM CHARACTER MODAL PATCH установлен");
+})();
