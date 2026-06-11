@@ -1,5 +1,5 @@
 // FIX: OPM season matching by year, prevents Season 1 card from showing Season 3 players.
-const GKM_APP_CLEAN_VERSION = "clean-cast-v3-direct-small-tmdb-id-2026-06-12";
+const GKM_APP_CLEAN_VERSION = "clean-cast-v4-local-cache-2026-06-12";
 const INDEX_URL = "data/index.json";
 const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
@@ -7431,7 +7431,11 @@ addRutubeSeasonExactList({
     if (isMovieOrSeriesForCast(m)) {
   box.innerHTML = '<div class="gkm-pro-empty">Ищу актёров и роли...</div>';
 
-  var movieCast = await loadMovieTvCast(m);
+  var movieCast = await loadMovieTvCastFromLocal(m);
+
+      if (!movieCast.length) {
+        movieCast = await loadMovieTvCast(m);
+      }
 
   if (!movieCast.length) {
     box.innerHTML = '<div class="gkm-pro-empty">Актёры и роли для этого тайтла пока не найдены.</div>';
@@ -7596,6 +7600,49 @@ return (
 '</div>'
 );
 }
+
+
+var gkmCastCacheData = null;
+
+async function loadLocalCastCache() {
+  if (gkmCastCacheData) return gkmCastCacheData;
+
+  try {
+    var res = await fetch("data/cast_cache.json?v=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) {
+      gkmCastCacheData = {};
+      return gkmCastCacheData;
+    }
+
+    var data = await res.json();
+    gkmCastCacheData = data && data.items ? data.items : {};
+    return gkmCastCacheData;
+  } catch (e) {
+    gkmCastCacheData = {};
+    return gkmCastCacheData;
+  }
+}
+
+async function loadMovieTvCastFromLocal(m) {
+  var found = await findTmdbIdForCast(m);
+  if (!found || !found.id) return [];
+
+  var cache = await loadLocalCastCache();
+  var item = cache[found.kind + ":" + found.id];
+
+  if (!item || !Array.isArray(item.cast) || !item.cast.length) return [];
+
+  return item.cast.slice(0, 14).map(function (p) {
+    return {
+      name: p.name || "",
+      original_name: p.name || "",
+      character: p.role || "",
+      profile_path: p.profile || "",
+      order: 0
+    };
+  });
+}
+
 
 async function loadMovieTvCast(m) {
     var found = await findTmdbIdForCast(m);
