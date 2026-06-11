@@ -9293,3 +9293,502 @@ addRutubeSeasonExactList({
   console.log("GKM RU TITLE CLEANUP FINAL установлен");
 })();
 
+/* ===== GKM FAVORITES FINAL ===== */
+(function () {
+  if (window.__gkmFavoritesFinal) return;
+  window.__gkmFavoritesFinal = true;
+
+  const STORAGE_KEY = "gkm_favorites_v1";
+
+  function readFavs() {
+    try {
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      return Array.isArray(data) ? data : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function writeFavs(items) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    } catch (e) {}
+  }
+
+  function normText(value) {
+    return String(value || "").trim();
+  }
+
+  function getTitleFromCard(card) {
+    if (!card) return "";
+
+    const titleEl =
+      card.querySelector(".card-title") ||
+      card.querySelector("[data-title]") ||
+      card.querySelector("h3") ||
+      card.querySelector("h2");
+
+    return normText(titleEl ? titleEl.textContent : "");
+  }
+
+  function getPosterFromCard(card) {
+    if (!card) return "";
+
+    const img = card.querySelector("img");
+    return img ? (img.currentSrc || img.src || img.getAttribute("src") || "") : "";
+  }
+
+  function getYearFromCard(card) {
+    if (!card) return "";
+
+    const text = normText(card.textContent);
+    const m = text.match(/\b(19\d{2}|20\d{2})\b/);
+    return m ? m[1] : "";
+  }
+
+  function getIdFromCard(card) {
+    if (!card) return "";
+
+    const attrs = [
+      "data-id",
+      "data-key",
+      "data-tmdb-id",
+      "data-tmdbid",
+      "data-slug"
+    ];
+
+    for (const attr of attrs) {
+      const value = card.getAttribute(attr);
+      if (value) return String(value);
+    }
+
+    const title = getTitleFromCard(card);
+    const year = getYearFromCard(card);
+    return (title + "|" + year).toLowerCase();
+  }
+
+  function itemFromCard(card) {
+    const title = getTitleFromCard(card);
+    const year = getYearFromCard(card);
+    const poster = getPosterFromCard(card);
+    const id = getIdFromCard(card);
+
+    if (!title) return null;
+
+    return {
+      id,
+      title,
+      year,
+      poster,
+      savedAt: Date.now()
+    };
+  }
+
+  function isFav(id) {
+    if (!id) return false;
+    return readFavs().some(x => String(x.id) === String(id));
+  }
+
+  function addFav(item) {
+    if (!item || !item.id) return;
+
+    const favs = readFavs();
+    const exists = favs.some(x => String(x.id) === String(item.id));
+
+    if (!exists) {
+      favs.unshift(item);
+      writeFavs(favs.slice(0, 500));
+    }
+  }
+
+  function removeFav(id) {
+    writeFavs(readFavs().filter(x => String(x.id) !== String(id)));
+  }
+
+  function toggleFav(card) {
+    const item = itemFromCard(card);
+    if (!item) return;
+
+    if (isFav(item.id)) {
+      removeFav(item.id);
+    } else {
+      addFav(item);
+    }
+
+    refreshHearts();
+    renderFavoritesPanel();
+  }
+
+  function createHeart(card) {
+    let btn =
+      card.querySelector(".gkm-fav-btn") ||
+      card.querySelector(".favorite-btn") ||
+      card.querySelector(".fav-btn") ||
+      card.querySelector(".heart-btn");
+
+    if (!btn) {
+      btn = document.createElement("button");
+      btn.className = "gkm-fav-btn";
+      btn.type = "button";
+      btn.innerHTML = "♡";
+      btn.setAttribute("aria-label", "Добавить в избранное");
+      card.appendChild(btn);
+    }
+
+    btn.classList.add("gkm-fav-btn");
+    btn.type = "button";
+
+    if (!btn.__gkmFavBound) {
+      btn.__gkmFavBound = true;
+
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleFav(card);
+      }, true);
+    }
+
+    return btn;
+  }
+
+  function refreshHearts(root) {
+    const scope = root || document;
+
+    if (!scope.querySelectorAll) return;
+
+    scope.querySelectorAll(".card").forEach(function (card) {
+      const title = getTitleFromCard(card);
+
+      if (!title) return;
+
+      card.classList.add("gkm-fav-card-ready");
+
+      const btn = createHeart(card);
+      const id = getIdFromCard(card);
+      const active = isFav(id);
+
+      btn.innerHTML = active ? "❤" : "♡";
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-label", active ? "Убрать из избранного" : "Добавить в избранное");
+      btn.title = active ? "Убрать из избранного" : "Добавить в избранное";
+    });
+  }
+
+  function ensureFavoritesPanel() {
+    let panel = document.getElementById("gkmFavoritesPanel");
+
+    if (panel) return panel;
+
+    panel = document.createElement("section");
+    panel.id = "gkmFavoritesPanel";
+    panel.className = "gkm-favorites-panel";
+    panel.innerHTML = `
+      <div class="gkm-favorites-head">
+        <h2>Избранное</h2>
+        <button type="button" id="gkmFavoritesClearBtn">Очистить</button>
+      </div>
+      <div id="gkmFavoritesList" class="gkm-favorites-list"></div>
+    `;
+
+    const main =
+      document.querySelector("main") ||
+      document.querySelector(".app") ||
+      document.querySelector(".container") ||
+      document.body;
+
+    const firstSection =
+      main.querySelector(".grid") ||
+      main.querySelector("#catalogGrid") ||
+      main.firstElementChild;
+
+    if (firstSection && firstSection.parentNode) {
+      firstSection.parentNode.insertBefore(panel, firstSection);
+    } else {
+      main.appendChild(panel);
+    }
+
+    const clearBtn = panel.querySelector("#gkmFavoritesClearBtn");
+
+    clearBtn.addEventListener("click", function () {
+      if (!confirm("Очистить избранное?")) return;
+      writeFavs([]);
+      refreshHearts();
+      renderFavoritesPanel();
+    });
+
+    return panel;
+  }
+
+  function renderFavoritesPanel() {
+    const panel = ensureFavoritesPanel();
+    const list = panel.querySelector("#gkmFavoritesList");
+    const favs = readFavs();
+
+    if (!favs.length) {
+      panel.classList.add("is-empty");
+      list.innerHTML = `<div class="gkm-favorites-empty">Пока пусто. Нажми сердечко на карточке, и тайтл появится здесь.</div>`;
+      return;
+    }
+
+    panel.classList.remove("is-empty");
+
+    list.innerHTML = favs.map(function (item) {
+      const title = normText(item.title);
+      const year = normText(item.year);
+      const poster = normText(item.poster);
+      const id = String(item.id || "").replace(/"/g, "&quot;");
+
+      return `
+        <button type="button" class="gkm-fav-mini-card" data-fav-id="${id}">
+          ${poster ? `<img src="${poster}" alt="">` : `<span class="gkm-fav-no-poster">★</span>`}
+          <span class="gkm-fav-mini-info">
+            <b>${escapeHtml(title)}</b>
+            ${year ? `<small>${escapeHtml(year)}</small>` : ""}
+          </span>
+          <span class="gkm-fav-remove" title="Убрать">×</span>
+        </button>
+      `;
+    }).join("");
+
+    list.querySelectorAll(".gkm-fav-mini-card").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        const id = btn.getAttribute("data-fav-id");
+
+        if (e.target && e.target.classList.contains("gkm-fav-remove")) {
+          removeFav(id);
+          refreshHearts();
+          renderFavoritesPanel();
+          return;
+        }
+
+        const fav = readFavs().find(x => String(x.id) === String(id));
+        if (!fav) return;
+
+        const cards = Array.from(document.querySelectorAll(".card"));
+        const found = cards.find(card => String(getIdFromCard(card)) === String(id) || getTitleFromCard(card) === fav.title);
+
+        if (found) {
+          found.scrollIntoView({ behavior: "smooth", block: "center" });
+          found.classList.add("gkm-fav-flash");
+          setTimeout(() => found.classList.remove("gkm-fav-flash"), 1200);
+        }
+      });
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function injectCss() {
+    if (document.getElementById("gkmFavoritesStyle")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkmFavoritesStyle";
+    style.textContent = `
+      .gkm-fav-card-ready {
+        position: relative !important;
+      }
+
+      .gkm-fav-btn {
+        position: absolute !important;
+        top: 10px !important;
+        right: 10px !important;
+        width: 38px !important;
+        height: 38px !important;
+        border-radius: 999px !important;
+        border: 1px solid rgba(255,255,255,.28) !important;
+        background: rgba(8, 10, 25, .72) !important;
+        color: #fff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 23px !important;
+        line-height: 1 !important;
+        cursor: pointer !important;
+        z-index: 15 !important;
+        box-shadow: 0 0 16px rgba(0,0,0,.45) !important;
+        backdrop-filter: blur(8px) !important;
+        transition: transform .16s ease, background .16s ease, color .16s ease !important;
+      }
+
+      .gkm-fav-btn:hover {
+        transform: scale(1.08) !important;
+      }
+
+      .gkm-fav-btn.is-active {
+        color: #ff4d8d !important;
+        background: rgba(255, 77, 141, .17) !important;
+        border-color: rgba(255, 77, 141, .75) !important;
+        text-shadow: 0 0 14px rgba(255, 77, 141, .8) !important;
+      }
+
+      .gkm-favorites-panel {
+        width: min(1180px, calc(100% - 24px)) !important;
+        margin: 18px auto 18px !important;
+        padding: 16px !important;
+        border-radius: 22px !important;
+        border: 1px solid rgba(0, 229, 255, .22) !important;
+        background: rgba(5, 8, 22, .72) !important;
+        box-shadow: 0 0 24px rgba(0, 229, 255, .08) !important;
+      }
+
+      .gkm-favorites-head {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 12px !important;
+        margin-bottom: 12px !important;
+      }
+
+      .gkm-favorites-head h2 {
+        margin: 0 !important;
+        color: #fff !important;
+        font-size: 22px !important;
+      }
+
+      #gkmFavoritesClearBtn {
+        border: 1px solid rgba(255,255,255,.2) !important;
+        background: rgba(255,255,255,.08) !important;
+        color: #dbeafe !important;
+        border-radius: 999px !important;
+        padding: 8px 12px !important;
+        cursor: pointer !important;
+      }
+
+      .gkm-favorites-list {
+        display: flex !important;
+        gap: 12px !important;
+        overflow-x: auto !important;
+        padding-bottom: 4px !important;
+      }
+
+      .gkm-fav-mini-card {
+        flex: 0 0 210px !important;
+        min-height: 82px !important;
+        border: 1px solid rgba(255,255,255,.14) !important;
+        background: rgba(15, 23, 42, .84) !important;
+        color: #fff !important;
+        border-radius: 16px !important;
+        padding: 8px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        text-align: left !important;
+        cursor: pointer !important;
+        position: relative !important;
+      }
+
+      .gkm-fav-mini-card img {
+        width: 46px !important;
+        height: 66px !important;
+        object-fit: cover !important;
+        border-radius: 10px !important;
+      }
+
+      .gkm-fav-no-poster {
+        width: 46px !important;
+        height: 66px !important;
+        border-radius: 10px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: rgba(255,255,255,.08) !important;
+      }
+
+      .gkm-fav-mini-info {
+        min-width: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+      }
+
+      .gkm-fav-mini-info b {
+        font-size: 13px !important;
+        line-height: 1.18 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+      }
+
+      .gkm-fav-mini-info small {
+        color: #a5b4fc !important;
+      }
+
+      .gkm-fav-remove {
+        position: absolute !important;
+        top: 4px !important;
+        right: 8px !important;
+        color: #fca5a5 !important;
+        font-size: 20px !important;
+      }
+
+      .gkm-favorites-empty {
+        color: #c7d2fe !important;
+        padding: 8px 2px !important;
+      }
+
+      .gkm-fav-flash {
+        outline: 3px solid #00e5ff !important;
+        box-shadow: 0 0 28px rgba(0,229,255,.85) !important;
+      }
+
+      @media (max-width: 700px) {
+        .gkm-favorites-panel {
+          width: calc(100% - 14px) !important;
+          margin-top: 12px !important;
+          padding: 12px !important;
+        }
+
+        .gkm-favorites-head h2 {
+          font-size: 18px !important;
+        }
+
+        .gkm-fav-mini-card {
+          flex-basis: 180px !important;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  function start() {
+    injectCss();
+    refreshHearts();
+    renderFavoritesPanel();
+
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        if (m.type === "childList") {
+          m.addedNodes.forEach(function (node) {
+            refreshHearts(node);
+          });
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true
+    });
+
+    setInterval(function () {
+      refreshHearts();
+    }, 2500);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
+
+  console.log("GKM FAVORITES FINAL установлен");
+})();
+
