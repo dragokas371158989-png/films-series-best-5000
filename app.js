@@ -7054,10 +7054,7 @@ if (typeof openDetails === "function") {
     }, 50);
   };
 }
-/* =========================================================
-   GKM PRO CATALOG DETAILS
-   Страна, год, студия, персонажи, отзывы, темы
-========================================================= */
+
 
 let gkmCharactersCache = null;
 
@@ -7261,10 +7258,7 @@ if (typeof openDetails === "function") {
     }, 80);
   };
 }
-/* =========================================================
-   GKM PRO CATALOG DETAILS + AUTO JIKAN INFO
-   Информация, жанры, темы, персонажи, отзывы
-========================================================= */
+
 
 var gkmCharactersCache = null;
 var gkmJikanAnimeCache = new Map();
