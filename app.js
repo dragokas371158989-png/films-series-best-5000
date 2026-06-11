@@ -7498,3 +7498,219 @@ addRutubeSeasonExactList({
     };
   }
 })();
+/* =========================================================
+   GKM RU PATCH
+   Русификация жанров, тем, статуса, возраста и источника
+========================================================= */
+
+(function () {
+  if (window.__gkmRuPatchInstalled) return;
+  window.__gkmRuPatchInstalled = true;
+
+  var RU_MAP = {
+    "Action": "Экшен",
+    "Adventure": "Приключения",
+    "Comedy": "Комедия",
+    "Drama": "Драма",
+    "Fantasy": "Фэнтези",
+    "Military": "Военное",
+    "Shounen": "Сёнэн",
+    "Shonen": "Сёнэн",
+    "Seinen": "Сэйнэн",
+    "Shoujo": "Сёдзё",
+    "Shojo": "Сёдзё",
+    "Josei": "Дзёсэй",
+    "Romance": "Романтика",
+    "School": "Школа",
+    "Magic": "Магия",
+    "Demons": "Демоны",
+    "Demon": "Демоны",
+    "Supernatural": "Сверхъестественное",
+    "Psychological": "Психология",
+    "Mystery": "Детектив",
+    "Detective": "Детектив",
+    "Horror": "Ужасы",
+    "Sports": "Спорт",
+    "Sport": "Спорт",
+    "Music": "Музыка",
+    "Game": "Игры",
+    "Games": "Игры",
+    "Martial Arts": "Боевые искусства",
+    "Slice of Life": "Повседневность",
+    "Sci-Fi": "Фантастика",
+    "Science Fiction": "Фантастика",
+    "Suspense": "Саспенс",
+    "Award Winning": "Удостоено наград",
+    "Gore": "Жесть",
+    "Survival": "Выживание",
+    "Time Travel": "Путешествия во времени",
+    "Historical": "Историческое",
+    "Samurai": "Самураи",
+    "Vampire": "Вампиры",
+    "Mecha": "Меха",
+    "Harem": "Гарем",
+    "Isekai": "Исекай",
+    "Reincarnation": "Перерождение",
+
+    "Manga": "Манга",
+    "Original": "Оригинал",
+    "Light novel": "Ранобэ",
+    "Light Novel": "Ранобэ",
+    "Web manga": "Веб-манга",
+    "Web Manga": "Веб-манга",
+    "Novel": "Роман",
+    "Visual novel": "Визуальная новелла",
+    "Visual Novel": "Визуальная новелла",
+    "Game source": "Игра",
+    "Game Source": "Игра",
+    "4-koma manga": "Ёнкома-манга",
+
+    "Finished Airing": "Вышло",
+    "Currently Airing": "Выходит",
+    "Not yet aired": "Анонс",
+    "Not Yet Aired": "Анонс",
+
+    "Main": "Главный персонаж",
+    "Supporting": "Второстепенный персонаж"
+  };
+
+  function ruText(value) {
+    var s = String(value || "").trim();
+
+    if (!s) return s;
+
+    if (RU_MAP[s]) return RU_MAP[s];
+
+    if (s === "Jikan / MyAnimeList") return "Манга";
+
+    if (s.indexOf("R - 17+") !== -1) return "17+";
+    if (s.indexOf("PG-13") !== -1) return "13+";
+    if (s.indexOf("PG - Children") !== -1) return "6+";
+    if (s.indexOf("G - All Ages") !== -1) return "0+";
+    if (s.indexOf("Rx") !== -1) return "18+";
+
+    return s;
+  }
+
+  function ruDuration(value) {
+    var s = String(value || "").trim();
+
+    if (!s) return s;
+
+    return s
+      .replace(/per ep/gi, "за серию")
+      .replace(/min/gi, "мин")
+      .replace(/hr/gi, "ч")
+      .replace(/sec/gi, "сек");
+  }
+
+  function ruArray(arr) {
+    if (!Array.isArray(arr)) return arr;
+
+    return arr
+      .filter(Boolean)
+      .map(function (x) {
+        return ruText(x);
+      });
+  }
+
+  function patchMovieData(m) {
+    if (!m) return m;
+
+    if (Array.isArray(m.genres)) {
+      m.genres = ruArray(m.genres);
+    }
+
+    if (Array.isArray(m.themes)) {
+      m.themes = ruArray(m.themes);
+    }
+
+    if (Array.isArray(m.tags)) {
+      m.tags = ruArray(m.tags);
+    }
+
+    if (Array.isArray(m.keywords)) {
+      m.keywords = ruArray(m.keywords);
+    }
+
+    if (m.status) {
+      m.status = ruText(m.status);
+    }
+
+    if (m.source) {
+      m.source = ruText(m.source);
+    }
+
+    if (m.ageRating) {
+      m.ageRating = ruText(m.ageRating);
+    }
+
+    if (m.age) {
+      m.age = ruText(m.age);
+    }
+
+    if (m.duration) {
+      m.duration = ruDuration(m.duration);
+    }
+
+    if (m.runtime) {
+      m.runtime = ruDuration(m.runtime);
+    }
+
+    return m;
+  }
+
+  if (typeof getGenres === "function") {
+    var oldGetGenres = getGenres;
+
+    getGenres = function (m) {
+      return ruArray(oldGetGenres(m));
+    };
+  }
+
+  if (typeof gkmValue === "function") {
+    var oldGkmValue = gkmValue;
+
+    gkmValue = function (value, fallback) {
+      if (Array.isArray(value)) {
+        return value
+          .filter(Boolean)
+          .map(function (x) {
+            return ruText(x);
+          })
+          .join(" · ") || fallback || "—";
+      }
+
+      var result = oldGkmValue(value, fallback);
+
+      return ruDuration(ruText(result));
+    };
+  }
+
+  if (typeof gkmHydrateAnimeInfo === "function") {
+    var oldHydrate = gkmHydrateAnimeInfo;
+
+    gkmHydrateAnimeInfo = async function (m) {
+      var result = await oldHydrate(m);
+      return patchMovieData(result || m);
+    };
+  }
+
+  if (typeof gkmCharacterCard === "function") {
+    var oldCharacterCard = gkmCharacterCard;
+
+    gkmCharacterCard = function (ch) {
+      if (ch && ch.role) {
+        ch.role = ruText(ch.role);
+      }
+
+      return oldCharacterCard(ch);
+    };
+  }
+
+  if (Array.isArray(window.allMovies)) {
+    window.allMovies.forEach(patchMovieData);
+  }
+
+  console.log("GKM RU PATCH установлен");
+})();
