@@ -8871,3 +8871,264 @@ addRutubeSeasonExactList({
 
   console.log("GKM CHARACTER FINAL FIX установлен");
 })();
+/* =========================================================
+   GKM CHARACTER NATIVE DIALOG FIX
+   Персонаж открывается поверх основной карточки через <dialog>
+========================================================= */
+
+(function () {
+  if (window.__gkmCharacterNativeDialogFixInstalled) return;
+  window.__gkmCharacterNativeDialogFixInstalled = true;
+
+  function escapeText(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function cleanText(value) {
+    return String(value || "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function injectStyle() {
+    if (document.getElementById("gkmNativeCharacterDialogStyle")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkmNativeCharacterDialogStyle";
+    style.textContent = `
+      #gkmCharacterDialog {
+        width: min(430px, calc(100vw - 26px));
+        max-height: calc(100vh - 26px);
+        padding: 0;
+        border: 1px solid rgba(34, 211, 238, 0.65);
+        border-radius: 24px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 38%),
+          radial-gradient(circle at top right, rgba(124, 58, 237, 0.26), transparent 40%),
+          #050816;
+        color: white;
+        box-shadow:
+          0 0 28px rgba(34, 211, 238, 0.28),
+          0 0 42px rgba(124, 58, 237, 0.35);
+      }
+
+      #gkmCharacterDialog::backdrop {
+        background: rgba(0, 0, 0, 0.92);
+      }
+
+      .gkm-native-character-card {
+        position: relative;
+        width: 100%;
+      }
+
+      .gkm-native-character-close {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        z-index: 5;
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        border: 1px solid rgba(34, 211, 238, 0.65);
+        background: linear-gradient(180deg, #7c3aed, #312e81);
+        color: white;
+        font-size: 26px;
+        cursor: pointer;
+        box-shadow: 0 0 18px rgba(124, 58, 237, 0.45);
+      }
+
+      .gkm-native-character-img {
+        width: 100%;
+        height: 370px;
+        background: #020617;
+        overflow: hidden;
+      }
+
+      .gkm-native-character-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+      }
+
+      .gkm-native-character-noimg {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #94a3b8;
+        font-weight: 900;
+      }
+
+      .gkm-native-character-body {
+        padding: 18px;
+      }
+
+      .gkm-native-character-body h3 {
+        margin: 0 0 14px;
+        font-size: 24px;
+        line-height: 1.15;
+        color: white;
+        text-shadow: 0 0 14px rgba(124, 58, 237, 0.75);
+      }
+
+      .gkm-native-character-info {
+        display: grid;
+        gap: 10px;
+      }
+
+      .gkm-native-character-info-item {
+        padding: 12px;
+        border-radius: 16px;
+        background: rgba(15, 23, 42, 0.82);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+      }
+
+      .gkm-native-character-label {
+        margin: 0 0 5px;
+        color: #94a3b8;
+        font-size: 12px;
+      }
+
+      .gkm-native-character-value {
+        margin: 0;
+        color: white;
+        font-weight: 900;
+        line-height: 1.35;
+      }
+
+      @media (max-width: 700px) {
+        #gkmCharacterDialog {
+          width: calc(100vw - 18px);
+        }
+
+        .gkm-native-character-img {
+          height: 310px;
+        }
+
+        .gkm-native-character-body h3 {
+          font-size: 21px;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  function getOrCreateDialog() {
+    let dialog = document.getElementById("gkmCharacterDialog");
+
+    if (!dialog) {
+      dialog = document.createElement("dialog");
+      dialog.id = "gkmCharacterDialog";
+      document.body.appendChild(dialog);
+    }
+
+    return dialog;
+  }
+
+  function openNativeCharacterDialog(card) {
+    if (!card) return;
+
+    injectStyle();
+
+    const oldBackdrop = document.getElementById("gkmCharacterBackdrop");
+    if (oldBackdrop) oldBackdrop.remove();
+
+    document.body.classList.remove("gkm-character-open");
+
+    const img = card.querySelector(".gkm-pro-character-img");
+    const name = cleanText(card.querySelector(".gkm-pro-character-name")?.textContent || "Персонаж");
+
+    const lines = Array.from(card.querySelectorAll(".gkm-pro-character-role"))
+      .map(el => cleanText(el.textContent))
+      .filter(Boolean);
+
+    let role = lines.find(x => !x.toLowerCase().includes("сейю")) || "Персонаж";
+    let voice = lines.find(x => x.toLowerCase().includes("сейю")) || "";
+
+    voice = voice.replace(/^Сейю:\s*/i, "").trim();
+
+    const imgSrc = img ? img.getAttribute("src") : "";
+
+    const dialog = getOrCreateDialog();
+
+    dialog.innerHTML = `
+      <article class="gkm-native-character-card">
+        <button class="gkm-native-character-close" type="button">×</button>
+
+        <div class="gkm-native-character-img">
+          ${
+            imgSrc
+              ? `<img src="${escapeText(imgSrc)}" alt="">`
+              : `<div class="gkm-native-character-noimg">Нет изображения</div>`
+          }
+        </div>
+
+        <div class="gkm-native-character-body">
+          <h3>${escapeText(name)}</h3>
+
+          <div class="gkm-native-character-info">
+            <div class="gkm-native-character-info-item">
+              <p class="gkm-native-character-label">Роль</p>
+              <p class="gkm-native-character-value">${escapeText(role)}</p>
+            </div>
+
+            <div class="gkm-native-character-info-item">
+              <p class="gkm-native-character-label">Сейю</p>
+              <p class="gkm-native-character-value">${escapeText(voice || "Пока не указано")}</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    `;
+
+    const closeBtn = dialog.querySelector(".gkm-native-character-close");
+
+    closeBtn.addEventListener("click", function () {
+      dialog.close();
+    });
+
+    dialog.addEventListener("click", function closeByBackdrop(e) {
+      const rect = dialog.getBoundingClientRect();
+      const inside =
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom;
+
+      if (!inside) {
+        dialog.close();
+      }
+    }, { once: true });
+
+    if (dialog.open) {
+      dialog.close();
+    }
+
+    dialog.showModal();
+  }
+
+  document.addEventListener("click", function (e) {
+    const card = e.target.closest(".gkm-pro-character-card");
+
+    if (!card) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+
+    openNativeCharacterDialog(card);
+  }, true);
+
+  injectStyle();
+
+  console.log("GKM CHARACTER NATIVE DIALOG FIX установлен");
+})();
