@@ -8661,3 +8661,71 @@ addRutubeSeasonExactList({
 
   console.log("GKM CHARACTER OVERLAY FIX установлен");
 })();
+/* =========================================================
+   GKM FAST MODAL PATCH
+   Убирает тормоза при открытии карточек персонажей
+========================================================= */
+
+(function () {
+  if (window.__gkmFastModalPatchInstalled) return;
+  window.__gkmFastModalPatchInstalled = true;
+
+  function injectFastStyle() {
+    if (document.getElementById("gkmFastModalStyle")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkmFastModalStyle";
+    style.textContent = `
+      /* убираем тяжёлый blur, он тормозит */
+      .gkm-character-backdrop {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(0, 0, 0, 0.86) !important;
+      }
+
+      body.gkm-character-open #detailsDialog .dialog-content {
+        opacity: 0.18 !important;
+        filter: none !important;
+        transform: none !important;
+        pointer-events: none !important;
+      }
+
+      /* меньше тяжёлых теней и анимаций */
+      .gkm-character-modal {
+        box-shadow: 0 0 28px rgba(124, 58, 237, 0.35) !important;
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .gkm-pro-character-card,
+      .gkm-pro-character-card:hover {
+        transition: none !important;
+      }
+
+      .gkm-character-img-wrap img {
+        will-change: auto !important;
+      }
+
+      /* на слабых телефонах/ПК вообще без тяжёлых эффектов */
+      @media (max-width: 900px) {
+        .gkm-character-backdrop {
+          background: rgba(0, 0, 0, 0.92) !important;
+        }
+
+        body.gkm-character-open #detailsDialog .dialog-content {
+          opacity: 0.08 !important;
+        }
+
+        .gkm-character-modal {
+          box-shadow: none !important;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  injectFastStyle();
+
+  console.log("GKM FAST MODAL PATCH установлен");
+})();
