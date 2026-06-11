@@ -8349,538 +8349,20 @@ addRutubeSeasonExactList({
 
   console.log("GKM NEXT WATCH PATCH установлен");
 })();
+
+
 /* =========================================================
-   GKM CHARACTER MODAL PATCH
-   Клик по персонажу → карточка персонажа
+   GKM CHARACTER NATIVE DIALOG + DESCRIPTION STABLE
+   Один стабильный блок: персонаж поверх основной карточки + описание
 ========================================================= */
 
 (function () {
-  if (window.__gkmCharacterModalPatchInstalled) return;
-  window.__gkmCharacterModalPatchInstalled = true;
+  if (window.__gkmCharacterNativeStableInstalled) return;
+  window.__gkmCharacterNativeStableInstalled = true;
 
-  function injectCharacterModalStyle() {
-    if (document.getElementById("gkmCharacterModalStyle")) return;
+  const gkmCharDescCache = new Map();
 
-    const style = document.createElement("style");
-    style.id = "gkmCharacterModalStyle";
-    style.textContent = `
-      .gkm-pro-character-card {
-        cursor: pointer !important;
-        transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
-      }
-
-      .gkm-pro-character-card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(34, 211, 238, 0.85) !important;
-        box-shadow:
-          0 0 22px rgba(34, 211, 238, 0.25),
-          0 18px 38px rgba(0, 0, 0, 0.45) !important;
-      }
-
-      .gkm-character-backdrop {
-        position: fixed;
-        inset: 0;
-        z-index: 999999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 18px;
-        background: rgba(0, 0, 0, 0.78);
-        backdrop-filter: blur(8px);
-      }
-
-      .gkm-character-modal {
-        width: min(420px, 100%);
-        border-radius: 24px;
-        overflow: hidden;
-        background:
-          radial-gradient(circle at top left, rgba(34, 211, 238, 0.18), transparent 38%),
-          radial-gradient(circle at top right, rgba(124, 58, 237, 0.28), transparent 40%),
-          #050816;
-        border: 1px solid rgba(34, 211, 238, 0.5);
-        color: white;
-        box-shadow:
-          0 0 34px rgba(124, 58, 237, 0.45),
-          0 30px 80px rgba(0, 0, 0, 0.75);
-        position: relative;
-      }
-
-      .gkm-character-close {
-        position: absolute;
-        right: 12px;
-        top: 12px;
-        z-index: 3;
-        width: 42px;
-        height: 42px;
-        border-radius: 14px;
-        border: 1px solid rgba(34, 211, 238, 0.55);
-        background: linear-gradient(180deg, #7c3aed, #312e81);
-        color: white;
-        font-size: 26px;
-        cursor: pointer;
-        box-shadow: 0 0 18px rgba(124, 58, 237, 0.45);
-      }
-
-      .gkm-character-img-wrap {
-        width: 100%;
-        height: 390px;
-        background: #020617;
-        overflow: hidden;
-      }
-
-      .gkm-character-img-wrap img {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
-        object-position: top center;
-      }
-
-      .gkm-character-body {
-        padding: 18px;
-      }
-
-      .gkm-character-body h3 {
-        margin: 0 0 10px;
-        font-size: 24px;
-        line-height: 1.15;
-        color: white;
-        text-shadow: 0 0 14px rgba(124, 58, 237, 0.75);
-      }
-
-      .gkm-character-info {
-        display: grid;
-        gap: 10px;
-        margin-top: 14px;
-      }
-
-      .gkm-character-info-item {
-        padding: 12px;
-        border-radius: 16px;
-        background: rgba(15, 23, 42, 0.78);
-        border: 1px solid rgba(148, 163, 184, 0.18);
-      }
-
-      .gkm-character-info-label {
-        margin: 0 0 5px;
-        color: #94a3b8;
-        font-size: 12px;
-      }
-
-      .gkm-character-info-value {
-        margin: 0;
-        color: #fff;
-        font-weight: 900;
-        line-height: 1.35;
-      }
-
-      @media (max-width: 700px) {
-        .gkm-character-img-wrap {
-          height: 330px;
-        }
-
-        .gkm-character-body h3 {
-          font-size: 21px;
-        }
-      }
-    `;
-
-    document.head.appendChild(style);
-  }
-
-  function cleanText(text) {
-    return String(text || "")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  function openCharacterModal(card) {
-    if (!card) return;
-
-    injectCharacterModalStyle();
-
-    const old = document.getElementById("gkmCharacterBackdrop");
-    if (old) old.remove();
-
-    const img = card.querySelector(".gkm-pro-character-img");
-    const name = cleanText(
-      card.querySelector(".gkm-pro-character-name")?.textContent || "Персонаж"
-    );
-
-    const roleLines = Array.from(card.querySelectorAll(".gkm-pro-character-role"))
-      .map(el => cleanText(el.textContent))
-      .filter(Boolean);
-
-    let role = roleLines.find(x => !x.toLowerCase().includes("сейю")) || "Персонаж";
-    let voice = roleLines.find(x => x.toLowerCase().includes("сейю")) || "";
-
-    voice = voice.replace(/^Сейю:\s*/i, "").trim();
-
-    const imgSrc = img ? img.getAttribute("src") : "";
-
-    const backdrop = document.createElement("div");
-    backdrop.id = "gkmCharacterBackdrop";
-    backdrop.className = "gkm-character-backdrop";
-
-    backdrop.innerHTML = `
-      <article class="gkm-character-modal">
-        <button class="gkm-character-close" type="button">×</button>
-
-        <div class="gkm-character-img-wrap">
-          ${
-            imgSrc
-              ? `<img src="${imgSrc}" alt="">`
-              : `<div style="height:100%;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-weight:900;">Нет изображения</div>`
-          }
-        </div>
-
-        <div class="gkm-character-body">
-          <h3>${name}</h3>
-
-          <div class="gkm-character-info">
-            <div class="gkm-character-info-item">
-              <p class="gkm-character-info-label">Роль</p>
-              <p class="gkm-character-info-value">${role}</p>
-            </div>
-
-            <div class="gkm-character-info-item">
-              <p class="gkm-character-info-label">Сейю</p>
-              <p class="gkm-character-info-value">${voice || "Пока не указано"}</p>
-            </div>
-          </div>
-        </div>
-      </article>
-    `;
-
-    document.body.appendChild(backdrop);
-
-    const closeBtn = backdrop.querySelector(".gkm-character-close");
-
-    closeBtn.addEventListener("click", function () {
-      backdrop.remove();
-    });
-
-    backdrop.addEventListener("click", function (e) {
-      if (e.target === backdrop) {
-        backdrop.remove();
-      }
-    });
-
-    document.addEventListener("keydown", function escClose(e) {
-      if (e.key === "Escape") {
-        backdrop.remove();
-        document.removeEventListener("keydown", escClose);
-      }
-    });
-  }
-
-  document.addEventListener("click", function (e) {
-    const card = e.target.closest(".gkm-pro-character-card");
-
-    if (!card) return;
-
-    openCharacterModal(card);
-  });
-
-  injectCharacterModalStyle();
-
-  console.log("GKM CHARACTER MODAL PATCH установлен");
-})();
-/* =========================================================
-   GKM CHARACTER MODAL OVERLAY FIX
-   Когда открыт персонаж — основная карточка не мешает
-========================================================= */
-
-(function () {
-  if (window.__gkmCharacterOverlayFixInstalled) return;
-  window.__gkmCharacterOverlayFixInstalled = true;
-
-  function injectFixStyle() {
-    if (document.getElementById("gkmCharacterOverlayFixStyle")) return;
-
-    const style = document.createElement("style");
-    style.id = "gkmCharacterOverlayFixStyle";
-    style.textContent = `
-      .gkm-character-backdrop {
-        z-index: 2147483647 !important;
-        background: rgba(0, 0, 0, 0.92) !important;
-        backdrop-filter: blur(14px) !important;
-      }
-
-      .gkm-character-modal {
-        z-index: 2147483647 !important;
-        position: relative !important;
-      }
-
-      body.gkm-character-open #detailsDialog .dialog-content {
-        opacity: 0.08 !important;
-        filter: blur(10px) !important;
-        pointer-events: none !important;
-      }
-
-      body.gkm-character-open .gkm-character-backdrop {
-        pointer-events: auto !important;
-      }
-
-      body.gkm-character-open {
-        overflow: hidden !important;
-      }
-    `;
-
-    document.head.appendChild(style);
-  }
-
-  function setCharacterOpenState() {
-    const modal = document.getElementById("gkmCharacterBackdrop");
-
-    if (modal) {
-      document.body.classList.add("gkm-character-open");
-    } else {
-      document.body.classList.remove("gkm-character-open");
-    }
-  }
-
-  injectFixStyle();
-
-  const observer = new MutationObserver(function () {
-    setCharacterOpenState();
-  });
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: false
-  });
-
-  document.addEventListener("click", function () {
-    setTimeout(setCharacterOpenState, 30);
-  });
-
-  document.addEventListener("keydown", function () {
-    setTimeout(setCharacterOpenState, 30);
-  });
-
-  console.log("GKM CHARACTER OVERLAY FIX установлен");
-})();
-/* =========================================================
-   GKM FAST MODAL PATCH
-   Убирает тормоза при открытии карточек персонажей
-========================================================= */
-
-(function () {
-  if (window.__gkmFastModalPatchInstalled) return;
-  window.__gkmFastModalPatchInstalled = true;
-
-  function injectFastStyle() {
-    if (document.getElementById("gkmFastModalStyle")) return;
-
-    const style = document.createElement("style");
-    style.id = "gkmFastModalStyle";
-    style.textContent = `
-      /* убираем тяжёлый blur, он тормозит */
-      .gkm-character-backdrop {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        background: rgba(0, 0, 0, 0.86) !important;
-      }
-
-      body.gkm-character-open #detailsDialog .dialog-content {
-        opacity: 0.18 !important;
-        filter: none !important;
-        transform: none !important;
-        pointer-events: none !important;
-      }
-
-      /* меньше тяжёлых теней и анимаций */
-      .gkm-character-modal {
-        box-shadow: 0 0 28px rgba(124, 58, 237, 0.35) !important;
-        animation: none !important;
-        transition: none !important;
-      }
-
-      .gkm-pro-character-card,
-      .gkm-pro-character-card:hover {
-        transition: none !important;
-      }
-
-      .gkm-character-img-wrap img {
-        will-change: auto !important;
-      }
-
-      /* на слабых телефонах/ПК вообще без тяжёлых эффектов */
-      @media (max-width: 900px) {
-        .gkm-character-backdrop {
-          background: rgba(0, 0, 0, 0.92) !important;
-        }
-
-        body.gkm-character-open #detailsDialog .dialog-content {
-          opacity: 0.08 !important;
-        }
-
-        .gkm-character-modal {
-          box-shadow: none !important;
-        }
-      }
-    `;
-
-    document.head.appendChild(style);
-  }
-
-  injectFastStyle();
-
-  console.log("GKM FAST MODAL PATCH установлен");
-})();
-/* =========================================================
-   GKM CHARACTER MODAL FINAL FIX
-   Исправляет пустой тёмный экран при открытии персонажа
-========================================================= */
-
-(function () {
-  if (window.__gkmCharacterFinalFixInstalled) return;
-  window.__gkmCharacterFinalFixInstalled = true;
-
-  function injectFinalFixStyle() {
-    let old1 = document.getElementById("gkmCharacterOverlayFixStyle");
-    if (old1) old1.remove();
-
-    let old2 = document.getElementById("gkmFastModalStyle");
-    if (old2) old2.remove();
-
-    if (document.getElementById("gkmCharacterFinalFixStyle")) return;
-
-    const style = document.createElement("style");
-    style.id = "gkmCharacterFinalFixStyle";
-    style.textContent = `
-      body.gkm-character-open #detailsDialog .dialog-content {
-        opacity: 1 !important;
-        filter: none !important;
-        pointer-events: auto !important;
-      }
-
-      body.gkm-character-open {
-        overflow: hidden !important;
-      }
-
-      .gkm-character-backdrop {
-        position: fixed !important;
-        inset: 0 !important;
-        z-index: 2147483647 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 18px !important;
-        background: rgba(0, 0, 0, 0.88) !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-      }
-
-      .gkm-character-modal {
-        position: relative !important;
-        z-index: 2147483647 !important;
-        opacity: 1 !important;
-        filter: none !important;
-        transform: none !important;
-        width: min(420px, calc(100vw - 28px)) !important;
-        max-height: calc(100vh - 28px) !important;
-        overflow: auto !important;
-        border-radius: 24px !important;
-        background:
-          radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 38%),
-          radial-gradient(circle at top right, rgba(124, 58, 237, 0.26), transparent 40%),
-          #050816 !important;
-        border: 1px solid rgba(34, 211, 238, 0.55) !important;
-        color: white !important;
-        box-shadow: 0 0 28px rgba(124, 58, 237, 0.45) !important;
-      }
-
-      .gkm-character-img-wrap {
-        width: 100% !important;
-        height: 360px !important;
-        background: #020617 !important;
-        overflow: hidden !important;
-      }
-
-      .gkm-character-img-wrap img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        object-position: top center !important;
-        display: block !important;
-      }
-
-      .gkm-character-close {
-        position: absolute !important;
-        right: 12px !important;
-        top: 12px !important;
-        z-index: 2147483647 !important;
-        width: 42px !important;
-        height: 42px !important;
-        border-radius: 14px !important;
-        border: 1px solid rgba(34, 211, 238, 0.55) !important;
-        background: linear-gradient(180deg, #7c3aed, #312e81) !important;
-        color: white !important;
-        font-size: 26px !important;
-        cursor: pointer !important;
-      }
-
-      .gkm-character-body {
-        padding: 18px !important;
-      }
-
-      .gkm-character-body h3 {
-        margin: 0 0 12px !important;
-        color: white !important;
-        font-size: 24px !important;
-        line-height: 1.15 !important;
-      }
-
-      @media (max-width: 700px) {
-        .gkm-character-img-wrap {
-          height: 300px !important;
-        }
-      }
-    `;
-
-    document.head.appendChild(style);
-  }
-
-  function updateState() {
-    if (document.getElementById("gkmCharacterBackdrop")) {
-      document.body.classList.add("gkm-character-open");
-    } else {
-      document.body.classList.remove("gkm-character-open");
-    }
-  }
-
-  injectFinalFixStyle();
-
-  const observer = new MutationObserver(function () {
-    setTimeout(updateState, 10);
-  });
-
-  observer.observe(document.body, {
-    childList: true
-  });
-
-  document.addEventListener("click", function () {
-    setTimeout(updateState, 30);
-  });
-
-  document.addEventListener("keydown", function () {
-    setTimeout(updateState, 30);
-  });
-
-  console.log("GKM CHARACTER FINAL FIX установлен");
-})();
-/* =========================================================
-   GKM CHARACTER NATIVE DIALOG FIX
-   Персонаж открывается поверх основной карточки через <dialog>
-========================================================= */
-
-(function () {
-  if (window.__gkmCharacterNativeDialogFixInstalled) return;
-  window.__gkmCharacterNativeDialogFixInstalled = true;
-
-  function escapeText(value) {
+  function gkmEscapeText(value) {
     return String(value || "")
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
@@ -8889,25 +8371,134 @@ addRutubeSeasonExactList({
       .replace(/'/g, "&#039;");
   }
 
-  function cleanText(value) {
+  function gkmCleanText(value) {
     return String(value || "")
       .replace(/\s+/g, " ")
       .trim();
   }
 
-  function injectStyle() {
-    if (document.getElementById("gkmNativeCharacterDialogStyle")) return;
+  function gkmClearCharacterName(name) {
+    return gkmCleanText(name)
+      .replace(/\(.*?\)/g, "")
+      .replace(/,/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function gkmCropDescription(text) {
+    let s = String(text || "")
+      .replace(/\\n/g, "\n")
+      .replace(/\r/g, "")
+      .replace(/\n{3,}/g, "\n\n")
+      .replace(/No biography written.*$/gi, "")
+      .replace(/No voice actors have been added.*$/gi, "")
+      .trim();
+
+    if (s.length > 850) {
+      s = s.slice(0, 850).trim() + "...";
+    }
+
+    return s;
+  }
+
+  async function gkmFetchJsonSafe(url) {
+    try {
+      const res = await fetch(url, { cache: "force-cache" });
+      if (!res.ok) return null;
+      return await res.json();
+    } catch (e) {
+      console.warn("GKM character fetch error:", e);
+      return null;
+    }
+  }
+
+  async function gkmLoadCharacterDescription(name) {
+    const q = gkmClearCharacterName(name);
+    if (!q) return "";
+
+    const key = "gkm_char_desc_" + q.toLowerCase();
+
+    if (gkmCharDescCache.has(key)) {
+      return gkmCharDescCache.get(key);
+    }
+
+    try {
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        gkmCharDescCache.set(key, saved);
+        return saved;
+      }
+    } catch (e) {}
+
+    const search = await gkmFetchJsonSafe(
+      "https://api.jikan.moe/v4/characters?q=" + encodeURIComponent(q) + "&limit=5"
+    );
+
+    if (!search || !Array.isArray(search.data) || !search.data.length) {
+      gkmCharDescCache.set(key, "");
+      return "";
+    }
+
+    const lower = q.toLowerCase();
+
+    let best = search.data[0];
+
+    const exact = search.data.find(item => {
+      const itemName = gkmClearCharacterName(item.name).toLowerCase();
+      return itemName === lower || itemName.includes(lower) || lower.includes(itemName);
+    });
+
+    if (exact) best = exact;
+
+    if (!best || !best.mal_id) {
+      gkmCharDescCache.set(key, "");
+      return "";
+    }
+
+    const full = await gkmFetchJsonSafe(
+      "https://api.jikan.moe/v4/characters/" + best.mal_id + "/full"
+    );
+
+    const about =
+      full && full.data && full.data.about
+        ? full.data.about
+        : best.about || "";
+
+    const desc = gkmCropDescription(about);
+
+    if (desc) {
+      try {
+        localStorage.setItem(key, desc);
+      } catch (e) {}
+    }
+
+    gkmCharDescCache.set(key, desc);
+    return desc;
+  }
+
+  function gkmInjectCharacterDialogStyle() {
+    if (document.getElementById("gkmNativeCharacterStableStyle")) return;
 
     const style = document.createElement("style");
-    style.id = "gkmNativeCharacterDialogStyle";
+    style.id = "gkmNativeCharacterStableStyle";
     style.textContent = `
+      .gkm-pro-character-card {
+        cursor: pointer !important;
+      }
+
+      .gkm-pro-character-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(34, 211, 238, 0.85) !important;
+        box-shadow: 0 0 18px rgba(34, 211, 238, 0.20) !important;
+      }
+
       #gkmCharacterDialog {
         width: min(430px, calc(100vw - 26px));
         max-height: calc(100vh - 26px);
         padding: 0;
         border: 1px solid rgba(34, 211, 238, 0.65);
         border-radius: 24px;
-        overflow: hidden;
+        overflow: auto;
         background:
           radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 38%),
           radial-gradient(circle at top right, rgba(124, 58, 237, 0.26), transparent 40%),
@@ -8945,7 +8536,7 @@ addRutubeSeasonExactList({
 
       .gkm-native-character-img {
         width: 100%;
-        height: 370px;
+        height: 360px;
         background: #020617;
         overflow: hidden;
       }
@@ -9004,13 +8595,23 @@ addRutubeSeasonExactList({
         line-height: 1.35;
       }
 
+      .gkm-native-character-desc {
+        white-space: pre-line;
+        color: #dbeafe !important;
+        font-size: 13px;
+        line-height: 1.45;
+        font-weight: 600;
+        max-height: 220px;
+        overflow: auto;
+      }
+
       @media (max-width: 700px) {
         #gkmCharacterDialog {
           width: calc(100vw - 18px);
         }
 
         .gkm-native-character-img {
-          height: 310px;
+          height: 300px;
         }
 
         .gkm-native-character-body h3 {
@@ -9022,7 +8623,7 @@ addRutubeSeasonExactList({
     document.head.appendChild(style);
   }
 
-  function getOrCreateDialog() {
+  function gkmGetOrCreateCharacterDialog() {
     let dialog = document.getElementById("gkmCharacterDialog");
 
     if (!dialog) {
@@ -9034,61 +8635,84 @@ addRutubeSeasonExactList({
     return dialog;
   }
 
-  function openNativeCharacterDialog(card) {
-    if (!card) return;
-
-    injectStyle();
-
-    const oldBackdrop = document.getElementById("gkmCharacterBackdrop");
-    if (oldBackdrop) oldBackdrop.remove();
-
-    document.body.classList.remove("gkm-character-open");
-
-    const img = card.querySelector(".gkm-pro-character-img");
-    const name = cleanText(card.querySelector(".gkm-pro-character-name")?.textContent || "Персонаж");
-
-    const lines = Array.from(card.querySelectorAll(".gkm-pro-character-role"))
-      .map(el => cleanText(el.textContent))
-      .filter(Boolean);
-
-    let role = lines.find(x => !x.toLowerCase().includes("сейю")) || "Персонаж";
-    let voice = lines.find(x => x.toLowerCase().includes("сейю")) || "";
-
-    voice = voice.replace(/^Сейю:\s*/i, "").trim();
-
-    const imgSrc = img ? img.getAttribute("src") : "";
-
-    const dialog = getOrCreateDialog();
-
-    dialog.innerHTML = `
+  function gkmBuildCharacterDialogHtml(name, role, voice, imgSrc) {
+    return `
       <article class="gkm-native-character-card">
         <button class="gkm-native-character-close" type="button">×</button>
 
         <div class="gkm-native-character-img">
           ${
             imgSrc
-              ? `<img src="${escapeText(imgSrc)}" alt="">`
+              ? `<img src="${gkmEscapeText(imgSrc)}" alt="">`
               : `<div class="gkm-native-character-noimg">Нет изображения</div>`
           }
         </div>
 
         <div class="gkm-native-character-body">
-          <h3>${escapeText(name)}</h3>
+          <h3>${gkmEscapeText(name)}</h3>
 
           <div class="gkm-native-character-info">
             <div class="gkm-native-character-info-item">
               <p class="gkm-native-character-label">Роль</p>
-              <p class="gkm-native-character-value">${escapeText(role)}</p>
+              <p class="gkm-native-character-value">${gkmEscapeText(role || "Персонаж")}</p>
             </div>
 
             <div class="gkm-native-character-info-item">
               <p class="gkm-native-character-label">Сейю</p>
-              <p class="gkm-native-character-value">${escapeText(voice || "Пока не указано")}</p>
+              <p class="gkm-native-character-value">${gkmEscapeText(voice || "Пока не указано")}</p>
+            </div>
+
+            <div class="gkm-native-character-info-item">
+              <p class="gkm-native-character-label">Описание</p>
+              <p id="gkmNativeCharacterDesc" class="gkm-native-character-value gkm-native-character-desc">
+                Загружаю описание...
+              </p>
             </div>
           </div>
         </div>
       </article>
     `;
+  }
+
+  async function gkmHydrateNativeCharacterDescription(dialog, name) {
+    const descEl = dialog.querySelector("#gkmNativeCharacterDesc");
+    if (!descEl) return;
+
+    descEl.textContent = "Загружаю описание...";
+
+    const desc = await gkmLoadCharacterDescription(name);
+
+    if (!dialog.open) return;
+
+    descEl.textContent = desc || "Описание персонажа пока не найдено.";
+  }
+
+  function gkmOpenNativeCharacterDialog(card) {
+    if (!card) return;
+
+    gkmInjectCharacterDialogStyle();
+
+    const img = card.querySelector(".gkm-pro-character-img");
+    const name = gkmCleanText(card.querySelector(".gkm-pro-character-name")?.textContent || "Персонаж");
+
+    const lines = Array.from(card.querySelectorAll(".gkm-pro-character-role"))
+      .map(el => gkmCleanText(el.textContent))
+      .filter(Boolean);
+
+    const role = lines.find(x => !x.toLowerCase().includes("сейю")) || "Персонаж";
+
+    let voice = lines.find(x => x.toLowerCase().includes("сейю")) || "";
+    voice = voice.replace(/^Сейю:\s*/i, "").trim();
+
+    const imgSrc = img ? img.getAttribute("src") : "";
+
+    const dialog = gkmGetOrCreateCharacterDialog();
+
+    if (dialog.open) {
+      dialog.close();
+    }
+
+    dialog.innerHTML = gkmBuildCharacterDialogHtml(name, role, voice, imgSrc);
 
     const closeBtn = dialog.querySelector(".gkm-native-character-close");
 
@@ -9096,8 +8720,9 @@ addRutubeSeasonExactList({
       dialog.close();
     });
 
-    dialog.addEventListener("click", function closeByBackdrop(e) {
+    dialog.addEventListener("click", function (e) {
       const rect = dialog.getBoundingClientRect();
+
       const inside =
         e.clientX >= rect.left &&
         e.clientX <= rect.right &&
@@ -9109,11 +8734,9 @@ addRutubeSeasonExactList({
       }
     }, { once: true });
 
-    if (dialog.open) {
-      dialog.close();
-    }
-
     dialog.showModal();
+
+    gkmHydrateNativeCharacterDescription(dialog, name);
   }
 
   document.addEventListener("click", function (e) {
@@ -9125,412 +8748,11 @@ addRutubeSeasonExactList({
     e.stopPropagation();
     e.stopImmediatePropagation();
 
-    openNativeCharacterDialog(card);
+    gkmOpenNativeCharacterDialog(card);
   }, true);
 
-  injectStyle();
+  gkmInjectCharacterDialogStyle();
 
-  console.log("GKM CHARACTER NATIVE DIALOG FIX установлен");
+  console.log("GKM CHARACTER NATIVE STABLE установлен");
 })();
-/* =========================================================
-   GKM CHARACTER DESCRIPTION PATCH
-   Добавляет описание персонажа в карточку персонажа
-========================================================= */
 
-(function () {
-  if (window.__gkmCharacterDescriptionPatchInstalled) return;
-  window.__gkmCharacterDescriptionPatchInstalled = true;
-
-  const characterDescCache = new Map();
-
-  function cleanText(value) {
-    return String(value || "")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  function cleanCharacterName(name) {
-    return cleanText(name)
-      .replace(/\(.*?\)/g, "")
-      .replace(/,/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  function shortDescription(text) {
-    let s = String(text || "")
-      .replace(/\r/g, "")
-      .replace(/\n{3,}/g, "\n\n")
-      .replace(/\\n/g, "\n")
-      .replace(/No voice actors have been added.*$/gi, "")
-      .replace(/No biography written.*$/gi, "")
-      .trim();
-
-    if (!s) return "";
-
-    if (s.length > 950) {
-      s = s.slice(0, 950).trim() + "...";
-    }
-
-    return s;
-  }
-
-  async function fetchJsonSafe(url) {
-    try {
-      const res = await fetch(url, { cache: "force-cache" });
-      if (!res.ok) return null;
-      return await res.json();
-    } catch (e) {
-      console.warn("GKM character description fetch error:", e);
-      return null;
-    }
-  }
-
-  async function findCharacterDescription(name) {
-    const cleanName = cleanCharacterName(name);
-
-    if (!cleanName) return "";
-
-    const cacheKey = "gkm_character_desc_" + cleanName.toLowerCase();
-
-    if (characterDescCache.has(cacheKey)) {
-      return characterDescCache.get(cacheKey);
-    }
-
-    const saved = localStorage.getItem(cacheKey);
-
-    if (saved) {
-      characterDescCache.set(cacheKey, saved);
-      return saved;
-    }
-
-    const searchUrl =
-      "https://api.jikan.moe/v4/characters?q=" +
-      encodeURIComponent(cleanName) +
-      "&limit=5";
-
-    const searchData = await fetchJsonSafe(searchUrl);
-
-    if (!searchData || !Array.isArray(searchData.data) || !searchData.data.length) {
-      characterDescCache.set(cacheKey, "");
-      return "";
-    }
-
-    let best = searchData.data[0];
-
-    const lower = cleanName.toLowerCase();
-
-    const exact = searchData.data.find(item => {
-      const itemName = cleanCharacterName(item.name).toLowerCase();
-      return itemName === lower || itemName.includes(lower) || lower.includes(itemName);
-    });
-
-    if (exact) best = exact;
-
-    if (!best || !best.mal_id) {
-      characterDescCache.set(cacheKey, "");
-      return "";
-    }
-
-    const fullData = await fetchJsonSafe(
-      "https://api.jikan.moe/v4/characters/" + best.mal_id + "/full"
-    );
-
-    const about =
-      fullData &&
-      fullData.data &&
-      fullData.data.about
-        ? fullData.data.about
-        : best.about || "";
-
-    const desc = shortDescription(about);
-
-    if (desc) {
-      localStorage.setItem(cacheKey, desc);
-    }
-
-    characterDescCache.set(cacheKey, desc);
-
-    return desc;
-  }
-
-  function addDescriptionBox(dialog) {
-    if (!dialog) return null;
-
-    let box = dialog.querySelector("#gkmCharacterDescriptionBox");
-
-    if (box) return box;
-
-    const info = dialog.querySelector(".gkm-native-character-info");
-
-    if (!info) return null;
-
-    box = document.createElement("div");
-    box.id = "gkmCharacterDescriptionBox";
-    box.className = "gkm-native-character-info-item";
-    box.innerHTML = `
-      <p class="gkm-native-character-label">Описание</p>
-      <p class="gkm-native-character-value gkm-character-description-text">
-        Загружаю описание...
-      </p>
-    `;
-
-    info.appendChild(box);
-
-    return box;
-  }
-
-  async function hydrateCharacterDescription() {
-    const dialog = document.getElementById("gkmCharacterDialog");
-
-    if (!dialog || !dialog.open) return;
-
-    const title = dialog.querySelector(".gkm-native-character-body h3");
-
-    if (!title) return;
-
-    const name = cleanText(title.textContent);
-
-    if (!name) return;
-
-    const box = addDescriptionBox(dialog);
-
-    if (!box) return;
-
-    const textEl = box.querySelector(".gkm-character-description-text");
-
-    if (!textEl) return;
-
-    textEl.textContent = "Загружаю описание...";
-
-    const desc = await findCharacterDescription(name);
-
-    if (!document.getElementById("gkmCharacterDialog")?.open) return;
-
-    if (desc) {
-      textEl.textContent = desc;
-    } else {
-      textEl.textContent = "Описание персонажа пока не найдено.";
-    }
-  }
-
-  function injectDescriptionStyle() {
-    if (document.getElementById("gkmCharacterDescriptionStyle")) return;
-
-    const style = document.createElement("style");
-    style.id = "gkmCharacterDescriptionStyle";
-    style.textContent = `
-      #gkmCharacterDescriptionBox {
-        max-height: 240px;
-        overflow: auto;
-      }
-
-      .gkm-character-description-text {
-        white-space: pre-line;
-        font-size: 13px !important;
-        line-height: 1.45 !important;
-        color: #dbeafe !important;
-        font-weight: 600 !important;
-      }
-
-      #gkmCharacterDescriptionBox::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      #gkmCharacterDescriptionBox::-webkit-scrollbar-thumb {
-        background: rgba(34, 211, 238, 0.45);
-        border-radius: 999px;
-      }
-    `;
-
-    document.head.appendChild(style);
-  }
-
-  injectDescriptionStyle();
-
-  const observer = new MutationObserver(function () {
-    clearTimeout(window.__gkmCharacterDescriptionTimer);
-    window.__gkmCharacterDescriptionTimer = setTimeout(hydrateCharacterDescription, 250);
-  });
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-
-  document.addEventListener("click", function () {
-    setTimeout(hydrateCharacterDescription, 350);
-  });
-
-  console.log("GKM CHARACTER DESCRIPTION PATCH установлен");
-})();
-/* =========================================================
-   GKM CHARACTER DESCRIPTION FINAL
-   Надёжно добавляет описание в dialog персонажа
-========================================================= */
-
-(function () {
-  if (window.__gkmCharacterDescriptionFinalInstalled) return;
-  window.__gkmCharacterDescriptionFinalInstalled = true;
-
-  const descCache = new Map();
-
-  function clean(value) {
-    return String(value || "").replace(/\s+/g, " ").trim();
-  }
-
-  function clearName(name) {
-    return clean(name)
-      .replace(/\(.*?\)/g, "")
-      .replace(/,/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  function crop(text) {
-    let s = String(text || "")
-      .replace(/\\n/g, "\n")
-      .replace(/\r/g, "")
-      .replace(/\n{3,}/g, "\n\n")
-      .replace(/No biography written.*$/gi, "")
-      .trim();
-
-    if (s.length > 850) s = s.slice(0, 850).trim() + "...";
-
-    return s;
-  }
-
-  async function getJson(url) {
-    try {
-      const res = await fetch(url, { cache: "force-cache" });
-      if (!res.ok) return null;
-      return await res.json();
-    } catch (e) {
-      console.warn("character desc error", e);
-      return null;
-    }
-  }
-
-  async function loadDesc(name) {
-    const q = clearName(name);
-    if (!q) return "";
-
-    const key = "char_desc_" + q.toLowerCase();
-
-    if (descCache.has(key)) return descCache.get(key);
-
-    const saved = localStorage.getItem(key);
-    if (saved) {
-      descCache.set(key, saved);
-      return saved;
-    }
-
-    const search = await getJson(
-      "https://api.jikan.moe/v4/characters?q=" + encodeURIComponent(q) + "&limit=3"
-    );
-
-    if (!search || !Array.isArray(search.data) || !search.data.length) {
-      descCache.set(key, "");
-      return "";
-    }
-
-    const first = search.data[0];
-
-    if (!first || !first.mal_id) {
-      descCache.set(key, "");
-      return "";
-    }
-
-    const full = await getJson(
-      "https://api.jikan.moe/v4/characters/" + first.mal_id + "/full"
-    );
-
-    const about = full && full.data && full.data.about ? full.data.about : "";
-    const desc = crop(about);
-
-    if (desc) localStorage.setItem(key, desc);
-
-    descCache.set(key, desc);
-
-    return desc;
-  }
-
-  function injectStyle() {
-    if (document.getElementById("gkmCharDescFinalStyle")) return;
-
-    const style = document.createElement("style");
-    style.id = "gkmCharDescFinalStyle";
-    style.textContent = `
-      .gkm-char-desc-final {
-        margin-top: 10px;
-        padding: 12px;
-        border-radius: 16px;
-        background: rgba(15, 23, 42, 0.82);
-        border: 1px solid rgba(148, 163, 184, 0.18);
-        max-height: 220px;
-        overflow: auto;
-      }
-
-      .gkm-char-desc-final-label {
-        margin: 0 0 6px;
-        color: #94a3b8;
-        font-size: 12px;
-      }
-
-      .gkm-char-desc-final-text {
-        margin: 0;
-        color: #dbeafe;
-        font-size: 13px;
-        line-height: 1.45;
-        font-weight: 600;
-        white-space: pre-line;
-      }
-    `;
-
-    document.head.appendChild(style);
-  }
-
-  async function addDesc() {
-    injectStyle();
-
-    const dialog = document.getElementById("gkmCharacterDialog");
-    if (!dialog || !dialog.open) return;
-
-    const body = dialog.querySelector(".gkm-native-character-body");
-    const title = dialog.querySelector(".gkm-native-character-body h3");
-
-    if (!body || !title) return;
-
-    let box = dialog.querySelector(".gkm-char-desc-final");
-
-    if (!box) {
-      box = document.createElement("div");
-      box.className = "gkm-char-desc-final";
-      box.innerHTML = `
-        <p class="gkm-char-desc-final-label">Описание</p>
-        <p class="gkm-char-desc-final-text">Загружаю описание...</p>
-      `;
-      body.appendChild(box);
-    }
-
-    const textEl = box.querySelector(".gkm-char-desc-final-text");
-    const name = clean(title.textContent);
-
-    textEl.textContent = "Загружаю описание...";
-
-    const desc = await loadDesc(name);
-
-    if (!dialog.open) return;
-
-    textEl.textContent = desc || "Описание персонажа пока не найдено.";
-  }
-
-  document.addEventListener("click", function (e) {
-    if (e.target.closest(".gkm-pro-character-card")) {
-      setTimeout(addDesc, 500);
-      setTimeout(addDesc, 1200);
-    }
-  }, true);
-
-  console.log("GKM CHARACTER DESCRIPTION FINAL установлен");
-})();
