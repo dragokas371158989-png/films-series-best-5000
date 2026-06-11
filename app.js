@@ -49,6 +49,51 @@ function translateKnownTitle(title) {
   const norm = raw.toLowerCase().replace(/[‐‑‒–—―-]/g, "-").replace(/\s+/g, " ").trim();
 
   const RU_TITLE_MAP = {
+
+    "attack on titan season 2": "Атака титанов 2 сезон",
+    "shingeki no kyojin season 2": "Атака титанов 2 сезон",
+    "attack on titan season 3": "Атака титанов 3 сезон",
+    "shingeki no kyojin season 3": "Атака титанов 3 сезон",
+    "attack on titan final season": "Атака титанов: Финальный сезон",
+    "shingeki no kyojin the final season": "Атака титанов: Финальный сезон",
+
+    "demon slayer: kimetsu no yaiba": "Истребитель демонов",
+    "demon slayer kimetsu no yaiba": "Истребитель демонов",
+    "demon slayer: kimetsu no yaiba tanjiro kamado, unwavering resolve arc": "Истребитель демонов",
+    "demon slayer kimetsu no yaiba tanjiro kamado unwavering resolve arc": "Истребитель демонов",
+    "kimetsu no yaiba": "Истребитель демонов",
+    "kimetsu no yaiba: yuukaku-hen": "Истребитель демонов: Квартал красных фонарей",
+    "kimetsu no yaiba yuukaku-hen": "Истребитель демонов: Квартал красных фонарей",
+    "kimetsu no yaiba: katanakaji no sato-hen": "Истребитель демонов: Деревня кузнецов",
+    "kimetsu no yaiba katanakaji no sato-hen": "Истребитель демонов: Деревня кузнецов",
+
+    "one punch man": "Ванпанчмен",
+    "one-punch man": "Ванпанчмен",
+    "one punch man 2nd season": "Ванпанчмен 2 сезон",
+    "one-punch man 2nd season": "Ванпанчмен 2 сезон",
+
+    "death note": "Тетрадь смерти",
+    "fullmetal alchemist": "Стальной алхимик",
+    "fullmetal alchemist: brotherhood": "Стальной алхимик: Братство",
+    "fullmetal alchemist brotherhood": "Стальной алхимик: Братство",
+
+    "naruto: shippuden": "Наруто: Ураганные хроники",
+    "naruto shippuden": "Наруто: Ураганные хроники",
+    "naruto shippuuden": "Наруто: Ураганные хроники",
+
+    "boku no hero academia": "Моя геройская академия",
+    "my hero academia": "Моя геройская академия",
+    "boku no hero academia 2nd season": "Моя геройская академия 2 сезон",
+    "boku no hero academia 3rd season": "Моя геройская академия 3 сезон",
+    "boku no hero academia 4th season": "Моя геройская академия 4 сезон",
+    "boku no hero academia 5th season": "Моя геройская академия 5 сезон",
+    "boku no hero academia 6th season": "Моя геройская академия 6 сезон",
+
+    "dragon ball z": "Драконий жемчуг Z",
+    "dragon ball z kai": "Драконий жемчуг Z Кай",
+    "dragon ball z kai: the final chapters": "Драконий жемчуг Z Кай: Финальные главы",
+    "dragon ball super": "Драконий жемчуг Супер",
+    "dragon ball": "Драконий жемчуг",
     "attack on titan": "Атака титанов",
     "shingeki no kyojin": "Атака титанов",
     "one piece": "Ван-Пис",
@@ -9144,5 +9189,107 @@ addRutubeSeasonExactList({
   cleanupRoot(document);
 
   console.log("GKM RU LABELS CLEANUP FINAL установлен");
+})();
+
+/* ===== GKM RU TITLE CLEANUP FINAL ===== */
+(function () {
+  if (window.__gkmRuTitleCleanupFinal) return;
+  window.__gkmRuTitleCleanupFinal = true;
+
+  const TITLE_MAP = {
+    "attack on titan season 2": "Атака титанов 2 сезон",
+    "attack on titan season 3": "Атака титанов 3 сезон",
+    "attack on titan final season": "Атака титанов: Финальный сезон",
+    "demon slayer: kimetsu no yaiba": "Истребитель демонов",
+    "demon slayer kimetsu no yaiba": "Истребитель демонов",
+    "demon slayer: kimetsu no...": "Истребитель демонов",
+    "kimetsu no yaiba": "Истребитель демонов",
+    "one punch man": "Ванпанчмен",
+    "one-punch man": "Ванпанчмен",
+    "death note": "Тетрадь смерти",
+    "fullmetal alchemist": "Стальной алхимик",
+    "fullmetal alchemist: brotherhood": "Стальной алхимик: Братство",
+    "fullmetal alchemist brotherhood": "Стальной алхимик: Братство",
+    "naruto shippuden": "Наруто: Ураганные хроники",
+    "naruto: shippuden": "Наруто: Ураганные хроники",
+    "boku no hero academia": "Моя геройская академия",
+    "my hero academia": "Моя геройская академия",
+    "dragon ball z kai": "Драконий жемчуг Z Кай",
+    "dragon ball z kai: the final chapters": "Драконий жемчуг Z Кай: Финальные главы",
+    "dragon ball super": "Драконий жемчуг Супер",
+    "dragon ball z": "Драконий жемчуг Z",
+    "dragon ball": "Драконий жемчуг"
+  };
+
+  function normTitle(s) {
+    return String(s || "")
+      .toLowerCase()
+      .replace(/[‐‑‒–—―-]/g, "-")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function translateTitleText(text) {
+    const raw = String(text || "").trim();
+    const n = normTitle(raw);
+
+    if (TITLE_MAP[n]) return TITLE_MAP[n];
+
+    for (const key in TITLE_MAP) {
+      if (n.startsWith(key) || n.includes(key)) {
+        return TITLE_MAP[key];
+      }
+    }
+
+    return raw;
+  }
+
+  function cleanupTitles(root) {
+    const scope = root || document;
+
+    if (!scope.querySelectorAll) return;
+
+    scope.querySelectorAll(".card-title, #detailTitle").forEach(function (el) {
+      const oldText = String(el.textContent || "").trim();
+      const newText = translateTitleText(oldText);
+
+      if (newText && newText !== oldText) {
+        el.textContent = newText;
+      }
+    });
+  }
+
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (m) {
+      if (m.type === "childList") {
+        m.addedNodes.forEach(function (node) {
+          cleanupTitles(node);
+        });
+      }
+
+      if (m.type === "characterData" && m.target && m.target.parentElement) {
+        cleanupTitles(m.target.parentElement);
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  document.addEventListener("click", function () {
+    setTimeout(function () { cleanupTitles(document); }, 100);
+    setTimeout(function () { cleanupTitles(document); }, 800);
+  }, true);
+
+  setInterval(function () {
+    cleanupTitles(document);
+  }, 2500);
+
+  cleanupTitles(document);
+
+  console.log("GKM RU TITLE CLEANUP FINAL установлен");
 })();
 
