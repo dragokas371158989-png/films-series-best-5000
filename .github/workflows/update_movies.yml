@@ -28,7 +28,7 @@ jobs:
         run: |
           python tools/update_movies_updates.py
           python tools/merge_movies_updates_to_data.py
-
+          python tools/update_cast_cache.py
       - name: Commit changes
         run: |
           git config user.name "movie-updater-bot"
