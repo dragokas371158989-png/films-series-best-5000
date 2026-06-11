@@ -8586,3 +8586,78 @@ addRutubeSeasonExactList({
 
   console.log("GKM CHARACTER MODAL PATCH установлен");
 })();
+/* =========================================================
+   GKM CHARACTER MODAL OVERLAY FIX
+   Когда открыт персонаж — основная карточка не мешает
+========================================================= */
+
+(function () {
+  if (window.__gkmCharacterOverlayFixInstalled) return;
+  window.__gkmCharacterOverlayFixInstalled = true;
+
+  function injectFixStyle() {
+    if (document.getElementById("gkmCharacterOverlayFixStyle")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkmCharacterOverlayFixStyle";
+    style.textContent = `
+      .gkm-character-backdrop {
+        z-index: 2147483647 !important;
+        background: rgba(0, 0, 0, 0.92) !important;
+        backdrop-filter: blur(14px) !important;
+      }
+
+      .gkm-character-modal {
+        z-index: 2147483647 !important;
+        position: relative !important;
+      }
+
+      body.gkm-character-open #detailsDialog .dialog-content {
+        opacity: 0.08 !important;
+        filter: blur(10px) !important;
+        pointer-events: none !important;
+      }
+
+      body.gkm-character-open .gkm-character-backdrop {
+        pointer-events: auto !important;
+      }
+
+      body.gkm-character-open {
+        overflow: hidden !important;
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  function setCharacterOpenState() {
+    const modal = document.getElementById("gkmCharacterBackdrop");
+
+    if (modal) {
+      document.body.classList.add("gkm-character-open");
+    } else {
+      document.body.classList.remove("gkm-character-open");
+    }
+  }
+
+  injectFixStyle();
+
+  const observer = new MutationObserver(function () {
+    setCharacterOpenState();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: false
+  });
+
+  document.addEventListener("click", function () {
+    setTimeout(setCharacterOpenState, 30);
+  });
+
+  document.addEventListener("keydown", function () {
+    setTimeout(setCharacterOpenState, 30);
+  });
+
+  console.log("GKM CHARACTER OVERLAY FIX установлен");
+})();
