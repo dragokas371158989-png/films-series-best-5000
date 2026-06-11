@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="ru">
 <head>
   <meta charset="utf-8">
@@ -57,8 +58,7 @@
     <option value="Аниме">Аниме</option>
   </select>
 
-  <select id="genreFilter"><option value="">Все жанры</option></select>
-  <select id="yearFilter"><option value="">Все годы</option></select>
+<select id="genreFilter"><option value="">Все жанры</option></select> <select id="yearFilter"><option value="">Все годы</option></select>
 
   <select id="ratingFilter">
     <option value="0">Любой рейтинг</option>
@@ -75,7 +75,8 @@
     <option value="title">По названию</option>
   </select>
 
-  <button id="resetFiltersBtn" class="reset-btn" type="button">Сброс</button>
+<button id="resetFiltersBtn" class="reset-btn" type="button">Сброс</button>
+
 </section>
 
 <nav class="tabs">
@@ -122,51 +123,54 @@
   <div class="dialog-content">
     <button id="closeDialog" class="close" type="button">×</button>
 
-    <div class="details">
-      <img id="detailPoster" alt="">
-      <div>
-        <h2 id="detailTitle"></h2>
-        <p id="detailMeta"></p>
-        <p id="detailGenres"></p>
-        <p id="detailOverview"></p>
-      </div>
-    </div>
+```
+<div class="details">
+  <img id="detailPoster" alt="">
+  <div>
+    <h2 id="detailTitle"></h2>
+    <p id="detailMeta"></p>
+    <p id="detailGenres"></p>
+    <p id="detailOverview"></p>
+  </div>
+</div>
 
-    <section id="gkmProSlot"></section>
+<section id="gkmProSlot"></section>
 
-    <section id="animeLinksBlock" class="links-block">
-      <h3 class="links-title">Аниме-сайты</h3>
-      <div class="detail-buttons">
-        <a id="shikimoriLink" target="_blank" rel="noreferrer">Shikimori</a>
-        <a id="malLink" target="_blank" rel="noreferrer">MyAnimeList</a>
-        <a id="anilistLink" target="_blank" rel="noreferrer">AniList</a>
-        <a id="animePlanetLink" target="_blank" rel="noreferrer">Anime-Planet</a>
-        <a id="anidbLink" target="_blank" rel="noreferrer">AniDB</a>
-      </div>
-    </section>
+<section id="animeLinksBlock" class="links-block">
+  <h3 class="links-title">Аниме-сайты</h3>
+  <div class="detail-buttons">
+    <a id="shikimoriLink" target="_blank" rel="noreferrer">Shikimori</a>
+    <a id="malLink" target="_blank" rel="noreferrer">MyAnimeList</a>
+    <a id="anilistLink" target="_blank" rel="noreferrer">AniList</a>
+    <a id="animePlanetLink" target="_blank" rel="noreferrer">Anime-Planet</a>
+    <a id="anidbLink" target="_blank" rel="noreferrer">AniDB</a>
+  </div>
+</section>
 
-    <section id="catalogLinksBlock" class="links-block">
-      <h3 class="links-title">Найти на сайтах-каталогах</h3>
-      <div class="detail-buttons">
-        <a id="myshowsLink" target="_blank" rel="noreferrer">MyShows</a>
-        <a id="kinoforumLink" target="_blank" rel="noreferrer">Кинофорум</a>
-        <a id="kinoMailLink" target="_blank" rel="noreferrer">Кино Mail</a>
-        <a id="filmRuLink" target="_blank" rel="noreferrer">Film.ru</a>
-        <a id="kinoafishaLink" target="_blank" rel="noreferrer">Киноафиша</a>
-      </div>
-    </section>
+<section id="catalogLinksBlock" class="links-block">
+  <h3 class="links-title">Найти на сайтах-каталогах</h3>
+  <div class="detail-buttons">
+    <a id="myshowsLink" target="_blank" rel="noreferrer">MyShows</a>
+    <a id="kinoforumLink" target="_blank" rel="noreferrer">Кинофорум</a>
+    <a id="kinoMailLink" target="_blank" rel="noreferrer">Кино Mail</a>
+    <a id="filmRuLink" target="_blank" rel="noreferrer">Film.ru</a>
+    <a id="kinoafishaLink" target="_blank" rel="noreferrer">Киноафиша</a>
+  </div>
+</section>
 
-    <section class="links-block">
-      <h3 class="links-title">Видео и поиск</h3>
-      <div class="detail-buttons">
-        <button id="favBtn" type="button">В избранное</button>
-        <a id="kinopoiskLink" target="_blank" rel="noreferrer">Кинопоиск</a>
-        <a id="youtubeLink" target="_blank" rel="noreferrer">YouTube</a>
-        <a id="vkLink" target="_blank" rel="noreferrer">VK Видео</a>
-        <a id="rutubeLink" target="_blank" rel="noreferrer">Rutube</a>
-        <a id="googleLink" target="_blank" rel="noreferrer">Google</a>
-      </div>
-    </section>
+<section class="links-block">
+  <h3 class="links-title">Видео и поиск</h3>
+  <div class="detail-buttons">
+    <button id="favBtn" type="button">В избранное</button>
+    <a id="kinopoiskLink" target="_blank" rel="noreferrer">Кинопоиск</a>
+    <a id="youtubeLink" target="_blank" rel="noreferrer">YouTube</a>
+    <a id="vkLink" target="_blank" rel="noreferrer">VK Видео</a>
+    <a id="rutubeLink" target="_blank" rel="noreferrer">Rutube</a>
+    <a id="googleLink" target="_blank" rel="noreferrer">Google</a>
+  </div>
+</section>
+```
+
   </div>
 </dialog>
 
@@ -191,8 +195,7 @@
   </p>
 </section>
 
-<script>
-  document.write('<script src="app.js?v=' + Date.now() + '"><\\/script>');
-</script>
+<script src="app.js"></script>
+
 </body>
 </html>
