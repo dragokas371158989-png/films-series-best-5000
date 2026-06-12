@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v30-helper-no-freeze-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v31-yummyanime-anime-sites-exact-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -2804,11 +2804,11 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v30-helper-no-freeze-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v31-yummyanime-anime-sites-exact-2026-06-13";
 })();
 
 
-/* === GKM V29 YUMMYANIME EVERY ANIME STRICT === */
+/* === GKM V31 YUMMYANIME EXACT ANIME-SITES BLOCK === */
 (function () {
   const SLIME_MOVIE_URL = "https://yummyanime.tv/1204-o-moem-pererozhdenii-v-sliz-film-g1.html";
 
@@ -2836,116 +2836,109 @@ if (document.readyState === "loading") {
       .trim();
   }
 
-  function getOpenDetailRoot() {
+  function root() {
     return document.querySelector("dialog[open]") ||
       document.querySelector(".detail-modal[open], .modal[open], #detailsModal, #detailModal, .details-modal, .detail-view") ||
       document.body;
   }
 
-  function getTitleFromRoot(root) {
-    const selectors = [
-      ".detail-title", ".modal-title", ".details-title", ".movie-title",
-      "[data-title]", "h1", "h2"
-    ];
-
-    for (const sel of selectors) {
-      const el = root.querySelector && root.querySelector(sel);
+  function title(rootEl) {
+    const selectors = [".detail-title", ".modal-title", ".details-title", ".movie-title", "[data-title]", "h1", "h2"];
+    for (const s of selectors) {
+      const el = rootEl.querySelector && rootEl.querySelector(s);
       if (!el) continue;
       const t = cleanTitle(el.getAttribute("data-title") || el.textContent || "");
-      if (t && t.length > 1 && !/смотреть|искать|аниме-сайты|найти на сайтах/i.test(t)) return t;
+      if (t && !/смотреть|искать|аниме-сайты|найти на сайтах/i.test(t)) return t;
     }
-
-    const text = cleanTitle((root.textContent || "").split("\n").map(x => x.trim()).filter(Boolean)[0] || "");
-    return text || "anime";
+    return "anime";
   }
 
-  function isAnimeRoot(root) {
-    const text = norm(root.textContent || "");
-    // Жестко: если в карточке есть тип Аниме или источники Jikan/MAL, значит добавляем
+  function isAnime(rootEl) {
+    const text = norm(rootEl.textContent || "");
     return /тип\s*аниме/.test(text) ||
-      text.includes("аниме") && (text.includes("jikan") || text.includes("myanimelist") || text.includes("аниме-сайты")) ||
-      text.includes("shikimori") || text.includes("anilist") || text.includes("anidb");
+      text.includes("jikan") ||
+      text.includes("myanimelist") ||
+      text.includes("shikimori") ||
+      text.includes("anilist") ||
+      text.includes("anidb");
   }
 
-  function isSlime(root) {
-    const text = norm((root.textContent || "") + " " + getTitleFromRoot(root));
+  function isSlime(rootEl) {
+    const text = norm((rootEl.textContent || "") + " " + title(rootEl));
     return SLIME_HINTS.some(h => text.includes(norm(h)));
   }
 
-  function yummyUrl(root) {
-    if (isSlime(root)) return SLIME_MOVIE_URL;
-    const title = getTitleFromRoot(root);
-    return "https://yummyanime.tv/index.php?do=search&subaction=search&story=" + encodeURIComponent(title);
+  function yummyUrl(rootEl) {
+    if (isSlime(rootEl)) return SLIME_MOVIE_URL;
+    return "https://yummyanime.tv/index.php?do=search&subaction=search&story=" + encodeURIComponent(title(rootEl));
   }
 
-  function makeButton(root) {
-    const a = document.createElement("a");
-    a.id = "yummyAnimeLink";
-    a.href = yummyUrl(root);
-    a.target = "_blank";
-    a.rel = "noreferrer";
-    a.textContent = "YummyAnime";
-    return a;
+  function removeWrongButtons(rootEl) {
+    // Убираем YummyAnime из блока "Смотреть / искать видео", если он туда попал старой версией.
+    const links = Array.from(rootEl.querySelectorAll("#yummyAnimeLink"));
+    links.forEach(a => {
+      const section = a.closest("section, .links-block, .detail-block, .detail-section, div");
+      const txt = norm(section && section.textContent);
+      if (txt && txt.includes("смотреть / искать видео")) a.remove();
+    });
   }
 
-  function findAnimeSitesBlock(root) {
-    const candidates = Array.from(root.querySelectorAll("section, .links-block, .detail-block, .detail-section, .detail-links, div"));
-    let block = candidates.find(el => /аниме-сайты/i.test(el.textContent || ""));
+  function findAnimeSitesButtonBox(rootEl) {
+    // Ищем именно заголовок "Аниме-сайты", а не большой родительский блок.
+    const headers = Array.from(rootEl.querySelectorAll("h1,h2,h3,h4,.links-title,.section-title,b,strong"));
+    const header = headers.find(h => norm(h.textContent) === "аниме-сайты" || norm(h.textContent).includes("аниме-сайты"));
+    if (!header) return null;
 
-    if (!block) {
-      const headers = Array.from(root.querySelectorAll("h1,h2,h3,h4,strong,b"));
-      const h = headers.find(el => /аниме-сайты/i.test(el.textContent || ""));
-      if (h) block = h.closest("section,.links-block,.detail-block,.detail-section,div") || h.parentElement;
+    let box = header.nextElementSibling;
+    while (box && !box.querySelector("a,button")) {
+      box = box.nextElementSibling;
     }
 
-    return block;
+    if (box) return box;
+
+    const parent = header.parentElement;
+    if (!parent) return null;
+    return parent.querySelector(".detail-buttons, .links-row, .buttons-row");
   }
 
-  function ensureButton() {
-    const root = getOpenDetailRoot();
-    if (!root || !isAnimeRoot(root)) return;
+  function ensure() {
+    const r = root();
+    if (!r || !isAnime(r)) return;
 
-    const animeBlock = findAnimeSitesBlock(root);
-    if (!animeBlock) return;
+    removeWrongButtons(r);
 
-    const btnBox =
-      animeBlock.querySelector(".detail-buttons") ||
-      animeBlock.querySelector(".links-row") ||
-      Array.from(animeBlock.querySelectorAll("div")).find(d => d.querySelector("a,button")) ||
-      animeBlock;
+    const box = findAnimeSitesButtonBox(r);
+    if (!box) return;
 
-    if (!btnBox) return;
-
-    let btn = btnBox.querySelector("#yummyAnimeLink");
+    let btn = box.querySelector("#yummyAnimeLink");
     if (!btn) {
-      btn = makeButton(root);
-      btnBox.appendChild(btn);
+      btn = document.createElement("a");
+      btn.id = "yummyAnimeLink";
+      btn.target = "_blank";
+      btn.rel = "noreferrer";
+      btn.textContent = "YummyAnime";
+      box.appendChild(btn);
     }
 
-    btn.href = yummyUrl(root);
+    btn.href = yummyUrl(r);
   }
 
-  let yummyTimer = 0;
-  function scheduleYummy() {
-    clearTimeout(yummyTimer);
-    yummyTimer = setTimeout(ensureButton, 120);
+  let timer = 0;
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(ensure, 120);
   }
-
-  const obs = new MutationObserver(scheduleYummy);
 
   function start() {
-    ensureButton();
-    obs.observe(document.body, { childList: true, subtree: true });
-    document.addEventListener("click", () => setTimeout(ensureButton, 160), true);
+    ensure();
+    new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
+    document.addEventListener("click", () => setTimeout(ensure, 180), true);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
   else start();
 
-  window.GKM_YUMMYANIME_LINK_VERSION = "v29-yummyanime-every-anime-strict-2026-06-13";
+  window.GKM_YUMMYANIME_LINK_VERSION = "v31-yummyanime-anime-sites-exact-2026-06-13";
+  window.GKM_NO_FREEZE_VERSION = "v31-yummyanime-anime-sites-exact-2026-06-13";
 })();
 
-
-
-/* === GKM V30 NO FREEZE PATCH === */
-window.GKM_NO_FREEZE_VERSION = "v30-helper-no-freeze-2026-06-13";
