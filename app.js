@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "clean-rebuild-v2-2-yandex-correct-small-app-2026-06-12";
+const GKM_APP_CLEAN_VERSION = "clean-rebuild-v2-3-filters-sort-fixed-2026-06-12";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -380,8 +380,9 @@ function renderSearchPage(page = 1) {
 async function runSearch() {
   const searchInput = $("searchInput");
   const q = normKey(searchInput ? searchInput.value : "");
+  const controlsActive = hasActiveControls();
 
-  if (!q) {
+  if (!q && !controlsActive) {
     lastSearchResults = [];
 
     if (currentTab === "all") renderHome();
@@ -396,11 +397,11 @@ async function runSearch() {
   for (const item of index) {
     if (matchesQuery(item, q)) {
       raw.push(item);
-      if (raw.length >= 2500) break;
     }
   }
 
-  lastSearchResults = applyLocalFilters(raw);
+  const scoped = applyTabFilter(raw);
+  lastSearchResults = applyLocalFilters(scoped);
   renderSearchPage(1);
 }
 
@@ -592,7 +593,34 @@ async function renderRandom() {
 
 function currentSearchActive() {
   const searchInput = $("searchInput");
-  return Boolean(normKey(searchInput ? searchInput.value : ""));
+  return Boolean(normKey(searchInput ? searchInput.value : "") || hasActiveControls());
+}
+
+function hasActiveControls() {
+  const typeFilter = $("typeFilter");
+  const genreFilter = $("genreFilter");
+  const yearFilter = $("yearFilter");
+  const ratingFilter = $("ratingFilter");
+  const sortFilter = $("sortFilter");
+
+  return Boolean(
+    (typeFilter && typeFilter.value) ||
+    (genreFilter && genreFilter.value) ||
+    (yearFilter && yearFilter.value) ||
+    Number(ratingFilter ? ratingFilter.value || 0 : 0) ||
+    (sortFilter && sortFilter.value && sortFilter.value !== "smart")
+  );
+}
+
+function applyTabFilter(list) {
+  if (currentTab === "movies") return list.filter(m => getType(m) === "Фильм");
+  if (currentTab === "series") return list.filter(m => getType(m) === "Сериал");
+  if (currentTab === "anime") return list.filter(m => getType(m) === "Аниме");
+  if (currentTab === "cartoons") return list.filter(m => getType(m) === "Мультфильм");
+  if (currentTab === "top") return list.filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP && getRating(m) >= 7);
+  if (currentTab === "new") return list.filter(m => Number(getYear(m) || 0) >= 2024);
+  if (currentTab === "popular") return list.filter(m => getVotes(m) >= 1000);
+  return list;
 }
 
 function setupEvents() {
@@ -610,7 +638,13 @@ function setupEvents() {
     if (moreBtn) {
       const tabName = moreBtn.dataset.openTab || "all";
       setActiveTab(tabName);
-      await loadPage(tabName, 1);
+
+      if (currentSearchActive()) {
+        await runSearch();
+      } else {
+        await loadPage(tabName, 1);
+      }
+
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
@@ -632,15 +666,17 @@ function setupEvents() {
       const tabName = tab.dataset.tab || "all";
       setActiveTab(tabName);
 
-      if (tabName === "all") {
-        currentPage = 1;
-        renderHome();
-      } else if (tabName === "fav") {
+      if (tabName === "fav") {
         await renderFavorites();
       } else if (tabName === "history") {
         await renderHistory();
       } else if (tabName === "random") {
         await renderRandom();
+      } else if (currentSearchActive()) {
+        await runSearch();
+      } else if (tabName === "all") {
+        currentPage = 1;
+        renderHome();
       } else {
         await loadPage(tabName, 1);
       }
