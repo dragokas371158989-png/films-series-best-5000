@@ -26,6 +26,7 @@ jobs:
           TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
           KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
           TARGET_COUNT: "5000"
+          GKM_CAST_LIMIT: "80"
         run: |
           python tools/update_movies_updates.py
           python tools/merge_movies_updates_to_data.py
