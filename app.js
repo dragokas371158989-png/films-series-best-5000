@@ -8,7 +8,7 @@ const TMDB_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzIyNGQ4YzcwMmRkYTIzNjA4Mzh
 
 const INITIAL_CHUNKS = 2;
 const BACKGROUND_RENDER_EVERY = 999999;
-const BACKGROUND_PAUSE_MS = 40;
+const BACKGROUND_PAUSE_MS = 60;
 const FILTER_DEBOUNCE_MS = 180;
 const HOME_SECTION_LIMIT = 12;
 
@@ -10102,53 +10102,153 @@ return cast;
 
 
 
-/* ===== GKM RESTORE FULL SITE SAFE PATCH V16 ===== */
+/* ===== GKM DETAIL ANTI FREEZE PATCH V17 ===== */
 (function () {
-  if (window.__gkmRestoreFullSiteSafePatchV16) return;
-  window.__gkmRestoreFullSiteSafePatchV16 = true;
+  if (window.__gkmDetailAntiFreezePatchV17) return;
+  window.__gkmDetailAntiFreezePatchV17 = true;
+
+  const DELAYED_TIMEOUTS = [];
+
+  function safeIdle(fn, delay) {
+    const run = () => {
+      try { fn(); } catch (e) { console.warn("GKM delayed task failed:", e); }
+    };
+
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(run, { timeout: delay || 900 });
+    } else {
+      DELAYED_TIMEOUTS.push(setTimeout(run, delay || 250));
+    }
+  }
 
   function injectCss() {
-    if (document.getElementById("gkmRestoreFullSiteSafeStyleV16")) return;
+    if (document.getElementById("gkmDetailAntiFreezeV17Style")) return;
 
-    var style = document.createElement("style");
-    style.id = "gkmRestoreFullSiteSafeStyleV16";
+    const style = document.createElement("style");
+    style.id = "gkmDetailAntiFreezeV17Style";
     style.textContent = `
       .card {
         content-visibility: auto !important;
         contain-intrinsic-size: 340px 230px !important;
       }
 
-      .card img {
+      .card img,
+      #detailsDialog img,
+      dialog img {
         image-rendering: auto;
+      }
+
+      #detailsDialog,
+      dialog {
+        scroll-behavior: auto !important;
+      }
+
+      .similar-grid .card:nth-child(n+7) {
+        display: none !important;
+      }
+
+      .similar-grid {
+        content-visibility: auto !important;
+        contain-intrinsic-size: 520px !important;
       }
     `;
     document.head.appendChild(style);
   }
 
   function optimizeImages(root) {
-    var scope = root || document;
+    const scope = root || document;
     if (!scope.querySelectorAll) return;
 
-    scope.querySelectorAll("img").forEach(function (img) {
+    scope.querySelectorAll("img").forEach(img => {
       if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
       if (!img.hasAttribute("decoding")) img.setAttribute("decoding", "async");
       try { img.fetchPriority = "low"; } catch (e) {}
     });
   }
 
+  function pauseBackgroundLoadForDetails() {
+    // Старый фон грузит 90к чанков. На момент открытия карточки это даёт фриз.
+    // Не убиваем базу, просто ставим флаг паузы для наших патчей/визуально.
+    window.__gkmDetailOpeningNow = true;
+    setTimeout(() => {
+      window.__gkmDetailOpeningNow = false;
+    }, 1800);
+  }
+
+  function patchFetchChunkMovies() {
+    if (typeof window.fetchChunkMovies !== "function" || window.__gkmFetchChunkPausePatched) return;
+    window.__gkmFetchChunkPausePatched = true;
+
+    const original = window.fetchChunkMovies;
+
+    window.fetchChunkMovies = async function patchedFetchChunkMovies(chunk) {
+      while (window.__gkmDetailOpeningNow) {
+        await new Promise(resolve => setTimeout(resolve, 120));
+      }
+
+      return original.call(this, chunk);
+    };
+  }
+
+  function patchOpenDetails() {
+    if (typeof window.openDetails !== "function" || window.__gkmOpenDetailsAntiFreezePatched) return;
+    window.__gkmOpenDetailsAntiFreezePatched = true;
+
+    const originalOpenDetails = window.openDetails;
+
+    window.openDetails = function patchedOpenDetails(movie) {
+      pauseBackgroundLoadForDetails();
+
+      // Открываем старую полную карточку, но даём браузеру кадр перед тяжёлыми хвостами.
+      const result = originalOpenDetails.apply(this, arguments);
+
+      safeIdle(() => {
+        optimizeImages(document.getElementById("detailsDialog") || document);
+      }, 120);
+
+      // Если сторонние патчи навесили слишком много похожих карточек, режем DOM после открытия.
+      safeIdle(() => {
+        document.querySelectorAll(".similar-grid").forEach(grid => {
+          const cards = [...grid.querySelectorAll(".card")];
+          cards.slice(6).forEach(card => card.remove());
+        });
+      }, 350);
+
+      return result;
+    };
+  }
+
+  function patchFindSimilarItems() {
+    if (typeof window.findSimilarItems !== "function" || window.__gkmSimilarLimitPatched) return;
+    window.__gkmSimilarLimitPatched = true;
+
+    const originalFindSimilarItems = window.findSimilarItems;
+
+    window.findSimilarItems = function patchedFindSimilarItems(base, limit) {
+      return originalFindSimilarItems.call(this, base, Math.min(Number(limit || 6), 6));
+    };
+  }
+
   function start() {
     injectCss();
     optimizeImages(document);
 
-    var t = null;
-    var observer = new MutationObserver(function (mutations) {
+    // Эти функции могут появиться не сразу, потому что в файле много патчей.
+    const timer = setInterval(() => {
+      patchFetchChunkMovies();
+      patchFindSimilarItems();
+      patchOpenDetails();
+    }, 300);
+
+    setTimeout(() => clearInterval(timer), 8000);
+
+    let t = null;
+    const observer = new MutationObserver(mutations => {
       clearTimeout(t);
-      t = setTimeout(function () {
-        mutations.forEach(function (m) {
+      t = setTimeout(() => {
+        mutations.forEach(m => {
           if (m.addedNodes) {
-            m.addedNodes.forEach(function (node) {
-              optimizeImages(node);
-            });
+            m.addedNodes.forEach(node => optimizeImages(node));
           }
         });
       }, 250);
@@ -10166,7 +10266,7 @@ return cast;
     start();
   }
 
-  window.GKM_APP_CLEAN_VERSION = "restore-full-site-v16-old-details-safe-2026-06-12";
-  console.log("GKM RESTORE FULL SITE V16 установлен");
+  window.GKM_APP_CLEAN_VERSION = "detail-anti-freeze-v17-full-card-safe-2026-06-12";
+  console.log("GKM DETAIL ANTI FREEZE V17 установлен");
 })();
 
