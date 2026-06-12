@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "clean-rebuild-v2-5-no-crash-fallback-2026-06-12";
+const GKM_APP_CLEAN_VERSION = "stable-final-v3-builder-and-fallback-fixed-2026-06-12";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -277,7 +277,7 @@ async function fetchJsonQuiet(url) {
   }
 }
 
-function normalizeChunkUrl(chunk) {
+function normalizeChunkUrls(chunk) {
   let url = "";
 
   if (typeof chunk === "string") {
@@ -287,15 +287,43 @@ function normalizeChunkUrl(chunk) {
   }
 
   url = String(url || "").trim().replace(/^\/+/, "");
+  if (!url) return [];
 
-  if (!url) return "";
+  if (url.startsWith("http")) return [url];
 
-  if (url.startsWith("http") || url.startsWith("data/")) return url;
-  if (url.startsWith("chunks/")) return "data/" + url;
-  if (/chunk_\d+\.json$/i.test(url)) return "data/chunks/" + url.split("/").pop();
+  const name = url.split("/").pop();
+  const candidates = [];
 
-  return "data/" + url;
+  function add(v) {
+    if (v && !candidates.includes(v)) candidates.push(v);
+  }
+
+  if (url.startsWith("data/")) {
+    add(url);
+  } else {
+    add("data/" + url);
+  }
+
+  if (url.startsWith("chunks/")) {
+    add("data/" + url);
+  }
+
+  if (/chunk_\d+\.json$/i.test(name)) {
+    add("data/" + name);              // твоя реальная структура: data/chunk_001.json
+    add("data/chunks/" + name);       // запасной вариант
+  }
+
+  return candidates;
 }
+
+async function fetchFirstWorkingJson(urls) {
+  for (const url of urls) {
+    const data = await fetchJsonQuiet(url);
+    if (data) return data;
+  }
+  return null;
+}
+
 
 function getItemsFromAnyJson(data) {
   if (Array.isArray(data)) return data;
@@ -390,10 +418,10 @@ async function loadLegacyFallbackHome(reason) {
   const legacyItems = [];
 
   for (const chunk of firstChunks) {
-    const url = normalizeChunkUrl(chunk);
-    if (!url) continue;
+    const urls = normalizeChunkUrls(chunk);
+    if (!urls.length) continue;
 
-    const data = await fetchJsonQuiet(url);
+    const data = await fetchFirstWorkingJson(urls);
     legacyItems.push(...getItemsFromAnyJson(data));
   }
 
@@ -409,7 +437,7 @@ async function loadLegacyFallbackHome(reason) {
   fillFilters();
   renderHome();
 
-  setStatus(`Запасная база: ${homeData.total} записей · причина: ${reason || "data/fast пустая"}`);
+  setStatus(`Запасная база: ${homeData.total} записей · сайт живой · причина: ${reason || "data/fast пустая"}`);
 }
 
 
