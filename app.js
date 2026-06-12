@@ -832,14 +832,31 @@ async function loadRemainingChunksInBackground(index, chunks, movies) {
 }
 
 async function fetchChunkMovies(chunk) {
-  const url = chunk.file || chunk.url;
+  let url = "";
+
+  if (typeof chunk === "string") {
+    url = chunk;
+  } else if (chunk && typeof chunk === "object") {
+    url = chunk.file || chunk.url || chunk.path || chunk.src || "";
+  }
+
   if (!url) return [];
+
+  url = String(url).trim().replace(/^\/+/, "");
+
+  if (!url.startsWith("data/") && !url.startsWith("http")) {
+    url = "data/" + url;
+  }
 
   let part = chunkCache.get(url);
 
   if (!part) {
     const res = await fetch(url + "?v=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) return [];
+    if (!res.ok) {
+      console.warn("Не загрузился чанк:", url, res.status);
+      return [];
+    }
+
     part = await res.json();
     chunkCache.set(url, part);
   }
@@ -9949,10 +9966,10 @@ return cast;
   console.log("GKM MOVIE TV CAST FINAL установлен");
 })();
 
-/* ===== GKM EMERGENCY LOCAL CAST PATCH V7 ===== */
+/* ===== GKM EMERGENCY LOCAL CAST PATCH V8 ===== */
 (function () {
-  if (window.__gkmEmergencyLocalCastPatchV7) return;
-  window.__gkmEmergencyLocalCastPatchV7 = true;
+  if (window.__gkmEmergencyLocalCastPatchV8) return;
+  window.__gkmEmergencyLocalCastPatchV8 = true;
 
   var LOCAL_CAST = {
     "movie:155": [
@@ -10037,7 +10054,6 @@ return cast;
 
   function renderLocalCast() {
     var m = window.selectedMovie || (typeof selectedMovie !== "undefined" ? selectedMovie : null);
-
     if (!m || !isFilmOrSeries(m)) return;
 
     var list = LOCAL_CAST[keyOf(m)];
@@ -10080,7 +10096,7 @@ return cast;
 
   setInterval(renderLocalCast, 1500);
 
-  window.GKM_APP_CLEAN_VERSION = "clean-cast-v7-emergency-local-actors-2026-06-12";
-  console.log("GKM EMERGENCY LOCAL CAST PATCH V7 установлен");
+  window.GKM_APP_CLEAN_VERSION = "clean-cast-v8-zero-records-plus-local-actors-2026-06-12";
+  console.log("GKM EMERGENCY LOCAL CAST PATCH V8 установлен");
 })();
 
