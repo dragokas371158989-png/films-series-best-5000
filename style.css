@@ -1153,3 +1153,227 @@ header .ai-top-btn {
   background: rgba(0,229,255,.055);
   border-radius: 8px;
 }
+
+
+/* === GKM V12 LEARNING HELPER STYLE === */
+.ai-action-row button {
+  user-select: none;
+}
+
+.ai-action-row button:hover {
+  filter: brightness(1.12);
+}
+
+.ai-rec-why {
+  border-left-color: rgba(75,255,190,.75) !important;
+}
+
+
+/* === GKM V13 DIRECTOR HELPER STYLE === */
+.ai-rec-card {
+  transition: transform .08s linear, border-color .08s linear;
+}
+
+.ai-rec-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0,229,255,.55);
+}
+
+.ai-rec-title {
+  letter-spacing: .1px;
+}
+
+
+/* === GKM V14 ORACLE HELPER STYLE === */
+.ai-action-row button {
+  border-color: rgba(75,255,190,.22);
+}
+
+.ai-action-row button:nth-child(1) {
+  background: rgba(0,229,255,.16);
+}
+
+
+/* === GKM V15 SEMANTIC ORACLE STYLE === */
+.ai-rec-why {
+  color: #b8fff1 !important;
+}
+
+.ai-rec-title::first-letter {
+  color: #9eeeff;
+}
+
+
+/* === GKM V16 CONTEXT ORACLE STYLE === */
+.ai-rec-msg::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.ai-rec-card {
+  position: relative;
+}
+
+.ai-rec-card::after {
+  content: "context";
+  position: absolute;
+  right: 8px;
+  bottom: 6px;
+  font-size: 9px;
+  color: rgba(158,238,255,.28);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+
+/* === GKM V17 FINAL BRAIN STYLE === */
+.ai-rec-card { overflow: hidden; }
+.ai-rec-title { text-wrap: balance; }
+.ai-rec-why::before { content: "🧠 "; }
+
+
+/* === GKM V18 TITAN HELPER STYLE === */
+.ai-match-row {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  overflow: hidden;
+  margin: 7px 0 4px;
+}
+
+.ai-match-row span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(123,44,255,.95), rgba(0,229,255,.95), rgba(75,255,190,.95));
+}
+
+.ai-rec-card {
+  border-color: rgba(75,255,190,.30) !important;
+}
+
+
+/* === GKM V19 GODMODE STYLE === */
+.ai-msg.ai-bot {
+  border-left: 2px solid rgba(75,255,190,.18);
+}
+
+.ai-match-row span {
+  box-shadow: 0 0 12px rgba(0,229,255,.35);
+}
+
+.ai-rec-card::before {
+  content: "GODMODE";
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 9px;
+  font-weight: 900;
+  color: rgba(75,255,190,.38);
+  letter-spacing: .08em;
+}
+
+
+/* === GKM V20 NEURO HELPER STYLE === */
+.ai-msg.ai-bot {
+  white-space: pre-wrap;
+}
+
+.ai-rec-card::before {
+  content: "NEURO";
+}
+
+.ai-action-row button {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+}
+
+
+/* === GKM V21 OMEGA STYLE === */
+.ai-rec-card::before {
+  content: "OMEGA";
+}
+
+.ai-msg.ai-bot:first-letter {
+  color: #9effdf;
+}
+
+.ai-action-row button:active {
+  transform: scale(.98);
+}
+
+
+/* === GKM V22 APEX STYLE === */
+.ai-rec-card::before {
+  content: "APEX";
+}
+
+.ai-action-row button {
+  border-radius: 999px;
+}
+
+.ai-msg.ai-bot {
+  background-image: linear-gradient(135deg, rgba(75,255,190,.025), rgba(0,229,255,.015));
+}
+
+
+/* === GKM V23 SUPREME STYLE === */
+.ai-rec-card::before {
+  content: "SUPREME";
+}
+
+.ai-rec-card {
+  background-image:
+    linear-gradient(135deg, rgba(75,255,190,.08), rgba(0,229,255,.045), rgba(123,44,255,.045));
+}
+
+.ai-action-row button:first-child {
+  font-weight: 900;
+}
+
+
+/* === GKM V24 ULTRA INSTINCT STYLE === */
+.ai-rec-card::before {
+  content: "ULTRA";
+}
+
+.ai-match-row span {
+  background: linear-gradient(90deg, rgba(255,255,255,.85), rgba(0,229,255,.95), rgba(75,255,190,.95), rgba(255,222,89,.95));
+}
+
+.ai-msg.ai-bot {
+  border-left-color: rgba(255,222,89,.22);
+}
+
+
+/* === GKM V25 INFINITY STYLE === */
+.ai-rec-card::before {
+  content: "INFINITY";
+}
+
+.ai-rec-card {
+  box-shadow: 0 0 0 1px rgba(255,255,255,.03), 0 12px 36px rgba(0,0,0,.18);
+}
+
+.ai-match-row span {
+  animation: gkmInfinityGlow 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes gkmInfinityGlow {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.25); }
+}
+
+
+/* === GKM V26 ABSOLUTE STYLE === */
+.ai-rec-card::before {
+  content: "ABSOLUTE";
+}
+
+.ai-rec-card {
+  border-color: rgba(255,222,89,.32) !important;
+}
+
+.ai-action-row button:hover {
+  transform: translateY(-1px);
+}
