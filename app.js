@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "clean-rebuild-v2-fast-pages-full-detail-2026-06-12";
+const GKM_APP_CLEAN_VERSION = "clean-rebuild-v2-2-yandex-correct-small-app-2026-06-12";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -450,6 +450,8 @@ function renderPlayerButtons(m) {
     buttons.push(`<a target="_blank" rel="noreferrer" href="${escapeAttr(link.url)}">${escapeHtml(link.name || "Смотреть")}</a>`);
   }
 
+  buttons.push(`<a target="_blank" rel="noreferrer" href="https://yandex.ru/search/?text=${q} смотреть онлайн">Яндекс поиск</a>`);
+  buttons.push(`<a target="_blank" rel="noreferrer" href="https://yandex.ru/video/search?text=${q} смотреть">Яндекс Видео</a>`);
   buttons.push(`<a target="_blank" rel="noreferrer" href="https://rutube.ru/search/?query=${q}">Rutube поиск</a>`);
   buttons.push(`<a target="_blank" rel="noreferrer" href="https://vk.com/video?q=${q}">VK Видео поиск</a>`);
   buttons.push(`<a target="_blank" rel="noreferrer" href="https://www.youtube.com/results?search_query=${q} трейлер">YouTube трейлер</a>`);
@@ -512,6 +514,8 @@ function setupDetailLinks(m) {
   }
 
   const links = {
+    yandexLink: `https://yandex.ru/search/?text=${q} смотреть онлайн`,
+    yandexVideoLink: `https://yandex.ru/video/search?text=${q} смотреть`,
     kinopoiskLink: `https://www.kinopoisk.ru/index.php?kp_query=${q}`,
     youtubeLink: `https://www.youtube.com/results?search_query=${q} трейлер`,
     vkLink: `https://vk.com/video?q=${q}`,
