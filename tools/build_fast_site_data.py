@@ -1,18 +1,19 @@
 import json
 import os
 import re
+import shutil
 from pathlib import Path
 from datetime import datetime
 
 DATA_DIR = Path("data")
 FAST_DIR = DATA_DIR / "fast"
+FAST_TMP_DIR = DATA_DIR / "fast_tmp_build"
+INDEX_PATH = DATA_DIR / "index.json"
+
 PAGE_SIZE = int(os.environ.get("GKM_FAST_PAGE_SIZE", "60"))
 HOME_LIMIT = int(os.environ.get("GKM_FAST_HOME_LIMIT", "18"))
 
-BAD_DIR_PARTS = {"fast", ".git", "node_modules"}
-BAD_FILE_NAMES = {"meta.json", "home.json", "search_index.json"}
-
-def read_json(path):
+def load_json(path):
     try:
         return json.loads(path.read_text(encoding="utf-8"))
     except Exception as e:
@@ -23,106 +24,96 @@ def save_json(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
-def looks_like_media_item(obj):
-    if not isinstance(obj, dict):
-        return False
-
-    title_keys = ("ru", "title", "name", "nameRu", "nameEn", "en", "originalTitle", "titleOriginal", "nameOriginal")
-    has_title = any(str(obj.get(k) or "").strip() for k in title_keys)
-
-    media_keys = (
-        "poster", "posterUrl", "poster_path", "image", "imageUrl",
-        "rating", "vote_average", "votes", "vote_count",
-        "genres", "genre", "year", "release_date",
-        "description", "overview", "synopsis",
-        "type", "kind", "source", "provider",
-        "tmdbId", "kinopoiskId", "filmId", "mal_id",
-    )
-    has_media_field = any(k in obj for k in media_keys)
-
-    return has_title and has_media_field
-
-def extract_media_items(data, depth=0):
-    if depth > 8:
-        return []
-
-    found = []
-
-    if isinstance(data, list):
-        if data and sum(1 for x in data[:30] if looks_like_media_item(x)) >= 1:
-            for x in data:
-                if looks_like_media_item(x):
-                    found.append(x)
-            return found
-
-        for x in data:
-            found.extend(extract_media_items(x, depth + 1))
-        return found
-
-    if isinstance(data, dict):
-        if looks_like_media_item(data):
-            return [data]
-
-        # Сначала стандартные ключи
-        for key in ("movies", "items", "data", "results", "records", "list", "titles"):
-            value = data.get(key)
-            if isinstance(value, list):
-                found.extend(extract_media_items(value, depth + 1))
-
-        # Потом общий обход
-        if not found:
-            for value in data.values():
-                if isinstance(value, (list, dict)):
-                    found.extend(extract_media_items(value, depth + 1))
-
-    return found
-
-def iter_json_files():
-    files = []
-
-    # Самое важное — чанки
-    for pattern in ("chunks/*.json", "chunk_*.json", "**/chunk_*.json", "movies_updates.json", "*.json", "**/*.json"):
-        root = DATA_DIR if pattern != "movies_updates.json" else Path(".")
-        for p in root.glob(pattern):
-            if not p.is_file():
-                continue
-            if any(part in BAD_DIR_PARTS for part in p.parts):
-                continue
-            if p.name in BAD_FILE_NAMES:
-                continue
-            files.append(p)
-
-    # Дедуп путей, сохраняя порядок
-    seen = set()
-    result = []
-    for p in files:
-        key = str(p)
-        if key not in seen:
-            seen.add(key)
-            result.append(p)
-    return result
-
 def clean_text(value):
     return re.sub(r"\s+", " ", str(value or "")).strip()
 
 def norm(value):
     return re.sub(r"[^\wа-яА-ЯёЁ]+", " ", str(value or "").lower().replace("ё", "е")).strip()
 
-RU_TITLE_MAP = {
-    "interstellar": "Интерстеллар",
-    "inception": "Начало",
-    "the dark knight": "Тёмный рыцарь",
-    "fight club": "Бойцовский клуб",
-    "the shawshank redemption": "Побег из Шоушенка",
-    "forrest gump": "Форрест Гамп",
-    "the godfather": "Крёстный отец",
-    "pulp fiction": "Криминальное чтиво",
-    "the matrix": "Матрица",
-    "naruto": "Наруто",
-    "one piece": "Ван-Пис",
-    "attack on titan": "Атака титанов",
-    "death note": "Тетрадь смерти",
-}
+def extract_items(data):
+    if isinstance(data, list):
+        return [x for x in data if isinstance(x, dict)]
+
+    if isinstance(data, dict):
+        for key in ("movies", "items", "data", "results", "records", "list"):
+            value = data.get(key)
+            if isinstance(value, list):
+                return [x for x in value if isinstance(x, dict)]
+
+    return []
+
+def chunk_candidates(entry):
+    raw = ""
+
+    if isinstance(entry, str):
+        raw = entry
+    elif isinstance(entry, dict):
+        raw = entry.get("file") or entry.get("path") or entry.get("url") or entry.get("src") or entry.get("name") or ""
+
+    raw = str(raw or "").strip().replace("\\", "/").lstrip("/")
+    if not raw:
+        return []
+
+    name = Path(raw).name
+    candidates = []
+
+    def add(p):
+        if p not in candidates:
+            candidates.append(p)
+
+    if raw.startswith("data/"):
+        add(Path(raw))
+    else:
+        add(DATA_DIR / raw)
+
+    if raw.startswith("chunks/"):
+        add(DATA_DIR / raw)
+
+    if re.match(r"chunk_\d+\.json$", name, re.I):
+        add(DATA_DIR / name)              # реальная структура пользователя: data/chunk_001.json
+        add(DATA_DIR / "chunks" / name)   # запасной вариант
+
+    return candidates
+
+def find_chunk_files():
+    index = load_json(INDEX_PATH)
+    result = []
+
+    if isinstance(index, dict) and isinstance(index.get("chunks"), list):
+        for entry in index["chunks"]:
+            chosen = None
+            for p in chunk_candidates(entry):
+                if p.exists():
+                    chosen = p
+                    break
+
+            if chosen:
+                result.append(chosen)
+            else:
+                print("MISSING chunk:", entry, "tried:", [str(x) for x in chunk_candidates(entry)])
+
+    # fallback scan
+    if not result:
+        print("No chunks from index. Scanning data/chunk_*.json and data/chunks/chunk_*.json")
+        for pattern in ("chunk_*.json", "chunks/chunk_*.json"):
+            for p in DATA_DIR.glob(pattern):
+                if p.is_file():
+                    result.append(p)
+
+    # dedupe, sorted by chunk number if possible
+    seen = set()
+    unique = []
+    for p in result:
+        s = str(p)
+        if s not in seen:
+            seen.add(s)
+            unique.append(p)
+
+    def sort_key(p):
+        m = re.search(r"chunk_(\d+)\.json$", p.name, re.I)
+        return int(m.group(1)) if m else 999999
+
+    return sorted(unique, key=sort_key)
 
 def title_of(item):
     title = clean_text(
@@ -137,9 +128,7 @@ def title_of(item):
         or item.get("nameOriginal")
         or ""
     )
-    if not title:
-        return ""
-    return RU_TITLE_MAP.get(norm(title), title)
+    return title
 
 def en_of(item):
     return clean_text(item.get("en") or item.get("nameEn") or item.get("originalTitle") or item.get("titleOriginal") or item.get("nameOriginal") or "")
@@ -171,6 +160,7 @@ def votes_of(item):
 
 def genres_of(item):
     genres = item.get("genres") or item.get("genre") or item.get("genresRu") or []
+
     if isinstance(genres, list):
         out = []
         for g in genres:
@@ -186,6 +176,7 @@ def genres_of(item):
 
     clean = []
     seen = set()
+
     for g in genres:
         g = clean_text(g)
         if not g:
@@ -194,21 +185,23 @@ def genres_of(item):
         if k not in seen:
             seen.add(k)
             clean.append(g)
+
     return clean[:12]
 
 def type_of(item):
     t = clean_text(item.get("type") or item.get("kind") or item.get("category") or "")
     low = norm(t)
+    source = norm(item.get("source") or item.get("provider") or "")
     genres_text = " ".join(norm(g) for g in genres_of(item))
-    source = norm(item.get("source") or item.get("provider") or item.get("category") or "")
-    text = " ".join([low, genres_text, source, norm(title_of(item)), norm(en_of(item))])
+    text = " ".join([low, source, genres_text, norm(title_of(item)), norm(en_of(item))])
 
     if "аниме" in text or "anime" in text or "jikan" in source or "myanimelist" in source:
         return "Аниме"
-    if "мульт" in text or "animation" == low or "cartoon" == low:
+    if "мульт" in text or low in {"animation", "cartoon"}:
         return "Мультфильм"
     if "сериал" in text or low in {"tv", "series", "tv series"}:
         return "Сериал"
+
     return "Фильм"
 
 def poster_of(item):
@@ -230,6 +223,7 @@ def stable_id(item, fallback):
 
 def pick_extra(item):
     extra = {}
+
     keys = [
         "player", "playerUrl", "video", "videoUrl", "url", "src", "iframe", "rutube",
         "watchUrl", "watch", "trailer", "trailerUrl", "players", "videoLinks", "links", "sources",
@@ -237,9 +231,11 @@ def pick_extra(item):
         "ageRating", "age", "source", "tmdbId", "tmdb_id", "kinopoiskId", "filmId",
         "mal_id", "malId", "shikimori_id", "shikimoriId",
     ]
+
     for key in keys:
         if key in item and item[key] not in (None, "", [], {}):
             extra[key] = item[key]
+
     return extra
 
 def card_item(raw, i):
@@ -252,39 +248,50 @@ def card_item(raw, i):
         "rating": rating_of(raw),
         "votes": votes_of(raw),
         "poster": poster_of(raw),
+        "backdrop": clean_text(raw.get("backdrop") or ""),
         "genres": genres_of(raw),
         "overview": overview_of(raw),
     }
+
     item.update(pick_extra(raw))
     item["source"] = clean_text(item.get("source") or raw.get("provider") or "")
     item["episodes"] = item.get("episodes") or item.get("episodeCount") or ""
     item["studio"] = item.get("studio") or item.get("studios") or ""
     item["country"] = item.get("country") or item.get("countries") or ""
     item["ageRating"] = item.get("ageRating") or item.get("age") or ""
+
     return item
 
 def score(item):
-    r = float(item.get("rating") or 0)
-    v = int(item.get("votes") or 0)
-    y = int(item.get("year") or 0)
-    return r * 10 + min(v, 50000) / 50000 * 4 + (0.4 if y >= 2010 else 0)
+    rating = float(item.get("rating") or 0)
+    votes = int(item.get("votes") or 0)
+    year = int(item.get("year") or 0)
+
+    # рейтинги 10.0 с 2 голосами не должны лезть наверх
+    if votes < 30:
+        return rating - 20
+
+    return rating * 10 + min(votes, 50000) / 50000 * 4 + (0.4 if year >= 2010 else 0)
 
 def quality(item):
-    return int(item.get("votes") or 0) * 100 + float(item.get("rating") or 0) * 1000 + (10000 if item.get("poster") else 0) + len(item.get("overview") or "")
+    return (
+        int(item.get("votes") or 0) * 100
+        + float(item.get("rating") or 0) * 1000
+        + (10000 if item.get("poster") else 0)
+        + len(item.get("overview") or "")
+    )
 
-def collect_raw_items():
+def collect_items():
+    chunks = find_chunk_files()
+    print(f"Resolved chunks: {len(chunks)}")
+
     raw_items = []
-    files = iter_json_files()
-    print(f"JSON files scanned: {len(files)}")
 
-    for p in files:
-        data = read_json(p)
-        if data is None:
-            continue
-        items = extract_media_items(data)
-        if items:
-            print(f"FOUND {len(items)} items in {p}")
-            raw_items.extend(items)
+    for p in chunks:
+        data = load_json(p)
+        items = extract_items(data)
+        print(f"{p}: {len(items)}")
+        raw_items.extend(items)
 
     return raw_items
 
@@ -295,48 +302,56 @@ def dedupe(raw_items):
     for i, raw in enumerate(raw_items):
         item = card_item(raw, i)
         title_key = norm(item.get("ru") or item.get("en"))
+
         if not title_key:
             skipped += 1
             continue
 
+        # Не склеиваем разные сезоны/части, если в названии есть сезон/season/part
         key = item["type"] + "|" + title_key
+
         old = best.get(key)
         if old is None or quality(item) > quality(old):
             best[key] = item
 
-    print(f"Skipped no-title: {skipped}")
+    print(f"Skipped without title: {skipped}")
     return list(best.values())
 
-def write_pages(tab_name, items):
-    pages_dir = FAST_DIR / "pages" / tab_name
+def write_pages(base_dir, tab_name, items):
+    pages_dir = base_dir / "pages" / tab_name
     pages_dir.mkdir(parents=True, exist_ok=True)
-    for old in pages_dir.glob("page_*.json"):
-        old.unlink()
 
     pages = max(1, (len(items) + PAGE_SIZE - 1) // PAGE_SIZE)
+
     for page in range(1, pages + 1):
         part = items[(page - 1) * PAGE_SIZE: page * PAGE_SIZE]
-        save_json(pages_dir / f"page_{page:04d}.json", {
-            "tab": tab_name,
-            "page": page,
-            "pages": pages,
-            "count": len(items),
-            "pageSize": PAGE_SIZE,
-            "items": part,
-        })
+        save_json(
+            pages_dir / f"page_{page:04d}.json",
+            {
+                "tab": tab_name,
+                "page": page,
+                "pages": pages,
+                "count": len(items),
+                "pageSize": PAGE_SIZE,
+                "items": part,
+            }
+        )
+
     return {"count": len(items), "pages": pages, "pageSize": PAGE_SIZE}
 
 def main():
-    raw_items = collect_raw_items()
+    raw_items = collect_items()
     print(f"Raw items: {len(raw_items)}")
 
     items = dedupe(raw_items)
     print(f"After dedupe: {len(items)}")
 
-    if len(items) == 0:
-        raise SystemExit("ERROR: 0 media items found. I refuse to overwrite data/fast with empty database.")
+    if len(items) <= 0:
+        raise SystemExit("ERROR: 0 items. Refusing to overwrite existing data/fast.")
 
-    FAST_DIR.mkdir(parents=True, exist_ok=True)
+    if FAST_TMP_DIR.exists():
+        shutil.rmtree(FAST_TMP_DIR)
+    FAST_TMP_DIR.mkdir(parents=True, exist_ok=True)
 
     genres = sorted({g for item in items for g in item.get("genres", [])}, key=lambda x: x.lower())
     years = sorted({item.get("year") for item in items if item.get("year")}, reverse=True)
@@ -348,19 +363,27 @@ def main():
     series = by_smart([x for x in items if x["type"] == "Сериал"])
     anime = by_smart([x for x in items if x["type"] == "Аниме"])
     cartoons = by_smart([x for x in items if x["type"] == "Мультфильм"])
-    new_items = sorted([x for x in items if int(x.get("year") or 0) >= 2024], key=lambda x: (int(x.get("year") or 0), score(x)), reverse=True)
-    popular = sorted([x for x in items if int(x.get("votes") or 0) >= 1000], key=lambda x: int(x.get("votes") or 0), reverse=True)
+    new_items = sorted(
+        [x for x in items if int(x.get("year") or 0) >= 2024],
+        key=lambda x: (int(x.get("year") or 0), score(x)),
+        reverse=True,
+    )
+    popular = sorted(
+        [x for x in items if int(x.get("votes") or 0) >= 1000],
+        key=lambda x: int(x.get("votes") or 0),
+        reverse=True,
+    )
     top = by_smart([x for x in items if int(x.get("votes") or 0) >= 300 and float(x.get("rating") or 0) >= 7])
 
     pages = {
-        "all": write_pages("all", all_sorted),
-        "movies": write_pages("movies", movies),
-        "series": write_pages("series", series),
-        "anime": write_pages("anime", anime),
-        "cartoons": write_pages("cartoons", cartoons),
-        "new": write_pages("new", new_items),
-        "popular": write_pages("popular", popular),
-        "top": write_pages("top", top[:250]),
+        "all": write_pages(FAST_TMP_DIR, "all", all_sorted),
+        "movies": write_pages(FAST_TMP_DIR, "movies", movies),
+        "series": write_pages(FAST_TMP_DIR, "series", series),
+        "anime": write_pages(FAST_TMP_DIR, "anime", anime),
+        "cartoons": write_pages(FAST_TMP_DIR, "cartoons", cartoons),
+        "new": write_pages(FAST_TMP_DIR, "new", new_items),
+        "popular": write_pages(FAST_TMP_DIR, "popular", popular),
+        "top": write_pages(FAST_TMP_DIR, "top", top[:250]),
     }
 
     home = {
@@ -374,15 +397,25 @@ def main():
             "movies": movies[:HOME_LIMIT],
             "series": series[:HOME_LIMIT],
             "cartoons": cartoons[:HOME_LIMIT],
-        }
+        },
     }
 
+    # лёгкий поисковый индекс, чтобы не плодить файл 55+ MB
     search_index = []
     for x in all_sorted:
-        y = dict(x)
-        if len(str(y.get("overview") or "")) > 520:
-            y["overview"] = y["overview"][:520]
-        search_index.append(y)
+        search_index.append({
+            "id": x.get("id"),
+            "ru": x.get("ru"),
+            "en": x.get("en"),
+            "year": x.get("year"),
+            "type": x.get("type"),
+            "rating": x.get("rating"),
+            "votes": x.get("votes"),
+            "poster": x.get("poster"),
+            "genres": x.get("genres", [])[:6],
+            "overview": (x.get("overview") or "")[:180],
+            "source": x.get("source"),
+        })
 
     meta = {
         "generatedAt": datetime.utcnow().isoformat(timespec="seconds") + "Z",
@@ -395,13 +428,18 @@ def main():
         "pages": pages,
     }
 
-    save_json(FAST_DIR / "home.json", home)
-    save_json(FAST_DIR / "search_index.json", search_index)
-    save_json(FAST_DIR / "meta.json", meta)
+    save_json(FAST_TMP_DIR / "home.json", home)
+    save_json(FAST_TMP_DIR / "search_index.json", search_index)
+    save_json(FAST_TMP_DIR / "meta.json", meta)
+
+    if FAST_DIR.exists():
+        shutil.rmtree(FAST_DIR)
+    FAST_TMP_DIR.rename(FAST_DIR)
 
     print("FAST DATA READY")
-    print(f"Count: {len(items)}")
-    print(f"Pages all: {pages['all']['pages']}")
+    print(f"rawCount={len(raw_items)}")
+    print(f"count={len(items)}")
+    print(f"pages_all={pages['all']['pages']}")
 
 if __name__ == "__main__":
     main()
