@@ -2,16 +2,13 @@ name: Build fast site data
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - "data/**"
-      - "tools/build_fast_site_data.py"
-      - ".github/workflows/build_fast_site_data.yml"
 
 permissions:
   contents: write
+
+concurrency:
+  group: build-fast-site-data
+  cancel-in-progress: true
 
 jobs:
   build-fast-data:
@@ -20,16 +17,24 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
-      - name: Build fast data
-        run: python tools/build_fast_site_data.py
+      - name: Sync branch
+        run: |
+          git pull --rebase origin main
 
-            - name: Commit fast data
+      - name: Build fast data
+        run: |
+          python tools/build_fast_site_data.py
+
+      - name: Commit fast data
         run: |
           git config user.name "fast-data-bot"
           git config user.email "fast-data-bot@users.noreply.github.com"
