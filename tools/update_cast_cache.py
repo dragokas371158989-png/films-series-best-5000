@@ -1,49 +1,44 @@
 import json
 import os
 import time
+import urllib.parse
 import urllib.request
 from pathlib import Path
 from datetime import datetime
 
-TOKEN = os.environ.get("TMDB_READ_TOKEN", "").strip()
+KP_TOKEN = os.environ.get("KINOPOISK_API_KEY", "").strip()
+
 DATA_DIR = Path("data")
 INDEX_PATH = DATA_DIR / "index.json"
 UPDATES_PATH = Path("movies_updates.json")
 OUT_PATH = DATA_DIR / "cast_cache.json"
-LIMIT = int(os.environ.get("GKM_CAST_LIMIT", "2500"))
 
-if not TOKEN:
-    raise SystemExit("TMDB_READ_TOKEN is empty.")
+LIMIT = int(os.environ.get("GKM_CAST_LIMIT", "1800"))
+SLEEP_SEC = float(os.environ.get("GKM_KP_SLEEP", "0.25"))
 
-HEADERS = {
-    "Authorization": f"Bearer {TOKEN}",
-    "User-Agent": "GKM cast cache updater v2",
+if not KP_TOKEN:
+    raise SystemExit("KINOPOISK_API_KEY is empty. Add it in GitHub Secrets.")
+
+KP_BASE = "https://kinopoiskapiunofficial.tech"
+KP_HEADERS = {
+    "X-API-KEY": KP_TOKEN,
     "Accept": "application/json",
+    "User-Agent": "GKM Kinopoisk cast cache updater",
 }
 
-# ВАЖНО: эти фильмы всегда добавляем, даже если они не попали в лимит.
-# 155 = The Dark Knight
-# 157336 = Interstellar
-# 13 = Forrest Gump
-# 238 = The Godfather
-# 680 = Pulp Fiction
-# 27205 = Inception
-# 603 = The Matrix
 MUST_INCLUDE = [
-    {"key": "movie:155", "kind": "movie", "tmdbId": 155, "itemId": "155", "title": "Тёмный рыцарь", "score": 999999999},
-    {"key": "movie:157336", "kind": "movie", "tmdbId": 157336, "itemId": "157336", "title": "Интерстеллар", "score": 999999998},
-    {"key": "movie:13", "kind": "movie", "tmdbId": 13, "itemId": "13", "title": "Форрест Гамп", "score": 999999997},
-    {"key": "movie:238", "kind": "movie", "tmdbId": 238, "itemId": "238", "title": "Крёстный отец", "score": 999999996},
-    {"key": "movie:680", "kind": "movie", "tmdbId": 680, "itemId": "680", "title": "Криминальное чтиво", "score": 999999995},
-    {"key": "movie:27205", "kind": "movie", "tmdbId": 27205, "itemId": "27205", "title": "Начало", "score": 999999994},
-    {"key": "movie:603", "kind": "movie", "tmdbId": 603, "itemId": "603", "title": "Матрица", "score": 999999993},
+    {"key": "movie:155", "kind": "movie", "tmdbId": 155, "itemId": "155", "title": "Тёмный рыцарь", "en": "The Dark Knight", "year": "2008", "score": 999999999},
+    {"key": "movie:157336", "kind": "movie", "tmdbId": 157336, "itemId": "157336", "title": "Интерстеллар", "en": "Interstellar", "year": "2014", "score": 999999998},
+    {"key": "movie:13", "kind": "movie", "tmdbId": 13, "itemId": "13", "title": "Форрест Гамп", "en": "Forrest Gump", "year": "1994", "score": 999999997},
+    {"key": "movie:238", "kind": "movie", "tmdbId": 238, "itemId": "238", "title": "Крёстный отец", "en": "The Godfather", "year": "1972", "score": 999999996},
+    {"key": "movie:27205", "kind": "movie", "tmdbId": 27205, "itemId": "27205", "title": "Начало", "en": "Inception", "year": "2010", "score": 999999995},
+    {"key": "movie:603", "kind": "movie", "tmdbId": 603, "itemId": "603", "title": "Матрица", "en": "The Matrix", "year": "1999", "score": 999999994},
 ]
 
 
 def load_json(path, default):
     if not path.exists():
         return default
-
     try:
         return json.loads(path.read_text(encoding="utf-8"))
     except Exception as e:
@@ -59,13 +54,11 @@ def save_json(path, data):
 def extract_items(data):
     if isinstance(data, list):
         return data
-
     if isinstance(data, dict):
         for key in ("movies", "items", "data", "results"):
             value = data.get(key)
             if isinstance(value, list):
                 return value
-
     return []
 
 
@@ -76,33 +69,25 @@ def chunk_path(entry):
         value = str(entry.get("file") or entry.get("path") or entry.get("url") or "").lstrip("/")
     else:
         return None
-
     if not value:
         return None
-
     if value.startswith("data/"):
         return Path(value)
-
     return DATA_DIR / value
 
 
 def load_all_items():
     items = []
-
-    # 1. Прямые записи из data/index.json
     index = load_json(INDEX_PATH, [])
     items.extend(extract_items(index))
 
-    # 2. Чанки из data/index.json
     chunks = []
-
     if isinstance(index, dict) and isinstance(index.get("chunks"), list):
         for entry in index["chunks"]:
             p = chunk_path(entry)
             if p and p.exists():
                 chunks.append(p)
 
-    # 3. Все возможные chunk-файлы, даже если index.json их не указал
     for p in sorted(DATA_DIR.glob("chunk*.json")):
         if p not in chunks:
             chunks.append(p)
@@ -111,48 +96,37 @@ def load_all_items():
         data = load_json(p, [])
         items.extend(extract_items(data))
 
-    # 4. movies_updates.json тоже читаем
     updates = load_json(UPDATES_PATH, {})
     items.extend(extract_items(updates))
 
-    # Убираем точные дубли
     seen = set()
     clean = []
-
     for item in items:
         if not isinstance(item, dict):
             continue
-
         key = str(item.get("id") or "") + "|" + str(item.get("tmdbId") or item.get("tmdb_id") or "") + "|" + str(item.get("ru") or item.get("en") or "")
-
         if key in seen:
             continue
-
         seen.add(key)
         clean.append(item)
-
     return clean
 
 
 def is_anime(item):
     text = " ".join(str(item.get(k, "")) for k in ("type", "source", "category", "provider", "ru", "en")).lower()
     genres = item.get("genres") or []
-
     if isinstance(genres, list):
         text += " " + " ".join(str(x).lower() for x in genres)
-
     return "аниме" in text or "anime" in text or "shikimori" in text or "myanimelist" in text
 
 
 def media_kind(item):
-    t = str(item.get("type", "")).lower()
-    return "tv" if "сериал" in t else "movie"
+    return "tv" if "сериал" in str(item.get("type", "")).lower() else "movie"
 
 
 def tmdb_id(item):
     kind = media_kind(item)
     direct = item.get("tmdbId") or item.get("tmdb_id") or item.get("tmdbID")
-
     if direct:
         try:
             return int(direct)
@@ -160,25 +134,23 @@ def tmdb_id(item):
             pass
 
     source = str(item.get("source") or item.get("provider") or item.get("category") or "").lower()
-    raw_id = item.get("id")
-
     try:
-        numeric = int(raw_id)
+        numeric = int(item.get("id"))
     except Exception:
         return None
 
-    # Самый важный вариант твоей базы:
-    # id: 155, source: tmdb
     if "tmdb" in source and 0 < numeric < 2_000_000:
         return numeric
-
     if kind == "movie" and 7_000_000 < numeric < 8_000_000:
         return numeric - 7_000_000
-
     if kind == "tv" and 8_000_000 < numeric < 9_000_000:
         return numeric - 8_000_000
-
     return None
+
+
+def item_year(item):
+    value = str(item.get("year") or "").strip()
+    return value[:4] if len(value) >= 4 else value
 
 
 def score(item):
@@ -186,58 +158,143 @@ def score(item):
         rating = float(item.get("rating") or 0)
     except Exception:
         rating = 0
-
     try:
         votes = int(item.get("votes") or 0)
     except Exception:
         votes = 0
-
     return rating * 100000 + min(votes, 100000)
 
 
-def fetch_credits(kind, tid):
-    url = f"https://api.themoviedb.org/3/{kind}/{tid}/credits?language=ru-RU"
-    req = urllib.request.Request(url, headers=HEADERS)
+def make_target(item):
+    if not isinstance(item, dict) or is_anime(item):
+        return None
+    kind = media_kind(item)
+    tid = tmdb_id(item)
+    if not tid:
+        return None
+    return {
+        "key": f"{kind}:{tid}",
+        "kind": kind,
+        "tmdbId": tid,
+        "itemId": str(item.get("id") or ""),
+        "title": item.get("ru") or item.get("title") or item.get("name") or item.get("en") or "",
+        "en": item.get("en") or item.get("originalTitle") or item.get("titleOriginal") or "",
+        "year": item_year(item),
+        "score": score(item),
+    }
 
-    with urllib.request.urlopen(req, timeout=40) as r:
-        return json.loads(r.read().decode("utf-8"))
+
+def kp_get(path, params=None, retries=3):
+    url = KP_BASE + path
+    if params:
+        url += "?" + urllib.parse.urlencode(params)
+
+    last_err = None
+    for attempt in range(retries):
+        try:
+            req = urllib.request.Request(url, headers=KP_HEADERS)
+            with urllib.request.urlopen(req, timeout=45) as r:
+                return json.loads(r.read().decode("utf-8"))
+        except Exception as e:
+            last_err = e
+            print(f"Kinopoisk request failed attempt={attempt + 1}: {path} {params} -> {e}")
+            time.sleep(1.0 + attempt * 1.5)
+    raise last_err
+
+
+def normalize_title(s):
+    return " ".join(str(s or "").lower().replace("ё", "е").split())
+
+
+def choose_kp_film(search_data, target):
+    films = []
+    if isinstance(search_data, dict):
+        if isinstance(search_data.get("films"), list):
+            films = search_data["films"]
+        elif isinstance(search_data.get("items"), list):
+            films = search_data["items"]
+    if not films:
+        return None
+
+    target_year = str(target.get("year") or "").strip()
+    target_title = normalize_title(target.get("title") or "")
+    target_en = normalize_title(target.get("en") or "")
+
+    for f in films:
+        fy = str(f.get("year") or "").strip()
+        names = [f.get("nameRu"), f.get("nameEn"), f.get("nameOriginal")]
+        names_norm = [normalize_title(x) for x in names if x]
+        if target_year and fy and fy != target_year:
+            continue
+        if target_title and target_title in names_norm:
+            return f
+        if target_en and target_en in names_norm:
+            return f
+
+    if target_year:
+        for f in films:
+            if str(f.get("year") or "").strip() == target_year:
+                return f
+    return films[0]
+
+
+def find_kp_id(target):
+    queries = []
+    for q in (target.get("title"), target.get("en")):
+        q = str(q or "").strip()
+        if q and q not in queries:
+            queries.append(q)
+
+    for q in queries:
+        data = kp_get("/api/v2.1/films/search-by-keyword", {"keyword": q})
+        film = choose_kp_film(data, target)
+        if film:
+            film_id = film.get("filmId") or film.get("kinopoiskId")
+            if film_id:
+                return int(film_id)
+        time.sleep(SLEEP_SEC)
+    return None
+
+
+def load_kp_staff(kp_id):
+    data = kp_get("/api/v1/staff", {"filmId": kp_id})
+    return data if isinstance(data, list) else []
+
+
+def convert_staff_to_cast(staff):
+    cast = []
+    for p in staff:
+        profession = str(p.get("professionKey") or p.get("professionText") or "").upper()
+        if profession and "ACTOR" not in profession and "АКТ" not in profession:
+            continue
+
+        name = p.get("nameRu") or p.get("nameEn") or ""
+        role = p.get("description") or ""
+
+        if not name:
+            continue
+
+        cast.append({
+            "name": name,
+            "role": role or "роль не указана",
+            "profile": p.get("posterUrl") or "",
+        })
+
+        if len(cast) >= 16:
+            break
+    return cast
 
 
 def build_targets():
-    items = load_all_items()
     targets = []
+    for item in load_all_items():
+        t = make_target(item)
+        if t:
+            targets.append(t)
 
-    for item in items:
-        if not isinstance(item, dict):
-            continue
-
-        if is_anime(item):
-            continue
-
-        kind = media_kind(item)
-
-        if kind not in ("movie", "tv"):
-            continue
-
-        tid = tmdb_id(item)
-
-        if not tid:
-            continue
-
-        targets.append({
-            "key": f"{kind}:{tid}",
-            "kind": kind,
-            "tmdbId": tid,
-            "itemId": str(item.get("id") or ""),
-            "title": item.get("ru") or item.get("en") or "",
-            "score": score(item),
-        })
-
-    # must include ставим поверх всего
     targets.extend(MUST_INCLUDE)
 
     uniq = {}
-
     for t in sorted(targets, key=lambda x: x["score"], reverse=True):
         if t["key"] not in uniq:
             uniq[t["key"]] = t
@@ -248,76 +305,71 @@ def build_targets():
 def main():
     old = load_json(OUT_PATH, {})
     old_items = old.get("items") if isinstance(old, dict) else {}
-
     if not isinstance(old_items, dict):
         old_items = {}
 
     targets = build_targets()
     result_items = dict(old_items)
 
-    updated = 0
-    skipped = 0
-    failed = 0
+    updated = skipped = failed = not_found = 0
 
-    for i, t in enumerate(targets, start=1):
-        key = t["key"]
+    for i, target in enumerate(targets, start=1):
+        key = target["key"]
 
-        if key in result_items and result_items[key].get("cast"):
+        if key in result_items and result_items[key].get("cast") and result_items[key].get("source") == "kinopoiskapiunofficial":
             skipped += 1
             continue
 
         try:
-            data = fetch_credits(t["kind"], t["tmdbId"])
-            raw_cast = data.get("cast") or []
+            kp_id = find_kp_id(target)
+            if not kp_id:
+                not_found += 1
+                print(f"KP not found: {key} {target.get('title')} {target.get('year')}")
+                continue
 
-            cast = []
+            time.sleep(SLEEP_SEC)
 
-            for p in raw_cast[:16]:
-                name = p.get("name") or p.get("original_name") or ""
-                role = p.get("character") or ""
-
-                if not name:
-                    continue
-
-                cast.append({
-                    "name": name,
-                    "role": role,
-                    "profile": p.get("profile_path") or "",
-                })
+            staff = load_kp_staff(kp_id)
+            cast = convert_staff_to_cast(staff)
 
             result_items[key] = {
-                "kind": t["kind"],
-                "tmdbId": t["tmdbId"],
-                "itemId": t["itemId"],
-                "title": t["title"],
+                "kind": target["kind"],
+                "tmdbId": target["tmdbId"],
+                "itemId": target["itemId"],
+                "title": target["title"],
+                "year": target.get("year") or "",
+                "kinopoiskId": kp_id,
+                "source": "kinopoiskapiunofficial",
                 "cast": cast,
             }
 
             updated += 1
 
-            if i % 25 == 0:
-                print(f"Processed {i}/{len(targets)} updated={updated} skipped={skipped} failed={failed}")
+            if i % 20 == 0:
+                print(f"Processed {i}/{len(targets)} updated={updated} skipped={skipped} failed={failed} not_found={not_found}")
 
-            time.sleep(0.15)
+            time.sleep(SLEEP_SEC)
         except Exception as e:
             failed += 1
-            print(f"Failed {key} {t['title']}: {e}")
-            time.sleep(0.8)
+            print(f"Failed {key} {target.get('title')}: {e}")
+            time.sleep(1.5)
 
     out = {
         "version": int(old.get("version", 0) or 0) + 1 if isinstance(old, dict) else 1,
         "generatedAt": datetime.utcnow().isoformat(timespec="seconds") + "Z",
         "count": len(result_items),
         "limit": LIMIT,
+        "source": "kinopoiskapiunofficial",
         "items": result_items,
     }
 
     save_json(OUT_PATH, out)
 
-    print("GKM cast cache v2 complete")
+    print("GKM Kinopoisk cast cache complete")
     print(f"Targets: {len(targets)}")
     print(f"Updated: {updated}")
     print(f"Skipped: {skipped}")
+    print(f"Not found: {not_found}")
     print(f"Failed: {failed}")
     print(f"Written: {OUT_PATH}")
 
