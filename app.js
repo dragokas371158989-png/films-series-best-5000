@@ -8,9 +8,9 @@ const TMDB_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzIyNGQ4YzcwMmRkYTIzNjA4Mzh
 
 const INITIAL_CHUNKS = 2;
 const BACKGROUND_RENDER_EVERY = 999999;
-const BACKGROUND_PAUSE_MS = 20;
+const BACKGROUND_PAUSE_MS = 80;
 const FILTER_DEBOUNCE_MS = 180;
-const HOME_SECTION_LIMIT = 12;
+const HOME_SECTION_LIMIT = 10;
 
 let allMovies = [];
 let filtered = [];
@@ -234,10 +234,8 @@ function queryOf(m) {
 
 function rankOf(m) {
   const r = getRating(m);
-  const votes = getVotes(m);
 
-  if (isBadTopRating(m)) return { rank: "n", label: "Новый" };
-  if (r >= 9 && votes >= MIN_VOTES_FOR_TOP) return { rank: "S", label: "S-класс" };
+  if (r >= 9) return { rank: "S", label: "S-класс" };
   if (r >= 8) return { rank: "A", label: "A-класс" };
   if (r >= 7) return { rank: "B", label: "B-класс" };
   if (r >= 6) return { rank: "C", label: "C-класс" };
@@ -251,7 +249,6 @@ function scoreSmart(m) {
   const year = Number(getYear(m) || 0);
 
   if (votes < 30) return -1;
-  if (isBadTopRating(m)) return rating + Math.min(votes, 300) / 300;
 
   const voteBonus = Math.min(votes, 50000) / 50000 * 4;
   const yearBonus = year >= 2010 ? 0.4 : 0;
@@ -729,117 +726,6 @@ function syncAnimePanel() {
   });
 }
 
-
-/* ===== GKM CLEAN DATA CORE ===== */
-
-function normalizeTitleForDedupe(value) {
-  return String(value || "")
-    .toLowerCase()
-    .replace(/ё/g, "е")
-    .replace(/[‐‑‒–—―-]/g, "-")
-    .replace(/[^\p{L}\p{N}]+/gu, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function itemTypeForDedupe(m) {
-  const type = normalize(m && m.type);
-
-  if (type.includes("аниме")) return "anime";
-  if (type.includes("мульт")) return "cartoon";
-  if (type.includes("сериал")) return "series";
-  if (type.includes("фильм")) return "movie";
-
-  if (isAnimeItem(m)) return "anime";
-
-  return type || "item";
-}
-
-function itemTitleForDedupe(m) {
-  const titles = [
-    titleOf(m),
-    m && m.ru,
-    m && m.en,
-    m && m.title,
-    m && m.name,
-    m && m.originalTitle,
-    m && m.titleOriginal
-  ].filter(Boolean);
-
-  for (const t of titles) {
-    const n = normalizeTitleForDedupe(t);
-    if (n) return n;
-  }
-
-  return "";
-}
-
-function itemQualityForDedupe(m) {
-  const rating = Number(getRating(m) || 0);
-  const votes = Number(getVotes(m) || 0);
-  const hasPoster = m && m.poster ? 1 : 0;
-  const source = normalize(m && m.source);
-  const overview = String((m && (m.overview_ru || m.ruOverview || m.description_ru || m.description || m.overview)) || "");
-
-  let sourceBonus = 0;
-  if (source.includes("top_rated")) sourceBonus += 500000;
-  if (source.includes("tmdb")) sourceBonus += 300000;
-  if (source.includes("popular")) sourceBonus += 80000;
-  if (source.includes("kinopoisk")) sourceBonus += 50000;
-
-  return votes * 100 + rating * 1000 + hasPoster * 10000 + overview.length + sourceBonus;
-}
-
-function dedupeMovieList(list) {
-  if (!Array.isArray(list)) return [];
-
-  const byKey = new Map();
-  const noTitle = [];
-
-  for (const item of list) {
-    if (!item) continue;
-
-    const title = itemTitleForDedupe(item);
-
-    if (!title) {
-      noTitle.push(item);
-      continue;
-    }
-
-    // Жёстко убираем дубли по типу + названию.
-    // Это лечит "Бойцовский клуб 1999/2000", "Побег из Шоушенка 1994/2019" и т.п.
-    const key = itemTypeForDedupe(item) + "|" + title;
-
-    const old = byKey.get(key);
-
-    if (!old || itemQualityForDedupe(item) > itemQualityForDedupe(old)) {
-      byKey.set(key, item);
-    }
-  }
-
-  return [...byKey.values(), ...noTitle];
-}
-
-function isBadTopRating(m) {
-  const rating = getRating(m);
-  const votes = getVotes(m);
-
-  return (
-    (rating >= 9.7 && votes < 300) ||
-    (rating >= 9.0 && votes < 80)
-  );
-}
-
-function ratingLabel(m) {
-  const rating = getRating(m);
-
-  if (isBadTopRating(m)) {
-    return "Новый · мало оценок";
-  }
-
-  return `${rankOf(m).label} · ${rating.toFixed(1)}`;
-}
-
 /* ===== ЗАГРУЗКА БАЗЫ ===== */
 
 async function loadData() {
@@ -871,7 +757,7 @@ async function loadData() {
   if (!res.ok) throw new Error("Не удалось загрузить movies_updates.json");
 
   const data = await res.json();
-  allMovies = dedupeMovieList(data.movies || data.items || []);
+  allMovies = data.movies || data.items || [];
 
   if (status) {
     status.textContent = `База: ${allMovies.length} записей · версия ${data.version || "?"} · ${data.generatedAt || ""}`;
@@ -894,7 +780,7 @@ async function loadChunkedDataFast(index) {
     movies.push(...partMovies);
   }
 
-  allMovies = dedupeMovieList(movies);
+  allMovies = movies;
 
   if (status) {
     status.textContent = `База грузится: ${allMovies.length} записей из ${chunks.length} чанков · версия ${index.version || "?"}`;
@@ -916,6 +802,7 @@ async function loadRemainingChunksInBackground(index, chunks, movies) {
 
   let loadedChunksCount = INITIAL_CHUNKS;
   let lastStatusUpdate = 0;
+  const totalChunks = INITIAL_CHUNKS + chunks.length;
 
   for (const chunk of chunks) {
     const partMovies = await fetchChunkMovies(chunk);
@@ -924,15 +811,17 @@ async function loadRemainingChunksInBackground(index, chunks, movies) {
 
     const now = Date.now();
 
-    if (status && now - lastStatusUpdate > 700) {
+    if (status && now - lastStatusUpdate > 900) {
       lastStatusUpdate = now;
-      status.textContent = `База грузится: ${dedupeMovieList(movies).length} записей · чанков ${loadedChunksCount}/${INITIAL_CHUNKS + chunks.length}`;
+      status.textContent = `База грузится: ${movies.length} записей · чанков ${loadedChunksCount}/${totalChunks}`;
     }
 
+    // ВАЖНО: не вызываем applyFilters() на каждом чанке.
+    // Иначе сайт начинает троить и зависать.
     await sleep(BACKGROUND_PAUSE_MS);
   }
 
-  allMovies = dedupeMovieList(movies);
+  allMovies = movies;
   isBackgroundLoading = false;
 
   if (status) {
@@ -942,7 +831,7 @@ async function loadRemainingChunksInBackground(index, chunks, movies) {
   setTimeout(() => {
     fillFilters();
     applyFilters();
-  }, 250);
+  }, 300);
 }
 
 async function fetchChunkMovies(chunk) {
@@ -1045,7 +934,7 @@ function applyFilters() {
     list = list.filter(m => animeSectionMatch(m, currentAnimeSection));
   }
 
-  if (currentTab === "top") list = list.filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP && !isBadTopRating(m)).slice(0, 250);
+  if (currentTab === "top") list = list.filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP).slice(0, 250);
   if (currentTab === "new") list = list.filter(m => Number(getYear(m)) >= 2024);
   if (currentTab === "popular") list = list.filter(m => getVotes(m) >= 1000);
 
@@ -1182,40 +1071,51 @@ function bindCardClicks(root = document) {
 function renderHomeSections() {
   injectHomeStyle();
 
-  const anime = allMovies
-    .filter(isAnimeItem)
-    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
-    .slice(0, HOME_SECTION_LIMIT);
+  const buckets = {
+    anime: [],
+    movies: [],
+    series: [],
+    cartoons: [],
+    newItems: [],
+    popular: [],
+    top: []
+  };
 
-  const movies = allMovies
-    .filter(m => m.type === "Фильм")
-    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
-    .slice(0, HOME_SECTION_LIMIT);
+  function pushTop(arr, item, max, scorer) {
+    arr.push(item);
+    arr.sort((a, b) => scorer(b) - scorer(a));
+    if (arr.length > max) arr.length = max;
+  }
 
-  const series = allMovies
-    .filter(m => m.type === "Сериал")
-    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
-    .slice(0, HOME_SECTION_LIMIT);
+  const max = HOME_SECTION_LIMIT;
 
-  const cartoons = allMovies
-    .filter(m => getGenres(m).some(g => normalize(g).includes("мульт")) && !isAnimeItem(m))
-    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
-    .slice(0, HOME_SECTION_LIMIT);
+  for (const m of allMovies) {
+    const animeItem = isAnimeItem(m);
+    const genresText = getGenres(m).map(normalize).join(" ");
+    const year = Number(getYear(m) || 0);
+    const votes = getVotes(m);
+    const rating = getRating(m);
 
-  const newItems = allMovies
-    .filter(m => Number(getYear(m)) >= 2024)
-    .sort((a, b) => Number(getYear(b) || 0) - Number(getYear(a) || 0))
-    .slice(0, HOME_SECTION_LIMIT);
+    if (animeItem) pushTop(buckets.anime, m, max, scoreSmart);
+    else if (m.type === "Фильм") pushTop(buckets.movies, m, max, scoreSmart);
+    else if (m.type === "Сериал") pushTop(buckets.series, m, max, scoreSmart);
 
-  const popular = allMovies
-    .filter(m => getVotes(m) >= 1000)
-    .sort((a, b) => getVotes(b) - getVotes(a))
-    .slice(0, HOME_SECTION_LIMIT);
+    if (genresText.includes("мульт") && !animeItem) {
+      pushTop(buckets.cartoons, m, max, scoreSmart);
+    }
 
-  const top = allMovies
-    .filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP && !isBadTopRating(m))
-    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
-    .slice(0, HOME_SECTION_LIMIT);
+    if (year >= 2024) {
+      pushTop(buckets.newItems, m, max, x => Number(getYear(x) || 0) * 100000 + scoreSmart(x));
+    }
+
+    if (votes >= 1000) {
+      pushTop(buckets.popular, m, max, getVotes);
+    }
+
+    if (votes >= MIN_VOTES_FOR_TOP && rating >= 7) {
+      pushTop(buckets.top, m, max, scoreSmart);
+    }
+  }
 
   const countText = $("countText");
   const grid = $("grid");
@@ -1237,13 +1137,13 @@ function renderHomeSections() {
         <button id="whatToWatchBtn" class="what-watch-main-btn" type="button">🎲 Что посмотреть?</button>
       </section>
 
-      ${homeSectionHtml("🔥 Популярное", popular, "popular")}
-      ${homeSectionHtml("⭐ Лучший рейтинг", top, "top")}
-      ${homeSectionHtml("🆕 Новинки", newItems, "new")}
-      ${homeSectionHtml("🐉 Аниме", anime, "anime")}
-      ${homeSectionHtml("🎬 Фильмы", movies, "movies")}
-      ${homeSectionHtml("📺 Сериалы", series, "series")}
-      ${homeSectionHtml("🧸 Мультфильмы", cartoons, "cartoons")}
+      ${homeSectionHtml("🔥 Популярное", buckets.popular, "popular")}
+      ${homeSectionHtml("⭐ Лучший рейтинг", buckets.top, "top")}
+      ${homeSectionHtml("🆕 Новинки", buckets.newItems, "new")}
+      ${homeSectionHtml("🐉 Аниме", buckets.anime, "anime")}
+      ${homeSectionHtml("🎬 Фильмы", buckets.movies, "movies")}
+      ${homeSectionHtml("📺 Сериалы", buckets.series, "series")}
+      ${homeSectionHtml("🧸 Мультфильмы", buckets.cartoons, "cartoons")}
     `;
   }
 
@@ -1275,6 +1175,7 @@ function renderHomeSections() {
   if (nextBtn) nextBtn.disabled = true;
   if (pageText) pageText.textContent = "Главная";
 }
+
 
 function homeSectionHtml(title, items, tabName) {
   if (!items.length) return "";
@@ -1714,8 +1615,6 @@ img.logo {
       -webkit-box-orient: vertical !important;
     }
 
-    .rank-n { background: linear-gradient(180deg, #64748b, #334155) !important; color: white !important; }
-
     .rating {
       margin-top: auto !important;
       width: 100% !important;
@@ -2004,7 +1903,7 @@ function cardHtml(m) {
         <p class="meta">${escapeHtml(m.year || "—")} · ${escapeHtml(m.type || "—")}</p>
         <p class="meta">${escapeHtml(genres)}</p>
         <span class="rating rank-${rankOf(m).rank.toLowerCase()}">
-          ${ratingLabel(m)}
+          ${rankOf(m).rank}-класс · ${getRating(m).toFixed(1)}
         </span>
       </div>
     </article>
@@ -9167,6 +9066,921 @@ return cast;
   }, true);
 })();
 
+/* ===== GKM FORCE TRANSLATE CHARACTER DESCRIPTION ===== */
+(function () {
+  if (window.__gkmForceTranslateCharacterDescription) return;
+  window.__gkmForceTranslateCharacterDescription = true;
+
+  function isEnglish(text) {
+    const s = String(text || "").trim();
+    if (!s) return false;
+
+    const latin = (s.match(/[a-zA-Z]/g) || []).length;
+    const cyr = (s.match(/[а-яА-ЯёЁ]/g) || []).length;
+
+    return latin > 40 && latin > cyr * 3;
+  }
+
+  function hashText(text) {
+    let h = 0;
+    const s = String(text || "");
+
+    for (let i = 0; i < s.length; i++) {
+      h = ((h << 5) - h) + s.charCodeAt(i);
+      h |= 0;
+    }
+
+    return String(Math.abs(h));
+  }
+
+  function splitText(text, maxLen) {
+    const s = String(text || "").trim();
+    const chunks = [];
+    let cur = "";
+
+    s.split(/(?<=[.!?])\s+/).forEach(function (part) {
+      if ((cur + " " + part).trim().length > maxLen) {
+        if (cur.trim()) chunks.push(cur.trim());
+        cur = part;
+      } else {
+        cur = (cur + " " + part).trim();
+      }
+    });
+
+    if (cur.trim()) chunks.push(cur.trim());
+
+    return chunks.length ? chunks : [s.slice(0, maxLen)];
+  }
+
+  async function translateChunkToRu(text) {
+    const url =
+      "https://api.mymemory.translated.net/get?q=" +
+      encodeURIComponent(text) +
+      "&langpair=en|ru";
+
+    try {
+      const res = await fetch(url, { cache: "force-cache" });
+      if (!res.ok) return "";
+
+      const data = await res.json();
+      return data && data.responseData && data.responseData.translatedText
+        ? String(data.responseData.translatedText).trim()
+        : "";
+    } catch (e) {
+      console.warn("GKM character translate failed:", e);
+      return "";
+    }
+  }
+
+  async function translateToRu(text) {
+    const original = String(text || "").trim();
+    if (!isEnglish(original)) return "";
+
+    const key = "gkm_force_char_ru_" + hashText(original);
+
+    try {
+      const cached = localStorage.getItem(key);
+      if (cached) return cached;
+    } catch (e) {}
+
+    const chunks = splitText(original, 430);
+    const parts = [];
+
+    for (const chunk of chunks) {
+      const ru = await translateChunkToRu(chunk);
+      parts.push(ru || chunk);
+      await new Promise(resolve => setTimeout(resolve, 220));
+    }
+
+    const result = parts.join(" ").trim();
+
+    if (result && result !== original) {
+      try {
+        localStorage.setItem(key, result);
+      } catch (e) {}
+
+      return result;
+    }
+
+    return "";
+  }
+
+  async function checkCharacterDesc() {
+    const el = document.querySelector("#gkmNativeCharacterDesc");
+    if (!el) return;
+
+    const text = String(el.textContent || "").trim();
+
+    if (!text) return;
+    if (text.includes("Загружаю")) return;
+    if (text.includes("Перевожу")) return;
+    if (!isEnglish(text)) return;
+
+    const currentHash = hashText(text);
+
+    if (el.dataset.ruDoneHash === currentHash) return;
+
+    el.dataset.ruDoneHash = currentHash;
+    el.dataset.originalText = text;
+    el.textContent = "Перевожу описание на русский...";
+
+    const ru = await translateToRu(text);
+
+    if (ru) {
+      el.textContent = ru;
+    } else {
+      el.textContent = text;
+      el.dataset.ruDoneHash = "";
+    }
+  }
+
+  function scheduleChecks() {
+    setTimeout(checkCharacterDesc, 300);
+    setTimeout(checkCharacterDesc, 900);
+    setTimeout(checkCharacterDesc, 1800);
+    setTimeout(checkCharacterDesc, 3200);
+  }
+
+  setInterval(checkCharacterDesc, 1200);
+
+  document.addEventListener("click", function () {
+    scheduleChecks();
+  }, true);
+
+  const observer = new MutationObserver(function () {
+    scheduleChecks();
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  scheduleChecks();
+
+  console.log("GKM FORCE TRANSLATE CHARACTER DESCRIPTION установлен");
+})();
+
+/* ===== GKM RU LABELS CLEANUP FINAL ===== */
+(function () {
+  if (window.__gkmRuLabelsCleanupFinal) return;
+  window.__gkmRuLabelsCleanupFinal = true;
+
+  const RU_MAP = {
+    "Action": "Экшен",
+    "Adventure": "Приключения",
+    "Comedy": "Комедия",
+    "Drama": "Драма",
+    "Fantasy": "Фэнтези",
+    "Romance": "Романтика",
+    "Sci-Fi": "Фантастика",
+    "Science Fiction": "Фантастика",
+    "Horror": "Ужасы",
+    "Mystery": "Детектив",
+    "Supernatural": "Сверхъестественное",
+    "Psychological": "Психология",
+    "Martial Arts": "Боевые искусства",
+    "Military": "Военное",
+    "School": "Школа",
+    "Magic": "Магия",
+    "Demons": "Демоны",
+    "Vampire": "Вампиры",
+    "Samurai": "Самураи",
+    "Sports": "Спорт",
+    "Music": "Музыка",
+    "Game": "Игры",
+    "Slice of Life": "Повседневность",
+    "Shounen": "Сёнэн",
+    "Shonen": "Сёнэн",
+    "Seinen": "Сэйнэн",
+    "Shoujo": "Сёдзё",
+    "Shojo": "Сёдзё",
+    "Josei": "Дзёсэй",
+    "Main": "Главный персонаж",
+    "Supporting": "Второстепенный персонаж",
+    "Source": "Источник",
+    "Wikipedia": "Википедия",
+    "Manga": "Манга",
+    "Original": "Оригинал",
+    "Light novel": "Ранобэ",
+    "Novel": "Роман",
+    "Web manga": "Веб-манга",
+    "4-koma manga": "Ёнкома-манга",
+    "Other": "Другое",
+    "Unknown": "Неизвестно"
+  };
+
+  function replaceWords(text) {
+    let s = String(text || "");
+
+    Object.keys(RU_MAP)
+      .sort(function (a, b) { return b.length - a.length; })
+      .forEach(function (key) {
+        const safe = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const re = new RegExp("(^|[^A-Za-zА-Яа-яЁё])" + safe + "([^A-Za-zА-Яа-яЁё]|$)", "g");
+
+        s = s.replace(re, function (_, left, right) {
+          return left + RU_MAP[key] + right;
+        });
+      });
+
+    s = s
+      .replace(/Сейю\s*:\s*/gi, "Сейю: ")
+      .replace(/Источник\s*:\s*Википедия/gi, "Источник: Википедия")
+      .replace(/\bR-17\b/g, "17+")
+      .replace(/\bPG-13\b/g, "13+")
+      .replace(/\bPG\b/g, "6+")
+      .replace(/\bG\b/g, "0+")
+      .replace(/Экшен\s*·\s*Экшен/gi, "Экшен")
+      .replace(/Приключения\s*·\s*Приключения/gi, "Приключения")
+      .replace(/Комедия\s*·\s*Комедия/gi, "Комедия")
+      .replace(/Фэнтези\s*·\s*Фэнтези/gi, "Фэнтези")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+
+    return s;
+  }
+
+  function cleanupTextNode(el) {
+    if (!el) return;
+
+    const tag = (el.tagName || "").toLowerCase();
+
+    if (["script", "style", "textarea", "input"].includes(tag)) return;
+
+    if (el.childNodes && el.childNodes.length) {
+      el.childNodes.forEach(function (node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const oldText = node.nodeValue;
+          const newText = replaceWords(oldText);
+
+          if (oldText !== newText) {
+            node.nodeValue = newText;
+          }
+        }
+      });
+    }
+  }
+
+  function cleanupAttributes(el) {
+    if (!el || !el.getAttribute) return;
+
+    ["title", "aria-label"].forEach(function (attr) {
+      const value = el.getAttribute(attr);
+
+      if (value) {
+        const next = replaceWords(value);
+
+        if (next !== value) {
+          el.setAttribute(attr, next);
+        }
+      }
+    });
+  }
+
+  function cleanupRoot(root) {
+    const scope = root || document;
+
+    if (scope.nodeType === 1) {
+      cleanupTextNode(scope);
+      cleanupAttributes(scope);
+    }
+
+    if (!scope.querySelectorAll) return;
+
+    scope.querySelectorAll(
+      ".gkm-pro-chip, .gkm-pro-character-role, .gkm-native-character-value, .gkm-native-character-label, .meta, .card-title, #detailGenres, #detailMeta, #detailOverview, .links-title, .gkm-pro-info-value, .gkm-pro-info-label, p, span, div"
+    ).forEach(function (el) {
+      cleanupTextNode(el);
+      cleanupAttributes(el);
+    });
+  }
+
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (m) {
+      if (m.type === "childList") {
+        m.addedNodes.forEach(function (node) {
+          cleanupRoot(node);
+        });
+      }
+
+      if (m.type === "characterData" && m.target && m.target.parentElement) {
+        cleanupRoot(m.target.parentElement);
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  document.addEventListener("click", function () {
+    setTimeout(function () { cleanupRoot(document); }, 100);
+    setTimeout(function () { cleanupRoot(document); }, 700);
+    setTimeout(function () { cleanupRoot(document); }, 1500);
+  }, true);
+
+  setInterval(function () {
+    cleanupRoot(document);
+  }, 2500);
+
+  cleanupRoot(document);
+
+  console.log("GKM RU LABELS CLEANUP FINAL установлен");
+})();
+
+/* ===== GKM RU TITLE CLEANUP FINAL ===== */
+(function () {
+  if (window.__gkmRuTitleCleanupFinal) return;
+  window.__gkmRuTitleCleanupFinal = true;
+
+  const TITLE_MAP = {
+    "attack on titan season 2": "Атака титанов 2 сезон",
+    "attack on titan season 3": "Атака титанов 3 сезон",
+    "attack on titan final season": "Атака титанов: Финальный сезон",
+    "demon slayer: kimetsu no yaiba": "Истребитель демонов",
+    "demon slayer kimetsu no yaiba": "Истребитель демонов",
+    "demon slayer: kimetsu no...": "Истребитель демонов",
+    "kimetsu no yaiba": "Истребитель демонов",
+    "one punch man": "Ванпанчмен",
+    "one-punch man": "Ванпанчмен",
+    "death note": "Тетрадь смерти",
+    "fullmetal alchemist": "Стальной алхимик",
+    "fullmetal alchemist: brotherhood": "Стальной алхимик: Братство",
+    "fullmetal alchemist brotherhood": "Стальной алхимик: Братство",
+    "naruto shippuden": "Наруто: Ураганные хроники",
+    "naruto: shippuden": "Наруто: Ураганные хроники",
+    "boku no hero academia": "Моя геройская академия",
+    "my hero academia": "Моя геройская академия",
+    "dragon ball z kai": "Драконий жемчуг Z Кай",
+    "dragon ball z kai: the final chapters": "Драконий жемчуг Z Кай: Финальные главы",
+    "dragon ball super": "Драконий жемчуг Супер",
+    "dragon ball z": "Драконий жемчуг Z",
+    "dragon ball": "Драконий жемчуг"
+  };
+
+  function normTitle(s) {
+    return String(s || "")
+      .toLowerCase()
+      .replace(/[‐‑‒–—―-]/g, "-")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function translateTitleText(text) {
+    const raw = String(text || "").trim();
+    const n = normTitle(raw);
+
+    if (TITLE_MAP[n]) return TITLE_MAP[n];
+
+    for (const key in TITLE_MAP) {
+      if (n.startsWith(key) || n.includes(key)) {
+        return TITLE_MAP[key];
+      }
+    }
+
+    return raw;
+  }
+
+  function cleanupTitles(root) {
+    const scope = root || document;
+
+    if (!scope.querySelectorAll) return;
+
+    scope.querySelectorAll(".card-title, #detailTitle").forEach(function (el) {
+      const oldText = String(el.textContent || "").trim();
+      const newText = translateTitleText(oldText);
+
+      if (newText && newText !== oldText) {
+        el.textContent = newText;
+      }
+    });
+  }
+
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (m) {
+      if (m.type === "childList") {
+        m.addedNodes.forEach(function (node) {
+          cleanupTitles(node);
+        });
+      }
+
+      if (m.type === "characterData" && m.target && m.target.parentElement) {
+        cleanupTitles(m.target.parentElement);
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  document.addEventListener("click", function () {
+    setTimeout(function () { cleanupTitles(document); }, 100);
+    setTimeout(function () { cleanupTitles(document); }, 800);
+  }, true);
+
+  setInterval(function () {
+    cleanupTitles(document);
+  }, 2500);
+
+  cleanupTitles(document);
+
+  console.log("GKM RU TITLE CLEANUP FINAL установлен");
+})();
+
+/* ===== GKM MOVIE TV CAST FINAL ===== */
+(function () {
+  if (window.__gkmMovieTvCastFinal) return;
+  window.__gkmMovieTvCastFinal = true;
+
+  const CAST_CACHE_PREFIX = "gkm_tmdb_cast_v1_";
+  const IMG_PROFILE = "https://image.tmdb.org/t/p/w185";
+  const FALLBACK_FACE =
+    "data:image/svg+xml;charset=utf-8," +
+    encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="185" height="278" viewBox="0 0 185 278">' +
+      '<rect width="185" height="278" fill="#111827"/>' +
+      '<circle cx="92.5" cy="86" r="42" fill="#334155"/>' +
+      '<path d="M33 236c8-52 42-82 59.5-82S144 184 152 236" fill="#334155"/>' +
+      '<text x="92.5" y="264" font-family="Arial" font-size="16" fill="#94a3b8" text-anchor="middle">Нет фото</text>' +
+      '</svg>'
+    );
+
+  function gkmCastEscape(text) {
+    return String(text || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function gkmCastNormalize(text) {
+    return String(text || "")
+      .toLowerCase()
+      .replace(/[ё]/g, "е")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function gkmCastYear(item) {
+    const value = String((item && item.year) || "");
+    const m = value.match(/\b(19\d{2}|20\d{2})\b/);
+    return m ? m[1] : "";
+  }
+
+  function gkmCastTitle(item) {
+    if (!item) return "";
+
+    if (typeof titleOf === "function") {
+      try {
+        const t = titleOf(item);
+        if (t) return String(t);
+      } catch (e) {}
+    }
+
+    return String(item.ru || item.en || item.title || item.name || "");
+  }
+
+  function gkmCastIsAnime(item) {
+    if (!item) return false;
+
+    if (typeof isAnimeItem === "function") {
+      try {
+        return !!isAnimeItem(item);
+      } catch (e) {}
+    }
+
+    const type = gkmCastNormalize(item.type);
+    const genres = Array.isArray(item.genres)
+      ? item.genres.map(gkmCastNormalize).join(" ")
+      : gkmCastNormalize(item.genres);
+
+    return type.includes("аниме") || genres.includes("аниме");
+  }
+
+  function gkmCastMediaType(item, fallback) {
+    if (fallback === "movie" || fallback === "tv") return fallback;
+
+    if (typeof tmdbTypeOf === "function") {
+      try {
+        const t = tmdbTypeOf(item);
+        if (t === "movie" || t === "tv") return t;
+      } catch (e) {}
+    }
+
+    const type = gkmCastNormalize(item && item.type);
+    if (type.includes("сериал")) return "tv";
+
+    return "movie";
+  }
+
+  function gkmCastHasToken() {
+    if (typeof hasTmdbToken === "function") {
+      try {
+        return !!hasTmdbToken();
+      } catch (e) {}
+    }
+
+    return (
+      typeof TMDB_TOKEN !== "undefined" &&
+      TMDB_TOKEN &&
+      String(TMDB_TOKEN).length > 30
+    );
+  }
+
+  function gkmCastFetchOptions() {
+    if (typeof tmdbHeaders === "function") {
+      try {
+        return tmdbHeaders();
+      } catch (e) {}
+    }
+
+    return {
+      headers: {
+        Authorization: `Bearer ${TMDB_TOKEN}`,
+        accept: "application/json"
+      }
+    };
+  }
+
+  async function gkmCastFetchJson(url) {
+    if (typeof fetchJsonWithTimeout === "function") {
+      try {
+        return await fetchJsonWithTimeout(url, gkmCastFetchOptions());
+      } catch (e) {
+        return null;
+      }
+    }
+
+    try {
+      const res = await fetch(url, gkmCastFetchOptions());
+      if (!res.ok) return null;
+      return await res.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function gkmCastFindTmdb(item) {
+    const directId = item && (item.tmdbId || item.tmdb_id);
+
+    if (directId) {
+      return {
+        id: directId,
+        mediaType: gkmCastMediaType(item)
+      };
+    }
+
+    const titleCandidates = [
+      item && item.ru,
+      item && item.en,
+      item && item.title,
+      item && item.name,
+      gkmCastTitle(item)
+    ].filter(Boolean);
+
+    const titles = [...new Set(titleCandidates.map(x => String(x).trim()).filter(Boolean))];
+    const year = gkmCastYear(item);
+    const wantedType = gkmCastMediaType(item);
+
+    for (const title of titles) {
+      const url =
+        "https://api.themoviedb.org/3/search/multi?query=" +
+        encodeURIComponent(title) +
+        "&include_adult=false&language=ru-RU&page=1";
+
+      const data = await gkmCastFetchJson(url);
+
+      if (!data || !Array.isArray(data.results)) continue;
+
+      let results = data.results.filter(function (r) {
+        return r && (r.media_type === "movie" || r.media_type === "tv");
+      });
+
+      if (wantedType === "movie" || wantedType === "tv") {
+        results = results.filter(function (r) {
+          return r.media_type === wantedType;
+        });
+      }
+
+      if (!results.length) continue;
+
+      let best = results[0];
+
+      if (year) {
+        const sameYear = results.find(function (r) {
+          const date = r.release_date || r.first_air_date || "";
+          return String(date).slice(0, 4) === String(year);
+        });
+
+        if (sameYear) best = sameYear;
+      }
+
+      if (best && best.id) {
+        return {
+          id: best.id,
+          mediaType: best.media_type
+        };
+      }
+    }
+
+    return null;
+  }
+
+  function gkmCastCleanCharacter(value) {
+    let s = String(value || "").trim();
+
+    s = s
+      .replace(/\s*\/\s*Self\s*$/i, "")
+      .replace(/\s*\(voice\)\s*/gi, " озвучка")
+      .replace(/\s*\(uncredited\)\s*/gi, "")
+      .replace(/\s*\(archive footage\)\s*/gi, " архив")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+
+    return s;
+  }
+
+  function gkmCastRuDepartment(mediaType) {
+    return mediaType === "tv" ? "Актёры и роли сериала" : "Актёры и роли фильма";
+  }
+
+  function gkmCastEnsureBlock() {
+    let block = document.getElementById("gkmMovieTvCastBlock");
+
+    if (block) return block;
+
+    block = document.createElement("section");
+    block.id = "gkmMovieTvCastBlock";
+    block.className = "gkm-movie-tv-cast-block";
+    block.innerHTML = `
+      <h3 class="gkm-movie-tv-cast-title">Актёры и роли</h3>
+      <div id="gkmMovieTvCastGrid" class="gkm-movie-tv-cast-grid"></div>
+    `;
+
+    const dialog = document.getElementById("detailsDialog") || document;
+    const similar =
+      dialog.querySelector("#similarGrid") ||
+      dialog.querySelector(".similar-grid") ||
+      dialog.querySelector("#catalogLinksBlock") ||
+      dialog.querySelector("#animeLinksBlock");
+
+    if (similar && similar.parentNode) {
+      similar.parentNode.insertBefore(block, similar.nextSibling);
+    } else {
+      const content =
+        dialog.querySelector(".dialog-content") ||
+        dialog.querySelector(".details") ||
+        dialog;
+      content.appendChild(block);
+    }
+
+    return block;
+  }
+
+  function gkmCastSetLoading(mediaType) {
+    const block = gkmCastEnsureBlock();
+    const grid = block.querySelector("#gkmMovieTvCastGrid");
+
+    block.style.display = "block";
+    block.querySelector(".gkm-movie-tv-cast-title").textContent = gkmCastRuDepartment(mediaType);
+    grid.innerHTML = `<div class="gkm-cast-empty">Загружаю актёров...</div>`;
+  }
+
+  function gkmCastHide() {
+    const block = document.getElementById("gkmMovieTvCastBlock");
+    if (block) block.style.display = "none";
+  }
+
+  function gkmCastRender(cast, mediaType) {
+    const block = gkmCastEnsureBlock();
+    const grid = block.querySelector("#gkmMovieTvCastGrid");
+
+    block.style.display = "block";
+    block.querySelector(".gkm-movie-tv-cast-title").textContent = gkmCastRuDepartment(mediaType);
+
+    if (!Array.isArray(cast) || !cast.length) {
+      grid.innerHTML = `<div class="gkm-cast-empty">Актёры пока не найдены.</div>`;
+      return;
+    }
+
+    grid.innerHTML = cast.slice(0, 14).map(function (p) {
+      const photo = p.profile_path ? IMG_PROFILE + p.profile_path : FALLBACK_FACE;
+      const name = p.name || p.original_name || "Актёр";
+      const role = gkmCastCleanCharacter(p.character || p.roles && p.roles[0] && p.roles[0].character || "");
+
+      return `
+        <article class="gkm-cast-card">
+          <img src="${gkmCastEscape(photo)}" alt="${gkmCastEscape(name)}" loading="lazy">
+          <div class="gkm-cast-card-body">
+            <b>${gkmCastEscape(name)}</b>
+            ${role ? `<span>${gkmCastEscape(role)}</span>` : `<span>роль не указана</span>`}
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  async function gkmCastLoadForItem(item) {
+    if (!item) return;
+
+    if (gkmCastIsAnime(item)) {
+      gkmCastHide();
+      return;
+    }
+
+    if (!gkmCastHasToken()) {
+      gkmCastHide();
+      return;
+    }
+
+    const mediaType = gkmCastMediaType(item);
+    gkmCastSetLoading(mediaType);
+
+    const found = await gkmCastFindTmdb(item);
+
+    if (!found || !found.id) {
+      gkmCastRender([], mediaType);
+      return;
+    }
+
+    const cacheKey = CAST_CACHE_PREFIX + found.mediaType + "_" + found.id;
+
+    try {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed)) {
+          gkmCastRender(parsed, found.mediaType);
+          return;
+        }
+      }
+    } catch (e) {}
+
+    const url =
+      `https://api.themoviedb.org/3/${found.mediaType}/${found.id}/credits?language=ru-RU`;
+
+    const data = await gkmCastFetchJson(url);
+    const cast = data && Array.isArray(data.cast) ? data.cast : [];
+
+    const cleanCast = cast
+      .filter(function (p) {
+        return p && (p.name || p.original_name);
+      })
+      .slice(0, 20)
+      .map(function (p) {
+        return {
+          id: p.id,
+          name: p.name || p.original_name || "",
+          original_name: p.original_name || "",
+          character: p.character || "",
+          profile_path: p.profile_path || "",
+          order: p.order || 0
+        };
+      });
+
+    try {
+      localStorage.setItem(cacheKey, JSON.stringify(cleanCast));
+    } catch (e) {}
+
+    gkmCastRender(cleanCast, found.mediaType);
+  }
+
+  function gkmCastInjectCss() {
+    if (document.getElementById("gkmMovieTvCastStyle")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkmMovieTvCastStyle";
+    style.textContent = `
+      .gkm-movie-tv-cast-block {
+        margin-top: 18px !important;
+        padding: 14px !important;
+        border-radius: 18px !important;
+        border: 1px solid rgba(0,229,255,.18) !important;
+        background: rgba(15,23,42,.62) !important;
+      }
+
+      .gkm-movie-tv-cast-title {
+        margin: 0 0 12px !important;
+        color: #fff !important;
+        font-size: 18px !important;
+        font-weight: 900 !important;
+      }
+
+      .gkm-movie-tv-cast-grid {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)) !important;
+        gap: 12px !important;
+      }
+
+      .gkm-cast-card {
+        overflow: hidden !important;
+        border-radius: 16px !important;
+        border: 1px solid rgba(255,255,255,.12) !important;
+        background: rgba(2,6,23,.76) !important;
+        box-shadow: 0 0 16px rgba(0,0,0,.28) !important;
+      }
+
+      .gkm-cast-card img {
+        width: 100% !important;
+        aspect-ratio: 2 / 3 !important;
+        object-fit: cover !important;
+        display: block !important;
+        background: #111827 !important;
+      }
+
+      .gkm-cast-card-body {
+        padding: 9px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+      }
+
+      .gkm-cast-card-body b {
+        color: #fff !important;
+        font-size: 13px !important;
+        line-height: 1.15 !important;
+      }
+
+      .gkm-cast-card-body span {
+        color: #c7d2fe !important;
+        font-size: 12px !important;
+        line-height: 1.2 !important;
+      }
+
+      .gkm-cast-empty {
+        color: #c7d2fe !important;
+        padding: 8px 0 !important;
+        font-size: 14px !important;
+      }
+
+      @media (max-width: 700px) {
+        .gkm-movie-tv-cast-block {
+          padding: 12px !important;
+          margin-top: 14px !important;
+        }
+
+        .gkm-movie-tv-cast-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          gap: 10px !important;
+        }
+
+        .gkm-cast-card-body b {
+          font-size: 12px !important;
+        }
+
+        .gkm-cast-card-body span {
+          font-size: 11px !important;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  function gkmCastPatchOpenDetails() {
+    if (typeof openDetails !== "function") return false;
+    if (openDetails.__gkmMovieTvCastPatched) return true;
+
+    const original = openDetails;
+
+    openDetails = function (item) {
+      const result = original.apply(this, arguments);
+
+      gkmCastInjectCss();
+
+      setTimeout(function () {
+        gkmCastLoadForItem(item);
+      }, 450);
+
+      return result;
+    };
+
+    openDetails.__gkmMovieTvCastPatched = true;
+    return true;
+  }
+
+  gkmCastInjectCss();
+
+  if (!gkmCastPatchOpenDetails()) {
+    const timer = setInterval(function () {
+      if (gkmCastPatchOpenDetails()) clearInterval(timer);
+    }, 300);
+
+    setTimeout(function () {
+      clearInterval(timer);
+    }, 10000);
+  }
+
+  console.log("GKM MOVIE TV CAST FINAL установлен");
+})();
+
 /* ===== GKM EMERGENCY LOCAL CAST PATCH V8 ===== */
 (function () {
   if (window.__gkmEmergencyLocalCastPatchV8) return;
@@ -9301,16 +10115,18 @@ return cast;
   console.log("GKM EMERGENCY LOCAL CAST PATCH V8 установлен");
 })();
 
-/* ===== GKM SAFE PERFORMANCE PATCH FINAL ===== */
+
+
+/* ===== GKM ANTI LAG STABLE V14 ===== */
 (function () {
-  if (window.__gkmSafePerformancePatchFinal) return;
-  window.__gkmSafePerformancePatchFinal = true;
+  if (window.__gkmAntiLagStableV14) return;
+  window.__gkmAntiLagStableV14 = true;
 
   function injectCss() {
-    if (document.getElementById("gkmSafePerformanceFinalStyle")) return;
+    if (document.getElementById("gkmAntiLagStableV14Style")) return;
 
     var style = document.createElement("style");
-    style.id = "gkmSafePerformanceFinalStyle";
+    style.id = "gkmAntiLagStableV14Style";
     style.textContent = `
       .card {
         content-visibility: auto !important;
@@ -9331,10 +10147,7 @@ return cast;
     scope.querySelectorAll("img").forEach(function (img) {
       if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
       if (!img.hasAttribute("decoding")) img.setAttribute("decoding", "async");
-
-      try {
-        img.fetchPriority = "low";
-      } catch (e) {}
+      try { img.fetchPriority = "low"; } catch (e) {}
     });
   }
 
@@ -9342,10 +10155,10 @@ return cast;
     injectCss();
     optimizeImages(document);
 
-    var timer = null;
+    var t = null;
     var observer = new MutationObserver(function (mutations) {
-      clearTimeout(timer);
-      timer = setTimeout(function () {
+      clearTimeout(t);
+      t = setTimeout(function () {
         mutations.forEach(function (m) {
           if (m.addedNodes) {
             m.addedNodes.forEach(function (node) {
@@ -9353,7 +10166,7 @@ return cast;
             });
           }
         });
-      }, 150);
+      }, 250);
     });
 
     observer.observe(document.documentElement, {
@@ -9368,7 +10181,7 @@ return cast;
     start();
   }
 
-  window.GKM_APP_CLEAN_VERSION = "core-clean-final-dedupe-rating-performance-2026-06-12";
-  console.log("GKM SAFE PERFORMANCE FINAL установлен");
+  window.GKM_APP_CLEAN_VERSION = "anti-lag-stable-v14-no-card-delete-2026-06-12";
+  console.log("GKM ANTI LAG STABLE V14 установлен");
 })();
 
