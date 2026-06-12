@@ -511,3 +511,137 @@ dialog::backdrop{background:rgba(0,0,0,.72)}
   .details{grid-template-columns:1fr}
   .detail-poster-box img{width:190px}
 }
+
+
+/* === GKM Detail Card Upgrade V2.4 === */
+
+#detailsDialog {
+  width: min(1080px, calc(100vw - 28px));
+}
+
+.dialog-content {
+  padding: 22px 22px 26px;
+}
+
+.details {
+  align-items: start;
+}
+
+.detail-poster-box {
+  position: sticky;
+  top: 16px;
+}
+
+.detail-poster-box img {
+  box-shadow: 0 0 24px rgba(0,229,255,.20), 0 18px 42px rgba(0,0,0,.42);
+}
+
+.detail-info {
+  min-width: 0;
+}
+
+#detailTitle {
+  font-size: clamp(26px, 3vw, 42px);
+  line-height: 1.08;
+  margin-bottom: 10px;
+  text-shadow: 0 0 16px rgba(123,44,255,.55);
+}
+
+#detailMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  align-items: center;
+  margin: 0 0 12px;
+  color: #dbeafe;
+}
+
+#detailMeta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  border: 1px solid rgba(148,163,184,.22);
+  background: rgba(15,23,42,.68);
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-weight: 800;
+}
+
+.detail-type-pill {
+  background: linear-gradient(180deg, #2563eb, #4c1d95) !important;
+  border-color: rgba(34,211,238,.45) !important;
+}
+
+.detail-rating-pill {
+  color: #02030a !important;
+  border: 0 !important;
+}
+
+#detailGenres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0 0 14px;
+}
+
+.genre-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 27px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(123,44,255,.18);
+  border: 1px solid rgba(123,44,255,.42);
+  color: #dbeafe;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+#detailOverview {
+  max-width: 760px;
+  max-height: 275px;
+  overflow: auto;
+  padding: 14px 16px;
+  border: 1px solid rgba(34,211,238,.20);
+  border-radius: 16px;
+  background: rgba(2,6,23,.42);
+  line-height: 1.62;
+}
+
+.facts-grid {
+  margin-top: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.fact-card {
+  min-height: 86px;
+  box-shadow: inset 0 0 18px rgba(0,229,255,.035);
+}
+
+.fact-value {
+  overflow-wrap: anywhere;
+}
+
+.links-block {
+  margin-top: 18px;
+}
+
+.detail-buttons a,
+.detail-buttons button {
+  min-height: 44px;
+}
+
+.detail-buttons a.watch-direct {
+  background: linear-gradient(180deg, #22c55e, #15803d) !important;
+  border-color: rgba(134,239,172,.65) !important;
+}
+
+@media(max-width:760px) {
+  .detail-poster-box {
+    position: static;
+  }
+
+  #detailOverview {
+    max-height: 240px;
+  }
+}
