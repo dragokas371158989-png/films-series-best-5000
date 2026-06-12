@@ -1017,3 +1017,139 @@ header .ai-top-btn {
   outline: 3px solid rgba(0,229,255,.85) !important;
   box-shadow: 0 0 24px rgba(0,229,255,.55) !important;
 }
+
+
+/* === GKM V9 MAX SMART HELPER STYLE === */
+.ai-rec-msg {
+  max-width: 98% !important;
+}
+
+.ai-rec-card {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid rgba(0,229,255,.30);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0,229,255,.055), rgba(123,44,255,.055));
+}
+
+.ai-rec-poster {
+  width: 74px;
+  height: 108px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex: 0 0 74px;
+  background: #0b1020;
+  border: 1px solid rgba(123,44,255,.38);
+}
+
+.ai-rec-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.ai-rec-title {
+  font-weight: 1000;
+  color: #fff;
+  margin-bottom: 6px;
+  line-height: 1.15;
+  font-size: 14px;
+}
+
+.ai-rec-meta {
+  font-size: 12px;
+  color: #c9d3ff;
+  line-height: 1.35;
+  margin-top: 3px;
+}
+
+.ai-rec-why {
+  margin-top: 7px;
+  font-size: 12px;
+  color: #9eeeff;
+  line-height: 1.35;
+}
+
+.ai-messages {
+  scrollbar-width: thin;
+}
+
+.gkm-ai-picked {
+  outline: 3px solid rgba(0,229,255,.85) !important;
+  box-shadow: 0 0 24px rgba(0,229,255,.55) !important;
+}
+
+
+/* === GKM V10 ULTRA SMART HELPER STYLE === */
+.ai-rec-msg {
+  max-width: 98% !important;
+}
+
+.ai-rec-card {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid rgba(0,229,255,.34);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0,229,255,.065), rgba(123,44,255,.07));
+}
+
+.ai-rec-poster {
+  width: 76px;
+  height: 112px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex: 0 0 76px;
+  background: #0b1020;
+  border: 1px solid rgba(123,44,255,.42);
+}
+
+.ai-rec-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.ai-rec-title {
+  font-weight: 1000;
+  color: #fff;
+  margin-bottom: 6px;
+  line-height: 1.15;
+  font-size: 14px;
+}
+
+.ai-rec-meta {
+  font-size: 12px;
+  color: #c9d3ff;
+  line-height: 1.35;
+  margin-top: 3px;
+}
+
+.ai-rec-why {
+  margin-top: 7px;
+  font-size: 12px;
+  color: #9eeeff;
+  line-height: 1.35;
+}
+
+.ai-messages {
+  scrollbar-width: thin;
+}
+
+.gkm-ai-picked {
+  outline: 3px solid rgba(0,229,255,.85) !important;
+  box-shadow: 0 0 24px rgba(0,229,255,.55) !important;
+}
+
+
+/* === GKM V11 BRAIN TAGS HELPER STYLE === */
+.ai-rec-why {
+  margin-top: 8px;
+  padding: 7px 9px;
+  border-left: 3px solid rgba(0,229,255,.65);
+  background: rgba(0,229,255,.055);
+  border-radius: 8px;
+}
