@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v4-all-in-one-clean-genres-rating-speed-2026-06-12";
+const GKM_APP_CLEAN_VERSION = "v5-chat-buttons-ui-ready-2026-06-12";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -973,3 +973,104 @@ if (document.readyState === "loading") {
 } else {
   startApp();
 }
+
+
+/* === GKM AI CHAT UI V5 === */
+(function () {
+  const AI_ENDPOINT = ""; // сюда потом вставим Worker/Vercel адрес, например: https://gkm-ai.ТВОЙ.workers.dev/chat
+
+  function $(id) {
+    return document.getElementById(id);
+  }
+
+  function addMsg(text, who) {
+    const box = $("gkmAiMessages");
+    if (!box) return null;
+    const div = document.createElement("div");
+    div.className = "ai-msg " + (who === "user" ? "ai-user" : "ai-bot");
+    div.textContent = text;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+    return div;
+  }
+
+  function openAi() {
+    const dlg = $("gkmAiDialog");
+    if (!dlg) return;
+    if (typeof dlg.showModal === "function") dlg.showModal();
+    else dlg.setAttribute("open", "open");
+    setTimeout(() => $("gkmAiInput") && $("gkmAiInput").focus(), 50);
+  }
+
+  function closeAi() {
+    const dlg = $("gkmAiDialog");
+    if (!dlg) return;
+    if (typeof dlg.close === "function") dlg.close();
+    else dlg.removeAttribute("open");
+  }
+
+  async function askAi(text) {
+    addMsg(text, "user");
+
+    if (!AI_ENDPOINT) {
+      addMsg(
+        "Кнопка готова, окно готово. Осталось подключить серверную часть: Cloudflare Worker или Vercel Function с OpenAI API ключом. Ключ в app.js вставлять нельзя — его украдут.",
+        "bot"
+      );
+      return;
+    }
+
+    const pending = addMsg("Думаю...", "bot");
+
+    try {
+      const res = await fetch(AI_ENDPOINT, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          message: text,
+          page: location.href,
+          site: "Голубь Каталог Мира"
+        })
+      });
+
+      const data = await res.json();
+      pending.textContent = data.answer || data.message || "Пустой ответ от сервера.";
+    } catch (err) {
+      pending.textContent = "Ошибка подключения к AI серверу. Проверь Worker/Vercel адрес.";
+    }
+  }
+
+  function initAiChat() {
+    const top = $("gkmAiTopBtn");
+    const float = $("gkmAiFloatBtn");
+    const close = $("gkmAiCloseBtn");
+    const form = $("gkmAiForm");
+    const input = $("gkmAiInput");
+
+    if (top) top.addEventListener("click", openAi);
+    if (float) float.addEventListener("click", openAi);
+    if (close) close.addEventListener("click", closeAi);
+
+    document.querySelectorAll("[data-ai-prompt]").forEach(btn => {
+      btn.addEventListener("click", () => askAi(btn.getAttribute("data-ai-prompt") || ""));
+    });
+
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const text = (input && input.value || "").trim();
+        if (!text) return;
+        input.value = "";
+        askAi(text);
+      });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAiChat);
+  } else {
+    initAiChat();
+  }
+
+  window.GKM_AI_CHAT_VERSION = "v5-chat-buttons-ui-ready-2026-06-12";
+})();
