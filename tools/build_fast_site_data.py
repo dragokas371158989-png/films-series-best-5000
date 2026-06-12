@@ -152,6 +152,95 @@ def pick_extra(item):
         if k in item and item[k] not in (None,"",[],{}): extra[k]=item[k]
     return extra
 
+def infer_ai_tags(item, title, en, genres, overview, item_type):
+    text = norm(" ".join([title, en, item_type, " ".join(genres), overview, str(item.get("source") or "")]))
+    tags = set()
+    moods = set()
+    rec = set()
+
+    def has_any(words):
+        return any(norm(w) in text for w in words)
+
+    # TYPE
+    if item_type == "Аниме":
+        tags.add("anime")
+    elif item_type == "Сериал":
+        tags.add("series")
+    elif item_type == "Мультфильм":
+        tags.add("cartoons")
+    else:
+        tags.add("movies")
+
+    # THEMES / RECOMMENDER TAGS
+    if has_any(["исекай", "isekai", "другой мир", "another world", "parallel world", "перерождение", "реинкарнация", "reincarnation", "summoned", "призван"]):
+        tags.add("isekai")
+        rec.add("попаданцы")
+
+    # title aliases for isekai/popadantsy
+    isekai_titles = [
+        "re zero", "rezero", "starting life in another world", "mushoku", "jobless reincarnation",
+        "slime", "tensei shitara", "reincarnated as a slime", "overlord", "konosuba",
+        "sword art online", "shield hero", "tate no yuusha", "tsukimichi", "no game no life",
+        "log horizon", "eminence in shadow", "kage no jitsuryokusha", "arifureta", "cautious hero",
+        "youjo senki", "moonlit fantasy", "farming life in another world", "death march",
+        "parallel world", "world's finest assassin", "ascendance of a bookworm", "grimgar",
+        "problem children", "black summoner", "skeleton knight", "campfire cooking"
+    ]
+    if any(norm(x) in text for x in isekai_titles):
+        tags.add("isekai")
+        rec.add("попаданцы")
+
+    if has_any(["сильный герой", "overpowered", "op", "прокачка", "leveling", "уровни", "непобедимый", "one punch", "solo leveling"]):
+        tags.add("opmc")
+        rec.add("сильный герой")
+
+    if has_any(["магия", "magic", "волшеб", "академия", "заклинание"]):
+        tags.add("magic")
+
+    if has_any(["сёнэн", "сенэн", "shounen", "боевик", "экшен", "action", "martial arts", "боевые искусства"]):
+        tags.add("action")
+        rec.add("экшен")
+
+    if has_any(["психология", "psychological", "детектив", "detective", "mystery", "mind game", "тайна", "расследование"]):
+        tags.add("smart")
+        rec.add("умный сюжет")
+
+    if has_any(["ужасы", "horror", "триллер", "thriller", "саспенс", "suspense", "кровь", "gore"]):
+        tags.add("dark")
+        moods.add("мрачное")
+
+    if has_any(["комедия", "comedy", "пародия", "parody", "повседневность", "slice of life"]):
+        tags.add("funny")
+        moods.add("лёгкое")
+
+    if has_any(["романс", "романтика", "romance", "мелодрама", "любовь"]):
+        tags.add("romance")
+        moods.add("романтика")
+
+    if has_any(["космос", "space", "галактика", "interstellar", "sci fi", "science fiction", "фантастика"]):
+        tags.add("space")
+
+    if has_any(["выживание", "survival", "зомби", "апокалипсис", "игра на смерть", "death game"]):
+        tags.add("survival")
+
+    if has_any(["спорт", "sports", "football", "basketball", "volleyball", "boxing"]):
+        tags.add("sport")
+
+    if has_any(["школа", "school", "академия", "student"]):
+        tags.add("school")
+
+    if has_any(["семейный", "family", "детям", "kids", "для детей"]):
+        tags.add("family")
+
+    # MOOD BY GENRE
+    if has_any(["фэнтези", "fantasy", "приключения", "adventure"]):
+        moods.add("приключения")
+    if has_any(["драма", "drama"]):
+        moods.add("драма")
+
+    return sorted(tags), sorted(moods), sorted(rec)
+
+
 def card_item(raw, i):
     x={"id":stable_id(raw,i),"ru":title_of(raw),"en":en_of(raw),"year":year_of(raw),"type":type_of(raw),"rating":rating_of(raw),"votes":votes_of(raw),"poster":poster_of(raw),"backdrop":clean_text(raw.get("backdrop") or ""),"genres":genres_of(raw),"overview":overview_of(raw)}
     x.update(pick_extra(raw))
@@ -160,6 +249,10 @@ def card_item(raw, i):
     x["studio"]=x.get("studio") or x.get("studios") or ""
     x["country"]=x.get("country") or x.get("countries") or ""
     x["ageRating"]=x.get("ageRating") or x.get("age") or ""
+    ai_tags, mood_tags, rec_tags = infer_ai_tags(raw, x["ru"], x["en"], x["genres"], x["overview"], x["type"])
+    x["aiTags"] = ai_tags
+    x["moodTags"] = mood_tags
+    x["recTags"] = rec_tags
     return x
 
 def smart_score(x):
@@ -220,7 +313,7 @@ def main():
     top=by([x for x in items if int(x.get("votes") or 0)>=300 and float(x.get("rating") or 0)>=7])
     pages={"all":write_pages(FAST_TMP_DIR,"all",all_sorted),"movies":write_pages(FAST_TMP_DIR,"movies",movies),"series":write_pages(FAST_TMP_DIR,"series",series),"anime":write_pages(FAST_TMP_DIR,"anime",anime),"cartoons":write_pages(FAST_TMP_DIR,"cartoons",cartoons),"new":write_pages(FAST_TMP_DIR,"new",new_items),"popular":write_pages(FAST_TMP_DIR,"popular",popular),"top":write_pages(FAST_TMP_DIR,"top",top[:250])}
     home={"generatedAt":now_iso(),"total":len(items),"sections":{"popular":popular[:HOME_LIMIT],"top":top[:HOME_LIMIT],"new":new_items[:HOME_LIMIT],"anime":anime[:HOME_LIMIT],"movies":movies[:HOME_LIMIT],"series":series[:HOME_LIMIT],"cartoons":cartoons[:HOME_LIMIT]}}
-    search_index=[{"id":x.get("id"),"ru":x.get("ru"),"en":x.get("en"),"year":x.get("year"),"type":x.get("type"),"rating":x.get("rating"),"votes":x.get("votes"),"poster":x.get("poster"),"genres":x.get("genres",[])[:6],"overview":(x.get("overview") or "")[:180],"source":x.get("source")} for x in all_sorted]
+    search_index=[{"id":x.get("id"),"ru":x.get("ru"),"en":x.get("en"),"year":x.get("year"),"type":x.get("type"),"rating":x.get("rating"),"votes":x.get("votes"),"poster":x.get("poster"),"genres":x.get("genres",[])[:6],"overview":(x.get("overview") or "")[:180],"source":x.get("source"),"aiTags":x.get("aiTags",[])[:8],"moodTags":x.get("moodTags",[])[:6],"recTags":x.get("recTags",[])[:6]} for x in all_sorted]
     meta={"generatedAt":now_iso(),"rawCount":len(raw),"count":len(items),"pageSize":PAGE_SIZE,"homeLimit":HOME_LIMIT,"genres":genres_all,"years":years,"pages":pages}
     save_json(FAST_TMP_DIR/"home.json", home)
     save_json(FAST_TMP_DIR/"search_index.json", search_index)
