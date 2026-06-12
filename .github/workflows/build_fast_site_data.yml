@@ -48,5 +48,8 @@ jobs:
 
           git commit -m "Build fast site data"
 
-          git pull --rebase origin main
-          git push origin main
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin main && break
+            echo "Push failed, retry $i"
+            sleep 5
+          done
