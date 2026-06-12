@@ -10340,3 +10340,292 @@ return cast;
   console.log("GKM PERFORMANCE PATCH V1 установлен");
 })();
 
+/* ===== GKM DEDUPE AND RATING FIX V1 ===== */
+(function () {
+  if (window.__gkmDedupeRatingFixV1) return;
+  window.__gkmDedupeRatingFixV1 = true;
+
+  function normTitle(s) {
+    return String(s || "")
+      .toLowerCase()
+      .replace(/[ё]/g, "е")
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function yearOf(m) {
+    var y = String((m && m.year) || "").match(/\b(19\d{2}|20\d{2})\b/);
+    return y ? y[1] : "";
+  }
+
+  function titleOfSafe(m) {
+    if (!m) return "";
+
+    if (typeof titleOf === "function") {
+      try {
+        var t = titleOf(m);
+        if (t) return t;
+      } catch (e) {}
+    }
+
+    return m.ru || m.en || m.title || m.name || "";
+  }
+
+  function ratingOf(m) {
+    if (typeof getRating === "function") {
+      try {
+        return Number(getRating(m) || 0);
+      } catch (e) {}
+    }
+
+    return Number((m && m.rating) || (m && m.vote_average) || 0);
+  }
+
+  function votesOf(m) {
+    if (typeof getVotes === "function") {
+      try {
+        return Number(getVotes(m) || 0);
+      } catch (e) {}
+    }
+
+    return Number((m && m.votes) || (m && m.vote_count) || 0);
+  }
+
+  function typeOf(m) {
+    var t = String((m && m.type) || "").toLowerCase();
+
+    if (t.includes("аниме")) return "anime";
+    if (t.includes("мульт")) return "cartoon";
+    if (t.includes("сериал")) return "tv";
+    if (t.includes("фильм")) return "movie";
+
+    return t || "title";
+  }
+
+  function itemKey(m) {
+    var t1 = normTitle(m && m.ru);
+    var t2 = normTitle(m && m.en);
+    var t3 = normTitle(titleOfSafe(m));
+    var title = t1 || t2 || t3;
+
+    return [
+      typeOf(m),
+      title,
+      yearOf(m)
+    ].join("|");
+  }
+
+  function itemQuality(m) {
+    var votes = votesOf(m);
+    var rating = ratingOf(m);
+    var poster = m && (m.poster || m.image || m.posterUrl) ? 1 : 0;
+    var source = String((m && m.source) || "").toLowerCase();
+
+    var sourceBonus = 0;
+
+    if (source.includes("tmdb")) sourceBonus += 80;
+    if (source.includes("top_rated")) sourceBonus += 60;
+    if (source.includes("popular")) sourceBonus += 25;
+    if (source.includes("kinopoisk")) sourceBonus += 30;
+
+    return votes * 10 + rating * 100 + poster * 500 + sourceBonus;
+  }
+
+  function dedupeArray(arr) {
+    if (!Array.isArray(arr)) return arr;
+
+    var map = new Map();
+
+    arr.forEach(function (m) {
+      if (!m) return;
+
+      var key = itemKey(m);
+
+      if (!key || key === "title||") {
+        key = String((m.id || "") + "|" + (m.tmdbId || m.tmdb_id || "") + "|" + titleOfSafe(m));
+      }
+
+      var old = map.get(key);
+
+      if (!old || itemQuality(m) > itemQuality(old)) {
+        map.set(key, m);
+      }
+    });
+
+    return Array.from(map.values());
+  }
+
+  function isTrashTop(m) {
+    var rating = ratingOf(m);
+    var votes = votesOf(m);
+
+    // Главная причина мусорного S-класса: рейтинг 10.0 при маленьком числе оценок.
+    // Такие тайтлы оставляем в базе, но режем их из "умного топа".
+    if (rating >= 9.7 && votes < 300) return true;
+    if (rating >= 9.0 && votes < 80) return true;
+
+    return false;
+  }
+
+  function patchArrays() {
+    var changed = false;
+
+    ["allMovies", "movies", "catalogItems", "items", "filteredMovies", "currentList"].forEach(function (name) {
+      try {
+        if (Array.isArray(window[name])) {
+          var before = window[name].length;
+          var clean = dedupeArray(window[name]);
+
+          // Для видимого списка ещё убираем мусорные 10.0 с малым числом голосов
+          if (name === "filteredMovies" || name === "currentList") {
+            clean = clean.filter(function (m) {
+              return !isTrashTop(m);
+            });
+          }
+
+          if (clean.length !== before) {
+            window[name] = clean;
+            changed = true;
+          }
+        }
+      } catch (e) {}
+    });
+
+    return changed;
+  }
+
+  function removeDuplicateCardsDom() {
+    var cards = Array.from(document.querySelectorAll(".card"));
+    var seen = new Set();
+    var removed = 0;
+
+    cards.forEach(function (card) {
+      var titleEl =
+        card.querySelector(".card-title") ||
+        card.querySelector("h3") ||
+        card.querySelector("h2");
+
+      var title = titleEl ? normTitle(titleEl.textContent) : "";
+      var text = card.textContent || "";
+      var y = text.match(/\b(19\d{2}|20\d{2})\b/);
+      var year = y ? y[1] : "";
+      var type = "";
+
+      if (text.includes("Аниме")) type = "anime";
+      else if (text.includes("Мультфильм")) type = "cartoon";
+      else if (text.includes("Сериал")) type = "tv";
+      else if (text.includes("Фильм")) type = "movie";
+
+      var key = type + "|" + title + "|" + year;
+
+      if (!title) return;
+
+      if (seen.has(key)) {
+        card.remove();
+        removed++;
+      } else {
+        seen.add(key);
+      }
+    });
+
+    return removed;
+  }
+
+  function fixBadRatingBadges() {
+    document.querySelectorAll(".card").forEach(function (card) {
+      var text = card.textContent || "";
+      var ratingMatch = text.match(/S-класс\s*·\s*10\.0/i);
+
+      if (!ratingMatch) return;
+
+      // Если явно нет большого числа голосов на карточке, не даём ей выглядеть как честный топ.
+      var hasVotes = /\b(голос|оценок|votes)\b/i.test(text);
+
+      if (!hasVotes) {
+        var badge =
+          card.querySelector(".rating") ||
+          card.querySelector(".score") ||
+          card.querySelector(".class-badge") ||
+          Array.from(card.querySelectorAll("*")).find(function (el) {
+            return /S-класс\s*·\s*10\.0/i.test(el.textContent || "");
+          });
+
+        if (badge) {
+          badge.textContent = "Новый · мало оценок";
+          badge.title = "Рейтинг 10.0 скрыт, потому что мало оценок";
+        }
+      }
+    });
+  }
+
+  function refreshAfterCleanup() {
+    removeDuplicateCardsDom();
+    fixBadRatingBadges();
+
+    var total = document.body.textContent.match(/Найдено:\s*\d+/);
+
+    // Не трогаем текст счётчика силой — его обновляет основной рендер.
+  }
+
+  function tryRerender() {
+    patchArrays();
+
+    if (typeof render === "function") {
+      try {
+        render();
+        return;
+      } catch (e) {}
+    }
+
+    if (typeof renderCards === "function") {
+      try {
+        renderCards();
+        return;
+      } catch (e) {}
+    }
+
+    if (typeof applyFilters === "function") {
+      try {
+        applyFilters();
+        return;
+      } catch (e) {}
+    }
+
+    refreshAfterCleanup();
+  }
+
+  function start() {
+    setTimeout(tryRerender, 1200);
+    setTimeout(refreshAfterCleanup, 2500);
+    setTimeout(refreshAfterCleanup, 5000);
+
+    var obs = new MutationObserver(function () {
+      clearTimeout(window.__gkmDedupeCleanTimer);
+      window.__gkmDedupeCleanTimer = setTimeout(refreshAfterCleanup, 350);
+    });
+
+    obs.observe(document.documentElement, {
+      childList: true,
+      subtree: true
+    });
+
+    document.addEventListener("change", function () {
+      setTimeout(tryRerender, 500);
+    }, true);
+
+    document.addEventListener("click", function () {
+      setTimeout(refreshAfterCleanup, 500);
+    }, true);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
+
+  window.GKM_APP_CLEAN_VERSION = "performance-v2-dedupe-rating-fix-2026-06-12";
+  console.log("GKM DEDUPE AND RATING FIX V1 установлен");
+})();
+
