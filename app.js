@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v27-yummyanime-link-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v30-helper-no-freeze-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -2341,32 +2341,74 @@ if (document.readyState === "loading") {
     const idx = await ensureSearchIndex();
     const c = parseConstraints(query);
     const finalLimit = Math.max(1, Math.min(10, limit || c.limit || 5));
-    const pool = pools(idx)
-      .filter(item => matchesKind(item, cls.kind))
-      .filter(item => passesConstraints(item, c));
 
-    const scored = pool
-      .map(item => ({ item, score: scoreItem(item, query, cls) + constraintBoost(item, c) }))
-      .filter(x => x.score > -40)
-      .sort((a, b) => b.score - a.score);
+    // ВАЖНО: не прогоняем 96к записей тяжёлым скорингом сразу.
+    // Сначала берём быстрый кандидатный набор, иначе браузер зависает.
+    const q = norm(fixQuery(query));
+    const qTokens = semanticTokens(q).slice(0, 14);
+    const tagList = (cls.tags || []).slice(0, 8);
 
-    const top = scored.slice(0, Math.max(finalLimit * 4, 18));
+    const fullPool = pools(idx).filter(item => matchesKind(item, cls.kind));
+    const candidates = [];
+    const maxCandidates = 2600;
+
+    for (let i = 0; i < fullPool.length; i++) {
+      const item = fullPool[i];
+      if (!passesConstraints(item, c)) continue;
+
+      const text = textOfItem(item);
+      let quick = 0;
+
+      for (const t of qTokens) {
+        if (text.includes(t)) quick += 6;
+      }
+
+      for (const tag of tagList) {
+        if (text.includes(tag) || tagHit(item, tag) > 0) quick += 12;
+      }
+
+      // качество тоже учитываем на лёгком этапе
+      quick += Math.min(Number(item.recScore || getRating(item) || 0), 100) / 10;
+      quick += posterOfItem(item) ? 2 : 0;
+
+      if (quick > 0 || qTokens.length === 0) {
+        candidates.push({ item, quick });
+      }
+
+      // каждые 1200 элементов отдаём поток браузеру, чтобы страница не висла
+      if (i % 1200 === 0) {
+        await new Promise(r => setTimeout(r, 0));
+      }
+    }
+
+    candidates.sort((a, b) => b.quick - a.quick);
+    const limited = candidates.slice(0, maxCandidates).map(x => x.item);
+
+    const scored = [];
+    for (let i = 0; i < limited.length; i++) {
+      const item = limited[i];
+      scored.push({ item, score: scoreItem(item, query, cls) + constraintBoost(item, c) });
+
+      if (i % 300 === 0) {
+        await new Promise(r => setTimeout(r, 0));
+      }
+    }
+
+    scored.sort((a, b) => b.score - a.score);
+
     const picked = [];
-
-    for (const x of top) {
+    for (const x of scored) {
       if (picked.length >= finalLimit) break;
       const title = norm(titleOf(x.item));
       if (!picked.some(p => norm(titleOf(p)) === title)) picked.push(x.item);
     }
 
-    // Если фильтр слишком жёсткий и ничего не дал — ослабляем, но всё равно не ломаем ответ.
-    if (!picked.length && pool.length === 0) {
-      const fallback = pools(idx)
-        .filter(item => matchesKind(item, cls.kind))
-        .map(item => ({ item, score: scoreItem(item, query, cls) }))
-        .sort((a, b) => b.score - a.score)
-        .slice(0, finalLimit)
-        .map(x => x.item);
+    if (!picked.length) {
+      const fallback = fullPool
+        .slice(0, 800)
+        .filter(item => passesConstraints(item, c))
+        .sort((a, b) => Number(getRating(b) || 0) - Number(getRating(a) || 0))
+        .slice(0, finalLimit);
       fallback.forEach(item => shownIds.add(String(item.id)));
       return fallback;
     }
@@ -2762,14 +2804,15 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v27-yummyanime-link-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v30-helper-no-freeze-2026-06-13";
 })();
 
 
-/* === GKM V27 YUMMYANIME DETAIL LINK === */
+/* === GKM V29 YUMMYANIME EVERY ANIME STRICT === */
 (function () {
-  const YUMMY_ANIME_URL = "https://yummyanime.tv/1204-o-moem-pererozhdenii-v-sliz-film-g1.html";
-  const YUMMY_ANIME_TITLE_HINTS = [
+  const SLIME_MOVIE_URL = "https://yummyanime.tv/1204-o-moem-pererozhdenii-v-sliz-film-g1.html";
+
+  const SLIME_HINTS = [
     "о моем перерождении в слизь",
     "о моём перерождении в слизь",
     "tensei shitara slime",
@@ -2780,54 +2823,129 @@ if (document.readyState === "loading") {
     "алые связи"
   ];
 
-  function normText(v) {
+  function norm(v) {
     return String(v || "").toLowerCase().replaceAll("ё", "е").trim();
   }
 
-  function isSlimeMovieDetail() {
-    const dialog = document.querySelector("dialog[open], .modal, .detail, .details, #detailsModal, #detailModal");
-    const scope = dialog || document.body;
-    const titleText = normText((scope.querySelector(".detail-title, .modal-title, h1, h2") || {}).textContent || scope.textContent || "");
-    return YUMMY_ANIME_TITLE_HINTS.some(h => titleText.includes(normText(h)));
+  function cleanTitle(v) {
+    return String(v || "")
+      .replace(/\(\d{4}\)/g, "")
+      .replace(/\bTV\b|\bONA\b|\bOVA\b|\bMovie\b|\bSpecial\b/gi, "")
+      .replace(/[|•·]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
   }
 
-  function makeBtn() {
+  function getOpenDetailRoot() {
+    return document.querySelector("dialog[open]") ||
+      document.querySelector(".detail-modal[open], .modal[open], #detailsModal, #detailModal, .details-modal, .detail-view") ||
+      document.body;
+  }
+
+  function getTitleFromRoot(root) {
+    const selectors = [
+      ".detail-title", ".modal-title", ".details-title", ".movie-title",
+      "[data-title]", "h1", "h2"
+    ];
+
+    for (const sel of selectors) {
+      const el = root.querySelector && root.querySelector(sel);
+      if (!el) continue;
+      const t = cleanTitle(el.getAttribute("data-title") || el.textContent || "");
+      if (t && t.length > 1 && !/смотреть|искать|аниме-сайты|найти на сайтах/i.test(t)) return t;
+    }
+
+    const text = cleanTitle((root.textContent || "").split("\n").map(x => x.trim()).filter(Boolean)[0] || "");
+    return text || "anime";
+  }
+
+  function isAnimeRoot(root) {
+    const text = norm(root.textContent || "");
+    // Жестко: если в карточке есть тип Аниме или источники Jikan/MAL, значит добавляем
+    return /тип\s*аниме/.test(text) ||
+      text.includes("аниме") && (text.includes("jikan") || text.includes("myanimelist") || text.includes("аниме-сайты")) ||
+      text.includes("shikimori") || text.includes("anilist") || text.includes("anidb");
+  }
+
+  function isSlime(root) {
+    const text = norm((root.textContent || "") + " " + getTitleFromRoot(root));
+    return SLIME_HINTS.some(h => text.includes(norm(h)));
+  }
+
+  function yummyUrl(root) {
+    if (isSlime(root)) return SLIME_MOVIE_URL;
+    const title = getTitleFromRoot(root);
+    return "https://yummyanime.tv/index.php?do=search&subaction=search&story=" + encodeURIComponent(title);
+  }
+
+  function makeButton(root) {
     const a = document.createElement("a");
     a.id = "yummyAnimeLink";
-    a.href = YUMMY_ANIME_URL;
+    a.href = yummyUrl(root);
     a.target = "_blank";
     a.rel = "noreferrer";
     a.textContent = "YummyAnime";
     return a;
   }
 
-  function addYummyAnimeButton() {
-    if (!isSlimeMovieDetail()) return;
+  function findAnimeSitesBlock(root) {
+    const candidates = Array.from(root.querySelectorAll("section, .links-block, .detail-block, .detail-section, .detail-links, div"));
+    let block = candidates.find(el => /аниме-сайты/i.test(el.textContent || ""));
 
-    const blocks = Array.from(document.querySelectorAll(".links-block, section, .detail-block, .detail-section"));
-    let animeBlock = blocks.find(b => /аниме-сайты/i.test(b.textContent || ""));
+    if (!block) {
+      const headers = Array.from(root.querySelectorAll("h1,h2,h3,h4,strong,b"));
+      const h = headers.find(el => /аниме-сайты/i.test(el.textContent || ""));
+      if (h) block = h.closest("section,.links-block,.detail-block,.detail-section,div") || h.parentElement;
+    }
+
+    return block;
+  }
+
+  function ensureButton() {
+    const root = getOpenDetailRoot();
+    if (!root || !isAnimeRoot(root)) return;
+
+    const animeBlock = findAnimeSitesBlock(root);
     if (!animeBlock) return;
 
-    const buttons = animeBlock.querySelector(".detail-buttons") || animeBlock.querySelector(".links-row") || animeBlock;
-    if (!buttons || buttons.querySelector("#yummyAnimeLink")) return;
+    const btnBox =
+      animeBlock.querySelector(".detail-buttons") ||
+      animeBlock.querySelector(".links-row") ||
+      Array.from(animeBlock.querySelectorAll("div")).find(d => d.querySelector("a,button")) ||
+      animeBlock;
 
-    buttons.appendChild(makeBtn());
+    if (!btnBox) return;
+
+    let btn = btnBox.querySelector("#yummyAnimeLink");
+    if (!btn) {
+      btn = makeButton(root);
+      btnBox.appendChild(btn);
+    }
+
+    btn.href = yummyUrl(root);
   }
 
-  const obs = new MutationObserver(() => {
-    window.requestAnimationFrame(addYummyAnimeButton);
-  });
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      addYummyAnimeButton();
-      obs.observe(document.body, { childList: true, subtree: true, characterData: true });
-    });
-  } else {
-    addYummyAnimeButton();
-    obs.observe(document.body, { childList: true, subtree: true, characterData: true });
+  let yummyTimer = 0;
+  function scheduleYummy() {
+    clearTimeout(yummyTimer);
+    yummyTimer = setTimeout(ensureButton, 120);
   }
 
-  window.GKM_YUMMYANIME_LINK_VERSION = "v27-yummyanime-link-2026-06-13";
+  const obs = new MutationObserver(scheduleYummy);
+
+  function start() {
+    ensureButton();
+    obs.observe(document.body, { childList: true, subtree: true });
+    document.addEventListener("click", () => setTimeout(ensureButton, 160), true);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+  else start();
+
+  window.GKM_YUMMYANIME_LINK_VERSION = "v29-yummyanime-every-anime-strict-2026-06-13";
 })();
 
+
+
+/* === GKM V30 NO FREEZE PATCH === */
+window.GKM_NO_FREEZE_VERSION = "v30-helper-no-freeze-2026-06-13";
