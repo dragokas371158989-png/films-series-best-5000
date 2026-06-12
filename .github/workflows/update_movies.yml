@@ -24,6 +24,7 @@ jobs:
       - name: Update movies_updates.json
         env:
           TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
+          KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
           TARGET_COUNT: "5000"
         run: |
           python tools/update_movies_updates.py
