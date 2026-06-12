@@ -38,9 +38,9 @@ RU_TITLE_MAP = {
 }
 
 def load_json(path, default):
+    if not path.exists():
+        return default
     try:
-        if not path.exists():
-            return default
         return json.loads(path.read_text(encoding="utf-8"))
     except Exception as e:
         print(f"Cannot read {path}: {e}")
@@ -53,128 +53,52 @@ def save_json(path, data):
 def extract_items(data):
     if isinstance(data, list):
         return data
-
     if isinstance(data, dict):
-        for key in ("movies", "items", "data", "results", "records", "list"):
+        for key in ("movies", "items", "data", "results"):
             value = data.get(key)
             if isinstance(value, list):
                 return value
-
-        # Иногда чанк может быть словарём вида {"1": {...}, "2": {...}}
-        dict_values = list(data.values())
-        if dict_values and all(isinstance(x, dict) for x in dict_values[:20]):
-            return dict_values
-
     return []
 
-def possible_chunk_paths(entry):
+def chunk_path(entry):
     if isinstance(entry, str):
-        raw_values = [entry]
+        value = entry
     elif isinstance(entry, dict):
-        raw_values = [
-            entry.get("file"),
-            entry.get("path"),
-            entry.get("url"),
-            entry.get("src"),
-            entry.get("name"),
-        ]
+        value = entry.get("file") or entry.get("path") or entry.get("url") or entry.get("name") or ""
     else:
-        raw_values = []
+        return None
 
-    result = []
+    value = str(value).strip().lstrip("/")
+    if not value:
+        return None
+    if value.startswith("data/"):
+        return Path(value)
+    if value.startswith("chunks/"):
+        return DATA_DIR / value
+    return DATA_DIR / "chunks" / value if value.startswith("chunk_") else DATA_DIR / value
 
-    for value in raw_values:
-        if not value:
-            continue
-
-        value = str(value).strip().replace("\\", "/").lstrip("/")
-        if not value:
-            continue
-
-        candidates = []
-
-        if value.startswith("data/"):
-            candidates.append(Path(value))
-        else:
-            candidates.append(DATA_DIR / value)
-
-        # name: chunk_0001.json
-        if re.search(r"chunk_\d+\.json$", value, re.I):
-            candidates.append(DATA_DIR / "chunks" / Path(value).name)
-
-        # chunks/chunk_0001.json
-        if value.startswith("chunks/"):
-            candidates.append(DATA_DIR / value)
-
-        # убираем дубли
-        for p in candidates:
-            if p not in result:
-                result.append(p)
-
-    return result
-
-def find_chunk_files_from_index():
+def iter_source_items():
     index = load_json(INDEX_PATH, {})
     chunks = []
 
     if isinstance(index, dict) and isinstance(index.get("chunks"), list):
         for entry in index["chunks"]:
-            for p in possible_chunk_paths(entry):
-                if p.exists():
-                    chunks.append(p)
-                    break
-
-    return chunks
-
-def find_chunk_files_by_scan():
-    candidates = []
-
-    for pattern in (
-        "chunks/chunk_*.json",
-        "chunk_*.json",
-        "**/chunk_*.json",
-    ):
-        for p in DATA_DIR.glob(pattern):
-            if "fast" in p.parts:
-                continue
-            if p.is_file():
-                candidates.append(p)
-
-    unique = sorted(set(candidates), key=lambda p: str(p))
-    return unique
-
-def iter_source_items():
-    chunks = find_chunk_files_from_index()
-
-    if not chunks:
-        print("No chunks resolved from data/index.json, scanning data/chunks...")
-        chunks = find_chunk_files_by_scan()
+            p = chunk_path(entry)
+            if p and p.exists():
+                chunks.append(p)
 
     if chunks:
         print(f"Reading chunks: {len(chunks)}")
-        total = 0
-
         for p in chunks:
             data = load_json(p, [])
-            items = extract_items(data)
-            total += len(items)
-
-            if not items:
-                print(f"Empty or unsupported chunk: {p}")
-
-            for item in items:
+            for item in extract_items(data):
                 if isinstance(item, dict):
                     yield item
-
-        print(f"Raw items from chunks before filtering dicts: {total}")
         return
 
     print("No chunks found, reading fallback movies_updates.json")
     data = load_json(UPDATES_PATH, {})
-    items = extract_items(data)
-    print(f"Fallback items: {len(items)}")
-
-    for item in items:
+    for item in extract_items(data):
         if isinstance(item, dict):
             yield item
 
@@ -185,98 +109,50 @@ def norm(value):
     return re.sub(r"[^\wа-яА-ЯёЁ]+", " ", str(value or "").lower().replace("ё", "е")).strip()
 
 def title_of(item):
-    title = clean_text(
-        item.get("ru")
-        or item.get("title")
-        or item.get("name")
-        or item.get("nameRu")
-        or item.get("nameEn")
-        or item.get("en")
-        or item.get("originalTitle")
-        or "Без названия"
-    )
+    title = clean_text(item.get("ru") or item.get("title") or item.get("name") or item.get("en") or "Без названия")
     n = norm(title)
     return RU_TITLE_MAP.get(n, title)
 
 def en_of(item):
-    return clean_text(
-        item.get("en")
-        or item.get("nameEn")
-        or item.get("originalTitle")
-        or item.get("titleOriginal")
-        or item.get("nameOriginal")
-        or ""
-    )
+    return clean_text(item.get("en") or item.get("originalTitle") or item.get("titleOriginal") or item.get("nameOriginal") or "")
 
 def year_of(item):
-    text = clean_text(
-        item.get("year")
-        or item.get("release_date")
-        or item.get("first_air_date")
-        or item.get("premiereRu")
-        or item.get("premiereWorld")
-        or ""
-    )
+    text = clean_text(item.get("year") or item.get("release_date") or item.get("first_air_date") or "")
     m = re.search(r"(19\d{2}|20\d{2})", text)
     return m.group(1) if m else ""
 
 def rating_of(item):
-    for key in ("rating", "vote_average", "ratingKinopoisk", "ratingImdb", "score"):
-        try:
-            value = item.get(key)
-            if value not in (None, ""):
-                return round(float(value), 2)
-        except Exception:
-            pass
-    return 0.0
+    try:
+        return round(float(item.get("rating") or item.get("vote_average") or 0), 2)
+    except Exception:
+        return 0.0
 
 def votes_of(item):
-    for key in ("votes", "vote_count", "ratingVoteCount", "kinopoiskVotes", "imdbVotes"):
-        try:
-            value = item.get(key)
-            if value not in (None, ""):
-                return int(float(value))
-        except Exception:
-            pass
-    return 0
+    try:
+        return int(float(item.get("votes") or item.get("vote_count") or 0))
+    except Exception:
+        return 0
 
 def genres_of(item):
-    genres = item.get("genres") or item.get("genre") or item.get("genresRu") or []
-
-    # kinopoisk style: [{"genre":"драма"}]
-    if isinstance(genres, list):
-        tmp = []
-        for g in genres:
-            if isinstance(g, dict):
-                tmp.append(g.get("genre") or g.get("name") or g.get("title") or "")
-            else:
-                tmp.append(g)
-        genres = tmp
-
+    genres = item.get("genres") or item.get("genre") or []
     if isinstance(genres, str):
         genres = re.split(r"[,;/|·]+", genres)
-
     if not isinstance(genres, list):
         genres = []
-
     clean = []
     seen = set()
-
     for g in genres:
         g = clean_text(g)
         if not g:
             continue
-
         key = norm(g)
-
         if key not in seen:
             seen.add(key)
             clean.append(g)
-
     return clean[:12]
 
 def type_of(item):
-    t = clean_text(item.get("type") or item.get("kind") or item.get("category") or "")
+    t = clean_text(item.get("type") or item.get("kind") or "")
     low = norm(t)
     genres = " ".join(norm(g) for g in genres_of(item))
     source = norm(item.get("source") or item.get("provider") or item.get("category") or "")
@@ -287,46 +163,32 @@ def type_of(item):
         norm(item.get("ru")),
         norm(item.get("en")),
         norm(item.get("title")),
-        norm(item.get("name")),
         genres,
     ])
 
-    if "аниме" in text or "anime" in text or "shikimori" in source or "myanimelist" in source or "jikan" in source:
+    if "аниме" in text or "anime" in text or "shikimori" in source or "myanimelist" in source:
         return "Аниме"
-
-    if "мульт" in low or "мульт" in genres or low in {"animation", "cartoon"}:
+    if "мульт" in low or "мульт" in genres:
         return "Мультфильм"
-
-    if "сериал" in low or low in {"tv", "series", "tv series"}:
+    if "сериал" in low or low in {"tv", "series"}:
         return "Сериал"
-
     return "Фильм"
 
 def poster_of(item):
-    return clean_text(
-        item.get("poster")
-        or item.get("posterUrl")
-        or item.get("poster_url")
-        or item.get("image")
-        or item.get("imageUrl")
-        or item.get("poster_path")
-        or item.get("cover")
-        or ""
-    )
+    return clean_text(item.get("poster") or item.get("posterUrl") or item.get("image") or item.get("poster_path") or "")
 
 def overview_of(item):
-    for key in ("overview_ru", "ruOverview", "description_ru", "descriptionRu", "description", "overview", "synopsis", "shortDescription"):
+    for key in ("overview_ru", "ruOverview", "description_ru", "descriptionRu", "description", "overview", "synopsis"):
         value = clean_text(item.get(key))
         if value:
             return value
     return ""
 
 def stable_id(item, fallback):
-    for key in ("id", "uid", "tmdbId", "tmdb_id", "kinopoiskId", "filmId", "mal_id", "malId", "shikimori_id"):
+    for key in ("id", "uid", "tmdbId", "tmdb_id", "mal_id", "malId", "shikimori_id"):
         value = item.get(key)
         if value not in (None, ""):
             return str(value)
-
     return "gkm_" + str(fallback)
 
 def pick_extra(item):
@@ -335,15 +197,27 @@ def pick_extra(item):
         "player", "playerUrl", "video", "videoUrl", "url", "src", "iframe", "rutube",
         "players", "videoLinks", "links", "episodes", "episodeCount", "status",
         "studio", "studios", "country", "countries", "ageRating", "age", "source",
-        "tmdbId", "tmdb_id", "kinopoiskId", "filmId", "mal_id", "malId",
-        "shikimori_id", "shikimoriId",
+        "tmdbId", "tmdb_id", "mal_id", "malId", "shikimori_id", "shikimoriId",
     ]
-
     for key in keys:
         if key in item and item[key] not in (None, "", [], {}):
             extra[key] = item[key]
-
     return extra
+
+def smart_score(item):
+    rating = float(item.get("rating") or 0)
+    votes = int(item.get("votes") or 0)
+    year = int(item.get("year") or 0)
+
+    if votes < 30:
+        return rating
+
+    vote_bonus = min(votes, 50000) / 50000 * 4
+    year_bonus = 0.4 if year >= 2010 else 0
+    return rating * 10 + vote_bonus + year_bonus
+
+def quality(item):
+    return int(item.get("votes") or 0) * 100 + float(item.get("rating") or 0) * 1000 + (1 if item.get("poster") else 0) * 10000 + len(item.get("overview") or "")
 
 def card_item(item, fallback):
     out = {
@@ -358,47 +232,20 @@ def card_item(item, fallback):
         "genres": genres_of(item),
         "overview": overview_of(item),
     }
-
     out.update(pick_extra(item))
     out["source"] = clean_text(out.get("source") or item.get("provider") or "")
     out["episodes"] = out.get("episodes") or out.get("episodeCount") or ""
     out["studio"] = out.get("studio") or out.get("studios") or ""
     out["country"] = out.get("country") or out.get("countries") or ""
     out["ageRating"] = out.get("ageRating") or out.get("age") or ""
-
     return out
-
-def smart_score(item):
-    rating = float(item.get("rating") or 0)
-    votes = int(item.get("votes") or 0)
-    year = int(item.get("year") or 0)
-
-    if votes < 30:
-        return rating
-
-    vote_bonus = min(votes, 50000) / 50000 * 4
-    year_bonus = 0.4 if year >= 2010 else 0
-
-    return rating * 10 + vote_bonus + year_bonus
-
-def quality(item):
-    return (
-        int(item.get("votes") or 0) * 100
-        + float(item.get("rating") or 0) * 1000
-        + (1 if item.get("poster") else 0) * 10000
-        + len(item.get("overview") or "")
-    )
 
 def dedupe(items):
     best = {}
-    skipped = 0
-
     for i, raw in enumerate(items):
         item = card_item(raw, i)
         title_key = norm(item["ru"] or item["en"])
-
-        if not title_key or title_key == norm("Без названия"):
-            skipped += 1
+        if not title_key:
             continue
 
         key = item["type"] + "|" + title_key
@@ -407,7 +254,6 @@ def dedupe(items):
         if old is None or quality(item) > quality(old):
             best[key] = item
 
-    print(f"Skipped no-title items: {skipped}")
     return list(best.values())
 
 def write_pages(tab_name, items):
@@ -422,7 +268,6 @@ def write_pages(tab_name, items):
     for page in range(1, pages + 1):
         start = (page - 1) * PAGE_SIZE
         part = items[start:start + PAGE_SIZE]
-
         save_json(
             pages_dir / f"page_{page:04d}.json",
             {
@@ -441,7 +286,7 @@ def main():
     FAST_DIR.mkdir(parents=True, exist_ok=True)
 
     raw_items = list(iter_source_items())
-    print(f"Raw dict items: {len(raw_items)}")
+    print(f"Raw items: {len(raw_items)}")
 
     items = dedupe(raw_items)
     print(f"After dedupe: {len(items)}")
@@ -457,11 +302,7 @@ def main():
     series = by_smart([x for x in items if x["type"] == "Сериал"])
     anime = by_smart([x for x in items if x["type"] == "Аниме"])
     cartoons = by_smart([x for x in items if x["type"] == "Мультфильм"])
-    new_items = sorted(
-        [x for x in items if int(x.get("year") or 0) >= 2024],
-        key=lambda x: (int(x.get("year") or 0), smart_score(x)),
-        reverse=True
-    )
+    new_items = sorted([x for x in items if int(x.get("year") or 0) >= 2024], key=lambda x: (int(x.get("year") or 0), smart_score(x)), reverse=True)
     popular = sorted([x for x in items if x["votes"] >= 1000], key=lambda x: x["votes"], reverse=True)
     top = by_smart([x for x in items if x["votes"] >= 300 and x["rating"] >= 7])
 
@@ -511,12 +352,6 @@ def main():
     save_json(FAST_DIR / "home.json", home)
     save_json(FAST_DIR / "search_index.json", search_index)
     save_json(FAST_DIR / "meta.json", meta)
-
-    if len(items) == 0:
-        raise SystemExit(
-            "FAST DATA ERROR: 0 items. "
-            "Check data/index.json chunks paths or data/chunks/*.json files."
-        )
 
     print("FAST DATA READY")
     print(f"Written: {FAST_DIR}")
