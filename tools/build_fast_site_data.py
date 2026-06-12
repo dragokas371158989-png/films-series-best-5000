@@ -226,6 +226,12 @@ def infer_ai_tags(item, title, en, genres, overview, item_type):
     if has_any(["спорт", "sports", "football", "basketball", "volleyball", "boxing"]):
         tags.add("sport")
 
+    if has_any(["меха", "mecha", "робот", "robot", "gundam"]):
+        tags.add("mecha")
+
+    if has_any(["гарем", "harem"]):
+        tags.add("harem")
+
     if has_any(["школа", "school", "академия", "student"]):
         tags.add("school")
 
@@ -238,7 +244,284 @@ def infer_ai_tags(item, title, en, genres, overview, item_type):
     if has_any(["драма", "drama"]):
         moods.add("драма")
 
+
+    if has_any(["детектив", "detective", "расследование", "mystery"]):
+        tags.add("detective")
+        tags.add("smart")
+
+    if has_any(["киберпанк", "cyberpunk", "роботы", "android", "андроид"]):
+        tags.add("cyberpunk")
+        tags.add("dystopia")
+
+    if has_any(["музыка", "music", "группа", "band", "idol"]):
+        tags.add("music")
+
+    if has_any(["еда", "кулинария", "cooking", "gourmet"]):
+        tags.add("food")
+        moods.add("лёгкое")
+
+
     return sorted(tags), sorted(moods), sorted(rec)
+
+
+def infer_ai_words(title, en, genres, overview, ai_tags, mood_tags, rec_tags):
+    text = norm(" ".join([title, en, " ".join(genres), overview, " ".join(ai_tags), " ".join(mood_tags), " ".join(rec_tags)]))
+    words = []
+    seen = set()
+
+    for w in text.split():
+        w = w.strip()
+        if len(w) < 3:
+            continue
+        if w.isdigit():
+            continue
+        if w in seen:
+            continue
+        seen.add(w)
+        words.append(w)
+        if len(words) >= 60:
+            break
+
+    return words
+
+
+def make_rec_text(title, en, genres, overview, ai_tags, mood_tags, rec_tags, ai_words):
+    parts = [title, en, " ".join(genres), " ".join(ai_tags), " ".join(mood_tags), " ".join(rec_tags), " ".join(ai_words), overview[:260]]
+    return clean_text(" ".join(str(x or "") for x in parts))[:900]
+
+
+def quality_tier(item):
+    rating = float(item.get("rating") or 0)
+    votes = int(item.get("votes") or 0)
+    if rating >= 8.7 and votes >= 10000:
+        return "legend"
+    if rating >= 8.2 and votes >= 1000:
+        return "top"
+    if rating >= 7.5 and votes >= 300:
+        return "good"
+    if votes < 30 and rating >= 9:
+        return "risky"
+    return "normal"
+
+def recommender_score(item):
+    rating = float(item.get("rating") or 0)
+    votes = int(item.get("votes") or 0)
+    year = int(item.get("year") or 0)
+    score = rating * 10 + min(votes, 500000) / 500000 * 20
+    if item.get("poster"):
+        score += 4
+    if year >= 2015:
+        score += 2
+    if year >= 2020:
+        score += 2
+    if votes < 30 and rating >= 9:
+        score -= 30
+    return round(score, 3)
+
+
+def popularity_tier(item):
+    votes = int(item.get("votes") or 0)
+    if votes >= 100000:
+        return "mega"
+    if votes >= 10000:
+        return "popular"
+    if votes >= 1000:
+        return "known"
+    if votes >= 100:
+        return "small"
+    return "unknown"
+
+
+def content_quality_flags(item):
+    flags = []
+    rating = float(item.get("rating") or 0)
+    votes = int(item.get("votes") or 0)
+    if rating >= 8.5 and votes >= 10000:
+        flags.append("must_watch")
+    if rating >= 8.0 and votes >= 1000:
+        flags.append("safe_pick")
+    if votes < 50:
+        flags.append("low_votes")
+    if item.get("poster"):
+        flags.append("has_poster")
+    return flags
+
+
+def neuro_vector(item):
+    vec = []
+    for key in ["type", "qualityTier", "popularityTier"]:
+        v = item.get(key)
+        if v:
+            vec.append(str(v))
+    vec += item.get("aiTags", [])[:10]
+    vec += item.get("moodTags", [])[:8]
+    vec += item.get("recTags", [])[:8]
+    rating = float(item.get("rating") or 0)
+    votes = int(item.get("votes") or 0)
+    year = int(item.get("year") or 0)
+    if rating >= 8.5:
+        vec.append("high_rating")
+    if votes >= 10000:
+        vec.append("many_votes")
+    if year >= 2020:
+        vec.append("modern")
+    elif year and year < 2005:
+        vec.append("classic")
+    return sorted(set(vec))
+
+
+def decade_of(item):
+    y = int(item.get("year") or 0)
+    if not y:
+        return ""
+    return str((y // 10) * 10) + "s"
+
+def omega_text(item):
+    parts = [
+        item.get("ru", ""),
+        item.get("en", ""),
+        item.get("type", ""),
+        decade_of(item),
+        item.get("qualityTier", ""),
+        item.get("popularityTier", ""),
+        " ".join(item.get("qualityFlags", [])),
+        " ".join(item.get("neuroVector", [])),
+        " ".join(item.get("aiTags", [])),
+        " ".join(item.get("moodTags", [])),
+        " ".join(item.get("recTags", [])),
+        " ".join(item.get("genres", [])),
+    ]
+    return clean_text(" ".join(str(x or "") for x in parts))[:700]
+
+
+def apex_text(item):
+    parts = [
+        item.get("omegaText", ""),
+        item.get("decade", ""),
+        item.get("qualityTier", ""),
+        item.get("popularityTier", ""),
+        " ".join(item.get("qualityFlags", [])),
+        " ".join(item.get("neuroVector", [])),
+    ]
+    # Короткие подсказки для помощника
+    if item.get("qualityTier") in ("legend", "top"):
+        parts.append("годное без шлака recommended")
+    if item.get("popularityTier") in ("mega", "popular"):
+        parts.append("популярное известное")
+    return clean_text(" ".join(str(x or "") for x in parts))[:800]
+
+
+def supreme_text(item):
+    parts = [
+        item.get("apexText", ""),
+        item.get("omegaText", ""),
+        item.get("qualityTier", ""),
+        item.get("popularityTier", ""),
+        " ".join(item.get("qualityFlags", [])),
+        " ".join(item.get("neuroVector", [])),
+        item.get("decade", "")
+    ]
+    if item.get("qualityTier") in ("legend", "top") and item.get("popularityTier") in ("mega", "popular"):
+        parts.append("supreme_best_choice")
+    if "low_votes" not in item.get("qualityFlags", []):
+        parts.append("reliable")
+    return clean_text(" ".join(str(x or "") for x in parts))[:900]
+
+
+def risk_level(item):
+    rating = float(item.get("rating") or 0)
+    votes = int(item.get("votes") or 0)
+    if votes < 30:
+        return "high_risk"
+    if votes < 300:
+        return "medium_risk"
+    if rating >= 8 and votes >= 1000:
+        return "low_risk"
+    return "normal_risk"
+
+def ultra_text(item):
+    parts = [
+        item.get("supremeText", ""),
+        item.get("apexText", ""),
+        item.get("omegaText", ""),
+        item.get("riskLevel", ""),
+        item.get("qualityTier", ""),
+        item.get("popularityTier", ""),
+        " ".join(item.get("qualityFlags", [])),
+        " ".join(item.get("neuroVector", [])),
+    ]
+    if item.get("riskLevel") == "low_risk":
+        parts.append("без риска надежный выбор")
+    if item.get("qualityTier") == "legend":
+        parts.append("легенда must watch")
+    if item.get("popularityTier") == "small" and item.get("qualityTier") in ("good", "top"):
+        parts.append("скрытая жемчужина underrated")
+    return clean_text(" ".join(str(x or "") for x in parts))[:1000]
+
+
+def final_score_band(item):
+    s = float(item.get("recScore") or 0)
+    if s >= 105:
+        return "s_plus"
+    if s >= 92:
+        return "s"
+    if s >= 80:
+        return "a"
+    if s >= 65:
+        return "b"
+    return "c"
+
+def infinity_text(item):
+    parts = [
+        item.get("ultraText", ""),
+        item.get("supremeText", ""),
+        item.get("apexText", ""),
+        item.get("riskLevel", ""),
+        item.get("scoreBand", ""),
+        item.get("qualityTier", ""),
+        item.get("popularityTier", ""),
+    ]
+    if item.get("scoreBand") in ("s_plus", "s"):
+        parts.append("infinity_best top choice")
+    if item.get("riskLevel") == "low_risk":
+        parts.append("safe reliable")
+    return clean_text(" ".join(str(x or "") for x in parts))[:1100]
+
+
+def absolute_rank(item):
+    rating = float(item.get("rating") or 0)
+    votes = int(item.get("votes") or 0)
+    rec = float(item.get("recScore") or 0)
+    risk = item.get("riskLevel") or ""
+    band = item.get("scoreBand") or ""
+    score = rec
+    if risk == "low_risk":
+        score += 8
+    if band in ("s_plus", "s"):
+        score += 10
+    if rating >= 8.5 and votes >= 10000:
+        score += 12
+    if votes < 50:
+        score -= 25
+    return round(score, 3)
+
+def absolute_text(item):
+    parts = [
+        item.get("infinityText", ""),
+        item.get("ultraText", ""),
+        item.get("supremeText", ""),
+        item.get("scoreBand", ""),
+        item.get("riskLevel", ""),
+        str(item.get("absoluteRank", "")),
+    ]
+    rank = float(item.get("absoluteRank") or 0)
+    if rank >= 120:
+        parts.append("absolute_god_pick")
+    elif rank >= 100:
+        parts.append("absolute_strong_pick")
+    if item.get("riskLevel") == "high_risk":
+        parts.append("warning risky")
+    return clean_text(" ".join(str(x or "") for x in parts))[:1200]
 
 
 def card_item(raw, i):
@@ -253,6 +536,23 @@ def card_item(raw, i):
     x["aiTags"] = ai_tags
     x["moodTags"] = mood_tags
     x["recTags"] = rec_tags
+    x["aiWords"] = infer_ai_words(x["ru"], x["en"], x["genres"], x["overview"], ai_tags, mood_tags, rec_tags)
+    x["recText"] = make_rec_text(x["ru"], x["en"], x["genres"], x["overview"], ai_tags, mood_tags, rec_tags, x["aiWords"])
+    x["qualityTier"] = quality_tier(x)
+    x["popularityTier"] = popularity_tier(x)
+    x["recScore"] = recommender_score(x)
+    x["qualityFlags"] = content_quality_flags(x)
+    x["neuroVector"] = neuro_vector(x)
+    x["decade"] = decade_of(x)
+    x["omegaText"] = omega_text(x)
+    x["apexText"] = apex_text(x)
+    x["supremeText"] = supreme_text(x)
+    x["riskLevel"] = risk_level(x)
+    x["scoreBand"] = final_score_band(x)
+    x["ultraText"] = ultra_text(x)
+    x["infinityText"] = infinity_text(x)
+    x["absoluteRank"] = absolute_rank(x)
+    x["absoluteText"] = absolute_text(x)
     return x
 
 def smart_score(x):
@@ -313,7 +613,7 @@ def main():
     top=by([x for x in items if int(x.get("votes") or 0)>=300 and float(x.get("rating") or 0)>=7])
     pages={"all":write_pages(FAST_TMP_DIR,"all",all_sorted),"movies":write_pages(FAST_TMP_DIR,"movies",movies),"series":write_pages(FAST_TMP_DIR,"series",series),"anime":write_pages(FAST_TMP_DIR,"anime",anime),"cartoons":write_pages(FAST_TMP_DIR,"cartoons",cartoons),"new":write_pages(FAST_TMP_DIR,"new",new_items),"popular":write_pages(FAST_TMP_DIR,"popular",popular),"top":write_pages(FAST_TMP_DIR,"top",top[:250])}
     home={"generatedAt":now_iso(),"total":len(items),"sections":{"popular":popular[:HOME_LIMIT],"top":top[:HOME_LIMIT],"new":new_items[:HOME_LIMIT],"anime":anime[:HOME_LIMIT],"movies":movies[:HOME_LIMIT],"series":series[:HOME_LIMIT],"cartoons":cartoons[:HOME_LIMIT]}}
-    search_index=[{"id":x.get("id"),"ru":x.get("ru"),"en":x.get("en"),"year":x.get("year"),"type":x.get("type"),"rating":x.get("rating"),"votes":x.get("votes"),"poster":x.get("poster"),"genres":x.get("genres",[])[:6],"overview":(x.get("overview") or "")[:180],"source":x.get("source"),"aiTags":x.get("aiTags",[])[:8],"moodTags":x.get("moodTags",[])[:6],"recTags":x.get("recTags",[])[:6]} for x in all_sorted]
+    search_index=[{"id":x.get("id"),"ru":x.get("ru"),"en":x.get("en"),"year":x.get("year"),"type":x.get("type"),"rating":x.get("rating"),"votes":x.get("votes"),"poster":x.get("poster"),"genres":x.get("genres",[])[:6],"overview":(x.get("overview") or "")[:180],"source":x.get("source"),"aiTags":x.get("aiTags",[])[:8],"moodTags":x.get("moodTags",[])[:6],"recTags":x.get("recTags",[])[:6],"aiWords":x.get("aiWords",[])[:40],"recText":(x.get("recText") or "")[:420],"qualityTier":x.get("qualityTier"),"popularityTier":x.get("popularityTier"),"recScore":x.get("recScore"),"qualityFlags":x.get("qualityFlags",[]),"neuroVector":x.get("neuroVector",[])[:25],"decade":x.get("decade"),"omegaText":(x.get("omegaText") or "")[:350],"apexText":(x.get("apexText") or "")[:350],"supremeText":(x.get("supremeText") or "")[:350],"riskLevel":x.get("riskLevel"),"ultraText":(x.get("ultraText") or "")[:350],"scoreBand":x.get("scoreBand"),"infinityText":(x.get("infinityText") or "")[:350],"absoluteRank":x.get("absoluteRank"),"absoluteText":(x.get("absoluteText") or "")[:350]} for x in all_sorted]
     meta={"generatedAt":now_iso(),"rawCount":len(raw),"count":len(items),"pageSize":PAGE_SIZE,"homeLimit":HOME_LIMIT,"genres":genres_all,"years":years,"pages":pages}
     save_json(FAST_TMP_DIR/"home.json", home)
     save_json(FAST_TMP_DIR/"search_index.json", search_index)
