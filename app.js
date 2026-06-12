@@ -8,7 +8,7 @@ const TMDB_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzIyNGQ4YzcwMmRkYTIzNjA4Mzh
 
 const INITIAL_CHUNKS = 2;
 const BACKGROUND_RENDER_EVERY = 999999;
-const BACKGROUND_PAUSE_MS = 80;
+const BACKGROUND_PAUSE_MS = 120;
 const FILTER_DEBOUNCE_MS = 180;
 const HOME_SECTION_LIMIT = 10;
 
@@ -772,28 +772,35 @@ async function loadChunkedDataFast(index) {
   const chunks = Array.isArray(index.chunks) ? index.chunks : [];
   const movies = [];
 
+  window.gkmIndexData = index;
+  window.gkmAllChunks = chunks;
+  window.gkmLoadedChunksCount = 0;
+  window.gkmFullBaseLoaded = false;
+
   const firstChunks = chunks.slice(0, INITIAL_CHUNKS);
-  const restChunks = chunks.slice(INITIAL_CHUNKS);
 
   for (const chunk of firstChunks) {
     const partMovies = await fetchChunkMovies(chunk);
     movies.push(...partMovies);
+    window.gkmLoadedChunksCount++;
   }
 
   allMovies = movies;
 
+  const totalCount = Number(index.total || index.count || index.itemsCount || 0);
+  const totalLabel = totalCount ? totalCount : (chunks.reduce((s, c) => s + Number(c.count || 0), 0) || "");
+
   if (status) {
-    status.textContent = `База грузится: ${allMovies.length} записей из ${chunks.length} чанков · версия ${index.version || "?"}`;
+    status.textContent = `Быстрый старт: ${allMovies.length} загружено${totalLabel ? " из " + totalLabel : ""} · чанков ${window.gkmLoadedChunksCount}/${chunks.length}`;
   }
 
   fillFilters();
   applyFilters();
 
-  if (restChunks.length) {
-    loadRemainingChunksInBackground(index, restChunks, movies).catch(showError);
-  } else if (status) {
-    status.textContent = `База: ${allMovies.length} записей · версия ${index.version || "?"} · ${index.generatedAt || ""}`;
-  }
+  injectLoadFullBaseButton(index);
+
+  // ВАЖНО: больше НЕ грузим 90к автоматически при входе.
+  // Это и давало тормоза/троение.
 }
 
 async function loadRemainingChunksInBackground(index, chunks, movies) {
@@ -802,7 +809,6 @@ async function loadRemainingChunksInBackground(index, chunks, movies) {
 
   let loadedChunksCount = INITIAL_CHUNKS;
   let lastStatusUpdate = 0;
-  const totalChunks = INITIAL_CHUNKS + chunks.length;
 
   for (const chunk of chunks) {
     const partMovies = await fetchChunkMovies(chunk);
@@ -811,13 +817,11 @@ async function loadRemainingChunksInBackground(index, chunks, movies) {
 
     const now = Date.now();
 
-    if (status && now - lastStatusUpdate > 900) {
+    if (status && now - lastStatusUpdate > 700) {
       lastStatusUpdate = now;
-      status.textContent = `База грузится: ${movies.length} записей · чанков ${loadedChunksCount}/${totalChunks}`;
+      status.textContent = `База грузится: ${movies.length} записей · чанков ${loadedChunksCount}/${INITIAL_CHUNKS + chunks.length}`;
     }
 
-    // ВАЖНО: не вызываем applyFilters() на каждом чанке.
-    // Иначе сайт начинает троить и зависать.
     await sleep(BACKGROUND_PAUSE_MS);
   }
 
@@ -831,7 +835,7 @@ async function loadRemainingChunksInBackground(index, chunks, movies) {
   setTimeout(() => {
     fillFilters();
     applyFilters();
-  }, 300);
+  }, 250);
 }
 
 async function fetchChunkMovies(chunk) {
@@ -870,6 +874,117 @@ async function fetchChunkMovies(chunk) {
 
   return [];
 }
+
+
+
+/* ===== GKM MANUAL FULL BASE LOADER ===== */
+
+function injectLoadFullBaseButton(index) {
+  if (document.getElementById("gkmLoadFullBaseBtn")) return;
+
+  const countText = $("countText");
+  const grid = $("grid");
+
+  const wrap = document.createElement("div");
+  wrap.id = "gkmLoadFullBaseWrap";
+  wrap.style.cssText = "grid-column:1/-1;display:flex;justify-content:center;gap:12px;align-items:center;margin:14px 0 18px;";
+
+  const btn = document.createElement("button");
+  btn.id = "gkmLoadFullBaseBtn";
+  btn.type = "button";
+  btn.textContent = "⚡ Загрузить всю базу";
+  btn.style.cssText = "border:1px solid rgba(34,211,238,.65);background:linear-gradient(180deg,#00d4ff,#5b21ff);color:white;border-radius:14px;padding:12px 18px;font-weight:900;cursor:pointer;box-shadow:0 0 18px rgba(34,211,238,.25);";
+
+  const hint = document.createElement("span");
+  hint.id = "gkmLoadFullBaseHint";
+  hint.textContent = "Для поиска по всем 90к записям";
+  hint.style.cssText = "color:#a5b4fc;font-size:13px;";
+
+  btn.addEventListener("click", function () {
+    loadFullBaseManual(index);
+  });
+
+  wrap.appendChild(btn);
+  wrap.appendChild(hint);
+
+  if (grid && grid.parentNode) {
+    grid.parentNode.insertBefore(wrap, grid);
+  } else if (countText && countText.parentNode) {
+    countText.parentNode.insertBefore(wrap, countText.nextSibling);
+  }
+}
+
+async function loadFullBaseManual(index) {
+  const status = $("statusText");
+  const btn = document.getElementById("gkmLoadFullBaseBtn");
+  const hint = document.getElementById("gkmLoadFullBaseHint");
+
+  if (window.gkmFullBaseLoading || window.gkmFullBaseLoaded) return;
+
+  window.gkmFullBaseLoading = true;
+
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "Загружаю базу...";
+    btn.style.opacity = ".7";
+  }
+
+  const chunks = window.gkmAllChunks || [];
+  const startAt = Number(window.gkmLoadedChunksCount || 0);
+  const restChunks = chunks.slice(startAt);
+
+  const movies = Array.isArray(allMovies) ? allMovies.slice() : [];
+  const totalChunks = chunks.length;
+
+  let loaded = startAt;
+  let lastStatus = 0;
+
+  for (const chunk of restChunks) {
+    const partMovies = await fetchChunkMovies(chunk).catch(e => {
+      console.warn("Чанк пропущен:", chunk, e);
+      return [];
+    });
+
+    movies.push(...partMovies);
+    loaded++;
+    window.gkmLoadedChunksCount = loaded;
+
+    const now = Date.now();
+
+    if (status && now - lastStatus > 700) {
+      lastStatus = now;
+      status.textContent = `Загружаю всю базу: ${movies.length} записей · чанков ${loaded}/${totalChunks}`;
+    }
+
+    if (hint) {
+      hint.textContent = `${movies.length} записей · чанков ${loaded}/${totalChunks}`;
+    }
+
+    // отдаём браузеру воздух, чтобы сайт не вис
+    await sleep(90);
+  }
+
+  allMovies = movies;
+  window.gkmFullBaseLoaded = true;
+  window.gkmFullBaseLoading = false;
+
+  if (status) {
+    status.textContent = `База полностью загружена: ${allMovies.length} записей · версия ${index.version || "?"}`;
+  }
+
+  if (btn) {
+    btn.textContent = "✅ Вся база загружена";
+    btn.disabled = true;
+  }
+
+  if (hint) {
+    hint.textContent = `${allMovies.length} записей`;
+  }
+
+  fillFilters();
+  applyFilters();
+}
+
 
 /* ===== ФИЛЬТРЫ ===== */
 
@@ -1071,51 +1186,40 @@ function bindCardClicks(root = document) {
 function renderHomeSections() {
   injectHomeStyle();
 
-  const buckets = {
-    anime: [],
-    movies: [],
-    series: [],
-    cartoons: [],
-    newItems: [],
-    popular: [],
-    top: []
-  };
+  const anime = allMovies
+    .filter(isAnimeItem)
+    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
+    .slice(0, HOME_SECTION_LIMIT);
 
-  function pushTop(arr, item, max, scorer) {
-    arr.push(item);
-    arr.sort((a, b) => scorer(b) - scorer(a));
-    if (arr.length > max) arr.length = max;
-  }
+  const movies = allMovies
+    .filter(m => m.type === "Фильм")
+    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
+    .slice(0, HOME_SECTION_LIMIT);
 
-  const max = HOME_SECTION_LIMIT;
+  const series = allMovies
+    .filter(m => m.type === "Сериал")
+    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
+    .slice(0, HOME_SECTION_LIMIT);
 
-  for (const m of allMovies) {
-    const animeItem = isAnimeItem(m);
-    const genresText = getGenres(m).map(normalize).join(" ");
-    const year = Number(getYear(m) || 0);
-    const votes = getVotes(m);
-    const rating = getRating(m);
+  const cartoons = allMovies
+    .filter(m => getGenres(m).some(g => normalize(g).includes("мульт")) && !isAnimeItem(m))
+    .sort((a, b) => scoreSmart(b) - scoreSmart(a))
+    .slice(0, HOME_SECTION_LIMIT);
 
-    if (animeItem) pushTop(buckets.anime, m, max, scoreSmart);
-    else if (m.type === "Фильм") pushTop(buckets.movies, m, max, scoreSmart);
-    else if (m.type === "Сериал") pushTop(buckets.series, m, max, scoreSmart);
+  const newItems = allMovies
+    .filter(m => Number(getYear(m)) >= 2024)
+    .sort((a, b) => Number(getYear(b) || 0) - Number(getYear(a) || 0))
+    .slice(0, HOME_SECTION_LIMIT);
 
-    if (genresText.includes("мульт") && !animeItem) {
-      pushTop(buckets.cartoons, m, max, scoreSmart);
-    }
+  const popular = allMovies
+    .filter(m => getVotes(m) >= 1000)
+    .sort((a, b) => getVotes(b) - getVotes(a))
+    .slice(0, HOME_SECTION_LIMIT);
 
-    if (year >= 2024) {
-      pushTop(buckets.newItems, m, max, x => Number(getYear(x) || 0) * 100000 + scoreSmart(x));
-    }
-
-    if (votes >= 1000) {
-      pushTop(buckets.popular, m, max, getVotes);
-    }
-
-    if (votes >= MIN_VOTES_FOR_TOP && rating >= 7) {
-      pushTop(buckets.top, m, max, scoreSmart);
-    }
-  }
+  const top = allMovies
+    .filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP)
+    .sort((a, b) => getRating(b) - getRating(a))
+    .slice(0, HOME_SECTION_LIMIT);
 
   const countText = $("countText");
   const grid = $("grid");
@@ -1137,13 +1241,13 @@ function renderHomeSections() {
         <button id="whatToWatchBtn" class="what-watch-main-btn" type="button">🎲 Что посмотреть?</button>
       </section>
 
-      ${homeSectionHtml("🔥 Популярное", buckets.popular, "popular")}
-      ${homeSectionHtml("⭐ Лучший рейтинг", buckets.top, "top")}
-      ${homeSectionHtml("🆕 Новинки", buckets.newItems, "new")}
-      ${homeSectionHtml("🐉 Аниме", buckets.anime, "anime")}
-      ${homeSectionHtml("🎬 Фильмы", buckets.movies, "movies")}
-      ${homeSectionHtml("📺 Сериалы", buckets.series, "series")}
-      ${homeSectionHtml("🧸 Мультфильмы", buckets.cartoons, "cartoons")}
+      ${homeSectionHtml("🔥 Популярное", popular, "popular")}
+      ${homeSectionHtml("⭐ Лучший рейтинг", top, "top")}
+      ${homeSectionHtml("🆕 Новинки", newItems, "new")}
+      ${homeSectionHtml("🐉 Аниме", anime, "anime")}
+      ${homeSectionHtml("🎬 Фильмы", movies, "movies")}
+      ${homeSectionHtml("📺 Сериалы", series, "series")}
+      ${homeSectionHtml("🧸 Мультфильмы", cartoons, "cartoons")}
     `;
   }
 
@@ -1175,7 +1279,6 @@ function renderHomeSections() {
   if (nextBtn) nextBtn.disabled = true;
   if (pageText) pageText.textContent = "Главная";
 }
-
 
 function homeSectionHtml(title, items, tabName) {
   if (!items.length) return "";
@@ -10117,16 +10220,16 @@ return cast;
 
 
 
-/* ===== GKM ANTI LAG STABLE V14 ===== */
+/* ===== GKM ULTRA LITE ANTI LAG V15 ===== */
 (function () {
-  if (window.__gkmAntiLagStableV14) return;
-  window.__gkmAntiLagStableV14 = true;
+  if (window.__gkmUltraLiteAntiLagV15) return;
+  window.__gkmUltraLiteAntiLagV15 = true;
 
   function injectCss() {
-    if (document.getElementById("gkmAntiLagStableV14Style")) return;
+    if (document.getElementById("gkmUltraLiteV15Style")) return;
 
-    var style = document.createElement("style");
-    style.id = "gkmAntiLagStableV14Style";
+    const style = document.createElement("style");
+    style.id = "gkmUltraLiteV15Style";
     style.textContent = `
       .card {
         content-visibility: auto !important;
@@ -10141,29 +10244,48 @@ return cast;
   }
 
   function optimizeImages(root) {
-    var scope = root || document;
+    const scope = root || document;
     if (!scope.querySelectorAll) return;
 
-    scope.querySelectorAll("img").forEach(function (img) {
+    scope.querySelectorAll("img").forEach(img => {
       if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
       if (!img.hasAttribute("decoding")) img.setAttribute("decoding", "async");
       try { img.fetchPriority = "low"; } catch (e) {}
     });
   }
 
+  function autoLoadFullBaseOnRealSearch() {
+    const search = document.getElementById("searchInput");
+    if (!search) return;
+
+    let timer = null;
+
+    search.addEventListener("input", function () {
+      clearTimeout(timer);
+
+      timer = setTimeout(function () {
+        const q = String(search.value || "").trim();
+
+        if (q.length >= 3 && window.gkmIndexData && !window.gkmFullBaseLoaded && !window.gkmFullBaseLoading) {
+          loadFullBaseManual(window.gkmIndexData);
+        }
+      }, 700);
+    });
+  }
+
   function start() {
     injectCss();
     optimizeImages(document);
+    autoLoadFullBaseOnRealSearch();
 
-    var t = null;
-    var observer = new MutationObserver(function (mutations) {
+    let t = null;
+    const observer = new MutationObserver(mutations => {
       clearTimeout(t);
-      t = setTimeout(function () {
-        mutations.forEach(function (m) {
+
+      t = setTimeout(() => {
+        mutations.forEach(m => {
           if (m.addedNodes) {
-            m.addedNodes.forEach(function (node) {
-              optimizeImages(node);
-            });
+            m.addedNodes.forEach(node => optimizeImages(node));
           }
         });
       }, 250);
@@ -10181,7 +10303,7 @@ return cast;
     start();
   }
 
-  window.GKM_APP_CLEAN_VERSION = "anti-lag-stable-v14-no-card-delete-2026-06-12";
-  console.log("GKM ANTI LAG STABLE V14 установлен");
+  window.GKM_APP_CLEAN_VERSION = "ultra-lite-v15-manual-full-base-no-lag-2026-06-12";
+  console.log("GKM ULTRA LITE ANTI LAG V15 установлен");
 })();
 
