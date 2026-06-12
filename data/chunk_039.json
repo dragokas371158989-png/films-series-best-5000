@@ -2922,25 +2922,6 @@
     "source": "tmdb"
   },
   {
-    "id": 1591834,
-    "ru": "Familia a la deriva",
-    "en": "Familia a la deriva",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 8.6,
-    "votes": 89,
-    "popularity": 0.97,
-    "genres": [
-      "семейный",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eH2FvInHc4hmOJQxdxMcVm8XNty.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rdvqpkgyG3oGPZPj4U5Inpcnuhi.jpg",
-    "source": "tmdb"
-  },
-  {
     "id": "tv_60549",
     "ru": "Okupas",
     "en": "Okupas",
@@ -3171,6 +3152,26 @@
     "source": "tmdb"
   },
   {
+    "id": 8231503,
+    "ru": "Дикий",
+    "en": "Yabani",
+    "year": "2023",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.6,
+    "votes": 50,
+    "popularity": 30.23,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Новый сериал повествует о молодом парне Ямане Али, которого похитили в детстве. Ему тогда было всего лишь четыре года. Он родился в могущественной и богатой семье, но однажды его похищают и выбрасывают на улицу. Парень вырастает в нищете и нужде. Однако ему удается выжить и спустя семнадцать лет он находит свою семью и возвращается домой… Но не так просто влиться в семью, где чувствуешь себя чужим и там тоже нужно завоевать для себя место. Сериал заставляет задуматься над вопросом: что сильнее — кровные или сердечные узы?",
+    "poster": "https://image.tmdb.org/t/p/w342/b0h4BxSMsxKmu63Y8QUyJYJI3hv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/897uYgM4gtY0MdPRszIJngRJrIp.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 231503
+  },
+  {
     "id": "tv_133490",
     "ru": "Правосудие",
     "en": "Yargı",
@@ -3188,24 +3189,6 @@
     "overview": "На место обнаружения трупа девушки приезжают именитый комиссар Метин Кая и прокурор Йылгаз Кая — отец и сын. Среди улик найдена кредитная карта, которая, как выясняется, принадлежит Метин Каю, но пользуется ей Чинар Кая — младший сын прокурора. Йылгаз немедленно нанимает для брата успешного адвоката Джейлин. Девушка берется за дело, но против Чинар Кая очень много косвенных улик, а убитой оказывается сестра Джейлин. Так переплелись судьбы двух семей, все члены которых, как выяснилось, вовсе не те, кем кажутся.",
     "poster": "https://image.tmdb.org/t/p/w342/oCYWD8JCd0hB7Q7jO6nLH1YyL6b.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/fCwZOi3cTEOi2UkhjJNbFQnl4IW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_231503",
-    "ru": "Дикий",
-    "en": "Yabani",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.6,
-    "votes": 47,
-    "popularity": 30.23,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Новый сериал повествует о молодом парне Ямане Али, которого похитили в детстве. Ему тогда было всего лишь четыре года. Он родился в могущественной и богатой семье, но однажды его похищают и выбрасывают на улицу. Парень вырастает в нищете и нужде. Однако ему удается выжить и спустя семнадцать лет он находит свою семью и возвращается домой… Но не так просто влиться в семью, где чувствуешь себя чужим и там тоже нужно завоевать для себя место. Сериал заставляет задуматься над вопросом: что сильнее — кровные или сердечные узы?",
-    "poster": "https://image.tmdb.org/t/p/w342/b0h4BxSMsxKmu63Y8QUyJYJI3hv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/897uYgM4gtY0MdPRszIJngRJrIp.jpg",
     "source": "tmdb"
   },
   {
@@ -8355,6 +8338,27 @@
     "source": "discover_best_movie_2025",
     "status": "Вышел",
     "tmdbId": 1302151
+  },
+  {
+    "id": 8591834,
+    "ru": "Familia a la deriva",
+    "en": "Familia a la deriva",
+    "year": "2026",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 8.56,
+    "votes": 95,
+    "popularity": 0.97,
+    "genres": [
+      "семейный",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eH2FvInHc4hmOJQxdxMcVm8XNty.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/rdvqpkgyG3oGPZPj4U5Inpcnuhi.jpg",
+    "source": "trending_movie_week",
+    "status": "Вышел",
+    "tmdbId": 1591834
   },
   {
     "id": 7299536,

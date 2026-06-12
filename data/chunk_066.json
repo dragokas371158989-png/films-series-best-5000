@@ -684,25 +684,6 @@
     "source": "tmdb"
   },
   {
-    "id": "tv_223326",
-    "ru": "Полярная звезда",
-    "en": "북극성",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.5,
-    "votes": 81,
-    "popularity": 6.73,
-    "genres": [
-      "драма",
-      "детектив"
-    ],
-    "overview": "В центре сюжета окажется южнокорейский спецагент Санхо и сотрудница дипломатического корпуса Со Мунджу. Судьба сведет главных героев во время расследования теракта, который рискует нарушить относительный мир между соседями по Корейскому полуострову.",
-    "poster": "https://image.tmdb.org/t/p/w342/A2wLUIQ1V8dTLlhz7TwwTM84Ak.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wyCQovekJ10HnmqCE3lPNaoGDde.jpg",
-    "source": "tmdb"
-  },
-  {
     "id": "tv_157368",
     "ru": "New Look: Революция стиля",
     "en": "The New Look",
@@ -9727,6 +9708,26 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/c2vKDSvh2aB4uo6hymOmmCPysoK.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/txG9gLcxDnuo1TWDOBOowqGjzbX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 296264,
+    "ru": "Pink Pajamas",
+    "en": "Pink Pajamas",
+    "year": 1964,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.5,
+    "votes": 15,
+    "popularity": 0.42,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/579lEthcDYR97VRFPzhL67e3cwP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wMy96GfUVxTrFCE4xVZBP7Nsb9y.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,23 +1,5 @@
 [
   {
-    "id": 1445905,
-    "ru": "阳光照耀青春里",
-    "en": "阳光照耀青春里",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.4,
-    "votes": 5,
-    "popularity": 1.12,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eEald2YlM5TIx5M7nMlivoG7suP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iF9GH1WWFnEERlEHjuPAsxJyF2c.jpg",
-    "source": "tmdb"
-  },
-  {
     "id": 667705,
     "ru": "Ang Babaeng Walang Pakiramdam",
     "en": "Ang Babaeng Walang Pakiramdam",
@@ -6815,6 +6797,28 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 451048
+  },
+  {
+    "id": 8136044,
+    "ru": "Нарушители",
+    "en": "The Outlaws",
+    "year": "2021",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.36,
+    "votes": 150,
+    "popularity": 6.13,
+    "genres": [
+      "комедия",
+      "криминал",
+      "драма"
+    ],
+    "overview": "Семь преступников из разных слоёв общества отбывают наказание в Бристоле, выполняя общественные работы. Сначала они кажутся совершенно типичными представителями своего круга, но постепенно история каждого раскрывает его личность и прошлое, и однажды им придется объединиться, чтобы защитить одного из своих от банды.",
+    "poster": "https://image.tmdb.org/t/p/w342/zIkfEa0Qkb8QvYDYstmo7C9AqwS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/nQb4zTRULkR1ifcoKGxPvkdgPSz.jpg",
+    "source": "trending_tv_week",
+    "status": "Онгоинг",
+    "tmdbId": 136044
   },
   {
     "id": "mal_9776",

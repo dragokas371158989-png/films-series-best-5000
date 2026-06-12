@@ -1,26 +1,5 @@
 [
   {
-    "id": 4606,
-    "ru": "Гарфилд и его друзья",
-    "en": "Garfield and Friends",
-    "year": 1988,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.3,
-    "votes": 396,
-    "popularity": 32.24,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Детский",
-      "Аниме"
-    ],
-    "overview": "Гарфилд — относится к семейству кошачьих, из себя представляет жирное и нахальное животное, хотя сам о себе он так не думает, так как исключительно самолюбив. \n\n \n\nЛюбимое лакомство Гарфилда — лазанья, можно даже сказать, что наш кот живет исключительно ради этого блюда и, именно поэтой причине, не может выдержать ни одной диеты. \n\n \n\nУ Гарфилда, безусловно, много друзей, одни из самых верных — это его добродушный хозяин Джон и забавный пес Оди.",
-    "poster": "https://image.tmdb.org/t/p/w342/pE6l6I1ICKOu4pDUXxkl87TTLZx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4qcNKcng7HYlKJJ0DFYIH52gWNF.jpg",
-    "source": "tmdb"
-  },
-  {
     "id": 8004606,
     "tmdbId": 4606,
     "ru": "Гарфилд и его друзья",
@@ -1477,6 +1456,28 @@
     "source": "tv_top_rated",
     "status": "Онгоинг",
     "tmdbId": 31078
+  },
+  {
+    "id": 7001538,
+    "ru": "Соучастник",
+    "en": "Collateral",
+    "year": "2004",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.24,
+    "votes": 6278,
+    "popularity": 9.09,
+    "genres": [
+      "драма",
+      "криминал",
+      "триллер"
+    ],
+    "overview": "Водитель такси оказывается в положении заложника, когда к нему в машину садится наёмный убийца, заставляющий его наматывать километры по ночному Лос-Анджелесу от одной жертвы к другой. Нужно спасать - себя и последнюю намеченную убийцей цель...",
+    "poster": "https://image.tmdb.org/t/p/w342/tZKDF0G3KXMkBDJTsSMgMDFe7Db.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/qVzmXKKOTtd3szkiCheCNrfa394.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 1538
   },
   {
     "id": 117030,
@@ -3781,14 +3782,14 @@
     "source": "tmdb"
   },
   {
-    "id": "tv_1475",
+    "id": 8001475,
     "ru": "Мертвая зона",
     "en": "The Dead Zone",
-    "year": 2002,
+    "year": "2002",
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.3,
-    "votes": 165,
+    "votes": 166,
     "popularity": 22.28,
     "genres": [
       "драма",
@@ -3796,8 +3797,10 @@
     ],
     "overview": "Джонни Смит после комы узнает о том, что у него появились необычные суперспособности, позволяющие ему видеть будущее и прошлое.",
     "poster": "https://image.tmdb.org/t/p/w342/j9l4svOscUWoVqGoATtGEDfTms.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uC6NoapdAI8xy4SHMNtd5jXbWup.jpg",
-    "source": "tmdb"
+    "backdrop": "https://image.tmdb.org/t/p/w500/uC6NoapdAI8xy4SHMNtd5jXbWup.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 1475
   },
   {
     "id": "tv_61698",

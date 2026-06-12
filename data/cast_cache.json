@@ -1,8 +1,9 @@
 {
-  "version": 2,
-  "generatedAt": "2026-06-11T21:56:28Z",
+  "version": 3,
+  "generatedAt": "2026-06-12T13:22:30Z",
   "count": 1199,
-  "limit": 1200,
+  "limit": 80,
+  "source": "kinopoiskapiunofficial",
   "items": {
     "tv:221034": {
       "kind": "tv",

@@ -1,23 +1,5 @@
 [
   {
-    "id": 529288,
-    "ru": "An Ideal Husband",
-    "en": "An Ideal Husband",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.5,
-    "votes": 2,
-    "popularity": 0.43,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/KhkEx85yBXx30CwQQ6WzHF5ccB.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
     "id": 774593,
     "ru": "闘将!!拉麺男",
     "en": "闘将!!拉麺男",
@@ -2520,6 +2502,27 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 206487
+  },
+  {
+    "id": 8223326,
+    "ru": "Полярная звезда",
+    "en": "북극성",
+    "year": "2025",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.49,
+    "votes": 81,
+    "popularity": 6.73,
+    "genres": [
+      "драма",
+      "детектив"
+    ],
+    "overview": "В центре сюжета окажется южнокорейский спецагент Санхо и сотрудница дипломатического корпуса Со Мунджу. Судьба сведет главных героев во время расследования теракта, который рискует нарушить относительный мир между соседями по Корейскому полуострову.",
+    "poster": "https://image.tmdb.org/t/p/w342/A2wLUIQ1V8dTLlhz7TwwTM84Ak.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/wyCQovekJ10HnmqCE3lPNaoGDde.jpg",
+    "source": "trending_tv_week",
+    "status": "Онгоинг",
+    "tmdbId": 223326
   },
   {
     "id": 7082690,

@@ -1,24 +1,5 @@
 [
   {
-    "id": "tv_291339",
-    "ru": "Память убийцы",
-    "en": "Memory of a Killer",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.4,
-    "votes": 40,
-    "popularity": 30.9,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "Анджело ведет двойную жизнь — наемного убийцы и семьянина, и ему удавалось совмещать эти роли, пока его не настигла ранняя форма болезни Альцгеймера. Теперь его миры сталкиваются, ставя под угрозу его семью.",
-    "poster": "https://image.tmdb.org/t/p/w342/pXqaKHo7vBZH3rGd3obNKkxouL7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/llrSuUkFiR6EjDnh79dq8HEeziF.jpg",
-    "source": "tmdb"
-  },
-  {
     "id": "tv_233912",
     "ru": "Страж Дафэна",
     "en": "大奉打更人",
@@ -9663,6 +9644,24 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/rEn0kHtZAjb44R2Jv0FUBLdFPsY.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/vcZ3UUVmFNk90DBSrTBlTKCdbbE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1445905,
+    "ru": "阳光照耀青春里",
+    "en": "阳光照耀青春里",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.4,
+    "votes": 5,
+    "popularity": 1.12,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eEald2YlM5TIx5M7nMlivoG7suP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iF9GH1WWFnEERlEHjuPAsxJyF2c.jpg",
     "source": "tmdb"
   }
 ]
