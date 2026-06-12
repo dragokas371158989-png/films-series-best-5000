@@ -3,10 +3,12 @@ name: Build fast site data
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches:
+      - main
     paths:
       - "data/**"
       - "tools/build_fast_site_data.py"
+      - ".github/workflows/build_fast_site_data.yml"
 
 permissions:
   contents: write
@@ -14,6 +16,7 @@ permissions:
 jobs:
   build-fast-data:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,8 +27,7 @@ jobs:
           python-version: "3.x"
 
       - name: Build fast data
-        run: |
-          python tools/build_fast_site_data.py
+        run: python tools/build_fast_site_data.py
 
       - name: Commit fast data
         run: |
