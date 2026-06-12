@@ -1,5 +1,4 @@
 // FIX: OPM season matching by year, prevents Season 1 card from showing Season 3 players.
-const GKM_APP_CLEAN_VERSION = "clean-cast-v6-no-browser-tmdb-fallback-2026-06-12";
 const INDEX_URL = "data/index.json";
 const PAGE_SIZE = 40;
 const MIN_VOTES_FOR_TOP = 300;
@@ -833,33 +832,14 @@ async function loadRemainingChunksInBackground(index, chunks, movies) {
 }
 
 async function fetchChunkMovies(chunk) {
-  let url = "";
-
-  if (typeof chunk === "string") {
-    url = chunk;
-  } else if (chunk && typeof chunk === "object") {
-    url = chunk.file || chunk.url || chunk.path || chunk.src || "";
-  }
-
+  const url = chunk.file || chunk.url;
   if (!url) return [];
-
-  url = String(url).trim().replace(/^\/+/, "");
-
-  // Если в data/index.json указано просто "chunk_001.json",
-  // то файл реально лежит в data/chunk_001.json.
-  if (!url.startsWith("data/") && !url.startsWith("http")) {
-    url = "data/" + url;
-  }
 
   let part = chunkCache.get(url);
 
   if (!part) {
     const res = await fetch(url + "?v=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) {
-      console.warn("Не загрузился чанк:", url, res.status);
-      return [];
-    }
-
+    if (!res.ok) return [];
     part = await res.json();
     chunkCache.set(url, part);
   }
@@ -7450,14 +7430,10 @@ addRutubeSeasonExactList({
     if (isMovieOrSeriesForCast(m)) {
   box.innerHTML = '<div class="gkm-pro-empty">Ищу актёров и роли...</div>';
 
-  var movieCast = await loadMovieTvCastFromLocal(m);
-
-      if (!movieCast.length) {
-        movieCast = await loadEmbeddedCast(m);
-      }
+  var movieCast = await loadMovieTvCast(m);
 
   if (!movieCast.length) {
-    box.innerHTML = '<div class="gkm-pro-empty">Актёры пока не попали в локальный кеш. Нужно обновить data/cast_cache.json.</div>';
+    box.innerHTML = '<div class="gkm-pro-empty">Актёры и роли для этого тайтла пока не найдены.</div>';
     return;
   }
 
@@ -7514,99 +7490,60 @@ return null;
 }
 
 async function findTmdbIdForCast(m) {
-    var kind = tmdbKindForCast(m);
-    var directId = m.tmdbId || m.tmdb_id || m.tmdbID;
-    var numericId = Number(m.id || 0);
-    var sourceText = String(m.source || m.provider || m.category || "").toLowerCase();
+var directId = m.tmdbId || m.tmdb_id;
 
-    // В базе TMDB-фильм может быть прямо id: 155, source: tmdb.
-    if (!directId && sourceText.includes("tmdb") && numericId > 0 && numericId < 2000000) {
-      directId = numericId;
-    }
-
-    // Или как смещённый id.
-    if (!directId && kind === "movie" && numericId > 7000000 && numericId < 8000000) {
-      directId = numericId - 7000000;
-    }
-
-    if (!directId && kind === "tv" && numericId > 8000000 && numericId < 9000000) {
-      directId = numericId - 8000000;
-    }
-
-    if (directId) {
-      return {
-        id: directId,
-        kind: kind
-      };
-    }
-
-    var titleCandidates = [
-      m.en,
-      m.originalTitle,
-      m.titleOriginal,
-      m.original_name,
-      m.original_title,
-      titleOf(m),
-      m.ru,
-      m.title,
-      m.name
-    ].filter(Boolean);
-
-    var titles = [];
-
-    titleCandidates.forEach(function (t) {
-      t = String(t || "").trim();
-      if (t && !titles.includes(t)) titles.push(t);
-    });
-
-    var year = String(m.year || "").trim();
-
-    for (var i = 0; i < titles.length; i++) {
-      var title = titles[i];
-
-      var url =
-        "https://api.themoviedb.org/3/search/" +
-        kind +
-        "?query=" +
-        encodeURIComponent(title) +
-        "&language=ru-RU&include_adult=false&page=1";
-
-      var data = await tmdbCastFetch(url);
-
-      if (!data || !Array.isArray(data.results) || !data.results.length) {
-        continue;
-      }
-
-      var best = data.results[0];
-
-      if (year) {
-        var sameYear = data.results.find(function (x) {
-          var d = x.release_date || x.first_air_date || "";
-          return String(d).slice(0, 4) === year;
-        });
-
-        if (sameYear) best = sameYear;
-      }
-
-      if (best && best.id) {
-        return {
-          id: best.id,
-          kind: kind
-        };
-      }
-    }
-
-    return null;
-  }
-
-  function movieCastCard(p) {
-var img = "";
-
-if (p.profile_path) {
-  img = String(p.profile_path).startsWith("http")
-    ? p.profile_path
-    : "https://image.tmdb.org/t/p/w185" + p.profile_path;
+if (directId) {
+return {
+id: directId,
+kind: tmdbKindForCast(m)
+};
 }
+
+var kind = tmdbKindForCast(m);
+var title = m.en || m.originalTitle || m.titleOriginal || titleOf(m);
+var year = String(m.year || "").trim();
+
+if (!title) return null;
+
+var url =
+"https://api.themoviedb.org/3/search/" +
+kind +
+"?query=" +
+encodeURIComponent(title) +
+"&language=ru-RU&include_adult=false&page=1";
+
+var data = await tmdbCastFetch(url);
+
+if (!data || !Array.isArray(data.results) || !data.results.length) {
+return null;
+}
+
+var best = data.results[0];
+
+if (year) {
+var sameYear = data.results.find(function (x) {
+var d = x.release_date || x.first_air_date || "";
+return String(d).slice(0, 4) === year;
+});
+
+```
+if (sameYear) best = sameYear;
+```
+
+}
+
+if (!best || !best.id) return null;
+
+return {
+id: best.id,
+kind: kind
+};
+}
+
+function movieCastCard(p) {
+var img = p.profile_path
+? "https://image.tmdb.org/t/p/w185" + p.profile_path
+: "";
 
 var name = p.name || p.original_name || "Актёр";
 var role = p.character || "роль не указана";
@@ -7624,160 +7561,52 @@ return (
 );
 }
 
-
-
-var GKM_EMBEDDED_CAST = {
-  "movie:155": [
-    { name: "Кристиан Бэйл", role: "Брюс Уэйн / Бэтмен", profile: "" },
-    { name: "Хит Леджер", role: "Джокер", profile: "" },
-    { name: "Аарон Экхарт", role: "Харви Дент / Двуликий", profile: "" },
-    { name: "Майкл Кейн", role: "Альфред", profile: "" },
-    { name: "Гэри Олдман", role: "Джеймс Гордон", profile: "" },
-    { name: "Морган Фримен", role: "Люциус Фокс", profile: "" },
-    { name: "Мэгги Джилленхол", role: "Рэйчел Доуз", profile: "" }
-  ],
-  "movie:157336": [
-    { name: "Мэттью Макконахи", role: "Купер", profile: "" },
-    { name: "Энн Хэтэуэй", role: "Амелия Брэнд", profile: "" },
-    { name: "Джессика Честейн", role: "Мёрф", profile: "" },
-    { name: "Майкл Кейн", role: "Профессор Брэнд", profile: "" },
-    { name: "Маккензи Фой", role: "Мёрф в детстве", profile: "" },
-    { name: "Мэтт Деймон", role: "Доктор Манн", profile: "" }
-  ],
-  "movie:13": [
-    { name: "Том Хэнкс", role: "Форрест Гамп", profile: "" },
-    { name: "Робин Райт", role: "Дженни Карран", profile: "" },
-    { name: "Гэри Синиз", role: "Лейтенант Дэн Тейлор", profile: "" },
-    { name: "Салли Филд", role: "Миссис Гамп", profile: "" }
-  ],
-  "movie:238": [
-    { name: "Марлон Брандо", role: "Дон Вито Корлеоне", profile: "" },
-    { name: "Аль Пачино", role: "Майкл Корлеоне", profile: "" },
-    { name: "Джеймс Каан", role: "Сонни Корлеоне", profile: "" },
-    { name: "Роберт Дюваль", role: "Том Хейген", profile: "" }
-  ],
-  "movie:27205": [
-    { name: "Леонардо ДиКаприо", role: "Дом Кобб", profile: "" },
-    { name: "Джозеф Гордон-Левитт", role: "Артур", profile: "" },
-    { name: "Эллиот Пейдж", role: "Ариадна", profile: "" },
-    { name: "Том Харди", role: "Имс", profile: "" },
-    { name: "Киллиан Мёрфи", role: "Роберт Фишер", profile: "" }
-  ],
-  "movie:603": [
-    { name: "Киану Ривз", role: "Нео", profile: "" },
-    { name: "Лоренс Фишбёрн", role: "Морфеус", profile: "" },
-    { name: "Кэрри-Энн Мосс", role: "Тринити", profile: "" },
-    { name: "Хьюго Уивинг", role: "Агент Смит", profile: "" }
-  ]
-};
-
-async function loadEmbeddedCast(m) {
-  var found = await findTmdbIdForCast(m);
-  if (!found || !found.id) return [];
-
-  var list = GKM_EMBEDDED_CAST[found.kind + ":" + found.id] || [];
-  return list.map(function (p) {
-    return {
-      name: p.name || "",
-      original_name: p.name || "",
-      character: p.role || "",
-      profile_path: p.profile || "",
-      order: 0
-    };
-  });
-}
-
-
-var gkmCastCacheData = null;
-
-async function loadLocalCastCache() {
-  if (gkmCastCacheData) return gkmCastCacheData;
-
-  try {
-    var res = await fetch("data/cast_cache.json?v=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) {
-      gkmCastCacheData = {};
-      return gkmCastCacheData;
-    }
-
-    var data = await res.json();
-    gkmCastCacheData = data && data.items ? data.items : {};
-    return gkmCastCacheData;
-  } catch (e) {
-    gkmCastCacheData = {};
-    return gkmCastCacheData;
-  }
-}
-
-async function loadMovieTvCastFromLocal(m) {
-  var found = await findTmdbIdForCast(m);
-  if (!found || !found.id) return [];
-
-  var cache = await loadLocalCastCache();
-  var item = cache[found.kind + ":" + found.id];
-
-  if (!item || !Array.isArray(item.cast) || !item.cast.length) return [];
-
-  return item.cast.slice(0, 14).map(function (p) {
-    return {
-      name: p.name || "",
-      original_name: p.name || "",
-      character: p.role || "",
-      profile_path: p.profile || "",
-      order: 0
-    };
-  });
-}
-
-
 async function loadMovieTvCast(m) {
-    var found = await findTmdbIdForCast(m);
+var found = await findTmdbIdForCast(m);
 
-    if (!found || !found.id) return [];
+if (!found || !found.id) return [];
 
-    var cacheKey = "gkm_movie_tv_cast_v3_" + found.kind + "_" + found.id;
+var cacheKey = "gkm_movie_tv_cast_" + found.kind + "_" + found.id;
 
-    try {
-      var cached = localStorage.getItem(cacheKey);
-      if (cached) {
-        var parsed = JSON.parse(cached);
-        if (Array.isArray(parsed) && parsed.length) return parsed;
-      }
-    } catch (e) {}
+try {
+var cached = localStorage.getItem(cacheKey);
+if (cached) {
+var parsed = JSON.parse(cached);
+if (Array.isArray(parsed)) return parsed;
+}
+} catch (e) {}
 
-    var url =
-      "https://api.themoviedb.org/3/" +
-      found.kind +
-      "/" +
-      found.id +
-      "/credits?language=ru-RU";
+var url =
+"https://api.themoviedb.org/3/" +
+found.kind +
+"/" +
+found.id +
+"/credits?language=ru-RU";
 
-    var data = await tmdbCastFetch(url);
-    var cast = data && Array.isArray(data.cast) ? data.cast : [];
+var data = await tmdbCastFetch(url);
+var cast = data && Array.isArray(data.cast) ? data.cast : [];
 
-    cast = cast
-      .filter(function (p) {
-        return p && (p.name || p.original_name);
-      })
-      .slice(0, 14)
-      .map(function (p) {
-        return {
-          name: p.name || p.original_name || "",
-          original_name: p.original_name || "",
-          character: p.character || "",
-          profile_path: p.profile_path || "",
-          order: p.order || 0
-        };
-      });
+cast = cast
+.filter(function (p) {
+return p && (p.name || p.original_name);
+})
+.slice(0, 14)
+.map(function (p) {
+return {
+name: p.name || p.original_name || "",
+original_name: p.original_name || "",
+character: p.character || "",
+profile_path: p.profile_path || "",
+order: p.order || 0
+};
+});
 
-    if (cast.length) {
-      try {
-        localStorage.setItem(cacheKey, JSON.stringify(cast));
-      } catch (e) {}
-    }
+try {
+localStorage.setItem(cacheKey, JSON.stringify(cast));
+} catch (e) {}
 
-    return cast;
-  }
+return cast;
+}
 
   function reviewsHtml(m) {
     var reviews = Array.isArray(m.reviews) ? m.reviews : [];
@@ -9203,5 +9032,1055 @@ async function loadMovieTvCast(m) {
 
     scrollDetailsTop();
   }, true);
+})();
+
+/* ===== GKM FORCE TRANSLATE CHARACTER DESCRIPTION ===== */
+(function () {
+  if (window.__gkmForceTranslateCharacterDescription) return;
+  window.__gkmForceTranslateCharacterDescription = true;
+
+  function isEnglish(text) {
+    const s = String(text || "").trim();
+    if (!s) return false;
+
+    const latin = (s.match(/[a-zA-Z]/g) || []).length;
+    const cyr = (s.match(/[а-яА-ЯёЁ]/g) || []).length;
+
+    return latin > 40 && latin > cyr * 3;
+  }
+
+  function hashText(text) {
+    let h = 0;
+    const s = String(text || "");
+
+    for (let i = 0; i < s.length; i++) {
+      h = ((h << 5) - h) + s.charCodeAt(i);
+      h |= 0;
+    }
+
+    return String(Math.abs(h));
+  }
+
+  function splitText(text, maxLen) {
+    const s = String(text || "").trim();
+    const chunks = [];
+    let cur = "";
+
+    s.split(/(?<=[.!?])\s+/).forEach(function (part) {
+      if ((cur + " " + part).trim().length > maxLen) {
+        if (cur.trim()) chunks.push(cur.trim());
+        cur = part;
+      } else {
+        cur = (cur + " " + part).trim();
+      }
+    });
+
+    if (cur.trim()) chunks.push(cur.trim());
+
+    return chunks.length ? chunks : [s.slice(0, maxLen)];
+  }
+
+  async function translateChunkToRu(text) {
+    const url =
+      "https://api.mymemory.translated.net/get?q=" +
+      encodeURIComponent(text) +
+      "&langpair=en|ru";
+
+    try {
+      const res = await fetch(url, { cache: "force-cache" });
+      if (!res.ok) return "";
+
+      const data = await res.json();
+      return data && data.responseData && data.responseData.translatedText
+        ? String(data.responseData.translatedText).trim()
+        : "";
+    } catch (e) {
+      console.warn("GKM character translate failed:", e);
+      return "";
+    }
+  }
+
+  async function translateToRu(text) {
+    const original = String(text || "").trim();
+    if (!isEnglish(original)) return "";
+
+    const key = "gkm_force_char_ru_" + hashText(original);
+
+    try {
+      const cached = localStorage.getItem(key);
+      if (cached) return cached;
+    } catch (e) {}
+
+    const chunks = splitText(original, 430);
+    const parts = [];
+
+    for (const chunk of chunks) {
+      const ru = await translateChunkToRu(chunk);
+      parts.push(ru || chunk);
+      await new Promise(resolve => setTimeout(resolve, 220));
+    }
+
+    const result = parts.join(" ").trim();
+
+    if (result && result !== original) {
+      try {
+        localStorage.setItem(key, result);
+      } catch (e) {}
+
+      return result;
+    }
+
+    return "";
+  }
+
+  async function checkCharacterDesc() {
+    const el = document.querySelector("#gkmNativeCharacterDesc");
+    if (!el) return;
+
+    const text = String(el.textContent || "").trim();
+
+    if (!text) return;
+    if (text.includes("Загружаю")) return;
+    if (text.includes("Перевожу")) return;
+    if (!isEnglish(text)) return;
+
+    const currentHash = hashText(text);
+
+    if (el.dataset.ruDoneHash === currentHash) return;
+
+    el.dataset.ruDoneHash = currentHash;
+    el.dataset.originalText = text;
+    el.textContent = "Перевожу описание на русский...";
+
+    const ru = await translateToRu(text);
+
+    if (ru) {
+      el.textContent = ru;
+    } else {
+      el.textContent = text;
+      el.dataset.ruDoneHash = "";
+    }
+  }
+
+  function scheduleChecks() {
+    setTimeout(checkCharacterDesc, 300);
+    setTimeout(checkCharacterDesc, 900);
+    setTimeout(checkCharacterDesc, 1800);
+    setTimeout(checkCharacterDesc, 3200);
+  }
+
+  setInterval(checkCharacterDesc, 1200);
+
+  document.addEventListener("click", function () {
+    scheduleChecks();
+  }, true);
+
+  const observer = new MutationObserver(function () {
+    scheduleChecks();
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  scheduleChecks();
+
+  console.log("GKM FORCE TRANSLATE CHARACTER DESCRIPTION установлен");
+})();
+
+/* ===== GKM RU LABELS CLEANUP FINAL ===== */
+(function () {
+  if (window.__gkmRuLabelsCleanupFinal) return;
+  window.__gkmRuLabelsCleanupFinal = true;
+
+  const RU_MAP = {
+    "Action": "Экшен",
+    "Adventure": "Приключения",
+    "Comedy": "Комедия",
+    "Drama": "Драма",
+    "Fantasy": "Фэнтези",
+    "Romance": "Романтика",
+    "Sci-Fi": "Фантастика",
+    "Science Fiction": "Фантастика",
+    "Horror": "Ужасы",
+    "Mystery": "Детектив",
+    "Supernatural": "Сверхъестественное",
+    "Psychological": "Психология",
+    "Martial Arts": "Боевые искусства",
+    "Military": "Военное",
+    "School": "Школа",
+    "Magic": "Магия",
+    "Demons": "Демоны",
+    "Vampire": "Вампиры",
+    "Samurai": "Самураи",
+    "Sports": "Спорт",
+    "Music": "Музыка",
+    "Game": "Игры",
+    "Slice of Life": "Повседневность",
+    "Shounen": "Сёнэн",
+    "Shonen": "Сёнэн",
+    "Seinen": "Сэйнэн",
+    "Shoujo": "Сёдзё",
+    "Shojo": "Сёдзё",
+    "Josei": "Дзёсэй",
+    "Main": "Главный персонаж",
+    "Supporting": "Второстепенный персонаж",
+    "Source": "Источник",
+    "Wikipedia": "Википедия",
+    "Manga": "Манга",
+    "Original": "Оригинал",
+    "Light novel": "Ранобэ",
+    "Novel": "Роман",
+    "Web manga": "Веб-манга",
+    "4-koma manga": "Ёнкома-манга",
+    "Other": "Другое",
+    "Unknown": "Неизвестно"
+  };
+
+  function replaceWords(text) {
+    let s = String(text || "");
+
+    Object.keys(RU_MAP)
+      .sort(function (a, b) { return b.length - a.length; })
+      .forEach(function (key) {
+        const safe = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const re = new RegExp("(^|[^A-Za-zА-Яа-яЁё])" + safe + "([^A-Za-zА-Яа-яЁё]|$)", "g");
+
+        s = s.replace(re, function (_, left, right) {
+          return left + RU_MAP[key] + right;
+        });
+      });
+
+    s = s
+      .replace(/Сейю\s*:\s*/gi, "Сейю: ")
+      .replace(/Источник\s*:\s*Википедия/gi, "Источник: Википедия")
+      .replace(/\bR-17\b/g, "17+")
+      .replace(/\bPG-13\b/g, "13+")
+      .replace(/\bPG\b/g, "6+")
+      .replace(/\bG\b/g, "0+")
+      .replace(/Экшен\s*·\s*Экшен/gi, "Экшен")
+      .replace(/Приключения\s*·\s*Приключения/gi, "Приключения")
+      .replace(/Комедия\s*·\s*Комедия/gi, "Комедия")
+      .replace(/Фэнтези\s*·\s*Фэнтези/gi, "Фэнтези")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+
+    return s;
+  }
+
+  function cleanupTextNode(el) {
+    if (!el) return;
+
+    const tag = (el.tagName || "").toLowerCase();
+
+    if (["script", "style", "textarea", "input"].includes(tag)) return;
+
+    if (el.childNodes && el.childNodes.length) {
+      el.childNodes.forEach(function (node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const oldText = node.nodeValue;
+          const newText = replaceWords(oldText);
+
+          if (oldText !== newText) {
+            node.nodeValue = newText;
+          }
+        }
+      });
+    }
+  }
+
+  function cleanupAttributes(el) {
+    if (!el || !el.getAttribute) return;
+
+    ["title", "aria-label"].forEach(function (attr) {
+      const value = el.getAttribute(attr);
+
+      if (value) {
+        const next = replaceWords(value);
+
+        if (next !== value) {
+          el.setAttribute(attr, next);
+        }
+      }
+    });
+  }
+
+  function cleanupRoot(root) {
+    const scope = root || document;
+
+    if (scope.nodeType === 1) {
+      cleanupTextNode(scope);
+      cleanupAttributes(scope);
+    }
+
+    if (!scope.querySelectorAll) return;
+
+    scope.querySelectorAll(
+      ".gkm-pro-chip, .gkm-pro-character-role, .gkm-native-character-value, .gkm-native-character-label, .meta, .card-title, #detailGenres, #detailMeta, #detailOverview, .links-title, .gkm-pro-info-value, .gkm-pro-info-label, p, span, div"
+    ).forEach(function (el) {
+      cleanupTextNode(el);
+      cleanupAttributes(el);
+    });
+  }
+
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (m) {
+      if (m.type === "childList") {
+        m.addedNodes.forEach(function (node) {
+          cleanupRoot(node);
+        });
+      }
+
+      if (m.type === "characterData" && m.target && m.target.parentElement) {
+        cleanupRoot(m.target.parentElement);
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  document.addEventListener("click", function () {
+    setTimeout(function () { cleanupRoot(document); }, 100);
+    setTimeout(function () { cleanupRoot(document); }, 700);
+    setTimeout(function () { cleanupRoot(document); }, 1500);
+  }, true);
+
+  setInterval(function () {
+    cleanupRoot(document);
+  }, 2500);
+
+  cleanupRoot(document);
+
+  console.log("GKM RU LABELS CLEANUP FINAL установлен");
+})();
+
+/* ===== GKM RU TITLE CLEANUP FINAL ===== */
+(function () {
+  if (window.__gkmRuTitleCleanupFinal) return;
+  window.__gkmRuTitleCleanupFinal = true;
+
+  const TITLE_MAP = {
+    "attack on titan season 2": "Атака титанов 2 сезон",
+    "attack on titan season 3": "Атака титанов 3 сезон",
+    "attack on titan final season": "Атака титанов: Финальный сезон",
+    "demon slayer: kimetsu no yaiba": "Истребитель демонов",
+    "demon slayer kimetsu no yaiba": "Истребитель демонов",
+    "demon slayer: kimetsu no...": "Истребитель демонов",
+    "kimetsu no yaiba": "Истребитель демонов",
+    "one punch man": "Ванпанчмен",
+    "one-punch man": "Ванпанчмен",
+    "death note": "Тетрадь смерти",
+    "fullmetal alchemist": "Стальной алхимик",
+    "fullmetal alchemist: brotherhood": "Стальной алхимик: Братство",
+    "fullmetal alchemist brotherhood": "Стальной алхимик: Братство",
+    "naruto shippuden": "Наруто: Ураганные хроники",
+    "naruto: shippuden": "Наруто: Ураганные хроники",
+    "boku no hero academia": "Моя геройская академия",
+    "my hero academia": "Моя геройская академия",
+    "dragon ball z kai": "Драконий жемчуг Z Кай",
+    "dragon ball z kai: the final chapters": "Драконий жемчуг Z Кай: Финальные главы",
+    "dragon ball super": "Драконий жемчуг Супер",
+    "dragon ball z": "Драконий жемчуг Z",
+    "dragon ball": "Драконий жемчуг"
+  };
+
+  function normTitle(s) {
+    return String(s || "")
+      .toLowerCase()
+      .replace(/[‐‑‒–—―-]/g, "-")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function translateTitleText(text) {
+    const raw = String(text || "").trim();
+    const n = normTitle(raw);
+
+    if (TITLE_MAP[n]) return TITLE_MAP[n];
+
+    for (const key in TITLE_MAP) {
+      if (n.startsWith(key) || n.includes(key)) {
+        return TITLE_MAP[key];
+      }
+    }
+
+    return raw;
+  }
+
+  function cleanupTitles(root) {
+    const scope = root || document;
+
+    if (!scope.querySelectorAll) return;
+
+    scope.querySelectorAll(".card-title, #detailTitle").forEach(function (el) {
+      const oldText = String(el.textContent || "").trim();
+      const newText = translateTitleText(oldText);
+
+      if (newText && newText !== oldText) {
+        el.textContent = newText;
+      }
+    });
+  }
+
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (m) {
+      if (m.type === "childList") {
+        m.addedNodes.forEach(function (node) {
+          cleanupTitles(node);
+        });
+      }
+
+      if (m.type === "characterData" && m.target && m.target.parentElement) {
+        cleanupTitles(m.target.parentElement);
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  document.addEventListener("click", function () {
+    setTimeout(function () { cleanupTitles(document); }, 100);
+    setTimeout(function () { cleanupTitles(document); }, 800);
+  }, true);
+
+  setInterval(function () {
+    cleanupTitles(document);
+  }, 2500);
+
+  cleanupTitles(document);
+
+  console.log("GKM RU TITLE CLEANUP FINAL установлен");
+})();
+
+/* ===== GKM MOVIE TV CAST FINAL ===== */
+(function () {
+  if (window.__gkmMovieTvCastFinal) return;
+  window.__gkmMovieTvCastFinal = true;
+
+  const CAST_CACHE_PREFIX = "gkm_tmdb_cast_v1_";
+  const IMG_PROFILE = "https://image.tmdb.org/t/p/w185";
+  const FALLBACK_FACE =
+    "data:image/svg+xml;charset=utf-8," +
+    encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="185" height="278" viewBox="0 0 185 278">' +
+      '<rect width="185" height="278" fill="#111827"/>' +
+      '<circle cx="92.5" cy="86" r="42" fill="#334155"/>' +
+      '<path d="M33 236c8-52 42-82 59.5-82S144 184 152 236" fill="#334155"/>' +
+      '<text x="92.5" y="264" font-family="Arial" font-size="16" fill="#94a3b8" text-anchor="middle">Нет фото</text>' +
+      '</svg>'
+    );
+
+  function gkmCastEscape(text) {
+    return String(text || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function gkmCastNormalize(text) {
+    return String(text || "")
+      .toLowerCase()
+      .replace(/[ё]/g, "е")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function gkmCastYear(item) {
+    const value = String((item && item.year) || "");
+    const m = value.match(/\b(19\d{2}|20\d{2})\b/);
+    return m ? m[1] : "";
+  }
+
+  function gkmCastTitle(item) {
+    if (!item) return "";
+
+    if (typeof titleOf === "function") {
+      try {
+        const t = titleOf(item);
+        if (t) return String(t);
+      } catch (e) {}
+    }
+
+    return String(item.ru || item.en || item.title || item.name || "");
+  }
+
+  function gkmCastIsAnime(item) {
+    if (!item) return false;
+
+    if (typeof isAnimeItem === "function") {
+      try {
+        return !!isAnimeItem(item);
+      } catch (e) {}
+    }
+
+    const type = gkmCastNormalize(item.type);
+    const genres = Array.isArray(item.genres)
+      ? item.genres.map(gkmCastNormalize).join(" ")
+      : gkmCastNormalize(item.genres);
+
+    return type.includes("аниме") || genres.includes("аниме");
+  }
+
+  function gkmCastMediaType(item, fallback) {
+    if (fallback === "movie" || fallback === "tv") return fallback;
+
+    if (typeof tmdbTypeOf === "function") {
+      try {
+        const t = tmdbTypeOf(item);
+        if (t === "movie" || t === "tv") return t;
+      } catch (e) {}
+    }
+
+    const type = gkmCastNormalize(item && item.type);
+    if (type.includes("сериал")) return "tv";
+
+    return "movie";
+  }
+
+  function gkmCastHasToken() {
+    if (typeof hasTmdbToken === "function") {
+      try {
+        return !!hasTmdbToken();
+      } catch (e) {}
+    }
+
+    return (
+      typeof TMDB_TOKEN !== "undefined" &&
+      TMDB_TOKEN &&
+      String(TMDB_TOKEN).length > 30
+    );
+  }
+
+  function gkmCastFetchOptions() {
+    if (typeof tmdbHeaders === "function") {
+      try {
+        return tmdbHeaders();
+      } catch (e) {}
+    }
+
+    return {
+      headers: {
+        Authorization: `Bearer ${TMDB_TOKEN}`,
+        accept: "application/json"
+      }
+    };
+  }
+
+  async function gkmCastFetchJson(url) {
+    if (typeof fetchJsonWithTimeout === "function") {
+      try {
+        return await fetchJsonWithTimeout(url, gkmCastFetchOptions());
+      } catch (e) {
+        return null;
+      }
+    }
+
+    try {
+      const res = await fetch(url, gkmCastFetchOptions());
+      if (!res.ok) return null;
+      return await res.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function gkmCastFindTmdb(item) {
+    const directId = item && (item.tmdbId || item.tmdb_id);
+
+    if (directId) {
+      return {
+        id: directId,
+        mediaType: gkmCastMediaType(item)
+      };
+    }
+
+    const titleCandidates = [
+      item && item.ru,
+      item && item.en,
+      item && item.title,
+      item && item.name,
+      gkmCastTitle(item)
+    ].filter(Boolean);
+
+    const titles = [...new Set(titleCandidates.map(x => String(x).trim()).filter(Boolean))];
+    const year = gkmCastYear(item);
+    const wantedType = gkmCastMediaType(item);
+
+    for (const title of titles) {
+      const url =
+        "https://api.themoviedb.org/3/search/multi?query=" +
+        encodeURIComponent(title) +
+        "&include_adult=false&language=ru-RU&page=1";
+
+      const data = await gkmCastFetchJson(url);
+
+      if (!data || !Array.isArray(data.results)) continue;
+
+      let results = data.results.filter(function (r) {
+        return r && (r.media_type === "movie" || r.media_type === "tv");
+      });
+
+      if (wantedType === "movie" || wantedType === "tv") {
+        results = results.filter(function (r) {
+          return r.media_type === wantedType;
+        });
+      }
+
+      if (!results.length) continue;
+
+      let best = results[0];
+
+      if (year) {
+        const sameYear = results.find(function (r) {
+          const date = r.release_date || r.first_air_date || "";
+          return String(date).slice(0, 4) === String(year);
+        });
+
+        if (sameYear) best = sameYear;
+      }
+
+      if (best && best.id) {
+        return {
+          id: best.id,
+          mediaType: best.media_type
+        };
+      }
+    }
+
+    return null;
+  }
+
+  function gkmCastCleanCharacter(value) {
+    let s = String(value || "").trim();
+
+    s = s
+      .replace(/\s*\/\s*Self\s*$/i, "")
+      .replace(/\s*\(voice\)\s*/gi, " озвучка")
+      .replace(/\s*\(uncredited\)\s*/gi, "")
+      .replace(/\s*\(archive footage\)\s*/gi, " архив")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+
+    return s;
+  }
+
+  function gkmCastRuDepartment(mediaType) {
+    return mediaType === "tv" ? "Актёры и роли сериала" : "Актёры и роли фильма";
+  }
+
+  function gkmCastEnsureBlock() {
+    let block = document.getElementById("gkmMovieTvCastBlock");
+
+    if (block) return block;
+
+    block = document.createElement("section");
+    block.id = "gkmMovieTvCastBlock";
+    block.className = "gkm-movie-tv-cast-block";
+    block.innerHTML = `
+      <h3 class="gkm-movie-tv-cast-title">Актёры и роли</h3>
+      <div id="gkmMovieTvCastGrid" class="gkm-movie-tv-cast-grid"></div>
+    `;
+
+    const dialog = document.getElementById("detailsDialog") || document;
+    const similar =
+      dialog.querySelector("#similarGrid") ||
+      dialog.querySelector(".similar-grid") ||
+      dialog.querySelector("#catalogLinksBlock") ||
+      dialog.querySelector("#animeLinksBlock");
+
+    if (similar && similar.parentNode) {
+      similar.parentNode.insertBefore(block, similar.nextSibling);
+    } else {
+      const content =
+        dialog.querySelector(".dialog-content") ||
+        dialog.querySelector(".details") ||
+        dialog;
+      content.appendChild(block);
+    }
+
+    return block;
+  }
+
+  function gkmCastSetLoading(mediaType) {
+    const block = gkmCastEnsureBlock();
+    const grid = block.querySelector("#gkmMovieTvCastGrid");
+
+    block.style.display = "block";
+    block.querySelector(".gkm-movie-tv-cast-title").textContent = gkmCastRuDepartment(mediaType);
+    grid.innerHTML = `<div class="gkm-cast-empty">Загружаю актёров...</div>`;
+  }
+
+  function gkmCastHide() {
+    const block = document.getElementById("gkmMovieTvCastBlock");
+    if (block) block.style.display = "none";
+  }
+
+  function gkmCastRender(cast, mediaType) {
+    const block = gkmCastEnsureBlock();
+    const grid = block.querySelector("#gkmMovieTvCastGrid");
+
+    block.style.display = "block";
+    block.querySelector(".gkm-movie-tv-cast-title").textContent = gkmCastRuDepartment(mediaType);
+
+    if (!Array.isArray(cast) || !cast.length) {
+      grid.innerHTML = `<div class="gkm-cast-empty">Актёры пока не найдены.</div>`;
+      return;
+    }
+
+    grid.innerHTML = cast.slice(0, 14).map(function (p) {
+      const photo = p.profile_path ? IMG_PROFILE + p.profile_path : FALLBACK_FACE;
+      const name = p.name || p.original_name || "Актёр";
+      const role = gkmCastCleanCharacter(p.character || p.roles && p.roles[0] && p.roles[0].character || "");
+
+      return `
+        <article class="gkm-cast-card">
+          <img src="${gkmCastEscape(photo)}" alt="${gkmCastEscape(name)}" loading="lazy">
+          <div class="gkm-cast-card-body">
+            <b>${gkmCastEscape(name)}</b>
+            ${role ? `<span>${gkmCastEscape(role)}</span>` : `<span>роль не указана</span>`}
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  async function gkmCastLoadForItem(item) {
+    if (!item) return;
+
+    if (gkmCastIsAnime(item)) {
+      gkmCastHide();
+      return;
+    }
+
+    if (!gkmCastHasToken()) {
+      gkmCastHide();
+      return;
+    }
+
+    const mediaType = gkmCastMediaType(item);
+    gkmCastSetLoading(mediaType);
+
+    const found = await gkmCastFindTmdb(item);
+
+    if (!found || !found.id) {
+      gkmCastRender([], mediaType);
+      return;
+    }
+
+    const cacheKey = CAST_CACHE_PREFIX + found.mediaType + "_" + found.id;
+
+    try {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed)) {
+          gkmCastRender(parsed, found.mediaType);
+          return;
+        }
+      }
+    } catch (e) {}
+
+    const url =
+      `https://api.themoviedb.org/3/${found.mediaType}/${found.id}/credits?language=ru-RU`;
+
+    const data = await gkmCastFetchJson(url);
+    const cast = data && Array.isArray(data.cast) ? data.cast : [];
+
+    const cleanCast = cast
+      .filter(function (p) {
+        return p && (p.name || p.original_name);
+      })
+      .slice(0, 20)
+      .map(function (p) {
+        return {
+          id: p.id,
+          name: p.name || p.original_name || "",
+          original_name: p.original_name || "",
+          character: p.character || "",
+          profile_path: p.profile_path || "",
+          order: p.order || 0
+        };
+      });
+
+    try {
+      localStorage.setItem(cacheKey, JSON.stringify(cleanCast));
+    } catch (e) {}
+
+    gkmCastRender(cleanCast, found.mediaType);
+  }
+
+  function gkmCastInjectCss() {
+    if (document.getElementById("gkmMovieTvCastStyle")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkmMovieTvCastStyle";
+    style.textContent = `
+      .gkm-movie-tv-cast-block {
+        margin-top: 18px !important;
+        padding: 14px !important;
+        border-radius: 18px !important;
+        border: 1px solid rgba(0,229,255,.18) !important;
+        background: rgba(15,23,42,.62) !important;
+      }
+
+      .gkm-movie-tv-cast-title {
+        margin: 0 0 12px !important;
+        color: #fff !important;
+        font-size: 18px !important;
+        font-weight: 900 !important;
+      }
+
+      .gkm-movie-tv-cast-grid {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)) !important;
+        gap: 12px !important;
+      }
+
+      .gkm-cast-card {
+        overflow: hidden !important;
+        border-radius: 16px !important;
+        border: 1px solid rgba(255,255,255,.12) !important;
+        background: rgba(2,6,23,.76) !important;
+        box-shadow: 0 0 16px rgba(0,0,0,.28) !important;
+      }
+
+      .gkm-cast-card img {
+        width: 100% !important;
+        aspect-ratio: 2 / 3 !important;
+        object-fit: cover !important;
+        display: block !important;
+        background: #111827 !important;
+      }
+
+      .gkm-cast-card-body {
+        padding: 9px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+      }
+
+      .gkm-cast-card-body b {
+        color: #fff !important;
+        font-size: 13px !important;
+        line-height: 1.15 !important;
+      }
+
+      .gkm-cast-card-body span {
+        color: #c7d2fe !important;
+        font-size: 12px !important;
+        line-height: 1.2 !important;
+      }
+
+      .gkm-cast-empty {
+        color: #c7d2fe !important;
+        padding: 8px 0 !important;
+        font-size: 14px !important;
+      }
+
+      @media (max-width: 700px) {
+        .gkm-movie-tv-cast-block {
+          padding: 12px !important;
+          margin-top: 14px !important;
+        }
+
+        .gkm-movie-tv-cast-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          gap: 10px !important;
+        }
+
+        .gkm-cast-card-body b {
+          font-size: 12px !important;
+        }
+
+        .gkm-cast-card-body span {
+          font-size: 11px !important;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  function gkmCastPatchOpenDetails() {
+    if (typeof openDetails !== "function") return false;
+    if (openDetails.__gkmMovieTvCastPatched) return true;
+
+    const original = openDetails;
+
+    openDetails = function (item) {
+      const result = original.apply(this, arguments);
+
+      gkmCastInjectCss();
+
+      setTimeout(function () {
+        gkmCastLoadForItem(item);
+      }, 450);
+
+      return result;
+    };
+
+    openDetails.__gkmMovieTvCastPatched = true;
+    return true;
+  }
+
+  gkmCastInjectCss();
+
+  if (!gkmCastPatchOpenDetails()) {
+    const timer = setInterval(function () {
+      if (gkmCastPatchOpenDetails()) clearInterval(timer);
+    }, 300);
+
+    setTimeout(function () {
+      clearInterval(timer);
+    }, 10000);
+  }
+
+  console.log("GKM MOVIE TV CAST FINAL установлен");
+})();
+
+/* ===== GKM EMERGENCY LOCAL CAST PATCH V7 ===== */
+(function () {
+  if (window.__gkmEmergencyLocalCastPatchV7) return;
+  window.__gkmEmergencyLocalCastPatchV7 = true;
+
+  var LOCAL_CAST = {
+    "movie:155": [
+      ["Кристиан Бэйл", "Брюс Уэйн / Бэтмен"],
+      ["Хит Леджер", "Джокер"],
+      ["Аарон Экхарт", "Харви Дент / Двуликий"],
+      ["Майкл Кейн", "Альфред"],
+      ["Гэри Олдман", "Джеймс Гордон"],
+      ["Морган Фримен", "Люциус Фокс"],
+      ["Мэгги Джилленхол", "Рэйчел Доуз"]
+    ],
+    "movie:157336": [
+      ["Мэттью Макконахи", "Купер"],
+      ["Энн Хэтэуэй", "Амелия Брэнд"],
+      ["Джессика Честейн", "Мёрф"],
+      ["Майкл Кейн", "Профессор Брэнд"],
+      ["Маккензи Фой", "Мёрф в детстве"],
+      ["Мэтт Деймон", "Доктор Манн"]
+    ],
+    "movie:13": [
+      ["Том Хэнкс", "Форрест Гамп"],
+      ["Робин Райт", "Дженни Карран"],
+      ["Гэри Синиз", "Лейтенант Дэн Тейлор"],
+      ["Салли Филд", "Миссис Гамп"]
+    ],
+    "movie:27205": [
+      ["Леонардо ДиКаприо", "Дом Кобб"],
+      ["Джозеф Гордон-Левитт", "Артур"],
+      ["Эллиот Пейдж", "Ариадна"],
+      ["Том Харди", "Имс"],
+      ["Киллиан Мёрфи", "Роберт Фишер"]
+    ],
+    "movie:603": [
+      ["Киану Ривз", "Нео"],
+      ["Лоренс Фишбёрн", "Морфеус"],
+      ["Кэрри-Энн Мосс", "Тринити"],
+      ["Хьюго Уивинг", "Агент Смит"]
+    ],
+    "movie:238": [
+      ["Марлон Брандо", "Дон Вито Корлеоне"],
+      ["Аль Пачино", "Майкл Корлеоне"],
+      ["Джеймс Каан", "Сонни Корлеоне"],
+      ["Роберт Дюваль", "Том Хейген"]
+    ]
+  };
+
+  function esc(v) {
+    return String(v || "").replace(/[&<>"']/g, function (ch) {
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[ch];
+    });
+  }
+
+  function keyOf(m) {
+    if (!m) return "";
+
+    var type = String(m.type || "").toLowerCase();
+    var kind = type.includes("сериал") ? "tv" : "movie";
+    var id = Number(m.tmdbId || m.tmdb_id || m.tmdbID || 0);
+
+    if (!id) {
+      var raw = Number(m.id || 0);
+      var source = String(m.source || m.provider || m.category || "").toLowerCase();
+
+      if (source.includes("tmdb") && raw > 0 && raw < 2000000) {
+        id = raw;
+      } else if (kind === "movie" && raw > 7000000 && raw < 8000000) {
+        id = raw - 7000000;
+      } else if (kind === "tv" && raw > 8000000 && raw < 9000000) {
+        id = raw - 8000000;
+      } else {
+        id = raw;
+      }
+    }
+
+    return kind + ":" + id;
+  }
+
+  function isFilmOrSeries(m) {
+    var type = String((m && m.type) || "").toLowerCase();
+    return type.includes("фильм") || type.includes("сериал");
+  }
+
+  function renderLocalCast() {
+    var m = window.selectedMovie || (typeof selectedMovie !== "undefined" ? selectedMovie : null);
+
+    if (!m || !isFilmOrSeries(m)) return;
+
+    var list = LOCAL_CAST[keyOf(m)];
+    if (!list || !list.length) return;
+
+    var box = document.getElementById("gkmProCharacters");
+    if (!box) return;
+
+    var section = box.closest(".gkm-pro-section");
+    var title = section ? section.querySelector("h4") : null;
+    if (title) title.textContent = "Актёры и роли";
+
+    box.innerHTML = list.map(function (p) {
+      return (
+        '<article class="gkm-pro-character-card">' +
+        '<div class="gkm-pro-character-img" style="display:flex;align-items:center;justify-content:center;color:#94a3b8;font-weight:900;text-align:center;padding:10px;background:#020617;">Фото<br>позже</div>' +
+        '<div class="gkm-pro-character-body">' +
+        '<p class="gkm-pro-character-name">' + esc(p[0]) + '</p>' +
+        '<p class="gkm-pro-character-role">' + esc(p[1]) + '</p>' +
+        '</div>' +
+        '</article>'
+      );
+    }).join("");
+  }
+
+  document.addEventListener("click", function () {
+    setTimeout(renderLocalCast, 200);
+    setTimeout(renderLocalCast, 700);
+    setTimeout(renderLocalCast, 1500);
+  }, true);
+
+  var observer = new MutationObserver(function () {
+    renderLocalCast();
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true
+  });
+
+  setInterval(renderLocalCast, 1500);
+
+  window.GKM_APP_CLEAN_VERSION = "clean-cast-v7-emergency-local-actors-2026-06-12";
+  console.log("GKM EMERGENCY LOCAL CAST PATCH V7 установлен");
 })();
 
