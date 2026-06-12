@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v11-brain-tags-helper-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v26-absolute-free-helper-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -974,7 +974,7 @@ if (document.readyState === "loading") {
   startApp();
 }
 
-/* === GKM BRAIN TAGS FREE HELPER V11 === */
+/* === GKM ABSOLUTE FREE HELPER V26 === */
 (function () {
   const STOP_WORDS = new Set([
     "и","или","а","но","да","нет","ну","в","во","на","по","про","для","из","от","до","как","что","чем","где",
@@ -1057,6 +1057,30 @@ if (document.readyState === "loading") {
       words: ["семейн","детям","ребенку","детский","мульт"],
       boost: ["семейный","мультфильм","для детей","комедия"]
     },
+    vampire: {
+      words: ["вампир","vampire"],
+      boost: ["вампиры","vampire","ужасы","сверхъестественное"]
+    },
+    demons: {
+      words: ["демон","демоны","дьявол","devil","demon"],
+      boost: ["демоны","сверхъестественное","ужасы","фэнтези"]
+    },
+    military: {
+      words: ["война","военный","армия","military","war"],
+      boost: ["военный","война","армия","история"]
+    },
+    dystopia: {
+      words: ["антиутопия","постапокалипсис","киберпанк","cyberpunk","dystopia"],
+      boost: ["антиутопия","киберпанк","фантастика","мрачное"]
+    },
+    game_world: {
+      words: ["игровой мир","игры","vr","мморпг","mmorpg","виртуальная реальность"],
+      boost: ["игры","виртуальная реальность","фэнтези","приключения"]
+    },
+    martial: {
+      words: ["ниндзя","самурай","боевые искусства","ninja","samurai","martial"],
+      boost: ["боевые искусства","самураи","ниндзя","боевик"]
+    },
     new: {
       words: ["новин","новое","свежее","2024","2025","2026"],
       boost: []
@@ -1078,7 +1102,630 @@ if (document.readyState === "loading") {
     cartoons: ["мульт","мультфильм","мультик","детям"]
   };
 
+  const SEMANTIC_EXPANSIONS = {
+    "попадан": ["исекай","другой мир","перерождение","реинкарнация","призван","another world","isekai"],
+    "исекай": ["попаданцы","другой мир","перерождение","реинкарнация","fantasy","adventure"],
+    "сильный": ["opmc","overpowered","сильный герой","прокачка","leveling","боевик"],
+    "мрачный": ["dark","триллер","ужасы","психология","саспенс","кровь"],
+    "умный": ["smart","психология","детектив","mystery","mind game","интрига"],
+    "легкий": ["funny","комедия","повседневность","без жести","slice of life"],
+    "космос": ["space","фантастика","галактика","планеты","sci-fi"],
+    "выживание": ["survival","апокалипсис","зомби","death game","battle royale"],
+    "магия": ["magic","фэнтези","академия","заклинания"],
+    "романтика": ["romance","мелодрама","любовь","отношения"],
+    "самурай": ["martial","samurai","боевые искусства","история"],
+    "ниндзя": ["martial","ninja","боевые искусства","сёнэн"],
+    "киберпанк": ["cyberpunk","dystopia","фантастика","технологии"],
+    "вампир": ["vampire","dark","сверхъестественное"],
+    "демон": ["demons","dark","сверхъестественное","фэнтези"]
+  };
+
+  const ORACLE_PROFILES = {
+    wife_evening: {
+      label: "С женой вечером",
+      query: "фильм на вечер без жести без ужасов рейтинг 7.5+",
+      kind: "movies",
+      tags: ["romance", "funny"]
+    },
+    hard_anime: {
+      label: "Жёсткое аниме",
+      query: "мрачное аниме с экшеном рейтинг 8+",
+      kind: "anime",
+      tags: ["dark", "action"]
+    },
+    isekai_op: {
+      label: "Исекай + сильный ГГ",
+      query: "аниме исекай попаданцы с сильным главным героем рейтинг 8+",
+      kind: "anime",
+      tags: ["isekai", "opmc"]
+    },
+    brain: {
+      label: "Умный сюжет",
+      query: "умный психологический детектив триллер рейтинг 8+",
+      kind: "any",
+      tags: ["smart"]
+    },
+    no_stress: {
+      label: "Без напряга",
+      query: "легкое смешное кино или аниме без жести",
+      kind: "any",
+      tags: ["funny"]
+    },
+    survival: {
+      label: "Выживание",
+      query: "сериал или фильм про выживание апокалипсис рейтинг 7+",
+      kind: "any",
+      tags: ["survival"]
+    }
+  };
+
   const shownIds = new Set();
+
+  const GODMODE_PRESETS = {
+    "аниме попаданцы": "5 аниме про попаданцев исекай с сильным главным героем рейтинг 8+ голосов 300+ без гарема",
+    "сильный гг": "аниме с сильным главным героем прокачка уровни рейтинг 8+",
+    "на вечер": "фильм на вечер рейтинг 8+ голосов 1000+ без шлака",
+    "с женой": "фильм с женой вечером без жести рейтинг 7.5+",
+    "без напряга": "легкое смешное без жести рейтинг 7+",
+    "мрачное": "мрачный умный триллер детектив рейтинг 7.5+",
+    "выживание": "сериал или фильм про выживание апокалипсис рейтинг 7+",
+    "космос": "фантастика космос рейтинг 8+ голосов 1000+",
+    "семейное": "семейный фильм мультфильм без жести рейтинг 7+"
+  };
+
+  function godmodePresetText(text) {
+    const q = norm(text);
+    for (const [key, val] of Object.entries(GODMODE_PRESETS)) {
+      if (q.includes(key)) return val;
+    }
+    return "";
+  }
+
+  function explainQueryUnderstanding(text) {
+    const cls = classify(text);
+    const c = parseConstraints(text);
+    const parts = [];
+    parts.push("тип: " + (cls.kind || "любой"));
+    if (cls.tags && cls.tags.length) parts.push("теги: " + cls.tags.join(", "));
+    if (c.minRating) parts.push("рейтинг от " + c.minRating);
+    if (c.minVotes) parts.push("голосов от " + c.minVotes);
+    if (c.minYear) parts.push("после " + c.minYear);
+    if (c.maxYear !== 9999) parts.push("до " + c.maxYear);
+    if (c.excludeTags && c.excludeTags.size) parts.push("исключить: " + [...c.excludeTags].join(", "));
+    return parts.join(" · ");
+  }
+
+  function addUnderstanding(text) {
+    const understood = explainQueryUnderstanding(text);
+    if (understood) addMsg("Понял запрос → " + understood, "bot");
+  }
+
+  function neuroPlan(text) {
+    const cls = classify(text);
+    const c = parseConstraints(text);
+    const steps = [];
+    steps.push("1) Определяю тип: " + (cls.kind || "любой"));
+    if (cls.tags && cls.tags.length) steps.push("2) Поднимаю теги: " + cls.tags.join(", "));
+    else steps.push("2) Ищу по смысловым словам и aiWords");
+    steps.push("3) Отсекаю минусы: " + (c.excludeTags && c.excludeTags.size ? [...c.excludeTags].join(", ") : "нет"));
+    steps.push("4) Учитываю качество: рейтинг, голоса, recScore, qualityFlags");
+    steps.push("5) Учитываю твои лайки/дизлайки и контекст прошлого запроса");
+    addMsg("NEURO-план:\n" + steps.join("\n"), "bot");
+  }
+
+  function aiBlacklist() {
+    try { return new Set(JSON.parse(localStorage.getItem("gkm_ai_blacklist_words") || "[]")); }
+    catch { return new Set(); }
+  }
+
+  function saveAiBlacklist(set) {
+    try { localStorage.setItem("gkm_ai_blacklist_words", JSON.stringify([...set])); } catch {}
+  }
+
+  function addBlacklistWords(text) {
+    const words = toks(text.replace(/заблокируй|не\s+показывай|убери\s+из\s+советов|минус/gi, ""));
+    const bl = aiBlacklist();
+    words.forEach(w => bl.add(w));
+    saveAiBlacklist(bl);
+    addMsg("Добавил в минус-слова: " + words.join(", "), "bot");
+  }
+
+  function clearBlacklistWords() {
+    localStorage.removeItem("gkm_ai_blacklist_words");
+    addMsg("Минус-слова очищены.", "bot");
+  }
+
+  function blacklistPenalty(item) {
+    const bl = aiBlacklist();
+    if (!bl.size) return 0;
+    const full = textOfItem(item);
+    let p = 0;
+    bl.forEach(w => {
+      if (full.includes(w)) p -= 80;
+    });
+    return p;
+  }
+
+  function savePlaylist(items, name) {
+    try {
+      const list = (items || []).map(x => ({
+        id: x.id,
+        title: titleOf(x),
+        year: getYear(x),
+        type: getType(x),
+        rating: getRating(x),
+        poster: posterOfItem(x)
+      }));
+      localStorage.setItem("gkm_ai_playlist_" + (name || "last"), JSON.stringify(list));
+      localStorage.setItem("gkm_ai_playlist_last", JSON.stringify(list));
+      addMsg("Сохранил подборку: " + list.length + " шт. Команда для просмотра: «покажи плейлист».", "bot");
+    } catch {}
+  }
+
+  function absoluteConfig() {
+    try { return JSON.parse(localStorage.getItem("gkm_ai_absolute_config") || "{}"); }
+    catch { return {}; }
+  }
+
+  function saveAbsoluteConfig(c) {
+    try { localStorage.setItem("gkm_ai_absolute_config", JSON.stringify(c || {})); } catch {}
+  }
+
+  function absoluteSet(key, value) {
+    const c = absoluteConfig();
+    c[key] = value;
+    saveAbsoluteConfig(c);
+    addMsg("ABSOLUTE настройка: " + key + " = " + value, "bot");
+  }
+
+  function absoluteBoostText() {
+    const c = absoluteConfig();
+    const parts = [];
+    if (c.onlyReliable) parts.push("без шлака рейтинг 8+ голосов 1000+");
+    if (c.onlyModern) parts.push("после 2015");
+    if (c.noKids) parts.push("взрослое без детского");
+    if (c.safe) parts.push("без жести без ужасов");
+    if (c.short) parts.push("короткое на вечер");
+    if (c.long) parts.push("марафон много серий");
+    return parts.join(" ");
+  }
+
+  function absoluteMenu() {
+    addBotWithActions("ABSOLUTE настройки будут подмешиваться ко всем коротким запросам:", [
+      { label: "Только надёжное", run: () => absoluteSet("onlyReliable", true) },
+      { label: "Только новое", run: () => absoluteSet("onlyModern", true) },
+      { label: "Без детского", run: () => absoluteSet("noKids", true) },
+      { label: "Без жести", run: () => absoluteSet("safe", true) },
+      { label: "Короткое", run: () => absoluteSet("short", true) },
+      { label: "Марафон", run: () => absoluteSet("long", true) }
+    ]);
+  }
+
+  function absoluteReset() {
+    localStorage.removeItem("gkm_ai_absolute_config");
+    addMsg("ABSOLUTE настройки сброшены.", "bot");
+  }
+
+  function absoluteDirector(text) {
+    const q = norm(text);
+    if (/девочк|жена|романт|вдвоем|вдвоём/.test(q)) return "режим жена фильм на вечер без жести рейтинг 7.5+";
+    if (/мужик|пацан|жестк|мясо|боевик/.test(q)) return "жесткое боевик экшен рейтинг 8+";
+    if (/аниме|исекай|попадан/.test(q)) return "аниме исекай попаданцы сильный герой рейтинг 8+ без гарема";
+    if (/семь|дет|мульт/.test(q)) return "семейное мультфильм без жести рейтинг 7+";
+    if (/сон|ночь|устал/.test(q)) return "короткое легкое без жести рейтинг 7+";
+    return "";
+  }
+
+  function absoluteExplainFull(text) {
+    const cls = classify(text);
+    const c = parseConstraints(text);
+    const lines = [
+      "ABSOLUTE разбор:",
+      "тип: " + (cls.kind || "любой"),
+      "интент: " + (cls.type || "recommend"),
+      "теги: " + ((cls.tags && cls.tags.length) ? cls.tags.join(", ") : "нет"),
+      "рейтинг от: " + (c.minRating || "не задан"),
+      "голосов от: " + (c.minVotes || "не задан"),
+      "год: " + (c.minYear || "любой") + " — " + (c.maxYear !== 9999 ? c.maxYear : "любой"),
+      "исключения: " + (c.excludeTags && c.excludeTags.size ? [...c.excludeTags].join(", ") : "нет"),
+      "absolute: " + (absoluteBoostText() || "нет")
+    ];
+    addMsg(lines.join("\\n"), "bot");
+  }
+
+  function infinityConfig() {
+    try { return JSON.parse(localStorage.getItem("gkm_ai_infinity_config") || "{}"); }
+    catch { return {}; }
+  }
+
+  function saveInfinityConfig(c) {
+    try { localStorage.setItem("gkm_ai_infinity_config", JSON.stringify(c || {})); } catch {}
+  }
+
+  function setInfinityQuality(mode) {
+    const c = infinityConfig();
+    c.quality = mode;
+    saveInfinityConfig(c);
+    addMsg("INFINITY качество: " + mode, "bot");
+  }
+
+  function infinityQualityBoost() {
+    const c = infinityConfig();
+    if (c.quality === "strict") return "без шлака рейтинг 8.2+ голосов 3000+";
+    if (c.quality === "balanced") return "рейтинг 7.7+ голосов 500+";
+    if (c.quality === "hidden") return "скрытые жемчужины рейтинг 7.4+ голосов 100+";
+    return "";
+  }
+
+  function infinityMenu() {
+    addBotWithActions("INFINITY режим. Выбери качество и стиль подбора:", [
+      { label: "Строго годное", run: () => setInfinityQuality("strict") },
+      { label: "Баланс", run: () => setInfinityQuality("balanced") },
+      { label: "Скрытые", run: () => setInfinityQuality("hidden") },
+      { label: "Микс 3+3+3", run: () => infinityMix() },
+      { label: "План на вечер", run: () => infinityEveningPlan() }
+    ]);
+  }
+
+  function infinityMix() {
+    addMsg("Собираю микс: аниме + фильм + сериал.", "bot");
+    recommendFromQuery("3 аниме рейтинг 8+ без шлака", { kind: "anime", intro: "INFINITY микс: аниме", limit: 3 });
+    recommendFromQuery("3 фильма рейтинг 8+ голосов 1000+", { kind: "movies", intro: "INFINITY микс: фильмы", limit: 3 });
+    recommendFromQuery("3 сериала рейтинг 8+ голосов 1000+", { kind: "series", intro: "INFINITY микс: сериалы", limit: 3 });
+  }
+
+  function infinityEveningPlan() {
+    addBotWithActions("План на вечер:", [
+      { label: "1 фильм", run: () => recommendFromQuery("один фильм на вечер рейтинг 8+ без жести", { kind: "movies", limit: 1, intro: "План на вечер: один фильм" }) },
+      { label: "2 серии", run: () => recommendFromQuery("короткий сериал 2 серии на вечер рейтинг 8+", { kind: "series", limit: 2, intro: "План на вечер: 2 серии" }) },
+      { label: "Аниме вечер", run: () => recommendFromQuery("аниме на вечер рейтинг 8+ без шлака", { kind: "anime", limit: 3, intro: "План на вечер: аниме" }) }
+    ]);
+  }
+
+  function infinityState() {
+    const c = infinityConfig();
+    const sup = supremeSession ? supremeSession() : {};
+    const apex = apexProfile ? apexProfile() : {};
+    addMsg(
+      "INFINITY состояние:\\n" +
+      "качество: " + (c.quality || "обычно") + "\\n" +
+      "supreme mode: " + (sup.mode || "нет") + "\\n" +
+      "apex profile: " + (Object.keys(apex).length ? JSON.stringify(apex) : "пусто"),
+      "bot"
+    );
+  }
+
+  function ultraProfileBoostText() {
+    const likes = aiFeedbackSet("gkm_ai_likes");
+    const dislikes = aiFeedbackSet("gkm_ai_dislikes");
+    const p = apexProfile ? apexProfile() : {};
+    const parts = [];
+
+    if (likes.size >= 3) parts.push("учитывай лайки");
+    if (dislikes.size >= 3) parts.push("не повторяй дизлайки");
+    if (p.noTrash) parts.push("без шлака");
+    if (p.safe) parts.push("без жести");
+    if (p.newer) parts.push("посвежее");
+    if (p.mood) parts.push(p.mood);
+    return parts.join(" ");
+  }
+
+  function ultraRewrite(text) {
+    let q = String(text || "").trim();
+    const n = norm(q);
+    const boost = ultraProfileBoostText();
+
+    if (/^(посоветуй|подбери|что смотреть|что посмотреть)$/i.test(n)) q = "что посмотреть рейтинг 8+ голосов 1000+";
+    if (/скрыт|жемчуж|недооцен/.test(n)) q += " рейтинг 7.5+ голосов 100+";
+    if (/безопасн|спокойн|не напряж/.test(n)) q += " без жести без ужасов";
+    if (/жестк|мясо|кров/.test(n)) q += " мрачное экшен триллер";
+    if (/самое лучшее|ультра топ|легенд/.test(n)) q += " рейтинг 8.7+ голосов 10000+";
+    if (/новое/.test(n)) q += " после 2020";
+    if (/старое|классик/.test(n)) q += " до 2010";
+
+    const inf = infinityQualityBoost();
+    const abs = absoluteBoostText();
+    const director = absoluteDirector(q);
+    if (director && toks(q).length <= 4) q += " " + director;
+    if (boost) q += " " + boost;
+    if (inf) q += " " + inf;
+    if (abs && !/сброс|настрой|режим|команды/.test(n)) q += " " + abs;
+    return q;
+  }
+
+  function ultraModes() {
+    addBotWithActions("ULTRA INSTINCT режимы:", [
+      { label: "Легенды", run: () => recommendFromQuery("легендарное рейтинг 8.7+ голосов 10000+", { intro: "ULTRA: легенды:" }) },
+      { label: "Скрытые жемчужины", run: () => recommendFromQuery("скрытые жемчужины рейтинг 7.5+ голосов 100+", { intro: "ULTRA: скрытые жемчужины:" }) },
+      { label: "Без риска", run: () => recommendFromQuery("без шлака рейтинг 8+ голосов 1000+ без жести", { intro: "ULTRA: безопасный выбор:" }) },
+      { label: "Жёстко", run: () => recommendFromQuery("жесткое мрачное экшен триллер рейтинг 8+", { intro: "ULTRA: жёсткое:" }) },
+      { label: "По вкусу", run: () => recommendFromQuery("под мой вкус рейтинг 8+", { intro: "ULTRA: под твой вкус:" }) }
+    ]);
+  }
+
+  function ultraSummary() {
+    const ctx = getAiContext();
+    const likes = aiFeedbackSet("gkm_ai_likes");
+    const dislikes = aiFeedbackSet("gkm_ai_dislikes");
+    const bl = aiBlacklist ? aiBlacklist() : new Set();
+    addMsg(
+      "ULTRA память:\\n" +
+      "последний запрос: " + (ctx.lastQuery || "нет") + "\\n" +
+      "последний тайтл: " + (ctx.lastTitle || "нет") + "\\n" +
+      "лайков: " + likes.size + "\\n" +
+      "дизлайков: " + dislikes.size + "\\n" +
+      "минус-слов: " + bl.size,
+      "bot"
+    );
+  }
+
+  function supremeSession() {
+    try { return JSON.parse(localStorage.getItem("gkm_ai_supreme_session") || "{}"); }
+    catch { return {}; }
+  }
+
+  function saveSupremeSession(s) {
+    try { localStorage.setItem("gkm_ai_supreme_session", JSON.stringify(s || {})); } catch {}
+  }
+
+  function setSupremeMode(mode) {
+    const s = supremeSession();
+    s.mode = mode;
+    s.time = Date.now();
+    saveSupremeSession(s);
+    addMsg("SUPREME-режим включён: " + mode, "bot");
+  }
+
+  function supremeModeBoost() {
+    const s = supremeSession();
+    if (!s.mode) return "";
+    if (s.mode === "company") return "популярное без жести рейтинг 7.5+ голосов 1000+";
+    if (s.mode === "solo") return "умное атмосферное рейтинг 8+";
+    if (s.mode === "wife") return "с женой без жести без ужасов рейтинг 7.5+";
+    if (s.mode === "anime") return "аниме рейтинг 8+ голосов 500+";
+    if (s.mode === "trash_off") return "без шлака рейтинг 8+ голосов 1000+";
+    return "";
+  }
+
+  function supremeExplainModes() {
+    addBotWithActions("SUPREME умеет режимы. Они будут подмешиваться в короткие запросы.", [
+      { label: "Для компании", run: () => setSupremeMode("company") },
+      { label: "Один", run: () => setSupremeMode("solo") },
+      { label: "С женой", run: () => setSupremeMode("wife") },
+      { label: "Аниме", run: () => setSupremeMode("anime") },
+      { label: "Анти-мусор", run: () => setSupremeMode("trash_off") }
+    ]);
+  }
+
+  function supremeReset() {
+    localStorage.removeItem("gkm_ai_supreme_session");
+    addMsg("SUPREME-режим сброшен.", "bot");
+  }
+
+  function apexProfile() {
+    try { return JSON.parse(localStorage.getItem("gkm_ai_apex_profile") || "{}"); }
+    catch { return {}; }
+  }
+
+  function saveApexProfile(p) {
+    try { localStorage.setItem("gkm_ai_apex_profile", JSON.stringify(p || {})); } catch {}
+  }
+
+  function setProfileValue(key, value) {
+    const p = apexProfile();
+    p[key] = value;
+    saveApexProfile(p);
+    addMsg("Запомнил профиль: " + key + " = " + value, "bot");
+  }
+
+  function profileQueryBoost() {
+    const p = apexProfile();
+    const parts = [];
+    if (p.kind) parts.push("только " + p.kind);
+    if (p.mood) parts.push(p.mood);
+    if (p.noTrash) parts.push("без шлака рейтинг 8+ голосов 1000+");
+    if (p.safe) parts.push("без жести");
+    if (p.noRomance) parts.push("без романтики");
+    if (p.newer) parts.push("после 2015");
+    return parts.join(" ");
+  }
+
+  function startApexQuiz() {
+    addBotWithActions("APEX-квиз: выбери, что чаще хочешь смотреть. Я сохраню профиль в этом браузере.", [
+      { label: "Аниме", run: () => setProfileValue("kind", "аниме") },
+      { label: "Фильмы", run: () => setProfileValue("kind", "фильм") },
+      { label: "Сериалы", run: () => setProfileValue("kind", "сериал") },
+      { label: "Без шлака", run: () => setProfileValue("noTrash", true) },
+      { label: "Без жести", run: () => setProfileValue("safe", true) },
+      { label: "Новее", run: () => setProfileValue("newer", true) }
+    ]);
+    addBotWithActions("Настроение:", [
+      { label: "Исекай", run: () => setProfileValue("mood", "исекай попаданцы") },
+      { label: "Сильный ГГ", run: () => setProfileValue("mood", "сильный главный герой") },
+      { label: "Мрачное", run: () => setProfileValue("mood", "мрачное умное") },
+      { label: "Лёгкое", run: () => setProfileValue("mood", "легкое смешное") },
+      { label: "Космос", run: () => setProfileValue("mood", "космос фантастика") }
+    ]);
+  }
+
+  function showApexProfile() {
+    const p = apexProfile();
+    const keys = Object.keys(p);
+    if (!keys.length) {
+      addMsg("Профиль пуст. Напиши «квиз» и я настрою вкус.", "bot");
+      return;
+    }
+    addMsg("APEX-профиль:\n" + keys.map(k => k + ": " + p[k]).join("\n"), "bot");
+  }
+
+  function resetApexProfile() {
+    localStorage.removeItem("gkm_ai_apex_profile");
+    addMsg("APEX-профиль сброшен.", "bot");
+  }
+
+  function omegaTimePreset() {
+    const h = new Date().getHours();
+    if (h >= 22 || h < 5) return "короткое легкое без жести рейтинг 7+";
+    if (h >= 18) return "фильм на вечер рейтинг 8+ голосов 1000+";
+    return "что посмотреть рейтинг 8+ без шлака";
+  }
+
+  function omegaImproveQuery(text) {
+    let q = String(text || "").trim();
+    const profileBoost = profileQueryBoost();
+    const n = norm(q);
+
+    if (/^(аниме|анимэ)$/.test(n)) q = "топ аниме рейтинг 8+ голосов 1000+";
+    if (/^(фильм|кино)$/.test(n)) q = "фильм на вечер рейтинг 8+ голосов 1000+";
+    if (/^(сериал)$/.test(n)) q = "сериал рейтинг 8+ голосов 1000+";
+    if (/^(мульт|мультик|мультфильм)$/.test(n)) q = "мультфильм семейный рейтинг 7+";
+    if (/^(вечер|на вечер)$/.test(n)) q = omegaTimePreset();
+
+    if (/марафон|надолго|много серий/i.test(n)) q += " длинное много серий";
+    if (/быстро|короткое|на час/i.test(n)) q += " короткое";
+    if (/жена|с женой|для двоих/i.test(n)) q += " без жести без ужасов";
+    if (/топчик|имба|самое лучшее/i.test(n)) q += " рейтинг 8.3+ голосов 1000+ без шлака";
+    const supremeBoost = supremeModeBoost();
+    if (profileBoost && !/сброс|профиль|квиз|команды/.test(n)) q += " " + profileBoost;
+    if (supremeBoost && !/сброс|режим|команды/.test(n)) q += " " + supremeBoost;
+
+    return q;
+  }
+
+  function exportPlaylistText() {
+    let list = [];
+    try { list = JSON.parse(localStorage.getItem("gkm_ai_playlist_last") || "[]"); } catch {}
+    if (!list.length && Array.isArray(window.GKM_AI_LAST_ITEMS)) {
+      list = window.GKM_AI_LAST_ITEMS.map(x => ({
+        title: titleOf(x), year: getYear(x), type: getType(x), rating: getRating(x)
+      }));
+    }
+    if (!list.length) {
+      addMsg("Экспортировать нечего. Сначала сделай подборку.", "bot");
+      return;
+    }
+
+    const text = list.slice(0, 20).map((x, i) =>
+      `${i + 1}. ${x.title} (${x.year || "—"}) · ${x.type || "—"} · ${x.rating || "—"}`
+    ).join("\\n");
+
+    navigator.clipboard && navigator.clipboard.writeText(text).then(
+      () => addMsg("Скопировал подборку в буфер:\\n" + text, "bot"),
+      () => addMsg("Не смог скопировать автоматически. Вот текст:\\n" + text, "bot")
+    );
+    if (!navigator.clipboard) addMsg("Вот подборка:\\n" + text, "bot");
+  }
+
+  function diagnoseNoResults(query) {
+    const c = parseConstraints(query);
+    const reasons = [];
+    if (c.minRating >= 8.5) reasons.push("слишком высокий рейтинг");
+    if (c.minVotes >= 1000) reasons.push("слишком много голосов");
+    if (c.excludeTags && c.excludeTags.size >= 2) reasons.push("много исключений");
+    if (c.minYear >= 2023) reasons.push("слишком свежий год");
+    if (!reasons.length) reasons.push("в базе мало точных совпадений");
+    addBotWithActions("Если результатов мало: " + reasons.join(", ") + ". Могу ослабить фильтр.", [
+      { label: "Ослабить", run: () => recommendFromQuery(String(query).replace(/рейтинг\\s*\\d+(?:[\\.,]\\d)?\\+?/gi, "рейтинг 7+").replace(/голосов\\s*\\d+\\+?/gi, "голосов 100+"), { intro: "Ослабил фильтр:" }) },
+      { label: "Популярное", run: () => clickByText(["Популярное"]) }
+    ]);
+  }
+
+  function showPlaylist() {
+    let list = [];
+    try { list = JSON.parse(localStorage.getItem("gkm_ai_playlist_last") || "[]"); } catch {}
+    if (!list.length) {
+      addMsg("Плейлист пуст. Сначала попроси подборку и напиши «сохрани плейлист».", "bot");
+      return;
+    }
+    addBotWithActions("В плейлисте " + list.length + " тайтлов. Могу кинуть первый в поиск.", [
+      { label: "Открыть первый", run: () => setSearch(list[0].title) },
+      { label: "Очистить", run: () => { localStorage.removeItem("gkm_ai_playlist_last"); addMsg("Плейлист очищен.", "bot"); } }
+    ]);
+    list.slice(0, 10).forEach((x, i) => {
+      addMsg((i+1) + ". " + x.title + " (" + (x.year || "—") + ") · " + (x.type || "—") + " · " + (x.rating || "—"), "bot");
+    });
+  }
+
+
+  function getAiContext() {
+    try { return JSON.parse(localStorage.getItem("gkm_ai_context") || "{}"); }
+    catch { return {}; }
+  }
+
+  function setAiContext(ctx) {
+    try { localStorage.setItem("gkm_ai_context", JSON.stringify(ctx || {})); } catch {}
+  }
+
+  function mergeWithContext(text) {
+    const q = norm(text);
+    const ctx = getAiContext();
+    const last = ctx.lastQuery || "";
+
+    if (!last) return text;
+
+    // Follow-up команды: "ещё", "похожие", "не это", "без романтики", "рейтинг 8+"
+    if (/^(еще|ещё|давай еще|давай ещё|покажи еще|покажи ещё|дальше|следующие|еще варианты|ещё варианты)$/i.test(q)) {
+      return last + " " + text;
+    }
+
+    if (/^(не то|не это|другое|другие|не подходит|не зашло)$/i.test(q)) {
+      return last + " без похожего на прошлое";
+    }
+
+    if (/^(похожие|похожее|такое же|типа этого)$/i.test(q) && ctx.lastTitle) {
+      return "похожее на " + ctx.lastTitle;
+    }
+
+    if (/^(без|с|после|до|рейтинг|оценка|голосов|не старше|новее)/i.test(q)) {
+      return last + " " + text;
+    }
+
+    return text;
+  }
+
+  function rememberContext(query, items) {
+    try {
+      const first = items && items[0];
+      setAiContext({
+        lastQuery: query,
+        lastTitle: first ? titleOf(first) : "",
+        lastKind: first ? kindFromItem(first) : classify(query).kind,
+        time: Date.now()
+      });
+    } catch {}
+  }
+
+
+  function aiFeedbackSet(key) {
+    try { return new Set(JSON.parse(localStorage.getItem(key) || "[]")); }
+    catch { return new Set(); }
+  }
+
+  function saveAiFeedback(key, set) {
+    try { localStorage.setItem(key, JSON.stringify([...set])); } catch {}
+  }
+
+  function markAiFeedback(item, liked) {
+    if (!item || item.id == null) return;
+    const id = String(item.id);
+    const likes = aiFeedbackSet("gkm_ai_likes");
+    const dislikes = aiFeedbackSet("gkm_ai_dislikes");
+
+    if (liked) {
+      likes.add(id);
+      dislikes.delete(id);
+      saveAiFeedback("gkm_ai_likes", likes);
+      saveAiFeedback("gkm_ai_dislikes", dislikes);
+      addMsg("Запомнил: тебе такое нравится. Дальше похожее буду поднимать выше.", "bot");
+    } else {
+      dislikes.add(id);
+      likes.delete(id);
+      saveAiFeedback("gkm_ai_dislikes", dislikes);
+      saveAiFeedback("gkm_ai_likes", likes);
+      addMsg("Понял: такое опущу ниже в будущих советах.", "bot");
+    }
+  }
+
 
   function $(id) { return document.getElementById(id); }
   function box() { return $("gkmAiMessages"); }
@@ -1090,7 +1737,175 @@ if (document.readyState === "loading") {
   }
   function compact(text) { return norm(fixQuery(text)).replace(/[^\p{L}\p{N}]+/gu, " ").replace(/\s+/g, " ").trim(); }
   function toks(text) { return compact(text).split(" ").filter(t => t.length >= 3 && !STOP_WORDS.has(t)); }
+
+  function semanticTokens(text) {
+    const base = new Set(toks(text));
+    const q = norm(fixQuery(text));
+    Object.entries(SEMANTIC_EXPANSIONS || {}).forEach(([key, vals]) => {
+      if (q.includes(key)) {
+        base.add(key);
+        vals.forEach(v => toks(v).forEach(t => base.add(t)));
+      }
+    });
+    return [...base];
+  }
+
+  function tokenSimilarity(a, b) {
+    a = norm(a); b = norm(b);
+    if (!a || !b) return 0;
+    if (a === b) return 1;
+    if (a.length < 4 || b.length < 4) return 0;
+    if (a.includes(b) || b.includes(a)) return 0.72;
+
+    // лёгкая похожесть для опечаток без тяжёлкого алгоритма
+    const min = Math.min(a.length, b.length);
+    let same = 0;
+    for (let i = 0; i < min; i++) if (a[i] === b[i]) same++;
+    return same / Math.max(a.length, b.length);
+  }
+
   function hasAny(q, arr) { return arr.some(x => q.includes(norm(x))); }
+
+  function parseConstraints(raw) {
+    const q = norm(fixQuery(raw));
+    const c = {
+      minYear: 0,
+      maxYear: 9999,
+      minRating: 0,
+      limit: 5,
+      excludeTags: new Set(),
+      includeTags: new Set(),
+      preferNew: false,
+      preferShort: false,
+      preferLong: false,
+      onlyWithPoster: false,
+      minVotes: 0,
+      excludeWatched: false,
+      safeMode: false,
+      forceKind: ""
+    };
+
+    const yearAfter = q.match(/(?:после|от|с)\s*(19\d{2}|20\d{2})/);
+    const yearBefore = q.match(/(?:до|раньше)\s*(19\d{2}|20\d{2})/);
+    const exactYear = q.match(/(?:за|год|в)\s*(19\d{2}|20\d{2})/);
+    if (yearAfter) c.minYear = Number(yearAfter[1]);
+    if (yearBefore) c.maxYear = Number(yearBefore[1]);
+    if (exactYear && !yearAfter && !yearBefore) {
+      c.minYear = Number(exactYear[1]);
+      c.maxYear = Number(exactYear[1]);
+    }
+
+    const rating = q.match(/(?:рейтинг|оценк[аи]?|от)\s*(\d(?:[\.,]\d)?|10)(?:\+|\s*и\s*выше)?/);
+    const ratingPlus = q.match(/(\d(?:[\.,]\d)?|10)\s*\+/);
+    if (rating) c.minRating = Number(rating[1].replace(",", "."));
+    else if (ratingPlus) c.minRating = Number(ratingPlus[1].replace(",", "."));
+
+    const count = q.match(/(?:дай|покажи|подбери)?\s*(\d{1,2})\s*(?:вариант|аниме|фильм|сериал|штук)/);
+    if (count) c.limit = Math.max(1, Math.min(10, Number(count[1])));
+
+    if (/без\s+романт|без\s+любв|не\s+романт/.test(q)) c.excludeTags.add("romance");
+    if (/без\s+ужас|не\s+страш|без\s+кров|без\s+жести/.test(q)) c.excludeTags.add("dark");
+    if (/без\s+комед|не\s+смешн/.test(q)) c.excludeTags.add("funny");
+    if (/без\s+школ/.test(q)) c.excludeTags.add("school");
+    if (/без\s+меха|без\s+робот/.test(q)) c.excludeTags.add("mecha");
+    if (/без\s+гарем|не\s+гарем/.test(q)) c.excludeTags.add("harem");
+
+    if (/с\s+романт|романт|любов/.test(q)) c.includeTags.add("romance");
+    if (/мрач|темн|жест|триллер|ужас/.test(q)) c.includeTags.add("dark");
+    if (/смешн|комед|легк|угар/.test(q)) c.includeTags.add("funny");
+    if (/школ|академ/.test(q)) c.includeTags.add("school");
+    if (/выживание|зомби|апокалип/.test(q)) c.includeTags.add("survival");
+    if (/космос|галакт|звезд/.test(q)) c.includeTags.add("space");
+
+    if (/новое|свеж|посвежее|новин/.test(q)) c.preferNew = true;
+    if (/коротк|на\s+вечер|быстро/.test(q)) c.preferShort = true;
+    if (/длинн|много\s+серий|надолго/.test(q)) c.preferLong = true;
+    if (/с\s+постер|красив|визуал/.test(q)) c.onlyWithPoster = true;
+
+
+    const votes = q.match(/(?:голосов|оценок|votes)\\s*(\\d{2,7})\\+?/);
+    if (votes) c.minVotes = Number(votes[1]);
+
+    if (/без\\s+мусор|без\\s+шлака|только\\s+норм|проверенн/.test(q)) {
+      c.minVotes = Math.max(c.minVotes, 300);
+      c.minRating = Math.max(c.minRating, 7);
+    }
+
+    if (/не\\s+показывай\\s+уже|без\\s+просмотренн|новое\\s+для\\s+меня/.test(q)) c.excludeWatched = true;
+    if (/без\\s+жести|без\\s+крови|без\\s+насилия|спокойн/.test(q)) c.safeMode = true;
+
+    if (/для\s+семьи|семейное|с\s+ребенком|с\s+детьми/.test(q)) {
+      c.includeTags.add("family");
+      c.safeMode = true;
+    }
+
+    if (/взросл|без\s+детск|не\s+детск/.test(q)) {
+      c.excludeTags.add("family");
+      c.excludeTags.add("school");
+    }
+
+    if (/только\s+аниме|строго\s+аниме/.test(q)) c.forceKind = "anime";
+    if (/только\s+фильм|строго\s+фильм/.test(q)) c.forceKind = "movies";
+    if (/только\s+сериал|строго\s+сериал/.test(q)) c.forceKind = "series";
+
+    return c;
+  }
+
+  function itemHasTag(item, tag) {
+    const all = new Set([...tagsOfItem(item), ...genresOfItem(item).map(norm), ...textOfItem(item).split(/\s+/)]);
+    if (tag === "romance") return all.has("romance") || all.has("романс") || all.has("мелодрама") || all.has("романтика");
+    if (tag === "dark") return all.has("dark") || all.has("ужасы") || all.has("триллер") || all.has("саспенс") || all.has("horror");
+    if (tag === "funny") return all.has("funny") || all.has("комедия") || all.has("comedy");
+    if (tag === "school") return all.has("school") || all.has("школа") || all.has("академия");
+    if (tag === "survival") return all.has("survival") || all.has("выживание") || all.has("зомби");
+    if (tag === "space") return all.has("space") || all.has("космос") || all.has("фантастика");
+    return all.has(tag);
+  }
+
+  function passesConstraints(item, c) {
+    const year = Number(getYear(item) || 0);
+    const rating = Number(getRating(item) || 0);
+
+    if (c.minYear && year && year < c.minYear) return false;
+    if (c.maxYear !== 9999 && year && year > c.maxYear) return false;
+    if (c.minRating && rating < c.minRating) return false;
+    if (c.minVotes && Number(getVotes(item) || 0) < c.minVotes) return false;
+    if (c.onlyWithPoster && !posterOfItem(item)) return false;
+
+    try {
+      if (c.excludeWatched) {
+        const hist = new Set(JSON.parse(localStorage.getItem("gkm_history") || "[]"));
+        if (hist.has(String(item.id))) return false;
+      }
+    } catch {}
+
+    if (c.safeMode && (itemHasTag(item, "dark") || itemHasTag(item, "survival"))) return false;
+
+    for (const tag of c.excludeTags) {
+      if (itemHasTag(item, tag)) return false;
+    }
+
+    return true;
+  }
+
+  function constraintBoost(item, c) {
+    let boost = 0;
+    const year = Number(getYear(item) || 0);
+    const votes = Number(getVotes(item) || 0);
+
+    for (const tag of c.includeTags) {
+      if (itemHasTag(item, tag)) boost += 35;
+    }
+
+    if (c.preferNew && year >= 2020) boost += 25;
+    if (c.preferNew && year >= 2024) boost += 35;
+    if (c.preferShort && votes > 5000) boost += 4;
+    if (c.preferLong && votes > 10000) boost += 4;
+    if (posterOfItem(item)) boost += 2;
+
+    return boost;
+  }
+
   function scrollAi() { const b = box(); if (b) b.scrollTop = b.scrollHeight; }
 
   function limitMessages() {
@@ -1152,7 +1967,7 @@ if (document.readyState === "loading") {
       titleOf(item), item.en, item.title, item.name, item.originalTitle,
       getType(item), getYear(item), ...(genresOfItem(item) || []),
       ...(item.aiTags || []), ...(item.moodTags || []), ...(item.recTags || []),
-      item.overview, item.description, item.source
+      item.absoluteText, item.infinityText, item.ultraText, item.supremeText, item.apexText, item.omegaText, item.recText, item.qualityTier, item.popularityTier, ...(item.qualityFlags || []), ...(item.neuroVector || []), item.overview, item.description, item.source
     ].join(" "));
   }
 
@@ -1196,6 +2011,8 @@ if (document.readyState === "loading") {
       <div class="ai-rec-meta">${escapeHtml(getYear(item) || "—")} · ${escapeHtml(getType(item) || "—")}</div>
       <div class="ai-rec-meta">${escapeHtml(genres || "Без жанров")}</div>
       <div class="ai-rec-meta">⭐ ${rating ? rating.toFixed(1) : "—"} · 👥 ${votes ? String(votes) : "—"}</div>
+      <div class="ai-match-row"><span style="width:${matchPercent(item, query)}%"></span></div>
+      <div class="ai-rec-meta">Совпадение: ${matchPercent(item, query)}%</div>
     `;
     card.appendChild(info);
     wrap.appendChild(card);
@@ -1213,6 +2030,8 @@ if (document.readyState === "loading") {
 
     [
       { label: "Открыть", run: () => openItemCard(item) },
+      { label: "👍 Нравится", run: () => markAiFeedback(item, true) },
+      { label: "👎 Не то", run: () => markAiFeedback(item, false) },
       { label: "Найти", run: () => setSearch(titleOf(item)) },
       { label: "Похожие", run: () => recommendFromQuery("похожее на " + titleOf(item), { kind: kind || kindFromItem(item), intro: "Похожие варианты:", limit: 5, fresh: true }) }
     ].forEach(a => {
@@ -1242,10 +2061,48 @@ if (document.readyState === "loading") {
     if (tags.includes("dark") && tagHit(item, "dark") > 0) reasons.push("мрачная атмосфера");
     if (Number(getRating(item) || 0) >= 8.3) reasons.push("высокий рейтинг");
     if (Number(getVotes(item) || 0) >= 10000) reasons.push("много оценок");
+    if (Number(getRating(item) || 0) >= 8.6 && Number(getVotes(item) || 0) >= 1000) reasons.push("надёжный топ");
+    const cc = parseConstraints(query);
+    if (cc.minRating && Number(getRating(item) || 0) >= cc.minRating) reasons.push("проходит рейтинг " + cc.minRating + "+");
+    if (cc.minYear && Number(getYear(item) || 0) >= cc.minYear) reasons.push("подходит по году");
     if (tagsOfItem(item).length) reasons.push("есть умные теги базы");
     if (posterOfItem(item)) reasons.push("есть постер");
 
     return reasons.length ? "Почему: " + reasons.slice(0, 4).join(", ") + "." : "";
+  }
+
+  function matchPercent(item, query) {
+    try {
+      const cls = classify(query || getAiContext().lastQuery || "");
+      const raw = scoreItem(item, query || "", cls);
+      let percent = Math.round(Math.max(35, Math.min(98, raw)));
+      const rating = Number(getRating(item) || 0);
+      const votes = Number(getVotes(item) || 0);
+      if (rating >= 8.5 && votes >= 1000) percent = Math.min(99, percent + 6);
+      if (votes < 30 && rating >= 9) percent = Math.max(30, percent - 18);
+      return percent;
+    } catch {
+      return 70;
+    }
+  }
+
+  function clearAiChat() {
+    const b = box();
+    if (!b) return;
+    b.innerHTML = "";
+    addMsg("Чат очищен. Пиши новый запрос.", "bot");
+  }
+
+  function showTasteStats() {
+    const likes = aiFeedbackSet("gkm_ai_likes");
+    const dislikes = aiFeedbackSet("gkm_ai_dislikes");
+    addBotWithActions("Твой вкус в этом браузере: лайков — " + likes.size + ", дизлайков — " + dislikes.size + ". Я использую это при подборе.", [
+      { label: "Сбросить обучение", run: () => {
+        localStorage.removeItem("gkm_ai_likes");
+        localStorage.removeItem("gkm_ai_dislikes");
+        addMsg("Сбросил обучение.", "bot");
+      }}
+    ]);
   }
 
   function openAi() {
@@ -1386,7 +2243,7 @@ if (document.readyState === "loading") {
     const votes = Number(getVotes(item) || 0);
     const year = Number(getYear(item) || 0);
 
-    let score = rating * 7 + Math.min(votes, 500000) / 500000 * 16;
+    let score = Number(item.absoluteRank || item.recScore || 0) || (rating * 7 + Math.min(votes, 500000) / 500000 * 16);
     if (posterOfItem(item)) score += 5;
     if (year >= 2015) score += 2;
     if (year >= 2020) score += 2;
@@ -1397,20 +2254,40 @@ if (document.readyState === "loading") {
   function userTasteBoost(item) {
     let boost = 0;
     try {
+      const id = String(item.id);
       const favs = new Set(JSON.parse(localStorage.getItem("gkm_favorites") || "[]"));
       const hist = new Set(JSON.parse(localStorage.getItem("gkm_history") || "[]"));
-      if (favs.has(String(item.id))) boost += 6;
-      if (hist.has(String(item.id))) boost -= 3; // уже смотрел/открывал — чуть ниже
+      const likes = aiFeedbackSet("gkm_ai_likes");
+      const dislikes = aiFeedbackSet("gkm_ai_dislikes");
+
+      if (favs.has(id)) boost += 8;
+      if (likes.has(id)) boost += 30;
+      if (dislikes.has(id)) boost -= 120;
+      if (hist.has(id)) boost -= 2; // уже открывал — чуть ниже, но не убиваем полностью
+
+      // Учимся по жанрам лайкнутых карточек
+      const pool = pools(Array.isArray(searchIndex) ? searchIndex : []);
+      const likedItems = pool.filter(x => likes.has(String(x.id))).slice(0, 50);
+      const myTags = new Set([...tagsOfItem(item), ...genresOfItem(item).map(norm)]);
+
+      likedItems.forEach(liked => {
+        const likedTags = new Set([...tagsOfItem(liked), ...genresOfItem(liked).map(norm)]);
+        likedTags.forEach(t => {
+          if (t && myTags.has(t)) boost += 4;
+        });
+      });
     } catch {}
     return boost;
   }
 
   function scoreItem(item, query, cls) {
     const q = norm(fixQuery(query));
-    const ts = toks(q);
+    const ts = semanticTokens(q);
     const full = textOfItem(item);
     const title = norm(titleOf(item));
-    let score = quality(item) + userTasteBoost(item);
+    const aiWords = Array.isArray(item.aiWords) ? item.aiWords.map(norm) : [];
+    const recText = norm(item.recText || '');
+    let score = quality(item) + userTasteBoost(item) + blacklistPenalty(item);
 
     if (matchesKind(item, cls.kind)) score += 45;
     else score -= 45;
@@ -1418,8 +2295,11 @@ if (document.readyState === "loading") {
     cls.tags.forEach(tag => score += tagHit(item, tag));
 
     ts.forEach(tok => {
-      if (title.includes(tok)) score += 30;
-      if (full.includes(tok)) score += 10;
+      if (title.includes(tok)) score += 34;
+      if (full.includes(tok)) score += 12;
+      if (aiWords.includes(tok)) score += 30;
+      if (recText.includes(tok)) score += 18;
+      if (aiWords.some(w => tokenSimilarity(w, tok) >= 0.82)) score += 12;
     });
 
     if (cls.kind === "anime" && !matchesKind(item, "anime")) score -= 90;
@@ -1459,19 +2339,36 @@ if (document.readyState === "loading") {
 
   async function bestItems(query, cls, limit) {
     const idx = await ensureSearchIndex();
-    const pool = pools(idx).filter(item => matchesKind(item, cls.kind));
+    const c = parseConstraints(query);
+    const finalLimit = Math.max(1, Math.min(10, limit || c.limit || 5));
+    const pool = pools(idx)
+      .filter(item => matchesKind(item, cls.kind))
+      .filter(item => passesConstraints(item, c));
 
     const scored = pool
-      .map(item => ({ item, score: scoreItem(item, query, cls) }))
+      .map(item => ({ item, score: scoreItem(item, query, cls) + constraintBoost(item, c) }))
       .filter(x => x.score > -40)
       .sort((a, b) => b.score - a.score);
 
-    // Берём не строго первые, а с лёгкой вариативностью среди хороших
-    const top = scored.slice(0, Math.max(limit * 3, 12));
+    const top = scored.slice(0, Math.max(finalLimit * 4, 18));
     const picked = [];
+
     for (const x of top) {
-      if (picked.length >= limit) break;
-      if (!picked.some(p => norm(titleOf(p)) === norm(titleOf(x.item)))) picked.push(x.item);
+      if (picked.length >= finalLimit) break;
+      const title = norm(titleOf(x.item));
+      if (!picked.some(p => norm(titleOf(p)) === title)) picked.push(x.item);
+    }
+
+    // Если фильтр слишком жёсткий и ничего не дал — ослабляем, но всё равно не ломаем ответ.
+    if (!picked.length && pool.length === 0) {
+      const fallback = pools(idx)
+        .filter(item => matchesKind(item, cls.kind))
+        .map(item => ({ item, score: scoreItem(item, query, cls) }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, finalLimit)
+        .map(x => x.item);
+      fallback.forEach(item => shownIds.add(String(item.id)));
+      return fallback;
     }
 
     picked.forEach(item => shownIds.add(String(item.id)));
@@ -1495,25 +2392,136 @@ if (document.readyState === "loading") {
   }
 
   async function recommendFromQuery(query, options = {}) {
+    query = ultraRewrite(query);
+    query = omegaImproveQuery(query);
+    const preset = godmodePresetText(query);
+    if (preset && norm(query).split(/\s+/).length <= 4) query = preset;
+    query = mergeWithContext(query);
     const cls = classify(query);
+    const force = parseConstraints(query).forceKind;
+    if (force) cls.kind = force;
     if (options.kind) cls.kind = options.kind;
     if (options.tags) cls.tags = [...new Set([...(cls.tags || []), ...options.tags])];
 
-    const wait = addMsg("Подбираю по базе 96к...", "bot");
-    const items = await bestItems(query, cls, options.limit || 5);
+    if (!options.silentUnderstanding) addUnderstanding(query);
+    const wait = addMsg("GODMODE ищет по базе 96к...", "bot");
+    const items = await bestItems(query, cls, options.limit || parseConstraints(query).limit || 5);
+    rememberContext(query, items);
+    try { window.GKM_AI_LAST_ITEMS = items || []; } catch {}
     if (wait) wait.remove();
 
     if (!items.length) {
-      addBotWithActions("Не нашёл точное. Попробуй другими словами или открой поиск.", [
+      addBotWithActions("Не нашёл точное. Сейчас объясню и предложу ослабить фильтр.", [
         { label: "Искать", run: () => setSearch(query) },
         { label: "Топ 250", run: () => clickByText(["Топ 250"]) },
         { label: "Популярное", run: () => clickByText(["Популярное"]) }
       ]);
+      diagnoseNoResults(query);
       return;
     }
 
     const intro = options.intro || "Вот что я бы выбрал:";
     items.forEach((item, i) => addRecommendationCard(item, i === 0 ? intro : "Ещё вариант:", query, cls.kind, i + 1));
+  }
+
+  function isVagueQuery(text) {
+    const q = compact(text);
+    const vague = ["что посмотреть", "посоветуй", "подбери", "дай что нибудь", "дай что-нибудь", "не знаю что смотреть", "скучно"];
+    return vague.includes(q) || (toks(q).length <= 1 && !/аниме|фильм|сериал|мульт|топ|новин/.test(q));
+  }
+
+  function askClarify() {
+    addBotWithActions("Запрос слишком общий. Выбери настроение — так я попаду точнее:", [
+      { label: ORACLE_PROFILES.wife_evening.label, run: () => recommendFromProfile("wife_evening") },
+      { label: ORACLE_PROFILES.isekai_op.label, run: () => recommendFromProfile("isekai_op") },
+      { label: ORACLE_PROFILES.brain.label, run: () => recommendFromProfile("brain") },
+      { label: ORACLE_PROFILES.no_stress.label, run: () => recommendFromProfile("no_stress") },
+      { label: ORACLE_PROFILES.survival.label, run: () => recommendFromProfile("survival") }
+    ]);
+  }
+
+  function recommendFromProfile(name) {
+    const p = ORACLE_PROFILES[name];
+    if (!p) return;
+    recommendFromQuery(p.query, { kind: p.kind, tags: p.tags || [], intro: "Режим «" + p.label + "»:" });
+  }
+
+  function itemMiniLine(item) {
+    const r = Number(getRating(item) || 0);
+    const v = Number(getVotes(item) || 0);
+    return `${titleOf(item)} (${getYear(item) || "—"}) · ${getType(item) || "—"} · ${r ? r.toFixed(1) : "—"} · ${v ? v + " голосов" : "без голосов"}`;
+  }
+
+  async function findByTitleLoose(name) {
+    const idx = await ensureSearchIndex();
+    const qTokens = toks(name);
+    if (!qTokens.length) return null;
+
+    let best = null;
+    let bestScore = -999;
+
+    pools(idx).forEach(item => {
+      const title = compact([titleOf(item), item.en, item.title, item.name].join(" "));
+      const full = textOfItem(item);
+      let s = 0;
+      qTokens.forEach(t => {
+        if (title.includes(t)) s += 24;
+        if (full.includes(t)) s += 6;
+      });
+      s += Number(getRating(item) || 0);
+      s += Math.min(Number(getVotes(item) || 0), 100000) / 100000 * 3;
+      if (s > bestScore) {
+        best = item;
+        bestScore = s;
+      }
+    });
+
+    return bestScore > 10 ? best : null;
+  }
+
+  async function compareTitles(text) {
+    const clean = text.replace(/сравни|что лучше|какой лучше|какая лучше|кто лучше/gi, "").trim();
+    let parts = clean.split(/\s+(?:и|или|vs|против)\s+/i).map(x => x.trim()).filter(Boolean);
+
+    if (parts.length < 2) {
+      addBotWithActions("Для сравнения напиши два названия через «и». Например: «сравни Наруто и Блич».", [
+        { label: "Топ аниме", run: () => recommendFromQuery("топ аниме рейтинг 8+ голосов 1000+", { kind: "anime" }) }
+      ]);
+      return;
+    }
+
+    parts = parts.slice(0, 2);
+    const a = await findByTitleLoose(parts[0]);
+    const b = await findByTitleLoose(parts[1]);
+
+    if (!a || !b) {
+      addBotWithActions("Не нашёл одно из названий точно. Могу кинуть их в поиск.", [
+        { label: "Искать первое", run: () => setSearch(parts[0]) },
+        { label: "Искать второе", run: () => setSearch(parts[1]) }
+      ]);
+      return;
+    }
+
+    const scoreA = quality(a) + Number(getRating(a) || 0) * 8 + Math.min(Number(getVotes(a) || 0), 300000) / 300000 * 20;
+    const scoreB = quality(b) + Number(getRating(b) || 0) * 8 + Math.min(Number(getVotes(b) || 0), 300000) / 300000 * 20;
+    const winner = scoreA >= scoreB ? a : b;
+
+    addBotWithActions("Сравнил по базе. Я бы выбрал: " + titleOf(winner) + ".", [
+      { label: "Открыть победителя", run: () => openItemCard(winner) },
+      { label: "Похожие", run: () => recommendFromQuery("похожее на " + titleOf(winner), { kind: kindFromItem(winner) }) }
+    ]);
+
+    addRecommendationCard(a, "Первый вариант:", text, kindFromItem(a), 1);
+    addRecommendationCard(b, "Второй вариант:", text, kindFromItem(b), 2);
+  }
+
+  function markLastAsDisliked() {
+    const ctx = getAiContext();
+    if (!ctx || !ctx.lastTitle) return false;
+    findByTitleLoose(ctx.lastTitle).then(item => {
+      if (item) markAiFeedback(item, false);
+    });
+    return true;
   }
 
   function greeting() {
@@ -1525,10 +2533,156 @@ if (document.readyState === "loading") {
   }
 
   function helperAnswer(text) {
+    const originalText = text;
+    text = mergeWithContext(text);
     const cls = classify(text);
-    addMsg(text, "user");
+    addMsg(originalText, "user");
+
+    if (/что\s+ты\s+понял|как\s+понял|разбор\s+запроса/i.test(text)) {
+      addUnderstanding(text);
+      return;
+    }
+
+    if (/apex|апекс|квиз|настрой\\s+вкус|опрос/i.test(text)) {
+      startApexQuiz();
+      return;
+    }
+
+    if (/мой\\s+профиль|профиль\\s+вкуса|apex\\s+profile/i.test(text)) {
+      showApexProfile();
+      return;
+    }
+
+    if (/сбрось\\s+профиль|очисти\\s+профиль/i.test(text)) {
+      resetApexProfile();
+      return;
+    }
+
+    if (/анти\\s*мусор|без\\s+мусора|только\\s+годное/i.test(text)) {
+      recommendFromQuery(text + " без шлака рейтинг 8+ голосов 1000+", { intro: "APEX анти-мусор, режимы компании/соло/с женой:" });
+      return;
+    }
+
+    if (/omega|омега|финал|ультра\s+умн|максимум/i.test(text)) {
+      addBotWithActions("OMEGA включён. Это самый жирный бесплатный режим.", [
+        { label: "По времени суток", run: () => recommendFromQuery(omegaTimePreset(), { intro: "OMEGA по времени суток:" }) },
+        { label: "Марафон", run: () => recommendFromQuery("сериал или аниме марафон рейтинг 8+ много серий", { intro: "OMEGA марафон:" }) },
+        { label: "Быстро на вечер", run: () => recommendFromQuery("короткий фильм на вечер рейтинг 8+ без жести", { kind: "movies", intro: "OMEGA быстро на вечер:" }) },
+        { label: "Экспорт", run: () => exportPlaylistText() }
+      ]);
+      return;
+    }
+
+    if (/экспорт|скопируй\s+подборку|дай\s+списком|списком/i.test(text)) {
+      exportPlaylistText();
+      return;
+    }
+
+    if (/почему\s+не\s+нашел|почему\s+мало|диагност/i.test(text)) {
+      diagnoseNoResults(getAiContext().lastQuery || text);
+      return;
+    }
+
+    if (/neuro|нейро|режим\s+нейро|ультра\s+режим/i.test(text)) {
+      addBotWithActions("NEURO включён. Я могу: план подбора, минус-слова, плейлист, вкус, сравнение, контекст.", [
+        { label: "План подбора", run: () => neuroPlan(getAiContext().lastQuery || "аниме попаданцы рейтинг 8+") },
+        { label: "Аниме попаданцы", run: () => recommendFromQuery("5 аниме про попаданцев рейтинг 8+ без гарема", { kind: "anime", tags: ["isekai"] }) },
+        { label: "Показать вкус", run: () => showTasteStats() },
+        { label: "Плейлист", run: () => showPlaylist() }
+      ]);
+      return;
+    }
+
+    if (/план\s+подбора|как\s+подбираешь|объясни\s+подбор/i.test(text)) {
+      neuroPlan(text);
+      return;
+    }
+
+    if (/заблокируй|не\s+показывай|убери\s+из\s+советов|минус\s+\w+/i.test(text)) {
+      addBlacklistWords(text);
+      return;
+    }
+
+    if (/очисти\s+минус|сбрось\s+минус|очисти\s+блок/i.test(text)) {
+      clearBlacklistWords();
+      return;
+    }
+
+    if (/сохрани\s+плейлист|сохрани\s+подборку/i.test(text)) {
+      savePlaylist(window.GKM_AI_LAST_ITEMS || [], "last");
+      return;
+    }
+
+    if (/покажи\s+плейлист|мой\s+плейлист|открой\s+плейлист/i.test(text)) {
+      showPlaylist();
+      return;
+    }
+
+    if (/godmode|режим\s+бог|макс\s+умн|мах\s+умн/i.test(text)) {
+      addBotWithActions("GODMODE включён. Выбери готовый умный режим:", [
+        { label: "Аниме попаданцы", run: () => recommendFromQuery(GODMODE_PRESETS["аниме попаданцы"], { kind: "anime", tags: ["isekai", "opmc"], intro: "GODMODE: попаданцы/исекай:" }) },
+        { label: "Сильный ГГ", run: () => recommendFromQuery(GODMODE_PRESETS["сильный гг"], { kind: "anime", tags: ["opmc"], intro: "GODMODE: сильный ГГ:" }) },
+        { label: "С женой", run: () => recommendFromQuery(GODMODE_PRESETS["с женой"], { kind: "movies", intro: "GODMODE: с женой вечером:" }) },
+        { label: "Мрачное", run: () => recommendFromQuery(GODMODE_PRESETS["мрачное"], { kind: "any", tags: ["dark", "smart"], intro: "GODMODE: мрачное/умное:" }) },
+        { label: "Космос", run: () => recommendFromQuery(GODMODE_PRESETS["космос"], { kind: "movies", tags: ["space"], intro: "GODMODE: космос:" }) }
+      ]);
+      return;
+    }
+
+    if (/сброс.*(обуч|лайк|памят)|забудь.*(вкус|лайк|обуч)/i.test(text)) {
+      localStorage.removeItem("gkm_ai_likes");
+      localStorage.removeItem("gkm_ai_dislikes");
+      addMsg("Сбросил обучение помощника. Начинаю советы с чистого листа.", "bot");
+      return;
+    }
+
+    if (/очисти\s+чат|почисти\s+чат|clear\s+chat/i.test(text)) {
+      clearAiChat();
+      return;
+    }
+
+    if (/мой\s+вкус|что\s+я\s+лайкал|мои\s+лайки|статистика\s+вкуса/i.test(text)) {
+      showTasteStats();
+      return;
+    }
+
+    if (/рандом|случайн|удиви\s+меня|что-нибудь\s+необыч/i.test(text)) {
+      addBotWithActions("Включаю режим случайного, но не мусорного совета.", [
+        { label: "Случайное аниме", run: () => recommendFromQuery("случайное аниме рейтинг 8+ голосов 300+", { kind: "anime", tags: ["top"], intro: "Случайное, но нормальное аниме:" }) },
+        { label: "Случайный фильм", run: () => recommendFromQuery("случайный фильм рейтинг 8+ голосов 1000+", { kind: "movies", tags: ["top"], intro: "Случайный, но нормальный фильм:" }) },
+        { label: "Удиви меня", run: () => recommendFromQuery("необычное хорошее рейтинг 8+ без шлака", { kind: "any", tags: ["top"], intro: "Лови необычное:" }) }
+      ]);
+      recommendFromQuery("случайное хорошее рейтинг 8+ голосов 300+", { kind: "any", tags: ["top"], intro: "Вот случайный нормальный вариант:" });
+      return;
+    }
+
+    if (/сравни|что\s+лучше|какой\s+лучше|какая\s+лучше|vs|против/i.test(text)) {
+      compareTitles(text);
+      return;
+    }
+
+    if (/^(не то|не это|другое|другие|не подходит|не зашло)$/i.test(norm(text))) {
+      markLastAsDisliked();
+      addMsg("Окей, прошлое опустил ниже. Подбираю другие варианты по тому же запросу.", "bot");
+      recommendFromQuery(text, { fresh: true });
+      return;
+    }
+
+    if (/что\s+ты\s+умеешь|помощь|команды|как\s+работаешь/i.test(text)) {
+      addBotWithActions("Я умею подбирать по типу, жанру, настроению и ограничениям. Понимаю продолжения: «ещё», «не это», «без романтики», «похожие». Примеры: «5 аниме про попаданцев без романтики рейтинг 8+», «фильм на вечер после 2015», «мрачный детектив без ужасов». Ещё понимаю «без шлака», «без просмотренного», «голосов 1000+», «рандом», «мой вкус», «очисти чат».", [
+        { label: "5 исекай 8+", run: () => recommendFromQuery("5 аниме про попаданцев рейтинг 8+ голосов 300+", { kind: "anime", tags: ["isekai"] }) },
+        { label: "Фильм после 2015", run: () => recommendFromQuery("фильм на вечер после 2015 рейтинг 8+ без жести", { kind: "movies" }) },
+        { label: "Мрачный детектив", run: () => recommendFromQuery("мрачный умный детектив без романтики рейтинг 7.5+", { kind: "any", tags: ["smart", "dark"] }) }
+      ]);
+      return;
+    }
 
     if (cls.type === "greeting") return greeting();
+
+    if (isVagueQuery(text)) {
+      askClarify();
+      return;
+    }
 
     if (cls.type === "smalltalk") {
       addBotWithActions("Принял. Дай жанр/настроение — подберу по базе.", [
@@ -1578,12 +2732,12 @@ if (document.readyState === "loading") {
     const note = document.querySelector(".ai-note");
 
     if (title) title.textContent = "Голубь помощник";
-    if (subtitle) subtitle.textContent = "Бесплатно: BRAIN подбор + мини-постеры";
+    if (subtitle) subtitle.textContent = "Бесплатно: ABSOLUTE подбор + мини-постеры";
     if (note) note.textContent = "";
 
     const first = document.querySelector("#gkmAiMessages .ai-bot");
     if (first) {
-      first.textContent = "Я стал умнее: использую теги базы, жанры, настроение, рейтинг, голоса, избранное и историю. Без платного API.";
+      first.textContent = "Я SUPREME: умею автопилот вкуса, режимы для компании, точный список, исключения, профиль, плейлист и анти-мусор, режимы компании/соло/с женой без API.";
     }
 
     if (top) top.addEventListener("click", openAi);
@@ -1608,5 +2762,5 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v11-brain-tags-helper-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v26-absolute-free-helper-2026-06-13";
 })();
