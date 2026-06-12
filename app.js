@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v5-chat-buttons-ui-ready-2026-06-12";
+const GKM_APP_CLEAN_VERSION = "v6-free-site-helper-no-api-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -975,12 +975,17 @@ if (document.readyState === "loading") {
 }
 
 
-/* === GKM AI CHAT UI V5 === */
-(function () {
-  const AI_ENDPOINT = ""; // сюда потом вставим Worker/Vercel адрес, например: https://gkm-ai.ТВОЙ.workers.dev/chat
 
+
+
+/* === GKM FREE SITE HELPER V6 === */
+(function () {
   function $(id) {
     return document.getElementById(id);
+  }
+
+  function normalizeText(text) {
+    return String(text || "").toLowerCase().replaceAll("ё", "е").trim();
   }
 
   function addMsg(text, who) {
@@ -992,6 +997,30 @@ if (document.readyState === "loading") {
     box.appendChild(div);
     box.scrollTop = box.scrollHeight;
     return div;
+  }
+
+  function addBotWithActions(text, actions) {
+    const box = $("gkmAiMessages");
+    if (!box) return;
+    const div = document.createElement("div");
+    div.className = "ai-msg ai-bot";
+    div.textContent = text;
+
+    if (actions && actions.length) {
+      const row = document.createElement("div");
+      row.className = "ai-action-row";
+      actions.forEach(a => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = a.label;
+        b.addEventListener("click", a.run);
+        row.appendChild(b);
+      });
+      div.appendChild(row);
+    }
+
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
   }
 
   function openAi() {
@@ -1009,35 +1038,133 @@ if (document.readyState === "loading") {
     else dlg.removeAttribute("open");
   }
 
-  async function askAi(text) {
-    addMsg(text, "user");
+  function clickByText(words) {
+    const list = Array.from(document.querySelectorAll("button, a"));
+    const found = list.find(el => {
+      const t = normalizeText(el.textContent);
+      return words.some(w => t.includes(normalizeText(w)));
+    });
+    if (found) {
+      found.click();
+      return true;
+    }
+    return false;
+  }
 
-    if (!AI_ENDPOINT) {
-      addMsg(
-        "Кнопка готова, окно готово. Осталось подключить серверную часть: Cloudflare Worker или Vercel Function с OpenAI API ключом. Ключ в app.js вставлять нельзя — его украдут.",
-        "bot"
-      );
+  function setSearch(query) {
+    const candidates = [
+      $("searchInput"),
+      document.querySelector('input[type="search"]'),
+      document.querySelector('input[placeholder*="Поиск"]'),
+      document.querySelector('input[placeholder*="поиск"]')
+    ].filter(Boolean);
+
+    const input = candidates[0];
+    if (!input) return false;
+
+    input.value = query;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+
+    const form = input.closest("form");
+    if (form) form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+
+    return true;
+  }
+
+  function showRandomAdvice(kind) {
+    const cards = Array.from(document.querySelectorAll(".card, [data-id], article")).filter(el => {
+      const text = normalizeText(el.textContent);
+      if (!text) return false;
+      if (kind === "anime") return text.includes("аниме");
+      if (kind === "movie") return text.includes("фильм") || !text.includes("сериал");
+      if (kind === "series") return text.includes("сериал");
+      return true;
+    });
+
+    if (!cards.length) {
+      addBotWithActions("Сначала открой раздел с карточками, потом нажми случайный совет.", [
+        { label: "Популярное", run: () => clickByText(["Популярное"]) },
+        { label: "Топ 250", run: () => clickByText(["Топ 250"]) },
+        { label: "Аниме", run: () => clickByText(["Аниме"]) }
+      ]);
       return;
     }
 
-    const pending = addMsg("Думаю...", "bot");
+    const card = cards[Math.floor(Math.random() * cards.length)];
+    const title = (card.querySelector("h3,h2,.title,.card-title")?.textContent || card.textContent || "").trim().split("\n")[0].slice(0, 90);
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
+    card.classList.add("gkm-ai-picked");
+    setTimeout(() => card.classList.remove("gkm-ai-picked"), 1800);
 
-    try {
-      const res = await fetch(AI_ENDPOINT, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          message: text,
-          page: location.href,
-          site: "Голубь Каталог Мира"
-        })
-      });
+    addBotWithActions("Я бы глянул вот это: " + (title || "карточку, которую подсветил на экране") + ".", [
+      { label: "Открыть карточку", run: () => card.click() },
+      { label: "Ещё вариант", run: () => showRandomAdvice(kind) }
+    ]);
+  }
 
-      const data = await res.json();
-      pending.textContent = data.answer || data.message || "Пустой ответ от сервера.";
-    } catch (err) {
-      pending.textContent = "Ошибка подключения к AI серверу. Проверь Worker/Vercel адрес.";
+  function helperAnswer(text) {
+    const q = normalizeText(text);
+    addMsg(text, "user");
+
+    if (!q) return;
+
+    if (q.includes("аниме") || q.includes("наруто") || q.includes("сёнэн") || q.includes("сенэн")) {
+      addBotWithActions("Открываю аниме. Для Наруто и похожего лучше искать: Наруто, сёнэн, боевик, приключения.", [
+        { label: "Открыть Аниме", run: () => clickByText(["Аниме"]) },
+        { label: "Искать Наруто", run: () => setSearch("Наруто") },
+        { label: "Случайное аниме", run: () => showRandomAdvice("anime") }
+      ]);
+      return;
     }
+
+    if (q.includes("фильм") || q.includes("вечер") || q.includes("посмотреть")) {
+      addBotWithActions("Для вечера лучше начать с популярного или топа. Могу открыть раздел или подсветить случайную карточку.", [
+        { label: "Популярное", run: () => clickByText(["Популярное"]) },
+        { label: "Топ 250", run: () => clickByText(["Топ 250"]) },
+        { label: "Случайный фильм", run: () => showRandomAdvice("movie") }
+      ]);
+      return;
+    }
+
+    if (q.includes("сериал")) {
+      addBotWithActions("Открываю сериалы. Потом можно отсортировать по рейтингу или голосам.", [
+        { label: "Открыть Сериалы", run: () => clickByText(["Сериалы"]) },
+        { label: "Популярное", run: () => clickByText(["Популярное"]) },
+        { label: "Случайный сериал", run: () => showRandomAdvice("series") }
+      ]);
+      return;
+    }
+
+    if (q.includes("мульт")) {
+      addBotWithActions("Открываю мультфильмы. Там лучше смотреть популярное и семейное.", [
+        { label: "Открыть Мультфильмы", run: () => clickByText(["Мультфильмы"]) },
+        { label: "Популярное", run: () => clickByText(["Популярное"]) }
+      ]);
+      return;
+    }
+
+    if (q.includes("новин")) {
+      addBotWithActions("Открываю новинки. Там будут свежие фильмы, сериалы и аниме из базы.", [
+        { label: "Новинки", run: () => clickByText(["Новинки"]) }
+      ]);
+      return;
+    }
+
+    if (q.includes("топ") || q.includes("лучшее") || q.includes("рейтинг")) {
+      addBotWithActions("Открываю топ. Это лучший вариант, когда не знаешь, что смотреть.", [
+        { label: "Топ 250", run: () => clickByText(["Топ 250"]) },
+        { label: "Популярное", run: () => clickByText(["Популярное"]) }
+      ]);
+      return;
+    }
+
+    const cleaned = text.trim().slice(0, 80);
+    addBotWithActions("Я не лезу в платный API. Могу поискать это по каталогу или открыть популярное.", [
+      { label: "Искать: " + cleaned, run: () => setSearch(cleaned) },
+      { label: "Популярное", run: () => clickByText(["Популярное"]) },
+      { label: "Случайное", run: () => showRandomAdvice("any") }
+    ]);
   }
 
   function initAiChat() {
@@ -1047,12 +1174,24 @@ if (document.readyState === "loading") {
     const form = $("gkmAiForm");
     const input = $("gkmAiInput");
 
+    const title = document.querySelector(".ai-title");
+    const subtitle = document.querySelector(".ai-subtitle");
+    const note = document.querySelector(".ai-note");
+    if (title) title.textContent = "Голубь помощник";
+    if (subtitle) subtitle.textContent = "Бесплатно: поиск и советы по базе сайта";
+    if (note) note.textContent = "";
+
+    const first = document.querySelector("#gkmAiMessages .ai-bot");
+    if (first) {
+      first.textContent = "Я работаю бесплатно без OpenAI API: помогу открыть раздел, найти по каталогу или выбрать случайное из карточек.";
+    }
+
     if (top) top.addEventListener("click", openAi);
     if (float) float.addEventListener("click", openAi);
     if (close) close.addEventListener("click", closeAi);
 
     document.querySelectorAll("[data-ai-prompt]").forEach(btn => {
-      btn.addEventListener("click", () => askAi(btn.getAttribute("data-ai-prompt") || ""));
+      btn.addEventListener("click", () => helperAnswer(btn.getAttribute("data-ai-prompt") || btn.textContent || ""));
     });
 
     if (form) {
@@ -1061,16 +1200,13 @@ if (document.readyState === "loading") {
         const text = (input && input.value || "").trim();
         if (!text) return;
         input.value = "";
-        askAi(text);
+        helperAnswer(text);
       });
     }
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initAiChat);
-  } else {
-    initAiChat();
-  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
+  else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v5-chat-buttons-ui-ready-2026-06-12";
+  window.GKM_AI_CHAT_VERSION = "v6-free-site-helper-no-api-2026-06-13";
 })();
