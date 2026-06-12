@@ -961,3 +961,59 @@ header .ai-top-btn {
   color:#c9d3ff;
   line-height:1.35;
 }
+
+
+/* === GKM V8 AI RECOMMENDATION FIX === */
+.ai-rec-msg {
+  max-width: 96% !important;
+}
+
+.ai-rec-card {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid rgba(0,229,255,.28);
+  border-radius: 14px;
+  background: rgba(255,255,255,.045);
+}
+
+.ai-rec-poster {
+  width: 72px;
+  height: 104px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex: 0 0 72px;
+  background: #0b1020;
+  border: 1px solid rgba(123,44,255,.35);
+}
+
+.ai-rec-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.ai-rec-title {
+  font-weight: 1000;
+  color: #fff;
+  margin-bottom: 6px;
+  line-height: 1.15;
+  font-size: 14px;
+}
+
+.ai-rec-meta {
+  font-size: 12px;
+  color: #c9d3ff;
+  line-height: 1.35;
+  margin-top: 3px;
+}
+
+.ai-messages {
+  scrollbar-width: thin;
+}
+
+.gkm-ai-picked {
+  outline: 3px solid rgba(0,229,255,.85) !important;
+  box-shadow: 0 0 24px rgba(0,229,255,.55) !important;
+}
