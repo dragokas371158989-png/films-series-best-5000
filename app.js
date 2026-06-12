@@ -10100,3 +10100,243 @@ return cast;
   console.log("GKM EMERGENCY LOCAL CAST PATCH V8 установлен");
 })();
 
+/* ===== GKM PERFORMANCE PATCH V1 ===== */
+(function () {
+  if (window.__gkmPerformancePatchV1) return;
+  window.__gkmPerformancePatchV1 = true;
+
+  function injectPerformanceCss() {
+    if (document.getElementById("gkmPerformanceStyleV1")) return;
+
+    var style = document.createElement("style");
+    style.id = "gkmPerformanceStyleV1";
+    style.textContent = `
+      .card {
+        content-visibility: auto !important;
+        contain-intrinsic-size: 340px 230px !important;
+      }
+
+      .card img,
+      .poster,
+      img {
+        image-rendering: auto;
+      }
+
+      .gkm-load-more-wrap {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 22px 0 36px;
+      }
+
+      .gkm-load-more-btn {
+        border: 1px solid rgba(34, 211, 238, .55);
+        background: linear-gradient(180deg, #7b2cff, #2563eb);
+        color: white;
+        border-radius: 16px;
+        padding: 13px 24px;
+        font-weight: 900;
+        cursor: pointer;
+        box-shadow: 0 0 20px rgba(34, 211, 238, .22);
+      }
+
+      .gkm-load-more-btn:hover {
+        filter: brightness(1.12);
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function optimizeImages(root) {
+    var scope = root || document;
+
+    if (!scope.querySelectorAll) return;
+
+    scope.querySelectorAll("img").forEach(function (img) {
+      if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
+      if (!img.hasAttribute("decoding")) img.setAttribute("decoding", "async");
+
+      try {
+        img.fetchPriority = "low";
+      } catch (e) {}
+    });
+  }
+
+  function findMainGrid() {
+    return (
+      document.getElementById("grid") ||
+      document.getElementById("catalogGrid") ||
+      document.querySelector(".grid") ||
+      document.querySelector(".cards-grid") ||
+      document.querySelector(".catalog-grid")
+    );
+  }
+
+  var fullCardList = [];
+  var renderedCount = 0;
+  var PAGE_STEP = 80;
+  var isApplying = false;
+
+  function getCards(grid) {
+    if (!grid) return [];
+    return Array.from(grid.children).filter(function (el) {
+      return el && el.classList && el.classList.contains("card");
+    });
+  }
+
+  function ensureLoadMoreButton(grid) {
+    var old = document.getElementById("gkmLoadMoreBtn");
+
+    if (!fullCardList.length || renderedCount >= fullCardList.length) {
+      if (old && old.parentNode) old.parentNode.remove();
+      return;
+    }
+
+    if (old) {
+      old.textContent = "Показать ещё (" + renderedCount + " / " + fullCardList.length + ")";
+      return;
+    }
+
+    var wrap = document.createElement("div");
+    wrap.className = "gkm-load-more-wrap";
+
+    var btn = document.createElement("button");
+    btn.id = "gkmLoadMoreBtn";
+    btn.className = "gkm-load-more-btn";
+    btn.type = "button";
+    btn.textContent = "Показать ещё (" + renderedCount + " / " + fullCardList.length + ")";
+
+    btn.addEventListener("click", function () {
+      renderMoreCards();
+    });
+
+    wrap.appendChild(btn);
+
+    if (grid && grid.parentNode) {
+      grid.parentNode.insertBefore(wrap, grid.nextSibling);
+    }
+  }
+
+  function renderMoreCards() {
+    var grid = findMainGrid();
+    if (!grid || !fullCardList.length) return;
+
+    isApplying = true;
+
+    var frag = document.createDocumentFragment();
+    var next = Math.min(renderedCount + PAGE_STEP, fullCardList.length);
+
+    for (var i = renderedCount; i < next; i++) {
+      frag.appendChild(fullCardList[i]);
+    }
+
+    grid.appendChild(frag);
+    renderedCount = next;
+
+    optimizeImages(grid);
+    ensureLoadMoreButton(grid);
+
+    setTimeout(function () {
+      isApplying = false;
+    }, 80);
+  }
+
+  function applyCardLimit() {
+    if (isApplying) return;
+
+    var grid = findMainGrid();
+    if (!grid) return;
+
+    var cards = getCards(grid);
+
+    if (cards.length <= 140) {
+      optimizeImages(grid);
+      return;
+    }
+
+    // Если уже ограничивали этот набор — не трогаем.
+    if (fullCardList.length && cards.length === renderedCount) return;
+
+    fullCardList = cards.slice();
+    renderedCount = 0;
+
+    isApplying = true;
+    grid.innerHTML = "";
+
+    var first = Math.min(PAGE_STEP, fullCardList.length);
+    var frag = document.createDocumentFragment();
+
+    for (var i = 0; i < first; i++) {
+      frag.appendChild(fullCardList[i]);
+    }
+
+    grid.appendChild(frag);
+    renderedCount = first;
+
+    optimizeImages(grid);
+    ensureLoadMoreButton(grid);
+
+    setTimeout(function () {
+      isApplying = false;
+    }, 120);
+  }
+
+  function debounce(fn, wait) {
+    var t = null;
+
+    return function () {
+      clearTimeout(t);
+      t = setTimeout(fn, wait);
+    };
+  }
+
+  var debouncedApply = debounce(applyCardLimit, 350);
+
+  function start() {
+    injectPerformanceCss();
+    optimizeImages(document);
+
+    setTimeout(applyCardLimit, 1200);
+    setTimeout(applyCardLimit, 3000);
+
+    var observer = new MutationObserver(function (mutations) {
+      var need = false;
+
+      mutations.forEach(function (m) {
+        if (m.type === "childList" && m.addedNodes && m.addedNodes.length) {
+          need = true;
+          m.addedNodes.forEach(function (node) {
+            optimizeImages(node);
+          });
+        }
+      });
+
+      if (need) debouncedApply();
+    });
+
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true
+    });
+
+    document.addEventListener("click", function () {
+      setTimeout(applyCardLimit, 800);
+    }, true);
+
+    document.addEventListener("change", function () {
+      fullCardList = [];
+      renderedCount = 0;
+      setTimeout(applyCardLimit, 900);
+    }, true);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
+
+  window.GKM_APP_CLEAN_VERSION = "performance-v1-limit-cards-lazy-images-2026-06-12";
+  console.log("GKM PERFORMANCE PATCH V1 установлен");
+})();
+
