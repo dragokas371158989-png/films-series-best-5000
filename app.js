@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v6-free-site-helper-no-api-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v7-smart-visual-helper-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -974,11 +974,7 @@ if (document.readyState === "loading") {
   startApp();
 }
 
-
-
-
-
-/* === GKM FREE SITE HELPER V6 === */
+/* === GKM SMART VISUAL HELPER V7 === */
 (function () {
   function $(id) {
     return document.getElementById(id);
@@ -988,23 +984,34 @@ if (document.readyState === "loading") {
     return String(text || "").toLowerCase().replaceAll("ё", "е").trim();
   }
 
+  function aiBox() {
+    return $("gkmAiMessages");
+  }
+
+  function scrollAi() {
+    const box = aiBox();
+    if (box) box.scrollTop = box.scrollHeight;
+  }
+
   function addMsg(text, who) {
-    const box = $("gkmAiMessages");
+    const box = aiBox();
     if (!box) return null;
     const div = document.createElement("div");
     div.className = "ai-msg " + (who === "user" ? "ai-user" : "ai-bot");
     div.textContent = text;
     box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
+    scrollAi();
     return div;
   }
 
   function addBotWithActions(text, actions) {
-    const box = $("gkmAiMessages");
+    const box = aiBox();
     if (!box) return;
     const div = document.createElement("div");
     div.className = "ai-msg ai-bot";
-    div.textContent = text;
+    const p = document.createElement('div');
+    p.textContent = text;
+    div.appendChild(p);
 
     if (actions && actions.length) {
       const row = document.createElement("div");
@@ -1020,7 +1027,69 @@ if (document.readyState === "loading") {
     }
 
     box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
+    scrollAi();
+  }
+
+  function addRecommendationCard(item, intro, extraActions) {
+    const box = aiBox();
+    if (!box || !item) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'ai-msg ai-bot';
+
+    const introEl = document.createElement('div');
+    introEl.textContent = intro || 'Вот хороший вариант:';
+    wrap.appendChild(introEl);
+
+    const card = document.createElement('div');
+    card.className = 'ai-rec-card';
+
+    const poster = document.createElement('img');
+    poster.className = 'ai-rec-poster';
+    poster.loading = 'lazy';
+    poster.alt = titleOf(item);
+    poster.src = item.poster || 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="180"><rect width="100%" height="100%" fill="#0a1020"/><text x="50%" y="50%" fill="#fff" font-size="14" text-anchor="middle">Нет постера</text></svg>');
+    card.appendChild(poster);
+
+    const info = document.createElement('div');
+    info.className = 'ai-rec-info';
+    const genres = (getGenres(item) || []).slice(0, 3).join(' · ');
+    const rating = Number(getRating(item) || 0);
+    const votes = Number(getVotes(item) || 0);
+    info.innerHTML = `
+      <div class="ai-rec-title">${escapeHtml(titleOf(item))}</div>
+      <div class="ai-rec-meta">${escapeHtml(getYear(item) || '—')} · ${escapeHtml(getType(item) || '—')}</div>
+      <div class="ai-rec-meta">${escapeHtml(genres || 'Без жанров')}</div>
+      <div class="ai-rec-meta">Рейтинг: ${rating ? rating.toFixed(1) : '—'} · Голосов: ${votes ? String(votes) : '—'}</div>
+    `;
+    card.appendChild(info);
+    wrap.appendChild(card);
+
+    const actions = document.createElement('div');
+    actions.className = 'ai-action-row';
+
+    const openBtn = document.createElement('button');
+    openBtn.type = 'button';
+    openBtn.textContent = 'Открыть карточку';
+    openBtn.addEventListener('click', () => openItemCard(item));
+    actions.appendChild(openBtn);
+
+    const similarBtn = document.createElement('button');
+    similarBtn.type = 'button';
+    similarBtn.textContent = 'Похожие';
+    similarBtn.addEventListener('click', () => recommendFromQuery('похожее на ' + titleOf(item), {kind: detectKindFromItem(item)}));
+    actions.appendChild(similarBtn);
+
+    (extraActions || []).forEach(a => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = a.label;
+      b.addEventListener('click', a.run);
+      actions.appendChild(b);
+    });
+
+    wrap.appendChild(actions);
+    box.appendChild(wrap);
+    scrollAi();
   }
 
   function openAi() {
@@ -1065,148 +1134,285 @@ if (document.readyState === "loading") {
     input.value = query;
     input.dispatchEvent(new Event("input", { bubbles: true }));
     input.dispatchEvent(new Event("change", { bubbles: true }));
-
     const form = input.closest("form");
     if (form) form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
-
     return true;
   }
 
-  function showRandomAdvice(kind) {
-    const cards = Array.from(document.querySelectorAll(".card, [data-id], article")).filter(el => {
-      const text = normalizeText(el.textContent);
-      if (!text) return false;
-      if (kind === "anime") return text.includes("аниме");
-      if (kind === "movie") return text.includes("фильм") || !text.includes("сериал");
-      if (kind === "series") return text.includes("сериал");
-      return true;
+  function visibleDomCards() {
+    return Array.from(document.querySelectorAll('.card[data-id]')).map(el => {
+      const id = String(el.getAttribute('data-id') || '');
+      return { el, id };
+    }).filter(x => x.id);
+  }
+
+  function allKnownItems() {
+    const seen = new Set();
+    const out = [];
+    const addMany = (arr) => {
+      (arr || []).forEach(item => {
+        if (!item || item.id == null) return;
+        const key = String(item.id);
+        if (seen.has(key)) return;
+        seen.add(key);
+        out.push(item);
+      });
+    };
+
+    addMany(currentItems || []);
+    addMany(lastSearchResults || []);
+
+    if (homeData && homeData.sections) {
+      Object.values(homeData.sections).forEach(addMany);
+    }
+
+    if (!out.length) {
+      const dom = visibleDomCards();
+      dom.forEach(({el, id}) => {
+        out.push({
+          id,
+          ru: (el.querySelector('.card-title')?.textContent || '').trim(),
+          title: (el.querySelector('.card-title')?.textContent || '').trim(),
+          year: ((el.querySelector('.meta')?.textContent || '').split('·')[0] || '').trim(),
+          type: ((el.querySelector('.meta')?.textContent || '').split('·')[1] || '').trim(),
+          genres: (el.querySelectorAll('.meta')[1]?.textContent || '').split('·').map(s => s.trim()).filter(Boolean),
+          rating: (((el.querySelector('.rating')?.textContent || '').match(/(\d+\.\d+)/) || [])[1]) || 0,
+          poster: el.querySelector('img')?.src || ''
+        });
+      });
+    }
+
+    return out;
+  }
+
+  function detectKindFromItem(item) {
+    const t = normalizeText(getType(item));
+    if (t.includes('аниме')) return 'anime';
+    if (t.includes('сериал')) return 'series';
+    if (t.includes('мульт')) return 'cartoons';
+    return 'movies';
+  }
+
+  function matchesKind(item, kind) {
+    if (!kind || kind === 'any') return true;
+    const t = normalizeText(getType(item));
+    if (kind === 'anime') return t.includes('аниме');
+    if (kind === 'series') return t.includes('сериал');
+    if (kind === 'cartoons') return t.includes('мульт');
+    if (kind === 'movies' || kind === 'movie') return t.includes('фильм') || (!t.includes('сериал') && !t.includes('аниме') && !t.includes('мульт'));
+    return true;
+  }
+
+  function queryHints(q) {
+    const hints = [];
+    if (q.includes('интерстел')) hints.push('фантастика','космос','драма','приключения');
+    if (q.includes('сильн')) hints.push('боевик','экшен','сёнэн','сенэн','приключения','фэнтези');
+    if (q.includes('вечер')) hints.push('драма','приключения','комедия');
+    if (q.includes('умн')) hints.push('психология','детектив','драма','фантастика');
+    if (q.includes('мрач')) hints.push('психология','ужасы','триллер','саспенс');
+    if (q.includes('смешн') || q.includes('весел')) hints.push('комедия');
+    if (q.includes('романт')) hints.push('романтика','драма');
+    if (q.includes('боев')) hints.push('боевик','экшен','боевые искусства');
+    return hints;
+  }
+
+  function smartScore(item, q, kind) {
+    let score = 0;
+    const full = normalizeText([
+      titleOf(item),
+      getType(item),
+      getYear(item),
+      ...(getGenres(item) || [])
+    ].join(' '));
+
+    const title = normalizeText(titleOf(item));
+    const genres = (getGenres(item) || []).map(normalizeText);
+    const rating = Number(getRating(item) || 0);
+    const votes = Number(getVotes(item) || 0);
+    const year = Number(getYear(item) || 0);
+
+    if (matchesKind(item, kind)) score += 30;
+    score += rating * 7;
+    score += Math.min(votes, 500000) / 500000 * 12;
+    if (year >= 2015) score += 3;
+    if (year >= 2020) score += 2;
+
+    q.split(/\s+/).filter(Boolean).forEach(tok => {
+      if (tok.length < 3) return;
+      if (title.includes(tok)) score += 20;
+      if (full.includes(tok)) score += 8;
     });
 
-    if (!cards.length) {
-      addBotWithActions("Сначала открой раздел с карточками, потом нажми случайный совет.", [
-        { label: "Популярное", run: () => clickByText(["Популярное"]) },
-        { label: "Топ 250", run: () => clickByText(["Топ 250"]) },
-        { label: "Аниме", run: () => clickByText(["Аниме"]) }
+    queryHints(q).forEach(h => {
+      const nh = normalizeText(h);
+      if (genres.some(g => g.includes(nh)) || full.includes(nh)) score += 9;
+    });
+
+    if ((q.includes('топ') || q.includes('лучш')) && rating >= 8.3) score += 8;
+    if ((q.includes('популяр') || q.includes('вечер')) && votes >= 50000) score += 8;
+    return score;
+  }
+
+  function bestItems(query, kind, limit = 3) {
+    const q = normalizeText(query);
+    const pool = allKnownItems().filter(item => matchesKind(item, kind));
+    return pool
+      .map(item => ({ item, score: smartScore(item, q, kind) }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit)
+      .map(x => x.item);
+  }
+
+  function openItemCard(item) {
+    if (!item) return;
+    const domCard = document.querySelector(`.card[data-id="${CSS.escape(String(item.id))}"]`);
+    if (domCard) {
+      domCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      domCard.classList.add('gkm-ai-picked');
+      setTimeout(() => domCard.classList.remove('gkm-ai-picked'), 1800);
+      domCard.click();
+      return;
+    }
+
+    if (typeof openDetails === 'function') {
+      openDetails(item);
+      return;
+    }
+
+    if (typeof showDetails === 'function') {
+      showDetails(item);
+    }
+  }
+
+  function recommendFromQuery(query, opts = {}) {
+    const kind = opts.kind || 'any';
+    const items = bestItems(query, kind, opts.limit || 3);
+    if (!items.length) {
+      addBotWithActions('Пока не нашёл хороший вариант в текущей базе. Могу открыть раздел или поиск.', [
+        { label: 'Популярное', run: () => clickByText(['Популярное']) },
+        { label: 'Топ 250', run: () => clickByText(['Топ 250']) },
+        { label: 'Поиск', run: () => setSearch(query) },
       ]);
       return;
     }
 
-    const card = cards[Math.floor(Math.random() * cards.length)];
-    const title = (card.querySelector("h3,h2,.title,.card-title")?.textContent || card.textContent || "").trim().split("\n")[0].slice(0, 90);
-    card.scrollIntoView({ behavior: "smooth", block: "center" });
-    card.classList.add("gkm-ai-picked");
-    setTimeout(() => card.classList.remove("gkm-ai-picked"), 1800);
-
-    addBotWithActions("Я бы глянул вот это: " + (title || "карточку, которую подсветил на экране") + ".", [
-      { label: "Открыть карточку", run: () => card.click() },
-      { label: "Ещё вариант", run: () => showRandomAdvice(kind) }
-    ]);
+    const intro = opts.intro || 'Вот что могу посоветовать:';
+    items.forEach((item, idx) => {
+      addRecommendationCard(item, idx === 0 ? intro : 'Ещё вариант:', [
+        { label: 'Ещё похожее', run: () => recommendFromQuery(query, { kind, limit: 3, intro: 'Лови ещё варианты:' }) }
+      ]);
+    });
   }
 
   function helperAnswer(text) {
     const q = normalizeText(text);
-    addMsg(text, "user");
-
+    addMsg(text, 'user');
     if (!q) return;
 
-    if (q.includes("аниме") || q.includes("наруто") || q.includes("сёнэн") || q.includes("сенэн")) {
-      addBotWithActions("Открываю аниме. Для Наруто и похожего лучше искать: Наруто, сёнэн, боевик, приключения.", [
-        { label: "Открыть Аниме", run: () => clickByText(["Аниме"]) },
-        { label: "Искать Наруто", run: () => setSearch("Наруто") },
-        { label: "Случайное аниме", run: () => showRandomAdvice("anime") }
+    if (q.includes('аниме') || q.includes('наруто') || q.includes('сенэн') || q.includes('сёнэн')) {
+      addBotWithActions('Подберу аниме и покажу визуально карточки.', [
+        { label: 'Открыть Аниме', run: () => clickByText(['Аниме']) },
+        { label: 'Искать Наруто', run: () => setSearch('Наруто') },
+        { label: 'Подобрать аниме', run: () => recommendFromQuery(text, { kind: 'anime', intro: 'Вот аниме, которое подходит:' }) }
       ]);
+      setTimeout(() => recommendFromQuery(text, { kind: 'anime', intro: 'Вот аниме, которое подходит:' }), 120);
       return;
     }
 
-    if (q.includes("фильм") || q.includes("вечер") || q.includes("посмотреть")) {
-      addBotWithActions("Для вечера лучше начать с популярного или топа. Могу открыть раздел или подсветить случайную карточку.", [
-        { label: "Популярное", run: () => clickByText(["Популярное"]) },
-        { label: "Топ 250", run: () => clickByText(["Топ 250"]) },
-        { label: "Случайный фильм", run: () => showRandomAdvice("movie") }
+    if (q.includes('фильм') || q.includes('вечер') || q.includes('посмотреть')) {
+      addBotWithActions('Окей, подберу фильмы на вечер.', [
+        { label: 'Популярное', run: () => clickByText(['Популярное']) },
+        { label: 'Топ 250', run: () => clickByText(['Топ 250']) },
+        { label: 'Подобрать фильм', run: () => recommendFromQuery(text, { kind: 'movies', intro: 'Вот фильмы на вечер:' }) }
       ]);
+      setTimeout(() => recommendFromQuery(text, { kind: 'movies', intro: 'Вот фильмы на вечер:' }), 120);
       return;
     }
 
-    if (q.includes("сериал")) {
-      addBotWithActions("Открываю сериалы. Потом можно отсортировать по рейтингу или голосам.", [
-        { label: "Открыть Сериалы", run: () => clickByText(["Сериалы"]) },
-        { label: "Популярное", run: () => clickByText(["Популярное"]) },
-        { label: "Случайный сериал", run: () => showRandomAdvice("series") }
+    if (q.includes('сериал')) {
+      addBotWithActions('Подберу сериалы и покажу постеры.', [
+        { label: 'Открыть Сериалы', run: () => clickByText(['Сериалы']) },
+        { label: 'Подобрать сериал', run: () => recommendFromQuery(text, { kind: 'series', intro: 'Вот сериалы, которые подходят:' }) }
       ]);
+      setTimeout(() => recommendFromQuery(text, { kind: 'series', intro: 'Вот сериалы, которые подходят:' }), 120);
       return;
     }
 
-    if (q.includes("мульт")) {
-      addBotWithActions("Открываю мультфильмы. Там лучше смотреть популярное и семейное.", [
-        { label: "Открыть Мультфильмы", run: () => clickByText(["Мультфильмы"]) },
-        { label: "Популярное", run: () => clickByText(["Популярное"]) }
+    if (q.includes('мульт')) {
+      addBotWithActions('Подберу мультфильмы.', [
+        { label: 'Открыть Мультфильмы', run: () => clickByText(['Мультфильмы']) },
+        { label: 'Подобрать мультик', run: () => recommendFromQuery(text, { kind: 'cartoons', intro: 'Вот мультфильмы:' }) }
       ]);
+      setTimeout(() => recommendFromQuery(text, { kind: 'cartoons', intro: 'Вот мультфильмы:' }), 120);
       return;
     }
 
-    if (q.includes("новин")) {
-      addBotWithActions("Открываю новинки. Там будут свежие фильмы, сериалы и аниме из базы.", [
-        { label: "Новинки", run: () => clickByText(["Новинки"]) }
+    if (q.includes('новин')) {
+      clickByText(['Новинки']);
+      addBotWithActions('Открыл новинки. Сейчас покажу хорошие варианты.', [
+        { label: 'Подобрать новинки', run: () => recommendFromQuery(text, { kind: 'any', intro: 'Вот новинки, на которые стоит глянуть:' }) }
       ]);
+      setTimeout(() => recommendFromQuery(text, { kind: 'any', intro: 'Вот новинки, на которые стоит глянуть:' }), 200);
       return;
     }
 
-    if (q.includes("топ") || q.includes("лучшее") || q.includes("рейтинг")) {
-      addBotWithActions("Открываю топ. Это лучший вариант, когда не знаешь, что смотреть.", [
-        { label: "Топ 250", run: () => clickByText(["Топ 250"]) },
-        { label: "Популярное", run: () => clickByText(["Популярное"]) }
+    if (q.includes('топ') || q.includes('лучшее') || q.includes('рейтинг')) {
+      clickByText(['Топ 250']);
+      addBotWithActions('Открыл топ. Вот сильные варианты.', [
+        { label: 'Показать топ', run: () => recommendFromQuery(text, { kind: 'any', intro: 'Вот топовые варианты:' }) }
       ]);
+      setTimeout(() => recommendFromQuery(text, { kind: 'any', intro: 'Вот топовые варианты:' }), 200);
       return;
     }
 
-    const cleaned = text.trim().slice(0, 80);
-    addBotWithActions("Я не лезу в платный API. Могу поискать это по каталогу или открыть популярное.", [
-      { label: "Искать: " + cleaned, run: () => setSearch(cleaned) },
-      { label: "Популярное", run: () => clickByText(["Популярное"]) },
-      { label: "Случайное", run: () => showRandomAdvice("any") }
+    addBotWithActions('Могу поискать это по каталогу и сразу показать визуальные рекомендации.', [
+      { label: 'Искать', run: () => setSearch(text.trim().slice(0, 80)) },
+      { label: 'Подобрать', run: () => recommendFromQuery(text, { kind: 'any', intro: 'Вот что нашёл по твоему запросу:' }) },
+      { label: 'Популярное', run: () => clickByText(['Популярное']) }
     ]);
+    setTimeout(() => recommendFromQuery(text, { kind: 'any', intro: 'Вот что нашёл по твоему запросу:' }), 120);
   }
 
   function initAiChat() {
-    const top = $("gkmAiTopBtn");
-    const float = $("gkmAiFloatBtn");
-    const close = $("gkmAiCloseBtn");
-    const form = $("gkmAiForm");
-    const input = $("gkmAiInput");
+    const top = $('gkmAiTopBtn');
+    const float = $('gkmAiFloatBtn');
+    const close = $('gkmAiCloseBtn');
+    const form = $('gkmAiForm');
+    const input = $('gkmAiInput');
 
-    const title = document.querySelector(".ai-title");
-    const subtitle = document.querySelector(".ai-subtitle");
-    const note = document.querySelector(".ai-note");
-    if (title) title.textContent = "Голубь помощник";
-    if (subtitle) subtitle.textContent = "Бесплатно: поиск и советы по базе сайта";
-    if (note) note.textContent = "";
+    const title = document.querySelector('.ai-title');
+    const subtitle = document.querySelector('.ai-subtitle');
+    const note = document.querySelector('.ai-note');
+    if (title) title.textContent = 'Голубь помощник';
+    if (subtitle) subtitle.textContent = 'Бесплатно: умные советы + мини-постеры';
+    if (note) note.textContent = '';
 
-    const first = document.querySelector("#gkmAiMessages .ai-bot");
+    const first = document.querySelector('#gkmAiMessages .ai-bot');
     if (first) {
-      first.textContent = "Я работаю бесплатно без OpenAI API: помогу открыть раздел, найти по каталогу или выбрать случайное из карточек.";
+      first.textContent = 'Я стал умнее: подбираю по жанрам, рейтингу и запросу, плюс показываю мини-карточки с постером.';
     }
 
-    if (top) top.addEventListener("click", openAi);
-    if (float) float.addEventListener("click", openAi);
-    if (close) close.addEventListener("click", closeAi);
+    if (top) top.addEventListener('click', openAi);
+    if (float) float.addEventListener('click', openAi);
+    if (close) close.addEventListener('click', closeAi);
 
-    document.querySelectorAll("[data-ai-prompt]").forEach(btn => {
-      btn.addEventListener("click", () => helperAnswer(btn.getAttribute("data-ai-prompt") || btn.textContent || ""));
+    document.querySelectorAll('[data-ai-prompt]').forEach(btn => {
+      btn.addEventListener('click', () => helperAnswer(btn.getAttribute('data-ai-prompt') || btn.textContent || ''));
     });
 
     if (form) {
-      form.addEventListener("submit", (e) => {
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const text = (input && input.value || "").trim();
+        const text = (input && input.value || '').trim();
         if (!text) return;
-        input.value = "";
+        input.value = '';
         helperAnswer(text);
       });
     }
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v6-free-site-helper-no-api-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = 'v7-smart-visual-helper-2026-06-13';
 })();
