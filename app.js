@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "clean-rebuild-v2-3-filters-sort-fixed-2026-06-12";
+const GKM_APP_CLEAN_VERSION = "clean-rebuild-v2-4-detail-card-upgrade-2026-06-12";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -419,23 +419,35 @@ function collectPlayerLinks(m) {
 
   const possible = [
     m.player, m.playerUrl, m.video, m.videoUrl, m.url, m.src, m.iframe, m.rutube,
+    m.watchUrl, m.watch, m.trailer, m.trailerUrl,
     ...(Array.isArray(m.players) ? m.players : []),
     ...(Array.isArray(m.videoLinks) ? m.videoLinks : []),
     ...(Array.isArray(m.links) ? m.links : []),
+    ...(Array.isArray(m.sources) ? m.sources : []),
   ].filter(Boolean);
 
   for (const item of possible) {
     if (typeof item === "string") {
-      if (/rutube|youtube|vk\.com|vkvideo|iframe|embed|http/i.test(item)) {
-        links.push({ name: "Смотреть", url: item });
+      if (/rutube|youtube|youtu\.be|vk\.com|vkvideo|iframe|embed|http/i.test(item)) {
+        let name = "Смотреть";
+        if (/rutube/i.test(item)) name = "Rutube";
+        else if (/youtu/i.test(item)) name = "YouTube";
+        else if (/vk/i.test(item)) name = "VK Видео";
+        links.push({ name, url: item });
       }
     } else if (item && typeof item === "object") {
-      const url = item.url || item.src || item.href || item.iframe || item.embed || "";
-      if (url) links.push({ name: item.name || item.title || "Смотреть", url });
+      const url = item.url || item.src || item.href || item.iframe || item.embed || item.link || "";
+      if (url) links.push({ name: item.name || item.title || item.label || "Смотреть", url });
     }
   }
 
-  return links.slice(0, 8);
+  const seen = new Set();
+  return links.filter(link => {
+    const key = String(link.url || "");
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).slice(0, 8);
 }
 
 function renderPlayerButtons(m) {
@@ -448,11 +460,11 @@ function renderPlayerButtons(m) {
   const buttons = [];
 
   for (const link of links) {
-    buttons.push(`<a target="_blank" rel="noreferrer" href="${escapeAttr(link.url)}">${escapeHtml(link.name || "Смотреть")}</a>`);
+    buttons.push(`<a class="watch-direct" target="_blank" rel="noreferrer" href="${escapeAttr(link.url)}">▶ ${escapeHtml(link.name || "Смотреть")}</a>`);
   }
 
-  buttons.push(`<a target="_blank" rel="noreferrer" href="https://yandex.ru/search/?text=${q} смотреть онлайн">Яндекс поиск</a>`);
   buttons.push(`<a target="_blank" rel="noreferrer" href="https://yandex.ru/video/search?text=${q} смотреть">Яндекс Видео</a>`);
+  buttons.push(`<a target="_blank" rel="noreferrer" href="https://yandex.ru/search/?text=${q} смотреть онлайн">Яндекс поиск</a>`);
   buttons.push(`<a target="_blank" rel="noreferrer" href="https://rutube.ru/search/?query=${q}">Rutube поиск</a>`);
   buttons.push(`<a target="_blank" rel="noreferrer" href="https://vk.com/video?q=${q}">VK Видео поиск</a>`);
   buttons.push(`<a target="_blank" rel="noreferrer" href="https://www.youtube.com/results?search_query=${q} трейлер">YouTube трейлер</a>`);
@@ -469,13 +481,24 @@ function openDetails(m) {
   saveSet(historyKey, hist);
 
   const dialog = $("detailsDialog");
+  const rank = rankOf(m);
+  const genres = getGenres(m);
+  const source = m.source || m.provider || "—";
+  const overview = m.overview || "Описание пока не добавлено.";
 
   $("detailPoster").src = m.poster || "";
   $("detailPoster").style.display = m.poster ? "block" : "none";
   $("detailTitle").textContent = titleOf(m);
-  $("detailMeta").textContent = `${getYear(m) || "—"} · ${getType(m)} · рейтинг ${getRating(m).toFixed(1)} · голосов ${getVotes(m)}`;
-  $("detailGenres").textContent = getGenres(m).join(" · ");
-  $("detailOverview").textContent = m.overview || "Описание пока не добавлено.";
+  $("detailMeta").innerHTML = `
+    <span class="detail-type-pill">${escapeHtml(getType(m))}</span>
+    <span>${escapeHtml(getYear(m) || "—")}</span>
+    <span class="detail-rating-pill rank-${rank.rank}">${escapeHtml(ratingLabel(m))}</span>
+    <span>${escapeHtml(getVotes(m))} голосов</span>
+  `;
+  $("detailGenres").innerHTML = genres.length
+    ? genres.slice(0, 12).map(g => `<span class="genre-chip">${escapeHtml(g)}</span>`).join("")
+    : `<span class="genre-chip">Жанры не указаны</span>`;
+  $("detailOverview").textContent = overview;
 
   const facts = $("detailFacts");
   if (facts) {
@@ -489,8 +512,8 @@ function openDetails(m) {
       factCard("Студия", Array.isArray(m.studio) ? m.studio.join(", ") : m.studio),
       factCard("Страна", Array.isArray(m.country) ? m.country.join(", ") : m.country),
       factCard("Возраст", m.ageRating),
-      factCard("Источник", m.source),
-    ].join("");
+      factCard("Источник", source),
+    ].filter(Boolean).join("");
   }
 
   renderPlayerButtons(m);
