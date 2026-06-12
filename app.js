@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v26-absolute-free-helper-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v27-yummyanime-link-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -2762,5 +2762,72 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v26-absolute-free-helper-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v27-yummyanime-link-2026-06-13";
 })();
+
+
+/* === GKM V27 YUMMYANIME DETAIL LINK === */
+(function () {
+  const YUMMY_ANIME_URL = "https://yummyanime.tv/1204-o-moem-pererozhdenii-v-sliz-film-g1.html";
+  const YUMMY_ANIME_TITLE_HINTS = [
+    "о моем перерождении в слизь",
+    "о моём перерождении в слизь",
+    "tensei shitara slime",
+    "slime datta ken",
+    "reincarnated as a slime",
+    "scarlet bond",
+    "алые узы",
+    "алые связи"
+  ];
+
+  function normText(v) {
+    return String(v || "").toLowerCase().replaceAll("ё", "е").trim();
+  }
+
+  function isSlimeMovieDetail() {
+    const dialog = document.querySelector("dialog[open], .modal, .detail, .details, #detailsModal, #detailModal");
+    const scope = dialog || document.body;
+    const titleText = normText((scope.querySelector(".detail-title, .modal-title, h1, h2") || {}).textContent || scope.textContent || "");
+    return YUMMY_ANIME_TITLE_HINTS.some(h => titleText.includes(normText(h)));
+  }
+
+  function makeBtn() {
+    const a = document.createElement("a");
+    a.id = "yummyAnimeLink";
+    a.href = YUMMY_ANIME_URL;
+    a.target = "_blank";
+    a.rel = "noreferrer";
+    a.textContent = "YummyAnime";
+    return a;
+  }
+
+  function addYummyAnimeButton() {
+    if (!isSlimeMovieDetail()) return;
+
+    const blocks = Array.from(document.querySelectorAll(".links-block, section, .detail-block, .detail-section"));
+    let animeBlock = blocks.find(b => /аниме-сайты/i.test(b.textContent || ""));
+    if (!animeBlock) return;
+
+    const buttons = animeBlock.querySelector(".detail-buttons") || animeBlock.querySelector(".links-row") || animeBlock;
+    if (!buttons || buttons.querySelector("#yummyAnimeLink")) return;
+
+    buttons.appendChild(makeBtn());
+  }
+
+  const obs = new MutationObserver(() => {
+    window.requestAnimationFrame(addYummyAnimeButton);
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      addYummyAnimeButton();
+      obs.observe(document.body, { childList: true, subtree: true, characterData: true });
+    });
+  } else {
+    addYummyAnimeButton();
+    obs.observe(document.body, { childList: true, subtree: true, characterData: true });
+  }
+
+  window.GKM_YUMMYANIME_LINK_VERSION = "v27-yummyanime-link-2026-06-13";
+})();
+
