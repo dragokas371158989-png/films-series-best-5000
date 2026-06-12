@@ -73,7 +73,9 @@ def chunk_path(entry):
         return None
     if value.startswith("data/"):
         return Path(value)
-    return DATA_DIR / value
+    if value.startswith("chunks/"):
+        return DATA_DIR / value
+    return DATA_DIR / "chunks" / value if value.startswith("chunk_") else DATA_DIR / value
 
 def iter_source_items():
     index = load_json(INDEX_PATH, {})
@@ -147,7 +149,7 @@ def genres_of(item):
         if key not in seen:
             seen.add(key)
             clean.append(g)
-    return clean[:10]
+    return clean[:12]
 
 def type_of(item):
     t = clean_text(item.get("type") or item.get("kind") or "")
@@ -155,7 +157,16 @@ def type_of(item):
     genres = " ".join(norm(g) for g in genres_of(item))
     source = norm(item.get("source") or item.get("provider") or item.get("category") or "")
 
-    if "аниме" in low or "anime" in low or "anime" in source:
+    text = " ".join([
+        low,
+        source,
+        norm(item.get("ru")),
+        norm(item.get("en")),
+        norm(item.get("title")),
+        genres,
+    ])
+
+    if "аниме" in text or "anime" in text or "shikimori" in source or "myanimelist" in source:
         return "Аниме"
     if "мульт" in low or "мульт" in genres:
         return "Мультфильм"
@@ -167,23 +178,36 @@ def poster_of(item):
     return clean_text(item.get("poster") or item.get("posterUrl") or item.get("image") or item.get("poster_path") or "")
 
 def overview_of(item):
-    for key in ("overview_ru", "ruOverview", "description_ru", "descriptionRu", "description", "overview"):
+    for key in ("overview_ru", "ruOverview", "description_ru", "descriptionRu", "description", "overview", "synopsis"):
         value = clean_text(item.get(key))
         if value:
             return value
     return ""
 
 def stable_id(item, fallback):
-    for key in ("id", "uid", "tmdbId", "mal_id", "shikimori_id"):
+    for key in ("id", "uid", "tmdbId", "tmdb_id", "mal_id", "malId", "shikimori_id"):
         value = item.get(key)
         if value not in (None, ""):
             return str(value)
     return "gkm_" + str(fallback)
 
+def pick_extra(item):
+    extra = {}
+    keys = [
+        "player", "playerUrl", "video", "videoUrl", "url", "src", "iframe", "rutube",
+        "players", "videoLinks", "links", "episodes", "episodeCount", "status",
+        "studio", "studios", "country", "countries", "ageRating", "age", "source",
+        "tmdbId", "tmdb_id", "mal_id", "malId", "shikimori_id", "shikimoriId",
+    ]
+    for key in keys:
+        if key in item and item[key] not in (None, "", [], {}):
+            extra[key] = item[key]
+    return extra
+
 def smart_score(item):
-    rating = rating_of(item)
-    votes = votes_of(item)
-    year = int(year_of(item) or 0)
+    rating = float(item.get("rating") or 0)
+    votes = int(item.get("votes") or 0)
+    year = int(item.get("year") or 0)
 
     if votes < 30:
         return rating
@@ -193,10 +217,10 @@ def smart_score(item):
     return rating * 10 + vote_bonus + year_bonus
 
 def quality(item):
-    return votes_of(item) * 100 + rating_of(item) * 1000 + (1 if poster_of(item) else 0) * 10000 + len(overview_of(item))
+    return int(item.get("votes") or 0) * 100 + float(item.get("rating") or 0) * 1000 + (1 if item.get("poster") else 0) * 10000 + len(item.get("overview") or "")
 
 def card_item(item, fallback):
-    return {
+    out = {
         "id": stable_id(item, fallback),
         "ru": title_of(item),
         "en": en_of(item),
@@ -207,14 +231,14 @@ def card_item(item, fallback):
         "poster": poster_of(item),
         "genres": genres_of(item),
         "overview": overview_of(item),
-        "source": clean_text(item.get("source") or item.get("provider") or ""),
-        "tmdbId": item.get("tmdbId") or item.get("tmdb_id") or "",
-        "episodes": item.get("episodes") or item.get("episodeCount") or "",
-        "status": item.get("status") or "",
-        "studio": item.get("studio") or item.get("studios") or "",
-        "country": item.get("country") or item.get("countries") or "",
-        "ageRating": item.get("ageRating") or item.get("age") or "",
     }
+    out.update(pick_extra(item))
+    out["source"] = clean_text(out.get("source") or item.get("provider") or "")
+    out["episodes"] = out.get("episodes") or out.get("episodeCount") or ""
+    out["studio"] = out.get("studio") or out.get("studios") or ""
+    out["country"] = out.get("country") or out.get("countries") or ""
+    out["ageRating"] = out.get("ageRating") or out.get("age") or ""
+    return out
 
 def dedupe(items):
     best = {}
@@ -224,10 +248,9 @@ def dedupe(items):
         if not title_key:
             continue
 
-        # Мягкий дедуп: тип + название. Год не берём, потому что в базе часто один и тот же фильм с кривым годом.
         key = item["type"] + "|" + title_key
-
         old = best.get(key)
+
         if old is None or quality(item) > quality(old):
             best[key] = item
 
@@ -237,7 +260,6 @@ def write_pages(tab_name, items):
     pages_dir = FAST_DIR / "pages" / tab_name
     pages_dir.mkdir(parents=True, exist_ok=True)
 
-    # чистим старые страницы этого раздела
     for old in pages_dir.glob("page_*.json"):
         old.unlink()
 
@@ -309,22 +331,12 @@ def main():
         }
     }
 
-    search_index = [
-        {
-            "id": x["id"],
-            "ru": x["ru"],
-            "en": x["en"],
-            "year": x["year"],
-            "type": x["type"],
-            "rating": x["rating"],
-            "votes": x["votes"],
-            "poster": x["poster"],
-            "genres": x["genres"][:5],
-            "overview": x["overview"][:260],
-            "source": x.get("source", ""),
-        }
-        for x in all_sorted
-    ]
+    search_index = []
+    for x in all_sorted:
+        y = dict(x)
+        if len(str(y.get("overview") or "")) > 520:
+            y["overview"] = y["overview"][:520]
+        search_index.append(y)
 
     meta = {
         "generatedAt": datetime.utcnow().isoformat(timespec="seconds") + "Z",
