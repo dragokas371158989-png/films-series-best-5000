@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v8-isekai-smart-helper-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v11-brain-tags-helper-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -974,42 +974,149 @@ if (document.readyState === "loading") {
   startApp();
 }
 
-/* === GKM SMART VISUAL HELPER V8 === */
+/* === GKM BRAIN TAGS FREE HELPER V11 === */
 (function () {
-  function $(id) {
-    return document.getElementById(id);
-  }
+  const STOP_WORDS = new Set([
+    "и","или","а","но","да","нет","ну","в","во","на","по","про","для","из","от","до","как","что","чем","где",
+    "мне","меня","мой","моя","мои","мы","нам","ты","тебя","твой","свой","это","этот","эти","под","за","с","со",
+    "подбери","посоветуй","найди","покажи","хочу","можно","надо","дай","кинь","сделай","смотреть","посмотреть",
+    "что-нибудь","чтонибудь","норм","хорошее","лучшее","пожалуйста","брат","братик","бро"
+  ]);
 
-  function normalizeText(text) {
-    return String(text || "").toLowerCase().replaceAll("ё", "е").trim();
-  }
+  const FIXES = [
+    [/анимэ|анеме|анимешк/gi, "аниме"],
+    [/поподан|пападан|поподанц|попаданц/gi, "попадан"],
+    [/исекаи|исекайчик|исикай/gi, "исекай"],
+    [/фентези|фэнтази|фентази/gi, "фэнтези"],
+    [/сериял|сереал/gi, "сериал"],
+    [/камеди|комеди/gi, "комедия"],
+    [/детектев/gi, "детектив"],
+    [/мультик|мульты/gi, "мультфильм"],
+    [/романтика|романтич/gi, "романс"],
+    [/главн(ый|ого)? герой|гг/gi, "главный герой"],
+    [/имбовый|имбовая|имба/gi, "сильный герой"],
+    [/левелинг|прокачка|уровни/gi, "прокачка уровни"],
+    [/наруто|naruto/gi, "naruto сёнэн ниндзя"],
+    [/интерстеллар|interstellar/gi, "interstellar космос фантастика драма"],
+  ];
 
-  function aiBox() {
-    return $("gkmAiMessages");
-  }
+  const TAGS = {
+    isekai: {
+      words: ["попадан","попаданец","попаданцы","исекай","isekai","другой мир","ином мире","перерожд","реинкарн","призван","summoned","another world","parallel world"],
+      boost: ["исекай","перерожд","реинкарн","другой мир","another world","isekai","summoned","parallel world","фэнтези","магия","приключения"],
+      titles: ["re zero","rezero","starting life in another world","mushoku","jobless reincarnation","slime","tensei shitara","reincarnated as a slime","overlord","konosuba","sword art online","shield hero","tate no yuusha","tsukimichi","no game no life","log horizon","eminence in shadow","kage no jitsuryokusha","arifureta","cautious hero","youjo senki","moonlit fantasy","farming life in another world","death march","parallel world","world's finest assassin","ascendance of a bookworm","grimgar","problem children","black summoner","skeleton knight","campfire cooking"]
+    },
+    opmc: {
+      words: ["сильн","имба","имбовый","overpowered","op","главный герой","прокачк","leveling","уровн","непобедим"],
+      boost: ["сёнэн","сенэн","боевик","экшен","боевые искусства","приключения","фэнтези","прокачка"],
+      titles: ["solo leveling","one punch","overlord","eminence in shadow","mob psycho","misfit","irregular at magic high school","slime","sword art online","hellsing","black summoner","mashle"]
+    },
+    magic: {
+      words: ["маг","магия","волшеб","академ","заклин","чарод"],
+      boost: ["магия","фэнтези","академия","сверхъестественное"]
+    },
+    dark: {
+      words: ["мрач","жест","кров","dark","ужас","триллер","саспенс","страшн"],
+      boost: ["ужасы","триллер","саспенс","психология","кровь"]
+    },
+    funny: {
+      words: ["смешн","угар","ржач","комед","весел","легкое","легкий"],
+      boost: ["комедия","пародия","повседневность"]
+    },
+    romance: {
+      words: ["романт","любов","мелодрам","отнош","вайфу"],
+      boost: ["романс","мелодрама","драма","школа"]
+    },
+    smart: {
+      words: ["умн","психолог","детектив","головолом","интриг","мозг","расслед"],
+      boost: ["психология","детектив","триллер","саспенс","тайна","мистика"],
+      titles: ["death note","steins gate","monster","code geass","erased","psycho pass","parasyte","promised neverland","detective","mystery"]
+    },
+    space: {
+      words: ["космос","космич","интерстел","галакт","звезд","планет"],
+      boost: ["космос","фантастика","драма","приключения","sci-fi","science fiction"],
+      titles: ["interstellar","gravity","martian","space odyssey","expanse","cowboy bebop","planetes"]
+    },
+    school: {
+      words: ["школ","академ","учени","студент"],
+      boost: ["школа","академия","повседневность"]
+    },
+    action: {
+      words: ["боев","драк","экшен","битв","сраж","махач","мясо"],
+      boost: ["боевик","экшен","сёнэн","сенэн","боевые искусства","приключения"]
+    },
+    survival: {
+      words: ["выживание","зомби","апокалип","остров","игра на смерть","королевская битва"],
+      boost: ["выживание","ужасы","триллер","боевик","зомби"]
+    },
+    sport: {
+      words: ["спорт","футбол","баскет","волейбол","бокс"],
+      boost: ["спорт"]
+    },
+    family: {
+      words: ["семейн","детям","ребенку","детский","мульт"],
+      boost: ["семейный","мультфильм","для детей","комедия"]
+    },
+    new: {
+      words: ["новин","новое","свежее","2024","2025","2026"],
+      boost: []
+    },
+    top: {
+      words: ["топ","лучшее","лучший","рейтинг","s-класс","а-класс","шедевр"],
+      boost: []
+    },
+    popular: {
+      words: ["популяр","известн","хайп","много голос"],
+      boost: []
+    }
+  };
 
-  function scrollAi() {
-    const box = aiBox();
-    if (box) box.scrollTop = box.scrollHeight;
+  const KIND_WORDS = {
+    anime: ["аниме","анимэ","исекай","попадан","сёнэн","сенэн","манга","наруто","тян","вайфу"],
+    movies: ["фильм","кино","кинчик","боевик","ужастик","комедия","вечер"],
+    series: ["сериал","сериалы","сезон"],
+    cartoons: ["мульт","мультфильм","мультик","детям"]
+  };
+
+  const shownIds = new Set();
+
+  function $(id) { return document.getElementById(id); }
+  function box() { return $("gkmAiMessages"); }
+  function norm(text) { return String(text || "").toLowerCase().replaceAll("ё", "е").trim(); }
+  function fixQuery(text) {
+    let q = String(text || "");
+    FIXES.forEach(([rx, to]) => q = q.replace(rx, to));
+    return q;
+  }
+  function compact(text) { return norm(fixQuery(text)).replace(/[^\p{L}\p{N}]+/gu, " ").replace(/\s+/g, " ").trim(); }
+  function toks(text) { return compact(text).split(" ").filter(t => t.length >= 3 && !STOP_WORDS.has(t)); }
+  function hasAny(q, arr) { return arr.some(x => q.includes(norm(x))); }
+  function scrollAi() { const b = box(); if (b) b.scrollTop = b.scrollHeight; }
+
+  function limitMessages() {
+    const b = box();
+    if (!b) return;
+    const msgs = Array.from(b.querySelectorAll(".ai-msg"));
+    if (msgs.length > 34) msgs.slice(1, 10).forEach(x => x.remove());
   }
 
   function addMsg(text, who) {
-    const box = aiBox();
-    if (!box) return null;
+    const b = box();
+    if (!b) return null;
     const div = document.createElement("div");
     div.className = "ai-msg " + (who === "user" ? "ai-user" : "ai-bot");
     div.textContent = text;
-    box.appendChild(div);
+    b.appendChild(div);
+    limitMessages();
     scrollAi();
     return div;
   }
 
   function addBotWithActions(text, actions) {
-    const box = aiBox();
-    if (!box) return;
+    const b = box();
+    if (!b) return;
     const div = document.createElement("div");
     div.className = "ai-msg ai-bot";
-
     const p = document.createElement("div");
     p.textContent = text;
     div.appendChild(p);
@@ -1018,28 +1125,54 @@ if (document.readyState === "loading") {
       const row = document.createElement("div");
       row.className = "ai-action-row";
       actions.forEach(a => {
-        const b = document.createElement("button");
-        b.type = "button";
-        b.textContent = a.label;
-        b.addEventListener("click", a.run);
-        row.appendChild(b);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = a.label;
+        btn.addEventListener("click", a.run);
+        row.appendChild(btn);
       });
       div.appendChild(row);
     }
 
-    box.appendChild(div);
+    b.appendChild(div);
+    limitMessages();
     scrollAi();
   }
 
-  function addRecommendationCard(item, intro, extraActions) {
-    const box = aiBox();
-    if (!box || !item) return;
+  function posterOfItem(item) {
+    return item.poster || item.posterUrl || item.image || item.imageUrl || "";
+  }
+
+  function genresOfItem(item) {
+    return getGenres(item) || item.genres || [];
+  }
+
+  function textOfItem(item) {
+    return norm([
+      titleOf(item), item.en, item.title, item.name, item.originalTitle,
+      getType(item), getYear(item), ...(genresOfItem(item) || []),
+      ...(item.aiTags || []), ...(item.moodTags || []), ...(item.recTags || []),
+      item.overview, item.description, item.source
+    ].join(" "));
+  }
+
+  function tagsOfItem(item) {
+    return [
+      ...(Array.isArray(item.aiTags) ? item.aiTags : []),
+      ...(Array.isArray(item.moodTags) ? item.moodTags : []),
+      ...(Array.isArray(item.recTags) ? item.recTags : [])
+    ].map(norm);
+  }
+
+  function addRecommendationCard(item, intro, query, kind, number) {
+    const b = box();
+    if (!b || !item) return;
 
     const wrap = document.createElement("div");
     wrap.className = "ai-msg ai-bot ai-rec-msg";
 
     const introEl = document.createElement("div");
-    introEl.textContent = intro || "Вот хороший вариант:";
+    introEl.textContent = intro || "Вот вариант:";
     wrap.appendChild(introEl);
 
     const card = document.createElement("div");
@@ -1049,50 +1182,70 @@ if (document.readyState === "loading") {
     poster.className = "ai-rec-poster";
     poster.loading = "lazy";
     poster.alt = titleOf(item);
-    poster.src = item.poster || "data:image/svg+xml;charset=UTF-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="180"><rect width="100%" height="100%" fill="#0a1020"/><text x="50%" y="50%" fill="#fff" font-size="14" text-anchor="middle">Нет постера</text></svg>');
+    poster.src = posterOfItem(item) || "data:image/svg+xml;charset=UTF-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="180"><rect width="100%" height="100%" fill="#0a1020"/><text x="50%" y="50%" fill="#fff" font-size="14" text-anchor="middle">Нет постера</text></svg>');
     card.appendChild(poster);
 
-    const genres = (getGenres(item) || []).slice(0, 4).join(" · ");
     const rating = Number(getRating(item) || 0);
     const votes = Number(getVotes(item) || 0);
+    const genres = (genresOfItem(item) || []).slice(0, 4).join(" · ");
 
     const info = document.createElement("div");
     info.className = "ai-rec-info";
     info.innerHTML = `
-      <div class="ai-rec-title">${escapeHtml(titleOf(item))}</div>
+      <div class="ai-rec-title">${number ? number + ". " : ""}${escapeHtml(titleOf(item))}</div>
       <div class="ai-rec-meta">${escapeHtml(getYear(item) || "—")} · ${escapeHtml(getType(item) || "—")}</div>
       <div class="ai-rec-meta">${escapeHtml(genres || "Без жанров")}</div>
-      <div class="ai-rec-meta">Рейтинг: ${rating ? rating.toFixed(1) : "—"} · Голосов: ${votes ? String(votes) : "—"}</div>
+      <div class="ai-rec-meta">⭐ ${rating ? rating.toFixed(1) : "—"} · 👥 ${votes ? String(votes) : "—"}</div>
     `;
     card.appendChild(info);
     wrap.appendChild(card);
 
+    const why = explainWhy(item, query);
+    if (why) {
+      const w = document.createElement("div");
+      w.className = "ai-rec-why";
+      w.textContent = why;
+      wrap.appendChild(w);
+    }
+
     const actions = document.createElement("div");
     actions.className = "ai-action-row";
 
-    const openBtn = document.createElement("button");
-    openBtn.type = "button";
-    openBtn.textContent = "Открыть";
-    openBtn.addEventListener("click", () => openItemCard(item));
-    actions.appendChild(openBtn);
-
-    const searchBtn = document.createElement("button");
-    searchBtn.type = "button";
-    searchBtn.textContent = "Найти";
-    searchBtn.addEventListener("click", () => setSearch(titleOf(item)));
-    actions.appendChild(searchBtn);
-
-    (extraActions || []).forEach(a => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.textContent = a.label;
-      b.addEventListener("click", a.run);
-      actions.appendChild(b);
+    [
+      { label: "Открыть", run: () => openItemCard(item) },
+      { label: "Найти", run: () => setSearch(titleOf(item)) },
+      { label: "Похожие", run: () => recommendFromQuery("похожее на " + titleOf(item), { kind: kind || kindFromItem(item), intro: "Похожие варианты:", limit: 5, fresh: true }) }
+    ].forEach(a => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = a.label;
+      btn.addEventListener("click", a.run);
+      actions.appendChild(btn);
     });
 
     wrap.appendChild(actions);
-    box.appendChild(wrap);
+    b.appendChild(wrap);
+    limitMessages();
     scrollAi();
+  }
+
+  function explainWhy(item, query) {
+    const q = norm(fixQuery(query));
+    const itemText = textOfItem(item);
+    const reasons = [];
+    const tags = detectTags(q);
+
+    if (tags.includes("isekai") && tagHit(item, "isekai") > 0) reasons.push("попаданцы/исекай");
+    if (tags.includes("opmc") && tagHit(item, "opmc") > 0) reasons.push("сильный герой/экшен");
+    if (tags.includes("magic") && tagHit(item, "magic") > 0) reasons.push("магия/фэнтези");
+    if (tags.includes("smart") && tagHit(item, "smart") > 0) reasons.push("умный сюжет");
+    if (tags.includes("dark") && tagHit(item, "dark") > 0) reasons.push("мрачная атмосфера");
+    if (Number(getRating(item) || 0) >= 8.3) reasons.push("высокий рейтинг");
+    if (Number(getVotes(item) || 0) >= 10000) reasons.push("много оценок");
+    if (tagsOfItem(item).length) reasons.push("есть умные теги базы");
+    if (posterOfItem(item)) reasons.push("есть постер");
+
+    return reasons.length ? "Почему: " + reasons.slice(0, 4).join(", ") + "." : "";
   }
 
   function openAi() {
@@ -1113,8 +1266,8 @@ if (document.readyState === "loading") {
   function clickByText(words) {
     const list = Array.from(document.querySelectorAll("button, a"));
     const found = list.find(el => {
-      const t = normalizeText(el.textContent);
-      return words.some(w => t.includes(normalizeText(w)));
+      const t = norm(el.textContent);
+      return words.some(w => t.includes(norm(w)));
     });
     if (found) {
       found.click();
@@ -1124,52 +1277,67 @@ if (document.readyState === "loading") {
   }
 
   function setSearch(query) {
-    const candidates = [
-      $("searchInput"),
-      document.querySelector('input[type="search"]'),
-      document.querySelector('input[placeholder*="Поиск"]'),
-      document.querySelector('input[placeholder*="поиск"]')
-    ].filter(Boolean);
-
-    const input = candidates[0];
+    const input = $("searchInput") || document.querySelector('input[type="search"]') || document.querySelector('input[placeholder*="Поиск"]');
     if (!input) return false;
-
     input.value = query;
     input.dispatchEvent(new Event("input", { bubbles: true }));
     input.dispatchEvent(new Event("change", { bubbles: true }));
-
-    const form = input.closest("form");
-    if (form) form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
     return true;
+  }
+
+  function classify(raw) {
+    const q = norm(fixQuery(raw));
+    const pure = compact(q);
+
+    if (/^(привет|прив|здарова|здравствуй|салам|хай|hello|hi|ку|йоу|добрый день|добрый вечер)$/.test(pure)) return { type: "greeting", kind: "any", tags: [] };
+    if (/^(спасибо|благодарю|ок|окей|понял|ясно|норм|круто)$/.test(pure)) return { type: "smalltalk", kind: "any", tags: [] };
+
+    const tags = detectTags(q);
+    let kind = "any";
+
+    for (const [k, words] of Object.entries(KIND_WORDS)) {
+      if (hasAny(q, words)) {
+        kind = k;
+        break;
+      }
+    }
+
+    if (tags.includes("isekai")) kind = "anime";
+
+    let type = "recommend";
+    if (/найди|поиск|искать|поищи/.test(q)) type = "search";
+    if (tags.includes("new")) type = "new";
+    if (tags.includes("top")) type = "top";
+    if (tags.includes("popular")) type = "popular";
+    if (/похож|как |типа /.test(q)) type = "similar";
+
+    return { type, kind, tags };
+  }
+
+  function detectTags(q) {
+    const tags = [];
+    Object.keys(TAGS).forEach(key => {
+      if (hasAny(q, TAGS[key].words)) tags.push(key);
+    });
+    return tags;
   }
 
   async function ensureSearchIndex() {
     if (Array.isArray(searchIndex) && searchIndex.length) return searchIndex;
-
     try {
-      if (typeof fetchJson === "function") {
-        searchIndex = await fetchJson(FAST_SEARCH_URL);
-      } else {
+      if (typeof fetchJson === "function") searchIndex = await fetchJson(FAST_SEARCH_URL);
+      else {
         const res = await fetch(FAST_SEARCH_URL + "?v=" + Date.now(), { cache: "no-store" });
         searchIndex = await res.json();
       }
     } catch (e) {
       console.warn("AI helper: search_index не загрузился", e);
     }
-
     return Array.isArray(searchIndex) ? searchIndex : [];
   }
 
-  function detectKindFromText(q) {
-    if (q.includes("аниме") || q.includes("анимэ") || q.includes("наруто") || q.includes("исекай") || q.includes("попадан")) return "anime";
-    if (q.includes("сериал")) return "series";
-    if (q.includes("мульт")) return "cartoons";
-    if (q.includes("фильм") || q.includes("кино") || q.includes("вечер")) return "movies";
-    return "any";
-  }
-
-  function detectKindFromItem(item) {
-    const t = normalizeText(getType(item));
+  function kindFromItem(item) {
+    const t = norm(getType(item));
     if (t.includes("аниме")) return "anime";
     if (t.includes("сериал")) return "series";
     if (t.includes("мульт")) return "cartoons";
@@ -1178,257 +1346,224 @@ if (document.readyState === "loading") {
 
   function matchesKind(item, kind) {
     if (!kind || kind === "any") return true;
-    const t = normalizeText(getType(item));
-    const full = normalizeText([titleOf(item), getType(item), ...(getGenres(item) || [])].join(" "));
-
-    if (kind === "anime") return t.includes("аниме") || full.includes("аниме");
+    const t = norm(getType(item));
+    const full = textOfItem(item);
+    if (kind === "anime") return t.includes("аниме") || /anime|myanimelist|shounen|seinen|isekai/.test(full);
     if (kind === "series") return t.includes("сериал");
     if (kind === "cartoons") return t.includes("мульт");
-    if (kind === "movies" || kind === "movie") {
-      return t.includes("фильм") || (!t.includes("сериал") && !t.includes("аниме") && !t.includes("мульт"));
-    }
-
+    if (kind === "movies") return t.includes("фильм") || (!t.includes("сериал") && !t.includes("аниме") && !t.includes("мульт"));
     return true;
   }
 
-  function allKnownItems(extraPool) {
-    const seen = new Set();
-    const out = [];
+  function tagHit(item, tag) {
+    const data = TAGS[tag];
+    if (!data) return 0;
 
-    const addMany = (arr) => {
-      (arr || []).forEach(item => {
-        if (!item || item.id == null) return;
-        const key = String(item.id);
-        if (seen.has(key)) return;
-        seen.add(key);
+    const full = textOfItem(item);
+    const title = norm([titleOf(item), item.en, item.title, item.name].join(" "));
+    const tagList = tagsOfItem(item);
+    let s = 0;
 
-        // В search_index иногда нет полного type/genres, но обычно хватает.
-        out.push(item);
-      });
-    };
+    // Самый сильный сигнал: теги, которые заранее собрал build_fast_site_data.py
+    if (tagList.includes(tag)) s += 140;
+    if (tagList.some(t => t.includes(tag) || tag.includes(t))) s += 45;
 
-    addMany(extraPool || []);
-    addMany(currentItems || []);
-    addMany(lastSearchResults || []);
+    (data.boost || []).forEach(w => {
+      const nw = norm(w);
+      if (tagList.includes(nw)) s += 70;
+      if (full.includes(nw)) s += 24;
+    });
 
-    if (homeData && homeData.sections) {
-      Object.values(homeData.sections).forEach(addMany);
-    }
+    (data.titles || []).forEach(w => {
+      if (title.includes(norm(w))) s += 95;
+    });
 
-    return out;
+    return s;
   }
 
-  function queryHints(q) {
-    const hints = [];
-
-    if (q.includes("попадан") || q.includes("исекай") || q.includes("другой мир") || q.includes("реинкарн") || q.includes("перерожд")) {
-      hints.push("исекай", "перерождение", "реинкарнация", "фэнтези", "приключения", "магия", "другой мир");
-    }
-
-    if (q.includes("интерстел")) hints.push("фантастика", "космос", "драма", "приключения");
-    if (q.includes("сильн")) hints.push("боевик", "экшен", "сёнэн", "сенэн", "приключения", "фэнтези");
-    if (q.includes("вечер")) hints.push("драма", "приключения", "комедия", "популярное");
-    if (q.includes("умн")) hints.push("психология", "детектив", "драма", "фантастика");
-    if (q.includes("мрач")) hints.push("психология", "ужасы", "триллер", "саспенс");
-    if (q.includes("смешн") || q.includes("весел")) hints.push("комедия");
-    if (q.includes("романт")) hints.push("романтика", "мелодрама", "драма");
-    if (q.includes("боев")) hints.push("боевик", "экшен", "боевые искусства");
-
-    return hints;
-  }
-
-  function titleAliasScore(item, q) {
-    const title = normalizeText([titleOf(item), item.en, item.title, item.name].join(" "));
-    let score = 0;
-
-    // Жёсткие подсказки для популярных запросов, чтобы не выдавал случайную фэнтези вместо попаданцев.
-    if (q.includes("попадан") || q.includes("исекай") || q.includes("другой мир") || q.includes("перерожд")) {
-      const isekaiTitles = [
-        "re zero", "rezero", "starting life in another world",
-        "mushoku", "jobless reincarnation",
-        "slime", "tensei shitara", "reincarnated as a slime",
-        "overlord", "konosuba", "sword art online",
-        "shield hero", "tate no yuusha",
-        "tsukimichi", "no game no life", "log horizon",
-        "eminence in shadow", "kage no jitsuryokusha",
-        "arifureta", "cautious hero", "youjo senki",
-        "in another world", "another world", "isekai"
-      ];
-      if (isekaiTitles.some(x => title.includes(normalizeText(x)))) score += 80;
-    }
-
-    if (q.includes("наруто") && title.includes("naruto")) score += 100;
-    if (q.includes("магич") && title.includes("magic")) score += 15;
-    return score;
-  }
-
-  function smartScore(item, q, kind) {
-    let score = 0;
-
-    const full = normalizeText([
-      titleOf(item),
-      item.en,
-      item.title,
-      item.name,
-      getType(item),
-      getYear(item),
-      ...(getGenres(item) || []),
-      item.overview || ""
-    ].join(" "));
-
-    const title = normalizeText(titleOf(item));
-    const genres = (getGenres(item) || []).map(normalizeText);
+  function quality(item) {
     const rating = Number(getRating(item) || 0);
     const votes = Number(getVotes(item) || 0);
     const year = Number(getYear(item) || 0);
 
-    if (matchesKind(item, kind)) score += 35;
-
-    // качество
-    score += rating * 6;
-    score += Math.min(votes, 500000) / 500000 * 12;
-    if (year >= 2015) score += 3;
+    let score = rating * 7 + Math.min(votes, 500000) / 500000 * 16;
+    if (posterOfItem(item)) score += 5;
+    if (year >= 2015) score += 2;
     if (year >= 2020) score += 2;
+    if (votes < 30 && rating >= 9.2) score -= 30;
+    return score;
+  }
 
-    // прямые слова запроса
-    q.split(/\s+/).filter(Boolean).forEach(tok => {
-      if (tok.length < 3) return;
-      if (title.includes(tok)) score += 20;
-      if (full.includes(tok)) score += 9;
+  function userTasteBoost(item) {
+    let boost = 0;
+    try {
+      const favs = new Set(JSON.parse(localStorage.getItem("gkm_favorites") || "[]"));
+      const hist = new Set(JSON.parse(localStorage.getItem("gkm_history") || "[]"));
+      if (favs.has(String(item.id))) boost += 6;
+      if (hist.has(String(item.id))) boost -= 3; // уже смотрел/открывал — чуть ниже
+    } catch {}
+    return boost;
+  }
+
+  function scoreItem(item, query, cls) {
+    const q = norm(fixQuery(query));
+    const ts = toks(q);
+    const full = textOfItem(item);
+    const title = norm(titleOf(item));
+    let score = quality(item) + userTasteBoost(item);
+
+    if (matchesKind(item, cls.kind)) score += 45;
+    else score -= 45;
+
+    cls.tags.forEach(tag => score += tagHit(item, tag));
+
+    ts.forEach(tok => {
+      if (title.includes(tok)) score += 30;
+      if (full.includes(tok)) score += 10;
     });
 
-    // жанровые подсказки
-    queryHints(q).forEach(h => {
-      const nh = normalizeText(h);
-      if (genres.some(g => g.includes(nh)) || full.includes(nh)) score += 18;
-    });
+    if (cls.kind === "anime" && !matchesKind(item, "anime")) score -= 90;
+    if (cls.tags.includes("isekai") && tagHit(item, "isekai") < 24) score -= 70;
+    if (cls.tags.includes("opmc") && tagHit(item, "opmc") < 20) score -= 18;
+    if (cls.tags.includes("top") && Number(getRating(item) || 0) >= 8.2) score += 18;
+    if (cls.tags.includes("popular") && Number(getVotes(item) || 0) >= 10000) score += 18;
+    if (cls.tags.includes("new") && Number(getYear(item) || 0) >= 2024) score += 40;
 
-    score += titleAliasScore(item, q);
-
-    // штраф, если просили аниме/попаданцев, а у элемента нет аниме/исекай признаков
-    if (kind === "anime" && !matchesKind(item, "anime")) score -= 60;
-    if ((q.includes("попадан") || q.includes("исекай") || q.includes("другой мир")) && !/исекай|перерожд|реинкарн|another world|isekai|re zero|mushoku|slime|overlord|konosuba|sword art|shield hero|log horizon|no game no life|tsukimichi/i.test(full)) {
-      score -= 35;
-    }
-
-    if ((q.includes("топ") || q.includes("лучш")) && rating >= 8.3) score += 8;
-    if ((q.includes("популяр") || q.includes("вечер")) && votes >= 50000) score += 8;
+    // диверсификация: уже показанные не повторяем
+    if (shownIds.has(String(item.id))) score -= 100;
 
     return score;
   }
 
-  async function bestItems(query, kind, limit = 3) {
-    const q = normalizeText(query);
-    const loaded = await ensureSearchIndex();
-    const pool = allKnownItems(loaded).filter(item => matchesKind(item, kind));
+  function pools(extra) {
+    const seen = new Set();
+    const out = [];
 
-    return pool
-      .map(item => ({ item, score: smartScore(item, q, kind) }))
-      .filter(x => x.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, limit)
-      .map(x => x.item);
+    function add(arr) {
+      (arr || []).forEach(item => {
+        if (!item || item.id == null) return;
+        const id = String(item.id);
+        if (seen.has(id)) return;
+        seen.add(id);
+        out.push(item);
+      });
+    }
+
+    add(extra || []);
+    add(currentItems || []);
+    add(lastSearchResults || []);
+    if (homeData && homeData.sections) Object.values(homeData.sections).forEach(add);
+
+    return out;
+  }
+
+  async function bestItems(query, cls, limit) {
+    const idx = await ensureSearchIndex();
+    const pool = pools(idx).filter(item => matchesKind(item, cls.kind));
+
+    const scored = pool
+      .map(item => ({ item, score: scoreItem(item, query, cls) }))
+      .filter(x => x.score > -40)
+      .sort((a, b) => b.score - a.score);
+
+    // Берём не строго первые, а с лёгкой вариативностью среди хороших
+    const top = scored.slice(0, Math.max(limit * 3, 12));
+    const picked = [];
+    for (const x of top) {
+      if (picked.length >= limit) break;
+      if (!picked.some(p => norm(titleOf(p)) === norm(titleOf(x.item)))) picked.push(x.item);
+    }
+
+    picked.forEach(item => shownIds.add(String(item.id)));
+    return picked;
   }
 
   function openItemCard(item) {
     if (!item) return;
-
     const id = String(item.id);
-    const domCard = document.querySelector(`.card[data-id="${CSS.escape(id)}"]`);
-    if (domCard) {
-      domCard.scrollIntoView({ behavior: "smooth", block: "center" });
-      domCard.classList.add("gkm-ai-picked");
-      setTimeout(() => domCard.classList.remove("gkm-ai-picked"), 1800);
-      domCard.click();
+    const card = document.querySelector(`.card[data-id="${CSS.escape(id)}"]`);
+    if (card) {
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.classList.add("gkm-ai-picked");
+      setTimeout(() => card.classList.remove("gkm-ai-picked"), 1800);
+      card.click();
       return;
     }
 
-    if (typeof openDetails === "function") {
-      openDetails(item);
-      return;
-    }
-
-    setSearch(titleOf(item));
+    if (typeof openDetails === "function") openDetails(item);
+    else setSearch(titleOf(item));
   }
 
-  async function recommendFromQuery(query, opts = {}) {
-    const kind = opts.kind || detectKindFromText(normalizeText(query));
-    const wait = addMsg("Подбираю по базе сайта...", "bot");
+  async function recommendFromQuery(query, options = {}) {
+    const cls = classify(query);
+    if (options.kind) cls.kind = options.kind;
+    if (options.tags) cls.tags = [...new Set([...(cls.tags || []), ...options.tags])];
 
-    const items = await bestItems(query, kind, opts.limit || 3);
+    const wait = addMsg("Подбираю по базе 96к...", "bot");
+    const items = await bestItems(query, cls, options.limit || 5);
     if (wait) wait.remove();
 
     if (!items.length) {
-      addBotWithActions("Не нашёл точное совпадение. Могу открыть поиск или популярное.", [
-        { label: "Искать запрос", run: () => setSearch(query) },
-        { label: "Популярное", run: () => clickByText(["Популярное"]) },
+      addBotWithActions("Не нашёл точное. Попробуй другими словами или открой поиск.", [
+        { label: "Искать", run: () => setSearch(query) },
         { label: "Топ 250", run: () => clickByText(["Топ 250"]) },
+        { label: "Популярное", run: () => clickByText(["Популярное"]) }
       ]);
       return;
     }
 
-    const intro = opts.intro || "Вот что могу посоветовать:";
-    items.forEach((item, idx) => {
-      addRecommendationCard(item, idx === 0 ? intro : "Ещё вариант:", [
-        { label: "Ещё похожее", run: () => recommendFromQuery(query, { kind, limit: 3, intro: "Лови ещё варианты:" }) }
-      ]);
-    });
+    const intro = options.intro || "Вот что я бы выбрал:";
+    items.forEach((item, i) => addRecommendationCard(item, i === 0 ? intro : "Ещё вариант:", query, cls.kind, i + 1));
+  }
+
+  function greeting() {
+    addBotWithActions("Здарова, брат. Я бесплатный помощник по твоей базе. Напиши: «аниме про попаданцев», «фильм на вечер», «мрачный детектив», «сериал про выживание» — покажу варианты с постерами.", [
+      { label: "Аниме про попаданцев", run: () => recommendFromQuery("аниме про попаданцев исекай", { kind: "anime", tags: ["isekai"], intro: "Вот исекай/попаданцы:" }) },
+      { label: "Фильм на вечер", run: () => recommendFromQuery("фильм на вечер популярный", { kind: "movies", intro: "Вот фильмы на вечер:" }) },
+      { label: "Сильный ГГ", run: () => recommendFromQuery("аниме с сильным главным героем", { kind: "anime", tags: ["opmc"], intro: "Вот аниме с сильным ГГ:" }) }
+    ]);
   }
 
   function helperAnswer(text) {
-    const q = normalizeText(text);
+    const cls = classify(text);
     addMsg(text, "user");
-    if (!q) return;
 
-    const kind = detectKindFromText(q);
+    if (cls.type === "greeting") return greeting();
 
-    if (kind === "anime") {
-      addBotWithActions("Понял: подбираю аниме. Для попаданцев ищу исекай, другой мир, перерождение и похожие тайтлы.", [
-        { label: "Открыть Аниме", run: () => clickByText(["Аниме"]) },
-        { label: "Искать Исекай", run: () => setSearch("Исекай") },
-        { label: "Подобрать", run: () => recommendFromQuery(text, { kind: "anime", intro: "Вот аниме под запрос:" }) }
+    if (cls.type === "smalltalk") {
+      addBotWithActions("Принял. Дай жанр/настроение — подберу по базе.", [
+        { label: "Топ аниме", run: () => recommendFromQuery("топ аниме", { kind: "anime", tags: ["top"] }) },
+        { label: "Что посмотреть", run: () => recommendFromQuery("что посмотреть вечером", { kind: "movies" }) }
       ]);
-      recommendFromQuery(text, { kind: "anime", intro: "Вот аниме под запрос:" });
       return;
     }
 
-    if (kind === "movies") {
-      addBotWithActions("Окей, подбираю фильмы и показываю мини-карточки.", [
-        { label: "Популярное", run: () => clickByText(["Популярное"]) },
-        { label: "Топ 250", run: () => clickByText(["Топ 250"]) },
-        { label: "Подобрать", run: () => recommendFromQuery(text, { kind: "movies", intro: "Вот фильмы под запрос:" }) }
+    if (cls.type === "search") {
+      setSearch(text.replace(/найди|поиск|искать|поищи/gi, "").trim() || text);
+      addBotWithActions("Поставил запрос в поиск и параллельно подбираю рекомендации.", [
+        { label: "Ещё подборка", run: () => recommendFromQuery(text, { kind: cls.kind }) }
       ]);
-      recommendFromQuery(text, { kind: "movies", intro: "Вот фильмы под запрос:" });
+      recommendFromQuery(text, { kind: cls.kind, tags: cls.tags, intro: "Вот что подходит:" });
       return;
     }
 
-    if (kind === "series") {
-      addBotWithActions("Подбираю сериалы.", [
-        { label: "Открыть Сериалы", run: () => clickByText(["Сериалы"]) },
-        { label: "Подобрать", run: () => recommendFromQuery(text, { kind: "series", intro: "Вот сериалы под запрос:" }) }
-      ]);
-      recommendFromQuery(text, { kind: "series", intro: "Вот сериалы под запрос:" });
-      return;
-    }
+    if (cls.type === "new") clickByText(["Новинки"]);
+    if (cls.type === "top") clickByText(["Топ 250"]);
+    if (cls.type === "popular") clickByText(["Популярное"]);
 
-    if (kind === "cartoons") {
-      addBotWithActions("Подбираю мультфильмы.", [
-        { label: "Открыть Мультфильмы", run: () => clickByText(["Мультфильмы"]) },
-        { label: "Подобрать", run: () => recommendFromQuery(text, { kind: "cartoons", intro: "Вот мультфильмы под запрос:" }) }
-      ]);
-      recommendFromQuery(text, { kind: "cartoons", intro: "Вот мультфильмы под запрос:" });
-      return;
-    }
+    const intro = cls.kind === "anime" ? "Вот аниме под запрос:" :
+      cls.kind === "movies" ? "Вот фильмы под запрос:" :
+      cls.kind === "series" ? "Вот сериалы под запрос:" :
+      cls.kind === "cartoons" ? "Вот мультфильмы под запрос:" :
+      "Вот что подходит:";
 
-    if (q.includes("новин")) clickByText(["Новинки"]);
-    if (q.includes("топ") || q.includes("лучшее") || q.includes("рейтинг")) clickByText(["Топ 250"]);
-
-    addBotWithActions("Ищу по базе и покажу визуальные рекомендации.", [
-      { label: "Искать", run: () => setSearch(text.trim().slice(0, 80)) },
-      { label: "Подобрать", run: () => recommendFromQuery(text, { kind: "any", intro: "Вот что нашёл:" }) },
+    addBotWithActions("Понял. Считаю жанры, ключевые слова, рейтинг, голоса и похожесть.", [
+      { label: "Искать", run: () => setSearch(text) },
+      { label: "Ещё варианты", run: () => recommendFromQuery(text, { kind: cls.kind, tags: cls.tags, intro: "Лови ещё:" }) },
       { label: "Популярное", run: () => clickByText(["Популярное"]) }
     ]);
-    recommendFromQuery(text, { kind: "any", intro: "Вот что нашёл:" });
+
+    recommendFromQuery(text, { kind: cls.kind, tags: cls.tags, intro });
   }
 
   function initAiChat() {
@@ -1443,12 +1578,12 @@ if (document.readyState === "loading") {
     const note = document.querySelector(".ai-note");
 
     if (title) title.textContent = "Голубь помощник";
-    if (subtitle) subtitle.textContent = "Бесплатно: умные советы + мини-постеры";
+    if (subtitle) subtitle.textContent = "Бесплатно: BRAIN подбор + мини-постеры";
     if (note) note.textContent = "";
 
     const first = document.querySelector("#gkmAiMessages .ai-bot");
     if (first) {
-      first.textContent = "Я стал умнее: понимаю анимэ/аниме, попаданцев/исекай, жанры и показываю мини-карточки с постером.";
+      first.textContent = "Я стал умнее: использую теги базы, жанры, настроение, рейтинг, голоса, избранное и историю. Без платного API.";
     }
 
     if (top) top.addEventListener("click", openAi);
@@ -1473,5 +1608,5 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v8-isekai-smart-helper-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v11-brain-tags-helper-2026-06-13";
 })();
