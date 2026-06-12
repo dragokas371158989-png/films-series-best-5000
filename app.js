@@ -1,9 +1,10 @@
-const GKM_APP_CLEAN_VERSION = "clean-rebuild-v2-4-detail-card-upgrade-2026-06-12";
+const GKM_APP_CLEAN_VERSION = "clean-rebuild-v2-5-no-crash-fallback-2026-06-12";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
 const FAST_META_URL = `${FAST_BASE}/meta.json`;
 const FAST_SEARCH_URL = `${FAST_BASE}/search_index.json`;
+const LEGACY_INDEX_URL = "data/index.json";
 const PAGE_SIZE = 60;
 const MIN_VOTES_FOR_TOP = 300;
 
@@ -267,11 +268,163 @@ function renderHome() {
   if (pageText) pageText.textContent = "Главная";
 }
 
+async function fetchJsonQuiet(url) {
+  try {
+    return await fetchJson(url);
+  } catch (e) {
+    console.warn("Не загрузилось:", url, e);
+    return null;
+  }
+}
+
+function normalizeChunkUrl(chunk) {
+  let url = "";
+
+  if (typeof chunk === "string") {
+    url = chunk;
+  } else if (chunk && typeof chunk === "object") {
+    url = chunk.file || chunk.path || chunk.url || chunk.src || chunk.name || "";
+  }
+
+  url = String(url || "").trim().replace(/^\/+/, "");
+
+  if (!url) return "";
+
+  if (url.startsWith("http") || url.startsWith("data/")) return url;
+  if (url.startsWith("chunks/")) return "data/" + url;
+  if (/chunk_\d+\.json$/i.test(url)) return "data/chunks/" + url.split("/").pop();
+
+  return "data/" + url;
+}
+
+function getItemsFromAnyJson(data) {
+  if (Array.isArray(data)) return data;
+
+  if (data && typeof data === "object") {
+    for (const key of ["movies", "items", "data", "results", "records", "list"]) {
+      if (Array.isArray(data[key])) return data[key];
+    }
+
+    const values = Object.values(data);
+    if (values.length && values.slice(0, 20).every(x => x && typeof x === "object" && !Array.isArray(x))) {
+      return values;
+    }
+  }
+
+  return [];
+}
+
+function quickCleanItem(raw, idx) {
+  const genres = Array.isArray(raw.genres)
+    ? raw.genres.map(g => typeof g === "object" ? (g.genre || g.name || g.title || "") : g).filter(Boolean)
+    : (typeof raw.genres === "string" ? raw.genres.split(/[,;/|·]+/).map(x => x.trim()).filter(Boolean) : []);
+
+  const title = raw.ru || raw.title || raw.name || raw.nameRu || raw.en || raw.originalTitle || "Без названия";
+
+  let year = String(raw.year || raw.release_date || raw.first_air_date || "");
+  const ym = year.match(/(19\d{2}|20\d{2})/);
+  year = ym ? ym[1] : year;
+
+  let type = raw.type || raw.kind || "Фильм";
+  const typeText = normalize([type, raw.source, raw.provider, title, ...genres].join(" "));
+
+  if (typeText.includes("аниме") || typeText.includes("anime") || typeText.includes("jikan") || typeText.includes("myanimelist")) {
+    type = "Аниме";
+  } else if (typeText.includes("мульт")) {
+    type = "Мультфильм";
+  } else if (typeText.includes("сериал") || typeText.includes("series")) {
+    type = "Сериал";
+  } else {
+    type = "Фильм";
+  }
+
+  return {
+    ...raw,
+    id: raw.id || raw.uid || raw.tmdbId || raw.kinopoiskId || raw.filmId || raw.mal_id || ("legacy_" + idx),
+    ru: title,
+    en: raw.en || raw.nameEn || raw.originalTitle || "",
+    year,
+    type,
+    rating: Number(raw.rating || raw.vote_average || raw.ratingKinopoisk || raw.ratingImdb || 0),
+    votes: Number(raw.votes || raw.vote_count || raw.ratingVoteCount || 0),
+    poster: raw.poster || raw.posterUrl || raw.poster_url || raw.image || raw.imageUrl || "",
+    genres,
+    overview: raw.overview_ru || raw.ruOverview || raw.description_ru || raw.descriptionRu || raw.description || raw.overview || raw.synopsis || "",
+    source: raw.source || raw.provider || "",
+  };
+}
+
+function buildHomeFromLegacy(items) {
+  const cleaned = items.map(quickCleanItem).filter(x => titleOf(x) !== "Без названия");
+
+  const bySmart = list => [...list].sort((a, b) => scoreSmart(b) - scoreSmart(a)).slice(0, 18);
+  const popular = [...cleaned].filter(x => getVotes(x) >= 1000).sort((a, b) => getVotes(b) - getVotes(a)).slice(0, 18);
+  const top = bySmart(cleaned.filter(x => getVotes(x) >= MIN_VOTES_FOR_TOP && getRating(x) >= 7));
+  const newItems = [...cleaned].filter(x => Number(getYear(x) || 0) >= 2024).sort((a, b) => Number(getYear(b) || 0) - Number(getYear(a) || 0)).slice(0, 18);
+
+  return {
+    total: cleaned.length,
+    sections: {
+      popular,
+      top,
+      new: newItems,
+      anime: bySmart(cleaned.filter(x => getType(x) === "Аниме")),
+      movies: bySmart(cleaned.filter(x => getType(x) === "Фильм")),
+      series: bySmart(cleaned.filter(x => getType(x) === "Сериал")),
+      cartoons: bySmart(cleaned.filter(x => getType(x) === "Мультфильм")),
+    }
+  };
+}
+
+async function loadLegacyFallbackHome(reason) {
+  setStatus("Быстрая база пустая, включаю запасную загрузку...");
+
+  const index = await fetchJsonQuiet(LEGACY_INDEX_URL);
+  const chunks = index && Array.isArray(index.chunks) ? index.chunks : [];
+
+  if (!chunks.length) {
+    throw new Error("data/fast пустая и data/index.json не содержит chunks");
+  }
+
+  const firstChunks = chunks.slice(0, 4);
+  const legacyItems = [];
+
+  for (const chunk of firstChunks) {
+    const url = normalizeChunkUrl(chunk);
+    if (!url) continue;
+
+    const data = await fetchJsonQuiet(url);
+    legacyItems.push(...getItemsFromAnyJson(data));
+  }
+
+  homeData = buildHomeFromLegacy(legacyItems);
+  metaData = {
+    count: homeData.total,
+    generatedAt: "legacy fallback",
+    years: [...new Set(legacyItems.map(x => quickCleanItem(x).year).filter(Boolean))].sort((a, b) => Number(b) - Number(a)),
+    genres: [...new Set(legacyItems.flatMap(x => quickCleanItem(x).genres || []))].sort((a, b) => a.localeCompare(b, "ru")),
+    fallback: true,
+  };
+
+  fillFilters();
+  renderHome();
+
+  setStatus(`Запасная база: ${homeData.total} записей · причина: ${reason || "data/fast пустая"}`);
+}
+
+
 async function loadHome() {
   setStatus("Загружаю быструю главную...");
 
   metaData = await fetchJson(FAST_META_URL);
   homeData = await fetchJson(FAST_HOME_URL);
+
+  const total = getTotalCount();
+
+  if (!total || total <= 0) {
+    await loadLegacyFallbackHome("data/fast вернула 0");
+    return;
+  }
 
   fillFilters();
   renderHome();
@@ -700,6 +853,12 @@ function setupEvents() {
       } else if (tabName === "all") {
         currentPage = 1;
         renderHome();
+      } else if (metaData && metaData.fallback && homeData && homeData.sections) {
+        const section = homeData.sections[tabName] || [];
+        currentItems = section;
+        currentPage = 1;
+        currentPages = 1;
+        renderList(section, `Запасной раздел: ${section.length}`);
       } else {
         await loadPage(tabName, 1);
       }
