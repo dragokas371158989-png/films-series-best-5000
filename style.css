@@ -645,3 +645,25 @@ dialog::backdrop{background:rgba(0,0,0,.72)}
     max-height: 240px;
   }
 }
+
+
+/* === GKM V4 SPEED LITE OVERRIDES === */
+.controls { backdrop-filter: none !important; }
+.site-logo { filter: drop-shadow(0 0 10px rgba(123,44,255,.55)) !important; }
+.card {
+  box-shadow: 0 10px 26px rgba(0,0,0,.48), 0 0 12px rgba(123,44,255,.10) !important;
+  transition: transform .08s linear, border-color .08s linear !important;
+}
+.card:hover {
+  transform: none !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.52), 0 0 14px rgba(0,229,255,.16) !important;
+}
+.rating,.rank-s,.rank-a,.rank-b,.rank-c,.rank-d { box-shadow: none !important; }
+dialog { backdrop-filter: none !important; }
+.detail-poster-box img { box-shadow: 0 12px 28px rgba(0,0,0,.42) !important; }
+body::after { text-shadow: none !important; }
+@media (max-width:760px){
+  .grid,.home-row{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+  .topbar{min-height:118px !important;}
+  .site-logo{max-height:88px !important;}
+}
