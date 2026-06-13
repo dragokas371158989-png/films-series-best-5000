@@ -1,5 +1,103 @@
 [
   {
+    "id": 62557,
+    "ru": "Peter Kay's Car Share",
+    "en": "Peter Kay's Car Share",
+    "year": 2015,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.4,
+    "votes": 41,
+    "popularity": 1.35,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mvhjwhldWSfslz1CUhDmU3NvZJ5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nM7WjQmNeT8wCYzsTzlAfOatLaV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 590102,
+    "ru": "Love Takes Flight",
+    "en": "Love Takes Flight",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.4,
+    "votes": 41,
+    "popularity": 0.54,
+    "genres": [
+      "телевизионный фильм",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tOCjOGMcmsDF2Ylsh61hP3YnG9p.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lnFkyyTOYk2STRdJjUimKPUE8QS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_74189",
+    "ru": "Волшебный учитель Нэгима - Хранитель Вечности",
+    "en": "UQ HOLDER!～魔法先生ネギま！",
+    "year": 2017,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.4,
+    "votes": 40,
+    "popularity": 3.98,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "комедия",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "С развитием науки человечеству открылись знания о существовании магии, что повлекло огромные изменения во всём мире. Однако, мальчик по имени Тота, живущий в небольшом городке, далёк от этих изменений. И всё же его обычная жизнь не лишена собственной магии. Поддержку в изучении этого навыка он получает от своей учительницы и друзей. Но тихие деньки заканчиваются, и юношу ждёт удивительное приключение.",
+    "poster": "https://image.tmdb.org/t/p/w342/7oUjy6CIwjiPCHtjKWH7vw1k9xN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yeN44FKUaQJ9EZcAakiw32gp7LN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 12516,
+    "ru": "La Linea",
+    "en": "La Linea",
+    "year": 1978,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.4,
+    "votes": 40,
+    "popularity": 2.32,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "Восемь новелл, связанных лишь тем, что они являются «снами» режиссёра. Среди них рассказ о том, как молодой Куросава попадает в картину Винсента Ван Гога и встречается там с самим автором. Также рассказы о жертвах Второй мировой и об апокалиптических картинах ядерной войны.  В одной из новелл, повествующей о лисьей свадьбе, домик, на фоне которого стоит герой — маленький мальчик, является воспоминанием Куросавы о доме, в котором он жил в детстве. Весь фильм во многом автобиографичен.",
+    "poster": "https://image.tmdb.org/t/p/w342/dzIBm3qZvWY9jomjR7Qt8pPewOH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hBVXHoweDSOLhCzbBXSgKr3ld8V.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_291339",
+    "ru": "Память убийцы",
+    "en": "Memory of a Killer",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.4,
+    "votes": 40,
+    "popularity": 30.9,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Анджело ведет двойную жизнь — наемного убийцы и семьянина, и ему удавалось совмещать эти роли, пока его не настигла ранняя форма болезни Альцгеймера. Теперь его миры сталкиваются, ставя под угрозу его семью.",
+    "poster": "https://image.tmdb.org/t/p/w342/pXqaKHo7vBZH3rGd3obNKkxouL7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/llrSuUkFiR6EjDnh79dq8HEeziF.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "tv_233912",
     "ru": "Страж Дафэна",
     "en": "大奉打更人",
@@ -9562,106 +9660,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/DHdtmiPBKfIrwIhFgn03vjNQc0.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/k4GHSwS1IuVJNUHcoMEiwr7lWag.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1542877,
-    "ru": "劇場版「暗殺教室」みんなの時間",
-    "en": "劇場版「暗殺教室」みんなの時間",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.4,
-    "votes": 5,
-    "popularity": 4.05,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "боевик",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dfrZ7VHcurFhLm2Hk6xyjRILc5d.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oP3Gj7nihYsu9i4JyPVMRLR7xBP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1466120,
-    "ru": "데드 어게인",
-    "en": "데드 어게인",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.4,
-    "votes": 5,
-    "popularity": 3.06,
-    "genres": [
-      "триллер",
-      "мелодрама",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iqSmb9ugb8xK6avZ3Wglxue39N8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ifDV7PwBq9FdfD6ArRiCxKtIa7o.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1362429,
-    "ru": "映画 先輩はおとこのこ あめのち晴れ",
-    "en": "映画 先輩はおとこのこ あめのち晴れ",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.4,
-    "votes": 5,
-    "popularity": 1.95,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qOCnr7MNK3jbWcLFusveOd2wsIe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eG8wN73Ma8AwvXtqIHdMXkaVevq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1130948,
-    "ru": "Rosebush Pruning",
-    "en": "Rosebush Pruning",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.4,
-    "votes": 5,
-    "popularity": 1.6,
-    "genres": [
-      "комедия",
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rEn0kHtZAjb44R2Jv0FUBLdFPsY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vcZ3UUVmFNk90DBSrTBlTKCdbbE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1445905,
-    "ru": "阳光照耀青春里",
-    "en": "阳光照耀青春里",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.4,
-    "votes": 5,
-    "popularity": 1.12,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eEald2YlM5TIx5M7nMlivoG7suP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iF9GH1WWFnEERlEHjuPAsxJyF2c.jpg",
     "source": "tmdb"
   }
 ]

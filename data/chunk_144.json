@@ -1,5 +1,271 @@
 [
   {
+    "id": 579879,
+    "ru": "Северный ветер",
+    "en": "Северный ветер",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 0.48,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Это было волшебное время, когда царил великий матриархат: женщины влиятельного клана правили на территории Северных полей и жили в ожидании любви… Они были всесильны, и любое их желание исполнялось, но в один миг все изменилось и начался хаос…",
+    "poster": "https://image.tmdb.org/t/p/w342/hedbJHiwK8sfOh8gM62FMNhE6Ml.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4JOU8zIx0nhaL5PRBw4VYNvlALf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 757514,
+    "ru": "Сын монархов",
+    "en": "Hijo de monarcas",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 0.46,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Когда-то Мендель покинул родную Мексику и переехал учиться в Нью-Йорк, где стал ведущим экспертом по бабочкам-монархам. Но воспоминания о том, как они со старшим братом Симоном осиротели, преследуют его до сих пор. Когда Мендель едет домой, чтобы присутствовать на похоронах своей бабушки, ему приходится восстановить свои связи с прошлым.",
+    "poster": "https://image.tmdb.org/t/p/w342/iOV7S8mBDkpGspskzdrALIkKodb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mUo1ilGTDm7LaiinW1EvsHQnr6A.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1479846,
+    "ru": "Hive",
+    "en": "Hive",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 9.39,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aFGoHyaTPERCyuAhEvonS8xlk9Y.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kuYX624dH6P0LsWTEWuLo9d3kNV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1205025,
+    "ru": "Foursome",
+    "en": "Foursome",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 3.87,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2a5eQej7Lvssp4dOnRrWpuXXvUj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8ZkOjttU34bmSkMq20A7zaXjP7U.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 677115,
+    "ru": "비뇨기과 여의사들 2",
+    "en": "비뇨기과 여의사들 2",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 1.94,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uksxhYz0Xc7c5AIjoU205XXEVk8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yy85YPsJEVxCy97A89cAwdsCUXa.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 827818,
+    "ru": "ثانية واحدة",
+    "en": "ثانية واحدة",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 0.85,
+    "genres": [
+      "комедия",
+      "мелодрама",
+      "драма",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/lGVkh5Ur6TZKTgj36hFkyTZdZLo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/875z76chnTDCh9kUZdIYCEqmjdu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 945836,
+    "ru": "ഓടും കുതിര ചാടും കുതിര",
+    "en": "ഓടും കുതിര ചാടും കുതിര",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 0.69,
+    "genres": [
+      "драма",
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/A7tcEl28jq2dOm3iU2WqGVzGnTP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bNH7K4yJtPqLd1VHvsjZHwx4BUa.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 824117,
+    "ru": "Незнакомцы, которых мы встречаем",
+    "en": "朝云暮雨",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 0.59,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6lI00yq52IxGUbL1Szpooqw6bCP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fl8VjJm93yj8oJVp1IRhRsVdMQ6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 879508,
+    "ru": "The Plus One",
+    "en": "The Plus One",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 0.51,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tGNNU1W2c4SaHlnDZwZfP6C1AT4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/drZ4lMwiiOQ1xOpQLqL1nNU7298.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 996771,
+    "ru": "A Country Christmas Harmony",
+    "en": "A Country Christmas Harmony",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 0.46,
+    "genres": [
+      "телевизионный фильм",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/YBfLXm9LEs3v89ZG2GTNDAN49P.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lUchbL8fUarf9JPRRz9uYMyEdod.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 782310,
+    "ru": "Mayor Pete",
+    "en": "Mayor Pete",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 0.42,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/g0yBlB0zwqf8HVOeEFtzbuuKhlm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sunWygA1FUOqTekHsvSZLeF0Uop.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 41263,
+    "ru": "Укуси и подуй",
+    "en": "Morde & Assopra",
+    "year": 2011,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 7.35,
+    "genres": [
+      "Мыльная опера",
+      "драма",
+      "комедия"
+    ],
+    "overview": "В центре сюжета две главные линии — палеонтолога Жулии, которая хочет найти останки динозавров. Во время раскопок она знакомится с фермером Абнером и влюбляется в него. Другая ведущая линия — ученого-робототехника Икаро. Тоскуя по погибшей жене Наоми, он создает робота — точную копию Наоми, и, подобно Пигмалиону, влюбляется в свою «Галатею».",
+    "poster": "https://image.tmdb.org/t/p/w342/8mLBgn8vmOF97qfgTPnVgSwLdUf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5ljtPgJ1eh8yluGFPTWVeS3lh2x.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 40811,
+    "ru": "Безрассудное сердце",
+    "en": "Insensato Coração",
+    "year": 2011,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 6.03,
+    "genres": [
+      "Мыльная опера",
+      "драма",
+      "комедия"
+    ],
+    "overview": "Педру Брандау — превосходный лётчик и добрый парень. Судьба сводит его с Мариной на борту самолёта, который захватил угонщик. Спасая жизнь пассажиров и обезвреживая преступника, Педру не только становится героем в лице Марины, но и её любовью. Сам парень тоже понимает, что не равнодушен к девушке. Тем не менее, он не может признаться той, что скоро должна состоятся его свадьба с Лусианой, которая является лучшей подругой детства Марины и не подозревающая, что её жених и подруга влюблены друг в друга.",
+    "poster": "https://image.tmdb.org/t/p/w342/yTmYFo5z8q3q3Pcj2WyBByc6CQb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/CBszVvMCuvIrWmtrW1B8cvgL2H.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 885302,
+    "ru": "Cold Return",
+    "en": "Cold Return",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 1.43,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/upZxK0lQXTkqBo4ZHZ6nSj2obw5.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
     "id": 333072,
     "ru": "Преисподняя мёртвых",
     "en": "Z アイランド",
@@ -9201,272 +9467,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/fmGnujCZZ4AvaG1pMCvIHYZh72m.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/eXAvzHsKcUDz2z42dkTw4KkmPGL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 461092,
-    "ru": "ఏంజెల్",
-    "en": "ఏంజెల్",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.58,
-    "genres": [
-      "боевик",
-      "фэнтези",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tY2u7TB8DOqPEw1aFdDTTfxOZHy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fqLOAS64aellTQvmSvBIH1evsGk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 390283,
-    "ru": "മോഹവലയം",
-    "en": "മോഹവലയം",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.58,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jlefoRNkJzTnhzGFbSaHJ0cpuAY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/89rfNiyJs2wMYT5huj5A6NUBeih.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 491879,
-    "ru": "Cradle",
-    "en": "Cradle",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.55,
-    "genres": [
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/z0EHQLDa6Pj7eSWruNJyBOwhbkL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pqxRhJZaE9Nfk7NEjZI603IWpvh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 476412,
-    "ru": "Doble",
-    "en": "Doble",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.54,
-    "genres": [
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jF3iEFqFV43JEAaAcUeSP42mroQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/p1YeWerRTzJHQszJIdQUTWd74vI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 446961,
-    "ru": "ちえりとチェリー",
-    "en": "ちえりとチェリー",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.54,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pokVN75BphBp6ZKaDfzSqmkvO7X.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kkVcdhAC8uTxpj0Xc2IQWPGZoN7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 438607,
-    "ru": "헤픈젤: 비밀의 몸캠",
-    "en": "헤픈젤: 비밀의 몸캠",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.53,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tPIPMLns1T4FOmcqJ7kl5Sea0Hj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ugeg21kKIhj16srAueZZ61RVlWD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 148923,
-    "ru": "アーバンスクウェア 琥珀の追撃",
-    "en": "アーバンスクウェア 琥珀の追撃",
-    "year": 1986,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.53,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rrRxlMA3KYYPZWhMT0ASaChIpkx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/z2Zt2GukpwUHayXWxt1X4Kn1q37.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 913541,
-    "ru": "ご近所物語",
-    "en": "ご近所物語",
-    "year": 1996,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.51,
-    "genres": [
-      "мультфильм",
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tiYP7wl8I18B3uCb1Us7TBaY5oD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/x3buQsJyyDDmkGLWZ6IyBEFkSoa.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 799735,
-    "ru": "Cirque du Soleil - Volta",
-    "en": "Cirque du Soleil - Volta",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.49,
-    "genres": [
-      "семейный",
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jTVpcyvOmJRVxrC21VLypwxcLR2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/reQo9gBjft1Vm0LbdMfTC8cICVF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 606883,
-    "ru": "Imparables Una Batalla Para Morirse de Risa",
-    "en": "Imparables Una Batalla Para Morirse de Risa",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.48,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/axjf30DnOh4ijvQRBdKn9xRywKu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9k3R05ouPZsiO80X1vj4hzZlGNh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 550082,
-    "ru": "PEACE MAKER 鐵 後篇 友命~ユウメイ~",
-    "en": "PEACE MAKER 鐵 後篇 友命~ユウメイ~",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.47,
-    "genres": [
-      "боевик",
-      "драма",
-      "история",
-      "мультфильм",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lH5rrystZvjQokaAyTNIgSceKFx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fPXZ02mREgbNOS4RPMWeybIhb6a.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 393170,
-    "ru": "Kaptaan",
-    "en": "Kaptaan",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.47,
-    "genres": [
-      "боевик",
-      "комедия",
-      "драма",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2lArjCwkRmBya27Sr3NaNoAkNnO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fE0Mc48ProMRO7L5bddbMQc8tmo.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 537707,
-    "ru": "Ville Neuve",
-    "en": "Ville Neuve",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.46,
-    "genres": [
-      "мультфильм",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zrgXO9fFOhqzZOxf76bEk3BjafO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xw4A6t7xnGZktG60YpbNShK33Z.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 889674,
-    "ru": "三天",
-    "en": "三天",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.46,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/A2xePK8G6anBDR5ufYpLBLWfzUz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iDSsIiCtl4aBacsraRQ2gcLmCSA.jpg",
     "source": "tmdb"
   }
 ]

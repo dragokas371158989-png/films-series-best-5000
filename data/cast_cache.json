@@ -1,7 +1,7 @@
 {
-  "version": 3,
-  "generatedAt": "2026-06-12T13:22:30Z",
-  "count": 1199,
+  "version": 4,
+  "generatedAt": "2026-06-13T11:42:24Z",
+  "count": 1205,
   "limit": 80,
   "source": "kinopoiskapiunofficial",
   "items": {
@@ -136,86 +136,89 @@
       "tmdbId": 219866,
       "itemId": "219866",
       "title": "Из-за любви",
+      "year": "2023",
+      "kinopoiskId": 5123304,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
           "name": "Джеймс Ма",
           "role": "Singh",
-          "profile": "/9BCbyykBaUY3Du8pXqcn1Ehqcs7.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4380526.jpg"
         },
         {
-          "name": "Пай Ринрада Кэубуасай",
-          "role": "Lin",
-          "profile": "/7HIn9glTSE5RXmI3qqfC06Uo1JB.jpg"
+          "name": "Rinrada Kaewbuasai",
+          "role": "Ring",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6980287.jpg"
         },
         {
-          "name": "Suriyont Arunwattanakul",
-          "role": "Zhou / \"Te\" Chotikan / Henry / Phakorn",
-          "profile": "/ibuVG5ctnVNmyMbUJbjz82FNJAM.jpg"
+          "name": "Сурийон Арунваттанакул",
+          "role": "Chotikan",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5220574.jpg"
         },
         {
-          "name": "Юдо Тантач Таринпиром",
+          "name": "Tantachj Tharunpirom",
           "role": "Worawat",
-          "profile": "/467gmBu3S0WcGHa7tqB962ynX1M.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6980288.jpg"
         },
         {
-          "name": "Тун Пимпави Кокрабин",
+          "name": "Пимпави Кограбин",
           "role": "Sroi",
-          "profile": "/s4NrUUQC8QLtaR9HUJLo1T0ZJfz.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6663572.jpg"
         },
         {
-          "name": "Ке Чаттарика Ситтипром",
-          "role": "Tripradad",
-          "profile": "/6e1Vvn6eRmrAtCoZzsN9DuNJzd8.jpg"
-        },
-        {
-          "name": "Sarawit Subun",
-          "role": "Phakkhaphol",
-          "profile": "/vNeJQcO8rJzWJh7dsQp1MHGwTla.jpg"
-        },
-        {
-          "name": "Pok Kosawis Piyasakulkaew",
-          "role": "Bu",
-          "profile": "/qxeDHVZaHUHxgd4trigrJpQDkF4.jpg"
-        },
-        {
-          "name": "สุรินทร คารวุตม์",
-          "role": "Chan",
-          "profile": "/feRmQ9MuYiUCRNWcMyOZJQtHCaI.jpg"
-        },
-        {
-          "name": "Джоб Нити Самуткочон",
-          "role": "Likhit",
-          "profile": "/sOlvwPswuoxZKsionxw2IYtniOO.jpg"
-        },
-        {
-          "name": "กมลชนก รอดเสถียร",
-          "role": "\"Gift\" Kanokdao",
-          "profile": "/AioXnTBqfVmNVIGTuWusFoTXO0I.jpg"
-        },
-        {
-          "name": "แจ๊คกี้ ชาเคอลีน มึ้นซ์",
-          "role": "Lin",
-          "profile": "/9JTyXfXlVgnwHcCabYYOnHfZkfQ.jpg"
-        },
-        {
-          "name": "Ну Сурасак Чайат",
-          "role": "Khajorn",
-          "profile": "/rT8V1l9vnkMSw4R5YOHmXtri0dy.jpg"
-        },
-        {
-          "name": "Бол Куммун Кломкаев",
+          "name": "Йитпану Кломкэв",
           "role": "Saeng",
-          "profile": "/plYucDBHCF5gI1GXeqK26jXP37r.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4807926.jpg"
         },
         {
-          "name": "Charat Fuengarom",
-          "role": "Siriwat",
-          "profile": "/hOAXz9PscT1WMIbr5YBDxzTajO6.jpg"
+          "name": "Чаттарика Ситтипром",
+          "role": "Tripradap",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6885988.jpg"
         },
         {
-          "name": "Peterpan Tadsapon Wiwitawan",
-          "role": "",
-          "profile": "/aMssS3vxIlq2ZoHZSPmm4drr8xl.jpg"
+          "name": "Sorawit Suboon",
+          "role": "Phakkhaphol",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5300962.jpg"
+        },
+        {
+          "name": "Косавис Пиясакулкэв",
+          "role": "Bu",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6695724.jpg"
+        },
+        {
+          "name": "Суринт Каравут",
+          "role": "Chan",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5591528.jpg"
+        },
+        {
+          "name": "Йоб Нити Самуткойорн",
+          "role": "Likhit",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6488078.jpg"
+        },
+        {
+          "name": "Kamonchanok Rodsatien",
+          "role": "Kanokdao",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6898813.jpg"
+        },
+        {
+          "name": "Жаклин Мюнх",
+          "role": "Lin",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6451268.jpg"
+        },
+        {
+          "name": "Сурасак Чаи-От",
+          "role": "Khajorn",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1454034.jpg"
+        },
+        {
+          "name": "Surasak Chaiyaat",
+          "role": "Khajorn",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4116076.jpg"
+        },
+        {
+          "name": "Химавари Тадзири",
+          "role": "Nuri [Daughter]",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_10159067.jpg"
         }
       ]
     },
@@ -224,56 +227,29 @@
       "tmdbId": 69562,
       "itemId": "69562",
       "title": "แผนร้ายนายเจ้าเล่ห์",
+      "year": "2016",
+      "kinopoiskId": 4300042,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Sheranut Yusananda",
-          "role": "Kookai",
-          "profile": "/kGAT84waxkHfy2tf7hu3xd5Vrlo.jpg"
-        },
-        {
-          "name": "ณิชาภัทร ฉัตรชัยพลรัตน์",
-          "role": "Khaiwan",
-          "profile": "/7ygrsxbcnfhXT6rISwHBDpOZFEO.jpg"
-        },
-        {
-          "name": "徐志賢",
-          "role": "Kongfa",
-          "profile": "/qhzw3jHkraonN80FukA2yBltLbX.jpg"
-        },
-        {
-          "name": "Джейн Метика Джиранорапат",
-          "role": "Kookai [Young]",
-          "profile": "/qUlGChMUXY8KG2OEUY8rVcB6dg8.jpg"
-        },
-        {
-          "name": "รัตท์ริชา ประภากิติ",
-          "role": "Koi",
-          "profile": "/orlZakWAWoBXSqZYc8Ut658ktYf.jpg"
-        },
-        {
-          "name": "Прэй Преплой Ори",
-          "role": "Coco",
-          "profile": "/p2PsfXi1iGqM6YwM5mDWzYcZ1QB.jpg"
-        },
-        {
-          "name": "อิงครัต ดำรงค์ศักดิ์กุล",
-          "role": "Daoneu [Young]",
-          "profile": "/wwPkeoZQj2a4oPww0aVdhd5nvDh.jpg"
-        },
-        {
-          "name": "ตะวัน วิหครัตน์",
-          "role": "Dew",
-          "profile": "/874HD73mqHfU1DQQmkgBOpP5zHI.jpg"
-        },
-        {
-          "name": "กร คุณาธิปอภิสิริ",
-          "role": "Kongfa [Young]",
-          "profile": "/jmkpB41iO5Hro22pJkYBhBaq5vJ.jpg"
-        },
-        {
-          "name": "จุฑาวุฒิ ภัทรกำพล",
+          "name": "Чутавут Пхатракампол",
           "role": "Daoneu",
-          "profile": "/1LBYp6MPa3tXQIr5DI2LJFk7XqW.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5850997.jpg"
+        },
+        {
+          "name": "Шеранут Юсананда",
+          "role": "Kookai",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3189872.jpg"
+        },
+        {
+          "name": "Ничапхат Чатчайпхолрат",
+          "role": "Khaiwan",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4203464.jpg"
+        },
+        {
+          "name": "Тхассапак Сюй",
+          "role": "Kongfa",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5460320.jpg"
         }
       ]
     },
@@ -446,81 +422,89 @@
       "tmdbId": 232834,
       "itemId": "232834",
       "title": "สืบลับหมอระบาด",
+      "year": "2023",
+      "kinopoiskId": 5026676,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "ณเดชน์ คูกิมิยะ",
+          "name": "Надеч Кугимия",
           "role": "Khunkhao Woraphutthichai",
-          "profile": "/w58HrktpHZ7UVGY5SKoJxFkitCy.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3208403.jpg"
         },
         {
-          "name": "Kimberly Ann Voltemas",
+          "name": "Кимберли Энн Волтемас",
           "role": "Jenjira",
-          "profile": "/zgo2a0h3N3oDhsteZzl6f0HEeAE.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5289629.jpg"
         },
         {
-          "name": "Alexander Rendell",
+          "name": "Алекс Ренделл",
           "role": "Theerat",
-          "profile": "/AuXrHmmYdXnvBthOwWk1K24Kv44.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_398269.jpg"
         },
         {
-          "name": "ภูริตา สุปินชุมภู",
-          "role": "Mintra",
-          "profile": "/2HmR9Qv6zZCGTkBuoY5imBOgsl5.jpg"
+          "name": "Пхулита Супинчомпу",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6758856.jpg"
         },
         {
-          "name": "สัญญา คุณากร",
+          "name": "Саня Кунакорн",
           "role": "Korn",
-          "profile": "/3DQGTDFdAvWMf8XTp8GsOG2VNR1.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_378903.jpg"
         },
         {
-          "name": "คัทลียา แมคอินทอช",
+          "name": "Катхалия Макинтош",
           "role": "Radakorn",
-          "profile": "/krFK6KNTlMbexFXeGNygZ9OFsSk.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5331757.jpg"
         },
         {
-          "name": "ทรงสิทธิ์ รุ่งนพคุณศรี",
+          "name": "Сонгсит Рунгнопакунси",
           "role": "Ram",
-          "profile": "/6sh6H6UYyUDPxw3gPXzdp2ERy4m.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1528773.jpg"
         },
         {
-          "name": "พลวัฒน์ มนูประเสริฐ",
+          "name": "Пхоллават Манупрасерт",
           "role": "Sek",
-          "profile": "/dINspxsEyG554WJHfii2YeeHdwy.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5107800.jpg"
         },
         {
-          "name": "Khwanruedi Klomklom",
-          "role": "Khronkhwan",
-          "profile": "/tNXhj89xt1p60j6k2i8ijRvXC24.jpg"
+          "name": "Кхванрыди Кломклом",
+          "role": "Khrongkhwan",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5186184.jpg"
         },
         {
-          "name": "นิติ ชัยชิตาทร",
+          "name": "Нити Чайчитаторн",
           "role": "Ja",
-          "profile": "/b5kJxNZNjJZJ6rG5Vj2dkAuq2Xz.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2837437.jpg"
         },
         {
-          "name": "Pai Virasut Hiranbuth",
+          "name": "Висарут Хиранбутх",
           "role": "Ek",
-          "profile": "/br3crpUaDb4JvLY1V0zC6ZsBzlc.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5277676.jpg"
         },
         {
-          "name": "นิภาภรณ์ ฐิติธนการ",
+          "name": "Нипапорн Тхитититанакарн",
           "role": "Ben",
-          "profile": "/rMUTEhzKpXbXsmsEj6U7SJMhRED.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5300963.jpg"
         },
         {
-          "name": "ธนายง ว่องตระกูล",
+          "name": "Ноппавит Тхайтэ",
+          "role": "Macky",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6883771.jpg"
+        },
+        {
+          "name": "Тханайонг Вонгтракул",
           "role": "Thanet",
-          "profile": "/AliWyacF1Hn6h9XViCrH6wTLZjH.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1130585.jpg"
         },
         {
-          "name": "ศรุต วิจิตรานนท์",
+          "name": "Сарут Вичитрананда",
           "role": "Nopphadanai",
-          "profile": "/g53WmoUxEXWacWKRjtNPAy5WtKO.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6191601.jpg"
         },
         {
-          "name": "Suchada Poonpattanasuk",
+          "name": "Сучада Пунпаттанасук",
           "role": "Phimphan",
-          "profile": "/2YbVnprukt2BGEF5JmXo03EhwrK.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3650633.jpg"
         }
       ]
     },
@@ -617,71 +601,89 @@
       "tmdbId": 69561,
       "itemId": "69561",
       "title": "เพื่อเธอ",
+      "year": "2016",
+      "kinopoiskId": 963340,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "พุฒิชัย เกษตรสิน",
-          "role": "Chanon",
-          "profile": "/wKeGJSqX4txNq996nrOmfoFoloA.jpg"
+          "name": "Сон Джун-ги",
+          "role": "Yoo Si-jin",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1910898.jpg"
         },
         {
-          "name": "Esther Supreeleela",
-          "role": "Anntika / Ann",
-          "profile": "/qL1NLM4tPynGmvH1ARa3kKB4sQS.jpg"
+          "name": "Сон Хе-гё",
+          "role": "Kang Mo-yeon",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1173130.jpg"
         },
         {
-          "name": "Девахастин На Аюттхая",
-          "role": "Athibet",
-          "profile": "/4KHTecNTUshnyap4wtjD7xhrvVC.jpg"
+          "name": "Чин Гу",
+          "role": "Seo Dae-yeong",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_885919.jpg"
         },
         {
-          "name": "Keerati Mahapreukpong",
-          "role": "Dao",
-          "profile": "/f7421wia36Eznbov3DHN63ol9h7.jpg"
+          "name": "Ким Джи-вон",
+          "role": "Yoon Myeong-joo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2533707.jpg"
         },
         {
-          "name": "Cee Hataipat Smathvithayavech",
-          "role": "Chompoonuch",
-          "profile": ""
+          "name": "Кан Щин-иль",
+          "role": "Yoon Joong-jang",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_484595.jpg"
         },
         {
-          "name": "Нум Сантисук Промсири",
-          "role": "Prapas",
-          "profile": "/grGMsczoVmp1hlZMKT1V7j1gP0I.jpg"
+          "name": "Ким Бён-чхоль",
+          "role": "Park Byeong-soo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_733690.jpg"
         },
         {
-          "name": "Ornanong Panyawong",
-          "role": "Maenee",
-          "profile": "/fxUIbsaWHU5KCzB8gB8ufYNdbnZ.jpg"
+          "name": "Ан Бо-хён",
+          "role": "Lim Gwang-nam",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4359393.jpg"
         },
         {
-          "name": "ศตวรรษ ดุลยวิจิตร",
-          "role": "Surakit",
-          "profile": "/lvVKXY0rJ36WhcoLSOv9YurVvmH.jpg"
+          "name": "Ким Мин-сок",
+          "role": "Kim Gi-beom",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3614934.jpg"
         },
         {
-          "name": "สุรวุฑ ไหมกัน",
-          "role": "Pairat",
-          "profile": "/7fkvaQBWDVj6TSbdKMf62S1dplo.jpg"
+          "name": "Ли Сын-джун",
+          "role": "Song Sang-hyeon",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1898713.jpg"
         },
         {
-          "name": "ภัทรพล กันตพจน์",
-          "role": "Yai",
-          "profile": "/2TXxFHNaq5mfuqz6zFtme8G3MAc.jpg"
+          "name": "Со Джон-ён",
+          "role": "Ha Ja-ae",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_731265.jpg"
         },
         {
-          "name": "Pongphan Petchbuntoon",
-          "role": "Palit",
-          "profile": "/dUv3H0kqmTk6KqELI3CXC8bq2zx.jpg"
+          "name": "Оню",
+          "role": "Lee Chi-hoon",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2860625.jpg"
         },
         {
-          "name": "Khunakorn Kirdpan",
-          "role": "Pramote",
-          "profile": "/xJRhD050HqFEn24TtiDYCIHLRwb.jpg"
+          "name": "Хён Джю-ни",
+          "role": "Pyo Ji-soo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2562831.jpg"
         },
         {
-          "name": "อรุชา โตสวัสดิ์",
-          "role": "Win",
-          "profile": "/7nRHVQCkL1J4BcAkkyaMAosa9ry.jpg"
+          "name": "Тхэ Ин-хо",
+          "role": "Han Seok-won",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4531411.jpg"
+        },
+        {
+          "name": "Дэвид Ли МакИннис",
+          "role": "Captain Argus",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_770276.jpg"
+        },
+        {
+          "name": "Джаспер Чо",
+          "role": "Doctor Daniel Spencer",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4345830.jpg"
+        },
+        {
+          "name": "Дин Доусон",
+          "role": "Chief of Police",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3120233.jpg"
         }
       ]
     },
@@ -733,21 +735,24 @@
       "tmdbId": 93294,
       "itemId": "93294",
       "title": "Dog's Most Wanted",
+      "year": "2019",
+      "kinopoiskId": 989280,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Duane 'Dog' Chapman",
-          "role": "Self",
-          "profile": "/nKUW1zlypxZDRqRLrTDdrA3Xkn0.jpg"
+          "name": "Тупак Шакур",
+          "role": "играет самого себя (в титрах: 2Pac)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_45413.jpg"
         },
         {
-          "name": "Beth Chapman",
-          "role": "Self",
-          "profile": "/rZOR1RFvo3PK6JtH0jDYWlZVNev.jpg"
+          "name": "Снуп Догг",
+          "role": "Snoop Doggy Dogg",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2005.jpg"
         },
         {
-          "name": "David Robinson",
-          "role": "Self",
-          "profile": ""
+          "name": "Андре Алексен",
+          "role": "LAPD Officer Wilcox",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1829655.jpg"
         }
       ]
     },
@@ -763,26 +768,89 @@
       "tmdbId": 102,
       "itemId": "102",
       "title": "Driven",
+      "year": "1998",
+      "kinopoiskId": 4907,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Mike Brewer",
-          "role": "Self - Host",
-          "profile": "/9Q6RK8UNQqvx7nMKzY7pmNnZJrV.jpg"
+          "name": "Сильвестр Сталлоне",
+          "role": "Joe Tanto",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_8816.jpg"
         },
         {
-          "name": "Penny Mallory",
-          "role": "Self - Host",
-          "profile": "/ko5B9Mm9o46unMtOrsPU0FeIMEn.jpg"
+          "name": "Берт Рейнолдс",
+          "role": "Carl Henry",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_8565.jpg"
         },
         {
-          "name": "Jason Plato",
-          "role": "Self - Host",
-          "profile": "/rX84Tpl2IWkyvbUuoLtIgydTlyU.jpg"
+          "name": "Кип Парду",
+          "role": "Jimmy Bly",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_10139.jpg"
         },
         {
-          "name": "Alex Sibley",
-          "role": "Self - Host",
-          "profile": "/gsxiCPLRml1vk5OWQbViOoeUSrE.jpg"
+          "name": "Стэйси Эдвардс",
+          "role": "Lucretia Clan",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_14676.jpg"
+        },
+        {
+          "name": "Тиль Швайгер",
+          "role": "Beau Brandenburg",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_26503.jpg"
+        },
+        {
+          "name": "Джина Гершон",
+          "role": "Cathy Heguy",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_28673.jpg"
+        },
+        {
+          "name": "Эстелла Уоррен",
+          "role": "Sophia Simone",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1431.jpg"
+        },
+        {
+          "name": "Кристиан де ла Фуэнте",
+          "role": "Memo Heguy",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_32656.jpg"
+        },
+        {
+          "name": "Брент Бриско",
+          "role": "Crusher",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_13487.jpg"
+        },
+        {
+          "name": "Роберт Шон Леонард",
+          "role": "Demille Bly",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_47984.jpg"
+        },
+        {
+          "name": "Верона Пут",
+          "role": "Nina (в титрах: Verona Feldbusch)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_17240.jpg"
+        },
+        {
+          "name": "Ясмин Вагнер",
+          "role": "Ingrid (в титрах: Jasmine Wagner)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_51487.jpg"
+        },
+        {
+          "name": "Чип Ганасси",
+          "role": "Team Owner",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_51488.jpg"
+        },
+        {
+          "name": "Джон Делла Пенна",
+          "role": "Team Manager",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_51489.jpg"
+        },
+        {
+          "name": "Дэн Дюран",
+          "role": "Commentator #1",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1840.jpg"
+        },
+        {
+          "name": "Роб Смит",
+          "role": "Commentator #2",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1286944.jpg"
         }
       ]
     },
@@ -791,11 +859,89 @@
       "tmdbId": 152661,
       "itemId": "152661",
       "title": "Scott the Woz",
+      "year": "2021",
+      "kinopoiskId": 1334365,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Scott Wozniak",
-          "role": "Scott the Woz (uncredited)",
-          "profile": "/x0vuJUZnPPzSAuL9pMWRE8kAa4W.jpg"
+          "name": "Скотт Возниак",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5867815.jpg"
+        },
+        {
+          "name": "Sam Essig",
+          "role": "Jeb Jab",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6093367.jpg"
+        },
+        {
+          "name": "Eric Turney",
+          "role": "Rex Mohs",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6093390.jpg"
+        },
+        {
+          "name": "Joe Robertson",
+          "role": "Terry Lesler",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6093370.jpg"
+        },
+        {
+          "name": "Dominic Mattero",
+          "role": "Wendy's Employee",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1568215.jpg"
+        },
+        {
+          "name": "Will Kanwischer",
+          "role": "Chet Shaft",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6093369.jpg"
+        },
+        {
+          "name": "Justin Womble",
+          "role": "Anchorman",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6093375.jpg"
+        },
+        {
+          "name": "Jarred Wise",
+          "role": "Officer Steel Wool",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6093374.jpg"
+        },
+        {
+          "name": "Jeffrey Pohlman-Beshuk",
+          "role": "Kay Swiss",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6093385.jpg"
+        },
+        {
+          "name": "Jacob Rahe",
+          "role": "Officerery Smith",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6093368.jpg"
+        },
+        {
+          "name": "ConnorEatsPants",
+          "role": "ConnorEatsPants",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6095681.jpg"
+        },
+        {
+          "name": "Винс Янг",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1552353.jpg"
+        },
+        {
+          "name": "Indiejacob",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6093380.jpg"
+        },
+        {
+          "name": "James Caddick",
+          "role": "Caddicarus",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5108540.jpg"
+        },
+        {
+          "name": "Джеймс Рольф",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1606804.jpg"
+        },
+        {
+          "name": "Nathaniel Bandy",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6093376.jpg"
         }
       ]
     },
@@ -830,81 +976,89 @@
       "tmdbId": 128919,
       "itemId": "128919",
       "title": "ให้รักพิพากษา",
+      "year": "2021",
+      "kinopoiskId": 1343908,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Kongthap Peak",
-          "role": "Napawat / \"Q\"",
-          "profile": "/ftN3tJSs3d9CJGsK62EhFH7GWNG.jpg"
+          "name": "Дэниэл Крэйг",
+          "role": "Benoit Blanc",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_14188.jpg"
         },
         {
-          "name": "ราณี แคมเปญ",
-          "role": "Thicha",
-          "profile": "/p2mHicig9Obk6InadpCmdxFIMpj.jpg"
+          "name": "Эдвард Нортон",
+          "role": "Miles Bron",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_25774.jpg"
         },
         {
-          "name": "สาวิกา ไชยเดช",
-          "role": "Cammy",
-          "profile": "/5Nv3x0ouI0uMvPOFy6OHBpyL19T.jpg"
+          "name": "Жанель Моне",
+          "role": "Andi Brand",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1827849.jpg"
         },
         {
-          "name": "Tanakorn Posayanon",
-          "role": "Ben",
-          "profile": "/ArYUUYh9KSClyBYxqKpnMcO975x.jpg"
+          "name": "Кэтрин Хан",
+          "role": "Claire Debella",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_31708.jpg"
         },
         {
-          "name": "Daraneenute Pasutanavin",
-          "role": "Ammie",
-          "profile": "/kiV3R5mLhvy1hfC6NcLo1DK9i1S.jpg"
+          "name": "Лесли Одом мл.",
+          "role": "Lionel Toussaint",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1131675.jpg"
         },
         {
-          "name": "Kirk Schiller",
-          "role": "Sak",
-          "profile": "/mVikADQf9SbInZMa3pt4buwCOo9.jpg"
+          "name": "Кейт Хадсон",
+          "role": "Birdie Jay",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6580.jpg"
         },
         {
-          "name": "Natha Lloyd",
-          "role": "[Ticha's mother]",
-          "profile": "/34JwZkrVhBKDJ6QGp1K6sT1GKnA.jpg"
+          "name": "Дэйв Батиста",
+          "role": "Duke Cody",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1171284.jpg"
         },
         {
-          "name": "ทรงสิทธิ์ รุ่งนพคุณศรี",
-          "role": "Phong [Q's father]",
-          "profile": "/6sh6H6UYyUDPxw3gPXzdp2ERy4m.jpg"
+          "name": "Джессика Хенвик",
+          "role": "Peg",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2006922.jpg"
         },
         {
-          "name": "Thunyaphat Phatrathinchaicherin",
-          "role": "Dala",
-          "profile": "/7df5htTaXrifGAriB7DwVK0oUDr.jpg"
+          "name": "Мэдлин Клайн",
+          "role": "Whiskey",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1709191.jpg"
         },
         {
-          "name": "จักริน  ภูริพัฒน์",
-          "role": "Tin [Q's friend]",
-          "profile": "/1V7jiYQ1905NDSThtRU2iNxWyiB.jpg"
+          "name": "Ноа Сеган",
+          "role": "Derol",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_226905.jpg"
         },
         {
-          "name": "Cake Nattavat Kaewbuasai",
-          "role": "Pon [Q's friend]",
-          "profile": "/vRmLwckb230kMmUX8bJMI4y8NZj.jpg"
+          "name": "Джеки Хоффман",
+          "role": "Ma",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_32570.jpg"
         },
         {
-          "name": "Larissa Wilmott",
-          "role": "June",
-          "profile": "/aq99PLkBqk2o4h8BYXwNxSEA7Cj.jpg"
+          "name": "Даллас Робертс",
+          "role": "Devon Debella",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_224721.jpg"
         },
         {
-          "name": "ศุภชัย สุวรรณอ่อน",
-          "role": "Jack",
-          "profile": "/nIid382zsYX7rdIQr441Y7lKmU3.jpg"
+          "name": "Итан Хоук",
+          "role": "Efficient Man",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4630.jpg"
         },
         {
-          "name": "Seadthawut Porntanawut",
-          "role": "Oh",
-          "profile": "/kVghSryDGDvxpOGiV6nYpLbLpjc.jpg"
+          "name": "Хью Грант",
+          "role": "Phillip",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_8090.jpg"
         },
         {
-          "name": "Jubjang Vimpolphan Chaleejunghran",
-          "role": "Goi",
-          "profile": "/978e6kGdU0ji9HoTex8mMdwHLOP.jpg"
+          "name": "Стивен Сондхайм",
+          "role": "Stephen Sondheim",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_33093.jpg"
+        },
+        {
+          "name": "Наташа Лионн",
+          "role": "Natasha Lyonne",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_295.jpg"
         }
       ]
     },
@@ -913,46 +1067,24 @@
       "tmdbId": 1509968,
       "itemId": "1509968",
       "title": "We, Brothers",
+      "year": "2025",
+      "kinopoiskId": 1070118,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Pedro Wagner",
-          "role": "Tony",
-          "profile": "/bmdQ2QgVt6DFK5v5px9O8Z4yGW9.jpg"
+          "name": "Доменик ДеФранк",
+          "role": "Aaron Burton",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4744581.jpg"
         },
         {
-          "name": "Paulo Pagliossa",
-          "role": "Pete",
-          "profile": "/tdBqJjz81LOcm7PB8CYERmxjaq5.jpg"
+          "name": "Palma Ellis",
+          "role": "Ms. Claire",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4790161.jpg"
         },
         {
-          "name": "Mickael Kornblum",
-          "role": "Lucio",
-          "profile": "/jLmBrO84SZBfwxk8HlsnWZo4Vsi.jpg"
-        },
-        {
-          "name": "Gabby Ballhausen",
-          "role": "Susanna",
-          "profile": "/ie2pkfCJPyMMbgT96N05pBy3nhM.jpg"
-        },
-        {
-          "name": "Pietra Cezimbra",
-          "role": "Jocelyn",
-          "profile": "/1R6p8mZIoX0D2y4FkiweCRuu5hu.jpg"
-        },
-        {
-          "name": "Victor Grimoni",
-          "role": "Dave",
-          "profile": "/g7k2y317qDlj32zeCYpPWamWcmp.jpg"
-        },
-        {
-          "name": "Felipe Bandeira",
-          "role": "Albert",
-          "profile": "/gpRVFBcK3gu5wTjD5AZYMOtI2it.jpg"
-        },
-        {
-          "name": "Orlando Rodrigues",
-          "role": "Detective Charlie",
-          "profile": "/kZ6iymFcuy3mdudJN9xm3JIqqhF.jpg"
+          "name": "Anthony DeFrank",
+          "role": "Luke Burton",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4790162.jpg"
         }
       ]
     },
@@ -961,71 +1093,89 @@
       "tmdbId": 79395,
       "itemId": "79395",
       "title": "Лус Мария",
+      "year": "1998",
+      "kinopoiskId": 419539,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
           "name": "Энджи Сепеда",
-          "role": "Luz María",
-          "profile": "/azShCjdzK93jcBBOJSs5lFUd7CH.jpg"
+          "role": "Luz María Camejo (Lucecita)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_417655.jpg"
         },
         {
-          "name": "Christian Meier",
+          "name": "Кристиан Мейер",
           "role": "Gustavo Gonzálvez",
-          "profile": "/Aez99BPhe7e63RuOtWGiojrV3rm.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_109166.jpg"
         },
         {
-          "name": "Mariela Alcalá",
-          "role": "Mirtha Valdéz",
-          "profile": "/r9DtT5W48sBRltj1yHTQfyMOC67.jpg"
-        },
-        {
-          "name": "Rosalinda Serfaty",
-          "role": "Angelina Mendoza y Rivero de Gonzálvez",
-          "profile": "/aKhClfS4ABvPngDAVi3uV8r5cR2.jpg"
-        },
-        {
-          "name": "Élide Brero",
-          "role": "Doña María Santander Vda. de Mendoza y Rivero",
-          "profile": "/yOLOjRtTMTGDhpos5cYq0aY3vTg.jpg"
-        },
-        {
-          "name": "Sonia Oquendo",
-          "role": "Graciela de Mendoza y Rivero",
-          "profile": ""
-        },
-        {
-          "name": "Zonaly Ruíz",
-          "role": "Fefa Espósito",
-          "profile": ""
-        },
-        {
-          "name": "Tatiana Espinoza",
-          "role": "Caruca",
-          "profile": "/jphEWJyQzYIYAgo2XmEjNw3oKvv.jpg"
-        },
-        {
-          "name": "Martín Farfán",
-          "role": "Amador Espósito",
-          "profile": "/cQT51f43glyRHoWMRv9k7CPQB8q.jpg"
-        },
-        {
-          "name": "Teddy Guzmán",
+          "name": "Тедди Гусман",
           "role": "Modesta Ludeña Vda. de Cosío",
-          "profile": "/awLGziBkYBwYSlwTLVgdEKMMrK6.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1445140.jpg"
         },
         {
-          "name": "Jesús Delaveaux",
-          "role": "Miguel Mendoza y Rivero Santander",
-          "profile": "/epTn70RD3QImYGoUf1wLBEyLXod.jpg"
+          "name": "Мариэла Алькала",
+          "role": "Mirtha Valdéz",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1109340.jpg"
         },
         {
-          "name": "Javier Echevarría",
-          "role": "José Julián Aldama de la Vega",
-          "profile": "/a7FUrcqy9LY4e48V7LYvCmFZ5AL.jpg"
+          "name": "Zonaly Ruiz",
+          "role": "Fefa Espósito",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1624607.jpg"
         },
         {
-          "name": "Orlando Fundichely",
+          "name": "Мартин Фарфан",
+          "role": "Amador Espósito",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1624606.jpg"
+        },
+        {
+          "name": "Орландо Фундичели",
           "role": "Sergio Cosío Ludeña",
-          "profile": ""
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_768935.jpg"
+        },
+        {
+          "name": "Элиде Бреро",
+          "role": "Doña María Santander Vda. de Mendoza y Rivero",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_390583.jpg"
+        },
+        {
+          "name": "Соня Оквендо",
+          "role": "Graciela de Mendoza y Rivero",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1429454.jpg"
+        },
+        {
+          "name": "Росалинда Серфати",
+          "role": "Angelina Mendoza y Rivero de Gonzálvez",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1179173.jpg"
+        },
+        {
+          "name": "Хесус Делаво",
+          "role": "Miguel Mendoza y Rivero Santander",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_855850.jpg"
+        },
+        {
+          "name": "Antonio Dulzaides",
+          "role": "Álvaro Revoredo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1621701.jpg"
+        },
+        {
+          "name": "Анхела Кихандрия",
+          "role": "Azucena",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_417623.jpg"
+        },
+        {
+          "name": "Агустин Бенитес",
+          "role": "Dr. Agustín Gutiérrez",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_768999.jpg"
+        },
+        {
+          "name": "Татьяна Эспиноза",
+          "role": "Caruca",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_950826.jpg"
+        },
+        {
+          "name": "Хавьер Валдес",
+          "role": "Padre Emilio Gonzálvez",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1458470.jpg"
         }
       ]
     },
@@ -1241,21 +1391,89 @@
       "tmdbId": 1562807,
       "itemId": "1562807",
       "title": "Rapsódia em Azul",
+      "year": "2025",
+      "kinopoiskId": 27668,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Ketheleen Souza",
-          "role": "Carmen",
-          "profile": ""
+          "name": "Роберт Алда",
+          "role": "George Gershwin",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_175841.jpg"
         },
         {
-          "name": "Monique Benoski",
-          "role": "Primeira Bailarina",
-          "profile": ""
+          "name": "Джоан Лесли",
+          "role": "Julie Adams",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_143467.jpg"
         },
         {
-          "name": "Vida Santos",
-          "role": "Professora",
-          "profile": ""
+          "name": "Алексис Смит",
+          "role": "Christine Gilbert",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_113191.jpg"
+        },
+        {
+          "name": "Чарльз Коберн",
+          "role": "Max Dreyfus",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_200325.jpg"
+        },
+        {
+          "name": "Джули Бишоп",
+          "role": "Lee Gershwin",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_208361.jpg"
+        },
+        {
+          "name": "Альберт Бассерманн",
+          "role": "Prof. Franck (в титрах: Albert Basserman)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_210621.jpg"
+        },
+        {
+          "name": "Моррис Карновский",
+          "role": "Morris Gershwin",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_181431.jpg"
+        },
+        {
+          "name": "Розмари ДеКамп",
+          "role": "Rose Gershwin (в титрах: Rosemary De Camp)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_166222.jpg"
+        },
+        {
+          "name": "Оскар Левант",
+          "role": "Oscar Levant",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_178231.jpg"
+        },
+        {
+          "name": "Пол Уайтмен",
+          "role": "Paul Whiteman",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_213152.jpg"
+        },
+        {
+          "name": "Эл Джолсон",
+          "role": "Al Jolson",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_78813.jpg"
+        },
+        {
+          "name": "Джордж Уайт",
+          "role": "George White",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_213153.jpg"
+        },
+        {
+          "name": "Хэйзел Скотт",
+          "role": "Hazel Scott",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_213154.jpg"
+        },
+        {
+          "name": "Энн Браун",
+          "role": "Bess",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_213155.jpg"
+        },
+        {
+          "name": "Герберт Радли",
+          "role": "Ira Gershwin",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_170414.jpg"
+        },
+        {
+          "name": "Джон Б. Хьюз",
+          "role": "Hughes",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_213156.jpg"
         }
       ]
     },
@@ -1342,11 +1560,89 @@
       "tmdbId": 126797,
       "itemId": "126797",
       "title": "Ничто не случается дважды",
+      "year": "2019",
+      "kinopoiskId": 1162631,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
+          "name": "Екатерина Тышкевич",
+          "role": "Катя Богданова / Маша Богданова",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3695775.jpg"
+        },
+        {
           "name": "Максим Дрозд",
-          "role": "Kalinin",
-          "profile": "/cH35zFpDBZXsKMiryBl8bZudBrK.jpg"
+          "role": "Калинин",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_916095.jpg"
+        },
+        {
+          "name": "Антон Батырев",
+          "role": "Вадим Огнев",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2275390.jpg"
+        },
+        {
+          "name": "Надежда Грановская",
+          "role": "Раиса",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1304317.jpg"
+        },
+        {
+          "name": "Алла Масленникова",
+          "role": "Лидия Николаевна",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_485821.jpg"
+        },
+        {
+          "name": "Ирина Ефремова",
+          "role": "Ирина Сергеевна",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1607905.jpg"
+        },
+        {
+          "name": "Валентин Томусяк",
+          "role": "Дмитрий Богданов",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1623082.jpg"
+        },
+        {
+          "name": "Владимир Гладкий",
+          "role": "Побегайло",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2347526.jpg"
+        },
+        {
+          "name": "Олесь Кацион",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1205176.jpg"
+        },
+        {
+          "name": "Глеб Калюжный",
+          "role": "Юра в юности",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3335983.jpg"
+        },
+        {
+          "name": "Антон Бухов",
+          "role": "следователь",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3923927.jpg"
+        },
+        {
+          "name": "Татьяна Жевнова",
+          "role": "Алла",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2424216.jpg"
+        },
+        {
+          "name": "Дмитрий Мальцев",
+          "role": "Борис",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3719149.jpg"
+        },
+        {
+          "name": "Екатерина Семенова",
+          "role": "Жанна Потехина",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_277225.jpg"
+        },
+        {
+          "name": "Регимантас Адомайтис",
+          "role": "муж Лидии",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_266155.jpg"
+        },
+        {
+          "name": "Полина Носыхина",
+          "role": "Аглая в юности",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4768579.jpg"
         }
       ]
     },
@@ -1355,56 +1651,89 @@
       "tmdbId": 47272,
       "itemId": "47272",
       "title": "История рок-н-ролла",
+      "year": "1995",
+      "kinopoiskId": 1047321,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Брюс Спрингстин",
-          "role": "Self",
-          "profile": "/pSBnsD7S19YwHXLD8UMSLE5wyKG.jpg"
-        },
-        {
-          "name": "Chuck Berry",
-          "role": "Self",
-          "profile": "/9faTPqWt3cBmQZWfB16REh1jUwl.jpg"
-        },
-        {
-          "name": "Tom Petty",
-          "role": "Self",
-          "profile": "/2wbz1cytLUhUaF7rxPLlhquVqwu.jpg"
-        },
-        {
           "name": "Боно",
-          "role": "Self",
-          "profile": "/p0TED4bMzyw00fxjiMnOARQOKvp.jpg"
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_29041.jpg"
         },
         {
-          "name": "Бадди Гай",
-          "role": "Self",
-          "profile": "/9J2mWgbZ39QCRASLKtiTeQV23Wr.jpg"
+          "name": "Брюс Спрингстин",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_57221.jpg"
         },
         {
-          "name": "Etta James",
-          "role": "Self",
-          "profile": "/lJW8BlxQGB9gwMzk6926EtviXwb.jpg"
+          "name": "Том Петти",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_74780.jpg"
         },
         {
-          "name": "Кит Ричардс",
-          "role": "Self",
-          "profile": "/hzb2tyMA2sa2AgEYXSmr63w8BFQ.jpg"
+          "name": "Пит Таунсенд",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_986377.jpg"
+        },
+        {
+          "name": "Куинси Джонс",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_29100.jpg"
+        },
+        {
+          "name": "Дэвид Боуи",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_18131.jpg"
+        },
+        {
+          "name": "Эрик Бёрдон",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_123557.jpg"
+        },
+        {
+          "name": "Дик Кларк",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_27729.jpg"
+        },
+        {
+          "name": "Джордж Клинтон",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4899.jpg"
+        },
+        {
+          "name": "Мик Флитвуд",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_105885.jpg"
+        },
+        {
+          "name": "Мик Джаггер",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_47214.jpg"
+        },
+        {
+          "name": "Грэхэм Нэш",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_139466.jpg"
         },
         {
           "name": "Гэри Бьюзи",
-          "role": "Narrator",
-          "profile": "/8H7Hlv6b7ZoK4jZKeLnc2i4pfPL.jpg"
+          "role": "рассказчик",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_16617.jpg"
         },
         {
-          "name": "Little Richard",
-          "role": "Self",
-          "profile": "/1JKKUNsQLHORat0YxqDYyQeydhS.jpg"
+          "name": "Джексон Браун",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_171459.jpg"
         },
         {
-          "name": "Al Kooper",
-          "role": "Self",
-          "profile": ""
+          "name": "Соломон Бёрк",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_98508.jpg"
+        },
+        {
+          "name": "Брайан Ино",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_159664.jpg"
         }
       ]
     },
@@ -1420,16 +1749,89 @@
       "tmdbId": 299653,
       "itemId": "299653",
       "title": "Skråplan",
+      "year": "2009",
+      "kinopoiskId": 55071,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Linda P",
-          "role": "Winnie",
-          "profile": "/77NRZrwdVxEXWS2pS1GJFNj0FhA.jpg"
+          "name": "Филипп Нуаре",
+          "role": "René Boirond",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_105775.jpg"
         },
         {
-          "name": "Christina Sederqvist",
-          "role": "Karina",
-          "profile": "/7MC4VJTER9sAK2PvibXQqhyA4gs.jpg"
+          "name": "Тьерри Лермитт",
+          "role": "François Lesbuche",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_30603.jpg"
+        },
+        {
+          "name": "Режин",
+          "role": "Simone",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_105782.jpg"
+        },
+        {
+          "name": "Грейс Де Капитани",
+          "role": "Natasha (в титрах: Grace De Capitani)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_291842.jpg"
+        },
+        {
+          "name": "Клод Броссе",
+          "role": "Vidal",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_90383.jpg"
+        },
+        {
+          "name": "Альбер Симоно",
+          "role": "Inspecteur Leblanc",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_154053.jpg"
+        },
+        {
+          "name": "Жюльен Гиомар",
+          "role": "Commissaire Bloret",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_121266.jpg"
+        },
+        {
+          "name": "Анри Атталь",
+          "role": "Dédé la Mitraille",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_46800.jpg"
+        },
+        {
+          "name": "Абу Бакар",
+          "role": "Le receleur de montres Cartier",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_919569.jpg"
+        },
+        {
+          "name": "Пьер Батон",
+          "role": "Le procureur",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_308931.jpg"
+        },
+        {
+          "name": "Бернар Бижауи",
+          "role": "Camoun",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_306969.jpg"
+        },
+        {
+          "name": "Жан-Клод Буйо",
+          "role": "Un gardien",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_101010.jpg"
+        },
+        {
+          "name": "Жюльен Буковски",
+          "role": "Le chauffeur de benne à ordures",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_133347.jpg"
+        },
+        {
+          "name": "Франсуа Каде",
+          "role": "L'hôtelier de l'hôtel Louxor",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_286749.jpg"
+        },
+        {
+          "name": "Жослин Каноен",
+          "role": "Le patron de la société de transports",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_419073.jpg"
+        },
+        {
+          "name": "Камель Шериф",
+          "role": "Abdel",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_128261.jpg"
         }
       ]
     },
@@ -1483,21 +1885,89 @@
       "tmdbId": 105699,
       "itemId": "105699",
       "title": "TIME TO TWICE",
+      "year": "2020",
+      "kinopoiskId": 4630624,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "나연",
-          "role": "Self",
-          "profile": "/fjChOSyBhQXCYhwsOSpJ0klVA2Y.jpg"
+          "name": "Наоми Аки",
+          "role": "Frida",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4194525.jpg"
         },
         {
-          "name": "정연",
-          "role": "Self",
-          "profile": "/rJDDjUO2uOBX5OygFnSrnivLL5q.jpg"
+          "name": "Ченнинг Татум",
+          "role": "Slater",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_475804.jpg"
         },
         {
-          "name": "Пак Чжи Хё",
-          "role": "Self",
-          "profile": "/50xrC5pnYU6E6uSonOa8hIy2rH7.jpg"
+          "name": "Алиа Шокат",
+          "role": "Jess",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_21044.jpg"
+        },
+        {
+          "name": "Кристиан Слэйтер",
+          "role": "Vic",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6653.jpg"
+        },
+        {
+          "name": "Саймон Рекс",
+          "role": "Cody",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4451.jpg"
+        },
+        {
+          "name": "Адриа Архона",
+          "role": "Sarah",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2956939.jpg"
+        },
+        {
+          "name": "Кайл Маклоклен",
+          "role": "Rich",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1413.jpg"
+        },
+        {
+          "name": "Хейли Джоэл Осмент",
+          "role": "Tom",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_11381.jpg"
+        },
+        {
+          "name": "Джина Дэвис",
+          "role": "Stacy",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_21361.jpg"
+        },
+        {
+          "name": "Левон Хоук",
+          "role": "Lucas",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6874935.jpg"
+        },
+        {
+          "name": "Лиз Карибель",
+          "role": "Camilla",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6663734.jpg"
+        },
+        {
+          "name": "Трю Маллен",
+          "role": "Heather",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4843984.jpg"
+        },
+        {
+          "name": "Крис Коста",
+          "role": "Stan",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6888696.jpg"
+        },
+        {
+          "name": "Мария Елена Оливарес",
+          "role": "Badass Maid",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_676863.jpg"
+        },
+        {
+          "name": "Сол Уильямс",
+          "role": "Emcee",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_50723.jpg"
+        },
+        {
+          "name": "Тиффани Персонс",
+          "role": "Interviewer",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1311234.jpg"
         }
       ]
     },
@@ -1506,66 +1976,89 @@
       "tmdbId": 208489,
       "itemId": "208489",
       "title": "Haus of Vicious",
+      "year": "2022",
+      "kinopoiskId": 4472695,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Tami Roman",
-          "role": "Chantel Vivian",
-          "profile": "/7tXyUvpVIUvQMr0C64U18WhWepg.jpg"
+          "name": "Тами Ромэн",
+          "role": "Chantel",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_240495.jpg"
         },
         {
-          "name": "Erica Peeples",
-          "role": "Jaelyn Ryan",
-          "profile": "/9zqtGPUrCyxcBgZyMD3HHU0kkIt.jpg"
+          "name": "Lyric Anderson",
+          "role": "Tia",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1919220.jpg"
         },
         {
-          "name": "Redaric Williams",
-          "role": "Kane",
-          "profile": "/aYORomrC2bXUqLi2vqrR8CTsU5T.jpg"
+          "name": "Zariyah Gibson",
+          "role": "Teen Chantel",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6267821.jpg"
         },
         {
-          "name": "Ella Joyce",
+          "name": "Элла Джойс",
           "role": "Carolyn",
-          "profile": "/p42wlar0hRZUtW9E96xFWZmNs9h.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_42586.jpg"
         },
         {
-          "name": "Norman Nixon, Jr.",
+          "name": "Кайлер О’Нил",
+          "role": "Izzy",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4841967.jpg"
+        },
+        {
+          "name": "Редарик Уильямс",
+          "role": "Kane",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2881371.jpg"
+        },
+        {
+          "name": "Норман Никсон мл.",
           "role": "Milan",
-          "profile": "/mMGUcLzMotzOTdklM73bQVrnnj5.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1458520.jpg"
         },
         {
-          "name": "Brely Evans",
+          "name": "Эрика Пиплз",
+          "role": "Jaelyn",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1482272.jpg"
+        },
+        {
+          "name": "Линдси Перлман",
+          "role": "Karen",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3921855.jpg"
+        },
+        {
+          "name": "Брели Эванс",
           "role": "Avery",
-          "profile": "/83ymE0A2KkeDCYFcmlWnj80mCfY.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1975909.jpg"
         },
         {
-          "name": "Vincent M. Ward",
-          "role": "Bishop",
-          "profile": "/wA7wu8SPn9xue8BzmHIXmYXmTo3.jpg"
+          "name": "Тиффани Блэк",
+          "role": "Raven",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1299143.jpg"
+        },
+        {
+          "name": "Мэтт Годби",
+          "role": "Detective Stacks",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1279173.jpg"
+        },
+        {
+          "name": "Herb Kimble",
+          "role": "Harvey",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4781721.jpg"
         },
         {
           "name": "Mikai Ramsey-Middleton",
           "role": "Young Kane",
-          "profile": ""
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7097993.jpg"
         },
         {
-          "name": "Nikki Lashae",
-          "role": "Raven",
-          "profile": ""
+          "name": "Ajima Cole",
+          "role": "Reporter",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5289238.jpg"
         },
         {
-          "name": "Dionne Gipson",
-          "role": "Lawanda",
-          "profile": ""
-        },
-        {
-          "name": "Джон Маршалл Джонс",
-          "role": "Trevor",
-          "profile": "/8aQ8qxVOeUx23Jw89ouj9gOwy1W.jpg"
-        },
-        {
-          "name": "Larry Williams Jr.",
-          "role": "Yung Jump",
-          "profile": ""
+          "name": "Нэнси Нейв",
+          "role": "Doctor",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2573987.jpg"
         }
       ]
     },
@@ -1640,16 +2133,89 @@
       "tmdbId": 255598,
       "itemId": "255598",
       "title": "รักนี้มีแค่เรา",
+      "year": "2024",
+      "kinopoiskId": 1045056,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "ธัญญาเรศ เองตระกูล",
-          "role": "Freya",
-          "profile": "/853lYJKqA7o5gnl75ie837ezpqz.jpg"
+          "name": "Рэйф Файнс",
+          "role": "Orlando Oxford",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_22670.jpg"
         },
         {
-          "name": "Panita Tumwattana",
-          "role": "Meiji",
-          "profile": "/t1knXeYHRGEbmUxWjigfnLKXO7n.jpg"
+          "name": "Харрис Дикинсон",
+          "role": "Conrad Oxford",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3498137.jpg"
+        },
+        {
+          "name": "Джимон Хонсу",
+          "role": "Shola",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_10024.jpg"
+        },
+        {
+          "name": "Джемма Артертон",
+          "role": "Polly",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1258054.jpg"
+        },
+        {
+          "name": "Рис Иванс",
+          "role": "Grigori Rasputin",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7629.jpg"
+        },
+        {
+          "name": "Мэттью Гуд",
+          "role": "Morton",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_397499.jpg"
+        },
+        {
+          "name": "Том Холландер",
+          "role": "King George / Kaiser Wilhelm / Tsar Nicholas",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6054.jpg"
+        },
+        {
+          "name": "Даниэль Брюль",
+          "role": "Erik Jan Hanussen",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_242467.jpg"
+        },
+        {
+          "name": "Тодд Бойс",
+          "role": "Dupont",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_47285.jpg"
+        },
+        {
+          "name": "Стэнли Туччи",
+          "role": "United States Ambassador",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_12028.jpg"
+        },
+        {
+          "name": "Шон МакКи",
+          "role": "Camp Guard #1 (в титрах: Shaun McKee)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3685340.jpg"
+        },
+        {
+          "name": "Питер Йорк",
+          "role": "Camp Guard #2",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3027071.jpg"
+        },
+        {
+          "name": "Чарльз Дэнс",
+          "role": "Kitchener",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_32594.jpg"
+        },
+        {
+          "name": "Александра Мария Лара",
+          "role": "Emily Oxford",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_234190.jpg"
+        },
+        {
+          "name": "Александр Шоу",
+          "role": "Young Conrad",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6170866.jpg"
+        },
+        {
+          "name": "Беван Вильджоэн",
+          "role": "Boer Sniper",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3356864.jpg"
         }
       ]
     },
@@ -1754,11 +2320,89 @@
       "tmdbId": 303014,
       "itemId": "303014",
       "title": "Heksejagt",
+      "year": "2025",
+      "kinopoiskId": 10193507,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Emma Paaske",
-          "role": "Vært",
-          "profile": "/4DuUbtJmKbKd91keMWhSXwxK9I6.jpg"
+          "name": "Julian Brix",
+          "role": "Laurentius Drago",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_10377346.jpg"
+        },
+        {
+          "name": "Lærke Krabbe De Waal",
+          "role": "Holly Storm",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_10377347.jpg"
+        },
+        {
+          "name": "Каспар Филлипсон",
+          "role": "Ærkebiskop Peder",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_968795.jpg"
+        },
+        {
+          "name": "Юссеф Уэйн Виттфельтт",
+          "role": "Diderik",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2564462.jpg"
+        },
+        {
+          "name": "Расмус Хаммерих",
+          "role": "Fyrst Drago",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1480166.jpg"
+        },
+        {
+          "name": "Adam Eiberg Kastaniegaard",
+          "role": "Django (в титрах: Adam Kastaniegaard)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_10377348.jpg"
+        },
+        {
+          "name": "Ida Skelbæk-Knudsen",
+          "role": "Frk. Sculabia",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6791262.jpg"
+        },
+        {
+          "name": "Петер Гильсфорт",
+          "role": "Ridder #3",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_309906.jpg"
+        },
+        {
+          "name": "Мортен Кристенсен",
+          "role": "Konge",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_573570.jpg"
+        },
+        {
+          "name": "Китт Майкен Мортенсен",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1694580.jpg"
+        },
+        {
+          "name": "Esther Thaulow Kharosh",
+          "role": "Pi",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_10377349.jpg"
+        },
+        {
+          "name": "Лаура Бро",
+          "role": "Kromutter",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_301781.jpg"
+        },
+        {
+          "name": "Emma Lihle Thomsen",
+          "role": "Olivia (в титрах: Emma Lihle)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7127808.jpg"
+        },
+        {
+          "name": "Vilbert Friberg",
+          "role": "в титрах: Vilbert Hein Friberg",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6934666.jpg"
+        },
+        {
+          "name": "Kristian Gintberg",
+          "role": "Tjener Frans",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4813915.jpg"
+        },
+        {
+          "name": "Anna Nordstrand",
+          "role": "Frida",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_10377350.jpg"
         }
       ]
     },
@@ -1767,26 +2411,79 @@
       "tmdbId": 1606507,
       "itemId": "1606507",
       "title": "Honey!",
+      "year": "2021",
+      "kinopoiskId": 4402111,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Калеб Хорн",
-          "role": "Honey",
-          "profile": "/e8Dw4RNTmmbn5p7pYNP92wO3cA9.jpg"
+          "name": "Рауль Мураками",
+          "role": "Kai Miura (в титрах: Raûru [Snow Man])",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6381021.jpg"
         },
         {
-          "name": "Jana Sosic",
-          "role": "Dani",
-          "profile": ""
+          "name": "Аи Ёсикава",
+          "role": "Hana Ishimori",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1567652.jpg"
         },
         {
-          "name": "Emilia McCarthy",
-          "role": "Melissa",
-          "profile": "/2ee33QDVXK49Xf5iIBfyO8UB9Gq.jpg"
+          "name": "Маю Хотта",
+          "role": "Serina Kanno",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4346426.jpg"
         },
         {
-          "name": "Charlie Luborsky",
-          "role": "Keith",
-          "profile": ""
+          "name": "Тацуоми Хамада",
+          "role": "Tomoya Takamine",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2024239.jpg"
+        },
+        {
+          "name": "Нацуми Окамото",
+          "role": "Ayumi Endo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4272048.jpg"
+        },
+        {
+          "name": "Рёта Бандо",
+          "role": "Satoru Seto",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5022500.jpg"
+        },
+        {
+          "name": "Бандо Хикосабуро",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6467903.jpg"
+        },
+        {
+          "name": "Рёки Мияма",
+          "role": "Student",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6808822.jpg"
+        },
+        {
+          "name": "Наги Мурата",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6467904.jpg"
+        },
+        {
+          "name": "Ханано Нономура",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6467905.jpg"
+        },
+        {
+          "name": "Кэнон Нономура",
+          "role": "(в титрах: Kanon)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6467906.jpg"
+        },
+        {
+          "name": "Карин Осанаи",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3731305.jpg"
+        },
+        {
+          "name": "Мики Янаги",
+          "role": "Remi Kojima",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4297341.jpg"
+        },
+        {
+          "name": "Юрина Янаги",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3776951.jpg"
         }
       ]
     },
@@ -1795,16 +2492,34 @@
       "tmdbId": 1619096,
       "itemId": "1619096",
       "title": "Tangent",
+      "year": "2021",
+      "kinopoiskId": 872141,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Alex Fitzalan",
-          "role": "Him",
-          "profile": "/yw9V4qCQr8V4aF2DJIbR5Ui7c43.jpg"
+          "name": "Лиза Петтерссон",
+          "role": "Sandra",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1210317.jpg"
         },
         {
-          "name": "Amy Jane Dowdle",
-          "role": "Her",
-          "profile": ""
+          "name": "Daniel Epstein",
+          "role": "Dr. Wahlstein",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3672845.jpg"
+        },
+        {
+          "name": "Хокан Юландер",
+          "role": "David",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1207100.jpg"
+        },
+        {
+          "name": "Дженнифер Лила",
+          "role": "Carol (в титрах: Jennifer Lila Knipe)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2893495.jpg"
+        },
+        {
+          "name": "Ви Вимолмал",
+          "role": "Kate",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_579145.jpg"
         }
       ]
     },
@@ -1872,56 +2587,89 @@
       "tmdbId": 83823,
       "itemId": "83823",
       "title": "葵 徳川三代",
+      "year": "2000",
+      "kinopoiskId": 690876,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "三林京子",
-          "role": "",
-          "profile": "/2lOKq3AqolKNzFvTalh3wC3bY6k.jpg"
-        },
-        {
-          "name": "Масахико Цугава",
-          "role": "Tokugawa Ieyasu",
-          "profile": "/wBictK1Lg1I3MpKmv4tQQejsNTk.jpg"
-        },
-        {
-          "name": "床嶋佳子",
-          "role": "",
-          "profile": "/tlRt5CsllMXZW5Qi3YkFkN4zL2z.jpg"
-        },
-        {
-          "name": "Рюноскэ Камики",
-          "role": "Tokugawa Yoshinao [Young]",
-          "profile": "/ut7ewXjdgUmgkhJ1EtbOo9tbc7s.jpg"
+          "name": "Баидзяку Накамура",
+          "role": "Mitsukuni Tokugawa",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_419707.jpg"
         },
         {
           "name": "Тосиюки Нисида",
-          "role": "Tokugawa Hidetada",
-          "profile": "/hsZZE7KBwjWbsa5tP2HVws34my8.jpg"
+          "role": "Hidetada Tokugawa",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_281909.jpg"
         },
         {
-          "name": "岩下志麻",
-          "role": "O-Go [Hidetada's wife]",
-          "profile": "/jVKVxWiaBP3ul4rztvB5vMgPoFv.jpg"
+          "name": "Кацуё Асари",
+          "role": "Sukesaburo Sassa",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_386619.jpg"
         },
         {
-          "name": "樹木希林",
-          "role": "Lady Kasuga [Iemitsu's wet nurse]",
-          "profile": "/7ndJHln7nWzrCMlSaBBAz9UjiuB.jpg"
+          "name": "Матико Васио",
+          "role": "Tanpaku Asaka",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_141283.jpg"
         },
         {
-          "name": "佐藤慶",
-          "role": "Mashita Nagamori",
-          "profile": "/xyb1DI4HViq1aEvc3pgJV5Xw2Sn.jpg"
+          "name": "Сима Ивасита",
+          "role": "Oeyo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_229053.jpg"
         },
         {
-          "name": "五代目 尾上菊之助",
-          "role": "Toyotomi Hideyori",
-          "profile": "/c5G0mTWG7TCHaFcmFQ92fNH123P.jpg"
+          "name": "Иккэи Ватанабэ",
+          "role": "Masazumi Honda",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_421867.jpg"
         },
         {
-          "name": "江守徹",
-          "role": "Ishida Mitsunari",
-          "profile": "/Qdzjq7UANUZfko03sCsebTniVL.jpg"
+          "name": "Масахико Цугава",
+          "role": "Ieyasu Tokugawa",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_245487.jpg"
+        },
+        {
+          "name": "Сигэру Кояма",
+          "role": "Masanobu Honda",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_133488.jpg"
+        },
+        {
+          "name": "Рюдзо Хаяси",
+          "role": "Toshikatsu Doi",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_376492.jpg"
+        },
+        {
+          "name": "Маюми Огава",
+          "role": "Chacha",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_492489.jpg"
+        },
+        {
+          "name": "Рё Амамия",
+          "role": "Masanari Inoue",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_246875.jpg"
+        },
+        {
+          "name": "Кёко Мицубаяси",
+          "role": "Acha",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_793417.jpg"
+        },
+        {
+          "name": "Нэндзи Кобаяси",
+          "role": "Katsumoto Katagiri",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_163752.jpg"
+        },
+        {
+          "name": "Таро Исида",
+          "role": "Tadachika Okubo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_52397.jpg"
+        },
+        {
+          "name": "Курико Намино",
+          "role": "Ohatsu",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_334395.jpg"
+        },
+        {
+          "name": "Рё Тамура",
+          "role": "Takatora Todo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_395115.jpg"
         }
       ]
     },
@@ -1930,86 +2678,89 @@
       "tmdbId": 86756,
       "itemId": "86756",
       "title": "The Heights",
+      "year": "2019",
+      "kinopoiskId": 1162990,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
           "name": "Шери Себбенс",
           "role": "Leonie",
-          "profile": "/ptXEjpYvIRJTurnTfYvyYgNdmaZ.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2257427.jpg"
         },
         {
           "name": "Calen Tassone",
           "role": "Mich",
-          "profile": "/Hzf2Tgc8LvwuEOOMzUc48EaMof.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4214105.jpg"
         },
         {
-          "name": "Roz Hammond",
+          "name": "Роз Хэммонд",
           "role": "Claudia",
-          "profile": "/n6WgYNWc0E1Nnh5RSw8E4ncCFov.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_57113.jpg"
         },
         {
-          "name": "Bridie McKim",
+          "name": "Брайди МакКим",
           "role": "Sabine",
-          "profile": ""
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4170002.jpg"
         },
         {
-          "name": "Fiona Press",
+          "name": "Фиона Пресс",
           "role": "Hazel",
-          "profile": "/1sJHossy4SCi1jYG0zGdbr3rYPq.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_78121.jpg"
         },
         {
           "name": "Mitchell Bourke",
           "role": "Ryan",
-          "profile": "/lZHV0vMDvij3LrSwiFHpBCXsFUA.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5216904.jpg"
         },
         {
-          "name": "Dan Paris",
+          "name": "Дэн Пэрис",
           "role": "Mark",
-          "profile": ""
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1465076.jpg"
         },
         {
-          "name": "Saskia Hampele",
+          "name": "Саскиа Хемпел",
           "role": "Renee",
-          "profile": "/5o3vs1hbW995j0fWDGvTdERJVPG.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1868087.jpg"
         },
         {
-          "name": "Феникс Раи",
+          "name": "Феникс Раэй",
           "role": "Ash",
-          "profile": "/tZ0PZ8ZBiUYGH0QK2VRt8NzbSbY.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3474113.jpg"
         },
         {
           "name": "Yazeed Daher",
           "role": "Kam",
-          "profile": "/nyjcXsgi0PzcseASD7gkv6JXmDY.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3716923.jpg"
         },
         {
           "name": "Carina Hoang",
           "role": "Iris",
-          "profile": ""
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5216906.jpg"
         },
         {
           "name": "Koa Nuen",
           "role": "Sully",
-          "profile": ""
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5216905.jpg"
         },
         {
-          "name": "Cara McCarthy",
+          "name": "Кара Маккарти",
           "role": "Ana",
-          "profile": "/oFxQWHXnNS45SwHHM3o3pF7YJmD.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2649165.jpg"
         },
         {
-          "name": "Руперт Рейд",
-          "role": "Pav",
-          "profile": "/6EdSU7Ay8V26gUE7UFpbJfOg3T6.jpg"
+          "name": "Келтон Пелл",
+          "role": "Uncle Max",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_279415.jpg"
         },
         {
           "name": "Briallen Clarke",
           "role": "Shannon",
-          "profile": "/92nXAtQ2tu9C1uCyKLFiU0h7nbl.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3533672.jpg"
         },
         {
-          "name": "Kelton Pell",
-          "role": "Uncle Max",
-          "profile": "/1ZHBn1N9BJzVaBdcOznWNtnpqAV.jpg"
+          "name": "Ноэль О’Нилл",
+          "role": "Watto",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_571439.jpg"
         }
       ]
     },
@@ -2018,7 +2769,91 @@
       "tmdbId": 66000,
       "itemId": "66000",
       "title": "My Crazy Ex",
-      "cast": []
+      "year": "2015",
+      "kinopoiskId": 848632,
+      "source": "kinopoiskapiunofficial",
+      "cast": [
+        {
+          "name": "Ashley Miers",
+          "role": "Nicole",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2046674.jpg"
+        },
+        {
+          "name": "Томас Пьер Мэддокс",
+          "role": "Frank",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3354362.jpg"
+        },
+        {
+          "name": "David Brent Tucker",
+          "role": "Dirk",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3240463.jpg"
+        },
+        {
+          "name": "Сэм Флеминг",
+          "role": "«Real» Andrew",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2718071.jpg"
+        },
+        {
+          "name": "Келли Рейтер",
+          "role": "Sasha",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3289889.jpg"
+        },
+        {
+          "name": "Damien Landini",
+          "role": "Gordon",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4346520.jpg"
+        },
+        {
+          "name": "Дезри Луиз",
+          "role": "Natalie",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2317792.jpg"
+        },
+        {
+          "name": "Dylan Santos",
+          "role": "Nate",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4384060.jpg"
+        },
+        {
+          "name": "Бен Уэйлен",
+          "role": "James",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2606638.jpg"
+        },
+        {
+          "name": "Элизабет Годли",
+          "role": "Nina",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2310002.jpg"
+        },
+        {
+          "name": "Эрнест Маршалл",
+          "role": "Barry",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4213219.jpg"
+        },
+        {
+          "name": "Christian Drerup",
+          "role": "«Real» Karen",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3820286.jpg"
+        },
+        {
+          "name": "Celina Mauti",
+          "role": "Jaime",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3208261.jpg"
+        },
+        {
+          "name": "Эрик Смит",
+          "role": "Wolf",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3243056.jpg"
+        },
+        {
+          "name": "Кортни Роуз Бадовски",
+          "role": "Courtney",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4505988.jpg"
+        },
+        {
+          "name": "Эшли Салливан",
+          "role": "Cindy",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3210394.jpg"
+        }
+      ]
     },
     "tv:89673": {
       "kind": "tv",
@@ -2043,7 +2878,91 @@
       "tmdbId": 94241,
       "itemId": "94241",
       "title": "iHeartRadio Music Festival",
-      "cast": []
+      "year": "2011",
+      "kinopoiskId": 710149,
+      "source": "kinopoiskapiunofficial",
+      "cast": [
+        {
+          "name": "Aerosmith",
+          "role": "играют самих себя - исполнители",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_247757.jpg"
+        },
+        {
+          "name": "Джейсон Алдин",
+          "role": "играет самого себя - исполнитель",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1552386.jpg"
+        },
+        {
+          "name": "Стивен Амелл",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1092512.jpg"
+        },
+        {
+          "name": "Стив Аоки",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1802150.jpg"
+        },
+        {
+          "name": "Мэри Джей Блайдж",
+          "role": "играет саму себя - исполнительница",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4897.jpg"
+        },
+        {
+          "name": "Bon Jovi",
+          "role": "играют самих себя - исполнители",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1235242.jpg"
+        },
+        {
+          "name": "Братья Джонас",
+          "role": "играют самих себя (в титрах: The Jonas Brothers)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1469986.jpg"
+        },
+        {
+          "name": "Кэти Кэссиди",
+          "role": "играет саму себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_723057.jpg"
+        },
+        {
+          "name": "Кейшия Коул",
+          "role": "играет саму себя - исполнительница",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1144905.jpg"
+        },
+        {
+          "name": "Майли Сайрус",
+          "role": "играет саму себя - презентатор",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_32546.jpg"
+        },
+        {
+          "name": "deadmau5",
+          "role": "играет самого себя - исполнитель",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3581905.jpg"
+        },
+        {
+          "name": "Гэвин Дегроу",
+          "role": "играет самого себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1136675.jpg"
+        },
+        {
+          "name": "Нина Добрев",
+          "role": "играет саму себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1173445.jpg"
+        },
+        {
+          "name": "Green Day",
+          "role": "играют самих себя - исполнители",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_653868.jpg"
+        },
+        {
+          "name": "Кэти Гриффин",
+          "role": "играет саму себя",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_14014.jpg"
+        },
+        {
+          "name": "Кэлвин Харрис",
+          "role": "играет самого себя - исполнитель",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1740256.jpg"
+        }
+      ]
     },
     "movie:431335": {
       "kind": "movie",
@@ -2131,26 +3050,29 @@
       "tmdbId": 1619084,
       "itemId": "1619084",
       "title": "Delusional",
+      "year": "2016",
+      "kinopoiskId": 1407359,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Alex Fitzalan",
+          "name": "Алекс Фитцалан",
           "role": "Johnny",
-          "profile": "/yw9V4qCQr8V4aF2DJIbR5Ui7c43.jpg"
-        },
-        {
-          "name": "Alex Rich",
-          "role": "Mirage Stud",
-          "profile": "/e0qryVy26f3i1a88vvkTx44Q9CE.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4577629.jpg"
         },
         {
           "name": "Andy Rappos",
           "role": "Toby",
-          "profile": ""
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4544703.jpg"
+        },
+        {
+          "name": "Алекс Рич",
+          "role": "Mirage Stud",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3086113.jpg"
         },
         {
           "name": "Anna Sophia",
           "role": "Mirage Girl",
-          "profile": ""
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6193315.jpg"
         }
       ]
     },
@@ -2172,86 +3094,89 @@
       "tmdbId": 259291,
       "itemId": "259291",
       "title": "Saving Grace",
+      "year": "2024",
+      "kinopoiskId": 6462033,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Julia Montes",
+          "name": "Джулия Монтес",
           "role": "Anna Sarmiento",
-          "profile": "/3rurxpHMUrkSHAIVAGj1Lrg47H2.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1508949.jpg"
         },
         {
-          "name": "Sharon Cuneta",
+          "name": "Шерон Кунета",
           "role": "Miranda Valdez",
-          "profile": "/wO9VgMCzOA6lr2vGhD2YGj5Mego.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_375164.jpg"
         },
         {
-          "name": "Zia Grace",
+          "name": "Зия Грейс",
           "role": "Mary Grace Banaag",
-          "profile": ""
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_10260734.jpg"
         },
         {
-          "name": "Джэнис Де Белен",
-          "role": "Helena Sarmiento",
-          "profile": "/1FSDnC4RviNJkNVCoe3oABKm9A0.jpg"
-        },
-        {
-          "name": "Sam Milby",
+          "name": "Сэм Ллойд Милби",
           "role": "Julius Hernandez",
-          "profile": "/ySCpLSWSoFQBYKezwIUPoEXKCUe.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1109777.jpg"
         },
         {
-          "name": "Jennica Garcia",
+          "name": "Дженис де Белен",
+          "role": "Helena Sarmiento",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_397176.jpg"
+        },
+        {
+          "name": "Дженика Гарсия",
           "role": "Sarah Banaag",
-          "profile": "/cNNdYfU2Fz2SSpACiXmPIWT9GM6.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1480850.jpg"
         },
         {
-          "name": "Christian Bables",
+          "name": "Кристиан Баблес",
           "role": "Chito Sumulong",
-          "profile": "/l0USxtMbjIRoB1YZUkpOv5eh6Gl.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4497375.jpg"
         },
         {
-          "name": "Sophia Reola",
+          "name": "София Реола",
           "role": "Erin Sarmiento",
-          "profile": "/iW0Tdl7RQP12jDluHrXMRf9gUxu.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4703872.jpg"
         },
         {
-          "name": "Eric Fructuoso",
+          "name": "Эрик Фруктуосо",
           "role": "Oscar Jimenez",
-          "profile": "/hw9cfy8DL9AO3wG1rxy6SDRZT4.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_399273.jpg"
         },
         {
-          "name": "Adrian Lindayag",
+          "name": "Адриан Линдаяг",
           "role": "Charlie Molina",
-          "profile": "/uu3VYWs7BvqguTKWft2wTqXIeEv.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5403659.jpg"
         },
         {
           "name": "Ая Фернандес",
           "role": "Ashley Santillan",
-          "profile": "/8utiFZS8qgSj5azQiwIbIDs1jsU.jpg"
-        },
-        {
-          "name": "Karl Gabriel",
-          "role": "Matty Cabreras",
-          "profile": ""
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6434393.jpg"
         },
         {
           "name": "Мэри Джой Апостол",
-          "role": "Princess Sarmineto",
-          "profile": "/h98Xr4ALf5kN3MYJKkg8dOwYagx.jpg"
+          "role": "Princess Sarmiento",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4549580.jpg"
         },
         {
-          "name": "Andrez Del Rosario",
+          "name": "Андрес Дель Росарио",
           "role": "Vincent Jimenez",
-          "profile": "/mrgxDToOZimfUvJWTPU7pU7OvBz.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5364166.jpg"
         },
         {
-          "name": "Fe de los Reyes",
+          "name": "Фе де лос Рейес",
           "role": "Carmen Flores",
-          "profile": "/g406YPoGvwthX9ZMekLxJ13aC8d.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_18854.jpg"
         },
         {
-          "name": "Emilio Daez",
-          "role": "Wilson Hernandez",
-          "profile": "/upxuJiF1zyACbn7yQsBmHAJ7kYb.jpg"
+          "name": "Элиссе Хосон",
+          "role": "Jessica Valdez",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2897913.jpg"
+        },
+        {
+          "name": "Карл Гэбриел",
+          "role": "Matty Cabreras",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5269350.jpg"
         }
       ]
     },
@@ -2260,81 +3185,89 @@
       "tmdbId": 309129,
       "itemId": "309129",
       "title": "Убийца змей",
+      "year": "2026",
+      "kinopoiskId": 10881628,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
           "name": "Пилу Асбек",
-          "role": "Brian 'Smiley' Petersen",
-          "profile": "/hUJAtjbYG7rqm54aoWtNWeeKjTY.jpg"
+          "role": "Brian «Smiley» Petersen",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1449220.jpg"
         },
         {
           "name": "Ларс Ранте",
           "role": "Jim Nolsøe",
-          "profile": "/9kaqquzzGBBa1zXD8QAcMn42XUu.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_17411.jpg"
         },
         {
-          "name": "Mira Elias Obling",
+          "name": "Юэн Хёйерслев",
+          "role": "Klaus «Cosmo» Telling",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_811435.jpg"
+        },
+        {
+          "name": "Mira Elisa Obling",
           "role": "Louise Knudsen",
-          "profile": "/zS17efuRrQPMcrppJKaTBYORV68.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6583029.jpg"
         },
         {
-          "name": "Joen Højerslev",
-          "role": "Klaus 'Cosmo' Telling",
-          "profile": "/LuHMKVKFU8PQ66e6t8TqdGhfKI.jpg"
-        },
-        {
-          "name": "Joey Moe",
+          "name": "Джои Мо",
           "role": "Deon Thomsen",
-          "profile": "/txo6ZMtkQbGerO8OodB9fEpacco.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3084492.jpg"
         },
         {
-          "name": "Hans Henrik Clemensen",
+          "name": "Ханс Хенрик Клеменсен",
           "role": "Jørn Warming",
-          "profile": "/oOQLlVjxhnd4GBMOKftSqff2XOt.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_71786.jpg"
+        },
+        {
+          "name": "Юлия Рудбэк",
+          "role": "Lisa Dahlin",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2679753.jpg"
         },
         {
           "name": "Ali Al-Bayate",
           "role": "Edmond Khaleghi",
-          "profile": "/yXMmHMHMuuw2YRXm8HGtZisjgbt.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6312096.jpg"
         },
         {
-          "name": "Mikael Birkkjær",
+          "name": "Микаэль Бирккьяр",
           "role": "Henrik Lundberg",
-          "profile": "/mAKWxBOuLkNtRZj8UtnLUK2O3RV.jpg"
-        },
-        {
-          "name": "Julie Rudbæk",
-          "role": "Lisa Dahlin",
-          "profile": "/x3jjn0ThkShHbqGtyrza687y2hR.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_438348.jpg"
         },
         {
           "name": "Hamun Maghsodlo",
           "role": "Kourosh Khamali",
-          "profile": "/5pnq94rBuUgpvso7KNM1ykptIYH.jpg"
-        },
-        {
-          "name": "Mads Duelund",
-          "role": "Glenn Rasmussen",
-          "profile": "/eY6q83xTKgsZuh5wiPjzy6k0PUl.jpg"
-        },
-        {
-          "name": "Anders Budde",
-          "role": "Niels 'Niller' Vejby",
-          "profile": "/j6nFRw7O4TnnhjCXhdf9aSBs58x.jpg"
-        },
-        {
-          "name": "Mogens Eckert",
-          "role": "Smiley's advokat",
-          "profile": "/pdEciLlPhdxOWX6lm21iISfeFd6.jpg"
-        },
-        {
-          "name": "Anders Rekalos",
-          "role": "Moustakas",
-          "profile": ""
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4535087.jpg"
         },
         {
           "name": "Sara Forghani",
           "role": "Roshan Khaleghi",
-          "profile": "/gstoez4xZruZGLpKzfUb8DTw0ri.jpg"
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5423111.jpg"
+        },
+        {
+          "name": "Андерс Рекалос",
+          "role": "Moustakas",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_10391703.jpg"
+        },
+        {
+          "name": "Mads Duelund",
+          "role": "Glenn Rasmussen",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1878995.jpg"
+        },
+        {
+          "name": "Андерс Будде Кристенсен",
+          "role": "Niels «Niller» Vejby / Niels",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_974685.jpg"
+        },
+        {
+          "name": "Саймон Сирс",
+          "role": "Michael Lerche",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2371792.jpg"
+        },
+        {
+          "name": "Лаура Кристенсен",
+          "role": "Camilla",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_35748.jpg"
         }
       ]
     },
@@ -2343,56 +3276,89 @@
       "tmdbId": 248521,
       "itemId": "248521",
       "title": "Зло",
+      "year": "2024",
+      "kinopoiskId": 5453327,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
           "name": "Даниил Страхов",
-          "role": "",
-          "profile": "/odJLKOJnHe2u9pyJd0iOtsiGbsC.jpg"
+          "role": "Юрий Ельцов",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_269499.jpg"
         },
         {
           "name": "Александр Устюгов",
-          "role": "",
-          "profile": "/wbYiQ5aYKB7xaNugPZ3UvIxxEH7.jpg"
+          "role": "Шорин",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1055853.jpg"
         },
         {
           "name": "Павел Трубинер",
-          "role": "",
-          "profile": "/9ZvC9gGPY9lnSqqwJRxqb39LXp6.jpg"
+          "role": "Махаон",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1615049.jpg"
         },
         {
           "name": "Любовь Толкалина",
-          "role": "",
-          "profile": "/emcwZwLLr8F6IwT9OIOLZh5p7VZ.jpg"
+          "role": "Елена Патолина",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_231571.jpg"
         },
         {
           "name": "Андрей Чернышов",
-          "role": "",
-          "profile": "/rCYq5bOBnTuXhKCKEyqK9uoUmB1.jpg"
+          "role": "Игорь Ельцов",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_42237.jpg"
         },
         {
           "name": "Евгений Харитонов",
-          "role": "",
-          "profile": "/h2HuYIdzdxqzUoKndsV3hQ2O1ob.jpg"
+          "role": "Игорь Анохин",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2329996.jpg"
         },
         {
           "name": "Борис Щербаков",
-          "role": "",
-          "profile": "/jZuWFFfHevkZ1K2h6nfCzp095iG.jpg"
+          "role": "Филин",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_251144.jpg"
         },
         {
           "name": "Александр Назаров",
-          "role": "",
-          "profile": "/cM0AQUamfB5oqAgCxDaVmv87Fs6.jpg"
+          "role": "Борис Михеев",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1121502.jpg"
         },
         {
           "name": "Алёна Коломина",
-          "role": "",
-          "profile": "/tKZ6OshyTEOEdZW4PoCd7MK9cMQ.jpg"
+          "role": "Даша Колобова",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4994745.jpg"
         },
         {
           "name": "Марина Петренко",
-          "role": "",
-          "profile": "/9nydXeH4tZGrU3oMzuCZBOAO5j6.jpg"
+          "role": "Наташа",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1627408.jpg"
+        },
+        {
+          "name": "Эдуард Флёров",
+          "role": "Ястреб",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1083016.jpg"
+        },
+        {
+          "name": "Сергей Юшкевич",
+          "role": "Павел Колобов",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_231268.jpg"
+        },
+        {
+          "name": "Екатерина Олькина",
+          "role": "Нина",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1624670.jpg"
+        },
+        {
+          "name": "Евгений Миллер",
+          "role": "Сергей Рудин",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1642674.jpg"
+        },
+        {
+          "name": "Михаил Владимиров",
+          "role": "Николай Носков",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_251029.jpg"
+        },
+        {
+          "name": "Александр Тютин",
+          "role": "Станислав Новожилов",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_464158.jpg"
         }
       ]
     },
@@ -2401,36 +3367,89 @@
       "tmdbId": 252557,
       "itemId": "252557",
       "title": "Операция «Карпаты»",
+      "year": "2024",
+      "kinopoiskId": 5374681,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
           "name": "Владимир Верёвочкин",
-          "role": "",
-          "profile": "/hE2UbvbExdkox2hn9dpE78Az7UE.jpg"
+          "role": "Вороновский",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3931781.jpg"
         },
         {
           "name": "Александр Лойе",
-          "role": "",
-          "profile": "/6Keaquuv9l08inmRuFkMz5tJeTu.jpg"
+          "role": "Чума",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_281045.jpg"
         },
         {
           "name": "Мария Лисовая",
-          "role": "",
-          "profile": "/cbdZK9l94pWhusXsV4cskRgzvxM.jpg"
+          "role": "Ангелина",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4276315.jpg"
         },
         {
           "name": "Олег Фомин",
-          "role": "",
-          "profile": "/cWcn34X4SlBMQl0TFRq7fEVnAvu.jpg"
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_238289.jpg"
+        },
+        {
+          "name": "Игорь Петренко",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_231397.jpg"
         },
         {
           "name": "Алексей Шевченков",
-          "role": "",
-          "profile": "/h9sMcw4V5Tb5TyAl6teQv8t642f.jpg"
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_552322.jpg"
+        },
+        {
+          "name": "Алексей Гришин",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1144128.jpg"
         },
         {
           "name": "Екатерина Волкова",
-          "role": "",
-          "profile": "/e4w4yzCHGJaVaCkCEdclBHZY48q.jpg"
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_224541.jpg"
+        },
+        {
+          "name": "Юрий Нифонтов",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_313563.jpg"
+        },
+        {
+          "name": "Сослан Фидаров",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1205174.jpg"
+        },
+        {
+          "name": "Константин Гацалов",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2610510.jpg"
+        },
+        {
+          "name": "Максим Горшков",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6975075.jpg"
+        },
+        {
+          "name": "Николай Самсонов",
+          "role": "роль не указана",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4740673.jpg"
+        },
+        {
+          "name": "Владимир Капустин",
+          "role": "Копыто, главаря шайки",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_870599.jpg"
+        },
+        {
+          "name": "Илья Крутояров",
+          "role": "Голубец",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1874743.jpg"
+        },
+        {
+          "name": "Артем Цыбулин",
+          "role": "Грищенко",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7200310.jpg"
         }
       ]
     },
@@ -2439,71 +3458,44 @@
       "tmdbId": 1432918,
       "itemId": "1432918",
       "title": "Blood Money",
+      "year": "2024",
+      "kinopoiskId": 845128,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Błażej Skrobała",
-          "role": "Paul Phillips",
-          "profile": "/p9rvlZfRCowpa5P3e2mdT9b0vRk.jpg"
+          "name": "Эллар Колтрейн",
+          "role": "Victor",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_232006.jpg"
         },
         {
-          "name": "Feliks Lipiński",
-          "role": "Dan Brown",
-          "profile": "/ijZJJgGwtfSZ9duUdvA5mSpzgEk.jpg"
+          "name": "Уилла Фицджералд",
+          "role": "Lynn",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1214277.jpg"
         },
         {
-          "name": "Filip Jurczyk",
-          "role": "Emmanuel Fritz",
-          "profile": "/pRBpklECO35yKCIesIbpzRH0ADd.jpg"
+          "name": "Джейкоб Артист",
+          "role": "Jeff",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2471797.jpg"
         },
         {
-          "name": "Tymon Jankowski",
-          "role": "Alexander Torres",
-          "profile": "/ulGVeEb2sfXwdvoLN2OsMyfKT1m.jpg"
+          "name": "Джон Кьюсак",
+          "role": "Miller",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_20865.jpg"
         },
         {
-          "name": "Jan Popiołek",
-          "role": "Bill Rock",
-          "profile": ""
+          "name": "Нед Беллами",
+          "role": "Ranger",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_23488.jpg"
         },
         {
-          "name": "Igor Niełacny",
-          "role": "Alvarez",
-          "profile": ""
+          "name": "Антонио Джей Белл",
+          "role": "Kayaker",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4478774.jpg"
         },
         {
-          "name": "Maks Górka",
-          "role": "Hugo Lopez",
-          "profile": "/c7VXMo0PZ96F4Vgy4tWCy3f4CCJ.jpg"
-        },
-        {
-          "name": "Stanisław Szpalerski",
-          "role": "Agent Miller",
-          "profile": ""
-        },
-        {
-          "name": "Piotr Wróblewski",
-          "role": "Marco",
-          "profile": ""
-        },
-        {
-          "name": "Oskar Małyszko",
-          "role": "Main Chief",
-          "profile": ""
-        },
-        {
-          "name": "Kajetan Witkowski",
-          "role": "Charles",
-          "profile": ""
-        },
-        {
-          "name": "Natalia Milewska",
-          "role": "Miss Torres",
-          "profile": ""
-        },
-        {
-          "name": "nieznane dziecko",
-          "role": "Emily Torres",
-          "profile": ""
+          "name": "Джоанна Макгинли",
+          "role": "Drunk Girl",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1981880.jpg"
         }
       ]
     },
@@ -2512,36 +3504,14 @@
       "tmdbId": 1572715,
       "itemId": "1572715",
       "title": "Lost and Found",
+      "year": "2025",
+      "kinopoiskId": 437531,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Gaon",
-          "role": "",
-          "profile": "/pgp3ONlTz8NmWlcF2wVtEL2COrt.jpg"
-        },
-        {
-          "name": "Jooyeon",
-          "role": "",
-          "profile": "/uZUHeMOayrBvEWkbjsftrZsFZlO.jpg"
-        },
-        {
-          "name": "Jungsu",
-          "role": "",
-          "profile": "/pGTjk0BDKs3EDvcycqICFNYOz1R.jpg"
-        },
-        {
-          "name": "Jun Han",
-          "role": "",
-          "profile": "/3VmLTR4JJsSNRPZ6ZatDzsgoIZV.jpg"
-        },
-        {
-          "name": "Gunil",
-          "role": "",
-          "profile": "/3iW7mWD8Y4LrZAfhenah2fwnM9G.jpg"
-        },
-        {
-          "name": "O.de",
-          "role": "",
-          "profile": "/6BPVc9CUfXHs50JqIlA9X4I2ssM.jpg"
+          "name": "Джим Бродбент",
+          "role": "рассказчик, озвучка",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_38704.jpg"
         }
       ]
     },
@@ -2633,90 +3603,101 @@
       "tmdbId": 226218,
       "itemId": "226218",
       "title": "Shaka iLembe",
-      "cast": []
+      "year": "2023",
+      "kinopoiskId": 5167957,
+      "source": "kinopoiskapiunofficial",
+      "cast": [
+        {
+          "name": "Номзамо Мбата",
+          "role": "Nandi",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4205436.jpg"
+        },
+        {
+          "name": "Ntando Zondi",
+          "role": "Young Shaka",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7014706.jpg"
+        },
+        {
+          "name": "Сензо Радебе",
+          "role": "Senzangakhona",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5047311.jpg"
+        },
+        {
+          "name": "Dawn Thandeka King",
+          "role": "Mkabayi",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6558795.jpg"
+        },
+        {
+          "name": "Стандиве Кгороге",
+          "role": "Mthaniya",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2071192.jpg"
+        },
+        {
+          "name": "Sibonile Ngubane",
+          "role": "Mudli",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7161342.jpg"
+        },
+        {
+          "name": "Khabonina Qubeka",
+          "role": "Ntombazi",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3778654.jpg"
+        },
+        {
+          "name": "Calvin Ratladi",
+          "role": "Goloza",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7161341.jpg"
+        },
+        {
+          "name": "Phumlani Mndebele",
+          "role": "Nyengelezi",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7161340.jpg"
+        },
+        {
+          "name": "Abdul Khoza",
+          "role": "Cija",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6299598.jpg"
+        },
+        {
+          "name": "Thembinkosi Mthembu",
+          "role": "Dingiswayo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7014707.jpg"
+        },
+        {
+          "name": "Wiseman Mncube",
+          "role": "Zwide",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5022628.jpg"
+        },
+        {
+          "name": "Hope Mbhele",
+          "role": "Baleka",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7161343.jpg"
+        },
+        {
+          "name": "Wanda Zuma",
+          "role": "Mawewe",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6971773.jpg"
+        },
+        {
+          "name": "Хэмилтон Дламини",
+          "role": "Jobe",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1327758.jpg"
+        },
+        {
+          "name": "Mondli Makhoba",
+          "role": "Ngomane",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3907817.jpg"
+        }
+      ]
     },
     "movie:1427540": {
       "kind": "movie",
       "tmdbId": 1427540,
       "itemId": "1427540",
       "title": "Free at Heart",
-      "cast": [
-        {
-          "name": "Linus Moog",
-          "role": "",
-          "profile": "/o4tdNO7pmPVbdgqjsYJ3LyocxTC.jpg"
-        },
-        {
-          "name": "Aurel Klug",
-          "role": "",
-          "profile": "/dwWPY3QwodgBAZ7RTR70GQUU4ub.jpg"
-        },
-        {
-          "name": "Annika Kuhl",
-          "role": "",
-          "profile": "/5LtOvLVBFjlD5T7eWqIavk8C1nz.jpg"
-        },
-        {
-          "name": "Оливер Бигальке",
-          "role": "",
-          "profile": "/a7R3TWUu8qmV4GYEhTHDlaUXckk.jpg"
-        },
-        {
-          "name": "Marlena Strawe",
-          "role": "",
-          "profile": ""
-        },
-        {
-          "name": "Leon Ndiaye",
-          "role": "",
-          "profile": "/2pKWBUuoWMl66mMBdqFLG0Udxjd.jpg"
-        },
-        {
-          "name": "Marie Becker",
-          "role": "",
-          "profile": ""
-        },
-        {
-          "name": "Karen Dahmen",
-          "role": "",
-          "profile": "/fMRTdzC0Fwm6kmWSJHoTErr4Zxn.jpg"
-        },
-        {
-          "name": "Yvonne Werner-Mees",
-          "role": "",
-          "profile": ""
-        },
-        {
-          "name": "Matthieu Svetchine",
-          "role": "",
-          "profile": ""
-        },
-        {
-          "name": "Ferdinand Lehmann",
-          "role": "",
-          "profile": "/hfZ9dGGDJZ2cRp2dLAUaYbBuIyC.jpg"
-        },
-        {
-          "name": "Bernd Panzer",
-          "role": "",
-          "profile": ""
-        },
-        {
-          "name": "Leonie Weber",
-          "role": "",
-          "profile": ""
-        },
-        {
-          "name": "Denis Lenz",
-          "role": "",
-          "profile": ""
-        },
-        {
-          "name": "Elias Ulnyrow",
-          "role": "",
-          "profile": ""
-        }
-      ]
+      "year": "2025",
+      "kinopoiskId": 1005118,
+      "source": "kinopoiskapiunofficial",
+      "cast": []
     },
     "movie:1467974": {
       "kind": "movie",
@@ -2754,86 +3735,89 @@
       "tmdbId": 1377455,
       "itemId": "1377455",
       "title": "Shutterspeed",
+      "year": "2025",
+      "kinopoiskId": 94277,
+      "source": "kinopoiskapiunofficial",
       "cast": [
         {
-          "name": "Лу Гуссенс",
-          "role": "Cas",
-          "profile": "/kY8eifhCPvjTE6JJclrrWO7Zr9L.jpg"
+          "name": "Стив Борден",
+          "role": "Riley Davis",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_9029.jpg"
         },
         {
-          "name": "Willem Herbots",
-          "role": "Jard",
-          "profile": "/jnioWltkTcIhuXJrKXJJWqwVD0g.jpg"
+          "name": "Дэвид Ловгрен",
+          "role": "Cliff Davis",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_52137.jpg"
         },
         {
-          "name": "Chinyere Brown",
-          "role": "",
-          "profile": ""
+          "name": "Дэйзи Фуэнтес",
+          "role": "Kenzie Pearson",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_85051.jpg"
         },
         {
-          "name": "Sueli Besson",
-          "role": "",
-          "profile": ""
+          "name": "Гэрри Чак",
+          "role": "Walter Bradford",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_17120.jpg"
         },
         {
-          "name": "Elliot Lafontaine",
-          "role": "",
-          "profile": ""
+          "name": "Гарвин Санфорд",
+          "role": "Angelo Diamond",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_18134.jpg"
         },
         {
-          "name": "Matthijs Meertens",
-          "role": "",
-          "profile": ""
+          "name": "Маккензи Грей",
+          "role": "Nigel Dickson",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_60188.jpg"
         },
         {
-          "name": "Peter Gorissen",
-          "role": "",
-          "profile": "/mFnEk7U48PZUbbFLUbNzCgHFXrC.jpg"
+          "name": "Джерард Планкет",
+          "role": "Griffen Bockman",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6300.jpg"
         },
         {
-          "name": "Joke Emmers",
-          "role": "",
-          "profile": "/8KG81s8OM5IsTTnUaHmCuznJdMc.jpg"
+          "name": "Дарси Белшер",
+          "role": "Perry Evans",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_17117.jpg"
         },
         {
-          "name": "Jonas Van Thielen",
-          "role": "",
-          "profile": "/vSsZldKMIfhxKkKbb11AGfEfMPS.jpg"
+          "name": "Роджер Оллфорд",
+          "role": "Joseph Davis",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_70192.jpg"
         },
         {
-          "name": "Pip Campbell",
-          "role": "",
-          "profile": ""
+          "name": "Крис Поуп",
+          "role": "Mark Pearson",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_32938.jpg"
         },
         {
-          "name": "Fiona Greweldinger",
-          "role": "",
-          "profile": ""
+          "name": "Тайрон Лейтсо",
+          "role": "Eric Knox",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_32930.jpg"
         },
         {
-          "name": "Julien Berkvens",
-          "role": "",
-          "profile": ""
+          "name": "Дэбби Подовски",
+          "role": "Melissa Flynn",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_96052.jpg"
         },
         {
-          "name": "Alicia Kabedi Tsileo-Meupu",
-          "role": "",
-          "profile": ""
+          "name": "Tracy Mayert",
+          "role": "Tess",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1483047.jpg"
         },
         {
-          "name": "Falke Van Volcem",
-          "role": "",
-          "profile": ""
+          "name": "Арт Китчинг",
+          "role": "Dermitt Winslow",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_57985.jpg"
         },
         {
-          "name": "Jasmijn Herremans",
-          "role": "",
-          "profile": ""
+          "name": "Тристин Леффлер",
+          "role": "Heather Jameson",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_50381.jpg"
         },
         {
-          "name": "Janna Hendrickx",
-          "role": "",
-          "profile": ""
+          "name": "Джонатан Саттон",
+          "role": "Rachel",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_55141.jpg"
         }
       ]
     },
@@ -42332,6 +43316,552 @@
           "name": "Рамон Франко",
           "role": "",
           "profile": ""
+        }
+      ]
+    },
+    "movie:155": {
+      "kind": "movie",
+      "tmdbId": 155,
+      "itemId": "155",
+      "title": "Тёмный рыцарь",
+      "year": "2008",
+      "kinopoiskId": 111543,
+      "source": "kinopoiskapiunofficial",
+      "cast": [
+        {
+          "name": "Кристиан Бэйл",
+          "role": "Bruce Wayne",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_21495.jpg"
+        },
+        {
+          "name": "Хит Леджер",
+          "role": "Joker",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1183.jpg"
+        },
+        {
+          "name": "Аарон Экхарт",
+          "role": "Harvey Dent",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6752.jpg"
+        },
+        {
+          "name": "Мэгги Джилленхол",
+          "role": "Rachel",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_10384.jpg"
+        },
+        {
+          "name": "Гари Олдман",
+          "role": "Gordon",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6650.jpg"
+        },
+        {
+          "name": "Майкл Кейн",
+          "role": "Alfred",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3711.jpg"
+        },
+        {
+          "name": "Морган Фриман",
+          "role": "Lucius Fox",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6750.jpg"
+        },
+        {
+          "name": "Чинь Хань",
+          "role": "Lau",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_911253.jpg"
+        },
+        {
+          "name": "Нестор Карбонелл",
+          "role": "Mayor",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_13074.jpg"
+        },
+        {
+          "name": "Эрик Робертс",
+          "role": "Maroni",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1870.jpg"
+        },
+        {
+          "name": "Ричи Костер",
+          "role": "Chechen",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_747.jpg"
+        },
+        {
+          "name": "Моник Кёрнен",
+          "role": "Ramirez",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_50717.jpg"
+        },
+        {
+          "name": "Рон Дин",
+          "role": "Wuertz",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_66454.jpg"
+        },
+        {
+          "name": "Киллиан Мерфи",
+          "role": "Scarecrow",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5005.jpg"
+        },
+        {
+          "name": "Нэйтан Гэмбл",
+          "role": "James Gordon",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_966111.jpg"
+        },
+        {
+          "name": "Том Листер мл.",
+          "role": "Tattooed Prisoner (в титрах: Tommy Tiny Lister)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2015.jpg"
+        }
+      ]
+    },
+    "movie:157336": {
+      "kind": "movie",
+      "tmdbId": 157336,
+      "itemId": "157336",
+      "title": "Интерстеллар",
+      "year": "2014",
+      "kinopoiskId": 258687,
+      "source": "kinopoiskapiunofficial",
+      "cast": [
+        {
+          "name": "Мэттью Макконахи",
+          "role": "Cooper",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_797.jpg"
+        },
+        {
+          "name": "Энн Хэтэуэй",
+          "role": "Brand",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_38703.jpg"
+        },
+        {
+          "name": "Джессика Честейн",
+          "role": "Murph",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1111242.jpg"
+        },
+        {
+          "name": "Маккензи Фой",
+          "role": "Murph",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2007922.jpg"
+        },
+        {
+          "name": "Майкл Кейн",
+          "role": "Professor Brand",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3711.jpg"
+        },
+        {
+          "name": "Дэвид Джеси",
+          "role": "Romilly",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_34831.jpg"
+        },
+        {
+          "name": "Уэс Бентли",
+          "role": "Doyle",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3.jpg"
+        },
+        {
+          "name": "Кейси Аффлек",
+          "role": "Tom",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_4.jpg"
+        },
+        {
+          "name": "Джон Литгоу",
+          "role": "Donald",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_8837.jpg"
+        },
+        {
+          "name": "Мэтт Дэймон",
+          "role": "Mann",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6458.jpg"
+        },
+        {
+          "name": "Тофер Грейс",
+          "role": "Getty",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_30099.jpg"
+        },
+        {
+          "name": "Эллен Бёрстин",
+          "role": "Murph",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6965.jpg"
+        },
+        {
+          "name": "Элиес Габел",
+          "role": "Administrator",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1076719.jpg"
+        },
+        {
+          "name": "Тимоти Шаламе",
+          "role": "Tom",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1665224.jpg"
+        },
+        {
+          "name": "Дэвид Ойелоуо",
+          "role": "School Principal",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5300.jpg"
+        },
+        {
+          "name": "Коллетт Вульф",
+          "role": "Ms. Hanley",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1094609.jpg"
+        }
+      ]
+    },
+    "movie:13": {
+      "kind": "movie",
+      "tmdbId": 13,
+      "itemId": "13",
+      "title": "Форрест Гамп",
+      "year": "1994",
+      "kinopoiskId": 448,
+      "source": "kinopoiskapiunofficial",
+      "cast": [
+        {
+          "name": "Том Хэнкс",
+          "role": "Forrest Gump",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_9144.jpg"
+        },
+        {
+          "name": "Робин Райт",
+          "role": "Jenny Curran",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_8887.jpg"
+        },
+        {
+          "name": "Салли Филд",
+          "role": "Mrs. Gump",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_13477.jpg"
+        },
+        {
+          "name": "Гэри Синиз",
+          "role": "Lieutenant Dan Taylor",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3100.jpg"
+        },
+        {
+          "name": "Майкелти Уильямсон",
+          "role": "Bubba Blue",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_519.jpg"
+        },
+        {
+          "name": "Майкл Коннер Хэмпфри",
+          "role": "Young Forrest",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_101657.jpg"
+        },
+        {
+          "name": "Ханна Р. Холл",
+          "role": "Young Jenny Curran (в титрах: Hanna R. Hall)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_24763.jpg"
+        },
+        {
+          "name": "Сэм Андерсон",
+          "role": "Principal",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_11843.jpg"
+        },
+        {
+          "name": "Шиван Фэллон Хоган",
+          "role": "School Bus Driver (в титрах: Siobhan J. Fallon)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_31636.jpg"
+        },
+        {
+          "name": "Ребекка Уильямс",
+          "role": "Nurse at Park Bench",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_101656.jpg"
+        },
+        {
+          "name": "Харольд Дж. Хертэм",
+          "role": "Doctor (в титрах: Harold Herthum)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_69686.jpg"
+        },
+        {
+          "name": "Джордж Келли",
+          "role": "Barber",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_101658.jpg"
+        },
+        {
+          "name": "Боб Пенни",
+          "role": "Crony",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_8399.jpg"
+        },
+        {
+          "name": "Джон Рэндолл",
+          "role": "Crony",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_101659.jpg"
+        },
+        {
+          "name": "Марго Мурер",
+          "role": "Louise",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_79518.jpg"
+        },
+        {
+          "name": "Иона М. Телек",
+          "role": "Elderly Woman",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_101660.jpg"
+        }
+      ]
+    },
+    "movie:238": {
+      "kind": "movie",
+      "tmdbId": 238,
+      "itemId": "238",
+      "title": "Крёстный отец",
+      "year": "1972",
+      "kinopoiskId": 325,
+      "source": "kinopoiskapiunofficial",
+      "cast": [
+        {
+          "name": "Марлон Брандо",
+          "role": "Don Vito Corleone",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_33037.jpg"
+        },
+        {
+          "name": "Аль Пачино",
+          "role": "Michael",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_26240.jpg"
+        },
+        {
+          "name": "Джеймс Каан",
+          "role": "Sonny",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7088.jpg"
+        },
+        {
+          "name": "Роберт Дювалл",
+          "role": "Tom Hagen",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6273.jpg"
+        },
+        {
+          "name": "Ричард С. Кастеллано",
+          "role": "Clemenza (в титрах: Richard Castellano)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_128548.jpg"
+        },
+        {
+          "name": "Дайан Китон",
+          "role": "Kay Adams",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_11754.jpg"
+        },
+        {
+          "name": "Талия Шайр",
+          "role": "Connie",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_33823.jpg"
+        },
+        {
+          "name": "Джон Казале",
+          "role": "Fredo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_128549.jpg"
+        },
+        {
+          "name": "Аль Леттьери",
+          "role": "Sollozzo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_181343.jpg"
+        },
+        {
+          "name": "Стерлинг Хейден",
+          "role": "Capt. McCluskey",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_169662.jpg"
+        },
+        {
+          "name": "Джон Марли",
+          "role": "Jack Woltz",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_164135.jpg"
+        },
+        {
+          "name": "Ричард Конте",
+          "role": "Barzini",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_184207.jpg"
+        },
+        {
+          "name": "Эйб Вигода",
+          "role": "Tessio",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_27655.jpg"
+        },
+        {
+          "name": "Джанни Руссо",
+          "role": "Carlo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6815.jpg"
+        },
+        {
+          "name": "Руди Бонд",
+          "role": "Cuneo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_172316.jpg"
+        },
+        {
+          "name": "Эл Мартино",
+          "role": "Johnny Fontane",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_128525.jpg"
+        }
+      ]
+    },
+    "movie:27205": {
+      "kind": "movie",
+      "tmdbId": 27205,
+      "itemId": "27205",
+      "title": "Начало",
+      "year": "2010",
+      "kinopoiskId": 447301,
+      "source": "kinopoiskapiunofficial",
+      "cast": [
+        {
+          "name": "Леонардо ДиКаприо",
+          "role": "Cobb",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_37859.jpg"
+        },
+        {
+          "name": "Джозеф Гордон-Левитт",
+          "role": "Arthur",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_9867.jpg"
+        },
+        {
+          "name": "Эллиот Пейдж",
+          "role": "Ariadne (в титрах: Ellen Page)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_43503.jpg"
+        },
+        {
+          "name": "Том Харди",
+          "role": "Eames",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_39984.jpg"
+        },
+        {
+          "name": "Кэн Ватанабэ",
+          "role": "Saito",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_30759.jpg"
+        },
+        {
+          "name": "Дилип Рао",
+          "role": "Yusuf",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1234077.jpg"
+        },
+        {
+          "name": "Киллиан Мерфи",
+          "role": "Robert Fischer, Jr.",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_5005.jpg"
+        },
+        {
+          "name": "Том Беренджер",
+          "role": "Browning",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6409.jpg"
+        },
+        {
+          "name": "Марион Котийяр",
+          "role": "Mal",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_32545.jpg"
+        },
+        {
+          "name": "Пит Постлетуэйт",
+          "role": "Maurice Fischer",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_8634.jpg"
+        },
+        {
+          "name": "Майкл Кейн",
+          "role": "Miles",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_3711.jpg"
+        },
+        {
+          "name": "Лукас Хаас",
+          "role": "Nash",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_24370.jpg"
+        },
+        {
+          "name": "Тай-ли Ли",
+          "role": "Tadashi",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1818040.jpg"
+        },
+        {
+          "name": "Клер Джир",
+          "role": "Phillipa (3 Years)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1867559.jpg"
+        },
+        {
+          "name": "Магнус Нолан",
+          "role": "James (20 Months)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_2216456.jpg"
+        },
+        {
+          "name": "Тейлор Джир",
+          "role": "Phillipa (5 Years)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1553673.jpg"
+        }
+      ]
+    },
+    "movie:603": {
+      "kind": "movie",
+      "tmdbId": 603,
+      "itemId": "603",
+      "title": "Матрица",
+      "year": "1999",
+      "kinopoiskId": 301,
+      "source": "kinopoiskapiunofficial",
+      "cast": [
+        {
+          "name": "Киану Ривз",
+          "role": "Neo",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7836.jpg"
+        },
+        {
+          "name": "Лоренс Фишбёрн",
+          "role": "Morpheus",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_9838.jpg"
+        },
+        {
+          "name": "Кэрри-Энн Мосс",
+          "role": "Trinity",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6226.jpg"
+        },
+        {
+          "name": "Хьюго Уивинг",
+          "role": "Agent Smith",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_1491.jpg"
+        },
+        {
+          "name": "Глория Фостер",
+          "role": "Oracle",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_23331.jpg"
+        },
+        {
+          "name": "Джо Пантольяно",
+          "role": "Cypher",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_9030.jpg"
+        },
+        {
+          "name": "Маркус Чонг",
+          "role": "Tank",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_23332.jpg"
+        },
+        {
+          "name": "Джулиан Араханга",
+          "role": "Apoc",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_23333.jpg"
+        },
+        {
+          "name": "Мэтт Доран",
+          "role": "Mouse",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_23334.jpg"
+        },
+        {
+          "name": "Белинда МакКлори",
+          "role": "Switch",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_23335.jpg"
+        },
+        {
+          "name": "Энтони Рэй Паркер",
+          "role": "Dozer",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_23336.jpg"
+        },
+        {
+          "name": "Пол Годдард",
+          "role": "Agent Brown",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_21711.jpg"
+        },
+        {
+          "name": "Роберт Тейлор",
+          "role": "Agent Jones",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_10311.jpg"
+        },
+        {
+          "name": "Дэвид Эстон",
+          "role": "Rhineheart",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_23337.jpg"
+        },
+        {
+          "name": "Марк Грэй",
+          "role": "Choi (в титрах: Marc Gray)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_23338.jpg"
+        },
+        {
+          "name": "Ада Никодему",
+          "role": "Dujour (White Rabbit Girl)",
+          "profile": "https://st.kp.yandex.net/images/actor_iphone/iphone360_23339.jpg"
         }
       ]
     }

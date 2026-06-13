@@ -1,5 +1,280 @@
 [
   {
+    "id": "tv_215103",
+    "ru": "तेरी मेरी डोरियाँ",
+    "en": "तेरी मेरी डोरियाँ",
+    "year": 2023,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 111,
+    "popularity": 12.68,
+    "genres": [
+      "драма",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4BHDmYiuSnNL3nqKIOzLJKYX4AN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3rIU17p1zzFEWnt7qyDEjC9RJJu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_32200",
+    "ru": "Мыслить как преступник: Поведение подозреваемого",
+    "en": "Criminal Minds: Suspect Behavior",
+    "year": 2011,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 109,
+    "popularity": 4.97,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Драма об элитной команде агентов подразделения по поведенческому анализу ФБР, которая использует нетрадиционные методы расследования и агрессивную тактику, чтобы ловить самых гнусных преступников Америки. Глава подразделения, особый агент Сэм Купер — умственно и физически энергичный лидер, который не боится рисковать своей карьерой. Купер, который старается избегать политической бюрократии, сам выбрал профайлеров для команды: бывшего служащего спецслужб Британии Мика Роусона, уверенного в себе и красивого снайпера, настроенного на искоренение зла; Джона «Пророка» Симса, вооруженного уличной мудростью и дзен-спокойствием бывшего преступника, который хочет замолить грехи прошлого; и Джину ЛаСалль, жесткого агента с тонким чутьем. Эта группа оперативников ФБР тверда в своих убеждениях и неуклонно исполняет свою миссию — привлечь к ответственности самых опасных преступников страны.",
+    "poster": "https://image.tmdb.org/t/p/w342/g2eFa0rnshPHqBOYZLyOaeh90I0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/24Kr67DhRIDalcRvarQeQ9650RI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1313013,
+    "ru": "Attitudini: Nessuna",
+    "en": "Attitudini: Nessuna",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 108,
+    "popularity": 0.78,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4U4X0ykGYTFxvxKT1VvWocRrBkJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gwzBKU5tcq6Y6higxeqwGRe2uoH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 105325,
+    "ru": "Как подключить домашний кинотеатр",
+    "en": "How to Hook Up Your Home Theater",
+    "year": 2007,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 107,
+    "popularity": 0.43,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "Однажды Гуфи, сидя дома и смотря любимую игру, заметил как соседу завозят новенький, большой, домашний кинотеатр. Это никуда не шло в сравнение с его мини-телевизором, на котором постоянно приходилось двигать антенну чтобы не было помех. С этого момента Гуфи собирается купить себе всё необходимое, чтобы провести просмотр любимой игры с максимальным качеством и комфортом.",
+    "poster": "https://image.tmdb.org/t/p/w342/eHU8HfMozjS6bC8APU4Ik3l3zXs.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tPx3EwiGpiYTWNfUuyU29SDqIZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 263475,
+    "ru": "கத்தி",
+    "en": "கத்தி",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 107,
+    "popularity": 0.97,
+    "genres": [
+      "боевик",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/y8hvai0Y96Fz1yqyvtAG0hnATuZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iOnnXN8XPMWrh7flteI1mCftYBZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_62117",
+    "ru": "Purple River 2nd Season",
+    "en": "Zi Chuan 2nd Season",
+    "year": 2025,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 106,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Приключения",
+      "Adventure",
+      "Фэнтези",
+      "Fantasy",
+      "Военное",
+      "Military"
+    ],
+    "overview": "To clear suspicion, words are the weakest defense. True power speaks for itself! General Zichuan Xiu, who once single-handedly executed a traitor of the Zichuan clan within the Demon Clan's stronghold, has risen to command hundreds of thousands of allied troops in the Far East. Supported by the Guardian Elders of the Sacred Temple, this warrior now ascends as the new sovereign of the Eastern lands: The Bright King is crowned!\n\n(Source: WeTV)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1186/151163l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 881211,
+    "ru": "Снупи представляет: новогодний праздник с Люси",
+    "en": "Snoopy Presents: For Auld Lang Syne",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 106,
+    "popularity": 0.64,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "комедия"
+    ],
+    "overview": "Когда Люси узнаёт, что бабушка не приедет на Рождество, она решает устроить грандиозную вечеринку в канун Нового года, чтобы поднять себе настроение. В то же время Чарли Браун пытается исполнить одно из своих обещаний на этот год до того, как часы пробьют полночь.",
+    "poster": "https://image.tmdb.org/t/p/w342/bsnOWVlYIfHxf2H2TTvz1mgAikG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7tJSulnvERJn6R9Ih2C2Uvpm8zy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1421309,
+    "ru": "La vita da grandi",
+    "en": "La vita da grandi",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 106,
+    "popularity": 0.84,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ttQBhfScEkM94KbQq1bEpGuuWk9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/g8wmSi0tvQFtnzvpOJjaCve3xd0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "14132",
+    "ru": "Макросс: Помнишь ли нашу любовь?",
+    "en": "超時空要塞マクロス 愛・おぼえていますか",
+    "year": 1984,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 105,
+    "popularity": 2.36,
+    "genres": [
+      "мультфильм",
+      "фантастика",
+      "военный",
+      "боевик",
+      "Аниме"
+    ],
+    "overview": "Человечество создаёт огромный корабль, Макросс, летающую крепость со своей личной эскадрильей космических пилотов. Одним из этих пилотов является главный герой - Хикару, молодой, но талантливый солдат, по уши влюбленный в песни знаменитой на Макроссе пивицы - Лин Минмэй. Однако, не все так хорошо. Макросс затянут в войну между двумя различными расами Мельтранами и Зентради. И однажды, когда летающая отбивала очередную атаку, Лин Минмэй чуть не погибла - из-за трансформаций Макросса в боевого робота она падает в один из механических отсеков. Но Хикару, вопреки приказам своего командира спасает её ценой поломки своего истребителя.",
+    "poster": "https://image.tmdb.org/t/p/w342/j27wHdXbq2VRurUtQiCpePZf11b.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/f1MwrnVB8eQyeJc3wQV7k1sZsz1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_60605",
+    "ru": "Y Gwyll",
+    "en": "Y Gwyll",
+    "year": 2013,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 104,
+    "popularity": 4.33,
+    "genres": [
+      "криминал",
+      "драма",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uyYp5sZqTkviCtRjQNuOuqWTssM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aPtygCQY7FOBO0Ns3bKhafR9HrI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 965143,
+    "ru": "Ад в Сети: Разоблачение Интернет-кошмара",
+    "en": "사이버 지옥: n번방을 무너뜨려라",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 103,
+    "popularity": 1.78,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Через сеть анонимных эксплуататорских онлайн-чатов совершалось много сексуальных преступлений. Охота за ее организаторами требовала мужества и упорства.",
+    "poster": "https://image.tmdb.org/t/p/w342/iWI05wWFZvPKCgEqXihjUQLar7r.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/okUGREWC4LN2TSjFX0AOiNJhzdN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_63726",
+    "ru": "В изоляции",
+    "en": "Alone",
+    "year": 2015,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 103,
+    "popularity": 7.8,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "В Изоляции является единственным в своем роде телесериалом, которое поместило людей против неизвестного в полной изоляции. Без продюсеров, начальников или съемочных команд, следующих за ними по пятам, эти эксперты по выживанию действительно собираются проверить свою выдержку. Это шоу чувствуется необработанным, но оно является подлинным – просто десять мужчин с их камерами и волей, чтобы выжить. Нет уловок и никакого контакта с внешним миром.",
+    "poster": "https://image.tmdb.org/t/p/w342/a1r1KLEYFP1u0q5kH4mHDQaOOvF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wcX3J5juFUMXhivZ9rHB7NgwLYa.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_82729",
+    "ru": "Paquita la del Barrio",
+    "en": "Paquita la del Barrio",
+    "year": 2017,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 103,
+    "popularity": 1.62,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dyFv2A0tYnxfr41oTJMm5hPeZOE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/o8p2FeRgUn1u1gatAdGUQSL3rfY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 134103,
+    "ru": "Кошмарный кролик",
+    "en": "Hair-Raising Hare",
+    "year": 1946,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 103,
+    "popularity": 0.37,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/sB72GBY4WTgOyW0Onzsh06RPaGK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oVqhPBqCsU5ygiqEF8DLv16FQSZ.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 194774,
     "ru": "Вермейл в золотом: Сильнейший маг проходит через магический мир с сильнейшей катастрофой",
     "en": "金装のヴェルメイユ~崖っぷち魔術師は最強の厄災と魔法世界を突き進む~",
@@ -9499,278 +9774,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/heOqng8QyxEFOuHdF6p4HGw70Zn.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/1Ss82WvXXANNwrfaumHGvbTiE2i.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 70581,
-    "ru": "Круг",
-    "en": "써클: 이어진 두 세계",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 32,
-    "popularity": 2.97,
-    "genres": [
-      "детектив",
-      "НФ и Фэнтези"
-    ],
-    "overview": "Эмоции - то, что сопровождало человечество еще с начала времен. Страх, радость, горе… Именно они делают человека человеком. Но вот в чем загвоздка - эмоции заставляют человека идти против правил, мешают подчиняться. Именно из-за них человек проявляет непокорность. А что если ты не человек и не проявляешь эмоции вовсе?\n\n2007 год, высадка на планету пришельца, свидетелями которой становятся два брата-близнеца со своим отцом. И вроде бы всё ничего, да и пришелец ведет себя не враждебно, вот только он не имеет никаких эмоций. Но почему спустя десять лет в 2017 году старший из близнецов убивает человека на почве помешательства на пришельцах, и тут же оба близнеца пропадают? И как это связано с событиями, разворачивающимися уже в 2037 году? Ведь теперь на «умной земле»  эмоции контролирует программа с помощью чипа, встроенного в голову, она гарантирует полную безопасность. Но на самом ли деле все под контролем, на самом ли деле здесь и сейчас безопасно? Или…",
-    "poster": "https://image.tmdb.org/t/p/w342/9ZeCBhSlqY2nS2i5yBGE9lHrZct.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bNKkzY9rWxtzCZmMrO62IEO7AEf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 67802,
-    "ru": "Что-то около 1%",
-    "en": "1%의 어떤것",
-    "year": 2016,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 32,
-    "popularity": 2.06,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Ли Чжэ Ин (Ха Сок Джин) обладает хорошей внешностью, он умен и происходит из богатой семьи, но также высокомерен. С целью перевоспитания внука его дедушка выдвигает условие: если Чжэ Ин хочет получить наследство, то должен как минимум 10 месяцев провстречаться с учительницей начальной школы, которая спасла дедушке жизнь. За время выполнения условия герой медленно влюбляется в девушку.\n\nРемейк дорамы 2003 года по мотивам одноименного романа.",
-    "poster": "https://image.tmdb.org/t/p/w342/nexRfQ5Blp0TJ3CjQWEAMK0ko4P.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/e4qqS2kfqcGVwFtW78is2CfQO1S.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 451474,
-    "ru": "Последний шаман",
-    "en": "The Last Shaman",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 32,
-    "popularity": 0.64,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/52wrrla3cOVadcNNBNf3HVKeX7d.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aaThu80ZRmN3OkKhDwLeJ33kHna.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 423778,
-    "ru": "La flor",
-    "en": "La flor",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 32,
-    "popularity": 0.53,
-    "genres": [
-      "драма",
-      "фэнтези",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/GMAnDHh4m2mn8schv9DtWF6khv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8fylml4dfpIpl5dPP0TGvVGA7eg.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 145756,
-    "ru": "Aladdin and His Wonderful Lamp",
-    "en": "Aladdin and His Wonderful Lamp",
-    "year": 1939,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 32,
-    "popularity": 0.33,
-    "genres": [
-      "драма",
-      "комедия",
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nV1HnmMhQnuHvRGnrXTHsfdgPXQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nzH3kHiS4moGaTP64hkKvtN5qNX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_284442",
-    "ru": "Путешествие коллекционера по другому миру",
-    "en": "素材採取家の異世界旅行記",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 31,
-    "popularity": 4.22,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Камиширо Такэру — самый обычный офисный работник, который перерождается в другом мире: мире мечей и магии под названием Мадеус. Начиная свою новую жизнь в изекае, он получает множество невероятных способностей! Такэру предстоит в полной мере использовать свою усиленную физическую силу, потрясающую магическую мощь и уникальную способность «Поиск», позволяющую находить ценные предметы, — ведь именно так начинается его великое приключение в другом мире!",
-    "poster": "https://image.tmdb.org/t/p/w342/oD4HawWJxmIGNzqwNw7SCFNjaoV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nir97l3eUIHeHUQjWhV3NffjIK3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 4803,
-    "ru": "Еноты",
-    "en": "The Raccoons",
-    "year": 1985,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 31,
-    "popularity": 4.43,
-    "genres": [
-      "мультфильм",
-      "Детский",
-      "Аниме"
-    ],
-    "overview": "Действие разворачивается в Вечнозелёном лесу, где живёт главный герой сериала енот Берт и его друзья, Рафль и Мелисса, а также другие животные. Жизнь обитателей леса была бы беззаботной, если бы не богач Сирил Снир (розовый трубкозуб), который время от времени пытается использовать лес для личной наживы, и его подручные, трое свинов. Сын Снира Сэдрик дружит с енотами и всегда старается предупредить их об очередной опасности, нависшей над лесом.",
-    "poster": "https://image.tmdb.org/t/p/w342/k5WiuSkGCRjuI6zuMwTyxJPqevL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sIBwamUMXFp6oZckAUTmMyMiUkl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_75793",
-    "ru": "Госпожа Коизуми без ума от лапши",
-    "en": "ラーメン大好き小泉さん",
-    "year": 2018,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 31,
-    "popularity": 3.12,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "Койзуми - тихая, очаровательная и на первый взгляд неприступная школьница. Она большой специалист по рамену и вечно находится в поисках ресторанов с восхитительным раменом.",
-    "poster": "https://image.tmdb.org/t/p/w342/3mbTcv1uzE8dHJBpUcES0deLyLa.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cybtvybUytUtoiK68dtWGhG4aYY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "477449",
-    "ru": "Повелитель: Тёмный воитель",
-    "en": "劇場版総集編 オーバーロード 漆黒の英雄【後編】",
-    "year": 2017,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 31,
-    "popularity": 1.73,
-    "genres": [
-      "мультфильм",
-      "боевик",
-      "приключения",
-      "фэнтези",
-      "Аниме"
-    ],
-    "overview": "Фильм представляет собой компиляцию событий второй половины первого сезона сериала «Повелитель».\r Легендарная онлайн-игра «Иггдрасиль» неожиданно закрывается. Желая остаться в любимом мире подольше, игрок, управляющий персонажем по имени Момонга, решает оставаться в игре до полного отключения серверов. Момонга — лич, глава одной из топовых гильдий, представляющих в игре тёмную сторону. В момент отключения сервера он собрал всех своих прислужников в главном зале гильдии, сел на трон и стал ждать неизбежного. Но произошло невероятное: сервер не прервал подключение, игра продолжилась, а Момонга превратился в могущественного волшебника. Неигровые персонажи вдруг начали проявлять человеческие эмоции. Теперь безо всякой помощи, без друзей и без какой-либо информации о происходящем Момонге придётся завоевать этот мир, чтобы найти выход",
-    "poster": "https://image.tmdb.org/t/p/w342/f6uP4mK2smW7A6xTRMzq15n91je.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7ppe5S9RJKBaIjliCFWOqwTiUaP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 228034,
-    "ru": "Абсолютное зло",
-    "en": "Ondskan",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 31,
-    "popularity": 5.5,
-    "genres": [
-      "драма"
-    ],
-    "overview": "За плохое поведение Эрика переводят из обычного класса в закрытую школу-интернат Стернсберг. Педагоги, не стесняясь в выражениях, называют его абсолютным злом и убеждены, что ничего путного из ученика не выйдет, а отчим почти каждый день избивает его после ужина. На новом месте Эрик снова попадает в атмосферу насилия и подавления любого инакомыслия, но даже здесь у него получается найти отдушину - он влюбляется в очаровательную Марию, которая работает в школьной столовой, и чувства к ней помогают парню противостоять школьной банде отморозков.",
-    "poster": "https://image.tmdb.org/t/p/w342/h974TcGoCwZIuCVv0zoXFqHNNyB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yCARkvjxhQhmAMpElXYwpWbBzE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1168719",
-    "ru": "Молчаливый друг",
-    "en": "Stille Freundin",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 31,
-    "popularity": 4.83,
-    "genres": [
-      "драма"
-    ],
-    "overview": "В 1908 году в Марбургский университет поступает первая студентка, в 1972 году застенчивый студент безнадёжно влюбляется в однокурсницу, а в 2020 году гонконгский нейробиолог не может покинуть кампус из-за пандемии. Действие разворачивается в ботаническом саду и охватывает три эпохи. Их объединяет один безмолвный свидетель — величественное дерево гинкго билоба.",
-    "poster": "https://image.tmdb.org/t/p/w342/aIHFsmrNi2aJGvEFKZ7S7XwqHeJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3HgNb4XRFVxwWP6XrES2oGOvHit.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 112489,
-    "ru": "Подработка",
-    "en": "Side Hustle",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 31,
-    "popularity": 3.27,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Двое подруг - умная и язвительная Лекс и самоуверенная и грубоватая Пресли – разрабатывают план заработка, чтобы компенсировать ущерб, случайно нанесённый транспортному средству соседей.",
-    "poster": "https://image.tmdb.org/t/p/w342/sTDn4xp6KcnjDLCpOarymUoSlAz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1umlfhQAWuRR6iyo8gD90vrN0wC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 752589,
-    "ru": "Рядовой Чээрин",
-    "en": "Рядовой Чээрин",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 31,
-    "popularity": 0.58,
-    "genres": [
-      "военный",
-      "история"
-    ],
-    "overview": "Глубокая осень 1943 года. Немецкие снайперы хозяйничают на передовой. Молодой охотник Егор Чээрин, только прибывший на фронт, становится снайпером. В первом же бою ему удается проявить себя, он вступает в схватку с немецкими захватчиками и меняет баланс сил на передовой.",
-    "poster": "https://image.tmdb.org/t/p/w342/yzuaxCZlVMmTl8rihuzxV0JlPko.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/md2hy7YU7yAKlyuhrAMIob1K1ga.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 793430,
-    "ru": "Водопады любви",
-    "en": "Chasing Waterfalls",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 31,
-    "popularity": 0.53,
-    "genres": [
-      "телевизионный фильм",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eJxHoF3xqXIqamM0j9WlKxGKZ6a.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1vPZKYagNQEFP2lk0dDkjHmvLfc.jpg",
     "source": "tmdb"
   }
 ]

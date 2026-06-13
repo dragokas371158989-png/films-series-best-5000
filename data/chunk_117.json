@@ -1,5 +1,286 @@
 [
   {
+    "id": "8689",
+    "ru": "Ад каннибалов",
+    "en": "Cannibal Holocaust",
+    "year": 1980,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 1867,
+    "popularity": 10.92,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "Несколько молодых репортеров отправляются в дебри Амазонки, чтобы снять сенсационный фильм о последних людоедах, оставшихся на Земле.  Попав туда, где не бывал еще ни один европеец, они бесследно исчезают. Что с ними случилось? Какие ужасные секреты хранит амазонская сельва?",
+    "poster": "https://image.tmdb.org/t/p/w342/ohbhlbwwZMryZsEesBwCsJzVaG0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/z4mSIudSz9ddv7kmZ7QFN0ALUz9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "623491",
+    "ru": "Няня. Королева проклятых",
+    "en": "The Babysitter: Killer Queen",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 1845,
+    "popularity": 4.48,
+    "genres": [
+      "комедия",
+      "ужасы"
+    ],
+    "overview": "Спустя два года после победы Коула над сатанинским культом, возглавляемым его няней Би, парень пытается забыть своё прошлое и сосредоточиться на выживании в старшей школе. Но когда старые враги неожиданно вернутся, Коулу придётся снова перехитрить силы зла.",
+    "poster": "https://image.tmdb.org/t/p/w342/bfreoPO5aKNv2nJiHXHilXoIROO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qDV3sQRhqyXflUfH6gOTGkPXTaV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_59835",
+    "ru": "Kirio Fan Club",
+    "en": "Kirio Fanclub",
+    "year": 2026,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.3,
+    "votes": 1839,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Комедия",
+      "Comedy",
+      "Школа",
+      "School"
+    ],
+    "overview": "Obsessed with their rather ordinary classmate Ken Kirio, high school students Aimi Miyoshi and Nami Sometani form a peculiar friendship. Every time the girls hang out, they talk about Kirio and fantasize about interacting with the boy they usually just observe from afar. Aimi and Nami are mostly satisfied with the status quo, but they occasionally cannot help but be jealous of those who get to be near their crush—though this still rarely leads them to approach him directly.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1066/155831l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "181283",
+    "ru": "Номер 44",
+    "en": "Child 44",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 1819,
+    "popularity": 2.64,
+    "genres": [
+      "криминал",
+      "триллер"
+    ],
+    "overview": "Действие фильма развернется в СССР времен Иосифа Сталина. Главный герой — дискредитированный офицер советской разведки Лев Демидов. Он расследует серию детских убийств, но его деятельность вызывает подозрение у параноидального советского правительства.",
+    "poster": "https://image.tmdb.org/t/p/w342/tc3u9yDWIvzVpVMdgndbururCd1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sjsaxwNsgBbrWrJIXtCT5DNo9Mt.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "11683",
+    "ru": "Земля мертвых",
+    "en": "Land of the Dead",
+    "year": 2005,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 1796,
+    "popularity": 3.48,
+    "genres": [
+      "ужасы",
+      "фантастика",
+      "триллер"
+    ],
+    "overview": "Ожившие мертвецы — зомби заполонили весь мир, и последние люди пытаются спастись, будучи заложниками ситуации в городе, окружённом неприступной стеной. Однако скоро и они окажутся под угрозой со стороны новых, более совершенных и более опасных существ...",
+    "poster": "https://image.tmdb.org/t/p/w342/6IOrS9S1gYYJWiHVC93jK8H3W1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/teAcCOSN9wWDgePt4bRbzDK9oZF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "323675",
+    "ru": "Миссия в Майами",
+    "en": "Ride Along 2",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 1795,
+    "popularity": 3.04,
+    "genres": [
+      "боевик",
+      "комедия"
+    ],
+    "overview": "Накануне собственной свадьбы Бен отправляется с братом своей будущей жены, крутым полицейским Джеймсом, в Майами, чтобы схватить наркодельца.",
+    "poster": "https://image.tmdb.org/t/p/w342/lF07ZyHePWhAKjvvQxSexE6bDtN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/x152hzQ03o6i7R78dL2Nwwy5Qhz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_34670",
+    "ru": "Monster Strike the Anime 2nd Season",
+    "en": "Monster Strike Anime",
+    "year": 2017,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.3,
+    "votes": 1771,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Фэнтези",
+      "Fantasy",
+      "Игры",
+      "Video Game"
+    ],
+    "overview": "The second season of Monster Strike, animated entirely in CG. \n\nA transfer student from America, Mana Livingston, becomes friends with the main cast and learns about the Monster Strike game, even obtaining her own ring and partner. Together, everyone helps solve crises involving the energy points that draw monsters in random areas of Japan. By sealing them, the monsters will stop being drawn to them. But Madarame, a CEO who reaches out to the children, is not telling them the whole truth.",
+    "poster": "https://cdn.myanimelist.net/images/anime/7/84735l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "11096",
+    "ru": "Игра в прятки",
+    "en": "Hide and Seek",
+    "year": 2005,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 1730,
+    "popularity": 2.45,
+    "genres": [
+      "ужасы",
+      "детектив"
+    ],
+    "overview": "Отец-вдовец отчаянно пытается пробиться к своей 9-летней дочери, создавшей себе подлого маниакального воображаемого друга, одержимого идеей мести отцу. Однако воображаемые друзья могут войти и в реальную жизнь…",
+    "poster": "https://image.tmdb.org/t/p/w342/sjF1Qegjf8IBeMSFTGD9Ose3OTt.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4QwtFTo7e8pfh0HCklVng5xun3y.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "8845",
+    "ru": "В осаде",
+    "en": "Under Siege",
+    "year": 1992,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 1727,
+    "popularity": 3.55,
+    "genres": [
+      "боевик",
+      "триллер"
+    ],
+    "overview": "Террористы под видом сопровождения рок-группы, которая должна выступить перед военными моряками, пробираются на корабль с ядерным оружием. Расправившись с основной частью командного состава они пытаются шантажировать правительство США. Всё для захватчиков судна складывалось благополучно до тех пор, пока они не решили изолировать повара - бывшего морского пехотинца. Кок не мог стерпеть такого издевательства: он практически в одиночку хоронит планы подонков один за другим...",
+    "poster": "https://image.tmdb.org/t/p/w342/biRKLtcZVhBDZzZP5jDlZgaNLd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ihBDaN7OwT7D9DVri8SmxCnuRLB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "10735",
+    "ru": "Чего хочет девушка",
+    "en": "What a Girl Wants",
+    "year": 2003,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 1721,
+    "popularity": 2.53,
+    "genres": [
+      "семейный",
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Дафна, семнадцатилетняя свободолюбивая девушка, отправляется из Нью-Йорка в Англию на поиски своего отца, которого она никогда не знала. Папочка же оказывается богатым аристократом и известным политиком.  Теперь Дафне предстоит стать своей в великосветском окружении отца, погрузившись с головой в бесконечную череду богемных приемов, показов мод и вечеринок. Но сладкая жизнь омрачается множеством трудностей: Дафне предстоит освоить все тонкости этикета, наладить отношения со сводной сестрой и, самое главное, — остаться верной себе и своим идеалам.  И она блестяще справляется с поставленной целью — с находчивостью и изобретательностью, которым позавидовала бы любая юная леди.",
+    "poster": "https://image.tmdb.org/t/p/w342/dvj1ELtLl1ZnDPrZNieUBzHzQgw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bZwUUgz0pgl1cEjcvpDSsBfYvzK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_3518",
+    "ru": "銀河の魚~URSA minor BLUE~",
+    "en": "Ginga no Uo Ursa Minor Blue",
+    "year": 1993,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.3,
+    "votes": 1713,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Призовые",
+      "Award Winning",
+      "Фэнтези",
+      "Fantasy",
+      "Для детей",
+      "Kids"
+    ],
+    "overview": "Urey is a boy who lives in a laboratory in a lake with an old man. One day they find a strange star in the Little Dipper. The stars are disappearing and the Little Dipper changes into a fish shape. To save stars, they begin to sail across the Milky Way to the place where the strange fish lives. \n\n(Source: AnimeNfo)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1174/92715l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "467660",
+    "ru": "Не в себе",
+    "en": "Unsane",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 1679,
+    "popularity": 3.4,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "Девушка покидает родной город, чтобы сбежать от проблемного прошлого и найти новую работу. Но когда она не по своей воле оказывается в психиатрическом учреждении, ей приходится столкнуться со своим самым большим страхом. Но реален ли он, или это — просто плод ее воображения? Героине кажется, что никто не верит ей, а власти не могут или не хотят помочь, поэтому она должна в одиночку противостоять своим страхам.",
+    "poster": "https://image.tmdb.org/t/p/w342/2m34jQco77dTDpOj3uJy1GbyBkC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5u0ImRdr8Z6uyDfmSWcThXEb8cl.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "630240",
+    "ru": "Титан",
+    "en": "Titane",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 1678,
+    "popularity": 2.98,
+    "genres": [
+      "драма",
+      "триллер",
+      "ужасы"
+    ],
+    "overview": "После автоаварии, в которую Алекса попала в детстве, в голове у неё титановая пластина. 15 лет спустя она работает стриптизёршей, а когда беременеет совершенно невероятным образом, это провоцирует у девушки всплеск неконтролируемой агрессии.",
+    "poster": "https://image.tmdb.org/t/p/w342/qGl0a1hTMWsiD4oXUqOV4QK1LjB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dVOlJVHYRWx7DhMQRNLnbf5bT1q.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "505058",
+    "ru": "Убрать из друзей: Даркнет",
+    "en": "Unfriended: Dark Web",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 1668,
+    "popularity": 3.17,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "В только что купленном ноутбуке Матиас обнаруживает страшные видеофайлы из даркнета. Во время коллективного чата он показывает их друзьям. Компьютер заражен новым, неопознанным вирусом, и кто-то неизвестный начинает смертельную игру в прямом эфире, которую никто не может покинуть просто так.",
+    "poster": "https://image.tmdb.org/t/p/w342/mkv9n3PZbWEgQpdZDyoFC5Gx5yR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2Dk9WG8R0PYlgZjo5F9iheKybpO.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "50698",
     "ru": "Искатели могил",
     "en": "Grave Encounters",
@@ -9635,282 +9916,6 @@
     "overview": "Его создали из самого честного полицейского в городе - Алекса Мёрфи. Создали, соединив человеческую плоть со сталью машины. Вероломно убитый бандитами офицер Мёрфи стал частью уникального эксперимента корпорации ОСР по созданию первого в истории робота-полицейского, несокрушимого и грозного защитника закона. Его нельзя подкупить. Его чертовски сложно взять на жалость и совершенно невозможно испугать. Соревнования с ним в искусстве стрельбы и тактике ведения боя - бесполезны. Это полумеханическое существо создано специально для войны в экстремальных условиях.",
     "poster": "https://image.tmdb.org/t/p/w342/vIYt0JnsjtbQ6IUyJZrix00TJuw.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/ayfwBr79hFnDuff15mm59ZRbU0W.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 455043,
-    "ru": "Бог войны",
-    "en": "荡寇风云",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 102,
-    "popularity": 2.06,
-    "genres": [
-      "боевик",
-      "история",
-      "военный"
-    ],
-    "overview": "1557 год. Морские разбойники уже несколько десятилетий грабят восточные рубежи Поднебесной. После того, как пираты захватили большой портовый город Цэньган, столичный генштаб посылает на помощь старому полководцу Юй Дао его более молодого и амбициозного коллегу Ци Цзигуана, уверенного в том, что в войне с пиратами можно поставить точку. Для этого необходимы две вещи — железная дисциплина и новая армия.",
-    "poster": "https://image.tmdb.org/t/p/w342/2ovwFlWla1MNNqUL4QR4j4aequO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5ViWWRc2sy0Au1ET77Qpn2jEctx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 52939,
-    "ru": "Три богатыря и Шамаханская царица",
-    "en": "Три богатыря и Шамаханская царица",
-    "year": 2010,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 102,
-    "popularity": 0.61,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "комедия",
-      "приключения"
-    ],
-    "overview": "Некогда первая красавица восточных земель Шамаханская царица, мечтая вернуть себе утраченные чары, отправляется в Храм Вечной Молодости. Однако там выясняется, что для достижения цели необходимо оросить Дерево Молодости слезами тысячи красавиц. Тогда помощник царицы — Ворон подсказывает ей самый, как ему кажется, простой план, где добыть женские слёзы. Всего-то и нужно: используя магический взгляд царицы, с помощью которого она покоряет мужчин, влюбить в себя Князя Киевского, завладеть Русью и заставить плакать всех её женщин. Но тут в дело вмешиваются богатыри Алёша Попович, Илья Муромец, Добрыня Никитич, а также уже хорошо знакомые зрителю герои: конь Юлий, Змей Горыныч, бабуля и дед Тихон. Дело, по мнению богатырей, несложное, а проветриться не мешает. Но скоро, как известно, только сказка сказывается...",
-    "poster": "https://image.tmdb.org/t/p/w342/nc8d2RZ08H2Oo0E6pguo2ob9uns.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iGFBNpWOq2kI8wVRRvI6CfmxAKq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 374607,
-    "ru": "Love on the Sidelines",
-    "en": "Love on the Sidelines",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 102,
-    "popularity": 0.89,
-    "genres": [
-      "телевизионный фильм",
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oPFXIYMzOX7LebQT53Bxc0R1eug.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8yK6v4v0M6jVUcXWvcrvIZGsapn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 793937,
-    "ru": "Школа магических зверей",
-    "en": "Die Schule der magischen Tiere",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 101,
-    "popularity": 1.82,
-    "genres": [
-      "семейный",
-      "приключения",
-      "фэнтези"
-    ],
-    "overview": "Мальчику Бенни и девочке Иде подарили по волшебному животному, которые не только умеют разговаривать, но и готовы стать для них их лучшими друзьями. Всех вместе их ждут впереди невероятные приключения, но сумеют ли они выполнить главное условие «Волшебного зоомагазина»: сохранить втайне от взрослых своих новых друзей?",
-    "poster": "https://image.tmdb.org/t/p/w342/vAUTnOslFmaHEwhYeiCANUT3rGP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/f5iYxNpImWQmaHPpamzutOjRwHe.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 980804,
-    "ru": "LEGO Звёздные Войны: Летние Каникулы",
-    "en": "LEGO Star Wars Summer Vacation",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 101,
-    "popularity": 1.41,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "фантастика",
-      "комедия"
-    ],
-    "overview": "Повествует о событиях \"Звёздных войн: Скайуокер\". Героям галактики очень нужен отпуск, но, как часто бывает с семейным отдыхом, всё идёт не по плану.",
-    "poster": "https://image.tmdb.org/t/p/w342/gvJhv78zjzcw9CIKWiBugPsFl2s.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jhmGJmPcuAhF2ccuKluYlLxnyeP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1143019,
-    "ru": "Непогрешимые",
-    "en": "Les Infaillibles",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 100,
-    "popularity": 0.94,
-    "genres": [
-      "комедия",
-      "боевик"
-    ],
-    "overview": "Череда дерзких нападений на инкассаторские бронемашины сотрясает Париж. Полиция знает, что это дело рук «семейного подряда» матёрого бандита Богарта и двух его сыновей, но и близко не может подобраться к преступникам. В надежде предотвратить очередное вооружённое ограбление власти поручают дело двум молодым легавым — парижанину Хьюго и девушке-полицейской Алие, специально для этого приглашённой из Марселя. Сходство у этих двух совершенно разных людей заключается в том, что оба в погоне за преступниками готовы нарушать законы и правила. А, возможно, только такими методами можно обезвредить неуловимую банду.",
-    "poster": "https://image.tmdb.org/t/p/w342/mmaz2IESTJkKf77tSOKZ3PxV7NN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yHEFwHkU2NqRxBrAoGBfuhuqIL1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 332356,
-    "ru": "Убийство Иисуса",
-    "en": "Killing Jesus",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 100,
-    "popularity": 0.89,
-    "genres": [
-      "телевизионный фильм",
-      "драма",
-      "фэнтези"
-    ],
-    "overview": "Это история жизни Иисуса из Назарета через призму различных конфликтов в Великой Римской империи.",
-    "poster": "https://image.tmdb.org/t/p/w342/1Wr7apWkhqHSdzmxnQuzlKTzdK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/q5CQZRXM5PBMNga9G1cErB6gOs8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 362478,
-    "ru": "Студент со связями",
-    "en": "The Preppie Connection",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 99,
-    "popularity": 0.65,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "Учащийся частной школы использует свои связи для создания сети распространения наркотиков.",
-    "poster": "https://image.tmdb.org/t/p/w342/5bcsmYxS89erdhFP1W3bEekG3SZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/haeL17pccpAC6xrK5v3p1KWhjkS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 572521,
-    "ru": "Молитва во имя Бога",
-    "en": "Gloria Mundi",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 99,
-    "popularity": 0.54,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Большая марсельская семья собирается вместе, чтобы отметить рождение ребенка. Несмотря на радостный повод, настроение у родственников не самое радужное - семья переживает не лучшие времена. У дяди маленькой Глории рождается одна рискованная бизнес идея, которая - если выгорит - может стать настоящим спасением для всех.",
-    "poster": "https://image.tmdb.org/t/p/w342/oa7xgXwykmLGCXmJUrmaJQ0dDBS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lPDLAJGTji0lkDqrpEXA7KAfCAM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 821420,
-    "ru": "Заложница: Найти пропавшую",
-    "en": "Catch the Fair One",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 98,
-    "popularity": 0.72,
-    "genres": [
-      "триллер",
-      "детектив"
-    ],
-    "overview": "Вот уже два года Кейли не теряет надежды отыскать свою без вести пропавшую младшую сестру Виту. Надежды на помощь властей мало — в этих краях девушки из рода коренных американцев слишком часто исчезают без следа. И хотя всем давно известно, что они самый ходовой товар в секс-торговле, власти предпочитают демонстративно не замечать проблемы. Отчаявшись, профессиональная боксерша Кейли завершает карьеру в спорте, устраивается в дешевую забегаловку неподалеку от места, где пропала Вита, и начинает собственное расследование. Продюсером фильма выступил режиссер Даррен Аронофски, а главную роль исполнила действительная чемпионка мира по боксу Кали Реис.",
-    "poster": "https://image.tmdb.org/t/p/w342/r7HXqZU1m8nbLm9tRByqglgokMh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/noCgyITVoRxC3huC9zSOQq23sVr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 993708,
-    "ru": "Третья лишняя",
-    "en": "The Threesome",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 97,
-    "popularity": 3.5,
-    "genres": [
-      "комедия",
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "После одного страстного вечера Коннор никак не может смириться с тем, что они с Оливией просто друзья. Чтобы вызвать ее ревность и пробудить ответные чувства, он начинает ухаживать за Дженни. Романтическая фантазия на троих неожиданно для всех заканчивается двумя беременностями. Теперь Коннору надо действовать в два раза активнее, не терять чувство юмора и разрешить ситуацию так, чтобы все остались довольны.",
-    "poster": "https://image.tmdb.org/t/p/w342/7vQUAw3CX60dhzgzC7BQZFN7Y31.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vXYRqIySwaa56quJGRKxXfSaTh0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 648990,
-    "ru": "Дом",
-    "en": "La casa",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 97,
-    "popularity": 0.4,
-    "genres": [
-      "ужасы",
-      "детектив"
-    ],
-    "overview": "Приехав на срочный вызов, полицейский попадает в ловушку злых духов проклятого дома.",
-    "poster": "https://image.tmdb.org/t/p/w342/fvTGWaQejnHQBZbEOrdbb38NBTC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kLsrE6q4ld144ECBkydZ4dV8t9T.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 317114,
-    "ru": "Bridal Wave",
-    "en": "Bridal Wave",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 97,
-    "popularity": 0.81,
-    "genres": [
-      "комедия",
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yZMUAsU9MxTDls737iU23XeywND.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qASObnfUQXAonFUpYVcAcuwt4U5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1357305,
-    "ru": "Детектив из Чайнатауна, 1900 год",
-    "en": "唐探1900",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 96,
-    "popularity": 2.61,
-    "genres": [
-      "комедия",
-      "детектив",
-      "боевик"
-    ],
-    "overview": "Сан-Франциско, начало 1900-х годов. В Чайнатауне убита белая женщина, а главным подозреваемым становится китаец. Преступление вызывает широкий общественный резонанс, и горожане требуют закрыть китайский квартал. Расследованием дела занимаются врач традиционной китайской медицины Цинь Фу и китайско-индейский охотник по прозвищу А-Гуй.",
-    "poster": "https://image.tmdb.org/t/p/w342/mlsSLMqBl4jikr9sr7DSG0jTuqt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4xN3phAX024b251CPhy8zvsXbBc.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,273 @@
 [
   {
+    "id": 1324495,
+    "ru": "Bad Fish",
+    "en": "Bad Fish",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.8,
+    "votes": 7,
+    "popularity": 1.66,
+    "genres": [
+      "триллер",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/t50tvosFJKPM6UCAaH6Q0hORXcJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jghhG5l8kDuVZahG02ogPZc9Gs8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 997791,
+    "ru": "A Porta ao Lado",
+    "en": "A Porta ao Lado",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.8,
+    "votes": 7,
+    "popularity": 1.05,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8pYsfzwI20pzzwVeEIPS2Sb0zFA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bqalitysa5dFjl0F0QGXKA3YHjS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 416187,
+    "ru": "3 Way Junction",
+    "en": "3 Way Junction",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.8,
+    "votes": 7,
+    "popularity": 0.68,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mlgiviGhfvty4VBDEjLn3W5IHYY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wr8ySPgRZ2EEhh5j9yLzNP5zmm0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 440250,
+    "ru": "巧巧",
+    "en": "巧巧",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.8,
+    "votes": 7,
+    "popularity": 0.48,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4QrDJk3mu2NDlUt2WZhDR0hUN91.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rrlme7lHTUOYHBiNybec2xUxFPY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 296883,
+    "ru": "Morgenrøde",
+    "en": "Morgenrøde",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.8,
+    "votes": 7,
+    "popularity": 0.42,
+    "genres": [
+      "фантастика",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1H4jmsp7XS96s2i2hmfYrNrugVh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pOWdNjRfLZUCq9loxZeSY40DPPX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 676965,
+    "ru": "Seducción",
+    "en": "Seducción",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.8,
+    "votes": 7,
+    "popularity": 2.08,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/26KUD30VtJWLbwJhxDg91w5WSF6.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 67853,
+    "ru": "Регалия: Три священные звезды",
+    "en": "レガリア The Three Sacred Stars",
+    "year": 2016,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 4.8,
+    "votes": 6,
+    "popularity": 6.01,
+    "genres": [
+      "Боевик и Приключения",
+      "мультфильм",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Двенадцать лет назад в Римгарде произошло таинственное событие, потрясшее всю страну и её жителей. По прошествии времени мир начал воцаряться над страной, и память об этом инциденте стала угасать.\n\nСёстры Юи и Рена жили спокойной жизнью в империи Энастрия, но всё изменилось, когда гигантский робот напал на их мирный дом. Вскоре девушки попадут в невероятный водоворот событий, из которого они не вернутся прежними.",
+    "poster": "https://image.tmdb.org/t/p/w342/9R1w0yRv9EXCrRZju6KxDsqJlPV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/r2w66HYqnSdyv8iebNKTwQDMQyU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 31026,
+    "ru": "Территория отверженных",
+    "en": "Z.O.E Dolores, i",
+    "year": 2001,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 4.8,
+    "votes": 6,
+    "popularity": 5.19,
+    "genres": [
+      "НФ и Фэнтези",
+      "мультфильм",
+      "Боевик и Приключения",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "Главный герой, 49-летний Джеймс Линкс, работает пилотом космогрузовика. Его жена - профессор, разрабатывала прототип робота, пропала после происшествий, описанных в OVA. У главного героя двое взрослых детей, которых он давно не видел, и отношения у него с ними не ахти. Ему поручают доставить один сомнительный груз. Оказывается, что груз – тот самый робот-прототип, созданный его женой. Зовут его, точнее, её, Долорес. После встречи с ней жизнь Джеймса резко меняется...",
+    "poster": "https://image.tmdb.org/t/p/w342/g5UPLq6OhhA8FEXMYwin9DcbZIO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vX7mePY4NQaeizDk4PweX4LrQ8m.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 68928,
+    "ru": "レモンエンジェル",
+    "en": "レモンエンジェル",
+    "year": 1987,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 4.8,
+    "votes": 6,
+    "popularity": 6.07,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/t0PKnYdEL7PFGYxIs33frCqUOrg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9AIgvFOxJ7YWmks2WsumUc8mHsE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 34757,
+    "ru": "Девять принцесс",
+    "en": "プリンセスナイン 如月女子高野球部",
+    "year": 1998,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 4.8,
+    "votes": 6,
+    "popularity": 5.09,
+    "genres": [
+      "мультфильм",
+      "драма",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tllrsIhRHYIm9baU0zGOmxbGJeV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jupn4lKOD3QmTa4cfbq5Ap8tOHH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1252051,
+    "ru": "Disforia",
+    "en": "Disforia",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.8,
+    "votes": 6,
+    "popularity": 53.3,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/49pzxbf1Eftz7wQZdVDVl8OM9bg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gYumbUCWyUI6Mutgd7oILOCunk8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 845084,
+    "ru": "Актриса",
+    "en": "Comme une actrice",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.8,
+    "votes": 6,
+    "popularity": 0.89,
+    "genres": [
+      "драма",
+      "фэнтези"
+    ],
+    "overview": "Анна и Антуан - идеальный тандем на сцене и в жизни, но после многих лет брака и совместной работы они начинают терять интерес друг к другу. Когда Антуан решает уйти от неё, Анна использует магию перевоплощения, чтобы снова стать молодой и привлекательной. Но постепенно игра оборачивается против неё самой, и Анна понимает, что должна выбирать между любовью к мужу и собственной жизнью...",
+    "poster": "https://image.tmdb.org/t/p/w342/nwgp99GH4XGBR69JzKPQDXDv6zB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ipzRUqvxVRr1PWcXXA5YaVYkdLC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1273470,
+    "ru": "Безумный криминал",
+    "en": "窗前明月，咣！",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.8,
+    "votes": 6,
+    "popularity": 0.85,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Ху Гун Пин - блестящий адвокат, не проигравший ни одного дела. Во время перерыва в судебном заседании он тайно встречается в отеле со своей любовницей, и в самый разгар их свидания из окна падает оконная рама, под которой оказывается тело неизвестного мужчины. Любой звонок в полицию может разрушить адвокату карьеру и семью, поэтому он решает замести следы любой ценой. Но одна ложь провоцирует другую, и ситуация выходит из-под контроля.",
+    "poster": "https://image.tmdb.org/t/p/w342/2hPFJFirwvSuXJadT6li8LdF9Bz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rp9MmFVHfe8C4XKQEeQ69qLQSeq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1114368,
+    "ru": "Летний хардкор PSY",
+    "en": "싸이 흠뻑쇼 2022",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.8,
+    "votes": 6,
+    "popularity": 0.79,
+    "genres": [
+      "музыка",
+      "документальный"
+    ],
+    "overview": "Этот концерт \"Летний хардкор\", снятый летом 2022 года, позволит поклонникам вновь пережить концерт рэпера PSY в Южной Корее, где фанаты прыгали, танцевали и подпевали его известным мелодиям и битам, находясь под градом водяных струй.",
+    "poster": "https://image.tmdb.org/t/p/w342/8B747JDiXHhjtloFWzBv4xPnSvJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zuIdJ6eSz1Qwoq6CmC90vwca0rl.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 828930,
     "ru": "Укрась свое сердце",
     "en": "Deck the Heart",
@@ -9321,273 +9589,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/aeWgSZSs3pMaheM0rRmTe9WgA6m.jpg",
     "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 951547,
-    "ru": "Легенда о Куньлуне",
-    "en": "发丘天官：昆仑墟",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 8,
-    "popularity": 0.43,
-    "genres": [
-      "фэнтези",
-      "боевик",
-      "приключения",
-      "фантастика"
-    ],
-    "overview": "Чжан Вэньфэнь (Тим Пэй) – охотник за сокровищами из секты Фацю, который посвятил свою жизнь поискам отца (Майкл Тун). Тот когда-то отправился в Куньлуньские горы помогать японцам в поисках легендарного затерянного города и не вернулся оттуда, и Вэньфэнь пытается узнать, что с ним случилось. Путь к городу ищет и японка Риоми (Ариэль Ань), которая пытается привлечь к своим поискам команду Вэньфэня.",
-    "poster": "https://image.tmdb.org/t/p/w342/9DeA3mAJ20Ep5cWBsCaB6wwdV7p.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/x6GaHpFM450sbZwbF7TEC0ltwtn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1145758,
-    "ru": "Birder",
-    "en": "Birder",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 8,
-    "popularity": 3.11,
-    "genres": [
-      "триллер",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/h3N0NwMV1GyxOrtSwABQDqqA74.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/A6ki5Sk12qgFvejikLv16kmqxqk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1396371,
-    "ru": "Les irresponsables",
-    "en": "Les irresponsables",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 8,
-    "popularity": 1.15,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kq48E5i40mGlIZU2pc5Q4E9jEAs.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d8rFsRuL5uDmlPg9gTBpe2pwCyw.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 635489,
-    "ru": "Не расставаясь с мечтой",
-    "en": "Full Count",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 8,
-    "popularity": 1.3,
-    "genres": [
-      "драма",
-      "фэнтези"
-    ],
-    "overview": "Череда несчастных событий вынуждает Милтона отказаться от своей мечты играть в бейсбол и вернуться домой в город, откуда он изо всех сил пытался сбежать. Оказавшись дома, Милтон сталкивается с разными трудностями, одна из которых может отправить его в тюрьму на всю жизнь.",
-    "poster": "https://image.tmdb.org/t/p/w342/egoplVifGS5bZWpzsqr7EpeILXc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wb1iLdAuDDWtevcILezTEtgCZAj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 60733,
-    "ru": "Elias og jakten på havets gull",
-    "en": "Elias og jakten på havets gull",
-    "year": 2010,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 8,
-    "popularity": 0.3,
-    "genres": [
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7AnoGPzQBq5Wm9npOBCcx1Dh4Ke.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lo5KeCPjAMphk1FwXoNYRX7b0Sr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 378970,
-    "ru": "രാജമ്മ @ യാഹൂ",
-    "en": "രാജമ്മ @ യാഹൂ",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 8,
-    "popularity": 0.41,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9ZmPAmqgvkh7RjLd0kIWN5KSleu.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1226293,
-    "ru": "Salitan",
-    "en": "Salitan",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 7,
-    "popularity": 48.36,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rMgG7cWuq9O6zhhLs2CbqIKVA8V.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/emK2hOB6ACiExT0lNLog9lAmMFL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1112564,
-    "ru": "Приди учитель",
-    "en": "வா வாத்தியார்",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 7,
-    "popularity": 2.02,
-    "genres": [
-      "комедия",
-      "боевик"
-    ],
-    "overview": "Рамешварана, воспитанный дедом как духовное перерождение его кумира — актёра-героя MGR, предал идеалы, став циничным и коррумпированным копом. Его рутина рушится, когда в городе объявляется банда хакеров, срывающая маски с сильных мира сего. Именно его назначают их найти и обезвредить. Однако вскоре расследование принимает личный оборот: с наступлением темноты им овладевает дух Ваатияра, бесстрашного персонажа из фильмов MGR. Ночное альтер-эго вершит правосудие и спасает невинных, а утром Раму очнувшись не помнит о своих подвигах. Захваченный в ловушку между долгом и судьбой, он вынужден охотиться на того, кто живёт в нём самом...",
-    "poster": "https://image.tmdb.org/t/p/w342/hb1YWskm1H2YwNj2KF2BGWgLA58.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qPNIwdR3y965KMsiweyuXdjDRXR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 660337,
-    "ru": "Атарраби и Микелац",
-    "en": "Atarrabi & Mikelats",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 7,
-    "popularity": 1.54,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Современная адаптация баскской легенды про двух братьев - сыновей Матери Земли, которых отдают на воспитание дьяволу.",
-    "poster": "https://image.tmdb.org/t/p/w342/7sqfz6ghmzudLADL2l3JDcSRfb9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nYoFhxq3WOL7NotlkGkczp8xdF9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1197031,
-    "ru": "Съезд не туда",
-    "en": "Off Ramp",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 7,
-    "popularity": 0.48,
-    "genres": [
-      "приключения",
-      "комедия",
-      "криминал"
-    ],
-    "overview": "Пара милых, не самых умных добряков-джаггало должны проехать через настоящее американское пекло, чтобы добраться на съезд джаггало, ведь это единственное место, где они чувствуют себя как дома.",
-    "poster": "https://image.tmdb.org/t/p/w342/38HZo9a39knZEX0rv4kyWjOigJZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lF56IyBeLJNwIpfdvgFJHlKLXBT.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 994741,
-    "ru": "百合の雨音",
-    "en": "百合の雨音",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 7,
-    "popularity": 1.34,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/50ZHtnZeLojHHW3x08FBTSqBmuq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/o18dPLaGmqpKXSk1KlM70pzhsR3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1043887,
-    "ru": "Badass Ravi Kumar",
-    "en": "Badass Ravi Kumar",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 7,
-    "popularity": 1.17,
-    "genres": [
-      "боевик",
-      "музыка",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4PHX3qbWQgez4aMN95S8YnFAlnF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uw8XD7pck9LChp1QbNuTzMY7YuT.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1168715,
-    "ru": "BJJ: Woman on Top",
-    "en": "BJJ: Woman on Top",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 7,
-    "popularity": 0.89,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/18NhtV7JyffD23L1CKfuQijex0g.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/r9S8NeS9iTQalegyHiYmkA1byQX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 739997,
-    "ru": "Goodbye Seventies",
-    "en": "Goodbye Seventies",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.7,
-    "votes": 7,
-    "popularity": 0.81,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rwJY7y8LzhDJgRV3z1V3wOXYqxW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9pn6E7W3sjHj276KGvlHlpUd2ur.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,295 @@
 [
   {
+    "id": "6520",
+    "ru": "Первый рыцарь",
+    "en": "First Knight",
+    "year": 1995,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1339,
+    "popularity": 4.92,
+    "genres": [
+      "боевик",
+      "приключения",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Ланселот, воин без страха и упрека, прибыл в золотой замок Камелот, чтобы служить великому королю Артуру. Им предстоят грозные сражения, доблесть и слава. Но в Камелоте он находит женщину, без которой не может жить, но которой не в силах обладать — прекрасную Гуиневеру Лионесскую. Она — возлюбленная короля Артура, который защищает ее маленькое королевство от войск черного рыцаря Малаганта. И Первый Рыцарь Ланселот должен сделать выбор — служить своему королю, или предать его во имя любимой…",
+    "poster": "https://image.tmdb.org/t/p/w342/yN714SBYQi0KERR4xKd5yTM3UKv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tsgEdYjwWVhdGHv01djx7KdXDJm.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "157834",
+    "ru": "Теорема Зеро",
+    "en": "The Zero Theorem",
+    "year": 2013,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1336,
+    "popularity": 1.5,
+    "genres": [
+      "драма",
+      "фэнтези",
+      "фантастика"
+    ],
+    "overview": "Эксцентричный компьютерный гений Коэн Лет бьется над неразрешимой теоремой. Благодаря костюму для виртуальной реальности, изобретенному мальчиком Бобом, Лету удается совершить путешествие в скрытое пространство и узнать тайну своей души. Эту разгадку ищет не только он сам, но и таинственный Менеджмент, который правит всем миром посредством всевидящих устройств под названием ManCams.",
+    "poster": "https://image.tmdb.org/t/p/w342/cjkhkAIheUJbLO2tQErIsR0okML.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6RcWkHz1LT8wJBlAwYRoq2nOzG6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "37861",
+    "ru": "Вальгалла: Сага о викинге",
+    "en": "Valhalla Rising",
+    "year": 2009,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1329,
+    "popularity": 3.01,
+    "genres": [
+      "приключения",
+      "драма",
+      "боевик",
+      "фэнтези"
+    ],
+    "overview": "1000 год нашей эры. Немой воин по прозвищу Одноглазый, вырывается из 10-летнего рабства. Сурово расправившись со своими мучителями, он вскоре встречает викингов, с которыми направляется в Иерусалим. По пути следования путешественники переживают страшный шторм, затем их судно попадает в необычный туман. Выбравшись из непроглядной пелены, викинги оказываются около неведомых земель…",
+    "poster": "https://image.tmdb.org/t/p/w342/kyMfY5bCTbu71MBO6QYk2hPi8jj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5UTOmyAIe7icGgjc5ETOZNMITmj.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_51371",
+    "ru": "Shine On! Bakumatsu Bad Boys",
+    "en": "Bucchigire!",
+    "year": 2022,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.0,
+    "votes": 11309,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Историческое",
+      "Historical",
+      "Самураи",
+      "Samurai"
+    ],
+    "overview": "Following a ruthless attack from an imperialist criminal gang known as the Masked Demons, Shinsengumi's Eighth Division—the law-enforcing squad in Kyoto that remains faithful to the shogunate—is nearly annihilated, with its sole survivor, Heisuke Toudou, critically injured. Urged to rebuild the Shinsengumi by the local feudal lord, Katamori Matsudaira, Toudou decides to offer eight convicts the chance to redeem themselves: they must abandon their old names and become substitutes for the eight Shinsengumi captains. All accept but one, who ends up immediately executed by the former assassin Sakuya.\n\nHowever, Toudou has a hard time transforming the seven reformed criminals into loyal servants. Due to his lack of discipline, the impulsive and vengeful Ichibanboshi, whose family perished at the hands of the Masked Demons, threatens the success of Toudou's strategy. As Toudou pledges to protect the shogunate against imperialists and foreign invaders, other factions, such as Kogorou Katsura's group, start to put their plans in motion with only one goal in mind—to seize power at the dusk of the Edo period.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1729/141091l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "593402",
+    "ru": "Невезучий",
+    "en": "Tolo Tolo",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1308,
+    "popularity": 0.84,
+    "genres": [
+      "комедия",
+      "драма",
+      "семейный"
+    ],
+    "overview": "Чекко - молодой апулийский предприниматель-мечтатель, который открыл суши-ресторан в своей Апулии. Однако через месяц ресторан обанкротился, и он решил эмигрировать в Африку, чтобы спастись от долгов. Здесь он приспосабливается к роли официанта на курорте в Кении, но в разгар гражданской войны он решает отправиться в безбилетную поездку на лодке для мигрантов в Европу и решает сделать это со своими африканскими друзьями. Однако он хотел бы не возвращаться в Италию, а скорее поехать в Лихтенштейн, где действует банковская тайна и где налоговое бремя ниже, чем в Италии.",
+    "poster": "https://image.tmdb.org/t/p/w342/8ZNfRp1fueraDMkeSKHrxYJQhTU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8TiYxxck4kfKwXAAdi6aZLeQd5L.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "410199",
+    "ru": "ARQ: ковчег времени",
+    "en": "ARQ",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1299,
+    "popularity": 1.74,
+    "genres": [
+      "фантастика",
+      "триллер"
+    ],
+    "overview": "Будущее Земли зависит от новой технологии, но на пути к выживании планеты — неожиданный поворот. Запертые в лаборотории и застрявшие во временной петле, дезориентированные герои пытаются скрыться от захватчиков в масках, одновременно сохранив новый источник энергии, который может спасти человечество.",
+    "poster": "https://image.tmdb.org/t/p/w342/mU4VeXVK18JtCZsy7i0zczlA9p7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oX6rYilUqQJMcMzCn6K61UifOnN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_1977",
+    "ru": "土方歳三　白の軌跡",
+    "en": "Hijikata Toshizou: Shiro no Kiseki",
+    "year": 2004,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.1,
+    "votes": 1285,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Драма",
+      "Drama",
+      "Историческое",
+      "Historical",
+      "Самураи",
+      "Samurai"
+    ],
+    "overview": "A biographical sketch of the life and ideals of Hijikata Toshizou, Vice Commander of the Shinsengumi, fighting to uphold the Shogunate during the Meiji revolution. \n\n(Source: ANN)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1/2252l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "582596",
+    "ru": "Не та девушка",
+    "en": "The Wrong Missy",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1274,
+    "popularity": 2.4,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Когда Тим Моррис случайно знакомится с очаровательной Мисси, то понимает, что встретил девушку своей мечты. Чтобы покорить ее сердце, герой решает пригласить красавицу провести с ним уик-энд на шикарном курорте, где его компания проводит корпоратив. Но Тим ошибается и отправляет сообщение другой Мисси — взбалмошной, эксцентричной особе, которая не стесняется демонстрировать свои недостатки.",
+    "poster": "https://image.tmdb.org/t/p/w342/A2YlIrzypvhS3vTFMcDkG3xLvac.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1xQtvgay8rDwSaZPwyhcecqV8UD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "333381",
+    "ru": "Вернуть отправителю",
+    "en": "Return to Sender",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1271,
+    "popularity": 2.76,
+    "genres": [
+      "драма",
+      "триллер"
+    ],
+    "overview": "Медсестра, проживающая в маленьком городке, идет на свидание вслепую с человеком, который притворяется не тем, кто он есть на самом деле.",
+    "poster": "https://image.tmdb.org/t/p/w342/4FNfLEY7aUHUgvDPzxQpaX3dEIB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nFPT1iucVA0qkmkJktYNeYzXhLc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "2665",
+    "ru": "Аэроплан 2: Продолжение",
+    "en": "Airplane II: The Sequel",
+    "year": 1982,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1265,
+    "popularity": 3.22,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Полет шаттла, совершающего первый регулярный рейс на Луну, проходит нормально, если не считать того, что все системы корабля отказали, на борту находится безумный террорист, угрожающий взорвать звездолет, и, что самое страшное, у экипажа… абсолютно кончился кофе.",
+    "poster": "https://image.tmdb.org/t/p/w342/hmdlJR372uljYcBsmT19fgKY4ey.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nZCuAonAbL1mXea0NITbxfnLvVQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "15657",
+    "ru": "Тарзан 2",
+    "en": "Tarzan II",
+    "year": 2005,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1241,
+    "popularity": 3.46,
+    "genres": [
+      "приключения",
+      "мультфильм",
+      "семейный"
+    ],
+    "overview": "До того, как стать Королем Джунглей, Тарзан был неуклюжим маленьким мальчиком, пытающимся приспособиться к окружающему миру. Но однажды он совершает ошибку и тем самым подвергает риску свою семью. С этого момента Тарзан решает, что им будет безопаснее без него, и покидает тех, кого любит.  Во время своего опасного путешествия Тарзан знакомится с загадочным Зугором — самым могущественным представителем тех мест. Будучи вместе, Тарзан и Зугор понимают, что быть разными не так уж и плохо, а друзья и семья — две самые главные ценности на свете.",
+    "poster": "https://image.tmdb.org/t/p/w342/v9wsiHFfp6W0MJwcloehonZOhhr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lBmemfERELoZDxyLOCoumfkHAEO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "427900",
+    "ru": "В гостях у Элис",
+    "en": "Home Again",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1240,
+    "popularity": 2.53,
+    "genres": [
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Жизнь матери-одиночки из Лос-Анджелеса неожиданно меняется, когда она разрешает трем парням пожить у нее.",
+    "poster": "https://image.tmdb.org/t/p/w342/kJTft8mKcGG8n4fqPw1nMGBgLEm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pxpEFY66yYr5bA1N4PCm5b4uz40.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_21663",
+    "ru": "Last Orders",
+    "en": "Last Orders",
+    "year": 1997,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.1,
+    "votes": 1215,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Фантастика",
+      "Sci-Fi",
+      "Самураи",
+      "Samurai"
+    ],
+    "overview": "The 60-second film features six fierce samurai who rush through a post-futuristic megalopolis using the most unpredictable means of transport (including a kite!) as to make it on time for the last order at their favorite pub.\n\n(Source: Production I.G)",
+    "poster": "https://cdn.myanimelist.net/images/anime/9/60623l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "295151",
+    "ru": "Пусть идёт снег",
+    "en": "Let It Snow",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1213,
+    "popularity": 1.33,
+    "genres": [
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "Снежная буря обрушивается на Грейстаун и застает жителей города врасплох. Но даже в непогоду магия Рождества способна создать уют и тепло, особенно когда дело касается любви.",
+    "poster": "https://image.tmdb.org/t/p/w342/1Wakzc09OYr7GWfq2Eq1peA2JdS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zAWXavwU4pdTkOU3DSrgM3xGjBn.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "244264",
     "ru": "Детка",
     "en": "Laggies",
@@ -9562,279 +9852,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/7WSMNERoqgtOwV1Q5xDmAiLvMeE.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/goPs7BcYBOrGMPjPwnqf3tMJI7G.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_58810",
-    "ru": "Череп и кости",
-    "en": "Crossbones",
-    "year": 2014,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.1,
-    "votes": 86,
-    "popularity": 2.87,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Эдвард Тич (Джон Малкович) по прозвищу Черная борода руководит собственной пиратской республикой, расположенной на одном из островов Багамского архипелага. Однажды во время очередного разбойного нападения на корабль британского флота пираты берут в заложники мужчину по имени Томас Лоу (Ричард Койл), назвавшегося доктором. Однако на самом деле Том является профессиональным агентом под прикрытием, которому британская корона дала задание убить Эдварда Тича и защитить хронометр — техническую новинку сродни современному GPS-навигатору, которая может окончательно закрепить за пиратами статус хозяев моря.",
-    "poster": "https://image.tmdb.org/t/p/w342/l1FvNiEC61VvuNPkaKMseDXnDGc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aO84eFkb0X8OMDnGTVMh3Ypttfo.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 424201,
-    "ru": "Бердэн",
-    "en": "Burden",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 86,
-    "popularity": 1.03,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Сирота Майк Бердэн вырос под покровительством членов Ку-клукс-клана. Герой влюбляется в девушку и решает уйти из сообщества. Бывшие соратники намереваются отомстить Майку, но преподобный Кеннеди, возглавляющий конгрегацию афроамериканцев, берёт парня, его подругу и её сына под свою защиту.",
-    "poster": "https://image.tmdb.org/t/p/w342/23tMG9TdzcABOpnTlgfIGZtQ6DN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/93OyDHh1GjepWdv5KxUpP1tPYjO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 826353,
-    "ru": "Маскарпоне",
-    "en": "Maschile singolare",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 85,
-    "popularity": 1.27,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "Антонио 30 лет, он счастлив в браке. Был счастлив. Ровно до того момента, пока его внезапно не бросил муж, от которого он зависит как психологически, так и экономически. Теперь ему нужно найти новое место для проживания, работу и новую цель в жизни. Антонио находит комнату в квартире, принадлежащей Денису, начинает работать в пекарне, принадлежащей Луке и записывается на курсы кондитеров. Благодаря этому неожиданному повороту в жизни, он обнаруживает, что с его стороны было неправильно пожертвовать своей независимостью ради отношений. Разобравшись в себе, Антонио начнёт новую жизнь.",
-    "poster": "https://image.tmdb.org/t/p/w342/25yIH1ZAzHLMd7HJreWy3ZYmgdJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uck1c4HIysro9LO9ok0R5Qhbcsg.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 881594,
-    "ru": "Это не смешно",
-    "en": "El Comediante",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 85,
-    "popularity": 0.4,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "Габриэль, которому стукнуло 40, получает предложение завести ребенка от своего лучшего друга. С долгой историей неудач и городом, который, кажется, настроен против него, он решает стать лучшим человеком и примириться с жизнью и космосом.",
-    "poster": "https://image.tmdb.org/t/p/w342/xsA8P4GRyAMtnNItf4dsOKZXeLh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/njtgrbHHwCds1VI3DzNNaYH2DXM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 506025,
-    "ru": "Плавая с мужиками",
-    "en": "Swimming with Men",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 85,
-    "popularity": 0.6,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Мужчина, страдающий от кризиса среднего возраста, находит смысл жизни, вступив в мужскую любительскую команду по синхронному плаванию.",
-    "poster": "https://image.tmdb.org/t/p/w342/18JuZBqLzdDQ7EuXmZVWuLLcZRm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7hgosgbMHwNT5r62K2Fjhk5lTfM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_115915",
-    "ru": "Малыш",
-    "en": "The Baby",
-    "year": 2022,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.1,
-    "votes": 84,
-    "popularity": 3.07,
-    "genres": [
-      "комедия",
-      "детектив"
-    ],
-    "overview": "Однажды ночью 38-летняя Наташа стояла на улице, и в её руки с неба упал младенец. С этого момента он полностью подчинил себе жизнь Наташи, но она не сдаётся и ищет любые способы избавиться от малыша.",
-    "poster": "https://image.tmdb.org/t/p/w342/bBAtAL8R2RpKnCvShOUSxFF78om.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fAsjhpFEx0We8vrOnbgJI5bKuLU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 53453,
-    "ru": "Пляжный пикник",
-    "en": "Beach Picnic",
-    "year": 1939,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 84,
-    "popularity": 0.36,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Плавательный поход Дональда и Плуто на пляж, среди прочего, прерывается роем голодных муравьев.",
-    "poster": "https://image.tmdb.org/t/p/w342/4ubHDfAOsDd60BO2AfkqGiDb7lz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/j5QdmenpApAcjLKS1K4s5M7VOIL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 90215,
-    "ru": "Маг-обманщик из другого мира",
-    "en": "異世界チート魔術師",
-    "year": 2019,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.1,
-    "votes": 83,
-    "popularity": 0.79,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Cовершенно обычные школьники Таити и Рин внезапно исчезли в луче света. Придя в себя, они понимают, что оказались не в привычном им мире, а в мире мечей и магии. Без особого труда выжив в своей первой схватке с монстрами и следуя советам других авантюристов, герои направляются к гильдии, где узнают, что они обладают невероятно мощной магией.",
-    "poster": "https://image.tmdb.org/t/p/w342/7mhQDoelta3Gavm3FgMYVCkw1C1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5Sr9nOKdh7g20qZPcwe9eS0WYR8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 78570,
-    "ru": "Топ Кэт",
-    "en": "Don Gato y su pandilla",
-    "year": 2011,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 83,
-    "popularity": 0.68,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "комедия"
-    ],
-    "overview": "Супер Кот и его озорная шайка бродячих котов сталкиваются с новым шефом полиции и своим старым заклятым врагом — офицером Дибблом. Полиция полна решимости помешать проделкам Кота и надеется выдворить его из любимого переулка. Но как бы они не старались, команде Супер Кота всегда удается обвести блюстителей закона вокруг пальца.",
-    "poster": "https://image.tmdb.org/t/p/w342/gaVaiYb4PIkuKFwYqRU5mnbPCz5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iTWfYuqu315DOZgcH9wwKwcGeI8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 40044,
-    "ru": "Халк и агенты СМЭШ",
-    "en": "Marvel's Hulk and the Agents of S.M.A.S.H.",
-    "year": 2013,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.1,
-    "votes": 82,
-    "popularity": 9.11,
-    "genres": [
-      "Боевик и Приключения",
-      "мультфильм",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Халк, его двоюродная сестра Женщина-Халк, сын Халка, Скаар, Красный Халк и А-Бомба — ансамбль героев мультсериала, более чем внушителен. Перед лицом угроз, с которыми сталкиваться им прежде еще не доводилось, эти супергерои объединяют свои усилия ради совместной борьбы.",
-    "poster": "https://image.tmdb.org/t/p/w342/gkGIiIIkHOeVXzwjBNFTRqTCnqF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7p0QLfjFx1iJzJ6iB82mp7E9qIH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_95442",
-    "ru": "Падение в мёртвые воды",
-    "en": "Deadwater Fell",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.1,
-    "votes": 82,
-    "popularity": 1.65,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "Уважаемый врач Том Кендрик живёт в небольшом городке вместе с женой и тремя детьми. В результате пожара вся семья Тома погибает, а ему удаётся спастись лишь чудом. Только вот позже выясняется, что пожар был не случаен, и что на самом деле жена и дети были убиты.",
-    "poster": "https://image.tmdb.org/t/p/w342/zyLTCQHh0nd5PEOPyEFUomz68BF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cTot7WfGxJhOYrVAQM4kAdIGWwJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 461773,
-    "ru": "Жизнь подонков",
-    "en": "Lowlife",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 82,
-    "popularity": 0.48,
-    "genres": [
-      "криминал",
-      "триллер",
-      "комедия",
-      "ужасы",
-      "драма"
-    ],
-    "overview": "Данный фильм повествует о пересечении жизненных путей наркоманки, преступника и борца, когда они сталкиваются с проблемой продажи органов.",
-    "poster": "https://image.tmdb.org/t/p/w342/5tquk3KoKtVo5D40gZYjlWWr0mt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3WLyIZ2O7it00l8Af7tFCMSOhI9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1200801",
-    "ru": "Переспать, жениться, убить",
-    "en": "F Marry Kill",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 81,
-    "popularity": 3.55,
-    "genres": [
-      "комедия",
-      "триллер",
-      "ужасы"
-    ],
-    "overview": "Ева встречается с тремя разными мужчинами. Она пытается выяснить, с кем из них может быть только секс на одну ночь, за кого стоит выйти замуж, а кто является киллером, который хочет её убить.",
-    "poster": "https://image.tmdb.org/t/p/w342/3wpnTXaGRllOAkGbrKCIebWQLJP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kYC6Z4XUvZ9JQKhrkvsif4bAJl3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1103437,
-    "ru": "Пожалуйста, не кормите детей",
-    "en": "Please Don't Feed the Children",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 81,
-    "popularity": 2.82,
-    "genres": [
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "В результате загадочной пандемии взрослое население страны было уничтожено. Группа сирот отправляется на юг в поисках новой жизни. Вскоре они узнают опасную тайну от сумасшедшей женщины.",
-    "poster": "https://image.tmdb.org/t/p/w342/as0f4pY5FPQiojZVvIgo8TdKmxo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1J5n9DDQN62pKkyTwzxr3wvZTzU.jpg",
     "source": "tmdb"
   }
 ]

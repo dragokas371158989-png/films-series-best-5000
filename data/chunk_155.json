@@ -1,5 +1,274 @@
 [
   {
+    "id": 489996,
+    "ru": "Призрак Клары",
+    "en": "Clara's Ghost",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.67,
+    "genres": [
+      "комедия",
+      "драма",
+      "триллер"
+    ],
+    "overview": "Действие происходит на протяжении одного вечера в семье Рейнольдсов, проживающих в пригороде Коннектикута. Призрак Клары рассказывает историю Клары Рейнольдс, сытой по горло нападками своей звездной семьи, и нашедшей утешение в сверхъестественной силе, которая ее преследует.",
+    "poster": "https://image.tmdb.org/t/p/w342/vxzYb31A8Q5pGdJCCYJiqx9GmDo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/exa8O0Z9T9LHiQLftDGpX8iIGvx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 391774,
+    "ru": "Любовные игры",
+    "en": "Love Games",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.51,
+    "genres": [
+      "мелодрама",
+      "триллер"
+    ],
+    "overview": "Парень влюбился в девушку своей мечты, однако взаимных чувств ему только предстояло добиться. Теперь молодой человек должен будет ввязаться в странные любовные игры, по результатам которых он может оказаться как победителем, так и проигравшим.",
+    "poster": "https://image.tmdb.org/t/p/w342/bZbfW7ZycVrruGl3tEQcrTECwBo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fxpuVkb8q1OeJLxYJggg82gKyDt.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 357965,
+    "ru": "원나잇온리",
+    "en": "원나잇온리",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 3.45,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2h1doVetvEpvv6BEMvUpb00qHhH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gmE58ZGRhajFbMosgULbJqNdve4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 452073,
+    "ru": "어린 형수 2",
+    "en": "어린 형수 2",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 2.95,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xWrAoVbcfrAAUivXh19DrmGqmVz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lOSXhE7y972cMuXlrtA0xMMUIBb.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 390329,
+    "ru": "Madly",
+    "en": "Madly",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 1.26,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ms119etpifPeST353vp5aJjqxIt.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6ilT0J6JjOGthjcGB89tHmqey79.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 67761,
+    "ru": "Pound Puppies and the Legend of Big Paw",
+    "en": "Pound Puppies and the Legend of Big Paw",
+    "year": 1988,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.88,
+    "genres": [
+      "мультфильм",
+      "приключения",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hKKgz32iGeK1NxHm5VNI50hOzdw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oFN9OyLfNhwwixoOBOBEnmT8Afa.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 659246,
+    "ru": "Psycho Nurse",
+    "en": "Psycho Nurse",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.87,
+    "genres": [
+      "триллер",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/806GgVYDI5RhXrOHM4lk19IgXwp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3ZVfRf6qXs3FdapeIEu92PAatJ3.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 366383,
+    "ru": "The Blackout",
+    "en": "The Blackout",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.6,
+    "genres": [
+      "триллер",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hoVVQw9TG3eIsXBV7GVN4e09az.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/l6hdJsQ0ZU1OpH4IG4Uaph3M88U.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 299264,
+    "ru": "Fort Buchanan",
+    "en": "Fort Buchanan",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.57,
+    "genres": [
+      "мелодрама",
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/roc93OKE145P9Xz5N5Pp0Z8LvXo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jW1cQmGz6sjyavaqjazapZqWU2o.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 454605,
+    "ru": "Breaking Legs",
+    "en": "Breaking Legs",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.51,
+    "genres": [
+      "комедия",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/62iZwypxT7xhnb1roIhPPzvjuAn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/phYeh96qk5qGyTrxkWwe5uF9JEd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 505929,
+    "ru": "90 ML",
+    "en": "90 ML",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.44,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xNsMXr4cYj1DRS67XcYtvOb1WNH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qFQrzNj2mv5D8ZWZlmxYqA7kINk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 287506,
+    "ru": "گل سرخ",
+    "en": "گل سرخ",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.35,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/a3m6N4rVw1fkwGnJqhHHk10PYOa.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/73aTMHWHrlxPKqGtvhz3uqmGu8d.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 447535,
+    "ru": "上海王",
+    "en": "上海王",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.62,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vdNEqLRbLxQcy9Xw7EmPCHfcBUz.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": "171106",
+    "ru": "Кирара",
+    "en": "Kirara",
+    "year": 2000,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 4.9,
+    "votes": 10,
+    "popularity": 1.19,
+    "genres": [
+      "мелодрама",
+      "комедия",
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "Имаи Кирара скоро станет Асай Кирарой, ведь сегодня она выходит замуж за своего парня, с которым она встречалась целых восемь лет. Но случилось страшное. По пути на церемонию бракосочетания Кирара попадает а автокатастрофу и погибает. Молодая невеста становится приведением и чудесным образом переносится на восемь лет назад, в квартиру к своему будущему жениху Компею, который ещё ни о чём не подозревает и встречается с её подругой. Так всё и начинается.",
+    "poster": "https://image.tmdb.org/t/p/w342/puy87glvsiQDItPjR5snUeaxmkv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/q75KCCvzdMrt8vzhxVw6vTn5Pgo.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "166684",
     "ru": "Калифорнийский кризис",
     "en": "カリフォルニア・クライシス 追撃の銃火（ひばな）",
@@ -9326,274 +9595,6 @@
     "overview": "Лиам подумывает о разводе, когда узнает, что у его жены Мии диагностирован рак. Чтобы наладить отношения, они отправляются в путешествие.",
     "poster": "https://image.tmdb.org/t/p/w342/qS9quCAaR9w7G4S6tI1f86zd2OV.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/dTVUI9nBet4npmSvs5x6xmFcYOI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1324495,
-    "ru": "Bad Fish",
-    "en": "Bad Fish",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 7,
-    "popularity": 1.66,
-    "genres": [
-      "триллер",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/t50tvosFJKPM6UCAaH6Q0hORXcJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jghhG5l8kDuVZahG02ogPZc9Gs8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 997791,
-    "ru": "A Porta ao Lado",
-    "en": "A Porta ao Lado",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 7,
-    "popularity": 1.05,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8pYsfzwI20pzzwVeEIPS2Sb0zFA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bqalitysa5dFjl0F0QGXKA3YHjS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 416187,
-    "ru": "3 Way Junction",
-    "en": "3 Way Junction",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 7,
-    "popularity": 0.68,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mlgiviGhfvty4VBDEjLn3W5IHYY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wr8ySPgRZ2EEhh5j9yLzNP5zmm0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 440250,
-    "ru": "巧巧",
-    "en": "巧巧",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 7,
-    "popularity": 0.48,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4QrDJk3mu2NDlUt2WZhDR0hUN91.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rrlme7lHTUOYHBiNybec2xUxFPY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 296883,
-    "ru": "Morgenrøde",
-    "en": "Morgenrøde",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 7,
-    "popularity": 0.42,
-    "genres": [
-      "фантастика",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1H4jmsp7XS96s2i2hmfYrNrugVh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pOWdNjRfLZUCq9loxZeSY40DPPX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 676965,
-    "ru": "Seducción",
-    "en": "Seducción",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 7,
-    "popularity": 2.08,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/26KUD30VtJWLbwJhxDg91w5WSF6.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 67853,
-    "ru": "Регалия: Три священные звезды",
-    "en": "レガリア The Three Sacred Stars",
-    "year": 2016,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 4.8,
-    "votes": 6,
-    "popularity": 6.01,
-    "genres": [
-      "Боевик и Приключения",
-      "мультфильм",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Двенадцать лет назад в Римгарде произошло таинственное событие, потрясшее всю страну и её жителей. По прошествии времени мир начал воцаряться над страной, и память об этом инциденте стала угасать.\n\nСёстры Юи и Рена жили спокойной жизнью в империи Энастрия, но всё изменилось, когда гигантский робот напал на их мирный дом. Вскоре девушки попадут в невероятный водоворот событий, из которого они не вернутся прежними.",
-    "poster": "https://image.tmdb.org/t/p/w342/9R1w0yRv9EXCrRZju6KxDsqJlPV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/r2w66HYqnSdyv8iebNKTwQDMQyU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 31026,
-    "ru": "Территория отверженных",
-    "en": "Z.O.E Dolores, i",
-    "year": 2001,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 4.8,
-    "votes": 6,
-    "popularity": 5.19,
-    "genres": [
-      "НФ и Фэнтези",
-      "мультфильм",
-      "Боевик и Приключения",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "Главный герой, 49-летний Джеймс Линкс, работает пилотом космогрузовика. Его жена - профессор, разрабатывала прототип робота, пропала после происшествий, описанных в OVA. У главного героя двое взрослых детей, которых он давно не видел, и отношения у него с ними не ахти. Ему поручают доставить один сомнительный груз. Оказывается, что груз – тот самый робот-прототип, созданный его женой. Зовут его, точнее, её, Долорес. После встречи с ней жизнь Джеймса резко меняется...",
-    "poster": "https://image.tmdb.org/t/p/w342/g5UPLq6OhhA8FEXMYwin9DcbZIO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vX7mePY4NQaeizDk4PweX4LrQ8m.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 68928,
-    "ru": "レモンエンジェル",
-    "en": "レモンエンジェル",
-    "year": 1987,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 4.8,
-    "votes": 6,
-    "popularity": 6.07,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/t0PKnYdEL7PFGYxIs33frCqUOrg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9AIgvFOxJ7YWmks2WsumUc8mHsE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 34757,
-    "ru": "Девять принцесс",
-    "en": "プリンセスナイン 如月女子高野球部",
-    "year": 1998,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 4.8,
-    "votes": 6,
-    "popularity": 5.09,
-    "genres": [
-      "мультфильм",
-      "драма",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tllrsIhRHYIm9baU0zGOmxbGJeV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jupn4lKOD3QmTa4cfbq5Ap8tOHH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1252051,
-    "ru": "Disforia",
-    "en": "Disforia",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 6,
-    "popularity": 53.3,
-    "genres": [
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/49pzxbf1Eftz7wQZdVDVl8OM9bg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gYumbUCWyUI6Mutgd7oILOCunk8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 845084,
-    "ru": "Актриса",
-    "en": "Comme une actrice",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 6,
-    "popularity": 0.89,
-    "genres": [
-      "драма",
-      "фэнтези"
-    ],
-    "overview": "Анна и Антуан - идеальный тандем на сцене и в жизни, но после многих лет брака и совместной работы они начинают терять интерес друг к другу. Когда Антуан решает уйти от неё, Анна использует магию перевоплощения, чтобы снова стать молодой и привлекательной. Но постепенно игра оборачивается против неё самой, и Анна понимает, что должна выбирать между любовью к мужу и собственной жизнью...",
-    "poster": "https://image.tmdb.org/t/p/w342/nwgp99GH4XGBR69JzKPQDXDv6zB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ipzRUqvxVRr1PWcXXA5YaVYkdLC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1273470,
-    "ru": "Безумный криминал",
-    "en": "窗前明月，咣！",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 6,
-    "popularity": 0.85,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Ху Гун Пин - блестящий адвокат, не проигравший ни одного дела. Во время перерыва в судебном заседании он тайно встречается в отеле со своей любовницей, и в самый разгар их свидания из окна падает оконная рама, под которой оказывается тело неизвестного мужчины. Любой звонок в полицию может разрушить адвокату карьеру и семью, поэтому он решает замести следы любой ценой. Но одна ложь провоцирует другую, и ситуация выходит из-под контроля.",
-    "poster": "https://image.tmdb.org/t/p/w342/2hPFJFirwvSuXJadT6li8LdF9Bz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rp9MmFVHfe8C4XKQEeQ69qLQSeq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1114368,
-    "ru": "Летний хардкор PSY",
-    "en": "싸이 흠뻑쇼 2022",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 6,
-    "popularity": 0.79,
-    "genres": [
-      "музыка",
-      "документальный"
-    ],
-    "overview": "Этот концерт \"Летний хардкор\", снятый летом 2022 года, позволит поклонникам вновь пережить концерт рэпера PSY в Южной Корее, где фанаты прыгали, танцевали и подпевали его известным мелодиям и битам, находясь под градом водяных струй.",
-    "poster": "https://image.tmdb.org/t/p/w342/8B747JDiXHhjtloFWzBv4xPnSvJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zuIdJ6eSz1Qwoq6CmC90vwca0rl.jpg",
     "source": "tmdb"
   }
 ]

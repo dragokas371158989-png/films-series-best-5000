@@ -1,5 +1,310 @@
 [
   {
+    "id": "80321",
+    "ru": "Мадагаскар 3",
+    "en": "Madagascar 3: Europe's Most Wanted",
+    "year": 2012,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 6569,
+    "popularity": 8.92,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "комедия",
+      "приключения"
+    ],
+    "overview": "Лев Алекс, зебра Марти, бегемотиха Глория и жираф Мелман, а также король Джулиан, Морис, Морт и Пингвины всё ещё пытаются вернуться в Нью-Йорк. На этот раз их путь пройдёт через Европу, где они откроют свой цирк.",
+    "poster": "https://image.tmdb.org/t/p/w342/aOKn2A1Ve0rKd6u8nTS1kXYSR65.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hfdds27YL5nTAhiOtjfNNxD3bJe.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "39538",
+    "ru": "Заражение",
+    "en": "Contagion",
+    "year": 2011,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 6542,
+    "popularity": 4.58,
+    "genres": [
+      "драма",
+      "триллер",
+      "фантастика"
+    ],
+    "overview": "Международная организация врачей совместно с Центром по контролю и профилактике заболеваний США пытается помешать распространению смертельного вируса.",
+    "poster": "https://image.tmdb.org/t/p/w342/f8ndlgpCQDg2qk5fA2bfDTsGT10.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bdmyvEdrmnj7J3RWaKXEOwYggRv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_32936",
+    "ru": "The Silver Guardian",
+    "en": "Gin no Guardian",
+    "year": 2017,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.2,
+    "votes": 46438,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Приключения",
+      "Adventure",
+      "Фэнтези",
+      "Fantasy",
+      "Игры",
+      "Video Game"
+    ],
+    "overview": "High school student and gamer Suigin Riku attends the prestigious Shinryou Private Academy, a school for the elite and the children of the wealthy. But rich or wealthy are not words that describe Suigin; in fact, he is dirt poor and must work many part time jobs to pay for his tuition. During one such job, he dives into a pool to save his pet cat, fully aware that he cannot swim. Luckily, he is saved by Rei Riku, the beautiful and popular daughter of a game developer, and he falls in love with her.\n\nHe is also drawn to another girl: a new friend he meets in Dungeon Century, his favorite online RPG. But when the game is scheduled to shut down, he knows his adventures with her will soon end. However, the day after the game is shut down, he finds out that Rei and the online girl are one and the same. Soon after, Rei gives Suigin a new game meant to replace Dungeon Century—a tomb raiding game called Grave Buster. But when Rei is suddenly kidnapped, Suigin is pulled inside Grave Buster to save her.\n\nGin no Guardian follows Suigin as he plays through Grave Buster to save Rei, while uncovering the secrets hidden within the game.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/8/86525l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "3049",
+    "ru": "Эйс Вентура: Розыск домашних животных",
+    "en": "Ace Ventura: Pet Detective",
+    "year": 1994,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.6,
+    "votes": 6389,
+    "popularity": 5.64,
+    "genres": [
+      "комедия",
+      "криминал",
+      "детектив",
+      "Аниме"
+    ],
+    "overview": "Он - лучший в своем деле, единственный и неповторимый! Он - Эйс Вентура, детектив по розыску домашних любимцев. Когда таинственные злоумышленники похищают дельфина по кличке Снежинка, талисман местной футбольной команды «Дельфины», Эйс тут же приступает к работе, проявляя чудеса изобретательности. История принимает странный оборот, когда похищают еще и ведущего игрока «Дельфинов». Теперь Эйсу приходится разыскивать сразу двух млекопитающих. Он сталкивается нос к носу с акулой-людоедом, спасает любимую команду и очаровывает женщин. Находится ли он под прикрытием, под огнем или под водой, он обязательно найдет то, что ищет!",
+    "poster": "https://image.tmdb.org/t/p/w342/9qeUQc5Z1Q3MvyR8ENL6TpNkpk0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nbvREKIjX16mwNZtFqAoQTTHPnQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1571",
+    "ru": "Крепкий орешек 4.0",
+    "en": "Live Free or Die Hard",
+    "year": 2007,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 6345,
+    "popularity": 7.14,
+    "genres": [
+      "боевик",
+      "триллер"
+    ],
+    "overview": "На этот раз Джону Макклейну предстоит спасти родную страну от группы компьютерных террористов, собирающихся в буквальном смысле «отключить» Соединённые Штаты Америки. А если учесть, что Джон — человек прежней формации, то в борьбе, в которую вовлечены новейшие технологии, ему, кроме старой доброй «Беретты», понадобится молодой, но очень талантливый помощник, хакер Мэтт Фэррелл.",
+    "poster": "https://image.tmdb.org/t/p/w342/tpE0ZzGYTQuSdFV7LwmIvtCIyUg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aRqTPOPt8BOHE0ngppM9jnuuaeS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "80274",
+    "ru": "Игра Эндера",
+    "en": "Ender's Game",
+    "year": 2013,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 6254,
+    "popularity": 3.62,
+    "genres": [
+      "фантастика",
+      "боевик",
+      "приключения"
+    ],
+    "overview": "Действие происходит в 2135 году. Человечество пережило два вторжения инопланетной расы «жукеров» (англ. buggers), лишь чудом уцелев, и готовится к очередному вторжению. Для поиска пилотов и военачальников, способных принести Земле победу, создаётся военная школа, в которую отправляют самых талантливых детей с раннего возраста. Среди этих детей Эндрю (Эндер) Виггин, будущий полководец Международного флота Земли и единственная надежда человечества на спасение.",
+    "poster": "https://image.tmdb.org/t/p/w342/28hxGKSqeLweJSa5q3q0GSieeXE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zWvOs6lepfOI0dPa1ANVcdbkBuY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "8488",
+    "ru": "Правила съёма: Метод Хитча",
+    "en": "Hitch",
+    "year": 2005,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 6227,
+    "popularity": 5.69,
+    "genres": [
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Алекс «Хитч» - легендарный нью-йоркский «доктор-сват». Множеству мужчин он помог добиться взаимности от женщин их мечты. Хитч не бескорыстен, он получает за свою работу гонорар, но предусмотрительно хранит в тайне свой способ зарабатывать на жизнь.Новый клиент Хитча - Альберт, робкий бухгалтер, без ума влюблённый в гламурную звезду Аллегру Коул. Для Хитча этот случай должен стать вершиной его карьеры. Однако, работая над этим делом, он вдруг встречает достойного противника в лице эффектной и проницательной Сары Мелас.",
+    "poster": "https://image.tmdb.org/t/p/w342/10fgHJ8SD4qBLvl7AhWXjV2zIm6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/a6tIX4fGgp60w2d9pqYRbFM91ne.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_40526",
+    "ru": "Dragon Goes House-Hunting",
+    "en": "Dragon, Ie wo Kau.",
+    "year": 2021,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.4,
+    "votes": 26071,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Комедия",
+      "Comedy",
+      "Фэнтези",
+      "Fantasy",
+      "Сёнэн",
+      "Shounen"
+    ],
+    "overview": "In an RPG fantasy world, a red dragon named Letty is disowned by his parents after failing to guard their eggs. Now he has to find a place of his own, but unlike other dragons, Letty is meek, cowardly, and has overall low stats. Regardless, a defenseless young dragon makes for an easy target for those who only see him as a beast to be feared, vanquished, and even devoured. After some time searching for somewhere to call \"home,\" he encounters the elf Dearia, who saves him from a band of heroes. Both an architect and a real estate agent, Dearia offers to help Letty find the perfect abode that suits his needs. Thus ensues Letty's house-hunting quest, as well as all the fantastical creatures and formidable enemies he meets along the way!\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1876/114021l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "274857",
+    "ru": "Меч короля Артура",
+    "en": "King Arthur: Legend of the Sword",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 6057,
+    "popularity": 7.26,
+    "genres": [
+      "боевик",
+      "драма",
+      "фэнтези"
+    ],
+    "overview": "Молодой Артур живёт на задворках Лондиниума вместе со своей бандой. Он и понятия не имел о своём королевском происхождении, пока однажды не взял в руки меч Эскалибур. Меч начинает менять Артура. В результате он присоединяется к сопротивлению и таинственной молодой девушке по имени Гвиневра. Ему предстоит научиться понимать магическое оружие, которым он овладел, столкнуться со своими собственными демонами и объединить народ в борьбе против диктатора Вортигерна, убившего его родителей и завладевшего короной.",
+    "poster": "https://image.tmdb.org/t/p/w342/pR5liuSzUesiYhe80yTpigUce73.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sVkjgKq8cwKm95LCyfrLldLbQIG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "396422",
+    "ru": "Проклятие Аннабель: Зарождение зла",
+    "en": "Annabelle: Creation",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 5988,
+    "popularity": 6.58,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "Через несколько лет после трагической гибели их маленькой дочери кукольник и его жена приглашают в свой дом монахиню и нескольких девочек из приюта, вскоре становящихся мишенью для одержимого создания кукольника — Аннабель.",
+    "poster": "https://image.tmdb.org/t/p/w342/5Omlys7hQXOKFDdueBq63roIhVE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/o8u0NyEigCEaZHBdCYTRfXR8U4i.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_36316",
+    "ru": "Seven Senses of the Re'Union",
+    "en": "Shichisei no Subaru",
+    "year": 2018,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.1,
+    "votes": 55974,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Драма",
+      "Drama",
+      "Фэнтези",
+      "Fantasy",
+      "Игры",
+      "Video Game"
+    ],
+    "overview": "Asahi's life in reality ended simultaneously when she died playing Union, a world-renowned online RPG. The members of Subaru went separate ways when Union shut down due to Asahi's death. Six years later, Haruto logs onto a renewed version of Re'Union and reunites with Asahi who had died. Is it really her or just an electronic ghost? The former team members reunite and enter the mysterious and deadly online game to find out.\n\n(Source: TBS Global Business)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1956/94914l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "215",
+    "ru": "Пила 2",
+    "en": "Saw II",
+    "year": 2005,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 5874,
+    "popularity": 6.82,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "Во время расследования подробностей кровавых деяний неизвестного убийцы детектив Эрик Мэтьюс ловит себя на мысли, что они очень похожи на работу Пилы - известного маньяка, который смог исчезнуть, оставив за собой множество жертв. Метьюс оказывается прав. Пила снова взялся за своё ужасное ремесло. Только на этот раз вместо двух людей он запирает в комнате смерти с единственным способом выбраться живым сразу восемь человек. Восемь незнакомцев оказываются вынуждены вступить в игру сумасшедшего убийцы, ставками в которой будут их жизни.",
+    "poster": "https://image.tmdb.org/t/p/w342/u6NA8O1oDxZWDp1G8C26zmDbO5O.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1lWeIA03iGXTlDv0yzsN0wUdT9T.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_41915",
+    "ru": "The Last Summoner",
+    "en": "Zuihou de Zhaohuan Shi",
+    "year": 2022,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 15836,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Приключения",
+      "Adventure",
+      "Драма",
+      "Drama",
+      "Фэнтези",
+      "Fantasy",
+      "Гарем",
+      "Harem"
+    ],
+    "overview": "A talented young cook's encounter with a hungry girl who popped up in his kitchen changes his ordinary life forever. Dora, a summoned spirit and a truly cute goddess, now calls him master. However, he is not interested at all and trying everything he could to get away from the ghostly figure. As fate would have it, when he becomes a summoner by accident, there is no turn back in life.\n\n(Source: MU)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1736/123834l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "mal_61943",
+    "ru": "Haibara's Teenage New Game+",
+    "en": "Haibara-kun no Tsuyokute Seishun New Game",
+    "year": 2026,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.6,
+    "votes": 5756,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Комедия",
+      "Comedy",
+      "Романтика",
+      "Romance",
+      "Школа",
+      "School",
+      "Путешествия во времени",
+      "Time Travel"
+    ],
+    "overview": "Although college student Natsuki Haibara has already secured a stable future for himself, he frequently thinks back to his high school days. At the time, he was socially anxious and overweight, and his attempts at becoming outgoing fell completely flat. One evening, Natsuki prays to be able to redo his teenage years and finds out the next morning that he has traveled back in time before his high school debut!\n\nHaving one month before the entrance ceremony, Natsuki immediately uses this chance to get himself into shape. When the first day of high school finally arrives, he makes a good first impression and befriends familiar faces, including Hikari Hoshimiya, his high school crush. Natsuki quickly realizes that his feelings for Hoshimiya have not changed and makes going out with her his new goal.\n\nWhile enjoying time with Hoshimiya and his other friends, Natsuki rekindles his love for basketball and even secures a part-time job at a local cafe. But with new friends come unfamiliar challenges, and Natsuki must overcome them if he wants to enjoy his adolescence to the fullest.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1401/156048l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
     "id": "mal_28883",
     "ru": "Aria the Scarlet Ammo AA",
     "en": "Hidan no Aria AA",
@@ -9846,281 +10151,6 @@
     "overview": "Две сестры узнают, что их родители участвовали в ритуале со смертельным исходом. Теперь они должны принять новую реальность - и её сверхъестественные составляющие.",
     "poster": "https://image.tmdb.org/t/p/w342/kcxfVY5ujMyHWWqAdNVAsFxbvN4.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/shftekqAkBsGvHoXKgGMsGVjE5q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 245859,
-    "ru": "Боже, помоги девушке",
-    "en": "God Help the Girl",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 230,
-    "popularity": 0.73,
-    "genres": [
-      "комедия",
-      "драма",
-      "музыка"
-    ],
-    "overview": "Ева — девушка, проходящая курс лечения собственных эмоциональных проблем. Но в больнице она находит способ помочь себе — Ева начинает писать песни.",
-    "poster": "https://image.tmdb.org/t/p/w342/7HvJyWDP5OhgAjrg1qs1dHPV9rd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yMh8badxy3ekUavcBNW37hjWE1d.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "334376",
-    "ru": "Призрак в доспехах. Новый фильм",
-    "en": "攻殻機動隊 新劇場版",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 229,
-    "popularity": 3.83,
-    "genres": [
-      "фантастика",
-      "мультфильм"
-    ],
-    "overview": "После окончания жестокой Мировой Войны в Японии наука сделала резкий скачок вверх и начала развиваться не по дням, а по часам, давая человечеству выбор продолжать жить и ослаблять страдания с помощью современной кибернетики. Все человечество связано с помощью системы умов и личностей, известных как «Призраки». Самой большой угрозой цивилизации являются кибер-террористы, которые способны украсть человеческие тела и память.  Когда вирус под названием FIre-Starter заражает систему и начинает распространяться, происходит убийство премьер-министра Японии, совершенное таинственным киборгом. Майора Мотоко Кусанаги и её элитную команду оперативников специального назначения призывают выследить источник заражения. Копаясь всё глубже и глубже в расследовании, они обнаруживают следы правительственной коррупции и подозрительного брокера, который может иметь к этому отношение.",
-    "poster": "https://image.tmdb.org/t/p/w342/7dHzNAi6Ae85FGOOFcZFxmFCxnf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/m2qvBj43KuC67plFDTHbNWyxuew.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 574241,
-    "ru": "Болельщицы со стажем",
-    "en": "Poms",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 226,
-    "popularity": 1.17,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Мечтая воплотить мечту всей жизни, разномастная группа обитателей дома престарелых создает свой клуб чирлидинга.",
-    "poster": "https://image.tmdb.org/t/p/w342/kioXVBFcP31jxvUpdI9iV4np0cD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/crBW5hKJk8BzsGMMTzTBYFTDapd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 454286,
-    "ru": "Бог не умер: Свет во тьме",
-    "en": "God's Not Dead: A Light in Darkness",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 225,
-    "popularity": 1.97,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Фильм «Бог не умер: Свет во тьме» демонстрирует старания священнослужителя восстановить разрушенный хулиганами храм. Пастору Дэйву удалось направить многих прихожан на путь истинный, вернуть им веру во Всевышнего и в собственные возможности. Духовный наставник искренне верил, что каждый заблудший человек способен найти способ спасения собственной души. Службу посещало не так много мужчин и женщин, что вовсе не удивляло пастора, хорошо знавшего о ситуации в городе. Желая посеять зерна истины среди молодого поколения, священнослужитель попытался читать лекции на религиозную тематику в здешнем университете. Священник не подозревал, что благие намерения обернутся фатальными последствиями. Группе молодых людей не понравилось регулярное появление пастора в университете.",
-    "poster": "https://image.tmdb.org/t/p/w342/1MwoZ4U8SGm7yIzfPFcTTbiiOYY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4vBafKZEdw6aFvN7wQ2vZV9bjv4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 16440,
-    "ru": "Хранители: История черной шхуны",
-    "en": "Tales of the Black Freighter",
-    "year": 2009,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 222,
-    "popularity": 0.91,
-    "genres": [
-      "мультфильм",
-      "боевик",
-      "приключения",
-      "ужасы"
-    ],
-    "overview": "Моряк выживает после нападения «Черной Шхуны» и пытается вернуться к себе в родной город, чтобы предупредить о приближении страшного корабля, однако для него это имеет ужасающие последствия.",
-    "poster": "https://image.tmdb.org/t/p/w342/vpZNACLrZC7EeZc0iCpnCsewZEO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/48LqZxlu1DSaGCdJQ5Yh4uUPRDO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 470610,
-    "ru": "Вечность между нами",
-    "en": "Endless",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 221,
-    "popularity": 1.27,
-    "genres": [
-      "мелодрама",
-      "драма",
-      "фэнтези"
-    ],
-    "overview": "Райли и Крис были счастливы в любви, пока не случилось ужасное — молодой человек трагически погиб. Райли винит себя в этой смерти, не догадываясь, что душа Криса задержалась между тем и этим светом.",
-    "poster": "https://image.tmdb.org/t/p/w342/eFkTEg97cNzcERF9UuBzfiht06q.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/o71u8V1u8uB4mL1kZjMjBGQU14M.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 216580,
-    "ru": "Одичавшие",
-    "en": "Savaged",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 221,
-    "popularity": 0.98,
-    "genres": [
-      "боевик",
-      "драма",
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "Поиздевавшись над девушкой, насильники, убедившись что она мертва, выбрасывают ее в пустынной местности. Местный шаман находит безжизненное тело и воскрешает его при помощи вселившегося духа воина Апачи, который сразу же объявляет преступникам кровавую месть и воплощает всё весьма нелицеприятными способами.",
-    "poster": "https://image.tmdb.org/t/p/w342/bsPV6pXVDTAGbl4Tg4xWkm3Kkl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/b6DSXmqDufJj30TDUkw6WngZffd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1443762,
-    "ru": "Грандиозная подделка",
-    "en": "Il falsario",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 219,
-    "popularity": 2.4,
-    "genres": [
-      "триллер",
-      "криминал",
-      "драма"
-    ],
-    "overview": "Рим 1970-х. Молодой художник, одарённый и амбициозный, оказывается по ту сторону закона, когда его талант замечают криминальные круги и он становится фальсификатором.",
-    "poster": "https://image.tmdb.org/t/p/w342/osYJEimhdd66yY7WnM5mxhGwnOL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uHavtqbnMDcwqVK9Y94ZQSWxtCw.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1281826,
-    "ru": "Одно быстрое движение",
-    "en": "One Fast Move",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 219,
-    "popularity": 1.66,
-    "genres": [
-      "боевик",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4BT0k95MjvRMERZypuDPWHJbP8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/QflfyU07MiQXSqTUCmG9Xfq0Ws.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1035982,
-    "ru": "Дом ада. Поместье Кармайкл",
-    "en": "Hell House LLC Origins: The Carmichael Manor",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 218,
-    "popularity": 2.68,
-    "genres": [
-      "ужасы",
-      "детектив"
-    ],
-    "overview": "В 1989 году в семье Кармайкл произошла трагедия: старшая дочь погибла в автоаварии, и вскоре мать семейства и младшая дочь были найдены дома жестоко убитыми, а отец и сын пропали без следа. С тех пор особняк семейства пустовал и будоражил умы любителей всякого рода загадок. В 2021 году основательница сообщества интернет-детективов получает разрешение провести в доме пять ночей, и в компании подруги и брата начинает обследовать дом — в кладовке ребята находят манекены в жутких костюмах клоунов.",
-    "poster": "https://image.tmdb.org/t/p/w342/bj8jgqQBxiHrJabqMBvoMRBLQwM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/EEASOZj5Mm2u6G3K4HS4pKIlfC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_39702",
-    "ru": "Обитель лжи",
-    "en": "House of Lies",
-    "year": 2012,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.6,
-    "votes": 217,
-    "popularity": 10.08,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Необычный и язвительный взгляд на очень успешного и беспощадного консультанта по вопросам управления Марти, который не брезгует никакими средствами, чтобы получить нужную для его клиентов информацию.",
-    "poster": "https://image.tmdb.org/t/p/w342/p27jD2GqFdvkPVjFhyTQesBrd95.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gNCDlz5dSjGYajyfCbSreXkMfdL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "19503",
-    "ru": "Бог игроков 2",
-    "en": "賭神2",
-    "year": 1994,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 217,
-    "popularity": 3.52,
-    "genres": [
-      "боевик",
-      "комедия"
-    ],
-    "overview": "Ко Чун после событий первой части ушел из мира карточных игр и последние четыре года жил во Франции, где и познакомился со своей нынешней женой, как две капли воды похожей на его девушку из первой части. У них должен родиться ребенок, но из тюрьмы выходит Чау Сиу Линг, карточный игрок, претендующий на благотворительный фонд в 16 миллиардов долларов, который должен перейти во власть того, кто станет Королем Азартных игр.  Сиу Линг убивает жену Ко Чуна, и перед смертью она берет с Ко обещание не играть и не раскрывать, кто он есть на самом деле, в течение одного года. Ко этот год проводит в путешествиях, но буквально за две недели до истечения срока обещания, знакомится с главой игорного дома в Тайване, который пытается прибрать к рукам как раз Чау Сиу Линг. Ко решает помочь им, но пока он не может раскрыть свою личность, он берет себе в подручные двух мошенников от карт…",
-    "poster": "https://image.tmdb.org/t/p/w342/fa2cA22PZfLARDftuj6SExQ6DPs.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7QVOVQs7yrRWDOjACc276BadLeh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 666622,
-    "ru": "Римские расставания",
-    "en": "Lasciarsi un giorno a Roma",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 216,
-    "popularity": 0.56,
-    "genres": [
-      "мелодрама",
-      "комедия",
-      "драма"
-    ],
-    "overview": "Писатель Томмазо под псевдонимом ведёт романтическую колонку в журнале. Однажды ему в редакцию приходит письмо от его возлюбленной Зои, которая не знала о его подработке. Оказывается, она хочет разорвать их многолетние отношения, но боится причинить ему боль. Умберто тоже обращается к своему другу Томмазо за советом. Его отношения с женой Эленой зашли в тупик, ведь она не просто мать и жена, а мэр Рима, и в их семье роли полностью поменялись местами, что сильно не устраивает Умберто. Обеим парам предстоит сделать сложный выбор.",
-    "poster": "https://image.tmdb.org/t/p/w342/8UTzW6iTcGgV0xR6IMtqHsJImjA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mVM9zFpGHHRQ1pS4iPXzenr5EcK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 251232,
-    "ru": "Копенгаген",
-    "en": "Copenhagen",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 215,
-    "popularity": 1.27,
-    "genres": [
-      "приключения",
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "После нескольких недель путешествия по Европе Уильям оказывается в Копенгагене, где когда-то родился его отец. Здесь парень встречает юную Эффи, и между ними завязываются дружеские отношения. Вместе они отправляются на поиски дедушки Уильяма. В Эффи объединяет в себе юношескую непосредственность и мудрость, и это отличает ей от всех женщин, которых знал Уильям. Однако их отношения оказываются под угрозой из-за темного прошлого семьи Уильяма...",
-    "poster": "https://image.tmdb.org/t/p/w342/1MSFfjvgf9auNANWcaGTvzf1TcW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/j5jPqb3h9wMGaXZtWwGfIMH5ykg.jpg",
     "source": "tmdb"
   }
 ]

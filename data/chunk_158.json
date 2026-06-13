@@ -1,5 +1,268 @@
 [
   {
+    "id": 290724,
+    "ru": "Ждущий выхода",
+    "en": "Waiting for the Out",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 1.32,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Дэн исследует свое прошлое, связанное с заключенными отцом, братом и дядей. Работа в тюрьме вызывает у него страх, что он тоже окажется за решеткой. Его растущая одержимость подвергает опасности его самого и его семью.",
+    "poster": "https://image.tmdb.org/t/p/w342/7e10bTKGK1TwHgxEl06lMCTerAI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/snOMxLdkkfbpVC9YqejhvfJhUvs.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 709334,
+    "ru": "Безымянный и Динамит",
+    "en": "No Name and Dynamite",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 0.53,
+    "genres": [
+      "вестерн"
+    ],
+    "overview": "Грань между хорошими парнями и плохими парнями стирается, когда безжалостные охотники за головами прокладывают себе путь через Дикий Запад, собирая награды и наживая больше врагов, чем друзей. Теперь, когда преступник Джон Уилкс Бут в бегах, а золото спрятано в горах, справедливость должна восторжествовать.",
+    "poster": "https://image.tmdb.org/t/p/w342/5kTyrSsJNfVmlc8S2FQ02fLLsQw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9NDiFyiMYcQHFGYZIKtL6w3JoAl.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 882898,
+    "ru": "Рики Велес: Обо всём понемногу",
+    "en": "Ricky Velez: Here's Everything",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 0.44,
+    "genres": [
+      "комедия",
+      "телевизионный фильм"
+    ],
+    "overview": "Искрометное выступление актера и комика Рики Велеса. Издание Variety внесло артиста в список «Десять комиков, которых стоит посмотреть». В своем первом спешле Рики сполна оправдывает розданные ранее авансы и показывает самобытный и очень честный юмор. Продюсером его сольного выступления стал именитый комедиограф Джадд Апатоу.",
+    "poster": "https://image.tmdb.org/t/p/w342/5XFsFIsnHaaIsfjoCGMs5N26pm6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1Glsr13h76eXUFrHzifUiHqGMOu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1497348,
+    "ru": "Alas Roban",
+    "en": "Alas Roban",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 23.27,
+    "genres": [
+      "драма",
+      "ужасы",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dtJmnGZYuA2Ngnj3iv0T9EqCHBH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5Q2CWHZTk48lb8QOMninYmzUfvc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1241743,
+    "ru": "Kapalit",
+    "en": "Kapalit",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 2.63,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/s58sRbuoAojLFDZW8tUaTzpv7aB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xTYzXsIwf4qypnNRkSpkiHE3O30.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1404320,
+    "ru": "特工狂花2：蜜桃杀机",
+    "en": "特工狂花2：蜜桃杀机",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 2.36,
+    "genres": [
+      "боевик",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9D8v1zS9qsvekrMiQPjVqYlJz0L.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/su40GoVmKOLQGrFAXcvV2qd625H.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1582328,
+    "ru": "Sonunda Sen",
+    "en": "Sonunda Sen",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 1.66,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mnBW7o8ycDi8WotGeRkGoDxrNMd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yt7kUJ42heOePCPAdzvsAZP7lJH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 701840,
+    "ru": "Madrid, int.",
+    "en": "Madrid, int.",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 0.81,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tTeM1efX2sXf4IS3VvpQL6Xswc6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5FbOsUQNMMA0sGKUqfgw97bYTW5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 764135,
+    "ru": "பிஸ்கோத்",
+    "en": "பிஸ்கோத்",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 0.8,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8QZ8G9kcc0Vrdi0tee59FZrdIyB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hm4bQJRFKjjGPC1UZaHwI7Q0YLt.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1249608,
+    "ru": "好运来",
+    "en": "好运来",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 0.65,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7TE7drVKGH08Y6kIUGt6pBLG2wr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5LOXUywFm9TnvoEMCx44cdBG2ny.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1179283,
+    "ru": "കൊണ്ടല്‍",
+    "en": "കൊണ്ടല്‍",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 0.56,
+    "genres": [
+      "боевик",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zLbnXZWIzKU9pmrGdzuwkHluGz9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uQ1qsmcOc7gyN8AePrC2NboSgT7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 810128,
+    "ru": "Genesis Code",
+    "en": "Genesis Code",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 0.54,
+    "genres": [
+      "драма",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xj7VuN5dRhWe7FaP3SLuZQSZR00.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hJIkLncU6yt5HB80Ry2qjAQsyPB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 701082,
+    "ru": "民间奇异志",
+    "en": "民间奇异志",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 0.52,
+    "genres": [
+      "боевик",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1B0gns8DaWpA6GnEjNhIbxogVkM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9LhloafxOQn5j9qND7qZKxpIqCB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 768167,
+    "ru": "Рождественский переворот",
+    "en": "A Wrestling Christmas Miracle",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 5,
+    "popularity": 0.37,
+    "genres": [
+      "семейный",
+      "комедия"
+    ],
+    "overview": "Одиннадцатилетний непобедимый борец, Кейс Габриэль уходит из спорта, чтобы снять фильм. Он уверен, что смешной фильм пробудит его друга от комы на Рождество. За неделю до Рождества недовольные, неуклюжие актеры крадут единственный носитель с фильмом.",
+    "poster": "https://image.tmdb.org/t/p/w342/3lz97Qb5QunfyoMkjpj1kvtxSl8.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
     "id": 580816,
     "ru": "Человек без тени",
     "en": "مردی بدون سایه",
@@ -9225,265 +9488,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/3Tz9KKO3JmRbNPj2DZZH5XruJsn.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/6Dsjalg0YgJ9LgK6aHHIx4xIoZQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 340852,
-    "ru": "두 번째 엄마",
-    "en": "두 번째 엄마",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 1.48,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9kDfafssklEYICgYzAPnG6TV3I9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8Wpg4Tkq2kFBfhreaoeZx7HHybe.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 418580,
-    "ru": "새오빠",
-    "en": "새오빠",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 1.46,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7pU4zml7ejdoqrfF9iz1uZgND3S.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/itC1ZXx743PmfwGfatUT5H6Tia8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 466487,
-    "ru": "Soul",
-    "en": "Soul",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 1.26,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aLax14mQ0W6YJA12VMVOQXjAyv4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wkWLU0LpuilvXeH7BK4iQBHqBwF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 387817,
-    "ru": "맛있는 만남",
-    "en": "맛있는 만남",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 1.12,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rF30dlX4j53KaOpI6vbRy9vKQHD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s8IBOCi6z0rJ6xrjtTxjUsTDv2A.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 587584,
-    "ru": "각자의 미식",
-    "en": "각자의 미식",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 1.08,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/laRbnPx3Q8djFgl0tQrSTkJAbPQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6fTQ3PEqcYjaIddltBq9tdYP0Vc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 480412,
-    "ru": "The BBQ",
-    "en": "The BBQ",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 1.06,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/khGd2Xbx20zdpp66UM52CG3uXOP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nAG2Ps6SlmUymMnsUNPorKUgu6K.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 478092,
-    "ru": "아름다운 엄마",
-    "en": "아름다운 엄마",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 1.0,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/91WHVC2Xugyd5JPgsiEWotHrkQI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tOU7ZKxAzyBv6ezB3VDUxCIhhWR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 508675,
-    "ru": "ぼのぼの クモモの木のこと",
-    "en": "ぼのぼの クモモの木のこと",
-    "year": 2002,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 0.94,
-    "genres": [
-      "мультфильм",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3zw1qqgA5plZNPjjcRKVAlh746W.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ssBPpPmQc6oAMm5BFAazkS7wouk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 407175,
-    "ru": "女幽霊",
-    "en": "女幽霊",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 0.92,
-    "genres": [
-      "триллер",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vqPbrDum6TEekyVo2YCwsY3gFLf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xOViQHnacxfc2xWVp1ZgyaXd86I.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 471431,
-    "ru": "全員、片想い",
-    "en": "全員、片想い",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 0.88,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/udSXAUak4mEcQs2zDhwwFTtJdug.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kBhII5D6uLbmTxyci7wsjpvoM5i.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 565304,
-    "ru": "황진이",
-    "en": "황진이",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 0.84,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/j0y7PgI8StcPQAIs0JE1qbwn8P0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/egAE652BDBzy9QyLIt2oyU04sPM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 337301,
-    "ru": "꽃보다 처녀귀신",
-    "en": "꽃보다 처녀귀신",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 0.84,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eo3Bao9QrB9BCy8O2NAxDeHZtz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rafRTDlcigKNrAGP2YvIv8haHKK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 334917,
-    "ru": "デッドヒート",
-    "en": "デッドヒート",
-    "year": 1987,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 0.79,
-    "genres": [
-      "мультфильм",
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mYMyD82XFc7EqFtBqBQeNPq6YVz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ihvjBFc6rtCwwgc9Vdu4E3JQnRn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 538983,
-    "ru": "キスできる餃子",
-    "en": "キスできる餃子",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 0.73,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uooj4m1hF09UpANgMFgE62rCBIN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cFU6tlxeOcymLyd4xIj5qOyHBV.jpg",
     "source": "tmdb"
   }
 ]

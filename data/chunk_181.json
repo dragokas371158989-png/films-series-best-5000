@@ -1,5 +1,268 @@
 [
   {
+    "id": 1693200,
+    "ru": "Understanding Myself as an Amphibian",
+    "en": "Understanding Myself as an Amphibian",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yfWPwEjffMHF0MarYc9P7Ybf8nP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wWlYRSjqzBv3Em0NSe5vUTyDfF1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1687500,
+    "ru": "$5 Margaritas",
+    "en": "$5 Margaritas",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3l3zUZsneMUCzEt7PncTcDz5c3u.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3cxnciDRoTWrgGsrgfKPgztIYXm.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1419725,
+    "ru": "Time Keeps Marching On",
+    "en": "Time Keeps Marching On",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "документальный",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/e18GmAcxmqpVvzS10r1yDeTxRDl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4Vb8LQzj1tcMwL74eedL30vcbCa.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1698444,
+    "ru": "Thin Places",
+    "en": "Thin Places",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "фэнтези",
+      "приключения",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3OXmJi0W67yXZnGLWhjgsDhSZL2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bRQ6TLrCsGIsRhvqNPQXGHKJEen.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1682356,
+    "ru": "Yekokebu Sew",
+    "en": "Yekokebu Sew",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rXEBqbtGgbjuwv3IrUGbHKqy0Ab.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m9XGVquKjHc6KxPY3EcI5DTwgDF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1676780,
+    "ru": "Cruz",
+    "en": "Cruz",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6eqNnYeOcGSkfPaCozfxeGjU8VI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sgfzAACXFZM1PTRGRDvZi4g4oEr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1661013,
+    "ru": "지축의 밤",
+    "en": "지축의 밤",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7PtLgM6YT6czj9GYepUlAGGS2NP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/r3rfumS3hbmjjrOBaKYOS01StUR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1657504,
+    "ru": "ラプソディ・ラプソディ",
+    "en": "ラプソディ・ラプソディ",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7FGvkiqno4dcYF3BQ5WE2SZzyhg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5NagNcNHcZII08ijFjvSj8fgD86.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1683639,
+    "ru": "怖偶惊情",
+    "en": "怖偶惊情",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6OaThuWPmamergMyVNK8AaQ2kPx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fAj9Nm9RoOVO4oBgThUCuhwsAdQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1650451,
+    "ru": "해피리 에버 애프터.",
+    "en": "해피리 에버 애프터.",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "детектив",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pmYgvXrCykUyG3h0OGelygBozON.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/chF01GpMTfis1PQEm5RavFWMnfI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1189095,
+    "ru": "Kapitan",
+    "en": "Kapitan",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/sMsUHQLPPCiGoYaDeyUu6wE5mtr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oW9q3skltv2I555xUrXhsWsCaSn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1698299,
+    "ru": "Diana",
+    "en": "Diana",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "приключения",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mp8Zo4iIOEoELUGANvPIirZWoyJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oxJXTxLOM3LLWSqkQkWgm77Xxdv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1686742,
+    "ru": "Still Form",
+    "en": "Still Form",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "фэнтези",
+      "детектив",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dQuHa8Drpg1JQI5K9XfKWKqD5Gt.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aKBs0q7pgXClSE4FrIGqpCMoubs.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1684205,
+    "ru": "Kesempatan/Kesempitan",
+    "en": "Kesempatan/Kesempitan",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.12,
+    "genres": [
+      "драма",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/d5b0ueWvF5Eg3TiQLAknRzetCea.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4uXuBADqbtE4MEygiYd8cdJwbXq.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1673368,
     "ru": "Under Exposed",
     "en": "Under Exposed",
@@ -8875,255 +9138,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/idhOOgfdmdWtFYmhXIrE1xPfbFN.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/dJB5B9k9OZTrbZzlHa9JEXeiofm.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1698412,
-    "ru": "Hai, Linda",
-    "en": "Hai, Linda",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8F22XEDVN6w3jWlWy1nbc1JGYuZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hmolydjrmrjSDUIj8qM1IgB4mML.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1670416,
-    "ru": "Living Twice, Dying Thrice",
-    "en": "Living Twice, Dying Thrice",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [
-      "драма",
-      "триллер",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bS1LhHyhze1DrJ8SugtLhdUezo3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ccUH7wAvg1NjQcKMnDVkCCbomGQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1696120,
-    "ru": "Iberah",
-    "en": "Iberah",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [
-      "комедия",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jTF4YS1Mdu9RPuhvgs5xuP3h6iu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/44kY7MIfmJcpvMTQTFSq3gQsE2S.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1695900,
-    "ru": "The Charybdis",
-    "en": "The Charybdis",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4eXVuy8ZhFtqWBn2So7PbIlqPeA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5aZekMM8vd8tekxIhL2oUeoCfYO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1691307,
-    "ru": "Der Kroatien-Krimi: Gefahr im Verzug",
-    "en": "Der Kroatien-Krimi: Gefahr im Verzug",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xK8OAtn6JVnV81olJMDQUkkYxQr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/slLd1YdmRGFGg4XWhHbDNAftLkg.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1691196,
-    "ru": "The Burger King",
-    "en": "The Burger King",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [
-      "документальный",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/A4yd4ZliH10YUpRAPbSpQTcq87f.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/p4xJK7M5YiXQn1sxX50EqFfR0IM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1668574,
-    "ru": "Un Portero Muy Improbable",
-    "en": "Un Portero Muy Improbable",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2qIny8wROLKOEe89YHJgkMHiBxA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/41WMO6U2QZhXJvXGlRHz9bJBzKn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1694454,
-    "ru": "Will of the Kirin",
-    "en": "Will of the Kirin",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gJ7hTlPDSQ1a33k9eTMhBV6dohq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nzYRqVNIhptZrG3yJ0DKZs1HZ59.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1694429,
-    "ru": "Staring at Stairs",
-    "en": "Staring at Stairs",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/n6rGBtC4j3rUzWDcT7nXlDpDO3G.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8YjfGEiy85CP5EWtlqcBfowZs2Q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1694301,
-    "ru": "Out of Phase",
-    "en": "Out of Phase",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1r1gYtsYujhFejXP2jQ5LXG8qBs.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/25Rt5W74Z2qO0de7R85w6cApzhZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1692390,
-    "ru": "Blinde Ører",
-    "en": "Blinde Ører",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oTzs6mt5lupYw5axcwEdF1rW2ND.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6l8apZODcL1frfSbTsmnA4r38an.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1691868,
-    "ru": "TV 2 Avslører: Cowboyhattene",
-    "en": "TV 2 Avslører: Cowboyhattene",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8NxjjujaTf9gMxxOSYM4LmdKwuV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oUzApeAASZl4mKecFkaun4P3jHY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1658431,
-    "ru": "Twin Days",
-    "en": "Twin Days",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ltjawYJVCprqarGy6TtYzy6wxgH.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/64mlnv2g0nEdMovX7y2pSMkZ03S.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1655529,
-    "ru": "Arek.Mama.Panorama",
-    "en": "Arek.Mama.Panorama",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.09,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4j7zA4qFAJZXXJUPePvAJQNnq6Q.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gFNQW6oOcwejZc12tlYPCSpCwP8.jpg",
     "source": "tmdb"
   }
 ]

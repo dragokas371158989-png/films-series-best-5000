@@ -1,5 +1,264 @@
 [
   {
+    "id": 313858,
+    "ru": "الخروج إلى البئر",
+    "en": "الخروج إلى البئر",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.74,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2T2giHJo4kYKBGf6HRDVq1Me4Pc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nldtdmIff4lV5ZqkrmBQcTsl7CL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 300406,
+    "ru": "Pavojingi ryšiai",
+    "en": "Pavojingi ryšiai",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.74,
+    "genres": [
+      "Мыльная опера",
+      "комедия",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/i4igBxm3ooJwF18xaoXZwxXghvB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/acJzu0DaqGPZkQCu8l8OZTL5nrF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1450475,
+    "ru": "Kaunis rietas onnellinen",
+    "en": "Kaunis rietas onnellinen",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.74,
+    "genres": [
+      "драма",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tIDTwZqqMY1AbAuopqtMQ82xZSZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fnds5DBAZdKOpWKI3YLkdQhckqQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1484486,
+    "ru": "Za duży na bajki 3",
+    "en": "Za duży na bajki 3",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.74,
+    "genres": [
+      "семейный",
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2x9Fkoea4brpGEJHE4xJWddMx8C.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qolSryE7Ppqn2SRqAqm5wyYgpEx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 309203,
+    "ru": "一周星星",
+    "en": "一周星星",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.73,
+    "genres": [
+      "Новости"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/a6AzvPrfOwDYFGhnUY5NHJ0fAXr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5NrHNfuYBNyMUrnC8cxsK0jgWVz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1535421,
+    "ru": "Christmas of Giving",
+    "en": "Christmas of Giving",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.73,
+    "genres": [
+      "телевизионный фильм",
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/864Ui2TYbkvaGuEDz6OgYPEvL6e.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lZuH6yRWVI9kIpUshnV6jEQV6Cy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1545317,
+    "ru": "ブルーボーイ事件",
+    "en": "ブルーボーイ事件",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.73,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rvayLkxT2H08B6Kl9QqsszWdDib.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rfoy910O5EJx9CFQhki4x0r4fYH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1557351,
+    "ru": "そこにきみはいて",
+    "en": "そこにきみはいて",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.73,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/t1h8BhEr5kDadPpLwu64An2aPDp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jR4Lj910RGx5our5VmeKssbOsDD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 768137,
+    "ru": "맛있는 섹스 그리고 언니들",
+    "en": "맛있는 섹스 그리고 언니들",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.73,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eBoMVbkvADKLoHU5GMTiDL1nlx9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7ZExTal9Gd9dT3u99u6eP22EaRc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 298508,
+    "ru": "قسمة العدل",
+    "en": "قسمة العدل",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.72,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nIVC9Ywj0RY5R33OR8tns7ohFvo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rw3M1nM4vMTDaDnNgC0dUUkHpn4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 879011,
+    "ru": "親密な他人",
+    "en": "親密な他人",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.72,
+    "genres": [
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7BoQs4m48A0FzEiYszfQMx2qpVF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sTa4BEVoeGbskSmpI0NcJg46pXV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 802463,
+    "ru": "శశి",
+    "en": "శశి",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.72,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8DFncGzLy7pJ8jLqRXseYCho0iQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dsRH2T2STCPtH4kbbjlzTBwT20O.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 304840,
+    "ru": "ゲームチェンジ",
+    "en": "ゲームチェンジ",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.71,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xqU6zOgx89qVivA7neWOcDvxJG6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dGVzUXZyONWVkvvLEwP68iHyowt.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1455103,
+    "ru": "Rumba Royale",
+    "en": "Rumba Royale",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.71,
+    "genres": [
+      "драма",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/lHWo5q8WipfW8yLSpT8yAGz2mWp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zWXe5HvV6Uq2TNLRTedkD5wsdEv.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1171042,
     "ru": "Famous",
     "en": "Famous",
@@ -8734,260 +8993,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/avQsrnLq4lKRg8Mk4S2gjqOhto8.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/rXgx2LXbJlafdsRi8aehy1x6zVQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 112136,
-    "ru": "Η Φαμίλια",
-    "en": "Η Φαμίλια",
-    "year": 2018,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 5.43,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1qtXql5sNmpq455Kzt6XgmA5UTU.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/akbwvk4gCna1CX6ZrCmhcYGhgFu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 92993,
-    "ru": "なつぞら",
-    "en": "なつぞら",
-    "year": 2019,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 5.37,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/c16XS5mHu0tugk58qX4njph9PYR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9niExxp2KxtM3mEZGNOqDWCLmXL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 364556,
-    "ru": "寡妇村",
-    "en": "寡妇村",
-    "year": 1989,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 5.24,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pmrxzm2zsFxawqQFeh5KacWQYhT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sJc5xJcxk8UajiFWQcOZUi7miPt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 85603,
-    "ru": "日月神劍",
-    "en": "日月神劍",
-    "year": 1991,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 5.23,
-    "genres": [
-      "драма",
-      "Боевик и Приключения",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hVFw1wA3cHGiHTDwRzVViD7NAej.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tvImRRHe6ixbAGNXi4k9ZNoMpUZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 117867,
-    "ru": "草燃える",
-    "en": "草燃える",
-    "year": 1979,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 5.21,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2ZWQybIWnLdiKA2nTM9LuZtrOsO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1O7h0zeDjOysDKW06EIfvh3uQMv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 103914,
-    "ru": "Dry Bar Comedy",
-    "en": "Dry Bar Comedy",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 5.14,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hOzfGKyWDHIZvpvT6EUUHtjdb7L.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/84Fvc88L9Ovlymhqhj2K6R88mWp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1068844,
-    "ru": "내 엄마의 친구 2",
-    "en": "내 엄마의 친구 2",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 3.66,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mIN2PxRJd951ZKo4Vnf4NFzhcDB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9oUjuI9auL0j9MvBLZlb1sbprsJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 980962,
-    "ru": "淫絶夫人　快楽の奥",
-    "en": "淫絶夫人　快楽の奥",
-    "year": 1976,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 3.47,
-    "genres": [
-      "драма",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ckuV1pyTiuvGnsJCsWpdgFPlGia.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9nonaejScL2nUkJkgyjnJuOarno.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 387839,
-    "ru": "전원일기: 젖소농장새댁",
-    "en": "전원일기: 젖소농장새댁",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 3.35,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bWtWi0ka8mRDgdCXRhv4BJE3pr4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jAulfr5KUEYPWWsq7MTbCDZCaiq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 499753,
-    "ru": "처제의 유혹",
-    "en": "처제의 유혹",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 3.29,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xGA1LHCdxwjQwqRavFXlveS0Hvg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tjdiZm53X10lIpekzOta4y7ZgGS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 240250,
-    "ru": "Fourplay - Live in Cape Town",
-    "en": "Fourplay - Live in Cape Town",
-    "year": 2009,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 2.59,
-    "genres": [
-      "музыка"
-    ],
-    "overview": "Концерт знаменитой группы в ЮАР.",
-    "poster": "https://image.tmdb.org/t/p/w342/7SXTH4Li4m9o1GYi8dpfQs2bsTq.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 589194,
-    "ru": "일상의 관계",
-    "en": "일상의 관계",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 2.46,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8Sfa8fvYkAMYKST3XgqrddoXX6P.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qwc5azukcuWkhQ5qTpXCaWgzsr8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 515134,
-    "ru": "తోడికోడళ్ళు",
-    "en": "తోడికోడళ్ళు",
-    "year": 1957,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 2.45,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ylF9VEd7JIE5aONEguXoXBTNY4Z.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ibzZwhtIZ1iYuNookSFVAieG4xC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1054802,
-    "ru": "び太と未来ノート",
-    "en": "び太と未来ノート",
-    "year": 1994,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 1.9,
-    "genres": [
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fCi1IuxDF8RMVPl2SylhUWxHSg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7yeFDWjhOmnDJhiRVuJGBZumS5V.jpg",
     "source": "tmdb"
   }
 ]

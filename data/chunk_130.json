@@ -1,5 +1,270 @@
 [
   {
+    "id": 300741,
+    "ru": "Игра: Ты никогда не играешь в одиночку",
+    "en": "The Game: You Never Play Alone",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 0.63,
+    "genres": [
+      "криминал",
+      "детектив"
+    ],
+    "overview": "Разработчица игр, стремящаяся построить карьеру, сталкивается с женоненавистническими ожиданиями и становится жертвой жестоких атак в Интернете и в реальной жизни.",
+    "poster": "https://image.tmdb.org/t/p/w342/c7WlnmjQvcKIoaUtOzzb951Hc5E.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hDsoCUGGPB0F8MddjII2RuhNVr1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 218261,
+    "ru": "Newscast",
+    "en": "Newscast",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 5.86,
+    "genres": [
+      "Новости",
+      "Ток-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/amqSeiSsVitgY8uVIOwu3eKSs3H.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7Lq0T1xcfksUlUxhxQfLv6euIBh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 223443,
+    "ru": "스모킹 건",
+    "en": "스모킹 건",
+    "year": 2023,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 5.18,
+    "genres": [
+      "документальный",
+      "Ток-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/AspiWiOPb23xLVBkd9tbSmXVoSY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5spsAoQKZhG0susfIk6ypAYjSka.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 276609,
+    "ru": "Thukra Ke Mera Pyaar",
+    "en": "Thukra Ke Mera Pyaar",
+    "year": 2024,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 5.04,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pcShyioNKqqvgnCSAdni0hQpESu.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mKXSi5t9CKy0jDEWcGTuJnapu07.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1098343,
+    "ru": "除恶：飞车党",
+    "en": "除恶：飞车党",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 4.72,
+    "genres": [
+      "боевик",
+      "криминал",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tVQ1DJjdtPQd9HeaUntXaGuWadq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/okzrhS42C2UbVvIokxdoZn1l4U9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 298203,
+    "ru": "人間標本",
+    "en": "人間標本",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 3.01,
+    "genres": [
+      "драма",
+      "детектив",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gDbXuXdGfGcd5pfmO8wGiHFvDTd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/etMLUe751O3GnQSHsFbgpijmHRr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 289624,
+    "ru": "八千里路云和月",
+    "en": "八千里路云和月",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 2.67,
+    "genres": [
+      "драма",
+      "Война и Политика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/91cU2SqTocP38tFOEwqYShqLE2h.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4Sn2oRviYg5ZVqrRtEBVwMmhFR8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 299719,
+    "ru": "逆仙而上",
+    "en": "逆仙而上",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 2.67,
+    "genres": [
+      "драма",
+      "НФ и Фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nVhL7poVS7vh1CBjMeikEcZYwLM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hIQ2RIZYHGpVGUzCF3DOs6pSxOc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 938144,
+    "ru": "너튜브: 3인의 맛집 2",
+    "en": "너튜브: 3인의 맛집 2",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 2.48,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vrSqq9hgJh1nqLdIznNHCzUHV4D.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/c5Gbj9NXWOBKxeoCnUJCvpv92SH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 292760,
+    "ru": "婢女",
+    "en": "婢女",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 2.4,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ikRNMLfiJQnvHlFCyqc74EguRzc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wtWphAa3wnm7wwH7LFZ1Vz3DzoP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 305979,
+    "ru": "唐诡奇谭之长安县尉",
+    "en": "唐诡奇谭之长安县尉",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 2.07,
+    "genres": [
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2u3P6GalX67Hc1HYj1In1pxvI3K.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8gtcFo1TJHBxWX5wkqLaqe2F3of.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1287809,
+    "ru": "The Sheriff",
+    "en": "The Sheriff",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 2.06,
+    "genres": [
+      "криминал",
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pba15JjYAoyuFIM6kkZ7qE6oqG2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jrYEcctu1rUa5OhRuGc3ooU7uSO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 757446,
+    "ru": "Intelligentia",
+    "en": "Intelligentia",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 1.89,
+    "genres": [
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dL3stvvSCWF2lsT9Sn0DX65LYlz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hX9EWF30CrETuUqHWziUgMU4G3l.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1163780,
+    "ru": "Dream",
+    "en": "Dream",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 3,
+    "popularity": 1.77,
+    "genres": [
+      "драма",
+      "фэнтези",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/i1oEkQjxV4Q1EL7T4lbMfxMZdde.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/76jah8Hn458ZysGD8RJ7Ia0XRsT.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1065661,
     "ru": "Chaperone",
     "en": "Chaperone",
@@ -9163,263 +9428,6 @@
     "overview": "Потеряв в жизни всё, главная героиня фильма обретает семью.",
     "poster": "https://image.tmdb.org/t/p/w342/tQB9biQwL1blSHkT9sJhQxnUS4P.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/5Fe6IfrIm0D9nFSL36RE2xc4mHS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 663971,
-    "ru": "Русские грузины. Фильм первый",
-    "en": "Русские грузины. Фильм первый",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.39,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "Фильм об исторической роли грузин в российской, а позже — советской политике, культуре и науке. Герои фильма — Багратион и Шеварднадзе, Пиросмани и Данелия, Баланчин и Андроников.",
-    "poster": "https://image.tmdb.org/t/p/w342/gRWIao0KW8ae72X1NcFzqvEBF0Y.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5YHTDKL2KAN80dspB920aBjdcbc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 778437,
-    "ru": "Архипелаг",
-    "en": "Archipel",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.37,
-    "genres": [
-      "мультфильм",
-      "документальный"
-    ],
-    "overview": "«Архипелаг» - это фильм, состоящий из рисунков и слов, рассказывающий о выдуманной стране и ее жителях, через образ которой просвечивается знакомые очертания мира и времени, в котором мы живем.",
-    "poster": "https://image.tmdb.org/t/p/w342/yyElaE309ZgpTrzy2OzqQiY75dQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/isnlHMAlMZOicvNgDKnRzl9Vh7x.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 313437,
-    "ru": "Чернобыль: дни, которые потрясли мир",
-    "en": "Chernobyl: Days That Shocked the World",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.3,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "Чернобыльская катастрофа стала самой страшной ядерной аварией в мире. Но в то время советские власти пытались это скрыть. Теперь же свидетели и выжившие рассказывают о том, что им пришлось пережить.",
-    "poster": "https://image.tmdb.org/t/p/w342/tBc0n5vOojSzlWrgDPl4yt4GO3x.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xL0mjOqxqDLLJZLBC7c53k8qEuJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 322518,
-    "ru": "一起穿书后，我和炮灰闺蜜一路躺赢",
-    "en": "一起穿书后，我和炮灰闺蜜一路躺赢",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.15,
-    "genres": [],
-    "overview": "После трагической потери матери, девочка-подросток, пытается раскрыть темные тайны ее нового дома, несмотря на то, что отец не верит ей...",
-    "poster": "https://image.tmdb.org/t/p/w342/rbmrSWHJoNpnynuZfuBmW6tExhK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3Nx6Z0K8jY6ZYQdtU0nUFljmmBZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 312470,
-    "ru": "Убийства на побережье",
-    "en": "Mordufer",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.14,
-    "genres": [
-      "криминал"
-    ],
-    "overview": "Доро Байтингер возвращается к работе в криминальной полиции после долгих лет забот о семье, детях и больной матери. На первом же деле она знакомится со своей новой начальницей Кьярой Локателли. Две женщины из разных поколений вскоре обнаруживают, что идеально дополняют друг друга в команде и способны раскрыть даже самые безнадёжные и запутанные убийства.",
-    "poster": "https://image.tmdb.org/t/p/w342/mWIBkKd4gNsFjyvzrF5acMp48bu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/o6EPcJrtpVd4YnkaTvCug3WKtDI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 203512,
-    "ru": "加油！妈妈",
-    "en": "加油！妈妈",
-    "year": 2022,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 12.65,
-    "genres": [
-      "семейный",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xo3qq1vYAhD2qBS2fLcpEIiCoEY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aLnO0hgy0VvDUZzKZU2o0YA9L0X.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 102790,
-    "ru": "Riti Riwaj",
-    "en": "Riti Riwaj",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 10.83,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iPrnyIxy5Zyp1eHFbIMlAXFXLtN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/k3dnAqIGvPscRoTvEzEt3EU2EdX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1193774,
-    "ru": "Hijo, amo tu boca",
-    "en": "Hijo, amo tu boca",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 10.68,
-    "genres": [
-      "драма",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bU5PA9DmgEjgQVhm1dNrRpBcJZ5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/43r72yQDIezet8VAZzRAxu6mLWf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 701469,
-    "ru": "Robbers: A The 1975 Documentary",
-    "en": "Robbers: A The 1975 Documentary",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 8.63,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8yNylFBfU3NEb7GVKrQNMnu64KR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zrvIgIQwN9u74AKToLz6XEayTFz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 208926,
-    "ru": "XY gelöst",
-    "en": "XY gelöst",
-    "year": 2022,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 6.94,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kiBHwoo4JzdO03przBeSjYqcJ4J.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pfgqHMIHvYbnY9Vhhdggvx4KLyq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1443374,
-    "ru": "森中有林",
-    "en": "森中有林",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 6.14,
-    "genres": [
-      "драма",
-      "мелодрама",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2lCe3wAq9KpyHwRZo28PeRMZgFm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qAe5omymsbIvRzl0PySF3NKPdad.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 283765,
-    "ru": "我们的爸爸",
-    "en": "我们的爸爸",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 5.66,
-    "genres": [
-      "Реалити-шоу",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gqL3kE2KohZPakjsIymWySuiRCt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/esWVoSm4S1hNIkRyqID467p130o.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 228667,
-    "ru": "朋友请吃饭",
-    "en": "朋友请吃饭",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 5.27,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ejLDGoMpma3VUv7wN3lCfowvbd2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/n79mTAQdn1a5pZ7taFdaOlupToK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 301174,
-    "ru": "Coração Acelerado",
-    "en": "Coração Acelerado",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 4.17,
-    "genres": [
-      "Мыльная опера",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dwSw1affkj4DfdqkCfyhpSa4ueP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xTU60aw1LhC3qGjKxK9B2W6gZ9k.jpg",
     "source": "tmdb"
   }
 ]

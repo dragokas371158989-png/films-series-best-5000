@@ -1,5 +1,283 @@
 [
   {
+    "id": "tv_42548",
+    "ru": "Мужики за работой",
+    "en": "Men at Work",
+    "year": 2012,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.6,
+    "votes": 49,
+    "popularity": 6.93,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "Главные персонажи сериала — работающий в престижном журнале парень по имени Майло и трое его друзей — Нил, Гиббс и Тайлер. После того, как Майло бросила девушка, они помогают ему справиться с депрессией и обрести уверенность в себе; правда, у самих друзей в личной жизни при этом тоже не все гладко.",
+    "poster": "https://image.tmdb.org/t/p/w342/roh8cMRx6BJhiwNNJwxFmQ9M6Bf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mqb0IbCMX5dDZvmqIjY6rcDTeRG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 76467,
+    "ru": "Странный ангел",
+    "en": "Strange Angel",
+    "year": 2018,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.6,
+    "votes": 49,
+    "popularity": 3.53,
+    "genres": [
+      "НФ и Фэнтези",
+      "драма",
+      "детектив"
+    ],
+    "overview": "Джек Парсонс - знаменитый инженер, химик и оккультист. В 1930-х молодой человек, с детства увлекавшийся реактивным движением, начал работать уборщиком на химическом заводе в Лос-Анджелесе. Вскоре благодаря врождённому таланту и амбициям Парсонс смог положить начало американскому ракетостроению и стал одним из ключевых основателей Лаборатории реактивного движения. Однако интересы Парсона не ограничивались химией. В начале 1940-х, после кратковременного периода увлечения марксизмом, Парсонс заинтересовался учениями английского оккультиста Алистера Кроули и вместе с женой Хелен присоединился к калифорнийскому отделению ордена восточных тамплиеров.",
+    "poster": "https://image.tmdb.org/t/p/w342/hny4ThL6XLznSXoQ3eMDzh4cYOz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8yfhxIIeHm2e1EZM4obgqUVmCDI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 29682,
+    "ru": "Так дорого моему сердцу",
+    "en": "So Dear to My Heart",
+    "year": 1948,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 49,
+    "popularity": 0.8,
+    "genres": [
+      "драма",
+      "семейный",
+      "мультфильм"
+    ],
+    "overview": "Начало 20-го века Индиана. На небольшой ферме живет мальчик Джерри и однажды там рождаются два маленьких ягненка, один белый другой черный. Мать отвергла черного агнца и Джерри стал заботиться о нем назвав его Дэнни (в честь знаменитых скачек Дэн Патч). Строгая бабушка Джерри против ягненка и все время говорит избавиться от него, единственным союзником мальчика стал кузнец дядя Хирам. Заветная мечта Джерри показать ягненка Дэнни на окружной ярмарке и поучаствовать в конкурсе, но бабушка категорически против, но с помощью дяди Хирама им удается уговорить сварливую и несговорчивую бабушку.",
+    "poster": "https://image.tmdb.org/t/p/w342/sWoOc4tkxlTf0i8YYia25sPRinY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/naRUQ7gNgz0Q9VjBuQGewJlRKmf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 192591,
+    "ru": "El Santos vs la Tetona Mendoza",
+    "en": "El Santos vs la Tetona Mendoza",
+    "year": 2012,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 49,
+    "popularity": 0.71,
+    "genres": [
+      "комедия",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bDMm9qdsAuWEHFqT24yllrXtkZf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8mwmmf6y3vhNmZrm9xBXJ2BrIuV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 361749,
+    "ru": "Hello, It's Me",
+    "en": "Hello, It's Me",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 49,
+    "popularity": 0.58,
+    "genres": [
+      "детектив",
+      "драма",
+      "мелодрама",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2xJG0DYwWFc2wO5KGZ8zxmTyhKr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/abjVYQDu5RlYIcW5NHYWHDRgASD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 91547,
+    "ru": "Разве я не просила усреднить мои способности в следующей жизни?!",
+    "en": "私、能力は平均値でって言ったよね！",
+    "year": 2019,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.6,
+    "votes": 48,
+    "popularity": 6.54,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "В день, когда Адель фон Аскам исполнилось 10 лет, она вспомнила всё о своей прошлой жизни в качестве Мисато Курихары. Она была японской девушкой с выдающимися способностями, которой её таланты только мешали. Возвращаясь с выпускного, Мисато погибла, спасая маленькую девочку. На небесах она встретила Бога, который предложил ей прожить ещё одну жизнь, но в параллельном мире. Девушка с радостью согласилась, прося лишь о том, чтобы Бог сделал её способности средними. Как оказалось, у богов свои понятия о среднестатистических способностях... Как же теперь быть Адель?",
+    "poster": "https://image.tmdb.org/t/p/w342/xxsc4CJHDpc9IZdaA3WSfdpJzBk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3d6NA7xA28fhg0UOJ5T5DXK2SMm.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_65383",
+    "ru": "Живая любовь! Сияние",
+    "en": "ラブライブ！サンシャイン!!",
+    "year": 2016,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.6,
+    "votes": 48,
+    "popularity": 3.16,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "драма",
+      "Аниме"
+    ],
+    "overview": "Однажды первогодка школы Уранохоси Тика Таками, гуляя по городу, увидела на большом экране выступление группы школьных айдолов из «μ's». Девушка прониклась, переслушала все песни и твердо решила создать свою группу для участия в проекте «Живая любовь!» Однако сложности не заставили себя долго ждать: в отличие от девочек из «μ's», Тика живет не в Токио, а в провинциальном городке, где айдолы не очень-то популярны. Заручившись поддержкой лучшей подруги, девушка решает создать клуб айдолов в своей школе.",
+    "poster": "https://image.tmdb.org/t/p/w342/3ZRYUZpHepxk50O5dLiYCBXbn3N.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nCEastc2t3njgwTLnLE7YkBjuLJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 63722,
+    "ru": "LEGO Звёздные Войны: Истории Дроидов",
+    "en": "LEGO Star Wars: Droid Tales",
+    "year": 2015,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.6,
+    "votes": 48,
+    "popularity": 2.69,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "семейный",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Главные герои - знакомые всем персонажи далёкой-далёкой Галактики. В центре сюжета серии - дроиды C-3PO и R2-D2. Находясь в эпицентре легендарных событий, они создали свою версию происходящего и решили поделиться ей с обитателями Вселенной. Дроиды были так увлечены своим рассказом, что не заметили, как таинственный злодей похитил корабль Адмирала Акбара.",
+    "poster": "https://image.tmdb.org/t/p/w342/kwEtB6toMVkmoqEoG5Hl63KP9NL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4hEdTuBLyKGcl6LO6ctKKucjLgT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 226749,
+    "ru": "Библиотекари: Следующая глава",
+    "en": "The Librarians: The Next Chapter",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.6,
+    "votes": 48,
+    "popularity": 5.3,
+    "genres": [
+      "Боевик и Приключения",
+      "НФ и Фэнтези"
+    ],
+    "overview": "Библиотекарь-путешественник во времени попадает из прошлого в наше время. Он не может вернуться в свою эпоху, и поэтому ищет свой замок, но обнаруживает, что теперь там находится музей. Нечаянно путешественник выпускает магию, которая распространяется по всему континенту.",
+    "poster": "https://image.tmdb.org/t/p/w342/w2PhnfYgY1yjxnUc1M4Jp5CjXvD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7vonjNjQ272lz0rJYM31K8V7b2m.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 655424,
+    "ru": "Улитка и Кит",
+    "en": "The Snail and the Whale",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 48,
+    "popularity": 1.15,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "телевизионный фильм"
+    ],
+    "overview": "Мир так широк, а улитка так мала - кто мог подумать, что именно крохотная улитка спасет своего большого друга, когда тот попадет в беду?",
+    "poster": "https://image.tmdb.org/t/p/w342/qWsqdJ6XUvwimqxwlplIazKjpve.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vCQFdqOYhRdSdLl5wqKXSDUchwA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 697039,
+    "ru": "Октагон: боец vs рестлер",
+    "en": "Cagefighter: Worlds Collide",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 48,
+    "popularity": 0.71,
+    "genres": [
+      "боевик"
+    ],
+    "overview": "Рисс – величайший чемпион ММА и легенда октагона. Оказаться с ним в одной клетке – равно что поставить себя под ядерный удар. Но его следующим соперником – в рамках «боя века» – неожиданно выбран знаменитый рестлер Рэнди Стоун – ярый провокатор и шоумен, готовый на всё, чтобы развлечь зрителей. Два мира, и только одна победа… Приготовьтесь к фееричному шоу!",
+    "poster": "https://image.tmdb.org/t/p/w342/7fJFwdZ75gX6hNNQdkKNq5TMXLx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8gXW1GufSNkyUYb6e1IkqPJRBfY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 571687,
+    "ru": "Совершенно нормальная семья",
+    "en": "En helt almindelig familie",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 48,
+    "popularity": 0.41,
+    "genres": [
+      "драма"
+    ],
+    "overview": "У Эммы была нормальная семья, пока её отец Томас не стал трансгендером. Теперь его зовут Агнита. Но младшая дочь не хочет с этим мириться.",
+    "poster": "https://image.tmdb.org/t/p/w342/xqDa3d0eqLrAw8GXlIjI1vCCTzz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bIlwxK8cm1t4WLQJISlq3yZ4Fio.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 725239,
+    "ru": "The Swamp",
+    "en": "The Swamp",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 48,
+    "popularity": 0.38,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/h70gDIHVJ1uKoUVjyaaCeX0txPW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wHyu1rbcKx3bMyc17Ls3qNHCCpI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 109572,
+    "ru": "Люпен III: Эпизод 0 — Первый контакт",
+    "en": "ルパン三世 EPISODE:0 ファーストコンタクト",
+    "year": 2002,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 48,
+    "popularity": 0.84,
+    "genres": [
+      "мультфильм",
+      "телевизионный фильм",
+      "боевик",
+      "комедия",
+      "криминал"
+    ],
+    "overview": "Молодая и симпатичная писательница задумывает книгу об известном аферисте Арсене Люпене Третьем. Она уже даже придумала название: «Люпен III: Первый контакт». Ей нужно интервью, но вот незадача, Люпена не так просто найти. Поэтому она просит интервью у его друга - Дайсукэ Дзигэна.  Мрачный молчун с большой неохотой поведает ей историю о том, как всё начиналось. Как они познакомились с Люпеном, как вражда и соперничество переросли в дружбу, откуда у Гоэмона столь могущественный меч, и почему инспектор Дзэнигата решил посвятить свою жизнь погоне за Люпеном.  Но рассказал ли Дзигэн правду этой писательнице, или он всего лишь хотел произвести на девушку впечатление?",
+    "poster": "https://image.tmdb.org/t/p/w342/64ZCMOeFIIEjzBhPujE4GElLVzL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5rTk5l36i6rYQSmdM47U1begYK7.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 287486,
     "ru": "Ворчун",
     "en": "Mielensäpahoittaja",
@@ -9420,278 +9698,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/6AdrI68ggKpSBRE2EbnvajeD53q.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/2RHKfO5oDU9PXOj2amTeAuu1vdE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 396488,
-    "ru": "ट्रैफिक",
-    "en": "ट्रैफिक",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 0.52,
-    "genres": [
-      "триллер",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kmufUYUXRapulEBNyn744oejb0A.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jmYYLYrXVfE2seTMIPJcIIOZ4cc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 321214,
-    "ru": "2 temps, 3 mouvements",
-    "en": "2 temps, 3 mouvements",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 0.49,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hXOKgjDB3F7FW0BMpvxKfaQLogo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1fxUZg38lVa1FvMboxvArVmJ0VJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 226427,
-    "ru": "Curtain Razor",
-    "en": "Curtain Razor",
-    "year": 1949,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 0.31,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vUUM5dfZQ1THwNW4whQCsNWUBV4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oOUFColJB61paFDXyaPO57CjGh6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 254268,
-    "ru": "Klub odložených",
-    "en": "Klub odložených",
-    "year": 1989,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 0.3,
-    "genres": [
-      "мультфильм",
-      "фэнтези",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3Mytz8Wur3SEEIr3LOVQxQFvIVT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/w02wKnLxuPAmBZfIcGIuHOQVA35.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "843269",
-    "ru": "EUREKA／交響詩篇エウレカセブン ハイエボリューション",
-    "en": "EUREKA／交響詩篇エウレカセブン ハイエボリューション",
-    "year": 2021,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.6,
-    "votes": 15,
-    "popularity": 2.4,
-    "genres": [
-      "мультфильм",
-      "драма",
-      "приключения",
-      "фантастика",
-      "мелодрама",
-      "боевик",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/orLSgCXqgD461f8u2hrFwoXZGl4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aLLTfRD7EfbE9GVyosknReARNHI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1516208,
-    "ru": "Список для Санты",
-    "en": "She's Making a List",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 15,
-    "popularity": 0.74,
-    "genres": [
-      "мелодрама",
-      "комедия",
-      "телевизионный фильм"
-    ],
-    "overview": "Изабель - инспектор, отвечающий за список послушных и непослушных детей. Наблюдая за Чарли, она влюбляется в её отца и понимает, что мир не такой уж чёрный и белый.",
-    "poster": "https://image.tmdb.org/t/p/w342/rpqNhO6PtTrBsuEh10O3rAVWDg1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9GnoKfvrLBmuAchlDzxAQmz1kzF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1204886,
-    "ru": "백수아파트",
-    "en": "백수아파트",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 15,
-    "popularity": 1.04,
-    "genres": [
-      "комедия",
-      "детектив",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eYdrfkmOb09qUm11QMUCJvaqYmz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6nto1CWW1EkED5jVCew7yj0EoFb.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1168918,
-    "ru": "The Making of Indiana Jones and the Dial of Destiny",
-    "en": "The Making of Indiana Jones and the Dial of Destiny",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 15,
-    "popularity": 1.04,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nJeiS9Zi1GTKD7JXFHyVJ1Edd0H.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zMtkSJfVuiv2I1lKkEnPhBiQagx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1180620,
-    "ru": "നുണക്കുഴി",
-    "en": "നുണക്കുഴി",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 15,
-    "popularity": 0.69,
-    "genres": [
-      "криминал",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yL0HgiyFCdzWljVQxa0DK1GDV3u.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pps3IdtSlYx3wYgANTyFXYL75nH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1210377,
-    "ru": "没有一顿火锅解决不了的事",
-    "en": "没有一顿火锅解决不了的事",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 15,
-    "popularity": 0.55,
-    "genres": [
-      "комедия",
-      "детектив",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3phypLODskon1fw3XSq9InwOx7h.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cO9gHeRR7sfCPJ9WcizBp9sSU9D.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 933833,
-    "ru": "കൂമൻ",
-    "en": "കൂമൻ",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 15,
-    "popularity": 0.43,
-    "genres": [
-      "драма",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nhKiu5zi5rUjPwzEQCaLKfbDHrL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/y0EpsN8VU5SH31Q5PMpk93UjyK9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 523,
-    "ru": "Золотые крылья Пенсаколы",
-    "en": "Pensacola: Wings of Gold",
-    "year": 1997,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.6,
-    "votes": 15,
-    "popularity": 6.39,
-    "genres": [
-      "Боевик и Приключения",
-      "драма"
-    ],
-    "overview": "Сериал рассказывает о командире подразделения специального назначения и его подчиненных морских пехотинцах.",
-    "poster": "https://image.tmdb.org/t/p/w342/5fdZmNKmvGAFRXYFmWtgUipc0hG.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 69720,
-    "ru": "Летний дом",
-    "en": "Summer House",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.6,
-    "votes": 15,
-    "popularity": 5.08,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5fjU5MPJqP5BOP5Zr6Ud2LL2y97.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4iuWXmTVgY54qOcbenbpiUafqvO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 322520,
-    "ru": "Hal",
-    "en": "Hal",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 15,
-    "popularity": 1.11,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/Ao8WlBeaPrvMvhPC27UX8dTbzfR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qBVVCW6CZFF14se1cTZ3F2TsyET.jpg",
     "source": "tmdb"
   }
 ]

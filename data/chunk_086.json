@@ -1,5 +1,299 @@
 [
   {
+    "id": "1024",
+    "ru": "Небесные создания",
+    "en": "Heavenly Creatures",
+    "year": 1994,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1035,
+    "popularity": 2.75,
+    "genres": [
+      "драма",
+      "фэнтези"
+    ],
+    "overview": "Все изменилось в жизни Полин, когда в их классе появилась новая ученица — Джулиет. Ее мир фантазий и независимость словно пробудили Полин ото сна. И ставшие неразлучными, подруги оказываются во власти неизведанных чувств. Но когда их очаровательно-невинная дружба сталкивается с угрозой, они преображаются, чтобы защититься!",
+    "poster": "https://image.tmdb.org/t/p/w342/AsZ286PDaYy8rZTKDDEbhrWV9gq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jHjOY9vgE7maH2HRk2fd9lOPg8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_5734",
+    "ru": "タユタマ -Kiss on my Deity-",
+    "en": "Tayutama: Kiss on My Deity",
+    "year": 2009,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.7,
+    "votes": 31030,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Романтика",
+      "Romance",
+      "Сверхъестественное",
+      "Supernatural",
+      "Гарем",
+      "Harem"
+    ],
+    "overview": "Yuuri Mito is a typical, normal Japanese teenager.  He goes to school, works on people's motorcycles and performs exorcisms.  Okay, that last part's a little bit unusual, but his family lives in a shrine and they do that sort of thing.  Still, you would think he'd know enough to be careful with an ancient relic he finds in the woods, especially when a mysterious goddess appears and tells him to leave it alone.  Unfortunately, despite Mito's best efforts, the seal gets broken anyway and a number of dangerous \"tayuti\" that it held in stasis get loose.  This is bad.  Mito also ends up with a beautiful goddess girl who decides that she's going to marry him.  This might not be so bad. if he wasn't already caught up in the middle of a war between the entities he's released.  The flesh may be weak but the spirit's more than willing to compensate. \n\n(Source: Sentai Filmworks)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1094/153283l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "64688",
+    "ru": "Мачо и ботан",
+    "en": "21 Jump Street",
+    "year": 2012,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 11030,
+    "popularity": 7.08,
+    "genres": [
+      "боевик",
+      "комедия",
+      "криминал"
+    ],
+    "overview": "Двое новоиспеченных горе-полицейских отправляются на сверхсекретное задание. Им предстоит заново стать учениками средней школы, в которой процветает наркоторговля.",
+    "poster": "https://image.tmdb.org/t/p/w342/xe2Z8wgNzKK9dhHr23B18dCBmie.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/d1ACwtoBygLKkGjCq9LUXnmcki.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "9434",
+    "ru": "Убийство в Гросс-Пойнте",
+    "en": "Grosse Pointe Blank",
+    "year": 1997,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1030,
+    "popularity": 1.98,
+    "genres": [
+      "боевик",
+      "комедия",
+      "триллер",
+      "мелодрама"
+    ],
+    "overview": "Мартин Блэнк приезжает на встречу выпускников в свой родной городок Гросс-Пойнт. У него богатые планы на этот вечер: он должен помириться со своей бывшей девушкой, которую не видел десять лет, а заодно, чтобы совместить приятное с полезным… совершить убийство.  Ведь в отличии от остальных одноклассников, Мартин выбрал карьеру профессионального киллера, и в Гросс-Пойнте его ждет очередное задание. И не только его… За Мартином уже давно охотятся два правительственных агента и конкурент, которые не дадут гостям скучать.",
+    "poster": "https://image.tmdb.org/t/p/w342/v6BfDtkkaZscUltVlvXcD8uTr3C.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/paSilBRK7Qw3iIbf3xIYVDKnVF9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "12335",
+    "ru": "Набалдашник и метла",
+    "en": "Bedknobs and Broomsticks",
+    "year": 1971,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1028,
+    "popularity": 2.3,
+    "genres": [
+      "семейный",
+      "мультфильм",
+      "фэнтези"
+    ],
+    "overview": "История о доброй волшебнице, которая помогает англичанам в борьбе с фашистами во время Второй мировой войны, помешав их высадке в Великобритании.",
+    "poster": "https://image.tmdb.org/t/p/w342/1BBzsThIZ06UmjZ3rChYGZhJtFQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jQAGYwpp00D9PN7qKIPb4HqNzoq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_50993",
+    "ru": "Death Hall",
+    "en": "Shiyakusho",
+    "year": 2022,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 1010,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Повседневность",
+      "Slice of Life",
+      "Сэйнэн",
+      "Seinen"
+    ],
+    "overview": "",
+    "poster": "https://cdn.myanimelist.net/images/anime/1713/120885l.webp",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mAt8qr2ciqCxXRulKN0VYzBOT4Q.jpg",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "mal_3734",
+    "ru": "Glass Mask: The Girl of a Thousand Masks",
+    "en": "Glass no Kamen: Sen no Kamen wo Motsu Shoujo",
+    "year": 1998,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 1009,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Драма",
+      "Drama",
+      "Сценическое искусство",
+      "Performing Arts",
+      "Сёдзё",
+      "Shoujo"
+    ],
+    "overview": "An OVA depicting the early events of the Glass no Kamen series.\n\nKitajima Maya is a young girl from a poor background with no talents of use to school or her widowed mother. However, she is obsessed with movies, theatrical plays and TV dramas-to the point of remembering every line from a movie she's seen once, and dramatically acting out the stories, including every character, for anyone who will listen. One day, she encounters an old woman with a scarred face who claims that Maya is the girl she's been looking for-for the old woman has spent years protecting the rights to a 'legendary' play.",
+    "poster": "https://cdn.myanimelist.net/images/anime/1788/97618l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "14506",
+    "ru": "Приключения барона Мюнхгаузена",
+    "en": "The Adventures of Baron Munchausen",
+    "year": 1988,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1008,
+    "popularity": 2.72,
+    "genres": [
+      "фэнтези",
+      "приключения",
+      "комедия"
+    ],
+    "overview": "Единственный, кто знает всю правду о Мюнхгаузене — сам барон. Легендарный герой рассказывает историю своих невероятных приключений.  Но неужели он действительно летал на раскаленном пушечном ядре, сражался с трехголовым грифоном, путешествовал на Луну, видел обнаженную Венеру, выходящую из морской раковины, и в конце концов, столкнулся нос к носу с самой Смертью? В это невозможно поверить… но разве знаменитый Мюнхгаузен может врать?",
+    "poster": "https://image.tmdb.org/t/p/w342/x0BS2FiyxHuhycRUC2O43PI2BXK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mBh3NXCkSCasZGovzAuc9UlFCru.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "628534",
+    "ru": "Белый тигр",
+    "en": "The White Tiger",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 995,
+    "popularity": 1.92,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Нищий парень устраивается водителем к богатой семье. Однажды его хозяева в подпитии насмерть сбивают человека и пытаются свалить вину на бедного водителя, но тот оказывается не так прост.",
+    "poster": "https://image.tmdb.org/t/p/w342/wFcymdv2uCtH9cYOb1GdXFW3HFv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wz4BoW7k5LNluY4PmxHBU1IS5Bc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "297556",
+    "ru": "Лига Справедливости: Трон Атлантиды",
+    "en": "Justice League: Throne of Atlantis",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 995,
+    "popularity": 3.05,
+    "genres": [
+      "фантастика",
+      "боевик",
+      "мультфильм",
+      "приключения"
+    ],
+    "overview": "О противостояние Аквамена и его брата Орма Повелителя Океана, который объявил войну жителям поверхности Земли после смерти короля Атлантиды во время инопланетного вторжения. События «Трона Антлантиды» будут разворачиваться вокруг молодого Артура Карри, который узнает о своем происхождении. Теперь он вынужден объединится с Лигой Справедливости, чтобы остановить Орма. Мы знакомимся с Артуром в очень сложный, поворотный момент его жизни. Его отец умирает, и он остается один, он становится изгоем. Когда армия Атлантиды начинает вторжение на поверхность, Артур еще не знает о своем происхождении. Однако, как только он узнает о своем наследии, то ему предстоит сделать нелегкий выбор, который в итоге определит его судьбу.",
+    "poster": "https://image.tmdb.org/t/p/w342/xXnNT7aM0deG4ONlfavCLt15QuW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ltlPFTMRsohmi2QbbSZUkAVg7Nc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "366924",
+    "ru": "Бэтмен: Дурная Кровь",
+    "en": "Batman: Bad Blood",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 989,
+    "popularity": 2.23,
+    "genres": [
+      "фантастика",
+      "боевик",
+      "мультфильм",
+      "приключения",
+      "криминал"
+    ],
+    "overview": "Готэме происходит неожиданное: некий еретик «убивает» Бэтмена, свидетелем чего становится Бэтвумен. Однако команде Летучей мыши горевать некогда, ведь зло не дремлет. Теперь оставшимся напарникам Бэтмена — Найтвингу (Дик Грейсон) и Робину (сын Бэтмена — Дэмиан Уэйн) — предстоит занять его пост и защищать жителей темного города.",
+    "poster": "https://image.tmdb.org/t/p/w342/uJb246149nxIEE61tqFj07onJVc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nwfpBjtMNFwrGjW2o9HBhMEYCpM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "651070",
+    "ru": "Грехопадение",
+    "en": "A Fall from Grace",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 985,
+    "popularity": 2.74,
+    "genres": [
+      "драма",
+      "триллер",
+      "детектив"
+    ],
+    "overview": "Законопослушной женщине предъявляют обвинение в убийстве мужа. Ее адвокат вскоре понимает, что за случившимся может стоять заговор большего масштаба.",
+    "poster": "https://image.tmdb.org/t/p/w342/h47JJZ015VF4neia33AFwTU37Yb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qeoAcUAw1xNYJ9PP7m1Wc7kKZZQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "10653",
+    "ru": "Зуд седьмого года",
+    "en": "The Seven Year Itch",
+    "year": 1955,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 985,
+    "popularity": 3.07,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Книгоиздатель Ричард Шерман женат уже семь лет. Его жена и сын в очередной раз уезжают за город на каникулы. Недолго длится одиночество Ричарда, неожиданно на его балкон падает огромный горшок с томатами, и виной этому соседка с верхнего этажа, белокурая рекламная модель.  Ричард предлагает красотке зайти к нему в гости и что-нибудь выпить. Шикарная блондинка в глубоком декольте, не давая соседу опомниться, появляется в его квартире с бутылкой шампанского в руке…  С этой минуты богатое воображение героя рисует не только сказочные картины завоевания сердца соблазнительной красавицы, но и унизительные сцены разоблачения женой его неверности…",
+    "poster": "https://image.tmdb.org/t/p/w342/k511XLPmI96sSfAYZvbACEboRtS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yjlg8Gq3TAWlFSUxh7Icey8uM4P.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_4586",
+    "ru": "I love BuBu ChaCha",
+    "en": "Daisuki! BuBu ChaCha",
+    "year": 2001,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 977,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Повседневность",
+      "Slice of Life",
+      "Питомцы",
+      "Pets",
+      "Для детей",
+      "Kids"
+    ],
+    "overview": "The anime talks about a little boy, Randy, whose dog, Chacha, died in an accident and was reincarnated into a living toy car. Each episode is told like the chapter of a storybook, where Randy learns a valuable thing in life with his cartoonish and goofy friend Chacha. Randy meets several friends in his neighbourhood, such as Catherine, the tall blonde girl in red long socks who rides a bicycle, or Mary, a little hot-tempered brunette girl dressed as a maid and who carries around a mop.\n\n(Source: ANN)",
+    "poster": "https://cdn.myanimelist.net/images/anime/9/46873l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
     "id": "1781",
     "ru": "Неудобная правда",
     "en": "An Inconvenient Truth",
@@ -9906,272 +10200,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/eCeFKkSZVWgIVmGCDCBlpmcVv23.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/wEDiwi2v2LchnPCOghsKes6Q1FP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1108354,
-    "ru": "Кали",
-    "en": "KALI, L'ange de la Vengeance",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 137,
-    "popularity": 1.58,
-    "genres": [
-      "боевик",
-      "триллер",
-      "приключения"
-    ],
-    "overview": "Лиза, она же Кали, когда-то была рекрутом в спецназе. Узнав, что её муж Эрик убит в Рио-де-Жанейро в связи с коррупционным скандалом, она решает вспомнить прежние боевые навыки и отправиться в Бразилию, чтобы найти и покарать виновных.",
-    "poster": "https://image.tmdb.org/t/p/w342/dpg75ast2iqac4b8xKgj6feaebM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dVPPCD7wK0bFEB2NK3fw3CBidwd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 826796,
-    "ru": "Сиделка",
-    "en": "Help",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 137,
-    "popularity": 1.16,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Сара, кажется, нашла свое призвание, работая в доме престарелых в Ливерпуле, где у нее особый талант общаться с жильцами. Затем, в марте 2020 года, разразится пандемия коронавируса.",
-    "poster": "https://image.tmdb.org/t/p/w342/xuB589szYuTcBJ0lZa0MSGAf1Ok.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jRwqNjLsOiCzDJ4lT4dpFZemNx7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 603206,
-    "ru": "Лошадь мечты",
-    "en": "Dream Horse",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 136,
-    "popularity": 1.54,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Устав от обыденной жизни, Джен решает ее изменить. Не имея ни опыта, ни средств, она убеждает своих соседей вложить сбережения в лошадь по кличке «Мечта».",
-    "poster": "https://image.tmdb.org/t/p/w342/6F8DsO8QRcv5Hso9rULcDHmv5Yb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rZpyIeadpjHDJDBdl7BNLRtPF49.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 57472,
-    "ru": "Микки Маус: Маленький храбрый портняжка",
-    "en": "Brave Little Tailor",
-    "year": 1938,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 136,
-    "popularity": 0.52,
-    "genres": [
-      "мультфильм",
-      "фэнтези",
-      "комедия"
-    ],
-    "overview": "Прекрасная экранизация известной сказки с Микки Маусом в роли храброго портняжки. Храбрый портняжка хвастал, что убил семь мух одним ударом, а теперь ему придется столкнуться с настоящим великаном.",
-    "poster": "https://image.tmdb.org/t/p/w342/a4iR5PHen2B0snLJZy5ZVWlFUT8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oSIPum1CLiWk77LUIbRTwgOs31m.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_99617",
-    "ru": "Холстон",
-    "en": "Halston",
-    "year": 2021,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 135,
-    "popularity": 4.19,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Он создал империю. Его стиль определил эпоху. Американский модельер Холстон стремительно обрел славу, но затем его жизнь стала выходить из-под контроля.",
-    "poster": "https://image.tmdb.org/t/p/w342/paNcR3RKnAKZd6bKvRnMcBi4sjZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kTuUYjlwsfBsiHCQPEc4clpDFAY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 103023,
-    "ru": "Я исчезну во тьме",
-    "en": "I'll Be Gone in the Dark",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 135,
-    "popularity": 2.15,
-    "genres": [
-      "документальный",
-      "криминал"
-    ],
-    "overview": "Джозеф Деанджело с 1976 по 1986 годы убил по меньшей мере 10 человек и около 50 подверг сексуальному насилию. Режиссёр фильма годами пыталась восстановить справедливость и не дать запутанному делу сгинуть в архивах.",
-    "poster": "https://image.tmdb.org/t/p/w342/wP8ypum7Jpy1UBfR6HLxdvMkqX6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wfivwtnzkWQCwOtpT7tiVATIVkR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 122672,
-    "ru": "Сыновья Сэма. Падение во тьму",
-    "en": "The Sons of Sam: A Descent into Darkness",
-    "year": 2021,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 135,
-    "popularity": 1.24,
-    "genres": [
-      "документальный",
-      "криминал"
-    ],
-    "overview": "Дело сына Сэма становится многолетней страстью журналиста Мори Терри, убежденного, что убийцы были связаны с сатанинским культом.",
-    "poster": "https://image.tmdb.org/t/p/w342/jejdm4PE6pxbNKz1UtBjvHCPmnA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cdCmK24gBPjKlACeDOliWFPrWt9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 946127,
-    "ru": "Соколиное озеро",
-    "en": "Falcon Lake",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 135,
-    "popularity": 1.16,
-    "genres": [
-      "драма",
-      "мелодрама",
-      "детектив"
-    ],
-    "overview": "Бастьену 13 лет. Он переезжает со своей семьей из Парижа в шале на берегу озера в Квебеке, где неожиданно связывается с 16-летней Хлоей.",
-    "poster": "https://image.tmdb.org/t/p/w342/7EoLtRBUAqBYNPEfFRj6DWIhCxe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aCI2blt8jVK3RGUN4NFtkWj0FkS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 915980,
-    "ru": "Солнце и бетон",
-    "en": "Sonne und Beton",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 134,
-    "popularity": 0.62,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "Берлин-Гропиусштадт в рекордное для жары лето 2003 года. В парках воняет собачьим дерьмом, повсюду битое стекло, в подворотнях стоят дилеры. Любой, кто живет здесь, является бандитом или жертвой. Лукас, Джино и Джулиус — жертвы. Нет денег на бассейн, не везет в любви, а дома ожидает только стресс. Однажды, когда они хотят купить травку в парке, они оказываются между двух конкурирующих банд торговцев. В итоге Лукаса избивают и требуют 500 евро за «крышу». Его новый одноклассник Санчес предлагает украсть со склада школы новые компьютеры и продать их.",
-    "poster": "https://image.tmdb.org/t/p/w342/ddacirup8d3NJqyFvRaBllSFncr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8I6RTwSmpt31I6bTIyxCgrcdXGT.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 814312,
-    "ru": "Майсабель",
-    "en": "Maixabel",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 134,
-    "popularity": 0.49,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Террористы убивают мужа главной героини, из-за чего вся её жизнь идёт наперекосяк. Полная решимости — не отомстить, но понять, почему это произошло, — она просит организовать встречи с теми, кто участвовал в том нападении и сейчас сидит в тюрьме. После этих встреч жизнь Майсабель и других жертв террористической атаки меняется, подарив им надежду на прощение, новую жизнь и свободу.",
-    "poster": "https://image.tmdb.org/t/p/w342/1jXI2yN7fEj8ass83Xmbrn8YaoW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7P8MrCJfAeKrzbfrv5AEU1tvJfE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_5383",
-    "ru": "Чужая нация",
-    "en": "Alien Nation",
-    "year": 1989,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 134,
-    "popularity": 6.55,
-    "genres": [
-      "НФ и Фэнтези",
-      "Боевик и Приключения",
-      "драма"
-    ],
-    "overview": "В пустыне Мохаве потерпел крушение огромный инопланетный космический корабль, перевозивший 250 тысяч рабов из разных концов Галактики. Пришельцы стали жить среди людей, многие из которых были очень враждебно настроены по отношению к «отбросам Вселенной».\n\nСреди них  детектив Мэттью Сайкс, напарник которого погиб в перестрелке с бандой пришельцев. Перебирая бумаги погибшего друга, Мэттью делает открытие: его убили за то, что он пытался выяснить, почему пришельцы так слепо повиновались своим бывшим хозяевам.\n\nКогда в городе начинают находить трупы пришельцев, умерших от странной болезни, а на страницы газет попадает снимок чудовищной насекомообразной твари, Мэттью и его новый напарник, пришелец Джордж, вынуждены работать рука об руку, чтобы раскрыть тайну этих событий",
-    "poster": "https://image.tmdb.org/t/p/w342/mSnZFa4Yv3dFCMdcyJXjlq0lj4c.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/npNbRiUGU29nz464ERJiAkxH997.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_64421",
-    "ru": "Хроники Франкенштейна",
-    "en": "The Frankenstein Chronicles",
-    "year": 2015,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 134,
-    "popularity": 3.59,
-    "genres": [
-      "НФ и Фэнтези",
-      "драма"
-    ],
-    "overview": "Инспектор полиции Джон Марлотт разыскивает маньяка, возомнившего себя Франкенштейном. Злодей воплощает действия книжного доктора в реальность — создает монстра из частей человеческих тел. Марлотт, обнаруживший одно из ужасных созданий убийцы, вынужден работать тайно и в одиночку бродить по Лондону 19-го века в поисках чудовища.",
-    "poster": "https://image.tmdb.org/t/p/w342/gEkUGlWXruIb8q6DvQDbqxcfjgi.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/efnTREn6vaTS02BQ6dhk8i9Ad6d.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 267467,
-    "ru": "Мишень",
-    "en": "표적",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 134,
-    "popularity": 1.2,
-    "genres": [
-      "триллер",
-      "боевик"
-    ],
-    "overview": "Некогда бывший наемник Ё Хун, пытается жить обычной жизнью. И у него это в принципе хорошо получается, но однажды он отправляется в офис по поручению и обнаруживает там труп. Вот так мужчина и становится в одночасье главным подозреваемым. Его разыскивает не только полиция, но и наемные убийцы. Как выбраться из этой передряги, доказать свою невиновность и при этом остаться в живых?",
-    "poster": "https://image.tmdb.org/t/p/w342/hljukhGDRHeGMdQ7KcKzobgxJlR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oquMboQfqtfFMNW9SSHpm0EVGHU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 594082,
-    "ru": "Mosul",
-    "en": "Mosul",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 134,
-    "popularity": 0.67,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/cOaq0MJNf3cCZsPeXWjw95CI0qv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xmBIS48kPpwGMh7tKb85Rt7Wq2O.jpg",
     "source": "tmdb"
   }
 ]

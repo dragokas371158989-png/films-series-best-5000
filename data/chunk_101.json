@@ -1,5 +1,303 @@
 [
   {
+    "id": "mal_347",
+    "ru": "Wild Arms",
+    "en": "Wild Arms: Twilight Venom",
+    "year": 1999,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.7,
+    "votes": 3356,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Приключения",
+      "Adventure",
+      "Фэнтези",
+      "Fantasy",
+      "Фантастика",
+      "Sci-Fi",
+      "Вампиры",
+      "Vampire"
+    ],
+    "overview": "This anime is based on a playstation game under the same title. The story is about four people who travel the desolated land of Filgaea and carve themselves a legendary story while they're at it. These adventurers are Sheyenne Rainstorm, a gunslinger who holds the legendary weapon called ARMs; Kiel Aromax, a scientist who looks like he should be carrying a sword; Roleta Oratorio the Crest Sorceress, a magic-user who uses cards called Crests to cast spells; and Mirabelle Graceland, one of the Noble Red, which are a family of vampiric creatures who live alongside human beings They also travel with cute little intelligent furry things, from the Popepi Pipepo Tribe, named Isaac and Jerusha.\n\n(Source: AniDB)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1532/94186l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "9614",
+    "ru": "Счастливчик Гилмор",
+    "en": "Happy Gilmore",
+    "year": 1996,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 3337,
+    "popularity": 5.25,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Гилмор с детства обожал хоккей, но, кроме пушечного удара, способностей у него к этой игре не было. Случай дал ему в руки клюшку для гольфа, и удар его был самым мощным за всю историю этого вида спорта, который он так презирал. Но на одном презрении далеко не уедешь, а вот за победу в гольф платят большие деньги. И тут за дело берется профессиональный тренер по гольфу, которому придётся весьма нелегко с Хэппи Гилмором.",
+    "poster": "https://image.tmdb.org/t/p/w342/z0FxccTbbe51HbGzteQxtN2yy5l.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/As7NuiDRM4EO7LlJn2u8JWWsABp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "8967",
+    "ru": "Древо жизни",
+    "en": "The Tree of Life",
+    "year": 2011,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 3332,
+    "popularity": 3.54,
+    "genres": [
+      "драма",
+      "фэнтези"
+    ],
+    "overview": "Мы наблюдаем за развитием 11-летнего Джека, одного из трех братьев. Поначалу ребенку все кажется чудесным. Глазами своей души он наблюдает за поступками мамы. Она представляет собой любовь и милосердие, в то время как отец пытается научить сына, что в реальном мире на первое место необходимо всегда ставить себя. Каждый родитель старается переманить Джека на свою сторону, и он должен примириться с их притязаниями. Действительность становится мрачнее, когда главному герою в первый раз приходится столкнуться с болью, страданиями и смертью. Некогда абсолютно ясный мир превращается в лабиринт.",
+    "poster": "https://image.tmdb.org/t/p/w342/jpIOnrPX6BtRlVj1fYRtIMmvLU5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xq1HIwZq9VbuvMQELAua1nqEkH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "943",
+    "ru": "Смертельное оружие 3",
+    "en": "Lethal Weapon 3",
+    "year": 1992,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 3249,
+    "popularity": 4.54,
+    "genres": [
+      "боевик",
+      "триллер",
+      "криминал"
+    ],
+    "overview": "Третий фильм о неустрашимом полицейском Риггсе.\r На этот раз Мартин и его напарник Роджер сталкиваются с гангстерами, похищающими оружие со склада полиции. Преступную группу, за которой тянется длинный кровавый след, возглавляет бывший сержант Джек Тревис. Найти улики против «грязного» полицейского напарникам помогает Лорна Коул — решительная женщина-полицейский, которая не останавливается перед лицом опасности и уверенно вступает в схватку с противниками…",
+    "poster": "https://image.tmdb.org/t/p/w342/h6fTuK3BgyNy3kce4guusbB43bQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kmt9XmhmX36sJduuDVFlTgEWh9U.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "11283",
+    "ru": "Моя ужасная няня",
+    "en": "Nanny McPhee",
+    "year": 2005,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 3226,
+    "popularity": 5.74,
+    "genres": [
+      "фэнтези",
+      "комедия",
+      "семейный"
+    ],
+    "overview": "Попав в дом к недавно овдовевшему мистеру Брауну, няня-волшебница пытается усмирить его семерых непослушных детей. Эти сорванцы, возглавляемые Саймоном, уже избавились от 17 предыдущих нянь и поэтому не сомневаются, что и 18-ю ждет та же участь.  Однако, когда няне Макфи все-таки удается взять ситуацию под контроль, детишки вдруг начинают замечать, что их ужасное поведение волшебным образом приводит к совершенно удивительным и непредсказуемым результатам…",
+    "poster": "https://image.tmdb.org/t/p/w342/ePTIBxY3ymbhD4Y1sQLqQj64fi7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ijmKdhQQ86L18ZUywjHjM7h7YgO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_45783",
+    "ru": "最遊記RELOAD -ZEROIN-",
+    "en": "Saiyuuki Reload: Zeroin",
+    "year": 2022,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.7,
+    "votes": 3218,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Приключения",
+      "Adventure",
+      "Комедия",
+      "Comedy",
+      "Драма",
+      "Drama",
+      "Сверхъестественное",
+      "Supernatural",
+      "Мифология",
+      "Mythology",
+      "Дзёсэй",
+      "Josei"
+    ],
+    "overview": "Getting ambushed by rogue demons on the road is business as usual for the Sanzou party. But when their latest assailants turn out to be humans, the group is left dumbfounded. The mystery only deepens when they encounter a wandering priest, Hazel Grouse, and his imposing bodyguard, Gaty Nene Hawk. The pair hails from the far West, with Hazel using his powers of resurrection to aid grief-stricken villages. While his ability is greatly welcomed by the people, the truth behind it is less miraculous than it seems. Furthermore, the resurrected humans gain golden eyes, a trait they share with the group's recent attackers. It appears that the friendly priest's intentions are not as generous as one might expect—and the Sanzou party is a step away from unraveling them.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1451/119862l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "25",
+    "ru": "Морпехи",
+    "en": "Jarhead",
+    "year": 2005,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.7,
+    "votes": 3177,
+    "popularity": 4.68,
+    "genres": [
+      "драма",
+      "военный",
+      "Аниме"
+    ],
+    "overview": "Действие картины разворачивается во время войны в Персидском заливе. Морской пехотинец Энтони Суоффорд - потомственный военный. После курса подготовки в специальном лагере его отправляют на Ближний Восток, где идут военные действия. Со снайперской винтовкой в руках и с тяжелым рюкзаком за плечами ему предстоит проделать нелегкий путь по пустыне, где нет спасения от невыносимой жары и иракских солдат, которые в любую минуту могут появиться на горизонте.",
+    "poster": "https://image.tmdb.org/t/p/w342/jVmk7s2QVIOK7rnXsYL5ineaZDj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bQ8fRUaitJvi54O2lUT6Ta7FVHK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "249397",
+    "ru": "Нимфоманка: Часть 2",
+    "en": "Nymphomaniac: Vol. II",
+    "year": 2013,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 3176,
+    "popularity": 104.81,
+    "genres": [
+      "драма",
+      "детектив"
+    ],
+    "overview": "Продолжение истории нимфоманки по имени Джо, чья жизнь была полна множества эротических переживаний, впечатлений и опытов. Она рассказывает о себе немолодому одинокому холостяку Селигману, который наткнулся на нее, избитую и находящуюся в полубессознательном состоянии, в переулке, доставил к себе домой и выходил…",
+    "poster": "https://image.tmdb.org/t/p/w342/vSCaG0r7NW9z5IIMUxNUXcBbYOe.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5n417Ff5GXOGCOKj3ZLMRAxEP0o.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "10999",
+    "ru": "Коммандос",
+    "en": "Commando",
+    "year": 1985,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 3139,
+    "popularity": 7.79,
+    "genres": [
+      "боевик",
+      "приключения",
+      "триллер"
+    ],
+    "overview": "Полковник в отставке Джон Матрикс — бывший командир спецотряда, участвовавшего в секретных операциях на Ближнем Востоке, СССР и Центральной Америке. Находясь в отличной физической форме и владея знаниями, которые делают его супер-солдатом, полковник в отставке Джон Матрикс живет под другим именем в большом доме со своей дочерью вдали от города.",
+    "poster": "https://image.tmdb.org/t/p/w342/iMHn218oEVvA2Hs6Veb3jbne0P.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gvao0WZchzudp2oMF5sjgzwHY0q.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_39846",
+    "ru": "この世の果てで恋を唄う少女YU-NO 無限の並列世界",
+    "en": "Kono Yo no Hate de Koi wo Utau Shoujo YU-NO: Mugen no Heiretsu Sekai",
+    "year": 2019,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.7,
+    "votes": 3079,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Драма",
+      "Drama",
+      "Фантастика",
+      "Sci-Fi",
+      "Путешествия во времени",
+      "Time Travel"
+    ],
+    "overview": "Unaired episode included with the third Blu-ray volume.",
+    "poster": "https://cdn.myanimelist.net/images/anime/1038/102471l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "353070",
+    "ru": "Уйти красиво",
+    "en": "Going in Style",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 3043,
+    "popularity": 3.53,
+    "genres": [
+      "криминал",
+      "комедия"
+    ],
+    "overview": "Старые друзья Вилли, Джо и Эла, несмотря на свой пенсионный возраст, впервые в жизни решают свернуть с праведного пути, чтобы сохранить свои пенсионные накопления.  Угнетенная оплатой счетов и потерей своих близких, пожилая троица решает рискнуть всем и намерена совершить ограбление банка, присвоившего их деньги.",
+    "poster": "https://image.tmdb.org/t/p/w342/qFqW8wX9r6UTnWZ2spIWroijRNM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uARnuPezr7eZkOsHj2ujFQz6EKE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "157386",
+    "ru": "Захватывающее время",
+    "en": "The Spectacular Now",
+    "year": 2013,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 3017,
+    "popularity": 3.06,
+    "genres": [
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Старшеклассник Саттер Кили, обаятельный и хладнокровный, заводила вечеринок, живет настоящим моментом. Он любит свою работу в магазине мужской одежды, и не строит никаких планов на будущее. Точно прогрессирующий алкоголик, он никогда не расстается со своей флягой с виски. Когда его бросает подруга, Саттер напивается и просыпается на газоне в тени нависшей над ним Эйми Финики. Она другая: «милая девушка», увлекающаяся фантастикой, да к тому же без парня. В то время как Эйми мечтает о будущем, Саттер проживает в блаженном неведении захватывающее время, но каким-то образом, они сближаются.",
+    "poster": "https://image.tmdb.org/t/p/w342/vDnMN9Bz4gIn7Pok01oDRZMz87M.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xy5YazEiPb3Nij6TUEP9Dq3LDhp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "768",
+    "ru": "Из Ада",
+    "en": "From Hell",
+    "year": 2001,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 3016,
+    "popularity": 4.45,
+    "genres": [
+      "ужасы",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "Он — воплощение тьмы и ужаса. Он самый таинственный и знаменитый из всех серийных убийц, известных истории. Он погрузил Англию в атмосферу страха и породил массу слухов и домыслов. Убийца, который знает больше простого мясника или лаборанта. Убивая, он совершает чудовищный ритуал. Его прозвище — Джек-Потрошитель.Поймать его пытается инспектор Фред Эбберлайн. С помощью опиума он усиливает свой природный дар ясновидения и приходит к выводу, что дело Джека-Потрошителя — часть злодейского заговора, в который замешан Орден Масонов, выполняющий, в свою очередь, волю королевского дома.",
+    "poster": "https://image.tmdb.org/t/p/w342/zxJIvJgzxYaVXET2IHzcflwFeK6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bHKj3m3eLlU2wJQBlAs7wv6ZMBv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "600583",
+    "ru": "Власть пса",
+    "en": "The Power of the Dog",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 2955,
+    "popularity": 2.99,
+    "genres": [
+      "драма",
+      "вестерн"
+    ],
+    "overview": "В центре сюжета «Власти пса» — братья Фил и Джордж Бёрбэнки, которые в 1920-х годах стали владельцами крупнейшего ранчо в штате Монтана. Джордж в какой-то момент решил жениться на молодой вдове Роуз и воспитывать её сына Питера, что не понравилось Филу, который начал издеваться над девушкой и подростком.",
+    "poster": "https://image.tmdb.org/t/p/w342/fAW8Nr4KIgsrtH1EmdFV3b1e8Yw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gAsHuCQMN7mv4uFIvM4ACQ09hPr.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "313922",
     "ru": "Зеленая комната",
     "en": "Green Room",
@@ -9789,276 +10087,6 @@
     "overview": "Кот рассказывает свою историю жизни.",
     "poster": "https://image.tmdb.org/t/p/w342/yEhoutHt6MZdyHz64XIFB9n3iGQ.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/m7gw5jZrzyA6n81iOPxilPOYjNg.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_12584",
-    "ru": "Заколдованное королевство",
-    "en": "Tin Man",
-    "year": 2007,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.7,
-    "votes": 192,
-    "popularity": 3.29,
-    "genres": [
-      "Боевик и Приключения",
-      "НФ и Фэнтези"
-    ],
-    "overview": "ДиДжи была простой студенткой, работающей в кафе на полставки и вечно чувствующей себя не на своем месте. Но ее жизнь изменилась коренным образом после того, как ей начали сниться фантастические сны и странные люди напали на ее семью с целью похитить девушку. Чтобы спасти ей жизнь, родители бросили ее в торнадо, которое перенесло ДиДжи в потусторонний мир, полный темной магии и загадочных существ. Теперь в компании своих новых приятелей она пытается отыскать свою настоящую мать.\n\n«Заколдованное королевство»  — фантастический минисериал из трёх серий, который является эпическим преображением сказки Фрэнка Баума «Удивительный Волшебник из Страны Оз». Эта версия сказки очень поверхностно напоминает оригинал и является больше современной смесью фантастики и фэнтези.",
-    "poster": "https://image.tmdb.org/t/p/w342/x1arl8OTwqfBGZhtWsaFoOZz6Lf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uQP0lW2cJkwnsZmxIWeqMt3iFSX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 559713,
-    "ru": "Отпетые друзья",
-    "en": "Fisherman's Friends",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 192,
-    "popularity": 1.06,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Дэнни – слегка потрёпанный сладкой жизнью музыкальный продюсер из Лондона – отправляется на выходные в Корнуолл, прихватив с собой за компанию коллег-пиарщиков. Он шутит, что не прочь заключить контракт с местным любительским хором: и на досуге, и за работой суровые рыбаки любят попеть. Но Джим не представляет, к чему приведёт розыгрыш доверчивых коллег: деревенские обитатели окажутся настоящими самородками, а сам Джим влюбится в дочь одного из них...",
-    "poster": "https://image.tmdb.org/t/p/w342/fWt852foljsqHtSznfEbdHLWzFn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xxjFyF0onOaH1MvTrOsuA47v74R.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_5885",
-    "ru": "Цвет волшебства",
-    "en": "The Colour of Magic",
-    "year": 2008,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.7,
-    "votes": 191,
-    "popularity": 4.89,
-    "genres": [
-      "Боевик и Приключения",
-      "НФ и Фэнтези",
-      "комедия",
-      "драма"
-    ],
-    "overview": "В Анк-Морпорк, крупнейший город Плоского Мира приезжает первый (и постоянно рискующий стать последним) турист Диска — Двацветок. Ринсвинд, самый трусливый и, вероятно, самый худший волшебник Диска, вынужден стать его гидом. Как большинство туристов, Двацветок абсолютно уверен, что с ним ничего страшного произойти просто не может. И поэтому он смело идет навстречу приключениям, а их будет немало: от поджога целого города до полёта на драконе и падения за Край!",
-    "poster": "https://image.tmdb.org/t/p/w342/eWLNAIHxeXLn4H7eP2vr5oyz6Tj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8L98xr6jp8wkYe8bBWxKpaIFCzp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 676710,
-    "ru": "Изумительный Морис",
-    "en": "The Amazing Maurice",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 190,
-    "popularity": 2.61,
-    "genres": [
-      "мультфильм",
-      "приключения",
-      "комедия",
-      "семейный",
-      "фэнтези"
-    ],
-    "overview": "У кота Мориса есть два таланта: говорить и проворачивать аферы. Путешествуя с говорящими грызунами из города в город, он каждый раз «спасает» местных жителей от нашествия крыс (разумеется, за хорошую оплату). Но попав в Дрянь-Блинцбург, Морис и его друзья понимают, что этот городок таит в себе нечто опасное… Теперь им предстоит сыграть в кошки-мышки с настоящим злом и разгадать главную загадку этого места — к изумлению всех живущих там двуногих.  Фильм снят по роману английского писателя Терри Пратчетта «Изумительный Морис и его учёные грызуны» из серии «Плоский мир».",
-    "poster": "https://image.tmdb.org/t/p/w342/9kLkozLeF3YOv54BJQ7pMFaL4XV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/70aVSo3fuZ94jyQ3rT64afEf8lV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 253254,
-    "ru": "Пока я не исчезну",
-    "en": "Before I Disappear",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 190,
-    "popularity": 1.02,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Опустившись на самое дно, Ричи получает звонок от своей сестры, которая просит присмотреть за его одиннадцатилетней племянницей Софией.",
-    "poster": "https://image.tmdb.org/t/p/w342/fVn4g01k6uEFdOsv7lNcJYvcldR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3oWmhuylOmKPnUb0biUtSgYxuIW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 587424,
-    "ru": "Инфекция. Зомби",
-    "en": "Infección",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 189,
-    "popularity": 0.93,
-    "genres": [
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "В столице Венесуэлы два русских мигранта-строителя употребляют наркотики, после чего один из них сходит с ума и нападает на другого. Тот сбегает, не догадываясь, что несёт в себе неизвестный вирус, который положит начало страшной эпидемии. В это время где-то в сельской местности врач-вдовец отправляет сына к бабушке с дедушкой, а на следующий день замечает, что давно знакомые соседи начинают странно себя вести. Когда становится очевидно, что по стране распространяется ужасающая инфекция, мужчина решает любой ценой добраться до сына.",
-    "poster": "https://image.tmdb.org/t/p/w342/iXrNSYb8rK3nSg7LFUh14dzs9CN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vHvEJwTDXFu4E2fC6a1vxdZKHND.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 487186,
-    "ru": "Halo: Сумерки",
-    "en": "Halo: Nightfall",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 188,
-    "popularity": 1.48,
-    "genres": [
-      "фантастика",
-      "боевик",
-      "приключения"
-    ],
-    "overview": "Действие фильма начнётся с событий на одной из Внешних колоний человечества, Седре. Отряд Службы военной разведки под командованием капитан-лейтенанта Джеймсона Локка высажен на планету с целью расследовать предполагаемую террористическую деятельность. Отряд подвергается атаке радикалов, и становится известно, что те пытаются использовать некое биологическое оружие, способное влиять только на людей. Ради своего выживания оперативники отряда вынуждены работать вместе с одним из местных командиров Рэндаллом Аикеном. Оставаясь на Седре, отряд обнаруживает инопланетный артефакт. Тем временем на орбиту колонии прибывает частично функциональная секция уничтоженной Установки 04.",
-    "poster": "https://image.tmdb.org/t/p/w342/v01BU2XnRCw4VKWM7IumyDI4knf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jAXel5sHK1bnv9lL1U4HOkdxuD9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 518496,
-    "ru": "Дикий",
-    "en": "Sauvage",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 188,
-    "popularity": 1.17,
-    "genres": [
-      "драма"
-    ],
-    "overview": "22-летний Лео зарабатывает на жизнь проституцией. Мужчины меняются, но не его жизнь. Он ждет любви. Лео не заботит будущее. Он бродит по улицам, душа его горит.",
-    "poster": "https://image.tmdb.org/t/p/w342/6ijy6rbXdrS08g2ovzqTfrR8YXc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uZctKVIWJkacJZILmKPDyZm1pok.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 659290,
-    "ru": "Порочная связь",
-    "en": "Lacci",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 185,
-    "popularity": 1.89,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Когда Альдо и Ванда были молодыми, их жизнь напоминала сказку: Неаполь, море, любовь и клятва быть вместе навсегда. Но после рождения детей все меняется. Пытаясь вернуть утраченную радость, Альдо заводит страстные отношения на стороне, а затем уходит из дома. Однако его связь с семьей оказывается гораздо прочнее, чем он предполагал.",
-    "poster": "https://image.tmdb.org/t/p/w342/4Ru2QeytoycqoReXyMCKG8wXF17.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vBwpFKgAXWkXBm7IaGf3445u5nY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "2239",
-    "ru": "Холлэм Фоу",
-    "en": "Hallam Foe",
-    "year": 2007,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 185,
-    "popularity": 3.77,
-    "genres": [
-      "драма",
-      "комедия",
-      "триллер"
-    ],
-    "overview": "Холлэм Фоу — странный 17-летний подросток, скучающий по своей матери, которая совершила самоубийство после передозировки снотворным. Все свободное время Холлэм тратит, следя за людьми, и обвиняет свою мачеху в убийстве матери. Во время путешествия в Эдинбург парень встречает женщину один-в-один похожую на его умершую мать…",
-    "poster": "https://image.tmdb.org/t/p/w342/2RzhxbVNu4BaPx0ETCiuNUpjJf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/n0b9FqOTm58LUaDjeluVim3WBJ1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 291692,
-    "ru": "Братство клинков",
-    "en": "绣春刀",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 185,
-    "popularity": 2.49,
-    "genres": [
-      "мелодрама",
-      "боевик",
-      "драма"
-    ],
-    "overview": "История о трех закадычных друзьях, служивших в Цзиньивей во времена династии Мин. Дворцовый евнух отправляет их на поиски Вей Чжунсяня, политика, который был вынужден уйти со своего высокого поста и бежать из Пекина. Братья Цзиньивей с успехом выполняют задачу, но вернувшись, узнают, что их задание лишь было началом тайного заговора.",
-    "poster": "https://image.tmdb.org/t/p/w342/6clhNv8twYzM27e4QPW9FKdkIND.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hnVbBBQMztst5gbmXsp7oyQTCaY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_60972",
-    "ru": "Тиран",
-    "en": "Tyrant",
-    "year": 2014,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.7,
-    "votes": 184,
-    "popularity": 7.09,
-    "genres": [
-      "драма",
-      "Война и Политика"
-    ],
-    "overview": "Сюжет рассказывает о сыне ближневосточного диктатора, который вернулся на родину, двадцать лет прожив в США.",
-    "poster": "https://image.tmdb.org/t/p/w342/14xKxbF3Si8m5u0m5yPj9ZGlEkj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dp4eaBQwxHgX5ALQABgd2Hrtm7O.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 483411,
-    "ru": "Дамы в чёрном",
-    "en": "Ladies in Black",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 184,
-    "popularity": 1.09,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Истории нескольких совершенно разных девушек, работающих в бутике Сиднея в 1959 году.",
-    "poster": "https://image.tmdb.org/t/p/w342/3DRWWh3qKlQdl1QmWTrkqucpc2H.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gIkqcEqz0rj6rK1knYAOoXpwA3y.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 315575,
-    "ru": "Три воспоминания моей юности",
-    "en": "Trois souvenirs de ma jeunesse",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 184,
-    "popularity": 0.54,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Поль Дедал возвращается из Туркменистана в родную Францию, где в аэропорту его встречает спецназ и агент службы национальной безопасности, предъявляющий паспорт его двойника, скончавшегося два года тому назад в Австралии, требуя объяснений, что побуждает его обратиться к прошлому, извлекая из памяти детали пройденного им пути, останавливаясь на нескольких поворотах в детстве и юности, составляющих главы его долгого рассказа, одна часть которого оказывается длиннее другой, рывком преодолевая болезненное детство с нездоровой матерью и разбитым потерей отцом, чтобы подробнее остановиться на своей конспиративной поездке в советский город Минск, где он вместе с поддельным паспортом с израильской визой отдал своё имя еврейскому парню — отказнику, переходя затем к знакомству с очаровательной девушкой Эстер, уже не сдерживая нахлынувших воспоминаний, отмеченных индивидуальностью отъявленного путешественника, жадно пьющего из чаши под названием жизнь.",
-    "poster": "https://image.tmdb.org/t/p/w342/winpywe0HSFki1sdNVlQZQaBABT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hJcWvo06Pze18parZGOjbfh7m9N.jpg",
     "source": "tmdb"
   }
 ]

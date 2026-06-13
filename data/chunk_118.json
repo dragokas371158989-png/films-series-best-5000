@@ -1,5 +1,281 @@
 [
   {
+    "id": 455043,
+    "ru": "Бог войны",
+    "en": "荡寇风云",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 102,
+    "popularity": 2.06,
+    "genres": [
+      "боевик",
+      "история",
+      "военный"
+    ],
+    "overview": "1557 год. Морские разбойники уже несколько десятилетий грабят восточные рубежи Поднебесной. После того, как пираты захватили большой портовый город Цэньган, столичный генштаб посылает на помощь старому полководцу Юй Дао его более молодого и амбициозного коллегу Ци Цзигуана, уверенного в том, что в войне с пиратами можно поставить точку. Для этого необходимы две вещи — железная дисциплина и новая армия.",
+    "poster": "https://image.tmdb.org/t/p/w342/2ovwFlWla1MNNqUL4QR4j4aequO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5ViWWRc2sy0Au1ET77Qpn2jEctx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 52939,
+    "ru": "Три богатыря и Шамаханская царица",
+    "en": "Три богатыря и Шамаханская царица",
+    "year": 2010,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 102,
+    "popularity": 0.61,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "комедия",
+      "приключения"
+    ],
+    "overview": "Некогда первая красавица восточных земель Шамаханская царица, мечтая вернуть себе утраченные чары, отправляется в Храм Вечной Молодости. Однако там выясняется, что для достижения цели необходимо оросить Дерево Молодости слезами тысячи красавиц. Тогда помощник царицы — Ворон подсказывает ей самый, как ему кажется, простой план, где добыть женские слёзы. Всего-то и нужно: используя магический взгляд царицы, с помощью которого она покоряет мужчин, влюбить в себя Князя Киевского, завладеть Русью и заставить плакать всех её женщин. Но тут в дело вмешиваются богатыри Алёша Попович, Илья Муромец, Добрыня Никитич, а также уже хорошо знакомые зрителю герои: конь Юлий, Змей Горыныч, бабуля и дед Тихон. Дело, по мнению богатырей, несложное, а проветриться не мешает. Но скоро, как известно, только сказка сказывается...",
+    "poster": "https://image.tmdb.org/t/p/w342/nc8d2RZ08H2Oo0E6pguo2ob9uns.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iGFBNpWOq2kI8wVRRvI6CfmxAKq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 374607,
+    "ru": "Love on the Sidelines",
+    "en": "Love on the Sidelines",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 102,
+    "popularity": 0.89,
+    "genres": [
+      "телевизионный фильм",
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/oPFXIYMzOX7LebQT53Bxc0R1eug.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8yK6v4v0M6jVUcXWvcrvIZGsapn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 793937,
+    "ru": "Школа магических зверей",
+    "en": "Die Schule der magischen Tiere",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 101,
+    "popularity": 1.82,
+    "genres": [
+      "семейный",
+      "приключения",
+      "фэнтези"
+    ],
+    "overview": "Мальчику Бенни и девочке Иде подарили по волшебному животному, которые не только умеют разговаривать, но и готовы стать для них их лучшими друзьями. Всех вместе их ждут впереди невероятные приключения, но сумеют ли они выполнить главное условие «Волшебного зоомагазина»: сохранить втайне от взрослых своих новых друзей?",
+    "poster": "https://image.tmdb.org/t/p/w342/vAUTnOslFmaHEwhYeiCANUT3rGP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/f5iYxNpImWQmaHPpamzutOjRwHe.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 980804,
+    "ru": "LEGO Звёздные Войны: Летние Каникулы",
+    "en": "LEGO Star Wars Summer Vacation",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 101,
+    "popularity": 1.41,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "фантастика",
+      "комедия"
+    ],
+    "overview": "Повествует о событиях \"Звёздных войн: Скайуокер\". Героям галактики очень нужен отпуск, но, как часто бывает с семейным отдыхом, всё идёт не по плану.",
+    "poster": "https://image.tmdb.org/t/p/w342/gvJhv78zjzcw9CIKWiBugPsFl2s.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jhmGJmPcuAhF2ccuKluYlLxnyeP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1143019,
+    "ru": "Непогрешимые",
+    "en": "Les Infaillibles",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 100,
+    "popularity": 0.94,
+    "genres": [
+      "комедия",
+      "боевик"
+    ],
+    "overview": "Череда дерзких нападений на инкассаторские бронемашины сотрясает Париж. Полиция знает, что это дело рук «семейного подряда» матёрого бандита Богарта и двух его сыновей, но и близко не может подобраться к преступникам. В надежде предотвратить очередное вооружённое ограбление власти поручают дело двум молодым легавым — парижанину Хьюго и девушке-полицейской Алие, специально для этого приглашённой из Марселя. Сходство у этих двух совершенно разных людей заключается в том, что оба в погоне за преступниками готовы нарушать законы и правила. А, возможно, только такими методами можно обезвредить неуловимую банду.",
+    "poster": "https://image.tmdb.org/t/p/w342/mmaz2IESTJkKf77tSOKZ3PxV7NN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yHEFwHkU2NqRxBrAoGBfuhuqIL1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 332356,
+    "ru": "Убийство Иисуса",
+    "en": "Killing Jesus",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 100,
+    "popularity": 0.89,
+    "genres": [
+      "телевизионный фильм",
+      "драма",
+      "фэнтези"
+    ],
+    "overview": "Это история жизни Иисуса из Назарета через призму различных конфликтов в Великой Римской империи.",
+    "poster": "https://image.tmdb.org/t/p/w342/1Wr7apWkhqHSdzmxnQuzlKTzdK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/q5CQZRXM5PBMNga9G1cErB6gOs8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 362478,
+    "ru": "Студент со связями",
+    "en": "The Preppie Connection",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 99,
+    "popularity": 0.65,
+    "genres": [
+      "драма",
+      "криминал"
+    ],
+    "overview": "Учащийся частной школы использует свои связи для создания сети распространения наркотиков.",
+    "poster": "https://image.tmdb.org/t/p/w342/5bcsmYxS89erdhFP1W3bEekG3SZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/haeL17pccpAC6xrK5v3p1KWhjkS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 572521,
+    "ru": "Молитва во имя Бога",
+    "en": "Gloria Mundi",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 99,
+    "popularity": 0.54,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Большая марсельская семья собирается вместе, чтобы отметить рождение ребенка. Несмотря на радостный повод, настроение у родственников не самое радужное - семья переживает не лучшие времена. У дяди маленькой Глории рождается одна рискованная бизнес идея, которая - если выгорит - может стать настоящим спасением для всех.",
+    "poster": "https://image.tmdb.org/t/p/w342/oa7xgXwykmLGCXmJUrmaJQ0dDBS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lPDLAJGTji0lkDqrpEXA7KAfCAM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 821420,
+    "ru": "Заложница: Найти пропавшую",
+    "en": "Catch the Fair One",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 98,
+    "popularity": 0.72,
+    "genres": [
+      "триллер",
+      "детектив"
+    ],
+    "overview": "Вот уже два года Кейли не теряет надежды отыскать свою без вести пропавшую младшую сестру Виту. Надежды на помощь властей мало — в этих краях девушки из рода коренных американцев слишком часто исчезают без следа. И хотя всем давно известно, что они самый ходовой товар в секс-торговле, власти предпочитают демонстративно не замечать проблемы. Отчаявшись, профессиональная боксерша Кейли завершает карьеру в спорте, устраивается в дешевую забегаловку неподалеку от места, где пропала Вита, и начинает собственное расследование. Продюсером фильма выступил режиссер Даррен Аронофски, а главную роль исполнила действительная чемпионка мира по боксу Кали Реис.",
+    "poster": "https://image.tmdb.org/t/p/w342/r7HXqZU1m8nbLm9tRByqglgokMh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/noCgyITVoRxC3huC9zSOQq23sVr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 993708,
+    "ru": "Третья лишняя",
+    "en": "The Threesome",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 97,
+    "popularity": 3.5,
+    "genres": [
+      "комедия",
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "После одного страстного вечера Коннор никак не может смириться с тем, что они с Оливией просто друзья. Чтобы вызвать ее ревность и пробудить ответные чувства, он начинает ухаживать за Дженни. Романтическая фантазия на троих неожиданно для всех заканчивается двумя беременностями. Теперь Коннору надо действовать в два раза активнее, не терять чувство юмора и разрешить ситуацию так, чтобы все остались довольны.",
+    "poster": "https://image.tmdb.org/t/p/w342/7vQUAw3CX60dhzgzC7BQZFN7Y31.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vXYRqIySwaa56quJGRKxXfSaTh0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 648990,
+    "ru": "Дом",
+    "en": "La casa",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 97,
+    "popularity": 0.4,
+    "genres": [
+      "ужасы",
+      "детектив"
+    ],
+    "overview": "Приехав на срочный вызов, полицейский попадает в ловушку злых духов проклятого дома.",
+    "poster": "https://image.tmdb.org/t/p/w342/fvTGWaQejnHQBZbEOrdbb38NBTC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kLsrE6q4ld144ECBkydZ4dV8t9T.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 317114,
+    "ru": "Bridal Wave",
+    "en": "Bridal Wave",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 97,
+    "popularity": 0.81,
+    "genres": [
+      "комедия",
+      "мелодрама",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yZMUAsU9MxTDls737iU23XeywND.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qASObnfUQXAonFUpYVcAcuwt4U5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1357305,
+    "ru": "Детектив из Чайнатауна, 1900 год",
+    "en": "唐探1900",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 96,
+    "popularity": 2.61,
+    "genres": [
+      "комедия",
+      "детектив",
+      "боевик"
+    ],
+    "overview": "Сан-Франциско, начало 1900-х годов. В Чайнатауне убита белая женщина, а главным подозреваемым становится китаец. Преступление вызывает широкий общественный резонанс, и горожане требуют закрыть китайский квартал. Расследованием дела занимаются врач традиционной китайской медицины Цинь Фу и китайско-индейский охотник по прозвищу А-Гуй.",
+    "poster": "https://image.tmdb.org/t/p/w342/mlsSLMqBl4jikr9sr7DSG0jTuqt.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4xN3phAX024b251CPhy8zvsXbBc.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 536517,
     "ru": "Кровь машин",
     "en": "Blood Machines",
@@ -9438,285 +9714,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/iru9uCiU6bKA8mC8cciUw7iKQuN.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/d15G2cOdRL5CzVE45flxKdsHThC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1465038,
-    "ru": "Последняя перестрелка",
-    "en": "The Last GunFight",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 24,
-    "popularity": 1.37,
-    "genres": [
-      "боевик"
-    ],
-    "overview": "В безжалостном подпольном турнире лучшие ассасины мира сражаются не на жизнь, а на смерть. Но среди них скрывается банда изгоев со своими смертоносными планами: проникнуть в ряды участников соревнований, выжить в кровавой бойне и уничтожить главного вдохновителя...",
-    "poster": "https://image.tmdb.org/t/p/w342/7ElOux95K8mfK1kuxK6K4A8MulM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mcmFEGb4A4XtJivjHrYnDMVvfu8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1426142,
-    "ru": "Высший класс",
-    "en": "Sosyal Climbers",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 24,
-    "popularity": 1.08,
-    "genres": [
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "Став жертвами мошенников и завязнув в огромных долгах, пара мечтателей, жаждущих попасть в высший свет, создают фальшивые личности, чтобы обманывать богатых и выманивать у них деньги.",
-    "poster": "https://image.tmdb.org/t/p/w342/sUUUxJhuU16h1hD8qrzDphXRyTA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jHbSVuahqx0FVbAhgtf6SUnJ1Vf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 820099,
-    "ru": "Антикварное мошенничество",
-    "en": "古董局中局",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 24,
-    "popularity": 0.83,
-    "genres": [
-      "приключения",
-      "детектив",
-      "боевик",
-      "комедия"
-    ],
-    "overview": "Во время японской интервенции, один из представителей союза антикваров передает японцам драгоценную нефритовую голову будды, из храма построенного императрицей У Цзетянь, что на долгие годы превращает его род в изгоев антикварного сообщества. Два поколения спустя, его внук должен, используя подсказки оставленные убитым отцом, докопаться до истинных причин действий своего деда и отстоять честь своего рода, параллельно отбиваясь от организации создателей подделок.",
-    "poster": "https://image.tmdb.org/t/p/w342/Aq8h9bw9K7Npe0LMYhMCG1pNCnv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bYARwFLSAXwuLnRATeXfvLVFP9p.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 844158,
-    "ru": "Стражи терракоты",
-    "en": "俑之城",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 24,
-    "popularity": 0.59,
-    "genres": [
-      "мультфильм",
-      "фэнтези",
-      "приключения"
-    ],
-    "overview": "Молодая девушка по имени Джейд и терракотовый воин Магнус объединяются в борьбе против ониксов — существ, атакующих подземный город династии Кин. Герои влюбляются друг в друга, а вскоре им удается узнать секрет вторжения монстров. Однако уже слишком поздно — жестокая война между терракотовыми воинами и ониксами началась.",
-    "poster": "https://image.tmdb.org/t/p/w342/3UXOcjPsD7asNHLvzRLXE1K3O0S.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wLrJjPL5uTP0syxblGswHCMWTKW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 636449,
-    "ru": "Уджда Чаман",
-    "en": "Ujda Chaman",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 24,
-    "popularity": 0.72,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Чаман – закоренелый холостяк, который не так давно принял нелёгкое для себя решение и всё же решил начать искать себе невесту. Главный герой комплексует из-за своего внешнего вида, и это мешает ему в достижении своей главной цели. Плюс ко всему прочему, Чаман недавно ходил к астрологу, и тот сказал, что если в ближайший год парень не найдёт себе невесту, то ему уже никогда не представится возможность жениться и завести семью. Теперь у Чамана появилась дополнительная мотивация ускорить свои поиски. Сможет ли молодой человек справиться со всеми своими неприятностями и удастся ли ему в конце концов отыскать девушку, с которой он мог бы задуматься о создании семьи?",
-    "poster": "https://image.tmdb.org/t/p/w342/hybSFEHZcehPN8oRdb5YjaxRk2u.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vWcM7acLBmsKsHIVLEBB19bprA1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 594676,
-    "ru": "ความหวังแช่แข็ง: ขอเกิดอีกครั้ง",
-    "en": "ความหวังแช่แข็ง: ขอเกิดอีกครั้ง",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 24,
-    "popularity": 0.62,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1sCawwtBif3Ggt6sr4DXG7SYf8d.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tf1HhoUfQaRJ2Sdig5OB2NaQPTH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 457920,
-    "ru": "Et au pire, on se mariera",
-    "en": "Et au pire, on se mariera",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 24,
-    "popularity": 0.51,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oxurwUpSvL0kIVubyA0nQUMO56T.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uFdLdOW2L3ovVjKNgBD6GxlI8sB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 45904,
-    "ru": "Muhammad: The Last Prophet",
-    "en": "Muhammad: The Last Prophet",
-    "year": 2002,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 24,
-    "popularity": 0.34,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "история"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dujTx4ZNu1xgIVMV22nge0jfwRs.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/p2S8xran3Fw3rEyiYtRNukCLgmF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "468690",
-    "ru": "Мобильный воин Гандам: Грозовой сектор — Бандитский цветок",
-    "en": "機動戦士ガンダム サンダーボルト Bandit Flower",
-    "year": 2017,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.3,
-    "votes": 23,
-    "popularity": 1.0,
-    "genres": [
-      "боевик",
-      "мультфильм",
-      "фантастика",
-      "военный",
-      "Аниме"
-    ],
-    "overview": "Режиссерская киноверсия мини-сериала \"Мобильный воин Гандам: Грозовой сектор 2\", дополненная новыми сценами.",
-    "poster": "https://image.tmdb.org/t/p/w342/hCr9uWlHdptgSxNa1VOgtdYiXeq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vCSUw7bsk85V7euRWx0gzy3aY9U.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "80405",
-    "ru": "ルパン三世 血の刻印 〜永遠のMermaid〜",
-    "en": "ルパン三世 血の刻印 〜永遠のMermaid〜",
-    "year": 2011,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.3,
-    "votes": 23,
-    "popularity": 1.41,
-    "genres": [
-      "боевик",
-      "мультфильм",
-      "комедия",
-      "телевизионный фильм",
-      "криминал",
-      "драма",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xZsYnRWIMwF9i0Anhh98FKhQjlj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bV57mCIPwX72SECsgoy2VjL8KOU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "128884",
-    "ru": "クレヨンしんちゃん 嵐を呼ぶ 歌うケツだけ爆弾！",
-    "en": "クレヨンしんちゃん 嵐を呼ぶ 歌うケツだけ爆弾！",
-    "year": 2007,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.3,
-    "votes": 23,
-    "popularity": 1.37,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uHqdEReaPvmyRWbOZ0uXsrNEiHu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d0nNFIypCjGrM0lGopxDZkF8e28.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1032454,
-    "ru": "Christmas Unfiltered",
-    "en": "Christmas Unfiltered",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 23,
-    "popularity": 0.74,
-    "genres": [
-      "комедия",
-      "драма",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mquQYEWVLqz8fb8umolFgyG9CVK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qwREqLTeSUh2LsvSi1worZnHQK3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1222140,
-    "ru": "ഗോളം",
-    "en": "ഗോളം",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 23,
-    "popularity": 0.64,
-    "genres": [
-      "криминал",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/Aa30QzjokChiDOtuV27cfOSSVOA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ra2T4rF5lbO58zKFF36f1zia93d.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 755393,
-    "ru": "சாணிக் காயிதம்",
-    "en": "சாணிக் காயிதம்",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 23,
-    "popularity": 0.46,
-    "genres": [
-      "криминал",
-      "боевик",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rm1f70UT6SMYcM31hrM5Dl2tpWy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qJUaZXqSw3eXBqW6GGql7YYrZgo.jpg",
     "source": "tmdb"
   }
 ]

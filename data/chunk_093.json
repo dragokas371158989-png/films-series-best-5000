@@ -1,5 +1,297 @@
 [
   {
+    "id": "10779",
+    "ru": "Страшилы",
+    "en": "The Frighteners",
+    "year": 1996,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1743,
+    "popularity": 4.77,
+    "genres": [
+      "ужасы",
+      "комедия"
+    ],
+    "overview": "Экстрасенс Фрэнк Бэннистер, который зарабатывает на жизнь тем, что за скромное вознаграждение успешно избавляет дома от полтергейста, который сам предварительно наслал, сталкивается со страшным противником — вернувшимся с того света, а вернее, задержавшемся на этом после казни, маньяком-убийцей. Вместе с женщиной-врачом, муж которой был убит этим олицетворением зла, Фрэнк низвергает демона в ад.",
+    "poster": "https://image.tmdb.org/t/p/w342/4ZKDHuvEsDhe0LnnutFUNgumBdy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/krR08gys45BTnY3qXIfBJVDKrvK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "171372",
+    "ru": "Фрэнк",
+    "en": "Frank",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1720,
+    "popularity": 1.38,
+    "genres": [
+      "комедия",
+      "драма",
+      "детектив"
+    ],
+    "overview": "В центре истории окажется молодой парень, жаждущий стать музыкантом и попадающий в состав эксцентричной поп-группы, возглавляет которую таинственный и загадочный Фрэнк.",
+    "poster": "https://image.tmdb.org/t/p/w342/mGzqs4CHW8LomreoPATnyrTXk7j.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jBkKw0GSAOTBsnar5RstD7MzkmL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "9667",
+    "ru": "Пиджак",
+    "en": "The Jacket",
+    "year": 2005,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1692,
+    "popularity": 2.74,
+    "genres": [
+      "драма",
+      "детектив",
+      "фантастика",
+      "триллер",
+      "фэнтези"
+    ],
+    "overview": "В 1991 году в Ираке американский солдат Джек Старкс встретился с местным подростком и получил от пацана пулю в голову. Врачи спасли Джеку жизнь, но от страшных последствий почти смертельного ранения уберечь не смогли: после дембеля начались у солдата такие глюки, что загремел он в психушку к доктору Томасу Беккеру. Этот доктор был известен тем, что назначал своим пациентам интенсивный курс лечения с помощью различных экспериментальных препаратов. Препарат произвел побочный эффект: Старкс увидел будущее…",
+    "poster": "https://image.tmdb.org/t/p/w342/z2wFU9osaBRspQn9Kk6GqyzkFv1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oMson3ThVDsgHUMbdFFyUdpLU2M.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "556694",
+    "ru": "Три тысячи лет желаний",
+    "en": "Three Thousand Years of Longing",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1660,
+    "popularity": 4.32,
+    "genres": [
+      "драма",
+      "фэнтези",
+      "мелодрама"
+    ],
+    "overview": "Британская лингвистка Алетея прилетает из Лондона в Стамбул, чтобы прочитать курс лекций по нарративу. Уже в аэропорту женщина начинает видеть загадочных существ, а когда в одной из многочисленных сувенирных лавочек покупает стеклянную бутылочку и пытается её отмыть, перед ней возникает самый настоящий джинн. Алетея не торопится загадывать три желания, ей интереснее послушать его историю. Джинн начинает свой рассказ.",
+    "poster": "https://image.tmdb.org/t/p/w342/tb3967BJu5QbZgiIh715pAigywF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/90IcDDC47Rck4D2fyZbpZ1rbFZW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_8250",
+    "ru": "Armored Trooper Votoms: Alone Again",
+    "en": "Soukou Kihei Votoms: Koei Futatabi",
+    "year": 2011,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.9,
+    "votes": 1647,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Драма",
+      "Drama",
+      "Фантастика",
+      "Sci-Fi",
+      "Меха",
+      "Mecha",
+      "Военное",
+      "Military"
+    ],
+    "overview": "Chirico visits an oasis town and meets Gotho and his friends for the first time in 32 years.",
+    "poster": "https://cdn.myanimelist.net/images/anime/4/82162l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "mal_20969",
+    "ru": "Buddha 2: The Endless Journey",
+    "en": "Tezuka Osamu no Buddha: Owarinaki Tabi",
+    "year": 2014,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.9,
+    "votes": 1624,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Драма",
+      "Drama",
+      "Сверхъестественное",
+      "Supernatural",
+      "Историческое",
+      "Historical"
+    ],
+    "overview": "2500 years ago, in India, Siddhartha was born as a prince of the Shakya clan, but he gives up his position as a prince to see the world. While he travels he meets a strange boy named Assaji, who can predict the future and a monk with only one eye. Overwhelmed by the sufferings he witnesses around him, Siddhartha strives to restore peace. Meanwhile, Prince Ruri of Kosara begins his attack on the Shakya clan. \n\n(Source: IMDB)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1264/112847l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "734265",
+    "ru": "Неуловимый аромат любви",
+    "en": "Love Hard",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1611,
+    "popularity": 1.8,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Журналистке из Лос-Анджелеса Натали постоянно не везет в любви. Она пытается устроить личную жизнь с помощью приложения для знакомств и влюбляется в Тэга. Ради него Натали едет через всю страну, чтобы сделать парню сюрприз на Рождество. Но, приехав в город, девушка понимает, что ее возлюбленный не тот, за кого себя выдавал.",
+    "poster": "https://image.tmdb.org/t/p/w342/vxQPai6mUY8QEtrODkfdf2sAxmB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pa0Mq5rGm2QnzdpFmugTu4Mghf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 152737,
+    "ru": "Август",
+    "en": "August: Osage County",
+    "year": 2013,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1592,
+    "popularity": 2.32,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "Штат Оклахома. Август месяц. Беверли Уэстон — поэт, погрязший в пьянство, в то время как его жена Вайолет, страдающая от рака ротовой полости, пристрастилась к наркотикам. Беверли решает нанять для Вайолет сиделку и повара…",
+    "poster": "https://image.tmdb.org/t/p/w342/rgNYKlwQKFPD1n6tTJbVu0qPLZ5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/svxDWCRGn4AWbOePNE5Fmdsjf6q.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "484482",
+    "ru": "Непотопляемые",
+    "en": "Le Grand Bain",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1590,
+    "popularity": 1.33,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "Настоящие мужчины никогда не сдаются, и если уж решили чем-то всерьез увлечься, то их ничто не остановит. Вот и во Франции великолепная семерка собирается вместе, чтобы сбежать от тягот обыденной взрослой жизни совершенно неожиданным образом. Ведь когда проблемы тянут ко дну, важно оставаться непотопляемыми!",
+    "poster": "https://image.tmdb.org/t/p/w342/krFeie4LnPIS2v2jvLHT4qli4KG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hljeAZsHfXScqbHsAmxUGqcCx8L.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "135397",
+    "ru": "Мир юрского периода",
+    "en": "Jurassic World",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 21589,
+    "popularity": 13.53,
+    "genres": [
+      "приключения",
+      "фантастика",
+      "триллер"
+    ],
+    "overview": "Тысячи людей спешат увидеть Мир Юрского периода, но безопасное на первый взгляд развлечение может обернуться угрозой для их жизней.",
+    "poster": "https://image.tmdb.org/t/p/w342/nSUyxiLlf9qHDiQH5LmCQQK62WX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s5QfDFqRO6sjgPtKkjxD0WqXQef.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "291805",
+    "ru": "Иллюзия обмана 2",
+    "en": "Now You See Me 2",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 11588,
+    "popularity": 10.05,
+    "genres": [
+      "криминал",
+      "триллер"
+    ],
+    "overview": "«4-ре всадника», команда лучших иллюзионистов мира, снова в сборе! Их «магия» стала еще совершеннее, а враги - опаснее. На сей раз им предстоит спасти свою репутацию и вывести на чистую воду жёстокого техномагната...",
+    "poster": "https://image.tmdb.org/t/p/w342/jzm3Pmp1uaFCDo0NrA0Tn98Ddda.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oFQilRMEq6yQbtMPxIYWpXeQ5ZN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1007734",
+    "ru": "Никто 2",
+    "en": "Nobody 2",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1582,
+    "popularity": 12.6,
+    "genres": [
+      "боевик",
+      "триллер",
+      "комедия"
+    ],
+    "overview": "Хатч Мэнселл, семьянин из пригорода и бывший профессиональный убийца, больше не может скрываться от своего опасного прошлого после предотвращения нападения дома. Постепенно раскрываются секреты не только Хатча, но и его жены Бекки.",
+    "poster": "https://image.tmdb.org/t/p/w342/744AMzuqzCxVWhjQEZVHxUIhzd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/82C04rTiXYZ7c8XZv91Nu53w82Y.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_89247",
+    "ru": "Бэтвумен",
+    "en": "Batwoman",
+    "year": 2019,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.9,
+    "votes": 1579,
+    "popularity": 12.93,
+    "genres": [
+      "НФ и Фэнтези",
+      "Боевик и Приключения"
+    ],
+    "overview": "Кэти Кейн — дочь владельца частной охранной компании, которую с позором выгнали из армии. Она возвращается в родной Готэм, лишенный защиты Бэтмена — Тёмный рыцарь пропал без следа три года назад. Пока в городе орудует жестокая банда, Кэти при поддержке гениального Люка Фокса вынуждена взять на себя защиту невинных и стать Бэтвумен.",
+    "poster": "https://image.tmdb.org/t/p/w342/hFD0bUuGd2JjdclnRqoFkMQ2p6i.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8vNQ3i2Xa3mrCKn6eq2ce5hhegT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_43694",
+    "ru": "Rilakkuma's Theme Park Adventure",
+    "en": "Rilakkuma to Yuuenchi",
+    "year": 2022,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.9,
+    "votes": 1578,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Повседневность",
+      "Slice of Life",
+      "Антропоморфные",
+      "Anthropomorphic",
+      "Исцеляющее",
+      "Iyashikei",
+      "Для детей",
+      "Kids"
+    ],
+    "overview": "Grab your tickets and get in line for a new series of stop-motion adventures with Rilakkuma and Kaoru! Join Rilakkuma, Korilakkuma, Kiiroitori, and Kaoru as they explore an amusement park in its closing hours when Rilakkuma's Theme Park Adventure arrives next year.\n\n(Source: Netflix)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1193/127386l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
     "id": "7305",
     "ru": "Выжить",
     "en": "Alive",
@@ -9908,273 +10200,6 @@
     "overview": "После эксперимента Эбби, Тильда и Хуан обнаруживают у себя чудовищные побочные эффекты. Они отправляются на поиски повинного в этом ученого — и способа излечиться.",
     "poster": "https://image.tmdb.org/t/p/w342/mFFcSkG3hnYgsEVgoqcnE9LZkTO.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/sVzI93UPwj7KXd6Alak0gEL1pBd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 601188,
-    "ru": "Между двумя мирами",
-    "en": "Ouistreham",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 164,
-    "popularity": 1.43,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Известная писательница, уезжает жить на север Франции, чтобы провести исследование для своей новой книги. Не раскрывая своей личности, ее нанимают уборщицей. В этой новой роли она на собственном опыте испытывает финансовую нестабильность.",
-    "poster": "https://image.tmdb.org/t/p/w342/dKQP0K1mNOEU4nLDrN4lSX7Uh0I.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5RxWPQAQqMvdJi9jUWiEb3nNz0e.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_30957",
-    "ru": "Удивительная гонка",
-    "en": "The Amazing Race",
-    "year": 2001,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 164,
-    "popularity": 20.79,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "Реалити-шоу, в котором команды из двух человек, связанные между собой разными отношениями (сестры, братья, друзья, супруги и тд) путешествуют по всему миру, параллельно выполняя забавные, интересные и порой невероятно сложные задания. Каждая команда стремится первой прибыть на «пит-стоп» (конечная точка каждого этапа), чтобы выиграть призы и избежать последнего места, которое влечет за собой исключение из гонки или в некоторых случаях серьезные проблемы в следующем этапе.",
-    "poster": "https://image.tmdb.org/t/p/w342/x1jq0atcQg6UkaZpco0kFL6QHuM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mSkisNewxu55Ivar5EubhcIuoqn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1430077",
-    "ru": "Хокум",
-    "en": "Hokum",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 163,
-    "popularity": 205.78,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "Писатель романов ужасов Ом Бауман приезжает в ирландскую гостиницу, чтобы развеять прах родителей, не подозревая, что в этом месте, по слухам, обитает ведьма. С приближением ночи он сталкивается с необъяснимыми явлениями и тайнами прошлого, которые постепенно раскрывают зловещую природу этого уединённого уголка.",
-    "poster": "https://image.tmdb.org/t/p/w342/zt5cQrDQG12EeaoebhdQV94ZgFi.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/woZX9wZaiX70LbW7bOeNccNTIhp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 58429,
-    "ru": "Болото",
-    "en": "La Ciénaga",
-    "year": 2001,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 163,
-    "popularity": 2.59,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Дисфункциональная семья. Спивающаяся красавица-мать, с порезами на груди, после того как упала пьяная возле бассейна, разбив фужеры. Отец, тоже со следами былой красоты, который, как всем известно, изменял матери, но теперь задвинут в заднюю комнату, жалок, стар, красит волосы. Старший сын, красавец, живущий в Буэнос-Айросе на содержании бывшей подруги его отца, ровесницы его матери.\r Дочь-подросток, ненавидящая мать и нашедшая ей замену в лице служанки-индианки. Младший сын, слепой на один глаз, в ожидании операции. Все сгрудились в тесной старинной асьенде, целыми днями сидят-лежат друг рядом с другом на кроватях, бытовой не шокирующий промискуитет. Все дисфункционирует...",
-    "poster": "https://image.tmdb.org/t/p/w342/emQIM4vtDbt25tVzdS16w2Gzjbk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7IpUXbKHWA1Xt4jCwnP3A2YFPC3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_557",
-    "ru": "Camp Lazlo",
-    "en": "Camp Lazlo",
-    "year": 2005,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 163,
-    "popularity": 14.04,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Детский"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9fZXdQbYeDMBTBtMNnsF2K2YWBh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gGYuBLoSozwVsEyrFVPvdJaTtef.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 437031,
-    "ru": "Враждебная зона",
-    "en": "Zona hostil",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 162,
-    "popularity": 1.34,
-    "genres": [
-      "военный"
-    ],
-    "overview": "Вертолёт медицинской эвакуации, экипаж которого помогает объединённым войскам США и ООН под руководством испанского подразделения в Афганистане, едва не разбивается при посадке. У испанской армии лишь одна ночь на эвакуацию экипажа и раненых, но рутина превращается в сущий ад - приходит приказ забрать и сам вертолёт. Ситуация осложняется ещё и ночным нападением большой группы талибанов.",
-    "poster": "https://image.tmdb.org/t/p/w342/v5wXuE8GeupmdikwoJvCjCYMETh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/AfpToyq0MaRMgR8D8blMcajXgDn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 493675,
-    "ru": "Профиль",
-    "en": "Profile",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 162,
-    "popularity": 1.19,
-    "genres": [
-      "триллер",
-      "драма",
-      "детектив"
-    ],
-    "overview": "Британская журналистка, работающая под прикрытием, внедряется в систему пропаганды «Исламского государства», которое привлекает в свои ряды все больше молодых европейских женщин. Ежедневные контакты с вербовщиками террористов затягивают ее.",
-    "poster": "https://image.tmdb.org/t/p/w342/7B5EY6xmGUZjBF3znhEpa7cTzco.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/utrwOVJFglRIJFsOhQUZ9fDyaXH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1329336,
-    "ru": "Плохие Парни: Жутковатое Ограбление",
-    "en": "The Bad Guys: Haunted Heist",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 161,
-    "popularity": 2.65,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Хитрые Плохие парни планируют провернуть на Хэллоуин крупное ограбление и умыкнуть бесценный амулет из зловещего особняка. Что может пойти не так?",
-    "poster": "https://image.tmdb.org/t/p/w342/s4NCEmllb2XVDehGaM860QEvXfG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rI9Mh0Q0XAtqTiSgKI0M2fflO1X.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1001274,
-    "ru": "Ночной вор",
-    "en": "La Nuit se traîne",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 161,
-    "popularity": 0.91,
-    "genres": [
-      "боевик",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "Студент Мади подрабатывает слесарем. Однажды вечером он едет по вызову и помогает девушке попасть в ее квартиру. Обычный заказ принимает неожиданный оборот, когда Мади оказывается на пороге ограбленной квартиры с бандой гангстеров на хвосте. Считая его вором, они требуют найти сообщницу и вернуть украденные деньги. У него есть двенадцать часов, чтобы найти настоящего грабителя и доказать свою невиновность.",
-    "poster": "https://image.tmdb.org/t/p/w342/zG0ph07ylnXSegafd0mBsk5vonb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/Eeuq1qmv8UEsd4sX6BSrGNYR19.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_74802",
-    "ru": "Карппи (Встречный ветер)",
-    "en": "Karppi",
-    "year": 2018,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 161,
-    "popularity": 8.64,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "Всего через несколько месяцев после трагической потери детектив София Карппи расследует убийство женщины, связанной со строительной компанией Хельсинки.",
-    "poster": "https://image.tmdb.org/t/p/w342/lFvTHBf09t4hyT53SNhMWwKPimQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/44l4MxfKWW6F5Ksqxq37tB2CTwK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_71383",
-    "ru": "Переправа",
-    "en": "The Crossing",
-    "year": 2018,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 160,
-    "popularity": 4.16,
-    "genres": [
-      "НФ и Фэнтези",
-      "Боевик и Приключения"
-    ],
-    "overview": "Волны выбрасывают на промозглый орегонский пляж тела непонятно откуда взявшихся беженцев. Все они прибыли из будущего, в котором сейчас вовсю разворачивается очередная мировая война. В том, чем грозит нашествие, пытается разобраться местный шериф.",
-    "poster": "https://image.tmdb.org/t/p/w342/cvoSPs6We2u88mXz2vSqjbd4kQ0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8Mga1PD5fVnB21JyarIE2EBu58S.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_96853",
-    "ru": "Забытая армия",
-    "en": "The Forgotten Army - Azaadi Ke Liye",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 159,
-    "popularity": 1.37,
-    "genres": [
-      "драма",
-      "Боевик и Приключения"
-    ],
-    "overview": "Проект основан на реальных событиях, происходивших в Индии много лет тому назад. Главные действующие лица этого исторического сериала - люди, которые борются за независимость страны,которую любят. В тысяча девятьсот девяносто девятом году Кабир снял потрясающий документальный проект, который лёг в основу этой истории. Сюжет переносит нас во времена борьбы за независимость. Индия находится под гнётом Британии. Субхаса Чандра Бос собирает под свои знамёна выдающихся воинов и настоящих патриотов. К армии индийцев присоединяются даже те, кто не является уроженцем этой страны.",
-    "poster": "https://image.tmdb.org/t/p/w342/8rAM0HCEsZIDfBobmsZtURZfqfN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/A5Se8NXM14WtpByB4zXnf0Ez1v0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "39207",
-    "ru": "Детектив Конан 12: Партитура, вызывающая трепет",
-    "en": "名探偵コナン 戦慄の楽譜（フルスコア）",
-    "year": 2008,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 159,
-    "popularity": 4.57,
-    "genres": [
-      "мультфильм",
-      "боевик",
-      "криминал",
-      "детектив"
-    ],
-    "overview": "Конан и компания были приглашены на первый концерт Мюзик-холла, построенного на деньги пианиста. Главная достопримечательность этого концерта - всемирно известная скрипка \"Страдивариус\".",
-    "poster": "https://image.tmdb.org/t/p/w342/kXNpeQF0q6TVSTIlTRaPPtQtkVx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tED9WowWMskdvK6hfTIUUt0za32.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 338065,
-    "ru": "Пусть сердце бьётся",
-    "en": "दिल धड़कने दो",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 159,
-    "popularity": 1.94,
-    "genres": [
-      "драма",
-      "семейный",
-      "мелодрама"
-    ],
-    "overview": "Главный герой этого фильма, Камаль Мехра, сколотил большое состояние, благодаря своему успешному бизнесу. Теперь же дела его идут не очень хорошо, поэтому Камалю приходится искать пути выхода из сложившейся трудной ситуации. Плюс ко всему прочему, его отношения с женой заметно ухудшились на фоне неприятностей. Тогда Камаль принимает решение отправиться вместе с женой в круиз по морю. Супруги пытаются взять с собой в путешествие своих взрослых детей Кабиру и Айшу, однако в личной жизни каждого из них также наступили очень непростые времена.",
-    "poster": "https://image.tmdb.org/t/p/w342/AqFX6282JM2ollS4XTFp6t6Dwa9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lKHV7I0vBOctPFvfztAO5qf1I4S.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,290 @@
 [
   {
+    "id": 505707,
+    "ru": "В ожидании варваров",
+    "en": "Waiting for the Barbarians",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 392,
+    "popularity": 1.17,
+    "genres": [
+      "драма",
+      "история"
+    ],
+    "overview": "Жизнь магистрата маленького колониального городка на границе Империи прерывается объявлением чрезвычайного положения и приездом полковника Третьего отделения. Он должен проверить слухи о том, что коренные народы, которых колонисты называют варварами, готовят нападение на город. Полковник Джолл организует экспедицию на окраины, а магистрат начинает сомневаться в Империи как таковой. Этому способствует и любовная связь с девушкой-варваром.",
+    "poster": "https://image.tmdb.org/t/p/w342/5bkXq0FC5LggenGeI89uyKixD1M.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/l0vUzd701TzvN3jywXex9G01zpd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_8233",
+    "ru": "源氏",
+    "en": "Genji",
+    "year": 1992,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.9,
+    "votes": 391,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Фэнтези",
+      "Fantasy",
+      "Романтика",
+      "Romance",
+      "Историческое",
+      "Historical",
+      "Путешествия во времени",
+      "Time Travel",
+      "Сёдзё",
+      "Shoujo"
+    ],
+    "overview": "Katsumi and Sakura find themselves transported in the midst of a civil war between the Heike and Genji clans.",
+    "poster": "https://cdn.myanimelist.net/images/anime/11/21295l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 780154,
+    "ru": "Все мои друзья мертвы",
+    "en": "Wszyscy moi przyjaciele nie żyją",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 391,
+    "popularity": 0.77,
+    "genres": [
+      "комедия",
+      "драма",
+      "триллер"
+    ],
+    "overview": "Комедия в стиле \"Американского пирога\" повествует об улётной вечеринке польских студентов, которая кончается загадочной гибелью практически всех участников. Детективам, прибывшим на место преступления на следующий день, предстоит изучить кровавые следы прошлой ночи и по крупицам распутать цепь событий, приведших к кровавой трагедии.",
+    "poster": "https://image.tmdb.org/t/p/w342/fYsgNphEYGdAAuDM2TUMCpC0Q1v.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cGJUnIquDE7SZpCS7YDG29roLwL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 382517,
+    "ru": "Сезон охоты 4: Страшно глупо",
+    "en": "Open Season: Scared Silly",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 383,
+    "popularity": 2.5,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "семейный",
+      "приключения",
+      "телевизионный фильм"
+    ],
+    "overview": "Неугомонный олень Эллиот, во время посиделок у костра, делится со своими друзьями подробностями ужасающей истории о злобном монстре по имени Глупый Плачущий Оборотень. Согласно легенде, этот монстр проживает в лесном заповеднике. Своими россказнями нерадивый олень приводит в неописуемый ужас неприспособленного к жизни медведя Буга. Следующим летом медведь должен поехать в туристическую поездку на природу. К несчастью, отправиться он должен именно в то место, где проживает Оборотень. Медведь очень напуган и хочет отказаться от предстоящей поездки.  Чтобы помочь своему другу, олень и другие лесные зверюшки объединяют свои усилия. Их основной задачей стало помочь медведю избавится от чрезмерной трусости. Параллельно друзья хотят разобраться в загадке, которая окутана мраком, таящей в себе существование Глупого Плачущего Оборотня. @Википедия",
+    "poster": "https://image.tmdb.org/t/p/w342/U5gUIsZyARb3ePuOOx2F4lfn0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lvxznRSXxzmGGh4kicfmYvZhedK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1196470",
+    "ru": "Последний день Земли",
+    "en": "Survivre",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 381,
+    "popularity": 12.06,
+    "genres": [
+      "фантастика",
+      "триллер",
+      "приключения",
+      "боевик"
+    ],
+    "overview": "Обычная семья во время прогулки под парусами становится свидетелями небывалого катаклизма: океан отступает, полностью осушая землю на многие тысячи километров. Выжившим приходится сражаться за выживание с чудовищами, обитающими на морском дне, а также друг с другом. Но вскоре океан вернется, и этот прилив станет последним в истории человечества.",
+    "poster": "https://image.tmdb.org/t/p/w342/fH1O6CAhZYtSJtQhM0ezUDwYAJJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2xnLwNvea2TSH0M0oc9iEq2KEVp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 476764,
+    "ru": "Как не стать президентом",
+    "en": "The Front Runner",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 379,
+    "popularity": 2.11,
+    "genres": [
+      "драма",
+      "история"
+    ],
+    "overview": "История американского сенатора Гэри Харта, который собирается баллотироваться в президенты, однако оказывается в центре скандала, связанного с его внебрачными связями.",
+    "poster": "https://image.tmdb.org/t/p/w342/fPEi2LlfnemxPHYekDmgC54iRpU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kQVo5ECXrTcoMtj8hWbdiqpfPms.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 650783,
+    "ru": "Афера по-голливудски",
+    "en": "The Comeback Trail",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 370,
+    "popularity": 1.51,
+    "genres": [
+      "комедия",
+      "криминал"
+    ],
+    "overview": "Голливуд, 1974 год. Последний фильм продюсера Макса Барбера «Монахини-убийцы» не собрал ни цента и получил разгромную критику, а сам он теперь должен мафии. Есть желающие приобрести его лучший сценарий за кругленькую сумму, но Макс не готов расстаться со своим любимым детищем, поэтому решает получить страховку в случае смерти звезды фильма. Выбран сценарий с большим количеством трюков, и даже найдена нежелающая жить звезда вестернов на закате карьеры, осталось только организовать «несчастный случай».",
+    "poster": "https://image.tmdb.org/t/p/w342/gpkk9Ap0rbvyQvIWwieLFialQss.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wRrhiUWQSrmCzuVRTUfrei6p3VY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 462148,
+    "ru": "Love Addict",
+    "en": "Love Addict",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 367,
+    "popularity": 1.18,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7Fqa4rMCqY39YgKNxrGdOvkobUY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/76KK7mJlgytYaqscUTTpXzHuxo8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 157823,
+    "ru": "Ночные движения",
+    "en": "Night Moves",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 366,
+    "popularity": 0.88,
+    "genres": [
+      "триллер",
+      "драма"
+    ],
+    "overview": "Фильм расскажет о троих защитниках окружающей среды, которые медленно, но верно, будучи подстегиваемыми жестокостью к ним полиции, приходят к намерению взорвать дамбу.",
+    "poster": "https://image.tmdb.org/t/p/w342/qQj7JKpUfrP7rVvr7kVrKuevGy7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/va6SObQdsJV4BmPKts4pTsKIk37.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1005776,
+    "ru": "З/Л/О 99",
+    "en": "V/H/S/99",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 360,
+    "popularity": 1.04,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "На видеокассете, куда подросток записывал свои игры в солдатики, обнаруживаются свидетельства других ужасающих событий. Музыкальная группа залезает в подвал, где несколько лет назад погибли другие музыканты; студентка, очень желающая вписаться в сообщество популярных девчонок, соглашается провести ночь в гробу; на детском телешоу происходит несчастный случай; компания озабоченных подростков наблюдает за соблазнительной блондинкой по соседству; операторы, снимающие обряд вызова демона, попадают в ад.",
+    "poster": "https://image.tmdb.org/t/p/w342/jPORl1FrzNQHS2GnpgEVksCutWI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zLUeVsiJ4mKlqSI7cB7lnxCzSbb.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 579828,
+    "ru": "Кольская сверхглубокая",
+    "en": "Кольская сверхглубокая",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 358,
+    "popularity": 2.0,
+    "genres": [
+      "ужасы",
+      "фантастика",
+      "триллер"
+    ],
+    "overview": "Кольская сверхглубокая скважина — самый масштабный секретный объект страны. В 1984 году на глубине более 12 километров были записаны необъяснимые звуки, похожие на крики множества голосов. После этих событий объект закрывают. Небольшая исследовательская группа отправляется под землю, чтобы узнать, какую тайну скрывает глубочайшая скважина в мире. То, что они обнаружили, оказывается величайшей угрозой в истории. Теперь будущее человечества находится в их руках.",
+    "poster": "https://image.tmdb.org/t/p/w342/3uUA6d7gkGyivkuxaf7zNSbkSuj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4ehqtwnjbYby9Brk6B1ECtmSiWu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 501395,
+    "ru": "Подлинная история банды Келли",
+    "en": "True History of the Kelly Gang",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 356,
+    "popularity": 1.63,
+    "genres": [
+      "криминал",
+      "драма",
+      "вестерн",
+      "триллер"
+    ],
+    "overview": "1860-е, Австралия. Семья подростка Неда нищенствует, и мать не брезгует проституцией, чтобы прокормить детей. Когда отец умирает в тюрьме, куда он попал за украденную Недом коровью ногу, мальчик преисполняется чувством вины. Через некоторое время парень отправляется с новым знакомым матери Гарри Пауэром перегонять скот, но вскоре выясняет, что мать продала его бандиту, и Нед должен помогать Гарри одурачивать путников, чтобы их грабить и убивать. Так начинается путь во взрослую жизнь впоследствии известного разбойника Неда Келли.",
+    "poster": "https://image.tmdb.org/t/p/w342/qTxxptM3qBVaJlLJnYfswuP7xCT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6xIZ4GCZ5Dhjv8tYU88ZbZ4PwxQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 895744,
+    "ru": "Студия 666",
+    "en": "Studio 666",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 354,
+    "popularity": 2.72,
+    "genres": [
+      "ужасы",
+      "комедия",
+      "музыка"
+    ],
+    "overview": "В поисках вдохновения и необычного звучания рок-группа Foo Fighters снимает особняк и пытается сочинить новый альбом. И вдохновение приходит — дом оказывается населён дьявольскими силами, которые овладевают лидером группы Дэйвом Гролом.",
+    "poster": "https://image.tmdb.org/t/p/w342/eC4Vqp3HQWtJIZ7mgoJx9CRyJvX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ppNyhrKHCeEgASliV4QN03bp6QR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1093231,
+    "ru": "Мать невесты",
+    "en": "Mother of the Bride",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 353,
+    "popularity": 1.64,
+    "genres": [
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "Дочь Ланы Эмма возвращается из Лондона и объявляет, что в следующем месяце выходит замуж. Все усложняется, когда Лана узнает, что мужчина, укравший сердце Эммы, - сын того, кто много лет назад разбил ее сердце.",
+    "poster": "https://image.tmdb.org/t/p/w342/jGLP3TKxh7mJL5AyZvzSKfNc81o.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m0XCtFisSD0O6P55G1pUHdFccuL.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "1483",
     "ru": "Порождённый",
     "en": "Begotten",
@@ -9434,271 +9719,6 @@
     "overview": "Айша — молодая уйгурская женщина, воспитанная в духе дисциплины и стойкости ее военным отцом. Покинув родные края, Айша оказывается в Нью-Йорке, где вынуждена работать на изнурительных кухнях китайского квартала, скрываясь в тени большого города и мечтая о лучшей жизни. Судьба сводит героиню со Скиннером — молодым американским солдатом, только что вернувшимся с трех туров службы на Ближнем Востоке. Оба несут в себе раны прошлого и тяжелый багаж переживаний, но их встреча становится началом совместного пути к исцелению.",
     "poster": "https://image.tmdb.org/t/p/w342/8JbuKgQBc8KlXopF1eege54HNQ5.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/a4bHIEPpXRSLp4b0sHRwHZeEOBx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_55216",
-    "ru": "Scènes de ménages",
-    "en": "Scènes de ménages",
-    "year": 2009,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.9,
-    "votes": 31,
-    "popularity": 14.94,
-    "genres": [
-      "комедия",
-      "семейный",
-      "Ток-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/38N3KQblPyTLGWNZs2qmy9mQywm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pnTYmGcsJBgQyI6qB8wHyvbuHBW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_1076",
-    "ru": "Непредсказуемая Сьюзан",
-    "en": "Suddenly Susan",
-    "year": 1996,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.9,
-    "votes": 31,
-    "popularity": 8.09,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dfM8shbsRi7Iw6SZmamX3mZ2313.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4EQAi7r9iTo84WzyS351ssPxAAX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 513730,
-    "ru": "DC Super Hero Girls: Legends of Atlantis",
-    "en": "DC Super Hero Girls: Legends of Atlantis",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 31,
-    "popularity": 1.08,
-    "genres": [
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6KT5oqjul7QQTmxpAmUK8WCigUx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zMMe6ZK4V96NdriZNzflcQDqbSw.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 468528,
-    "ru": "Soleil battant",
-    "en": "Soleil battant",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 31,
-    "popularity": 0.54,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hyYphOGK7vUWI8o5Q5Doaf44zJz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jqFR3sOoGiN83JUoBwul6KoyXnE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 393521,
-    "ru": "שבוע ויום",
-    "en": "שבוע ויום",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 31,
-    "popularity": 0.41,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ksXbsxQeKWq2QSY8H1KQIVNAQPx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nfM4BignSJXNhQoOQrtfkb5tLN6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_99969",
-    "ru": "Соммердаль",
-    "en": "Sommerdahl",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.9,
-    "votes": 30,
-    "popularity": 12.21,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "Дэн Соммердаль расследует убийства в датском прибрежном городке вместе со своей женой, криминалистом Марианной, и лучшим другом, детективом Флеммингом Торпом. Дэна много лет интересовала лишь работа, поэтому Марианна хочет развестись. Вскоре Дэн обнаруживает, что его соперником за ее расположение является не кто иной, как Флемминг. Тем не менее им придется работать сообща, чтобы раскрыть преступления.",
-    "poster": "https://image.tmdb.org/t/p/w342/t8klLdjPErriFytwlWkt2dDvyOW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dVrKJkcvssTm5oY8Pv4fX1EB6YS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1360780,
-    "ru": "Наша Рождественская история",
-    "en": "Our Holiday Story",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 30,
-    "popularity": 0.95,
-    "genres": [
-      "телевизионный фильм",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Дэвид и Элеонора рассказывают свою трогательную историю любви, чтобы спасти отношения Джоанны — дочери Дэвида.",
-    "poster": "https://image.tmdb.org/t/p/w342/15TXQSd0RerDV7XNtOcTNhnfhOq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wexB0OfXJ6IK9v0jMg2j5lmfLlW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1140168,
-    "ru": "Пятницы Фредди",
-    "en": "Freddy's Fridays",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 30,
-    "popularity": 0.62,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "Детектив Лила Джонс сталкивается с непростым расследованием серии жестоких убийств молодых девушек, произошедших за последние две недели. Ключ к делу появляется, когда удаётся установить личность последней жертвы – Анастасии, работавшей в эскорте. Её зверски убили вечером в пятницу после встречи с клиентом. Лила, движимая желанием справедливости для сестры Анастасии, решает во что бы то ни стало поймать маньяка.  Однако расследование принимает неожиданный поворот, когда Лила обнаруживает, что за убийствами стоят не просто человеческие руки. Всё связано с древней книгой, с помощью которой в ночь пятницы можно оживить жутких кукол для ритуальных убийств. Теперь Лиле предстоит остановить маньяка и разрушить магическое зло, пока не стало слишком поздно.",
-    "poster": "https://image.tmdb.org/t/p/w342/oMoPJPbUwcrp2vWyNYX0gBLBL77.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/z8LpGBiUB272FgK8q1ZHr4tAY26.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "231164",
-    "ru": "Сладкий кнут",
-    "en": "甘い鞭",
-    "year": 2013,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 30,
-    "popularity": 3.97,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "История о женщине, которую похитили подростком. Теперь она работает врачом, а по ночам — госпожой в см-клубе.",
-    "poster": "https://image.tmdb.org/t/p/w342/4mXbvGaQuWteEyCAgszKMmQEcqS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1bQTl8E3dA9pJCLh61XHj6dwMPV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 57661,
-    "ru": "Бог игроков 3: Ранние годы",
-    "en": "賭神3之少年賭神",
-    "year": 1996,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 30,
-    "popularity": 2.92,
-    "genres": [
-      "боевик",
-      "комедия"
-    ],
-    "overview": "Сирота Ко Чун попадает под покровительство талантливого карточного шулера Кента. Но со временем Кент начал видеть в Ко Чуне не столько успешного ученика, сколько соперника, и накануне престижного китайского турнира по покеру решает избавиться от него.",
-    "poster": "https://image.tmdb.org/t/p/w342/d9lN4VcF810xmBydi53cgbxOfLP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zRefnJUN5EICBWxIwltzQLLcEa5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 53745,
-    "ru": "Дональд Дак: Птица кондор",
-    "en": "Contrary Condor",
-    "year": 1944,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 30,
-    "popularity": 0.45,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "Во время альпинизма в Андах Дональд попал под крыло матери-кондора, которая приняла его за одного из своих новорожденных детей.",
-    "poster": "https://image.tmdb.org/t/p/w342/gDvnVuLB4rez1fJ4oBPcSHzzAJz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fExigmVX8q6ytQRiFVHvAg0Zece.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_60842",
-    "ru": "Актёры ослеплённого города",
-    "en": "メカクシティアクターズ",
-    "year": 2014,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.9,
-    "votes": 29,
-    "popularity": 4.32,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "10749",
-      "Аниме"
-    ],
-    "overview": "18-летний Синтаро Кисараги два года не выходил на улицу. А зачем? Для заказов есть Сеть, для общения – виртуальная девушка Энэ, творение неизвестного гения. И надо же было проклятой клавиатуре сломаться в разгар праздника Обон, когда вся Япония почитает духов предков, и доставка нигде не работает! Пришлось Кисараги под шуточки Энэ лично тащиться в супермаркет в пик августовской жары.",
-    "poster": "https://image.tmdb.org/t/p/w342/4fYd1cBnv2CEYW3bdQvcWCOwXhK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lWFBgk4BsHB8OjRUCCgK6o4Qylx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 980537,
-    "ru": "Мать-Земля",
-    "en": "Earth Mama",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 29,
-    "popularity": 1.99,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Интимная история взросления беременной матери-одиночки, которая принимает сообщество района Бэй, определяя судьбу своей семьи.",
-    "poster": "https://image.tmdb.org/t/p/w342/am2ZjdYSt7aCdBQA5dAC4fGTQ2f.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nLQ7jOeBmCQEETS3FCtZDWvYYtA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 99896,
-    "ru": "Крестики-нолики",
-    "en": "Noughts + Crosses",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.9,
-    "votes": 29,
-    "popularity": 1.63,
-    "genres": [
-      "драма",
-      "НФ и Фэнтези"
-    ],
-    "overview": "В «Крестиках-ноликах» нас ждет мир будущего, власть в котором принадлежит темнокожим, то есть крестикам, которые эксплуатируют и угнетают белое население — ноликов. На фоне разворачивается каноническая история Ромео и Джульетты — Каллума и Сефи, которые не могут быть вместе из-за цвета кожи и социального положения.",
-    "poster": "https://image.tmdb.org/t/p/w342/jDoa0jwaHzOvLmZGrMVa7TR6RuE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tRHML16irVmFXqKDoIwP8Sk8rQU.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,276 @@
 [
   {
+    "id": 552398,
+    "ru": "இந்தியன் II: Zero Tolerance",
+    "en": "இந்தியன் II: Zero Tolerance",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 29,
+    "popularity": 0.61,
+    "genres": [
+      "драма",
+      "боевик",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fPoiIfqmVfNYZRVUtfTSyuAj8Tw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/i9WVr01ZerROPpluROAk79Tbqd8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 464876,
+    "ru": "Knights of the Damned",
+    "en": "Knights of the Damned",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 29,
+    "popularity": 0.44,
+    "genres": [
+      "боевик",
+      "фэнтези",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kx1AtyDEJ4Cw4ylI635K5FkcXzo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/prK2N6jzZybJ5Pm4VfUWfAYhGt0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 245589,
+    "ru": "Voodoo Possession",
+    "en": "Voodoo Possession",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 29,
+    "popularity": 0.44,
+    "genres": [
+      "детектив",
+      "ужасы",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nuHQxaA1ei3flajBZgyFoqffQYR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3PMbr7KH2nFYkgwJTpLvpy0X8lc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 268823,
+    "ru": "April Rain",
+    "en": "April Rain",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 28,
+    "popularity": 0.45,
+    "genres": [
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/o4LjrRFusaibX5TpHR2EX9bvh76.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kG503lbcnQ890gBZX1nuVOaCxwO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 347064,
+    "ru": "Jurassic Prey",
+    "en": "Jurassic Prey",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 27,
+    "popularity": 0.73,
+    "genres": [
+      "фантастика",
+      "боевик",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xhVuhDc4RTmV0AcfTaNfLtvCWyp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3FvTZR548z8R93PepaDy8MMuxhK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1165918,
+    "ru": "Megalodon: The Frenzy",
+    "en": "Megalodon: The Frenzy",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 25,
+    "popularity": 0.97,
+    "genres": [
+      "боевик",
+      "приключения",
+      "ужасы",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1o0jJYxgF7IJKdYNlDWgxomt2ft.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/v0EkUA9hG3CQGgrX5CAbNvQFyyb.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 254126,
+    "ru": "Кровавое пристанище",
+    "en": "Blood Shed",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 24,
+    "popularity": 0.56,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "Бездомные люди, ночуют на складе, который переоборудован под контейнеры временного хранения вещей. Однажды ночью, несколько бездомных, остаются запертыми с невменяемой женщиной, которая охотится за ними в поисках своего потерянного ребенка. По мотивам реальной событий.",
+    "poster": "https://image.tmdb.org/t/p/w342/5UJd7nNQWbKsj7g2wYDtV8RbLWJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8OGnkgmRSo7IK00gvxle8ocdXVO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 667177,
+    "ru": "Dead Earth",
+    "en": "Dead Earth",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 23,
+    "popularity": 0.53,
+    "genres": [
+      "боевик",
+      "драма",
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dTEY7mDBVwYnByLJaJKcC4areCG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jF3gk9a4t8JH0MaCCVxkXldKVDJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 229314,
+    "ru": "Отвязная Калифорния",
+    "en": "California Scheming",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 18,
+    "popularity": 0.64,
+    "genres": [
+      "триллер"
+    ],
+    "overview": "Девушка-подросток, втягивает трех молодых людей в свои интриги. Коварный замысел героини приводит к непредвиденным последствиям, заставляя ее жертв столкнуться лицом к лицу с собственными страхами и смертью…",
+    "poster": "https://image.tmdb.org/t/p/w342/s6NUi3Lumny97z7ht4FAuZRWZkZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/re90XK22FAiOCEgVftQss6tKZbf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 567203,
+    "ru": "Шершень",
+    "en": "Hornet",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 18,
+    "popularity": 0.47,
+    "genres": [
+      "фантастика",
+      "боевик",
+      "приключения"
+    ],
+    "overview": "Тихий городок подвергся нападению пришельцев — они похищают местных жителей и превращают их в кровожадных зомби. Людей может спасти лишь робот Шершень, который как раз проходит полевые испытания в том районе…",
+    "poster": "https://image.tmdb.org/t/p/w342/4LyngGcHBwpvLajrC7Kv070RU9m.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bIgophPk56G2cBOCvGiLYgpsx8y.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 257954,
+    "ru": "2 спальни, 1 ванная",
+    "en": "2 Bedroom 1 Bath",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 18,
+    "popularity": 0.44,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "Нет ничего более приятного для молодой семьи чем найти идеальный дом для медового месяца и дальнейшей жизни.  Рейчел и Кевин Фостер, молодая пара, которая находит тот самый - идеальный дом и строит большие планы на будущие, но похоже этот дом имеет совершенно другие планы на эту семью.  2 спальни, 1 ванная – холодная , страшная сказка.  Когда странные события вторгаются в мечты Кевина , с его женой начинают происходить необъяснимые вещи. Весь ужас усугубляется тем, что Рейчел - беременна. Кевин вынужден вникать в историю своей новой квартиры и он обнаруживает ужасные вещи. В квартире живет дух умершей женщины, которая в свое время потеряла ребенка и она начинает мучать семейную пару.",
+    "poster": "https://image.tmdb.org/t/p/w342/dnkEizK9NUC8eoFCEX26nR7uDzs.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/t0rqIVwNp34nIkMCx4SmgJhyksi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 897018,
+    "ru": "Треугольник Дьявола",
+    "en": "Devil's Triangle",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 16,
+    "popularity": 0.64,
+    "genres": [
+      "боевик",
+      "приключения",
+      "фантастика",
+      "фэнтези"
+    ],
+    "overview": "Когда группа морских биологов терпит крушение в Бермудском треугольнике, они понимают, что наткнулись на затерянный город Атлантида. Но они быстро обнаруживают, что город недружелюбен, и его гуманоидные жители планируют мировое господство, используя груды оружия и технологий, которые провалились в Треугольнике на протяжении веков.",
+    "poster": "https://image.tmdb.org/t/p/w342/j5ErORq2j7yzr2vNZ7GFXTrEKPm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qJOVfk6snrK5tdc6FBcpBv6LJF1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 314952,
+    "ru": "Что творят мужчины! 2",
+    "en": "Что творят мужчины! 2",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 16,
+    "popularity": 1.7,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "России угрожает страшная опасность! Бывший сисадмин Секретного Военного Подразделения, уехавший в Америку, запустил вирус для взлома системы безопасности, что грозит всем нам страшными последствиями. Чтобы остановить программу, нужен пароль — слово, которое произносит бывшая подружка хакера, когда испытывает оргазм. Это всего лишь одно слово, но за последний год у злодея было десяток подружек, и с каждой был секс… и все они в Лос-Анджелесе! Спасти страну призваны главные специалисты по женщинам — Даниэль, Гоша и Виталик.",
+    "poster": "https://image.tmdb.org/t/p/w342/u4kbHJl7Cxm3pwFFrGDITQyo6ln.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3tm15se4TJzXDIwdgO2oXThbHPU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 456824,
+    "ru": "House of Evil",
+    "en": "House of Evil",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.3,
+    "votes": 15,
+    "popularity": 0.7,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/iGdMrcQW9jEuRyBuIoXUooRz2KR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hwaO8OE6HI3LabsUrsqFwDQzB7b.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1289004,
     "ru": "Астрал. Заклятие мёртвых",
     "en": "Siccîn 7",
@@ -9147,269 +9418,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/gsXz7wmbqQ8ywNjJhlpOkxMtOZ4.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/khgUrxxkQ9zIgMOvuQq8JOSmBEN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1163498,
-    "ru": "锁战",
-    "en": "锁战",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.79,
-    "genres": [
-      "боевик",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/t8216wfsxV8E7aY2MVBncQvho2r.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iJ0Vbl9r2DHaVpfuJ1c3Tc8ju6F.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 249760,
-    "ru": "बैंडवाले",
-    "en": "बैंडवाले",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.77,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/h1heLNN77Jmjin06ihQdMKTGGIt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uz0OhuErhylmCBszXwYAxOU3oVo.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 911244,
-    "ru": "മിണ്ടിയും പറഞ്ഞും",
-    "en": "മിണ്ടിയും പറഞ്ഞും",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.76,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2TfEGFtcYenVrydMVJ2fiPXb5dl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/daBv4Hz3l1WzE0dByw5efexYrQp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1525446,
-    "ru": "Agape: The Unconditional Love",
-    "en": "Agape: The Unconditional Love",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.74,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aylX6hIIbeIK2sOyeA5NeEVVm74.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/w4M9w57wpH5um8UTX25548okOsJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 306089,
-    "ru": "CO-ED",
-    "en": "CO-ED",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.72,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yszfk2In6I82bQIhrNijsoZkoiz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/33oeHzYG3MEs8fAfQLkI9m4kAUi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1136460,
-    "ru": "＃ミトヤマネ",
-    "en": "＃ミトヤマネ",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.71,
-    "genres": [
-      "триллер",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3dbWZuiosAt2Y05UcXXariMwVvh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1CS7Zy2vMRC51UamsB3ua7wAnDu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1061128,
-    "ru": "その少女、怒り。",
-    "en": "その少女、怒り。",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.71,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ldOTQBCz1ufPN9OCwiegCInXr2T.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vWsBwAya4Datgs2rL6QpgQZEN8H.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1537212,
-    "ru": "Huwag Kang Titingin",
-    "en": "Huwag Kang Titingin",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.7,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fLdWIk9c01RFXCaEKCjqIDbOe6i.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sHWdG2qgupT4WHLIfMmm3hegiou.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 990128,
-    "ru": "黑狐之绝地营救",
-    "en": "黑狐之绝地营救",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.7,
-    "genres": [
-      "военный",
-      "боевик",
-      "драма",
-      "история"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/w1CEub3EkxWR21skS8pdqkLsENo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tL7n257j6fD8XuO52J11Iu71k67.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1415690,
-    "ru": "Hoagie",
-    "en": "Hoagie",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.67,
-    "genres": [
-      "комедия",
-      "ужасы",
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jCgq1J6KYxTWxHFEgMfghbD1w4y.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vrdOWPrTliifhsripGUtK14fqtO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 724193,
-    "ru": "세 여자의 은밀한 직장생활",
-    "en": "세 여자의 은밀한 직장생활",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.67,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nvQqmSZZ3GcQDBh4uqDhrePvQ4K.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/flxM5JCooD6P4QTVhdbTea7mSOM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 274011,
-    "ru": "Buldok z Poděbrad",
-    "en": "Buldok z Poděbrad",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.64,
-    "genres": [
-      "комедия",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/a5aZoYqY2sE6ecdj0ATk7umxq0e.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5VhP0dj9uv8VnRKELgCt8bcSfqC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1402208,
-    "ru": "Dreamland Awaits",
-    "en": "Dreamland Awaits",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.64,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hpowtShENEYE4sAKbrJuj1ygcu9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lzLzag4tUcJHwIgauktrG52L3C.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 988703,
-    "ru": "電子靈",
-    "en": "電子靈",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.0,
-    "votes": 1,
-    "popularity": 0.64,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eM4C3t2eXtjplvmQ1rYkmAN8rez.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fEu9zjsL1t6iA3grYS5ZknQaVb.jpg",
     "source": "tmdb"
   }
 ]

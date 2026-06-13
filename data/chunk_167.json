@@ -1,5 +1,270 @@
 [
   {
+    "id": 1135718,
+    "ru": "Bugaw",
+    "en": "Bugaw",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 5,
+    "popularity": 1.03,
+    "genres": [
+      "драма",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7pzJmpV56FiNtIFbUq73ytIfutq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qB4Xmelj1mm0rJ9rlNi3o4tvnEV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1049075,
+    "ru": "A Night of the Undead",
+    "en": "A Night of the Undead",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 5,
+    "popularity": 0.56,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zxh5Z2zpbAtAuS2CoVaO0pkkes8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bdJeZxltSjFMFxzykYa3CLfMBEz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1082528,
+    "ru": "Freedom Hair",
+    "en": "Freedom Hair",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 5,
+    "popularity": 0.53,
+    "genres": [
+      "драма",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/n6ijbeJIIicXroHEey3HxS6pWNx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/A3fuwLayI2h2EeIY2fdYtddfldk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 948797,
+    "ru": "Dangerous Cheaters",
+    "en": "Dangerous Cheaters",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 5,
+    "popularity": 0.46,
+    "genres": [
+      "драма",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eL7NFBdVcdXODJVh59OSbmHuMT1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vZzr0GjQzil3TYsRvTt9tC4c6gP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 656888,
+    "ru": "H. H. Holmes: Original Evil",
+    "en": "H. H. Holmes: Original Evil",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 5,
+    "popularity": 0.48,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/BgTzRDsgUcBjviqThKvBPKPGR4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kC2QCTdmkcGS27a2rkLliUKbbKH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 456332,
+    "ru": "活劇少女探偵団",
+    "en": "活劇少女探偵団",
+    "year": 1986,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 5,
+    "popularity": 0.33,
+    "genres": [
+      "комедия",
+      "боевик",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6IspfIDieZqZ7vGaNSYr8D2kxHF.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 615228,
+    "ru": "Vou Nadar Até Você",
+    "en": "Vou Nadar Até Você",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 4,
+    "popularity": 3.5,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aNbcim9eQqi6oRXotRKTlT9ofXF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5RPXDu7FLHSmUQDt319t7qsk186.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 781032,
+    "ru": "All My Friends Are Dead",
+    "en": "All My Friends Are Dead",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 4,
+    "popularity": 0.72,
+    "genres": [
+      "ужасы",
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2lntROK1jjhvjUCLWw6ZdGaVBcj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uK9LsR7amxY7X2NZA8nex6x5X6h.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 872659,
+    "ru": "ആയിഷ",
+    "en": "ആയിഷ",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 4,
+    "popularity": 0.44,
+    "genres": [
+      "драма",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3LQ8HwPAl3JpaqKSnVFgtbTxzhj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7Vu0N2sLPfUWRjZau4XWs6PYovC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 444480,
+    "ru": "Slammed!",
+    "en": "Slammed!",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 4,
+    "popularity": 0.91,
+    "genres": [
+      "триллер",
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/oh9KWUWPIq77pGlfe8L4YZCLt11.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ijfKnPbASK9LEWknKLewAX2Z4wy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 404931,
+    "ru": "マリアの乳房",
+    "en": "マリアの乳房",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 4,
+    "popularity": 0.68,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uKMtGmuOBeaIMxHHnqyZPCFs5xA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/n3moQSUbFCkmGArfnJwsbtxT4yW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 725140,
+    "ru": "未来世紀アマゾネス",
+    "en": "未来世紀アマゾネス",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 4,
+    "popularity": 0.65,
+    "genres": [
+      "комедия",
+      "ужасы",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/jQvKKSXZQLJdCYfci70PsNl3f10.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/w4oocOf1qIcBmozgFQ7lOY92ixL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 815762,
+    "ru": "El sexo me da risa 8",
+    "en": "El sexo me da risa 8",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 4,
+    "popularity": 0.58,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/icSrMgxgzx8ia0WpCix5eW5Xn1D.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vDERr9tZwc63aYDB47FLihcICBX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 609246,
+    "ru": "Nothing Like The Sun",
+    "en": "Nothing Like The Sun",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 4,
+    "popularity": 0.55,
+    "genres": [
+      "драма",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yE3r6i1KHaI68TCLChzslqhLCdS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1QWh99owXdtU2pp8VxFeH5omctr.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 426596,
     "ru": "Robin and the Dreamweavers",
     "en": "Robin and the Dreamweavers",
@@ -9008,264 +9273,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/xLohASMD57zk4ocE0JHUt0uubeH.jpg",
     "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 836600,
-    "ru": "METAL GEAR SOLID 2 BANDE DESSINÉE",
-    "en": "METAL GEAR SOLID 2 BANDE DESSINÉE",
-    "year": 2008,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 1.71,
-    "genres": [
-      "боевик",
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oX9mMPcPImNws9FnLxuJwxc5Z1t.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 52242,
-    "ru": "ベイビィ☆LOVE",
-    "en": "ベイビィ☆LOVE",
-    "year": 1997,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 0.51,
-    "genres": [
-      "мультфильм",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/u6AZUaS3qxfQQv8gib1QsvZyGa8.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 370069,
-    "ru": "திருட்டு ரயில்",
-    "en": "திருட்டு ரயில்",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 0.5,
-    "genres": [
-      "комедия",
-      "боевик",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eYMjGg9iGVF2QxpSfH2Jxjs7xUp.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 301319,
-    "ru": "Little Women Big Cars 2",
-    "en": "Little Women Big Cars 2",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 0.35,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/htkKQgb7GTOh2I4S90lyyksepgz.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 328481,
-    "ru": "Life's Essentials with Ruby Dee",
-    "en": "Life's Essentials with Ruby Dee",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 1,
-    "popularity": 0.75,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3g5M7vQQaHXofZJdK7PIgZZYa4f.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pAlO07KIrGPgME3DGo4usfrIWBL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 499136,
-    "ru": "燦爛這一刻",
-    "en": "燦爛這一刻",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 1,
-    "popularity": 0.45,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bWFsKLFnnzi6PDGIHBmgvlzmLvU.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/A40BMcFGncfzaLnBVln6dmSgepB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 750667,
-    "ru": "Юрий Олеша по кличке «Писатель»",
-    "en": "Юрий Олеша по кличке «Писатель»",
-    "year": 2009,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 1,
-    "popularity": 0.36,
-    "genres": [
-      "документальный",
-      "мультфильм",
-      "телевизионный фильм"
-    ],
-    "overview": "Современники уважительно звали его «Писатель», хотя при жизни Юрия Олеши вышли всего две книги. Он был невероятно талантлив и чрезвычайно беззащитен перед ветрами эпохи. Последние двадцать лет он писал «в стол», но имя Олеши навсегда осталось в истории русской литературы. Фильм рассказывает о сложном творческом и жизненном пути писателя.",
-    "poster": "https://image.tmdb.org/t/p/w342/cqp6RloJXg1q7DIeE7sU7ydTeGN.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 552618,
-    "ru": "Bagyong Bheverlynn",
-    "en": "Bagyong Bheverlynn",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 1,
-    "popularity": 0.78,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qo3y9rHme0ISDCKdq7r9C6e3czq.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 337653,
-    "ru": "துணை முதல்வர்",
-    "en": "துணை முதல்வர்",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 1,
-    "popularity": 0.57,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vpi60H4RzeumfeC0B6ySKnMvJOb.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 644730,
-    "ru": "Restricted Area",
-    "en": "Restricted Area",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.4,
-    "votes": 11,
-    "popularity": 0.57,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mP5ccG9kmw8Xzak9wVDYADw9mfK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uZPjTcmZGfoCRBNL0W2ex80z2n1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 239897,
-    "ru": "Dwegons and Leprechauns",
-    "en": "Dwegons and Leprechauns",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.4,
-    "votes": 4,
-    "popularity": 0.31,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eCWjbEI7v3ThQ32gM3aiID568P4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gUN9VweIhb1L3TCez1yaySmCkaB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 829490,
-    "ru": "I Piss on Your Corpse",
-    "en": "I Piss on Your Corpse",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.3,
-    "votes": 5,
-    "popularity": 0.48,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/A1FCdOWGens4DT1PXBXmq0W3zti.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/B7mCjB50uqPk8vSumjACoB3Wyz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 604897,
-    "ru": "The Adventures of Anais Nin",
-    "en": "The Adventures of Anais Nin",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.3,
-    "votes": 5,
-    "popularity": 0.74,
-    "genres": [
-      "документальный",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vqyaUcR9EKEAWGXpt1ertaucilt.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1143459,
-    "ru": "Butch vs. Sundance",
-    "en": "Butch vs. Sundance",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.3,
-    "votes": 3,
-    "popularity": 0.44,
-    "genres": [
-      "приключения",
-      "вестерн"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2MzpjmihLNEwnFwur9g2y4wsMT6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/r0faQIra8e8rZSRIHWB9qcahZaH.jpg",
     "source": "tmdb"
   }
 ]

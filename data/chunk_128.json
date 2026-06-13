@@ -1,5 +1,276 @@
 [
   {
+    "id": 27342,
+    "ru": "Мэлоун",
+    "en": "Malone",
+    "year": 1987,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 75,
+    "popularity": 2.55,
+    "genres": [
+      "боевик",
+      "триллер"
+    ],
+    "overview": "Отставной агент ЦРУ Ричард Мэлоун ищет, где ему поселиться после долгих лет службы своей стране. Когда он проезжает через небольшой городок Комсток, у него ломается машина. Вынужденный задержаться на несколько дней, он заводит в городе знакомства и дружеские связи. Вскоре он узнаёт, что Комсток находится под властью местного воротилы Чарльза Дилэйни, который не остановится перед преступлением, чтобы её сохранить. Мэлойн вступает с Дилэйни в конфликт…",
+    "poster": "https://image.tmdb.org/t/p/w342/uA32G48OnKutmWdifMSi9hp2jed.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uPeLGj9psrkOvvfsgn3isLnZHuJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 442947,
+    "ru": "Кроткая",
+    "en": "Кроткая",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 75,
+    "popularity": 0.88,
+    "genres": [
+      "драма",
+      "детектив"
+    ],
+    "overview": "Молодая женщина по пути на свидание к арестованному мужу встречает различных героев своего времени: от полицейских и правозащитников до проституток и бродяг.",
+    "poster": "https://image.tmdb.org/t/p/w342/3gdoZ5PkVaB8IUYVibTUxRUZZAi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lK0QUQVs8ywBZ0WSjDu9Qu1nciy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 80928,
+    "ru": "Babes in the Woods",
+    "en": "Babes in the Woods",
+    "year": 1932,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 75,
+    "popularity": 0.35,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/v6GjctO6e4MjT082EZLfiOIR1Fj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uByeooe6NwJYpnrpXzBIVxtceW2.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1253000",
+    "ru": "Ловчий смерти",
+    "en": "Deathstalker",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 74,
+    "popularity": 5.58,
+    "genres": [
+      "фэнтези",
+      "боевик",
+      "приключения"
+    ],
+    "overview": "Ловчий смерти, легендарный воин и бывший рыцарь, однажды среди трупов на поле боя находит таинственный амулет и становится жертвой древнего проклятия. Теперь ему предстоит найти способ снять проклятие и спасти королевство Абраксеон от зла.",
+    "poster": "https://image.tmdb.org/t/p/w342/peYuikjmgjkWNVhKzIlUf95hMpu.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7aiQebqYUHbs2wZPhsTznuMWyeH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1429605",
+    "ru": "С Днём проклятого Валентина!",
+    "en": "F Valentine's Day",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 74,
+    "popularity": 3.78,
+    "genres": [
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "Джина ненавидит свой день рождения в День святого Валентина и едет в Грецию, чтобы помешать предложению руки и сердца от своего парня. С помощью отдыхающих Джонни и его сестры Микки она придумывает план, как отложить это событие, одновременно сомневаясь в своих отношениях.",
+    "poster": "https://image.tmdb.org/t/p/w342/e6ppS0qLcenWR1OTgNI24mLizXh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rQXIm9oICpHCBpuHSJ3SwthBQYc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 575842,
+    "ru": "Красный призрак",
+    "en": "Красный призрак",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 74,
+    "popularity": 1.36,
+    "genres": [
+      "военный",
+      "драма",
+      "история"
+    ],
+    "overview": "Зима 1941 года. Выходя из «Вяземского котла» - немецкого окружения в районе города Вязьма - небольшой отряд советских солдат вынужден остановиться в заброшенной деревне. Передышки не получается. Рядом обнаруживается особое и очень жестокое подразделение карателей Вермахта. Солдаты врага ищут в этих местах таинственного «Красного призрака». Он появляется из ниоткуда и в одиночку убивает захватчиков. Немцы даже не догадываются, что уже находятся под прицелом партизана-супергероя, а советские солдаты собираются вступить в смертельный бой.",
+    "poster": "https://image.tmdb.org/t/p/w342/BTOXjg1pLPKMCvC2mpFFEOgGur.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ekjm6VTCu64gk0UcGWnCMxuwbdk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1114590,
+    "ru": "Anna Nicole Smith: You Don't Know Me",
+    "en": "Anna Nicole Smith: You Don't Know Me",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 74,
+    "popularity": 0.55,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mybL2Hd3PvsY7Qyjf7W6BKsoECu.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nIXBaPRix53sq4W2KK8FazrGzc4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 21250,
+    "ru": "Паутина Шарлотты 2: Великое приключение Уилбура",
+    "en": "Charlotte's Web 2: Wilbur's Great Adventure",
+    "year": 2003,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 74,
+    "popularity": 1.65,
+    "genres": [
+      "приключения",
+      "мультфильм",
+      "драма",
+      "семейный"
+    ],
+    "overview": "Поросенок по имени Уилбур умеет ценить дружбу - этому он научился у паучихи Шарлотты. Повстречав одинокого ягненка Кардигана, он немедленно становится его другом.  Он знакомит своего нового приятеля с прелестями жизни на ферме и с тремя паучками - Нелли, Аранеей и Джой - дочерьми Шарлотты. Когда фермер Цукерман продает Кардигана другому хозяину, Уилбур действует решительно.  Вместе с крысой Темплтон и паучьей семейкой он пускается в незабываемое путешествие на поиски ягненка.",
+    "poster": "https://image.tmdb.org/t/p/w342/fq2dwyjbrjUWWJljCyXHe8LdVyy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/w71FGJXkADpK2B9qNPu52QvNH5K.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 26497,
+    "ru": "Динозаврик Урмель",
+    "en": "Urmel aus dem Eis",
+    "year": 2006,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 73,
+    "popularity": 0.92,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "фэнтези"
+    ],
+    "overview": "На маленьком вулканическом острове Титиву посреди далекого озера живет и проводит свои исследования гениальный ученый Габакук Тибатонг вместе со своим приемным сыном Тимом Тинтенклексом и пингвином Пингом. Однажды зоолог находит неизвестное в природе яйцо. Из него вылупляется приветливый мини-динозавр Урмель…",
+    "poster": "https://image.tmdb.org/t/p/w342/qZojC6vXlK2MFLIDiDlb8JNbfot.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/u0wIDCYOZfnXqABoPb6gEk0PHd3.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 253283,
+    "ru": "Бывший на все случаи жизни",
+    "en": "Take Care",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 73,
+    "popularity": 0.9,
+    "genres": [
+      "драма",
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Молодой девушке Фрэнни требуется уход после того, как ее сбивает машина. Вскоре она понимает, что ее близкие и друзья - не самые лучшие помощники, и тогда она обращается к своему бывшему с просьбой позаботиться о ней.",
+    "poster": "https://image.tmdb.org/t/p/w342/lZmsE2TY9IOZALFjG0wqGNnARWZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pw6SIQWf3fTdzY9F9HnYpVaM9cv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 454769,
+    "ru": "बहन होगी तेरी",
+    "en": "बहन होगी तेरी",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 73,
+    "popularity": 0.49,
+    "genres": [
+      "мелодрама",
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2zdhiVMVrHFu5J2LarF5bHhSabM.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 649392,
+    "ru": "Угнать и продать",
+    "en": "Rev",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 72,
+    "popularity": 1.86,
+    "genres": [
+      "боевик",
+      "драма"
+    ],
+    "overview": "Молодой угонщик дорогих автомобилей после неудачного дела вынужден согласиться на сотрудничество с полицией. Он должен внедриться в банду и помочь стражам порядка раскрыть крупное предприятие по контрабанде сотен экзотических суперкаров.",
+    "poster": "https://image.tmdb.org/t/p/w342/5zkkcgyPiGLWC3iZONcAglTGUB4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eMI53B3SJFj4r7k5t5evaXARhmw.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 540023,
+    "ru": "Ступая во мрак",
+    "en": "Wander Darkly",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 72,
+    "popularity": 1.76,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "У супругов Адриенн и Маттео недавно родилась дочь, и в отношениях наметился разлад. Они попадают в автоаварию, в результате которой Адриенн погибает. Теперь женщина в виде бесплотного призрака вынуждена наблюдать за семьёй со стороны, но, кажется, судьба предоставляет ей шанс исправить ошибки прошлого.",
+    "poster": "https://image.tmdb.org/t/p/w342/7B8s8FTOA8j5NgHlFeHQRpHzfD7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wO8vg2bB4rR7lGtIlZ7mJlcfwJ7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1001840,
+    "ru": "Ложная память",
+    "en": "Ipersonnia",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 72,
+    "popularity": 0.5,
+    "genres": [
+      "фантастика",
+      "триллер"
+    ],
+    "overview": "Италия, ближайшее будущее. Переполненные шумные тюрьмы остались в прошлом. Теперь заключенные отбывают наказание в состоянии глубокого сна, это делает их безвредными и снижает угрозу рецидивов до нуля. Давид Дамиани, психолог, который следит за психическим состоянием спящих заключенных, много лет работает в системе и считает, что знает о ней все. Пока не сталкивается со странным преступником, над которым вдруг теряет всякий контроль.",
+    "poster": "https://image.tmdb.org/t/p/w342/knvo6bI7QRZNvVnx96DuH1ur8bK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pE24NEwXJE2D0Gl2XXUykN5q4gw.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 36616,
     "ru": "Bebe's Kids",
     "en": "Bebe's Kids",
@@ -9378,277 +9649,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/7tvhf1ApXJn4LwVWwk4Mmhh62tQ.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/8Q3deKUP05ed8bLN4ZAJyGseq5S.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 824362,
-    "ru": "劇場版「きのう何食べた？」",
-    "en": "劇場版「きのう何食べた？」",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 16,
-    "popularity": 0.66,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wZL8EQSarjLeREvA97QJ0Jx7yX5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kfQQGQY5WZvFicI8UIbYBVzjt3f.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 737195,
-    "ru": "The Man in the Hat",
-    "en": "The Man in the Hat",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 16,
-    "popularity": 0.39,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hYLhSAbVW1Wa9mRX05DGCL5X20w.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kTkAdzFxj4wSJW6j43sV9QHpkuB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 557132,
-    "ru": "Царь зверей",
-    "en": "دا ڈونکی كِنگ",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 16,
-    "popularity": 1.01,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "семейный"
-    ],
-    "overview": "«Если ты родился ослом, то не обязательно всю жизнь жить как осел. Мечтай, и твои мечты осуществятся». Получив такое напутствие от отца, осел по имени Мангу с оптимизмом смотрит на жизнь. И однажды ему действительно улыбается удача. В стране грядут выборы нового правителя. По невероятному стечению обстоятельств, претендентов на трон всего двое: он и избалованный принц, которого народ терпеть не может. Казалось бы, дело в шляпе, а корона на голове у ослика! Но сможет ли простой осел из бедной семьи стать царем зверей? Ведь речи произносить его никто не учил, а всё, чем он управлял — это утюг и доска для стирки белья!",
-    "poster": "https://image.tmdb.org/t/p/w342/qqxpf84ZD0R4lEoy5WiD0M4mVHl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mFREpPtK5tgSmnR0N7rK9LB3A0C.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 400990,
-    "ru": "Страшные истории 3",
-    "en": "무서운 이야기 3: 화성에서 온 소녀",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 16,
-    "popularity": 0.91,
-    "genres": [
-      "триллер",
-      "ужасы",
-      "фантастика"
-    ],
-    "overview": "Маленькая девочка захватила космический корабль сил Земли,чтоб сбежать на планету Титан, но попала в руки Робота, который ненавидит людей.Чтобы обмануть его, девочка сказала, что она не человек. Пытаясь оттянуть время, она рассказывает Роботу три ужасные истории о людях, которые происходят в прошлом, настоящем и будущем.Сможет ли она спасти себя или Робот унитожит ее.\r Первая история из прошлого. Долина Лис. История-сказка, судя по всему, написана под метамфетамином.Двое мужчин забредают в город, в котором живут люди-лисы,которые копают огромный туннель в горе.Они умеют менять облик, но хреново размножаются. Что из этого вышло и что в конце туннеля, смотрите сами.\r Вторая история. Настоящее. Дорожная ярость. Самая внятная история, про парочку на машине и грузовике с маньяком, охотящимся за ними по ночной дороге.\r Третья история. Из будущего. Робот Спирит. Домашний робот выходит из строя,но не желает отправлятся на свалку,так как очень любит свою семью.",
-    "poster": "https://image.tmdb.org/t/p/w342/zcZcYv2PkOo6nAiDl43LMPXiQ3Z.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mzMRdToBtofaZPnoFKbpb71gFLu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 36132,
-    "ru": "Самсон и Салли",
-    "en": "Samson og Sally",
-    "year": 1984,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 16,
-    "popularity": 0.35,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "Молодой кит Самсон страдает от одиночества. У него совсем нет друзей, и из-за этого огромный океан кажется излишне просторным и пустым. Мама воспитывает его на рассказах о легендарном Моби Дике, папа пытается научить его выживать в нелегких условиях подводного мира. Они подбирают крошку Салли, мать которой убили китоловы. И вот, когда в очередной раз китоловы намерены напасть на китов, а на поверхности моря разлито огромное нефтяное пятно, Самсон отправляется на поиски того самого легендарного Моби Дика…",
-    "poster": "https://image.tmdb.org/t/p/w342/j0QujPfK8Bx1DUPz12s6vYSSKPJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3t4Gh4FqZe9z06vFAwEeqn1MSPn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 213646,
-    "ru": "擋不住的瘋情",
-    "en": "擋不住的瘋情",
-    "year": 1993,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 16,
-    "popularity": 2.71,
-    "genres": [
-      "триллер",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/x68W8y1OQd6qOx9KkdXB5wbN0dl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sud1OChHez9sXVIAf39oOZdrJ6g.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 651879,
-    "ru": "屍人荘の殺人",
-    "en": "屍人荘の殺人",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 16,
-    "popularity": 0.98,
-    "genres": [
-      "детектив",
-      "криминал",
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1YEamCg1OUHRG0gFXfp9Bz96BHW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zPATOBJBItefuQ9yJgZMdZD1drP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 303835,
-    "ru": "Sex and Broadcasting",
-    "en": "Sex and Broadcasting",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 16,
-    "popularity": 0.7,
-    "genres": [
-      "документальный",
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dk5KcUZy1OdZ5nwe6qXI9CFLdyn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ozrmo2tlwJhq2dUcJGvi4RPTx0H.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 545273,
-    "ru": "Helicopter Eela",
-    "en": "Helicopter Eela",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 16,
-    "popularity": 0.61,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5nl4RpcRKROSvqkoJzthUAhJ7NG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8AN67MrhyOm0ewFijuhHOhppPU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 312788,
-    "ru": "Americons",
-    "en": "Americons",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 16,
-    "popularity": 0.5,
-    "genres": [
-      "драма",
-      "боевик",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pi03dJrDAisb9SJzc2UZrnWBT5c.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3o4L5xnm9b2qmHkdLpLNii2vsOd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 258673,
-    "ru": "The Trip to Bountiful",
-    "en": "The Trip to Bountiful",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 16,
-    "popularity": 0.49,
-    "genres": [
-      "драма",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yceP6tTD3XePL4ae5gsiUVPe9qH.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4tzaOybzFJbbOQqX67lhXgKq26R.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_45893",
-    "ru": "Наброски Хидамари",
-    "en": "ひだまりスケッチ",
-    "year": 2007,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.0,
-    "votes": 15,
-    "popularity": 4.88,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "«Хидамари» («солнечное место») — имя собственное двухэтажной коробки, в которой снимают квартиры ученицы художественного отделения школы Ямабуки. «Скетч» — небольшая сценка в свободной манере. Беглый набросок, фиксирующий наблюдение или замысел без детальных описаний. Повседневность, самостоятельность, учеба, дружба. Четверка узнаваемых старшеклассниц: прилежная Юно (невысокая, помечена тонким крестиком), прагматичная Мия (аппетит), устойчивая Сая (очки), её подруга, мнительная Хиро (кудряшки и диета). Всё. Сверх перечисленного нет ничего, даже первой любви.",
-    "poster": "https://image.tmdb.org/t/p/w342/g1vJD3al2XDY0OJpIgNXAEN966b.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/POCKoyMDc7YH50vlTyjicqJgqW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_34148",
-    "ru": "Этот ужасный и прекрасный мир",
-    "en": "この醜くも美しい世界",
-    "year": 2004,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.0,
-    "votes": 15,
-    "popularity": 4.15,
-    "genres": [
-      "мультфильм",
-      "драма",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "Ученик средней школы Такеру Такемото, ленивый и безответственный, хоть и не лишенный чувства юмора и доброго нрава, живет размеренной и скучной жизнью. Клуб плавания, подработка курьером, общение с лучшим другом, также состоящим в клубе, и регулярные нагоняи от кузины за безалаберность – вот будни этого юноши.\n\nЖизнь изменится в одно мгновение, когда при выполнении одного из заказов он увидит исходящий из леса свет. События развиваются стремительно, обнаружив юную девушку в лесу, он тут же натыкается на огромное чудовище, которого просто не могло там быть…",
-    "poster": "https://image.tmdb.org/t/p/w342/sHUucBFpaoeF9ZZ1hduOzrv0P2K.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qBfldtvxqDVoY9ZCyyMksFZ3dAG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1261543,
-    "ru": "Невеста дьявола",
-    "en": "Pengantin Iblis",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 15,
-    "popularity": 1.51,
-    "genres": [
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "Ранти, преданная жена и заботливая мать дочери Нины, родившейся с инвалидностью. Когда Нина получает серьёзную травму, нуждаясь в срочной медицинской помощи, а муж отсутствует, Ранти оказывается на грани страшного решения. В отчаянии она заключает мистический и зловещий договор - становится «невестой дьявола», чтобы спасти жизнь ребёнка. Изначально казалось, что всё наладилось, но затем расплата наступает: проклятие обрушивается на всю семью, заставляя её платить ужасающую цену.",
-    "poster": "https://image.tmdb.org/t/p/w342/j8Zar9xxzyTJevigM9lLMYnbCKZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tX0G6mVkRt550e3cfzkqZIK8wNz.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,270 @@
 [
   {
+    "id": "tv_55216",
+    "ru": "Scènes de ménages",
+    "en": "Scènes de ménages",
+    "year": 2009,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.9,
+    "votes": 31,
+    "popularity": 14.94,
+    "genres": [
+      "комедия",
+      "семейный",
+      "Ток-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/38N3KQblPyTLGWNZs2qmy9mQywm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pnTYmGcsJBgQyI6qB8wHyvbuHBW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_1076",
+    "ru": "Непредсказуемая Сьюзан",
+    "en": "Suddenly Susan",
+    "year": 1996,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.9,
+    "votes": 31,
+    "popularity": 8.09,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dfM8shbsRi7Iw6SZmamX3mZ2313.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4EQAi7r9iTo84WzyS351ssPxAAX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 513730,
+    "ru": "DC Super Hero Girls: Legends of Atlantis",
+    "en": "DC Super Hero Girls: Legends of Atlantis",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 31,
+    "popularity": 1.08,
+    "genres": [
+      "мультфильм",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6KT5oqjul7QQTmxpAmUK8WCigUx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zMMe6ZK4V96NdriZNzflcQDqbSw.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 468528,
+    "ru": "Soleil battant",
+    "en": "Soleil battant",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 31,
+    "popularity": 0.54,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hyYphOGK7vUWI8o5Q5Doaf44zJz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jqFR3sOoGiN83JUoBwul6KoyXnE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 393521,
+    "ru": "שבוע ויום",
+    "en": "שבוע ויום",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 31,
+    "popularity": 0.41,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ksXbsxQeKWq2QSY8H1KQIVNAQPx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nfM4BignSJXNhQoOQrtfkb5tLN6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_99969",
+    "ru": "Соммердаль",
+    "en": "Sommerdahl",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.9,
+    "votes": 30,
+    "popularity": 12.21,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Дэн Соммердаль расследует убийства в датском прибрежном городке вместе со своей женой, криминалистом Марианной, и лучшим другом, детективом Флеммингом Торпом. Дэна много лет интересовала лишь работа, поэтому Марианна хочет развестись. Вскоре Дэн обнаруживает, что его соперником за ее расположение является не кто иной, как Флемминг. Тем не менее им придется работать сообща, чтобы раскрыть преступления.",
+    "poster": "https://image.tmdb.org/t/p/w342/t8klLdjPErriFytwlWkt2dDvyOW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dVrKJkcvssTm5oY8Pv4fX1EB6YS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1360780,
+    "ru": "Наша Рождественская история",
+    "en": "Our Holiday Story",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 30,
+    "popularity": 0.95,
+    "genres": [
+      "телевизионный фильм",
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Дэвид и Элеонора рассказывают свою трогательную историю любви, чтобы спасти отношения Джоанны — дочери Дэвида.",
+    "poster": "https://image.tmdb.org/t/p/w342/15TXQSd0RerDV7XNtOcTNhnfhOq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wexB0OfXJ6IK9v0jMg2j5lmfLlW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1140168,
+    "ru": "Пятницы Фредди",
+    "en": "Freddy's Fridays",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 30,
+    "popularity": 0.62,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "Детектив Лила Джонс сталкивается с непростым расследованием серии жестоких убийств молодых девушек, произошедших за последние две недели. Ключ к делу появляется, когда удаётся установить личность последней жертвы – Анастасии, работавшей в эскорте. Её зверски убили вечером в пятницу после встречи с клиентом. Лила, движимая желанием справедливости для сестры Анастасии, решает во что бы то ни стало поймать маньяка.  Однако расследование принимает неожиданный поворот, когда Лила обнаруживает, что за убийствами стоят не просто человеческие руки. Всё связано с древней книгой, с помощью которой в ночь пятницы можно оживить жутких кукол для ритуальных убийств. Теперь Лиле предстоит остановить маньяка и разрушить магическое зло, пока не стало слишком поздно.",
+    "poster": "https://image.tmdb.org/t/p/w342/oMoPJPbUwcrp2vWyNYX0gBLBL77.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/z8LpGBiUB272FgK8q1ZHr4tAY26.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "231164",
+    "ru": "Сладкий кнут",
+    "en": "甘い鞭",
+    "year": 2013,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 30,
+    "popularity": 3.97,
+    "genres": [
+      "драма",
+      "криминал"
+    ],
+    "overview": "История о женщине, которую похитили подростком. Теперь она работает врачом, а по ночам — госпожой в см-клубе.",
+    "poster": "https://image.tmdb.org/t/p/w342/4mXbvGaQuWteEyCAgszKMmQEcqS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1bQTl8E3dA9pJCLh61XHj6dwMPV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 57661,
+    "ru": "Бог игроков 3: Ранние годы",
+    "en": "賭神3之少年賭神",
+    "year": 1996,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 30,
+    "popularity": 2.92,
+    "genres": [
+      "боевик",
+      "комедия"
+    ],
+    "overview": "Сирота Ко Чун попадает под покровительство талантливого карточного шулера Кента. Но со временем Кент начал видеть в Ко Чуне не столько успешного ученика, сколько соперника, и накануне престижного китайского турнира по покеру решает избавиться от него.",
+    "poster": "https://image.tmdb.org/t/p/w342/d9lN4VcF810xmBydi53cgbxOfLP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zRefnJUN5EICBWxIwltzQLLcEa5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 53745,
+    "ru": "Дональд Дак: Птица кондор",
+    "en": "Contrary Condor",
+    "year": 1944,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 30,
+    "popularity": 0.45,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "Во время альпинизма в Андах Дональд попал под крыло матери-кондора, которая приняла его за одного из своих новорожденных детей.",
+    "poster": "https://image.tmdb.org/t/p/w342/gDvnVuLB4rez1fJ4oBPcSHzzAJz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fExigmVX8q6ytQRiFVHvAg0Zece.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_60842",
+    "ru": "Актёры ослеплённого города",
+    "en": "メカクシティアクターズ",
+    "year": 2014,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.9,
+    "votes": 29,
+    "popularity": 4.32,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "10749",
+      "Аниме"
+    ],
+    "overview": "18-летний Синтаро Кисараги два года не выходил на улицу. А зачем? Для заказов есть Сеть, для общения – виртуальная девушка Энэ, творение неизвестного гения. И надо же было проклятой клавиатуре сломаться в разгар праздника Обон, когда вся Япония почитает духов предков, и доставка нигде не работает! Пришлось Кисараги под шуточки Энэ лично тащиться в супермаркет в пик августовской жары.",
+    "poster": "https://image.tmdb.org/t/p/w342/4fYd1cBnv2CEYW3bdQvcWCOwXhK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lWFBgk4BsHB8OjRUCCgK6o4Qylx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 980537,
+    "ru": "Мать-Земля",
+    "en": "Earth Mama",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 29,
+    "popularity": 1.99,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Интимная история взросления беременной матери-одиночки, которая принимает сообщество района Бэй, определяя судьбу своей семьи.",
+    "poster": "https://image.tmdb.org/t/p/w342/am2ZjdYSt7aCdBQA5dAC4fGTQ2f.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nLQ7jOeBmCQEETS3FCtZDWvYYtA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 99896,
+    "ru": "Крестики-нолики",
+    "en": "Noughts + Crosses",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.9,
+    "votes": 29,
+    "popularity": 1.63,
+    "genres": [
+      "драма",
+      "НФ и Фэнтези"
+    ],
+    "overview": "В «Крестиках-ноликах» нас ждет мир будущего, власть в котором принадлежит темнокожим, то есть крестикам, которые эксплуатируют и угнетают белое население — ноликов. На фоне разворачивается каноническая история Ромео и Джульетты — Каллума и Сефи, которые не могут быть вместе из-за цвета кожи и социального положения.",
+    "poster": "https://image.tmdb.org/t/p/w342/jDoa0jwaHzOvLmZGrMVa7TR6RuE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tRHML16irVmFXqKDoIwP8Sk8rQU.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 97724,
     "ru": "Спайды",
     "en": "Spides",
@@ -9344,274 +9609,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/o34lCbdb4vq15JsJN8vGt2vrBDo.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/4pIJME4gk1dpLrashNSncF1d8P8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1180236,
-    "ru": "మా ఊరి పొలిమేర 2",
-    "en": "మా ఊరి పొలిమేర 2",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 0.55,
-    "genres": [
-      "ужасы",
-      "триллер",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/w9bpn7naJEoYi7BxnJEarmk4VpI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7LJTM8DiWrPJdcbnsPH5vnT76Tr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1239306,
-    "ru": "Mommy Meanest",
-    "en": "Mommy Meanest",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 0.44,
-    "genres": [
-      "драма",
-      "телевизионный фильм",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zEsMoyfx8LJLCniLpTm99tiKGUt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xQSjwKKkRv1Th113qCAJRTIf6Xy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 673407,
-    "ru": "불량탐정: 먹이사슬",
-    "en": "불량탐정: 먹이사슬",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 1.73,
-    "genres": [
-      "криминал",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wyGNUFVpXSVGTRHSylyPqn3qZcT.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 272158,
-    "ru": "劇場版 仮面ライダー鎧武 サッカー大決戦!黄金の果実争奪杯!",
-    "en": "劇場版 仮面ライダー鎧武 サッカー大決戦!黄金の果実争奪杯!",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 1.54,
-    "genres": [
-      "боевик",
-      "приключения",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eSCaqh6DO2neNkjwFt1DbboJGsb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2fdyiHJLjAiWQ4OSxUWm2sQvOb0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 391136,
-    "ru": "Inside Her Sex",
-    "en": "Inside Her Sex",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 0.4,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oYz9wrXGKBmAzLxdV9eWg2DyTvn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d4ZaIOpmRxthLv7AJO9Jw9uMOTT.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 100838,
-    "ru": "Lauras Stern und die Traummonster",
-    "en": "Lauras Stern und die Traummonster",
-    "year": 2011,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 0.37,
-    "genres": [
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qtyMobcGOqvLVFTdS4z8V8rOCl3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/phxrKrRzEPrSWMIqRRC08rKTRNl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 454402,
-    "ru": "Memória em Verde e Rosa",
-    "en": "Memória em Verde e Rosa",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 1.64,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1TDozm5owmWXHczaD4eWpwiZNVm.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 729592,
-    "ru": "Ji",
-    "en": "Ji",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 1.23,
-    "genres": [
-      "фантастика",
-      "боевик",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bspK2poYcXIMAVETUn9RPPTzBW6.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 68365,
-    "ru": "ประวัติพระพุทธเจ้า",
-    "en": "ประวัติพระพุทธเจ้า",
-    "year": 2007,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 0.36,
-    "genres": [
-      "история",
-      "документальный",
-      "мультфильм",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2od4De4VQPLozdYLBhCUR7EZQpQ.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 283657,
-    "ru": "Слава",
-    "en": "ग्लोरी",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.9,
-    "votes": 4,
-    "popularity": 27.5,
-    "genres": [
-      "драма",
-      "детектив",
-      "Боевик и Приключения"
-    ],
-    "overview": "Сатья (Рупеш Шетти), проницательный и преданный своему делу молодой человек, работающий на местного члена законодательного собрания Вишваната (Радж Дипак Шетти), живет в деревне Симхабетту в прибрежной части штата Карнатака. Поначалу Сатья не обращал внимания на застарелые проблемы деревни, в том числе на отсутствие моста и медицинских учреждений, но когда эти проблемы коснулись его семьи, он начал действовать. Он стал бороться за благополучие своей общины, преодолевая политические манипуляции и социальные трудности...",
-    "poster": "https://image.tmdb.org/t/p/w342/5WWryCimw7l3JF2fQPva82yYsgq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/o9rD068PXoATK5H5Z3W2sJ4fA60.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1580225,
-    "ru": "A Firefighter's Christmas Calendar",
-    "en": "A Firefighter's Christmas Calendar",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 4,
-    "popularity": 0.9,
-    "genres": [
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bGBaRoF2Yuis2rSn8NPeY2CI05m.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gZ84KYTHknBEVjMUFP4c2YcNlZJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 731015,
-    "ru": "いのちの停車場",
-    "en": "いのちの停車場",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 4,
-    "popularity": 0.89,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3TFjnMVVoBnaLnidgDAm8uIVJF3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pTIcf8IncK3RhbFUVUG2uPqFuqz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1375135,
-    "ru": "Dasim",
-    "en": "Dasim",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 4,
-    "popularity": 0.88,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ulKWRfIn4okrZTNgFFLaayAYcEX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/A5HZKrMHXWaCRIYXMkqtFzD748u.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 319820,
-    "ru": "Rosa Elettrica - In fuga con il nemico",
-    "en": "Rosa Elettrica - In fuga con il nemico",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.9,
-    "votes": 4,
-    "popularity": 0.6,
-    "genres": [
-      "Боевик и Приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6L8mWi31O2SwdX8b3oCLv0S6eJI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7B3jeJJXo4suCZoWx2b89Qt3OqH.jpg",
     "source": "tmdb"
   }
 ]

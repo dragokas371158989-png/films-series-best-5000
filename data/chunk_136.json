@@ -1,5 +1,280 @@
 [
   {
+    "id": 574078,
+    "ru": "История моей жены",
+    "en": "A feleségem története",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 74,
+    "popularity": 0.76,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "Капитан Якоб Штэрр заключает пари с приятелем, что женится на первой женщине, которая переступит порог кафе, в котором они коротают время. Избранницей становится ветреная француженка Лиззи. Восхитительная, очаровательная, но отнюдь не верная.",
+    "poster": "https://image.tmdb.org/t/p/w342/n5szavugUP5sG9LUUXgsYIoEeFr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bMlKb5ZReuBTMP8Sp3b7m41j8WJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 747349,
+    "ru": "Долли Партон: Рождество на площади",
+    "en": "Dolly Parton's Christmas on the Square",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 74,
+    "popularity": 0.75,
+    "genres": [
+      "комедия",
+      "музыка",
+      "семейный",
+      "телевизионный фильм"
+    ],
+    "overview": "Праздничное настроение улетучивается, когда черствая женщина приезжает продать землю в своем родном городке. Могут ли музыка, волшебство и воспоминания изменить ее планы?",
+    "poster": "https://image.tmdb.org/t/p/w342/2fmnCR1UpojTl5FRBu7OzZTibA4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4HPcsQP2qdwtTyezK5dUo75OiVH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "38018",
+    "ru": "Заблудившиеся",
+    "en": "Les égarés",
+    "year": 2003,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 74,
+    "popularity": 3.77,
+    "genres": [
+      "драма",
+      "мелодрама",
+      "военный"
+    ],
+    "overview": "Июнь 1940 года. Гитлеровцы вошли в Париж, и школьная учительница Одиль /Эммануэль Беар/, поддавшись общей панике, бежит из города вместе с двумя детьми. Когда колонну беженцев атакуют истребители, машина Одиль ломается, и троица вынуждена укрыться в лесу. В этот момент они сталкиваются с Иваном /Гаспар Ульель/, семнадцатилетним неграмотным беглецом, чьи навыки выживания оказываются весьма необходимыми. Проведя ночь под открытым небом, герои обнаруживают пустой дом, который становится временным пристанищем для их импровизированной семьи. Одиль, в чьих чувствах к незнакомцу смешались подозрительность и влечение, оказывается в гуще неожиданных личных и сексуальных переживаний...",
+    "poster": "https://image.tmdb.org/t/p/w342/5S7kpeVc6kNwgbcbA0sHxj3bzFQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7kHxNCeUcROtri3XKUubXBwDEfq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 411139,
+    "ru": "I'm Not Here",
+    "en": "I'm Not Here",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 74,
+    "popularity": 1.16,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zyJyNCoR4rVi5OEYniLEOxYCM4b.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5rcJujH3Qse8TtrsoDxX72mDXv9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1235610,
+    "ru": "Решала. Агент на миллиард",
+    "en": "Mercato",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 73,
+    "popularity": 2.15,
+    "genres": [
+      "триллер"
+    ],
+    "overview": "Дрисс — футбольный агент, знающий все правила игры в спортивном бизнесе. Но когда его главного игрока дисквалифицируют, а собственные долги перед криминальными структурами достигают критической суммы, привычные схемы перестают работать. У Дрисса есть 7 дней, чтобы спасти карьеру, благополучие семьи и собственную жизнь. И для этого ему придется совершить беспрецедентную сделку.",
+    "poster": "https://image.tmdb.org/t/p/w342/9R9Hsqu8nR13l7kqBAJcGwcfxkR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2uEmC6WvlxL1H4RRFS567l3HoVP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 489934,
+    "ru": "Монстры и люди",
+    "en": "Monsters and Men",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 73,
+    "popularity": 0.79,
+    "genres": [
+      "драма",
+      "криминал",
+      "триллер"
+    ],
+    "overview": "Несколько человек попадают в эпицентр назревающего скандала, вызванного убийством безоружного темнокожего бруклинца полицейским. Кадры этого происшествия оказываются в руках одного из героев фильма…",
+    "poster": "https://image.tmdb.org/t/p/w342/u6FtNjPCVF3yRMFGvbzNj56i1Dj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4Nm7zZbRLFrNqzaHQB604pQAV3F.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 254526,
+    "ru": "Следующая полночь",
+    "en": "那夜凌晨，我坐上了旺角開往大埔的紅VAN",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 73,
+    "popularity": 0.73,
+    "genres": [
+      "комедия",
+      "детектив",
+      "фантастика",
+      "триллер",
+      "ужасы"
+    ],
+    "overview": "Восемнадцать... нет, 16 пассажиров, севших в маршрутное такси (и водитель, конечно), отправляются из Монкока в Тайпоу. Как только красная маршрутка проходит тоннель Лайон-Рок - переход с Коулуна на новые территории, - Гонконг становится городом-призраком. По прибытии в Тайпоу все, находившиеся в автобусе, начинают понимать, что что-то не так. Почему на улицах пусто? Где все? Почему на их звонки никто не отвечает? И кто эти таинственные фигуры в масках, время от времени появляющиеся перед растерянными пассажирами?",
+    "poster": "https://image.tmdb.org/t/p/w342/dxcM9WgsBeVvFOnM04OSM59OIlu.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wqcq91Trtek0yH00X78lz7fBf6d.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 404580,
+    "ru": "Любовь без тормозов",
+    "en": "Spin Out",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 73,
+    "popularity": 0.45,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Билли и Люси выросли вместе в небольшом дружном провинциальном городке, где организовали крепкую команду любителей езды по бездорожью. Когда Билли выполняет очень опасный трюк на автомобиле, Люси принимает решение переехать в город, чем повергает Билли в панику. В суматохе ежегодной городской благотворительной вечеринки у Билли в распоряжении всего один вечер: либо он разберется с чувствами к своей лучшей подруге, либо потеряет её навсегда.",
+    "poster": "https://image.tmdb.org/t/p/w342/hCR3eX7RwnogvEfrWny3SkJewhg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/j9wTGhQrG5fMF9uUk0d2I6slqxS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1426964",
+    "ru": "Группировка: общий сбор",
+    "en": "Salve Geral: Irmandade",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 72,
+    "popularity": 5.83,
+    "genres": [
+      "боевик",
+      "триллер",
+      "криминал",
+      "драма"
+    ],
+    "overview": "Сан-Паулу захлестывает беспрецедентная волна насилия. Чтобы спасти похищенную племянницу, ее тетя-адвокат, связанная с преступным миром, заключает сделку с полицией.",
+    "poster": "https://image.tmdb.org/t/p/w342/5AAzx2bcorTZUVe4Sk6yqhMBq1s.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1Xdsq7U7bvJJd2X7Jg4qNaKVkYO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1042657,
+    "ru": "Ханна. В игре",
+    "en": "Latency",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 72,
+    "popularity": 1.46,
+    "genres": [
+      "фантастика",
+      "триллер",
+      "ужасы"
+    ],
+    "overview": "Ханна — геймер, из-за тяжелой агорафобии сутки напролет она проводит за видеоиграми и предпочитает не выходить из дома. На этом ей удалось построить целую карьеру: трансляции в Twitch, турниры, ранний доступ ко всем новинкам — в этом вся ее жизнь. Однажды ее приглашают принять участие в крупном соревновании, прислав совершенно новое оборудование с поддержкой виртуальной реальности. Девайс оказывается революционным, но похоже он начинает овладевать сознанием геймерши.",
+    "poster": "https://image.tmdb.org/t/p/w342/80hgsCQDPI1UmkeVVKebxjIfBDc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9GzQ4bT6gdeq4fKMrzpJLwx40sI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 661227,
+    "ru": "Мститель 2: Расплата",
+    "en": "I Am Vengeance: Retaliation",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 72,
+    "popularity": 0.68,
+    "genres": [
+      "боевик"
+    ],
+    "overview": "Бывшему спецназовцу Джону Голду предоставляется возможность привлечь к ответственности Шона Тига — человека, который предал команду во время последней миссии в Восточной Европе несколько лет назад. Голд предпочел бы поскорее увидеть Тига мертвым, но он обязан схватить его и переправить в военную тюрьму для судебного разбирательства. В ходе этого задания Голду придется столкнуться не только с пособниками предателя, но и со снайпером, который, кажется, намеревается убить Тига, чтобы не допустить его поимки.",
+    "poster": "https://image.tmdb.org/t/p/w342/xur6xrG7V4fhLbl8vpK5TGgOiOB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rZzTXoAyRCXdizU2wkbEH83No0Z.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_112712",
+    "ru": "Sex",
+    "en": "Sex",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.8,
+    "votes": 72,
+    "popularity": 6.41,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/af2WkK4PqG09paffASqPeaIw5wH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lMLGb28yyhN31Y0yRBE9LKEacZw.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 514690,
+    "ru": "Глобальная катастрофа",
+    "en": "Global Meltdown",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 72,
+    "popularity": 1.09,
+    "genres": [
+      "боевик",
+      "фантастика",
+      "триллер",
+      "телевизионный фильм"
+    ],
+    "overview": "Доктор Карен Кавана пребывает на одну из ферм возле городка Плезант-Крик, чтобы расследовать случай массовой гибели овец. Произошедшее напоминает ей события в Камеруне, когда целая деревня погибла от выброса углекислого газа. У Карен есть подозрения, что выброс углекислоты - лишь одно из проявлений обширной сейсмической активности, которая может привести к глобальной катастрофе. Ее подозрения подтверждают кадры теленовостей. Сильное землетрясение в Тихом океане породило гигантскую приливную волну, смывающую один за другим прибрежные города. Расположение Плезант-Крика в 100 километрах от Йеллоустоунского заповедника не оставляет городку шансов. Необходима срочная эвакуация...",
+    "poster": "https://image.tmdb.org/t/p/w342/uniRY9O6MpI2dQUS12mSl8Wjv0H.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2S6hk3mJqXWeKwDABJcotIdf1a1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 371451,
+    "ru": "Хранитель тьмы",
+    "en": "陀地驅魔人",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 72,
+    "popularity": 1.05,
+    "genres": [
+      "фэнтези",
+      "ужасы",
+      "мелодрама"
+    ],
+    "overview": "Фай с детства видит призраков и занимается экзорцизмом много лет. Однажды два знаменитых на весь Гонконг экзорциста погибают при странных обстоятельствах.",
+    "poster": "https://image.tmdb.org/t/p/w342/usHXbR70paZF3GdO742YrafKcZP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/77or0xGz5jpcBEFuok6FnPzsZzY.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 346570,
     "ru": "Идеальный кайф",
     "en": "Perfect High",
@@ -9399,272 +9674,6 @@
     "overview": "\"Платоническая любовь\" — это искрометная комедийная мелодрама из Турции, в центре которой — несокрушимые узы между сестрами Гюльтен и Недрет. Эти две женщины разделяют всё — от секретов до семейных историй, кажется, никакие испытания не в силах разлучить их. Однако приход в их жизнь амбициозного и очаровательного Каана ставит под угрозу их крепкие отношения. Вихрь чувств и неожиданных событий заставляет героинь переосмыслить не только свои родственные связи, но и взгляды на жизнь. Смогут ли сестры сохранить свою близость, или же присутствие Каана изменит все навсегда?",
     "poster": "https://image.tmdb.org/t/p/w342/dj8A4dX6oC7DFD2RWLqvMLMPVQ3.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/c7mQmsBKo3xKAVsdNVuqKz7eZxb.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 661908,
-    "ru": "Убийство в стране басков. Мадди Эчебан",
-    "en": "Maddy Etcheban",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 0.41,
-    "genres": [
-      "криминал",
-      "драма",
-      "детектив"
-    ],
-    "overview": "Мадди Эчебан — полицейский города Байон и мать страдающего аутизмом Клемана, которого она растит одна после смерти мужа. В течение недели сын находится под присмотром в «Институте Агории», а она забирает его по пятницам. Этой стабильности приходит конец, когда директор института сообщает, что они больше не могут присматривать за мальчиком. Мадди должна найти выход из ситуации или ...",
-    "poster": "https://image.tmdb.org/t/p/w342/vV8oqdSdnXIQn0QyawDX9VEliIc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nS0mmWS663raVsNj70mSC2qm9cz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 851743,
-    "ru": "കനകം കാമിനി കലഹം",
-    "en": "കനകം കാമിനി കലഹം",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 2.44,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iZJfmpm8NuTN631npCv0cIPyvlR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5d6Gnj2u26RRE0H4mnyhU8Ckrxk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1260794,
-    "ru": "Resurrection Road",
-    "en": "Resurrection Road",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 0.73,
-    "genres": [
-      "боевик",
-      "ужасы",
-      "вестерн"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3FSlrUUzGsQDESz935ryjo769sK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/AcLKdztolhIBySNuWZRLPYNzm8x.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1207413,
-    "ru": "Dark Parasite",
-    "en": "Dark Parasite",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 0.68,
-    "genres": [
-      "ужасы",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hmfVO0q2LCsu2sTOe4KjH1aU5tG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oK29TJvtWzzYFWWPBq1RGfb8FMS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 573644,
-    "ru": "The Outside Story",
-    "en": "The Outside Story",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 0.48,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gONHahY9aygWGvnAa8sx86ExD3O.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lm4syvlmME3Zw5iuIc3Titku8Ol.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1119752,
-    "ru": "Make Me a Match",
-    "en": "Make Me a Match",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 0.44,
-    "genres": [
-      "телевизионный фильм",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5rrxdDD4uwTXlyRvYHcrECnpXMC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bgUTgnEOei5tyvL5OuxeABeJqx2.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 656216,
-    "ru": "Дельфин Берни 2",
-    "en": "Bernie the Dolphin 2",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 0.67,
-    "genres": [
-      "семейный",
-      "комедия",
-      "приключения"
-    ],
-    "overview": "Дети очень рады, что Берни вернулся. Но вместе с Берни появился и коварный Уинстон, который хочет похитить талантливого дельфина. Кевин и Холли должны спасти морского друга, пока ещё не поздно.",
-    "poster": "https://image.tmdb.org/t/p/w342/e5JIXRo3SUSWBFUljOxC69M5gWB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5LDWmyVkxyNXOANFnbbrXJv4677.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 663610,
-    "ru": "Тридцать семь-надцать",
-    "en": "37 Teen",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 0.44,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "У миллиардера Адама Пая есть всё кроме положительных воспоминаний о старших классах. Он неохотно идет на 20-ый вечер встречи выпускников и предлагает бывшим одноклассникам годовую зарплату за то, чтобы на месяц вернуться обратно в школу.",
-    "poster": "https://image.tmdb.org/t/p/w342/sUPEZzoFarSwWWFaNQ45PRgEuAF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/q8wdspRRWYIQKQUdWPIGItoiop1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 90934,
-    "ru": "香港奇案之吸血貴利王",
-    "en": "香港奇案之吸血貴利王",
-    "year": 1994,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 2.88,
-    "genres": [
-      "криминал",
-      "триллер",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/c0XAcWPlQpF6Y3a9f0klQ5RvG7t.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2F74qRanI2hKWJQNlSqX555d3WA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 512082,
-    "ru": "Jahr des Tigers",
-    "en": "Jahr des Tigers",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 1.79,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/IqxQ9X6zcTg79Tw7Dz4VNJpX4e.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cz7rj3Otz4vA7DxbCwQ6a0AlVEL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 560095,
-    "ru": "Pauvre Georges!",
-    "en": "Pauvre Georges!",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 1.6,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/h7ovr0Mmm3stHQR6wIDsAHk2XBw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/29wkp3yHgkHlBJeJiWz1McIsuqu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 451003,
-    "ru": "花芯",
-    "en": "花芯",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 1.42,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4fHfSbtVo5eP8ei2in9bvpp1tUP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/y4IMSTLTmH91XkhlFkpROBRhFZ4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 338400,
-    "ru": "娚の一生",
-    "en": "娚の一生",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 1.04,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fvCsvj9uE82uhmobWloIxOdMJWr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xy9COGeKwGNaT29gSMVP9VwiCRd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 387715,
-    "ru": "Louis-Ferdinand Céline",
-    "en": "Louis-Ferdinand Céline",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 0.8,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9KlQsoskJTLKfuRbRsJNRAYXaWh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wdWbNBJGZEHTpgJZgPkLa1ZOUTX.jpg",
     "source": "tmdb"
   }
 ]

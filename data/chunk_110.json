@@ -1,5 +1,274 @@
 [
   {
+    "id": 372518,
+    "ru": "Mais Forte que o Mundo: A História de José Aldo",
+    "en": "Mais Forte que o Mundo: A História de José Aldo",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 126,
+    "popularity": 0.63,
+    "genres": [
+      "драма",
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4L3xcKcs63XZByvjTDZz7Gia20A.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6bwWbChnViFHfvkY8HyybHKyVmC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 561557,
+    "ru": "Эспен в поисках Золотого замка",
+    "en": "Askeladden - I Soria Moria slott",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 125,
+    "popularity": 1.18,
+    "genres": [
+      "фэнтези",
+      "приключения"
+    ],
+    "overview": "Король и королева отравлены. Единственный шанс на спасение — живая вода, спрятанная на краю света в стенах таинственного Золотого замка. Эспен с принцессой Кристин отправляются в путешествие, полное опасностей и приключений.",
+    "poster": "https://image.tmdb.org/t/p/w342/wzpGkd1d58FUTPRbedZME8FTY7V.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jG6bfsahRPUQhXJcBrJrnWnK2BQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 468207,
+    "ru": "La Villa",
+    "en": "La Villa",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 125,
+    "popularity": 0.51,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/okip4vdJXniZ4COhKnYvaztt8bV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mDU05aMf6kRDm908PDnmhLX489j.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 451919,
+    "ru": "Что у них было",
+    "en": "What They Had",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 123,
+    "popularity": 0.71,
+    "genres": [
+      "драма"
+    ],
+    "overview": "История женщины, которая возвращается в родной город, где живут ее отец и страдающая от болезни Альцгеймера мать.",
+    "poster": "https://image.tmdb.org/t/p/w342/7VnbsaPddG90dSqn704tndxkMCN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/A7l3ZvQBGSvd8AWZ6dydZVJyyXr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "438058",
+    "ru": "Детектив Конан 21: Любовное послание в багровых тонах",
+    "en": "名探偵コナン から紅の恋歌",
+    "year": 2017,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 122,
+    "popularity": 2.83,
+    "genres": [
+      "мультфильм",
+      "криминал",
+      "детектив",
+      "боевик",
+      "Аниме"
+    ],
+    "overview": "В здании телевидения Нитиури, в котором проходит Кубок Сацуки на соискание победителя в японском Хякунин Иссю, происходит взрыв. Инцидент приводит к большому волнению, и, хотя здание сгорает дотла, единственные люди, оставшиеся внутри, — это Хэйджи и Казуха. Но их спасает Конан, который вовремя успел на место происшествия. Личность и цели террориста неизвестны. Одновременно с этим в японском доме в Арасияме, пригород Киото, находят тело действующего чемпиона Кубка Сацуки. Фотографии с места преступления указывают на причастность Момиджи, поскольку рядом с телом жертвы был разложены карты каруты.  Конан и Хэйджи, при поддержке полицейских департамента Осаки и Киото, берутся за расследование случившегося на Кубке Сацуки и связанного с ним убийства. В ходе следственных мероприятий парочка сталкивается с тайной о Хякунин Иссю.",
+    "poster": "https://image.tmdb.org/t/p/w342/v51KT0hZT3387NVxocRPxie5yWG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/60h5gBY9YLUBIRRBmXgnVt5Ywkt.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 554279,
+    "ru": "Возвращение в Кристмас Крик",
+    "en": "Return to Christmas Creek",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 122,
+    "popularity": 1.09,
+    "genres": [
+      "мелодрама",
+      "семейный",
+      "телевизионный фильм"
+    ],
+    "overview": "В преддверии Рождества Амелия Хьюз, многообещающий разработчик приложений в Чикаго, не отличающаяся праздничным настроением, возвращается в свой родной городок Кристмас Крик, чтобы вновь открыть для себя смысл Рождества.",
+    "poster": "https://image.tmdb.org/t/p/w342/gCdjZCWM9x9vAbtkvZiIIYL7tOB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zNUmOf9vOk0f146jQBrBkdmrZyH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 261101,
+    "ru": "Кантинфлас",
+    "en": "Cantinflas",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 122,
+    "popularity": 0.81,
+    "genres": [
+      "драма"
+    ],
+    "overview": "История жизни величайшего мексиканского комедийного актера.",
+    "poster": "https://image.tmdb.org/t/p/w342/jGrJ1CcewVtiEZJ43UtO90R4lwS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cqk0C16cGar0CNAtckk5Ztbik1B.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 776512,
+    "ru": "На счёт три",
+    "en": "On the Count of Three",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 121,
+    "popularity": 0.78,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "Вэл и Кевин — два лучших друга, желающих покончить с собой. Но им не хватает смелости сделать это самим, поэтому они выезжают за город и наставляют друг на друга пистолеты. Кажется, что долгожданная смерть близка, но перед двойным самоубийством им придётся поговорить о нерешённых проблемах.",
+    "poster": "https://image.tmdb.org/t/p/w342/mv5v3xtiRqpMyP1XWRnRl5s38lV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nzDMlEi6h2HMyRDU02eGsa9hncm.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 69292,
+    "ru": "Тайные желания отвергнутых",
+    "en": "クズの本懐",
+    "year": 2017,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 120,
+    "popularity": 8.19,
+    "genres": [
+      "мультфильм",
+      "драма",
+      "Аниме"
+    ],
+    "overview": "На первый взгляд старшеклассники Муги и Ханаби — идеальная пара, но это лишь маскарад. В реальности Ханаби с детства влюблена в Наруми, а Муги сохнет по своей репетиторше Аканэ Минагаве. Понимая, что добиться ответной любви пока нереально, заговорщики решают изображать счастливую пару. И правил у их временного союза всего три. Первое: незамедлительно разбежаться в случае, если кто-то из них добьется своей цели; второе: ни в коем случае не влюбляться друг в друга; и третье: выполнять физические желания партнёра.",
+    "poster": "https://image.tmdb.org/t/p/w342/gy00KZvi4N8HlYsGTx4MT01qcoV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yGUivSAtsxc82CmSgyFRDEInlVP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 726649,
+    "ru": "Анелька, непонятый гений",
+    "en": "Anelka : L'Incompris",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 120,
+    "popularity": 0.58,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "Непостижимый, несравненный или и то, и другое? В этом документальном фильме исследуется противоречивое наследие прославленного французского футболиста Николя Анелька.",
+    "poster": "https://image.tmdb.org/t/p/w342/yEBf6xa8dOutzxYNl2is9WA6rFU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m7dFZdz6cS720lfTEKwe2Arkw3p.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 245527,
+    "ru": "Осуждённый",
+    "en": "Convict",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 120,
+    "popularity": 2.43,
+    "genres": [
+      "боевик",
+      "криминал",
+      "драма"
+    ],
+    "overview": "Попав в тюрьму за непредумышленное убийство, Рэй подвергается физическим и психическим испытаниям со стороны тюремного босса-садиста.",
+    "poster": "https://image.tmdb.org/t/p/w342/mnvkok7eVau9Fg8BMDuwmk8JCZw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/f3rd6o0EQ0TnZsVtS1SD1k580Dh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_81239",
+    "ru": "Имя мне Ночь",
+    "en": "I Am the Night",
+    "year": 2019,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.5,
+    "votes": 120,
+    "popularity": 2.3,
+    "genres": [
+      "криминал",
+      "драма",
+      "детектив"
+    ],
+    "overview": "Девушка Фауна начинает расследовать секреты своего прошлого, чтобы найти свою настоящую мать, однако сталкивается с пугающими деталями одного из самых загадочных преступлений в истории США…",
+    "poster": "https://image.tmdb.org/t/p/w342/6wjIsd9BPFfL1CfkgLYZy8WqqIs.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/v0hkmz15hlYxd04im5GWv4nF2uR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 613348,
+    "ru": "Les vétos",
+    "en": "Les vétos",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 120,
+    "popularity": 0.55,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/w7bS4nnqZArSgkFU96uPIhxNP6v.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kEY2Kir3pRl2EhDkR519RO71bs5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_209876",
+    "ru": "Нарковоры",
+    "en": "Dope Thief",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.5,
+    "votes": 119,
+    "popularity": 6.97,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "В Филадельфии двое давних друзей выдают себя за агентов УБН, чтобы грабить мелких наркоторговцев. Афера проходит гладко, пока они не выбирают не ту цель и не становятся мишенью масштабной операции наркобизнеса.",
+    "poster": "https://image.tmdb.org/t/p/w342/yea7rbx5321J8TBG1o0dx2xIQum.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qbUeqIQAn1cy01OuSctGmatVJCC.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 681349,
     "ru": "По соседству",
     "en": "Nebenan",
@@ -9455,280 +9724,6 @@
     "overview": "Художник на заре славы отвлекается на юную студентку юридического вуза. Но на пути к общему будущему их ждет множество преград.",
     "poster": "https://image.tmdb.org/t/p/w342/hqqEHkLUdOyoDYcvXi0lUEeQ748.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/fDiUVAzUFwSx26IiVcDCtg2WyIj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1163186,
-    "ru": "Мы теперь взрослые",
-    "en": "We Grown Now",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 36,
-    "popularity": 1.08,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Лучшие друзья Малик и Эрик путешествуют по Чикаго изо всех сил стараясь избежать школьной рутины и тягот взросления. Неожиданная трагедия подвергает сомнению нерушимую связь юных героев.",
-    "poster": "https://image.tmdb.org/t/p/w342/ueMHawpQHYmd94HAE2pEyxDR1kR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/85aNuihDRCkx8GFwUd71HQ7nBUs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 675594,
-    "ru": "Кармен Сандиего: Красть или не красть",
-    "en": "Carmen Sandiego: To Steal or Not to Steal",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 36,
-    "popularity": 0.89,
-    "genres": [
-      "мультфильм",
-      "приключения",
-      "семейный"
-    ],
-    "overview": "Интерактивное приключение Кармен Сандиего. Зритель может помочь ей спасти Айви и Зака, которые были пойманы во время ограбления.",
-    "poster": "https://image.tmdb.org/t/p/w342/vzZxIosViM1H4d7MN93Jmqzwl3h.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/g5vUmDfYH86E8gdy9kwUVBhdRN4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 47711,
-    "ru": "Назову ее Фериха",
-    "en": "Adını Feriha Koydum",
-    "year": 2011,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.5,
-    "votes": 36,
-    "popularity": 5.81,
-    "genres": [
-      "семейный",
-      "драма"
-    ],
-    "overview": "Целеустремлённая девушка из бедной семьи Фериха поступает в один из лучших университетов страны, где учится золотая молодёжь. Боясь насмешек, Фериха скрывает своё происхождение. Это приводит к роковым последствиям, когда в неё влюбляется богатый и популярный студент Эмир. Бедность не порок – но как насчёт лжи?",
-    "poster": "https://image.tmdb.org/t/p/w342/sNWQIhTcesccuXG9hKr67Bbomn5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ebCEAxRFnBD1KkQAYHvcBO5TzmZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 408245,
-    "ru": "Репортер на краю света",
-    "en": "The Journey Is the Destination",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 36,
-    "popularity": 1.1,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Дэну Элдону, одному из самых молодых фотожурналистов, побывавших в Африке, было всего 22, когда его убила разъяренная толпа в Сомали. Фильм включает в себя страницы из 17-ти дневников, которые он вёл, путешествуя по разным странам, а также работы, выполненные фотохудожником в период с 14 до 22 лет.",
-    "poster": "https://image.tmdb.org/t/p/w342/2llZjuO87A2foskcJWlpXY94aU0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cMQvD5SmfCEaCacRhddosC1Dakc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 64152,
-    "ru": "Гарфилд: Все 9 жизней",
-    "en": "Garfield: His 9 Lives",
-    "year": 1988,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 36,
-    "popularity": 0.37,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "приключения",
-      "драма",
-      "фэнтези",
-      "музыка",
-      "фантастика",
-      "телевизионный фильм"
-    ],
-    "overview": "Несколько историй о коте Гарфилде, которые рассказывают о его предыдущих жизнях.",
-    "poster": "https://image.tmdb.org/t/p/w342/qfd3Grd0ZSTSOM0Zy7wx82yDGjt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/t76UA5vFVAG6AWhZYr5CaqitTY2.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 66993,
-    "ru": "Гуфи: Львы – снизу",
-    "en": "Lion Down",
-    "year": 1951,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 36,
-    "popularity": 0.32,
-    "genres": [
-      "комедия",
-      "семейный",
-      "мультфильм"
-    ],
-    "overview": "Гуфи планирует спокойный день на отдыхе, но ему нужно второе дерево, чтобы повесить гамак. Но у горного льва другое мнение на этот счёт.",
-    "poster": "https://image.tmdb.org/t/p/w342/swSOzBicz7P1ECXcQqldNIVHyAV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6WTXWP4t0wl39VktTEuXNmeARO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 70514,
-    "ru": "The Replacement",
-    "en": "The Replacement",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.5,
-    "votes": 36,
-    "popularity": 1.78,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vtNE4SiJ0lN340XIUaNJ0UIZ3y4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uIZkke7RjnUnSy5dEhQrsFV9TGU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 583727,
-    "ru": "True Love Blooms",
-    "en": "True Love Blooms",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 36,
-    "popularity": 0.71,
-    "genres": [
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kesL2ioCEGNNLahaZhTJkWWxDFf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/w08HLX9x0adVXYPZ7AIKvHt7AkO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 129902,
-    "ru": "Гуфи: Как дома сидеть",
-    "en": "Disney Presents Goofy in How to Stay at Home",
-    "year": 2021,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.5,
-    "votes": 35,
-    "popularity": 1.1,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "Один из классических персонажей Диснея становится чрезвычайно современным в новой серии короткометражных мультфильмов: Как дома сидеть.\n\nКомиксы с участием Гуфи вдохновлены самыми забавными повседневными событиями, с которыми приходится сталкиваться дома во время пандемии COVID-19 за последние полтора года.",
-    "poster": "https://image.tmdb.org/t/p/w342/6mquHuSdZhTa0yFivASiswFxau7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8AytW4DprI7GR2Z98LSEnGlbvoN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 60810,
-    "ru": "Академия Драгонар",
-    "en": "星刻の竜騎士",
-    "year": 2014,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.5,
-    "votes": 35,
-    "popularity": 3.84,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "В стране драконов, где граждане, называемые заводчиками, приручают своих приятелей-драконов, расы драконов рождаются от заводчиков, которым дают Сэйкоку: клеймо в форме звезды дракона. Научиться ездить верхом и приручать драконов легко дается большинству студентов Академии Драконов Ансаривана — за исключением первокурсника Эша Блейка, которого одноклассники называют \"проблемным ребенком номер один\".",
-    "poster": "https://image.tmdb.org/t/p/w342/a71a5pDmyDT2ZwXZcEAZEpooYkS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aaAy3CGWCrLAIvNMNv7XXoXXmsG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_100913",
-    "ru": "Проект «Анна Николаевна»",
-    "en": "Проект «Анна Николаевна»",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.5,
-    "votes": 35,
-    "popularity": 9.46,
-    "genres": [
-      "комедия",
-      "драма",
-      "НФ и Фэнтези"
-    ],
-    "overview": "Отечественные учёные создали андроида-полицейского. Идеальная во всех отношениях капитан Анна Николаевна Королькевич отправляется служить в провинциальный город, чтобы увидеть реальную жизнь и стать похожей на человека. Коллеги думают, что Анна Николаевна - дочь замминистра, и ничто не предвещает беды, пока очеловечивание не заходит слишком далеко.",
-    "poster": "https://image.tmdb.org/t/p/w342/vXf9bN3ENUv88L5d8TLRvUmUerl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fXwt6ECG6s769puFSNPfSFa32p5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 212196,
-    "ru": "Бывшая жена",
-    "en": "The Ex-Wife",
-    "year": 2022,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.5,
-    "votes": 35,
-    "popularity": 2.98,
-    "genres": [
-      "драма",
-      "детектив"
-    ],
-    "overview": "Когда юная Таша узнала, что беременна, Джек сразу же оставил свою жену и сделал ей предложение, несмотря на существенную разницу в возрасте и социальном положении. Теперь Таша живет в роскошном особняке с любимым мужем и обожаемой дочкой. Однако даже спустя три года после свадьбы она чувствует себя самозванкой: сестра и родители Джека ее ненавидят, бывшая жена все время заглядывает к ним в гости, а сам Джек постоянно пропадает на работе. И когда Наташа начинает осознавать всю шаткость своего положения, ее мир внезапно разваливается на части. В один миг все переворачивается, и она больше не знает, кому верить и на кого полагаться. Ее поглощает хаос, бороться с которым ей придется в одиночку. Достанет ли у нее сил противостоять искусно сплетенной интриге?",
-    "poster": "https://image.tmdb.org/t/p/w342/jwKOwmTKzWrUefzi9v6aPFmAMsT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/imt5AkPgo4oZb8sPzbZJov4B5pW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 256693,
-    "ru": "Я",
-    "en": "Me",
-    "year": 2024,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.5,
-    "votes": 35,
-    "popularity": 1.93,
-    "genres": [
-      "семейный",
-      "НФ и Фэнтези"
-    ],
-    "overview": "Новая школа. Новая семья. Новая суперсила. Для 12-летнего Бена Васани наступает время перемен, когда он узнаёт, что может превращаться в любого, кого встречает. Будучи метаморфом, Бен должен выяснить, кто он и кем хочет быть.",
-    "poster": "https://image.tmdb.org/t/p/w342/zYE9357q2thkuiRAsMA60H0eKiB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4K4Fgi7N36IUggoBPp9eFYLrBfp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 253344,
-    "ru": "Felices los 6",
-    "en": "Felices los 6",
-    "year": 2024,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.5,
-    "votes": 35,
-    "popularity": 1.59,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Сюжет фильма вращается вокруг профессора Кембриджского университета, избравшего в качестве своего девиза изречение уайльдовского лорда Генри из «Портрета Дориана Грея»: «Единственный способ отделаться от искушения — уступить ему». Но однажды в жизни героя появляется молодая женщина, ради которой он решает пересмотреть личные приоритеты и подавить гедонистические наклонности. И все бы хорошо, вот только сводная сестра новой возлюбленной профессора ждет от него ребенка.",
-    "poster": "https://image.tmdb.org/t/p/w342/18EGKG6ZWwDZ8CFSSalMyUj816Q.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/o9qcRVTAmWHZW31hFO5Fdvu5W1G.jpg",
     "source": "tmdb"
   }
 ]

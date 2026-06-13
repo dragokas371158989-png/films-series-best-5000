@@ -1,5 +1,154 @@
 [
   {
+    "id": "mal_974",
+    "ru": "Dead Leaves",
+    "en": "Dead Leaves",
+    "year": 2004,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 44548,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Комедия",
+      "Comedy",
+      "Фантастика",
+      "Sci-Fi",
+      "Жесть",
+      "Gore",
+      "Суперспособности",
+      "Super Power"
+    ],
+    "overview": "Shortly after waking up in an unknown street with no clothes or memories, Retro and Pandy team up and begin a life of thrill chasing and violence. Retro's wild antics and Pandy's carefree personality make them the perfect partners in crime to cause mayhem wherever they strike.\n\nWhen an accidental mistake lands them behind bars, Retro and Pandy are sent to Dead Leaves—a high-security prison on the Moon. Once there, they soon discover that the other inmates are clones, all products of genetic mutation experiments. With nothing better to do, they escape from their cell and lead a prison break with the other captives. Armed with a crew of mutants and a hunger for havoc, the chaotic duo begins their wacky escape.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1827/112657l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 7479718,
+    "tmdbId": 479718,
+    "ru": "Криминальный город",
+    "en": "범죄도시",
+    "year": "2022",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.64,
+    "votes": 543,
+    "poster": "https://image.tmdb.org/t/p/w342/pwnaCW29a6BxYwcKe5VkCPMwxUM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/xord8lZ7mK8ctki6FBgNYrbpWCO.jpg",
+    "overview": "В 2004 году в китайском квартале Сеула, печально известном высоким уровнем преступности, объявляются три особо борзых мигранта-коллектора и вместо того, чтобы по старинке изымать деньги у должников, сразу убивают главу одной из преступных группировок. Свято место пусто не бывает, и вот уже предводитель троицы Цзян Чэнь руководит этой бандой и пытается отжать бизнес у конкурентов. Местный начальник следственно-оперативной группы Ма Сок-то привык поддерживать худой мир на подконтрольной территории, но Цзян Чэнь мирно жить не хочет.",
+    "genres": [
+      "боевик",
+      "криминал",
+      "триллер"
+    ],
+    "source": "movie_top_rated"
+  },
+  {
+    "id": "mal_18041",
+    "ru": "Rozen Maiden: Zurückspulen",
+    "en": "Rozen Maiden (2013)",
+    "year": 2013,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.3,
+    "votes": 34541,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Драма",
+      "Drama",
+      "Сверхъестественное",
+      "Supernatural",
+      "Сэйнэн",
+      "Seinen"
+    ],
+    "overview": "During the events of the original Rozen Maiden, after circling \"yes\" on a paper and agreeing to wind an unknown  \"something,\" a traumatized Jun Sakurada fights alongside the lifelike dolls known as the Rozen Maidens. But what would have happened if Jun had circled \"no\"?\n\nJun, having gotten over his school trauma from his younger days, spends his time attending college and working in a bookstore. However, he does not feel as though he belongs anywhere. One day, he finds a book containing instructions on how to make a Rozen Maiden. Mysteriously, when he arrives home that night, the second volume in the book series has been delivered to his house, along with some pieces of a doll. But as suddenly as they started arriving, the books stop coming, and Jun gets a notice that says that the books have ceased being published. With an incomplete doll in hand, and a message from his other self in another world, this Jun also finds his way into the world of the Rozen Maidens.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/10/52079l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "mal_50287",
+    "ru": "The Vampire Dies in No Time Season 2",
+    "en": "Kyuuketsuki Sugu Shinu 2",
+    "year": 2023,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.5,
+    "votes": 14511,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Комедия",
+      "Comedy",
+      "Фэнтези",
+      "Fantasy",
+      "Взрослые персонажи",
+      "Adult Cast",
+      "Гэг-юмор",
+      "Gag Humor",
+      "Urban Fantasy",
+      "Вампиры",
+      "Vampire",
+      "Сёнэн",
+      "Shounen"
+    ],
+    "overview": "Second season of Kyuuketsuki Sugu Shinu.",
+    "poster": "https://cdn.myanimelist.net/images/anime/1254/131832l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "3580",
+    "ru": "Подмена",
+    "en": "Changeling",
+    "year": 2008,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 4487,
+    "popularity": 5.36,
+    "genres": [
+      "криминал",
+      "драма",
+      "детектив"
+    ],
+    "overview": "Действие картины развивается в Лос-Анджелесе 20-х годов прошлого столетия. Обратившись в полицию с заявлением об исчезновении ребенка, главная героиня вскоре получает своего сына, но сообщает полицейским, что, несмотря на внешнее сходство, это не ее сын. Вместо помощи несчастная мать получает прописку в палате клиники для сумасшедших…",
+    "poster": "https://image.tmdb.org/t/p/w342/cGqSOihfrqgA2o0hT2xjGyXUWWY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yWs9QUP2kamsnfdV4cloxLM5RUw.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 7000164,
+    "ru": "Завтрак у Тиффани",
+    "en": "Breakfast at Tiffany's",
+    "year": "1961",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 4481,
+    "popularity": 4.47,
+    "genres": [
+      "комедия",
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "Столица сильных мира сего и уютное гнездышко очаровательной Холли Голайтли. Кто-то назовет ее девицей по вызову, кто-то — авантюристкой. Одни подумают, что она хитра как лисица. Другие решат, что глупа как пробка. Холли это безразлично. Она наслаждается жизнью, меняет наряды и ищет богатого жениха. Но однажды этажом выше появляется симпатичный молодой человек…",
+    "poster": "https://image.tmdb.org/t/p/w342/hHIH5UuzRmpjWVGwNEs8MlT0o9o.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/jXZ2tyJl44yKvh22I6ooQwU5rFM.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 164
+  },
+  {
     "id": "mal_9288",
     "ru": "映画 ハートキャッチプリキュア！花の都でファッションショー・・・ですか！？",
     "en": "Heartcatch Precure! Movie: Hana no Miyako de Fashion Show... desu ka!?",
@@ -46,6 +195,27 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1602/134832l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 8094372,
+    "ru": "ФБР: Самые разыскиваемые преступники",
+    "en": "FBI: Most Wanted",
+    "year": "2020",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.64,
+    "votes": 436,
+    "popularity": 33.87,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Сериал рассказывает об отделе ФБР, который занимается поимкой преступников из списка самых разыскиваемых.",
+    "poster": "https://image.tmdb.org/t/p/w342/dl1GmwdY2ajOWmC9tQHVNmRM6h0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/4BrWdbv2Cqe0zLqvNzkoednZQAb.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 94372
   },
   {
     "id": "mal_2424",
@@ -238,7 +408,7 @@
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.61,
-    "votes": 3364,
+    "votes": 3365,
     "popularity": 94.01,
     "genres": [
       "Боевик и Приключения",
@@ -247,7 +417,7 @@
     ],
     "overview": "Инопланетянин-гуманоид, называющий себя Доктором, путешествует через время и пространство в космическом корабле, который снаружи выглядит как полицейская будка 50-х годов. Доктор чрезвычайно эксцентричен и имеет невероятные знания в областях технологии, истории и науки. Он путешествует вместе со своими компаньонами, попутно борясь против космических злодеев и спасая Землю от бесчисленных врагов.",
     "poster": "https://image.tmdb.org/t/p/w342/4yAIKCTUumob1Xx38yuW1U9IbJe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/tPwpc9Uo1Fly50urDxfGWWk7H77.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/vcFW09U4834DyFOeRZpsx9x1D3S.jpg",
     "source": "tv_top_rated",
     "status": "Онгоинг",
     "tmdbId": 57243
@@ -303,28 +473,6 @@
     "poster": "https://cdn.myanimelist.net/images/anime/10/10462l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 7002649,
-    "tmdbId": 2649,
-    "ru": "Игра",
-    "en": "The Game",
-    "year": "1998",
-    "type": "Фильм",
-    "episodes": "",
-    "status": "Вышел",
-    "studio": "",
-    "rating": 7.57,
-    "votes": 7344,
-    "poster": "https://image.tmdb.org/t/p/w342/fQkIewFx7pF77cyyXXMKpTynlkc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/k7GM13qRYSour3lk90Dq1EwdpoW.jpg",
-    "overview": "Николас Ван Ортон - само воплощение успеха. Он преуспевает, он невозмутим и спокоен, привык держать любую ситуацию под контролем. На день рождения Николас получает необычный подарок - билет для участия в «Игре». Ему обещают, что игра вернет яркие чувства, позволит ощутить вкус и остроту жизни. Вступив в игру, Николас начинает осознавать, что это игра всерьез, игра не на жизнь, а на смерть.",
-    "genres": [
-      "драма",
-      "триллер",
-      "детектив"
-    ],
-    "source": "movie_top_rated"
   },
   {
     "id": "mal_20977",
@@ -635,67 +783,24 @@
     "source": "tv_top_rated"
   },
   {
-    "id": 8031585,
-    "ru": "Копы-новобранцы",
-    "en": "Rookie Blue",
-    "year": "2010",
+    "id": 8210905,
+    "ru": "100 атлетов",
+    "en": "피지컬: 100",
+    "year": "2023",
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.64,
-    "votes": 217,
-    "popularity": 19.8,
+    "votes": 184,
+    "popularity": 3.32,
     "genres": [
-      "драма",
-      "криминал"
+      "Реалити-шоу"
     ],
-    "overview": "Драма о пяти копах-новичках, которым приходится изучать основы профессии, работая полицейскими в большом городе. Любая ошибка может стать смертельной. Нам покажут, как пятеро главных героев учились в полицейской академии. А теперь они вместе работают. И первое, что им придется узнать — никакая академия не подготовит их к жизни.",
-    "poster": "https://image.tmdb.org/t/p/w342/4a27MkQTK71E030nLKgvlsS8rPH.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/riBPF8AXg5cSAO5cFVy0mJYxqjM.jpg",
-    "source": "tv_top_rated",
+    "overview": "В этом яростном состязании сто участников в отличной физической форме сражаются за звание лучшего и денежное вознаграждение.",
+    "poster": "https://image.tmdb.org/t/p/w342/1nOSEftQdH3ftjSbhCDJyIReCR1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/msrw4yMwqrUgGDzQSRRNSgkamBt.jpg",
+    "source": "discover_best_tv_2023",
     "status": "Онгоинг",
-    "tmdbId": 31585
-  },
-  {
-    "id": 8290821,
-    "tmdbId": 1290821,
-    "ru": "Убежище",
-    "en": "Shelter",
-    "year": "2026",
-    "type": "Фильм",
-    "episodes": "",
-    "status": "Вышел",
-    "studio": "",
-    "rating": 7.63,
-    "votes": 1194,
-    "poster": "https://image.tmdb.org/t/p/w342/yHwVIhzBYWzUpwOmOTT3ijWj1kS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/nHxWyy18SvAZ8jJeemtS8k1UNjM.jpg",
-    "overview": "Бывший боец спецотряда MI6 Майкл Мейсон живёт отшельником вместе с псом на одном из небольших уединённых островов Шотландии, скрываясь от своего прошлого. Периодически к нему приплывает на лодке его сослуживец с племянницей Джесси и привозит припасы. Однажды во время шторма лодка переворачивается, дядя девочки погибает, но Майкл успевает спасти Джесси, которая получает серьёзную травму ноги. Поняв, что без лекарств ногу не вылечить, Мейсон выбирается в ближайший городок на материке, где его засекают сотрудники MI6. А вскоре на остров, где находятся Майкл и Джесси, высаживается отряд спецназа.",
-    "genres": [
-      "боевик",
-      "криминал",
-      "триллер"
-    ],
-    "source": "movie_top_rated"
-  },
-  {
-    "id": 8081144,
-    "ru": "Соседство",
-    "en": "The Neighborhood",
-    "year": "2018",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.64,
-    "votes": 171,
-    "popularity": 25.73,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Джонсоны только что переехали в один из уютных домиков в пригороде Лос-Анджелеса и пытаются наладить отношения с соседями. Вскоре выясняется, что местные жители составляют сплочённое сообщество, определённое не столько общими интересами, сколько цветом кожи. Завоевать себе место в чёрном районе простым белым ребятам оказывается непросто.",
-    "poster": "https://image.tmdb.org/t/p/w342/qV9U4IGVgZWQ8Uie4Iq1GismgbS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/2GlkdaHtxORqWfPccv2YLDoLxMb.jpg",
-    "source": "tv_popular",
-    "status": "Онгоинг",
-    "tmdbId": 81144
+    "tmdbId": 210905
   },
   {
     "id": "mal_5306",
@@ -724,27 +829,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8000106,
-    "ru": "Шоу Энди Гриффита",
-    "en": "The Andy Griffith Show",
-    "year": "1960",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.64,
-    "votes": 167,
-    "popularity": 59.08,
-    "genres": [
-      "комедия",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/x2DNKGyeJ273Tt5hwty4GQnbwkV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/szx8lk5wIv1jU3NpMBZVjjs96Fi.jpg",
-    "source": "tv_popular",
-    "status": "Онгоинг",
-    "tmdbId": 106
-  },
-  {
     "id": 7003558,
     "ru": "Прерванная жизнь",
     "en": "Girl, Interrupted",
@@ -763,6 +847,27 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 3558
+  },
+  {
+    "id": 8125816,
+    "ru": "Потерянные цветы Элис Харт",
+    "en": "The Lost Flowers of Alice Hart",
+    "year": "2023",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.64,
+    "votes": 148,
+    "popularity": 3.15,
+    "genres": [
+      "драма",
+      "детектив"
+    ],
+    "overview": "Девятилетнюю Элис Харт, потерявшую родителей в загадочном пожаре, воспитывает ее бабушка Джун на цветочной ферме, где Элис узнаёт, что бывают секреты внутри секретов. Но годы спустя, когда давнее предательство становится явным, Элис вынуждена разобраться со своим прошлым.",
+    "poster": "https://image.tmdb.org/t/p/w342/AhDgjGxTTp5FbiVRb5tOA5nWrxp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/koU92vPMZFoWn2SD1w0IoOzAxFm.jpg",
+    "source": "discover_best_tv_2023",
+    "status": "Онгоинг",
+    "tmdbId": 125816
   },
   {
     "id": 8002543,
@@ -815,28 +920,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 7000630,
-    "tmdbId": 630,
-    "ru": "Волшебник страны Оз",
-    "en": "The Wizard of Oz",
-    "year": "1939",
-    "type": "Фильм",
-    "episodes": "",
-    "status": "Вышел",
-    "studio": "",
-    "rating": 7.58,
-    "votes": 6124,
-    "poster": "https://image.tmdb.org/t/p/w342/mKZBXQsylauEMmfFJSuyJeKMdI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/g1OvTd1eF346vmx8qsJnjaiooZ6.jpg",
-    "overview": "Усаживайтесь поудобнее и приготовьтесь отправиться в долгое путешествие. Поднявшись выше радуги, вы окажетесь на дороге из желтого кирпича. Дорога проведет вас через заколдованные леса, царства злых ведьм и добрых фей в Изумрудный Город в далекой стране Оз. В мир, где любая мечта становится реальностью…",
-    "genres": [
-      "приключения",
-      "фэнтези",
-      "семейный"
-    ],
-    "source": "movie_top_rated"
-  },
-  {
     "id": 8228689,
     "ru": "Загадай желание",
     "en": "다 이루어질지니",
@@ -854,7 +937,7 @@
     "overview": "Спустя тысячу лет необычный джинн возвращается, чтобы исполнить желания женщины, рожденной без чувств. Сможет ли его магия принести любовь и чудеса в ее мир?",
     "poster": "https://image.tmdb.org/t/p/w342/zq84x5kmwomvmmJ03hzl389UGeb.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/2ds9EWX7cwGfZiRjYqhyw7SbzsW.jpg",
-    "source": "tv_popular",
+    "source": "trending_tv_week",
     "status": "Онгоинг",
     "tmdbId": 228689
   },
@@ -866,7 +949,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.58,
-    "votes": 6111,
+    "votes": 6112,
     "popularity": 15.11,
     "genres": [
       "триллер",
@@ -891,7 +974,7 @@
     "status": "Вышел",
     "studio": "",
     "rating": 7.63,
-    "votes": 1105,
+    "votes": 1106,
     "poster": "https://image.tmdb.org/t/p/w342/2MmLWzSo1DV8nwOE6OVcysId46M.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/UD0PBqGgXJOOqsNMOHeZ9Apjde.jpg",
     "overview": "В океане начинают пропадать японские корабли. От них остаются только оборванные радиограммы, сообщающие о столбах пламени, рвущихся из океана.",
@@ -901,6 +984,29 @@
       "фантастика"
     ],
     "source": "movie_top_rated"
+  },
+  {
+    "id": 8127372,
+    "tmdbId": 127372,
+    "ru": "Капитан Лазерхоук: Blood Dragon Remix",
+    "en": "Captain Laserhawk: A Blood Dragon Remix",
+    "year": "2023",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 7.64,
+    "votes": 104,
+    "poster": "https://image.tmdb.org/t/p/w342/xo27H3RmU01DQSfRiikpTbUVrxZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/4udjjH52TQEEiTZpw0FSZwvhK69.jpg",
+    "overview": "В антиутопическом обществе, где все так обманчиво и нестабильно, киборг-суперсолдат, заклейменный как враг государства, стремится найти правду, за которую стоит бороться.",
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "НФ и Фэнтези",
+      "комедия"
+    ],
+    "source": "discover_best_tv_2023"
   },
   {
     "id": "mal_57611",
@@ -965,6 +1071,29 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8280110,
+    "tmdbId": 280110,
+    "ru": "Моя геройская академия: Вне закона",
+    "en": "ヴィジランテ -僕のヒーローアカデミア ILLEGALS-",
+    "year": "2025",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 7.64,
+    "votes": 73,
+    "poster": "https://image.tmdb.org/t/p/w342/4EifHbAwdP0RNNkbPTkY9ljAwXS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/baZ0pGbBGjCBhIqsFyOSTpJyUnQ.jpg",
+    "overview": "Коити Хаймавари — обычный студент, который мечтал стать героем, но поставил крест на этом стремлении. Несмотря на то, что 80% населения обладает сверхспособностями, причудами, далеко не каждый решает стать героем и защищать людей. Жизнь Коити резко меняется, когда его с Поп-Стэп спасает линчеватель Кастет. В итоге они сами становятся линчевателями!",
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "драма",
+      "НФ и Фэнтези"
+    ],
+    "source": "trending_tv_week"
+  },
+  {
     "id": 7000099,
     "ru": "Всё о моей матери",
     "en": "Todo sobre mi madre",
@@ -986,28 +1115,6 @@
     "tmdbId": 99
   },
   {
-    "id": 8010545,
-    "ru": "Настоящая кровь",
-    "en": "True Blood",
-    "year": "2008",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.62,
-    "votes": 2064,
-    "popularity": 44.5,
-    "genres": [
-      "НФ и Фэнтези",
-      "драма",
-      "детектив"
-    ],
-    "overview": "События разворачиваются в небольшом городке в пригороде Нового Орлеана. С тех пор, как японцы изобрели синтетическую кровь «True Blood», у вампиров отпала необходимость убивать простых смертных. Два года назад вампиры покинули свои гробы и официально заявили о своих правах. Но как водится, не все люди оказались готовы к этому, и не все вампиры были рады отказаться от привычного лакомства. Сьюки Стэкхауз — обычная официантка из пригородного кафе, наделенная способностью читать мысли окружающих, знакомится с «хорошим» вампиром Биллом Комтоном. И сразу приобретает много врагов из «плохих парней».",
-    "poster": "https://image.tmdb.org/t/p/w342/omEyeccHNi9nQnILoBVlvJiBnXz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/nGhC6P0lgcrY57NRB9nweu4nWaK.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 10545
-  },
-  {
     "id": 8116135,
     "ru": "Викинги: Вальхалла",
     "en": "Vikings: Valhalla",
@@ -1015,7 +1122,7 @@
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.63,
-    "votes": 1040,
+    "votes": 1041,
     "popularity": 22.56,
     "genres": [
       "Боевик и Приключения",
@@ -1111,7 +1218,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.57,
-    "votes": 6936,
+    "votes": 6937,
     "popularity": 5.91,
     "genres": [
       "фантастика",
@@ -1144,28 +1251,6 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 110160
-  },
-  {
-    "id": 7000819,
-    "ru": "Спящие",
-    "en": "Sleepers",
-    "year": "1996",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.6,
-    "votes": 3892,
-    "popularity": 9.4,
-    "genres": [
-      "криминал",
-      "драма",
-      "триллер"
-    ],
-    "overview": "В 1960-е район «Адская кухня» в Нью-Йорке был местом, где правили священники и мафиози. Здесь росли четыре друга, беззаботное детство которых прервалось страшной бедой, толкнувшей их во взрослый мир насилия и подлости. Прошло полтора десятилетия, но ужасные воспоминания о прошлом все еще живы. Теперь уроки, усвоенные в «Адской кухне», помогут им свести счеты с судьбой, которая обошлась с ними столь сурово.",
-    "poster": "https://image.tmdb.org/t/p/w342/dG0OisLgi9tW2JtsnBnx31NoSk9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/sDhABATFQX8nfTHShTfH8HeqKY1.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 819
   },
   {
     "id": "mal_32086",
@@ -1228,7 +1313,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.6,
-    "votes": 3879,
+    "votes": 3880,
     "popularity": 7.03,
     "genres": [
       "драма",
@@ -1426,28 +1511,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 7950396,
-    "ru": "Ущелье",
-    "en": "The Gorge",
-    "year": "2025",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.6,
-    "votes": 3768,
-    "popularity": 26.75,
-    "genres": [
-      "мелодрама",
-      "фантастика",
-      "триллер"
-    ],
-    "overview": "Два агента высшей квалификации сближаются, когда их назначают охранять противоположные стороны загадочного ущелья. Зло, таящееся на дне ущелья, вырывается наружу, и они должны объединиться, чтобы выжить.",
-    "poster": "https://image.tmdb.org/t/p/w342/yiUINsMKnemBFcUHqpv94yJolWH.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/9nhjGaFLKtddDPtPaX5EmKqsWdH.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 950396
-  },
-  {
     "id": "mal_42519",
     "ru": "We Never Learn: BOKUBEN - The Church Bells Bless [X]",
     "en": "Bokutachi wa Benkyou ga Dekinai! Chapel no Kane wa [X] wo Shukufuku Suru",
@@ -1510,7 +1573,7 @@
     "status": "Вышел",
     "studio": "",
     "rating": 7.61,
-    "votes": 2739,
+    "votes": 2740,
     "poster": "https://image.tmdb.org/t/p/w342/hDgH2UKSM1ViaU1SrXr2dyMS5cb.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/5KtmBSqFtHY3I9t8lgH27Mc0bqY.jpg",
     "overview": "Барбра и её брат Джонни приезжают на кладбище, расположенное в уединённом загородном месте. Неожиданно на них совершают нападение существа, напоминающие мертвецов, восставших из могил. Барбра укрывается в расположенном неподалёку доме, где также находят убежище темнокожий парень по имени Бен, супруги Гарри и Хелен Куперы с дочерью Карен, а также возлюбленные Том и Джуди. Лишь спустя время им удаётся узнать, что причиной катастрофы, уже принявшей планетарный масштаб, является радиоактивное излучение, занесённое с Венеры одним из космических кораблей НАСА.",
@@ -1775,28 +1838,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 7180299,
-    "ru": "Рейд 2",
-    "en": "The Raid 2: Berandal",
-    "year": "2014",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.61,
-    "votes": 2594,
-    "popularity": 5.01,
-    "genres": [
-      "боевик",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "Из трех полицейских, выбравшихся из кровавого ада первой части, в живых остается только офицер Рама. Уволившись из спецназа, он пробует начать жизнь заново, но вскоре прошлое жестко напоминает о себе — преступники убивают его брата. Чтобы отомстить, он внедряется в мощный криминальный синдикат, где быстро поднимается до самых вершин бандитской иерархии. Врагов здесь еще больше, и каждый неверный шаг может оказаться последним. Здесь нет ни близких, ни друзей, ни любви, ни тоски, ни жалости!",
-    "poster": "https://image.tmdb.org/t/p/w342/cfmZohbi3XUyWdiO9LOx8XzKdTF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/wJD1VaO6XMkOSAacUGLkzOKAd4D.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 180299
-  },
-  {
     "id": 7004995,
     "ru": "Ночи в стиле буги",
     "en": "Boogie Nights",
@@ -1804,7 +1845,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.6,
-    "votes": 3573,
+    "votes": 3574,
     "popularity": 5.59,
     "genres": [
       "драма",
@@ -1844,28 +1885,6 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1827/92122l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 7284054,
-    "ru": "Чёрная Пантера",
-    "en": "Black Panther",
-    "year": "2018",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.4,
-    "votes": 23515,
-    "popularity": 13.62,
-    "genres": [
-      "боевик",
-      "приключения",
-      "фантастика"
-    ],
-    "overview": "С первого взгляда можно решить, что Ваканда — обычная территория дикой Африки, но это не так. Здесь, в недрах пустынных земель, скрываются залежи уникального металла, способного поглощать вибрацию. Многие пытались добраться до него, разоряя всё на своём пути и принося смерть аборигенам, но каждый раз таинственный дух саванны — Чёрная Пантера — вставал на защиту угнетённых.  Спустя много лет беда снова приходит в Ваканду, и в этот раз враг заручился поддержкой современных технологий. Когда шансов почти не остаётся, Т`Чалла, молодой принц Ваканды, узнаёт, что именно ему предстоит возродить легенду и продолжить вечную борьбу, надев маску Чёрной Пантеры.",
-    "poster": "https://image.tmdb.org/t/p/w342/ndpwgAANbZSMwgTcxmQ7o4SKDsd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/19Ed4XgjahPm4U8JT7SnntERIlt.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 284054
   },
   {
     "id": "mal_334",
@@ -1922,25 +1941,25 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8047665,
-    "ru": "Чёрные паруса",
-    "en": "Black Sails",
+    "id": 7244267,
+    "ru": "Я - начало",
+    "en": "I Origins",
     "year": "2014",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.62,
-    "votes": 1458,
-    "popularity": 21.35,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 3471,
+    "popularity": 2.72,
     "genres": [
-      "драма",
-      "Боевик и Приключения"
+      "фантастика",
+      "драма"
     ],
-    "overview": "На дворе начало XVIII века – золотые времена для пиратов Карибского моря. На острове Нью-Провиденс, принадлежащем Великобритании, царит хаос и беззаконие. Эти территории оккупировали знаменитые пиратские капитаны. Капитан Флинт – самый известный и самый грозный из них. Но английский флот возвращается в неспокойные воды Карибского моря, чтобы навести порядок в колониях и избавить эти места от пиратских набегов. Сложные обстоятельства вынуждают Флинта взять в союзники суровую Элеонору Гатри, чей отец, криминальный авторитет, помогает пиратам превращать награбленное добро в деньги. Вместе они составляют план действий, воплотив который капитан Флинт и его экипаж спасут свои шеи и сохранят за собой пиратские угодья. На пути к цели им встретится немало препятствий: соратник Флинта затевает бунт, амбиции отца Элеоноры приводят того к ссоре с дочерью, а молодому коку Джону Сильверу, недавно вступившему в команду, раз за разом удается разрушить планы капитана Флинта.",
-    "poster": "https://image.tmdb.org/t/p/w342/nyoTN75k48fUk7h4Dw4Pzkd6PLQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/A7lo83g09i3cDmLRKtDiiYN8w0z.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 47665
+    "overview": "Молекулярный биолог и его напарница по лаборатории делают потрясающее открытие, способное коренным образом изменить современное общество.",
+    "poster": "https://image.tmdb.org/t/p/w342/s3F1Rn5RRWpIz4GjxjuJRFmZCZC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/cr8pv3Iel9T5Z3WTJX5VqvdIpAm.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 244267
   },
   {
     "id": "mal_32962",
@@ -1991,27 +2010,6 @@
     "poster": "https://cdn.myanimelist.net/images/anime/11/71798l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 8094372,
-    "ru": "ФБР: Самые разыскиваемые преступники",
-    "en": "FBI: Most Wanted",
-    "year": "2020",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.63,
-    "votes": 435,
-    "popularity": 33.87,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "Сериал рассказывает об отделе ФБР, который занимается поимкой преступников из списка самых разыскиваемых.",
-    "poster": "https://image.tmdb.org/t/p/w342/dl1GmwdY2ajOWmC9tQHVNmRM6h0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/4BrWdbv2Cqe0zLqvNzkoednZQAb.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 94372
   },
   {
     "id": 8127700,
@@ -2098,28 +2096,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 7001904,
-    "ru": "Мемуары гейши",
-    "en": "Memoirs of a Geisha",
-    "year": "2005",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.6,
-    "votes": 3395,
-    "popularity": 4.27,
-    "genres": [
-      "драма",
-      "мелодрама",
-      "история"
-    ],
-    "overview": "Маленькую прелестную девочку из бедной японской семьи отдают в услужение в дом гейш. С годами красавица расцветает и познает все таинства этой профессии. Самые влиятельные мужчины становятся пленниками знаменитой гейши по имени Сайюри, достигшей совершенства в своем искусстве.Но в сердце Сайюри теплится любовь к тому, над которым ее чары не властны. Тайну своей любовной страсти она доверяет лишь страницам дневника…",
-    "poster": "https://image.tmdb.org/t/p/w342/vIVkZy4b2Su5u2YbIpOEr2cdnOV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/zJDnqXtGNHUmexiaWNa52Vslve5.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 1904
-  },
-  {
     "id": 7013830,
     "ru": "Shottas",
     "en": "Shottas",
@@ -2183,7 +2159,7 @@
     "status": "Вышел",
     "studio": "",
     "rating": 7.54,
-    "votes": 9356,
+    "votes": 9358,
     "poster": "https://image.tmdb.org/t/p/w342/hACq0LdC5WNjPb1jzTZzuj1R4qx.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/wb34q3VgzHgL8frVMywrN3wXmqx.jpg",
     "overview": "Жизнь Шона похожа на бесконечный, тоскливый сон: нудная работа, бытовые дрязги, «разборки» с подружкой и проблемы с мамой. Единственная отдушина нашего парня — местная пивная, где он после работы «заседает» со своим другом по имени Эд. Вы не поверите, но мертвецы залежались в могилах: они решили разнообразить своё скучное существование и собрались «прошвырнуться» по городу, полакомившись свежей живой плотью! Начинается зомби-эпидемия с участием огромного количества распоясавшихся живых трупов, которые весьма проголодались и страстно жаждут погрызть человеческое мяско! И кто, как Вы думаете, сможет положить конец зловещему рассвету мертвецов?! Конечно же Шон, который, ради такого случая, восстал…с дивана, вооружился битой и приготовился надавать зомби основательных тумаков! Теперь наш новоявленный супергерой должен спасти не только человечество, но и …свою коллекцию грампластинок!",
@@ -2229,7 +2205,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.56,
-    "votes": 7309,
+    "votes": 7310,
     "popularity": 9.73,
     "genres": [
       "приключения",
@@ -2253,7 +2229,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.58,
-    "votes": 5306,
+    "votes": 5307,
     "popularity": 13.19,
     "genres": [
       "мультфильм",
@@ -2268,29 +2244,6 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 976573
-  },
-  {
-    "id": 7939243,
-    "ru": "Соник 3 в кино",
-    "en": "Sonic the Hedgehog 3",
-    "year": "2024",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.6,
-    "votes": 3301,
-    "popularity": 26.78,
-    "genres": [
-      "боевик",
-      "фантастика",
-      "комедия",
-      "семейный"
-    ],
-    "overview": "Соник, Наклз и Тейлз воссоединяются против нового могущественного противника, Ежа Шэдоу, таинственного злодея с силами, не похожими ни на что, с чем они сталкивались раньше. Команда Соника вынуждена создать неожиданный союз в надежде остановить Шэдоу и защитить планету.",
-    "poster": "https://image.tmdb.org/t/p/w342/sj8AqCcpfdILdP5fhFVJLdx2NfF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/zOpe0eHsq0A2NvNyBbtT6sj53qV.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 939243
   },
   {
     "id": 7572164,
@@ -2372,7 +2325,7 @@
     "status": "Онгоинг",
     "studio": "",
     "rating": 7.63,
-    "votes": 257,
+    "votes": 258,
     "poster": "https://image.tmdb.org/t/p/w342/9G2ncJo7GatteNf22FRX4vA01yi.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/hgmVKvA1zddu5VmcGJYqIStpDo6.jpg",
     "overview": "Данте, в чьих жилах течёт кровь человека и демона, организовал агентство «Devil May Cry», в котором занимается истреблением нечисти. Однако его деятельность приносит только убыток. Он проигрывает пари или же оплачивает ущерб от разрушений, которые нанёс сам, занимаясь этой работой.",
@@ -2384,26 +2337,25 @@
     "source": "tv_top_rated"
   },
   {
-    "id": 8063210,
-    "ru": "Сумеречные охотники: орудия смерти",
-    "en": "Shadowhunters",
-    "year": "2016",
+    "id": 8031585,
+    "ru": "Копы-новобранцы",
+    "en": "Rookie Blue",
+    "year": "2010",
     "type": "Сериал",
     "category": "Сериал",
-    "rating": 7.62,
-    "votes": 1214,
-    "popularity": 19.97,
+    "rating": 7.63,
+    "votes": 218,
+    "popularity": 19.8,
     "genres": [
-      "Боевик и Приключения",
       "драма",
-      "НФ и Фэнтези"
+      "криминал"
     ],
-    "overview": "Жизнь обыкновенной девушки Клэри Фрей переворачивается вверх дном, когда она узнает, что принадлежит к расе охотников на демонов, в чьих венах течет ангельская кровь.",
-    "poster": "https://image.tmdb.org/t/p/w342/siDYlS3J3RVxQ8OklMgIs1PIc1e.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/o0PtXGp2XyoRu0S1uPYzDpMnkOM.jpg",
+    "overview": "Драма о пяти копах-новичках, которым приходится изучать основы профессии, работая полицейскими в большом городе. Любая ошибка может стать смертельной. Нам покажут, как пятеро главных героев учились в полицейской академии. А теперь они вместе работают. И первое, что им придется узнать — никакая академия не подготовит их к жизни.",
+    "poster": "https://image.tmdb.org/t/p/w342/4a27MkQTK71E030nLKgvlsS8rPH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/riBPF8AXg5cSAO5cFVy0mJYxqjM.jpg",
     "source": "tv_top_rated",
     "status": "Онгоинг",
-    "tmdbId": 63210
+    "tmdbId": 31585
   },
   {
     "id": 7940721,
@@ -2486,6 +2438,29 @@
     "source": "tv_popular",
     "status": "Онгоинг",
     "tmdbId": 2686
+  },
+  {
+    "id": 8203164,
+    "ru": "Силачка Кан Нам Сун",
+    "en": "힘쎈여자 강남순",
+    "year": "2023",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.63,
+    "votes": 149,
+    "popularity": 9.28,
+    "genres": [
+      "комедия",
+      "драма",
+      "НФ и Фэнтези",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ktB3epuAUGjVE6te7udTUAHBuv2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/6gyJwBbgFD0MYap1AFWQKOkve6D.jpg",
+    "source": "discover_best_tv_2023",
+    "status": "Онгоинг",
+    "tmdbId": 203164
   },
   {
     "id": 80020,
@@ -2578,6 +2553,51 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 7011544,
+    "tmdbId": 11544,
+    "ru": "Лило и Стич",
+    "en": "Lilo & Stitch",
+    "year": "2002",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.56,
+    "votes": 7100,
+    "poster": "https://image.tmdb.org/t/p/w342/6YhJyjmkGiP34uVa56ZkfSs8UXm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/AcxbOWUbwtIEDisfuhNGHQNfnMK.jpg",
+    "overview": "Лило — это маленькая девочка, живущая на Гавайах. Она сирота и живёт вместе со своей старшей сестрой Нани. Лило любит всех животных, но больше всего она подружилась с собачкой по имени Стич, которая на самом деле совсем не собачка, а замаскированный инопланетянин. Дело было так: некоего преступника по имени Стич переправляли в интергалактическую тюрьму, но ему удалось ускользнуть и приземлиться на Земле, где он и встретил Лило. И тут Стич прикинулся собакой, дабы скрыться от преследования интергалактической полиции. Теперь Стич учится тому, чему не был обучен — заботе о других…",
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "комедия",
+      "фантастика"
+    ],
+    "source": "movie_top_rated"
+  },
+  {
+    "id": 7000071,
+    "tmdbId": 71,
+    "ru": "Билли Эллиот",
+    "en": "Billy Elliot",
+    "year": "2001",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.59,
+    "votes": 4096,
+    "poster": "https://image.tmdb.org/t/p/w342/dNWOiUsyBQgbstG2OBkZJKZUgsU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/urzflyf41uySpgciGHdQzpcaMOY.jpg",
+    "overview": "Чем должен увлекаться сын шахтера? Сомнений нет: боксом и только боксом. Но у 11-летнего Билли Эллиота на этот счет было свое мнение. Он был влюблен в… балет.  Отец и старший брат Тони впадают в ярость, когда узнают, что он «променял бокс» на менее «мужественный балет». И только острая на язык миссис Уилкинсон поддерживает Билли в его желании танцевать, и он получает шанс поступить в Королевскую балетную школу.",
+    "genres": [
+      "драма",
+      "комедия",
+      "музыка"
+    ],
+    "source": "movie_top_rated"
+  },
+  {
     "id": 8139798,
     "ru": "Ад для одиночек",
     "en": "솔로지옥",
@@ -2600,26 +2620,27 @@
     "tmdbId": 139798
   },
   {
-    "id": 7000071,
-    "tmdbId": 71,
-    "ru": "Билли Эллиот",
-    "en": "Billy Elliot",
-    "year": "2001",
-    "type": "Фильм",
+    "id": 8289892,
+    "tmdbId": 289892,
+    "ru": "Аццкий босс",
+    "en": "Helluva Boss",
+    "year": "2020",
+    "type": "Сериал",
     "episodes": "",
-    "status": "Вышел",
+    "status": "Онгоинг",
     "studio": "",
-    "rating": 7.59,
-    "votes": 4094,
-    "poster": "https://image.tmdb.org/t/p/w342/dNWOiUsyBQgbstG2OBkZJKZUgsU.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/urzflyf41uySpgciGHdQzpcaMOY.jpg",
-    "overview": "Чем должен увлекаться сын шахтера? Сомнений нет: боксом и только боксом. Но у 11-летнего Билли Эллиота на этот счет было свое мнение. Он был влюблен в… балет.  Отец и старший брат Тони впадают в ярость, когда узнают, что он «променял бокс» на менее «мужественный балет». И только острая на язык миссис Уилкинсон поддерживает Билли в его желании танцевать, и он получает шанс поступить в Королевскую балетную школу.",
+    "rating": 7.63,
+    "votes": 88,
+    "poster": "https://image.tmdb.org/t/p/w342/dgtuBsG2F4cGiumtHBKDru7PW9j.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/20OP4f0xDbPttORm9OyIbNu3cNN.jpg",
+    "overview": "В Аду бес Блиц пытается запустить стартап киллерского агенства на очень конкурентном рынке вместе со специалистом по оружию Мокси, громилой Милли и секретарем Луной.",
     "genres": [
-      "драма",
+      "мультфильм",
       "комедия",
-      "музыка"
+      "драма",
+      "НФ и Фэнтези"
     ],
-    "source": "movie_top_rated"
+    "source": "trending_tv_week"
   },
   {
     "id": 8031072,
@@ -2694,7 +2715,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.62,
-    "votes": 1039,
+    "votes": 1040,
     "popularity": 2.17,
     "genres": [
       "драма",
@@ -2900,27 +2921,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 7000055,
-    "ru": "Сука-любовь",
-    "en": "Amores perros",
-    "year": "2000",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.6,
-    "votes": 2923,
-    "popularity": 5.0,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "Мехико-Сити, фатальная авария. Сталкиваются три жизни, раскрывая предательскую сторону человеческой природы. Будоражащая и волнующая история об искуплении и об уязвимости и сложности человеческой жизни.",
-    "poster": "https://image.tmdb.org/t/p/w342/8HZxZOf3OaNIgtmWcwwWYUzETGW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/tJTRLtdKPeVT8HORSbeHpdb8BKg.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 55
-  },
-  {
     "id": 7013363,
     "ru": "Человек с Земли",
     "en": "The Man from Earth",
@@ -2977,7 +2977,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.6,
-    "votes": 2861,
+    "votes": 2862,
     "popularity": 5.13,
     "genres": [
       "драма",
@@ -3223,7 +3223,7 @@
     "status": "Онгоинг",
     "studio": "",
     "rating": 7.62,
-    "votes": 750,
+    "votes": 751,
     "poster": "https://image.tmdb.org/t/p/w342/wmsINbZuEBLNP2Z26Xffx5NHJpW.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/fKpfCR3l0WukHTkI6Z2ySX1if4P.jpg",
     "overview": "Мир мультфильма предстаёт глазами годовалого ребёнка по имени Томми и его приятелей. В обычной каждодневной обстановке в присутствии взрослых детки — обычные, ползающие под ногами создания, но стоит родителям отвернуться, и оказывается, что малыши могут разговаривать друг с другом.",
@@ -3234,6 +3234,27 @@
       "комедия"
     ],
     "source": "tv_top_rated"
+  },
+  {
+    "id": 7138843,
+    "ru": "Заклятие",
+    "en": "The Conjuring",
+    "year": "2013",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.5,
+    "votes": 12736,
+    "popularity": 21.15,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "Эд и Лоррейн Уоррены — детективы, которые расследуют паранормальные дела. Однажды к ним обращается семья, страдающая от злого духа. Уоррены, вынужденные сражаться с могущественной демонической сущностью, сталкиваются с самым пугающим случаем в своей жизни.",
+    "poster": "https://image.tmdb.org/t/p/w342/dq99MpZPTpHOFaZCGvYz3o2uwQk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/ecKQlAEG95k62SMGhvX83oEqANK.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 138843
   },
   {
     "id": "mal_9785",
@@ -3325,27 +3346,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 7012093,
-    "tmdbId": 12093,
-    "ru": "Лиля навсегда",
-    "en": "Lilja 4-ever",
-    "year": "2003",
-    "type": "Фильм",
-    "episodes": "",
-    "status": "Вышел",
-    "studio": "",
-    "rating": 7.62,
-    "votes": 668,
-    "poster": "https://image.tmdb.org/t/p/w342/iARzbzHuOrWxMNfZnWFCr95B4UQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/fJeOpfzQSkzESNPmEXpyNLMmOtI.jpg",
-    "overview": "16-летняя Лиля живет в маленьком бедном городке где-то в бывшем Советском Союзе. Ее мать уехала в Америку с новым любовником, и Лиля ждет, когда ей пришлют приглашение. Не дождавшись от матери ни писем, ни денег, Лиля понимает, что ее бросили.  У нее остается единственный друг — 11-летний Володя, с которым они мечтают о лучшей жизни. И однажды у Лили появляется надежда. Она влюбляется во взрослого симпатичного парня по имени Андрей, и он уговаривает Лилю поехать вместе с ним в Швецию…",
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "source": "movie_top_rated"
-  },
-  {
     "id": 7498249,
     "ru": "Сорняки",
     "en": "Mauvaises herbes",
@@ -3367,6 +3367,28 @@
     "tmdbId": 498249
   },
   {
+    "id": 7180299,
+    "ru": "Рейд 2",
+    "en": "The Raid 2: Berandal",
+    "year": "2014",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 2594,
+    "popularity": 5.01,
+    "genres": [
+      "боевик",
+      "криминал",
+      "триллер"
+    ],
+    "overview": "Из трех полицейских, выбравшихся из кровавого ада первой части, в живых остается только офицер Рама. Уволившись из спецназа, он пробует начать жизнь заново, но вскоре прошлое жестко напоминает о себе — преступники убивают его брата. Чтобы отомстить, он внедряется в мощный криминальный синдикат, где быстро поднимается до самых вершин бандитской иерархии. Врагов здесь еще больше, и каждый неверный шаг может оказаться последним. Здесь нет ни близких, ни друзей, ни любви, ни тоски, ни жалости!",
+    "poster": "https://image.tmdb.org/t/p/w342/cfmZohbi3XUyWdiO9LOx8XzKdTF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/wJD1VaO6XMkOSAacUGLkzOKAd4D.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 180299
+  },
+  {
     "id": 7374720,
     "ru": "Дюнкерк",
     "en": "Dunkirk",
@@ -3374,7 +3396,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.45,
-    "votes": 17584,
+    "votes": 17587,
     "popularity": 11.72,
     "genres": [
       "военный",
@@ -3488,6 +3510,28 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8004614,
+    "ru": "Морская полиция: Спецотдел",
+    "en": "NCIS",
+    "year": "2003",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 2515,
+    "popularity": 195.29,
+    "genres": [
+      "криминал",
+      "драма",
+      "Боевик и Приключения"
+    ],
+    "overview": "Сериал о приключениях команды профессиональных спецагентов. Их миссия — расследовать преступления, которые каким-то образом связаны со служащими морской пехоты. Группу следователей возглавляет специальный агент Гиббс. Его команда — это экс-детектив Энтони ДиНоззо, выхоженка из Моссад — Зива Давид, специалисты в области судмедэкспертизы — Эбби Шуто и Дональд Маллард, а также профессионал в области IT — Тимоти МакГи.",
+    "poster": "https://image.tmdb.org/t/p/w342/4ltafNQAjz9jhZ4xPN3eLGPD5P8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/nn3SuLTO4hum8yAxaY4ql8h6kRk.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 4614
+  },
+  {
     "id": 8225634,
     "ru": "Монстры: история братьев Менендес",
     "en": "Monsters: The Lyle and Erik Menendez Story",
@@ -3507,6 +3551,28 @@
     "source": "tv_top_rated",
     "status": "Онгоинг",
     "tmdbId": 225634
+  },
+  {
+    "id": 7014624,
+    "ru": "Последний подарок",
+    "en": "The Ultimate Gift",
+    "year": "2007",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.62,
+    "votes": 510,
+    "popularity": 3.74,
+    "genres": [
+      "мелодрама",
+      "драма",
+      "семейный"
+    ],
+    "overview": "Джейсон, избалованный плейбой, купается в деньгах своего супербогатого дедушки Говарда Стивенса. что не мешает ему ненавидеть своего благодетеля. Молодой кутила не сомневается, что со смертью Говарда все состояние моментально перейдет в его карман, но, покинув этот мир, старик оставляет Джейсону неожиданный подарок. Юноша получит наследство, только если справится с двенадцатью заданиями, которые для богача с претензиями станут испытанием на грани возможного. Джейсона ждут 12 незабываемых уроков жизни. Сдаст ли он самый трудный экзамен, который придумал для него хитрый Говард Стивенс?",
+    "poster": "https://image.tmdb.org/t/p/w342/3qhihzHYhDa4xv558W7yzGewX23.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/t6ohjYxnEolUGupwvsIHioWfVxl.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 14624
   },
   {
     "id": 7000783,
@@ -3530,27 +3596,6 @@
     "tmdbId": 783
   },
   {
-    "id": 8113367,
-    "ru": "Дикарки",
-    "en": "The Wilds",
-    "year": "2020",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.62,
-    "votes": 491,
-    "popularity": 6.3,
-    "genres": [
-      "детектив",
-      "драма"
-    ],
-    "overview": "Группа девушек-подростков из разных социальных слоев оказывается на странном необитаемом острове. Через какое-то время между ними вспыхивают конфликты, и единая группа разбивается на несколько маленьких. Каждая скрывает в прошлом какой-то секрет, имеющий отношение к их нынешнему положению, ведь на острове девушки оказались не просто так.",
-    "poster": "https://image.tmdb.org/t/p/w342/7zYU3CKuzZUO2LN8h4PDTcYW36A.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/7SSO2wXsuOOVnB6oeWbuIDynrE2.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 113367
-  },
-  {
     "id": 7003580,
     "tmdbId": 3580,
     "ru": "Подмена",
@@ -3569,27 +3614,6 @@
       "криминал",
       "драма",
       "детектив"
-    ],
-    "source": "movie_top_rated"
-  },
-  {
-    "id": 7000702,
-    "tmdbId": 702,
-    "ru": "Трамвай «Желание»",
-    "en": "A Streetcar Named Desire",
-    "year": "1951",
-    "type": "Фильм",
-    "episodes": "",
-    "status": "Вышел",
-    "studio": "",
-    "rating": 7.61,
-    "votes": 1480,
-    "poster": "https://image.tmdb.org/t/p/w342/auBQctM42AUd1QeKK4T1nQ0ELBb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/or90vNrOVnYwi07fYYpQ3pbnjxP.jpg",
-    "overview": "Далеко не юная, но все еще привлекательная Бланш Дюбуа приезжает в Новый Орлеан к беременной сестре Стелле, живущей с мужем Стэнли в местных трущобах. Бланш сообщает сестре, что разорена, ушла с работы и жить ей негде и не на что. Стэнли, воплощение естественности и грубости, сразу невзлюбил её за пристрастие к алкоголю и неуместное кокетство. Вскоре у Бланш появляется поклонник и призрачная надежда на замужество, но Стэнли расстраивает их помолвку…",
-    "genres": [
-      "драма",
-      "триллер"
     ],
     "source": "movie_top_rated"
   },
@@ -3678,6 +3702,27 @@
     "tmdbId": 12102
   },
   {
+    "id": 7011969,
+    "ru": "Тумстоун: Легенда дикого запада",
+    "en": "Tombstone",
+    "year": "1993",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 2455,
+    "popularity": 7.08,
+    "genres": [
+      "вестерн",
+      "боевик"
+    ],
+    "overview": "1871 год. В США закончилась гражданская война. Фермеры, грабители, золотоискатели, убийцы, воры — все отправились на поиски состояний. Нам расскажут легенду о шерифе Эрпе, который отказался от своей работы, чтобы начать нормальную жизнь со своей семьей. Его друг Док Холлидей, южанин и игрок, тоже решил зажить нормальной жизнью.  В городе Тумстоун нашли месторождение серебра, началась серебряная лихорадка. Там и решили они осесть. Но в то же время там же организовалась жестокая и огромная банда убийц.",
+    "poster": "https://image.tmdb.org/t/p/w342/hSHheD5v8esxZqF9lOT1wnEseY1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/djPXXv9pPyTLGl9kMPCTyiBmIA5.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 11969
+  },
+  {
     "id": "mal_29589",
     "ru": "Ultimate Otaku Teacher",
     "en": "Denpa Kyoushi",
@@ -3748,6 +3793,28 @@
     "source": "movie_top_rated"
   },
   {
+    "id": 7000921,
+    "ru": "Нокдаун",
+    "en": "Cinderella Man",
+    "year": "2005",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 2418,
+    "popularity": 4.3,
+    "genres": [
+      "мелодрама",
+      "драма",
+      "история"
+    ],
+    "overview": "Потерпев несколько поражений кряду, подававший надежды боксёр-тяжеловес Джим Брэддок вынужден бросить спорт. Во времена Великой депрессии Брэддок берётся за любую работу, чтобы прокормить свою жену Мэй и детей. При этом он всё ещё надеется вернуться на ринг. И однажды ему предоставляется такой шанс. В последнюю минуту Джим заменяет другого боксёра и выходит на поединок с претендентом на титул чемпиона мира.",
+    "poster": "https://image.tmdb.org/t/p/w342/zjUUI27VPQkvzWo02q9U13vWraJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/oO5sMDETneOPCneX3jfXMFfPh9E.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 921
+  },
+  {
     "id": "820",
     "ru": "Джон Ф. Кеннеди: Выстрелы в Далласе",
     "en": "JFK",
@@ -3795,7 +3862,7 @@
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.6,
-    "votes": 2407,
+    "votes": 2408,
     "popularity": 32.5,
     "genres": [
       "НФ и Фэнтези",
@@ -3816,7 +3883,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.61,
-    "votes": 1389,
+    "votes": 1390,
     "popularity": 4.28,
     "genres": [
       "мелодрама",
@@ -3828,6 +3895,26 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 417261
+  },
+  {
+    "id": 7042987,
+    "tmdbId": 42987,
+    "ru": "Слуга",
+    "en": "The Servant",
+    "year": "1963",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.62,
+    "votes": 374,
+    "poster": "https://image.tmdb.org/t/p/w342/lqkqj8ebu2h4UpF0RNTXuURIPfK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/a5NNxs0HA6CEEtCNCUDvOZiQqIK.jpg",
+    "overview": "Недавно осиротевший аристократ нанимает в слуги человека с безупречными рекомендациями, но вскоре выясняется, что тот ведет нечестную игру и имеет некий коварный план.",
+    "genres": [
+      "драма"
+    ],
+    "source": "movie_top_rated"
   },
   {
     "id": "mal_41061",
@@ -3852,29 +3939,6 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1909/105734l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 7724495,
-    "ru": "Королева-воин",
-    "en": "The Woman King",
-    "year": "2022",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.6,
-    "votes": 2368,
-    "popularity": 6.86,
-    "genres": [
-      "боевик",
-      "драма",
-      "история",
-      "военный"
-    ],
-    "overview": "Королевство Дагомея, 1823 год. Элитный женский отряд королевской стражи агоджи во главе с генералом Наниской возвращает женщин, похищенных рабовладельцами из империи Ойо, что грозит спровоцировать войну. А в это время 19-летнюю девушку Нави, которая не хочет мириться с жестоким потенциальным мужем, отец сдает во дворец в качестве подарка королю. Так Нави оказывается среди новичков, обучающихся для вступления в ряды агоджи.",
-    "poster": "https://image.tmdb.org/t/p/w342/aDjj0D701uuMahjvRZrpsXKEIle.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/p5kb4VwnK0bkxsOmME3SBKAcBoe.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 724495
   },
   {
     "id": "mal_50185",
@@ -3973,6 +4037,28 @@
     "tmdbId": 19125
   },
   {
+    "id": 7371645,
+    "ru": "Охота на дикарей",
+    "en": "Hunt for the Wilderpeople",
+    "year": "2016",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 2307,
+    "popularity": 2.47,
+    "genres": [
+      "приключения",
+      "комедия",
+      "драма"
+    ],
+    "overview": "Рикки Бэйкер — упитанный городской хулиган. Сотрудница социальной службы Пола отвозит подростка в сельскую местность, где живёт единственная готовая принять его семья — Белла и её нелюдимый муж Гек. Когда Белла умирает и социальная защита собирается забрать Рикки, тот убегает в леса. Гек отправляется за ним. Сумасбродная Пола убеждена, что странный Гек слетел с катушек из-за смерти жены и похитил подростка. Она развязывает общенациональную охоту на мальчика и его «совратителя».",
+    "poster": "https://image.tmdb.org/t/p/w342/2MK52LiSL8ERDSkapfSZeyNEBHE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/ixpUtvrZNwk6LBObXaNH8fh4FYf.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 371645
+  },
+  {
     "id": 8088408,
     "ru": "Новый Папа",
     "en": "The New Pope",
@@ -4000,7 +4086,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.6,
-    "votes": 2301,
+    "votes": 2302,
     "popularity": 1.54,
     "genres": [
       "драма",
@@ -4096,7 +4182,7 @@
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.62,
-    "votes": 251,
+    "votes": 252,
     "popularity": 8.41,
     "genres": [
       "драма"
@@ -4380,6 +4466,50 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8001527,
+    "ru": "Строго на юг",
+    "en": "Due South",
+    "year": "1994",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.62,
+    "votes": 79,
+    "popularity": 29.76,
+    "genres": [
+      "драма",
+      "криминал",
+      "комедия"
+    ],
+    "overview": "Бентон Фрейзер приехал в Чикаго, пытаясь найти убийц своего отца. После того, как расследование завершилось, он решил оглядеться и устроился на работу в Канадское консульство….",
+    "poster": "https://image.tmdb.org/t/p/w342/lPhHfF9ZX38Rmc4S82phdDFmRAi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/cfpEjMTT3BZxa7ohtK4fY7ETL81.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 1527
+  },
+  {
+    "id": 8010545,
+    "ru": "Настоящая кровь",
+    "en": "True Blood",
+    "year": "2008",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 2064,
+    "popularity": 44.5,
+    "genres": [
+      "НФ и Фэнтези",
+      "драма",
+      "детектив"
+    ],
+    "overview": "События разворачиваются в небольшом городке в пригороде Нового Орлеана. С тех пор, как японцы изобрели синтетическую кровь «True Blood», у вампиров отпала необходимость убивать простых смертных. Два года назад вампиры покинули свои гробы и официально заявили о своих правах. Но как водится, не все люди оказались готовы к этому, и не все вампиры были рады отказаться от привычного лакомства. Сьюки Стэкхауз — обычная официантка из пригородного кафе, наделенная способностью читать мысли окружающих, знакомится с «хорошим» вампиром Биллом Комтоном. И сразу приобретает много врагов из «плохих парней».",
+    "poster": "https://image.tmdb.org/t/p/w342/omEyeccHNi9nQnILoBVlvJiBnXz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/nGhC6P0lgcrY57NRB9nweu4nWaK.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 10545
+  },
+  {
     "id": "mal_45558",
     "ru": "凡人修仙传 特别篇 燕家堡大战",
     "en": "Fanren Xiu Xian Zhuan: Yan Jia Bao Dazhan",
@@ -4469,10 +4599,9 @@
     "backdrop": "https://image.tmdb.org/t/p/w500/mXLVA0YL6tcXi6SJSuAh9ONXFj5.jpg",
     "overview": "Инопланетянин прилетает на землю в составе научно-исследовательской группы с мирными намерениями. Специалисты из NASA замечают приближение летающей тарелки и решают, что обязаны отловить хотя бы одну из инопланетных тварей. Несчастные существа улетают так спешно, что забывают захватить одного из коллег.",
     "genres": [
-      "драма",
-      "семейный",
-      "фэнтези",
-      "фантастика"
+      "приключения",
+      "фантастика",
+      "семейный"
     ],
     "source": "movie_top_rated"
   },
@@ -4594,6 +4723,28 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1002/142134l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 7001895,
+    "ru": "Звёздные войны: Эпизод 3 - Месть Ситхов",
+    "en": "Star Wars: Episode III - Revenge of the Sith",
+    "year": "2005",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.47,
+    "votes": 14965,
+    "popularity": 13.47,
+    "genres": [
+      "приключения",
+      "боевик",
+      "фантастика"
+    ],
+    "overview": "Идёт третий год Войн клонов. Галактическая Республика, некогда бывшая спокойным и гармоничным государством, превратилась в поле битвы между армиями клонов, возглавляемых канцлером Палпатином, и армадами дроидов, которых ведёт граф Дуку, тёмный лорд ситхов. Республика медленно погружается во тьму. Лишь рыцари-джедаи, защитники мира и справедливости, могут противостоять злу, которое вскоре поглотит галактику. Но настоящая битва идёт в душе у молодого рыцаря-джедая Энакина, который разрывается между долгом джедая и любовью к своей жене, сенатору Падме Амидале. И от того, какое чувство в нём победит, зависит будущее всего мира.",
+    "poster": "https://image.tmdb.org/t/p/w342/a1f0xvhIfUlzgWlPYL3XS8n5XuL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/jniabJVBSW3EqLlyhjxWCZjVkiE.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 1895
   },
   {
     "id": 7496450,
@@ -4791,28 +4942,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8079696,
-    "tmdbId": 79696,
-    "ru": "Манифест",
-    "en": "Manifest",
-    "year": "2018",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 7.6,
-    "votes": 1789,
-    "poster": "https://image.tmdb.org/t/p/w342/fRmOxbaM2fhYDNLJQP5dqOU5DWn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/iZu83GB1IM7VXL2X90m7iLHYUHU.jpg",
-    "overview": "Когда авиарейс Монтего 828 безопасно приземляется после турбулентного, но обычного полёта, команда и пассажиры выходят наружу. Они обнаруживают, что за прошедшие несколько часов мир постарел на пять лет, а друзья, коллеги и семьи, поначалу не терявшие надежды увидеть родных живыми, начали жить дальше. По мере осознания произошедшего раскрываются новые тайны: некоторые понимают, что способны на то, что раньше им казалось невозможным.",
-    "genres": [
-      "НФ и Фэнтези",
-      "детектив",
-      "драма"
-    ],
-    "source": "tv_top_rated"
-  },
-  {
     "id": 7770254,
     "ru": "Дорога домой",
     "en": "Back to the Outback",
@@ -4907,6 +5036,27 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 7021575,
+    "ru": "Пророк",
+    "en": "Un prophète",
+    "year": "2009",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 1737,
+    "popularity": 2.94,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Приговоренный к шести годам тюрьмы Малик Эль Джебена кажется на фоне других заключенных самым «зеленым» и самым уязвимым. Ему 19 лет. Он не умеет ни писать, ни читать. За стенами тюрьмы у него нет близких.\r Всё меняется, когда Лучано, лидер авторитетной банды корсиканцев, решает поручить Малику ряд опасных и рискованных заданий, выполнение которых под прессингом корсиканцев могло бы сломить кого угодно, но не его. Каждое задание закаляет Малика. Он быстро учится жизни в новом для себя мире. Завоевывает доверие корсиканцев и мусульман. И вскоре начинает вынашивать собственные дерзкие планы.",
+    "poster": "https://image.tmdb.org/t/p/w342/144076FtNLoxDQIYY93b1RpreLa.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/jEJDjDBT6KCoS4WOBq68vZMbFk2.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 21575
+  },
+  {
     "id": 7011657,
     "tmdbId": 11657,
     "ru": "Красный круг",
@@ -4944,29 +5094,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/501j5fLek6Z75SjHNRkx7JcfWe2.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/d7XExzHIjNgKPRAVv8YCiS0qVB7.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8022789,
-    "ru": "Головоломка 2",
-    "en": "Inside Out 2",
-    "year": "2024",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.55,
-    "votes": 6705,
-    "popularity": 26.17,
-    "genres": [
-      "мультфильм",
-      "приключения",
-      "комедия",
-      "семейный"
-    ],
-    "overview": "Головной отдел мозга Райли внезапно подвергается капитальному ремонту в тот момент, когда необходимо освободить место для чего-то совершенно неожиданного: новых эмоций.  Радость, Печаль, Гнев, Страх и Брезгливость, которые уже давно успешно руководят эмоциональными процессами, не знают, что и чувствовать, когда появляется некая… Тревожность. И похоже, не только она.",
-    "poster": "https://image.tmdb.org/t/p/w342/5fXrqBIvatwSuph7nTuSETBQYxm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/p5ozvmdgsmbWe0H8Xk7Rc8SCwAB.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 1022789
   },
   {
     "id": 8064432,
@@ -5042,6 +5169,27 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8096129,
+    "ru": "Руки прочь от котиков! Охота на интернет-убийцу",
+    "en": "Don't F**k with Cats: Hunting an Internet Killer",
+    "year": "2019",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.61,
+    "votes": 654,
+    "popularity": 1.78,
+    "genres": [
+      "криминал",
+      "документальный"
+    ],
+    "overview": "Ужасные видеоролики преступника-извращенца заставляют группу искателей справедливости начать рискованную охоту, все глубже затягивающую их в мрачный мир криминала.",
+    "poster": "https://image.tmdb.org/t/p/w342/z3xBYmDJjBgLgjTq4YP3hpcg41R.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/5B5hpcQ4hc6ywi1MiauLhs4liem.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 96129
+  },
+  {
     "id": "mal_49838",
     "ru": "Living Idly and Dying as if Dreaming",
     "en": "Yuuseiboushi",
@@ -5086,6 +5234,30 @@
     "poster": "https://cdn.myanimelist.net/images/anime/11/81607l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 7009016,
+    "tmdbId": 9016,
+    "ru": "Планета сокровищ",
+    "en": "Treasure Planet",
+    "year": "2003",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.57,
+    "votes": 4615,
+    "poster": "https://image.tmdb.org/t/p/w342/bAEJQgE2Xq9Deny9pTqTTxUZDzr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/f2opsSUSiMdEp6AiY2sbC8QPd8S.jpg",
+    "overview": "16-летний Джим Хоукинс отправляется на поиски таинственной Планеты Сокровищ в компании настоящих космических пиратов. Под руководством корабельного кока, киборга Джона Сильвера, он становится умелым «космоплавателем» и не раз спасает космический галеон от самых серьезных опасностей: черных дыр, взрывов сверхновых и космических штормов.",
+    "genres": [
+      "фантастика",
+      "приключения",
+      "мультфильм",
+      "семейный",
+      "фэнтези"
+    ],
+    "source": "movie_top_rated"
   },
   {
     "id": "mal_61851",
@@ -5236,6 +5408,28 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 7014784,
+    "tmdbId": 14784,
+    "ru": "Запределье",
+    "en": "The Fall",
+    "year": "2008",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.6,
+    "votes": 1544,
+    "poster": "https://image.tmdb.org/t/p/w342/7fy0tDJ1FBaiZ2wdn9CLy9ysO9M.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/vNrXoT45xscHY6AN4IGf44vHxVJ.jpg",
+    "overview": "Головорез Черный бандит, сбежавший африканский раб Отта Бенга, индийский мудрец, итальянский революционер Луиджи и натуралист Чарльз Дарвин — герои сказки голливудского каскадера Роя, получившего травму после неудачного трюка на мосту. В лос-анджелесской больнице его фантазии слушает пятилетняя девочка Александрия. Но однажды Рой узнает, что возлюбленная предала его. Он больше не хочет жить и решает покончить с собой.",
+    "genres": [
+      "приключения",
+      "фэнтези",
+      "драма"
+    ],
+    "source": "movie_top_rated"
+  },
+  {
     "id": "mal_34792",
     "ru": "Lu Over the Wall",
     "en": "Yoake Tsugeru Lu no Uta",
@@ -5312,50 +5506,6 @@
     "source": "tmdb"
   },
   {
-    "id": 7014624,
-    "ru": "Последний подарок",
-    "en": "The Ultimate Gift",
-    "year": "2007",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.61,
-    "votes": 508,
-    "popularity": 3.74,
-    "genres": [
-      "мелодрама",
-      "драма",
-      "семейный"
-    ],
-    "overview": "Джейсон, избалованный плейбой, купается в деньгах своего супербогатого дедушки Говарда Стивенса. что не мешает ему ненавидеть своего благодетеля. Молодой кутила не сомневается, что со смертью Говарда все состояние моментально перейдет в его карман, но, покинув этот мир, старик оставляет Джейсону неожиданный подарок. Юноша получит наследство, только если справится с двенадцатью заданиями, которые для богача с претензиями станут испытанием на грани возможного. Джейсона ждут 12 незабываемых уроков жизни. Сдаст ли он самый трудный экзамен, который придумал для него хитрый Говард Стивенс?",
-    "poster": "https://image.tmdb.org/t/p/w342/3qhihzHYhDa4xv558W7yzGewX23.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/t6ohjYxnEolUGupwvsIHioWfVxl.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 14624
-  },
-  {
-    "id": 7841755,
-    "ru": "Легенды Мортал комбат: Битва миров",
-    "en": "Mortal Kombat Legends: Battle of the Realms",
-    "year": "2021",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.61,
-    "votes": 504,
-    "popularity": 8.04,
-    "genres": [
-      "мультфильм",
-      "боевик",
-      "фэнтези"
-    ],
-    "overview": "Рейдэн, Лю Кан, Джонни Кейдж, Соня Блейд и Джакс возвращаются на Землю, где обнаруживают армию Внешнего мира. Император Шао Кан ставит бойцам очередной ультиматум — или новая смертельная битва, или его армия захватит планету, уничтожив всё на своем пути.",
-    "poster": "https://image.tmdb.org/t/p/w342/4fKQu20OJIJgdAZWI557OeM0UFV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/dssCw0mUmD4EriUmkwB3PnsGu4q.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 841755
-  },
-  {
     "id": 7109424,
     "ru": "Капитан Филлипс",
     "en": "Captain Phillips",
@@ -5376,6 +5526,27 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 109424
+  },
+  {
+    "id": 7000702,
+    "tmdbId": 702,
+    "ru": "Трамвай «Желание»",
+    "en": "A Streetcar Named Desire",
+    "year": "1951",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.6,
+    "votes": 1480,
+    "poster": "https://image.tmdb.org/t/p/w342/auBQctM42AUd1QeKK4T1nQ0ELBb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/or90vNrOVnYwi07fYYpQ3pbnjxP.jpg",
+    "overview": "Далеко не юная, но все еще привлекательная Бланш Дюбуа приезжает в Новый Орлеан к беременной сестре Стелле, живущей с мужем Стэнли в местных трущобах. Бланш сообщает сестре, что разорена, ушла с работы и жить ей негде и не на что. Стэнли, воплощение естественности и грубости, сразу невзлюбил её за пристрастие к алкоголю и неуместное кокетство. Вскоре у Бланш появляется поклонник и призрачная надежда на замужество, но Стэнли расстраивает их помолвку…",
+    "genres": [
+      "драма",
+      "триллер"
+    ],
+    "source": "movie_top_rated"
   },
   {
     "id": "mal_1454",
@@ -5461,48 +5632,25 @@
     "tmdbId": 1401
   },
   {
-    "id": 7101299,
-    "ru": "Голодные игры: И вспыхнет пламя",
-    "en": "The Hunger Games: Catching Fire",
-    "year": "2013",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.43,
-    "votes": 18459,
-    "popularity": 8.83,
-    "genres": [
-      "приключения",
-      "боевик",
-      "фантастика"
-    ],
-    "overview": "Сумев выжить на безжалостных Голодных играх, Китнисс Эвердин и Пит Мелларк тщетно пытаются забыть о том, что произошло с ними в Капитолии. Но президент Сноу, диктатор государства Панем, и его клика не готовы оставить девушку и парня в покое, считая их опасными.  Власти решают устроить показательные Игры, в которых примут участие победители прошлых лет от каждого дистрикта. Жребий брошен: Китнисс и Пит вынуждены вернуться на Арену. Вновь они лицом к лицу со смертью — ради своих близких, ради своего будущего, ради своей любви!",
-    "poster": "https://image.tmdb.org/t/p/w342/lKe3uEQKyc6uTAOlFt9KmxHs5eH.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/eHaazLxM5LRMh0ySkVy7SK6wUWt.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 101299
-  },
-  {
-    "id": 7009394,
-    "ru": "Меня зовут Троица",
-    "en": "Lo chiamavano Trinità...",
-    "year": "1970",
-    "type": "Фильм",
-    "category": "Фильм",
+    "id": 8047665,
+    "ru": "Чёрные паруса",
+    "en": "Black Sails",
+    "year": "2014",
+    "type": "Сериал",
+    "category": "Сериал",
     "rating": 7.6,
-    "votes": 1456,
-    "popularity": 4.9,
+    "votes": 1459,
+    "popularity": 21.35,
     "genres": [
-      "боевик",
-      "комедия",
-      "вестерн"
+      "драма",
+      "Боевик и Приключения"
     ],
-    "overview": "Вольный стрелок Троица, прозванный за умение быстро и метко стрелять «Правой рукой дьявола», приезжает в город, где натыкается на своего сводного брата Бамбино (по кличке «Левая рука дьявола»). Их мать — содержательница публичного дома, в прошлом — проститутка, поэтому братья не знают, кто были их отцы. Бамбино «работает» в городе шерифом (на самом-то деле он — грабитель, но, сломав настоящему шерифу ногу, он решил занять его место, чтобы на время залечь на дно) и Троица решает ему «помочь». Община мормонов, приняв их за реальных служителей закона, просит найти управу на главного местного землевладельца и его банду. Обе руки дьявола не позволят свершиться беззаконию. Точнее, они и сами-то не прочь совершить какое-нибудь преступление, однако Троица всерьез западает на двух мормонских цыпочек, так что всех негодяев ожидает кровавая баня…",
-    "poster": "https://image.tmdb.org/t/p/w342/cnwLbMVW0BJN06cOKkrGYgTPqWl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/FzjWIXu3n714sYxQHq3TPEWz16.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 9394
+    "overview": "На дворе начало XVIII века – золотые времена для пиратов Карибского моря. На острове Нью-Провиденс, принадлежащем Великобритании, царит хаос и беззаконие. Эти территории оккупировали знаменитые пиратские капитаны. Капитан Флинт – самый известный и самый грозный из них. Но английский флот возвращается в неспокойные воды Карибского моря, чтобы навести порядок в колониях и избавить эти места от пиратских набегов. Сложные обстоятельства вынуждают Флинта взять в союзники суровую Элеонору Гатри, чей отец, криминальный авторитет, помогает пиратам превращать награбленное добро в деньги. Вместе они составляют план действий, воплотив который капитан Флинт и его экипаж спасут свои шеи и сохранят за собой пиратские угодья. На пути к цели им встретится немало препятствий: соратник Флинта затевает бунт, амбиции отца Элеоноры приводят того к ссоре с дочерью, а молодому коку Джону Сильверу, недавно вступившему в команду, раз за разом удается разрушить планы капитана Флинта.",
+    "poster": "https://image.tmdb.org/t/p/w342/nyoTN75k48fUk7h4Dw4Pzkd6PLQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/A7lo83g09i3cDmLRKtDiiYN8w0z.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 47665
   },
   {
     "id": "mal_1913",
@@ -5564,7 +5712,7 @@
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.61,
-    "votes": 446,
+    "votes": 447,
     "popularity": 5.69,
     "genres": [
       "драма",
@@ -5578,25 +5726,25 @@
     "tmdbId": 4184
   },
   {
-    "id": 7017058,
-    "ru": "Улица греха",
-    "en": "Scarlet Street",
-    "year": "1945",
+    "id": 7000064,
+    "tmdbId": 64,
+    "ru": "Поговори с ней",
+    "en": "Hable con ella",
+    "year": "2002",
     "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.61,
-    "votes": 444,
-    "popularity": 2.19,
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.6,
+    "votes": 1447,
+    "poster": "https://image.tmdb.org/t/p/w342/d85z2Le2FmtT7vUxc0kTZ6EWtaD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/9aCRXFWT1rd1nZDcEtWILKb2Sap.jpg",
+    "overview": "В поисках интересного персонажа для статьи журналист Марко встречается со знаменитой женщиной-тореро Лидией. Их знакомство перерастает в страстную любовь, но все надежды рушит трагедия на корриде: удар разъяренного быка повергает Лидию в кому. Проводя дни и ночи в больнице, Марко знакомится с медбратом Бениньо. Он не первый год заботится о впавшей в кому Алисии, которую страстно любит, не надеясь на взаимность.",
     "genres": [
       "драма",
-      "криминал"
+      "мелодрама"
     ],
-    "overview": "Крис Кросс, застенчивый, наивный господин, утомившийся от собственного благополучия, спасает красивую девушку Китти от неуравновешенного приятеля. Герой увлекается Китти и позволяет ей считать себя состоятельным и успешным художником, не подозревая, что у новой знакомой и ее жениха имеются свои планы относительно него.",
-    "poster": "https://image.tmdb.org/t/p/w342/eGEDor1BWSQGaLtOntPHUSqNzRC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/g0phljbAcccz7bkSZpFEPVLuIRP.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 17058
+    "source": "movie_top_rated"
   },
   {
     "id": "mal_47351",
@@ -5626,7 +5774,7 @@
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.6,
-    "votes": 1424,
+    "votes": 1425,
     "popularity": 49.71,
     "genres": [
       "комедия",
@@ -5641,6 +5789,28 @@
     "tmdbId": 111803
   },
   {
+    "id": 7083533,
+    "ru": "Аватар: Пламя и пепел",
+    "en": "Avatar: Fire and Ash",
+    "year": "2025",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.58,
+    "votes": 3424,
+    "popularity": 151.12,
+    "genres": [
+      "фантастика",
+      "приключения",
+      "фэнтези"
+    ],
+    "overview": "Джейк Салли, Нейтири и их дети переживают смерть Нетейама. Противостояние с корпорацией RDA обостряется, и теперь семье предстоит столкнуться с враждебным племенем На`ви во главе с Варанг.",
+    "poster": "https://image.tmdb.org/t/p/w342/kpxYvaCnbRi7btNnpLCJrehy77e.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/u8DU5fkLoM5tTRukzPC31oGPxaQ.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 83533
+  },
+  {
     "id": 7334541,
     "tmdbId": 334541,
     "ru": "Манчестер у моря",
@@ -5651,7 +5821,7 @@
     "status": "Вышел",
     "studio": "",
     "rating": 7.55,
-    "votes": 6414,
+    "votes": 6416,
     "poster": "https://image.tmdb.org/t/p/w342/9h22dvN7LYIud5oUAurXXrfGHUS.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/fjk4eE8Ypke4YLv5A3ArDH4GzYH.jpg",
     "overview": "Ленивый и безответственный сантехник Ли после внезапной смерти брата назначен опекуном своего племянника-подростка. Возвращение в родной город даёт новый ход трагедии, сокрытой в его прошлом.",
@@ -5659,28 +5829,6 @@
       "драма"
     ],
     "source": "movie_top_rated"
-  },
-  {
-    "id": 8004616,
-    "ru": "Зена - королева воинов",
-    "en": "Xena: Warrior Princess",
-    "year": "1995",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 1407,
-    "popularity": 45.01,
-    "genres": [
-      "драма",
-      "Боевик и Приключения",
-      "НФ и Фэнтези"
-    ],
-    "overview": "Сериал о временах, когда всем управляли боги, которые и в грош не ставили человеческую жизнь. В эти тёмные времена появляется непобедимая и бесстрашная воительница, которая приходит на помощь всем, кто в ней нуждается, и имя ей — Зена.",
-    "poster": "https://image.tmdb.org/t/p/w342/qjUn6GVZVDifLHB7bvVrgZsOfzE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/1V7WuDv5kmzwCCNd9CNQvOmqHdm.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 4616
   },
   {
     "id": 7010754,
@@ -5702,6 +5850,28 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 10754
+  },
+  {
+    "id": 8016961,
+    "ru": "Кофе с ароматом женщины",
+    "en": "Café con Aroma de Mujer",
+    "year": "1994",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.61,
+    "votes": 396,
+    "popularity": 2.43,
+    "genres": [
+      "драма",
+      "семейный",
+      "Реалити-шоу"
+    ],
+    "overview": "На ранчо богатого землевладельца Октавио Валехо приезжают, как обычно во время сбора урожая кофе, две женщины: Гавиота и еe мать Карменcа. История начинается со смерти Октавио и его похорон, на которых присутствует вся семья. Гавиота случайно встречает внука Оттавио, Себастьяна, и они влюбляются друг в друга. Себастьян должен возвращаться назад в Лондон оканчивать учeбу, но перед его отъездом они с Гавоиотой проводят вместе ночь. Себастьян обещает вернуться через год и жениться на ней. Но вскоре после его отъезда она обнаруживает, что беременна и сама отправляется в Европу на поиски Себастьяна, но становится жертвой обмана, и в конце концов попадает на путь проституции. Она теряет своего ребeнка...",
+    "poster": "https://image.tmdb.org/t/p/w342/51sT2YMf3lmJpFLcYUfpFA0prgc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/oOqWl3GavxfYiwxegiVyQ5p9NYK.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 16961
   },
   {
     "id": 8109958,
@@ -5769,6 +5939,29 @@
       "комедия"
     ],
     "source": "movie_top_rated"
+  },
+  {
+    "id": 7724495,
+    "ru": "Королева-воин",
+    "en": "The Woman King",
+    "year": "2022",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.59,
+    "votes": 2369,
+    "popularity": 6.86,
+    "genres": [
+      "боевик",
+      "драма",
+      "история",
+      "военный"
+    ],
+    "overview": "Королевство Дагомея, 1823 год. Элитный женский отряд королевской стражи агоджи во главе с генералом Наниской возвращает женщин, похищенных рабовладельцами из империи Ойо, что грозит спровоцировать войну. А в это время 19-летнюю девушку Нави, которая не хочет мириться с жестоким потенциальным мужем, отец сдает во дворец в качестве подарка королю. Так Нави оказывается среди новичков, обучающихся для вступления в ряды агоджи.",
+    "poster": "https://image.tmdb.org/t/p/w342/aDjj0D701uuMahjvRZrpsXKEIle.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/p5kb4VwnK0bkxsOmME3SBKAcBoe.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 724495
   },
   {
     "id": "mal_16512",
@@ -5967,7 +6160,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.58,
-    "votes": 3297,
+    "votes": 3298,
     "popularity": 6.13,
     "genres": [
       "драма",
@@ -6202,7 +6395,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.49,
-    "votes": 12242,
+    "votes": 12245,
     "popularity": 4.42,
     "genres": [
       "музыка",
@@ -6345,6 +6538,28 @@
     "source": "tmdb"
   },
   {
+    "id": 8063210,
+    "ru": "Сумеречные охотники: орудия смерти",
+    "en": "Shadowhunters",
+    "year": "2016",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 1214,
+    "popularity": 19.97,
+    "genres": [
+      "Боевик и Приключения",
+      "драма",
+      "НФ и Фэнтези"
+    ],
+    "overview": "Жизнь обыкновенной девушки Клэри Фрей переворачивается вверх дном, когда она узнает, что принадлежит к расе охотников на демонов, в чьих венах течет ангельская кровь.",
+    "poster": "https://image.tmdb.org/t/p/w342/siDYlS3J3RVxQ8OklMgIs1PIc1e.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/o0PtXGp2XyoRu0S1uPYzDpMnkOM.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 63210
+  },
+  {
     "id": "mal_55877",
     "ru": "A Salad Bowl of Eccentrics",
     "en": "Henjin no Salad Bowl",
@@ -6367,6 +6582,27 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8082883,
+    "ru": "Притворство",
+    "en": "The Act",
+    "year": "2019",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.56,
+    "votes": 5172,
+    "popularity": 5.67,
+    "genres": [
+      "драма",
+      "криминал"
+    ],
+    "overview": "«Притворство» — это сериал-антология, рассказывающий удивительные подробности реальных уголовных преступлений. Сюжет первого сезона основан на статье журналистки Мишель Дин 2016 года «Ди Ди хотела, чтобы её дочь заболела, а Джипси хотела, чтобы её мать убили».",
+    "poster": "https://image.tmdb.org/t/p/w342/i5gKZyTQjNrichaQk56bmyoJnE2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/1yhQGQH7pfKdIY2xJSYNdp8ReD6.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 82883
+  },
+  {
     "id": 8097333,
     "tmdbId": 97333,
     "ru": "Сумерки богов",
@@ -6387,6 +6623,28 @@
       "Боевик и Приключения"
     ],
     "source": "discover_best_tv_2024"
+  },
+  {
+    "id": 7446159,
+    "ru": "Бакурау",
+    "en": "Bacurau",
+    "year": "2019",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 1144,
+    "popularity": 1.57,
+    "genres": [
+      "детектив",
+      "вестерн",
+      "триллер"
+    ],
+    "overview": "Небольшой городок где-то в бразильской глуши. Местные жители оплакивают кончину старейшей жительницы, которой было 94 года, и вскоре замечают, что их поселение исчезло с большинства карт.",
+    "poster": "https://image.tmdb.org/t/p/w342/qvmLAVqNB5TbGUa9QqQvXiFC4UR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/nhsC7Q1Zb5n2p4H3UKy422zP5XC.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 446159
   },
   {
     "id": "mal_59169",
@@ -6547,24 +6805,27 @@
     "tmdbId": 16306
   },
   {
-    "id": 8229913,
-    "ru": "El Roomie",
-    "en": "El Roomie",
-    "year": "2024",
+    "id": 7015137,
+    "tmdbId": 15137,
+    "ru": "Евангелион 1.11: Ты (не) один",
+    "en": "ヱヴァンゲリヲン新劇場版：序",
+    "year": "2012",
     "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.61,
-    "votes": 101,
-    "popularity": 0.75,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zaRzz2BxjxIVb7ja0gSedj1Hn1E.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/wxYBMcxFIJai9AaZr6XAOKZTfxY.jpg",
-    "source": "discover_best_movie_2024",
+    "episodes": "",
     "status": "Вышел",
-    "tmdbId": 1229913
+    "studio": "",
+    "rating": 7.6,
+    "votes": 1097,
+    "poster": "https://image.tmdb.org/t/p/w342/rdsN0JXAgHYiPwtb4ChQvbfwB7B.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/tmXP9R43XlYTmVD7XLnakFbf2ax.jpg",
+    "overview": "Чтобы спасти человечество — нужно спасти человека. Синдзи Икари получает телефонный звонок от отца из штаб-квартиры НЕРВ — организации, воюющей с таинственным врагом. Последняя надежда человечества в этой войне — Евангелион, человекоподобное оружие, и почему-то именно Синдзи, замкнутому юноше, обремененному грузом психологических проблем, предстоит быть его пилотом...",
+    "genres": [
+      "мультфильм",
+      "фантастика",
+      "боевик",
+      "драма"
+    ],
+    "source": "movie_top_rated"
   },
   {
     "id": "15137",
@@ -6746,6 +7007,27 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1518/110450l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 7000981,
+    "ru": "Филадельфийская история",
+    "en": "The Philadelphia Story",
+    "year": "1940",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 982,
+    "popularity": 2.76,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Холодная красавица миссис Трейси разведена и готовится вновь выйти замуж за Джорджа, управляющего нефтяной компанией ее отца. Казалось бы, сомнений нет, но вдруг накануне торжества неожиданно появляется ее бывший муж Декстер в сопровождении двух корреспондентов, симпатичного молодого человека по имени Коннор и мисс Имбири, которые должны осветить в «желтой» прессе это великосветское событие.",
+    "poster": "https://image.tmdb.org/t/p/w342/bIiXMwUs2IiK3wW11fktbTHtOAg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/iItypZVpdnxTFgA0iv345AzMUqk.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 981
   },
   {
     "id": 7306819,
@@ -6967,6 +7249,27 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 7339403,
+    "ru": "Малыш на драйве",
+    "en": "Baby Driver",
+    "year": "2017",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.44,
+    "votes": 16855,
+    "popularity": 9.89,
+    "genres": [
+      "боевик",
+      "криминал"
+    ],
+    "overview": "Молодой парень по прозвищу Малыш обожает стильную музыку, быструю езду и адреналин в крови. Вся его жизнь — это сплошные погони и перестрелки, ведь он работает водителем, который помогает бандитам скрыться с места преступления. Однажды он по-настоящему влюбляется и решает выйти из игры, но сначала ему предстоит выполнить еще одно задание, которое вполне может оказаться последним в его жизни.",
+    "poster": "https://image.tmdb.org/t/p/w342/rKfAeHAdN6AswpW1Q1kOD8cZD5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/yir5430WblZSZuIMd9C6pIZerfA.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 339403
+  },
+  {
     "id": "mal_37890",
     "ru": "If My Favorite Pop Idol Made It to the Budokan, I Would Die",
     "en": "Oshi ga Budoukan Ittekuretara Shinu",
@@ -6995,27 +7298,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 7339403,
-    "ru": "Малыш на драйве",
-    "en": "Baby Driver",
-    "year": "2017",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.44,
-    "votes": 16852,
-    "popularity": 9.89,
-    "genres": [
-      "боевик",
-      "криминал"
-    ],
-    "overview": "Молодой парень по прозвищу Малыш обожает стильную музыку, быструю езду и адреналин в крови. Вся его жизнь — это сплошные погони и перестрелки, ведь он работает водителем, который помогает бандитам скрыться с места преступления. Однажды он по-настоящему влюбляется и решает выйти из игры, но сначала ему предстоит выполнить еще одно задание, которое вполне может оказаться последним в его жизни.",
-    "poster": "https://image.tmdb.org/t/p/w342/rKfAeHAdN6AswpW1Q1kOD8cZD5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/yir5430WblZSZuIMd9C6pIZerfA.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 339403
-  },
-  {
     "id": 7803700,
     "ru": "Восемь гор",
     "en": "Le otto montagne",
@@ -7023,7 +7305,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.6,
-    "votes": 838,
+    "votes": 839,
     "popularity": 1.24,
     "genres": [
       "драма"
@@ -7122,6 +7404,27 @@
     "source": "tv_top_rated",
     "status": "Онгоинг",
     "tmdbId": 47450
+  },
+  {
+    "id": 7018329,
+    "ru": "Счастливы вместе",
+    "en": "春光乍洩",
+    "year": "1997",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 800,
+    "popularity": 3.54,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Лай Ю-Фай и Хо По-Винг были влюблены, когда приехали в Аргентину из Гонконга. Но когда они отправились на юг в поисках приключений, что-то между ними сломалось…",
+    "poster": "https://image.tmdb.org/t/p/w342/dAyUTgO1BGuEZhF3f2G8V9d8sXM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/2Xkd3WeAx11cHxb4Lr3wnSNDWcd.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 18329
   },
   {
     "id": 7031417,
@@ -7626,6 +7929,27 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 7012093,
+    "tmdbId": 12093,
+    "ru": "Лиля навсегда",
+    "en": "Lilja 4-ever",
+    "year": "2003",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.6,
+    "votes": 668,
+    "poster": "https://image.tmdb.org/t/p/w342/iARzbzHuOrWxMNfZnWFCr95B4UQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/fJeOpfzQSkzESNPmEXpyNLMmOtI.jpg",
+    "overview": "16-летняя Лиля живет в маленьком бедном городке где-то в бывшем Советском Союзе. Ее мать уехала в Америку с новым любовником, и Лиля ждет, когда ей пришлют приглашение. Не дождавшись от матери ни писем, ни денег, Лиля понимает, что ее бросили.  У нее остается единственный друг — 11-летний Володя, с которым они мечтают о лучшей жизни. И однажды у Лили появляется надежда. Она влюбляется во взрослого симпатичного парня по имени Андрей, и он уговаривает Лилю поехать вместе с ним в Швецию…",
+    "genres": [
+      "драма",
+      "криминал"
+    ],
+    "source": "movie_top_rated"
+  },
+  {
     "id": 7028580,
     "ru": "Потерянный уик-энд",
     "en": "The Lost Weekend",
@@ -7688,28 +8012,6 @@
     "tmdbId": 17057
   },
   {
-    "id": 8146176,
-    "ru": "Берлин",
-    "en": "Berlín",
-    "year": "2023",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 657,
-    "popularity": 45.6,
-    "genres": [
-      "драма",
-      "Боевик и Приключения",
-      "криминал"
-    ],
-    "overview": "В золотую для него эпоху Берлин собирает банду в Париже, чтобы совершить одно из самых амбициозных ограблений — украсть за ночь украшения стоимостью 44 миллиона евро.",
-    "poster": "https://image.tmdb.org/t/p/w342/9gKDYPnrVJKlWmMsCqL01EegsRt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/179sUCj5AcFKdQpvDhkIX15NRgy.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 146176
-  },
-  {
     "id": 7221731,
     "ru": "Бродяга Кэнсин: Великий киотский пожар",
     "en": "るろうに剣心 京都大火編",
@@ -7731,49 +8033,6 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 221731
-  },
-  {
-    "id": 8096129,
-    "ru": "Руки прочь от котиков! Охота на интернет-убийцу",
-    "en": "Don't F**k with Cats: Hunting an Internet Killer",
-    "year": "2019",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 653,
-    "popularity": 1.78,
-    "genres": [
-      "криминал",
-      "документальный"
-    ],
-    "overview": "Ужасные видеоролики преступника-извращенца заставляют группу искателей справедливости начать рискованную охоту, все глубже затягивающую их в мрачный мир криминала.",
-    "poster": "https://image.tmdb.org/t/p/w342/z3xBYmDJjBgLgjTq4YP3hpcg41R.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/5B5hpcQ4hc6ywi1MiauLhs4liem.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 96129
-  },
-  {
-    "id": 7399566,
-    "ru": "Годзилла против Конга",
-    "en": "Godzilla vs. Kong",
-    "year": "2021",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.5,
-    "votes": 10647,
-    "popularity": 10.03,
-    "genres": [
-      "боевик",
-      "фантастика",
-      "приключения"
-    ],
-    "overview": "Конг и группа учёных отправляются в опасное путешествие в поисках родного дома гиганта. Среди них девочка Джия, единственная, кто умеет общаться с Конгом. Неожиданно они сталкиваются с разъярённым Годзиллой, разрушающим всё на своём пути. Битва двух титанов, спровоцированная неведомыми силами — лишь малая часть тайны, спрятанной в недрах Земли.",
-    "poster": "https://image.tmdb.org/t/p/w342/wLAxMrIbBMWMm0ibCSGQFgBUDOZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/wWqTMWkEw6HouLd1zPZbZWxtAPr.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 399566
   },
   {
     "id": 7049992,
@@ -8251,6 +8510,30 @@
     "tmdbId": 5739
   },
   {
+    "id": 8001615,
+    "tmdbId": 1615,
+    "ru": "Чип и Дейл спешат на помощь",
+    "en": "Chip 'n' Dale Rescue Rangers",
+    "year": "1989",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 7.6,
+    "votes": 551,
+    "poster": "https://image.tmdb.org/t/p/w342/cVa6j0tiZ4y68Rm5RnDIvxEXzSR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/2yXFFErpVFDPbiQZqvJSomR2fIM.jpg",
+    "overview": "Главные герои мультсериала — бурундуки Чип и Дейл, которые вместе с их друзьями Рокфором, Гайкой и Вжиком образуют «Команду спасателей» и защищают родной город от преступности. Как только где-то запахло опасностью, наши маленькие герои тут же прибегут, они уже спешат на помощь всем, кому она понадобится.",
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Детский",
+      "семейный",
+      "Боевик и Приключения"
+    ],
+    "source": "tv_top_rated"
+  },
+  {
     "id": 1615,
     "ru": "Чип и Дейл спешат на помощь",
     "en": "Chip 'n' Dale Rescue Rangers",
@@ -8274,30 +8557,6 @@
     "source": "tmdb"
   },
   {
-    "id": 8001615,
-    "tmdbId": 1615,
-    "ru": "Чип и Дейл спешат на помощь",
-    "en": "Chip 'n' Dale Rescue Rangers",
-    "year": "1989",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 7.6,
-    "votes": 550,
-    "poster": "https://image.tmdb.org/t/p/w342/cVa6j0tiZ4y68Rm5RnDIvxEXzSR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/2yXFFErpVFDPbiQZqvJSomR2fIM.jpg",
-    "overview": "Главные герои мультсериала — бурундуки Чип и Дейл, которые вместе с их друзьями Рокфором, Гайкой и Вжиком образуют «Команду спасателей» и защищают родной город от преступности. Как только где-то запахло опасностью, наши маленькие герои тут же прибегут, они уже спешат на помощь всем, кому она понадобится.",
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Детский",
-      "семейный",
-      "Боевик и Приключения"
-    ],
-    "source": "tv_top_rated"
-  },
-  {
     "id": 7000196,
     "tmdbId": 196,
     "ru": "Назад в будущее 3",
@@ -8308,7 +8567,7 @@
     "status": "Вышел",
     "studio": "",
     "rating": 7.49,
-    "votes": 11541,
+    "votes": 11542,
     "poster": "https://image.tmdb.org/t/p/w342/hP8IQLoaN2KLFFmDuIdtRrD38O7.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/AtF7TESJEMmImBRUj9Z7HmW2ZH0.jpg",
     "overview": "Из газет 1955 года Марти узнает, что доктор Браун погиб еще сто лет назад. Несмотря на просьбы Дока не навещать его в XIX веке, Марти вновь хочет вмешаться в ход событий и на машине времени уносится в 1885 год, навстречу Дикому Западу. Это путешествие, как и все прежние, не обходится без опасных приключений, но смелый Марти, рискуя жизнью, предотвращает трагедию в жизни Эммета Брауна. Тот, в свою очередь, без памяти влюбляется в очаровательную незнакомку, которую спасает от гибели, и поездка домой - в будущее - теряет для него всякий смысл...",
@@ -8417,13 +8676,12 @@
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.6,
-    "votes": 524,
+    "votes": 525,
     "popularity": 12.85,
     "genres": [
       "мультфильм",
       "НФ и Фэнтези",
       "комедия",
-      "Детский",
       "семейный"
     ],
     "overview": "Чудаковатые истории из жизни расчетливого чихуахуа Рена и простака-кота Стимпи.",
@@ -8450,6 +8708,49 @@
     "poster": "https://image.tmdb.org/t/p/w342/lzU2Qr2qTdPTB33aiaMTwSLULnY.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/7KYqBgUtQGInqHVEMRnlyneuCpA.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 7841755,
+    "ru": "Легенды Мортал комбат: Битва миров",
+    "en": "Mortal Kombat Legends: Battle of the Realms",
+    "year": "2021",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 504,
+    "popularity": 8.04,
+    "genres": [
+      "мультфильм",
+      "боевик",
+      "фэнтези"
+    ],
+    "overview": "Рейдэн, Лю Кан, Джонни Кейдж, Соня Блейд и Джакс возвращаются на Землю, где обнаруживают армию Внешнего мира. Император Шао Кан ставит бойцам очередной ультиматум — или новая смертельная битва, или его армия захватит планету, уничтожив всё на своем пути.",
+    "poster": "https://image.tmdb.org/t/p/w342/4fKQu20OJIJgdAZWI557OeM0UFV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/dssCw0mUmD4EriUmkwB3PnsGu4q.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 841755
+  },
+  {
+    "id": 8113367,
+    "ru": "Дикарки",
+    "en": "The Wilds",
+    "year": "2020",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 491,
+    "popularity": 6.3,
+    "genres": [
+      "детектив",
+      "драма"
+    ],
+    "overview": "Группа девушек-подростков из разных социальных слоев оказывается на странном необитаемом острове. Через какое-то время между ними вспыхивают конфликты, и единая группа разбивается на несколько маленьких. Каждая скрывает в прошлом какой-то секрет, имеющий отношение к их нынешнему положению, ведь на острове девушки оказались не просто так.",
+    "poster": "https://image.tmdb.org/t/p/w342/7zYU3CKuzZUO2LN8h4PDTcYW36A.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/7SSO2wXsuOOVnB6oeWbuIDynrE2.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 113367
   },
   {
     "id": 7033997,
@@ -8543,29 +8844,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/tFZR8AjulBTQTjyMOiYrqislfKa.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/86JFnMyoj6Mk8P66QoT4NLkiMO7.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8046671,
-    "tmdbId": 46671,
-    "ru": "Дневник будущего",
-    "en": "未来日記",
-    "year": "2011",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 7.6,
-    "votes": 480,
-    "poster": "https://image.tmdb.org/t/p/w342/tFZR8AjulBTQTjyMOiYrqislfKa.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/86JFnMyoj6Mk8P66QoT4NLkiMO7.jpg",
-    "overview": "Амано Юкитэру — типичный изгой, одиночка. Все свое время он — безучастный наблюдатель, делающий записи в мобильном дневнике об окружающих событиях. Единственного постоянного собеседника, бога пространства и времени Деуса, Юки считает плодом своей фантазии. Однако всё меняется, когда Деус наделяет Юки, а точнее его дневник, вполне реальным свойством показывать события ближайшего будущего. Казалось бы живи да радуйся, однако подарок оказывается с подвохом — парень узнаёт, что подобными дневниками владеют ещё одиннадцать человек, и все вместе они являются участниками жестокой игры, выжить в которой суждено лишь одному.",
-    "genres": [
-      "Боевик и Приключения",
-      "мультфильм",
-      "драма",
-      "детектив"
-    ],
-    "source": "tv_top_rated"
   },
   {
     "id": "mal_55774",
@@ -8755,27 +9033,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 7011969,
-    "ru": "Тумстоун: Легенда дикого запада",
-    "en": "Tombstone",
-    "year": "1993",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.58,
-    "votes": 2455,
-    "popularity": 7.08,
-    "genres": [
-      "вестерн",
-      "боевик"
-    ],
-    "overview": "1871 год. В США закончилась гражданская война. Фермеры, грабители, золотоискатели, убийцы, воры — все отправились на поиски состояний. Нам расскажут легенду о шерифе Эрпе, который отказался от своей работы, чтобы начать нормальную жизнь со своей семьей. Его друг Док Холлидей, южанин и игрок, тоже решил зажить нормальной жизнью.  В городе Тумстоун нашли месторождение серебра, началась серебряная лихорадка. Там и решили они осесть. Но в то же время там же организовалась жестокая и огромная банда убийц.",
-    "poster": "https://image.tmdb.org/t/p/w342/hSHheD5v8esxZqF9lOT1wnEseY1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/djPXXv9pPyTLGl9kMPCTyiBmIA5.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 11969
-  },
-  {
     "id": 7003309,
     "ru": "Милдред Пирс",
     "en": "Mildred Pierce",
@@ -8821,6 +9078,27 @@
     "poster": "https://cdn.myanimelist.net/images/anime/12/69911l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 7017058,
+    "ru": "Улица греха",
+    "en": "Scarlet Street",
+    "year": "1945",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 444,
+    "popularity": 2.19,
+    "genres": [
+      "драма",
+      "криминал"
+    ],
+    "overview": "Крис Кросс, застенчивый, наивный господин, утомившийся от собственного благополучия, спасает красивую девушку Китти от неуравновешенного приятеля. Герой увлекается Китти и позволяет ей считать себя состоятельным и успешным художником, не подозревая, что у новой знакомой и ее жениха имеются свои планы относительно него.",
+    "poster": "https://image.tmdb.org/t/p/w342/eGEDor1BWSQGaLtOntPHUSqNzRC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/g0phljbAcccz7bkSZpFEPVLuIRP.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 17058
   },
   {
     "id": 8077341,
@@ -9058,7 +9336,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.6,
-    "votes": 420,
+    "votes": 421,
     "popularity": 1.42,
     "genres": [
       "драма"
@@ -9239,28 +9517,6 @@
     "tmdbId": 20139
   },
   {
-    "id": 7083533,
-    "ru": "Аватар: Пламя и пепел",
-    "en": "Avatar: Fire and Ash",
-    "year": "2025",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.57,
-    "votes": 3405,
-    "popularity": 151.12,
-    "genres": [
-      "фантастика",
-      "приключения",
-      "фэнтези"
-    ],
-    "overview": "Джейк Салли, Нейтири и их дети переживают смерть Нетейама. Противостояние с корпорацией RDA обостряется, и теперь семье предстоит столкнуться с враждебным племенем На`ви во главе с Варанг.",
-    "poster": "https://image.tmdb.org/t/p/w342/kpxYvaCnbRi7btNnpLCJrehy77e.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/u8DU5fkLoM5tTRukzPC31oGPxaQ.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 83533
-  },
-  {
     "id": 7566525,
     "ru": "Шан-Чи и Легенда Десяти Колец",
     "en": "Shang-Chi and the Legend of the Ten Rings",
@@ -9268,7 +9524,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.5,
-    "votes": 10403,
+    "votes": 10405,
     "popularity": 12.63,
     "genres": [
       "боевик",
@@ -9302,28 +9558,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/4l4mqZjpbo41QYeQwFXGqAX91y0.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/noPMcHv45ngiwAUd71s6FyDZoLW.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8016961,
-    "ru": "Кофе с ароматом женщины",
-    "en": "Café con Aroma de Mujer",
-    "year": "1994",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 395,
-    "popularity": 2.43,
-    "genres": [
-      "драма",
-      "семейный",
-      "Реалити-шоу"
-    ],
-    "overview": "На ранчо богатого землевладельца Октавио Валехо приезжают, как обычно во время сбора урожая кофе, две женщины: Гавиота и еe мать Карменcа. История начинается со смерти Октавио и его похорон, на которых присутствует вся семья. Гавиота случайно встречает внука Оттавио, Себастьяна, и они влюбляются друг в друга. Себастьян должен возвращаться назад в Лондон оканчивать учeбу, но перед его отъездом они с Гавоиотой проводят вместе ночь. Себастьян обещает вернуться через год и жениться на ней. Но вскоре после его отъезда она обнаруживает, что беременна и сама отправляется в Европу на поиски Себастьяна, но становится жертвой обмана, и в конце концов попадает на путь проституции. Она теряет своего ребeнка...",
-    "poster": "https://image.tmdb.org/t/p/w342/51sT2YMf3lmJpFLcYUfpFA0prgc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/oOqWl3GavxfYiwxegiVyQ5p9NYK.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 16961
   },
   {
     "id": 7025768,
@@ -9413,26 +9647,6 @@
     "source": "movie_top_rated"
   },
   {
-    "id": 7042987,
-    "tmdbId": 42987,
-    "ru": "Слуга",
-    "en": "The Servant",
-    "year": "1963",
-    "type": "Фильм",
-    "episodes": "",
-    "status": "Вышел",
-    "studio": "",
-    "rating": 7.6,
-    "votes": 373,
-    "poster": "https://image.tmdb.org/t/p/w342/lqkqj8ebu2h4UpF0RNTXuURIPfK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/a5NNxs0HA6CEEtCNCUDvOZiQqIK.jpg",
-    "overview": "Недавно осиротевший аристократ нанимает в слуги человека с безупречными рекомендациями, но вскоре выясняется, что тот ведет нечестную игру и имеет некий коварный план.",
-    "genres": [
-      "драма"
-    ],
-    "source": "movie_top_rated"
-  },
-  {
     "id": 530079,
     "ru": "На твоей волне",
     "en": "きみと、波にのれたら",
@@ -9494,6 +9708,28 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 28145
+  },
+  {
+    "id": 8087104,
+    "ru": "Годы",
+    "en": "Years and Years",
+    "year": "2019",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 363,
+    "popularity": 4.38,
+    "genres": [
+      "драма",
+      "Война и Политика",
+      "НФ и Фэнтези"
+    ],
+    "overview": "История об эпатажной Вивьен Рук, которая превращается в скандальную политическую фигуру. Она — политик новой формации. Шоувумен, бунтарка, шарлатанка. Великобритания переживает сложный период дестабилизации, а ее приход к власти еще больше раскалывает нацию и не сулит никакого светлого будущего. Действие начинается в 2019 году и разворачивается в течение следующих 15 турбулентных лет.",
+    "poster": "https://image.tmdb.org/t/p/w342/7cZRJfSvgSh1PJATnInCYIz2025.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/95DOsfIpXweztOlzGBU1bnePCIS.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 87104
   },
   {
     "id": "mal_10714",
@@ -9738,6 +9974,27 @@
     "tmdbId": 11909
   },
   {
+    "id": 8213241,
+    "ru": "Локвуд и компания",
+    "en": "Lockwood & Co.",
+    "year": "2023",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 312,
+    "popularity": 3.42,
+    "genres": [
+      "НФ и Фэнтези",
+      "Боевик и Приключения"
+    ],
+    "overview": "В населенном призраками мире три подростка объединяются, чтобы вместе расследовать паранормальные явления. Рискуя всем, они пытаются раскрыть дьявольский заговор.",
+    "poster": "https://image.tmdb.org/t/p/w342/xs3ivae3iIaXnC1xLO2ev0ulsx4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/t65wB2iajohomOYqcQVwjBFebHh.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 213241
+  },
+  {
     "id": 7025858,
     "tmdbId": 25858,
     "ru": "Пьяный ангел",
@@ -9776,24 +10033,26 @@
     "source": "tmdb"
   },
   {
-    "id": 7759054,
-    "ru": "Восхождение",
-    "en": "Rise",
-    "year": "2022",
-    "type": "Фильм",
-    "category": "Фильм",
+    "id": 8010926,
+    "tmdbId": 10926,
+    "ru": "Соник Икс",
+    "en": "ソニックX",
+    "year": "2003",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
     "rating": 7.6,
-    "votes": 304,
-    "popularity": 1.84,
+    "votes": 303,
+    "poster": "https://image.tmdb.org/t/p/w342/wWur8FVALoMxzzplT1iSV4z8XXw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/8Ep5ppQvqFvaMQrX3ENmM4jpNPI.jpg",
+    "overview": "Ёжик Соник прибывает на Землю, где встречает Криса Торндайка, который помогает собирать Изумруды Хаоса, чтобы Соник и его друзья могли вернуться домой.",
     "genres": [
-      "драма"
+      "мультфильм",
+      "Боевик и Приключения",
+      "комедия"
     ],
-    "overview": "После эмиграции из Нигерии в Грецию Чарльз и Вера Адетокунбо изо всех сил стараются получить гражданство и обеспечить своих пятерых детей под постоянной угрозой депортации. Фильм основан на реальной истории и повествует о трех мальчишках, Яннисе, Костасе и Танасисе Адетокунбо, которые торговали на улице безделушками, а затем стали чемпионами НБА.",
-    "poster": "https://image.tmdb.org/t/p/w342/h5RO5ynbC73TYvVJJVqAgtwgOem.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/uKL39lSf3rQbcMG8XbByoHBwGId.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 759054
+    "source": "tv_top_rated"
   },
   {
     "id": 10926,
@@ -10223,26 +10482,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8081723,
-    "ru": "Позолоченный век",
-    "en": "The Gilded Age",
-    "year": "2022",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 259,
-    "popularity": 18.85,
-    "genres": [
-      "драма"
-    ],
-    "overview": "XIX век. Молодая девушка Мариан Брук, осиротевшая дочь генерала-южанина, переезжает в Нью-Йорк в дом своих тётушек-традиционалисток. Там она оказывается втянута в жизни богатых соседей и безжалостного железнодорожного магната, чья жена пытается пробиться в высший свет. Мариан должна понять правила этого общества и проложить себе путь в будущее.",
-    "poster": "https://image.tmdb.org/t/p/w342/xFi8lE0ezDirXnTKq6Z7VyijaRp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/jPcQlhoJ3LrOfKwCvGD58P8rC5b.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 81723
-  },
-  {
     "id": 444706,
     "ru": "Дейв Шаппелл: В самом сердце Техаса",
     "en": "Dave Chappelle: Deep in the Heart of Texas",
@@ -10289,7 +10528,7 @@
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.6,
-    "votes": 254,
+    "votes": 255,
     "popularity": 8.23,
     "genres": [
       "драма"
@@ -10773,27 +11012,6 @@
     "source": "tmdb"
   },
   {
-    "id": 8000653,
-    "tmdbId": 653,
-    "ru": "Металлопокалипсис",
-    "en": "Metalocalypse",
-    "year": "2006",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 7.6,
-    "votes": 214,
-    "poster": "https://image.tmdb.org/t/p/w342/aJ8e3EjggpnnGOPjLRUka6lt1Ly.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/nLaF4UJbjotJzXhTZWUJgD7FeFI.jpg",
-    "overview": "В группе Dethklok играет 5 человек, все они больше ни на что не способны, играют они в стиле «Death metal», и почему-то, вероятно, своей эпохальностью — нравятся миллионам людей. Они обладают огромным состоянием, и хорошим адвокатом, который помогает им выкрутиться из любой щепетильной ситуации, а таких бывает много — либо кого-то случайно пришибут или раздавят, или начинается массовая давка. ..",
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "source": "tv_top_rated"
-  },
-  {
     "id": 8227004,
     "ru": "Братья Сунь",
     "en": "The Brothers Sun",
@@ -11143,185 +11361,6 @@
     "overview": "Среди гор и маковых полей Мексики три подруги помогают друг другу восстановить искалеченные наркокартелем жизни.",
     "poster": "https://image.tmdb.org/t/p/w342/uIzHQXSxD8u0iCnIxwhDHDxvWo.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/wLdRx7aCc1i3P3kknIVKjcMZYQl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_7361",
-    "ru": "Освенцим: Нацисты и «Последнее решение»",
-    "en": "Auschwitz: The Nazis and the Final Solution",
-    "year": 2005,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 190,
-    "popularity": 1.47,
-    "genres": [
-      "документальный",
-      "криминал",
-      "Война и Политика"
-    ],
-    "overview": "Спустя 60 лет после освобождения от нацизма, невообразимая история о самом ужасном месте на планете наконец раскрыта...",
-    "poster": "https://image.tmdb.org/t/p/w342/tLomUa8wQd8IKursGSuGW2n6kt2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iOgFfAvA1fqjKZzSTMjR3VN6Zu9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_86346",
-    "ru": "El Bronx",
-    "en": "El Bronx",
-    "year": 2019,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 190,
-    "popularity": 1.59,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2VSKvnL3aZPghHQOOg1v3owsr8d.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qArchZj808F9S6t9vbcZ0Wtsn12.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 102518,
-    "ru": "Держись крепче! Скалолазки",
-    "en": "いわかける！ - Sport Climbing Girls -",
-    "year": 2020,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.6,
-    "votes": 189,
-    "popularity": 6.84,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "драма",
-      "Аниме"
-    ],
-    "overview": "Перейдя в старшую школу, Кономи Касахара случайно замечает интересное сооружение на территории школы — скалодром. Рядом с ним она знакомится с Дзюн Уэхарой, состоящей в школьном клубе по спортивному скалолазанию. Благодаря давнему увлечению компьютерными играми и головоломками, Кономи отыскивает оптимальные маршруты на скалодроме и быстрейшие пути их преодоления, чем добивается вступления в клуб и уважения от его действующих участниц.\n\nС первых же дней она с головой погружается в мир нового для неё спорта. Кономи ожидают трудности и серьёзные испытания, так как скалолазание требует усердной работы над собой. Однако именно здесь ей повстречаются и новые друзья, и соперники и мириады вершин, которые нужно покорить.",
-    "poster": "https://image.tmdb.org/t/p/w342/yOn7g69Hz8GhAxyzqvJlOb2JvkF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pw9c9dhImjaksKZYbVuAR6om8tH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 499537,
-    "ru": "Дом волка",
-    "en": "La casa lobo",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.6,
-    "votes": 189,
-    "popularity": 0.72,
-    "genres": [
-      "мультфильм",
-      "ужасы",
-      "драма"
-    ],
-    "overview": "История Марии, молодой женщины, которая укрывается в доме на юге Чили после побега из немецкой колонии.",
-    "poster": "https://image.tmdb.org/t/p/w342/ydEHUS04x9kmANWrGeOUNPPA2Tv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/u4CVC9VVpbfxxFqf8fcaPVegUmZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_103",
-    "ru": "Туннель времени",
-    "en": "The Time Tunnel",
-    "year": 1966,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 186,
-    "popularity": 11.1,
-    "genres": [
-      "Боевик и Приключения",
-      "НФ и Фэнтези",
-      "драма"
-    ],
-    "overview": "Во время первого же запуска тоннеля времени - величайшего и секретнейшего американского проекта «TicToc», двое американских учёных, Тони Ньюмэн и Даг Филипс, потерялись в лабиринте водоворота прошлого и будущего. И, затерявшись где-то в бесконечных коридорах времени, они каждый раз попадают в новые фантастические приключения…",
-    "poster": "https://image.tmdb.org/t/p/w342/6E3Ncd9iLWqi8m1GcdkU5bSwOnS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/omPcylzcwlsser7aKTlsyoMJLyK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 7000856,
-    "ru": "Кто подставил кролика Роджера",
-    "en": "Who Framed Roger Rabbit",
-    "year": "1988",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.54,
-    "votes": 6185,
-    "popularity": 6.35,
-    "genres": [
-      "фэнтези",
-      "мультфильм",
-      "комедия",
-      "криминал"
-    ],
-    "overview": "Частный детектив расследует загадочное преступление, в котором подозревается… мультипликационный персонаж кролик Роджер! Сыщик попадает в непредсказуемый мир, где его ожидают нарисованные злодеи с настоящими револьверами, говорящий автомобиль и соблазнительная мультяшная красотка. Наконец, на горизонте появляется мрачная фигура того, кто подставил кролика Роджера…",
-    "poster": "https://image.tmdb.org/t/p/w342/rtba2Xa50esVXLmrM8Wokd7SZXr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/udIE8Cdon9wnYmVIOFYrBPfA2Mq.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 856
-  },
-  {
-    "id": "tv_123349",
-    "ru": "Звук волшебства",
-    "en": "안나라수마나라",
-    "year": 2022,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 185,
-    "popularity": 4.25,
-    "genres": [
-      "драма",
-      "НФ и Фэнтези"
-    ],
-    "overview": "Старшекласснице Юн Аи пришлось рано повзрослеть. Отец сбежал из дома, скрываясь от коллекторов, а следом ушла и мать, поэтому девушке приходится работать и заботиться о младшей сестре. Аи очень хорошо учится и хочет поскорее вырасти, чтобы устроиться на нормальную работу. Однажды она встречает в заброшенном парке развлечений загадочного фокусника, который даёт представления для верящих в магию.",
-    "poster": "https://image.tmdb.org/t/p/w342/9EyoRMleITfcGhK5i5006jNSqgP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ft9kPRULcAN7hgjvzpEfmtROiQR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 8014069,
-    "ru": "Пациенты",
-    "en": "In Treatment",
-    "year": "2008",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 185,
-    "popularity": 35.49,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Психотерапевт Пол Уэстон предан своему делу. Ежедневно он прикладывает колоссальные усилия, чтобы помочь пациентам. Однако сам Пол — точно такой же человек, которому постоянно приходится разбираться с собственными проблемами и переживаниями.",
-    "poster": "https://image.tmdb.org/t/p/w342/jGH4ARqOKJF6ARpAuK1sS54F8tZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/gpPg6JSixhf9JZbZtD32X3nNYCm.jpg",
-    "source": "tv_popular",
-    "status": "Онгоинг",
-    "tmdbId": 14069
-  },
-  {
-    "id": "tv_210905",
-    "ru": "100 атлетов",
-    "en": "피지컬: 100",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 184,
-    "popularity": 3.32,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "В этом яростном состязании сто участников в отличной физической форме сражаются за звание лучшего и денежное вознаграждение.",
-    "poster": "https://image.tmdb.org/t/p/w342/1nOSEftQdH3ftjSbhCDJyIReCR1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/msrw4yMwqrUgGDzQSRRNSgkamBt.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,293 @@
 [
   {
+    "id": "579",
+    "ru": "Челюсти 2",
+    "en": "Jaws 2",
+    "year": 1978,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 2116,
+    "popularity": 3.77,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "Акула-убийца, несколько лет назад терроризировавшая побережье курортного городка Эмити, вернулась! Гигантский хищник снова начал охоту. Рискуя жизнью, шеф полиции морского парка Мартин Броди вступает в борьбу с чудовищем, чей голод теперь во много раз сильнее!",
+    "poster": "https://image.tmdb.org/t/p/w342/oXQjslE2fhlKvSCCFQYjPQA959J.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/q46nyik6GeDkUV6wQGiZQ97UuP6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "9564",
+    "ru": "Астерикс и Обеликс против Цезаря",
+    "en": "Astérix & Obélix contre César",
+    "year": 1999,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 2048,
+    "popularity": 3.23,
+    "genres": [
+      "семейный",
+      "приключения",
+      "комедия",
+      "фэнтези"
+    ],
+    "overview": "Вся Европа покорена Римской Империей, лишь одна галльская деревня продолжает сопротивляться захватчикам. Узнав об этом, Цезарь решил лично разобраться с ситуацией.",
+    "poster": "https://image.tmdb.org/t/p/w342/jZbUR5tAIneodiQlssU6BTQNnpo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1FxwuCdaMmCEsl3hSlafKRHR8Th.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "616820",
+    "ru": "Хэллоуин заканчивается",
+    "en": "Halloween Ends",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 2021,
+    "popularity": 4.4,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "Спустя 4 года после трагических событий, вызванных действиями маньяка-убийцы Майкла Майерса, Лори Строуд живёт с любознательной внучкой Эллисон и работает над мемуарами. Лори, которая на протяжении долгих лет позволяла Майклу Майерсу влиять на её будущее, ведёт счастливый и беззаботный образ жизни, освободившись от преследовавших её страхов. Однако прошлое не отпускает Лори, и, когда в городке происходит ужасный инцидент — убийство маленького мальчика, якобы совершённое молодым парнем по имени Кори Каннингем, героиня должна столкнуться лицом к лицу со злом, разрушающим её жизнь",
+    "poster": "https://image.tmdb.org/t/p/w342/soP1REe8abskkY9gq3JODWaQyab.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aTovumsNlDjof7YVoU5nW2RHaYn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_32595",
+    "ru": "Cerberus",
+    "en": "Seisen Cerberus: Ryuukoku no Fatalités",
+    "year": 2016,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.6,
+    "votes": 41951,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Приключения",
+      "Adventure",
+      "Фэнтези",
+      "Fantasy"
+    ],
+    "overview": "Maintaining a delicate balance of power, the kingdoms of Amoria, Ishilfen, and Vanrodis rule over the continent of Kuna'anh. Even the slightest hint of trouble in one country could spark a continent-wide war. However, their one common fear is the evil dragon Daganzord, whose only meaning of existence is to devour and destroy all life.\n\nTen years ago, a group of mages worked together in an effort to seal away the malevolent beast. But the ritual—later known as the \"Balbagoa Tragedy\"—was a failure, and many lost their lives. Though his parents died in this tragedy, Hiiro was saved by the swordsman Giruu. Under the latter's tutelage, Hiiro learned swordsmanship with the sole purpose of seeking revenge. Now a budding master himself, he sets out in search of Daganzord in order to realize his long-awaited vengeance, or to be consumed by the dragon and meet the same fate as his parents.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/5/79459l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "11452",
+    "ru": "Король вечеринок",
+    "en": "National Lampoon's Van Wilder",
+    "year": 2002,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1951,
+    "popularity": 3.81,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Вэн учится в колледже уже 6 лет, и всё никак не может получить диплом. Но вовсе не из-за того, что он самый тупой ученик в группе, а потому что без ума влюблён в беззаботную студенческую жизнь. К своему ужасу он узнаёт, что отец не намерен оплачивать затянувшуюся учебу своего отпрыска, и теперь у него всего 2 варианта: либо самостоятельно заплатить за 7-ой год веселья, либо... стать, в конце концов, выпускником!",
+    "poster": "https://image.tmdb.org/t/p/w342/dKui0jUwa1CYRN0tqpAR98FGusL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7CAEkkp07JBPHGIxmagu181f4CP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "32823",
+    "ru": "Побег из Вегаса",
+    "en": "Get Him to the Greek",
+    "year": 2010,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1938,
+    "popularity": 2.43,
+    "genres": [
+      "приключения",
+      "комедия",
+      "музыка"
+    ],
+    "overview": "Новая комедия расскажет о том, как однажды молодого сотрудника страховой компании наняли сопровождать безбашенного рокера из Лондона на концерт в Греческом театре Лос Анджелеса.",
+    "poster": "https://image.tmdb.org/t/p/w342/xE1OyCFux5WdXbZ8vzapv1rtDAS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xvHceO1U7osWWTOPXUrjr2Vg8h7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "9072",
+    "ru": "Шалун",
+    "en": "Little Man",
+    "year": 2006,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1905,
+    "popularity": 10.82,
+    "genres": [
+      "комедия",
+      "криминал"
+    ],
+    "overview": "Главный герой так мечтает стать отцом, что по ошибке принимает находящегося в бегах маленького и похожего на ребенка воришку за своего брошенного сына. Новоявленный папаша и его жена берут «малыша» к себе в дом и начинают всячески о нем заботиться. Тем временем напарник вора, ограбивший вместе с ним ювелирный магазин, пытается выманить его из новой семьи, чтобы заполучить украденный бриллиант…",
+    "poster": "https://image.tmdb.org/t/p/w342/d8DHk6Kevl4zw4ViQjys4cUsL4P.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3sF2wc5SRQaBs0kC7Jhanz5NnbO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "76494",
+    "ru": "Чего ждать, когда ждёшь ребёнка",
+    "en": "What to Expect When You're Expecting",
+    "year": 2012,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1855,
+    "popularity": 2.59,
+    "genres": [
+      "мелодрама",
+      "комедия",
+      "драма"
+    ],
+    "overview": "Фильм расскажет историю пяти пар, которым предстоят все радости процесса ожидания и рождения ребенка. Главная героиня 42-летняя адептка системы похудания по Джиллиан Майклз, которая ведет собственное шоу по сбросу веса и фитнесу. По сюжету героиня выясняет, что, несмотря на возраст, она ждет ребенка.",
+    "poster": "https://image.tmdb.org/t/p/w342/k76CT0P7aR5SQs3VYQOC00JGORh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3hlsNk8RMaxfcjHTllSODvWwt12.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "9348",
+    "ru": "Особь",
+    "en": "Species",
+    "year": 1995,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1849,
+    "popularity": 4.71,
+    "genres": [
+      "фантастика",
+      "ужасы",
+      "боевик"
+    ],
+    "overview": "В сверхсекретном научном центре получили из космоса формулу ДНК, которая была воспроизведена и скрещена с женской. В результате получилась девочка, которая росла не по дням, а по часам. Напуганные результатами эксперимента ученые решают уничтожить подопытное существо, но оно сбегает. Из девушки существо превращается в женщину с очень сексапильной внешностью, которая жаждет размножаться.",
+    "poster": "https://image.tmdb.org/t/p/w342/w2aZXOIo74hVjui730XvELVQVa9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tEHmWaIzM0nuFi1CKQL8mJdJZsT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "258509",
+    "ru": "Элвин и бурундуки: Грандиозное бурундуключение",
+    "en": "Alvin and the Chipmunks: The Road Chip",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1761,
+    "popularity": 4.6,
+    "genres": [
+      "семейный",
+      "комедия",
+      "музыка",
+      "приключения",
+      "мультфильм"
+    ],
+    "overview": "Бурундуки пойдут на всё, чтобы сохранить свою семью, даже на грандиозное бурундуключение по всей Америке!  Когда Бурундуки видят, что Дэйв берет с собой коробочку с кольцом в поездку в Майами, они отчаянно пытаются помешать ему сделать предложение его девушке — из опасения, что мачеха и сводный брат внесут перемены в их семейную идиллию. Но после того, как их помещают в черный список за хулиганское поведение в самолете, Элвин, Саймон, Теодор и их будущий брат Майлз отправляются в самое важное путешествие в их жизни через всю страну, чтобы успеть помешать помолвке.",
+    "poster": "https://image.tmdb.org/t/p/w342/tRrPyV1koSU54AQ8qQNxD7QNYug.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jUeUWPkq7rDIjrDsm0tWVuoTEwq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "848538",
+    "ru": "Аргайл: Супершпион",
+    "en": "Argylle",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1743,
+    "popularity": 4.45,
+    "genres": [
+      "боевик",
+      "приключения",
+      "комедия"
+    ],
+    "overview": "Писательница Элли Конвей заканчивает уже пятый роман о приключениях шпиона Обри Аргайла, который борется со зловещей тайной организацией. Когда женщина отправляется на поезде к маме, к ней подсаживается развязный длинноволосый мужчина и сообщает, что он — настоящий шпион, а Элли в своих книгах угадала многое из происходящего в действительности, и им немедленно нужно лететь в Лондон на поиски хакера Бакунина.",
+    "poster": "https://image.tmdb.org/t/p/w342/45zkAuOiResNxesz6Ox1hQ5vw8Z.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mY3CRicUMaX3Btxv8yspud75UJu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "396806",
+    "ru": "Анон",
+    "en": "Anon",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1730,
+    "popularity": 3.55,
+    "genres": [
+      "фантастика",
+      "криминал",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "Идеальное общество будущего: режим тотального надзора, отсутствие личной жизни, приватных территорий и гражданских прав. Казалось бы, в полностью контролируемом государстве нет места ошибкам и правонарушениям. Но однажды детектив Сол Фриленд знакомится с девушкой, которая не числится в базах данных. Перед копом приоткрывается дверь преступного мира новой эры…",
+    "poster": "https://image.tmdb.org/t/p/w342/uUyWtWy7cC38iqaEGIm0cM6v9uD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uugcOIfnh8Gz0nxUbduWCoxjWct.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "37786",
+    "ru": "Секс в большом городе 2",
+    "en": "Sex and the City 2",
+    "year": 2010,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1729,
+    "popularity": 6.03,
+    "genres": [
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Безумное веселье, яркая мода и преданная дружба: «Секс в большом городе-2» снова дарит нам их, и даже больше, ведь Кэрри, Саманта, Шарлотта и Миранда готовы показать нам еще один «кусочек» их жизни в «Большом Яблоке» — и за его пределами, — как они устраивают свои дела и личную жизнь в этом действительно сверкающем сиквеле.",
+    "poster": "https://image.tmdb.org/t/p/w342/1ueYAM1VlQ2tEUwNTBkzxo3qV4M.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gPqqEBBpSl7E4Fz8uMBqoBLxcTP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_49215",
+    "ru": "セリア先生のわくわくまじかる教室",
+    "en": "Celia-sensei no Wakuwaku Magical Kyoushitsu",
+    "year": 2021,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.0,
+    "votes": 1706,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Комедия",
+      "Comedy",
+      "Фэнтези",
+      "Fantasy",
+      "Исекай",
+      "Isekai",
+      "Перерождение",
+      "Reincarnation"
+    ],
+    "overview": "Informational mini anime posted on the anime's official Twitter and HJ Bunko/HJ Novel's official YouTube channel.",
+    "poster": "https://cdn.myanimelist.net/images/anime/1928/116547l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
     "id": "77883",
     "ru": "Шкатулка проклятия",
     "en": "The Possession",
@@ -9579,277 +9867,6 @@
     "overview": "История о стендап-комике Нине Гельд, чья карьера на взлёте, а вот личная жизнь представляет собой полную катастрофу. Чтобы сбежать от проблематичного бывшего и подготовиться к крайне важному прослушиванию, Нина отправляется в Лос-Анджелес, где встречает Рейфа — и он ставит её жизнь с ног на голову.",
     "poster": "https://image.tmdb.org/t/p/w342/AsRHf4iFqfcEYxRLbzeHdLiGZN9.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/qvlToqIqsAY0qcFtGXXK1v2xDFl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 27342,
-    "ru": "Мэлоун",
-    "en": "Malone",
-    "year": 1987,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 75,
-    "popularity": 2.55,
-    "genres": [
-      "боевик",
-      "триллер"
-    ],
-    "overview": "Отставной агент ЦРУ Ричард Мэлоун ищет, где ему поселиться после долгих лет службы своей стране. Когда он проезжает через небольшой городок Комсток, у него ломается машина. Вынужденный задержаться на несколько дней, он заводит в городе знакомства и дружеские связи. Вскоре он узнаёт, что Комсток находится под властью местного воротилы Чарльза Дилэйни, который не остановится перед преступлением, чтобы её сохранить. Мэлойн вступает с Дилэйни в конфликт…",
-    "poster": "https://image.tmdb.org/t/p/w342/uA32G48OnKutmWdifMSi9hp2jed.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uPeLGj9psrkOvvfsgn3isLnZHuJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 442947,
-    "ru": "Кроткая",
-    "en": "Кроткая",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 75,
-    "popularity": 0.88,
-    "genres": [
-      "драма",
-      "детектив"
-    ],
-    "overview": "Молодая женщина по пути на свидание к арестованному мужу встречает различных героев своего времени: от полицейских и правозащитников до проституток и бродяг.",
-    "poster": "https://image.tmdb.org/t/p/w342/3gdoZ5PkVaB8IUYVibTUxRUZZAi.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lK0QUQVs8ywBZ0WSjDu9Qu1nciy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 80928,
-    "ru": "Babes in the Woods",
-    "en": "Babes in the Woods",
-    "year": 1932,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 75,
-    "popularity": 0.35,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/v6GjctO6e4MjT082EZLfiOIR1Fj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uByeooe6NwJYpnrpXzBIVxtceW2.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1253000",
-    "ru": "Ловчий смерти",
-    "en": "Deathstalker",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 74,
-    "popularity": 5.58,
-    "genres": [
-      "фэнтези",
-      "боевик",
-      "приключения"
-    ],
-    "overview": "Ловчий смерти, легендарный воин и бывший рыцарь, однажды среди трупов на поле боя находит таинственный амулет и становится жертвой древнего проклятия. Теперь ему предстоит найти способ снять проклятие и спасти королевство Абраксеон от зла.",
-    "poster": "https://image.tmdb.org/t/p/w342/peYuikjmgjkWNVhKzIlUf95hMpu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7aiQebqYUHbs2wZPhsTznuMWyeH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1429605",
-    "ru": "С Днём проклятого Валентина!",
-    "en": "F Valentine's Day",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 74,
-    "popularity": 3.78,
-    "genres": [
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "Джина ненавидит свой день рождения в День святого Валентина и едет в Грецию, чтобы помешать предложению руки и сердца от своего парня. С помощью отдыхающих Джонни и его сестры Микки она придумывает план, как отложить это событие, одновременно сомневаясь в своих отношениях.",
-    "poster": "https://image.tmdb.org/t/p/w342/e6ppS0qLcenWR1OTgNI24mLizXh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rQXIm9oICpHCBpuHSJ3SwthBQYc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 575842,
-    "ru": "Красный призрак",
-    "en": "Красный призрак",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 74,
-    "popularity": 1.36,
-    "genres": [
-      "военный",
-      "драма",
-      "история"
-    ],
-    "overview": "Зима 1941 года. Выходя из «Вяземского котла» - немецкого окружения в районе города Вязьма - небольшой отряд советских солдат вынужден остановиться в заброшенной деревне. Передышки не получается. Рядом обнаруживается особое и очень жестокое подразделение карателей Вермахта. Солдаты врага ищут в этих местах таинственного «Красного призрака». Он появляется из ниоткуда и в одиночку убивает захватчиков. Немцы даже не догадываются, что уже находятся под прицелом партизана-супергероя, а советские солдаты собираются вступить в смертельный бой.",
-    "poster": "https://image.tmdb.org/t/p/w342/BTOXjg1pLPKMCvC2mpFFEOgGur.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ekjm6VTCu64gk0UcGWnCMxuwbdk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1114590,
-    "ru": "Anna Nicole Smith: You Don't Know Me",
-    "en": "Anna Nicole Smith: You Don't Know Me",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 74,
-    "popularity": 0.55,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mybL2Hd3PvsY7Qyjf7W6BKsoECu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nIXBaPRix53sq4W2KK8FazrGzc4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 21250,
-    "ru": "Паутина Шарлотты 2: Великое приключение Уилбура",
-    "en": "Charlotte's Web 2: Wilbur's Great Adventure",
-    "year": 2003,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 74,
-    "popularity": 1.65,
-    "genres": [
-      "приключения",
-      "мультфильм",
-      "драма",
-      "семейный"
-    ],
-    "overview": "Поросенок по имени Уилбур умеет ценить дружбу - этому он научился у паучихи Шарлотты. Повстречав одинокого ягненка Кардигана, он немедленно становится его другом.  Он знакомит своего нового приятеля с прелестями жизни на ферме и с тремя паучками - Нелли, Аранеей и Джой - дочерьми Шарлотты. Когда фермер Цукерман продает Кардигана другому хозяину, Уилбур действует решительно.  Вместе с крысой Темплтон и паучьей семейкой он пускается в незабываемое путешествие на поиски ягненка.",
-    "poster": "https://image.tmdb.org/t/p/w342/fq2dwyjbrjUWWJljCyXHe8LdVyy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/w71FGJXkADpK2B9qNPu52QvNH5K.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 26497,
-    "ru": "Динозаврик Урмель",
-    "en": "Urmel aus dem Eis",
-    "year": 2006,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 73,
-    "popularity": 0.92,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "фэнтези"
-    ],
-    "overview": "На маленьком вулканическом острове Титиву посреди далекого озера живет и проводит свои исследования гениальный ученый Габакук Тибатонг вместе со своим приемным сыном Тимом Тинтенклексом и пингвином Пингом. Однажды зоолог находит неизвестное в природе яйцо. Из него вылупляется приветливый мини-динозавр Урмель…",
-    "poster": "https://image.tmdb.org/t/p/w342/qZojC6vXlK2MFLIDiDlb8JNbfot.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/u0wIDCYOZfnXqABoPb6gEk0PHd3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 253283,
-    "ru": "Бывший на все случаи жизни",
-    "en": "Take Care",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 73,
-    "popularity": 0.9,
-    "genres": [
-      "драма",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Молодой девушке Фрэнни требуется уход после того, как ее сбивает машина. Вскоре она понимает, что ее близкие и друзья - не самые лучшие помощники, и тогда она обращается к своему бывшему с просьбой позаботиться о ней.",
-    "poster": "https://image.tmdb.org/t/p/w342/lZmsE2TY9IOZALFjG0wqGNnARWZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pw6SIQWf3fTdzY9F9HnYpVaM9cv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 454769,
-    "ru": "बहन होगी तेरी",
-    "en": "बहन होगी तेरी",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 73,
-    "popularity": 0.49,
-    "genres": [
-      "мелодрама",
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2zdhiVMVrHFu5J2LarF5bHhSabM.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 649392,
-    "ru": "Угнать и продать",
-    "en": "Rev",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 72,
-    "popularity": 1.86,
-    "genres": [
-      "боевик",
-      "драма"
-    ],
-    "overview": "Молодой угонщик дорогих автомобилей после неудачного дела вынужден согласиться на сотрудничество с полицией. Он должен внедриться в банду и помочь стражам порядка раскрыть крупное предприятие по контрабанде сотен экзотических суперкаров.",
-    "poster": "https://image.tmdb.org/t/p/w342/5zkkcgyPiGLWC3iZONcAglTGUB4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eMI53B3SJFj4r7k5t5evaXARhmw.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 540023,
-    "ru": "Ступая во мрак",
-    "en": "Wander Darkly",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 72,
-    "popularity": 1.76,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "У супругов Адриенн и Маттео недавно родилась дочь, и в отношениях наметился разлад. Они попадают в автоаварию, в результате которой Адриенн погибает. Теперь женщина в виде бесплотного призрака вынуждена наблюдать за семьёй со стороны, но, кажется, судьба предоставляет ей шанс исправить ошибки прошлого.",
-    "poster": "https://image.tmdb.org/t/p/w342/7B8s8FTOA8j5NgHlFeHQRpHzfD7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wO8vg2bB4rR7lGtIlZ7mJlcfwJ7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1001840,
-    "ru": "Ложная память",
-    "en": "Ipersonnia",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 72,
-    "popularity": 0.5,
-    "genres": [
-      "фантастика",
-      "триллер"
-    ],
-    "overview": "Италия, ближайшее будущее. Переполненные шумные тюрьмы остались в прошлом. Теперь заключенные отбывают наказание в состоянии глубокого сна, это делает их безвредными и снижает угрозу рецидивов до нуля. Давид Дамиани, психолог, который следит за психическим состоянием спящих заключенных, много лет работает в системе и считает, что знает о ней все. Пока не сталкивается со странным преступником, над которым вдруг теряет всякий контроль.",
-    "poster": "https://image.tmdb.org/t/p/w342/knvo6bI7QRZNvVnx96DuH1ur8bK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pE24NEwXJE2D0Gl2XXUykN5q4gw.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,270 @@
 [
   {
+    "id": 628466,
+    "ru": "소리꾼",
+    "en": "소리꾼",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.49,
+    "genres": [
+      "история",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uEHZmC2VXLYdVGl7UPdTmqYTGbX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1aqPRAjP2MJpgwbJ8TqR0w6CqQV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 961413,
+    "ru": "குற்றம் குற்றமே",
+    "en": "குற்றம் குற்றமே",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.48,
+    "genres": [
+      "боевик",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eDaFfX6sqf7FKYXlWbi1NcYEG2m.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/whtSQsZZbraiF1Y6DXQVWxUegdd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 928054,
+    "ru": "猫は逃げた",
+    "en": "猫は逃げた",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.47,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ilS6GV60X3xomk5h4TD7hvM3NfE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oj5AuW9qSEYtLafTQPJr5kV45j5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 729127,
+    "ru": "거친 섹스에 빠진 그녀들",
+    "en": "거친 섹스에 빠진 그녀들",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.47,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tWD3g3BnC2QRWKSfsYwOEsyfi2o.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tg5YY8ofC8nbV4pFhBvk1pGOOUr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 733566,
+    "ru": "白发魔女传",
+    "en": "白发魔女传",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.47,
+    "genres": [
+      "боевик",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/z8F01pMDsHtu3nBZDNFtjtR4fAe.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qCz0FIMKzLvEzusWdmx0sDcDKab.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 629925,
+    "ru": "我爸没说的那件事",
+    "en": "我爸没说的那件事",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.43,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yxkNd1ijKfsuBrDq8kPTN6SlUJS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mPdYDAKCiEE1tcV4dQ2XxRk5Qr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1316288,
+    "ru": "LEGO Monkie Kid: A Hero Is Born",
+    "en": "LEGO Monkie Kid: A Hero Is Born",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.43,
+    "genres": [
+      "мультфильм",
+      "боевик",
+      "приключения",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4Su0Agl6BKynqI6dKYTA8CycTk7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vMOqBrLkKO6OjAGgLRKW1F5RBDY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 641295,
+    "ru": "Тарас. Повернення",
+    "en": "Тарас. Повернення",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.43,
+    "genres": [
+      "история",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/cBexzfzigN5rio4TC9VzBdET8t8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1S1zILt8jY8CgGQj84VTDZ71yuT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 303397,
+    "ru": "LOL: Skrattar bäst som skrattar sist - Sverige - Halloween Special",
+    "en": "LOL: Skrattar bäst som skrattar sist - Sverige - Halloween Special",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.42,
+    "genres": [
+      "Реалити-шоу",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qp4Xvih57e2rWqIza9PQVWJUswM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iYSwCoSSj7xHBTOUMmuLCMmH2tA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 796014,
+    "ru": "Calm Before",
+    "en": "Calm Before",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.42,
+    "genres": [
+      "триллер",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bNQmxZ6KCH8krWogROt0xAbdhCz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xJKVRwjmrWymmoQBYhLR4EO0hk4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 965507,
+    "ru": "러브 앤 위시",
+    "en": "러브 앤 위시",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.41,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uVAub6K7fMWYERrC3cieGW6IKhr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/g1cIqW6wc6R57a0cibnGno1JdzX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 677639,
+    "ru": "We Are the Dream: The Kids of the Oakland MLK Oratorical Fest",
+    "en": "We Are the Dream: The Kids of the Oakland MLK Oratorical Fest",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.41,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ayTpips1ckLmaynXQrQNwCrtJNQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4ruvjmlBsdoZcudd0PCtWclcMjA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 763308,
+    "ru": "El viaje más largo",
+    "en": "El viaje más largo",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.39,
+    "genres": [
+      "документальный",
+      "мультфильм",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6vBmhk3UT0bIv7VhtayCcExJQIH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s88eVyKNMc98vErsA2hBBxfKI0J.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1402913,
+    "ru": "나쁜계집애: 달려라 하니",
+    "en": "나쁜계집애: 달려라 하니",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.36,
+    "genres": [
+      "мультфильм",
+      "драма",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9ZWsJVgJ5xEhP6ycBRyKwznYdI1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eNQRRS8todBnkscazkHym4yVlUF.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 301862,
     "ru": "Lucy Letby: Murder or Mistake",
     "en": "Lucy Letby: Murder or Mistake",
@@ -9734,285 +9999,6 @@
     "overview": "Молодая пара Джеймс и Софи получают уникальную возможность стать первыми в мире обладателями последнего достижения технологического прогресса - нового робота Генри, внешне абсолютно неотличимого от обычного человека. По мере того как эти трое сближаются, их понимание того, что значит быть человеком, меняется.",
     "poster": "https://image.tmdb.org/t/p/w342/5R8rhUFn4cDEVoSMUBTiWUHyjIf.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/mrvhoKAEm0zAXIJUksDFsmyk4vQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "14576",
-    "ru": "Ловкие руки",
-    "en": "Shade",
-    "year": 2003,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 261,
-    "popularity": 3.19,
-    "genres": [
-      "боевик",
-      "триллер",
-      "криминал"
-    ],
-    "overview": "В Лос-Анджелесских клубах и барах группа покерных кидал устраивает крупную аферу против гангстера Стивенса. Махинации оборачиваются преследованием шулеров, который желает вернуть себе крупную сумму денег и поквитаться с обманщиками.",
-    "poster": "https://image.tmdb.org/t/p/w342/zwsBLPKlVsPzqc9UnpzhWYNQLxB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4bPNy1jpf75bwHk4T7iIuEYayEJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "299824",
-    "ru": "Моцзинь",
-    "en": "寻龙诀",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 261,
-    "popularity": 3.06,
-    "genres": [
-      "боевик",
-      "приключения",
-      "фэнтези"
-    ],
-    "overview": "В 1988 году трое моцзинов (расхитителей гробниц) - Ху Баи, Ван Кайсюань и Ширли Ян - бросают заниматься грабежами могил и переезжают в Нью-Йорк. Хотя Баи и Ширли связывают романтические отношения, Ван чувствует, что великие моцзины заслуживают лучшего финансового положения и, приняв предложение корпорации найти захоронение одной богини, возвращается на родину. Пытаясь спасти друга от неприятностей, Баи и Ширли отправляются следом за ним.",
-    "poster": "https://image.tmdb.org/t/p/w342/nKJY0jpWB5cGYPpxrt3WeOahiJg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6ilMT6VCADu5F1Xr9LjiVxQSXPp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1116490,
-    "ru": "Сорвать банк",
-    "en": "Cash Out",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 260,
-    "popularity": 3.62,
-    "genres": [
-      "боевик",
-      "триллер"
-    ],
-    "overview": "Профессиональный вор Мейсон вместе с братом планирует свое самое крупное дело — ограбление банка. Когда все идет не так, они оказываются запертыми внутри в окружении сотрудников полиции. Пока ситуация накаляется, Мейсон ведет переговоры с ведущим переговорщиком — своей бывшей любовницей.",
-    "poster": "https://image.tmdb.org/t/p/w342/8fyGHmNoUeZmhYvd9iPKsVPzkHE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6VoxDupaW2VXfLtJyeOoGCgXSjD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 333357,
-    "ru": "Стефани",
-    "en": "Stephanie",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 260,
-    "popularity": 1.16,
-    "genres": [
-      "ужасы",
-      "детектив"
-    ],
-    "overview": "Девочка с необычными способностями считалась сиротой, пока вдруг не появились мужчина и женщина, утверждающие, что они её родители.",
-    "poster": "https://image.tmdb.org/t/p/w342/saH984W3ZGjRX0NMCEsuKh8VUP9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/frIVSxnqgQfEOedXxZHH5y3lSJR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 744742,
-    "ru": "Последний обряд",
-    "en": "The Last Rite",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 257,
-    "popularity": 0.42,
-    "genres": [
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "Студентка-медик, страдающая сонным параличом, после переезда к своему парню обнаруживает, что ее преследует демоническая сущность.",
-    "poster": "https://image.tmdb.org/t/p/w342/1YAperQbfpJETfpPn6ezlWOm1sx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dxFPdSi03jm4hW6lodkRV4b26rL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 647785,
-    "ru": "Коллекторы 2",
-    "en": "Debt Collectors",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 256,
-    "popularity": 2.36,
-    "genres": [
-      "боевик",
-      "комедия",
-      "криминал"
-    ],
-    "overview": "Сборщики долгов Френч и Сью приступают к работе, делая то, что у них получается лучше всего — ломают черепа и кости, гоняясь за разными подонками, которые должны деньги их боссу Томми. Напарников вызывают в Лас-Вегас, чтобы они забрали долг у нечистой на руку владелицы казино, которая, как оказалось, является бывшей любовницей Сью. Тем временем на тропу войны выходит наркобарон, жаждущий убить Фрэнчи и Сью и тем самым отомстить за смерть брата.",
-    "poster": "https://image.tmdb.org/t/p/w342/6zeLNy0s6rQXqucYWPmOF6OpMAo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vXUX7Qi4rtOh2TxqA1eB2CU6QAo.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "595867",
-    "ru": "Одной волшебной ночью",
-    "en": "Chambre 212",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 256,
-    "popularity": 3.2,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Мария — парижанка, и этим всё сказано. Она наслаждается свободой и мужским вниманием, будучи замужем. После ссоры с супругом героиня ночует в отеле напротив своей квартиры, через окна наблюдая за мужем и вспоминая их историю любви. У неё есть лишь одна волшебная ночь, чтобы решить, что делать дальше, но непрошеных советчиков оказывается неожиданно много…",
-    "poster": "https://image.tmdb.org/t/p/w342/ApYpcW6oNhONEJxIqLcnWUM6iOx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6Slce0VC5KUbJ5YwokqbZBiRBzV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 570,
-    "ru": "Моей сестре!",
-    "en": "À ma sœur !",
-    "year": 2001,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 255,
-    "popularity": 2.55,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Лето, море, каникулы, родители, первая любовь. Анаис и ее старшая сестра Елена ни в чем не похожи друг на друга. Анаис — пухленькая и умненькая. Елена дьявольски красива в свои 15 лет. Это возраст первого сексуального опыта. Анаис постигает эти азы, наблюдая за сестрой…",
-    "poster": "https://image.tmdb.org/t/p/w342/fjqafvJW9UxiuiVFE0WtGxwvJit.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pnwI95K4pmYeM3LsMRTQYzvhvvO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 283589,
-    "ru": "Пиф-паф",
-    "en": "बैंग बैंग",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 252,
-    "popularity": 3.39,
-    "genres": [
-      "боевик",
-      "приключения",
-      "комедия",
-      "мелодрама",
-      "триллер"
-    ],
-    "overview": "Случайная встреча скромной банковской служащей Харлин Сахни с обаятельным, но загадочным Раджвиром Нанда приводит к угробленным самолетам, погоням, перестрелкам, взрывам и к общему глобальному беспределу. Но хотя разворачивается трансконтинентальная погоня, Раджвир убеждает Харлин, что он хороший парень. Но действительно ли она может доверять ему, и стоит ли доверять, когда начинают летать пули?",
-    "poster": "https://image.tmdb.org/t/p/w342/6ukTOJ3VNqrR0un8nolKoIlgn1V.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kmQxQT2MzqwSkXIlVN1uygXk5fC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 27381,
-    "ru": "Кровь невинных",
-    "en": "Innocent Blood",
-    "year": 1992,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 251,
-    "popularity": 2.48,
-    "genres": [
-      "комедия",
-      "ужасы",
-      "криминал",
-      "боевик",
-      "мелодрама"
-    ],
-    "overview": "Жертвой очаровательной вампирши Мари чуть было не стал гангстерский босс, питсбургский авторитет. После того как гангстер понял, после «свидания» с Мари, какие возможности открываются перед ним и его командой, городу угрожает беда. Если вампир-Мари и ее друг, тайный агент полиции, не остановят преступников, Питсбург превратится в настоящий ад…",
-    "poster": "https://image.tmdb.org/t/p/w342/7gNXGbG8fLHUfTQUvwzsHfe7rOz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8MAiMQLDfyd6YktQFk1B1bhzzz3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_8332",
-    "ru": "クダン",
-    "en": "Kudan",
-    "year": 2008,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.2,
-    "votes": 250,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Призовые",
-      "Award Winning",
-      "Фэнтези",
-      "Fantasy"
-    ],
-    "overview": "As oppose to the mythological creature Minotaur, a monsters of western culture, a Japanese monster Kudan has a human head and the body of cow. Kudan is born from female cow. It speaks human language, predicts significant incidents such as war or disaster and dies in three days. This story is about a man who is accidentally transformed into a Kudan.\n\n(Source: Official website)",
-    "poster": "https://cdn.myanimelist.net/images/anime/8/21959l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "25998",
-    "ru": "Человек за солнцем",
-    "en": "黑太陽731",
-    "year": 1988,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 250,
-    "popularity": 3.04,
-    "genres": [
-      "военный",
-      "история",
-      "ужасы"
-    ],
-    "overview": "В 40-х годах японское командование в оккупированной Манчжурии создало концентрационный «Лагерь 731». Узники, чаще китайцы, были материалом для испытаний переносимости экстремальных условий, например, холод, высота, а также для испытаний бактериологического оружия. Среди японцев кто сразу, а кто постепенно привыкает к мысли, что узники не люди, а рассходный материал. Ярче всего это происходит у команды мобилизованных подростков.",
-    "poster": "https://image.tmdb.org/t/p/w342/vTbOXA1gBIhuumN5CnRhxfDp9xY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8yscpKDJQnMz2O98bZKiHyknn64.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 412209,
-    "ru": "Tramps",
-    "en": "Tramps",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 249,
-    "popularity": 0.96,
-    "genres": [
-      "комедия",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/baXRDIafCF0qVkpySLpQp8bQMEv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s1VfATxvBq7X6DZRpjY0SmerBQJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 375950,
-    "ru": "Médecin de campagne",
-    "en": "Médecin de campagne",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 249,
-    "popularity": 0.51,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8ftmqAWf9Z9s2YljwnRepqtg6DM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uu0MkrM0lw0v3pXnVqgD3UsF9pl.jpg",
     "source": "tmdb"
   }
 ]

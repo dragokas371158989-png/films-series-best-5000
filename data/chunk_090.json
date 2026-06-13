@@ -1,5 +1,260 @@
 [
   {
+    "id": 315638,
+    "ru": "Мотай!",
+    "en": "Мотай!",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 1.31,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Начальник колонии в глухой тайге Тимофей Назаров всё ещё мечтает вырваться в столицу — и снова делает ставку на кино. Но Николай Виденин вышел на свободу, и теперь Назаров переводит в свою колонию нового заключённого — известного московского режиссёра Матвея Селюжицкого, который получает кличку «Мотор» и начинает переснимать культовые голливудские боевики.",
+    "poster": "https://image.tmdb.org/t/p/w342/zIeVPuR7z7s1azzSTCQdzTaNT7B.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/em5Q6pUP9H0Q7w2qJUzCz9nbp53.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1530067,
+    "ru": "Королевский обман",
+    "en": "Royally Screwed",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 1.28,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "Мятежный принц встречается с остроумной официанткой на шумном Манхэттене, и между ними вспыхивает королевский роман, который ломает границы морали, рушит империю табу и подрывает статус короны.",
+    "poster": "https://image.tmdb.org/t/p/w342/kZj8mogbWSSX07Yad2sWrGjnR3c.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iCgpdzf21wjnNO7QHP9CpvjG7xQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1517161,
+    "ru": "Ломаный английский",
+    "en": "Broken English",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 1.28,
+    "genres": [
+      "документальный",
+      "музыка"
+    ],
+    "overview": "Рассказ о жизни и творческом пути британской певицы Марианны Фэйтфулл.",
+    "poster": "https://image.tmdb.org/t/p/w342/dhT0Okekfq6Ncqh5ttFBGM6TimF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/253S3mBfoE7Bd0Ioe9pXEvdhlh6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 312447,
+    "ru": "Мистер Ноготь",
+    "en": "Мистер Ноготь",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 1.13,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Опытный мастер Семага теряет работу в цехе, а его жена, напротив, получает повышение. В это время дочь считает отца скучным скуфом, и только сын гордится папой. В отчаянной попытке вернуть уважение семьи и найти новое призвание Семага открывает маникюрный салон с другом Антохой. Уверенный, что с ногтями справится так же легко, как с матрёшками, герой попадает в мир женщин, гелей и лаков, который меняет его больше, чем он мог себе представить.",
+    "poster": "https://image.tmdb.org/t/p/w342/aKApPcX0TC0Ufb4fKucah5PUp5x.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xF2UpLBJ7gpVNNEASWaQI39mLSI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 316558,
+    "ru": "Тайны Амишей из Шугар Крика",
+    "en": "Sugarcreek Amish Mysteries",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 1.12,
+    "genres": [
+      "детектив"
+    ],
+    "overview": "Шерил, пережившая болезненное расставание, случайно становится владелицей сувенирного магазина в амишском городке Шугаркрик — месте, где время будто замедлилось. Её дни наполняются заботой о ручной керамике, вышитых платках и причудливых мягких игрушках с необычными узорами. Идиллия рушится, когда из витрины исчезает старинный амулет, спрятанный среди товаров. Поняв, что это не простая кража, Шерил просит помощи у Наоми и Леви. Вместе они отправляются по следу таинственных знаков и старых обид, раскрывая секреты, которые связывают прошлое и настоящее Шугаркрика.",
+    "poster": "https://image.tmdb.org/t/p/w342/ipm4Z8wI0WmQvAIh4HOH55i4iaj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tjlI2Sjv5BdR4GNW2Rtb5XwTABV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 251301,
+    "ru": "Чёрная графиня",
+    "en": "Чёрная графиня",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 1.11,
+    "genres": [
+      "драма",
+      "детектив"
+    ],
+    "overview": "В Москве и Петербурге уже год идёт сенсационное театральное шоу с единственным зрителем, где стирается грань между вымыслом и реальностью. Каждый спектакль создаётся индивидуально командой профессионалов под руководством успешного режиссёра. Очередное представление проходит в уединённом особняке в лесу, куда зрителя доставляют на вертолёте. Но на этот раз всё выходит из-под контроля: один из актёров погибает, а участники оказываются отрезаны от внешнего мира. Новый «спектакль» превращается в испытание, где раскрываются человеческие слабости и ответственность каждого за происходящее.",
+    "poster": "https://image.tmdb.org/t/p/w342/t33qHmwXpZvLfchWsVz60OOCBBP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kzh7sMRx0xlSYzTl2jul9ueDD0l.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 287677,
+    "ru": "Нейровася",
+    "en": "Нейровася",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 1.07,
+    "genres": [
+      "комедия",
+      "детектив"
+    ],
+    "overview": "Вася Фролов — полицейский старой закалки, привыкший действовать по интуиции и не доверяющий технологиям. Пережив развод и череду рабочих проблем, он получает необычного напарника — нейросеть Свету, установленную прямо в его мозг. Вместе они раскрывают запутанные преступления, от мелких краж до серьёзных дел, постоянно попадая в забавные ситуации. Света помогает Васе анализировать улики, вмешивается в его личную жизнь и спорит с ним о морали и чувствах. Постепенно грубый и упрямый следователь начинает понимать, что искусственный интеллект способен быть ближе к человеку, чем многие люди.",
+    "poster": "https://image.tmdb.org/t/p/w342/8XIcuH6QMhFixR2IgKIP55zvws6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bMZajTaePVKKLYkxHoEXmIprPb0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 315751,
+    "ru": "Время Счастливых",
+    "en": "Время Счастливых",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 1.06,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Незадолго до развала СССР у Марины и Ивана Счастливых рождается тройня и начинается жизнь в отдельной — наконец-то своей! — квартире номер 13. Но наивные 80-е сменяются голодными 90-ми, и настроения в семье уже не назовешь радужными. Некогда самый молодой и перспективный кандидат наук в МГУ, Иван вынужден стать репетитором и домохозяином, пока Марина зарабатывает на рынке. А потом приходит 2012 год, и энергия нового времени.",
+    "poster": "https://image.tmdb.org/t/p/w342/lmEpZaEZoSQ6Gd4NcjxVTgZ3CGk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cZHudFCRcsGNbpmWbnIYWPxupDZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1188772,
+    "ru": "Половина Нас",
+    "en": "A Metade de Nós",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 1.05,
+    "genres": [
+      "драма"
+    ],
+    "overview": "После самоубийства сына, страдавшего от депрессии, родители оказываются лицом к лицу не только с утратой, но и с тем, как по-разному они переживают горе.",
+    "poster": "https://image.tmdb.org/t/p/w342/6yx6Tp46q2CKrcllKo3UWLvfd3F.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uVaAqq9XLWfLAWDC04VY7w8SaJv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1590206,
+    "ru": "Коммерсант",
+    "en": "Коммерсант",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 0.77,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Москва, 1996 год. У молодого и предприимчивого банкира Андрея Рубанова есть жена Ирма и маленький ребенок. А ещё — больше миллиона долларов на двоих с другом Мишей. Видя себя будущей элитой нового государства, олигархами, они вписываются в крупную сделку, но оказывается, что друзей втянули в масштабную аферу по хищению миллиардов из казны. После ареста Андрей попадает в переполненную общую камеру «Матросской тишины» — чистилище, где ему предстоит стать другим человеком, чтобы выжить и вернуться в привычный мир.",
+    "poster": "https://image.tmdb.org/t/p/w342/jOnhgog9iknampOOuz5bBRjYDy9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cAeBJDu1UkziL5Gk1M6lUaLEtyF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 304336,
+    "ru": "Константинополь",
+    "en": "Константинополь",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 0.75,
+    "genres": [
+      "детектив",
+      "драма"
+    ],
+    "overview": "Ноябрь 1920-го года. Белогвардейский офицер Сергей Нератов прибывает из Крыма в Константинополь вместе с остатками разбитой армии Врангеля и гражданскими беженцами. Одинокий и сломленный, потерявший в революцию и Гражданскую войну абсолютно всё – армия разгромлена, жена и дети погибли – Нератов становится во главе русской эмиграции. В Константинополе, с которым русские беженцы связывали надежды на спасение и свободу, их ждет холодный прием. Сергей Нератов – принципиальный русский офицер, ставящий долг и честь выше личной выгоды. Он оказывается в совершенно чуждом мире, где беженцев из России воспринимают людьми «второго сорта» – изгоями, обреченными на нищету и гибель. Но Нератов оказывается способным отстоять право своих соотечественников на достойную жизнь. Он сможет защитить от произвола русский мир.",
+    "poster": "https://image.tmdb.org/t/p/w342/xd3nMCl7gzwJxz8MKIcc9zJXfIB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3SYzJlMhKAIH1A0axgwt4UBp43Z.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 305119,
+    "ru": "Мрачные хроники Древней Греции",
+    "en": "Ancient Greece: The Dark Chronicles",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 0.61,
+    "genres": [],
+    "overview": "Древняя Греция известна как родина демократии, науки и архитектуры, но за блестящим мраморным фасадом скрывается более мрачная реальность. Этот документальный сериал раскрывает другую сторону греческой истории - зловещих богов, гнетущие законы и жестокие войны. Каждая серия освещает отдельную эпоху: морские традиции бронзового века, агрессивный экспансионизм архаического периода, величие классического времени и Пелопоннесскую войну, поставившую греческий мир на грань разрушения. В финале рассказывается история Александра Великого и хаос, который последовал после его смерти.",
+    "poster": "https://image.tmdb.org/t/p/w342/qHEfzdWg9zwkeuvcsOy38KrKtwX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qtCpQdjzFjaHnYOrcEADaUrZDGf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1171833,
+    "ru": "Кэрол Дода: Топлес в клубе «Кондор»",
+    "en": "Carol Doda Topless at the Condor",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 0.59,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "История Кэрол Энн Дода, официантки и танцовщицы из Сан‑Франциско, совершившей в 1964 году нечто вроде маленькой секс-революции — она первой начала выступать топлесс публично.",
+    "poster": "https://image.tmdb.org/t/p/w342/dkPKYkMRzYHnVgVhcpqXLhbDiLq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yokMPbgYGZSdb0c2veZ6nfQBrii.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 716839,
+    "ru": "Фестиваль",
+    "en": "잔칫날",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 0.57,
+    "genres": [
+      "драма",
+      "семейный"
+    ],
+    "overview": "Ника бросила девушка прямо перед выпускной церемонией. Безрезультатно поунижавшись у всех на глазах, прося её со сцены вернуться, парень несколько недель провалялся в депрессии, пока лучший друг Шэйн не вытащил его на большой музыкальный фестиваль. Познакомившись по дороге с неугомонной Эми, друзья добираются до места проведения фестиваля, где сразу же сталкиваются с бывшей девушкой Ника.",
+    "poster": "https://image.tmdb.org/t/p/w342/uA07OIU99drJrmO5iWMoUaCuTEu.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eiTNoNSIkqehbWg25hQaMSpRzTk.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 249725,
     "ru": "Карта желаний",
     "en": "Карта желаний",
@@ -9114,265 +9369,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/laU6jMDzgnMsPxlV8Otk7CWoIio.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/9RQHq1UpcpgW01Pc58gs9zHtBcs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 313858,
-    "ru": "الخروج إلى البئر",
-    "en": "الخروج إلى البئر",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.74,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2T2giHJo4kYKBGf6HRDVq1Me4Pc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nldtdmIff4lV5ZqkrmBQcTsl7CL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 300406,
-    "ru": "Pavojingi ryšiai",
-    "en": "Pavojingi ryšiai",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.74,
-    "genres": [
-      "Мыльная опера",
-      "комедия",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/i4igBxm3ooJwF18xaoXZwxXghvB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/acJzu0DaqGPZkQCu8l8OZTL5nrF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1450475,
-    "ru": "Kaunis rietas onnellinen",
-    "en": "Kaunis rietas onnellinen",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.74,
-    "genres": [
-      "драма",
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tIDTwZqqMY1AbAuopqtMQ82xZSZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fnds5DBAZdKOpWKI3YLkdQhckqQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1484486,
-    "ru": "Za duży na bajki 3",
-    "en": "Za duży na bajki 3",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.74,
-    "genres": [
-      "семейный",
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2x9Fkoea4brpGEJHE4xJWddMx8C.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qolSryE7Ppqn2SRqAqm5wyYgpEx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 309203,
-    "ru": "一周星星",
-    "en": "一周星星",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.73,
-    "genres": [
-      "Новости"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/a6AzvPrfOwDYFGhnUY5NHJ0fAXr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5NrHNfuYBNyMUrnC8cxsK0jgWVz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1535421,
-    "ru": "Christmas of Giving",
-    "en": "Christmas of Giving",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.73,
-    "genres": [
-      "телевизионный фильм",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/864Ui2TYbkvaGuEDz6OgYPEvL6e.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lZuH6yRWVI9kIpUshnV6jEQV6Cy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1545317,
-    "ru": "ブルーボーイ事件",
-    "en": "ブルーボーイ事件",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.73,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rvayLkxT2H08B6Kl9QqsszWdDib.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rfoy910O5EJx9CFQhki4x0r4fYH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1557351,
-    "ru": "そこにきみはいて",
-    "en": "そこにきみはいて",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.73,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/t1h8BhEr5kDadPpLwu64An2aPDp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jR4Lj910RGx5our5VmeKssbOsDD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 768137,
-    "ru": "맛있는 섹스 그리고 언니들",
-    "en": "맛있는 섹스 그리고 언니들",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.73,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eBoMVbkvADKLoHU5GMTiDL1nlx9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7ZExTal9Gd9dT3u99u6eP22EaRc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 298508,
-    "ru": "قسمة العدل",
-    "en": "قسمة العدل",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.72,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nIVC9Ywj0RY5R33OR8tns7ohFvo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rw3M1nM4vMTDaDnNgC0dUUkHpn4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 879011,
-    "ru": "親密な他人",
-    "en": "親密な他人",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.72,
-    "genres": [
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7BoQs4m48A0FzEiYszfQMx2qpVF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sTa4BEVoeGbskSmpI0NcJg46pXV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 802463,
-    "ru": "శశి",
-    "en": "శశి",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.72,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8DFncGzLy7pJ8jLqRXseYCho0iQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dsRH2T2STCPtH4kbbjlzTBwT20O.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 304840,
-    "ru": "ゲームチェンジ",
-    "en": "ゲームチェンジ",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.71,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xqU6zOgx89qVivA7neWOcDvxJG6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dGVzUXZyONWVkvvLEwP68iHyowt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1455103,
-    "ru": "Rumba Royale",
-    "en": "Rumba Royale",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.71,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lHWo5q8WipfW8yLSpT8yAGz2mWp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zWXe5HvV6Uq2TNLRTedkD5wsdEv.jpg",
     "source": "tmdb"
   }
 ]

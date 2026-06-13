@@ -1,5 +1,283 @@
 [
   {
+    "id": 164975,
+    "ru": "Primitive Pluto",
+    "en": "Primitive Pluto",
+    "year": 1950,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 12,
+    "popularity": 0.35,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/srvu7WJwmyW0GkGxS57B1RjpMES.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2rD9LPEsIzTjmFIBJV3RSNROyYi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 306037,
+    "ru": "Котёнок по Имени Гав: Пятая История",
+    "en": "Котёнок по Имени Гав: Пятая История",
+    "year": 1982,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 12,
+    "popularity": 0.33,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "В этом выпуске история про то как котёнок Гав и щенок Шарик ищут, где живут хозяева.",
+    "poster": "https://image.tmdb.org/t/p/w342/kUSE6h2i7indIJ6ouoPbOFfUIzl.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 63070,
+    "ru": "Zimmer frei!",
+    "en": "Zimmer frei!",
+    "year": 1996,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.8,
+    "votes": 12,
+    "popularity": 16.84,
+    "genres": [
+      "Ток-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6Q1jUy5DZbrBRI4vXpmseDJebm1.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 395278,
+    "ru": "Wizard Mode",
+    "en": "Wizard Mode",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 12,
+    "popularity": 1.52,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/p8bwvNPVqhd27tH6Dy9PVZ9qml7.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 721820,
+    "ru": "A Rugrats Chanukah",
+    "en": "A Rugrats Chanukah",
+    "year": 1996,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 12,
+    "popularity": 0.55,
+    "genres": [
+      "семейный",
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kkPAIbatNJGQlGMoehyJzeaZPCc.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_94277",
+    "ru": "Детективное агентство «Дятел»",
+    "en": "啄木鳥探偵處",
+    "year": 2020,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.8,
+    "votes": 11,
+    "popularity": 3.55,
+    "genres": [
+      "мультфильм",
+      "детектив",
+      "драма",
+      "Аниме"
+    ],
+    "overview": "Эпоха Мэйдзи подходит к концу. Страдающий от безденежья поэт Такубоку Исикава открывает у себя дома частное детективное агентство «Дятел» и вместе со своим соседом Кёсукэ Киндаити расследуют одно загадочное дело за другим.",
+    "poster": "https://image.tmdb.org/t/p/w342/1vdmdRv3m4BDvs7ckSQclQK26GH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zdlcU789CQCXb133I00ubJjEmIw.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_130112",
+    "ru": "Девушка встречает \"Деджи\"",
+    "en": "でーじミーツガール",
+    "year": 2021,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.8,
+    "votes": 11,
+    "popularity": 2.44,
+    "genres": [
+      "мультфильм",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Однажды летом вялая старшеклассница-первокурсница Хига Майсэ, работающая на стойке регистрации в отеле своей семьи на Окинаве, встречает таинственного юношу по имени Судзуки Ичиро, приехавшего из Токио в качестве гостя отеля. После их встречи вокруг Майсэ стали происходить разные странные вещи: \"дэджи\": рыба плавающая по комнате или гигантское баньяновое дерево, пробивающее потолок отеля. Так что же это за явления такие? Это и предстоит узнать главной героине.",
+    "poster": "https://image.tmdb.org/t/p/w342/33jVyWdGSIwoBrTcSaZnjEe8IaD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rvgdt7q2tGQUiAAMTPAWG7QA12l.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1170215",
+    "ru": "JUNK WORLD",
+    "en": "JUNK WORLD",
+    "year": 2025,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.8,
+    "votes": 11,
+    "popularity": 0.89,
+    "genres": [
+      "мультфильм",
+      "фантастика",
+      "боевик",
+      "приключения",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/596aPikSFPpv0fxePAcxwAdryj2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tShlFArLm6eCMXJ6JhlnvlXCLBt.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_25850",
+    "ru": "Воины-марионетки Джей",
+    "en": "セイバーマリオネットJ",
+    "year": 1996,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.8,
+    "votes": 11,
+    "popularity": 7.91,
+    "genres": [
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "В далеком будущем, когда перенаселенная Земля уже не смогла вместить всех обитателей, был найден выход - колонизация других планет. Однако, не все попытки стали удачными, и один корабль, \"Месопотамия\", потерпел крушение, выжить удалось только шестерым. Они высадились на планете под названием \"Земля II\", которая действительно во многих отношениях напоминала Землю. К несчастью, все выжившие оказались мужчинами. Разделившись, они основали 6 государств, которые увеличивались и развивались, используя клонирование и генетические модификация для продолжения жизни. Время шло, но ни одной женщины так и не появилось на планете, вместо них в повседневном хозяйстве использовали женщин-андроидов, называемых \"Марионетками\". Они были лишены эмоций и выполняли только порученные задания по уборке и готовке. Но однажды обычный мальчик по имени Отару нашел и пробудил трех марионеток, созданных специально для участия в битвах, научил их жить обычной жизнью и проявлять свои эмоции.",
+    "poster": "https://image.tmdb.org/t/p/w342/n3LApkobOxCK7z1jjfTAWiHiTpz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rSQ14CqSVOvtHA3vnR3YJjzNLCz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_36588",
+    "ru": "Уважаемый старший брат",
+    "en": "おにいさまへ…",
+    "year": 1991,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.8,
+    "votes": 11,
+    "popularity": 6.93,
+    "genres": [
+      "мультфильм",
+      "драма",
+      "Аниме"
+    ],
+    "overview": "Перейдя в новую школу, Нанако буквально попадает в мир женского соперничества и любви. Её сразу же выбирают в так называемое Женское Сообщество, дав ей довольно завидную для остальных учениц позицию. Впрочем, так как Нанако родом не из богатой семьи, большинство девушек считают несправедливым, что её выбрали. Теперь ей предстоит защищаться от распускаемых о ней слухов и подлых заговоров, целью которых является выгнать Нанако из школы. Вместе со своими старыми и новыми друзьями, Нанако раскроет прошлое одних из самых популярных учениц школы, и, на своём пути через старшие классы, она многое узнает о любви, потерях и даже о секретах своей собственной семьи…",
+    "poster": "https://image.tmdb.org/t/p/w342/8jjXGvBkaLcWrfF8kiLiwmT1dkB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/atrV2b9k7kOKJKH2AeZDznEL3pP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "270482",
+    "ru": "Заводные Детки-таблетки!",
+    "en": "映画ドキドキ！プリキュア　マナ結婚！！？未来につなぐ希望のドレス",
+    "year": 2013,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.8,
+    "votes": 11,
+    "popularity": 1.1,
+    "genres": [
+      "мультфильм",
+      "боевик",
+      "фэнтези",
+      "комедия",
+      "приключения",
+      "семейный",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/jhqgkFeqteDyL5Om322KihkvZVA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mxMuX9v5YUVqgjC9yhNfce2tJ2o.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1434580,
+    "ru": "Кто в доме хозяин?",
+    "en": "தலைவன் தலைவி",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 11,
+    "popularity": 1.55,
+    "genres": [
+      "мелодрама",
+      "комедия",
+      "драма"
+    ],
+    "overview": "Аагасавиран вместе с семьей владеет придорожной закусочной. Перараси испытывает чувства к Аагасавирану из-за их общей страсти к кулинарии. Агасавиран и Перараси рискнули пойти против воли родных и поженились. Но вместо идиллии их ждут бесконечные семейные перепалки: кто управляет кафе, кто в доме хозяин, как унять вечное ворчание родни. Каждый их день — то вспышка страсти, то громкая ссора. «Thalaivan Thalaivii» — один из немногих тамильских фильмов, в котором показана жизнь после свадьбы, то есть после того, на чём обычно фильмы заканчиваются «и они жили долго и счастливо»...",
+    "poster": "https://image.tmdb.org/t/p/w342/jfN2iQLfhvziz9YlR9WbB4VVQvk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pwrVIBSrjeIiutfa1KvI5e1UdAZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1214871,
+    "ru": "Онегин",
+    "en": "Онегин",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 11,
+    "popularity": 1.0,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Евгений Онегин живет на широкую ногу: балы, приемы, театральные премьеры и прочие развлечения, которые может предложить молодому человеку столица. Но светская жизнь давно утомила его, потому известие о болезни живущего в деревне дяди, он воспринимает, как возможность сбежать от опостылевшего света. Однако, добравшись до имения, Онегин узнает о кончине родственника, что, впрочем, не сильно расстраивает Евгения. Его финансовые дела весьма печальны, а дядя богат и других наследников у него нет. Онегин запирается в имении, сторонится соседей, которые очень скоро начинают называть его между собой чудаком. В бесцельном одиночестве Евгений живет до тех пор, пока в соседнем имении не объявляется вернувшийся из-за границы хозяин — юный, восторженный, еще не пресыщенный жизнью Ленский, который знакомит Евгения с сестрами Татьяной и Ольгой Лариными.",
+    "poster": "https://image.tmdb.org/t/p/w342/qEgFBpDn3V8gu3y9cybQg2IbqxQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hQZgk0o7mbCJ0cX09etwJI2fXXw.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1178811,
+    "ru": "Мерцает, мерцает яркая звезда",
+    "en": "一闪一闪亮星星",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 11,
+    "popularity": 1.3,
+    "genres": [
+      "мелодрама",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5WAb43IVUkc7Ryuof2yj7zBiuK8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aZHgv0ukYln6a4LRcpGgGcu26G7.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1126608,
     "ru": "Рейд в cмертельную зону",
     "en": "絕地追擊",
@@ -9556,304 +9834,6 @@
     "overview": "Миа — принцесса вымышленной страны Женовии. Вскоре ей придется стать королевой, но перед коронацией ее ждут непростые испытания, среди которых выбор кавалера на праздничный бал и экзамен на умение мудро править государством…",
     "poster": "https://image.tmdb.org/t/p/w342/msY07eRTUbkHD8o21JLda3ae202.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/pmOXaAK8hteMlCiMZyyDJENHCZI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_347",
-    "ru": "Wild Arms",
-    "en": "Wild Arms: Twilight Venom",
-    "year": 1999,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.7,
-    "votes": 3356,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Экшен",
-      "Action",
-      "Приключения",
-      "Adventure",
-      "Фэнтези",
-      "Fantasy",
-      "Фантастика",
-      "Sci-Fi",
-      "Вампиры",
-      "Vampire"
-    ],
-    "overview": "This anime is based on a playstation game under the same title. The story is about four people who travel the desolated land of Filgaea and carve themselves a legendary story while they're at it. These adventurers are Sheyenne Rainstorm, a gunslinger who holds the legendary weapon called ARMs; Kiel Aromax, a scientist who looks like he should be carrying a sword; Roleta Oratorio the Crest Sorceress, a magic-user who uses cards called Crests to cast spells; and Mirabelle Graceland, one of the Noble Red, which are a family of vampiric creatures who live alongside human beings They also travel with cute little intelligent furry things, from the Popepi Pipepo Tribe, named Isaac and Jerusha.\n\n(Source: AniDB)",
-    "poster": "https://cdn.myanimelist.net/images/anime/1532/94186l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "9614",
-    "ru": "Счастливчик Гилмор",
-    "en": "Happy Gilmore",
-    "year": 1996,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 3337,
-    "popularity": 5.25,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Гилмор с детства обожал хоккей, но, кроме пушечного удара, способностей у него к этой игре не было. Случай дал ему в руки клюшку для гольфа, и удар его был самым мощным за всю историю этого вида спорта, который он так презирал. Но на одном презрении далеко не уедешь, а вот за победу в гольф платят большие деньги. И тут за дело берется профессиональный тренер по гольфу, которому придётся весьма нелегко с Хэппи Гилмором.",
-    "poster": "https://image.tmdb.org/t/p/w342/z0FxccTbbe51HbGzteQxtN2yy5l.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/As7NuiDRM4EO7LlJn2u8JWWsABp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "8967",
-    "ru": "Древо жизни",
-    "en": "The Tree of Life",
-    "year": 2011,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 3332,
-    "popularity": 3.54,
-    "genres": [
-      "драма",
-      "фэнтези"
-    ],
-    "overview": "Мы наблюдаем за развитием 11-летнего Джека, одного из трех братьев. Поначалу ребенку все кажется чудесным. Глазами своей души он наблюдает за поступками мамы. Она представляет собой любовь и милосердие, в то время как отец пытается научить сына, что в реальном мире на первое место необходимо всегда ставить себя. Каждый родитель старается переманить Джека на свою сторону, и он должен примириться с их притязаниями. Действительность становится мрачнее, когда главному герою в первый раз приходится столкнуться с болью, страданиями и смертью. Некогда абсолютно ясный мир превращается в лабиринт.",
-    "poster": "https://image.tmdb.org/t/p/w342/jpIOnrPX6BtRlVj1fYRtIMmvLU5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xq1HIwZq9VbuvMQELAua1nqEkH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "943",
-    "ru": "Смертельное оружие 3",
-    "en": "Lethal Weapon 3",
-    "year": 1992,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 3249,
-    "popularity": 4.54,
-    "genres": [
-      "боевик",
-      "триллер",
-      "криминал"
-    ],
-    "overview": "Третий фильм о неустрашимом полицейском Риггсе.\r На этот раз Мартин и его напарник Роджер сталкиваются с гангстерами, похищающими оружие со склада полиции. Преступную группу, за которой тянется длинный кровавый след, возглавляет бывший сержант Джек Тревис. Найти улики против «грязного» полицейского напарникам помогает Лорна Коул — решительная женщина-полицейский, которая не останавливается перед лицом опасности и уверенно вступает в схватку с противниками…",
-    "poster": "https://image.tmdb.org/t/p/w342/h6fTuK3BgyNy3kce4guusbB43bQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kmt9XmhmX36sJduuDVFlTgEWh9U.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "11283",
-    "ru": "Моя ужасная няня",
-    "en": "Nanny McPhee",
-    "year": 2005,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 3226,
-    "popularity": 5.74,
-    "genres": [
-      "фэнтези",
-      "комедия",
-      "семейный"
-    ],
-    "overview": "Попав в дом к недавно овдовевшему мистеру Брауну, няня-волшебница пытается усмирить его семерых непослушных детей. Эти сорванцы, возглавляемые Саймоном, уже избавились от 17 предыдущих нянь и поэтому не сомневаются, что и 18-ю ждет та же участь.  Однако, когда няне Макфи все-таки удается взять ситуацию под контроль, детишки вдруг начинают замечать, что их ужасное поведение волшебным образом приводит к совершенно удивительным и непредсказуемым результатам…",
-    "poster": "https://image.tmdb.org/t/p/w342/ePTIBxY3ymbhD4Y1sQLqQj64fi7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ijmKdhQQ86L18ZUywjHjM7h7YgO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_45783",
-    "ru": "最遊記RELOAD -ZEROIN-",
-    "en": "Saiyuuki Reload: Zeroin",
-    "year": 2022,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.7,
-    "votes": 3218,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Экшен",
-      "Action",
-      "Приключения",
-      "Adventure",
-      "Комедия",
-      "Comedy",
-      "Драма",
-      "Drama",
-      "Сверхъестественное",
-      "Supernatural",
-      "Мифология",
-      "Mythology",
-      "Дзёсэй",
-      "Josei"
-    ],
-    "overview": "Getting ambushed by rogue demons on the road is business as usual for the Sanzou party. But when their latest assailants turn out to be humans, the group is left dumbfounded. The mystery only deepens when they encounter a wandering priest, Hazel Grouse, and his imposing bodyguard, Gaty Nene Hawk. The pair hails from the far West, with Hazel using his powers of resurrection to aid grief-stricken villages. While his ability is greatly welcomed by the people, the truth behind it is less miraculous than it seems. Furthermore, the resurrected humans gain golden eyes, a trait they share with the group's recent attackers. It appears that the friendly priest's intentions are not as generous as one might expect—and the Sanzou party is a step away from unraveling them.\n\n[Written by MAL Rewrite]",
-    "poster": "https://cdn.myanimelist.net/images/anime/1451/119862l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "25",
-    "ru": "Морпехи",
-    "en": "Jarhead",
-    "year": 2005,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.7,
-    "votes": 3177,
-    "popularity": 4.68,
-    "genres": [
-      "драма",
-      "военный",
-      "Аниме"
-    ],
-    "overview": "Действие картины разворачивается во время войны в Персидском заливе. Морской пехотинец Энтони Суоффорд - потомственный военный. После курса подготовки в специальном лагере его отправляют на Ближний Восток, где идут военные действия. Со снайперской винтовкой в руках и с тяжелым рюкзаком за плечами ему предстоит проделать нелегкий путь по пустыне, где нет спасения от невыносимой жары и иракских солдат, которые в любую минуту могут появиться на горизонте.",
-    "poster": "https://image.tmdb.org/t/p/w342/jVmk7s2QVIOK7rnXsYL5ineaZDj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bQ8fRUaitJvi54O2lUT6Ta7FVHK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "249397",
-    "ru": "Нимфоманка: Часть 2",
-    "en": "Nymphomaniac: Vol. II",
-    "year": 2013,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 3176,
-    "popularity": 104.81,
-    "genres": [
-      "драма",
-      "детектив"
-    ],
-    "overview": "Продолжение истории нимфоманки по имени Джо, чья жизнь была полна множества эротических переживаний, впечатлений и опытов. Она рассказывает о себе немолодому одинокому холостяку Селигману, который наткнулся на нее, избитую и находящуюся в полубессознательном состоянии, в переулке, доставил к себе домой и выходил…",
-    "poster": "https://image.tmdb.org/t/p/w342/vSCaG0r7NW9z5IIMUxNUXcBbYOe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5n417Ff5GXOGCOKj3ZLMRAxEP0o.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "10999",
-    "ru": "Коммандос",
-    "en": "Commando",
-    "year": 1985,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 3139,
-    "popularity": 7.79,
-    "genres": [
-      "боевик",
-      "приключения",
-      "триллер"
-    ],
-    "overview": "Полковник в отставке Джон Матрикс — бывший командир спецотряда, участвовавшего в секретных операциях на Ближнем Востоке, СССР и Центральной Америке. Находясь в отличной физической форме и владея знаниями, которые делают его супер-солдатом, полковник в отставке Джон Матрикс живет под другим именем в большом доме со своей дочерью вдали от города.",
-    "poster": "https://image.tmdb.org/t/p/w342/iMHn218oEVvA2Hs6Veb3jbne0P.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gvao0WZchzudp2oMF5sjgzwHY0q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_39846",
-    "ru": "この世の果てで恋を唄う少女YU-NO 無限の並列世界",
-    "en": "Kono Yo no Hate de Koi wo Utau Shoujo YU-NO: Mugen no Heiretsu Sekai",
-    "year": 2019,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.7,
-    "votes": 3079,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Драма",
-      "Drama",
-      "Фантастика",
-      "Sci-Fi",
-      "Путешествия во времени",
-      "Time Travel"
-    ],
-    "overview": "Unaired episode included with the third Blu-ray volume.",
-    "poster": "https://cdn.myanimelist.net/images/anime/1038/102471l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "353070",
-    "ru": "Уйти красиво",
-    "en": "Going in Style",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 3043,
-    "popularity": 3.53,
-    "genres": [
-      "криминал",
-      "комедия"
-    ],
-    "overview": "Старые друзья Вилли, Джо и Эла, несмотря на свой пенсионный возраст, впервые в жизни решают свернуть с праведного пути, чтобы сохранить свои пенсионные накопления.  Угнетенная оплатой счетов и потерей своих близких, пожилая троица решает рискнуть всем и намерена совершить ограбление банка, присвоившего их деньги.",
-    "poster": "https://image.tmdb.org/t/p/w342/qFqW8wX9r6UTnWZ2spIWroijRNM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uARnuPezr7eZkOsHj2ujFQz6EKE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "157386",
-    "ru": "Захватывающее время",
-    "en": "The Spectacular Now",
-    "year": 2013,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 3017,
-    "popularity": 3.06,
-    "genres": [
-      "комедия",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Старшеклассник Саттер Кили, обаятельный и хладнокровный, заводила вечеринок, живет настоящим моментом. Он любит свою работу в магазине мужской одежды, и не строит никаких планов на будущее. Точно прогрессирующий алкоголик, он никогда не расстается со своей флягой с виски. Когда его бросает подруга, Саттер напивается и просыпается на газоне в тени нависшей над ним Эйми Финики. Она другая: «милая девушка», увлекающаяся фантастикой, да к тому же без парня. В то время как Эйми мечтает о будущем, Саттер проживает в блаженном неведении захватывающее время, но каким-то образом, они сближаются.",
-    "poster": "https://image.tmdb.org/t/p/w342/vDnMN9Bz4gIn7Pok01oDRZMz87M.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xy5YazEiPb3Nij6TUEP9Dq3LDhp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "768",
-    "ru": "Из Ада",
-    "en": "From Hell",
-    "year": 2001,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 3016,
-    "popularity": 4.45,
-    "genres": [
-      "ужасы",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "Он — воплощение тьмы и ужаса. Он самый таинственный и знаменитый из всех серийных убийц, известных истории. Он погрузил Англию в атмосферу страха и породил массу слухов и домыслов. Убийца, который знает больше простого мясника или лаборанта. Убивая, он совершает чудовищный ритуал. Его прозвище — Джек-Потрошитель.Поймать его пытается инспектор Фред Эбберлайн. С помощью опиума он усиливает свой природный дар ясновидения и приходит к выводу, что дело Джека-Потрошителя — часть злодейского заговора, в который замешан Орден Масонов, выполняющий, в свою очередь, волю королевского дома.",
-    "poster": "https://image.tmdb.org/t/p/w342/zxJIvJgzxYaVXET2IHzcflwFeK6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bHKj3m3eLlU2wJQBlAs7wv6ZMBv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "600583",
-    "ru": "Власть пса",
-    "en": "The Power of the Dog",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 2955,
-    "popularity": 2.99,
-    "genres": [
-      "драма",
-      "вестерн"
-    ],
-    "overview": "В центре сюжета «Власти пса» — братья Фил и Джордж Бёрбэнки, которые в 1920-х годах стали владельцами крупнейшего ранчо в штате Монтана. Джордж в какой-то момент решил жениться на молодой вдове Роуз и воспитывать её сына Питера, что не понравилось Филу, который начал издеваться над девушкой и подростком.",
-    "poster": "https://image.tmdb.org/t/p/w342/fAW8Nr4KIgsrtH1EmdFV3b1e8Yw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gAsHuCQMN7mv4uFIvM4ACQ09hPr.jpg",
     "source": "tmdb"
   }
 ]

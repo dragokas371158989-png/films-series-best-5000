@@ -1,5 +1,276 @@
 [
   {
+    "id": 824362,
+    "ru": "劇場版「きのう何食べた？」",
+    "en": "劇場版「きのう何食べた？」",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 16,
+    "popularity": 0.66,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wZL8EQSarjLeREvA97QJ0Jx7yX5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kfQQGQY5WZvFicI8UIbYBVzjt3f.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 737195,
+    "ru": "The Man in the Hat",
+    "en": "The Man in the Hat",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 16,
+    "popularity": 0.39,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hYLhSAbVW1Wa9mRX05DGCL5X20w.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kTkAdzFxj4wSJW6j43sV9QHpkuB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 557132,
+    "ru": "Царь зверей",
+    "en": "دا ڈونکی كِنگ",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 16,
+    "popularity": 1.01,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "семейный"
+    ],
+    "overview": "«Если ты родился ослом, то не обязательно всю жизнь жить как осел. Мечтай, и твои мечты осуществятся». Получив такое напутствие от отца, осел по имени Мангу с оптимизмом смотрит на жизнь. И однажды ему действительно улыбается удача. В стране грядут выборы нового правителя. По невероятному стечению обстоятельств, претендентов на трон всего двое: он и избалованный принц, которого народ терпеть не может. Казалось бы, дело в шляпе, а корона на голове у ослика! Но сможет ли простой осел из бедной семьи стать царем зверей? Ведь речи произносить его никто не учил, а всё, чем он управлял — это утюг и доска для стирки белья!",
+    "poster": "https://image.tmdb.org/t/p/w342/qqxpf84ZD0R4lEoy5WiD0M4mVHl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mFREpPtK5tgSmnR0N7rK9LB3A0C.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 400990,
+    "ru": "Страшные истории 3",
+    "en": "무서운 이야기 3: 화성에서 온 소녀",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 16,
+    "popularity": 0.91,
+    "genres": [
+      "триллер",
+      "ужасы",
+      "фантастика"
+    ],
+    "overview": "Маленькая девочка захватила космический корабль сил Земли,чтоб сбежать на планету Титан, но попала в руки Робота, который ненавидит людей.Чтобы обмануть его, девочка сказала, что она не человек. Пытаясь оттянуть время, она рассказывает Роботу три ужасные истории о людях, которые происходят в прошлом, настоящем и будущем.Сможет ли она спасти себя или Робот унитожит ее.\r Первая история из прошлого. Долина Лис. История-сказка, судя по всему, написана под метамфетамином.Двое мужчин забредают в город, в котором живут люди-лисы,которые копают огромный туннель в горе.Они умеют менять облик, но хреново размножаются. Что из этого вышло и что в конце туннеля, смотрите сами.\r Вторая история. Настоящее. Дорожная ярость. Самая внятная история, про парочку на машине и грузовике с маньяком, охотящимся за ними по ночной дороге.\r Третья история. Из будущего. Робот Спирит. Домашний робот выходит из строя,но не желает отправлятся на свалку,так как очень любит свою семью.",
+    "poster": "https://image.tmdb.org/t/p/w342/zcZcYv2PkOo6nAiDl43LMPXiQ3Z.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mzMRdToBtofaZPnoFKbpb71gFLu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 36132,
+    "ru": "Самсон и Салли",
+    "en": "Samson og Sally",
+    "year": 1984,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 16,
+    "popularity": 0.35,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "Молодой кит Самсон страдает от одиночества. У него совсем нет друзей, и из-за этого огромный океан кажется излишне просторным и пустым. Мама воспитывает его на рассказах о легендарном Моби Дике, папа пытается научить его выживать в нелегких условиях подводного мира. Они подбирают крошку Салли, мать которой убили китоловы. И вот, когда в очередной раз китоловы намерены напасть на китов, а на поверхности моря разлито огромное нефтяное пятно, Самсон отправляется на поиски того самого легендарного Моби Дика…",
+    "poster": "https://image.tmdb.org/t/p/w342/j0QujPfK8Bx1DUPz12s6vYSSKPJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3t4Gh4FqZe9z06vFAwEeqn1MSPn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 213646,
+    "ru": "擋不住的瘋情",
+    "en": "擋不住的瘋情",
+    "year": 1993,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 16,
+    "popularity": 2.71,
+    "genres": [
+      "триллер",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/x68W8y1OQd6qOx9KkdXB5wbN0dl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sud1OChHez9sXVIAf39oOZdrJ6g.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 651879,
+    "ru": "屍人荘の殺人",
+    "en": "屍人荘の殺人",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 16,
+    "popularity": 0.98,
+    "genres": [
+      "детектив",
+      "криминал",
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1YEamCg1OUHRG0gFXfp9Bz96BHW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zPATOBJBItefuQ9yJgZMdZD1drP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 303835,
+    "ru": "Sex and Broadcasting",
+    "en": "Sex and Broadcasting",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 16,
+    "popularity": 0.7,
+    "genres": [
+      "документальный",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dk5KcUZy1OdZ5nwe6qXI9CFLdyn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ozrmo2tlwJhq2dUcJGvi4RPTx0H.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 545273,
+    "ru": "Helicopter Eela",
+    "en": "Helicopter Eela",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 16,
+    "popularity": 0.61,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5nl4RpcRKROSvqkoJzthUAhJ7NG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8AN67MrhyOm0ewFijuhHOhppPU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 312788,
+    "ru": "Americons",
+    "en": "Americons",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 16,
+    "popularity": 0.5,
+    "genres": [
+      "драма",
+      "боевик",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pi03dJrDAisb9SJzc2UZrnWBT5c.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3o4L5xnm9b2qmHkdLpLNii2vsOd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 258673,
+    "ru": "The Trip to Bountiful",
+    "en": "The Trip to Bountiful",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 16,
+    "popularity": 0.49,
+    "genres": [
+      "драма",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yceP6tTD3XePL4ae5gsiUVPe9qH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4tzaOybzFJbbOQqX67lhXgKq26R.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_45893",
+    "ru": "Наброски Хидамари",
+    "en": "ひだまりスケッチ",
+    "year": 2007,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.0,
+    "votes": 15,
+    "popularity": 4.88,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "«Хидамари» («солнечное место») — имя собственное двухэтажной коробки, в которой снимают квартиры ученицы художественного отделения школы Ямабуки. «Скетч» — небольшая сценка в свободной манере. Беглый набросок, фиксирующий наблюдение или замысел без детальных описаний. Повседневность, самостоятельность, учеба, дружба. Четверка узнаваемых старшеклассниц: прилежная Юно (невысокая, помечена тонким крестиком), прагматичная Мия (аппетит), устойчивая Сая (очки), её подруга, мнительная Хиро (кудряшки и диета). Всё. Сверх перечисленного нет ничего, даже первой любви.",
+    "poster": "https://image.tmdb.org/t/p/w342/g1vJD3al2XDY0OJpIgNXAEN966b.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/POCKoyMDc7YH50vlTyjicqJgqW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_34148",
+    "ru": "Этот ужасный и прекрасный мир",
+    "en": "この醜くも美しい世界",
+    "year": 2004,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.0,
+    "votes": 15,
+    "popularity": 4.15,
+    "genres": [
+      "мультфильм",
+      "драма",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "Ученик средней школы Такеру Такемото, ленивый и безответственный, хоть и не лишенный чувства юмора и доброго нрава, живет размеренной и скучной жизнью. Клуб плавания, подработка курьером, общение с лучшим другом, также состоящим в клубе, и регулярные нагоняи от кузины за безалаберность – вот будни этого юноши.\n\nЖизнь изменится в одно мгновение, когда при выполнении одного из заказов он увидит исходящий из леса свет. События развиваются стремительно, обнаружив юную девушку в лесу, он тут же натыкается на огромное чудовище, которого просто не могло там быть…",
+    "poster": "https://image.tmdb.org/t/p/w342/sHUucBFpaoeF9ZZ1hduOzrv0P2K.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qBfldtvxqDVoY9ZCyyMksFZ3dAG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1261543,
+    "ru": "Невеста дьявола",
+    "en": "Pengantin Iblis",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 15,
+    "popularity": 1.51,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "Ранти, преданная жена и заботливая мать дочери Нины, родившейся с инвалидностью. Когда Нина получает серьёзную травму, нуждаясь в срочной медицинской помощи, а муж отсутствует, Ранти оказывается на грани страшного решения. В отчаянии она заключает мистический и зловещий договор - становится «невестой дьявола», чтобы спасти жизнь ребёнка. Изначально казалось, что всё наладилось, но затем расплата наступает: проклятие обрушивается на всю семью, заставляя её платить ужасающую цену.",
+    "poster": "https://image.tmdb.org/t/p/w342/j8Zar9xxzyTJevigM9lLMYnbCKZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tX0G6mVkRt550e3cfzkqZIK8wNz.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 716255,
     "ru": "Самый завидный жених",
     "en": "Most Eligible బ్యాచ్‌లర్",
@@ -9254,271 +9525,6 @@
     "overview": "Василий Кандинский официально был женат дважды. Но была в его жизни ещё одна женщина, на глазах которой рождался творческий гений основателя абстракционизма. Молодая немецкая художница Габриэле Мюнтер стала для Кандинского спутницей и единомышленницей на долгие 12 лет.",
     "poster": "https://image.tmdb.org/t/p/w342/1l6NxKhP1jvOObcqTphIjCGcwM1.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/6KnYHMMrBTiUN2PvLFTphR4WidD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 300741,
-    "ru": "Игра: Ты никогда не играешь в одиночку",
-    "en": "The Game: You Never Play Alone",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 0.63,
-    "genres": [
-      "криминал",
-      "детектив"
-    ],
-    "overview": "Разработчица игр, стремящаяся построить карьеру, сталкивается с женоненавистническими ожиданиями и становится жертвой жестоких атак в Интернете и в реальной жизни.",
-    "poster": "https://image.tmdb.org/t/p/w342/c7WlnmjQvcKIoaUtOzzb951Hc5E.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hDsoCUGGPB0F8MddjII2RuhNVr1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 218261,
-    "ru": "Newscast",
-    "en": "Newscast",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 5.86,
-    "genres": [
-      "Новости",
-      "Ток-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/amqSeiSsVitgY8uVIOwu3eKSs3H.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7Lq0T1xcfksUlUxhxQfLv6euIBh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 223443,
-    "ru": "스모킹 건",
-    "en": "스모킹 건",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 5.18,
-    "genres": [
-      "документальный",
-      "Ток-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/AspiWiOPb23xLVBkd9tbSmXVoSY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5spsAoQKZhG0susfIk6ypAYjSka.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 276609,
-    "ru": "Thukra Ke Mera Pyaar",
-    "en": "Thukra Ke Mera Pyaar",
-    "year": 2024,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 5.04,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pcShyioNKqqvgnCSAdni0hQpESu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mKXSi5t9CKy0jDEWcGTuJnapu07.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1098343,
-    "ru": "除恶：飞车党",
-    "en": "除恶：飞车党",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 4.72,
-    "genres": [
-      "боевик",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tVQ1DJjdtPQd9HeaUntXaGuWadq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/okzrhS42C2UbVvIokxdoZn1l4U9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 298203,
-    "ru": "人間標本",
-    "en": "人間標本",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 3.01,
-    "genres": [
-      "драма",
-      "детектив",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gDbXuXdGfGcd5pfmO8wGiHFvDTd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/etMLUe751O3GnQSHsFbgpijmHRr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 289624,
-    "ru": "八千里路云和月",
-    "en": "八千里路云和月",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 2.67,
-    "genres": [
-      "драма",
-      "Война и Политика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/91cU2SqTocP38tFOEwqYShqLE2h.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4Sn2oRviYg5ZVqrRtEBVwMmhFR8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 299719,
-    "ru": "逆仙而上",
-    "en": "逆仙而上",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 2.67,
-    "genres": [
-      "драма",
-      "НФ и Фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nVhL7poVS7vh1CBjMeikEcZYwLM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hIQ2RIZYHGpVGUzCF3DOs6pSxOc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 938144,
-    "ru": "너튜브: 3인의 맛집 2",
-    "en": "너튜브: 3인의 맛집 2",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 2.48,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vrSqq9hgJh1nqLdIznNHCzUHV4D.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/c5Gbj9NXWOBKxeoCnUJCvpv92SH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 292760,
-    "ru": "婢女",
-    "en": "婢女",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 2.4,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ikRNMLfiJQnvHlFCyqc74EguRzc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wtWphAa3wnm7wwH7LFZ1Vz3DzoP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 305979,
-    "ru": "唐诡奇谭之长安县尉",
-    "en": "唐诡奇谭之长安县尉",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 2.07,
-    "genres": [
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2u3P6GalX67Hc1HYj1In1pxvI3K.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8gtcFo1TJHBxWX5wkqLaqe2F3of.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1287809,
-    "ru": "The Sheriff",
-    "en": "The Sheriff",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 2.06,
-    "genres": [
-      "криминал",
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pba15JjYAoyuFIM6kkZ7qE6oqG2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jrYEcctu1rUa5OhRuGc3ooU7uSO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 757446,
-    "ru": "Intelligentia",
-    "en": "Intelligentia",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 1.89,
-    "genres": [
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dL3stvvSCWF2lsT9Sn0DX65LYlz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hX9EWF30CrETuUqHWziUgMU4G3l.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1163780,
-    "ru": "Dream",
-    "en": "Dream",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 3,
-    "popularity": 1.77,
-    "genres": [
-      "драма",
-      "фэнтези",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/i1oEkQjxV4Q1EL7T4lbMfxMZdde.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/76jah8Hn458ZysGD8RJ7Ia0XRsT.jpg",
     "source": "tmdb"
   }
 ]

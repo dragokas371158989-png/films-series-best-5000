@@ -1,5 +1,271 @@
 [
   {
+    "id": 661908,
+    "ru": "Убийство в стране басков. Мадди Эчебан",
+    "en": "Maddy Etcheban",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 0.41,
+    "genres": [
+      "криминал",
+      "драма",
+      "детектив"
+    ],
+    "overview": "Мадди Эчебан — полицейский города Байон и мать страдающего аутизмом Клемана, которого она растит одна после смерти мужа. В течение недели сын находится под присмотром в «Институте Агории», а она забирает его по пятницам. Этой стабильности приходит конец, когда директор института сообщает, что они больше не могут присматривать за мальчиком. Мадди должна найти выход из ситуации или ...",
+    "poster": "https://image.tmdb.org/t/p/w342/vV8oqdSdnXIQn0QyawDX9VEliIc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nS0mmWS663raVsNj70mSC2qm9cz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 851743,
+    "ru": "കനകം കാമിനി കലഹം",
+    "en": "കനകം കാമിനി കലഹം",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 2.44,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/iZJfmpm8NuTN631npCv0cIPyvlR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5d6Gnj2u26RRE0H4mnyhU8Ckrxk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1260794,
+    "ru": "Resurrection Road",
+    "en": "Resurrection Road",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 0.73,
+    "genres": [
+      "боевик",
+      "ужасы",
+      "вестерн"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3FSlrUUzGsQDESz935ryjo769sK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/AcLKdztolhIBySNuWZRLPYNzm8x.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1207413,
+    "ru": "Dark Parasite",
+    "en": "Dark Parasite",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 0.68,
+    "genres": [
+      "ужасы",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hmfVO0q2LCsu2sTOe4KjH1aU5tG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oK29TJvtWzzYFWWPBq1RGfb8FMS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 573644,
+    "ru": "The Outside Story",
+    "en": "The Outside Story",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 0.48,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gONHahY9aygWGvnAa8sx86ExD3O.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lm4syvlmME3Zw5iuIc3Titku8Ol.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1119752,
+    "ru": "Make Me a Match",
+    "en": "Make Me a Match",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 0.44,
+    "genres": [
+      "телевизионный фильм",
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5rrxdDD4uwTXlyRvYHcrECnpXMC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bgUTgnEOei5tyvL5OuxeABeJqx2.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 656216,
+    "ru": "Дельфин Берни 2",
+    "en": "Bernie the Dolphin 2",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 0.67,
+    "genres": [
+      "семейный",
+      "комедия",
+      "приключения"
+    ],
+    "overview": "Дети очень рады, что Берни вернулся. Но вместе с Берни появился и коварный Уинстон, который хочет похитить талантливого дельфина. Кевин и Холли должны спасти морского друга, пока ещё не поздно.",
+    "poster": "https://image.tmdb.org/t/p/w342/e5JIXRo3SUSWBFUljOxC69M5gWB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5LDWmyVkxyNXOANFnbbrXJv4677.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 663610,
+    "ru": "Тридцать семь-надцать",
+    "en": "37 Teen",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 0.44,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "У миллиардера Адама Пая есть всё кроме положительных воспоминаний о старших классах. Он неохотно идет на 20-ый вечер встречи выпускников и предлагает бывшим одноклассникам годовую зарплату за то, чтобы на месяц вернуться обратно в школу.",
+    "poster": "https://image.tmdb.org/t/p/w342/sUPEZzoFarSwWWFaNQ45PRgEuAF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/q8wdspRRWYIQKQUdWPIGItoiop1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 90934,
+    "ru": "香港奇案之吸血貴利王",
+    "en": "香港奇案之吸血貴利王",
+    "year": 1994,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 2.88,
+    "genres": [
+      "криминал",
+      "триллер",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/c0XAcWPlQpF6Y3a9f0klQ5RvG7t.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2F74qRanI2hKWJQNlSqX555d3WA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 512082,
+    "ru": "Jahr des Tigers",
+    "en": "Jahr des Tigers",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 1.79,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/IqxQ9X6zcTg79Tw7Dz4VNJpX4e.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cz7rj3Otz4vA7DxbCwQ6a0AlVEL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 560095,
+    "ru": "Pauvre Georges!",
+    "en": "Pauvre Georges!",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 1.6,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/h7ovr0Mmm3stHQR6wIDsAHk2XBw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/29wkp3yHgkHlBJeJiWz1McIsuqu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 451003,
+    "ru": "花芯",
+    "en": "花芯",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 1.42,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4fHfSbtVo5eP8ei2in9bvpp1tUP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/y4IMSTLTmH91XkhlFkpROBRhFZ4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 338400,
+    "ru": "娚の一生",
+    "en": "娚の一生",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 1.04,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fvCsvj9uE82uhmobWloIxOdMJWr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xy9COGeKwGNaT29gSMVP9VwiCRd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 387715,
+    "ru": "Louis-Ferdinand Céline",
+    "en": "Louis-Ferdinand Céline",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 14,
+    "popularity": 0.8,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9KlQsoskJTLKfuRbRsJNRAYXaWh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wdWbNBJGZEHTpgJZgPkLa1ZOUTX.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 365949,
     "ru": "起終点駅 ターミナル",
     "en": "起終点駅 ターミナル",
@@ -9282,313 +9548,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/reyZJfMHfAYIY6ZMF6mwL1yT0ll.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/xPbOyocSKgvqyZfVNSYv8SQy0Pi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 475934,
-    "ru": "காதல் கசக்குதையா",
-    "en": "காதல் கசக்குதையா",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 2,
-    "popularity": 0.53,
-    "genres": [
-      "комедия",
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aSpMc3JsRRgTDYKe6d1b1abIyLE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2vjxrMq6dM9z30zLdTfOmvx3xwl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 566804,
-    "ru": "The Dolls with Attitude",
-    "en": "The Dolls with Attitude",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 2,
-    "popularity": 0.44,
-    "genres": [
-      "ужасы",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hMY2Z4oz0Vk8zp2S21cnrgpGBKA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2OZyEttQ6zplryW7qdyHF6I87wC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 403934,
-    "ru": "僵尸小子II：天外天小子",
-    "en": "僵尸小子II：天外天小子",
-    "year": 1988,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 2,
-    "popularity": 3.99,
-    "genres": [
-      "комедия",
-      "семейный",
-      "фэнтези",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pr0zqrnKp61m2nH1jwB71DwG6co.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 348901,
-    "ru": "Gutterdämmerung",
-    "en": "Gutterdämmerung",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 2,
-    "popularity": 0.55,
-    "genres": [
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iaLjMNFLMGNK4xTgkxC3EcfJwd9.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 443269,
-    "ru": "ファントム勇者伝説",
-    "en": "ファントム勇者伝説",
-    "year": 1991,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 2,
-    "popularity": 0.46,
-    "genres": [
-      "военный",
-      "мультфильм",
-      "боевик",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rylNTdjuS8xG7p2TOIKKdFZOLjp.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 470693,
-    "ru": "Sin in the Rain",
-    "en": "Sin in the Rain",
-    "year": 2006,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 2,
-    "popularity": 0.35,
-    "genres": [
-      "детектив",
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/v5Qc2FWXH5rMdE2Vr4pp5S64bx9.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_52807",
-    "ru": "One-Punch Man Season 3",
-    "en": "One Punch Man 3",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 4.8,
-    "votes": 117713,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Экшен",
-      "Action",
-      "Комедия",
-      "Comedy",
-      "Взрослые персонажи",
-      "Adult Cast",
-      "Пародия",
-      "Parody",
-      "Суперспособности",
-      "Super Power",
-      "Сэйнэн",
-      "Seinen"
-    ],
-    "overview": "Earth is saved by heroes for now, but the large-scale battle between the Hero Association and the Monster Association is far from over. The dangerous hero hunter Garou is still on the loose despite the efforts to capture him, and the Monster Association has abducted a notable figure, leaving the Hero Association in turmoil. With a strict deadline for the rescue, the heroes set out in search of the monsters' hideout.\n\nThough he is heavily injured, Garou is recruited by the Monster Association in the hope of making him a part of the leadership. In order to ascend the ranks, the hero hunter must first prove that he is ready to give up on his humanity by killing a hero. It does not take long for Garou to find his victim, but that very person is the oblivious Saitama, who effortlessly knocks him out.\n\nThis humiliating defeat causes Garou to be branded as a traitor by the monsters. Moreover, the next clash between the two associations approaches rapidly. As both sides are ready to engage in any tactics and use any pawns at their disposal, the safety of the world is at their mercy.\n\n[Written by MAL Rewrite]",
-    "poster": "https://cdn.myanimelist.net/images/anime/1168/148347l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "mal_61831",
-    "ru": "The Beginning After the End Season 2",
-    "en": "Saikyou no Ousama, Nidome no Jinsei wa Nani wo Suru? Season 2",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.7,
-    "votes": 9101,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Фэнтези",
-      "Fantasy",
-      "Исекай",
-      "Isekai",
-      "Перерождение",
-      "Reincarnation"
-    ],
-    "overview": "After being granted a second life, now-teenage Arthur Leywin—an unparalleled, ruthless king in his previous life—has finally become an adventurer with the help of his mentor, Jasmine Flamesworth. Although he is still far from his ultimate goal of becoming more powerful than in his past life, Arthur demonstrates remarkable skill in adventuring, exceeding everyone's expectations.\n\nMeanwhile, Arthur's elven friend and Elenoir Kingdom's princess, Tessia Eralith, has also started adventuring. Due to the prolonged hostility between humans and elves, her duty is to spread goodwill and create friendly relations with human kingdoms. However, as a mysterious group threatens to harm the races' fragile relationship, both Arthur and Tessia soon find themselves becoming pivotal parts of a larger change for the better.\n\n[Written by MAL Rewrite]",
-    "poster": "https://cdn.myanimelist.net/images/anime/1738/156028l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "mal_33775",
-    "ru": "Soul Buster",
-    "en": "Soul Buster",
-    "year": 2016,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.7,
-    "votes": 7456,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Экшен",
-      "Action",
-      "Самураи",
-      "Samurai"
-    ],
-    "overview": "Keishuu, China.\n\nThe history books say that in the era of the Three Kingdoms, this land was a place of never-ending war. A young high school boy, Sonshin, who hates his city's history, is troubled by a certain dream. When he wakes up from the dream, strange things begin to happen one after another, and without understanding what's going on, he suddenly finds himself facing Gien, one of the generals from the Romance of the Three Kingdoms, who's trying to kill him! Just before Gien's blade strikes home, a mysterious beautiful woman appears in front of Sonshin. What trials await Sonshin, as he witnesses this terrible battle between two generals of the Three Kingdoms?\n\n(Source: Crunchyroll)",
-    "poster": "https://cdn.myanimelist.net/images/anime/3/82256l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "86834",
-    "ru": "Ной",
-    "en": "Noah",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 6615,
-    "popularity": 4.36,
-    "genres": [
-      "драма",
-      "приключения"
-    ],
-    "overview": "Много-много лет назад. Ной — набожный отец семейства, которого начинают посещать ужасные видения конца света. Поняв, что людей ждет неминуемая гибель, он начинает строить ковчег — гигантский корабль, который должен защитить его семью и его самого от бушующих волн. Однако Ною приходится бороться не только с собственными страхами, но и с вполне осязаемым человеческим злом, ведь люди, прослышавшие о строительстве корабля, тоже захотели спастись. Только вот для них в ковчеге не было места.",
-    "poster": "https://image.tmdb.org/t/p/w342/iYllEA6A2bAjMse6QAfCqGT7O03.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5z75Q6nqgwgYfpMB9fVHQcw9gMz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_36309",
-    "ru": "Butlers x Battlers",
-    "en": "Butlers: Chitose Momotose Monogatari",
-    "year": 2018,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.7,
-    "votes": 6462,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Драма",
-      "Drama",
-      "Сверхъестественное",
-      "Supernatural",
-      "Школа",
-      "School",
-      "Путешествия во времени",
-      "Time Travel"
-    ],
-    "overview": "Butlers: They are guardians that hold a thousand-year history and a certain fate. Jay lived in peace with his little sister Tenna and a fellow Butler named Hayakawa. However, those peaceful days came to a sudden end. Tenna was swallowed up into the void and Jay was sent a hundred years into the future. Jay finds there is now an academy called Koyomi Academy standing in the place where his mansion once stood. Jay took up the name Jinguji Koma and became the student council president of the school as he looks for clues about the past. Jay will eventually find out the truth behind this world.\n\n(Source: Crunchyroll)",
-    "poster": "https://cdn.myanimelist.net/images/anime/1633/92012l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "72559",
-    "ru": "G.I. Joe: Бросок кобры 2",
-    "en": "G.I. Joe: Retaliation",
-    "year": 2013,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 5762,
-    "popularity": 6.67,
-    "genres": [
-      "боевик",
-      "фантастика",
-      "приключения",
-      "триллер"
-    ],
-    "overview": "Во второй части отряд «G.I. Joe» вновь объявит вызов группировке «Кобра» и вступит в противостояние с правительством…",
-    "poster": "https://image.tmdb.org/t/p/w342/hOky0VwgPIwdes61OrF5ckWQNg9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pEhXq18GVe1dg2ltplcxtGWfSje.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_37584",
-    "ru": "BAKUMATSU",
-    "en": "Bakumatsu",
-    "year": 2018,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.7,
-    "votes": 5619,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Экшен",
-      "Action",
-      "Историческое",
-      "Historical",
-      "Самураи",
-      "Samurai",
-      "Путешествия во времени",
-      "Time Travel"
-    ],
-    "overview": "The Bakumatsu was an era in which the souls of young men burned with anxiety for their country's future. Takasugi Shinsaku, a soldier of fortune from Choshu, sneaks aboard a government ship with his comrade Katsura Kogorou in search of a mysterious \"timepiece\" with the power to manipulate time that he fears the government wishes to keep for themselves. Rather than allow such power to fall into the wrong hands, Takasugi plans to destroy the artifact, but having obtained it, the artifact is quickly stolen, forcing the pair to follow the mysterious thief to the seat of government in Kyoto. However, when they arrive in the capital, they discover that the government has been overthrown and the deity Susanoo now reigns in its place. The streets of the city and the people in them are much different than Takasugi and Katsura remembered. The times may have changed but their mission hasn't - Takasugi and Katsura resolve to reset time and save their nation from the nefarious forces trying to hijack it.\n\n(Source: Tokyo Otaku Mode)",
-    "poster": "https://cdn.myanimelist.net/images/anime/1764/95110l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "49849",
-    "ru": "Ковбои против пришельцев",
-    "en": "Cowboys & Aliens",
-    "year": 2011,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 5419,
-    "popularity": 6.31,
-    "genres": [
-      "боевик",
-      "фантастика",
-      "триллер",
-      "вестерн"
-    ],
-    "overview": "1873, Абсолюшен, штат Аризона. В эту глухую американскую провинцию прибывает потерявший память незнакомец. Единственный намёк на его прошлое - это странные кандалы на одном из его запястий. Странник быстро узнаёт, что жители городка не рады незнакомцам и вообще выходят на улицы лишь по приказу полковника Долархайда, правящего в этой местности железной рукой. Этому есть объяснение: город терроризируют жуткие существа. Герой постепенно вспоминает себя и понимает, что помочь несчастным только в его силах.",
-    "poster": "https://image.tmdb.org/t/p/w342/A394jIrRPChMCsErfkGVQCKp9Kq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sGXCYMzr1sCnGNVuRpB2TOWPWDA.jpg",
     "source": "tmdb"
   }
 ]

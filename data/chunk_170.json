@@ -1,5 +1,262 @@
 [
   {
+    "id": 223586,
+    "ru": "藤子・Ｆ・不二雄 ＳＦ短編ドラマ",
+    "en": "藤子・Ｆ・不二雄 ＳＦ短編ドラマ",
+    "year": 2023,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.27,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/lTCjWKycI8gktPQfdd5ws1vf26Z.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pA6LRHxX4SI1Sw37H6iNZpJUgcL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 308254,
+    "ru": "Love Beyond Dreams",
+    "en": "Love Beyond Dreams",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.24,
+    "genres": [
+      "НФ и Фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8og0ZX3WJpQhTypRHUOImmclbD3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hcVPLAHHEnVmA9PEyEOTFPf43nA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 308260,
+    "ru": "รักเติมเต็ม",
+    "en": "รักเติมเต็ม",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.1,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kwaFICOw9wyh0k6mCLurCU1pLjA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tNdhUtyj8I7UbjZXy3aXTPlAAju.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1592768,
+    "ru": "Един грам живот",
+    "en": "Един грам живот",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.06,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/oIHQ83HeDkwd4lj2YKkhA9pDX2M.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hfv5JL4AHowjMhDDE91OI9RTMbE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 306555,
+    "ru": "तू जूलिएट जट दी",
+    "en": "तू जूलिएट जट दी",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.03,
+    "genres": [
+      "драма",
+      "Мыльная опера"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ohY98YSpy9PQqZLFgtjDaac5B7q.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9BPzXqPrPXcDa60ZbgnUJxpHjef.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 114565,
+    "ru": "벌거벗은 세계사",
+    "en": "벌거벗은 세계사",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 6.98,
+    "genres": [
+      "Ток-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/KJ6ZRm18wWh5IaD955ATjfkzV5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iM8MEBnclah1oYpwVNljDc9OdEj.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 208960,
+    "ru": "돌박이일",
+    "en": "돌박이일",
+    "year": 2022,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 6.89,
+    "genres": [
+      "Реалити-шоу",
+      "комедия",
+      "Боевик и Приключения"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/i2qij6ZaV3esGOiEPCTBIJwn456.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/deDfgwDIomaQXZLR8iL6pRFXiB4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1706197,
+    "ru": "Scandal Queen",
+    "en": "Scandal Queen",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 6.86,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/45A4e9Z7yA2zvFJH5DDlr7aBQlm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yNuZJTG4Nv0WJGhAtrOibEwplOM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1464795,
+    "ru": "दादी की शादी",
+    "en": "दादी की शादी",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 6.84,
+    "genres": [
+      "комедия",
+      "драма",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hKbQjE5ZcZUpuzApEjyoVCUWwdx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4QTWMWtrBkN5PdsL4XX5Pp27VIO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 913800,
+    "ru": "The Return of the Jinkx and DeLa Holiday Show Live!",
+    "en": "The Return of the Jinkx and DeLa Holiday Show Live!",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 6.65,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/n6vSG3Agnt0ff2hsZFZ9kzYI249.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mDsl4SFCXTqelV9W63kLIlMnf2h.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 240263,
+    "ru": "The Good Stuff with Mary Berg",
+    "en": "The Good Stuff with Mary Berg",
+    "year": 2023,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 6.63,
+    "genres": [
+      "Ток-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/18juAlpzttaLqdwFyLoSeNUoFzw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/x8tlDrThPlA9CfM7X1VzudCsFbQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 322558,
+    "ru": "Vimal Khanna",
+    "en": "Vimal Khanna",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 6.63,
+    "genres": [
+      "Боевик и Приключения",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/x46kt1DCCpDfwp5Xfr12uJtrPN1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/x9gBrPP5ZnSdFDfVcdx4CmI7VLb.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1641014,
+    "ru": "SONE-053引っ越ししたマンションの隣人は絶倫元カレだった…過去をネタに揺すられ寝取られ夫のそばで他人棒イキしちゃう新婚妻",
+    "en": "SONE-053引っ越ししたマンションの隣人は絶倫元カレだった…過去をネタに揺すられ寝取られ夫のそばで他人棒イキしちゃう新婚妻",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 6.55,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6930oFTiS87wj2S1q8uDj8GwJ9S.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lRwJ897sFlCgxSCCsekcWnssZfJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 324347,
+    "ru": "Udti Ka Naam Rajjo",
+    "en": "Udti Ka Naam Rajjo",
+    "year": 2022,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 6.54,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gb7NdB6SofFhJNcQyRsZRYaVR3g.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vmK7aUicADvTRZdhRxUoBQ1Yp0Q.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 249745,
     "ru": "재친구",
     "en": "재친구",
@@ -9039,268 +9296,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/oXK8FGCQ84fzlkzMINdPl3W5LVE.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/wivMNppNIsJ3sF7RSzEuRl1J61n.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1533456,
-    "ru": "Love You So Bad",
-    "en": "Love You So Bad",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/h2VnqqAbO290tQ6QkynsHhgerjC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9lMMZUe0X0LZHGIxYANLwuuaIba.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1242173,
-    "ru": "골프레슨 특별한 기술",
-    "en": "골프레슨 특별한 기술",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/cKENbGokA7fNLKTXoFD0TKB2xyX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/v5FIu4zBHUN6lFgRGoPhhYsj0wT.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1004486,
-    "ru": "Adieu Aurora",
-    "en": "Adieu Aurora",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "комедия",
-      "фантастика",
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1bfTX8pMv899OZzODSAxRrfi8kl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aVowT8yYRNncw5bbvoZJR4Q6YqI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 702932,
-    "ru": "Пафос",
-    "en": "Pathos",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Первая часть трилогии, действие которое происходит в 2017 году. Голос пастора ведёт нас через прошлое, когда мы сможем познакомиться с героями. Земля, жизнь и смерть, слова и молчание складывается в удивительную мозаику, переосмысляющую историю португальского кино.",
-    "poster": "https://image.tmdb.org/t/p/w342/oVDr87qlbYUaVVf3vMmWKzyQ7V7.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1298145,
-    "ru": "Acting",
-    "en": "Acting",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zgpfGEzFDNa2M1ZBwoq5xo5pIch.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aVGDwNnjjAokEilnJnIFxouL5Q0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 313899,
-    "ru": "対決",
-    "en": "対決",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.39,
-    "genres": [
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5ygfB3iJBktJzksJl9BSdRDhXRJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s88NfLLcU2ONHNfM1pJex1iMYUQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 304261,
-    "ru": "女医进击录",
-    "en": "女医进击录",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.39,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/e4KD6KgAlQDAKSPYQ86loq0fEpj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/np8YTiaS9sTwVOpBDxMgbzkwVGh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1300258,
-    "ru": "Haps",
-    "en": "Haps",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.39,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mTaIeQr4Wa89ai0AImf8dvYUZUy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/if34qdCE7DCNC2irlESbxnpGyXU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1303090,
-    "ru": "Desiré",
-    "en": "Desiré",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.39,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bNB7pUR8ictufOpakFbhjn3Q4tn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jF1cB1FFbQirm1l3fGvxruAJADT.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 937099,
-    "ru": "Apag",
-    "en": "Apag",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.39,
-    "genres": [
-      "детектив",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fdCcxjD78G1XSQ1nSU7SDRAsJSg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wo0YOkVwNXYQvDxS7PN1bjHpU7V.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1231173,
-    "ru": "La China",
-    "en": "La China",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.39,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ltcGARXcc2xp0TANXWsZ2RHb6uv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qbLYHVeNmke5y7oNqmz9T2t4fIN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1020868,
-    "ru": "Kosmos",
-    "en": "Kosmos",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.39,
-    "genres": [
-      "драма",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yeZuQTPM0YaqcDsRzqCRjYWgZif.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4Rdgahv8quJzeklgTMafELd8Mvs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1115030,
-    "ru": "Animal Friends",
-    "en": "Animal Friends",
-    "year": 2027,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.38,
-    "genres": [
-      "комедия",
-      "приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/I65yQ8p6VqDK96JH5tpNZ0Q3DS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5Ejvk0SqZ6mGe9bkymgxuPWkdfj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1269325,
-    "ru": "दृश्यम् 3",
-    "en": "दृश्यम् 3",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.38,
-    "genres": [
-      "триллер",
-      "драма",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/43HEnZBiZ0MZUbtBxMwnrvJNlt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9jIJrwbDTH92027rIrR2R0HM0Qe.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,277 @@
 [
   {
+    "id": 258578,
+    "ru": "魔法使いの約束",
+    "en": "魔法使いの約束",
+    "year": 2025,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 6.38,
+    "genres": [
+      "мультфильм",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qmRgfyEwafV0qpPDh1PfUDigG5T.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/quHLmheViYmmvSp6QnCLn9Q4L0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 72698,
+    "ru": "武装神姫",
+    "en": "武装神姫",
+    "year": 2012,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 7.08,
+    "genres": [
+      "мультфильм",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6bMwmmBBsRdpo8iNgBp7RdZD1zP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rYisXkvIEFRJeSKCz3VPmciGBqy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 257161,
+    "ru": "喜人奇妙夜",
+    "en": "喜人奇妙夜",
+    "year": 2024,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 44.32,
+    "genres": [
+      "Реалити-шоу",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nQFCp0Tlfqq3NhF2kiNAGwXLfnX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2l2KlVJAmGrnnhURaMfESslMVh3.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 881350,
+    "ru": "Секс, ложь и убийство",
+    "en": "Deadly Seduction",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 1.45,
+    "genres": [
+      "телевизионный фильм",
+      "детектив",
+      "триллер",
+      "криминал",
+      "драма"
+    ],
+    "overview": "Мэгги и ее муж Ричард — профессора колледжа, у них есть дочь, 17-летняя Дженни. Их брак разваливается, и когда Ричард признается, что у него роман со студенткой, они расходятся. Мэгги и лучшая подруга Алисса собираются устроить девичник. В баре встречает Кайла, красивого и обаятельного, и она упивается его вниманием. После слишком большого количества выпивки они проводят страстную ночь. Позже она была ошеломлена, увидев в своем классе Кайла, который утверждает, что является поклонником ее бестселлера о серийном убийце Корделле Колтоне. Только тогда мы начинаем раскрывать шокирующую тайну Кайла, когда он намеревается разрушить жизнь и карьеру Мэгги, обвиняя ее мужа в убийстве и соблазняя ее дочь.",
+    "poster": "https://image.tmdb.org/t/p/w342/eH4NAdf2J5jZpJqXAuAZ7gvSlKM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1nAJqsT0Dt7WprDvjB6B3SUkdXb.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1080658,
+    "ru": "Отравленный газом",
+    "en": "Gassed Up",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 1.43,
+    "genres": [
+      "драма",
+      "криминал",
+      "триллер"
+    ],
+    "overview": "Эш, пытаясь заработать денег, чтобы поднять на ноги свою четырнадцатилетнюю сестру и отправить мать на реабилитацию, попадает в банду организованной преступности, возглавляемой молодым и харизматичным албанским иммигрантом Дабзом.",
+    "poster": "https://image.tmdb.org/t/p/w342/v4AvXUj2WD1r9sSXg3BJsW8IVXf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eTU8MEsQBUKMAimUF1hKcdZ6qLb.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1084376,
+    "ru": "Отель «Жасмин»",
+    "en": "Losmen Melati",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 0.5,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "Ища ночлега в забытой части города, путешественники оказываются запертыми в проклятом отеле, в то время как его хозяйка заставляет их встретиться лицом к лицу с самыми темными ужасами.",
+    "poster": "https://image.tmdb.org/t/p/w342/bjzu53yAIgomy5Kx6viRfdKCU2o.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eQ2Rk5FxZRqtEuXAZdqcKb4j51G.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 951436,
+    "ru": "Forty Winks",
+    "en": "Forty Winks",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 1.59,
+    "genres": [
+      "драма",
+      "комедия",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gzOHsSvlz9iTq3T31DTMhVFBSq1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iFi9fo2iiDOo1kn5GIOqmq6giAp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1530787,
+    "ru": "匿杀",
+    "en": "匿杀",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 1.27,
+    "genres": [
+      "криминал",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wz7DchRv3sXIH87LyjhhxJdrVGk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/CZUyZdTBeOhr29KFjcsVjexEFE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 876823,
+    "ru": "#PTGF出租女友",
+    "en": "#PTGF出租女友",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 0.92,
+    "genres": [
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5TQIL4a2CI2AXwgFVMstEc5E2Ho.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ovEhRLuV4MNWjT0pL22VuN8MylL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 744392,
+    "ru": "架空OL日記",
+    "en": "架空OL日記",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 0.85,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7RfbfLLBjciuakfPebiJsEPYSNy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4Awl2yKsBP7n4WVyWKhoV0Nhu3s.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1466747,
+    "ru": "Portal in the Pines",
+    "en": "Portal in the Pines",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 0.73,
+    "genres": [
+      "ужасы",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/iB73OJ3smvKdPDSy1ieTW1BVaJo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/Q8m7qKrvlLRqbpnIqMzgBv4v7g.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1601000,
+    "ru": "Critical Incident: Death at the Border",
+    "en": "Critical Incident: Death at the Border",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 0.61,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gThb7GuqTZ19EHgcvX3GSDdNBqJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/t2p67zRXn00bUrw94HReWdTp7Q0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 965073,
+    "ru": "88",
+    "en": "88",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 0.56,
+    "genres": [
+      "драма",
+      "триллер",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2MVTeKfol3Vl0ZUBMrokaZ3mNcA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hXin4s7WuXBoJJQGRYxJ9Ocum8E.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 741354,
+    "ru": "ಹೀರೋ",
+    "en": "ಹೀರೋ",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 7,
+    "popularity": 0.49,
+    "genres": [
+      "комедия",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xZAxSiL5csPIe6Q1V8pbwz69U5m.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ipd4mfEjEoCc7YOpji6LPzEVC3F.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 960803,
     "ru": "Todo es Gila",
     "en": "Todo es Gila",
@@ -9423,275 +9695,6 @@
     "overview": "Гедда оказывается разрываемой между мучительной тоской по прошлой любви и тихим удушьем нынешней жизни. В течение одной напряжённой ночи давно подавленные желания и скрытые конфликты вспыхивают — втягивая её и всех вокруг в водоворот манипуляций, страсти и предательства.",
     "poster": "https://image.tmdb.org/t/p/w342/1jLXlws6JWirlRjTAcnNtclE11N.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/cKZcDKawR79igCgDMSXlpkn8hLR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 798223,
-    "ru": "Пипа",
-    "en": "Pipa",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 106,
-    "popularity": 0.7,
-    "genres": [
-      "криминал"
-    ],
-    "overview": "Даже спустя годы после переезда в отдаленный городок темное прошлое не отпускает экс-полицейскую — женщина обнаруживает труп на территории своего дома.",
-    "poster": "https://image.tmdb.org/t/p/w342/3xdPntWgSjAbHY1OYhRkEt2s6tl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5HgmYfCGZRtx0PnQxDTg3Djqrrd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 768757,
-    "ru": "С любовью и яростью",
-    "en": "Avec amour et acharnement",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 105,
-    "popularity": 1.04,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "История женщины, разрывающейся между двумя мужчинами — ее давним партнером и его лучшим другом, ее бывшем любовнике.",
-    "poster": "https://image.tmdb.org/t/p/w342/3qbZnKgKbSkkLrRQ20LBoxzyh2Y.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4g5kaH8gfujIS93gTzFLMeDN99R.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 409056,
-    "ru": "Назови своё имя",
-    "en": "Along Came the Devil",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 105,
-    "popularity": 0.91,
-    "genres": [
-      "триллер",
-      "ужасы",
-      "драма"
-    ],
-    "overview": "Эшли любила свою мать, но та рано ушла из жизни, а с отцом героиня никогда не была близка, поскольку тот часто вел себя очень грубо. Вот Эшли и приходилось делиться всем со своей старшей сестрой, а когда та уехала учиться в колледж, она стала чувствовать себя совсем одинокой. Однажды в доме начали происходить странные вещи: девушка начала слышать какой-то голос, который её пугал, а затем Эшли стала замечать, что предметы в доме двигались сами по себе. Однажды ей даже показалось, что она увидела свою покойную мать. В тот момент наша героиня совсем не догадывалась, что она столкнулась с ужасом, который на самом деле терроризировал ее семью.",
-    "poster": "https://image.tmdb.org/t/p/w342/tEiu83QxMMWWD8gWUtXR4piF1Iw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6tpvIOtArFdyd5oo3FbcWAVj0NN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 490410,
-    "ru": "48 рождественских желаний",
-    "en": "48 Christmas Wishes",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 105,
-    "popularity": 0.59,
-    "genres": [
-      "семейный",
-      "телевизионный фильм"
-    ],
-    "overview": "О юных помощниках Санты, которые впервые покидают Северный полюс ради того, чтобы спасти веру людей в доброту и Рождество.",
-    "poster": "https://image.tmdb.org/t/p/w342/yz3BdtQuWxBvjyXqhwLCdzbTxj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/o016Kp8GCOgamnvVulm3AmFCl5p.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 113566,
-    "ru": "ДМЗ",
-    "en": "DMZ",
-    "year": 2022,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.6,
-    "votes": 104,
-    "popularity": 2.94,
-    "genres": [
-      "драма",
-      "НФ и Фэнтези"
-    ],
-    "overview": "В недалеком будущем в Америке бушует гражданская война. Есть только одна зона без оружия, которая никем не контролируется, — она находится в центре Нью-Йорка. Именно там врач по имени Альма пытается найти потерянного сына.",
-    "poster": "https://image.tmdb.org/t/p/w342/ayd6FSZgYSlYUWUXV5LxPpcgyF8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fUjATGfykF0EU57DhMDkIXqQlc5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 347033,
-    "ru": "Чувство справедливости",
-    "en": "Equity",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 104,
-    "popularity": 1.16,
-    "genres": [
-      "драма"
-    ],
-    "overview": "История старшего инвестиционного банкира, которой вопреки нависшему над ней финансовому скандалу предстоит раскрыть коррупционные схемы.",
-    "poster": "https://image.tmdb.org/t/p/w342/bUVQanY1tOAMB4FJCLDmkPd2noG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9pgHdDy43KeGQiODBNye3ltjxY3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 443076,
-    "ru": "Где деньги лежат",
-    "en": "Where's the Money",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 103,
-    "popularity": 1.76,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Чтобы достать деньги, которые его отец запрятал в подвале, чернокожий неудачник из гетто пытается попасть в общежитие, в которое до сих пор принимали только белых студентов.",
-    "poster": "https://image.tmdb.org/t/p/w342/3Gj3zKVJUajDHgbCv2X04VG0Xpy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bnZInMpula862WkR0pPzD7JC1E3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 437035,
-    "ru": "Туман и дева",
-    "en": "La niebla y la doncella",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 103,
-    "popularity": 0.49,
-    "genres": [
-      "триллер",
-      "криминал",
-      "детектив"
-    ],
-    "overview": "На острове Ла Гомера находят труп молодого человека. После недолгого расследования был обвинён местный политик, однако суд оправдал его за недостатком улик. Три года спустя сержант Бевилакуа и его помощник, капрал Чаморро, отправляются на остров, чтобы возобновить расследование. Их сопровождает капрал Англада, который был одним из последних, кто видел молодого человека живым.",
-    "poster": "https://image.tmdb.org/t/p/w342/f2s1m6K64vFboWp9NjqiKrTDXsF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4h30X1Ss9QIy9zKPLZJSbL8W8G7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 879990,
-    "ru": "Божья страна",
-    "en": "God's Country",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 102,
-    "popularity": 0.84,
-    "genres": [
-      "детектив",
-      "триллер",
-      "вестерн",
-      "драма"
-    ],
-    "overview": "Действие развернется в одном из горных штатов Америки. Ньютон сыграла преподавательницу колледжа, живущую в уединенном местечке на границе национального парка. Однажды на ее участок проникают два браконьера, открывшие сезон незаконной охоты...",
-    "poster": "https://image.tmdb.org/t/p/w342/hDkBxOaT6xpMjd89yeuse52aIPy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/w1zCG16xT77PuRD3wZRGKVPPLHO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 608755,
-    "ru": "Un figlio di nome Erasmus",
-    "en": "Un figlio di nome Erasmus",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 102,
-    "popularity": 0.53,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gbYyqqpXt5EBWL07BTwHso9CN7m.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xcUcU8dfYkcqlPdpfHjjFBHUFXQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 611748,
-    "ru": "Полный дом 4",
-    "en": "Housefull 4",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 102,
-    "popularity": 1.44,
-    "genres": [
-      "комедия",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Продолжение фэнтезийной франшизы, сюжет которой разворачивается как в начале XV века, так и в наше время. В центре повествования находится сразу три истории любви. Молодым людям пришлось расстаться из-за проделок заговорщиков ещё в средневековье, а затем они перемещаются в наше время, где им суждено вновь встретиться уже в Лондоне. Однако на этот раз им всем предстоит пройти через множество испытаний, которые проверят на прочность их чувства. Пары оказываются разлучены, так что для начала героям фильма предстоит снова выяснить, кто кого любит на самом деле. Отношения между ними запутываются, и привести их в порядок будет очень непросто…",
-    "poster": "https://image.tmdb.org/t/p/w342/rX6wsr5JmemfPfrfrSlctCE4tXc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6phj6ztvDBU9Fn6MMONhCpqa6mM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 796428,
-    "ru": "О матерях",
-    "en": "Madres",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 101,
-    "popularity": 2.29,
-    "genres": [
-      "ужасы",
-      "детектив"
-    ],
-    "overview": "1970-е. Глубоко беременная Диана вместе с мужем-мексиканцем селится в иммигрантской коммуне в Калифорнии. Муж занимается сельским хозяйством и постепенно вливается в коллектив, а неговорящая по-испански Диана чувствует себя изгоем. Проводя дни в одиночестве, женщина находит вещи предыдущих жильцов и начинает замечать, что с их новым домом что-то не так.",
-    "poster": "https://image.tmdb.org/t/p/w342/dLrs8Il1VxShM2G4o5AR3wM0s1S.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sG4zvv1Ahl2jHxyVnwuMHOP2Clx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 16508,
-    "ru": "Doug's 1st Movie",
-    "en": "Doug's 1st Movie",
-    "year": 1999,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 101,
-    "popularity": 1.08,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hZduJdSSWCkmvnBpNyRaIszubVm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6SRECmsTgh9IbJZULGMJMCuWby4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 461108,
-    "ru": "Ядовитая акула",
-    "en": "Toxic Shark",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 100,
-    "popularity": 1.85,
-    "genres": [
-      "ужасы",
-      "фантастика",
-      "комедия"
-    ],
-    "overview": "Чудесный отдых на острове, где все хотят найти себе парочку, оборачивается полным ужасом. Ядовитая акула наносит вред не только окружающей среде, но и людям. Используя токсичный яд, она уничтожает всё на своем пути.",
-    "poster": "https://image.tmdb.org/t/p/w342/sZx7JcVyfgh2OpfbUlZru23BX0a.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8Rfrw5svIpsnw46KeFDnPWjzayH.jpg",
     "source": "tmdb"
   }
 ]

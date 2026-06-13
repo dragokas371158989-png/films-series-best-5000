@@ -1,5 +1,263 @@
 [
   {
+    "id": 836600,
+    "ru": "METAL GEAR SOLID 2 BANDE DESSINÉE",
+    "en": "METAL GEAR SOLID 2 BANDE DESSINÉE",
+    "year": 2008,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 1.71,
+    "genres": [
+      "боевик",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/oX9mMPcPImNws9FnLxuJwxc5Z1t.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 52242,
+    "ru": "ベイビィ☆LOVE",
+    "en": "ベイビィ☆LOVE",
+    "year": 1997,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 0.51,
+    "genres": [
+      "мультфильм",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/u6AZUaS3qxfQQv8gib1QsvZyGa8.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 370069,
+    "ru": "திருட்டு ரயில்",
+    "en": "திருட்டு ரயில்",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 0.5,
+    "genres": [
+      "комедия",
+      "боевик",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eYMjGg9iGVF2QxpSfH2Jxjs7xUp.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 301319,
+    "ru": "Little Women Big Cars 2",
+    "en": "Little Women Big Cars 2",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 0.35,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/htkKQgb7GTOh2I4S90lyyksepgz.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 328481,
+    "ru": "Life's Essentials with Ruby Dee",
+    "en": "Life's Essentials with Ruby Dee",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 1,
+    "popularity": 0.75,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3g5M7vQQaHXofZJdK7PIgZZYa4f.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pAlO07KIrGPgME3DGo4usfrIWBL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 499136,
+    "ru": "燦爛這一刻",
+    "en": "燦爛這一刻",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 1,
+    "popularity": 0.45,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bWFsKLFnnzi6PDGIHBmgvlzmLvU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/A40BMcFGncfzaLnBVln6dmSgepB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 750667,
+    "ru": "Юрий Олеша по кличке «Писатель»",
+    "en": "Юрий Олеша по кличке «Писатель»",
+    "year": 2009,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 1,
+    "popularity": 0.36,
+    "genres": [
+      "документальный",
+      "мультфильм",
+      "телевизионный фильм"
+    ],
+    "overview": "Современники уважительно звали его «Писатель», хотя при жизни Юрия Олеши вышли всего две книги. Он был невероятно талантлив и чрезвычайно беззащитен перед ветрами эпохи. Последние двадцать лет он писал «в стол», но имя Олеши навсегда осталось в истории русской литературы. Фильм рассказывает о сложном творческом и жизненном пути писателя.",
+    "poster": "https://image.tmdb.org/t/p/w342/cqp6RloJXg1q7DIeE7sU7ydTeGN.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 552618,
+    "ru": "Bagyong Bheverlynn",
+    "en": "Bagyong Bheverlynn",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 1,
+    "popularity": 0.78,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qo3y9rHme0ISDCKdq7r9C6e3czq.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 337653,
+    "ru": "துணை முதல்வர்",
+    "en": "துணை முதல்வர்",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 1,
+    "popularity": 0.57,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vpi60H4RzeumfeC0B6ySKnMvJOb.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 644730,
+    "ru": "Restricted Area",
+    "en": "Restricted Area",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.4,
+    "votes": 11,
+    "popularity": 0.57,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mP5ccG9kmw8Xzak9wVDYADw9mfK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uZPjTcmZGfoCRBNL0W2ex80z2n1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 239897,
+    "ru": "Dwegons and Leprechauns",
+    "en": "Dwegons and Leprechauns",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.4,
+    "votes": 4,
+    "popularity": 0.31,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eCWjbEI7v3ThQ32gM3aiID568P4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gUN9VweIhb1L3TCez1yaySmCkaB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 829490,
+    "ru": "I Piss on Your Corpse",
+    "en": "I Piss on Your Corpse",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.3,
+    "votes": 5,
+    "popularity": 0.48,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/A1FCdOWGens4DT1PXBXmq0W3zti.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/B7mCjB50uqPk8vSumjACoB3Wyz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 604897,
+    "ru": "The Adventures of Anais Nin",
+    "en": "The Adventures of Anais Nin",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.3,
+    "votes": 5,
+    "popularity": 0.74,
+    "genres": [
+      "документальный",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vqyaUcR9EKEAWGXpt1ertaucilt.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1143459,
+    "ru": "Butch vs. Sundance",
+    "en": "Butch vs. Sundance",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.3,
+    "votes": 3,
+    "popularity": 0.44,
+    "genres": [
+      "приключения",
+      "вестерн"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2MzpjmihLNEwnFwur9g2y4wsMT6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/r0faQIra8e8rZSRIHWB9qcahZaH.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 717960,
     "ru": "Малыш лев",
     "en": "The Lion Kid",
@@ -9055,287 +9313,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/pjfxzfJSNVwXUHyFBaCN3iC00Wj.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/6glZXqH8NgUU8JstpzgWuHRXZk0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 320756,
-    "ru": "咖宝车神之超能救援",
-    "en": "咖宝车神之超能救援",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.9,
-    "genres": [
-      "мультфильм",
-      "Детский",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oLRc2yuIRJHDxs3BPtaimH1aA5W.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/y40IEfz3wIKFUmM4w6XxkM1Mp3B.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 281197,
-    "ru": "超凡进化",
-    "en": "超凡进化",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.9,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uWCKT6I0aKsrS8NpcvVV8ziBfIy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6wRAihfFjhdCghibH9jnlnDDUXZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 232684,
-    "ru": "Koati",
-    "en": "Koati",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.9,
-    "genres": [
-      "мультфильм",
-      "Детский",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8u71Ttb9lZSpC5nvWlCXYMlc4Eh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/br5cqGusYpChz0sJXd97MdrpLHH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 323102,
-    "ru": "聖闘士星矢",
-    "en": "聖闘士星矢",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.87,
-    "genres": [
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/k72FTZRJPGxhD6g96UUBvctiFmA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zzyUiG3fPmqAdMwHuS7oLIgQZfK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 316037,
-    "ru": "Kosmiczna Zagłada",
-    "en": "Kosmiczna Zagłada",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.86,
-    "genres": [
-      "мультфильм",
-      "НФ и Фэнтези",
-      "Боевик и Приключения",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tn29kmjjthlqDchIyiloDG5dTQZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iC6aejfvrVltebWBkhXhx0JVmAV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 283502,
-    "ru": "Les Trois Petites Sœurs",
-    "en": "Les Trois Petites Sœurs",
-    "year": 2027,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.83,
-    "genres": [
-      "мультфильм",
-      "Детский",
-      "Боевик и Приключения",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5jwVRVIaG0QL03uuMChg7krYRJ5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rn1zY5N9fiwokA7ldqMIC6b5qb4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 312020,
-    "ru": "ワールド イズ ダンシング",
-    "en": "ワールド イズ ダンシング",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.82,
-    "genres": [
-      "мультфильм",
-      "драма",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oOmQf94idSBnDueIrM3FNQy8IXw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/AsQ6QzR58WOfty0CFuICHmEDf5C.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 293125,
-    "ru": "Monsieur Crocodile",
-    "en": "Monsieur Crocodile",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.82,
-    "genres": [
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9yK1KngTMm2a4gkQ9qvPJxdv9v5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nfINjz5solEAU9hZ8AzDRxF1vf0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 292621,
-    "ru": "Mortina",
-    "en": "Mortina",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.8,
-    "genres": [
-      "комедия",
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/m4OcyCHy2xhp1un1E4XvwGDaPkr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cRmrAO4asHgfmpNa0mAeeyvbBkk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 324120,
-    "ru": "大きい女の子は好きですか?",
-    "en": "大きい女の子は好きですか?",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.78,
-    "genres": [
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dCvgA8cw7G0NJBnWI59Biidv3eu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4PPSeA0OLF3MWC9heWvaLiF2sa0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 282797,
-    "ru": "Phoebe & Jay",
-    "en": "Phoebe & Jay",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.78,
-    "genres": [
-      "мультфильм",
-      "Детский",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/50qaNqtIHj0Fst11e8ihfsyF7DS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/h7HdW2NcEYAyrr435enLBvwubQD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 229654,
-    "ru": "Les Marsupilamis",
-    "en": "Les Marsupilamis",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.67,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "комедия",
-      "Детский",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/42LPtTRWp4MfSd5vvJImKkZy9gI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/AsDf7OFu8Cuc5AsdzoXNDmJGThR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 309974,
-    "ru": "透明な夜に駆ける君と、目に見えない恋をした。",
-    "en": "透明な夜に駆ける君と、目に見えない恋をした。",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.6,
-    "genres": [
-      "мультфильм",
-      "драма",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6ewITBY2csXVTsg8k6BQ2X19fBY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9MkO2Mx43V2znUzRNHjPRkLBZgk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 322737,
-    "ru": "Agüizotes",
-    "en": "Agüizotes",
-    "year": 2027,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.59,
-    "genres": [
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xTZJEUTyf2yygjMLQ7uOVhqMhDQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vK2x73GsJFsNGgGeZODyO6EEnRf.jpg",
     "source": "tmdb"
   }
 ]

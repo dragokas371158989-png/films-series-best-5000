@@ -1,5 +1,271 @@
 [
   {
+    "id": 601611,
+    "ru": "우리 지금 만나",
+    "en": "우리 지금 만나",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.5,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/m2Q7PKH6A00vI2Klq2r04hMWOly.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4IQ7GacePJeJpTDMe1zQNV1wyZK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 993006,
+    "ru": "Walking with Dinosaurs: Prehistoric Planet 3D",
+    "en": "Walking with Dinosaurs: Prehistoric Planet 3D",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.5,
+    "genres": [
+      "документальный",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xnOx9FgT9t2yXD8psHqHRko88db.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1j8EHsYcIXtTXRv4tGSePv4akYn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 220650,
+    "ru": "校長先生とクジラ",
+    "en": "校長先生とクジラ",
+    "year": 2007,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.5,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kzceBzAxFyD88MUORCywWIFmfBr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/46TpC4bJ2IcECTNTHU3ZH2zYOio.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 608559,
+    "ru": "大梦西游4伏妖记",
+    "en": "大梦西游4伏妖记",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.49,
+    "genres": [
+      "приключения",
+      "фэнтези",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ndSD1g21f7QZHYmE3BHjrjxFOp1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iGfpXCdVEOSFRtndbELzoIa9LrF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 358395,
+    "ru": "Origin Story",
+    "en": "Origin Story",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.49,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/27hBWhwqfwCeD8KzULGwDgIkZRV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m1QPClc1ojXLfCKfKRf6GjR8usA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 568180,
+    "ru": "がじまる食堂の恋",
+    "en": "がじまる食堂の恋",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.49,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/CejRrdGHD1UVwmX1VwsjkIzAOQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/thqJwmFjksDsxV90bsWtxuKbXiY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 484900,
+    "ru": "世にも奇妙な物語 '17秋の特別編",
+    "en": "世にも奇妙な物語 '17秋の特別編",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.48,
+    "genres": [
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dz2TKf9hPbIrErJ8pqwo5myQz6b.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nvKbJK0hiHikrZtqLwXS1mVQdp4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 137894,
+    "ru": "チスト　みどりのおやゆび",
+    "en": "チスト　みどりのおやゆび",
+    "year": 1990,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.48,
+    "genres": [
+      "приключения",
+      "мультфильм",
+      "фэнтези",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/43dnWbRASDsxT0sLQnba2eT6tpb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/i5H9Rkn7ShAPKDlhzPW47nmYz24.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 803668,
+    "ru": "Animax Special: The Making of 'Metropolis'",
+    "en": "Animax Special: The Making of 'Metropolis'",
+    "year": 2002,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.48,
+    "genres": [
+      "документальный",
+      "семейный",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zflq1Pbm7xaIFnHi2BX0DDEtYvz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9zKLlPm0Bfnd1TfCz4ur54BTntB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 942389,
+    "ru": "ভূতচক্র Pvt. Ltd.",
+    "en": "ভূতচক্র Pvt. Ltd.",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.47,
+    "genres": [
+      "ужасы",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dyThT72C2VNN25nBMIvrjs7Mnnj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cMcnybVMOTwQqsztKXoUM99lHrh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 504293,
+    "ru": "Мозги Хуберта",
+    "en": "Hubert's Brain",
+    "year": 2001,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.47,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "В нем рассказывается история научного выродка, который дружит с говорящим мозгом в банке.",
+    "poster": "https://image.tmdb.org/t/p/w342/wEpmeRMJpNzPjtNw9ELybon0OmA.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 638736,
+    "ru": "A Working Mom's Nightmare",
+    "en": "A Working Mom's Nightmare",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.45,
+    "genres": [
+      "телевизионный фильм",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gsyo6ZPBKGGH0IZqmlIDfAa0RFk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2AabYEjJgtz7yAclNl8KkAINtFI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 542794,
+    "ru": "ஓடு ராஜா ஓடு",
+    "en": "ஓடு ராஜா ஓடு",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.44,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4MI38mA1gGahSqKB1b6xGjNpOzH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kW5vHKwGMnLtFnyXLfvFRJaT2v7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 492868,
+    "ru": "பிரம்மா.காம்",
+    "en": "பிரம்மா.காம்",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 2,
+    "popularity": 0.43,
+    "genres": [
+      "фэнтези",
+      "боевик",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9EKD0r0QyIzDgzDabSkkA0TgrSV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xcnJePy2loaBjTQzvzfsCgkWmtI.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 405038,
     "ru": "Bangkit!",
     "en": "Bangkit!",
@@ -9786,287 +10052,6 @@
     "overview": "Алекс, известный инженер в сфере кибернетики, возвращается в Санта-Ирину, чтобы заняться необычным проектом для факультета Робототехники своего университета ― созданием робота-ребенка. В течение десяти лет, пока его не было в городе, жизнь для его брата Дэвида и девушки Ланы шла своим чередом: теперь они живут вместе и у них есть дочь Ева. Между Алексом и Евой сразу налаживаются хорошие отношения, и так получается, что Ева самым неожиданным образом меняет подход Алекса к его разработкам. Для них начинается путешествие, которое обещает интригующую кульминацию.",
     "poster": "https://image.tmdb.org/t/p/w342/yrhxVWbzmng6GEkLB3Kt3NPvYDJ.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/dOeQPKVa9verEARmAzzZd9qb5tp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "463843",
-    "ru": "Милая",
-    "en": "Sweetheart",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 410,
-    "popularity": 2.59,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "Потерпев крушение в океане, молодая женщина Дженн выбирается на небольшой остров. К берегу также прибивает одного из её друзей, но вскоре тяжелораненый парень умирает. Похоронив друга и кое-как обустроившись на острове, Дженн вскоре сталкивается с непредвиденной угрозой — оказывается, из моря по ночам выходит плотоядное чудовище.",
-    "poster": "https://image.tmdb.org/t/p/w342/xyPPBPkGbZxfS6UM4PjR5bnVfwR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/de51GG0AQZj8dUm00aQUi4wisBr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "11215",
-    "ru": "Бум вокруг младенца",
-    "en": "Baby Boom",
-    "year": 1987,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 410,
-    "popularity": 1.43,
-    "genres": [
-      "драма",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Деловая женщина, безумно занятая на работе, вынуждена круто менять свою жизнь, когда у нее на руках появляется крохотный плачущий комочек в пеленках. Она мечется между младенцем, боссом и \"другом семьи\" и находит успокоение, только уехав за город, где встречае замечательного человека, местного ветеринара.",
-    "poster": "https://image.tmdb.org/t/p/w342/d4ykqfBoUMTqPg2HX0rSKis1Hc9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/v0negFRxnxLtanMNXY7HYP7RUZ6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "733317",
-    "ru": "Боевой робот номер 4",
-    "en": "Monsters of Man",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 408,
-    "popularity": 2.56,
-    "genres": [
-      "фантастика",
-      "боевик"
-    ],
-    "overview": "В далеких джунглях Камбоджи ЦРУ проводит несанкционированные испытания боевых роботов с искусственным интеллектом, созданных частной компанией. Расстреливая банду вооружённых наркоторговцев, андроиды уничтожают и жителей лесной деревни, невольными свидетелями чего становится живущий там же бывший морпех и группа американских студентов-медиков, участвующих в волонтёрской программе. Им удаётся почти без потерь сбежать в джунгли, но ЦРУ свидетели не нужны.",
-    "poster": "https://image.tmdb.org/t/p/w342/cN0nLHeJe4USI6OV05OWsB87YLA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cxwImFWajltfkBhsTEy8ZXiQ9NP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "17707",
-    "ru": "Разрушенный дворец",
-    "en": "Brokedown Palace",
-    "year": 1999,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 408,
-    "popularity": 2.38,
-    "genres": [
-      "драма",
-      "триллер",
-      "детектив"
-    ],
-    "overview": "Подруги Элис Марано и Дарлин Дэвис, героини фильма \"Разрушенный дворец\", считали что достойны того, чтобы попасть в рай, но они и не подозревали что придется осваивать ад.  Элис и Дарлин отправились отдохнуть в Таиланд на пару недель после окончания средней школы. Отдых действительно оказался приятным, но ещё более приятным было знакомство с симпатичным Ником Парксом. Он и уговорил подруг съездить на однодневную экскурсию в Гонконг. Однако небольшое путешествие окончилось более чем плачевно. В аэропорту, по прилету из Гонкога, у девушек обнаружен героин...",
-    "poster": "https://image.tmdb.org/t/p/w342/szBbCHqmr5nmsJFEYzOv9fgoU4w.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iwcvWOyT04GHLSevuFROL3SGSb6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "286987",
-    "ru": "Как создать идеального парня",
-    "en": "How to Build a Better Boy",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 407,
-    "popularity": 1.75,
-    "genres": [
-      "семейный",
-      "фантастика",
-      "телевизионный фильм"
-    ],
-    "overview": "Две студентки Мэи Хартли и Габби Харрисон решают создать идеального бойфренда. Что они не учли, это то, что компьютер, который они используют для этого, настроен для создания роботов суперсолдат…",
-    "poster": "https://image.tmdb.org/t/p/w342/ivo09vYN76w3epqAv9jS9BEXi5N.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vt5UhqjyWYbmJdZhrQsWpRCqCra.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "11564",
-    "ru": "Класс 1984",
-    "en": "Class of 1984",
-    "year": 1982,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 401,
-    "popularity": 1.44,
-    "genres": [
-      "боевик",
-      "криминал",
-      "драма",
-      "триллер"
-    ],
-    "overview": "Банда оголтелых школьников преследует нового учителя, решившего навести в классе порядок. Озверевшие панки-школьники во главе с учеником-психопатом (Ван Паттен) избивают его, а жену насилуют. Месть учителя не уступает по жестокости выходкам банды, но заметно превосходит их по изощренности.",
-    "poster": "https://image.tmdb.org/t/p/w342/j4SzJcBMYEV0zuqO5Q3kZtI8rfd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ke6cDBFg4IPb8MWjPOBlIhtosQ0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "798362",
-    "ru": "Дочь болотного царя",
-    "en": "The Marsh King's Daughter",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 400,
-    "popularity": 4.57,
-    "genres": [
-      "триллер",
-      "криминал",
-      "детектив"
-    ],
-    "overview": "Двенадцать лет Хелена прожила в лесу в полной изоляции под присмотром отца-тирана и убийцы по прозвищу Болотный царь. И лишь когда его упрятали за решётку, девочка обрела свободу и возможность жить нормальной жизнью. У неё появилась семья, которая ничего не знает о её загадочном прошлом. Спустя много лет Болотный Царь сбегает из тюрьмы, и теперь она должна помочь полиции поймать легендарного преступника. Для этого ей придётся использовать все навыки, которым обучил её жестокий отец...",
-    "poster": "https://image.tmdb.org/t/p/w342/toPXIsYEqxd4m16U9QYrFV5Otvk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/c7MRmF3LMiBWokedmdQl3roTUv2.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 828853,
-    "ru": "Чудаки 4.5",
-    "en": "Jackass 4.5",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 391,
-    "popularity": 1.83,
-    "genres": [
-      "комедия",
-      "боевик",
-      "документальный"
-    ],
-    "overview": "В этот фильм вошли кадры, не попавшие в \"Чудаков навсегда\". В новой версии Чудаков тебя ждёт ещё больше юмора и трэша, вы станете свидетелем того, как банда «Чудаков» делают дикие невиданные ранее трюки.",
-    "poster": "https://image.tmdb.org/t/p/w342/oxyJ9v5IN8zr1C6QLQgLtRfOua8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/42975nYxawMHta0yoAtwm6ZPy0L.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 21705,
-    "ru": "Дневники Барби",
-    "en": "The Barbie Diaries",
-    "year": 2006,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 391,
-    "popularity": 1.36,
-    "genres": [
-      "семейный",
-      "мультфильм"
-    ],
-    "overview": "Для всех повзрослевших поклонниц Барби готовится настоящий сюрприз: впервые Барби-тинейджер обсуждает взрослые проблемы со своими ровесницами! Это вовсе не сказка, в которой все привыкли видеть Барби-волшебницу, а замечательная история о реальной девочке, на которую многие захотят быть похожими!",
-    "poster": "https://image.tmdb.org/t/p/w342/zSCQBfNWsdiKaqDj7LQUgxnSaFi.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bACImU2OK8iFwDIIRBzLX4KOPL1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 669664,
-    "ru": "Ослик, любовник и я",
-    "en": "Antoinette dans les Cévennes",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 388,
-    "popularity": 0.82,
-    "genres": [
-      "комедия",
-      "приключения",
-      "мелодрама"
-    ],
-    "overview": "Антуанетта, учительница начальных классов, с нетерпением ждала выходных, чтобы провести их со своим любовником, отцом одного из учеников. Но вот незадача. У любовника оказалась жена, которая решила отправиться в путешествие по югу Франции как раз в эти дни. Отвергнутая девушка не сдается и следует за ними. Компанию ей составил ослик Патрик, который оказался мудрее и благородней некоторых мужчин.",
-    "poster": "https://image.tmdb.org/t/p/w342/xe2pjfRVEJso1f0TVacYM5lNdot.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ve8eFz0fKHxap9hwm18dUFtxfId.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_58894",
-    "ru": "Touken Ranbu Kai Douden",
-    "en": "Touken Ranbu Kai: Douden Chikashi Haberau Monora",
-    "year": 2024,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.4,
-    "votes": 386,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Экшен",
-      "Action",
-      "Фэнтези",
-      "Fantasy",
-      "Антропоморфные",
-      "Anthropomorphic",
-      "Историческое",
-      "Historical",
-      "Самураи",
-      "Samurai"
-    ],
-    "overview": "Prequel movie of Touken Ranbu Kai: Kyoden Moyuru Honnouji.",
-    "poster": "https://cdn.myanimelist.net/images/anime/1725/144268l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "1097311",
-    "ru": "Долина эха",
-    "en": "Echo Valley",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 379,
-    "popularity": 3.78,
-    "genres": [
-      "триллер",
-      "драма"
-    ],
-    "overview": "Джулианна Мур в роли Кейт, чья уединенная жизнь нарушается появлением ее проблемной дочери, испуганной и выпачканной в чужой крови. Выясняя шокирующую правду, Кейт узнаёт, как далеко она готова зайти ради своего ребенка.",
-    "poster": "https://image.tmdb.org/t/p/w342/a4bsGr1XonkB9w1HkVKPdfUTKUD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aQ5nvQGT6mM6TliOM5iSgrKVF4C.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "464889",
-    "ru": "Снайпер: Безупречное убийство",
-    "en": "Sniper: Ultimate Kill",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 378,
-    "popularity": 4.23,
-    "genres": [
-      "боевик"
-    ],
-    "overview": "Глава колумбийского наркокартеля объединят в своих руках все каналы доставки наркотиков в США. Его врагов уничтожает супер-снайпер по кличке \"Дьявол\". Агентство по борьбе с наркотиками отправляет на борьбу с ними спецагента под прикрытием, опытного снайпера из морской разведки.",
-    "poster": "https://image.tmdb.org/t/p/w342/3FfnhUt0HCqvox5BwNhMXGkaw6y.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yD4FojKumGSeA0Z8m49VZ8GKUuJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 575446,
-    "ru": "Новый порядок",
-    "en": "Nuevo orden",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 376,
-    "popularity": 1.23,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "Роскошная свадьба представителей высшего класса прерывается явлением непрошеных гостей - в стране начинаются бунты, сопровождающиеся ростом классовой ненависти и всплеском насилия.",
-    "poster": "https://image.tmdb.org/t/p/w342/tFzd7Cu88V8TKZL64nugkkbvUcn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rCQp2lOfGeiUnXxRk3B3FEq59rC.jpg",
     "source": "tmdb"
   }
 ]

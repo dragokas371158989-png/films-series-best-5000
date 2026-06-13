@@ -1,5 +1,277 @@
 [
   {
+    "id": 776327,
+    "ru": "Любовь без памяти",
+    "en": "Blackout Love",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.39,
+    "genres": [
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "Циничная и расчетливая Валерия меняет мужчин, ни секунды не сожалея о расставаниях. Тому же она учит и своих подопечных из волейбольной команды. Но единственный человек, который год назад разбил ее сердце, снова появляется в жизни Валерии. Она решает, что теперь найдет в себе силы отомстить бывшему бойфренду. Или это ей только так кажется?",
+    "poster": "https://image.tmdb.org/t/p/w342/yOoxbjxnzggNNCOtu152jrMpDUS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6WfZAveeI3OHZwtBx7vHhlvrUSZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1069069,
+    "ru": "10일간의 애인",
+    "en": "10일간의 애인",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 1.11,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/osqXpbKzoyTYAGOEmgtID230p7M.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/15RFlhN9WmXadgzHEs93dHHeviE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 288287,
+    "ru": "打噴嚏",
+    "en": "打噴嚏",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.61,
+    "genres": [
+      "боевик",
+      "комедия",
+      "мелодрама",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1G7DZYsPHAzpnSh97bsnnfAqEth.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qk6khjQUF2B655bfX7NEHyhnHS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 740963,
+    "ru": "Jump, Darling",
+    "en": "Jump, Darling",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.48,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ziQks92PZUAkcxO3tvR3yCIXGXf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5OJnX7xXqHWuvvWaKC8GMPXFIyU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 631880,
+    "ru": "Tyger Tyger",
+    "en": "Tyger Tyger",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.48,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5fhlV6jdEd9iqYnE9XUQAAhvw82.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/14ATSJsT3KDmHQdZY8FeEMxfPoG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 532811,
+    "ru": "Петсон и Финдус. Финдус переезжает",
+    "en": "Pettersson und Findus - Findus zieht um",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.59,
+    "genres": [
+      "семейный",
+      "мультфильм"
+    ],
+    "overview": "С тех пор, как у Финдуса появился новый матрас, он просыпается каждый день часа в 4 утра и устраивает на этом матрасе скачки, не давая Петсону насладиться утренним сном. Однажды в сердцах Петсон произносит роковую фразу: «Либо ты прекратишь прыгать, либо твоя кровать окажется где-то в другом месте!» А Финдус, вместо того чтобы испугаться, моментально соглашается отделиться от старого фермера. Решив, что это игра, Петсон обустраивает для Финдуса крошечный домик. Однако котенок воспринимает ситуацию куда как серьезно: теперь у него есть не только место для прыжков и игр, свобода и независимость, но и еще… собственный дом, а это вам не абы что. Одним словом, Финдус переезжает — и кажется, что жизнь больше никогда не будет такой, как прежде.",
+    "poster": "https://image.tmdb.org/t/p/w342/8pXr7yT18nfOg2qkNM06RvdOBij.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/neN9tgO0E0iZjb5MT8Ph8B4F3Sv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 298581,
+    "ru": "Кровь храбрых мужчин",
+    "en": "Borgríki II - Blóð hraustra manna",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.44,
+    "genres": [
+      "криминал",
+      "триллер",
+      "боевик",
+      "драма"
+    ],
+    "overview": "Бывший главарь мафии Гуннар отстранен от дел, утратил все влияние и мечтает о мести. Сербская мафия контролирует весь наркотрафик в стране, на них работает и продажный начальник наркоконтроля. Но в отдел внутренних расследований приходит молодой амбициозный сотрудник, который собирается всех вывести на чистую воду…",
+    "poster": "https://image.tmdb.org/t/p/w342/9FITP0KQsYXXhAkzhHyJTCQuTmk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m5X8PYxedwhsdtLgr7nKnGlOXUG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 550476,
+    "ru": "Кровь, пот и ужасы",
+    "en": "Blood, Sweat and Terrors",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.43,
+    "genres": [
+      "боевик",
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "Киноальманах, состоящий из девяти пропитанных кровью и адреналином историй, созданных в результате смешения ужасов и ураганного экшена.",
+    "poster": "https://image.tmdb.org/t/p/w342/dfd7xEN3Fgr8U3g7OLk4DUKtY2p.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/myxNmLdQy59m0q0PbggKkMEiYC9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 71654,
+    "ru": "Beat Shazam",
+    "en": "Beat Shazam",
+    "year": 2017,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 5.75,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/q2U5Iulo8NWWiOiVx0f7VX9o4RM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/r9lklmHeOznXd0WvJHbW47mMMag.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 377007,
+    "ru": "不可思异",
+    "en": "不可思异",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.98,
+    "genres": [
+      "фэнтези",
+      "фантастика",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/royv6PqUojsFNbQntIPrLu4qVhe.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ytybVDcBWR1ikme9EFi467CJg64.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 557130,
+    "ru": "Dangerous Matrimony",
+    "en": "Dangerous Matrimony",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.9,
+    "genres": [
+      "криминал",
+      "драма",
+      "детектив",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/m9rPNda9xApMtx3m6rWtwyKeeB1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8SWxF2GKXorlV1EzUCTd0da89CL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 484008,
+    "ru": "Счастливый билет",
+    "en": "Kaikki oikein",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.7,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mIefxl7ewozB6M2NbWhNC2q3niA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/17dyPl7L6gUvOQ1iSGYbWF0dkMe.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 449454,
+    "ru": "E-Demon",
+    "en": "E-Demon",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.6,
+    "genres": [
+      "ужасы",
+      "драма",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yU7TxtCeLvKZXEpf7chenNB2byo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2V0g6nVjxkFcT5BkiaSaRAqRL7R.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 458668,
+    "ru": "Nanny Seduction",
+    "en": "Nanny Seduction",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.53,
+    "genres": [
+      "триллер",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/lAMnVlI3uGgCPlyfObjaJsFAb6b.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/utkU7kWZCrIfFNlCp7XeE4yOsYk.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 275068,
     "ru": "VeggieTales: The Star of Christmas",
     "en": "VeggieTales: The Star of Christmas",
@@ -9195,263 +9467,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/wk6F6Fb4C58tYe1KUly4mC7UmDD.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/N6l0R7h9Jc8bbCGTORWUxMUK27.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 318179,
-    "ru": "My Killer Father: The Green Hollow Murders",
-    "en": "My Killer Father: The Green Hollow Murders",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.36,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/350LaXzJFxol6nx0nHvOAkpfisY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ejFDqpMl1rINCctrcITPDZ3OKZD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 302904,
-    "ru": "Nissene i skjul",
-    "en": "Nissene i skjul",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.34,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/e14xzejaqvMs6VB3pRNACCtUrK9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ivrDIAQwQsHb69tawueRu1kEOz1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1301059,
-    "ru": "Dikkie Dik en de verdwenen knuffel",
-    "en": "Dikkie Dik en de verdwenen knuffel",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.34,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8GwSPOX2GZroJdE6y7BQU2njFwd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qXujNPfKXabRy3yF2jPADO4zLNS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 317199,
-    "ru": "크로스 링크",
-    "en": "크로스 링크",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.3,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eekziYVqaK2XI6IMnPcSU5EAKNN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gh7BKBpkw1ZXWj3zHzysA5BUO9x.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 286409,
-    "ru": "Noční operatér",
-    "en": "Noční operatér",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.26,
-    "genres": [
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/x2a98Fa9vYsXZXP2zJ1fnvK6RFW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cWetxcEaE8cOihJCopZ0GsehKBd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1598312,
-    "ru": "Projecto Global",
-    "en": "Projecto Global",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.23,
-    "genres": [
-      "драма",
-      "история"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rkcLQHSnCJDXmmBrgMosiyM53ZI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rZyRAeNySiZztvfgAFWRuBwtfFq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 313759,
-    "ru": "Saint Laurence Academy",
-    "en": "Saint Laurence Academy",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.23,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xxRrKiyRNwa9ImEFYI7Nk7yarVO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qaFZBN1R7iqBBGXlxXG9llgj6XB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 308284,
-    "ru": "什么！攻略对象出错了",
-    "en": "什么！攻略对象出错了",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.03,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1WdginwMyN6l8jlsxtXZonpAntp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/t3nf1zBGXz6JhR8BxbvwF0tQwEn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1613650,
-    "ru": "El fantasma de mi mujer",
-    "en": "El fantasma de mi mujer",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.97,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/c2eVAJ8wMtk8bRGiEAPQH3id8nq.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1016018,
-    "ru": "이웃집 유부녀",
-    "en": "이웃집 유부녀",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.76,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6oKd1MkgDqabYA8XngrCD0NfW6C.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1049514,
-    "ru": "얼룩",
-    "en": "얼룩",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.61,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jeGyZvuRcplZEk7eIQvtVVuCJxJ.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 515599,
-    "ru": "Ню",
-    "en": "Ню",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.57,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Китайская девушка ищет в Москве свою любовь, идеал, мечту... Ладно, на самом деле, она всего лишь ищет с кем бы ей переспать. Но почему-то у нее ничего не получается: ни с лучшим другом, ни с девушкой, ни с незнакомцем из интернета. Может, причина в ней самой? Русский не ее родной язык - может быть ее неправильно понимают? К кому она обращается в каждом выпуске своего видеоблога? Что нарисовано на картине, которую она ото всех прячет? Что означает иероглиф 牛?",
-    "poster": "https://image.tmdb.org/t/p/w342/huq6Mw2pZiqqKb1DTBzO1XySYHE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lxqJwUwFYkEA6za4zwTV9AKpM3Q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1061818,
-    "ru": "'Tis the Season: The Holidays on Screen",
-    "en": "'Tis the Season: The Holidays on Screen",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.56,
-    "genres": [
-      "документальный",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ie5zpIgWKKKAU24flhdO3FjrUVD.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1320149,
-    "ru": "Детектив со школьного двора",
-    "en": "校园神探",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.55,
-    "genres": [
-      "детектив",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kOlspLNPHwtyvmHWBlBvfHanMVp.jpg",
-    "backdrop": "",
     "source": "tmdb"
   }
 ]

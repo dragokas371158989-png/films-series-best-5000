@@ -1,5 +1,124 @@
 [
   {
+    "id": "tv_111495",
+    "ru": "Carmel: ¿Quién mató a María Marta?",
+    "en": "Carmel: ¿Quién mató a María Marta?",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.5,
+    "votes": 96,
+    "popularity": 0.6,
+    "genres": [
+      "документальный",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fPBilOJmi2VAwjgdvfvuLTNjdP8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eBJQvI0syaskth7jcyCKopCCaID.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_69786",
+    "ru": "Невинный",
+    "en": "Masum",
+    "year": 2017,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.5,
+    "votes": 96,
+    "popularity": 3.7,
+    "genres": [
+      "криминал",
+      "драма",
+      "детектив"
+    ],
+    "overview": "Джевет, отставной комиссар полиции, спокойно живущий на пенсии со своей женой и детьми. Но ему снова приходится заниматься криминальными расследованиями, потому что вокруг его семьи начинают сгущаться тучи…",
+    "poster": "https://image.tmdb.org/t/p/w342/kxFvOPVuUXaAX7h2qTKjg67qizN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gzDEvP76g3AoKQtfbiORPvkTTtl.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 8002586,
+    "ru": "Sanford and Son",
+    "en": "Sanford and Son",
+    "year": "1972",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.5,
+    "votes": 96,
+    "popularity": 15.79,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/g4Ycu20Ie4uJO006kB6jN9Zl4tR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/9bKG3fEyUjDizCL164OgfFGYTUs.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 2586
+  },
+  {
+    "id": 2342,
+    "ru": "Школа клонов",
+    "en": "Clone High",
+    "year": 2002,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.5,
+    "votes": 95,
+    "popularity": 5.79,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "Знаковые исторические личности клонированы… и теперь должны вместе посещать школу.",
+    "poster": "https://image.tmdb.org/t/p/w342/gGRcBuEG3JlXWg5wTyeQtkXmPtY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dDwgCabevlILyAVy35zALKY8fFT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 4622,
+    "ru": "Code Lyoko",
+    "en": "Code Lyoko",
+    "year": 2003,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.5,
+    "votes": 95,
+    "popularity": 4.61,
+    "genres": [
+      "НФ и Фэнтези",
+      "мультфильм",
+      "комедия",
+      "Боевик и Приключения",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tnbDoaiVjD6svXDIxJ6dMUTEBVK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oSBOivU2VjjrLlslo5Hdixygneo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 60899,
+    "ru": "У истоков жизни",
+    "en": "Nära livet",
+    "year": 1958,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.5,
+    "votes": 95,
+    "popularity": 2.39,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Три женщины оказались в роддоме. Две из них мечтают родить ребенка, еще одна — хочет от него избавиться. Однако у жизни на все свои планы.",
+    "poster": "https://image.tmdb.org/t/p/w342/6reNtA0KXBas4n8E6Qwqj7AjT8v.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/l810ZtbnQzqivGJRqNjs007LbC0.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "tv_1551",
     "ru": "The Kids in the Hall",
     "en": "The Kids in the Hall",
@@ -16,6 +135,28 @@
     "poster": "https://image.tmdb.org/t/p/w342/2dNiB88EBv64V9rcicXwNGQosJW.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/6OkpAR1IWKYe8bJPt1FVCtcPB7T.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 8253811,
+    "tmdbId": 253811,
+    "ru": "Тёмный демон",
+    "en": "桃源暗鬼",
+    "year": "2025",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 7.5,
+    "votes": 94,
+    "poster": "https://image.tmdb.org/t/p/w342/elzm2YILMHwh8WKfphhmnewwoiJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/k7h9p81H6X6TGV70TgOp4TmjXco.jpg",
+    "overview": "Сики Итиносэ — подросток из XXI века. В его жилах течёт кровь адских существ, которые раньше терроризировали людей. В наше время потомки смелого мальчика-воина объединились в «Агентство Момотаро», которые охотятся за Сики и ему подобными. После битвы с этими «народными мстителями» Итиносэ узнает тайну смерти своего отца и решает не сдерживать зов своей крови — он поступает в академию для потомков демонов, где можно развить сверхспособности и дать отпор убийцам, которые прикрываются связью с легендарным героем.",
+    "genres": [
+      "мультфильм",
+      "детектив",
+      "Боевик и Приключения"
+    ],
+    "source": "tv_popular"
   },
   {
     "id": 34771,
@@ -606,6 +747,29 @@
     "source": "tmdb"
   },
   {
+    "id": 8002467,
+    "tmdbId": 2467,
+    "ru": "Мышиный дом",
+    "en": "Disney's House of Mouse",
+    "year": "2001",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 7.5,
+    "votes": 84,
+    "poster": "https://image.tmdb.org/t/p/w342/53HmzBwkr43NEewZp5wLNLDffKr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/n0VOCRcEVsshvYwtmLvolGx3sFR.jpg",
+    "overview": "Микки Маус и его друзья приглашают персонажей из различных диснеевских полнометражек в свой клуб, где показывают классические мультфильмы студии Уолта Диснея.",
+    "genres": [
+      "мультфильм",
+      "Детский",
+      "комедия",
+      "НФ и Фэнтези"
+    ],
+    "source": "tv_popular"
+  },
+  {
     "id": "tv_200908",
     "ru": "Нам повезло",
     "en": "We Were the Lucky Ones",
@@ -860,26 +1024,6 @@
     "source": "tmdb"
   },
   {
-    "id": 8254953,
-    "ru": "Рустер",
-    "en": "Rooster",
-    "year": "2026",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.5,
-    "votes": 78,
-    "popularity": 12.71,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Писатель Грег Руссо приезжает на кампус колледжа Ладлоу, чтобы наладить отношения с дочерью Кейти, профессором, и помочь ей пережить расставание с мужем, который ушёл от неё к аспирантке. Также Грег проводит семинары со студентами о своих произведениях и обнаруживает, что главный герой его романов, брутальный и мужественный Рустер, не только пользуется популярностью среди студентов, но и плотно ассоциируется с ним самим. Оказавшись среди беззаботной молодёжи, писатель начинает поддаваться её призывам, веселиться с ними и всё чаще вести себя как Рустер.",
-    "poster": "https://image.tmdb.org/t/p/w342/szpYuYqLNzgc3WMr3kZ0f81m0rC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/mhZAT8ktiNi7YwuL50kmumsau69.jpg",
-    "source": "trending_tv_week",
-    "status": "Онгоинг",
-    "tmdbId": 254953
-  },
-  {
     "id": 602562,
     "ru": "Mujeres arriba",
     "en": "Mujeres arriba",
@@ -916,28 +1060,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/xmH51jGILGGaGdnGTZnQFo7QwSj.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/cMd4GEtNwAkEMVPyihLtUzO6Arc.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 7000176,
-    "ru": "Пила. Игра на выживание",
-    "en": "Saw",
-    "year": "2004",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.4,
-    "votes": 10077,
-    "popularity": 10.64,
-    "genres": [
-      "ужасы",
-      "детектив",
-      "криминал"
-    ],
-    "overview": "Адам и Гордон очнулись прикованными к трубам в огромном заброшенном помещении. Между ними труп в луже крови... Оба не понимают ни как они оказались в таком положении, ни как из него выйти. Достаточно быстро они осознают, что стали жертвой серийного маньяка, которого полицейские называют «Конструктор смерти» за его манеру ставить людей в ситуацию, где у них есть только два выхода — погибнуть самим или убить. На сей раз «изобретатель» поставил перед выбором Гордона: он должен убить Адама или его жена и дочь будут уничтожены. Расследовавший предыдущие «эксперименты» супер-изобретательного злодея детектив Тапп попытается вмешаться в ситуацию... Смогут ли Адам, Гордон и Тапп обыграть маньяка в его дьявольской игре и остаться в живых?",
-    "poster": "https://image.tmdb.org/t/p/w342/ghBc5iOJxDcEHPi7OvQYdVXiGeF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/ok4ot3YbfDYZcINXf91JUfq3maB.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 176
   },
   {
     "id": 8002474,
@@ -2264,29 +2386,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/5qayyUvsmjw1i2DvhcM0Wtbwcei.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/ewqs9Hx3yMqMTzbs2GpXAP13il3.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8020111,
-    "tmdbId": 20111,
-    "ru": "Мобильный воин ГАНДАМ: Поколение",
-    "en": "機動戦士ガンダムSEED",
-    "year": "2002",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 7.5,
-    "votes": 61,
-    "poster": "https://image.tmdb.org/t/p/w342/et7TAbuD2bF6QCdOyzv7Fxu15Aq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/otE9DjFrKMOv0Mkz1o7HfJGCvNF.jpg",
-    "overview": "Научные достижения позволили человеку досконально изучить генный уровень и научиться его доводить до совершенства. У тех, на ком ставили опыты, появлялись на свет умные дети, обладающие высокими физическими показателями, более сильные, ловкие. Но у других людей они начали вызывать зависть, ведь общество не терпит, когда кто –то отличается от большинства. Между людьми с усовершенствованными генами – Координаторами и Натуралами – обычными людьми, которых генами наделила сама природа, начинается противостояние. Юноша Кира Ямато оказался вовлеченным в эту войну, он пытается спасти себя и своих приятелей, он не занимает ничьей стороны, он намерен помочь выжить тем, кого любит и ценит, и ему все равно будь тот человек Координатор, или же Натурал. Противостояние кажется ему совершенно не нужным, а жертвы бессмысленными, и Кира намерен положить конец этой войне…",
-    "genres": [
-      "Боевик и Приключения",
-      "мультфильм",
-      "НФ и Фэнтези",
-      "Война и Политика"
-    ],
-    "source": "tv_popular"
   },
   {
     "id": 118556,
@@ -9630,104 +9729,6 @@
     "overview": "Студентка юридического факультета и ее друзья пытаются доказать невиновность ее брата, но единственный способ оправдать его имя - найти настоящего убийцу.",
     "poster": "https://image.tmdb.org/t/p/w342/pN7VxfVY0dtgcoaA1CD3dir649U.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/aznaT2jkJW9OH0e7j40uLeoxppv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 683124,
-    "ru": "アルプススタンドのはしの方",
-    "en": "アルプススタンドのはしの方",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.5,
-    "votes": 15,
-    "popularity": 0.38,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/f2FOvVg3IClAkl3JWGlB1mIqGm2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pvmtYStO23VlR5doO8p2hCxOsSV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 260091,
-    "ru": "Медведи-соседи",
-    "en": "熊出沒之奪寶熊兵",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.5,
-    "votes": 15,
-    "popularity": 2.21,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "приключения"
-    ],
-    "overview": "Медведям-соседям и вездесущему дровосеку придется стать нянями очутившегося у них в лесу ребенка. Все бы ничего, если бы эта девочка не была до этого похищена и упущена бандитами, которые жаждут ее вернуть и доставить заказчику — главному злодею. Теперь нашим героям предстоит сразиться с плохими парнями и помочь найти дорогу домой малышке.",
-    "poster": "https://image.tmdb.org/t/p/w342/ctrzW7GJZPT9JvP8QmSBzAjpbuh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/flgVOxVraxnu1ww0EYHm4Xqki7X.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 329931,
-    "ru": "きみはいい子",
-    "en": "きみはいい子",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.5,
-    "votes": 15,
-    "popularity": 0.53,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7OvIG4VD2aW2RhqgjGfqqejxQrn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pVd5rBIjn4FaYQJraraGi9feAvy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 361422,
-    "ru": "Ever After High: Way Too Wonderland",
-    "en": "Ever After High: Way Too Wonderland",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.5,
-    "votes": 15,
-    "popularity": 0.47,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "телевизионный фильм",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/c2vKDSvh2aB4uo6hymOmmCPysoK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/txG9gLcxDnuo1TWDOBOowqGjzbX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 296264,
-    "ru": "Pink Pajamas",
-    "en": "Pink Pajamas",
-    "year": 1964,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.5,
-    "votes": 15,
-    "popularity": 0.42,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/579lEthcDYR97VRFPzhL67e3cwP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wMy96GfUVxTrFCE4xVZBP7Nsb9y.jpg",
     "source": "tmdb"
   }
 ]

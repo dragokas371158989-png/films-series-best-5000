@@ -1,5 +1,273 @@
 [
   {
+    "id": 285844,
+    "ru": "Preggoland",
+    "en": "Preggoland",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 46,
+    "popularity": 0.47,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kBgxv3uMwR3MVwHEvVtr5xujYtg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bXwQHQ5HbtmCNKGRj8TwFjRrLRJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1227003,
+    "ru": "Последний экзорцист",
+    "en": "Shadow of God",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 45,
+    "popularity": 1.43,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "По заданию Ватикана отец Мейсон возвращается в родные края. Он должен расследовать гибель семи экзорцистов за последнее время и сразиться с могущественным демоном, который вселился в воскресшего непонятным образом отца священника, умершего много лет назад. Первая любовь Мейсона, а ныне психолог Танис, помогает ему в схватке со злом, собирая информацию о загадочном воскрешении.",
+    "poster": "https://image.tmdb.org/t/p/w342/jzsOHWlkUrN5r2Xw7TP9ObMdl0o.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nViQZruGVd8M2RkFD5MCPjyjqgA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1058303,
+    "ru": "Джун всемогущая",
+    "en": "Drugstore June",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 45,
+    "popularity": 0.78,
+    "genres": [
+      "комедия",
+      "криминал",
+      "детектив"
+    ],
+    "overview": "Джун уже давно исполнилось 20 лет, но она упорно продолжает вести себя как безответственный подросток: живёт вместе с родителями, не даёт проходу своему бывшему парню, постит видео для своих немногочисленных, но «преданных» подписчиков, сидит на всех видах диет и постоянно срывается на тотальное обжорство. Однажды ночью аптеку, в которой Джун работала, ограбили, и она решает раскрыть это преступление самостоятельно.",
+    "poster": "https://image.tmdb.org/t/p/w342/zbWcd3e5ooHEmiJnEmRE8sE3bOP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kmbKwy4K62E1Vc5SupuDlJhQwPf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 67253,
+    "ru": "Кошка по имени Лили",
+    "en": "LILY-C.A.T.",
+    "year": 1987,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 45,
+    "popularity": 0.83,
+    "genres": [
+      "фантастика",
+      "ужасы",
+      "мультфильм"
+    ],
+    "overview": "Будущее. Ученые создают Капсулы глубокого сна, которые почти полностью останавливают старение организма во время сна и тем самым позволяют людям путешествовать на большие расстояния. Используя эти капсулы, команду космонавтов посылают в двадцатилетнее путешествие для изучения недавно открытой планеты. После того, как команда выходит из сна, прибыв на орбиту неизвестной планеты, космонавты обнаруживают поврежденное сообщение из Земли. В нем говорят о том, что на корабле среди команды есть два беглеца, выдающих себя за членов команды. А пока члены экспедиции пытаются выяснить, что это за пассажиры и каковы их цели, над командой нависает новая угроза - люди умирают один за другим, пораженные неизвестным внеземным вирусом, и обычная исследовательская миссия оборачивается отчаянной борьбой за выживание.",
+    "poster": "https://image.tmdb.org/t/p/w342/nRfQD3BgsAKCppB0YCX78ZhV8zB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ea6ts3iP073a0oO3N76y8W87mG1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 466410,
+    "ru": "Кем мы стали",
+    "en": "Who We Are Now",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 45,
+    "popularity": 0.49,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Вышедшая из тюрьмы мать с помощью молодого адвоката-идеалиста пытается вернуть себе право опеки над сыном и заводит романтические отношения с пережившим травму бывшим солдатом.",
+    "poster": "https://image.tmdb.org/t/p/w342/kxTfAC1pCHjLYDqAoiUVul5Hor3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2ERlXsLJLRdGLilHwPN1GkqEG1i.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 848950,
+    "ru": "Боулинг Сатурн",
+    "en": "Bowling Saturne",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 44,
+    "popularity": 0.59,
+    "genres": [
+      "драма",
+      "триллер",
+      "криминал"
+    ],
+    "overview": "В центре событий остросюжетного драматического триллера под названием «Боулинг Сатурн» находится молодой представитель сильного пола по имени Гийом, жизнь которого протекает в тихом и ничем не примечательном духе. Но в некий момент он решает внести в свой привычный жизненный расклад существенные изменения. Все начинается с того, что у него возникает идея инвестировать серию убийств, совершенных полицией. И эта мысль возникает у главного героя после того, как его брат и сестра начинают управлять отцовским бизнесом весьма неординарным образом…",
+    "poster": "https://image.tmdb.org/t/p/w342/lyIqihYpiIXLSPYwGEvg0ImnTHK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3FYlk1DlXulq5gE7PZ3lIHbYbOA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 254263,
+    "ru": "Принцесса Лебедь 5: Королевская сказка",
+    "en": "The Swan Princess: A Royal Family Tale",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 44,
+    "popularity": 0.99,
+    "genres": [
+      "семейный",
+      "мультфильм",
+      "фэнтези"
+    ],
+    "overview": "В сказочном королевстве принцесса Одетт, принц Дерек и их преданные лесные друзья собираются встречать рождество. Однако после того, как королевская семья удочерила маленькую прелестную девочку, неизвестный злодей похищает и уводит в лес девочку. Одетт и Дерек отправляются на её поиски. Но пока королевство готовится к празднику, хитрый и коварный колдун Ротбарт планирует уничтожить королевство.",
+    "poster": "https://image.tmdb.org/t/p/w342/wuMhHoiwJreSgiHrRq68gWc2R8J.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8FRvEFTdZxx0ICeP0egjxRE5NHE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1339166,
+    "ru": "Шаман",
+    "en": "Shaman",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 43,
+    "popularity": 1.14,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "Миссионерка, обращающая в веру коренную общину на отдаленном эквадорском вулкане, должна примириться со своей собственной верой, когда ее сын оказывается одержим темными силами, которые старше ее собственной религии.",
+    "poster": "https://image.tmdb.org/t/p/w342/hFecHDZVILGNvzQNssWAUxvwmj5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kWm4HxanOhRWfW9PzigkUXulwdG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1310871,
+    "ru": "Отпечаток зла",
+    "en": "La huella del mal",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 43,
+    "popularity": 0.63,
+    "genres": [
+      "криминал",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "Во время школьной экскурсии группа подростков обнаруживает тело молодой женщины на месте, где должна была находиться реплика неандертальского захоронения. Погибшей оказалась Эва Сантос, жительница близлежащего посёлка. Её тело обнажено и расположено в позе эмбриона, что напоминает случившееся шесть лет назад ритуальное убийство. Главный инспектор Сильвия Гусман и бывший полицейский Даниэль Веларде берут на себя расследование этого преступления.",
+    "poster": "https://image.tmdb.org/t/p/w342/o410zKXtZYy2vVBcQJPxzOc9KYc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wnVxIPc14Af9ztf1h3YzelZuw6W.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1157869,
+    "ru": "Histoires parallèles",
+    "en": "Histoires parallèles",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 43,
+    "popularity": 1.79,
+    "genres": [
+      "драма",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/slUt1jzYxJZzEJWrOZ67DouFwoH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3lKjspWl46OWPmn6jIp8Wo8UdP4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1141228,
+    "ru": "Untold: Jake Paul the Problem Child",
+    "en": "Untold: Jake Paul the Problem Child",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 43,
+    "popularity": 0.55,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/737TAAAXQZA4C4s3LJP6DJ6IieK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oMZyBoY4nV4VYX3JaTfvp6spN2N.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 61849,
+    "ru": "Одно большое счастье",
+    "en": "One Big Happy",
+    "year": 2015,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.7,
+    "votes": 43,
+    "popularity": 2.2,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Лучшие друзья Лиззи и Люк почти как семья. Когда они были детьми, им вместе пришлось пройти через развод родителей. Общие переживания сблизили их и с тех пор они практически неразлучны. Теперь, будучи уже взрослыми и одинокими людьми, они хотят создать собственную семью. Однако не совсем типичным способом. Лиззи — лесбиянка, а Люк традиционной ориентации, но тем не менее они решают завести общего ребенка. Однажды Люк знакомится с веселой девушкой из Великобритании по имени Пруденс. Они мгновенно влюбляются друг в друга, и именно в тот момент, когда Лиззи понимает, что беременна, Люк объявляет, что намерен жениться на Пруденс",
+    "poster": "https://image.tmdb.org/t/p/w342/9fku61Zx2kwklMhbLhK4eyhx3dD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7UQk6QdUgcBUkq0eaeg0GaFw1sw.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 264555,
+    "ru": "Друзья до смерти",
+    "en": "Death Clique",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 43,
+    "popularity": 0.78,
+    "genres": [
+      "драма",
+      "триллер",
+      "телевизионный фильм"
+    ],
+    "overview": "Соперничество на почве ревности между тремя школьницами перерастает в шокирующий акт насилия, ведущий к смерти одной из девушек. Мать жертвы полна решимости найти своего пропавшего ребёнка и добиться справедливости ради своей дочери.",
+    "poster": "https://image.tmdb.org/t/p/w342/teieNkUqwID5wTsRaK3yeKXFoFC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sQGbhykhJ8FCQ6YDaxmIU8KNCqA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 285200,
+    "ru": "Выжить в Арктике",
+    "en": "Operasjon Arktis",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 43,
+    "popularity": 0.71,
+    "genres": [
+      "семейный",
+      "приключения"
+    ],
+    "overview": "Трое детей — 13-летняя Юлия вместе с сестрой и братом оказались во льдах суровой Арктики неподалеку от Шпицбергена. Им предстоит бороться с непогодой, спасаться от белых медведей и искать пропитание. Современная история о робинзонах посреди величественной и морозно опасной природы.",
+    "poster": "https://image.tmdb.org/t/p/w342/67wK37Y6lf4MDTpPGmD0GIcqt5P.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tXpRzyW7ABZV3fjqAV61HFDj94x.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 465260,
     "ru": "Le trip à trois",
     "en": "Le trip à trois",
@@ -9416,278 +9684,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/AgV244hLAhFCDXDiaaENZejUHmI.jpg",
     "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 258578,
-    "ru": "魔法使いの約束",
-    "en": "魔法使いの約束",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 6.38,
-    "genres": [
-      "мультфильм",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qmRgfyEwafV0qpPDh1PfUDigG5T.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/quHLmheViYmmvSp6QnCLn9Q4L0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 72698,
-    "ru": "武装神姫",
-    "en": "武装神姫",
-    "year": 2012,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 7.08,
-    "genres": [
-      "мультфильм",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6bMwmmBBsRdpo8iNgBp7RdZD1zP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rYisXkvIEFRJeSKCz3VPmciGBqy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 257161,
-    "ru": "喜人奇妙夜",
-    "en": "喜人奇妙夜",
-    "year": 2024,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 44.32,
-    "genres": [
-      "Реалити-шоу",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nQFCp0Tlfqq3NhF2kiNAGwXLfnX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2l2KlVJAmGrnnhURaMfESslMVh3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 881350,
-    "ru": "Секс, ложь и убийство",
-    "en": "Deadly Seduction",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 1.45,
-    "genres": [
-      "телевизионный фильм",
-      "детектив",
-      "триллер",
-      "криминал",
-      "драма"
-    ],
-    "overview": "Мэгги и ее муж Ричард — профессора колледжа, у них есть дочь, 17-летняя Дженни. Их брак разваливается, и когда Ричард признается, что у него роман со студенткой, они расходятся. Мэгги и лучшая подруга Алисса собираются устроить девичник. В баре встречает Кайла, красивого и обаятельного, и она упивается его вниманием. После слишком большого количества выпивки они проводят страстную ночь. Позже она была ошеломлена, увидев в своем классе Кайла, который утверждает, что является поклонником ее бестселлера о серийном убийце Корделле Колтоне. Только тогда мы начинаем раскрывать шокирующую тайну Кайла, когда он намеревается разрушить жизнь и карьеру Мэгги, обвиняя ее мужа в убийстве и соблазняя ее дочь.",
-    "poster": "https://image.tmdb.org/t/p/w342/eH4NAdf2J5jZpJqXAuAZ7gvSlKM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1nAJqsT0Dt7WprDvjB6B3SUkdXb.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1080658,
-    "ru": "Отравленный газом",
-    "en": "Gassed Up",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 1.43,
-    "genres": [
-      "драма",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "Эш, пытаясь заработать денег, чтобы поднять на ноги свою четырнадцатилетнюю сестру и отправить мать на реабилитацию, попадает в банду организованной преступности, возглавляемой молодым и харизматичным албанским иммигрантом Дабзом.",
-    "poster": "https://image.tmdb.org/t/p/w342/v4AvXUj2WD1r9sSXg3BJsW8IVXf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eTU8MEsQBUKMAimUF1hKcdZ6qLb.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1084376,
-    "ru": "Отель «Жасмин»",
-    "en": "Losmen Melati",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 0.5,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "Ища ночлега в забытой части города, путешественники оказываются запертыми в проклятом отеле, в то время как его хозяйка заставляет их встретиться лицом к лицу с самыми темными ужасами.",
-    "poster": "https://image.tmdb.org/t/p/w342/bjzu53yAIgomy5Kx6viRfdKCU2o.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eQ2Rk5FxZRqtEuXAZdqcKb4j51G.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 951436,
-    "ru": "Forty Winks",
-    "en": "Forty Winks",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 1.59,
-    "genres": [
-      "драма",
-      "комедия",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gzOHsSvlz9iTq3T31DTMhVFBSq1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iFi9fo2iiDOo1kn5GIOqmq6giAp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1530787,
-    "ru": "匿杀",
-    "en": "匿杀",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 1.27,
-    "genres": [
-      "криминал",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wz7DchRv3sXIH87LyjhhxJdrVGk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/CZUyZdTBeOhr29KFjcsVjexEFE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 876823,
-    "ru": "#PTGF出租女友",
-    "en": "#PTGF出租女友",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 0.92,
-    "genres": [
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5TQIL4a2CI2AXwgFVMstEc5E2Ho.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ovEhRLuV4MNWjT0pL22VuN8MylL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 744392,
-    "ru": "架空OL日記",
-    "en": "架空OL日記",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 0.85,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7RfbfLLBjciuakfPebiJsEPYSNy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4Awl2yKsBP7n4WVyWKhoV0Nhu3s.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1466747,
-    "ru": "Portal in the Pines",
-    "en": "Portal in the Pines",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 0.73,
-    "genres": [
-      "ужасы",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iB73OJ3smvKdPDSy1ieTW1BVaJo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/Q8m7qKrvlLRqbpnIqMzgBv4v7g.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1601000,
-    "ru": "Critical Incident: Death at the Border",
-    "en": "Critical Incident: Death at the Border",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 0.61,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gThb7GuqTZ19EHgcvX3GSDdNBqJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/t2p67zRXn00bUrw94HReWdTp7Q0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 965073,
-    "ru": "88",
-    "en": "88",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 0.56,
-    "genres": [
-      "драма",
-      "триллер",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2MVTeKfol3Vl0ZUBMrokaZ3mNcA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hXin4s7WuXBoJJQGRYxJ9Ocum8E.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 741354,
-    "ru": "ಹೀರೋ",
-    "en": "ಹೀರೋ",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 7,
-    "popularity": 0.49,
-    "genres": [
-      "комедия",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xZAxSiL5csPIe6Q1V8pbwz69U5m.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ipd4mfEjEoCc7YOpji6LPzEVC3F.jpg",
     "source": "tmdb"
   }
 ]

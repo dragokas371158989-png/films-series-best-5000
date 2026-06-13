@@ -1,5 +1,268 @@
 [
   {
+    "id": 1163498,
+    "ru": "锁战",
+    "en": "锁战",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.79,
+    "genres": [
+      "боевик",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/t8216wfsxV8E7aY2MVBncQvho2r.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iJ0Vbl9r2DHaVpfuJ1c3Tc8ju6F.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 249760,
+    "ru": "बैंडवाले",
+    "en": "बैंडवाले",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.77,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/h1heLNN77Jmjin06ihQdMKTGGIt.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uz0OhuErhylmCBszXwYAxOU3oVo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 911244,
+    "ru": "മിണ്ടിയും പറഞ്ഞും",
+    "en": "മിണ്ടിയും പറഞ്ഞും",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.76,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2TfEGFtcYenVrydMVJ2fiPXb5dl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/daBv4Hz3l1WzE0dByw5efexYrQp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1525446,
+    "ru": "Agape: The Unconditional Love",
+    "en": "Agape: The Unconditional Love",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.74,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aylX6hIIbeIK2sOyeA5NeEVVm74.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/w4M9w57wpH5um8UTX25548okOsJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 306089,
+    "ru": "CO-ED",
+    "en": "CO-ED",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.72,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yszfk2In6I82bQIhrNijsoZkoiz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/33oeHzYG3MEs8fAfQLkI9m4kAUi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1136460,
+    "ru": "＃ミトヤマネ",
+    "en": "＃ミトヤマネ",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.71,
+    "genres": [
+      "триллер",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3dbWZuiosAt2Y05UcXXariMwVvh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1CS7Zy2vMRC51UamsB3ua7wAnDu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1061128,
+    "ru": "その少女、怒り。",
+    "en": "その少女、怒り。",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.71,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ldOTQBCz1ufPN9OCwiegCInXr2T.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vWsBwAya4Datgs2rL6QpgQZEN8H.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1537212,
+    "ru": "Huwag Kang Titingin",
+    "en": "Huwag Kang Titingin",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.7,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fLdWIk9c01RFXCaEKCjqIDbOe6i.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sHWdG2qgupT4WHLIfMmm3hegiou.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 990128,
+    "ru": "黑狐之绝地营救",
+    "en": "黑狐之绝地营救",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.7,
+    "genres": [
+      "военный",
+      "боевик",
+      "драма",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/w1CEub3EkxWR21skS8pdqkLsENo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tL7n257j6fD8XuO52J11Iu71k67.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1415690,
+    "ru": "Hoagie",
+    "en": "Hoagie",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.67,
+    "genres": [
+      "комедия",
+      "ужасы",
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/jCgq1J6KYxTWxHFEgMfghbD1w4y.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vrdOWPrTliifhsripGUtK14fqtO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 724193,
+    "ru": "세 여자의 은밀한 직장생활",
+    "en": "세 여자의 은밀한 직장생활",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.67,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nvQqmSZZ3GcQDBh4uqDhrePvQ4K.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/flxM5JCooD6P4QTVhdbTea7mSOM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 274011,
+    "ru": "Buldok z Poděbrad",
+    "en": "Buldok z Poděbrad",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.64,
+    "genres": [
+      "комедия",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/a5aZoYqY2sE6ecdj0ATk7umxq0e.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5VhP0dj9uv8VnRKELgCt8bcSfqC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1402208,
+    "ru": "Dreamland Awaits",
+    "en": "Dreamland Awaits",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.64,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hpowtShENEYE4sAKbrJuj1ygcu9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lzLzag4tUcJHwIgauktrG52L3C.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 988703,
+    "ru": "電子靈",
+    "en": "電子靈",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.64,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eM4C3t2eXtjplvmQ1rYkmAN8rez.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fEu9zjsL1t6iA3grYS5ZknQaVb.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1571746,
     "ru": "La Fuente",
     "en": "La Fuente",
@@ -9082,271 +9345,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/pjBgYNsHpREvBQ1tFcyj976QDiq.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/sMtFvcLT7eaNC2dNyG0LpXg2y0H.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1135718,
-    "ru": "Bugaw",
-    "en": "Bugaw",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 5,
-    "popularity": 1.03,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7pzJmpV56FiNtIFbUq73ytIfutq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qB4Xmelj1mm0rJ9rlNi3o4tvnEV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1049075,
-    "ru": "A Night of the Undead",
-    "en": "A Night of the Undead",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 5,
-    "popularity": 0.56,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zxh5Z2zpbAtAuS2CoVaO0pkkes8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bdJeZxltSjFMFxzykYa3CLfMBEz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1082528,
-    "ru": "Freedom Hair",
-    "en": "Freedom Hair",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 5,
-    "popularity": 0.53,
-    "genres": [
-      "драма",
-      "история"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/n6ijbeJIIicXroHEey3HxS6pWNx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/A3fuwLayI2h2EeIY2fdYtddfldk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 948797,
-    "ru": "Dangerous Cheaters",
-    "en": "Dangerous Cheaters",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 5,
-    "popularity": 0.46,
-    "genres": [
-      "драма",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eL7NFBdVcdXODJVh59OSbmHuMT1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vZzr0GjQzil3TYsRvTt9tC4c6gP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 656888,
-    "ru": "H. H. Holmes: Original Evil",
-    "en": "H. H. Holmes: Original Evil",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 5,
-    "popularity": 0.48,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/BgTzRDsgUcBjviqThKvBPKPGR4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kC2QCTdmkcGS27a2rkLliUKbbKH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 456332,
-    "ru": "活劇少女探偵団",
-    "en": "活劇少女探偵団",
-    "year": 1986,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 5,
-    "popularity": 0.33,
-    "genres": [
-      "комедия",
-      "боевик",
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6IspfIDieZqZ7vGaNSYr8D2kxHF.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 615228,
-    "ru": "Vou Nadar Até Você",
-    "en": "Vou Nadar Até Você",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 4,
-    "popularity": 3.5,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aNbcim9eQqi6oRXotRKTlT9ofXF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5RPXDu7FLHSmUQDt319t7qsk186.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 781032,
-    "ru": "All My Friends Are Dead",
-    "en": "All My Friends Are Dead",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 4,
-    "popularity": 0.72,
-    "genres": [
-      "ужасы",
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2lntROK1jjhvjUCLWw6ZdGaVBcj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uK9LsR7amxY7X2NZA8nex6x5X6h.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 872659,
-    "ru": "ആയിഷ",
-    "en": "ആയിഷ",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 4,
-    "popularity": 0.44,
-    "genres": [
-      "драма",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3LQ8HwPAl3JpaqKSnVFgtbTxzhj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7Vu0N2sLPfUWRjZau4XWs6PYovC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 444480,
-    "ru": "Slammed!",
-    "en": "Slammed!",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 4,
-    "popularity": 0.91,
-    "genres": [
-      "триллер",
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oh9KWUWPIq77pGlfe8L4YZCLt11.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ijfKnPbASK9LEWknKLewAX2Z4wy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 404931,
-    "ru": "マリアの乳房",
-    "en": "マリアの乳房",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 4,
-    "popularity": 0.68,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uKMtGmuOBeaIMxHHnqyZPCFs5xA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/n3moQSUbFCkmGArfnJwsbtxT4yW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 725140,
-    "ru": "未来世紀アマゾネス",
-    "en": "未来世紀アマゾネス",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 4,
-    "popularity": 0.65,
-    "genres": [
-      "комедия",
-      "ужасы",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jQvKKSXZQLJdCYfci70PsNl3f10.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/w4oocOf1qIcBmozgFQ7lOY92ixL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 815762,
-    "ru": "El sexo me da risa 8",
-    "en": "El sexo me da risa 8",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 4,
-    "popularity": 0.58,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/icSrMgxgzx8ia0WpCix5eW5Xn1D.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vDERr9tZwc63aYDB47FLihcICBX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 609246,
-    "ru": "Nothing Like The Sun",
-    "en": "Nothing Like The Sun",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 4,
-    "popularity": 0.55,
-    "genres": [
-      "драма",
-      "история"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yE3r6i1KHaI68TCLChzslqhLCdS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1QWh99owXdtU2pp8VxFeH5omctr.jpg",
     "source": "tmdb"
   }
 ]

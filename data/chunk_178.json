@@ -1,5 +1,261 @@
 [
   {
+    "id": 1620048,
+    "ru": "তুমি আমি শুধু",
+    "en": "তুমি আমি শুধু",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uqBBGwGraBTXA3pfTIl1YAz6oY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/z6u3QrGJm9uwutjtkNDWQoe55Bg.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 323798,
+    "ru": "내 결혼식의 불청객",
+    "en": "내 결혼식의 불청객",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/upmSDCDiBpYlp4T33CtKq6gcNDp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nrZPJ61ND20zYR7OccYTusQif0j.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 322477,
+    "ru": "Roland-Garros, entre les lignes",
+    "en": "Roland-Garros, entre les lignes",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tRVHsMdqKOjgtlGwNJme3jFHcqj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hwJ3MYihbxCg06R70c1tjC9tGyy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 322421,
+    "ru": "The Philosophy of Science",
+    "en": "The Philosophy of Science",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "документальный",
+      "Ток-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vxDANhwQAwJCqrrIN1xtBVp6kCD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1Vib139oXmw6rVUej1Q22huRsRo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 319928,
+    "ru": "AIに話しすぎた男",
+    "en": "AIに話しすぎた男",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gO3Ur4svytemTxwTXAWCbfNOI1T.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hJPgxiP9K1pCIiAxXE38FLO2qZy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 320648,
+    "ru": "Quem É O Pai do Meu Bebê?",
+    "en": "Quem É O Pai do Meu Bebê?",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "драма",
+      "Мыльная опера"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hXNAxH2zIbvsTt3xhX5gqCnDdtZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oG5GrWQjf5ZXZHODBkZigijYCMT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 301234,
+    "ru": "L'ombre de ton ombre",
+    "en": "L'ombre de ton ombre",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "драма",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xzn8BfSGr437WkiphOvzAEuCINN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iQqusLHMKOWYzrEN32yeLXjrXHn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 319138,
+    "ru": "Die Toring",
+    "en": "Die Toring",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rw8wqhxssRyHaOgT1YiHmdxH0gD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fj0qSP5dJBSYNIizg9kB8jXVvbe.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 314348,
+    "ru": "バッドチョイス・グッドラブ",
+    "en": "バッドチョイス・グッドラブ",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/f9vxl5ZiPKPIrMpq3KAcCem8hJY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/joNd3RjmCFRZ6MsfcVHEyCQeXCD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 314471,
+    "ru": "আদালত ও একটি মেয়ে",
+    "en": "আদালত ও একটি মেয়ে",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/etRkpV0qclowMlyBmdPd3eLGA7z.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4XgCosi3Q6Ts27J8fYG3hDuUYK9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 242416,
+    "ru": "الحوت",
+    "en": "الحوت",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5mnvgQhtLidPqCgNe3bPrNC5LgO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iTsyawf6sC6ZQ4UXiY8yL5mEFlS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 313878,
+    "ru": "Das gebaute Versprechen",
+    "en": "Das gebaute Versprechen",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ggxEw53z5vjySam4KFVl3geSisi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1Pp77iVV0iyMcZ1iMrEtiNvJDzs.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 312348,
+    "ru": "Dr. Aarambhi",
+    "en": "Dr. Aarambhi",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/v9vWIUF4qrP127Runv2Yq9Akb6Y.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/HjvoYqWIqxcvxREZidaBAvPtoI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 303810,
+    "ru": "护花",
+    "en": "护花",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.31,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pxZWlIbMuE7qMdmFK3aSIMAfLa3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nCwfOZZ4SXmV2NPwxhmu5kXlErm.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 307060,
     "ru": "스파이크 워",
     "en": "스파이크 워",
@@ -8935,268 +9191,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/d4KIIBzpCUPCinq1RbaWYZuxagY.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/n0TKj590kFk8ML81gP6zirSXXvN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1475047,
-    "ru": "John Lennon: The Last Interview",
-    "en": "John Lennon: The Last Interview",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gyGYd85tjdMQhXrTls0vlNGZGJj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iWpopY4G6siTvFmgwi8vwxjaCBp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1496928,
-    "ru": "我々は宇宙人",
-    "en": "我々は宇宙人",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "мультфильм",
-      "фантастика",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nPv646UPrBw0hOz6Q1dC15bDCMI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qwpEXIdiyoRo5kVdVEq22vEQEmt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1698018,
-    "ru": "RHYTHMS",
-    "en": "RHYTHMS",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "драма",
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/t7u4VvODNdoaFHA85UILqKrFopW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qHvQtyXcaFzRJhCTB0XeOpMtYQI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1381564,
-    "ru": "POCA PON ポカポン",
-    "en": "POCA PON ポカポン",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "драма",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zBhqVoNrhFYHf2sJ9C1C6HpdE6k.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rFR9DuMFQxu5KRSWWY8VGRHzxyg.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1632595,
-    "ru": "Моя родина в клеточку",
-    "en": "Моя родина в клеточку",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "документальный",
-      "мультфильм",
-      "драма",
-      "военный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eK5HvFcZLekOPAHTrKs5nwI0Hvr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6J4EkYDF2jkDn5PlX06IhllK3kr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1600763,
-    "ru": "Rongbazar",
-    "en": "Rongbazar",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eSs15T3gd3I6lmJGMSe1RG2Lh5w.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uGR93RizSz8OTXblnJe74Fp4p1o.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1696171,
-    "ru": "Одно на двоих",
-    "en": "Одно на двоих",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Dо время учебно-тренировочного полёта на самолёте произошла техническая неисправность. Лётчики до последнего пытались увести падающую машину от жилых домов. Несмотря на многократные команды диспетчера катапультироваться, экипаж принял решение остаться в кабине, чтобы направить самолёт на единственный свободный клочок земли между зданиями.",
-    "poster": "https://image.tmdb.org/t/p/w342/x7FCAZE2Na3XCdwIEva8KrSdqpI.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1684451,
-    "ru": "Vindication: Search and Rescue",
-    "en": "Vindication: Search and Rescue",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8EgAVmG4gyBQis9CMrunsrZ0cqr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ztb6Rz1BcprIrv9Th23WqSCpL81.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1414544,
-    "ru": "Mi amigo el sol",
-    "en": "Mi amigo el sol",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oEPCUNFvFAy3mVVHLSNCpmTm5gh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4KvDQSVEpKxrvBz9lpZI5Ltps1B.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1572077,
-    "ru": "Wizard of Death: Tinman's Rise",
-    "en": "Wizard of Death: Tinman's Rise",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1ZvkQTnzDjjt2Zi82LgAMmxrZKJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tylQE3g72DUFvJbSurzloYI6DQl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1469511,
-    "ru": "A Year in London",
-    "en": "A Year in London",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kbFIBUKDWM6uELFUox4obiEsshZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4SWYwfZJHpSaphDy5REqTR4UV1C.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 323609,
-    "ru": "L'Affaire Céline Giboire - une contre-enquête de McSkyz",
-    "en": "L'Affaire Céline Giboire - une contre-enquête de McSkyz",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "документальный",
-      "криминал",
-      "Новости"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ibvf49RExx4dC6HdZmX8554ObIw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4fbAiQcmzqGpqXaOMVgmFPt20hf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 309091,
-    "ru": "Inspekce",
-    "en": "Inspekce",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wSM1WFvs2A5Chflp3X4oUfwSTwA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/c6gcIAC5CEvLBZtjacTFEucCGGs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 322997,
-    "ru": "자판귀",
-    "en": "자판귀",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.22,
-    "genres": [
-      "драма",
-      "НФ и Фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lIulHSVa1udKMVwpDUGm1ClXAd0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hAnMxWqyUR1dH84ZJt3DulI0eW9.jpg",
     "source": "tmdb"
   }
 ]

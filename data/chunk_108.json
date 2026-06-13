@@ -1,5 +1,277 @@
 [
   {
+    "id": 396488,
+    "ru": "ट्रैफिक",
+    "en": "ट्रैफिक",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 16,
+    "popularity": 0.52,
+    "genres": [
+      "триллер",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kmufUYUXRapulEBNyn744oejb0A.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jmYYLYrXVfE2seTMIPJcIIOZ4cc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 321214,
+    "ru": "2 temps, 3 mouvements",
+    "en": "2 temps, 3 mouvements",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 16,
+    "popularity": 0.49,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hXOKgjDB3F7FW0BMpvxKfaQLogo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1fxUZg38lVa1FvMboxvArVmJ0VJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 226427,
+    "ru": "Curtain Razor",
+    "en": "Curtain Razor",
+    "year": 1949,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 16,
+    "popularity": 0.31,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vUUM5dfZQ1THwNW4whQCsNWUBV4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oOUFColJB61paFDXyaPO57CjGh6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 254268,
+    "ru": "Klub odložených",
+    "en": "Klub odložených",
+    "year": 1989,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 16,
+    "popularity": 0.3,
+    "genres": [
+      "мультфильм",
+      "фэнтези",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3Mytz8Wur3SEEIr3LOVQxQFvIVT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/w02wKnLxuPAmBZfIcGIuHOQVA35.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "843269",
+    "ru": "EUREKA／交響詩篇エウレカセブン ハイエボリューション",
+    "en": "EUREKA／交響詩篇エウレカセブン ハイエボリューション",
+    "year": 2021,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.6,
+    "votes": 15,
+    "popularity": 2.4,
+    "genres": [
+      "мультфильм",
+      "драма",
+      "приключения",
+      "фантастика",
+      "мелодрама",
+      "боевик",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/orLSgCXqgD461f8u2hrFwoXZGl4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aLLTfRD7EfbE9GVyosknReARNHI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1516208,
+    "ru": "Список для Санты",
+    "en": "She's Making a List",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 15,
+    "popularity": 0.74,
+    "genres": [
+      "мелодрама",
+      "комедия",
+      "телевизионный фильм"
+    ],
+    "overview": "Изабель - инспектор, отвечающий за список послушных и непослушных детей. Наблюдая за Чарли, она влюбляется в её отца и понимает, что мир не такой уж чёрный и белый.",
+    "poster": "https://image.tmdb.org/t/p/w342/rpqNhO6PtTrBsuEh10O3rAVWDg1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9GnoKfvrLBmuAchlDzxAQmz1kzF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1204886,
+    "ru": "백수아파트",
+    "en": "백수아파트",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 15,
+    "popularity": 1.04,
+    "genres": [
+      "комедия",
+      "детектив",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eYdrfkmOb09qUm11QMUCJvaqYmz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6nto1CWW1EkED5jVCew7yj0EoFb.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1168918,
+    "ru": "The Making of Indiana Jones and the Dial of Destiny",
+    "en": "The Making of Indiana Jones and the Dial of Destiny",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 15,
+    "popularity": 1.04,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nJeiS9Zi1GTKD7JXFHyVJ1Edd0H.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zMtkSJfVuiv2I1lKkEnPhBiQagx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1180620,
+    "ru": "നുണക്കുഴി",
+    "en": "നുണക്കുഴി",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 15,
+    "popularity": 0.69,
+    "genres": [
+      "криминал",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yL0HgiyFCdzWljVQxa0DK1GDV3u.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pps3IdtSlYx3wYgANTyFXYL75nH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1210377,
+    "ru": "没有一顿火锅解决不了的事",
+    "en": "没有一顿火锅解决不了的事",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 15,
+    "popularity": 0.55,
+    "genres": [
+      "комедия",
+      "детектив",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3phypLODskon1fw3XSq9InwOx7h.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cO9gHeRR7sfCPJ9WcizBp9sSU9D.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 933833,
+    "ru": "കൂമൻ",
+    "en": "കൂമൻ",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 15,
+    "popularity": 0.43,
+    "genres": [
+      "драма",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nhKiu5zi5rUjPwzEQCaLKfbDHrL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/y0EpsN8VU5SH31Q5PMpk93UjyK9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 523,
+    "ru": "Золотые крылья Пенсаколы",
+    "en": "Pensacola: Wings of Gold",
+    "year": 1997,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.6,
+    "votes": 15,
+    "popularity": 6.39,
+    "genres": [
+      "Боевик и Приключения",
+      "драма"
+    ],
+    "overview": "Сериал рассказывает о командире подразделения специального назначения и его подчиненных морских пехотинцах.",
+    "poster": "https://image.tmdb.org/t/p/w342/5fdZmNKmvGAFRXYFmWtgUipc0hG.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 69720,
+    "ru": "Летний дом",
+    "en": "Summer House",
+    "year": 2017,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.6,
+    "votes": 15,
+    "popularity": 5.08,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5fjU5MPJqP5BOP5Zr6Ud2LL2y97.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4iuWXmTVgY54qOcbenbpiUafqvO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 322520,
+    "ru": "Hal",
+    "en": "Hal",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 15,
+    "popularity": 1.11,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/Ao8WlBeaPrvMvhPC27UX8dTbzfR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qBVVCW6CZFF14se1cTZ3F2TsyET.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 81685,
     "ru": "The Story of Santa Claus",
     "en": "The Story of Santa Claus",
@@ -9709,279 +9981,6 @@
     "overview": "После смерти жены доктор Нэйт Дэниелс возвращается в Южную Африку, где они познакомились. Вместе с дочерьми он направляется в заповедник, которым управляет давний друг семьи Мартин Баттлс. Однако семейная поездка оборачивается опасным приключением, в котором Нэйту придется вступить в противостояние со свирепым львом.",
     "poster": "https://image.tmdb.org/t/p/w342/oMFUpawz3dOi6hXvVgKZhGDrHVy.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/pz7bGOUNJXyPKJ2GcJN6nhwBnCs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "45132",
-    "ru": "Супер",
-    "en": "Super",
-    "year": 2010,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1736,
-    "popularity": 2.01,
-    "genres": [
-      "комедия",
-      "боевик",
-      "драма"
-    ],
-    "overview": "Главный герой Фрэнк — обычный парень. После того как его жену соблазняет драгдилер, бедняга воображает себя супергероем, а отсутствие суперспособностей успешно компенсирует вооружившись гаечным ключом.",
-    "poster": "https://image.tmdb.org/t/p/w342/jZrRMGSajZQehg8mz74A5A00L3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5OGrBmi0fWAE6b1R6uv5EnuWOaL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1551",
-    "ru": "Коматозники",
-    "en": "Flatliners",
-    "year": 1990,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1731,
-    "popularity": 5.01,
-    "genres": [
-      "драма",
-      "фантастика",
-      "ужасы"
-    ],
-    "overview": "Достаточно сделать всего один шаг, чтобы перейти хрупкую грань между жизнью и смертью. Группа студентов-медиков выбрала для своих исследований запретную и опасную область. Будущие врачи решили проникнуть в тайну небытия, которое наступает после остановки сердца. Один за другим студенты погружаются в состояние клинической смерти, отправляясь в непредсказуемое путешествие по ту сторону жизни. Результаты исследований оказались настолько неожиданными, что побывавший ТАМ уже не может продолжать прежний образ жизни, даже если бы и хотел.",
-    "poster": "https://image.tmdb.org/t/p/w342/88GxQQTDMU8SJOAxNKIJYe1WYWE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kI1wLZdD5n28SknQaRIkSoSRfas.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "9035",
-    "ru": "Слизняк",
-    "en": "Slither",
-    "year": 2006,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1722,
-    "popularity": 4.72,
-    "genres": [
-      "ужасы",
-      "фантастика",
-      "комедия"
-    ],
-    "overview": "Грант Грант, житель маленького городка Уилси, обнаруживает в лесу упавший метеорит. Из этого космического тела исторгается некая субстанция, которая тут же поселяется в груди Гранта. После этого с ним начинают происходить странные метаморфозы.\r Он постоянно испытывает сильный голод, а его тело подвергается трансформациям. Когда же Грант осознает свое новое предназначение, он бросается превращать других жителей городка в таких же, как и он, ненасытных зомби. Первым делом Грант хочет проделать это с собственной женой Старлой, однако местный шериф Билл Парди делает все, чтобы защитить ее и весь город от космической чумы…",
-    "poster": "https://image.tmdb.org/t/p/w342/5z6ROKVsawr9RPB2IztkuHBz7gV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kUpD6EnpnQBi3mjYxmiM4xvuh8g.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "568620",
-    "ru": "G.I. Joe: Бросок кобры. Снейк Айз",
-    "en": "Snake Eyes: G.I. Joe Origins",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1721,
-    "popularity": 4.59,
-    "genres": [
-      "боевик",
-      "приключения"
-    ],
-    "overview": "Загадочный и суровый одиночка Снейк Айз спасает наследника древнего японского клана Арашикаге, и в знак признательности клан открывает ему тайные знания пути ниндзя. Но главное: Снейк Айз обретает то, к чему так долго стремился, — дом. Однако, когда становятся известны секреты его прошлого, на кону оказываются его честь, преданность и доверие самых близких людей.",
-    "poster": "https://image.tmdb.org/t/p/w342/5ziYvBUoDB95zeGnTEZxxb92Xi1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2OFg5p9yarI5zZsUWKCRgBgPctj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "252838",
-    "ru": "Шафер напрокат",
-    "en": "The Wedding Ringer",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1693,
-    "popularity": 4.47,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Главный герой женится на девушке своей мечты. Он купил кольца и смокинг, оплатил шикарный ресторан, но для идеальной церемонии не хватает маленькой детали — друзей жениха. Эту «услугу» он находит в специальном агентстве, где напрокат получает целый комплект «друзей»… Пройдет ли теперь подготовка и сама свадьба идеально?",
-    "poster": "https://image.tmdb.org/t/p/w342/1rjskQMrE3QrKry64jLsz8GjEbr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aan0KdhVgJfAwUJ3n2HDFOWcxZ2.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "777443",
-    "ru": "Электрический штат",
-    "en": "The Electric State",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1661,
-    "popularity": 6.15,
-    "genres": [
-      "боевик",
-      "приключения",
-      "фантастика"
-    ],
-    "overview": "Осиротевшая девушка отправляется на поиски младшего брата вместе с желтым игрушечным роботом и причудливым бродягой.",
-    "poster": "https://image.tmdb.org/t/p/w342/yoxaghGvZ0L0zJi2UdgJfb8zqTr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2n7lYEeIbucsEQCswRcVB6ZYmMP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "6538",
-    "ru": "Война Чарли Уилсона",
-    "en": "Charlie Wilson's War",
-    "year": 2007,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1643,
-    "popularity": 2.3,
-    "genres": [
-      "комедия",
-      "драма",
-      "история"
-    ],
-    "overview": "Драма, развёрнутая вокруг жуликоватого конгрессмена от штата Техас, чья страсть к выпивке и девушкам почти загубила его карьеру. Но он умудряется переживать скандал за скандалом, более того, он становится свидетелем крупнейшей и самой успешной операции ЦРУ в истории, его попытки финансировать повстанцев в Афганистане приводят к не вполне ожидаемым последствиям.",
-    "poster": "https://image.tmdb.org/t/p/w342/c7qFNJ8TyZso40YWCDE2KZEXCDQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jIphrlwHyjq5WC96hbDmAK3JQdl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "11001",
-    "ru": "Бриллиантовый полицейский",
-    "en": "Blue Streak",
-    "year": 1999,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1635,
-    "popularity": 4.5,
-    "genres": [
-      "боевик",
-      "комедия",
-      "криминал"
-    ],
-    "overview": "Вор должен сидеть в тюрьме, а не работать в полиции. Создатели этого комедийного боевика с этим не согласны. Непревзойденный эксперт по сейфам и хранящимся в них драгоценностям Майлс Логан выходит из тюрьмы и сразу направляется … в полицию. Незадолго перед арестом он спрятал бесценный бриллиант в строящемся здании, которое вскоре превратилось в полицейский участок.  Чтобы проникнуть на вражескую территорию и вернуть украденное, Майлс становится служителем закона и, как назло, ему приходится участвовать в настоящих расследованиях. За считанные дни неисправимый рецидивист становится руководителем целого подразделения! Ведь никто лучше вора не знает всех тонкостей криминального мира. Однако все это время преступное сообщество внимательно следило за карьерой бриллиантового полицейского. И приняло меры.",
-    "poster": "https://image.tmdb.org/t/p/w342/xv80JZrJicYlp5Vt37nX7E0Zyn0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xDKuTzBVpJPqFc39H4hctrle87T.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "14254",
-    "ru": "Незваные",
-    "en": "The Uninvited",
-    "year": 2009,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1625,
-    "popularity": 2.38,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "Анна, после смерти матери, попадает в клинику. После лечения она возвращается домой и узнает, что отец встречается с Рейчел, медсестрой, которая когда-то ухаживала за ее умирающей матерью. Смятение Анны сменяется ужасом, когда ее посещает призрак матери и сообщает о злобных намерениях медсестры. Вместе со своей сестрой она начинает расследовать странные обстоятельства гибели их матери, и вскоре их противостояние с незваной гостьей достигает апогея…",
-    "poster": "https://image.tmdb.org/t/p/w342/qqNdf8PE3yLJGIwmITzzFsurjmf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yGsKygpcJl7WXn2UfGFoi1Mdrze.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "535",
-    "ru": "Танец-вспышка",
-    "en": "Flashdance",
-    "year": 1983,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1605,
-    "popularity": 3.93,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Вечерами Алекс танцует в ночном клубе сексуальные танцы, а днем работает на заводе и ходит на занятия, чтобы осуществить свою детскую мечту и стать балериной. У нее есть прекрасная, добрая и понимающая покровительница, которая когда-то была известной и необыкновенной балериной, умением танцевать которой, восхищались, а ее талант боготворили. Неуверенная в себе кроткая молодая и мечтающая о танцах девушка идет к своей мечте, но, боясь провалиться, постоянно бежит от просмотров. Но вдруг ее жизнь превращается в необыкновенную сказку, за Алекс начинает ухаживать богатый и красивый кавалер, а ее мечта о балетной школе почти скоро сбудется. История похожа на сказку о Золушке, которая по воле судьбы стала принцессой.",
-    "poster": "https://image.tmdb.org/t/p/w342/80Uzfh4tSbXuHrBJdcy6SiX18M5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/k6BDdDhWeTlj0LVUL5eADZtR0cz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "173185",
-    "ru": "Притворись моим парнем",
-    "en": "20 Ans d'écart",
-    "year": 2013,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1591,
-    "popularity": 6.49,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "У редактора модного глянцевого журнала Алисы Лантенс безупречный вкус, отличное резюме и репутация «железной леди». Но однажды начальство намекает, что возглавлять молодежное издание должен кто-то более смелый и провокативный. Решение приходит неожиданно: по нелепой случайности по миру шоу-бизнеса разносится слух о ее романе с 18-летним студентом. Оказывается, что подмоченная репутация — именно то, что нужно для продвижения по карьерной лестнице! Но куда деваться от парня, который и вправду влюбился?",
-    "poster": "https://image.tmdb.org/t/p/w342/9l7yH90H8YZDloLi4EnQX7GFM6W.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uuAbE6pP6VF7LxeOTokMUeDPyPI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "11596",
-    "ru": "Кошмар на улице Вязов 7: Новый кошмар",
-    "en": "Wes Craven's New Nightmare",
-    "year": 1994,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1591,
-    "popularity": 3.46,
-    "genres": [
-      "ужасы",
-      "детектив",
-      "фэнтези"
-    ],
-    "overview": "Героиня предыдущей серии, одержавшая победу над Фредди, выросла и вышла замуж за постановщика спецэффектов, разработавшего знаменитую ручку с маникюром. Снимается новый фильм про Крюгера, так как многочисленные поклонники требуют оживления своего любимчика.И снова начинаются кошмары, преследующие теперь сына нашей героини. В этом фильме Фредди существует на самом деле, а в финальных титрах для смеха написано, что роль Фредди Крюгера играл сам Фредди Крюгер.",
-    "poster": "https://image.tmdb.org/t/p/w342/bWWxdgUcR4USqym7usIXkvE8wNJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qKF9GwtJbi2rob8kZBmGcQGAaMo.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "14191",
-    "ru": "Аквамарин",
-    "en": "Aquamarine",
-    "year": 2006,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1582,
-    "popularity": 3.33,
-    "genres": [
-      "фэнтези",
-      "мелодрама",
-      "семейный",
-      "комедия"
-    ],
-    "overview": "Лето близится к концу, и перед закадычными подругами Клер и Хейли встает серьезная проблема: ровно через пять дней семья Хейли перебирается на другой конец света! Помочь девушкам может только чудо, и оно является в виде прекрасной русалки Аквамарин, которую выносит на берег летним штормом.  Милая, но совершенно несведущая в романтических делах, она предлагает девушкам исполнить одно их желание, если те помогут ей обрести парня ее мечты. Подруги пытаются завлечь местного спасателя, но результат оказывается весьма далеким от ожидаемого… и становится ясно, что иногда твои желания — это совсем не то, чего ты в действительности хочешь.",
-    "poster": "https://image.tmdb.org/t/p/w342/8mioUyXqn60cwSoLrRCaO5ZAsCV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dysXmAJJNttAXqVWsKJis9MOf17.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "73567",
-    "ru": "Киллер Джо",
-    "en": "Killer Joe",
-    "year": 2012,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 1578,
-    "popularity": 2.23,
-    "genres": [
-      "криминал",
-      "триллер",
-      "драма"
-    ],
-    "overview": "Фильм рассказывает о брате и сестре, которые замышляют убийство матери, чтобы получить деньги по страховке и по этому случаю они нанимают «Киллера Джо» Купера — копа и наемного убийцу.",
-    "poster": "https://image.tmdb.org/t/p/w342/sNSdMg44RwoXGiyHzZ5fH4Li6xf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/20LDgpq7CzqRDEBa4WBlbon2J8.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,268 @@
 [
   {
+    "id": 766020,
+    "ru": "Ivy & Mistletoe",
+    "en": "Ivy & Mistletoe",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 1.35,
+    "genres": [
+      "мелодрама",
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/snGpv2u5baj793ppzKRbzmUt3CC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6o08SxkAE130WvoKySi0IfF0dSp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1291436,
+    "ru": "Huwad",
+    "en": "Huwad",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 1.34,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/90x37OOpcn4S0QAHCPOwHa6pFxi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vDkuC6RTzYPuQ8a3LLptbFED0IB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 293940,
+    "ru": "Lisbon Noir",
+    "en": "Lisbon Noir",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 1.23,
+    "genres": [
+      "драма",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/t8pJgw27hci7eSQMsVwCiPeI7Lg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/a5nhICZWrFXOXl18v47mDv9cUto.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1547844,
+    "ru": "Tuhan, Benarkah Kau Mendengarku?",
+    "en": "Tuhan, Benarkah Kau Mendengarku?",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 1.09,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/i2oVUnQ5cQweC9tyTRtSRaNVuo1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5z2YL63p9WTWetGiEPF1B5VLxCX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1436034,
+    "ru": "¿Cuál es su emergencia?",
+    "en": "¿Cuál es su emergencia?",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 0.91,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bOMaFUfeuKwZN0EAFTqwZgpEhaA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6z2Vt7yR7VyDdneLAeJbtPQwuHr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 470442,
+    "ru": "തേർഡ് വേൾഡ് ബോയ്സ്",
+    "en": "തേർഡ് വേൾഡ് ബോയ്സ്",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 0.83,
+    "genres": [
+      "комедия",
+      "приключения"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/sazqOao9eOJwtLSZgMZ7dcnuaaP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aPJQdKq42Rw0SxmjyjIRsHy0GMz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1174023,
+    "ru": "Rote Sterne überm Feld",
+    "en": "Rote Sterne überm Feld",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 0.81,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/d9biUvRR2XgYFeIhBR8TeDYFHTU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uYtvHArB0oRDVtdatCRMxg1xEzE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 860703,
+    "ru": "Antonio García-Trevijano: Transición e historia política de España en primera persona",
+    "en": "Antonio García-Trevijano: Transición e historia política de España en primera persona",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 0.81,
+    "genres": [
+      "документальный",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4Q5HvaUlnwAOHRTim52saZkWFBE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/p2WD7yqDrp8InwWDu8eCM2lrINJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 739781,
+    "ru": "이웃집 여자 스토킹",
+    "en": "이웃집 여자 스토킹",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 0.81,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/A6Y7g46hgcLmp1dMSqukVbCHs1N.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lekL2J6JNm5BT8eNgepl54TCpJx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1622764,
+    "ru": "Broad Trip",
+    "en": "Broad Trip",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 0.73,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8gGtvGzwyQIZeHECopX9OeLPjYH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cgjhUMqLziFU750HybRoFkEGTfV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1030025,
+    "ru": "და მერე გათენდა",
+    "en": "და მერე გათენდა",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 0.73,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mdMacoBbjJyUrvq25xcFP4F5g8m.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kw8ZKdeDwBQBBj8blfc03QmlVa5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 569903,
+    "ru": "红楼梦之金玉良缘",
+    "en": "红楼梦之金玉良缘",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 0.68,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2T7XlJIsBgAUTSqtgWj3IyGhkF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/91w7skNmRruBYMzWxM1RbrLNoIx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1091138,
+    "ru": "Polder",
+    "en": "Polder",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 0.68,
+    "genres": [
+      "триллер",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/voLJE1one23PkVsuId4k2AIcLCH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zqNCKnzOTRTFME3XlWJ0YvRHQcS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1426032,
+    "ru": "Убийство из будущего",
+    "en": "How to Solve Your Own Murder",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 0.65,
+    "genres": [
+      "фантастика",
+      "драма"
+    ],
+    "overview": "Кейт, менеджер фармацевтической компании, оказывается в альтернативной версии своей жизни. Чтобы вернуться домой, она должна пройти через ряд параллельных реальностей и столкнуться с иной версией себя.",
+    "poster": "https://image.tmdb.org/t/p/w342/gues2Wq2Txvk6hdD080nXcEm0ru.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
     "id": 1178020,
     "ru": "Затерянная гробница: Город проклятого песка",
     "en": "介子鬼城",
@@ -9000,269 +9263,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/6K2Rip5ZipqdKavmoxreBrtE8fM.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/xPbOyocSKgvqyZfVNSYv8SQy0Pi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 582932,
-    "ru": "カーニバル・ファンタズム ひびちかスペシャル",
-    "en": "カーニバル・ファンタズム ひびちかスペシャル",
-    "year": 2012,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.37,
-    "genres": [
-      "комедия",
-      "мультфильм",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vh47zCpzDAWIWJbpzvXloHNAOKC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/u03Weg1BKKTH2piNEAMU4xS4i6K.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 457404,
-    "ru": "아무 것도 사라지지 않는다",
-    "en": "아무 것도 사라지지 않는다",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.36,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/cFpYHZSZf0UHc3F8C4a0xgjtng1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/i1UsHiOVg4zcvwpn1KAfvW6sLvn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 911530,
-    "ru": "Чудеса в Гусляре",
-    "en": "Чудеса в Гусляре",
-    "year": 1989,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.32,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "Экранизация рассказа «Паровоз для царя». Иронические наблюдения на тему того, что человек очень часто пользуется предметами, строение которых ему абсолютно непонятно. Пришелец просит Корнелия Удалова помоч ему починить космический корабль, но житель Великого Гусляра в этом вопросе совершенно не компетентен.",
-    "poster": "https://image.tmdb.org/t/p/w342/VtRvDH2zACFpWWKlJMC0LWFTP5.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1274260,
-    "ru": "宇宙戦艦ヤマト2199 第三章「果てしなき航海」",
-    "en": "宇宙戦艦ヤマト2199 第三章「果てしなき航海」",
-    "year": 2012,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.31,
-    "genres": [
-      "мультфильм",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xKuko0Bq1fiHhfSRVmVHyT99wts.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xPbOyocSKgvqyZfVNSYv8SQy0Pi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1576918,
-    "ru": "Roughnecks: The Starship Troopers Chronicles - The Pluto Campaign",
-    "en": "Roughnecks: The Starship Troopers Chronicles - The Pluto Campaign",
-    "year": 2001,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.3,
-    "genres": [
-      "фантастика",
-      "мультфильм",
-      "боевик",
-      "военный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mKuZkwytfmdA8zYR1lSYqQK099z.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4QTP56yTyB2fcmuMM0Tllv4WUOk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 418578,
-    "ru": "齐天大性II大破盘丝洞",
-    "en": "齐天大性II大破盘丝洞",
-    "year": 2005,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 5.16,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zdWZGbFFI6pHk3A1C4XnwD9lyiJ.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 198639,
-    "ru": "Lo bueno de llorar",
-    "en": "Lo bueno de llorar",
-    "year": 2006,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 2.91,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/72G2LStsNXQaw8Fzr7FiTdQ3ATG.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 279882,
-    "ru": "Raasi",
-    "en": "Raasi",
-    "year": 1997,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 2.83,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/njYx5AFNR0XARSx0hUA0q0FjIOY.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1355193,
-    "ru": "동생의 애인들",
-    "en": "동생의 애인들",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 2.17,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rTh4sQvFatvz0blGJh17bK0L8JC.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 996224,
-    "ru": "자매의교환섹스",
-    "en": "자매의교환섹스",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 1.99,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/baD6vIJH0U7lonG9cUTe6oV9oY5.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 862772,
-    "ru": "맛있는 섹스 그리고 여군",
-    "en": "맛있는 섹스 그리고 여군",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 1.51,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8OyIEI31EqcY4k1hWIDjWfxvVT3.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 320144,
-    "ru": "Children",
-    "en": "Children",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 1.1,
-    "genres": [
-      "триллер",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hXeQipB8OfFTbWOFn7K4hKxS7Ib.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 387739,
-    "ru": "LDR",
-    "en": "LDR",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.98,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/okHdGvF7eQLHOddO3z4Tg2Xy9Eb.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 333954,
-    "ru": "Бави Сток [OVA-1]",
-    "en": "バビ・ストック",
-    "year": 1985,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.96,
-    "genres": [
-      "фэнтези",
-      "мультфильм",
-      "фантастика",
-      "приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gBABF0byWggJ4De1nB9bfeSSUTk.jpg",
-    "backdrop": "",
     "source": "tmdb"
   }
 ]

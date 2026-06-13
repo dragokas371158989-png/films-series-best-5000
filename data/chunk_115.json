@@ -1,5 +1,277 @@
 [
   {
+    "id": 127617,
+    "ru": "Elize Matsunaga: Era uma Vez um Crime",
+    "en": "Elize Matsunaga: Era uma Vez um Crime",
+    "year": 2021,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.4,
+    "votes": 53,
+    "popularity": 0.57,
+    "genres": [
+      "документальный",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nTRqmcds3dn3Bbu5Sts07ouyF0k.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2eSo388uW5wRNsWhjl1cyrwaufP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 79412,
+    "ru": "Пуленепробиваемые",
+    "en": "Bulletproof",
+    "year": 2018,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.4,
+    "votes": 53,
+    "popularity": 3.88,
+    "genres": [
+      "Боевик и Приключения",
+      "криминал"
+    ],
+    "overview": "История о двух полицейских, Бишопе и Пайке борющихся с преступностью в лондонском Ист-Энде. Потрясающая авантюрная атмосфера и черный юмор создают из сериала про вполне реальных копов настоящую пародию на целый жанр криминальных сериалов.",
+    "poster": "https://image.tmdb.org/t/p/w342/yiKT45qwaiXof4T6EG990qjk2wO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dLs1fcqgExAPLcZGz0650DNBiUD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 460135,
+    "ru": "LEGO DC Девчонки-супергерои: Утечка мозгов",
+    "en": "LEGO DC Super Hero Girls: Brain Drain",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 53,
+    "popularity": 1.35,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "Планета снова в опасности. Появился новый сверхзлодей, способный управлять сознанием окружающих. И Чудо-Женщина, Супергёрл и Бэтгёрл испытали это на себе. Им привиделось, что Катана и Шмель украли бесценные бриллианты. Трио погналось за ними. Но внезапно девочки приходят в себя и понимают, что стали жертвами массового гипноза. Однако двух «похитительниц» нигде нет. Вполне вероятно, что кое-что из галлюцинаций оказалось правдой. У троицы есть сутки, чтобы отыскать пропавших и выяснить, что произошло на самом деле. Между тем, помутнение разума происходит еще несколько раз. Супергероини решают окончательно выяснить, кто стоит за этими странными событиями. Расследование приводит их к некому Эклипсо, за которым девочки начинают погоню. Зло должно быть обязательно наказано.",
+    "poster": "https://image.tmdb.org/t/p/w342/niLX2txdI5GlVowJlnb5Hr26QpK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4iKsPyyKyoeK30y25qMzR1X7XnJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 314946,
+    "ru": "Три богатыря: Ход конем",
+    "en": "Три богатыря: Ход конем",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 53,
+    "popularity": 0.35,
+    "genres": [
+      "приключения",
+      "мультфильм",
+      "комедия",
+      "фэнтези"
+    ],
+    "overview": "Придворный конь Гай Юлий Цезарь на свою беду подслушивает разговор бояр и узнаёт о заговоре против князя. Что же делать? Защитить-то князя некому! Богатыри далеко — ловят разбойника Потаню, Горыныч в отпуске, войско на учениях... Но если плохие парни собираются захватить мир, то кому-то же надо его спасти? Кто же он, настоящий герой, который придёт на помощь? Конечно, конь Юлий! Настоящий стратег и «великий комбинатор». Он непременно всех спасёт, а если не спасёт, то хотя бы постарается. Главное, чтобы операция по спасению мира не обернулась полной катастрофой.",
+    "poster": "https://image.tmdb.org/t/p/w342/pW7OIlDn4sWTg4h5pH9Znz6Fs2V.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ygphgOzTOQtQcBPRdp9ax3BBWsq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1261616,
+    "ru": "Ангелы и Ко",
+    "en": "Anges & Cie",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 52,
+    "popularity": 0.78,
+    "genres": [
+      "комедия",
+      "фэнтези"
+    ],
+    "overview": "Невидимые ангелы-хранители должны помешать запретной любви Поля и Леа. Ангелы Рафаэль и Габриэль вынуждены объединить усилия — в случае провала она лишится повышения, а он будет навсегда изгнан на Землю.",
+    "poster": "https://image.tmdb.org/t/p/w342/d3AO6twCId5iYwaU4FM4cSpZaVp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pVVyTL0O3VlRO14quS516Aqg4Jr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 923192,
+    "ru": "Слишком круто, чтобы убивать",
+    "en": "这个杀手不太冷静",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 52,
+    "popularity": 0.62,
+    "genres": [
+      "боевик",
+      "комедия"
+    ],
+    "overview": "Вэй Сян играет актера-любителя, которого приглашают сыграть главную роль в фильме, и в конечном итоге он оказывается втянутым в опасную ситуацию...",
+    "poster": "https://image.tmdb.org/t/p/w342/6sNoEgjNkfAOlqZ5XsPb9jwdepD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/i6xBxo7l0b0IJd8OP4t6lN95Wo7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 987919,
+    "ru": "Рождественская мистерия",
+    "en": "A Christmas Mystery",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 52,
+    "popularity": 0.54,
+    "genres": [
+      "семейный",
+      "комедия",
+      "драма",
+      "детектив"
+    ],
+    "overview": "Сто лет назад волшебные колокольчики Санты принесли спокойствие и процветание маленькому городку. Теперь, в канун Рождества, колокольчики исчезли, и группа смелых детей должна их найти, чтобы вернуть рождественскую магию в город.",
+    "poster": "https://image.tmdb.org/t/p/w342/7ROhQeFIRCDadpIe4C7fVi5mV1Q.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fLDo1GXZWuBpMRkrzITYzBufath.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 923150,
+    "ru": "燃冬",
+    "en": "燃冬",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 52,
+    "popularity": 1.32,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4IL67atIV6zC6h2G1FVSVYinUXU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ptzhZVIQ9wKV2kdAJB9ts7CIlLs.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 47224,
+    "ru": "Джекил и Хайд",
+    "en": "Jekyll and Hyde",
+    "year": 2015,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.4,
+    "votes": 52,
+    "popularity": 1.88,
+    "genres": [
+      "драма",
+      "Боевик и Приключения",
+      "НФ и Фэнтези"
+    ],
+    "overview": "Действие разворачивается в Лондоне 1930-х годов, где Роберт Джекил, внук Генри Джекила, воспитанный на Цейлоне приёмными родителями, пытается узнать правду о своей настоящей семье и понять причину своих странных «приступов». По пятам за Робертом следует «Ми-И», британская спецслужба, занимающаяся паранормальными явлениями, а также агенты некоего сообщества, называемого «Тенебри».",
+    "poster": "https://image.tmdb.org/t/p/w342/A4kZLLnbxgwfVApMGd84H3R1a2E.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lzULQvCjnGHJT3dK9Ymxl5GOJ6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 288587,
+    "ru": "Vie Sauvage",
+    "en": "Vie Sauvage",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 52,
+    "popularity": 1.43,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7EwY1JFY6j120Wg66cxG7CtKPu.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hJzE5xbxapBjlB3F4SZHNUkNsFL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 66080,
+    "ru": "Чёрный хром",
+    "en": "クロムクロ",
+    "year": 2016,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.4,
+    "votes": 51,
+    "popularity": 6.96,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "драма",
+      "детектив",
+      "Аниме"
+    ],
+    "overview": "Во время строительства плотины Куробе обнаруживается какой-то древний артефакт, и для его изучения создаётся специальный исследовательский институт при ООН. Интеллектуалы со всего мира съезжаются в Японию, их дети ходят в специальную международную школу, а человечество совершает неслабый технологический рывок и создаёт гигантских человекоподобных роботов. И тут под воздействием артефакта от векового сна пробуждается самурай по имени Кенноске Токисада Оума, рассказывающий всем про каких-то злобных огров, которые хотят сожрать всех людей.",
+    "poster": "https://image.tmdb.org/t/p/w342/q3Mvd8IgjfvyuEUtalEkY91wzUb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9ByWfLIczxMdIprIFRzMaD3UQxa.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "36072",
+    "ru": "Голова-гора",
+    "en": "頭山",
+    "year": 2002,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.4,
+    "votes": 51,
+    "popularity": 0.27,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "фэнтези",
+      "Аниме"
+    ],
+    "overview": "Абсурдная анимационная комедия от японского мастера короткометражек. Герой фильма «Голова-гора» — очень жадный житель Токио — не желает расставаться ни с чем из нажитого по доброй воле. Как-то раз вместо того чтобы выбросить вишневые косточки в мусорное ведро, он проглатывает их. Одна из вишен пускает побеги у скупердяя на голове. Дерево растет, начиная причинять хозяину неудобства. В период цветения вишни люди приходят к герою, чтобы отдохнуть в тени раскидистых крон на его голове.",
+    "poster": "https://image.tmdb.org/t/p/w342/2XsbnsB3lZFhSAE8mS9EoGviief.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tapUeZMlUUDlxy6hOcnDHF282eX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_97085",
+    "ru": "Ван дер Валк",
+    "en": "Detective Van der Valk",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.4,
+    "votes": 51,
+    "popularity": 6.86,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Криминальный Амстердам, детектив, известный по всему миру, и загадки, которые под силу разгадать только ему.",
+    "poster": "https://image.tmdb.org/t/p/w342/hXhLu31ro2O8C5vRBzLjFP4yACO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xnT4XnJhMFExcV8dUNiIwIDF3OD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1318917",
+    "ru": "Оставь это ветру",
+    "en": "Rüzgara Bırak",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 51,
+    "popularity": 3.58,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "Эге Языджи и Аслы Мансой — наследники группы компаний Yazman, которые последний раз виделись, когда им было по пять лет. Эге закончил университет заграницей, но вернувшись в Турцию, отказался от поста в компании отца, выбрав простую жизнь сёрфера на пляже в Чешме. Аслы, обладающая острым умом и железной волей, заняла пост генерального директора. Однако финансовый кризис нанес большой урон компании, и единственный способ удержать ее на плаву — построить огромный отель в бухте, где живет Эге. Аслы уверена, что сможет получить его подпись на разрешении строительства в течение нескольких часов, а Эге надеется за один день избавиться от общества этой девушки.",
+    "poster": "https://image.tmdb.org/t/p/w342/uQsLUdzOEsyBfSZPK1BLarnzkIm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qAJqYEz0utqsaPsMQvgjbUatUwv.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 722798,
     "ru": "Дверь в лето",
     "en": "夏への扉 ―キミのいる未来へ―",
@@ -9421,276 +9693,6 @@
     "overview": "С давних пор в уютном живописном и скрытом от посторонних глаз месте раскинулось Лягушачье Королевство — страна, в которой лягушки живут в мире и согласии, и каждый их день наполнен радостью и весельем. Однако злодеи вознамерились выкрасть магический амулет — Хрустальную лягушку, без которого жители королевства не смогут пережить зиму. Чтобы помешать им, король собирает отряд из отчаянных парней, в который тайно записывается и принцесса.",
     "poster": "https://image.tmdb.org/t/p/w342/z1hzRjHtQLJPbVfzJlXkQu5wg6L.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/fd6oTdTLCHNsVrUic1vyoE3jE4B.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 223017,
-    "ru": "Как это будет по-гречески",
-    "en": "It's Greek to Me-ow!",
-    "year": 1961,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.44,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Этот мультфильм открывается с того, что диктор представляет древнегреческий Акрополь, описывая его богатство и прекрасную архитектуру. Том изображен как один из этих жителей, уличный кот, который живет в тени Афин в поисках еды.",
-    "poster": "https://image.tmdb.org/t/p/w342/BHm4bJyDhUjZVmnsQCVZYnlCq1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uEPtUUjvqageY17AvDSm9SzGChj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 270313,
-    "ru": "平成ライダー対昭和ライダー 仮面ライダー大戦 feat.スーパー戦隊",
-    "en": "平成ライダー対昭和ライダー 仮面ライダー大戦 feat.スーパー戦隊",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 1.33,
-    "genres": [
-      "боевик",
-      "приключения",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xHKtNtg6pPj3FyIv2rt9Ya9ae.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/agg9Idb7rpJJG6OmdYs3ju9PFrd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 252981,
-    "ru": "Невеста напрокат",
-    "en": "Bride for Rent",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.59,
-    "genres": [
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lYekmCbEb7srZGXRr9c8V1Vi8so.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6ucJi8YMLockqLk1W51KbHJYMhI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 340829,
-    "ru": "பாயும் புலி",
-    "en": "பாயும் புலி",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.58,
-    "genres": [
-      "боевик",
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bFZ1hFL8rHmq54VEHcqTWHMaSxe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oCLDl9mCgIds3zR3oMBOiNk2W05.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 307125,
-    "ru": "Pass the Light",
-    "en": "Pass the Light",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.46,
-    "genres": [
-      "семейный",
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/z7Iiy7YwgRQLgvxUzWLO4UvNws6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vlUOc5SJl56YF1TvQxJjmUD0CJL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 482262,
-    "ru": "Hamilton: One Shot to Broadway",
-    "en": "Hamilton: One Shot to Broadway",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.43,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jONGm2W0mMCBMG4v8IcFjY6qs4u.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fcQNEt9uLS6O2B5SaOZOXcgmuzs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 234706,
-    "ru": "Lickety-Splat",
-    "en": "Lickety-Splat",
-    "year": 1961,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.33,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9NBOfRYiD5gtncs6LCkwCORiBNN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zhXOYCXCqzOA8cwu8Pabm8oP1EF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 156606,
-    "ru": "Хомяк и Гретель",
-    "en": "Hamster & Gretel",
-    "year": 2022,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.4,
-    "votes": 15,
-    "popularity": 8.67,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Боевик и Приключения",
-      "Аниме"
-    ],
-    "overview": "Комедийный анимационный сериал про отважную девочку Гретель, ее заботливого старшего брата Кевина и любимого хомяка по кличке Хомяк. После нашествия космических пришельцев Гретель и Кевин должны были получить сверхспособности, но силы, предназначенные Кевину, попадают в хомяка. После этого Гретель и Хомяк образуют лихой супергеройский дуэт и спасают город, а Кевин пытается понять, как с ними работать.",
-    "poster": "https://image.tmdb.org/t/p/w342/7Mm4oQbsCbHbop7YQ9t0arXi9Ov.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6vl0ZRYnf7gICpc80eUpRdGPDOL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "55296",
-    "ru": "Принцесса кукол",
-    "en": "からくりの君",
-    "year": 2000,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.4,
-    "votes": 15,
-    "popularity": 0.98,
-    "genres": [
-      "мультфильм",
-      "боевик",
-      "драма",
-      "Аниме"
-    ],
-    "overview": "Давным-давно, во времена жестоких феодальных войн, Хисасиги Фумиватари прославился своим талантом в кукольном деле: ему удалось создать марионеток, превосходивших человека в силе и действовавших по своей воле. Возжелавший заполучить эти творения, чтобы расширить с их помощью свои владения, Садаёси Каримата убивает Хисасиги. И теперь дочь мастера-кукольника Рангику ищет мщения.",
-    "poster": "https://image.tmdb.org/t/p/w342/eGgWRqaTxHVfhU9NlVgCnjYSl7y.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/c2ifnArW9E3Y96pH7E3a20SWU3Q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1418286,
-    "ru": "Принцесса поневоле",
-    "en": "The Royal We",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 15,
-    "popularity": 0.88,
-    "genres": [
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "Когда ее старшая сестра сбегает с простолюдином, принцессе Беа, всю жизнь державшейся в стороне от королевских обязанностей, приходится взять на себя ответственность и заключить договоренный брак с принцем небольшого королевства.",
-    "poster": "https://image.tmdb.org/t/p/w342/rNdqi9oYpynE7pDMF9vysCedFzg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gjPTiSzfbAsMkDCxkTgVuzjIpBX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 541481,
-    "ru": "С — счастье",
-    "en": "H Is for Happiness",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 15,
-    "popularity": 0.42,
-    "genres": [
-      "семейный"
-    ],
-    "overview": "Двенадцатилетняя рыжая Кэндис — девочка с безграничным оптимизмом и уникальным взглядом на мир. В школе она знакомится со странным новеньким, заявляющим, что он пришел из другого измерения. Эта встреча вдохновляет ее на поиск счастья, которого так не хватает ее семье.",
-    "poster": "https://image.tmdb.org/t/p/w342/cSwp3V00MJQQKJBHhx77kwK5O5v.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vlm6lvP2AcSmm8vIblHClN75KBQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 752435,
-    "ru": "Clearwater",
-    "en": "Clearwater",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 15,
-    "popularity": 0.87,
-    "genres": [
-      "фантастика",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8plWK3VJdv6PNvXU8LYAdheYR40.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/h3TV8Pcr5Wcod3VU2HKM0hDYPfn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 783111,
-    "ru": "행복의 나라",
-    "en": "행복의 나라",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 15,
-    "popularity": 0.69,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zutoot1xMPUlTWuTgbvD9JenIfn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tMv8tIXqAZ2CQkzItxlyeAvgxXH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 901059,
-    "ru": "City of Dreams",
-    "en": "City of Dreams",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 15,
-    "popularity": 0.63,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lizYHlyDZIEcziPMBuwvd7ubii6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zL8BUUF5zc0BQAMmCGY01wEzxvL.jpg",
     "source": "tmdb"
   }
 ]

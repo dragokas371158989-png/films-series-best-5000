@@ -1,5 +1,277 @@
 [
   {
+    "id": 1678844,
+    "ru": "Le Bus : Les Bleus en grève",
+    "en": "Le Bus : Les Bleus en grève",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 1.17,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xy5oC3dWw2OuSUHXIBPm6XQLk8n.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dTEbfFiaYupyhgFg9ZC4NpH5p8G.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 598439,
+    "ru": "Den største forbrytelsen",
+    "en": "Den største forbrytelsen",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 1.02,
+    "genres": [
+      "драма",
+      "история",
+      "военный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aj64NcGhjlFTO7T4XSz7bA8i7yB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dBwi6eHcxmWQfOMSCUMgq86HJTB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 227248,
+    "ru": "Más Allá de Tí",
+    "en": "Más Allá de Tí",
+    "year": 2023,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 0.74,
+    "genres": [
+      "драма",
+      "криминал",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/lAaCTmYNwJDRD3DRUlXGe70grs1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uuib9FNuXAFt9QClGiqhRVWDYoA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 672701,
+    "ru": "Apprendre à t'aimer",
+    "en": "Apprendre à t'aimer",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 0.62,
+    "genres": [
+      "драма",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qJlaQRaHM7beO3xLEWS42L43182.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kjOdKpgYbdxW21M0dnYJ7k6ByIc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 87372,
+    "ru": "Сильвия Пиналь... перед тобой",
+    "en": "Silvia Pinal... frente a tí",
+    "year": 2019,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 0.64,
+    "genres": [
+      "драма",
+      "документальный",
+      "Мыльная опера"
+    ],
+    "overview": "Сериал рассказывает о жизни знаменитой мексиканской актрисы Сильвии Пиналь.",
+    "poster": "https://image.tmdb.org/t/p/w342/yWl9k3oUbwcCZA6NU6uBsVXpBMz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2JX5Y4Htnm9NgIMz021ebn3Aip.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 48740,
+    "ru": "Падения койота",
+    "en": "Coyote Falls",
+    "year": 2010,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 0.45,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "Койот привязал шнур банджи и создал корм ловушку под автодорожным мостом. Это \"надежный\" план, который принимает во внимание все ... кроме встречного движения.",
+    "poster": "https://image.tmdb.org/t/p/w342/76rz994icSRNHBZuAHmsRwVROsy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jrk9jqFw3eSebTgm9ldKS71rorS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 425553,
+    "ru": "Побег в будущее",
+    "en": "Flykten till framtiden",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 0.44,
+    "genres": [
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "1973 год. Сванте — обычный парень из Стокгольма, который работает продавцом в магазине грампластинок. Жизнь скучна и однообразна. Но всё радикально меняется, когда однажды вечером на местной станции метро он обнаруживает портал, который переносит его прямиком в 2016 год.",
+    "poster": "https://image.tmdb.org/t/p/w342/chcWPwYgWDnUcoNWXmnlxr5vWzD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xYJiM4TDuahYgFUSQDRVbl2lskm.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 87196,
+    "ru": "Головокружительная Золушка",
+    "en": "Swing Shift Cinderella",
+    "year": 1945,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 0.37,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "Осовремененная история Золушки с участием Волка из сказки о Красной Шапочке. Золушка готовится на конкурс красоты и ухаживания Волка ей сейчас ни к чему, а вот ее Крестной Фее Волк пришелся по душе…",
+    "poster": "https://image.tmdb.org/t/p/w342/6SVJzUs3njFbKO8q6d36iyKZ8Fa.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rkry2mxRTwtMVrRqexcwDb2CpWX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 95632,
+    "ru": "Pick of the Litter",
+    "en": "Pick of the Litter",
+    "year": 2019,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 0.38,
+    "genres": [
+      "документальный",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vcPGkS4Wzj09132CDjWG337UJcW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cGEYVybmhASYgx12SxUrlwSHgJC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1154304,
+    "ru": "Как приручить бизона",
+    "en": "Buffalo Kids",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 39,
+    "popularity": 2.91,
+    "genres": [
+      "мультфильм",
+      "приключения",
+      "комедия",
+      "семейный"
+    ],
+    "overview": "1886 год. Двое ирландских сирот прибывают на океанском лайнере в шумный и суетливый Нью-Йорк. Мэри и Том проделали долгий путь, чтобы встретиться со своим дядей Найлом и получить наследство. Почти без гроша в кармане они отправляются в захватывающее приключение по Трансконтинентальной железной дороге.",
+    "poster": "https://image.tmdb.org/t/p/w342/r9BeqSkZdGuvFGQ7BoIPSbMAihh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nOEIe9E5rj372Y7Ct0Kx3FJ9tLV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 629078,
+    "ru": "Стеклодув",
+    "en": "شیشہ گر",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 39,
+    "popularity": 1.07,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "мелодрама",
+      "военный"
+    ],
+    "overview": "Юный Винсент и его отец Томас управляют лучшей стеклодувной мастерской в стране. Размеренная жизнь семьи стремительно меняется с появлением в городе влиятельного полковника и его дочери Эллиз – талантливой скрипачки. Между Винсентом и Эллиз зарождается симпатия, которая встречает сопротивление отцов, чьи взгляды на жизнь абсолютно различаются. Влюбленных ждут нелегкие испытания, но чувства и магия искусства творят волшебство.",
+    "poster": "https://image.tmdb.org/t/p/w342/iMJ43Ut910F2vADJ0KYmD3LhCLq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wNfo4jTlzLPcWc68xxw8VnBJjae.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 815029,
+    "ru": "Довбуш",
+    "en": "Довбуш",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 39,
+    "popularity": 0.85,
+    "genres": [
+      "история",
+      "драма"
+    ],
+    "overview": "Фильм рассказывает о жизни и подвигах легендарного народного героя Украины Олексы Довбуша. Эта историческая драма освещает не только личную жизнь Довбуша, но и его борьбу за права и свободу крестьянства в Карпатах.\r Сюжет фильма разворачивается в Карпатских горах, где Олекса Довбуш, выходец из простого крестьянского сословия, становится символом сопротивления угнетению и борьбы за социальную справедливость. Отмеченный решимостью и непоколебимой верой в справедливость, Довбуш становится лидером повстанцев, которые встают против феодального угнетения и эксплуатации.\r Фильм подробно иллюстрирует ключевые моменты в жизни Довбуша, включая его детство, молодость, а также путь, который привел его к становлению как народного героя. Особое внимание уделяется его отношениям с близкими людьми и любовным переживаниям, которые играют значительную роль в его жизни и становлении как лидера.",
+    "poster": "https://image.tmdb.org/t/p/w342/gcDtCVANU3sjl7wdTNzu4BSYsMN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/AqLFZK2nykm6oURXFRHjOaAssqn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_66465",
+    "ru": "Шоу Капила Шармы",
+    "en": "The Kapil Sharma Show",
+    "year": 2016,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 39,
+    "popularity": 60.59,
+    "genres": [
+      "комедия",
+      "Ток-шоу"
+    ],
+    "overview": "Комедийное ток-шоу, где Капил Шарма приглашает знаменитостей Болливуда для промоушна их предстоящего релиза.",
+    "poster": "https://image.tmdb.org/t/p/w342/bUlgDjaxYkBrbOxjJef2qkFBAjb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xV0JOheZzmemwdpq1fahTnfAUoU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 388885,
+    "ru": "Тайны «Пробуждения силы»",
+    "en": "Secrets of the Force Awakens: A Cinematic Journey",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 39,
+    "popularity": 0.8,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "Документальная картина о создании фильма «Звездные войны: Пробуждение силы», интервью с создателями и фрагменты съемок.",
+    "poster": "https://image.tmdb.org/t/p/w342/xSzoZ5eE0cUQnAzUJ9TJHZ1l70c.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tfHG3i2QP0UmmMm7ynA9IAk6RUp.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 596445,
     "ru": "Потанцуй со мной",
     "en": "ダンスウィズミー",
@@ -9392,271 +9664,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/f2t0HQzQkB4cJZfjLmJ6w2BgeJJ.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/hIpVsEipOehSVA1fFK3DVaqhVVS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 386243,
-    "ru": "സ്റ്റൈൽ",
-    "en": "സ്റ്റൈൽ",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.87,
-    "genres": [
-      "боевик",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vFhcpb2OHg4mOK9r6nMEz4GDiM4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jegIxNVrrWbomp0GNE60Cr7HbgJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 577974,
-    "ru": "わたしに××しなさい！",
-    "en": "わたしに××しなさい！",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.85,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xfch2gZCu2e8UzlOY6iVnaMqc4p.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6mnKq1f5dKaTzQV7GfAhbMxSAIL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 280959,
-    "ru": "காவியத்தலைவன்",
-    "en": "காவியத்தலைவன்",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.58,
-    "genres": [
-      "мелодрама",
-      "история",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aIhoQ3UFnRAV4wcJZgEkTWBX1JQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5nj47ZPRTYry69hRMlwVPpjXJ8z.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 446020,
-    "ru": "If You're Not in the Obit, Eat Breakfast",
-    "en": "If You're Not in the Obit, Eat Breakfast",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.48,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7hLg7BuyExANDzaSHyOmqxBdqJE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/g7Y6ApHzI9GvlJHOzhsmRe2Xh0D.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 413842,
-    "ru": "In the Radiant City",
-    "en": "In the Radiant City",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.46,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ovOt1dC8hhoQWsrvqw9hlswVtAy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/drf39EgnPUZpKoqBdnC85jWrMaY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 429809,
-    "ru": "The Snowy Day",
-    "en": "The Snowy Day",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.4,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gm7dFvzPkbKYCvwvB05b4zSFshn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gO45Gpbzj8GHqTCmUgDDaOcErVY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 235809,
-    "ru": "Cats A-Weigh!",
-    "en": "Cats A-Weigh!",
-    "year": 1953,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.36,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ld2ehnOusrbq0J6i3njb9TnmyK7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/atgDXtpQaQ1kG0A70QPoBBOj3nU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 102186,
-    "ru": "Bear Feat",
-    "en": "Bear Feat",
-    "year": 1949,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.29,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gpvLGgZ2DdRLi86dA3PmRdIVQIY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uaqfYOYhCTCpTHQe6BjJIfGqWQt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 106333,
-    "ru": "The Wild Thornberrys: The Origin of Donnie",
-    "en": "The Wild Thornberrys: The Origin of Donnie",
-    "year": 2001,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.9,
-    "genres": [
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/e4Br3oF0lOyaVpZh415CxEFecb4.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 362541,
-    "ru": "Jump!",
-    "en": "Jump!",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.41,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yFhri1qRHKmBmHK5AQ7XRbuOFOE.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 295800,
-    "ru": "Fièvres",
-    "en": "Fièvres",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.36,
-    "genres": [
-      "драма",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2L4obz0E34b5iuNNt2JVRPbJc68.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 205683,
-    "ru": "Chibiverse",
-    "en": "Chibiverse",
-    "year": 2022,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.0,
-    "votes": 9,
-    "popularity": 5.47,
-    "genres": [
-      "Детский",
-      "комедия",
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/sfLdBGHL0qsIqP7IsuMxgTYA890.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s6BO9QBSJE2lMcUPjVJmyJeRxSY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1398050,
-    "ru": "Драйв",
-    "en": "Driver's Ed",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 9,
-    "popularity": 2.15,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Подросток угоняет школьную учебную машину и вместе с друзьями отправляется в безумное дорожное путешествие через полстраны, чтобы успеть к девушке, которая вот-вот может стать для него просто воспоминанием.",
-    "poster": "https://image.tmdb.org/t/p/w342/hHbzSzjJnmcq02l2razSScBEVBf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3fs6Encf71ChabAKV6VrnpQRrjV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 129760,
-    "ru": "체인지 데이즈",
-    "en": "체인지 데이즈",
-    "year": 2021,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 9,
-    "popularity": 6.59,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iC764nvQ6A6eS5WdH4trj9wnG9w.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d7zvwjqWc04keAN3Aq1yvYLXY1g.jpg",
     "source": "tmdb"
   }
 ]

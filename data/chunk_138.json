@@ -1,5 +1,312 @@
 [
   {
+    "id": 475934,
+    "ru": "காதல் கசக்குதையா",
+    "en": "காதல் கசக்குதையா",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 2,
+    "popularity": 0.53,
+    "genres": [
+      "комедия",
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aSpMc3JsRRgTDYKe6d1b1abIyLE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2vjxrMq6dM9z30zLdTfOmvx3xwl.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 566804,
+    "ru": "The Dolls with Attitude",
+    "en": "The Dolls with Attitude",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 2,
+    "popularity": 0.44,
+    "genres": [
+      "ужасы",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hMY2Z4oz0Vk8zp2S21cnrgpGBKA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2OZyEttQ6zplryW7qdyHF6I87wC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 403934,
+    "ru": "僵尸小子II：天外天小子",
+    "en": "僵尸小子II：天外天小子",
+    "year": 1988,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 2,
+    "popularity": 3.99,
+    "genres": [
+      "комедия",
+      "семейный",
+      "фэнтези",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pr0zqrnKp61m2nH1jwB71DwG6co.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 348901,
+    "ru": "Gutterdämmerung",
+    "en": "Gutterdämmerung",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 2,
+    "popularity": 0.55,
+    "genres": [
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/iaLjMNFLMGNK4xTgkxC3EcfJwd9.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 443269,
+    "ru": "ファントム勇者伝説",
+    "en": "ファントム勇者伝説",
+    "year": 1991,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 2,
+    "popularity": 0.46,
+    "genres": [
+      "военный",
+      "мультфильм",
+      "боевик",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rylNTdjuS8xG7p2TOIKKdFZOLjp.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 470693,
+    "ru": "Sin in the Rain",
+    "en": "Sin in the Rain",
+    "year": 2006,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 2,
+    "popularity": 0.35,
+    "genres": [
+      "детектив",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/v5Qc2FWXH5rMdE2Vr4pp5S64bx9.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_52807",
+    "ru": "One-Punch Man Season 3",
+    "en": "One Punch Man 3",
+    "year": 2025,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 4.8,
+    "votes": 117713,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Комедия",
+      "Comedy",
+      "Взрослые персонажи",
+      "Adult Cast",
+      "Пародия",
+      "Parody",
+      "Суперспособности",
+      "Super Power",
+      "Сэйнэн",
+      "Seinen"
+    ],
+    "overview": "Earth is saved by heroes for now, but the large-scale battle between the Hero Association and the Monster Association is far from over. The dangerous hero hunter Garou is still on the loose despite the efforts to capture him, and the Monster Association has abducted a notable figure, leaving the Hero Association in turmoil. With a strict deadline for the rescue, the heroes set out in search of the monsters' hideout.\n\nThough he is heavily injured, Garou is recruited by the Monster Association in the hope of making him a part of the leadership. In order to ascend the ranks, the hero hunter must first prove that he is ready to give up on his humanity by killing a hero. It does not take long for Garou to find his victim, but that very person is the oblivious Saitama, who effortlessly knocks him out.\n\nThis humiliating defeat causes Garou to be branded as a traitor by the monsters. Moreover, the next clash between the two associations approaches rapidly. As both sides are ready to engage in any tactics and use any pawns at their disposal, the safety of the world is at their mercy.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1168/148347l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "mal_61831",
+    "ru": "The Beginning After the End Season 2",
+    "en": "Saikyou no Ousama, Nidome no Jinsei wa Nani wo Suru? Season 2",
+    "year": 2026,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.7,
+    "votes": 9101,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Фэнтези",
+      "Fantasy",
+      "Исекай",
+      "Isekai",
+      "Перерождение",
+      "Reincarnation"
+    ],
+    "overview": "After being granted a second life, now-teenage Arthur Leywin—an unparalleled, ruthless king in his previous life—has finally become an adventurer with the help of his mentor, Jasmine Flamesworth. Although he is still far from his ultimate goal of becoming more powerful than in his past life, Arthur demonstrates remarkable skill in adventuring, exceeding everyone's expectations.\n\nMeanwhile, Arthur's elven friend and Elenoir Kingdom's princess, Tessia Eralith, has also started adventuring. Due to the prolonged hostility between humans and elves, her duty is to spread goodwill and create friendly relations with human kingdoms. However, as a mysterious group threatens to harm the races' fragile relationship, both Arthur and Tessia soon find themselves becoming pivotal parts of a larger change for the better.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1738/156028l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "mal_33775",
+    "ru": "Soul Buster",
+    "en": "Soul Buster",
+    "year": 2016,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.7,
+    "votes": 7456,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Самураи",
+      "Samurai"
+    ],
+    "overview": "Keishuu, China.\n\nThe history books say that in the era of the Three Kingdoms, this land was a place of never-ending war. A young high school boy, Sonshin, who hates his city's history, is troubled by a certain dream. When he wakes up from the dream, strange things begin to happen one after another, and without understanding what's going on, he suddenly finds himself facing Gien, one of the generals from the Romance of the Three Kingdoms, who's trying to kill him! Just before Gien's blade strikes home, a mysterious beautiful woman appears in front of Sonshin. What trials await Sonshin, as he witnesses this terrible battle between two generals of the Three Kingdoms?\n\n(Source: Crunchyroll)",
+    "poster": "https://cdn.myanimelist.net/images/anime/3/82256l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "86834",
+    "ru": "Ной",
+    "en": "Noah",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 6615,
+    "popularity": 4.36,
+    "genres": [
+      "драма",
+      "приключения"
+    ],
+    "overview": "Много-много лет назад. Ной — набожный отец семейства, которого начинают посещать ужасные видения конца света. Поняв, что людей ждет неминуемая гибель, он начинает строить ковчег — гигантский корабль, который должен защитить его семью и его самого от бушующих волн. Однако Ною приходится бороться не только с собственными страхами, но и с вполне осязаемым человеческим злом, ведь люди, прослышавшие о строительстве корабля, тоже захотели спастись. Только вот для них в ковчеге не было места.",
+    "poster": "https://image.tmdb.org/t/p/w342/iYllEA6A2bAjMse6QAfCqGT7O03.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5z75Q6nqgwgYfpMB9fVHQcw9gMz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_36309",
+    "ru": "Butlers x Battlers",
+    "en": "Butlers: Chitose Momotose Monogatari",
+    "year": 2018,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.7,
+    "votes": 6462,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Драма",
+      "Drama",
+      "Сверхъестественное",
+      "Supernatural",
+      "Школа",
+      "School",
+      "Путешествия во времени",
+      "Time Travel"
+    ],
+    "overview": "Butlers: They are guardians that hold a thousand-year history and a certain fate. Jay lived in peace with his little sister Tenna and a fellow Butler named Hayakawa. However, those peaceful days came to a sudden end. Tenna was swallowed up into the void and Jay was sent a hundred years into the future. Jay finds there is now an academy called Koyomi Academy standing in the place where his mansion once stood. Jay took up the name Jinguji Koma and became the student council president of the school as he looks for clues about the past. Jay will eventually find out the truth behind this world.\n\n(Source: Crunchyroll)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1633/92012l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "72559",
+    "ru": "G.I. Joe: Бросок кобры 2",
+    "en": "G.I. Joe: Retaliation",
+    "year": 2013,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 5762,
+    "popularity": 6.67,
+    "genres": [
+      "боевик",
+      "фантастика",
+      "приключения",
+      "триллер"
+    ],
+    "overview": "Во второй части отряд «G.I. Joe» вновь объявит вызов группировке «Кобра» и вступит в противостояние с правительством…",
+    "poster": "https://image.tmdb.org/t/p/w342/hOky0VwgPIwdes61OrF5ckWQNg9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pEhXq18GVe1dg2ltplcxtGWfSje.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_37584",
+    "ru": "BAKUMATSU",
+    "en": "Bakumatsu",
+    "year": 2018,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.7,
+    "votes": 5619,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Историческое",
+      "Historical",
+      "Самураи",
+      "Samurai",
+      "Путешествия во времени",
+      "Time Travel"
+    ],
+    "overview": "The Bakumatsu was an era in which the souls of young men burned with anxiety for their country's future. Takasugi Shinsaku, a soldier of fortune from Choshu, sneaks aboard a government ship with his comrade Katsura Kogorou in search of a mysterious \"timepiece\" with the power to manipulate time that he fears the government wishes to keep for themselves. Rather than allow such power to fall into the wrong hands, Takasugi plans to destroy the artifact, but having obtained it, the artifact is quickly stolen, forcing the pair to follow the mysterious thief to the seat of government in Kyoto. However, when they arrive in the capital, they discover that the government has been overthrown and the deity Susanoo now reigns in its place. The streets of the city and the people in them are much different than Takasugi and Katsura remembered. The times may have changed but their mission hasn't - Takasugi and Katsura resolve to reset time and save their nation from the nefarious forces trying to hijack it.\n\n(Source: Tokyo Otaku Mode)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1764/95110l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "49849",
+    "ru": "Ковбои против пришельцев",
+    "en": "Cowboys & Aliens",
+    "year": 2011,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 5419,
+    "popularity": 6.31,
+    "genres": [
+      "боевик",
+      "фантастика",
+      "триллер",
+      "вестерн"
+    ],
+    "overview": "1873, Абсолюшен, штат Аризона. В эту глухую американскую провинцию прибывает потерявший память незнакомец. Единственный намёк на его прошлое - это странные кандалы на одном из его запястий. Странник быстро узнаёт, что жители городка не рады незнакомцам и вообще выходят на улицы лишь по приказу полковника Долархайда, правящего в этой местности железной рукой. Этому есть объяснение: город терроризируют жуткие существа. Герой постепенно вспоминает себя и понимает, что помочь несчастным только в его силах.",
+    "poster": "https://image.tmdb.org/t/p/w342/A394jIrRPChMCsErfkGVQCKp9Kq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sGXCYMzr1sCnGNVuRpB2TOWPWDA.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "205584",
     "ru": "Боги Египта",
     "en": "Gods of Egypt",
@@ -9544,274 +9851,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/5PcVo8sQ5FwrEE5uXAksUhRG67U.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/gA4cBZmkB0WD9Psg3YXqH0obtQq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 285844,
-    "ru": "Preggoland",
-    "en": "Preggoland",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 46,
-    "popularity": 0.47,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kBgxv3uMwR3MVwHEvVtr5xujYtg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bXwQHQ5HbtmCNKGRj8TwFjRrLRJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1227003,
-    "ru": "Последний экзорцист",
-    "en": "Shadow of God",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 45,
-    "popularity": 1.43,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "По заданию Ватикана отец Мейсон возвращается в родные края. Он должен расследовать гибель семи экзорцистов за последнее время и сразиться с могущественным демоном, который вселился в воскресшего непонятным образом отца священника, умершего много лет назад. Первая любовь Мейсона, а ныне психолог Танис, помогает ему в схватке со злом, собирая информацию о загадочном воскрешении.",
-    "poster": "https://image.tmdb.org/t/p/w342/jzsOHWlkUrN5r2Xw7TP9ObMdl0o.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nViQZruGVd8M2RkFD5MCPjyjqgA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1058303,
-    "ru": "Джун всемогущая",
-    "en": "Drugstore June",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 45,
-    "popularity": 0.78,
-    "genres": [
-      "комедия",
-      "криминал",
-      "детектив"
-    ],
-    "overview": "Джун уже давно исполнилось 20 лет, но она упорно продолжает вести себя как безответственный подросток: живёт вместе с родителями, не даёт проходу своему бывшему парню, постит видео для своих немногочисленных, но «преданных» подписчиков, сидит на всех видах диет и постоянно срывается на тотальное обжорство. Однажды ночью аптеку, в которой Джун работала, ограбили, и она решает раскрыть это преступление самостоятельно.",
-    "poster": "https://image.tmdb.org/t/p/w342/zbWcd3e5ooHEmiJnEmRE8sE3bOP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kmbKwy4K62E1Vc5SupuDlJhQwPf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 67253,
-    "ru": "Кошка по имени Лили",
-    "en": "LILY-C.A.T.",
-    "year": 1987,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 45,
-    "popularity": 0.83,
-    "genres": [
-      "фантастика",
-      "ужасы",
-      "мультфильм"
-    ],
-    "overview": "Будущее. Ученые создают Капсулы глубокого сна, которые почти полностью останавливают старение организма во время сна и тем самым позволяют людям путешествовать на большие расстояния. Используя эти капсулы, команду космонавтов посылают в двадцатилетнее путешествие для изучения недавно открытой планеты. После того, как команда выходит из сна, прибыв на орбиту неизвестной планеты, космонавты обнаруживают поврежденное сообщение из Земли. В нем говорят о том, что на корабле среди команды есть два беглеца, выдающих себя за членов команды. А пока члены экспедиции пытаются выяснить, что это за пассажиры и каковы их цели, над командой нависает новая угроза - люди умирают один за другим, пораженные неизвестным внеземным вирусом, и обычная исследовательская миссия оборачивается отчаянной борьбой за выживание.",
-    "poster": "https://image.tmdb.org/t/p/w342/nRfQD3BgsAKCppB0YCX78ZhV8zB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ea6ts3iP073a0oO3N76y8W87mG1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 466410,
-    "ru": "Кем мы стали",
-    "en": "Who We Are Now",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 45,
-    "popularity": 0.49,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Вышедшая из тюрьмы мать с помощью молодого адвоката-идеалиста пытается вернуть себе право опеки над сыном и заводит романтические отношения с пережившим травму бывшим солдатом.",
-    "poster": "https://image.tmdb.org/t/p/w342/kxTfAC1pCHjLYDqAoiUVul5Hor3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2ERlXsLJLRdGLilHwPN1GkqEG1i.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 848950,
-    "ru": "Боулинг Сатурн",
-    "en": "Bowling Saturne",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 44,
-    "popularity": 0.59,
-    "genres": [
-      "драма",
-      "триллер",
-      "криминал"
-    ],
-    "overview": "В центре событий остросюжетного драматического триллера под названием «Боулинг Сатурн» находится молодой представитель сильного пола по имени Гийом, жизнь которого протекает в тихом и ничем не примечательном духе. Но в некий момент он решает внести в свой привычный жизненный расклад существенные изменения. Все начинается с того, что у него возникает идея инвестировать серию убийств, совершенных полицией. И эта мысль возникает у главного героя после того, как его брат и сестра начинают управлять отцовским бизнесом весьма неординарным образом…",
-    "poster": "https://image.tmdb.org/t/p/w342/lyIqihYpiIXLSPYwGEvg0ImnTHK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3FYlk1DlXulq5gE7PZ3lIHbYbOA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 254263,
-    "ru": "Принцесса Лебедь 5: Королевская сказка",
-    "en": "The Swan Princess: A Royal Family Tale",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 44,
-    "popularity": 0.99,
-    "genres": [
-      "семейный",
-      "мультфильм",
-      "фэнтези"
-    ],
-    "overview": "В сказочном королевстве принцесса Одетт, принц Дерек и их преданные лесные друзья собираются встречать рождество. Однако после того, как королевская семья удочерила маленькую прелестную девочку, неизвестный злодей похищает и уводит в лес девочку. Одетт и Дерек отправляются на её поиски. Но пока королевство готовится к празднику, хитрый и коварный колдун Ротбарт планирует уничтожить королевство.",
-    "poster": "https://image.tmdb.org/t/p/w342/wuMhHoiwJreSgiHrRq68gWc2R8J.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8FRvEFTdZxx0ICeP0egjxRE5NHE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1339166,
-    "ru": "Шаман",
-    "en": "Shaman",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 43,
-    "popularity": 1.14,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "Миссионерка, обращающая в веру коренную общину на отдаленном эквадорском вулкане, должна примириться со своей собственной верой, когда ее сын оказывается одержим темными силами, которые старше ее собственной религии.",
-    "poster": "https://image.tmdb.org/t/p/w342/hFecHDZVILGNvzQNssWAUxvwmj5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kWm4HxanOhRWfW9PzigkUXulwdG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1310871,
-    "ru": "Отпечаток зла",
-    "en": "La huella del mal",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 43,
-    "popularity": 0.63,
-    "genres": [
-      "криминал",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "Во время школьной экскурсии группа подростков обнаруживает тело молодой женщины на месте, где должна была находиться реплика неандертальского захоронения. Погибшей оказалась Эва Сантос, жительница близлежащего посёлка. Её тело обнажено и расположено в позе эмбриона, что напоминает случившееся шесть лет назад ритуальное убийство. Главный инспектор Сильвия Гусман и бывший полицейский Даниэль Веларде берут на себя расследование этого преступления.",
-    "poster": "https://image.tmdb.org/t/p/w342/o410zKXtZYy2vVBcQJPxzOc9KYc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wnVxIPc14Af9ztf1h3YzelZuw6W.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1157869,
-    "ru": "Histoires parallèles",
-    "en": "Histoires parallèles",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 43,
-    "popularity": 1.79,
-    "genres": [
-      "драма",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/slUt1jzYxJZzEJWrOZ67DouFwoH.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3lKjspWl46OWPmn6jIp8Wo8UdP4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1141228,
-    "ru": "Untold: Jake Paul the Problem Child",
-    "en": "Untold: Jake Paul the Problem Child",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 43,
-    "popularity": 0.55,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/737TAAAXQZA4C4s3LJP6DJ6IieK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oMZyBoY4nV4VYX3JaTfvp6spN2N.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 61849,
-    "ru": "Одно большое счастье",
-    "en": "One Big Happy",
-    "year": 2015,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.7,
-    "votes": 43,
-    "popularity": 2.2,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Лучшие друзья Лиззи и Люк почти как семья. Когда они были детьми, им вместе пришлось пройти через развод родителей. Общие переживания сблизили их и с тех пор они практически неразлучны. Теперь, будучи уже взрослыми и одинокими людьми, они хотят создать собственную семью. Однако не совсем типичным способом. Лиззи — лесбиянка, а Люк традиционной ориентации, но тем не менее они решают завести общего ребенка. Однажды Люк знакомится с веселой девушкой из Великобритании по имени Пруденс. Они мгновенно влюбляются друг в друга, и именно в тот момент, когда Лиззи понимает, что беременна, Люк объявляет, что намерен жениться на Пруденс",
-    "poster": "https://image.tmdb.org/t/p/w342/9fku61Zx2kwklMhbLhK4eyhx3dD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7UQk6QdUgcBUkq0eaeg0GaFw1sw.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 264555,
-    "ru": "Друзья до смерти",
-    "en": "Death Clique",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 43,
-    "popularity": 0.78,
-    "genres": [
-      "драма",
-      "триллер",
-      "телевизионный фильм"
-    ],
-    "overview": "Соперничество на почве ревности между тремя школьницами перерастает в шокирующий акт насилия, ведущий к смерти одной из девушек. Мать жертвы полна решимости найти своего пропавшего ребёнка и добиться справедливости ради своей дочери.",
-    "poster": "https://image.tmdb.org/t/p/w342/teieNkUqwID5wTsRaK3yeKXFoFC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sQGbhykhJ8FCQ6YDaxmIU8KNCqA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 285200,
-    "ru": "Выжить в Арктике",
-    "en": "Operasjon Arktis",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 43,
-    "popularity": 0.71,
-    "genres": [
-      "семейный",
-      "приключения"
-    ],
-    "overview": "Трое детей — 13-летняя Юлия вместе с сестрой и братом оказались во льдах суровой Арктики неподалеку от Шпицбергена. Им предстоит бороться с непогодой, спасаться от белых медведей и искать пропитание. Современная история о робинзонах посреди величественной и морозно опасной природы.",
-    "poster": "https://image.tmdb.org/t/p/w342/67wK37Y6lf4MDTpPGmD0GIcqt5P.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tXpRzyW7ABZV3fjqAV61HFDj94x.jpg",
     "source": "tmdb"
   }
 ]

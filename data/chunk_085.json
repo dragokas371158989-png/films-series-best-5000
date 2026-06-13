@@ -1,5 +1,277 @@
 [
   {
+    "id": 497607,
+    "ru": "The Man with the Gray Elevated Hair",
+    "en": "The Man with the Gray Elevated Hair",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.6,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gRwNiJftzskWkUrt1ilhdJ8buo3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8WkhlHcXILMAdNB9p2Ga5ASB5JH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 505568,
+    "ru": "我的情敵女婿",
+    "en": "我的情敵女婿",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.48,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yYeZhWBcWD8jNzQl0mXg7INYhA7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zX4GubAp1npfgckNDPxfpsNkBHQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 593144,
+    "ru": "A Deadly Dance",
+    "en": "A Deadly Dance",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.4,
+    "genres": [
+      "телевизионный фильм",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/q7LDxp1DC7NhdFbsOZnIZITv1A9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1WhY8oZRl9nb0Hej2aXZrefVFra.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 38752,
+    "ru": "The Alphabet Conspiracy",
+    "en": "The Alphabet Conspiracy",
+    "year": 1959,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.33,
+    "genres": [
+      "семейный",
+      "телевизионный фильм",
+      "мультфильм",
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7UmafAqLcAOn2HPfjmnsxDRYXL2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/alXNklpIlSrOb7Vw6JJddQfFt18.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 219481,
+    "ru": "Porky's Hero Agency",
+    "en": "Porky's Hero Agency",
+    "year": 1937,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.32,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/78ncK41xb1aXY4Q8SH93AgaeLI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/i7h1pd8QMienTNimfLSf7KNIfjF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 613736,
+    "ru": "Smurfily Ever After",
+    "en": "Smurfily Ever After",
+    "year": 1985,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.53,
+    "genres": [
+      "комедия",
+      "семейный",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/v5Pi5eexIa7299Tn0zmXmWyo2PV.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 369367,
+    "ru": "The Testimony",
+    "en": "The Testimony",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.43,
+    "genres": [
+      "документальный",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/696AxhETTkbcoFXsaaFmqBwYFG4.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 293697,
+    "ru": "Я хочу закончить эту игру любви",
+    "en": "愛してるゲームを終わらせたい",
+    "year": 2026,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.1,
+    "votes": 7,
+    "popularity": 10.0,
+    "genres": [
+      "комедия",
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "Юкия Асаги и Мику Сакура — друзья детства, которые всегда были рядом и давно влюблены друг в друга. Но признаться? Ни за что! Не потому что боятся, а потому что однажды, в начальной школе, они начали игру: «Я люблю тебя». По правилам побеждает тот, кто первым заставит другого покраснеть от признания. С тех пор прошло много лет, чувства стали настоящими, но правила остались. И теперь каждый их взгляд, каждый жест — это ход в глупой игре, где любовь не означает победу.",
+    "poster": "https://image.tmdb.org/t/p/w342/9abkyVlmrFDQ11vdZmpHLFnnZgY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rep8uV9N7jSYpxpxH7glSP6qOmp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 245876,
+    "ru": "Небесно-голубой гибрид",
+    "en": "空色ユーティリティ",
+    "year": 2025,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.1,
+    "votes": 7,
+    "popularity": 7.33,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/lwIqH2y5G2cqbgoC8F3efWLICiA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1eWI1oR4LexG8PUMXVA1GAIHkKo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 34773,
+    "ru": "Реал-Драйв",
+    "en": "RD 潜脳調査室",
+    "year": 2008,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.1,
+    "votes": 7,
+    "popularity": 9.85,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "НФ и Фэнтези",
+      "криминал",
+      "Аниме"
+    ],
+    "overview": "Действие сериала разворачивается в 2061-ом году, прошло 50 лет с тех пор, как человечество создало \"Net society\" (\"Сетевое общество\"), использующее информационные сети, несмотря на недостатки их систем безопасности. Для увеличения надежности этих самых систем была разработана новая сеть - Meta Real Network, или, для краткости, \"Metal\". Личные воспоминания людей переведены в цифровую форму и помещены в \"защищенные виртуальные отдельные органические кибер-анклавы, именуемые bubble shells\". В результате случился виртуальный взрыв творческой свободы, ведь люди чувствовали себя защищенными и могли испытывать в Metal то, что им было недоступно в реальной жизни. Эти трения между влекущим отсутствием ограничений в Metal и множество ограничений в реальности приводят к различным проблемам и случаям, расследовать которые должны так называемые \"кибер-дайверы\". Один из них - Масамити Хару.",
+    "poster": "https://image.tmdb.org/t/p/w342/33lPIG5divmPEIiCj8UmqbjQIsm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rWatsA0eJEhroHkmEWiGcdwugnz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 262932,
+    "ru": "Из поколения в поколение",
+    "en": "江湖夜雨十年灯",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.1,
+    "votes": 7,
+    "popularity": 17.39,
+    "genres": [
+      "драма",
+      "Боевик и Приключения",
+      "детектив"
+    ],
+    "overview": "Противостояние между Шестью школами Бэйчэнь и Демонической сектой длится уже два столетия, а начало вражде положила гибель главы секты Не Хэнчэна. Случайно получив божественный трактат по боевым искусствам, он нарушил хрупкое равновесие сил и принес хаос в мир праведных школ. Цай Пиншу из долины Лоин, одной из Шести школ, посвятил жизнь искоренению зла и восстановлению справедливости. Он сумел сразить Не Хэнчэна, но утратил все свои силы и скончался после долгой болезни. Двадцать лет спустя его племянница Цай Чжао, исполняя завет семьи, становится ученицей школы Цинцюэ.",
+    "poster": "https://image.tmdb.org/t/p/w342/fExFPnVTUMmRdSxon9ASsWQGkNr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6640A10Z0aysTCroNQQPK8ZB4FH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 315800,
+    "ru": "Культ йоги",
+    "en": "Twisted Yoga",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.1,
+    "votes": 7,
+    "popularity": 5.09,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "Бывшие члены школы тантрической йоги говорят о том, как их поиски благополучия и дружеского сообщества привели к опасению, что они попали в секту, и к поискам справедливости в связи с якобы имевшими место насилием и манипуляциями со стороны самопровозглашенного гуру.",
+    "poster": "https://image.tmdb.org/t/p/w342/gJmTFVuvUHJkCY1fusbJqgyoY9G.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7z2cmuREaHOFaDtzTgDNy1wbkc2.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 316835,
+    "ru": "Вкус к убийству",
+    "en": "A Taste for Murder",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.1,
+    "votes": 7,
+    "popularity": 4.89,
+    "genres": [
+      "криминал",
+      "драма",
+      "детектив"
+    ],
+    "overview": "Сериал рассказывает о старшем инспекторе уголовного розыска Джо Моттраме — звёздном детективе лондонской Метрополитен‑полиции, который после личной трагедии вместе с дочерью уезжает на Капри, в Италии, чтобы провести лето у своих итальянских родственников со стороны жены.",
+    "poster": "https://image.tmdb.org/t/p/w342/iQMSIHR6hPN53h7TILztOZuYOcl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3Kl4l236MoQahIH3aM58mqbaHwP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1062402,
+    "ru": "Бэнг-Бэнг",
+    "en": "Bang Bang",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 7,
+    "popularity": 2.53,
+    "genres": [
+      "драма"
+    ],
+    "overview": "В центре истории — Бернард «Бэнг‑Бэнг» Бернс, одинокий бывший боксер, который ведет тихую и неприметную жизнь. Пытаясь найти хоть какой‑то смысл, искупить вину за прошлое и помочь окружающим, он случайно переходит дорогу местному криминальному авторитету, что запускает цепь опасных и разрушительных событий.",
+    "poster": "https://image.tmdb.org/t/p/w342/8qYYsOLVDg3dMdakor6V5cGfvS6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/haq6qT4lrRf7pnNsTddPiF8MvWt.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1216443,
     "ru": "Живя в двух мирах",
     "en": "ぼくが生きてる、ふたつの世界",
@@ -10625,299 +10897,5 @@
     "poster": "https://image.tmdb.org/t/p/w342/ehkjLAiw6FKTul4b72F2HIDNMOU.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/gT3hatcFDbZWUlLZ7TClRDhZ9Pa.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": "1024",
-    "ru": "Небесные создания",
-    "en": "Heavenly Creatures",
-    "year": 1994,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1035,
-    "popularity": 2.75,
-    "genres": [
-      "драма",
-      "фэнтези"
-    ],
-    "overview": "Все изменилось в жизни Полин, когда в их классе появилась новая ученица — Джулиет. Ее мир фантазий и независимость словно пробудили Полин ото сна. И ставшие неразлучными, подруги оказываются во власти неизведанных чувств. Но когда их очаровательно-невинная дружба сталкивается с угрозой, они преображаются, чтобы защититься!",
-    "poster": "https://image.tmdb.org/t/p/w342/AsZ286PDaYy8rZTKDDEbhrWV9gq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jHjOY9vgE7maH2HRk2fd9lOPg8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_5734",
-    "ru": "タユタマ -Kiss on my Deity-",
-    "en": "Tayutama: Kiss on My Deity",
-    "year": 2009,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.7,
-    "votes": 31030,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Романтика",
-      "Romance",
-      "Сверхъестественное",
-      "Supernatural",
-      "Гарем",
-      "Harem"
-    ],
-    "overview": "Yuuri Mito is a typical, normal Japanese teenager.  He goes to school, works on people's motorcycles and performs exorcisms.  Okay, that last part's a little bit unusual, but his family lives in a shrine and they do that sort of thing.  Still, you would think he'd know enough to be careful with an ancient relic he finds in the woods, especially when a mysterious goddess appears and tells him to leave it alone.  Unfortunately, despite Mito's best efforts, the seal gets broken anyway and a number of dangerous \"tayuti\" that it held in stasis get loose.  This is bad.  Mito also ends up with a beautiful goddess girl who decides that she's going to marry him.  This might not be so bad. if he wasn't already caught up in the middle of a war between the entities he's released.  The flesh may be weak but the spirit's more than willing to compensate. \n\n(Source: Sentai Filmworks)",
-    "poster": "https://cdn.myanimelist.net/images/anime/1094/153283l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "64688",
-    "ru": "Мачо и ботан",
-    "en": "21 Jump Street",
-    "year": 2012,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 11030,
-    "popularity": 7.08,
-    "genres": [
-      "боевик",
-      "комедия",
-      "криминал"
-    ],
-    "overview": "Двое новоиспеченных горе-полицейских отправляются на сверхсекретное задание. Им предстоит заново стать учениками средней школы, в которой процветает наркоторговля.",
-    "poster": "https://image.tmdb.org/t/p/w342/xe2Z8wgNzKK9dhHr23B18dCBmie.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d1ACwtoBygLKkGjCq9LUXnmcki.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "9434",
-    "ru": "Убийство в Гросс-Пойнте",
-    "en": "Grosse Pointe Blank",
-    "year": 1997,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1030,
-    "popularity": 1.98,
-    "genres": [
-      "боевик",
-      "комедия",
-      "триллер",
-      "мелодрама"
-    ],
-    "overview": "Мартин Блэнк приезжает на встречу выпускников в свой родной городок Гросс-Пойнт. У него богатые планы на этот вечер: он должен помириться со своей бывшей девушкой, которую не видел десять лет, а заодно, чтобы совместить приятное с полезным… совершить убийство.  Ведь в отличии от остальных одноклассников, Мартин выбрал карьеру профессионального киллера, и в Гросс-Пойнте его ждет очередное задание. И не только его… За Мартином уже давно охотятся два правительственных агента и конкурент, которые не дадут гостям скучать.",
-    "poster": "https://image.tmdb.org/t/p/w342/v6BfDtkkaZscUltVlvXcD8uTr3C.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/paSilBRK7Qw3iIbf3xIYVDKnVF9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "12335",
-    "ru": "Набалдашник и метла",
-    "en": "Bedknobs and Broomsticks",
-    "year": 1971,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1028,
-    "popularity": 2.3,
-    "genres": [
-      "семейный",
-      "мультфильм",
-      "фэнтези"
-    ],
-    "overview": "История о доброй волшебнице, которая помогает англичанам в борьбе с фашистами во время Второй мировой войны, помешав их высадке в Великобритании.",
-    "poster": "https://image.tmdb.org/t/p/w342/1BBzsThIZ06UmjZ3rChYGZhJtFQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jQAGYwpp00D9PN7qKIPb4HqNzoq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_50993",
-    "ru": "Death Hall",
-    "en": "Shiyakusho",
-    "year": 2022,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.0,
-    "votes": 1010,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Повседневность",
-      "Slice of Life",
-      "Сэйнэн",
-      "Seinen"
-    ],
-    "overview": "",
-    "poster": "https://cdn.myanimelist.net/images/anime/1713/120885l.webp",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mAt8qr2ciqCxXRulKN0VYzBOT4Q.jpg",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "mal_3734",
-    "ru": "Glass Mask: The Girl of a Thousand Masks",
-    "en": "Glass no Kamen: Sen no Kamen wo Motsu Shoujo",
-    "year": 1998,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.0,
-    "votes": 1009,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Драма",
-      "Drama",
-      "Сценическое искусство",
-      "Performing Arts",
-      "Сёдзё",
-      "Shoujo"
-    ],
-    "overview": "An OVA depicting the early events of the Glass no Kamen series.\n\nKitajima Maya is a young girl from a poor background with no talents of use to school or her widowed mother. However, she is obsessed with movies, theatrical plays and TV dramas-to the point of remembering every line from a movie she's seen once, and dramatically acting out the stories, including every character, for anyone who will listen. One day, she encounters an old woman with a scarred face who claims that Maya is the girl she's been looking for-for the old woman has spent years protecting the rights to a 'legendary' play.",
-    "poster": "https://cdn.myanimelist.net/images/anime/1788/97618l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "14506",
-    "ru": "Приключения барона Мюнхгаузена",
-    "en": "The Adventures of Baron Munchausen",
-    "year": 1988,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1008,
-    "popularity": 2.72,
-    "genres": [
-      "фэнтези",
-      "приключения",
-      "комедия"
-    ],
-    "overview": "Единственный, кто знает всю правду о Мюнхгаузене — сам барон. Легендарный герой рассказывает историю своих невероятных приключений.  Но неужели он действительно летал на раскаленном пушечном ядре, сражался с трехголовым грифоном, путешествовал на Луну, видел обнаженную Венеру, выходящую из морской раковины, и в конце концов, столкнулся нос к носу с самой Смертью? В это невозможно поверить… но разве знаменитый Мюнхгаузен может врать?",
-    "poster": "https://image.tmdb.org/t/p/w342/x0BS2FiyxHuhycRUC2O43PI2BXK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mBh3NXCkSCasZGovzAuc9UlFCru.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "628534",
-    "ru": "Белый тигр",
-    "en": "The White Tiger",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 995,
-    "popularity": 1.92,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Нищий парень устраивается водителем к богатой семье. Однажды его хозяева в подпитии насмерть сбивают человека и пытаются свалить вину на бедного водителя, но тот оказывается не так прост.",
-    "poster": "https://image.tmdb.org/t/p/w342/wFcymdv2uCtH9cYOb1GdXFW3HFv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wz4BoW7k5LNluY4PmxHBU1IS5Bc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "297556",
-    "ru": "Лига Справедливости: Трон Атлантиды",
-    "en": "Justice League: Throne of Atlantis",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 995,
-    "popularity": 3.05,
-    "genres": [
-      "фантастика",
-      "боевик",
-      "мультфильм",
-      "приключения"
-    ],
-    "overview": "О противостояние Аквамена и его брата Орма Повелителя Океана, который объявил войну жителям поверхности Земли после смерти короля Атлантиды во время инопланетного вторжения. События «Трона Антлантиды» будут разворачиваться вокруг молодого Артура Карри, который узнает о своем происхождении. Теперь он вынужден объединится с Лигой Справедливости, чтобы остановить Орма. Мы знакомимся с Артуром в очень сложный, поворотный момент его жизни. Его отец умирает, и он остается один, он становится изгоем. Когда армия Атлантиды начинает вторжение на поверхность, Артур еще не знает о своем происхождении. Однако, как только он узнает о своем наследии, то ему предстоит сделать нелегкий выбор, который в итоге определит его судьбу.",
-    "poster": "https://image.tmdb.org/t/p/w342/xXnNT7aM0deG4ONlfavCLt15QuW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ltlPFTMRsohmi2QbbSZUkAVg7Nc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "366924",
-    "ru": "Бэтмен: Дурная Кровь",
-    "en": "Batman: Bad Blood",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 989,
-    "popularity": 2.23,
-    "genres": [
-      "фантастика",
-      "боевик",
-      "мультфильм",
-      "приключения",
-      "криминал"
-    ],
-    "overview": "Готэме происходит неожиданное: некий еретик «убивает» Бэтмена, свидетелем чего становится Бэтвумен. Однако команде Летучей мыши горевать некогда, ведь зло не дремлет. Теперь оставшимся напарникам Бэтмена — Найтвингу (Дик Грейсон) и Робину (сын Бэтмена — Дэмиан Уэйн) — предстоит занять его пост и защищать жителей темного города.",
-    "poster": "https://image.tmdb.org/t/p/w342/uJb246149nxIEE61tqFj07onJVc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nwfpBjtMNFwrGjW2o9HBhMEYCpM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "651070",
-    "ru": "Грехопадение",
-    "en": "A Fall from Grace",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 985,
-    "popularity": 2.74,
-    "genres": [
-      "драма",
-      "триллер",
-      "детектив"
-    ],
-    "overview": "Законопослушной женщине предъявляют обвинение в убийстве мужа. Ее адвокат вскоре понимает, что за случившимся может стоять заговор большего масштаба.",
-    "poster": "https://image.tmdb.org/t/p/w342/h47JJZ015VF4neia33AFwTU37Yb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qeoAcUAw1xNYJ9PP7m1Wc7kKZZQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "10653",
-    "ru": "Зуд седьмого года",
-    "en": "The Seven Year Itch",
-    "year": 1955,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 985,
-    "popularity": 3.07,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Книгоиздатель Ричард Шерман женат уже семь лет. Его жена и сын в очередной раз уезжают за город на каникулы. Недолго длится одиночество Ричарда, неожиданно на его балкон падает огромный горшок с томатами, и виной этому соседка с верхнего этажа, белокурая рекламная модель.  Ричард предлагает красотке зайти к нему в гости и что-нибудь выпить. Шикарная блондинка в глубоком декольте, не давая соседу опомниться, появляется в его квартире с бутылкой шампанского в руке…  С этой минуты богатое воображение героя рисует не только сказочные картины завоевания сердца соблазнительной красавицы, но и унизительные сцены разоблачения женой его неверности…",
-    "poster": "https://image.tmdb.org/t/p/w342/k511XLPmI96sSfAYZvbACEboRtS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yjlg8Gq3TAWlFSUxh7Icey8uM4P.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_4586",
-    "ru": "I love BuBu ChaCha",
-    "en": "Daisuki! BuBu ChaCha",
-    "year": 2001,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.0,
-    "votes": 977,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Повседневность",
-      "Slice of Life",
-      "Питомцы",
-      "Pets",
-      "Для детей",
-      "Kids"
-    ],
-    "overview": "The anime talks about a little boy, Randy, whose dog, Chacha, died in an accident and was reincarnated into a living toy car. Each episode is told like the chapter of a storybook, where Randy learns a valuable thing in life with his cartoonish and goofy friend Chacha. Randy meets several friends in his neighbourhood, such as Catherine, the tall blonde girl in red long socks who rides a bicycle, or Mary, a little hot-tempered brunette girl dressed as a maid and who carries around a mop.\n\n(Source: ANN)",
-    "poster": "https://cdn.myanimelist.net/images/anime/9/46873l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
   }
 ]

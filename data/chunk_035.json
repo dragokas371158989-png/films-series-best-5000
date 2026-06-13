@@ -1,24 +1,5 @@
 [
   {
-    "id": 69433,
-    "ru": "Ферма во времена Тюдоров",
-    "en": "Tudor Monastery Farm",
-    "year": 2013,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 9.1,
-    "votes": 7,
-    "popularity": 0.62,
-    "genres": [
-      "документальный",
-      "Реалити-шоу"
-    ],
-    "overview": "Если вы хотите узнать все о духовном мире средневековой Англии, то вам стоит отправиться в монастырь. Историки Рут Гудман и Питер Джин вместе с археологом Томом Пинфолдом возьмут на себя роли обычных мирян, которые в Средние века выполняли всю основную работу на ферме, принадлежащей монастырю. Несмотря на то, что главной функцией монастыря было молиться и заботиться о духовном здравии всех христиан, живых или мертвых, монастыри в Средние века также владели большим числом земель, что позволяло им занимать важнейшие позиции в фермерском хозяйстве.",
-    "poster": "https://image.tmdb.org/t/p/w342/uLd6WkuLnfw9CsBvnYMC19ifrbP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/BEUsmNObtGpP0sOTL5TXmES76t.jpg",
-    "source": "tmdb"
-  },
-  {
     "id": 85457,
     "ru": "커피 프렌즈",
     "en": "커피 프렌즈",
@@ -2050,6 +2031,29 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8259837,
+    "ru": "Суперглупцы",
+    "en": "원더풀스",
+    "year": "2026",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 9.09,
+    "votes": 163,
+    "popularity": 67.55,
+    "genres": [
+      "Боевик и Приключения",
+      "комедия",
+      "НФ и Фэнтези",
+      "драма"
+    ],
+    "overview": "1999-ый год. Группа обычных горожан, внезапно получивших суперспособности, встаёт на защиту родного города.",
+    "poster": "https://image.tmdb.org/t/p/w342/uARtDxJDtISHnM2BxaSKvlQpWrc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/y2u7d8evmnTivi3LaVql01Sfea4.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 259837
+  },
+  {
     "id": "mal_9863",
     "ru": "SKET Dance",
     "en": "SKET Dance",
@@ -2152,27 +2156,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8632181,
-    "ru": "Socias por accidente",
-    "en": "Socias por accidente",
-    "year": "2026",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 9.06,
-    "votes": 247,
-    "popularity": 46.61,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/sr1Yoj6XLPTWYcbDoBy67xivW4I.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/tdY46jlxbcvgMHKlJhSCebahhBh.jpg",
-    "source": "movie_popular",
-    "status": "Вышел",
-    "tmdbId": 1632181
-  },
-  {
     "id": "mal_12431",
     "ru": "Space Brothers",
     "en": "Uchuu Kyoudai",
@@ -2233,6 +2216,27 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1404/106707l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 8632181,
+    "ru": "Socias por accidente",
+    "en": "Socias por accidente",
+    "year": "2026",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 9.05,
+    "votes": 256,
+    "popularity": 46.61,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/sr1Yoj6XLPTWYcbDoBy67xivW4I.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/tdY46jlxbcvgMHKlJhSCebahhBh.jpg",
+    "source": "movie_popular",
+    "status": "Вышел",
+    "tmdbId": 1632181
   },
   {
     "id": "mal_17389",
@@ -2419,7 +2423,7 @@
     "status": "Вышел",
     "studio": "",
     "rating": 8.72,
-    "votes": 30529,
+    "votes": 30541,
     "poster": "https://image.tmdb.org/t/p/w342/yvmKPlTIi0xdcFQIFcQKQJcI63W.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/zfbjgQE1uSd9wiPTX4VzsLi0rGG.jpg",
     "overview": "Бухгалтер Энди Дюфрейн обвинён в убийстве собственной жены и её любовника. Оказавшись в тюрьме под названием Шоушенк, он сталкивается с жестокостью и беззаконием, царящими по обе стороны решётки. Каждый, кто попадает в эти стены, становится их рабом до конца жизни. Но Энди, обладающий живым умом и доброй душой, находит подход как к заключённым, так и к охранникам, добиваясь их особого к себе расположения.",
@@ -2534,7 +2538,7 @@
     "type": "Сериал",
     "category": "Сериал",
     "rating": 9.0,
-    "votes": 422,
+    "votes": 438,
     "popularity": 724.0,
     "genres": [
       "драма"

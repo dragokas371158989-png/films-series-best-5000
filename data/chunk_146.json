@@ -1,5 +1,279 @@
 [
   {
+    "id": 752687,
+    "ru": "Big Freaking Rat",
+    "en": "Big Freaking Rat",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.4,
+    "votes": 26,
+    "popularity": 0.67,
+    "genres": [
+      "ужасы",
+      "фантастика",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4xKoyh4fWg7pp3wTQAS4XJ2kaUc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2TQI4FbG6qVmyxciHDlaR31Db5S.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 736203,
+    "ru": "Ane",
+    "en": "Ane",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.4,
+    "votes": 26,
+    "popularity": 0.53,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5LYxSzkN3JJcCmlXH6O83NExm7F.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wC49kGxmtm4lnbLTkFn86hW2k9u.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 577340,
+    "ru": "Добро пожаловать в Акапулько",
+    "en": "Welcome to Acapulco",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.4,
+    "votes": 26,
+    "popularity": 0.62,
+    "genres": [
+      "боевик",
+      "комедия",
+      "триллер"
+    ],
+    "overview": "У разработчика компьютерных игр Мэтта Бута есть один шанс спасти свою карьеру, представив свой самый крупный проект на церемонии вручения наград в американском Нью-Мексико. Но весело отметив встречу с приятелем в аэропорту, он оказывается в мексиканском городе Акапулько.",
+    "poster": "https://image.tmdb.org/t/p/w342/hYenQ1VtBO0PeJbFEJ5XgbOPd5J.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/u8tuxgMMuJahTSQ4dFMfJn6wtr8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 336788,
+    "ru": "Love by Design",
+    "en": "Love by Design",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.4,
+    "votes": 26,
+    "popularity": 0.43,
+    "genres": [
+      "мелодрама",
+      "телевизионный фильм"
+    ],
+    "overview": "После неудачного романа Брук загадывает желание на свой 30-й день рождения на основе доске визуализации, которую она сделала в 14 лет.",
+    "poster": "https://image.tmdb.org/t/p/w342/6PfiZxUtaGOLMkPPTU6u76jtJos.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/u4u4kYniJLVy4B2KuD0amzAPE7c.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 12939,
+    "ru": "The Steve Wilkos Show",
+    "en": "The Steve Wilkos Show",
+    "year": 2007,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.4,
+    "votes": 26,
+    "popularity": 6.02,
+    "genres": [
+      "драма",
+      "Реалити-шоу",
+      "Ток-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8sH6nMwB33ZKITSWOGWgKlX8dsd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hHjB7YH851IvmLPD5xe6gk5WqC5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 52466,
+    "ru": "Godkiller: Walk Among Us",
+    "en": "Godkiller: Walk Among Us",
+    "year": 2010,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.4,
+    "votes": 26,
+    "popularity": 0.7,
+    "genres": [
+      "мультфильм",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dZp4y7jDZrQLn4ZSQ2IlGvv8ZXx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/evvujOcxcvxeExEUNTvqu6RauQ4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 187542,
+    "ru": "Journey Back to Oz",
+    "en": "Journey Back to Oz",
+    "year": 1972,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.4,
+    "votes": 26,
+    "popularity": 0.67,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bX9rBErQllVx1rKezflwPDvstda.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/17986Oeh2N1UQD6HzXtjVsHDvfV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 469186,
+    "ru": "Смерть онлайн",
+    "en": "เน็ต ไอ ดาย สวยตายล่ะมึง!",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.4,
+    "votes": 26,
+    "popularity": 0.46,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/w9jNKQSa99o7Cf6ScGxT5agRtMY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/86ZcDOQHe8CmMwM1eGDuveSR83k.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 372337,
+    "ru": "Trailer Park Boys: Drunk, High and Unemployed",
+    "en": "Trailer Park Boys: Drunk, High and Unemployed",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.4,
+    "votes": 26,
+    "popularity": 0.42,
+    "genres": [
+      "комедия",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5IieFirFkfWMlyJLNV4PaEF7bXT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ql8S2rTkztIUHuwfAuiDeGNXvm2.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 256599,
+    "ru": "June in January",
+    "en": "June in January",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.4,
+    "votes": 26,
+    "popularity": 0.41,
+    "genres": [
+      "комедия",
+      "драма",
+      "мелодрама",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/oEGvQJ3hcJLyTNqU7szvxCelukP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1WOs0ebQNtm9PAJF0XEC5SvDvsc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "20089",
+    "ru": "Сумерки Повелителя Тьмы",
+    "en": "支配者の黄昏",
+    "year": 1997,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.4,
+    "votes": 25,
+    "popularity": 1.26,
+    "genres": [
+      "мультфильм",
+      "фэнтези",
+      "фантастика",
+      "ужасы",
+      "Аниме"
+    ],
+    "overview": "С начала времён чудовищные Демоны и благородные Стражи сражались за Землю — величественный дар Матери, создательницы всего живого. Поскольку Стражи защищают человечество и весь мир от уничтожения Демонами, они сильно ненавидят друг друга. С началом новой эры люди, позабыв о Демонах и Стражах, стали управлять Землей. Но в это же время в городе Синдзюку продолжается бесконечное сражение. Глубоко в преступных недрах города один выживший Верховный Демон составляет заговор, чтобы поработить людей. Теперь судьба человечества решится в ходе этой финальной битвы!",
+    "poster": "https://image.tmdb.org/t/p/w342/pikAk2mBnKHLMSklqWCOlpZjOQu.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3YEx97DMVVv8qUsdTwS5La3IQna.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1026202,
+    "ru": "Месть 50-футовой вебкамщицы",
+    "en": "Giantess Battle Attack!",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.4,
+    "votes": 25,
+    "popularity": 1.36,
+    "genres": [
+      "фантастика",
+      "комедия",
+      "ужасы"
+    ],
+    "overview": "Фильм расскажет о продолжении похождений чудовищно прекрасной Беверли, звезды социальных сетей, в предыдущей ленте мутировавшей до абсурдного размера. В сиквеле ей предстоит сразиться с очередными завистницами, одержимыми желанием добиться превосходства над ней.",
+    "poster": "https://image.tmdb.org/t/p/w342/wj6cbxh1e8h21R3FOPil19lnIkv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/l8OLbCzeuMmYnU2fQQls4dbsD7m.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 631428,
+    "ru": "Дорогие воспоминания: Подарок на память 2",
+    "en": "Cherished Memories: A Gift to Remember 2",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.4,
+    "votes": 25,
+    "popularity": 0.63,
+    "genres": [
+      "мелодрама",
+      "телевизионный фильм"
+    ],
+    "overview": "Дарси и Эйден готовятся встретить Рождество вместе, но неожиданный гость меняет их планы, и борьба за сохранение традиций города делает это Рождество незабываемым.",
+    "poster": "https://image.tmdb.org/t/p/w342/6ku2gd9GcXwHSqeHHfs1ihjslIb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5KIrurfI2gya8RtaZqNA6J1x7PE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 290829,
+    "ru": "Terre Battue",
+    "en": "Terre Battue",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.4,
+    "votes": 25,
+    "popularity": 1.72,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pgMwhLcMUpJ11StVGglhZbg9nml.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ya2nGkcaCrIQVQq8Ul5d6gVxHds.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 298539,
     "ru": "A Belle for Christmas",
     "en": "A Belle for Christmas",
@@ -9333,277 +9607,6 @@
     "overview": "Сюжет фильма расскажет нам о том, как из тюрьмы для умалишенных сбежали 6 самых опасных в мире психов. Встретив на своем пути парк аттракционов, стилизованный под Хэллоуин, они устраивают настоящий террор с ничего не подозревающими посетителями.",
     "poster": "https://image.tmdb.org/t/p/w342/poG8CdJlgSqkJ7JVtcVyeVBAapN.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/aup58gdd5xZy85TqXkgewtnb6jU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 343284,
-    "ru": "Ночь Живой Дэб",
-    "en": "Night of the Living Deb",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 161,
-    "popularity": 0.48,
-    "genres": [
-      "комедия",
-      "ужасы"
-    ],
-    "overview": "Дэб - рыжая бестия. И где бы она не появилась - приключения так и поджидают её. Может поэтому мужчины бросают её после первой ночи. Но когда начинается зомби-апокалипсис, Дэб решает не упускать своего последнего шанса и любой ценой подцепить себе жениха!",
-    "poster": "https://image.tmdb.org/t/p/w342/4zYHMNeK9gqr4x7GiY5YpjDEeG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ziupKeRs39HJf0m6V9F4vPxxCuP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 926516,
-    "ru": "Plancha",
-    "en": "Plancha",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 157,
-    "popularity": 0.48,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4Drst6qdfGDdkRIXEQk429QGXWC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4JFDWK5AhtkPz0zyyHgvCZdnWQD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_35694",
-    "ru": "Kirin the Noop",
-    "en": "Kirin the Noop",
-    "year": 2014,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.3,
-    "votes": 156,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Приключения",
-      "Adventure"
-    ],
-    "overview": "A shadow painting anime about a timid giraffe named Noop and his hedgehog companion named Harry as they travel their distant star world helping each other.",
-    "poster": "https://cdn.myanimelist.net/images/anime/13/86110l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 395925,
-    "ru": "Ярость 3",
-    "en": "Rampage: President Down",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 155,
-    "popularity": 0.85,
-    "genres": [
-      "боевик",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "Продолжение кровавой истории идейного убийцы Билла Уильямсона. Вдохновившись новостными репортажами, неуловимый каратель начинает новую расправу над обществом, которое изжило себя и нуждается в адовой встряске.",
-    "poster": "https://image.tmdb.org/t/p/w342/2vECiNZrGdcuu347W3Itl8IR36i.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nv5aB3k3Tvkmh5xCwpMZsVr5DxY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 94590,
-    "ru": "Злостный Видеоигровой Задрот: Кино",
-    "en": "Angry Video Game Nerd: The Movie",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 155,
-    "popularity": 0.68,
-    "genres": [
-      "фантастика",
-      "приключения",
-      "комедия",
-      "боевик"
-    ],
-    "overview": "Главная тема фильма — сомнительное захоронение свыше одного миллиона копий так называемой «самой ужасной игры за всё время», E.T. (игра по фильму Стивена Спилберга «Инопланетянин» для системы Atari 2600). По просьбе своих фанатов, ответ на эту загадку пытается найти Задрот, решив доказать, что там ничего не лежит. Федеральные организации в свою очередь считают, что он исследует Зону 51 и место падения НЛО…",
-    "poster": "https://image.tmdb.org/t/p/w342/vXEKVaCbCUd53CYKkI0B7u1LBB6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jJoNY0vNJgwr5yp67sBs19TxJra.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 295315,
-    "ru": "Половое воспитание",
-    "en": "Sex Ed",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 154,
-    "popularity": 1.25,
-    "genres": [
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "Эдди проводит свой первый урок в средней школе и обнаруживает, что его ученики не получают никакого полового воспитания. Он решает это исправить, хотя сам не слишком опытен в этой сфере.",
-    "poster": "https://image.tmdb.org/t/p/w342/nEwe8CbqDpWXLmFjMC7hQaF0Cfh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rYfIZiTkmYNQDquMbXHl47V9cj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 792657,
-    "ru": "Убийство онлайн",
-    "en": "Safer at Home",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 153,
-    "popularity": 0.64,
-    "genres": [
-      "триллер",
-      "ужасы",
-      "криминал",
-      "драма"
-    ],
-    "overview": "Распространяющаяся пандемия коронавируса вызывает настоящий хаос в Лос-Анджелесе, а город трансформируется в штат полицейских. Главные герои устраивают вечеринку онлайн в зуме, чтобы играть всю ночь в видеоигры, пробовать наркотики и спиртное. Но после употребления экстази их жизнь дома превращается в ужас.",
-    "poster": "https://image.tmdb.org/t/p/w342/p9W1IHRpSnL7EBYVb3Yb0AIhwyW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mkYYFZhjdExNNexOpCfxu9hbERp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 539364,
-    "ru": "Сатанинская паника",
-    "en": "Satanic Panic",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 152,
-    "popularity": 0.98,
-    "genres": [
-      "ужасы",
-      "комедия"
-    ],
-    "overview": "Девушка-курьер доставляет пиццу прямо на бал сатанистов из высшего общества, которым нужна её девственность. Она вынуждена сражаться за свою жизнь, чтобы не допустить прихода Сатаны.",
-    "poster": "https://image.tmdb.org/t/p/w342/qnxAGrRwBynkQXCs4Dh6zpEVajN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7xySmHLRPHy4SyfOLA50IcinewH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 402688,
-    "ru": "Абракадабра",
-    "en": "Abracadabra",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 152,
-    "popularity": 0.7,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Кармен – самая простая домохозяйка, проживающая в Мадриде. Вот только счастливой ее жизни вряд ли можно назвать, ведь супруг сделал все, чтобы ее существование превратилось в кошмар. Вскоре все меняется, когда женщина встречает идеального мужчину. Но есть одно большое «но» - этот идеал – призрак, который живет в теле ее мужа. Кармен предстоит определиться – хочет ли она приручать внезапно возникшие потусторонние силы, или все же решит не спасать супруга и оставить этого идеального представителя сильного пола.",
-    "poster": "https://image.tmdb.org/t/p/w342/bkSi1jjm2X994dgKSEcwWaA74FI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cP39k9l7VzJ5m7h2tGNfw1vrVF4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 741124,
-    "ru": "Президенты",
-    "en": "Présidents",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 150,
-    "popularity": 1.55,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Бывший президент Николя пытается убедить Франсуа, своего ярого оппонента и тоже главу в отставке, снова вместе баллотироваться на пост президента (-ов).",
-    "poster": "https://image.tmdb.org/t/p/w342/rlHMQK4cyvzqsOUZCSJEAQkd8qm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6bpomQ8dfKnqB9b49Z4EWF3vHvA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 481879,
-    "ru": "Страсть, любовь и стволы",
-    "en": "Die in a Gunfight",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 148,
-    "popularity": 1.27,
-    "genres": [
-      "боевик",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Молодой бунтарь Бен, наследник знаменитой медиаимперии в Нью-Йорке, влюбляется в дочь заклятого врага своего отца.",
-    "poster": "https://image.tmdb.org/t/p/w342/7p3PvZrIUMd4Cq9iHAQq6b5rmHt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zJIyrAt24I48Kz26ffu8dFpB6UQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1631",
-    "ru": "Настоящая девчонка",
-    "en": "Une vraie jeune fille",
-    "year": 1976,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 147,
-    "popularity": 4.57,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "Почти весь фильм девушка лет 14-ти, приехавшая на побывку из школы к сельским родителям, снимает трусики и настойчиво пытается засунуть себе между ног любой подвернувшийся предмет или тварь - вплоть до дождевых червей. Много крупных планов. В остальное время она старается соблазнить сексапильного мачо с лесопилки, но дать ему никак не решается. Это не порно. Это серьезное кино - феминистское, скандальное, запрещенное.",
-    "poster": "https://image.tmdb.org/t/p/w342/ku4Dz80IjiiQ7ODeAp1XsxRxqMK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fEfFaByobTu2RR2KMMohmCNLReg.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_331",
-    "ru": "Топ-модель по-американски",
-    "en": "America's Next Top Model",
-    "year": 2003,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.3,
-    "votes": 146,
-    "popularity": 26.99,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "Ведущая и организатор шоу супермодель Тайра Бэнкс и ее ассистенты, два веселых гея — мисс Джей и арт-директор и фотограф Джей Мануэль выбрали тридцать пять девушек, которые сели за парту начальной школы моделей в Лос-Анджелесе. На шоу уже было девять драк, восемь макияжей сквозь слезы, семь вызовов врача по причине нервного срыва, шесть неудачных падений на подиуме, общение с пятью толстушками, уверенными в неотразимости своих форм и четыре фотосессии в воздухе.",
-    "poster": "https://image.tmdb.org/t/p/w342/47EIfjYrT80AOfpAIkvSxdpwGOv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9kuUPHz99Oojm6GG7mawtIjv4lv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 727097,
-    "ru": "Макс Фист",
-    "en": "Archenemy",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 142,
-    "popularity": 1.07,
-    "genres": [
-      "боевик",
-      "криминал",
-      "фантастика",
-      "триллер"
-    ],
-    "overview": "Макс Фист утверждает, что он супергерой из другого измерения, провалившийся сквозь время и пространство на Землю и потерявший из-за этого свои суперспособности. Его рассказам не верит никто, кроме паренька по кличке Хомяк.",
-    "poster": "https://image.tmdb.org/t/p/w342/s52To6FnIgSGTUOw4gN0eKusF44.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s8GWJcoif5bt4woQAXGlfe7LwoS.jpg",
     "source": "tmdb"
   }
 ]

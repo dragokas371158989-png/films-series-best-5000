@@ -5662,29 +5662,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8007757,
-    "ru": "В чужой шкуре",
-    "en": "Swapped",
-    "year": "2026",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 8.97,
-    "votes": 1647,
-    "popularity": 216.39,
-    "genres": [
-      "приключения",
-      "мультфильм",
-      "семейный",
-      "фэнтези"
-    ],
-    "overview": "Крошечное лесное существо и величественная птица внезапно поменялись телами, и теперь им предстоит вместе пережить самое безумное приключение в своей жизни.",
-    "poster": "https://image.tmdb.org/t/p/w342/gl112Rnih0fHcWBIKpVzeW84xov.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/zMwhWailP1WY7sb6AoE6b8ugoy.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 1007757
-  },
-  {
     "id": "mal_265",
     "ru": "Fighting Spirit: Mashiba vs. Kimura",
     "en": "Hajime no Ippo: Mashiba vs. Kimura",
@@ -5707,6 +5684,29 @@
     "poster": "https://cdn.myanimelist.net/images/anime/4/64737l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 8007757,
+    "ru": "В чужой шкуре",
+    "en": "Swapped",
+    "year": "2026",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 8.96,
+    "votes": 1657,
+    "popularity": 216.39,
+    "genres": [
+      "приключения",
+      "мультфильм",
+      "семейный",
+      "фэнтези"
+    ],
+    "overview": "Крошечное лесное существо и величественная птица внезапно поменялись телами, и теперь им предстоит вместе пережить самое безумное приключение в своей жизни.",
+    "poster": "https://image.tmdb.org/t/p/w342/gl112Rnih0fHcWBIKpVzeW84xov.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/zMwhWailP1WY7sb6AoE6b8ugoy.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 1007757
   },
   {
     "id": "mal_40174",
@@ -5893,6 +5893,29 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8245328,
+    "ru": "Margarita: Que tu cuento valga la pena",
+    "en": "Margarita: Que tu cuento valga la pena",
+    "year": "2024",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.95,
+    "votes": 74,
+    "popularity": 9.53,
+    "genres": [
+      "комедия",
+      "драма",
+      "семейный",
+      "Мыльная опера"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/h5ie5WyR4kvQBs93TigxjRjLRlr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/ldCadzOdqjjIYdUlhVCBYSiTwB9.jpg",
+    "source": "trending_tv_week",
+    "status": "Онгоинг",
+    "tmdbId": 245328
+  },
+  {
     "id": "mal_24687",
     "ru": "Mushi-shi Path of Thorns",
     "en": "Mushishi Zoku Shou: Odoro no Michi",
@@ -6024,27 +6047,25 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8245328,
-    "ru": "Margarita: Que tu cuento valga la pena",
-    "en": "Margarita: Que tu cuento valga la pena",
-    "year": "2024",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.93,
-    "votes": 73,
-    "popularity": 9.53,
+    "id": 7000238,
+    "ru": "Крёстный отец",
+    "en": "The Godfather",
+    "year": "1972",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 8.7,
+    "votes": 23020,
+    "popularity": 44.89,
     "genres": [
-      "комедия",
       "драма",
-      "семейный",
-      "Мыльная опера"
+      "криминал"
     ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/h5ie5WyR4kvQBs93TigxjRjLRlr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/ldCadzOdqjjIYdUlhVCBYSiTwB9.jpg",
-    "source": "trending_tv_week",
-    "status": "Онгоинг",
-    "tmdbId": 245328
+    "overview": "Криминальная сага, повествующая о нью-йоркской сицилийской мафиозной семье Корлеоне. Фильм охватывает период 1945-1955 годов. Глава семьи, Дон Вито Корлеоне, выдаёт замуж свою дочь. В это время со Второй мировой войны возвращается его любимый сын Майкл. Майкл, герой войны, гордость семьи, не выражает желания заняться жестоким семейным бизнесом. Дон Корлеоне ведёт дела по старым правилам, но наступают иные времена, и появляются люди, желающие изменить сложившиеся порядки. На Дона Корлеоне совершается покушение.",
+    "poster": "https://image.tmdb.org/t/p/w342/hoowzozsn0XQGtgH8nyivAMZfPN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/tSPT36ZKlP2WVHJLM4cQPLSzv3b.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 238
   },
   {
     "id": "mal_57433",
@@ -6073,6 +6094,27 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8278573,
+    "ru": "Жена принца XXI века",
+    "en": "21세기 대군부인",
+    "year": "2026",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.92,
+    "votes": 119,
+    "popularity": 43.86,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "В условиях конституционной монархии XXI века, женщина, имеющая всё, но остающаяся простолюдинкой, встречает принца, который, несмотря на своё королевское происхождение, чувствует себя бессильным, — и это приводит к любви, которая бросает вызов социальному статусу.",
+    "poster": "https://image.tmdb.org/t/p/w342/j37wlFXIPcSVEjWOi1KBxzWK0in.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/6ekykPwvAywJRjFEnUoCFWTO9O3.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 278573
+  },
+  {
     "id": "mal_440",
     "ru": "Revolutionary Girl Utena",
     "en": "Shoujo Kakumei Utena",
@@ -6099,27 +6141,6 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1078/95285l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 7000238,
-    "ru": "Крёстный отец",
-    "en": "The Godfather",
-    "year": "1972",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 8.69,
-    "votes": 23016,
-    "popularity": 44.89,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "Криминальная сага, повествующая о нью-йоркской сицилийской мафиозной семье Корлеоне. Фильм охватывает период 1945-1955 годов. Глава семьи, Дон Вито Корлеоне, выдаёт замуж свою дочь. В это время со Второй мировой войны возвращается его любимый сын Майкл. Майкл, герой войны, гордость семьи, не выражает желания заняться жестоким семейным бизнесом. Дон Корлеоне ведёт дела по старым правилам, но наступают иные времена, и появляются люди, желающие изменить сложившиеся порядки. На Дона Корлеоне совершается покушение.",
-    "poster": "https://image.tmdb.org/t/p/w342/hoowzozsn0XQGtgH8nyivAMZfPN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/tSPT36ZKlP2WVHJLM4cQPLSzv3b.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 238
   },
   {
     "id": "mal_5690",
@@ -6354,25 +6375,6 @@
     "source": "tmdb"
   },
   {
-    "id": "tv_214999",
-    "ru": "Плохая мать",
-    "en": "나쁜 엄마",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.9,
-    "votes": 190,
-    "popularity": 7.47,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/o8h8BJz85BNI6g6ty47jbpEDAiK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zOZqdv7UTc2sP2Tu5Cxj8j1M2r8.jpg",
-    "source": "tmdb"
-  },
-  {
     "id": "tv_137228",
     "ru": "La Casa de los Famosos",
     "en": "La Casa de los Famosos",
@@ -6389,6 +6391,29 @@
     "poster": "https://image.tmdb.org/t/p/w342/os706RrUUFdW8sWuo1qmmCDv6OE.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/qNT2VZqK3ZQsXr5wBBXqO4kdVtk.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 8229544,
+    "tmdbId": 229544,
+    "ru": "Среди нас",
+    "en": "Among Us",
+    "year": "2026",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 8.9,
+    "votes": 74,
+    "poster": "https://image.tmdb.org/t/p/w342/b1Iicvevtup9jAzXVCNMnjSN2ti.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/zoa11EvyuasC3j7PmH1QGftrSvf.jpg",
+    "overview": "Эксцентричные, однотонные члены экипажа корабля, перевозящего металлолом по галактике, должны искоренить Самозванца среди себя, прежде чем сами станут жертвами его злодейских замыслов.",
+    "genres": [
+      "мультфильм",
+      "детектив",
+      "комедия",
+      "НФ и Фэнтези"
+    ],
+    "source": "tv_popular"
   },
   {
     "id": 259819,
@@ -9295,26 +9320,25 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 7157336,
-    "ru": "Интерстеллар",
-    "en": "Interstellar",
-    "year": "2014",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 8.5,
-    "votes": 39975,
-    "popularity": 72.1,
+    "id": 8214999,
+    "ru": "Плохая мать",
+    "en": "나쁜 엄마",
+    "year": "2023",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.89,
+    "votes": 191,
+    "popularity": 7.47,
     "genres": [
-      "приключения",
       "драма",
-      "фантастика"
+      "комедия"
     ],
-    "overview": "Когда засуха, пыльные бури и вымирание растений приводят человечество к продовольственному кризису, коллектив исследователей и учёных отправляется сквозь червоточину в путешествие, чтобы превзойти прежние ограничения для космических путешествий человека и найти планету с подходящими для человечества условиями.",
-    "poster": "https://image.tmdb.org/t/p/w342/vReLRjDV9XPhiOSEW7QWow4DXwf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/2ssWTSVklAEc98frZUQhgtGHx7s.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 157336
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/o8h8BJz85BNI6g6ty47jbpEDAiK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/zOZqdv7UTc2sP2Tu5Cxj8j1M2r8.jpg",
+    "source": "discover_best_tv_2023",
+    "status": "Онгоинг",
+    "tmdbId": 214999
   },
   {
     "id": "mal_32366",
@@ -9341,27 +9365,6 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1962/133573l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 8278573,
-    "ru": "Жена принца XXI века",
-    "en": "21세기 대군부인",
-    "year": "2026",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.89,
-    "votes": 116,
-    "popularity": 43.86,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "В условиях конституционной монархии XXI века, женщина, имеющая всё, но остающаяся простолюдинкой, встречает принца, который, несмотря на своё королевское происхождение, чувствует себя бессильным, — и это приводит к любви, которая бросает вызов социальному статусу.",
-    "poster": "https://image.tmdb.org/t/p/w342/j37wlFXIPcSVEjWOi1KBxzWK0in.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/6ekykPwvAywJRjFEnUoCFWTO9O3.jpg",
-    "source": "tv_popular",
-    "status": "Онгоинг",
-    "tmdbId": 278573
   },
   {
     "id": "mal_55016",
@@ -9421,7 +9424,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 8.53,
-    "votes": 35876,
+    "votes": 35881,
     "popularity": 40.13,
     "genres": [
       "боевик",
@@ -9434,6 +9437,28 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 155
+  },
+  {
+    "id": 7157336,
+    "ru": "Интерстеллар",
+    "en": "Interstellar",
+    "year": "2014",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 8.48,
+    "votes": 39989,
+    "popularity": 72.1,
+    "genres": [
+      "приключения",
+      "драма",
+      "фантастика"
+    ],
+    "overview": "Когда засуха, пыльные бури и вымирание растений приводят человечество к продовольственному кризису, коллектив исследователей и учёных отправляется сквозь червоточину в путешествие, чтобы превзойти прежние ограничения для космических путешествий человека и найти планету с подходящими для человечества условиями.",
+    "poster": "https://image.tmdb.org/t/p/w342/vReLRjDV9XPhiOSEW7QWow4DXwf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/2ssWTSVklAEc98frZUQhgtGHx7s.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 157336
   },
   {
     "id": "mal_61517",
@@ -9661,26 +9686,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8259702,
-    "ru": "Дом духов",
-    "en": "The House of the Spirits",
-    "year": "2026",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.87,
-    "votes": 59,
-    "popularity": 11.71,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Эстебан Труэба выстраивает могущественную династию, пройдя путь от нищеты до абсолютной власти в политически нестабильной стране. Его жена Клара наделена мистическим даром общения с духами — её способности переплетают судьбы трёх поколений семьи на фоне социальных бурь, революций и неизбежных перемен.",
-    "poster": "https://image.tmdb.org/t/p/w342/yb682O0KCZlS5qRydxOytO5A6co.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/aX2MN3TweeODXA8xrciMWogL9A2.jpg",
-    "source": "trending_tv_week",
-    "status": "Онгоинг",
-    "tmdbId": 259702
-  },
-  {
     "id": "mal_45556",
     "ru": "Scissor Seven: Xuanwu Kingdom Chapter",
     "en": "Wu Liuqi: Xuanwu Guo Pian",
@@ -9747,6 +9752,28 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8245026,
+    "ru": "Волшебники за пределами Вэйверли Плэйс",
+    "en": "Wizards Beyond Waverly Place",
+    "year": "2024",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.86,
+    "votes": 196,
+    "popularity": 13.21,
+    "genres": [
+      "комедия",
+      "НФ и Фэнтези",
+      "семейный"
+    ],
+    "overview": "Сериал рассказывает о взрослом Джастине Руссо, который решил вести обычную, смертную жизнь со своей семьёй, Джадой, Романом и Майло. Когда сестра Джастина Алекс приводит в его дом Билли, требующую помощи, Джастин понимает, что ему придется воспользоваться своими магическими навыками, чтобы наставлять волшебника-стажёра, одновременно выполняя свои повседневные обязанности и защищая будущее Мира Волшебников.",
+    "poster": "https://image.tmdb.org/t/p/w342/zekFfF9ch0yjfKPiyOQW7v4T03Y.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/ore4E3D1qfTH1Ollf4UDhzW3PtG.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 245026
+  },
+  {
     "id": "mal_30370",
     "ru": "Yona of the Dawn OVA",
     "en": "Akatsuki no Yona OVA",
@@ -9769,28 +9796,6 @@
     "poster": "https://cdn.myanimelist.net/images/anime/8/75974l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 8094605,
-    "tmdbId": 94605,
-    "ru": "Аркейн",
-    "en": "Arcane",
-    "year": "2021",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 8.8,
-    "votes": 5925,
-    "poster": "https://image.tmdb.org/t/p/w342/kVioUjk1SXGWblJNaKsIJcBqUcY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/q8eejQcg1bAqImEV8jh8RtBD4uH.jpg",
-    "overview": "В условиях глубоких разногласий между городами-близнецами, Пилтовером и Зауном, две сестры оказываются по разные стороны баррикад в войне технологий и убеждений.",
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "НФ и Фэнтези"
-    ],
-    "source": "tv_top_rated"
   },
   {
     "id": 94605,
@@ -9842,28 +9847,6 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1203/139210l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 8245026,
-    "ru": "Волшебники за пределами Вэйверли Плэйс",
-    "en": "Wizards Beyond Waverly Place",
-    "year": "2024",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.85,
-    "votes": 194,
-    "popularity": 13.21,
-    "genres": [
-      "комедия",
-      "НФ и Фэнтези",
-      "семейный"
-    ],
-    "overview": "Сериал рассказывает о взрослом Джастине Руссо, который решил вести обычную, смертную жизнь со своей семьёй, Джадой, Романом и Майло. Когда сестра Джастина Алекс приводит в его дом Билли, требующую помощи, Джастин понимает, что ему придется воспользоваться своими магическими навыками, чтобы наставлять волшебника-стажёра, одновременно выполняя свои повседневные обязанности и защищая будущее Мира Волшебников.",
-    "poster": "https://image.tmdb.org/t/p/w342/zekFfF9ch0yjfKPiyOQW7v4T03Y.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/ore4E3D1qfTH1Ollf4UDhzW3PtG.jpg",
-    "source": "tv_popular",
-    "status": "Онгоинг",
-    "tmdbId": 245026
   },
   {
     "id": "mal_18617",
@@ -10117,27 +10100,24 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8209867,
-    "tmdbId": 209867,
-    "ru": "Фрирен, провожающая в последний путь",
-    "en": "葬送のフリーレン",
-    "year": "2023",
+    "id": 8259702,
+    "ru": "Дом духов",
+    "en": "The House of the Spirits",
+    "year": "2026",
     "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 8.81,
-    "votes": 845,
-    "poster": "https://image.tmdb.org/t/p/w342/bxWVzZ6oq5SdUBOcG74IavUlHGd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/rBOnrVlck7BIlGeWVlzYiZeg4l2.jpg",
-    "overview": "Владыка Тьмы повержен, и вместе с тем подошло к концу путешествие героя Химмеля и его отряда. Шли годы, все они разбрелись кто куда, но только эльфийке-долгожительнице Фрирен десятилетия показались мгновением... и однажды на её плечи легла тяжесть осознания того, что людской век ужасно скоротечен. В конце концов эльфийка решает во чтобы то ни стало исполнить предсмертные желания своих друзей. Но сможет ли она это сделать? И как сильно её потрясёт череда неизбежных потерь? Фрирен пускается в путь, чтобы это выяснить...",
+    "category": "Сериал",
+    "rating": 8.83,
+    "votes": 61,
+    "popularity": 11.71,
     "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "драма",
-      "НФ и Фэнтези"
+      "драма"
     ],
-    "source": "tv_top_rated"
+    "overview": "Эстебан Труэба выстраивает могущественную династию, пройдя путь от нищеты до абсолютной власти в политически нестабильной стране. Его жена Клара наделена мистическим даром общения с духами — её способности переплетают судьбы трёх поколений семьи на фоне социальных бурь, революций и неизбежных перемен.",
+    "poster": "https://image.tmdb.org/t/p/w342/yb682O0KCZlS5qRydxOytO5A6co.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/aX2MN3TweeODXA8xrciMWogL9A2.jpg",
+    "source": "trending_tv_week",
+    "status": "Онгоинг",
+    "tmdbId": 259702
   },
   {
     "id": "mal_38731",
@@ -10190,6 +10170,28 @@
     "poster": "https://cdn.myanimelist.net/images/anime/13/39511l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 8259819,
+    "tmdbId": 259819,
+    "ru": "Боевой петух",
+    "en": "Rooster Fighter",
+    "year": "2026",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 8.81,
+    "votes": 71,
+    "poster": "https://image.tmdb.org/t/p/w342/bvDvF91GNzarxEJNXePr96rgvcl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/nTDL4UmMLDBCeMtYh8F1LZtgmLV.jpg",
+    "overview": "Мир в огне, гигантские монстры жрут города, а человечество уже готово выкинуть белый флаг. Но тут на горизонте появляется одинокий странник с идеальной укладкой гребня и стальным взглядом. Никаких супергероев в трико — спасать планету будет Кейдзи, самый пафосный и брутальный петух в истории!\n\nЭто не просто птичий двор, это яростный экшен, где одно мощное «КУ-КА-РЕ-КУ» разносит чудовищ на атомы. Кейдзи живет по законам суровых боевиков: он мстит за прошлое, защищает слабых и уходит в закат, не оборачиваясь на взрывы. Готовьтесь к самому абсурдному и драйвовому зрелищу года, где перья летят вместе с головами монстров!",
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "НФ и Фэнтези"
+    ],
+    "source": "tv_popular"
   },
   {
     "id": "mal_37514",
@@ -10274,6 +10276,28 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8094605,
+    "tmdbId": 94605,
+    "ru": "Аркейн",
+    "en": "Arcane",
+    "year": "2021",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 8.75,
+    "votes": 5925,
+    "poster": "https://image.tmdb.org/t/p/w342/kVioUjk1SXGWblJNaKsIJcBqUcY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/q8eejQcg1bAqImEV8jh8RtBD4uH.jpg",
+    "overview": "В условиях глубоких разногласий между городами-близнецами, Пилтовером и Зауном, две сестры оказываются по разные стороны баррикад в войне технологий и убеждений.",
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "НФ и Фэнтези"
+    ],
+    "source": "tv_top_rated"
+  },
+  {
     "id": 8000246,
     "tmdbId": 246,
     "ru": "Аватар: Легенда об Аанге",
@@ -10284,7 +10308,7 @@
     "status": "Онгоинг",
     "studio": "",
     "rating": 8.76,
-    "votes": 4865,
+    "votes": 4866,
     "poster": "https://image.tmdb.org/t/p/w342/pbTLpt8c7YUT4Vr6DE2ai3HY6U7.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/7oBGhqJIghRBvOwo5Qe0yM0cnMc.jpg",
     "overview": "В мире существуют народы 4-ёх стихий: огня, воды, земли и воздуха. Представитель народа огня решил поработить остальные народы. Спасти мир и прекратить войну подвластно только Аватару, повелевающему всеми 4-мя стихиями. Ответственность внезапно ложится на плечи 19-ти летнего Аанга, которому предстоит отправиться в опасное путешествие.",
@@ -10323,6 +10347,29 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8209867,
+    "tmdbId": 209867,
+    "ru": "Фрирен, провожающая в последний путь",
+    "en": "葬送のフリーレン",
+    "year": "2023",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 8.8,
+    "votes": 847,
+    "poster": "https://image.tmdb.org/t/p/w342/bxWVzZ6oq5SdUBOcG74IavUlHGd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/rBOnrVlck7BIlGeWVlzYiZeg4l2.jpg",
+    "overview": "Владыка Тьмы повержен, и вместе с тем подошло к концу путешествие героя Химмеля и его отряда. Шли годы, все они разбрелись кто куда, но только эльфийке-долгожительнице Фрирен десятилетия показались мгновением... и однажды на её плечи легла тяжесть осознания того, что людской век ужасно скоротечен. В конце концов эльфийка решает во чтобы то ни стало исполнить предсмертные желания своих друзей. Но сможет ли она это сделать? И как сильно её потрясёт череда неизбежных потерь? Фрирен пускается в путь, чтобы это выяснить...",
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "драма",
+      "НФ и Фэнтези"
+    ],
+    "source": "tv_top_rated"
+  },
+  {
     "id": 209867,
     "ru": "Фрирен, провожающая в последний путь",
     "en": "葬送のフリーレン",
@@ -10343,6 +10390,28 @@
     "poster": "https://image.tmdb.org/t/p/w342/bxWVzZ6oq5SdUBOcG74IavUlHGd.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/rBOnrVlck7BIlGeWVlzYiZeg4l2.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 7000680,
+    "tmdbId": 680,
+    "ru": "Криминальное чтиво",
+    "en": "Pulp Fiction",
+    "year": "1995",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 8.5,
+    "votes": 30265,
+    "poster": "https://image.tmdb.org/t/p/w342/qvbfoyW2zaI15c0quUfF6CRGH4H.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/suaEOtk1N1sgg2MTM7oZd2cfVp3.jpg",
+    "overview": "Пути двух наемных убийц, профессионального бойца, двух бандитов и жены гангстера пересекаются в этом закрученном кровавом путешествии по злачному центру Лос-Анджелеса.",
+    "genres": [
+      "триллер",
+      "криминал",
+      "комедия"
+    ],
+    "source": "movie_top_rated"
   },
   {
     "id": "680",
@@ -10549,28 +10618,6 @@
     "source": "tmdb"
   },
   {
-    "id": 8259819,
-    "tmdbId": 259819,
-    "ru": "Боевой петух",
-    "en": "Rooster Fighter",
-    "year": "2026",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 8.8,
-    "votes": 69,
-    "poster": "https://image.tmdb.org/t/p/w342/bvDvF91GNzarxEJNXePr96rgvcl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/nTDL4UmMLDBCeMtYh8F1LZtgmLV.jpg",
-    "overview": "Мир в огне, гигантские монстры жрут города, а человечество уже готово выкинуть белый флаг. Но тут на горизонте появляется одинокий странник с идеальной укладкой гребня и стальным взглядом. Никаких супергероев в трико — спасать планету будет Кейдзи, самый пафосный и брутальный петух в истории!\n\nЭто не просто птичий двор, это яростный экшен, где одно мощное «КУ-КА-РЕ-КУ» разносит чудовищ на атомы. Кейдзи живет по законам суровых боевиков: он мстит за прошлое, защищает слабых и уходит в закат, не оборачиваясь на взрывы. Готовьтесь к самому абсурдному и драйвовому зрелищу года, где перья летят вместе с головами монстров!",
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "НФ и Фэнтези"
-    ],
-    "source": "tv_popular"
-  },
-  {
     "id": 106978,
     "ru": "Селена + шеф",
     "en": "Selena + Chef",
@@ -10587,29 +10634,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/97TlFTlUOMcqOeY8XXHw5N1LcLL.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/wOjOaMOEksUgluhnykEKhMGjn2c.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8229544,
-    "tmdbId": 229544,
-    "ru": "Среди нас",
-    "en": "Among Us",
-    "year": "2026",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 8.8,
-    "votes": 66,
-    "poster": "https://image.tmdb.org/t/p/w342/b1Iicvevtup9jAzXVCNMnjSN2ti.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/zoa11EvyuasC3j7PmH1QGftrSvf.jpg",
-    "overview": "Эксцентричные, однотонные члены экипажа корабля, перевозящего металлолом по галактике, должны искоренить Самозванца среди себя, прежде чем сами станут жертвами его злодейских замыслов.",
-    "genres": [
-      "мультфильм",
-      "детектив",
-      "комедия",
-      "НФ и Фэнтези"
-    ],
-    "source": "tv_popular"
   },
   {
     "id": 96323,
@@ -10836,25 +10860,6 @@
     "overview": "Старшеклассница Ё Ый-джу ведёт замкнутый образ жизни, хорошо учится, но практически не общается со сверстниками. Никто из окружающих не подозревает, что Ый-джу — автор любовных романов для взрослых. Главными героями её произведений становятся харизматичные учителя, и в реальной жизни она сталкивается с четырьмя похожими педагогами.",
     "poster": "https://image.tmdb.org/t/p/w342/qWN2GtyhOzT8Bx17gbjLQ56p8Ml.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/sWgf0zfmjKiwXl5ND2b9apkChkV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 240591,
-    "ru": "연애 지상주의 구역",
-    "en": "연애 지상주의 구역",
-    "year": 2024,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.8,
-    "votes": 36,
-    "popularity": 2.23,
-    "genres": [
-      "драма",
-      "НФ и Фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2B5qmwLebYJPl2rUGiPptstJV5y.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zosXWvNXWj6cddVVXJ5iBuLjYlV.jpg",
     "source": "tmdb"
   }
 ]

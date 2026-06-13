@@ -1,5 +1,281 @@
 [
   {
+    "id": 34708,
+    "ru": "Гэнсикэн",
+    "en": "げんしけん",
+    "year": 2004,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.1,
+    "votes": 40,
+    "popularity": 9.82,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "Нет ничего лучше, чем студенческие годы. Это счастливое время беззаботной юности, когда вокруг тебя находятся прекрасные девушки, а в свободное от учебы время можно с головой окунуться в клубные увлечения…. Именно об этом и пойдет речь дальше. Нерешительный первокурсник Сасахара Кандзи должен вступить в клуб. Что может быть проще? Но для стеснительного паренька это очень нелегкий шаг. Неуверенность в себе закрывает перед ним двери желанных аниме и манга клубов. Хотя, имеется еще одна возможность – вступить в клуб «Гэнсикен», включающий в себя и вышеперечисленные увлечения. Сасахара решает использовать свой последний шанс, но и здесь его поджидают непростые испытания. При первой же проверке паренька застают в руках с тем, с чем воспитанному человеку не пристало бы показываться на людях. Да уж, похоже, что в клубе «Гэнсикен» скучать никому не придется.",
+    "poster": "https://image.tmdb.org/t/p/w342/A08BbxuWLWzJ98NZTh1xY6jJ0tP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/h9IQsx7dMMJPDPRIKS44utEQOfP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "68368",
+    "ru": "Грязная Парочка: Проект Эдем",
+    "en": "ダーティペア 劇場版",
+    "year": 1986,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.1,
+    "votes": 40,
+    "popularity": 1.1,
+    "genres": [
+      "мультфильм",
+      "фантастика",
+      "боевик",
+      "комедия",
+      "мелодрама",
+      "Аниме"
+    ],
+    "overview": "Планета Агерна - крупнейший поставщик визория, минерала, необходимого для космических путешествий. Неудивительно, что после серии нападений на горнодобывающие участки правительства всего мира обвиняют в терактах друг друга. ОООБ приходится отправить на расследование своих лучших агентов. Но справятся ли \"Прекрасные Ангелы\" с безумным ученым, пытающимся пробудить древнюю инопланетную расу и привести ее к завершающей стадии эволюции? Прибавьте к этому вора, охотящегося за бутылкой старинного вина времен Второй Мировой, и можете быть уверены - планета в опасности! \"Грязная парочка\" берется за свое самое безумное дело, а значит, нас ожидает еще больше хаоса, еще больше пострадавших, еще больше разрушений!",
+    "poster": "https://image.tmdb.org/t/p/w342/nBi474csfvBhSWAuWBZHnwXpJGd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fh7zymOxycXT7K09KIyGlUXBdUa.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 771257,
+    "ru": "Аферист",
+    "en": "อ้าย..คนหล่อลวง",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 40,
+    "popularity": 0.85,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Парень Ины убегает, оставляя её в серьезных долгах. Когда девушку пытается обмануть телефонный мошенник, она быстро выводит его на чистую воду. Но она не сдаёт афериста в полицию, а нанимает его, чтобы проучить своего бывшего.",
+    "poster": "https://image.tmdb.org/t/p/w342/1BsleErwzQ97vCnZVwlHCNQb4JL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6SZg4LRCQxyqVZ3TgRKJfhCjCYH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 681303,
+    "ru": "Моя фея-проказница",
+    "en": "Meine Chaosfee & Ich",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 40,
+    "popularity": 0.8,
+    "genres": [
+      "мультфильм",
+      "приключения",
+      "комедия",
+      "семейный",
+      "фэнтези"
+    ],
+    "overview": "Крошечная фея Виолетта, провалив экзамен по волшебству, не сможет доставлять подарки в мир людей. Обманным путем маленькой волшебнице удается проникнуть на Землю и подружиться с девочкой Макси, которая живет с мамой в большом городе, скучая по своему старому загородному дому. Виолетта обещает своей новой подружке исполнить сокровенное желание, если Макси поможет ей...",
+    "poster": "https://image.tmdb.org/t/p/w342/pft66sAJHof3WsA1lxLCqA3arf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/p4o1xEIHdQVuchXzkFSQORh3gWx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1166714,
+    "ru": "Mickey and Friends: Trick or Treats",
+    "en": "Mickey and Friends: Trick or Treats",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 40,
+    "popularity": 1.13,
+    "genres": [
+      "мультфильм",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5Gz3k1TqeAxL5M47XZzjltxQrMb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uELCMpKxSXqKN47iOUTjJmJD57g.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 4250,
+    "ru": "Last of the Summer Wine",
+    "en": "Last of the Summer Wine",
+    "year": 1973,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.1,
+    "votes": 40,
+    "popularity": 26.2,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Фильм рассказывает о двух братьях. Младший - работает в полиции, у старшего - финансовые проблемы. Когда младший брат соглашается помочь снять старшему брату порно фильм, ему приходится совмещать службу добропорядочного полицейского днем с работой режиссером порно фильма ночью. И с каждым днем это становится сложнее и сложнее.",
+    "poster": "https://image.tmdb.org/t/p/w342/vjI4WdHda9ckCo5YIYVhc8rl6SR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/88jpREzaBTjadaJ71JbihhL9A1k.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 74902,
+    "ru": "Хайди",
+    "en": "Heidi",
+    "year": 1993,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.1,
+    "votes": 40,
+    "popularity": 1.75,
+    "genres": [
+      "драма",
+      "семейный"
+    ],
+    "overview": "После гибели родителей Хайди воспитывала тетушка. Когда девочке исполнилось 8 лет, ее привезли в горы к дедушке, который поначалу не признает внучку. Благодаря ангельскому терпению девочки и ласковым словам, сердце старика оттаивает. У Хайди появляются друзья. Однако, через некоторое время, тетушка отдает ее в богатый дом, где она должна стать компаньонкой больной девочки Клары, прикованной к инвалидной коляске…",
+    "poster": "https://image.tmdb.org/t/p/w342/8AgGpuktVJamxvjHnRmCGmjURu7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cLrJ7B61zdYt4Vxrsd9RvxFo11G.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 479630,
+    "ru": "Расследование Хейли Дин: Смертельные Свидания",
+    "en": "Hailey Dean Mysteries: Dating Is Murder",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 40,
+    "popularity": 0.5,
+    "genres": [
+      "детектив",
+      "криминал",
+      "телевизионный фильм"
+    ],
+    "overview": "Игрушка в руках убийцы может стать смертельным оружием, и так происходит с приложением для знакомств. Хейли начинает очередное расследование, и на этот раз виртуальный убийца оказывается опаснее всех живых.",
+    "poster": "https://image.tmdb.org/t/p/w342/oUvxkLiFPUU82HwgcySdgRmXDVI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/agXTwI5evShrIOrCJ5u8OaMidEx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_1849",
+    "ru": "Benson",
+    "en": "Benson",
+    "year": 1979,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.1,
+    "votes": 40,
+    "popularity": 12.2,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pXQIwDfMMDF6GVJdgLm68Exm5wo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hs0q37NVgFkN8AMtXhKbtw3w4gR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 387252,
+    "ru": "காதலும் கடந்து போகும்",
+    "en": "காதலும் கடந்து போகும்",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 40,
+    "popularity": 1.12,
+    "genres": [
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4kg3MYk5u5FNRowZypXON1qR1Ji.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mnvqyiUprja8lxDONWBqSvZlYhc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 396849,
+    "ru": "Felicia Impastato",
+    "en": "Felicia Impastato",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 40,
+    "popularity": 0.87,
+    "genres": [
+      "драма",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9TpF7Iry0ag8yoGvbqqqF8fGxCe.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zEJwhYAvPnrLGDK6Z9lGvKFXch.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 255647,
+    "ru": "Монтевидео, видимо се!",
+    "en": "Монтевидео, видимо се!",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 40,
+    "popularity": 0.37,
+    "genres": [
+      "приключения",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8ZD5R4WZSLephLFLQpWOuSIyNGC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/npxDOs4yEphzsuUETvnsNW466Q.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_68586",
+    "ru": "Человек-дьявол",
+    "en": "デビルマン",
+    "year": 1972,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.1,
+    "votes": 39,
+    "popularity": 5.47,
+    "genres": [
+      "Боевик и Приключения",
+      "мультфильм",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Человек-дьявол — один из сильнейших солдат Дьявольского клана — вселяется в тело молодого Акиры Фудо по приказу Лорда-Дьявола, чтобы сеять хаос на Земле. Однако вскоре Человек-дьявол предает Дьявольский клан из-за любви к Мики Макимуре. После того, как об этом становится известно Лорду-Дьяволу, тот посылает своих воинов за головой предателя. Сможет ли Человек-дьявол защитить мир людей и возлюбленную, при этом не раскрыв свою истинную сущность?",
+    "poster": "https://image.tmdb.org/t/p/w342/m8SDrkwGnWOB8P2FGBUIEzFOzBT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1RgfoVvgyqxOVUpqCeahVCI689A.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_283123",
+    "ru": "Мечта Эшрефа",
+    "en": "Eşref Rüya",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.1,
+    "votes": 39,
+    "popularity": 70.03,
+    "genres": [
+      "драма",
+      "Боевик и Приключения"
+    ],
+    "overview": "Эшреф — 14-летний подросток из бедной семьи, подрабатывающий в автомастерской. Однажды он встречает девушку и влюбляется в нее с первого взгляда. Не зная ее имени, в своих мечтах он зовет ее Руйя (мечта/сон). Спустя годы Эшреф становится очень богатым и влиятельным мужчиной, в его жизни есть все, кроме любви. Он часто вспоминает ту прекрасную девушку, которую полюбил с первого взгляда и с которой так и не сумел познакомиться. Судьба решает преподнести Эшрефу неприятный сюрприз — она вновь сводит его с Руйей, только вот теперь эта девушка — его враг.",
+    "poster": "https://image.tmdb.org/t/p/w342/mYG3mcnKwyrPMcZzkO9pIyE9UX1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/opxjwbFSadDgVmZtrLTlWJsUxrB.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 235228,
     "ru": "Я проснулась вампиром",
     "en": "I Woke Up a Vampire",
@@ -9433,278 +9709,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/n8o2KS8D49ZcQ4NbVJ1K2ROaBjm.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/y4JJ3PS3EfFPLlXkPhVxNIu94HY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 497607,
-    "ru": "The Man with the Gray Elevated Hair",
-    "en": "The Man with the Gray Elevated Hair",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 8,
-    "popularity": 0.6,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gRwNiJftzskWkUrt1ilhdJ8buo3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8WkhlHcXILMAdNB9p2Ga5ASB5JH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 505568,
-    "ru": "我的情敵女婿",
-    "en": "我的情敵女婿",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 8,
-    "popularity": 0.48,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yYeZhWBcWD8jNzQl0mXg7INYhA7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zX4GubAp1npfgckNDPxfpsNkBHQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 593144,
-    "ru": "A Deadly Dance",
-    "en": "A Deadly Dance",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 8,
-    "popularity": 0.4,
-    "genres": [
-      "телевизионный фильм",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/q7LDxp1DC7NhdFbsOZnIZITv1A9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1WhY8oZRl9nb0Hej2aXZrefVFra.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 38752,
-    "ru": "The Alphabet Conspiracy",
-    "en": "The Alphabet Conspiracy",
-    "year": 1959,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 8,
-    "popularity": 0.33,
-    "genres": [
-      "семейный",
-      "телевизионный фильм",
-      "мультфильм",
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7UmafAqLcAOn2HPfjmnsxDRYXL2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/alXNklpIlSrOb7Vw6JJddQfFt18.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 219481,
-    "ru": "Porky's Hero Agency",
-    "en": "Porky's Hero Agency",
-    "year": 1937,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 8,
-    "popularity": 0.32,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/78ncK41xb1aXY4Q8SH93AgaeLI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/i7h1pd8QMienTNimfLSf7KNIfjF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 613736,
-    "ru": "Smurfily Ever After",
-    "en": "Smurfily Ever After",
-    "year": 1985,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 8,
-    "popularity": 0.53,
-    "genres": [
-      "комедия",
-      "семейный",
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/v5Pi5eexIa7299Tn0zmXmWyo2PV.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 369367,
-    "ru": "The Testimony",
-    "en": "The Testimony",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 8,
-    "popularity": 0.43,
-    "genres": [
-      "документальный",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/696AxhETTkbcoFXsaaFmqBwYFG4.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 293697,
-    "ru": "Я хочу закончить эту игру любви",
-    "en": "愛してるゲームを終わらせたい",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.1,
-    "votes": 7,
-    "popularity": 10.0,
-    "genres": [
-      "комедия",
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "Юкия Асаги и Мику Сакура — друзья детства, которые всегда были рядом и давно влюблены друг в друга. Но признаться? Ни за что! Не потому что боятся, а потому что однажды, в начальной школе, они начали игру: «Я люблю тебя». По правилам побеждает тот, кто первым заставит другого покраснеть от признания. С тех пор прошло много лет, чувства стали настоящими, но правила остались. И теперь каждый их взгляд, каждый жест — это ход в глупой игре, где любовь не означает победу.",
-    "poster": "https://image.tmdb.org/t/p/w342/9abkyVlmrFDQ11vdZmpHLFnnZgY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rep8uV9N7jSYpxpxH7glSP6qOmp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 245876,
-    "ru": "Небесно-голубой гибрид",
-    "en": "空色ユーティリティ",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.1,
-    "votes": 7,
-    "popularity": 7.33,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lwIqH2y5G2cqbgoC8F3efWLICiA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1eWI1oR4LexG8PUMXVA1GAIHkKo.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 34773,
-    "ru": "Реал-Драйв",
-    "en": "RD 潜脳調査室",
-    "year": 2008,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.1,
-    "votes": 7,
-    "popularity": 9.85,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "НФ и Фэнтези",
-      "криминал",
-      "Аниме"
-    ],
-    "overview": "Действие сериала разворачивается в 2061-ом году, прошло 50 лет с тех пор, как человечество создало \"Net society\" (\"Сетевое общество\"), использующее информационные сети, несмотря на недостатки их систем безопасности. Для увеличения надежности этих самых систем была разработана новая сеть - Meta Real Network, или, для краткости, \"Metal\". Личные воспоминания людей переведены в цифровую форму и помещены в \"защищенные виртуальные отдельные органические кибер-анклавы, именуемые bubble shells\". В результате случился виртуальный взрыв творческой свободы, ведь люди чувствовали себя защищенными и могли испытывать в Metal то, что им было недоступно в реальной жизни. Эти трения между влекущим отсутствием ограничений в Metal и множество ограничений в реальности приводят к различным проблемам и случаям, расследовать которые должны так называемые \"кибер-дайверы\". Один из них - Масамити Хару.",
-    "poster": "https://image.tmdb.org/t/p/w342/33lPIG5divmPEIiCj8UmqbjQIsm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rWatsA0eJEhroHkmEWiGcdwugnz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 262932,
-    "ru": "Из поколения в поколение",
-    "en": "江湖夜雨十年灯",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.1,
-    "votes": 7,
-    "popularity": 17.39,
-    "genres": [
-      "драма",
-      "Боевик и Приключения",
-      "детектив"
-    ],
-    "overview": "Противостояние между Шестью школами Бэйчэнь и Демонической сектой длится уже два столетия, а начало вражде положила гибель главы секты Не Хэнчэна. Случайно получив божественный трактат по боевым искусствам, он нарушил хрупкое равновесие сил и принес хаос в мир праведных школ. Цай Пиншу из долины Лоин, одной из Шести школ, посвятил жизнь искоренению зла и восстановлению справедливости. Он сумел сразить Не Хэнчэна, но утратил все свои силы и скончался после долгой болезни. Двадцать лет спустя его племянница Цай Чжао, исполняя завет семьи, становится ученицей школы Цинцюэ.",
-    "poster": "https://image.tmdb.org/t/p/w342/fExFPnVTUMmRdSxon9ASsWQGkNr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6640A10Z0aysTCroNQQPK8ZB4FH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 315800,
-    "ru": "Культ йоги",
-    "en": "Twisted Yoga",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.1,
-    "votes": 7,
-    "popularity": 5.09,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "Бывшие члены школы тантрической йоги говорят о том, как их поиски благополучия и дружеского сообщества привели к опасению, что они попали в секту, и к поискам справедливости в связи с якобы имевшими место насилием и манипуляциями со стороны самопровозглашенного гуру.",
-    "poster": "https://image.tmdb.org/t/p/w342/gJmTFVuvUHJkCY1fusbJqgyoY9G.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7z2cmuREaHOFaDtzTgDNy1wbkc2.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 316835,
-    "ru": "Вкус к убийству",
-    "en": "A Taste for Murder",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.1,
-    "votes": 7,
-    "popularity": 4.89,
-    "genres": [
-      "криминал",
-      "драма",
-      "детектив"
-    ],
-    "overview": "Сериал рассказывает о старшем инспекторе уголовного розыска Джо Моттраме — звёздном детективе лондонской Метрополитен‑полиции, который после личной трагедии вместе с дочерью уезжает на Капри, в Италии, чтобы провести лето у своих итальянских родственников со стороны жены.",
-    "poster": "https://image.tmdb.org/t/p/w342/iQMSIHR6hPN53h7TILztOZuYOcl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3Kl4l236MoQahIH3aM58mqbaHwP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1062402,
-    "ru": "Бэнг-Бэнг",
-    "en": "Bang Bang",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 7,
-    "popularity": 2.53,
-    "genres": [
-      "драма"
-    ],
-    "overview": "В центре истории — Бернард «Бэнг‑Бэнг» Бернс, одинокий бывший боксер, который ведет тихую и неприметную жизнь. Пытаясь найти хоть какой‑то смысл, искупить вину за прошлое и помочь окружающим, он случайно переходит дорогу местному криминальному авторитету, что запускает цепь опасных и разрушительных событий.",
-    "poster": "https://image.tmdb.org/t/p/w342/8qYYsOLVDg3dMdakor6V5cGfvS6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/haq6qT4lrRf7pnNsTddPiF8MvWt.jpg",
     "source": "tmdb"
   }
 ]

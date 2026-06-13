@@ -1,5 +1,262 @@
 [
   {
+    "id": 663971,
+    "ru": "Русские грузины. Фильм первый",
+    "en": "Русские грузины. Фильм первый",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.39,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "Фильм об исторической роли грузин в российской, а позже — советской политике, культуре и науке. Герои фильма — Багратион и Шеварднадзе, Пиросмани и Данелия, Баланчин и Андроников.",
+    "poster": "https://image.tmdb.org/t/p/w342/gRWIao0KW8ae72X1NcFzqvEBF0Y.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5YHTDKL2KAN80dspB920aBjdcbc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 778437,
+    "ru": "Архипелаг",
+    "en": "Archipel",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.37,
+    "genres": [
+      "мультфильм",
+      "документальный"
+    ],
+    "overview": "«Архипелаг» - это фильм, состоящий из рисунков и слов, рассказывающий о выдуманной стране и ее жителях, через образ которой просвечивается знакомые очертания мира и времени, в котором мы живем.",
+    "poster": "https://image.tmdb.org/t/p/w342/yyElaE309ZgpTrzy2OzqQiY75dQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/isnlHMAlMZOicvNgDKnRzl9Vh7x.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 313437,
+    "ru": "Чернобыль: дни, которые потрясли мир",
+    "en": "Chernobyl: Days That Shocked the World",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.3,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "Чернобыльская катастрофа стала самой страшной ядерной аварией в мире. Но в то время советские власти пытались это скрыть. Теперь же свидетели и выжившие рассказывают о том, что им пришлось пережить.",
+    "poster": "https://image.tmdb.org/t/p/w342/tBc0n5vOojSzlWrgDPl4yt4GO3x.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xL0mjOqxqDLLJZLBC7c53k8qEuJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 322518,
+    "ru": "一起穿书后，我和炮灰闺蜜一路躺赢",
+    "en": "一起穿书后，我和炮灰闺蜜一路躺赢",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.15,
+    "genres": [],
+    "overview": "После трагической потери матери, девочка-подросток, пытается раскрыть темные тайны ее нового дома, несмотря на то, что отец не верит ей...",
+    "poster": "https://image.tmdb.org/t/p/w342/rbmrSWHJoNpnynuZfuBmW6tExhK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3Nx6Z0K8jY6ZYQdtU0nUFljmmBZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 312470,
+    "ru": "Убийства на побережье",
+    "en": "Mordufer",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.14,
+    "genres": [
+      "криминал"
+    ],
+    "overview": "Доро Байтингер возвращается к работе в криминальной полиции после долгих лет забот о семье, детях и больной матери. На первом же деле она знакомится со своей новой начальницей Кьярой Локателли. Две женщины из разных поколений вскоре обнаруживают, что идеально дополняют друг друга в команде и способны раскрыть даже самые безнадёжные и запутанные убийства.",
+    "poster": "https://image.tmdb.org/t/p/w342/mWIBkKd4gNsFjyvzrF5acMp48bu.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/o6EPcJrtpVd4YnkaTvCug3WKtDI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 203512,
+    "ru": "加油！妈妈",
+    "en": "加油！妈妈",
+    "year": 2022,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 12.65,
+    "genres": [
+      "семейный",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xo3qq1vYAhD2qBS2fLcpEIiCoEY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aLnO0hgy0VvDUZzKZU2o0YA9L0X.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 102790,
+    "ru": "Riti Riwaj",
+    "en": "Riti Riwaj",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 10.83,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/iPrnyIxy5Zyp1eHFbIMlAXFXLtN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/k3dnAqIGvPscRoTvEzEt3EU2EdX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1193774,
+    "ru": "Hijo, amo tu boca",
+    "en": "Hijo, amo tu boca",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 10.68,
+    "genres": [
+      "драма",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bU5PA9DmgEjgQVhm1dNrRpBcJZ5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/43r72yQDIezet8VAZzRAxu6mLWf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 701469,
+    "ru": "Robbers: A The 1975 Documentary",
+    "en": "Robbers: A The 1975 Documentary",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 8.63,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8yNylFBfU3NEb7GVKrQNMnu64KR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zrvIgIQwN9u74AKToLz6XEayTFz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 208926,
+    "ru": "XY gelöst",
+    "en": "XY gelöst",
+    "year": 2022,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 6.94,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kiBHwoo4JzdO03przBeSjYqcJ4J.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pfgqHMIHvYbnY9Vhhdggvx4KLyq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1443374,
+    "ru": "森中有林",
+    "en": "森中有林",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 6.14,
+    "genres": [
+      "драма",
+      "мелодрама",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2lCe3wAq9KpyHwRZo28PeRMZgFm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qAe5omymsbIvRzl0PySF3NKPdad.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 283765,
+    "ru": "我们的爸爸",
+    "en": "我们的爸爸",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 5.66,
+    "genres": [
+      "Реалити-шоу",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gqL3kE2KohZPakjsIymWySuiRCt.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/esWVoSm4S1hNIkRyqID467p130o.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 228667,
+    "ru": "朋友请吃饭",
+    "en": "朋友请吃饭",
+    "year": 2023,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 5.27,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ejLDGoMpma3VUv7wN3lCfowvbd2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/n79mTAQdn1a5pZ7taFdaOlupToK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 301174,
+    "ru": "Coração Acelerado",
+    "en": "Coração Acelerado",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 4.17,
+    "genres": [
+      "Мыльная опера",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dwSw1affkj4DfdqkCfyhpSa4ueP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xTU60aw1LhC3qGjKxK9B2W6gZ9k.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 312066,
     "ru": "主咖和Ta的朋友们",
     "en": "主咖和Ta的朋友们",
@@ -8895,264 +9152,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/7fqbiiosK6XwLAeiyatr2WydhOw.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/bh3KvZgl52yZkR72Zft08MVXnnA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 700263,
-    "ru": "정사 : 착한 며느리들 2",
-    "en": "정사 : 착한 며느리들 2",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.84,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xhDnmihHoFPxiuTprqan9DPltt7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/88wtK74zmG0XOALcnmiYn78UB0L.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 961330,
-    "ru": "ドクターX ～外科医・大門未知子～ スペシャル",
-    "en": "ドクターX ～外科医・大門未知子～ スペシャル",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.82,
-    "genres": [
-      "драма",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8E4EXatIujTZEZwkQjQD6Xu2EbD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/RgonVyGFVmjBAJYInZ8KkaDAV4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 432014,
-    "ru": "Big Data - La révolution des mégadonnées",
-    "en": "Big Data - La révolution des mégadonnées",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.81,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ehjkIDyc4aarTxxuq2ylllY4cKL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/o4LNOyiQO8SsAyNqJOAbepK5c6L.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 700559,
-    "ru": "가정교사-맛있는 섹스 비밀수업",
-    "en": "가정교사-맛있는 섹스 비밀수업",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.8,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/z3iRgI2l6rwekjRdFd85urUs41D.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bIwD6udw6agqAcMSaZFFZxJMxDh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 428473,
-    "ru": "PG戀愛指引",
-    "en": "PG戀愛指引",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.8,
-    "genres": [
-      "драма",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kQSLm9PoV5HsEIR28gsG7cUE0kT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cxTgpa23YYtmbv9igxnkinVEWBL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 470749,
-    "ru": "类似爱情2：只有我知",
-    "en": "类似爱情2：只有我知",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.79,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wkeW2yMsA8ZV2u1FHVCF8KFsfTC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/smushoZjUYPe84AJLTDCMi8epqG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 698752,
-    "ru": "완벽한 섹스의 맛",
-    "en": "완벽한 섹스의 맛",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.78,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qA3yjf5LrjvtVxLlHmmAhVlJqEL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/g2HdfRnLyi8jGTantEz9UlIYmrn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 427753,
-    "ru": "Santa Forgot",
-    "en": "Santa Forgot",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.77,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oc7DI9mHehYWkk0HQGW1VTpRQGb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aiPs64yWCPs0ovWR6yowLucTagA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 914782,
-    "ru": "欲望爱人",
-    "en": "欲望爱人",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.75,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hpDRyNWkSLnzeu5zZudgk7reJby.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bMuAU50m4YJqIKEq2KJnPa97THU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 285313,
-    "ru": "Bwaya",
-    "en": "Bwaya",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.75,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wN2ifwefiG3R8tj36Wgvyuwhd8c.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cM2CXr9PTKOXAUVqpwxf6exW45M.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 630612,
-    "ru": "聖☆おにいさん 第Ⅱ紀",
-    "en": "聖☆おにいさん 第Ⅱ紀",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.73,
-    "genres": [
-      "комедия",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oW8LNwtKomdHwsV8CgffS8MbeaS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8gEBKHispNvXMEwkjFyssoeR7Ds.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 763006,
-    "ru": "大雪山の勇者 牙王",
-    "en": "大雪山の勇者 牙王",
-    "year": 1978,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.73,
-    "genres": [
-      "мультфильм",
-      "приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hhD549GFbC6FYO26CDhraB4stpr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bQjNsPVyq5rCqVbWHMxCPBZ12zA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 265982,
-    "ru": "Holidaze: The Christmas That Almost Didn't Happen",
-    "en": "Holidaze: The Christmas That Almost Didn't Happen",
-    "year": 2006,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.73,
-    "genres": [
-      "семейный",
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bGQOSLcyBk2K8bxCKNIpenifLVz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eTbivYREJQ8n77DeIvOnge1AHEz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1300275,
-    "ru": "犬神家の一族",
-    "en": "犬神家の一族",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.72,
-    "genres": [
-      "телевизионный фильм",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/sbK8LOppzrFPOCeNzmgKFSPdFfm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7R9HdLeHeRWPjx8TGTfP2VcPzaR.jpg",
     "source": "tmdb"
   }
 ]

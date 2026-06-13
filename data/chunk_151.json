@@ -1,5 +1,278 @@
 [
   {
+    "id": 312770,
+    "ru": "Ana Maria in Novela Land",
+    "en": "Ana Maria in Novela Land",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.1,
+    "votes": 11,
+    "popularity": 0.81,
+    "genres": [
+      "фэнтези",
+      "комедия",
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4GvBAsv0ZneN162YxVJnTqlQZts.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/clSZOboesVlSMaLOd6xwdRA5nLy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 458294,
+    "ru": "Menendez: Blood Brothers",
+    "en": "Menendez: Blood Brothers",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.1,
+    "votes": 11,
+    "popularity": 0.68,
+    "genres": [
+      "драма",
+      "телевизионный фильм",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/svTPcBSl6DozVGgQIZdOaujdwZQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7koiUiubldbRGNuXf2jJgj9P8Hz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 436450,
+    "ru": "Addicted to Porn: Chasing the Cardboard Butterfly",
+    "en": "Addicted to Porn: Chasing the Cardboard Butterfly",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.1,
+    "votes": 11,
+    "popularity": 0.53,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/72Vf0T8naq5emFa5AMNMOCiGgMP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wpu4muR9vWAKTSBn31SWU4K4ndU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 281139,
+    "ru": "行動代號：孫中山",
+    "en": "行動代號：孫中山",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.1,
+    "votes": 11,
+    "popularity": 0.38,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hveZCrmMwJRIbWyDSqOCAPrFrry.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s8XTPODojpdZWpuWHTCMgHSQKJb.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 413640,
+    "ru": "മുദ്ദുഗൗ",
+    "en": "മുദ്ദുഗൗ",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.1,
+    "votes": 11,
+    "popularity": 0.85,
+    "genres": [
+      "боевик",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/z6Acsm2dJohn1AgLInVENXmmVm6.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 404100,
+    "ru": "The Coneheads",
+    "en": "The Coneheads",
+    "year": 1983,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.1,
+    "votes": 11,
+    "popularity": 0.46,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "фантастика",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/djSxIZ9xIdqbea8G0bxVmRslt9O.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 284307,
+    "ru": "Waste Land",
+    "en": "Waste Land",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.1,
+    "votes": 11,
+    "popularity": 0.39,
+    "genres": [
+      "драма",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rx2cVdaKqlOLZ5CIdA9eJPeL6nE.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 296998,
+    "ru": "Plan Sexenal",
+    "en": "Plan Sexenal",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.1,
+    "votes": 11,
+    "popularity": 0.38,
+    "genres": [
+      "триллер",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/jcUZJ3V3ZIQycTLWVCniXuwACSB.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 162705,
+    "ru": "Bosko's Soda Fountain",
+    "en": "Bosko's Soda Fountain",
+    "year": 1931,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.1,
+    "votes": 11,
+    "popularity": 0.35,
+    "genres": [
+      "комедия",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xLUngR1hjGmVVbzK1PSx2KxiKpy.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": "46249",
+    "ru": "План Зет",
+    "en": "プランゼット",
+    "year": 2010,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.1,
+    "votes": 10,
+    "popularity": 1.2,
+    "genres": [
+      "мультфильм",
+      "боевик",
+      "фантастика",
+      "Аниме"
+    ],
+    "overview": "2047 год, из-за вторжение пришельцев население Земли сокращается в половину. Инициируемые силами самообороны контратаки — малоэффективны. На военной базе в Японии, планируется операция по спасению человечества и остановке вторжения, под названием «Plan Zet». Главный герой — Хироши Акедзима, высаживается на вражеской территории. ..",
+    "poster": "https://image.tmdb.org/t/p/w342/uYF6KSEjm4PtQ9GoqJ7Mi07tLKI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7HyWo7p5FWi250dsQHZFyaT6B5z.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 528360,
+    "ru": "Разбитые алмазы",
+    "en": "Broken Diamonds",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.1,
+    "votes": 10,
+    "popularity": 0.53,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Смерть отца рушит давнюю мечту молодого писателя переехать в Париж, так как теперь он вынужден заботиться о сестре, которая страдает от шизофрении.",
+    "poster": "https://image.tmdb.org/t/p/w342/7hDWjqTMeidAvuHy4aKJZfryycy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xYmt7bLGCnen7l7zGM7mRaqe0Za.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 284022,
+    "ru": "Two Weeks in August",
+    "en": "Two Weeks in August",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.1,
+    "votes": 10,
+    "popularity": 10.71,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xjkR648bH8FzQVKG9RvQtNCVVDa.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lZwwE5GjEOobKhKpLn9j5UxIZ8E.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 882878,
+    "ru": "Ben 10: Alien X-Tinction",
+    "en": "Ben 10: Alien X-Tinction",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.1,
+    "votes": 10,
+    "popularity": 0.8,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "телевизионный фильм",
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pgL3pJEPv1K4Bb1isw5PFlA1MJ3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gG8At6y4p89KJsKYx1kYZIBdOz4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 474125,
+    "ru": "Золотой монах",
+    "en": "降魔传",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.1,
+    "votes": 10,
+    "popularity": 1.11,
+    "genres": [
+      "комедия",
+      "фэнтези",
+      "боевик"
+    ],
+    "overview": "Молодой монах занимается изгнанием демонов, и однажды на работе он встречает прекрасную девушку. Та убивает демонов, чтобы волшебные свойства некоторых их органов помогли ей вспомнить лицо любимого - 10000 лет назад влюбленных изгнали из Небесных чертогов за нарушение небесных законов. Её возлюбленный выпил зелье забвения и стал смертным, а сама она пить зелье отказалась, но за долгие годы забыла его лицо.",
+    "poster": "https://image.tmdb.org/t/p/w342/fv7sF5kR8N2xZFBpWBKjlDezkkn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xAHQkfEnrvwv1LIaFIrlvWVSllC.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 24633,
     "ru": "인어 아가씨",
     "en": "인어 아가씨",
@@ -9344,278 +9617,6 @@
     "overview": "Мать-одиночка Джейн (Гиллиан Джейкобс) отвозит дочь в летний лагерь и впервые за долгое время остается наедине с собой. Впереди у нее длинная дорога, в которой она познакомится с новыми людьми, встретит старых знакомых, начнет познавать себя и различать, что ей нравится, а что нет. Каждый фрагмент жизни Джейн не похож на другие, одни окрашены в более мрачные тона, другие — окутаны духом вестернов, а третьи и вовсе похожи на мелодраму, но в каждом из них Джейн проходит через кризис идентичности, ища путь к себе настоящей.",
     "poster": "https://image.tmdb.org/t/p/w342/AiC5auZlZNKxlNO8jlI73b63Bgw.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/l9kCyXUaCIqW8VnQDkvWorqUacL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 776327,
-    "ru": "Любовь без памяти",
-    "en": "Blackout Love",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 0.39,
-    "genres": [
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "Циничная и расчетливая Валерия меняет мужчин, ни секунды не сожалея о расставаниях. Тому же она учит и своих подопечных из волейбольной команды. Но единственный человек, который год назад разбил ее сердце, снова появляется в жизни Валерии. Она решает, что теперь найдет в себе силы отомстить бывшему бойфренду. Или это ей только так кажется?",
-    "poster": "https://image.tmdb.org/t/p/w342/yOoxbjxnzggNNCOtu152jrMpDUS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6WfZAveeI3OHZwtBx7vHhlvrUSZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1069069,
-    "ru": "10일간의 애인",
-    "en": "10일간의 애인",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 1.11,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/osqXpbKzoyTYAGOEmgtID230p7M.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/15RFlhN9WmXadgzHEs93dHHeviE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 288287,
-    "ru": "打噴嚏",
-    "en": "打噴嚏",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 0.61,
-    "genres": [
-      "боевик",
-      "комедия",
-      "мелодрама",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1G7DZYsPHAzpnSh97bsnnfAqEth.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qk6khjQUF2B655bfX7NEHyhnHS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 740963,
-    "ru": "Jump, Darling",
-    "en": "Jump, Darling",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 0.48,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ziQks92PZUAkcxO3tvR3yCIXGXf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5OJnX7xXqHWuvvWaKC8GMPXFIyU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 631880,
-    "ru": "Tyger Tyger",
-    "en": "Tyger Tyger",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 0.48,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5fhlV6jdEd9iqYnE9XUQAAhvw82.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/14ATSJsT3KDmHQdZY8FeEMxfPoG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 532811,
-    "ru": "Петсон и Финдус. Финдус переезжает",
-    "en": "Pettersson und Findus - Findus zieht um",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 0.59,
-    "genres": [
-      "семейный",
-      "мультфильм"
-    ],
-    "overview": "С тех пор, как у Финдуса появился новый матрас, он просыпается каждый день часа в 4 утра и устраивает на этом матрасе скачки, не давая Петсону насладиться утренним сном. Однажды в сердцах Петсон произносит роковую фразу: «Либо ты прекратишь прыгать, либо твоя кровать окажется где-то в другом месте!» А Финдус, вместо того чтобы испугаться, моментально соглашается отделиться от старого фермера. Решив, что это игра, Петсон обустраивает для Финдуса крошечный домик. Однако котенок воспринимает ситуацию куда как серьезно: теперь у него есть не только место для прыжков и игр, свобода и независимость, но и еще… собственный дом, а это вам не абы что. Одним словом, Финдус переезжает — и кажется, что жизнь больше никогда не будет такой, как прежде.",
-    "poster": "https://image.tmdb.org/t/p/w342/8pXr7yT18nfOg2qkNM06RvdOBij.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/neN9tgO0E0iZjb5MT8Ph8B4F3Sv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 298581,
-    "ru": "Кровь храбрых мужчин",
-    "en": "Borgríki II - Blóð hraustra manna",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 0.44,
-    "genres": [
-      "криминал",
-      "триллер",
-      "боевик",
-      "драма"
-    ],
-    "overview": "Бывший главарь мафии Гуннар отстранен от дел, утратил все влияние и мечтает о мести. Сербская мафия контролирует весь наркотрафик в стране, на них работает и продажный начальник наркоконтроля. Но в отдел внутренних расследований приходит молодой амбициозный сотрудник, который собирается всех вывести на чистую воду…",
-    "poster": "https://image.tmdb.org/t/p/w342/9FITP0KQsYXXhAkzhHyJTCQuTmk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/m5X8PYxedwhsdtLgr7nKnGlOXUG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 550476,
-    "ru": "Кровь, пот и ужасы",
-    "en": "Blood, Sweat and Terrors",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 0.43,
-    "genres": [
-      "боевик",
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "Киноальманах, состоящий из девяти пропитанных кровью и адреналином историй, созданных в результате смешения ужасов и ураганного экшена.",
-    "poster": "https://image.tmdb.org/t/p/w342/dfd7xEN3Fgr8U3g7OLk4DUKtY2p.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/myxNmLdQy59m0q0PbggKkMEiYC9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 71654,
-    "ru": "Beat Shazam",
-    "en": "Beat Shazam",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 5.75,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/q2U5Iulo8NWWiOiVx0f7VX9o4RM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/r9lklmHeOznXd0WvJHbW47mMMag.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 377007,
-    "ru": "不可思异",
-    "en": "不可思异",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 0.98,
-    "genres": [
-      "фэнтези",
-      "фантастика",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/royv6PqUojsFNbQntIPrLu4qVhe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ytybVDcBWR1ikme9EFi467CJg64.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 557130,
-    "ru": "Dangerous Matrimony",
-    "en": "Dangerous Matrimony",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 0.9,
-    "genres": [
-      "криминал",
-      "драма",
-      "детектив",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/m9rPNda9xApMtx3m6rWtwyKeeB1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8SWxF2GKXorlV1EzUCTd0da89CL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 484008,
-    "ru": "Счастливый билет",
-    "en": "Kaikki oikein",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 0.7,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mIefxl7ewozB6M2NbWhNC2q3niA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/17dyPl7L6gUvOQ1iSGYbWF0dkMe.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 449454,
-    "ru": "E-Demon",
-    "en": "E-Demon",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 0.6,
-    "genres": [
-      "ужасы",
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yU7TxtCeLvKZXEpf7chenNB2byo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2V0g6nVjxkFcT5BkiaSaRAqRL7R.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 458668,
-    "ru": "Nanny Seduction",
-    "en": "Nanny Seduction",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 12,
-    "popularity": 0.53,
-    "genres": [
-      "триллер",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lAMnVlI3uGgCPlyfObjaJsFAb6b.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/utkU7kWZCrIfFNlCp7XeE4yOsYk.jpg",
     "source": "tmdb"
   }
 ]

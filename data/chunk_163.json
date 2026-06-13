@@ -1,5 +1,268 @@
 [
   {
+    "id": 582932,
+    "ru": "カーニバル・ファンタズム ひびちかスペシャル",
+    "en": "カーニバル・ファンタズム ひびちかスペシャル",
+    "year": 2012,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 0.37,
+    "genres": [
+      "комедия",
+      "мультфильм",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vh47zCpzDAWIWJbpzvXloHNAOKC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/u03Weg1BKKTH2piNEAMU4xS4i6K.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 457404,
+    "ru": "아무 것도 사라지지 않는다",
+    "en": "아무 것도 사라지지 않는다",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 0.36,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/cFpYHZSZf0UHc3F8C4a0xgjtng1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/i1UsHiOVg4zcvwpn1KAfvW6sLvn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 911530,
+    "ru": "Чудеса в Гусляре",
+    "en": "Чудеса в Гусляре",
+    "year": 1989,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 0.32,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "Экранизация рассказа «Паровоз для царя». Иронические наблюдения на тему того, что человек очень часто пользуется предметами, строение которых ему абсолютно непонятно. Пришелец просит Корнелия Удалова помоч ему починить космический корабль, но житель Великого Гусляра в этом вопросе совершенно не компетентен.",
+    "poster": "https://image.tmdb.org/t/p/w342/VtRvDH2zACFpWWKlJMC0LWFTP5.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1274260,
+    "ru": "宇宙戦艦ヤマト2199 第三章「果てしなき航海」",
+    "en": "宇宙戦艦ヤマト2199 第三章「果てしなき航海」",
+    "year": 2012,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 0.31,
+    "genres": [
+      "мультфильм",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xKuko0Bq1fiHhfSRVmVHyT99wts.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xPbOyocSKgvqyZfVNSYv8SQy0Pi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1576918,
+    "ru": "Roughnecks: The Starship Troopers Chronicles - The Pluto Campaign",
+    "en": "Roughnecks: The Starship Troopers Chronicles - The Pluto Campaign",
+    "year": 2001,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 0.3,
+    "genres": [
+      "фантастика",
+      "мультфильм",
+      "боевик",
+      "военный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mKuZkwytfmdA8zYR1lSYqQK099z.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4QTP56yTyB2fcmuMM0Tllv4WUOk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 418578,
+    "ru": "齐天大性II大破盘丝洞",
+    "en": "齐天大性II大破盘丝洞",
+    "year": 2005,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 5.16,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zdWZGbFFI6pHk3A1C4XnwD9lyiJ.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 198639,
+    "ru": "Lo bueno de llorar",
+    "en": "Lo bueno de llorar",
+    "year": 2006,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 2.91,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/72G2LStsNXQaw8Fzr7FiTdQ3ATG.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 279882,
+    "ru": "Raasi",
+    "en": "Raasi",
+    "year": 1997,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 2.83,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/njYx5AFNR0XARSx0hUA0q0FjIOY.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1355193,
+    "ru": "동생의 애인들",
+    "en": "동생의 애인들",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 2.17,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rTh4sQvFatvz0blGJh17bK0L8JC.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 996224,
+    "ru": "자매의교환섹스",
+    "en": "자매의교환섹스",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 1.99,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/baD6vIJH0U7lonG9cUTe6oV9oY5.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 862772,
+    "ru": "맛있는 섹스 그리고 여군",
+    "en": "맛있는 섹스 그리고 여군",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 1.51,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8OyIEI31EqcY4k1hWIDjWfxvVT3.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 320144,
+    "ru": "Children",
+    "en": "Children",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 1.1,
+    "genres": [
+      "триллер",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hXeQipB8OfFTbWOFn7K4hKxS7Ib.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 387739,
+    "ru": "LDR",
+    "en": "LDR",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 0.98,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/okHdGvF7eQLHOddO3z4Tg2Xy9Eb.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 333954,
+    "ru": "Бави Сток [OVA-1]",
+    "en": "バビ・ストック",
+    "year": 1985,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 1,
+    "popularity": 0.96,
+    "genres": [
+      "фэнтези",
+      "мультфильм",
+      "фантастика",
+      "приключения"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gBABF0byWggJ4De1nB9bfeSSUTk.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
     "id": 540702,
     "ru": "聖飢魔II HUMANE SOCIETY ~人類愛に満ちた社会~",
     "en": "聖飢魔II HUMANE SOCIETY ~人類愛に満ちた社会~",
@@ -9198,270 +9461,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/nVp5lcTYaI7TtQ0i1AZvDtwHLvs.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/lgdI4Q34pgkElKlOkm1gHWr7J8F.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 90865,
-    "ru": "少女☆寸劇(コント) オールスタァライト",
-    "en": "少女☆寸劇(コント) オールスタァライト",
-    "year": 2019,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 5.19,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7WIWOZayHIW1rHqF2JI1GdROjvB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2pN76mFjyHesIZbnFTzPJco3EzZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 795321,
-    "ru": "Адская тюрьма",
-    "en": "아수라도",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 1.6,
-    "genres": [
-      "криминал",
-      "боевик"
-    ],
-    "overview": "Асурадо — тюрьма смертников, в которой содержатся самые отвратительные преступники, осужденные за особо тяжкие преступления. Новый надзиратель Чо Пхён Хо решает навести в тюрьме порядок.",
-    "poster": "https://image.tmdb.org/t/p/w342/p7zMPSPyXcXIKdpQxMHjtT3R7n1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mz32fg55mSXVGP03WqKoz0E051n.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 795755,
-    "ru": "Отель Алоха Сёрф",
-    "en": "Aloha Surf Hotel",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 0.56,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Бывший профессионал по серфингу вынужден устроиться на работу в пляжный отель, обучая отвратительных туристов серфингу. Вскоре он станет профессиональным теннисистом, инструктором по йоге, разнорабочим - возможно, он даже станет ключом к спасению этого семейного гавайского отеля.",
-    "poster": "https://image.tmdb.org/t/p/w342/zrSHgR6LozappCeBRZpbB9l4LbP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9chQK4EbGA5UmdBRwCDOJhIsTJ0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 665402,
-    "ru": "Город уснул",
-    "en": "Город уснул",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 0.46,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Виктор умывался в каюте, когда боцман позвал его к телефону. Вот Виктор уже услышал: «Ника умерла», а все равно кричит: «Я не слышу!». Виктор сошел на землю. Двое суток без сна добирался до больницы. Когда врач договорил, Виктор безучастно отвернулся к окну. Все детали этого вида за окном вдруг как будто приблизились к нему. Виктор вышел на улицу. Улица спала мертвым сном. Спал и весь город. Город как будто вымер. Но все в нем дышало, храпело, бормотало во сне. Этот спящий город был похож на кошмар. В этом кошмаре безвольно спящие переплелись с воспоминаниями о его любви. Виктор бродил по городу в поисках человека, находящегося так же, как и он, на Этой стороне реальности. И он нашел его.",
-    "poster": "https://image.tmdb.org/t/p/w342/xNbcURn57sL8IMEAxmKVwRIEfd2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xj6NrSebs1keTYQ3ov8pGilMz4K.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1376046,
-    "ru": "Que ma volonté soit faite",
-    "en": "Que ma volonté soit faite",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 3.54,
-    "genres": [
-      "драма",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oBWmqQSFewFhAhfcmFvvf9yIjo6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aPQgALeD3UND09hRntBwIdwLoXr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1380553,
-    "ru": "Ungol",
-    "en": "Ungol",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 2.99,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1UJgaTuyGBbkq3xZVKWTZ49Xbsw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7QwylJf82UGCAZpMbqgPJF5o0ZV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1096963,
-    "ru": "삼악도",
-    "en": "삼악도",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 2.07,
-    "genres": [
-      "ужасы",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pOW3ioalNbTjApWkuDvg3DBcdzp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/waeplPdvJ7EIUsWZuLIbWdVDQRQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 977163,
-    "ru": "มนต์รักวัวชน",
-    "en": "มนต์รักวัวชน",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 1.98,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6scuq9KjUCpG563Q5XoCul3AKe8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hz3cVizcZgUfvtR4yCn7d2heB8N.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 803664,
-    "ru": "給我1天",
-    "en": "給我1天",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 1.89,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fC6z71h8b7H0LesSv7XbHQ69T1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gICPuENoKCA9knqei0DdyGmjV5B.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1352077,
-    "ru": "Verhängnisvolle Leidenschaft Sylt",
-    "en": "Verhängnisvolle Leidenschaft Sylt",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 1.42,
-    "genres": [
-      "драма",
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/l3SN7HOHXqlFp7RiBYmxGbpMwU3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wNVdzNoFYxnXAb3PyyHji81EbxK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1357259,
-    "ru": "ധീരം",
-    "en": "ധീരം",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 1.19,
-    "genres": [
-      "криминал",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wilAY8QRL1tZNcRjnfNKrFRqblD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gcceqDCIgY57EUKtr7cq1hNb45y.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 788106,
-    "ru": "ಪೊಗರು",
-    "en": "ಪೊಗರು",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 1.12,
-    "genres": [
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iKulrSnAylrwOvXOYmJsHGTb4r1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zDI8OZTmLbzNgKi060u3bk5UPV0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1042053,
-    "ru": "Fırtına",
-    "en": "Fırtına",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 0.93,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2vpwW8PncqUvL4PuTOBBCOCUGqj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pl6MejrfIccsz589VwPygeFbEGn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1302696,
-    "ru": "പാതിരാത്രി",
-    "en": "പാതിരാത്രി",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 3.7,
-    "votes": 3,
-    "popularity": 0.85,
-    "genres": [
-      "триллер",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/utpxOviVGA0Qum2C4tTt0TTLTHz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3LdUr1Z3sSu0h2wwXPZYHaMvUgF.jpg",
     "source": "tmdb"
   }
 ]

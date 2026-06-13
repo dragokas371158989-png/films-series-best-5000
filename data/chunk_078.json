@@ -1,5 +1,308 @@
 [
   {
+    "id": "tv_1481",
+    "ru": "Четыре тысячи четыреста",
+    "en": "The 4400",
+    "year": 2004,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 729,
+    "popularity": 21.07,
+    "genres": [
+      "драма",
+      "НФ и Фэнтези"
+    ],
+    "overview": "4400 человек, пропавших без вести в разные годы 20 века, неожиданно возвращаются на землю, оставшись такими же, как они были в день исчезновения. Обеспокоенные власти начинают расследование, чтобы выяснить, где же были эти люди и почему их вернули обратно. Очень скоро становится понятно, что их появление может изменить мир самым непредсказуемым образом.",
+    "poster": "https://image.tmdb.org/t/p/w342/nWpatnVtPVxjsn7mMiRZNAalEMf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2yWQg2FBynT8vFQw3kmBlOTdrXy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "10860",
+    "ru": "Стальные магнолии",
+    "en": "Steel Magnolias",
+    "year": 1989,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 728,
+    "popularity": 3.27,
+    "genres": [
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Удивительная история жизни шестерых женщин из маленького городка в штате Луизиана, которые пронесли свою трогательную дружбу сквозь годы. Они привыкли делиться друг с другом радостями и горестями, откровенными переживаниями и тайными надеждами. Красавица Шелби, самая сильная из них, убеждена, что на свете нет ничего невозможного, и своей уверенностью и остроумием поддерживает подруг на крутых виражах судьбы. Возможно, именно с ее помощью женщинам удастся подняться над суетой и скукой серого существования и совершить путешествие туда, где расцветают стальные магнолии.",
+    "poster": "https://image.tmdb.org/t/p/w342/iyQEg3fRpXMf8qQtE0bem66vc7f.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fYqV4AVj2c9C3mFL0dddWVdCOva.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "998022",
+    "ru": "Учительская",
+    "en": "Das Lehrerzimmer",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 719,
+    "popularity": 3.22,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Молодая учительница пытается пресечь серию краж в своей школе. Разоблачение предполагаемого преступника и последующее школьное расследование приводят к доносам и ссорам.",
+    "poster": "https://image.tmdb.org/t/p/w342/bI4Bys5lFKf5iuctqH1GFg6leuX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7RxhC2ntrglVl1nkKjAgNoO0XP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "837881",
+    "ru": "Её правда",
+    "en": "She Said",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 717,
+    "popularity": 1.83,
+    "genres": [
+      "драма",
+      "история"
+    ],
+    "overview": "Журналистки The New York Times Меган Туи и Джоди Кантор убедили жертв сексуального насилия рассказать об этом. Несмотря на усилия Вайнштейна, девушкам удалось предать его многочисленные преступления огласке.",
+    "poster": "https://image.tmdb.org/t/p/w342/pWElVJ80edWz1ejFBkUdQ4WjlvN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5tb7RjF0OAAaiGDUXsuedvhoGqV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "8088",
+    "ru": "Разомкнутые объятия",
+    "en": "Los abrazos rotos",
+    "year": 2009,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 715,
+    "popularity": 1.46,
+    "genres": [
+      "драма",
+      "мелодрама",
+      "триллер"
+    ],
+    "overview": "Известный сценарист и режиссёр попадает в страшную автокатастрофу, после которой необратимо слепнет. Он не может больше снимать кино, от него уходит женщина, которая была смыслом его жизни. Вместе со зрением он теряет всё. Смириться с трагедией своей жизни он сможет только спустя 14 лет, открыв душу своему молодому помощнику, которого он полюбил как сына.",
+    "poster": "https://image.tmdb.org/t/p/w342/nYpwMuFtKFphldASGdvVStjTGLv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/shrpF5ZivObmV3hnCK8sSS0DP5z.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "75624",
+    "ru": "Наруто: Ураганные хроники. Фильм 8 — Кровавая тюрьма",
+    "en": "劇場版 NARUTO -ナルト- ブラッド・プリズン",
+    "year": 2011,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 700,
+    "popularity": 4.05,
+    "genres": [
+      "триллер",
+      "мультфильм",
+      "боевик",
+      "комедия",
+      "ужасы",
+      "детектив"
+    ],
+    "overview": "По сюжету Наруто сажают в тюрьму под названием «Кровавая тюрьма» за покушение на убийство Райкагэ и убийство нескольких синоби, и Наруто пытается доказать свою невиновность.",
+    "poster": "https://image.tmdb.org/t/p/w342/aT6E0vy4051GEK8lO2WVecKP99j.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/Abv3ZtGV2NXxPimArb3LDLg2bDH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_112314",
+    "ru": "Архив 81",
+    "en": "Archive 81",
+    "year": 2022,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 695,
+    "popularity": 3.95,
+    "genres": [
+      "драма",
+      "детектив",
+      "НФ и Фэнтези"
+    ],
+    "overview": "Архивиста, восстанавливающего поврежденные видеозаписи, затягивает в водоворот мистических событий, связанных с исчезновением режиссера и деятельностью сатанинской секты.",
+    "poster": "https://image.tmdb.org/t/p/w342/t1M6RcxtG6IXR4fwPWNQm8kJUYF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7TYMho2TM6ZcqSv6YaEjlNIyhXn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "21641",
+    "ru": "Проклятый Юнайтед",
+    "en": "The Damned United",
+    "year": 2009,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 695,
+    "popularity": 1.55,
+    "genres": [
+      "драма",
+      "история"
+    ],
+    "overview": "Взгляд на 44-дневное пребывание Брайана Клафа на посту тренера Лидс Юнайтед.",
+    "poster": "https://image.tmdb.org/t/p/w342/ftlbCma6QoRiZgiflVmLuPKHrkq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cw8z9H963CtcqchtEEzqs3Ls1wC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "353577",
+    "ru": "Статистическая вероятность любви с первого взгляда",
+    "en": "Love at First Sight",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 693,
+    "popularity": 2.44,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "Девушка-подросток опаздывает на свой рейс в аэропорту Кеннеди и встречает молодого британца, который может оказаться её настоящей любовью.",
+    "poster": "https://image.tmdb.org/t/p/w342/yVp6CbOnfe7pyeVwW6uUDrs1RHl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gz1Lr0WcKJ1eg7mfN0AfAPXbI7h.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "846214",
+    "ru": "Симпсоны: Добрый, Бартистый и Локистый",
+    "en": "The Good, the Bart, and the Loki",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 692,
+    "popularity": 1.68,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "семейный"
+    ],
+    "overview": "Локи объединяется с Бартом Симпсоном после изгнания из Асгарда, создав новую вселенную, которая отдаёт дань уважения героям и злодеям кинематографической вселенной Marvel.",
+    "poster": "https://image.tmdb.org/t/p/w342/ibYMcRiSPJShNrVsdaTFyXkPA7o.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jBUukLTCmXL79itbmK5JtQvImYS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "11176",
+    "ru": "Фильм Маппетов",
+    "en": "The Muppet Movie",
+    "year": 1979,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 692,
+    "popularity": 2.42,
+    "genres": [
+      "семейный",
+      "комедия",
+      "приключения"
+    ],
+    "overview": "Джим Хенсон, основатель, и Фрэнк Оз, творческий консультант, оставили последовательный формат своего видеошоу и вставили своих кукол в отличную комбинацию музыкальной комедии и фантастического приключения. В результате получилось шоу маппетов в \"Волшебнике страны Оз\". Лягушонок Кермит ведет труппу маппетов по асфальтовой дороге в Голливуд. В сценарии есть афористичный юмор и уморительно смешные фразы и словечки. Режиссер Джеймс Фроули на славу позабавился возможностями операторской работы ручной камерой, включив, например, кадры Кермита на велосипеде, а Маппетов, сидящих за рулем автомобилей и грузовиков, а также влкючил кадры в полный рост. Строгая сюжетная линия пропускает Кермита через мясорубку с широким диапазоном эмоций, начиная от неуверенности в себе до отчаянной любви с моральной перестрелкой на съемочной площадке",
+    "poster": "https://image.tmdb.org/t/p/w342/mfj8yR2vO5BMkaTMu1wvKQLUTsL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9mbXZSLINbwNQateHLGRhtaZzZB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_48305",
+    "ru": "Red Shoes and the Seven Dwarfs",
+    "en": "Red Shoes",
+    "year": 2019,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 687,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Комедия",
+      "Comedy",
+      "Романтика",
+      "Romance"
+    ],
+    "overview": "Princes who have been turned into Dwarfs seek the red shoes of a lady in order to break the spell, although it will not be easy. A parody with a twist.",
+    "poster": "https://cdn.myanimelist.net/images/anime/1403/112558l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "11533",
+    "ru": "Язон И Аргонавты",
+    "en": "Jason and the Argonauts",
+    "year": 1963,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 687,
+    "popularity": 2.22,
+    "genres": [
+      "приключения",
+      "семейный",
+      "фэнтези"
+    ],
+    "overview": "Фантастические спецэффекты Рэя Харрихаузена и увлекательное мифическое приключение делают эту картину интересной для всех. Это история Ясона (Тодд Армстронг), бесстрашного моряка и исследователя, возвращающегося в царство Фессалия после 20-летнего отсутствия, чтобы предъявить права на трон. Но для этого Ясону придется сначала найти волшебное золотое руно. Он набирает команду и с помощью Геры, царицы богов, отправляется на поиски руна. Ясон и его команда должны преодолеть невероятные препятствия, например, 30-метрового бронзового великана, ядовитую гидру о семи змеиных головах и зрелищную битву с армией скелетов.",
+    "poster": "https://image.tmdb.org/t/p/w342/tGPQ4etPy0RXDRKT8sqV9QlHjzd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xdefSJpYARFdW4jPhPsuvUlmt2M.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_6262",
+    "ru": "Manga Fairy Tales of the World",
+    "en": "Manga Sekai Mukashibanashi",
+    "year": 1976,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 685,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Приключения",
+      "Adventure",
+      "Драма",
+      "Drama",
+      "Фэнтези",
+      "Fantasy",
+      "Историческое",
+      "Historical"
+    ],
+    "overview": "Each episode of this series tells the story of a famous fairy tale from all around the world. Some of them are adapted from famous books such as \"The Iliad\".\n\n(Source: ANN)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1876/157155l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "392982",
+    "ru": "Маршалл",
+    "en": "Marshall",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 678,
+    "popularity": 2.49,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Фильм расскажет о яркой странице в биографии Тергуда Маршалла, первого афроамериканца в рядах Верховного суда США. На заре карьеры ему достаётся спорное дело о чернокожем шофёре, обвинённом своей богатой работодательницей в сексуальном нападении. Молодой Маршалл объединяется с начинающим адвокатом-евреем, чтобы в эпоху расизма и антисемитизма сделать сенсационное заявление в защиту прав и равенства граждан.",
+    "poster": "https://image.tmdb.org/t/p/w342/grHRk9g56EMuzRteqE63RUqHO8b.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8nh70OvIsJKpfZdTMZoMJMb8aVE.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "695",
     "ru": "Короткий монтаж",
     "en": "Short Cuts",
@@ -8518,25 +8821,6 @@
     "source": "tmdb"
   },
   {
-    "id": "tv_224941",
-    "ru": "Бороуз",
-    "en": "The Boroughs",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 133,
-    "popularity": 55.14,
-    "genres": [
-      "НФ и Фэнтези",
-      "детектив"
-    ],
-    "overview": "В идеальном жилом комплексе для пенсионеров действует потусторонняя сила, которая угрожает отнять самое ценное — оставшееся время. Ей противостоит героическая команда.",
-    "poster": "https://image.tmdb.org/t/p/w342/826WiB3FY5dsfCC1gwUpJXGkwkm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iftYIh1OjJb99EOTHIrDcx59zWb.jpg",
-    "source": "tmdb"
-  },
-  {
     "id": "tv_32294",
     "ru": "Красотки в Кливленде",
     "en": "Hot in Cleveland",
@@ -9677,281 +9961,6 @@
     "overview": "Есть нечто тёмное в прошлом Такэси Нанасэ. В связи с некоторыми обстоятельствами он завёл фальшивые отношения со своей подругой детства Куруми, в остальном же он — обычный старшеклассник. Однажды Такэси проходит мимо девушки, рухнувшей возле школьного кампуса, а форму одежды, как у этой незнакомки по имени Муй Айба, наш школьник никогда не встречал. Естественно, с этого столкновения судьба и жизнь Такэси полностью меняются. Муй рассказывает, что она — маг, и извиняется за то, что превратила в мага и самого Такэси. Мир, который он знал, теперь оказывается разделён — на мир людей и мир магов.",
     "poster": "https://image.tmdb.org/t/p/w342/Sm3Xh2E7rpXVeWwtimpTZciB2d.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/14BLE7V596Sso8zWQEZa2iAF0G9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_215103",
-    "ru": "तेरी मेरी डोरियाँ",
-    "en": "तेरी मेरी डोरियाँ",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 111,
-    "popularity": 12.68,
-    "genres": [
-      "драма",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4BHDmYiuSnNL3nqKIOzLJKYX4AN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3rIU17p1zzFEWnt7qyDEjC9RJJu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_32200",
-    "ru": "Мыслить как преступник: Поведение подозреваемого",
-    "en": "Criminal Minds: Suspect Behavior",
-    "year": 2011,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 109,
-    "popularity": 4.97,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "Драма об элитной команде агентов подразделения по поведенческому анализу ФБР, которая использует нетрадиционные методы расследования и агрессивную тактику, чтобы ловить самых гнусных преступников Америки. Глава подразделения, особый агент Сэм Купер — умственно и физически энергичный лидер, который не боится рисковать своей карьерой. Купер, который старается избегать политической бюрократии, сам выбрал профайлеров для команды: бывшего служащего спецслужб Британии Мика Роусона, уверенного в себе и красивого снайпера, настроенного на искоренение зла; Джона «Пророка» Симса, вооруженного уличной мудростью и дзен-спокойствием бывшего преступника, который хочет замолить грехи прошлого; и Джину ЛаСалль, жесткого агента с тонким чутьем. Эта группа оперативников ФБР тверда в своих убеждениях и неуклонно исполняет свою миссию — привлечь к ответственности самых опасных преступников страны.",
-    "poster": "https://image.tmdb.org/t/p/w342/g2eFa0rnshPHqBOYZLyOaeh90I0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/24Kr67DhRIDalcRvarQeQ9650RI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1313013,
-    "ru": "Attitudini: Nessuna",
-    "en": "Attitudini: Nessuna",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 108,
-    "popularity": 0.78,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4U4X0ykGYTFxvxKT1VvWocRrBkJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gwzBKU5tcq6Y6higxeqwGRe2uoH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 105325,
-    "ru": "Как подключить домашний кинотеатр",
-    "en": "How to Hook Up Your Home Theater",
-    "year": 2007,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 107,
-    "popularity": 0.43,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Однажды Гуфи, сидя дома и смотря любимую игру, заметил как соседу завозят новенький, большой, домашний кинотеатр. Это никуда не шло в сравнение с его мини-телевизором, на котором постоянно приходилось двигать антенну чтобы не было помех. С этого момента Гуфи собирается купить себе всё необходимое, чтобы провести просмотр любимой игры с максимальным качеством и комфортом.",
-    "poster": "https://image.tmdb.org/t/p/w342/eHU8HfMozjS6bC8APU4Ik3l3zXs.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tPx3EwiGpiYTWNfUuyU29SDqIZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 263475,
-    "ru": "கத்தி",
-    "en": "கத்தி",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 107,
-    "popularity": 0.97,
-    "genres": [
-      "боевик",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/y8hvai0Y96Fz1yqyvtAG0hnATuZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iOnnXN8XPMWrh7flteI1mCftYBZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_62117",
-    "ru": "Purple River 2nd Season",
-    "en": "Zi Chuan 2nd Season",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 106,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Экшен",
-      "Action",
-      "Приключения",
-      "Adventure",
-      "Фэнтези",
-      "Fantasy",
-      "Военное",
-      "Military"
-    ],
-    "overview": "To clear suspicion, words are the weakest defense. True power speaks for itself! General Zichuan Xiu, who once single-handedly executed a traitor of the Zichuan clan within the Demon Clan's stronghold, has risen to command hundreds of thousands of allied troops in the Far East. Supported by the Guardian Elders of the Sacred Temple, this warrior now ascends as the new sovereign of the Eastern lands: The Bright King is crowned!\n\n(Source: WeTV)",
-    "poster": "https://cdn.myanimelist.net/images/anime/1186/151163l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 881211,
-    "ru": "Снупи представляет: новогодний праздник с Люси",
-    "en": "Snoopy Presents: For Auld Lang Syne",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 106,
-    "popularity": 0.64,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "комедия"
-    ],
-    "overview": "Когда Люси узнаёт, что бабушка не приедет на Рождество, она решает устроить грандиозную вечеринку в канун Нового года, чтобы поднять себе настроение. В то же время Чарли Браун пытается исполнить одно из своих обещаний на этот год до того, как часы пробьют полночь.",
-    "poster": "https://image.tmdb.org/t/p/w342/bsnOWVlYIfHxf2H2TTvz1mgAikG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7tJSulnvERJn6R9Ih2C2Uvpm8zy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1421309,
-    "ru": "La vita da grandi",
-    "en": "La vita da grandi",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 106,
-    "popularity": 0.84,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ttQBhfScEkM94KbQq1bEpGuuWk9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/g8wmSi0tvQFtnzvpOJjaCve3xd0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "14132",
-    "ru": "Макросс: Помнишь ли нашу любовь?",
-    "en": "超時空要塞マクロス 愛・おぼえていますか",
-    "year": 1984,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 105,
-    "popularity": 2.36,
-    "genres": [
-      "мультфильм",
-      "фантастика",
-      "военный",
-      "боевик",
-      "Аниме"
-    ],
-    "overview": "Человечество создаёт огромный корабль, Макросс, летающую крепость со своей личной эскадрильей космических пилотов. Одним из этих пилотов является главный герой - Хикару, молодой, но талантливый солдат, по уши влюбленный в песни знаменитой на Макроссе пивицы - Лин Минмэй. Однако, не все так хорошо. Макросс затянут в войну между двумя различными расами Мельтранами и Зентради. И однажды, когда летающая отбивала очередную атаку, Лин Минмэй чуть не погибла - из-за трансформаций Макросса в боевого робота она падает в один из механических отсеков. Но Хикару, вопреки приказам своего командира спасает её ценой поломки своего истребителя.",
-    "poster": "https://image.tmdb.org/t/p/w342/j27wHdXbq2VRurUtQiCpePZf11b.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/f1MwrnVB8eQyeJc3wQV7k1sZsz1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_60605",
-    "ru": "Y Gwyll",
-    "en": "Y Gwyll",
-    "year": 2013,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 104,
-    "popularity": 4.33,
-    "genres": [
-      "криминал",
-      "драма",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uyYp5sZqTkviCtRjQNuOuqWTssM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aPtygCQY7FOBO0Ns3bKhafR9HrI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 965143,
-    "ru": "Ад в Сети: Разоблачение Интернет-кошмара",
-    "en": "사이버 지옥: n번방을 무너뜨려라",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 103,
-    "popularity": 1.78,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "Через сеть анонимных эксплуататорских онлайн-чатов совершалось много сексуальных преступлений. Охота за ее организаторами требовала мужества и упорства.",
-    "poster": "https://image.tmdb.org/t/p/w342/iWI05wWFZvPKCgEqXihjUQLar7r.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/okUGREWC4LN2TSjFX0AOiNJhzdN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_63726",
-    "ru": "В изоляции",
-    "en": "Alone",
-    "year": 2015,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 103,
-    "popularity": 7.8,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "В Изоляции является единственным в своем роде телесериалом, которое поместило людей против неизвестного в полной изоляции. Без продюсеров, начальников или съемочных команд, следующих за ними по пятам, эти эксперты по выживанию действительно собираются проверить свою выдержку. Это шоу чувствуется необработанным, но оно является подлинным – просто десять мужчин с их камерами и волей, чтобы выжить. Нет уловок и никакого контакта с внешним миром.",
-    "poster": "https://image.tmdb.org/t/p/w342/a1r1KLEYFP1u0q5kH4mHDQaOOvF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wcX3J5juFUMXhivZ9rHB7NgwLYa.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_82729",
-    "ru": "Paquita la del Barrio",
-    "en": "Paquita la del Barrio",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 103,
-    "popularity": 1.62,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dyFv2A0tYnxfr41oTJMm5hPeZOE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/o8p2FeRgUn1u1gatAdGUQSL3rfY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 134103,
-    "ru": "Кошмарный кролик",
-    "en": "Hair-Raising Hare",
-    "year": 1946,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 103,
-    "popularity": 0.37,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/sB72GBY4WTgOyW0Onzsh06RPaGK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oVqhPBqCsU5ygiqEF8DLv16FQSZ.jpg",
     "source": "tmdb"
   }
 ]

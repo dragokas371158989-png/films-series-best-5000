@@ -1,5 +1,284 @@
 [
   {
+    "id": "14576",
+    "ru": "Ловкие руки",
+    "en": "Shade",
+    "year": 2003,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 261,
+    "popularity": 3.19,
+    "genres": [
+      "боевик",
+      "триллер",
+      "криминал"
+    ],
+    "overview": "В Лос-Анджелесских клубах и барах группа покерных кидал устраивает крупную аферу против гангстера Стивенса. Махинации оборачиваются преследованием шулеров, который желает вернуть себе крупную сумму денег и поквитаться с обманщиками.",
+    "poster": "https://image.tmdb.org/t/p/w342/zwsBLPKlVsPzqc9UnpzhWYNQLxB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4bPNy1jpf75bwHk4T7iIuEYayEJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "299824",
+    "ru": "Моцзинь",
+    "en": "寻龙诀",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 261,
+    "popularity": 3.06,
+    "genres": [
+      "боевик",
+      "приключения",
+      "фэнтези"
+    ],
+    "overview": "В 1988 году трое моцзинов (расхитителей гробниц) - Ху Баи, Ван Кайсюань и Ширли Ян - бросают заниматься грабежами могил и переезжают в Нью-Йорк. Хотя Баи и Ширли связывают романтические отношения, Ван чувствует, что великие моцзины заслуживают лучшего финансового положения и, приняв предложение корпорации найти захоронение одной богини, возвращается на родину. Пытаясь спасти друга от неприятностей, Баи и Ширли отправляются следом за ним.",
+    "poster": "https://image.tmdb.org/t/p/w342/nKJY0jpWB5cGYPpxrt3WeOahiJg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6ilMT6VCADu5F1Xr9LjiVxQSXPp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1116490,
+    "ru": "Сорвать банк",
+    "en": "Cash Out",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 260,
+    "popularity": 3.62,
+    "genres": [
+      "боевик",
+      "триллер"
+    ],
+    "overview": "Профессиональный вор Мейсон вместе с братом планирует свое самое крупное дело — ограбление банка. Когда все идет не так, они оказываются запертыми внутри в окружении сотрудников полиции. Пока ситуация накаляется, Мейсон ведет переговоры с ведущим переговорщиком — своей бывшей любовницей.",
+    "poster": "https://image.tmdb.org/t/p/w342/8fyGHmNoUeZmhYvd9iPKsVPzkHE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6VoxDupaW2VXfLtJyeOoGCgXSjD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 333357,
+    "ru": "Стефани",
+    "en": "Stephanie",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 260,
+    "popularity": 1.16,
+    "genres": [
+      "ужасы",
+      "детектив"
+    ],
+    "overview": "Девочка с необычными способностями считалась сиротой, пока вдруг не появились мужчина и женщина, утверждающие, что они её родители.",
+    "poster": "https://image.tmdb.org/t/p/w342/saH984W3ZGjRX0NMCEsuKh8VUP9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/frIVSxnqgQfEOedXxZHH5y3lSJR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 744742,
+    "ru": "Последний обряд",
+    "en": "The Last Rite",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 257,
+    "popularity": 0.42,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "Студентка-медик, страдающая сонным параличом, после переезда к своему парню обнаруживает, что ее преследует демоническая сущность.",
+    "poster": "https://image.tmdb.org/t/p/w342/1YAperQbfpJETfpPn6ezlWOm1sx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dxFPdSi03jm4hW6lodkRV4b26rL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 647785,
+    "ru": "Коллекторы 2",
+    "en": "Debt Collectors",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 256,
+    "popularity": 2.36,
+    "genres": [
+      "боевик",
+      "комедия",
+      "криминал"
+    ],
+    "overview": "Сборщики долгов Френч и Сью приступают к работе, делая то, что у них получается лучше всего — ломают черепа и кости, гоняясь за разными подонками, которые должны деньги их боссу Томми. Напарников вызывают в Лас-Вегас, чтобы они забрали долг у нечистой на руку владелицы казино, которая, как оказалось, является бывшей любовницей Сью. Тем временем на тропу войны выходит наркобарон, жаждущий убить Фрэнчи и Сью и тем самым отомстить за смерть брата.",
+    "poster": "https://image.tmdb.org/t/p/w342/6zeLNy0s6rQXqucYWPmOF6OpMAo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vXUX7Qi4rtOh2TxqA1eB2CU6QAo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "595867",
+    "ru": "Одной волшебной ночью",
+    "en": "Chambre 212",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 256,
+    "popularity": 3.2,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "Мария — парижанка, и этим всё сказано. Она наслаждается свободой и мужским вниманием, будучи замужем. После ссоры с супругом героиня ночует в отеле напротив своей квартиры, через окна наблюдая за мужем и вспоминая их историю любви. У неё есть лишь одна волшебная ночь, чтобы решить, что делать дальше, но непрошеных советчиков оказывается неожиданно много…",
+    "poster": "https://image.tmdb.org/t/p/w342/ApYpcW6oNhONEJxIqLcnWUM6iOx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6Slce0VC5KUbJ5YwokqbZBiRBzV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 570,
+    "ru": "Моей сестре!",
+    "en": "À ma sœur !",
+    "year": 2001,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 255,
+    "popularity": 2.55,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Лето, море, каникулы, родители, первая любовь. Анаис и ее старшая сестра Елена ни в чем не похожи друг на друга. Анаис — пухленькая и умненькая. Елена дьявольски красива в свои 15 лет. Это возраст первого сексуального опыта. Анаис постигает эти азы, наблюдая за сестрой…",
+    "poster": "https://image.tmdb.org/t/p/w342/fjqafvJW9UxiuiVFE0WtGxwvJit.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pnwI95K4pmYeM3LsMRTQYzvhvvO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 283589,
+    "ru": "Пиф-паф",
+    "en": "बैंग बैंग",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 252,
+    "popularity": 3.39,
+    "genres": [
+      "боевик",
+      "приключения",
+      "комедия",
+      "мелодрама",
+      "триллер"
+    ],
+    "overview": "Случайная встреча скромной банковской служащей Харлин Сахни с обаятельным, но загадочным Раджвиром Нанда приводит к угробленным самолетам, погоням, перестрелкам, взрывам и к общему глобальному беспределу. Но хотя разворачивается трансконтинентальная погоня, Раджвир убеждает Харлин, что он хороший парень. Но действительно ли она может доверять ему, и стоит ли доверять, когда начинают летать пули?",
+    "poster": "https://image.tmdb.org/t/p/w342/6ukTOJ3VNqrR0un8nolKoIlgn1V.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kmQxQT2MzqwSkXIlVN1uygXk5fC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 27381,
+    "ru": "Кровь невинных",
+    "en": "Innocent Blood",
+    "year": 1992,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 251,
+    "popularity": 2.48,
+    "genres": [
+      "комедия",
+      "ужасы",
+      "криминал",
+      "боевик",
+      "мелодрама"
+    ],
+    "overview": "Жертвой очаровательной вампирши Мари чуть было не стал гангстерский босс, питсбургский авторитет. После того как гангстер понял, после «свидания» с Мари, какие возможности открываются перед ним и его командой, городу угрожает беда. Если вампир-Мари и ее друг, тайный агент полиции, не остановят преступников, Питсбург превратится в настоящий ад…",
+    "poster": "https://image.tmdb.org/t/p/w342/7gNXGbG8fLHUfTQUvwzsHfe7rOz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8MAiMQLDfyd6YktQFk1B1bhzzz3.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_8332",
+    "ru": "クダン",
+    "en": "Kudan",
+    "year": 2008,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.2,
+    "votes": 250,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Призовые",
+      "Award Winning",
+      "Фэнтези",
+      "Fantasy"
+    ],
+    "overview": "As oppose to the mythological creature Minotaur, a monsters of western culture, a Japanese monster Kudan has a human head and the body of cow. Kudan is born from female cow. It speaks human language, predicts significant incidents such as war or disaster and dies in three days. This story is about a man who is accidentally transformed into a Kudan.\n\n(Source: Official website)",
+    "poster": "https://cdn.myanimelist.net/images/anime/8/21959l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "25998",
+    "ru": "Человек за солнцем",
+    "en": "黑太陽731",
+    "year": 1988,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 250,
+    "popularity": 3.04,
+    "genres": [
+      "военный",
+      "история",
+      "ужасы"
+    ],
+    "overview": "В 40-х годах японское командование в оккупированной Манчжурии создало концентрационный «Лагерь 731». Узники, чаще китайцы, были материалом для испытаний переносимости экстремальных условий, например, холод, высота, а также для испытаний бактериологического оружия. Среди японцев кто сразу, а кто постепенно привыкает к мысли, что узники не люди, а рассходный материал. Ярче всего это происходит у команды мобилизованных подростков.",
+    "poster": "https://image.tmdb.org/t/p/w342/vTbOXA1gBIhuumN5CnRhxfDp9xY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8yscpKDJQnMz2O98bZKiHyknn64.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 412209,
+    "ru": "Tramps",
+    "en": "Tramps",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 249,
+    "popularity": 0.96,
+    "genres": [
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/baXRDIafCF0qVkpySLpQp8bQMEv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s1VfATxvBq7X6DZRpjY0SmerBQJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 375950,
+    "ru": "Médecin de campagne",
+    "en": "Médecin de campagne",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 249,
+    "popularity": 0.51,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8ftmqAWf9Z9s2YljwnRepqtg6DM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uu0MkrM0lw0v3pXnVqgD3UsF9pl.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 325302,
     "ru": "Они похожи на людей",
     "en": "They Look Like People",
@@ -9479,277 +9758,6 @@
     "overview": "Хевен Ли — старшая из пяти детей семейства Кастил, живущего в убогой хижине в горах Западной Виргинии. Презираемая отцом и эксплуатируемая матерью, девочка находит утешение в любви к младшим братьям и сестрам.  Накануне своего десятилетия Хевен узнаёт от бабушки, что её настоящей матерью была красивая и богатая девушка, которая без памяти влюбилась в Люка Кастила. К несчастью, сразу после рождения Хевен она умерла, и отец не может простить этого девочке. Через несколько лет, не выдержав нищеты и пренебрежения со стороны мужа, мачеха Хевен уезжает, бросив детей на произвол судьбы. Чтобы поправить свои дела, пришедшие в полный упадок из-за страсти к азартным играм, Люк Кастил придумывает гениальный, по его мнению, план: он начинает распродавать собственных детей богатым бездетным парам...",
     "poster": "https://image.tmdb.org/t/p/w342/9464thsDOScnDstf6TdFJhGGaET.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/v2AsVdaQlcMNYaVZE2H5W9xu5zp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 630923,
-    "ru": "Праздник к нам приходит",
-    "en": "It's Beginning to Look a Lot Like Christmas",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 40,
-    "popularity": 0.57,
-    "genres": [
-      "телевизионный фильм",
-      "мелодрама"
-    ],
-    "overview": "В Новой Англии проходит конкурс украшений к Рождеству, и мэры Западного и Восточного Ривертона готовы на всё, чтобы именно их город признали лучшим.",
-    "poster": "https://image.tmdb.org/t/p/w342/vYEpId8nCN9wcE4cXSSqG3cw82p.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jJlM7XxfWdAhWx6BeqFYJWIceId.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_43323",
-    "ru": "Comedy Bang! Bang!",
-    "en": "Comedy Bang! Bang!",
-    "year": 2012,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.2,
-    "votes": 40,
-    "popularity": 15.86,
-    "genres": [
-      "комедия",
-      "Ток-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5undCFoglpvKYFmu404ve9mh6on.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wn4JtSxtYzLiYu5PoKggz8KvRDZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 116377,
-    "ru": "Дорогой М",
-    "en": "디어엠",
-    "year": 2022,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.2,
-    "votes": 39,
-    "popularity": 2.12,
-    "genres": [
-      "драма"
-    ],
-    "overview": "В центре сюжета группа студентов университета Соён, которые пытаются вычислить, кто скрывается под псевдонимом \"М\", написавший скандальный пост в онлайн-сообществе университета.\n\nМа Чжу А (Пак Хэ Су) учится на факультете управления. Она добрая, но совершенно не амбициозная и не заинтересована в романтических отношениях.\n\nЧха Мин Хо (Джэ Хён) учится на факультете вычислительной техники. У него талант в области мобильных приложений. Дружит с Ма Чжу А уже 12 лет.\n\nСо Чжи Мин (Но Чжон Ый) учится на экономическом факультете и состоит в группе поддержки.\n\nПак Ха Ныль (Пэ Хён Сон) тоже учится на факультете управления и является почетным послом университета.\n\nМин Ян Хи (Квон Ын Бин) – специалист по компьютерной инженерии, сокурсник Чха Мин Хо.",
-    "poster": "https://image.tmdb.org/t/p/w342/ycFqtchGGdz1Ju8wiIWXt2wubjB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hdHlM2ynoYSvFB9nIDSDwN3ixtZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 949709,
-    "ru": "Высокое напряжение",
-    "en": "危机航线",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 39,
-    "popularity": 1.75,
-    "genres": [
-      "боевик",
-      "криминал"
-    ],
-    "overview": "В недалеком прошлом спецназовец Гао Хаоцзюнь стал виновником автомобильной аварии, в результате которой его дочь полностью лишилась зрения. После этого инцидента его брак распался, а он был вынужден уволиться с работы, чтобы переквалифицироваться в эксперта по международной безопасности в крупной авиакомпании. Мужчина случайно пересекается со своей бывшей женой и дочерью на борту авиалайнера Airbus A380, который вскоре оказывается в руках 12 террористов, требующих выкуп в размере 500 миллионов долларов. Чтобы защитить свою семью и остальных пассажиров, Гао Хаоцзюнь решает дать отпор преступникам.",
-    "poster": "https://image.tmdb.org/t/p/w342/57F7AVuYOoOlDKMeJfJQu3FrlOG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8lqfrOBQ2EcY7znD3LxTYcvlh25.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1618945,
-    "ru": "Йо! Лучшие друзья",
-    "en": "Yoh! Bestie",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 39,
-    "popularity": 1.49,
-    "genres": [
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "Тандо постоянно не везёт в любви, но когда её лучший друг возвращается из путешествия с невестой, ей приходится столкнуться с новым чувством — ревностью.",
-    "poster": "https://image.tmdb.org/t/p/w342/9wBzRaeWfELNOPmcvOVTmB3kDEl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1EVHnzF3gescyQZSqwbx5LfQ1EN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 674779,
-    "ru": "భీష్మ",
-    "en": "భీష్మ",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 39,
-    "popularity": 1.26,
-    "genres": [
-      "мелодрама",
-      "боевик",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pE0ECn6buZNigSDFlpoIngDNAuD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uVoOsxSVhlie37wBZprHtEyYpQV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 394148,
-    "ru": "Куда идёшь, любимый?",
-    "en": "Wo willst du hin, Habibi?",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 39,
-    "popularity": 0.68,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Встреча в Берлине предствителя турецкой диаспоры Ибрагима, выпускника универстета, и плохого парня Александра, брутального немца с преступным прошлым и настоящим, приводит к невероятной любви и непредсказуемым поворотам в их судьбах..",
-    "poster": "https://image.tmdb.org/t/p/w342/czCAGrkaHQdaAocU4tl1jZQoph.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aRMdw4XrMvSxVRJULcjvGVV4TyW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 74176,
-    "ru": "Неаполитанские страсти",
-    "en": "Neapolitan Mouse",
-    "year": 1954,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 39,
-    "popularity": 0.29,
-    "genres": [
-      "комедия",
-      "мультфильм"
-    ],
-    "overview": "Том и Джерри попадают в Неаполь, где встречают нового друга, и приключения.",
-    "poster": "https://image.tmdb.org/t/p/w342/pyIQInirfT01QoQIPm9l5SMkBMX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fGAEdCMpTXGHaBer1W9SPWLiO8q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 74615,
-    "ru": "Обратная сторона рая",
-    "en": "O Outro Lado do Paraíso",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.2,
-    "votes": 39,
-    "popularity": 0.06,
-    "genres": [
-      "Мыльная опера",
-      "драма",
-      "детектив"
-    ],
-    "overview": "У дедушки Клары имеется крупное поместье в Токантинс, которым он управляет всю свою жизнь. Однажды она знакомиться с красивым и умным молодым человеком Гаелом, но его мать выступает категорически против их отношений, так как считает, что девушка попросту не достойна ее сына. Спустя месяц мать Гаела узнает, что поместье деда Клары – это настоящий Клондайк, так как там имеются залежи изумрудов. Она полностью изменяет свое отношение к Кларе и добивается, чтобы Гаел сделал ей предложение. Но делает она это только из корыстных побуждений – ее целью является участок Жозефа, дедушки Клары и чтобы его заполучить, она готова на все.",
-    "poster": "https://image.tmdb.org/t/p/w342/aNA16YOOgoawbLYltG4CKADPkhK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/de2jfUW4E3X3jl8Tf62BgRPDMHd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_4382",
-    "ru": "Eight Is Enough",
-    "en": "Eight Is Enough",
-    "year": 1977,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.2,
-    "votes": 39,
-    "popularity": 14.78,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/grfzd62iFtkA68lRJCqMVZEVnSL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/v2M8qSIcNDUOZ5jaRznuKaux36D.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 403032,
-    "ru": "樓下的房客",
-    "en": "樓下的房客",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 39,
-    "popularity": 1.64,
-    "genres": [
-      "драма",
-      "детектив",
-      "криминал",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9dpKhqrBcqt9ABc5zTU6HjQuvcN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/k303bREblg3ySFCaXXXhrFbtceH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 267797,
-    "ru": "Elvira, te daría mi vida pero la estoy usando",
-    "en": "Elvira, te daría mi vida pero la estoy usando",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 39,
-    "popularity": 0.47,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/AsN46YJ0OvzA0gPMQNNT10GUhye.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/n2yg9V0XQLuyn8euNxyKfyZfF0G.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "36753",
-    "ru": "Покемон: Пикачу и Пичу",
-    "en": "ピチューとピカチュウ",
-    "year": 2000,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.2,
-    "votes": 38,
-    "popularity": 3.0,
-    "genres": [
-      "мультфильм",
-      "приключения",
-      "семейный",
-      "Аниме"
-    ],
-    "overview": "Эш Кетчум, Мисти и Брок берут небольшой перерыв и они временно отдаляются от сражений между тренерами покемонов отправляясь в город, отпустив своих покемонов погулять. Пикачу быстро подружился с двумя местными покемонами Пичу и начинает с ними игру кошки-мышки. Отлучившись, вместе с остальными двумя, Пикачу сам того не замечая, попадает в скрытое святилище, полное различными покемонами. Однако, этим троим угрожает опасность, возможно Пикачу и его новым друзьям придётся объединиться с остальными покемонами, чтобы выжить.",
-    "poster": "https://image.tmdb.org/t/p/w342/236O6h9x7rlZx70iMzZpk7iMgzz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/AtMxZ0Vx9Sx2c5nfDNYGvyX5lpJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1511417",
-    "ru": "Бахубали: Эпос",
-    "en": "Bāhubali: The Epic",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 38,
-    "popularity": 16.96,
-    "genres": [
-      "боевик",
-      "драма"
-    ],
-    "overview": "Раненая женщина с младенцем на руках убегает от вооружённых солдат. Понимая, что долго не протянет, она возносит последнюю молитву богам и просит спасти жизнь ребёнка, а сама погружается на дно реки, держа младенца в вытянутой руке над водой. На следующий день его находят местные жители и решают усыновить. Спустя годы мальчик превращается в крепкого и рослого парня Шивуду, наделённого невероятной силой. Однажды он находит маску и решает во что бы то ни стало разыскать её владельца, не подозревая, что она принадлежит прекрасной воительнице Авантике, которая всем своим кланом пытается вызволить королеву Девасену из плена тирана Бхаллаладевы.",
-    "poster": "https://image.tmdb.org/t/p/w342/4sLSorDKKDN944kWngxgQlpdDeg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/i2GPnSwsdxHtI19e7gZwFVndpqg.jpg",
     "source": "tmdb"
   }
 ]

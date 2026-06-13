@@ -1,5 +1,283 @@
 [
   {
+    "id": 11388,
+    "ru": "Yancy Derringer",
+    "en": "Yancy Derringer",
+    "year": 1958,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.2,
+    "votes": 11,
+    "popularity": 5.31,
+    "genres": [
+      "вестерн",
+      "Боевик и Приключения"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9kUjeNoI23qwKDJnGldIvy16HEb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iGjRmUhYi2s5nNwoRi2P9M6QlvR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 503606,
+    "ru": "灵魂摆渡·黄泉",
+    "en": "灵魂摆渡·黄泉",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 11,
+    "popularity": 2.37,
+    "genres": [
+      "фэнтези",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rtOfVKu2JCbtzTcrxwF6WSTLr9u.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ftrKmHhFAfILMsEzxl6c3aIzx2T.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 540638,
+    "ru": "The Boxcar Children: Surprise Island",
+    "en": "The Boxcar Children: Surprise Island",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 11,
+    "popularity": 0.61,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/c6IOTVyG1t3zrKinuEG1GC0b7Sp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dsKnI59xVN25mMLXKktEVs3Q4Zo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 156476,
+    "ru": "Three's a Crowd",
+    "en": "Three's a Crowd",
+    "year": 1932,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 11,
+    "popularity": 0.41,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9cCHzHbfIdJCb6JB4JVJkGcSj75.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9RgMDgqXhcnKbe4j64KxMQZJN8d.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 306060,
+    "ru": "Richard Pryor: Icon",
+    "en": "Richard Pryor: Icon",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 11,
+    "popularity": 0.39,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8L8Ry6fcgW6nXW0OwAUqlRcRtG9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nrDCrN23veiypQYGzLPKtb5hpbR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 53717,
+    "ru": "Kaptein Sabeltann",
+    "en": "Kaptein Sabeltann",
+    "year": 2003,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 11,
+    "popularity": 0.33,
+    "genres": [
+      "мультфильм",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/m1En5GvKDHnUWrojcywoIPMWpbx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tDHiCPYgLHUcaB6YEiqvywxV2eB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 10099,
+    "ru": "The Doris Day Show",
+    "en": "The Doris Day Show",
+    "year": 1968,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.2,
+    "votes": 11,
+    "popularity": 9.03,
+    "genres": [
+      "комедия",
+      "вестерн"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zdDgcr6w6l6eaYigrX5ggnuU5Mp.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 257553,
+    "ru": "Short and Suite",
+    "en": "Short and Suite",
+    "year": 1959,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 11,
+    "popularity": 0.31,
+    "genres": [
+      "мультфильм",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mNdK8kHfr5q4VvTnGoid3IaAdtw.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": "1230477",
+    "ru": "映画 ギヴン 柊mix",
+    "en": "映画 ギヴン 柊mix",
+    "year": 2024,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.2,
+    "votes": 10,
+    "popularity": 1.89,
+    "genres": [
+      "мультфильм",
+      "мелодрама",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uOvHjRDuJrRAgmJkUPcmnvaEqew.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/59gIydacLPl4vITlzBb4qbKW7Qh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_34709",
+    "ru": "Реквием из тьмы",
+    "en": "京極夏彦 巷説百物語",
+    "year": 2003,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.2,
+    "votes": 10,
+    "popularity": 7.25,
+    "genres": [
+      "мультфильм",
+      "детектив",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Время действия – эпоха Бакуматсу – конец правления Токугава. В те времена создания тьмы дышали полной грудью, повсюду кишели вселяющие ужас демоны. Молодой писатель, Ямаока Хьякуске путешествует по стране, собирая различные рассказы о сверхъестественных существах и явлениях, надеясь представить их в своей книге «Хьяку Моногатари». Как говорится, на ловца и зверь бежит, Ямаоку ждет встреча с Матаити, Огин и Чоудзи. Эта тройка – наемники, но не простые, используя свои необычные способности, они вершат суд и карают преступников.",
+    "poster": "https://image.tmdb.org/t/p/w342/ppaJsMKo6Wr3E5tAQhQEwni974w.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/93bKVCDs3BZRX4TPpddJQWYVVpd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_60826",
+    "ru": "Наследник Сёгуна: Великая Революция",
+    "en": "風雲維新ダイ☆ショーグン",
+    "year": 2014,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.2,
+    "votes": 10,
+    "popularity": 2.86,
+    "genres": [
+      "Боевик и Приключения",
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "Сюжет перенесет нас в поздний период эпохи Эдо, когда Япония встала перед лицом беспрецедентного кризиса, возникшего в результате вторжения из-за границы Черных кораблей. Избежать угрозы захвата портов помогает Onigami, гигантский робот, существующий с давних времен. В результате страна осталась в самоизоляции и идёт по другому пути развития истории, в которой не было реставрации Мейдзи в 1868 году.",
+    "poster": "https://image.tmdb.org/t/p/w342/68wL7sLwlfBYTERzQ0qjJnVRsn5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lhxVRXZgLig07jXDiiCB6zUepIx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_25708",
+    "ru": "Космический воин Зеро",
+    "en": "コスモウォーリアー零",
+    "year": 2001,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.2,
+    "votes": 10,
+    "popularity": 2.13,
+    "genres": [
+      "мультфильм",
+      "Детский",
+      "Боевик и Приключения",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Война между людьми и Механоидами закончилась, наступил, пусть и хрупкий, но все же мир. Вышедший в отставку адмирал Зеро занимается тем, что обучает новичков полетам в космосе. Но на его пути возникает космический пират Харлок и не смотря на все попытки Зеро предотвратить это - уничтожает транспортный корабль Механоидов. Правительство Земли отправляет Зеро на поиски Харлока, и даже возвращает ему его боевой корабль Карию (Огненный Дракон). Теперь начинается долгий путь Зеро полный приключений, предательства и опасностей...",
+    "poster": "https://image.tmdb.org/t/p/w342/tLBegcYRSAEuGmMV4kScMmbsND9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bzvSLmHctSiYpPydfsjgsRHWlf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "118931",
+    "ru": "Школьные полуночники",
+    "en": "放課後ミッドナイターズ",
+    "year": 2012,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.2,
+    "votes": 10,
+    "popularity": 1.36,
+    "genres": [
+      "фэнтези",
+      "мультфильм",
+      "комедия",
+      "семейный",
+      "Аниме"
+    ],
+    "overview": "История происходит в стенах начальной школы под названием Сент-Клер. Трое девочек дошколят - Мако, Мико и Муцуко, также известные как МММ, попадают туда на день открытых дверей, когда родители осматривают школу перед тем, как отдать в нее детей. Блуждая по коридорам, оторвавшиеся от мам и пап девочки попадают в заброшенный научный кабинет. Там они находят анатомическую модель человека, ту самую, у которой отсутствует часть кожи, видны мышцы, вынимаются внутренности и глаза. Совершенно потрясенные девочки решают сделать несчастного немного покрасивее... Но кто мог знать, что каждую ночь этот муляж оживает...",
+    "poster": "https://image.tmdb.org/t/p/w342/zByRwRi27Av88dTuH90ZcMTBodc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nf5tIKw7cFzKfSaDsZpOcQYh27O.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "39951",
+    "ru": "Приключения Гулливера",
+    "en": "ガリバーの宇宙旅行",
+    "year": 1965,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.2,
+    "votes": 10,
+    "popularity": 1.08,
+    "genres": [
+      "мультфильм",
+      "фантастика",
+      "семейный",
+      "Аниме"
+    ],
+    "overview": "Однажды поздним вечером мальчик Тед, бродячий пес Мак и заводной солдатик оказались в парке развлечений. Бдительная охрана, обнаружив непрошеных посетителей, пыталась их схватить. Но друзья улизнули на игрушечной ракете, а приземлились неподалеку от дома… профессора Гулливера. И теперь вместе с известным путешественником, уже на настоящем космическом корабле, они отправляются к далекой звезде Надежды. Впереди — полный опасностей путь, война с роботами, поработившими Зеленую планету, встреча с прекрасной принцессой и много-много других, самых невероятных событий.",
+    "poster": "https://image.tmdb.org/t/p/w342/7oLhO7d84ZubmVM2WciBk0zC1Kr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/g0e28GVV1Z4m8T8rlNJV9zSfj3s.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "332485",
     "ru": "ピカチュウ、これなんのカギ？",
     "en": "ピカチュウ、これなんのカギ？",
@@ -9495,296 +9773,6 @@
     "overview": "После смерти мужа Харпер отправляется из Лондона в сельскую местность, надеясь расслабиться на природе и прийти в себя. Во время прогулки по лесу она набредает на загадочный тоннель, где пробуждает кого-то или что-то, что начинает её преследовать.",
     "poster": "https://image.tmdb.org/t/p/w342/5TkrtAJP0XCE45cIeSlQD5wTAsx.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/4N2FuCTuqH3h4dw9XPFtsnDPSz7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "6520",
-    "ru": "Первый рыцарь",
-    "en": "First Knight",
-    "year": 1995,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 1339,
-    "popularity": 4.92,
-    "genres": [
-      "боевик",
-      "приключения",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Ланселот, воин без страха и упрека, прибыл в золотой замок Камелот, чтобы служить великому королю Артуру. Им предстоят грозные сражения, доблесть и слава. Но в Камелоте он находит женщину, без которой не может жить, но которой не в силах обладать — прекрасную Гуиневеру Лионесскую. Она — возлюбленная короля Артура, который защищает ее маленькое королевство от войск черного рыцаря Малаганта. И Первый Рыцарь Ланселот должен сделать выбор — служить своему королю, или предать его во имя любимой…",
-    "poster": "https://image.tmdb.org/t/p/w342/yN714SBYQi0KERR4xKd5yTM3UKv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tsgEdYjwWVhdGHv01djx7KdXDJm.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "157834",
-    "ru": "Теорема Зеро",
-    "en": "The Zero Theorem",
-    "year": 2013,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 1336,
-    "popularity": 1.5,
-    "genres": [
-      "драма",
-      "фэнтези",
-      "фантастика"
-    ],
-    "overview": "Эксцентричный компьютерный гений Коэн Лет бьется над неразрешимой теоремой. Благодаря костюму для виртуальной реальности, изобретенному мальчиком Бобом, Лету удается совершить путешествие в скрытое пространство и узнать тайну своей души. Эту разгадку ищет не только он сам, но и таинственный Менеджмент, который правит всем миром посредством всевидящих устройств под названием ManCams.",
-    "poster": "https://image.tmdb.org/t/p/w342/cjkhkAIheUJbLO2tQErIsR0okML.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6RcWkHz1LT8wJBlAwYRoq2nOzG6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "37861",
-    "ru": "Вальгалла: Сага о викинге",
-    "en": "Valhalla Rising",
-    "year": 2009,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 1329,
-    "popularity": 3.01,
-    "genres": [
-      "приключения",
-      "драма",
-      "боевик",
-      "фэнтези"
-    ],
-    "overview": "1000 год нашей эры. Немой воин по прозвищу Одноглазый, вырывается из 10-летнего рабства. Сурово расправившись со своими мучителями, он вскоре встречает викингов, с которыми направляется в Иерусалим. По пути следования путешественники переживают страшный шторм, затем их судно попадает в необычный туман. Выбравшись из непроглядной пелены, викинги оказываются около неведомых земель…",
-    "poster": "https://image.tmdb.org/t/p/w342/kyMfY5bCTbu71MBO6QYk2hPi8jj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5UTOmyAIe7icGgjc5ETOZNMITmj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_51371",
-    "ru": "Shine On! Bakumatsu Bad Boys",
-    "en": "Bucchigire!",
-    "year": 2022,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.0,
-    "votes": 11309,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Экшен",
-      "Action",
-      "Историческое",
-      "Historical",
-      "Самураи",
-      "Samurai"
-    ],
-    "overview": "Following a ruthless attack from an imperialist criminal gang known as the Masked Demons, Shinsengumi's Eighth Division—the law-enforcing squad in Kyoto that remains faithful to the shogunate—is nearly annihilated, with its sole survivor, Heisuke Toudou, critically injured. Urged to rebuild the Shinsengumi by the local feudal lord, Katamori Matsudaira, Toudou decides to offer eight convicts the chance to redeem themselves: they must abandon their old names and become substitutes for the eight Shinsengumi captains. All accept but one, who ends up immediately executed by the former assassin Sakuya.\n\nHowever, Toudou has a hard time transforming the seven reformed criminals into loyal servants. Due to his lack of discipline, the impulsive and vengeful Ichibanboshi, whose family perished at the hands of the Masked Demons, threatens the success of Toudou's strategy. As Toudou pledges to protect the shogunate against imperialists and foreign invaders, other factions, such as Kogorou Katsura's group, start to put their plans in motion with only one goal in mind—to seize power at the dusk of the Edo period.\n\n[Written by MAL Rewrite]",
-    "poster": "https://cdn.myanimelist.net/images/anime/1729/141091l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "593402",
-    "ru": "Невезучий",
-    "en": "Tolo Tolo",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 1308,
-    "popularity": 0.84,
-    "genres": [
-      "комедия",
-      "драма",
-      "семейный"
-    ],
-    "overview": "Чекко - молодой апулийский предприниматель-мечтатель, который открыл суши-ресторан в своей Апулии. Однако через месяц ресторан обанкротился, и он решил эмигрировать в Африку, чтобы спастись от долгов. Здесь он приспосабливается к роли официанта на курорте в Кении, но в разгар гражданской войны он решает отправиться в безбилетную поездку на лодке для мигрантов в Европу и решает сделать это со своими африканскими друзьями. Однако он хотел бы не возвращаться в Италию, а скорее поехать в Лихтенштейн, где действует банковская тайна и где налоговое бремя ниже, чем в Италии.",
-    "poster": "https://image.tmdb.org/t/p/w342/8ZNfRp1fueraDMkeSKHrxYJQhTU.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8TiYxxck4kfKwXAAdi6aZLeQd5L.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "410199",
-    "ru": "ARQ: ковчег времени",
-    "en": "ARQ",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 1299,
-    "popularity": 1.74,
-    "genres": [
-      "фантастика",
-      "триллер"
-    ],
-    "overview": "Будущее Земли зависит от новой технологии, но на пути к выживании планеты — неожиданный поворот. Запертые в лаборотории и застрявшие во временной петле, дезориентированные герои пытаются скрыться от захватчиков в масках, одновременно сохранив новый источник энергии, который может спасти человечество.",
-    "poster": "https://image.tmdb.org/t/p/w342/mU4VeXVK18JtCZsy7i0zczlA9p7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oX6rYilUqQJMcMzCn6K61UifOnN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_1977",
-    "ru": "土方歳三　白の軌跡",
-    "en": "Hijikata Toshizou: Shiro no Kiseki",
-    "year": 2004,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.1,
-    "votes": 1285,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Экшен",
-      "Action",
-      "Драма",
-      "Drama",
-      "Историческое",
-      "Historical",
-      "Самураи",
-      "Samurai"
-    ],
-    "overview": "A biographical sketch of the life and ideals of Hijikata Toshizou, Vice Commander of the Shinsengumi, fighting to uphold the Shogunate during the Meiji revolution. \n\n(Source: ANN)",
-    "poster": "https://cdn.myanimelist.net/images/anime/1/2252l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "582596",
-    "ru": "Не та девушка",
-    "en": "The Wrong Missy",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 1274,
-    "popularity": 2.4,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Когда Тим Моррис случайно знакомится с очаровательной Мисси, то понимает, что встретил девушку своей мечты. Чтобы покорить ее сердце, герой решает пригласить красавицу провести с ним уик-энд на шикарном курорте, где его компания проводит корпоратив. Но Тим ошибается и отправляет сообщение другой Мисси — взбалмошной, эксцентричной особе, которая не стесняется демонстрировать свои недостатки.",
-    "poster": "https://image.tmdb.org/t/p/w342/A2YlIrzypvhS3vTFMcDkG3xLvac.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1xQtvgay8rDwSaZPwyhcecqV8UD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "333381",
-    "ru": "Вернуть отправителю",
-    "en": "Return to Sender",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 1271,
-    "popularity": 2.76,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "Медсестра, проживающая в маленьком городке, идет на свидание вслепую с человеком, который притворяется не тем, кто он есть на самом деле.",
-    "poster": "https://image.tmdb.org/t/p/w342/4FNfLEY7aUHUgvDPzxQpaX3dEIB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nFPT1iucVA0qkmkJktYNeYzXhLc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "2665",
-    "ru": "Аэроплан 2: Продолжение",
-    "en": "Airplane II: The Sequel",
-    "year": 1982,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 1265,
-    "popularity": 3.22,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Полет шаттла, совершающего первый регулярный рейс на Луну, проходит нормально, если не считать того, что все системы корабля отказали, на борту находится безумный террорист, угрожающий взорвать звездолет, и, что самое страшное, у экипажа… абсолютно кончился кофе.",
-    "poster": "https://image.tmdb.org/t/p/w342/hmdlJR372uljYcBsmT19fgKY4ey.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nZCuAonAbL1mXea0NITbxfnLvVQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "15657",
-    "ru": "Тарзан 2",
-    "en": "Tarzan II",
-    "year": 2005,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 1241,
-    "popularity": 3.46,
-    "genres": [
-      "приключения",
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "До того, как стать Королем Джунглей, Тарзан был неуклюжим маленьким мальчиком, пытающимся приспособиться к окружающему миру. Но однажды он совершает ошибку и тем самым подвергает риску свою семью. С этого момента Тарзан решает, что им будет безопаснее без него, и покидает тех, кого любит.  Во время своего опасного путешествия Тарзан знакомится с загадочным Зугором — самым могущественным представителем тех мест. Будучи вместе, Тарзан и Зугор понимают, что быть разными не так уж и плохо, а друзья и семья — две самые главные ценности на свете.",
-    "poster": "https://image.tmdb.org/t/p/w342/v9wsiHFfp6W0MJwcloehonZOhhr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lBmemfERELoZDxyLOCoumfkHAEO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "427900",
-    "ru": "В гостях у Элис",
-    "en": "Home Again",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 1240,
-    "popularity": 2.53,
-    "genres": [
-      "комедия",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Жизнь матери-одиночки из Лос-Анджелеса неожиданно меняется, когда она разрешает трем парням пожить у нее.",
-    "poster": "https://image.tmdb.org/t/p/w342/kJTft8mKcGG8n4fqPw1nMGBgLEm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pxpEFY66yYr5bA1N4PCm5b4uz40.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_21663",
-    "ru": "Last Orders",
-    "en": "Last Orders",
-    "year": 1997,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.1,
-    "votes": 1215,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Экшен",
-      "Action",
-      "Фантастика",
-      "Sci-Fi",
-      "Самураи",
-      "Samurai"
-    ],
-    "overview": "The 60-second film features six fierce samurai who rush through a post-futuristic megalopolis using the most unpredictable means of transport (including a kite!) as to make it on time for the last order at their favorite pub.\n\n(Source: Production I.G)",
-    "poster": "https://cdn.myanimelist.net/images/anime/9/60623l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "295151",
-    "ru": "Пусть идёт снег",
-    "en": "Let It Snow",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 1213,
-    "popularity": 1.33,
-    "genres": [
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "Снежная буря обрушивается на Грейстаун и застает жителей города врасплох. Но даже в непогоду магия Рождества способна создать уют и тепло, особенно когда дело касается любви.",
-    "poster": "https://image.tmdb.org/t/p/w342/1Wakzc09OYr7GWfq2Eq1peA2JdS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zAWXavwU4pdTkOU3DSrgM3xGjBn.jpg",
     "source": "tmdb"
   }
 ]

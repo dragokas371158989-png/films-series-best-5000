@@ -1,21 +1,164 @@
 [
   {
-    "id": 1058647,
-    "ru": "Вдохни поглубже",
-    "en": "The Deepest Breath",
-    "year": 2023,
+    "id": "tv_7361",
+    "ru": "Освенцим: Нацисты и «Последнее решение»",
+    "en": "Auschwitz: The Nazis and the Final Solution",
+    "year": 2005,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 190,
+    "popularity": 1.47,
+    "genres": [
+      "документальный",
+      "криминал",
+      "Война и Политика"
+    ],
+    "overview": "Спустя 60 лет после освобождения от нацизма, невообразимая история о самом ужасном месте на планете наконец раскрыта...",
+    "poster": "https://image.tmdb.org/t/p/w342/tLomUa8wQd8IKursGSuGW2n6kt2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iOgFfAvA1fqjKZzSTMjR3VN6Zu9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_86346",
+    "ru": "El Bronx",
+    "en": "El Bronx",
+    "year": 2019,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 190,
+    "popularity": 1.59,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2VSKvnL3aZPghHQOOg1v3owsr8d.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qArchZj808F9S6t9vbcZ0Wtsn12.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 102518,
+    "ru": "Держись крепче! Скалолазки",
+    "en": "いわかける！ - Sport Climbing Girls -",
+    "year": 2020,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.6,
+    "votes": 189,
+    "popularity": 6.84,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "драма",
+      "Аниме"
+    ],
+    "overview": "Перейдя в старшую школу, Кономи Касахара случайно замечает интересное сооружение на территории школы — скалодром. Рядом с ним она знакомится с Дзюн Уэхарой, состоящей в школьном клубе по спортивному скалолазанию. Благодаря давнему увлечению компьютерными играми и головоломками, Кономи отыскивает оптимальные маршруты на скалодроме и быстрейшие пути их преодоления, чем добивается вступления в клуб и уважения от его действующих участниц.\n\nС первых же дней она с головой погружается в мир нового для неё спорта. Кономи ожидают трудности и серьёзные испытания, так как скалолазание требует усердной работы над собой. Однако именно здесь ей повстречаются и новые друзья, и соперники и мириады вершин, которые нужно покорить.",
+    "poster": "https://image.tmdb.org/t/p/w342/yOn7g69Hz8GhAxyzqvJlOb2JvkF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pw9c9dhImjaksKZYbVuAR6om8tH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 499537,
+    "ru": "Дом волка",
+    "en": "La casa lobo",
+    "year": 2018,
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.6,
-    "votes": 179,
-    "popularity": 0.98,
+    "votes": 189,
+    "popularity": 0.72,
     "genres": [
-      "документальный"
+      "мультфильм",
+      "ужасы",
+      "драма"
     ],
-    "overview": "Объединенные любовью к фридайвингу, чемпион-рекордсмен и отважный спасатель пытаются войти в историю, совершив выдающийся подвиг, и готовы рискнуть для этого всем.",
-    "poster": "https://image.tmdb.org/t/p/w342/o9Zt9ByaNZt3XjMBNK0AZelP7vQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8J0gmuwmq8z7TI4YuWDTclHoB75.jpg",
+    "overview": "История Марии, молодой женщины, которая укрывается в доме на юге Чили после побега из немецкой колонии.",
+    "poster": "https://image.tmdb.org/t/p/w342/ydEHUS04x9kmANWrGeOUNPPA2Tv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/u4CVC9VVpbfxxFqf8fcaPVegUmZ.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": "tv_103",
+    "ru": "Туннель времени",
+    "en": "The Time Tunnel",
+    "year": 1966,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 186,
+    "popularity": 11.1,
+    "genres": [
+      "Боевик и Приключения",
+      "НФ и Фэнтези",
+      "драма"
+    ],
+    "overview": "Во время первого же запуска тоннеля времени - величайшего и секретнейшего американского проекта «TicToc», двое американских учёных, Тони Ньюмэн и Даг Филипс, потерялись в лабиринте водоворота прошлого и будущего. И, затерявшись где-то в бесконечных коридорах времени, они каждый раз попадают в новые фантастические приключения…",
+    "poster": "https://image.tmdb.org/t/p/w342/6E3Ncd9iLWqi8m1GcdkU5bSwOnS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/omPcylzcwlsser7aKTlsyoMJLyK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 7000856,
+    "ru": "Кто подставил кролика Роджера",
+    "en": "Who Framed Roger Rabbit",
+    "year": "1988",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.54,
+    "votes": 6185,
+    "popularity": 6.35,
+    "genres": [
+      "фэнтези",
+      "мультфильм",
+      "комедия",
+      "криминал"
+    ],
+    "overview": "Частный детектив расследует загадочное преступление, в котором подозревается… мультипликационный персонаж кролик Роджер! Сыщик попадает в непредсказуемый мир, где его ожидают нарисованные злодеи с настоящими револьверами, говорящий автомобиль и соблазнительная мультяшная красотка. Наконец, на горизонте появляется мрачная фигура того, кто подставил кролика Роджера…",
+    "poster": "https://image.tmdb.org/t/p/w342/rtba2Xa50esVXLmrM8Wokd7SZXr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/udIE8Cdon9wnYmVIOFYrBPfA2Mq.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 856
+  },
+  {
+    "id": "tv_123349",
+    "ru": "Звук волшебства",
+    "en": "안나라수마나라",
+    "year": 2022,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 185,
+    "popularity": 4.25,
+    "genres": [
+      "драма",
+      "НФ и Фэнтези"
+    ],
+    "overview": "Старшекласснице Юн Аи пришлось рано повзрослеть. Отец сбежал из дома, скрываясь от коллекторов, а следом ушла и мать, поэтому девушке приходится работать и заботиться о младшей сестре. Аи очень хорошо учится и хочет поскорее вырасти, чтобы устроиться на нормальную работу. Однажды она встречает в заброшенном парке развлечений загадочного фокусника, который даёт представления для верящих в магию.",
+    "poster": "https://image.tmdb.org/t/p/w342/9EyoRMleITfcGhK5i5006jNSqgP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ft9kPRULcAN7hgjvzpEfmtROiQR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 8014069,
+    "ru": "Пациенты",
+    "en": "In Treatment",
+    "year": "2008",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 185,
+    "popularity": 35.49,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Психотерапевт Пол Уэстон предан своему делу. Ежедневно он прикладывает колоссальные усилия, чтобы помочь пациентам. Однако сам Пол — точно такой же человек, которому постоянно приходится разбираться с собственными проблемами и переживаниями.",
+    "poster": "https://image.tmdb.org/t/p/w342/jGH4ARqOKJF6ARpAuK1sS54F8tZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/gpPg6JSixhf9JZbZtD32X3nNYCm.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 14069
   },
   {
     "id": "tv_124067",
@@ -137,6 +280,26 @@
     "source": "tmdb"
   },
   {
+    "id": 8081144,
+    "ru": "Соседство",
+    "en": "The Neighborhood",
+    "year": "2018",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 172,
+    "popularity": 25.73,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Джонсоны только что переехали в один из уютных домиков в пригороде Лос-Анджелеса и пытаются наладить отношения с соседями. Вскоре выясняется, что местные жители составляют сплочённое сообщество, определённое не столько общими интересами, сколько цветом кожи. Завоевать себе место в чёрном районе простым белым ребятам оказывается непросто.",
+    "poster": "https://image.tmdb.org/t/p/w342/qV9U4IGVgZWQ8Uie4Iq1GismgbS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/2GlkdaHtxORqWfPccv2YLDoLxMb.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 81144
+  },
+  {
     "id": 597089,
     "ru": "Статья 15",
     "en": "Article 15",
@@ -213,6 +376,27 @@
     "poster": "https://image.tmdb.org/t/p/w342/cduGmrNnER1r5bVvi6NpUgKLD3n.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/u3zk93cygbgDa8w05ahz8o2dhTK.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 8000106,
+    "ru": "Шоу Энди Гриффита",
+    "en": "The Andy Griffith Show",
+    "year": "1960",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.6,
+    "votes": 167,
+    "popularity": 59.08,
+    "genres": [
+      "комедия",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/x2DNKGyeJ273Tt5hwty4GQnbwkV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/szx8lk5wIv1jU3NpMBZVjjs96Fi.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 106
   },
   {
     "id": 42413,
@@ -825,27 +1009,6 @@
     "source": "tmdb"
   },
   {
-    "id": "tv_203164",
-    "ru": "Силачка Кан Нам Сун",
-    "en": "힘쎈여자 강남순",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 149,
-    "popularity": 9.28,
-    "genres": [
-      "комедия",
-      "драма",
-      "НФ и Фэнтези",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ktB3epuAUGjVE6te7udTUAHBuv2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6gyJwBbgFD0MYap1AFWQKOkve6D.jpg",
-    "source": "tmdb"
-  },
-  {
     "id": "tv_32604",
     "ru": "Опасные связи",
     "en": "Relaciones Peligrosas",
@@ -901,25 +1064,6 @@
     "overview": "Осужденный преступник вынужден помогать полиции, чтобы впервые в жизни увидеть свою дочь...",
     "poster": "https://image.tmdb.org/t/p/w342/deAqLkECioYFxVuFthtdTiammct.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/seTFDq1iKyJ6YHr7HePbC20DMsy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_125816",
-    "ru": "Потерянные цветы Элис Харт",
-    "en": "The Lost Flowers of Alice Hart",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 147,
-    "popularity": 3.15,
-    "genres": [
-      "драма",
-      "детектив"
-    ],
-    "overview": "Девятилетнюю Элис Харт, потерявшую родителей в загадочном пожаре, воспитывает ее бабушка Джун на цветочной ферме, где Элис узнаёт, что бывают секреты внутри секретов. Но годы спустя, когда давнее предательство становится явным, Элис вынуждена разобраться со своим прошлым.",
-    "poster": "https://image.tmdb.org/t/p/w342/AhDgjGxTTp5FbiVRb5tOA5nWrxp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/koU92vPMZFoWn2SD1w0IoOzAxFm.jpg",
     "source": "tmdb"
   },
   {
@@ -1118,25 +1262,6 @@
     "source": "movie_popular",
     "status": "Вышел",
     "tmdbId": 45380
-  },
-  {
-    "id": "tv_216811",
-    "ru": "Триптих",
-    "en": "Tríada",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 140,
-    "popularity": 2.21,
-    "genres": [
-      "драма",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xwZVZCXUq2ir54zYtfHtJgyf1Hy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jlbIkIkiNCvfGt8b9Vq5xiX2nvK.jpg",
-    "source": "tmdb"
   },
   {
     "id": 85444,
@@ -1376,7 +1501,7 @@
     "overview": "Кармине и Филиппо случайно встречаются в музыкальной студии, где они оба хотят записать свои песни. Их дружба быстро развивается, но они не знают, что настоящая жизнь их ждет совсем скоро. Они оба попадают в конфликт с местными криминальными группировками, их друзья и семьи теперь находятся в опасности. В то же время, Филиппо влюбляется в дочь главы мафии, их любовь становится запретной и опасной. Кармине и Филиппо должны найти способ спастись и оставаться верными своим мечтам и целям, не смирившись с жестокой реальностью и общественным прессом, навязываемым им в Неаполе.",
     "poster": "https://image.tmdb.org/t/p/w342/eaUYYzfSrX7aV3cidQWSurj0njX.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/509CnjLa0O9eJSBwqwArNdUohY9.jpg",
-    "source": "tv_popular",
+    "source": "trending_tv_week",
     "status": "Онгоинг",
     "tmdbId": 110283
   },
@@ -2487,7 +2612,8 @@
       "Боевик и Приключения",
       "мультфильм",
       "комедия",
-      "семейный"
+      "семейный",
+      "НФ и Фэнтези"
     ],
     "source": "tv_popular"
   },
@@ -2693,29 +2819,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/3VeupeQVliLyxT8PYAyTVWNzGwc.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/i1POkO0NUMQ0mN4LP4sEXNE1jrG.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 7015137,
-    "tmdbId": 15137,
-    "ru": "Евангелион 1.11: Ты (не) один",
-    "en": "ヱヴァンゲリヲン新劇場版：序",
-    "year": "2012",
-    "type": "Фильм",
-    "episodes": "",
-    "status": "Вышел",
-    "studio": "",
-    "rating": 7.59,
-    "votes": 1096,
-    "poster": "https://image.tmdb.org/t/p/w342/rdsN0JXAgHYiPwtb4ChQvbfwB7B.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/tmXP9R43XlYTmVD7XLnakFbf2ax.jpg",
-    "overview": "Чтобы спасти человечество — нужно спасти человека. Синдзи Икари получает телефонный звонок от отца из штаб-квартиры НЕРВ — организации, воюющей с таинственным врагом. Последняя надежда человечества в этой войне — Евангелион, человекоподобное оружие, и почему-то именно Синдзи, замкнутому юноше, обремененному грузом психологических проблем, предстоит быть его пилотом...",
-    "genres": [
-      "мультфильм",
-      "фантастика",
-      "боевик",
-      "драма"
-    ],
-    "source": "movie_top_rated"
   },
   {
     "id": 1794,
@@ -3447,29 +3550,6 @@
     "source": "tmdb"
   },
   {
-    "id": 8289892,
-    "tmdbId": 289892,
-    "ru": "Аццкий босс",
-    "en": "Helluva Boss",
-    "year": "2020",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 7.6,
-    "votes": 86,
-    "poster": "https://image.tmdb.org/t/p/w342/dgtuBsG2F4cGiumtHBKDru7PW9j.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/20OP4f0xDbPttORm9OyIbNu3cNN.jpg",
-    "overview": "В Аду бес Блиц пытается запустить стартап киллерского агенства на очень конкурентном рынке вместе со специалистом по оружию Мокси, громилой Милли и секретарем Луной.",
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "драма",
-      "НФ и Фэнтези"
-    ],
-    "source": "trending_tv_week"
-  },
-  {
     "id": 42567,
     "ru": "Синее синего",
     "en": "藍より青し",
@@ -3676,6 +3756,28 @@
     "source": "tmdb"
   },
   {
+    "id": 8029200,
+    "tmdbId": 29200,
+    "ru": "G.I. Joe: A Real American Hero",
+    "en": "G.I. Joe: A Real American Hero",
+    "year": "1983",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 7.6,
+    "votes": 82,
+    "poster": "https://image.tmdb.org/t/p/w342/nq3hyd68PeUbm1Wz3nQMkUUaYZ1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/f7otxzK1w3sBxT8PeHJCFTb8ebf.jpg",
+    "overview": "",
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "Детский"
+    ],
+    "source": "tv_popular"
+  },
+  {
     "id": 218263,
     "ru": "Моя возлюбленная забыла свои очки",
     "en": "好きな子がめがねを忘れた",
@@ -3793,28 +3895,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/sr8CmrtnPTJSYtNyMxvWHRaweSN.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/9vhz9uJyvsiHHQj521zVkudol2R.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8029200,
-    "tmdbId": 29200,
-    "ru": "G.I. Joe: A Real American Hero",
-    "en": "G.I. Joe: A Real American Hero",
-    "year": "1983",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 7.6,
-    "votes": 81,
-    "poster": "https://image.tmdb.org/t/p/w342/nq3hyd68PeUbm1Wz3nQMkUUaYZ1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/f7otxzK1w3sBxT8PeHJCFTb8ebf.jpg",
-    "overview": "",
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "Детский"
-    ],
-    "source": "tv_popular"
   },
   {
     "id": "tv_155493",
@@ -9765,89 +9845,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/lhsJzNmXlktaOVsdTAQDQhGt5ob.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/dCcSHIf26NyqVqXJkEH9KaCcwOJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 12501,
-    "ru": "Огни пёстрой арены",
-    "en": "カレイドスター",
-    "year": 2003,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.6,
-    "votes": 24,
-    "popularity": 7.23,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "драма",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Цирк \"Пестрая Арена\" знаменит на весь мир своими великолепными выступлениями. Так однажды молодая японская девушка Сора Наэгино приехала в Америку специально для того, чтобы вступить в цирк и радовать зрителей так же как радовал её он, когда Сора впервые посетила его со своими родителями. По некоторым обстоятельствам девушка опоздала и королева арены Лейла Гамильтон отказалась ждать её. Однако, с вмешательством директора Соре все таки удалось попасть в состав группы, но между девушками сразу почувствовалась вражда. Шут - дух арены, который видят лишь избранные, те которым суждено стать истинной звездой цирка, те кто сможет воплотить в жизнь мистический трюк. Что такое мистический трюк? Кто такая истинная звезда? Как этого добиться?",
-    "poster": "https://image.tmdb.org/t/p/w342/i9YETMIFiuV0rFcyOdsmysRXrri.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bEtJQnmMkSd4GPewIv1yC9lDudf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_53352",
-    "ru": "Дом Пяти Листьев",
-    "en": "さらい屋 五葉",
-    "year": 2010,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.6,
-    "votes": 24,
-    "popularity": 2.96,
-    "genres": [
-      "мультфильм",
-      "драма",
-      "детектив",
-      "криминал",
-      "Аниме"
-    ],
-    "overview": "В Японии заканчивается эпоха Эдо, идеи сегуната постепенно обесцениваются, сотни самураев ищут работу. Среди них — Акицу Масаносукэ, талантливый воин, но крайне застенчивый человек. Ему сложно даже просто заговорить с людьми, а о том, чтобы предложить свои услуги, речь даже не идет. Неожиданно встретившийся ему развязный юноша предложил Акицу еду и работу телохранителем. Блуждающий воин согласился, не догадываясь, что он заключают сделку с главарем самой грозной банды Японии «Пять листьев», в которой было всего четыре человека. Акицу стал пятым.",
-    "poster": "https://image.tmdb.org/t/p/w342/grzQcawXgXBKwdqUwf52N8ijodd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fReRituFiToJoXPoQtDJ7lGT6NN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "48661",
-    "ru": "Фландрийский пес (фильм)",
-    "en": "フランダースの犬",
-    "year": 1997,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.6,
-    "votes": 24,
-    "popularity": 0.89,
-    "genres": [
-      "мультфильм",
-      "драма",
-      "мелодрама",
-      "Аниме"
-    ],
-    "overview": "У мальчика Нелло, наделенного даром рисования, живет пес Патраш, добрый и симпатичный. С мальчиком дружит Алуа, дочь богатого человека, но папа не разрешает ей с ним дружить, считая, что бедный мальчик для нее не подходящая компания. А Нелло так хорошо нарисовал ее портрет. Однажды он, его дедушка и Алуа пошли в Антверпен, там Патраша узнал его бывший злой хозяин, захотевший взять пса обратно. Но Нелло и его друзья помешали этому. Мальчик принял участие в конкурсе юных художников - победитель мог бесплатно учиться в школе искусств. О жизни Нелло, его пса Патраша, Алуа и рассказывает этот фильм",
-    "poster": "https://image.tmdb.org/t/p/w342/2Bp0LW1VR2q1kf3lomlJ6WpaTJn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iQCg1oPi9ZX2UIFH1ey9BoijM3J.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 219290,
-    "ru": "Кровавые цветы",
-    "en": "Kan Çiçekleri",
-    "year": 2022,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 24,
-    "popularity": 23.64,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Мечты, надежды и амбиции Дилан были отняты у нее, поскольку она была вынуждена выйти замуж за Барана, который отказался от собственных целей, чтобы положить конец безумной вражде и спасти жизнь брата жены. Вот только брак, заключенный по расчету, становится настоящей каторгой для Дилан и ее супруга. Тем временем над Бараном начинают сгущаться тучи, когда его алчный дядя, намеренный преступным путем захватить богатства племянника, вновь разжигает вражду. По мере того как конфликт между двумя семьями разгорается с новой силой, муж и жена неожиданно осознают, что их брак по расчету постепенно превращается настоящую семейную жизнь, наполненную любовью и преданностью…",
-    "poster": "https://image.tmdb.org/t/p/w342/9O4rFfLRQyu4Dvb6SRF3BBXKkS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d3YL9PsQRHyrPXpcqkoDBjXwsfW.jpg",
     "source": "tmdb"
   }
 ]

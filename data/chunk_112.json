@@ -1,5 +1,289 @@
 [
   {
+    "id": 278296,
+    "ru": "Hemma",
+    "en": "Hemma",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 11,
+    "popularity": 0.42,
+    "genres": [
+      "мелодрама",
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3FmRHC2Y4cQvYIExCMQMt98tuat.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fFNqx4MT57gKdLdqbE32mhxLPEM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 220987,
+    "ru": "Кукла мечты",
+    "en": "Lutka snova",
+    "year": 1979,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 11,
+    "popularity": 0.39,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "Короткометражный мультфильм совместного производства Великобритании и Югославии. Сюжет описывает любовный роман, возникший между одиноким мужчиной и красивой резиновой куклой. Однажды устав от одиночества, герой покупает в магазине надувную барышню. Он восхищен ее дивными формами и прелестным личиком, а она, будто живая, начинает преследовать его повсюду, не стесняясь своей наготы. Коллеги и случайные прохожие не разделяют радость мужчины, но какое ему дело до людской молвы, когда такое восхитительное резиновое создание отдает ему всю свою любовь и нежность!",
+    "poster": "https://image.tmdb.org/t/p/w342/64mF94whXuNm5vPtq3aMf1hWNML.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 346927,
+    "ru": "A Song for Jenny",
+    "en": "A Song for Jenny",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 11,
+    "popularity": 0.52,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9ZpEEFQV9f2o7nzYcE2iWujEQ7M.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 253337,
+    "ru": "The Winding Stream",
+    "en": "The Winding Stream",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 11,
+    "popularity": 0.36,
+    "genres": [
+      "документальный",
+      "семейный",
+      "история",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hfj2j250SsAKMd9Ancr5DH7wfyt.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_106301",
+    "ru": "Карточные бои «Авангарда»",
+    "en": "カードファイト!! ヴァンガード",
+    "year": 2021,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 10,
+    "popularity": 10.57,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "Аниме"
+    ],
+    "overview": "Вся прогрессивная молодежь Японии болеет новой карточной игрой «Авангард»! Фанаты увлеченно собирают колоды, отчаянно ищут редкие карты и оттачивают мастерство где угодно: в школе, дома, в парке на скамейке, чтобы достойно выступить среди серьезных игроков на официальных турнирах. Десятиклассник Тосики Кай обыграл всех в районе, его имя известно в клубах и кафе, но сам от этого не очень-то счастлив. По восточным канонам, для движения вперед нужен вызов, необходим соперник, которого должна послать судьба. Почивание на лаврах означает застой, противный духу истинного бойца. Тосики все понимает, но где же тот, кто снова зажжет в его душе пламя борьбы? Ждать осталось недолго!",
+    "poster": "https://image.tmdb.org/t/p/w342/mjKtwfnz1X7ehbFgHqRoVoDT8DR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1uuWlEEAZHnPX1VnwqJc7pfo2YM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_106611",
+    "ru": "Давайте тоже слепим кружку",
+    "en": "やくならマグカップも",
+    "year": 2021,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 10,
+    "popularity": 4.0,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "Город Тадзими, расположенный в южной части японской префектуры Гифу, славится своей глиняной посудой Мино. Город усеян гончарными мастерскими и музеями керамики. Главная героиня переезжает на торговую улицу в Тадзими. Ее ждут встречи, друзья, городские жители, керамическое искусство. Что же она обнаружит в городе, знаменитом своей керамикой?",
+    "poster": "https://image.tmdb.org/t/p/w342/7ugTcRcwKCviKFWd8l6p1tvcwR0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yTmrNjS6SXeW70mOa8BMJ4vwyl0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "963806",
+    "ru": "名探偵コナン 本庁の刑事恋物語～結婚前夜～",
+    "en": "名探偵コナン 本庁の刑事恋物語～結婚前夜～",
+    "year": 2022,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 10,
+    "popularity": 0.92,
+    "genres": [
+      "драма",
+      "криминал",
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7Vq3HGbKwCLxgAQURTUE4Ub5DdJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5P0pYpKmI6Gv9EgMLtSfiK23G50.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 43702,
+    "ru": "Катри, девочка с лугов",
+    "en": "牧場の少女カトリ",
+    "year": 1984,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 10,
+    "popularity": 14.53,
+    "genres": [
+      "мультфильм",
+      "драма",
+      "семейный",
+      "Аниме"
+    ],
+    "overview": "Прошло три года с тех пор, как мать Катри уехала на заработки в  Германию, оставив свою дочь в Финляндии. Катри живёт со своими дедушкой и  бабушкой. Финляндия находится под властью России, жители этих земель  получают мало или вообще никаких новостей из-за пределов страны, и никто  не знает, сможет ли Катри снова увидеть мать. Дела на ферме бабушки и  дедушки Катри обстоят плохо: урожай невелик, единственная корова была  убита медведем, денег не осталось. Катри находит работу на соседней  ферме. Для девочки девяти лет это тяжелая и утомительная работа.",
+    "poster": "https://image.tmdb.org/t/p/w342/l4pNaHsEo9rhlYALpyGgs10WKIj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m8ZAmqhNnyM2ym2cpTxXUYbtE0A.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_34067",
+    "ru": "Нечто важное для мага",
+    "en": "魔法遣いに大切なこと",
+    "year": 2003,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 10,
+    "popularity": 7.35,
+    "genres": [
+      "мультфильм",
+      "драма",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Юмэ живет в провинциальном городке Тойа и, однажды, переезжает в Токио, чтобы пройти там обучение и стать дипломированным магом. Она поселяется в женский пансион, руководителем которого оказывается мужчина, который к тому же и красавчик. Так начинается ее путь на пути к настоящей магии. Может благодаря этому обучению, она поймет, зачем в этом мире магия, можно ли с помощью нее помочь людям и достаточно ли ее, чтобы сделать человека счастливым.",
+    "poster": "https://image.tmdb.org/t/p/w342/v1mt4lItC6gJDjMoTioMEn13Qzg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pVHRrh5bsBhXpcgMrXgJXmEf1Z8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_44919",
+    "ru": "Мобильный воин ГАНДАМ: Скрытая Однолетняя война",
+    "en": "機動戦士ガンダム MSイグルー",
+    "year": 2004,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 10,
+    "popularity": 7.1,
+    "genres": [
+      "мультфильм",
+      "Война и Политика",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Лейтенант Оливер Мэй на корабле Йотунхейм, в составе подразделения 603-его дивизиона снабжения, продолжает тестирование новейшего вооружения. Конечной целью этих тестов является поставка данного вооружения силам Зеона для борьбы с Федерацией. По завершении каждого теста, в историю Годичной войны добавляется новая глава, повествующая о испытаниях выпавших на долю пилотов-испытателей и их машин.",
+    "poster": "https://image.tmdb.org/t/p/w342/tvVgO0zi2nxjGfG9oFEGTlP1SQV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2YWYNmdZmhyP1ecviUMAraJtqD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_75864",
+    "ru": "Жрицы с мечами",
+    "en": "刀使ノ巫女",
+    "year": 2018,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 10,
+    "popularity": 4.21,
+    "genres": [
+      "НФ и Фэнтези",
+      "Боевик и Приключения",
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "С древних времен страшные монстры, именуемые аратама, угрожают людям. Им противостоят тодзи — жрицы, избранные божественными мечами, состоят в особой религиозной воинской части и имеют разрешение владеть мечами.\n\nСуществует пять тренировочных женских младших и старших школ, где ученицы ведут обычную школьную жизнь и сражаются на миссиях, защищая людей. Весной проводится соревнование между этими школами, где принимает участие и главная героиня Канами Это со своей подругой Май Янасэ. Однако финал идёт совсем не по плану.",
+    "poster": "https://image.tmdb.org/t/p/w342/bTp1Ge0zaF6cvrsBbIapMuSGVvz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kzWs6c4kEMEto1EXAb9s66i43vX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_80188",
+    "ru": "秘境探検ファム＆イーリー",
+    "en": "秘境探検ファム＆イーリー",
+    "year": 1995,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 10,
+    "popularity": 4.21,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "комедия",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/czYEN2kDEEO5UxemUyH5bCUjx9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mGXP6NwFJBb5DKw1mCW1ArSXknX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "162975",
+    "ru": "アラタなるセカイ WORLD'S/START/LOAD/END",
+    "en": "アラタなるセカイ WORLD'S/START/LOAD/END",
+    "year": 2012,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 10,
+    "popularity": 0.86,
+    "genres": [
+      "фантастика",
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wTUdn8RgR8XGbeAZyBdBhTgeKCl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qkpI6qzv4NgTDbxXjZ1qYTSkOuD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "132382",
+    "ru": "おばあちゃんの思い出",
+    "en": "おばあちゃんの思い出",
+    "year": 2000,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 10,
+    "popularity": 0.56,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/v5MrKG5CXe4Eq2J4M3xRSSuDkMl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ypv3GUFaYgJrAZbQrVMhz2VlgET.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "61687",
     "ru": "詩人の生涯",
     "en": "詩人の生涯",
@@ -9208,272 +9492,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/xdEyu91hlPFljkKa2cfCEfTaNSG.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/ic8qa4FoxzC8NeuDKXhXJdFyv9M.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 601611,
-    "ru": "우리 지금 만나",
-    "en": "우리 지금 만나",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.5,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/m2Q7PKH6A00vI2Klq2r04hMWOly.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4IQ7GacePJeJpTDMe1zQNV1wyZK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 993006,
-    "ru": "Walking with Dinosaurs: Prehistoric Planet 3D",
-    "en": "Walking with Dinosaurs: Prehistoric Planet 3D",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.5,
-    "genres": [
-      "документальный",
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xnOx9FgT9t2yXD8psHqHRko88db.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1j8EHsYcIXtTXRv4tGSePv4akYn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 220650,
-    "ru": "校長先生とクジラ",
-    "en": "校長先生とクジラ",
-    "year": 2007,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.5,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kzceBzAxFyD88MUORCywWIFmfBr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/46TpC4bJ2IcECTNTHU3ZH2zYOio.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 608559,
-    "ru": "大梦西游4伏妖记",
-    "en": "大梦西游4伏妖记",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.49,
-    "genres": [
-      "приключения",
-      "фэнтези",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ndSD1g21f7QZHYmE3BHjrjxFOp1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iGfpXCdVEOSFRtndbELzoIa9LrF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 358395,
-    "ru": "Origin Story",
-    "en": "Origin Story",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.49,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/27hBWhwqfwCeD8KzULGwDgIkZRV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/m1QPClc1ojXLfCKfKRf6GjR8usA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 568180,
-    "ru": "がじまる食堂の恋",
-    "en": "がじまる食堂の恋",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.49,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/CejRrdGHD1UVwmX1VwsjkIzAOQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/thqJwmFjksDsxV90bsWtxuKbXiY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 484900,
-    "ru": "世にも奇妙な物語 '17秋の特別編",
-    "en": "世にも奇妙な物語 '17秋の特別編",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.48,
-    "genres": [
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dz2TKf9hPbIrErJ8pqwo5myQz6b.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nvKbJK0hiHikrZtqLwXS1mVQdp4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 137894,
-    "ru": "チスト　みどりのおやゆび",
-    "en": "チスト　みどりのおやゆび",
-    "year": 1990,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.48,
-    "genres": [
-      "приключения",
-      "мультфильм",
-      "фэнтези",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/43dnWbRASDsxT0sLQnba2eT6tpb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/i5H9Rkn7ShAPKDlhzPW47nmYz24.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 803668,
-    "ru": "Animax Special: The Making of 'Metropolis'",
-    "en": "Animax Special: The Making of 'Metropolis'",
-    "year": 2002,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.48,
-    "genres": [
-      "документальный",
-      "семейный",
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zflq1Pbm7xaIFnHi2BX0DDEtYvz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9zKLlPm0Bfnd1TfCz4ur54BTntB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 942389,
-    "ru": "ভূতচক্র Pvt. Ltd.",
-    "en": "ভূতচক্র Pvt. Ltd.",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.47,
-    "genres": [
-      "ужасы",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dyThT72C2VNN25nBMIvrjs7Mnnj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cMcnybVMOTwQqsztKXoUM99lHrh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 504293,
-    "ru": "Мозги Хуберта",
-    "en": "Hubert's Brain",
-    "year": 2001,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.47,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "В нем рассказывается история научного выродка, который дружит с говорящим мозгом в банке.",
-    "poster": "https://image.tmdb.org/t/p/w342/wEpmeRMJpNzPjtNw9ELybon0OmA.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 638736,
-    "ru": "A Working Mom's Nightmare",
-    "en": "A Working Mom's Nightmare",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.45,
-    "genres": [
-      "телевизионный фильм",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gsyo6ZPBKGGH0IZqmlIDfAa0RFk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2AabYEjJgtz7yAclNl8KkAINtFI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 542794,
-    "ru": "ஓடு ராஜா ஓடு",
-    "en": "ஓடு ராஜா ஓடு",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.44,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4MI38mA1gGahSqKB1b6xGjNpOzH.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kW5vHKwGMnLtFnyXLfvFRJaT2v7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 492868,
-    "ru": "பிரம்மா.காம்",
-    "en": "பிரம்மா.காம்",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 2,
-    "popularity": 0.43,
-    "genres": [
-      "фэнтези",
-      "боевик",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9EKD0r0QyIzDgzDabSkkA0TgrSV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xcnJePy2loaBjTQzvzfsCgkWmtI.jpg",
     "source": "tmdb"
   }
 ]

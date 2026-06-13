@@ -1,5 +1,273 @@
 [
   {
+    "id": 347091,
+    "ru": "Тайна тёмной комнаты",
+    "en": "Тайна темной комнаты",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 0.5,
+    "genres": [
+      "приключения",
+      "семейный",
+      "фэнтези"
+    ],
+    "overview": "Два школьника решают исследовать таинственное окно, появляющееся на стене их дома в полночь во время полнолуния. Проникнув туда и оказавшись в тёмной комнате, они и не подозревают, какие приключения ждут их впереди…",
+    "poster": "https://image.tmdb.org/t/p/w342/fr4sH1bIpmvRSYD5EJbtgemOCFj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nm6pxrbl8olyhlsUKalr68nUMAw.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 6174,
+    "ru": "Isidingo",
+    "en": "Isidingo",
+    "year": 1998,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 21.21,
+    "genres": [
+      "Мыльная опера",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hxJdczj4roJ9OtqSJcuAkD2TK6y.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eXPYbOfQ6YRgqgnsXTTEIL1clRs.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 92661,
+    "ru": "25 Words or Less",
+    "en": "25 Words or Less",
+    "year": 2018,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 20.05,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gwu2aVl89amkSfBL5TqhvazYQAE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zi7hR8mfpApWoj3N3poBsJW9uxL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 383,
+    "ru": "Cain's Hundred",
+    "en": "Cain's Hundred",
+    "year": 1961,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 7.75,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gF52PA0wga7Cl5VWcjZ3wVVYTg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3IPbuOFNBv3A4ygYHTItlxVgeMl.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 73340,
+    "ru": "De Vuelta al Barrio",
+    "en": "De Vuelta al Barrio",
+    "year": 2017,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 6.53,
+    "genres": [
+      "комедия",
+      "семейный",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/po1FbSe2OtVz1w6r4vU8a3Tf6z6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8xVkmtf9vVjVCQb7ndTYXNAuZfB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 888009,
+    "ru": "地下鉄連続レイプ ＯＬ狩り",
+    "en": "地下鉄連続レイプ ＯＬ狩り",
+    "year": 1986,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 4.99,
+    "genres": [
+      "драма",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aMg4eM8dXZF7a5bNUSIMh8nV2z4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vImB0rI41iEjc4C33TRUvVBKEh1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 267188,
+    "ru": "Ветры пустыни",
+    "en": "Desert Winds",
+    "year": 1994,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 2.88,
+    "genres": [
+      "драма",
+      "детектив",
+      "мелодрама"
+    ],
+    "overview": "Спустя годы герой возвращается на родину законченным скептиком. Встреча с прошлым и прежней возлюбленной заставляет вновь поверить в себя. Но хватит ли у героя сил удержать любовь и не остановиться на полпути...",
+    "poster": "https://image.tmdb.org/t/p/w342/vvceS641s5Sh4ec660nhnMXHnh2.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 253240,
+    "ru": "くノ一忍法帖VI 忍者月影抄",
+    "en": "くノ一忍法帖VI 忍者月影抄",
+    "year": 1996,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 2.82,
+    "genres": [
+      "боевик",
+      "комедия",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rzZdbGs4c3QnY8DzO0gezJeKVM3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/15jfCjGsFVUWZa3eWUBIibiKFy0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 698327,
+    "ru": "어린 이모 2",
+    "en": "어린 이모 2",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 2.16,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3yyCDLvEexF1P30G5HXZXofO3bA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rQfr3QdktkNDl6FzrfAf8WTwwzh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 702775,
+    "ru": "하숙집 여자들",
+    "en": "하숙집 여자들",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 1.32,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mXLV8AxxffvAScbhkJTXv6YwoTU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nPFDmg5m89wXH472HeVZFSdBATn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 481172,
+    "ru": "속사정",
+    "en": "속사정",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 1.17,
+    "genres": [
+      "драма",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nTowyxt76qI0AjokzdXdVg7RHAm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bXj8FKI92u4nveKNTR2sfxBHq8c.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 90782,
+    "ru": "鉄人28号 白昼の残月",
+    "en": "鉄人28号 白昼の残月",
+    "year": 2007,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 1.15,
+    "genres": [
+      "фантастика",
+      "мультфильм",
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hcYcBLrspRnlaDerYGQaaeixAUe.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/scAEKVSuTXAUtxtQv0KOQ7azea3.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 603375,
+    "ru": "走れ！T校バスケット部",
+    "en": "走れ！T校バスケット部",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 0.9,
+    "genres": [
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mvUXbpS8XqZ72CBddbUO0XSWm2P.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mL74jWdQbjtcQVNsAb5KR3viUfq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 166690,
+    "ru": "那由他",
+    "en": "那由他",
+    "year": 1986,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 4,
+    "popularity": 0.82,
+    "genres": [
+      "мультфильм",
+      "боевик",
+      "приключения",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8Y5gSOJDxGn3PnuIJjQH3ZyrYUZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8NqLwUHrGCoAPCgXdwcJirmIEPi.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 499447,
     "ru": "云水",
     "en": "云水",
@@ -9384,279 +9652,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/qqGRmJK6UQHmuzxJOowj4xdSnUw.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/sf5vAYbAdtsqbkl6GV1edomtLos.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 312770,
-    "ru": "Ana Maria in Novela Land",
-    "en": "Ana Maria in Novela Land",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.1,
-    "votes": 11,
-    "popularity": 0.81,
-    "genres": [
-      "фэнтези",
-      "комедия",
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4GvBAsv0ZneN162YxVJnTqlQZts.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/clSZOboesVlSMaLOd6xwdRA5nLy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 458294,
-    "ru": "Menendez: Blood Brothers",
-    "en": "Menendez: Blood Brothers",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.1,
-    "votes": 11,
-    "popularity": 0.68,
-    "genres": [
-      "драма",
-      "телевизионный фильм",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/svTPcBSl6DozVGgQIZdOaujdwZQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7koiUiubldbRGNuXf2jJgj9P8Hz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 436450,
-    "ru": "Addicted to Porn: Chasing the Cardboard Butterfly",
-    "en": "Addicted to Porn: Chasing the Cardboard Butterfly",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.1,
-    "votes": 11,
-    "popularity": 0.53,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/72Vf0T8naq5emFa5AMNMOCiGgMP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wpu4muR9vWAKTSBn31SWU4K4ndU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 281139,
-    "ru": "行動代號：孫中山",
-    "en": "行動代號：孫中山",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.1,
-    "votes": 11,
-    "popularity": 0.38,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hveZCrmMwJRIbWyDSqOCAPrFrry.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s8XTPODojpdZWpuWHTCMgHSQKJb.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 413640,
-    "ru": "മുദ്ദുഗൗ",
-    "en": "മുദ്ദുഗൗ",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.1,
-    "votes": 11,
-    "popularity": 0.85,
-    "genres": [
-      "боевик",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/z6Acsm2dJohn1AgLInVENXmmVm6.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 404100,
-    "ru": "The Coneheads",
-    "en": "The Coneheads",
-    "year": 1983,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.1,
-    "votes": 11,
-    "popularity": 0.46,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "фантастика",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/djSxIZ9xIdqbea8G0bxVmRslt9O.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 284307,
-    "ru": "Waste Land",
-    "en": "Waste Land",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.1,
-    "votes": 11,
-    "popularity": 0.39,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rx2cVdaKqlOLZ5CIdA9eJPeL6nE.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 296998,
-    "ru": "Plan Sexenal",
-    "en": "Plan Sexenal",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.1,
-    "votes": 11,
-    "popularity": 0.38,
-    "genres": [
-      "триллер",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jcUZJ3V3ZIQycTLWVCniXuwACSB.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 162705,
-    "ru": "Bosko's Soda Fountain",
-    "en": "Bosko's Soda Fountain",
-    "year": 1931,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.1,
-    "votes": 11,
-    "popularity": 0.35,
-    "genres": [
-      "комедия",
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xLUngR1hjGmVVbzK1PSx2KxiKpy.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": "46249",
-    "ru": "План Зет",
-    "en": "プランゼット",
-    "year": 2010,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.1,
-    "votes": 10,
-    "popularity": 1.2,
-    "genres": [
-      "мультфильм",
-      "боевик",
-      "фантастика",
-      "Аниме"
-    ],
-    "overview": "2047 год, из-за вторжение пришельцев население Земли сокращается в половину. Инициируемые силами самообороны контратаки — малоэффективны. На военной базе в Японии, планируется операция по спасению человечества и остановке вторжения, под названием «Plan Zet». Главный герой — Хироши Акедзима, высаживается на вражеской территории. ..",
-    "poster": "https://image.tmdb.org/t/p/w342/uYF6KSEjm4PtQ9GoqJ7Mi07tLKI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7HyWo7p5FWi250dsQHZFyaT6B5z.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 528360,
-    "ru": "Разбитые алмазы",
-    "en": "Broken Diamonds",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.1,
-    "votes": 10,
-    "popularity": 0.53,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Смерть отца рушит давнюю мечту молодого писателя переехать в Париж, так как теперь он вынужден заботиться о сестре, которая страдает от шизофрении.",
-    "poster": "https://image.tmdb.org/t/p/w342/7hDWjqTMeidAvuHy4aKJZfryycy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xYmt7bLGCnen7l7zGM7mRaqe0Za.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 284022,
-    "ru": "Two Weeks in August",
-    "en": "Two Weeks in August",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.1,
-    "votes": 10,
-    "popularity": 10.71,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xjkR648bH8FzQVKG9RvQtNCVVDa.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lZwwE5GjEOobKhKpLn9j5UxIZ8E.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 882878,
-    "ru": "Ben 10: Alien X-Tinction",
-    "en": "Ben 10: Alien X-Tinction",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.1,
-    "votes": 10,
-    "popularity": 0.8,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "телевизионный фильм",
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pgL3pJEPv1K4Bb1isw5PFlA1MJ3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gG8At6y4p89KJsKYx1kYZIBdOz4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 474125,
-    "ru": "Золотой монах",
-    "en": "降魔传",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.1,
-    "votes": 10,
-    "popularity": 1.11,
-    "genres": [
-      "комедия",
-      "фэнтези",
-      "боевик"
-    ],
-    "overview": "Молодой монах занимается изгнанием демонов, и однажды на работе он встречает прекрасную девушку. Та убивает демонов, чтобы волшебные свойства некоторых их органов помогли ей вспомнить лицо любимого - 10000 лет назад влюбленных изгнали из Небесных чертогов за нарушение небесных законов. Её возлюбленный выпил зелье забвения и стал смертным, а сама она пить зелье отказалась, но за долгие годы забыла его лицо.",
-    "poster": "https://image.tmdb.org/t/p/w342/fv7sF5kR8N2xZFBpWBKjlDezkkn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xAHQkfEnrvwv1LIaFIrlvWVSllC.jpg",
     "source": "tmdb"
   }
 ]

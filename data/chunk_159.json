@@ -1,5 +1,264 @@
 [
   {
+    "id": 340852,
+    "ru": "두 번째 엄마",
+    "en": "두 번째 엄마",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 1.48,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9kDfafssklEYICgYzAPnG6TV3I9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8Wpg4Tkq2kFBfhreaoeZx7HHybe.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 418580,
+    "ru": "새오빠",
+    "en": "새오빠",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 1.46,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7pU4zml7ejdoqrfF9iz1uZgND3S.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/itC1ZXx743PmfwGfatUT5H6Tia8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 466487,
+    "ru": "Soul",
+    "en": "Soul",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 1.26,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aLax14mQ0W6YJA12VMVOQXjAyv4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wkWLU0LpuilvXeH7BK4iQBHqBwF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 387817,
+    "ru": "맛있는 만남",
+    "en": "맛있는 만남",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 1.12,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rF30dlX4j53KaOpI6vbRy9vKQHD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s8IBOCi6z0rJ6xrjtTxjUsTDv2A.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 587584,
+    "ru": "각자의 미식",
+    "en": "각자의 미식",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 1.08,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/laRbnPx3Q8djFgl0tQrSTkJAbPQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6fTQ3PEqcYjaIddltBq9tdYP0Vc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 480412,
+    "ru": "The BBQ",
+    "en": "The BBQ",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 1.06,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/khGd2Xbx20zdpp66UM52CG3uXOP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nAG2Ps6SlmUymMnsUNPorKUgu6K.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 478092,
+    "ru": "아름다운 엄마",
+    "en": "아름다운 엄마",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 1.0,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/91WHVC2Xugyd5JPgsiEWotHrkQI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tOU7ZKxAzyBv6ezB3VDUxCIhhWR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 508675,
+    "ru": "ぼのぼの クモモの木のこと",
+    "en": "ぼのぼの クモモの木のこと",
+    "year": 2002,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 0.94,
+    "genres": [
+      "мультфильм",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3zw1qqgA5plZNPjjcRKVAlh746W.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ssBPpPmQc6oAMm5BFAazkS7wouk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 407175,
+    "ru": "女幽霊",
+    "en": "女幽霊",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 0.92,
+    "genres": [
+      "триллер",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vqPbrDum6TEekyVo2YCwsY3gFLf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xOViQHnacxfc2xWVp1ZgyaXd86I.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 471431,
+    "ru": "全員、片想い",
+    "en": "全員、片想い",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 0.88,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/udSXAUak4mEcQs2zDhwwFTtJdug.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kBhII5D6uLbmTxyci7wsjpvoM5i.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 565304,
+    "ru": "황진이",
+    "en": "황진이",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 0.84,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/j0y7PgI8StcPQAIs0JE1qbwn8P0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/egAE652BDBzy9QyLIt2oyU04sPM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 337301,
+    "ru": "꽃보다 처녀귀신",
+    "en": "꽃보다 처녀귀신",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 0.84,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eo3Bao9QrB9BCy8O2NAxDeHZtz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rafRTDlcigKNrAGP2YvIv8haHKK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 334917,
+    "ru": "デッドヒート",
+    "en": "デッドヒート",
+    "year": 1987,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 0.79,
+    "genres": [
+      "мультфильм",
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mYMyD82XFc7EqFtBqBQeNPq6YVz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ihvjBFc6rtCwwgc9Vdu4E3JQnRn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 538983,
+    "ru": "キスできる餃子",
+    "en": "キスできる餃子",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.5,
+    "votes": 2,
+    "popularity": 0.73,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uooj4m1hF09UpANgMFgE62rCBIN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cFU6tlxeOcymLyd4xIj5qOyHBV.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 698730,
     "ru": "처제의 속사정",
     "en": "처제의 속사정",
@@ -9293,272 +9552,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/uTUdIdwJPIOyQLJWtXevg1ZrkDq.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/aD283VfwcMk0pSZWC3StXAaWXFu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1139695,
-    "ru": "酱园弄·悬案",
-    "en": "酱园弄·悬案",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 1.73,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hB89LNbr3OkoZ085h8JocFFXufE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/busvJ951z67XMmGbAWgFHhXwdSf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1266125,
-    "ru": "超意神探",
-    "en": "超意神探",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 1.03,
-    "genres": [
-      "криминал",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/AkMWQY4mPAUGnFLCwj7cPB81Cs4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/Zgvt4ZQH5MUEm5zZUoeklHo8Ph.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 787767,
-    "ru": "Family Squares",
-    "en": "Family Squares",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 0.63,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/99rpfRJCt6JPhyos1oOZhizQ5Iu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s5KhQd4pK262USZSFer3CLNAac.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 530624,
-    "ru": "Антиквариат",
-    "en": "Antiquities",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 1.02,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "После смерти отца, молодой человек по имени Уолтер хочет узнать о нём побольше, пожить его жизнью и прочувствовать всё на своей шкуре, но в итоге неизбежно сталкивается с собственными проблемами.",
-    "poster": "https://image.tmdb.org/t/p/w342/d6xyWHELxrGlR5oaOX2Z22XM9uM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/proxvIB4yzKqFl0V10p6xtxWozf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 312171,
-    "ru": "Sex, кофе, сигареты",
-    "en": "Sex, кофе, сигареты",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 0.93,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "Кого только не встретишь в московских ресторанах! Вам кажется — люди приходят сюда, чтобы насладиться вкусной едой или ароматным кофе с сигаретой? Отнюдь… Они приходят в рестораны, потому что здесь кипит бурная жизнь! Здесь покупают и продают кофейные плантации, здесь орудуют ловкие карманники и хладнокровные убийцы, здесь пишут диссертации о многообразии сексуальных отношений в мире насекомых… Здесь в укромных местах возникают мимолетные связи, здесь находят свою единственную любовь или расстаются навсегда.",
-    "poster": "https://image.tmdb.org/t/p/w342/31Gu8dL5lySlBWl3ZNnjXzLXuXW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wQnQmQYCs5os8fGqs1xVlnIL9aM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 539397,
-    "ru": "Недосломленная",
-    "en": "Pretty Broken",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 0.47,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Отец Линдси Лу, профессор геологии, пропал во время восхождения на Эверест после схода лавины. Вся семья уже смирилась с его смертью, лишь Линдси продолжает верить, что отец жив, и решает отправиться на его поиски. Вот только она ничего не смыслит в альпинизме",
-    "poster": "https://image.tmdb.org/t/p/w342/gqIqb9HLBEfxvWYN5ye4rRNTncX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jEaSn8x13C339t47U2JCdXpb1ad.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 340243,
-    "ru": "Все ошибки зарыты",
-    "en": "All Mistakes Buried",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 0.39,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "Когда-то у Сонни была идеальная жизнь: хорошая работа, уважение и положительная репутация в обществе, счастливый брак с любимой женщиной и твёрдая уверенность в светлом будущем. Всё рухнуло, когда в жизнь Сонни ворвались наркотики. Постепенно мужчина начал отдаляться от жены, его разум помутнел, внешний вид и сознание с каждым днём становились всё печальнее, пока однажды не настал конец всему. Сонни остался без супруги, денег, карьеры и окончательно погрузился в саморазрушение за счёт употребления тех веществ, на которые у него ещё хватало.Однажды случилось то, что расшевелило последние остатки человечности внутри загнивающего зависимого: преступники украли прекрасный кулон, который Сонни годы назад подарил супруге. Он свято верит, что если вернёт кулон - все ошибки будут похоронены, жена вернётся и жизнь наладится...",
-    "poster": "https://image.tmdb.org/t/p/w342/p0FKuXDxKBSZaqRsOzcekrFfZo6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iOWjS5HSvfyLVnYL8lQvD7zPU6g.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 483664,
-    "ru": "PlayBoy (and the Gang of Cherry)",
-    "en": "PlayBoy (and the Gang of Cherry)",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 13.44,
-    "genres": [
-      "боевик",
-      "криминал",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3LlbpgxWqPXr5U7jQOPJ6RyXMHh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/17rlIxssJdn8UiUywZV4hzY70uj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 61140,
-    "ru": "감격시대: 투신의 탄생",
-    "en": "감격시대: 투신의 탄생",
-    "year": 2014,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 6.5,
-    "genres": [
-      "Боевик и Приключения",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5Ch5wEp8sAZC1pnUAokyMDQn62M.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fRYxZoYoIOYFLeT826idmnE459o.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 387847,
-    "ru": "친구누나",
-    "en": "친구누나",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 3.57,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5J0SWa3BEYdWfvMgtOJIBAMSPQf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jCOC4DEPiUSBwHVF49CRXHWAfw6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 398841,
-    "ru": "Песня сирен",
-    "en": "Blood Lust",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 1.83,
-    "genres": [
-      "ужасы",
-      "детектив"
-    ],
-    "overview": "После смерти жены, вегетарианский повар ресторана и критик Дэн заводит виртуальные отношения с Келли, которая владеет отелем на острове. Проблемы возникают, когда он приезжает по ее просьбе на остров, и к удивлению Келли, выясняет, что приглашала его не она, а ее странные сестры Лидия и Тесс. И когда другие постояльцы начинают исчезать один за другим, Дэн понимает, что все не так, как кажется, и он не может доверять никому на острове.",
-    "poster": "https://image.tmdb.org/t/p/w342/yWd9zdBDUXvCW69jnnmpaXchn1x.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 166731,
-    "ru": "Плодди супергерой",
-    "en": "Pelle Politibil går i vannet",
-    "year": 2010,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 0.66,
-    "genres": [
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "Плодди — одушевленный и очень умный полицейский автомобиль. Он умеет не только ездить без водителя, но и разговаривать! Осенняя буря обрывает провода, оставляя город без электричества. Отважный Плодди берется протянуть новый кабель через горы. Но когда работа почти завершена, Плодди касается разорванного электрического кабеля и получает мощный удар током!.. Все думают, что наш герой выведен из строя, и дело не будет закончено, но происходит чудо — Плодди становится электрической машиной и снова готов к подвигам!",
-    "poster": "https://image.tmdb.org/t/p/w342/dCsBAS64FmnCATKtSpzw4pUDVVJ.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 472225,
-    "ru": "¿Cómo matar a un esposo muerto?",
-    "en": "¿Cómo matar a un esposo muerto?",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 0.59,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yZQbSUZTSL8jO8DN12XI2uhjAAV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cI1245MAkh7wVsR1N1VHeOYa3Kr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 17738,
-    "ru": "The Condor",
-    "en": "The Condor",
-    "year": 2007,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.3,
-    "votes": 10,
-    "popularity": 0.46,
-    "genres": [
-      "боевик",
-      "приключения",
-      "мультфильм",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bch7Q6VyaedoMzKlTdyD1u0qFhW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ugiyHRFor4Ngb5QHLm17bwYNhmO.jpg",
     "source": "tmdb"
   }
 ]

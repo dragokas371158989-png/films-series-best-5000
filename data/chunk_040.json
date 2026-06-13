@@ -1,69 +1,23 @@
 [
   {
-    "id": 88803,
-    "ru": "Сага о Винланде",
-    "en": "ヴィンランド・サガ",
-    "year": 2019,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 8.5,
-    "votes": 945,
-    "popularity": 17.59,
-    "genres": [
-      "мультфильм",
-      "Война и Политика",
-      "Боевик и Приключения",
-      "драма",
-      "Аниме"
-    ],
-    "overview": "На суровых землях Исландии, средь хлада и ветров, живут потомки мореплавателей, некогда перебравшихся с материка на заснеженный остров. Здесь же живёт и Торс, отец Торфинна, — статный и уважаемый мужчина. И, по мнению соседей, человек необычных взглядов на жизнь… Торс не спешит браться за меч и считает, что настоящему воину он вовсе не нужен.",
-    "poster": "https://image.tmdb.org/t/p/w342/aFJf2FeSFSGGBFUm4L97tUw1nQe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xamCBQePUy9xI42GvtphLuGqd09.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 8088803,
-    "tmdbId": 88803,
-    "ru": "Сага о Винланде",
-    "en": "ヴィンランド・サガ",
-    "year": "2019",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 8.5,
-    "votes": 945,
-    "poster": "https://image.tmdb.org/t/p/w342/aFJf2FeSFSGGBFUm4L97tUw1nQe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/xamCBQePUy9xI42GvtphLuGqd09.jpg",
-    "overview": "На суровых землях Исландии, средь хлада и ветров, живут потомки мореплавателей, некогда перебравшихся с материка на заснеженный остров. Здесь же живёт и Торс, отец Торфинна, — статный и уважаемый мужчина. И, по мнению соседей, человек необычных взглядов на жизнь… Торс не спешит браться за меч и считает, что настоящему воину он вовсе не нужен.",
-    "genres": [
-      "мультфильм",
-      "Война и Политика",
-      "Боевик и Приключения",
-      "драма"
-    ],
-    "source": "tv_top_rated"
-  },
-  {
-    "id": 8012313,
-    "ru": "Shadow Hunter",
-    "en": "Shadow Hunter",
-    "year": "2005",
+    "id": 8136283,
+    "ru": "Торжество мести",
+    "en": "더 글로리",
+    "year": "2022",
     "type": "Сериал",
     "category": "Сериал",
     "rating": 8.5,
-    "votes": 922,
-    "popularity": 0.4,
+    "votes": 906,
+    "popularity": 23.92,
     "genres": [
-      "НФ и Фэнтези",
       "драма"
     ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hOTaiR2qRDZtHgR2Kwz7RcAVqA6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/wxoj4musib568fnNtmJVovu1Ef.jpg",
+    "overview": "Спустя годы после того, как женщина пережила ужасное насилие в школе, она реализует тщательно продуманный план мести, чтобы обидчики заплатили за свои преступления.",
+    "poster": "https://image.tmdb.org/t/p/w342/dbuIoJKnnAFGof9imZ9UFa3O42S.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/AjwoDj77HLlqcpwEGqsnvMXm5my.jpg",
     "source": "tv_top_rated",
     "status": "Онгоинг",
-    "tmdbId": 12313
+    "tmdbId": 136283
   },
   {
     "id": "mal_38422",
@@ -191,7 +145,7 @@
     "status": "Онгоинг",
     "studio": "",
     "rating": 8.5,
-    "votes": 792,
+    "votes": 793,
     "poster": "https://image.tmdb.org/t/p/w342/kdkdDl0VZUfOavld4p5qItr35cw.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/99Y64VK0KwyRWfaW6VdpDfPKNMo.jpg",
     "overview": "Через предательство и кровь к власти пришел новый король. Его демоны-подручные чинят несправедливости до тех пор, пока в город однажды ночью не приходит тяжело вооруженный воин. Весь покрытый оружием, броней и шрамами, он называет себя Чёрным Мечником. Размеры его меча могут сравниться только с его ненавистью к королю и его демонам.",
@@ -261,6 +215,29 @@
     "genres": [
       "мультфильм",
       "драма"
+    ],
+    "source": "tv_top_rated"
+  },
+  {
+    "id": 8030981,
+    "tmdbId": 30981,
+    "ru": "Монстр",
+    "en": "MONSTER",
+    "year": "2004",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 8.5,
+    "votes": 782,
+    "poster": "https://image.tmdb.org/t/p/w342/9d3Jv2VuKB7RClJMDKXSpO1vwsH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/6T19aRp9zLMghZo1dTEwoNyreNZ.jpg",
+    "overview": "Доктор Кэндзо Тэнма — талантливый хирург, который работает в Германии. Однажды он спасает тяжело раненого мальчика. Этот случай послужит началом череды загадочных убийств, а спустя годы Кэндзо вновь столкнётся с тем, кого он когда-то спас от смерти.",
+    "genres": [
+      "мультфильм",
+      "драма",
+      "детектив",
+      "криминал"
     ],
     "source": "tv_top_rated"
   },
@@ -386,7 +363,7 @@
     "overview": "Кан Джи-вон — несчастная молодая женщина, которой приходится много работать, вести домашние дела и мириться с неблагополучным браком. Тем временем ее муж Пак Мин-хван ведет себя как эгоист, сидит дома без работы и умудряется влезть в крупные долги. Все становится еще хуже, когда Джи-вон узнает, что больна раком и вынуждена лечь в больницу. Женщина окончательно теряет почву под ногами, когда застает супруга и лучшую подругу в одной постели. В результате разразившейся потасовки главная героиня погибает и невероятным образом переносится на 10 лет назад во времени, получив шанс изменить ключевые решения в своей жизни.",
     "poster": "https://image.tmdb.org/t/p/w342/9ZptM9JBG7MwswjMnFRH0kIEG72.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/bd1uYBQnd9HRex77LTiMughdKKK.jpg",
-    "source": "tv_top_rated",
+    "source": "discover_best_tv_2024",
     "status": "Онгоинг",
     "tmdbId": 221851
   },
@@ -430,6 +407,29 @@
     "poster": "https://image.tmdb.org/t/p/w342/kYP6kFq79cuyKbGXuHPqhSexT7R.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/w50RYqdXGNB0rM7mMrOLGzdS0p3.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 8070523,
+    "ru": "Тьма",
+    "en": "Dark",
+    "year": "2017",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.43,
+    "votes": 7591,
+    "popularity": 42.47,
+    "genres": [
+      "криминал",
+      "драма",
+      "НФ и Фэнтези",
+      "детектив"
+    ],
+    "overview": "После пропажи ребенка четыре семьи пускаются в отчаянную погоню за ответами и раскрывают леденящую тайну трех поколений.",
+    "poster": "https://image.tmdb.org/t/p/w342/ikhUNN25WVfMN2uvoJLLKYXp8jE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/3jDXL4Xvj3AzDOF6UH1xeyHW8MH.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 70523
   },
   {
     "id": "mal_25015",
@@ -476,6 +476,28 @@
     "source": "tmdb"
   },
   {
+    "id": 8066433,
+    "ru": "Алые сердца: Корё",
+    "en": "달의 연인 - 보보경심 려",
+    "year": "2016",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.5,
+    "votes": 575,
+    "popularity": 10.68,
+    "genres": [
+      "драма",
+      "НФ и Фэнтези",
+      "Война и Политика"
+    ],
+    "overview": "Удивительная история любви современной девушки и принца эпохи Корё. Южнокорейская мелодрама радует интересной сюжетной линией и блестящей игрой актеров. Режиссер Ким Гютхэ. В ролях Ли Джунги и Кан Ханыль. Милая барышня попадает в опасный круговорот событий в далеком прошлом. Как она туда попала из 21 века? Во время полного солнечного затмения по необъяснимым причинам девушка совершит путешествие во времени. Здесь начинается настоящая драма за любовь и королевский трон. Наследники престола не способны мирным путем договориться между собой. Юная леди по имени Хэ Су влюбляется в сильного и храброго Ванг Така. Все его недоброжелатели трясутся от страха, пытаются не связываться с ним, иначе их ждет жестокая расправа. Ему необходимо суметь сохранить свой авторитет и репутацию, чтобы стать новым правителем. Сама героиня, после перемещения во времени, вселяется в чужое тело своей предшественницы, которой всего лишь шестнадцать лет. В реальном времени героине исполнилось 25 лет. Девушка попадает в самую гущу событий, впереди страну ждет военный переворот и борьба за власть. Ей предстоит выжить в столь дикой для нее временной эпохе, вжиться в свой новый образ, найти свое место в новом доме. Главное не ошибиться в любви и не разбить свое сердце. Вернется ли она домой? Вдруг после смирения и обретения новой жизни ее телепортирует назад в будущее.",
+    "poster": "https://image.tmdb.org/t/p/w342/7Ji4MvbqOnAnwGJV5Z953AkuE0X.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/yBmqsAFjJJtdHkptwlCy0WMsfKA.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 66433
+  },
+  {
     "id": 8083095,
     "tmdbId": 83095,
     "ru": "Восхождение героя щита",
@@ -506,7 +528,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 8.44,
-    "votes": 6538,
+    "votes": 6541,
     "popularity": 0.01,
     "genres": [
       "мультфильм",
@@ -645,7 +667,7 @@
     "status": "Онгоинг",
     "studio": "",
     "rating": 8.5,
-    "votes": 445,
+    "votes": 446,
     "poster": "https://image.tmdb.org/t/p/w342/conBjZLX8KBc18vdQjSNegZytln.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/f7DC5Qu0MJBtbAK9zCOU2rzz6NG.jpg",
     "overview": "Каждые 500 лет Звезда Судьбы, Лаго, проносится по небу, оповещая всех шаманов мира о том, что Великий Турнир Шаманов начался. Но Звезду Судьбы всегда сопровождает Раго — звезда, несущая миру разрушение и хаос. На Турнире и определяется Шаман, достойный объединения с Королём Духов — духом всего сущего, он может как спасти мир, так и уничтожить его. Шаманы способны видеть духов и сражаться вместе с ними как единое целое. Цель Турнира заключается в том, что шаман, который прошёл все испытания и бои, становится Королём Шаманов, объединяется с Королём Духов — величайшим и сильнейшим духом в мире, — и становится настолько могущественным, что может управлять всей жизнью на Земле.\n\nГлавный герой Йо из рода Асакура, должен стать королём шаманов и предотвратить грядущее бедствие. Йо быстро заводит себе друзей, которые тоже являются шаманами, а также обычного подростка Морти, который станет ему лучшим другом. Чтобы пройти отборочный этап «Турнира Шаманов», они должны нанести один удар членам совета в бою за право биться за титул Короля Шаманов. Йо и все его друзья проходят этот тур успешно и получают мобильный оракул. Он будет сообщать шаманам информацию по боям, к примеру, место проведения боя, соперник. Через какое-то время Йо узнает о своем брате близнеце — Зик Асакура (Хао).\n\nУже третий раз подряд Хао, древний шаман, телепат и предсказатель, мечтает одержать победу на Турнире. Его цель — уничтожить человечество, ибо он считает, что человечество губит планету. Он полагает, что только королевство шаманов, созданное и управляемое им, будет существовать в гармонии и согласии с природой. Он был побеждён уже 2 раза — 1000 (в роде Асакуры) и 500 (племя Патчи) лет назад, ценой неимоверных усилий. Каждый раз перерождаясь, он становится всё более могущественным, с ним всё труднее справиться. В этот раз он возродился в древней шаманской династии Асакура, происходящей от его исконной инкарнации, и только его брат-близнец Йо c духом Амидамару имеют шанс противостоять ему.",
@@ -699,26 +721,25 @@
     "source": "tmdb"
   },
   {
-    "id": 8126506,
-    "tmdbId": 126506,
-    "ru": "Задорные друзья",
-    "en": "Smiling Friends",
-    "year": "2020",
+    "id": 8117648,
+    "ru": "Ферма Кларксона",
+    "en": "Clarkson's Farm",
+    "year": "2021",
     "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
+    "category": "Сериал",
     "rating": 8.5,
-    "votes": 430,
-    "poster": "https://image.tmdb.org/t/p/w342/mq95GURa6ubaiZtKkbg0eRP1hZp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/qjHTkQ3QUlw6sxkIhugqNYsRJnR.jpg",
-    "overview": "По сюжету небольшая компания, стремящаяся принести счастье в мир, получает простую просьбу: помочь несчастному сыну одной женщины снова начать улыбаться, но работа оказывается сложнее чем кажется.",
+    "votes": 412,
+    "popularity": 57.65,
     "genres": [
-      "мультфильм",
-      "комедия",
-      "НФ и Фэнтези"
+      "Реалити-шоу",
+      "комедия"
     ],
-    "source": "tv_top_rated"
+    "overview": "В новом шоу Джереми Кларксон будет пытаться управлять собственной фермой площадью 1000 акров в британском Чиппинг Нортоне. Проект снят в том же документальном формате, что и Топ Гир — ведущий подвергается разнообразным «фермерским» испытаниям, включая уход за животными и уборку урожая.",
+    "poster": "https://image.tmdb.org/t/p/w342/ivcJkXAr6wPZKThuDsFXIi54iN9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/i50h4Gz6e9BMGak5l6gg5qfIjcv.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 117648
   },
   {
     "id": 32118,
@@ -763,27 +784,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/uHUjIul2J5HQQlPRgSczcNtJwdf.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/rrREM1cowfMZ8SmrJ9KCFO3y4j6.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8117648,
-    "ru": "Ферма Кларксона",
-    "en": "Clarkson's Farm",
-    "year": "2021",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.5,
-    "votes": 410,
-    "popularity": 57.65,
-    "genres": [
-      "Реалити-шоу",
-      "комедия"
-    ],
-    "overview": "В новом шоу Джереми Кларксон будет пытаться управлять собственной фермой площадью 1000 акров в британском Чиппинг Нортоне. Проект снят в том же документальном формате, что и Топ Гир — ведущий подвергается разнообразным «фермерским» испытаниям, включая уход за животными и уборку урожая.",
-    "poster": "https://image.tmdb.org/t/p/w342/ivcJkXAr6wPZKThuDsFXIi54iN9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/i50h4Gz6e9BMGak5l6gg5qfIjcv.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 117648
   },
   {
     "id": 8106600,
@@ -950,6 +950,26 @@
     "source": "tv_top_rated",
     "status": "Онгоинг",
     "tmdbId": 126485
+  },
+  {
+    "id": 8000333,
+    "ru": "Жемчужина дворца",
+    "en": "대장금",
+    "year": "2003",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.5,
+    "votes": 276,
+    "popularity": 12.72,
+    "genres": [
+      "драма"
+    ],
+    "overview": "«Жемчужина дворца» — южнокорейский сериал, действия которого происходят в XV веке в Корее, во время правления династии Чосон. Сюжет представляет собой историю молодой девушки, которая столкнулась со множеством трудностей. В детстве она потеряла родителей, после чего попала во дворец, где ей предстояло встретить дворцовые заговоры, опасные и коварные планы леди Чхве, соперничество, раскрыть свои таланты и конечно же встретить свою любовь. Талант, помноженный на ослиное упрямство и упорство, позволяют не только стать первой в истории женщиной-врачом, но и личным врачом короля, спасти большое количество жизней и найти новые способы лечения страшных болезней, стать первым корейским врачом в истории, применившим хирургический метод лечения.",
+    "poster": "https://image.tmdb.org/t/p/w342/wTiBK9Fj0qIXgkgYiPHZ0HoXfnh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/oHZ9e5WlZfuHBbZZsQzfR0baxt2.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 333
   },
   {
     "id": 8226529,
@@ -1212,6 +1232,27 @@
     "tmdbId": 231749
   },
   {
+    "id": 7000423,
+    "ru": "Пианист",
+    "en": "The Pianist",
+    "year": "2002",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 8.4,
+    "votes": 10150,
+    "popularity": 12.4,
+    "genres": [
+      "драма",
+      "военный"
+    ],
+    "overview": "Фильм снят по автобиографии Владислава Шпильмана, одного из лучших пианистов Польши 30-х годов прошлого века. Главный герой фильма — Владек — занимается искусством до тех пор, пока территорию Польши не занимают нацисты. Жизнь всех евреев меняется: их помещают в Варшавское гетто, запрещают работать, унижают, заставляют носить отличительные повязки, а через некоторое время отправляют в концлагерь.",
+    "poster": "https://image.tmdb.org/t/p/w342/eih8OFL5Kc4nrGU821jxU5rWINx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/c0fB9xk7D1aVb3Bg2rk2SVJcGn.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 423
+  },
+  {
     "id": 938567,
     "ru": "Озорная Такаги. Фильм",
     "en": "劇場版 からかい上手の高木さん",
@@ -1273,28 +1314,6 @@
     "source": "tmdb"
   },
   {
-    "id": 8233347,
-    "ru": "Учебная группа",
-    "en": "스터디그룹",
-    "year": "2025",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.5,
-    "votes": 116,
-    "popularity": 22.02,
-    "genres": [
-      "Боевик и Приключения",
-      "комедия",
-      "драма"
-    ],
-    "overview": "Юн Га Мин учится в печально известной профессиональной школе, где много проблемных учеников. Он выглядит образцовым студентом в очках, у которого аккуратная внешность и невинный вид. Парень мечтает хорошо учиться, но у него самые низкие оценки в школе. Недостаток академических знаний Га Мин компенсирует силой и боевыми навыками. Чтобы улучшить свои оценки, он формирует учебную группу. Всякий раз, когда члены его учебной группы попадают в беду, Юн Га Мин защищает их. На основе одноименного вебтуна.",
-    "poster": "https://image.tmdb.org/t/p/w342/rLrEtysTwvVZESavwufnoGIaq8j.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/1ucAo7E2fzTdwORGbMhLEUoPhfa.jpg",
-    "source": "tv_popular",
-    "status": "Онгоинг",
-    "tmdbId": 233347
-  },
-  {
     "id": 7004935,
     "tmdbId": 4935,
     "ru": "Ходячий замок",
@@ -1305,7 +1324,7 @@
     "status": "Вышел",
     "studio": "",
     "rating": 8.39,
-    "votes": 11107,
+    "votes": 11109,
     "poster": "https://image.tmdb.org/t/p/w342/oQvAlVSjYsJZPg9raiQRYE0aVrv.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/nv5wwZou159v5OC61i4ElR7OqyY.jpg",
     "overview": "Злая ведьма заточила 18-летнюю Софи в тело старухи. Девушка-бабушка бежит из города куда глаза глядят и встречает удивительный дом на ножках, где знакомится с могущественным волшебником Хаулом и демоном Кальцифером. Кальцифер должен служить Хаулу по договору, условия которого он не может разглашать. Девушка и демон решают помочь друг другу избавиться от злых чар.",
@@ -1392,27 +1411,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/2fmB1XXHiQCgnk8R0QLP8FoBVwF.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/goWGf6rnqEYiGGBxSxltTteVKzD.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8256226,
-    "ru": "Дорогой Икс",
-    "en": "친애하는 X",
-    "year": "2025",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.5,
-    "votes": 92,
-    "popularity": 10.55,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "Милая внешность Пэк А-джин скрывает хитрую натуру. Обманом и манипуляциями она достигла самой вершины в мире кино, но теперь её ждёт жёсткое падение.",
-    "poster": "https://image.tmdb.org/t/p/w342/9eTQfA8lC4027DrG0PBvEBVRKuM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/2ED8o8nAdwvbvrkPyqUHBYa1xm8.jpg",
-    "source": "tv_popular",
-    "status": "Онгоинг",
-    "tmdbId": 256226
   },
   {
     "id": 472796,
@@ -1506,48 +1504,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/diXtQic9EzM3HRpvA0PfL32kkJ0.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/hYsoBDKzpa4YttVOIhiTv4uVtB4.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8106449,
-    "tmdbId": 106449,
-    "ru": "Путешествие к бессмертию",
-    "en": "凡人修仙传",
-    "year": "2020",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 8.5,
-    "votes": 75,
-    "poster": "https://image.tmdb.org/t/p/w342/viVBozYSdBf4CTg88sHHZuFXX49.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/8NIvQY34tNPc4txNeym2zEYk9ek.jpg",
-    "overview": "Обычный деревенский мальчишка случайно становится учеником небольшой секты. Несмотря на поджидающие трудности, он сразится с демонами и древними небожителями, чтобы найти свой собственный путь к бессмертию.",
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "НФ и Фэнтези"
-    ],
-    "source": "tv_popular"
-  },
-  {
-    "id": 8133174,
-    "ru": "Свита королевы",
-    "en": "All the Queen's Men",
-    "year": "2021",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.5,
-    "votes": 74,
-    "popularity": 5.24,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Действие этой драмы разворачивается в Атланте и разворачивается вокруг жизни Мэрилин «мадам» Девиль (ее играет Ева Марсилье). Мадам чванится как яростная деловая женщина, которая правит всеми в прибыльной индустрии экзотических ночных клубов для мужчин. Мадам окружена группой доверенных сотрудников, которые заботятся о том, чтобы мадам и ее империя были успешными. По мере того, как ее путешествие продолжается, она упорно стремится расширить свой королевский титул. Однако мадам вскоре обнаруживает, что больше денег и больше власти означают больше проблем.",
-    "poster": "https://image.tmdb.org/t/p/w342/eXswCm8rvJUQbU89ihb0CQVJGpS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/dt75jPUtDiY7sZpQaNoFKv3zkv.jpg",
-    "source": "trending_tv_week",
-    "status": "Онгоинг",
-    "tmdbId": 133174
   },
   {
     "id": 122009,
@@ -1994,24 +1950,6 @@
     "source": "tmdb"
   },
   {
-    "id": 93014,
-    "ru": "Жуки",
-    "en": "Жуки",
-    "year": 2019,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.5,
-    "votes": 51,
-    "popularity": 5.79,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Никита, Дэн и Артемий разработали уникальное приложение для смартфонов, вот-вот продадут его и осуществят все свои мечты. Но в последний момент многомиллионная сделка срывается и парней забирают в армию. Чтобы не ставить под угрозу успех своего стартапа, они выбирают альтернативную службу в глухой деревне Жуки, где будут пытаться довести свой проект до конца. Только не так просто разрабатывать приложение там, где нет даже интернета...",
-    "poster": "https://image.tmdb.org/t/p/w342/e02i7zHJEpAgVKBt9Uc4HG1CCDe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mddEdxLhrEjJl8zWFmkaI7qEVs9.jpg",
-    "source": "tmdb"
-  },
-  {
     "id": "1147411",
     "ru": "Леди Баг и Супер-Кот: Токио. Звёздный отряд",
     "en": "Miraculous World : Tokyo, Stellar Force",
@@ -2032,6 +1970,26 @@
     "poster": "https://image.tmdb.org/t/p/w342/tRPRJ4wGoOCEK3aHxIornleZe6s.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/3kps0wiGFMRVkSXxbebbAUeWrN3.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 8100088,
+    "ru": "Одни из нас",
+    "en": "The Last of Us",
+    "year": "2023",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.43,
+    "votes": 7047,
+    "popularity": 42.55,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Спустя 20 лет после уничтожения современной цивилизации из-за пандемии, контрабандист Джоэл нанимается вывезти Элли, 14-летнюю девочку, из карантинной зоны. То, что начинается как непыльная работка, вскоре превращается в жестокое и душераздирающее путешествие, в течение которого Джоэлу и Элли придётся научиться доверять друг другу.",
+    "poster": "https://image.tmdb.org/t/p/w342/69loIrm9JPpPRE3Akw4yRoitSYn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/acevLdSl5I2MK5RYAm7gwAndt1w.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 100088
   },
   {
     "id": "tv_225941",
@@ -2090,26 +2048,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/v0kZJmHpQTms264js0YHYMLV7Oy.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/sRJo1YEF1b858xuKPd83AHWVjrf.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8100088,
-    "ru": "Одни из нас",
-    "en": "The Last of Us",
-    "year": "2023",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.43,
-    "votes": 7044,
-    "popularity": 42.55,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Спустя 20 лет после уничтожения современной цивилизации из-за пандемии, контрабандист Джоэл нанимается вывезти Элли, 14-летнюю девочку, из карантинной зоны. То, что начинается как непыльная работка, вскоре превращается в жестокое и душераздирающее путешествие, в течение которого Джоэлу и Элли придётся научиться доверять друг другу.",
-    "poster": "https://image.tmdb.org/t/p/w342/69loIrm9JPpPRE3Akw4yRoitSYn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/acevLdSl5I2MK5RYAm7gwAndt1w.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 100088
   },
   {
     "id": 68848,
@@ -10164,6 +10102,84 @@
     ],
     "overview": "Tensions are running high among the clans as the Green King begins making moves that threaten to drive the world into pandemonium. Following the death of the Gold King, the safety of the Dresden Slate, the source of power of the Kings, is under threat. Nagare Hisui, the sly and mysterious leader of the Green Clan Jungle, is determined to procure the powerful Slate by any means possible.\n\nStanding directly in his way is Sceptre 4, the Blue Clan, headed by their unyielding King, Reishi Munakata. However, the grim sight of his crumbling Sword of Damocles leaves the stability of his clan and all of Japan in jeopardy. Meanwhile, still recovering from their tragic losses, Anna Kushina and her aggressive clan HOMRA find themselves caught up in the Green King's games. Amidst the chaos, Kurou Yatogami and Neko are left vulnerable while their beloved friend, Yashiro Isana, the Silver King, remains missing.  \n\nAs the remaining clans struggle against the Green King's formidable forces, one final king appears.\n\n[Written by MAL Rewrite]",
     "poster": "https://cdn.myanimelist.net/images/anime/6/76198l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "mal_14131",
+    "ru": "Girls und Panzer",
+    "en": "Girls & Panzer",
+    "year": 2012,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.5,
+    "votes": 163043,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Милые девочки",
+      "CGDCT",
+      "Военное",
+      "Military",
+      "Школа",
+      "School"
+    ],
+    "overview": "\"Senshadou\" is a traditional sport using World War II era tanks in elimination-based matches. Widely practiced by women and girls alike, it's advertised as a form of art geared towards making ladies more prominent in culture and appealing to men. Becoming a worldwide phenomenon over time, the influence of senshadou leads to the creation of a world championship which will soon be held in Japan.\n\nMiho Nishizumi, who comes from a lineage of well-respected senshadou specialists, is at odds with the sport after a traumatic event led to her retirement and eventually a rift to form between her and her family. To steer clear of the practice as much as possible, she transfers to Ooarai Girls Academy where the senshadou program has been abolished. However, with the news of the upcoming championships, the school revives their tankery program, and Miho is pushed into joining.\n\nNow, with the aid of some new friends, she must overcome her past and once again take command of a squadron of tanks in an effort to save her school from closure, all while proving to her family that the Nishizumi-style of senshadou is not solely about victory.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/9/40969l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "mal_10589",
+    "ru": "Naruto Shippuden the Movie 5: Blood Prison",
+    "en": "Naruto: Shippuuden Movie 5 - Blood Prison",
+    "year": 2011,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.5,
+    "votes": 158631,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Приключения",
+      "Adventure",
+      "Фэнтези",
+      "Fantasy",
+      "Сёнэн",
+      "Shounen"
+    ],
+    "overview": "During their discussion of a sensitive investigation A, the Fourth Raikage, and his subordinates are ambushed by a cloaked intruder. As the Kumogakure leader repels the assault, he is shocked to discover that the culprit is Naruto Uzumaki! \n\nHowever, the assassination attempt is not the only crime attributed to the young ninja, who vigorously denies the accusations. To avoid a diplomatic conflict, Tsunade forcibly sends him to Kusagakure's Houzuki Castle—a maximum-security penitentiary dedicated to ninja criminals—until the situation is resolved.\n\nDespite his powers being immediately suppressed by Mui, the prison's warden who possesses the ability to seal chakra, Naruto recklessly engages in futile escape attempts. But with the help of two fellow inmates, he realizes that there is more to this legendary detention facility than meets the eye. Uncovering a terrible secret, the trio embarks on a dangerous operation that may be Naruto's only chance to break free and prove his innocence.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1500/134496l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "mal_12291",
+    "ru": "Place to Place",
+    "en": "Acchi Kocchi",
+    "year": 2012,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.5,
+    "votes": 155605,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Комедия",
+      "Comedy",
+      "Романтика",
+      "Romance",
+      "Гэг-юмор",
+      "Gag Humor",
+      "Школа",
+      "School"
+    ],
+    "overview": "Feelings may come and go, but true love always remains in the heart. Tsumiki Miniwa is in love with her best friend, Io Otonashi. For her, confessing is nearly impossible; but to her friends, they seem to be the perfect match. Cute and petite, Tsumiki comes off more as a friend, and Io's attitude toward her is friendlier than toward others. Despite the constant teasing and obvious hints that his friends have been dropping, Io always seems to miss the signs. \n\nThroughout her everyday school life, Tsumiki spends time with her friends and Io. Will she finally muster enough courage to confess her true feelings?\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/5/46489l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
   }

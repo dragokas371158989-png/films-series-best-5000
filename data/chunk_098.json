@@ -1,5 +1,279 @@
 [
   {
+    "id": 220845,
+    "ru": "Смурфики: Легенда о Смурфной лощине",
+    "en": "The Smurfs: The Legend of Smurfy Hollow",
+    "year": 2013,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 114,
+    "popularity": 1.7,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "семейный",
+      "фэнтези"
+    ],
+    "overview": "История начинается с того, как смурфики услышали рассказ местного жителя о существующей давно легенде о Смурфной лощине, в котором постоянно происходят какие-то невероятные вещи. Старый рассказчик говорит о том, что лощина — это очень страшное и опасное место, посещать которое не желательно. Но смурфы решают раз и навсегда покончить с угрожающей всем Смурфной лощиной и изучить её феномен.",
+    "poster": "https://image.tmdb.org/t/p/w342/xSKwLIKHTjQSp9JluWJ3jKvP1xF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/smLRIs1l1dyRsJbFu0WcfeejwHD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 21793,
+    "ru": "Приключения бурундучков",
+    "en": "The Chipmunk Adventure",
+    "year": 1987,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 114,
+    "popularity": 1.12,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "приключения",
+      "комедия",
+      "музыка"
+    ],
+    "overview": "Любимое трио — Элвин, Саймон и Теодор — в полнометражном мультфильме. Элвин заключает пари со своими друзьями. Тот, кто победит в гонках вокруг света, получит приз в 100 000 долларов. Но не все так легко, как кажется. На пути возникают препятствия, через которые им помогает пройти настоящая дружба.",
+    "poster": "https://image.tmdb.org/t/p/w342/ufOyracu8XtkGoGwykinryBnj2v.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ung9i4OVPj3keSAAjzbtI4xRdTi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 554753,
+    "ru": "Mirreyes contra Godínez",
+    "en": "Mirreyes contra Godínez",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 114,
+    "popularity": 0.65,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8CaR0A277kdxSGcDxQ8v46Lv2Kv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pow8TNWeyv1ygbadxZeo9O48dgt.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 539056,
+    "ru": "Тель-Авив в огне",
+    "en": "תל אביב על האש",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 114,
+    "popularity": 0.6,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yMrJhTT7FEfIeTiE9VtYw6WN8Ti.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yDRxG3IAojCCSiyEs4UWUpKoBnG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 894246,
+    "ru": "Буря",
+    "en": "Tempête",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 113,
+    "popularity": 0.69,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Подросток воспитывается с лошадьми на родительской конюшне для скаковых лошадей. У него возникает глубокая связь с молодой лошадью. Несчастный случай грозит положить конец карьере скакунов, но они вместе борются за победу.",
+    "poster": "https://image.tmdb.org/t/p/w342/Asuv7Zy7aSnBW44NSMcmXjkNni9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/x93D07coMGtZHP7SNAQjn7Jb1Zw.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 519187,
+    "ru": "Донбасс",
+    "en": "Донбас",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 113,
+    "popularity": 0.61,
+    "genres": [
+      "драма",
+      "военный"
+    ],
+    "overview": "Военная трагикомедия снята по сценарию, в основе которого – размещенные на YouTube любительские видеоролики с территории, подконтрольной самопровозглашенным в 2014-15 годах республикам на востоке Украины. Загримированная массовка раздает фейковые интервью, от пассажиров междугородного автобуса требуют взятки, а в Новороссии играют свадьбу. Лента состоит из 13 эпизодов-цепочек, которые логично перетекают из одного в другой и воссоздают в игровом кино истории из настоящей жизни на востоке Украины\", - говорится в аннотации к фильму.",
+    "poster": "https://image.tmdb.org/t/p/w342/vgy5YhPzqJuXBeMlHtmYYdBwkFd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sesIy1vPnT7wwCuZG95iuJN9IFv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_32694",
+    "ru": "Сбежавшая работа",
+    "en": "Outsourced",
+    "year": 2010,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.8,
+    "votes": 112,
+    "popularity": 4.63,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Истинно американская компания Mid America Novelties, которая продает подушки-перделки, поролоновые перчатки болельщика и бумажники, сделанные из бекона, решает переместить свой центр обслуживания клиентов в Индию. Тодд Демпси — должен отправиться в Индию, руководить тем самым центром. С ужасом он обнаруживает, что его новые подчиненные нуждаются в срочном ликбезе по Америке, если они хотят продавать чисто американские товары.",
+    "poster": "https://image.tmdb.org/t/p/w342/tE9lH8OpF8qExJYmz28tMLUlhjD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/g3Hs1yiMaVbiLqrpervhts9MJ68.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_64102",
+    "ru": "Dreaming of a Whale",
+    "en": "Kujira wo Yumemu",
+    "year": 2026,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.8,
+    "votes": 111,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Драма",
+      "Drama"
+    ],
+    "overview": "A girl wanders through a landscape of quiet ruin, alone except for her dog and a mysterious voice on her radio, reciting poems at a precise hour every day. A haunting memory of a nearby future.\n\n(Source: Fantasia International Film Festival)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1900/157215l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 891584,
+    "ru": "История звука",
+    "en": "The History of Sound",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 111,
+    "popularity": 2.59,
+    "genres": [
+      "драма",
+      "мелодрама",
+      "музыка"
+    ],
+    "overview": "Двое молодых студентов-музыкантов, Лайонел и Дэвид, обучавшиеся в Бостонской консерватории в 1917 году, сблизились на почве общей любви к фолк-музыке. Спустя несколько лет они снова встретились, отправившись в путешествие по тихим водам штата Мэн, чтобы собирать музыкальные произведения.",
+    "poster": "https://image.tmdb.org/t/p/w342/5tNr1CySiYQICRsQbWWSSsDiKjn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/e13Io18jl6p5UiS5Cxhug9ptTPU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_102281",
+    "ru": "Ленокс-Хилл",
+    "en": "Lenox Hill",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.8,
+    "votes": 111,
+    "popularity": 0.66,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "Четверо врачей из знаменитого манхэттенского госпиталя в Ленокс-Хилле стремятся целиком отдавать себя пациентам, не забывая про личную жизнь без белых халатов.",
+    "poster": "https://image.tmdb.org/t/p/w342/1MvaZ5WbRAqjhkiMGH3trRXcYgG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xzlaPVmgq3f7ZRTBySEYJx0IPTh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 118249,
+    "ru": "Шрэк: Триллер",
+    "en": "Thriller Night",
+    "year": 2011,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 110,
+    "popularity": 1.22,
+    "genres": [
+      "мультфильм",
+      "музыка",
+      "ужасы",
+      "комедия"
+    ],
+    "overview": "Шрэку наскучил обыденный Хэллоуин, ему захотелось чего-то по-настоящему страшного…",
+    "poster": "https://image.tmdb.org/t/p/w342/55EKnFS6qgKAe048TqDxlhkW4UV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bF2KdequbcuOyR8ZKY52loVzKY1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_51992",
+    "ru": "On Happiness Road",
+    "en": "Xingfu Lushang",
+    "year": 2018,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.8,
+    "votes": 109,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Призовые",
+      "Award Winning",
+      "Драма",
+      "Drama"
+    ],
+    "overview": "Chi earned her American dream after persevering with her studies in Taiwan. Following her grandmothers' death, Chi returns to her family on Happiness Road, where she begins to feel nostalgic about her childhood and starts to contemplate the meaning of \"life\" and \"home\". What is happiness? Will Chi find her own happiness?\n\n(Source: Official Site)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1155/124253l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "tv_118303",
+    "ru": "Кокетка",
+    "en": "Minx",
+    "year": 2022,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.8,
+    "votes": 109,
+    "popularity": 10.0,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "Лос-Анджелес, 1970-е г. Молодая и целеустремлённая феминистка Джойс объединяется с издателем Дагом, чтобы создать первый журнал эротического содержания, ориентированный на женскую аудиторию.",
+    "poster": "https://image.tmdb.org/t/p/w342/atbl6en3bBGZYfq2F8lCXsYPFp2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/i8oPK8F2jLZhobxbZIScjFtRxYs.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 801803,
+    "ru": "Лунный человек",
+    "en": "独行月球",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 108,
+    "popularity": 0.91,
+    "genres": [
+      "фантастика",
+      "комедия",
+      "драма"
+    ],
+    "overview": "Чтобы защитить Землю от потока астероидов, в 2033 году на Луне был построен комплекс специальных сооружений. Обычный техник Юэ Дугу прозевал эвакуацию персонала, а когда часть защиты не сработала, и астероиды устроили на Земле глобальный катаклизм, стал свидетелем гибели планеты. Теперь Дугу считает себя последним человеком во Вселенной и не знает, что остатки цивилизации на уцелевшем оборудовании без возможности обратной связи наблюдают за ним в прямом эфире. Кроме того, на лунной базе обнаруживается большой рыжий кенгуру - животное очень сильное и опасное.",
+    "poster": "https://image.tmdb.org/t/p/w342/mRL1bFYk0esaFQfqKHtNNXpVUgc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/q3Njgn2eNo52TVi55PULD1rHlaF.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 370076,
     "ru": "தெறி",
     "en": "தெறி",
@@ -9460,284 +9734,6 @@
     "overview": "Мышонок Перес работает Зубной феей. У него очень много дел: днем он трудится на плавучей жемчужной фабрике, где из молочных зубов делаются жемчужинки, а ночью вершит свою зубную миссию! Однажды вечером он должен подобрать зуб, сломанный маленьким Лукасом.  В доме у мальчика мышонок знакомится с привлекательной мышкой Лолой. Подружившиеся Лола и Перес, учатся танцевать сальсу. О Пересе узнает Джил Пенькоффу — жадный продюсер. Он хочет поймать мышонка, чтобы показать миру сенсацию! Но Лола и Лукас помогают ему бежать из рук злодея.",
     "poster": "https://image.tmdb.org/t/p/w342/uJYFm3kAzvA32Nux1NEehoAji9s.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/elcBFpTXqfVwwkDVVDFVBkLBT6O.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 627076,
-    "ru": "Дикарь",
-    "en": "Savage",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 37,
-    "popularity": 0.44,
-    "genres": [
-      "криминал"
-    ],
-    "overview": "Фильм снят по мотивам реальной истории ново-зеландской байкерской банды и одного из её лидеров - Денни. охватывая 30 лет его жизни и три ключевых момента становления его как личности.",
-    "poster": "https://image.tmdb.org/t/p/w342/1XixAUZcBhdqxqkDAimbZQcLnHE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tp8EnB5W9aAv0nw3t1ltA1Jyg5t.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "118379",
-    "ru": "色情男女",
-    "en": "色情男女",
-    "year": 1996,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 37,
-    "popularity": 3.92,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aPyobHbdC9ZlU2LuO2agqTCPcze.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fg8GCBZY755mdLcwo3NVxqot6Wl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 570701,
-    "ru": "Zog",
-    "en": "Zog",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 37,
-    "popularity": 0.87,
-    "genres": [
-      "семейный",
-      "приключения",
-      "мультфильм",
-      "фэнтези",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ko3AtKUsMK27LMJqpyW5uJk4FZh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mInb0w8yFTOj7ylNEDJXcHg8yLS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 356189,
-    "ru": "Меня зовут Эмили",
-    "en": "My Name Is Emily",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 37,
-    "popularity": 0.66,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mFx4GeDJoWTQnoffRwj5IcPWAOb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/h6Vg9IFbKjLH7MPBRy9GMGzIdum.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 200753,
-    "ru": "Кайтмен: Чёрт возьми, да!",
-    "en": "Kite Man: Hell Yeah!",
-    "year": 2024,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.8,
-    "votes": 36,
-    "popularity": 6.81,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "История вращается вокруг Кайтмена, заполучившего репутацию самого бесполезного и неудачливого злодея Готэма, поскольку его главное оружие, воздушный змей, не способено справиться даже с боковым ветром. Единственная, кто поддерживает его во всех злоключениях — такая же неудачливая Лиза Снарт, более известная как Золотой Глайдер. Однажды обстоятельства заставляют двоих влезть в неподъемные долги, чтобы выкупить захудалый бар «У Нунана», который посещают различные злодеи, переживающие свои не лучшие времена. Эта покупка навлекает на Кайтмена и его подругу еще больше комичных неприятностей.",
-    "poster": "https://image.tmdb.org/t/p/w342/1H7KNNgT7MBefNi4VJ9BozVaKQF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cdY1KD6dFlWf0XB787RJLCaSqsE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 85368,
-    "ru": "Досье лорда Эль-Меллоя II",
-    "en": "ロード・エルメロイⅡ世の事件簿 -魔眼蒐集列車 Grace note-",
-    "year": 2019,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.8,
-    "votes": 36,
-    "popularity": 9.79,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "детектив",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Прошло около десяти лет после окончания Четвёртой Войны Святого Грааля, в которой вместе с Королём Завоевателей, Искандером, участвовал молодой Уэйвер Велвет. Некоторое время назад он получил титул лорда в Часовой Башне и стал известен как лорд Эль-Меллой II. Теперь ему предстоит разобраться с внутренней политикой в штаб-квартире «Ассоциации магов», помочь восстановлению семьи Эль-Меллой и её будущей главе Райнес Арчисорт, а также справиться со множеством запутанных дел, наполненных магией и таинством. В этом непростом деле ему будут помогать его ученики: загадочная хранительница могил, Грей, и её говорящий мистический код, Адд, а также выдающаяся комбинация трудных подростков — Флатт Эскардос и Свин Глашайт, которые, несмотря на свою репутацию, являются самыми одарёнными учениками факультета современной магии.",
-    "poster": "https://image.tmdb.org/t/p/w342/hfBhxlbQNLhJ3ZDI51D5TRevznd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3jWeadSVRZOe6mjcA4PkcaL4gFb.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 9542,
-    "ru": "Кризис каждый день: Токио 2040",
-    "en": "バブルガムクライシス TOKYO 2040",
-    "year": 1998,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.8,
-    "votes": 36,
-    "popularity": 8.69,
-    "genres": [
-      "Боевик и Приключения",
-      "мультфильм",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Мега-Токио, 2040 год. Вооруженные до зубов продвинутым и инновационным вооружением отряд «Рыцари сабли» ведёт скрытую войну с корпорацией «Геном». Сражаясь с лучшим детищем компании — биороботами и киборгами, которых прозвали «бумеры».",
-    "poster": "https://image.tmdb.org/t/p/w342/7CwOsUmwrBkC86MJXJNB5T3kn2t.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3nmwKiDhF3daBoGPO3BlUumxcIt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 61680,
-    "ru": "МАГИ В ЗАКОНЕ",
-    "en": "ウィザード・バリスターズ～弁魔士セシル",
-    "year": 2014,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.8,
-    "votes": 36,
-    "popularity": 6.6,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Боевик и Приключения",
-      "Аниме"
-    ],
-    "overview": "Действие сериала разворачивается в Токио 2018 года. В этом мире помимо обычных людей существуют и такие, которые способны использовать магию. Но, как всем известно: “Большая сила — большая ответственность”, и потому существует множество законов и ограничений на использование волшебства. Если же они нарушаются, в игру вступают “Адвокаты”.\n\nИ наша юная героиня как раз одна из них...",
-    "poster": "https://image.tmdb.org/t/p/w342/yVC4ULsRDRBTYXuuuBWuKDX95n2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/m0Ghz5pLz1klYLcfTZ3LaD6YQes.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1009679,
-    "ru": "Главная гонка",
-    "en": "Hard Miles",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 36,
-    "popularity": 0.98,
-    "genres": [
-      "драма"
-    ],
-    "overview": "После очередной драки среди подростков директор школы поручает преподавателю Грегу Таунсенду придумать проект перевоспитания, который понравится предстоящей проверочной комиссии. Увлеченный педагог и идеалист Грег решает создать из трудных воспитанников команду велогонщиков и отправляется вместе с ними в долгий велопробег в Гранд-Каньон. Ребята всеми силами противятся этой трудной затее, но они даже не подозревают, что эта гонка навсегда изменит их жизнь.",
-    "poster": "https://image.tmdb.org/t/p/w342/mHGTuC2VOPJ1Tj3lw0EmkP1QYuD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6oM1Im24YnH6RTmziatTIcxRRG5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 106513,
-    "ru": "Самые разыскиваемые",
-    "en": "World's Most Wanted",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.8,
-    "votes": 36,
-    "popularity": 0.51,
-    "genres": [
-      "документальный",
-      "криминал"
-    ],
-    "overview": "Картина расскажет гениях преступного мира, избежавших поимки, несмотря на огромные суммы за их головы и глобальные расследования. В первом сезоне рассказывается про пятерых преступников из разных стран, которые все ещё на свободе.",
-    "poster": "https://image.tmdb.org/t/p/w342/dDaIGQvHHP4xixwqwhgwn8WMZx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7pJBax2QbrmH7A5hjmg0q09zuGD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1148677",
-    "ru": "映画ドラえもん のび太の地球交響楽",
-    "en": "映画ドラえもん のび太の地球交響楽",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 36,
-    "popularity": 4.13,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "фэнтези",
-      "музыка",
-      "приключения",
-      "комедия",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lsVsHv1g18rnCC0GNoz6GnLDo54.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/Z3mSxuPRNiFYxf1LBoGz3YrJzC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 157726,
-    "ru": "Drôle",
-    "en": "Drôle",
-    "year": 2022,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.8,
-    "votes": 36,
-    "popularity": 1.69,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7xkwOn8wj2Mckln8h1Voli0lnYj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mhdGOAY8KJ977wymVMxxELHTN5i.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 702701,
-    "ru": "Осень в Лук Лодж",
-    "en": "Love at Look Lodge",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 36,
-    "popularity": 0.48,
-    "genres": [
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yW6c7lyJIhfiklmsqBfpugHHywS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vk7YuKyALJJ5lpBZDR92FxPpdrd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 614564,
-    "ru": "Исполняющий желания",
-    "en": "Wish Man",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 36,
-    "popularity": 2.15,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Желание одного мальчика изменило человека. Желание одного человека изменило мир.",
-    "poster": "https://image.tmdb.org/t/p/w342/pJGAUwBVql7dYGfAOpYYe0EmqZ7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fv1ZIqHsq2juN7l8A2htKzLpEw7.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,276 @@
 [
   {
+    "id": 630923,
+    "ru": "Праздник к нам приходит",
+    "en": "It's Beginning to Look a Lot Like Christmas",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 40,
+    "popularity": 0.57,
+    "genres": [
+      "телевизионный фильм",
+      "мелодрама"
+    ],
+    "overview": "В Новой Англии проходит конкурс украшений к Рождеству, и мэры Западного и Восточного Ривертона готовы на всё, чтобы именно их город признали лучшим.",
+    "poster": "https://image.tmdb.org/t/p/w342/vYEpId8nCN9wcE4cXSSqG3cw82p.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jJlM7XxfWdAhWx6BeqFYJWIceId.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_43323",
+    "ru": "Comedy Bang! Bang!",
+    "en": "Comedy Bang! Bang!",
+    "year": 2012,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.2,
+    "votes": 40,
+    "popularity": 15.86,
+    "genres": [
+      "комедия",
+      "Ток-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5undCFoglpvKYFmu404ve9mh6on.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wn4JtSxtYzLiYu5PoKggz8KvRDZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 116377,
+    "ru": "Дорогой М",
+    "en": "디어엠",
+    "year": 2022,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.2,
+    "votes": 39,
+    "popularity": 2.12,
+    "genres": [
+      "драма"
+    ],
+    "overview": "В центре сюжета группа студентов университета Соён, которые пытаются вычислить, кто скрывается под псевдонимом \"М\", написавший скандальный пост в онлайн-сообществе университета.\n\nМа Чжу А (Пак Хэ Су) учится на факультете управления. Она добрая, но совершенно не амбициозная и не заинтересована в романтических отношениях.\n\nЧха Мин Хо (Джэ Хён) учится на факультете вычислительной техники. У него талант в области мобильных приложений. Дружит с Ма Чжу А уже 12 лет.\n\nСо Чжи Мин (Но Чжон Ый) учится на экономическом факультете и состоит в группе поддержки.\n\nПак Ха Ныль (Пэ Хён Сон) тоже учится на факультете управления и является почетным послом университета.\n\nМин Ян Хи (Квон Ын Бин) – специалист по компьютерной инженерии, сокурсник Чха Мин Хо.",
+    "poster": "https://image.tmdb.org/t/p/w342/ycFqtchGGdz1Ju8wiIWXt2wubjB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hdHlM2ynoYSvFB9nIDSDwN3ixtZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 949709,
+    "ru": "Высокое напряжение",
+    "en": "危机航线",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 39,
+    "popularity": 1.75,
+    "genres": [
+      "боевик",
+      "криминал"
+    ],
+    "overview": "В недалеком прошлом спецназовец Гао Хаоцзюнь стал виновником автомобильной аварии, в результате которой его дочь полностью лишилась зрения. После этого инцидента его брак распался, а он был вынужден уволиться с работы, чтобы переквалифицироваться в эксперта по международной безопасности в крупной авиакомпании. Мужчина случайно пересекается со своей бывшей женой и дочерью на борту авиалайнера Airbus A380, который вскоре оказывается в руках 12 террористов, требующих выкуп в размере 500 миллионов долларов. Чтобы защитить свою семью и остальных пассажиров, Гао Хаоцзюнь решает дать отпор преступникам.",
+    "poster": "https://image.tmdb.org/t/p/w342/57F7AVuYOoOlDKMeJfJQu3FrlOG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8lqfrOBQ2EcY7znD3LxTYcvlh25.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1618945,
+    "ru": "Йо! Лучшие друзья",
+    "en": "Yoh! Bestie",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 39,
+    "popularity": 1.49,
+    "genres": [
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "Тандо постоянно не везёт в любви, но когда её лучший друг возвращается из путешествия с невестой, ей приходится столкнуться с новым чувством — ревностью.",
+    "poster": "https://image.tmdb.org/t/p/w342/9wBzRaeWfELNOPmcvOVTmB3kDEl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1EVHnzF3gescyQZSqwbx5LfQ1EN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 674779,
+    "ru": "భీష్మ",
+    "en": "భీష్మ",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 39,
+    "popularity": 1.26,
+    "genres": [
+      "мелодрама",
+      "боевик",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pE0ECn6buZNigSDFlpoIngDNAuD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uVoOsxSVhlie37wBZprHtEyYpQV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 394148,
+    "ru": "Куда идёшь, любимый?",
+    "en": "Wo willst du hin, Habibi?",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 39,
+    "popularity": 0.68,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Встреча в Берлине предствителя турецкой диаспоры Ибрагима, выпускника универстета, и плохого парня Александра, брутального немца с преступным прошлым и настоящим, приводит к невероятной любви и непредсказуемым поворотам в их судьбах..",
+    "poster": "https://image.tmdb.org/t/p/w342/czCAGrkaHQdaAocU4tl1jZQoph.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aRMdw4XrMvSxVRJULcjvGVV4TyW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 74176,
+    "ru": "Неаполитанские страсти",
+    "en": "Neapolitan Mouse",
+    "year": 1954,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 39,
+    "popularity": 0.29,
+    "genres": [
+      "комедия",
+      "мультфильм"
+    ],
+    "overview": "Том и Джерри попадают в Неаполь, где встречают нового друга, и приключения.",
+    "poster": "https://image.tmdb.org/t/p/w342/pyIQInirfT01QoQIPm9l5SMkBMX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fGAEdCMpTXGHaBer1W9SPWLiO8q.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 74615,
+    "ru": "Обратная сторона рая",
+    "en": "O Outro Lado do Paraíso",
+    "year": 2017,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.2,
+    "votes": 39,
+    "popularity": 0.06,
+    "genres": [
+      "Мыльная опера",
+      "драма",
+      "детектив"
+    ],
+    "overview": "У дедушки Клары имеется крупное поместье в Токантинс, которым он управляет всю свою жизнь. Однажды она знакомиться с красивым и умным молодым человеком Гаелом, но его мать выступает категорически против их отношений, так как считает, что девушка попросту не достойна ее сына. Спустя месяц мать Гаела узнает, что поместье деда Клары – это настоящий Клондайк, так как там имеются залежи изумрудов. Она полностью изменяет свое отношение к Кларе и добивается, чтобы Гаел сделал ей предложение. Но делает она это только из корыстных побуждений – ее целью является участок Жозефа, дедушки Клары и чтобы его заполучить, она готова на все.",
+    "poster": "https://image.tmdb.org/t/p/w342/aNA16YOOgoawbLYltG4CKADPkhK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/de2jfUW4E3X3jl8Tf62BgRPDMHd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_4382",
+    "ru": "Eight Is Enough",
+    "en": "Eight Is Enough",
+    "year": 1977,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.2,
+    "votes": 39,
+    "popularity": 14.78,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/grfzd62iFtkA68lRJCqMVZEVnSL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/v2M8qSIcNDUOZ5jaRznuKaux36D.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 403032,
+    "ru": "樓下的房客",
+    "en": "樓下的房客",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 39,
+    "popularity": 1.64,
+    "genres": [
+      "драма",
+      "детектив",
+      "криминал",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9dpKhqrBcqt9ABc5zTU6HjQuvcN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/k303bREblg3ySFCaXXXhrFbtceH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 267797,
+    "ru": "Elvira, te daría mi vida pero la estoy usando",
+    "en": "Elvira, te daría mi vida pero la estoy usando",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 39,
+    "popularity": 0.47,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/AsN46YJ0OvzA0gPMQNNT10GUhye.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/n2yg9V0XQLuyn8euNxyKfyZfF0G.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "36753",
+    "ru": "Покемон: Пикачу и Пичу",
+    "en": "ピチューとピカチュウ",
+    "year": 2000,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.2,
+    "votes": 38,
+    "popularity": 3.0,
+    "genres": [
+      "мультфильм",
+      "приключения",
+      "семейный",
+      "Аниме"
+    ],
+    "overview": "Эш Кетчум, Мисти и Брок берут небольшой перерыв и они временно отдаляются от сражений между тренерами покемонов отправляясь в город, отпустив своих покемонов погулять. Пикачу быстро подружился с двумя местными покемонами Пичу и начинает с ними игру кошки-мышки. Отлучившись, вместе с остальными двумя, Пикачу сам того не замечая, попадает в скрытое святилище, полное различными покемонами. Однако, этим троим угрожает опасность, возможно Пикачу и его новым друзьям придётся объединиться с остальными покемонами, чтобы выжить.",
+    "poster": "https://image.tmdb.org/t/p/w342/236O6h9x7rlZx70iMzZpk7iMgzz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/AtMxZ0Vx9Sx2c5nfDNYGvyX5lpJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1511417",
+    "ru": "Бахубали: Эпос",
+    "en": "Bāhubali: The Epic",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 38,
+    "popularity": 16.96,
+    "genres": [
+      "боевик",
+      "драма"
+    ],
+    "overview": "Раненая женщина с младенцем на руках убегает от вооружённых солдат. Понимая, что долго не протянет, она возносит последнюю молитву богам и просит спасти жизнь ребёнка, а сама погружается на дно реки, держа младенца в вытянутой руке над водой. На следующий день его находят местные жители и решают усыновить. Спустя годы мальчик превращается в крепкого и рослого парня Шивуду, наделённого невероятной силой. Однажды он находит маску и решает во что бы то ни стало разыскать её владельца, не подозревая, что она принадлежит прекрасной воительнице Авантике, которая всем своим кланом пытается вызволить королеву Девасену из плена тирана Бхаллаладевы.",
+    "poster": "https://image.tmdb.org/t/p/w342/4sLSorDKKDN944kWngxgQlpdDeg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/i2GPnSwsdxHtI19e7gZwFVndpqg.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 651866,
     "ru": "Дивизия",
     "en": "A Divisão",
@@ -9411,284 +9682,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/uJkpZsWZ0zHddColxLQh3ONXnTZ.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/3Pfg0IZeb5kHP21hhYWqIc558R7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 11388,
-    "ru": "Yancy Derringer",
-    "en": "Yancy Derringer",
-    "year": 1958,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.2,
-    "votes": 11,
-    "popularity": 5.31,
-    "genres": [
-      "вестерн",
-      "Боевик и Приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9kUjeNoI23qwKDJnGldIvy16HEb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iGjRmUhYi2s5nNwoRi2P9M6QlvR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 503606,
-    "ru": "灵魂摆渡·黄泉",
-    "en": "灵魂摆渡·黄泉",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 11,
-    "popularity": 2.37,
-    "genres": [
-      "фэнтези",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rtOfVKu2JCbtzTcrxwF6WSTLr9u.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ftrKmHhFAfILMsEzxl6c3aIzx2T.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 540638,
-    "ru": "The Boxcar Children: Surprise Island",
-    "en": "The Boxcar Children: Surprise Island",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 11,
-    "popularity": 0.61,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/c6IOTVyG1t3zrKinuEG1GC0b7Sp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dsKnI59xVN25mMLXKktEVs3Q4Zo.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 156476,
-    "ru": "Three's a Crowd",
-    "en": "Three's a Crowd",
-    "year": 1932,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 11,
-    "popularity": 0.41,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9cCHzHbfIdJCb6JB4JVJkGcSj75.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9RgMDgqXhcnKbe4j64KxMQZJN8d.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 306060,
-    "ru": "Richard Pryor: Icon",
-    "en": "Richard Pryor: Icon",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 11,
-    "popularity": 0.39,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8L8Ry6fcgW6nXW0OwAUqlRcRtG9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nrDCrN23veiypQYGzLPKtb5hpbR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 53717,
-    "ru": "Kaptein Sabeltann",
-    "en": "Kaptein Sabeltann",
-    "year": 2003,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 11,
-    "popularity": 0.33,
-    "genres": [
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/m1En5GvKDHnUWrojcywoIPMWpbx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tDHiCPYgLHUcaB6YEiqvywxV2eB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 10099,
-    "ru": "The Doris Day Show",
-    "en": "The Doris Day Show",
-    "year": 1968,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.2,
-    "votes": 11,
-    "popularity": 9.03,
-    "genres": [
-      "комедия",
-      "вестерн"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zdDgcr6w6l6eaYigrX5ggnuU5Mp.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 257553,
-    "ru": "Short and Suite",
-    "en": "Short and Suite",
-    "year": 1959,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 11,
-    "popularity": 0.31,
-    "genres": [
-      "мультфильм",
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mNdK8kHfr5q4VvTnGoid3IaAdtw.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": "1230477",
-    "ru": "映画 ギヴン 柊mix",
-    "en": "映画 ギヴン 柊mix",
-    "year": 2024,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.2,
-    "votes": 10,
-    "popularity": 1.89,
-    "genres": [
-      "мультфильм",
-      "мелодрама",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uOvHjRDuJrRAgmJkUPcmnvaEqew.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/59gIydacLPl4vITlzBb4qbKW7Qh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_34709",
-    "ru": "Реквием из тьмы",
-    "en": "京極夏彦 巷説百物語",
-    "year": 2003,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.2,
-    "votes": 10,
-    "popularity": 7.25,
-    "genres": [
-      "мультфильм",
-      "детектив",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Время действия – эпоха Бакуматсу – конец правления Токугава. В те времена создания тьмы дышали полной грудью, повсюду кишели вселяющие ужас демоны. Молодой писатель, Ямаока Хьякуске путешествует по стране, собирая различные рассказы о сверхъестественных существах и явлениях, надеясь представить их в своей книге «Хьяку Моногатари». Как говорится, на ловца и зверь бежит, Ямаоку ждет встреча с Матаити, Огин и Чоудзи. Эта тройка – наемники, но не простые, используя свои необычные способности, они вершат суд и карают преступников.",
-    "poster": "https://image.tmdb.org/t/p/w342/ppaJsMKo6Wr3E5tAQhQEwni974w.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/93bKVCDs3BZRX4TPpddJQWYVVpd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_60826",
-    "ru": "Наследник Сёгуна: Великая Революция",
-    "en": "風雲維新ダイ☆ショーグン",
-    "year": 2014,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.2,
-    "votes": 10,
-    "popularity": 2.86,
-    "genres": [
-      "Боевик и Приключения",
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "Сюжет перенесет нас в поздний период эпохи Эдо, когда Япония встала перед лицом беспрецедентного кризиса, возникшего в результате вторжения из-за границы Черных кораблей. Избежать угрозы захвата портов помогает Onigami, гигантский робот, существующий с давних времен. В результате страна осталась в самоизоляции и идёт по другому пути развития истории, в которой не было реставрации Мейдзи в 1868 году.",
-    "poster": "https://image.tmdb.org/t/p/w342/68wL7sLwlfBYTERzQ0qjJnVRsn5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lhxVRXZgLig07jXDiiCB6zUepIx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_25708",
-    "ru": "Космический воин Зеро",
-    "en": "コスモウォーリアー零",
-    "year": 2001,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.2,
-    "votes": 10,
-    "popularity": 2.13,
-    "genres": [
-      "мультфильм",
-      "Детский",
-      "Боевик и Приключения",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Война между людьми и Механоидами закончилась, наступил, пусть и хрупкий, но все же мир. Вышедший в отставку адмирал Зеро занимается тем, что обучает новичков полетам в космосе. Но на его пути возникает космический пират Харлок и не смотря на все попытки Зеро предотвратить это - уничтожает транспортный корабль Механоидов. Правительство Земли отправляет Зеро на поиски Харлока, и даже возвращает ему его боевой корабль Карию (Огненный Дракон). Теперь начинается долгий путь Зеро полный приключений, предательства и опасностей...",
-    "poster": "https://image.tmdb.org/t/p/w342/tLBegcYRSAEuGmMV4kScMmbsND9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bzvSLmHctSiYpPydfsjgsRHWlf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "118931",
-    "ru": "Школьные полуночники",
-    "en": "放課後ミッドナイターズ",
-    "year": 2012,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.2,
-    "votes": 10,
-    "popularity": 1.36,
-    "genres": [
-      "фэнтези",
-      "мультфильм",
-      "комедия",
-      "семейный",
-      "Аниме"
-    ],
-    "overview": "История происходит в стенах начальной школы под названием Сент-Клер. Трое девочек дошколят - Мако, Мико и Муцуко, также известные как МММ, попадают туда на день открытых дверей, когда родители осматривают школу перед тем, как отдать в нее детей. Блуждая по коридорам, оторвавшиеся от мам и пап девочки попадают в заброшенный научный кабинет. Там они находят анатомическую модель человека, ту самую, у которой отсутствует часть кожи, видны мышцы, вынимаются внутренности и глаза. Совершенно потрясенные девочки решают сделать несчастного немного покрасивее... Но кто мог знать, что каждую ночь этот муляж оживает...",
-    "poster": "https://image.tmdb.org/t/p/w342/zByRwRi27Av88dTuH90ZcMTBodc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nf5tIKw7cFzKfSaDsZpOcQYh27O.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "39951",
-    "ru": "Приключения Гулливера",
-    "en": "ガリバーの宇宙旅行",
-    "year": 1965,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.2,
-    "votes": 10,
-    "popularity": 1.08,
-    "genres": [
-      "мультфильм",
-      "фантастика",
-      "семейный",
-      "Аниме"
-    ],
-    "overview": "Однажды поздним вечером мальчик Тед, бродячий пес Мак и заводной солдатик оказались в парке развлечений. Бдительная охрана, обнаружив непрошеных посетителей, пыталась их схватить. Но друзья улизнули на игрушечной ракете, а приземлились неподалеку от дома… профессора Гулливера. И теперь вместе с известным путешественником, уже на настоящем космическом корабле, они отправляются к далекой звезде Надежды. Впереди — полный опасностей путь, война с роботами, поработившими Зеленую планету, встреча с прекрасной принцессой и много-много других, самых невероятных событий.",
-    "poster": "https://image.tmdb.org/t/p/w342/7oLhO7d84ZubmVM2WciBk0zC1Kr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/g0e28GVV1Z4m8T8rlNJV9zSfj3s.jpg",
     "source": "tmdb"
   }
 ]

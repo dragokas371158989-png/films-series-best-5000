@@ -1,5 +1,262 @@
 [
   {
+    "id": 577874,
+    "ru": "Głupcy",
+    "en": "Głupcy",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.94,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rcteBePazitSbPPUJCN8PMEMlaz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tmJIbJisJEuVCoDIpU44febpoBV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 910446,
+    "ru": "Jorden Kalder",
+    "en": "Jorden Kalder",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.94,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aG2qcOrLMcX9th6rL9Ls4cphym7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/56PYLAw8zBhDGYcz5iy96dGMehB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1598661,
+    "ru": "National Theatre Live: The Playboy of the Western World",
+    "en": "National Theatre Live: The Playboy of the Western World",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.93,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hFA2KlHAExXZFs7sZ7YtxtblDQC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aycPE77PLSClLBOF5XjEz2Rgj13.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1204340,
+    "ru": "Crudo",
+    "en": "Crudo",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.93,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gGV9cALHLbQk0zByZT0d5MS7stp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jhwwQmCQEApRTx33RTUyq031cQx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 295780,
+    "ru": "Life, Larry and the Pursuit of Unhappiness",
+    "en": "Life, Larry and the Pursuit of Unhappiness",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.93,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fJ0KbC08ZKNVhHVZXEJE1VChYyH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yYuG3nFKwi4WcIDFDRCIuceACMR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 322400,
+    "ru": "This Land",
+    "en": "This Land",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.93,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/x9dLlw5WjWJX4P5bDPHIAbcwhDG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kUeQapM1mss7RR0xFCOciIgZbuT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 321392,
+    "ru": "Chopped: Castaways",
+    "en": "Chopped: Castaways",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.93,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fCP8r4xO5QBeAEaJLM6HeIT5gip.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4yOhHZV1bbD3r5csuaQzQHX9o4B.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 321083,
+    "ru": "My Staycation Boy",
+    "en": "My Staycation Boy",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.93,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xCRlWRP2BWpSMTzvcZqVdGWpZiv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dZ5PVykdRz07YLGTBeIilkZ19ZN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 314441,
+    "ru": "コンビニ兄弟　テンダネス門司港こがね村店",
+    "en": "コンビニ兄弟　テンダネス門司港こがね村店",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.93,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ktBfU9RQhzgpZPiPxvCJh4JAxs6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aJ2hJVT3aWNeIdHk5SKYVIXYrhx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 273819,
+    "ru": "我在这里等你",
+    "en": "我在这里等你",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.93,
+    "genres": [
+      "НФ и Фэнтези",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mU213OSYcE7ahg1OCMK7kuNrqfm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yf6MLB7Y203pf8VV0idpXvdjNbY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1514803,
+    "ru": "Stairs",
+    "en": "Stairs",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.93,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/cgmOlqUimLEmj0UqzLMNsEudffN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dHELXXIVUs15sbwM2SN8GR2LqkS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1599770,
+    "ru": "Bucks Harbor",
+    "en": "Bucks Harbor",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.93,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5XYh1GjxJMrs9MvjEp9ueUxsfDu.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5BCG8hAghyaYKOl5jwuwIQQXK5D.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1614242,
+    "ru": "Ivar",
+    "en": "Ivar",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.93,
+    "genres": [
+      "комедия",
+      "драма",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5ob7NskbmfCNoZJUSuq6FPONT5s.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8lhDDem8PDOE9D9K0FyHNXHKp9Q.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1604264,
+    "ru": "ರಕ್ಕಸಪುರದೊಳ್",
+    "en": "ರಕ್ಕಸಪುರದೊಳ್",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.93,
+    "genres": [
+      "триллер",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aOGcRUDWdY5XAzZXVtynDS7ZW0A.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mbS8oejfGNZ4KaTuXnVHX2SjOkm.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1449319,
     "ru": "វិញ្ញាណនិស្សិតពេទ្យ",
     "en": "វិញ្ញាណនិស្សិតពេទ្យ",
@@ -9019,273 +9276,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/j5i3enEg79hrbHnp5fQS0d30zSy.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/vdalavw8Z3t19hh6cQAUNhmxmKr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1590920,
-    "ru": "Me No Pause Me Play",
-    "en": "Me No Pause Me Play",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nMItbnyJaH6mkxxCOpKIcOm18gS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lcWOH5YqzE6d54kGSsP1npibYcS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1565841,
-    "ru": "Terra",
-    "en": "Terra",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "драма",
-      "военный",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6cqykRc8YMrktmmWpZvGWf3kcDc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/EBEi8o16ZXA8uIARTmeFQo09LV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1587322,
-    "ru": "ডিম লাইট",
-    "en": "ডিম লাইট",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1sQiIcEgT0Ey4wg6PO0Wc5duZ0E.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tO0xuCP3ureQ02ZMlJa9iSp7W7i.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1608823,
-    "ru": "The Cheerleader...",
-    "en": "The Cheerleader...",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "комедия",
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/b12DFgmLhNkfHJaWeEYP7dL5Sn0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zeXfMizCGja94V4ZJV0D2frPYGr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1590983,
-    "ru": "Paternité : une métamorphose décryptée",
-    "en": "Paternité : une métamorphose décryptée",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xZ16hNijEJxCrX1IOU3Zagxoart.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7hoQVcu0YCjej9nJGtl57EEVtOI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1562422,
-    "ru": "Numbrituba",
-    "en": "Numbrituba",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "детектив",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2A0y6wbl568n4jxcRh4erBcuvkL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gs6tpx3ZFQlerGMgjKt8DeWGRWG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1572169,
-    "ru": "This Place is a Sh*thole",
-    "en": "This Place is a Sh*thole",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "ужасы",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eiEMNNDWkUqDSMYvYWYy9qqSWD0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7jDWgD9aqMxJeXZ1XYw1LT7EtQF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1278699,
-    "ru": "نجوم الساحل",
-    "en": "نجوم الساحل",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aCSwmHWIIIffF7dSoUQOBN99Yeo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/c3NR9zPb2allaa2LRku9EQ8wwM2.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1555941,
-    "ru": "Babae Sa Butas",
-    "en": "Babae Sa Butas",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "драма",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zw8FxEI7LXaCERWd9T0RqgM7QSk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dfs2uFGjD85JvQA4uoqvkV4kdKU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1479176,
-    "ru": "Savvy Sheldon Feels Good As Hell",
-    "en": "Savvy Sheldon Feels Good As Hell",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/phJfKKmVTD7VfDHJyrm9jaE3XIJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7ItH1g0rOlTSzS9JN54BmkbX51t.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1447641,
-    "ru": "Holidays with the Twins",
-    "en": "Holidays with the Twins",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jJx9iwrb5WaPv1ICtRg8MLeLmRO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iGbuNxrl6Kgslq3nBYPYxeXN2Zd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1297201,
-    "ru": "Crosspoint",
-    "en": "Crosspoint",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "драма",
-      "боевик",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lu2DVipQhPLmYvlVblbU8MhYSuo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mQ3AKdkfLhUnrtqEZbEObBRNycL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1117242,
-    "ru": "Valleyheart",
-    "en": "Valleyheart",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "драма",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/Adz17JAqysM4TJUeq92IMR6bRXN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pqJHSpHa7AuBROY4WGZ3A2SLsLI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1199946,
-    "ru": "Cocodrilos",
-    "en": "Cocodrilos",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.74,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/chJZO8wZUoJSmiKoWYKLabxvBd1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nAdlu7EMGW6jgaxdbRAcJRFp6HJ.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,268 @@
 [
   {
+    "id": 931107,
+    "ru": "The Line",
+    "en": "The Line",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 0.9,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fzdTaYU6niPMwOBSd8mRcmQVYgf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/e4bxrONDwldFb8eUgwdRHBDoneh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1032274,
+    "ru": "Reggie",
+    "en": "Reggie",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 0.9,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xMXHVmyYNQMDiPEZPWl5aVlVKG4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3ruKxDCY071SwCOzlzMTlJknvvM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 919031,
+    "ru": "टीकू वेड्स शेरू",
+    "en": "टीकू वेड्स शेरू",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 0.68,
+    "genres": [
+      "комедия",
+      "драма",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5mp4KqqVU6uUNwnpYqAtthik1DB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vozTuo8zvFGMtcLPWKUEdpM86d5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 816706,
+    "ru": "Josefina",
+    "en": "Josefina",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 0.42,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2FkGbxnjon6LDUFLmkDELJ5ewyf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ufVZKeVerNm7FrnAx6MQzAfa1bD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 725234,
+    "ru": "Madklubben",
+    "en": "Madklubben",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 0.37,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/HfaztgUSHAvzndlKFR1oviO5h1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zfaAtRRmdHpJGmyjNHB3GCYMfgA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 45875,
+    "ru": "Прожекторперисхилтон",
+    "en": "Прожекторперисхилтон",
+    "year": 2008,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 6.83,
+    "genres": [
+      "Новости",
+      "комедия"
+    ],
+    "overview": "Проект Первого канала, ведущими которого стали Гарик Мартиросян, Иван Ургант, Саша Цекало и Сергей Светлаков. Это программа, где нет ничего обязательного. Ведущие делают практически все, что хотят. Обсуждают темы, которые интересны зрителям, проводят «политинформацию» для населения. На столе в студии разложено много газет - ведь где еще, как не в свежих газетах, черпать актуальные новости, которые произошли на прошедшей неделе.",
+    "poster": "https://image.tmdb.org/t/p/w342/4TtDrrHN1cMjCmmXaIayL7E6vIm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mIbaWPE4GesxGaJbAUKLx450yKh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 631998,
+    "ru": "Филофобия",
+    "en": "As I Am",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 1.06,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Кай мечтает о писательской карьере, но чтобы стать хорошим писателем, нужно начать как можно быстрее жить как можно более яркой жизнью. Как этого добиться? У любого найдутся в запасе мудрые слова или совет, но реальность такова, что чужой опыт не работает - все радости и невзгоды нужно пережить самому. В том числе и любовь.",
+    "poster": "https://image.tmdb.org/t/p/w342/lw7DSPOre4XBevvZIpU3sJy7KVd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mstA9h9M9CadVmcuITuKPlx4dzu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 76263,
+    "ru": "Томас и его друзья: Спасение с Туманного острова",
+    "en": "Thomas & Friends: Misty Island Rescue",
+    "year": 2010,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 0.8,
+    "genres": [
+      "мультфильм",
+      "семейный"
+    ],
+    "overview": "Томас помогает в строительстве нового поисково-спасательного центра на Содоре, и его награждают поездкой на материк - но вместо этого наш герой попадает на дикий и загадочный остров.",
+    "poster": "https://image.tmdb.org/t/p/w342/b2wzDXAzB0SlpF71iw9Cq9zYjvN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kEtTof6FMDFE98o4fN03Hjm6u8K.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 91174,
+    "ru": "Lights Out with David Spade",
+    "en": "Lights Out with David Spade",
+    "year": 2019,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 9.13,
+    "genres": [
+      "Ток-шоу",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5AO1sWKOrwHo3Jh5ORcCgozjwng.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hzqf8b43RqHYmVjJJ2itMCftUCn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 33833,
+    "ru": "HBO: Первый взгляд",
+    "en": "HBO First Look",
+    "year": 1992,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 8.51,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "Взгляд за кулисы съёмок самых новых фильмов, интервью с актёрами и создателями кино.",
+    "poster": "https://image.tmdb.org/t/p/w342/1R6pR4X5usNA7rPbt9q7a96S6HK.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 284755,
+    "ru": "炎トリッパー",
+    "en": "炎トリッパー",
+    "year": 1985,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 0.72,
+    "genres": [
+      "мультфильм",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qhAjSvs1NDh53ynbcVCdvoHNvzd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qORaWDypxF7VJLMNlqTOhquuuEz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 282800,
+    "ru": "ライヴ",
+    "en": "ライヴ",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 0.6,
+    "genres": [
+      "триллер",
+      "комедия",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/42KdXUGisSpkJAk5g1CrIfeEsfh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/l5TnejmsA9aeR0pdHPZwqXzOlpV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 655602,
+    "ru": "Смертельная интрижка",
+    "en": "His Deadly Affair",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 0.52,
+    "genres": [
+      "триллер",
+      "криминал",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6ha40QUuFnuuzsQEsqs7iSjv5Xt.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eZRqE8YqehMJhBBer33An4u33Uo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 508033,
+    "ru": "Use Me",
+    "en": "Use Me",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 12,
+    "popularity": 0.51,
+    "genres": [
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8XyY0ziVUenJoGSF2Am559TF2fy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/d62J0uxCLv6H1UyQ3yPKTVwbOGY.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "tv_303434",
     "ru": "Учитель-мизантроп в классе нелюдей",
     "en": "人外教室の人間嫌い教師",
@@ -9445,270 +9708,6 @@
     "overview": "Когда монахиня католического монастыря в Архангельской области заявляет о беременности близнецами, на место прибывают кардинал Руссо и отец Фокс, специалисты по мёртвым языкам. Они расшифровывают древние источники и узнают, что один из младенцев будет Мессией, а другой — Антихристом. Спасая монахиню от желающего её убить тайного ордена, священники бегут в Эстонию и находят приют в одиноком лесном доме. Вокруг них появляется всё больше пугающих знаков, а по их следу неотступно следуют убийцы.",
     "poster": "https://image.tmdb.org/t/p/w342/liKiO7MwczG6jQ6T3xJcFc92OZQ.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/s7JEziJOgV7HsQimPGXSrkwMVas.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1231953,
-    "ru": "Пять свиданий вслепую",
-    "en": "Five Blind Dates",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 97,
-    "popularity": 0.52,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Лиа посвящает свою жизнь не поискам любви, а бизнесу. Как-то гадалка говорит ей, что ее личная жизнь и успех ее чайной переплетены между собой. Родственники и лучший друг Лиа устраивают ей пять свиданий вслепую, на которые она вынуждена пойти.",
-    "poster": "https://image.tmdb.org/t/p/w342/f4Q51r4x318CDYpBlLzmZbpZMxO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sDrYaCGIaTcXZvns04LjTtju0Vp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 979275,
-    "ru": "Земля мафии",
-    "en": "Mob Land",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 95,
-    "popularity": 1.72,
-    "genres": [
-      "боевик",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "Провинциальный американский городок. Простые работяги Шелби и Трей решают устроить дерзкое ограбление, чтобы достать деньги для своей семьи. Их преступление идет не по плану, из-за чего они ввязываются в перестрелку, убивают двух человек и едва скрываются с места. Вскоре на их след нападает опытный шериф Боди Дэвис, который хочет во что бы то ни стало покончить с наркобизнесом, медленно пожирающим его родной город. Однако служитель закона оказывается вовсе не самым опасным противником Шелби и Трея. Грабители даже не подозревают, что украденные ими деньги принадлежат могущественному мафиозному боссу, который жаждет отомстить людям, сорвавшим его планы.",
-    "poster": "https://image.tmdb.org/t/p/w342/sgFj4LMHry5swCQOcxQ6C3ipUnq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3mrli3xsGrAieQks7KsBUm2LpCg.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 771502,
-    "ru": "Безумный девичник",
-    "en": "Addio al nubilato",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 94,
-    "popularity": 1.18,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Пять близких подруг когда-то поклялись быть вместе навсегда, но со временем их пути разошлись. И вот спустя двадцать лет одна из них зовёт остальных на девичник перед свадьбой. Происходит безумное воссоединение, девушек ждет захватывающее приключение, множество сюрпризов и очень неожиданный финал…",
-    "poster": "https://image.tmdb.org/t/p/w342/aC5bqr8Srmf2dI5DLEcDTZqnRvO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lx3qLjA0lW7dZGIk7xBEJaBeKDN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 400329,
-    "ru": "Первенец",
-    "en": "First Born",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 94,
-    "popularity": 1.0,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "Парень и девушка любят друг друга, как можно любить только в юности. Девушка думала, что самый страшный выбор её жизни случился, когда она забеременела, но влюблённые решают оставить ребёнка и пожениться. А вот через пару месяцев после рождения дочери начинают происходить действительно страшные вещи, о которых не пишут в книгах для молодых родителей.",
-    "poster": "https://image.tmdb.org/t/p/w342/uI0Fz7vMAcYWnhdDEbNSDl90AaZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/t2teCVwBMTQ6D39bk4VFLQX1iwT.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 522246,
-    "ru": "Жуть",
-    "en": "Eerie",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 94,
-    "popularity": 0.68,
-    "genres": [
-      "ужасы",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "Страшная смерть школьницы потрясла католическую школу для девочек. Патриция, работающая здесь консультантом, начинает собственное расследование внезапной смерти ученицы. Жуткие секреты школы выплывут на поверхность...",
-    "poster": "https://image.tmdb.org/t/p/w342/duEI37Qjtt1WaiOzZzVlkI6JO2z.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qPTEsaY7MIg2OJyrO2xEG6lxG4X.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 406668,
-    "ru": "Женский мозг: Инструкция по применению",
-    "en": "The Female Brain",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 92,
-    "popularity": 1.03,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Фильм посвящён вопросу внутренней работы и сложной химии мозга участников пяти пар на разных этапах отношений.",
-    "poster": "https://image.tmdb.org/t/p/w342/2rv3q0Ac1OWGZ9c8zS2yqWlhRF4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yx4o9fL7taFvPnQjdqgGfOp2Uc0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 389630,
-    "ru": "Всё, что у нас было",
-    "en": "All We Had",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 92,
-    "popularity": 0.67,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Тринадцатилетняя Рути Кармайкл и ее мать Рита на грани бедности, несмотря на то, что Рита ходит на несколько работ. Когда домовладелец выкидывает их, Рита использует свою внешность, для знакомства с парнем, который возьмет их к себе. Вскоре Рути убеждает свою мать уйти, и они направляются на восток в поисках лучшей жизни. В дороге у них кончаются деньги и ломается машина, они оказываются в сложном положении в небольшом городке, где удача поворачивается к ним лицом.",
-    "poster": "https://image.tmdb.org/t/p/w342/q7PMZEEgMg2so2D6RLMiEI1oqX2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wrAf9aoLHCybHRT0F9XhqdFppqx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 254772,
-    "ru": "La Voie de l‘ennemi",
-    "en": "La Voie de l‘ennemi",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 91,
-    "popularity": 0.79,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/df8tTDXxd4wgDgaldnph2I0R2UB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6948QYLT3GVComQG4hbiNFF7VuA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 512199,
-    "ru": "Сын Америки",
-    "en": "Native Son",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 90,
-    "popularity": 2.08,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Молодой афроамериканец из Чикаго, устроившись водителем состоятельного бизнесмена, попадает в мир денег и власти.",
-    "poster": "https://image.tmdb.org/t/p/w342/vVF6CnjXLqAjK2crI1ielma18TW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ar6swJk6O4kfevpk6ky76Ast7ys.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 467679,
-    "ru": "Хищные",
-    "en": "Carnivores",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 89,
-    "popularity": 0.74,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "Это история о двух сестрах. Они обе актрисы. Во только Сэмия успешнее Моны, но и у нее есть профессиональные недостатки. И Мона вызвалась ей помочь. Увы, это не тот случай, когда сестры понимаю друг друга с полуслова. Отношения Сэмии и Моны напряженные и болезненные. Одному богу известно, к чему это приведет...",
-    "poster": "https://image.tmdb.org/t/p/w342/mTJ3EeRMGvSP0T3cCBtxLChLQeA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/orvA4fru7azuBkPDcxpNtk4MSWi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 567714,
-    "ru": "Неизбранные дороги",
-    "en": "The Roads Not Taken",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 88,
-    "popularity": 0.84,
-    "genres": [
-      "драма"
-    ],
-    "overview": "День, обещавший Лео лишь рутину, становится точкой пересечения множества судеб. Богемная жизнь, непростая карьера музыканта на Манхэттене, безумная любовь, рождение дочери и бегство на греческий остров, полный соблазнов. Сегодня всё это как будто происходит вновь…",
-    "poster": "https://image.tmdb.org/t/p/w342/kS9qMoqIf7DtTAWkoAmrQozr5P3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3khLsessoSDOpA5hkBo6JeVamk2.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 474722,
-    "ru": "Безумная семейка",
-    "en": "Ailecek Şaşkınız",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 88,
-    "popularity": 0.46,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Ферхат — испорченный человек и генеральный директор в компании своего отца. Правой рукой Ферхата является его друг детства — Гёкхан, который работает в компании финансовым директором. Однажды они идут в ресторан, чтобы договориться с руководством насчет доставки обедов для их сотрудников. Ферхат безумно влюбляется в дочку директора ресторана, Элиф. Только девушка обладает суровым характером и гибким интеллектом, поэтому Ферхату будет очень сложно завоевать её.",
-    "poster": "https://image.tmdb.org/t/p/w342/ulvZA5VSMCs2msRXiC1UtClBhYA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xGBJLlndaDptjlZxlQ0m0NkEzmL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1211483,
-    "ru": "Главный герой. Апокалипсис",
-    "en": "Skal: Fight for Survival",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 87,
-    "popularity": 0.89,
-    "genres": [
-      "боевик",
-      "ужасы",
-      "комедия",
-      "триллер"
-    ],
-    "overview": "Блогер и стендапер Артур только что набрал три миллиона подписчиков. Чтобы это отметить, он закатывает масштабную вечеринку. В самый разгар веселья выясняется, что в мире начинается самый настоящий апокалипсис. Исчезают все запасы пресной воды. В результате вместо вечеринки гости начинают жестокую борьбу за выживание. Теперь важно не сколько у тебя подписчиков, а умеешь ли ты драться и стрелять из оружия.",
-    "poster": "https://image.tmdb.org/t/p/w342/6AAJHytBVu4wETXdBDbDQ3n2Pv1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s9YTxwaByYeoSqugYjJJtZjMRAG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 931346,
-    "ru": "Кто их пригласил?",
-    "en": "Who Invited Them",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 86,
-    "popularity": 0.44,
-    "genres": [
-      "ужасы",
-      "триллер",
-      "комедия"
-    ],
-    "overview": "Семейная пара с маленьким сыном купила большой дом в престижном районе. Хотя Марго считает, что такое жилье для них слишком шикарно, Адам всё же устраивает вечеринку, чтобы похвастаться перед коллегами и начальством. Когда гости уже разошлись, хозяева внезапно обнаруживают в доме незнакомую пару. Рассыпаясь в извинениях и комплиментах, те представляются состоятельными соседями, которые пришли поругаться из-за парковки, но передумали портить мероприятие. Ребёнок ночует у друзей, поэтому Адам с Марго решают продолжить вечер в компании новых знакомых.",
-    "poster": "https://image.tmdb.org/t/p/w342/yaUlb7j9cAIAv7nV56YAxQJ2gxT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8RqZ57dpz3SiqfZq0gvV9Bzju6T.jpg",
     "source": "tmdb"
   }
 ]

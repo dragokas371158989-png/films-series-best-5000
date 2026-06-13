@@ -1,5 +1,264 @@
 [
   {
+    "id": 1668470,
+    "ru": "Glory/Us",
+    "en": "Glory/Us",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/brACHQOkgCetD51uMFSI4BAbFi3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/e405HnVDlp2kCKffUXvvQALMx7v.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1686758,
+    "ru": "The Decision",
+    "en": "The Decision",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nNAsn9aeIyLrDqef8CJZPckA0SK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tAyDQivsFXhJVy6eroQAuVQM7h4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1661066,
+    "ru": "늦여름 매미처럼",
+    "en": "늦여름 매미처럼",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bbQOsWAbI2SeJiq8yNwmI8tLgT9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aDDOQx8kl8GMAtL971OHPOtN79G.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1661006,
+    "ru": "허망에 관하여",
+    "en": "허망에 관하여",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/f9QYDUG3Prpx1IVFNiJexBMiEOE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5Zcy02jotOJosk5ypSvIL9Y4nS9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1653281,
+    "ru": "Shadow of Hope",
+    "en": "Shadow of Hope",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/36Kf1FNSE6VEStCCLrrthr2e6Or.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1fWYkz04Od5w82HjhPy4ssTQJP0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1608562,
+    "ru": "The Alfred Show Movie",
+    "en": "The Alfred Show Movie",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6D5GsPXLGYk7NmCY6okKIYhrfLq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lI50vaYWaJ7HacLTYel1dmM7tZv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1501288,
+    "ru": "ALA, ALA",
+    "en": "ALA, ALA",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wLZj3ShbxQS2Uglt9stTwlMNwRi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bT0LgC79K2s1pNTskjo2c6bikke.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1692138,
+    "ru": "San Francisco Rising",
+    "en": "San Francisco Rising",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gsGjzGggJFfJ4OIjCZyepGMYbWk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cyItKovyIe7pNrKEgf76h4YxarU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1687541,
+    "ru": "Cómo entrenar tu cerebro",
+    "en": "Cómo entrenar tu cerebro",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hw3FXrF7fnxgklru7fiMoOvyAqb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jIJystqGlOzTiH49WdWvUfvEG2t.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1686109,
+    "ru": "神秘美人鱼2之虐心爱恋",
+    "en": "神秘美人鱼2之虐心爱恋",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "мелодрама",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ixyhA5D6jU1UiL2Hv594AZRZ2aZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/48z2mXGG2ZblpjNPa2ur0uLSYdW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1664550,
+    "ru": "Ícaro",
+    "en": "Ícaro",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3sxkBWNcavz7hCezrObFrRZio9Z.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pcYxaR0ppXQn0mujxr39Rjt1l0g.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1660999,
+    "ru": "음악만세",
+    "en": "음악만세",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "документальный",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9WpjXHsJswwGwqr5hIaNBQGpSTV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vyua9vPFirNyq80I6YoOJE0dktf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1660316,
+    "ru": "극장판 반짝반짝 달님이: 싱어롱 파티",
+    "en": "극장판 반짝반짝 달님이: 싱어롱 파티",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "фэнтези",
+      "приключения",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vKS6arCPL0rMLeUgH1W4CE2TfUJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uBPu6sZAKmeJHWYuUR4a36cAEn1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1654549,
+    "ru": "시민오랑",
+    "en": "시민오랑",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.07,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yWWsQpPoAyCOBldAR8GsYzA1aEK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/d4ZjBchlEuvLchJuKG2wpGIK6F3.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1650967,
     "ru": "A Glass of Chocolate Milk",
     "en": "A Glass of Chocolate Milk",
@@ -8785,265 +9044,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/aOucd1G9ZV1wcX7UN6P59qM2kra.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/yTrXc5BD1ENvHNcFDFjVEmq6xMl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1691818,
-    "ru": "ההצגה של משפחת גאון",
-    "en": "ההצגה של משפחת גאון",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rJr4AJSj9x25CkzSFo3OAT4xgsM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aiqzN7cWgf27XnZYGPNW89ZBQXp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1593045,
-    "ru": "Boomer Rebirth",
-    "en": "Boomer Rebirth",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [
-      "комедия",
-      "фантастика",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ztwMUvoNoRdLhgHZ2jBmiNJJJr4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jSpmlXkvqvdf4LBcOLqqdzPKCMk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1494512,
-    "ru": "Looking for Alan",
-    "en": "Looking for Alan",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ejfiFiTKvo2UkNzoFiuwlE0zAlF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7h98uE9r6z9EnzydMK7W5OxBD8D.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1704532,
-    "ru": "অচেনা আমি",
-    "en": "অচেনা আমি",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2pT5n96lsJjzNlqE30OyEoLBscf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xcQUbx4MrqlHAYyJnsZyso315Bd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1698978,
-    "ru": "Abuaraw Chese",
-    "en": "Abuaraw Chese",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aZoUTk9qBCqnxQHtUvy211PCAb5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8CIPzXH6QaI6B0E5axmYkdV7V6s.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1472112,
-    "ru": "Fractured Bonds",
-    "en": "Fractured Bonds",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bjf7bbsxBrhcnBiv459fH1KOjxA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/AmdJZdc9y2cYs1fFXrUFEP1WAgS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1388537,
-    "ru": "Itch",
-    "en": "Itch",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [
-      "ужасы",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nbYkwf71vJ5wwzxjlmgJN64KrOY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9cOKlufHqanonbpd3DMWrS1d4UX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1707409,
-    "ru": "TRADITIO - Part I: A Work of Faith",
-    "en": "TRADITIO - Part I: A Work of Faith",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tEiKeoQuzkIkeesWbJe8HSPBjS0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3vOmXsA42TNEbI1s12j8ldbScTz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1707176,
-    "ru": "The Bar Between Roads",
-    "en": "The Bar Between Roads",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7qR9vWIF83goop5T6y1nKzr2IRk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2nrUtLuur05oIk7yZTTlYHsRnZ8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1705738,
-    "ru": "Cost of a Second",
-    "en": "Cost of a Second",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [
-      "фантастика",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9ENuBj4ce0AnBlh2auRGrqKvES5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dNf2D2qNgBPgOUUx7mXMgKTZgmW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1690254,
-    "ru": "L’uomo a cui hanno rubato il cuore",
-    "en": "L’uomo a cui hanno rubato il cuore",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/k6UgfIefFDd774LDOugby6bS6FX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2jvz4uzdkxJaBh068m1RmXDeDcs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1702887,
-    "ru": "Miles",
-    "en": "Miles",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [
-      "документальный",
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fnZ6Tx0Htuff6SABRSyaCLwGRFM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uL8nf8TAk5yyHigfIBD4KcgD3Qy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1702450,
-    "ru": "Latidos en la lluvia",
-    "en": "Latidos en la lluvia",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [
-      "документальный",
-      "приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yHnWOaf4FZ3qROPXooxUbTelK0Y.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/irHupEIkhVmXJ34PIPz5ECMxAkQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1702340,
-    "ru": "ADRIANA",
-    "en": "ADRIANA",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.05,
-    "genres": [
-      "триллер",
-      "драма",
-      "мелодрама",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/frEh4XITwGPw089dKK6F7KmWQJk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gwtdjGE4QwNckRcEWUwJSWBiout.jpg",
     "source": "tmdb"
   }
 ]

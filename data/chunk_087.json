@@ -1,5 +1,271 @@
 [
   {
+    "id": 1108354,
+    "ru": "Кали",
+    "en": "KALI, L'ange de la Vengeance",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 137,
+    "popularity": 1.58,
+    "genres": [
+      "боевик",
+      "триллер",
+      "приключения"
+    ],
+    "overview": "Лиза, она же Кали, когда-то была рекрутом в спецназе. Узнав, что её муж Эрик убит в Рио-де-Жанейро в связи с коррупционным скандалом, она решает вспомнить прежние боевые навыки и отправиться в Бразилию, чтобы найти и покарать виновных.",
+    "poster": "https://image.tmdb.org/t/p/w342/dpg75ast2iqac4b8xKgj6feaebM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dVPPCD7wK0bFEB2NK3fw3CBidwd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 826796,
+    "ru": "Сиделка",
+    "en": "Help",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 137,
+    "popularity": 1.16,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Сара, кажется, нашла свое призвание, работая в доме престарелых в Ливерпуле, где у нее особый талант общаться с жильцами. Затем, в марте 2020 года, разразится пандемия коронавируса.",
+    "poster": "https://image.tmdb.org/t/p/w342/xuB589szYuTcBJ0lZa0MSGAf1Ok.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jRwqNjLsOiCzDJ4lT4dpFZemNx7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 603206,
+    "ru": "Лошадь мечты",
+    "en": "Dream Horse",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 136,
+    "popularity": 1.54,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "Устав от обыденной жизни, Джен решает ее изменить. Не имея ни опыта, ни средств, она убеждает своих соседей вложить сбережения в лошадь по кличке «Мечта».",
+    "poster": "https://image.tmdb.org/t/p/w342/6F8DsO8QRcv5Hso9rULcDHmv5Yb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rZpyIeadpjHDJDBdl7BNLRtPF49.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 57472,
+    "ru": "Микки Маус: Маленький храбрый портняжка",
+    "en": "Brave Little Tailor",
+    "year": 1938,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 136,
+    "popularity": 0.52,
+    "genres": [
+      "мультфильм",
+      "фэнтези",
+      "комедия"
+    ],
+    "overview": "Прекрасная экранизация известной сказки с Микки Маусом в роли храброго портняжки. Храбрый портняжка хвастал, что убил семь мух одним ударом, а теперь ему придется столкнуться с настоящим великаном.",
+    "poster": "https://image.tmdb.org/t/p/w342/a4iR5PHen2B0snLJZy5ZVWlFUT8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oSIPum1CLiWk77LUIbRTwgOs31m.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_99617",
+    "ru": "Холстон",
+    "en": "Halston",
+    "year": 2021,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 135,
+    "popularity": 4.19,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Он создал империю. Его стиль определил эпоху. Американский модельер Холстон стремительно обрел славу, но затем его жизнь стала выходить из-под контроля.",
+    "poster": "https://image.tmdb.org/t/p/w342/paNcR3RKnAKZd6bKvRnMcBi4sjZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kTuUYjlwsfBsiHCQPEc4clpDFAY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 103023,
+    "ru": "Я исчезну во тьме",
+    "en": "I'll Be Gone in the Dark",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 135,
+    "popularity": 2.15,
+    "genres": [
+      "документальный",
+      "криминал"
+    ],
+    "overview": "Джозеф Деанджело с 1976 по 1986 годы убил по меньшей мере 10 человек и около 50 подверг сексуальному насилию. Режиссёр фильма годами пыталась восстановить справедливость и не дать запутанному делу сгинуть в архивах.",
+    "poster": "https://image.tmdb.org/t/p/w342/wP8ypum7Jpy1UBfR6HLxdvMkqX6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wfivwtnzkWQCwOtpT7tiVATIVkR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 122672,
+    "ru": "Сыновья Сэма. Падение во тьму",
+    "en": "The Sons of Sam: A Descent into Darkness",
+    "year": 2021,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 135,
+    "popularity": 1.24,
+    "genres": [
+      "документальный",
+      "криминал"
+    ],
+    "overview": "Дело сына Сэма становится многолетней страстью журналиста Мори Терри, убежденного, что убийцы были связаны с сатанинским культом.",
+    "poster": "https://image.tmdb.org/t/p/w342/jejdm4PE6pxbNKz1UtBjvHCPmnA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cdCmK24gBPjKlACeDOliWFPrWt9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 946127,
+    "ru": "Соколиное озеро",
+    "en": "Falcon Lake",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 135,
+    "popularity": 1.16,
+    "genres": [
+      "драма",
+      "мелодрама",
+      "детектив"
+    ],
+    "overview": "Бастьену 13 лет. Он переезжает со своей семьей из Парижа в шале на берегу озера в Квебеке, где неожиданно связывается с 16-летней Хлоей.",
+    "poster": "https://image.tmdb.org/t/p/w342/7EoLtRBUAqBYNPEfFRj6DWIhCxe.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aCI2blt8jVK3RGUN4NFtkWj0FkS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 915980,
+    "ru": "Солнце и бетон",
+    "en": "Sonne und Beton",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 134,
+    "popularity": 0.62,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Берлин-Гропиусштадт в рекордное для жары лето 2003 года. В парках воняет собачьим дерьмом, повсюду битое стекло, в подворотнях стоят дилеры. Любой, кто живет здесь, является бандитом или жертвой. Лукас, Джино и Джулиус — жертвы. Нет денег на бассейн, не везет в любви, а дома ожидает только стресс. Однажды, когда они хотят купить травку в парке, они оказываются между двух конкурирующих банд торговцев. В итоге Лукаса избивают и требуют 500 евро за «крышу». Его новый одноклассник Санчес предлагает украсть со склада школы новые компьютеры и продать их.",
+    "poster": "https://image.tmdb.org/t/p/w342/ddacirup8d3NJqyFvRaBllSFncr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8I6RTwSmpt31I6bTIyxCgrcdXGT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 814312,
+    "ru": "Майсабель",
+    "en": "Maixabel",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 134,
+    "popularity": 0.49,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Террористы убивают мужа главной героини, из-за чего вся её жизнь идёт наперекосяк. Полная решимости — не отомстить, но понять, почему это произошло, — она просит организовать встречи с теми, кто участвовал в том нападении и сейчас сидит в тюрьме. После этих встреч жизнь Майсабель и других жертв террористической атаки меняется, подарив им надежду на прощение, новую жизнь и свободу.",
+    "poster": "https://image.tmdb.org/t/p/w342/1jXI2yN7fEj8ass83Xmbrn8YaoW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7P8MrCJfAeKrzbfrv5AEU1tvJfE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_5383",
+    "ru": "Чужая нация",
+    "en": "Alien Nation",
+    "year": 1989,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 134,
+    "popularity": 6.55,
+    "genres": [
+      "НФ и Фэнтези",
+      "Боевик и Приключения",
+      "драма"
+    ],
+    "overview": "В пустыне Мохаве потерпел крушение огромный инопланетный космический корабль, перевозивший 250 тысяч рабов из разных концов Галактики. Пришельцы стали жить среди людей, многие из которых были очень враждебно настроены по отношению к «отбросам Вселенной».\n\nСреди них  детектив Мэттью Сайкс, напарник которого погиб в перестрелке с бандой пришельцев. Перебирая бумаги погибшего друга, Мэттью делает открытие: его убили за то, что он пытался выяснить, почему пришельцы так слепо повиновались своим бывшим хозяевам.\n\nКогда в городе начинают находить трупы пришельцев, умерших от странной болезни, а на страницы газет попадает снимок чудовищной насекомообразной твари, Мэттью и его новый напарник, пришелец Джордж, вынуждены работать рука об руку, чтобы раскрыть тайну этих событий",
+    "poster": "https://image.tmdb.org/t/p/w342/mSnZFa4Yv3dFCMdcyJXjlq0lj4c.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/npNbRiUGU29nz464ERJiAkxH997.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_64421",
+    "ru": "Хроники Франкенштейна",
+    "en": "The Frankenstein Chronicles",
+    "year": 2015,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 134,
+    "popularity": 3.59,
+    "genres": [
+      "НФ и Фэнтези",
+      "драма"
+    ],
+    "overview": "Инспектор полиции Джон Марлотт разыскивает маньяка, возомнившего себя Франкенштейном. Злодей воплощает действия книжного доктора в реальность — создает монстра из частей человеческих тел. Марлотт, обнаруживший одно из ужасных созданий убийцы, вынужден работать тайно и в одиночку бродить по Лондону 19-го века в поисках чудовища.",
+    "poster": "https://image.tmdb.org/t/p/w342/gEkUGlWXruIb8q6DvQDbqxcfjgi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/efnTREn6vaTS02BQ6dhk8i9Ad6d.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 267467,
+    "ru": "Мишень",
+    "en": "표적",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 134,
+    "popularity": 1.2,
+    "genres": [
+      "триллер",
+      "боевик"
+    ],
+    "overview": "Некогда бывший наемник Ё Хун, пытается жить обычной жизнью. И у него это в принципе хорошо получается, но однажды он отправляется в офис по поручению и обнаруживает там труп. Вот так мужчина и становится в одночасье главным подозреваемым. Его разыскивает не только полиция, но и наемные убийцы. Как выбраться из этой передряги, доказать свою невиновность и при этом остаться в живых?",
+    "poster": "https://image.tmdb.org/t/p/w342/hljukhGDRHeGMdQ7KcKzobgxJlR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oquMboQfqtfFMNW9SSHpm0EVGHU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 594082,
+    "ru": "Mosul",
+    "en": "Mosul",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 134,
+    "popularity": 0.67,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/cOaq0MJNf3cCZsPeXWjw95CI0qv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xmBIS48kPpwGMh7tKb85Rt7Wq2O.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "mal_57480",
     "ru": "The Legend",
     "en": "Hua Jianghu: Tiangang",
@@ -9471,278 +9737,6 @@
     "overview": "Ханна и Джош знакомятся друг с другом в парке после того, как их обоих бросили у свадебных алтарей в один и тот же день. После этого их пути загадочным образом пересекаются, когда они оба договариваются отправиться в одиночный медовый месяц и вновь встречаются на другом конце света.",
     "poster": "https://image.tmdb.org/t/p/w342/q5hbXUl8O2A8PKDCe6bJcKTeiPk.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/cspLTXWrkY8bUubQnwWES2mAR1V.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1678844,
-    "ru": "Le Bus : Les Bleus en grève",
-    "en": "Le Bus : Les Bleus en grève",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 1.17,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xy5oC3dWw2OuSUHXIBPm6XQLk8n.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dTEbfFiaYupyhgFg9ZC4NpH5p8G.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 598439,
-    "ru": "Den største forbrytelsen",
-    "en": "Den største forbrytelsen",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 1.02,
-    "genres": [
-      "драма",
-      "история",
-      "военный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aj64NcGhjlFTO7T4XSz7bA8i7yB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dBwi6eHcxmWQfOMSCUMgq86HJTB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 227248,
-    "ru": "Más Allá de Tí",
-    "en": "Más Allá de Tí",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 0.74,
-    "genres": [
-      "драма",
-      "криминал",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lAaCTmYNwJDRD3DRUlXGe70grs1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uuib9FNuXAFt9QClGiqhRVWDYoA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 672701,
-    "ru": "Apprendre à t'aimer",
-    "en": "Apprendre à t'aimer",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 0.62,
-    "genres": [
-      "драма",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qJlaQRaHM7beO3xLEWS42L43182.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kjOdKpgYbdxW21M0dnYJ7k6ByIc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 87372,
-    "ru": "Сильвия Пиналь... перед тобой",
-    "en": "Silvia Pinal... frente a tí",
-    "year": 2019,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 0.64,
-    "genres": [
-      "драма",
-      "документальный",
-      "Мыльная опера"
-    ],
-    "overview": "Сериал рассказывает о жизни знаменитой мексиканской актрисы Сильвии Пиналь.",
-    "poster": "https://image.tmdb.org/t/p/w342/yWl9k3oUbwcCZA6NU6uBsVXpBMz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2JX5Y4Htnm9NgIMz021ebn3Aip.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 48740,
-    "ru": "Падения койота",
-    "en": "Coyote Falls",
-    "year": 2010,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 0.45,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Койот привязал шнур банджи и создал корм ловушку под автодорожным мостом. Это \"надежный\" план, который принимает во внимание все ... кроме встречного движения.",
-    "poster": "https://image.tmdb.org/t/p/w342/76rz994icSRNHBZuAHmsRwVROsy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jrk9jqFw3eSebTgm9ldKS71rorS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 425553,
-    "ru": "Побег в будущее",
-    "en": "Flykten till framtiden",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 0.44,
-    "genres": [
-      "комедия",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "1973 год. Сванте — обычный парень из Стокгольма, который работает продавцом в магазине грампластинок. Жизнь скучна и однообразна. Но всё радикально меняется, когда однажды вечером на местной станции метро он обнаруживает портал, который переносит его прямиком в 2016 год.",
-    "poster": "https://image.tmdb.org/t/p/w342/chcWPwYgWDnUcoNWXmnlxr5vWzD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xYJiM4TDuahYgFUSQDRVbl2lskm.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 87196,
-    "ru": "Головокружительная Золушка",
-    "en": "Swing Shift Cinderella",
-    "year": 1945,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 0.37,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Осовремененная история Золушки с участием Волка из сказки о Красной Шапочке. Золушка готовится на конкурс красоты и ухаживания Волка ей сейчас ни к чему, а вот ее Крестной Фее Волк пришелся по душе…",
-    "poster": "https://image.tmdb.org/t/p/w342/6SVJzUs3njFbKO8q6d36iyKZ8Fa.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rkry2mxRTwtMVrRqexcwDb2CpWX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 95632,
-    "ru": "Pick of the Litter",
-    "en": "Pick of the Litter",
-    "year": 2019,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 0.38,
-    "genres": [
-      "документальный",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vcPGkS4Wzj09132CDjWG337UJcW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cGEYVybmhASYgx12SxUrlwSHgJC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1154304,
-    "ru": "Как приручить бизона",
-    "en": "Buffalo Kids",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 39,
-    "popularity": 2.91,
-    "genres": [
-      "мультфильм",
-      "приключения",
-      "комедия",
-      "семейный"
-    ],
-    "overview": "1886 год. Двое ирландских сирот прибывают на океанском лайнере в шумный и суетливый Нью-Йорк. Мэри и Том проделали долгий путь, чтобы встретиться со своим дядей Найлом и получить наследство. Почти без гроша в кармане они отправляются в захватывающее приключение по Трансконтинентальной железной дороге.",
-    "poster": "https://image.tmdb.org/t/p/w342/r9BeqSkZdGuvFGQ7BoIPSbMAihh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nOEIe9E5rj372Y7Ct0Kx3FJ9tLV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 629078,
-    "ru": "Стеклодув",
-    "en": "شیشہ گر",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 39,
-    "popularity": 1.07,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "мелодрама",
-      "военный"
-    ],
-    "overview": "Юный Винсент и его отец Томас управляют лучшей стеклодувной мастерской в стране. Размеренная жизнь семьи стремительно меняется с появлением в городе влиятельного полковника и его дочери Эллиз – талантливой скрипачки. Между Винсентом и Эллиз зарождается симпатия, которая встречает сопротивление отцов, чьи взгляды на жизнь абсолютно различаются. Влюбленных ждут нелегкие испытания, но чувства и магия искусства творят волшебство.",
-    "poster": "https://image.tmdb.org/t/p/w342/iMJ43Ut910F2vADJ0KYmD3LhCLq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wNfo4jTlzLPcWc68xxw8VnBJjae.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 815029,
-    "ru": "Довбуш",
-    "en": "Довбуш",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 39,
-    "popularity": 0.85,
-    "genres": [
-      "история",
-      "драма"
-    ],
-    "overview": "Фильм рассказывает о жизни и подвигах легендарного народного героя Украины Олексы Довбуша. Эта историческая драма освещает не только личную жизнь Довбуша, но и его борьбу за права и свободу крестьянства в Карпатах.\r Сюжет фильма разворачивается в Карпатских горах, где Олекса Довбуш, выходец из простого крестьянского сословия, становится символом сопротивления угнетению и борьбы за социальную справедливость. Отмеченный решимостью и непоколебимой верой в справедливость, Довбуш становится лидером повстанцев, которые встают против феодального угнетения и эксплуатации.\r Фильм подробно иллюстрирует ключевые моменты в жизни Довбуша, включая его детство, молодость, а также путь, который привел его к становлению как народного героя. Особое внимание уделяется его отношениям с близкими людьми и любовным переживаниям, которые играют значительную роль в его жизни и становлении как лидера.",
-    "poster": "https://image.tmdb.org/t/p/w342/gcDtCVANU3sjl7wdTNzu4BSYsMN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/AqLFZK2nykm6oURXFRHjOaAssqn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_66465",
-    "ru": "Шоу Капила Шармы",
-    "en": "The Kapil Sharma Show",
-    "year": 2016,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 39,
-    "popularity": 60.59,
-    "genres": [
-      "комедия",
-      "Ток-шоу"
-    ],
-    "overview": "Комедийное ток-шоу, где Капил Шарма приглашает знаменитостей Болливуда для промоушна их предстоящего релиза.",
-    "poster": "https://image.tmdb.org/t/p/w342/bUlgDjaxYkBrbOxjJef2qkFBAjb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xV0JOheZzmemwdpq1fahTnfAUoU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 388885,
-    "ru": "Тайны «Пробуждения силы»",
-    "en": "Secrets of the Force Awakens: A Cinematic Journey",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 39,
-    "popularity": 0.8,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "Документальная картина о создании фильма «Звездные войны: Пробуждение силы», интервью с создателями и фрагменты съемок.",
-    "poster": "https://image.tmdb.org/t/p/w342/xSzoZ5eE0cUQnAzUJ9TJHZ1l70c.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tfHG3i2QP0UmmMm7ynA9IAk6RUp.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,259 @@
 [
   {
+    "id": 112136,
+    "ru": "Η Φαμίλια",
+    "en": "Η Φαμίλια",
+    "year": 2018,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 5.43,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1qtXql5sNmpq455Kzt6XgmA5UTU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/akbwvk4gCna1CX6ZrCmhcYGhgFu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 92993,
+    "ru": "なつぞら",
+    "en": "なつぞら",
+    "year": 2019,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 5.37,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/c16XS5mHu0tugk58qX4njph9PYR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9niExxp2KxtM3mEZGNOqDWCLmXL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 364556,
+    "ru": "寡妇村",
+    "en": "寡妇村",
+    "year": 1989,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 5.24,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pmrxzm2zsFxawqQFeh5KacWQYhT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sJc5xJcxk8UajiFWQcOZUi7miPt.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 85603,
+    "ru": "日月神劍",
+    "en": "日月神劍",
+    "year": 1991,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 5.23,
+    "genres": [
+      "драма",
+      "Боевик и Приключения",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hVFw1wA3cHGiHTDwRzVViD7NAej.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tvImRRHe6ixbAGNXi4k9ZNoMpUZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 117867,
+    "ru": "草燃える",
+    "en": "草燃える",
+    "year": 1979,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 5.21,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2ZWQybIWnLdiKA2nTM9LuZtrOsO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1O7h0zeDjOysDKW06EIfvh3uQMv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 103914,
+    "ru": "Dry Bar Comedy",
+    "en": "Dry Bar Comedy",
+    "year": 2017,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 5.14,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hOzfGKyWDHIZvpvT6EUUHtjdb7L.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/84Fvc88L9Ovlymhqhj2K6R88mWp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1068844,
+    "ru": "내 엄마의 친구 2",
+    "en": "내 엄마의 친구 2",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 3.66,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mIN2PxRJd951ZKo4Vnf4NFzhcDB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9oUjuI9auL0j9MvBLZlb1sbprsJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 980962,
+    "ru": "淫絶夫人　快楽の奥",
+    "en": "淫絶夫人　快楽の奥",
+    "year": 1976,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 3.47,
+    "genres": [
+      "драма",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ckuV1pyTiuvGnsJCsWpdgFPlGia.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9nonaejScL2nUkJkgyjnJuOarno.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 387839,
+    "ru": "전원일기: 젖소농장새댁",
+    "en": "전원일기: 젖소농장새댁",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 3.35,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bWtWi0ka8mRDgdCXRhv4BJE3pr4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jAulfr5KUEYPWWsq7MTbCDZCaiq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 499753,
+    "ru": "처제의 유혹",
+    "en": "처제의 유혹",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 3.29,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xGA1LHCdxwjQwqRavFXlveS0Hvg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tjdiZm53X10lIpekzOta4y7ZgGS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 240250,
+    "ru": "Fourplay - Live in Cape Town",
+    "en": "Fourplay - Live in Cape Town",
+    "year": 2009,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 2.59,
+    "genres": [
+      "музыка"
+    ],
+    "overview": "Концерт знаменитой группы в ЮАР.",
+    "poster": "https://image.tmdb.org/t/p/w342/7SXTH4Li4m9o1GYi8dpfQs2bsTq.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 589194,
+    "ru": "일상의 관계",
+    "en": "일상의 관계",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 2.46,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8Sfa8fvYkAMYKST3XgqrddoXX6P.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qwc5azukcuWkhQ5qTpXCaWgzsr8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 515134,
+    "ru": "తోడికోడళ్ళు",
+    "en": "తోడికోడళ్ళు",
+    "year": 1957,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 2.45,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ylF9VEd7JIE5aONEguXoXBTNY4Z.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ibzZwhtIZ1iYuNookSFVAieG4xC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1054802,
+    "ru": "び太と未来ノート",
+    "en": "び太と未来ノート",
+    "year": 1994,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 1.9,
+    "genres": [
+      "мультфильм",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fCi1IuxDF8RMVPl2SylhUWxHSg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7yeFDWjhOmnDJhiRVuJGBZumS5V.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 511042,
     "ru": "El debut",
     "en": "El debut",
@@ -10082,297 +10336,5 @@
     "poster": "https://image.tmdb.org/t/p/w342/gEO14OFi04jAoPnSKPBxkGFBnV2.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/ctzKCslTsMRsOJNvAm1Mw8ytiHY.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": "10779",
-    "ru": "Страшилы",
-    "en": "The Frighteners",
-    "year": 1996,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1743,
-    "popularity": 4.77,
-    "genres": [
-      "ужасы",
-      "комедия"
-    ],
-    "overview": "Экстрасенс Фрэнк Бэннистер, который зарабатывает на жизнь тем, что за скромное вознаграждение успешно избавляет дома от полтергейста, который сам предварительно наслал, сталкивается со страшным противником — вернувшимся с того света, а вернее, задержавшемся на этом после казни, маньяком-убийцей. Вместе с женщиной-врачом, муж которой был убит этим олицетворением зла, Фрэнк низвергает демона в ад.",
-    "poster": "https://image.tmdb.org/t/p/w342/4ZKDHuvEsDhe0LnnutFUNgumBdy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/krR08gys45BTnY3qXIfBJVDKrvK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "171372",
-    "ru": "Фрэнк",
-    "en": "Frank",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1720,
-    "popularity": 1.38,
-    "genres": [
-      "комедия",
-      "драма",
-      "детектив"
-    ],
-    "overview": "В центре истории окажется молодой парень, жаждущий стать музыкантом и попадающий в состав эксцентричной поп-группы, возглавляет которую таинственный и загадочный Фрэнк.",
-    "poster": "https://image.tmdb.org/t/p/w342/mGzqs4CHW8LomreoPATnyrTXk7j.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jBkKw0GSAOTBsnar5RstD7MzkmL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "9667",
-    "ru": "Пиджак",
-    "en": "The Jacket",
-    "year": 2005,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1692,
-    "popularity": 2.74,
-    "genres": [
-      "драма",
-      "детектив",
-      "фантастика",
-      "триллер",
-      "фэнтези"
-    ],
-    "overview": "В 1991 году в Ираке американский солдат Джек Старкс встретился с местным подростком и получил от пацана пулю в голову. Врачи спасли Джеку жизнь, но от страшных последствий почти смертельного ранения уберечь не смогли: после дембеля начались у солдата такие глюки, что загремел он в психушку к доктору Томасу Беккеру. Этот доктор был известен тем, что назначал своим пациентам интенсивный курс лечения с помощью различных экспериментальных препаратов. Препарат произвел побочный эффект: Старкс увидел будущее…",
-    "poster": "https://image.tmdb.org/t/p/w342/z2wFU9osaBRspQn9Kk6GqyzkFv1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oMson3ThVDsgHUMbdFFyUdpLU2M.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "556694",
-    "ru": "Три тысячи лет желаний",
-    "en": "Three Thousand Years of Longing",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1660,
-    "popularity": 4.32,
-    "genres": [
-      "драма",
-      "фэнтези",
-      "мелодрама"
-    ],
-    "overview": "Британская лингвистка Алетея прилетает из Лондона в Стамбул, чтобы прочитать курс лекций по нарративу. Уже в аэропорту женщина начинает видеть загадочных существ, а когда в одной из многочисленных сувенирных лавочек покупает стеклянную бутылочку и пытается её отмыть, перед ней возникает самый настоящий джинн. Алетея не торопится загадывать три желания, ей интереснее послушать его историю. Джинн начинает свой рассказ.",
-    "poster": "https://image.tmdb.org/t/p/w342/tb3967BJu5QbZgiIh715pAigywF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/90IcDDC47Rck4D2fyZbpZ1rbFZW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_8250",
-    "ru": "Armored Trooper Votoms: Alone Again",
-    "en": "Soukou Kihei Votoms: Koei Futatabi",
-    "year": 2011,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.9,
-    "votes": 1647,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Драма",
-      "Drama",
-      "Фантастика",
-      "Sci-Fi",
-      "Меха",
-      "Mecha",
-      "Военное",
-      "Military"
-    ],
-    "overview": "Chirico visits an oasis town and meets Gotho and his friends for the first time in 32 years.",
-    "poster": "https://cdn.myanimelist.net/images/anime/4/82162l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "mal_20969",
-    "ru": "Buddha 2: The Endless Journey",
-    "en": "Tezuka Osamu no Buddha: Owarinaki Tabi",
-    "year": 2014,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.9,
-    "votes": 1624,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Драма",
-      "Drama",
-      "Сверхъестественное",
-      "Supernatural",
-      "Историческое",
-      "Historical"
-    ],
-    "overview": "2500 years ago, in India, Siddhartha was born as a prince of the Shakya clan, but he gives up his position as a prince to see the world. While he travels he meets a strange boy named Assaji, who can predict the future and a monk with only one eye. Overwhelmed by the sufferings he witnesses around him, Siddhartha strives to restore peace. Meanwhile, Prince Ruri of Kosara begins his attack on the Shakya clan. \n\n(Source: IMDB)",
-    "poster": "https://cdn.myanimelist.net/images/anime/1264/112847l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "734265",
-    "ru": "Неуловимый аромат любви",
-    "en": "Love Hard",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1611,
-    "popularity": 1.8,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Журналистке из Лос-Анджелеса Натали постоянно не везет в любви. Она пытается устроить личную жизнь с помощью приложения для знакомств и влюбляется в Тэга. Ради него Натали едет через всю страну, чтобы сделать парню сюрприз на Рождество. Но, приехав в город, девушка понимает, что ее возлюбленный не тот, за кого себя выдавал.",
-    "poster": "https://image.tmdb.org/t/p/w342/vxQPai6mUY8QEtrODkfdf2sAxmB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pa0Mq5rGm2QnzdpFmugTu4Mghf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 152737,
-    "ru": "Август",
-    "en": "August: Osage County",
-    "year": 2013,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1592,
-    "popularity": 2.32,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Штат Оклахома. Август месяц. Беверли Уэстон — поэт, погрязший в пьянство, в то время как его жена Вайолет, страдающая от рака ротовой полости, пристрастилась к наркотикам. Беверли решает нанять для Вайолет сиделку и повара…",
-    "poster": "https://image.tmdb.org/t/p/w342/rgNYKlwQKFPD1n6tTJbVu0qPLZ5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/svxDWCRGn4AWbOePNE5Fmdsjf6q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "484482",
-    "ru": "Непотопляемые",
-    "en": "Le Grand Bain",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1590,
-    "popularity": 1.33,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "Настоящие мужчины никогда не сдаются, и если уж решили чем-то всерьез увлечься, то их ничто не остановит. Вот и во Франции великолепная семерка собирается вместе, чтобы сбежать от тягот обыденной взрослой жизни совершенно неожиданным образом. Ведь когда проблемы тянут ко дну, важно оставаться непотопляемыми!",
-    "poster": "https://image.tmdb.org/t/p/w342/krFeie4LnPIS2v2jvLHT4qli4KG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hljeAZsHfXScqbHsAmxUGqcCx8L.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "135397",
-    "ru": "Мир юрского периода",
-    "en": "Jurassic World",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 21589,
-    "popularity": 13.53,
-    "genres": [
-      "приключения",
-      "фантастика",
-      "триллер"
-    ],
-    "overview": "Тысячи людей спешат увидеть Мир Юрского периода, но безопасное на первый взгляд развлечение может обернуться угрозой для их жизней.",
-    "poster": "https://image.tmdb.org/t/p/w342/nSUyxiLlf9qHDiQH5LmCQQK62WX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s5QfDFqRO6sjgPtKkjxD0WqXQef.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "291805",
-    "ru": "Иллюзия обмана 2",
-    "en": "Now You See Me 2",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 11588,
-    "popularity": 10.05,
-    "genres": [
-      "криминал",
-      "триллер"
-    ],
-    "overview": "«4-ре всадника», команда лучших иллюзионистов мира, снова в сборе! Их «магия» стала еще совершеннее, а враги - опаснее. На сей раз им предстоит спасти свою репутацию и вывести на чистую воду жёстокого техномагната...",
-    "poster": "https://image.tmdb.org/t/p/w342/jzm3Pmp1uaFCDo0NrA0Tn98Ddda.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oFQilRMEq6yQbtMPxIYWpXeQ5ZN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1007734",
-    "ru": "Никто 2",
-    "en": "Nobody 2",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1582,
-    "popularity": 12.6,
-    "genres": [
-      "боевик",
-      "триллер",
-      "комедия"
-    ],
-    "overview": "Хатч Мэнселл, семьянин из пригорода и бывший профессиональный убийца, больше не может скрываться от своего опасного прошлого после предотвращения нападения дома. Постепенно раскрываются секреты не только Хатча, но и его жены Бекки.",
-    "poster": "https://image.tmdb.org/t/p/w342/744AMzuqzCxVWhjQEZVHxUIhzd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/82C04rTiXYZ7c8XZv91Nu53w82Y.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_89247",
-    "ru": "Бэтвумен",
-    "en": "Batwoman",
-    "year": 2019,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 1579,
-    "popularity": 12.93,
-    "genres": [
-      "НФ и Фэнтези",
-      "Боевик и Приключения"
-    ],
-    "overview": "Кэти Кейн — дочь владельца частной охранной компании, которую с позором выгнали из армии. Она возвращается в родной Готэм, лишенный защиты Бэтмена — Тёмный рыцарь пропал без следа три года назад. Пока в городе орудует жестокая банда, Кэти при поддержке гениального Люка Фокса вынуждена взять на себя защиту невинных и стать Бэтвумен.",
-    "poster": "https://image.tmdb.org/t/p/w342/hFD0bUuGd2JjdclnRqoFkMQ2p6i.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8vNQ3i2Xa3mrCKn6eq2ce5hhegT.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_43694",
-    "ru": "Rilakkuma's Theme Park Adventure",
-    "en": "Rilakkuma to Yuuenchi",
-    "year": 2022,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.9,
-    "votes": 1578,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Повседневность",
-      "Slice of Life",
-      "Антропоморфные",
-      "Anthropomorphic",
-      "Исцеляющее",
-      "Iyashikei",
-      "Для детей",
-      "Kids"
-    ],
-    "overview": "Grab your tickets and get in line for a new series of stop-motion adventures with Rilakkuma and Kaoru! Join Rilakkuma, Korilakkuma, Kiiroitori, and Kaoru as they explore an amusement park in its closing hours when Rilakkuma's Theme Park Adventure arrives next year.\n\n(Source: Netflix)",
-    "poster": "https://cdn.myanimelist.net/images/anime/1193/127386l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
   }
 ]

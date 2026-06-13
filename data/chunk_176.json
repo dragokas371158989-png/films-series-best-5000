@@ -1,5 +1,275 @@
 [
   {
+    "id": 1140100,
+    "ru": "Over The Red River",
+    "en": "Over The Red River",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nQ60L7HHTR1kvEmde3AfqLiDxpS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tcgLIeA8JDk8kQQ24WAgRiHloFZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1293598,
+    "ru": "新作歌舞伎『流白浪燦星』",
+    "en": "新作歌舞伎『流白浪燦星』",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "история",
+      "криминал",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yWHir8wHMXhCp8iqjpLbxymS1hf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uCC2mtLZTOO1CvBgN9RjLfv9Wiy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1365037,
+    "ru": "狂暴之旅",
+    "en": "狂暴之旅",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "боевик",
+      "криминал",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tvrBlT6fqFOCadsBWwFjS9KLWrj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dcvqm6pecRLMlj8T7ZKJlCUgAyi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1336767,
+    "ru": "夺宝寻龙: 北冥鲲宫",
+    "en": "夺宝寻龙: 北冥鲲宫",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "приключения",
+      "боевик",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/p4tp3RGtUQno2VU5hCsq7loFB12.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2PHr07rPBS7pMqpQbeN9IMvAUoI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1212238,
+    "ru": "Nick and Nicky",
+    "en": "Nick and Nicky",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/f4Q8eOeP9jnyNpRVlFt5rugofLW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bp18rtiwLotDBkiBOjjbCLfxbGr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 942386,
+    "ru": "தி ஸ்மைல் மேன்",
+    "en": "தி ஸ்மைல் மேன்",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "криминал",
+      "детектив",
+      "триллер",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/jBEnBBDyAdwN1MGdhW3FK9WwDbH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/r1xx1HzUxlSozLFjlewPmMirgNc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1503010,
+    "ru": "Lumeon Lands",
+    "en": "Lumeon Lands",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "приключения",
+      "комедия",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nn0jS4MPNoZfl5CbHKiJ1pwVN6k.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lesLb2ihr1qsBdzf46Pg10ZFnCV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1313216,
+    "ru": "幻日のヨハネ -SUNSHINE in the MIRROR- 劇場総集編",
+    "en": "幻日のヨハネ -SUNSHINE in the MIRROR- 劇場総集編",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "фэнтези",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/jZSa2wSkNiYyfA5gezYkSFQ1h5T.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pykKsgqbmTo0POvnuBEQqegxf5c.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1359582,
+    "ru": "Titanus 1904",
+    "en": "Titanus 1904",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9iUKEMjr2wF8eXTwlJtb8ZMyvuf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/n4vcTSKZrbqpXxRVPIUukPrsqDV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1641778,
+    "ru": "Young People of Ireland",
+    "en": "Young People of Ireland",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "драма",
+      "комедия",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/baRKaGSCFpq2I5ueM6l7h1oU2XZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fOm6670eB2zh2UIH1itv5wNGoRf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1315993,
+    "ru": "Das Märchen von der silbernen Brücke",
+    "en": "Das Märchen von der silbernen Brücke",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "фэнтези",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xIg8xOjBqvscza4iGbkbIvXreOm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kAzDH6BnjqgJX7lPSfJAQ1LIKDu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1175252,
+    "ru": "Pousada Sonhar",
+    "en": "Pousada Sonhar",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "ужасы",
+      "драма",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/cLT2omlSj7thuhWFaD3vQ8PouCD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dZ4IxtpJlplHHImyCHfuO2WG6cc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1005176,
+    "ru": "Mohammad Saadh",
+    "en": "Mohammad Saadh",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2OoA8smBHHhFu12TdTQG1mhsHf1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iPR7sVcciVEm4pA40aQnMgw0em7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1070826,
+    "ru": "Despide a tu fuckboi",
+    "en": "Despide a tu fuckboi",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mIQhIj0JMqGD0I1LACgEqdM7IJd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eiZBzZh2REp3UvYL0c2wWQMAyCI.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1032953,
     "ru": "شماريخ",
     "en": "شماريخ",
@@ -8942,260 +9212,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/7FQVLBfvKovrpfYoeeDgXeQ2sQe.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/lm0FjVm0jGyYIQ7pGquYHaRl0zv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1547670,
-    "ru": "Fading at Dawn",
-    "en": "Fading at Dawn",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lFxrMjAJVhmF3J7tJWzKg1ib73r.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1uPXawzg425GVtGqGmHInYDTBYe.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1635059,
-    "ru": "Идрак Мирзализаде: Концерт в клубе Lokal",
-    "en": "Идрак Мирзализаде: Концерт в клубе Lokal",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Стендап написан на открытых микрофонах и проверочных концертах стендап клуба Lokal в Варшаве. Доработан в туре «Мой второй сын».",
-    "poster": "https://image.tmdb.org/t/p/w342/3zkhq4rkoP5zJWrRG9czQToTinG.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1634668,
-    "ru": "Сеть",
-    "en": "Сеть",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "О том, как интернет влияет на каждого из нас. Специалисты по кибер-безопасности, психологи и священники рассказывают о том, какую опасность несет в себе погруженность в виртуальную реальность и как зависимость от интернета ломает судьбы людей.",
-    "poster": "https://image.tmdb.org/t/p/w342/dRdAJ0qaxF81nZibvvGZPUwVdE8.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1649185,
-    "ru": "A las ocho en casa",
-    "en": "A las ocho en casa",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/sGk2GNwww2UpG0WOWzXJXBM77J4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iUUWUtNHkyUwJzrTYDPoP4CUjUF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1449056,
-    "ru": "Snapshot",
-    "en": "Snapshot",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/cjek01BkcKlTQuUbZHPZlLXS22W.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9burYB54QVi4Rn2eYCnWGEo4WHb.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1604075,
-    "ru": "You Do Not Exist",
-    "en": "You Do Not Exist",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bcKoiJVb5jQ40h2LLEO4DZ2jQsI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7KYsRQaS67Ze7TZoqSerPFUmud0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1442947,
-    "ru": "Жемчуг",
-    "en": "Жемчуг",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "драма",
-      "комедия",
-      "семейный"
-    ],
-    "overview": "Крупная металлургическая компания, в которой работает москвич Роман Мухин, опекает детский дом в Ханты-Мансийске. Руководство компании рекомендует Роману взять на попечение ребенка из этого приюта. Елена, жена Романа, не против – она думает, что еще один ребенок (у пары есть старший сын Олег) укрепит их брак. Выбор падает на 11-летнюю Марту Чемесову. Марта не хочет уезжать из Ханты-Мансийска, потому что там живет ее бабушка, которая очень любит внучку, но, понимая, что сама уже не в силах о ней заботиться, она дает добро на опеку. Марта переезжает в Москву. Поначалу все участники истории полны энтузиазма, однако, несмотря на совместное путешествие в Индию, куда Марта всегда мечтала попасть, стать настоящей семьей оказывается сложнее, чем Елена и Роман могли себе представить…",
-    "poster": "https://image.tmdb.org/t/p/w342/xBZPars7iswbYTgFaNmG8zX7DZM.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1626590,
-    "ru": "A Touch of Distinction",
-    "en": "A Touch of Distinction",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "вестерн"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aGqD4mZRbKzVSEyROduRN8P5LCz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fU9DT2JuCB4ggKMSRS5645mUPgU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1648710,
-    "ru": "Medora: Empress of the Badlands",
-    "en": "Medora: Empress of the Badlands",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "драма",
-      "вестерн"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mQZ4hxocf4JrAUyK5vVsQEkuJD8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lBhK7S0jMciZ3SyNgpBvpkpUBaY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1568607,
-    "ru": "Konduktorių gatvėje",
-    "en": "Konduktorių gatvėje",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mZrg5eJkXkQcZxHBBU2PLMi1pTb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zkZ5yGprfnJyV8SRzss9vfOnTLN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1624042,
-    "ru": "Саша Незлобин: Думай как миллионер",
-    "en": "Саша Незлобин: Думай как миллионер",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Сольный стендап-концерт Саши Незлобина, записанный в 2025 году в Сан-Хосе (США).",
-    "poster": "https://image.tmdb.org/t/p/w342/rAj4FXSYNDngoWYvuyweBS1LL8I.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1616256,
-    "ru": "The Sandbox",
-    "en": "The Sandbox",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ivDelzVqxhBb0TAELCqAUQk0sPa.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/145vdph790oCZcybZJHcer5J6iY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1646739,
-    "ru": "Dead or Dying",
-    "en": "Dead or Dying",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iXUwzFCNc9bNfkEz6EIsdf2blog.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hCIXhwg43hJifiuG0VTNIL0Gv2K.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1056726,
-    "ru": "Puddysticks",
-    "en": "Puddysticks",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4fVwWjiMo5iHNd4lugSt9o0tiln.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uvSKQ72ufJdlVbV4K9Od4TUxdsU.jpg",
     "source": "tmdb"
   }
 ]

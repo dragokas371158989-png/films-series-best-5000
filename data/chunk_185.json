@@ -1,5 +1,272 @@
 [
   {
+    "id": 1661127,
+    "ru": "She Fell Asleep and Dreamt of a Library",
+    "en": "She Fell Asleep and Dreamt of a Library",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "ужасы",
+      "комедия",
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rX4pnwN6aBUl9v5hfdfPh9DpDDh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wY0qGkeTT6W4kG4xLWBEpcTGOSY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1651997,
+    "ru": "The Coronation",
+    "en": "The Coronation",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/taFG4fedR9TsmgEsngteeQkmxmT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hKozLWDeqqWrBr1YVRUNLUu0hii.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1601950,
+    "ru": "De let'en! - Da it'en!",
+    "en": "De let'en! - Da it'en!",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "документальный",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xsx5C3laAJmCb7MPk1X5AoWrQxf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yCyiGhnDt0aOa6z3zA76q1DZnpj.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1678806,
+    "ru": "Bless",
+    "en": "Bless",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4M3muDtzlYLslw7g8UG89QrS4t8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dS6kTQtxDAPyzvrrHsBlCFpj2YJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1678612,
+    "ru": "Trip and Chadwick: Code Pink",
+    "en": "Trip and Chadwick: Code Pink",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "комедия",
+      "приключения"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gMHWRJvG3XC1v7a8zjsnQy7FbFj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fJiTkmVQQIbQSXnloJXgGCFhqTD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1664292,
+    "ru": "Min Vän Döden",
+    "en": "Min Vän Döden",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "драма",
+      "фэнтези",
+      "триллер",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aj7NiyB8yAva5kvPgjI24qqnBRr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yaat7nOStj8ibEWkK9FStUd2LVJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1658524,
+    "ru": "怪屋",
+    "en": "怪屋",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "ужасы",
+      "триллер",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ea1hDCOeKgSYPbJk2pIK6vIHVQQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2EjcsKrOgjTvaZEwmP9eqsEhCss.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1651317,
+    "ru": "Yo tengo dos papás",
+    "en": "Yo tengo dos papás",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/p3qkFvGksVteDziLm4hKPhLjpKS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jd47lPPQKLk38vYcWTXi7dXxTIo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1529908,
+    "ru": "Sjeti se moje pjesme",
+    "en": "Sjeti se moje pjesme",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "документальный",
+      "история",
+      "военный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qcALPHJkIzg3AoVH2a4zVQVJ0Uo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lXwcFJktKfCi9FBXhEKv1l45FAI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1636712,
+    "ru": "Зсередини",
+    "en": "Зсередини",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tXX8mutVqcV5StvvGicWYCKiJpG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hdJj5fS7zLz5Dygd588dBkSKkdh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1667098,
+    "ru": "Jamie: Pero tú no lo sabes",
+    "en": "Jamie: Pero tú no lo sabes",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/MrllyM43zMh0jOpEaNn2VzzNDY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fby5QYi21OpuVmP9IIxgDDszrTR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1643651,
+    "ru": "CITY: Het verhaal van een familiebioscoop",
+    "en": "CITY: Het verhaal van een familiebioscoop",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "документальный",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ux2R8mOhhKvkBXNfnwVfFe99e8O.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/FGeCRICnzzd1iDaGcdJdhTlEEW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1670223,
+    "ru": "Never Seen",
+    "en": "Never Seen",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "триллер",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/cKgptQXN5EyHvDqkELbPeYCzBZs.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s7W6eQZ0eewldz59EGsYPNBx4QR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1632741,
+    "ru": "Flores",
+    "en": "Flores",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "фэнтези",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dm0dkEX5KzPTq4datCW947tYkX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vifot0KnPrgVKoV9iH6Ipo4eaCp.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1438306,
     "ru": "WWE WrestleMania 42 Sunday - Post-show",
     "en": "WWE WrestleMania 42 Sunday - Post-show",
@@ -8759,253 +9026,6 @@
     ],
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/rMg3BFUKs8IaekSJgMT1IYmypk.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1465559,
-    "ru": "Anima",
-    "en": "Anima",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.98,
-    "genres": [
-      "фантастика",
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/h2IJpK2OwyXbVQekIHdUznXlTSo.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1705479,
-    "ru": "에리카: 은밀한 거래",
-    "en": "에리카: 은밀한 거래",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.98,
-    "genres": [
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9sICjsClLMV6T6FbtGaM69qgCN2.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1429646,
-    "ru": "Napoleonic Code",
-    "en": "Napoleonic Code",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.98,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uP66K1YUDUWkUWPGBvBicEOyM0h.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1106559,
-    "ru": "4인 4섹",
-    "en": "4인 4섹",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.98,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qrxgIoHbQI3ADTg5yW3v1kwpZXh.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1250441,
-    "ru": "Amityville Apocalypse",
-    "en": "Amityville Apocalypse",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.98,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jm1dHEitIjMqYWI9ey41rIkj5Sb.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1312908,
-    "ru": "DumbFellas",
-    "en": "DumbFellas",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.98,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/o0GjqhL5qaAwCILy4nzs6HLDv2p.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 853578,
-    "ru": "Vaxandi tungl",
-    "en": "Vaxandi tungl",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.98,
-    "genres": [
-      "семейный",
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/m6Acs2FFBiNv9WnFGT9NIseZdxR.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1131119,
-    "ru": "Nos urgences",
-    "en": "Nos urgences",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.97,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/p0EKRlLAji1mtQMOsI3fKByU2t3.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 745554,
-    "ru": "信念一生",
-    "en": "信念一生",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.97,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/a6VwHXYrQAM7KNfGci0zvUH7gsu.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1277016,
-    "ru": "Η βασίλισσα των ουρανών",
-    "en": "Η βασίλισσα των ουρανών",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.96,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zY2vIC5q9waeSKDrYjAQnP6CyTz.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 315626,
-    "ru": "為你鐘情",
-    "en": "為你鐘情",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.96,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ogZchbxdFmMQRJoGIq5C8PEKPUX.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1470995,
-    "ru": "어린자매들 남자공유법",
-    "en": "어린자매들 남자공유법",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.96,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/636honbGs2RuXTs0GRkwfpj9ILY.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1271435,
-    "ru": "When Sex On TV Goes Horribly Wrong",
-    "en": "When Sex On TV Goes Horribly Wrong",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.96,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eLosNW8Dtx8E4VJUCvsbQfKXcwR.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1400144,
-    "ru": "Special Dad",
-    "en": "Special Dad",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.96,
-    "genres": [
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/j9tg7ENSErmnCcOtUKptr2lq2k5.jpg",
     "backdrop": "",
     "source": "tmdb"
   }

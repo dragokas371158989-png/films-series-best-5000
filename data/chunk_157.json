@@ -1,5 +1,272 @@
 [
   {
+    "id": 951547,
+    "ru": "Легенда о Куньлуне",
+    "en": "发丘天官：昆仑墟",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 8,
+    "popularity": 0.43,
+    "genres": [
+      "фэнтези",
+      "боевик",
+      "приключения",
+      "фантастика"
+    ],
+    "overview": "Чжан Вэньфэнь (Тим Пэй) – охотник за сокровищами из секты Фацю, который посвятил свою жизнь поискам отца (Майкл Тун). Тот когда-то отправился в Куньлуньские горы помогать японцам в поисках легендарного затерянного города и не вернулся оттуда, и Вэньфэнь пытается узнать, что с ним случилось. Путь к городу ищет и японка Риоми (Ариэль Ань), которая пытается привлечь к своим поискам команду Вэньфэня.",
+    "poster": "https://image.tmdb.org/t/p/w342/9DeA3mAJ20Ep5cWBsCaB6wwdV7p.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/x6GaHpFM450sbZwbF7TEC0ltwtn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1145758,
+    "ru": "Birder",
+    "en": "Birder",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 8,
+    "popularity": 3.11,
+    "genres": [
+      "триллер",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/h3N0NwMV1GyxOrtSwABQDqqA74.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/A6ki5Sk12qgFvejikLv16kmqxqk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1396371,
+    "ru": "Les irresponsables",
+    "en": "Les irresponsables",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 8,
+    "popularity": 1.15,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kq48E5i40mGlIZU2pc5Q4E9jEAs.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/d8rFsRuL5uDmlPg9gTBpe2pwCyw.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 635489,
+    "ru": "Не расставаясь с мечтой",
+    "en": "Full Count",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 8,
+    "popularity": 1.3,
+    "genres": [
+      "драма",
+      "фэнтези"
+    ],
+    "overview": "Череда несчастных событий вынуждает Милтона отказаться от своей мечты играть в бейсбол и вернуться домой в город, откуда он изо всех сил пытался сбежать. Оказавшись дома, Милтон сталкивается с разными трудностями, одна из которых может отправить его в тюрьму на всю жизнь.",
+    "poster": "https://image.tmdb.org/t/p/w342/egoplVifGS5bZWpzsqr7EpeILXc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wb1iLdAuDDWtevcILezTEtgCZAj.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 60733,
+    "ru": "Elias og jakten på havets gull",
+    "en": "Elias og jakten på havets gull",
+    "year": 2010,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 8,
+    "popularity": 0.3,
+    "genres": [
+      "мультфильм",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7AnoGPzQBq5Wm9npOBCcx1Dh4Ke.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lo5KeCPjAMphk1FwXoNYRX7b0Sr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 378970,
+    "ru": "രാജമ്മ @ യാഹൂ",
+    "en": "രാജമ്മ @ യാഹൂ",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 8,
+    "popularity": 0.41,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9ZmPAmqgvkh7RjLd0kIWN5KSleu.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1226293,
+    "ru": "Salitan",
+    "en": "Salitan",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 7,
+    "popularity": 48.36,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rMgG7cWuq9O6zhhLs2CbqIKVA8V.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/emK2hOB6ACiExT0lNLog9lAmMFL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1112564,
+    "ru": "Приди учитель",
+    "en": "வா வாத்தியார்",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 7,
+    "popularity": 2.02,
+    "genres": [
+      "комедия",
+      "боевик"
+    ],
+    "overview": "Рамешварана, воспитанный дедом как духовное перерождение его кумира — актёра-героя MGR, предал идеалы, став циничным и коррумпированным копом. Его рутина рушится, когда в городе объявляется банда хакеров, срывающая маски с сильных мира сего. Именно его назначают их найти и обезвредить. Однако вскоре расследование принимает личный оборот: с наступлением темноты им овладевает дух Ваатияра, бесстрашного персонажа из фильмов MGR. Ночное альтер-эго вершит правосудие и спасает невинных, а утром Раму очнувшись не помнит о своих подвигах. Захваченный в ловушку между долгом и судьбой, он вынужден охотиться на того, кто живёт в нём самом...",
+    "poster": "https://image.tmdb.org/t/p/w342/hb1YWskm1H2YwNj2KF2BGWgLA58.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qPNIwdR3y965KMsiweyuXdjDRXR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 660337,
+    "ru": "Атарраби и Микелац",
+    "en": "Atarrabi & Mikelats",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 7,
+    "popularity": 1.54,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Современная адаптация баскской легенды про двух братьев - сыновей Матери Земли, которых отдают на воспитание дьяволу.",
+    "poster": "https://image.tmdb.org/t/p/w342/7sqfz6ghmzudLADL2l3JDcSRfb9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nYoFhxq3WOL7NotlkGkczp8xdF9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1197031,
+    "ru": "Съезд не туда",
+    "en": "Off Ramp",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 7,
+    "popularity": 0.48,
+    "genres": [
+      "приключения",
+      "комедия",
+      "криминал"
+    ],
+    "overview": "Пара милых, не самых умных добряков-джаггало должны проехать через настоящее американское пекло, чтобы добраться на съезд джаггало, ведь это единственное место, где они чувствуют себя как дома.",
+    "poster": "https://image.tmdb.org/t/p/w342/38HZo9a39knZEX0rv4kyWjOigJZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lF56IyBeLJNwIpfdvgFJHlKLXBT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 994741,
+    "ru": "百合の雨音",
+    "en": "百合の雨音",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 7,
+    "popularity": 1.34,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/50ZHtnZeLojHHW3x08FBTSqBmuq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/o18dPLaGmqpKXSk1KlM70pzhsR3.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1043887,
+    "ru": "Badass Ravi Kumar",
+    "en": "Badass Ravi Kumar",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 7,
+    "popularity": 1.17,
+    "genres": [
+      "боевик",
+      "музыка",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4PHX3qbWQgez4aMN95S8YnFAlnF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uw8XD7pck9LChp1QbNuTzMY7YuT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1168715,
+    "ru": "BJJ: Woman on Top",
+    "en": "BJJ: Woman on Top",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 7,
+    "popularity": 0.89,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/18NhtV7JyffD23L1CKfuQijex0g.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/r9S8NeS9iTQalegyHiYmkA1byQX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 739997,
+    "ru": "Goodbye Seventies",
+    "en": "Goodbye Seventies",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.7,
+    "votes": 7,
+    "popularity": 0.81,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rwJY7y8LzhDJgRV3z1V3wOXYqxW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9pn6E7W3sjHj276KGvlHlpUd2ur.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1547920,
     "ru": "The Snow Must Go On",
     "en": "The Snow Must Go On",
@@ -9272,269 +9539,6 @@
     ],
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/2zBsCHPqXpXFFT0EfrAJGaiYiNF.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 290724,
-    "ru": "Ждущий выхода",
-    "en": "Waiting for the Out",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 1.32,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Дэн исследует свое прошлое, связанное с заключенными отцом, братом и дядей. Работа в тюрьме вызывает у него страх, что он тоже окажется за решеткой. Его растущая одержимость подвергает опасности его самого и его семью.",
-    "poster": "https://image.tmdb.org/t/p/w342/7e10bTKGK1TwHgxEl06lMCTerAI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/snOMxLdkkfbpVC9YqejhvfJhUvs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 709334,
-    "ru": "Безымянный и Динамит",
-    "en": "No Name and Dynamite",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 0.53,
-    "genres": [
-      "вестерн"
-    ],
-    "overview": "Грань между хорошими парнями и плохими парнями стирается, когда безжалостные охотники за головами прокладывают себе путь через Дикий Запад, собирая награды и наживая больше врагов, чем друзей. Теперь, когда преступник Джон Уилкс Бут в бегах, а золото спрятано в горах, справедливость должна восторжествовать.",
-    "poster": "https://image.tmdb.org/t/p/w342/5kTyrSsJNfVmlc8S2FQ02fLLsQw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9NDiFyiMYcQHFGYZIKtL6w3JoAl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 882898,
-    "ru": "Рики Велес: Обо всём понемногу",
-    "en": "Ricky Velez: Here's Everything",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 0.44,
-    "genres": [
-      "комедия",
-      "телевизионный фильм"
-    ],
-    "overview": "Искрометное выступление актера и комика Рики Велеса. Издание Variety внесло артиста в список «Десять комиков, которых стоит посмотреть». В своем первом спешле Рики сполна оправдывает розданные ранее авансы и показывает самобытный и очень честный юмор. Продюсером его сольного выступления стал именитый комедиограф Джадд Апатоу.",
-    "poster": "https://image.tmdb.org/t/p/w342/5XFsFIsnHaaIsfjoCGMs5N26pm6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1Glsr13h76eXUFrHzifUiHqGMOu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1497348,
-    "ru": "Alas Roban",
-    "en": "Alas Roban",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 23.27,
-    "genres": [
-      "драма",
-      "ужасы",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dtJmnGZYuA2Ngnj3iv0T9EqCHBH.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5Q2CWHZTk48lb8QOMninYmzUfvc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1241743,
-    "ru": "Kapalit",
-    "en": "Kapalit",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 2.63,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/s58sRbuoAojLFDZW8tUaTzpv7aB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xTYzXsIwf4qypnNRkSpkiHE3O30.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1404320,
-    "ru": "特工狂花2：蜜桃杀机",
-    "en": "特工狂花2：蜜桃杀机",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 2.36,
-    "genres": [
-      "боевик",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9D8v1zS9qsvekrMiQPjVqYlJz0L.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/su40GoVmKOLQGrFAXcvV2qd625H.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1582328,
-    "ru": "Sonunda Sen",
-    "en": "Sonunda Sen",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 1.66,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mnBW7o8ycDi8WotGeRkGoDxrNMd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yt7kUJ42heOePCPAdzvsAZP7lJH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 701840,
-    "ru": "Madrid, int.",
-    "en": "Madrid, int.",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 0.81,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tTeM1efX2sXf4IS3VvpQL6Xswc6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5FbOsUQNMMA0sGKUqfgw97bYTW5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 764135,
-    "ru": "பிஸ்கோத்",
-    "en": "பிஸ்கோத்",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 0.8,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8QZ8G9kcc0Vrdi0tee59FZrdIyB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hm4bQJRFKjjGPC1UZaHwI7Q0YLt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1249608,
-    "ru": "好运来",
-    "en": "好运来",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 0.65,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7TE7drVKGH08Y6kIUGt6pBLG2wr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5LOXUywFm9TnvoEMCx44cdBG2ny.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1179283,
-    "ru": "കൊണ്ടല്‍",
-    "en": "കൊണ്ടല്‍",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 0.56,
-    "genres": [
-      "боевик",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zLbnXZWIzKU9pmrGdzuwkHluGz9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uQ1qsmcOc7gyN8AePrC2NboSgT7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 810128,
-    "ru": "Genesis Code",
-    "en": "Genesis Code",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 0.54,
-    "genres": [
-      "драма",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xj7VuN5dRhWe7FaP3SLuZQSZR00.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hJIkLncU6yt5HB80Ry2qjAQsyPB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 701082,
-    "ru": "民间奇异志",
-    "en": "民间奇异志",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 0.52,
-    "genres": [
-      "боевик",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1B0gns8DaWpA6GnEjNhIbxogVkM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9LhloafxOQn5j9qND7qZKxpIqCB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 768167,
-    "ru": "Рождественский переворот",
-    "en": "A Wrestling Christmas Miracle",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.6,
-    "votes": 5,
-    "popularity": 0.37,
-    "genres": [
-      "семейный",
-      "комедия"
-    ],
-    "overview": "Одиннадцатилетний непобедимый борец, Кейс Габриэль уходит из спорта, чтобы снять фильм. Он уверен, что смешной фильм пробудит его друга от комы на Рождество. За неделю до Рождества недовольные, неуклюжие актеры крадут единственный носитель с фильмом.",
-    "poster": "https://image.tmdb.org/t/p/w342/3lz97Qb5QunfyoMkjpj1kvtxSl8.jpg",
     "backdrop": "",
     "source": "tmdb"
   }
