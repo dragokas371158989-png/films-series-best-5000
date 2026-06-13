@@ -625,3 +625,241 @@ def main():
     print(f"count={len(items)}")
     print(f"pages_all={pages['all']['pages']}")
 if __name__=="__main__": main()
+
+
+# === GKM V35 RU TITLE TRANSLATOR BUILDER HELPERS ===
+def gkm_pick_ru_title_v35(item):
+    if not isinstance(item, dict):
+        return ""
+    keys = [
+        "title_ru", "ruTitle", "russian", "name_ru", "titleRu",
+        "original_title_ru", "altTitleRu", "nameRu"
+    ]
+    for k in keys:
+        v = item.get(k)
+        if isinstance(v, str) and any("а" <= ch.lower() <= "я" or ch.lower() == "ё" for ch in v):
+            return v.strip()
+    for k in ("aliases", "names", "alt_titles", "alternative_titles"):
+        arr = item.get(k)
+        if isinstance(arr, list):
+            for x in arr:
+                v = x if isinstance(x, str) else (x.get("title") or x.get("name") or x.get("value") if isinstance(x, dict) else "")
+                if isinstance(v, str) and any("а" <= ch.lower() <= "я" or ch.lower() == "ё" for ch in v):
+                    return v.strip()
+    return ""
+
+
+# === GKM V36 REAL RU TITLES HELPERS ===
+def gkm_norm_title_v36(v):
+    import re
+    s = str(v or "").lower().replace("ё", "е")
+    s = re.sub(r"\s*\(\d{4}\)\s*", " ", s)
+    s = re.sub(r"\b(tv|ona|ova|movie|special)\b", " ", s)
+    s = re.sub(r"[^0-9a-zа-яё:]+", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+def gkm_has_ru_v36(v):
+    return any(("а" <= ch.lower() <= "я") or ch.lower() == "ё" for ch in str(v or ""))
+
+GKM_RU_TITLE_MAP_V36 = {
+    "demon slayer": "Истребитель демонов",
+    "kimetsu no yaiba": "Истребитель демонов",
+    "one piece": "Ван-Пис",
+    "naruto": "Наруто",
+    "bleach": "Блич",
+    "attack on titan": "Атака титанов",
+    "jujutsu kaisen": "Магическая битва",
+    "solo leveling": "Поднятие уровня в одиночку",
+    "chainsaw man": "Человек-бензопила",
+    "death note": "Тетрадь смерти",
+    "one punch man": "Ванпанчмен",
+    "my hero academia": "Моя геройская академия",
+    "that time i got reincarnated as a slime": "О моём перерождении в слизь",
+    "tensei shitara slime datta ken": "О моём перерождении в слизь",
+}
+
+def gkm_apply_ru_title_v36(item):
+    if not isinstance(item, dict):
+        return item
+    ru = ""
+    for k in ("title_ru", "ruTitle", "titleRu", "russian", "name_ru", "nameRu", "original_title_ru"):
+        v = item.get(k)
+        if isinstance(v, str) and gkm_has_ru_v36(v):
+            ru = v.strip()
+            break
+    if not ru:
+        for k in ("title", "name", "original_title", "english", "title_en", "romaji"):
+            kk = gkm_norm_title_v36(item.get(k, ""))
+            if kk in GKM_RU_TITLE_MAP_V36:
+                ru = GKM_RU_TITLE_MAP_V36[kk]
+                break
+    if ru:
+        old = item.get("title") or item.get("name") or item.get("original_title") or ""
+        if old and not item.get("title_original"):
+            item["title_original"] = old
+        item["title_ru"] = item.get("title_ru") or ru
+        item["ruTitle"] = item.get("ruTitle") or ru
+    return item
+
+
+# === GKM V37 REAL RU TITLES HELPERS ===
+GKM_RU_TITLE_MAP_V37 = {
+  "demon slayer": "Истребитель демонов",
+  "kimetsu no yaiba": "Истребитель демонов",
+  "demon slayer kimetsu no yaiba": "Истребитель демонов",
+  "one piece": "Ван-Пис",
+  "naruto": "Наруто",
+  "naruto shippuden": "Наруто: Ураганные хроники",
+  "boruto": "Боруто",
+  "boruto naruto next generations": "Боруто: Новое поколение Наруто",
+  "bleach": "Блич",
+  "bleach thousand year blood war": "Блич: Тысячелетняя кровавая война",
+  "attack on titan": "Атака титанов",
+  "shingeki no kyojin": "Атака титанов",
+  "jujutsu kaisen": "Магическая битва",
+  "solo leveling": "Поднятие уровня в одиночку",
+  "chainsaw man": "Человек-бензопила",
+  "death note": "Тетрадь смерти",
+  "one punch man": "Ванпанчмен",
+  "my hero academia": "Моя геройская академия",
+  "boku no hero academia": "Моя геройская академия",
+  "dragon ball": "Драконий жемчуг",
+  "dragon ball z": "Драконий жемчуг Z",
+  "dragon ball super": "Драконий жемчуг Супер",
+  "black clover": "Чёрный клевер",
+  "tokyo ghoul": "Токийский гуль",
+  "hunter x hunter": "Охотник х Охотник",
+  "fullmetal alchemist": "Стальной алхимик",
+  "fullmetal alchemist brotherhood": "Стальной алхимик: Братство",
+  "fairy tail": "Хвост Феи",
+  "sword art online": "Мастера меча онлайн",
+  "that time i got reincarnated as a slime": "О моём перерождении в слизь",
+  "tensei shitara slime datta ken": "О моём перерождении в слизь",
+  "reincarnated as a slime": "О моём перерождении в слизь",
+  "mushoku tensei": "Реинкарнация безработного",
+  "overlord": "Повелитель",
+  "konosuba": "Этот замечательный мир!",
+  "kono subarashii sekai ni shukufuku wo": "Этот замечательный мир!",
+  "re zero": "Re:Zero. Жизнь с нуля в альтернативном мире",
+  "re:zero": "Re:Zero. Жизнь с нуля в альтернативном мире",
+  "spy x family": "Семья шпиона",
+  "classroom of the elite": "Добро пожаловать в класс превосходства",
+  "youkoso jitsuryoku shijou shugi no kyoushitsu e": "Добро пожаловать в класс превосходства",
+  "tokyo revengers": "Токийские мстители",
+  "blue lock": "Синяя тюрьма",
+  "haikyuu": "Волейбол!!",
+  "black butler": "Тёмный дворецкий",
+  "vinland saga": "Сага о Винланде",
+  "dr stone": "Доктор Стоун",
+  "frieren": "Провожающая в последний путь Фрирен",
+  "sousou no frieren": "Провожающая в последний путь Фрирен",
+  "hells paradise": "Адский рай",
+  "hell's paradise": "Адский рай",
+  "jigokuraku": "Адский рай",
+  "goblin slayer": "Убийца гоблинов",
+  "the eminence in shadow": "Восхождение в тени",
+  "kage no jitsuryokusha ni naritakute": "Восхождение в тени",
+  "danmachi": "Может, я встречу тебя в подземелье?",
+  "made in abyss": "Созданный в Бездне",
+  "violet evergarden": "Вайолет Эвергарден",
+  "your name": "Твоё имя",
+  "kimi no na wa": "Твоё имя",
+  "weathering with you": "Дитя погоды",
+  "tenki no ko": "Дитя погоды",
+  "suzume": "Судзумэ, закрывающая двери",
+  "mob psycho": "Моб Психо 100",
+  "mob psycho 100": "Моб Психо 100",
+  "jojo": "Невероятные приключения ДжоДжо",
+  "jojos bizarre adventure": "Невероятные приключения ДжоДжо",
+  "jojo's bizarre adventure": "Невероятные приключения ДжоДжо",
+  "berserk": "Берсерк",
+  "monster": "Монстр",
+  "cowboy bebop": "Ковбой Бибоп",
+  "samurai champloo": "Самурай Чамплу",
+  "neon genesis evangelion": "Евангелион",
+  "code geass": "Код Гиас",
+  "steins gate": "Врата Штейна",
+  "steins;gate": "Врата Штейна",
+  "erased": "Город, в котором меня нет",
+  "boku dake ga inai machi": "Город, в котором меня нет",
+  "parasyte": "Паразит",
+  "kiseijuu": "Паразит",
+  "another": "Иная",
+  "angel beats": "Ангельские ритмы!",
+  "clannad": "Кланнад",
+  "toradora": "Торадора!",
+  "your lie in april": "Твоя апрельская ложь",
+  "shigatsu wa kimi no uso": "Твоя апрельская ложь",
+  "kaguya sama love is war": "Госпожа Кагуя: в любви как на войне",
+  "kaguya-sama love is war": "Госпожа Кагуя: в любви как на войне",
+  "rent a girlfriend": "Девушка на час",
+  "kanojo okarishimasu": "Девушка на час",
+  "food wars": "В поисках божественного рецепта",
+  "shokugeki no soma": "В поисках божественного рецепта",
+  "no game no life": "Нет игры — нет жизни",
+  "the rising of the shield hero": "Восхождение героя щита",
+  "tate no yuusha no nariagari": "Восхождение героя щита",
+  "arifureta": "Арифурэта: сильнейший ремесленник в мире",
+  "the world's finest assassin": "Лучший в мире ассасин",
+  "sekai saikou no ansatsusha": "Лучший в мире ассасин",
+  "the daily life of the immortal king": "Повседневная жизнь бессмертного короля",
+  "initial d": "Инициал Ди",
+  "rurouni kenshin": "Бродяга Кэнсин",
+  "inuyasha": "Инуяша",
+  "ranma": "Ранма ½",
+  "sailor moon": "Сейлор Мун",
+  "pokemon": "Покемон",
+  "digimon": "Дигимон",
+  "beyblade": "Бейблэйд",
+  "yu gi oh": "Югио!",
+  "yu-gi-oh": "Югио!",
+  "death parade": "Парад смерти",
+  "akame ga kill": "Убийца Акаме!",
+  "noragami": "Бездомный бог",
+  "fire force": "Пламенная бригада пожарных",
+  "enen no shouboutai": "Пламенная бригада пожарных",
+  "soul eater": "Пожиратель душ",
+  "d gray man": "Ди Грэй-мен",
+  "d.gray-man": "Ди Грэй-мен",
+  "magi": "Маги",
+  "magi the labyrinth of magic": "Маги: Лабиринт магии",
+  "seven deadly sins": "Семь смертных грехов",
+  "nanatsu no taizai": "Семь смертных грехов",
+  "assassination classroom": "Класс убийц",
+  "ansatsu kyoushitsu": "Класс убийц"
+}
+
+def gkm_norm_title_v37(v):
+    import re
+    s = str(v or "").lower().replace("ё", "е")
+    s = re.sub(r"\s*\(\d{4}\)\s*", " ", s)
+    s = re.sub(r"\b(tv|ona|ova|movie|special)\b", " ", s)
+    s = re.sub(r"[^0-9a-zа-яё:]+", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+def gkm_has_ru_v37(v):
+    return any(("а" <= ch.lower() <= "я") or ch.lower() == "ё" for ch in str(v or ""))
+
+def gkm_apply_ru_title_v37(item):
+    if not isinstance(item, dict):
+        return item
+    ru = ""
+    for k in ("title_ru", "ruTitle", "titleRu", "russian", "name_ru", "nameRu", "original_title_ru"):
+        v = item.get(k)
+        if isinstance(v, str) and gkm_has_ru_v37(v):
+            ru = v.strip()
+            break
+    if not ru:
+        for k in ("title", "name", "original_title", "english", "title_en", "romaji", "japanese"):
+            kk = gkm_norm_title_v37(item.get(k, ""))
+            if kk in GKM_RU_TITLE_MAP_V37:
+                ru = GKM_RU_TITLE_MAP_V37[kk]
+                break
+    if ru:
+        old = item.get("title") or item.get("name") or item.get("original_title") or ""
+        if old and not item.get("title_original"):
+            item["title_original"] = old
+        item["title_ru"] = item.get("title_ru") or ru
+        item["ruTitle"] = item.get("ruTitle") or ru
+        item["searchTitle"] = (ru + " " + old + " " + str(item.get("searchTitle") or "")).strip()
+    return item
