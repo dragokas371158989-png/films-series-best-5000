@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v43-smart-search-typos-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v44-force-anime-sites-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -2944,142 +2944,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v43-smart-search-typos-2026-06-13";
-})();
-
-
-/* === GKM V31 YUMMYANIME EXACT ANIME-SITES BLOCK === */
-(function () {
-  const SLIME_MOVIE_URL = "https://yummyanime.tv/1204-o-moem-pererozhdenii-v-sliz-film-g1.html";
-
-  const SLIME_HINTS = [
-    "о моем перерождении в слизь",
-    "о моём перерождении в слизь",
-    "tensei shitara slime",
-    "slime datta ken",
-    "reincarnated as a slime",
-    "scarlet bond",
-    "алые узы",
-    "алые связи"
-  ];
-
-  function norm(v) {
-    return String(v || "").toLowerCase().replaceAll("ё", "е").trim();
-  }
-
-  function cleanTitle(v) {
-    return String(v || "")
-      .replace(/\(\d{4}\)/g, "")
-      .replace(/\bTV\b|\bONA\b|\bOVA\b|\bMovie\b|\bSpecial\b/gi, "")
-      .replace(/[|•·]+/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  function root() {
-    return document.querySelector("dialog[open]") ||
-      document.querySelector(".detail-modal[open], .modal[open], #detailsModal, #detailModal, .details-modal, .detail-view") ||
-      document.body;
-  }
-
-  function title(rootEl) {
-    const selectors = [".detail-title", ".modal-title", ".details-title", ".movie-title", "[data-title]", "h1", "h2"];
-    for (const s of selectors) {
-      const el = rootEl.querySelector && rootEl.querySelector(s);
-      if (!el) continue;
-      const t = cleanTitle(el.getAttribute("data-title") || el.textContent || "");
-      if (t && !/смотреть|искать|аниме-сайты|найти на сайтах/i.test(t)) return t;
-    }
-    return "anime";
-  }
-
-  function isAnime(rootEl) {
-    const text = norm(rootEl.textContent || "");
-    return /тип\s*аниме/.test(text) ||
-      text.includes("jikan") ||
-      text.includes("myanimelist") ||
-      text.includes("shikimori") ||
-      text.includes("anilist") ||
-      text.includes("anidb");
-  }
-
-  function isSlime(rootEl) {
-    const text = norm((rootEl.textContent || "") + " " + title(rootEl));
-    return SLIME_HINTS.some(h => text.includes(norm(h)));
-  }
-
-  function yummyUrl(rootEl) {
-    if (isSlime(rootEl)) return SLIME_MOVIE_URL;
-    return "https://yummyanime.tv/index.php?do=search&subaction=search&story=" + encodeURIComponent(title(rootEl));
-  }
-
-  function removeWrongButtons(rootEl) {
-    // Убираем YummyAnime из блока "Смотреть / искать видео", если он туда попал старой версией.
-    const links = Array.from(rootEl.querySelectorAll("#yummyAnimeLink"));
-    links.forEach(a => {
-      const section = a.closest("section, .links-block, .detail-block, .detail-section, div");
-      const txt = norm(section && section.textContent);
-      if (txt && txt.includes("смотреть / искать видео")) a.remove();
-    });
-  }
-
-  function findAnimeSitesButtonBox(rootEl) {
-    // Ищем именно заголовок "Аниме-сайты", а не большой родительский блок.
-    const headers = Array.from(rootEl.querySelectorAll("h1,h2,h3,h4,.links-title,.section-title,b,strong"));
-    const header = headers.find(h => norm(h.textContent) === "аниме-сайты" || norm(h.textContent).includes("аниме-сайты"));
-    if (!header) return null;
-
-    let box = header.nextElementSibling;
-    while (box && !box.querySelector("a,button")) {
-      box = box.nextElementSibling;
-    }
-
-    if (box) return box;
-
-    const parent = header.parentElement;
-    if (!parent) return null;
-    return parent.querySelector(".detail-buttons, .links-row, .buttons-row");
-  }
-
-  function ensure() {
-    const r = root();
-    if (!r || !isAnime(r)) return;
-
-    removeWrongButtons(r);
-
-    const box = findAnimeSitesButtonBox(r);
-    if (!box) return;
-
-    let btn = box.querySelector("#yummyAnimeLink");
-    if (!btn) {
-      btn = document.createElement("a");
-      btn.id = "yummyAnimeLink";
-      btn.target = "_blank";
-      btn.rel = "noreferrer";
-      btn.textContent = "YummyAnime";
-      box.appendChild(btn);
-    }
-
-    btn.href = yummyUrl(r);
-  }
-
-  let timer = 0;
-  function schedule() {
-    clearTimeout(timer);
-    timer = setTimeout(ensure, 120);
-  }
-
-  function start() {
-    ensure();
-    new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
-    document.addEventListener("click", () => setTimeout(ensure, 180), true);
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
-  else start();
-
-  window.GKM_YUMMYANIME_LINK_VERSION = "v31-yummyanime-anime-sites-exact-2026-06-13";
-  window.GKM_NO_FREEZE_VERSION = "v31-yummyanime-anime-sites-exact-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v44-force-anime-sites-2026-06-13";
 })();
 
 
@@ -4069,5 +3934,162 @@ if (document.readyState === "loading") {
   new MutationObserver(bindSmartSearch).observe(document.body, { childList: true, subtree: true });
 
   window.GKM_SMART_SEARCH_VERSION = "v43-smart-search-typos-2026-06-13";
+})();
+
+
+/* === GKM V44 FORCE ANIME-SITES FOR ALL ANIME-LIKE DETAILS === */
+(function () {
+  const YUMMY_SLIME_URL = "https://yummyanime.tv/1204-o-moem-pererozhdenii-v-sliz-film-g1.html";
+
+  const ANIME_HINTS = [
+    "аниме", "jikan", "myanimelist", "shikimori", "anilist", "anidb",
+    "naruto", "наруто", "boruto", "боруто", "one piece", "ван-пис", "ван пис",
+    "bleach", "блич", "demon slayer", "kimetsu", "истребитель демонов",
+    "jujutsu", "магическая битва", "attack on titan", "атака титанов",
+    "hunter x hunter", "охотник", "gintama", "гинтама", "frieren", "фрирен",
+    "fullmetal", "стальной алхимик", "chainsaw", "человек-бензопила",
+    "dragon ball", "драконий жемчуг", "re:zero", "re zero", "ре зеро",
+    "mushoku", "slime", "слизь", "jojo", "джоджо", "sword art online",
+    "sao", "one punch", "ванпанч", "tokyo ghoul", "токийский гуль",
+    "black clover", "fairy tail", "haikyuu", "волейбол", "pokemon", "покемон",
+    "berserk", "берсерк", "death note", "тетрадь смерти"
+  ];
+
+  function norm(v) {
+    return String(v || "").toLowerCase().replaceAll("ё", "е").trim();
+  }
+
+  function cleanTitle(v) {
+    return String(v || "")
+      .replace(/\(\d{4}\)/g, "")
+      .replace(/\bTV\b|\bONA\b|\bOVA\b|\bMovie\b|\bSpecial\b/gi, "")
+      .replace(/[|•·]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function detailRoot() {
+    return document.querySelector("dialog[open]") ||
+      document.querySelector(".detail-modal[open], .modal[open], #detailsModal, #detailModal, .details-modal, .detail-view") ||
+      document.body;
+  }
+
+  function detailTitle(root) {
+    const selectors = [".detail-title", ".modal-title", ".details-title", ".movie-title", "[data-title]", "h1", "h2"];
+    for (const s of selectors) {
+      const el = root.querySelector && root.querySelector(s);
+      if (!el) continue;
+      const t = cleanTitle(el.getAttribute("data-title") || el.textContent || "");
+      if (t && !/смотреть|искать|аниме-сайты|найти на сайтах/i.test(t)) return t;
+    }
+    return "";
+  }
+
+  function isAnimeLike(root) {
+    const text = norm((root.textContent || "") + " " + detailTitle(root));
+    if (/тип\s*аниме/.test(text)) return true;
+    if (text.includes("источник") && (text.includes("jikan") || text.includes("myanimelist"))) return true;
+    if (text.includes("аниме-сайты")) return true;
+
+    // ВАЖНО: у тебя часть аниме помечена как "Мультфильм" через TMDB.
+    // Поэтому проверяем не только тип, но и название/франшизу.
+    return ANIME_HINTS.some(h => text.includes(norm(h)));
+  }
+
+  function titleQuery(root) {
+    return encodeURIComponent(detailTitle(root) || "anime");
+  }
+
+  function linkSet(root) {
+    const q = titleQuery(root);
+    const titleText = norm((root.textContent || "") + " " + detailTitle(root));
+    const isSlime = titleText.includes("слизь") || titleText.includes("slime") || titleText.includes("tensei shitara slime");
+
+    return [
+      ["Shikimori", "https://shikimori.one/animes/search?search=" + q],
+      ["MyAnimeList", "https://myanimelist.net/anime.php?q=" + q],
+      ["AniList", "https://anilist.co/search/anime?search=" + q],
+      ["Anime-Planet", "https://www.anime-planet.com/anime/all?name=" + q],
+      ["AniDB", "https://anidb.net/anime/?adb.search=" + q],
+      ["YummyAnime", isSlime ? YUMMY_SLIME_URL : "https://yummyanime.tv/index.php?do=search&subaction=search&story=" + q]
+    ];
+  }
+
+  function findBlockByHeader(root, headerText) {
+    const headers = Array.from(root.querySelectorAll("h1,h2,h3,h4,.links-title,.section-title,b,strong"));
+    const h = headers.find(el => norm(el.textContent).includes(norm(headerText)));
+    if (!h) return null;
+    return h.closest("section,.links-block,.detail-block,.detail-section,div") || h.parentElement;
+  }
+
+  function findOrCreateAnimeBlock(root) {
+    let block = findBlockByHeader(root, "аниме-сайты");
+    if (block) return block;
+
+    const findSitesBlock = findBlockByHeader(root, "найти на сайтах");
+    const watchBlock = findBlockByHeader(root, "смотреть / искать видео");
+
+    const section = document.createElement("section");
+    section.className = "links-block gkm-force-anime-sites";
+    section.innerHTML = '<h3 class="links-title">Аниме-сайты</h3><div class="detail-buttons"></div>';
+
+    if (findSitesBlock && findSitesBlock.parentNode) {
+      findSitesBlock.parentNode.insertBefore(section, findSitesBlock);
+    } else if (watchBlock && watchBlock.parentNode) {
+      watchBlock.parentNode.insertBefore(section, watchBlock.nextSibling);
+    } else {
+      root.appendChild(section);
+    }
+
+    return section;
+  }
+
+  function buttonBox(block) {
+    let box = block.querySelector(".detail-buttons,.links-row,.buttons-row");
+    if (!box) {
+      box = document.createElement("div");
+      box.className = "detail-buttons";
+      block.appendChild(box);
+    }
+    return box;
+  }
+
+  function ensureAnimeSites() {
+    const root = detailRoot();
+    if (!root || !isAnimeLike(root)) return;
+
+    const block = findOrCreateAnimeBlock(root);
+    if (!block) return;
+
+    const box = buttonBox(block);
+    const links = linkSet(root);
+
+    links.forEach(([name, url]) => {
+      let a = Array.from(box.querySelectorAll("a,button")).find(x => norm(x.textContent) === norm(name));
+      if (!a || a.tagName !== "A") {
+        a = document.createElement("a");
+        a.target = "_blank";
+        a.rel = "noreferrer";
+        a.textContent = name;
+        box.appendChild(a);
+      }
+      a.href = url;
+    });
+  }
+
+  let timer = 0;
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(ensureAnimeSites, 120);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", schedule);
+  else schedule();
+
+  window.addEventListener("load", schedule);
+  document.addEventListener("click", () => setTimeout(schedule, 180), true);
+  new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, characterData: true });
+
+  window.GKM_FORCE_ANIME_SITES_VERSION = "v44-force-anime-sites-2026-06-13";
 })();
 
