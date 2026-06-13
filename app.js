@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v46-strict-title-search-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v47-title-only-search-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -685,10 +685,8 @@ async function runSearch() {
 
   if (!q && !controlsActive) {
     lastSearchResults = [];
-
     if (currentTab === "all") renderHome();
     else await loadPage(currentTab, 1);
-
     return;
   }
 
@@ -698,13 +696,10 @@ async function runSearch() {
   if (q) {
     for (let i = 0; i < index.length; i++) {
       const item = index[i];
-      const s = gkmSearchScoreV45(item, q);
+      const s = gkmStrictTitleOnlyScoreV47(item, q);
       if (s > 0) scored.push({ item, s });
-
-      // Не вешаем страницу на больших базах
-      if (i % 5000 === 0) await new Promise(r => setTimeout(r, 0));
+      if (i % 6000 === 0) await new Promise(r => setTimeout(r, 0));
     }
-
     scored.sort((a, b) => b.s - a.s);
   } else {
     for (const item of index) scored.push({ item, s: scoreSmart(item) });
@@ -715,7 +710,7 @@ async function runSearch() {
   lastSearchResults = applyLocalFilters(scoped);
 
   if (!lastSearchResults.length && q) {
-    renderList([], `Поиск: 0 найдено · попробуй короче или по-английски`);
+    renderList([], `Поиск: 0 найдено · попробуй другое название`);
     setStatus(`Поиск ничего не нашёл: ${qRaw}`);
     return;
   }
@@ -2970,7 +2965,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v46-strict-title-search-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v47-title-only-search-2026-06-13";
 })();
 
 
@@ -4124,5 +4119,95 @@ if (document.readyState === "loading") {
 /* === GKM V46 STRICT TITLE SEARCH GUARD === */
 (function () {
   window.GKM_STRICT_TITLE_SEARCH_VERSION = "v46-strict-title-search-2026-06-13";
+})();
+
+
+/* === GKM V47 TITLE ONLY SEARCH === */
+(function () {
+  window.GKM_TITLE_ONLY_SEARCH_VERSION = "v47-title-only-search-2026-06-13";
+})();
+
+function gkmStrictTitleOnlyScoreV47(m, q) {
+  if (!q) return 1;
+
+  const variants = typeof gkmQueryVariantsV45 === "function" ? gkmQueryVariantsV45(q) : [normKey(q)];
+
+  const titleHay = normKey([
+    m.ru, m.en, m.title, m.name, m.title_ru, m.ruTitle, m.title_original,
+    m.originalTitle, m.original_title, m.english, m.japanese, m.romaji,
+    ...(m.aliases || []), ...(m.names || [])
+  ].join(" "));
+
+  if (!titleHay) return 0;
+
+  const words = titleHay.split(" ").filter(Boolean);
+  let best = 0;
+
+  for (const v of variants) {
+    if (!v) continue;
+    const parts = v.split(" ").filter(x => x.length > 1);
+
+    if (titleHay === v) best = Math.max(best, 1000000);
+    else if (titleHay.startsWith(v + " ")) best = Math.max(best, 900000);
+    else if ((" " + titleHay + " ").includes(" " + v + " ")) best = Math.max(best, 800000);
+    else if (titleHay.includes(v)) best = Math.max(best, 650000);
+
+    if (parts.length) {
+      let hits = 0;
+      for (const p of parts) {
+        if ((" " + titleHay + " ").includes(" " + p + " ") || titleHay.includes(p)) {
+          hits++;
+          continue;
+        }
+        if (p.length >= 4 && typeof gkmLevSmallV45 === "function") {
+          if (words.some(w => gkmLevSmallV45(w, p) <= (p.length <= 5 ? 1 : 2))) hits++;
+        }
+      }
+      if (hits === parts.length) best = Math.max(best, 500000 + hits * 1000);
+      else if (parts.length >= 2 && hits >= Math.ceil(parts.length * 0.8)) best = Math.max(best, 250000 + hits * 500);
+    }
+  }
+
+  if (best > 0) {
+    if (getType(m) === "Аниме") best += 2000;
+    if (getType(m) === "Мультфильм") best += 300;
+    best += Math.min(getRating(m) || 0, 10) * 10;
+    best += Math.min(getVotes(m) || 0, 100000) / 1000;
+  }
+
+  return best;
+}
+
+/* === GKM V47 SEARCH BIND OVERRIDE === */
+(function () {
+  function bindV47() {
+    const input = document.getElementById("searchInput");
+    if (!input || input.dataset.gkmSearchV47 === "1") return;
+    input.dataset.gkmSearchV47 = "1";
+    input.placeholder = "Поиск строго по названию: Наруто, Ван-Пис, Блич...";
+
+    let timer = 0;
+    const go = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        if (typeof runSearch === "function") runSearch();
+      }, 250);
+    };
+
+    input.addEventListener("input", go, true);
+    input.addEventListener("change", go, true);
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        clearTimeout(timer);
+        if (typeof runSearch === "function") runSearch();
+      }
+    }, true);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindV47);
+  else bindV47();
+
+  new MutationObserver(bindV47).observe(document.body, { childList: true, subtree: true });
 })();
 
