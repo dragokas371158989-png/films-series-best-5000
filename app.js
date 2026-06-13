@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v37-ru-titles-real-apply-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v38-buttons-fix-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -2804,7 +2804,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v37-ru-titles-real-apply-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v38-buttons-fix-2026-06-13";
 })();
 
 
@@ -3386,5 +3386,131 @@ if (document.readyState === "loading") {
 
   window.GKM_REAL_RU_TITLES_VERSION = "v37-ru-titles-real-apply-2026-06-13";
   window.GKM_RU_TITLES_MAP_SIZE = Object.keys(RU_BUILTIN_MAP).length;
+})();
+
+
+/* === GKM V38 BUTTONS CLICK FIX === */
+(function () {
+  function txt(el) {
+    return String(el && el.textContent || "").trim().toLowerCase().replaceAll("ё", "е");
+  }
+
+  function safeClickSelector(selectors) {
+    for (const s of selectors) {
+      const el = document.querySelector(s);
+      if (el) {
+        el.click();
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function openHelper() {
+    if (typeof window.openAi === "function") {
+      window.openAi();
+      return true;
+    }
+
+    if (typeof window.initAiChat === "function") {
+      try { window.initAiChat(); } catch(e) {}
+    }
+
+    const dlg = document.querySelector("#gkmAiDialog, .ai-dialog, #aiDialog");
+    if (dlg) {
+      dlg.style.display = "block";
+      dlg.hidden = false;
+      dlg.classList.add("open", "active", "is-open");
+      if (typeof dlg.showModal === "function" && !dlg.open) {
+        try { dlg.showModal(); } catch(e) {}
+      }
+      return true;
+    }
+
+    return safeClickSelector([
+      "#gkmAiFab",
+      "#aiFab",
+      ".ai-fab",
+      ".gkm-ai-fab",
+      "[data-ai-open]",
+      "[data-open-ai]"
+    ]);
+  }
+
+  function showAllPopular() {
+    const btns = Array.from(document.querySelectorAll("button,a"));
+    const allBtn = btns.find(b => txt(b) === "все");
+    if (allBtn) {
+      allBtn.click();
+      return true;
+    }
+
+    try {
+      if (typeof window.setCategory === "function") {
+        window.setCategory("all");
+        return true;
+      }
+      if (typeof window.renderAll === "function") {
+        window.renderAll();
+        return true;
+      }
+      if (typeof window.render === "function") {
+        window.render();
+        return true;
+      }
+    } catch(e) {}
+
+    document.querySelectorAll(".popular .card, #popular .card, [data-section='popular'] .card").forEach(card => {
+      card.style.display = "";
+      card.hidden = false;
+    });
+    return true;
+  }
+
+  document.addEventListener("click", function (ev) {
+    const target = ev.target && ev.target.closest ? ev.target.closest("button,a") : null;
+    if (!target) return;
+
+    const t = txt(target);
+
+    if (t.includes("что посмотреть")) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      setTimeout(openHelper, 0);
+      return;
+    }
+
+    if (t === "смотреть все" || t.includes("смотреть все")) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      setTimeout(showAllPopular, 0);
+      return;
+    }
+  }, true);
+
+  function fixButtonStyles() {
+    Array.from(document.querySelectorAll("button,a")).forEach(el => {
+      const t = txt(el);
+      if (t.includes("что посмотреть") || t.includes("смотреть все")) {
+        el.style.pointerEvents = "auto";
+        el.style.cursor = "pointer";
+        el.style.position = el.style.position || "relative";
+        el.style.zIndex = "50";
+      }
+    });
+  }
+
+  let timer = 0;
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(fixButtonStyles, 120);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", schedule);
+  else schedule();
+
+  new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
+
+  window.GKM_BUTTONS_FIX_VERSION = "v38-buttons-fix-2026-06-13";
 })();
 
