@@ -1,12 +1,14 @@
 {
-  "_comment": "Ручные правки каталога. key ищется по названию/оригинальному названию/алиасам. Можно добавлять type, ru, remove, animeSites, yummyanime, aliases.",
+  "_comment": "V52 BIG MANUAL FIXES PACK. Ручные правки каталога. Можно добавлять type, ru, remove, animeSites, yummyanime, aliases.",
   "naruto": {
     "type": "Аниме",
     "ru": "Наруто",
     "animeSites": true,
     "aliases": [
       "наруто",
-      "naruto"
+      "naruto",
+      "норуто",
+      "нарута"
     ]
   },
   "naruto shippuden": {
@@ -24,7 +26,8 @@
     "animeSites": true,
     "aliases": [
       "боруто",
-      "boruto"
+      "boruto",
+      "baruto"
     ]
   },
   "one piece": {
@@ -34,7 +37,9 @@
     "aliases": [
       "ван пис",
       "ванпис",
-      "one piece"
+      "ван-пис",
+      "one piece",
+      "onepiece"
     ]
   },
   "bleach": {
@@ -46,13 +51,25 @@
       "bleach"
     ]
   },
+  "bleach thousand year blood war": {
+    "type": "Аниме",
+    "ru": "Блич: Тысячелетняя кровавая война",
+    "animeSites": true,
+    "aliases": [
+      "блич тысячелетняя кровавая война",
+      "bleach thousand year blood war",
+      "tybw"
+    ]
+  },
   "jujutsu kaisen": {
     "type": "Аниме",
     "ru": "Магическая битва",
     "animeSites": true,
     "aliases": [
       "магическая битва",
-      "jujutsu kaisen"
+      "jujutsu kaisen",
+      "дзюдзюцу кайсен",
+      "jujutsu"
     ]
   },
   "demon slayer": {
@@ -62,8 +79,666 @@
     "aliases": [
       "истребитель демонов",
       "клинок",
+      "клинок рассекающий демонов",
       "demon slayer",
       "kimetsu no yaiba"
     ]
+  },
+  "kimetsu no yaiba": {
+    "type": "Аниме",
+    "ru": "Истребитель демонов",
+    "animeSites": true,
+    "aliases": [
+      "истребитель демонов",
+      "demon slayer",
+      "kimetsu no yaiba"
+    ]
+  },
+  "attack on titan": {
+    "type": "Аниме",
+    "ru": "Атака титанов",
+    "animeSites": true,
+    "aliases": [
+      "атака титанов",
+      "attack on titan",
+      "shingeki no kyojin"
+    ]
+  },
+  "shingeki no kyojin": {
+    "type": "Аниме",
+    "ru": "Атака титанов",
+    "animeSites": true,
+    "aliases": [
+      "атака титанов",
+      "attack on titan",
+      "shingeki no kyojin"
+    ]
+  },
+  "frieren": {
+    "type": "Аниме",
+    "ru": "Провожающая в последний путь Фрирен",
+    "animeSites": true,
+    "aliases": [
+      "фрирен",
+      "frieren",
+      "sousou no frieren"
+    ]
+  },
+  "sousou no frieren": {
+    "type": "Аниме",
+    "ru": "Провожающая в последний путь Фрирен",
+    "animeSites": true,
+    "aliases": [
+      "фрирен",
+      "frieren",
+      "sousou no frieren"
+    ]
+  },
+  "fullmetal alchemist": {
+    "type": "Аниме",
+    "ru": "Стальной алхимик",
+    "animeSites": true,
+    "aliases": [
+      "стальной алхимик",
+      "fullmetal alchemist",
+      "fma"
+    ]
+  },
+  "fullmetal alchemist brotherhood": {
+    "type": "Аниме",
+    "ru": "Стальной алхимик: Братство",
+    "animeSites": true,
+    "aliases": [
+      "стальной алхимик братство",
+      "fullmetal alchemist brotherhood",
+      "fma brotherhood"
+    ]
+  },
+  "gintama": {
+    "type": "Аниме",
+    "ru": "Гинтама",
+    "animeSites": true,
+    "aliases": [
+      "гинтама",
+      "gintama"
+    ]
+  },
+  "hunter x hunter": {
+    "type": "Аниме",
+    "ru": "Охотник х Охотник",
+    "animeSites": true,
+    "aliases": [
+      "охотник",
+      "хантер",
+      "hunter x hunter",
+      "hxh"
+    ]
+  },
+  "berserk": {
+    "type": "Аниме",
+    "ru": "Берсерк",
+    "animeSites": true,
+    "aliases": [
+      "берсерк",
+      "berserk"
+    ]
+  },
+  "death note": {
+    "type": "Аниме",
+    "ru": "Тетрадь смерти",
+    "animeSites": true,
+    "aliases": [
+      "тетрадь смерти",
+      "death note"
+    ]
+  },
+  "chainsaw man": {
+    "type": "Аниме",
+    "ru": "Человек-бензопила",
+    "animeSites": true,
+    "aliases": [
+      "человек бензопила",
+      "человек-бензопила",
+      "бензопила",
+      "chainsaw man"
+    ]
+  },
+  "solo leveling": {
+    "type": "Аниме",
+    "ru": "Поднятие уровня в одиночку",
+    "animeSites": true,
+    "aliases": [
+      "соло левелинг",
+      "поднятие уровня",
+      "solo leveling"
+    ]
+  },
+  "mushoku tensei": {
+    "type": "Аниме",
+    "ru": "Реинкарнация безработного",
+    "animeSites": true,
+    "aliases": [
+      "реинкарнация безработного",
+      "mushoku tensei"
+    ]
+  },
+  "re zero": {
+    "type": "Аниме",
+    "ru": "Re:Zero. Жизнь с нуля в альтернативном мире",
+    "animeSites": true,
+    "aliases": [
+      "ре зеро",
+      "re zero",
+      "re:zero"
+    ]
+  },
+  "re:zero": {
+    "type": "Аниме",
+    "ru": "Re:Zero. Жизнь с нуля в альтернативном мире",
+    "animeSites": true,
+    "aliases": [
+      "ре зеро",
+      "re zero",
+      "re:zero"
+    ]
+  },
+  "dragon ball": {
+    "type": "Аниме",
+    "ru": "Драконий жемчуг",
+    "animeSites": true,
+    "aliases": [
+      "драконий жемчуг",
+      "dragon ball"
+    ]
+  },
+  "dragon ball z": {
+    "type": "Аниме",
+    "ru": "Драконий жемчуг Z",
+    "animeSites": true,
+    "aliases": [
+      "драконий жемчуг z",
+      "dragon ball z",
+      "dbz"
+    ]
+  },
+  "dragon ball super": {
+    "type": "Аниме",
+    "ru": "Драконий жемчуг Супер",
+    "animeSites": true,
+    "aliases": [
+      "драконий жемчуг супер",
+      "dragon ball super"
+    ]
+  },
+  "tokyo ghoul": {
+    "type": "Аниме",
+    "ru": "Токийский гуль",
+    "animeSites": true,
+    "aliases": [
+      "токийский гуль",
+      "гуль",
+      "tokyo ghoul"
+    ]
+  },
+  "black clover": {
+    "type": "Аниме",
+    "ru": "Чёрный клевер",
+    "animeSites": true,
+    "aliases": [
+      "черный клевер",
+      "чёрный клевер",
+      "black clover"
+    ]
+  },
+  "fairy tail": {
+    "type": "Аниме",
+    "ru": "Хвост Феи",
+    "animeSites": true,
+    "aliases": [
+      "хвост феи",
+      "fairy tail"
+    ]
+  },
+  "sword art online": {
+    "type": "Аниме",
+    "ru": "Мастера меча онлайн",
+    "animeSites": true,
+    "aliases": [
+      "мастера меча онлайн",
+      "sao",
+      "sword art online"
+    ]
+  },
+  "one punch man": {
+    "type": "Аниме",
+    "ru": "Ванпанчмен",
+    "animeSites": true,
+    "aliases": [
+      "ванпанчмен",
+      "one punch man",
+      "ван панч"
+    ]
+  },
+  "my hero academia": {
+    "type": "Аниме",
+    "ru": "Моя геройская академия",
+    "animeSites": true,
+    "aliases": [
+      "моя геройская академия",
+      "my hero academia",
+      "boku no hero academia"
+    ]
+  },
+  "boku no hero academia": {
+    "type": "Аниме",
+    "ru": "Моя геройская академия",
+    "animeSites": true,
+    "aliases": [
+      "моя геройская академия",
+      "my hero academia",
+      "boku no hero academia"
+    ]
+  },
+  "spy x family": {
+    "type": "Аниме",
+    "ru": "Семья шпиона",
+    "animeSites": true,
+    "aliases": [
+      "семья шпиона",
+      "spy x family"
+    ]
+  },
+  "tokyo revengers": {
+    "type": "Аниме",
+    "ru": "Токийские мстители",
+    "animeSites": true,
+    "aliases": [
+      "токийские мстители",
+      "tokyo revengers"
+    ]
+  },
+  "blue lock": {
+    "type": "Аниме",
+    "ru": "Синяя тюрьма",
+    "animeSites": true,
+    "aliases": [
+      "синяя тюрьма",
+      "blue lock"
+    ]
+  },
+  "haikyuu": {
+    "type": "Аниме",
+    "ru": "Волейбол!!",
+    "animeSites": true,
+    "aliases": [
+      "волейбол",
+      "haikyuu",
+      "haikyu"
+    ]
+  },
+  "violet evergarden": {
+    "type": "Аниме",
+    "ru": "Вайолет Эвергарден",
+    "animeSites": true,
+    "aliases": [
+      "вайолет эвергарден",
+      "violet evergarden"
+    ]
+  },
+  "made in abyss": {
+    "type": "Аниме",
+    "ru": "Созданный в Бездне",
+    "animeSites": true,
+    "aliases": [
+      "созданный в бездне",
+      "made in abyss"
+    ]
+  },
+  "goblin slayer": {
+    "type": "Аниме",
+    "ru": "Убийца гоблинов",
+    "animeSites": true,
+    "aliases": [
+      "убийца гоблинов",
+      "goblin slayer"
+    ]
+  },
+  "the eminence in shadow": {
+    "type": "Аниме",
+    "ru": "Восхождение в тени",
+    "animeSites": true,
+    "aliases": [
+      "восхождение в тени",
+      "the eminence in shadow",
+      "kage no jitsuryokusha"
+    ]
+  },
+  "kage no jitsuryokusha": {
+    "type": "Аниме",
+    "ru": "Восхождение в тени",
+    "animeSites": true,
+    "aliases": [
+      "восхождение в тени",
+      "the eminence in shadow",
+      "kage no jitsuryokusha"
+    ]
+  },
+  "danmachi": {
+    "type": "Аниме",
+    "ru": "Может, я встречу тебя в подземелье?",
+    "animeSites": true,
+    "aliases": [
+      "данмачи",
+      "danmachi",
+      "is it wrong to try to pick up girls in a dungeon"
+    ]
+  },
+  "the rising of the shield hero": {
+    "type": "Аниме",
+    "ru": "Восхождение героя щита",
+    "animeSites": true,
+    "aliases": [
+      "герой щита",
+      "shield hero",
+      "the rising of the shield hero",
+      "tate no yuusha"
+    ]
+  },
+  "shield hero": {
+    "type": "Аниме",
+    "ru": "Восхождение героя щита",
+    "animeSites": true,
+    "aliases": [
+      "герой щита",
+      "shield hero",
+      "tate no yuusha"
+    ]
+  },
+  "no game no life": {
+    "type": "Аниме",
+    "ru": "Нет игры — нет жизни",
+    "animeSites": true,
+    "aliases": [
+      "нет игры нет жизни",
+      "no game no life"
+    ]
+  },
+  "overlord": {
+    "type": "Аниме",
+    "ru": "Повелитель",
+    "animeSites": true,
+    "aliases": [
+      "повелитель",
+      "overlord"
+    ]
+  },
+  "konosuba": {
+    "type": "Аниме",
+    "ru": "Этот замечательный мир!",
+    "animeSites": true,
+    "aliases": [
+      "коносуба",
+      "konosuba",
+      "kono subarashii sekai"
+    ]
+  },
+  "classroom of the elite": {
+    "type": "Аниме",
+    "ru": "Добро пожаловать в класс превосходства",
+    "animeSites": true,
+    "aliases": [
+      "класс превосходства",
+      "classroom of the elite",
+      "youkoso jitsuryoku"
+    ]
+  },
+  "pokemon": {
+    "type": "Аниме",
+    "ru": "Покемон",
+    "animeSites": true,
+    "aliases": [
+      "покемон",
+      "pokemon"
+    ]
+  },
+  "digimon": {
+    "type": "Аниме",
+    "ru": "Дигимон",
+    "animeSites": true,
+    "aliases": [
+      "дигимон",
+      "digimon"
+    ]
+  },
+  "jojo": {
+    "type": "Аниме",
+    "ru": "Невероятные приключения ДжоДжо",
+    "animeSites": true,
+    "aliases": [
+      "джоджо",
+      "jojo",
+      "jojos bizarre adventure"
+    ]
+  },
+  "jojo's bizarre adventure": {
+    "type": "Аниме",
+    "ru": "Невероятные приключения ДжоДжо",
+    "animeSites": true,
+    "aliases": [
+      "джоджо",
+      "jojo",
+      "jojo's bizarre adventure"
+    ]
+  },
+  "cowboy bebop": {
+    "type": "Аниме",
+    "ru": "Ковбой Бибоп",
+    "animeSites": true,
+    "aliases": [
+      "ковбой бибоп",
+      "cowboy bebop"
+    ]
+  },
+  "samurai champloo": {
+    "type": "Аниме",
+    "ru": "Самурай Чамплу",
+    "animeSites": true,
+    "aliases": [
+      "самурай чамплу",
+      "samurai champloo"
+    ]
+  },
+  "neon genesis evangelion": {
+    "type": "Аниме",
+    "ru": "Евангелион",
+    "animeSites": true,
+    "aliases": [
+      "евангелион",
+      "neon genesis evangelion",
+      "evangelion"
+    ]
+  },
+  "code geass": {
+    "type": "Аниме",
+    "ru": "Код Гиас",
+    "animeSites": true,
+    "aliases": [
+      "код гиас",
+      "code geass"
+    ]
+  },
+  "steins gate": {
+    "type": "Аниме",
+    "ru": "Врата Штейна",
+    "animeSites": true,
+    "aliases": [
+      "врата штейна",
+      "steins gate",
+      "steins;gate"
+    ]
+  },
+  "parasyte": {
+    "type": "Аниме",
+    "ru": "Паразит",
+    "animeSites": true,
+    "aliases": [
+      "паразит",
+      "parasyte",
+      "kiseijuu"
+    ]
+  },
+  "mob psycho": {
+    "type": "Аниме",
+    "ru": "Моб Психо 100",
+    "animeSites": true,
+    "aliases": [
+      "моб психо",
+      "mob psycho",
+      "mob psycho 100"
+    ]
+  },
+  "black butler": {
+    "type": "Аниме",
+    "ru": "Тёмный дворецкий",
+    "animeSites": true,
+    "aliases": [
+      "темный дворецкий",
+      "тёмный дворецкий",
+      "black butler",
+      "kuroshitsuji"
+    ]
+  },
+  "vinland saga": {
+    "type": "Аниме",
+    "ru": "Сага о Винланде",
+    "animeSites": true,
+    "aliases": [
+      "сага о винланде",
+      "vinland saga"
+    ]
+  },
+  "dr stone": {
+    "type": "Аниме",
+    "ru": "Доктор Стоун",
+    "animeSites": true,
+    "aliases": [
+      "доктор стоун",
+      "dr stone",
+      "dr. stone"
+    ]
+  },
+  "hells paradise": {
+    "type": "Аниме",
+    "ru": "Адский рай",
+    "animeSites": true,
+    "aliases": [
+      "адский рай",
+      "hells paradise",
+      "hell's paradise",
+      "jigokuraku"
+    ]
+  },
+  "jigokuraku": {
+    "type": "Аниме",
+    "ru": "Адский рай",
+    "animeSites": true,
+    "aliases": [
+      "адский рай",
+      "jigokuraku",
+      "hells paradise"
+    ]
+  },
+  "your name": {
+    "type": "Аниме",
+    "ru": "Твоё имя",
+    "animeSites": true,
+    "aliases": [
+      "твое имя",
+      "твоё имя",
+      "your name",
+      "kimi no na wa"
+    ]
+  },
+  "kimi no na wa": {
+    "type": "Аниме",
+    "ru": "Твоё имя",
+    "animeSites": true,
+    "aliases": [
+      "твое имя",
+      "твоё имя",
+      "your name",
+      "kimi no na wa"
+    ]
+  },
+  "weathering with you": {
+    "type": "Аниме",
+    "ru": "Дитя погоды",
+    "animeSites": true,
+    "aliases": [
+      "дитя погоды",
+      "weathering with you",
+      "tenki no ko"
+    ]
+  },
+  "suzume": {
+    "type": "Аниме",
+    "ru": "Судзумэ, закрывающая двери",
+    "animeSites": true,
+    "aliases": [
+      "судзумэ",
+      "suzume"
+    ]
+  },
+  "initial d": {
+    "type": "Аниме",
+    "ru": "Инициал Ди",
+    "animeSites": true,
+    "aliases": [
+      "инициал ди",
+      "initial d"
+    ]
+  },
+  "inuyasha": {
+    "type": "Аниме",
+    "ru": "Инуяша",
+    "animeSites": true,
+    "aliases": [
+      "инуяша",
+      "inuyasha"
+    ]
+  },
+  "rurouni kenshin": {
+    "type": "Аниме",
+    "ru": "Бродяга Кэнсин",
+    "animeSites": true,
+    "aliases": [
+      "бродяга кэнсин",
+      "rurouni kenshin"
+    ]
+  },
+  "that time i got reincarnated as a slime": {
+    "type": "Аниме",
+    "ru": "О моём перерождении в слизь",
+    "animeSites": true,
+    "aliases": [
+      "слизь",
+      "о моем перерождении в слизь",
+      "о моём перерождении в слизь",
+      "slime",
+      "tensei shitara slime",
+      "reincarnated as a slime"
+    ],
+    "yummyanime": "https://yummyanime.tv/1204-o-moem-pererozhdenii-v-sliz-film-g1.html"
+  },
+  "tensei shitara slime datta ken": {
+    "type": "Аниме",
+    "ru": "О моём перерождении в слизь",
+    "animeSites": true,
+    "aliases": [
+      "слизь",
+      "tensei shitara slime datta ken",
+      "reincarnated as a slime"
+    ],
+    "yummyanime": "https://yummyanime.tv/1204-o-moem-pererozhdenii-v-sliz-film-g1.html"
   }
 }
