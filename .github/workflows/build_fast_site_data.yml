@@ -19,14 +19,18 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+
       - name: Sync branch
         run: git pull --rebase origin main
+
       - name: Build fast data
         run: python tools/build_fast_site_data.py
+
       - name: Commit fast data
         run: |
           git config user.name "fast-data-bot"
