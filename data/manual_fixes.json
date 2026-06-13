@@ -1,0 +1,69 @@
+{
+  "_comment": "Ручные правки каталога. key ищется по названию/оригинальному названию/алиасам. Можно добавлять type, ru, remove, animeSites, yummyanime, aliases.",
+  "naruto": {
+    "type": "Аниме",
+    "ru": "Наруто",
+    "animeSites": true,
+    "aliases": [
+      "наруто",
+      "naruto"
+    ]
+  },
+  "naruto shippuden": {
+    "type": "Аниме",
+    "ru": "Наруто: Ураганные хроники",
+    "animeSites": true,
+    "aliases": [
+      "наруто ураганные хроники",
+      "naruto shippuden"
+    ]
+  },
+  "boruto": {
+    "type": "Аниме",
+    "ru": "Боруто",
+    "animeSites": true,
+    "aliases": [
+      "боруто",
+      "boruto"
+    ]
+  },
+  "one piece": {
+    "type": "Аниме",
+    "ru": "Ван-Пис",
+    "animeSites": true,
+    "aliases": [
+      "ван пис",
+      "ванпис",
+      "one piece"
+    ]
+  },
+  "bleach": {
+    "type": "Аниме",
+    "ru": "Блич",
+    "animeSites": true,
+    "aliases": [
+      "блич",
+      "bleach"
+    ]
+  },
+  "jujutsu kaisen": {
+    "type": "Аниме",
+    "ru": "Магическая битва",
+    "animeSites": true,
+    "aliases": [
+      "магическая битва",
+      "jujutsu kaisen"
+    ]
+  },
+  "demon slayer": {
+    "type": "Аниме",
+    "ru": "Истребитель демонов",
+    "animeSites": true,
+    "aliases": [
+      "истребитель демонов",
+      "клинок",
+      "demon slayer",
+      "kimetsu no yaiba"
+    ]
+  }
+}
