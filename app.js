@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v39-card-titles-full-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v40-no-title-cut-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -2804,7 +2804,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v39-card-titles-full-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v40-no-title-cut-2026-06-13";
 })();
 
 
@@ -3561,5 +3561,64 @@ if (document.readyState === "loading") {
   new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, characterData: true });
 
   window.GKM_CARD_TITLES_FULL_VERSION = "v39-card-titles-full-2026-06-13";
+})();
+
+
+/* === GKM V40 NO TITLE CUT PATCH === */
+(function () {
+  function fullTitleFromNode(el) {
+    const original = el && (
+      el.getAttribute("data-original-title") ||
+      el.getAttribute("data-originalTitle") ||
+      el.getAttribute("title")
+    );
+    if (original && original.length > (el.textContent || "").length) return original;
+    return "";
+  }
+
+  function uncutTitles() {
+    const selectors = [
+      ".card-title",
+      ".movie-title",
+      ".item-title",
+      ".card-name",
+      ".card__title",
+      ".card h3",
+      ".movie-card h3",
+      ".item-card h3"
+    ].join(",");
+
+    document.querySelectorAll(selectors).forEach(el => {
+      const full = fullTitleFromNode(el);
+      if (full && /…|\.\.\./.test(el.textContent || "")) {
+        el.textContent = full;
+      }
+
+      el.style.whiteSpace = "normal";
+      el.style.overflow = "visible";
+      el.style.textOverflow = "clip";
+      el.style.display = "block";
+      el.style.webkitLineClamp = "unset";
+      el.style.lineClamp = "unset";
+      el.style.maxHeight = "none";
+      el.style.wordBreak = "break-word";
+      el.style.overflowWrap = "anywhere";
+    });
+  }
+
+  let timer = 0;
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(uncutTitles, 100);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", schedule);
+  else schedule();
+
+  window.addEventListener("load", schedule);
+  document.addEventListener("click", () => setTimeout(schedule, 160), true);
+  new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, characterData: true });
+
+  window.GKM_NO_TITLE_CUT_VERSION = "v40-no-title-cut-2026-06-13";
 })();
 
