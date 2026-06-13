@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v40-no-title-cut-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v41-hard-dedupe-cards-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -2804,7 +2804,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v40-no-title-cut-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v41-hard-dedupe-cards-2026-06-13";
 })();
 
 
@@ -3620,5 +3620,132 @@ if (document.readyState === "loading") {
   new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, characterData: true });
 
   window.GKM_NO_TITLE_CUT_VERSION = "v40-no-title-cut-2026-06-13";
+})();
+
+
+/* === GKM V41 HARD DEDUPE CARDS === */
+(function () {
+  function norm(v) {
+    return String(v || "")
+      .toLowerCase()
+      .replaceAll("ё", "е")
+      .replace(/\(\d{4}\)/g, " ")
+      .replace(/\bseason\s*\d+\b/gi, " ")
+      .replace(/\bсезон\s*\d+\b/gi, " ")
+      .replace(/\bpart\s*\d+\b/gi, " ")
+      .replace(/\bчасть\s*\d+\b/gi, " ")
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function cardTitle(card) {
+    const el = card.querySelector(".card-title,.movie-title,.item-title,.card-name,.card__title,h3");
+    return norm((el && (el.getAttribute("title") || el.textContent)) || card.getAttribute("data-title") || card.textContent || "");
+  }
+
+  function cardYear(card) {
+    const txt = String(card.textContent || "");
+    const m = txt.match(/\b(19\d{2}|20\d{2})\b/);
+    return m ? m[1] : "";
+  }
+
+  function cardPoster(card) {
+    const img = card.querySelector("img");
+    const src = img && (img.getAttribute("src") || img.getAttribute("data-src") || img.getAttribute("data-original"));
+    if (!src) return "";
+    return src.split("?")[0].replace(/\/w\d+\//, "/").slice(-80);
+  }
+
+  function dupKey(card) {
+    const title = cardTitle(card);
+    const year = cardYear(card);
+    const poster = cardPoster(card);
+    if (title.length > 3) return title + "|" + year;
+    if (poster) return "poster|" + poster;
+    return title + "|" + poster;
+  }
+
+  function hardDedupeCards() {
+    const sections = Array.from(document.querySelectorAll(
+      ".grid,.cards,.catalog-grid,.movie-grid,.items-grid,.popular,#popular,main,body"
+    ));
+
+    sections.forEach(section => {
+      const cards = Array.from(section.querySelectorAll(":scope > .card, :scope > .movie-card, :scope > .item-card, :scope > .catalog-card"));
+      if (cards.length < 2) return;
+
+      const seen = new Set();
+      cards.forEach(card => {
+        const k = dupKey(card);
+        if (!k || k.length < 5) return;
+
+        if (seen.has(k)) {
+          card.remove();
+        } else {
+          seen.add(k);
+        }
+      });
+    });
+  }
+
+  function dedupeArray(arr) {
+    if (!Array.isArray(arr)) return arr;
+    const seen = new Set();
+    const out = [];
+
+    for (const item of arr) {
+      if (!item || typeof item !== "object") {
+        out.push(item);
+        continue;
+      }
+
+      const title = norm(item.title || item.name || item.title_ru || item.ruTitle || item.original_title || "");
+      const year = item.year || item.release_year || item.date || "";
+      const poster = String(item.poster || item.poster_path || item.image || "").split("?")[0].slice(-80);
+      const k = title ? (title + "|" + year) : ("poster|" + poster);
+
+      if (!k || seen.has(k)) continue;
+      seen.add(k);
+      out.push(item);
+    }
+
+    return out;
+  }
+
+  function patchGlobalArray(name) {
+    try {
+      let value = window[name];
+      if (Array.isArray(value)) value = dedupeArray(value);
+
+      Object.defineProperty(window, name, {
+        configurable: true,
+        get() { return value; },
+        set(v) { value = Array.isArray(v) ? dedupeArray(v) : v; }
+      });
+    } catch(e) {}
+  }
+
+  ["items","allItems","movies","GKM_ITEMS","catalogItems","DATA","db"].forEach(patchGlobalArray);
+
+  let timer = 0;
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      ["items","allItems","movies","GKM_ITEMS","catalogItems","DATA","db"].forEach(n => {
+        if (Array.isArray(window[n])) window[n] = dedupeArray(window[n]);
+      });
+      hardDedupeCards();
+    }, 150);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", schedule);
+  else schedule();
+
+  window.addEventListener("load", schedule);
+  document.addEventListener("click", () => setTimeout(schedule, 180), true);
+  new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
+
+  window.GKM_HARD_DEDUPE_VERSION = "v41-hard-dedupe-cards-2026-06-13";
 })();
 
