@@ -1379,53 +1379,60 @@ header .ai-top-btn {
 }
 
 
-/* === GKM V32 MOBILE POSTER FIX === */
+
+
+/* === GKM V33 MOBILE POSTER HARD CSS === */
 @media (max-width: 768px) {
   .card,
   .movie-card,
-  .item-card {
-    overflow: hidden !important;
-  }
-
-  .card img,
-  .poster img,
-  .movie-card img,
-  .item-card img,
-  img.poster {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: 100% !important;
-    height: auto !important;
-    min-height: 170px !important;
-    max-height: 260px !important;
-    object-fit: cover !important;
-    background: #111827 !important;
+  .item-card,
+  .catalog-card,
+  [data-id].card {
+    min-height: 260px !important;
   }
 
   .poster,
   .card-poster,
   .movie-poster,
-  .item-poster {
+  .item-poster,
+  .thumb,
+  .cover {
     display: block !important;
-    min-height: 170px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 190px !important;
+    max-height: 280px !important;
     background: #111827 !important;
     overflow: hidden !important;
   }
 
-  #gkmAiDialog,
-  .ai-dialog {
-    max-height: 82vh !important;
+  .card img,
+  .movie-card img,
+  .item-card img,
+  .catalog-card img,
+  .poster img,
+  .card-poster img,
+  .movie-poster img,
+  .item-poster img,
+  .thumb img,
+  .cover img,
+  .gkm-mobile-created-poster {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 190px !important;
+    max-height: 280px !important;
+    object-fit: cover !important;
+    background: #111827 !important;
+    position: relative !important;
+    z-index: 2 !important;
   }
 
-  .ai-rec-card {
-    contain: content !important;
-  }
-
-  .ai-rec-poster {
-    width: 58px !important;
-    height: 84px !important;
-    min-height: 84px !important;
-    flex-basis: 58px !important;
+  .card [style*="display: none"] img,
+  .movie-card [style*="display: none"] img,
+  .item-card [style*="display: none"] img {
+    display: block !important;
   }
 }
