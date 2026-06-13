@@ -28,8 +28,26 @@ jobs:
       - name: Sync branch
         run: git pull --rebase origin main
 
+      - name: Verify V57 post-fix exists
+        run: |
+          test -f tools/post_fix_fast_data.py
+          grep -n "v57-force-postfix-build-2026-06-13" tools/post_fix_fast_data.py
+
       - name: Build fast data
         run: python tools/build_fast_site_data.py
+
+      - name: Force post-fix fast data
+        run: python tools/post_fix_fast_data.py
+
+      - name: Verify fixed meta
+        run: |
+          python - <<'PY'
+          import json
+          m=json.load(open('data/fast/meta.json',encoding='utf-8'))
+          print(m.get('builderVersion'), m.get('dedupeRemovedPostFix'), m.get('checks'))
+          assert m.get('builderVersion') == 'v57-force-postfix-build-2026-06-13'
+          assert m.get('checks',{}).get('scoobyInAnime') == 0
+          PY
 
       - name: Commit fast data
         run: |
@@ -40,7 +58,7 @@ jobs:
             echo "No fast data changes"
             exit 0
           fi
-          git commit -m "Build fast site data"
+          git commit -m "Build fast site data v57"
           for i in 1 2 3; do
             git pull --rebase origin main && git push origin main && break
             echo "Push failed, retry $i"
