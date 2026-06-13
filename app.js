@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v53-type-dedupe-fix-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v55-real-render-dedupe-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -39,7 +39,7 @@ const TAB_TO_PAGE = {
 
 /* === GKM V51 MANUAL FIXES SYSTEM === */
 (function () {
-  const FIX_URL = "data/manual_fixes.json?v=53";
+  const FIX_URL = "data/manual_fixes.json?v=55";
   let FIXES = null;
   let LOADING = false;
 
@@ -293,7 +293,7 @@ function applyManualFixesArray(arr) {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initManualFixes);
   else initManualFixes();
 
-  window.GKM_MANUAL_FIXES_VERSION = "v53-type-dedupe-fix-2026-06-13";
+  window.GKM_MANUAL_FIXES_VERSION = "v55-real-render-dedupe-2026-06-13";
 })();
 
 function normalize(s) {
@@ -337,6 +337,8 @@ async function fetchJson(url, cache = "no-store") {
 }
 
 function titleOf(m) {
+  if (typeof gkmApplyHardTypeV54 === "function") gkmApplyHardTypeV54(m);
+
   return m.ru || m.title || m.name || m.en || "Без названия";
 }
 
@@ -356,7 +358,56 @@ function getGenres(m) {
   return Array.isArray(m.genres) ? m.genres.filter(Boolean) : [];
 }
 
+
+
+/* === GKM V54 SCOOBY HARD FIX === */
+function gkmHardTitleHayV54(m) {
+  return String([
+    m && m.ru, m && m.en, m && m.title, m && m.name, m && m.title_ru,
+    m && m.originalTitle, m && m.original_title, m && m.title_original,
+    m && m.english,
+    ...(Array.isArray(m && m.aliases) ? m.aliases : []),
+    ...(Array.isArray(m && m.names) ? m.names : [])
+  ].join(" ")).toLowerCase().replaceAll("ё", "е");
+}
+
+function gkmIsScoobyV54(m) {
+  const h = gkmHardTitleHayV54(m);
+  return h.includes("scooby") || h.includes("скуби");
+}
+
+function gkmIsAnimeHardV54(m) {
+  if (gkmIsScoobyV54(m)) return false;
+  if (m && m.animeSites === false) return false;
+  const h = gkmHardTitleHayV54(m);
+  if (h.includes("scooby") || h.includes("скуби")) return false;
+  return false;
+}
+
+function gkmApplyHardTypeV54(m) {
+  if (!m || typeof m !== "object") return m;
+  if (gkmIsScoobyV54(m)) {
+    m.type = "Мультфильм";
+    m.animeSites = false;
+    if (!m.ru || /scooby/i.test(String(m.ru))) {
+      if (gkmHardTitleHayV54(m).includes("behind")) m.ru = "Скуби-Ду! За кадром";
+      else if (gkmHardTitleHayV54(m).includes("lego")) m.ru = "LEGO Скуби-Ду: короткометражки";
+      else m.ru = "Скуби-Ду";
+    }
+  }
+  return m;
+}
+
+function gkmApplyHardArrayV54(arr) {
+  if (!Array.isArray(arr)) return arr;
+  return arr.map(gkmApplyHardTypeV54);
+}
+
+window.GKM_SCOOBY_HARD_FIX_VERSION = "v54-scooby-hard-fix-2026-06-13";
+
 function getType(m) {
+  if (typeof gkmIsScoobyV54 === "function" && gkmIsScoobyV54(m)) return "Мультфильм";
+
   return m.type || "Фильм";
 }
 
@@ -449,6 +500,8 @@ function badgesHtml(m) {
 }
 
 function cardHtml(m) {
+  if (typeof gkmApplyHardTypeV54 === "function") gkmApplyHardTypeV54(m);
+
   const fav = loadSet(favKey);
   const isFav = fav.has(String(m.id));
   const rank = rankOf(m).rank;
@@ -483,6 +536,120 @@ function homeSectionHtml(title, items, tabName) {
     </section>
   `;
 }
+
+
+
+/* === GKM V55 REAL RENDER DEDUPE === */
+function gkmDedupeNormV55(v) {
+  return String(v || "")
+    .toLowerCase()
+    .replaceAll("ё", "е")
+    .replace(/['’`]/g, "")
+    .replace(/[^\p{L}\p{N}:]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function gkmAllNamesV55(m) {
+  if (!m || typeof m !== "object") return "";
+  return gkmDedupeNormV55([
+    m.ru, m.title_ru, m.ruTitle, m.title, m.name, m.en, m.english,
+    m.originalTitle, m.original_title, m.title_original, m.japanese, m.romaji,
+    ...(Array.isArray(m.aliases) ? m.aliases : []),
+    ...(Array.isArray(m.names) ? m.names : [])
+  ].join(" "));
+}
+
+function gkmCanonTitleV55(m) {
+  if (!m || typeof m !== "object") return "";
+  if (typeof gkmApplyHardTypeV54 === "function") gkmApplyHardTypeV54(m);
+  if (typeof applyManualFix === "function") applyManualFix(m);
+
+  const hay = gkmAllNamesV55(m);
+  const rules = [
+    ["witch hat atelier", "anime:ателье колдовских колпаков"],
+    ["atelier of witch hat", "anime:ателье колдовских колпаков"],
+    ["tongari boushi no atelier", "anime:ателье колдовских колпаков"],
+    ["とんがり帽子のアトリエ", "anime:ателье колдовских колпаков"],
+    ["oshi no ko season 3", "anime:звездное дитя сезон 3"],
+    ["推しの子 season 3", "anime:звездное дитя сезон 3"],
+    ["re zero starting life in another world season 4", "anime:re zero season 4"],
+    ["re:zero starting life in another world season 4", "anime:re zero season 4"],
+    ["jujutsu kaisen the culling game part 1", "anime:jujutsu kaisen culling game part 1"],
+    ["呪術廻戦 死滅回游", "anime:jujutsu kaisen culling game part 1"],
+    ["scooby doo behind the scenes", "cartoon:scooby doo behind the scenes"],
+    ["scooby-doo behind the scenes", "cartoon:scooby doo behind the scenes"],
+    ["lego scooby doo shorts", "cartoon:lego scooby doo shorts"],
+    ["lego scooby-doo shorts", "cartoon:lego scooby doo shorts"]
+  ];
+
+  for (const [needle, canon] of rules) {
+    if (hay.includes(gkmDedupeNormV55(needle))) return canon;
+  }
+
+  let title = "";
+  if (typeof titleOf === "function") title = titleOf(m);
+  title = title || m.ru || m.title_ru || m.ruTitle || m.title || m.name || m.en || m.original_title || "";
+  title = gkmDedupeNormV55(title);
+
+  // Чистим служебные слова, из-за которых рус/англ версии расходятся
+  title = title
+    .replace(/\bseason\b/g, "сезон")
+    .replace(/\bpart\b/g, "часть")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const year = String(m.year || m.release_year || "").slice(0, 4);
+  const type = typeof getType === "function" ? getType(m) : (m.type || "");
+  return [type, title, year].map(gkmDedupeNormV55).join("|");
+}
+
+function gkmQualityScoreV55(m) {
+  if (!m) return 0;
+  let s = 0;
+  if (m.poster) s += 20;
+  if (m.ru || m.title_ru || m.ruTitle) s += 15;
+  if (m.overview) s += 5;
+  if (m.animeSites === true) s += 3;
+  s += Math.min(Number(m.vote_count || m.votes || m.vote_average || 0) || 0, 100000) / 100000;
+  return s;
+}
+
+function gkmRealDedupeV55(arr) {
+  if (!Array.isArray(arr)) return arr;
+  const map = new Map();
+  const out = [];
+
+  for (const item of arr) {
+    if (!item || item.__gkmRemovedByManualFix) continue;
+    if (typeof gkmApplyHardTypeV54 === "function") gkmApplyHardTypeV54(item);
+    if (typeof applyManualFix === "function") applyManualFix(item);
+
+    const key = gkmCanonTitleV55(item);
+    if (!key || key === "||") {
+      out.push(item);
+      continue;
+    }
+
+    const prev = map.get(key);
+    if (!prev) {
+      map.set(key, item);
+      out.push(item);
+      continue;
+    }
+
+    if (gkmQualityScoreV55(item) > gkmQualityScoreV55(prev)) {
+      const idx = out.indexOf(prev);
+      if (idx >= 0) out[idx] = item;
+      map.set(key, item);
+    }
+  }
+
+  window.GKM_REAL_RENDER_DEDUPE_LAST = arr.length - out.length;
+  return out;
+}
+
+window.GKM_REAL_RENDER_DEDUPE_VERSION = "v55-real-render-dedupe-2026-06-13";
 
 function renderHome() {
   const grid = $("grid");
@@ -714,6 +881,7 @@ async function loadPage(tab, page = 1) {
 }
 
 function renderList(items, label) {
+  if (Array.isArray(arguments[0]) && typeof gkmRealDedupeV55 === "function") arguments[0] = gkmRealDedupeV55(arguments[0]);
   const grid = $("grid");
   const countText = $("countText");
   const pageText = $("pageText");
@@ -1071,6 +1239,7 @@ function matchesQuery(m, q) {
 }
 
 function renderSearchPage(page = 1) {
+  if (Array.isArray(lastSearchResults) && typeof gkmRealDedupeV55 === "function") lastSearchResults = gkmRealDedupeV55(lastSearchResults);
   currentPage = page;
   currentPages = Math.max(1, Math.ceil(lastSearchResults.length / PAGE_SIZE));
 
@@ -1270,6 +1439,7 @@ function openDetails(m) {
 
 
 function isAnimeLikeTitle(m) {
+  if (typeof gkmIsScoobyV54 === "function" && gkmIsScoobyV54(m)) return false;
   const hay = normKey([
     getType(m),
     titleOf(m),
@@ -3493,7 +3663,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v53-type-dedupe-fix-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v55-real-render-dedupe-2026-06-13";
 })();
 
 
@@ -4694,3 +4864,62 @@ window.GKM_BIG_MANUAL_FIXES_VERSION = "v53-type-dedupe-fix-2026-06-13";
 
 
 window.GKM_TYPE_DEDUPE_FIX_VERSION = "v53-type-dedupe-fix-2026-06-13";
+
+
+
+/* === GKM V54 DOM SAFETY FOR SCOOBY === */
+(function () {
+  function fixScoobyDom() {
+    document.querySelectorAll(".card, .movie-card, article").forEach(card => {
+      const txt = (card.innerText || "").toLowerCase();
+      if (!txt.includes("scooby") && !txt.includes("скуби")) return;
+
+      card.querySelectorAll(".badge, .type-badge, .card-badge, .pill").forEach(b => {
+        if ((b.textContent || "").includes("Аниме")) b.textContent = b.textContent.replace("Аниме", "Мультфильм");
+      });
+
+      card.innerHTML = card.innerHTML.replaceAll("1998 · Аниме", "1998 · Мультфильм")
+        .replaceAll("2015 · Аниме", "2015 · Мультфильм")
+        .replaceAll("2026 · Аниме", "2026 · Мультфильм");
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fixScoobyDom);
+  else fixScoobyDom();
+
+  new MutationObserver(fixScoobyDom).observe(document.body, { childList: true, subtree: true });
+})();
+
+
+
+
+/* === GKM V55 DOM DUPLICATE CLEANER === */
+(function () {
+  function cleanCards() {
+    const cards = [...document.querySelectorAll(".card, .movie-card, article")];
+    const seen = new Set();
+
+    for (const card of cards) {
+      const txt = (card.innerText || "").toLowerCase().replaceAll("ё","е");
+      let key = "";
+
+      if (txt.includes("witch hat atelier") || txt.includes("ателье колдовских колпаков") || txt.includes("とんがり帽子")) key = "witch-hat-atelier-2026";
+      else if (txt.includes("oshi no ko") || txt.includes("звездное дитя") || txt.includes("推しの子")) key = "oshi-no-ko";
+      else if (txt.includes("re:zero") || txt.includes("re zero")) key = "re-zero";
+      else if (txt.includes("scooby") || txt.includes("скуби")) key = txt.includes("lego") ? "lego-scooby" : "scooby";
+
+      if (!key) continue;
+      if (seen.has(key)) {
+        card.remove();
+      } else {
+        seen.add(key);
+      }
+    }
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", cleanCards);
+  else cleanCards();
+
+  new MutationObserver(cleanCards).observe(document.body, { childList: true, subtree: true });
+})();
+
