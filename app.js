@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v51-manual-fixes-system-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v52-big-manual-fixes-pack-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -39,7 +39,7 @@ const TAB_TO_PAGE = {
 
 /* === GKM V51 MANUAL FIXES SYSTEM === */
 (function () {
-  const FIX_URL = "data/manual_fixes.json?v=51";
+  const FIX_URL = "data/manual_fixes.json?v=52";
   let FIXES = null;
   let LOADING = false;
 
@@ -219,7 +219,7 @@ const TAB_TO_PAGE = {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initManualFixes);
   else initManualFixes();
 
-  window.GKM_MANUAL_FIXES_VERSION = "v51-manual-fixes-system-2026-06-13";
+  window.GKM_MANUAL_FIXES_VERSION = "v52-big-manual-fixes-pack-2026-06-13";
 })();
 
 function normalize(s) {
@@ -3418,7 +3418,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v51-manual-fixes-system-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v52-big-manual-fixes-pack-2026-06-13";
 })();
 
 
@@ -4613,3 +4613,6 @@ window.GKM_DETAIL_ANIME_SITES_VERSION = "v48-detail-anime-sites-real-2026-06-13"
 
 
 window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-search-2026-06-13";
+
+
+window.GKM_BIG_MANUAL_FIXES_VERSION = "v52-big-manual-fixes-pack-2026-06-13";
