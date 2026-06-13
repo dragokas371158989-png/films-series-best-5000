@@ -1381,58 +1381,53 @@ header .ai-top-btn {
 
 
 
-/* === GKM V33 MOBILE POSTER HARD CSS === */
+
+
+/* === GKM V34 MOBILE POSTER-WRAP CSS REAL FIX === */
 @media (max-width: 768px) {
-  .card,
-  .movie-card,
-  .item-card,
-  .catalog-card,
-  [data-id].card {
-    min-height: 260px !important;
+  .card {
+    content-visibility: visible !important;
+    contain-intrinsic-size: auto !important;
+    min-height: 340px !important;
   }
 
-  .poster,
-  .card-poster,
-  .movie-poster,
-  .item-poster,
-  .thumb,
-  .cover {
+  .poster-wrap {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    width: 100% !important;
+    aspect-ratio: 2 / 3 !important;
     min-height: 190px !important;
-    max-height: 280px !important;
-    background: #111827 !important;
+    max-height: none !important;
+    height: auto !important;
     overflow: hidden !important;
+    background: #111827 !important;
+    position: relative !important;
   }
 
-  .card img,
-  .movie-card img,
-  .item-card img,
-  .catalog-card img,
-  .poster img,
-  .card-poster img,
-  .movie-poster img,
-  .item-poster img,
-  .thumb img,
-  .cover img,
-  .gkm-mobile-created-poster {
+  .poster-wrap img,
+  .poster-wrap picture,
+  .gkm-mobile-poster-real {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     width: 100% !important;
     height: 100% !important;
     min-height: 190px !important;
-    max-height: 280px !important;
     object-fit: cover !important;
-    background: #111827 !important;
     position: relative !important;
-    z-index: 2 !important;
+    z-index: 1 !important;
   }
 
-  .card [style*="display: none"] img,
-  .movie-card [style*="display: none"] img,
-  .item-card [style*="display: none"] img {
-    display: block !important;
+  .poster-placeholder {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 190px !important;
+  }
+
+  .card-badges,
+  .card-fav-btn {
+    z-index: 5 !important;
   }
 }
