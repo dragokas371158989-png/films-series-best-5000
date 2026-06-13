@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v47-title-only-search-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v48-detail-anime-sites-real-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -837,6 +837,59 @@ function openDetails(m) {
   dialog.scrollTop = 0;
 }
 
+
+function isAnimeLikeTitle(m) {
+  const hay = normKey([
+    getType(m),
+    titleOf(m),
+    m.en,
+    m.ru,
+    m.title,
+    m.name,
+    m.original_title,
+    m.english,
+    m.japanese,
+    m.romaji,
+    m.source,
+    ...(m.genres || []),
+    ...(m.aliases || []),
+    ...(m.names || [])
+  ].join(" "));
+
+  if (getType(m) === "Аниме") return true;
+  if (hay.includes("аниме") || hay.includes("anime") || hay.includes("jikan") || hay.includes("myanimelist")) return true;
+
+  const hints = [
+    "naruto", "наруто", "boruto", "боруто",
+    "one piece", "ван пис", "ванпис", "ван-пис",
+    "bleach", "блич",
+    "demon slayer", "kimetsu", "истребитель демонов",
+    "jujutsu", "магическая битва",
+    "attack on titan", "атака титанов",
+    "hunter x hunter", "охотник",
+    "gintama", "гинтама",
+    "frieren", "фрирен",
+    "fullmetal", "стальной алхимик",
+    "chainsaw", "бензопила",
+    "dragon ball", "драконий жемчуг",
+    "re zero", "re:zero", "ре зеро",
+    "mushoku", "slime", "слизь",
+    "jojo", "джоджо",
+    "sword art online", "sao",
+    "one punch", "ванпанч",
+    "tokyo ghoul", "токийский гуль",
+    "black clover", "fairy tail",
+    "haikyuu", "волейбол",
+    "pokemon", "покемон",
+    "berserk", "берсерк",
+    "death note", "тетрадь смерти",
+    "violet evergarden", "вайолет эвергарден",
+    "avatar the last airbender", "аватар легенда об аанге"
+  ];
+
+  return hints.some(h => hay.includes(normKey(h)));
+}
+
 function setupDetailLinks(m) {
   const q = encodeURIComponent(titleOf(m));
   const fav = loadSet(favKey);
@@ -872,7 +925,50 @@ function setupDetailLinks(m) {
   }
 
   const animeBlock = $("animeLinksBlock");
-  if (animeBlock) animeBlock.style.display = getType(m) === "Аниме" ? "block" : "none";
+  if (animeBlock) animeBlock.style.display = isAnimeLikeTitle(m) ? "block" : "none";
+
+  ensureDetailAnimeExtraLinks(m);
+}
+
+
+
+function ensureDetailAnimeExtraLinks(m) {
+  const animeBlock = $("animeLinksBlock");
+  if (!animeBlock || !isAnimeLikeTitle(m)) return;
+
+  const q = encodeURIComponent(titleOf(m));
+  const titleText = normKey(titleOf(m) + " " + (m.en || "") + " " + (m.original_title || ""));
+  const isSlime = titleText.includes("слизь") || titleText.includes("slime") || titleText.includes("tensei shitara slime");
+
+  const links = [
+    ["shikimoriLink", "Shikimori", `https://shikimori.one/animes?search=${q}`],
+    ["malLink", "MyAnimeList", `https://myanimelist.net/anime.php?q=${q}`],
+    ["anilistLink", "AniList", `https://anilist.co/search/anime?search=${q}`],
+    ["animePlanetLink", "Anime-Planet", `https://www.anime-planet.com/anime/all?name=${q}`],
+    ["anidbLink", "AniDB", `https://anidb.net/anime/?adb.search=${q}&do.search=1`],
+    ["yummyAnimeLink", "YummyAnime", isSlime ? "https://yummyanime.tv/1204-o-moem-pererozhdenii-v-sliz-film-g1.html" : `https://yummyanime.tv/index.php?do=search&subaction=search&story=${q}`]
+  ];
+
+  let box = animeBlock.querySelector(".detail-buttons");
+  if (!box) {
+    box = document.createElement("div");
+    box.className = "detail-buttons";
+    animeBlock.appendChild(box);
+  }
+
+  for (const [id, text, href] of links) {
+    let a = document.getElementById(id);
+    if (!a) {
+      a = document.createElement("a");
+      a.id = id;
+      a.target = "_blank";
+      a.rel = "noreferrer";
+      a.textContent = text;
+      box.appendChild(a);
+    }
+    a.href = href;
+    a.style.display = "";
+  }
 }
 
 function toggleFavorite(id, btn) {
@@ -2965,7 +3061,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v47-title-only-search-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v48-detail-anime-sites-real-2026-06-13";
 })();
 
 
@@ -4211,3 +4307,6 @@ function gkmStrictTitleOnlyScoreV47(m, q) {
   new MutationObserver(bindV47).observe(document.body, { childList: true, subtree: true });
 })();
 
+
+
+window.GKM_DETAIL_ANIME_SITES_VERSION = "v48-detail-anime-sites-real-2026-06-13";
