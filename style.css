@@ -1431,3 +1431,45 @@ header .ai-top-btn {
     z-index: 5 !important;
   }
 }
+
+
+
+
+
+
+/* === GKM V37 REAL RU TITLES CSS === */
+.gkm-original-title {
+  margin-top: 3px;
+  font-size: 11px;
+  line-height: 1.2;
+  opacity: .58;
+  color: #9ca3af;
+}
+
+#gkmRuTitleToggle {
+  border: 1px solid rgba(139,220,255,.35);
+  background: rgba(16,24,39,.78);
+  color: #dff7ff;
+  border-radius: 999px;
+  padding: 8px 11px;
+  font-size: 13px;
+  cursor: pointer;
+  margin: 4px;
+}
+
+#gkmRuTitleToggle:hover {
+  background: rgba(27,38,59,.95);
+}
+
+@media (max-width: 768px) {
+  .gkm-original-title {
+    font-size: 10px;
+    max-height: 26px;
+    overflow: hidden;
+  }
+
+  #gkmRuTitleToggle {
+    font-size: 12px;
+    padding: 7px 9px;
+  }
+}
