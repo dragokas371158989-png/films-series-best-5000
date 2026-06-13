@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v41-hard-dedupe-cards-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v42-real-global-dedupe-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -2804,7 +2804,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v41-hard-dedupe-cards-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v42-real-global-dedupe-2026-06-13";
 })();
 
 
@@ -3623,7 +3623,7 @@ if (document.readyState === "loading") {
 })();
 
 
-/* === GKM V41 HARD DEDUPE CARDS === */
+/* === GKM V42 REAL GLOBAL DEDUPE === */
 (function () {
   function norm(v) {
     return String(v || "")
@@ -3634,118 +3634,264 @@ if (document.readyState === "loading") {
       .replace(/\bсезон\s*\d+\b/gi, " ")
       .replace(/\bpart\s*\d+\b/gi, " ")
       .replace(/\bчасть\s*\d+\b/gi, " ")
+      .replace(/\bova\b|\bona\b|\btv\b|\bmovie\b|\bspecial\b/gi, " ")
       .replace(/[^\p{L}\p{N}]+/gu, " ")
       .replace(/\s+/g, " ")
       .trim();
   }
 
-  function cardTitle(card) {
-    const el = card.querySelector(".card-title,.movie-title,.item-title,.card-name,.card__title,h3");
-    return norm((el && (el.getAttribute("title") || el.textContent)) || card.getAttribute("data-title") || card.textContent || "");
+  function titleFromCard(card) {
+    const selectors = [
+      ".card-title", ".movie-title", ".item-title", ".card-name", ".card__title",
+      ".title", "h3", "h2"
+    ];
+    for (const s of selectors) {
+      const el = card.querySelector(s);
+      if (!el) continue;
+      const raw = el.getAttribute("data-original-title") || el.getAttribute("title") || el.textContent || "";
+      const t = norm(raw);
+      if (t && t.length > 2) return t;
+    }
+
+    // запасной вариант: первая жирная строка в карточке
+    const lines = String(card.textContent || "")
+      .split("\n")
+      .map(x => norm(x))
+      .filter(Boolean)
+      .filter(x => !/^(аниме|сериал|мультфильм|фильм|топ|новинка|s класс|a класс|новый мало оценок)/.test(x));
+    return lines[0] || "";
   }
 
-  function cardYear(card) {
+  function yearFromCard(card) {
     const txt = String(card.textContent || "");
     const m = txt.match(/\b(19\d{2}|20\d{2})\b/);
     return m ? m[1] : "";
   }
 
-  function cardPoster(card) {
+  function posterFromCard(card) {
     const img = card.querySelector("img");
-    const src = img && (img.getAttribute("src") || img.getAttribute("data-src") || img.getAttribute("data-original"));
-    if (!src) return "";
-    return src.split("?")[0].replace(/\/w\d+\//, "/").slice(-80);
+    let src = img && (img.getAttribute("src") || img.getAttribute("data-src") || img.getAttribute("data-original"));
+    if (!src) {
+      const bg = getComputedStyle(card).backgroundImage || "";
+      const m = bg.match(/url\(["']?(.+?)["']?\)/);
+      src = m && m[1] ? m[1] : "";
+    }
+    return String(src || "").split("?")[0].replace(/\/w\d+\//, "/").slice(-90);
   }
 
-  function dupKey(card) {
-    const title = cardTitle(card);
-    const year = cardYear(card);
-    const poster = cardPoster(card);
-    if (title.length > 3) return title + "|" + year;
-    if (poster) return "poster|" + poster;
-    return title + "|" + poster;
+  function typeScore(card) {
+    const t = String(card.textContent || "").toLowerCase();
+    let s = 0;
+    if (t.includes("аниме")) s += 5;
+    if (t.includes("сериал")) s += 4;
+    if (t.includes("фильм")) s += 3;
+    if (t.includes("мультфильм")) s += 1;
+    if (t.includes("s-класс")) s += 8;
+    if (t.includes("a-класс")) s += 6;
+    if (t.includes("новый - мало оценок")) s -= 4;
+    if (card.querySelector("img")) s += 2;
+    return s;
   }
 
-  function hardDedupeCards() {
-    const sections = Array.from(document.querySelectorAll(
-      ".grid,.cards,.catalog-grid,.movie-grid,.items-grid,.popular,#popular,main,body"
-    ));
+  function keyFromCard(card) {
+    const title = titleFromCard(card);
+    const year = yearFromCard(card);
+    const poster = posterFromCard(card);
 
-    sections.forEach(section => {
-      const cards = Array.from(section.querySelectorAll(":scope > .card, :scope > .movie-card, :scope > .item-card, :scope > .catalog-card"));
-      if (cards.length < 2) return;
+    // Главный ключ: рус/англ название + год. Тип не учитываем специально,
+    // чтобы убрать "одно и то же" как Аниме/Мультфильм.
+    if (title && title.length > 2) return "t|" + title + "|" + year;
 
-      const seen = new Set();
-      cards.forEach(card => {
-        const k = dupKey(card);
-        if (!k || k.length < 5) return;
+    if (poster && poster.length > 10) return "p|" + poster;
+    return "";
+  }
 
-        if (seen.has(k)) {
-          card.remove();
-        } else {
-          seen.add(k);
-        }
+  function getAllCards() {
+    return Array.from(document.querySelectorAll(".card, .movie-card, .item-card, .catalog-card"))
+      .filter(card => {
+        const t = String(card.textContent || "").trim();
+        return t.length > 5 || card.querySelector("img");
       });
-    });
+  }
+
+  function dedupeDomGlobal() {
+    const cards = getAllCards();
+    if (cards.length < 2) return;
+
+    const groups = new Map();
+
+    for (const card of cards) {
+      const key = keyFromCard(card);
+      if (!key) continue;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(card);
+    }
+
+    let removed = 0;
+
+    for (const [key, list] of groups.entries()) {
+      if (list.length < 2) continue;
+
+      // Оставляем лучшую карточку: чаще всего аниме/сериал с рейтингом важнее, чем дубль-мультфильм.
+      list.sort((a, b) => typeScore(b) - typeScore(a));
+      const keep = list[0];
+
+      for (let i = 1; i < list.length; i++) {
+        const card = list[i];
+        if (card === keep) continue;
+        card.remove();
+        removed++;
+      }
+    }
+
+    window.GKM_LAST_DEDUPE_REMOVED = removed;
+  }
+
+  function itemTitle(item) {
+    return norm(
+      item && (
+        item.title_ru || item.ruTitle || item.title || item.name ||
+        item.original_title || item.english || item.japanese || item.romaji || ""
+      )
+    );
+  }
+
+  function itemYear(item) {
+    return String(item && (item.year || item.release_year || item.start_year || item.date || "") || "").match(/\b(19\d{2}|20\d{2})\b/)?.[1] || "";
+  }
+
+  function itemPoster(item) {
+    return String(item && (item.poster || item.poster_path || item.image || item.cover || "") || "")
+      .split("?")[0]
+      .replace(/\/w\d+\//, "/")
+      .slice(-90);
+  }
+
+  function itemScore(item) {
+    let s = 0;
+    const txt = String(JSON.stringify(item || {})).toLowerCase();
+    if (txt.includes("аниме") || txt.includes("anime")) s += 5;
+    if (txt.includes("сериал") || txt.includes("series")) s += 4;
+    if (txt.includes("мультфильм") || txt.includes("cartoon")) s += 1;
+    const rating = Number(item && (item.rating || item.score || item.vote_average || 0)) || 0;
+    s += rating;
+    const votes = Number(item && (item.votes || item.vote_count || item.scored_by || 0)) || 0;
+    if (votes > 1000) s += 4;
+    if (item && (item.poster || item.poster_path || item.image)) s += 2;
+    return s;
   }
 
   function dedupeArray(arr) {
     if (!Array.isArray(arr)) return arr;
-    const seen = new Set();
-    const out = [];
+
+    const map = new Map();
 
     for (const item of arr) {
       if (!item || typeof item !== "object") {
-        out.push(item);
+        const k = "raw|" + String(item);
+        if (!map.has(k)) map.set(k, item);
         continue;
       }
 
-      const title = norm(item.title || item.name || item.title_ru || item.ruTitle || item.original_title || "");
-      const year = item.year || item.release_year || item.date || "";
-      const poster = String(item.poster || item.poster_path || item.image || "").split("?")[0].slice(-80);
-      const k = title ? (title + "|" + year) : ("poster|" + poster);
+      const title = itemTitle(item);
+      const year = itemYear(item);
+      const poster = itemPoster(item);
 
-      if (!k || seen.has(k)) continue;
-      seen.add(k);
-      out.push(item);
+      let k = title && title.length > 2 ? ("t|" + title + "|" + year) : "";
+      if (!k && poster) k = "p|" + poster;
+      if (!k) k = "id|" + (item.id || item.mal_id || item.tmdb_id || Math.random());
+
+      const old = map.get(k);
+      if (!old || itemScore(item) > itemScore(old)) {
+        map.set(k, item);
+      }
     }
 
-    return out;
+    return Array.from(map.values());
   }
 
   function patchGlobalArray(name) {
     try {
-      let value = window[name];
-      if (Array.isArray(value)) value = dedupeArray(value);
+      let val = window[name];
+      if (Array.isArray(val)) val = dedupeArray(val);
 
       Object.defineProperty(window, name, {
         configurable: true,
-        get() { return value; },
-        set(v) { value = Array.isArray(v) ? dedupeArray(v) : v; }
+        get() { return val; },
+        set(v) { val = Array.isArray(v) ? dedupeArray(v) : v; }
       });
     } catch(e) {}
   }
 
-  ["items","allItems","movies","GKM_ITEMS","catalogItems","DATA","db"].forEach(patchGlobalArray);
+  function patchGlobals() {
+    ["items","allItems","movies","GKM_ITEMS","catalogItems","DATA","db"].forEach(patchGlobalArray);
+    ["items","allItems","movies","GKM_ITEMS","catalogItems","DATA","db"].forEach(n => {
+      if (Array.isArray(window[n])) window[n] = dedupeArray(window[n]);
+    });
+  }
+
+  // Патчим fetch, чтобы JSON-массивы и chunks сразу чистились при загрузке.
+  const oldFetch = window.fetch;
+  if (typeof oldFetch === "function" && !oldFetch.__gkmDedupeV42) {
+    const wrappedFetch = async function(...args) {
+      const res = await oldFetch.apply(this, args);
+      try {
+        const url = String(args[0] && (args[0].url || args[0]) || "");
+        if (!/\.json(\?|$)|\/data\//i.test(url)) return res;
+
+        const clone = res.clone();
+        const data = await clone.json();
+
+        let changed = false;
+        let out = data;
+
+        if (Array.isArray(data)) {
+          out = dedupeArray(data);
+          changed = out.length !== data.length;
+        } else if (data && typeof data === "object") {
+          for (const k of ["items","movies","results","data","records"]) {
+            if (Array.isArray(data[k])) {
+              const before = data[k].length;
+              data[k] = dedupeArray(data[k]);
+              if (data[k].length !== before) changed = true;
+            }
+          }
+          out = data;
+        }
+
+        if (!changed) return res;
+
+        return new Response(JSON.stringify(out), {
+          status: res.status,
+          statusText: res.statusText,
+          headers: res.headers
+        });
+      } catch(e) {
+        return res;
+      }
+    };
+    wrappedFetch.__gkmDedupeV42 = true;
+    window.fetch = wrappedFetch;
+  }
 
   let timer = 0;
   function schedule() {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      ["items","allItems","movies","GKM_ITEMS","catalogItems","DATA","db"].forEach(n => {
-        if (Array.isArray(window[n])) window[n] = dedupeArray(window[n]);
-      });
-      hardDedupeCards();
-    }, 150);
+      patchGlobals();
+      dedupeDomGlobal();
+    }, 120);
   }
+
+  patchGlobals();
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", schedule);
   else schedule();
 
   window.addEventListener("load", schedule);
-  document.addEventListener("click", () => setTimeout(schedule, 180), true);
+  document.addEventListener("click", () => setTimeout(schedule, 160), true);
   new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
 
-  window.GKM_HARD_DEDUPE_VERSION = "v41-hard-dedupe-cards-2026-06-13";
+  window.GKM_REAL_DEDUPE_VERSION = "v42-real-global-dedupe-2026-06-13";
 })();
 
