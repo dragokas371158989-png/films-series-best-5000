@@ -740,5 +740,87 @@
       "reincarnated as a slime"
     ],
     "yummyanime": "https://yummyanime.tv/1204-o-moem-pererozhdenii-v-sliz-film-g1.html"
+  },
+  "scooby-doo": {
+    "type": "Мультфильм",
+    "ru": "Скуби-Ду",
+    "animeSites": false,
+    "aliases": [
+      "scooby-doo",
+      "scooby doo",
+      "скуби ду",
+      "скуби-ду"
+    ]
+  },
+  "scooby-doo behind the scenes": {
+    "type": "Мультфильм",
+    "ru": "Скуби-Ду! За кадром",
+    "animeSites": false,
+    "aliases": [
+      "scooby-doo behind the scenes",
+      "behind the scenes",
+      "скуби ду за кадром"
+    ]
+  },
+  "lego scooby-doo shorts": {
+    "type": "Мультфильм",
+    "ru": "LEGO Скуби-Ду: короткометражки",
+    "animeSites": false,
+    "aliases": [
+      "lego scooby-doo shorts",
+      "lego scooby doo",
+      "лего скуби ду"
+    ]
+  },
+  "ordinary cartoon lost plans": {
+    "type": "Мультфильм",
+    "ru": "Обычный мультик: Утерянные плёнки",
+    "animeSites": false,
+    "aliases": [
+      "обычный мультик утерянные пленки",
+      "regular show lost tapes",
+      "ordinary cartoon lost plans"
+    ]
+  },
+  "witch hat atelier": {
+    "type": "Аниме",
+    "ru": "Ателье колдовских колпаков",
+    "animeSites": true,
+    "aliases": [
+      "witch hat atelier",
+      "ателье колдовских колпаков",
+      "tongari boushi no atelier"
+    ]
+  },
+  "tongari boushi no atelier": {
+    "type": "Аниме",
+    "ru": "Ателье колдовских колпаков",
+    "animeSites": true,
+    "aliases": [
+      "witch hat atelier",
+      "ателье колдовских колпаков",
+      "tongari boushi no atelier"
+    ]
+  },
+  "oshi no ko": {
+    "type": "Аниме",
+    "ru": "Звёздное дитя",
+    "animeSites": true,
+    "aliases": [
+      "oshi no ko",
+      "oshi no ko season",
+      "звездное дитя",
+      "звёздное дитя"
+    ]
+  },
+  "re zero season 4": {
+    "type": "Аниме",
+    "ru": "Re:ZERO — Жизнь с нуля в альтернативном мире: Сезон 4",
+    "animeSites": true,
+    "aliases": [
+      "re zero season 4",
+      "re:zero season 4",
+      "re zero starting life in another world season 4"
+    ]
   }
 }
