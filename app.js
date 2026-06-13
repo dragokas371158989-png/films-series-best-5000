@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v33-mobile-poster-hard-fix-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v34-mobile-poster-wrap-fix-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -165,7 +165,7 @@ function fillFilters() {
 
 function posterHtml(m) {
   if (m.poster) {
-    return `<img src="${escapeAttr(m.poster)}" loading="lazy" decoding="async" alt="">`;
+    return `<img src="${escapeAttr(m.poster)}" loading="eager" decoding="async" fetchpriority="high" alt="">`;
   }
 
   return `<div class="poster-placeholder">Нет постера</div>`;
@@ -2804,7 +2804,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v33-mobile-poster-hard-fix-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v34-mobile-poster-wrap-fix-2026-06-13";
 })();
 
 
@@ -2943,9 +2943,9 @@ if (document.readyState === "loading") {
 })();
 
 
-/* === GKM V33 MOBILE POSTER HARD FIX === */
+/* === GKM V34 MOBILE POSTER-WRAP REAL FIX === */
 (function () {
-  const FALLBACK_POSTER = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
+  const FALLBACK = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
     '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="450"><rect width="100%" height="100%" fill="#111827"/><text x="50%" y="48%" fill="#8bdcff" font-size="22" text-anchor="middle" font-family="Arial">Нет постера</text></svg>'
   );
 
@@ -2953,96 +2953,78 @@ if (document.readyState === "loading") {
     return window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
   }
 
-  function posterFromCard(card) {
-    if (!card) return "";
-
-    const attrs = [
-      "data-poster",
-      "data-poster-url",
-      "data-img",
-      "data-image",
-      "data-src",
-      "poster"
-    ];
-
-    for (const a of attrs) {
-      const v = card.getAttribute && card.getAttribute(a);
-      if (v && /^https?:|^data:|^\//.test(v)) return v;
-    }
-
-    const img = card.querySelector && card.querySelector("img");
-    if (img) {
-      const v = img.getAttribute("src") || img.getAttribute("data-src") || img.getAttribute("data-original");
-      if (v) return v;
-    }
-
-    const nodes = [card, ...(card.querySelectorAll ? Array.from(card.querySelectorAll("*")) : [])];
-    for (const el of nodes) {
-      const bg = (el.style && el.style.backgroundImage) || "";
-      const m = bg.match(/url\(["']?(.+?)["']?\)/);
-      if (m && m[1]) return m[1];
-    }
-
-    return "";
+  function getBgUrl(el) {
+    const bg = (el && getComputedStyle(el).backgroundImage) || (el && el.style && el.style.backgroundImage) || "";
+    const m = bg.match(/url\(["']?(.+?)["']?\)/);
+    return m && m[1] ? m[1] : "";
   }
 
-  function ensurePosterImg(card) {
-    if (!card) return;
-
-    let box =
-      card.querySelector(".poster, .card-poster, .movie-poster, .item-poster, .thumb, .cover") ||
-      card;
-
-    let img = box.querySelector && box.querySelector("img");
-
-    if (!img) {
-      img = document.createElement("img");
-      img.className = "gkm-mobile-created-poster";
-      img.alt = "poster";
-      box.prepend(img);
-    }
-
-    const src = img.getAttribute("src") ||
-      img.getAttribute("data-src") ||
-      img.getAttribute("data-original") ||
-      posterFromCard(card) ||
-      FALLBACK_POSTER;
-
-    img.setAttribute("src", src);
-    img.removeAttribute("data-src");
-    img.removeAttribute("data-original");
-    img.loading = "eager";
-    img.decoding = "async";
-
-    img.onerror = function () {
-      this.onerror = null;
-      this.src = FALLBACK_POSTER;
-    };
-
-    box.style.display = "block";
-    box.style.visibility = "visible";
-    box.style.opacity = "1";
-  }
-
-  function fixMobilePosters() {
+  function fixPosterWraps() {
     if (!isMobile()) return;
 
-    const cards = Array.from(document.querySelectorAll(
-      ".card, .movie-card, .item-card, .catalog-card, [data-id].card, [data-id]"
-    ));
+    document.querySelectorAll(".card").forEach(card => {
+      card.style.contentVisibility = "visible";
+      card.style.containIntrinsicSize = "auto";
 
-    cards.forEach(card => {
-      const text = (card.textContent || "").trim();
-      // не трогаем кнопки/панели, только похожие на карточки элементы
-      if (!text && !posterFromCard(card)) return;
-      ensurePosterImg(card);
+      let wrap = card.querySelector(".poster-wrap");
+      if (!wrap) {
+        wrap = document.createElement("div");
+        wrap.className = "poster-wrap";
+        card.prepend(wrap);
+      }
+
+      wrap.style.display = "block";
+      wrap.style.visibility = "visible";
+      wrap.style.opacity = "1";
+      wrap.style.minHeight = "190px";
+
+      let img = wrap.querySelector("img");
+
+      if (!img) {
+        img = document.createElement("img");
+        img.className = "gkm-mobile-poster-real";
+        img.alt = "";
+        wrap.appendChild(img);
+      }
+
+      const src =
+        img.getAttribute("src") ||
+        img.getAttribute("data-src") ||
+        img.getAttribute("data-original") ||
+        card.getAttribute("data-poster") ||
+        card.getAttribute("data-img") ||
+        getBgUrl(wrap) ||
+        getBgUrl(card) ||
+        "";
+
+      img.loading = "eager";
+      img.decoding = "async";
+      img.setAttribute("fetchpriority", "high");
+
+      if (src) {
+        img.src = src;
+      } else if (!img.src) {
+        img.src = FALLBACK;
+      }
+
+      img.onerror = function () {
+        this.onerror = null;
+        this.src = FALLBACK;
+      };
+
+      img.style.display = "block";
+      img.style.visibility = "visible";
+      img.style.opacity = "1";
+      img.style.width = "100%";
+      img.style.height = "100%";
+      img.style.objectFit = "cover";
     });
   }
 
-  let timer = 0;
+  let t = 0;
   function schedule() {
-    clearTimeout(timer);
-    timer = setTimeout(fixMobilePosters, 180);
+    clearTimeout(t);
+    t = setTimeout(fixPosterWraps, 120);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", schedule);
@@ -3050,11 +3032,10 @@ if (document.readyState === "loading") {
 
   window.addEventListener("load", schedule);
   window.addEventListener("resize", schedule);
-  document.addEventListener("click", () => setTimeout(schedule, 250), true);
+  document.addEventListener("click", () => setTimeout(schedule, 200), true);
   document.addEventListener("scroll", schedule, { passive: true });
-
   new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
 
-  window.GKM_MOBILE_POSTER_HARD_FIX_VERSION = "v33-mobile-poster-hard-fix-2026-06-13";
+  window.GKM_MOBILE_POSTER_WRAP_FIX_VERSION = "v34-mobile-poster-wrap-fix-2026-06-13";
 })();
 
