@@ -1377,3 +1377,55 @@ header .ai-top-btn {
 .ai-action-row button:hover {
   transform: translateY(-1px);
 }
+
+
+/* === GKM V32 MOBILE POSTER FIX === */
+@media (max-width: 768px) {
+  .card,
+  .movie-card,
+  .item-card {
+    overflow: hidden !important;
+  }
+
+  .card img,
+  .poster img,
+  .movie-card img,
+  .item-card img,
+  img.poster {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 170px !important;
+    max-height: 260px !important;
+    object-fit: cover !important;
+    background: #111827 !important;
+  }
+
+  .poster,
+  .card-poster,
+  .movie-poster,
+  .item-poster {
+    display: block !important;
+    min-height: 170px !important;
+    background: #111827 !important;
+    overflow: hidden !important;
+  }
+
+  #gkmAiDialog,
+  .ai-dialog {
+    max-height: 82vh !important;
+  }
+
+  .ai-rec-card {
+    contain: content !important;
+  }
+
+  .ai-rec-poster {
+    width: 58px !important;
+    height: 84px !important;
+    min-height: 84px !important;
+    flex-basis: 58px !important;
+  }
+}
