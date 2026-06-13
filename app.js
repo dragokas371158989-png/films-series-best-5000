@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v52-big-manual-fixes-pack-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v53-type-dedupe-fix-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -39,7 +39,7 @@ const TAB_TO_PAGE = {
 
 /* === GKM V51 MANUAL FIXES SYSTEM === */
 (function () {
-  const FIX_URL = "data/manual_fixes.json?v=52";
+  const FIX_URL = "data/manual_fixes.json?v=53";
   let FIXES = null;
   let LOADING = false;
 
@@ -90,7 +90,12 @@ const TAB_TO_PAGE = {
       const aliases = Array.isArray(fix.aliases) ? fix.aliases.map(normFix) : [];
       const keys = [k, ...aliases].filter(Boolean);
 
-      if (names.some(n => keys.some(x => n === x || n.includes(x) || x.includes(n)))) {
+      if (names.some(n => keys.some(x => {
+        if (!n || !x) return false;
+        if (n === x) return true;
+        if (x.length >= 4 && n.includes(x)) return true;
+        return false;
+      }))) {
         return fix;
       }
     }
@@ -140,14 +145,83 @@ const TAB_TO_PAGE = {
     return item;
   }
 
-  function applyManualFixesArray(arr) {
+  
+function gkmManualDedupeKeyV53(item) {
+  if (!item || typeof item !== "object") return "";
+  const rawTitle = [
+    item.ru, item.title_ru, item.ruTitle, item.title, item.name,
+    item.originalTitle, item.original_title, item.title_original, item.en, item.english
+  ].filter(Boolean)[0] || "";
+
+  let t = normFix(rawTitle);
+  const alias = [
+    ["witch hat atelier", "ателье колдовских колпаков"],
+    ["tongari boushi no atelier", "ателье колдовских колпаков"],
+    ["oshi no ko", "звездное дитя"],
+    ["re zero starting life in another world", "re zero"],
+    ["re:zero starting life in another world", "re zero"],
+    ["scooby doo", "скуби ду"],
+    ["scooby-doo", "скуби ду"]
+  ];
+
+  const hay = normFix([
+    item.ru, item.title, item.name, item.en, item.original_title, item.title_original,
+    ...(Array.isArray(item.aliases) ? item.aliases : [])
+  ].join(" "));
+
+  for (const [a, b] of alias) {
+    if (hay.includes(normFix(a)) || hay.includes(normFix(b))) {
+      t = normFix(b);
+      break;
+    }
+  }
+
+  const y = item.year || item.release_year || item.first_air_date || "";
+  const type = item.type || "";
+  return [t, y, type].join("|");
+}
+
+function gkmManualDedupeArrayV53(arr) {
+  if (!Array.isArray(arr)) return arr;
+  const seen = new Map();
+  const out = [];
+
+  for (const item of arr) {
+    const key = gkmManualDedupeKeyV53(item);
+    if (!key || key === "||") {
+      out.push(item);
+      continue;
+    }
+
+    if (!seen.has(key)) {
+      seen.set(key, item);
+      out.push(item);
+      continue;
+    }
+
+    const old = seen.get(key);
+    const oldScore = (old.poster ? 10 : 0) + (old.ru ? 8 : 0) + (old.overview ? 3 : 0) + (Number(old.vote_count || old.votes || 0) / 100000);
+    const newScore = (item.poster ? 10 : 0) + (item.ru ? 8 : 0) + (item.overview ? 3 : 0) + (Number(item.vote_count || item.votes || 0) / 100000);
+
+    if (newScore > oldScore) {
+      const idx = out.indexOf(old);
+      if (idx >= 0) out[idx] = item;
+      seen.set(key, item);
+    }
+  }
+
+  window.GKM_MANUAL_DEDUPE_LAST = arr.length - out.length;
+  return out;
+}
+
+function applyManualFixesArray(arr) {
     if (!Array.isArray(arr)) return arr;
     const out = [];
     for (const item of arr) {
       const fixed = applyManualFix(item);
       if (fixed && !fixed.__gkmRemovedByManualFix) out.push(fixed);
     }
-    return out;
+    return gkmManualDedupeArrayV53(out);
   }
 
   function patchGlobal(name) {
@@ -219,7 +293,7 @@ const TAB_TO_PAGE = {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initManualFixes);
   else initManualFixes();
 
-  window.GKM_MANUAL_FIXES_VERSION = "v52-big-manual-fixes-pack-2026-06-13";
+  window.GKM_MANUAL_FIXES_VERSION = "v53-type-dedupe-fix-2026-06-13";
 })();
 
 function normalize(s) {
@@ -1213,6 +1287,7 @@ function isAnimeLikeTitle(m) {
     ...(m.names || [])
   ].join(" "));
 
+  if (m.animeSites === false) return false;
   if (getType(m) === "Аниме" || m.animeSites === true) return true;
   if (hay.includes("аниме") || hay.includes("anime") || hay.includes("jikan") || hay.includes("myanimelist")) return true;
 
@@ -3418,7 +3493,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v52-big-manual-fixes-pack-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v53-type-dedupe-fix-2026-06-13";
 })();
 
 
@@ -4615,4 +4690,7 @@ window.GKM_DETAIL_ANIME_SITES_VERSION = "v48-detail-anime-sites-real-2026-06-13"
 window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-search-2026-06-13";
 
 
-window.GKM_BIG_MANUAL_FIXES_VERSION = "v52-big-manual-fixes-pack-2026-06-13";
+window.GKM_BIG_MANUAL_FIXES_VERSION = "v53-type-dedupe-fix-2026-06-13";
+
+
+window.GKM_TYPE_DEDUPE_FIX_VERSION = "v53-type-dedupe-fix-2026-06-13";
