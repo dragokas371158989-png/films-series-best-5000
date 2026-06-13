@@ -1555,3 +1555,48 @@ a {
     height: auto !important;
   }
 }
+
+
+/* === GKM V40 NO TITLE CUT CSS === */
+.card-title,
+.movie-title,
+.item-title,
+.card-name,
+.card__title,
+.card h3,
+.movie-card h3,
+.item-card h3 {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
+  max-height: none !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+/* Чуть меньше шрифт, чтобы русские названия помещались аккуратнее */
+.card-title,
+.movie-title,
+.item-title,
+.card-name,
+.card__title {
+  font-size: 16px !important;
+  line-height: 1.12 !important;
+}
+
+@media (max-width: 768px) {
+  .card-title,
+  .movie-title,
+  .item-title,
+  .card-name,
+  .card__title,
+  .card h3,
+  .movie-card h3,
+  .item-card h3 {
+    font-size: 14px !important;
+    line-height: 1.12 !important;
+  }
+}
