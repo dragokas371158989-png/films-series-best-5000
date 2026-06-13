@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v31-yummyanime-anime-sites-exact-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v32-mobile-images-helper-light-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -2350,7 +2350,7 @@ if (document.readyState === "loading") {
 
     const fullPool = pools(idx).filter(item => matchesKind(item, cls.kind));
     const candidates = [];
-    const maxCandidates = 2600;
+    const maxCandidates = (window.GKM_MOBILE_HELPER_LIGHT ? 350 : 1600);
 
     for (let i = 0; i < fullPool.length; i++) {
       const item = fullPool[i];
@@ -2804,7 +2804,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v31-yummyanime-anime-sites-exact-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v32-mobile-images-helper-light-2026-06-13";
 })();
 
 
@@ -2940,5 +2940,64 @@ if (document.readyState === "loading") {
 
   window.GKM_YUMMYANIME_LINK_VERSION = "v31-yummyanime-anime-sites-exact-2026-06-13";
   window.GKM_NO_FREEZE_VERSION = "v31-yummyanime-anime-sites-exact-2026-06-13";
+})();
+
+
+/* === GKM V32 MOBILE IMAGES + HELPER LIGHT PATCH === */
+(function () {
+  function isMobileGkm() {
+    return window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
+  }
+
+  function fixCardImages() {
+    const imgs = Array.from(document.querySelectorAll(".card img, .poster img, .movie-card img, .item-card img, img.poster"));
+    imgs.forEach(img => {
+      img.loading = "eager";
+      img.decoding = "async";
+      img.style.display = "block";
+      img.style.opacity = "1";
+      img.style.visibility = "visible";
+
+      const src = img.getAttribute("src") || img.getAttribute("data-src") || img.getAttribute("data-original") || "";
+      if (!img.getAttribute("src") && src) img.setAttribute("src", src);
+
+      img.onerror = function () {
+        this.onerror = null;
+        this.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
+          '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="450"><rect width="100%" height="100%" fill="#111827"/><text x="50%" y="48%" fill="#8bdcff" font-size="22" text-anchor="middle" font-family="Arial">Нет постера</text></svg>'
+        );
+      };
+    });
+  }
+
+  function makeHelperMobileLight() {
+    if (!isMobileGkm()) return;
+    window.GKM_MOBILE_HELPER_LIGHT = true;
+
+    const input = document.getElementById("gkmAiInput");
+    if (input && !input.dataset.mobileLightReady) {
+      input.dataset.mobileLightReady = "1";
+      input.placeholder = "Моб. режим: короткий запрос...";
+    }
+  }
+
+  let t = 0;
+  function scheduleFix() {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      fixCardImages();
+      makeHelperMobileLight();
+    }, 160);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleFix);
+  } else {
+    scheduleFix();
+  }
+
+  new MutationObserver(scheduleFix).observe(document.body, { childList: true, subtree: true });
+
+  window.GKM_MOBILE_FIX_VERSION = "v32-mobile-images-helper-light-2026-06-13";
 })();
 
