@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v45-fast-correct-search-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v46-strict-title-search-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -561,7 +561,9 @@ function gkmTitleHayV45(m) {
   if (m.__gkmTitleHayV45) return m.__gkmTitleHayV45;
   m.__gkmTitleHayV45 = normKey([
     m.ru, m.en, m.title, m.name, m.title_ru, m.ruTitle, m.title_original,
-    m.originalTitle, m.original_title, m.english, m.japanese, m.romaji
+    m.originalTitle, m.original_title, m.english, m.japanese, m.romaji,
+    ...(m.aliases || []),
+    ...(m.names || [])
   ].join(" "));
   return m.__gkmTitleHayV45;
 }
@@ -572,16 +574,7 @@ function gkmFullHayV45(m) {
     gkmTitleHayV45(m),
     m.year, m.type, m.source, m.status,
     ...(m.genres || []),
-    ...(m.aliases || []),
-    ...(m.names || []),
-    m.overview || "",
-    m.searchTitle || "",
-    m.absoluteText || "",
-    m.infinityText || "",
-    m.supremeText || "",
-    m.omegaText || "",
-    m.apexText || "",
-    m.recText || ""
+    m.searchTitle || ""
   ].join(" "));
   return m.__gkmFullHayV45;
 }
@@ -599,33 +592,41 @@ function gkmSearchScoreV45(m, q) {
   for (const v of variants) {
     if (!v) continue;
 
-    if (titleHay === v) best = Math.max(best, 10000);
-    else if (titleHay.startsWith(v + " ")) best = Math.max(best, 8500);
-    else if (titleHay.includes(v)) best = Math.max(best, 7000);
-    else if (fullHay.includes(v)) best = Math.max(best, 2500);
-
     const parts = v.split(" ").filter(x => x.length > 1);
+
+    if (titleHay === v) best = Math.max(best, 100000);
+    else if (titleHay.startsWith(v + " ")) best = Math.max(best, 90000);
+    else if (titleHay.includes(" " + v + " ") || titleHay.includes(v)) best = Math.max(best, 80000);
+
     if (parts.length) {
       let titleHits = 0;
-      let fullHits = 0;
 
       for (const p of parts) {
         if (titleHay.includes(p)) titleHits++;
         else if (p.length >= 4 && titleWords.some(w => gkmLevSmallV45(w, p) <= (p.length <= 5 ? 1 : 2))) titleHits++;
-
-        if (fullHay.includes(p)) fullHits++;
       }
 
-      if (titleHits === parts.length) best = Math.max(best, 6000 + titleHits * 100);
-      else if (titleHits >= Math.ceil(parts.length * 0.7)) best = Math.max(best, 4200 + titleHits * 80);
-      else if (fullHits === parts.length) best = Math.max(best, 1800 + fullHits * 50);
+      if (titleHits === parts.length) best = Math.max(best, 70000 + titleHits * 500);
+      else if (parts.length >= 2 && titleHits >= Math.ceil(parts.length * 0.75)) best = Math.max(best, 50000 + titleHits * 300);
+    }
+
+    // Описание/жанры используем только для длинных запросов.
+    // Одно слово "наруто" больше не тащит мусор из overview.
+    if (best === 0 && v.length >= 8 && parts.length >= 2) {
+      if (fullHay.includes(v)) best = Math.max(best, 9000);
+
+      let fullHits = 0;
+      for (const p of parts) {
+        if (fullHay.includes(p)) fullHits++;
+      }
+      if (fullHits === parts.length) best = Math.max(best, 7000 + fullHits * 100);
     }
   }
 
   if (best > 0) {
     best += Math.min(getRating(m) || 0, 10) * 10;
     best += Math.min(getVotes(m) || 0, 100000) / 1000;
-    if (getType(m) === "Аниме") best += 120;
+    if (getType(m) === "Аниме") best += 500;
   }
 
   return best;
@@ -2969,7 +2970,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v45-fast-correct-search-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v46-strict-title-search-2026-06-13";
 })();
 
 
@@ -4117,5 +4118,11 @@ if (document.readyState === "loading") {
   new MutationObserver(bindSearchV45).observe(document.body, { childList: true, subtree: true });
 
   window.GKM_FAST_SEARCH_VERSION = "v45-fast-correct-search-2026-06-13";
+})();
+
+
+/* === GKM V46 STRICT TITLE SEARCH GUARD === */
+(function () {
+  window.GKM_STRICT_TITLE_SEARCH_VERSION = "v46-strict-title-search-2026-06-13";
 })();
 
