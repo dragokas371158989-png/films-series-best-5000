@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v50-strict-visible-title-search-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v51-manual-fixes-system-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -34,6 +34,193 @@ const TAB_TO_PAGE = {
   new: "new",
   popular: "popular",
 };
+
+
+
+/* === GKM V51 MANUAL FIXES SYSTEM === */
+(function () {
+  const FIX_URL = "data/manual_fixes.json?v=51";
+  let FIXES = null;
+  let LOADING = false;
+
+  function normFix(v) {
+    return String(v || "")
+      .toLowerCase()
+      .replaceAll("ё", "е")
+      .replace(/['’`]/g, "")
+      .replace(/[^\p{L}\p{N}:]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  async function loadManualFixes() {
+    if (FIXES || LOADING) return FIXES || {};
+    LOADING = true;
+    try {
+      const r = await fetch(FIX_URL, { cache: "no-store" });
+      FIXES = r.ok ? await r.json() : {};
+    } catch (e) {
+      FIXES = {};
+    }
+    LOADING = false;
+    window.GKM_MANUAL_FIXES_COUNT = Object.keys(FIXES || {}).filter(k => !k.startsWith("_")).length;
+    return FIXES || {};
+  }
+
+  function itemNamesForFix(item) {
+    if (!item || typeof item !== "object") return [];
+    const arr = [
+      item.title, item.name, item.ru, item.en, item.title_ru, item.ruTitle,
+      item.title_original, item.originalTitle, item.original_title, item.english,
+      item.japanese, item.romaji,
+      ...(Array.isArray(item.aliases) ? item.aliases : []),
+      ...(Array.isArray(item.names) ? item.names : [])
+    ].filter(Boolean);
+    return arr.map(normFix).filter(Boolean);
+  }
+
+  function findFixForItem(item) {
+    const fixes = FIXES || {};
+    const names = itemNamesForFix(item);
+
+    for (const [key, fix] of Object.entries(fixes)) {
+      if (!fix || key.startsWith("_")) continue;
+
+      const k = normFix(key);
+      const aliases = Array.isArray(fix.aliases) ? fix.aliases.map(normFix) : [];
+      const keys = [k, ...aliases].filter(Boolean);
+
+      if (names.some(n => keys.some(x => n === x || n.includes(x) || x.includes(n)))) {
+        return fix;
+      }
+    }
+
+    return null;
+  }
+
+  function applyManualFix(item) {
+    if (!item || typeof item !== "object") return item;
+    const fix = findFixForItem(item);
+    if (!fix) return item;
+
+    if (fix.remove === true) {
+      item.__gkmRemovedByManualFix = true;
+      return item;
+    }
+
+    const oldTitle = item.title || item.name || item.original_title || item.english || "";
+
+    if (fix.ru) {
+      if (oldTitle && !item.title_original) item.title_original = oldTitle;
+      item.ru = fix.ru;
+      item.title_ru = fix.ru;
+      item.ruTitle = fix.ru;
+      item.title = fix.ru;
+      item.name = fix.ru;
+    }
+
+    if (fix.type) item.type = fix.type;
+    if (fix.source) item.source = fix.source;
+    if (fix.yummyanime) item.yummyanime = fix.yummyanime;
+    if (fix.animeSites === true) item.animeSites = true;
+
+    if (Array.isArray(fix.aliases)) {
+      const old = Array.isArray(item.aliases) ? item.aliases : [];
+      item.aliases = Array.from(new Set([...old, ...fix.aliases]));
+    }
+
+    item.searchTitle = [
+      item.searchTitle || "",
+      item.title || "",
+      item.title_original || "",
+      ...(Array.isArray(item.aliases) ? item.aliases : [])
+    ].join(" ");
+
+    item.__gkmManualFixed = true;
+    return item;
+  }
+
+  function applyManualFixesArray(arr) {
+    if (!Array.isArray(arr)) return arr;
+    const out = [];
+    for (const item of arr) {
+      const fixed = applyManualFix(item);
+      if (fixed && !fixed.__gkmRemovedByManualFix) out.push(fixed);
+    }
+    return out;
+  }
+
+  function patchGlobal(name) {
+    try {
+      let value = window[name];
+      if (Array.isArray(value)) value = applyManualFixesArray(value);
+
+      Object.defineProperty(window, name, {
+        configurable: true,
+        get() { return value; },
+        set(v) { value = Array.isArray(v) ? applyManualFixesArray(v) : v; }
+      });
+    } catch(e) {}
+  }
+
+  function patchFetch() {
+    const oldFetch = window.fetch;
+    if (typeof oldFetch !== "function" || oldFetch.__gkmManualFixesV51) return;
+
+    const wrapped = async function(...args) {
+      const res = await oldFetch.apply(this, args);
+      try {
+        const url = String(args[0] && (args[0].url || args[0]) || "");
+        if (!/data\/|\.json/i.test(url) || /manual_fixes\.json/i.test(url)) return res;
+
+        await loadManualFixes();
+
+        const data = await res.clone().json();
+        let changed = false;
+        let out = data;
+
+        if (Array.isArray(data)) {
+          out = applyManualFixesArray(data);
+          changed = true;
+        } else if (data && typeof data === "object") {
+          for (const k of ["items", "movies", "results", "data", "records"]) {
+            if (Array.isArray(data[k])) {
+              data[k] = applyManualFixesArray(data[k]);
+              changed = true;
+            }
+          }
+          out = data;
+        }
+
+        if (!changed) return res;
+        return new Response(JSON.stringify(out), {
+          status: res.status,
+          statusText: res.statusText,
+          headers: res.headers
+        });
+      } catch (e) {
+        return res;
+      }
+    };
+
+    wrapped.__gkmManualFixesV51 = true;
+    window.fetch = wrapped;
+  }
+
+  async function initManualFixes() {
+    await loadManualFixes();
+    patchFetch();
+    ["items","allItems","movies","GKM_ITEMS","catalogItems","DATA","db","searchIndex","currentItems","lastSearchResults"].forEach(patchGlobal);
+    ["items","allItems","movies","GKM_ITEMS","catalogItems","DATA","db","searchIndex","currentItems","lastSearchResults"].forEach(n => {
+      if (Array.isArray(window[n])) window[n] = applyManualFixesArray(window[n]);
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initManualFixes);
+  else initManualFixes();
+
+  window.GKM_MANUAL_FIXES_VERSION = "v51-manual-fixes-system-2026-06-13";
+})();
 
 function normalize(s) {
   return String(s || "").toLowerCase().replace(/ё/g, "е").trim();
@@ -1026,7 +1213,7 @@ function isAnimeLikeTitle(m) {
     ...(m.names || [])
   ].join(" "));
 
-  if (getType(m) === "Аниме") return true;
+  if (getType(m) === "Аниме" || m.animeSites === true) return true;
   if (hay.includes("аниме") || hay.includes("anime") || hay.includes("jikan") || hay.includes("myanimelist")) return true;
 
   const hints = [
@@ -3231,7 +3418,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v50-strict-visible-title-search-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v51-manual-fixes-system-2026-06-13";
 })();
 
 
