@@ -1473,3 +1473,20 @@ header .ai-top-btn {
     padding: 7px 9px;
   }
 }
+
+
+/* === GKM V38 BUTTONS FIX CSS === */
+button,
+a {
+  touch-action: manipulation;
+}
+
+.hero button,
+.hero a,
+.popular button,
+.popular a,
+#popular button,
+#popular a {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
