@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v44-force-anime-sites-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v45-fast-correct-search-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -477,94 +477,99 @@ async function ensureSearchIndex() {
   return searchIndex;
 }
 
-function gkmSearchLevenshtein(a, b) {
-  a = String(a || "");
-  b = String(b || "");
-  if (!a || !b) return 999;
-  if (Math.abs(a.length - b.length) > 3) return 999;
 
-  const dp = Array.from({ length: a.length + 1 }, () => new Array(b.length + 1).fill(0));
-  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
-  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
 
-  for (let i = 1; i <= a.length; i++) {
-    for (let j = 1; j <= b.length; j++) {
-      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-      dp[i][j] = Math.min(
-        dp[i - 1][j] + 1,
-        dp[i][j - 1] + 1,
-        dp[i - 1][j - 1] + cost
-      );
-    }
-  }
 
-  return dp[a.length][b.length];
-}
+/* === GKM V45 FAST CORRECT SEARCH ENGINE === */
+const GKM_SEARCH_SYNONYMS_V45 = {
+  "наруто": ["naruto", "норуто", "нарута"],
+  "норуто": ["naruto", "наруто"],
+  "нарута": ["naruto", "наруто"],
+  "боруто": ["boruto", "baruto", "naruto"],
+  "баруто": ["boruto", "боруто"],
+  "ван пис": ["one piece", "onepiece", "ванпис", "ван-пис"],
+  "ванпис": ["one piece", "ван пис", "ван-пис"],
+  "ван-пис": ["one piece", "ван пис"],
+  "блич": ["bleach"],
+  "магическая битва": ["jujutsu kaisen", "дзюдзюцу кайсен", "jujutsu"],
+  "дзюдзюцу": ["jujutsu kaisen", "магическая битва"],
+  "атака титанов": ["attack on titan", "shingeki no kyojin"],
+  "клинок": ["demon slayer", "kimetsu no yaiba", "истребитель демонов"],
+  "истребитель демонов": ["demon slayer", "kimetsu no yaiba"],
+  "тетрадь смерти": ["death note"],
+  "слизь": ["slime", "tensei shitara slime", "reincarnated as a slime"],
+  "фрирен": ["frieren", "sousou no frieren"],
+  "бензопила": ["chainsaw man", "человек бензопила", "человек-бензопила"],
+  "человек бензопила": ["chainsaw man"],
+  "соло левелинг": ["solo leveling", "поднятие уровня"],
+  "поднятие уровня": ["solo leveling"],
+  "ре зеро": ["re zero", "re:zero"],
+  "реинкарнация безработного": ["mushoku tensei"],
+  "охотник": ["hunter x hunter"],
+  "стальной алхимик": ["fullmetal alchemist"],
+  "волейбол": ["haikyuu"],
+  "покемон": ["pokemon"],
+  "драконий жемчуг": ["dragon ball"],
+  "гуль": ["tokyo ghoul", "токийский гуль"],
+  "токийский гуль": ["tokyo ghoul"],
+  "берсерк": ["berserk"]
+};
 
-function gkmSearchKeyboardFix(s) {
+function gkmSearchKeyboardFixV45(s) {
   const map = {
     "q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ",
     "a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э",
-    "z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю",
-    "й":"q","ц":"w","у":"e","к":"r","е":"t","н":"y","г":"u","ш":"i","щ":"o","з":"p","х":"[","ъ":"]",
-    "ф":"a","ы":"s","в":"d","а":"f","п":"g","р":"h","о":"j","л":"k","д":"l","ж":";","э":"'",
-    "я":"z","ч":"x","с":"c","м":"v","и":"b","т":"n","ь":"m","б":",","ю":"."
+    "z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"
   };
   return String(s || "").split("").map(ch => map[ch.toLowerCase()] || ch).join("");
 }
 
-function gkmSearchExpandQuery(q) {
+function gkmLevSmallV45(a, b) {
+  a = String(a || "");
+  b = String(b || "");
+  if (!a || !b) return 99;
+  if (Math.abs(a.length - b.length) > 2) return 99;
+
+  let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
+    }
+    prev = cur;
+  }
+  return prev[b.length];
+}
+
+function gkmQueryVariantsV45(q) {
   const base = normKey(q);
-  const variants = new Set([base, normKey(gkmSearchKeyboardFix(base))]);
+  const out = new Set([base]);
+  const kb = normKey(gkmSearchKeyboardFixV45(base));
+  if (kb && kb !== base) out.add(kb);
 
-  const synonym = {
-    "наруто": ["naruto", "boruto", "норуто", "нарута"],
-    "норуто": ["naruto", "наруто"],
-    "баруто": ["boruto", "naruto", "боруто"],
-    "боруто": ["boruto", "naruto"],
-    "ван пис": ["one piece", "onepiece", "ван-пис", "ванпис"],
-    "ванпис": ["one piece", "ван пис"],
-    "блич": ["bleach"],
-    "магическая битва": ["jujutsu kaisen", "дзюдзюцу кайсен"],
-    "дзюдзюцу": ["jujutsu kaisen", "магическая битва"],
-    "атака титанов": ["attack on titan", "shingeki no kyojin"],
-    "тетрадь смерти": ["death note"],
-    "клинок": ["demon slayer", "kimetsu no yaiba", "истребитель демонов"],
-    "истребитель демонов": ["demon slayer", "kimetsu no yaiba"],
-    "слизь": ["slime", "tensei shitara slime", "reincarnated as a slime"],
-    "фрирен": ["frieren", "sousou no frieren"],
-    "человек бензопила": ["chainsaw man"],
-    "бензопила": ["chainsaw man"],
-    "поднятие уровня": ["solo leveling"],
-    "соло левелинг": ["solo leveling"],
-    "герой щита": ["shield hero", "tate no yuusha"],
-    "ре зеро": ["re zero", "re:zero"],
-    "реинкарнация безработного": ["mushoku tensei"],
-    "охотник": ["hunter x hunter"],
-    "стальной алхимик": ["fullmetal alchemist"],
-    "волейбол": ["haikyuu"],
-    "покемон": ["pokemon"],
-    "драконий жемчуг": ["dragon ball"]
-  };
-
-  for (const [k, list] of Object.entries(synonym)) {
+  for (const [k, arr] of Object.entries(GKM_SEARCH_SYNONYMS_V45)) {
     if (base.includes(k) || k.includes(base)) {
-      list.forEach(x => variants.add(normKey(x)));
+      arr.forEach(x => out.add(normKey(x)));
     }
   }
 
-  // если запрос написан слитно, пробуем раздельно
-  if (base.length > 5 && !base.includes(" ")) {
-    variants.add(base.replace(/([а-яa-z])([0-9])/g, "$1 $2"));
-  }
-
-  return [...variants].filter(Boolean);
+  return [...out].filter(Boolean);
 }
 
-function gkmSearchHay(m) {
-  return normKey([
-    m.ru, m.en, m.title, m.name, m.title_ru, m.ruTitle, m.title_original, m.originalTitle,
-    m.original_title, m.english, m.japanese, m.romaji,
+function gkmTitleHayV45(m) {
+  if (m.__gkmTitleHayV45) return m.__gkmTitleHayV45;
+  m.__gkmTitleHayV45 = normKey([
+    m.ru, m.en, m.title, m.name, m.title_ru, m.ruTitle, m.title_original,
+    m.originalTitle, m.original_title, m.english, m.japanese, m.romaji
+  ].join(" "));
+  return m.__gkmTitleHayV45;
+}
+
+function gkmFullHayV45(m) {
+  if (m.__gkmFullHayV45) return m.__gkmFullHayV45;
+  m.__gkmFullHayV45 = normKey([
+    gkmTitleHayV45(m),
     m.year, m.type, m.source, m.status,
     ...(m.genres || []),
     ...(m.aliases || []),
@@ -578,38 +583,56 @@ function gkmSearchHay(m) {
     m.apexText || "",
     m.recText || ""
   ].join(" "));
+  return m.__gkmFullHayV45;
 }
 
-function gkmSearchTokenHit(hay, q) {
-  if (!q) return true;
-  if (hay.includes(q)) return true;
+function gkmSearchScoreV45(m, q) {
+  if (!q) return 1;
 
-  const qTokens = q.split(" ").filter(x => x.length > 1);
-  if (!qTokens.length) return true;
+  const variants = gkmQueryVariantsV45(q);
+  const titleHay = gkmTitleHayV45(m);
+  const fullHay = gkmFullHayV45(m);
+  const titleWords = titleHay.split(" ").filter(Boolean);
 
-  let hits = 0;
-  for (const t of qTokens) {
-    if (hay.includes(t)) hits++;
-    else {
-      const words = hay.split(" ").filter(w => Math.abs(w.length - t.length) <= 2);
-      if (words.some(w => gkmSearchLevenshtein(w, t) <= (t.length <= 4 ? 1 : 2))) hits++;
+  let best = 0;
+
+  for (const v of variants) {
+    if (!v) continue;
+
+    if (titleHay === v) best = Math.max(best, 10000);
+    else if (titleHay.startsWith(v + " ")) best = Math.max(best, 8500);
+    else if (titleHay.includes(v)) best = Math.max(best, 7000);
+    else if (fullHay.includes(v)) best = Math.max(best, 2500);
+
+    const parts = v.split(" ").filter(x => x.length > 1);
+    if (parts.length) {
+      let titleHits = 0;
+      let fullHits = 0;
+
+      for (const p of parts) {
+        if (titleHay.includes(p)) titleHits++;
+        else if (p.length >= 4 && titleWords.some(w => gkmLevSmallV45(w, p) <= (p.length <= 5 ? 1 : 2))) titleHits++;
+
+        if (fullHay.includes(p)) fullHits++;
+      }
+
+      if (titleHits === parts.length) best = Math.max(best, 6000 + titleHits * 100);
+      else if (titleHits >= Math.ceil(parts.length * 0.7)) best = Math.max(best, 4200 + titleHits * 80);
+      else if (fullHits === parts.length) best = Math.max(best, 1800 + fullHits * 50);
     }
   }
 
-  return hits >= Math.max(1, Math.ceil(qTokens.length * 0.65));
+  if (best > 0) {
+    best += Math.min(getRating(m) || 0, 10) * 10;
+    best += Math.min(getVotes(m) || 0, 100000) / 1000;
+    if (getType(m) === "Аниме") best += 120;
+  }
+
+  return best;
 }
 
 function matchesQuery(m, q) {
-  if (!q) return true;
-
-  const hay = gkmSearchHay(m);
-  const variants = gkmSearchExpandQuery(q);
-
-  for (const v of variants) {
-    if (gkmSearchTokenHit(hay, v)) return true;
-  }
-
-  return false;
+  return !q || gkmSearchScoreV45(m, q) > 0;
 }
 
 function applyLocalFilters(list) {
@@ -669,27 +692,29 @@ async function runSearch() {
   }
 
   const index = await ensureSearchIndex();
-  let raw = [];
+  const scored = [];
 
-  for (const item of index) {
-    if (matchesQuery(item, q)) raw.push(item);
+  if (q) {
+    for (let i = 0; i < index.length; i++) {
+      const item = index[i];
+      const s = gkmSearchScoreV45(item, q);
+      if (s > 0) scored.push({ item, s });
+
+      // Не вешаем страницу на больших базах
+      if (i % 5000 === 0) await new Promise(r => setTimeout(r, 0));
+    }
+
+    scored.sort((a, b) => b.s - a.s);
+  } else {
+    for (const item of index) scored.push({ item, s: scoreSmart(item) });
   }
 
-  // Если ничего нет — не тупим, а пробуем очень мягкий режим: только по словам/опечаткам.
-  if (!raw.length && q) {
-    const variants = gkmSearchExpandQuery(q);
-    const qTokens = variants.join(" ").split(" ").filter(x => x.length > 2);
-    raw = index.filter(item => {
-      const hay = gkmSearchHay(item);
-      return qTokens.some(t => hay.includes(t) || hay.split(" ").some(w => gkmSearchLevenshtein(w, t) <= 2));
-    });
-  }
-
+  const raw = scored.map(x => x.item);
   const scoped = applyTabFilter(raw);
   lastSearchResults = applyLocalFilters(scoped);
 
   if (!lastSearchResults.length && q) {
-    renderList([], `Поиск: 0 найдено · попробуй короче: "${escapeHtml(qRaw.slice(0, 4))}"`);
+    renderList([], `Поиск: 0 найдено · попробуй короче или по-английски`);
     setStatus(`Поиск ничего не нашёл: ${qRaw}`);
     return;
   }
@@ -2944,7 +2969,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v44-force-anime-sites-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v45-fast-correct-search-2026-06-13";
 })();
 
 
@@ -3901,42 +3926,6 @@ if (document.readyState === "loading") {
 })();
 
 
-/* === GKM V43 SEARCH INPUT EVENT FIX === */
-(function () {
-  function bindSmartSearch() {
-    const input = document.getElementById("searchInput");
-    if (!input || input.dataset.gkmSearchV43 === "1") return;
-
-    input.dataset.gkmSearchV43 = "1";
-    input.placeholder = "Поиск: Наруто, нарута, ван пис, блич...";
-
-    let timer = 0;
-    const go = () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        if (typeof runSearch === "function") runSearch();
-      }, 180);
-    };
-
-    input.addEventListener("input", go);
-    input.addEventListener("change", go);
-    input.addEventListener("keydown", e => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        if (typeof runSearch === "function") runSearch();
-      }
-    });
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindSmartSearch);
-  else bindSmartSearch();
-
-  new MutationObserver(bindSmartSearch).observe(document.body, { childList: true, subtree: true });
-
-  window.GKM_SMART_SEARCH_VERSION = "v43-smart-search-typos-2026-06-13";
-})();
-
-
 /* === GKM V44 FORCE ANIME-SITES FOR ALL ANIME-LIKE DETAILS === */
 (function () {
   const YUMMY_SLIME_URL = "https://yummyanime.tv/1204-o-moem-pererozhdenii-v-sliz-film-g1.html";
@@ -4091,5 +4080,42 @@ if (document.readyState === "loading") {
   new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, characterData: true });
 
   window.GKM_FORCE_ANIME_SITES_VERSION = "v44-force-anime-sites-2026-06-13";
+})();
+
+
+/* === GKM V45 FAST SEARCH INPUT BIND === */
+(function () {
+  function bindSearchV45() {
+    const input = document.getElementById("searchInput");
+    if (!input || input.dataset.gkmSearchV45 === "1") return;
+
+    input.dataset.gkmSearchV45 = "1";
+    input.placeholder = "Поиск: Наруто, нарута, ван пис, блич...";
+
+    let timer = 0;
+    const go = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        if (typeof runSearch === "function") runSearch();
+      }, 300);
+    };
+
+    input.addEventListener("input", go);
+    input.addEventListener("change", go);
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        clearTimeout(timer);
+        if (typeof runSearch === "function") runSearch();
+      }
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindSearchV45);
+  else bindSearchV45();
+
+  new MutationObserver(bindSearchV45).observe(document.body, { childList: true, subtree: true });
+
+  window.GKM_FAST_SEARCH_VERSION = "v45-fast-correct-search-2026-06-13";
 })();
 
