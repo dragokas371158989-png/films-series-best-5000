@@ -789,7 +789,8 @@
     "aliases": [
       "witch hat atelier",
       "ателье колдовских колпаков",
-      "tongari boushi no atelier"
+      "tongari boushi no atelier",
+      "とんがり帽子のアトリエ"
     ]
   },
   "tongari boushi no atelier": {
@@ -799,7 +800,8 @@
     "aliases": [
       "witch hat atelier",
       "ателье колдовских колпаков",
-      "tongari boushi no atelier"
+      "tongari boushi no atelier",
+      "とんがり帽子のアトリエ"
     ]
   },
   "oshi no ko": {
@@ -814,6 +816,38 @@
     ]
   },
   "re zero season 4": {
+    "type": "Аниме",
+    "ru": "Re:ZERO — Жизнь с нуля в альтернативном мире: Сезон 4",
+    "animeSites": true,
+    "aliases": [
+      "re zero season 4",
+      "re:zero season 4",
+      "re zero starting life in another world season 4"
+    ]
+  },
+  "atelier of witch hat": {
+    "type": "Аниме",
+    "ru": "Ателье колдовских колпаков",
+    "animeSites": true,
+    "aliases": [
+      "witch hat atelier",
+      "atelier of witch hat",
+      "ателье колдовских колпаков",
+      "tongari boushi no atelier"
+    ]
+  },
+  "oshi no ko season 3": {
+    "type": "Аниме",
+    "ru": "Звёздное дитя: Сезон 3",
+    "animeSites": true,
+    "aliases": [
+      "oshi no ko season 3",
+      "推しの子 season 3",
+      "звездное дитя сезон 3",
+      "звёздное дитя сезон 3"
+    ]
+  },
+  "re zero starting life in another world season 4": {
     "type": "Аниме",
     "ru": "Re:ZERO — Жизнь с нуля в альтернативном мире: Сезон 4",
     "animeSites": true,
