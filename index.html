@@ -21,14 +21,7 @@
   <link rel="icon" type="image/png" href="favicon.png.png">
   <link rel="shortcut icon" type="image/png" href="favicon.png.png">
   <link rel="apple-touch-icon" href="favicon.png.png">
-
-<script>
-  document.write('<link rel="stylesheet" href="style.css?v=' + Date.now() + '">');
-</script>
-<noscript>
-  <link rel="stylesheet" href="style.css">
-</noscript>
-
+  <link rel="stylesheet" href="style.css?v=4004">
 </head>
 
 <body>
@@ -36,7 +29,6 @@
     <div class="logo-row">
       <img class="site-logo" src="logo-banner.png.png" alt="ГОЛУБЬ Каталог Мира">
       <p id="statusText" class="status-text">Загрузка...</p>
-        <button id="gkmAiTopBtn" class="ai-top-btn" type="button">🤖 Помощник</button>
     </div>
   </header>
 
@@ -142,7 +134,6 @@
           <a id="anilistLink" target="_blank" rel="noreferrer">AniList</a>
           <a id="animePlanetLink" target="_blank" rel="noreferrer">Anime-Planet</a>
           <a id="anidbLink" target="_blank" rel="noreferrer">AniDB</a>
-    <a id="yummyAnimeLink" target="_blank" rel="noreferrer">YummyAnime</a>
         </div>
       </section>
 
@@ -162,51 +153,6 @@
     </div>
   </dialog>
 
-<script>
-  (function () {
-    var s = document.createElement("script");
-    s.src = "app.js?v=" + Date.now();
-    document.body.appendChild(s);
-  })();
-</script>
-
-
-<!-- GKM AI CHAT UI V5 -->
-<button id="gkmAiFloatBtn" class="ai-float-btn" type="button" aria-label="Открыть чат">🤖</button>
-
-<dialog id="gkmAiDialog" class="ai-dialog">
-  <div class="ai-box">
-    <div class="ai-head">
-      <div>
-        <div class="ai-title">Голубь помощник</div>
-        <div class="ai-subtitle">Советы по фильмам, аниме и сериалам</div>
-      </div>
-      <button id="gkmAiCloseBtn" class="ai-close" type="button">✕</button>
-    </div>
-
-    <div id="gkmAiMessages" class="ai-messages">
-      <div class="ai-msg ai-bot">
-        Привет. Я помогу подобрать фильм, сериал, аниме или мультфильм. Например: «посоветуй аниме как Наруто» или «что посмотреть вечером?»
-      </div>
-    </div>
-
-    <div class="ai-quick">
-      <button type="button" data-ai-prompt="Посоветуй мне топ аниме с сильным главным героем">Топ аниме</button>
-      <button type="button" data-ai-prompt="Что посмотреть вечером из фильмов?">Фильм вечером</button>
-      <button type="button" data-ai-prompt="Найди что-то похожее на Интерстеллар">Как Интерстеллар</button>
-    </div>
-
-    <form id="gkmAiForm" class="ai-form">
-      <input id="gkmAiInput" autocomplete="off" maxlength="500" placeholder="Напиши вопрос..." />
-      <button id="gkmAiSendBtn" type="submit">Отправить</button>
-    </form>
-
-    <div class="ai-note">
-      Пока это кнопка и окно чата. Для настоящих ответов нужен Worker/Vercel с OpenAI API ключом.
-    </div>
-  </div>
-</dialog>
-<!-- /GKM AI CHAT UI V5 -->
-
+  <script src="app.js?v=4005"></script>
 </body>
 </html>
