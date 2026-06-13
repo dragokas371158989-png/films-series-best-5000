@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v42-real-global-dedupe-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v43-smart-search-typos-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -477,16 +477,139 @@ async function ensureSearchIndex() {
   return searchIndex;
 }
 
+function gkmSearchLevenshtein(a, b) {
+  a = String(a || "");
+  b = String(b || "");
+  if (!a || !b) return 999;
+  if (Math.abs(a.length - b.length) > 3) return 999;
+
+  const dp = Array.from({ length: a.length + 1 }, () => new Array(b.length + 1).fill(0));
+  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + cost
+      );
+    }
+  }
+
+  return dp[a.length][b.length];
+}
+
+function gkmSearchKeyboardFix(s) {
+  const map = {
+    "q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ",
+    "a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э",
+    "z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю",
+    "й":"q","ц":"w","у":"e","к":"r","е":"t","н":"y","г":"u","ш":"i","щ":"o","з":"p","х":"[","ъ":"]",
+    "ф":"a","ы":"s","в":"d","а":"f","п":"g","р":"h","о":"j","л":"k","д":"l","ж":";","э":"'",
+    "я":"z","ч":"x","с":"c","м":"v","и":"b","т":"n","ь":"m","б":",","ю":"."
+  };
+  return String(s || "").split("").map(ch => map[ch.toLowerCase()] || ch).join("");
+}
+
+function gkmSearchExpandQuery(q) {
+  const base = normKey(q);
+  const variants = new Set([base, normKey(gkmSearchKeyboardFix(base))]);
+
+  const synonym = {
+    "наруто": ["naruto", "boruto", "норуто", "нарута"],
+    "норуто": ["naruto", "наруто"],
+    "баруто": ["boruto", "naruto", "боруто"],
+    "боруто": ["boruto", "naruto"],
+    "ван пис": ["one piece", "onepiece", "ван-пис", "ванпис"],
+    "ванпис": ["one piece", "ван пис"],
+    "блич": ["bleach"],
+    "магическая битва": ["jujutsu kaisen", "дзюдзюцу кайсен"],
+    "дзюдзюцу": ["jujutsu kaisen", "магическая битва"],
+    "атака титанов": ["attack on titan", "shingeki no kyojin"],
+    "тетрадь смерти": ["death note"],
+    "клинок": ["demon slayer", "kimetsu no yaiba", "истребитель демонов"],
+    "истребитель демонов": ["demon slayer", "kimetsu no yaiba"],
+    "слизь": ["slime", "tensei shitara slime", "reincarnated as a slime"],
+    "фрирен": ["frieren", "sousou no frieren"],
+    "человек бензопила": ["chainsaw man"],
+    "бензопила": ["chainsaw man"],
+    "поднятие уровня": ["solo leveling"],
+    "соло левелинг": ["solo leveling"],
+    "герой щита": ["shield hero", "tate no yuusha"],
+    "ре зеро": ["re zero", "re:zero"],
+    "реинкарнация безработного": ["mushoku tensei"],
+    "охотник": ["hunter x hunter"],
+    "стальной алхимик": ["fullmetal alchemist"],
+    "волейбол": ["haikyuu"],
+    "покемон": ["pokemon"],
+    "драконий жемчуг": ["dragon ball"]
+  };
+
+  for (const [k, list] of Object.entries(synonym)) {
+    if (base.includes(k) || k.includes(base)) {
+      list.forEach(x => variants.add(normKey(x)));
+    }
+  }
+
+  // если запрос написан слитно, пробуем раздельно
+  if (base.length > 5 && !base.includes(" ")) {
+    variants.add(base.replace(/([а-яa-z])([0-9])/g, "$1 $2"));
+  }
+
+  return [...variants].filter(Boolean);
+}
+
+function gkmSearchHay(m) {
+  return normKey([
+    m.ru, m.en, m.title, m.name, m.title_ru, m.ruTitle, m.title_original, m.originalTitle,
+    m.original_title, m.english, m.japanese, m.romaji,
+    m.year, m.type, m.source, m.status,
+    ...(m.genres || []),
+    ...(m.aliases || []),
+    ...(m.names || []),
+    m.overview || "",
+    m.searchTitle || "",
+    m.absoluteText || "",
+    m.infinityText || "",
+    m.supremeText || "",
+    m.omegaText || "",
+    m.apexText || "",
+    m.recText || ""
+  ].join(" "));
+}
+
+function gkmSearchTokenHit(hay, q) {
+  if (!q) return true;
+  if (hay.includes(q)) return true;
+
+  const qTokens = q.split(" ").filter(x => x.length > 1);
+  if (!qTokens.length) return true;
+
+  let hits = 0;
+  for (const t of qTokens) {
+    if (hay.includes(t)) hits++;
+    else {
+      const words = hay.split(" ").filter(w => Math.abs(w.length - t.length) <= 2);
+      if (words.some(w => gkmSearchLevenshtein(w, t) <= (t.length <= 4 ? 1 : 2))) hits++;
+    }
+  }
+
+  return hits >= Math.max(1, Math.ceil(qTokens.length * 0.65));
+}
+
 function matchesQuery(m, q) {
   if (!q) return true;
 
-  const hay = normKey([
-    m.ru, m.en, m.year, m.type, m.source, m.status,
-    ...(m.genres || []),
-    m.overview || ""
-  ].join(" "));
+  const hay = gkmSearchHay(m);
+  const variants = gkmSearchExpandQuery(q);
 
-  return hay.includes(q);
+  for (const v of variants) {
+    if (gkmSearchTokenHit(hay, v)) return true;
+  }
+
+  return false;
 }
 
 function applyLocalFilters(list) {
@@ -532,7 +655,8 @@ function renderSearchPage(page = 1) {
 
 async function runSearch() {
   const searchInput = $("searchInput");
-  const q = normKey(searchInput ? searchInput.value : "");
+  const qRaw = searchInput ? searchInput.value : "";
+  const q = normKey(qRaw);
   const controlsActive = hasActiveControls();
 
   if (!q && !controlsActive) {
@@ -545,17 +669,33 @@ async function runSearch() {
   }
 
   const index = await ensureSearchIndex();
-  const raw = [];
+  let raw = [];
 
   for (const item of index) {
-    if (matchesQuery(item, q)) {
-      raw.push(item);
-    }
+    if (matchesQuery(item, q)) raw.push(item);
+  }
+
+  // Если ничего нет — не тупим, а пробуем очень мягкий режим: только по словам/опечаткам.
+  if (!raw.length && q) {
+    const variants = gkmSearchExpandQuery(q);
+    const qTokens = variants.join(" ").split(" ").filter(x => x.length > 2);
+    raw = index.filter(item => {
+      const hay = gkmSearchHay(item);
+      return qTokens.some(t => hay.includes(t) || hay.split(" ").some(w => gkmSearchLevenshtein(w, t) <= 2));
+    });
   }
 
   const scoped = applyTabFilter(raw);
   lastSearchResults = applyLocalFilters(scoped);
+
+  if (!lastSearchResults.length && q) {
+    renderList([], `Поиск: 0 найдено · попробуй короче: "${escapeHtml(qRaw.slice(0, 4))}"`);
+    setStatus(`Поиск ничего не нашёл: ${qRaw}`);
+    return;
+  }
+
   renderSearchPage(1);
+  setStatus(`Поиск: ${lastSearchResults.length} найдено`);
 }
 
 function factCard(label, value) {
@@ -2804,7 +2944,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v42-real-global-dedupe-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v43-smart-search-typos-2026-06-13";
 })();
 
 
@@ -3893,5 +4033,41 @@ if (document.readyState === "loading") {
   new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
 
   window.GKM_REAL_DEDUPE_VERSION = "v42-real-global-dedupe-2026-06-13";
+})();
+
+
+/* === GKM V43 SEARCH INPUT EVENT FIX === */
+(function () {
+  function bindSmartSearch() {
+    const input = document.getElementById("searchInput");
+    if (!input || input.dataset.gkmSearchV43 === "1") return;
+
+    input.dataset.gkmSearchV43 = "1";
+    input.placeholder = "Поиск: Наруто, нарута, ван пис, блич...";
+
+    let timer = 0;
+    const go = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        if (typeof runSearch === "function") runSearch();
+      }, 180);
+    };
+
+    input.addEventListener("input", go);
+    input.addEventListener("change", go);
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        if (typeof runSearch === "function") runSearch();
+      }
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindSmartSearch);
+  else bindSmartSearch();
+
+  new MutationObserver(bindSmartSearch).observe(document.body, { childList: true, subtree: true });
+
+  window.GKM_SMART_SEARCH_VERSION = "v43-smart-search-typos-2026-06-13";
 })();
 
