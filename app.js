@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v48-detail-anime-sites-real-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v49-stable-search-core-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -632,9 +632,7 @@ function gkmSearchScoreV45(m, q) {
   return best;
 }
 
-function matchesQuery(m, q) {
-  return !q || gkmSearchScoreV45(m, q) > 0;
-}
+
 
 function applyLocalFilters(list) {
   const typeFilter = $("typeFilter");
@@ -667,6 +665,138 @@ function applyLocalFilters(list) {
   return out;
 }
 
+
+
+/* === GKM V49 STABLE SEARCH CORE === */
+function gkmSearchNormV49(v) {
+  return String(v || "")
+    .toLowerCase()
+    .replaceAll("ё", "е")
+    .replace(/&/g, " and ")
+    .replace(/['’`]/g, "")
+    .replace(/[^\p{L}\p{N}:]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function gkmSearchKeyboardFixV49(s) {
+  const map = {
+    "q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ",
+    "a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э",
+    "z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"
+  };
+  return String(s || "").split("").map(ch => map[ch.toLowerCase()] || ch).join("");
+}
+
+function gkmSearchVariantsV49(q) {
+  const base = gkmSearchNormV49(q);
+  const out = new Set([base]);
+  const kb = gkmSearchNormV49(gkmSearchKeyboardFixV49(base));
+  if (kb && kb !== base) out.add(kb);
+
+  const syn = {
+    "наруто": ["naruto"],
+    "норуто": ["наруто", "naruto"],
+    "нарута": ["наруто", "naruto"],
+    "боруто": ["boruto"],
+    "ван пис": ["one piece", "ванпис", "ван-пис"],
+    "ванпис": ["one piece", "ван пис"],
+    "ван-пис": ["one piece", "ван пис"],
+    "блич": ["bleach"],
+    "магическая битва": ["jujutsu kaisen", "дзюдзюцу"],
+    "дзюдзюцу": ["jujutsu kaisen", "магическая битва"],
+    "атака титанов": ["attack on titan", "shingeki no kyojin"],
+    "истребитель демонов": ["demon slayer", "kimetsu no yaiba"],
+    "клинок": ["demon slayer", "истребитель демонов"],
+    "тетрадь смерти": ["death note"],
+    "фрирен": ["frieren"],
+    "бензопила": ["chainsaw man"],
+    "соло левелинг": ["solo leveling"],
+    "ре зеро": ["re zero", "re:zero"],
+    "охотник": ["hunter x hunter"],
+    "стальной алхимик": ["fullmetal alchemist"],
+    "волейбол": ["haikyuu"],
+    "покемон": ["pokemon"]
+  };
+
+  for (const [k, arr] of Object.entries(syn)) {
+    if (base === k || base.includes(k) || k.includes(base)) {
+      arr.forEach(x => out.add(gkmSearchNormV49(x)));
+    }
+  }
+
+  return [...out].filter(Boolean);
+}
+
+function gkmTitleOnlyHayV49(m) {
+  return gkmSearchNormV49([
+    m.ru, m.en, m.title, m.name, m.title_ru, m.ruTitle, m.title_original,
+    m.originalTitle, m.original_title, m.english, m.japanese, m.romaji,
+    ...(m.aliases || []), ...(m.names || [])
+  ].join(" "));
+}
+
+function gkmLevV49(a, b) {
+  a = String(a || "");
+  b = String(b || "");
+  if (!a || !b) return 99;
+  if (Math.abs(a.length - b.length) > 2) return 99;
+  let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
+    }
+    prev = cur;
+  }
+  return prev[b.length];
+}
+
+function gkmTitleSearchScoreV49(m, q) {
+  q = gkmSearchNormV49(q);
+  if (!q) return 1;
+
+  const hay = gkmTitleOnlyHayV49(m);
+  if (!hay) return 0;
+
+  const variants = gkmSearchVariantsV49(q);
+  const words = hay.split(" ").filter(Boolean);
+  let best = 0;
+
+  for (const v of variants) {
+    if (!v) continue;
+
+    if (hay === v) best = Math.max(best, 1000000);
+    else if (hay.startsWith(v + " ")) best = Math.max(best, 900000);
+    else if ((" " + hay + " ").includes(" " + v + " ")) best = Math.max(best, 800000);
+    else if (hay.includes(v)) best = Math.max(best, 700000);
+
+    const parts = v.split(" ").filter(x => x.length > 1);
+    if (parts.length) {
+      let hits = 0;
+      for (const p of parts) {
+        if (hay.includes(p)) hits++;
+        else if (p.length >= 4 && words.some(w => gkmLevV49(w, p) <= (p.length <= 5 ? 1 : 2))) hits++;
+      }
+      if (hits === parts.length) best = Math.max(best, 600000 + hits * 1000);
+    }
+  }
+
+  if (best > 0) {
+    if (getType(m) === "Аниме") best += 2000;
+    if (getType(m) === "Мультфильм") best += 300;
+    best += Math.min(getRating(m) || 0, 10) * 10;
+    best += Math.min(getVotes(m) || 0, 100000) / 1000;
+  }
+
+  return best;
+}
+
+function matchesQuery(m, q) {
+  return !q || gkmTitleSearchScoreV49(m, q) > 0;
+}
+
 function renderSearchPage(page = 1) {
   currentPage = page;
   currentPages = Math.max(1, Math.ceil(lastSearchResults.length / PAGE_SIZE));
@@ -680,7 +810,7 @@ function renderSearchPage(page = 1) {
 async function runSearch() {
   const searchInput = $("searchInput");
   const qRaw = searchInput ? searchInput.value : "";
-  const q = normKey(qRaw);
+  const q = gkmSearchNormV49(qRaw);
   const controlsActive = hasActiveControls();
 
   if (!q && !controlsActive) {
@@ -691,26 +821,27 @@ async function runSearch() {
   }
 
   const index = await ensureSearchIndex();
-  const scored = [];
+  let raw = [];
 
   if (q) {
+    const scored = [];
     for (let i = 0; i < index.length; i++) {
       const item = index[i];
-      const s = gkmStrictTitleOnlyScoreV47(item, q);
+      const s = gkmTitleSearchScoreV49(item, q);
       if (s > 0) scored.push({ item, s });
-      if (i % 6000 === 0) await new Promise(r => setTimeout(r, 0));
+      if (i % 8000 === 0) await new Promise(r => setTimeout(r, 0));
     }
     scored.sort((a, b) => b.s - a.s);
+    raw = scored.map(x => x.item);
   } else {
-    for (const item of index) scored.push({ item, s: scoreSmart(item) });
+    raw = index;
   }
 
-  const raw = scored.map(x => x.item);
   const scoped = applyTabFilter(raw);
   lastSearchResults = applyLocalFilters(scoped);
 
   if (!lastSearchResults.length && q) {
-    renderList([], `Поиск: 0 найдено · попробуй другое название`);
+    renderList([], `Поиск: 0 найдено · ищет только по названию`);
     setStatus(`Поиск ничего не нашёл: ${qRaw}`);
     return;
   }
@@ -3061,7 +3192,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v48-detail-anime-sites-real-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v49-stable-search-core-2026-06-13";
 })();
 
 
@@ -4218,95 +4349,38 @@ if (document.readyState === "loading") {
 })();
 
 
-/* === GKM V47 TITLE ONLY SEARCH === */
-(function () {
-  window.GKM_TITLE_ONLY_SEARCH_VERSION = "v47-title-only-search-2026-06-13";
-})();
-
-function gkmStrictTitleOnlyScoreV47(m, q) {
-  if (!q) return 1;
-
-  const variants = typeof gkmQueryVariantsV45 === "function" ? gkmQueryVariantsV45(q) : [normKey(q)];
-
-  const titleHay = normKey([
-    m.ru, m.en, m.title, m.name, m.title_ru, m.ruTitle, m.title_original,
-    m.originalTitle, m.original_title, m.english, m.japanese, m.romaji,
-    ...(m.aliases || []), ...(m.names || [])
-  ].join(" "));
-
-  if (!titleHay) return 0;
-
-  const words = titleHay.split(" ").filter(Boolean);
-  let best = 0;
-
-  for (const v of variants) {
-    if (!v) continue;
-    const parts = v.split(" ").filter(x => x.length > 1);
-
-    if (titleHay === v) best = Math.max(best, 1000000);
-    else if (titleHay.startsWith(v + " ")) best = Math.max(best, 900000);
-    else if ((" " + titleHay + " ").includes(" " + v + " ")) best = Math.max(best, 800000);
-    else if (titleHay.includes(v)) best = Math.max(best, 650000);
-
-    if (parts.length) {
-      let hits = 0;
-      for (const p of parts) {
-        if ((" " + titleHay + " ").includes(" " + p + " ") || titleHay.includes(p)) {
-          hits++;
-          continue;
-        }
-        if (p.length >= 4 && typeof gkmLevSmallV45 === "function") {
-          if (words.some(w => gkmLevSmallV45(w, p) <= (p.length <= 5 ? 1 : 2))) hits++;
-        }
-      }
-      if (hits === parts.length) best = Math.max(best, 500000 + hits * 1000);
-      else if (parts.length >= 2 && hits >= Math.ceil(parts.length * 0.8)) best = Math.max(best, 250000 + hits * 500);
-    }
-  }
-
-  if (best > 0) {
-    if (getType(m) === "Аниме") best += 2000;
-    if (getType(m) === "Мультфильм") best += 300;
-    best += Math.min(getRating(m) || 0, 10) * 10;
-    best += Math.min(getVotes(m) || 0, 100000) / 1000;
-  }
-
-  return best;
-}
-
-/* === GKM V47 SEARCH BIND OVERRIDE === */
-(function () {
-  function bindV47() {
-    const input = document.getElementById("searchInput");
-    if (!input || input.dataset.gkmSearchV47 === "1") return;
-    input.dataset.gkmSearchV47 = "1";
-    input.placeholder = "Поиск строго по названию: Наруто, Ван-Пис, Блич...";
-
-    let timer = 0;
-    const go = () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        if (typeof runSearch === "function") runSearch();
-      }, 250);
-    };
-
-    input.addEventListener("input", go, true);
-    input.addEventListener("change", go, true);
-    input.addEventListener("keydown", e => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        clearTimeout(timer);
-        if (typeof runSearch === "function") runSearch();
-      }
-    }, true);
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindV47);
-  else bindV47();
-
-  new MutationObserver(bindV47).observe(document.body, { childList: true, subtree: true });
-})();
-
 
 
 window.GKM_DETAIL_ANIME_SITES_VERSION = "v48-detail-anime-sites-real-2026-06-13";
+
+/* === GKM V49 SINGLE SEARCH BIND === */
+(function () {
+  function bindSearch() {
+    const input = document.getElementById("searchInput");
+    if (!input || input.dataset.gkmSearchV49 === "1") return;
+    input.dataset.gkmSearchV49 = "1";
+    input.placeholder = "Поиск по названию: Наруто, Ван-Пис, Блич...";
+
+    let t = 0;
+    input.addEventListener("input", () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        if (typeof runSearch === "function") runSearch();
+      }, 220);
+    });
+
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        clearTimeout(t);
+        if (typeof runSearch === "function") runSearch();
+      }
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindSearch);
+  else bindSearch();
+
+  window.GKM_STABLE_SEARCH_VERSION = "v49-stable-search-core-2026-06-13";
+})();
+
