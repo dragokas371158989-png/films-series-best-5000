@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v34-mobile-poster-wrap-fix-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v37-ru-titles-real-apply-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -2804,7 +2804,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v34-mobile-poster-wrap-fix-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v37-ru-titles-real-apply-2026-06-13";
 })();
 
 
@@ -3037,5 +3037,354 @@ if (document.readyState === "loading") {
   new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
 
   window.GKM_MOBILE_POSTER_WRAP_FIX_VERSION = "v34-mobile-poster-wrap-fix-2026-06-13";
+})();
+
+/* === GKM V37 REAL RU TITLES APPLY === */
+(function () {
+
+  const RU_TITLE_ON_KEY = "gkm_ru_titles_on_v37";
+  const RU_BUILTIN_MAP = {
+  "demon slayer": "Истребитель демонов",
+  "kimetsu no yaiba": "Истребитель демонов",
+  "demon slayer kimetsu no yaiba": "Истребитель демонов",
+  "one piece": "Ван-Пис",
+  "naruto": "Наруто",
+  "naruto shippuden": "Наруто: Ураганные хроники",
+  "boruto": "Боруто",
+  "boruto naruto next generations": "Боруто: Новое поколение Наруто",
+  "bleach": "Блич",
+  "bleach thousand year blood war": "Блич: Тысячелетняя кровавая война",
+  "attack on titan": "Атака титанов",
+  "shingeki no kyojin": "Атака титанов",
+  "jujutsu kaisen": "Магическая битва",
+  "solo leveling": "Поднятие уровня в одиночку",
+  "chainsaw man": "Человек-бензопила",
+  "death note": "Тетрадь смерти",
+  "one punch man": "Ванпанчмен",
+  "my hero academia": "Моя геройская академия",
+  "boku no hero academia": "Моя геройская академия",
+  "dragon ball": "Драконий жемчуг",
+  "dragon ball z": "Драконий жемчуг Z",
+  "dragon ball super": "Драконий жемчуг Супер",
+  "black clover": "Чёрный клевер",
+  "tokyo ghoul": "Токийский гуль",
+  "hunter x hunter": "Охотник х Охотник",
+  "fullmetal alchemist": "Стальной алхимик",
+  "fullmetal alchemist brotherhood": "Стальной алхимик: Братство",
+  "fairy tail": "Хвост Феи",
+  "sword art online": "Мастера меча онлайн",
+  "that time i got reincarnated as a slime": "О моём перерождении в слизь",
+  "tensei shitara slime datta ken": "О моём перерождении в слизь",
+  "reincarnated as a slime": "О моём перерождении в слизь",
+  "mushoku tensei": "Реинкарнация безработного",
+  "overlord": "Повелитель",
+  "konosuba": "Этот замечательный мир!",
+  "kono subarashii sekai ni shukufuku wo": "Этот замечательный мир!",
+  "re zero": "Re:Zero. Жизнь с нуля в альтернативном мире",
+  "re:zero": "Re:Zero. Жизнь с нуля в альтернативном мире",
+  "spy x family": "Семья шпиона",
+  "classroom of the elite": "Добро пожаловать в класс превосходства",
+  "youkoso jitsuryoku shijou shugi no kyoushitsu e": "Добро пожаловать в класс превосходства",
+  "tokyo revengers": "Токийские мстители",
+  "blue lock": "Синяя тюрьма",
+  "haikyuu": "Волейбол!!",
+  "black butler": "Тёмный дворецкий",
+  "vinland saga": "Сага о Винланде",
+  "dr stone": "Доктор Стоун",
+  "frieren": "Провожающая в последний путь Фрирен",
+  "sousou no frieren": "Провожающая в последний путь Фрирен",
+  "hells paradise": "Адский рай",
+  "hell's paradise": "Адский рай",
+  "jigokuraku": "Адский рай",
+  "goblin slayer": "Убийца гоблинов",
+  "the eminence in shadow": "Восхождение в тени",
+  "kage no jitsuryokusha ni naritakute": "Восхождение в тени",
+  "danmachi": "Может, я встречу тебя в подземелье?",
+  "made in abyss": "Созданный в Бездне",
+  "violet evergarden": "Вайолет Эвергарден",
+  "your name": "Твоё имя",
+  "kimi no na wa": "Твоё имя",
+  "weathering with you": "Дитя погоды",
+  "tenki no ko": "Дитя погоды",
+  "suzume": "Судзумэ, закрывающая двери",
+  "mob psycho": "Моб Психо 100",
+  "mob psycho 100": "Моб Психо 100",
+  "jojo": "Невероятные приключения ДжоДжо",
+  "jojos bizarre adventure": "Невероятные приключения ДжоДжо",
+  "jojo's bizarre adventure": "Невероятные приключения ДжоДжо",
+  "berserk": "Берсерк",
+  "monster": "Монстр",
+  "cowboy bebop": "Ковбой Бибоп",
+  "samurai champloo": "Самурай Чамплу",
+  "neon genesis evangelion": "Евангелион",
+  "code geass": "Код Гиас",
+  "steins gate": "Врата Штейна",
+  "steins;gate": "Врата Штейна",
+  "erased": "Город, в котором меня нет",
+  "boku dake ga inai machi": "Город, в котором меня нет",
+  "parasyte": "Паразит",
+  "kiseijuu": "Паразит",
+  "another": "Иная",
+  "angel beats": "Ангельские ритмы!",
+  "clannad": "Кланнад",
+  "toradora": "Торадора!",
+  "your lie in april": "Твоя апрельская ложь",
+  "shigatsu wa kimi no uso": "Твоя апрельская ложь",
+  "kaguya sama love is war": "Госпожа Кагуя: в любви как на войне",
+  "kaguya-sama love is war": "Госпожа Кагуя: в любви как на войне",
+  "rent a girlfriend": "Девушка на час",
+  "kanojo okarishimasu": "Девушка на час",
+  "food wars": "В поисках божественного рецепта",
+  "shokugeki no soma": "В поисках божественного рецепта",
+  "no game no life": "Нет игры — нет жизни",
+  "the rising of the shield hero": "Восхождение героя щита",
+  "tate no yuusha no nariagari": "Восхождение героя щита",
+  "arifureta": "Арифурэта: сильнейший ремесленник в мире",
+  "the world's finest assassin": "Лучший в мире ассасин",
+  "sekai saikou no ansatsusha": "Лучший в мире ассасин",
+  "the daily life of the immortal king": "Повседневная жизнь бессмертного короля",
+  "initial d": "Инициал Ди",
+  "rurouni kenshin": "Бродяга Кэнсин",
+  "inuyasha": "Инуяша",
+  "ranma": "Ранма ½",
+  "sailor moon": "Сейлор Мун",
+  "pokemon": "Покемон",
+  "digimon": "Дигимон",
+  "beyblade": "Бейблэйд",
+  "yu gi oh": "Югио!",
+  "yu-gi-oh": "Югио!",
+  "death parade": "Парад смерти",
+  "akame ga kill": "Убийца Акаме!",
+  "noragami": "Бездомный бог",
+  "fire force": "Пламенная бригада пожарных",
+  "enen no shouboutai": "Пламенная бригада пожарных",
+  "soul eater": "Пожиратель душ",
+  "d gray man": "Ди Грэй-мен",
+  "d.gray-man": "Ди Грэй-мен",
+  "magi": "Маги",
+  "magi the labyrinth of magic": "Маги: Лабиринт магии",
+  "seven deadly sins": "Семь смертных грехов",
+  "nanatsu no taizai": "Семь смертных грехов",
+  "assassination classroom": "Класс убийц",
+  "ansatsu kyoushitsu": "Класс убийц"
+};
+
+  let RU_EXTERNAL_MAP = null;
+  let RU_LOADING = false;
+
+  function isOn() {
+    return localStorage.getItem(RU_TITLE_ON_KEY) !== "0";
+  }
+
+  function hasRu(v) {
+    return /[а-яё]/i.test(String(v || ""));
+  }
+
+  function clean(v) {
+    return String(v || "")
+      .replace(/\s*\(\d{4}\)\s*/g, " ")
+      .replace(/\bTV\b|\bONA\b|\bOVA\b|\bMovie\b|\bSpecial\b/gi, " ")
+      .replace(/[|•·]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function key(v) {
+    return clean(v).toLowerCase()
+      .replaceAll("ё", "е")
+      .replace(/['’`]/g, "")
+      .replace(/&/g, " and ")
+      .replace(/[^\p{L}\p{N}:]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  async function loadExternalMap() {
+    if (RU_EXTERNAL_MAP || RU_LOADING) return RU_EXTERNAL_MAP || {};
+    RU_LOADING = true;
+    try {
+      const r = await fetch("data/ru_titles_map.json?v=37", { cache: "no-store" });
+      if (r.ok) RU_EXTERNAL_MAP = await r.json();
+      else RU_EXTERNAL_MAP = {};
+    } catch(e) {
+      RU_EXTERNAL_MAP = {};
+    }
+    RU_LOADING = false;
+    return RU_EXTERNAL_MAP || {};
+  }
+
+  function allMaps() {
+    return Object.assign({}, RU_BUILTIN_MAP, RU_EXTERNAL_MAP || {});
+  }
+
+  function exactMap(title) {
+    const k = key(title);
+    const m = allMaps();
+    if (m[k]) return m[k];
+
+    for (const mk in m) {
+      if (k && mk && (k.includes(mk) || mk.includes(k))) return m[mk];
+    }
+    return "";
+  }
+
+  function pickRu(item) {
+    if (!item || typeof item !== "object") return "";
+
+    const fields = [
+      item.title_ru, item.ruTitle, item.titleRu, item.russian, item.name_ru, item.nameRu,
+      item.original_title_ru, item.altTitleRu, item.titleRussian
+    ];
+
+    for (const v of fields) {
+      if (v && hasRu(v)) return clean(v);
+    }
+
+    const arrays = [item.aliases, item.names, item.alt_titles, item.alternative_titles, item.synonyms];
+    for (const arr of arrays) {
+      if (!Array.isArray(arr)) continue;
+      for (const x of arr) {
+        const v = typeof x === "string" ? x : (x && (x.title || x.name || x.value || x.text));
+        if (v && hasRu(v)) return clean(v);
+      }
+    }
+
+    const source = [
+      item.title, item.name, item.original_title, item.english,
+      item.title_en, item.romaji, item.japanese
+    ].filter(Boolean);
+
+    for (const s of source) {
+      const ru = exactMap(s);
+      if (ru) return ru;
+    }
+
+    return "";
+  }
+
+  function applyRuToItem(item) {
+    if (!isOn() || !item || typeof item !== "object") return item;
+
+    const ru = pickRu(item);
+    const current = clean(item.title || item.name || item.original_title || item.english || "");
+    if (!ru || ru === current) {
+      item.__gkmRuV37 = true;
+      return item;
+    }
+
+    if (!item.title_original && current) item.title_original = current;
+    if (!item.originalTitle && current) item.originalTitle = current;
+
+    item.title_ru = item.title_ru || ru;
+    item.ruTitle = item.ruTitle || ru;
+    item.title = ru;
+    item.name = ru;
+
+    const orig = item.title_original || item.originalTitle || current;
+    item.searchTitle = (ru + " " + orig + " " + (item.searchTitle || "")).trim();
+    item.__gkmRuV37 = true;
+    return item;
+  }
+
+  function applyRuArray(arr) {
+    if (!Array.isArray(arr)) return arr;
+    for (let i = 0; i < arr.length; i++) applyRuToItem(arr[i]);
+    return arr;
+  }
+
+  function patchGlobalArray(name) {
+    try {
+      let value = window[name];
+      if (Array.isArray(value)) applyRuArray(value);
+
+      Object.defineProperty(window, name, {
+        configurable: true,
+        get() { return value; },
+        set(v) {
+          value = Array.isArray(v) ? applyRuArray(v) : v;
+        }
+      });
+    } catch(e) {}
+  }
+
+  function patchTitleOf() {
+    const oldTitleOf = window.titleOf;
+    if (typeof oldTitleOf !== "function" || oldTitleOf.__gkmRuV37) return;
+
+    const wrapped = function(item) {
+      if (isOn()) applyRuToItem(item);
+      const ru = isOn() ? pickRu(item) : "";
+      if (ru) return ru;
+      return oldTitleOf(item);
+    };
+    wrapped.__gkmRuV37 = true;
+    window.titleOf = wrapped;
+  }
+
+  function patchRenderData() {
+    ["items", "allItems", "movies", "GKM_ITEMS", "catalogItems", "DATA", "db"].forEach(patchGlobalArray);
+    ["items", "allItems", "movies", "GKM_ITEMS", "catalogItems", "DATA", "db"].forEach(n => applyRuArray(window[n]));
+    patchTitleOf();
+  }
+
+  function translateDomTitles() {
+    if (!isOn()) return;
+    const nodes = document.querySelectorAll(".card-title,.movie-title,.item-title,.detail-title,.modal-title,.details-title,h1,h2");
+    nodes.forEach(node => {
+      if (node.dataset.gkmRuV37 === "1") return;
+      const txt = clean(node.textContent || "");
+      if (!txt || hasRu(txt)) return;
+      const ru = exactMap(txt);
+      if (!ru) return;
+
+      node.dataset.gkmRuV37 = "1";
+      node.dataset.originalTitle = txt;
+      node.textContent = ru;
+      node.title = txt;
+
+      if (!node.nextElementSibling || !node.nextElementSibling.classList.contains("gkm-original-title")) {
+        const sub = document.createElement("div");
+        sub.className = "gkm-original-title";
+        sub.textContent = txt;
+        node.insertAdjacentElement("afterend", sub);
+      }
+    });
+  }
+
+  function addToggle() {
+    if (document.getElementById("gkmRuTitleToggle")) return;
+    const btn = document.createElement("button");
+    btn.id = "gkmRuTitleToggle";
+    btn.type = "button";
+    btn.textContent = isOn() ? "RU тайтлы" : "RU выкл";
+    btn.title = "Русские названия тайтлов";
+    btn.onclick = () => {
+      localStorage.setItem(RU_TITLE_ON_KEY, isOn() ? "0" : "1");
+      location.reload();
+    };
+    const place = document.querySelector(".topbar, header, .controls, .toolbar, .filters") || document.body;
+    place.appendChild(btn);
+  }
+
+  let timer = 0;
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(async () => {
+      addToggle();
+      await loadExternalMap();
+      patchRenderData();
+      translateDomTitles();
+    }, 100);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", schedule);
+  else schedule();
+
+  window.addEventListener("load", schedule);
+  document.addEventListener("click", () => setTimeout(schedule, 150), true);
+  new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, characterData: true });
+
+  window.GKM_REAL_RU_TITLES_VERSION = "v37-ru-titles-real-apply-2026-06-13";
+  window.GKM_RU_TITLES_MAP_SIZE = Object.keys(RU_BUILTIN_MAP).length;
 })();
 
