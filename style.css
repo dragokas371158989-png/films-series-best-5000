@@ -1600,3 +1600,11 @@ a {
     line-height: 1.12 !important;
   }
 }
+
+
+/* === GKM V44 FORCE ANIME-SITES CSS === */
+.gkm-force-anime-sites {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(139,92,246,.35);
+}
