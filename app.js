@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v49-stable-search-core-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v50-strict-visible-title-search-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -729,10 +729,22 @@ function gkmSearchVariantsV49(q) {
 }
 
 function gkmTitleOnlyHayV49(m) {
+  const mainTitle = typeof titleOf === "function" ? titleOf(m) : "";
   return gkmSearchNormV49([
-    m.ru, m.en, m.title, m.name, m.title_ru, m.ruTitle, m.title_original,
-    m.originalTitle, m.original_title, m.english, m.japanese, m.romaji,
-    ...(m.aliases || []), ...(m.names || [])
+    mainTitle,
+    m.title,
+    m.name,
+    m.title_ru,
+    m.ruTitle,
+    m.title_original,
+    m.originalTitle,
+    m.original_title,
+    m.english,
+    m.title_en,
+    m.japanese,
+    m.romaji,
+    ...(m.aliases || []),
+    ...(m.names || [])
   ].join(" "));
 }
 
@@ -825,12 +837,39 @@ async function runSearch() {
 
   if (q) {
     const scored = [];
+    const variants = gkmSearchVariantsV49(q);
+
     for (let i = 0; i < index.length; i++) {
       const item = index[i];
+      const hay = gkmTitleOnlyHayV49(item);
+
+      // ЖЁСТКО: если в названии/алиасах нет запроса/синонима — вообще не показываем.
+      let realTitleHit = false;
+      for (const v of variants) {
+        if (!v) continue;
+        if (hay.includes(v)) {
+          realTitleHit = true;
+          break;
+        }
+
+        const parts = v.split(" ").filter(x => x.length > 1);
+        if (parts.length && parts.every(p => hay.includes(p))) {
+          realTitleHit = true;
+          break;
+        }
+      }
+
+      if (!realTitleHit) {
+        if (i % 9000 === 0) await new Promise(r => setTimeout(r, 0));
+        continue;
+      }
+
       const s = gkmTitleSearchScoreV49(item, q);
       if (s > 0) scored.push({ item, s });
-      if (i % 8000 === 0) await new Promise(r => setTimeout(r, 0));
+
+      if (i % 9000 === 0) await new Promise(r => setTimeout(r, 0));
     }
+
     scored.sort((a, b) => b.s - a.s);
     raw = scored.map(x => x.item);
   } else {
@@ -841,7 +880,7 @@ async function runSearch() {
   lastSearchResults = applyLocalFilters(scoped);
 
   if (!lastSearchResults.length && q) {
-    renderList([], `Поиск: 0 найдено · ищет только по названию`);
+    renderList([], `Поиск: 0 найдено · ищет строго по названию`);
     setStatus(`Поиск ничего не нашёл: ${qRaw}`);
     return;
   }
@@ -3192,7 +3231,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v49-stable-search-core-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v50-strict-visible-title-search-2026-06-13";
 })();
 
 
@@ -4384,3 +4423,6 @@ window.GKM_DETAIL_ANIME_SITES_VERSION = "v48-detail-anime-sites-real-2026-06-13"
   window.GKM_STABLE_SEARCH_VERSION = "v49-stable-search-core-2026-06-13";
 })();
 
+
+
+window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-search-2026-06-13";
