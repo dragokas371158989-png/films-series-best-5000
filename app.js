@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v32-mobile-images-helper-light-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v33-mobile-poster-hard-fix-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -2804,7 +2804,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v32-mobile-images-helper-light-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v33-mobile-poster-hard-fix-2026-06-13";
 })();
 
 
@@ -2943,61 +2943,118 @@ if (document.readyState === "loading") {
 })();
 
 
-/* === GKM V32 MOBILE IMAGES + HELPER LIGHT PATCH === */
+/* === GKM V33 MOBILE POSTER HARD FIX === */
 (function () {
-  function isMobileGkm() {
+  const FALLBACK_POSTER = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="450"><rect width="100%" height="100%" fill="#111827"/><text x="50%" y="48%" fill="#8bdcff" font-size="22" text-anchor="middle" font-family="Arial">Нет постера</text></svg>'
+  );
+
+  function isMobile() {
     return window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
   }
 
-  function fixCardImages() {
-    const imgs = Array.from(document.querySelectorAll(".card img, .poster img, .movie-card img, .item-card img, img.poster"));
-    imgs.forEach(img => {
-      img.loading = "eager";
-      img.decoding = "async";
-      img.style.display = "block";
-      img.style.opacity = "1";
-      img.style.visibility = "visible";
+  function posterFromCard(card) {
+    if (!card) return "";
 
-      const src = img.getAttribute("src") || img.getAttribute("data-src") || img.getAttribute("data-original") || "";
-      if (!img.getAttribute("src") && src) img.setAttribute("src", src);
+    const attrs = [
+      "data-poster",
+      "data-poster-url",
+      "data-img",
+      "data-image",
+      "data-src",
+      "poster"
+    ];
 
-      img.onerror = function () {
-        this.onerror = null;
-        this.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
-          '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="450"><rect width="100%" height="100%" fill="#111827"/><text x="50%" y="48%" fill="#8bdcff" font-size="22" text-anchor="middle" font-family="Arial">Нет постера</text></svg>'
-        );
-      };
+    for (const a of attrs) {
+      const v = card.getAttribute && card.getAttribute(a);
+      if (v && /^https?:|^data:|^\//.test(v)) return v;
+    }
+
+    const img = card.querySelector && card.querySelector("img");
+    if (img) {
+      const v = img.getAttribute("src") || img.getAttribute("data-src") || img.getAttribute("data-original");
+      if (v) return v;
+    }
+
+    const nodes = [card, ...(card.querySelectorAll ? Array.from(card.querySelectorAll("*")) : [])];
+    for (const el of nodes) {
+      const bg = (el.style && el.style.backgroundImage) || "";
+      const m = bg.match(/url\(["']?(.+?)["']?\)/);
+      if (m && m[1]) return m[1];
+    }
+
+    return "";
+  }
+
+  function ensurePosterImg(card) {
+    if (!card) return;
+
+    let box =
+      card.querySelector(".poster, .card-poster, .movie-poster, .item-poster, .thumb, .cover") ||
+      card;
+
+    let img = box.querySelector && box.querySelector("img");
+
+    if (!img) {
+      img = document.createElement("img");
+      img.className = "gkm-mobile-created-poster";
+      img.alt = "poster";
+      box.prepend(img);
+    }
+
+    const src = img.getAttribute("src") ||
+      img.getAttribute("data-src") ||
+      img.getAttribute("data-original") ||
+      posterFromCard(card) ||
+      FALLBACK_POSTER;
+
+    img.setAttribute("src", src);
+    img.removeAttribute("data-src");
+    img.removeAttribute("data-original");
+    img.loading = "eager";
+    img.decoding = "async";
+
+    img.onerror = function () {
+      this.onerror = null;
+      this.src = FALLBACK_POSTER;
+    };
+
+    box.style.display = "block";
+    box.style.visibility = "visible";
+    box.style.opacity = "1";
+  }
+
+  function fixMobilePosters() {
+    if (!isMobile()) return;
+
+    const cards = Array.from(document.querySelectorAll(
+      ".card, .movie-card, .item-card, .catalog-card, [data-id].card, [data-id]"
+    ));
+
+    cards.forEach(card => {
+      const text = (card.textContent || "").trim();
+      // не трогаем кнопки/панели, только похожие на карточки элементы
+      if (!text && !posterFromCard(card)) return;
+      ensurePosterImg(card);
     });
   }
 
-  function makeHelperMobileLight() {
-    if (!isMobileGkm()) return;
-    window.GKM_MOBILE_HELPER_LIGHT = true;
-
-    const input = document.getElementById("gkmAiInput");
-    if (input && !input.dataset.mobileLightReady) {
-      input.dataset.mobileLightReady = "1";
-      input.placeholder = "Моб. режим: короткий запрос...";
-    }
+  let timer = 0;
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(fixMobilePosters, 180);
   }
 
-  let t = 0;
-  function scheduleFix() {
-    clearTimeout(t);
-    t = setTimeout(() => {
-      fixCardImages();
-      makeHelperMobileLight();
-    }, 160);
-  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", schedule);
+  else schedule();
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", scheduleFix);
-  } else {
-    scheduleFix();
-  }
+  window.addEventListener("load", schedule);
+  window.addEventListener("resize", schedule);
+  document.addEventListener("click", () => setTimeout(schedule, 250), true);
+  document.addEventListener("scroll", schedule, { passive: true });
 
-  new MutationObserver(scheduleFix).observe(document.body, { childList: true, subtree: true });
+  new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
 
-  window.GKM_MOBILE_FIX_VERSION = "v32-mobile-images-helper-light-2026-06-13";
+  window.GKM_MOBILE_POSTER_HARD_FIX_VERSION = "v33-mobile-poster-hard-fix-2026-06-13";
 })();
 
