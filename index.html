@@ -29,6 +29,7 @@
     <div class="logo-row">
       <img class="site-logo" src="logo-banner.png.png" alt="ГОЛУБЬ Каталог Мира">
       <p id="statusText" class="status-text">Загрузка...</p>
+        <button id="gkmAiTopBtn" class="ai-top-btn" type="button">🤖 Помощник</button>
     </div>
   </header>
 
@@ -154,5 +155,43 @@
   </dialog>
 
   <script src="app.js?v=4005"></script>
+
+<!-- GKM AI CHAT UI V58 RESTORED -->
+<button id="gkmAiFloatBtn" class="ai-float-btn" type="button" aria-label="Открыть чат">🤖</button>
+
+<dialog id="gkmAiDialog" class="ai-dialog">
+  <div class="ai-box">
+    <div class="ai-head">
+      <div>
+        <div class="ai-title">Голубь помощник</div>
+        <div class="ai-subtitle">Советы по фильмам, аниме и сериалам</div>
+      </div>
+      <button id="gkmAiCloseBtn" class="ai-close" type="button">✕</button>
+    </div>
+
+    <div id="gkmAiMessages" class="ai-messages">
+      <div class="ai-msg ai-bot">
+        Привет. Я помогу подобрать фильм, сериал, аниме или мультфильм. Например: «посоветуй аниме как Наруто» или «что посмотреть вечером?»
+      </div>
+    </div>
+
+    <div class="ai-quick">
+      <button type="button" data-ai-prompt="Посоветуй мне топ аниме с сильным главным героем">Топ аниме</button>
+      <button type="button" data-ai-prompt="Что посмотреть вечером из фильмов?">Фильм вечером</button>
+      <button type="button" data-ai-prompt="Найди что-то похожее на Интерстеллар">Как Интерстеллар</button>
+    </div>
+
+    <form id="gkmAiForm" class="ai-form">
+      <input id="gkmAiInput" autocomplete="off" maxlength="500" placeholder="Напиши вопрос..." />
+      <button id="gkmAiSendBtn" type="submit">Отправить</button>
+    </form>
+
+    <div class="ai-note">
+      Пока это локальный помощник по каталогу. Для настоящих ответов нужен Worker/Vercel с API ключом.
+    </div>
+  </div>
+</dialog>
+<!-- /GKM AI CHAT UI V58 RESTORED -->
+
 </body>
 </html>
