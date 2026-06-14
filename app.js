@@ -6337,3 +6337,132 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
     setTimeout(sweepEmptyPostersV85, 5000);
   });
 })();
+
+/* === GKM V86 FRANCHISE-FIRST RELATED === */
+(function () {
+  window.GKM_V86_FRANCHISE_RELATED_VERSION = "v86-franchise-first-related-2026-06-15";
+
+  const FRANCHISE_ALIASES_V86 = [
+    ["shazam", "шазам"],
+    ["deadpool", "дэдпул"],
+    ["harry potter", "гарри поттер"],
+    ["fantastic beasts", "фантастические твари"],
+    ["guardians of the galaxy", "стражи галактики"],
+    ["avengers", "мстители"],
+    ["spider man", "человек паук"],
+    ["batman", "бэтмен"],
+    ["superman", "супермен"],
+    ["matrix", "матрица"],
+    ["john wick", "джон уик"],
+    ["lord of the rings", "властелин колец"],
+    ["hobbit", "хоббит"],
+    ["star wars", "звездные войны"],
+    ["jurassic", "парк юрского периода"],
+    ["fast furious", "форсаж"],
+    ["mission impossible", "миссия невыполнима"],
+    ["bourne", "борн"],
+    ["terminator", "терминатор"],
+    ["alien", "чужой"],
+    ["predator", "хищник"],
+    ["scream", "крик"],
+    ["saw", "пила"],
+    ["conjuring", "заклятие"],
+    ["insidious", "астрал"],
+    ["kung fu panda", "кунг фу панда"],
+    ["toy story", "история игрушек"],
+    ["shrek", "шрек"],
+    ["ice age", "ледниковый период"],
+    ["cars", "тачки"],
+    ["naruto", "наруто"],
+    ["boruto", "боруто"],
+    ["bleach", "блич"],
+    ["one piece", "ван пис"],
+    ["demon slayer", "истребитель демонов"],
+    ["jujutsu kaisen", "магическая битва"]
+  ];
+
+  function normTitleV86(v) {
+    return String(v || "")
+      .toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[!?:;.,'"’`]/g, " ")
+      .replace(/[–—-]/g, " ")
+      .replace(/\b(часть|глава|фильм|сезон|season|part|chapter|movie|episode|эпизод)\b/gi, " ")
+      .replace(/\b([ivxlcdm]+|\d+)\b/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function titlesV86(item) {
+    return [
+      titleOf(item),
+      item && item.ru,
+      item && item.en,
+      item && item.title,
+      item && item.name,
+      item && item.original_title,
+      item && item.original_name
+    ].filter(Boolean);
+  }
+
+  function franchiseKeyV86(item) {
+    const titles = titlesV86(item).map(normTitleV86).filter(Boolean);
+    const hay = titles.join(" | ");
+
+    for (const pair of FRANCHISE_ALIASES_V86) {
+      const aliases = pair.map(normTitleV86);
+      if (aliases.some(a => a && hay.includes(a))) return aliases[0];
+    }
+
+    const best = titles[0] || "";
+    const beforeColon = best.split(/\s[:：]\s|:/)[0].trim();
+    const words = beforeColon.split(" ").filter(w => w.length > 2);
+    if (words.length >= 2) return words.slice(0, 3).join(" ");
+    return words[0] || "";
+  }
+
+  function sequelSignalV86(base, item) {
+    const bk = franchiseKeyV86(base);
+    const ik = franchiseKeyV86(item);
+    if (!bk || !ik || bk !== ik) return 0;
+    if (gkmRelatedKeyV66(base) === gkmRelatedKeyV66(item)) return 0;
+    return 1;
+  }
+
+  const oldScoreV86 = typeof gkmRelatedScoreV66 === "function" ? gkmRelatedScoreV66 : null;
+  if (oldScoreV86) {
+    gkmRelatedScoreV66 = function(base, item) {
+      const score = oldScoreV86(base, item);
+      const sameFranchise = sequelSignalV86(base, item);
+      if (!sameFranchise) return score;
+      const yearDistance = Math.abs(Number(getYear(base) || 0) - Number(getYear(item) || 0));
+      const closeness = Number.isFinite(yearDistance) ? Math.max(0, 40 - yearDistance) : 0;
+      return Math.max(score, 1) + 5000 + closeness;
+    };
+  }
+
+  const oldPickV86 = typeof gkmPickRelatedV66 === "function" ? gkmPickRelatedV66 : null;
+  if (oldPickV86) {
+    gkmPickRelatedV66 = function(base, pool, limit = 10) {
+      const cleaned = gkmCleanListV60(pool);
+      const franchise = cleaned
+        .filter(item => sequelSignalV86(base, item))
+        .map(item => ({ item, score: gkmRelatedScoreV66(base, item) }))
+        .sort((a, b) => b.score - a.score)
+        .map(x => x.item);
+
+      const picked = oldPickV86(base, cleaned, Math.max(limit, 20));
+      const merged = [];
+      const seen = new Set();
+
+      [...franchise, ...picked].forEach(item => {
+        const key = gkmRelatedKeyV66(item);
+        if (!key || seen.has(key)) return;
+        seen.add(key);
+        merged.push(item);
+      });
+
+      return merged.slice(0, limit);
+    };
+  }
+})();
