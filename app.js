@@ -5720,3 +5720,318 @@ window.GKM_V77_DEEP_RETEST_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 
 
 window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
+
+
+/* === GKM V80 HARD FIX: FAST SEARCH + REAL POSTERS FIRST, NO OLD INPUT LAG === */
+(function(){
+  window.GKM_V80_HARD_FIX_VERSION = "v80-fast-search-real-posters-first-2026-06-15";
+
+  const DEPARTMENT_TABS_V80 = new Set(["movies", "series", "cartoons", "anime", "top", "new", "popular"]);
+
+  function normV80(v) {
+    return String(v || "")
+      .toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/&/g, " and ")
+      .replace(/[’'`]/g, "")
+      .replace(/[^0-9a-zа-я一-龯ぁ-ゔァ-ヴー々〆〤:]+/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function posterValueV80(m) {
+    if (!m || typeof m !== "object") return "";
+    return String(
+      m.poster || m.poster_path || m.posterUrl || m.poster_url ||
+      m.image || m.imageUrl || m.image_url || m.cover || m.coverUrl ||
+      m.cover_url || m.img || ""
+    ).trim();
+  }
+
+  function hasRealPosterV80(m) {
+    const pRaw = posterValueV80(m);
+    const p = pRaw.toLowerCase();
+    if (!p || p === "null" || p === "undefined" || p === "n/a") return false;
+    if (p.length < 8) return false;
+    if (m && (m.posterFallback || m.isFallbackPoster || m.noPoster)) return false;
+    if (p.includes("dummyimage.com")) return false;
+    if (p.includes("placeholder")) return false;
+    if (p.includes("no-poster") || p.includes("noposter")) return false;
+    if (p.includes("/null") || p.endsWith("null")) return false;
+    return /^(https?:)?\/\//i.test(pRaw) || pRaw.startsWith("/") || pRaw.startsWith("data/") || /\.(jpg|jpeg|png|webp)(\?|$)/i.test(pRaw);
+  }
+
+  window.gkmHasRealPosterV74 = hasRealPosterV80;
+
+  window.gkmPosterSrcV73 = function(m) {
+    const p = posterValueV80(m);
+    if (!hasRealPosterV80(m)) return gkmPosterFallbackV73(m);
+    if (/^http:\/\//i.test(p)) return p.replace(/^http:/i, "https:");
+    return p;
+  };
+
+  window.posterHtml = function(m) {
+    const src = gkmPosterSrcV73(m);
+    const fallback = gkmPosterFallbackV73(m);
+    return `<img src="${escapeAttr(src)}" data-fallback="${escapeAttr(fallback)}" loading="lazy" decoding="async" alt="" onerror="gkmPosterErrorV73(this)">`;
+  };
+
+  function scoreV80(m) {
+    const votes = Number((typeof getVotes === "function" ? getVotes(m) : m && m.votes) || 0);
+    const rating = Number((typeof getRating === "function" ? getRating(m) : m && m.rating) || 0);
+    const year = Number((typeof getYear === "function" ? getYear(m) : m && m.year) || 0);
+    return (votes * 100000) + (rating * 1000) + year;
+  }
+
+  function posterBottomV80(list) {
+    const arr = Array.isArray(list) ? list.slice() : [];
+    return arr.sort((a, b) => {
+      const bp = hasRealPosterV80(b) ? 1 : 0;
+      const ap = hasRealPosterV80(a) ? 1 : 0;
+      if (bp !== ap) return bp - ap;
+      return scoreV80(b) - scoreV80(a);
+    });
+  }
+
+  window.gkmNoPosterBottomV79 = posterBottomV80;
+  window.gkmVisiblePosterItemsV76 = function(items) { return Array.isArray(items) ? items : []; };
+  window.gkmVisibleCardsV79 = function(items) { return posterBottomV80(items); };
+  window.gkmSortVotesFirstV67 = posterBottomV80;
+  window.gkmRealPosterFirstV75 = posterBottomV80;
+
+  window.gkmCountFallbackInSliceV75 = function(items, limit) {
+    return (Array.isArray(items) ? items : []).slice(0, limit || PAGE_SIZE).filter(x => !hasRealPosterV80(x)).length;
+  };
+
+  function localFiltersOnlyV80(list) {
+    const typeFilter = $("typeFilter");
+    const genreFilter = $("genreFilter");
+    const yearFilter = $("yearFilter");
+    const ratingFilter = $("ratingFilter");
+    const sortFilter = $("sortFilter");
+
+    const type = typeFilter ? typeFilter.value : "";
+    const genre = genreFilter ? genreFilter.value : "";
+    const year = yearFilter ? yearFilter.value : "";
+    const minRating = Number(ratingFilter ? ratingFilter.value || 0 : 0);
+    const sort = sortFilter ? sortFilter.value : "votes";
+
+    let out = Array.isArray(list) ? list.slice() : [];
+    if (type) out = out.filter(m => getType(m) === type);
+    if (genre) out = out.filter(m => getGenres(m).includes(genre));
+    if (year) out = out.filter(m => getYear(m) === year);
+    if (minRating) out = out.filter(m => getRating(m) >= minRating);
+
+    if (sort === "rating") {
+      out.sort((a, b) => (Number(getRating(b) || 0) - Number(getRating(a) || 0)) || (Number(getVotes(b) || 0) - Number(getVotes(a) || 0)));
+    } else if (sort === "year") {
+      out.sort((a, b) => (Number(getYear(b) || 0) - Number(getYear(a) || 0)) || (Number(getVotes(b) || 0) - Number(getVotes(a) || 0)));
+    } else if (sort === "title") {
+      out.sort((a, b) => titleOf(a).localeCompare(titleOf(b), "ru"));
+    } else {
+      out.sort((a, b) => scoreV80(b) - scoreV80(a));
+    }
+
+    const real = out.filter(hasRealPosterV80);
+    const missing = out.filter(x => !hasRealPosterV80(x));
+    return real.concat(missing);
+  }
+
+  window.applyLocalFilters = localFiltersOnlyV80;
+
+  function titleHayV80(m) {
+    if (!m || typeof m !== "object") return "";
+    if (m.__gkmFastTitleHayV80) return m.__gkmFastTitleHayV80;
+    const main = typeof titleOf === "function" ? titleOf(m) : "";
+    m.__gkmFastTitleHayV80 = normV80([
+      main, m.ru, m.en, m.title, m.name, m.title_ru, m.ruTitle, m.title_original,
+      m.originalTitle, m.original_title, m.english, m.title_en, m.japanese, m.romaji,
+      ...(Array.isArray(m.aliases) ? m.aliases : []),
+      ...(Array.isArray(m.names) ? m.names : []),
+      m.searchTitle || ""
+    ].join(" "));
+    return m.__gkmFastTitleHayV80;
+  }
+
+  function queryVariantsV80(q) {
+    const base = normV80(q);
+    const out = new Set([base]);
+    try {
+      const kb = normV80(gkmSearchKeyboardFixV49(base));
+      if (kb && kb !== base) out.add(kb);
+    } catch(e) {}
+    const syn = {
+      "наруто": ["naruto", "норуто", "нарута"],
+      "боруто": ["boruto", "baruto"],
+      "ван пис": ["one piece", "ванпис", "ван-пис"],
+      "ванпис": ["one piece", "ван пис"],
+      "магическая битва": ["jujutsu kaisen", "дзюдзюцу"],
+      "дзюдзюцу": ["jujutsu kaisen", "магическая битва"],
+      "клинок": ["demon slayer", "истребитель демонов", "kimetsu no yaiba"],
+      "истребитель демонов": ["demon slayer", "kimetsu no yaiba"],
+      "атака титанов": ["attack on titan", "shingeki no kyojin"],
+      "соло левелинг": ["solo leveling", "поднятие уровня"],
+      "блич": ["bleach"],
+      "фрирен": ["frieren"],
+      "тетрадь смерти": ["death note"],
+      "бензопила": ["chainsaw man"],
+      "покемон": ["pokemon"]
+    };
+    for (const [k, arr] of Object.entries(syn)) {
+      if (base === k || base.includes(k) || k.includes(base)) arr.forEach(x => out.add(normV80(x)));
+    }
+    return [...out].filter(Boolean);
+  }
+
+  function fastSearchScoreV80(m, q) {
+    if (!q) return 1;
+    const hay = titleHayV80(m);
+    if (!hay) return 0;
+    let best = 0;
+    for (const v of queryVariantsV80(q)) {
+      if (!v) continue;
+      const wrappedHay = " " + hay + " ";
+      if (hay === v) best = Math.max(best, 10000000);
+      else if (hay.startsWith(v + " ")) best = Math.max(best, 9000000);
+      else if (wrappedHay.includes(" " + v + " ")) best = Math.max(best, 8000000);
+      else if (hay.includes(v)) best = Math.max(best, 7000000);
+      else {
+        const parts = v.split(" ").filter(x => x.length > 1);
+        if (parts.length && parts.every(p => hay.includes(p))) best = Math.max(best, 6000000 + parts.length * 1000);
+      }
+    }
+    if (!best) return 0;
+    if (hasRealPosterV80(m)) best += 500000;
+    best += Math.min(Number(getVotes(m) || 0), 1000000) / 10;
+    best += Number(getRating(m) || 0) * 100;
+    return best;
+  }
+
+  window.renderList = function(items, label) {
+    const list = posterBottomV80(items);
+    const grid = $("grid");
+    const countText = $("countText");
+    const pageText = $("pageText");
+    const prevBtn = $("prevBtn");
+    const nextBtn = $("nextBtn");
+    if (countText) countText.textContent = label || `Найдено: ${list.length}`;
+    if (grid) grid.innerHTML = list.map(cardHtml).join("");
+    currentItems = list;
+    if (pageText) pageText.textContent = `${currentPage} / ${currentPages}`;
+    if (prevBtn) prevBtn.disabled = currentPage <= 1;
+    if (nextBtn) nextBtn.disabled = currentPage >= currentPages;
+  };
+
+  window.renderSearchPage = function(page) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil(lastSearchResults.length / PAGE_SIZE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE_SIZE;
+    currentItems = lastSearchResults.slice(start, start + PAGE_SIZE);
+    const missingFirst = currentItems.findIndex(x => !hasRealPosterV80(x));
+    const badBeforeMissing = missingFirst >= 0 ? currentItems.slice(missingFirst + 1).some(hasRealPosterV80) : false;
+    renderList(currentItems, `Поиск: ${lastSearchResults.length} найдено · Страница ${currentPage} из ${currentPages}${badBeforeMissing ? " · ошибка сортировки" : ""}`);
+  };
+
+  window.runSearch = async function() {
+    const runId = (window.GKM_SEARCH_RUN_ID_V80 = (window.GKM_SEARCH_RUN_ID_V80 || 0) + 1);
+    const searchInput = $("searchInput");
+    const qRaw = searchInput ? searchInput.value : "";
+    const q = normV80(qRaw);
+    const genericTab = typeof gkmGenericQueryTabV76 === "function" ? gkmGenericQueryTabV76(qRaw) : "";
+
+    if (genericTab) {
+      if (typeof gkmOpenGenericQueryTabV76 === "function") gkmOpenGenericQueryTabV76(genericTab);
+      return;
+    }
+
+    const controlsActive = typeof hasActiveControls === "function" ? hasActiveControls() : false;
+    if (!q && !controlsActive) {
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    if (q && q.replace(/\s+/g, "").length < 2 && !controlsActive) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+
+    const t0 = performance && performance.now ? performance.now() : Date.now();
+    setStatus(q ? `Ищу быстро: ${qRaw}...` : "Фильтрую...");
+    const index = await ensureSearchIndex();
+    if (runId !== window.GKM_SEARCH_RUN_ID_V80) return;
+
+    let raw;
+    if (q) {
+      const scored = [];
+      for (let i = 0; i < index.length; i++) {
+        const item = index[i];
+        const s = fastSearchScoreV80(item, q);
+        if (s > 0) scored.push({ item, s });
+      }
+      scored.sort((a, b) => b.s - a.s);
+      raw = scored.map(x => x.item);
+    } else {
+      raw = index.slice();
+    }
+
+    const scoped = typeof applyTabFilter === "function" ? applyTabFilter(raw) : raw;
+    lastSearchResults = localFiltersOnlyV80(scoped);
+    if (runId !== window.GKM_SEARCH_RUN_ID_V80) return;
+
+    if (!lastSearchResults.length && q) {
+      renderList([], `Поиск: 0 найдено`);
+      setStatus(`Ничего не нашёл: ${qRaw}`);
+      return;
+    }
+
+    renderSearchPage(1);
+    const t1 = performance && performance.now ? performance.now() : Date.now();
+    const missing = lastSearchResults.filter(x => !hasRealPosterV80(x)).length;
+    setStatus(`Поиск: ${lastSearchResults.length} найдено · без постера внизу: ${missing} · ${Math.round(t1 - t0)} мс`);
+    try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch { window.scrollTo(0, 0); }
+  };
+
+  const oldHomeSectionHtml = window.homeSectionHtml || homeSectionHtml;
+  window.homeSectionHtml = function(title, items, tabName) {
+    return oldHomeSectionHtml(title, posterBottomV80(items).filter(hasRealPosterV80).slice(0, 18), tabName);
+  };
+
+  const oldRenderHome = window.renderHome || renderHome;
+  window.renderHome = function() {
+    if (homeData && homeData.sections) {
+      Object.keys(homeData.sections).forEach(k => {
+        if (Array.isArray(homeData.sections[k])) homeData.sections[k] = posterBottomV80(homeData.sections[k]).filter(hasRealPosterV80);
+      });
+    }
+    return oldRenderHome();
+  };
+
+  function bindFastInputV80() {
+    if (document.documentElement.dataset.gkmV80FastInput === "1") return;
+    document.documentElement.dataset.gkmV80FastInput = "1";
+    document.addEventListener("input", function(e) {
+      const input = e.target && e.target.closest ? e.target.closest("#searchInput") : null;
+      if (!input) return;
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+      clearTimeout(window.GKM_V80_SEARCH_TIMER);
+      window.GKM_V80_SEARCH_TIMER = setTimeout(() => window.runSearch(), 180);
+    }, true);
+    ["typeFilter", "genreFilter", "yearFilter", "ratingFilter", "sortFilter"].forEach(id => {
+      const el = $(id);
+      if (!el) return;
+      el.addEventListener("change", function(e) {
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+        clearTimeout(window.GKM_V80_SEARCH_TIMER);
+        window.GKM_V80_SEARCH_TIMER = setTimeout(() => window.runSearch(), 80);
+      }, true);
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindFastInputV80);
+  else bindFastInputV80();
+})();
+/* === /GKM V80 HARD FIX === */
