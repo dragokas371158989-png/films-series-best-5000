@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -875,13 +875,13 @@ async function gkmLoadDepartmentFromIndexV68(tab, page = 1) {
   gkmRenderDepartmentPageV68(tab, page, idx);
 }
 
-window.GKM_STRICT_DEPARTMENT_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_STRICT_DEPARTMENT_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 /* === /GKM V68 STRICT DEPARTMENT PAGES === */
 
 
 
 /* === GKM V71 PAGE BUFFER + NO SEARCH PAGER === */
-const GKM_PAGE_BUFFER_LIMIT_V71 = 12;
+const GKM_PAGE_BUFFER_LIMIT_V71 = 25;
 let gkmDepartmentBufferCacheV71 = {};
 
 function gkmStrictFilterTabV71(tab, items) {
@@ -949,8 +949,8 @@ function gkmRenderBufferedDepartmentV71(pageTab, requestedPage, buffer) {
   setStatus(`Раздел ${pageTab} · без search_index · сортировка по голосам`);
 }
 
-window.GKM_PAGER_NO_SEARCH_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
-window.GKM_PAGE_BUFFER_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_PAGER_NO_SEARCH_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_PAGE_BUFFER_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 /* === /GKM V71 PAGE BUFFER + NO SEARCH PAGER === */
 
 
@@ -1227,7 +1227,7 @@ function gkmSortSmartV67(list) {
   });
 }
 
-window.GKM_VOTES_FIRST_SORT_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_VOTES_FIRST_SORT_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 /* === /GKM V67 VOTES FIRST SORT === */
 
 
@@ -1722,7 +1722,7 @@ async function renderRelatedCardsV66(baseItem) {
   });
 }
 
-window.GKM_RELATED_CARDS_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_RELATED_CARDS_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 /* === /GKM V66 RELATED CARDS IN DETAILS === */
 
 
@@ -3995,7 +3995,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 })();
 
 
@@ -5127,23 +5127,23 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_HELPER_RESTORED_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_TESTED_RELEASE_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_RUNTIME_GUARD_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 
-window.GKM_NO_SCROLL_BUTTONS_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 
 
 
@@ -5171,7 +5171,7 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v71-pager-buffer-no-search-tested-2026-0
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
   else bindMoreButtonsCaptureV63();
 
-  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 })();
 
 
@@ -5236,11 +5236,11 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v71-pager-buffer-no-search-tested-2026-0
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAiCloseV64);
   else bindAiCloseV64();
 
-  window.GKM_HELPER_CLOSE_FIX_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+  window.GKM_HELPER_CLOSE_FIX_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 })();
 
 
-window.GKM_BALANCED_HOME_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_BALANCED_HOME_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 
 
 window.GKM_LIST_SORT_POLICY_VERSION = "votes_first_then_rating_v67";
@@ -5327,7 +5327,158 @@ window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_i
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindTabsV70);
   else bindTabsV70();
 
-  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
-  window.GKM_VOTE_BUCKETS_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+  window.GKM_VOTE_BUCKETS_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
 })();
 /* === /GKM V70 STRICT TAB BUTTONS + VOTE BUCKETS === */
+
+
+
+/* === GKM V72 HARD PAGER + STRICT TABS OVERRIDE === */
+(function () {
+  const DEPARTMENT_TABS_V72 = new Set(["movies", "series", "cartoons", "anime", "top", "new", "popular"]);
+  const SPECIAL_TABS_V72 = new Set(["fav", "history", "random"]);
+
+  function gkmScrollPageTopV72() {
+    try {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  function gkmClearControlsForDepartmentV72() {
+    const search = $("searchInput");
+    if (search) {
+      search.value = "";
+      search.blur();
+    }
+
+    ["typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(id => {
+      const el = $(id);
+      if (el) el.value = id === "ratingFilter" ? "0" : "";
+    });
+
+    const sort = $("sortFilter");
+    if (sort) sort.value = "votes";
+  }
+
+  async function gkmOpenDepartmentHardV72(tabName, page = 1) {
+    tabName = tabName || "all";
+    gkmClearControlsForDepartmentV72();
+    lastSearchResults = [];
+    currentPage = Math.max(1, Number(page || 1));
+    setActiveTab(tabName);
+
+    if (tabName === "all") {
+      currentTab = "all";
+      renderHome();
+      gkmScrollPageTopV72();
+      return;
+    }
+
+    if (tabName === "fav") {
+      await renderFavorites();
+      gkmScrollPageTopV72();
+      return;
+    }
+
+    if (tabName === "history") {
+      await renderHistory();
+      gkmScrollPageTopV72();
+      return;
+    }
+
+    if (tabName === "random") {
+      await renderRandom();
+      gkmScrollPageTopV72();
+      return;
+    }
+
+    await loadPage(tabName, currentPage);
+    gkmScrollPageTopV72();
+  }
+
+  async function gkmGoPageHardV72(delta) {
+    const next = currentPage + delta;
+    if (next < 1 || next > currentPages) return;
+
+    if (SPECIAL_TABS_V72.has(currentTab)) {
+      renderSearchPage(next);
+      gkmScrollPageTopV72();
+      return;
+    }
+
+    if (currentSearchActive() && !DEPARTMENT_TABS_V72.has(currentTab)) {
+      renderSearchPage(next);
+      gkmScrollPageTopV72();
+      return;
+    }
+
+    await loadPage(currentTab || "all", next);
+    gkmScrollPageTopV72();
+  }
+
+  function bindHardV72() {
+    if (document.documentElement.dataset.gkmHardPagerTabsV72 === "1") return;
+    document.documentElement.dataset.gkmHardPagerTabsV72 = "1";
+
+    document.addEventListener("click", function(e) {
+      const tabBtn = e.target && e.target.closest ? e.target.closest(".tab[data-tab]") : null;
+      if (tabBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+        gkmOpenDepartmentHardV72(tabBtn.dataset.tab || "all", 1);
+        return;
+      }
+
+      const moreBtn = e.target && e.target.closest ? e.target.closest("[data-open-tab], .home-more-btn") : null;
+      if (moreBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+        gkmOpenDepartmentHardV72(moreBtn.getAttribute("data-open-tab") || moreBtn.dataset.openTab || "all", 1);
+        return;
+      }
+
+      const prev = e.target && e.target.closest ? e.target.closest("#prevBtn") : null;
+      if (prev) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+        gkmGoPageHardV72(-1);
+        return;
+      }
+
+      const next = e.target && e.target.closest ? e.target.closest("#nextBtn") : null;
+      if (next) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+        gkmGoPageHardV72(1);
+        return;
+      }
+    }, true);
+
+    // V72: смена сортировки больше не запускает поиск на текущем разделе.
+    ["sortFilter"].forEach(id => {
+      const el = $(id);
+      if (!el) return;
+      el.addEventListener("change", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+        if (DEPARTMENT_TABS_V72.has(currentTab)) loadPage(currentTab, 1).then(gkmScrollPageTopV72);
+        else if (currentTab === "all") renderHome();
+      }, true);
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindHardV72);
+  else bindHardV72();
+
+  window.GKM_HARD_PAGER_TABS_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+  window.GKM_PAGE_SCROLL_TOP_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+})();
+/* === /GKM V72 HARD PAGER + STRICT TABS OVERRIDE === */
