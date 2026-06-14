@@ -1,3 +1,4 @@
+# GKM_TESTED_PACKAGE_V59 wrapper: tested with synthetic data before release
 import json, re, shutil
 from pathlib import Path
 from datetime import datetime, timezone
