@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -875,8 +875,83 @@ async function gkmLoadDepartmentFromIndexV68(tab, page = 1) {
   gkmRenderDepartmentPageV68(tab, page, idx);
 }
 
-window.GKM_STRICT_DEPARTMENT_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+window.GKM_STRICT_DEPARTMENT_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 /* === /GKM V68 STRICT DEPARTMENT PAGES === */
+
+
+
+/* === GKM V71 PAGE BUFFER + NO SEARCH PAGER === */
+const GKM_PAGE_BUFFER_LIMIT_V71 = 12;
+let gkmDepartmentBufferCacheV71 = {};
+
+function gkmStrictFilterTabV71(tab, items) {
+  let out = gkmCleanListV60(items || []);
+  if (tab === "movies") out = out.filter(m => getType(m) === "Фильм");
+  else if (tab === "series") out = out.filter(m => getType(m) === "Сериал");
+  else if (tab === "cartoons") out = out.filter(m => getType(m) === "Мультфильм");
+  else if (tab === "anime") out = out.filter(m => getType(m) === "Аниме");
+  else if (tab === "new") out = out.filter(m => Number(getYear(m) || 0) >= 2024);
+  else if (tab === "top") out = out.filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP && getRating(m) >= 7);
+  else if (tab === "popular") out = out.filter(m => getVotes(m) >= 1);
+  return gkmSortVotesFirstV67(out);
+}
+
+async function gkmFetchPageQuietV71(pageTab, page) {
+  try {
+    return await fetchJson(`${FAST_BASE}/pages/${pageTab}/page_${String(page).padStart(4, "0")}.json`);
+  } catch (e) {
+    console.warn("V71 page fetch failed", pageTab, page, e);
+    return null;
+  }
+}
+
+async function gkmBuildPageBufferV71(pageTab, firstData) {
+  const cacheKey = pageTab;
+  if (gkmDepartmentBufferCacheV71[cacheKey]) return gkmDepartmentBufferCacheV71[cacheKey];
+
+  const totalPages = Math.max(1, Number(firstData && firstData.pages || 1));
+  const fetchCount = Math.min(totalPages, GKM_PAGE_BUFFER_LIMIT_V71);
+  const datas = [firstData];
+
+  const promises = [];
+  for (let p = 2; p <= fetchCount; p++) promises.push(gkmFetchPageQuietV71(pageTab, p));
+  const more = await Promise.all(promises);
+  more.forEach(x => { if (x && Array.isArray(x.items)) datas.push(x); });
+
+  const raw = datas.flatMap(x => Array.isArray(x && x.items) ? x.items : []);
+  const strict = gkmStrictFilterTabV71(pageTab, raw);
+
+  const result = {
+    items: strict,
+    sourcePages: datas.length,
+    originalPages: totalPages,
+    originalCount: Number(firstData && firstData.count || strict.length),
+    syntheticPages: Math.max(1, Math.ceil(strict.length / PAGE_SIZE))
+  };
+
+  gkmDepartmentBufferCacheV71[cacheKey] = result;
+  return result;
+}
+
+function gkmRenderBufferedDepartmentV71(pageTab, requestedPage, buffer) {
+  currentPage = Math.max(1, Number(requestedPage || 1));
+  currentPages = buffer.syntheticPages || 1;
+  if (currentPage > currentPages) currentPage = currentPages;
+
+  const start = (currentPage - 1) * PAGE_SIZE;
+  currentItems = buffer.items.slice(start, start + PAGE_SIZE);
+  currentCount = buffer.originalCount || buffer.items.length;
+
+  renderList(
+    currentItems,
+    `Раздел: ${currentCount} · Страница ${currentPage} из ${currentPages} · буфер ${buffer.sourcePages} стр.`
+  );
+  setStatus(`Раздел ${pageTab} · без search_index · сортировка по голосам`);
+}
+
+window.GKM_PAGER_NO_SEARCH_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+window.GKM_PAGE_BUFFER_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+/* === /GKM V71 PAGE BUFFER + NO SEARCH PAGER === */
 
 
 async function loadPage(tab, page = 1) {
@@ -885,22 +960,19 @@ async function loadPage(tab, page = 1) {
   currentTab = tab;
   currentPage = page;
 
-  // V69: НЕ грузим весь search_index при открытии разделов.
-  // Разделы берут готовые быстрые page_0001/page_0002, которые собирает GitHub Action.
   const url = `${FAST_BASE}/pages/${pageTab}/page_${String(page).padStart(4, "0")}.json`;
   setStatus(`Загружаю ${tab} · страница ${page}...`);
 
   const data = await fetchJson(url);
 
-  let items = gkmCleanListV60(data.items || []);
+  const departmentTabs = new Set(["movies", "series", "cartoons", "anime", "top", "new", "popular"]);
+  if (departmentTabs.has(pageTab)) {
+    const buffer = await gkmBuildPageBufferV71(pageTab, data);
+    gkmRenderBufferedDepartmentV71(pageTab, page, buffer);
+    return;
+  }
 
-  // Страховка: даже если старые json смешанные, на экране типы не смешиваем.
-  if (pageTab === "movies") items = items.filter(m => getType(m) === "Фильм");
-  if (pageTab === "series") items = items.filter(m => getType(m) === "Сериал");
-  if (pageTab === "cartoons") items = items.filter(m => getType(m) === "Мультфильм");
-  if (pageTab === "anime") items = items.filter(m => getType(m) === "Аниме");
-
-  currentItems = gkmSortVotesFirstV67(items);
+  currentItems = gkmSortVotesFirstV67(gkmCleanListV60(data.items || []));
   currentPage = data.page || page;
   currentPages = data.pages || 1;
   currentCount = data.count || currentItems.length;
@@ -908,9 +980,6 @@ async function loadPage(tab, page = 1) {
   renderList(currentItems, `Найдено: ${currentCount} · Страница ${currentPage} из ${currentPages}`);
   setStatus(`Раздел загружен: ${currentCount} записей · fast pages`);
 }
-
-window.GKM_FAST_PAGES_NO_FREEZE_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
-
 
 function renderList(items, label) {
   const grid = $("grid");
@@ -1158,7 +1227,7 @@ function gkmSortSmartV67(list) {
   });
 }
 
-window.GKM_VOTES_FIRST_SORT_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+window.GKM_VOTES_FIRST_SORT_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 /* === /GKM V67 VOTES FIRST SORT === */
 
 
@@ -1653,7 +1722,7 @@ async function renderRelatedCardsV66(baseItem) {
   });
 }
 
-window.GKM_RELATED_CARDS_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+window.GKM_RELATED_CARDS_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 /* === /GKM V66 RELATED CARDS IN DETAILS === */
 
 
@@ -1906,14 +1975,13 @@ function hasActiveControls() {
   const genreFilter = $("genreFilter");
   const yearFilter = $("yearFilter");
   const ratingFilter = $("ratingFilter");
-  const sortFilter = $("sortFilter");
 
+  // V71: сортировка "По голосам" не включает режим поиска.
   return Boolean(
     (typeFilter && typeFilter.value) ||
     (genreFilter && genreFilter.value) ||
     (yearFilter && yearFilter.value) ||
-    Number(ratingFilter ? ratingFilter.value || 0 : 0) ||
-    (sortFilter && sortFilter.value && sortFilter.value !== "smart")
+    Number(ratingFilter ? ratingFilter.value || 0 : 0)
   );
 }
 
@@ -3927,7 +3995,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 })();
 
 
@@ -5059,23 +5127,23 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+window.GKM_HELPER_RESTORED_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+window.GKM_TESTED_RELEASE_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+window.GKM_RUNTIME_GUARD_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 
-window.GKM_NO_SCROLL_BUTTONS_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 
 
 
@@ -5103,7 +5171,7 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
   else bindMoreButtonsCaptureV63();
 
-  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 })();
 
 
@@ -5168,11 +5236,11 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAiCloseV64);
   else bindAiCloseV64();
 
-  window.GKM_HELPER_CLOSE_FIX_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+  window.GKM_HELPER_CLOSE_FIX_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 })();
 
 
-window.GKM_BALANCED_HOME_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+window.GKM_BALANCED_HOME_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 
 
 window.GKM_LIST_SORT_POLICY_VERSION = "votes_first_then_rating_v67";
@@ -5259,7 +5327,7 @@ window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_i
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindTabsV70);
   else bindTabsV70();
 
-  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
-  window.GKM_VOTE_BUCKETS_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
+  window.GKM_VOTE_BUCKETS_VERSION = "v71-pager-buffer-no-search-tested-2026-06-13";
 })();
 /* === /GKM V70 STRICT TAB BUTTONS + VOTE BUCKETS === */
