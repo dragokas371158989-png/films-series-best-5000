@@ -3,7 +3,7 @@ import json, re, shutil
 from pathlib import Path
 from datetime import datetime, timezone
 
-VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13"
+VERSION = "v70-tabs-votes-buckets-tested-2026-06-13"
 DATA_FAST = Path("data/fast")
 PAGE_SIZE = 60
 HOME_LIMIT = 18
@@ -168,13 +168,24 @@ def dedupe(items):
     return list(best.values())
 
 def score(item):
-    """Votes-first score for generated pages.
-    More votes always wins first; rating/year are only tie breakers.
+    """Vote buckets for generated pages:
+    30k+ first, then 10k+, then 1k+, then 100+, then tiny votes.
+    Inside each bucket: more votes, then rating, then year.
     """
     rating = float(item.get("rating") or 0)
     votes = int(float(item.get("votes") or 0))
     year = int(item.get("year") or 0)
-    return votes * 100000 + rating * 1000 + year
+    if votes >= 30000:
+        bucket = 4
+    elif votes >= 10000:
+        bucket = 3
+    elif votes >= 1000:
+        bucket = 2
+    elif votes >= 100:
+        bucket = 1
+    else:
+        bucket = 0
+    return bucket * 10_000_000_000 + votes * 100000 + rating * 1000 + year
 
 def write_pages(tab, items):
     d = DATA_FAST / "pages" / tab
@@ -270,7 +281,7 @@ def main():
     save(DATA_FAST / "search_index.json", items)
     save(DATA_FAST / "home.json", home)
     save(DATA_FAST / "meta.json", meta)
-    print("V69 FAST PAGES READY")
+    print("V70 VOTE BUCKET PAGES READY")
     print("builderVersion=", VERSION)
     print("anime=", len(anime), "cartoons=", len(cartoons))
     print("scoobyInAnime=", meta["checks"]["scoobyInAnime"])
