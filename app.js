@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v73-poster-repair-tested-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v74-real-posters-first-tested-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -587,7 +587,7 @@ function gkmPosterErrorV73(img) {
   } catch(e) {}
 }
 
-window.GKM_POSTER_REPAIR_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_POSTER_REPAIR_VERSION = "v74-real-posters-first-tested-2026-06-13";
 /* === /GKM V73 POSTER REPAIR === */
 
 
@@ -908,7 +908,7 @@ async function gkmLoadDepartmentFromIndexV68(tab, page = 1) {
   gkmRenderDepartmentPageV68(tab, page, idx);
 }
 
-window.GKM_STRICT_DEPARTMENT_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_STRICT_DEPARTMENT_VERSION = "v74-real-posters-first-tested-2026-06-13";
 /* === /GKM V68 STRICT DEPARTMENT PAGES === */
 
 
@@ -982,8 +982,8 @@ function gkmRenderBufferedDepartmentV71(pageTab, requestedPage, buffer) {
   setStatus(`Раздел ${pageTab} · без search_index · сортировка по голосам`);
 }
 
-window.GKM_PAGER_NO_SEARCH_VERSION = "v73-poster-repair-tested-2026-06-13";
-window.GKM_PAGE_BUFFER_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_PAGER_NO_SEARCH_VERSION = "v74-real-posters-first-tested-2026-06-13";
+window.GKM_PAGE_BUFFER_VERSION = "v74-real-posters-first-tested-2026-06-13";
 /* === /GKM V71 PAGE BUFFER + NO SEARCH PAGER === */
 
 
@@ -1207,6 +1207,19 @@ function gkmVotesFirstScoreV67(m) {
   return (votes * 100000) + (rating * 1000) + year;
 }
 
+
+/* === GKM V74 REAL POSTERS FIRST === */
+function gkmHasRealPosterV74(m) {
+  const p = String(m && m.poster || "").trim().toLowerCase();
+  if (!p || p.length < 8) return false;
+  if (m && m.posterFallback) return false;
+  if (p.includes("dummyimage.com")) return false;
+  return true;
+}
+
+window.GKM_REAL_POSTERS_FIRST_VERSION = "v74-real-posters-first-tested-2026-06-13";
+/* === /GKM V74 REAL POSTERS FIRST === */
+
 function gkmVotesBucketV70(m) {
   const v = Number(getVotes(m) || 0);
   if (v >= 30000) return 4;   // сперва жир: 30k+
@@ -1218,6 +1231,11 @@ function gkmVotesBucketV70(m) {
 
 function gkmSortVotesFirstV67(list) {
   return [...(Array.isArray(list) ? list : [])].sort((a, b) => {
+    // V74: на ранних страницах сначала карточки с настоящими постерами.
+    const bp = gkmHasRealPosterV74(b) ? 1 : 0;
+    const ap = gkmHasRealPosterV74(a) ? 1 : 0;
+    if (bp !== ap) return bp - ap;
+
     const bb = gkmVotesBucketV70(b);
     const ab = gkmVotesBucketV70(a);
     if (bb !== ab) return bb - ab;
@@ -1260,7 +1278,7 @@ function gkmSortSmartV67(list) {
   });
 }
 
-window.GKM_VOTES_FIRST_SORT_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_VOTES_FIRST_SORT_VERSION = "v74-real-posters-first-tested-2026-06-13";
 /* === /GKM V67 VOTES FIRST SORT === */
 
 
@@ -1755,7 +1773,7 @@ async function renderRelatedCardsV66(baseItem) {
   });
 }
 
-window.GKM_RELATED_CARDS_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_RELATED_CARDS_VERSION = "v74-real-posters-first-tested-2026-06-13";
 /* === /GKM V66 RELATED CARDS IN DETAILS === */
 
 
@@ -4030,7 +4048,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v73-poster-repair-tested-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v74-real-posters-first-tested-2026-06-13";
 })();
 
 
@@ -5162,23 +5180,23 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v74-real-posters-first-tested-2026-06-13";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_HELPER_RESTORED_VERSION = "v74-real-posters-first-tested-2026-06-13";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_TESTED_RELEASE_VERSION = "v74-real-posters-first-tested-2026-06-13";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_RUNTIME_GUARD_VERSION = "v74-real-posters-first-tested-2026-06-13";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v74-real-posters-first-tested-2026-06-13";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v74-real-posters-first-tested-2026-06-13";
 
-window.GKM_NO_SCROLL_BUTTONS_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v74-real-posters-first-tested-2026-06-13";
 
 
 
@@ -5206,7 +5224,7 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v73-poster-repair-tested-2026-06-13";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
   else bindMoreButtonsCaptureV63();
 
-  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v73-poster-repair-tested-2026-06-13";
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v74-real-posters-first-tested-2026-06-13";
 })();
 
 
@@ -5271,11 +5289,11 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v73-poster-repair-tested-2026-06-13";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAiCloseV64);
   else bindAiCloseV64();
 
-  window.GKM_HELPER_CLOSE_FIX_VERSION = "v73-poster-repair-tested-2026-06-13";
+  window.GKM_HELPER_CLOSE_FIX_VERSION = "v74-real-posters-first-tested-2026-06-13";
 })();
 
 
-window.GKM_BALANCED_HOME_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_BALANCED_HOME_VERSION = "v74-real-posters-first-tested-2026-06-13";
 
 
 window.GKM_LIST_SORT_POLICY_VERSION = "votes_first_then_rating_v67";
@@ -5362,8 +5380,8 @@ window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_i
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindTabsV70);
   else bindTabsV70();
 
-  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v73-poster-repair-tested-2026-06-13";
-  window.GKM_VOTE_BUCKETS_VERSION = "v73-poster-repair-tested-2026-06-13";
+  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v74-real-posters-first-tested-2026-06-13";
+  window.GKM_VOTE_BUCKETS_VERSION = "v74-real-posters-first-tested-2026-06-13";
 })();
 /* === /GKM V70 STRICT TAB BUTTONS + VOTE BUCKETS === */
 
@@ -5513,7 +5531,7 @@ window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_i
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindHardV72);
   else bindHardV72();
 
-  window.GKM_HARD_PAGER_TABS_VERSION = "v73-poster-repair-tested-2026-06-13";
-  window.GKM_PAGE_SCROLL_TOP_VERSION = "v73-poster-repair-tested-2026-06-13";
+  window.GKM_HARD_PAGER_TABS_VERSION = "v74-real-posters-first-tested-2026-06-13";
+  window.GKM_PAGE_SCROLL_TOP_VERSION = "v74-real-posters-first-tested-2026-06-13";
 })();
 /* === /GKM V72 HARD PAGER + STRICT TABS OVERRIDE === */
