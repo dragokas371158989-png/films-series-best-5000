@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v67-votes-first-tested-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -827,18 +827,89 @@ async function loadHome() {
   setStatus(`Быстрая база: ${getTotalCount()} записей · ${metaData.generatedAt || ""}`);
 }
 
+
+/* === GKM V68 STRICT DEPARTMENT PAGES === */
+function gkmDepartmentFullListV68(tab, index) {
+  const list = gkmCleanListV60(Array.isArray(index) ? index : []);
+  let out = list;
+
+  if (tab === "movies") out = out.filter(m => getType(m) === "Фильм");
+  else if (tab === "series") out = out.filter(m => getType(m) === "Сериал");
+  else if (tab === "cartoons") out = out.filter(m => getType(m) === "Мультфильм");
+  else if (tab === "anime") out = out.filter(m => getType(m) === "Аниме");
+  else if (tab === "new") out = out.filter(m => Number(getYear(m) || 0) >= 2024);
+  else if (tab === "popular") out = out.filter(m => getVotes(m) >= 1);
+  else if (tab === "top") out = out.filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP && getRating(m) >= 7);
+  else out = list;
+
+  if (tab === "new") {
+    out = [...out].sort((a, b) => {
+      const dy = Number(getYear(b) || 0) - Number(getYear(a) || 0);
+      return dy || (getVotes(b) - getVotes(a)) || (getRating(b) - getRating(a));
+    });
+  } else {
+    out = gkmSortVotesFirstV67(out);
+  }
+
+  return out;
+}
+
+function gkmRenderDepartmentPageV68(tab, page, fullList) {
+  currentTab = tab;
+  currentPage = Math.max(1, Number(page || 1));
+  lastSearchResults = gkmDepartmentFullListV68(tab, fullList);
+  currentCount = lastSearchResults.length;
+  currentPages = Math.max(1, Math.ceil(currentCount / PAGE_SIZE));
+
+  if (currentPage > currentPages) currentPage = currentPages;
+
+  const start = (currentPage - 1) * PAGE_SIZE;
+  currentItems = lastSearchResults.slice(start, start + PAGE_SIZE);
+
+  renderList(currentItems, `Раздел: ${currentCount} · Страница ${currentPage} из ${currentPages}`);
+  setStatus(`Раздел ${tab}: ${currentCount} записей · сортировка по голосам`);
+}
+
+async function gkmLoadDepartmentFromIndexV68(tab, page = 1) {
+  const idx = await ensureSearchIndex();
+  gkmRenderDepartmentPageV68(tab, page, idx);
+}
+
+window.GKM_STRICT_DEPARTMENT_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+/* === /GKM V68 STRICT DEPARTMENT PAGES === */
+
+
 async function loadPage(tab, page = 1) {
   const pageTab = TAB_TO_PAGE[tab] || "all";
 
   currentTab = tab;
   currentPage = page;
 
+  // ВАЖНО V68:
+  // Разделы Фильмы/Сериалы/Мультфильмы/Аниме/Топ/Новинки/Популярное строим из полного search_index.
+  // Так в разделе "Фильмы" не появятся аниме/мультики, а сортировка будет по голосам по всей базе, не только внутри одной старой страницы.
+  const strictTabs = new Set(["movies", "series", "cartoons", "anime", "top", "new", "popular"]);
+  if (strictTabs.has(pageTab)) {
+    try {
+      await gkmLoadDepartmentFromIndexV68(pageTab, page);
+      return;
+    } catch (e) {
+      console.warn("V68 strict department index failed, fallback to page json", e);
+    }
+  }
+
   const url = `${FAST_BASE}/pages/${pageTab}/page_${String(page).padStart(4, "0")}.json`;
   setStatus(`Загружаю ${tab} · страница ${page}...`);
 
   const data = await fetchJson(url);
 
-  currentItems = gkmSortSmartV67(gkmCleanListV60(data.items || []));
+  let items = gkmCleanListV60(data.items || []);
+  if (pageTab === "movies") items = items.filter(m => getType(m) === "Фильм");
+  if (pageTab === "series") items = items.filter(m => getType(m) === "Сериал");
+  if (pageTab === "cartoons") items = items.filter(m => getType(m) === "Мультфильм");
+  if (pageTab === "anime") items = items.filter(m => getType(m) === "Аниме");
+
+  currentItems = gkmSortVotesFirstV67(items);
   currentPage = data.page || page;
   currentPages = data.pages || 1;
   currentCount = data.count || currentItems.length;
@@ -1080,7 +1151,7 @@ function gkmSortSmartV67(list) {
   });
 }
 
-window.GKM_VOTES_FIRST_SORT_VERSION = "v67-votes-first-tested-2026-06-13";
+window.GKM_VOTES_FIRST_SORT_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 /* === /GKM V67 VOTES FIRST SORT === */
 
 
@@ -1579,7 +1650,7 @@ async function renderRelatedCardsV66(baseItem) {
   });
 }
 
-window.GKM_RELATED_CARDS_VERSION = "v67-votes-first-tested-2026-06-13";
+window.GKM_RELATED_CARDS_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 /* === /GKM V66 RELATED CARDS IN DETAILS === */
 
 
@@ -3853,7 +3924,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v67-votes-first-tested-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 })();
 
 
@@ -4985,23 +5056,23 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v67-votes-first-tested-2026-06-13";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v67-votes-first-tested-2026-06-13";
+window.GKM_HELPER_RESTORED_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v67-votes-first-tested-2026-06-13";
+window.GKM_TESTED_RELEASE_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v67-votes-first-tested-2026-06-13";
+window.GKM_RUNTIME_GUARD_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v67-votes-first-tested-2026-06-13";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v67-votes-first-tested-2026-06-13";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 
-window.GKM_NO_SCROLL_BUTTONS_VERSION = "v67-votes-first-tested-2026-06-13";
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 
 
 
@@ -5029,7 +5100,7 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v67-votes-first-tested-2026-06-13";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
   else bindMoreButtonsCaptureV63();
 
-  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v67-votes-first-tested-2026-06-13";
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 })();
 
 
@@ -5094,11 +5165,11 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v67-votes-first-tested-2026-06-13";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAiCloseV64);
   else bindAiCloseV64();
 
-  window.GKM_HELPER_CLOSE_FIX_VERSION = "v67-votes-first-tested-2026-06-13";
+  window.GKM_HELPER_CLOSE_FIX_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 })();
 
 
-window.GKM_BALANCED_HOME_VERSION = "v67-votes-first-tested-2026-06-13";
+window.GKM_BALANCED_HOME_VERSION = "v68-strict-department-pages-tested-2026-06-13";
 
 
 window.GKM_LIST_SORT_POLICY_VERSION = "votes_first_then_rating_v67";
