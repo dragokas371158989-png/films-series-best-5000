@@ -1,0 +1,114 @@
+GKM V77 DEEP RETEST REPORT
+
+STATUS: PASS
+
+## node_app_syntax
+returncode=0
+
+## python_builder_compile
+returncode=0
+stderr:
+Spreadsheet runtime warmup failed during python startup
+Traceback (most recent call last):
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 720, in _warm_feature_flows
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 704, in _warm_collaboration_flows
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/generated/interface/models.py", line 48821, in hydrate_crdt_from_proto
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/rpc/remote.py", line 747, in __call__
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/rpc/client.py", line 150, in call
+artifact_tool.rpc.client.RemoteError: hydrateCrdtFromProto requires an empty collaborative document.
+
+## python_postfix_compile
+returncode=0
+stderr:
+Spreadsheet runtime warmup failed during python startup
+Traceback (most recent call last):
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 720, in _warm_feature_flows
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 704, in _warm_collaboration_flows
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/generated/interface/models.py", line 48821, in hydrate_crdt_from_proto
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/rpc/remote.py", line 747, in __call__
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/rpc/client.py", line 150, in call
+artifact_tool.rpc.client.RemoteError: hydrateCrdtFromProto requires an empty collaborative document.
+
+## static_v77_requirements
+returncode=0
+stdout:
+OK
+
+## no_full_index_and_sort_not_search
+returncode=0
+stdout:
+OK: loadPage без search_index, sortFilter не search mode
+
+## deep_js_app_logic
+returncode=0
+stdout:
+{"genericOk":true,"opened":true,"activeSearch":false,"page1":["real30","real10","real1k"],"visible":["real"],"searchIndexCalled":false,"filters":{"type":"","genre":"","year":"","rating":"0","sort":"votes","search":""},"fetched":["data/fast/pages/movies/page_0001.json","data/fast/pages/movies/page_0002.json"]}
+
+## deep_postfix_runtime
+returncode=0
+stdout:
+V57 POSTFIX: loaded search_index=115
+V57 POSTFIX: after fix+dedupe=115 removed=0
+V73 POSTERS: repaired=0 fallbacked=30
+V77 RETESTED NO POSTERS PAGES READY
+builderVersion= v77-retested-no-freeze-no-posters-2026-06-14
+anime= 10 cartoons= 0
+scoobyInAnime= 0
+witchHatInNew= 0
+stderr:
+Spreadsheet runtime warmup failed during python startup
+Traceback (most recent call last):
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 720, in _warm_feature_flows
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 704, in _warm_collaboration_flows
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/generated/interface/models.py", line 48821, in hydrate_crdt_from_proto
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/rpc/remote.py", line 747, in __call__
+  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/rpc/client.py", line 150, in call
+artifact_tool.rpc.client.RemoteError: hydrateCrdtFromProto requires an empty collaborative document.
+
+## deep_postfix_assertions
+returncode=0
+stdout:
+{
+  "assertions": {
+    "movies_page1_only_films": true,
+    "movies_page1_all_real_posters": true,
+    "movies_page2_all_real_posters": true,
+    "home_movies_all_real": true,
+    "anime_not_in_movies_page1": true,
+    "fallback_not_visible_in_movies_pages": true
+  },
+  "movies_p1_count": 60,
+  "movies_p2_count": 15,
+  "metaPosterRepair": {
+    "repairedFromDuplicates": 0,
+    "fallbackGenerated": 30,
+    "fallbackInMoviesFirstPage": 0,
+    "realPosterMoviesFirstPage": 60,
+    "fallbackInMoviesTopPages": 30,
+    "missingInPopularHome": 0
+  }
+}
+
+FIXED IN V77:
+- generic search words clear all filters before opening a tab
+- typing 'фильм' cannot keep old anime/year/rating filters active
+- no full search_index load for department pages
+- visible movie pages hide fallback/no-poster cards when real-poster cards exist
+- deep test checked page1/page2/home movie sections for real posters only
+
+FILES TO REPLACE:
+- index.html
+- app.js
+- style.css
+- tools/build_fast_site_data.py
+- tools/post_fix_fast_data.py
+- .github/workflows/build_fast_site_data.yml
+
+AFTER UPLOAD:
+Run GitHub Actions -> Build fast site data

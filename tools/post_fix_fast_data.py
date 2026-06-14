@@ -4,6 +4,8 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 VERSION = "v79-no-poster-bottom-10tests-2026-06-14"
+TMDB_ENABLED = False
+TMDB_OFF_VERSION = "v81-tmdb-off-local-base-2026-06-15"
 DATA_FAST = Path("data/fast")
 PAGE_SIZE = 60
 HOME_LIMIT = 18

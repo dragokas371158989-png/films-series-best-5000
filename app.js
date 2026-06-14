@@ -6222,4 +6222,51 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindFastInputV80);
   else bindFastInputV80();
 })();
+
+/* === GKM V84 HIDE BROKEN AND FALLBACK POSTERS === */
+(function () {
+  window.GKM_V84_HIDE_BROKEN_POSTERS_VERSION = "v84-hide-broken-fallback-posters-2026-06-15";
+
+  function posterValueV84(m) {
+    return String(m && (
+      m.poster || m.poster_path || m.posterUrl || m.poster_url ||
+      m.image || m.imageUrl || m.cover || m.coverUrl || m.img || ""
+    ) || "").trim();
+  }
+
+  function hasRealPosterV84(m) {
+    const p = posterValueV84(m).toLowerCase();
+    if (!p || p === "null" || p === "undefined" || p === "n/a") return false;
+    if (m && (m.posterFallback || m.isFallbackPoster || m.noPoster)) return false;
+    if (p.includes("dummyimage.com") || p.includes("placeholder") || p.includes("no-poster") || p.includes("noposter")) return false;
+    return /^https?:\/\//i.test(p) || p.startsWith("data:image/");
+  }
+
+  function filterRealPostersV84(items) {
+    return (Array.isArray(items) ? items : []).filter(hasRealPosterV84);
+  }
+
+  const oldVisibleV84 = window.gkmVisibleCardsV79;
+  window.gkmVisibleCardsV79 = function(items) {
+    const base = typeof oldVisibleV84 === "function" ? oldVisibleV84(items) : items;
+    return filterRealPostersV84(base);
+  };
+
+  const oldPosterErrorV84 = window.gkmPosterErrorV73;
+  window.gkmPosterErrorV73 = function(img) {
+    try {
+      const card = img && img.closest && img.closest(".card,.related-card");
+      if (card) {
+        card.dataset.posterBroken = "1";
+        card.style.display = "none";
+      } else if (img) {
+        img.style.display = "none";
+      }
+      window.GKM_BROKEN_POSTER_HIDDEN = (window.GKM_BROKEN_POSTER_HIDDEN || 0) + 1;
+      return;
+    } catch(e) {
+      if (typeof oldPosterErrorV84 === "function") oldPosterErrorV84(img);
+    }
+  };
+})();
 /* === /GKM V80 HARD FIX === */

@@ -1,0 +1,25 @@
+GKM V80 HARD FIX REPORT
+Date: 2026-06-15
+
+Fixed:
+1. Search input now uses a capture-phase V80 handler and blocks old duplicate input handlers.
+2. Search uses cached normalized title fields and a faster scorer.
+3. Real poster detection checks poster/poster_path/posterUrl/poster_url/image/imageUrl/cover/coverUrl/img.
+4. Fake posters are rejected: dummyimage.com, placeholder, no-poster/noposter, null/undefined/N/A.
+5. Sorting always puts real posters first, missing posters after them.
+6. renderList no longer hides items after pagination in a way that breaks order/counts.
+7. Home rows show only real-poster items in visible rows.
+
+Tests run:
+PASS 01 app.js syntax is valid
+PASS 02 V80 hard fix is appended
+PASS 03 old slow search is overridden
+PASS 04 search input captures old duplicate handlers
+PASS 05 poster detector rejects fake posters
+PASS 06 poster detector accepts all poster field aliases
+PASS 07 sorting always puts real posters first
+PASS 08 renderList no longer hides missing posters after pagination
+PASS 09 home sections filter no-poster cards from visible rows
+PASS 10 status reports timing and missing-poster count
+
+Result: 10/10 passed

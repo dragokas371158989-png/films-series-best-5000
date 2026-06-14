@@ -1,0 +1,26 @@
+GKM V84 HIDE BROKEN / FALLBACK POSTERS
+
+Status: OK
+
+Problem fixed:
+- Some cards displayed blue fallback poster tiles even when the database field was present.
+- These are now treated as no real poster and hidden from visible card lists.
+- If an image URL fails while loading, the card is hidden instead of showing a blue placeholder.
+
+Main database:
+- Total records in fast index: 96213
+- Posters in fast index: 96213
+- Without poster in fast index: 0
+
+Official type counts from data/fast/meta.json:
+- Movies: 53936
+- Series: 21970
+- Anime: 11733
+- Cartoons: 8574
+
+Tests:
+1. node --check app.js: PASS
+2. node v84_hide_broken_posters_test.js: PASS, 6/6
+3. node v83_real_data_count_test.js: PASS
+4. node v82_kinopoisk_api_test.js: PASS, 10/10
+5. python3 -m py_compile tools/build_fast_site_data.py tools/post_fix_fast_data.py: PASS

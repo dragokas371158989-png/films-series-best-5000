@@ -10,6 +10,8 @@ INDEX_PATH = DATA_DIR / "index.json"
 PAGE_SIZE = int(os.environ.get("GKM_FAST_PAGE_SIZE", "60"))
 HOME_LIMIT = int(os.environ.get("GKM_FAST_HOME_LIMIT", "18"))
 MIN_VOTES_FOR_TOP = int(os.environ.get("GKM_MIN_VOTES_FOR_TOP", "300"))
+TMDB_ENABLED = False
+TMDB_OFF_VERSION = "v81-tmdb-off-local-base-2026-06-15"
 
 GENRE_MAP = {
     "10749":"Мелодрама","36":"История","28":"Боевик","12":"Приключения","16":"Мультфильм","35":"Комедия","80":"Криминал",

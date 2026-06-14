@@ -1,0 +1,39 @@
+GKM V83 FULL DATA / KINOPOISK API / TMDB OFF
+
+Status: OK
+
+Package:
+- Includes full data/ folder from films-series-best-5000-main.zip.
+- TMDB remains disabled.
+- Kinopoisk API layer remains connected.
+
+Main site database:
+- Source used by site first: data/fast/search_index.json
+- Total records in fast index: 96213
+- Posters in fast index: 96213
+- Without poster in fast index: 0
+
+Official type counts from data/fast/meta.json:
+- Movies: 53936
+- Series: 21970
+- Anime: 11733
+- Cartoons: 8574
+- Total: 96213
+
+Direct scan by type from data/fast/search_index.json:
+- Movies: 53890, posters: 53890
+- Series: 22016, posters: 22016
+- Anime: 11733, posters: 11733
+- Cartoons: 8574, posters: 8574
+
+Raw chunk scan:
+- Chunk records scanned: 97047
+- Posters in chunks: 97047
+- Without poster in chunks: 0
+
+Tests:
+1. node --check app.js: PASS
+2. node v83_real_data_count_test.js: PASS
+3. node v82_kinopoisk_api_test.js: PASS, 10/10
+4. node v80_hard_fix_test.js: PASS, 10/10
+5. python3 -m py_compile tools/build_fast_site_data.py tools/post_fix_fast_data.py: PASS
