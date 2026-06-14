@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v56-clean-builder-data-fix-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v57-force-postfix-build-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -4429,3 +4429,6 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 
 
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
+
+
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v57-force-postfix-build-2026-06-13";
