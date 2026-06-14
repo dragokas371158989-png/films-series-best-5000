@@ -6268,3 +6268,72 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
   };
 })();
 /* === /GKM V80 HARD FIX === */
+
+/* === GKM V85 TMDB IMAGE PROXY + EMPTY CARD SWEEP === */
+(function () {
+  window.GKM_V85_TMDB_IMAGE_PROXY_VERSION = "v85-tmdb-image-proxy-empty-card-sweep-2026-06-15";
+
+  function proxiedPosterUrlV85(url) {
+    const raw = String(url || "").trim();
+    if (!raw) return raw;
+    if (!/\/\/image\.tmdb\.org\//i.test(raw)) return raw;
+    const clean = raw.replace(/^https?:\/\//i, "");
+    return "https://images.weserv.nl/?url=" + encodeURIComponent(clean) + "&w=342&output=webp";
+  }
+
+  const oldPosterSrcV85 = typeof gkmPosterSrcV73 === "function" ? gkmPosterSrcV73 : null;
+  if (oldPosterSrcV85) {
+    gkmPosterSrcV73 = function(m) {
+      return proxiedPosterUrlV85(oldPosterSrcV85(m));
+    };
+  }
+
+  function hideBrokenCardV85(img) {
+    try {
+      const card = img && img.closest && img.closest(".card,.related-card");
+      if (card) {
+        card.dataset.posterBroken = "1";
+        card.remove();
+      } else if (img) {
+        img.remove();
+      }
+      window.GKM_V85_REMOVED_EMPTY_POSTER_CARDS = (window.GKM_V85_REMOVED_EMPTY_POSTER_CARDS || 0) + 1;
+    } catch(e) {}
+  }
+
+  window.gkmPosterErrorV73 = function(img) {
+    hideBrokenCardV85(img);
+  };
+
+  function sweepEmptyPostersV85() {
+    const cards = Array.from(document.querySelectorAll(".card,.related-card"));
+    cards.forEach(card => {
+      const img = card.querySelector("img");
+      if (!img) {
+        card.remove();
+        window.GKM_V85_REMOVED_EMPTY_POSTER_CARDS = (window.GKM_V85_REMOVED_EMPTY_POSTER_CARDS || 0) + 1;
+        return;
+      }
+      const src = String(img.currentSrc || img.src || "");
+      if (!src || src.includes("dummyimage.com") || src.includes("placeholder") || src.includes("no-poster")) {
+        hideBrokenCardV85(img);
+        return;
+      }
+      if (img.complete && img.naturalWidth === 0) hideBrokenCardV85(img);
+    });
+  }
+
+  const oldRenderListV85 = typeof renderList === "function" ? renderList : null;
+  if (oldRenderListV85) {
+    renderList = function(items, label) {
+      oldRenderListV85(items, label);
+      setTimeout(sweepEmptyPostersV85, 1200);
+      setTimeout(sweepEmptyPostersV85, 3500);
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(sweepEmptyPostersV85, 2000);
+    setTimeout(sweepEmptyPostersV85, 5000);
+  });
+})();
