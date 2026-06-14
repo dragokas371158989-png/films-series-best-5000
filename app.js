@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v62-clean-only-replace-root-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -312,11 +312,9 @@ function gkmEnsureHomeSectionsV61(sections) {
     return (br * 10 + Math.min(bv, 80000) / 80000 * 5) - (ar * 10 + Math.min(av, 80000) / 80000 * 5);
   };
 
-  if (!Array.isArray(s.anime) || !s.anime.filter(x => getType(x) === "Аниме").length) {
-    s.anime = cleanAll.filter(x => getType(x) === "Аниме").sort(byScore).slice(0, 18);
-  } else {
-    s.anime = gkmCleanListV60(s.anime).filter(x => getType(x) === "Аниме").sort(byScore).slice(0, 18);
-  }
+  const allAnime = cleanAll.filter(x => getType(x) === "Аниме").sort(byScore);
+  const cleanedAnime = Array.isArray(s.anime) ? gkmCleanListV60(s.anime).filter(x => getType(x) === "Аниме").sort(byScore) : [];
+  s.anime = gkmUniqueByIdOrKeyV61([...cleanedAnime, ...allAnime]).filter(x => getType(x) === "Аниме").sort(byScore).slice(0, 18);
 
   if (!Array.isArray(s.cartoons) || !s.cartoons.length) {
     s.cartoons = cleanAll.filter(x => getType(x) === "Мультфильм").sort(byScore).slice(0, 18);
@@ -340,12 +338,15 @@ function gkmClearSearchControlsV61() {
   if (sort) sort.value = "smart";
 }
 
-async function gkmOpenDepartmentV61(tabName) {
+async function gkmOpenDepartmentV61(tabName, opts = {}) {
   tabName = tabName || "all";
   gkmClearSearchControlsV61();
   lastSearchResults = [];
   currentPage = 1;
   setActiveTab(tabName);
+
+  const searchInput = $("searchInput");
+  if (searchInput) searchInput.blur();
 
   if (tabName === "all") {
     renderHome();
@@ -364,7 +365,13 @@ async function gkmOpenDepartmentV61(tabName) {
     await loadPage(tabName, 1);
   }
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  setStatus(`Открыт раздел: ${tabName}`);
+  if (opts.keepPosition) return;
+
+  const target = $("countText") || $("grid") || document.querySelector("main");
+  if (target && target.scrollIntoView) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 }
 /* === /GKM V61 MORE BUTTONS + ANIME SECTION FIX === */
 
@@ -3520,7 +3527,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v62-clean-only-replace-root-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
 })();
 
 
@@ -4634,43 +4641,7 @@ if (document.readyState === "loading") {
 })();
 
 
-/* === GKM V45 FAST SEARCH INPUT BIND === */
-(function () {
-  function bindSearchV45() {
-    const input = document.getElementById("searchInput");
-    if (!input || input.dataset.gkmSearchV45 === "1") return;
-
-    input.dataset.gkmSearchV45 = "1";
-    input.placeholder = "Поиск: Наруто, нарута, ван пис, блич...";
-
-    let timer = 0;
-    const go = () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        if (typeof runSearch === "function") runSearch();
-      }, 300);
-    };
-
-    input.addEventListener("input", go);
-    input.addEventListener("change", go);
-    input.addEventListener("keydown", e => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        clearTimeout(timer);
-        if (typeof runSearch === "function") runSearch();
-      }
-    });
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindSearchV45);
-  else bindSearchV45();
-
-  new MutationObserver(bindSearchV45).observe(document.body, { childList: true, subtree: true });
-
-  window.GKM_FAST_SEARCH_VERSION = "v45-fast-correct-search-2026-06-13";
-})();
-
-
+/* GKM V63: removed duplicate V45 search input bind */
 /* === GKM V46 STRICT TITLE SEARCH GUARD === */
 (function () {
   window.GKM_STRICT_TITLE_SEARCH_VERSION = "v46-strict-title-search-2026-06-13";
@@ -4681,57 +4652,56 @@ if (document.readyState === "loading") {
 
 window.GKM_DETAIL_ANIME_SITES_VERSION = "v48-detail-anime-sites-real-2026-06-13";
 
-/* === GKM V49 SINGLE SEARCH BIND === */
-(function () {
-  function bindSearch() {
-    const input = document.getElementById("searchInput");
-    if (!input || input.dataset.gkmSearchV49 === "1") return;
-    input.dataset.gkmSearchV49 = "1";
-    input.placeholder = "Поиск по названию: Наруто, Ван-Пис, Блич...";
-
-    let t = 0;
-    input.addEventListener("input", () => {
-      clearTimeout(t);
-      t = setTimeout(() => {
-        if (typeof runSearch === "function") runSearch();
-      }, 220);
-    });
-
-    input.addEventListener("keydown", e => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        clearTimeout(t);
-        if (typeof runSearch === "function") runSearch();
-      }
-    });
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindSearch);
-  else bindSearch();
-
-  window.GKM_STABLE_SEARCH_VERSION = "v49-stable-search-core-2026-06-13";
-})();
-
-
-
+/* GKM V63: removed duplicate V49 search input bind */
 window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-search-2026-06-13";
 
 
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v62-clean-only-replace-root-2026-06-13";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v62-clean-only-replace-root-2026-06-13";
+window.GKM_HELPER_RESTORED_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v62-clean-only-replace-root-2026-06-13";
+window.GKM_TESTED_RELEASE_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v62-clean-only-replace-root-2026-06-13";
+window.GKM_RUNTIME_GUARD_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v62-clean-only-replace-root-2026-06-13";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v62-clean-only-replace-root-2026-06-13";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+
+
+
+/* === GKM V63 MORE BUTTONS CAPTURE OVERRIDE === */
+(function () {
+  function bindMoreButtonsCaptureV63() {
+    if (document.documentElement.dataset.gkmMoreButtonsV63 === "1") return;
+    document.documentElement.dataset.gkmMoreButtonsV63 = "1";
+
+    document.addEventListener("click", function (e) {
+      const btn = e.target && e.target.closest ? e.target.closest("[data-open-tab], .home-more-btn") : null;
+      if (!btn) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+
+      const tabName = btn.getAttribute("data-open-tab") || btn.dataset.openTab || "all";
+      if (typeof gkmOpenDepartmentV61 === "function") {
+        gkmOpenDepartmentV61(tabName, { keepPosition: false });
+      }
+    }, true);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
+  else bindMoreButtonsCaptureV63();
+
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+})();
