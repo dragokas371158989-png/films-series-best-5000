@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -875,7 +875,7 @@ async function gkmLoadDepartmentFromIndexV68(tab, page = 1) {
   gkmRenderDepartmentPageV68(tab, page, idx);
 }
 
-window.GKM_STRICT_DEPARTMENT_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+window.GKM_STRICT_DEPARTMENT_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 /* === /GKM V68 STRICT DEPARTMENT PAGES === */
 
 
@@ -909,7 +909,7 @@ async function loadPage(tab, page = 1) {
   setStatus(`Раздел загружен: ${currentCount} записей · fast pages`);
 }
 
-window.GKM_FAST_PAGES_NO_FREEZE_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+window.GKM_FAST_PAGES_NO_FREEZE_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 
 
 function renderList(items, label) {
@@ -1105,8 +1105,21 @@ function gkmVotesFirstScoreV67(m) {
   return (votes * 100000) + (rating * 1000) + year;
 }
 
+function gkmVotesBucketV70(m) {
+  const v = Number(getVotes(m) || 0);
+  if (v >= 30000) return 4;   // сперва жир: 30k+
+  if (v >= 10000) return 3;   // потом крепкие: 10k+
+  if (v >= 1000) return 2;    // потом средние
+  if (v >= 100) return 1;     // потом мелкие
+  return 0;                   // почти без голосов в самый низ
+}
+
 function gkmSortVotesFirstV67(list) {
   return [...(Array.isArray(list) ? list : [])].sort((a, b) => {
+    const bb = gkmVotesBucketV70(b);
+    const ab = gkmVotesBucketV70(a);
+    if (bb !== ab) return bb - ab;
+
     const bv = Number(getVotes(b) || 0);
     const av = Number(getVotes(a) || 0);
     if (bv !== av) return bv - av;
@@ -1145,7 +1158,7 @@ function gkmSortSmartV67(list) {
   });
 }
 
-window.GKM_VOTES_FIRST_SORT_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+window.GKM_VOTES_FIRST_SORT_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 /* === /GKM V67 VOTES FIRST SORT === */
 
 
@@ -1640,7 +1653,7 @@ async function renderRelatedCardsV66(baseItem) {
   });
 }
 
-window.GKM_RELATED_CARDS_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+window.GKM_RELATED_CARDS_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 /* === /GKM V66 RELATED CARDS IN DETAILS === */
 
 
@@ -3914,7 +3927,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 })();
 
 
@@ -5046,23 +5059,23 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+window.GKM_HELPER_RESTORED_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+window.GKM_TESTED_RELEASE_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+window.GKM_RUNTIME_GUARD_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 
-window.GKM_NO_SCROLL_BUTTONS_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 
 
 
@@ -5090,7 +5103,7 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
   else bindMoreButtonsCaptureV63();
 
-  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 })();
 
 
@@ -5155,14 +5168,98 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAiCloseV64);
   else bindAiCloseV64();
 
-  window.GKM_HELPER_CLOSE_FIX_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+  window.GKM_HELPER_CLOSE_FIX_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 })();
 
 
-window.GKM_BALANCED_HOME_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+window.GKM_BALANCED_HOME_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
 
 
 window.GKM_LIST_SORT_POLICY_VERSION = "votes_first_then_rating_v67";
 
 
 window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_index_v69";
+
+
+
+/* === GKM V70 STRICT TAB BUTTONS + VOTE BUCKETS === */
+(function () {
+  const GKM_TAB_TO_PAGE_V70 = {
+    all: "all",
+    movies: "movies",
+    series: "series",
+    cartoons: "cartoons",
+    anime: "anime",
+    top: "top",
+    new: "new",
+    popular: "popular",
+    fav: "fav",
+    history: "history",
+    random: "random"
+  };
+
+  async function gkmOpenTabStrictV70(tabName) {
+    tabName = GKM_TAB_TO_PAGE_V70[tabName] || "all";
+
+    const search = $("searchInput");
+    if (search) {
+      search.value = "";
+      search.blur();
+    }
+
+    ["typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(id => {
+      const el = $(id);
+      if (el) el.value = "";
+    });
+
+    const sort = $("sortFilter");
+    if (sort) sort.value = "votes";
+
+    lastSearchResults = [];
+    currentPage = 1;
+    setActiveTab(tabName);
+
+    if (tabName === "all") {
+      renderHome();
+      return;
+    }
+
+    if (tabName === "fav") return renderFavorites();
+    if (tabName === "history") return renderHistory();
+    if (tabName === "random") return renderRandom();
+
+    return loadPage(tabName, 1);
+  }
+
+  function bindTabsV70() {
+    if (document.documentElement.dataset.gkmTabsV70 === "1") return;
+    document.documentElement.dataset.gkmTabsV70 = "1";
+
+    document.addEventListener("click", function(e) {
+      const tabBtn = e.target && e.target.closest ? e.target.closest(".tab[data-tab]") : null;
+      if (tabBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+        gkmOpenTabStrictV70(tabBtn.dataset.tab || "all");
+        return;
+      }
+
+      const moreBtn = e.target && e.target.closest ? e.target.closest("[data-open-tab], .home-more-btn") : null;
+      if (moreBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+        gkmOpenTabStrictV70(moreBtn.getAttribute("data-open-tab") || moreBtn.dataset.openTab || "all");
+        return;
+      }
+    }, true);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindTabsV70);
+  else bindTabsV70();
+
+  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+  window.GKM_VOTE_BUCKETS_VERSION = "v70-tabs-votes-buckets-tested-2026-06-13";
+})();
+/* === /GKM V70 STRICT TAB BUTTONS + VOTE BUCKETS === */
