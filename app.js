@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v66-related-cards-tested-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v67-votes-first-tested-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -838,7 +838,7 @@ async function loadPage(tab, page = 1) {
 
   const data = await fetchJson(url);
 
-  currentItems = gkmCleanListV60(data.items || []);
+  currentItems = gkmSortSmartV67(gkmCleanListV60(data.items || []));
   currentPage = data.page || page;
   currentPages = data.pages || 1;
   currentCount = data.count || currentItems.length;
@@ -1029,6 +1029,61 @@ function gkmSearchScoreV45(m, q) {
 
 
 
+
+/* === GKM V67 VOTES FIRST SORT === */
+function gkmVotesFirstScoreV67(m) {
+  const votes = Number(getVotes(m) || 0);
+  const rating = Number(getRating(m) || 0);
+  const year = Number(getYear(m) || 0);
+
+  // Главный вес — голоса. Оценка и год только помогают при равных/похожих голосах.
+  return (votes * 100000) + (rating * 1000) + year;
+}
+
+function gkmSortVotesFirstV67(list) {
+  return [...(Array.isArray(list) ? list : [])].sort((a, b) => {
+    const bv = Number(getVotes(b) || 0);
+    const av = Number(getVotes(a) || 0);
+    if (bv !== av) return bv - av;
+
+    const br = Number(getRating(b) || 0);
+    const ar = Number(getRating(a) || 0);
+    if (br !== ar) return br - ar;
+
+    return Number(getYear(b) || 0) - Number(getYear(a) || 0);
+  });
+}
+
+function gkmSortRatingWithVotesV67(list) {
+  return [...(Array.isArray(list) ? list : [])].sort((a, b) => {
+    const bs = (Number(getRating(b) || 0) * 1000000) + Math.log10(Number(getVotes(b) || 0) + 1) * 100000 + Number(getVotes(b) || 0);
+    const as = (Number(getRating(a) || 0) * 1000000) + Math.log10(Number(getVotes(a) || 0) + 1) * 100000 + Number(getVotes(a) || 0);
+    return bs - as;
+  });
+}
+
+function gkmSortSmartV67(list) {
+  // Smart теперь не тащит наверх "9.9 при 2 голосах".
+  // Сначала доверие по голосам, потом рейтинг.
+  return [...(Array.isArray(list) ? list : [])].sort((a, b) => {
+    const bv = Number(getVotes(b) || 0);
+    const av = Number(getVotes(a) || 0);
+
+    // Если разрыв по голосам большой — побеждают голоса.
+    if (Math.abs(bv - av) >= 300) return bv - av;
+
+    const br = Number(getRating(b) || 0);
+    const ar = Number(getRating(a) || 0);
+    if (br !== ar) return br - ar;
+
+    return bv - av;
+  });
+}
+
+window.GKM_VOTES_FIRST_SORT_VERSION = "v67-votes-first-tested-2026-06-13";
+/* === /GKM V67 VOTES FIRST SORT === */
+
+
 function applyLocalFilters(list) {
   const typeFilter = $("typeFilter");
   const genreFilter = $("genreFilter");
@@ -1051,11 +1106,14 @@ function applyLocalFilters(list) {
 
   out = [...out];
 
-  if (sort === "rating") out.sort((a, b) => getRating(b) - getRating(a));
-  else if (sort === "votes") out.sort((a, b) => getVotes(b) - getVotes(a));
-  else if (sort === "year") out.sort((a, b) => Number(getYear(b) || 0) - Number(getYear(a) || 0));
+  if (sort === "rating") out = gkmSortRatingWithVotesV67(out);
+  else if (sort === "votes") out = gkmSortVotesFirstV67(out);
+  else if (sort === "year") out.sort((a, b) => {
+    const dy = Number(getYear(b) || 0) - Number(getYear(a) || 0);
+    return dy || (getVotes(b) - getVotes(a));
+  });
   else if (sort === "title") out.sort((a, b) => titleOf(a).localeCompare(titleOf(b), "ru"));
-  else out.sort((a, b) => scoreSmart(b) - scoreSmart(a));
+  else out = gkmSortSmartV67(out);
 
   return out;
 }
@@ -1521,7 +1579,7 @@ async function renderRelatedCardsV66(baseItem) {
   });
 }
 
-window.GKM_RELATED_CARDS_VERSION = "v66-related-cards-tested-2026-06-13";
+window.GKM_RELATED_CARDS_VERSION = "v67-votes-first-tested-2026-06-13";
 /* === /GKM V66 RELATED CARDS IN DETAILS === */
 
 
@@ -3795,7 +3853,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v66-related-cards-tested-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v67-votes-first-tested-2026-06-13";
 })();
 
 
@@ -4927,23 +4985,23 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v66-related-cards-tested-2026-06-13";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v67-votes-first-tested-2026-06-13";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v66-related-cards-tested-2026-06-13";
+window.GKM_HELPER_RESTORED_VERSION = "v67-votes-first-tested-2026-06-13";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v66-related-cards-tested-2026-06-13";
+window.GKM_TESTED_RELEASE_VERSION = "v67-votes-first-tested-2026-06-13";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v66-related-cards-tested-2026-06-13";
+window.GKM_RUNTIME_GUARD_VERSION = "v67-votes-first-tested-2026-06-13";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v66-related-cards-tested-2026-06-13";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v67-votes-first-tested-2026-06-13";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v66-related-cards-tested-2026-06-13";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v67-votes-first-tested-2026-06-13";
 
-window.GKM_NO_SCROLL_BUTTONS_VERSION = "v66-related-cards-tested-2026-06-13";
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v67-votes-first-tested-2026-06-13";
 
 
 
@@ -4971,7 +5029,7 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v66-related-cards-tested-2026-06-13";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
   else bindMoreButtonsCaptureV63();
 
-  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v66-related-cards-tested-2026-06-13";
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v67-votes-first-tested-2026-06-13";
 })();
 
 
@@ -5036,8 +5094,11 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v66-related-cards-tested-2026-06-13";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAiCloseV64);
   else bindAiCloseV64();
 
-  window.GKM_HELPER_CLOSE_FIX_VERSION = "v66-related-cards-tested-2026-06-13";
+  window.GKM_HELPER_CLOSE_FIX_VERSION = "v67-votes-first-tested-2026-06-13";
 })();
 
 
-window.GKM_BALANCED_HOME_VERSION = "v66-related-cards-tested-2026-06-13";
+window.GKM_BALANCED_HOME_VERSION = "v67-votes-first-tested-2026-06-13";
+
+
+window.GKM_LIST_SORT_POLICY_VERSION = "votes_first_then_rating_v67";
