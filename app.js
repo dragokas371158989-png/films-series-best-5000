@@ -998,7 +998,6 @@ async function loadLegacyFallbackHome(reason) {
 
   fillFilters();
   renderHome();
-
   setStatus(`Запасная база: ${homeData.total} записей · причина: ${reason || "data/fast пустая"}`);
 }
 
@@ -4998,7 +4997,6 @@ if (document.readyState === "loading") {
       card.style.minHeight = card.style.minHeight || "";
     });
   }
-
   let timer = 0;
   function schedule() {
     clearTimeout(timer);
