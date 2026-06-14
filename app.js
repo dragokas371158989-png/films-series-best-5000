@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v73-poster-repair-tested-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -556,12 +556,45 @@ function fillFilters() {
   }
 }
 
-function posterHtml(m) {
-  if (m.poster) {
-    return `<img src="${escapeAttr(m.poster)}" loading="eager" decoding="async" fetchpriority="high" alt="">`;
-  }
 
-  return `<div class="poster-placeholder">Нет постера</div>`;
+/* === GKM V73 POSTER REPAIR === */
+function gkmPosterFallbackV73(m) {
+  const type = getType(m);
+  const title = encodeURIComponent(titleOf(m) || "Без постера");
+  const sub = encodeURIComponent(`${getYear(m) || "—"} · ${type}`);
+  const colors = {
+    "Фильм": ["1b2a6b", "08d9ff"],
+    "Сериал": ["0b3d52", "47eaff"],
+    "Аниме": ["3a1478", "9d4dff"],
+    "Мультфильм": ["5a2360", "ff6bd6"]
+  }[type] || ["141428", "00e5ff"];
+  return `https://dummyimage.com/420x630/${colors[0]}/${colors[1]}.png&text=${title}%0A${sub}`;
+}
+
+function gkmPosterSrcV73(m) {
+  const p = String(m && m.poster || "").trim();
+  if (!p || p === "null" || p === "undefined" || p.length < 8) return gkmPosterFallbackV73(m);
+  if (/^http:\/\//i.test(p)) return p.replace(/^http:/i, "https:");
+  return p;
+}
+
+function gkmPosterErrorV73(img) {
+  try {
+    img.onerror = null;
+    img.src = img.dataset.fallback || "https://dummyimage.com/420x630/141428/00e5ff.png&text=%D0%9D%D0%B5%D1%82%20%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%80%D0%B0";
+    img.classList.add("poster-fallback-img");
+    window.GKM_POSTER_FALLBACK_HITS = (window.GKM_POSTER_FALLBACK_HITS || 0) + 1;
+  } catch(e) {}
+}
+
+window.GKM_POSTER_REPAIR_VERSION = "v73-poster-repair-tested-2026-06-13";
+/* === /GKM V73 POSTER REPAIR === */
+
+
+function posterHtml(m) {
+  const src = gkmPosterSrcV73(m);
+  const fallback = gkmPosterFallbackV73(m);
+  return `<img src="${escapeAttr(src)}" data-fallback="${escapeAttr(fallback)}" loading="lazy" decoding="async" alt="" onerror="gkmPosterErrorV73(this)">`;
 }
 
 function badgesHtml(m) {
@@ -875,7 +908,7 @@ async function gkmLoadDepartmentFromIndexV68(tab, page = 1) {
   gkmRenderDepartmentPageV68(tab, page, idx);
 }
 
-window.GKM_STRICT_DEPARTMENT_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_STRICT_DEPARTMENT_VERSION = "v73-poster-repair-tested-2026-06-13";
 /* === /GKM V68 STRICT DEPARTMENT PAGES === */
 
 
@@ -949,8 +982,8 @@ function gkmRenderBufferedDepartmentV71(pageTab, requestedPage, buffer) {
   setStatus(`Раздел ${pageTab} · без search_index · сортировка по голосам`);
 }
 
-window.GKM_PAGER_NO_SEARCH_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
-window.GKM_PAGE_BUFFER_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_PAGER_NO_SEARCH_VERSION = "v73-poster-repair-tested-2026-06-13";
+window.GKM_PAGE_BUFFER_VERSION = "v73-poster-repair-tested-2026-06-13";
 /* === /GKM V71 PAGE BUFFER + NO SEARCH PAGER === */
 
 
@@ -1227,7 +1260,7 @@ function gkmSortSmartV67(list) {
   });
 }
 
-window.GKM_VOTES_FIRST_SORT_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_VOTES_FIRST_SORT_VERSION = "v73-poster-repair-tested-2026-06-13";
 /* === /GKM V67 VOTES FIRST SORT === */
 
 
@@ -1673,9 +1706,9 @@ function gkmEnsureRelatedBlockV66() {
 
 function gkmRelatedCardHtmlV66(m) {
   const rank = rankOf(m).rank;
-  const poster = m.poster
-    ? `<img class="related-poster" src="${escapeAttr(m.poster)}" alt="">`
-    : `<div class="related-poster related-empty">Нет<br>постера</div>`;
+  const relatedSrc = gkmPosterSrcV73(m);
+  const relatedFallback = gkmPosterFallbackV73(m);
+  const poster = `<img class="related-poster" src="${escapeAttr(relatedSrc)}" data-fallback="${escapeAttr(relatedFallback)}" loading="lazy" decoding="async" alt="" onerror="gkmPosterErrorV73(this)">`;
   return `
     <article class="related-card" data-related-id="${escapeAttr(m.id || gkmRelatedKeyV66(m))}">
       ${poster}
@@ -1722,7 +1755,7 @@ async function renderRelatedCardsV66(baseItem) {
   });
 }
 
-window.GKM_RELATED_CARDS_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_RELATED_CARDS_VERSION = "v73-poster-repair-tested-2026-06-13";
 /* === /GKM V66 RELATED CARDS IN DETAILS === */
 
 
@@ -1740,7 +1773,9 @@ function openDetails(m) {
   const source = m.source || m.provider || "—";
   const overview = m.overview || "Описание пока не добавлено.";
 
-  $("detailPoster").src = m.poster || "";
+  $("detailPoster").onerror = function(){ gkmPosterErrorV73(this); };
+  $("detailPoster").dataset.fallback = gkmPosterFallbackV73(m);
+  $("detailPoster").src = gkmPosterSrcV73(m);
   $("detailPoster").style.display = m.poster ? "block" : "none";
   $("detailTitle").textContent = titleOf(m);
   $("detailMeta").innerHTML = `
@@ -3995,7 +4030,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v73-poster-repair-tested-2026-06-13";
 })();
 
 
@@ -5127,23 +5162,23 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v73-poster-repair-tested-2026-06-13";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_HELPER_RESTORED_VERSION = "v73-poster-repair-tested-2026-06-13";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_TESTED_RELEASE_VERSION = "v73-poster-repair-tested-2026-06-13";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_RUNTIME_GUARD_VERSION = "v73-poster-repair-tested-2026-06-13";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v73-poster-repair-tested-2026-06-13";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v73-poster-repair-tested-2026-06-13";
 
-window.GKM_NO_SCROLL_BUTTONS_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v73-poster-repair-tested-2026-06-13";
 
 
 
@@ -5171,7 +5206,7 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
   else bindMoreButtonsCaptureV63();
 
-  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v73-poster-repair-tested-2026-06-13";
 })();
 
 
@@ -5236,11 +5271,11 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAiCloseV64);
   else bindAiCloseV64();
 
-  window.GKM_HELPER_CLOSE_FIX_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+  window.GKM_HELPER_CLOSE_FIX_VERSION = "v73-poster-repair-tested-2026-06-13";
 })();
 
 
-window.GKM_BALANCED_HOME_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+window.GKM_BALANCED_HOME_VERSION = "v73-poster-repair-tested-2026-06-13";
 
 
 window.GKM_LIST_SORT_POLICY_VERSION = "votes_first_then_rating_v67";
@@ -5327,8 +5362,8 @@ window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_i
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindTabsV70);
   else bindTabsV70();
 
-  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
-  window.GKM_VOTE_BUCKETS_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v73-poster-repair-tested-2026-06-13";
+  window.GKM_VOTE_BUCKETS_VERSION = "v73-poster-repair-tested-2026-06-13";
 })();
 /* === /GKM V70 STRICT TAB BUTTONS + VOTE BUCKETS === */
 
@@ -5478,7 +5513,7 @@ window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_i
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindHardV72);
   else bindHardV72();
 
-  window.GKM_HARD_PAGER_TABS_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
-  window.GKM_PAGE_SCROLL_TOP_VERSION = "v72-hard-pager-tabs-tested-2026-06-13";
+  window.GKM_HARD_PAGER_TABS_VERSION = "v73-poster-repair-tested-2026-06-13";
+  window.GKM_PAGE_SCROLL_TOP_VERSION = "v73-poster-repair-tested-2026-06-13";
 })();
 /* === /GKM V72 HARD PAGER + STRICT TABS OVERRIDE === */
