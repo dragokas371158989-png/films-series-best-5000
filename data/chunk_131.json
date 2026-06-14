@@ -1,5 +1,191 @@
 [
   {
+    "id": 1411301,
+    "ru": "Цвет под подозрением: документальный фильм",
+    "en": "To Dye For: The Documentary",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.7,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "После того как родители обнаруживают у своего ребёнка тяжёлую чувствительность к синтетическим красителям в пище и других продуктах, они отправляются в личное расследовательское путешествие и снимают документальный фильм о последствиях таких добавок для здоровья. По ходу фильма они встречаются с ведущими мировыми специалистами по синтетическим красителям — учёными, токсикологами и исследователями, а также общаются с другими семьями, столкнувшимися с подобной проблемой. История сочетает влоговые элементы, интервью и личные семейные моменты, постепенно раскрывая шокирующие факты и неожиданные открытия о влиянии красителей на детей и взрослых.",
+    "poster": "https://image.tmdb.org/t/p/w342/8vPfPIBpW3jP7rZkZeaw8GImgIN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5JapCBdyhTr9uM3hK99qVwb5Dss.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 314295,
+    "ru": "Грабители",
+    "en": "Rippers",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.69,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Это жесткая уличная драма о молодых парнях, которые хотят быстро разбогатеть и подняться в криминальной иерархии. Вместо того чтобы работать на крупных наркобаронов, они решают играть по своим правилам.",
+    "poster": "https://image.tmdb.org/t/p/w342/f7vClKT75D1xliL3SxrcC9mZeZ0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jFhuC3UnQBWgfSLBovgzO45B0Uu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1523445,
+    "ru": "День рождения Сидни Люмета",
+    "en": "День рождения Сидни Люмета",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.66,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Семнадцатилетний грузин Дато и его бабушка пытаются найти общий язык на руинах когда-то большой семьи. Все идет по плану, пока внезапно после долгих лет отсутствия на пороге не возникает мать Дато.",
+    "poster": "https://image.tmdb.org/t/p/w342/4Hy5qwC37COYSEkZA76ieo1HT2E.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mhCoTqxEVKVSjRvnyg4AMMjxCjB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 307041,
+    "ru": "Шальной отдел",
+    "en": "Шальной отдел",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.63,
+    "genres": [
+      "детектив",
+      "драма"
+    ],
+    "overview": "Оперативник Кирилл Шальной живет и действует в полном соответствии со своей фамилией, которую ему дали в детдоме. Это и помогает ему, и в то же время мешает. Тяга к экстриму определила выбор профессии. Став взрослым, Кирилл пошел работать в полицию, где дослужился до замначальника ОУР одного из центральных УМВД.\n\nВ личной жизни Шального всё не так радужно. Несколько лет назад ему улыбнулась удача, и первая красавица отдела полиции — дознаватель Елизавета ответила «да» на его предложение руки и сердца. Но спустя время отношения между ними остыли. К тому же новый начальник УМВД стал назойливо ухаживать за Елизаветой. Кирилл не стерпел такого удара по самолюбию и на корпоративе дал начальнику по физиономии. Начальник пообещал, что этого просто так не оставит, и слово свое сдержал. Успешного опера перевели на службу в захудалый спальный район. Кирилла на новом месте ждет самый неласковый прием.",
+    "poster": "https://image.tmdb.org/t/p/w342/9Ue37JprF1xud5rG67dxq2s7gIT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9ecsT0WZ9mG8YAptwv55VmTCO4K.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 312425,
+    "ru": "Хильдур",
+    "en": "Hildur",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.62,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Напряжённая криминальная драма, разворачивающаяся среди суровых фьордов Исландии. В центре истории - женщина-детектив, для которой катание на волнах становится редким способом сбежать от тяжести службы. Ей предстоит гонка со временем: в этих холодных местах орудует серийный убийца, а каждая новая улика лишь усложняет картину. Параллельно героиня пытается распутать давнюю и личную тайну - исчезновение сестёр, чьи судьбы до сих пор окутаны молчанием. Расследования переплетаются, прошлое давит всё сильнее, а суровая природа словно хранит собственные секреты, которые не спешат быть раскрытыми. По бестселлерам финской писательницы Сату Рямё.",
+    "poster": "https://image.tmdb.org/t/p/w342/ofLuBA9RmkrlZ4ZIr5qV9hFvjd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rd14xhO0r5STD74ip37XMMsDa0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1577602,
+    "ru": "Рождественский билет",
+    "en": "The Christmas Ticket",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.58,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "За неделю до Рождества Алана получает в наследство от дедушки загородный дом. Вскоре она выясняет, что где-то в доме он, вероятно, спрятал лотерейный билет с крупным выигрышем.",
+    "poster": "https://image.tmdb.org/t/p/w342/dvFrgNuGm41wLNQAsQHRzDzVfbn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/v4jsmNF1Beo1qUPC9Zcx6UhUeP2.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 693845,
+    "ru": "ДАУ. Нора Сын",
+    "en": "ДАУ. Нора Cын",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.56,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Чуждые всему научному институту, в котором живут, одинокая домохозяйка и ее сын-подросток нарушают последнее табу. Тайну знают только они двое и их покорная горничная.",
+    "poster": "https://image.tmdb.org/t/p/w342/bvPdCuiJhtJCllDjZbyGGynEEFI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/p24tY59KXIWsQVfrZSviMjsxv4z.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 845788,
+    "ru": "Необычные истории. Специальный летний выпуск",
+    "en": "世にも奇妙な物語 '21夏の特別編",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.54,
+    "genres": [
+      "драма",
+      "фэнтези"
+    ],
+    "overview": "\"Я умру через 15 секунд\" Посреди ночи фармацевту Миками Мегуми (Митико Йошисе) выстрелили в сердце сзади, и время внезапно остановилось. Осталось жить еще 15 секунд, и она может начать останавливаться в любое время в течение этих 15 секунд, и ей интересно посмотреть, как она их потратит. Миками предпочел ясно видеть лицо убийцы, и всего за несколько секунд спроектировал ситуацию, когда убийца вырыл бы себе могилу, но почему убийца хотел убить убийцу?Это все просто чистая обида?",
+    "poster": "https://image.tmdb.org/t/p/w342/rB0V4Pc5meRdPTXysiJGH4nnaqV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/whBRB7RltbW9xEbRklxeWKdOFn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 579731,
+    "ru": "Печень, или История одного стартапа",
+    "en": "Печень, или История одного стартапа",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.47,
+    "genres": [
+      "комедия",
+      "криминал"
+    ],
+    "overview": "1990-е. Три друга Вова, Мамед и Лёха учатся в школе и мечтают, как и все в России в это время, открыть собственный бизнес. Но для начала нужны деньги. Всё, вроде бы, складывалось хорошо, но их не допустили до выпускных экзаменов. Его величество случай в образе районного полукриминального авторитета Костика приходит на помощь начинающим предпринимателям. У Костика сгнила печень - нужна новая. Юные бизнесмены достают вожделенный орган, но только с ним, с этим органом, не все так просто.",
+    "poster": "https://image.tmdb.org/t/p/w342/3wKYcY2cJanKxo8lMQy2AA9puHh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5llPQbzFZBc41qZ0VrBUZzu30oy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1500148,
+    "ru": "Цинтун и Куйхуа",
+    "en": "青銅葵花",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.44,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Потеряв в жизни всё, главная героиня фильма обретает семью.",
+    "poster": "https://image.tmdb.org/t/p/w342/tQB9biQwL1blSHkT9sJhQxnUS4P.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5Fe6IfrIm0D9nFSL36RE2xc4mHS.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 663971,
     "ru": "Русские грузины. Фильм первый",
     "en": "Русские грузины. Фильм первый",
@@ -8966,192 +9152,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/po1d2ha9MfyVB1koxIQ1dkn0Cxf.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/k6n68QDZuO53OB7fzWmsShlT4xU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 798894,
-    "ru": "悪魔が来りて笛を吹く",
-    "en": "悪魔が来りて笛を吹く",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.97,
-    "genres": [
-      "драма",
-      "ужасы",
-      "детектив",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fWUvtcyvGpmuhkBrcX55IlVS9Mb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nLPtXWIKGZqr2iF4feKNcA7CDLA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 426537,
-    "ru": "Alan Bennett's Diaries",
-    "en": "Alan Bennett's Diaries",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.97,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/cLMgoef1RePXbWiIOnYfGWuHMl5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yJHtpP2sHJzaJ3SsdsmxsiuS5f9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 658767,
-    "ru": "Intercourse",
-    "en": "Intercourse",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.95,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uDR6esmRBE5Cc9j8OFOGzaA0Zfb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8HcLg6rjizgA0VM4hYcYEhPchMu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 689751,
-    "ru": "Capitán Escudo",
-    "en": "Capitán Escudo",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.95,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "приключения",
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7Spe2ObqUe0F8RU2g9rSTs719vy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bmtn158UW4ZoTPclhrrxc9amZrB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 391749,
-    "ru": "Once Upon a Time in Amritsar",
-    "en": "Once Upon a Time in Amritsar",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.9,
-    "genres": [
-      "боевик",
-      "криминал",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uiBeT2YKEze5A6Xm70fthjawq0v.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hOHqvqarN8oSepOBziFSAWi2CL9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 700422,
-    "ru": "Che Guevara, la fabrique d'une icône",
-    "en": "Che Guevara, la fabrique d'une icône",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.9,
-    "genres": [
-      "документальный",
-      "история"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xaS2wzLgO1xI1GTXsn4WAZMUh0o.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/17NcOlZ7amSpgiWSwlpNeEB1eY0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 251338,
-    "ru": "Olho Nu",
-    "en": "Olho Nu",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.9,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tr2G3riv1O7KAevBLW0u0xjwQ5A.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qg10J9Q4KbG721m0GLlUGtTrLpt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 680411,
-    "ru": "ドクターZERO 精神分析医・財前零子",
-    "en": "ドクターZERO 精神分析医・財前零子",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.89,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/sUoHqr6ZTq1E1eUly2axJ4444BR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xRBShCNKfYGfikJX3KU3g4wr9wf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 698816,
-    "ru": "상류시대",
-    "en": "상류시대",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.88,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/n2PFcmCwA18lB5qa6ceydBqCFkS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ecpKOTFj5utHxm9ftDbfEkkUaTu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 409160,
-    "ru": "夢情人",
-    "en": "夢情人",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 1,
-    "popularity": 0.88,
-    "genres": [
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7fqbiiosK6XwLAeiyatr2WydhOw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bh3KvZgl52yZkR72Zft08MVXnnA.jpg",
     "source": "tmdb"
   }
 ]

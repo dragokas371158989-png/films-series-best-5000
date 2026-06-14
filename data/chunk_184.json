@@ -1,5 +1,188 @@
 [
   {
+    "id": 1703058,
+    "ru": "Supplies",
+    "en": "Supplies",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.05,
+    "genres": [
+      "боевик",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8qnOkCYqvxZ1xAQQ8Q8WLhqeIPb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5HwD6woN8bkUhCno1uF0ntCL8Td.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1700701,
+    "ru": "Prawie nad morzem czyli Parówa",
+    "en": "Prawie nad morzem czyli Parówa",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.05,
+    "genres": [
+      "мультфильм",
+      "фэнтези",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/znB2UUQYLkbGAtX975hzLzk0G6q.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/AbBi5JzGBQbvZTdRnJR7OlnSIlM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1691793,
+    "ru": "אבו סאלי",
+    "en": "אבו סאלי",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.05,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7yGzc1gClFhfEZGod9rKfIoAenY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vpLa2eF5wRgwP2GvUkPc86B4YQn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1706371,
+    "ru": "Lost against time. Never against myself",
+    "en": "Lost against time. Never against myself",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.05,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uZJBG6JPbr6rsLHngTHtaRL3DfO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xXYNXuW0joh1sq55tnuDb5jxDUG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1701655,
+    "ru": "Der Zug hat keine Bremse",
+    "en": "Der Zug hat keine Bremse",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.05,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ld2rAzpW4TIWR8GKI3YfBGIXOs6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/t38DibKXXdxS56bt2gNaJByjV6o.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1701650,
+    "ru": "Hart wie Kruppstahl",
+    "en": "Hart wie Kruppstahl",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.05,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nunVosd6kTV1CT02rj4z67STU94.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1ZJkndyVU55hENz9yNnRetTNPPG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1685075,
+    "ru": "האישה בלבן",
+    "en": "האישה בלבן",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.05,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ndB7rBkzVoHuxapGMkk9TOxUpqG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/j0cnegxtTeOgBjsx2DlBU6pnGBI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1656616,
+    "ru": "Cleb's",
+    "en": "Cleb's",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.05,
+    "genres": [
+      "ужасы",
+      "триллер",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mYkFsrtRnTFbjAGJX60XPvntqZ2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lR013e1lSwCX5LgGmJ8JgjVNevA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1700848,
+    "ru": "Howard’s Way: The Hot Dog Howard Story",
+    "en": "Howard’s Way: The Hot Dog Howard Story",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.05,
+    "genres": [
+      "комедия",
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4FfIMmQVysKHIlPxbKwtaNkTxyE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6DpH5L8LXiDDXGJYKw7fPY7Nt1E.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1693641,
+    "ru": "Secret's Travel",
+    "en": "Secret's Travel",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.05,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aOucd1G9ZV1wcX7UN6P59qM2kra.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yTrXc5BD1ENvHNcFDFjVEmq6xMl.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1691818,
     "ru": "ההצגה של משפחת גאון",
     "en": "ההצגה של משפחת גאון",
@@ -8917,194 +9100,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/xnMJLvJgVohbTSYREUl8uC0v6Tz.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/uD3Pkyj4LAukx9Tjpevxqv7eJZm.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1694418,
-    "ru": "חנאל ומכבית",
-    "en": "חנאל ומכבית",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.04,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6XrKvTO7LF1cmFRr9SisE6g9oQO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vJuZUiWhrbeLpiycKDRjWrTiXZi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1687276,
-    "ru": "מתיישבים",
-    "en": "מתיישבים",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.04,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/952g9TpPxZtmeCARbgtW6gDjeFr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1AIt2N7jRfa78hNR69mPC2hrc9r.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1686789,
-    "ru": "風のアンセム",
-    "en": "風のアンセム",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.04,
-    "genres": [
-      "мультфильм",
-      "музыка",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rGDb4H1JnFTc0vkxWfkqv9gFKWI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/akaTecoTAhBx6BsyyZOKqZ8eBZK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1651614,
-    "ru": "Shower Thoughts",
-    "en": "Shower Thoughts",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.04,
-    "genres": [
-      "комедия",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3q4y8SY1k19mVrUAikQIKOAsrpV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mEJybGsb3F5FtnQAf8RT07g90lk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1642775,
-    "ru": "Maybe I",
-    "en": "Maybe I",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.04,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wQsCkT0L5wmSIBxOHenuV3YTPyk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/b6PDboJ55gjXXzetAFT4aJm9aX8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1476767,
-    "ru": "5D",
-    "en": "5D",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.04,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8x3QiYf1uuZ2cVkvXHDFA7E1OYK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/doxK03bdIP7J0Z00hb3RliXu2bl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1686306,
-    "ru": "One to Go",
-    "en": "One to Go",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.04,
-    "genres": [
-      "комедия",
-      "боевик",
-      "история"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/e9nCc6zCGg5a9LVaMWoA4GrZQTF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/m4qVZawWq8ySUVPGBxtk757FHhq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1679180,
-    "ru": "AMADI",
-    "en": "AMADI",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.04,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6d4r1KAy47hvfDiUFaGeyzd65WL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/f5tqsyJ7e4cExPxWHaaEztwJrdg.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1679171,
-    "ru": "El sueño",
-    "en": "El sueño",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.04,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4Jz1ZAgaP9P49ZuZ05ad44gToTL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ieoIlykUD9Ud5l43ljMePEpoaqp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1677407,
-    "ru": "1881 Atatürk: Bir Liderin Doğuşu",
-    "en": "1881 Atatürk: Bir Liderin Doğuşu",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.04,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/cLhkaPwJLuB90gM6AhEltCP3pgr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uJdDnjgvJopKNd1w8aXml1k3UIt.jpg",
     "source": "tmdb"
   }
 ]

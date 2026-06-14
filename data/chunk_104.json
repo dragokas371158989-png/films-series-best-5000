@@ -1,5 +1,200 @@
 [
   {
+    "id": "84480",
+    "ru": "わんぱく王子の大蛇退治",
+    "en": "わんぱく王子の大蛇退治",
+    "year": 1963,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.7,
+    "votes": 17,
+    "popularity": 0.66,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "приключения",
+      "фэнтези",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2dgDgi5N7mkoGPeVh5h870fbnPO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s3L0snNMWVhxFkmaSGCt34pSlzH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 726894,
+    "ru": "Пылающий меч",
+    "en": "燃えよ剣",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 17,
+    "popularity": 1.92,
+    "genres": [
+      "история",
+      "драма",
+      "боевик"
+    ],
+    "overview": "Фильм снован на реальных событиях и одноименном романе автора «Табу» Рютару Шибы. В центре сюжета история Тосидзо Хидзикаты - командира военно-полицейского отряда, действовавшего во второй половине XIX века во времена смуты и позднего сёгуната Токугава. Отряд также вел боевые действия на стороне сёгуна против сторонников императора.",
+    "poster": "https://image.tmdb.org/t/p/w342/c3Ao5AJN9T5egSHfLr7b262oV7L.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oL4p6swBI7KVd2sFnFmo4CQyhrr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1444327,
+    "ru": "Дело на миллион",
+    "en": "The Final Run",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 17,
+    "popularity": 0.96,
+    "genres": [
+      "боевик",
+      "драма"
+    ],
+    "overview": "Когда-то бывший морпех Пирс Батлер связался с преступным миром, чтобы быстро разбогатеть, но попал в тюрьму. Отсидев срок, он оставил криминальное прошлое, чтобы построить мирную жизнь: небольшой бизнес, уютный дом, любящая семья. Но жизнь ставит его перед жестоким выбором: быстро найти огромную сумму денег, иначе его жена умрёт от редкой формы рака. Чтобы спасти любимую, Пирс решает пойти на последнее рискованное дело.",
+    "poster": "https://image.tmdb.org/t/p/w342/nls5a5r0ebwF0E3dbdJrvJVAcvp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tGO5ysGW0fqJ4SaT2I19atpPpiE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 674255,
+    "ru": "Я мщу, остальные платят наличными",
+    "en": "Seperti Dendam, Rindu Harus Dibayar Tuntas",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 17,
+    "popularity": 0.52,
+    "genres": [
+      "боевик",
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "Аджо Кавир — сильнейший боец яванского преступного мира. Но молодого бойца тревожит болезненная тайна: он импотент. Когда он наконец находит достойного соперника, им оказывается суровая и красивая телохранительница Итан. После схватки Джо влюбляется в Итан, но сможет ли он когда-нибудь сделать её счастливой?",
+    "poster": "https://image.tmdb.org/t/p/w342/bvjKYCDI5M0M0mIv55NUPXTzGG3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/71ybEDLT73rsx4ciLWJo1zzuAW3.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 575189,
+    "ru": "Хэппи-Энд",
+    "en": "Хэппи-Энд",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 17,
+    "popularity": 0.45,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Загадочный старик приходит в себя на пляже в Таиланде. Он не помнит ни своего имени, ни причины, по которой оказался так далеко от дома. Хотя говорит он только по-русски и отличается крайне скверным характером, старик быстро осваивается на новом месте, налаживает связи и даже открывает авантюрный бизнес. И вроде новая жизнь складывается хорошо, но постепенно возвращаются воспоминания о том, для чего же он всё-таки прилетел на другой край континента.",
+    "poster": "https://image.tmdb.org/t/p/w342/1qOlgP4osNRFSzle8ql8ewYQUkc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mk5vXk4KWmVqqg4FAEPoh1m0iqk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 855638,
+    "ru": "Sweet as Maple Syrup",
+    "en": "Sweet as Maple Syrup",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 17,
+    "popularity": 0.53,
+    "genres": [
+      "телевизионный фильм",
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kL0NnDrJsvOx2bo1VvPq7L9K5lq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oeRB2cbw7PnP9fJrUhaz4fFkCJM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 380254,
+    "ru": "Сори: Голос от сердца",
+    "en": "로봇, 소리",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 17,
+    "popularity": 0.74,
+    "genres": [
+      "драма",
+      "фантастика"
+    ],
+    "overview": "Что может сравниться с горем отца, потерявшего своего ребенка и пытающегося уже как 10 лет найти свою дочь.\r В тот момент, когда Хэ Гван почти отчаялся и решил сдаться, он случайно находит спутникового робота AI, упавшего из космоса на Землю. AI может распознавать голоса всех людей на планете, используя спутниковую связь. Поможет ли это найти Чжи Ён?",
+    "poster": "https://image.tmdb.org/t/p/w342/2sAcfaBKW1ETstuLXXNkA9DAURI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kckxCJXjj0yhUf4OO1Nt8MfgfSU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 19789,
+    "ru": "Мой маленький пони: Прогулка принцессы",
+    "en": "My Little Pony: The Princess Promenade",
+    "year": 2006,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 17,
+    "popularity": 0.59,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "фэнтези"
+    ],
+    "overview": "Вистерия гордится! Ее сады цветут, ее маленькие друзья находятся в городе, и это — время для самого причудливого весеннего парада в Понивилле, праздника цветов. Но дела не идут согласно плану, когда Вистерия случайно пробуждает дракона, сонного, глупого 1000-летнего дракона. Легенда считает, что когда дракон пробужден, новая принцесса будет коронована!",
+    "poster": "https://image.tmdb.org/t/p/w342/i7cK8rcrRVUegVZzj2WjmQAfeUo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gWdEb16BN1RS3DoeZJuYXJFGQyX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 380341,
+    "ru": "Если бы я жил с мамой",
+    "en": "母と暮せば",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 17,
+    "popularity": 0.53,
+    "genres": [
+      "драма"
+    ],
+    "overview": "9 августа 1948 года. Нобуко, акушерка из Нагасаки, ошеломлена внезапным визитом своего Кодзи, который, как она думала, умер три года назад в результате сброса на город атомной бомбы. В этот самый день, стоя у его могилы, ога сказала себе: «В тот момент его не стало. Пора мне его отпустить…» Вместе они вспоминают о старых добрых временах. Эти счастливые моменты, хоть и с причудливым оттенком, кажутся вечными.",
+    "poster": "https://image.tmdb.org/t/p/w342/33NEFoAUJcqIG32JIRZjrBT6FKI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xalNYkhRC7wVS36P678ntMkG72n.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 481061,
+    "ru": "The Midnight Man",
+    "en": "The Midnight Man",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 17,
+    "popularity": 0.47,
+    "genres": [
+      "ужасы",
+      "комедия"
+    ],
+    "overview": "На чердаке своей бабушки Алекс и ее друзья находят игру, с помощью которой можно вызвать Полуночного человека. Это опасное существо умеет воплощать самые худшие кошмары тех, кто к нему обращается.",
+    "poster": "https://image.tmdb.org/t/p/w342/65kPBkottSEaz8O8eQ1ZMLLTdmt.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nmn5TZ24XZrVZ72YCVSeu24epEU.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 573409,
     "ru": "വിജയ് സൂപ്പറും പൗര്‍ണമിയും",
     "en": "വിജയ് സൂപ്പറും പൗര്‍ണമിയും",
@@ -9474,213 +9669,5 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1384/127328l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "240832",
-    "ru": "Люси",
-    "en": "Lucy",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 17077,
-    "popularity": 10.66,
-    "genres": [
-      "боевик",
-      "фантастика"
-    ],
-    "overview": "Еще вчера она была просто сексапильной блондинкой, а сегодня - самое опасное и смертоносное создание на планете со сверхъестественными способностями и интеллектом. То, что совсем недавно лучшие умы мира считали фантастической теорией, для нее стало реальностью. И теперь из добычи она превратится в охотницу.",
-    "poster": "https://image.tmdb.org/t/p/w342/x5oeAkujbFmdZuvxTbphiCKsLgb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1hzH1Wu2xhXBNOWzw3RMwNTJX5q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "507086",
-    "ru": "Мир юрского периода: Господство",
-    "en": "Jurassic World Dominion",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 7058,
-    "popularity": 13.12,
-    "genres": [
-      "приключения",
-      "фантастика",
-      "триллер"
-    ],
-    "overview": "После уничтожения острова Нублар динозавры вырвались на свободу и заполнили планету. Людям удается поддерживать хрупкое равновесие, определяющее мирное сосуществование на Земле. Но как долго человек сможет сохранять свое господство, живя по соседству с самыми устрашающими существами в истории?",
-    "poster": "https://image.tmdb.org/t/p/w342/6BLMT9T4wRu5QlnqVeQUU5WApLj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/698FjyzLdpgXmUSr63LaRwblTmx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "270303",
-    "ru": "Оно приходит за тобой",
-    "en": "It Follows",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 6918,
-    "popularity": 7.97,
-    "genres": [
-      "ужасы",
-      "детектив"
-    ],
-    "overview": "После ночи с парнем Джей оказывается в ловушке проклятия — нечто начинает преследовать её и подбирается всё ближе. Единственный способ спастись — постоянно убегать или передать проклятие другому.",
-    "poster": "https://image.tmdb.org/t/p/w342/jNoIHWis8hbltUpthcn7CeoZh9c.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ikaRI4yMxKOje5SmOlAhOBUnicL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "51540",
-    "ru": "Несносные боссы",
-    "en": "Horrible Bosses",
-    "year": 2011,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 6811,
-    "popularity": 5.06,
-    "genres": [
-      "комедия",
-      "криминал"
-    ],
-    "overview": "Ник, Курт и Дэйл старые друзья, но у них есть общая проблема - их боссы. Ник мечтал получить повышение, и трудился не покладая рук, а его босс делал вид, что собирается его повысить, а в итоге сам занял обещанную должность. Начальница Дэйла нимфоманка, которая постоянно до него домогается, а ведь у него есть невеста. Только у Курта отношения с боссом складывались наилучшим образом, однако он умер, и его место занял сын-наркоман, который ненавидит Курта. И вот однажды, изрядно перебрав алкоголя, друзья решают убить своих начальников...",
-    "poster": "https://image.tmdb.org/t/p/w342/b5JQ3q72bDqPI0nSV0Zl9MtwXbO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9fkYHcOtaz4cKmlDWw7tqUr5TUt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_50869",
-    "ru": "Gods' Game We Play",
-    "en": "Kami wa Game ni Ueteiru.",
-    "year": 2024,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.3,
-    "votes": 36786,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Фэнтези",
-      "Fantasy",
-      "Саспенс",
-      "Suspense",
-      "Игры на ставки",
-      "High Stakes Game",
-      "Игры",
-      "Strategy Game"
-    ],
-    "overview": "When Leoleshea, a dragon god, is accidentally awoken from her sleep within a glacier, she demands this era's very best game player be brought before her. After a year of waiting, she meets Fay Theo Philus, an apostle—a human granted a supernatural ability called an Arise and thus given permission to challenge the gods in games. Fay and Leoleshea realize they share a passion for games, whether it be with cards or a battle of wits with a god. Declaring that she likes this human, Leoleshea allows Fay to call her \"Leshea\" and team up with her to play in the gods' games.\n\nEver since the gods gave humans the ability to challenge them, they have promised to grant any wish after ten victories. Leshea desires to become an official god again, as she previously descended to the human world and lost her status as a divine being. Fay has only one goal: to find the woman who long ago taught him how to play games. \n\nThough Leshea and Fay quickly prove themselves to be a capable team, the gods will not allow them ten victories so easily: every game has its own unique conditions and hidden rules. Together, the duo will have to act as a perfect team to finally achieve their goals.\n\n[Written by MAL Rewrite]",
-    "poster": "https://cdn.myanimelist.net/images/anime/1578/141782l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "2454",
-    "ru": "Хроники Нарнии: Принц Каспиан",
-    "en": "The Chronicles of Narnia: Prince Caspian",
-    "year": 2008,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 6771,
-    "popularity": 7.31,
-    "genres": [
-      "приключения",
-      "семейный",
-      "фэнтези"
-    ],
-    "overview": "Люси, Сьюзен, Эдмунд и Питер возвращаются в Нарнию. В Англии прошло совсем немного времени, а в Нарнии - века. Страна находится под гнётом зловещего короля Мираза. Но у волшебного королевства есть одна надежда - юный принц Каспиан. Чтобы помочь Каспиану отвоевать трон, четверо героев собирают армию мифических существ во главе с Асланом...",
-    "poster": "https://image.tmdb.org/t/p/w342/n43CryBQ330tXklFURAjh7iwtn1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9pBv1BOSloAUgAkF0meJWdnbV4Q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_54028",
-    "ru": "Turkey! Time to Strike",
-    "en": "Turkey!",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.6,
-    "votes": 6753,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Спорт",
-      "Sports",
-      "Историческое",
-      "Historical",
-      "Путешествия во времени",
-      "Time Travel"
-    ],
-    "overview": "Mai Otonashi, Rina Godai, Nozomi Mitaka, Sayuri Ichinose, and Nanase Nikaidou are all members of their high school's bowling club. The captain, Mai, can effortlessly land a \"turkey\"—three strikes in a row—yet her next delivery always ruins her game. Each girl struggles with the sport in her own way, but that never stops them from having fun.\n\nHowever, amusement is not enough for Rina. As the newest member, she is furious about the others' disregard for their failures. After an argument, Rina decides to quit the club, but Mai refuses to let her leave. During a match to determine if Rina stays, a strange incident occurs after Mai's turkey: the girls are sent back in time!\n\nThe group discover that they have landed right into the middle of a battlefield in the Sengoku period. They soon realize that recreating the match between Mai and Rina is the key to returning home. As the girls decide to enjoy their time in the unfamiliar era, Mai must prepare to score a turkey when it matters the most.\n\n[Written by MAL Rewrite]",
-    "poster": "https://cdn.myanimelist.net/images/anime/1977/150952l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "mal_9754",
-    "ru": "Princess Jellyfish Specials",
-    "en": "Kuragehime: Eiyuu Retsuden☆",
-    "year": 2011,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.6,
-    "votes": 6720,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Комедия",
-      "Comedy",
-      "Искусство",
-      "Visual Arts",
-      "Дзёсэй",
-      "Josei"
-    ],
-    "overview": "Short episodes included in Blu-ray and DVD release, adapting the side story \"Kuragehime Heroes☆\", a spin-off manga serialized in Kiss Plus magazine. Supporting characters are featured in short chapters.",
-    "poster": "https://cdn.myanimelist.net/images/anime/6/27015l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "238636",
-    "ru": "Судная ночь 2",
-    "en": "The Purge: Anarchy",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 6716,
-    "popularity": 5.31,
-    "genres": [
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "Добро пожаловать в идеальный мир будущего, мир без преступности и войн. И только один раз в году роскошная спокойная жизнь сменяется анархией. Этой ночью дозволено все: во тьме улиц одни жаждут мести, другие ищут развлечений, остальные пытаются дожить до рассвета...",
-    "poster": "https://image.tmdb.org/t/p/w342/7YHq527yxe9KdgG93zwjWJqOnCK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/blfZnm6StMPnTY35kaooPBCsSVp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "9532",
-    "ru": "Пункт назначения",
-    "en": "Final Destination",
-    "year": 2000,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 6682,
-    "popularity": 8.03,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "Алекс летит развлекаться со всем классом в Париж на 10 дней. Отец говорит, что детство кончилось. В аэропорту он узнает, что время вылета совпадает с его днем рождения. Потом, повинуясь плохому предчувствию, Алекс покидает самолет вместе с еще семью людьми. И тут взрывается их самолет… Но позже оставшиеся в живых пассажиры гибнут один за другим, и Алекс понимает: смерть не обманешь — это только отсрочка…",
-    "poster": "https://image.tmdb.org/t/p/w342/rrXMDkTZYK4MeEqUAu1jqVNLzg3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7isarjYDEKZ5t1CgcvbuqEUby8P.jpg",
-    "source": "tmdb"
   }
 ]

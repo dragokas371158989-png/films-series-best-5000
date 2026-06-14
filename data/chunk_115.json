@@ -1,5 +1,197 @@
 [
   {
+    "id": 120142,
+    "ru": "Биско-ржавоед",
+    "en": "錆喰いビスコ",
+    "year": 2022,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.4,
+    "votes": 54,
+    "popularity": 7.07,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "комедия",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Вся Япония превратилась в выжженную пустошь, когда взрыв огромного оружия привёл к возникновению «Ржавого ветра», загадочного феномена, пожирающего города и живые организмы. Биско Акабоси — представитель печально известного клана «Грибных стражей», который отправляется в путь, чтобы найти волшебный гриб «Ржавоед» и спасти своего учителя от верной гибели. В дороге он встречает Мило Нэкоянаги, юного врача, который также хочет спасти своего близкого от ржавчины. Их путешествие будет полно неприятностей, и всё же они смело выступают в мир, где даже ветер сулит им верную гибель...",
+    "poster": "https://image.tmdb.org/t/p/w342/reFD4QQCBRVbRHLNnAn4XDXswnA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1PjeMinKDUgHaWyFdlkCXKlDZnb.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1641319",
+    "ru": "Снайпер: Без флага",
+    "en": "Sniper: No Nation",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 54,
+    "popularity": 31.34,
+    "genres": [
+      "боевик",
+      "триллер"
+    ],
+    "overview": "Главный герой, снайпер Брэндон Беккет, узнаёт, что его союзники из движения «Феникс» были уничтожены Железным легионом, наемной силой, работающей на безжалостного премьер‑министра Коста‑Верде.",
+    "poster": "https://image.tmdb.org/t/p/w342/tUmARo0TZEK1EaSuS6dU35FhDyU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7lizs4SuEU2ihkkAa0SZ66NtHbl.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1249508",
+    "ru": "Ночь гризли",
+    "en": "Grizzly Night",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 54,
+    "popularity": 8.7,
+    "genres": [
+      "ужасы",
+      "триллер",
+      "драма"
+    ],
+    "overview": "12 августа 1967 года в национальном парке Глейшер, штат Монтана, произошло немыслимое: в одну и ту же ночь, на расстоянии девяти миль друг от друга, случились не один, а сразу два смертельных нападения медведей гризли.",
+    "poster": "https://image.tmdb.org/t/p/w342/lvs5J3FKDqAlVkUYiWMWHZDOdxy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/i275mAQP4KhPtYUpMUgBGMmK4WN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 497863,
+    "ru": "С Новым годом, Колин Берстед",
+    "en": "Happy New Year, Colin Burstead",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 54,
+    "popularity": 0.58,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "Колин арендовал загородный дом, чтобы отпраздновать там наступление Нового года вместе со своей семьей. Он купался во внимании окружающих до тех пор, пока его брат Дэвид неожиданно не заглянул на огонек, после чего все перевернулось с ног на голову…",
+    "poster": "https://image.tmdb.org/t/p/w342/l1RtxOgL3AKb6NY61nWlewmyqpP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bDpMfZ6wf4bBYr0btnCwgeFCVPr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 432942,
+    "ru": "Гук",
+    "en": "Gook",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 54,
+    "popularity": 0.47,
+    "genres": [
+      "драма"
+    ],
+    "overview": "В центре сюжета фильма «Гук» оказываются два брата — Эли (Джастин Чон) и Дэниел (Дэвид Со), которые живут в Лос-Анджелесе и владеют обувным магазином покойного отца. На фоне беспорядков и гражданских восстаний братья заводят дружбу с чернокожей 11-летней Камиллой (Симон Бэйкер), вместе с которой пытаются защитить себя и свой магазин.",
+    "poster": "https://image.tmdb.org/t/p/w342/Ij6zyFnVd3ha5uR5b4na3LYux6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/91YouXHP7MufOfl1Ymw2LWKh6x2.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 69773,
+    "ru": "Яблочный двор",
+    "en": "Apple Tree Yard",
+    "year": 2017,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.4,
+    "votes": 54,
+    "popularity": 1.94,
+    "genres": [
+      "драма",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4KgTAANgyxOLlDMPQD4vwe0AOQR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dSQvrQdkPB3e7348zjeoeTlNZwh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 380121,
+    "ru": "The Bounce Back",
+    "en": "The Bounce Back",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 54,
+    "popularity": 0.54,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/jPEc1SFKbKnvFb4b0E1oAiGcDg3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/orqcWMPuJHIOPKHI1LJQ9iPLp4z.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1352774,
+    "ru": "Пятачок. Кровь и жёлуди",
+    "en": "Piglet",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 53,
+    "popularity": 1.56,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "Праздничный поход в честь 21-го дня рождения Кейт превращается в кровавый кошмар, когда компания друзей сталкивается с Поросёнком — жутким созданием, полу-человеком, полу-свиньей, безжалостно убивающим всех на своём пути. Обнаружив зловещую тайну происхождения монстра, Кейт понимает, что её собственное прошлое неразрывно связано с этим существом. Теперь, чтобы спасти себя и оставшихся в живых друзей, ей придётся встретиться лицом к лицу не только с безумным убийцей, но и с демонами собственной души.",
+    "poster": "https://image.tmdb.org/t/p/w342/ttIdhtln6s7KKp6j06Nq7oldslR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tehewlwOPFDDf4syutyopaY23AY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 611114,
+    "ru": "Девушка грёз",
+    "en": "I Met a Girl",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 53,
+    "popularity": 0.56,
+    "genres": [
+      "мелодрама",
+      "драма",
+      "комедия"
+    ],
+    "overview": "Импульсивный музыкант, борющийся с шизофренией, влюбляется в таинственную женщину, которая — плод его воображения. Когда она внезапно исчезает, он в поисках её отправляется в путешествие по Австралии, привлекая к помощи брата.",
+    "poster": "https://image.tmdb.org/t/p/w342/wxiSRlHJkjxDUwpY2kIQ9kNSbWa.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rnIXIdIAVog9rphux0RFiWEGN4B.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 785544,
+    "ru": "ボクたちはみんな大人になれなかった",
+    "en": "ボクたちはみんな大人になれなかった",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.4,
+    "votes": 53,
+    "popularity": 1.06,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mbLvZNvB75nlimk82y4zAhW2GNh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/y7PsnD6oe00OVpDesy0bo0lhQQ3.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 127617,
     "ru": "Elize Matsunaga: Era uma Vez um Crime",
     "en": "Elize Matsunaga: Era uma Vez um Crime",
@@ -9498,201 +9690,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/kM32hmDGTxmqNeT1x8zJExJdDCM.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/3CHC5GAlTFoFrf6BUgjO8Z9D0QN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1351923,
-    "ru": "120  बहादुर",
-    "en": "120  बहादुर",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 2.15,
-    "genres": [
-      "боевик",
-      "военный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3mKTRcvzXUizGlTlvlb2ryXuc2Y.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xxY1udGvueqd1oPl2wmeuFOUF5d.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 957861,
-    "ru": "窄路微塵",
-    "en": "窄路微塵",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.73,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nAyisFVSmhmdkEwXAAyzRRlA5OC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9M3jOzfgH4glbpU53qnfyUVAalM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1180262,
-    "ru": "A Match in Manhattan",
-    "en": "A Match in Manhattan",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.66,
-    "genres": [
-      "телевизионный фильм",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gbkrkIN7Ajxao1dIwyAu5vOFKXg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2OMx6CZ0QPQdTjzdPISb6VSeKpK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 807072,
-    "ru": "हैलो चार्ली",
-    "en": "हैलो चार्ली",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.6,
-    "genres": [
-      "приключения",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8dhYgQ0nsFRIIXOKBNHW0hUTDyN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7sIU6DdydcWn7ovVPRXs1K0s6QW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 962367,
-    "ru": "When Christmas Was Young",
-    "en": "When Christmas Was Young",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.5,
-    "genres": [
-      "телевизионный фильм",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6Fdku46UeJnny4xZK8E1sTVMBRe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6eY3V5Exj0kEriaS2aLNHssi0je.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 784992,
-    "ru": "Love's Match",
-    "en": "Love's Match",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.42,
-    "genres": [
-      "телевизионный фильм",
-      "мелодрама",
-      "комедия",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/x8xbpuf7c9o0tQEi53WZsB5sEn4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/14h9mYtZsmymVaNUMH0PsGnSPwi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 462927,
-    "ru": "Братья Медведи: Тайна трёх миров",
-    "en": "熊出没·奇幻空间",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 2.16,
-    "genres": [
-      "мультфильм",
-      "фэнтези",
-      "семейный",
-      "боевик"
-    ],
-    "overview": "Веселые и озорные братья медведи Брайр и Брамбл, как и все лесные жители, любят свой дом — лес, в котором они живут, и не позволяют своему давнему другу, лесорубу Вику, его уничтожить.  Не в первый раз удирая от медведей, Вик сталкивается с роботом-археологом Коко, пытающейся отыскать древний затерянный мир «Фантастика» и сбежать от бандитов, охотящихся за сокровищами волшебного мира. Братья и Вик решают объединиться и встать на защиту сокровищ, ведь настоящая дружба способна на все.",
-    "poster": "https://image.tmdb.org/t/p/w342/c69OPpYRXqeC19aXKP7OQjxHf0J.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/scr8SGoh0e65Q37ka1cIigiQ8Wt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 582350,
-    "ru": "Спринтер",
-    "en": "Sprinter",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 1.87,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Мальчик, чья мать уехала в США для лучшей жизни, становится звездой легкой атлетики Ямайки.",
-    "poster": "https://image.tmdb.org/t/p/w342/wnZ5hoWuw3reRXSIBvo0bM3Tbre.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2R2ixk72hdxRcsy1mZZgDZcYV2l.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 420635,
-    "ru": "Счастливый несчастный случай",
-    "en": "美好的意外",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.67,
-    "genres": [
-      "комедия",
-      "фэнтези",
-      "мелодрама"
-    ],
-    "overview": "Успешная адвокатесса живёт одна в огромной квартире, всю себя посвящает карьере и не планирует заводить ни мужа, ни детей. И вот однажды она попадает в аварию, погибает и оказывается в небесной канцелярии. А там выясняется, что произошла ошибка, и ей ещё рано умирать. В канцелярии решают - чтобы вернуть свою жизнь независимой женщины, она должна пожить в теле домохозяйки с двумя детьми. Оказаться там, где она быть не хотела, конечно, тяжело. Но всё меняется, и она обретает счастье.",
-    "poster": "https://image.tmdb.org/t/p/w342/qTjjzltg2GDfty4IvfRwgeohpQq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/acE4a2ygzLWc9RZtt8KtNKOoXdt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 450298,
-    "ru": "Принцесса-лягушка: Тайна волшебной комнаты",
-    "en": "Arctic Adventure: On Frozen Pond",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.4,
-    "votes": 16,
-    "popularity": 0.67,
-    "genres": [
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "С давних пор в уютном живописном и скрытом от посторонних глаз месте раскинулось Лягушачье Королевство — страна, в которой лягушки живут в мире и согласии, и каждый их день наполнен радостью и весельем. Однако злодеи вознамерились выкрасть магический амулет — Хрустальную лягушку, без которого жители королевства не смогут пережить зиму. Чтобы помешать им, король собирает отряд из отчаянных парней, в который тайно записывается и принцесса.",
-    "poster": "https://image.tmdb.org/t/p/w342/z1hzRjHtQLJPbVfzJlXkQu5wg6L.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fd6oTdTLCHNsVrUic1vyoE3jE4B.jpg",
     "source": "tmdb"
   }
 ]

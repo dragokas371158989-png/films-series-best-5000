@@ -1,5 +1,191 @@
 [
   {
+    "id": 798894,
+    "ru": "悪魔が来りて笛を吹く",
+    "en": "悪魔が来りて笛を吹く",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.97,
+    "genres": [
+      "драма",
+      "ужасы",
+      "детектив",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fWUvtcyvGpmuhkBrcX55IlVS9Mb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nLPtXWIKGZqr2iF4feKNcA7CDLA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 426537,
+    "ru": "Alan Bennett's Diaries",
+    "en": "Alan Bennett's Diaries",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.97,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/cLMgoef1RePXbWiIOnYfGWuHMl5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yJHtpP2sHJzaJ3SsdsmxsiuS5f9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 658767,
+    "ru": "Intercourse",
+    "en": "Intercourse",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.95,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uDR6esmRBE5Cc9j8OFOGzaA0Zfb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8HcLg6rjizgA0VM4hYcYEhPchMu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 689751,
+    "ru": "Capitán Escudo",
+    "en": "Capitán Escudo",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.95,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "приключения",
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7Spe2ObqUe0F8RU2g9rSTs719vy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bmtn158UW4ZoTPclhrrxc9amZrB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 391749,
+    "ru": "Once Upon a Time in Amritsar",
+    "en": "Once Upon a Time in Amritsar",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.9,
+    "genres": [
+      "боевик",
+      "криминал",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uiBeT2YKEze5A6Xm70fthjawq0v.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hOHqvqarN8oSepOBziFSAWi2CL9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 700422,
+    "ru": "Che Guevara, la fabrique d'une icône",
+    "en": "Che Guevara, la fabrique d'une icône",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.9,
+    "genres": [
+      "документальный",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xaS2wzLgO1xI1GTXsn4WAZMUh0o.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/17NcOlZ7amSpgiWSwlpNeEB1eY0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 251338,
+    "ru": "Olho Nu",
+    "en": "Olho Nu",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.9,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tr2G3riv1O7KAevBLW0u0xjwQ5A.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qg10J9Q4KbG721m0GLlUGtTrLpt.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 680411,
+    "ru": "ドクターZERO 精神分析医・財前零子",
+    "en": "ドクターZERO 精神分析医・財前零子",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.89,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/sUoHqr6ZTq1E1eUly2axJ4444BR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xRBShCNKfYGfikJX3KU3g4wr9wf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 698816,
+    "ru": "상류시대",
+    "en": "상류시대",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.88,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/n2PFcmCwA18lB5qa6ceydBqCFkS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ecpKOTFj5utHxm9ftDbfEkkUaTu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 409160,
+    "ru": "夢情人",
+    "en": "夢情人",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 1,
+    "popularity": 0.88,
+    "genres": [
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7fqbiiosK6XwLAeiyatr2WydhOw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bh3KvZgl52yZkR72Zft08MVXnnA.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 700263,
     "ru": "정사 : 착한 며느리들 2",
     "en": "정사 : 착한 며느리들 2",
@@ -9448,201 +9634,6 @@
     "overview": "После аварийной посадки «семейного» звездолета на Эндоре родители подростка Мэйса и его сестренки Синдел потеряли детей, а дети — родителей. Вместе с несколькими лесными жителями-эвоками Мэйс и Синдел, не мешкая, отправились на поиски папы и мамы. С какими только чудовищами детям ни пришлось сразиться на долгом и трудном пути!..",
     "poster": "https://image.tmdb.org/t/p/w342/4GrECLKaJhYA6ooSTOG0XEuPnSl.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/waWPYcXrbENXEoJkrQt7zFUdq14.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "39285",
-    "ru": "Бизнес ради любви",
-    "en": "Beauty & the Briefcase",
-    "year": 2010,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 419,
-    "popularity": 1.07,
-    "genres": [
-      "мелодрама",
-      "комедия",
-      "телевизионный фильм"
-    ],
-    "overview": "Лэйн — молодая нью-йоркская журналистка, мечтающая о любви и карьере в Космо. По протекции лучшей подруги Джоан девушка попадает в модный журнал на стажировку. Во что бы то ни стало ее статья должна быть лучшей, но… в её жизни совершенно неожиданно появляется Он — «волшебный мужчина», отвечающий всем требованиям из списка идеального. Что же сильнее — желание быть любимой или карьера?",
-    "poster": "https://image.tmdb.org/t/p/w342/zN9FYOXf5tUYjgget7yOzu8TlZU.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/m0uy78mSoSqh470bGJuOHGiEZnQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "311667",
-    "ru": "Журналист",
-    "en": "Manhattan Night",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 417,
-    "popularity": 1.56,
-    "genres": [
-      "драма",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "С просьбы соблазнительной незнакомки разобраться в нераскрытом убийстве ее мужа начинается неприятная история сексуальной одержимости и шантажа, которая может стоить журналисту Портеру Рену его работы, семьи и даже жизни.",
-    "poster": "https://image.tmdb.org/t/p/w342/ozQjMmohuFFVNPUdS8yfPSCxfk1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1eM6CsDTwRmxgnigzz8pitLlUKJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "39345",
-    "ru": "Каспер встречает Венди",
-    "en": "Casper Meets Wendy",
-    "year": 1998,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 415,
-    "popularity": 1.6,
-    "genres": [
-      "семейный",
-      "фэнтези",
-      "комедия",
-      "телевизионный фильм"
-    ],
-    "overview": "Каспер, доброе привидение, встречает Венди — маленькую ведьмочку. Скрываясь от вредного волшебника Десмонда, Венди и три ее тетки — Грет, Габби и Фанни — случайно встречают Каспера и его дядюшек — Длинного, Толстяка и Вонючку.",
-    "poster": "https://image.tmdb.org/t/p/w342/zYJWQvee9CN6nc9En2KUWewHGHr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uttOGgMYQJqwxL6OohWHFk6rpW7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "54540",
-    "ru": "Крошка из Беверли-Хиллз 2",
-    "en": "Beverly Hills Chihuahua 2",
-    "year": 2011,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 413,
-    "popularity": 2.16,
-    "genres": [
-      "комедия",
-      "семейный"
-    ],
-    "overview": "Хлоя и Папи возвращаются в Беверли-Хиллз, где они поженились и стали счастливыми родителями на удивление вредных щенков, в то время как Сэм Кортес должен бороться, чтобы не выселили его родителей.",
-    "poster": "https://image.tmdb.org/t/p/w342/l23zIQCS4uz761q35anndouMCk3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ekNXqMP50X7w7zAPWuikxdjWlwC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "590869",
-    "ru": "Хаммамет",
-    "en": "Hammamet",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 412,
-    "popularity": 0.54,
-    "genres": [
-      "драма",
-      "история"
-    ],
-    "overview": "Прошло 20 лет со дня смерти одного из самых обсуждаемых итальянских политиков прошлого века. Его имя, которое когда-то не сходило с первых полос, теперь скрыто за оглушительным молчанием свидетелей последних дней его жизни. Фильм основан на реальных фактах, но это — не только правдивая хроника, это глубокая психологическая история на грани триллера, который разворачивается между самим Беттино, «падшим королем» итальянской политики, между его дочерью, которая готова до последнего сражаться за отца, и третьим персонажем — загадочным мальчиком, который проникает в их мир и пытается разрушить его изнутри.",
-    "poster": "https://image.tmdb.org/t/p/w342/4gs4OFUKQmUSwsltE6ZpCgysOmD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dUBfcpXkD75WD8ZFgDfUauqFINh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "258193",
-    "ru": "Похищения инопланетянами",
-    "en": "Alien Abduction",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 410,
-    "popularity": 1.37,
-    "genres": [
-      "ужасы",
-      "фантастика",
-      "триллер"
-    ],
-    "overview": "На протяжении веков в горах Северной Каролины исчезали люди. Легенды и фольклор говорили что это связано с огнями в воздухе. Группа исследователей попробует разгадать тайну.",
-    "poster": "https://image.tmdb.org/t/p/w342/h4Ny82lizNTdTH2MFLjjyOVDWtk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9p29QBHdeeaZZeHbOVcKYb66M3s.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1008392",
-    "ru": "Потемнело",
-    "en": "The Blackening",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 408,
-    "popularity": 1.89,
-    "genres": [
-      "ужасы",
-      "комедия"
-    ],
-    "overview": "Семеро чернокожих друзей отправляются вместе отдохнуть на выходные, но оказываются в ловушке в хижине с убийцей, который мстит им.",
-    "poster": "https://image.tmdb.org/t/p/w342/oMMw86wz1rdkyG1opcdwhyMttgM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iHSE8lEkPFHHPqaCv6Eh2aUfe6q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "565413",
-    "ru": "Мушкетёры. Неизвестная миссия",
-    "en": "Moschettieri del Re - La penultima missione",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 405,
-    "popularity": 0.58,
-    "genres": [
-      "приключения",
-      "комедия"
-    ],
-    "overview": "Окончив службу, четыре мушкетёра пытаются вести унылую мирную жизнь. Д’Артаньян работает мясником и лечит колено. Атос поглощён новыми романами и лечит плечо. Арамис стал аббатом в монастыре. Портос, похудевший и несчастный, стал заложником Бахуса. Но когда королева Анна Австрийская поручает им новую миссию, мушкетёры вновь берутся за оружие. Один за всех, и все за одного!",
-    "poster": "https://image.tmdb.org/t/p/w342/fcB6ed9akHrfZiIYEQ1eOZQ3eAY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2EHwNBnzz48p1v7DXqAc9S2ylLc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "461053",
-    "ru": "Спецназ: В осаде",
-    "en": "S.W.A.T.: Under Siege",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 402,
-    "popularity": 2.47,
-    "genres": [
-      "боевик",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "В осаде рассказывает о совместной операции отдела по борьбе с наркотраффиком и спецназа, направленной на устранение членов наркокартеля.\r Съёмочная площадка картины Спецназ: В осаде собрала звёздный актёрский состав. Главную роль в ленте исполнил американский актёр, режиссёр, продюсер и сценарист Сэм Джагер, звезда сериалов Клиника, C. S. I. Место преступления, Скорая помощь. Коллегой Сэма Джагера по съёмкам стал Майкл Джей Уайт, ранее засветившийся в таких кассовых фильмах, как Тёмный рыцарь, Неоспоримый-2, а так же телесериалах Стрела и C. S. I.: Майами. Фильм Спецназ: В осаде получил положительные оценки от кинокритиков ещё задолго до выхода на большие экраны.",
-    "poster": "https://image.tmdb.org/t/p/w342/4zRYbb0pW8N1gBZErWcT3TShkPc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cz1EXa6aRBzrX0q2lByOHo079jI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "39386",
-    "ru": "Корсиканец",
-    "en": "L'Enquête corse",
-    "year": 2004,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 402,
-    "popularity": 0.69,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Парижский нотариус поручает знаменитому детективу и любимцу женщин Джеку Палмеру разыскать на Корсике своего пропавшего клиента, мсье Леони. Приехав на Остров красоты, детектив Палмер быстро превращается из восторженного туриста в решительного бойца, а с виду легкая развлекательная поездка оборачивается рискованной шпионской миссией…",
-    "poster": "https://image.tmdb.org/t/p/w342/zXYuaZizR5k50GV42Zbawerc7Ao.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wIK3PmfQFLISrFl455tq99kkVBW.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,45 @@
 [
   {
+    "id": 7940721,
+    "tmdbId": 940721,
+    "ru": "Годзилла: Минус один",
+    "en": "ゴジラ-1.0",
+    "year": "2024",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.57,
+    "votes": 3192,
+    "poster": "https://image.tmdb.org/t/p/w342/bSICu9qWyUJVThkffuaqs9dgRV7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/vlmiJOeDMbiyaJCAjFPtlkDcOEv.jpg",
+    "overview": "В последние дни Второй мировой камикадзе Коити Сикисима посадил самолёт на острове Одо, где располагалась ремонтная база императорской армии Японии. В тот же вечер на них напал непонятно откуда взявшийся огромный ящер Годзилла — именно так называли его местные. Коити возвращается в разрушенный бомбардировками Токио (родители погибли, от дома остались одни обломки) и пытается жить дальше. К нему прибивается тоже потерявшая семью девушка с младенцем, которого она спасла во время воздушного налёта. Время идёт, жизнь налаживается, Коити работает в команде по обезвреживанию мин в Токийском заливе, и однажды их хлипкий деревянный катер сталкивается с Годзиллой, который после ядерных испытаний на атолле Бикини стал ещё больше и ещё свирепее.",
+    "genres": [
+      "фантастика",
+      "ужасы",
+      "боевик"
+    ],
+    "source": "movie_top_rated"
+  },
+  {
+    "id": 670981,
+    "ru": "Молитвы об украденных",
+    "en": "Noche de fuego",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.6,
+    "votes": 190,
+    "popularity": 1.24,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Среди гор и маковых полей Мексики три подруги помогают друг другу восстановить искалеченные наркокартелем жизни.",
+    "poster": "https://image.tmdb.org/t/p/w342/uIzHQXSxD8u0iCnIxwhDHDxvWo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wLdRx7aCc1i3P3kknIVKjcMZYQl.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "tv_7361",
     "ru": "Освенцим: Нацисты и «Последнее решение»",
     "en": "Auschwitz: The Nazis and the Final Solution",
@@ -79,6 +119,29 @@
     "source": "tmdb"
   },
   {
+    "id": 7000856,
+    "ru": "Кто подставил кролика Роджера",
+    "en": "Who Framed Roger Rabbit",
+    "year": "1988",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.54,
+    "votes": 6187,
+    "popularity": 6.35,
+    "genres": [
+      "фэнтези",
+      "мультфильм",
+      "комедия",
+      "криминал"
+    ],
+    "overview": "Частный детектив расследует загадочное преступление, в котором подозревается… мультипликационный персонаж кролик Роджер! Сыщик попадает в непредсказуемый мир, где его ожидают нарисованные злодеи с настоящими револьверами, говорящий автомобиль и соблазнительная мультяшная красотка. Наконец, на горизонте появляется мрачная фигура того, кто подставил кролика Роджера…",
+    "poster": "https://image.tmdb.org/t/p/w342/rtba2Xa50esVXLmrM8Wokd7SZXr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/udIE8Cdon9wnYmVIOFYrBPfA2Mq.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 856
+  },
+  {
     "id": "tv_103",
     "ru": "Туннель времени",
     "en": "The Time Tunnel",
@@ -97,29 +160,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/6E3Ncd9iLWqi8m1GcdkU5bSwOnS.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/omPcylzcwlsser7aKTlsyoMJLyK.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 7000856,
-    "ru": "Кто подставил кролика Роджера",
-    "en": "Who Framed Roger Rabbit",
-    "year": "1988",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.54,
-    "votes": 6185,
-    "popularity": 6.35,
-    "genres": [
-      "фэнтези",
-      "мультфильм",
-      "комедия",
-      "криминал"
-    ],
-    "overview": "Частный детектив расследует загадочное преступление, в котором подозревается… мультипликационный персонаж кролик Роджер! Сыщик попадает в непредсказуемый мир, где его ожидают нарисованные злодеи с настоящими револьверами, говорящий автомобиль и соблазнительная мультяшная красотка. Наконец, на горизонте появляется мрачная фигура того, кто подставил кролика Роджера…",
-    "poster": "https://image.tmdb.org/t/p/w342/rtba2Xa50esVXLmrM8Wokd7SZXr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/udIE8Cdon9wnYmVIOFYrBPfA2Mq.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 856
   },
   {
     "id": "tv_123349",
@@ -1009,6 +1049,29 @@
     "source": "tmdb"
   },
   {
+    "id": 8046025,
+    "tmdbId": 46025,
+    "ru": "Бесконечные небеса",
+    "en": "IS＜インフィニット・ストラトス＞",
+    "year": "2011",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 7.6,
+    "votes": 150,
+    "poster": "https://image.tmdb.org/t/p/w342/76vuF3lfuI2whofnswqWJ8XcpNK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/xQNNHHLJj7WNUplWTKrB36pK55c.jpg",
+    "overview": "В ближайшем будущем в Японии (где же еще?) изобрели чудесный боевой костюм, оператор которого получал огромную силу, скорость, могучую защиту и целый арсенал встроенного оружия. Человек становился подобен универсальному истребителю, потому костюм получил название «Небесный Доспех», сокращенно НД. Если учесть, что пилот мог активировать костюм силой мысли, а талантов хватало в каждой стране, то станет ясно, почему войны прекратились, а НД занял нишу «оружия сдерживания». Теперь работы по его развитию велись под благовидным предлогом «мирного применения», к примеру, в спортивных состязаниях, где участвовали представители всех наций. Точнее, представительницы, поскольку активировать Доспех могли только женщины!",
+    "genres": [
+      "Боевик и Приключения",
+      "мультфильм",
+      "комедия",
+      "НФ и Фэнтези"
+    ],
+    "source": "tv_popular"
+  },
+  {
     "id": "tv_32604",
     "ru": "Опасные связи",
     "en": "Relaciones Peligrosas",
@@ -1501,7 +1564,7 @@
     "overview": "Кармине и Филиппо случайно встречаются в музыкальной студии, где они оба хотят записать свои песни. Их дружба быстро развивается, но они не знают, что настоящая жизнь их ждет совсем скоро. Они оба попадают в конфликт с местными криминальными группировками, их друзья и семьи теперь находятся в опасности. В то же время, Филиппо влюбляется в дочь главы мафии, их любовь становится запретной и опасной. Кармине и Филиппо должны найти способ спастись и оставаться верными своим мечтам и целям, не смирившись с жестокой реальностью и общественным прессом, навязываемым им в Неаполе.",
     "poster": "https://image.tmdb.org/t/p/w342/eaUYYzfSrX7aV3cidQWSurj0njX.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/509CnjLa0O9eJSBwqwArNdUohY9.jpg",
-    "source": "trending_tv_week",
+    "source": "tv_popular",
     "status": "Онгоинг",
     "tmdbId": 110283
   },
@@ -1521,7 +1584,7 @@
     "overview": "Дублин, 1868 год. Глава семейства Гиннессов мертв, и судьба пивоварни находится в руках его четырех детей, каждый из которых скрывает свои темные секреты.",
     "poster": "https://image.tmdb.org/t/p/w342/cdVOef6W7PYXOLOXYVNZUdZPsij.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/1ELIdCCzB1afeO0KQh2lvUaOxjd.jpg",
-    "source": "discover_best_tv_2025",
+    "source": "trending_tv_week",
     "status": "Онгоинг",
     "tmdbId": 250988
   },
@@ -3307,10 +3370,10 @@
     "tmdbId": 61565
   },
   {
-    "id": "tv_4488",
+    "id": 8004488,
     "ru": "Робин из Шервуда",
     "en": "Robin of Sherwood",
-    "year": 1984,
+    "year": "1984",
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.6,
@@ -3323,8 +3386,10 @@
     ],
     "overview": "Юный Робин Локсли был избран духом леса — языческим полубожеством Херном, чтобы хранить мир и защищать справедливость на берегах Туманного Альбиона. Робину и его верным соратникам предстоит сразиться не только с алчной знатью, но и с могущественными колдунами, кровожадными викингами и беспощадными крестоносцами. Истинная отвага и подлые предательства, черная магия и древние пророчества, смерть и всепобеждающая любовь — всему есть место в этой саге.",
     "poster": "https://image.tmdb.org/t/p/w342/9w2VHgqZ4pQTAdUX5BDhMvaA7mo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1WLIpPMAryGpd2rQFI14JuVYgb7.jpg",
-    "source": "tmdb"
+    "backdrop": "https://image.tmdb.org/t/p/w500/1WLIpPMAryGpd2rQFI14JuVYgb7.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 4488
   },
   {
     "id": 4784,
@@ -5182,28 +5247,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/bAybU7BwGU2L0cVm44Lj4zI72lX.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/iJ0iDvSg4N17KIa1oQbtb3sW4Om.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8154538,
-    "ru": "Шоу группы «Нирванна». Фильм",
-    "en": "Nirvanna the Band the Show the Movie",
-    "year": "2026",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.6,
-    "votes": 61,
-    "popularity": 5.74,
-    "genres": [
-      "комедия",
-      "фантастика",
-      "приключения"
-    ],
-    "overview": "Мэтт и Джей — два неразлучных друга из Торонто, которые одержимы идеей выступить в легендарном клубе «Риволи». Проблема в том, что у них нет ни одной написанной песни, и они даже не пытались связаться с администрацией заведения.  В ходе реализации своего очередного безумного плана герои случайно совершают путешествие во времени и переносятся в 2008 год. Теперь им нужно не только попасть на сцену, но и найти способ вернуться в свое время, взаимодействуя с молодыми версиями самих себя.",
-    "poster": "https://image.tmdb.org/t/p/w342/ftJspH4JK6HfCBLxfjM3Ddrny5p.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/gYxOlYtLvGNrzYm6kQBcY5mqKja.jpg",
-    "source": "trending_movie_week",
-    "status": "Вышел",
-    "tmdbId": 1154538
   },
   {
     "id": 132925,
@@ -9807,44 +9850,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/1UrMMAChGXORYrbCef7GNId98Vk.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/rYYUi8m3YdPxDRbjs3xU5ct3Rzi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 988460,
-    "ru": "Machine Gun Kelly's Life In Pink",
-    "en": "Machine Gun Kelly's Life In Pink",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.6,
-    "votes": 25,
-    "popularity": 0.61,
-    "genres": [
-      "документальный",
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eiJxvswZSc3dc3DfAUw2YvC254u.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/k4oreWZCB8NW1c5eJGozi5YU7ca.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 45890,
-    "ru": "勇者ヨシヒコと魔王の城",
-    "en": "勇者ヨシヒコと魔王の城",
-    "year": 2011,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.6,
-    "votes": 25,
-    "popularity": 5.37,
-    "genres": [
-      "НФ и Фэнтези",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lhsJzNmXlktaOVsdTAQDQhGt5ob.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dCcSHIf26NyqVqXJkEH9KaCcwOJ.jpg",
     "source": "tmdb"
   }
 ]

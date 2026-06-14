@@ -1,5 +1,200 @@
 [
   {
+    "id": 618200,
+    "ru": "Дерзкое ограбление",
+    "en": "파이프라인",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 47,
+    "popularity": 1.07,
+    "genres": [
+      "криминал",
+      "боевик"
+    ],
+    "overview": "Наследник богатого семейства собирает команду из пяти суперпрофессионалов, чтобы реализовать план дерзкого ограбления. Им предстоит украсть нефть, спрятанную в туннеле на глубине десятков метров под землей.",
+    "poster": "https://image.tmdb.org/t/p/w342/dIaFHRAbE66kEaexBjR30Oir37Q.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dPFCnfKw0o8tQasFO76jCZ5WqTv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 879097,
+    "ru": "Вторжение кроликов: Миссия на Марс",
+    "en": "Les Lapins Crétins - Invasion : Objectif Mars",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 47,
+    "popularity": 0.96,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "Ученым Джону и Оливии было поручено собрать команду кроликов для первого космического полета на Марс. Полет финансируется Фрэнком Небулой, богатым генеральным директором глобального технологического гиганта. В то время как большинство рассматриваемых кроликов не самые умные животные, а также разрушительно озорные, один из кроликов, которого Джон и Оливия назвали «Скрибблс», находит способы доказать, что он необычайно одарен в математике и естественных науках. Оливия настаивает на том, чтобы Скрибблс полетел на космическом корабле на Марс, но ее настойчивость раскрывает настоящую причину, по которой Небула хочет, чтобы Кролики, в отличие от роботов или людей, первыми отправились на Марс.",
+    "poster": "https://image.tmdb.org/t/p/w342/pHM0DBDnvFlxIvwPckaVIV6KbLw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dXVXHeH0da4Lq63nsD3ABYNSEPu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1219560,
+    "ru": "Alter weißer Mann",
+    "en": "Alter weißer Mann",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 47,
+    "popularity": 0.67,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/32rESYjhBkSYo4cXoEIOGJEQMk5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5dcKoBZFuVQCSnDQctUpcXToHLu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 108611,
+    "ru": "牙狼＜GARO＞−魔戒ノ花−",
+    "en": "牙狼＜GARO＞−魔戒ノ花−",
+    "year": 2014,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.9,
+    "votes": 47,
+    "popularity": 1.49,
+    "genres": [
+      "Боевик и Приключения",
+      "драма",
+      "НФ и Фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/scXiLKLiSaUDpbSE78xinsRmPW4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2kxElNum4eccZhdDg4I3B3atsv0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 62987,
+    "ru": "Darknet",
+    "en": "Darknet",
+    "year": 2013,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.9,
+    "votes": 47,
+    "popularity": 1.07,
+    "genres": [
+      "детектив",
+      "криминал",
+      "НФ и Фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uMDuholBSIBHW8zr5iL405fmSaa.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zIuudnCA9qiSZt0XEZwL1aEuSV4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 37565,
+    "ru": "Хроника крыльев",
+    "en": "ツバサ･クロニクル",
+    "year": 2005,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.9,
+    "votes": 46,
+    "popularity": 11.93,
+    "genres": [
+      "мультфильм",
+      "драма",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Экранизация весьма популярной манги, построенной на смешении героев из разных миров студии Clamp. Основная сюжетная линия связана с Шаораном и Сакурой, которые вынуждены отправиться в путешествие за потерянной памятью Сакуры. Это происшествие было подстроено темными личностями, которым нужна способность Сакуры перемещаться по мирам и менять их. Кто победит: судьба или воля главного героя?",
+    "poster": "https://image.tmdb.org/t/p/w342/zVyrHP3xgNqvMXfxZhPepCjog7c.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6yEPWAfQQmkZTht21z9OYZP9f8E.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "98299",
+    "ru": "Приключения Дигимонов: Золотые Дигименталы",
+    "en": "デジモンアドベンチャー02 前編・デジモンハリケーン上陸!!／後編・超絶進化!!黄金のデジメンタル",
+    "year": 2000,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.9,
+    "votes": 46,
+    "popularity": 2.55,
+    "genres": [
+      "мультфильм",
+      "приключения",
+      "фантастика",
+      "Аниме"
+    ],
+    "overview": "Америка, Нью-Йорк. Это именно то место, куда отправились на каникулы трое «избранных» детей — Хикари, Такэру и Мими. Когда ребята решают в очередной раз сфотографироваться, из ниоткуда появляется мистический ветер, который, пролетев полмира, заставил исчезнуть многих «избранных», и сейчас он унёс Мими. Одновременно с этим своего давно пропавшего друга-дигимона ищет таинственный паренёк. Смогут ли оставшиеся «избранные» помочь этому ребёнку? И справятся ли они с новой угрозой?",
+    "poster": "https://image.tmdb.org/t/p/w342/zB4VpT9RF7UTVpRabCUPugjPTs3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5KwDfIM7UO2vPXr4E7JEmeiFxwU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 67082,
+    "ru": "Total Drama Presents: The Ridonculous Race",
+    "en": "Total Drama Presents: The Ridonculous Race",
+    "year": 2015,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.9,
+    "votes": 46,
+    "popularity": 3.24,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/NpHctZgDk1QvwQWpR4gZaqZIdP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hQrDOEBB9NZAjcXA3BtrwseTss1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 877181,
+    "ru": "Под шлемом: Наследие Бобы Фетта",
+    "en": "Under the Helmet: The Legacy of Boba Fett",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 46,
+    "popularity": 1.08,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "Специальный выпуск, посвященный истокам и наследию легендарного охотника за головами из «Звездных войн», Бобы Фетта.",
+    "poster": "https://image.tmdb.org/t/p/w342/jhgC70TurqELEc7vuepAjVpKakH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1Ikah6jKZfIzo9UOPgxnrVStnmO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1179496,
+    "ru": "La Sexóloga",
+    "en": "La Sexóloga",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 46,
+    "popularity": 0.54,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/slXJn0kE0pkxJpHnIrnKk7CZOqj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aEnuL9ZZabmWxBslinlgprxKgSW.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 627654,
     "ru": "La cravate",
     "en": "La cravate",
@@ -9509,195 +9704,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/6kDAeEiOkL14fwinIXzqwozjxKT.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/UJB2XsMvpqDy83vE3I10iEi8h0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 378340,
-    "ru": "Смерть - это сладкий сон",
-    "en": "Sanft schläft der Tod",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 12,
-    "popularity": 0.54,
-    "genres": [
-      "телевизионный фильм",
-      "триллер",
-      "драма"
-    ],
-    "overview": "Для Франка и Ани их летний отдых на Балтийском море обернулся кошмаром — когда они ненадолго сошли на берег, кто-то угнал яхту, на которой остались их дети. Полиция не может выйти на след похитителя, и у отчаявшихся родителей осталась одна надежда: отец Франка, бывший офицер Штази. 25 лет назад он расследовал похожий случай в этом городе. Похоже маньяк снова проявил себя в здешних краях.",
-    "poster": "https://image.tmdb.org/t/p/w342/qOWj6X5NMsFHqHn5jfCPdk8NZR9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dt10ZXcfmnouk3kS3oprzDpzlxC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 121876,
-    "ru": "花儿与少年",
-    "en": "花儿与少年",
-    "year": 2014,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 12,
-    "popularity": 18.23,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/s4WOcsEQ1pLjdKWEy7dcFDlWfI4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kIgzX0QdvK3vtaoHBpj9fUy7DP9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 529107,
-    "ru": "Inside 'Interstellar'",
-    "en": "Inside 'Interstellar'",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 12,
-    "popularity": 1.14,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xWA7Bbo9VeahPcKCFYiC7NZXNoV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/z7JUwll8F1BSVc8NjVGelW87mcU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 303967,
-    "ru": "나의 독재자",
-    "en": "나의 독재자",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 12,
-    "popularity": 0.7,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1poWm8oKIc0zlYupnHrEN4SH6Ow.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dsx0XGbYby2ZoBA9CcS74zc1GwN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 313371,
-    "ru": "All She Wishes",
-    "en": "All She Wishes",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 12,
-    "popularity": 0.64,
-    "genres": [
-      "комедия",
-      "фэнтези",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uwyvClqccWsilxCMbH3TDfAGPxJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/80VAmXBbeTqsRJ56ecKzYfouq66.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 412206,
-    "ru": "再見瓦城",
-    "en": "再見瓦城",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 12,
-    "popularity": 0.52,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/h8kaV5cSVs7G922UYULIU6PUz4I.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/12nKjOEt68hafwvKPJU9CIT4yK5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 455122,
-    "ru": "Allmen und das Geheimnis der Libellen",
-    "en": "Allmen und das Geheimnis der Libellen",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 12,
-    "popularity": 0.43,
-    "genres": [
-      "комедия",
-      "криминал",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bCmbfKZHoZqahQ49ita4pIOskxM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/r3FlESoR0jF6GtH4Xay3xVRoaxe.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 70002,
-    "ru": "Bubble Bee",
-    "en": "Bubble Bee",
-    "year": 1949,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 12,
-    "popularity": 0.41,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qp3lnM4fGdu3ZiUZH9JPBusQnxX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/phwUPMMSrj8Cil5OAvEiasCFmWz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 504993,
-    "ru": "Solar Walk",
-    "en": "Solar Walk",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 12,
-    "popularity": 0.31,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ko1tkpzecu6YcZTEWcNSWA27wzJ.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_42425",
-    "ru": "Плач Асуры",
-    "en": "アスラクライン",
-    "year": 2009,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.9,
-    "votes": 11,
-    "popularity": 7.21,
-    "genres": [
-      "Боевик и Приключения",
-      "мультфильм",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Томохару Нацумэ во всех отношениях обычный старшеклассник, за одним исключением: за ним постоянно следует призрак его погибшей лучшей подруги Мисао Минаками.\n\nПосле переезда в старый дом своего брата, Томохару решает начать жить нормальной жизнью. Но все его планы рушатся в тот день, когда таинственная незнакомка вручает ему закрытый чемоданчик. Томохару оставляет его на хранение, но вскоре об этом жалеет, когда за чемоданчиком в дом проникают якудза и какие-то религиозные фанатики. Спасаясь от пуль, Томохару открывает чемоданчик, и тут-то и начинается самое интересное.",
-    "poster": "https://image.tmdb.org/t/p/w342/9PMG7rbOMSbPSqWOuVVpCdO6usz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pGCKkACejNJ5rN710X09EOfRTxJ.jpg",
     "source": "tmdb"
   }
 ]

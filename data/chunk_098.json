@@ -1,5 +1,200 @@
 [
   {
+    "id": 892530,
+    "ru": "Путешественница во времени",
+    "en": "Le Tourbillon de la vie",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 116,
+    "popularity": 0.52,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "Париж, 2052 год. Джулия путешествует по своей жизни в поисках событий, изменивших ее судьбу. Порой это нечто значительное вроде национального музыкального конкурса, а иногда такая мелочь, как забытый дома паспорт. Мелочь, которая спустя годы рушит всю карьеру и жизнь.",
+    "poster": "https://image.tmdb.org/t/p/w342/iswdZuzhSzkWzBssh36aEnh59aA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aYQwIfByTt8GdglBOOWrewIorXr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_84303",
+    "ru": "Джетт",
+    "en": "Jett",
+    "year": 2019,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.8,
+    "votes": 116,
+    "popularity": 5.14,
+    "genres": [
+      "драма",
+      "криминал"
+    ],
+    "overview": "Профессиональная воровка Дэйзи \"Джетт\" Ковальски недавно вышла из тюрьмы. Ей снова придётся вернуться к опасному ремеслу, поскольку именно этого хотят грозные криминальные боссы.",
+    "poster": "https://image.tmdb.org/t/p/w342/vO0sqX01xYtPiwn9gEyRZuYSjAA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6IfH0XyukdKPxk8vVGuFMX2aioE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 464458,
+    "ru": "По стечению обстоятельств",
+    "en": "इत्तेफ़ाक़",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 116,
+    "popularity": 1.73,
+    "genres": [
+      "криминал",
+      "триллер"
+    ],
+    "overview": "Произошло двойное убийство. Есть два свидетеля, они же главные подозреваемые — популярный писатель и молодая домохозяйка. Оба рассказывают вполне правдоподобные, но полностью противоречащие друг другу истории. Инспектор должен решить, кто говорит правду, а кто — нет.",
+    "poster": "https://image.tmdb.org/t/p/w342/riEnSoGJ1WubamfrNpj4N0wVdoW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kCvpPhEIEpdiGU7VdSfJ4CjoiUD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 374251,
+    "ru": "Мистер Росток",
+    "en": "Stick Man",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 116,
+    "popularity": 1.49,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "телевизионный фильм"
+    ],
+    "overview": "Как-то мистер Росток отправился на пробежку в парк. Так получилось, что он попал в небольшой переплет и никак не может вернуться домой. Росток заблудился в дремучем лесу, а дома ждет жена с детками, и вот уже на носу Рождество...",
+    "poster": "https://image.tmdb.org/t/p/w342/hChFSATMxo9cDpDGl5iit5dx7yy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2Jmqs0uCi6JFw5HFm9lKOQKzVpV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 50166,
+    "ru": "Lucky Luke: La Ballade des Dalton",
+    "en": "Lucky Luke: La Ballade des Dalton",
+    "year": 1978,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 116,
+    "popularity": 0.64,
+    "genres": [
+      "семейный",
+      "мультфильм",
+      "комедия",
+      "вестерн"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yZTMQK4o6LcuKJADIBlqbZg9FRI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/x5kPnSawsJo1Ml7rPYZUJZL0Ssr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1229349,
+    "ru": "Йоло",
+    "en": "热辣滚烫",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 115,
+    "popularity": 2.32,
+    "genres": [
+      "драма",
+      "комедия",
+      "боевик"
+    ],
+    "overview": "Лэйинг много лет сидела дома, ничего не делая. Окончив колледж и поработав некоторое время, Лэйинг решила удалиться от общества и прекратить контакты со своим кругом общения. Она считала, что это лучший способ для нее \"примириться\" с самой собой.",
+    "poster": "https://image.tmdb.org/t/p/w342/fI5BIp48yERyYhu7O6XlDT4puSZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9IEYCg2Sxk72QdNNcvbbCMelalu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_32651",
+    "ru": "Интерны",
+    "en": "Интерны",
+    "year": 2010,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.8,
+    "votes": 115,
+    "popularity": 12.26,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Медицинский ситком с Иваном Охлобыстиным про врачей, которые ещё не умеют лечить, но уже умеют смешить. Главные герои ситкома — четыре интерна. Они всё время попадают в идиотские ситуации, а их руководитель доктор Быков с удовольствием за этим наблюдает",
+    "poster": "https://image.tmdb.org/t/p/w342/nGRNrIyBo6J0WiuCtlammxtSUoC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fSLnRSDjSyw3yXHuXdyYMdLY7ho.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_14981",
+    "ru": "The Late Late Show with Craig Ferguson",
+    "en": "The Late Late Show with Craig Ferguson",
+    "year": 2005,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.8,
+    "votes": 115,
+    "popularity": 50.97,
+    "genres": [
+      "комедия",
+      "Ток-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gGC7zSDgG0FY0MbM1pjfhTCWQBI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m0bV3qBiJBBlpFaaKjwHo13MVjm.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 2141,
+    "ru": "Джеймс Дин",
+    "en": "James Dean",
+    "year": 2001,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 115,
+    "popularity": 2.37,
+    "genres": [
+      "драма",
+      "телевизионный фильм"
+    ],
+    "overview": "Ему было всего 24 года. Он погиб в автомобильной катастрофе 30-го сентября 1955 года. Но и сегодня он остается иконой 50-х, одним из самых стильных мужчин того времени. Этот фильм покажет вам историю его жизни от ранних лет до пика его карьеры.",
+    "poster": "https://image.tmdb.org/t/p/w342/6dZt1YCJoEUjFRZUUhjEZclkDSZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iBsvTINEs3trKH73p4Ogbwm9xQ5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1365044,
+    "ru": "Снежная сестрёнка",
+    "en": "Snøsøsteren",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 114,
+    "popularity": 2.1,
+    "genres": [
+      "фэнтези",
+      "семейный",
+      "приключения",
+      "драма"
+    ],
+    "overview": "Мальчик, чья семья, убитая горем, совсем позабыла о Рождестве, неожиданно заводит дружбу с жизнерадостной девочкой, излучающей праздничное настроение.",
+    "poster": "https://image.tmdb.org/t/p/w342/xreT6WRclmAL647P61jS8THxBh5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/A2g1tlceVs7liy765ozaJ27aH0M.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 220845,
     "ru": "Смурфики: Легенда о Смурфной лощине",
     "en": "The Smurfs: The Legend of Smurfy Hollow",
@@ -9542,198 +9737,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/156RBfnvdtz9Nszr1DAx6kfB3o3.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/786R9nYlk2QUVlbSkisJn3RcwWX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 100394,
-    "ru": "Палочка Банни",
-    "en": "Baton Bunny",
-    "year": 1959,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 38,
-    "popularity": 0.5,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lUGj3Z0xFtGEkzxjGtrV9AdJvgp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/232k5FaSPIiF5UDeMggYFbsEF8e.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 193652,
-    "ru": "An Optical Poem",
-    "en": "An Optical Poem",
-    "year": 1938,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 38,
-    "popularity": 0.29,
-    "genres": [
-      "мультфильм",
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1yAfkkvRsmK8rbJD2m5W905jb56.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hz7Z4JasDXpVDpuZGeHfcN98k7N.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 30958,
-    "ru": "Charlie and Lola",
-    "en": "Charlie and Lola",
-    "year": 2005,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.8,
-    "votes": 37,
-    "popularity": 2.6,
-    "genres": [
-      "Детский",
-      "мультфильм",
-      "семейный",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/78XSc7oUweLLpmjCJ9q59y2Mi8e.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uvXS4NVBXnf1BEh3YQDfs8R20gL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 718100,
-    "ru": "Принцесса Лебедь: Королевская Свадьба",
-    "en": "The Swan Princess: A Royal Wedding",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 37,
-    "popularity": 0.68,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "фэнтези"
-    ],
-    "overview": "Принцесса Одетт, принц Дерек и их королевские друзья плывут на корабле на встречу еще одному волшебному приключению в заколдованной стране Катай! Прекрасная принцесса Мэй Ли пригласила принцессу Одетт на свою свадьбу с ее возлюбленным Ченом. По приезду Одетт обнаруживает, что тут что-то не так. И не все - те, за КОГО они себя выдают! Злая колдунья Фанг когда-то наложила заклятие, желая сама выйти замуж за Чена. Свадьба приближается, и только принцесса Одетт и ее друзья могут снять проклятие и сделать так, чтобы принцесса Мэй Ли и Чен жили вместе долго и счастливо.",
-    "poster": "https://image.tmdb.org/t/p/w342/xEcybBgi8WAnwbT3hs6nNBe1gTc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/12oPPNSAKabqcwCd8CJSYL0A6p5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 834500,
-    "ru": "Trippin’ with the Kandasamys",
-    "en": "Trippin’ with the Kandasamys",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 37,
-    "popularity": 0.74,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1tpuwM9fZFcMNkkGU0WwqPAEaFz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gXuTcVYpn4YhYLPm69IxJAdxqtR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 849242,
-    "ru": "Harka",
-    "en": "Harka",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 37,
-    "popularity": 0.52,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dFE0Kk51q5l7finikNgUVR1fPKj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uGjJmBYNLAdJq2KgJUXq2GA8ex6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 86632,
-    "ru": "Пиарщица",
-    "en": "Flack",
-    "year": 2019,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.8,
-    "votes": 37,
-    "popularity": 4.64,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "Робин - пиарщица, она знает всё о том, как преподнести клиента клиента в выгодном свете. Тем временем в её собственной жизни полный бардак.",
-    "poster": "https://image.tmdb.org/t/p/w342/i2bW3nZE8iThEgqNYjaxAz3qZoo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6lkZYlgKF77OOcsoLP6Rdj4Lwy9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 72396,
-    "ru": "Самый сильный доставщик",
-    "en": "최강 배달꾼",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.8,
-    "votes": 37,
-    "popularity": 3.71,
-    "genres": [
-      "драма"
-    ],
-    "overview": "История о доставщике чачжанмёна Чхве Кан Су и о том, как он поднимается с позорной позиции временного сотрудника до должности директора, а также находит своё личное счастье.\n\nЛи Да На тоже занимается доставкой чжаджанмёна и мечтает сбежать из \"Адского Чосона\", то есть из Кореи-в-которой-невозможно-найти-работу. Она отказывается от ухаживаний мужчин, предпочитая заниматься своим делом. Её не волнует ничего, кроме денег.",
-    "poster": "https://image.tmdb.org/t/p/w342/5R8ofR1cX7mc17cayDfrLQuFJ0w.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/AeIJNWD4bw5WkjjQKg1bYBAgWcI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 465365,
-    "ru": "Мой брат слишком сильно меня любит",
-    "en": "兄に愛されすぎて困ってます",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 37,
-    "popularity": 2.17,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Старшекласснице Сэтоке Татибане не везёт с личной жизнью. Она уже 12 раз признавалась парням в своих чувствах, но всякий раз была отшита и осмеяна. Старший брат девушки Харука всегда готов выслушать сестру. Он — добрый и заботливый. Но у него есть тайна, которую он хранит много лет: они с Сэтокой вовсе не брат и сестра. Однажды в город возвращается первая любовь Сэтоки — Таканэ Сэрикава — и, кажется, что тайна семейства Татибана скоро вывалится наружу.",
-    "poster": "https://image.tmdb.org/t/p/w342/dtSguACVTiZM6jZ1Lj6XaDo12Lb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/untd68N5EvEeVF6pPG3cIQqlp9H.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 52611,
-    "ru": "Приключения мышонка Переса 2",
-    "en": "El Ratón Pérez 2",
-    "year": 2008,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 37,
-    "popularity": 0.48,
-    "genres": [
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "Мышонок Перес работает Зубной феей. У него очень много дел: днем он трудится на плавучей жемчужной фабрике, где из молочных зубов делаются жемчужинки, а ночью вершит свою зубную миссию! Однажды вечером он должен подобрать зуб, сломанный маленьким Лукасом.  В доме у мальчика мышонок знакомится с привлекательной мышкой Лолой. Подружившиеся Лола и Перес, учатся танцевать сальсу. О Пересе узнает Джил Пенькоффу — жадный продюсер. Он хочет поймать мышонка, чтобы показать миру сенсацию! Но Лола и Лукас помогают ему бежать из рук злодея.",
-    "poster": "https://image.tmdb.org/t/p/w342/uJYFm3kAzvA32Nux1NEehoAji9s.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/elcBFpTXqfVwwkDVVDFVBkLBT6O.jpg",
     "source": "tmdb"
   }
 ]

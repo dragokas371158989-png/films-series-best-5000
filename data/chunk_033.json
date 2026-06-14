@@ -4784,6 +4784,28 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8276161,
+    "ru": "Истинное Образование",
+    "en": "참교육",
+    "year": "2026",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 9.4,
+    "votes": 243,
+    "popularity": 150.33,
+    "genres": [
+      "Боевик и Приключения",
+      "драма",
+      "комедия"
+    ],
+    "overview": "Когда в школах рушится уважение, на место выезжают необычные инспекторы, чтобы навести порядок — с помощью жестких и прагматичных уроков, которых не найдешь в учебниках.",
+    "poster": "https://image.tmdb.org/t/p/w342/k5XFkspikw2fGcXZ1GwbTRhzJHy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/vyG93jhmPL7tBIhRtCLa5mdBKob.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 276161
+  },
+  {
     "id": 7484133,
     "ru": "Нагота",
     "en": "Nude",
@@ -7367,49 +7389,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8299167,
-    "ru": "Ранчо Даттонов",
-    "en": "Dutton Ranch",
-    "year": "2026",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 9.33,
-    "votes": 249,
-    "popularity": 146.39,
-    "genres": [
-      "вестерн",
-      "драма"
-    ],
-    "overview": "Ранчо Даттонов - дом Бет и Рипа, стало символом той жизни, о которой они мечтали, за которую отчаянно боролись и ради которой едва не пожертвовали всем. Они всей душой привязались к своей земле площадью 7000 акров, превратив её в место, которое готовы защищать любой ценой. Даже в самые тяжёлые времена Бет и Рип делают всё возможное, чтобы выстоять, сохранить своё ранчо и обеспечить достойное будущее себе и своему приёмному сыну Картеру.",
-    "poster": "https://image.tmdb.org/t/p/w342/mmxsx98NnY56CvataUqM1ktt14O.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/wh5agdl3b7fqC7mSjsCkHx4fMAs.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 299167
-  },
-  {
-    "id": 8276161,
-    "ru": "Истинное Образование",
-    "en": "참교육",
-    "year": "2026",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 9.33,
-    "votes": 206,
-    "popularity": 150.33,
-    "genres": [
-      "Боевик и Приключения",
-      "драма",
-      "комедия"
-    ],
-    "overview": "Когда в школах рушится уважение, на место выезжают необычные инспекторы, чтобы навести порядок — с помощью жестких и прагматичных уроков, которых не найдешь в учебниках.",
-    "poster": "https://image.tmdb.org/t/p/w342/k5XFkspikw2fGcXZ1GwbTRhzJHy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/vyG93jhmPL7tBIhRtCLa5mdBKob.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 276161
-  },
-  {
     "id": "mal_30709",
     "ru": "神様はじめました～過去編～",
     "en": "Kamisama Hajimemashita: Kako-hen",
@@ -7438,6 +7417,27 @@
     "poster": "https://cdn.myanimelist.net/images/anime/3/81250l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 8299167,
+    "ru": "Ранчо Даттонов",
+    "en": "Dutton Ranch",
+    "year": "2026",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 9.3,
+    "votes": 253,
+    "popularity": 146.39,
+    "genres": [
+      "вестерн",
+      "драма"
+    ],
+    "overview": "Ранчо Даттонов - дом Бет и Рипа, стало символом той жизни, о которой они мечтали, за которую отчаянно боролись и ради которой едва не пожертвовали всем. Они всей душой привязались к своей земле площадью 7000 акров, превратив её в место, которое готовы защищать любой ценой. Даже в самые тяжёлые времена Бет и Рип делают всё возможное, чтобы выстоять, сохранить своё ранчо и обеспечить достойное будущее себе и своему приёмному сыну Картеру.",
+    "poster": "https://image.tmdb.org/t/p/w342/mmxsx98NnY56CvataUqM1ktt14O.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/wh5agdl3b7fqC7mSjsCkHx4fMAs.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 299167
   },
   {
     "id": 196950,

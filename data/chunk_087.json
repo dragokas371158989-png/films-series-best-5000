@@ -1,5 +1,207 @@
 [
   {
+    "id": "1047041",
+    "ru": "Детектив Конан 26: Железная подводная лодка",
+    "en": "名探偵コナン 黒鉄の魚影（サブマリン）",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 141,
+    "popularity": 6.08,
+    "genres": [
+      "мультфильм",
+      "боевик",
+      "криминал",
+      "детектив"
+    ],
+    "overview": "На этот раз место действия — территориальные воды острова Хатидзё, Токио. Инженеры со всего мира собрались для полномасштабного запуска «Pacific Buoy», морского объекта, соединяющего камеры слежения полиции всего мира. Там тестировалась некая «новая технология», применявшая систему распознавания лиц. Тем временем Конану, который посещает Хатидзё с Юными Сыщиками по приглашению Соноко для наблюдения за китами, звонит Окия Субару и сообщает, что сотрудник Европола был убит в Германии Джином, членом Черной Организации. Обеспокоенный, Конан пробирается в полицейский корабль, на котором находятся Курода Хёэ и полицейские, которые направляются для охраны объекта. Идет подготовка к полной активации всей системы, но Черная Организация похищает женщину-инженера! В их руки попадает имевшаяся у нее флешка с особой информацией...\r Гул винтов в океане. Темная тень подкрадывается к Хайбаре Ай...",
+    "poster": "https://image.tmdb.org/t/p/w342/688nvrDbpYsQOXik3KB6t5eVWjO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pfHvwpKwXeQ7GKD91YFFFBtLLJc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_61592",
+    "ru": "Honor Of Kings: Destiny",
+    "en": "Wangzhe Rongyao: Rongyao Zhi Zhang - Mingyun Pian",
+    "year": 2025,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 140,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Приключения",
+      "Adventure",
+      "Фэнтези",
+      "Fantasy",
+      "Историческое",
+      "Historical",
+      "Боевые искусства",
+      "Martial Arts"
+    ],
+    "overview": "Kain and Luna were born into the Moon Clan of Sea City, siblings who relied on each other since childhood. During Luna's coronation ceremony as clan leader, a powerful force belonging to the family curse erupted, killing everyone present except Kain. Kain was thus hunted by the Judges and forced to flee Sea City. On his escape, he met the mercenary Kuang Tie and together they journey to the Divine Realm to challenge the gods...\n\n(Source: Tencent, translated)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1754/149498l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "tv_213713",
+    "ru": "Бесполезная",
+    "en": "Faltu",
+    "year": 2022,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 140,
+    "popularity": 5.97,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Среди засушливого ландшафта Раджастана молодая женщина с мечтательным взглядом пытается доказать свою значимость.",
+    "poster": "https://image.tmdb.org/t/p/w342/lgyFuoXs7GvKJN0mNm7z7OMOFuZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/t2rAdgjSh0WYbXzdOB5zTDqzdCI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_1818",
+    "ru": "Лексс",
+    "en": "Lexx",
+    "year": 1997,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 140,
+    "popularity": 15.29,
+    "genres": [
+      "комедия",
+      "драма",
+      "НФ и Фэнтези"
+    ],
+    "overview": "Космический корабль «Лексс» — «самое могущественное оружие разрушения в двух вселенных». Это огромный живой и разумный звездолёт, являющийся по своей сути насекомым: он очень похож на стрекозу как внешне, так и по физиологии (он боится паутин и пауков, если они имеют космические размеры). Он предназначен для разрушения планет одним мощным выстрелом, чтобы затем проглотить биологические остатки и использовать их как топливо. «Лексс» изначально был выращен для служения Его Божественной Тени, но позднее послужил для уничтожения учреждённого им «Священного Порядка».",
+    "poster": "https://image.tmdb.org/t/p/w342/oSDZ9YpDvAbXxzbC3YdknfyBR3W.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6HCTF1qRwysB7Q5pJjPTTTY0spr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "10275",
+    "ru": "Храм Шаолинь",
+    "en": "少林寺",
+    "year": 1982,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 140,
+    "popularity": 5.45,
+    "genres": [
+      "боевик"
+    ],
+    "overview": "Действие происходит в Китае в VII веке н. э. Второй император династии Тан Ли Шиминь был предан одним из своих генералов, который провозгласил себя императором Восточной столицы. Кроме того, генерал убивает одного из рабов, а сын этого раба — юноша Цзи Юань (Джет Ли) — убегает и находит приют у монахов храма Шаолиня. Под руководством монахов Цзи Юань изучает боевые искусства, желая отомстить убийце своего отца.",
+    "poster": "https://image.tmdb.org/t/p/w342/rkIS7I1ozxdAoVTmoLIOgXCSZfv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iAzySCUzm0GOEMM6MgM3WzvJ246.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "15981",
+    "ru": "Мёртвые листья: Звёздная тюряга",
+    "en": "デッド　リーブス",
+    "year": 2004,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 139,
+    "popularity": 1.32,
+    "genres": [
+      "мультфильм",
+      "боевик",
+      "фантастика",
+      "Аниме"
+    ],
+    "overview": "Шизоиды Панди и Ретро с отшибленной памятью очухиваются в центре Токио и устраивают беспредел — им нужна еда, шмотки и средство передвижения, и они не остановятся ни перед чем!  Отмороженную парочку все-таки ловят и отправляют отбывать сроки в знаменитую лунную тюрьму строгого режима, которую, по слухам, покинуть можно только в виде трупа. Тут-то и начинается реальный дурдом!",
+    "poster": "https://image.tmdb.org/t/p/w342/793WvrgqnX6Xvz7XNAXmKGLVfiC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2VtpkzTFLJHdGQK4TM7cwXztA6i.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_3562",
+    "ru": "Новая звезда",
+    "en": "NOVA",
+    "year": 1974,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 139,
+    "popularity": 62.91,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "Телесериал «Nova» рассказывает о научных открытиях и исторических событиях. Включает в себя интервью с учёными — математиками, физиками, астрономами, историками, археологами.",
+    "poster": "https://image.tmdb.org/t/p/w342/giUBXYnDAaJgNqA6iE3BMVE2EHp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/euEHCRdfV1ZTDgfhZm1XKHVkZ2K.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_2443",
+    "ru": "Бак Роджерс в 25 веке",
+    "en": "Buck Rogers in the 25th Century",
+    "year": 1979,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 138,
+    "popularity": 13.41,
+    "genres": [
+      "Боевик и Приключения",
+      "НФ и Фэнтези"
+    ],
+    "overview": "Бак Роджерс — пилот ВВС США из XX века — попадает в аварию во время полёта на космическом челноке. Его тело оказывается замороженным на пятьсот лет. В 2491 году люди будущего обнаруживают челнок Роджерса и возвращают пилота к жизни.",
+    "poster": "https://image.tmdb.org/t/p/w342/1SgcheHtEcacQxRFKpIuP0jYw6u.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9hjHVwtHFt03Y6kS9yFXoBI4WK0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 449927,
+    "ru": "В погоне за драконами",
+    "en": "追龍",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 138,
+    "popularity": 2.4,
+    "genres": [
+      "боевик",
+      "криминал",
+      "триллер"
+    ],
+    "overview": "1963 год. Один колхозник решает бежать из коммунистического Китая в коррумпированный и продажный Гонконг, чтобы навсегда променять работу в поле на профессию ещё одного уличного головореза. Ради светлого будущего и куска хлеба упорный нелегал соглашается вступить в войну между преступными кланами.",
+    "poster": "https://image.tmdb.org/t/p/w342/tZvXCBLEtiMj3UZ5SI0Hau13DET.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6WFWXiwe9rpaXsiuTtM351B2Il9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_93579",
+    "ru": "Regreso a la guaca",
+    "en": "Regreso a la guaca",
+    "year": 2009,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 138,
+    "popularity": 0.62,
+    "genres": [
+      "Боевик и Приключения",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eCeFKkSZVWgIVmGCDCBlpmcVv23.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wEDiwi2v2LchnPCOghsKes6Q1FP.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1108354,
     "ru": "Кали",
     "en": "KALI, L'ange de la Vengeance",
@@ -9540,203 +9742,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/s3K5Tztc7ERzYkZ3hC25x9ekx17.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/btk09Axh7woJBK9diBLqNc0KFXX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_90877",
-    "ru": "Дамы шутят по-черному",
-    "en": "A Black Lady Sketch Show",
-    "year": 2019,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 41,
-    "popularity": 7.12,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Первое скетч-шоу, написанное, поставленное и сыгранное исключительно темнокожими женщинами. Трудно представить, насколько ценный вклад такой шаг вносит в распространение идей дайверсити, чьи постулаты продвигают расовое, культурное и гендерное разнообразие.",
-    "poster": "https://image.tmdb.org/t/p/w342/juMYMNKegUB7XfZ1cXlUIjX4r4q.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uXcPWOgj6RGphspYiIau44obMsJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 40024,
-    "ru": "Мышиная уборка",
-    "en": "Mouse Cleaning",
-    "year": 1948,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 41,
-    "popularity": 1.71,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Мамочка Два Тапочка угрожает выгнать Тома из дома, если он устроит беспорядок. Джерри видит возможность избавиться от своего кошачьего врага.",
-    "poster": "https://image.tmdb.org/t/p/w342/hXMoXr0gRsZAXfPqwmNUICYhWbZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pH9mbNteY14Bcf2qVRZYcV4AF7P.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 87611,
-    "ru": "Будто мы никогда не встречались",
-    "en": "Si no t'hagués conegut",
-    "year": 2018,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 41,
-    "popularity": 1.26,
-    "genres": [
-      "драма",
-      "НФ и Фэнтези",
-      "детектив"
-    ],
-    "overview": "Мужчина, потерявший семью в трагическом инциденте случайно понимает, что может путешествовать по альтернативным вселенным, и решает найти мир, в котором его семью можно спасти.",
-    "poster": "https://image.tmdb.org/t/p/w342/e2DED8LcLiEdeuaA7AnMCvDFPPO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vUFhv3AtUq42O90OdyxL9Jz0BSK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 67159,
-    "ru": "Дональд Дак: Верхом на ветке",
-    "en": "Out on a Limb",
-    "year": 1950,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 41,
-    "popularity": 0.33,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Дональд Дак просто обезумел от ужаса, когда, решив слегка подрезать крону дереву-дому бурундуков, сам оказался «Верхом на ветке»!",
-    "poster": "https://image.tmdb.org/t/p/w342/e1FUcWDabOsVBkvbxlTLHuxXtoE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jmflJ8G6VbN2Xa7nCghCEIpGOOj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_131366",
-    "ru": "Авантюристы, которые не верят в человечество, спасут мир",
-    "en": "人間不信の冒険者たちが世界を救うようです",
-    "year": 2023,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 5.29,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "НФ и Фэнтези",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "История о четырёх авантюристах, которым не повезло пережить предательство и испытать большие трудности в жизни. Нахлебавшись несчастий вдосталь, они решили объединиться в команду и показать всему миру где раки зимуют!",
-    "poster": "https://image.tmdb.org/t/p/w342/lrF4BomivMX6FHTnwQr6NHfzQUb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7Y5Jnq89taomGJvDqy4VTbzuE0m.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_248951",
-    "ru": "Самый сильный волшебник армии повелителя демонов оказался человеком",
-    "en": "魔王軍最強の魔術師は人間だった",
-    "year": 2024,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 4.58,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "Аниме"
-    ],
-    "overview": "Известный как «сильнейший маг в армии Повелителя Демонов», Айк — демон, способный в одиночку захватывать крепости. Его огромные магические силы, сметающие врагов, делают его настоящим «монстром», внушающим страх как друзьям, так и врагам. Однако он хранит секрет, который не может рассказать другим демонам. «— На самом деле, я человек». Мрачная фэнтезийная история о восходящем демоне, стремящемся к сосуществованию людей и демонов, скрывая при этом свою истинную личность!",
-    "poster": "https://image.tmdb.org/t/p/w342/kCOho8tk5Gz0LB9hACQ8uDs1dTg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iIjfY0Zz6LTn2PTiLEe8baGc48k.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "253987",
-    "ru": "Граница пустоты: Благословение будущего — Дополнительная глава",
-    "en": "劇場版 空の境界 未来福音 extra chorus",
-    "year": 2013,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 0.86,
-    "genres": [
-      "мультфильм",
-      "фантастика",
-      "фэнтези",
-      "драма",
-      "Аниме"
-    ],
-    "overview": "Аниме-адаптация манги Такаши Такеучи, состоящая из трёх коротких историй-дополнений к новелле «Граница пустоты: Благословение будущего». Входит в состав диска с оригинальным фильмом в качестве бонуса.",
-    "poster": "https://image.tmdb.org/t/p/w342/gcY4FbjnBN3C7WpZragedSAjyeM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1CWD8qWGOWPcdmOGDiC1CXGYO8x.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 222288,
-    "ru": "Выхода нет",
-    "en": "No Escape",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 3.34,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Лучшие подруги Лана и Китти находятся в бегах от полиции Великобритании. Они находят убежище на корабле под названием «Блю», который обещает беззаботную жизнь, полную красивых людей, вечеринок и бесконечных пляжей, но этот рай вскоре превращается в кошмар, и пара оказывается вдали от дома в смертельной опасности.",
-    "poster": "https://image.tmdb.org/t/p/w342/bBv2L16yhIaKGZaEUKLIBG8cHli.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cmzNw4BpBPdFNFlxH7Ns7RAYdgs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 104068,
-    "ru": "Мы охотимся вместе",
-    "en": "We Hunt Together",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 1.55,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "Истории двух пар пересекаются в местах совершения жестоких убийств. Сильный, агрессивный, но надломленный Баба попадает в зависимость от хрупкой, утончённой, но крайне опасной психопатки Фредди. Запутанный кровавый след их отношений пытаются распутать детективы Френкс и Мэнди, которые вынуждены работать вместе, хоть и не доверяют друг другу.",
-    "poster": "https://image.tmdb.org/t/p/w342/l8ERSXc9RXiXUNRBasvnmYjl2a7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ob2Tn0ZuJx60qy9PVI2mbc6Jj1Q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 964403,
-    "ru": "Два билета в рай",
-    "en": "Two Tickets to Paradise",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 40,
-    "popularity": 0.54,
-    "genres": [
-      "телевизионный фильм",
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "Ханна и Джош знакомятся друг с другом в парке после того, как их обоих бросили у свадебных алтарей в один и тот же день. После этого их пути загадочным образом пересекаются, когда они оба договариваются отправиться в одиночный медовый месяц и вновь встречаются на другом конце света.",
-    "poster": "https://image.tmdb.org/t/p/w342/q5hbXUl8O2A8PKDCe6bJcKTeiPk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cspLTXWrkY8bUubQnwWES2mAR1V.jpg",
     "source": "tmdb"
   }
 ]

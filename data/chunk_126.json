@@ -1,5 +1,204 @@
 [
   {
+    "id": 1164614,
+    "ru": "We're All Gonna Die",
+    "en": "We're All Gonna Die",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 22,
+    "popularity": 0.46,
+    "genres": [
+      "комедия",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/er7627yHVe1hEHnIHM7HV86EgJw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pnAgUXF4sJmSsBQF3HF5jsKhQ6i.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 576674,
+    "ru": "Фрэнсис Фергюсон",
+    "en": "Frances Ferguson",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 22,
+    "popularity": 0.6,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "История скандала в маленьком городе.",
+    "poster": "https://image.tmdb.org/t/p/w342/7o6Rrp4Y7WuKxn88YM8OZQfKnpl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mBk8i2aLMEqfxmJCSLpq4T0qaLF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 265563,
+    "ru": "Секрет счастья",
+    "en": "El misterio de la felicidad",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 22,
+    "popularity": 0.41,
+    "genres": [
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Caнтьяго и Эухенио больше, чем друзья, в течение всей жизни они — деловые партнёры. Они понимают друг друга без слов, они заботятся друг о друге, они необходимы друг другу. Однажды Эухенио исчезает, не оставив никаких следов и улик. Caнтьяго, конечно, сразу же замечает пропажу, но осознаёт, что случилось нечто необратимое только тогда, когда его в этом убеждает жена Эухенио, Лаура. Caнтьяго и Лаура отправляются на поиски Эухенио, и в ходе этого расследования они обнаруживают, что оба предпочитают остаться вместе в этом движении, а не выяснить, где обитает исчезнувший супруг и партнер.",
+    "poster": "https://image.tmdb.org/t/p/w342/bMj4LdKWwk4YuWV83PuGvqQU9dT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hxy7PS9RLXsnLH2vZmaxLStXpcA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 54912,
+    "ru": "There's No Time for Love, Charlie Brown",
+    "en": "There's No Time for Love, Charlie Brown",
+    "year": 1973,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 22,
+    "popularity": 0.46,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "семейный",
+      "мелодрама",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gpR3FPqF4lqvlTJqUQmWo125yI8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rAANw3K7FwHcIIlX6oLMSqo4zUE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 273632,
+    "ru": "La petite reine",
+    "en": "La petite reine",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 22,
+    "popularity": 0.41,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/sVgljvNJtNujbKPKYSrE1Hz6fo6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qZ5iMuzByJnP1708Deo0BrxrIlo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "227326",
+    "ru": "FIGHT!!",
+    "en": "FIGHT!!",
+    "year": 1993,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.1,
+    "votes": 21,
+    "popularity": 0.75,
+    "genres": [
+      "мультфильм",
+      "боевик",
+      "фэнтези",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2ctuOltpgm2IXHZ5tbTstFwQ4tT.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1119544,
+    "ru": "Счастливы в Риме",
+    "en": "Rom",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 21,
+    "popularity": 0.44,
+    "genres": [
+      "мелодрама",
+      "комедия",
+      "драма"
+    ],
+    "overview": "Герда и Кристофер планировали насладиться спокойным отпуском, полным воспоминаний и романтики. Однако их идиллия неожиданно нарушается, когда в размеренный отдых врывается давний знакомый, который быстро навязывает свои правила игры.",
+    "poster": "https://image.tmdb.org/t/p/w342/eM4822S2vHaYcIZbNBq53fwuTFx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/co3sIugI7B3stDeaBfZXDWU80BP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1065426,
+    "ru": "मेट्रो... इन दिनों",
+    "en": "मेट्रो... इन दिनों",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 21,
+    "popularity": 1.39,
+    "genres": [
+      "драма",
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/AlmzM8CNm2fRJQW2iA9Ittwv0ig.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8ycWZizMNfYlQE5CdLSbOboNDko.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1184247,
+    "ru": "എബ്രഹാം ഓസ്ലർ",
+    "en": "എബ്രഹാം ഓസ്ലർ",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 21,
+    "popularity": 0.68,
+    "genres": [
+      "триллер",
+      "драма",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eWleIhsdQSwLG00fYD1VfIRPBuN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fO29Ccn3GT3FX3jCzXZNcG8ZqkM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 221912,
+    "ru": "Изнасилованная ангелом 4",
+    "en": "強姦終極篇之最後羔羊",
+    "year": 1999,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 21,
+    "popularity": 2.91,
+    "genres": [
+      "криминал",
+      "комедия",
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "Из тюрьмы сбегают два насильника, которых берет под свое крыло еще один насильник, бывший агент ЦРУ. Троица планирует изнасиловать известную писательницу любовных романов, живущую по соседству, а защищать ее будут ее неказистый бойфренд-полицейский и его новая напарница...",
+    "poster": "https://image.tmdb.org/t/p/w342/c5mn7ejvETjHnazdwWmNQRmxKvO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/p9rAyhIktK1LnLkfVPixGBpV6Ya.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 418109,
     "ru": "Скифский агнец",
     "en": "羊の木",
@@ -9611,216 +9810,6 @@
     "overview": "Экранизация одноименной книги британского журналиста Джона Ронсона, посвященной людям с паранормальными способностями, состоящим на службе в Армии США. Главный герой, офицер спецподразделения Лин Кэссиди, выполняет сверхсекретное задание, о котором ничего неизвестно даже армии США. Газетный репортер Боб Уилтон следует по пятам за Лином, пытаясь разузнать о его миссии...",
     "poster": "https://image.tmdb.org/t/p/w342/wTUSxuKSB15ylXWmBU0mU3FoYaw.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/lAJpYAepH7bic2TmE7ZP8q404P4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "216015",
-    "ru": "Пятьдесят оттенков серого",
-    "en": "Fifty Shades of Grey",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 12395,
-    "popularity": 29.83,
-    "genres": [
-      "драма",
-      "мелодрама",
-      "триллер"
-    ],
-    "overview": "В центре сюжета сложные взаимоотношения выпускницы колледжа Анастейши Стил и молодого бизнесмена Кристиана Грея, который убеждает девушку подписать с ним контракт, позволяющий ему фактически контролировать всю ее жизнь. Условия контракта подразумевают также подписание соглашения о неразглашении, в результате чего Грей фактически может делать с Анастейшей все, что ему заблагорассудится.",
-    "poster": "https://image.tmdb.org/t/p/w342/tZTzJm9ZpOL61ZdqSQSrTadWFGG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7IGKrY1f1KfwMipx9wZC4NRgIdF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_53300",
-    "ru": "A Girl & Her Guard Dog",
-    "en": "Ojou to Banken-kun",
-    "year": 2023,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.7,
-    "votes": 32321,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Романтика",
-      "Romance",
-      "Организованная преступность",
-      "Organized Crime",
-      "Школа",
-      "School",
-      "Сёдзё",
-      "Shoujo"
-    ],
-    "overview": "When Isaku Senagaki was five years old, the death of her parents left her to be raised by her yakuza boss grandfather, Tasuke. Now preparing to enter high school, Isaku is determined to start fresh with an honest attempt at having a normal high school experience. All she wants is to be able to make friends and find love without being defined by her connection to the yakuza.\n\nBut Isaku's dreams are thwarted when her overprotective caretaker, 26-year-old Keiya Utou, takes it upon himself to enroll in Isaku's school by bribing the school administration. While Isaku yearns for a reciprocated love, she is trapped in a one-sided infatuation with Keiya, who only sees her as the boss's granddaughter he helped raise. Her longing for a normal life becomes a constant battle, and breaking free from her heart's grip is far more challenging than it sounds, as Keiya's overprotectiveness and disregard for her boundaries make it almost impossible to move on.\n\n[Written by MAL Rewrite]",
-    "poster": "https://cdn.myanimelist.net/images/anime/1016/139805l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "37821",
-    "ru": "Киллеры",
-    "en": "Killers",
-    "year": 2010,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 2314,
-    "popularity": 3.98,
-    "genres": [
-      "боевик",
-      "комедия",
-      "триллер",
-      "мелодрама"
-    ],
-    "overview": "Спенсер был безжалостным наемным убийцей, грозой мирового терроризма и перестал им быть, когда встретил Джен в лифте курортного отеля… Спустя три года они — обычная идеальная молодая пара, проживающая в американском пригороде. Но их безоблачному счастью приходит конец, когда за голову Спенсера объявляют награду в $5 млн, и все глубоко законспирированные профессионалы-киллеры начинают за ним охоту.",
-    "poster": "https://image.tmdb.org/t/p/w342/4g053xrUJJEMpSxrrFV9onGlQtE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hJ4xtZnejzfneeRqv2NaTzxJ1jp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "146198",
-    "ru": "Три девятки",
-    "en": "Triple 9",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 2279,
-    "popularity": 3.99,
-    "genres": [
-      "боевик",
-      "криминал",
-      "приключения",
-      "триллер"
-    ],
-    "overview": "«999» - код опасности американских полицейских, который подразумевает намеренное убийство стража порядка. Сюжет разворачивается вокруг компании коррумпированных копов, решившихся на крупное ограбление. Но ради того, чтобы выйти сухими из воды, им необходимо убить кого-то из своих.",
-    "poster": "https://image.tmdb.org/t/p/w342/eTILtbs17UnAyNOw5K0VaikLeg4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kVchIyTFulZtFJmxq8e0SPvc3tH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "228066",
-    "ru": "Виктор Франкенштейн",
-    "en": "Victor Frankenstein",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 2278,
-    "popularity": 3.63,
-    "genres": [
-      "драма",
-      "фантастика",
-      "триллер"
-    ],
-    "overview": "Новый взгляд на фантастическую историю Виктора Франкенштейна, на этот раз — с точки зрения его помощника Игоря. Мы узнаем о темных тайнах юного помощника Франкенштейна и об их искупительной дружбе, а также станем свидетелями превращения творения доктора в человека и легенду, каким мы знаем монстра сейчас.",
-    "poster": "https://image.tmdb.org/t/p/w342/sWff8RSeitDUOoHSRPyaKZJFu9T.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/byMyHJvhiIMKEYqO4I3UhIPEm7G.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "8452",
-    "ru": "Шестой день",
-    "en": "The 6th Day",
-    "year": 2000,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 2269,
-    "popularity": 3.74,
-    "genres": [
-      "боевик",
-      "фантастика",
-      "триллер"
-    ],
-    "overview": "В начале третьего тысячелетия самым суровым законом стал «закон Шестого дня». Он запрещал клонирование людей и создание искусственных копий человека. Но огромная подпольная империя вопреки запрету выращивает человечество нового будущего, сотни управляемых теней.Налаженная машина преступления не давала сбоев, пока в ее совершенный механизм не вмешалась случайность: пилот вертолета Адам Гибсон неожиданно приоткрыл непроницаемую завесу заговора. Теперь он — последний рубеж обороны, отделяющий цивилизацию от общества зомби.",
-    "poster": "https://image.tmdb.org/t/p/w342/7mNm67CfL0ExVEllcrfRR4asQVg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pf5xJlqKLPSCXnyn3KlbAuxcklZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 23488,
-    "ru": "Дориан Грей",
-    "en": "Dorian Gray",
-    "year": 2009,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 2238,
-    "popularity": 2.97,
-    "genres": [
-      "фэнтези",
-      "драма",
-      "триллер"
-    ],
-    "overview": "Молодой и невероятно красивый Дориан Грей приезжает в Лондон и попадает под влияние искателя приключений лорда Уоттона. Он внушил юноше, что секрет успеха и счастья Дориана — в его красоте, ведь она поможет получить все удовольствия мира. Дориан заключает сделку с Дьяволом. Юноша заказывает свой портрет, и теперь вся грязь его жизни, полной распутства и преступных страстей, будет пачкать и портить полотно, его же собственное лицо останется вечно юным и прекрасным.",
-    "poster": "https://image.tmdb.org/t/p/w342/qPyp6w3kovpTzwCJ1y5hh9y9V6L.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ij9ai1FDd2ErfRJ8PJrAWakzVEo.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_36577",
-    "ru": "ダンジョン飯",
-    "en": "Dungeon Meshi PVs",
-    "year": 2017,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.0,
-    "votes": 2174,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Фэнтези",
-      "Fantasy",
-      "Еда",
-      "Gourmet"
-    ],
-    "overview": "Promotional videos with original animation for Dungeon Meshi.\n\nThe first episode is a stop-motion short in honor of the 5th tankoubon going on sale. It features Senshi's hands trying to prepare a walking mushroom. It is the same walking mushroom as shown in the manga's 1st volume in the \"Monster Tidbits\" bonus chapter.\n\nThe second episode is a traditional animated short in honor of the 8th tankoubon going on sale.",
-    "poster": "https://cdn.myanimelist.net/images/anime/12/88396l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "520663",
-    "ru": "Женщина в окне",
-    "en": "The Woman in the Window",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 2141,
-    "popularity": 2.35,
-    "genres": [
-      "криминал",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "Женщина, страдающая агорафобией, начинает шпионить за своими новыми соседями и однажды становится свидетельницей акта насилия.",
-    "poster": "https://image.tmdb.org/t/p/w342/uvDW7ljuXSZb3tISieETXh45mVq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gUttUEqsrvaMlK5oL5TSQ54iE96.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "5549",
-    "ru": "Робокоп 2",
-    "en": "RoboCop 2",
-    "year": 1990,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 2127,
-    "popularity": 3.36,
-    "genres": [
-      "боевик",
-      "фантастика",
-      "триллер"
-    ],
-    "overview": "Наркодельцы стремятся захватить власть в городе, подчинить органы управления и поработить жителей. Робот-полицейский - единственная надежда в борьбе с распоясавшимися негодяями. Но бандиты, зная о его существовании, создают свою машину - киборга, при помощи которого они надеются избавиться от кибернетического блюстителя порядка, и установить тотальный контроль...",
-    "poster": "https://image.tmdb.org/t/p/w342/mvK67goH99BcnfBl1UpO0KUzZ07.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cT0YCYCtAQC8wi56VWK1JRGgk3a.jpg",
     "source": "tmdb"
   }
 ]

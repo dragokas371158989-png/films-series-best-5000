@@ -1,5 +1,192 @@
 [
   {
+    "id": 1652307,
+    "ru": "AAA Rey De Reyes 2026",
+    "en": "AAA Rey De Reyes 2026",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "боевик",
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/l3sfxeKQ23j122S6aP4SgUZ9EMf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7DVlZOCET0ElUN7AlCNe4jbsuEn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1629038,
+    "ru": "Mallory's Ghost",
+    "en": "Mallory's Ghost",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kxGW55aWe5bUnu8r2OzZA4DpH2k.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s8Z4McrorG9gea6dFaESv56OLpj.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1568180,
+    "ru": "Mohammed & Paul – Once Upon a Time in Tangier",
+    "en": "Mohammed & Paul – Once Upon a Time in Tangier",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uUMjLJ7F9yOzNVQA51Gl1bBk8h6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/piZeU37GGuL9l2qRNKrkK2JDW1Y.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1608230,
+    "ru": "Broken Bonds",
+    "en": "Broken Bonds",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "триллер",
+      "детектив",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kXdBxAK9V2Qu23AP0h0ph1jDJtB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/95jkrY9RC0CaDyYDGNwv1ETd9EX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1617152,
+    "ru": "London Ghost",
+    "en": "London Ghost",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/daAFV0fTNR5xw22eD2W2UTkzcD6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/51qXQiiculnOZFvlyFTcyTd4TR8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1610776,
+    "ru": "Fragment of sometime, somewhere",
+    "en": "Fragment of sometime, somewhere",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/w8BeOiBJNWz9tuNHgUGNkqw4zxG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iKwPdv6s6Z3fFarqyXJ4RtnRnAD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1026067,
+    "ru": "The Ghost's Guide to Adventuring",
+    "en": "The Ghost's Guide to Adventuring",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "драма",
+      "приключения",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/f8fJ9IK15ZnTp7OuUqlQQA6hGW5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vxtIJLHXRdCtfvbPOrTbq90P98a.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1395468,
+    "ru": "징크스 몽타주",
+    "en": "징크스 몽타주",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yWPh4mEUKsJufT13vgadjeRhApY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/d87rfeLb0TIVmvj3hUz2TC9afF6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1284193,
+    "ru": "The Tales of the Bound & Restrained",
+    "en": "The Tales of the Bound & Restrained",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nHpVoHtdtHDM8MtQodDXGClmksL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kfcOTdAJfKYDxXbynWseR7y9fam.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1295409,
+    "ru": "原神：烬中歌",
+    "en": "原神：烬中歌",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.47,
+    "genres": [
+      "мультфильм",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dv1HZoldymFsv5e7VnJnvL4iRkg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eEeKA8UzXhl8glGJJfq7szXKoID.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1140100,
     "ru": "Over The Red River",
     "en": "Over The Red River",
@@ -9027,191 +9214,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/x549RfO7SFeqnJzKX6pD1nRZlEe.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/8Tb3OyaqJUzock6sLAMFaB0pIVG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 311248,
-    "ru": "The Apprentice: Unfinished Business",
-    "en": "The Apprentice: Unfinished Business",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "Реалити-шоу",
-      "Ток-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/AfXfSFPGdAo1HO2MQ4qDnAQW162.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sF1gOSWgCC23zH0pmRYTNz8xCT0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 307735,
-    "ru": "今日もカレーですか？",
-    "en": "今日もカレーですか？",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aNZh0zAfSHPf9xvW84VdeUzzSC3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mOzAMR82BVYZWJvyqSnDGZiNVLY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 299740,
-    "ru": "无间罪",
-    "en": "无间罪",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pux09h4t8wtXsGDekNbz30U81en.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6Dtbtk76dIF3uMLHcpaRRXmVr4n.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 306574,
-    "ru": "月拢雁西归",
-    "en": "月拢雁西归",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yVV7DA7sRVn8m3D33fD6NXBOGyP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lBnFREduZ8M6Tt8Z4ixeyXiotTn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 303597,
-    "ru": "Ruby",
-    "en": "Ruby",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zZFhjLOZO5ON3JGNe2vZyXKy133.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5v5q8VIYuHRQUKjkas4BLv3rtAP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 322431,
-    "ru": "Maps of Meaning",
-    "en": "Maps of Meaning",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "Ток-шоу",
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wnr3Jx0mBctnHiydasznMeElCxN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lNrKdMFE3dV18pGKfRRFibwGeUc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 301421,
-    "ru": "接住流星的人",
-    "en": "接住流星的人",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1KKuAOF52a7eWaqEYaDl116vttt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rVbG8Yu1OqPNrLRd4JJC7BKqCGr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 302752,
-    "ru": "Chaalbaaz",
-    "en": "Chaalbaaz",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "драма",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bxzJP7vuRfr7a27TA7SP1z27Bmb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/en5LaKmNtUTgTpY47msaeYanJH3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 302275,
-    "ru": "热血年代",
-    "en": "热血年代",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/A8E91bFt6vKpeEpoZWifRRjEFLt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pnBbQ40WEWKkZRa8VwGksfaMEea.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1653105,
-    "ru": "Lightbulb",
-    "en": "Lightbulb",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.41,
-    "genres": [
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7FQVLBfvKovrpfYoeeDgXeQ2sQe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lm0FjVm0jGyYIQ7pGquYHaRl0zv.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,215 @@
 [
   {
+    "id": "216015",
+    "ru": "Пятьдесят оттенков серого",
+    "en": "Fifty Shades of Grey",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 12395,
+    "popularity": 29.83,
+    "genres": [
+      "драма",
+      "мелодрама",
+      "триллер"
+    ],
+    "overview": "В центре сюжета сложные взаимоотношения выпускницы колледжа Анастейши Стил и молодого бизнесмена Кристиана Грея, который убеждает девушку подписать с ним контракт, позволяющий ему фактически контролировать всю ее жизнь. Условия контракта подразумевают также подписание соглашения о неразглашении, в результате чего Грей фактически может делать с Анастейшей все, что ему заблагорассудится.",
+    "poster": "https://image.tmdb.org/t/p/w342/tZTzJm9ZpOL61ZdqSQSrTadWFGG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7IGKrY1f1KfwMipx9wZC4NRgIdF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_53300",
+    "ru": "A Girl & Her Guard Dog",
+    "en": "Ojou to Banken-kun",
+    "year": 2023,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.7,
+    "votes": 32321,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Романтика",
+      "Romance",
+      "Организованная преступность",
+      "Organized Crime",
+      "Школа",
+      "School",
+      "Сёдзё",
+      "Shoujo"
+    ],
+    "overview": "When Isaku Senagaki was five years old, the death of her parents left her to be raised by her yakuza boss grandfather, Tasuke. Now preparing to enter high school, Isaku is determined to start fresh with an honest attempt at having a normal high school experience. All she wants is to be able to make friends and find love without being defined by her connection to the yakuza.\n\nBut Isaku's dreams are thwarted when her overprotective caretaker, 26-year-old Keiya Utou, takes it upon himself to enroll in Isaku's school by bribing the school administration. While Isaku yearns for a reciprocated love, she is trapped in a one-sided infatuation with Keiya, who only sees her as the boss's granddaughter he helped raise. Her longing for a normal life becomes a constant battle, and breaking free from her heart's grip is far more challenging than it sounds, as Keiya's overprotectiveness and disregard for her boundaries make it almost impossible to move on.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1016/139805l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "37821",
+    "ru": "Киллеры",
+    "en": "Killers",
+    "year": 2010,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 2314,
+    "popularity": 3.98,
+    "genres": [
+      "боевик",
+      "комедия",
+      "триллер",
+      "мелодрама"
+    ],
+    "overview": "Спенсер был безжалостным наемным убийцей, грозой мирового терроризма и перестал им быть, когда встретил Джен в лифте курортного отеля… Спустя три года они — обычная идеальная молодая пара, проживающая в американском пригороде. Но их безоблачному счастью приходит конец, когда за голову Спенсера объявляют награду в $5 млн, и все глубоко законспирированные профессионалы-киллеры начинают за ним охоту.",
+    "poster": "https://image.tmdb.org/t/p/w342/4g053xrUJJEMpSxrrFV9onGlQtE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hJ4xtZnejzfneeRqv2NaTzxJ1jp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "146198",
+    "ru": "Три девятки",
+    "en": "Triple 9",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 2279,
+    "popularity": 3.99,
+    "genres": [
+      "боевик",
+      "криминал",
+      "приключения",
+      "триллер"
+    ],
+    "overview": "«999» - код опасности американских полицейских, который подразумевает намеренное убийство стража порядка. Сюжет разворачивается вокруг компании коррумпированных копов, решившихся на крупное ограбление. Но ради того, чтобы выйти сухими из воды, им необходимо убить кого-то из своих.",
+    "poster": "https://image.tmdb.org/t/p/w342/eTILtbs17UnAyNOw5K0VaikLeg4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kVchIyTFulZtFJmxq8e0SPvc3tH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "228066",
+    "ru": "Виктор Франкенштейн",
+    "en": "Victor Frankenstein",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 2278,
+    "popularity": 3.63,
+    "genres": [
+      "драма",
+      "фантастика",
+      "триллер"
+    ],
+    "overview": "Новый взгляд на фантастическую историю Виктора Франкенштейна, на этот раз — с точки зрения его помощника Игоря. Мы узнаем о темных тайнах юного помощника Франкенштейна и об их искупительной дружбе, а также станем свидетелями превращения творения доктора в человека и легенду, каким мы знаем монстра сейчас.",
+    "poster": "https://image.tmdb.org/t/p/w342/sWff8RSeitDUOoHSRPyaKZJFu9T.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/byMyHJvhiIMKEYqO4I3UhIPEm7G.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "8452",
+    "ru": "Шестой день",
+    "en": "The 6th Day",
+    "year": 2000,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 2269,
+    "popularity": 3.74,
+    "genres": [
+      "боевик",
+      "фантастика",
+      "триллер"
+    ],
+    "overview": "В начале третьего тысячелетия самым суровым законом стал «закон Шестого дня». Он запрещал клонирование людей и создание искусственных копий человека. Но огромная подпольная империя вопреки запрету выращивает человечество нового будущего, сотни управляемых теней.Налаженная машина преступления не давала сбоев, пока в ее совершенный механизм не вмешалась случайность: пилот вертолета Адам Гибсон неожиданно приоткрыл непроницаемую завесу заговора. Теперь он — последний рубеж обороны, отделяющий цивилизацию от общества зомби.",
+    "poster": "https://image.tmdb.org/t/p/w342/7mNm67CfL0ExVEllcrfRR4asQVg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pf5xJlqKLPSCXnyn3KlbAuxcklZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 23488,
+    "ru": "Дориан Грей",
+    "en": "Dorian Gray",
+    "year": 2009,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 2238,
+    "popularity": 2.97,
+    "genres": [
+      "фэнтези",
+      "драма",
+      "триллер"
+    ],
+    "overview": "Молодой и невероятно красивый Дориан Грей приезжает в Лондон и попадает под влияние искателя приключений лорда Уоттона. Он внушил юноше, что секрет успеха и счастья Дориана — в его красоте, ведь она поможет получить все удовольствия мира. Дориан заключает сделку с Дьяволом. Юноша заказывает свой портрет, и теперь вся грязь его жизни, полной распутства и преступных страстей, будет пачкать и портить полотно, его же собственное лицо останется вечно юным и прекрасным.",
+    "poster": "https://image.tmdb.org/t/p/w342/qPyp6w3kovpTzwCJ1y5hh9y9V6L.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ij9ai1FDd2ErfRJ8PJrAWakzVEo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_36577",
+    "ru": "ダンジョン飯",
+    "en": "Dungeon Meshi PVs",
+    "year": 2017,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.0,
+    "votes": 2174,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Фэнтези",
+      "Fantasy",
+      "Еда",
+      "Gourmet"
+    ],
+    "overview": "Promotional videos with original animation for Dungeon Meshi.\n\nThe first episode is a stop-motion short in honor of the 5th tankoubon going on sale. It features Senshi's hands trying to prepare a walking mushroom. It is the same walking mushroom as shown in the manga's 1st volume in the \"Monster Tidbits\" bonus chapter.\n\nThe second episode is a traditional animated short in honor of the 8th tankoubon going on sale.",
+    "poster": "https://cdn.myanimelist.net/images/anime/12/88396l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "520663",
+    "ru": "Женщина в окне",
+    "en": "The Woman in the Window",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 2141,
+    "popularity": 2.35,
+    "genres": [
+      "криминал",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "Женщина, страдающая агорафобией, начинает шпионить за своими новыми соседями и однажды становится свидетельницей акта насилия.",
+    "poster": "https://image.tmdb.org/t/p/w342/uvDW7ljuXSZb3tISieETXh45mVq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gUttUEqsrvaMlK5oL5TSQ54iE96.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "5549",
+    "ru": "Робокоп 2",
+    "en": "RoboCop 2",
+    "year": 1990,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.0,
+    "votes": 2127,
+    "popularity": 3.36,
+    "genres": [
+      "боевик",
+      "фантастика",
+      "триллер"
+    ],
+    "overview": "Наркодельцы стремятся захватить власть в городе, подчинить органы управления и поработить жителей. Робот-полицейский - единственная надежда в борьбе с распоясавшимися негодяями. Но бандиты, зная о его существовании, создают свою машину - киборга, при помощи которого они надеются избавиться от кибернетического блюстителя порядка, и установить тотальный контроль...",
+    "poster": "https://image.tmdb.org/t/p/w342/mvK67goH99BcnfBl1UpO0KUzZ07.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cT0YCYCtAQC8wi56VWK1JRGgk3a.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "579",
     "ru": "Челюсти 2",
     "en": "Jaws 2",
@@ -9674,199 +9884,6 @@
     "overview": "После ограбления банка команда профессиональных воров оказывается обманутой и решает выполнить еще более сложную миссию: вернуть похищенные деньги.",
     "poster": "https://image.tmdb.org/t/p/w342/6ke8pycPTpO8aFqIos2r3HkbDmC.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/5P0FeTl1mO65Xa5xjTIG6Iqdls0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 732684,
-    "ru": "Либерея: Охотники за сокровищами",
-    "en": "Либерея: Охотники за сокровищами",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 80,
-    "popularity": 0.84,
-    "genres": [
-      "боевик",
-      "приключения"
-    ],
-    "overview": "При строительстве столичного метро рабочие обнаруживают драгоценный оклад, который доказывает — легендарная Библиотека Ивана Грозного существует! Но находка оказывается забыта на долгие годы, и уже в наше время попадает в руки ни о чем не подозревающего Ильи. Теперь его жизнь в опасности, ведь за старинным артефактом начинают охоту могущественные силы! Парень вынужден объединиться со странным незнакомцем, который утверждает, что оклад — это ключ к обнаружению Библиотеки. Помочь им в поисках и разгадать древние шифры берется красотка-филолог Арина. Теперь, чтобы обрести новые ключи-подсказки и приблизиться к разгадке, трио авантюристов нужно побывать в затерянных и опасных местах, разбросанных по всей России: от Вологды до Нарьян-Мара, на суше, под водой и даже в тайных подземельях Кремля.",
-    "poster": "https://image.tmdb.org/t/p/w342/4fTHk6JD9xQExgVhhgqYQzpg3Nv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/e3BodMSt25yP2GkPqJh4wmxTVNs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 388191,
-    "ru": "Мифика: Стальная корона",
-    "en": "Mythica: The Iron Crown",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 80,
-    "popularity": 0.68,
-    "genres": [
-      "боевик",
-      "приключения",
-      "фэнтези"
-    ],
-    "overview": "Главная героиня — молодая волшебница Марек. Когда-то она была несчастной рабыней, чья жизнь не сулила ничего хорошего и позитивного. Однако, все в судьбе героини коренным образом изменилось, когда обнаружились ее сверхъестественные способности некроманта. С этого момента начинается непростой путь постижения ею тайных навыков, сил и обрядов…",
-    "poster": "https://image.tmdb.org/t/p/w342/3gdDDA1rD9sDQzZJBMJy4xePwhy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uS9l3dVVJknIgJHFyW7jbTiaequ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 949429,
-    "ru": "ผจญภัยล่าขุมทรัพย์หมื่นลี้",
-    "en": "ผจญภัยล่าขุมทรัพย์หมื่นลี้",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 79,
-    "popularity": 0.68,
-    "genres": [
-      "мелодрама",
-      "комедия",
-      "приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/w0Fao59IOjgfA9a1BFHG5nECGJg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mOQV573Tr0WxI2VVOLKwtfaRGZH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 299579,
-    "ru": "Чудо Рождества",
-    "en": "Northpole",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 79,
-    "popularity": 2.23,
-    "genres": [
-      "телевизионный фильм",
-      "фэнтези",
-      "семейный"
-    ],
-    "overview": "Волшебный город Санта-Клауса всегда существовал благодаря магической силе рождественских торжеств, доброте и любви, переполняющей сердца. Однако люди стали слишком заняты своими проблемами и перестали праздновать Рождество. Городу Санты грозит исчезновение. Мальчику по имени Кевин нужно сделать все возможное, чтобы возродить дух Рождества и спасти волшебный город Санта-Клауса от исчезновения.",
-    "poster": "https://image.tmdb.org/t/p/w342/1J0eisyWjmaZLXYDszjWbNpnKt9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kqxutpfTc3QjFqZ6IMso54Hxtug.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 259233,
-    "ru": "Проклятие: Начало конца",
-    "en": "呪怨－終わりの始まり－",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 79,
-    "popularity": 1.38,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "Проклятие: Начало конца – это седьмая часть знаменитой франшизы, герои которой на свою беду оказываются в местах, где прежде кто-то трагически погиб. Так, молодая учительница из начальной школы отправляется на дом к своему ученику, который уже в течение недели не появлялся на занятиях. Но оказавшись в доме, где живет мальчик, девушка сталкивается с чередой пугающих мистических событий. Лишь со временем она узнаёт, что в этих стенах 14 лет назад произошло коллективное самоубийство.",
-    "poster": "https://image.tmdb.org/t/p/w342/A2rE32Cm2sdrbJdQQWTO90jUWQA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8v7CBqnCIyaQejMV8rh87NjX5sE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 385390,
-    "ru": "Часом не любовь?",
-    "en": "Love by Chance",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 79,
-    "popularity": 1.08,
-    "genres": [
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "Главная забота матери Клэр тайком найти ей пару.",
-    "poster": "https://image.tmdb.org/t/p/w342/zJgGXJbvRAvmcrSDfPhF2MzzW3j.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xLsHboODdsH6x21WGbDxM9Y0s0w.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 391617,
-    "ru": "Капитан Коблик",
-    "en": "Kóblic",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 78,
-    "popularity": 2.23,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "Между 1976 и 1983 годами военная диктатура, находившаяся у власти в Аргентине, совершила множество преступлений против человечности. Один из способов убийства был особенно ужасен: живых заключенных сбрасывали в море с военных самолетов. Этот метод стал известен как «смертельный полет». Рикардо Дарин и Инма Куэста в роли военного пилота и его возлюбленной, спасающихся от преследований аргентинской диктатуры семидесятых. Дружба и предательство, любовь и смерть… Кто победит в этой схватке?",
-    "poster": "https://image.tmdb.org/t/p/w342/rJkaGsuvPb4LZciIudFeZgXmApu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dKAudJwmkENqL1FZYP9351rItZs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 423893,
-    "ru": "Рождество на память",
-    "en": "A Christmas to Remember",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 78,
-    "popularity": 0.41,
-    "genres": [
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "Телеведущей с непростым характером необходимо сделать перерыв и отдохнуть, для чего она отправляется в небольшой горный городок. По дороге она попадает в автомобильную аварию из-за сильной метели. Когда героиня приходит в себя, обнаруживается, что у нее полнейшая амнезия и ее приютил дружелюбный местный житель.",
-    "poster": "https://image.tmdb.org/t/p/w342/xpOZBdq1bFf6nBSilkfLrtjhNL0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jEXOjVapXCShq5y4bkt36ioYs9c.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 410317,
-    "ru": "Christmas Cookies",
-    "en": "Christmas Cookies",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 78,
-    "popularity": 0.74,
-    "genres": [
-      "телевизионный фильм",
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ut0buWDVWX3xOdFco7ODrmHeVWh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/o1rojxsDw2o90jRa9d4Jy19DG98.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 483435,
-    "ru": "Все о Нине",
-    "en": "All About Nina",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.0,
-    "votes": 77,
-    "popularity": 1.15,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "История о стендап-комике Нине Гельд, чья карьера на взлёте, а вот личная жизнь представляет собой полную катастрофу. Чтобы сбежать от проблематичного бывшего и подготовиться к крайне важному прослушиванию, Нина отправляется в Лос-Анджелес, где встречает Рейфа — и он ставит её жизнь с ног на голову.",
-    "poster": "https://image.tmdb.org/t/p/w342/AsRHf4iFqfcEYxRLbzeHdLiGZN9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qvlToqIqsAY0qcFtGXXK1v2xDFl.jpg",
     "source": "tmdb"
   }
 ]

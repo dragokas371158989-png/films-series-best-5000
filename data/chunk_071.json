@@ -4138,6 +4138,28 @@
     "source": "tmdb"
   },
   {
+    "id": 7994108,
+    "ru": "Мы всем чужие",
+    "en": "All of Us Strangers",
+    "year": "2023",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.39,
+    "votes": 1022,
+    "popularity": 3.12,
+    "genres": [
+      "мелодрама",
+      "драма",
+      "фэнтези"
+    ],
+    "overview": "Однажды вечером сценарист Адам в своей почти пустой многоэтажке в Лондоне случайно сталкивается с загадочным соседом Гарри, который нарушает ритм его повседневной жизни, они  сближаются. В это время Адам возвращается в дом своего детства, где он обнаруживает, что его давно умершие родители живы и того же возраста, что и в день их смерти, более 30 лет назад.",
+    "poster": "https://image.tmdb.org/t/p/w342/5DeYPHaG6hCq1xGQ7z7aszir4Z.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/8yjHiSuSEhzR916LcIecuQ8tETG.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 994108
+  },
+  {
     "id": 318880,
     "ru": "Халк Хоган: Настоящий американец",
     "en": "Hulk Hogan: Real American",
@@ -6685,28 +6707,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/m5UBHbEjQJx3AkRZWRY6A4l4ZDT.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/eRNMOrA6Bigonug3dT1R7aLZQaq.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 7111969,
-    "ru": "Застрял в любви",
-    "en": "Stuck in Love",
-    "year": "2013",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.38,
-    "votes": 2013,
-    "popularity": 2.89,
-    "genres": [
-      "драма",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Сюжет фильма сосредоточен на запутанных отношениях между известным новеллистом Биллом Борджес, его бывшей женой и их детьми — дочерью-студенткой Самантой и сыном-тинейджером.",
-    "poster": "https://image.tmdb.org/t/p/w342/byic4VFVrpPyjDWK54CcsxYWW85.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/so5jtbB00IiW3dKbeI5JTdGNmK2.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 111969
   },
   {
     "id": 1415211,

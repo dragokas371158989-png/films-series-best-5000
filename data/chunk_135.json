@@ -1,5 +1,195 @@
 [
   {
+    "id": 486590,
+    "ru": "Polański, Horowitz. Hometown",
+    "en": "Polański, Horowitz. Hometown",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 6,
+    "popularity": 0.46,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qxteWaJcb7p8ocquRcBT1CW6IXm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rmbxXHYv8B9o5kRIc5cYNFTRQlt.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 105315,
+    "ru": "Lauren Lake's Paternity Court",
+    "en": "Lauren Lake's Paternity Court",
+    "year": 2013,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.9,
+    "votes": 6,
+    "popularity": 7.25,
+    "genres": [
+      "Реалити-шоу",
+      "Ток-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/f2ba4FRCjfiDkcrBzk7kNusZtW5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mC6aXqRc7waSj7xJRA75CV0wHeP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 565885,
+    "ru": "வந்தா ராஜாவாதான் வருவேன்",
+    "en": "வந்தா ராஜாவாதான் வருவேன்",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 6,
+    "popularity": 0.87,
+    "genres": [
+      "драма",
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/iZew5hsN6zKyOkBl2a0U5oqlkEO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ck7jY0CnSzQqTm1pjTtwt8AruI0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 622343,
+    "ru": "Open",
+    "en": "Open",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 6,
+    "popularity": 0.5,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zOYidyZTXkL0xyaZFESnfKJJcKo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3jgwFVNS3nWGsBj4bWwNdDND4P.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 48108,
+    "ru": "Bob the Builder: The Golden Hammer",
+    "en": "Bob the Builder: The Golden Hammer",
+    "year": 2010,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 6,
+    "popularity": 0.43,
+    "genres": [
+      "мультфильм",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eaxVFjTmDGuFRqvlnGou4puO9D7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6dq1MWlxgUEMGrYa4PjpjlnMElH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 328515,
+    "ru": "รัก ลวง หลอน",
+    "en": "รัก ลวง หลอน",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 6,
+    "popularity": 0.4,
+    "genres": [
+      "драма",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vcPk2JTqs1BrL3ChgaXhQhOHYvz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5icyqLlfhsddYuhfNeEeZpee6Rh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 680027,
+    "ru": "Изменённая реальность",
+    "en": "Altered Reality",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 5,
+    "popularity": 0.46,
+    "genres": [
+      "триллер",
+      "фантастика"
+    ],
+    "overview": "Жизнь Оливера Кука меняется, когда он встречает старого сторожа из своего прошлого Джека. Жизнь Оливера меняется благодаря чудодейственному лекарству, отмеченному инопланетными символами. Снадобье приносит ему богатство и исцеление, но обостряет семейные узы. Когда его дочь исчезает, богатство Оливера вовсе не утешает. Главный герой отправляется в путешествие, чтобы разгадать тайну исчезновения, сталкиваясь с моральными дилеммами и сверхъестественными силами.",
+    "poster": "https://image.tmdb.org/t/p/w342/agvfvfoF96sEHHkfCXLLJ93ZZ4V.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kBHBPB6xs4PaXDvUE9XAo8rZmFV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1215921,
+    "ru": "Last Train to Fortune",
+    "en": "Last Train to Fortune",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 5,
+    "popularity": 1.49,
+    "genres": [
+      "драма",
+      "вестерн"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/oqBHbggqRIPSD8VoezinVP26t0j.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8utNndo8XwsjrvcwSjGTPbcbc4R.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1618941,
+    "ru": "Mandioca Frita",
+    "en": "Mandioca Frita",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 5,
+    "popularity": 0.66,
+    "genres": [
+      "комедия",
+      "драма",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/niDeR6vC7mQka0rHzfNmKn8EmPk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/weIyeX9vednnENyqMiA8H9dQIIh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 865471,
+    "ru": "శ్రీదేవి సోడా సెంటర్",
+    "en": "శ్రీదేవి సోడా సెంటర్",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 5,
+    "popularity": 0.58,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/o34lCbdb4vq15JsJN8vGt2vrBDo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4pIJME4gk1dpLrashNSncF1d8P8.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1180236,
     "ru": "మా ఊరి పొలిమేర 2",
     "en": "మా ఊరి పొలిమేర 2",
@@ -9698,197 +9888,6 @@
     "overview": "Мать и ее 18-летняя дочь переезжают в пригород, чтобы избавится от страха, после того как в дом ворвался преступник и напал на дочь. Но зловещая тень кажется ещё преследует их.",
     "poster": "https://image.tmdb.org/t/p/w342/dU0c3qVTYKXcBPP2fIffdEPrThQ.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/bwpO9haOakRJ6pCEc0TxT7uEb2r.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 279661,
-    "ru": "Убийственные легенды",
-    "en": "Killer Legends",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 79,
-    "popularity": 0.45,
-    "genres": [
-      "документальный",
-      "история",
-      "криминал",
-      "ужасы"
-    ],
-    "overview": "Документальный фильм о происхождении наиболее ужасающих городских легенд и настоящих историях, которые легли в их основу.",
-    "poster": "https://image.tmdb.org/t/p/w342/hRJQDcEX78PSpSnFKNDsVm6MGNE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4BSwmhvoS9BOn6wz88gUp4GLVSc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 612701,
-    "ru": "Frankenstein's Monster's Monster, Frankenstein",
-    "en": "Frankenstein's Monster's Monster, Frankenstein",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 79,
-    "popularity": 0.77,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aVrXQAk0lIRw123EghPfNlludjU.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fWBmMHi7ukR8pYmbBfPERjzdZwS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 565373,
-    "ru": "Коко-ди Коко-да",
-    "en": "Koko-di Koko-da",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 78,
-    "popularity": 0.47,
-    "genres": [
-      "ужасы",
-      "комедия",
-      "фэнтези"
-    ],
-    "overview": "Молодая пара отправляется в путешествие по живописным местам. В лесу они встречают артистов цирка, которые устраивают им забавные игры, терроризируя супругов. Снова и снова они вынуждены проживать этот день, чтобы найти выход и разорвать порочный круг.",
-    "poster": "https://image.tmdb.org/t/p/w342/dbepGfMVV8teOrQwnuGHq090hW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dxe4F1ZOiwNNIiHBZNhgOZ2jNhJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 415962,
-    "ru": "My Christmas Dream",
-    "en": "My Christmas Dream",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 78,
-    "popularity": 0.58,
-    "genres": [
-      "телевизионный фильм",
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jCrE3Twc7PeLev4sCHkMtOPdrA5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/x74bdNj7uwpyUZPOhrldDUJvINe.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 428886,
-    "ru": "Англия принадлежит мне",
-    "en": "England Is Mine",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 76,
-    "popularity": 0.96,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Фильм о начале творческого пути певца Моррисси и группы The Smiths.",
-    "poster": "https://image.tmdb.org/t/p/w342/ue3Zh4YRyJgQXj39tq8smr0iqOa.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xRZk37nylCe0BzsbGCxUHF0PRKf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 337104,
-    "ru": "Хроник",
-    "en": "Chronic",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 76,
-    "popularity": 0.78,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Дэвид — медработник, который ухаживает за неизлечимо больными пациентами. Умелый и заботливый труженик, он устанавливает доверительные отношения с каждым человеком, о котором заботится. Но вне своей работы Дэвид — неловкий и закомплексованный человек. И он нуждается в каждом своем пациенте так же, как они в нем...",
-    "poster": "https://image.tmdb.org/t/p/w342/Ap5UKMteI276JS0ZNy4PMjLfzJ3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bJxYeQiwXQNZIzfJZiVJVwfF26f.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 270920,
-    "ru": "Бодибилдер",
-    "en": "Bodybuilder",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 76,
-    "popularity": 0.58,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "Антуан Морель – из тех парней, что вечно концентрирует вокруг себя проблемы. Он связался с бандой головорезов, и теперь должен им кругленькую сумму. Бандиты ворвались в квартиру Антуана и разгромили ее. К счастью, самому Морелю удалось бежать и спрятаться в интернет-кафе, где он остался незамеченным. Мать Антуана устала от выходок своего непутевого сына – она и так два года копила деньги, чтобы выплатить его долги. Ей надоело покрывать преступника, и она настоятельно просит его наконец-то устроиться на работу и дать ей спокойно пожить.",
-    "poster": "https://image.tmdb.org/t/p/w342/1aXOKgOE2F8u8mpdCzEJaOOMuko.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ncwtRlZqSPhAK4RRrHjVjgd48mW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1146556,
-    "ru": "Сеанс в 16:30",
-    "en": "The 4:30 Movie",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 75,
-    "popularity": 0.99,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Лето 1986-го года. Трое шестнадцатилетних друзей каждую субботу, тайком пробираются в местный кинотеатр чтобы бесплатно смотреть фильмы. Но когда один из парней приглашает еще и девушку своей мечты на поздний сеанс комедии с рейтингом «для взрослых», каждый из подростков узнает больше о жизни и любви.",
-    "poster": "https://image.tmdb.org/t/p/w342/aUHSCf2xyUJUQKI7anJP0jpDXnG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ptnpsXfZSbNtBHayFXqqW4hV8UL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 467342,
-    "ru": "Гибель: Лос-Анджелес",
-    "en": "Destruction: Los Angeles",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 75,
-    "popularity": 0.85,
-    "genres": [
-      "боевик",
-      "приключения"
-    ],
-    "overview": "Смертельно опасное извержение вулкана и сильнейшее землетрясение сотрясают Лос-Анджелес и убивают его жителей. Лучший репортер новостей города Джон Бенсон хватается за шанс рассказать историю разрушения города изнутри и старается найти потерянных во время стихийного бедствия родных.",
-    "poster": "https://image.tmdb.org/t/p/w342/sJRMIihUYyT06pUIPg9sRkJF9kz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sS6b7phk6X9lT5Nds8Akibl69vH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 36075,
-    "ru": "Счастливое удовольствие убийцы",
-    "en": "女虐 悪魔の悦び",
-    "year": 1996,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 75,
-    "popularity": 2.65,
-    "genres": [
-      "ужасы",
-      "фантастика"
-    ],
-    "overview": "Ученый оскверняет научный эксперимент своей матери своим собственным наркотиком, который превращает боль в приятный опыт. К сожалению, для трех женщин, участвующих в эксперименте, препарат работает слишком хорошо.",
-    "poster": "https://image.tmdb.org/t/p/w342/vu0XKRxGVucazlhagpGqlq8gU2U.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s1PvYipppwcbge4n69rThiMSLg0.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,200 @@
 [
   {
+    "id": "536869",
+    "ru": "Кошки",
+    "en": "Cats",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.1,
+    "votes": 1044,
+    "popularity": 3.67,
+    "genres": [
+      "фэнтези",
+      "комедия",
+      "драма"
+    ],
+    "overview": "На ежегодный кошачий бал собираются кошки из Племени избранных из разных уголков земли. Все они разные: породистые и беспородные, юные и старые, домашние любимцы и бездомные. Когда они собираются вместе, каждая кошка рассказывает о себе — чем же она так исключительна, и за что её можно считать избранной.",
+    "poster": "https://image.tmdb.org/t/p/w342/zfsb7lYonqKiFsP98OIEJYs8aFS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rXSDDbT43pcTjppu1qTxs1cOwla.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "10152",
+    "ru": "Тупой и еще тупее тупого: Когда Гарри встретил Ллойда",
+    "en": "Dumb and Dumberer: When Harry Met Lloyd",
+    "year": 2003,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.1,
+    "votes": 904,
+    "popularity": 2.42,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Как же встретились два героя-недоумка Гарри и Ллойд, известные по фильму «Тупой и еще тупее»? Оба несколько лет не ходили в школу, а учились на дому. Пришло время отправляться в школу, и прямо на улице Гарри и Ллойд столкнулись лбами…  А в это время школьный директор Коллинз и мисс Хеллер, буфетчица-официантка школьной столовой, задумали провернуть аферу — получить благотворительную премию в сто тысяч долларов за организацию класса для умственно отсталых. Злоумышленники решили создать липовый класс. Два кандидата в спецкласс нашлись сразу — Гарри и Ллойд, а они разыскали остальных…",
+    "poster": "https://image.tmdb.org/t/p/w342/xRYXPtRWwen0tMhk0XBQpo5A4vU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/e2Ppz6IQcukpqyYYJsRkWcsGXvT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_63433",
+    "ru": "The Regression of Great Sage Riddle",
+    "en": "Daikenja Riddle no Jikan Gyakkou",
+    "year": 2026,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 4.1,
+    "votes": 889,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Фэнтези",
+      "Fantasy",
+      "Путешествия во времени",
+      "Time Travel"
+    ],
+    "overview": "A young man named Riddle had lost all of his friends—and the entire world—at the hands of a mysterious organization known as the \"Box of Malice.\" Having lost all hope to live, he dwelled in a pit of despair until he has one final revelation. What if... he could return to a time before everything ended? And so, after a thousand years, a deformed Riddle finally manages to reverse time. \"I'm going to stop them this time...!\" Equipped with a thousand years of knowledge and experience in his young body, the Great Sage Riddle's journey to the past now unfolds!\n\n(Source: Shogakukan, translated)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1764/155312l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "12177",
+    "ru": "Секс Гуру",
+    "en": "The Love Guru",
+    "year": 2008,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.1,
+    "votes": 767,
+    "popularity": 1.96,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Питка, воспитанный многочисленными гуру вне родной культуры американец, возвращается в Штаты в надежде стать популярным психотерапевтом. Первым вызовом его способностям станет трудный случай с хоккеистом-профи, от которого жена ушла к конкуренту.",
+    "poster": "https://image.tmdb.org/t/p/w342/zdyKGQ8FCePdqvT0zmzx2YjA6Si.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9E7RHTs5hyVCwZ8vmw0UtrcwfFD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "21435",
+    "ru": "Веселые и загорелые",
+    "en": "Les Bronzés 3 : Amis pour la vie",
+    "year": 2006,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.1,
+    "votes": 751,
+    "popularity": 0.77,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "С момента встречи в Клаб Мед на Кот-д’Ивуар в конце семидесятых их тепло называют «Загорелыми». Несведущий управляющий курортом и неверный муж Попая, грудастая Джиги, пластический хирург, потерявший свою врачебную практику Жерома, удачливый продавец париков и невротик Жан-Клод, старомодный, вечно в состоянии стресса оптик Бернар, его пьяница-жена Натали и, наконец, вечно недовольная, находящаяся в поисках мести Кристиан встречаются на летнем отдыхе на одном из роскошных итальянских курортов, где их ждут совершенно непредсказуемые и невероятные приключения…",
+    "poster": "https://image.tmdb.org/t/p/w342/9g7z9WG6MS3Q8cYfxTTBC4Ckm9A.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/teGBD3OBdNAAFvA0XUfPBvo8Bgd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "168705",
+    "ru": "Бладрейн",
+    "en": "BloodRayne",
+    "year": 2005,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.1,
+    "votes": 621,
+    "popularity": 1.43,
+    "genres": [
+      "фэнтези",
+      "ужасы",
+      "боевик"
+    ],
+    "overview": "Румыния, 18 век. Рейн — совершенное создание, обладающее силой Бессмертных и душой человека. Наполовину вампир, наполовину земная женщина, она поклялась истреблять кровожадных упырей. Она жаждет возмездия за смерть матери. Рейн вступает в отчаянные схватки с Иными, отправляя тех в мир тьмы. Рейн мстит кровопийцам, и успокоится, лишь уничтожив главного из них, вампира Кагана.",
+    "poster": "https://image.tmdb.org/t/p/w342/1Xy9uu5INNMnyF7W6BTEQkkGOZC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7M4Gg8VJLO4RgZVfEPq02px2SVL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "244688",
+    "ru": "Похмельные игры",
+    "en": "The Hungover Games",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.1,
+    "votes": 535,
+    "popularity": 1.16,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "После празднования предстоящей свадьбы Доуга в отеле в Лафлине, штат Невада, Брэдли, Эд и Зак приходят в себя в футуристической антиутопии, потеряв своего друга — Доуга.",
+    "poster": "https://image.tmdb.org/t/p/w342/m4FiNL8qsc2pUmbQ2g9PREi1q6Q.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/z3Q8cbwmtsVdkPDCX10XawVG3bc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "11867",
+    "ru": "Не называй меня малышкой",
+    "en": "Barb Wire",
+    "year": 1996,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.1,
+    "votes": 488,
+    "popularity": 3.51,
+    "genres": [
+      "фантастика",
+      "боевик",
+      "приключения"
+    ],
+    "overview": "Америка охвачена второй гражданской войной. Единственным нейтральным городом остается Стил Харбор. А самое популярное место в Стил Харборе — гриль-бар «Дубовая голова». Имя его владелицы, красавицы по кличке «колючая проволока» окружено легендами. Когда эмоции в ее баре перехлестывают через край, она лично исполняет обязанности вышибалы, а вот справиться с ней не удавалось еще никому. Единственный человек о котором она заботилась — ее слепой младший брат Чарли.  Но вот в городе появляется Аксель Худ. Он должен переправить в Канаду доктора Тайру Армстронг, чтобы предупредить Комиссию по перемирию о страшном биологическом оружии, которое может повлечь за собой глобальную катастрофу. Акселю нужна помощь, и он знает, что оказать ее может лишь «Колючая проволока»….",
+    "poster": "https://image.tmdb.org/t/p/w342/9MOBXas5HYQ8oRZekzv4cLwmvS2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/o7bxmFoHfEP5JiBzVYY5QgLiSfU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "22345",
+    "ru": "Гениальные младенцы",
+    "en": "Baby Geniuses",
+    "year": 1999,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.1,
+    "votes": 414,
+    "popularity": 2.7,
+    "genres": [
+      "фантастика",
+      "комедия",
+      "семейный"
+    ],
+    "overview": "Доктор Елена Киндер готова к тому, чтобы править миром. Ее двухлетний сын Слай - единственная помеха на этом пути. Доктор Киндер и ее партнер доктор Хип работают в секретной лаборатории, пытаясь раскрыть код секретного языка младенцев. Когда Слай сбегает из лаборатории, он присоединяется к брату-близнецу Уиту с целью разоблачить их. Воспитанного дядей наивного Уита быстро схватывают. Слая, ошибочно принятого за Уита, забирает дядя. Слай сплачивает остальных приемных детей и организовывает отряд по спасению с целью вторгнуться в лабораторию и помешать доктору Киндер воплотить свой коварный план.",
+    "poster": "https://image.tmdb.org/t/p/w342/7jqOKjt2JHaMZ1fR4lQuDgtf6SH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/o6ehdNIduOXmxaJlavLxETlR3sR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 369779,
+    "ru": "La Tour 2 contrôle infernale",
+    "en": "La Tour 2 contrôle infernale",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.1,
+    "votes": 247,
+    "popularity": 0.43,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nIuTXKeLs4COxzRS0PzOuUnkTZO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9eY0O8K3ubYJNAJIphAdCxfvyx0.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 608649,
     "ru": "Неверные",
     "en": "Gli infedeli",
@@ -9314,194 +9509,6 @@
     "overview": "Финник случайно теряет невидимость, и теперь мир домовых оказывается под угрозой. Вместе со своим человеком Кристиной он отправляется на поиски волшебного мага, который поможет ему вернуть невидимость.",
     "poster": "https://image.tmdb.org/t/p/w342/2CJ01g3An35uUwDwvfKQcEIg7T0.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/lnwRiQVEvfHZZhHV1zG5RsuyrpU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1417285,
-    "ru": "ราคี",
-    "en": "ราคี",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 2,
-    "popularity": 8.35,
-    "genres": [
-      "ужасы",
-      "триллер",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vPxVvwMduxySggqEyHpwQNtjbx6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s9kbcVd0PQCw2JPKo9C84ChP2x.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 289210,
-    "ru": "一见你就笑",
-    "en": "一见你就笑",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.0,
-    "votes": 2,
-    "popularity": 7.68,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dLidSaIRBqKwu5mBBWla0noPmU4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7pocRZp6wDgJtYzxgztEN8UYdmn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 315371,
-    "ru": "사내에서는 정숙할 것",
-    "en": "사내에서는 정숙할 것",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.0,
-    "votes": 2,
-    "popularity": 4.55,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/njrmxhBLfkeTIw0tbSlGdcx11Qc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yK9sj3YXZzVS2TNMHC3nGUpmWWM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 313732,
-    "ru": "스캔들러브",
-    "en": "스캔들러브",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.0,
-    "votes": 2,
-    "popularity": 3.0,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hwBQuhP9ntGR7nUL5DOE1vgpwpe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4hu8o22HPPqW2cBAqI8lL0L8Wfn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 297005,
-    "ru": "Celebrity Weakest Link",
-    "en": "Celebrity Weakest Link",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.0,
-    "votes": 2,
-    "popularity": 2.72,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9zpo2Tcgm2EOyx0E3cyWgKn8crN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/euzlgl95XocL76FO9Q1MoUtxYLy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1294705,
-    "ru": "Kıyma: Orman Kanunları",
-    "en": "Kıyma: Orman Kanunları",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 2,
-    "popularity": 2.49,
-    "genres": [
-      "комедия",
-      "криминал",
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nEnulDyNyiEyov1iu0PtCzCnymn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hIM016a5ZBY9mRR7ZUQjwaiiZTe.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1668364,
-    "ru": "Deseo",
-    "en": "Deseo",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 2,
-    "popularity": 2.34,
-    "genres": [
-      "драма",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5lJPvf7cJ2r2EiNrnvBVYpusKFM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5NoP8obTAXVPv6RcK5wGd2rVt8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1594520,
-    "ru": "True Justice: Eye For An Eye",
-    "en": "True Justice: Eye For An Eye",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 2,
-    "popularity": 1.86,
-    "genres": [
-      "криминал",
-      "детектив",
-      "драма",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rcKD1DBuJzC8T35UD4KKFrXZI9n.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pZixcjAW0s2dflNZGJ6zLFJuh9j.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1384380,
-    "ru": "Maryang Palad",
-    "en": "Maryang Palad",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 2,
-    "popularity": 1.83,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xLo7kNzzLRdZ9u2J2KG7OvA8kfi.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rYnOQ8epU4hZWq94aexKfQiY8Gx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1296778,
-    "ru": "痴人の愛 リバース",
-    "en": "痴人の愛 リバース",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 2,
-    "popularity": 1.61,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ohaNz7wOLoJ1JdjrQdXETtTWAIF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d2rCqJAoL13snEvDsbGpTFQrqbb.jpg",
     "source": "tmdb"
   }
 ]

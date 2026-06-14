@@ -1,5 +1,219 @@
 [
   {
+    "id": 3317,
+    "ru": "Cidade dos Homens",
+    "en": "Cidade dos Homens",
+    "year": 2002,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 33,
+    "popularity": 2.94,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/259wCChpB4RZkrcD5f9quXbMckk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eiLAEO2XSCwyDL7yOzVieMxrvhy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 65858,
+    "ru": "LEGO Нексо Рыцари",
+    "en": "LEGO Nexo Knights",
+    "year": 2015,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 32,
+    "popularity": 4.99,
+    "genres": [
+      "Боевик и Приключения",
+      "мультфильм",
+      "Детский",
+      "комедия",
+      "семейный",
+      "Аниме"
+    ],
+    "overview": "Пятерым храбрым рыцарям NEXO KNIGHTS – Клэю Мурингтону, Лансу Ричмонду, Аарону Фоксу, Акселю и Мэйси Хальберт - предстоит встать на защиту своего мирного Королевства Найтония от нашествия армии Огненных Монстров. Каждый из рыцарей обладает уникальным характером, талантом, способностями, оружием и экипировкой.",
+    "poster": "https://image.tmdb.org/t/p/w342/d0e5dJ2FQhlwEhFX4cB0ijp5SMd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6eWhYRuA381fHMXzovXjo3sEtkS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 68256,
+    "ru": "Комета Люцифер",
+    "en": "コメット・ルシファー",
+    "year": 2015,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 32,
+    "popularity": 3.85,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Действие разворачивается на далекой планете Гифт, чьи недра полны кристаллов, названных Гифтиум. Молодой человек по имени Сого живет в шахтерском городке Сад Индиго. У паренька есть хобби — он любит собирать редкие кристаллы.  Однажды мальчишка оказывается втянут в заварушку вместе со своими одноклассниками. Убегая от погони, умудряется заблудиться и по чистой случайности находит озеро глубоко под руинами старой шахты. Здесь Сого встречает загадочную девушку с голубыми волосами и красными глазами по имени Фелия. Именно с этого момента и начинаются все его приключения.",
+    "poster": "https://image.tmdb.org/t/p/w342/621IzHQCeQf39KOWJ45KVuPE6iV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9SzNNYYHBeujYYreNeNojTaVtvm.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "477777",
+    "ru": "Код Гиас: Восставший Лелуш — Восстание",
+    "en": "コードギアス 反逆のルルーシュⅡ 叛道",
+    "year": 2018,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 32,
+    "popularity": 0.93,
+    "genres": [
+      "фантастика",
+      "мультфильм",
+      "драма",
+      "боевик",
+      "Аниме"
+    ],
+    "overview": "Спустя целый год после событий, которые теперь называют Черным Восстанием. В последствии восстания погиб всеми известный «Зеро». Об этом смерти ходило множество слухов, но ни один из них не был подтвержден и подкреплен официальными фактами, поэтому смерть «Зеро» оставалась под покровом тайны.\r Лелуш потерял память, и совсем ничего не помнил о своей жизни в облике таинственного «Зеро». Он жил жизнью обычного, среднестатистического студента и ничего не подозревал, но вот ему посчастливилось встретить необычную девушку — С.С.",
+    "poster": "https://image.tmdb.org/t/p/w342/tloNoCpgEbYqLptfap4RMIOP6bi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/de94egii0q7C6GZu6gFTJS6MeMB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 123149,
+    "ru": "Проблема с Джоном Стюартом",
+    "en": "The Problem with Jon Stewart",
+    "year": 2021,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 32,
+    "popularity": 5.03,
+    "genres": [
+      "комедия",
+      "Ток-шоу"
+    ],
+    "overview": "Джон Стюарт демонстрирует свой фирменный юмор в этом номинированном на премию «Эмми» сериале, поднимая самые насущные проблемы Америки и пытаясь найти решения с людьми из высших эшелонов власти... вот только на его звонки они не отвечают.",
+    "poster": "https://image.tmdb.org/t/p/w342/oCSvUr8oOtcWPq9wRZScwxbjKsi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xTT4ZDKT0NAGoOj6d070523smae.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "568770",
+    "ru": "Заклятие. Демон внутри",
+    "en": "La Exorcista",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 32,
+    "popularity": 3.64,
+    "genres": [
+      "ужасы",
+      "детектив"
+    ],
+    "overview": "После загадочной смерти отца Каролина начинает часто ссориться с мамой и учителями. Ей самой становится страшно от того, что она постоянно злится и делает странные вещи. Она начинает подозревать, что появившийся на её теле знак — это символ древнеегипетского демона, который поселился внутри неё, и сила которого растет с каждым днем. Каролине предстоит пройти через опасный ритуал, чтобы вернуть саму себя и понять, что же на самом деле случилось с её отцом.",
+    "poster": "https://image.tmdb.org/t/p/w342/xNwapHcaAgLwYr5Ur5yawQeqapb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/j7b27zJOkjLylvjxFEd7Hc7BRfz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 219476,
+    "ru": "Perdona nuestros pecados",
+    "en": "Perdona nuestros pecados",
+    "year": 2023,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 32,
+    "popularity": 2.4,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Рейнальдо Суарес приезжает в Вийа Руйсеньор новым падре с целью мести Армандо Кирога, самому богатому и властному человеку в городе. Но план мести и призвание священника оказываются в опасности, когда на пути падре появляется Мария Эльса, любимая дочь Армандо. Выдержит ли он соблазн, и сохранит ли он свою веру в Господа или поддастся искушению, и броситься в омут своих чувств?",
+    "poster": "https://image.tmdb.org/t/p/w342/AepsNWQiPAZ5kBq9K0BSae9Hp3s.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1MvwtWt79rmauIcrFtOvxnZeIm8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 246027,
+    "ru": "Никто не видел, как мы уходили",
+    "en": "Nadie nos vio partir",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 32,
+    "popularity": 1.67,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Мать сталкивается с осуждением и болезненной разлукой, когда ее муж увозит детей за границу, навсегда изменив ее жизнь.",
+    "poster": "https://image.tmdb.org/t/p/w342/nOjhJqlWYDZHuskzGmZKdgoxlXN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qLUqBpWFvags0yOPVBsH1pxt3SA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 835561,
+    "ru": "Минск",
+    "en": "Минск",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 32,
+    "popularity": 0.61,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Минск, август 2020 г. Паша и Юлия, молодая супружеская пара, выходят ночью из дома и оказываются в эпицентре мирных протестов. Повседневная прогулка превращается в настоящий ад, в котором ни в чем не повинные люди становятся жертвами полицейского произвола.",
+    "poster": "https://image.tmdb.org/t/p/w342/cit3DpLqOxXzpW6OIeC2KGdaJJ7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uzR7xzntekFWSlshAbPCqgAQM6P.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 201050,
+    "ru": "दहाड़",
+    "en": "दहाड़",
+    "year": 2023,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 32,
+    "popularity": 1.99,
+    "genres": [
+      "криминал",
+      "детектив",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9Sc9LcCmfoehvpJPBBT8e0sx1m4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pO1tIrVa1ptJWS7vA15HokdeBcL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1231942,
+    "ru": "Giannis: The Marvelous Journey",
+    "en": "Giannis: The Marvelous Journey",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 32,
+    "popularity": 0.55,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/heOqng8QyxEFOuHdF6p4HGw70Zn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1Ss82WvXXANNwrfaumHGvbTiE2i.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 70581,
     "ru": "Круг",
     "en": "써클: 이어진 두 세계",
@@ -9456,215 +9670,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/aOloA4NcNoa9NhyRdbEO99G79hx.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/lIUQ28eubM0aLL8yJ33Bl9gIFVp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 417414,
-    "ru": "The Best Democracy Money Can Buy",
-    "en": "The Best Democracy Money Can Buy",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 6,
-    "popularity": 0.47,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5HbB08bX8jImnRL5RR8fuAcmWxb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5Ts0Iw4KzlkOoW2I8b79C0Z8ht0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 494182,
-    "ru": "Тайны Солнечной системы",
-    "en": "Secrets of the Solar System",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 6,
-    "popularity": 0.46,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iAw6EZJGcxLx2geJVB3yFYtQe06.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sx0dKhNKmBwAeUklIeoq4FV1ihi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 354885,
-    "ru": "Merry Riana: Mimpi Sejuta Dolar",
-    "en": "Merry Riana: Mimpi Sejuta Dolar",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 6,
-    "popularity": 0.43,
-    "genres": [
-      "драма",
-      "мелодрама",
-      "история"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/avtkmK8L6JpmBq6NDlyTgJ82aY4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yp7lcCfhMcLknWx22v5pS9SrN44.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 588848,
-    "ru": "Chacrinha: O Eterno Guerreiro",
-    "en": "Chacrinha: O Eterno Guerreiro",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 6,
-    "popularity": 0.42,
-    "genres": [
-      "музыка",
-      "комедия",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uQIQ23z3Qt9yAQ4axgBZ0fhalS2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3pQXrJtISbJaEZY6Sa16Bcdj09K.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 397367,
-    "ru": "Dear Dad",
-    "en": "Dear Dad",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 6,
-    "popularity": 0.41,
-    "genres": [
-      "драма",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/arMYLwkzz0vgMX2z8pmY1PcwyG0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7HcB2RHytUEUbGj1dhSWmE8DZWi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 103985,
-    "ru": "Ragtime Bear",
-    "en": "Ragtime Bear",
-    "year": 1949,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 6,
-    "popularity": 0.34,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aqVp73YiDVKF2ACVx9j9D2PGFi0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7n1FjoNgVieUnM7BArI54Kdfkvm.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 446974,
-    "ru": "Волк и семеро козлят",
-    "en": "Волк и семеро козлят",
-    "year": 1957,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 6,
-    "popularity": 0.3,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "Мультипликационный фильм по мотивам известной русской народной сказки о том, как Волк хочет украсть у Козы её семерых козлят, но грубый голос выдаёт его. Волк просит Медведя-кузнеца выковать ему тоненький голосок и крадёт козлят, но его преследуют Коза, зайчата и Дятел. Медведь, узнав об обмане, помогает им и наказывает Волка",
-    "poster": "https://image.tmdb.org/t/p/w342/hIrGU6YlQ6zmH2K0XX4UfaP7y6g.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 342860,
-    "ru": "¡Qué vecinos tan animales!",
-    "en": "¡Qué vecinos tan animales!",
-    "year": 1998,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 6,
-    "popularity": 0.81,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vQWgm3GGclk5nYZj88cM5avSJ0L.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 371710,
-    "ru": "Ompelijatar",
-    "en": "Ompelijatar",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 6,
-    "popularity": 0.45,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7pfKVyWMN4FvyHAy2xCwUrK5Mx.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 245215,
-    "ru": "Идеальный принц любит меня, своего соперника?!",
-    "en": "当て馬キャラのくせして、スパダリ王子に寵愛されています。",
-    "year": 2024,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 5,
-    "popularity": 27.63,
-    "genres": [
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "\"Я всегда... Хотел прикоснуться к тебе.\" Лихой принц встречает меня, любовный интерес проигравшего соперника. Хотя мы должны были бы бороться за героиню... Почему принц положил глаз на меня?!",
-    "poster": "https://image.tmdb.org/t/p/w342/3Ca0AClMBPvUDPXzKaHFc9x0nRh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kKM415bfv3n0s36GXrQIKDVVyIH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 300015,
-    "ru": "Клубничная элегия: Грубая и дерзкая сестра и брат, который не может с этим смириться",
-    "en": "イチゴ哀歌～雑で生イキな妹と割り切れない兄～",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 5,
-    "popularity": 13.13,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "Мирная жизнь Коты Такамуры делает крутой поворот, когда его отец снова женится, и в семье появляется сводная сестра Айка.\n\nНа первый взгляд, она – идеальная «девочка-ангелочек», обожаемая родителями. Но как только двери захлопываются, она превращает жизнь Коты в сущий кошмар — приводит парней и устраивает вечеринки. Кота уже махнул на всё рукой, но внезапно атмосфера меняется: Айка начинает требовать от него объятий и даже большего...!?\n\nЭто взрывная романтическая комедия о дерзкой гяру и зануде-девственнике — непримиримых брате и сестре!",
-    "poster": "https://image.tmdb.org/t/p/w342/fjKOO6PBLwLG3ViyvrIL9oZUmbU.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bFdIuq0tWRSeYENCf1i3ZQWY8iF.jpg",
     "source": "tmdb"
   }
 ]

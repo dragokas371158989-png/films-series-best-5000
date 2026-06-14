@@ -1,5 +1,202 @@
 [
   {
+    "id": "tv_90877",
+    "ru": "Дамы шутят по-черному",
+    "en": "A Black Lady Sketch Show",
+    "year": 2019,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 41,
+    "popularity": 7.12,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Первое скетч-шоу, написанное, поставленное и сыгранное исключительно темнокожими женщинами. Трудно представить, насколько ценный вклад такой шаг вносит в распространение идей дайверсити, чьи постулаты продвигают расовое, культурное и гендерное разнообразие.",
+    "poster": "https://image.tmdb.org/t/p/w342/juMYMNKegUB7XfZ1cXlUIjX4r4q.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uXcPWOgj6RGphspYiIau44obMsJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 40024,
+    "ru": "Мышиная уборка",
+    "en": "Mouse Cleaning",
+    "year": 1948,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 41,
+    "popularity": 1.71,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "Мамочка Два Тапочка угрожает выгнать Тома из дома, если он устроит беспорядок. Джерри видит возможность избавиться от своего кошачьего врага.",
+    "poster": "https://image.tmdb.org/t/p/w342/hXMoXr0gRsZAXfPqwmNUICYhWbZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pH9mbNteY14Bcf2qVRZYcV4AF7P.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 87611,
+    "ru": "Будто мы никогда не встречались",
+    "en": "Si no t'hagués conegut",
+    "year": 2018,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 41,
+    "popularity": 1.26,
+    "genres": [
+      "драма",
+      "НФ и Фэнтези",
+      "детектив"
+    ],
+    "overview": "Мужчина, потерявший семью в трагическом инциденте случайно понимает, что может путешествовать по альтернативным вселенным, и решает найти мир, в котором его семью можно спасти.",
+    "poster": "https://image.tmdb.org/t/p/w342/e2DED8LcLiEdeuaA7AnMCvDFPPO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vUFhv3AtUq42O90OdyxL9Jz0BSK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 67159,
+    "ru": "Дональд Дак: Верхом на ветке",
+    "en": "Out on a Limb",
+    "year": 1950,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 41,
+    "popularity": 0.33,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "Дональд Дак просто обезумел от ужаса, когда, решив слегка подрезать крону дереву-дому бурундуков, сам оказался «Верхом на ветке»!",
+    "poster": "https://image.tmdb.org/t/p/w342/e1FUcWDabOsVBkvbxlTLHuxXtoE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jmflJ8G6VbN2Xa7nCghCEIpGOOj.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_131366",
+    "ru": "Авантюристы, которые не верят в человечество, спасут мир",
+    "en": "人間不信の冒険者たちが世界を救うようです",
+    "year": 2023,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 5.29,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "НФ и Фэнтези",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "История о четырёх авантюристах, которым не повезло пережить предательство и испытать большие трудности в жизни. Нахлебавшись несчастий вдосталь, они решили объединиться в команду и показать всему миру где раки зимуют!",
+    "poster": "https://image.tmdb.org/t/p/w342/lrF4BomivMX6FHTnwQr6NHfzQUb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7Y5Jnq89taomGJvDqy4VTbzuE0m.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_248951",
+    "ru": "Самый сильный волшебник армии повелителя демонов оказался человеком",
+    "en": "魔王軍最強の魔術師は人間だった",
+    "year": 2024,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 4.58,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "Аниме"
+    ],
+    "overview": "Известный как «сильнейший маг в армии Повелителя Демонов», Айк — демон, способный в одиночку захватывать крепости. Его огромные магические силы, сметающие врагов, делают его настоящим «монстром», внушающим страх как друзьям, так и врагам. Однако он хранит секрет, который не может рассказать другим демонам. «— На самом деле, я человек». Мрачная фэнтезийная история о восходящем демоне, стремящемся к сосуществованию людей и демонов, скрывая при этом свою истинную личность!",
+    "poster": "https://image.tmdb.org/t/p/w342/kCOho8tk5Gz0LB9hACQ8uDs1dTg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iIjfY0Zz6LTn2PTiLEe8baGc48k.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "253987",
+    "ru": "Граница пустоты: Благословение будущего — Дополнительная глава",
+    "en": "劇場版 空の境界 未来福音 extra chorus",
+    "year": 2013,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 0.86,
+    "genres": [
+      "мультфильм",
+      "фантастика",
+      "фэнтези",
+      "драма",
+      "Аниме"
+    ],
+    "overview": "Аниме-адаптация манги Такаши Такеучи, состоящая из трёх коротких историй-дополнений к новелле «Граница пустоты: Благословение будущего». Входит в состав диска с оригинальным фильмом в качестве бонуса.",
+    "poster": "https://image.tmdb.org/t/p/w342/gcY4FbjnBN3C7WpZragedSAjyeM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1CWD8qWGOWPcdmOGDiC1CXGYO8x.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 222288,
+    "ru": "Выхода нет",
+    "en": "No Escape",
+    "year": 2023,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 3.34,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Лучшие подруги Лана и Китти находятся в бегах от полиции Великобритании. Они находят убежище на корабле под названием «Блю», который обещает беззаботную жизнь, полную красивых людей, вечеринок и бесконечных пляжей, но этот рай вскоре превращается в кошмар, и пара оказывается вдали от дома в смертельной опасности.",
+    "poster": "https://image.tmdb.org/t/p/w342/bBv2L16yhIaKGZaEUKLIBG8cHli.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cmzNw4BpBPdFNFlxH7Ns7RAYdgs.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 104068,
+    "ru": "Мы охотимся вместе",
+    "en": "We Hunt Together",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 1.55,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Истории двух пар пересекаются в местах совершения жестоких убийств. Сильный, агрессивный, но надломленный Баба попадает в зависимость от хрупкой, утончённой, но крайне опасной психопатки Фредди. Запутанный кровавый след их отношений пытаются распутать детективы Френкс и Мэнди, которые вынуждены работать вместе, хоть и не доверяют друг другу.",
+    "poster": "https://image.tmdb.org/t/p/w342/l8ERSXc9RXiXUNRBasvnmYjl2a7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ob2Tn0ZuJx60qy9PVI2mbc6Jj1Q.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 964403,
+    "ru": "Два билета в рай",
+    "en": "Two Tickets to Paradise",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 40,
+    "popularity": 0.54,
+    "genres": [
+      "телевизионный фильм",
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "Ханна и Джош знакомятся друг с другом в парке после того, как их обоих бросили у свадебных алтарей в один и тот же день. После этого их пути загадочным образом пересекаются, когда они оба договариваются отправиться в одиночный медовый месяц и вновь встречаются на другом конце света.",
+    "poster": "https://image.tmdb.org/t/p/w342/q5hbXUl8O2A8PKDCe6bJcKTeiPk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cspLTXWrkY8bUubQnwWES2mAR1V.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1678844,
     "ru": "Le Bus : Les Bleus en grève",
     "en": "Le Bus : Les Bleus en grève",
@@ -9479,191 +9676,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/aGC1MTH2MqG1lIyhl9XZP7PYBlX.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/mIuupMykdfRmchmyqS6vYNyGgbB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 709056,
-    "ru": "아이",
-    "en": "아이",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.51,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zaJgETPiglM3MktSWfFr3Dbg092.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ufeu8FpNCKHjBtJ4YfVuMsxERBg.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1687834,
-    "ru": "TRENTE",
-    "en": "TRENTE",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 0.32,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/387z6JS94ra3DYYo5oTjRWtfbbK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/w6qWjxwYMvmHsQEtse9hgb6cppG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 65255,
-    "ru": "Легенда о Ми Юэ",
-    "en": "芈月传",
-    "year": 2015,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 9.91,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Легенда о прабабушке императора Цин Шихуан - Ми Юэ, первой вантайхоу (мать императора). Действия разворачиваются в середине 4 века до нашей эры.\n\nВ царстве Чу во времена периода воюющих царств жила молодая девушка, которую в качестве приданного своей сестры отправили в царство Цинь наложницей. Многочисленные политические интриги привели к тому, что Ми Юэ стала первой в истории Китая вдовствующей императрицей. Сюжет основан на историческом персонаже, благодаря своим родственным связям и сыновьям, женщина встает во главу государства и в качестве регента будет управлять страной.",
-    "poster": "https://image.tmdb.org/t/p/w342/cmzztCW7dPqPjVSdgdNgYK0Wf8W.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zvd2vbpnazeGYIDsbnYyYIJ3phR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 86132,
-    "ru": "Как прекрасен этот мир",
-    "en": "Êta Mundo Bom!",
-    "year": 2016,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 6.63,
-    "genres": [
-      "Мыльная опера",
-      "драма",
-      "комедия"
-    ],
-    "overview": "В поисках своей отчужденной биологической матери молодой человек и его осел отправляются в большой город. Его мать богатая вдова, и она ищет его. Но ее поискам препятствует её амбициозной племянница, которая жаждет получить все её богатства.",
-    "poster": "https://image.tmdb.org/t/p/w342/gAbt0tV2Z0z2zSYEjDzhsyy74d7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9q0so2KgyKLQkWJHaOF9M2xwdSe.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 4371,
-    "ru": "Каллан",
-    "en": "Callan",
-    "year": 1967,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 5.28,
-    "genres": [
-      "Боевик и Приключения",
-      "драма"
-    ],
-    "overview": "Двоюродный брат Грега Каллана Дэвид Каллан - главный агент/убийца Службы безопасности (британской контрразведки), но он озлобленный человек, который выполняет свои обязанности \"для королевы и страны\" под принуждением. Эта мрачная шпионская драма в стиле «Шпион, пришедший с холода» концентрируется на изнаночной стороне скрытых операций: убийств, шантажа и грязных сделок.",
-    "poster": "https://image.tmdb.org/t/p/w342/xtOGjlpLcd2JDww8gQsOQBS70Y3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6Gb9x6sqoHF84aIGbBtJGN7qwWA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 72896,
-    "ru": "미운 우리 새끼",
-    "en": "미운 우리 새끼",
-    "year": 2016,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 44.06,
-    "genres": [
-      "Реалити-шоу",
-      "Ток-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eFxC1aItvr2xGfG2Z7lXQt6CfnB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vrLDuQ5L45f7vFWpMT17WopdWx0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 70558,
-    "ru": "NPR Tiny Desk Concerts",
-    "en": "NPR Tiny Desk Concerts",
-    "year": 2008,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 30.64,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/sJ6HdzajIVkC5G2kRROhNu8at43.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lksigd4PnpvvIY9oPHW2DEnHh5H.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 4563,
-    "ru": "Never the Twain",
-    "en": "Never the Twain",
-    "year": 1981,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 6.19,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4hej7iadX0AgnctZbHseNMJDBjQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d17k9muuIf69l0OZnIrGhPeH5yp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 543094,
-    "ru": "劇場版 仮面ライダービルド Be The One",
-    "en": "劇場版 仮面ライダービルド Be The One",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 1.92,
-    "genres": [
-      "боевик",
-      "приключения",
-      "фантастика",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/i8qAIvjYzzJio4mBf6OXkd3ML8i.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4839MFALC2yHo4N73ooIOmvBCk0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 358900,
-    "ru": "Eva Nová",
-    "en": "Eva Nová",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 10,
-    "popularity": 1.14,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/f2t0HQzQkB4cJZfjLmJ6w2BgeJJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hIpVsEipOehSVA1fFK3DVaqhVVS.jpg",
     "source": "tmdb"
   }
 ]

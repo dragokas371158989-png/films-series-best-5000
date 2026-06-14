@@ -1,5 +1,214 @@
 [
   {
+    "id": "mal_56566",
+    "ru": "Beyblade X",
+    "en": "Beyblade X",
+    "year": 2023,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.9,
+    "votes": 1952,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Приключения",
+      "Adventure",
+      "Спорт",
+      "Sports",
+      "Для детей",
+      "Kids"
+    ],
+    "overview": "At the heart of X City stands the impressive X Tower, an interconnected twin-skyscraper structure that symbolizes the pinnacle of every Beyblade player's dream. The building serves as the official headquarters for professional Beybattles, where competitors strive to ascend all one hundred floors; at its summit, the reigning champions, Team Pendragon, await contenders worthy of challenging their title.\n\nBird Kazami, an amateur Blader, arrives in the city eager to turn professional. However, he and his teammates are crushed in their first qualifying match, prompting his companions to give up and disband their team. Fortunately, Bird is soon approached by the easygoing Ekusu Kurosu. In disguise as \"Kamen X\" to hide his identity as a former member of the undefeated Team Pendragon, Ekusu wants to climb the tower all over again. To complete their new group, they recruit skilled Beyblade expert and savvy social media influencer Multi Nanairo.\n\nDriven by their individual goals, the trio wins their preliminary rounds, launching their careers as Team Persona. Bird and his new friends must navigate the world of corporate sponsorships, earn the fickle public's support, and defeat many formidable opponents—all in their quest to reach X Tower's peak.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1394/145458l.webp",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6OAvlyDxLhfxxPB9Mn9w43EaR3N.jpg",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "1079091",
+    "ru": "Всё закончится на нас",
+    "en": "It Ends with Us",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1947,
+    "popularity": 8.73,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Лили Блум, женщина, которая преодолела травмирующее детство, чтобы начать новую жизнь в Бостоне и осуществить мечту всей жизни - открыть её собственный бизнес. Случайная встреча с очаровательным нейрохирургом Райлом Кинкейдом вызывает интенсивную связь, но когда они глубоко влюбляются друг в друга, Лили начинает видеть стороны Райла, которые напоминают ей об отношениях её родителей.",
+    "poster": "https://image.tmdb.org/t/p/w342/hsInJC61gvlAcNKe2BSleQQtC2E.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8yPSYhooj8nyBbmV3GVdLDwuE7e.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "581032",
+    "ru": "Новости со всех концов света",
+    "en": "News of the World",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1940,
+    "popularity": 1.98,
+    "genres": [
+      "драма",
+      "вестерн",
+      "приключения"
+    ],
+    "overview": "Ветеран Гражданской войны в США капитан Джефферсон Кайл Кидд зарабатывает на жизнь, путешествуя по стране и зачитывая неграмотным местным последние новости из газет. Однажды его нанимают отвезти к родственникам 10-летнюю девочку-сироту, которая долгое время жила в индийском племени Кайова. Путешествуя из городка в городок, вдовец Кидд, давно не общавшийся с собственной дочерью, начинает испытывать к юной попутчице отеческие чувства. Вместе они должны преодолеть суровую природу американского Запада и избежать бандитов, намеренных похитить девочку.",
+    "poster": "https://image.tmdb.org/t/p/w342/q7h2jqHMug8APfMef0g0co9qTGQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oyBZyY5GdzZdofVVsDda49QmvFP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "513310",
+    "ru": "День курка",
+    "en": "Boss Level",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1922,
+    "popularity": 5.58,
+    "genres": [
+      "боевик",
+      "фантастика",
+      "триллер"
+    ],
+    "overview": "Каждый день бывший спецназовец Рой Палвер начинает, отбиваясь от всевозможных убийц: здоровяка с мачете, пулемётчика на вертолёте, двух красоток на быстром авто, виртуозно владеющей мечом китаянки, карлика-подрывника и прочих психопатов. И каждый раз Рой неизменно погибает и снова оказывается в том же дне. Однажды он узнаёт, что его бывшая девушка, которая занималась секретными разработками, мертва. Рой решает докопаться до причин её смерти, а заодно выяснить, как ему самому выбраться из этой невыносимой временной петли.",
+    "poster": "https://image.tmdb.org/t/p/w342/wxFFdyVnah84PsY1yPFJqTqhUcx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1Yc5hIRh3skhsEKLbCHE7v1FBOa.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "2196",
+    "ru": "Смерть на похоронах",
+    "en": "Death at a Funeral",
+    "year": 2007,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1921,
+    "popularity": 3.06,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "Чопорная английская семья воссоединяется, дабы безутешно оплакать своего почившего родственника. Искренне сожалея о смерти обладателя кристальной, по их мнению, души, члены благородного семейства оказываются весьма обескуражены, узнав о прижизненных проделках своего дядюшки. Поведавший все эти забавные истории шантажист отнюдь не намерен держать язык за зубами. Он согласен поспособствовать сохранению репутации аристократов разве что за небольшую, по его словам, сумму с большим количеством нулей.",
+    "poster": "https://image.tmdb.org/t/p/w342/xyTxrJnjbSJQzcbKIP6S1uqLuxy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lIXNL1uoEyuTLqaTAqtBYoc71WF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "11820",
+    "ru": "Улыбка Моны Лизы",
+    "en": "Mona Lisa Smile",
+    "year": 2003,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1901,
+    "popularity": 2.31,
+    "genres": [
+      "драма",
+      "история",
+      "мелодрама"
+    ],
+    "overview": "1953 год. В Америке идет борьба женщин за свои права, и в это время Кэтрин Энн Уотсон, выпускница Беркли, получает место преподавателя истории искусств в женском колледже Уэллесли. Однако среди руководства и преподавательского состава колледжа преобладают патриархальные взгляды на роль женщины в этом мире.  Кэтрин со страстным энтузиазмом бросается в борьбу за равноправие полов, и оказывает огромное влияние на студенток, в том числе на Бетти и Джоан. Общение с ними меняет не только их, но и заставляет ее по-новому взглянуть на собственную жизнь…",
+    "poster": "https://image.tmdb.org/t/p/w342/fIQSRBummbCz9kU4CKVoMaKURS8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/trfjdJI51Krnig9UmxJQkz15ICo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "3432",
+    "ru": "Кто Вы, Мистер Брукс?",
+    "en": "Mr. Brooks",
+    "year": 2007,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1878,
+    "popularity": 2.6,
+    "genres": [
+      "криминал",
+      "триллер"
+    ],
+    "overview": "Уважаемый бизнесмен и отец семейства, мистер Брукс скрывает тайну. За фасадом заботливого мужа и нежного отца скрывается жестокий убийца. На протяжении долгого времени эти две личности безуспешно борются между собой, и ни одна из них не может одержать верх. В результате убийства продолжаются, и, кажется, ничто не может оборвать эту кровавую цепь преступлений.Однако Бруксу не повезло. Свидетелем его последнего злодеяния становится сумасшедший фотограф. Он начинает шантажировать преступника, но у него особые требования. В отличие от обычных шантажистов, фотографа не интересуют деньги. Он хочет присутствовать при следующих убийствах.У героя остается сомнительный выбор — пойти на поводу у шантажиста или найти в себе силы победить свой порок и вернуться к нормальной жизни.",
+    "poster": "https://image.tmdb.org/t/p/w342/2F2jGdvEoXaqA7QdYWaLkL10EEh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6M2IeELPSKZZ4iAPz2w0i7wdm6X.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1038392",
+    "ru": "Заклятие 4: Последний обряд",
+    "en": "The Conjuring: Last Rites",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1856,
+    "popularity": 35.92,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "Исследователи паранормальных явлений Эд и Лоррейн Уоррен берутся за самый тревожный случай в своей практике. Семья переезжает в новый дом своей мечты, но вскоре их жилище начинает проявлять признаки демонической активности, превращая жизнь в кошмар.",
+    "poster": "https://image.tmdb.org/t/p/w342/1DPYceqs7OuKgUD13vrPFZ2SYRd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/i8MupUe4xgmYXoRNAQMYvuoexSU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_31763",
+    "ru": "アクセル・ワールド INFINITE∞BURST（インフィニット・バースト）",
+    "en": "Accel World: Infinite∞Burst",
+    "year": 2016,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.6,
+    "votes": 31800,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Романтика",
+      "Romance",
+      "Фантастика",
+      "Sci-Fi",
+      "Школа",
+      "School",
+      "Игры",
+      "Video Game"
+    ],
+    "overview": "Some time after the events involving Burst Linker Dusk Taker, Kuroyukihime recalls recruiting Haruyuki Arita to the \"Brain Burst\" program—an application that allows players to accelerate their cognitive functions until time seems to stop. Since his arrival, Haruyuki has risen to fame among the other Burst Linkers and has been helping Kuroyukihime achieve her goal of reaching the highest level in the game.\n\nDuring a territorial battle with their legion, Nega Nebulus, Haruyuki and his friends are kicked out of the program after a destructive storm in-game. All over Tokyo, security cameras are malfunctioning, which Kuroyukihime deduces is related to the Brain Burst glitch. Determined to fix the problem, Nega Nebulus must recruit the other legions to find the source of the issue and restore the acceleration ability.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/5/87145l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "9359",
+    "ru": "Мэверик",
+    "en": "Maverick",
+    "year": 1994,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 1773,
+    "popularity": 3.31,
+    "genres": [
+      "боевик",
+      "приключения",
+      "комедия",
+      "драма",
+      "вестерн"
+    ],
+    "overview": "История о великолепном картежнике, игроке в покер и, конечно, обаятельном мошеннике Брэте Маверике. О том, как он самоотверженно «зарабатывает» деньги для участия в чемпионате по игре в покер. Но не только он собирается принять участие в «великом мошенничестве» — туда же стремится и обаятельная воровка Аннабел. Много приключений выпадет на их долю, пока им удастся набрать по 25 тысяч долларов, а именно такая сумма необходима для участия в игре….",
+    "poster": "https://image.tmdb.org/t/p/w342/gEO14OFi04jAoPnSKPBxkGFBnV2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ctzKCslTsMRsOJNvAm1Mw8ytiHY.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "10779",
     "ru": "Страшилы",
     "en": "The Frighteners",
@@ -10008,198 +10217,6 @@
     "overview": "Котяра Том беспечно бездельничает в гамаке, как обычно, измываясь над мышом Джерри, иногда получая нагоняи от капитана за лодырнечество. Однажды ему в лапы попадает карта сокровищ, ну он, само собой, загорается идеей обогатиться старомодной валютой, ну а у Джерри свои планы на клад. Так же на поиски злата и серебра кидаются трое братьев-близнецов. В конце концов побеждает наидостойнейший, а недостойные остаются с носом (или не совсем?)",
     "poster": "https://image.tmdb.org/t/p/w342/l4j8r4SHLJXjMccxX8yGH3QudRO.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/sTTQggCcbkf8KWmdYDx0kIhEXxI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 33600,
-    "ru": "Лицо Фюрера",
-    "en": "Der Fuehrer's Face",
-    "year": 1943,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 169,
-    "popularity": 0.75,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "музыка"
-    ],
-    "overview": "Дональд пробуждается от шума и немецкие музыканты заставляют его надеть нацистскую военную форму и забирают на фабрику вооружения, где он вынужден работать 48 часов в сутки.",
-    "poster": "https://image.tmdb.org/t/p/w342/v6skZApYBhhLRfYlX4YfMJog4oa.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dXqeXEh5pkwKrTBNHB8ihWzPF2m.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_201304",
-    "ru": "Правосудие: Первобытный город",
-    "en": "Justified: City Primeval",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 168,
-    "popularity": 4.7,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "Рэйлан Гивенс отправляется в Детройт, где сталкивается с опасным преступником Клементом Мэнселлом. Кроме этого Гивенс ищет баланс между работой и воспитанием дочери-подростка.",
-    "poster": "https://image.tmdb.org/t/p/w342/8ekUNSE2AyI2I9OsHNEtcWxJtew.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/q2dljJjmUBfpI0z5VC17z9S3rSD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 259910,
-    "ru": "Marvel Studios: Создание Вселенной",
-    "en": "Marvel Studios: Assembling a Universe",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 168,
-    "popularity": 1.58,
-    "genres": [
-      "документальный",
-      "телевизионный фильм",
-      "фэнтези"
-    ],
-    "overview": "Фильм предлагает ближе узнать историю Marvel Studios и кинематографическую вселенную Marvel. Заглядывая за кулисы съемок кинолент и беря интервью у звезд, авторы предоставляют поклонникам этой Вселенной эксклюзивный взгляд на мир кинокомиксов.",
-    "poster": "https://image.tmdb.org/t/p/w342/6i7wbS34rAZ3qZDFUb4oa7dhlc0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2l9yXhNtLC5SHa81m3MtLfpoXTr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 336211,
-    "ru": "Свадьба Тану и Ману. Возвращение",
-    "en": "तनु वेड्स मनु रिटर्न्स",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 168,
-    "popularity": 0.93,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Тану и Ману уже женаты четыре года и живут в Англии. Любовь прошла, и осталась надежда лишь на психиатров, чтобы понять, если есть возможность улучшить ситуацию. Но, как назло, у Ману начинается психическое расстройство и он попадает в психиатрическую клинику. Бессердечная Тану оставляет его на произвол судьбы и возвращается в Индию к своим родителям. Там она сообщает его другу Паппи о состоянии Ману. Когда Паппи приезжает в Лондон, Ману уже выписан из клиники и они вместе возвращаются в Индию. Однажды, совершенно случайно, Ману видит двойника Тану и ошибочно принимает за свою бывшую жену. Но оказывается, что её зовут Кусум по прозвищу Датто, родом из Харьяна и учится в Дели. Она спортсменка..",
-    "poster": "https://image.tmdb.org/t/p/w342/sO3XD6ZDZetb2N6YDQrHLTVQrfq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xZbereNXjKCxKUvoaLafnRSKWgy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_66912",
-    "ru": "Доктор Шанс",
-    "en": "Chance",
-    "year": 2016,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 167,
-    "popularity": 4.9,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Судебный психоневролог невольно оказывается вовлечен в жестокий и опасный мир ошибочного установления личности, коррупции в полиции и психического заболевания.",
-    "poster": "https://image.tmdb.org/t/p/w342/pnbvLjmyEVSWXY5NoK085QMqZa2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/i7YiC1kIioY9tN0PYVJttl6liMa.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 32428,
-    "ru": "Микки Маус: Одинокие привидения",
-    "en": "Lonesome Ghosts",
-    "year": 1937,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 167,
-    "popularity": 0.57,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "ужасы"
-    ],
-    "overview": "Микки, Дональд и Гуффи приняли вызов и взялись избавить усадьбу «Мрачный Жуть» от наводящих ужас призраков.",
-    "poster": "https://image.tmdb.org/t/p/w342/sKAsUgxPSC7ekvmgc7RjqiTw3Hq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gWFk9VMolKPQTVfp7TQ0HzqwOGr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1126934,
-    "ru": "Криминальный шеф",
-    "en": "What You Wish For",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 166,
-    "popularity": 0.83,
-    "genres": [
-      "триллер"
-    ],
-    "overview": "Райан, повар-неудачник по уши в долгах, приезжает в Латинскую Америку по приглашению давнего товарища по кулинарной школе. Тот реализовался в профессии и временно проживает в шикарном доме, где через несколько дней должен пройти званый ужин для богатых гостей. Однажды утром Райан обнаруживает своего приятеля повесившимся и, увидев в этом возможность расплатиться с долгами, решает выдать себя за него.",
-    "poster": "https://image.tmdb.org/t/p/w342/ybBNCiTdhIxifRmM4PPxzOilS3E.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sGAvgQDy1HShW8ja7R6pkUqJUKe.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "623135",
-    "ru": "Обрушение",
-    "en": "싱크홀",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 165,
-    "popularity": 3.03,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "В результате сильного ливня и трагического стечения обстоятельств конструкция современного многоэтажного дома не выдерживает и здание проваливается в огромную воронку. Жители оказываются заперты под обломками на глубине 250 метров. Вода продолжает прибывать, а запаса воздуха становится всё меньше с каждой минутой. У людей остаются считанные часы, чтобы выбраться из смертельной ловушки...",
-    "poster": "https://image.tmdb.org/t/p/w342/4Ah3vI04Brifob7qsacnTFYO2pF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/69dIMxj3aHtp8ABQsPYz2Ht0F6p.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_67743",
-    "ru": "Кардинал",
-    "en": "Cardinal",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 165,
-    "popularity": 8.28,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "В заброшенной шахте городка найдено тело тринадцатилетней Кейти Пайн, судя по уликам, погибшей в результате насильственной смерти. За расследование дела берутся полицейские детективы: Джон Кардинал, одолеваемый демонами из далёкого прошлого, и Лиз Делорм, рождённая в местной франкоговорящей общине.",
-    "poster": "https://image.tmdb.org/t/p/w342/c1ZSmaRsqV8WSgwkWkeW3E1vFbg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/b9bTAULS5coAm9UYh3DGA8SoZuk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_203555",
-    "ru": "Несовершенные",
-    "en": "The Imperfects",
-    "year": 2022,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 164,
-    "popularity": 3.79,
-    "genres": [
-      "Боевик и Приключения",
-      "драма",
-      "НФ и Фэнтези"
-    ],
-    "overview": "После эксперимента Эбби, Тильда и Хуан обнаруживают у себя чудовищные побочные эффекты. Они отправляются на поиски повинного в этом ученого — и способа излечиться.",
-    "poster": "https://image.tmdb.org/t/p/w342/mFFcSkG3hnYgsEVgoqcnE9LZkTO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sVzI93UPwj7KXd6Alak0gEL1pBd.jpg",
     "source": "tmdb"
   }
 ]

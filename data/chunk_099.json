@@ -1,5 +1,197 @@
 [
   {
+    "id": 100394,
+    "ru": "Палочка Банни",
+    "en": "Baton Bunny",
+    "year": 1959,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 38,
+    "popularity": 0.5,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/lUGj3Z0xFtGEkzxjGtrV9AdJvgp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/232k5FaSPIiF5UDeMggYFbsEF8e.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 193652,
+    "ru": "An Optical Poem",
+    "en": "An Optical Poem",
+    "year": 1938,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 38,
+    "popularity": 0.29,
+    "genres": [
+      "мультфильм",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1yAfkkvRsmK8rbJD2m5W905jb56.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hz7Z4JasDXpVDpuZGeHfcN98k7N.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 30958,
+    "ru": "Charlie and Lola",
+    "en": "Charlie and Lola",
+    "year": 2005,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.8,
+    "votes": 37,
+    "popularity": 2.6,
+    "genres": [
+      "Детский",
+      "мультфильм",
+      "семейный",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/78XSc7oUweLLpmjCJ9q59y2Mi8e.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uvXS4NVBXnf1BEh3YQDfs8R20gL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 718100,
+    "ru": "Принцесса Лебедь: Королевская Свадьба",
+    "en": "The Swan Princess: A Royal Wedding",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 37,
+    "popularity": 0.68,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "фэнтези"
+    ],
+    "overview": "Принцесса Одетт, принц Дерек и их королевские друзья плывут на корабле на встречу еще одному волшебному приключению в заколдованной стране Катай! Прекрасная принцесса Мэй Ли пригласила принцессу Одетт на свою свадьбу с ее возлюбленным Ченом. По приезду Одетт обнаруживает, что тут что-то не так. И не все - те, за КОГО они себя выдают! Злая колдунья Фанг когда-то наложила заклятие, желая сама выйти замуж за Чена. Свадьба приближается, и только принцесса Одетт и ее друзья могут снять проклятие и сделать так, чтобы принцесса Мэй Ли и Чен жили вместе долго и счастливо.",
+    "poster": "https://image.tmdb.org/t/p/w342/xEcybBgi8WAnwbT3hs6nNBe1gTc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/12oPPNSAKabqcwCd8CJSYL0A6p5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 834500,
+    "ru": "Trippin’ with the Kandasamys",
+    "en": "Trippin’ with the Kandasamys",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 37,
+    "popularity": 0.74,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1tpuwM9fZFcMNkkGU0WwqPAEaFz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gXuTcVYpn4YhYLPm69IxJAdxqtR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 849242,
+    "ru": "Harka",
+    "en": "Harka",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 37,
+    "popularity": 0.52,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dFE0Kk51q5l7finikNgUVR1fPKj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uGjJmBYNLAdJq2KgJUXq2GA8ex6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 86632,
+    "ru": "Пиарщица",
+    "en": "Flack",
+    "year": 2019,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.8,
+    "votes": 37,
+    "popularity": 4.64,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "Робин - пиарщица, она знает всё о том, как преподнести клиента клиента в выгодном свете. Тем временем в её собственной жизни полный бардак.",
+    "poster": "https://image.tmdb.org/t/p/w342/i2bW3nZE8iThEgqNYjaxAz3qZoo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6lkZYlgKF77OOcsoLP6Rdj4Lwy9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 72396,
+    "ru": "Самый сильный доставщик",
+    "en": "최강 배달꾼",
+    "year": 2017,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.8,
+    "votes": 37,
+    "popularity": 3.71,
+    "genres": [
+      "драма"
+    ],
+    "overview": "История о доставщике чачжанмёна Чхве Кан Су и о том, как он поднимается с позорной позиции временного сотрудника до должности директора, а также находит своё личное счастье.\n\nЛи Да На тоже занимается доставкой чжаджанмёна и мечтает сбежать из \"Адского Чосона\", то есть из Кореи-в-которой-невозможно-найти-работу. Она отказывается от ухаживаний мужчин, предпочитая заниматься своим делом. Её не волнует ничего, кроме денег.",
+    "poster": "https://image.tmdb.org/t/p/w342/5R8ofR1cX7mc17cayDfrLQuFJ0w.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/AeIJNWD4bw5WkjjQKg1bYBAgWcI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 465365,
+    "ru": "Мой брат слишком сильно меня любит",
+    "en": "兄に愛されすぎて困ってます",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 37,
+    "popularity": 2.17,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Старшекласснице Сэтоке Татибане не везёт с личной жизнью. Она уже 12 раз признавалась парням в своих чувствах, но всякий раз была отшита и осмеяна. Старший брат девушки Харука всегда готов выслушать сестру. Он — добрый и заботливый. Но у него есть тайна, которую он хранит много лет: они с Сэтокой вовсе не брат и сестра. Однажды в город возвращается первая любовь Сэтоки — Таканэ Сэрикава — и, кажется, что тайна семейства Татибана скоро вывалится наружу.",
+    "poster": "https://image.tmdb.org/t/p/w342/dtSguACVTiZM6jZ1Lj6XaDo12Lb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/untd68N5EvEeVF6pPG3cIQqlp9H.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 52611,
+    "ru": "Приключения мышонка Переса 2",
+    "en": "El Ratón Pérez 2",
+    "year": 2008,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 37,
+    "popularity": 0.48,
+    "genres": [
+      "мультфильм",
+      "семейный"
+    ],
+    "overview": "Мышонок Перес работает Зубной феей. У него очень много дел: днем он трудится на плавучей жемчужной фабрике, где из молочных зубов делаются жемчужинки, а ночью вершит свою зубную миссию! Однажды вечером он должен подобрать зуб, сломанный маленьким Лукасом.  В доме у мальчика мышонок знакомится с привлекательной мышкой Лолой. Подружившиеся Лола и Перес, учатся танцевать сальсу. О Пересе узнает Джил Пенькоффу — жадный продюсер. Он хочет поймать мышонка, чтобы показать миру сенсацию! Но Лола и Лукас помогают ему бежать из рук злодея.",
+    "poster": "https://image.tmdb.org/t/p/w342/uJYFm3kAzvA32Nux1NEehoAji9s.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/elcBFpTXqfVwwkDVVDFVBkLBT6O.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 627076,
     "ru": "Дикарь",
     "en": "Savage",
@@ -9540,194 +9732,6 @@
     "overview": "Из-за роковой случайности чемпион мира по боксу теряет всё, что у него есть, и оказывается в тюрьме. После освобождения он понимает, что ему придётся добиваться всего заново и главным препятствием на его пути будет его бывший друг и спарринг-партнёр.",
     "poster": "https://image.tmdb.org/t/p/w342/5uLbzz4i0UDB30RFTyls6VVxhEJ.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/2bkkKlk6GuEYZ4DL7mfSGSvxyB1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 394034,
-    "ru": "Будда в заторе",
-    "en": "Buddha in a Traffic Jam",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 12,
-    "popularity": 0.44,
-    "genres": [
-      "триллер",
-      "криминал"
-    ],
-    "overview": "Викрам Пандит учится в достаточно престижном университете. Парень постоянно выпускает в свет научные статьи, которые на самом деле написаны его преподавателем и наставником Джамшедом Батки. Викрам публикует работы, в которых говорится в социальном расслоении и о жизни индийских бедняков. Однажды главный герой предлагает свой способ решения этой непростой проблемы. Викрам считает, что побороть бедность можно только обойдя застойную политику, которую проповедует правительство страны. Вскоре парень начинает осознавать, что оказался в потенциально опасной ситуации, из которой не так уж просто выбраться.",
-    "poster": "https://image.tmdb.org/t/p/w342/bAia8POGJHaSLL9RCdo99ZNClKG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ehiMVFVHtgoGwyJ0cIXP3mmHe0N.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 69115,
-    "ru": "Карате-гвардия",
-    "en": "The Karate Guard",
-    "year": 2005,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 12,
-    "popularity": 0.41,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Том неожиданно просыпается в своём доме из-за посторонних шумов. Осмотрев мышиную нору, выясняется, что звуки исходят от Джерри, который тренируется боевому искусству карате. Закончив тренировку, появляется духовный наставник, и предлагает мышонку практиковать свои приёмы на коте. Однако первая попытка заканчивается неудачей, и учитель Джерри даёт гонг, призывающий на подмогу бойца сумо Спайка. С его помощью соперник не раз побеждает своего противника. Чтобы расправиться со своими противникам, Том звонит Бутчу, который со своими друзьями должны убрать Спайка и схватить Джерри. Коты неудачно обстреляли Спайка пейнтбольными шариками, но последний быстро расправляется с ними с помощью Тома, из которого сделал шар. В конце эпизода показывают Джерри и пса, которые смотрят телевизор и заставляют Тома исполнять их желания.",
-    "poster": "https://image.tmdb.org/t/p/w342/6dAuo4eUh4BFDVcuG9RC2PLoTrj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zQNnicL0DItMcwY1zkZN5n5VfwO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 561347,
-    "ru": "ഒരു കുപ്രസിദ്ധ പയ്യൻ",
-    "en": "ഒരു കുപ്രസിദ്ധ പയ്യൻ",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 12,
-    "popularity": 0.9,
-    "genres": [
-      "детектив",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/niqnnJ93gu7g0qEzW876ohgmBnQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rs35z02nEieUmymStlL4dp82gub.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 475153,
-    "ru": "당신의 부탁",
-    "en": "당신의 부탁",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 12,
-    "popularity": 0.8,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bLmgb4209D5NH8pV9eRAtb43O4s.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iCISmMZeIPq98YjL9yIxZ6L9qyM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 603110,
-    "ru": "மகாமுனி",
-    "en": "மகாமுனி",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 12,
-    "popularity": 0.59,
-    "genres": [
-      "драма",
-      "триллер",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/A4NtgJCaD6rgmtMc9LjA1ifv3Bp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bkuUZS0JO7SIOXW9MkqiI8csCWC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 642224,
-    "ru": "Margaret Atwood: A Word After a Word After a Word Is Power",
-    "en": "Margaret Atwood: A Word After a Word After a Word Is Power",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 12,
-    "popularity": 0.52,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/G9F9RWSHaUZByx3ia1xgDQf5YO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gczJ4JO03Y7Do93WFj2KBGdfUHh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 451289,
-    "ru": "Making Apes: The Artists Who Changed Film",
-    "en": "Making Apes: The Artists Who Changed Film",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 12,
-    "popularity": 0.49,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bGoymiD9FN4MCzlW0TWcLQyv7yf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tipnzzMAPQRTJJnjSiqCjqx66RQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 540765,
-    "ru": "แอปชนแอป",
-    "en": "แอปชนแอป",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 12,
-    "popularity": 0.48,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5h9doHLMFaupNFP8WKlvkHPeApS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mWhSTzx14Pd0GR38WLcWFn2ExLh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 468844,
-    "ru": "Ordinary Days",
-    "en": "Ordinary Days",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 12,
-    "popularity": 0.46,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1mTVjbBuxx9kn8C0IxfMhsLYhFm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xSsZkWFixnOjDcGuDkY8o96zC2s.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 317214,
-    "ru": "من ألف إلى باء",
-    "en": "من ألف إلى باء",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 12,
-    "popularity": 0.41,
-    "genres": [
-      "приключения",
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/w1TP7MzhSFK4qzOQgB6lT0SHCca.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7ryaQY5skxiqMttgVATvxcZyGJF.jpg",
     "source": "tmdb"
   }
 ]

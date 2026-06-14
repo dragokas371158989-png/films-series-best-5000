@@ -8222,6 +8222,27 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8320315,
+    "ru": "Guardián de mi vida",
+    "en": "Guardián de mi vida",
+    "year": "2026",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 9.71,
+    "votes": 58,
+    "popularity": 3.37,
+    "genres": [
+      "Мыльная опера",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ppdrvfUyukqtFkl1HY7x6qHd7st.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/wy3dhydGawctPp3S9mVqb1ONFBR.jpg",
+    "source": "trending_tv_week",
+    "status": "Онгоинг",
+    "tmdbId": 320315
+  },
+  {
     "id": 256695,
     "ru": "Обычный мультик: Утерянные плёнки",
     "en": "Regular Show: The Lost Tapes",
@@ -8242,27 +8263,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/h5lAgHtM1ROmaMCxhSof7R9NNNL.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/Zk5UmvJ634LhA56R18h8RfipFG.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8320315,
-    "ru": "Guardián de mi vida",
-    "en": "Guardián de mi vida",
-    "year": "2026",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 9.7,
-    "votes": 56,
-    "popularity": 3.37,
-    "genres": [
-      "Мыльная опера",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ppdrvfUyukqtFkl1HY7x6qHd7st.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/wy3dhydGawctPp3S9mVqb1ONFBR.jpg",
-    "source": "trending_tv_week",
-    "status": "Онгоинг",
-    "tmdbId": 320315
   },
   {
     "id": 1444376,

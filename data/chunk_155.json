@@ -1,5 +1,197 @@
 [
   {
+    "id": 392033,
+    "ru": "Saved by Grace",
+    "en": "Saved by Grace",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 12,
+    "popularity": 0.47,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/c4STZuRIJJHGf40dadW3yKjuDYS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6sopYMrn6I51CJbIJOfV9xUmr4H.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 400309,
+    "ru": "Az Úr hangja",
+    "en": "Az Úr hangja",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 12,
+    "popularity": 0.46,
+    "genres": [
+      "фантастика",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/phfe2D30ueVbp1D9c24AWSEDEG8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qiweNvauU6eeXvPK0gkLopS1d6D.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "76731",
+    "ru": "Один: Космический корабль «Звёздный свет»",
+    "en": "オーディーン　光子帆船スターライト",
+    "year": 1985,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.9,
+    "genres": [
+      "фантастика",
+      "приключения",
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "2099 год. Новейшие технологии позволили преобразование солнечной энергии в энергию лазера, чьи мощные лучи послужили движущим средством тысячам космическим парусникам, перевозящим пассажиров и грузы между различыми уголками нашей системы. Вершиной развития научно-технического прогресса стал парусник «Звёздный Свет», способный управлять силой гравитации. С группой отборных молодых космонавтов и опытным капитаном судно отправилось в космос для проверки летательных качеств, но все планы нарушает сигнал бедстия с гибнущего в магнитной буре транспорта. Отклонение от заданного маршрута приводит к обнаружению древней инопланетной цивилизации, возможно, праматери всего живого, к чьей родной планете и направляется «Звёздный Свет»",
+    "poster": "https://image.tmdb.org/t/p/w342/fQMkeFeE4MKGweEYHnoUjH8TGWX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/glDHTZ1x4FSxubgnGq6I35vaqpc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_62323",
+    "ru": "ガンスリンガー ストラトス",
+    "en": "ガンスリンガー ストラトス",
+    "year": 2015,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 7.54,
+    "genres": [
+      "НФ и Фэнтези",
+      "Боевик и Приключения",
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fiiEdn5QId58LBuGOguI6cs3Rg6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jo09ciCWaivNeiH4vgh48HMJC7i.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1233327,
+    "ru": "Король ставок",
+    "en": "మట్కా",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 2.28,
+    "genres": [
+      "боевик",
+      "криминал"
+    ],
+    "overview": "Уличный авантюрист пробивается в криминальный мир и становится лидером крупнейшей сети азартных игр в стране.",
+    "poster": "https://image.tmdb.org/t/p/w342/1LzHbFk93Lp00ZsqGHPAnAoUJW8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kyVcNF6GRthdiT4oZn5XgJtl0F7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 828595,
+    "ru": "Добрая ведьма Рождества",
+    "en": "The Good Witch of Christmas",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.57,
+    "genres": [
+      "комедия",
+      "семейный",
+      "фэнтези"
+    ],
+    "overview": "Эмма и Питер отвозят детей к дяде, чтобы успеть за подарками, но по дороге сбивают упряжку оленей Санты-Клауса. Рождественская ведьма, вылетевшая на помощь Санте, тоже терпит крушение и полностью теряет память. Дети ждут Рождества, но успеют ли наши герои его спасти?",
+    "poster": "https://image.tmdb.org/t/p/w342/nEP2DSmUVpVrTmYEuObZzGigGr1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/l4XVXkCFOuYHo2XltjW0w8xxjMY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 895539,
+    "ru": "Тень. Взять Гордея",
+    "en": "Тень. Взять Гордея",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.51,
+    "genres": [
+      "приключения",
+      "драма"
+    ],
+    "overview": "Он — неуловимый шпион, который проходит по сводкам как «Гордей». Он — настоящая тень, человек с множеством лиц, которого никто никогда не видел. Поймать предателя Гордея — главная цель российской контрразведки, ведь этот загадочный человек неуловим и крадет государственные секреты. Когда появляется информация, что Гордей прямо сейчас действует в Москве и под угрозой оказывается национальная безопасность страны, на его след выходит молодой контрразведчик Вадим. Ставки в шпионской игре повышаются с каждым днем, главная из них — поймать Гордея пока не поздно, или погибнуть…",
+    "poster": "https://image.tmdb.org/t/p/w342/vlE9ybZ4cJjLYbZdDiNOVOmoID5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mmed0lQ3WyfmboSfO9MNgGn1AHQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 737012,
+    "ru": "Идеальный Давид",
+    "en": "El perfecto David",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.4,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Давид как одержимый работает над своим телом: он хочет добиться совершенства и стать знаменитым культуристом. Но чем больше Давид посвящает себя собственному телу, тем сложнее ему становится наладить свою личную жизнь и не завидовать ровесникам.",
+    "poster": "https://image.tmdb.org/t/p/w342/qIAvmUGgU59li6QvuAH2mqIgTyc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/17ncxcNURtBo8NTkyIoFeFYla2H.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1138474,
+    "ru": "Primbon",
+    "en": "Primbon",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 0.61,
+    "genres": [
+      "драма",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7JF4Z1wCKt0NeRicyQzs4zD5Zv0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dSNTIeu7qpM1H1YlOdEu0awVPo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 561155,
+    "ru": "Спасая Рождество",
+    "en": "Saving Christmas",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.9,
+    "votes": 11,
+    "popularity": 1.84,
+    "genres": [
+      "семейный"
+    ],
+    "overview": "С помощью различных научных теорий и самодельных электронных устройств маленький мальчик Дэнни пытается доказать, что Санта Клаус существует. Отыскать истину и подарить всем жителям маленького города праздничное настроение в канун Рождества ему помогают близкие друзья и родные.",
+    "poster": "https://image.tmdb.org/t/p/w342/xBR7C6Go9FsXmOWXx4R1bjIJiZY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pywpPVkgvp2dbtbz2HeZDQzLqid.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 489996,
     "ru": "Призрак Клары",
     "en": "Clara's Ghost",
@@ -9404,197 +9596,6 @@
     "overview": "Грей – обычный солдат военной системы будущего, высоко оплачивающей успехи в сражениях. Однако только три процента солдат доживают до самый высшей платы – гражданства. Грей умудрился вернуться живым, заработав за время службы прозвище «Синигами». Грей вернулся… Но стоило ли общество, за которое сражались он и его товарищи тех жертв?…",
     "poster": "https://image.tmdb.org/t/p/w342/99ZKfA4wb5fc9FR12buDVqV02Ih.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/16XTEYRVuJZD9aLLreSN8cLrHLm.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 75415,
-    "ru": "Galileo",
-    "en": "Galileo",
-    "year": 1998,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.8,
-    "votes": 8,
-    "popularity": 19.49,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/VwqwId0kD9NIT0cTWx3Is6Jar5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wtONQBI3nbqFNOT2RoXXBgckMeX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1929,
-    "ru": "Checkmate",
-    "en": "Checkmate",
-    "year": 1960,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.8,
-    "votes": 8,
-    "popularity": 9.81,
-    "genres": [
-      "криминал",
-      "драма",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8EPt8QG4e4qbw2lIHySMPYFdhUE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9zvc03mGeRtuMfAasghNTn2zapv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 40367,
-    "ru": "Putous",
-    "en": "Putous",
-    "year": 2010,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.8,
-    "votes": 8,
-    "popularity": 5.11,
-    "genres": [
-      "комедия",
-      "Реалити-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oTasblSN5pSkDoKUcgGyTXnb7p3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/k7tzLBbJySJMmITE88HGoDeoQOu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 137502,
-    "ru": "蒼穹のファフナー HEAVEN AND EARTH",
-    "en": "蒼穹のファフナー HEAVEN AND EARTH",
-    "year": 2010,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 8,
-    "popularity": 0.95,
-    "genres": [
-      "боевик",
-      "мультфильм",
-      "драма",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5oj7SUSrYlUzAfLcpdxOVehEp9D.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/slU4vFaL8HbNcMaM9gwkxfsCGK6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 400384,
-    "ru": "惡人谷",
-    "en": "惡人谷",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 8,
-    "popularity": 0.8,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gNluDghvJLZXyG4rpQ51mQcuxOl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/u7H2X9tsn1WMYFhKlXprUEkdwX4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 359644,
-    "ru": "通学シリーズ 通学電車",
-    "en": "通学シリーズ 通学電車",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 8,
-    "popularity": 0.58,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dALzsMquhHXqevyjvQpYGI9RGpH.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/x1d8sXmpemOpqUmK5f0qekmVyjO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 622719,
-    "ru": "イソップの思うツボ",
-    "en": "イソップの思うツボ",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 8,
-    "popularity": 0.56,
-    "genres": [
-      "фэнтези",
-      "триллер",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oFGFkF2uODzmbLrz3mdMyGtzqsb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/i5rRz7vIXEWTXiIDa52tBJFObuk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 168850,
-    "ru": "Onikirimaru",
-    "en": "Onikirimaru",
-    "year": 1994,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 8,
-    "popularity": 0.29,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1JJNBfh5KxNV6fwLmaA61XjZ54c.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1576878,
-    "ru": "Невидимый враг",
-    "en": "Unseen Enemy",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 7,
-    "popularity": 0.7,
-    "genres": [
-      "боевик",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "Скрывающийся телохранитель Леви втягивается в поиски пропавшей девушки и становится мишенью для Якудза. Так опасное расследование заставляет его выйти из тени и бросить вызов подпольному миру. И чтобы защитить семью, он прекращает бегство и решает сам вершить правосудие.",
-    "poster": "https://image.tmdb.org/t/p/w342/A5mQcSgBeML2OBQLCH6RXn7gNNy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7TsA9t4iy3lcYHBHPT9o2FOkZ0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 776791,
-    "ru": "Дорога вперед",
-    "en": "The Road Ahead",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.8,
-    "votes": 7,
-    "popularity": 0.37,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Лиам подумывает о разводе, когда узнает, что у его жены Мии диагностирован рак. Чтобы наладить отношения, они отправляются в путешествие.",
-    "poster": "https://image.tmdb.org/t/p/w342/qS9quCAaR9w7G4S6tI1f86zd2OV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dTVUI9nBet4npmSvs5x6xmFcYOI.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,197 @@
 [
   {
+    "id": 33600,
+    "ru": "Лицо Фюрера",
+    "en": "Der Fuehrer's Face",
+    "year": 1943,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 169,
+    "popularity": 0.75,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "музыка"
+    ],
+    "overview": "Дональд пробуждается от шума и немецкие музыканты заставляют его надеть нацистскую военную форму и забирают на фабрику вооружения, где он вынужден работать 48 часов в сутки.",
+    "poster": "https://image.tmdb.org/t/p/w342/v6skZApYBhhLRfYlX4YfMJog4oa.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dXqeXEh5pkwKrTBNHB8ihWzPF2m.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_201304",
+    "ru": "Правосудие: Первобытный город",
+    "en": "Justified: City Primeval",
+    "year": 2023,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.9,
+    "votes": 168,
+    "popularity": 4.7,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Рэйлан Гивенс отправляется в Детройт, где сталкивается с опасным преступником Клементом Мэнселлом. Кроме этого Гивенс ищет баланс между работой и воспитанием дочери-подростка.",
+    "poster": "https://image.tmdb.org/t/p/w342/8ekUNSE2AyI2I9OsHNEtcWxJtew.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/q2dljJjmUBfpI0z5VC17z9S3rSD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 259910,
+    "ru": "Marvel Studios: Создание Вселенной",
+    "en": "Marvel Studios: Assembling a Universe",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 168,
+    "popularity": 1.58,
+    "genres": [
+      "документальный",
+      "телевизионный фильм",
+      "фэнтези"
+    ],
+    "overview": "Фильм предлагает ближе узнать историю Marvel Studios и кинематографическую вселенную Marvel. Заглядывая за кулисы съемок кинолент и беря интервью у звезд, авторы предоставляют поклонникам этой Вселенной эксклюзивный взгляд на мир кинокомиксов.",
+    "poster": "https://image.tmdb.org/t/p/w342/6i7wbS34rAZ3qZDFUb4oa7dhlc0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2l9yXhNtLC5SHa81m3MtLfpoXTr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 336211,
+    "ru": "Свадьба Тану и Ману. Возвращение",
+    "en": "तनु वेड्स मनु रिटर्न्स",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 168,
+    "popularity": 0.93,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Тану и Ману уже женаты четыре года и живут в Англии. Любовь прошла, и осталась надежда лишь на психиатров, чтобы понять, если есть возможность улучшить ситуацию. Но, как назло, у Ману начинается психическое расстройство и он попадает в психиатрическую клинику. Бессердечная Тану оставляет его на произвол судьбы и возвращается в Индию к своим родителям. Там она сообщает его другу Паппи о состоянии Ману. Когда Паппи приезжает в Лондон, Ману уже выписан из клиники и они вместе возвращаются в Индию. Однажды, совершенно случайно, Ману видит двойника Тану и ошибочно принимает за свою бывшую жену. Но оказывается, что её зовут Кусум по прозвищу Датто, родом из Харьяна и учится в Дели. Она спортсменка..",
+    "poster": "https://image.tmdb.org/t/p/w342/sO3XD6ZDZetb2N6YDQrHLTVQrfq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xZbereNXjKCxKUvoaLafnRSKWgy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_66912",
+    "ru": "Доктор Шанс",
+    "en": "Chance",
+    "year": 2016,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.9,
+    "votes": 167,
+    "popularity": 4.9,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Судебный психоневролог невольно оказывается вовлечен в жестокий и опасный мир ошибочного установления личности, коррупции в полиции и психического заболевания.",
+    "poster": "https://image.tmdb.org/t/p/w342/pnbvLjmyEVSWXY5NoK085QMqZa2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/i7YiC1kIioY9tN0PYVJttl6liMa.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 32428,
+    "ru": "Микки Маус: Одинокие привидения",
+    "en": "Lonesome Ghosts",
+    "year": 1937,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 167,
+    "popularity": 0.57,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "ужасы"
+    ],
+    "overview": "Микки, Дональд и Гуффи приняли вызов и взялись избавить усадьбу «Мрачный Жуть» от наводящих ужас призраков.",
+    "poster": "https://image.tmdb.org/t/p/w342/sKAsUgxPSC7ekvmgc7RjqiTw3Hq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gWFk9VMolKPQTVfp7TQ0HzqwOGr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1126934,
+    "ru": "Криминальный шеф",
+    "en": "What You Wish For",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 166,
+    "popularity": 0.83,
+    "genres": [
+      "триллер"
+    ],
+    "overview": "Райан, повар-неудачник по уши в долгах, приезжает в Латинскую Америку по приглашению давнего товарища по кулинарной школе. Тот реализовался в профессии и временно проживает в шикарном доме, где через несколько дней должен пройти званый ужин для богатых гостей. Однажды утром Райан обнаруживает своего приятеля повесившимся и, увидев в этом возможность расплатиться с долгами, решает выдать себя за него.",
+    "poster": "https://image.tmdb.org/t/p/w342/ybBNCiTdhIxifRmM4PPxzOilS3E.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sGAvgQDy1HShW8ja7R6pkUqJUKe.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "623135",
+    "ru": "Обрушение",
+    "en": "싱크홀",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 165,
+    "popularity": 3.03,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "В результате сильного ливня и трагического стечения обстоятельств конструкция современного многоэтажного дома не выдерживает и здание проваливается в огромную воронку. Жители оказываются заперты под обломками на глубине 250 метров. Вода продолжает прибывать, а запаса воздуха становится всё меньше с каждой минутой. У людей остаются считанные часы, чтобы выбраться из смертельной ловушки...",
+    "poster": "https://image.tmdb.org/t/p/w342/4Ah3vI04Brifob7qsacnTFYO2pF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/69dIMxj3aHtp8ABQsPYz2Ht0F6p.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_67743",
+    "ru": "Кардинал",
+    "en": "Cardinal",
+    "year": 2017,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.9,
+    "votes": 165,
+    "popularity": 8.28,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "В заброшенной шахте городка найдено тело тринадцатилетней Кейти Пайн, судя по уликам, погибшей в результате насильственной смерти. За расследование дела берутся полицейские детективы: Джон Кардинал, одолеваемый демонами из далёкого прошлого, и Лиз Делорм, рождённая в местной франкоговорящей общине.",
+    "poster": "https://image.tmdb.org/t/p/w342/c1ZSmaRsqV8WSgwkWkeW3E1vFbg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/b9bTAULS5coAm9UYh3DGA8SoZuk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_203555",
+    "ru": "Несовершенные",
+    "en": "The Imperfects",
+    "year": 2022,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.9,
+    "votes": 164,
+    "popularity": 3.79,
+    "genres": [
+      "Боевик и Приключения",
+      "драма",
+      "НФ и Фэнтези"
+    ],
+    "overview": "После эксперимента Эбби, Тильда и Хуан обнаруживают у себя чудовищные побочные эффекты. Они отправляются на поиски повинного в этом ученого — и способа излечиться.",
+    "poster": "https://image.tmdb.org/t/p/w342/mFFcSkG3hnYgsEVgoqcnE9LZkTO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sVzI93UPwj7KXd6Alak0gEL1pBd.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 601188,
     "ru": "Между двумя мирами",
     "en": "Ouistreham",
@@ -9509,201 +9701,6 @@
     "overview": "Правозащитник Мэттью Коллинз проникает в британскую неонацистскую террористическую группировку, чтобы предотвратить убийство члена парламента.",
     "poster": "https://image.tmdb.org/t/p/w342/67lqoQrhvby2iNfNQnFGZgXemfB.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/i4oCghPVqEuNhAnY9eUFZPxqine.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 618200,
-    "ru": "Дерзкое ограбление",
-    "en": "파이프라인",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 47,
-    "popularity": 1.07,
-    "genres": [
-      "криминал",
-      "боевик"
-    ],
-    "overview": "Наследник богатого семейства собирает команду из пяти суперпрофессионалов, чтобы реализовать план дерзкого ограбления. Им предстоит украсть нефть, спрятанную в туннеле на глубине десятков метров под землей.",
-    "poster": "https://image.tmdb.org/t/p/w342/dIaFHRAbE66kEaexBjR30Oir37Q.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dPFCnfKw0o8tQasFO76jCZ5WqTv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 879097,
-    "ru": "Вторжение кроликов: Миссия на Марс",
-    "en": "Les Lapins Crétins - Invasion : Objectif Mars",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 47,
-    "popularity": 0.96,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Ученым Джону и Оливии было поручено собрать команду кроликов для первого космического полета на Марс. Полет финансируется Фрэнком Небулой, богатым генеральным директором глобального технологического гиганта. В то время как большинство рассматриваемых кроликов не самые умные животные, а также разрушительно озорные, один из кроликов, которого Джон и Оливия назвали «Скрибблс», находит способы доказать, что он необычайно одарен в математике и естественных науках. Оливия настаивает на том, чтобы Скрибблс полетел на космическом корабле на Марс, но ее настойчивость раскрывает настоящую причину, по которой Небула хочет, чтобы Кролики, в отличие от роботов или людей, первыми отправились на Марс.",
-    "poster": "https://image.tmdb.org/t/p/w342/pHM0DBDnvFlxIvwPckaVIV6KbLw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dXVXHeH0da4Lq63nsD3ABYNSEPu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1219560,
-    "ru": "Alter weißer Mann",
-    "en": "Alter weißer Mann",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 47,
-    "popularity": 0.67,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/32rESYjhBkSYo4cXoEIOGJEQMk5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5dcKoBZFuVQCSnDQctUpcXToHLu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 108611,
-    "ru": "牙狼＜GARO＞−魔戒ノ花−",
-    "en": "牙狼＜GARO＞−魔戒ノ花−",
-    "year": 2014,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 47,
-    "popularity": 1.49,
-    "genres": [
-      "Боевик и Приключения",
-      "драма",
-      "НФ и Фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/scXiLKLiSaUDpbSE78xinsRmPW4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2kxElNum4eccZhdDg4I3B3atsv0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 62987,
-    "ru": "Darknet",
-    "en": "Darknet",
-    "year": 2013,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.9,
-    "votes": 47,
-    "popularity": 1.07,
-    "genres": [
-      "детектив",
-      "криминал",
-      "НФ и Фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uMDuholBSIBHW8zr5iL405fmSaa.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zIuudnCA9qiSZt0XEZwL1aEuSV4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 37565,
-    "ru": "Хроника крыльев",
-    "en": "ツバサ･クロニクル",
-    "year": 2005,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.9,
-    "votes": 46,
-    "popularity": 11.93,
-    "genres": [
-      "мультфильм",
-      "драма",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Экранизация весьма популярной манги, построенной на смешении героев из разных миров студии Clamp. Основная сюжетная линия связана с Шаораном и Сакурой, которые вынуждены отправиться в путешествие за потерянной памятью Сакуры. Это происшествие было подстроено темными личностями, которым нужна способность Сакуры перемещаться по мирам и менять их. Кто победит: судьба или воля главного героя?",
-    "poster": "https://image.tmdb.org/t/p/w342/zVyrHP3xgNqvMXfxZhPepCjog7c.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6yEPWAfQQmkZTht21z9OYZP9f8E.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "98299",
-    "ru": "Приключения Дигимонов: Золотые Дигименталы",
-    "en": "デジモンアドベンチャー02 前編・デジモンハリケーン上陸!!／後編・超絶進化!!黄金のデジメンタル",
-    "year": 2000,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.9,
-    "votes": 46,
-    "popularity": 2.55,
-    "genres": [
-      "мультфильм",
-      "приключения",
-      "фантастика",
-      "Аниме"
-    ],
-    "overview": "Америка, Нью-Йорк. Это именно то место, куда отправились на каникулы трое «избранных» детей — Хикари, Такэру и Мими. Когда ребята решают в очередной раз сфотографироваться, из ниоткуда появляется мистический ветер, который, пролетев полмира, заставил исчезнуть многих «избранных», и сейчас он унёс Мими. Одновременно с этим своего давно пропавшего друга-дигимона ищет таинственный паренёк. Смогут ли оставшиеся «избранные» помочь этому ребёнку? И справятся ли они с новой угрозой?",
-    "poster": "https://image.tmdb.org/t/p/w342/zB4VpT9RF7UTVpRabCUPugjPTs3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5KwDfIM7UO2vPXr4E7JEmeiFxwU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 67082,
-    "ru": "Total Drama Presents: The Ridonculous Race",
-    "en": "Total Drama Presents: The Ridonculous Race",
-    "year": 2015,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.9,
-    "votes": 46,
-    "popularity": 3.24,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/NpHctZgDk1QvwQWpR4gZaqZIdP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hQrDOEBB9NZAjcXA3BtrwseTss1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 877181,
-    "ru": "Под шлемом: Наследие Бобы Фетта",
-    "en": "Under the Helmet: The Legacy of Boba Fett",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 46,
-    "popularity": 1.08,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "Специальный выпуск, посвященный истокам и наследию легендарного охотника за головами из «Звездных войн», Бобы Фетта.",
-    "poster": "https://image.tmdb.org/t/p/w342/jhgC70TurqELEc7vuepAjVpKakH.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1Ikah6jKZfIzo9UOPgxnrVStnmO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1179496,
-    "ru": "La Sexóloga",
-    "en": "La Sexóloga",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 46,
-    "popularity": 0.54,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/slXJn0kE0pkxJpHnIrnKk7CZOqj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aEnuL9ZZabmWxBslinlgprxKgSW.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,23 +1,46 @@
 [
   {
-    "id": 8136283,
-    "ru": "Торжество мести",
-    "en": "더 글로리",
-    "year": "2022",
+    "id": 88803,
+    "ru": "Сага о Винланде",
+    "en": "ヴィンランド・サガ",
+    "year": 2019,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 8.5,
+    "votes": 945,
+    "popularity": 17.59,
+    "genres": [
+      "мультфильм",
+      "Война и Политика",
+      "Боевик и Приключения",
+      "драма",
+      "Аниме"
+    ],
+    "overview": "На суровых землях Исландии, средь хлада и ветров, живут потомки мореплавателей, некогда перебравшихся с материка на заснеженный остров. Здесь же живёт и Торс, отец Торфинна, — статный и уважаемый мужчина. И, по мнению соседей, человек необычных взглядов на жизнь… Торс не спешит браться за меч и считает, что настоящему воину он вовсе не нужен.",
+    "poster": "https://image.tmdb.org/t/p/w342/aFJf2FeSFSGGBFUm4L97tUw1nQe.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xamCBQePUy9xI42GvtphLuGqd09.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 8012313,
+    "ru": "Shadow Hunter",
+    "en": "Shadow Hunter",
+    "year": "2005",
     "type": "Сериал",
     "category": "Сериал",
     "rating": 8.5,
-    "votes": 906,
-    "popularity": 23.92,
+    "votes": 922,
+    "popularity": 0.4,
     "genres": [
+      "НФ и Фэнтези",
       "драма"
     ],
-    "overview": "Спустя годы после того, как женщина пережила ужасное насилие в школе, она реализует тщательно продуманный план мести, чтобы обидчики заплатили за свои преступления.",
-    "poster": "https://image.tmdb.org/t/p/w342/dbuIoJKnnAFGof9imZ9UFa3O42S.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/AjwoDj77HLlqcpwEGqsnvMXm5my.jpg",
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hOTaiR2qRDZtHgR2Kwz7RcAVqA6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/wxoj4musib568fnNtmJVovu1Ef.jpg",
     "source": "tv_top_rated",
     "status": "Онгоинг",
-    "tmdbId": 136283
+    "tmdbId": 12313
   },
   {
     "id": "mal_38422",
@@ -145,7 +168,7 @@
     "status": "Онгоинг",
     "studio": "",
     "rating": 8.5,
-    "votes": 793,
+    "votes": 796,
     "poster": "https://image.tmdb.org/t/p/w342/kdkdDl0VZUfOavld4p5qItr35cw.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/99Y64VK0KwyRWfaW6VdpDfPKNMo.jpg",
     "overview": "Через предательство и кровь к власти пришел новый король. Его демоны-подручные чинят несправедливости до тех пор, пока в город однажды ночью не приходит тяжело вооруженный воин. Весь покрытый оружием, броней и шрамами, он называет себя Чёрным Мечником. Размеры его меча могут сравниться только с его ненавистью к королю и его демонам.",
@@ -219,29 +242,6 @@
     "source": "tv_top_rated"
   },
   {
-    "id": 8030981,
-    "tmdbId": 30981,
-    "ru": "Монстр",
-    "en": "MONSTER",
-    "year": "2004",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 8.5,
-    "votes": 782,
-    "poster": "https://image.tmdb.org/t/p/w342/9d3Jv2VuKB7RClJMDKXSpO1vwsH.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/6T19aRp9zLMghZo1dTEwoNyreNZ.jpg",
-    "overview": "Доктор Кэндзо Тэнма — талантливый хирург, который работает в Германии. Однажды он спасает тяжело раненого мальчика. Этот случай послужит началом череды загадочных убийств, а спустя годы Кэндзо вновь столкнётся с тем, кого он когда-то спас от смерти.",
-    "genres": [
-      "мультфильм",
-      "драма",
-      "детектив",
-      "криминал"
-    ],
-    "source": "tv_top_rated"
-  },
-  {
     "id": 225180,
     "ru": "Голубоглазый самурай",
     "en": "BLUE EYE SAMURAI",
@@ -305,6 +305,28 @@
     "source": "tmdb"
   },
   {
+    "id": 8138502,
+    "tmdbId": 138502,
+    "ru": "Люди Икс '97",
+    "en": "X-Men '97",
+    "year": "2024",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 8.5,
+    "votes": 677,
+    "poster": "https://image.tmdb.org/t/p/w342/dboSanhToCuyjNHYvJLCRc39Koe.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/iDnTAeR2WNA62XQG0ivtteDSjd5.jpg",
+    "overview": "\"Люди Икс ’97\" - американский супергеройский мультсериал, созданный шоураннером Бо ДеМайо для стримингового сервиса Disney+. Он основан на комиксах об одноимённой команде Marvel Comics и является продолжением мультсериала \"Люди Икс\" 1992 года. Повествование начинается с момента завершения оригинального сериала и освещает приключения мутантов после смерти их лидера профессора Икс.",
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "НФ и Фэнтези"
+    ],
+    "source": "tv_top_rated"
+  },
+  {
     "id": 8058474,
     "tmdbId": 58474,
     "ru": "Космос",
@@ -363,7 +385,7 @@
     "overview": "Кан Джи-вон — несчастная молодая женщина, которой приходится много работать, вести домашние дела и мириться с неблагополучным браком. Тем временем ее муж Пак Мин-хван ведет себя как эгоист, сидит дома без работы и умудряется влезть в крупные долги. Все становится еще хуже, когда Джи-вон узнает, что больна раком и вынуждена лечь в больницу. Женщина окончательно теряет почву под ногами, когда застает супруга и лучшую подругу в одной постели. В результате разразившейся потасовки главная героиня погибает и невероятным образом переносится на 10 лет назад во времени, получив шанс изменить ключевые решения в своей жизни.",
     "poster": "https://image.tmdb.org/t/p/w342/9ZptM9JBG7MwswjMnFRH0kIEG72.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/bd1uYBQnd9HRex77LTiMughdKKK.jpg",
-    "source": "discover_best_tv_2024",
+    "source": "tv_top_rated",
     "status": "Онгоинг",
     "tmdbId": 221851
   },
@@ -416,7 +438,7 @@
     "type": "Сериал",
     "category": "Сериал",
     "rating": 8.43,
-    "votes": 7591,
+    "votes": 7593,
     "popularity": 42.47,
     "genres": [
       "криминал",
@@ -508,7 +530,7 @@
     "status": "Онгоинг",
     "studio": "",
     "rating": 8.49,
-    "votes": 1555,
+    "votes": 1556,
     "poster": "https://image.tmdb.org/t/p/w342/6m7XAqY4NRlvznQj1QhdzTbYRBh.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/ygJ9BOiLwExwFdxQeZiiUA6TqME.jpg",
     "overview": "Обычный студент Наофуми Иватани вместе с тремя другими юношами был призван в параллельный мир, чтобы спасти его от гибели и стать героем. Однако вскоре Иватани предают и грабят. У него остаётся только легендарный щит, с помощью которого парень решает отомстить своим обидчикам.",
@@ -528,7 +550,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 8.44,
-    "votes": 6541,
+    "votes": 6542,
     "popularity": 0.01,
     "genres": [
       "мультфильм",
@@ -591,6 +613,28 @@
     "source": "tv_top_rated",
     "status": "Онгоинг",
     "tmdbId": 108261
+  },
+  {
+    "id": 8030669,
+    "tmdbId": 30669,
+    "ru": "Отчёт о буйстве духов",
+    "en": "幽☆遊☆白書",
+    "year": "1992",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 8.5,
+    "votes": 487,
+    "poster": "https://image.tmdb.org/t/p/w342/Aq5af62w7eQlqjK6vgpEbFA8Z2b.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/uNM5dbnPJXJJs1eggepRWjSvdIR.jpg",
+    "overview": "История повествует об уличном хулигане Юсукэ Урамэси, который был насмерть сбит машиной при попытке спасти маленького мальчика от наезда. Призрак Юсукэ встречается с девушкой по имени Ботан, которая представилась ему проводником мистической реки Сандзу, по которой души умерших переправляются в мир мёртвых, где впоследствии могут быть приговорены к жизни после смерти. Ботан сообщает Юсукэ, что из-за поступка, который он совершил перед смертью, для него теперь нет места ни в раю, ни в аду, поэтому Яма-младший, сын правителя мира мёртвых Ямы, предлагает Юсукэ воскрешение из мёртвых. Юсукэ соглашается.",
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "НФ и Фэнтези"
+    ],
+    "source": "tv_top_rated"
   },
   {
     "id": 30669,
@@ -719,27 +763,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/mq95GURa6ubaiZtKkbg0eRP1hZp.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/qjHTkQ3QUlw6sxkIhugqNYsRJnR.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8117648,
-    "ru": "Ферма Кларксона",
-    "en": "Clarkson's Farm",
-    "year": "2021",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.5,
-    "votes": 412,
-    "popularity": 57.65,
-    "genres": [
-      "Реалити-шоу",
-      "комедия"
-    ],
-    "overview": "В новом шоу Джереми Кларксон будет пытаться управлять собственной фермой площадью 1000 акров в британском Чиппинг Нортоне. Проект снят в том же документальном формате, что и Топ Гир — ведущий подвергается разнообразным «фермерским» испытаниям, включая уход за животными и уборку урожая.",
-    "poster": "https://image.tmdb.org/t/p/w342/ivcJkXAr6wPZKThuDsFXIi54iN9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/i50h4Gz6e9BMGak5l6gg5qfIjcv.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 117648
   },
   {
     "id": 32118,
@@ -952,26 +975,6 @@
     "tmdbId": 126485
   },
   {
-    "id": 8000333,
-    "ru": "Жемчужина дворца",
-    "en": "대장금",
-    "year": "2003",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.5,
-    "votes": 276,
-    "popularity": 12.72,
-    "genres": [
-      "драма"
-    ],
-    "overview": "«Жемчужина дворца» — южнокорейский сериал, действия которого происходят в XV веке в Корее, во время правления династии Чосон. Сюжет представляет собой историю молодой девушки, которая столкнулась со множеством трудностей. В детстве она потеряла родителей, после чего попала во дворец, где ей предстояло встретить дворцовые заговоры, опасные и коварные планы леди Чхве, соперничество, раскрыть свои таланты и конечно же встретить свою любовь. Талант, помноженный на ослиное упрямство и упорство, позволяют не только стать первой в истории женщиной-врачом, но и личным врачом короля, спасти большое количество жизней и найти новые способы лечения страшных болезней, стать первым корейским врачом в истории, применившим хирургический метод лечения.",
-    "poster": "https://image.tmdb.org/t/p/w342/wTiBK9Fj0qIXgkgYiPHZ0HoXfnh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/oHZ9e5WlZfuHBbZZsQzfR0baxt2.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 333
-  },
-  {
     "id": 8226529,
     "ru": "Магазин светильников",
     "en": "조명가게",
@@ -1115,6 +1118,29 @@
     "tmdbId": 96102
   },
   {
+    "id": 8235577,
+    "ru": "Судья из ада",
+    "en": "지옥에서 온 판사",
+    "year": "2024",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.5,
+    "votes": 166,
+    "popularity": 13.14,
+    "genres": [
+      "драма",
+      "НФ и Фэнтези",
+      "криминал",
+      "детектив"
+    ],
+    "overview": "Демоница работает судьёй и наказывает злых людей, посылая их прямо в ад.",
+    "poster": "https://image.tmdb.org/t/p/w342/fmfT6TpKD3nkykjF0oVlGumaw2e.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/dNwVnRWE4LRLJ9f3WIWOnIURPwn.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 235577
+  },
+  {
     "id": "tv_213762",
     "ru": "Sean eternos: Campeones de América",
     "en": "Sean eternos: Campeones de América",
@@ -1232,27 +1258,6 @@
     "tmdbId": 231749
   },
   {
-    "id": 7000423,
-    "ru": "Пианист",
-    "en": "The Pianist",
-    "year": "2002",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 8.4,
-    "votes": 10150,
-    "popularity": 12.4,
-    "genres": [
-      "драма",
-      "военный"
-    ],
-    "overview": "Фильм снят по автобиографии Владислава Шпильмана, одного из лучших пианистов Польши 30-х годов прошлого века. Главный герой фильма — Владек — занимается искусством до тех пор, пока территорию Польши не занимают нацисты. Жизнь всех евреев меняется: их помещают в Варшавское гетто, запрещают работать, унижают, заставляют носить отличительные повязки, а через некоторое время отправляют в концлагерь.",
-    "poster": "https://image.tmdb.org/t/p/w342/eih8OFL5Kc4nrGU821jxU5rWINx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/c0fB9xk7D1aVb3Bg2rk2SVJcGn.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 423
-  },
-  {
     "id": 938567,
     "ru": "Озорная Такаги. Фильм",
     "en": "劇場版 からかい上手の高木さん",
@@ -1324,7 +1329,7 @@
     "status": "Вышел",
     "studio": "",
     "rating": 8.39,
-    "votes": 11109,
+    "votes": 11113,
     "poster": "https://image.tmdb.org/t/p/w342/oQvAlVSjYsJZPg9raiQRYE0aVrv.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/nv5wwZou159v5OC61i4ElR7OqyY.jpg",
     "overview": "Злая ведьма заточила 18-летнюю Софи в тело старухи. Девушка-бабушка бежит из города куда глаза глядят и встречает удивительный дом на ножках, где знакомится с могущественным волшебником Хаулом и демоном Кальцифером. Кальцифер должен служить Хаулу по договору, условия которого он не может разглашать. Девушка и демон решают помочь друг другу избавиться от злых чар.",
@@ -1765,25 +1770,6 @@
     "tmdbId": 1144107
   },
   {
-    "id": "tv_207371",
-    "ru": "Любовь витает в воздухе",
-    "en": "บรรยากาศรัก เดอะซีรีส์",
-    "year": 2022,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.5,
-    "votes": 57,
-    "popularity": 6.53,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "В один дождливый день у студента Рейна сломалась машина. Помог бедолаге самодовольный байкер Паю, о котором грезят большинство девушек на факультете, включая избранницу Рейна. Решив проучить надменного Паю, Рейн начинает осуществлять коварный план по его соблазнению.",
-    "poster": "https://image.tmdb.org/t/p/w342/jhgXvueCV6nf7xW39hLCzpn53uN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6lvgezjEMioeoXUZixWpkEE8UYE.jpg",
-    "source": "tmdb"
-  },
-  {
     "id": 304597,
     "ru": "Мелочь",
     "en": "Due spicci",
@@ -1931,6 +1917,26 @@
     "source": "tv_popular"
   },
   {
+    "id": 8100088,
+    "ru": "Одни из нас",
+    "en": "The Last of Us",
+    "year": "2023",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.43,
+    "votes": 7053,
+    "popularity": 42.55,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Спустя 20 лет после уничтожения современной цивилизации из-за пандемии, контрабандист Джоэл нанимается вывезти Элли, 14-летнюю девочку, из карантинной зоны. То, что начинается как непыльная работка, вскоре превращается в жестокое и душераздирающее путешествие, в течение которого Джоэлу и Элли придётся научиться доверять друг другу.",
+    "poster": "https://image.tmdb.org/t/p/w342/69loIrm9JPpPRE3Akw4yRoitSYn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/acevLdSl5I2MK5RYAm7gwAndt1w.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 100088
+  },
+  {
     "id": 128329,
     "ru": "Pancho Villa: El centauro del norte",
     "en": "Pancho Villa: El centauro del norte",
@@ -1970,26 +1976,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/tRPRJ4wGoOCEK3aHxIornleZe6s.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/3kps0wiGFMRVkSXxbebbAUeWrN3.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8100088,
-    "ru": "Одни из нас",
-    "en": "The Last of Us",
-    "year": "2023",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.43,
-    "votes": 7047,
-    "popularity": 42.55,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Спустя 20 лет после уничтожения современной цивилизации из-за пандемии, контрабандист Джоэл нанимается вывезти Элли, 14-летнюю девочку, из карантинной зоны. То, что начинается как непыльная работка, вскоре превращается в жестокое и душераздирающее путешествие, в течение которого Джоэлу и Элли придётся научиться доверять друг другу.",
-    "poster": "https://image.tmdb.org/t/p/w342/69loIrm9JPpPRE3Akw4yRoitSYn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/acevLdSl5I2MK5RYAm7gwAndt1w.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 100088
   },
   {
     "id": "tv_225941",
@@ -10180,6 +10166,30 @@
     ],
     "overview": "Feelings may come and go, but true love always remains in the heart. Tsumiki Miniwa is in love with her best friend, Io Otonashi. For her, confessing is nearly impossible; but to her friends, they seem to be the perfect match. Cute and petite, Tsumiki comes off more as a friend, and Io's attitude toward her is friendlier than toward others. Despite the constant teasing and obvious hints that his friends have been dropping, Io always seems to miss the signs. \n\nThroughout her everyday school life, Tsumiki spends time with her friends and Io. Will she finally muster enough courage to confess her true feelings?\n\n[Written by MAL Rewrite]",
     "poster": "https://cdn.myanimelist.net/images/anime/5/46489l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "mal_21327",
+    "ru": "One Week Friends",
+    "en": "Isshuukan Friends.",
+    "year": 2014,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.5,
+    "votes": 153645,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Драма",
+      "Drama",
+      "Школа",
+      "School",
+      "Сёнэн",
+      "Shounen"
+    ],
+    "overview": "Sixteen-year-old Yuuki Hase finally finds the courage to speak to his crush and ask her if she wants to become friends. The object of his affection, Kaori Fujimiya, is a quiet and reserved girl who cuts herself off from everyone and does not spare him the same blunt rejection she gives everybody else.\n\nSome time after, Yuuki finds her eating lunch on the roof where she secludes herself during break. He decides to start meeting with Kaori every day in the hopes of beginning to understand her better. The more time they spend together, the more she begins to open up to him. However, nearing the end of the week, she starts to push him away once more. It is then revealed to him the reason for Kaori's cold front: at the end of the week, her memories of those close to her, excluding her family, are forgotten, as they are reset every Monday. The result of an accident in middle school, the once popular and kind Kaori is now unable to make friends in fear of hurting the people dear to her.\n\nDetermined to become more than just one week friends, Yuuki asks her the exact same question each Monday: \"Would you like to be friends?\" Because he knows that deep down, Kaori wishes for that more than anything.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/6/61891l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
   }

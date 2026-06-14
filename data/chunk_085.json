@@ -1,5 +1,191 @@
 [
   {
+    "id": 814662,
+    "ru": "劇場編集版 かくしごと ―ひめごとはなんですか―",
+    "en": "劇場編集版 かくしごと ―ひめごとはなんですか―",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 1.03,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gkq4iIx4ParsPJ5Wn3ETbx5p9OD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/evm4KLYl7c5wXsnbMPTkLnq7RtN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1184420,
+    "ru": "Morando com o Crush",
+    "en": "Morando com o Crush",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.83,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eZA7H3FN20qX5ppoCsdUsMSvYk4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/u7NRT4rhG3hAaJwkWYVjyMO2ace.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 806900,
+    "ru": "트웬티 해커",
+    "en": "트웬티 해커",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.81,
+    "genres": [
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nrJpaz6aLl8rm6xGQlzBukh6zvt.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rYZY3Q9L9tTy5xqVkDkvHJFIAGF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1330044,
+    "ru": "ドキュメンタリー オブ ベイビーわるきゅーれ",
+    "en": "ドキュメンタリー オブ ベイビーわるきゅーれ",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.74,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dNFgNrZQJoji3XMUqOcmnnCNS7Z.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2pcpqbRXv94OwpzwHuDsPyQOzxi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1131977,
+    "ru": "God's Country Song",
+    "en": "God's Country Song",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.63,
+    "genres": [
+      "драма",
+      "семейный",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yseigOgQaXpyflaprAkE2Qg2Zuw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hSsfOxKsq21Qd64B7M4U5LmDLLY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1273936,
+    "ru": "新米記者トロッ子 私がやらねば誰がやる！",
+    "en": "新米記者トロッ子 私がやらねば誰がやる！",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.54,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yBeVvSP5ajHCg16ZcII129HXoW3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qnkWajbhuYCQPxpFAUrhRkSergy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 842002,
+    "ru": "梅切らぬバカ",
+    "en": "梅切らぬバカ",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.53,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bqeciod0mDR4yqugXWY1iIqXk6M.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bybBCh0gpsbI4E42EXEC0mIy1VM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 811736,
+    "ru": "Gara-Gara Warisan",
+    "en": "Gara-Gara Warisan",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 0.48,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dhIcT3nNSIF5CzOGkFwkq2DEwh1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rgJtvxZ1ZusVO26Sp9f23J6y02T.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 7676,
+    "ru": "Commissaire Moulin",
+    "en": "Commissaire Moulin",
+    "year": 1976,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 7.04,
+    "genres": [
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7JLEY3IDUgAoAeZpZLnALSrCep5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hYodpN0WczRf4q2kT86o2ALqLu7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1350,
+    "ru": "Out of the Unknown",
+    "en": "Out of the Unknown",
+    "year": 1965,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.1,
+    "votes": 8,
+    "popularity": 6.48,
+    "genres": [
+      "НФ и Фэнтези",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/n8o2KS8D49ZcQ4NbVJ1K2ROaBjm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/y4JJ3PS3EfFPLlXkPhVxNIu94HY.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 497607,
     "ru": "The Man with the Gray Elevated Hair",
     "en": "The Man with the Gray Elevated Hair",
@@ -10682,220 +10868,6 @@
     "overview": "Глава эксцентричной бруклинской семьи в свое время был известным писателем, однако сейчас он вынужден преподавать. Когда его жена открывает в себе писательский талант, ревность разрывает семью пополам, заставляя двух их сыновей заново строить отношения с родителями. Жена начинает встречаться с тренером младшего сына по теннису, в то время как муж заводит роман со своей студенткой, за которой также ухаживает старший сын.",
     "poster": "https://image.tmdb.org/t/p/w342/do520fneIj9aJWRMiUjwFNBIvx1.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/3ZjxENlw4HXioGGwhqaJrvdEXKo.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "332283",
-    "ru": "Красавица для чудовища",
-    "en": "Mary Shelley",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1061,
-    "popularity": 1.99,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "Когда тебе 16 лет и ты влюбляешься, можешь ли ты представить, что жизнь подарит тебе монстра?",
-    "poster": "https://image.tmdb.org/t/p/w342/125AL52aKCnnt0rzut6YtXnQAXe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iGm4RpRv5zEsdUPGZRems4KYFgg.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "74306",
-    "ru": "Боже, благослови Америку!",
-    "en": "God Bless America",
-    "year": 2012,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1060,
-    "popularity": 1.92,
-    "genres": [
-      "комедия",
-      "драма",
-      "криминал"
-    ],
-    "overview": "Фрэнк просто выдохся: сосед-невежа, постоянный плач ребенка, глупая болтовня коллег, и в довершение всего — ещё и опухоль мозга. Достав пистолет, уставший от жизни герой находит для себя неожиданного друга и союзника по имени Рокси. Это девушка-студентка, проявляющая нетерпимость к идиотам вокруг и мыслящая в точности, как и Фрэнк. Он даёт ей уроки стрельбы, а она ему — цели, которые нужно поразить.",
-    "poster": "https://image.tmdb.org/t/p/w342/bLJ0enmPeeB0myXlOtpS2AGESIy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/55A2d6rWj0SYb52xKzx6DweiuEM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "256835",
-    "ru": "История Игрушек, Забытая Временем",
-    "en": "Toy Story That Time Forgot",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1059,
-    "popularity": 4.77,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "приключения",
-      "комедия"
-    ],
-    "overview": "Рождество подошло к концу, подарки уже подарены, и Бони, захватив с собой рюкзак с любимыми игрушками, отправился в гости к мальчику, живущему в соседнем доме. Застала она его не в комнате с любимыми игрушками, а за игрой в компьютерную игру, подаренную парой дней назад, и, с размаху швырнув рюкзак в кучу других игрушек, присоединилась к нему. Выбравшись после не самой мягкой посадки из рюкзака, Вуди и компанию ждала встреча с новыми боевыми динозаврами, которые устроили далеко не теплый прием своим гостям…",
-    "poster": "https://image.tmdb.org/t/p/w342/8cOnVo3d0fRcbzJ0QUhWZMACdok.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4vetbabOgDQzpitnAkEVRiZP4P5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_4926",
-    "ru": "Marco: 母をたずねて三千里",
-    "en": "Marco: Haha wo Tazunete Sanzenri",
-    "year": 1999,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.0,
-    "votes": 1057,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Приключения",
-      "Adventure",
-      "Драма",
-      "Drama"
-    ],
-    "overview": "In the 19th century, Genoa (Italy), 9-year-old Marco must face separation from his mother Anna, who leaves for work in Argentina to escape heavy taxes and a deep economic depression. Remaining at home with his father-a doctor at the hospital for the poor-Marco cannot help but miss his mother. When Anna suddenly stops writing to them, Marco becomes anxious about her and decides to travel all the way to Argentina by himself. Marco sets out a long and arduous adventure of over 10,000 miles. All he carries with him is love, courage, friendship and a longing to see his mother again. The story will take you on an exciting journey across the Atlantic, the Andes, and the spiritual border as we watch Marco come of age. \n\n(Source: AnimeNfo)",
-    "poster": "https://cdn.myanimelist.net/images/anime/7/9467l.webp",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yyLURTdtRkiqGGeOWa6sQfx124F.jpg",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "236735",
-    "ru": "Миниатюрный остров",
-    "en": "La isla mínima",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1052,
-    "popularity": 1.03,
-    "genres": [
-      "криминал",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "1980 год. Хуан и Педро — двое полицейских отдела по расследованию убийств Мадрида, идеологические противники — после получения выговоров в наказание должны перебраться в отдаленные и забытые людьми болота Гвадалквивир, чтобы расследовать исчезновение и жестокое убийство двух девочек-подростков во время празднования местного праздника. Вместе они должны преодолеть свои разногласия и найти и противостоять жестокому убийце…",
-    "poster": "https://image.tmdb.org/t/p/w342/4UCgxOoYxw3ttQKmAYDHXzv9nox.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qLuu0GysqAM2nw6JEIjTkJdEwp7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1168190",
-    "ru": "Опасный дуэт",
-    "en": "The Wrecking Crew",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1049,
-    "popularity": 33.75,
-    "genres": [
-      "боевик",
-      "комедия",
-      "криминал",
-      "детектив"
-    ],
-    "overview": "После 20 лет вражды сводные братья Джонни и Джеймс вынуждены объединиться, чтобы выяснить, кто убил их отца.",
-    "poster": "https://image.tmdb.org/t/p/w342/1nJjoONDlxkpkcE5UO8hfGv6oy5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cz4vLJrmaV1zJlRYbxqtvLzeLWB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_51585",
-    "ru": "City Hunter The Movie: Angel Dust",
-    "en": "City Hunter Movie: Tenshi no Namida",
-    "year": 2023,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.0,
-    "votes": 1047,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Экшен",
-      "Action",
-      "Детектив",
-      "Mystery",
-      "Взрослые персонажи",
-      "Adult Cast",
-      "Сёнэн",
-      "Shounen"
-    ],
-    "overview": "Based on the manga finale, where Ryo Saeba faces his dark past that his former mentor and adoptive father Shin Kaibara from now on leader of Union Teope would want to kill him, as the people who are injected with nanomachines to become super soldiers, aka Angel Dust, are starting to kill him.\n\n(Source: City Hunter Wiki)",
-    "poster": "https://cdn.myanimelist.net/images/anime/1046/136433l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "1171145",
-    "ru": "Ограбление в Лос-Анджелесе",
-    "en": "Crime 101",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1046,
-    "popularity": 41.36,
-    "genres": [
-      "криминал",
-      "триллер"
-    ],
-    "overview": "Дерзкие ограбления неуловимого вора Дэвиса вдоль знаменитого шоссе 101 поставили полицию в тупик. Планируя последнее дело, которое должно стать «ударом всей жизни», он сталкивается с разочаровавшимся страховым брокером Шэрон, переживающей собственный переломный момент. Неожиданное сотрудничество между ними привлекает внимание настойчивого детектива Лу, который стремится раскрыть дело любой ценой, повышая ставки до предела.",
-    "poster": "https://image.tmdb.org/t/p/w342/41wzOKSPuwdFAZ7AbSOi2yElg4Q.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/52AkwEfQiJl2HuTPMZ2yC5Bdr9I.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_29513",
-    "ru": "アキの奏で",
-    "en": "Aki no Kanade",
-    "year": 2015,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.9,
-    "votes": 11043,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Повседневность",
-      "Slice of Life",
-      "Музыка",
-      "Music",
-      "Сценическое искусство",
-      "Performing Arts",
-      "Школа",
-      "School"
-    ],
-    "overview": "Aki Miyagawa has loved the sound of traditional Japanese drums ever since she first heard them in her youth. Now a professional drummer in Tokyo, she struggles to keep her passion alive while also having to work a second job to make ends meet. When she gets a call from Michio Yoshioka, the teacher who introduced her to drums, Aki has a chance to return to her hometown and reflect on the path she took to reach where she is now, reigniting her passion in the process.\n\n[Written by MAL Rewrite]",
-    "poster": "https://cdn.myanimelist.net/images/anime/1839/123300l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "5919",
-    "ru": "Вздымающийся ад",
-    "en": "The Towering Inferno",
-    "year": 1974,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1040,
-    "popularity": 3.65,
-    "genres": [
-      "боевик",
-      "драма",
-      "триллер"
-    ],
-    "overview": "В роковую ночь группа несчастных гостей остается запертой страшным пожаром на верхних этажах небоскреба. Архитектор здания, ставший вынужденным узником своего творения, пытается помочь шефу пожарных спасти людей.",
-    "poster": "https://image.tmdb.org/t/p/w342/ehkjLAiw6FKTul4b72F2HIDNMOU.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gT3hatcFDbZWUlLZ7TClRDhZ9Pa.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,219 @@
 [
   {
+    "id": "25769",
+    "ru": "Носители",
+    "en": "Carriers",
+    "year": 2009,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1495,
+    "popularity": 3.16,
+    "genres": [
+      "боевик",
+      "драма",
+      "ужасы",
+      "фантастика",
+      "триллер"
+    ],
+    "overview": "Ужасная инфекция вырвалась в наш мир. Убивающая людей в страшных муках, она моментально и глобально распространилась воздушно-капельным путем среди людей. Четверо друзей оказались застигнуты этой эпидемией в дороге. Постоянное передвижение стало для них единственным путем к выживанию. Избегая контактов, они стремятся покинуть зараженную территорию, но удастся ли им выжить?..",
+    "poster": "https://image.tmdb.org/t/p/w342/6L7GjRyujgT4nw6QbDZSA2QGfXd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uYxAGovHS4mCGsIeSZCTtwOQ5Po.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "934632",
+    "ru": "Rebel Moon. Часть вторая: Оставляющая шрамы",
+    "en": "Rebel Moon - Part Two: The Scargiver",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1486,
+    "popularity": 4.35,
+    "genres": [
+      "фантастика",
+      "боевик",
+      "приключения"
+    ],
+    "overview": "Пришло время для нерушимых союзов, новых героев и легенд: повстанцы готовятся к битве с жестокой армией Праматери.",
+    "poster": "https://image.tmdb.org/t/p/w342/habjuTKViM4zU75aM4Zef2mie70.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tpiqEVTLRz2Mq7eLq5DT8jSrp71.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1685",
+    "ru": "Под планетой обезьян",
+    "en": "Beneath the Planet of the Apes",
+    "year": 1970,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1470,
+    "popularity": 2.76,
+    "genres": [
+      "приключения",
+      "фантастика",
+      "детектив"
+    ],
+    "overview": "Это вторая серия из пяти, рассказывающих о жизни на Земле в конце 40-го века от Рождества Христова. Когда после катастрофы звездолета оставшиеся в живых астронавты попали в плен к жутким человекоподобным обезьянам, все думали, что это конец.Много приключений было у людей, но, в конце концов, самый лучший и удачливый из них — Брент, вынужден отправиться на поиски своих соплеменников. Он знает, что маленькие группки изменившихся после атомного взрыва людей скрываются в совершенно секретном подземном городе и совершенно не желают ни с кем поддерживать отношения…",
+    "poster": "https://image.tmdb.org/t/p/w342/szHCeYwi4ubewuYnlnz0YGqWnQC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/e5MlN03JvbpTqq2dsW3H2VUTU4s.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_39057",
+    "ru": "A New Journey",
+    "en": "A New Journey",
+    "year": 2019,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.1,
+    "votes": 1456,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Игры",
+      "Video Game"
+    ],
+    "overview": "League of Legends commercial animated by P.A. Works, published on League of Legends YouTube channel.",
+    "poster": "https://cdn.myanimelist.net/images/anime/1549/98385l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "301875",
+    "ru": "Равные",
+    "en": "Equals",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1448,
+    "popularity": 2.33,
+    "genres": [
+      "драма",
+      "мелодрама",
+      "фантастика"
+    ],
+    "overview": "Будущее. Сайлас живет в обществе под названием Коллектив, жители которого называются Равными. Равные — это мирные, спокойные, вежливые и справедливые люди, их жизнь в Коллективе идеальна. В нём не существует ни бедности, ни жадности, ни насилия, ни эмоций. Но над обществом нависает угроза: заболевание SOS, или Синдром общественной сознательности, жертвы которого подвергаются всему, чего, как они думали, избежали: депрессия, уязвимость, страх, любовь.\r Когда Сайлас обнаруживает, что заражён, он становится изгоем, но замечает одного человека, который, как ему кажется, понимает, через что ему приходится проходить. В это время правительство заявляет, что лекарство от болезни найдено.",
+    "poster": "https://image.tmdb.org/t/p/w342/cyckBnqc3nLxAFwiZvdIlTwuSL3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jdaZ4QUC3YajBIUrqwdxv5YasD3.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_4713",
+    "ru": "劇場版ハートの国のアリス～Wonderful Wonder World～",
+    "en": "Heart no Kuni no Alice: Wonderful Wonder World",
+    "year": 2011,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.0,
+    "votes": 11412,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Фэнтези",
+      "Fantasy",
+      "Романтика",
+      "Romance",
+      "Обратный гарем",
+      "Reverse Harem",
+      "Дзёсэй",
+      "Josei"
+    ],
+    "overview": "The girly but bloody otome game re-imagining of Lewis Carroll's classic fantasy novel Alice's Adventures in Wonderland with bishounen characters and added romance.\n\nA parody of Alice's Adventures in Wonderland where Alice is smart and non-doormatlike.\n\nIn this story, Alice is not all what she seems. She is practical, strong, yet darkly cynical. Instead of the tradition story, Alice is kidnapped unwillingly by a mysterious (yet somewhat bishie-looking) man with bunny ears into a place call Heartland. Stuck in Heartland due to a trick by the mysterious bunny eared man, she meets the residents of this world. Along the way, Alice meets Blood, handsome mafia leader; Ace, the psycho yet charming knight and more... What should Alice do in such a world!?\n\n(Source: MU)",
+    "poster": "https://cdn.myanimelist.net/images/anime/10/28748l.webp",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vUuW2bbdZBfkfHGo1QbQ3Vb18Ks.jpg",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "72358",
+    "ru": "Тысяча слов",
+    "en": "A Thousand Words",
+    "year": 2012,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1400,
+    "popularity": 2.76,
+    "genres": [
+      "драма",
+      "комедия",
+      "фэнтези"
+    ],
+    "overview": "Главный герой — трепло, каких свет не видывал. И вот однажды этот говорливый персонаж узнаёт, что ему осталось произнести вслух ровно тысячу слов, после чего он обязательно умрёт...",
+    "poster": "https://image.tmdb.org/t/p/w342/29BgAZRmTGQqAT4CG0ZxRnzwbmw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eec2tDpexGhAQOjwSno13PFP978.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_4853",
+    "ru": "手塚治虫のドン・ドラキュラ",
+    "en": "Tezuka Osamu no Don Dracula",
+    "year": 1982,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.1,
+    "votes": 1374,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Комедия",
+      "Comedy",
+      "Ужасы",
+      "Horror",
+      "Сверхъестественное",
+      "Supernatural",
+      "Вампиры",
+      "Vampire"
+    ],
+    "overview": "After living in Transylvania for several years, \"Earl Dracula\" (as Osamu Tezuka's official website calls him in English) has moved to Japan. In the Nerima Ward of Tokyo, he and his daughter, Chocola, and faithful servant Igor have taken up residence in an old-Western style house.\n\nWhile Chocola attends Junior High School, Earl Dracula is desperate to drink the blood of beautiful virgin women; an appropriate meal for a vampire of his stature. However, each night that Earl Dracula goes out on the prowl he finds himself getting involved in some kind of disturbance which leads to him causing various trouble for the local residents. With nobody in Japan believing in vampires, his very presence causes trouble amongst the people in town.",
+    "poster": "https://cdn.myanimelist.net/images/anime/1132/147716l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "64807",
+    "ru": "Забойный реванш",
+    "en": "Grudge Match",
+    "year": 2013,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1365,
+    "popularity": 2.39,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Фильм расскажет о двух бывших боксерах, решающих вернуться на ринг ради финального матча, который должен будет уладить все их разногласия.",
+    "poster": "https://image.tmdb.org/t/p/w342/hBJFVzYjBsUxOdGQG5gQZuQP80J.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bsxrlDhasbMfe8WqQmqvvV3Gst.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "780609",
+    "ru": "Род мужской",
+    "en": "Men",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 1348,
+    "popularity": 4.52,
+    "genres": [
+      "ужасы",
+      "триллер",
+      "фэнтези"
+    ],
+    "overview": "После смерти мужа Харпер отправляется из Лондона в сельскую местность, надеясь расслабиться на природе и прийти в себя. Во время прогулки по лесу она набредает на загадочный тоннель, где пробуждает кого-то или что-то, что начинает её преследовать.",
+    "poster": "https://image.tmdb.org/t/p/w342/5TkrtAJP0XCE45cIeSlQD5wTAsx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4N2FuCTuqH3h4dw9XPFtsnDPSz7.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "6520",
     "ru": "Первый рыцарь",
     "en": "First Knight",
@@ -9654,204 +9868,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/jo6ItNdatsIJuIN6WNXI94q74Yq.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/OBVPrR3htm4WC6v6SsUSKZRvFD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 624989,
-    "ru": "Звук и ярость",
-    "en": "Sturgill Simpson Presents Sound & Fury",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 90,
-    "popularity": 0.43,
-    "genres": [
-      "мультфильм",
-      "музыка"
-    ],
-    "overview": "В этом визуальном аниме-альбоме таинственный водитель отправляется в адский постапокалиптический пейзаж, чтобы встретиться с двумя чудовищными противниками.",
-    "poster": "https://image.tmdb.org/t/p/w342/a3EwM8LiN8w3dGXEqrMgOBXjRip.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gckDWdOSKFDziIgcRQRAMzUZi1e.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 121869,
-    "ru": "Эйзенштейн в Гуанахуато",
-    "en": "Eisenstein in Guanajuato",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 89,
-    "popularity": 0.45,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "В октябре 1931 года знаменитый кинорежиссёр Сергей Эйзенштейн путешествует по Мексике, работая над фильмом «Да здравствует Мексика!» (Que viva México), финансируемым частным образом американскими сторонниками коммунистов. Эйзенштейн намерен провести несколько дней в Гуанахуато, где собирается заснять знаменитый Музей мумий.",
-    "poster": "https://image.tmdb.org/t/p/w342/qiAyZxqzw4BuLWIGICO81TTqDFK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4CEVoTSP3R0NMWUYbbOtfM3bwsD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "848116",
-    "ru": "Рокки и Рани. История любви",
-    "en": "रॉकी और रानी की प्रेम कहानी",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 88,
-    "popularity": 39.73,
-    "genres": [
-      "комедия",
-      "драма",
-      "семейный",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vTQIqlxUkOuyf2UKhlM2OUaFGKz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/61RYedFgX1K07xgVIvdJzukSR4g.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1018754,
-    "ru": "Недостатки",
-    "en": "Shortcomings",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 87,
-    "popularity": 2.11,
-    "genres": [
-      "комедия",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Начинающий кинорежиссер Бен живет в Калифорнии и управляет небольшим артхаусным кинотеатром. У него есть девушка Мико, которая тоже работает в киноиндустрии. Бен все свое время проводит в поисках себя и своего особого пути в кинематографе, что сводится к бесконечному просмотру кино и рассуждениях о нем с друзьями.",
-    "poster": "https://image.tmdb.org/t/p/w342/uld210snAVIWQh8VdyxGMiDE4A0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jXORVzqmZ0NiQwsfW8CP1mFSoU5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1245708,
-    "ru": "Кресент-Сити",
-    "en": "Crescent City",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 87,
-    "popularity": 1.63,
-    "genres": [
-      "криминал",
-      "триллер",
-      "детектив"
-    ],
-    "overview": "Когда небольшой южный городок начинает терроризировать безжалостный серийный убийца, все становятся подозреваемыми... включая полицию. По мере того, как число жертв растет, а ситуация углубляется, главного детектива начинают преследовать ужасы его прошлого.",
-    "poster": "https://image.tmdb.org/t/p/w342/nkn17qcetkL7opgs1LQBFP0OvSE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nIqtfruif9XbCBo2KBIHPcCGkOB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 545567,
-    "ru": "Бенджамин",
-    "en": "Benjamin",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 87,
-    "popularity": 1.13,
-    "genres": [
-      "мелодрама",
-      "комедия",
-      "драма"
-    ],
-    "overview": "Главный герой - молодой кинорежиссёр Беджамин Оливер после съёмок своего второго фильма, с нетерпением ждёт его премьеры. Сам Оливер человек не особо общительный, живущий в своей тихой квартире вместе с кошкой. Кинорежиссёр никогда не посещает незнакомые места, но в этот раз он решился, и может быть не зря. На вечеринке Бенджамин познакомился с французским музыкантом Ноем. А так как Бенджамин был мужчиной с нетрадиционной ориентацией, Ной сразу же понравился ему своей непосредственностью и нежным взглядом. Ной, принадлежащий к тому же кругу, предложил режиссёру свою любовь, на что тот ответил, что никогда не принимал ни от кого этого чувства, всегда избегая его. Сможет ли Бенджамин, у которого начался роман с Ноем, наконец-то принять его любовь, или он останется при своих принципах?",
-    "poster": "https://image.tmdb.org/t/p/w342/gtcbJTGIGya6vRvSeIasRPGTaMC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cPZMjrWmuQa5h2FxoftAPA5YHDq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 360604,
-    "ru": "Ледяная скульптура Рождества",
-    "en": "Ice Sculpture Christmas",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 87,
-    "popularity": 0.62,
-    "genres": [
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "Молодая девушка, страстно мечтающая стать шеф-поваром, Келли, вместе со своим другом детства Дэвидом решают принять участие в ежегодном рождественском соревновании по изготовлению ледяных скульптур. Их главным соперником выступает профессиональный шеф-повар, босс Келли. Это Рождество будет как никогда горячим и романтичным!",
-    "poster": "https://image.tmdb.org/t/p/w342/tbLXuXt9ZBVGcrLE8AfLCzGfoHw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gGjwFDPY1TouGKaWNR4uYEPEDVJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1134048,
-    "ru": "Маршмэллоу",
-    "en": "Marshmallow",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 86,
-    "popularity": 1.88,
-    "genres": [
-      "ужасы",
-      "фантастика"
-    ],
-    "overview": "Робкий мальчик Морган первый раз отправляется в летний лагерь. Он страдает от ночных кошмаров и боится воды, поэтому переживает, что ему сложно будет завести друзей. Вопреки опасениям, Морган легко сходится с несколькими ребятами, вот только его донимает рослый сын маминой подруги, и страшилка про жуткого доктора, рассказанная вожатыми у костра, внезапно становится реальностью.",
-    "poster": "https://image.tmdb.org/t/p/w342/qZseaOw1BgLkJsfiEmNpS1KhH8d.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/x6p8NZGyQt9dP7RDTLi1IXdqvtC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 884315,
-    "ru": "Смерть в прерии",
-    "en": "Terror on the Prairie",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 86,
-    "popularity": 1.54,
-    "genres": [
-      "вестерн",
-      "боевик",
-      "триллер"
-    ],
-    "overview": "В центре повествования семья американских первопроходцев, которая пытается обосноваться в прериях Монтаны и становится объектом нападения жестокой банды. Сопротивление бандитам возглавляет женщина...",
-    "poster": "https://image.tmdb.org/t/p/w342/44hmIDNM0zyGABLjxGX1bSFOjz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3boseSuFfjTazSrPAe9G6pSDvnH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1029578,
-    "ru": "B&B Merry",
-    "en": "B&B Merry",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 86,
-    "popularity": 0.5,
-    "genres": [
-      "мелодрама",
-      "комедия",
-      "драма",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7WSMNERoqgtOwV1Q5xDmAiLvMeE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/goPs7BcYBOrGMPjPwnqf3tMJI7G.jpg",
     "source": "tmdb"
   }
 ]

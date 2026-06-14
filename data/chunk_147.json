@@ -1,5 +1,198 @@
 [
   {
+    "id": 716703,
+    "ru": "Что скрывает вода",
+    "en": "What Lies Below",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.3,
+    "votes": 207,
+    "popularity": 0.93,
+    "genres": [
+      "ужасы",
+      "фантастика"
+    ],
+    "overview": "Мать-одиночка с 16-летней дочерью отправляются в загородный дом, где девушку ждёт сюрприз: мама встречается с мужчиной и собирается за него замуж. Разумеется, в потенциальном отчиме дочь видит угрозу, и, как вскоре выяснится, не зря. Незнакомец оказывается вовсе не человеком, а загадочным монстром. Или девушке всего лишь так кажется?",
+    "poster": "https://image.tmdb.org/t/p/w342/xjzREl8EWGz2Rti6hPFGJQPqgjR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qLL6H9SGEwRRW6PJHixyUtbBjBE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1035806,
+    "ru": "Детектив Найт: Независимость",
+    "en": "Detective Knight: Independence",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.3,
+    "votes": 193,
+    "popularity": 1.63,
+    "genres": [
+      "боевик",
+      "криминал",
+      "триллер"
+    ],
+    "overview": "В День независимости детективу Джеймсу Найту предстоит обезвредить бандитов, чтобы спасти городской праздник.",
+    "poster": "https://image.tmdb.org/t/p/w342/gtgItqYnVbJ6nZL0B7CcaSHbkdK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fTLMsF3IVLMcpNqIqJRweGvVwtX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 42251,
+    "ru": "Запретный мир",
+    "en": "Forbidden World",
+    "year": 1982,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.3,
+    "votes": 193,
+    "popularity": 2.46,
+    "genres": [
+      "ужасы",
+      "фантастика"
+    ],
+    "overview": "На исследовательскую базу, находящуюся на одной из далеких планет, прибывает главный герой картины — «крутой» космический боец. Идиллическая жизнь, которой он живет поначалу (проводя время главным образом в общении с прекрасной половиной персонала станции) вдруг взрывается жутким кошмаром. Из научной лаборатории вырывается некое искусственно созданное белковое существо, начиная с нечеловеческой быстротой пожирать все и всех на своем пути…",
+    "poster": "https://image.tmdb.org/t/p/w342/5iDgpYgCbaEs0IpUY33X4BTDwJk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cEobU3Z74T6zRppJRyqI3tx6igB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 544345,
+    "ru": "Красавчик со стажем",
+    "en": "Just a Gigolo",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.3,
+    "votes": 191,
+    "popularity": 0.64,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Встречайте мужчину мечты! Он знает секреты обольщения и вовсю этим пользуется, чтобы жить в свое удовольствие. Возможно, опытный мачо уже немного растерял обаяние, но отказываться от роскошной жизни не входит в его планы. Применяя весь свой арсенал, он вновь готов вернуться в игру.",
+    "poster": "https://image.tmdb.org/t/p/w342/vkfFcTQMT3EX9PNAP0Tf7xuJMql.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aVz2iTRF9NxngTzHAR7C6qkjQHs.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 787310,
+    "ru": "Выжить в игре",
+    "en": "Survive the Game",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.3,
+    "votes": 188,
+    "popularity": 0.81,
+    "genres": [
+      "боевик",
+      "триллер",
+      "криминал"
+    ],
+    "overview": "Спокойная жизнь хозяина фермы прерывается с появлением полицейских и пары опасных преступников.",
+    "poster": "https://image.tmdb.org/t/p/w342/nWXuzEBZ8HiH2nom3NSw7fApakD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zPCWnlk5d0XAwgurFfw4BKdVXeQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 10385,
+    "ru": "Отбой",
+    "en": "Hanging Up",
+    "year": 2000,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.3,
+    "votes": 186,
+    "popularity": 2.43,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "Три сестры живут так, как им нравится. Наслаждаются жизнью, влюбляются, совершают глупости… Ева, средняя сестра, самая ответственная. Джорджия, главный редактор женского журнала, увлеченно борется за власть. А младшая сестра Мэдди не слишком удачливая актриса телесериалов. Сестры постоянно висят на телефоне, обсуждая свои любовные истории, работу, друзей.  Однажды они узнают, что их отец, раздражавший их многие годы и ведший безумную жизнь, находится при смерти. Ни одна из дочерей никогда не была близка к нему. Ответственная Ева берет заботу о папочке на себя и очень сердится, что ее сестры не уделяют достаточно внимания умирающему. По телефону они ругаются, плачут, радуются… и смеются.",
+    "poster": "https://image.tmdb.org/t/p/w342/6NwE6sxvazy7unwBFYC65B7hDkl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9I9VYNau1KU77OQAcF6WnfOtGcU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 682532,
+    "ru": "Джон и дыра",
+    "en": "John and the Hole",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.3,
+    "votes": 175,
+    "popularity": 2.51,
+    "genres": [
+      "драма",
+      "триллер",
+      "ужасы"
+    ],
+    "overview": "Долговязый Джон живёт в богатом загородном доме, у него всё есть, и семья у него не самая плохая. Но однажды мальчик находит в лесу бункер.",
+    "poster": "https://image.tmdb.org/t/p/w342/vZ28AYbKm8cZdvnWlfCASOmH2ag.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hwrR53NC0rQV24ESbqsQxj4nmht.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 432627,
+    "ru": "Любовь-морковь по-французски",
+    "en": "L'un dans l'autre",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.3,
+    "votes": 175,
+    "popularity": 0.52,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Пьер и Эми и Эрик и Пенелопа дружат тысячу лет. Но вдруг Пьер и Пенелопа становятся любовниками. Не в силах выйти из ситуации, они решают прекратить отношения. Но после ночи, которая должна была стать последней, они просыпаются… в телах друг друга! Теперь им нужно сохранить свою тайну и как-то вывернуться из всех проблем.",
+    "poster": "https://image.tmdb.org/t/p/w342/j7ivKYFljvETkRYLvbcf1TdqYJu.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lqHhRkcy9YgZXkty664Q04I4JYT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 732713,
+    "ru": "Добро пожаловать в Блумхаус: Сглаз",
+    "en": "Evil Eye",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.3,
+    "votes": 174,
+    "popularity": 1.53,
+    "genres": [
+      "детектив",
+      "триллер",
+      "ужасы"
+    ],
+    "overview": "Идеальный, на первый взгляд, роман превращается в кошмар, когда мать убеждается, что новый парень её дочери связан с её собственным прошлым.",
+    "poster": "https://image.tmdb.org/t/p/w342/lhExfe0yTZL2DRVkou9hnNlOcc9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xTGJ4ZPDLoCIJkTjDkb0d1j7AUI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 363889,
+    "ru": "Резня в парке аттракционов",
+    "en": "The Funhouse Massacre",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.3,
+    "votes": 174,
+    "popularity": 0.88,
+    "genres": [
+      "комедия",
+      "ужасы"
+    ],
+    "overview": "Сюжет фильма расскажет нам о том, как из тюрьмы для умалишенных сбежали 6 самых опасных в мире психов. Встретив на своем пути парк аттракционов, стилизованный под Хэллоуин, они устраивают настоящий террор с ничего не подозревающими посетителями.",
+    "poster": "https://image.tmdb.org/t/p/w342/poG8CdJlgSqkJ7JVtcVyeVBAapN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aup58gdd5xZy85TqXkgewtnb6jU.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 343284,
     "ru": "Ночь Живой Дэб",
     "en": "Night of the Living Deb",
@@ -9424,194 +9617,6 @@
     "overview": "Морской биолог Ясвиндер находится в большой опасности: ей приходят письма с угрозами, вор врывается в ее ирландскую лабораторию и, наконец, она бесследно исчезает с борта своего исследовательского судна. К счастью, ее сын Тарун со своей подругой Алисой — настоящие детективы из табакерки. Они берутся за новое дело и раскрывают его с храбростью и смекалкой.",
     "poster": "https://image.tmdb.org/t/p/w342/xS0emKjiWnfjjkZzXIV1eTbCXLN.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/nxuev6mN3C7gnRTxnUQ9IhfkpiD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 289131,
-    "ru": "Лола на «Горошине»",
-    "en": "Lola auf der Erbse",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 8,
-    "popularity": 0.78,
-    "genres": [
-      "семейный"
-    ],
-    "overview": "Лола, живущая на плавучем доме со своей матерью, подружилась с курдским мальчиком, новым учеником в ее классе.",
-    "poster": "https://image.tmdb.org/t/p/w342/ioWFCQtsdKKONWteWSG8KTrKO7o.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3Rteq8hnTJbeRI1UpQBRu1VXXFy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 340825,
-    "ru": "美姉妹・剥ぐ",
-    "en": "美姉妹・剥ぐ",
-    "year": 1985,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 8,
-    "popularity": 2.38,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tUTEs0LTBIqFOex4TgtqIg6u40o.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pwId1Vh7nND4NJegXPBTdB5YxdF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 353172,
-    "ru": "Comeback",
-    "en": "Comeback",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 8,
-    "popularity": 0.87,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/AdYX5azssz9rabvDlSlKlgCMP1d.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/a1Xhm29cH4yxa8WxxIO6VnnlnQP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 373522,
-    "ru": "サンクチュアリ",
-    "en": "サンクチュアリ",
-    "year": 1996,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 8,
-    "popularity": 0.68,
-    "genres": [
-      "мультфильм",
-      "криминал",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zc9kBMZWL3ASvtPXi2KgTM4j7BA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hqLCdhnwsBnSzyZiqmprTBEmcJH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 339297,
-    "ru": "എയ്ഞ്ചല്‍സ്",
-    "en": "എയ്ഞ്ചല്‍സ്",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 8,
-    "popularity": 0.64,
-    "genres": [
-      "детектив",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iGyWIimmx4f3n4NKb7FGkUk85p2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sm2MofJ5JcJTbaI7auXVIx4S04O.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 424988,
-    "ru": "Casablancas, l'homme qui aimait les femmes",
-    "en": "Casablancas, l'homme qui aimait les femmes",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 8,
-    "popularity": 0.62,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/byVMBTig1b6f7fcFmowkUkafIx2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4UoSHGSqwXe1HeyzbouZ6Lm40H5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 408255,
-    "ru": "Corps étranger",
-    "en": "Corps étranger",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 8,
-    "popularity": 0.52,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qg2rNSNN43litDzVYu1PScOQNGs.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hYqonLs6kAeb8vh8R5p9PAPZOul.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 549524,
-    "ru": "ராஜா ரங்குஸ்கி",
-    "en": "ராஜா ரங்குஸ்கி",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 8,
-    "popularity": 0.5,
-    "genres": [
-      "криминал",
-      "триллер",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qjE2TK4wzzyiwTU8tZCRITpAsut.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/m9wZfHc7jAdSvKnRfLewXAS4hVs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 367189,
-    "ru": "Guddu Ki Gun",
-    "en": "Guddu Ki Gun",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 8,
-    "popularity": 0.5,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8CMeDmIETdt18Xl1H2Do9gpUDg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5X1k5ptAsUxMnyelOnmMwqhYz6a.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 285856,
-    "ru": "Big Muddy",
-    "en": "Big Muddy",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.3,
-    "votes": 8,
-    "popularity": 0.4,
-    "genres": [
-      "криминал",
-      "вестерн",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pGUDsXeJi0ZOr535k0VhD9qZAhR.jpg",
-    "backdrop": "",
     "source": "tmdb"
   }
 ]

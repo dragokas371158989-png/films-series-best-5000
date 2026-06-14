@@ -1,44 +1,5 @@
 [
   {
-    "id": "tv_111495",
-    "ru": "Carmel: ¿Quién mató a María Marta?",
-    "en": "Carmel: ¿Quién mató a María Marta?",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.5,
-    "votes": 96,
-    "popularity": 0.6,
-    "genres": [
-      "документальный",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fPBilOJmi2VAwjgdvfvuLTNjdP8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eBJQvI0syaskth7jcyCKopCCaID.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_69786",
-    "ru": "Невинный",
-    "en": "Masum",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.5,
-    "votes": 96,
-    "popularity": 3.7,
-    "genres": [
-      "криминал",
-      "драма",
-      "детектив"
-    ],
-    "overview": "Джевет, отставной комиссар полиции, спокойно живущий на пенсии со своей женой и детьми. Но ему снова приходится заниматься криминальными расследованиями, потому что вокруг его семьи начинают сгущаться тучи…",
-    "poster": "https://image.tmdb.org/t/p/w342/kxFvOPVuUXaAX7h2qTKjg67qizN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gzDEvP76g3AoKQtfbiORPvkTTtl.jpg",
-    "source": "tmdb"
-  },
-  {
     "id": 8002586,
     "ru": "Sanford and Son",
     "en": "Sanford and Son",
@@ -156,7 +117,7 @@
       "детектив",
       "Боевик и Приключения"
     ],
-    "source": "tv_popular"
+    "source": "trending_tv_week"
   },
   {
     "id": 34771,
@@ -1922,6 +1883,28 @@
     "source": "tmdb"
   },
   {
+    "id": 8216467,
+    "tmdbId": 216467,
+    "ru": "Операция: Семейка Ёдзакура",
+    "en": "夜桜さんちの大作戦",
+    "year": "2024",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 7.5,
+    "votes": 65,
+    "poster": "https://image.tmdb.org/t/p/w342/ld8DpQKpM4T1wRAiBjgReV0mQcK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/xUC6mdVESvJN2umz8mNxKn89Htf.jpg",
+    "overview": "Тайо Асано был предоставлен сам себе с тех пор, как умерли его родители, и единственный, кто заботится о нем, это его друг детства и одноклассник Муцуми Ёдзакура. Но у Муцуми есть секрет — она глава семьи шпионов! И вдобавок ко всему, ее брат Кёитиро опасно защищает ее! Чтобы помешать Кёитиро убить его, Тайё и Муцуми должны сделать последний шаг — пожениться! Потому что в семье Ёдзакура семья не может убить семью.",
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Боевик и Приключения"
+    ],
+    "source": "tv_popular"
+  },
+  {
     "id": 115911,
     "ru": "Ориент",
     "en": "オリエント",
@@ -2097,6 +2080,26 @@
     "poster": "https://image.tmdb.org/t/p/w342/4bTJq19uRHNsjVWpOYVHvTNUITg.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/pyYU53K9QZIIvCvkLo7GwXOBNVs.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 8001974,
+    "ru": "Шоу Боба Ньюхарта",
+    "en": "The Bob Newhart Show",
+    "year": "1972",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.5,
+    "votes": 63,
+    "popularity": 19.59,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kQ9XpyvsW76gIwQxJ5GdXsYbF5N.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/vE6yzGzNqQdjdOFw48C41a4pF5j.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 1974
   },
   {
     "id": 112718,
@@ -3038,28 +3041,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/nNYgJLG64F6CjrFmsjldHaK33Ex.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/hsQr8gZl2CrIMhWhNgwd2sqVFPl.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8271855,
-    "ru": "Сандокан: Принц пиратов",
-    "en": "Sandokan",
-    "year": "2025",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.5,
-    "votes": 53,
-    "popularity": 14.53,
-    "genres": [
-      "Боевик и Приключения",
-      "драма",
-      "Война и Политика"
-    ],
-    "overview": "Середина XIX века, остров Борнео в Юго-Восточной Азии, чье население находится под гнетом британских войск. Сандокан — пират, который зарабатывает на жизнь грабежами богатых чужестранцев и помогает местным жителям. Случайная встреча с Марианной, дочерью британского консула, разжигает в его сердце огонь любви. Однако охотник на пиратов лорд Брук, скрывающий тайну своего происхождения, не может допустить их союза. Две силы сходятся в битве за любовь прекрасной дамы и свободу целого острова.",
-    "poster": "https://image.tmdb.org/t/p/w342/5syzopG2JrFrwm8NE0pUJzZFI1E.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/1AA5xIVt1PTrbLxCCBxRyvjdpqO.jpg",
-    "source": "tv_popular",
-    "status": "Онгоинг",
-    "tmdbId": 271855
   },
   {
     "id": 1264349,
@@ -9729,6 +9710,25 @@
     "overview": "Студентка юридического факультета и ее друзья пытаются доказать невиновность ее брата, но единственный способ оправдать его имя - найти настоящего убийцу.",
     "poster": "https://image.tmdb.org/t/p/w342/pN7VxfVY0dtgcoaA1CD3dir649U.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/aznaT2jkJW9OH0e7j40uLeoxppv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 683124,
+    "ru": "アルプススタンドのはしの方",
+    "en": "アルプススタンドのはしの方",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.5,
+    "votes": 15,
+    "popularity": 0.38,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/f2FOvVg3IClAkl3JWGlB1mIqGm2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pvmtYStO23VlR5doO8p2hCxOsSV.jpg",
     "source": "tmdb"
   }
 ]

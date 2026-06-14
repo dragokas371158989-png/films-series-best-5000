@@ -51,7 +51,7 @@
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.3,
-    "votes": 440,
+    "votes": 441,
     "popularity": 14.6,
     "genres": [
       "драма",
@@ -130,26 +130,6 @@
     "tmdbId": 70573
   },
   {
-    "id": 8014658,
-    "ru": "Последний герой",
-    "en": "Survivor",
-    "year": "2000",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.3,
-    "votes": 430,
-    "popularity": 58.88,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "Две группы людей, жувущие на необитаемых островах, не имеющие связи с большой землей, состязаются друг с другом, пока их не объединят в одно племя. Но в конце останется только один. Именно он и получит главный приз.",
-    "poster": "https://image.tmdb.org/t/p/w342/1usR1nanbDvnc0LJlWd5TOylT9M.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/4WdtTK5SbeXsYeloXHI2WTpgvdE.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 14658
-  },
-  {
     "id": 7091417,
     "ru": "Драконы: Подарок Ночной Фурии",
     "en": "Dragons: Gift of the Night Fury",
@@ -180,7 +160,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.25,
-    "votes": 5420,
+    "votes": 5421,
     "popularity": 7.74,
     "genres": [
       "мультфильм",
@@ -548,6 +528,27 @@
     "source": "movie_top_rated"
   },
   {
+    "id": 7017687,
+    "tmdbId": 17687,
+    "ru": "Враг общества",
+    "en": "The Public Enemy",
+    "year": "1931",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.3,
+    "votes": 390,
+    "poster": "https://image.tmdb.org/t/p/w342/1k2goPvgcz4HpEuZwgL9BIVMCUS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/oXLaGV0VOqQhXdUmQpm6KGsSpu1.jpg",
+    "overview": "1909 год, двое ирландских мальчишек Том и Мэтт взрослеют на «грязных» улицах Саут-Сайда Чикаго, проходя курс обучения преступной жизни у скупщика краденого. Став взрослыми, ребята переходят к ограблениям, в результате убит полицейский. Далее идет бутлеггерство, приходит «успех», они уже живут в апартаментах с двумя блондиночками Мэмю и Китти. Том, более крутой и жестокий, быстрее поднимается по ступенькам гангстерской иерархии, и через какое-то время убийство становится для обоих настолько обыденным, что они убивают даже лошадь. Но расплаты, по законам морали того времени, не избежать.",
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "source": "movie_top_rated"
+  },
+  {
     "id": 8124124,
     "tmdbId": 124124,
     "ru": "Кофе с ароматом любви",
@@ -838,6 +839,28 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 7064847,
+    "tmdbId": 64847,
+    "ru": "Печальная Белладонна",
+    "en": "哀しみのベラドンナ",
+    "year": "1973",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.3,
+    "votes": 362,
+    "poster": "https://image.tmdb.org/t/p/w342/4U9Bbc7UqvKahDV0ZELaASBLNLh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/gpCfsRtAiOTG1H4sTVQpl6edZQV.jpg",
+    "overview": "В сельской глубинке средневековой Франции двое влюблённых крестьян, Жан и Жанна, направляются к местному господину за разрешением на брак. Однако налог на венчание резко возрос, жених заплатить не в состоянии, и потому первая брачная ночь с невестой достаётся господину и его свите. Почувствовав себя брошенной Богом, девушка обращается к нечистой силе. Так начинается страшный путь Жанны к адскому костру",
+    "genres": [
+      "мультфильм",
+      "драма",
+      "фэнтези"
+    ],
+    "source": "movie_top_rated"
+  },
+  {
     "id": 8037664,
     "ru": "Тайный круг",
     "en": "The Secret Circle",
@@ -857,6 +880,27 @@
     "source": "tv_top_rated",
     "status": "Онгоинг",
     "tmdbId": 37664
+  },
+  {
+    "id": 7011537,
+    "ru": "Змея в тени орла",
+    "en": "蛇形刁手",
+    "year": "1978",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.3,
+    "votes": 360,
+    "popularity": 2.7,
+    "genres": [
+      "боевик",
+      "комедия"
+    ],
+    "overview": "Китай времён динacтии Цин. Бедный сирота Цзянь Фу случайно спасает жизнь мастеру кунг-фу Бай Чжантяню, последнему оставшемуся в живых представителю школы Змеиного Кулака, уничтоженной зловещим кланом Орлиного Когтя. Благородный мастер берёт юношу в ученики, дабы передать ему секреты своего боевого стиля. А ученик оказывается настолько талантлив, что на основе приёмов учителя даже создаёт собственный стиль. Очень своевременное изобретение, которому вскоре придётся пройти самую суровую проверку, когда орда адептов Орлиного Когтя во главе с непобедимым Шангуань Июнем обнаружат Бай Чжантяня и явятся убить его.",
+    "poster": "https://image.tmdb.org/t/p/w342/um52H6A1TILH4GyeKyHnKLc89Yv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/7VjslHn3HOhH6N2rgywlH3Js1Dz.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 11537
   },
   {
     "id": 7001433,
@@ -1064,7 +1108,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.23,
-    "votes": 7341,
+    "votes": 7343,
     "popularity": 8.85,
     "genres": [
       "комедия"
@@ -1084,7 +1128,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.26,
-    "votes": 4339,
+    "votes": 4341,
     "popularity": 7.14,
     "genres": [
       "триллер"
@@ -1205,6 +1249,27 @@
     "source": "movie_top_rated"
   },
   {
+    "id": 7964980,
+    "tmdbId": 964980,
+    "ru": "Air: Большой прыжок",
+    "en": "Air",
+    "year": "2023",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.28,
+    "votes": 2336,
+    "poster": "https://image.tmdb.org/t/p/w342/yPtqBdEGzcFsSuTvzCIoSUtQe6N.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/aT3sRVqgpkyCo23fp9myVfKPWbA.jpg",
+    "overview": "1980-е. Продавец кроссовок из фирмы Nike Сонни Ваккаро и соучредитель Nike Фил Найт пытаются подписать контракт с многообещающим спортсменом Майклом Джорданом.",
+    "genres": [
+      "драма",
+      "история"
+    ],
+    "source": "movie_top_rated"
+  },
+  {
     "id": 7258893,
     "ru": "Скуби-Ду! Искусство борьбы",
     "en": "Scooby-Doo! WrestleMania Mystery",
@@ -1252,27 +1317,6 @@
     "poster": "https://cdn.myanimelist.net/images/anime/5/19558l.webp",
     "backdrop": "https://image.tmdb.org/t/p/w780/swY5XyOTUIt8a60SsSKtUTd1BkK.jpg",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 7964980,
-    "tmdbId": 964980,
-    "ru": "Air: Большой прыжок",
-    "en": "Air",
-    "year": "2023",
-    "type": "Фильм",
-    "episodes": "",
-    "status": "Вышел",
-    "studio": "",
-    "rating": 7.28,
-    "votes": 2333,
-    "poster": "https://image.tmdb.org/t/p/w342/yPtqBdEGzcFsSuTvzCIoSUtQe6N.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/aT3sRVqgpkyCo23fp9myVfKPWbA.jpg",
-    "overview": "1980-е. Продавец кроссовок из фирмы Nike Сонни Ваккаро и соучредитель Nike Фил Найт пытаются подписать контракт с многообещающим спортсменом Майклом Джорданом.",
-    "genres": [
-      "драма",
-      "история"
-    ],
-    "source": "movie_top_rated"
   },
   {
     "id": 8070865,
@@ -1355,28 +1399,6 @@
     "source": "tv_top_rated",
     "status": "Онгоинг",
     "tmdbId": 39279
-  },
-  {
-    "id": 7011807,
-    "tmdbId": 11807,
-    "ru": "Когда мы встретились",
-    "en": "जब वी मेट",
-    "year": "2007",
-    "type": "Фильм",
-    "episodes": "",
-    "status": "Вышел",
-    "studio": "",
-    "rating": 7.3,
-    "votes": 320,
-    "poster": "https://image.tmdb.org/t/p/w342/iqiH6vnoEgjAypKsuIScN7JlE2j.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/1liaFFVnxdcUlfvi6Dp29261tK5.jpg",
-    "overview": "Адитья — бизнесмен-неудачник. Он несчастен, потому что, его любимая девушка выходит замуж за другого. Ему не хватает мужества вернуться домой, он решает плыть по течению, садится в первый попавшийся поезд, и едет, « куда глаза глядят». Но судьба распоряжается иначе. В поезде он знакомится с девушкой по имени Гита. Она красива, но чересчур болтлива. Гита едет из Мумбай в родной город Бхатинд, затем, у нее есть планы сбежать к своему бойфренду.  Гита раздражает Адитью до такой степени, что он сходит с поезда. Она пытается вернуть его обратно, но сама опаздывает на поезд. Так они оба оказываются на заброшенной станции без багажа и денег. Начинается идиллическое путешествие по живописным местам Северной Индии и эта странная парочка встречает на своем пути: автобусы, такси, верблюжьи повозки, различных людей. Они пересекают равнины, пустыни, озера, до тех пор, пока не доберутся до Пенджаба.",
-    "genres": [
-      "драма",
-      "комедия",
-      "мелодрама"
-    ],
-    "source": "movie_top_rated"
   },
   {
     "id": 8095249,
@@ -1553,6 +1575,26 @@
     "source": "movie_top_rated"
   },
   {
+    "id": 7027094,
+    "tmdbId": 27094,
+    "ru": "Ленни",
+    "en": "Lenny",
+    "year": "1974",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.3,
+    "votes": 308,
+    "poster": "https://image.tmdb.org/t/p/w342/2rCqD29srmHGej1PV9StcyMf4lp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/6zqFDzIKPKyGX1jwYAiJTGvYyXz.jpg",
+    "overview": "Фильм рассказывает о жизни колкого юмориста Ленни Брюса, чей оригинальный, не сдерживаемый внутренними запретами стиль, часто оценивался как непристойный и непригодный для публики.",
+    "genres": [
+      "драма"
+    ],
+    "source": "movie_top_rated"
+  },
+  {
     "id": 7021733,
     "tmdbId": 21733,
     "ru": "Драконы Навсегда",
@@ -1641,7 +1683,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.3,
-    "votes": 300,
+    "votes": 301,
     "popularity": 3.39,
     "genres": [
       "мелодрама",
@@ -1762,7 +1804,7 @@
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.3,
-    "votes": 296,
+    "votes": 297,
     "popularity": 6.69,
     "genres": [
       "детектив",
@@ -1926,6 +1968,28 @@
     "source": "tmdb"
   },
   {
+    "id": 7001538,
+    "ru": "Соучастник",
+    "en": "Collateral",
+    "year": "2004",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.24,
+    "votes": 6283,
+    "popularity": 9.09,
+    "genres": [
+      "драма",
+      "криминал",
+      "триллер"
+    ],
+    "overview": "Водитель такси оказывается в положении заложника, когда к нему в машину садится наёмный убийца, заставляющий его наматывать километры по ночному Лос-Анджелесу от одной жертвы к другой. Нужно спасать - себя и последнюю намеченную убийцей цель...",
+    "poster": "https://image.tmdb.org/t/p/w342/tZKDF0G3KXMkBDJTsSMgMDFe7Db.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/qVzmXKKOTtd3szkiCheCNrfa394.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 1538
+  },
+  {
     "id": 8095202,
     "ru": "Эпидемия",
     "en": "Эпидемия",
@@ -1990,26 +2054,27 @@
     "tmdbId": 31078
   },
   {
-    "id": 7001538,
-    "ru": "Соучастник",
-    "en": "Collateral",
-    "year": "2004",
+    "id": 7116745,
+    "tmdbId": 116745,
+    "ru": "Невероятная жизнь Уолтера Митти",
+    "en": "The Secret Life of Walter Mitty",
+    "year": "2014",
     "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.24,
-    "votes": 6280,
-    "popularity": 9.09,
-    "genres": [
-      "драма",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "Водитель такси оказывается в положении заложника, когда к нему в машину садится наёмный убийца, заставляющий его наматывать километры по ночному Лос-Анджелесу от одной жертвы к другой. Нужно спасать - себя и последнюю намеченную убийцей цель...",
-    "poster": "https://image.tmdb.org/t/p/w342/tZKDF0G3KXMkBDJTsSMgMDFe7Db.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/qVzmXKKOTtd3szkiCheCNrfa394.jpg",
-    "source": "movie_top_rated",
+    "episodes": "",
     "status": "Вышел",
-    "tmdbId": 1538
+    "studio": "",
+    "rating": 7.22,
+    "votes": 8277,
+    "poster": "https://image.tmdb.org/t/p/w342/nIKlc3okrp1d0N7R7OA0r11J5rR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/pzMrxeP9XkKOtQVUBPTq5yk4ck5.jpg",
+    "overview": "Кто сказал, что в сердце маленького человека не могут жить великие мечты? Даже скромному и незаметному служащему хочется иногда совершить пусть безумные, но геройские поступки, поверить в свою силу и мужество. Почему всех спасать должны исключительно супермены?",
+    "genres": [
+      "приключения",
+      "комедия",
+      "драма",
+      "фэнтези"
+    ],
+    "source": "movie_top_rated"
   },
   {
     "id": 117030,
@@ -2099,29 +2164,6 @@
     "tmdbId": 64852
   },
   {
-    "id": 7116745,
-    "tmdbId": 116745,
-    "ru": "Невероятная жизнь Уолтера Митти",
-    "en": "The Secret Life of Walter Mitty",
-    "year": "2014",
-    "type": "Фильм",
-    "episodes": "",
-    "status": "Вышел",
-    "studio": "",
-    "rating": 7.22,
-    "votes": 8274,
-    "poster": "https://image.tmdb.org/t/p/w342/nIKlc3okrp1d0N7R7OA0r11J5rR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/pzMrxeP9XkKOtQVUBPTq5yk4ck5.jpg",
-    "overview": "Кто сказал, что в сердце маленького человека не могут жить великие мечты? Даже скромному и незаметному служащему хочется иногда совершить пусть безумные, но геройские поступки, поверить в свою силу и мужество. Почему всех спасать должны исключительно супермены?",
-    "genres": [
-      "приключения",
-      "комедия",
-      "драма",
-      "фэнтези"
-    ],
-    "source": "movie_top_rated"
-  },
-  {
     "id": 8180629,
     "ru": "Никап",
     "en": "Kneecap",
@@ -2205,28 +2247,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/hOH1JUTHNCig2wfAtLJIr4E1Ste.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/vfEtEzBIn0wwWM7ppzJCGEZUSu2.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 7866398,
-    "ru": "Пчеловод",
-    "en": "The Beekeeper",
-    "year": "2024",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.26,
-    "votes": 4264,
-    "popularity": 16.76,
-    "genres": [
-      "боевик",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "Месть одного человека приобретает национальные масштабы после того, как выясняется, что он является бывшим оперативником мощной и подпольной организации, известной как \"Пчеловоды\".",
-    "poster": "https://image.tmdb.org/t/p/w342/1mbla3dGMbzyAz1PgpMcy4Yjtir.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/f0ACHVpV707zqu4etZrXnWNdSgL.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 866398
   },
   {
     "id": 19316,
@@ -2639,6 +2659,26 @@
     "source": "tmdb"
   },
   {
+    "id": 8196890,
+    "ru": "Вождь войны",
+    "en": "Chief of War",
+    "year": "2025",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.3,
+    "votes": 232,
+    "popularity": 11.08,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Четыре островных королевства Гавайев разделены войной. Суровый воин Каиана берёт на себя сверхсложную задачу по объединению своего народа. В это время над их берегами нависает смертельная угроза.",
+    "poster": "https://image.tmdb.org/t/p/w342/DiYjojO8V0DZAwJoP78zZ9DYqn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/2c3PCbxVgWen5HrYsaukUmfu4J9.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 196890
+  },
+  {
     "id": 855400,
     "ru": "ஜெய் பீம்",
     "en": "ஜெய் பீம்",
@@ -2740,6 +2780,26 @@
     "poster": "https://image.tmdb.org/t/p/w342/p4YiseA6zPrXQMAJ7dj9GxCTHmo.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/sDAhbdyPc9qAaNqSqNmiHJgNGNj.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 8031497,
+    "ru": "Лига",
+    "en": "The League",
+    "year": "2009",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.3,
+    "votes": 226,
+    "popularity": 20.52,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "\"Лига\" — это полу-импровизационный ситком, который расскажет про друзей из Чикаго, пытающихся совместить семейную жизнь со своим любимым занятием, Fantasy Football — виртуальной футбольной лигой.",
+    "poster": "https://image.tmdb.org/t/p/w342/w6IAasjDdANmalOWkjKcENhirQR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/4MRgkPa85umPuvNpahlQo1JtzMP.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 31497
   },
   {
     "id": 8002263,
@@ -2980,7 +3040,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.3,
-    "votes": 216,
+    "votes": 217,
     "popularity": 2.61,
     "genres": [
       "драма",
@@ -4866,10 +4926,10 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": "40213",
+    "id": 7040213,
     "ru": "Таверна Дракона",
     "en": "新龍門客棧",
-    "year": 1992,
+    "year": "1992",
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.3,
@@ -4881,8 +4941,10 @@
     ],
     "overview": "1457 год, правление династии Минг, власть загребают под себя жестокие и коварные евнухи. Один из них, Чжао добивается казни генерала Ю и повелевает уничтожить всех его наследников, однако тех ссылают на удаленный пограничный пост под названием «Врата Дракона». Чжао не собирается останавливаться на полпути и посылает отряд убийц в таверну, через которую эскорт обязательно пройдет. Но туда забредают странствующие воины, которые встанут грудью на защиту невинных.",
     "poster": "https://image.tmdb.org/t/p/w342/wWDgLNHfbBuj9N1xkD9C8GU4fIS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kQBEHIcFrUPIudjIlsULhglRQzc.jpg",
-    "source": "tmdb"
+    "backdrop": "https://image.tmdb.org/t/p/w500/kQBEHIcFrUPIudjIlsULhglRQzc.jpg",
+    "source": "movie_popular",
+    "status": "Вышел",
+    "tmdbId": 40213
   },
   {
     "id": 8259730,
@@ -5082,6 +5144,27 @@
     "tmdbId": 1234591
   },
   {
+    "id": 8239966,
+    "ru": "Дело Асунты",
+    "en": "El caso Asunta",
+    "year": "2024",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.3,
+    "votes": 146,
+    "popularity": 1.95,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "Вскоре после того, как родители заявляют о пропаже своей 12-летней дочери Асунты, расследование оборачивается против них.",
+    "poster": "https://image.tmdb.org/t/p/w342/A64XGr4BKLSjTidCKJJ5UI9h8OO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/sU43u8iWvCT6aQ0Mvi4hB6VkuDg.jpg",
+    "source": "discover_best_tv_2024",
+    "status": "Онгоинг",
+    "tmdbId": 239966
+  },
+  {
     "id": "tv_97401",
     "ru": "Чирлидеры",
     "en": "Cheer",
@@ -5207,6 +5290,27 @@
     "poster": "https://image.tmdb.org/t/p/w342/pDhtvE8yJeqRwm9zrQxUJkLi2YI.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/8eP1SDVCSasQlZ6fCq2uzkLNKjr.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 8228477,
+    "ru": "Зорро",
+    "en": "Zorro",
+    "year": "2024",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.3,
+    "votes": 143,
+    "popularity": 4.48,
+    "genres": [
+      "Боевик и Приключения",
+      "драма"
+    ],
+    "overview": "Калифорния, 1834 год. Представителям коррумпированных властей противостоят местные жители. Сюда, в Лос-Анджелес, в спешке приезжает юный Дон Диего де ла Вега, вынужденный оставить учёбу в Испании, чтобы найти убийц отца и отомстить им. Он надевает маску Зорро и бросает вызов всесильному мексиканскому губернатору Педро Виктория, который мечтает избавиться от народного мстителя. А среди его особенно принципиальных врагов вскоре оказывается и юная индианка На-Лин, в совершенстве овладевшая боевыми навыками своего народа.",
+    "poster": "https://image.tmdb.org/t/p/w342/3PdRgpNfyx23t2FxdF54abW5TzZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/f5ZF7H4y9k4bRLyg9obIUlMbDSs.jpg",
+    "source": "discover_best_tv_2024",
+    "status": "Онгоинг",
+    "tmdbId": 228477
   },
   {
     "id": 1041580,
@@ -5537,28 +5641,6 @@
     "source": "tmdb"
   },
   {
-    "id": 7899294,
-    "ru": "Фрэнк и Пенелопа",
-    "en": "Frank and Penelope",
-    "year": "2022",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.3,
-    "votes": 128,
-    "popularity": 6.17,
-    "genres": [
-      "триллер",
-      "ужасы",
-      "криминал"
-    ],
-    "overview": "Его помотало по миру, а она танцует в захудалом стриптиз-клубе. После судьбоносной встречи их жизнь покатится под откос, но они будут готовы рискнуть всем.",
-    "poster": "https://image.tmdb.org/t/p/w342/5NpXoAi3nEQkEgLO09nmotPfyNa.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/eyiSLRh44SKKWIJ6bxWq8z1sscB.jpg",
-    "source": "movie_popular",
-    "status": "Вышел",
-    "tmdbId": 899294
-  },
-  {
     "id": "tv_131026",
     "ru": "Даль-ли и камджатхан",
     "en": "달리와 감자탕",
@@ -5877,6 +5959,26 @@
     "tmdbId": 609271
   },
   {
+    "id": 8067482,
+    "ru": "Королевские Гонки РуПола: Все Звёзды",
+    "en": "RuPaul's Drag Race All Stars",
+    "year": "2012",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.3,
+    "votes": 124,
+    "popularity": 18.48,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "Спин-офф Королевских Гонок РуПола в котором звёздные участники оригинальных сезонов показывают все свои таланты в борьбе за желанную корону и место в зале славы Гонок.",
+    "poster": "https://image.tmdb.org/t/p/w342/ArIu3xEo28LiKtiVWHNZdPFNZrM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/sdZYmfP3J7AoWERidtaBAx23avP.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 67482
+  },
+  {
     "id": "tv_61123",
     "ru": "The Honourable Woman",
     "en": "The Honourable Woman",
@@ -6146,7 +6248,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 7.3,
-    "votes": 114,
+    "votes": 115,
     "popularity": 224.88,
     "genres": [
       "боевик",
@@ -6372,7 +6474,7 @@
     "overview": "Бывший звезда футбольной команды и король выпускного Бенни, скрывающий свою истинную сущность, быстро сближается с Кармен — изгоем, готовой на всё, чтобы вписаться в школьную тусовку. Под руководством старшей сестры Бенни и её легендарного парня с кампуса они балансируют между неудачными романами, ароматизированной водкой и поддельными удостоверениями личности.",
     "poster": "https://image.tmdb.org/t/p/w342/zr7zdJqdX644gFfGRweFkhzuLT9.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/vG1nIg9epHFzjqOlyiOlWkeKlXw.jpg",
-    "source": "discover_best_tv_2025",
+    "source": "trending_tv_week",
     "status": "Онгоинг",
     "tmdbId": 247619
   },
@@ -7811,6 +7913,28 @@
     "poster": "https://image.tmdb.org/t/p/w342/5dRJijOkun0Rmdpip7iWlfuNozx.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/hnuEnMxZBYjxXLNOnsdXsdY4kP6.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 8134667,
+    "tmdbId": 134667,
+    "ru": "О моём перерождении в меч",
+    "en": "転生したら剣でした",
+    "year": "2022",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 7.3,
+    "votes": 82,
+    "poster": "https://image.tmdb.org/t/p/w342/hiy90AJr6iJL5N9uGfIB7viHrjp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/fo5qwDAVqY7j2jmL350WKjk6kmi.jpg",
+    "overview": "Попаданцам вечно не везёт. Как в прошлой жизни, в которой они, как правило, погибли жестокой глупой смертью, так и в нынешней, где они часто оказываются не в самом выгодном положении. Главному герою этой истории не повезло вдвойне: мало того, что коньки отбросил, вместе с коньками он лишился ног, рук, головы и вообще тела, так как переродился в меч! Да ещё с корабля на бал очутился посреди леса, кишащего монстрами.\n\nВот в этом хаосе он и повстречал девушку-кошку, которая сбежала от своих хозяев и их жестокого с ней обращения.\n\nДевушка представляется как Фран, а вот меч никак не может назвать имя и не потому что рта нет, а потому что — забыл. Фран любезно дарует мечу имя Мастер, а меч великодушно обещает девушке дружбу и защиту. Отныне они команда, которая будет мочить злодеев, биться за добро и справедливость, ну и параллельно прокачиваться потихоньку.",
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "НФ и Фэнтези"
+    ],
+    "source": "trending_tv_week"
   },
   {
     "id": 23406,
@@ -9972,7 +10096,7 @@
     "overview": "Пейшенс Эванс работает в отделе уголовных записей полиции Йоркшира, каталогизируя и регистрируя доказательства, полученные в ходе крупных дел. Молодая женщина-аутист, она придерживается рутины и порядка, наслаждаясь одиночеством и структурой, которые дает ее работа, но она жаждет большего. Блестящий криминолог-самоучка, Пейшенс обладает инстинктивным взглядом на места преступлений и страстью к решению проблем.",
     "poster": "https://image.tmdb.org/t/p/w342/kJAKX5QVCbQYxrdlq0jFUA45zuj.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/5BVOw0s15KTPnBYUihtmPWqFZr4.jpg",
-    "source": "trending_tv_week",
+    "source": "tv_popular",
     "status": "Онгоинг",
     "tmdbId": 279603
   },
@@ -10015,122 +10139,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/5ZumU878KJndWedQICQAKz6kCf4.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/fsUfOopW3SchYbxYLX34alrpCHl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 133775,
-    "ru": "Чёрная невеста",
-    "en": "블랙의신부",
-    "year": 2022,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.3,
-    "votes": 58,
-    "popularity": 4.38,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Сюжет повествует о рынке брачных услуг. Эксклюзивное брачное агентством помогает женщинам выйти замуж за желанного холостяка и занять высокое положение в обществе.",
-    "poster": "https://image.tmdb.org/t/p/w342/xYcCKWsqeqYgaTbhsqozdztMepy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cTIfK6Vdp4B1fljaRFjMWrzavC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_126660",
-    "ru": "Профессор Т.",
-    "en": "Professor T",
-    "year": 2021,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.3,
-    "votes": 58,
-    "popularity": 6.71,
-    "genres": [
-      "криминал",
-      "детектив",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jJ9SjrX7tEAwHigRq20TeANhH1Q.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/q9tRxUOQ2K3vAvziTWhh9VYhZan.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 234717,
-    "ru": "Eine Billion Dollar",
-    "en": "Eine Billion Dollar",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.3,
-    "votes": 58,
-    "popularity": 2.03,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uP2YXK8Q7NspFNj2SJ16iXHfxg6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zdjKqMFj5lLgglJHi2Pg38TbeLj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 456063,
-    "ru": "Восьмилетняя помолвка",
-    "en": "8年越しの花嫁 奇跡の実話",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.3,
-    "votes": 58,
-    "popularity": 1.34,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Хисаси и Маи должны были пожениться через три месяца, но Маи серьёзно заболевает и впадает в кому. Хисаси не сдаётся и не бросает свою невесту, парень не перестаёт молиться о её выздоровлении. Но когда Маи приходит в себя, она не может вспомнить ничего об их отношениях.",
-    "poster": "https://image.tmdb.org/t/p/w342/8U2bPJMeNYKvQ9RkttiZJ5Jl5D1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/63q3Yk7yvMN1afU9j1YNJGyWx6d.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_92591",
-    "ru": "Небесные драконы",
-    "en": "空挺ドラゴンズ",
-    "year": 2020,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.3,
-    "votes": 57,
-    "popularity": 4.89,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Драконы — властители небес. Для людей, живущих на поверхности земли, они представляют собой серьёзную угрозу, однако в то же время являются бесценным источником всевозможных благ — пищи, лекарств, топлива. Поэтому неудивительно, что рано или поздно должны были появиться и охотники на драконов, опасная, но полная приключений и азарта профессия. Они путешествуют по воздушным просторам на дирижаблях, выискивая драконов.\n\nАниме поведает историю одного из таких кораблей под названием «Королева Заза» и его боевой команды.",
-    "poster": "https://image.tmdb.org/t/p/w342/pdSAcireZWWqj0l75WLzwojpjZe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eS87GW6iMXjAjzB8G5R9GZ9RZm5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "89458",
-    "ru": "クレヨンしんちゃん 暗黒タマタマ大追跡",
-    "en": "クレヨンしんちゃん 暗黒タマタマ大追跡",
-    "year": 1997,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.3,
-    "votes": 57,
-    "popularity": 2.72,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dFV1UkIxxD98iGp7eqyQGjMw3wX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ubpleh5Oj6ymlZsGUGo77hOKXXR.jpg",
     "source": "tmdb"
   }
 ]

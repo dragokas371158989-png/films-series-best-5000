@@ -1,5 +1,214 @@
 [
   {
+    "id": 417414,
+    "ru": "The Best Democracy Money Can Buy",
+    "en": "The Best Democracy Money Can Buy",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 6,
+    "popularity": 0.47,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5HbB08bX8jImnRL5RR8fuAcmWxb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5Ts0Iw4KzlkOoW2I8b79C0Z8ht0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 494182,
+    "ru": "Тайны Солнечной системы",
+    "en": "Secrets of the Solar System",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 6,
+    "popularity": 0.46,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/iAw6EZJGcxLx2geJVB3yFYtQe06.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sx0dKhNKmBwAeUklIeoq4FV1ihi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 354885,
+    "ru": "Merry Riana: Mimpi Sejuta Dolar",
+    "en": "Merry Riana: Mimpi Sejuta Dolar",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 6,
+    "popularity": 0.43,
+    "genres": [
+      "драма",
+      "мелодрама",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/avtkmK8L6JpmBq6NDlyTgJ82aY4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yp7lcCfhMcLknWx22v5pS9SrN44.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 588848,
+    "ru": "Chacrinha: O Eterno Guerreiro",
+    "en": "Chacrinha: O Eterno Guerreiro",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 6,
+    "popularity": 0.42,
+    "genres": [
+      "музыка",
+      "комедия",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uQIQ23z3Qt9yAQ4axgBZ0fhalS2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3pQXrJtISbJaEZY6Sa16Bcdj09K.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 397367,
+    "ru": "Dear Dad",
+    "en": "Dear Dad",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 6,
+    "popularity": 0.41,
+    "genres": [
+      "драма",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/arMYLwkzz0vgMX2z8pmY1PcwyG0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7HcB2RHytUEUbGj1dhSWmE8DZWi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 103985,
+    "ru": "Ragtime Bear",
+    "en": "Ragtime Bear",
+    "year": 1949,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 6,
+    "popularity": 0.34,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aqVp73YiDVKF2ACVx9j9D2PGFi0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7n1FjoNgVieUnM7BArI54Kdfkvm.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 446974,
+    "ru": "Волк и семеро козлят",
+    "en": "Волк и семеро козлят",
+    "year": 1957,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 6,
+    "popularity": 0.3,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "Мультипликационный фильм по мотивам известной русской народной сказки о том, как Волк хочет украсть у Козы её семерых козлят, но грубый голос выдаёт его. Волк просит Медведя-кузнеца выковать ему тоненький голосок и крадёт козлят, но его преследуют Коза, зайчата и Дятел. Медведь, узнав об обмане, помогает им и наказывает Волка",
+    "poster": "https://image.tmdb.org/t/p/w342/hIrGU6YlQ6zmH2K0XX4UfaP7y6g.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 342860,
+    "ru": "¡Qué vecinos tan animales!",
+    "en": "¡Qué vecinos tan animales!",
+    "year": 1998,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 6,
+    "popularity": 0.81,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vQWgm3GGclk5nYZj88cM5avSJ0L.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 371710,
+    "ru": "Ompelijatar",
+    "en": "Ompelijatar",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 6,
+    "popularity": 0.45,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7pfKVyWMN4FvyHAy2xCwUrK5Mx.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 245215,
+    "ru": "Идеальный принц любит меня, своего соперника?!",
+    "en": "当て馬キャラのくせして、スパダリ王子に寵愛されています。",
+    "year": 2024,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 5,
+    "popularity": 27.63,
+    "genres": [
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "\"Я всегда... Хотел прикоснуться к тебе.\" Лихой принц встречает меня, любовный интерес проигравшего соперника. Хотя мы должны были бы бороться за героиню... Почему принц положил глаз на меня?!",
+    "poster": "https://image.tmdb.org/t/p/w342/3Ca0AClMBPvUDPXzKaHFc9x0nRh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kKM415bfv3n0s36GXrQIKDVVyIH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 300015,
+    "ru": "Клубничная элегия: Грубая и дерзкая сестра и брат, который не может с этим смириться",
+    "en": "イチゴ哀歌～雑で生イキな妹と割り切れない兄～",
+    "year": 2026,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 5,
+    "popularity": 13.13,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "Мирная жизнь Коты Такамуры делает крутой поворот, когда его отец снова женится, и в семье появляется сводная сестра Айка.\n\nНа первый взгляд, она – идеальная «девочка-ангелочек», обожаемая родителями. Но как только двери захлопываются, она превращает жизнь Коты в сущий кошмар — приводит парней и устраивает вечеринки. Кота уже махнул на всё рукой, но внезапно атмосфера меняется: Айка начинает требовать от него объятий и даже большего...!?\n\nЭто взрывная романтическая комедия о дерзкой гяру и зануде-девственнике — непримиримых брате и сестре!",
+    "poster": "https://image.tmdb.org/t/p/w342/fjKOO6PBLwLG3ViyvrIL9oZUmbU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bFdIuq0tWRSeYENCf1i3ZQWY8iF.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 271264,
     "ru": "Маленькие спасатели: Легенда о лорде демонов",
     "en": "魔神創造伝ワタル",
@@ -10736,243 +10945,6 @@
     "overview": "В 1894 году артиллерийского офицера Альфреда Дрейфуса объявляют особо опасным преступником. Официальное обвинение — государственная измена и шпионаж в пользу Германии. Бывший наставник Дрейфуса Жорж Пикар ведёт собственное расследование, чтобы доказать, что его подзащитный невиновен.",
     "poster": "https://image.tmdb.org/t/p/w342/m1WiVpyL4GxSkLLFJLC5EyIag5x.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/qyHc9Fxgt6Szby7fmItRd9fpM6V.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "597219",
-    "ru": "Половина всего",
-    "en": "The Half of It",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 1593,
-    "popularity": 1.59,
-    "genres": [
-      "комедия",
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "Школьный спортсмен нанимает отличницу Элли, чтобы она помогла ему добиться руки и сердца местной красавицы. Ситуация заметно осложняется, когда Элли понимает, что Дикон испытывает к ней романтические чувства.",
-    "poster": "https://image.tmdb.org/t/p/w342/jC1PNXGET1ZZQyrJvdFhPfXdPP1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8YSpQBdGvuvSj9pLsY2yoUb9fZn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "308639",
-    "ru": "Наркотик",
-    "en": "Dope",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 1587,
-    "popularity": 2.99,
-    "genres": [
-      "криминал",
-      "драма",
-      "комедия"
-    ],
-    "overview": "В центре истории подросток, мечтающий учиться в Гарварде, однако на дворе 90-е годы и живет он в преступном района Инглвуда, откуда выбраться не так уж и просто.",
-    "poster": "https://image.tmdb.org/t/p/w342/qZyKTxHgurAPB5UF9QiiF2ruyxQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4Yihb0wD1Jd2sQtNrKo9TOs8S3l.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_1045",
-    "ru": "Those Who Hunt Elves",
-    "en": "Elf wo Karu Mono-tachi",
-    "year": 1996,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.0,
-    "votes": 11586,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Приключения",
-      "Adventure",
-      "Комедия",
-      "Comedy",
-      "Фэнтези",
-      "Fantasy",
-      "Этти",
-      "Ecchi",
-      "Исекай",
-      "Isekai",
-      "Сёнэн",
-      "Shounen"
-    ],
-    "overview": "Loudmouthed martial artist Junpei Ryuzouji, elegant actress Airi Komiyama, and cheery but artillery-obsessed student Ritsuko Inoue all find themselves transported from their homeland of Japan to an unfamiliar, magical world. When the elven priestess Celcia Marieclaire casts the spell to send them home, she is interrupted, and the spell is broken into parts that scatter throughout the world. The spell fragments imprint themselves onto the skin of various elves.\n\nThe trio travels in Ritsuko's tank, searching for elves who might carry the spell fragments so that Celcia can transfer them to her own body and make the spell whole again. As they adventure, people begin to refer to them as \"Those Who Hunt Elves,\" gaining a reputation as warriors that put a stop to evil-doers with their miraculous cannon, terrifying elves by stripping any that they find. Though they're not the smartest group, they make up for it with enthusiasm and their strong determination to get back to Japan.\n\n[Written by MAL Rewrite]",
-    "poster": "https://cdn.myanimelist.net/images/anime/1663/150696l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "1548",
-    "ru": "Призрачный мир",
-    "en": "Ghost World",
-    "year": 2001,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 1584,
-    "popularity": 1.93,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "В то время, как все благовоспитанные выпускники средней школы отправились в колледж, наши героини Энид и Ребекка решили, что учиться дальше — это скука смертная и бесполезная трата времени. Гораздо лучше отдохнуть в свое удовольствие; поглядеть, что к чему; ну и, конечно, как следует «перемыть косточки» всем несовершенным представителям рода человеческого. А их, к счастью, повсюду превеликое множество!  Но вот однажды, «пулестойкое» сердце нашей язвительной и саркастичной Энид дрогнуло. Это произошло после встречи со скромным и нерешительным холостяком-неудачником, торгующим старыми виниловыми пластинками. Девушку начинает необъяснимым образом тянуть к этому одинокому и застенчивому человеку…",
-    "poster": "https://image.tmdb.org/t/p/w342/uHyZ8jmjOh6f4u8uyHhdsbsM75C.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6zIOO1NrTehQkDaNfvga4luSRQc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1156593",
-    "ru": "Твоя вина",
-    "en": "Culpa tuya",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 1555,
-    "popularity": 29.22,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Ноа и Николас влюблены и счастливы, но это прекрасное чувство очень хрупко. Достаточно одной искры, чтобы пламя недоверия все разрушило. Смогут ли влюбленные преодолеть попытки родителей их разлучить? Удастся ли им сохранить чувства, несмотря на появление бывшей девушки Ника, новых друзей Ноа из колледжа и другие испытания?",
-    "poster": "https://image.tmdb.org/t/p/w342/dj0x6mPhLzPlcnYjIPV2Wnh7Jvp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/k24eZq5I3jyz4htPkZCRpnUmBzE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_50414",
-    "ru": "あんさんぶるスターズ!! -Road to Show!!-",
-    "en": "Ensemble Stars!! Road to Show!!",
-    "year": 2022,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.1,
-    "votes": 1547,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Айдолы",
-      "Idols (Male)",
-      "Музыка",
-      "Music"
-    ],
-    "overview": "The story of \"Ensemble Stars!! Road to Show!!\" picks up in New York City and acts as a direct sequel to the anime, where the main characters have gathered for an awards ceremony because three of the movies they have created have been nominated. Considering that they are in the Big Apple, the idols decide to visit different locations in the city, but things are not exactly what they seem, and it's up to the protagonists to figure out what sinister force may be hiding behind the curtains.\n\n(Source: Looper)",
-    "poster": "https://cdn.myanimelist.net/images/anime/1641/120627l.webp",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eTfbiJANxSTnrISIL9JSGeI8uur.jpg",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "mal_36344",
-    "ru": "フルメタル・パニック！イントゥ・ザ・ブルー",
-    "en": "Full Metal Panic! Movie 3: Into the Blue",
-    "year": 2018,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.1,
-    "votes": 1542,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Комедия",
-      "Comedy",
-      "Меха",
-      "Mecha",
-      "Военное",
-      "Military"
-    ],
-    "overview": "Shikidouji, the illustrator of Shoji Gatoh's Full Metal Panic! light novel series, revealed that production has been green-lit on a \"director's cut\" version of the first Full Metal Panic!! television anime series from 2002. The director's cut will consist of three films. The announcement does not state if the film trilogy will add new footage. \n\n(Source: ANN)",
-    "poster": "https://cdn.myanimelist.net/images/anime/12/89870l.webp",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zkOPL845VN9I5XFK9RV1v5cEHQ2.jpg",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "1090",
-    "ru": "Тринадцатый этаж",
-    "en": "The Thirteenth Floor",
-    "year": 1999,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 1531,
-    "popularity": 3.65,
-    "genres": [
-      "триллер",
-      "фантастика",
-      "детектив"
-    ],
-    "overview": "На тринадцатом этаже компьютерной корпорации была разработана совершенная модель виртуальной реальности, создание которой повлекло за собой цепь таинственных убийств. Разгадать загадку можно, лишь погрузившись в иное измерение, где может быть ответ на многие вопросы, а может быть - страшная нереальность...",
-    "poster": "https://image.tmdb.org/t/p/w342/52r9iLGdl0gzmVUhxm9wpxYBs7I.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nJ0jz1J3zNja31UEMeklhgFeMw5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "15588",
-    "ru": "Агент 117: Миссия в Рио",
-    "en": "OSS 117 : Rio ne répond plus",
-    "year": 2009,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 1528,
-    "popularity": 1.31,
-    "genres": [
-      "криминал",
-      "боевик",
-      "комедия"
-    ],
-    "overview": "На дворе 1967 год. Десять лет спустя от своего первого приключения в Каире, шпион Юбер Бониссер де ля Бат, или же просто Агент 117, послан начальством в Рио-де-Жанейро, чтобы найти микрофильм, хранившийся ранее у одного нацистского высокопоставленного лица. Но наш агент совершенно случайно привлекает внимание агентов Моссада, израильской разведывательной службы…",
-    "poster": "https://image.tmdb.org/t/p/w342/u6TklhHnYyWZK1Hmgdp3Hna7jIT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/t1LMwZqFXjoa7KM4QWGZxmUYD4J.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_2651",
-    "ru": "Doraemon: Doraemon Comes Back (Movie)",
-    "en": "Doraemon: Kaette Kita Doraemon (Movie)",
-    "year": 1998,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.1,
-    "votes": 1527,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Комедия",
-      "Comedy",
-      "Фэнтези",
-      "Fantasy",
-      "Для детей",
-      "Kids"
-    ],
-    "overview": "Nobita is running from an angry Gian, though is quickly able to escape when Gian trips. Nobita asks Doraemon for a gadget to fight back, but Doraemon instead snaps at him; Doraemon tells Nobita that he must return to the 22nd century, and won’t be returning. \n\n(Source: Doraemon Wiki)",
-    "poster": "https://cdn.myanimelist.net/images/anime/1511/150392l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "817758",
-    "ru": "Тар",
-    "en": "TÁR",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 1524,
-    "popularity": 4.83,
-    "genres": [
-      "музыка",
-      "драма"
-    ],
-    "overview": "Дирижёр и композитор Лидия Тар становится первой в истории женщиной-дирижёром Берлинского оркестра.",
-    "poster": "https://image.tmdb.org/t/p/w342/bLRB0h2qaHOIIWuy6WtXeaUy0jN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/84XcRwKHAw4VXdKOYTSW5ARxFEt.jpg",
     "source": "tmdb"
   }
 ]

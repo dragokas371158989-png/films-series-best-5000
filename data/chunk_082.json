@@ -1,5 +1,242 @@
 [
   {
+    "id": "597219",
+    "ru": "Половина всего",
+    "en": "The Half of It",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 1593,
+    "popularity": 1.59,
+    "genres": [
+      "комедия",
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "Школьный спортсмен нанимает отличницу Элли, чтобы она помогла ему добиться руки и сердца местной красавицы. Ситуация заметно осложняется, когда Элли понимает, что Дикон испытывает к ней романтические чувства.",
+    "poster": "https://image.tmdb.org/t/p/w342/jC1PNXGET1ZZQyrJvdFhPfXdPP1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8YSpQBdGvuvSj9pLsY2yoUb9fZn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "308639",
+    "ru": "Наркотик",
+    "en": "Dope",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 1587,
+    "popularity": 2.99,
+    "genres": [
+      "криминал",
+      "драма",
+      "комедия"
+    ],
+    "overview": "В центре истории подросток, мечтающий учиться в Гарварде, однако на дворе 90-е годы и живет он в преступном района Инглвуда, откуда выбраться не так уж и просто.",
+    "poster": "https://image.tmdb.org/t/p/w342/qZyKTxHgurAPB5UF9QiiF2ruyxQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4Yihb0wD1Jd2sQtNrKo9TOs8S3l.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_1045",
+    "ru": "Those Who Hunt Elves",
+    "en": "Elf wo Karu Mono-tachi",
+    "year": 1996,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 11586,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Приключения",
+      "Adventure",
+      "Комедия",
+      "Comedy",
+      "Фэнтези",
+      "Fantasy",
+      "Этти",
+      "Ecchi",
+      "Исекай",
+      "Isekai",
+      "Сёнэн",
+      "Shounen"
+    ],
+    "overview": "Loudmouthed martial artist Junpei Ryuzouji, elegant actress Airi Komiyama, and cheery but artillery-obsessed student Ritsuko Inoue all find themselves transported from their homeland of Japan to an unfamiliar, magical world. When the elven priestess Celcia Marieclaire casts the spell to send them home, she is interrupted, and the spell is broken into parts that scatter throughout the world. The spell fragments imprint themselves onto the skin of various elves.\n\nThe trio travels in Ritsuko's tank, searching for elves who might carry the spell fragments so that Celcia can transfer them to her own body and make the spell whole again. As they adventure, people begin to refer to them as \"Those Who Hunt Elves,\" gaining a reputation as warriors that put a stop to evil-doers with their miraculous cannon, terrifying elves by stripping any that they find. Though they're not the smartest group, they make up for it with enthusiasm and their strong determination to get back to Japan.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1663/150696l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "1548",
+    "ru": "Призрачный мир",
+    "en": "Ghost World",
+    "year": 2001,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 1584,
+    "popularity": 1.93,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "В то время, как все благовоспитанные выпускники средней школы отправились в колледж, наши героини Энид и Ребекка решили, что учиться дальше — это скука смертная и бесполезная трата времени. Гораздо лучше отдохнуть в свое удовольствие; поглядеть, что к чему; ну и, конечно, как следует «перемыть косточки» всем несовершенным представителям рода человеческого. А их, к счастью, повсюду превеликое множество!  Но вот однажды, «пулестойкое» сердце нашей язвительной и саркастичной Энид дрогнуло. Это произошло после встречи со скромным и нерешительным холостяком-неудачником, торгующим старыми виниловыми пластинками. Девушку начинает необъяснимым образом тянуть к этому одинокому и застенчивому человеку…",
+    "poster": "https://image.tmdb.org/t/p/w342/uHyZ8jmjOh6f4u8uyHhdsbsM75C.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6zIOO1NrTehQkDaNfvga4luSRQc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1156593",
+    "ru": "Твоя вина",
+    "en": "Culpa tuya",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 1555,
+    "popularity": 29.22,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Ноа и Николас влюблены и счастливы, но это прекрасное чувство очень хрупко. Достаточно одной искры, чтобы пламя недоверия все разрушило. Смогут ли влюбленные преодолеть попытки родителей их разлучить? Удастся ли им сохранить чувства, несмотря на появление бывшей девушки Ника, новых друзей Ноа из колледжа и другие испытания?",
+    "poster": "https://image.tmdb.org/t/p/w342/dj0x6mPhLzPlcnYjIPV2Wnh7Jvp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/k24eZq5I3jyz4htPkZCRpnUmBzE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_50414",
+    "ru": "あんさんぶるスターズ!! -Road to Show!!-",
+    "en": "Ensemble Stars!! Road to Show!!",
+    "year": 2022,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.1,
+    "votes": 1547,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Айдолы",
+      "Idols (Male)",
+      "Музыка",
+      "Music"
+    ],
+    "overview": "The story of \"Ensemble Stars!! Road to Show!!\" picks up in New York City and acts as a direct sequel to the anime, where the main characters have gathered for an awards ceremony because three of the movies they have created have been nominated. Considering that they are in the Big Apple, the idols decide to visit different locations in the city, but things are not exactly what they seem, and it's up to the protagonists to figure out what sinister force may be hiding behind the curtains.\n\n(Source: Looper)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1641/120627l.webp",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eTfbiJANxSTnrISIL9JSGeI8uur.jpg",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "mal_36344",
+    "ru": "フルメタル・パニック！イントゥ・ザ・ブルー",
+    "en": "Full Metal Panic! Movie 3: Into the Blue",
+    "year": 2018,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.1,
+    "votes": 1542,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Комедия",
+      "Comedy",
+      "Меха",
+      "Mecha",
+      "Военное",
+      "Military"
+    ],
+    "overview": "Shikidouji, the illustrator of Shoji Gatoh's Full Metal Panic! light novel series, revealed that production has been green-lit on a \"director's cut\" version of the first Full Metal Panic!! television anime series from 2002. The director's cut will consist of three films. The announcement does not state if the film trilogy will add new footage. \n\n(Source: ANN)",
+    "poster": "https://cdn.myanimelist.net/images/anime/12/89870l.webp",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zkOPL845VN9I5XFK9RV1v5cEHQ2.jpg",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "1090",
+    "ru": "Тринадцатый этаж",
+    "en": "The Thirteenth Floor",
+    "year": 1999,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 1531,
+    "popularity": 3.65,
+    "genres": [
+      "триллер",
+      "фантастика",
+      "детектив"
+    ],
+    "overview": "На тринадцатом этаже компьютерной корпорации была разработана совершенная модель виртуальной реальности, создание которой повлекло за собой цепь таинственных убийств. Разгадать загадку можно, лишь погрузившись в иное измерение, где может быть ответ на многие вопросы, а может быть - страшная нереальность...",
+    "poster": "https://image.tmdb.org/t/p/w342/52r9iLGdl0gzmVUhxm9wpxYBs7I.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nJ0jz1J3zNja31UEMeklhgFeMw5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "15588",
+    "ru": "Агент 117: Миссия в Рио",
+    "en": "OSS 117 : Rio ne répond plus",
+    "year": 2009,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 1528,
+    "popularity": 1.31,
+    "genres": [
+      "криминал",
+      "боевик",
+      "комедия"
+    ],
+    "overview": "На дворе 1967 год. Десять лет спустя от своего первого приключения в Каире, шпион Юбер Бониссер де ля Бат, или же просто Агент 117, послан начальством в Рио-де-Жанейро, чтобы найти микрофильм, хранившийся ранее у одного нацистского высокопоставленного лица. Но наш агент совершенно случайно привлекает внимание агентов Моссада, израильской разведывательной службы…",
+    "poster": "https://image.tmdb.org/t/p/w342/u6TklhHnYyWZK1Hmgdp3Hna7jIT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/t1LMwZqFXjoa7KM4QWGZxmUYD4J.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_2651",
+    "ru": "Doraemon: Doraemon Comes Back (Movie)",
+    "en": "Doraemon: Kaette Kita Doraemon (Movie)",
+    "year": 1998,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.1,
+    "votes": 1527,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Комедия",
+      "Comedy",
+      "Фэнтези",
+      "Fantasy",
+      "Для детей",
+      "Kids"
+    ],
+    "overview": "Nobita is running from an angry Gian, though is quickly able to escape when Gian trips. Nobita asks Doraemon for a gadget to fight back, but Doraemon instead snaps at him; Doraemon tells Nobita that he must return to the 22nd century, and won’t be returning. \n\n(Source: Doraemon Wiki)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1511/150392l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "817758",
+    "ru": "Тар",
+    "en": "TÁR",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.1,
+    "votes": 1524,
+    "popularity": 4.83,
+    "genres": [
+      "музыка",
+      "драма"
+    ],
+    "overview": "Дирижёр и композитор Лидия Тар становится первой в истории женщиной-дирижёром Берлинского оркестра.",
+    "poster": "https://image.tmdb.org/t/p/w342/bLRB0h2qaHOIIWuy6WtXeaUy0jN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/84XcRwKHAw4VXdKOYTSW5ARxFEt.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "1777",
     "ru": "Фаренгейт 9/11",
     "en": "Fahrenheit 9/11",
@@ -10065,221 +10302,6 @@
     "overview": "Сериал о соседях по лестничной площадке, двух парах. Одна пара — женаты уже 15 лет, другая — только съехались вместе. Они общаются между собой и делятся впечатлениями о совместной жизни. Пятый персонаж — убеждённый холостяк.",
     "poster": "https://image.tmdb.org/t/p/w342/tRma9RQCgwLXqkDrCPyrQwsazuJ.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/xYnYBGtDsuduzIznvVKeLnpEtXt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 123591,
-    "ru": "Смурфики",
-    "en": "Les Schtroumpfs",
-    "year": 2021,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.1,
-    "votes": 189,
-    "popularity": 9.57,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "семейный",
-      "Детский",
-      "Аниме"
-    ],
-    "overview": "Голубых и не выше трёх яблок, смурфов трудно отличить с первого взгляда, но все они уникальны и обладают собственной индивидуальностью, их имена говорят сами за себя!",
-    "poster": "https://image.tmdb.org/t/p/w342/aPN6Qh3uKPWG2QRXetwYxZmURf6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/znf5Z1LSFYFOsRGClXwclqIhf83.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 32389,
-    "ru": "Логорама",
-    "en": "Logorama",
-    "year": 2009,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 188,
-    "popularity": 0.6,
-    "genres": [
-      "мультфильм",
-      "криминал",
-      "комедия",
-      "боевик"
-    ],
-    "overview": "В городе, наполненном корпоративными логотипами известных компаний, слоганами и персонажами-талисманами, полиция преследует вооруженного преступника на красном фургоне. Автомобилем управляет Рональд Макдональд, но на оживленном перекрестке фургон переворачивается, и из него вываливается гора оружия, в том числе и биологического... «Оскароносный» мультфильм «Логорама» представляет вниманию зрителей огромное количество логотипов: за 16 минут экранного времени их в поле зрения публики попадает около 2500. Кроме того, в картине присутствуют пародии на несколько известных мультфильмов, фильмов и сериалов.",
-    "poster": "https://image.tmdb.org/t/p/w342/ilIE1I3Lr8lly9bDpruB7kIjWLJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jepeB7fLQobRPfj4fq8nZDkG5tc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 913991,
-    "ru": "Тюрьма 77",
-    "en": "Modelo 77",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 187,
-    "popularity": 1.05,
-    "genres": [
-      "драма"
-    ],
-    "overview": "1977 год. Бухгалтер Мануэль несправедливо приговорен к 20 годам лишения свободы. При помощи своего сокамерника он станет лидером движения, которое объединит все тюрьмы в борьбе за свою свободу и изменит тюремные законы и общество навсегда.",
-    "poster": "https://image.tmdb.org/t/p/w342/gONbbwwlUPghNnVl1YeYWxmUjk4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pZkhtaqZzcTSz2e5GxUj3CM6jz6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1328803",
-    "ru": "Военнопленный",
-    "en": "Prisoner of War",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 186,
-    "popularity": 7.6,
-    "genres": [
-      "боевик",
-      "военный",
-      "триллер",
-      "история"
-    ],
-    "overview": "Джеймс Райт, офицер британского спецназа SAS, захвачен японцами и содержится в филиппинском лагере для военнопленных. Чтобы развлечь тюремщиков, перед отправкой на печально известный Батаанский марш смерти пленных заставляют участвовать в жестоких смертельных боях. Оказавшись в отчаянной ситуации, Райт становится последней надеждой для своих товарищей.",
-    "poster": "https://image.tmdb.org/t/p/w342/qwxU3i186IwqIMJdI7gXl6eknkK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yGByIyqgJerCw7AAphTrTAlrdkJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 756603,
-    "ru": "Дела человеческие",
-    "en": "Les Choses humaines",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 186,
-    "popularity": 0.51,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Семейство Фарель знают во всей Франции: Жан — известный ученый, а его жена Клэр — писательница, известная своими радикальными феминистскими взглядами. У них есть красавец сын Александр — студент престижного американского ВУЗа. Приехав в гости к родителям, Александр знакомится с Милой — дочерью нового партнера его матери. Молодые люди легко находят общий язык и вместе отправляются на вечеринку. Следующим утром Мила обвиняет Александра в изнасиловании, тем самым уничтожая репутацию его семьи и запуская необратимый процесс пережевывания всех деталей произошедшего не только органами правосудия, но и всеми СМИ, желающими во что бы то ни стало узнать, кто говорит правду, а кто лжет...",
-    "poster": "https://image.tmdb.org/t/p/w342/wxZJx8JmmemB1Rwa8syxrWFMDuz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xtErsvnl1DD8123cBUChCmr6zCI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1938,
-    "ru": "Angel Face",
-    "en": "Angel Face",
-    "year": 1953,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 185,
-    "popularity": 2.56,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/c4wrCYEgEtLXxoyEZf4pBl6XD4V.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4qTuhQTKWzHUx5tw3kE2TxW2cux.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 24914,
-    "ru": "Аниматрица: История одного ребенка",
-    "en": "Kid's Story",
-    "year": 2003,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 185,
-    "popularity": 0.49,
-    "genres": [
-      "фантастика",
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/SteXNwc3hRV9o2BlyxV3yBXCV2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vj4eElApdiafulc0EgcEjDlXvlr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 718867,
-    "ru": "Остров личинок",
-    "en": "The Larva Island Movie",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 184,
-    "popularity": 1.41,
-    "genres": [
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "Две личинки, которые невероятно дружны между собой, по стечению обстоятельств оказываются на необитаемом острове. Любой бы на их месте испытывал истинный ужас. Но эти приятели находят в здешних безлюдных краях ни только еду и воду, но и новых друзей, представителей дикого, животного мира.",
-    "poster": "https://image.tmdb.org/t/p/w342/uHdxICUIRGoJjK67aOp3ykvL8ZW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/53aUwtolUZxgzMr2KbDpOnD8jo3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 477428,
-    "ru": "Раскрашенная птица",
-    "en": "Nabarvené ptáče",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.1,
-    "votes": 184,
-    "popularity": 1.49,
-    "genres": [
-      "военный",
-      "драма",
-      "триллер"
-    ],
-    "overview": "В центре сюжета молодой еврейский мальчик, который ищет убежища в лесу в Польше  во время Второй мировой войны, встречая на своем пути множество разных людей.",
-    "poster": "https://image.tmdb.org/t/p/w342/h5E5kqVGH5DYic95C6EQMFqFbc6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/v4buFsMejWGCrEsLE9wy4SCNv5W.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_201289",
-    "ru": "Последнее, что он сказал мне",
-    "en": "The Last Thing He Told Me",
-    "year": 2023,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.1,
-    "votes": 183,
-    "popularity": 12.06,
-    "genres": [
-      "детектив",
-      "драма"
-    ],
-    "overview": "Женщина должна наладить отношения с падчерицей-подростком, чтобы найти таинственным образом исчезнувшего мужа.",
-    "poster": "https://image.tmdb.org/t/p/w342/yIhn1ocuhaVfW4U3rDo2C9xpbn0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hUdsZNxl8zIekBVZOSNFoiVIpiR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_102434",
-    "ru": "Голова",
-    "en": "The Head",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.1,
-    "votes": 183,
-    "popularity": 6.34,
-    "genres": [
-      "детектив",
-      "драма"
-    ],
-    "overview": "Международная антарктическая исследовательская станция. Во время длительной полярной ночи учёным из разных стран предстоит столкнуться не только с культурными различиями, но и с неким неведомым ужасом.",
-    "poster": "https://image.tmdb.org/t/p/w342/rCkvLiqDL5iWWAWmQqxj4uLpZrf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8GAIpNkyVHorYZhCKYT4hC9C7Dv.jpg",
     "source": "tmdb"
   }
 ]

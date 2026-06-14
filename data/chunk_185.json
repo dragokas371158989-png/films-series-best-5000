@@ -1,5 +1,193 @@
 [
   {
+    "id": 1694418,
+    "ru": "חנאל ומכבית",
+    "en": "חנאל ומכבית",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6XrKvTO7LF1cmFRr9SisE6g9oQO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vJuZUiWhrbeLpiycKDRjWrTiXZi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1687276,
+    "ru": "מתיישבים",
+    "en": "מתיישבים",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/952g9TpPxZtmeCARbgtW6gDjeFr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1AIt2N7jRfa78hNR69mPC2hrc9r.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1686789,
+    "ru": "風のアンセム",
+    "en": "風のアンセム",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "мультфильм",
+      "музыка",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rGDb4H1JnFTc0vkxWfkqv9gFKWI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/akaTecoTAhBx6BsyyZOKqZ8eBZK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1651614,
+    "ru": "Shower Thoughts",
+    "en": "Shower Thoughts",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "комедия",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3q4y8SY1k19mVrUAikQIKOAsrpV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mEJybGsb3F5FtnQAf8RT07g90lk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1642775,
+    "ru": "Maybe I",
+    "en": "Maybe I",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wQsCkT0L5wmSIBxOHenuV3YTPyk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/b6PDboJ55gjXXzetAFT4aJm9aX8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1476767,
+    "ru": "5D",
+    "en": "5D",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "драма",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8x3QiYf1uuZ2cVkvXHDFA7E1OYK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/doxK03bdIP7J0Z00hb3RliXu2bl.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1686306,
+    "ru": "One to Go",
+    "en": "One to Go",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "комедия",
+      "боевик",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/e9nCc6zCGg5a9LVaMWoA4GrZQTF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m4qVZawWq8ySUVPGBxtk757FHhq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1679180,
+    "ru": "AMADI",
+    "en": "AMADI",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "драма",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6d4r1KAy47hvfDiUFaGeyzd65WL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/f5tqsyJ7e4cExPxWHaaEztwJrdg.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1679171,
+    "ru": "El sueño",
+    "en": "El sueño",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4Jz1ZAgaP9P49ZuZ05ad44gToTL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ieoIlykUD9Ud5l43ljMePEpoaqp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1677407,
+    "ru": "1881 Atatürk: Bir Liderin Doğuşu",
+    "en": "1881 Atatürk: Bir Liderin Doğuşu",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.04,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/cLhkaPwJLuB90gM6AhEltCP3pgr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uJdDnjgvJopKNd1w8aXml1k3UIt.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1661127,
     "ru": "She Fell Asleep and Dreamt of a Library",
     "en": "She Fell Asleep and Dreamt of a Library",
@@ -8846,186 +9034,6 @@
     ],
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/8C2DNq91rpvJapWj61oQidfirCT.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 764451,
-    "ru": "Coronavirus-Covid-19, Sécurité vs Liberté.Français, Allemands et Suédois face à la crise",
-    "en": "Coronavirus-Covid-19, Sécurité vs Liberté.Français, Allemands et Suédois face à la crise",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.0,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pbsgkt6k5gnSe608zoh91Vi4izG.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 890216,
-    "ru": "Чужой. Остров проклятых",
-    "en": "Pacífico",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.99,
-    "genres": [
-      "ужасы",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nB1Hq2Gz8Q5lUQAGDHNdXbyfoIF.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1703919,
-    "ru": "Teesri Begum",
-    "en": "Teesri Begum",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.99,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ryPjjIwhEi1a8nNT6nqOkNdyo3N.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1240773,
-    "ru": "육덕진미녀수사관",
-    "en": "육덕진미녀수사관",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.99,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/cstw78a4YiWJH46R6lJeWgW1zWm.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1327450,
-    "ru": "Boundary Waters",
-    "en": "Boundary Waters",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.99,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5Pbm0RRd8zZUqrcB1Ro3CxNu2hF.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1079634,
-    "ru": "Solo Respira",
-    "en": "Solo Respira",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.99,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qhKpeeDN73TTu3nbej7HyKwcCjP.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1044937,
-    "ru": "Selfie King",
-    "en": "Selfie King",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.99,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/66Nn5mPgOMkHZ9RD7hkUsG0E0nM.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 748958,
-    "ru": "Les Roses de Damas",
-    "en": "Les Roses de Damas",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.99,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dzxwBq2olzwuSlosaLizgNvZUbI.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 770352,
-    "ru": "Menopause The Musical: Live from Las Vegas",
-    "en": "Menopause The Musical: Live from Las Vegas",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.99,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8d3kAeUhlOKk0zzbIJxmZTOzbmk.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1389379,
-    "ru": "రణబాలి",
-    "en": "రణబాలి",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.98,
-    "genres": [
-      "история",
-      "боевик",
-      "драма",
-      "военный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rMg3BFUKs8IaekSJgMT1IYmypk.jpg",
     "backdrop": "",
     "source": "tmdb"
   }

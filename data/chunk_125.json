@@ -1,5 +1,203 @@
 [
   {
+    "id": 624989,
+    "ru": "Звук и ярость",
+    "en": "Sturgill Simpson Presents Sound & Fury",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 90,
+    "popularity": 0.43,
+    "genres": [
+      "мультфильм",
+      "музыка"
+    ],
+    "overview": "В этом визуальном аниме-альбоме таинственный водитель отправляется в адский постапокалиптический пейзаж, чтобы встретиться с двумя чудовищными противниками.",
+    "poster": "https://image.tmdb.org/t/p/w342/a3EwM8LiN8w3dGXEqrMgOBXjRip.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gckDWdOSKFDziIgcRQRAMzUZi1e.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 121869,
+    "ru": "Эйзенштейн в Гуанахуато",
+    "en": "Eisenstein in Guanajuato",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 89,
+    "popularity": 0.45,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "В октябре 1931 года знаменитый кинорежиссёр Сергей Эйзенштейн путешествует по Мексике, работая над фильмом «Да здравствует Мексика!» (Que viva México), финансируемым частным образом американскими сторонниками коммунистов. Эйзенштейн намерен провести несколько дней в Гуанахуато, где собирается заснять знаменитый Музей мумий.",
+    "poster": "https://image.tmdb.org/t/p/w342/qiAyZxqzw4BuLWIGICO81TTqDFK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4CEVoTSP3R0NMWUYbbOtfM3bwsD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "848116",
+    "ru": "Рокки и Рани. История любви",
+    "en": "रॉकी और रानी की प्रेम कहानी",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 88,
+    "popularity": 39.73,
+    "genres": [
+      "комедия",
+      "драма",
+      "семейный",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vTQIqlxUkOuyf2UKhlM2OUaFGKz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/61RYedFgX1K07xgVIvdJzukSR4g.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1018754,
+    "ru": "Недостатки",
+    "en": "Shortcomings",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 87,
+    "popularity": 2.11,
+    "genres": [
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Начинающий кинорежиссер Бен живет в Калифорнии и управляет небольшим артхаусным кинотеатром. У него есть девушка Мико, которая тоже работает в киноиндустрии. Бен все свое время проводит в поисках себя и своего особого пути в кинематографе, что сводится к бесконечному просмотру кино и рассуждениях о нем с друзьями.",
+    "poster": "https://image.tmdb.org/t/p/w342/uld210snAVIWQh8VdyxGMiDE4A0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jXORVzqmZ0NiQwsfW8CP1mFSoU5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1245708,
+    "ru": "Кресент-Сити",
+    "en": "Crescent City",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 87,
+    "popularity": 1.63,
+    "genres": [
+      "криминал",
+      "триллер",
+      "детектив"
+    ],
+    "overview": "Когда небольшой южный городок начинает терроризировать безжалостный серийный убийца, все становятся подозреваемыми... включая полицию. По мере того, как число жертв растет, а ситуация углубляется, главного детектива начинают преследовать ужасы его прошлого.",
+    "poster": "https://image.tmdb.org/t/p/w342/nkn17qcetkL7opgs1LQBFP0OvSE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nIqtfruif9XbCBo2KBIHPcCGkOB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 545567,
+    "ru": "Бенджамин",
+    "en": "Benjamin",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 87,
+    "popularity": 1.13,
+    "genres": [
+      "мелодрама",
+      "комедия",
+      "драма"
+    ],
+    "overview": "Главный герой - молодой кинорежиссёр Беджамин Оливер после съёмок своего второго фильма, с нетерпением ждёт его премьеры. Сам Оливер человек не особо общительный, живущий в своей тихой квартире вместе с кошкой. Кинорежиссёр никогда не посещает незнакомые места, но в этот раз он решился, и может быть не зря. На вечеринке Бенджамин познакомился с французским музыкантом Ноем. А так как Бенджамин был мужчиной с нетрадиционной ориентацией, Ной сразу же понравился ему своей непосредственностью и нежным взглядом. Ной, принадлежащий к тому же кругу, предложил режиссёру свою любовь, на что тот ответил, что никогда не принимал ни от кого этого чувства, всегда избегая его. Сможет ли Бенджамин, у которого начался роман с Ноем, наконец-то принять его любовь, или он останется при своих принципах?",
+    "poster": "https://image.tmdb.org/t/p/w342/gtcbJTGIGya6vRvSeIasRPGTaMC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cPZMjrWmuQa5h2FxoftAPA5YHDq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 360604,
+    "ru": "Ледяная скульптура Рождества",
+    "en": "Ice Sculpture Christmas",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 87,
+    "popularity": 0.62,
+    "genres": [
+      "мелодрама",
+      "телевизионный фильм"
+    ],
+    "overview": "Молодая девушка, страстно мечтающая стать шеф-поваром, Келли, вместе со своим другом детства Дэвидом решают принять участие в ежегодном рождественском соревновании по изготовлению ледяных скульптур. Их главным соперником выступает профессиональный шеф-повар, босс Келли. Это Рождество будет как никогда горячим и романтичным!",
+    "poster": "https://image.tmdb.org/t/p/w342/tbLXuXt9ZBVGcrLE8AfLCzGfoHw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gGjwFDPY1TouGKaWNR4uYEPEDVJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1134048,
+    "ru": "Маршмэллоу",
+    "en": "Marshmallow",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 86,
+    "popularity": 1.88,
+    "genres": [
+      "ужасы",
+      "фантастика"
+    ],
+    "overview": "Робкий мальчик Морган первый раз отправляется в летний лагерь. Он страдает от ночных кошмаров и боится воды, поэтому переживает, что ему сложно будет завести друзей. Вопреки опасениям, Морган легко сходится с несколькими ребятами, вот только его донимает рослый сын маминой подруги, и страшилка про жуткого доктора, рассказанная вожатыми у костра, внезапно становится реальностью.",
+    "poster": "https://image.tmdb.org/t/p/w342/qZseaOw1BgLkJsfiEmNpS1KhH8d.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/x6p8NZGyQt9dP7RDTLi1IXdqvtC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 884315,
+    "ru": "Смерть в прерии",
+    "en": "Terror on the Prairie",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 86,
+    "popularity": 1.54,
+    "genres": [
+      "вестерн",
+      "боевик",
+      "триллер"
+    ],
+    "overview": "В центре повествования семья американских первопроходцев, которая пытается обосноваться в прериях Монтаны и становится объектом нападения жестокой банды. Сопротивление бандитам возглавляет женщина...",
+    "poster": "https://image.tmdb.org/t/p/w342/44hmIDNM0zyGABLjxGX1bSFOjz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3boseSuFfjTazSrPAe9G6pSDvnH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1029578,
+    "ru": "B&B Merry",
+    "en": "B&B Merry",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.1,
+    "votes": 86,
+    "popularity": 0.5,
+    "genres": [
+      "мелодрама",
+      "комедия",
+      "драма",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7WSMNERoqgtOwV1Q5xDmAiLvMeE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/goPs7BcYBOrGMPjPwnqf3tMJI7G.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "tv_58810",
     "ru": "Череп и кости",
     "en": "Crossbones",
@@ -9492,205 +9690,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/pR7DL8qVbebsE4aBdoEbCRv4JjF.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/s5aYMvERcbPwNVphzskeBQ6v717.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1164614,
-    "ru": "We're All Gonna Die",
-    "en": "We're All Gonna Die",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 22,
-    "popularity": 0.46,
-    "genres": [
-      "комедия",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/er7627yHVe1hEHnIHM7HV86EgJw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pnAgUXF4sJmSsBQF3HF5jsKhQ6i.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 576674,
-    "ru": "Фрэнсис Фергюсон",
-    "en": "Frances Ferguson",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 22,
-    "popularity": 0.6,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "История скандала в маленьком городе.",
-    "poster": "https://image.tmdb.org/t/p/w342/7o6Rrp4Y7WuKxn88YM8OZQfKnpl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mBk8i2aLMEqfxmJCSLpq4T0qaLF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 265563,
-    "ru": "Секрет счастья",
-    "en": "El misterio de la felicidad",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 22,
-    "popularity": 0.41,
-    "genres": [
-      "комедия",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Caнтьяго и Эухенио больше, чем друзья, в течение всей жизни они — деловые партнёры. Они понимают друг друга без слов, они заботятся друг о друге, они необходимы друг другу. Однажды Эухенио исчезает, не оставив никаких следов и улик. Caнтьяго, конечно, сразу же замечает пропажу, но осознаёт, что случилось нечто необратимое только тогда, когда его в этом убеждает жена Эухенио, Лаура. Caнтьяго и Лаура отправляются на поиски Эухенио, и в ходе этого расследования они обнаруживают, что оба предпочитают остаться вместе в этом движении, а не выяснить, где обитает исчезнувший супруг и партнер.",
-    "poster": "https://image.tmdb.org/t/p/w342/bMj4LdKWwk4YuWV83PuGvqQU9dT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hxy7PS9RLXsnLH2vZmaxLStXpcA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 54912,
-    "ru": "There's No Time for Love, Charlie Brown",
-    "en": "There's No Time for Love, Charlie Brown",
-    "year": 1973,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 22,
-    "popularity": 0.46,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "семейный",
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gpR3FPqF4lqvlTJqUQmWo125yI8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rAANw3K7FwHcIIlX6oLMSqo4zUE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 273632,
-    "ru": "La petite reine",
-    "en": "La petite reine",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 22,
-    "popularity": 0.41,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/sVgljvNJtNujbKPKYSrE1Hz6fo6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qZ5iMuzByJnP1708Deo0BrxrIlo.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "227326",
-    "ru": "FIGHT!!",
-    "en": "FIGHT!!",
-    "year": 1993,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.1,
-    "votes": 21,
-    "popularity": 0.75,
-    "genres": [
-      "мультфильм",
-      "боевик",
-      "фэнтези",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2ctuOltpgm2IXHZ5tbTstFwQ4tT.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1119544,
-    "ru": "Счастливы в Риме",
-    "en": "Rom",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 21,
-    "popularity": 0.44,
-    "genres": [
-      "мелодрама",
-      "комедия",
-      "драма"
-    ],
-    "overview": "Герда и Кристофер планировали насладиться спокойным отпуском, полным воспоминаний и романтики. Однако их идиллия неожиданно нарушается, когда в размеренный отдых врывается давний знакомый, который быстро навязывает свои правила игры.",
-    "poster": "https://image.tmdb.org/t/p/w342/eM4822S2vHaYcIZbNBq53fwuTFx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/co3sIugI7B3stDeaBfZXDWU80BP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1065426,
-    "ru": "मेट्रो... इन दिनों",
-    "en": "मेट्रो... इन दिनों",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 21,
-    "popularity": 1.39,
-    "genres": [
-      "драма",
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/AlmzM8CNm2fRJQW2iA9Ittwv0ig.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8ycWZizMNfYlQE5CdLSbOboNDko.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1184247,
-    "ru": "എബ്രഹാം ഓസ്ലർ",
-    "en": "എബ്രഹാം ഓസ്ലർ",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 21,
-    "popularity": 0.68,
-    "genres": [
-      "триллер",
-      "драма",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eWleIhsdQSwLG00fYD1VfIRPBuN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fO29Ccn3GT3FX3jCzXZNcG8ZqkM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 221912,
-    "ru": "Изнасилованная ангелом 4",
-    "en": "強姦終極篇之最後羔羊",
-    "year": 1999,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.1,
-    "votes": 21,
-    "popularity": 2.91,
-    "genres": [
-      "криминал",
-      "комедия",
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "Из тюрьмы сбегают два насильника, которых берет под свое крыло еще один насильник, бывший агент ЦРУ. Троица планирует изнасиловать известную писательницу любовных романов, живущую по соседству, а защищать ее будут ее неказистый бойфренд-полицейский и его новая напарница...",
-    "poster": "https://image.tmdb.org/t/p/w342/c5mn7ejvETjHnazdwWmNQRmxKvO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/p9rAyhIktK1LnLkfVPixGBpV6Ya.jpg",
     "source": "tmdb"
   }
 ]

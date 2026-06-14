@@ -1,5 +1,204 @@
 [
   {
+    "id": 926762,
+    "ru": "Жизнь с Чаки",
+    "en": "Living with Chucky",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 50,
+    "popularity": 0.82,
+    "genres": [
+      "документальный",
+      "ужасы"
+    ],
+    "overview": "Кинопродюсер, выросший вместе с куклой-убийцей Чаки, ищет другие семьи, окружающие фильмы о кукле-убийце, чтобы поделиться своим опытом работы над франшизой и тем, что она значит.",
+    "poster": "https://image.tmdb.org/t/p/w342/iATJr3eQF7DMnLaBxgw0avaFR0X.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hVtV77j9G3P5cwaPNaTRkBJOn0l.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 814853,
+    "ru": "Hostage House",
+    "en": "Hostage House",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 50,
+    "popularity": 0.55,
+    "genres": [
+      "триллер",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1y0efqbvfJOlkgkHJTtF3PpSbS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gEOWBfe5l5TLLXubAW3WR7OG82w.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_7283",
+    "ru": "Los Serrano",
+    "en": "Los Serrano",
+    "year": 2003,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.6,
+    "votes": 50,
+    "popularity": 7.93,
+    "genres": [
+      "комедия",
+      "семейный",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/w9hPecVLyCkbnJLLdjFu67URBZP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nXmxvy4VyiaYVVINJYARSD3CTLi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 502149,
+    "ru": "Being Frank",
+    "en": "Being Frank",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 50,
+    "popularity": 0.47,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3f9yRUkhYOAmPm5QRv6Oh6M6W0t.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vAD4HBaU71anP41yugv4WV36tsk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 132714,
+    "ru": "Gulliver Mickey",
+    "en": "Gulliver Mickey",
+    "year": 1934,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 50,
+    "popularity": 0.42,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2Q0IwyLYLHJ3RjaqBGo1iyHF4Je.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bEzPIGEJyQfH8ELoscFcT2p086X.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 270474,
+    "ru": "Худшая работа «оценщика» оказалась самой сильной",
+    "en": "不遇職【鑑定士】が実は最強だった～奈落で鍛えた最強の【神眼】で無双する～",
+    "year": 2025,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.6,
+    "votes": 49,
+    "popularity": 6.06,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "НФ и Фэнтези",
+      "драма",
+      "Аниме"
+    ],
+    "overview": "В магическом мире полный порядок: всем новорождённым богини дают «работу» и «навыки», которые полностью определят жизнь человека. Как и все, в возрасте пятнадцати лет Айн получил свой «набор», однако юноше не повезло: его распределили в оценщики, так что он не умеет ничего, кроме как распознавать вещи. Однако Айн решил не пасовать перед судьбой и стал авантюристом!\n\nС большим трудом после множества отказов Айн нашёл место в команде, которая отправилась в неизведанный лабиринт. И тут злосчастный ранг вновь его подвёл: именно Айном как самым бесполезным решили пожертвовать и бросили на съедение монстрам. Пытаясь спастись, Айн упал в озерцо у корней магического дерева Игдрассиль, что изменило его жизнь.",
+    "poster": "https://image.tmdb.org/t/p/w342/oBmUr9M1Wc01u0pBC7QxR0u9PIB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aTk5XhDb4vdqVXBiatmpbdDJIVK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "188541",
+    "ru": "Появление Гигантского Бога Войны в Токио",
+    "en": "巨神兵東京に現わる",
+    "year": 2012,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.6,
+    "votes": 49,
+    "popularity": 0.88,
+    "genres": [
+      "фантастика",
+      "ужасы",
+      "боевик",
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/y9GNjiFKdRGXn9ANQwKwbknLkTn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7qpo9BgJzhIDY1SejOKPhTaa8Ze.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 228958,
+    "ru": "Кошмары и грезы Джоко Анвара",
+    "en": "Joko Anwar's Nightmares and Daydreams",
+    "year": 2024,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.6,
+    "votes": 49,
+    "popularity": 3.4,
+    "genres": [
+      "НФ и Фэнтези",
+      "драма",
+      "детектив"
+    ],
+    "overview": "В сборник захватывающих историй от сценариста и режиссера Джоко Анвара вошли семь взаимосвязанных сюжетов о сверхъестественных и фантастических явлениях.",
+    "poster": "https://image.tmdb.org/t/p/w342/r5Y1Jyehk6VoODrfqqLD9JPPsH5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aiCSg8b7qYFe6lfBsxfljDJ5xGx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 786190,
+    "ru": "Чудачка",
+    "en": "पगलैट",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 49,
+    "popularity": 1.52,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "Молодая женщина становится вдовой вскоре после свадьбы и испытывает сложности со скорбью, своеобразными родственниками и тревожными новостями о своем покойном муже.",
+    "poster": "https://image.tmdb.org/t/p/w342/oIVAwceJjOwFjUkoJoOiooGupm0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fbALWEldsKHueCvEjHqarf9rmiM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 974213,
+    "ru": "Старое, доброе Рождество",
+    "en": "Jolly Good Christmas",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.6,
+    "votes": 49,
+    "popularity": 0.55,
+    "genres": [
+      "телевизионный фильм",
+      "комедия",
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "Зацикленный на работе архитектор Дэвид не знает, что подарить подруге и нанимает \"фею подарков\" Энджи. Поиски идеального рождественского подарка оборачиваются настоящим приключением, и они находят то, чего совсем не ожидали.",
+    "poster": "https://image.tmdb.org/t/p/w342/8wAWTFuImKou9ix86ZEitPAiZ4O.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iG58Wk7WHnaFvSAgkeBMrPyPTPz.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "tv_42548",
     "ru": "Мужики за работой",
     "en": "Men at Work",
@@ -9507,197 +9706,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/9KeE7l8Lc0ma8ged6DjXaR8Geiz.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/6YaOMF7lV6U19HSZiAOdCCC1IrM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 785864,
-    "ru": "Salt-N-Pepa",
-    "en": "Salt-N-Pepa",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 0.61,
-    "genres": [
-      "музыка",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/t8TPdLXPazQNBFVSSaRUHVxI5NE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bdTgZdpAVUOCwHLGt6YKOFrGBQv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1075424,
-    "ru": "Meet Me in Paris",
-    "en": "Meet Me in Paris",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 0.59,
-    "genres": [
-      "мелодрама",
-      "комедия",
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6XNvAG9EkJFsy5mPgOdEAHjBcno.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/t8RemXkcsgcUIqZsgQ3pffjMIaN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 14976,
-    "ru": "Independent Lens",
-    "en": "Independent Lens",
-    "year": 1999,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 21.48,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "Бывшая фотомодель Ким последние десять лет постоянно попадает в реабилитационные клиники. Пролежав в одной из них очередные восемь месяцев, она решает изменить свою жизнь и отправляется на свадьбу своей сестры Рэйчел, чтобы восстановить отношения с семьей и привести в порядок душевное равновесие.",
-    "poster": "https://image.tmdb.org/t/p/w342/amfeqi4cccb458kFNEg2pSZoCGw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8D7O0JBWVLaFGyDk3vSPri7HmWp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 525395,
-    "ru": "Школьница А",
-    "en": "여중생A",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 0.84,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Ученица средней школы Чан Ми-рэ - самый настоящий интроверт. Не особо любит общаться с одноклассниками, отец-алкоголик её поколачивает, поэтому девушка чувствует себя живой только в многопользовательской онлайн-игре. После того, как Ми-рэ занимает второе место в школьном литературном конкурсе, с ней начинает дружить самая популярная девочка класса. Но вскоре дружбе приходит конец, любимую онлайн-игру закрывают, тогда Ми-рэ решает напоследок увидеться с одним из игроков.",
-    "poster": "https://image.tmdb.org/t/p/w342/wFTakmrbBEV5WUlwYuN2FQ6GH4w.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4JUC0FnQA3ujopE8wRSkI9pZIng.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 432831,
-    "ru": "Его тайное прошлое",
-    "en": "His Secret Past",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 0.6,
-    "genres": [
-      "триллер",
-      "телевизионный фильм"
-    ],
-    "overview": "Популярный писатель детективов Дженнифер Беккер живёт в роскоши в маленьком прибрежном городке в Калифорнии со своей дочерью Лили. Однажды, во время пробежки, на Лили нападают, однако, ей на помощь приходит таинственный незнакомец по имени Мик. Местный шериф начинает подозревать, что чудесное появление Мика — не простая случайность. Вместе с Дженнифер они затевают расследование и обнаруживают, что Мик — не тот, за кого себя выдаёт...",
-    "poster": "https://image.tmdb.org/t/p/w342/ylve4L3piRLyHiMCApFUfWIaB4i.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7s2FwiS7Nhr8Qskz9yUB7GK9ufB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 450765,
-    "ru": "Жажда мести",
-    "en": "Bad Investigate",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 0.46,
-    "genres": [
-      "криминал",
-      "боевик",
-      "комедия",
-      "триллер",
-      "драма",
-      "детектив"
-    ],
-    "overview": "Ромеу, коррумпированный полицейский, поручает двум сотрудникам уголовного розыска Сиду и Алексу поймать известного преступника Хавьера. Хавьер сбегает из страны, чтобы найти убийцу своего брата и отомстить за его смерть. Все герои ввязываются в очень опасную и запутанную игру. На чьей стороне окажется правда и кто на самом деле является преступником?",
-    "poster": "https://image.tmdb.org/t/p/w342/w6T2v0u4DR2Yim7AzhwoffIQJ1C.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2aqidWih61H6dv4ktnACa1KkSJB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 66153,
-    "ru": "Nord Nord Mord",
-    "en": "Nord Nord Mord",
-    "year": 2011,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 6.17,
-    "genres": [
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7ZBHhbEX8Cjv4NEZkKHvqUWn8B3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/u1SVVziNCSLzFkFYrvGiYXDA7s6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 91291,
-    "ru": "Celebrity Gogglebox",
-    "en": "Celebrity Gogglebox",
-    "year": 2019,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 6.04,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rOmeOChcP5L1ygbrpdOutLSgnBU.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/x8WxnXKCuVK8uNsQOyd8VM4HqwY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 480713,
-    "ru": "The Orange Years: The Nickelodeon Story",
-    "en": "The Orange Years: The Nickelodeon Story",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 0.67,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rl0UHIIUg6Vw6FHZzYFHEoyrqKk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3Zu2q92P1FKw6yOy0WWZTIdCBtU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 385152,
-    "ru": "Ugramm",
-    "en": "Ugramm",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.6,
-    "votes": 16,
-    "popularity": 0.59,
-    "genres": [
-      "боевик",
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6AdrI68ggKpSBRE2EbnvajeD53q.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2RHKfO5oDU9PXOj2amTeAuu1vdE.jpg",
     "source": "tmdb"
   }
 ]

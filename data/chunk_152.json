@@ -1,5 +1,193 @@
 [
   {
+    "id": 701561,
+    "ru": "이채담의 지스팟",
+    "en": "이채담의 지스팟",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 13,
+    "popularity": 2.75,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tnxbYOlkXbuSXZWfHYOy4l4V51h.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/y7YOnq4PxKaELAMvns0x351cpNQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 92976,
+    "ru": "真・女神転生 東京黙示録",
+    "en": "真・女神転生 東京黙示録",
+    "year": 1995,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 13,
+    "popularity": 1.02,
+    "genres": [
+      "мультфильм",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qoZUKU0k49b353orW8KQjd0QQ0D.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7jsUCjRTZAI3ntSiZLoQCNxjvOd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 639357,
+    "ru": "Thunderbird",
+    "en": "Thunderbird",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 13,
+    "popularity": 0.8,
+    "genres": [
+      "триллер",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zeMmho9Gx3Bm4YgYcXaBI9iKPf2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3VrWqfbVM0EcGkIzOnSVckAzh2u.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 338789,
+    "ru": "Chop Shop",
+    "en": "Chop Shop",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 13,
+    "popularity": 0.62,
+    "genres": [
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/UZtlr9TmcF5BcI23dfQ1UQL2EK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1x5dF7EguDYPznxlzEcg2pRiVWE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 278329,
+    "ru": "Korso",
+    "en": "Korso",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 13,
+    "popularity": 0.37,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/d9GFq67eAeZbJbQXxLOKzMlYFiL.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 291087,
+    "ru": "Sztandar Młodych",
+    "en": "Sztandar Młodych",
+    "year": 1957,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 13,
+    "popularity": 0.33,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9MrNUhzqlEBqQsDhQmROZJaETR6.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": "507455",
+    "ru": "Be-Boy Kidnapp'n Idol",
+    "en": "Be-Boy Kidnapp'n Idol",
+    "year": 1989,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 2.46,
+    "genres": [
+      "мультфильм",
+      "драма",
+      "мелодрама",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6kySz0kYM3X622eMeKE8AxaOOPp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gGh7DLooar30FCEOYNnTVdTkjK3.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "506643",
+    "ru": "劇場版 はいからさんが通る 後編 ～花の東京大ロマン～",
+    "en": "劇場版 はいからさんが通る 後編 ～花の東京大ロマン～",
+    "year": 2018,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 1.13,
+    "genres": [
+      "мультфильм",
+      "мелодрама",
+      "драма",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yT2UixDr6ApxrcJsqFlHjRJZEsf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7sYjLC3eBSiwL9upLArmYamPWCC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 838720,
+    "ru": "Неделя в раю",
+    "en": "A Week in Paradise",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.6,
+    "genres": [
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "Известная актриса узнаёт из прессы об измене мужа. В поисках утешения она летит на райский остров и знакомится в отеле с обаятельным шеф-поваром. Летняя мелодрама на фоне курорта Карибского моря с Малин Акерман, Конни Нильсен и Филипом Уинчестером.",
+    "poster": "https://image.tmdb.org/t/p/w342/dYmlqJeBkO2B9Aa2VCbzETtCS9X.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/96Z7daHRkf60AcrqL4Cy0nAbslr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 982813,
+    "ru": "Семь лиц Джейн",
+    "en": "The Seven Faces of Jane",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.0,
+    "votes": 12,
+    "popularity": 0.56,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Мать-одиночка Джейн (Гиллиан Джейкобс) отвозит дочь в летний лагерь и впервые за долгое время остается наедине с собой. Впереди у нее длинная дорога, в которой она познакомится с новыми людьми, встретит старых знакомых, начнет познавать себя и различать, что ей нравится, а что нет. Каждый фрагмент жизни Джейн не похож на другие, одни окрашены в более мрачные тона, другие — окутаны духом вестернов, а третьи и вовсе похожи на мелодраму, но в каждом из них Джейн проходит через кризис идентичности, ища путь к себе настоящей.",
+    "poster": "https://image.tmdb.org/t/p/w342/AiC5auZlZNKxlNO8jlI73b63Bgw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/l9kCyXUaCIqW8VnQDkvWorqUacL.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 776327,
     "ru": "Любовь без памяти",
     "en": "Blackout Love",
@@ -9276,197 +9464,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/502SgAGi6AiH9IHt3VBo0Y0oljj.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/gjZUitqacztN6MPWAPKjuPNjMrg.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1068957,
-    "ru": "Колдун по имени Укун",
-    "en": "西游记之七十二变",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.45,
-    "genres": [
-      "боевик",
-      "мультфильм",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8gbIQKZtBWSMP1BD3IvUrmvGvkI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kyjQ3qF5Wj3rXDRVOeah4Nvurxm.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 877295,
-    "ru": "둠둠",
-    "en": "둠둠",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.45,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uFWgcJnC2cVqeUzHPSWwTU6YVh0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6gkHQ8yG5xl61yc4x9y58YxamJE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 885792,
-    "ru": "California Love",
-    "en": "California Love",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.44,
-    "genres": [
-      "телевизионный фильм",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iG2OG2KheD3JFiZjAzVI7RtBVw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bkJ9ck16hNMXfREkh1QYMq52epV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1297962,
-    "ru": "La llum de l'Aisha",
-    "en": "La llum de l'Aisha",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.44,
-    "genres": [
-      "мультфильм",
-      "приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1UkkkGYhKVvImnhBaezYmaMsG7I.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4PEUCTjp0DtlS2Ebu4cWzrQ9bup.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1195833,
-    "ru": "黑金古殿",
-    "en": "黑金古殿",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.43,
-    "genres": [
-      "боевик",
-      "детектив",
-      "приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/e2pcXdDeWYC9eH7I8haZ9QjuRdE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2Or0ntRh6O5zTUtmumkqXhMus3t.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 858877,
-    "ru": "愤怒的黄牛",
-    "en": "愤怒的黄牛",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.43,
-    "genres": [
-      "боевик",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uz05FnkCB1bwjVf5KEgx7wfw2TC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mAKlZhkzGMOKDXmH5KJTIgPIKcZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 732957,
-    "ru": "జోహార్",
-    "en": "జోహార్",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.43,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/46hWv4UGnQrKD7aYywsnpZI6NEe.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/smiD4euXS2MYBC4QSi5lh1aswoj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 742726,
-    "ru": "메피스토",
-    "en": "메피스토",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.43,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1cc4KnY4ZH5yB3DIrdYmPDCeagc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3tGfiOcLGuN1qMX8CrUbZMqEO8q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 772950,
-    "ru": "Total Excess: How Carolco Changed Hollywood",
-    "en": "Total Excess: How Carolco Changed Hollywood",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.41,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wx1M3FZxn2fYsecKC4l50MeQ8ki.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rtadEAOZlvybM5on7wxZq1iHWy7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1598702,
-    "ru": "Bidadari Surga",
-    "en": "Bidadari Surga",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.0,
-    "votes": 2,
-    "popularity": 0.38,
-    "genres": [
-      "драма",
-      "мелодрама",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wk6F6Fb4C58tYe1KUly4mC7UmDD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/N6l0R7h9Jc8bbCGTORWUxMUK27.jpg",
     "source": "tmdb"
   }
 ]

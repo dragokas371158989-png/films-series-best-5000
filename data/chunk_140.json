@@ -1,5 +1,195 @@
 [
   {
+    "id": 336158,
+    "ru": "La increíble historia del niño de piedra",
+    "en": "La increíble historia del niño de piedra",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 9,
+    "popularity": 0.3,
+    "genres": [
+      "мультфильм",
+      "фэнтези",
+      "приключения"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pTEGhSFonhVCBSleT5FO0wdGvlr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xJhJwnWD4FKgH2JP3Ww6mRvS6zW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1591822,
+    "ru": "Пандора. Огонь и лёд",
+    "en": "Pandora: Fire and Ice",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 8,
+    "popularity": 0.93,
+    "genres": [
+      "фантастика",
+      "боевик",
+      "приключения"
+    ],
+    "overview": "Человечество, истощив ресурсы Земли, отправляет новую экспедицию на Пандору, чтобы вывезти всё, что осталось. Но аборигены, которых люди когда-то считали примитивными, за прошедшие годы не только выжили, но и создали технологию, способную уничтожить целую планету. Их цель - Земля, и они готовы нанести удар. У человечества теперь есть лишь один шанс - остановить их сейчас.",
+    "poster": "https://image.tmdb.org/t/p/w342/vtpUX5OPRzc6vjYOAAg7MQ1SzNV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/quQeahjlVgqIxL3WjNFwRaKQcNX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 964978,
+    "ru": "Хорошая девочка Джейн",
+    "en": "Good Girl Jane",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 8,
+    "popularity": 0.83,
+    "genres": [
+      "драма",
+      "мелодрама",
+      "криминал"
+    ],
+    "overview": "Джейн скоро 18. Недавно её выгнали из частной школы, вдобавок она совершенно не ладит со своими разведёнными родителями. Героиня попадает в серьёзные неприятности, когда влюбляется в наркодилера Джейми.",
+    "poster": "https://image.tmdb.org/t/p/w342/132TUizBnUEfs2hUQM5QXdIy0Q3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aspmwgx8hIVvCdonXgxKxGtttY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1439594,
+    "ru": "Несломленные: Бойцы ринга",
+    "en": "ചത്താ പച്ച: The Ring of Rowdies",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 8,
+    "popularity": 0.38,
+    "genres": [
+      "боевик",
+      "драма"
+    ],
+    "overview": "В детстве они вместе занимались борьбой и равнялись на своего кумира — Уолтера по прозвищу Буллет. Со временем каждый пошёл своей дорогой. Спустя годы Томас возвращается в родной город, чтобы вновь объединиться с друзьями детства, которые стали ему братьями, и всерьёз заняться рестлингом.",
+    "poster": "https://image.tmdb.org/t/p/w342/wYXy20uC7aW7ArJJDRWR5E8dDL1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7ocFvtRnNXwrNJLJRWa0kKVPRW0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 882455,
+    "ru": "聽不見的距離",
+    "en": "聽不見的距離",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 8,
+    "popularity": 1.1,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zFiHkeiCLa3gVvKtpxFRzUj7CFb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9A63BYdfpmNWSM5XhX42vrZhZhc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 268677,
+    "ru": "Разговоры с богами",
+    "en": "Words with Gods",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 8,
+    "popularity": 0.69,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "В альманахе раскрываются отношения людей разных религий с Богом.",
+    "poster": "https://image.tmdb.org/t/p/w342/hlVeqMN4wbP8r8WbM4UcAvMjKpj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gR7XokQ7uidQtRfoaCmmAodZ9Q0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 413542,
+    "ru": "뱀파이어는 우리 옆집에 산다",
+    "en": "뱀파이어는 우리 옆집에 산다",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 8,
+    "popularity": 0.73,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6VPJGFyYQ80L8hkpvBHNi1pAgSZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jEkXBxh1xCn2WPS2lIoNUU8lvyi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 388978,
+    "ru": "渚のフィアンセ",
+    "en": "渚のフィアンセ",
+    "year": 1988,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 8,
+    "popularity": 0.67,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zlLh2Dpj6yASVBUxMwTYnQI5xxh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vjKhde86eHDVVKUDKW7MbODb4Em.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 361222,
+    "ru": "Stalking Eva",
+    "en": "Stalking Eva",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 8,
+    "popularity": 0.42,
+    "genres": [
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/b0n9iqHvSUbY1EnJte9eBXOR0UH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2HcQexBS1tqksNyB63slUgs8Qpc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 433846,
+    "ru": "Der Island-Krimi: Der Tote im Westfjord",
+    "en": "Der Island-Krimi: Der Tote im Westfjord",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 8,
+    "popularity": 0.45,
+    "genres": [
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/AgV244hLAhFCDXDiaaENZejUHmI.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
     "id": 258578,
     "ru": "魔法使いの約束",
     "en": "魔法使いの約束",
@@ -9499,202 +9689,6 @@
     "overview": "Дана Милгром - профессиональная гонщица, попавшая в страшную автокатастрофу. Очнувшись в госпитале, женщина обнаруживает, что она совершенно парализована и не способна даже самостоятельно разговаривать и дышать. Но на дыхательном аппарате и голосовой программе беды не заканчиваются - в её палате обитает злой дух Нэйлз. Никто не верит Дане, даже муж убеждён в её психической нестабильности. Женщина отчаянно пытается убедить врачей и семью, что призрак реален и хочет убить её.",
     "poster": "https://image.tmdb.org/t/p/w342/3xEY07eJRPzRxfecPNdkuwmiSSb.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/4VbZSElasRwGKLrabfiOialeF5m.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1206008",
-    "ru": "Элла Маккей",
-    "en": "Ella McCay",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 118,
-    "popularity": 4.32,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Молодая девушка становится губернатором своего штата и пытается удержать баланс между работой и обычной жизнью.",
-    "poster": "https://image.tmdb.org/t/p/w342/oqgIYiGCLHBfrTHSdkv251bNqar.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9cd1zsxcOAcBW01WDOWz8EODTS0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 614204,
-    "ru": "Проклятый лес",
-    "en": "Witches in the Woods",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 118,
-    "popularity": 0.7,
-    "genres": [
-      "ужасы",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "Семеро друзей отправляются на машине на базу отдыха. По пути выясняется, что часть дороги закрыта, поэтому приходится сделать немаленький крюк, в результате ребята сбиваются с пути. Вскоре им начинает казаться, что они ездят кругами, а когда машина попадает в небольшую аварию, одна из девушек заявляет, что они никогда отсюда не выберутся.",
-    "poster": "https://image.tmdb.org/t/p/w342/qzM22kWfSCkSCcpIaF4tx7kjyaP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/unkSO4YbgRz7AcH11vsiZm3Ni8T.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 746781,
-    "ru": "Ночь",
-    "en": "آن شب",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 116,
-    "popularity": 0.45,
-    "genres": [
-      "ужасы",
-      "детектив"
-    ],
-    "overview": "Засидевшись в гостях, супружеская пара с младенцем отправляется на машине домой, но по пути всё же решает переночевать в отеле. В первой попавшейся гостинице их встречает странный портье, а в номере супруги начинают слышать посторонние звуки — будто кто-то никак не хочет оставить их в покое.",
-    "poster": "https://image.tmdb.org/t/p/w342/iW0YRI7fL7ZTutiVBPoNy8T8b7i.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8ngU7WVjQbzWwxQktii0TlIndB6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 602666,
-    "ru": "Детектив из Чайнатауна 3",
-    "en": "唐人街探案3",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 115,
-    "popularity": 2.79,
-    "genres": [
-      "боевик",
-      "комедия",
-      "детектив"
-    ],
-    "overview": "На этот раз доморощенный Шерлок Холмс и его не слишком сообразительный родственник отправляются в Токио, куда их приглашает японский коллега-детектив, и где поджидает местный колорит: кровожадные якудза, соблазнительные гейши, суровые сумоисты и прочие радости туриста Страны восходящего солнца.",
-    "poster": "https://image.tmdb.org/t/p/w342/nbGzncqTJw94LHisdEXKC1dFc3J.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/j3P4MhXTIrb9wPX1hqQQtpegxXP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 352695,
-    "ru": "Джоши",
-    "en": "Joshy",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 115,
-    "popularity": 2.5,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "Джош не хочет упустить отличную возможность воссоединиться со старыми друзьями на своем мальчишнике, который он решает устроить даже несмотря на отменившуюся свадьбу.",
-    "poster": "https://image.tmdb.org/t/p/w342/qbRPGqfHf6TOCax353dgpmALBFP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vRongtodPwC2LLhbOaPFSnJjsEl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 28042,
-    "ru": "Frosty Returns",
-    "en": "Frosty Returns",
-    "year": 1992,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 114,
-    "popularity": 0.76,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/r4XMrwhhhic6W6LvxBTxzs8kXlt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kFXtr3TbiP0WMCD2U3DYqh7G0WD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 376501,
-    "ru": "Грешники и праведники",
-    "en": "Outlaws and Angels",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 109,
-    "popularity": 0.92,
-    "genres": [
-      "вестерн",
-      "драма",
-      "триллер"
-    ],
-    "overview": "Удирая от погони, шайка преступников, забирается в дом ничего не подозревающего семейства, чтобы укрыться на ночь. Появление непрошенных гостей влечет за собой необратимые последствия для всех членов семьи.",
-    "poster": "https://image.tmdb.org/t/p/w342/rEV31TbZoC9mBa0fjJVtw94Pnvf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uJB4JEG8bYBQQ2QupGTzvMdnW1P.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 566039,
-    "ru": "Рождество с принцем",
-    "en": "Christmas with a Prince",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 108,
-    "popularity": 0.49,
-    "genres": [
-      "драма",
-      "мелодрама",
-      "телевизионный фильм",
-      "комедия"
-    ],
-    "overview": "Педиатр Таша Миллер лечит детей, больных раком. Когда принц Александр Кавальери ломает ногу на близлежащем горнолыжном курорте, она разрешает ему спрятаться от репортеров в своём отделении. Таша боится, что избалованный принц может нарушить спокойствие и помешать выздоровлению детей. Однако вскоре она понимает, что чуть-чуть строгости и очень много рождественского настроения могут превратить его в рыцаря в сияющих доспехах.",
-    "poster": "https://image.tmdb.org/t/p/w342/f36niI1QKbUUN7hh6lbeIEUIv4P.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4PqktwV3aQr9fadJIljF9OFwdYq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 421386,
-    "ru": "Como Se Tornar o Pior Aluno da Escola",
-    "en": "Como Se Tornar o Pior Aluno da Escola",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 107,
-    "popularity": 1.06,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/olRSTQXTNRPwIUIjbeVs5LGrYGC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ry4aOGPuyt4Nz3B67cOJuOqXYAz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 997113,
-    "ru": "Гедда",
-    "en": "Hedda",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 106,
-    "popularity": 2.06,
-    "genres": [
-      "драма",
-      "триллер",
-      "мелодрама"
-    ],
-    "overview": "Гедда оказывается разрываемой между мучительной тоской по прошлой любви и тихим удушьем нынешней жизни. В течение одной напряжённой ночи давно подавленные желания и скрытые конфликты вспыхивают — втягивая её и всех вокруг в водоворот манипуляций, страсти и предательства.",
-    "poster": "https://image.tmdb.org/t/p/w342/1jLXlws6JWirlRjTAcnNtclE11N.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cKZcDKawR79igCgDMSXlpkn8hLR.jpg",
     "source": "tmdb"
   }
 ]

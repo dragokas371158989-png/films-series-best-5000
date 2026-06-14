@@ -1,5 +1,190 @@
 [
   {
+    "id": 1392469,
+    "ru": "कॉकटेल 2",
+    "en": "कॉकटेल 2",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 8.01,
+    "genres": [
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hkDo2RN8tDsFl3J8wi4j7jy3sXU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vwvMQxD3MHHk2cQCuSyEdYktjUL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 281406,
+    "ru": "Sasuraal Genda Phool 2",
+    "en": "Sasuraal Genda Phool 2",
+    "year": 2021,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.96,
+    "genres": [
+      "драма",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/31y7N2wK0paGjAvLe3wrzDkGtsT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4KQRQJtyPKEmow9lWwtpLRXYbfO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1440040,
+    "ru": "裸天使 宮下玲奈",
+    "en": "裸天使 宮下玲奈",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.89,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tcBKCHvbIfHkgDld8g4UdfZVO4C.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cnrMIPjQo49hSCVpkcXwN5aBJ4S.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 207699,
+    "ru": "呢鋪開乜",
+    "en": "呢鋪開乜",
+    "year": 2022,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.7,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3lvJPv4OHXEYvmLbKXUUUDPpS5m.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3ZWHi3jJvBj7gtw4HeTUTfSFuvo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 304965,
+    "ru": "Baabel",
+    "en": "Baabel",
+    "year": 2023,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.68,
+    "genres": [
+      "семейный",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/y1RziGYVVGIVV4gwrf3PTmG6dFP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aM1Yv2U9mK4Wy17fYhy06RH9lMK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1599184,
+    "ru": "斗破苍穹剧场版 双帝之战",
+    "en": "斗破苍穹剧场版 双帝之战",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.66,
+    "genres": [
+      "мультфильм",
+      "приключения"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6ciIJXlGSwqWHZMwC9PgeLAzlRO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/g5n1jTrfhhTf40iBKYp4prMK1Gn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 257662,
+    "ru": "혤's Club",
+    "en": "혤's Club",
+    "year": 2024,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.62,
+    "genres": [
+      "Ток-шоу",
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9BlbyG0CDJsbupqzErGqfTwhPki.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/AtxUDukFYyewqw59QVeiw5wbYm7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 113550,
+    "ru": "36題愛上你",
+    "en": "36題愛上你",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.48,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wbbucxINEwfKV5mII4fwoKo9Xz5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sRq5oQnHUsd5kBZkVLT3gVqTwZQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 100505,
+    "ru": "日向坂46です。ちょっといいですか?",
+    "en": "日向坂46です。ちょっといいですか?",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.42,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vMJVs1qugfw7oNqAUoiwSKMogIE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mAyOQNPun9iTxmEoGVbskpUdO8v.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 230983,
+    "ru": "청룡시리즈어워즈",
+    "en": "청룡시리즈어워즈",
+    "year": 2022,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 7.29,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7MxjHQV9HSoPM34hZvE8jk8ozNz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/z0fk9ntUWTrMPJvnksUu13B8FkX.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 223586,
     "ru": "藤子・Ｆ・不二雄 ＳＦ短編ドラマ",
     "en": "藤子・Ｆ・不二雄 ＳＦ短編ドラマ",
@@ -9107,195 +9292,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/3o5iUsb50j1wPBMSRWOvwzdbLQ6.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/eUdeyivt9F53dGFUcO3Qbg3HbBd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 315194,
-    "ru": "Thadayam",
-    "en": "Thadayam",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.41,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/Qw6NDY418wB7jpHSLGEhrqxLM1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4AdaGRRz3XtpTtjjRg1NHRZ7mhY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 299878,
-    "ru": "スキャンダルイブ",
-    "en": "スキャンダルイブ",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.41,
-    "genres": [
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iQU1r4fkPayjYPALYTOeU749zwM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mwJiHvhcSdhDIG81aarJbddUDLR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1705642,
-    "ru": "Shrek 25 Aniversario",
-    "en": "Shrek 25 Aniversario",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "комедия",
-      "мультфильм",
-      "фэнтези",
-      "приключения",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bnQeKBCN53eio6HOuGBs7XjFeEz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zaYOndul0cGFuHuF942HX9m0GUv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 313727,
-    "ru": "Miss Behave",
-    "en": "Miss Behave",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "комедия",
-      "детектив",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rvtgmNcH31DJdxZWCwrthf2hi3W.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aCQeYRXOuk4G4u6pBs6JAmfV0X5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 321775,
-    "ru": "Monyová",
-    "en": "Monyová",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kzxXEf5WECvyYJALKEBy4jwWoP4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s08XuC492BcML35dmkx89pwdq0t.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 315209,
-    "ru": "サバ缶、宇宙へ行く",
-    "en": "サバ缶、宇宙へ行く",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/feFcVtYhiNWKvfzKENDHKk2CkYA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eCjAiaeC5eL2BaTetkgya7Xmws8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 306556,
-    "ru": "剧情崩坏！死了十一年的白月光回来了",
-    "en": "剧情崩坏！死了十一年的白月光回来了",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "комедия",
-      "НФ и Фэнтези",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tGZvQDl2lFtkID53r40GeCNjQ7W.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xPv7KPv5L2fhDrN6dFgtbtGZEtx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1391450,
-    "ru": "I Fell, It's Fine",
-    "en": "I Fell, It's Fine",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1KCtVONn5VpHD6nc1orKRfYRFvA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/e8HHThuBgIMRXpxHLwtytLC3lMh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1568600,
-    "ru": "காதல் ரீசெட் ரிபீட்",
-    "en": "காதல் ரீசெட் ரிபீட்",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "мелодрама",
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3xMgvXDquViX50l8rwle5SbShqm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hCSWwwBZUkq44ZjmsePhXmgPPiz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1371850,
-    "ru": "Rock Springs",
-    "en": "Rock Springs",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.4,
-    "genres": [
-      "ужасы",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oXK8FGCQ84fzlkzMINdPl3W5LVE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wivMNppNIsJ3sF7RSzEuRl1J61n.jpg",
     "source": "tmdb"
   }
 ]

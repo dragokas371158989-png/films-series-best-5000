@@ -1,5 +1,208 @@
 [
   {
+    "id": 795531,
+    "ru": "Картофелинка мечтает об Америке",
+    "en": "Potato Dreams of America",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 25,
+    "popularity": 0.51,
+    "genres": [
+      "комедия",
+      "драма",
+      "фэнтези"
+    ],
+    "overview": "На дворе лихие годы перестройки, и Лена с сыном по прозвищу Картофелинка, как может, выживает в жестоком и беспощадном СССР. Вскоре побегов в цветные грезы телевизора оказывается недостаточно, и Лена принимает отчаянное решение — стать невестой по переписке. Уехав c сыном к американцу Джону, Лена понимает, что так и не обрела своего места в Америке. Всё, что она делала, совершалось для Картофелинки, который ещё на родине успел возненавидеть себя за то, что он гей. Но кто знает, сколько ещё открытий ждет Картофелинку, ведь новая страна — это только начало.",
+    "poster": "https://image.tmdb.org/t/p/w342/ci0jqn7LJKMzkzYhCl1b9bJ3C4P.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eU8NO4vTjLXuVFtB9dXCSkrtY3q.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 784986,
+    "ru": "Love in Translation",
+    "en": "Love in Translation",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 25,
+    "popularity": 0.49,
+    "genres": [
+      "комедия",
+      "мелодрама",
+      "семейный",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1EediCxkAZ6u3vVlF35pgQ4LhV5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uyc3Nw8FUeJFIAEtOCcepGKlMJ4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1027439,
+    "ru": "Lights, Camera, Christmas!",
+    "en": "Lights, Camera, Christmas!",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 25,
+    "popularity": 0.44,
+    "genres": [
+      "телевизионный фильм",
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xensL98L0bGnkkQsEFy3USC5n5Y.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3kmrbT2kguKWaz6UknbXyUf3chc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 585839,
+    "ru": "The Protector",
+    "en": "The Protector",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 25,
+    "popularity": 1.01,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fKyCT9i9jw3JhuXtUdinbuykKHN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iAESLebJJ8Xe7MxXBNZKoY5vFt7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 264746,
+    "ru": "들개",
+    "en": "들개",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 25,
+    "popularity": 0.39,
+    "genres": [
+      "драма",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xRKTca5NwXITRtaVyBGk0ALBkyc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8xAa0JaGkvEnMBLshUbL2YYpiWL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 73629,
+    "ru": "Midnight in a Toy Shop",
+    "en": "Midnight in a Toy Shop",
+    "year": 1930,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 25,
+    "popularity": 0.3,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2MvljPtEpbELHZqlPUrJZezqfpT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7QNQc3NjiwyuDKeZy4WPLsIXg9h.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 70823,
+    "ru": "Микки и весёлые гонки",
+    "en": "Mickey and the Roadster Racers",
+    "year": 2017,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.3,
+    "votes": 24,
+    "popularity": 10.14,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "Детский",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "На старт, внимание, марш! Микки, Дональд, Гуфи, Минни и Дейзи готовят свои гоночные машины к большому кругосветному автопробегу. Плуто не участвует в гонках.",
+    "poster": "https://image.tmdb.org/t/p/w342/3D4275Ck9eXdMlXEQgNrOsikmMS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7ne3CUNlcnzqEdX3jf0MQoGEP1o.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_45277",
+    "ru": "Одна из них моя сестра!",
+    "en": "この中に１人、妹がいる！",
+    "year": 2012,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.3,
+    "votes": 24,
+    "popularity": 4.16,
+    "genres": [
+      "драма",
+      "мультфильм",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "Микадоно Шого глава компании Микадоно-групп и настоящий миллиардер. Он еще недавно он похоронил своего отца, который наказал ему — чтобы стать полноправным главой компании он должен найти себе спутницу жизни. За этим Шого и отправляется в Академию Миюрин. Вскоре Шого узнает, что еще в детстве его разлучили со своей сестрой, и она тоже учится в академии Миюрин. Но кто же она?",
+    "poster": "https://image.tmdb.org/t/p/w342/tc7O8guBEjmfxz2K7LxJgpi9sTh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4XhCA0UoGMz6RJw6LBwwGeNgwQ0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "133481",
+    "ru": "東のエデン 総集編 Air Communication",
+    "en": "東のエデン 総集編 Air Communication",
+    "year": 2009,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.3,
+    "votes": 24,
+    "popularity": 0.66,
+    "genres": [
+      "мультфильм",
+      "драма",
+      "детектив",
+      "фантастика",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3fdL3o6bI7u9PNemWocfeB7ndVT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/geIQSn0lYo9OwZCzvjlRSKE5Vsy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "153119",
+    "ru": "道成寺",
+    "en": "道成寺",
+    "year": 1976,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.3,
+    "votes": 24,
+    "popularity": 0.14,
+    "genres": [
+      "мультфильм",
+      "фэнтези",
+      "ужасы",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/iru9uCiU6bKA8mC8cciUw7iKQuN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/d15G2cOdRL5CzVE45flxKdsHThC.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1465038,
     "ru": "Последняя перестрелка",
     "en": "The Last GunFight",
@@ -9516,199 +9719,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/ayhKhJUseGqNFCBNU1sACwJSfsu.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/f2cg6w6jqfPLQnPxhEIPEJK22BU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 835030,
-    "ru": "പീസ്",
-    "en": "പീസ്",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 3,
-    "popularity": 0.57,
-    "genres": [
-      "драма",
-      "триллер",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gUkrXgMmkMXHS6qEFnTJzbbLArR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qyDqaQSlKL8nAkMi1VTIA6VhmWr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 890107,
-    "ru": "అతిధి దేవోభవ",
-    "en": "అతిధి దేవోభవ",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 3,
-    "popularity": 0.55,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/k1eUqOyh0sF9V89UgLvPei5Q8zz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iKdZgaKlUHMq3pclHvhAXh0k4cj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 742922,
-    "ru": "A Virtual Princess Bride Reunion",
-    "en": "A Virtual Princess Bride Reunion",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 3,
-    "popularity": 0.55,
-    "genres": [
-      "фэнтези",
-      "комедия",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/r3ajAzeO1kP1GG8tlyY8GFdq61X.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wlRJ6tasNFUBMsFdVepQTza47Vf.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1121878,
-    "ru": "Gurkha: Beneath the Bravery",
-    "en": "Gurkha: Beneath the Bravery",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 3,
-    "popularity": 0.53,
-    "genres": [
-      "драма",
-      "военный",
-      "история"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jYRneZ6p7WzkFEyEdRYZJcg07eg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qwXfMa8oJY007JTfSOZeaSEGjkR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1151423,
-    "ru": "I Am Not Big Bird",
-    "en": "I Am Not Big Bird",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 3,
-    "popularity": 0.52,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6P0Zj7BVMpimbDSHJl03ezATkqR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yBijB9vofBbxNIK0qGbtrqHnlNJ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1026804,
-    "ru": "绝望主夫",
-    "en": "绝望主夫",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 3,
-    "popularity": 0.51,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gFFWHbYMavOIFZVSlu1GsGIRMxs.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rXzM5NDX9cJcXa52m6tcjKEVp1R.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 654982,
-    "ru": "Qu'importe si les bêtes meurent",
-    "en": "Qu'importe si les bêtes meurent",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 3,
-    "popularity": 0.5,
-    "genres": [
-      "фантастика",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zwo86BUCyAMcAXUXsv9t4dBgC9q.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tLitvwOz680j9RTTAUpAArMlu0H.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 547991,
-    "ru": "멀리가지마라",
-    "en": "멀리가지마라",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 3,
-    "popularity": 0.5,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iu4FYVxFpDz9DA4CRFsFZNLKznF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eUoZfYOPdptc9OKTiH8nIqoAn4w.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1273232,
-    "ru": "Sci-Fi Vixens from Beyond",
-    "en": "Sci-Fi Vixens from Beyond",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 3,
-    "popularity": 0.49,
-    "genres": [
-      "фантастика",
-      "мелодрама",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kWSpaZC0zeL0qUrvUFmDcrCIzkn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6ABo12JyTmSQSNFlJ8HJp6GXmJT.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 988393,
-    "ru": "Nos belles-sœurs",
-    "en": "Nos belles-sœurs",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 3,
-    "popularity": 0.49,
-    "genres": [
-      "комедия",
-      "драма",
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eENcp78HBgc1oO6VdhARJDNrl7h.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qDmjrXjwLUZHzijd1jgK9gy4CF2.jpg",
     "source": "tmdb"
   }
 ]

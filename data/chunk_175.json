@@ -1,5 +1,188 @@
 [
   {
+    "id": 1394733,
+    "ru": "Sob o Lençol",
+    "en": "Sob o Lençol",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.55,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8iCKnhXdtI75OjN5r8ZgS1YetCu.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xp1DhBHBfZpqEWj1HgRiF6bk6ni.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1409961,
+    "ru": "Toxic King",
+    "en": "Toxic King",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.55,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/p8sNxhkrpRm7cOTrZp2mBEAPROj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yR4fOBHMsB88xiFTW6XPinda9sY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1391300,
+    "ru": "Bitchin'",
+    "en": "Bitchin'",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.55,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wwFuCFniFsvy0Vw4ejXRUMVoGwv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dtetZXcD1ggDEyiQ8XuAYR8GIOl.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1276328,
+    "ru": "Prête-moi ton docteur",
+    "en": "Prête-moi ton docteur",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.55,
+    "genres": [
+      "документальный",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5tFSrPVlXv9FslgYsng5EzRiIc6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jWZD2m7f7WX5LvgsxSxIyBg1myu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1305543,
+    "ru": "DESPE invitacional",
+    "en": "DESPE invitacional",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.55,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xxIIf7kAS6FKpBWpDZw6H0UCGjx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jr2SoWyZVWp7l8Gan2aA0F2SrgC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1240625,
+    "ru": "MBTI E 정열 섹스녀 연주의 첫경험",
+    "en": "MBTI E 정열 섹스녀 연주의 첫경험",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.55,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/lJOyYoLyAKKuhKebl4i3wQP5IpW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yf7iUhKPFKbfegPxCj0Uc2DTfTY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1424478,
+    "ru": "Ombuaren itzala",
+    "en": "Ombuaren itzala",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.55,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3iZEw588BKSIvFrKmdX0M0NhNRX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/78Fpz0X4B47zZdEJPv3BGuKy3Q9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1279039,
+    "ru": "Nix's Symphony",
+    "en": "Nix's Symphony",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.55,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kv0zdDbBdpuakXtQgmdq1uwLpBK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fQtkQvAg9b8m4KJkj2vIHtnPWnk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1313029,
+    "ru": "苗岭诡事",
+    "en": "苗岭诡事",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.55,
+    "genres": [
+      "триллер",
+      "приключения",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/x9gWHVN6PEKWCqSGHoQ325NAwfv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/d7pTQLvdK3PZrM6xfByT9QzWnon.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1358597,
+    "ru": "オアシス",
+    "en": "オアシス",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.55,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/t6o0gOwIU6jGJ75hb1ArmwAGaei.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jTPjsciUEJiG8QrNaakgu8C3csd.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1121274,
     "ru": "Late Night Nightmare",
     "en": "Late Night Nightmare",
@@ -9066,193 +9249,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/9kkRtG2SxLLluI9WKvlPIQrtRE4.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/uxZpsnSItFtaBxtkEHaS7RcibC0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1652307,
-    "ru": "AAA Rey De Reyes 2026",
-    "en": "AAA Rey De Reyes 2026",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.47,
-    "genres": [
-      "боевик",
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/l3sfxeKQ23j122S6aP4SgUZ9EMf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7DVlZOCET0ElUN7AlCNe4jbsuEn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1629038,
-    "ru": "Mallory's Ghost",
-    "en": "Mallory's Ghost",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.47,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kxGW55aWe5bUnu8r2OzZA4DpH2k.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/s8Z4McrorG9gea6dFaESv56OLpj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1568180,
-    "ru": "Mohammed & Paul – Once Upon a Time in Tangier",
-    "en": "Mohammed & Paul – Once Upon a Time in Tangier",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.47,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uUMjLJ7F9yOzNVQA51Gl1bBk8h6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/piZeU37GGuL9l2qRNKrkK2JDW1Y.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1608230,
-    "ru": "Broken Bonds",
-    "en": "Broken Bonds",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.47,
-    "genres": [
-      "триллер",
-      "детектив",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kXdBxAK9V2Qu23AP0h0ph1jDJtB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/95jkrY9RC0CaDyYDGNwv1ETd9EX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1617152,
-    "ru": "London Ghost",
-    "en": "London Ghost",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.47,
-    "genres": [
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/daAFV0fTNR5xw22eD2W2UTkzcD6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/51qXQiiculnOZFvlyFTcyTd4TR8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1610776,
-    "ru": "Fragment of sometime, somewhere",
-    "en": "Fragment of sometime, somewhere",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.47,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/w8BeOiBJNWz9tuNHgUGNkqw4zxG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iKwPdv6s6Z3fFarqyXJ4RtnRnAD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1026067,
-    "ru": "The Ghost's Guide to Adventuring",
-    "en": "The Ghost's Guide to Adventuring",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.47,
-    "genres": [
-      "драма",
-      "приключения",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/f8fJ9IK15ZnTp7OuUqlQQA6hGW5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vxtIJLHXRdCtfvbPOrTbq90P98a.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1395468,
-    "ru": "징크스 몽타주",
-    "en": "징크스 몽타주",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.47,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yWPh4mEUKsJufT13vgadjeRhApY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d87rfeLb0TIVmvj3hUz2TC9afF6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1284193,
-    "ru": "The Tales of the Bound & Restrained",
-    "en": "The Tales of the Bound & Restrained",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.47,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nHpVoHtdtHDM8MtQodDXGClmksL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kfcOTdAJfKYDxXbynWseR7y9fam.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1295409,
-    "ru": "原神：烬中歌",
-    "en": "原神：烬中歌",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.47,
-    "genres": [
-      "мультфильм",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dv1HZoldymFsv5e7VnJnvL4iRkg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eEeKA8UzXhl8glGJJfq7szXKoID.jpg",
     "source": "tmdb"
   }
 ]

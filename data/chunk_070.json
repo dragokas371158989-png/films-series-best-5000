@@ -20,6 +20,48 @@
     "tmdbId": 634
   },
   {
+    "id": 7644583,
+    "ru": "Мавританец",
+    "en": "The Mauritanian",
+    "year": "2021",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.39,
+    "votes": 1296,
+    "popularity": 2.88,
+    "genres": [
+      "драма",
+      "триллер"
+    ],
+    "overview": "Не получив официальных обвинений и возможности защиты в суде, Мохаммед Ульд Слахи провел в тюрьме Гуантанамо более 6 лет. Только после этого он был удостоен права иметь адвокатов. Но и им в борьбе с правительственной машиной предстоит побороть личные сомнения.",
+    "poster": "https://image.tmdb.org/t/p/w342/vpm7SLssF7v1XH004huu3RM55wE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/dXQLVJxvScwtUtORAiaAxgikmtC.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 644583
+  },
+  {
+    "id": 7009462,
+    "tmdbId": 9462,
+    "ru": "Путь дракона",
+    "en": "猛龍過江",
+    "year": "2010",
+    "type": "Фильм",
+    "episodes": "",
+    "status": "Вышел",
+    "studio": "",
+    "rating": 7.39,
+    "votes": 1296,
+    "poster": "https://image.tmdb.org/t/p/w342/hXv2ssDOMBkYu4EtjE155n7sIXS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/yaql2veoJrsw9TH6qbWho7cjG9t.jpg",
+    "overview": "Тан приезжает из Гонконга в Рим, чтобы помочь друзьям семьи, чей ресторан задумали отобрать местные мафиози. Привыкшие всегда получать то, что захотят и не останавливаться ни перед чем, бандиты совершили большую ошибку, недооценив с виду скромного молодого человека. Не сумев справиться с ним своими силами, мафиози нанимают лучших европейских и японских мастеров боевых искусств, но Тан с легкостью побеждает всех. И тогда против него на арену древнего Колизея выходит «крутой и смертоносный» американец Колт.",
+    "genres": [
+      "боевик",
+      "криминал"
+    ],
+    "source": "movie_top_rated"
+  },
+  {
     "id": 644089,
     "ru": "Голубой байу",
     "en": "Blue Bayou",
@@ -124,29 +166,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/bmLeWn58QiHKRRDXx3ImH2IMaZZ.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/nZ7PeP09wioVQppxopmXHUfrAn1.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8066053,
-    "tmdbId": 66053,
-    "ru": "Берсерк",
-    "en": "ベルセルク",
-    "year": "2016",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 7.4,
-    "votes": 292,
-    "poster": "https://image.tmdb.org/t/p/w342/rPqWt642UhC8UObCtnpRz4iM2DQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/fjCymH4xdWonDJEXBqLRLKsmKCs.jpg",
-    "overview": "Когда-то наемник Гатс встретился с бандой Ястреба и ее главарем Гриффитом, и они стали для него семьей. Однако ради власти Гриффит предал своих людей, принеся их в жертву темным силам. Теперь Гатс, преследуемый демонами, отправляется мстить человеку, которого он когда-то считал своим другом.",
-    "genres": [
-      "Боевик и Приключения",
-      "мультфильм",
-      "драма",
-      "НФ и Фэнтези"
-    ],
-    "source": "tv_top_rated"
   },
   {
     "id": 13354,
@@ -2773,10 +2792,10 @@
     "source": "tmdb"
   },
   {
-    "id": "tv_118189",
+    "id": 8118189,
     "ru": "Королева змей",
     "en": "The Serpent Queen",
-    "year": 2022,
+    "year": "2022",
     "type": "Сериал",
     "category": "Сериал",
     "rating": 7.4,
@@ -2787,8 +2806,10 @@
     ],
     "overview": "14-летнюю Екатерину Медичи выдают замуж за будущего короля Генриха II. Вскоре девушка узнает, что её муж влюблён в другую женщину, а сама она не может забеременеть и оставить ему наследников.",
     "poster": "https://image.tmdb.org/t/p/w342/7S4tsDXjE93D6N8E4lvqXPIpOpi.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/o1n5b8AI7UWeJ8yxFzunf9in5OB.jpg",
-    "source": "tmdb"
+    "backdrop": "https://image.tmdb.org/t/p/w500/o1n5b8AI7UWeJ8yxFzunf9in5OB.jpg",
+    "source": "trending_tv_week",
+    "status": "Онгоинг",
+    "tmdbId": 118189
   },
   {
     "id": 407650,
@@ -2947,6 +2968,28 @@
     "source": "tmdb"
   },
   {
+    "id": 7045612,
+    "ru": "Исходный код",
+    "en": "Source Code",
+    "year": "2011",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.31,
+    "votes": 9140,
+    "popularity": 5.98,
+    "genres": [
+      "триллер",
+      "фантастика",
+      "детектив"
+    ],
+    "overview": "Герой фильма - солдат, который оказывается в теле некоего человека, и вынужден постоянно переживать чудовищный взрыв поезда, пока не поймёт, кто его устроил.",
+    "poster": "https://image.tmdb.org/t/p/w342/dE4IM48fgZBzr96y7gjwpbab4hJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/s2Cu1y9Al9RbwRU5blAH8wMCrBI.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 45612
+  },
+  {
     "id": "tv_93297",
     "ru": "Монархиня",
     "en": "Monarca",
@@ -3021,28 +3064,6 @@
     "source": "tmdb"
   },
   {
-    "id": 7045612,
-    "ru": "Исходный код",
-    "en": "Source Code",
-    "year": "2011",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.31,
-    "votes": 9136,
-    "popularity": 5.98,
-    "genres": [
-      "триллер",
-      "фантастика",
-      "детектив"
-    ],
-    "overview": "Герой фильма - солдат, который оказывается в теле некоего человека, и вынужден постоянно переживать чудовищный взрыв поезда, пока не поймёт, кто его устроил.",
-    "poster": "https://image.tmdb.org/t/p/w342/dE4IM48fgZBzr96y7gjwpbab4hJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/s2Cu1y9Al9RbwRU5blAH8wMCrBI.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 45612
-  },
-  {
     "id": "tv_64264",
     "ru": "Игроделы",
     "en": "Game Shakers",
@@ -3081,29 +3102,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/cpLYtpKwRu01ovX6LUDjfAkiGFK.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/q8Eiw6XBQ9urbaKmP9ChxkjOZmw.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8000216,
-    "tmdbId": 216,
-    "ru": "Дак Доджерс",
-    "en": "Duck Dodgers",
-    "year": "2003",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 7.4,
-    "votes": 133,
-    "poster": "https://image.tmdb.org/t/p/w342/cpLYtpKwRu01ovX6LUDjfAkiGFK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/q8Eiw6XBQ9urbaKmP9ChxkjOZmw.jpg",
-    "overview": "Вернув к жизни 300 лет находившегося в заморозке селезня Дака Доджерса, профессор Игнатиус и не подозревал, что гость из далёкого прошлого на самом деле является известнейшим интергалактическим супергероем.",
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "НФ и Фэнтези",
-      "Детский"
-    ],
-    "source": "tv_popular"
   },
   {
     "id": 202880,
@@ -3275,27 +3273,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/o4H3cUNrql6wdAOgHWVmQrU7fAl.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/mXkbeRiKpThbNHSOMppn0gVBUQ3.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 7000087,
-    "tmdbId": 87,
-    "ru": "Индиана Джонс и Храм Судьбы",
-    "en": "Indiana Jones and the Temple of Doom",
-    "year": "1999",
-    "type": "Фильм",
-    "episodes": "",
-    "status": "Вышел",
-    "studio": "",
-    "rating": 7.3,
-    "votes": 10127,
-    "poster": "https://image.tmdb.org/t/p/w342/az7v4UfTazPSeiLT1TrMNLdk6YX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/f133nWlU6yUkZqqwcCXCbTEJWHr.jpg",
-    "overview": "Вторая часть невероятных похождений прославленного археолога и искателя приключений Индианы Джонса. В этот раз бесстрашный доктор Джонс совершит путешествие в сердце Гималаев вместе с ресторанной певичкой Уилли Скотт и своим верным маленьким помощником Коротышкой.Здесь, среди величественных гор, археологу и его спутникам предстоит столкнуться кровавым культом поклонения древней Богине Смерти — Кали.",
-    "genres": [
-      "приключения",
-      "боевик"
-    ],
-    "source": "movie_top_rated"
   },
   {
     "id": "tv_63130",
@@ -4228,6 +4205,30 @@
       "мультфильм",
       "комедия",
       "Боевик и Приключения"
+    ],
+    "source": "tv_popular"
+  },
+  {
+    "id": 8022634,
+    "tmdbId": 22634,
+    "ru": "Пламенный взор Шаны",
+    "en": "灼眼のシャナ",
+    "year": "2005",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 7.4,
+    "votes": 104,
+    "poster": "https://image.tmdb.org/t/p/w342/1V98igFU3su5VEXvcCNMd2JuLAD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/5bOYtdiBKBnrbfPTwZaAEJOfDmW.jpg",
+    "overview": "“Тебя больше нет”. Именно это сказала красноглазая и красноволосая Шана парню Юдзи Сакаки - старшекласснику, который был просто в шоке, от того что девушка вытащила его из пасти страшного существа. За считанные секунды парень полностью пересмотрел свои взгляды на жизнь и его мир изменился до неузнаваемости. Он шел домой после занятий, и внезапно попал в параллельный мир населенный жудкими созданиями, которые его и приняли за вкусный обед. От страшной смерти нашего героя спасла девушка, которая появилась из пустоты, и она убила чудовище при помощи длинного меча. Но самой страшной оказалась новость о том, что он уже давно не человек, а просто его подобие, в котором скрыты важные ценности этого параллельного мира. С этого момента парень взглянул на свое существование по-другому.",
+    "genres": [
+      "Боевик и Приключения",
+      "мультфильм",
+      "драма",
+      "НФ и Фэнтези",
+      "комедия"
     ],
     "source": "tv_popular"
   },
@@ -5753,28 +5754,6 @@
     "source": "tmdb"
   },
   {
-    "id": 8273977,
-    "ru": "Искусство Сары",
-    "en": "레이디 두아",
-    "year": "2026",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.4,
-    "votes": 78,
-    "popularity": 6.09,
-    "genres": [
-      "криминал",
-      "детектив",
-      "драма"
-    ],
-    "overview": "Тело, найденное в центре города. Набирающий популярность элитный бренд. Детектив проверяет каждую деталь изменчивой истории одной женщины. Что же случилось на самом деле?",
-    "poster": "https://image.tmdb.org/t/p/w342/3bYSwRqLy2qfx5gqVJdOhibxeML.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/uLYp6qxGNzDlDtBOAlDbfcf4QgO.jpg",
-    "source": "trending_tv_week",
-    "status": "Онгоинг",
-    "tmdbId": 273977
-  },
-  {
     "id": 118876,
     "ru": "Последняя возможность: баскетбол",
     "en": "Last Chance U: Basketball",
@@ -7215,6 +7194,26 @@
     "poster": "https://image.tmdb.org/t/p/w342/cMaGXlRU9olfEsHNcEaZNcnHKRC.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/mkLPEV7raBVlpKZTlJjZ3LpsXSj.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 8056559,
+    "tmdbId": 56559,
+    "ru": "Театр тьмы",
+    "en": "闇芝居",
+    "year": "2013",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 7.4,
+    "votes": 62,
+    "poster": "https://image.tmdb.org/t/p/w342/nDWsPPVVNuGDx92sWZELBmSosJg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/upkcoee5VhPeTTbLdPERtCVhy4N.jpg",
+    "overview": "Каждую неделю в 5 часов вечера на детской площадке появляется старик в желтой маске и рассказывает детям истории о привидениях, основанные на мифах и городских легендах японского происхождения. Он рассказывает истории на велосипеде, используя традиционный метод камиcибай (бумажная драма), и каждую неделю рассказывает новую историю.",
+    "genres": [
+      "мультфильм"
+    ],
+    "source": "tv_popular"
   },
   {
     "id": 56559,

@@ -1,5 +1,195 @@
 [
   {
+    "id": 827662,
+    "ru": "Lone Wolves",
+    "en": "Lone Wolves",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 1.79,
+    "genres": [
+      "драма",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4NIZQl1CEBLPvT4YL6RJxDOHCfN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/g1PeF8NidsQkIVbpJx1D0mAc5Gk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 482007,
+    "ru": "스캔들 3",
+    "en": "스캔들 3",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 0.96,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/lXjhl6SSvXILjXQwgxxWmdTLi6K.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4zjmHWy7PwhU7X0JKkfqmXPONmF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 409166,
+    "ru": "하고 싶은 날",
+    "en": "하고 싶은 날",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 0.76,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3OyqUryslM080WN9pFuovrxgiGl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/b7BcJnsNo8hRgPtwAcXUyx2jdOh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 706729,
+    "ru": "スケベ研究室 絶倫強化計画",
+    "en": "スケベ研究室 絶倫強化計画",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 0.69,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3oeMeb3LglHX2c2llT8sp0mtWye.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jkxtqbDN9BIQp8ziy9n3BWxnqk4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 277397,
+    "ru": "Городские игры",
+    "en": "城市游戏",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 0.66,
+    "genres": [
+      "боевик",
+      "криминал",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3FpMmEmbCpMjxzkUZp8YeKWgvRc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1eWuSilTSwzvmaFYF0wGF31lepv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 497652,
+    "ru": "Bachelor Lions",
+    "en": "Bachelor Lions",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 0.65,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/x5zcQN2wzhocK8kbTcE2hRWTfnh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rikX9IQbWHdmZLb2qhbaZ5tD5n6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 602287,
+    "ru": "மார்க்கெட் ராஜா MBBS",
+    "en": "மார்க்கெட் ராஜா MBBS",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 0.63,
+    "genres": [
+      "комедия",
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3NblkZMUwCeVS4uoSo66LFI3O5f.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tAH8AMrTqJ0qynWHNxWNZjnJgZu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 855148,
+    "ru": "博多弁の女の子はかわいいと思いませんか？",
+    "en": "博多弁の女の子はかわいいと思いませんか？",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 0.55,
+    "genres": [
+      "комедия",
+      "мелодрама",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yLhuGDbyatyReBtvq2OfnvVR6da.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/huFpeD3wWQ1ReG2jNPdsB2C1buR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 460549,
+    "ru": "செம",
+    "en": "செம",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 0.48,
+    "genres": [
+      "боевик",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/avt99HU2fdgTO15T5njb1XGxLE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nwufuHoVEhLPmzUcsBUWbXN28p8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 927711,
+    "ru": "The Matadors",
+    "en": "The Matadors",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 1.5,
+    "votes": 2,
+    "popularity": 1.71,
+    "genres": [
+      "боевик",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xLohASMD57zk4ocE0JHUt0uubeH.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
     "id": 836600,
     "ru": "METAL GEAR SOLID 2 BANDE DESSINÉE",
     "en": "METAL GEAR SOLID 2 BANDE DESSINÉE",
@@ -9113,206 +9303,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/necIfg41N30YMh85OSGeFMzUJRp.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/vccVazBaC5RMkvnk0J2tyM4PFU7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 320598,
-    "ru": "开拍啦！怪兽大电影",
-    "en": "开拍啦！怪兽大电影",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.33,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/a8DLcMDcNDx31cKderfdGbKLBHk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hBp05yx8KKviyHZS5XpJnMsupkb.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 324017,
-    "ru": "绑定破产AI，我开局氪成大神",
-    "en": "绑定破产AI，我开局氪成大神",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.32,
-    "genres": [
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dLAiafB0pAI7jaWQZXiCV7wr8xT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vnAJ8f3lYfuIyzhyU0fD4vQKR3a.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 319424,
-    "ru": "Arturo & Teresa",
-    "en": "Arturo & Teresa",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.26,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nOkwS0rAzrsE8wtwzUreedPQ3HA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/m0vhVQafpqdxyNHOTXLvBNQqO5R.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 320449,
-    "ru": "我把末日上交给了国家",
-    "en": "我把末日上交给了国家",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.23,
-    "genres": [
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jwWOxnm8CWv0nS57RAJDgsXqEhg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lCe9zx2jS5Lw5eph4aQbS9PjjC3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 295071,
-    "ru": "さよならララ",
-    "en": "さよならララ",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.14,
-    "genres": [
-      "мультфильм",
-      "НФ и Фэнтези",
-      "драма",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eMXafJcr4MWb4X8JQ5nw5xPt6yM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hcQ7WkI9CXlP0TJfqigvSbaHpLP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 309360,
-    "ru": "奇妙萌可之闪耀流星",
-    "en": "奇妙萌可之闪耀流星",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 1.07,
-    "genres": [
-      "Детский",
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ruZh4azP0hztFrVteFXFqQ90Csl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9TunW3BDOoZjCjEX3G2NOdgxGuR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 314271,
-    "ru": "Bass X Machina",
-    "en": "Bass X Machina",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.99,
-    "genres": [
-      "мультфильм",
-      "вестерн",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lnpDbSBtImDLJDkIARySYp6wuDu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gpp6NcgfSrxKDivWskRxLp9UadU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 302675,
-    "ru": "Duolingo: The Final Test",
-    "en": "Duolingo: The Final Test",
-    "year": 2025,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.92,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/siM6aupNj8udo5qgo2swSVznDxL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zTtHSfLTL9P3fYRujy1CmRnNYYx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 217167,
-    "ru": "Karna the Guardian",
-    "en": "Karna the Guardian",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.91,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3M7PkwXvT2scTNUoXOaCqlIpfVM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/52YGUyqCsIW6tIhAYrfsZigkaBn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 228671,
-    "ru": "Magicampers",
-    "en": "Magicampers",
-    "year": 2026,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.91,
-    "genres": [
-      "Детский",
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pjfxzfJSNVwXUHyFBaCN3iC00Wj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6glZXqH8NgUU8JstpzgWuHRXZk0.jpg",
     "source": "tmdb"
   }
 ]

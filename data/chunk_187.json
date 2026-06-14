@@ -1,5 +1,188 @@
 [
   {
+    "id": 876677,
+    "ru": "Por Um Punhado de Trocos",
+    "en": "Por Um Punhado de Trocos",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.62,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qnGUHYYqFFy1TWbX7NJxpno3eJ.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1018354,
+    "ru": "여대생의 은밀한 불륜",
+    "en": "여대생의 은밀한 불륜",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.62,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7pI8yAYYX8qrewIwHPCprE0rPUG.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1319741,
+    "ru": "LoveLive! Series Asia Tour 2024 ～みんなで叶える物語 ～",
+    "en": "LoveLive! Series Asia Tour 2024 ～みんなで叶える物語 ～",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.62,
+    "genres": [
+      "мультфильм",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8t3zAUWqId0xyR1L9255MlxSR2k.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1520508,
+    "ru": "Khosla Ka Ghosla 2",
+    "en": "Khosla Ka Ghosla 2",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.61,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9cMcSUFYAKHNpOyHlwS77SMK7Y6.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1226699,
+    "ru": "The Wrong Girls",
+    "en": "The Wrong Girls",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.61,
+    "genres": [
+      "комедия",
+      "драма",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rwLgmo32j1O91D2xPXOrGUcyzn5.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1433051,
+    "ru": "腎上腺-母侵",
+    "en": "腎上腺-母侵",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.61,
+    "genres": [
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7vMJYmGU4MsKwHK3Wzk2bvhfApc.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1695327,
+    "ru": "드림하이: 쇼뮤지컬 온 스테이지",
+    "en": "드림하이: 쇼뮤지컬 온 스테이지",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.61,
+    "genres": [
+      "драма",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/27cxhMeOsEg8uVOWtB7AiQC5ELw.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1322768,
+    "ru": "A Safe Distance",
+    "en": "A Safe Distance",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.61,
+    "genres": [
+      "драма",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zVKXv5R2Gge5xlvMwvD40pGNG2T.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1631122,
+    "ru": "Case No 73",
+    "en": "Case No 73",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.61,
+    "genres": [
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eUTIwSdqvnRRToGPZGo8tArpso8.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1616839,
+    "ru": "Fruits of Despair",
+    "en": "Fruits of Despair",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.61,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hub9xiFq39trYLIlThDO0X748R.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
     "id": 1634827,
     "ru": "Sportsko srce",
     "en": "Sportsko srce",
@@ -8886,190 +9069,6 @@
     ],
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/6JTsV2N0gmH0OSWiNAcXOwn1zYD.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1484689,
-    "ru": "The Rake's Progress - Norwegian National Opera & Ballet",
-    "en": "The Rake's Progress - Norwegian National Opera & Ballet",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.48,
-    "genres": [
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4CRsexUjrJOslMG63NY2XEiO5VS.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1462557,
-    "ru": "Steps & Bars",
-    "en": "Steps & Bars",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.48,
-    "genres": [
-      "документальный",
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pUFoI8JkieVOKC5LXK1T0mTfvrB.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1403156,
-    "ru": "Ett öga för film",
-    "en": "Ett öga för film",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.48,
-    "genres": [
-      "ужасы",
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1z8zlTu5FheX5P9vQLTkDs1w1LH.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1552584,
-    "ru": "夜王烈伝2 打倒No.1への道",
-    "en": "夜王烈伝2 打倒No.1への道",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.48,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lOO9goUPwjQUz7hBai1atSioptM.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1401511,
-    "ru": "ගෞතම බුද්ධ මාතා",
-    "en": "ගෞතම බුද්ධ මාතා",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.48,
-    "genres": [
-      "история",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2MTozmtSGsAvP23YzvMz5Ibj24h.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1424862,
-    "ru": "Henry Mancini: 100 at the Hollywood Bowl",
-    "en": "Henry Mancini: 100 at the Hollywood Bowl",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.48,
-    "genres": [
-      "музыка",
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mfJZgVQVP4rhNcFhQUaJfDznYJD.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1301092,
-    "ru": "Raca",
-    "en": "Raca",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.48,
-    "genres": [
-      "комедия",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ydbN46M8E7cIHYN1R8KTNz2EK0p.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1286636,
-    "ru": "SACRA MUSIC FES. 2022 -5th Anniversary-",
-    "en": "SACRA MUSIC FES. 2022 -5th Anniversary-",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.48,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/d2qx4PL8ZpqCT4JH2LhMCnQjgdb.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 926836,
-    "ru": "Four For Fun",
-    "en": "Four For Fun",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.48,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/q9FVx8RsbZzyBERH8UcA7upuNmZ.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 1063735,
-    "ru": "Homeward Bound: A Grammy Salute to the Songs of Paul Simon",
-    "en": "Homeward Bound: A Grammy Salute to the Songs of Paul Simon",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.48,
-    "genres": [
-      "музыка",
-      "документальный",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/o6Xls279fqnT2MunvmN5ZMWIuH9.jpg",
     "backdrop": "",
     "source": "tmdb"
   }

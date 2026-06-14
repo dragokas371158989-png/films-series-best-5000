@@ -1,5 +1,192 @@
 [
   {
+    "id": 1516175,
+    "ru": "Party USA",
+    "en": "Party USA",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.74,
+    "genres": [
+      "комедия",
+      "криминал",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wsTd6RAh7n1OKiymVnQc61xnxUw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dtWuDGiAZOHzmdKQfBfF1kK2Wz6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1594606,
+    "ru": "The Hostage's Hero",
+    "en": "The Hostage's Hero",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.74,
+    "genres": [
+      "драма",
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vYRiPe1U3uGedFTMdg3m30alLBK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/A8GYqifL6CHteL3W1cQmQgXrXu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1552497,
+    "ru": "Faim De Vie",
+    "en": "Faim De Vie",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.74,
+    "genres": [
+      "триллер",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1KsVav276W0Ap6lh6eeYRO3UEey.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/noKiDRRAAYGB0UkHhJJuXIg1LaV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1623257,
+    "ru": "Garage",
+    "en": "Garage",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.74,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3fJctqEw6g0Ig2IRJ9RVUtND1zB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uhuNucdSkmmhyN6NZuOZ3QG02kA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1599379,
+    "ru": "মাস্টার",
+    "en": "মাস্টার",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.74,
+    "genres": [
+      "триллер",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/8XcbZTYtpd2UUUJnExFXoRuBNta.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vDoNcP0Q3nJCBWTvB9vj2rqyACv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1599277,
+    "ru": "超風",
+    "en": "超風",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.74,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/lEYaFuhuK2VC27tLIo836OlT552.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jUDDXm6yydTzSGuysDOCAOqE8ZZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1547656,
+    "ru": "Picture Perfect Sister-in-Law",
+    "en": "Picture Perfect Sister-in-Law",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.74,
+    "genres": [
+      "триллер",
+      "телевизионный фильм",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bbUMJHai0BUDaITE4Ihobaow0IJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/11BqKMO4nVKnCVP7EeoNrYgu2NV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1490236,
+    "ru": "Putnubiedēkļi",
+    "en": "Putnubiedēkļi",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.74,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mwflKlbXNKJZnpOaMplT0jMLIEb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qCyynC8yLKlhkyMlmJjkh056uyq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1601652,
+    "ru": "The Baddest Speechwriter of All",
+    "en": "The Baddest Speechwriter of All",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.74,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/a600xi9rnKkvgwBgHIwWgIDxoaK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qogDW73YJ46rk4YvX35oeTWiDNN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1603020,
+    "ru": "Le grand cirque des marées",
+    "en": "Le grand cirque des marées",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.74,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/j5i3enEg79hrbHnp5fQS0d30zSy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vdalavw8Z3t19hh6cQAUNhmxmKr.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1590920,
     "ru": "Me No Pause Me Play",
     "en": "Me No Pause Me Play",
@@ -9141,190 +9328,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/3ULc8P89vH2d5AbCAIqnUK1RmVD.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/cHSnGXoP5wcOJTTiYIsPSVarxt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1518070,
-    "ru": "గుర్రం పాపి రెడ్డి",
-    "en": "గుర్రం పాపి రెడ్డి",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.63,
-    "genres": [
-      "комедия",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fo7TpR3Pyfxl7DjT3VlvMFgFeOd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/e8A6wYBmJSgPZH0dX42j65X0Fza.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1266589,
-    "ru": "Mint in Box",
-    "en": "Mint in Box",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.63,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/11CCpYumL9rv617zBD7lyM5M1iT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gWotqfLtSVVz9qpQq9EdQ5NPmz7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1147885,
-    "ru": "The Darkling Fox",
-    "en": "The Darkling Fox",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.63,
-    "genres": [
-      "ужасы",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wfy3kKhI8lUKpFEfaV2uFGQOFF3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9tP4bjSXYm6TQrINA2QQ6CXCJB9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1269104,
-    "ru": "Les sous-marines",
-    "en": "Les sous-marines",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.63,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4Sp6aaQmFKpDHoKL9BBYMyLi1hi.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jy1hdnvu0v4fb9wAtnd6Re1Fhvz.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1337095,
-    "ru": "Playing to Survive: Von Cramm vs. Hitler",
-    "en": "Playing to Survive: Von Cramm vs. Hitler",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.63,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ozCP2BE3r7SsNpQGXyArKHuVKWy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mZvApVWqE87PMmmaKiXqEgkGAY6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1370041,
-    "ru": "White Crow",
-    "en": "White Crow",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.63,
-    "genres": [
-      "боевик",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2MjJVEfJTBQpr4OZ6IaM6sBk8JJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kvjKnB0ejqhtfEHEFjd7BRLTFyR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1339093,
-    "ru": "Sua: Portrait of a Retired Bus Driver",
-    "en": "Sua: Portrait of a Retired Bus Driver",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.63,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/k6UONWnBHgZ5uhfECbfQTmCwCow.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dA5btuJGlXTTjVifo8EAVVcRlcU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1450335,
-    "ru": "プロジェクトセカイ COLORFUL LIVE 3rd - Evolve -",
-    "en": "プロジェクトセカイ COLORFUL LIVE 3rd - Evolve -",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.63,
-    "genres": [
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/s9IsSHsiLbI4HUVPuR8132ezFSp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4vLPeNNcu52NTALIlNCLfzORQBC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1395260,
-    "ru": "Play Sound Portretai: Free Finga",
-    "en": "Play Sound Portretai: Free Finga",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.63,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eWQHAhL3TH6cgR0ij4XTd0Hqbfm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1J21Adbeb856fvtyEPsQ4CHAjja.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1306973,
-    "ru": "Where the Heck Is My Period?",
-    "en": "Where the Heck Is My Period?",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.63,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fgSaBR234xTuSTjDuiU9CTvXr7k.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/suJIKa2NOc34RT2m4DZqvLHLTOK.jpg",
     "source": "tmdb"
   }
 ]

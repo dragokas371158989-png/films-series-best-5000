@@ -1,5 +1,235 @@
 [
   {
+    "id": "45162",
+    "ru": "Супермен/Бэтмен: Апокалипсис",
+    "en": "Superman/Batman: Apocalypse",
+    "year": 2010,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 772,
+    "popularity": 1.71,
+    "genres": [
+      "фантастика",
+      "боевик",
+      "приключения",
+      "мультфильм"
+    ],
+    "overview": "После того, как Бэтмен уничтожил криптонитовый астероид, а Супермен добился импичмента президента Лютора (события, происходившие в фильме «Супермен / Бэтмен — Враги Общества»), вроде всё должно бы закончиться, но…. Один из осколков криптонитового астероида падает в Готэмский Залив. Бэтмен, исследуя обломки, обнаруживает, что его катер пытаются угнать. Преследуя угонщика, он находит девушку с суперспособностями. Так начинается эта необычная история…",
+    "poster": "https://image.tmdb.org/t/p/w342/wxcejrj9P6aUCNFMaIs7jbMGxjS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/74H4XXU0q22TSrkPmlqkcWoX5ZZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_279",
+    "ru": "Requiem from the Darkness",
+    "en": "Kyougoku Natsuhiko: Kousetsu Hyaku Monogatari",
+    "year": 2003,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.1,
+    "votes": 10770,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Ужасы",
+      "Horror",
+      "Детектив",
+      "Mystery",
+      "Сверхъестественное",
+      "Supernatural",
+      "Жесть",
+      "Gore",
+      "Историческое",
+      "Historical",
+      "Мифология",
+      "Mythology",
+      "Психология",
+      "Psychological"
+    ],
+    "overview": "In an attempt to turn his floundering career around by compiling one hundred ghost stories, struggling author Momosuke Yamaoka roams through Edo-period Japan searching for material. During his travels, the young man wanders deep into the mountains, where he encounters a monk named Mataichi. Failing to heed the monk's advice to turn back, Momosuke presses forward and soon witnesses a murder carried out by Mataichi and his two associates. As it turns out, Mataichi's gang also investigates paranormal incidents—aiming to make those in the wrong pay the ultimate price.\n\nContinuing to seek out subject matter for his stories, Momosuke repeatedly crosses paths with the trio of outlaws, becoming increasingly involved in their schemes each time. As the author strays further toward the world of darkness, he grapples with both the morality of the group's actions and the line between humans and the supernatural.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/2/30681l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "11044",
+    "ru": "Аризонская мечта",
+    "en": "Arizona Dream",
+    "year": 1993,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 768,
+    "popularity": 2.95,
+    "genres": [
+      "фэнтези",
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Дядя Лео привык добиваться своего. А хочет он, чтобы племянник Аксель стал шафером на его свадьбе и работал в его фирме по продаже «кадиллаков». Аксель же ничего не хочет. Он предпочитает проводить время в компании своей возлюбленной, местной сумасшедшей Элен, и ее падчерицы Грейс, и вместе с ними предаваться мечтам. Влюбленная Элен мечтает летать как птица. Отвергнутая Грейс мечтает перевоплотиться в черепаху. Аксель мечтает о заснеженных просторах Аляски, где охотники-эскимосы ловят стрелозубых палтусов. Мечтает даже дядя Лео: построить бы целую гору из «кадиллаков» и забраться бы по ней на Луну…",
+    "poster": "https://image.tmdb.org/t/p/w342/fcYewAfn7IExMPAPR35dSfa50vn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/i4VUKbHE2XFwX5LRkTg3oRE9opN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "632617",
+    "ru": "Камон Камон",
+    "en": "C'mon C'mon",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 767,
+    "popularity": 1.32,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Радиожурналист Джонни отправляется с 9-летним племянником в поездку по Америке. Совместное путешествие навсегда изменит каждого из них.",
+    "poster": "https://image.tmdb.org/t/p/w342/o99QxlU2ichbp5HXekWjBf0sdI2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zs1I3ZFUDEWa5rFyph7OrMH1aJ9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "16553",
+    "ru": "Маленький Манхэттен",
+    "en": "Little Manhattan",
+    "year": 2005,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 764,
+    "popularity": 2.06,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Романтическая комедия для того, кому за ... одиннадцать. Любовь в столь юном возрасте - это почти Шекспир. Настоящее кино для семейного просмотра. Лишь одиннадцать лет от роду и ты влюбился впервые в своей жизни. Эту истину открывает для себя юный Гейб, влюбившийся в свою одноклассницу Розмари. Вообще-то он знал ее очень давно, но как и все остальные девчонки она не вызывала у него никакой симпатии. Все началось, когда их сделали спарринг партнёрами в секции карате.",
+    "poster": "https://image.tmdb.org/t/p/w342/nPseXWCmqYEdg2sCN40nw52nMk4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/f5XOH9b9oV7yzIqhKDEXtDx0uz9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "204436",
+    "ru": "Джек и механическое сердце",
+    "en": "Jack et la mécanique du cœur",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 759,
+    "popularity": 1.67,
+    "genres": [
+      "мультфильм",
+      "мелодрама",
+      "приключения",
+      "драма",
+      "фэнтези"
+    ],
+    "overview": "Джек родился в «самый холодный день», и его сердце мгновенно оледенело. Сироту усыновила волшебница Мадлен. Она вставила ему в грудь часы, поддерживающие сердцебиение, и наказала соблюдать три правила, самое главное из которых – «никогда не влюбляться». Однако подросший Джек невольно нарушает запрет.",
+    "poster": "https://image.tmdb.org/t/p/w342/yuovfjZu7AnRomjXG9SLECeMBKZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rjXK74vrvmFMN0vuFw3TViZ18Ha.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 132559,
+    "ru": "Семейка Крудс: Семейное древо",
+    "en": "The Croods: Family Tree",
+    "year": 2021,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 757,
+    "popularity": 8.24,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "Боевик и Приключения",
+      "комедия",
+      "Детский",
+      "Аниме"
+    ],
+    "overview": "Соперничающие с доисторических времён семьи Крудсов и Беттерманов учатся преодолевать разногласия жить вместе на самой прекрасной ферме.",
+    "poster": "https://image.tmdb.org/t/p/w342/5jo8VSbaM112fsBzPpR2A2hulLX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5QKGJ4nEjAq4TSTvhJw5PrNcIbu.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "197082",
+    "ru": "Венера в мехах",
+    "en": "La Vénus à la fourrure",
+    "year": 2013,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 751,
+    "popularity": 1.1,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Весь день Тома проводил прослушивания, выбирая актрису для пьесы по знаменитому роману Леопольда фон Захера-Мазоха «Венера в мехах». Режиссер в отчаянии, пока не появляется Ванда — настоящий сгусток энергии, разнузданная и развязная. Она воплощает собой все, что Тома ненавидит: вульгарна, взбалмошна и не остановится ни перед чем, чтобы получить роль. Вдруг все, что так ненавидит Тома, начинает ему нравиться — актриса отлично подготовилась к прослушиванию. Удивление сменяется влечением, а затем и одержимостью этой женщиной.",
+    "poster": "https://image.tmdb.org/t/p/w342/jkZYVRj6bTLADUuSCCOxddFfnjA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9OZBgxriOtS0XgNgiQX4BhhkSVv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_66398",
+    "ru": "Diomedes, el Cacique de La Junta",
+    "en": "Diomedes, el Cacique de La Junta",
+    "year": 2015,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.2,
+    "votes": 748,
+    "popularity": 2.25,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dloUU6Qy5yDVIBd6EUhatBCiRsL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jeXcEHlAow5bkBtoNHQg9GajdVi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "9701",
+    "ru": "Северная страна",
+    "en": "North Country",
+    "year": 2005,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 740,
+    "popularity": 3.35,
+    "genres": [
+      "драма"
+    ],
+    "overview": "После того, как распался ее брак, Джози Эймс в поисках работы возвращается в свой родной город в Северной Миннесоте. У нее двое детей, и чтобы обеспечить их, она вынуждена устроиться на шахту, где трудятся практически все местные мужчины, в том числе и ее отец. Оказавшись одной из немногих женщин, работающих на шахте, Джози сталкивается с суровой реальностью. Мужчины, не терпящие конкуренции со стороны представительниц слабого пола, выдвигают им свои унизительные требования. И тогда Джози, пойдя на большой риск, решает обратиться в суд, чтобы защитить себя и своих подруг. В итоге это дело становится первым прецедентом в США, когда был удовлетворен иск о сексуальном домогательстве…",
+    "poster": "https://image.tmdb.org/t/p/w342/fwvgBlhh94u9EFmIMsTewEMP99U.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6rgiRuLHn65d3qalkc7YjrtmDQW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_9340",
+    "ru": "チェブラーシカ",
+    "en": "Cheburashka",
+    "year": 2010,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 732,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Комедия",
+      "Comedy"
+    ],
+    "overview": "The stop-motion animated film based on Russia's Cheburashka character.",
+    "poster": "https://cdn.myanimelist.net/images/anime/5/25871l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
     "id": "tv_1481",
     "ru": "Четыре тысячи четыреста",
     "en": "The 4400",
@@ -9740,227 +9970,6 @@
     "overview": "В Гонконг приезжает коррумпированный британский агент Ричард Нордон, целью которого является продажа боссу мафии микрофильма, изобличающего его преступные махинации. Но Нордон не сходится с ним в цене, и Тьен подсылает к нему убийцу, который убивает англичанина, но микрофильм так и не находит.Пленка хранится в паспорте Нордона, который прихватили с собой воришки Стрепсилс и Аспирин. Не зная, что у них на руках, существенная улика, они ведут свой обычный образ жизни, ноу них на хвосте сидят две девушки-полицейские…",
     "poster": "https://image.tmdb.org/t/p/w342/oVNW4keSq8Gev6eeCXGNPlevAPV.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/gx5POm4v5uwres9jSM10Aq9BHyt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "16516",
-    "ru": "Кланнад. Фильм",
-    "en": "CLANNAD -クラナド-",
-    "year": 2007,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 114,
-    "popularity": 1.88,
-    "genres": [
-      "мультфильм",
-      "драма",
-      "мелодрама",
-      "Аниме"
-    ],
-    "overview": "После смерти матери Томоя Окадзаки стал видеть странные сны, которые постепенно сводят его с ума, заставляя отгораживаться от окружающих, выстраивая образ разгильдяя и хулигана. Томоя давно разочаровался в жизни и ходит в старшую школу по инерции, да и общается там только с Сунохарой — таким же неудачником. Потому ему все равно, когда какая-то девчонка по имени Нагиса Фурукава просит вместе подняться на холм, к школе, по тропе под цветущей сакурой. Однако потом Нагиса «случайно» встречает его снова… и снова… постепенно Томоя (с верным Сунохарой) втягивается в ее жизнь, начиная помогать в осуществлении главной мечты Нагисы — возродить в школе театральный клуб. Ближе узнавая Нагису, ее семью, обретая новых друзей, Томоя начинает понимать самого себя, а потом, наконец, до него доходит самое главное…",
-    "poster": "https://image.tmdb.org/t/p/w342/kLilzbm3IIK9VSj3k3ysscF9vpQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oPaDTUGaqIfUo40LangGZgeZBmY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_73200",
-    "ru": "Лоудермилк",
-    "en": "Loudermilk",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 114,
-    "popularity": 6.32,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Главный герой Лоудермилк — алкоголик в завязке с манией раздавать всем свои «бесценные» советы и крайне негативным отношением к жизни. У него настоящий дар безо всяких угрызений совести портить жизнь окружающим. Этот выдающийся мизантроп всех вокруг считает врагами и успешно справляется лишь с одной задачей — держаться подальше от алкоголя.",
-    "poster": "https://image.tmdb.org/t/p/w342/n9OpiTPynQDamlNyBPZgubMunKL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/bZTxh2wIYO4yiqOy1ONqqMsd21R.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 611014,
-    "ru": "Фокстер і Макс",
-    "en": "Фокстер і Макс",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 114,
-    "popularity": 2.01,
-    "genres": [
-      "приключения",
-      "фэнтези",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/cuE7KKuDobzB8lUUsbtcrC3Az7w.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xgBjOcLGnjFs4N2LAR64cV3awDB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 92090,
-    "ru": "Клинок Бессмертного",
-    "en": "無限の住人-IMMORTAL-",
-    "year": 2019,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 113,
-    "popularity": 15.03,
-    "genres": [
-      "мультфильм",
-      "драма",
-      "Боевик и Приключения",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Мандзи — убийца ста самураев и бессмертный мечник, уставший от своего проклятия. После гибели собственной сестры он делает 800-летней монахине, запустившей в его тело не позволяющих расстаться с жизнью «кровяных червей», предложение: дабы искупить грехи, он обещает убить на своём пути тысячу злодеев. И как только клятва будет исполнена, Мандзи вернётся его смертность, а черви навсегда оставят его тело.\n\nВ своём путешествии он встречает молодую девушку Рин, жаждущую мести за убийство всей своей семьи и не знающую куда податься. Странствуя вместе с ней, бесконечно сражающийся Мандзи продолжает двигаться к собственной цели, не оставляя надежды найти себе «покой».",
-    "poster": "https://image.tmdb.org/t/p/w342/dbsChsdeYPYhsD71IxcfPS8zl75.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pub9SbIQlKcdrcasZarZR405gOb.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_123377",
-    "ru": "Педро Дом",
-    "en": "Dom",
-    "year": 2021,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 113,
-    "popularity": 4.83,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "История о противостоянии и сближении двух мужчин, отца и сына. Полицейский Виктор Дантас всю свою жизнь и карьеру посвятил борьбе с наркотиками. А его сын Педро в подростковом пристрастился к кокаину, пошёл по кривой дорожке, и в итоге в конце 2000-х годов возглавил в Рио-де-Жанейро известную преступную группировку Педро Дом.",
-    "poster": "https://image.tmdb.org/t/p/w342/70HC9Nl6JH3tuT64xw6yOHXHzJ5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wGMuQ0yxHu6RgWgtvGgkeNZNu3R.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 939210,
-    "ru": "Приключения Блю в большом городе",
-    "en": "Blue's Big City Adventure",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 113,
-    "popularity": 1.05,
-    "genres": [
-      "семейный",
-      "музыка",
-      "комедия",
-      "приключения",
-      "мультфильм"
-    ],
-    "overview": "Джош и Блю отправляются в Нью-Йорк на прослушивание в большой бродвейский мюзикл.",
-    "poster": "https://image.tmdb.org/t/p/w342/sAYBC3WhhiX25629HLpCvkpGk9q.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/17sIiv4LGapYnyvdpKxA1vozBqY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 52989,
-    "ru": "Как игрушки спасли Рождество",
-    "en": "La freccia azzurra",
-    "year": 1996,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 113,
-    "popularity": 0.32,
-    "genres": [
-      "семейный",
-      "мультфильм",
-      "фэнтези"
-    ],
-    "overview": "Каждый год на Рождество добрая фея Бефана дарит детям игрушки. Однажды ей решил помешать жадный и злой доктор Скарафони. Нарушить его коварные планы могут только сами игрушки.",
-    "poster": "https://image.tmdb.org/t/p/w342/qEGduvgSZE2dAh9JHFEpE7hMI47.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fIzsXK6P1cQcrSBdwYqHN203uRt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 331251,
-    "ru": "스물",
-    "en": "스물",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 113,
-    "popularity": 1.17,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hzKynyDi7NwG5Yxn3JC9eNWM9Io.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9AKN9jgCXqziM2fEFyLDOTUMCrS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_1909",
-    "ru": "Величайший американский герой",
-    "en": "The Greatest American Hero",
-    "year": 1981,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 112,
-    "popularity": 9.67,
-    "genres": [
-      "Боевик и Приключения",
-      "комедия",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/sViWrklUxxYw4ZYuGsrthnS63X2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5ASuXTfd6zfLmyYdIf7R4uk4h5d.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 505205,
-    "ru": "Pope Francis: A Man of His Word",
-    "en": "Pope Francis: A Man of His Word",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 112,
-    "popularity": 0.71,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4pGMnjyebbDY33AkWqaJbvC5eEo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lUVRn6CC3voutG905c8qTIAa7QL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 72091,
-    "ru": "Магические войны",
-    "en": "魔法戦争",
-    "year": 2014,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 111,
-    "popularity": 3.87,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "Есть нечто тёмное в прошлом Такэси Нанасэ. В связи с некоторыми обстоятельствами он завёл фальшивые отношения со своей подругой детства Куруми, в остальном же он — обычный старшеклассник. Однажды Такэси проходит мимо девушки, рухнувшей возле школьного кампуса, а форму одежды, как у этой незнакомки по имени Муй Айба, наш школьник никогда не встречал. Естественно, с этого столкновения судьба и жизнь Такэси полностью меняются. Муй рассказывает, что она — маг, и извиняется за то, что превратила в мага и самого Такэси. Мир, который он знал, теперь оказывается разделён — на мир людей и мир магов.",
-    "poster": "https://image.tmdb.org/t/p/w342/Sm3Xh2E7rpXVeWwtimpTZciB2d.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/14BLE7V596Sso8zWQEZa2iAF0G9.jpg",
     "source": "tmdb"
   }
 ]

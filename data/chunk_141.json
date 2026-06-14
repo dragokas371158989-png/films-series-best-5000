@@ -1,5 +1,201 @@
 [
   {
+    "id": "1206008",
+    "ru": "Элла Маккей",
+    "en": "Ella McCay",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 118,
+    "popularity": 4.32,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "Молодая девушка становится губернатором своего штата и пытается удержать баланс между работой и обычной жизнью.",
+    "poster": "https://image.tmdb.org/t/p/w342/oqgIYiGCLHBfrTHSdkv251bNqar.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9cd1zsxcOAcBW01WDOWz8EODTS0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 614204,
+    "ru": "Проклятый лес",
+    "en": "Witches in the Woods",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 118,
+    "popularity": 0.7,
+    "genres": [
+      "ужасы",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "Семеро друзей отправляются на машине на базу отдыха. По пути выясняется, что часть дороги закрыта, поэтому приходится сделать немаленький крюк, в результате ребята сбиваются с пути. Вскоре им начинает казаться, что они ездят кругами, а когда машина попадает в небольшую аварию, одна из девушек заявляет, что они никогда отсюда не выберутся.",
+    "poster": "https://image.tmdb.org/t/p/w342/qzM22kWfSCkSCcpIaF4tx7kjyaP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/unkSO4YbgRz7AcH11vsiZm3Ni8T.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 746781,
+    "ru": "Ночь",
+    "en": "آن شب",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 116,
+    "popularity": 0.45,
+    "genres": [
+      "ужасы",
+      "детектив"
+    ],
+    "overview": "Засидевшись в гостях, супружеская пара с младенцем отправляется на машине домой, но по пути всё же решает переночевать в отеле. В первой попавшейся гостинице их встречает странный портье, а в номере супруги начинают слышать посторонние звуки — будто кто-то никак не хочет оставить их в покое.",
+    "poster": "https://image.tmdb.org/t/p/w342/iW0YRI7fL7ZTutiVBPoNy8T8b7i.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8ngU7WVjQbzWwxQktii0TlIndB6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 602666,
+    "ru": "Детектив из Чайнатауна 3",
+    "en": "唐人街探案3",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 115,
+    "popularity": 2.79,
+    "genres": [
+      "боевик",
+      "комедия",
+      "детектив"
+    ],
+    "overview": "На этот раз доморощенный Шерлок Холмс и его не слишком сообразительный родственник отправляются в Токио, куда их приглашает японский коллега-детектив, и где поджидает местный колорит: кровожадные якудза, соблазнительные гейши, суровые сумоисты и прочие радости туриста Страны восходящего солнца.",
+    "poster": "https://image.tmdb.org/t/p/w342/nbGzncqTJw94LHisdEXKC1dFc3J.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/j3P4MhXTIrb9wPX1hqQQtpegxXP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 352695,
+    "ru": "Джоши",
+    "en": "Joshy",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 115,
+    "popularity": 2.5,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "Джош не хочет упустить отличную возможность воссоединиться со старыми друзьями на своем мальчишнике, который он решает устроить даже несмотря на отменившуюся свадьбу.",
+    "poster": "https://image.tmdb.org/t/p/w342/qbRPGqfHf6TOCax353dgpmALBFP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vRongtodPwC2LLhbOaPFSnJjsEl.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 28042,
+    "ru": "Frosty Returns",
+    "en": "Frosty Returns",
+    "year": 1992,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 114,
+    "popularity": 0.76,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/r4XMrwhhhic6W6LvxBTxzs8kXlt.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kFXtr3TbiP0WMCD2U3DYqh7G0WD.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 376501,
+    "ru": "Грешники и праведники",
+    "en": "Outlaws and Angels",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 109,
+    "popularity": 0.92,
+    "genres": [
+      "вестерн",
+      "драма",
+      "триллер"
+    ],
+    "overview": "Удирая от погони, шайка преступников, забирается в дом ничего не подозревающего семейства, чтобы укрыться на ночь. Появление непрошенных гостей влечет за собой необратимые последствия для всех членов семьи.",
+    "poster": "https://image.tmdb.org/t/p/w342/rEV31TbZoC9mBa0fjJVtw94Pnvf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uJB4JEG8bYBQQ2QupGTzvMdnW1P.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 566039,
+    "ru": "Рождество с принцем",
+    "en": "Christmas with a Prince",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 108,
+    "popularity": 0.49,
+    "genres": [
+      "драма",
+      "мелодрама",
+      "телевизионный фильм",
+      "комедия"
+    ],
+    "overview": "Педиатр Таша Миллер лечит детей, больных раком. Когда принц Александр Кавальери ломает ногу на близлежащем горнолыжном курорте, она разрешает ему спрятаться от репортеров в своём отделении. Таша боится, что избалованный принц может нарушить спокойствие и помешать выздоровлению детей. Однако вскоре она понимает, что чуть-чуть строгости и очень много рождественского настроения могут превратить его в рыцаря в сияющих доспехах.",
+    "poster": "https://image.tmdb.org/t/p/w342/f36niI1QKbUUN7hh6lbeIEUIv4P.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4PqktwV3aQr9fadJIljF9OFwdYq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 421386,
+    "ru": "Como Se Tornar o Pior Aluno da Escola",
+    "en": "Como Se Tornar o Pior Aluno da Escola",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 107,
+    "popularity": 1.06,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/olRSTQXTNRPwIUIjbeVs5LGrYGC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ry4aOGPuyt4Nz3B67cOJuOqXYAz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 997113,
+    "ru": "Гедда",
+    "en": "Hedda",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.6,
+    "votes": 106,
+    "popularity": 2.06,
+    "genres": [
+      "драма",
+      "триллер",
+      "мелодрама"
+    ],
+    "overview": "Гедда оказывается разрываемой между мучительной тоской по прошлой любви и тихим удушьем нынешней жизни. В течение одной напряжённой ночи давно подавленные желания и скрытые конфликты вспыхивают — втягивая её и всех вокруг в водоворот манипуляций, страсти и предательства.",
+    "poster": "https://image.tmdb.org/t/p/w342/1jLXlws6JWirlRjTAcnNtclE11N.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cKZcDKawR79igCgDMSXlpkn8hLR.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 798223,
     "ru": "Пипа",
     "en": "Pipa",
@@ -9452,206 +9648,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/hZiWB42bTpYtP0mxM7eNLYoa9Jb.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/eRrC4yyzz4B7FaKjaGd1FRgosNi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_13224",
-    "ru": "Истории Мейпл-тауна",
-    "en": "メイプルタウン物語",
-    "year": 1986,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.6,
-    "votes": 12,
-    "popularity": 6.05,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "Аниме"
-    ],
-    "overview": "Действие происходит в Соединённых Штатах в 1920-е годы. Здесь среди дремучего леса располагается маленький городок Мейпл-таун, который населяют маленькие и дружелюбные зверьки. Туда приезжает крольчиха Пэтти вместе со своими родителями, однако в поезде сумку отца крадёт злой волк-разбойник Гретель и сбегает в лес. Она в одиночку отправляется в лес, где случайно знакомится с медвежонком Бобби, вместе они перехитрили волка и возвращают папину сумку. Семья крольчихи начинает работать почтальонами, а между Пэтти и Бобби образуется крепкая дружба. В то же время им предстоит срывать корыстные планы Гретеля.",
-    "poster": "https://image.tmdb.org/t/p/w342/4GG3mBDlM9NpRG1Puj7PKLHyPnD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3R2U3E2h3ozGPxVmdUVGz1VJF8R.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 89095,
-    "ru": "Полли Покет",
-    "en": "Polly Pocket",
-    "year": 2018,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.6,
-    "votes": 12,
-    "popularity": 5.86,
-    "genres": [
-      "Детский",
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "Приключения находчивой девочки Полли, которая доказывает, что сильным может быть даже самый маленький человек. Взрослые часто говорят Полли, что она ещё слишком мала, чтобы делать всё, что ей хочется. Но Полли доказывает, что быть маленькой — это не ограничение, а наоборот, большой плюс. Это её главная сила! Однажды героиня наследует волшебный медальон, который уменьшает её до размеров 10 сантиментов. Благодаря этой способности Полли и её друзья постоянно попадают в классные приключения и решают проблемы необычным способом.",
-    "poster": "https://image.tmdb.org/t/p/w342/gGZsmoZ0Qd1WMX1WW1Dgy2LcR3m.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mF21J5mBfGdVFDHLWCX8VeSSz1N.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "55430",
-    "ru": "Сломанный меч 2",
-    "en": "劇場版 ブレイク ブレイド　第二章「訣別ノ路」",
-    "year": 2010,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.6,
-    "votes": 12,
-    "popularity": 0.64,
-    "genres": [
-      "мультфильм",
-      "боевик",
-      "фэнтези",
-      "Аниме"
-    ],
-    "overview": "Противостояние двух держав не обошлось без вмешательства и третьей стороны, отсюда и мотивы действий Зесса, но он ещё не ведает условий сдачи короля Кришны, его некогда друга. Зессу предстоит встретить и ещё одного товарища, Райгата, того кому суждено тоже быть вовлеченным в этот конфликт и может быть прекратить ненужные кровопролития.",
-    "poster": "https://image.tmdb.org/t/p/w342/9scWJkRwBKlFCLWU3juCUHtgvfO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cGe9xybFBvKSj6rl2XGYdcd8qlF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_34215",
-    "ru": "Идолмастер: Ксеноглоссия",
-    "en": "アイドルマスター ゼノグラシア",
-    "year": 2007,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.6,
-    "votes": 12,
-    "popularity": 7.65,
-    "genres": [
-      "Боевик и Приключения",
-      "мультфильм",
-      "комедия",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/n1nR7bqfBfy9FPXIrmaspnNzhc1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lBRMABrCdyAojps4xswI1YFchQy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "393808",
-    "ru": "スターフォックス ゼロ ザ・バトル・ビギンズ",
-    "en": "スターフォックス ゼロ ザ・バトル・ビギンズ",
-    "year": 2016,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.6,
-    "votes": 12,
-    "popularity": 0.5,
-    "genres": [
-      "фантастика",
-      "мультфильм",
-      "боевик",
-      "приключения",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jL92TBCND4JPtMonAe7SkFoNj9q.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6WeFVTTpuBRZ71LT2F4fdLd99Qo.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 854207,
-    "ru": "Любовь на плаву",
-    "en": "Love Afloat",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 12,
-    "popularity": 0.49,
-    "genres": [
-      "телевизионный фильм",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Лорелея наследует старую лодку от дальнего родственника на карибском островке, и чтобы привести ее в порядок, она нанимает Роба. Работая вместе, они оба учатся видеть мир иначе, чем прежде и, кроме того, помогают друг другу осознать, что для них важнее всего.",
-    "poster": "https://image.tmdb.org/t/p/w342/vfQtbcFdKf7juAnX2JSUSvkl75V.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7so76ZQvUbsvhGYt3txYpooLiuC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1134607,
-    "ru": "Брачный уговор",
-    "en": "The Marry Me Pact",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 12,
-    "popularity": 0.46,
-    "genres": [
-      "телевизионный фильм",
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Шарлотт и Рори - лучшие друзья, и на свое 30-летие Рори отправляется путешествовать по миру. Год спустя Шарлотт посещает ясновидящую, которая говорит ей, что ей суждено быть с Рори, когда он вернется домой. Рори возвращается... но с невестой.",
-    "poster": "https://image.tmdb.org/t/p/w342/4gZYMOKK0tlzF7RADzGAmYMxQMj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oI6I2hdfya3O9Ke8PuVMFo5w4aB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 602623,
-    "ru": "오! 문희",
-    "en": "오! 문희",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 12,
-    "popularity": 1.34,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pjqweWlZtgivZKDTG2moq8MpCxU.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zZVaWENS1ttCvdgIh3HZ9gN8R6n.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 927068,
-    "ru": "Le variabili dipendenti",
-    "en": "Le variabili dipendenti",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 12,
-    "popularity": 0.94,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ageBdUzbMuW1xuIhu5ITG4dNTvZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1Kkf3hBNwx2Kxy2gziiggze1Cyy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 894758,
-    "ru": "18 పేజెస్",
-    "en": "18 పేజెస్",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.6,
-    "votes": 12,
-    "popularity": 0.93,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/d6SdWIh7gY6x84isJkfrD9SNiJ7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/869a5acZOHlxbRJJeQBxyGKahxl.jpg",
     "source": "tmdb"
   }
 ]

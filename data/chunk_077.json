@@ -1,5 +1,280 @@
 [
   {
+    "id": 7335360,
+    "ru": "My Little Pony в кино",
+    "en": "My Little Pony: The Movie",
+    "year": "2017",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.27,
+    "votes": 416,
+    "popularity": 5.32,
+    "genres": [
+      "семейный",
+      "мультфильм",
+      "приключения",
+      "фэнтези"
+    ],
+    "overview": "Шестерка любимых героев – Эпплджек, Твайлайт Спаркл, Флаттершай, Пинки Пай, Рарити и Рэйнбоу Дэш – теперь на большом экране! Король Шторм хочет лишить пони магии и захватывает Кантерлот. Под угрозой будущее всей Эквестрии! Чтобы остановить злодея, пони покидают родные края и отправляются в путешествие, полное чудес и опасностей.",
+    "poster": "https://image.tmdb.org/t/p/w342/69d9F4E8c7yXLvSXpWrZL1dxpsp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/2UEIPqFkrOY7LyOCsjXZrx3NDmy.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 335360
+  },
+  {
+    "id": "mal_2597",
+    "ru": "Detective Conan OVA 07: A Challenge from Agasa! Agasa vs. Conan and the Detective Boys",
+    "en": "Meitantei Conan OVA 07: Agasa kara no Chousenjou! Agasa vs Conan & Shounen Tanteidan",
+    "year": 2007,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 7393,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Приключения",
+      "Adventure",
+      "Комедия",
+      "Comedy",
+      "Детектив",
+      "Mystery",
+      "Detective",
+      "Сёнэн",
+      "Shounen"
+    ],
+    "overview": "Professor Agasa is kidnapped and the Detective Boys must use clues found at his house and in various parts of the city in order to find him.",
+    "poster": "https://cdn.myanimelist.net/images/anime/12/31145l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "mal_958",
+    "ru": "HeatGuy J",
+    "en": "Heat Guy J",
+    "year": 2002,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 7385,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Приключения",
+      "Adventure",
+      "Фантастика",
+      "Sci-Fi",
+      "Организованная преступность",
+      "Organized Crime"
+    ],
+    "overview": "In the city of Judoh, Claire Leonelli has inherited leadership of the Mafia group \"Vampire\" following the death of his father. To keep Claire's and other criminal activities in check, the city's Bureau of Urban Safety has Special Services Division operative Daisuke Aurora and the super android codenamed \"J\" (whose identity is apparently kept in secrecy, as androids are banned in the city). With both of them around, crime now has little room to breathe in Judoh.\n\n(Source: ANN)",
+    "poster": "https://cdn.myanimelist.net/images/anime/10/76288l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 7298115,
+    "ru": "Драконы: Гонки Бесстрашных",
+    "en": "Dragons: Dawn of the Dragon Racers",
+    "year": "2014",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.27,
+    "votes": 376,
+    "popularity": 1.35,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "приключения",
+      "комедия",
+      "фэнтези"
+    ],
+    "overview": "Поиски пропавшей овцы превращаются в соревнование между Иккингом и его друзьями за титул первого чемпиона драконьих гонок Олуха. Это история о расцвете драконьих гонок, и о том, как они стали самым популярным видом спорта на Олухе.",
+    "poster": "https://image.tmdb.org/t/p/w342/qziSU6XdRAP4F7dy2zkBzHln1SQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/1tJWJksH1Hxyd2mKQTnR6yATiE2.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 298115
+  },
+  {
+    "id": "2668",
+    "ru": "Сонная лощина",
+    "en": "Sleepy Hollow",
+    "year": 1999,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.2,
+    "votes": 7372,
+    "popularity": 7.5,
+    "genres": [
+      "фэнтези",
+      "триллер",
+      "детектив",
+      "ужасы"
+    ],
+    "overview": "Нью-Йорк, 1799 год. Икабода Крэйна, молодого констебля, отправляют в местечко Сонная лощина для расследования загадочных убийств. Все жертвы, как сообщает местное население, погибают от меча всадника без головы. Все они обезглавлены, а головы исчезли. Крэйну приходится убедиться, что это не легенда, а страшная правда. Становится очевидно, что убийца приходит с того света, что в преступлениях замешаны ведьмы и иная нечисть. Всадника нельзя убить пулей, всех смельчаков он побеждает в схватках. Но каковы мотивы злодеяний?..",
+    "poster": "https://image.tmdb.org/t/p/w342/htrk5FO8HaxtfJX8TcEBamDXLjv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m8t7K3LcAY7bpyQ7iQ5kGsrcjnh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 8102621,
+    "ru": "Каос",
+    "en": "KAOS",
+    "year": "2024",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.27,
+    "votes": 366,
+    "popularity": 6.1,
+    "genres": [
+      "комедия",
+      "НФ и Фэнтези",
+      "драма"
+    ],
+    "overview": "Пока на горе Олимп царит раздор, а всемогущий Зевс впадает в паранойю, троим смертным суждено изменить будущее человечества.",
+    "poster": "https://image.tmdb.org/t/p/w342/ntOfhsUUy4W5XcyaL0NUP1hup8z.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/oyKYPA1UXwwgrjmnM30sh33IRG5.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 102621
+  },
+  {
+    "id": 8207863,
+    "ru": "Мэйфейрские ведьмы",
+    "en": "Mayfair Witches",
+    "year": "2023",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.27,
+    "votes": 340,
+    "popularity": 11.06,
+    "genres": [
+      "драма",
+      "НФ и Фэнтези"
+    ],
+    "overview": "Молодая нейрохирург обнаруживает, что она — наследница семьи ведьм. Пытаясь разобраться в своих новообретенных способностях, ей приходится противостоять зловещему созданию, которое преследовало ее семью на протяжении поколений.",
+    "poster": "https://image.tmdb.org/t/p/w342/wTwlZ3W3euIZIWKnPqKjWARJA5v.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/9DHo5qXkG0titQmr2PF92N3aYYk.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 207863
+  },
+  {
+    "id": 8117030,
+    "tmdbId": 117030,
+    "ru": "Мы маленькие медведи",
+    "en": "We Baby Bears",
+    "year": "2022",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 7.27,
+    "votes": 277,
+    "poster": "https://image.tmdb.org/t/p/w342/cXJ1m6f8KORhoIcrPSOYap56aAe.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/A1g8X7atNe7sjIEDJIyGbmaDfJn.jpg",
+    "overview": "Будучи брошенными на улицах города, милые братья-медвежата Гризли, Панда и Белый оказались ночью на игровой площадке и загадали желание: обрести новый дом. Когда звезда падает с неба, обычная коробка превращается в волшебное транспортное средство, на котором братья путешествуют между множеством миров — от деревни говорящих овощей до страны оживших снежных скульптур. Не оставляя попыток найти место, которое они смогут назвать новым домом, медвежата продолжают путешествие по различным мирам, постоянно попадая в неловкие, забавные и непредсказуемые приключения.",
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "комедия",
+      "Детский"
+    ],
+    "source": "tv_top_rated"
+  },
+  {
+    "id": 8247518,
+    "ru": "Гротеск",
+    "en": "Grotesquerie",
+    "year": "2024",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.27,
+    "votes": 263,
+    "popularity": 7.2,
+    "genres": [
+      "драма",
+      "детектив",
+      "криминал"
+    ],
+    "overview": "Детектив и монахиня расследуют серию отвратительных преступлений, одновременно решая личные проблемы и раскрывая зловещую паутину, в которой больше вопросов, чем ответов.",
+    "poster": "https://image.tmdb.org/t/p/w342/jZjbkW0AA0icXzhiUI9V12TeUrO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/tUdqnpN03fQFWAe5O7d61O2lNkr.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 247518
+  },
+  {
+    "id": 7072570,
+    "ru": "Клятва",
+    "en": "The Vow",
+    "year": "2012",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.23,
+    "votes": 4257,
+    "popularity": 4.97,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Во время медового месяца Пейдж и Лео попадают в автокатастрофу. Пока жена находится в коме, Лео не отходит от ее кровати ни на час, но возвращение девушки к жизни омрачено потерей памяти — она не узнает любимого и не помнит об их романе. И тогда Лео решает заново завоевать сердце Пейдж.",
+    "poster": "https://image.tmdb.org/t/p/w342/4wQifZA6GgYxTI4s2IXhxrI5vqx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/a8IFeO1BMn4QEfLsf41Ml7LodyC.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 72570
+  },
+  {
+    "id": 8113246,
+    "ru": "Хрупкие создания",
+    "en": "Tiny Pretty Things",
+    "year": "2020",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.27,
+    "votes": 253,
+    "popularity": 3.37,
+    "genres": [
+      "драма",
+      "детектив"
+    ],
+    "overview": "Девушка по имени Невия в последнюю минуту попадает в престижную балетную школу Нью-Йорка, где все студенты отчаянно интригуют и готовы пойти на крайние меры, чтобы возвыситься над конкурентами. Невия занимает место покончившей с собой предшественницы, которую неизвестный убийца столкнул с крыши.",
+    "poster": "https://image.tmdb.org/t/p/w342/akgMCqHtj5aJgfIr25qY35pAnjQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/vNEXeurfoBXkaRJTRSlNUdMzIxJ.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 113246
+  },
+  {
+    "id": "mal_2199",
+    "ru": "Ringing Bell",
+    "en": "Chirin no Suzu",
+    "year": 1978,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.2,
+    "votes": 7214,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Приключения",
+      "Adventure",
+      "Драма",
+      "Drama",
+      "Фэнтези",
+      "Fantasy"
+    ],
+    "overview": "Chirin, a newborn lamb, and his mother live a peaceful life in a meadow. As long as they stay inside the fence that protects them and the rest of the flock, they are free to frolic and graze on the delicious clover leaves. However, their idyllic life is shattered when a wolf named Wor attacks them in the dead of night, killing Chirin's mother.\n\nStruggling to process his mother's death, Chirin swears to become a wolf himself in order to avenge his mother, unaware of what this transformation would cost him.\n\n[Written by MAL Rewrite]",
+    "poster": "https://cdn.myanimelist.net/images/anime/1391/156459l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
     "id": "mal_36491",
     "ru": "Fights Break Sphere",
     "en": "Doupo Cangqiong",
@@ -30,6 +305,28 @@
     "poster": "https://cdn.myanimelist.net/images/anime/6/88942l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 8122099,
+    "ru": "Баллада об острове Уоллис",
+    "en": "The Ballad of Wallis Island",
+    "year": "2025",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.27,
+    "votes": 188,
+    "popularity": 2.55,
+    "genres": [
+      "комедия",
+      "драма",
+      "музыка"
+    ],
+    "overview": "Экстравагантный победитель лотереи, живущий в одиночестве на удалённом острове, пытается воплотить свои фантазии в жизнь, приглашая любимых музыкантов выступить у него дома.",
+    "poster": "https://image.tmdb.org/t/p/w342/ciVHX2pp3Y7smNi9if75sa8IdwF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/1nn7nCFRTKeWOXbtjrFxfSvf1EI.jpg",
+    "source": "discover_best_movie_2025",
+    "status": "Вышел",
+    "tmdbId": 1122099
   },
   {
     "id": "mal_26351",
@@ -102,24 +399,27 @@
     "tmdbId": 224941
   },
   {
-    "id": 8067482,
-    "ru": "Королевские Гонки РуПола: Все Звёзды",
-    "en": "RuPaul's Drag Race All Stars",
-    "year": "2012",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.27,
-    "votes": 124,
-    "popularity": 18.48,
+    "id": 8083862,
+    "ru": "Обитель Зла: Остров Смерти",
+    "en": "バイオハザード：デスアイランド",
+    "year": "2023",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.26,
+    "votes": 1116,
+    "popularity": 5.38,
     "genres": [
-      "Реалити-шоу"
+      "боевик",
+      "мультфильм",
+      "фантастика",
+      "ужасы"
     ],
-    "overview": "Спин-офф Королевских Гонок РуПола в котором звёздные участники оригинальных сезонов показывают все свои таланты в борьбе за желанную корону и место в зале славы Гонок.",
-    "poster": "https://image.tmdb.org/t/p/w342/ArIu3xEo28LiKtiVWHNZdPFNZrM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/sdZYmfP3J7AoWERidtaBAx23avP.jpg",
-    "source": "tv_popular",
-    "status": "Онгоинг",
-    "tmdbId": 67482
+    "overview": "Агент Министерства обороны Леон С. Кеннеди отправляется на задание по спасению доктора Антонио Тейлора от похитителей, но таинственная женщина мешает его преследованию. Тем временем агент B.S.A.A. Крис Редфилд расследует вспышку зомби в Сан-Франциско, причину которой не удаётся установить. Единственное, что объединяет жертв, это то, что все они недавно посещали остров Алькатрас. Следуя этой подсказке, Крис и его команда отправляются на остров, где их ждёт новый ужас.",
+    "poster": "https://image.tmdb.org/t/p/w342/mfvVnsJc48SCCHOHfUIwquhg451.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/7drO1kYgQ0PnnU87sAnBEphYrSM.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 1083862
   },
   {
     "id": "mal_55997",
@@ -341,27 +641,6 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1967/129099l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 8086374,
-    "tmdbId": 86374,
-    "ru": "Война миров",
-    "en": "War of the Worlds",
-    "year": "2019",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 7.26,
-    "votes": 907,
-    "poster": "https://image.tmdb.org/t/p/w342/dQepT0kyjKEOl5G5FWgdzhuJ9z.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/kri75jPdoOdaiZJ5p7AU4qEHTuL.jpg",
-    "overview": "Астрономы обнаружили передачу данных из другой галактики, что является очевидным доказательством разумной внеземной жизни. Жители земли ждут дальнейшего контакта, но им не придется долго ждать.",
-    "genres": [
-      "НФ и Фэнтези",
-      "драма"
-    ],
-    "source": "tv_top_rated"
   },
   {
     "id": "mal_49842",
@@ -1592,28 +1871,6 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 446893
-  },
-  {
-    "id": 8247518,
-    "ru": "Гротеск",
-    "en": "Grotesquerie",
-    "year": "2024",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.26,
-    "votes": 262,
-    "popularity": 7.2,
-    "genres": [
-      "драма",
-      "детектив",
-      "криминал"
-    ],
-    "overview": "Детектив и монахиня расследуют серию отвратительных преступлений, одновременно решая личные проблемы и раскрывая зловещую паутину, в которой больше вопросов, чем ответов.",
-    "poster": "https://image.tmdb.org/t/p/w342/jZjbkW0AA0icXzhiUI9V12TeUrO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/tUdqnpN03fQFWAe5O7d61O2lNkr.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 247518
   },
   {
     "id": "mal_60531",
@@ -11353,235 +11610,5 @@
     "poster": "https://image.tmdb.org/t/p/w342/eX6VvKcdwDfXgUsVAt9chO2UA6d.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/lyBNJn16WIHIriX1bJVoOnv8U6Z.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": "45162",
-    "ru": "Супермен/Бэтмен: Апокалипсис",
-    "en": "Superman/Batman: Apocalypse",
-    "year": 2010,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 772,
-    "popularity": 1.71,
-    "genres": [
-      "фантастика",
-      "боевик",
-      "приключения",
-      "мультфильм"
-    ],
-    "overview": "После того, как Бэтмен уничтожил криптонитовый астероид, а Супермен добился импичмента президента Лютора (события, происходившие в фильме «Супермен / Бэтмен — Враги Общества»), вроде всё должно бы закончиться, но…. Один из осколков криптонитового астероида падает в Готэмский Залив. Бэтмен, исследуя обломки, обнаруживает, что его катер пытаются угнать. Преследуя угонщика, он находит девушку с суперспособностями. Так начинается эта необычная история…",
-    "poster": "https://image.tmdb.org/t/p/w342/wxcejrj9P6aUCNFMaIs7jbMGxjS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/74H4XXU0q22TSrkPmlqkcWoX5ZZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_279",
-    "ru": "Requiem from the Darkness",
-    "en": "Kyougoku Natsuhiko: Kousetsu Hyaku Monogatari",
-    "year": 2003,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.1,
-    "votes": 10770,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Ужасы",
-      "Horror",
-      "Детектив",
-      "Mystery",
-      "Сверхъестественное",
-      "Supernatural",
-      "Жесть",
-      "Gore",
-      "Историческое",
-      "Historical",
-      "Мифология",
-      "Mythology",
-      "Психология",
-      "Psychological"
-    ],
-    "overview": "In an attempt to turn his floundering career around by compiling one hundred ghost stories, struggling author Momosuke Yamaoka roams through Edo-period Japan searching for material. During his travels, the young man wanders deep into the mountains, where he encounters a monk named Mataichi. Failing to heed the monk's advice to turn back, Momosuke presses forward and soon witnesses a murder carried out by Mataichi and his two associates. As it turns out, Mataichi's gang also investigates paranormal incidents—aiming to make those in the wrong pay the ultimate price.\n\nContinuing to seek out subject matter for his stories, Momosuke repeatedly crosses paths with the trio of outlaws, becoming increasingly involved in their schemes each time. As the author strays further toward the world of darkness, he grapples with both the morality of the group's actions and the line between humans and the supernatural.\n\n[Written by MAL Rewrite]",
-    "poster": "https://cdn.myanimelist.net/images/anime/2/30681l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "11044",
-    "ru": "Аризонская мечта",
-    "en": "Arizona Dream",
-    "year": 1993,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 768,
-    "popularity": 2.95,
-    "genres": [
-      "фэнтези",
-      "комедия",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Дядя Лео привык добиваться своего. А хочет он, чтобы племянник Аксель стал шафером на его свадьбе и работал в его фирме по продаже «кадиллаков». Аксель же ничего не хочет. Он предпочитает проводить время в компании своей возлюбленной, местной сумасшедшей Элен, и ее падчерицы Грейс, и вместе с ними предаваться мечтам. Влюбленная Элен мечтает летать как птица. Отвергнутая Грейс мечтает перевоплотиться в черепаху. Аксель мечтает о заснеженных просторах Аляски, где охотники-эскимосы ловят стрелозубых палтусов. Мечтает даже дядя Лео: построить бы целую гору из «кадиллаков» и забраться бы по ней на Луну…",
-    "poster": "https://image.tmdb.org/t/p/w342/fcYewAfn7IExMPAPR35dSfa50vn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/i4VUKbHE2XFwX5LRkTg3oRE9opN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "632617",
-    "ru": "Камон Камон",
-    "en": "C'mon C'mon",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 767,
-    "popularity": 1.32,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Радиожурналист Джонни отправляется с 9-летним племянником в поездку по Америке. Совместное путешествие навсегда изменит каждого из них.",
-    "poster": "https://image.tmdb.org/t/p/w342/o99QxlU2ichbp5HXekWjBf0sdI2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zs1I3ZFUDEWa5rFyph7OrMH1aJ9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "16553",
-    "ru": "Маленький Манхэттен",
-    "en": "Little Manhattan",
-    "year": 2005,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 764,
-    "popularity": 2.06,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Романтическая комедия для того, кому за ... одиннадцать. Любовь в столь юном возрасте - это почти Шекспир. Настоящее кино для семейного просмотра. Лишь одиннадцать лет от роду и ты влюбился впервые в своей жизни. Эту истину открывает для себя юный Гейб, влюбившийся в свою одноклассницу Розмари. Вообще-то он знал ее очень давно, но как и все остальные девчонки она не вызывала у него никакой симпатии. Все началось, когда их сделали спарринг партнёрами в секции карате.",
-    "poster": "https://image.tmdb.org/t/p/w342/nPseXWCmqYEdg2sCN40nw52nMk4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/f5XOH9b9oV7yzIqhKDEXtDx0uz9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "204436",
-    "ru": "Джек и механическое сердце",
-    "en": "Jack et la mécanique du cœur",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 759,
-    "popularity": 1.67,
-    "genres": [
-      "мультфильм",
-      "мелодрама",
-      "приключения",
-      "драма",
-      "фэнтези"
-    ],
-    "overview": "Джек родился в «самый холодный день», и его сердце мгновенно оледенело. Сироту усыновила волшебница Мадлен. Она вставила ему в грудь часы, поддерживающие сердцебиение, и наказала соблюдать три правила, самое главное из которых – «никогда не влюбляться». Однако подросший Джек невольно нарушает запрет.",
-    "poster": "https://image.tmdb.org/t/p/w342/yuovfjZu7AnRomjXG9SLECeMBKZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rjXK74vrvmFMN0vuFw3TViZ18Ha.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 132559,
-    "ru": "Семейка Крудс: Семейное древо",
-    "en": "The Croods: Family Tree",
-    "year": 2021,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 757,
-    "popularity": 8.24,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "Боевик и Приключения",
-      "комедия",
-      "Детский",
-      "Аниме"
-    ],
-    "overview": "Соперничающие с доисторических времён семьи Крудсов и Беттерманов учатся преодолевать разногласия жить вместе на самой прекрасной ферме.",
-    "poster": "https://image.tmdb.org/t/p/w342/5jo8VSbaM112fsBzPpR2A2hulLX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5QKGJ4nEjAq4TSTvhJw5PrNcIbu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "197082",
-    "ru": "Венера в мехах",
-    "en": "La Vénus à la fourrure",
-    "year": 2013,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 751,
-    "popularity": 1.1,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Весь день Тома проводил прослушивания, выбирая актрису для пьесы по знаменитому роману Леопольда фон Захера-Мазоха «Венера в мехах». Режиссер в отчаянии, пока не появляется Ванда — настоящий сгусток энергии, разнузданная и развязная. Она воплощает собой все, что Тома ненавидит: вульгарна, взбалмошна и не остановится ни перед чем, чтобы получить роль. Вдруг все, что так ненавидит Тома, начинает ему нравиться — актриса отлично подготовилась к прослушиванию. Удивление сменяется влечением, а затем и одержимостью этой женщиной.",
-    "poster": "https://image.tmdb.org/t/p/w342/jkZYVRj6bTLADUuSCCOxddFfnjA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9OZBgxriOtS0XgNgiQX4BhhkSVv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_66398",
-    "ru": "Diomedes, el Cacique de La Junta",
-    "en": "Diomedes, el Cacique de La Junta",
-    "year": 2015,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.2,
-    "votes": 748,
-    "popularity": 2.25,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dloUU6Qy5yDVIBd6EUhatBCiRsL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jeXcEHlAow5bkBtoNHQg9GajdVi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "9701",
-    "ru": "Северная страна",
-    "en": "North Country",
-    "year": 2005,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.2,
-    "votes": 740,
-    "popularity": 3.35,
-    "genres": [
-      "драма"
-    ],
-    "overview": "После того, как распался ее брак, Джози Эймс в поисках работы возвращается в свой родной город в Северной Миннесоте. У нее двое детей, и чтобы обеспечить их, она вынуждена устроиться на шахту, где трудятся практически все местные мужчины, в том числе и ее отец. Оказавшись одной из немногих женщин, работающих на шахте, Джози сталкивается с суровой реальностью. Мужчины, не терпящие конкуренции со стороны представительниц слабого пола, выдвигают им свои унизительные требования. И тогда Джози, пойдя на большой риск, решает обратиться в суд, чтобы защитить себя и своих подруг. В итоге это дело становится первым прецедентом в США, когда был удовлетворен иск о сексуальном домогательстве…",
-    "poster": "https://image.tmdb.org/t/p/w342/fwvgBlhh94u9EFmIMsTewEMP99U.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6rgiRuLHn65d3qalkc7YjrtmDQW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_9340",
-    "ru": "チェブラーシカ",
-    "en": "Cheburashka",
-    "year": 2010,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 7.2,
-    "votes": 732,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Комедия",
-      "Comedy"
-    ],
-    "overview": "The stop-motion animated film based on Russia's Cheburashka character.",
-    "poster": "https://cdn.myanimelist.net/images/anime/5/25871l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
   }
 ]

@@ -1,5 +1,194 @@
 [
   {
+    "id": 378340,
+    "ru": "Смерть - это сладкий сон",
+    "en": "Sanft schläft der Tod",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 12,
+    "popularity": 0.54,
+    "genres": [
+      "телевизионный фильм",
+      "триллер",
+      "драма"
+    ],
+    "overview": "Для Франка и Ани их летний отдых на Балтийском море обернулся кошмаром — когда они ненадолго сошли на берег, кто-то угнал яхту, на которой остались их дети. Полиция не может выйти на след похитителя, и у отчаявшихся родителей осталась одна надежда: отец Франка, бывший офицер Штази. 25 лет назад он расследовал похожий случай в этом городе. Похоже маньяк снова проявил себя в здешних краях.",
+    "poster": "https://image.tmdb.org/t/p/w342/qOWj6X5NMsFHqHn5jfCPdk8NZR9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dt10ZXcfmnouk3kS3oprzDpzlxC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 121876,
+    "ru": "花儿与少年",
+    "en": "花儿与少年",
+    "year": 2014,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.9,
+    "votes": 12,
+    "popularity": 18.23,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/s4WOcsEQ1pLjdKWEy7dcFDlWfI4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kIgzX0QdvK3vtaoHBpj9fUy7DP9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 529107,
+    "ru": "Inside 'Interstellar'",
+    "en": "Inside 'Interstellar'",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 12,
+    "popularity": 1.14,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xWA7Bbo9VeahPcKCFYiC7NZXNoV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/z7JUwll8F1BSVc8NjVGelW87mcU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 303967,
+    "ru": "나의 독재자",
+    "en": "나의 독재자",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 12,
+    "popularity": 0.7,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1poWm8oKIc0zlYupnHrEN4SH6Ow.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dsx0XGbYby2ZoBA9CcS74zc1GwN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 313371,
+    "ru": "All She Wishes",
+    "en": "All She Wishes",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 12,
+    "popularity": 0.64,
+    "genres": [
+      "комедия",
+      "фэнтези",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uwyvClqccWsilxCMbH3TDfAGPxJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/80VAmXBbeTqsRJ56ecKzYfouq66.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 412206,
+    "ru": "再見瓦城",
+    "en": "再見瓦城",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 12,
+    "popularity": 0.52,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/h8kaV5cSVs7G922UYULIU6PUz4I.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/12nKjOEt68hafwvKPJU9CIT4yK5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 455122,
+    "ru": "Allmen und das Geheimnis der Libellen",
+    "en": "Allmen und das Geheimnis der Libellen",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 12,
+    "popularity": 0.43,
+    "genres": [
+      "комедия",
+      "криминал",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bCmbfKZHoZqahQ49ita4pIOskxM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/r3FlESoR0jF6GtH4Xay3xVRoaxe.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 70002,
+    "ru": "Bubble Bee",
+    "en": "Bubble Bee",
+    "year": 1949,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 12,
+    "popularity": 0.41,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qp3lnM4fGdu3ZiUZH9JPBusQnxX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/phwUPMMSrj8Cil5OAvEiasCFmWz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 504993,
+    "ru": "Solar Walk",
+    "en": "Solar Walk",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.9,
+    "votes": 12,
+    "popularity": 0.31,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ko1tkpzecu6YcZTEWcNSWA27wzJ.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_42425",
+    "ru": "Плач Асуры",
+    "en": "アスラクライン",
+    "year": 2009,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.9,
+    "votes": 11,
+    "popularity": 7.21,
+    "genres": [
+      "Боевик и Приключения",
+      "мультфильм",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Томохару Нацумэ во всех отношениях обычный старшеклассник, за одним исключением: за ним постоянно следует призрак его погибшей лучшей подруги Мисао Минаками.\n\nПосле переезда в старый дом своего брата, Томохару решает начать жить нормальной жизнью. Но все его планы рушатся в тот день, когда таинственная незнакомка вручает ему закрытый чемоданчик. Томохару оставляет его на хранение, но вскоре об этом жалеет, когда за чемоданчиком в дом проникают якудза и какие-то религиозные фанатики. Спасаясь от пуль, Томохару открывает чемоданчик, и тут-то и начинается самое интересное.",
+    "poster": "https://image.tmdb.org/t/p/w342/9PMG7rbOMSbPSqWOuVVpCdO6usz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pGCKkACejNJ5rN710X09EOfRTxJ.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "tv_20565",
     "ru": "宇宙の騎士テッカマンブレード II",
     "en": "宇宙の騎士テッカマンブレード II",
@@ -10119,205 +10308,6 @@
     "overview": "Четверо героев страдают от проблем во взаимоотношениях со спутницами жизни, которые вовсю черпают советы из книги Стива Харви «Поступай как женщина, думай как мужчина». Узнав об этом, парни решают отомстить слабому полу тем, что попытаются опровергнуть данные в тексте рекомендации, ведя себя в точности наоборот.",
     "poster": "https://image.tmdb.org/t/p/w342/1otxHPVkt5Mg4e8LyjA8HXPg40u.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/cYsUnTpvRu6g4C5XjTTjboFtTYx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "236751",
-    "ru": "Небеса реальны",
-    "en": "Heaven Is for Real",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 884,
-    "popularity": 2.43,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Главный герой меняет свое мировоззрение после того, как его 4-летний сын выходит из комы и утверждает, что был в раю. В доказательство он приводит факты из жизни их семьи, которые просто не мог знать.",
-    "poster": "https://image.tmdb.org/t/p/w342/wkaDAIqnR1qDBoiZao9mENo8MEn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/11eRKCIIkRnGseeIlWlAqkbiHKl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_4515",
-    "ru": "Bannertail: The Story of Gray Squirrel",
-    "en": "Seton Doubutsuki: Risu no Banner",
-    "year": 1979,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.8,
-    "votes": 881,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Драма",
-      "Drama",
-      "Для детей",
-      "Kids"
-    ],
-    "overview": "Soon after birth a young squirrel comesc to a farm, and gets caught by a human. This human then tries to find him to their pet cat. However, the cat feels sorry for the squirrel and adopts him as their child and names the squirrel Banner. Banner and the cat live happily in the farm, but their happy lives don't last long. A fire destoys the farm, and Banner gets separated from his mother the cat. \n\n(Source: ANN)",
-    "poster": "https://cdn.myanimelist.net/images/anime/11/78448l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "tv_32754",
-    "ru": "Терра Нова",
-    "en": "Terra Nova",
-    "year": 2011,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.8,
-    "votes": 877,
-    "popularity": 6.42,
-    "genres": [
-      "НФ и Фэнтези",
-      "детектив",
-      "Боевик и Приключения"
-    ],
-    "overview": "2149 год. Земля перенаселена. Большинство растений и животных уже исчезли с её лица. Будущее человечества под сомнением, единственную надежду на выживание ученые видят в прошлом. Неожиданно обнаруженный ими пространственно-временной портал позволяет претворить в жизнь самый смелый план — переселить людей на 85 миллионов лет назад с целью повторного восстановления цивилизации. Семье Шеннонов выпадает честь присоединиться к десятому паломничеству переселенцев на Тerra Nova.",
-    "poster": "https://image.tmdb.org/t/p/w342/ckOsCVhiHa7M9dtd66LqIDjkZaw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3kz0Hp1sO7JnHFX8BzTokdxTuwY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "11879",
-    "ru": "Почти стемнело",
-    "en": "Near Dark",
-    "year": 1987,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 876,
-    "popularity": 2.72,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "Молодой парень знакомится с очаровательной девушкой, которая при ближайшем рассмотрении оказывается вампиршей. «Вампиризм» — болезнь заразная, и после страстного поцелуя парень постепенно тоже должен стать вампиром.  Девушка же, как оказалось, входит в целый вампирный клан, который разъезжает на стареньком фургончике по дорогам Техаса. Днем вампиры отсыпаются в мотелях, а по ночам выходят на «тихую охоту». Полиция против них бессильна, т. к. пуля их не берет: они боятся лишь солнечного света.  Вампиры готовы принять парня в свой клан, но для этого он должен сам убить свою первую жертву…",
-    "poster": "https://image.tmdb.org/t/p/w342/ifwKiDlHXoCyzJ6k6mOnurgaeYF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fLqhMfRyMySsqORn0xq7iFWRdcM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "450322",
-    "ru": "Необыкновенная история на Рождество",
-    "en": "The Man Who Invented Christmas",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 869,
-    "popularity": 1.38,
-    "genres": [
-      "драма",
-      "история",
-      "комедия",
-      "семейный"
-    ],
-    "overview": "После череды профессиональных неудач молодой писатель Чарльз Диккенс решает написать и на собственные средства выпустить «Рождественскую песнь».",
-    "poster": "https://image.tmdb.org/t/p/w342/mei0kT2dmRpMpHtLh5bNSEibpNy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hm8Gux0946IfeJ1PZwztOo6lVHH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "465003",
-    "ru": "Курорт для Ныряльщиков на Красном Море",
-    "en": "The Red Sea Diving Resort",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 864,
-    "popularity": 1.92,
-    "genres": [
-      "драма",
-      "триллер",
-      "история"
-    ],
-    "overview": "Невероятная операция агентов израильской спецслужбы \"Моссад\", которые в 80-х годах перевезли в Израиль тысячи эфиопских евреев.",
-    "poster": "https://image.tmdb.org/t/p/w342/chPfFYkwp4bEElvM6OmfosUWONz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7XI3DfxdQwvgXTCx29fglvcirQP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "10973",
-    "ru": "Тварь из Чёрной лагуны",
-    "en": "Creature from the Black Lagoon",
-    "year": 1954,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 860,
-    "popularity": 2.75,
-    "genres": [
-      "приключения",
-      "ужасы",
-      "фантастика"
-    ],
-    "overview": "Научная экспедиция отправляется в дебри Амазонки на поиски древних окаменелостей и сталкивается с обитателем Чёрной лагуны - доисторической рептилией.",
-    "poster": "https://image.tmdb.org/t/p/w342/euCzA2Exc70MpTDCVYih8tdE7z1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/31P56eY3GQOA0wTwiW0gzkJyhSG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "184352",
-    "ru": "Том на ферме",
-    "en": "Tom à la ferme",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 857,
-    "popularity": 1.0,
-    "genres": [
-      "драма",
-      "триллер",
-      "детектив"
-    ],
-    "overview": "Том — молодой парень, который потерял самого близкого человека в своей жизни, Гийома. Он очень сильно переживает эту утрату и, чтобы проститься с покойным, отправляется в его родную деревушку, далекую канадскую глубинку. По дороге он готовит прощальную речь, даже не подозревая о том, что ждет его впереди. Приехав в деревню, он находит дом матери Гийома, в котором она проживает вместе с его братом Франсисом. Убитая горем женщина совершенно ничего не знает об ориентации погибшего сына и свято верит в то, что у него были отношения с некой молодой девушкой по имени Сара. Под постоянным давлением Франсиса Тому приходится делать все возможное, чтобы сохранить тайну, но вскоре это приводит к большим неприятностям...",
-    "poster": "https://image.tmdb.org/t/p/w342/12V1gZlRJ51BvJHaiUJIylCu5gn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jv247hW6iebdNHwtt8fZdXjZwdV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "18937",
-    "ru": "Волшебный меч: Спасение Камелота",
-    "en": "Quest for Camelot",
-    "year": 1998,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 855,
-    "popularity": 2.36,
-    "genres": [
-      "фэнтези",
-      "мультфильм",
-      "драма",
-      "мелодрама",
-      "семейный"
-    ],
-    "overview": "Все то же царство Камелот, все тот же король Артур, все тот же легендарный меч Экскалибур, который похищает злой рыцарь Рубер. Храбрая девушка по имени Кейли отправляется на поиски меча, ведомая ослепшим юношей по имени Гаррет.  Они встречаются с забавным созданием — двухголовым драконом по имени Девон и Корнуол. Во время их волшебного и музыкального путешествия Кейли и Гаррет открывают для себя нескончаемую силу дружбы и отваги.",
-    "poster": "https://image.tmdb.org/t/p/w342/qD0tJQLTqMrkFzdZlhwlZ8fCGOK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/m58yUAi6CuHJ61eYGtSOaV996qn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "814776",
-    "ru": "Неудачницы",
-    "en": "Bottoms",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 850,
-    "popularity": 5.11,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Изгои Пи Джей и Джози создают бойцовский клуб, чтобы очаровать чирлидерш и лишится девственности до выпускного. По мере того, как клуб набирает обороты,  самые популярные девочки в школе начинают избивать друг друга во имя самозащиты, девочки оказываются в затруднительном положении, пытаясь найти выход из ситуации, прежде чем их план будет раскрыт.",
-    "poster": "https://image.tmdb.org/t/p/w342/ewFt9d71ZVNoSIc9pr7SwRzzOpg.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2sxiysM6O0FAxeR2CEIeKSv9IkA.jpg",
     "source": "tmdb"
   }
 ]

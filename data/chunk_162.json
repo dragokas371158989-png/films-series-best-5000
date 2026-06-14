@@ -1,5 +1,193 @@
 [
   {
+    "id": 1417285,
+    "ru": "ราคี",
+    "en": "ราคี",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 8.35,
+    "genres": [
+      "ужасы",
+      "триллер",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vPxVvwMduxySggqEyHpwQNtjbx6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s9kbcVd0PQCw2JPKo9C84ChP2x.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 289210,
+    "ru": "一见你就笑",
+    "en": "一见你就笑",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 7.68,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dLidSaIRBqKwu5mBBWla0noPmU4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7pocRZp6wDgJtYzxgztEN8UYdmn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 315371,
+    "ru": "사내에서는 정숙할 것",
+    "en": "사내에서는 정숙할 것",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 4.55,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/njrmxhBLfkeTIw0tbSlGdcx11Qc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yK9sj3YXZzVS2TNMHC3nGUpmWWM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 313732,
+    "ru": "스캔들러브",
+    "en": "스캔들러브",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 3.0,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hwBQuhP9ntGR7nUL5DOE1vgpwpe.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4hu8o22HPPqW2cBAqI8lL0L8Wfn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 297005,
+    "ru": "Celebrity Weakest Link",
+    "en": "Celebrity Weakest Link",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 2.72,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9zpo2Tcgm2EOyx0E3cyWgKn8crN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/euzlgl95XocL76FO9Q1MoUtxYLy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1294705,
+    "ru": "Kıyma: Orman Kanunları",
+    "en": "Kıyma: Orman Kanunları",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 2.49,
+    "genres": [
+      "комедия",
+      "криминал",
+      "боевик"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nEnulDyNyiEyov1iu0PtCzCnymn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hIM016a5ZBY9mRR7ZUQjwaiiZTe.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1668364,
+    "ru": "Deseo",
+    "en": "Deseo",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 2.34,
+    "genres": [
+      "драма",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5lJPvf7cJ2r2EiNrnvBVYpusKFM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5NoP8obTAXVPv6RcK5wGd2rVt8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1594520,
+    "ru": "True Justice: Eye For An Eye",
+    "en": "True Justice: Eye For An Eye",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 1.86,
+    "genres": [
+      "криминал",
+      "детектив",
+      "драма",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rcKD1DBuJzC8T35UD4KKFrXZI9n.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/pZixcjAW0s2dflNZGJ6zLFJuh9j.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1384380,
+    "ru": "Maryang Palad",
+    "en": "Maryang Palad",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 1.83,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xLo7kNzzLRdZ9u2J2KG7OvA8kfi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rYnOQ8epU4hZWq94aexKfQiY8Gx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1296778,
+    "ru": "痴人の愛 リバース",
+    "en": "痴人の愛 リバース",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.0,
+    "votes": 2,
+    "popularity": 1.61,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ohaNz7wOLoJ1JdjrQdXETtTWAIF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/d2rCqJAoL13snEvDsbGpTFQrqbb.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 766020,
     "ru": "Ivy & Mistletoe",
     "en": "Ivy & Mistletoe",
@@ -9075,194 +9263,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/53JQpaUA5ipLUO4aha1e8FyRkuW.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/28C2aZMkLxZXuHTtUxe9LdSqH7t.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 630892,
-    "ru": "메모리즈",
-    "en": "메모리즈",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.43,
-    "genres": [
-      "драма",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gp7qO3Ila5MA25Vfsfryg1dNQya.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lQ57NjNmCS3AHYm8CLCT321vui5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 522332,
-    "ru": "イブセキヨルニ",
-    "en": "イブセキヨルニ",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.43,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mwpehuz8J3fIUmb8pEoClCAwEhG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3L1bGLhw3ulhBwl9uGugEJFphLs.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 544148,
-    "ru": "만나게 해, 주오",
-    "en": "만나게 해, 주오",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.42,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aKW0JUzLMGKpdgfOmdUtcWeYGMv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nXlDJtj1igVchUmi75jmOVqgw5V.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 256458,
-    "ru": "신이 보낸 사람",
-    "en": "신이 보낸 사람",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.42,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bNgquNM3xmzf8u5nHFSOySkyVgW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/30NljEtGSuBOe76kEwNa3GM8HTU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 591263,
-    "ru": "Мне нужно лишь 7 дней",
-    "en": "换爱七日",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.42,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/q0XMPyHSjHaS6gA7kRnMxKqyuFc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6jqK56MZgpyoGd8D5TmBqWj7mDu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 437344,
-    "ru": "浪漫天降",
-    "en": "浪漫天降",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.4,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iWGdDMy3seNViiyi6jZBXvmCZYY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qEcBYdkm1Exhl9fGu5qNXOsCm5b.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 350722,
-    "ru": "Donizetti: L'Elisir d'Amore",
-    "en": "Donizetti: L'Elisir d'Amore",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.4,
-    "genres": [
-      "музыка",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qn8rh9kZTn0wMsaUrsbeF9LPs7o.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/AuF0D2ZL6GyxMSwmVpVuLI5sAJ1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1274262,
-    "ru": "宇宙戦艦ヤマト2199 第四章「銀河辺境の攻防」",
-    "en": "宇宙戦艦ヤマト2199 第四章「銀河辺境の攻防」",
-    "year": 2013,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.4,
-    "genres": [
-      "мультфильм",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/GRTz31qSnaX1O3x2T6DeUJ2Nwm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xPbOyocSKgvqyZfVNSYv8SQy0Pi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 346171,
-    "ru": "바캉스",
-    "en": "바캉스",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.39,
-    "genres": [
-      "комедия",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gabwS5qO9KdGeICTuEhbk6PGcyo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7Td9OicHXuz8FzfAmDGOj1bYKF0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1274275,
-    "ru": "宇宙戦艦ヤマト2199 第五章「望郷の銀河間空間」",
-    "en": "宇宙戦艦ヤマト2199 第五章「望郷の銀河間空間」",
-    "year": 2013,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.0,
-    "votes": 1,
-    "popularity": 0.39,
-    "genres": [
-      "мультфильм",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6K2Rip5ZipqdKavmoxreBrtE8fM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xPbOyocSKgvqyZfVNSYv8SQy0Pi.jpg",
     "source": "tmdb"
   }
 ]

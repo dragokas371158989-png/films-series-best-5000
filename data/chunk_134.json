@@ -1,5 +1,198 @@
 [
   {
+    "id": "52683",
+    "ru": "В самое сердце",
+    "en": "En plein cœur",
+    "year": 1998,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 32,
+    "popularity": 4.57,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Сесиль и Самира не могут заплатить за съем квартиры в Париже и решают добыть деньги другим путем. Девушки крадут кошелек богатого адвоката Мишеля, а затем собираются ограбить китайского ювелира, при этом Самира попадается. Сесиль должна найти адвоката. Она видит визитку Мишеля в бумажнике...",
+    "poster": "https://image.tmdb.org/t/p/w342/8qJp8Gs8S9VbU9iuCefS6C7wTdH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dctQtDIIP6068UVlFgmoinhAKkC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 333088,
+    "ru": "Чепуха",
+    "en": "Applesauce",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 32,
+    "popularity": 1.75,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Сложные отношения двух женатых пар ещё немного запутывает маньяк-психопат.",
+    "poster": "https://image.tmdb.org/t/p/w342/7wwsxlSZTCK9OOtcCLcopiWB3PK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7EKPqRKs1n7fLOf94fT1buS77Jm.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 62504,
+    "ru": "Черная работа",
+    "en": "Black Work",
+    "year": 2015,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.9,
+    "votes": 32,
+    "popularity": 1.29,
+    "genres": [
+      "криминал",
+      "драма",
+      "детектив"
+    ],
+    "overview": "Главная героиня Джо Гиллеспай служит в полиции, где трудился и её муж Райан, который с недавнего времени работал под прикрытием, но был застрелен при загадочных обстоятельствах. Джо пытается докопаться до истины и выясняет, что супруг шёл по следу недавно выпущенного из тюрьмы преступника, однако никто из вышестоящего начальства не берёт на себя ответственность за проведение операции, в коей участвовал Райан. Джо предстоит узнать на кого работал её покойный муж, и как-то справиться со свалившимся на неё горем.",
+    "poster": "https://image.tmdb.org/t/p/w342/rQVcQ61VfzQ6v16WIq7pB4OeHWb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/231CwAOIUwApgh8m3TC9xaBtokz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 459828,
+    "ru": "Пункт назначения: Свадьба",
+    "en": "Destination Wedding",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 32,
+    "popularity": 0.64,
+    "genres": [
+      "мелодрама",
+      "телевизионный фильм"
+    ],
+    "overview": "Элли Гамильтон тщательно планировала свадьбу своей сестры в течение долгого времени. Когда гости собираются на райском побережье, Элли встречается со своим бывшим бойфрендом Грегом и по совместительству шафером. Внезапно жених и невеста решают отменить свадьбу. Элли и Грег должны любой ценой успокоить гостей и помирить пару, а заодно и заново влюбиться друг в друга.",
+    "poster": "https://image.tmdb.org/t/p/w342/mSLJA6hRDxY6GtEfqSpBktLWVX5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3d4fjS1DN5ymzjKf9OstFXuYMbC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 67161,
+    "ru": "Микки Маус: Дом мечты Плуто",
+    "en": "Pluto's Dream House",
+    "year": 1940,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 32,
+    "popularity": 0.43,
+    "genres": [
+      "мультфильм",
+      "семейный"
+    ],
+    "overview": "Плуто давно мечтает о новой будке, и Микки решил порадовать своего приятеля. Во время работы они находят волшебную лампу, которая может исполнить любое их желание. Новая будка построена очень быстро. Волшебная лампа может все.",
+    "poster": "https://image.tmdb.org/t/p/w342/c6xNa8o3PIehG2rRLN0lIqtANoU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3oWOIf0xIhOtHHUUSt1VNfQPdff.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 347158,
+    "ru": "Bikini Avengers",
+    "en": "Bikini Avengers",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 32,
+    "popularity": 2.3,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ehTYWuPKwl8sXPX0I6LnvJUDaVl.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dhxWBxZNJRJSHUbZMjdibJtKgEw.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 532108,
+    "ru": "البدلة",
+    "en": "البدلة",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 32,
+    "popularity": 0.48,
+    "genres": [
+      "боевик",
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qYmdApNCqwDN6Q09NQeJBQPUAFs.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oKXLdkWsva7SoXF7KjKwn6weBdM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 305355,
+    "ru": "A Miser Brothers' Christmas",
+    "en": "A Miser Brothers' Christmas",
+    "year": 2008,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.9,
+    "votes": 31,
+    "popularity": 0.33,
+    "genres": [
+      "телевизионный фильм",
+      "мультфильм",
+      "семейный",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/buaDjwed0PAJyte7detsLUuLdI5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/x4rwSuhiY5TbkTyZbNTLy3qyQAc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 210218,
+    "ru": "Выгодное мошенничество",
+    "en": "이로운 사기",
+    "year": 2023,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.9,
+    "votes": 31,
+    "popularity": 3.18,
+    "genres": [
+      "драма",
+      "комедия",
+      "криминал"
+    ],
+    "overview": "Ли Ро Ум - гениальная мошенница с даром заговаривать людям зубы. Благодаря своему таланту девушка заработала целое состояние. Однажды судьба сводит ее с адвокатом Хан Му Ёном. Он, в отличие от Ли Ро Ум, очень внимателен к людям и их эмоциональному состоянию.",
+    "poster": "https://image.tmdb.org/t/p/w342/whxwgof7mT8DQ0QVkUad9bOLxLI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lCdiBW0x73zYvTArT82M6JDoeyL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1314129,
+    "ru": "Подготовка к следующей жизни",
+    "en": "Preparation for the Next Life",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.9,
+    "votes": 31,
+    "popularity": 1.12,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Айша — молодая уйгурская женщина, воспитанная в духе дисциплины и стойкости ее военным отцом. Покинув родные края, Айша оказывается в Нью-Йорке, где вынуждена работать на изнурительных кухнях китайского квартала, скрываясь в тени большого города и мечтая о лучшей жизни. Судьба сводит героиню со Скиннером — молодым американским солдатом, только что вернувшимся с трех туров службы на Ближнем Востоке. Оба несут в себе раны прошлого и тяжелый багаж переживаний, но их встреча становится началом совместного пути к исцелению.",
+    "poster": "https://image.tmdb.org/t/p/w342/8JbuKgQBc8KlXopF1eege54HNQ5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/a4bHIEPpXRSLp4b0sHRwHZeEOBx.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "tv_55216",
     "ru": "Scènes de ménages",
     "en": "Scènes de ménages",
@@ -9419,196 +9612,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/gkZjoJcroaUrbjK0TE49ysLCGf6.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/kSUdHE8eWcQydK0P6q9kQB4dK1M.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 486590,
-    "ru": "Polański, Horowitz. Hometown",
-    "en": "Polański, Horowitz. Hometown",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 6,
-    "popularity": 0.46,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qxteWaJcb7p8ocquRcBT1CW6IXm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rmbxXHYv8B9o5kRIc5cYNFTRQlt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 105315,
-    "ru": "Lauren Lake's Paternity Court",
-    "en": "Lauren Lake's Paternity Court",
-    "year": 2013,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.9,
-    "votes": 6,
-    "popularity": 7.25,
-    "genres": [
-      "Реалити-шоу",
-      "Ток-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/f2ba4FRCjfiDkcrBzk7kNusZtW5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mC6aXqRc7waSj7xJRA75CV0wHeP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 565885,
-    "ru": "வந்தா ராஜாவாதான் வருவேன்",
-    "en": "வந்தா ராஜாவாதான் வருவேன்",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 6,
-    "popularity": 0.87,
-    "genres": [
-      "драма",
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iZew5hsN6zKyOkBl2a0U5oqlkEO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ck7jY0CnSzQqTm1pjTtwt8AruI0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 622343,
-    "ru": "Open",
-    "en": "Open",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 6,
-    "popularity": 0.5,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zOYidyZTXkL0xyaZFESnfKJJcKo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3jgwFVNS3nWGsBj4bWwNdDND4P.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 48108,
-    "ru": "Bob the Builder: The Golden Hammer",
-    "en": "Bob the Builder: The Golden Hammer",
-    "year": 2010,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 6,
-    "popularity": 0.43,
-    "genres": [
-      "мультфильм",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/eaxVFjTmDGuFRqvlnGou4puO9D7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6dq1MWlxgUEMGrYa4PjpjlnMElH.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 328515,
-    "ru": "รัก ลวง หลอน",
-    "en": "รัก ลวง หลอน",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 6,
-    "popularity": 0.4,
-    "genres": [
-      "драма",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/vcPk2JTqs1BrL3ChgaXhQhOHYvz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5icyqLlfhsddYuhfNeEeZpee6Rh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 680027,
-    "ru": "Изменённая реальность",
-    "en": "Altered Reality",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 0.46,
-    "genres": [
-      "триллер",
-      "фантастика"
-    ],
-    "overview": "Жизнь Оливера Кука меняется, когда он встречает старого сторожа из своего прошлого Джека. Жизнь Оливера меняется благодаря чудодейственному лекарству, отмеченному инопланетными символами. Снадобье приносит ему богатство и исцеление, но обостряет семейные узы. Когда его дочь исчезает, богатство Оливера вовсе не утешает. Главный герой отправляется в путешествие, чтобы разгадать тайну исчезновения, сталкиваясь с моральными дилеммами и сверхъестественными силами.",
-    "poster": "https://image.tmdb.org/t/p/w342/agvfvfoF96sEHHkfCXLLJ93ZZ4V.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kBHBPB6xs4PaXDvUE9XAo8rZmFV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1215921,
-    "ru": "Last Train to Fortune",
-    "en": "Last Train to Fortune",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 1.49,
-    "genres": [
-      "драма",
-      "вестерн"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oqBHbggqRIPSD8VoezinVP26t0j.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8utNndo8XwsjrvcwSjGTPbcbc4R.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1618941,
-    "ru": "Mandioca Frita",
-    "en": "Mandioca Frita",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 0.66,
-    "genres": [
-      "комедия",
-      "драма",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/niDeR6vC7mQka0rHzfNmKn8EmPk.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/weIyeX9vednnENyqMiA8H9dQIIh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 865471,
-    "ru": "శ్రీదేవి సోడా సెంటర్",
-    "en": "శ్రీదేవి సోడా సెంటర్",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.9,
-    "votes": 5,
-    "popularity": 0.58,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/o34lCbdb4vq15JsJN8vGt2vrBDo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4pIJME4gk1dpLrashNSncF1d8P8.jpg",
     "source": "tmdb"
   }
 ]

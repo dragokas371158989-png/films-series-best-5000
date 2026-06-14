@@ -1,5 +1,192 @@
 [
   {
+    "id": 815306,
+    "ru": "Vocación sexo",
+    "en": "Vocación sexo",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.3,
+    "votes": 3,
+    "popularity": 1.21,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/26ggqmAn65XTO6qYsT6wefspnCQ.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 841225,
+    "ru": "La esposa de mi jefe",
+    "en": "La esposa de mi jefe",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.3,
+    "votes": 3,
+    "popularity": 0.67,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/keAxPZvpUY9mcXuAsDjBbnm2fpQ.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 614365,
+    "ru": "A.I. 187",
+    "en": "A.I. 187",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.3,
+    "votes": 3,
+    "popularity": 0.6,
+    "genres": [
+      "фантастика",
+      "фэнтези",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wNcTkJ38MyCaU7KvMH3C3LcMDmv.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 340216,
+    "ru": "Echo Lake",
+    "en": "Echo Lake",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.3,
+    "votes": 3,
+    "popularity": 0.48,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/j5lEgUTfjhd6b82hcNvG7G8Imwc.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 331579,
+    "ru": "Цена желания",
+    "en": "The Price of Desire",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.3,
+    "votes": 3,
+    "popularity": 0.46,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/79Ws63I4mIiiIXXONdXbAqHqsYP.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 841220,
+    "ru": "Como burro en primavera",
+    "en": "Como burro en primavera",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.3,
+    "votes": 3,
+    "popularity": 0.43,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gI7fLxDmuVQ9PNAto5UhLuQDHPX.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 10,
+    "ru": "All in Good Faith",
+    "en": "All in Good Faith",
+    "year": 1985,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 2.2,
+    "votes": 70,
+    "popularity": 1.2,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/h9qveCyL3m6tNOrdhUabZk7khKt.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 556485,
+    "ru": "Крымский мост. Сделано с любовью!",
+    "en": "Крымский мост. Сделано с любовью!",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 14,
+    "popularity": 0.56,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Жаркое лето и ласковое море — в Керчи строится Крымский мост. У Димы — молодого и дерзкого строителя — есть хобби: из каждой смены студенток-археологов выбрать самую красивую и именно ее завоевать. И в этот раз случилось бы так же, если бы не московский пиарщик. Он привез на стройку телевизионщиков из Америки, и, конечно, именно он — роскошный карьерист на белом кабриолете — покорит сердце Вари. Или нет? Пока два соперника наперегонки очаровывают её, горячий кавказец Берик (по паспорту Бернард!) пытается реализовать свою мечту — жениться на американке и уехать в Голливуд.",
+    "poster": "https://image.tmdb.org/t/p/w342/j97EPjQj6APoWbLxDkykN2m78wK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nWUjEWytw4mr9BEkiPhIxof4034.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1225048,
+    "ru": "Sağ Salim 3: Ölü ya da Diri",
+    "en": "Sağ Salim 3: Ölü ya da Diri",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 8,
+    "popularity": 0.75,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/jeLgDRs67kCsmNcRC5mOqQtW1qI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wFXlMaudoW0XmNwZ5OmTT0xSHHe.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 952733,
+    "ru": "Quartz Vein",
+    "en": "Quartz Vein",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 2.2,
+    "votes": 5,
+    "popularity": 1.68,
+    "genres": [
+      "ужасы",
+      "комедия",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pjBgYNsHpREvBQ1tFcyj976QDiq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sMtFvcLT7eaNC2dNyG0LpXg2y0H.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1135718,
     "ru": "Bugaw",
     "en": "Bugaw",
@@ -9083,196 +9270,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/yt5HBLGEICkQ8EDSuRtqzJqLrKe.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/e38OItOSqwdQGBr3Bu5rjxBkJXy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 827662,
-    "ru": "Lone Wolves",
-    "en": "Lone Wolves",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 1.79,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4NIZQl1CEBLPvT4YL6RJxDOHCfN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/g1PeF8NidsQkIVbpJx1D0mAc5Gk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 482007,
-    "ru": "스캔들 3",
-    "en": "스캔들 3",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 0.96,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lXjhl6SSvXILjXQwgxxWmdTLi6K.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4zjmHWy7PwhU7X0JKkfqmXPONmF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 409166,
-    "ru": "하고 싶은 날",
-    "en": "하고 싶은 날",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 0.76,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3OyqUryslM080WN9pFuovrxgiGl.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/b7BcJnsNo8hRgPtwAcXUyx2jdOh.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 706729,
-    "ru": "スケベ研究室 絶倫強化計画",
-    "en": "スケベ研究室 絶倫強化計画",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 0.69,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3oeMeb3LglHX2c2llT8sp0mtWye.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jkxtqbDN9BIQp8ziy9n3BWxnqk4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 277397,
-    "ru": "Городские игры",
-    "en": "城市游戏",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 0.66,
-    "genres": [
-      "боевик",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3FpMmEmbCpMjxzkUZp8YeKWgvRc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1eWuSilTSwzvmaFYF0wGF31lepv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 497652,
-    "ru": "Bachelor Lions",
-    "en": "Bachelor Lions",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 0.65,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/x5zcQN2wzhocK8kbTcE2hRWTfnh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rikX9IQbWHdmZLb2qhbaZ5tD5n6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 602287,
-    "ru": "மார்க்கெட் ராஜா MBBS",
-    "en": "மார்க்கெட் ராஜா MBBS",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 0.63,
-    "genres": [
-      "комедия",
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3NblkZMUwCeVS4uoSo66LFI3O5f.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tAH8AMrTqJ0qynWHNxWNZjnJgZu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 855148,
-    "ru": "博多弁の女の子はかわいいと思いませんか？",
-    "en": "博多弁の女の子はかわいいと思いませんか？",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 0.55,
-    "genres": [
-      "комедия",
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yLhuGDbyatyReBtvq2OfnvVR6da.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/huFpeD3wWQ1ReG2jNPdsB2C1buR.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 460549,
-    "ru": "செம",
-    "en": "செம",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 0.48,
-    "genres": [
-      "боевик",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/avt99HU2fdgTO15T5njb1XGxLE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nwufuHoVEhLPmzUcsBUWbXN28p8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 927711,
-    "ru": "The Matadors",
-    "en": "The Matadors",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 1.5,
-    "votes": 2,
-    "popularity": 1.71,
-    "genres": [
-      "боевик",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xLohASMD57zk4ocE0JHUt0uubeH.jpg",
-    "backdrop": "",
     "source": "tmdb"
   }
 ]

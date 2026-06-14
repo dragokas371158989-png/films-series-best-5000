@@ -1,5 +1,206 @@
 [
   {
+    "id": 330980,
+    "ru": "Кладовка",
+    "en": "Box Room",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 12,
+    "popularity": 1.44,
+    "genres": [
+      "фантастика",
+      "драма",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nQK0m0n6yVlL3oLkUt5ZI1w6fnG.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 161579,
+    "ru": "Bosko's Store",
+    "en": "Bosko's Store",
+    "year": 1932,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 12,
+    "popularity": 0.29,
+    "genres": [
+      "комедия",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/A83aCcZYj1WR4uMxCmD4G0AbgCL.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_108952",
+    "ru": "Доктор Рамунэ — специалист по таинственным болезням",
+    "en": "怪病医ラムネ",
+    "year": 2021,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 3.8,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "детектив",
+      "Аниме"
+    ],
+    "overview": "Пока внутри грубой человеческой оболочки бьётся горячее сердце, люди обречены страдать. Однако если их страдания начинают переваливать через край, а в сознание вливается нечто «странное», то у человека может развиться неизвестная и, что самое ужасное, неизлечимая болезнь. Пусть большинству людей и даже врачей об этом неведомо, однако существование таких недугов бесспорно. К счастью, есть в мире доктор, который на пару с учеником борется с болезнями, которые неподвластны современной медицине. Зовут этого удивительного доктора — Рамунэ.\n\nКонечно, с первого взгляда на этого шумного любителя сквернословить, у которого постоянно ветер в голове, и не скажешь, что он — доктор. Но несмотря на сомнительный внешний вид, столкнувшись с загадочной болезнью, Рамунэ способен в одно мгновение раскусить первопричину недуга и спасти страдальца и от физической боли, и от душевных терзаний.",
+    "poster": "https://image.tmdb.org/t/p/w342/ibfBezO7X4BMsm3Vtfg22WPTj1i.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m3FukCUFSGdlrcD218wcIDMqhZX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_128510",
+    "ru": "Истинная сила тысячи",
+    "en": "真・一騎当千",
+    "year": 2022,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 2.68,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Боевик и Приключения",
+      "Аниме"
+    ],
+    "overview": "Запечатанный в древних драгоценностях дух героев, которые безуспешно попробовали объединить Китай в эру Троецарствия. Эти драгоценности были рассеяны всюду по Японии, они могут развить полный потенциал тех, кто их унаследует. Однако, владельцы, известные как Тоуши, охвачены жаждой страсти к сражениям. Хакуфу Сонсаку является одной из таких бойцов. Желание Хакуфу избить кого-либо до полусмерти маловыполнимо, пока ее мать не отправляет в Токио, где Хакуфу начинает обучение с другими Тоуши и вступает на путь к своей судьбе.",
+    "poster": "https://image.tmdb.org/t/p/w342/816zU3IELJlkmRqPt91uu9ty1Qf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qCrfz18gF0SLsE7VlHqLk1GGoHW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_24411",
+    "ru": "Он мой хозяин",
+    "en": "これが私の御主人様",
+    "year": 2005,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 3.59,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "14-летний юноша после смерти своих состоятельных родителей в автокатастрофе становится миллионером. У него есть все что необходимо - много денег, роскошный особняк, огромная территория. Вот только беда - его некому обслужить. Поэтому Ёситака публикует объявление о поиске горничной. На это объявление отозвались две юные сестры - Идзуми Мицуки, которые сбежали из родительского дома из-за того, что им не разрешали держать любимого крокодильчика. Вскоре в доме становится на одну горничную больше. Её является Анна Кураути - одноклассница Идзуми. Но на этом все не заканчивается...",
+    "poster": "https://image.tmdb.org/t/p/w342/mPh1xjeTOd1YXkCIQDRFIxFMlh1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vauTj05XNjSz8hwA2gGHWce0UDp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_83102",
+    "ru": "Девичьи воздушные силы",
+    "en": "ガーリー・エアフォース",
+    "year": 2019,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 3.1,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "драма",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Нарутами Кэй - юноша, полный решимости отомстить за смерть своей матери, грезит поступлением в летные войска, что очень ранит его сестренку Сон. Кроме Кея у неё больше никого не осталось. И во всём виноваты Дзаи - летательные аппараты внеземной цивилизации, атаку которых военные едва в силах сдерживать. Будущее всего человечества зависит от смелой, волшебно-красивой и абсолютно нестабильно обжоры Грипен. Она создана для полетов, но пустота внутри неё не дает собраться ни с мыслями, ни с силами. Сможет ли Кей заполнить эту пустоту и спасти мир? Ведь, однажды, у него уже получилось помочь ей взлететь...",
+    "poster": "https://image.tmdb.org/t/p/w342/hyvkoYUgfMu4PMvd4HaswbeHp6k.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/h28TcKAcUmZVK9Tq2WF14hSdJn8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "34772",
+    "ru": "SIN: Создатели монстров",
+    "en": "Sin: The Movie",
+    "year": 2000,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 1.14,
+    "genres": [
+      "мультфильм",
+      "фантастика",
+      "ужасы",
+      "боевик",
+      "триллер",
+      "Аниме"
+    ],
+    "overview": "Мегаполис Фрипорт балансирует на грани криминального коллапса. Единственная сила, не позволяющая огромному городу рухнуть в пучину полного беззакония — отряд специального назначения «Хардкорпс», возглавляемый полковником Джоном Блейдом. Под его командованием оперативники противостоят коррупционерам и убийцам, маньякам и хакерам-виртуозам.\r Расследование серии таинственных похищений выводит Блейда на руководство «Sintek» — влиятельной транснациональной корпорации. Глава «Sintek» Элексис Синклер напрямую связана с экспериментами в области биохимии, результат которых может помочь человечеству выйти на новый виток эволюции — или приведет весь мир к уничтожению…",
+    "poster": "https://image.tmdb.org/t/p/w342/5pzbXzP7KAiwgrnrCbrxjQaNBP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gsXBBl4E4VzFcf0sG5cUeZ6ZzHA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 279116,
+    "ru": "Смерть Банни Манро",
+    "en": "The Death of Bunny Munro",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 1.46,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Банни Манро - продавец косметики, сексоголик и женоненавистник - после самоубийства жены остается один с 9-летним сыном. Их посещают дамы из опеки и пытаются забрать мальчика. Отец с сыном сбегают и отправляются в безумное автомобильное путешествие по Южной Англии, где орудует серийный убийца… «Смерть Банни Манро» снята по одноименному роману, который написал музыкант и лидер группы Bad Seeds Ник Кейв",
+    "poster": "https://image.tmdb.org/t/p/w342/enarhiECET5jXpvdzq7tweeP7FW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ogi8uZCaW17tmz5uOQkUoxXKVSX.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1008445,
+    "ru": "Пророк. История Александра Пушкина",
+    "en": "Пророк. История Александра Пушкина",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 0.66,
+    "genres": [
+      "мелодрама",
+      "музыка"
+    ],
+    "overview": "Пушкин молод, дерзок и любим публикой: он звезда любого бала, поклонники носят его на руках, а девушки мечтают о его внимании. Но ни высокие покровители, ни верные друзья, ни известность не могут отвести от него злой рок — ссылки, дуэли, безденежье. Пока однажды он не встречает ту самую, единственную, кто осветит его жизнь и станет его судьбой. Судьбой гения, которого нам только предстоит по-настоящему узнать.",
+    "poster": "https://image.tmdb.org/t/p/w342/u1c7hlPdCFMUOe77Ttee3UVLjRD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mdFrkufYmXcoohvFxvoALidSqJ1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1025881,
+    "ru": "Бобби Моретти. Человек, победивший себя",
+    "en": "Bobcat Moretti",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 11,
+    "popularity": 0.5,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Год назад мир Бобби рухнул. После страшной трагедии мужчина совсем себя запустил, у него диагностировали ожирение, а жуткие головные боли окончательно его подкосили. Устав от ничтожной жизни, Бобби увольняется с работы и переезжает в Лос-Анджелес, город своего детства. Судьба приводит его в спортзал, где командует решительная тренерша Джо. Мужчина просит её о работе, но получает нечто большее — шанс изменить свою жизнь. Теперь ему придётся вкалывать в две смены: днём — обычным уборщиком, по вечерам — начинающим боксёром. Тело его не слушается, болезни не отступают, но Бобби должен себя победить.",
+    "poster": "https://image.tmdb.org/t/p/w342/l15McluvTOGQYgpYfE3FlFMyUHU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eP3LmZUUvIrEBtB1OcdzPawg0nd.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 579879,
     "ru": "Северный ветер",
     "en": "Северный ветер",
@@ -9278,195 +9479,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/74jk95qeI7dwFDLwWK8fHv4CM8m.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/yYrR9GvseonljlONiiI3ltPE7kL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 323389,
-    "ru": "スクライド オルタレイション QUAN",
-    "en": "スクライド オルタレイション QUAN",
-    "year": 2012,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.66,
-    "genres": [
-      "боевик",
-      "приключения",
-      "мультфильм",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5SXsjB8juFWaW4zabzt7W4PXEE2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kFfcfyeAGoTjoVB0cvfAT7B8w07.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 390292,
-    "ru": "방 안의 코끼리",
-    "en": "방 안의 코끼리",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.65,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rEm3K8yHxyc48NLXKWvpPNvX7Ef.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wtoTeZsewceR11Uc1M7d7un851Z.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 440710,
-    "ru": "The Spiritualist",
-    "en": "The Spiritualist",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.64,
-    "genres": [
-      "драма",
-      "ужасы",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lWLq1LBRiAykvemJHp22cZhFiV7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iLhxlBqleMDx8RRUqX97JGjXgkE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 354433,
-    "ru": "劇場版 とっとこハム太郎 ハムハムランド大冒険",
-    "en": "劇場版 とっとこハム太郎 ハムハムランド大冒険",
-    "year": 2001,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.64,
-    "genres": [
-      "семейный",
-      "фэнтези",
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dMYSAuTJcrmPmdnrJoQ5nMQMpFf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xE2ST7XApVZpwzUMiIpB9lErNqN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 635258,
-    "ru": "Historias de nuestro cine",
-    "en": "Historias de nuestro cine",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.62,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/As15agSHd6WmBCGd9EmRPb69S4W.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lHF3s2UQ6PUhvZ7iB1pVZnTFP4H.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 267484,
-    "ru": "피해자들",
-    "en": "피해자들",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.62,
-    "genres": [
-      "триллер",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gCUaFvAHFkiiccM1HrxLPAZChSs.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/94QfinFRziJYmfkg7tiLBYKjYwM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1496993,
-    "ru": "メガゾーン23 III",
-    "en": "メガゾーン23 III",
-    "year": 1989,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.62,
-    "genres": [
-      "мультфильм",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uKsPClvdzVLCI7p90KYYyMWfvGG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yY2XjhhKaVbDHFCcNVF0NCfGOtT.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 980326,
-    "ru": "惑星ロボ　ダンガードＡ対昆虫ロボット軍団",
-    "en": "惑星ロボ　ダンガードＡ対昆虫ロボット軍団",
-    "year": 1977,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.62,
-    "genres": [
-      "мультфильм",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dwgBs7NJ0vYehyRjK9CmKirIKzA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zPgb7ggjpgSNzGETFUngnBDyu08.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1092238,
-    "ru": "젊은엄마네 하숙집",
-    "en": "젊은엄마네 하숙집",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.59,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hCV7YynvZ7wHgxiRusn2typNN0T.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cc0Ka7ijNfzZnHsrr3Y7MzJHdDi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 616974,
-    "ru": "Partenonas",
-    "en": "Partenonas",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.5,
-    "votes": 2,
-    "popularity": 0.58,
-    "genres": [
-      "драма",
-      "криминал",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fmGnujCZZ4AvaG1pMCvIHYZh72m.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eXAvzHsKcUDz2z42dkTw4KkmPGL.jpg",
     "source": "tmdb"
   }
 ]

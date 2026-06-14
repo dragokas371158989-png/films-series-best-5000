@@ -1,5 +1,196 @@
 [
   {
+    "id": 279661,
+    "ru": "Убийственные легенды",
+    "en": "Killer Legends",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 79,
+    "popularity": 0.45,
+    "genres": [
+      "документальный",
+      "история",
+      "криминал",
+      "ужасы"
+    ],
+    "overview": "Документальный фильм о происхождении наиболее ужасающих городских легенд и настоящих историях, которые легли в их основу.",
+    "poster": "https://image.tmdb.org/t/p/w342/hRJQDcEX78PSpSnFKNDsVm6MGNE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4BSwmhvoS9BOn6wz88gUp4GLVSc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 612701,
+    "ru": "Frankenstein's Monster's Monster, Frankenstein",
+    "en": "Frankenstein's Monster's Monster, Frankenstein",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 79,
+    "popularity": 0.77,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aVrXQAk0lIRw123EghPfNlludjU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fWBmMHi7ukR8pYmbBfPERjzdZwS.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 565373,
+    "ru": "Коко-ди Коко-да",
+    "en": "Koko-di Koko-da",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 78,
+    "popularity": 0.47,
+    "genres": [
+      "ужасы",
+      "комедия",
+      "фэнтези"
+    ],
+    "overview": "Молодая пара отправляется в путешествие по живописным местам. В лесу они встречают артистов цирка, которые устраивают им забавные игры, терроризируя супругов. Снова и снова они вынуждены проживать этот день, чтобы найти выход и разорвать порочный круг.",
+    "poster": "https://image.tmdb.org/t/p/w342/dbepGfMVV8teOrQwnuGHq090hW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dxe4F1ZOiwNNIiHBZNhgOZ2jNhJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 415962,
+    "ru": "My Christmas Dream",
+    "en": "My Christmas Dream",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 78,
+    "popularity": 0.58,
+    "genres": [
+      "телевизионный фильм",
+      "мелодрама",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/jCrE3Twc7PeLev4sCHkMtOPdrA5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/x74bdNj7uwpyUZPOhrldDUJvINe.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 428886,
+    "ru": "Англия принадлежит мне",
+    "en": "England Is Mine",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 76,
+    "popularity": 0.96,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Фильм о начале творческого пути певца Моррисси и группы The Smiths.",
+    "poster": "https://image.tmdb.org/t/p/w342/ue3Zh4YRyJgQXj39tq8smr0iqOa.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xRZk37nylCe0BzsbGCxUHF0PRKf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 337104,
+    "ru": "Хроник",
+    "en": "Chronic",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 76,
+    "popularity": 0.78,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Дэвид — медработник, который ухаживает за неизлечимо больными пациентами. Умелый и заботливый труженик, он устанавливает доверительные отношения с каждым человеком, о котором заботится. Но вне своей работы Дэвид — неловкий и закомплексованный человек. И он нуждается в каждом своем пациенте так же, как они в нем...",
+    "poster": "https://image.tmdb.org/t/p/w342/Ap5UKMteI276JS0ZNy4PMjLfzJ3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bJxYeQiwXQNZIzfJZiVJVwfF26f.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 270920,
+    "ru": "Бодибилдер",
+    "en": "Bodybuilder",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 76,
+    "popularity": 0.58,
+    "genres": [
+      "драма",
+      "комедия"
+    ],
+    "overview": "Антуан Морель – из тех парней, что вечно концентрирует вокруг себя проблемы. Он связался с бандой головорезов, и теперь должен им кругленькую сумму. Бандиты ворвались в квартиру Антуана и разгромили ее. К счастью, самому Морелю удалось бежать и спрятаться в интернет-кафе, где он остался незамеченным. Мать Антуана устала от выходок своего непутевого сына – она и так два года копила деньги, чтобы выплатить его долги. Ей надоело покрывать преступника, и она настоятельно просит его наконец-то устроиться на работу и дать ей спокойно пожить.",
+    "poster": "https://image.tmdb.org/t/p/w342/1aXOKgOE2F8u8mpdCzEJaOOMuko.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ncwtRlZqSPhAK4RRrHjVjgd48mW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1146556,
+    "ru": "Сеанс в 16:30",
+    "en": "The 4:30 Movie",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 75,
+    "popularity": 0.99,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Лето 1986-го года. Трое шестнадцатилетних друзей каждую субботу, тайком пробираются в местный кинотеатр чтобы бесплатно смотреть фильмы. Но когда один из парней приглашает еще и девушку своей мечты на поздний сеанс комедии с рейтингом «для взрослых», каждый из подростков узнает больше о жизни и любви.",
+    "poster": "https://image.tmdb.org/t/p/w342/aUHSCf2xyUJUQKI7anJP0jpDXnG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ptnpsXfZSbNtBHayFXqqW4hV8UL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 467342,
+    "ru": "Гибель: Лос-Анджелес",
+    "en": "Destruction: Los Angeles",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 75,
+    "popularity": 0.85,
+    "genres": [
+      "боевик",
+      "приключения"
+    ],
+    "overview": "Смертельно опасное извержение вулкана и сильнейшее землетрясение сотрясают Лос-Анджелес и убивают его жителей. Лучший репортер новостей города Джон Бенсон хватается за шанс рассказать историю разрушения города изнутри и старается найти потерянных во время стихийного бедствия родных.",
+    "poster": "https://image.tmdb.org/t/p/w342/sJRMIihUYyT06pUIPg9sRkJF9kz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sS6b7phk6X9lT5Nds8Akibl69vH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 36075,
+    "ru": "Счастливое удовольствие убийцы",
+    "en": "女虐 悪魔の悦び",
+    "year": 1996,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.8,
+    "votes": 75,
+    "popularity": 2.65,
+    "genres": [
+      "ужасы",
+      "фантастика"
+    ],
+    "overview": "Ученый оскверняет научный эксперимент своей матери своим собственным наркотиком, который превращает боль в приятный опыт. К сожалению, для трех женщин, участвующих в эксперименте, препарат работает слишком хорошо.",
+    "poster": "https://image.tmdb.org/t/p/w342/vu0XKRxGVucazlhagpGqlq8gU2U.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s1PvYipppwcbge4n69rThiMSLg0.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 574078,
     "ru": "История моей жены",
     "en": "A feleségem története",
@@ -9473,207 +9664,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/pVh1kb32ZLqdyxOuHPjPZgrlrYM.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/1dBh3ZlWYMho0WyywlGM3rpYvbZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 2559,
-    "ru": "Boon",
-    "en": "Boon",
-    "year": 1986,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.8,
-    "votes": 15,
-    "popularity": 7.59,
-    "genres": [
-      "комедия",
-      "драма",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xjbb4DLt9dnjNvSFWAy3rNZQZJU.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eDx5illyQDGzGFmMOvBbfw1enZ4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 314555,
-    "ru": "Melody",
-    "en": "Melody",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 15,
-    "popularity": 1.93,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6esZiKLWaoLp3HOPRG54HRVkTW9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9eVAJ4Ulpy6es0GXNaJPXk3zxta.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 417935,
-    "ru": "جحيم في الهند",
-    "en": "جحيم في الهند",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 15,
-    "popularity": 0.97,
-    "genres": [
-      "комедия",
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/DKoqZtDW4fqiIjWxc5kfVbzRUf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8Wc3jZQeI9a40knaa6fOjPTvJQg.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 373541,
-    "ru": "Dark Awakening",
-    "en": "Dark Awakening",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.8,
-    "votes": 15,
-    "popularity": 0.65,
-    "genres": [
-      "ужасы",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iTeBZr2FH8J4nBqoIxMNuApN7aK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5PmnwPvpR9iFQfnnUZt6hjIuSjC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_157879",
-    "ru": "3秒後、野獣。〜合コンで隅にいた彼は肉食でした",
-    "en": "3秒後、野獣。〜合コンで隅にいた彼は肉食でした",
-    "year": 2022,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 17.83,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9LnfZfpFEYsOP3THUz1uszExGyf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pXPR5qBQbCa5WDASnirTO8PpEXk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 77437,
-    "ru": "Любовная песня одного пилота",
-    "en": "とある飛空士への恋歌",
-    "year": 2014,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 6.14,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "драма",
-      "НФ и Фэнтези",
-      "Аниме"
-    ],
-    "overview": "История разворачивается вокруг Карла Ла Гира — бывшего наследника империи Баллестерос, который потерял всё в ходе «Ветряной революции».\n\nОднажды ему предлагают отправиться в путешествие на Ислу. Узнав о том, что там же будет и Нина Виенто, из-за которой, собственно, и началась революция, он соглашается и отправляется в путешествие без каких-либо гарантий на возвращение домой в целости и сохранности.\n\nНенависть и жажда мести затмили разум нашего героя, но, как и в любой истории, на пути ему встречаются люди, которые, возможно, научат принца тому, что такое дружба... и любовь.",
-    "poster": "https://image.tmdb.org/t/p/w342/dWAzWXJX5Cf5Loylbdofx8cjgRp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rM6p0nimum40kWRZTGcK8XZtvxX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "268998",
-    "ru": "Зимние каникулы Пикачу 2000: Игры на льду",
-    "en": "ピカチュウのふゆやすみ２０００",
-    "year": 1999,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 1.78,
-    "genres": [
-      "мультфильм",
-      "приключения",
-      "комедия",
-      "семейный",
-      "Аниме"
-    ],
-    "overview": "Ребята оставляют своих покемонов в домике, который покемоны, как ни странно, не раздолбали.",
-    "poster": "https://image.tmdb.org/t/p/w342/xKpaul4cXgQJH6wt5H3WrJp71UJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8DD4uAkADPW4fSUFfoEXmFnOqS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "211814",
-    "ru": "Привал Пикачу",
-    "en": "ピカピカ星空キャンプ",
-    "year": 2002,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 1.0,
-    "genres": [
-      "мультфильм",
-      "приключения",
-      "комедия",
-      "семейный",
-      "Аниме"
-    ],
-    "overview": "Братья Пичу свалились с поезда, на котором должны были приехать домой. Упали они, разумеется, на Пикачу и ко. А те, разумеется, решили помочь им вернуться на поезд.",
-    "poster": "https://image.tmdb.org/t/p/w342/1jBC6aXXrv73omHwrDoxMKOvWpO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fnQBKKNsNo7qKDPlAyUTo6uI51I.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "85792",
-    "ru": "Капля",
-    "en": "しずく",
-    "year": 1965,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 0.18,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2GpKZlqszB7c7FjOBwpIGK1cBvB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tHQmbpaBr1jVZBhLwMMfvvxXNYv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 278011,
-    "ru": "Платоническая любовь",
-    "en": "Platonik",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.8,
-    "votes": 14,
-    "popularity": 1.05,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "\"Платоническая любовь\" — это искрометная комедийная мелодрама из Турции, в центре которой — несокрушимые узы между сестрами Гюльтен и Недрет. Эти две женщины разделяют всё — от секретов до семейных историй, кажется, никакие испытания не в силах разлучить их. Однако приход в их жизнь амбициозного и очаровательного Каана ставит под угрозу их крепкие отношения. Вихрь чувств и неожиданных событий заставляет героинь переосмыслить не только свои родственные связи, но и взгляды на жизнь. Смогут ли сестры сохранить свою близость, или же присутствие Каана изменит все навсегда?",
-    "poster": "https://image.tmdb.org/t/p/w342/dj8A4dX6oC7DFD2RWLqvMLMPVQ3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/c7mQmsBKo3xKAVsdNVuqKz7eZxb.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,194 @@
 [
   {
+    "id": 315194,
+    "ru": "Thadayam",
+    "en": "Thadayam",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 1.41,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/Qw6NDY418wB7jpHSLGEhrqxLM1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4AdaGRRz3XtpTtjjRg1NHRZ7mhY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 299878,
+    "ru": "スキャンダルイブ",
+    "en": "スキャンダルイブ",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 1.41,
+    "genres": [
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/iQU1r4fkPayjYPALYTOeU749zwM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mwJiHvhcSdhDIG81aarJbddUDLR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1705642,
+    "ru": "Shrek 25 Aniversario",
+    "en": "Shrek 25 Aniversario",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 1.4,
+    "genres": [
+      "комедия",
+      "мультфильм",
+      "фэнтези",
+      "приключения",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bnQeKBCN53eio6HOuGBs7XjFeEz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zaYOndul0cGFuHuF942HX9m0GUv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 313727,
+    "ru": "Miss Behave",
+    "en": "Miss Behave",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 1.4,
+    "genres": [
+      "комедия",
+      "детектив",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rvtgmNcH31DJdxZWCwrthf2hi3W.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aCQeYRXOuk4G4u6pBs6JAmfV0X5.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 321775,
+    "ru": "Monyová",
+    "en": "Monyová",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 1.4,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kzxXEf5WECvyYJALKEBy4jwWoP4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s08XuC492BcML35dmkx89pwdq0t.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 315209,
+    "ru": "サバ缶、宇宙へ行く",
+    "en": "サバ缶、宇宙へ行く",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 1.4,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/feFcVtYhiNWKvfzKENDHKk2CkYA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eCjAiaeC5eL2BaTetkgya7Xmws8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 306556,
+    "ru": "剧情崩坏！死了十一年的白月光回来了",
+    "en": "剧情崩坏！死了十一年的白月光回来了",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 1.4,
+    "genres": [
+      "комедия",
+      "НФ и Фэнтези",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tGZvQDl2lFtkID53r40GeCNjQ7W.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xPv7KPv5L2fhDrN6dFgtbtGZEtx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1391450,
+    "ru": "I Fell, It's Fine",
+    "en": "I Fell, It's Fine",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 1.4,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1KCtVONn5VpHD6nc1orKRfYRFvA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/e8HHThuBgIMRXpxHLwtytLC3lMh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1568600,
+    "ru": "காதல் ரீசெட் ரிபீட்",
+    "en": "காதல் ரீசெட் ரிபீட்",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 1.4,
+    "genres": [
+      "мелодрама",
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/3xMgvXDquViX50l8rwle5SbShqm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hCSWwwBZUkq44ZjmsePhXmgPPiz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1371850,
+    "ru": "Rock Springs",
+    "en": "Rock Springs",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 1.4,
+    "genres": [
+      "ужасы",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/oXK8FGCQ84fzlkzMINdPl3W5LVE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wivMNppNIsJ3sF7RSzEuRl1J61n.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1533456,
     "ru": "Love You So Bad",
     "en": "Love You So Bad",
@@ -9045,190 +9234,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/gqzWjCxzyv2O4ac7oEEH8fY9rGv.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/megfQEuvgjacyRdBggXIiFJBG26.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1533549,
-    "ru": "Wicked of Oz",
-    "en": "Wicked of Oz",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.94,
-    "genres": [
-      "боевик",
-      "фэнтези",
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/a3KqiPPgjbvWCD2Ez3Om2zxb2Wr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4PUPZHbMxqoFTPpfZ5OtXRPG2OO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1536232,
-    "ru": "Manila's Finest",
-    "en": "Manila's Finest",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.94,
-    "genres": [
-      "боевик",
-      "криминал",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/cWNkpDIwt1Qt3JtWLL2c2vUWVwd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/12zO6K0EAQfpLPyb9K9M1d1vFJ3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1567954,
-    "ru": "A Year Later",
-    "en": "A Year Later",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.94,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1AclQ0XfPOmaaw5sqc448t2zqCr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/r6PZgQiJMvYdBZQ0NzQ4tBKBsoI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1205177,
-    "ru": "Cottonmouth",
-    "en": "Cottonmouth",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.94,
-    "genres": [
-      "вестерн",
-      "триллер",
-      "боевик"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/dEnE2xYn3jZuqFEG8JU1TRIzjea.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/k1S2ExN86RyKbRxF31YwrfVJ6Ox.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1223169,
-    "ru": "Roses on the Vine",
-    "en": "Roses on the Vine",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.94,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/za1URj6UXjIp6AsnbrZRTx0tutr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kXcdxgGespqw4cv6CDR1oPgYeEn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1103467,
-    "ru": "The Big Whoop",
-    "en": "The Big Whoop",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.94,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/hZ8V7xDSNeb7jmVdfOieGeH3mbp.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sCm5ZHNs9Qm5YNNsCr9z2UWaZWP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1335089,
-    "ru": "ただ、あなたを理解したい",
-    "en": "ただ、あなたを理解したい",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.94,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/640KkrBD6rAgo1Y8FBVdIMoKAZd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/g7W9dd7210gDktsQZwTaiRyvxT1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1214776,
-    "ru": "裸族之香港部落",
-    "en": "裸族之香港部落",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.94,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gpFKX9lnTJ2IXc020bRmyIyh514.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zGiwCYPzJDaOPdPsYCeG9TeFxkT.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1080943,
-    "ru": "Goldhammer",
-    "en": "Goldhammer",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.94,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/4PbWvJDFWkzYpP2qtizpElMHBfG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/x0rj61wwufJe3cxzxrHnSE69l8t.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1158381,
-    "ru": "THE IDOLM@STER SHINY COLORS 5thLIVE If I_wings",
-    "en": "THE IDOLM@STER SHINY COLORS 5thLIVE If I_wings",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.94,
-    "genres": [
-      "музыка"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6sOoyMWttFFNC10RKxdBB4EZwbT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jjQyxqfsiTDiOr4sVuv62D6xxdo.jpg",
     "source": "tmdb"
   }
 ]

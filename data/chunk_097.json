@@ -1,5 +1,204 @@
 [
   {
+    "id": "236751",
+    "ru": "Небеса реальны",
+    "en": "Heaven Is for Real",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 884,
+    "popularity": 2.43,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Главный герой меняет свое мировоззрение после того, как его 4-летний сын выходит из комы и утверждает, что был в раю. В доказательство он приводит факты из жизни их семьи, которые просто не мог знать.",
+    "poster": "https://image.tmdb.org/t/p/w342/wkaDAIqnR1qDBoiZao9mENo8MEn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/11eRKCIIkRnGseeIlWlAqkbiHKl.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_4515",
+    "ru": "Bannertail: The Story of Gray Squirrel",
+    "en": "Seton Doubutsuki: Risu no Banner",
+    "year": 1979,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.8,
+    "votes": 881,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Драма",
+      "Drama",
+      "Для детей",
+      "Kids"
+    ],
+    "overview": "Soon after birth a young squirrel comesc to a farm, and gets caught by a human. This human then tries to find him to their pet cat. However, the cat feels sorry for the squirrel and adopts him as their child and names the squirrel Banner. Banner and the cat live happily in the farm, but their happy lives don't last long. A fire destoys the farm, and Banner gets separated from his mother the cat. \n\n(Source: ANN)",
+    "poster": "https://cdn.myanimelist.net/images/anime/11/78448l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "tv_32754",
+    "ru": "Терра Нова",
+    "en": "Terra Nova",
+    "year": 2011,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.8,
+    "votes": 877,
+    "popularity": 6.42,
+    "genres": [
+      "НФ и Фэнтези",
+      "детектив",
+      "Боевик и Приключения"
+    ],
+    "overview": "2149 год. Земля перенаселена. Большинство растений и животных уже исчезли с её лица. Будущее человечества под сомнением, единственную надежду на выживание ученые видят в прошлом. Неожиданно обнаруженный ими пространственно-временной портал позволяет претворить в жизнь самый смелый план — переселить людей на 85 миллионов лет назад с целью повторного восстановления цивилизации. Семье Шеннонов выпадает честь присоединиться к десятому паломничеству переселенцев на Тerra Nova.",
+    "poster": "https://image.tmdb.org/t/p/w342/ckOsCVhiHa7M9dtd66LqIDjkZaw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3kz0Hp1sO7JnHFX8BzTokdxTuwY.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "11879",
+    "ru": "Почти стемнело",
+    "en": "Near Dark",
+    "year": 1987,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 876,
+    "popularity": 2.72,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "Молодой парень знакомится с очаровательной девушкой, которая при ближайшем рассмотрении оказывается вампиршей. «Вампиризм» — болезнь заразная, и после страстного поцелуя парень постепенно тоже должен стать вампиром.  Девушка же, как оказалось, входит в целый вампирный клан, который разъезжает на стареньком фургончике по дорогам Техаса. Днем вампиры отсыпаются в мотелях, а по ночам выходят на «тихую охоту». Полиция против них бессильна, т. к. пуля их не берет: они боятся лишь солнечного света.  Вампиры готовы принять парня в свой клан, но для этого он должен сам убить свою первую жертву…",
+    "poster": "https://image.tmdb.org/t/p/w342/ifwKiDlHXoCyzJ6k6mOnurgaeYF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fLqhMfRyMySsqORn0xq7iFWRdcM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "450322",
+    "ru": "Необыкновенная история на Рождество",
+    "en": "The Man Who Invented Christmas",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 869,
+    "popularity": 1.38,
+    "genres": [
+      "драма",
+      "история",
+      "комедия",
+      "семейный"
+    ],
+    "overview": "После череды профессиональных неудач молодой писатель Чарльз Диккенс решает написать и на собственные средства выпустить «Рождественскую песнь».",
+    "poster": "https://image.tmdb.org/t/p/w342/mei0kT2dmRpMpHtLh5bNSEibpNy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hm8Gux0946IfeJ1PZwztOo6lVHH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "465003",
+    "ru": "Курорт для Ныряльщиков на Красном Море",
+    "en": "The Red Sea Diving Resort",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 864,
+    "popularity": 1.92,
+    "genres": [
+      "драма",
+      "триллер",
+      "история"
+    ],
+    "overview": "Невероятная операция агентов израильской спецслужбы \"Моссад\", которые в 80-х годах перевезли в Израиль тысячи эфиопских евреев.",
+    "poster": "https://image.tmdb.org/t/p/w342/chPfFYkwp4bEElvM6OmfosUWONz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7XI3DfxdQwvgXTCx29fglvcirQP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "10973",
+    "ru": "Тварь из Чёрной лагуны",
+    "en": "Creature from the Black Lagoon",
+    "year": 1954,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 860,
+    "popularity": 2.75,
+    "genres": [
+      "приключения",
+      "ужасы",
+      "фантастика"
+    ],
+    "overview": "Научная экспедиция отправляется в дебри Амазонки на поиски древних окаменелостей и сталкивается с обитателем Чёрной лагуны - доисторической рептилией.",
+    "poster": "https://image.tmdb.org/t/p/w342/euCzA2Exc70MpTDCVYih8tdE7z1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/31P56eY3GQOA0wTwiW0gzkJyhSG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "184352",
+    "ru": "Том на ферме",
+    "en": "Tom à la ferme",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 857,
+    "popularity": 1.0,
+    "genres": [
+      "драма",
+      "триллер",
+      "детектив"
+    ],
+    "overview": "Том — молодой парень, который потерял самого близкого человека в своей жизни, Гийома. Он очень сильно переживает эту утрату и, чтобы проститься с покойным, отправляется в его родную деревушку, далекую канадскую глубинку. По дороге он готовит прощальную речь, даже не подозревая о том, что ждет его впереди. Приехав в деревню, он находит дом матери Гийома, в котором она проживает вместе с его братом Франсисом. Убитая горем женщина совершенно ничего не знает об ориентации погибшего сына и свято верит в то, что у него были отношения с некой молодой девушкой по имени Сара. Под постоянным давлением Франсиса Тому приходится делать все возможное, чтобы сохранить тайну, но вскоре это приводит к большим неприятностям...",
+    "poster": "https://image.tmdb.org/t/p/w342/12V1gZlRJ51BvJHaiUJIylCu5gn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jv247hW6iebdNHwtt8fZdXjZwdV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "18937",
+    "ru": "Волшебный меч: Спасение Камелота",
+    "en": "Quest for Camelot",
+    "year": 1998,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 855,
+    "popularity": 2.36,
+    "genres": [
+      "фэнтези",
+      "мультфильм",
+      "драма",
+      "мелодрама",
+      "семейный"
+    ],
+    "overview": "Все то же царство Камелот, все тот же король Артур, все тот же легендарный меч Экскалибур, который похищает злой рыцарь Рубер. Храбрая девушка по имени Кейли отправляется на поиски меча, ведомая ослепшим юношей по имени Гаррет.  Они встречаются с забавным созданием — двухголовым драконом по имени Девон и Корнуол. Во время их волшебного и музыкального путешествия Кейли и Гаррет открывают для себя нескончаемую силу дружбы и отваги.",
+    "poster": "https://image.tmdb.org/t/p/w342/qD0tJQLTqMrkFzdZlhwlZ8fCGOK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m58yUAi6CuHJ61eYGtSOaV996qn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "814776",
+    "ru": "Неудачницы",
+    "en": "Bottoms",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.8,
+    "votes": 850,
+    "popularity": 5.11,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Изгои Пи Джей и Джози создают бойцовский клуб, чтобы очаровать чирлидерш и лишится девственности до выпускного. По мере того, как клуб набирает обороты,  самые популярные девочки в школе начинают избивать друг друга во имя самозащиты, девочки оказываются в затруднительном положении, пытаясь найти выход из ситуации, прежде чем их план будет раскрыт.",
+    "poster": "https://image.tmdb.org/t/p/w342/ewFt9d71ZVNoSIc9pr7SwRzzOpg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2sxiysM6O0FAxeR2CEIeKSv9IkA.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "283235",
     "ru": "99 домов",
     "en": "99 Homes",
@@ -9898,201 +10097,6 @@
     "overview": "В поисках самого себя Тедди сбегает от надоевшей суеты слишком европейской жизни и в разгар зимы пытается воссоединиться с природой, отправившись в маленькую хижину недалеко от озера Байкал. Однажды вечером, заблудившись в снежной буре, он с прискорбием понимает, что вот-вот расстанется с жизнью, но неожиданно его спасает Саша, русский парень, много лет скрывающийся в лесах из-за совершенного им преступления.",
     "poster": "https://image.tmdb.org/t/p/w342/nx8qPVFThN0zpgrQ9bIo9dsNjOy.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/hYUNtgzEqaOnzfuUCsLD0b0yyTj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 892530,
-    "ru": "Путешественница во времени",
-    "en": "Le Tourbillon de la vie",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 116,
-    "popularity": 0.52,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "Париж, 2052 год. Джулия путешествует по своей жизни в поисках событий, изменивших ее судьбу. Порой это нечто значительное вроде национального музыкального конкурса, а иногда такая мелочь, как забытый дома паспорт. Мелочь, которая спустя годы рушит всю карьеру и жизнь.",
-    "poster": "https://image.tmdb.org/t/p/w342/iswdZuzhSzkWzBssh36aEnh59aA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aYQwIfByTt8GdglBOOWrewIorXr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_84303",
-    "ru": "Джетт",
-    "en": "Jett",
-    "year": 2019,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.8,
-    "votes": 116,
-    "popularity": 5.14,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "Профессиональная воровка Дэйзи \"Джетт\" Ковальски недавно вышла из тюрьмы. Ей снова придётся вернуться к опасному ремеслу, поскольку именно этого хотят грозные криминальные боссы.",
-    "poster": "https://image.tmdb.org/t/p/w342/vO0sqX01xYtPiwn9gEyRZuYSjAA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6IfH0XyukdKPxk8vVGuFMX2aioE.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 464458,
-    "ru": "По стечению обстоятельств",
-    "en": "इत्तेफ़ाक़",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 116,
-    "popularity": 1.73,
-    "genres": [
-      "криминал",
-      "триллер"
-    ],
-    "overview": "Произошло двойное убийство. Есть два свидетеля, они же главные подозреваемые — популярный писатель и молодая домохозяйка. Оба рассказывают вполне правдоподобные, но полностью противоречащие друг другу истории. Инспектор должен решить, кто говорит правду, а кто — нет.",
-    "poster": "https://image.tmdb.org/t/p/w342/riEnSoGJ1WubamfrNpj4N0wVdoW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/kCvpPhEIEpdiGU7VdSfJ4CjoiUD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 374251,
-    "ru": "Мистер Росток",
-    "en": "Stick Man",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 116,
-    "popularity": 1.49,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "телевизионный фильм"
-    ],
-    "overview": "Как-то мистер Росток отправился на пробежку в парк. Так получилось, что он попал в небольшой переплет и никак не может вернуться домой. Росток заблудился в дремучем лесу, а дома ждет жена с детками, и вот уже на носу Рождество...",
-    "poster": "https://image.tmdb.org/t/p/w342/hChFSATMxo9cDpDGl5iit5dx7yy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2Jmqs0uCi6JFw5HFm9lKOQKzVpV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 50166,
-    "ru": "Lucky Luke: La Ballade des Dalton",
-    "en": "Lucky Luke: La Ballade des Dalton",
-    "year": 1978,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 116,
-    "popularity": 0.64,
-    "genres": [
-      "семейный",
-      "мультфильм",
-      "комедия",
-      "вестерн"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yZTMQK4o6LcuKJADIBlqbZg9FRI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/x5kPnSawsJo1Ml7rPYZUJZL0Ssr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1229349,
-    "ru": "Йоло",
-    "en": "热辣滚烫",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 115,
-    "popularity": 2.32,
-    "genres": [
-      "драма",
-      "комедия",
-      "боевик"
-    ],
-    "overview": "Лэйинг много лет сидела дома, ничего не делая. Окончив колледж и поработав некоторое время, Лэйинг решила удалиться от общества и прекратить контакты со своим кругом общения. Она считала, что это лучший способ для нее \"примириться\" с самой собой.",
-    "poster": "https://image.tmdb.org/t/p/w342/fI5BIp48yERyYhu7O6XlDT4puSZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9IEYCg2Sxk72QdNNcvbbCMelalu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_32651",
-    "ru": "Интерны",
-    "en": "Интерны",
-    "year": 2010,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.8,
-    "votes": 115,
-    "popularity": 12.26,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "Медицинский ситком с Иваном Охлобыстиным про врачей, которые ещё не умеют лечить, но уже умеют смешить. Главные герои ситкома — четыре интерна. Они всё время попадают в идиотские ситуации, а их руководитель доктор Быков с удовольствием за этим наблюдает",
-    "poster": "https://image.tmdb.org/t/p/w342/nGRNrIyBo6J0WiuCtlammxtSUoC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fSLnRSDjSyw3yXHuXdyYMdLY7ho.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_14981",
-    "ru": "The Late Late Show with Craig Ferguson",
-    "en": "The Late Late Show with Craig Ferguson",
-    "year": 2005,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.8,
-    "votes": 115,
-    "popularity": 50.97,
-    "genres": [
-      "комедия",
-      "Ток-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gGC7zSDgG0FY0MbM1pjfhTCWQBI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/m0bV3qBiJBBlpFaaKjwHo13MVjm.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 2141,
-    "ru": "Джеймс Дин",
-    "en": "James Dean",
-    "year": 2001,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 115,
-    "popularity": 2.37,
-    "genres": [
-      "драма",
-      "телевизионный фильм"
-    ],
-    "overview": "Ему было всего 24 года. Он погиб в автомобильной катастрофе 30-го сентября 1955 года. Но и сегодня он остается иконой 50-х, одним из самых стильных мужчин того времени. Этот фильм покажет вам историю его жизни от ранних лет до пика его карьеры.",
-    "poster": "https://image.tmdb.org/t/p/w342/6dZt1YCJoEUjFRZUUhjEZclkDSZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iBsvTINEs3trKH73p4Ogbwm9xQ5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1365044,
-    "ru": "Снежная сестрёнка",
-    "en": "Snøsøsteren",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.8,
-    "votes": 114,
-    "popularity": 2.1,
-    "genres": [
-      "фэнтези",
-      "семейный",
-      "приключения",
-      "драма"
-    ],
-    "overview": "Мальчик, чья семья, убитая горем, совсем позабыла о Рождестве, неожиданно заводит дружбу с жизнерадостной девочкой, излучающей праздничное настроение.",
-    "poster": "https://image.tmdb.org/t/p/w342/xreT6WRclmAL647P61jS8THxBh5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/A2g1tlceVs7liy765ozaJ27aH0M.jpg",
     "source": "tmdb"
   }
 ]

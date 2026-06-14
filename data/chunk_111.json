@@ -1,5 +1,204 @@
 [
   {
+    "id": 78124,
+    "ru": "Импи – суперстар!",
+    "en": "Urmel voll in Fahrt",
+    "year": 2008,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 37,
+    "popularity": 0.67,
+    "genres": [
+      "мультфильм",
+      "приключения",
+      "семейный",
+      "фэнтези",
+      "комедия"
+    ],
+    "overview": "Когда-то профессор Хабакук нашел на острове Титиу странное яйцо, из которого вылупился маленький динозавр Импи, которого полюбили и люди, и звери… Но настали новые времена, и на Титиу появилась обаятельная панда Бабу. Динозаврик загрустил, подумав, что друзья разлюбили его. И тогда он отправился в большой мир, чтобы стать артистом грандиозного парка развлечений. Он не знал, что там его ждут серьезные испытания. Но панда Бабу и другие звери не оставят Импи на произвол судьбы! Вместе с ним они окунутся в водоворот новых головокружительных приключений…",
+    "poster": "https://image.tmdb.org/t/p/w342/3gvbjeScwM7S3XSo0ial3anE2q6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zTUpcvBaNfXu1Qo69bQmZTrNIQd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 332830,
+    "ru": "Шалопаи",
+    "en": "ഒരു വടക്കൻ സെൽഫി",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 37,
+    "popularity": 0.45,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "Парень по имени Умеш учится в университете. Он настолько плохо справляется с экзаменами, что становится одним из худших студентов. Отец молодого человека, торговец, разочаровавшись в умственных способностях Умеша, предлагает ему работать в магазине. Но парень не собирается продолжать дело отца. Он всегда мечтал стать режиссером. Умеш даже предпринимает попытку снять собственный короткометражный фильм в качестве первого шага в профессии. Полностью отсняв короткометражку, главный герой и его друзья теряют камеру со всем видеоматериалом в водопаде. Камера стоила очень дорого, поэтому Умеш теперь просто обязан пойти по стопам отца.",
+    "poster": "https://image.tmdb.org/t/p/w342/jkVR9ufZELPcgWViPGJ6D0Y5ss8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/w8lo7gKlKCpvfD1yUt3mguECWS6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 84036,
+    "ru": "Как утенок на юг собирался",
+    "en": "Southbound Duckling",
+    "year": 1955,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 37,
+    "popularity": 0.42,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "Утенок хочет улететь в теплые края, Джерри хочет его переубедить потому как домашние утки должны сидеть дома, а Том хочет вкусно поесть и утенок для этой цели отлично подходит.",
+    "poster": "https://image.tmdb.org/t/p/w342/lGnVnhG4Vc6KRkb1zYB5hY6XSJ6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jYKKU866vlAl0ntMKpsotDcYNiF.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 79263,
+    "ru": "Умный котик",
+    "en": "Smarty Cat",
+    "year": 1955,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 37,
+    "popularity": 0.37,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "Трио котов из Бутча, Топси и Молниеносного вылезает из-под забора. Бутч посвистывает Тому. Том видит друзей и показывает табличку, на которой написано «Никого нет дома». Коты сначала бегут, потом увидев Спайка идут на цыпочках, и вновь бегут. Бутч говорит, что снял фильм про глупых псов. Квартет котов собирается смотреть фильм, но перед этим вышвыривает из дома Джерри, который тоже хочет вместе с котами посмотреть фильм.",
+    "poster": "https://image.tmdb.org/t/p/w342/xei3FbcWKSP25pHiGKOK7V7iwIN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5cWyaAwVHtJr1AXGhXuNF9AuP9K.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 67503,
+    "ru": "Гуфи: Учителя тоже люди",
+    "en": "Teachers Are People",
+    "year": 1952,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 37,
+    "popularity": 0.34,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "Без особого успеха, Гуфи пытается быть учителем в классе молодых смутьянов.",
+    "poster": "https://image.tmdb.org/t/p/w342/8ttBuBpkPWvgyTWhNfNTwjbXnTT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/AutEN2riNSUCiWWueVf2A0HoBR7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 548682,
+    "ru": "No One Would Tell",
+    "en": "No One Would Tell",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 37,
+    "popularity": 1.9,
+    "genres": [
+      "драма",
+      "триллер",
+      "детектив",
+      "телевизионный фильм",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/u8sSi6i7on9odDQaCeB1ircFonO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sAsOpPAAhJMUg4dkQxIOSCBqh21.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 525453,
+    "ru": "The Perfect Bride: Wedding Bells",
+    "en": "The Perfect Bride: Wedding Bells",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 37,
+    "popularity": 0.75,
+    "genres": [
+      "мелодрама",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/sSEzaWf7UrjVLrpZLaBawWkKl2l.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5ZnDnmthBadTpJNbzo3pEs9JJJv.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_110975",
+    "ru": "Романтическая комедия, в которой подруга детства ни за что не проиграет",
+    "en": "幼なじみが絶対に負けないラブコメ",
+    "year": 2021,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 36,
+    "popularity": 10.24,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "К главному герою испытывает чувства милая девушка, которая живет рядом. Она общительная и заботливая, словно старшая сестра. Однако парень уже нашел свою любовь — прекрасного айдола и писателя из старшей школы. Но эта девушка вряд ли примет его признание. А еще у нее уже есть парень. И когда главный герой уже было отчаялся, подруга детства предложила ему: «Если для тебя это так невыносимо, тогда почему бы нам не отомстить? Устроим же самую лучшую месть».",
+    "poster": "https://image.tmdb.org/t/p/w342/7i31cztEfiRDG30KjorCrEXbyEG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/clPZ1X2xBFe5oau6N8KEGPacflQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "386467",
+    "ru": "絶対純白♡魔法少女",
+    "en": "絶対純白♡魔法少女",
+    "year": 2012,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 36,
+    "popularity": 2.47,
+    "genres": [
+      "боевик",
+      "мультфильм",
+      "фэнтези",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uIDnnnfpX4F4tePVAPTgTBbnYuM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oxAJyNCp13kmXmBMx1StnAAtYzd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 665894,
+    "ru": "Правда любить",
+    "en": "Really Love",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 36,
+    "popularity": 1.16,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "Художник на заре славы отвлекается на юную студентку юридического вуза. Но на пути к общему будущему их ждет множество преград.",
+    "poster": "https://image.tmdb.org/t/p/w342/hqqEHkLUdOyoDYcvXi0lUEeQ748.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fDiUVAzUFwSx26IiVcDCtg2WyIj.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1163186,
     "ru": "Мы теперь взрослые",
     "en": "We Grown Now",
@@ -9514,199 +9713,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/awub6gcLdqR1Mt0Mc6UGn3H6SFR.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/csmtBeWDB4aPPEjEka8X6KURlfY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 470133,
-    "ru": "திருட்டுப்பயலே 2",
-    "en": "திருட்டுப்பயலே 2",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 11,
-    "popularity": 1.05,
-    "genres": [
-      "триллер",
-      "боевик",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/snwOxyhly7D6MaYcRRcINeAYPIY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vXV7h05Uco1b8l82aILbVUZoA8R.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 511752,
-    "ru": "ഇര",
-    "en": "ഇര",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 11,
-    "popularity": 1.0,
-    "genres": [
-      "криминал",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lBZYBYe58ibftmEgTDpZCYDDen1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qpDWO2bHuHXVBWNFAax2dMSExHD.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 576314,
-    "ru": "Weil du nur einmal lebst - Die Toten Hosen auf Tour",
-    "en": "Weil du nur einmal lebst - Die Toten Hosen auf Tour",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 11,
-    "popularity": 0.93,
-    "genres": [
-      "музыка",
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/cvOTIEc4kXme0tSTAwvzrQNVd7w.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3TLj1sUuYcA4X89kdG4cQpwAWRG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 373470,
-    "ru": "Uncle Howard",
-    "en": "Uncle Howard",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 11,
-    "popularity": 0.89,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qEiCXG0pF58EvnQIb7pn14tyUqf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mWs2EcJCVTPDhay92ClhQzpH1Tp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 459674,
-    "ru": "吃吃的愛",
-    "en": "吃吃的愛",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 11,
-    "popularity": 0.65,
-    "genres": [
-      "мелодрама",
-      "комедия",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wPRNQPWTLkiiulA3mWb94c5Cgfz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vCq3EXUjL7luylTP0mmlZ4SPEKn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 644158,
-    "ru": "He Dreams of Giants",
-    "en": "He Dreams of Giants",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 11,
-    "popularity": 0.62,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qAYEnL4QNj6vBM211B1y9n18s0Y.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nBly7nYGUlTGsjPawOQ5WJebiZF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 405040,
-    "ru": "Warkop DKI Reborn: Jangkrik Boss! Part 1",
-    "en": "Warkop DKI Reborn: Jangkrik Boss! Part 1",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 11,
-    "popularity": 0.62,
-    "genres": [
-      "комедия",
-      "боевик",
-      "приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/95yweFRAHUzAHTKEFUqoMAeec8u.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ottxCAgqFw007HHg24H0HFXgO1Y.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 51041,
-    "ru": "Scruffy",
-    "en": "Scruffy",
-    "year": 1980,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 11,
-    "popularity": 0.54,
-    "genres": [
-      "мультфильм",
-      "драма",
-      "приключения",
-      "семейный",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lzZuUUcUxrxZN2goZh4ZWFhrNjj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/941eEYy1qzl22HZo03pYDs6357D.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 621005,
-    "ru": "प्रस्थानम",
-    "en": "प्रस्थानम",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 11,
-    "popularity": 0.52,
-    "genres": [
-      "боевик",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5l61RPXvueIc0yfJAz6ETf7zFUM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uJcVbFmUK4SfKwRSciWp55X1rpN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 552990,
-    "ru": "Nyitva",
-    "en": "Nyitva",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 11,
-    "popularity": 0.45,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ixN3eBYScImxQN2Imn8er5ZJSRo.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6dDQ2HblFqqyYBh1dt0tcc96gaQ.jpg",
     "source": "tmdb"
   }
 ]

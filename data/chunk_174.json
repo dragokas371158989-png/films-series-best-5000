@@ -1,5 +1,189 @@
 [
   {
+    "id": 1518070,
+    "ru": "గుర్రం పాపి రెడ్డి",
+    "en": "గుర్రం పాపి రెడ్డి",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.63,
+    "genres": [
+      "комедия",
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fo7TpR3Pyfxl7DjT3VlvMFgFeOd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/e8A6wYBmJSgPZH0dX42j65X0Fza.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1266589,
+    "ru": "Mint in Box",
+    "en": "Mint in Box",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.63,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/11CCpYumL9rv617zBD7lyM5M1iT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gWotqfLtSVVz9qpQq9EdQ5NPmz7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1147885,
+    "ru": "The Darkling Fox",
+    "en": "The Darkling Fox",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.63,
+    "genres": [
+      "ужасы",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wfy3kKhI8lUKpFEfaV2uFGQOFF3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9tP4bjSXYm6TQrINA2QQ6CXCJB9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1269104,
+    "ru": "Les sous-marines",
+    "en": "Les sous-marines",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.63,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4Sp6aaQmFKpDHoKL9BBYMyLi1hi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/jy1hdnvu0v4fb9wAtnd6Re1Fhvz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1337095,
+    "ru": "Playing to Survive: Von Cramm vs. Hitler",
+    "en": "Playing to Survive: Von Cramm vs. Hitler",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.63,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ozCP2BE3r7SsNpQGXyArKHuVKWy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mZvApVWqE87PMmmaKiXqEgkGAY6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1370041,
+    "ru": "White Crow",
+    "en": "White Crow",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.63,
+    "genres": [
+      "боевик",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2MjJVEfJTBQpr4OZ6IaM6sBk8JJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kvjKnB0ejqhtfEHEFjd7BRLTFyR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1339093,
+    "ru": "Sua: Portrait of a Retired Bus Driver",
+    "en": "Sua: Portrait of a Retired Bus Driver",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.63,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/k6UONWnBHgZ5uhfECbfQTmCwCow.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dA5btuJGlXTTjVifo8EAVVcRlcU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1450335,
+    "ru": "プロジェクトセカイ COLORFUL LIVE 3rd - Evolve -",
+    "en": "プロジェクトセカイ COLORFUL LIVE 3rd - Evolve -",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.63,
+    "genres": [
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/s9IsSHsiLbI4HUVPuR8132ezFSp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4vLPeNNcu52NTALIlNCLfzORQBC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1395260,
+    "ru": "Play Sound Portretai: Free Finga",
+    "en": "Play Sound Portretai: Free Finga",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.63,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eWQHAhL3TH6cgR0ij4XTd0Hqbfm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1J21Adbeb856fvtyEPsQ4CHAjja.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1306973,
+    "ru": "Where the Heck Is My Period?",
+    "en": "Where the Heck Is My Period?",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.63,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fgSaBR234xTuSTjDuiU9CTvXr7k.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/suJIKa2NOc34RT2m4DZqvLHLTOK.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1383360,
     "ru": "Honkai: Star Rail - Taking It Easy",
     "en": "Honkai: Star Rail - Taking It Easy",
@@ -9052,189 +9236,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/aWywFJGglE75WIkOihIHg1l6716.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/ji1CZD7lgEOnBzo7ZebLeff0S9Z.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1394733,
-    "ru": "Sob o Lençol",
-    "en": "Sob o Lençol",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.55,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8iCKnhXdtI75OjN5r8ZgS1YetCu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xp1DhBHBfZpqEWj1HgRiF6bk6ni.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1409961,
-    "ru": "Toxic King",
-    "en": "Toxic King",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.55,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/p8sNxhkrpRm7cOTrZp2mBEAPROj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yR4fOBHMsB88xiFTW6XPinda9sY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1391300,
-    "ru": "Bitchin'",
-    "en": "Bitchin'",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.55,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wwFuCFniFsvy0Vw4ejXRUMVoGwv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dtetZXcD1ggDEyiQ8XuAYR8GIOl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1276328,
-    "ru": "Prête-moi ton docteur",
-    "en": "Prête-moi ton docteur",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.55,
-    "genres": [
-      "документальный",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5tFSrPVlXv9FslgYsng5EzRiIc6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jWZD2m7f7WX5LvgsxSxIyBg1myu.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1305543,
-    "ru": "DESPE invitacional",
-    "en": "DESPE invitacional",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.55,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xxIIf7kAS6FKpBWpDZw6H0UCGjx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jr2SoWyZVWp7l8Gan2aA0F2SrgC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1240625,
-    "ru": "MBTI E 정열 섹스녀 연주의 첫경험",
-    "en": "MBTI E 정열 섹스녀 연주의 첫경험",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.55,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/lJOyYoLyAKKuhKebl4i3wQP5IpW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yf7iUhKPFKbfegPxCj0Uc2DTfTY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1424478,
-    "ru": "Ombuaren itzala",
-    "en": "Ombuaren itzala",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.55,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3iZEw588BKSIvFrKmdX0M0NhNRX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/78Fpz0X4B47zZdEJPv3BGuKy3Q9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1279039,
-    "ru": "Nix's Symphony",
-    "en": "Nix's Symphony",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.55,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/kv0zdDbBdpuakXtQgmdq1uwLpBK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fQtkQvAg9b8m4KJkj2vIHtnPWnk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1313029,
-    "ru": "苗岭诡事",
-    "en": "苗岭诡事",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.55,
-    "genres": [
-      "триллер",
-      "приключения",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/x9gWHVN6PEKWCqSGHoQ325NAwfv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d7pTQLvdK3PZrM6xfByT9QzWnon.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1358597,
-    "ru": "オアシス",
-    "en": "オアシス",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.55,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/t6o0gOwIU6jGJ75hb1ArmwAGaei.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jTPjsciUEJiG8QrNaakgu8C3csd.jpg",
     "source": "tmdb"
   }
 ]

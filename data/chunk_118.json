@@ -1,5 +1,199 @@
 [
   {
+    "id": 256766,
+    "ru": "Небесный меч",
+    "en": "Heavenly Sword",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 108,
+    "popularity": 2.12,
+    "genres": [
+      "приключения",
+      "боевик",
+      "мультфильм",
+      "фэнтези"
+    ],
+    "overview": "Тысячи лет прошло с тех времен, когда злостный король по имени Ворон захватил практически всю земли. Но против него выступил небесный посланник, желающий прекратить эту несправедливость. В жестоком бою он смог одолеть ужасного царя, и мир снова стал светлым и спокойным. В результате этого боя, в месте сражения появился небесный меч, который обладает огромной силой. Тот, кто обладает им, может изменить все на своем пути - либо ввести в процветание, либо вовсе его разрушить...",
+    "poster": "https://image.tmdb.org/t/p/w342/wZzMbYDomCgj6LUN1b33ha7BiGh.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gKcFbx4QsanSNyblcsnycCEgKdq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 959596,
+    "ru": "Дело «Мальдорор»",
+    "en": "Le Dossier Maldoror",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 107,
+    "popularity": 0.64,
+    "genres": [
+      "триллер",
+      "криминал",
+      "драма"
+    ],
+    "overview": "1995 год. Бесследное исчезновение двух девочек потрясает население. Пока местные СМИ множат версии произошедшего, молодой детектив Поль Шартье присоединяется к секретному расследованию под грифом «Мальдорор». Однако стандартные полицейские методы кажутся Полю устаревшими и малоэффективными. Вопреки приказам начальства он решает взять дело в свои руки и начинает охоту на маньяка в одиночку.",
+    "poster": "https://image.tmdb.org/t/p/w342/bf6BN1frey9KkOPnlpuw6POrCfY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5N3w3cC5d8fDMLuuDMn8io4StUE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 292014,
+    "ru": "Снежная королева 2: Перезаморозка",
+    "en": "Снежная королева 2: Перезаморозка",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 107,
+    "popularity": 2.89,
+    "genres": [
+      "фэнтези",
+      "семейный",
+      "мультфильм",
+      "приключения"
+    ],
+    "overview": "Тщеславный тролль Орм давно мечтает о лаврах героя, и наконец получает этот шанс: северный ветер грозит миру вечной зимой и похищает Марибель. Рука принцессы и королевство троллей достанутся тому, кто вызволит её из снежного плена. Однажды Орм победил зиму с помощью друзей, теперь он хочет действовать в одиночку. На нём доспехи из сковородок, за ним — отряд трусливых троллей, а впереди — опасный путь к замку Снежной королевы. Но, к счастью, друзья не помнят обид: храбрая Герда, застенчивый Кай, удалая Альфида и весёлая Лута не бросят Орма в беде. А значит их ждут невероятные приключения!",
+    "poster": "https://image.tmdb.org/t/p/w342/bNF5hV9hx5A5GG3743ijCnLhXeH.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wwW1jZSTSPW7HCcPFXgjcRVaeHM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1320637,
+    "ru": "Я расист?",
+    "en": "Am I Racist?",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 105,
+    "popularity": 0.45,
+    "genres": [
+      "комедия",
+      "документальный"
+    ],
+    "overview": "Мэтт Уолш исследует практики разнообразия, равенства и инклюзивности, разоблачая их абсурдность в виде тайных социальных экспериментов.",
+    "poster": "https://image.tmdb.org/t/p/w342/a0nfgpeRMORStotrouLoOBr00Pc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vohINT54Cvez6xu2LyGTHYjUe28.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 787761,
+    "ru": "Оракул",
+    "en": "Oracle",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 105,
+    "popularity": 0.61,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/laOpPREcTlDukttovlUGJ3Wmtb6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/bqBY8uFoRMNRPhE39KTPIK1Dhim.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_32390",
+    "ru": "Настоящие домохозяйки Беверли-Хиллз",
+    "en": "The Real Housewives of Beverly Hills",
+    "year": 2010,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.3,
+    "votes": 105,
+    "popularity": 23.57,
+    "genres": [
+      "Реалити-шоу"
+    ],
+    "overview": "Реалити-сериал, рассказывающий о самых богатых женщинах страны, которые наслаждаются роскошным образом жизни, который может обеспечить только Беверли-Хиллз.",
+    "poster": "https://image.tmdb.org/t/p/w342/8ktaCSlCgGDMFzgdYc1LYF6CiWq.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xmCue1RQDs1BfrHrJwmCD2ETeEb.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 397992,
+    "ru": "Праведные небеса",
+    "en": "Fair Haven",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 104,
+    "popularity": 0.65,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Джеймс возвращается на свою семейную ферму, после долгого пребывания в экс-гей конверсионной терапии и разрывается между ожиданиями его эмоционально далекого отца, и воспоминаниями о прошлом, любовными отношениями со своим другом Чарли, которые он пытается забыть...",
+    "poster": "https://image.tmdb.org/t/p/w342/lary9OSK5aYRtcFovAbPSVu5ueu.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4vxH3NrvQ9ghJTQrg2J8SNKvnD2.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1154223,
+    "ru": "Охота с тиграми",
+    "en": "Tigres et Hyènes",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 103,
+    "popularity": 0.62,
+    "genres": [
+      "боевик",
+      "триллер"
+    ],
+    "overview": "Возвращаясь из Испании, Малик узнает, что его тесть, Серж Лами, арестован за неудачное ограбление и ему грозит тюрьма. В день суда Ирис, адвокат Шерифа, одного из несправедливо обвиненных, предлагает Малику сделку: в обмен на свободу Сержа и Шерифа Малик должен принять участие в ограблении. Мучимый чувством вины, он соглашается и собирает команду, чтобы организовать последнее дело.",
+    "poster": "https://image.tmdb.org/t/p/w342/wyGaJk25KqJOFwJWV5bzf8PWP9J.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gKDFHQsEdnwZW0RC0htr0aYYH5W.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1033462",
+    "ru": "Бюро 749",
+    "en": "749局",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 102,
+    "popularity": 4.39,
+    "genres": [
+      "боевик",
+      "приключения",
+      "фантастика"
+    ],
+    "overview": "Недалекое будущее. На людей нападают неизвестно откуда взявшиеся жуткие чудовища, но, оказывается, на этот случай был разработан специальный план, державшийся в строжайшей тайне. Парень Ма Шань попадает в бюро 749, где готовят бойцов, которые будут сражаться с чудовищами.",
+    "poster": "https://image.tmdb.org/t/p/w342/8GOrx5xMI4YAKBGPvkBn7QFYxYd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lf8IZ86ajGpgbuyHCZrXUeAMmvy.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_5191",
+    "ru": "Робокоп (телесериал)",
+    "en": "RoboCop: The Series",
+    "year": 1994,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.3,
+    "votes": 102,
+    "popularity": 4.38,
+    "genres": [
+      "Боевик и Приключения",
+      "криминал",
+      "НФ и Фэнтези"
+    ],
+    "overview": "Его создали из самого честного полицейского в городе - Алекса Мёрфи. Создали, соединив человеческую плоть со сталью машины. Вероломно убитый бандитами офицер Мёрфи стал частью уникального эксперимента корпорации ОСР по созданию первого в истории робота-полицейского, несокрушимого и грозного защитника закона. Его нельзя подкупить. Его чертовски сложно взять на жалость и совершенно невозможно испугать. Соревнования с ним в искусстве стрельбы и тактике ведения боя - бесполезны. Это полумеханическое существо создано специально для войны в экстремальных условиях.",
+    "poster": "https://image.tmdb.org/t/p/w342/vIYt0JnsjtbQ6IUyJZrix00TJuw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ayfwBr79hFnDuff15mm59ZRbU0W.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 455043,
     "ru": "Бог войны",
     "en": "荡寇风云",
@@ -9511,209 +9705,6 @@
     "overview": "Зои Дэвис - успешный и целеустремлённый свадебный организатор в большом городе. Когда отец просит её помочь в семейном кафе, она с радостью возвращается в свой уютный родной городок Романс, штат Орегон. Зои и не подозревает, что мама уже наняла помощника - Уилла, начинающего шеф-повара и, по счастливому совпадению… первую любовь Зои из детства!  Между Зои и Уиллом вспыхивают напряжение и споры, но вместе с ними - и искры былой химии. Смогут ли они преодолеть разногласия и вновь обрести утраченную любовь по пути?",
     "poster": "https://image.tmdb.org/t/p/w342/hqlAZWVAoQWGXMJzBTtf1qjrRpH.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/m5OZfpt9q1b5r8edAehumQ5Jrgq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 795531,
-    "ru": "Картофелинка мечтает об Америке",
-    "en": "Potato Dreams of America",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 25,
-    "popularity": 0.51,
-    "genres": [
-      "комедия",
-      "драма",
-      "фэнтези"
-    ],
-    "overview": "На дворе лихие годы перестройки, и Лена с сыном по прозвищу Картофелинка, как может, выживает в жестоком и беспощадном СССР. Вскоре побегов в цветные грезы телевизора оказывается недостаточно, и Лена принимает отчаянное решение — стать невестой по переписке. Уехав c сыном к американцу Джону, Лена понимает, что так и не обрела своего места в Америке. Всё, что она делала, совершалось для Картофелинки, который ещё на родине успел возненавидеть себя за то, что он гей. Но кто знает, сколько ещё открытий ждет Картофелинку, ведь новая страна — это только начало.",
-    "poster": "https://image.tmdb.org/t/p/w342/ci0jqn7LJKMzkzYhCl1b9bJ3C4P.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eU8NO4vTjLXuVFtB9dXCSkrtY3q.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 784986,
-    "ru": "Love in Translation",
-    "en": "Love in Translation",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 25,
-    "popularity": 0.49,
-    "genres": [
-      "комедия",
-      "мелодрама",
-      "семейный",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1EediCxkAZ6u3vVlF35pgQ4LhV5.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uyc3Nw8FUeJFIAEtOCcepGKlMJ4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1027439,
-    "ru": "Lights, Camera, Christmas!",
-    "en": "Lights, Camera, Christmas!",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 25,
-    "popularity": 0.44,
-    "genres": [
-      "телевизионный фильм",
-      "комедия",
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xensL98L0bGnkkQsEFy3USC5n5Y.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3kmrbT2kguKWaz6UknbXyUf3chc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 585839,
-    "ru": "The Protector",
-    "en": "The Protector",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 25,
-    "popularity": 1.01,
-    "genres": [
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fKyCT9i9jw3JhuXtUdinbuykKHN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/iAESLebJJ8Xe7MxXBNZKoY5vFt7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 264746,
-    "ru": "들개",
-    "en": "들개",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 25,
-    "popularity": 0.39,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xRKTca5NwXITRtaVyBGk0ALBkyc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8xAa0JaGkvEnMBLshUbL2YYpiWL.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 73629,
-    "ru": "Midnight in a Toy Shop",
-    "en": "Midnight in a Toy Shop",
-    "year": 1930,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.3,
-    "votes": 25,
-    "popularity": 0.3,
-    "genres": [
-      "мультфильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2MvljPtEpbELHZqlPUrJZezqfpT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7QNQc3NjiwyuDKeZy4WPLsIXg9h.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 70823,
-    "ru": "Микки и весёлые гонки",
-    "en": "Mickey and the Roadster Racers",
-    "year": 2017,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.3,
-    "votes": 24,
-    "popularity": 10.14,
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "Детский",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "На старт, внимание, марш! Микки, Дональд, Гуфи, Минни и Дейзи готовят свои гоночные машины к большому кругосветному автопробегу. Плуто не участвует в гонках.",
-    "poster": "https://image.tmdb.org/t/p/w342/3D4275Ck9eXdMlXEQgNrOsikmMS.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7ne3CUNlcnzqEdX3jf0MQoGEP1o.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_45277",
-    "ru": "Одна из них моя сестра!",
-    "en": "この中に１人、妹がいる！",
-    "year": 2012,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.3,
-    "votes": 24,
-    "popularity": 4.16,
-    "genres": [
-      "драма",
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "Микадоно Шого глава компании Микадоно-групп и настоящий миллиардер. Он еще недавно он похоронил своего отца, который наказал ему — чтобы стать полноправным главой компании он должен найти себе спутницу жизни. За этим Шого и отправляется в Академию Миюрин. Вскоре Шого узнает, что еще в детстве его разлучили со своей сестрой, и она тоже учится в академии Миюрин. Но кто же она?",
-    "poster": "https://image.tmdb.org/t/p/w342/tc7O8guBEjmfxz2K7LxJgpi9sTh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4XhCA0UoGMz6RJw6LBwwGeNgwQ0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "133481",
-    "ru": "東のエデン 総集編 Air Communication",
-    "en": "東のエデン 総集編 Air Communication",
-    "year": 2009,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.3,
-    "votes": 24,
-    "popularity": 0.66,
-    "genres": [
-      "мультфильм",
-      "драма",
-      "детектив",
-      "фантастика",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3fdL3o6bI7u9PNemWocfeB7ndVT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/geIQSn0lYo9OwZCzvjlRSKE5Vsy.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "153119",
-    "ru": "道成寺",
-    "en": "道成寺",
-    "year": 1976,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.3,
-    "votes": 24,
-    "popularity": 0.14,
-    "genres": [
-      "мультфильм",
-      "фэнтези",
-      "ужасы",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iru9uCiU6bKA8mC8cciUw7iKQuN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d15G2cOdRL5CzVE45flxKdsHThC.jpg",
     "source": "tmdb"
   }
 ]

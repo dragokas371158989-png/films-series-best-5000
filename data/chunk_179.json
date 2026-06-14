@@ -1,5 +1,189 @@
 [
   {
+    "id": 1676506,
+    "ru": "Mexicanamerican",
+    "en": "Mexicanamerican",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.22,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wGp2clMovz9LbtBj2IzIeWzjsfr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/c68O4nJJq3Dgg4P8aSMFQGy98Jq.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1696897,
+    "ru": "Procrastination Yoga",
+    "en": "Procrastination Yoga",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.22,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ixt0dl1TfnyhMxoTbvZhF7s7d1u.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kcxOB5vvN1zRYYd6pPeeb2pR7uL.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1699555,
+    "ru": "Жужа",
+    "en": "Жужа",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.22,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Мир Жужи состоит из наблюдений со стороны, внимательного разглядывания, изучения, но не из взаимодействия. Жужа предпочитает молчание словам, и из-за этого она мало кому понятна, а потому и не очень интересна. В отличие от своей младшей сестры, скрипачки Анки, чей мир состоит из бесконечных репетиций, школьной суматохи и подготовки к надвигающемуся поступлению. Они – самые близкие друг для друга люди, но все меняется, когда Жужа встречает Юру – глухого парня, для которого она становится проводником, способом прикосновения к недоступному для него звуку, и незаметно для себя из фонового статиста вдруг превращается в главную героиню своей собственной истории.",
+    "poster": "https://image.tmdb.org/t/p/w342/vogVE9flOOOAquLCLvGjwQHPIvA.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 1696236,
+    "ru": "మరీచిక",
+    "en": "మరీచిక",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.22,
+    "genres": [
+      "мелодрама",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4Frhm74pTez19R2n3KJerHPl0FW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6OK3XhunlgLkHmrqZfxqxpIoTft.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1684268,
+    "ru": "이상한 과자 가게 전천당",
+    "en": "이상한 과자 가게 전천당",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.22,
+    "genres": [
+      "драма",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xHnw4j8F0xMFB1P7mxD4rJsp87J.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/86TwJ1OSOyDuyvd5qZqLbH9RaHh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1700865,
+    "ru": "Les Ombrageux",
+    "en": "Les Ombrageux",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.22,
+    "genres": [
+      "военный",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qyySUkCmfAYjiw57i0xSKtVZV7T.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4vZpEzCJ7Cbvx9iKDOE7DiLdk89.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1699059,
+    "ru": "Good Ones",
+    "en": "Good Ones",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.22,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eICQVkGrl9wih3sUimCBaxPJAcG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yjIEIffpHUtWP05ROJke36wJkNA.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1702969,
+    "ru": "The Human Library",
+    "en": "The Human Library",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.22,
+    "genres": [
+      "мелодрама",
+      "детектив",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dXCzmLxB6r6qSlCZLF8qhN2281O.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/omzGAYM8hoRpWbWkXs776djOLYI.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1675735,
+    "ru": "Sportfreunde Stiller - Mit dem Herz in der Hand",
+    "en": "Sportfreunde Stiller - Mit dem Herz in der Hand",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.22,
+    "genres": [
+      "документальный",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qxS3MyOIWXeDSxXOV1NnZzNO3di.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/MAfaAx6UdNNp8oiuzbMDQ32AFE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1631816,
+    "ru": "Strejkarna",
+    "en": "Strejkarna",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.22,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/d4KIIBzpCUPCinq1RbaWYZuxagY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/n0TKj590kFk8ML81gP6zirSXXvN.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1475047,
     "ru": "John Lennon: The Last Interview",
     "en": "John Lennon: The Last Interview",
@@ -8911,190 +9095,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/8XgxmN8SICFEzILjtHv1OhMmduS.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/vxJInWOZ4wP6hqVIL4yNm0Epk4W.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1705585,
-    "ru": "Sandigdham",
-    "en": "Sandigdham",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.16,
-    "genres": [
-      "криминал",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/clhxtpF4D3a0jTjVDnY6xCPm4tT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/65qMWbxNnFHaY00UGLxizdrWQEG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1489036,
-    "ru": "Born to Fake",
-    "en": "Born to Fake",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.16,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/b8ISCi8SxJpZgFSXh20vqRK1ZWW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vjCctiMsntxdbfvqz6YUzuKMOef.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1697640,
-    "ru": "探索期",
-    "en": "探索期",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.16,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/2cTsyeutkrVyX7mQyFXDbnk2FRv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/z0BOATiqe3uF8CFGb6MSzdoBfeZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1698417,
-    "ru": "Aufstand in Auschwitz",
-    "en": "Aufstand in Auschwitz",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.16,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ysoGmGKEq7eifMdbIySJwV9AeQR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8g2pHTY2grfiIMsh4qRTpblhwu8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1678769,
-    "ru": "Spiritus Sanctus",
-    "en": "Spiritus Sanctus",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.16,
-    "genres": [
-      "комедия",
-      "драма",
-      "история"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5pJIitWwcrtR0oBiCZZbJ07OhpR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/h2rGdUEEKr3S6Pe6DXW5WvAkkz8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1694172,
-    "ru": "Friends Until the End",
-    "en": "Friends Until the End",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.16,
-    "genres": [
-      "детектив",
-      "триллер",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wdbfTtPdWsmXPoIog5JNhZ953AO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tevXnExZdF8u8Sjqt4xXkXFy5T8.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1692376,
-    "ru": "トランジット・イン・フラミンゴ",
-    "en": "トランジット・イン・フラミンゴ",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.16,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bOMD92imvC3UWPmVylDOGUNtlWE.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vPylm4YZKAppVIIlbXPdrosZ27n.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1575562,
-    "ru": "Quasi Grazia",
-    "en": "Quasi Grazia",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.16,
-    "genres": [
-      "драма",
-      "история"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/7xxuXuHFLhgCtsnmSFcKjm9lk5v.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vxD0xfmFqnjAxzh3YG09nqYswSt.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1049439,
-    "ru": "L'Âge d'or",
-    "en": "L'Âge d'or",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.16,
-    "genres": [
-      "история",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tuLe4oHdG4wrCsscEpcCxzibBfB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gQQ7j5t5m2BYhk4gCOQzLccwtes.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1694451,
-    "ru": "The Sunny Side",
-    "en": "The Sunny Side",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.16,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/Aag6QMZDDXIyS908r75HaGa13XD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hepiKf9D9X4uD6yrFWbcZ9AxwkM.jpg",
     "source": "tmdb"
   }
 ]

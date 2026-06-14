@@ -1,5 +1,191 @@
 [
   {
+    "id": 885206,
+    "ru": "മധുരം ജീവാമൃത ബിന്ദു",
+    "en": "മധുരം ജീവാമൃത ബിന്ദു",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.92,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pFf4WFC8lcmdEcaQXMeUDTbdok3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vVNaQvEpDugLUxV6NBdJdivTT2E.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 933557,
+    "ru": "The Contrast",
+    "en": "The Contrast",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.92,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/sioXCmW4Q2VXLYm9hIY8GcnU3m7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ibWj2ARVrAabIWDq5vSXoJRZfVV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 766824,
+    "ru": "섹시퀸 유진의 섹스 스캔들",
+    "en": "섹시퀸 유진의 섹스 스캔들",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.87,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xlKCw70uKchPEKn5gLlPfNw61zw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/61r0muLCNqOgNKNRoaBPxXrOiyk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1113932,
+    "ru": "大海怪",
+    "en": "大海怪",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.86,
+    "genres": [
+      "боевик",
+      "приключения",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kP4AeHfcNwk19FFK9QPlclq1lbS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4SW8d7T5lrinT6SIKuc3gX4aSN9.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1048267,
+    "ru": "惡人當道",
+    "en": "惡人當道",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.85,
+    "genres": [
+      "криминал",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yfIe5vvnVZw5vr3G5bRdACAdnJs.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xmS2baxZUpvxsnxJhReDLx4Ge1r.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1352445,
+    "ru": "Inherit the Witch",
+    "en": "Inherit the Witch",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.85,
+    "genres": [
+      "ужасы",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/BTkcOikAvHCC7an9iLRwlxX94E.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eeGTJKXZDw3wOKRsqPtYXvmwcn2.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1474133,
+    "ru": "祭弒",
+    "en": "祭弒",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.83,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xtahqv4AAP8x6S1oRAbsIeiCOzV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mnD2rucjQm5YMXumscc06qp9sfG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 734110,
+    "ru": "스와핑: 내 아내의 친구",
+    "en": "스와핑: 내 아내의 친구",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.83,
+    "genres": [
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vXt5OgjOWom1wym7OZYKkpnhOdS.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eS7mb5g1Fw9rtKjpEFyfr3DvMcm.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 754740,
+    "ru": "해풍 : 바람난 여자",
+    "en": "해풍 : 바람난 여자",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.81,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/oJLFTUK639IItc8nbffKB1gQuuj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dAXzOV4szgfaEJfoE8B3iViR8Hm.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1429311,
+    "ru": "പൊങ്കാല",
+    "en": "പൊങ്കാല",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 3.0,
+    "votes": 1,
+    "popularity": 0.8,
+    "genres": [
+      "боевик",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gsXz7wmbqQ8ywNjJhlpOkxMtOZ4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/khgUrxxkQ9zIgMOvuQq8JOSmBEN.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1163498,
     "ru": "锁战",
     "en": "锁战",
@@ -9158,193 +9344,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/8hrUuNfPdIce0qlousJN3N2V9PH.jpg",
     "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 815306,
-    "ru": "Vocación sexo",
-    "en": "Vocación sexo",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.3,
-    "votes": 3,
-    "popularity": 1.21,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/26ggqmAn65XTO6qYsT6wefspnCQ.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 841225,
-    "ru": "La esposa de mi jefe",
-    "en": "La esposa de mi jefe",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.3,
-    "votes": 3,
-    "popularity": 0.67,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/keAxPZvpUY9mcXuAsDjBbnm2fpQ.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 614365,
-    "ru": "A.I. 187",
-    "en": "A.I. 187",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.3,
-    "votes": 3,
-    "popularity": 0.6,
-    "genres": [
-      "фантастика",
-      "фэнтези",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wNcTkJ38MyCaU7KvMH3C3LcMDmv.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 340216,
-    "ru": "Echo Lake",
-    "en": "Echo Lake",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.3,
-    "votes": 3,
-    "popularity": 0.48,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/j5lEgUTfjhd6b82hcNvG7G8Imwc.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 331579,
-    "ru": "Цена желания",
-    "en": "The Price of Desire",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.3,
-    "votes": 3,
-    "popularity": 0.46,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/79Ws63I4mIiiIXXONdXbAqHqsYP.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 841220,
-    "ru": "Como burro en primavera",
-    "en": "Como burro en primavera",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.3,
-    "votes": 3,
-    "popularity": 0.43,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/gI7fLxDmuVQ9PNAto5UhLuQDHPX.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 10,
-    "ru": "All in Good Faith",
-    "en": "All in Good Faith",
-    "year": 1985,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 2.2,
-    "votes": 70,
-    "popularity": 1.2,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/h9qveCyL3m6tNOrdhUabZk7khKt.jpg",
-    "backdrop": "",
-    "source": "tmdb"
-  },
-  {
-    "id": 556485,
-    "ru": "Крымский мост. Сделано с любовью!",
-    "en": "Крымский мост. Сделано с любовью!",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 14,
-    "popularity": 0.56,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Жаркое лето и ласковое море — в Керчи строится Крымский мост. У Димы — молодого и дерзкого строителя — есть хобби: из каждой смены студенток-археологов выбрать самую красивую и именно ее завоевать. И в этот раз случилось бы так же, если бы не московский пиарщик. Он привез на стройку телевизионщиков из Америки, и, конечно, именно он — роскошный карьерист на белом кабриолете — покорит сердце Вари. Или нет? Пока два соперника наперегонки очаровывают её, горячий кавказец Берик (по паспорту Бернард!) пытается реализовать свою мечту — жениться на американке и уехать в Голливуд.",
-    "poster": "https://image.tmdb.org/t/p/w342/j97EPjQj6APoWbLxDkykN2m78wK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/nWUjEWytw4mr9BEkiPhIxof4034.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1225048,
-    "ru": "Sağ Salim 3: Ölü ya da Diri",
-    "en": "Sağ Salim 3: Ölü ya da Diri",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 8,
-    "popularity": 0.75,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jeLgDRs67kCsmNcRC5mOqQtW1qI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wFXlMaudoW0XmNwZ5OmTT0xSHHe.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 952733,
-    "ru": "Quartz Vein",
-    "en": "Quartz Vein",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 2.2,
-    "votes": 5,
-    "popularity": 1.68,
-    "genres": [
-      "ужасы",
-      "комедия",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pjBgYNsHpREvBQ1tFcyj976QDiq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sMtFvcLT7eaNC2dNyG0LpXg2y0H.jpg",
     "source": "tmdb"
   }
 ]

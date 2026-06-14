@@ -1,5 +1,198 @@
 [
   {
+    "id": 835030,
+    "ru": "പീസ്",
+    "en": "പീസ്",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.57,
+    "genres": [
+      "драма",
+      "триллер",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gUkrXgMmkMXHS6qEFnTJzbbLArR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qyDqaQSlKL8nAkMi1VTIA6VhmWr.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 890107,
+    "ru": "అతిధి దేవోభవ",
+    "en": "అతిధి దేవోభవ",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.55,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/k1eUqOyh0sF9V89UgLvPei5Q8zz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iKdZgaKlUHMq3pclHvhAXh0k4cj.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 742922,
+    "ru": "A Virtual Princess Bride Reunion",
+    "en": "A Virtual Princess Bride Reunion",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.55,
+    "genres": [
+      "фэнтези",
+      "комедия",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/r3ajAzeO1kP1GG8tlyY8GFdq61X.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wlRJ6tasNFUBMsFdVepQTza47Vf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1121878,
+    "ru": "Gurkha: Beneath the Bravery",
+    "en": "Gurkha: Beneath the Bravery",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.53,
+    "genres": [
+      "драма",
+      "военный",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/jYRneZ6p7WzkFEyEdRYZJcg07eg.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qwXfMa8oJY007JTfSOZeaSEGjkR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1151423,
+    "ru": "I Am Not Big Bird",
+    "en": "I Am Not Big Bird",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.52,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6P0Zj7BVMpimbDSHJl03ezATkqR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yBijB9vofBbxNIK0qGbtrqHnlNJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1026804,
+    "ru": "绝望主夫",
+    "en": "绝望主夫",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.51,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gFFWHbYMavOIFZVSlu1GsGIRMxs.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rXzM5NDX9cJcXa52m6tcjKEVp1R.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 654982,
+    "ru": "Qu'importe si les bêtes meurent",
+    "en": "Qu'importe si les bêtes meurent",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.5,
+    "genres": [
+      "фантастика",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zwo86BUCyAMcAXUXsv9t4dBgC9q.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tLitvwOz680j9RTTAUpAArMlu0H.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 547991,
+    "ru": "멀리가지마라",
+    "en": "멀리가지마라",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.5,
+    "genres": [
+      "драма",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/iu4FYVxFpDz9DA4CRFsFZNLKznF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eUoZfYOPdptc9OKTiH8nIqoAn4w.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1273232,
+    "ru": "Sci-Fi Vixens from Beyond",
+    "en": "Sci-Fi Vixens from Beyond",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.49,
+    "genres": [
+      "фантастика",
+      "мелодрама",
+      "ужасы"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/kWSpaZC0zeL0qUrvUFmDcrCIzkn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6ABo12JyTmSQSNFlJ8HJp6GXmJT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 988393,
+    "ru": "Nos belles-sœurs",
+    "en": "Nos belles-sœurs",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.3,
+    "votes": 3,
+    "popularity": 0.49,
+    "genres": [
+      "комедия",
+      "драма",
+      "музыка"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/eENcp78HBgc1oO6VdhARJDNrl7h.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qDmjrXjwLUZHzijd1jgK9gy4CF2.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 628466,
     "ru": "소리꾼",
     "en": "소리꾼",
@@ -9802,203 +9995,5 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1501/111468l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 740952,
-    "ru": "Гнев во спасение",
-    "en": "Savage Salvation",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 280,
-    "popularity": 1.68,
-    "genres": [
-      "боевик",
-      "триллер"
-    ],
-    "overview": "Бывший наркоман, чья девушка погибла из-за передозировки героина, решает отомстить картелю, ответственному за поставку наркотиков.",
-    "poster": "https://image.tmdb.org/t/p/w342/tjZ7UvzTd2Cl124bYF8w2sW9qB7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rodjjIJ8oh9nuBp86PhojcYHTEN.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 688258,
-    "ru": "Оккупация: Миссия «Дождь»",
-    "en": "Occupation: Rainfall",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 279,
-    "popularity": 1.59,
-    "genres": [
-      "фантастика",
-      "боевик"
-    ],
-    "overview": "Прошло два года после инопланетного вторжения. Пришельцам удалось уничтожить практически всё человечество, но Сидней ещё не повержен — выжившие и примкнувшие к ним инакомыслящие инопланетяне продолжают отчаянно сражаться, но их силы на исходе. Тем временем небольшая группа людей узнает о заговоре, который может положить конец войне.",
-    "poster": "https://image.tmdb.org/t/p/w342/1H4NXkEGy9IhbkI5cRJ3NgIP68M.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xG8MoAb91jRGi01iwU0UMpXNlvK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 557336,
-    "ru": "Язвы Бреслау",
-    "en": "Plagi Breslau",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 278,
-    "popularity": 0.46,
-    "genres": [
-      "криминал",
-      "боевик",
-      "триллер"
-    ],
-    "overview": "Вроцлав сотрясает волна убийств. Каждый день в 18:00 серийный убийца казнит очередную жертву. Разгадать мрачную тайну пытается женщина-полицейский Елена Русь.",
-    "poster": "https://image.tmdb.org/t/p/w342/hcLCLWYuLJFHrN4y23YxHTlZVsV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/n8IlbxbfK34s3bjAcVjcgNZpBrd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 931954,
-    "ru": "Венера",
-    "en": "Venus",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 274,
-    "popularity": 1.46,
-    "genres": [
-      "драма",
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "Люсия, танцовщица диско в бегах, укрывается в зловещем здании на окраине Мадрида, где живет ее сестра Росио с дочерью Альбой.",
-    "poster": "https://image.tmdb.org/t/p/w342/yGpJbft7JQpQHHHasRr4wWdVcuJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hyR5Lfzf2ZvCtIJGMcMYOK5KcLT.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_66789",
-    "ru": "24 часа: Наследие",
-    "en": "24: Legacy",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.2,
-    "votes": 270,
-    "popularity": 5.99,
-    "genres": [
-      "криминал",
-      "драма",
-      "детектив"
-    ],
-    "overview": "Герой войны возвращается домой и в силу обстоятельств вынужден обратиться за помощью в антитеррористический отдел.",
-    "poster": "https://image.tmdb.org/t/p/w342/2eoCEa9myi32C3QC7VYEu4y1f6D.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xBCYJrPYAqdjAfvinHBB3WT9lqp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 745376,
-    "ru": "Между здравствуй и прощай",
-    "en": "Hello, Goodbye, and Everything in Between",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 267,
-    "popularity": 1.56,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "Клэр и Эйдан решают расстаться перед поступлением в колледж — без особых душевных терзаний. Но станет ли их прощальное свидание последним шансом на воссоединение?",
-    "poster": "https://image.tmdb.org/t/p/w342/xyGsnp4Ld5PmJYYWnfuYYoENhHt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8vn4eis4xk6cnOnAuAcyzPbqVb0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 267863,
-    "ru": "Прогулка по солнечному свету",
-    "en": "Walking on Sunshine",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 266,
-    "popularity": 1.1,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "После красивого, бурного и стремительного романа Мэдди и Раф принимают решение пожениться, а свадьбу сыграть на берегу Средиземного моря в Испании. Мэдди счастлива. Она готовится к церемонии, приглашает гостей, среди которых — ее любимая сестра Тэйлор. Кто мог предположить, что между Рафом и Тэйлор была когда-то страстная любовь, которая, как оказалось, вовсе не угасла…",
-    "poster": "https://image.tmdb.org/t/p/w342/cinzBoSTTENMpUPIILrEHE7To91.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/yWhPEx0CyRAVXtAeQspbDIcxXPP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 13647,
-    "ru": "Несокрушимый Железный Человек",
-    "en": "The Invincible Iron Man",
-    "year": 2007,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 265,
-    "popularity": 1.4,
-    "genres": [
-      "приключения",
-      "мультфильм",
-      "боевик",
-      "фэнтези",
-      "фантастика"
-    ],
-    "overview": "Искусствовед, специализирующийся по странам Востока миллиардер Тони Старк, вот уже несколько лет плодотворно работает над главным проектом своей жизни — возрождением древнего китайского города, императором которого был великий Мандарин, оставшийся в истории, как самый жестокий правитель Китая. Древняя китайская легенда гласит, что непобедимый император, заключив договор с силами тьмы, получил от них бессмертие и могущество, но потом был повержен и предан забвению. И только через несколько тысяч лет Великий Император вновь обретёт свою силу и в этот день люди в последний раз увидят солнечный свет…",
-    "poster": "https://image.tmdb.org/t/p/w342/eebNTSRa5Hh5skPKGdGJIJpo9Ls.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/x6gi2yn51sjRBMt6xeVTPVGFeSB.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 580629,
-    "ru": "Вздрюченные",
-    "en": "Get Duked!",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 263,
-    "popularity": 0.99,
-    "genres": [
-      "комедия",
-      "боевик",
-      "ужасы"
-    ],
-    "overview": "За многочисленные правонарушения три малолетних гопника вынуждены отправиться в поход по Северо-Шотландскому нагорью за премию герцога Эдинбургского. К ним присоединяется ещё один подросток, давно мечтавший принять участие в мероприятии, и ребята пускаются в путь. Основные задачи похода - научиться командной работе, ориентированию на местности и собирательству - приятелям придётся выполнять в экстремальных условиях, когда в этой безлюдной местности на них открывают охоту неизвестные в масках.",
-    "poster": "https://image.tmdb.org/t/p/w342/b52nqFj5XrBNA7MhqcnENvFsHtx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hH1vDR2vz9aCZMm2NfR6Qaar5ZK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 586707,
-    "ru": "Как живой",
-    "en": "Life Like",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 262,
-    "popularity": 2.23,
-    "genres": [
-      "триллер",
-      "фантастика",
-      "драма"
-    ],
-    "overview": "Молодая пара Джеймс и Софи получают уникальную возможность стать первыми в мире обладателями последнего достижения технологического прогресса - нового робота Генри, внешне абсолютно неотличимого от обычного человека. По мере того как эти трое сближаются, их понимание того, что значит быть человеком, меняется.",
-    "poster": "https://image.tmdb.org/t/p/w342/5R8rhUFn4cDEVoSMUBTiWUHyjIf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mrvhoKAEm0zAXIJUksDFsmyk4vQ.jpg",
-    "source": "tmdb"
   }
 ]

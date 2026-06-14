@@ -1,5 +1,194 @@
 [
   {
+    "id": 325226,
+    "ru": "Eat My Shit",
+    "en": "Eat My Shit",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 43,
+    "popularity": 0.68,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7vVTSVOMV963Lnj7YaqYF2GNu2N.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/plYmfKkoOujtd5ClWn28UppZyyo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 655524,
+    "ru": "Причини мне любовь",
+    "en": "Lovecut",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 42,
+    "popularity": 0.4,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Три пары подростков разбираются с трудностями в самоопределении, отношениях, любви и сексе в условиях современной цифровой реальности, таящей в себе как множество возможностей, так и опасностей.",
+    "poster": "https://image.tmdb.org/t/p/w342/subhzhanuzxPhh1jotcRJa8eJdU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2vmXNAOQfXfe6K8t1Bjaz1rsPKs.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 299822,
+    "ru": "Чжун Куй: Снежная дева и Темный кристалл",
+    "en": "钟馗伏魔：雪妖魔灵",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 42,
+    "popularity": 1.69,
+    "genres": [
+      "боевик",
+      "фэнтези",
+      "мелодрама"
+    ],
+    "overview": "Молодой человек Чжун Куй - в поздней китайской мифологии повелитель демонов, а к началу эпохи Тан Чжун Куй превратился из божества, оберегающего от злых сил, в божество, усмиряющее и истребляющее демонов - наделённый таинственными силами вынужден сражаться с духами Неба, Земли и Ада ради спасения своих соотечественников и любимой женщины…",
+    "poster": "https://image.tmdb.org/t/p/w342/9KvaY7sREAYAtXHsMijwBZub7F5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5R4KbfpKWXbhiEZTV3RmZ0uZGgf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 561461,
+    "ru": "Королевские гонки РуПола. Рождевственский выпуск",
+    "en": "RuPaul's Drag Race Holi-Slay Spectacular",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 42,
+    "popularity": 0.96,
+    "genres": [
+      "музыка"
+    ],
+    "overview": "В этом праздничном выпуске Латрис Роял, Шанжела, Ким Чи и другие любимицы зрителей будут бороться за титул Рождественской королевы. Это настоящее рождественское чудо!",
+    "poster": "https://image.tmdb.org/t/p/w342/tz7F1rVH9wFAyWKZb3Xx3dKt4rm.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/AiYqD7sLmse19LPG7XDgw3hGdjz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 159100,
+    "ru": "Kink",
+    "en": "Kink",
+    "year": 2013,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 42,
+    "popularity": 2.99,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/oJe79y9CgO5VLSG9ecHJwF09IZ4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xY4RzdpnnE4x0jmyTNuDgKXsr9x.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1127407,
+    "ru": "Фрэнки Фрико",
+    "en": "Frankie Freako",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 41,
+    "popularity": 1.24,
+    "genres": [
+      "фэнтези",
+      "комедия",
+      "ужасы"
+    ],
+    "overview": "Конор работает с утра до ночи, а в выходные разгребает накопившиеся бытовые дела. В конце концов его накрывает экзистенциальный кризис. Неожиданно он натыкается по телевизору на рекламу горячей линии для вечеринок, которую ведет странный гоблин Фрэнки Фрико. Конор звонит по телефону, чтобы затем отправиться в главное путешествие в своей жизни, после которого он не будет прежним.",
+    "poster": "https://image.tmdb.org/t/p/w342/8xjOFXj0CHy5Mp6Wfsr2iIXTtZ5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/1qjegraxHJVAJuwXlUrPzuLEs9N.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 45453,
+    "ru": "Изнасилованная ангелом",
+    "en": "香港奇案之強姦",
+    "year": 1993,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 41,
+    "popularity": 2.69,
+    "genres": [
+      "комедия",
+      "криминал",
+      "триллер",
+      "ужасы"
+    ],
+    "overview": "Нам — блестящий юрист, держащий свою адвокатскую контору. Он кажется идеальным джентльменом, но вне работы преображается, превращаясь в жестокого насильника. Увидев в телерекламе двух очаровательных девушек , он переезжает в соседнюю с ними квартиру и после долгой подготовки насилует одну из них, подстроив все таким образом, что суд его оправдывает. Теперь вторая девушка вместе с боссом триад решает устроить ему ловушку, чтобы потом поймать по его же, законным правилам.",
+    "poster": "https://image.tmdb.org/t/p/w342/294wZqO7amlsePQF4UAMiGggNZ4.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/k49q2roFSJtD47xQMIfqqVZfDks.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 370301,
+    "ru": "Поварской Турнир",
+    "en": "Cook-Off!",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 41,
+    "popularity": 2.01,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Американская мокьюментари-комедия о группе чудаков, которые участвуют в кулинарном шоу для начинающих поваров, победа в котором принесет одному счастливчику целый миллион долларов. По первым кадрам фильм не отличить от сотен реалити-шоу, которые идут на телеканалах один за другим. Камера подробно следит за каждым поваром, и кроме кулинарных секретов вы узнаете и секретные истории каждого персонажа – невероятные и до коликов смешные. Какими блюдами начинающие кулинары будут удивлять критиков шоу? Как сложатся отношения между конкурсантами? Есть ли на кулинарном поединке место дружбе и любовным интригам? Играют в фильме гении импровизации – сама Катрин Мишон, которая не впервые обращается к кулинарной теме в кино, Дидрих Бадер и Мелисса Маккарти.",
+    "poster": "https://image.tmdb.org/t/p/w342/j1n87kfgnP3cIZfVhrnqZmfWjj0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nYaChE5HqJDAbreITxgrwBY2YEt.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 474698,
+    "ru": "Сиджин 4",
+    "en": "Siccîn 4",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 41,
+    "popularity": 0.62,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "Из-за финансовых трудностей семье с детьми приходится переехать в дом бабушки, которая живёт одна в большом доме. Вот только, живёт она там на самом деле не одна, ведь её дом - ещё и гробница усопшего мужа.",
+    "poster": "https://image.tmdb.org/t/p/w342/fgceFw2fvM0bjFSiCVjER3rPCIG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mboBRzejgNdjYxVwuXRmlcCVLDR.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 496748,
+    "ru": "Делиха 2",
+    "en": "Deliha 2",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.2,
+    "votes": 41,
+    "popularity": 0.79,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ulVSho2mdZplxuWWBq578p7xePZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/nGaUTAibDbgeYreBE6z0dDm9Scr.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "960135",
     "ru": "Мадам де Севинье",
     "en": "Madame de Sévigné",
@@ -9331,196 +9520,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/ptypoqrDZARMtmhErkxIs0j4fuY.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/drJPsuSACfWJV6zQ2OtCIX8QJCX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 887823,
-    "ru": "Путешествие на запад : Дитя демона",
-    "en": "西游记红孩儿",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.2,
-    "votes": 4,
-    "popularity": 0.48,
-    "genres": [
-      "комедия",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qVrGjdx0wOHtE6fJE17jPmCsp2r.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gItXvK10n2pEFsE9FkRa4BqKuC6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 649044,
-    "ru": "Láska na špičkách",
-    "en": "Láska na špičkách",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.2,
-    "votes": 4,
-    "popularity": 0.47,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fbFhQE4wuRbqwTs8Vwf2FPkASHt.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pOoBqUvNB53ZInnjNleuUxam41l.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 811826,
-    "ru": "ഇന്ന് മുതൽ",
-    "en": "ഇന്ന് മുതൽ",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.2,
-    "votes": 4,
-    "popularity": 0.44,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3K8twLQ622D4s5hotfxfjo3TZ9N.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wXrvQJeMGcp0IB677pySQVfi614.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 633490,
-    "ru": "Safeguard",
-    "en": "Safeguard",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.2,
-    "votes": 4,
-    "popularity": 0.43,
-    "genres": [
-      "боевик",
-      "триллер",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yvtSmxGSqBjfSqDEMvgHDlPoLQD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d9S560FcKeXN3yZTl5KX4cvXJ0M.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 746800,
-    "ru": "زنزانة ٧",
-    "en": "زنزانة ٧",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.2,
-    "votes": 4,
-    "popularity": 0.37,
-    "genres": [
-      "боевик",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uyKtesW2lPI8zN5mS5TQd5dIRcv.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/38XUSf4LCV0CGQXLkLr7IVCAfFp.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 304995,
-    "ru": "High Horse: The Black Cowboy",
-    "en": "High Horse: The Black Cowboy",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.2,
-    "votes": 4,
-    "popularity": 0.31,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yMjmR1n2L20GyyvJvTeyM8JJyPW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/92VrriHqW9vAaqrSZlubKyvUxPv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 288782,
-    "ru": "Enquête en famille",
-    "en": "Enquête en famille",
-    "year": 2025,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.2,
-    "votes": 4,
-    "popularity": 0.29,
-    "genres": [
-      "комедия",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qmSm294wr8nlGr55OOBr5u0fOML.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3Hqy1pNaJiDKyKMvHErDGZpbxwX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 304483,
-    "ru": "House of Villains",
-    "en": "House of Villains",
-    "year": 2026,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 5.2,
-    "votes": 4,
-    "popularity": 0.28,
-    "genres": [
-      "Реалити-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6op16rkFjeLqb8cq0Nxu9MCMt8p.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lZOoorbos4NsfxWlwbU1aN57oDl.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 530707,
-    "ru": "День счастья",
-    "en": "День счастья",
-    "year": 1964,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.2,
-    "votes": 4,
-    "popularity": 2.77,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Как правило, жизнь человека — это череда дней, плавно перетекающих из одного в другой. Но иногда случается, что один — самый обычный день кардинально изменяет направление этого размеренного течения.  Врач «скорой помощи» ехал в автобусе и встретил прекрасную незнакомку. Под надуманным предлогом познакомился с ней, (они оказались полными тезками: она — Александра Николаевна, он — Александр Николаевич), потерял в толпе, и с тех пор всегда искал встречи с ней…  Выдающийся геофизик, муж Александры Николаевны, не поехал в очередную экспедицию, остался дома с женой, устроив себе «день счастья», и потерял работу…",
-    "poster": "https://image.tmdb.org/t/p/w342/v17aIu7CvlcBAYxOQHQeBDrsFrI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ytQ69KU6qgIDRCA910ac5aqmdiK.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 874930,
-    "ru": "封神·托塔天王",
-    "en": "封神·托塔天王",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.2,
-    "votes": 4,
-    "popularity": 0.91,
-    "genres": [
-      "боевик",
-      "фэнтези",
-      "приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/iA5wDhduS8Kk790fYxyO4KEm2ZA.jpg",
-    "backdrop": "",
     "source": "tmdb"
   }
 ]

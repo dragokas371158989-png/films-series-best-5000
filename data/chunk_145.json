@@ -1,5 +1,194 @@
 [
   {
+    "id": 323389,
+    "ru": "スクライド オルタレイション QUAN",
+    "en": "スクライド オルタレイション QUAN",
+    "year": 2012,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 2,
+    "popularity": 0.66,
+    "genres": [
+      "боевик",
+      "приключения",
+      "мультфильм",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5SXsjB8juFWaW4zabzt7W4PXEE2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/kFfcfyeAGoTjoVB0cvfAT7B8w07.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 390292,
+    "ru": "방 안의 코끼리",
+    "en": "방 안의 코끼리",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 2,
+    "popularity": 0.65,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rEm3K8yHxyc48NLXKWvpPNvX7Ef.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wtoTeZsewceR11Uc1M7d7un851Z.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 440710,
+    "ru": "The Spiritualist",
+    "en": "The Spiritualist",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 2,
+    "popularity": 0.64,
+    "genres": [
+      "драма",
+      "ужасы",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/lWLq1LBRiAykvemJHp22cZhFiV7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/iLhxlBqleMDx8RRUqX97JGjXgkE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 354433,
+    "ru": "劇場版 とっとこハム太郎 ハムハムランド大冒険",
+    "en": "劇場版 とっとこハム太郎 ハムハムランド大冒険",
+    "year": 2001,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 2,
+    "popularity": 0.64,
+    "genres": [
+      "семейный",
+      "фэнтези",
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dMYSAuTJcrmPmdnrJoQ5nMQMpFf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xE2ST7XApVZpwzUMiIpB9lErNqN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 635258,
+    "ru": "Historias de nuestro cine",
+    "en": "Historias de nuestro cine",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 2,
+    "popularity": 0.62,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/As15agSHd6WmBCGd9EmRPb69S4W.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lHF3s2UQ6PUhvZ7iB1pVZnTFP4H.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 267484,
+    "ru": "피해자들",
+    "en": "피해자들",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 2,
+    "popularity": 0.62,
+    "genres": [
+      "триллер",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/gCUaFvAHFkiiccM1HrxLPAZChSs.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/94QfinFRziJYmfkg7tiLBYKjYwM.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1496993,
+    "ru": "メガゾーン23 III",
+    "en": "メガゾーン23 III",
+    "year": 1989,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 2,
+    "popularity": 0.62,
+    "genres": [
+      "мультфильм",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/uKsPClvdzVLCI7p90KYYyMWfvGG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yY2XjhhKaVbDHFCcNVF0NCfGOtT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 980326,
+    "ru": "惑星ロボ　ダンガードＡ対昆虫ロボット軍団",
+    "en": "惑星ロボ　ダンガードＡ対昆虫ロボット軍団",
+    "year": 1977,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 2,
+    "popularity": 0.62,
+    "genres": [
+      "мультфильм",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/dwgBs7NJ0vYehyRjK9CmKirIKzA.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zPgb7ggjpgSNzGETFUngnBDyu08.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1092238,
+    "ru": "젊은엄마네 하숙집",
+    "en": "젊은엄마네 하숙집",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 2,
+    "popularity": 0.59,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/hCV7YynvZ7wHgxiRusn2typNN0T.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cc0Ka7ijNfzZnHsrr3Y7MzJHdDi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 616974,
+    "ru": "Partenonas",
+    "en": "Partenonas",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.5,
+    "votes": 2,
+    "popularity": 0.58,
+    "genres": [
+      "драма",
+      "криминал",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/fmGnujCZZ4AvaG1pMCvIHYZh72m.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eXAvzHsKcUDz2z42dkTw4KkmPGL.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 461092,
     "ru": "ఏంజెల్",
     "en": "ఏంజెల్",
@@ -9450,206 +9639,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/bCatQ1aEkqAuDdNmNoG4KI9v0A0.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/2QOFHlNF59ff8xedGmndduSqrV5.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 261364,
-    "ru": "Einmal Hans mit scharfer Soße",
-    "en": "Einmal Hans mit scharfer Soße",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.4,
-    "votes": 28,
-    "popularity": 0.38,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rte3udWi47fKxDXKyJfRf7Voda3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zYFU7CfOl6PkWNrjVd9wr7X2tk3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "632458",
-    "ru": "Фури-кури 2",
-    "en": "フリクリ プログレ",
-    "year": 2018,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.4,
-    "votes": 27,
-    "popularity": 0.99,
-    "genres": [
-      "боевик",
-      "комедия",
-      "мультфильм",
-      "Аниме"
-    ],
-    "overview": "Много лет миновало с тех пор, как нелюдимый Наота Нандаба и неистовая Харуко Харухара устраивали сумасшедшие гонки и сражения с инопланетными силами, скромно называя это «приключениями». Теперь Наота... Хотя нет, не Наота. Здесь его вообще не будет.\r Наша главная героиня — Хидоми. Она — самый что ни на есть обычный подросток, уже не ждущий от своей скучной и серой жизни каких-то сюрпризов. Точнее не ждала, пока в школу девочки не устроилась новая преподавательница с прекрасным именем... Харуко! Пожив мирно последние минуты, Хидоми обнаруживает, что на её город напала «Medical Mechanica». Прибывшая «Medical Mechanica» — инопланетная компания прямиком из космоса — начала нешуточную войну с ещё одной такой же компанией под названием «Fraternity». И вот теперь их вражда дошла до границ Земли.",
-    "poster": "https://image.tmdb.org/t/p/w342/kRLWa1i4gMfJR57oyq13uN5XdUA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7XkeX8nmTj16iZ9zsJUMWhAE8La.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 699046,
-    "ru": "Идеальный план",
-    "en": "A Perfect Plan",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.4,
-    "votes": 27,
-    "popularity": 0.54,
-    "genres": [
-      "боевик",
-      "приключения",
-      "криминал",
-      "детектив",
-      "триллер"
-    ],
-    "overview": "Четыре печально известных грабителя просыпаются в неизвестном и закрытом месте. Оказывается, что их похитили для того, чтобы они украли бриллианты. Но для этого им нужно выполнить несколько заданий.",
-    "poster": "https://image.tmdb.org/t/p/w342/wah4b3hDb3ueVNuwNxdplUE8ppQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rc9cOb61uD8PiruWCMwegC0V4tq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1317877,
-    "ru": "Dream Eater",
-    "en": "Dream Eater",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.4,
-    "votes": 27,
-    "popularity": 0.66,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5PRT9vkRxSAogsce4v4svKNQkqb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vqrw1TwujGvNcDBL6xVVU9cUKge.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 874196,
-    "ru": "The Christmas House 2: Deck Those Halls",
-    "en": "The Christmas House 2: Deck Those Halls",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.4,
-    "votes": 27,
-    "popularity": 0.56,
-    "genres": [
-      "мелодрама",
-      "драма",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/cWccc2GZL0w4IUiW2d4o81c8A28.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xz3hZViv1AwAZDlwhu9dE8yVCmX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 353463,
-    "ru": "Виль-Мари",
-    "en": "Ville-Marie",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.4,
-    "votes": 27,
-    "popularity": 0.57,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "Французская актриса Софи пытается наладить отношения с сыном, который хочет выяснить, кто же является его биологическим отцом. После неожиданных роковых событий судьба сводит их с медсестрой и работником отделения «скорой помощи», и теперь их жизни изменятся навсегда.",
-    "poster": "https://image.tmdb.org/t/p/w342/t4Gn7SqE0qucrx5pXkKJ4U9VzNA.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vy6NUb6NC9HSm93hcF4yX2kz20O.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 602939,
-    "ru": "Моссад",
-    "en": "המוסד",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.4,
-    "votes": 27,
-    "popularity": 0.56,
-    "genres": [
-      "комедия",
-      "боевик"
-    ],
-    "overview": "После похищения американского технологического миллиардера в Израиле спасти его спешат агенты Моссада. В то же время ЦРУ отправляет на помощь своего лучшего агента.",
-    "poster": "https://image.tmdb.org/t/p/w342/d4csUZ1nvL4N4yDNzYuibBZv3a8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/45yRzYXSJ8zg6Ki7PqxOFlGN95t.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 253256,
-    "ru": "The Heart Machine",
-    "en": "The Heart Machine",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.4,
-    "votes": 27,
-    "popularity": 0.37,
-    "genres": [
-      "драма",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/Aay15LtGwU0oz2ReXnMpGzAo7iu.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ljsYUs9tIKcFWDNzThz2kEfROXG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "415283",
-    "ru": "Поп и Кью",
-    "en": "ポッピンQ",
-    "year": 2016,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.4,
-    "votes": 26,
-    "popularity": 0.89,
-    "genres": [
-      "мультфильм",
-      "фэнтези",
-      "музыка",
-      "драма",
-      "приключения",
-      "Аниме"
-    ],
-    "overview": "Наконец-то завтра выпускной. Но не тут-то было. Так и не попав на церемонию вручения дипломов, пять самых обычных учениц средней школы переносятся в параллельный мир, которому грозит огромная опасность. Чем же обыкновенные, ничем не примечательные девушки смогут помочь? Ответ лежит на поверхности. Танец, способный объединить пять девичьих сердец. Им необходимо полюбить этот мир и донести друг до друга свои чувства. А получится ли у них это? Ведь время не стоит на месте. Успеют ли они вернуться на выпускной?",
-    "poster": "https://image.tmdb.org/t/p/w342/pk3Q0U7dh3wf3c3J3cagqz0zUE9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hqWDlweByJpuaHm0b1IakGGwVp3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "68828",
-    "ru": "アウトランダーズ",
-    "en": "アウトランダーズ",
-    "year": 1986,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 5.4,
-    "votes": 26,
-    "popularity": 1.0,
-    "genres": [
-      "мультфильм",
-      "фантастика",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/jb6Ht6p1gc7OubIpA2h0UIdKpB6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/z8sHmvEF3zvOpCekFPJz4dDtHdb.jpg",
     "source": "tmdb"
   }
 ]

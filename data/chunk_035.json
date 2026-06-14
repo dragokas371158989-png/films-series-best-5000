@@ -2031,29 +2031,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8259837,
-    "ru": "Суперглупцы",
-    "en": "원더풀스",
-    "year": "2026",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 9.09,
-    "votes": 163,
-    "popularity": 67.55,
-    "genres": [
-      "Боевик и Приключения",
-      "комедия",
-      "НФ и Фэнтези",
-      "драма"
-    ],
-    "overview": "1999-ый год. Группа обычных горожан, внезапно получивших суперспособности, встаёт на защиту родного города.",
-    "poster": "https://image.tmdb.org/t/p/w342/uARtDxJDtISHnM2BxaSKvlQpWrc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/y2u7d8evmnTivi3LaVql01Sfea4.jpg",
-    "source": "tv_popular",
-    "status": "Онгоинг",
-    "tmdbId": 259837
-  },
-  {
     "id": "mal_9863",
     "ru": "SKET Dance",
     "en": "SKET Dance",
@@ -2100,6 +2077,29 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1976/122302l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 8259837,
+    "ru": "Суперглупцы",
+    "en": "원더풀스",
+    "year": "2026",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 9.07,
+    "votes": 166,
+    "popularity": 67.55,
+    "genres": [
+      "Боевик и Приключения",
+      "комедия",
+      "НФ и Фэнтези",
+      "драма"
+    ],
+    "overview": "1999-ый год. Группа обычных горожан, внезапно получивших суперспособности, встаёт на защиту родного города.",
+    "poster": "https://image.tmdb.org/t/p/w342/uARtDxJDtISHnM2BxaSKvlQpWrc.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/y2u7d8evmnTivi3LaVql01Sfea4.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 259837
   },
   {
     "id": "mal_45649",
@@ -2154,6 +2154,27 @@
     "poster": "https://cdn.myanimelist.net/images/anime/3/45028l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 8632181,
+    "ru": "Socias por accidente",
+    "en": "Socias por accidente",
+    "year": "2026",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 9.06,
+    "votes": 260,
+    "popularity": 46.61,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/sr1Yoj6XLPTWYcbDoBy67xivW4I.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/tdY46jlxbcvgMHKlJhSCebahhBh.jpg",
+    "source": "movie_popular",
+    "status": "Вышел",
+    "tmdbId": 1632181
   },
   {
     "id": "mal_12431",
@@ -2216,27 +2237,6 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1404/106707l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 8632181,
-    "ru": "Socias por accidente",
-    "en": "Socias por accidente",
-    "year": "2026",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 9.05,
-    "votes": 256,
-    "popularity": 46.61,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/sr1Yoj6XLPTWYcbDoBy67xivW4I.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/tdY46jlxbcvgMHKlJhSCebahhBh.jpg",
-    "source": "movie_popular",
-    "status": "Вышел",
-    "tmdbId": 1632181
   },
   {
     "id": "mal_17389",
@@ -2423,7 +2423,7 @@
     "status": "Вышел",
     "studio": "",
     "rating": 8.72,
-    "votes": 30541,
+    "votes": 30550,
     "poster": "https://image.tmdb.org/t/p/w342/yvmKPlTIi0xdcFQIFcQKQJcI63W.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/zfbjgQE1uSd9wiPTX4VzsLi0rGG.jpg",
     "overview": "Бухгалтер Энди Дюфрейн обвинён в убийстве собственной жены и её любовника. Оказавшись в тюрьме под названием Шоушенк, он сталкивается с жестокостью и беззаконием, царящими по обе стороны решётки. Каждый, кто попадает в эти стены, становится их рабом до конца жизни. Но Энди, обладающий живым умом и доброй душой, находит подход как к заключённым, так и к охранникам, добиваясь их особого к себе расположения.",
@@ -2531,26 +2531,6 @@
     "source": "tmdb"
   },
   {
-    "id": 8273240,
-    "ru": "Вне кампуса",
-    "en": "Off Campus",
-    "year": "2026",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 9.0,
-    "votes": 438,
-    "popularity": 724.0,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Отличница и поп-певица Ханна влюблена в местную знаменитость - звезду футбола Джастина Кола, но тот не замечает девушку. Чтобы обратить на себя внимание Джастина и заставить ревновать, она заключает договор с капитаном университетской хоккейной команды. Он должен сыграть роль её жениха, а Ханна поможет ему улучшить успеваемость. Однако надёжный план даёт сбой.",
-    "poster": "https://image.tmdb.org/t/p/w342/etw1XngIUqHeTeIPloS9B8w9xPi.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/52sp0vPhLOWrZ1QoZIWiapronM.jpg",
-    "source": "tv_top_rated",
-    "status": "Онгоинг",
-    "tmdbId": 273240
-  },
-  {
     "id": "mal_15059",
     "ru": "頭文字 D Fifth Stage",
     "en": "Initial D Fifth Stage",
@@ -2594,6 +2574,27 @@
     "poster": "https://image.tmdb.org/t/p/w342/gLNZdWq7r8ZAyWuUxoke7qC0gy8.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/8vDzqxZvrp7IdyAI5F8NePWGyEP.jpg",
     "source": "tmdb"
+  },
+  {
+    "id": 8278573,
+    "ru": "Жена принца XXI века",
+    "en": "21세기 대군부인",
+    "year": "2026",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 9.0,
+    "votes": 125,
+    "popularity": 43.86,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "В условиях конституционной монархии XXI века, женщина, имеющая всё, но остающаяся простолюдинкой, встречает принца, который, несмотря на своё королевское происхождение, чувствует себя бессильным, — и это приводит к любви, которая бросает вызов социальному статусу.",
+    "poster": "https://image.tmdb.org/t/p/w342/j37wlFXIPcSVEjWOi1KBxzWK0in.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/6ekykPwvAywJRjFEnUoCFWTO9O3.jpg",
+    "source": "tv_popular",
+    "status": "Онгоинг",
+    "tmdbId": 278573
   },
   {
     "id": "mal_57864",

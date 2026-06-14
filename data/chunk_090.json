@@ -1,5 +1,203 @@
 [
   {
+    "id": 301043,
+    "ru": "天相",
+    "en": "天相",
+    "year": 2025,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 1.37,
+    "genres": [
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5eX2letlL8kIRKjUaiuMsO6tW5e.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/72iKVOc23oblT3IlQSB4BitkbI7.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 281599,
+    "ru": "Я собираю мусор Небесного двора",
+    "en": "我在天庭收废品",
+    "year": 2025,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 0.26,
+    "genres": [
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xd6f5O3aRb6hPeXKP9ZtyrsM8Mn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/i7T9Cpl6jtfrJhn4WMYR2QjKIOi.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 104697,
+    "ru": "Путь выбора",
+    "en": "择天记",
+    "year": 2015,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 18.26,
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Перенесемся в стародавний Китай. Эпоха золотых драконов, седых мудрецов и глупых учеников. По истине величайшая культурная эра, которая дошла сейчас и до современной поднебесной. В данном аниме будет затронута тема религии, а точнее Буддизма, который очень сильно распространён в Китае. По легенде, которая рассказывается в это тв сериале, на Землю упало несколько камней (метеориты). На одном из них были выгравированы странные символы. И начали люди молится камню, и даровал он им силушку богатырскую… А точнее просто силу, с помощью которой можно было управлять природной энергией, путём медитации, концентрации, физическому и духовному развитию. И стали люди использовать эту силу для защиты от врага ближнего...",
+    "poster": "https://image.tmdb.org/t/p/w342/zb72zHYOJiPQBfFZ7aLzO6J6Wp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ziAtDhoOnduGam51Alr74pAftuf.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 112527,
+    "ru": "Привидение Кью-Таро",
+    "en": "オバケのQ太郎",
+    "year": 1985,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 14.13,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "Детский",
+      "Аниме"
+    ],
+    "overview": "Обакэ — маленький и безобидный обакэ (демон), похожий внешне на утёнка, который любит летать, пугая прохожих людей, но сам страшно боится собак. Он начинает жить в семье Охара и дружится с мальчиком по имени Сёта, вместе они будут попадать в забавные ситуации и решать проблемы.",
+    "poster": "https://image.tmdb.org/t/p/w342/acb9g0rlsFhy3LBPDvMF7Tso9Q0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xIYUHL2KEYNMAsjFuUCQQZsH7D1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 36587,
+    "ru": "Инари в нашем доме",
+    "en": "我が家のお稲荷さま。",
+    "year": 2012,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 6.22,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "НФ и Фэнтези",
+      "Аниме"
+    ],
+    "overview": "Братья Такагами – шестнадцатилетний Нобору и одиннадцатилетний Тору – едут в провинцию, чтобы навестить дядю по матери и умирающую бабушку. Приехав, братья застают старушку в добром здравии и загадочном беспокойстве: матриарх семьи Мидзути сообщает внукам, что сила их жреческого клана оскудевает (!), магия Девы-Защитницы Мидзути слабеет(?!), и оттого Тору грозит быть съеденным демоном (!!!).\n\nИ единственное, оказывается, что им остается сделать, это идти будить Инари-сама – могущественную лисицу, запечатанную заклятьями клана Мидзути. Инари-сама просыпается. Инари-сама дуется. Инари-сама соглашается защищать... больше того, Инари-сама собирается ехать с ними в город и жить в доме Такагами! Вот на это Нобору и Тору абсолютно не рассчитывали...",
+    "poster": "https://image.tmdb.org/t/p/w342/p1fZCl4hdxnCVgqN4v4y6W1QsPa.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ojEA4oOaGm659au0gIoTrlZk7fj.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1571594,
+    "ru": "La fotógrafa",
+    "en": "La fotógrafa",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 63.89,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/95pZ9yB5SABddzaINITvZd7SvER.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9qYPmrdpGT58hd3wSam82pmPIoW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1688157,
+    "ru": "Scissors",
+    "en": "Scissors",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 6.58,
+    "genres": [
+      "драма",
+      "мелодрама"
+    ],
+    "overview": "Преследуемые серийным убийцей, известным как «Ножницы», Кортни и ее подружки отправляются в ужасное путешествие, поскольку за ними охотится психопат-садист.",
+    "poster": "https://image.tmdb.org/t/p/w342/u1T5mCSxHNTGdEv19d8lZQsBmjt.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/r22gIcIGcOwen45f7lN55PDP5j6.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 276510,
+    "ru": "Марокканская мафия: Тоннано",
+    "en": "Tonnano",
+    "year": 2025,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 2.4,
+    "genres": [
+      "драма",
+      "криминал",
+      "Боевик и Приключения"
+    ],
+    "overview": "После рождения сына Тоннано хочет оставить свое криминальное прошлое позади и начать честную жизнь в районе Ахтерхук, где живет его подруга Амани со своей семьей. Его приезд вызывает волнения в печально известной наркосемье Айсинков. Выясняется, что дядя Амани в долгу перед семьей, и Тоннано снова оказывается втянутым в преступный мир.",
+    "poster": "https://image.tmdb.org/t/p/w342/w9E2V0gNOsWvoWvZ3NNB5tVXXcW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zp25UhCeuBQ1C3CYAdmbDSmVCBO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 314669,
+    "ru": "Доктор Щин",
+    "en": "닥터신",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 2.33,
+    "genres": [
+      "драма",
+      "НФ и Фэнтези",
+      "детектив"
+    ],
+    "overview": "Эта история о гениальном враче, осмеливающемся бросить вызов самому Богу, и о женщине, у которой внезапно отказывает мозг, и она медленно теряет свою душу.",
+    "poster": "https://image.tmdb.org/t/p/w342/cSuTZ0yJgjN3DuWK1HsuWNmamkk.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/aWJ69UgwuksIt055n1Z9eyV1aND.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 312753,
+    "ru": "Резервация",
+    "en": "Резервация",
+    "year": 2026,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 2,
+    "popularity": 1.43,
+    "genres": [
+      "детектив",
+      "драма"
+    ],
+    "overview": "Загадочная аномалия отрезала Тополёво и его жителей от внешнего мира: любая попытка покинуть город оборачивается необъяснимой смертью. Именно туда после долгого отсутствия отправляется Сергей Назаров, к жене и дочери. Обнаружив лазейку, он проникает на закрытую территорию и сталкивается с новой реальностью: помимо того, что жизнь местных подчинена строгим правилам, в городе бесследно исчезают дети. Сергей пойдёт на всё, чтобы вытащить близких из ловушки — даже попробует раскрыть тайну резервации. Но что, если кому-то очень выгодно сохранять зону закрытой…",
+    "poster": "https://image.tmdb.org/t/p/w342/4IcEYz5Nw1p58TR4z174mPfDjCQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ah556k6i9UN5Wd2KKFjrQkeh7DL.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 315638,
     "ru": "Мотай!",
     "en": "Мотай!",
@@ -9181,194 +9379,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/vaICzM7ORxCE38lfQIuJR6ovKhW.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/tQr1QOyh7k3As5NFvjNFmeum6p2.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1698418,
-    "ru": "Adili Idola Celebrity Roast: Fedi Nuril",
-    "en": "Adili Idola Celebrity Roast: Fedi Nuril",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.77,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9y2pxITMw1auo3lnDDoFbuU1kCR.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qLfmNFEdRXWf3TzkguNY05SWk2M.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1423035,
-    "ru": "Aontas",
-    "en": "Aontas",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.77,
-    "genres": [
-      "триллер",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qmP75nlRXg5tyUG0Uf1FXQT4FRM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/tosxYPeSTPuvpRDlNG5l56Ae09J.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1565545,
-    "ru": "Пингвинёнок Пороро: Приключения в мире сладостей",
-    "en": "뽀로로 극장판 스위트캐슬 대모험",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.77,
-    "genres": [
-      "мультфильм",
-      "семейный",
-      "приключения",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/38VavZHCg9Sf7hl0H7n0iakYoxf.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/208FihJM7H9F2SSAoYw5Q8q7Oad.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1318613,
-    "ru": "SOUND of LOVE",
-    "en": "SOUND of LOVE",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.77,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9WsCauNasnTfyzSCZZJoybpBPZ9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3OHxN7G9cBItnOer5lUKm09XefG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 952911,
-    "ru": "Pulang",
-    "en": "Pulang",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.77,
-    "genres": [
-      "драма",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/oeQ7tJPYx4dqR6yAPOVY0T1m6xz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8X7TIpj3LBCjoo1jlOPFmjotyb4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 821097,
-    "ru": "一度も撃ってません",
-    "en": "一度も撃ってません",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.77,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6m1SdF15qyZSSyPzKfccJpavlWK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rqX8rRjRTVDhqrMhJlDRlE9ADao.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 901225,
-    "ru": "வீரபாண்டியபுரம்",
-    "en": "வீரபாண்டியபுரம்",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.76,
-    "genres": [
-      "боевик",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wWhcKIMdgu2s01yqWEKmqaKI6CI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/eNMX1PYehuECyGqwQvyKZ1ZGc8x.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 837922,
-    "ru": "锦鼠御猫之九幽血狼",
-    "en": "锦鼠御猫之九幽血狼",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.76,
-    "genres": [
-      "комедия",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/rYX1Jm5kLyRWyxUCKRVfHRdjRf8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/XIG7ops17x0saVdxUG2Euz3xk1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1460588,
-    "ru": "El Asesino: Silencio y Muerte",
-    "en": "El Asesino: Silencio y Muerte",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.75,
-    "genres": [
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pfAt3H56UNaW60sv5d4Kj1mtmeO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4HXgebY9BYrUX56G8OQE3GK9lYd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 935630,
-    "ru": "アナスタシア",
-    "en": "アナスタシア",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 0.75,
-    "genres": [
-      "музыка",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/laU6jMDzgnMsPxlV8Otk7CWoIio.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9RQHq1UpcpgW01Pc58gs9zHtBcs.jpg",
     "source": "tmdb"
   }
 ]

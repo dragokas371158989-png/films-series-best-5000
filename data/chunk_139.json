@@ -1,5 +1,205 @@
 [
   {
+    "id": 471310,
+    "ru": "Белая орхидея",
+    "en": "The White Orchid",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 48,
+    "popularity": 0.71,
+    "genres": [
+      "драма",
+      "триллер"
+    ],
+    "overview": "Женщина-следователь примеряет на себя роль убитой в маленьком городке девушки в надежде раскрыть обстоятельства её жуткой смерти.",
+    "poster": "https://image.tmdb.org/t/p/w342/2S4nPwv8dgvFDogpp5vCxscJjTB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/19TCbcfd2rw2Lx7a7BZfposzzaW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 434949,
+    "ru": "Боуи: Человек, который изменил мир",
+    "en": "Bowie: The Man Who Changed the World",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 48,
+    "popularity": 0.67,
+    "genres": [
+      "документальный",
+      "музыка"
+    ],
+    "overview": "Познакомьтесь с невероятным влиянием Дэвида Боуи на музыку, искусство и культуру, слушая интервью с людьми, которые знали его лучше всего.",
+    "poster": "https://image.tmdb.org/t/p/w342/okiUq69MB9Wgj9fNE0u4RWCGus3.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/2CbgsjUzoyEXBH0rvAxfdI5fwLU.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1265517,
+    "ru": "Жуть",
+    "en": "You Shall Not Sleep Tonight",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 47,
+    "popularity": 0.7,
+    "genres": [
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "Маленького мальчика по ночам мучают кошмары. Он уверен, что в их доме прячется нечто жуткое. Но его отец не верит в реальность страшных монстров и пытается научить сына преодолевать свои страхи. Тьма сгущается, и мальчику все-таки придется сразиться с жутью, поселившейся в их доме.",
+    "poster": "https://image.tmdb.org/t/p/w342/krCt93RSbZMmiPIw2k1r9zzfzTb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oqFdBPhutu8nbfNg1g5zTmEScbd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1027330,
+    "ru": "Fall Into Winter",
+    "en": "Fall Into Winter",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 47,
+    "popularity": 0.49,
+    "genres": [
+      "телевизионный фильм",
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/nKvBcgmhGNDEGPY4zZFnuGOK9KC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/lZ8SesZuZVqJY3ZqXIsxFGubUew.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 321620,
+    "ru": "Пятеро Друзей 4",
+    "en": "Fünf Freunde 4",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 47,
+    "popularity": 0.66,
+    "genres": [
+      "семейный",
+      "приключения",
+      "триллер",
+      "криминал"
+    ],
+    "overview": "На этот раз неразлучные приятели решают снова провести летние каникулы вместе. Они отправляются на выставку древнеегипетских сокровищ и здесь замечают грабителя. Подозрительный мужчина крутился около 5000-летней мумии и убежал, когда его спугнули. Осмотрев мумию, ребята находят золотой амулет, след от которого ведет к овеянной легендами гробнице фараона. Совсем скоро они садятся на самолет до Каира, где их поджидают большое приключение и множество опасностей, включая арест и заговор тайного общества.",
+    "poster": "https://image.tmdb.org/t/p/w342/fx0lziJ5GJDyvOX82Fqyixvn1xp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4J7T7kn6fp4CEds0TxHpN3I6eZW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 51531,
+    "ru": "Grandma Got Run Over by a Reindeer",
+    "en": "Grandma Got Run Over by a Reindeer",
+    "year": 2000,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 47,
+    "popularity": 0.46,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "комедия",
+      "фэнтези",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9g46hyB2tobGWaIeOJxNXlIUA39.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s1ocRQzswE9ro48yMJkHNchWlZQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 3478,
+    "ru": "Эвоки",
+    "en": "Ewoks",
+    "year": 1985,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 5.7,
+    "votes": 46,
+    "popularity": 5.1,
+    "genres": [
+      "Детский",
+      "мультфильм",
+      "НФ и Фэнтези",
+      "Боевик и Приключения",
+      "Аниме"
+    ],
+    "overview": "Действие сериала происходит на лесной луне Эндора в период, предшествующий событиям VI эпизода Звёздных войн. Главными героями сериала являются Уикет Уистри Уоррик вместе с его друзьями, тулгайская ведьма Мораг, а также соперничающие с эвоками племена дюлоков.",
+    "poster": "https://image.tmdb.org/t/p/w342/gu7FdhTki8lBiGceQlsL7H6o3ky.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/j5bbgjw1Wq4mjDzmmHuus0FgYro.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1561969,
+    "ru": "Baramulla",
+    "en": "बारामूला",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 46,
+    "popularity": 1.86,
+    "genres": [
+      "ужасы"
+    ],
+    "overview": "Полицейский расследует похищения детей и раскрывает леденящие душу тайны, а из-за сверхъестественных событий его родным и мирному городу Барамуле грозит опасность.",
+    "poster": "https://image.tmdb.org/t/p/w342/2raITTyjXVUcsbJ7lJAQt8HzjDK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/fbTRgh6moAvhlkB4wPjswP9EdWz.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1180199,
+    "ru": "Любовь над бездной",
+    "en": "クレイジークルーズ",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 46,
+    "popularity": 1.26,
+    "genres": [
+      "мелодрама",
+      "комедия",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "На борту роскошного лайнера, идущего в Эгейское море, дворецкий и пассажир пытаются раскрыть загадочное убийство. Героев ждут любовь, тайны и настоящий хаос.",
+    "poster": "https://image.tmdb.org/t/p/w342/wIFfdvOrGszCruRjazBuld5KBRU.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4B3oS9lESptSBvlZxFw2ymLhUJd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 456017,
+    "ru": "வேலையில்லா பட்டதாரி 2",
+    "en": "வேலையில்லா பட்டதாரி 2",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 5.7,
+    "votes": 46,
+    "popularity": 2.34,
+    "genres": [
+      "боевик",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5PcVo8sQ5FwrEE5uXAksUhRG67U.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gA4cBZmkB0WD9Psg3YXqH0obtQq.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 285844,
     "ru": "Preggoland",
     "en": "Preggoland",
@@ -9494,196 +9694,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/qxMUf34Xn4mVS88uFujZ67DY2CX.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/s8tH5FpDKaL1LbTljcn3Nvlcxlq.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 336158,
-    "ru": "La increíble historia del niño de piedra",
-    "en": "La increíble historia del niño de piedra",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 9,
-    "popularity": 0.3,
-    "genres": [
-      "мультфильм",
-      "фэнтези",
-      "приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/pTEGhSFonhVCBSleT5FO0wdGvlr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/xJhJwnWD4FKgH2JP3Ww6mRvS6zW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1591822,
-    "ru": "Пандора. Огонь и лёд",
-    "en": "Pandora: Fire and Ice",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 8,
-    "popularity": 0.93,
-    "genres": [
-      "фантастика",
-      "боевик",
-      "приключения"
-    ],
-    "overview": "Человечество, истощив ресурсы Земли, отправляет новую экспедицию на Пандору, чтобы вывезти всё, что осталось. Но аборигены, которых люди когда-то считали примитивными, за прошедшие годы не только выжили, но и создали технологию, способную уничтожить целую планету. Их цель - Земля, и они готовы нанести удар. У человечества теперь есть лишь один шанс - остановить их сейчас.",
-    "poster": "https://image.tmdb.org/t/p/w342/vtpUX5OPRzc6vjYOAAg7MQ1SzNV.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/quQeahjlVgqIxL3WjNFwRaKQcNX.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 964978,
-    "ru": "Хорошая девочка Джейн",
-    "en": "Good Girl Jane",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 8,
-    "popularity": 0.83,
-    "genres": [
-      "драма",
-      "мелодрама",
-      "криминал"
-    ],
-    "overview": "Джейн скоро 18. Недавно её выгнали из частной школы, вдобавок она совершенно не ладит со своими разведёнными родителями. Героиня попадает в серьёзные неприятности, когда влюбляется в наркодилера Джейми.",
-    "poster": "https://image.tmdb.org/t/p/w342/132TUizBnUEfs2hUQM5QXdIy0Q3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aspmwgx8hIVvCdonXgxKxGtttY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1439594,
-    "ru": "Несломленные: Бойцы ринга",
-    "en": "ചത്താ പച്ച: The Ring of Rowdies",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 8,
-    "popularity": 0.38,
-    "genres": [
-      "боевик",
-      "драма"
-    ],
-    "overview": "В детстве они вместе занимались борьбой и равнялись на своего кумира — Уолтера по прозвищу Буллет. Со временем каждый пошёл своей дорогой. Спустя годы Томас возвращается в родной город, чтобы вновь объединиться с друзьями детства, которые стали ему братьями, и всерьёз заняться рестлингом.",
-    "poster": "https://image.tmdb.org/t/p/w342/wYXy20uC7aW7ArJJDRWR5E8dDL1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7ocFvtRnNXwrNJLJRWa0kKVPRW0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 882455,
-    "ru": "聽不見的距離",
-    "en": "聽不見的距離",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 8,
-    "popularity": 1.1,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zFiHkeiCLa3gVvKtpxFRzUj7CFb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9A63BYdfpmNWSM5XhX42vrZhZhc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 268677,
-    "ru": "Разговоры с богами",
-    "en": "Words with Gods",
-    "year": 2014,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 8,
-    "popularity": 0.69,
-    "genres": [
-      "драма",
-      "комедия"
-    ],
-    "overview": "В альманахе раскрываются отношения людей разных религий с Богом.",
-    "poster": "https://image.tmdb.org/t/p/w342/hlVeqMN4wbP8r8WbM4UcAvMjKpj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gR7XokQ7uidQtRfoaCmmAodZ9Q0.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 413542,
-    "ru": "뱀파이어는 우리 옆집에 산다",
-    "en": "뱀파이어는 우리 옆집에 산다",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 8,
-    "popularity": 0.73,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6VPJGFyYQ80L8hkpvBHNi1pAgSZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jEkXBxh1xCn2WPS2lIoNUU8lvyi.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 388978,
-    "ru": "渚のフィアンセ",
-    "en": "渚のフィアンセ",
-    "year": 1988,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 8,
-    "popularity": 0.67,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/zlLh2Dpj6yASVBUxMwTYnQI5xxh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/vjKhde86eHDVVKUDKW7MbODb4Em.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 361222,
-    "ru": "Stalking Eva",
-    "en": "Stalking Eva",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 8,
-    "popularity": 0.42,
-    "genres": [
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/b0n9iqHvSUbY1EnJte9eBXOR0UH.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2HcQexBS1tqksNyB63slUgs8Qpc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 433846,
-    "ru": "Der Island-Krimi: Der Tote im Westfjord",
-    "en": "Der Island-Krimi: Der Tote im Westfjord",
-    "year": 2016,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 5.7,
-    "votes": 8,
-    "popularity": 0.45,
-    "genres": [
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/AgV244hLAhFCDXDiaaENZejUHmI.jpg",
-    "backdrop": "",
     "source": "tmdb"
   }
 ]

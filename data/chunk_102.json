@@ -1,5 +1,220 @@
 [
   {
+    "id": "tv_90970",
+    "ru": "Игрушка для взрослых",
+    "en": "Made for Love",
+    "year": 2021,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.7,
+    "votes": 199,
+    "popularity": 5.52,
+    "genres": [
+      "НФ и Фэнтези",
+      "драма",
+      "комедия"
+    ],
+    "overview": "Жена миллиардера узнаёт, что муж вживил ей в мозг высокотехнологичный прибор слежения. Это устройство позволяет отслеживать её местоположение, наблюдать за ней и даже рассказывает о её чувствах. Будучи не в силах больше жить с ним, женщина отправляется в бега.",
+    "poster": "https://image.tmdb.org/t/p/w342/60s2sB3WQeAO9o2xwslwipU1RUi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/otnWfF8LXkWN6kRoqgZ3vJI0MDn.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 676705,
+    "ru": "Приключения Пильи",
+    "en": "Pil",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 199,
+    "popularity": 1.31,
+    "genres": [
+      "мультфильм",
+      "приключения",
+      "фэнтези",
+      "комедия",
+      "семейный"
+    ],
+    "overview": "Пилья — озорная девчонка-сирота, живущая на улицах города Туманвиль. Однажды, чтобы не попасться стражам замка, она наряжается принцессой и оказывается втянута в невероятные приключения. Жестокий Тристан хочет захватить трон и с помощью магического зелья превращает принца Роланда в… котоцыпа (наполовину кота, наполовину курицу). Пилья — единственная, кто может спасти принца и все королевство. Вместе со своими немножко безумными помощниками — шутом, стражем и тремя ласками — Пилья отправляется на поиски противоядия. И, если все получится (а на пути их ждёт немало опасностей), они смогут обрести не только спасительное снадобье, но и дружную семью, которой у них никогда не было.",
+    "poster": "https://image.tmdb.org/t/p/w342/3pHmxQUwJRNv8FpkucdNoi5HNBp.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tq3klWQevRK0Or0cGhsw0h3FDWQ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_83870",
+    "ru": "Заговор против Америки",
+    "en": "The Plot Against America",
+    "year": 2020,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.7,
+    "votes": 198,
+    "popularity": 4.1,
+    "genres": [
+      "НФ и Фэнтези",
+      "драма"
+    ],
+    "overview": "США, альтернативная реальность. В центре сюжета еврейская семья рабочего класса из Нью-Джерси, наблюдающая за политическим подъемом Чарльза Линдберга, героя-авиатора и ксенофобского популиста, который становится президентом и поворачивает нацию к фашизму.",
+    "poster": "https://image.tmdb.org/t/p/w342/fSKs0xLtlZ00gehBR1k1qP1UZqb.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/5bbXx8oopd6a6ZeG7uuxQK6JFRp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "24742",
+    "ru": "Тайный поклонник",
+    "en": "Secret Admirer",
+    "year": 1985,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 197,
+    "popularity": 3.17,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "Любовное письмо, написанное школьницей старших классов, попадает не в те руки, после чего начинается серия комических эпизодов. Ее одноклассники, да и родители стали участниками этой милой комедии ошибок.",
+    "poster": "https://image.tmdb.org/t/p/w342/4kJQ1R7zD1ckFPFfmyxI7kwPSiM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/otElW2B6kTSObMEzaFGkZdPRRbE.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 609734,
+    "ru": "Девушка-невидимка",
+    "en": "Above the Shadows",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 197,
+    "popularity": 1.25,
+    "genres": [
+      "фэнтези",
+      "мелодрама"
+    ],
+    "overview": "Молодая женщина Холли после смерти своей матери начала становиться невидимой. Привыкнув к этому состоянию, она решила стать частным сыщиком, но однажды сталкивается с парнем по имени Шейн, который может ее видеть и мечтает о карьере боксера. Судьба свела их вместе не случайно, и теперь они должны помочь друг другу.",
+    "poster": "https://image.tmdb.org/t/p/w342/ceDdWumnBrB0zHG0an6uCr2KnBY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4mOgNdPuyG4nLg3Md6Wf4vw5ubo.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 51786,
+    "ru": "Ким Пять-с-плюсом:Борьба во времени",
+    "en": "Kim Possible: A Sitch in Time",
+    "year": 2003,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 197,
+    "popularity": 0.77,
+    "genres": [
+      "телевизионный фильм",
+      "боевик",
+      "приключения",
+      "мультфильм",
+      "семейный",
+      "фантастика",
+      "комедия"
+    ],
+    "overview": "Это самое экстремальное путешествие Ким! В погоне за временем, она промчится сквозь годы. Шиго и её коварные прихвостни ловят волшебную обезьяну и начинают куролесить во времени. Об этом узнает пришелец из будущего Руфус ЗООО - потомок любимого всеми крота. Руфус помогает Ким составить план борьбы, и вместе со своим верным другом Роном, они отправляются в путь по настоящему, прошлому и будущему.",
+    "poster": "https://image.tmdb.org/t/p/w342/3XAMrWxsqqQI5HNJfegbUXtXiEG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vkyiRXgIAKFNVBYmauTF1a7u4wj.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 16394,
+    "ru": "Винни Пух: Весенние денёчки с малышом Ру",
+    "en": "Winnie the Pooh: Springtime with Roo",
+    "year": 2004,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.7,
+    "votes": 196,
+    "popularity": 1.76,
+    "genres": [
+      "приключения",
+      "мультфильм",
+      "комедия",
+      "семейный"
+    ],
+    "overview": "Вот и наступил это замечательный весенний денек! Пчелки жужжат, цветочки распускаются, а Ру, Винни и Тигруля уже готовы к веселью и играм. Но Кролик не хочет никого выпускать на улицу, пока не будет закончена большая сезонная уборка!  Сможет ли что-то или кто-то повлиять на строгого Кролика? С помощью мудрости и доброты Ру Кролик вскоре понимает, что на свете есть необычные дни и к ним нужно относиться особенно.",
+    "poster": "https://image.tmdb.org/t/p/w342/xQoERdOzfiRCNRr361IL1i3mqKw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eg6db3KpXpUBfFaWQNa7S6Ob3MC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "mal_61420",
+    "ru": "Ancient War Soul",
+    "en": "Taigu Zhan Hun",
+    "year": 2025,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.7,
+    "votes": 195,
+    "popularity": 0.0,
+    "genres": [
+      "Аниме",
+      "Экшен",
+      "Action",
+      "Приключения",
+      "Adventure",
+      "Фэнтези",
+      "Fantasy",
+      "Историческое",
+      "Historical",
+      "Боевые искусства",
+      "Martial Arts",
+      "Перерождение",
+      "Reincarnation"
+    ],
+    "overview": "A legendary Martial Emperor perished, only to be reborn ten thousand years later in the body of a young man named Qin Feng. Awakening an unparalleled divine soul and cultivating supreme martial arts, he rises to prominence, vying with countless geniuses, causing all the realms to tremble at his return!\n\n(Source: Youku, translated)",
+    "poster": "https://cdn.myanimelist.net/images/anime/1193/157653l.webp",
+    "backdrop": "",
+    "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": "514710",
+    "ru": "3 истории от студии Ponoc",
+    "en": "ちいさな英雄－カニとタマゴと透明人間－",
+    "year": 2018,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.7,
+    "votes": 192,
+    "popularity": 1.56,
+    "genres": [
+      "мультфильм",
+      "фэнтези",
+      "приключения",
+      "драма",
+      "Аниме"
+    ],
+    "overview": "Три истории: маленькие подводные жители, брат с сестрой, отправляются на поиски унесённого течением отца; история о мальчике с аллергией на яйца; невесёлая жизнь невидимого человека в современном городе.",
+    "poster": "https://image.tmdb.org/t/p/w342/vYDafpsEwQ3M6EmG0ewcMokHtJr.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9ahTjsTLJAxbkCQ49J1zzsIzQrP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "18143",
+    "ru": "Она и ее кот",
+    "en": "彼女と彼女の猫",
+    "year": 1999,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.7,
+    "votes": 192,
+    "popularity": 0.63,
+    "genres": [
+      "мультфильм",
+      "Аниме"
+    ],
+    "overview": "Кот рассказывает свою историю жизни.",
+    "poster": "https://image.tmdb.org/t/p/w342/yEhoutHt6MZdyHz64XIFB9n3iGQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m7gw5jZrzyA6n81iOPxilPOYjNg.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "tv_12584",
     "ru": "Заколдованное королевство",
     "en": "Tin Man",
@@ -9551,194 +9766,6 @@
     "overview": "Братья-близнецы У Шин и Су Хён были шокированы известием о том, что их биологический отец обвиняется в убийстве их отчима и ему грозит смертная казнь. Они узнают, что отец был ложно обвинен и каждый своими методами пытается раскрыть тайну преступления, которое произошло более 20 лет назад и снять обвинения.",
     "poster": "https://image.tmdb.org/t/p/w342/qaodZmdbTorhGISrlDQKSjaHcHy.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/dJJ9dH80HwWGERo5U59tw9JzYBQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 864866,
-    "ru": "The Road Dance",
-    "en": "The Road Dance",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 49,
-    "popularity": 0.75,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aHEV0oXxludb6QfT3KS1DMRbY2n.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/AheN2aPRkiN1lZqCOGg4eyTI4Uj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 677209,
-    "ru": "Ты сводишь меня с ума",
-    "en": "You're Bacon Me Crazy",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 49,
-    "popularity": 0.43,
-    "genres": [
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/e6FSxn0Myqq3uffXjdZXpOTGCn4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/aTUFQx4NPEIQqH4DrKCJShaI66J.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "625976",
-    "ru": "Воронка на двоих",
-    "en": "火口のふたり",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 49,
-    "popularity": 5.84,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "У Кэндзи Нагахары тяжелый период в жизни – из-за банкротства компании он потерял работу и развёлся. Кэндзи приезжает в родной город Акита на свадьбу своей бывшей девушки Наоко Сато. Увидев парня впервые за долгое время, Наоко предлагает ему секс на одну ночь, однако и после этого их отношения не заканчиваются.",
-    "poster": "https://image.tmdb.org/t/p/w342/fNR6cAGd6MasTBN4gMWlYuJMQx9.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/n0kK9yH3WZZgJg6AA3umd6xGK0U.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 61703,
-    "ru": "Преданность",
-    "en": "Allegiance",
-    "year": 2015,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.7,
-    "votes": 49,
-    "popularity": 5.25,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Алекс О`Коннор, специализирующийся на российских делах в ЦРУ, внезапно узнает шокирующую тайну, что его родители Марк и Катя — тайные российские шпионы, деактивированные несколько десятилетий назад. Но сегодня Кремль вновь включает их в службу, поскольку в планах террористический акт на территории США, который поставит Америку на колени. Новая миссия родителей — превратить Алекса в шпиона. Выбор у них небольшой: предать свою страну или рискнуть семьей.",
-    "poster": "https://image.tmdb.org/t/p/w342/a3JebriAnBipohn5qtWuezuA0D6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rgZlOP9IF7GAC7rsLpM6BUpKK23.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 313628,
-    "ru": "Сегодняшняя любовь",
-    "en": "오늘의 연애",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 49,
-    "popularity": 1.29,
-    "genres": [
-      "комедия",
-      "мелодрама"
-    ],
-    "overview": "Когда Чун-су влюбляется, он даёт своей девушке всё, что может. И даже несмотря на такую любовь и самоотверженность, его всё равно бросают. Хён-у работает ведущей прогноза погоды. Хоть у неё и ангельская внешность, но характер далеко не сахар — она любит гульнуть, выпить и при случае за словом в карман не полезет. Сначала эти двое просто проводят вместе время, за стаканом изливая друг другу душу, но потом возникает чувство.",
-    "poster": "https://image.tmdb.org/t/p/w342/aLhmyQXy1lCwA2htnjrJYtGgBbP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/r13gbuO9esnTWtp7IAaPQMwXEE3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 216529,
-    "ru": "Обреченные: Нерассказанная история \"Фантастической Четвёрки\" Роджера Кормана",
-    "en": "Doomed! The Untold Story of Roger Corman's The Fantastic Four",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 49,
-    "popularity": 0.46,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "История неудачной постановки в 1994 году \"Фантастической четвёрки\" исполнительного продюсера Роджера Кормана.",
-    "poster": "https://image.tmdb.org/t/p/w342/eVWltbQgLbEvzfMyONWN4bU1jYW.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7v4Sa3fsueJmQ49KmJyEC48SbLb.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 52268,
-    "ru": "Мужик в печали",
-    "en": "Man Down",
-    "year": 2013,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.7,
-    "votes": 49,
-    "popularity": 3.45,
-    "genres": [
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/s00xvEkk6cTuZdHPvxght2ZR3JJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/40hYOs4H10VFRNTuqUEgs8lvgPY.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 67344,
-    "ru": "Мистер Вампир 3",
-    "en": "靈幻先生",
-    "year": 1987,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 49,
-    "popularity": 2.77,
-    "genres": [
-      "ужасы",
-      "боевик",
-      "комедия"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6sFrynlBQpCyKEs02yQMnH28w31.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1HZgzGi4R8FSulHxUV9cVpUbV3T.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 479614,
-    "ru": "Christmas Homecoming",
-    "en": "Christmas Homecoming",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 49,
-    "popularity": 0.79,
-    "genres": [
-      "драма",
-      "телевизионный фильм",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/6tviM77Kfi2bfvyrMLQ4fAHkz6e.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/2N0XZxyPB8WSPcmijVSywyezV1e.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 639421,
-    "ru": "Подстава в День благодарения",
-    "en": "Turkey Drop",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.7,
-    "votes": 49,
-    "popularity": 0.72,
-    "genres": [
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/8WO7VtU9eIMRVef32fryYsfizC6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/p6IiyqLSQDnmzicjElrXXDKgq0g.jpg",
     "source": "tmdb"
   }
 ]

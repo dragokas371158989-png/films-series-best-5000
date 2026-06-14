@@ -1,5 +1,189 @@
 [
   {
+    "id": 1705585,
+    "ru": "Sandigdham",
+    "en": "Sandigdham",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.16,
+    "genres": [
+      "криминал",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/clhxtpF4D3a0jTjVDnY6xCPm4tT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/65qMWbxNnFHaY00UGLxizdrWQEG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1489036,
+    "ru": "Born to Fake",
+    "en": "Born to Fake",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.16,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/b8ISCi8SxJpZgFSXh20vqRK1ZWW.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vjCctiMsntxdbfvqz6YUzuKMOef.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1697640,
+    "ru": "探索期",
+    "en": "探索期",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.16,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2cTsyeutkrVyX7mQyFXDbnk2FRv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/z0BOATiqe3uF8CFGb6MSzdoBfeZ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1698417,
+    "ru": "Aufstand in Auschwitz",
+    "en": "Aufstand in Auschwitz",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.16,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ysoGmGKEq7eifMdbIySJwV9AeQR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8g2pHTY2grfiIMsh4qRTpblhwu8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1678769,
+    "ru": "Spiritus Sanctus",
+    "en": "Spiritus Sanctus",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.16,
+    "genres": [
+      "комедия",
+      "драма",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5pJIitWwcrtR0oBiCZZbJ07OhpR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/h2rGdUEEKr3S6Pe6DXW5WvAkkz8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1694172,
+    "ru": "Friends Until the End",
+    "en": "Friends Until the End",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.16,
+    "genres": [
+      "детектив",
+      "триллер",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wdbfTtPdWsmXPoIog5JNhZ953AO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tevXnExZdF8u8Sjqt4xXkXFy5T8.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1692376,
+    "ru": "トランジット・イン・フラミンゴ",
+    "en": "トランジット・イン・フラミンゴ",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.16,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bOMD92imvC3UWPmVylDOGUNtlWE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vPylm4YZKAppVIIlbXPdrosZ27n.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1575562,
+    "ru": "Quasi Grazia",
+    "en": "Quasi Grazia",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.16,
+    "genres": [
+      "драма",
+      "история"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/7xxuXuHFLhgCtsnmSFcKjm9lk5v.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vxD0xfmFqnjAxzh3YG09nqYswSt.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1049439,
+    "ru": "L'Âge d'or",
+    "en": "L'Âge d'or",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.16,
+    "genres": [
+      "история",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tuLe4oHdG4wrCsscEpcCxzibBfB.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gQQ7j5t5m2BYhk4gCOQzLccwtes.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1694451,
+    "ru": "The Sunny Side",
+    "en": "The Sunny Side",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 0.0,
+    "votes": 0,
+    "popularity": 0.16,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/Aag6QMZDDXIyS908r75HaGa13XD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hepiKf9D9X4uD6yrFWbcZ9AxwkM.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 1690677,
     "ru": "The Family Recipe",
     "en": "The Family Recipe",
@@ -8962,189 +9146,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/6pZ7oSJm6e6EOOIVFVXTFJVor54.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/xvZmuuJ6X7VeCRa4ya6oDS00Rz1.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1694285,
-    "ru": "aux oubliettes",
-    "en": "aux oubliettes",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.12,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/yqj0mmAyDw4fjfxu6hwMGN7Kawa.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/hW62DaRvHXiLr63YsQ9lpe56tb3.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1694249,
-    "ru": "Caught in the Act",
-    "en": "Caught in the Act",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.12,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/miT8awl6SKuLFpnFgcvNqlFhfvK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dH1NdDYUhRbI0NKUhAn2cIu08jj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1694234,
-    "ru": "Cardboard Skies",
-    "en": "Cardboard Skies",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.12,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tPFg6F3EczxZOBQkgPNg5MdkEKM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/9hFa9nsudynJnDINgtsOR49z7A6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1695124,
-    "ru": "Heroine",
-    "en": "Heroine",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.12,
-    "genres": [
-      "триллер",
-      "приключения",
-      "вестерн"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/thxza5zuemIwr5wGWipSHUaaCx3.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/4zp6MtzKR6A1rCoWRyENLfWLLIr.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1598950,
-    "ru": "B",
-    "en": "B",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.12,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/mFeToWSg3XgNOQKb8xmyPXrm54j.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oTlxlynezVP7ImkExeNt4aI58Ir.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1692337,
-    "ru": "Putri Dongeng",
-    "en": "Putri Dongeng",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.12,
-    "genres": [
-      "приключения",
-      "мультфильм",
-      "драма",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5ZbP1RViNqDth2khrlvrjS2etPj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rN74EP9gFxLzj5nsVzDaSHB9F37.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1660602,
-    "ru": "Femminielli, les sirènes de Naples",
-    "en": "Femminielli, les sirènes de Naples",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.12,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/y9vvaufJiQGJplddcpwQIdABl9Y.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/24IocjbwzEw03buw563AlZdd9xw.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1579306,
-    "ru": "Peter Has Something to Say",
-    "en": "Peter Has Something to Say",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.12,
-    "genres": [
-      "драма",
-      "фэнтези"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/f8eSwP4OGgbF8yCMGxfnPAWnfeb.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cY1horDAFdzRiWEqxcEpH1j62Bj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1670013,
-    "ru": "Reminiscencias",
-    "en": "Reminiscencias",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.12,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/z8AmTfDNuQWVC35yyhQ9382C7cJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/3WdVgHIrzXUY7pecIXxPhElib8g.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1666624,
-    "ru": "On dansera quand même",
-    "en": "On dansera quand même",
-    "year": 2026,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 0.0,
-    "votes": 0,
-    "popularity": 0.12,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/d0UOeG7Fl41gemIPRkXkNVZFMa4.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wPJKIGZl01WyyreuB3YwJ0umIk1.jpg",
     "source": "tmdb"
   }
 ]

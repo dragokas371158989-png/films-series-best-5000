@@ -5693,7 +5693,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 8.96,
-    "votes": 1657,
+    "votes": 1667,
     "popularity": 216.39,
     "genres": [
       "приключения",
@@ -5707,6 +5707,26 @@
     "source": "movie_top_rated",
     "status": "Вышел",
     "tmdbId": 1007757
+  },
+  {
+    "id": 8273240,
+    "ru": "Вне кампуса",
+    "en": "Off Campus",
+    "year": "2026",
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.97,
+    "votes": 445,
+    "popularity": 724.0,
+    "genres": [
+      "драма"
+    ],
+    "overview": "Отличница и поп-певица Ханна влюблена в местную знаменитость - звезду футбола Джастина Кола, но тот не замечает девушку. Чтобы обратить на себя внимание Джастина и заставить ревновать, она заключает договор с капитаном университетской хоккейной команды. Он должен сыграть роль её жениха, а Ханна поможет ему улучшить успеваемость. Однако надёжный план даёт сбой.",
+    "poster": "https://image.tmdb.org/t/p/w342/etw1XngIUqHeTeIPloS9B8w9xPi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/52sp0vPhLOWrZ1QoZIWiapronM.jpg",
+    "source": "tv_top_rated",
+    "status": "Онгоинг",
+    "tmdbId": 273240
   },
   {
     "id": "mal_40174",
@@ -6047,27 +6067,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 7000238,
-    "ru": "Крёстный отец",
-    "en": "The Godfather",
-    "year": "1972",
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 8.7,
-    "votes": 23020,
-    "popularity": 44.89,
-    "genres": [
-      "драма",
-      "криминал"
-    ],
-    "overview": "Криминальная сага, повествующая о нью-йоркской сицилийской мафиозной семье Корлеоне. Фильм охватывает период 1945-1955 годов. Глава семьи, Дон Вито Корлеоне, выдаёт замуж свою дочь. В это время со Второй мировой войны возвращается его любимый сын Майкл. Майкл, герой войны, гордость семьи, не выражает желания заняться жестоким семейным бизнесом. Дон Корлеоне ведёт дела по старым правилам, но наступают иные времена, и появляются люди, желающие изменить сложившиеся порядки. На Дона Корлеоне совершается покушение.",
-    "poster": "https://image.tmdb.org/t/p/w342/hoowzozsn0XQGtgH8nyivAMZfPN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/tSPT36ZKlP2WVHJLM4cQPLSzv3b.jpg",
-    "source": "movie_top_rated",
-    "status": "Вышел",
-    "tmdbId": 238
-  },
-  {
     "id": "mal_57433",
     "ru": "Rascal Does Not Dream of Santa Claus",
     "en": "Seishun Buta Yarou wa Santa Claus no Yume wo Minai",
@@ -6092,27 +6091,6 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1823/149858l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": 8278573,
-    "ru": "Жена принца XXI века",
-    "en": "21세기 대군부인",
-    "year": "2026",
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.92,
-    "votes": 119,
-    "popularity": 43.86,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "В условиях конституционной монархии XXI века, женщина, имеющая всё, но остающаяся простолюдинкой, встречает принца, который, несмотря на своё королевское происхождение, чувствует себя бессильным, — и это приводит к любви, которая бросает вызов социальному статусу.",
-    "poster": "https://image.tmdb.org/t/p/w342/j37wlFXIPcSVEjWOi1KBxzWK0in.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/6ekykPwvAywJRjFEnUoCFWTO9O3.jpg",
-    "source": "tv_popular",
-    "status": "Онгоинг",
-    "tmdbId": 278573
   },
   {
     "id": "mal_440",
@@ -6141,6 +6119,27 @@
     "poster": "https://cdn.myanimelist.net/images/anime/1078/95285l.webp",
     "backdrop": "",
     "source": "Jikan / MyAnimeList"
+  },
+  {
+    "id": 7000238,
+    "ru": "Крёстный отец",
+    "en": "The Godfather",
+    "year": "1972",
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 8.69,
+    "votes": 23028,
+    "popularity": 44.89,
+    "genres": [
+      "драма",
+      "криминал"
+    ],
+    "overview": "Криминальная сага, повествующая о нью-йоркской сицилийской мафиозной семье Корлеоне. Фильм охватывает период 1945-1955 годов. Глава семьи, Дон Вито Корлеоне, выдаёт замуж свою дочь. В это время со Второй мировой войны возвращается его любимый сын Майкл. Майкл, герой войны, гордость семьи, не выражает желания заняться жестоким семейным бизнесом. Дон Корлеоне ведёт дела по старым правилам, но наступают иные времена, и появляются люди, желающие изменить сложившиеся порядки. На Дона Корлеоне совершается покушение.",
+    "poster": "https://image.tmdb.org/t/p/w342/hoowzozsn0XQGtgH8nyivAMZfPN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/tSPT36ZKlP2WVHJLM4cQPLSzv3b.jpg",
+    "source": "movie_top_rated",
+    "status": "Вышел",
+    "tmdbId": 238
   },
   {
     "id": "mal_5690",
@@ -6391,29 +6390,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/os706RrUUFdW8sWuo1qmmCDv6OE.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/qNT2VZqK3ZQsXr5wBBXqO4kdVtk.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 8229544,
-    "tmdbId": 229544,
-    "ru": "Среди нас",
-    "en": "Among Us",
-    "year": "2026",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 8.9,
-    "votes": 74,
-    "poster": "https://image.tmdb.org/t/p/w342/b1Iicvevtup9jAzXVCNMnjSN2ti.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/zoa11EvyuasC3j7PmH1QGftrSvf.jpg",
-    "overview": "Эксцентричные, однотонные члены экипажа корабля, перевозящего металлолом по галактике, должны искоренить Самозванца среди себя, прежде чем сами станут жертвами его злодейских замыслов.",
-    "genres": [
-      "мультфильм",
-      "детектив",
-      "комедия",
-      "НФ и Фэнтези"
-    ],
-    "source": "tv_popular"
   },
   {
     "id": 259819,
@@ -9424,7 +9400,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 8.53,
-    "votes": 35881,
+    "votes": 35890,
     "popularity": 40.13,
     "genres": [
       "боевик",
@@ -9439,6 +9415,29 @@
     "tmdbId": 155
   },
   {
+    "id": 8229544,
+    "tmdbId": 229544,
+    "ru": "Среди нас",
+    "en": "Among Us",
+    "year": "2026",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 8.88,
+    "votes": 81,
+    "poster": "https://image.tmdb.org/t/p/w342/b1Iicvevtup9jAzXVCNMnjSN2ti.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/zoa11EvyuasC3j7PmH1QGftrSvf.jpg",
+    "overview": "Эксцентричные, однотонные члены экипажа корабля, перевозящего металлолом по галактике, должны искоренить Самозванца среди себя, прежде чем сами станут жертвами его злодейских замыслов.",
+    "genres": [
+      "мультфильм",
+      "детектив",
+      "комедия",
+      "НФ и Фэнтези"
+    ],
+    "source": "tv_popular"
+  },
+  {
     "id": 7157336,
     "ru": "Интерстеллар",
     "en": "Interstellar",
@@ -9446,7 +9445,7 @@
     "type": "Фильм",
     "category": "Фильм",
     "rating": 8.48,
-    "votes": 39989,
+    "votes": 40000,
     "popularity": 72.1,
     "genres": [
       "приключения",
@@ -9798,6 +9797,28 @@
     "source": "Jikan / MyAnimeList"
   },
   {
+    "id": 8094605,
+    "tmdbId": 94605,
+    "ru": "Аркейн",
+    "en": "Arcane",
+    "year": "2021",
+    "type": "Сериал",
+    "episodes": "",
+    "status": "Онгоинг",
+    "studio": "",
+    "rating": 8.8,
+    "votes": 5929,
+    "poster": "https://image.tmdb.org/t/p/w342/kVioUjk1SXGWblJNaKsIJcBqUcY.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/q8eejQcg1bAqImEV8jh8RtBD4uH.jpg",
+    "overview": "В условиях глубоких разногласий между городами-близнецами, Пилтовером и Зауном, две сестры оказываются по разные стороны баррикад в войне технологий и убеждений.",
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "НФ и Фэнтези"
+    ],
+    "source": "tv_top_rated"
+  },
+  {
     "id": 94605,
     "ru": "Аркейн",
     "en": "Arcane",
@@ -10100,24 +10121,26 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8259702,
-    "ru": "Дом духов",
-    "en": "The House of the Spirits",
-    "year": "2026",
+    "id": 8000246,
+    "tmdbId": 246,
+    "ru": "Аватар: Легенда об Аанге",
+    "en": "Avatar: The Last Airbender",
+    "year": "2005",
     "type": "Сериал",
-    "category": "Сериал",
-    "rating": 8.83,
-    "votes": 61,
-    "popularity": 11.71,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Эстебан Труэба выстраивает могущественную династию, пройдя путь от нищеты до абсолютной власти в политически нестабильной стране. Его жена Клара наделена мистическим даром общения с духами — её способности переплетают судьбы трёх поколений семьи на фоне социальных бурь, революций и неизбежных перемен.",
-    "poster": "https://image.tmdb.org/t/p/w342/yb682O0KCZlS5qRydxOytO5A6co.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/aX2MN3TweeODXA8xrciMWogL9A2.jpg",
-    "source": "trending_tv_week",
+    "episodes": "",
     "status": "Онгоинг",
-    "tmdbId": 259702
+    "studio": "",
+    "rating": 8.77,
+    "votes": 4870,
+    "poster": "https://image.tmdb.org/t/p/w342/pbTLpt8c7YUT4Vr6DE2ai3HY6U7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w500/7oBGhqJIghRBvOwo5Qe0yM0cnMc.jpg",
+    "overview": "В мире существуют народы 4-ёх стихий: огня, воды, земли и воздуха. Представитель народа огня решил поработить остальные народы. Спасти мир и прекратить войну подвластно только Аватару, повелевающему всеми 4-мя стихиями. Ответственность внезапно ложится на плечи 19-ти летнего Аанга, которому предстоит отправиться в опасное путешествие.",
+    "genres": [
+      "мультфильм",
+      "Боевик и Приключения",
+      "НФ и Фэнтези"
+    ],
+    "source": "tv_top_rated"
   },
   {
     "id": "mal_38731",
@@ -10276,50 +10299,6 @@
     "source": "Jikan / MyAnimeList"
   },
   {
-    "id": 8094605,
-    "tmdbId": 94605,
-    "ru": "Аркейн",
-    "en": "Arcane",
-    "year": "2021",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 8.75,
-    "votes": 5925,
-    "poster": "https://image.tmdb.org/t/p/w342/kVioUjk1SXGWblJNaKsIJcBqUcY.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/q8eejQcg1bAqImEV8jh8RtBD4uH.jpg",
-    "overview": "В условиях глубоких разногласий между городами-близнецами, Пилтовером и Зауном, две сестры оказываются по разные стороны баррикад в войне технологий и убеждений.",
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "НФ и Фэнтези"
-    ],
-    "source": "tv_top_rated"
-  },
-  {
-    "id": 8000246,
-    "tmdbId": 246,
-    "ru": "Аватар: Легенда об Аанге",
-    "en": "Avatar: The Last Airbender",
-    "year": "2005",
-    "type": "Сериал",
-    "episodes": "",
-    "status": "Онгоинг",
-    "studio": "",
-    "rating": 8.76,
-    "votes": 4866,
-    "poster": "https://image.tmdb.org/t/p/w342/pbTLpt8c7YUT4Vr6DE2ai3HY6U7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/7oBGhqJIghRBvOwo5Qe0yM0cnMc.jpg",
-    "overview": "В мире существуют народы 4-ёх стихий: огня, воды, земли и воздуха. Представитель народа огня решил поработить остальные народы. Спасти мир и прекратить войну подвластно только Аватару, повелевающему всеми 4-мя стихиями. Ответственность внезапно ложится на плечи 19-ти летнего Аанга, которому предстоит отправиться в опасное путешествие.",
-    "genres": [
-      "мультфильм",
-      "Боевик и Приключения",
-      "НФ и Фэнтези"
-    ],
-    "source": "tv_top_rated"
-  },
-  {
     "id": "mal_1365",
     "ru": "Case Closed Movie 06: The Phantom of Baker Street",
     "en": "Meitantei Conan Movie 06: Baker Street no Bourei",
@@ -10357,7 +10336,7 @@
     "status": "Онгоинг",
     "studio": "",
     "rating": 8.8,
-    "votes": 847,
+    "votes": 848,
     "poster": "https://image.tmdb.org/t/p/w342/bxWVzZ6oq5SdUBOcG74IavUlHGd.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/rBOnrVlck7BIlGeWVlzYiZeg4l2.jpg",
     "overview": "Владыка Тьмы повержен, и вместе с тем подошло к концу путешествие героя Химмеля и его отряда. Шли годы, все они разбрелись кто куда, но только эльфийке-долгожительнице Фрирен десятилетия показались мгновением... и однажды на её плечи легла тяжесть осознания того, что людской век ужасно скоротечен. В конце концов эльфийка решает во чтобы то ни стало исполнить предсмертные желания своих друзей. Но сможет ли она это сделать? И как сильно её потрясёт череда неизбежных потерь? Фрирен пускается в путь, чтобы это выяснить...",
@@ -10390,28 +10369,6 @@
     "poster": "https://image.tmdb.org/t/p/w342/bxWVzZ6oq5SdUBOcG74IavUlHGd.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/rBOnrVlck7BIlGeWVlzYiZeg4l2.jpg",
     "source": "tmdb"
-  },
-  {
-    "id": 7000680,
-    "tmdbId": 680,
-    "ru": "Криминальное чтиво",
-    "en": "Pulp Fiction",
-    "year": "1995",
-    "type": "Фильм",
-    "episodes": "",
-    "status": "Вышел",
-    "studio": "",
-    "rating": 8.5,
-    "votes": 30265,
-    "poster": "https://image.tmdb.org/t/p/w342/qvbfoyW2zaI15c0quUfF6CRGH4H.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/suaEOtk1N1sgg2MTM7oZd2cfVp3.jpg",
-    "overview": "Пути двух наемных убийц, профессионального бойца, двух бандитов и жены гангстера пересекаются в этом закрученном кровавом путешествии по злачному центру Лос-Анджелеса.",
-    "genres": [
-      "триллер",
-      "криминал",
-      "комедия"
-    ],
-    "source": "movie_top_rated"
   },
   {
     "id": "680",
@@ -10569,7 +10526,8 @@
     "votes": 99,
     "popularity": 2.58,
     "genres": [
-      "музыка"
+      "музыка",
+      "документальный"
     ],
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/u3IsNHuTykczbnLPYSzEMJ2p32G.jpg",
@@ -10860,6 +10818,44 @@
     "overview": "Старшеклассница Ё Ый-джу ведёт замкнутый образ жизни, хорошо учится, но практически не общается со сверстниками. Никто из окружающих не подозревает, что Ый-джу — автор любовных романов для взрослых. Главными героями её произведений становятся харизматичные учителя, и в реальной жизни она сталкивается с четырьмя похожими педагогами.",
     "poster": "https://image.tmdb.org/t/p/w342/qWN2GtyhOzT8Bx17gbjLQ56p8Ml.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/sWgf0zfmjKiwXl5ND2b9apkChkV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 240591,
+    "ru": "연애 지상주의 구역",
+    "en": "연애 지상주의 구역",
+    "year": 2024,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.8,
+    "votes": 36,
+    "popularity": 2.23,
+    "genres": [
+      "драма",
+      "НФ и Фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2B5qmwLebYJPl2rUGiPptstJV5y.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zosXWvNXWj6cddVVXJ5iBuLjYlV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 237337,
+    "ru": "วันดีวิทยา",
+    "en": "วันดีวิทยา",
+    "year": 2024,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 8.8,
+    "votes": 32,
+    "popularity": 2.14,
+    "genres": [
+      "комедия",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aFoVhqRWN93F15aeu3tWdEVHyQn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/owtvdducZVoRG3PnXvMyA0y46af.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,200 @@
 [
   {
+    "id": 409520,
+    "ru": "Ламмбок 2",
+    "en": "Lommbock",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 130,
+    "popularity": 0.42,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/zVWcpJDmN3rudl2OKUE4DACzQS8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8mFgpcK6K5lM4nriqtYb0Pf0g9B.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 4274,
+    "ru": "Том и Джерри в детстве",
+    "en": "Tom & Jerry Kids Show",
+    "year": 1990,
+    "type": "Аниме",
+    "category": "Аниме",
+    "rating": 6.5,
+    "votes": 129,
+    "popularity": 22.15,
+    "genres": [
+      "Детский",
+      "мультфильм",
+      "комедия",
+      "Аниме"
+    ],
+    "overview": "«Том и Джерри в детстве» несколько подобна классическому «Том и Джерри». Котёнок Том постоянно пытается поймать мышонка Джерри, часто терпя неудачу.",
+    "poster": "https://image.tmdb.org/t/p/w342/pApniCXhegDnhxQda7RcpG8gFP0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/vLCIWnDNPC9bWDN7cAEMvTdqe1j.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "18190",
+    "ru": "Секс, ложь, безумие",
+    "en": "Dream Lover",
+    "year": 1994,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 129,
+    "popularity": 5.45,
+    "genres": [
+      "драма",
+      "детектив",
+      "триллер"
+    ],
+    "overview": "В жизни преуспевающего бизнесмена Рэя настают тяжелые времена. Развод с женой, проблемы в бизнесе, депрессия. В это время судьба сводит его с очаровательной Леной. Она помогает ему забыть о прошлых неудачах.  Жизнь вновь кажется безоблачной и счастливой, но именно в этот момент начинают происходить таинственные проишествия, которые проливают свет на темное прошлое Лены. Ни о чем не подозревающий Рэй оказывается в смертельной опасности, которая исходит от его идеальной любовницы…",
+    "poster": "https://image.tmdb.org/t/p/w342/epl5pprGt04gAJI8lzbKy83XkbE.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/83hLixhpxMw2WpG72IzFYE28b3v.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "1149167",
+    "ru": "Сорвать банк 2: Высокие ставки",
+    "en": "Cash Out 2: High Rollers",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 128,
+    "popularity": 4.88,
+    "genres": [
+      "боевик",
+      "криминал",
+      "триллер"
+    ],
+    "overview": "Вор-профессионал Мэйсон даже после смерти (разумеется, инсценированной) вынужден вернуться к прежним делам и запланировать очередное супер-ограбление. Его возлюбленная Эми находится в заложниках, и похититель — старый враг Салазар — требует достать ему сейф из казино. Дело казалось бы невозможное, однако Мэйсон не намерен сдаваться. Жизнь Эми — главный джекпот в этой игре, да и команда Мэйсона всегда готова ему помочь.",
+    "poster": "https://image.tmdb.org/t/p/w342/yQpt9l4JUUi7qYZtJDSkehxLkT.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tsRtpoXBKWVe8B3qh3nqEjdq2Zj.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 109298,
+    "ru": "The Big Bad Wolf",
+    "en": "The Big Bad Wolf",
+    "year": 1934,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 128,
+    "popularity": 0.88,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1Gezi4uqCAyr0LNWXO3t5HavlXz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9SNiXNGwrdyAZmeiwTtRJlGg8qh.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 455918,
+    "ru": "Expedition Happiness",
+    "en": "Expedition Happiness",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 128,
+    "popularity": 0.49,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1wCbqZRiMvWUMHplGYhcF2Qvkw9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7BAy0m2E8Cz93GUNwjLrzKHCU73.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 807867,
+    "ru": "Supreme: Бунтарский рэп",
+    "en": "Suprêmes",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 127,
+    "popularity": 0.9,
+    "genres": [
+      "музыка",
+      "драма"
+    ],
+    "overview": "История о парижских районах, молодежных протестах, жестокости полицейских и словах, положенных на музыку — о знаменитых французских рэперах Supreme NTM. С помощью дерзких текстов и яркого бита они смогли не просто рассказать, а громко донести до общественности проблемы своего поколения.",
+    "poster": "https://image.tmdb.org/t/p/w342/AiazY0f6TaFN88usZxI1a1Cuk8J.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/A9FEeZRURvhSvK3xJsWbqIPyKrj.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 785527,
+    "ru": "Вечно богатый",
+    "en": "Forever Rich",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 126,
+    "popularity": 2.37,
+    "genres": [
+      "криминал",
+      "комедия",
+      "драма"
+    ],
+    "overview": "Жизнь восходящей поп-звезды рушится после публикации унизительного вирусного видео. Чтобы восстановить репутацию, артисту придется побороться. Эта ночь будет длинной.",
+    "poster": "https://image.tmdb.org/t/p/w342/vRbX9sTiZheczEtNfjAi0bhHPAn.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/oMxI0VCdp26C14rf7rjGZsyKXGJ.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1359227,
+    "ru": "LEGO Marvel Avengers: Mission Demolition",
+    "en": "LEGO Marvel Avengers: Mission Demolition",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 126,
+    "popularity": 2.32,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "фантастика"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/s3qM33JHOntz2D7o6FGRf5yuI1v.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/Al127H6f1RXpESdg0MGNL2g8mzO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 81077,
+    "ru": "Кузнечик и муравьи",
+    "en": "The Grasshopper and the Ants",
+    "year": 1934,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.5,
+    "votes": 126,
+    "popularity": 0.58,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "музыка"
+    ],
+    "overview": "Веселая история по басне Лафонтена. Кузнечик все лето веселится и играет на скрипке, а трудолюбивые муравьи делают запасы на зиму. Но что же случится, когда наступит зима…",
+    "poster": "https://image.tmdb.org/t/p/w342/rTRYC5loiIL5EuQgZv7NXEiH0Pd.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/6g48BXkmtEdcKN5ispRuQd1b8qy.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 372518,
     "ru": "Mais Forte que o Mundo: A História de José Aldo",
     "en": "Mais Forte que o Mundo: A História de José Aldo",
@@ -9525,205 +9720,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/A050OSat95YGsvivT6KeKQrXMVD.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/3qd0bM8DQ7Rj32944EXnhbKROoP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 78124,
-    "ru": "Импи – суперстар!",
-    "en": "Urmel voll in Fahrt",
-    "year": 2008,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 37,
-    "popularity": 0.67,
-    "genres": [
-      "мультфильм",
-      "приключения",
-      "семейный",
-      "фэнтези",
-      "комедия"
-    ],
-    "overview": "Когда-то профессор Хабакук нашел на острове Титиу странное яйцо, из которого вылупился маленький динозавр Импи, которого полюбили и люди, и звери… Но настали новые времена, и на Титиу появилась обаятельная панда Бабу. Динозаврик загрустил, подумав, что друзья разлюбили его. И тогда он отправился в большой мир, чтобы стать артистом грандиозного парка развлечений. Он не знал, что там его ждут серьезные испытания. Но панда Бабу и другие звери не оставят Импи на произвол судьбы! Вместе с ним они окунутся в водоворот новых головокружительных приключений…",
-    "poster": "https://image.tmdb.org/t/p/w342/3gvbjeScwM7S3XSo0ial3anE2q6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zTUpcvBaNfXu1Qo69bQmZTrNIQd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 332830,
-    "ru": "Шалопаи",
-    "en": "ഒരു വടക്കൻ സെൽഫി",
-    "year": 2015,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 37,
-    "popularity": 0.45,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Парень по имени Умеш учится в университете. Он настолько плохо справляется с экзаменами, что становится одним из худших студентов. Отец молодого человека, торговец, разочаровавшись в умственных способностях Умеша, предлагает ему работать в магазине. Но парень не собирается продолжать дело отца. Он всегда мечтал стать режиссером. Умеш даже предпринимает попытку снять собственный короткометражный фильм в качестве первого шага в профессии. Полностью отсняв короткометражку, главный герой и его друзья теряют камеру со всем видеоматериалом в водопаде. Камера стоила очень дорого, поэтому Умеш теперь просто обязан пойти по стопам отца.",
-    "poster": "https://image.tmdb.org/t/p/w342/jkVR9ufZELPcgWViPGJ6D0Y5ss8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/w8lo7gKlKCpvfD1yUt3mguECWS6.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 84036,
-    "ru": "Как утенок на юг собирался",
-    "en": "Southbound Duckling",
-    "year": 1955,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 37,
-    "popularity": 0.42,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Утенок хочет улететь в теплые края, Джерри хочет его переубедить потому как домашние утки должны сидеть дома, а Том хочет вкусно поесть и утенок для этой цели отлично подходит.",
-    "poster": "https://image.tmdb.org/t/p/w342/lGnVnhG4Vc6KRkb1zYB5hY6XSJ6.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jYKKU866vlAl0ntMKpsotDcYNiF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 79263,
-    "ru": "Умный котик",
-    "en": "Smarty Cat",
-    "year": 1955,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 37,
-    "popularity": 0.37,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Трио котов из Бутча, Топси и Молниеносного вылезает из-под забора. Бутч посвистывает Тому. Том видит друзей и показывает табличку, на которой написано «Никого нет дома». Коты сначала бегут, потом увидев Спайка идут на цыпочках, и вновь бегут. Бутч говорит, что снял фильм про глупых псов. Квартет котов собирается смотреть фильм, но перед этим вышвыривает из дома Джерри, который тоже хочет вместе с котами посмотреть фильм.",
-    "poster": "https://image.tmdb.org/t/p/w342/xei3FbcWKSP25pHiGKOK7V7iwIN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5cWyaAwVHtJr1AXGhXuNF9AuP9K.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 67503,
-    "ru": "Гуфи: Учителя тоже люди",
-    "en": "Teachers Are People",
-    "year": 1952,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 37,
-    "popularity": 0.34,
-    "genres": [
-      "мультфильм",
-      "комедия"
-    ],
-    "overview": "Без особого успеха, Гуфи пытается быть учителем в классе молодых смутьянов.",
-    "poster": "https://image.tmdb.org/t/p/w342/8ttBuBpkPWvgyTWhNfNTwjbXnTT.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/AutEN2riNSUCiWWueVf2A0HoBR7.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 548682,
-    "ru": "No One Would Tell",
-    "en": "No One Would Tell",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 37,
-    "popularity": 1.9,
-    "genres": [
-      "драма",
-      "триллер",
-      "детектив",
-      "телевизионный фильм",
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/u8sSi6i7on9odDQaCeB1ircFonO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sAsOpPAAhJMUg4dkQxIOSCBqh21.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 525453,
-    "ru": "The Perfect Bride: Wedding Bells",
-    "en": "The Perfect Bride: Wedding Bells",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 37,
-    "popularity": 0.75,
-    "genres": [
-      "мелодрама",
-      "телевизионный фильм"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/sSEzaWf7UrjVLrpZLaBawWkKl2l.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5ZnDnmthBadTpJNbzo3pEs9JJJv.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "tv_110975",
-    "ru": "Романтическая комедия, в которой подруга детства ни за что не проиграет",
-    "en": "幼なじみが絶対に負けないラブコメ",
-    "year": 2021,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.5,
-    "votes": 36,
-    "popularity": 10.24,
-    "genres": [
-      "мультфильм",
-      "комедия",
-      "Аниме"
-    ],
-    "overview": "К главному герою испытывает чувства милая девушка, которая живет рядом. Она общительная и заботливая, словно старшая сестра. Однако парень уже нашел свою любовь — прекрасного айдола и писателя из старшей школы. Но эта девушка вряд ли примет его признание. А еще у нее уже есть парень. И когда главный герой уже было отчаялся, подруга детства предложила ему: «Если для тебя это так невыносимо, тогда почему бы нам не отомстить? Устроим же самую лучшую месть».",
-    "poster": "https://image.tmdb.org/t/p/w342/7i31cztEfiRDG30KjorCrEXbyEG.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/clPZ1X2xBFe5oau6N8KEGPacflQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "386467",
-    "ru": "絶対純白♡魔法少女",
-    "en": "絶対純白♡魔法少女",
-    "year": 2012,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.5,
-    "votes": 36,
-    "popularity": 2.47,
-    "genres": [
-      "боевик",
-      "мультфильм",
-      "фэнтези",
-      "Аниме"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/uIDnnnfpX4F4tePVAPTgTBbnYuM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oxAJyNCp13kmXmBMx1StnAAtYzd.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 665894,
-    "ru": "Правда любить",
-    "en": "Really Love",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.5,
-    "votes": 36,
-    "popularity": 1.16,
-    "genres": [
-      "мелодрама",
-      "драма"
-    ],
-    "overview": "Художник на заре славы отвлекается на юную студентку юридического вуза. Но на пути к общему будущему их ждет множество преград.",
-    "poster": "https://image.tmdb.org/t/p/w342/hqqEHkLUdOyoDYcvXi0lUEeQ748.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/fDiUVAzUFwSx26IiVcDCtg2WyIj.jpg",
     "source": "tmdb"
   }
 ]

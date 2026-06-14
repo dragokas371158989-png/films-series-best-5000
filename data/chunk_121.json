@@ -1,5 +1,203 @@
 [
   {
+    "id": 740952,
+    "ru": "Гнев во спасение",
+    "en": "Savage Salvation",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 280,
+    "popularity": 1.68,
+    "genres": [
+      "боевик",
+      "триллер"
+    ],
+    "overview": "Бывший наркоман, чья девушка погибла из-за передозировки героина, решает отомстить картелю, ответственному за поставку наркотиков.",
+    "poster": "https://image.tmdb.org/t/p/w342/tjZ7UvzTd2Cl124bYF8w2sW9qB7.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rodjjIJ8oh9nuBp86PhojcYHTEN.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 688258,
+    "ru": "Оккупация: Миссия «Дождь»",
+    "en": "Occupation: Rainfall",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 279,
+    "popularity": 1.59,
+    "genres": [
+      "фантастика",
+      "боевик"
+    ],
+    "overview": "Прошло два года после инопланетного вторжения. Пришельцам удалось уничтожить практически всё человечество, но Сидней ещё не повержен — выжившие и примкнувшие к ним инакомыслящие инопланетяне продолжают отчаянно сражаться, но их силы на исходе. Тем временем небольшая группа людей узнает о заговоре, который может положить конец войне.",
+    "poster": "https://image.tmdb.org/t/p/w342/1H4NXkEGy9IhbkI5cRJ3NgIP68M.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xG8MoAb91jRGi01iwU0UMpXNlvK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 557336,
+    "ru": "Язвы Бреслау",
+    "en": "Plagi Breslau",
+    "year": 2018,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 278,
+    "popularity": 0.46,
+    "genres": [
+      "криминал",
+      "боевик",
+      "триллер"
+    ],
+    "overview": "Вроцлав сотрясает волна убийств. Каждый день в 18:00 серийный убийца казнит очередную жертву. Разгадать мрачную тайну пытается женщина-полицейский Елена Русь.",
+    "poster": "https://image.tmdb.org/t/p/w342/hcLCLWYuLJFHrN4y23YxHTlZVsV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/n8IlbxbfK34s3bjAcVjcgNZpBrd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 931954,
+    "ru": "Венера",
+    "en": "Venus",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 274,
+    "popularity": 1.46,
+    "genres": [
+      "драма",
+      "ужасы",
+      "триллер"
+    ],
+    "overview": "Люсия, танцовщица диско в бегах, укрывается в зловещем здании на окраине Мадрида, где живет ее сестра Росио с дочерью Альбой.",
+    "poster": "https://image.tmdb.org/t/p/w342/yGpJbft7JQpQHHHasRr4wWdVcuJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hyR5Lfzf2ZvCtIJGMcMYOK5KcLT.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": "tv_66789",
+    "ru": "24 часа: Наследие",
+    "en": "24: Legacy",
+    "year": 2017,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 6.2,
+    "votes": 270,
+    "popularity": 5.99,
+    "genres": [
+      "криминал",
+      "драма",
+      "детектив"
+    ],
+    "overview": "Герой войны возвращается домой и в силу обстоятельств вынужден обратиться за помощью в антитеррористический отдел.",
+    "poster": "https://image.tmdb.org/t/p/w342/2eoCEa9myi32C3QC7VYEu4y1f6D.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xBCYJrPYAqdjAfvinHBB3WT9lqp.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 745376,
+    "ru": "Между здравствуй и прощай",
+    "en": "Hello, Goodbye, and Everything in Between",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 267,
+    "popularity": 1.56,
+    "genres": [
+      "мелодрама",
+      "драма"
+    ],
+    "overview": "Клэр и Эйдан решают расстаться перед поступлением в колледж — без особых душевных терзаний. Но станет ли их прощальное свидание последним шансом на воссоединение?",
+    "poster": "https://image.tmdb.org/t/p/w342/xyGsnp4Ld5PmJYYWnfuYYoENhHt.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8vn4eis4xk6cnOnAuAcyzPbqVb0.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 267863,
+    "ru": "Прогулка по солнечному свету",
+    "en": "Walking on Sunshine",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 266,
+    "popularity": 1.1,
+    "genres": [
+      "комедия",
+      "мелодрама"
+    ],
+    "overview": "После красивого, бурного и стремительного романа Мэдди и Раф принимают решение пожениться, а свадьбу сыграть на берегу Средиземного моря в Испании. Мэдди счастлива. Она готовится к церемонии, приглашает гостей, среди которых — ее любимая сестра Тэйлор. Кто мог предположить, что между Рафом и Тэйлор была когда-то страстная любовь, которая, как оказалось, вовсе не угасла…",
+    "poster": "https://image.tmdb.org/t/p/w342/cinzBoSTTENMpUPIILrEHE7To91.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/yWhPEx0CyRAVXtAeQspbDIcxXPP.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 13647,
+    "ru": "Несокрушимый Железный Человек",
+    "en": "The Invincible Iron Man",
+    "year": 2007,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 265,
+    "popularity": 1.4,
+    "genres": [
+      "приключения",
+      "мультфильм",
+      "боевик",
+      "фэнтези",
+      "фантастика"
+    ],
+    "overview": "Искусствовед, специализирующийся по странам Востока миллиардер Тони Старк, вот уже несколько лет плодотворно работает над главным проектом своей жизни — возрождением древнего китайского города, императором которого был великий Мандарин, оставшийся в истории, как самый жестокий правитель Китая. Древняя китайская легенда гласит, что непобедимый император, заключив договор с силами тьмы, получил от них бессмертие и могущество, но потом был повержен и предан забвению. И только через несколько тысяч лет Великий Император вновь обретёт свою силу и в этот день люди в последний раз увидят солнечный свет…",
+    "poster": "https://image.tmdb.org/t/p/w342/eebNTSRa5Hh5skPKGdGJIJpo9Ls.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/x6gi2yn51sjRBMt6xeVTPVGFeSB.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 580629,
+    "ru": "Вздрюченные",
+    "en": "Get Duked!",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 263,
+    "popularity": 0.99,
+    "genres": [
+      "комедия",
+      "боевик",
+      "ужасы"
+    ],
+    "overview": "За многочисленные правонарушения три малолетних гопника вынуждены отправиться в поход по Северо-Шотландскому нагорью за премию герцога Эдинбургского. К ним присоединяется ещё один подросток, давно мечтавший принять участие в мероприятии, и ребята пускаются в путь. Основные задачи похода - научиться командной работе, ориентированию на местности и собирательству - приятелям придётся выполнять в экстремальных условиях, когда в этой безлюдной местности на них открывают охоту неизвестные в масках.",
+    "poster": "https://image.tmdb.org/t/p/w342/b52nqFj5XrBNA7MhqcnENvFsHtx.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/hH1vDR2vz9aCZMm2NfR6Qaar5ZK.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 586707,
+    "ru": "Как живой",
+    "en": "Life Like",
+    "year": 2019,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 6.2,
+    "votes": 262,
+    "popularity": 2.23,
+    "genres": [
+      "триллер",
+      "фантастика",
+      "драма"
+    ],
+    "overview": "Молодая пара Джеймс и Софи получают уникальную возможность стать первыми в мире обладателями последнего достижения технологического прогресса - нового робота Генри, внешне абсолютно неотличимого от обычного человека. По мере того как эти трое сближаются, их понимание того, что значит быть человеком, меняется.",
+    "poster": "https://image.tmdb.org/t/p/w342/5R8rhUFn4cDEVoSMUBTiWUHyjIf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/mrvhoKAEm0zAXIJUksDFsmyk4vQ.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": "14576",
     "ru": "Ловкие руки",
     "en": "Shade",
@@ -9565,199 +9763,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/4ujb3np6gErCGHM5BiHC7lzXCVB.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/3kCLrGwtBvqein4xMyoTni4rzex.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "637462",
-    "ru": "Судьба: Великий приказ. Камелот. Паладин",
-    "en": "Fate/Grand Order -神聖円卓領域キャメロット-後編 Paladin; Agateram",
-    "year": 2021,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.2,
-    "votes": 40,
-    "popularity": 1.93,
-    "genres": [
-      "мультфильм",
-      "боевик",
-      "приключения",
-      "история",
-      "драма",
-      "фэнтези",
-      "Аниме"
-    ],
-    "overview": "1273 год от Рождества Христова, Иерусалим. Странствующий рыцарь Бедивер достигает исхода своего пути... но вместо Святой земли его встречает огромная пустыня, по которой бродят обездоленные. Три силы сошлись в войне за огромную пустошь. С одной стороны рыцари Круглого стола, что стремятся защитить Святой город и своего короля Льва. С другой — «король-солнце» Осимандий, призвавший в пески всё своё царство. В горах же скрываются защитники всех тех, кого лишили крова. Они выжидают момент, чтобы поднять восстание. Бедивер идёт к Святому городу в надежде на аудиенцию у короля Льва. Там он встречает последнего мастера человечества Рицку Фудзимару. Тот прибыл в Иерусалим вместе со своей Слугой Маш, чтобы восстановить человеческую историю.",
-    "poster": "https://image.tmdb.org/t/p/w342/aH4wC0xEmWi8ATJjuzbhKtY13dX.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/AomMVgCPljAKJ1ZogMnwWQZ7jXW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1059372,
-    "ru": "Дорогой Дэвид",
-    "en": "Dear David",
-    "year": 2023,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 40,
-    "popularity": 2.44,
-    "genres": [
-      "драма",
-      "мелодрама",
-      "фэнтези"
-    ],
-    "overview": "Будущее отличницы Ларас оказывается под угрозой, когда вся школа узнаёт о блоге с ее тайными фантазиями.",
-    "poster": "https://image.tmdb.org/t/p/w342/b94ohfflWQSqwuZl1ZIOCFaftty.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d1YxrmqIzS30haejpT7DcJMz3Md.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 110862,
-    "ru": "Социальная дистанция: вместе на расстоянии",
-    "en": "Social Distance",
-    "year": 2020,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.2,
-    "votes": 40,
-    "popularity": 2.27,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Снятый в изоляции сериал-антология состоит из забавных и мрачных историй о том, как люди пытаются оставаться на связи в разлуке.",
-    "poster": "https://image.tmdb.org/t/p/w342/xaut7SbpycotlvxPBgEU0RaN3QZ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jTASRzfeFeaxuu4kTHxgOq2bHeS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1242686,
-    "ru": "Спасаемый",
-    "en": "Salvable",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 40,
-    "popularity": 1.18,
-    "genres": [
-      "криминал",
-      "драма"
-    ],
-    "overview": "Бывший боксер Сэл, которому за сорок, выбирает между шансом возродить свою карьеру с помощью подпольных боев и сохранением отношений с дочерью Молли.",
-    "poster": "https://image.tmdb.org/t/p/w342/6py1ohTIaEhzPPXp3ju9KapAIJr.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ioMxoDUyaRtMZPgoOU5wJkErtKS.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 950453,
-    "ru": "In einem Land, das es nicht mehr gibt",
-    "en": "In einem Land, das es nicht mehr gibt",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 40,
-    "popularity": 0.59,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aPCciODmLCQvdVdihd7mvl6sZDB.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/e6wzyEh3RqJHmLvlpSeLXrP35nj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1014574,
-    "ru": "Drawn Into the Night",
-    "en": "Drawn Into the Night",
-    "year": 2022,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 40,
-    "popularity": 0.45,
-    "genres": [
-      "ужасы",
-      "триллер"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/nRxVqv9KQsF9QEIHp0sLCXOSF6v.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rEMdbwWSIPQmlT2YmRrMt6uLFKc.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "417688",
-    "ru": "Сутенёр",
-    "en": "Pimp",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 40,
-    "popularity": 5.92,
-    "genres": [
-      "драма"
-    ],
-    "overview": "Посреди гнетущих кварталов Бронкса разворачивается любовная история. Боевая девушка, сутенёр, по имени Винсди, научилась всему от отца. И когда он умирает, она отправляется на поиски своей матери, работающей проституткой и подруги детства, Никки.",
-    "poster": "https://image.tmdb.org/t/p/w342/aLFt9swGFQpujVXzbj9LWowjX6C.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wyMd7nQ1REmWTc1OHfr08BCGpdF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 62284,
-    "ru": "Те, кто убивают",
-    "en": "Those Who Kill",
-    "year": 2014,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 6.2,
-    "votes": 40,
-    "popularity": 2.05,
-    "genres": [
-      "Боевик и Приключения",
-      "криминал"
-    ],
-    "overview": "Детектив бостонской полиции Кэтрин Дженсен и эксперт по судебной медицине Томас Шэффер. Про неё говорят, что она новичок со всех сторон положительный: умная, решительная, сильная и бесстрашная. Шэффер от неё не отстаёт: красавчик-интеллектуал со степенью доктора психологии. Вдвоём они одержимы глубоким проникновением в мотивы поведения серийных убийц, отловом которых и занимаются.",
-    "poster": "https://image.tmdb.org/t/p/w342/6PEwdfDuedbfSxXNhuP68QOyZBm.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sWtPjboMQ2x3eg6niyjrStmmajI.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 622230,
-    "ru": "LEGO Marvel Человек-Паук: Раздражённый Веномом",
-    "en": "LEGO Marvel Spider-Man: Vexed by Venom",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 40,
-    "popularity": 1.38,
-    "genres": [
-      "мультфильм",
-      "боевик"
-    ],
-    "overview": "Быть Королем Ваканды очень трудно – особенно, если ты ещё и Чёрная Пантера! Когда Танос прилетает из космоса и угрожает разрушить Землю, Чёрная Пантера рвётся в бой и побеждает его с помощью Величайших Героев Земли. Но ситуация только ухудшается, когда злодеи Киллмонгер и Улисс Кло объединяются с Безумным Титаном, чтобы пойти в атаку на родину Чёрной Пантеры! Сможет ли Пантера разгадать их рискованный план прежде, чем Ваканду распылят на атомы?",
-    "poster": "https://image.tmdb.org/t/p/w342/7M3fUjKWukFuPAJsFjZsTVQIRsJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/EXJrCRBYAPffNuMQbX7irsbrRn.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 532024,
-    "ru": "Хевен, дочь Ангела",
-    "en": "Heaven",
-    "year": 2019,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.2,
-    "votes": 40,
-    "popularity": 1.36,
-    "genres": [
-      "драма",
-      "телевизионный фильм"
-    ],
-    "overview": "Хевен Ли — старшая из пяти детей семейства Кастил, живущего в убогой хижине в горах Западной Виргинии. Презираемая отцом и эксплуатируемая матерью, девочка находит утешение в любви к младшим братьям и сестрам.  Накануне своего десятилетия Хевен узнаёт от бабушки, что её настоящей матерью была красивая и богатая девушка, которая без памяти влюбилась в Люка Кастила. К несчастью, сразу после рождения Хевен она умерла, и отец не может простить этого девочке. Через несколько лет, не выдержав нищеты и пренебрежения со стороны мужа, мачеха Хевен уезжает, бросив детей на произвол судьбы. Чтобы поправить свои дела, пришедшие в полный упадок из-за страсти к азартным играм, Люк Кастил придумывает гениальный, по его мнению, план: он начинает распродавать собственных детей богатым бездетным парам...",
-    "poster": "https://image.tmdb.org/t/p/w342/9464thsDOScnDstf6TdFJhGGaET.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/v2AsVdaQlcMNYaVZE2H5W9xu5zp.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,193 @@
 [
   {
+    "id": 1698418,
+    "ru": "Adili Idola Celebrity Roast: Fedi Nuril",
+    "en": "Adili Idola Celebrity Roast: Fedi Nuril",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.77,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9y2pxITMw1auo3lnDDoFbuU1kCR.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qLfmNFEdRXWf3TzkguNY05SWk2M.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1423035,
+    "ru": "Aontas",
+    "en": "Aontas",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.77,
+    "genres": [
+      "триллер",
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/qmP75nlRXg5tyUG0Uf1FXQT4FRM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/tosxYPeSTPuvpRDlNG5l56Ae09J.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1565545,
+    "ru": "Пингвинёнок Пороро: Приключения в мире сладостей",
+    "en": "뽀로로 극장판 스위트캐슬 대모험",
+    "year": 2025,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.77,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "приключения",
+      "фэнтези"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/38VavZHCg9Sf7hl0H7n0iakYoxf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/208FihJM7H9F2SSAoYw5Q8q7Oad.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1318613,
+    "ru": "SOUND of LOVE",
+    "en": "SOUND of LOVE",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.77,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/9WsCauNasnTfyzSCZZJoybpBPZ9.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/3OHxN7G9cBItnOer5lUKm09XefG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 952911,
+    "ru": "Pulang",
+    "en": "Pulang",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.77,
+    "genres": [
+      "драма",
+      "семейный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/oeQ7tJPYx4dqR6yAPOVY0T1m6xz.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/8X7TIpj3LBCjoo1jlOPFmjotyb4.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 821097,
+    "ru": "一度も撃ってません",
+    "en": "一度も撃ってません",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.77,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/6m1SdF15qyZSSyPzKfccJpavlWK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rqX8rRjRTVDhqrMhJlDRlE9ADao.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 901225,
+    "ru": "வீரபாண்டியபுரம்",
+    "en": "வீரபாண்டியபுரம்",
+    "year": 2022,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.76,
+    "genres": [
+      "боевик",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/wWhcKIMdgu2s01yqWEKmqaKI6CI.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/eNMX1PYehuECyGqwQvyKZ1ZGc8x.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 837922,
+    "ru": "锦鼠御猫之九幽血狼",
+    "en": "锦鼠御猫之九幽血狼",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.76,
+    "genres": [
+      "комедия",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rYX1Jm5kLyRWyxUCKRVfHRdjRf8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/XIG7ops17x0saVdxUG2Euz3xk1.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1460588,
+    "ru": "El Asesino: Silencio y Muerte",
+    "en": "El Asesino: Silencio y Muerte",
+    "year": 2024,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.75,
+    "genres": [
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/pfAt3H56UNaW60sv5d4Kj1mtmeO.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/4HXgebY9BYrUX56G8OQE3GK9lYd.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 935630,
+    "ru": "アナスタシア",
+    "en": "アナスタシア",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 0.75,
+    "genres": [
+      "музыка",
+      "мелодрама"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/laU6jMDzgnMsPxlV8Otk7CWoIio.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/9RQHq1UpcpgW01Pc58gs9zHtBcs.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 313858,
     "ru": "الخروج إلى البئر",
     "en": "الخروج إلى البئر",
@@ -8813,186 +9001,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/75PQjk3YROcVCIiIwJwSD7qa7TU.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/7KCCWeLzbnnKLMMm7j9YYXI3ETA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 157770,
-    "ru": "我是大侦探",
-    "en": "我是大侦探",
-    "year": 2018,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 7.35,
-    "genres": [
-      "Реалити-шоу",
-      "драма",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/19Ewm6Wy9GCxyHPvmS4h0zO6lGa.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zla8aM9cid2EbbDc2O8u1xHWkUC.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 120884,
-    "ru": "青春探偵ハルヤ",
-    "en": "青春探偵ハルヤ",
-    "year": 2015,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 6.95,
-    "genres": [
-      "криминал"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bSMWwOO3IhTjCOJkhHSr40RE9N0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7HR4UORTuigdLBNLgGoO7IXQ821.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 86356,
-    "ru": "新包青天",
-    "en": "新包青天",
-    "year": 1995,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 6.76,
-    "genres": [
-      "драма",
-      "детектив"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/tvBLthbI5LhMEwytTxLZzFgn2Uj.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/7CeRi49LvlqkyJzrQRRuzgqX7Rk.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 99314,
-    "ru": "大運河",
-    "en": "大運河",
-    "year": 1987,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 6.74,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/1oauXtKNfKKGwaL1hch6qQhT2qJ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/wgq4bsvYeYiu8ARif3k0uVU6OjV.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 306235,
-    "ru": "Πανσέληνος",
-    "en": "Πανσέληνος",
-    "year": 2009,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 6.69,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/xjngCJsZTn61GIKv16Yh8do99xF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/gfMjDv9kiKsZnDuTChhSh3C5D6V.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 282166,
-    "ru": "As Pupilas do Senhor Reitor",
-    "en": "As Pupilas do Senhor Reitor",
-    "year": 1970,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 6.64,
-    "genres": [
-      "Мыльная опера",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bh4WkpfpLdhCoJ4mNS8LEjup1DD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ytQjHGTq2wPELGNGAb0RDo7OnFW.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 158475,
-    "ru": "#BOOS",
-    "en": "#BOOS",
-    "year": 2016,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 6.24,
-    "genres": [
-      "Ток-шоу",
-      "Новости",
-      "Реалити-шоу"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ayXiHS13Kxc4mOkAHMPBFh0xwSP.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uK4bRnGdwNnzXsHYQmXc6TLW51e.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 97761,
-    "ru": "連城訣",
-    "en": "連城訣",
-    "year": 1989,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 6.16,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/aKKCU2xVXe09IkGqufwEJMJj8o2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/cHYfckp48j30pCQk5C88KvO46fO.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 66759,
-    "ru": "Planet Wissen",
-    "en": "Planet Wissen",
-    "year": 2002,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 5.86,
-    "genres": [
-      "документальный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5VDhxDNprQZA0ZdvJ6mfrkHv12L.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/qDVMHxUyBI5KCeUYYyKgaRO4DpG.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 20364,
-    "ru": "La guerre des clans",
-    "en": "La guerre des clans",
-    "year": 2009,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 7.0,
-    "votes": 1,
-    "popularity": 5.68,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/avQsrnLq4lKRg8Mk4S2gjqOhto8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/rXgx2LXbJlafdsRi8aehy1x6zVQ.jpg",
     "source": "tmdb"
   }
 ]

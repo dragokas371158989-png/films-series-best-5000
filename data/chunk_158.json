@@ -1,5 +1,192 @@
 [
   {
+    "id": 311220,
+    "ru": "Twink",
+    "en": "Twink",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 7,
+    "popularity": 0.37,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2XSi7dPbsIoyGKbGOe3CC25L5pi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/irdEuI0B6tWQromwTDIwOHYE91k.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 650243,
+    "ru": "День города",
+    "en": "День города",
+    "year": 2021,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 6,
+    "popularity": 0.45,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "Приезд президента – очень ответственное мероприятие для любого провинциального города. На любом этапе подготовки что-то может пойти не так. Но никто в Любякино не ожидал, что не так пойдет всё.",
+    "poster": "https://image.tmdb.org/t/p/w342/8kG9zEWXMju3m5AMijx2fi9kgih.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/xOi7mzyLFMKffxpLO1Rv5A9V3HW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 1388771,
+    "ru": "The Fairfield County Four",
+    "en": "The Fairfield County Four",
+    "year": 2026,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 6,
+    "popularity": 0.84,
+    "genres": [
+      "триллер",
+      "ужасы",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/rgCVAdvyciFfOFdTHXuzpiPxTx5.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/s9k5t842Mpa6hkwLmF5dIzWyO25.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 981371,
+    "ru": "பகாசூரன்",
+    "en": "பகாசூரன்",
+    "year": 2023,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 6,
+    "popularity": 0.7,
+    "genres": [
+      "триллер",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/mwEn3zXAvKiMEt3xmaEynKFCqP0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/sYDsiXb88fMuTazC6J72PG6VpVw.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 618518,
+    "ru": "Sh_t Happens",
+    "en": "Sh_t Happens",
+    "year": 2020,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 6,
+    "popularity": 0.34,
+    "genres": [
+      "мультфильм",
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/vIqyumwhOYDQEywRlR0qr2UlzaL.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/dkMY6uh6G7LUjppDUT3H4gGfKWc.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 456476,
+    "ru": "구세주: 리턴즈",
+    "en": "구세주: 리턴즈",
+    "year": 2017,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 6,
+    "popularity": 0.69,
+    "genres": [
+      "комедия"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/4VDNEnJGdiZu4sS8skeiplE2JDM.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/A6OJTDyHCWGJFsbBTMS6AtSyept.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 256828,
+    "ru": "പകിട",
+    "en": "പകിട",
+    "year": 2014,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 6,
+    "popularity": 0.55,
+    "genres": [
+      "криминал",
+      "триллер"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bf5b0l7I2PXrlMNJYi6OgDIuIdJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uUEG5AP0qWr6ulopU5p3igLblrx.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 328264,
+    "ru": "Bereave",
+    "en": "Bereave",
+    "year": 2015,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 6,
+    "popularity": 0.53,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/yEyZJHRheeET92ImqZjZ1gv1hym.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/m0lYhp6M2av2SGgmOpYDD486ysH.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 266116,
+    "ru": "タッチ～Miss Lonely Yesterday あれから、君は・・・～",
+    "en": "タッチ～Miss Lonely Yesterday あれから、君は・・・～",
+    "year": 1998,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 6,
+    "popularity": 0.78,
+    "genres": [
+      "мультфильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/njRym4DIAtIUIsnY0ayYENtfWCo.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
+    "id": 433969,
+    "ru": "Abducted Love",
+    "en": "Abducted Love",
+    "year": 2016,
+    "type": "Фильм",
+    "category": "Фильм",
+    "rating": 4.6,
+    "votes": 6,
+    "popularity": 0.59,
+    "genres": [
+      "боевик",
+      "триллер",
+      "телевизионный фильм"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/2zBsCHPqXpXFFT0EfrAJGaiYiNF.jpg",
+    "backdrop": "",
+    "source": "tmdb"
+  },
+  {
     "id": 290724,
     "ru": "Ждущий выхода",
     "en": "Waiting for the Out",
@@ -9303,191 +9490,6 @@
     "overview": "",
     "poster": "https://image.tmdb.org/t/p/w342/4GWCTjkXMdFF4cOVYKKQ4irz47u.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/zteVun9mry9sN2h5BXZP6uQApT9.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 110714,
-    "ru": "燕双鹰系列",
-    "en": "燕双鹰系列",
-    "year": 2001,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 9.69,
-    "genres": [
-      "драма",
-      "Боевик и Приключения"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/46BtosDYEekox64NlgkX5k0YzxO.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/uZza65KkcRdWhlIWZSt9nKUiQpx.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 38933,
-    "ru": "하얀 거짓말",
-    "en": "하얀 거짓말",
-    "year": 2008,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 7.57,
-    "genres": [
-      "драма",
-      "семейный"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/fXN1oZCNFegzBrcFNss3oEU184h.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5hYd7IazrqhkWV3laPboJbaYVk4.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 99887,
-    "ru": "Chakravartin Ashoka Samrat",
-    "en": "Chakravartin Ashoka Samrat",
-    "year": 2015,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 6.27,
-    "genres": [
-      "Мыльная опера"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/znkKMWvlIzeJwHSe36BHTwtownc.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/pHpeJbqbYE9rPCxK64o1tKopsDZ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 102106,
-    "ru": "Μπρούσκο",
-    "en": "Μπρούσκο",
-    "year": 2013,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 6.26,
-    "genres": [
-      "Мыльная опера",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/bUcXirbutuLpCLYtlcxNCsTkIp7.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ctNPIoiTvjBVoybPCozVsGbujal.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 31886,
-    "ru": "La fureur",
-    "en": "La fureur",
-    "year": 1998,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 5.57,
-    "genres": [],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/qKlH7VhjVobDh2VPi5EcOZ1U3Se.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/mbMtKvMSpqyKdqq2RvTDGAG0Ytj.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 100624,
-    "ru": "Çember",
-    "en": "Çember",
-    "year": 2017,
-    "type": "Сериал",
-    "category": "Сериал",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 5.12,
-    "genres": [
-      "Боевик и Приключения",
-      "криминал",
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/ynXp4l5MQ3DG8HkmTEyJR0KEGTd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jHxda2IAhWiti0OcOoE8xEzS50C.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 483509,
-    "ru": "新任女教師 劇場版 愛してるとか 好きだとか",
-    "en": "新任女教師 劇場版 愛してるとか 好きだとか",
-    "year": 2009,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 3.12,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/9ZLDPKfTH7YyLFs4JCEiwstb1hD.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/5BlBuyg5J54weQ0wWfpGOSIiSFQ.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 552643,
-    "ru": "아내의 애인2",
-    "en": "아내의 애인2",
-    "year": 2018,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 2.77,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/wZxEUrvJvrmc1zrOK3gM3UM20A0.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/i0BltyvEmbJ1OTyyabh9hq9R0QA.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 1023603,
-    "ru": "スター・ダスト",
-    "en": "スター・ダスト",
-    "year": 1992,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 2.24,
-    "genres": [
-      "мультфильм",
-      "фантастика"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/5BdoWxIQ9yzzFn2SIvd8pIWsFXF.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/jxlpsaL8nFUfg6e3uQdPx8Bl4Ga.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": 458038,
-    "ru": "Uma Vida À Espera",
-    "en": "Uma Vida À Espera",
-    "year": 2017,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 4.5,
-    "votes": 2,
-    "popularity": 2.21,
-    "genres": [
-      "драма"
-    ],
-    "overview": "",
-    "poster": "https://image.tmdb.org/t/p/w342/3Tz9KKO3JmRbNPj2DZZH5XruJsn.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6Dsjalg0YgJ9LgK6aHHIx4xIoZQ.jpg",
     "source": "tmdb"
   }
 ]

@@ -1,5 +1,185 @@
 [
   {
+    "id": 157770,
+    "ru": "我是大侦探",
+    "en": "我是大侦探",
+    "year": 2018,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 7.35,
+    "genres": [
+      "Реалити-шоу",
+      "драма",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/19Ewm6Wy9GCxyHPvmS4h0zO6lGa.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/zla8aM9cid2EbbDc2O8u1xHWkUC.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 120884,
+    "ru": "青春探偵ハルヤ",
+    "en": "青春探偵ハルヤ",
+    "year": 2015,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 6.95,
+    "genres": [
+      "криминал"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bSMWwOO3IhTjCOJkhHSr40RE9N0.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7HR4UORTuigdLBNLgGoO7IXQ821.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 86356,
+    "ru": "新包青天",
+    "en": "新包青天",
+    "year": 1995,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 6.76,
+    "genres": [
+      "драма",
+      "детектив"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/tvBLthbI5LhMEwytTxLZzFgn2Uj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/7CeRi49LvlqkyJzrQRRuzgqX7Rk.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 99314,
+    "ru": "大運河",
+    "en": "大運河",
+    "year": 1987,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 6.74,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/1oauXtKNfKKGwaL1hch6qQhT2qJ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/wgq4bsvYeYiu8ARif3k0uVU6OjV.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 306235,
+    "ru": "Πανσέληνος",
+    "en": "Πανσέληνος",
+    "year": 2009,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 6.69,
+    "genres": [
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/xjngCJsZTn61GIKv16Yh8do99xF.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/gfMjDv9kiKsZnDuTChhSh3C5D6V.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 282166,
+    "ru": "As Pupilas do Senhor Reitor",
+    "en": "As Pupilas do Senhor Reitor",
+    "year": 1970,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 6.64,
+    "genres": [
+      "Мыльная опера",
+      "драма"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/bh4WkpfpLdhCoJ4mNS8LEjup1DD.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/ytQjHGTq2wPELGNGAb0RDo7OnFW.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 158475,
+    "ru": "#BOOS",
+    "en": "#BOOS",
+    "year": 2016,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 6.24,
+    "genres": [
+      "Ток-шоу",
+      "Новости",
+      "Реалити-шоу"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/ayXiHS13Kxc4mOkAHMPBFh0xwSP.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/uK4bRnGdwNnzXsHYQmXc6TLW51e.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 97761,
+    "ru": "連城訣",
+    "en": "連城訣",
+    "year": 1989,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 6.16,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/aKKCU2xVXe09IkGqufwEJMJj8o2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/cHYfckp48j30pCQk5C88KvO46fO.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 66759,
+    "ru": "Planet Wissen",
+    "en": "Planet Wissen",
+    "year": 2002,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 5.86,
+    "genres": [
+      "документальный"
+    ],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/5VDhxDNprQZA0ZdvJ6mfrkHv12L.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/qDVMHxUyBI5KCeUYYyKgaRO4DpG.jpg",
+    "source": "tmdb"
+  },
+  {
+    "id": 20364,
+    "ru": "La guerre des clans",
+    "en": "La guerre des clans",
+    "year": 2009,
+    "type": "Сериал",
+    "category": "Сериал",
+    "rating": 7.0,
+    "votes": 1,
+    "popularity": 5.68,
+    "genres": [],
+    "overview": "",
+    "poster": "https://image.tmdb.org/t/p/w342/avQsrnLq4lKRg8Mk4S2gjqOhto8.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w780/rXgx2LXbJlafdsRi8aehy1x6zVQ.jpg",
+    "source": "tmdb"
+  },
+  {
     "id": 112136,
     "ru": "Η Φαμίλια",
     "en": "Η Φαμίλια",
@@ -10126,215 +10306,6 @@
     "overview": "Кровавый период Гражданской войны в США: американский конфедерат Инман пытается добраться с линии фронта домой, в Холодную Гору (штат Северная Каролина), где оставил свою возлюбленную Аду. Ада пытается выжить одна в разоренном тылу. На помощь ей приходит бродяжка Руби, которая учит светскую барышню азам ведения хозяйства…",
     "poster": "https://image.tmdb.org/t/p/w342/eIDXt3IPiYN6nn2UhR9OvvHKYCE.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w780/xjJz025MAPrSeNj18LPjcyu4xFM.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_56566",
-    "ru": "Beyblade X",
-    "en": "Beyblade X",
-    "year": 2023,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.9,
-    "votes": 1952,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Приключения",
-      "Adventure",
-      "Спорт",
-      "Sports",
-      "Для детей",
-      "Kids"
-    ],
-    "overview": "At the heart of X City stands the impressive X Tower, an interconnected twin-skyscraper structure that symbolizes the pinnacle of every Beyblade player's dream. The building serves as the official headquarters for professional Beybattles, where competitors strive to ascend all one hundred floors; at its summit, the reigning champions, Team Pendragon, await contenders worthy of challenging their title.\n\nBird Kazami, an amateur Blader, arrives in the city eager to turn professional. However, he and his teammates are crushed in their first qualifying match, prompting his companions to give up and disband their team. Fortunately, Bird is soon approached by the easygoing Ekusu Kurosu. In disguise as \"Kamen X\" to hide his identity as a former member of the undefeated Team Pendragon, Ekusu wants to climb the tower all over again. To complete their new group, they recruit skilled Beyblade expert and savvy social media influencer Multi Nanairo.\n\nDriven by their individual goals, the trio wins their preliminary rounds, launching their careers as Team Persona. Bird and his new friends must navigate the world of corporate sponsorships, earn the fickle public's support, and defeat many formidable opponents—all in their quest to reach X Tower's peak.\n\n[Written by MAL Rewrite]",
-    "poster": "https://cdn.myanimelist.net/images/anime/1394/145458l.webp",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6OAvlyDxLhfxxPB9Mn9w43EaR3N.jpg",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "1079091",
-    "ru": "Всё закончится на нас",
-    "en": "It Ends with Us",
-    "year": 2024,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1947,
-    "popularity": 8.73,
-    "genres": [
-      "драма",
-      "мелодрама"
-    ],
-    "overview": "Лили Блум, женщина, которая преодолела травмирующее детство, чтобы начать новую жизнь в Бостоне и осуществить мечту всей жизни - открыть её собственный бизнес. Случайная встреча с очаровательным нейрохирургом Райлом Кинкейдом вызывает интенсивную связь, но когда они глубоко влюбляются друг в друга, Лили начинает видеть стороны Райла, которые напоминают ей об отношениях её родителей.",
-    "poster": "https://image.tmdb.org/t/p/w342/hsInJC61gvlAcNKe2BSleQQtC2E.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/8yPSYhooj8nyBbmV3GVdLDwuE7e.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "581032",
-    "ru": "Новости со всех концов света",
-    "en": "News of the World",
-    "year": 2020,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1940,
-    "popularity": 1.98,
-    "genres": [
-      "драма",
-      "вестерн",
-      "приключения"
-    ],
-    "overview": "Ветеран Гражданской войны в США капитан Джефферсон Кайл Кидд зарабатывает на жизнь, путешествуя по стране и зачитывая неграмотным местным последние новости из газет. Однажды его нанимают отвезти к родственникам 10-летнюю девочку-сироту, которая долгое время жила в индийском племени Кайова. Путешествуя из городка в городок, вдовец Кидд, давно не общавшийся с собственной дочерью, начинает испытывать к юной попутчице отеческие чувства. Вместе они должны преодолеть суровую природу американского Запада и избежать бандитов, намеренных похитить девочку.",
-    "poster": "https://image.tmdb.org/t/p/w342/q7h2jqHMug8APfMef0g0co9qTGQ.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/oyBZyY5GdzZdofVVsDda49QmvFP.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "513310",
-    "ru": "День курка",
-    "en": "Boss Level",
-    "year": 2021,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1922,
-    "popularity": 5.58,
-    "genres": [
-      "боевик",
-      "фантастика",
-      "триллер"
-    ],
-    "overview": "Каждый день бывший спецназовец Рой Палвер начинает, отбиваясь от всевозможных убийц: здоровяка с мачете, пулемётчика на вертолёте, двух красоток на быстром авто, виртуозно владеющей мечом китаянки, карлика-подрывника и прочих психопатов. И каждый раз Рой неизменно погибает и снова оказывается в том же дне. Однажды он узнаёт, что его бывшая девушка, которая занималась секретными разработками, мертва. Рой решает докопаться до причин её смерти, а заодно выяснить, как ему самому выбраться из этой невыносимой временной петли.",
-    "poster": "https://image.tmdb.org/t/p/w342/wxFFdyVnah84PsY1yPFJqTqhUcx.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/1Yc5hIRh3skhsEKLbCHE7v1FBOa.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "2196",
-    "ru": "Смерть на похоронах",
-    "en": "Death at a Funeral",
-    "year": 2007,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1921,
-    "popularity": 3.06,
-    "genres": [
-      "комедия",
-      "драма"
-    ],
-    "overview": "Чопорная английская семья воссоединяется, дабы безутешно оплакать своего почившего родственника. Искренне сожалея о смерти обладателя кристальной, по их мнению, души, члены благородного семейства оказываются весьма обескуражены, узнав о прижизненных проделках своего дядюшки. Поведавший все эти забавные истории шантажист отнюдь не намерен держать язык за зубами. Он согласен поспособствовать сохранению репутации аристократов разве что за небольшую, по его словам, сумму с большим количеством нулей.",
-    "poster": "https://image.tmdb.org/t/p/w342/xyTxrJnjbSJQzcbKIP6S1uqLuxy.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lIXNL1uoEyuTLqaTAqtBYoc71WF.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "11820",
-    "ru": "Улыбка Моны Лизы",
-    "en": "Mona Lisa Smile",
-    "year": 2003,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1901,
-    "popularity": 2.31,
-    "genres": [
-      "драма",
-      "история",
-      "мелодрама"
-    ],
-    "overview": "1953 год. В Америке идет борьба женщин за свои права, и в это время Кэтрин Энн Уотсон, выпускница Беркли, получает место преподавателя истории искусств в женском колледже Уэллесли. Однако среди руководства и преподавательского состава колледжа преобладают патриархальные взгляды на роль женщины в этом мире.  Кэтрин со страстным энтузиазмом бросается в борьбу за равноправие полов, и оказывает огромное влияние на студенток, в том числе на Бетти и Джоан. Общение с ними меняет не только их, но и заставляет ее по-новому взглянуть на собственную жизнь…",
-    "poster": "https://image.tmdb.org/t/p/w342/fIQSRBummbCz9kU4CKVoMaKURS8.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/trfjdJI51Krnig9UmxJQkz15ICo.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "3432",
-    "ru": "Кто Вы, Мистер Брукс?",
-    "en": "Mr. Brooks",
-    "year": 2007,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1878,
-    "popularity": 2.6,
-    "genres": [
-      "криминал",
-      "триллер"
-    ],
-    "overview": "Уважаемый бизнесмен и отец семейства, мистер Брукс скрывает тайну. За фасадом заботливого мужа и нежного отца скрывается жестокий убийца. На протяжении долгого времени эти две личности безуспешно борются между собой, и ни одна из них не может одержать верх. В результате убийства продолжаются, и, кажется, ничто не может оборвать эту кровавую цепь преступлений.Однако Бруксу не повезло. Свидетелем его последнего злодеяния становится сумасшедший фотограф. Он начинает шантажировать преступника, но у него особые требования. В отличие от обычных шантажистов, фотографа не интересуют деньги. Он хочет присутствовать при следующих убийствах.У героя остается сомнительный выбор — пойти на поводу у шантажиста или найти в себе силы победить свой порок и вернуться к нормальной жизни.",
-    "poster": "https://image.tmdb.org/t/p/w342/2F2jGdvEoXaqA7QdYWaLkL10EEh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/6M2IeELPSKZZ4iAPz2w0i7wdm6X.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "1038392",
-    "ru": "Заклятие 4: Последний обряд",
-    "en": "The Conjuring: Last Rites",
-    "year": 2025,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1856,
-    "popularity": 35.92,
-    "genres": [
-      "ужасы"
-    ],
-    "overview": "Исследователи паранормальных явлений Эд и Лоррейн Уоррен берутся за самый тревожный случай в своей практике. Семья переезжает в новый дом своей мечты, но вскоре их жилище начинает проявлять признаки демонической активности, превращая жизнь в кошмар.",
-    "poster": "https://image.tmdb.org/t/p/w342/1DPYceqs7OuKgUD13vrPFZ2SYRd.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/i8MupUe4xgmYXoRNAQMYvuoexSU.jpg",
-    "source": "tmdb"
-  },
-  {
-    "id": "mal_31763",
-    "ru": "アクセル・ワールド INFINITE∞BURST（インフィニット・バースト）",
-    "en": "Accel World: Infinite∞Burst",
-    "year": 2016,
-    "type": "Аниме",
-    "category": "Аниме",
-    "rating": 6.6,
-    "votes": 31800,
-    "popularity": 0.0,
-    "genres": [
-      "Аниме",
-      "Экшен",
-      "Action",
-      "Романтика",
-      "Romance",
-      "Фантастика",
-      "Sci-Fi",
-      "Школа",
-      "School",
-      "Игры",
-      "Video Game"
-    ],
-    "overview": "Some time after the events involving Burst Linker Dusk Taker, Kuroyukihime recalls recruiting Haruyuki Arita to the \"Brain Burst\" program—an application that allows players to accelerate their cognitive functions until time seems to stop. Since his arrival, Haruyuki has risen to fame among the other Burst Linkers and has been helping Kuroyukihime achieve her goal of reaching the highest level in the game.\n\nDuring a territorial battle with their legion, Nega Nebulus, Haruyuki and his friends are kicked out of the program after a destructive storm in-game. All over Tokyo, security cameras are malfunctioning, which Kuroyukihime deduces is related to the Brain Burst glitch. Determined to fix the problem, Nega Nebulus must recruit the other legions to find the source of the issue and restore the acceleration ability.\n\n[Written by MAL Rewrite]",
-    "poster": "https://cdn.myanimelist.net/images/anime/5/87145l.webp",
-    "backdrop": "",
-    "source": "Jikan / MyAnimeList"
-  },
-  {
-    "id": "9359",
-    "ru": "Мэверик",
-    "en": "Maverick",
-    "year": 1994,
-    "type": "Фильм",
-    "category": "Фильм",
-    "rating": 6.9,
-    "votes": 1773,
-    "popularity": 3.31,
-    "genres": [
-      "боевик",
-      "приключения",
-      "комедия",
-      "драма",
-      "вестерн"
-    ],
-    "overview": "История о великолепном картежнике, игроке в покер и, конечно, обаятельном мошеннике Брэте Маверике. О том, как он самоотверженно «зарабатывает» деньги для участия в чемпионате по игре в покер. Но не только он собирается принять участие в «великом мошенничестве» — туда же стремится и обаятельная воровка Аннабел. Много приключений выпадет на их долю, пока им удастся набрать по 25 тысяч долларов, а именно такая сумма необходима для участия в игре….",
-    "poster": "https://image.tmdb.org/t/p/w342/gEO14OFi04jAoPnSKPBxkGFBnV2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ctzKCslTsMRsOJNvAm1Mw8ytiHY.jpg",
     "source": "tmdb"
   }
 ]
