@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+const GKM_APP_CLEAN_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -587,7 +587,7 @@ function gkmPosterErrorV73(img) {
   } catch(e) {}
 }
 
-window.GKM_POSTER_REPAIR_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_POSTER_REPAIR_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 /* === /GKM V73 POSTER REPAIR === */
 
 
@@ -908,7 +908,7 @@ async function gkmLoadDepartmentFromIndexV68(tab, page = 1) {
   gkmRenderDepartmentPageV68(tab, page, idx);
 }
 
-window.GKM_STRICT_DEPARTMENT_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_STRICT_DEPARTMENT_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 /* === /GKM V68 STRICT DEPARTMENT PAGES === */
 
 
@@ -926,8 +926,60 @@ function gkmCountFallbackInSliceV75(items, limit = PAGE_SIZE) {
   return (Array.isArray(items) ? items : []).slice(0, limit).filter(x => !gkmHasRealPosterV74(x)).length;
 }
 
-window.GKM_NO_FALLBACK_FIRST_PAGES_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_NO_FALLBACK_FIRST_PAGES_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 /* === /GKM V75 NO FALLBACK FIRST PAGES === */
+
+
+/* === GKM V76 HIDE NO POSTERS + NO GENERIC SEARCH === */
+function gkmVisiblePosterItemsV76(items) {
+  const list = Array.isArray(items) ? items : [];
+  const real = list.filter(gkmHasRealPosterV74);
+  return real.length ? real : list.filter(x => !String(x && x.poster || "").includes("dummyimage.com"));
+}
+
+function gkmGenericQueryTabV76(q) {
+  const s = String(q || "").toLowerCase().replace(/ё/g, "е").trim();
+  if (!s) return "";
+  if (["фильм", "фильмы", "кино", "movies", "movie"].includes(s)) return "movies";
+  if (["сериал", "сериалы", "series", "show", "shows"].includes(s)) return "series";
+  if (["мульт", "мультик", "мультики", "мультфильм", "мультфильмы", "cartoon", "cartoons"].includes(s)) return "cartoons";
+  if (["аниме", "anime", "анимэ"].includes(s)) return "anime";
+  return "";
+}
+
+function gkmOpenGenericQueryTabV76(q) {
+  const tab = gkmGenericQueryTabV76(q);
+  if (!tab) return false;
+
+  const search = $("searchInput");
+  if (search) {
+    search.value = "";
+    search.blur();
+  }
+
+  // V77: generic words like "фильм" open a section and must clear ALL filters.
+  // Otherwise filters kept hasActiveControls=true and pager could fall back to search mode.
+  ["typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(id => {
+    const el = $(id);
+    if (el) el.value = id === "ratingFilter" ? "0" : "";
+  });
+
+  const sort = $("sortFilter");
+  if (sort) sort.value = "votes";
+
+  lastSearchResults = [];
+  currentPage = 1;
+  setActiveTab(tab);
+
+  loadPage(tab, 1).then(() => {
+    try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch { window.scrollTo(0,0); }
+  });
+  return true;
+}
+
+window.GKM_HIDE_NO_POSTERS_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_NO_GENERIC_SEARCH_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+/* === /GKM V76 HIDE NO POSTERS + NO GENERIC SEARCH === */
 
 /* === GKM V71 PAGE BUFFER + NO SEARCH PAGER === */
 const GKM_PAGE_BUFFER_LIMIT_V71 = 80;
@@ -942,7 +994,7 @@ function gkmStrictFilterTabV71(tab, items) {
   else if (tab === "new") out = out.filter(m => Number(getYear(m) || 0) >= 2024);
   else if (tab === "top") out = out.filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP && getRating(m) >= 7);
   else if (tab === "popular") out = out.filter(m => getVotes(m) >= 1);
-  return gkmRealPosterFirstV75(gkmSortVotesFirstV67(out));
+  return gkmVisiblePosterItemsV76(gkmRealPosterFirstV75(gkmSortVotesFirstV67(out)));
 }
 
 async function gkmFetchPageQuietV71(pageTab, page) {
@@ -998,8 +1050,8 @@ function gkmRenderBufferedDepartmentV71(pageTab, requestedPage, buffer) {
   setStatus(`Раздел ${pageTab} · без search_index · сортировка по голосам`);
 }
 
-window.GKM_PAGER_NO_SEARCH_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
-window.GKM_PAGE_BUFFER_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_PAGER_NO_SEARCH_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_PAGE_BUFFER_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 /* === /GKM V71 PAGE BUFFER + NO SEARCH PAGER === */
 
 
@@ -1233,7 +1285,7 @@ function gkmHasRealPosterV74(m) {
   return true;
 }
 
-window.GKM_REAL_POSTERS_FIRST_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_REAL_POSTERS_FIRST_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 /* === /GKM V74 REAL POSTERS FIRST === */
 
 function gkmVotesBucketV70(m) {
@@ -1294,7 +1346,7 @@ function gkmSortSmartV67(list) {
   });
 }
 
-window.GKM_VOTES_FIRST_SORT_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_VOTES_FIRST_SORT_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 /* === /GKM V67 VOTES FIRST SORT === */
 
 
@@ -1487,6 +1539,12 @@ function renderSearchPage(page = 1) {
 }
 
 async function runSearch() {
+  const genericTabV76 = gkmGenericQueryTabV76($("searchInput") ? $("searchInput").value : "");
+  if (genericTabV76) {
+    gkmOpenGenericQueryTabV76(genericTabV76);
+    return;
+  }
+
   const searchInput = $("searchInput");
   const qRaw = searchInput ? searchInput.value : "";
   const q = gkmSearchNormV49(qRaw);
@@ -1789,7 +1847,7 @@ async function renderRelatedCardsV66(baseItem) {
   });
 }
 
-window.GKM_RELATED_CARDS_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_RELATED_CARDS_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 /* === /GKM V66 RELATED CARDS IN DETAILS === */
 
 
@@ -4064,7 +4122,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+  window.GKM_AI_CHAT_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 })();
 
 
@@ -5196,23 +5254,23 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_HELPER_RESTORED_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_TESTED_RELEASE_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_RUNTIME_GUARD_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 
-window.GKM_NO_SCROLL_BUTTONS_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 
 
 
@@ -5240,7 +5298,7 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v75-no-fallback-first-pages-tested-2026-
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
   else bindMoreButtonsCaptureV63();
 
-  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 })();
 
 
@@ -5305,11 +5363,11 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v75-no-fallback-first-pages-tested-2026-
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAiCloseV64);
   else bindAiCloseV64();
 
-  window.GKM_HELPER_CLOSE_FIX_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+  window.GKM_HELPER_CLOSE_FIX_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 })();
 
 
-window.GKM_BALANCED_HOME_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+window.GKM_BALANCED_HOME_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 
 
 window.GKM_LIST_SORT_POLICY_VERSION = "votes_first_then_rating_v67";
@@ -5396,8 +5454,8 @@ window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_i
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindTabsV70);
   else bindTabsV70();
 
-  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
-  window.GKM_VOTE_BUCKETS_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+  window.GKM_VOTE_BUCKETS_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 })();
 /* === /GKM V70 STRICT TAB BUTTONS + VOTE BUCKETS === */
 
@@ -5547,7 +5605,34 @@ window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_i
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindHardV72);
   else bindHardV72();
 
-  window.GKM_HARD_PAGER_TABS_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
-  window.GKM_PAGE_SCROLL_TOP_VERSION = "v75-no-fallback-first-pages-tested-2026-06-14";
+  window.GKM_HARD_PAGER_TABS_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+  window.GKM_PAGE_SCROLL_TOP_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
 })();
 /* === /GKM V72 HARD PAGER + STRICT TABS OVERRIDE === */
+
+
+
+/* === GKM V76 SEARCH GUARD === */
+(function(){
+  function bindSearchGuardV76(){
+    if (document.documentElement.dataset.gkmSearchGuardV76 === "1") return;
+    document.documentElement.dataset.gkmSearchGuardV76 = "1";
+    const input = $("searchInput");
+    if (!input) return;
+    input.addEventListener("input", function(e){
+      const tab = gkmGenericQueryTabV76(input.value);
+      if (!tab) return;
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+      clearTimeout(window.GKM_GENERIC_SEARCH_TIMER_V76);
+      window.GKM_GENERIC_SEARCH_TIMER_V76 = setTimeout(() => gkmOpenGenericQueryTabV76(tab), 120);
+    }, true);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindSearchGuardV76);
+  else bindSearchGuardV76();
+  window.GKM_SEARCH_GUARD_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+})();
+/* === /GKM V76 SEARCH GUARD === */
+
+
+window.GKM_V77_DEEP_RETEST_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
