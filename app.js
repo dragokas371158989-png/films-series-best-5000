@@ -4393,6 +4393,119 @@ if (document.readyState === "loading") {
   window.GKM_AI_CHAT_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 })();
 
+/* === GKM V88 STABLE SEARCH / NO CRASH === */
+(function () {
+  window.GKM_V88_STABLE_SEARCH_VERSION = "v88-stable-search-no-sweep-2026-06-15";
+
+  function directPosterValueV88(m) {
+    return String(m && (
+      m.poster || m.poster_path || m.posterUrl || m.poster_url ||
+      m.image || m.imageUrl || m.cover || m.coverUrl || m.img || ""
+    ) || "").trim();
+  }
+
+  window.gkmPosterSrcV73 = function(m) {
+    const p = directPosterValueV88(m);
+    if (!p || p === "null" || p === "undefined") return "";
+    if (/^http:\/\//i.test(p)) return p.replace(/^http:/i, "https:");
+    return p;
+  };
+
+  window.gkmPosterErrorV73 = function(img) {
+    try {
+      const card = img && img.closest && img.closest(".card,.related-card");
+      if (card) card.remove();
+      else if (img) img.remove();
+      window.GKM_V88_REMOVED_BROKEN_POSTERS = (window.GKM_V88_REMOVED_BROKEN_POSTERS || 0) + 1;
+    } catch(e) {}
+  };
+
+  function normV88(v) {
+    return String(v || "")
+      .toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[’'`]/g, "")
+      .replace(/[^0-9a-zа-я一-龯ぁ-ゔァ-ヴー々〆〤:]+/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function titleHayV88(m) {
+    if (!m) return "";
+    if (m.__gkmTitleHayV88) return m.__gkmTitleHayV88;
+    m.__gkmTitleHayV88 = normV88([
+      typeof titleOf === "function" ? titleOf(m) : "",
+      m.ru, m.en, m.title, m.name, m.original_title, m.original_name,
+      m.title_ru, m.ruTitle, m.english, m.romaji,
+      ...(Array.isArray(m.aliases) ? m.aliases : []),
+      ...(Array.isArray(m.names) ? m.names : [])
+    ].join(" "));
+    return m.__gkmTitleHayV88;
+  }
+
+  function itemScoreV88(m, q) {
+    if (!q) return Number(getVotes(m) || 0);
+    const hay = titleHayV88(m);
+    if (!hay) return 0;
+    const parts = normV88(q).split(" ").filter(Boolean);
+    let s = 0;
+    if (hay === q) s += 10000000;
+    else if (hay.startsWith(q + " ")) s += 9000000;
+    else if (hay.includes(q)) s += 7000000;
+    if (parts.length && parts.every(p => hay.includes(p))) s += 6000000 + parts.length * 1000;
+    if (!s) return 0;
+    return s + Number(getVotes(m) || 0) + Number(getRating(m) || 0) * 1000;
+  }
+
+  window.renderSearchPage = function(page = 1) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE_SIZE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE_SIZE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE_SIZE);
+    renderList(currentItems, `Поиск: ${lastSearchResults.length} найдено · Страница ${currentPage} из ${currentPages}`);
+  };
+
+  window.runSearch = async function() {
+    const input = $("searchInput");
+    const q = normV88(input ? input.value : "");
+    const typeFilter = $("typeFilter");
+    const genreFilter = $("genreFilter");
+    const yearFilter = $("yearFilter");
+    const ratingFilter = $("ratingFilter");
+    const sortFilter = $("sortFilter");
+
+    const type = typeFilter ? typeFilter.value : "";
+    const genre = genreFilter ? genreFilter.value : "";
+    const year = yearFilter ? yearFilter.value : "";
+    const minRating = Number(ratingFilter ? ratingFilter.value || 0 : 0);
+    const sort = sortFilter ? sortFilter.value : "votes";
+
+    const index = await ensureSearchIndex();
+    let out = [];
+
+    for (const item of index) {
+      if (type && getType(item) !== type) continue;
+      if (genre && !getGenres(item).includes(genre)) continue;
+      if (year && getYear(item) !== year) continue;
+      if (minRating && getRating(item) < minRating) continue;
+      const score = itemScoreV88(item, q);
+      if (q && score <= 0) continue;
+      out.push({ item, score });
+    }
+
+    if (sort === "rating") out.sort((a, b) => getRating(b.item) - getRating(a.item) || getVotes(b.item) - getVotes(a.item));
+    else if (sort === "year") out.sort((a, b) => Number(getYear(b.item) || 0) - Number(getYear(a.item) || 0) || getVotes(b.item) - getVotes(a.item));
+    else if (sort === "title") out.sort((a, b) => titleOf(a.item).localeCompare(titleOf(b.item), "ru"));
+    else if (q) out.sort((a, b) => b.score - a.score);
+    else out.sort((a, b) => getVotes(b.item) - getVotes(a.item));
+
+    lastSearchResults = out.map(x => x.item);
+    renderSearchPage(1);
+    setStatus(`Поиск: ${lastSearchResults.length} найдено`);
+  };
+})();
+
 
 /* === GKM V34 MOBILE POSTER-WRAP REAL FIX === */
 (function () {
@@ -4997,6 +5110,7 @@ if (document.readyState === "loading") {
       card.style.minHeight = card.style.minHeight || "";
     });
   }
+
   let timer = 0;
   function schedule() {
     clearTimeout(timer);
