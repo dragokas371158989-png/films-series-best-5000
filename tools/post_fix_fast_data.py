@@ -3,7 +3,7 @@ import json, re, shutil
 from pathlib import Path
 from datetime import datetime, timezone
 
-VERSION = "v75-no-fallback-first-pages-tested-2026-06-14"
+VERSION = "v77-retested-no-freeze-no-posters-2026-06-14"
 DATA_FAST = Path("data/fast")
 PAGE_SIZE = 60
 HOME_LIMIT = 18
@@ -298,8 +298,8 @@ def write_pages(tab, items):
         shutil.rmtree(d)
     d.mkdir(parents=True, exist_ok=True)
 
-    # V75: real posters first on every generated page.
-    items = prefer_real_posters(items)
+    # V76: visible generated pages should not show blue fallback cards if real posters exist.
+    items = only_real_posters(prefer_real_posters(items))
 
     pages = max(1, (len(items) + PAGE_SIZE - 1) // PAGE_SIZE)
     for page in range(1, pages + 1):
@@ -318,6 +318,11 @@ def prefer_real_posters(items):
     real = [x for x in items if real_poster_ok(x)]
     fallback = [x for x in items if not real_poster_ok(x)]
     return real + fallback
+
+
+def only_real_posters(items):
+    real = [x for x in items if real_poster_ok(x)]
+    return real if real else items
 
 def main():
     if not DATA_FAST.exists():
@@ -406,7 +411,7 @@ def main():
     save(DATA_FAST / "search_index.json", items)
     save(DATA_FAST / "home.json", home)
     save(DATA_FAST / "meta.json", meta)
-    print("V75 NO FALLBACK FIRST PAGES READY")
+    print("V77 RETESTED NO POSTERS PAGES READY")
     print("builderVersion=", VERSION)
     print("anime=", len(anime), "cartoons=", len(cartoons))
     print("scoobyInAnime=", meta["checks"]["scoobyInAnime"])
