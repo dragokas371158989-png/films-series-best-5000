@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -875,7 +875,7 @@ async function gkmLoadDepartmentFromIndexV68(tab, page = 1) {
   gkmRenderDepartmentPageV68(tab, page, idx);
 }
 
-window.GKM_STRICT_DEPARTMENT_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+window.GKM_STRICT_DEPARTMENT_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 /* === /GKM V68 STRICT DEPARTMENT PAGES === */
 
 
@@ -885,25 +885,16 @@ async function loadPage(tab, page = 1) {
   currentTab = tab;
   currentPage = page;
 
-  // ВАЖНО V68:
-  // Разделы Фильмы/Сериалы/Мультфильмы/Аниме/Топ/Новинки/Популярное строим из полного search_index.
-  // Так в разделе "Фильмы" не появятся аниме/мультики, а сортировка будет по голосам по всей базе, не только внутри одной старой страницы.
-  const strictTabs = new Set(["movies", "series", "cartoons", "anime", "top", "new", "popular"]);
-  if (strictTabs.has(pageTab)) {
-    try {
-      await gkmLoadDepartmentFromIndexV68(pageTab, page);
-      return;
-    } catch (e) {
-      console.warn("V68 strict department index failed, fallback to page json", e);
-    }
-  }
-
+  // V69: НЕ грузим весь search_index при открытии разделов.
+  // Разделы берут готовые быстрые page_0001/page_0002, которые собирает GitHub Action.
   const url = `${FAST_BASE}/pages/${pageTab}/page_${String(page).padStart(4, "0")}.json`;
   setStatus(`Загружаю ${tab} · страница ${page}...`);
 
   const data = await fetchJson(url);
 
   let items = gkmCleanListV60(data.items || []);
+
+  // Страховка: даже если старые json смешанные, на экране типы не смешиваем.
   if (pageTab === "movies") items = items.filter(m => getType(m) === "Фильм");
   if (pageTab === "series") items = items.filter(m => getType(m) === "Сериал");
   if (pageTab === "cartoons") items = items.filter(m => getType(m) === "Мультфильм");
@@ -915,8 +906,11 @@ async function loadPage(tab, page = 1) {
   currentCount = data.count || currentItems.length;
 
   renderList(currentItems, `Найдено: ${currentCount} · Страница ${currentPage} из ${currentPages}`);
-  setStatus(`Раздел загружен: ${currentCount} записей`);
+  setStatus(`Раздел загружен: ${currentCount} записей · fast pages`);
 }
+
+window.GKM_FAST_PAGES_NO_FREEZE_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
+
 
 function renderList(items, label) {
   const grid = $("grid");
@@ -1151,7 +1145,7 @@ function gkmSortSmartV67(list) {
   });
 }
 
-window.GKM_VOTES_FIRST_SORT_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+window.GKM_VOTES_FIRST_SORT_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 /* === /GKM V67 VOTES FIRST SORT === */
 
 
@@ -1623,14 +1617,10 @@ async function renderRelatedCardsV66(baseItem) {
   let pool = gkmRelatedPoolV66();
   let items = gkmPickRelatedV66(baseItem, pool, 10);
 
+  // V69: не грузим весь search_index при открытии деталки.
+  // Похожие берём из уже загруженных секций/текущего списка, чтобы деталка не подвешивала страницу.
   if (items.length < 6) {
-    try {
-      const idx = await ensureSearchIndex();
-      pool = gkmCleanListV60([...(pool || []), ...(idx || [])]);
-      items = gkmPickRelatedV66(baseItem, pool, 10);
-    } catch (e) {
-      console.warn("related search index failed", e);
-    }
+    console.info("related: limited pool, search_index lazy load skipped for speed");
   }
 
   if (!items.length) {
@@ -1650,7 +1640,7 @@ async function renderRelatedCardsV66(baseItem) {
   });
 }
 
-window.GKM_RELATED_CARDS_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+window.GKM_RELATED_CARDS_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 /* === /GKM V66 RELATED CARDS IN DETAILS === */
 
 
@@ -3924,7 +3914,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 })();
 
 
@@ -5056,23 +5046,23 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+window.GKM_HELPER_RESTORED_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+window.GKM_TESTED_RELEASE_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+window.GKM_RUNTIME_GUARD_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 
-window.GKM_NO_SCROLL_BUTTONS_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 
 
 
@@ -5100,7 +5090,7 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v68-strict-department-pages-tested-2026-
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
   else bindMoreButtonsCaptureV63();
 
-  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 })();
 
 
@@ -5165,11 +5155,14 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v68-strict-department-pages-tested-2026-
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAiCloseV64);
   else bindAiCloseV64();
 
-  window.GKM_HELPER_CLOSE_FIX_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+  window.GKM_HELPER_CLOSE_FIX_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 })();
 
 
-window.GKM_BALANCED_HOME_VERSION = "v68-strict-department-pages-tested-2026-06-13";
+window.GKM_BALANCED_HOME_VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13";
 
 
 window.GKM_LIST_SORT_POLICY_VERSION = "votes_first_then_rating_v67";
+
+
+window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_index_v69";
