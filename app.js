@@ -4393,6 +4393,547 @@ if (document.readyState === "loading") {
   window.GKM_AI_CHAT_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 })();
 
+/* === GKM V90 NON-BLOCKING SEARCH + YEAR FILTER FINAL === */
+(function () {
+  window.GKM_V90_NON_BLOCKING_SEARCH_VERSION = "v90-non-blocking-search-year-filter-2026-06-15";
+
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const SEARCH_CHUNK = 2500;
+  const DEFAULT_SORT = "smart";
+  let activeRun = 0;
+  let inputTimer = 0;
+
+  function id(name) {
+    return document.getElementById(name);
+  }
+
+  function sleepFrame() {
+    return new Promise(resolve => setTimeout(resolve, 0));
+  }
+
+  function norm(value) {
+    return String(value || "")
+      .toLowerCase()
+      .replaceAll("ё", "е")
+      .replace(/&/g, " and ")
+      .replace(/['’`]/g, "")
+      .replace(/[^\p{L}\p{N}:]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function keyboardFix(text) {
+    const map = {
+      "q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ",
+      "a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э",
+      "z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"
+    };
+    return String(text || "").split("").map(ch => map[ch.toLowerCase()] || ch).join("");
+  }
+
+  function variants(query) {
+    const base = norm(query);
+    const out = new Set([base]);
+    const fixed = norm(keyboardFix(base));
+    if (fixed && fixed !== base) out.add(fixed);
+    const syn = {
+      "матрица": ["matrix", "the matrix"],
+      "шазам": ["shazam"],
+      "дэдпул": ["deadpool", "дедпул"],
+      "дедпул": ["deadpool", "дэдпул"],
+      "наруто": ["naruto"],
+      "ван пис": ["one piece", "ванпис"],
+      "ванпис": ["one piece", "ван пис"]
+    };
+    for (const [key, list] of Object.entries(syn)) {
+      if (base === key || base.includes(key)) list.forEach(x => out.add(norm(x)));
+    }
+    return [...out].filter(Boolean);
+  }
+
+  function ensureSortOptions() {
+    const sort = id("sortFilter");
+    if (!sort || sort.dataset.gkmV90SortOptions === "1") return;
+    const current = sort.value || DEFAULT_SORT;
+    sort.innerHTML = [
+      ["smart", "Лучшие"],
+      ["rating", "По оценке"],
+      ["votes", "Популярные"],
+      ["year", "Новые"],
+      ["year_old", "Старые"],
+      ["title", "По названию"]
+    ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
+    sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT;
+    sort.dataset.gkmV90SortOptions = "1";
+  }
+
+  function fillYears(years) {
+    const year = id("yearFilter");
+    if (!year || !Array.isArray(years) || !years.length) return;
+    const current = year.value;
+    const clean = [...new Set(years.map(x => String(x || "").trim()).filter(x => /^\d{4}$/.test(x)))]
+      .sort((a, b) => Number(b) - Number(a));
+    if (!clean.length) return;
+    year.innerHTML = `<option value="">Все годы</option>` + clean.map(y => `<option value="${y}">${y}</option>`).join("");
+    if (current && clean.includes(current)) year.value = current;
+    year.dataset.gkmV90Years = "1";
+  }
+
+  async function ensureYears() {
+    const year = id("yearFilter");
+    if (!year) return;
+    if (year.options && year.options.length > 1) return;
+    if (window.metaData && Array.isArray(window.metaData.years)) fillYears(window.metaData.years);
+    if (year.options && year.options.length > 1) return;
+    try {
+      const res = await fetch("data/fast/meta.json", { cache: "force-cache" });
+      if (res.ok) {
+        const meta = await res.json();
+        if (meta && Array.isArray(meta.years)) fillYears(meta.years);
+      }
+    } catch (e) {}
+  }
+
+  function titleText(item) {
+    if (!item || typeof item !== "object") return "";
+    if (item.__gkmHayV90) return item.__gkmHayV90;
+    const t = typeof titleOf === "function" ? titleOf(item) : "";
+    item.__gkmHayV90 = norm([
+      t,
+      item.ru,
+      item.en,
+      item.title,
+      item.name,
+      item.title_ru,
+      item.ruTitle,
+      item.originalTitle,
+      item.original_title,
+      item.original_name,
+      item.english,
+      item.title_en,
+      item.searchTitle,
+      ...(Array.isArray(item.aliases) ? item.aliases : []),
+      ...(Array.isArray(item.names) ? item.names : [])
+    ].join(" "));
+    return item.__gkmHayV90;
+  }
+
+  function searchScore(item, queryList) {
+    if (!queryList.length) return 1;
+    const hay = titleText(item);
+    if (!hay) return 0;
+    const wrapped = " " + hay + " ";
+    let best = 0;
+    for (const q of queryList) {
+      if (hay === q) best = Math.max(best, 10000000);
+      else if (hay.startsWith(q + " ")) best = Math.max(best, 9000000);
+      else if (wrapped.includes(" " + q + " ")) best = Math.max(best, 8000000);
+      else if (hay.includes(q)) best = Math.max(best, 7000000);
+      else {
+        const parts = q.split(" ").filter(p => p.length > 1);
+        if (parts.length && parts.every(p => hay.includes(p))) best = Math.max(best, 6000000 + parts.length * 1000);
+      }
+    }
+    if (!best) return 0;
+    return best + Math.min(Number(getVotes(item) || 0), 1000000) / 10 + Number(getRating(item) || 0) * 100;
+  }
+
+  function controls() {
+    return {
+      qRaw: (id("searchInput") || {}).value || "",
+      type: (id("typeFilter") || {}).value || "",
+      genre: (id("genreFilter") || {}).value || "",
+      year: (id("yearFilter") || {}).value || "",
+      minRating: Number((id("ratingFilter") || {}).value || 0),
+      sort: (id("sortFilter") || {}).value || DEFAULT_SORT
+    };
+  }
+
+  function hasActive(c) {
+    return Boolean(norm(c.qRaw) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== DEFAULT_SORT));
+  }
+
+  function passes(item, c) {
+    if (c.type && getType(item) !== c.type) return false;
+    if (c.genre && !getGenres(item).includes(c.genre)) return false;
+    if (c.year && String(getYear(item) || "") !== String(c.year)) return false;
+    if (c.minRating && Number(getRating(item) || 0) < c.minRating) return false;
+    return true;
+  }
+
+  function sortResults(rows, sort, hasQuery) {
+    if (sort === "rating") rows.sort((a, b) => Number(getRating(b.item) || 0) - Number(getRating(a.item) || 0) || Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0));
+    else if (sort === "votes") rows.sort((a, b) => Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0) || Number(getRating(b.item) || 0) - Number(getRating(a.item) || 0));
+    else if (sort === "year") rows.sort((a, b) => Number(getYear(b.item) || 0) - Number(getYear(a.item) || 0) || Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0));
+    else if (sort === "year_old") rows.sort((a, b) => Number(getYear(a.item) || 9999) - Number(getYear(b.item) || 9999) || Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0));
+    else if (sort === "title") rows.sort((a, b) => titleOf(a.item).localeCompare(titleOf(b.item), "ru"));
+    else if (hasQuery) rows.sort((a, b) => b.score - a.score);
+    else rows.sort((a, b) => {
+      const av = Number(getVotes(a.item) || 0);
+      const bv = Number(getVotes(b.item) || 0);
+      const ar = Number(getRating(a.item) || 0);
+      const br = Number(getRating(b.item) || 0);
+      const ay = Number(getYear(a.item) || 0);
+      const by = Number(getYear(b.item) || 0);
+      return ((br * 100000) + Math.min(bv, 250000) + by) - ((ar * 100000) + Math.min(av, 250000) + ay);
+    });
+  }
+
+  function drawResults(page) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · Страница ${currentPage} из ${currentPages}`);
+  }
+
+  window.renderSearchPage = drawResults;
+
+  window.runSearch = async function () {
+    const run = ++activeRun;
+    ensureSortOptions();
+    await ensureYears();
+
+    const c = controls();
+    const q = norm(c.qRaw);
+    if (!hasActive(c)) {
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    if (q && q.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+
+    const qv = variants(q);
+    const t0 = performance && performance.now ? performance.now() : Date.now();
+    setStatus(q ? `Ищу: ${c.qRaw}...` : "Фильтрую...");
+
+    const index = await ensureSearchIndex();
+    if (run !== activeRun) return;
+
+    let source = Array.isArray(index) ? index : [];
+    if (typeof applyTabFilter === "function") source = applyTabFilter(source);
+
+    const rows = [];
+    for (let i = 0; i < source.length; i++) {
+      const item = source[i];
+      if (passes(item, c)) {
+        const score = searchScore(item, qv);
+        if (!qv.length || score > 0) rows.push({ item, score });
+      }
+      if (i > 0 && i % SEARCH_CHUNK === 0) {
+        if (run !== activeRun) return;
+        setStatus(q ? `Ищу: ${c.qRaw}... ${Math.round(i / source.length * 100)}%` : `Фильтрую... ${Math.round(i / source.length * 100)}%`);
+        await sleepFrame();
+      }
+    }
+
+    if (run !== activeRun) return;
+    sortResults(rows, c.sort, Boolean(qv.length));
+    if (run !== activeRun) return;
+
+    lastSearchResults = rows.map(x => x.item);
+    drawResults(1);
+    const t1 = performance && performance.now ? performance.now() : Date.now();
+    setStatus(`Найдено: ${lastSearchResults.length} · ${Math.round(t1 - t0)} мс`);
+  };
+
+  function scheduleSearch(delay) {
+    clearTimeout(inputTimer);
+    inputTimer = setTimeout(() => window.runSearch(), delay);
+  }
+
+  function interceptInput(event) {
+    const target = event.target;
+    if (!target || !target.closest || !target.closest("#searchInput")) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    scheduleSearch(350);
+  }
+
+  function interceptChange(event) {
+    const target = event.target;
+    if (!target || !target.closest) return;
+    if (!target.closest("#typeFilter,#genreFilter,#yearFilter,#ratingFilter,#sortFilter")) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    scheduleSearch(80);
+  }
+
+  function interceptReset(event) {
+    const target = event.target;
+    if (!target || !target.closest || !target.closest("#resetBtn")) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    ["searchInput", "typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(name => {
+      const el = id(name);
+      if (el) el.value = "";
+    });
+    const sort = id("sortFilter");
+    if (sort) sort.value = DEFAULT_SORT;
+    scheduleSearch(30);
+  }
+
+  function boot() {
+    ensureSortOptions();
+    ensureYears();
+    window.addEventListener("input", interceptInput, true);
+    window.addEventListener("change", interceptChange, true);
+    window.addEventListener("click", interceptReset, true);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
+
+/* === GKM V89 YEAR FILTER AND CLEAR SORTS === */
+(function () {
+  window.GKM_V89_YEAR_SORT_FILTER_VERSION = "v89-year-filter-clear-sorts-2026-06-15";
+
+  const DEFAULT_SORT_V89 = "smart";
+
+  function byIdV89(id) {
+    return document.getElementById(id);
+  }
+
+  function normV89(value) {
+    return String(value || "")
+      .toLowerCase()
+      .replaceAll("ё", "е")
+      .replace(/&/g, " and ")
+      .replace(/[^\p{L}\p{N}:]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function ensureSortOptionsV89() {
+    const sort = byIdV89("sortFilter");
+    if (!sort || sort.dataset.gkmV89SortOptions === "1") return;
+
+    const current = sort.value || DEFAULT_SORT_V89;
+    sort.innerHTML = [
+      ["smart", "Лучшие"],
+      ["rating", "По оценке"],
+      ["votes", "Популярные"],
+      ["year", "Новые"],
+      ["year_old", "Старые"],
+      ["title", "По названию"]
+    ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
+
+    sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT_V89;
+    sort.dataset.gkmV89SortOptions = "1";
+  }
+
+  function setYearOptionsV89(years) {
+    const select = byIdV89("yearFilter");
+    if (!select || !Array.isArray(years) || !years.length) return;
+
+    const clean = [...new Set(years.map(y => String(y || "").trim()).filter(Boolean))]
+      .filter(y => /^\d{4}$/.test(y))
+      .sort((a, b) => Number(b) - Number(a));
+
+    if (!clean.length) return;
+
+    const current = select.value;
+    select.innerHTML = `<option value="">Все годы</option>` +
+      clean.map(y => `<option value="${y}">${y}</option>`).join("");
+    if (current && clean.includes(current)) select.value = current;
+    select.dataset.gkmV89YearReady = "1";
+  }
+
+  async function ensureYearFilterV89() {
+    const select = byIdV89("yearFilter");
+    if (!select) return;
+
+    if (window.metaData && Array.isArray(window.metaData.years)) {
+      setYearOptionsV89(window.metaData.years);
+    }
+
+    if (select.options && select.options.length > 1) return;
+
+    try {
+      const res = await fetch("data/fast/meta.json", { cache: "no-store" });
+      if (!res.ok) return;
+      const meta = await res.json();
+      if (meta && Array.isArray(meta.years)) setYearOptionsV89(meta.years);
+    } catch (e) {}
+  }
+
+  function titleHayV89(item) {
+    if (!item || typeof item !== "object") return "";
+    if (item.__gkmTitleHayV89) return item.__gkmTitleHayV89;
+    const title = typeof titleOf === "function" ? titleOf(item) : "";
+    item.__gkmTitleHayV89 = normV89([
+      title,
+      item.ru,
+      item.en,
+      item.title,
+      item.name,
+      item.title_ru,
+      item.ruTitle,
+      item.originalTitle,
+      item.original_title,
+      item.original_name,
+      item.english,
+      item.title_en,
+      item.searchTitle,
+      ...(Array.isArray(item.aliases) ? item.aliases : []),
+      ...(Array.isArray(item.names) ? item.names : [])
+    ].join(" "));
+    return item.__gkmTitleHayV89;
+  }
+
+  function scoreSearchV89(item, query) {
+    if (!query) return 1;
+    const hay = titleHayV89(item);
+    if (!hay) return 0;
+
+    const wrapped = " " + hay + " ";
+    let score = 0;
+    if (hay === query) score = 10000000;
+    else if (hay.startsWith(query + " ")) score = 9000000;
+    else if (wrapped.includes(" " + query + " ")) score = 8000000;
+    else if (hay.includes(query)) score = 7000000;
+    else {
+      const parts = query.split(" ").filter(x => x.length > 1);
+      if (parts.length && parts.every(part => hay.includes(part))) score = 6000000 + parts.length * 1000;
+    }
+
+    if (!score) return 0;
+    score += Math.min(Number(getVotes(item) || 0), 1000000) / 10;
+    score += Number(getRating(item) || 0) * 100;
+    return score;
+  }
+
+  function hasControlsV89() {
+    const q = normV89((byIdV89("searchInput") || {}).value || "");
+    const sort = (byIdV89("sortFilter") || {}).value || DEFAULT_SORT_V89;
+    return Boolean(
+      q ||
+      ((byIdV89("typeFilter") || {}).value || "") ||
+      ((byIdV89("genreFilter") || {}).value || "") ||
+      ((byIdV89("yearFilter") || {}).value || "") ||
+      ((byIdV89("ratingFilter") || {}).value || "") ||
+      (sort && sort !== DEFAULT_SORT_V89)
+    );
+  }
+
+  function applyFiltersAndSortV89(list, query) {
+    const type = (byIdV89("typeFilter") || {}).value || "";
+    const genre = (byIdV89("genreFilter") || {}).value || "";
+    const year = (byIdV89("yearFilter") || {}).value || "";
+    const minRating = Number(((byIdV89("ratingFilter") || {}).value || 0));
+    const sort = (byIdV89("sortFilter") || {}).value || DEFAULT_SORT_V89;
+
+    let out = Array.isArray(list) ? list.slice() : [];
+    if (type) out = out.filter(item => getType(item) === type);
+    if (genre) out = out.filter(item => getGenres(item).includes(genre));
+    if (year) out = out.filter(item => String(getYear(item) || "") === String(year));
+    if (minRating) out = out.filter(item => Number(getRating(item) || 0) >= minRating);
+
+    if (query) {
+      out = out
+        .map(item => ({ item, score: scoreSearchV89(item, query) }))
+        .filter(x => x.score > 0);
+    } else {
+      out = out.map(item => ({ item, score: 0 }));
+    }
+
+    if (sort === "rating") {
+      out.sort((a, b) => Number(getRating(b.item) || 0) - Number(getRating(a.item) || 0) || Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0));
+    } else if (sort === "votes") {
+      out.sort((a, b) => Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0) || Number(getRating(b.item) || 0) - Number(getRating(a.item) || 0));
+    } else if (sort === "year") {
+      out.sort((a, b) => Number(getYear(b.item) || 0) - Number(getYear(a.item) || 0) || Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0));
+    } else if (sort === "year_old") {
+      out.sort((a, b) => Number(getYear(a.item) || 9999) - Number(getYear(b.item) || 9999) || Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0));
+    } else if (sort === "title") {
+      out.sort((a, b) => titleOf(a.item).localeCompare(titleOf(b.item), "ru"));
+    } else if (query) {
+      out.sort((a, b) => b.score - a.score);
+    } else {
+      out.sort((a, b) => {
+        const ar = Number(getRating(a.item) || 0);
+        const br = Number(getRating(b.item) || 0);
+        const av = Number(getVotes(a.item) || 0);
+        const bv = Number(getVotes(b.item) || 0);
+        const ay = Number(getYear(a.item) || 0);
+        const by = Number(getYear(b.item) || 0);
+        return ((br * 100000) + Math.min(bv, 250000) + by) - ((ar * 100000) + Math.min(av, 250000) + ay);
+      });
+    }
+
+    return out.map(x => x.item);
+  }
+
+  window.runSearch = async function() {
+    ensureSortOptionsV89();
+    await ensureYearFilterV89();
+
+    const input = byIdV89("searchInput");
+    const queryRaw = input ? input.value : "";
+    const query = normV89(queryRaw);
+
+    if (!hasControlsV89()) {
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+
+    if (query && query.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+
+    setStatus(query ? `Ищу: ${queryRaw}...` : "Фильтрую...");
+    const index = await ensureSearchIndex();
+    let scoped = Array.isArray(index) ? index : [];
+    if (typeof applyTabFilter === "function") scoped = applyTabFilter(scoped);
+
+    lastSearchResults = applyFiltersAndSortV89(scoped, query);
+    currentPage = 1;
+    currentPages = Math.max(1, Math.ceil(lastSearchResults.length / PAGE_SIZE));
+    const pageItems = lastSearchResults.slice(0, PAGE_SIZE);
+    currentItems = pageItems;
+    renderList(pageItems, `Найдено: ${lastSearchResults.length} · Страница 1 из ${currentPages}`);
+    setStatus(`Найдено: ${lastSearchResults.length}`);
+  };
+
+  window.renderSearchPage = function(page = 1) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE_SIZE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE_SIZE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE_SIZE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · Страница ${currentPage} из ${currentPages}`);
+  };
+
+  function bindV89() {
+    ensureSortOptionsV89();
+    ensureYearFilterV89();
+
+    ["typeFilter", "genreFilter", "yearFilter", "ratingFilter", "sortFilter"].forEach(id => {
+      const el = byIdV89(id);
+      if (!el || el.dataset.gkmV89Bound === "1") return;
+      el.dataset.gkmV89Bound = "1";
+      el.addEventListener("change", function(event) {
+        event.stopPropagation();
+        if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+        clearTimeout(window.GKM_V89_FILTER_TIMER);
+        window.GKM_V89_FILTER_TIMER = setTimeout(() => window.runSearch(), 60);
+      }, true);
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindV89);
+  else bindV89();
+})();
+
 /* === GKM V88 STABLE SEARCH / NO CRASH === */
 (function () {
   window.GKM_V88_STABLE_SEARCH_VERSION = "v88-stable-search-no-sweep-2026-06-15";
@@ -4456,7 +4997,6 @@ if (document.readyState === "loading") {
     if (!s) return 0;
     return s + Number(getVotes(m) || 0) + Number(getRating(m) || 0) * 1000;
   }
-
   window.renderSearchPage = function(page = 1) {
     currentPage = Math.max(1, Number(page || 1));
     currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE_SIZE));
@@ -6579,4 +7119,203 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
       return merged.slice(0, limit);
     };
   }
+})();
+
+/* === GKM V91 FINAL NON-BLOCKING SEARCH OVERRIDE === */
+(function () {
+  window.GKM_V91_FINAL_SEARCH_VERSION = "v91-final-non-blocking-search-2026-06-15";
+
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const CHUNK = 2000;
+  const DEFAULT_SORT = "smart";
+  let runId = 0;
+  let timer = 0;
+
+  function $(id) { return document.getElementById(id); }
+  function yieldTurn() { return new Promise(resolve => setTimeout(resolve, 0)); }
+  function n(v) {
+    return String(v || "").toLowerCase().replaceAll("ё", "е").replace(/&/g, " and ").replace(/['’`]/g, "").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim();
+  }
+  function keyfix(s) {
+    const map = {"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};
+    return String(s || "").split("").map(ch => map[ch.toLowerCase()] || ch).join("");
+  }
+  function queryList(q) {
+    const base = n(q);
+    const out = new Set([base]);
+    const fixed = n(keyfix(base));
+    if (fixed && fixed !== base) out.add(fixed);
+    const syn = {"матрица":["matrix","the matrix"],"шазам":["shazam"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"]};
+    Object.entries(syn).forEach(([k, arr]) => { if (base === k || base.includes(k)) arr.forEach(x => out.add(n(x))); });
+    return [...out].filter(Boolean);
+  }
+  function setupControls() {
+    const sort = $("sortFilter");
+    if (sort && sort.dataset.gkmV91 !== "1") {
+      const current = sort.value || DEFAULT_SORT;
+      sort.innerHTML = [
+        ["smart", "Лучшие"],
+        ["rating", "По оценке"],
+        ["votes", "Популярные"],
+        ["year", "Новые"],
+        ["year_old", "Старые"],
+        ["title", "По названию"]
+      ].map(x => `<option value="${x[0]}">${x[1]}</option>`).join("");
+      sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT;
+      sort.dataset.gkmV91 = "1";
+    }
+    const year = $("yearFilter");
+    if (year && (!year.options || year.options.length < 2) && window.metaData && Array.isArray(window.metaData.years)) {
+      const cur = year.value;
+      year.innerHTML = `<option value="">Все годы</option>` + window.metaData.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+      if (cur) year.value = cur;
+    }
+  }
+  async function setupYears() {
+    setupControls();
+    const year = $("yearFilter");
+    if (!year || (year.options && year.options.length > 1)) return;
+    try {
+      const r = await fetch("data/fast/meta.json", { cache: "force-cache" });
+      if (!r.ok) return;
+      const meta = await r.json();
+      if (meta && Array.isArray(meta.years)) {
+        const cur = year.value;
+        year.innerHTML = `<option value="">Все годы</option>` + meta.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+        if (cur) year.value = cur;
+      }
+    } catch (e) {}
+  }
+  function hay(item) {
+    if (!item || typeof item !== "object") return "";
+    if (item.__gkmHayV91) return item.__gkmHayV91;
+    const main = typeof titleOf === "function" ? titleOf(item) : "";
+    item.__gkmHayV91 = n([main,item.ru,item.en,item.title,item.name,item.title_ru,item.ruTitle,item.originalTitle,item.original_title,item.original_name,item.english,item.title_en,item.searchTitle,...(Array.isArray(item.aliases) ? item.aliases : []),...(Array.isArray(item.names) ? item.names : [])].join(" "));
+    return item.__gkmHayV91;
+  }
+  function score(item, qs) {
+    if (!qs.length) return 1;
+    const h = hay(item);
+    if (!h) return 0;
+    const wh = " " + h + " ";
+    let best = 0;
+    for (const q of qs) {
+      if (h === q) best = Math.max(best, 10000000);
+      else if (h.startsWith(q + " ")) best = Math.max(best, 9000000);
+      else if (wh.includes(" " + q + " ")) best = Math.max(best, 8000000);
+      else if (h.includes(q)) best = Math.max(best, 7000000);
+      else {
+        const parts = q.split(" ").filter(p => p.length > 1);
+        if (parts.length && parts.every(p => h.includes(p))) best = Math.max(best, 6000000 + parts.length * 1000);
+      }
+    }
+    return best ? best + Math.min(Number(getVotes(item) || 0), 1000000) / 10 + Number(getRating(item) || 0) * 100 : 0;
+  }
+  function values() {
+    return {
+      qRaw: ($("searchInput") || {}).value || "",
+      type: ($("typeFilter") || {}).value || "",
+      genre: ($("genreFilter") || {}).value || "",
+      year: ($("yearFilter") || {}).value || "",
+      minRating: Number(($("ratingFilter") || {}).value || 0),
+      sort: ($("sortFilter") || {}).value || DEFAULT_SORT
+    };
+  }
+  function active(c) { return Boolean(n(c.qRaw) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== DEFAULT_SORT)); }
+  function pass(item, c) {
+    if (c.type && getType(item) !== c.type) return false;
+    if (c.genre && !getGenres(item).includes(c.genre)) return false;
+    if (c.year && String(getYear(item) || "") !== String(c.year)) return false;
+    if (c.minRating && Number(getRating(item) || 0) < c.minRating) return false;
+    return true;
+  }
+  function sortRows(rows, sort, hasQ) {
+    if (sort === "rating") rows.sort((a,b) => Number(getRating(b.item)||0) - Number(getRating(a.item)||0) || Number(getVotes(b.item)||0) - Number(getVotes(a.item)||0));
+    else if (sort === "votes") rows.sort((a,b) => Number(getVotes(b.item)||0) - Number(getVotes(a.item)||0) || Number(getRating(b.item)||0) - Number(getRating(a.item)||0));
+    else if (sort === "year") rows.sort((a,b) => Number(getYear(b.item)||0) - Number(getYear(a.item)||0) || Number(getVotes(b.item)||0) - Number(getVotes(a.item)||0));
+    else if (sort === "year_old") rows.sort((a,b) => Number(getYear(a.item)||9999) - Number(getYear(b.item)||9999) || Number(getVotes(b.item)||0) - Number(getVotes(a.item)||0));
+    else if (sort === "title") rows.sort((a,b) => titleOf(a.item).localeCompare(titleOf(b.item), "ru"));
+    else if (hasQ) rows.sort((a,b) => b.score - a.score);
+    else rows.sort((a,b) => (Number(getRating(b.item)||0) * 100000 + Math.min(Number(getVotes(b.item)||0), 250000) + Number(getYear(b.item)||0)) - (Number(getRating(a.item)||0) * 100000 + Math.min(Number(getVotes(a.item)||0), 250000) + Number(getYear(a.item)||0)));
+  }
+  function draw(page) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · Страница ${currentPage} из ${currentPages}`);
+  }
+  window.renderSearchPage = draw;
+  window.runSearch = async function () {
+    const myRun = ++runId;
+    setupControls();
+    await setupYears();
+    const c = values();
+    const q = n(c.qRaw);
+    if (!active(c)) {
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    if (q && q.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+    const qs = queryList(q);
+    const started = performance && performance.now ? performance.now() : Date.now();
+    setStatus(q ? `Ищу: ${c.qRaw}...` : "Фильтрую...");
+    const idx = await ensureSearchIndex();
+    if (myRun !== runId) return;
+    let src = Array.isArray(idx) ? idx : [];
+    if (typeof applyTabFilter === "function") src = applyTabFilter(src);
+    const rows = [];
+    for (let i = 0; i < src.length; i++) {
+      const item = src[i];
+      if (pass(item, c)) {
+        const s = score(item, qs);
+        if (!qs.length || s > 0) rows.push({ item, score: s });
+      }
+      if (i && i % CHUNK === 0) {
+        if (myRun !== runId) return;
+        setStatus(q ? `Ищу: ${c.qRaw}... ${Math.round(i / src.length * 100)}%` : `Фильтрую... ${Math.round(i / src.length * 100)}%`);
+        await yieldTurn();
+      }
+    }
+    if (myRun !== runId) return;
+    sortRows(rows, c.sort, Boolean(qs.length));
+    if (myRun !== runId) return;
+    lastSearchResults = rows.map(x => x.item);
+    draw(1);
+    const ended = performance && performance.now ? performance.now() : Date.now();
+    setStatus(`Найдено: ${lastSearchResults.length} · ${Math.round(ended - started)} мс`);
+  };
+  function schedule(delay) {
+    clearTimeout(timer);
+    timer = setTimeout(() => window.runSearch(), delay);
+  }
+  window.addEventListener("input", function(e) {
+    if (!(e.target && e.target.closest && e.target.closest("#searchInput"))) return;
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+    schedule(400);
+  }, true);
+  window.addEventListener("change", function(e) {
+    if (!(e.target && e.target.closest && e.target.closest("#typeFilter,#genreFilter,#yearFilter,#ratingFilter,#sortFilter"))) return;
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+    schedule(80);
+  }, true);
+  window.addEventListener("click", function(e) {
+    if (!(e.target && e.target.closest && e.target.closest("#resetBtn"))) return;
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+    ["searchInput","typeFilter","genreFilter","yearFilter","ratingFilter"].forEach(name => { const el = $(name); if (el) el.value = ""; });
+    const sort = $("sortFilter");
+    if (sort) sort.value = DEFAULT_SORT;
+    schedule(30);
+  }, true);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
+  else { setupControls(); setupYears(); }
 })();
