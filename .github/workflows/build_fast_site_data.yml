@@ -31,7 +31,7 @@ jobs:
       - name: Verify V57 post-fix exists
         run: |
           test -f tools/post_fix_fast_data.py
-          grep -n "v71-pager-buffer-no-search-tested-2026-06-13" tools/post_fix_fast_data.py
+          grep -n "v72-hard-pager-tabs-tested-2026-06-13" tools/post_fix_fast_data.py
 
       - name: Build fast data
         run: python tools/build_fast_site_data.py
@@ -45,7 +45,7 @@ jobs:
           import json
           m=json.load(open('data/fast/meta.json',encoding='utf-8'))
           print(m.get('builderVersion'), m.get('dedupeRemovedPostFix'), m.get('checks'))
-          assert m.get('builderVersion') == 'v71-pager-buffer-no-search-tested-2026-06-13'
+          assert m.get('builderVersion') == 'v72-hard-pager-tabs-tested-2026-06-13'
           assert m.get('checks',{}).get('scoobyInAnime') == 0
           PY
 
