@@ -1696,3 +1696,14 @@ a {
   border-radius: 14px;
 }
 /* === /GKM V66 RELATED CARDS === */
+
+/* === GKM V73 POSTER FALLBACK === */
+.poster-fallback-img {
+  object-fit: cover;
+  filter: saturate(1.05);
+}
+.poster-placeholder {
+  background: linear-gradient(135deg, rgba(28,42,107,.85), rgba(58,20,120,.85));
+  color: #dff7ff;
+}
+/* === /GKM V73 POSTER FALLBACK === */
