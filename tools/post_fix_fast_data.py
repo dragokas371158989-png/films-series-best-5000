@@ -3,7 +3,7 @@ import json, re, shutil
 from pathlib import Path
 from datetime import datetime, timezone
 
-VERSION = "v74-real-posters-first-tested-2026-06-13"
+VERSION = "v75-no-fallback-first-pages-tested-2026-06-14"
 DATA_FAST = Path("data/fast")
 PAGE_SIZE = 60
 HOME_LIMIT = 18
@@ -297,6 +297,10 @@ def write_pages(tab, items):
     if d.exists():
         shutil.rmtree(d)
     d.mkdir(parents=True, exist_ok=True)
+
+    # V75: real posters first on every generated page.
+    items = prefer_real_posters(items)
+
     pages = max(1, (len(items) + PAGE_SIZE - 1) // PAGE_SIZE)
     for page in range(1, pages + 1):
         save(d / f"page_{page:04d}.json", {
@@ -390,6 +394,7 @@ def main():
             "repairedFromDuplicates": postersRepaired,
             "fallbackGenerated": postersFallbacked,
             "fallbackInMoviesFirstPage": len([x for x in movies[:PAGE_SIZE] if not real_poster_ok(x)]),
+            "realPosterMoviesFirstPage": len([x for x in movies[:PAGE_SIZE] if real_poster_ok(x)]),
             "fallbackInMoviesTopPages": len([x for x in movies[:180] if not real_poster_ok(x)]),
             "missingInPopularHome": len([x for x in popular[:HOME_LIMIT] if not poster_ok(x.get("poster"))])
         },
@@ -401,7 +406,7 @@ def main():
     save(DATA_FAST / "search_index.json", items)
     save(DATA_FAST / "home.json", home)
     save(DATA_FAST / "meta.json", meta)
-    print("V74 REAL POSTERS FIRST PAGES READY")
+    print("V75 NO FALLBACK FIRST PAGES READY")
     print("builderVersion=", VERSION)
     print("anime=", len(anime), "cartoons=", len(cartoons))
     print("scoobyInAnime=", meta["checks"]["scoobyInAnime"])
