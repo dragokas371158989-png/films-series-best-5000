@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v64-helper-close-fix-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v65-balanced-home-tested-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -375,6 +375,97 @@ async function gkmOpenDepartmentV61(tabName, opts = {}) {
 }
 /* === /GKM V61 MORE BUTTONS + ANIME SECTION FIX === */
 
+
+/* === GKM V65 BALANCED HOME: votes + rating + all types === */
+const GKM_HOME_MIN_VOTES_V65 = 300;
+const GKM_HOME_SECTION_LIMIT_V65 = 12;
+
+function gkmVotesV65(m) {
+  return Number(m && m.votes || 0);
+}
+
+function gkmRatingV65(m) {
+  return Number(m && m.rating || 0);
+}
+
+function gkmYearV65(m) {
+  return Number(m && m.year || 0);
+}
+
+function gkmHomeScoreV65(m) {
+  const r = gkmRatingV65(m);
+  const v = gkmVotesV65(m);
+  const y = gkmYearV65(m);
+  if (v < GKM_HOME_MIN_VOTES_V65) return -999999;
+  return (r * 10) + (Math.log10(v + 1) * 8) + Math.min(v, 500000) / 500000 * 12 + (y >= 2024 ? 3 : 0);
+}
+
+function gkmGoodHomeItemsV65(list, soft = false) {
+  const minVotes = soft ? 80 : GKM_HOME_MIN_VOTES_V65;
+  return gkmCleanListV60(Array.isArray(list) ? list : [])
+    .filter(x => gkmVotesV65(x) >= minVotes)
+    .sort((a, b) => gkmHomeScoreV65(b) - gkmHomeScoreV65(a));
+}
+
+function gkmPickHomeV65(list, limit = GKM_HOME_SECTION_LIMIT_V65, soft = false) {
+  return gkmGoodHomeItemsV65(list, soft).slice(0, limit);
+}
+
+async function gkmFetchPageItemsV65(tab) {
+  try {
+    const data = await fetchJsonQuiet(`${FAST_BASE}/pages/${tab}/page_0001.json`);
+    return data && Array.isArray(data.items) ? data.items : [];
+  } catch {
+    return [];
+  }
+}
+
+async function gkmBuildBalancedHomeV65() {
+  if (!homeData || !homeData.sections) return;
+
+  const source = { ...(homeData.sections || {}) };
+  const tabs = ["popular", "top", "new", "movies", "series", "cartoons", "anime"];
+
+  const pages = await Promise.all(tabs.map(async t => [t, await gkmFetchPageItemsV65(t)]));
+  pages.forEach(([t, items]) => {
+    if (items && items.length) source[t] = gkmCleanListV60([...(source[t] || []), ...items]);
+  });
+
+  const all = gkmCleanListV60(Object.values(source).flatMap(arr => Array.isArray(arr) ? arr : []));
+  const byType = (type) => all.filter(x => getType(x) === type);
+
+  const movies = gkmPickHomeV65(byType("Фильм"));
+  const series = gkmPickHomeV65(byType("Сериал"));
+  const cartoons = gkmPickHomeV65(byType("Мультфильм"));
+  const anime = gkmPickHomeV65(byType("Аниме"));
+
+  const newItems = gkmPickHomeV65(all.filter(x => gkmYearV65(x) >= 2024), GKM_HOME_SECTION_LIMIT_V65, true);
+  const popular = gkmPickHomeV65(all.sort((a, b) => gkmVotesV65(b) - gkmVotesV65(a)), GKM_HOME_SECTION_LIMIT_V65);
+  const top = gkmPickHomeV65(all, GKM_HOME_SECTION_LIMIT_V65);
+
+  homeData.sections = {
+    new: newItems.length ? newItems : gkmPickHomeV65(source.new || [], GKM_HOME_SECTION_LIMIT_V65, true),
+    movies: movies.length ? movies : gkmPickHomeV65(source.movies || [], GKM_HOME_SECTION_LIMIT_V65, true),
+    series: series.length ? series : gkmPickHomeV65(source.series || [], GKM_HOME_SECTION_LIMIT_V65, true),
+    cartoons: cartoons.length ? cartoons : gkmPickHomeV65(source.cartoons || [], GKM_HOME_SECTION_LIMIT_V65, true),
+    anime: anime.length ? anime : gkmPickHomeV65(source.anime || [], GKM_HOME_SECTION_LIMIT_V65, true),
+    popular: popular.length ? popular : gkmPickHomeV65(source.popular || [], GKM_HOME_SECTION_LIMIT_V65, true),
+    top: top.length ? top : gkmPickHomeV65(source.top || [], GKM_HOME_SECTION_LIMIT_V65, true)
+  };
+
+  window.GKM_BALANCED_HOME_STATS = {
+    minVotes: GKM_HOME_MIN_VOTES_V65,
+    new: homeData.sections.new.length,
+    movies: homeData.sections.movies.length,
+    series: homeData.sections.series.length,
+    cartoons: homeData.sections.cartoons.length,
+    anime: homeData.sections.anime.length,
+    popular: homeData.sections.popular.length,
+    top: homeData.sections.top.length
+  };
+}
+/* === /GKM V65 BALANCED HOME === */
+
 /* === /GKM V60 RUNTIME DATA GUARD === */
 
 function titleOf(m) {
@@ -555,13 +646,13 @@ function renderHome() {
         <button id="whatToWatchBtn" class="what-watch-main-btn" type="button">🎲 Что посмотреть?</button>
       </section>
 
-      ${homeSectionHtml("🔥 Популярное", s.popular, "popular")}
-      ${homeSectionHtml("⭐ Лучший рейтинг", s.top, "top")}
-      ${homeSectionHtml("🆕 Новинки", s.new, "new")}
-      ${homeSectionHtml("🐉 Аниме", s.anime, "anime")}
+      ${homeSectionHtml("🆕 Новинки с нормальными голосами", s.new, "new")}
       ${homeSectionHtml("🎬 Фильмы", s.movies, "movies")}
       ${homeSectionHtml("📺 Сериалы", s.series, "series")}
       ${homeSectionHtml("🧸 Мультфильмы", s.cartoons, "cartoons")}
+      ${homeSectionHtml("🐉 Аниме", s.anime, "anime")}
+      ${homeSectionHtml("🔥 Популярное по голосам", s.popular, "popular")}
+      ${homeSectionHtml("⭐ Лучший рейтинг + голоса", s.top, "top")}
     `;
   }
 
@@ -727,6 +818,8 @@ async function loadHome() {
     await loadLegacyFallbackHome("data/fast вернула 0");
     return;
   }
+
+  await gkmBuildBalancedHomeV65();
 
   fillFilters();
   renderHome();
@@ -3527,7 +3620,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v64-helper-close-fix-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v65-balanced-home-tested-2026-06-13";
 })();
 
 
@@ -4659,23 +4752,23 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v64-helper-close-fix-2026-06-13";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v65-balanced-home-tested-2026-06-13";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v64-helper-close-fix-2026-06-13";
+window.GKM_HELPER_RESTORED_VERSION = "v65-balanced-home-tested-2026-06-13";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v64-helper-close-fix-2026-06-13";
+window.GKM_TESTED_RELEASE_VERSION = "v65-balanced-home-tested-2026-06-13";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v64-helper-close-fix-2026-06-13";
+window.GKM_RUNTIME_GUARD_VERSION = "v65-balanced-home-tested-2026-06-13";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v64-helper-close-fix-2026-06-13";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v65-balanced-home-tested-2026-06-13";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v64-helper-close-fix-2026-06-13";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v65-balanced-home-tested-2026-06-13";
 
-window.GKM_NO_SCROLL_BUTTONS_VERSION = "v64-helper-close-fix-2026-06-13";
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v65-balanced-home-tested-2026-06-13";
 
 
 
@@ -4703,7 +4796,7 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v64-helper-close-fix-2026-06-13";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
   else bindMoreButtonsCaptureV63();
 
-  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v64-helper-close-fix-2026-06-13";
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v65-balanced-home-tested-2026-06-13";
 })();
 
 
@@ -4768,5 +4861,8 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v64-helper-close-fix-2026-06-13";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAiCloseV64);
   else bindAiCloseV64();
 
-  window.GKM_HELPER_CLOSE_FIX_VERSION = "v64-helper-close-fix-2026-06-13";
+  window.GKM_HELPER_CLOSE_FIX_VERSION = "v65-balanced-home-tested-2026-06-13";
 })();
+
+
+window.GKM_BALANCED_HOME_VERSION = "v65-balanced-home-tested-2026-06-13";
