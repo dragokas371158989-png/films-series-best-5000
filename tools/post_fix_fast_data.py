@@ -3,7 +3,7 @@ import json, re, shutil
 from pathlib import Path
 from datetime import datetime, timezone
 
-VERSION = "v73-poster-repair-tested-2026-06-13"
+VERSION = "v74-real-posters-first-tested-2026-06-13"
 DATA_FAST = Path("data/fast")
 PAGE_SIZE = 60
 HOME_LIMIT = 18
@@ -136,6 +136,16 @@ def poster_ok(v):
     s = str(v or "").strip()
     return len(s) > 8 and s.lower() not in ("none","null","undefined")
 
+def real_poster_ok(item):
+    s = str((item or {}).get("poster") or "").strip().lower()
+    if not poster_ok(s):
+        return False
+    if (item or {}).get("posterFallback"):
+        return False
+    if "dummyimage.com" in s:
+        return False
+    return True
+
 def poster_quality(v):
     s = str(v or "")
     if not poster_ok(s):
@@ -258,13 +268,18 @@ def dedupe(items):
     return list(best.values())
 
 def score(item):
-    """Vote buckets for generated pages:
-    30k+ first, then 10k+, then 1k+, then 100+, then tiny votes.
-    Inside each bucket: more votes, then rating, then year.
+    """Real posters first, then vote buckets:
+    1) cards with real poster
+    2) 30k+ votes
+    3) 10k+ votes
+    4) 1k+ votes
+    5) 100+ votes
+    6) tiny votes / fallback posters
     """
     rating = float(item.get("rating") or 0)
     votes = int(float(item.get("votes") or 0))
     year = int(item.get("year") or 0)
+    poster_boost = 100_000_000_000_000 if real_poster_ok(item) else 0
     if votes >= 30000:
         bucket = 4
     elif votes >= 10000:
@@ -275,7 +290,7 @@ def score(item):
         bucket = 1
     else:
         bucket = 0
-    return bucket * 10_000_000_000 + votes * 100000 + rating * 1000 + year
+    return poster_boost + bucket * 10_000_000_000 + votes * 100000 + rating * 1000 + year
 
 def write_pages(tab, items):
     d = DATA_FAST / "pages" / tab
@@ -294,6 +309,12 @@ def write_pages(tab, items):
         })
     return {"count": len(items), "pages": pages, "pageSize": PAGE_SIZE}
 
+
+def prefer_real_posters(items):
+    real = [x for x in items if real_poster_ok(x)]
+    fallback = [x for x in items if not real_poster_ok(x)]
+    return real + fallback
+
 def main():
     if not DATA_FAST.exists():
         raise SystemExit("data/fast not found. Run build_fast_site_data.py first.")
@@ -311,13 +332,13 @@ def main():
     print(f"V57 POSTFIX: after fix+dedupe={len(items)} removed={len(raw)-len(items)}")
     print(f"V73 POSTERS: repaired={postersRepaired} fallbacked={postersFallbacked}")
 
-    movies = sorted([x for x in items if x.get("type") == "Фильм"], key=score, reverse=True)
-    series = sorted([x for x in items if x.get("type") == "Сериал"], key=score, reverse=True)
-    anime = sorted([x for x in items if x.get("type") == "Аниме"], key=score, reverse=True)
-    cartoons = sorted([x for x in items if x.get("type") == "Мультфильм"], key=score, reverse=True)
-    new_items = sorted([x for x in items if int(x.get("year") or 0) >= 2024 and int(float(x.get("votes") or 0)) >= 80], key=lambda x: (int(x.get("year") or 0), score(x)), reverse=True)
-    popular = sorted([x for x in items if int(float(x.get("votes") or 0)) >= 1000], key=lambda x: int(float(x.get("votes") or 0)), reverse=True)
-    top = sorted([x for x in items if int(float(x.get("votes") or 0)) >= MIN_VOTES_FOR_TOP and float(x.get("rating") or 0) >= 7], key=score, reverse=True)[:250]
+    movies = prefer_real_posters(sorted([x for x in items if x.get("type") == "Фильм"], key=score, reverse=True))
+    series = prefer_real_posters(sorted([x for x in items if x.get("type") == "Сериал"], key=score, reverse=True))
+    anime = prefer_real_posters(sorted([x for x in items if x.get("type") == "Аниме"], key=score, reverse=True))
+    cartoons = prefer_real_posters(sorted([x for x in items if x.get("type") == "Мультфильм"], key=score, reverse=True))
+    new_items = prefer_real_posters(sorted([x for x in items if int(x.get("year") or 0) >= 2024 and int(float(x.get("votes") or 0)) >= 80], key=lambda x: (real_poster_ok(x), int(x.get("year") or 0), score(x)), reverse=True))
+    popular = prefer_real_posters(sorted([x for x in items if int(float(x.get("votes") or 0)) >= 1000], key=score, reverse=True))
+    top = prefer_real_posters(sorted([x for x in items if int(float(x.get("votes") or 0)) >= MIN_VOTES_FOR_TOP and float(x.get("rating") or 0) >= 7], key=score, reverse=True))[:250]
 
     pages = {
         "all": write_pages("all", items),
@@ -368,7 +389,8 @@ def main():
         "posterRepair": {
             "repairedFromDuplicates": postersRepaired,
             "fallbackGenerated": postersFallbacked,
-            "missingInMoviesTopPages": len([x for x in movies[:180] if not poster_ok(x.get("poster"))]),
+            "fallbackInMoviesFirstPage": len([x for x in movies[:PAGE_SIZE] if not real_poster_ok(x)]),
+            "fallbackInMoviesTopPages": len([x for x in movies[:180] if not real_poster_ok(x)]),
             "missingInPopularHome": len([x for x in popular[:HOME_LIMIT] if not poster_ok(x.get("poster"))])
         },
         "checks": {
@@ -379,7 +401,7 @@ def main():
     save(DATA_FAST / "search_index.json", items)
     save(DATA_FAST / "home.json", home)
     save(DATA_FAST / "meta.json", meta)
-    print("V73 POSTER REPAIR PAGES READY")
+    print("V74 REAL POSTERS FIRST PAGES READY")
     print("builderVersion=", VERSION)
     print("anime=", len(anime), "cartoons=", len(cartoons))
     print("scoobyInAnime=", meta["checks"]["scoobyInAnime"])
