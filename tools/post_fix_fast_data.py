@@ -3,7 +3,7 @@ import json, re, shutil
 from pathlib import Path
 from datetime import datetime, timezone
 
-VERSION = "v72-hard-pager-tabs-tested-2026-06-13"
+VERSION = "v73-poster-repair-tested-2026-06-13"
 DATA_FAST = Path("data/fast")
 PAGE_SIZE = 60
 HOME_LIMIT = 18
@@ -131,6 +131,96 @@ def fix_item(item):
 def quality(item):
     return (20 if item.get("poster") else 0) + (15 if item.get("ru") else 0) + (5 if item.get("overview") else 0) + min(float(item.get("votes") or 0), 500000) / 500000 + float(item.get("rating") or 0) / 10
 
+
+def poster_ok(v):
+    s = str(v or "").strip()
+    return len(s) > 8 and s.lower() not in ("none","null","undefined")
+
+def poster_quality(v):
+    s = str(v or "")
+    if not poster_ok(s):
+        return -1
+    q = 0
+    if "image.tmdb.org" in s:
+        q += 50
+    if "m.media-amazon.com" in s or "kinopoisk" in s:
+        q += 35
+    if s.startswith("https://"):
+        q += 10
+    if "/w500" in s or "/original" in s:
+        q += 10
+    return q + min(len(s), 300) / 300
+
+def poster_keys(item):
+    item = fix_item(item)
+    year = str(item.get("year") or "")[:4]
+    typ = item.get("type") or ""
+    keys = set()
+    ck = canon_key(item)
+    if ck:
+        keys.add(ck)
+    for n in names(item):
+        nn = norm(n)
+        if nn:
+            keys.add(f"{typ}|{nn}|{year}")
+            keys.add(f"{nn}|{year}")
+    return keys
+
+def fallback_poster(item):
+    title = clean(item.get("ru") or item.get("en") or item.get("title") or item.get("name") or "Нет постера")
+    typ = clean(item.get("type") or "Фильм")
+    year = clean(item.get("year") or "—")
+    import urllib.parse
+    text = urllib.parse.quote(f"{title}\\n{year} · {typ}")
+    palette = {
+        "Фильм": ("1b2a6b", "08d9ff"),
+        "Сериал": ("0b3d52", "47eaff"),
+        "Аниме": ("3a1478", "9d4dff"),
+        "Мультфильм": ("5a2360", "ff6bd6"),
+    }.get(typ, ("141428","00e5ff"))
+    return f"https://dummyimage.com/420x630/{palette[0]}/{palette[1]}.png&text={text}"
+
+def make_poster_backfill_map(raw_items):
+    mp = {}
+    for raw in raw_items:
+        try:
+            item = fix_item(raw)
+            p = item.get("poster")
+            if not poster_ok(p):
+                continue
+            for k in poster_keys(item):
+                prev = mp.get(k)
+                if not prev or poster_quality(p) > poster_quality(prev):
+                    mp[k] = p
+        except Exception:
+            continue
+    return mp
+
+def repair_posters(items, raw_items):
+    poster_map = make_poster_backfill_map(raw_items)
+    repaired = 0
+    fallbacked = 0
+    out = []
+    for item in items:
+        item = dict(item)
+        if not poster_ok(item.get("poster")):
+            found = None
+            for k in poster_keys(item):
+                if poster_ok(poster_map.get(k)):
+                    found = poster_map[k]
+                    break
+            if found:
+                item["poster"] = found
+                repaired += 1
+        if not poster_ok(item.get("poster")):
+            if int(float(item.get("votes") or 0)) >= 100 or float(item.get("rating") or 0) >= 7:
+                item["poster"] = fallback_poster(item)
+                item["posterFallback"] = True
+                fallbacked += 1
+        out.append(item)
+    return out, repaired, fallbacked
+
+
 def canon_key(item):
     item = fix_item(item)
     r = rule_for(item)
@@ -216,8 +306,10 @@ def main():
 
     print(f"V57 POSTFIX: loaded search_index={len(raw)}")
     items = dedupe(raw)
+    items, postersRepaired, postersFallbacked = repair_posters(items, raw)
     items = sorted(items, key=score, reverse=True)
     print(f"V57 POSTFIX: after fix+dedupe={len(items)} removed={len(raw)-len(items)}")
+    print(f"V73 POSTERS: repaired={postersRepaired} fallbacked={postersFallbacked}")
 
     movies = sorted([x for x in items if x.get("type") == "Фильм"], key=score, reverse=True)
     series = sorted([x for x in items if x.get("type") == "Сериал"], key=score, reverse=True)
@@ -273,6 +365,12 @@ def main():
         "genres": genres,
         "years": years,
         "pages": pages,
+        "posterRepair": {
+            "repairedFromDuplicates": postersRepaired,
+            "fallbackGenerated": postersFallbacked,
+            "missingInMoviesTopPages": len([x for x in movies[:180] if not poster_ok(x.get("poster"))]),
+            "missingInPopularHome": len([x for x in popular[:HOME_LIMIT] if not poster_ok(x.get("poster"))])
+        },
         "checks": {
             "scoobyInAnime": len([x for x in anime if "scooby" in hay(x) or "скуби" in hay(x)]),
             "witchHatInNew": len([x for x in new_items if "witch hat" in hay(x) or "ателье колдовских" in hay(x) or "とんがり帽子" in hay(x)])
@@ -281,7 +379,7 @@ def main():
     save(DATA_FAST / "search_index.json", items)
     save(DATA_FAST / "home.json", home)
     save(DATA_FAST / "meta.json", meta)
-    print("V72 HARD PAGER PAGES READY")
+    print("V73 POSTER REPAIR PAGES READY")
     print("builderVersion=", VERSION)
     print("anime=", len(anime), "cartoons=", len(cartoons))
     print("scoobyInAnime=", meta["checks"]["scoobyInAnime"])
