@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+const GKM_APP_CLEAN_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -587,7 +587,7 @@ function gkmPosterErrorV73(img) {
   } catch(e) {}
 }
 
-window.GKM_POSTER_REPAIR_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_POSTER_REPAIR_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 /* === /GKM V73 POSTER REPAIR === */
 
 
@@ -908,7 +908,7 @@ async function gkmLoadDepartmentFromIndexV68(tab, page = 1) {
   gkmRenderDepartmentPageV68(tab, page, idx);
 }
 
-window.GKM_STRICT_DEPARTMENT_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_STRICT_DEPARTMENT_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 /* === /GKM V68 STRICT DEPARTMENT PAGES === */
 
 
@@ -926,7 +926,7 @@ function gkmCountFallbackInSliceV75(items, limit = PAGE_SIZE) {
   return (Array.isArray(items) ? items : []).slice(0, limit).filter(x => !gkmHasRealPosterV74(x)).length;
 }
 
-window.GKM_NO_FALLBACK_FIRST_PAGES_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_NO_FALLBACK_FIRST_PAGES_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 /* === /GKM V75 NO FALLBACK FIRST PAGES === */
 
 
@@ -977,8 +977,8 @@ function gkmOpenGenericQueryTabV76(q) {
   return true;
 }
 
-window.GKM_HIDE_NO_POSTERS_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
-window.GKM_NO_GENERIC_SEARCH_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_HIDE_NO_POSTERS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
+window.GKM_NO_GENERIC_SEARCH_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 /* === /GKM V76 HIDE NO POSTERS + NO GENERIC SEARCH === */
 
 /* === GKM V71 PAGE BUFFER + NO SEARCH PAGER === */
@@ -994,7 +994,7 @@ function gkmStrictFilterTabV71(tab, items) {
   else if (tab === "new") out = out.filter(m => Number(getYear(m) || 0) >= 2024);
   else if (tab === "top") out = out.filter(m => getVotes(m) >= MIN_VOTES_FOR_TOP && getRating(m) >= 7);
   else if (tab === "popular") out = out.filter(m => getVotes(m) >= 1);
-  return gkmVisiblePosterItemsV76(gkmRealPosterFirstV75(gkmSortVotesFirstV67(out)));
+  return gkmNoPosterBottomV79(gkmVisiblePosterItemsV76(gkmRealPosterFirstV75(gkmSortVotesFirstV67(out))));
 }
 
 async function gkmFetchPageQuietV71(pageTab, page) {
@@ -1050,8 +1050,8 @@ function gkmRenderBufferedDepartmentV71(pageTab, requestedPage, buffer) {
   setStatus(`Раздел ${pageTab} · без search_index · сортировка по голосам`);
 }
 
-window.GKM_PAGER_NO_SEARCH_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
-window.GKM_PAGE_BUFFER_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_PAGER_NO_SEARCH_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
+window.GKM_PAGE_BUFFER_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 /* === /GKM V71 PAGE BUFFER + NO SEARCH PAGER === */
 
 
@@ -1082,7 +1082,49 @@ async function loadPage(tab, page = 1) {
   setStatus(`Раздел загружен: ${currentCount} записей · fast pages`);
 }
 
+
+/* === GKM V79 NO POSTER BOTTOM HARD FILTER === */
+const GKM_POSTER_DEPARTMENTS_V79 = new Set(["movies", "series", "cartoons", "anime", "top", "new", "popular"]);
+
+function gkmNoPosterBottomV79(items) {
+  const list = Array.isArray(items) ? items : [];
+  const real = list.filter(gkmHasRealPosterV74);
+  const missing = list.filter(x => !gkmHasRealPosterV74(x));
+  return [...real, ...missing];
+}
+
+function gkmVisibleCardsV79(items) {
+  const list = gkmNoPosterBottomV79(items);
+  const real = list.filter(gkmHasRealPosterV74);
+  const missing = list.filter(x => !gkmHasRealPosterV74(x));
+
+  if (GKM_POSTER_DEPARTMENTS_V79.has(currentTab) && real.length > 0) return real;
+
+  const q = $("searchInput") ? String($("searchInput").value || "").trim() : "";
+  if (q && real.length > 0) return real;
+
+  return [...real, ...missing];
+}
+
+function gkmNoPosterStatsV79(items) {
+  const list = Array.isArray(items) ? items : [];
+  return {
+    real: list.filter(gkmHasRealPosterV74).length,
+    missing: list.filter(x => !gkmHasRealPosterV74(x)).length
+  };
+}
+
+window.GKM_NO_POSTER_BOTTOM_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
+/* === /GKM V79 NO POSTER BOTTOM HARD FILTER === */
+
 function renderList(items, label) {
+  const beforeV79 = Array.isArray(items) ? items : [];
+  const statsBeforeV79 = gkmNoPosterStatsV79(beforeV79);
+  items = gkmVisibleCardsV79(beforeV79);
+  const statsAfterV79 = gkmNoPosterStatsV79(items);
+  if (statsBeforeV79.missing && statsAfterV79.missing === 0) {
+    label = `${label} · скрыто без постера ${statsBeforeV79.missing}`;
+  }
   const grid = $("grid");
   const countText = $("countText");
   const pageText = $("pageText");
@@ -1285,7 +1327,7 @@ function gkmHasRealPosterV74(m) {
   return true;
 }
 
-window.GKM_REAL_POSTERS_FIRST_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_REAL_POSTERS_FIRST_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 /* === /GKM V74 REAL POSTERS FIRST === */
 
 function gkmVotesBucketV70(m) {
@@ -1346,7 +1388,7 @@ function gkmSortSmartV67(list) {
   });
 }
 
-window.GKM_VOTES_FIRST_SORT_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_VOTES_FIRST_SORT_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 /* === /GKM V67 VOTES FIRST SORT === */
 
 
@@ -1538,17 +1580,46 @@ function renderSearchPage(page = 1) {
   renderList(currentItems, `Поиск: ${lastSearchResults.length} найдено · Страница ${currentPage} из ${currentPages}`);
 }
 
+
+/* === GKM V78 SAFE SEARCH === */
+let GKM_SEARCH_RUN_ID_V78 = 0;
+
+function gkmSleepFrameV78() {
+  return new Promise(resolve => setTimeout(resolve, 0));
+}
+
+function gkmSearchMinReadyV78(q) {
+  const s = String(q || "").trim();
+  if (!s) return true;
+  return s.replace(/\s+/g, "").length >= 2;
+}
+
+function gkmSearchPrepareResultsV78(items) {
+  return gkmNoPosterBottomV79(gkmVisiblePosterItemsV76(gkmSortVotesFirstV67(items || [])));
+}
+
+window.GKM_SAFE_SEARCH_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
+/* === /GKM V78 SAFE SEARCH === */
+
 async function runSearch() {
-  const genericTabV76 = gkmGenericQueryTabV76($("searchInput") ? $("searchInput").value : "");
+  const myRun = ++GKM_SEARCH_RUN_ID_V78;
+
+  const searchInput = $("searchInput");
+  const qRaw = searchInput ? searchInput.value : "";
+  const q = gkmSearchNormV49(qRaw);
+  const genericTabV76 = gkmGenericQueryTabV76(qRaw);
+
   if (genericTabV76) {
     gkmOpenGenericQueryTabV76(genericTabV76);
     return;
   }
 
-  const searchInput = $("searchInput");
-  const qRaw = searchInput ? searchInput.value : "";
-  const q = gkmSearchNormV49(qRaw);
   const controlsActive = hasActiveControls();
+
+  if (!gkmSearchMinReadyV78(qRaw) && !controlsActive) {
+    setStatus("Введите минимум 2 символа для поиска");
+    return;
+  }
 
   if (!q && !controlsActive) {
     lastSearchResults = [];
@@ -1557,18 +1628,24 @@ async function runSearch() {
     return;
   }
 
+  setStatus(`Ищу: ${qRaw}...`);
+
   const index = await ensureSearchIndex();
+  if (myRun !== GKM_SEARCH_RUN_ID_V78) return;
+
   let raw = [];
 
   if (q) {
     const scored = [];
     const variants = gkmSearchVariantsV49(q);
+    const BATCH = 450;
 
     for (let i = 0; i < index.length; i++) {
+      if (myRun !== GKM_SEARCH_RUN_ID_V78) return;
+
       const item = index[i];
       const hay = gkmTitleOnlyHayV49(item);
 
-      // ЖЁСТКО: если в названии/алиасах нет запроса/синонима — вообще не показываем.
       let realTitleHit = false;
       for (const v of variants) {
         if (!v) continue;
@@ -1584,17 +1661,18 @@ async function runSearch() {
         }
       }
 
-      if (!realTitleHit) {
-        if (i % 9000 === 0) await new Promise(r => setTimeout(r, 0));
-        continue;
+      if (realTitleHit) {
+        const s = gkmTitleSearchScoreV49(item, q);
+        if (s > 0) scored.push({ item, s });
       }
 
-      const s = gkmTitleSearchScoreV49(item, q);
-      if (s > 0) scored.push({ item, s });
-
-      if (i % 9000 === 0) await new Promise(r => setTimeout(r, 0));
+      if (i > 0 && i % BATCH === 0) {
+        if (i % 9000 === 0) setStatus(`Ищу: ${qRaw} · проверено ${i} из ${index.length}`);
+        await gkmSleepFrameV78();
+      }
     }
 
+    if (myRun !== GKM_SEARCH_RUN_ID_V78) return;
     scored.sort((a, b) => b.s - a.s);
     raw = scored.map(x => x.item);
   } else {
@@ -1602,7 +1680,9 @@ async function runSearch() {
   }
 
   const scoped = applyTabFilter(raw);
-  lastSearchResults = applyLocalFilters(scoped);
+  lastSearchResults = gkmSearchPrepareResultsV78(applyLocalFilters(scoped));
+
+  if (myRun !== GKM_SEARCH_RUN_ID_V78) return;
 
   if (!lastSearchResults.length && q) {
     renderList([], `Поиск: 0 найдено · ищет строго по названию`);
@@ -1612,6 +1692,7 @@ async function runSearch() {
 
   renderSearchPage(1);
   setStatus(`Поиск: ${lastSearchResults.length} найдено`);
+  try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch { window.scrollTo(0, 0); }
 }
 
 function factCard(label, value) {
@@ -1847,7 +1928,7 @@ async function renderRelatedCardsV66(baseItem) {
   });
 }
 
-window.GKM_RELATED_CARDS_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_RELATED_CARDS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 /* === /GKM V66 RELATED CARDS IN DETAILS === */
 
 
@@ -4122,7 +4203,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+  window.GKM_AI_CHAT_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 })();
 
 
@@ -5254,23 +5335,23 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_HELPER_RESTORED_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_TESTED_RELEASE_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_RUNTIME_GUARD_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 
-window.GKM_NO_SCROLL_BUTTONS_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 
 
 
@@ -5298,7 +5379,7 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v77-retested-no-freeze-no-posters-2026-0
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
   else bindMoreButtonsCaptureV63();
 
-  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 })();
 
 
@@ -5363,11 +5444,11 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v77-retested-no-freeze-no-posters-2026-0
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAiCloseV64);
   else bindAiCloseV64();
 
-  window.GKM_HELPER_CLOSE_FIX_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+  window.GKM_HELPER_CLOSE_FIX_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 })();
 
 
-window.GKM_BALANCED_HOME_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_BALANCED_HOME_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 
 
 window.GKM_LIST_SORT_POLICY_VERSION = "votes_first_then_rating_v67";
@@ -5454,8 +5535,8 @@ window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_i
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindTabsV70);
   else bindTabsV70();
 
-  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
-  window.GKM_VOTE_BUCKETS_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+  window.GKM_TAB_BUTTONS_STRICT_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
+  window.GKM_VOTE_BUCKETS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 })();
 /* === /GKM V70 STRICT TAB BUTTONS + VOTE BUCKETS === */
 
@@ -5605,8 +5686,8 @@ window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_i
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindHardV72);
   else bindHardV72();
 
-  window.GKM_HARD_PAGER_TABS_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
-  window.GKM_PAGE_SCROLL_TOP_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+  window.GKM_HARD_PAGER_TABS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
+  window.GKM_PAGE_SCROLL_TOP_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 })();
 /* === /GKM V72 HARD PAGER + STRICT TABS OVERRIDE === */
 
@@ -5630,9 +5711,12 @@ window.GKM_FAST_PAGES_POLICY_VERSION = "departments_use_prebuilt_pages_no_full_i
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindSearchGuardV76);
   else bindSearchGuardV76();
-  window.GKM_SEARCH_GUARD_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+  window.GKM_SEARCH_GUARD_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 })();
 /* === /GKM V76 SEARCH GUARD === */
 
 
-window.GKM_V77_DEEP_RETEST_VERSION = "v77-retested-no-freeze-no-posters-2026-06-14";
+window.GKM_V77_DEEP_RETEST_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
+
+
+window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
