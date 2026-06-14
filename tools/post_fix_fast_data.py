@@ -3,7 +3,7 @@ import json, re, shutil
 from pathlib import Path
 from datetime import datetime, timezone
 
-VERSION = "v77-retested-no-freeze-no-posters-2026-06-14"
+VERSION = "v79-no-poster-bottom-10tests-2026-06-14"
 DATA_FAST = Path("data/fast")
 PAGE_SIZE = 60
 HOME_LIMIT = 18
@@ -299,7 +299,7 @@ def write_pages(tab, items):
     d.mkdir(parents=True, exist_ok=True)
 
     # V76: visible generated pages should not show blue fallback cards if real posters exist.
-    items = only_real_posters(prefer_real_posters(items))
+    items = only_real_posters(no_poster_bottom(prefer_real_posters(items)))
 
     pages = max(1, (len(items) + PAGE_SIZE - 1) // PAGE_SIZE)
     for page in range(1, pages + 1):
@@ -319,6 +319,11 @@ def prefer_real_posters(items):
     fallback = [x for x in items if not real_poster_ok(x)]
     return real + fallback
 
+
+def no_poster_bottom(items):
+    real = [x for x in items if real_poster_ok(x)]
+    missing = [x for x in items if not real_poster_ok(x)]
+    return real + missing
 
 def only_real_posters(items):
     real = [x for x in items if real_poster_ok(x)]
@@ -365,13 +370,13 @@ def main():
         "total": len(items),
         "postFixVersion": VERSION,
         "sections": {
-            "popular": popular[:HOME_LIMIT],
-            "top": top[:HOME_LIMIT],
-            "new": new_items[:HOME_LIMIT],
-            "anime": anime[:HOME_LIMIT],
-            "movies": movies[:HOME_LIMIT],
-            "series": series[:HOME_LIMIT],
-            "cartoons": cartoons[:HOME_LIMIT],
+            "popular": only_real_posters(no_poster_bottom(popular))[:HOME_LIMIT],
+            "top": only_real_posters(no_poster_bottom(top))[:HOME_LIMIT],
+            "new": only_real_posters(no_poster_bottom(new_items))[:HOME_LIMIT],
+            "anime": only_real_posters(no_poster_bottom(anime))[:HOME_LIMIT],
+            "movies": only_real_posters(no_poster_bottom(movies))[:HOME_LIMIT],
+            "series": only_real_posters(no_poster_bottom(series))[:HOME_LIMIT],
+            "cartoons": only_real_posters(no_poster_bottom(cartoons))[:HOME_LIMIT],
         }
     }
 
@@ -411,7 +416,7 @@ def main():
     save(DATA_FAST / "search_index.json", items)
     save(DATA_FAST / "home.json", home)
     save(DATA_FAST / "meta.json", meta)
-    print("V77 RETESTED NO POSTERS PAGES READY")
+    print("V79 NO POSTER BOTTOM PAGES READY")
     print("builderVersion=", VERSION)
     print("anime=", len(anime), "cartoons=", len(cartoons))
     print("scoobyInAnime=", meta["checks"]["scoobyInAnime"])
