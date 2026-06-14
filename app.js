@@ -1,10 +1,16 @@
-const GKM_APP_CLEAN_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
+const GKM_APP_CLEAN_VERSION = "v81-tmdb-off-local-base-2026-06-15";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
 const FAST_META_URL = `${FAST_BASE}/meta.json`;
 const FAST_SEARCH_URL = `${FAST_BASE}/search_index.json`;
 const LEGACY_INDEX_URL = "data/index.json";
+const TMDB_ENABLED = false;
+const GKM_TMDB_OFF_VERSION = "v81-tmdb-off-local-base-2026-06-15";
+const KINOPOISK_ENABLED = true;
+const KINOPOISK_API_BASE = "https://api.kinopoisk.dev/v1.4";
+const KINOPOISK_API_KEY = "";
+const GKM_KINOPOISK_API_VERSION = "v82-kinopoisk-api-2026-06-15";
 const PAGE_SIZE = 60;
 const MIN_VOTES_FOR_TOP = 300;
 
@@ -19,6 +25,7 @@ let searchIndex = null;
 let lastSearchResults = [];
 let selectedMovie = null;
 let searchTimer = null;
+const kinopoiskCache = new Map();
 
 const $ = (id) => document.getElementById(id);
 const favKey = "gkm_favorites";
@@ -69,10 +76,167 @@ function saveSet(key, set) {
   localStorage.setItem(key, JSON.stringify([...set]));
 }
 
+function isTmdbRequest(url) {
+  const raw = String(url && (url.url || url) || "");
+  return /(^|\/\/)(api\.)?themoviedb\.org\b/i.test(raw) || /api\.tmdb\.org\b/i.test(raw);
+}
+
+function blockTmdbRequest(url) {
+  if (TMDB_ENABLED || !isTmdbRequest(url)) return false;
+  console.warn("TMDB отключен: запрос заблокирован", String(url && (url.url || url) || ""));
+  return true;
+}
+
+if (typeof window !== "undefined" && typeof window.fetch === "function" && !window.__GKM_TMDB_FETCH_GUARD__) {
+  const nativeFetch = window.fetch.bind(window);
+  window.fetch = function(input, init) {
+    if (blockTmdbRequest(input)) {
+      return Promise.reject(new Error("TMDB отключен: сайт работает только с локальной базой"));
+    }
+    return nativeFetch(input, init);
+  };
+  window.__GKM_TMDB_FETCH_GUARD__ = true;
+}
+
 async function fetchJson(url, cache = "no-store") {
+  if (blockTmdbRequest(url)) {
+    throw new Error("TMDB отключен: сайт работает только с локальной базой");
+  }
   const res = await fetch(url + "?v=" + Date.now(), { cache });
   if (!res.ok) throw new Error(`Не загрузилось: ${url} (${res.status})`);
   return await res.json();
+}
+
+function getKinopoiskApiKey() {
+  try {
+    const saved = localStorage.getItem("gkm_kinopoisk_api_key");
+    if (saved && saved.trim()) return saved.trim();
+  } catch {}
+  return String(KINOPOISK_API_KEY || "").trim();
+}
+
+function hasPosterValue(value) {
+  const p = String(value || "").trim().toLowerCase();
+  if (!p || p === "null" || p === "undefined" || p === "n/a") return false;
+  if (p.includes("dummyimage.com") || p.includes("placeholder") || p.includes("no-poster") || p.includes("noposter")) return false;
+  return /^https?:\/\//i.test(p) || p.startsWith("data:image/");
+}
+
+function posterValueAny(item) {
+  return item && (
+    item.poster || item.poster_path || item.posterUrl || item.poster_url ||
+    item.image || item.imageUrl || item.cover || item.coverUrl || item.img || ""
+  ) || "";
+}
+
+function countPostersInItems(items) {
+  const list = Array.isArray(items) ? items : [];
+  const withPoster = list.filter(item => hasPosterValue(posterValueAny(item))).length;
+  return {
+    total: list.length,
+    withPoster,
+    withoutPoster: Math.max(0, list.length - withPoster),
+  };
+}
+
+function collectLoadedCatalogItems() {
+  const out = [];
+  if (Array.isArray(searchIndex)) out.push(...searchIndex);
+  if (Array.isArray(currentItems)) out.push(...currentItems);
+  if (homeData && homeData.sections) {
+    Object.values(homeData.sections).forEach(list => {
+      if (Array.isArray(list)) out.push(...list);
+    });
+  }
+
+  const seen = new Set();
+  return out.filter((item, idx) => {
+    if (!item) return false;
+    const key = String(item.id || item.uid || item.kinopoiskId || item.filmId || titleOf(item) + "|" + getYear(item) || idx);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function logPosterCount(label = "poster-count") {
+  const counts = countPostersInItems(collectLoadedCatalogItems());
+  console.info(`${label}: всего ${counts.total}, с постером ${counts.withPoster}, без постера ${counts.withoutPoster}`);
+  return counts;
+}
+
+function normalizeKinopoiskDoc(doc) {
+  if (!doc || typeof doc !== "object") return null;
+  const poster = doc.poster && (doc.poster.url || doc.poster.previewUrl) || "";
+  const rating = doc.rating && (doc.rating.kp || doc.rating.imdb) || 0;
+  const votes = doc.votes && (doc.votes.kp || doc.votes.imdb) || 0;
+  const typeRaw = String(doc.type || "").toLowerCase();
+  const type = typeRaw.includes("tv") || typeRaw.includes("series") ? "Сериал" : "Фильм";
+  return {
+    kinopoiskId: doc.id || doc.kinopoiskId,
+    ru: doc.name || doc.alternativeName || "",
+    en: doc.enName || doc.alternativeName || "",
+    year: doc.year || "",
+    type,
+    rating: Number(rating || 0),
+    votes: Number(votes || 0),
+    poster,
+    overview: doc.description || doc.shortDescription || "",
+    source: "kinopoisk.dev",
+  };
+}
+
+async function searchKinopoiskMovie(query, year) {
+  if (!KINOPOISK_ENABLED) return null;
+  const key = getKinopoiskApiKey();
+  if (!key) {
+    console.info("Кинопоиск API: ключ не указан, запрос пропущен");
+    return null;
+  }
+
+  const q = String(query || "").trim();
+  if (!q) return null;
+
+  const cacheKey = `${q}|${year || ""}`.toLowerCase();
+  if (kinopoiskCache.has(cacheKey)) return kinopoiskCache.get(cacheKey);
+
+  const url = new URL(`${KINOPOISK_API_BASE}/movie/search`);
+  url.searchParams.set("page", "1");
+  url.searchParams.set("limit", "5");
+  url.searchParams.set("query", q);
+
+  const res = await fetch(url.toString(), {
+    headers: {
+      "accept": "application/json",
+      "X-API-KEY": key,
+    },
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error(`Кинопоиск API не ответил: ${res.status}`);
+
+  const data = await res.json();
+  const docs = Array.isArray(data.docs) ? data.docs : [];
+  const y = String(year || "").slice(0, 4);
+  const found = docs.find(doc => y && String(doc.year || "") === y) || docs[0] || null;
+  const normalized = normalizeKinopoiskDoc(found);
+  kinopoiskCache.set(cacheKey, normalized);
+  return normalized;
+}
+
+async function enrichFromKinopoisk(item) {
+  if (!item) return item;
+  const title = titleOf(item);
+  const year = getYear(item);
+  const extra = await searchKinopoiskMovie(title, year);
+  if (!extra) return item;
+
+  if (!hasPosterValue(posterValueAny(item)) && hasPosterValue(extra.poster)) item.poster = extra.poster;
+  if (!item.overview && extra.overview) item.overview = extra.overview;
+  if (!item.rating && extra.rating) item.rating = extra.rating;
+  if (!item.votes && extra.votes) item.votes = extra.votes;
+  if (!item.kinopoiskId && extra.kinopoiskId) item.kinopoiskId = extra.kinopoiskId;
+  if (!item.source) item.source = extra.source;
+  return item;
 }
 
 
@@ -1984,6 +2148,30 @@ function openDetails(m) {
 
   if (!dialog.open) dialog.showModal();
   dialog.scrollTop = 0;
+
+  if (KINOPOISK_ENABLED && getKinopoiskApiKey() && (!hasPosterValue(posterValueAny(m)) || !m.overview || !m.kinopoiskId)) {
+    enrichFromKinopoisk(m).then(updated => {
+      if (selectedMovie !== m || !updated) return;
+      const posterEl = $("detailPoster");
+      if (posterEl && hasPosterValue(posterValueAny(updated))) {
+        posterEl.dataset.fallback = gkmPosterFallbackV73(updated);
+        posterEl.src = gkmPosterSrcV73(updated);
+        posterEl.style.display = "block";
+      }
+      const overviewEl = $("detailOverview");
+      if (overviewEl && updated.overview) overviewEl.textContent = updated.overview;
+      const metaEl = $("detailMeta");
+      if (metaEl) {
+        const nextRank = rankOf(updated);
+        metaEl.innerHTML = `
+          <span class="detail-type-pill">${escapeHtml(getType(updated))}</span>
+          <span>${escapeHtml(getYear(updated) || "—")}</span>
+          <span class="detail-rating-pill rank-${nextRank.rank}">${escapeHtml(ratingLabel(updated))}</span>
+          <span>${escapeHtml(getVotes(updated))} голосов</span>
+        `;
+      }
+    }).catch(e => console.warn("Кинопоиск API: не удалось обновить карточку", e));
+  }
 }
 
 
