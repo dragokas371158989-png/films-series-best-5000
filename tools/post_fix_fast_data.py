@@ -3,7 +3,7 @@ import json, re, shutil
 from pathlib import Path
 from datetime import datetime, timezone
 
-VERSION = "v57-force-postfix-build-2026-06-13"
+VERSION = "v65-balanced-home-tested-2026-06-13"
 DATA_FAST = Path("data/fast")
 PAGE_SIZE = 60
 HOME_LIMIT = 18
