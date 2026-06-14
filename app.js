@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+const GKM_APP_CLEAN_VERSION = "v64-helper-close-fix-2026-06-13";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -3527,7 +3527,7 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAiChat);
   else initAiChat();
 
-  window.GKM_AI_CHAT_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+  window.GKM_AI_CHAT_VERSION = "v64-helper-close-fix-2026-06-13";
 })();
 
 
@@ -4659,23 +4659,23 @@ window.GKM_STRICT_VISIBLE_TITLE_SEARCH_VERSION = "v50-strict-visible-title-searc
 window.GKM_BUILD_DATA_FIX_VERSION = "v56-clean-builder-data-fix-2026-06-13";
 
 
-window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+window.GKM_FORCE_POSTFIX_BUILD_VERSION = "v64-helper-close-fix-2026-06-13";
 
 
-window.GKM_HELPER_RESTORED_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+window.GKM_HELPER_RESTORED_VERSION = "v64-helper-close-fix-2026-06-13";
 
 
-window.GKM_TESTED_RELEASE_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+window.GKM_TESTED_RELEASE_VERSION = "v64-helper-close-fix-2026-06-13";
 
 
-window.GKM_RUNTIME_GUARD_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+window.GKM_RUNTIME_GUARD_VERSION = "v64-helper-close-fix-2026-06-13";
 
 
-window.GKM_MORE_BUTTONS_FIX_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+window.GKM_MORE_BUTTONS_FIX_VERSION = "v64-helper-close-fix-2026-06-13";
 
-window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+window.GKM_CLEAN_ONLY_PACKAGE_VERSION = "v64-helper-close-fix-2026-06-13";
 
-window.GKM_NO_SCROLL_BUTTONS_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+window.GKM_NO_SCROLL_BUTTONS_VERSION = "v64-helper-close-fix-2026-06-13";
 
 
 
@@ -4703,5 +4703,70 @@ window.GKM_NO_SCROLL_BUTTONS_VERSION = "v63-no-scroll-no-search-buttons-2026-06-
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindMoreButtonsCaptureV63);
   else bindMoreButtonsCaptureV63();
 
-  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v63-no-scroll-no-search-buttons-2026-06-13";
+  window.GKM_MORE_BUTTONS_CAPTURE_VERSION = "v64-helper-close-fix-2026-06-13";
+})();
+
+
+
+/* === GKM V64 HELPER CLOSE HARD FIX === */
+(function () {
+  function closeAiDialogV64() {
+    const dialog = document.getElementById("gkmAiDialog");
+    if (!dialog) return false;
+    try {
+      if (typeof dialog.close === "function" && dialog.open) dialog.close();
+    } catch {}
+    dialog.removeAttribute("open");
+    dialog.style.display = "none";
+    document.body.classList.remove("ai-open", "gkm-ai-open");
+    return true;
+  }
+
+  function openAiDialogV64() {
+    const dialog = document.getElementById("gkmAiDialog");
+    if (!dialog) return false;
+    dialog.style.display = "";
+    try {
+      if (typeof dialog.showModal === "function" && !dialog.open) dialog.showModal();
+      else dialog.setAttribute("open", "");
+    } catch {
+      dialog.setAttribute("open", "");
+    }
+    document.body.classList.add("gkm-ai-open");
+    return true;
+  }
+
+  function bindAiCloseV64() {
+    if (document.documentElement.dataset.gkmAiCloseV64 === "1") return;
+    document.documentElement.dataset.gkmAiCloseV64 = "1";
+
+    document.addEventListener("click", function (e) {
+      const closeBtn = e.target && e.target.closest ? e.target.closest("#gkmAiCloseBtn, .ai-close") : null;
+      if (closeBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+        closeAiDialogV64();
+        return;
+      }
+
+      const openBtn = e.target && e.target.closest ? e.target.closest("#gkmAiFloatBtn, #gkmAiTopBtn, .ai-float-btn, .ai-top-btn") : null;
+      if (openBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+        openAiDialogV64();
+        return;
+      }
+    }, true);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeAiDialogV64();
+    }, true);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAiCloseV64);
+  else bindAiCloseV64();
+
+  window.GKM_HELPER_CLOSE_FIX_VERSION = "v64-helper-close-fix-2026-06-13";
 })();
