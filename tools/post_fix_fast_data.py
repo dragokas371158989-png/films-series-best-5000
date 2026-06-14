@@ -3,7 +3,7 @@ import json, re, shutil
 from pathlib import Path
 from datetime import datetime, timezone
 
-VERSION = "v68-strict-department-pages-tested-2026-06-13"
+VERSION = "v69-fast-pages-no-freeze-tested-2026-06-13"
 DATA_FAST = Path("data/fast")
 PAGE_SIZE = 60
 HOME_LIMIT = 18
@@ -168,12 +168,13 @@ def dedupe(items):
     return list(best.values())
 
 def score(item):
+    """Votes-first score for generated pages.
+    More votes always wins first; rating/year are only tie breakers.
+    """
     rating = float(item.get("rating") or 0)
     votes = int(float(item.get("votes") or 0))
     year = int(item.get("year") or 0)
-    if votes < 30:
-        return rating - 25
-    return rating * 10 + min(votes, 80000) / 80000 * 5 + (0.35 if year >= 2010 else 0)
+    return votes * 100000 + rating * 1000 + year
 
 def write_pages(tab, items):
     d = DATA_FAST / "pages" / tab
@@ -207,11 +208,11 @@ def main():
     items = sorted(items, key=score, reverse=True)
     print(f"V57 POSTFIX: after fix+dedupe={len(items)} removed={len(raw)-len(items)}")
 
-    movies = [x for x in items if x.get("type") == "Фильм"]
-    series = [x for x in items if x.get("type") == "Сериал"]
-    anime = [x for x in items if x.get("type") == "Аниме"]
-    cartoons = [x for x in items if x.get("type") == "Мультфильм"]
-    new_items = sorted([x for x in items if int(x.get("year") or 0) >= 2024 and int(float(x.get("votes") or 0)) >= 10], key=lambda x: (int(x.get("year") or 0), score(x)), reverse=True)
+    movies = sorted([x for x in items if x.get("type") == "Фильм"], key=score, reverse=True)
+    series = sorted([x for x in items if x.get("type") == "Сериал"], key=score, reverse=True)
+    anime = sorted([x for x in items if x.get("type") == "Аниме"], key=score, reverse=True)
+    cartoons = sorted([x for x in items if x.get("type") == "Мультфильм"], key=score, reverse=True)
+    new_items = sorted([x for x in items if int(x.get("year") or 0) >= 2024 and int(float(x.get("votes") or 0)) >= 80], key=lambda x: (int(x.get("year") or 0), score(x)), reverse=True)
     popular = sorted([x for x in items if int(float(x.get("votes") or 0)) >= 1000], key=lambda x: int(float(x.get("votes") or 0)), reverse=True)
     top = sorted([x for x in items if int(float(x.get("votes") or 0)) >= MIN_VOTES_FOR_TOP and float(x.get("rating") or 0) >= 7], key=score, reverse=True)[:250]
 
@@ -269,7 +270,7 @@ def main():
     save(DATA_FAST / "search_index.json", items)
     save(DATA_FAST / "home.json", home)
     save(DATA_FAST / "meta.json", meta)
-    print("V57 POSTFIX READY")
+    print("V69 FAST PAGES READY")
     print("builderVersion=", VERSION)
     print("anime=", len(anime), "cartoons=", len(cartoons))
     print("scoobyInAnime=", meta["checks"]["scoobyInAnime"])
