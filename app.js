@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v81-tmdb-off-local-base-2026-06-15";
+const GKM_APP_CLEAN_VERSION = "v100-root-app-workflow-tools-fixed-2026-06-15";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -6,7 +6,7 @@ const FAST_META_URL = `${FAST_BASE}/meta.json`;
 const FAST_SEARCH_URL = `${FAST_BASE}/search_index.json`;
 const LEGACY_INDEX_URL = "data/index.json";
 const TMDB_ENABLED = false;
-const GKM_TMDB_OFF_VERSION = "v81-tmdb-off-local-base-2026-06-15";
+const GKM_TMDB_OFF_VERSION = "v100-root-app-workflow-tools-fixed-2026-06-15";
 const KINOPOISK_ENABLED = false;
 const KINOPOISK_API_BASE = "https://api.kinopoisk.dev/v1.4";
 const KINOPOISK_API_KEY = "";
