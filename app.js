@@ -172,6 +172,17 @@ function normalizeKinopoiskDoc(doc) {
   const votes = doc.votes && (doc.votes.kp || doc.votes.imdb) || 0;
   const typeRaw = String(doc.type || "").toLowerCase();
   const type = typeRaw.includes("tv") || typeRaw.includes("series") ? "Сериал" : "Фильм";
+  const countries = Array.isArray(doc.countries)
+    ? doc.countries.map(x => typeof x === "object" ? x.name : x).filter(Boolean)
+    : [];
+  const studios = [
+    ...(Array.isArray(doc.productionCompanies) ? doc.productionCompanies : []),
+    ...(Array.isArray(doc.networks) ? doc.networks : []),
+    ...(Array.isArray(doc.fees && doc.fees.productionCompanies) ? doc.fees.productionCompanies : []),
+  ].map(x => typeof x === "object" ? (x.name || x.title || "") : x).filter(Boolean);
+  const episodeCount = Array.isArray(doc.seasonsInfo)
+    ? doc.seasonsInfo.reduce((sum, season) => sum + Number(season && (season.episodesCount || season.episodes || season.episodeCount) || 0), 0)
+    : 0;
   return {
     kinopoiskId: doc.id || doc.kinopoiskId,
     ru: doc.name || doc.alternativeName || "",
@@ -182,6 +193,11 @@ function normalizeKinopoiskDoc(doc) {
     votes: Number(votes || 0),
     poster,
     overview: doc.description || doc.shortDescription || "",
+    episodes: episodeCount || doc.episodes || doc.episodeCount || doc.numberOfEpisodes || "",
+    studio: studios.length ? [...new Set(studios)].slice(0, 4) : "",
+    country: countries.length ? [...new Set(countries)].slice(0, 4) : "",
+    ageRating: doc.ageRating ? String(doc.ageRating) + "+" : "",
+    status: doc.status || "",
     source: "kinopoisk.dev",
   };
 }
@@ -235,6 +251,11 @@ async function enrichFromKinopoisk(item) {
   if (!item.rating && extra.rating) item.rating = extra.rating;
   if (!item.votes && extra.votes) item.votes = extra.votes;
   if (!item.kinopoiskId && extra.kinopoiskId) item.kinopoiskId = extra.kinopoiskId;
+  if (!item.episodes && extra.episodes) item.episodes = extra.episodes;
+  if (!item.studio && extra.studio) item.studio = extra.studio;
+  if (!item.country && extra.country) item.country = extra.country;
+  if (!item.ageRating && extra.ageRating) item.ageRating = extra.ageRating;
+  if (!item.status && extra.status) item.status = extra.status;
   if (!item.source) item.source = extra.source;
   return item;
 }
@@ -998,6 +1019,7 @@ async function loadLegacyFallbackHome(reason) {
 
   fillFilters();
   renderHome();
+
   setStatus(`Запасная база: ${homeData.total} записей · причина: ${reason || "data/fast пустая"}`);
 }
 
@@ -1867,6 +1889,30 @@ function factCard(label, value) {
   `;
 }
 
+function gkmFormatFactValueV95(value) {
+  if (Array.isArray(value)) return value.filter(Boolean).join(", ");
+  if (value && typeof value === "object") return value.name || value.title || "";
+  return value;
+}
+
+function gkmRenderDetailFactsV95(m, sourceOverride) {
+  const facts = $("detailFacts");
+  if (!facts || !m) return;
+  const source = sourceOverride || m.source || m.provider || "—";
+  facts.innerHTML = [
+    factCard("Тип", getType(m)),
+    factCard("Год", getYear(m)),
+    factCard("Рейтинг", getRating(m).toFixed(1)),
+    factCard("Голосов", getVotes(m)),
+    factCard("Статус", gkmFormatFactValueV95(m.status)),
+    factCard("Эпизоды", gkmFormatFactValueV95(m.episodes || m.episodeCount || m.numberOfEpisodes || m.number_of_episodes)),
+    factCard("Студия", gkmFormatFactValueV95(m.studio || m.studios || m.productionCompanies || m.networks)),
+    factCard("Страна", gkmFormatFactValueV95(m.country || m.countries || m.origin_country || m.production_countries)),
+    factCard("Возраст", gkmFormatFactValueV95(m.ageRating || m.age_rating)),
+    factCard("Источник", source),
+  ].filter(Boolean).join("");
+}
+
 function collectPlayerLinks(m) {
   const links = [];
 
@@ -2127,18 +2173,7 @@ function openDetails(m) {
 
   const facts = $("detailFacts");
   if (facts) {
-    facts.innerHTML = [
-      factCard("Тип", getType(m)),
-      factCard("Год", getYear(m)),
-      factCard("Рейтинг", getRating(m).toFixed(1)),
-      factCard("Голосов", getVotes(m)),
-      factCard("Статус", m.status),
-      factCard("Эпизоды", m.episodes),
-      factCard("Студия", Array.isArray(m.studio) ? m.studio.join(", ") : m.studio),
-      factCard("Страна", Array.isArray(m.country) ? m.country.join(", ") : m.country),
-      factCard("Возраст", m.ageRating),
-      factCard("Источник", source),
-    ].filter(Boolean).join("");
+    gkmRenderDetailFactsV95(m, source);
   }
 
   renderPlayerButtons(m);
@@ -2148,29 +2183,8 @@ function openDetails(m) {
   if (!dialog.open) dialog.showModal();
   dialog.scrollTop = 0;
 
-  if (KINOPOISK_ENABLED && getKinopoiskApiKey() && (!hasPosterValue(posterValueAny(m)) || !m.overview || !m.kinopoiskId)) {
-    enrichFromKinopoisk(m).then(updated => {
-      if (selectedMovie !== m || !updated) return;
-      const posterEl = $("detailPoster");
-      if (posterEl && hasPosterValue(posterValueAny(updated))) {
-        posterEl.dataset.fallback = gkmPosterFallbackV73(updated);
-        posterEl.src = gkmPosterSrcV73(updated);
-        posterEl.style.display = "block";
-      }
-      const overviewEl = $("detailOverview");
-      if (overviewEl && updated.overview) overviewEl.textContent = updated.overview;
-      const metaEl = $("detailMeta");
-      if (metaEl) {
-        const nextRank = rankOf(updated);
-        metaEl.innerHTML = `
-          <span class="detail-type-pill">${escapeHtml(getType(updated))}</span>
-          <span>${escapeHtml(getYear(updated) || "—")}</span>
-          <span class="detail-rating-pill rank-${nextRank.rank}">${escapeHtml(ratingLabel(updated))}</span>
-          <span>${escapeHtml(getVotes(updated))} голосов</span>
-        `;
-      }
-    }).catch(e => console.warn("Кинопоиск API: не удалось обновить карточку", e));
-  }
+  // V96: Кинопоиск API нельзя вызывать из браузера из-за CORS.
+  // Факты episodes/studio/country добавляются заранее скриптом tools/enrich_kinopoisk_facts.py.
 }
 
 
@@ -4552,6 +4566,8 @@ if (document.readyState === "loading") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
   else { setupControls(); setupYears(); }
 })();
+
+window.GKM_V96_SERVER_FACTS_VERSION = "v96-server-side-kinopoisk-facts-2026-06-15";
 
 /* === GKM V92 WORKER SEARCH NO PAGE FREEZE === */
 (function () {

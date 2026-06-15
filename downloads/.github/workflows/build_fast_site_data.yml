@@ -39,6 +39,12 @@ jobs:
       - name: Force post-fix fast data
         run: python tools/post_fix_fast_data.py
 
+      - name: Enrich Kinopoisk facts
+        env:
+          KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
+          GKM_KINOPOISK_FACT_LIMIT: "800"
+        run: python tools/enrich_kinopoisk_facts.py
+
       - name: Verify fixed meta
         run: |
           python - <<'PY'
