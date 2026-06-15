@@ -42,7 +42,7 @@ jobs:
       - name: Enrich Kinopoisk facts
         env:
           KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
-          GKM_KINOPOISK_FACT_LIMIT: "800"
+          GKM_KINOPOISK_FACT_LIMIT: "2000"
         run: python tools/enrich_kinopoisk_facts.py
 
       - name: Verify fast data
@@ -61,12 +61,15 @@ jobs:
         run: |
           git config user.name "fast-data-bot"
           git config user.email "fast-data-bot@users.noreply.github.com"
-          git add data/fast data/kinopoisk_facts_cache.json
+          git add data/fast
+          if [ -f data/kinopoisk_facts_cache.json ]; then
+            git add data/kinopoisk_facts_cache.json
+          fi
           if git diff --cached --quiet; then
             echo "No fast data changes"
             exit 0
           fi
-          git commit -m "Build fast site data v97"
+          git commit -m "Build fast site data v98"
           for i in 1 2 3; do
             git pull --rebase origin main && git push origin main && break
             echo "Push failed, retry $i"
