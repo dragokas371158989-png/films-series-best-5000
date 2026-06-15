@@ -7,10 +7,10 @@ const FAST_SEARCH_URL = `${FAST_BASE}/search_index.json`;
 const LEGACY_INDEX_URL = "data/index.json";
 const TMDB_ENABLED = false;
 const GKM_TMDB_OFF_VERSION = "v81-tmdb-off-local-base-2026-06-15";
-const KINOPOISK_ENABLED = true;
+const KINOPOISK_ENABLED = false;
 const KINOPOISK_API_BASE = "https://api.kinopoisk.dev/v1.4";
 const KINOPOISK_API_KEY = "";
-const GKM_KINOPOISK_API_VERSION = "v82-kinopoisk-api-2026-06-15";
+const GKM_KINOPOISK_API_VERSION = "v97-server-side-only-kinopoisk-facts-2026-06-15";
 const PAGE_SIZE = 60;
 const MIN_VOTES_FOR_TOP = 300;
 
@@ -172,6 +172,17 @@ function normalizeKinopoiskDoc(doc) {
   const votes = doc.votes && (doc.votes.kp || doc.votes.imdb) || 0;
   const typeRaw = String(doc.type || "").toLowerCase();
   const type = typeRaw.includes("tv") || typeRaw.includes("series") ? "Сериал" : "Фильм";
+  const countries = Array.isArray(doc.countries)
+    ? doc.countries.map(x => typeof x === "object" ? x.name : x).filter(Boolean)
+    : [];
+  const studios = [
+    ...(Array.isArray(doc.productionCompanies) ? doc.productionCompanies : []),
+    ...(Array.isArray(doc.networks) ? doc.networks : []),
+    ...(Array.isArray(doc.fees && doc.fees.productionCompanies) ? doc.fees.productionCompanies : []),
+  ].map(x => typeof x === "object" ? (x.name || x.title || "") : x).filter(Boolean);
+  const episodeCount = Array.isArray(doc.seasonsInfo)
+    ? doc.seasonsInfo.reduce((sum, season) => sum + Number(season && (season.episodesCount || season.episodes || season.episodeCount) || 0), 0)
+    : 0;
   return {
     kinopoiskId: doc.id || doc.kinopoiskId,
     ru: doc.name || doc.alternativeName || "",
@@ -182,60 +193,20 @@ function normalizeKinopoiskDoc(doc) {
     votes: Number(votes || 0),
     poster,
     overview: doc.description || doc.shortDescription || "",
+    episodes: episodeCount || doc.episodes || doc.episodeCount || doc.numberOfEpisodes || "",
+    studio: studios.length ? [...new Set(studios)].slice(0, 4) : "",
+    country: countries.length ? [...new Set(countries)].slice(0, 4) : "",
+    ageRating: doc.ageRating ? String(doc.ageRating) + "+" : "",
+    status: doc.status || "",
     source: "kinopoisk.dev",
   };
 }
 
 async function searchKinopoiskMovie(query, year) {
-  if (!KINOPOISK_ENABLED) return null;
-  const key = getKinopoiskApiKey();
-  if (!key) {
-    console.info("Кинопоиск API: ключ не указан, запрос пропущен");
-    return null;
-  }
-
-  const q = String(query || "").trim();
-  if (!q) return null;
-
-  const cacheKey = `${q}|${year || ""}`.toLowerCase();
-  if (kinopoiskCache.has(cacheKey)) return kinopoiskCache.get(cacheKey);
-
-  const url = new URL(`${KINOPOISK_API_BASE}/movie/search`);
-  url.searchParams.set("page", "1");
-  url.searchParams.set("limit", "5");
-  url.searchParams.set("query", q);
-
-  const res = await fetch(url.toString(), {
-    headers: {
-      "accept": "application/json",
-      "X-API-KEY": key,
-    },
-    cache: "no-store",
-  });
-  if (!res.ok) throw new Error(`Кинопоиск API не ответил: ${res.status}`);
-
-  const data = await res.json();
-  const docs = Array.isArray(data.docs) ? data.docs : [];
-  const y = String(year || "").slice(0, 4);
-  const found = docs.find(doc => y && String(doc.year || "") === y) || docs[0] || null;
-  const normalized = normalizeKinopoiskDoc(found);
-  kinopoiskCache.set(cacheKey, normalized);
-  return normalized;
+  return null;
 }
 
 async function enrichFromKinopoisk(item) {
-  if (!item) return item;
-  const title = titleOf(item);
-  const year = getYear(item);
-  const extra = await searchKinopoiskMovie(title, year);
-  if (!extra) return item;
-
-  if (!hasPosterValue(posterValueAny(item)) && hasPosterValue(extra.poster)) item.poster = extra.poster;
-  if (!item.overview && extra.overview) item.overview = extra.overview;
-  if (!item.rating && extra.rating) item.rating = extra.rating;
-  if (!item.votes && extra.votes) item.votes = extra.votes;
-  if (!item.kinopoiskId && extra.kinopoiskId) item.kinopoiskId = extra.kinopoiskId;
-  if (!item.source) item.source = extra.source;
   return item;
 }
 
@@ -1868,6 +1839,30 @@ function factCard(label, value) {
   `;
 }
 
+function gkmFormatFactValueV95(value) {
+  if (Array.isArray(value)) return value.filter(Boolean).join(", ");
+  if (value && typeof value === "object") return value.name || value.title || "";
+  return value;
+}
+
+function gkmRenderDetailFactsV95(m, sourceOverride) {
+  const facts = $("detailFacts");
+  if (!facts || !m) return;
+  const source = sourceOverride || m.source || m.provider || "—";
+  facts.innerHTML = [
+    factCard("Тип", getType(m)),
+    factCard("Год", getYear(m)),
+    factCard("Рейтинг", getRating(m).toFixed(1)),
+    factCard("Голосов", getVotes(m)),
+    factCard("Статус", gkmFormatFactValueV95(m.status)),
+    factCard("Эпизоды", gkmFormatFactValueV95(m.episodes || m.episodeCount || m.numberOfEpisodes || m.number_of_episodes)),
+    factCard("Студия", gkmFormatFactValueV95(m.studio || m.studios || m.productionCompanies || m.networks)),
+    factCard("Страна", gkmFormatFactValueV95(m.country || m.countries || m.origin_country || m.production_countries)),
+    factCard("Возраст", gkmFormatFactValueV95(m.ageRating || m.age_rating)),
+    factCard("Источник", source),
+  ].filter(Boolean).join("");
+}
+
 function collectPlayerLinks(m) {
   const links = [];
 
@@ -2128,18 +2123,7 @@ function openDetails(m) {
 
   const facts = $("detailFacts");
   if (facts) {
-    facts.innerHTML = [
-      factCard("Тип", getType(m)),
-      factCard("Год", getYear(m)),
-      factCard("Рейтинг", getRating(m).toFixed(1)),
-      factCard("Голосов", getVotes(m)),
-      factCard("Статус", m.status),
-      factCard("Эпизоды", m.episodes),
-      factCard("Студия", Array.isArray(m.studio) ? m.studio.join(", ") : m.studio),
-      factCard("Страна", Array.isArray(m.country) ? m.country.join(", ") : m.country),
-      factCard("Возраст", m.ageRating),
-      factCard("Источник", source),
-    ].filter(Boolean).join("");
+    gkmRenderDetailFactsV95(m, source);
   }
 
   renderPlayerButtons(m);
@@ -2149,29 +2133,8 @@ function openDetails(m) {
   if (!dialog.open) dialog.showModal();
   dialog.scrollTop = 0;
 
-  if (KINOPOISK_ENABLED && getKinopoiskApiKey() && (!hasPosterValue(posterValueAny(m)) || !m.overview || !m.kinopoiskId)) {
-    enrichFromKinopoisk(m).then(updated => {
-      if (selectedMovie !== m || !updated) return;
-      const posterEl = $("detailPoster");
-      if (posterEl && hasPosterValue(posterValueAny(updated))) {
-        posterEl.dataset.fallback = gkmPosterFallbackV73(updated);
-        posterEl.src = gkmPosterSrcV73(updated);
-        posterEl.style.display = "block";
-      }
-      const overviewEl = $("detailOverview");
-      if (overviewEl && updated.overview) overviewEl.textContent = updated.overview;
-      const metaEl = $("detailMeta");
-      if (metaEl) {
-        const nextRank = rankOf(updated);
-        metaEl.innerHTML = `
-          <span class="detail-type-pill">${escapeHtml(getType(updated))}</span>
-          <span>${escapeHtml(getYear(updated) || "—")}</span>
-          <span class="detail-rating-pill rank-${nextRank.rank}">${escapeHtml(ratingLabel(updated))}</span>
-          <span>${escapeHtml(getVotes(updated))} голосов</span>
-        `;
-      }
-    }).catch(e => console.warn("Кинопоиск API: не удалось обновить карточку", e));
-  }
+  // V96: Кинопоиск API нельзя вызывать из браузера из-за CORS.
+  // Факты episodes/studio/country добавляются заранее скриптом tools/enrich_kinopoisk_facts.py.
 }
 
 
@@ -4394,6 +4357,1255 @@ if (document.readyState === "loading") {
   window.GKM_AI_CHAT_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 })();
 
+/* === GKM V94 FINAL WORKER ABSOLUTE URL FIX === */
+(function () {
+  window.GKM_V94_WORKER_ABSOLUTE_URL_VERSION = "v94-worker-absolute-url-fix-2026-06-15";
+
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const DEFAULT_SORT = "smart";
+  const SEARCH_URL = new URL("data/fast/search_index.json", window.location.href).href;
+  let timer = 0;
+  let requestId = 0;
+  let worker = null;
+
+  function byId(id) { return document.getElementById(id); }
+  function norm(value) {
+    return String(value || "").toLowerCase().replaceAll("ё", "е").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim();
+  }
+  function setupControls() {
+    const sort = byId("sortFilter");
+    if (sort && sort.dataset.gkmV94 !== "1") {
+      const current = sort.value || DEFAULT_SORT;
+      sort.innerHTML = [
+        ["smart", "Лучшие"],
+        ["rating", "По оценке"],
+        ["votes", "Популярные"],
+        ["year", "Новые"],
+        ["year_old", "Старые"],
+        ["title", "По названию"]
+      ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
+      sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT;
+      sort.dataset.gkmV94 = "1";
+    }
+  }
+  async function setupYears() {
+    setupControls();
+    const year = byId("yearFilter");
+    if (!year || (year.options && year.options.length > 1)) return;
+    try {
+      const res = await fetch("data/fast/meta.json", { cache: "force-cache" });
+      if (!res.ok) return;
+      const meta = await res.json();
+      if (!meta || !Array.isArray(meta.years)) return;
+      const current = year.value;
+      year.innerHTML = `<option value="">Все годы</option>` + meta.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+      if (current) year.value = current;
+    } catch (e) {}
+  }
+  function controls() {
+    return {
+      q: (byId("searchInput") || {}).value || "",
+      type: (byId("typeFilter") || {}).value || "",
+      genre: (byId("genreFilter") || {}).value || "",
+      year: (byId("yearFilter") || {}).value || "",
+      minRating: Number((byId("ratingFilter") || {}).value || 0),
+      sort: (byId("sortFilter") || {}).value || DEFAULT_SORT,
+      tab: typeof currentTab === "string" ? currentTab : "all"
+    };
+  }
+  function active(c) {
+    return Boolean(norm(c.q) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== DEFAULT_SORT));
+  }
+  function draw(page = 1) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · Страница ${currentPage} из ${currentPages}`);
+  }
+  function createWorker() {
+    if (worker) return worker;
+    const code = `
+      const SEARCH_URL=${JSON.stringify(SEARCH_URL)};
+      let indexPromise=null;
+      function norm(value){return String(value||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
+      function keyfix(s){const m={"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};return String(s||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
+      function queries(qRaw){const base=norm(qRaw);const out=new Set(base?[base]:[]);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"]};Object.entries(syn).forEach(([k,a])=>{if(base===k||base.includes(k))a.forEach(x=>out.add(norm(x)));});return [...out].filter(Boolean);}
+      function title(i){return String((i&&(i.ru||i.title_ru||i.name||i.title||i.en||i.original_title||i.original_name))||"");}
+      function year(i){return String((i&&i.year)||"");}
+      function typeOf(i){return String((i&&(i.type||i.category))||"");}
+      function rating(i){return Number((i&&i.rating)||(i&&i.vote_average)||0);}
+      function votes(i){return Number((i&&i.votes)||(i&&i.vote_count)||0);}
+      function genres(i){const g=i&&i.genres;if(Array.isArray(g))return g.map(String);if(typeof g==="string")return g.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);return [];}
+      function tabPass(i,tab){const t=typeOf(i);if(!tab||tab==="all")return true;if(tab==="movies")return t==="Фильм";if(tab==="series")return t==="Сериал";if(tab==="anime")return t==="Аниме";if(tab==="cartoons")return t==="Мультфильм";return true;}
+      function pass(i,c){if(!tabPass(i,c.tab))return false;if(c.type&&typeOf(i)!==c.type)return false;if(c.genre&&!genres(i).includes(c.genre))return false;if(c.year&&year(i)!==String(c.year))return false;if(c.minRating&&rating(i)<Number(c.minRating))return false;return true;}
+      function hay(i){if(i.__hay94)return i.__hay94;i.__hay94=norm([title(i),i.ru,i.en,i.title,i.name,i.original_title,i.original_name,i.english,i.searchTitle].join(" "));return i.__hay94;}
+      function score(i,qs){if(!qs.length)return 1;const h=hay(i);if(!h)return 0;const wh=" "+h+" ";let best=0;for(const q of qs){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+Math.min(votes(i),1000000)/10+rating(i)*100:0;}
+      function sortRows(rows,sort,hasQ){if(sort==="rating")rows.sort((a,b)=>rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>title(a.item).localeCompare(title(b.item),"ru"));else if(hasQ)rows.sort((a,b)=>b.score-a.score);else rows.sort((a,b)=>(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
+      async function loadIndex(){if(!indexPromise){indexPromise=fetch(SEARCH_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index load failed "+r.status);return r.json();});}return indexPromise;}
+      self.onmessage=async e=>{const {id,controls}=e.data||{};try{const started=Date.now();self.postMessage({id,status:"loading"});const index=await loadIndex();const qs=queries(controls.q);const rows=[];for(let i=0;i<index.length;i++){const item=index[i];if(!pass(item,controls))continue;const s=score(item,qs);if(!qs.length||s>0)rows.push({item,score:s});}sortRows(rows,controls.sort,Boolean(qs.length));self.postMessage({id,ok:true,ms:Date.now()-started,results:rows.map(x=>x.item)});}catch(err){self.postMessage({id,ok:false,error:String(err&&err.message||err)});}};
+    `;
+    worker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
+    worker.onmessage = event => {
+      const msg = event.data || {};
+      if (msg.id !== requestId) return;
+      if (msg.status === "loading") {
+        setStatus("Загружаю базу поиска без зависания страницы...");
+        return;
+      }
+      if (!msg.ok) {
+        setStatus("Поиск не сработал: " + (msg.error || "ошибка"));
+        return;
+      }
+      lastSearchResults = Array.isArray(msg.results) ? msg.results : [];
+      draw(1);
+      setStatus(`Найдено: ${lastSearchResults.length} · ${msg.ms || 0} мс`);
+    };
+    return worker;
+  }
+  window.renderSearchPage = draw;
+  window.runSearch = async function () {
+    setupControls();
+    await setupYears();
+    const c = controls();
+    if (!active(c)) {
+      requestId += 1;
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    const q = norm(c.q);
+    if (q && q.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+    requestId += 1;
+    setStatus(q ? `Ищу: ${c.q}...` : "Фильтрую...");
+    createWorker().postMessage({ id: requestId, controls: c });
+  };
+  function schedule(delay) {
+    clearTimeout(timer);
+    timer = setTimeout(() => window.runSearch(), delay);
+  }
+  window.addEventListener("input", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#searchInput"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    schedule(450);
+  }, true);
+  window.addEventListener("change", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#typeFilter,#genreFilter,#yearFilter,#ratingFilter,#sortFilter"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    schedule(80);
+  }, true);
+  window.addEventListener("click", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#resetBtn"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    ["searchInput", "typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(name => {
+      const el = byId(name);
+      if (el) el.value = "";
+    });
+    const sort = byId("sortFilter");
+    if (sort) sort.value = DEFAULT_SORT;
+    schedule(30);
+  }, true);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
+  else { setupControls(); setupYears(); }
+})();
+
+window.GKM_V96_SERVER_FACTS_VERSION = "v96-server-side-kinopoisk-facts-2026-06-15";
+window.GKM_V97_WORKFLOW_FIX_VERSION = "v97-workflow-fix-server-facts-2026-06-15";
+window.GKM_V98_WORKFLOW_CACHE_FIX_VERSION = "v98-workflow-cache-fix-kinopoisk-facts-2026-06-15";
+window.GKM_V99_BROWSER_KINOPOISK_NOOP_VERSION = "v99-browser-kinopoisk-noop-2026-06-15";
+window.GKM_V100_ROOT_PATCH_VERSION = "v100-root-app-workflow-tools-fixed-2026-06-15";
+
+/* === GKM V92 WORKER SEARCH NO PAGE FREEZE === */
+(function () {
+  window.GKM_V92_WORKER_SEARCH_VERSION = "v92-worker-search-no-page-freeze-2026-06-15";
+
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const DEFAULT_SORT = "smart";
+  let timer = 0;
+  let requestId = 0;
+  let worker = null;
+
+  function byId(id) { return document.getElementById(id); }
+
+  function setupControls() {
+    const sort = byId("sortFilter");
+    if (sort && sort.dataset.gkmV92 !== "1") {
+      const current = sort.value || DEFAULT_SORT;
+      sort.innerHTML = [
+        ["smart", "Лучшие"],
+        ["rating", "По оценке"],
+        ["votes", "Популярные"],
+        ["year", "Новые"],
+        ["year_old", "Старые"],
+        ["title", "По названию"]
+      ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
+      sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT;
+      sort.dataset.gkmV92 = "1";
+    }
+
+    const year = byId("yearFilter");
+    if (year && (!year.options || year.options.length < 2) && window.metaData && Array.isArray(window.metaData.years)) {
+      const current = year.value;
+      year.innerHTML = `<option value="">Все годы</option>` + window.metaData.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+      if (current) year.value = current;
+    }
+  }
+
+  async function setupYears() {
+    setupControls();
+    const year = byId("yearFilter");
+    if (!year || (year.options && year.options.length > 1)) return;
+    try {
+      const res = await fetch("data/fast/meta.json", { cache: "force-cache" });
+      if (!res.ok) return;
+      const meta = await res.json();
+      if (!meta || !Array.isArray(meta.years)) return;
+      const current = year.value;
+      year.innerHTML = `<option value="">Все годы</option>` + meta.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+      if (current) year.value = current;
+    } catch (e) {}
+  }
+
+  function values() {
+    return {
+      q: (byId("searchInput") || {}).value || "",
+      type: (byId("typeFilter") || {}).value || "",
+      genre: (byId("genreFilter") || {}).value || "",
+      year: (byId("yearFilter") || {}).value || "",
+      minRating: Number((byId("ratingFilter") || {}).value || 0),
+      sort: (byId("sortFilter") || {}).value || DEFAULT_SORT,
+      tab: typeof currentTab === "string" ? currentTab : "all"
+    };
+  }
+
+  function normLocal(value) {
+    return String(value || "").toLowerCase().replaceAll("ё", "е").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim();
+  }
+
+  function isActive(c) {
+    return Boolean(normLocal(c.q) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== DEFAULT_SORT));
+  }
+
+  function draw(page = 1) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · Страница ${currentPage} из ${currentPages}`);
+  }
+
+  function createWorker() {
+    if (worker) return worker;
+    const workerCode = `
+      let indexPromise = null;
+      function norm(value) {
+        return String(value || "").toLowerCase().replaceAll("ё", "е").replace(/&/g, " and ").replace(/['’\\\`]/g, "").replace(/[^\\p{L}\\p{N}:]+/gu, " ").replace(/\\s+/g, " ").trim();
+      }
+      function keyfix(s) {
+        const map = {"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};
+        return String(s || "").split("").map(ch => map[ch.toLowerCase()] || ch).join("");
+      }
+      function queries(qRaw) {
+        const base = norm(qRaw);
+        const out = new Set(base ? [base] : []);
+        const fixed = norm(keyfix(base));
+        if (fixed && fixed !== base) out.add(fixed);
+        const syn = {"матрица":["matrix","the matrix"],"шазам":["shazam"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"]};
+        Object.entries(syn).forEach(([k, arr]) => { if (base === k || base.includes(k)) arr.forEach(x => out.add(norm(x))); });
+        return [...out].filter(Boolean);
+      }
+      function title(item) {
+        return String((item && (item.ru || item.title_ru || item.name || item.title || item.en || item.original_title || item.original_name)) || "");
+      }
+      function year(item) { return String((item && item.year) || ""); }
+      function typeOf(item) { return String((item && (item.type || item.category)) || ""); }
+      function rating(item) { return Number((item && item.rating) || (item && item.vote_average) || 0); }
+      function votes(item) { return Number((item && item.votes) || (item && item.vote_count) || 0); }
+      function genres(item) {
+        const g = item && item.genres;
+        if (Array.isArray(g)) return g.map(String);
+        if (typeof g === "string") return g.split(/[,|/]+/).map(x => x.trim()).filter(Boolean);
+        return [];
+      }
+      function tabPass(item, tab) {
+        const t = typeOf(item);
+        if (!tab || tab === "all") return true;
+        if (tab === "movies") return t === "Фильм";
+        if (tab === "series") return t === "Сериал";
+        if (tab === "anime") return t === "Аниме";
+        if (tab === "cartoons") return t === "Мультфильм";
+        return true;
+      }
+      function pass(item, c) {
+        if (!tabPass(item, c.tab)) return false;
+        if (c.type && typeOf(item) !== c.type) return false;
+        if (c.genre && !genres(item).includes(c.genre)) return false;
+        if (c.year && year(item) !== String(c.year)) return false;
+        if (c.minRating && rating(item) < Number(c.minRating)) return false;
+        return true;
+      }
+      function hay(item) {
+        if (item.__hay92) return item.__hay92;
+        item.__hay92 = norm([title(item), item.ru, item.en, item.title, item.name, item.original_title, item.original_name, item.english, item.searchTitle].join(" "));
+        return item.__hay92;
+      }
+      function score(item, qs) {
+        if (!qs.length) return 1;
+        const h = hay(item);
+        if (!h) return 0;
+        const wh = " " + h + " ";
+        let best = 0;
+        for (const q of qs) {
+          if (h === q) best = Math.max(best, 10000000);
+          else if (h.startsWith(q + " ")) best = Math.max(best, 9000000);
+          else if (wh.includes(" " + q + " ")) best = Math.max(best, 8000000);
+          else if (h.includes(q)) best = Math.max(best, 7000000);
+          else {
+            const parts = q.split(" ").filter(p => p.length > 1);
+            if (parts.length && parts.every(p => h.includes(p))) best = Math.max(best, 6000000 + parts.length * 1000);
+          }
+        }
+        return best ? best + Math.min(votes(item), 1000000) / 10 + rating(item) * 100 : 0;
+      }
+      function sortRows(rows, sort, hasQ) {
+        if (sort === "rating") rows.sort((a,b) => rating(b.item) - rating(a.item) || votes(b.item) - votes(a.item));
+        else if (sort === "votes") rows.sort((a,b) => votes(b.item) - votes(a.item) || rating(b.item) - rating(a.item));
+        else if (sort === "year") rows.sort((a,b) => Number(year(b.item) || 0) - Number(year(a.item) || 0) || votes(b.item) - votes(a.item));
+        else if (sort === "year_old") rows.sort((a,b) => Number(year(a.item) || 9999) - Number(year(b.item) || 9999) || votes(b.item) - votes(a.item));
+        else if (sort === "title") rows.sort((a,b) => title(a.item).localeCompare(title(b.item), "ru"));
+        else if (hasQ) rows.sort((a,b) => b.score - a.score);
+        else rows.sort((a,b) => (rating(b.item) * 100000 + Math.min(votes(b.item), 250000) + Number(year(b.item) || 0)) - (rating(a.item) * 100000 + Math.min(votes(a.item), 250000) + Number(year(a.item) || 0)));
+      }
+      async function loadIndex() {
+        if (!indexPromise) {
+          indexPromise = fetch("data/fast/search_index.json", { cache: "force-cache" }).then(r => {
+            if (!r.ok) throw new Error("search_index load failed");
+            return r.json();
+          });
+        }
+        return indexPromise;
+      }
+      self.onmessage = async (event) => {
+        const { id, controls } = event.data || {};
+        try {
+          const started = Date.now();
+          self.postMessage({ id, status: "loading" });
+          const index = await loadIndex();
+          const qs = queries(controls.q);
+          const rows = [];
+          for (let i = 0; i < index.length; i++) {
+            const item = index[i];
+            if (!pass(item, controls)) continue;
+            const s = score(item, qs);
+            if (!qs.length || s > 0) rows.push({ item, score: s });
+          }
+          sortRows(rows, controls.sort, Boolean(qs.length));
+          self.postMessage({ id, ok: true, ms: Date.now() - started, results: rows.map(x => x.item) });
+        } catch (err) {
+          self.postMessage({ id, ok: false, error: String(err && err.message || err) });
+        }
+      };
+    `;
+    worker = new Worker(URL.createObjectURL(new Blob([workerCode], { type: "text/javascript" })));
+    worker.onmessage = event => {
+      const msg = event.data || {};
+      if (msg.id !== requestId) return;
+      if (msg.status === "loading") {
+        setStatus("Загружаю базу поиска без зависания страницы...");
+        return;
+      }
+      if (!msg.ok) {
+        setStatus("Поиск не сработал: " + (msg.error || "ошибка"));
+        return;
+      }
+      lastSearchResults = Array.isArray(msg.results) ? msg.results : [];
+      draw(1);
+      setStatus(`Найдено: ${lastSearchResults.length} · ${msg.ms || 0} мс`);
+    };
+    return worker;
+  }
+
+  window.renderSearchPage = draw;
+
+  window.runSearch = async function () {
+    setupControls();
+    await setupYears();
+    const c = values();
+    if (!isActive(c)) {
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    const q = normLocal(c.q);
+    if (q && q.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+    requestId += 1;
+    setStatus(q ? `Ищу: ${c.q}...` : "Фильтрую...");
+    createWorker().postMessage({ id: requestId, controls: c });
+  };
+
+  function schedule(delay) {
+    clearTimeout(timer);
+    timer = setTimeout(() => window.runSearch(), delay);
+  }
+
+  window.addEventListener("input", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#searchInput"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    schedule(450);
+  }, true);
+
+  window.addEventListener("change", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#typeFilter,#genreFilter,#yearFilter,#ratingFilter,#sortFilter"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    schedule(80);
+  }, true);
+
+  window.addEventListener("click", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#resetBtn"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    ["searchInput", "typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(name => {
+      const el = byId(name);
+      if (el) el.value = "";
+    });
+    const sort = byId("sortFilter");
+    if (sort) sort.value = DEFAULT_SORT;
+    schedule(30);
+  }, true);
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
+  else { setupControls(); setupYears(); }
+})();
+
+/* === GKM V94 FINAL WORKER SEARCH ABSOLUTE URL OVERRIDE AT EOF === */
+(function () {
+  window.GKM_V94_WORKER_ABSOLUTE_URL_VERSION = "v94-worker-absolute-url-fix-2026-06-15";
+
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const DEFAULT_SORT = "smart";
+  const SEARCH_URL = new URL("data/fast/search_index.json", window.location.href).href;
+  let timer = 0;
+  let requestId = 0;
+  let worker = null;
+
+  function byId(id) { return document.getElementById(id); }
+  function norm(value) {
+    return String(value || "").toLowerCase().replaceAll("ё", "е").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim();
+  }
+  function setupControls() {
+    const sort = byId("sortFilter");
+    if (sort && sort.dataset.gkmV94 !== "1") {
+      const current = sort.value || DEFAULT_SORT;
+      sort.innerHTML = [
+        ["smart", "Лучшие"],
+        ["rating", "По оценке"],
+        ["votes", "Популярные"],
+        ["year", "Новые"],
+        ["year_old", "Старые"],
+        ["title", "По названию"]
+      ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
+      sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT;
+      sort.dataset.gkmV94 = "1";
+    }
+  }
+  async function setupYears() {
+    setupControls();
+    const year = byId("yearFilter");
+    if (!year || (year.options && year.options.length > 1)) return;
+    try {
+      const res = await fetch("data/fast/meta.json", { cache: "force-cache" });
+      if (!res.ok) return;
+      const meta = await res.json();
+      if (!meta || !Array.isArray(meta.years)) return;
+      const current = year.value;
+      year.innerHTML = `<option value="">Все годы</option>` + meta.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+      if (current) year.value = current;
+    } catch (e) {}
+  }
+  function controls() {
+    return {
+      q: (byId("searchInput") || {}).value || "",
+      type: (byId("typeFilter") || {}).value || "",
+      genre: (byId("genreFilter") || {}).value || "",
+      year: (byId("yearFilter") || {}).value || "",
+      minRating: Number((byId("ratingFilter") || {}).value || 0),
+      sort: (byId("sortFilter") || {}).value || DEFAULT_SORT,
+      tab: typeof currentTab === "string" ? currentTab : "all"
+    };
+  }
+  function active(c) {
+    return Boolean(norm(c.q) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== DEFAULT_SORT));
+  }
+  function draw(page = 1) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · Страница ${currentPage} из ${currentPages}`);
+  }
+  function createWorker() {
+    if (worker) return worker;
+    const code = `
+      const SEARCH_URL=${JSON.stringify(SEARCH_URL)};
+      let indexPromise = null;
+      function norm(value){return String(value||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
+      function keyfix(s){const m={"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};return String(s||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
+      function queries(qRaw){const base=norm(qRaw);const out=new Set(base?[base]:[]);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"]};Object.entries(syn).forEach(([k,a])=>{if(base===k||base.includes(k))a.forEach(x=>out.add(norm(x)));});return [...out].filter(Boolean);}
+      function title(i){return String((i&&(i.ru||i.title_ru||i.name||i.title||i.en||i.original_title||i.original_name))||"");}
+      function year(i){return String((i&&i.year)||"");}
+      function typeOf(i){return String((i&&(i.type||i.category))||"");}
+      function rating(i){return Number((i&&i.rating)||(i&&i.vote_average)||0);}
+      function votes(i){return Number((i&&i.votes)||(i&&i.vote_count)||0);}
+      function genres(i){const g=i&&i.genres;if(Array.isArray(g))return g.map(String);if(typeof g==="string")return g.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);return [];}
+      function tabPass(i,tab){const t=typeOf(i);if(!tab||tab==="all")return true;if(tab==="movies")return t==="Фильм";if(tab==="series")return t==="Сериал";if(tab==="anime")return t==="Аниме";if(tab==="cartoons")return t==="Мультфильм";return true;}
+      function pass(i,c){if(!tabPass(i,c.tab))return false;if(c.type&&typeOf(i)!==c.type)return false;if(c.genre&&!genres(i).includes(c.genre))return false;if(c.year&&year(i)!==String(c.year))return false;if(c.minRating&&rating(i)<Number(c.minRating))return false;return true;}
+      function hay(i){if(i.__hay93)return i.__hay93;i.__hay93=norm([title(i),i.ru,i.en,i.title,i.name,i.original_title,i.original_name,i.english,i.searchTitle].join(" "));return i.__hay93;}
+      function score(i,qs){if(!qs.length)return 1;const h=hay(i);if(!h)return 0;const wh=" "+h+" ";let best=0;for(const q of qs){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+Math.min(votes(i),1000000)/10+rating(i)*100:0;}
+      function sortRows(rows,sort,hasQ){if(sort==="rating")rows.sort((a,b)=>rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>title(a.item).localeCompare(title(b.item),"ru"));else if(hasQ)rows.sort((a,b)=>b.score-a.score);else rows.sort((a,b)=>(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
+      async function loadIndex(){if(!indexPromise){indexPromise=fetch(SEARCH_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index load failed "+r.status);return r.json();});}return indexPromise;}
+      self.onmessage=async e=>{const {id,controls}=e.data||{};try{const started=Date.now();self.postMessage({id,status:"loading"});const index=await loadIndex();const qs=queries(controls.q);const rows=[];for(let i=0;i<index.length;i++){const item=index[i];if(!pass(item,controls))continue;const s=score(item,qs);if(!qs.length||s>0)rows.push({item,score:s});}sortRows(rows,controls.sort,Boolean(qs.length));self.postMessage({id,ok:true,ms:Date.now()-started,results:rows.map(x=>x.item)});}catch(err){self.postMessage({id,ok:false,error:String(err&&err.message||err)});}};
+    `;
+    worker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
+    worker.onmessage = event => {
+      const msg = event.data || {};
+      if (msg.id !== requestId) return;
+      if (msg.status === "loading") {
+        setStatus("Загружаю базу поиска без зависания страницы...");
+        return;
+      }
+      if (!msg.ok) {
+        setStatus("Поиск не сработал: " + (msg.error || "ошибка"));
+        return;
+      }
+      lastSearchResults = Array.isArray(msg.results) ? msg.results : [];
+      draw(1);
+      setStatus(`Найдено: ${lastSearchResults.length} · ${msg.ms || 0} мс`);
+    };
+    return worker;
+  }
+  window.renderSearchPage = draw;
+  window.runSearch = async function () {
+    setupControls();
+    await setupYears();
+    const c = controls();
+    if (!active(c)) {
+      requestId += 1;
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    const q = norm(c.q);
+    if (q && q.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+    requestId += 1;
+    setStatus(q ? `Ищу: ${c.q}...` : "Фильтрую...");
+    createWorker().postMessage({ id: requestId, controls: c });
+  };
+  function schedule(delay) {
+    clearTimeout(timer);
+    timer = setTimeout(() => window.runSearch(), delay);
+  }
+  window.addEventListener("input", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#searchInput"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    schedule(450);
+  }, true);
+  window.addEventListener("change", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#typeFilter,#genreFilter,#yearFilter,#ratingFilter,#sortFilter"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    schedule(80);
+  }, true);
+  window.addEventListener("click", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#resetBtn"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    ["searchInput", "typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(name => {
+      const el = byId(name);
+      if (el) el.value = "";
+    });
+    const sort = byId("sortFilter");
+    if (sort) sort.value = DEFAULT_SORT;
+    schedule(30);
+  }, true);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
+  else { setupControls(); setupYears(); }
+})();
+
+/* === GKM V90 NON-BLOCKING SEARCH + YEAR FILTER FINAL === */
+(function () {
+  window.GKM_V90_NON_BLOCKING_SEARCH_VERSION = "v90-non-blocking-search-year-filter-2026-06-15";
+
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const SEARCH_CHUNK = 2500;
+  const DEFAULT_SORT = "smart";
+  let activeRun = 0;
+  let inputTimer = 0;
+
+  function id(name) {
+    return document.getElementById(name);
+  }
+
+  function sleepFrame() {
+    return new Promise(resolve => setTimeout(resolve, 0));
+  }
+
+  function norm(value) {
+    return String(value || "")
+      .toLowerCase()
+      .replaceAll("ё", "е")
+      .replace(/&/g, " and ")
+      .replace(/['’`]/g, "")
+      .replace(/[^\p{L}\p{N}:]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function keyboardFix(text) {
+    const map = {
+      "q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ",
+      "a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э",
+      "z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"
+    };
+    return String(text || "").split("").map(ch => map[ch.toLowerCase()] || ch).join("");
+  }
+
+  function variants(query) {
+    const base = norm(query);
+    const out = new Set([base]);
+    const fixed = norm(keyboardFix(base));
+    if (fixed && fixed !== base) out.add(fixed);
+    const syn = {
+      "матрица": ["matrix", "the matrix"],
+      "шазам": ["shazam"],
+      "дэдпул": ["deadpool", "дедпул"],
+      "дедпул": ["deadpool", "дэдпул"],
+      "наруто": ["naruto"],
+      "ван пис": ["one piece", "ванпис"],
+      "ванпис": ["one piece", "ван пис"]
+    };
+    for (const [key, list] of Object.entries(syn)) {
+      if (base === key || base.includes(key)) list.forEach(x => out.add(norm(x)));
+    }
+    return [...out].filter(Boolean);
+  }
+
+  function ensureSortOptions() {
+    const sort = id("sortFilter");
+    if (!sort || sort.dataset.gkmV90SortOptions === "1") return;
+    const current = sort.value || DEFAULT_SORT;
+    sort.innerHTML = [
+      ["smart", "Лучшие"],
+      ["rating", "По оценке"],
+      ["votes", "Популярные"],
+      ["year", "Новые"],
+      ["year_old", "Старые"],
+      ["title", "По названию"]
+    ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
+    sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT;
+    sort.dataset.gkmV90SortOptions = "1";
+  }
+
+  function fillYears(years) {
+    const year = id("yearFilter");
+    if (!year || !Array.isArray(years) || !years.length) return;
+    const current = year.value;
+    const clean = [...new Set(years.map(x => String(x || "").trim()).filter(x => /^\d{4}$/.test(x)))]
+      .sort((a, b) => Number(b) - Number(a));
+    if (!clean.length) return;
+    year.innerHTML = `<option value="">Все годы</option>` + clean.map(y => `<option value="${y}">${y}</option>`).join("");
+    if (current && clean.includes(current)) year.value = current;
+    year.dataset.gkmV90Years = "1";
+  }
+
+  async function ensureYears() {
+    const year = id("yearFilter");
+    if (!year) return;
+    if (year.options && year.options.length > 1) return;
+    if (window.metaData && Array.isArray(window.metaData.years)) fillYears(window.metaData.years);
+    if (year.options && year.options.length > 1) return;
+    try {
+      const res = await fetch("data/fast/meta.json", { cache: "force-cache" });
+      if (res.ok) {
+        const meta = await res.json();
+        if (meta && Array.isArray(meta.years)) fillYears(meta.years);
+      }
+    } catch (e) {}
+  }
+
+  function titleText(item) {
+    if (!item || typeof item !== "object") return "";
+    if (item.__gkmHayV90) return item.__gkmHayV90;
+    const t = typeof titleOf === "function" ? titleOf(item) : "";
+    item.__gkmHayV90 = norm([
+      t,
+      item.ru,
+      item.en,
+      item.title,
+      item.name,
+      item.title_ru,
+      item.ruTitle,
+      item.originalTitle,
+      item.original_title,
+      item.original_name,
+      item.english,
+      item.title_en,
+      item.searchTitle,
+      ...(Array.isArray(item.aliases) ? item.aliases : []),
+      ...(Array.isArray(item.names) ? item.names : [])
+    ].join(" "));
+    return item.__gkmHayV90;
+  }
+
+  function searchScore(item, queryList) {
+    if (!queryList.length) return 1;
+    const hay = titleText(item);
+    if (!hay) return 0;
+    const wrapped = " " + hay + " ";
+    let best = 0;
+    for (const q of queryList) {
+      if (hay === q) best = Math.max(best, 10000000);
+      else if (hay.startsWith(q + " ")) best = Math.max(best, 9000000);
+      else if (wrapped.includes(" " + q + " ")) best = Math.max(best, 8000000);
+      else if (hay.includes(q)) best = Math.max(best, 7000000);
+      else {
+        const parts = q.split(" ").filter(p => p.length > 1);
+        if (parts.length && parts.every(p => hay.includes(p))) best = Math.max(best, 6000000 + parts.length * 1000);
+      }
+    }
+    if (!best) return 0;
+    return best + Math.min(Number(getVotes(item) || 0), 1000000) / 10 + Number(getRating(item) || 0) * 100;
+  }
+
+  function controls() {
+    return {
+      qRaw: (id("searchInput") || {}).value || "",
+      type: (id("typeFilter") || {}).value || "",
+      genre: (id("genreFilter") || {}).value || "",
+      year: (id("yearFilter") || {}).value || "",
+      minRating: Number((id("ratingFilter") || {}).value || 0),
+      sort: (id("sortFilter") || {}).value || DEFAULT_SORT
+    };
+  }
+
+  function hasActive(c) {
+    return Boolean(norm(c.qRaw) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== DEFAULT_SORT));
+  }
+
+  function passes(item, c) {
+    if (c.type && getType(item) !== c.type) return false;
+    if (c.genre && !getGenres(item).includes(c.genre)) return false;
+    if (c.year && String(getYear(item) || "") !== String(c.year)) return false;
+    if (c.minRating && Number(getRating(item) || 0) < c.minRating) return false;
+    return true;
+  }
+
+  function sortResults(rows, sort, hasQuery) {
+    if (sort === "rating") rows.sort((a, b) => Number(getRating(b.item) || 0) - Number(getRating(a.item) || 0) || Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0));
+    else if (sort === "votes") rows.sort((a, b) => Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0) || Number(getRating(b.item) || 0) - Number(getRating(a.item) || 0));
+    else if (sort === "year") rows.sort((a, b) => Number(getYear(b.item) || 0) - Number(getYear(a.item) || 0) || Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0));
+    else if (sort === "year_old") rows.sort((a, b) => Number(getYear(a.item) || 9999) - Number(getYear(b.item) || 9999) || Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0));
+    else if (sort === "title") rows.sort((a, b) => titleOf(a.item).localeCompare(titleOf(b.item), "ru"));
+    else if (hasQuery) rows.sort((a, b) => b.score - a.score);
+    else rows.sort((a, b) => {
+      const av = Number(getVotes(a.item) || 0);
+      const bv = Number(getVotes(b.item) || 0);
+      const ar = Number(getRating(a.item) || 0);
+      const br = Number(getRating(b.item) || 0);
+      const ay = Number(getYear(a.item) || 0);
+      const by = Number(getYear(b.item) || 0);
+      return ((br * 100000) + Math.min(bv, 250000) + by) - ((ar * 100000) + Math.min(av, 250000) + ay);
+    });
+  }
+
+  function drawResults(page) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · Страница ${currentPage} из ${currentPages}`);
+  }
+
+  window.renderSearchPage = drawResults;
+
+  window.runSearch = async function () {
+    const run = ++activeRun;
+    ensureSortOptions();
+    await ensureYears();
+
+    const c = controls();
+    const q = norm(c.qRaw);
+    if (!hasActive(c)) {
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    if (q && q.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+
+    const qv = variants(q);
+    const t0 = performance && performance.now ? performance.now() : Date.now();
+    setStatus(q ? `Ищу: ${c.qRaw}...` : "Фильтрую...");
+
+    const index = await ensureSearchIndex();
+    if (run !== activeRun) return;
+
+    let source = Array.isArray(index) ? index : [];
+    if (typeof applyTabFilter === "function") source = applyTabFilter(source);
+
+    const rows = [];
+    for (let i = 0; i < source.length; i++) {
+      const item = source[i];
+      if (passes(item, c)) {
+        const score = searchScore(item, qv);
+        if (!qv.length || score > 0) rows.push({ item, score });
+      }
+      if (i > 0 && i % SEARCH_CHUNK === 0) {
+        if (run !== activeRun) return;
+        setStatus(q ? `Ищу: ${c.qRaw}... ${Math.round(i / source.length * 100)}%` : `Фильтрую... ${Math.round(i / source.length * 100)}%`);
+        await sleepFrame();
+      }
+    }
+
+    if (run !== activeRun) return;
+    sortResults(rows, c.sort, Boolean(qv.length));
+    if (run !== activeRun) return;
+
+    lastSearchResults = rows.map(x => x.item);
+    drawResults(1);
+    const t1 = performance && performance.now ? performance.now() : Date.now();
+    setStatus(`Найдено: ${lastSearchResults.length} · ${Math.round(t1 - t0)} мс`);
+  };
+
+  function scheduleSearch(delay) {
+    clearTimeout(inputTimer);
+    inputTimer = setTimeout(() => window.runSearch(), delay);
+  }
+
+  function interceptInput(event) {
+    const target = event.target;
+    if (!target || !target.closest || !target.closest("#searchInput")) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    scheduleSearch(350);
+  }
+
+  function interceptChange(event) {
+    const target = event.target;
+    if (!target || !target.closest) return;
+    if (!target.closest("#typeFilter,#genreFilter,#yearFilter,#ratingFilter,#sortFilter")) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    scheduleSearch(80);
+  }
+
+  function interceptReset(event) {
+    const target = event.target;
+    if (!target || !target.closest || !target.closest("#resetBtn")) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    ["searchInput", "typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(name => {
+      const el = id(name);
+      if (el) el.value = "";
+    });
+    const sort = id("sortFilter");
+    if (sort) sort.value = DEFAULT_SORT;
+    scheduleSearch(30);
+  }
+
+  function boot() {
+    ensureSortOptions();
+    ensureYears();
+    window.addEventListener("input", interceptInput, true);
+    window.addEventListener("change", interceptChange, true);
+    window.addEventListener("click", interceptReset, true);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
+
+/* === GKM V89 YEAR FILTER AND CLEAR SORTS === */
+(function () {
+  window.GKM_V89_YEAR_SORT_FILTER_VERSION = "v89-year-filter-clear-sorts-2026-06-15";
+
+  const DEFAULT_SORT_V89 = "smart";
+
+  function byIdV89(id) {
+    return document.getElementById(id);
+  }
+
+  function normV89(value) {
+    return String(value || "")
+      .toLowerCase()
+      .replaceAll("ё", "е")
+      .replace(/&/g, " and ")
+      .replace(/[^\p{L}\p{N}:]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function ensureSortOptionsV89() {
+    const sort = byIdV89("sortFilter");
+    if (!sort || sort.dataset.gkmV89SortOptions === "1") return;
+
+    const current = sort.value || DEFAULT_SORT_V89;
+    sort.innerHTML = [
+      ["smart", "Лучшие"],
+      ["rating", "По оценке"],
+      ["votes", "Популярные"],
+      ["year", "Новые"],
+      ["year_old", "Старые"],
+      ["title", "По названию"]
+    ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
+
+    sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT_V89;
+    sort.dataset.gkmV89SortOptions = "1";
+  }
+
+  function setYearOptionsV89(years) {
+    const select = byIdV89("yearFilter");
+    if (!select || !Array.isArray(years) || !years.length) return;
+
+    const clean = [...new Set(years.map(y => String(y || "").trim()).filter(Boolean))]
+      .filter(y => /^\d{4}$/.test(y))
+      .sort((a, b) => Number(b) - Number(a));
+
+    if (!clean.length) return;
+
+    const current = select.value;
+    select.innerHTML = `<option value="">Все годы</option>` +
+      clean.map(y => `<option value="${y}">${y}</option>`).join("");
+    if (current && clean.includes(current)) select.value = current;
+    select.dataset.gkmV89YearReady = "1";
+  }
+
+  async function ensureYearFilterV89() {
+    const select = byIdV89("yearFilter");
+    if (!select) return;
+
+    if (window.metaData && Array.isArray(window.metaData.years)) {
+      setYearOptionsV89(window.metaData.years);
+    }
+
+    if (select.options && select.options.length > 1) return;
+
+    try {
+      const res = await fetch("data/fast/meta.json", { cache: "no-store" });
+      if (!res.ok) return;
+      const meta = await res.json();
+      if (meta && Array.isArray(meta.years)) setYearOptionsV89(meta.years);
+    } catch (e) {}
+  }
+
+  function titleHayV89(item) {
+    if (!item || typeof item !== "object") return "";
+    if (item.__gkmTitleHayV89) return item.__gkmTitleHayV89;
+    const title = typeof titleOf === "function" ? titleOf(item) : "";
+    item.__gkmTitleHayV89 = normV89([
+      title,
+      item.ru,
+      item.en,
+      item.title,
+      item.name,
+      item.title_ru,
+      item.ruTitle,
+      item.originalTitle,
+      item.original_title,
+      item.original_name,
+      item.english,
+      item.title_en,
+      item.searchTitle,
+      ...(Array.isArray(item.aliases) ? item.aliases : []),
+      ...(Array.isArray(item.names) ? item.names : [])
+    ].join(" "));
+    return item.__gkmTitleHayV89;
+  }
+
+  function scoreSearchV89(item, query) {
+    if (!query) return 1;
+    const hay = titleHayV89(item);
+    if (!hay) return 0;
+
+    const wrapped = " " + hay + " ";
+    let score = 0;
+    if (hay === query) score = 10000000;
+    else if (hay.startsWith(query + " ")) score = 9000000;
+    else if (wrapped.includes(" " + query + " ")) score = 8000000;
+    else if (hay.includes(query)) score = 7000000;
+    else {
+      const parts = query.split(" ").filter(x => x.length > 1);
+      if (parts.length && parts.every(part => hay.includes(part))) score = 6000000 + parts.length * 1000;
+    }
+
+    if (!score) return 0;
+    score += Math.min(Number(getVotes(item) || 0), 1000000) / 10;
+    score += Number(getRating(item) || 0) * 100;
+    return score;
+  }
+
+  function hasControlsV89() {
+    const q = normV89((byIdV89("searchInput") || {}).value || "");
+    const sort = (byIdV89("sortFilter") || {}).value || DEFAULT_SORT_V89;
+    return Boolean(
+      q ||
+      ((byIdV89("typeFilter") || {}).value || "") ||
+      ((byIdV89("genreFilter") || {}).value || "") ||
+      ((byIdV89("yearFilter") || {}).value || "") ||
+      ((byIdV89("ratingFilter") || {}).value || "") ||
+      (sort && sort !== DEFAULT_SORT_V89)
+    );
+  }
+
+  function applyFiltersAndSortV89(list, query) {
+    const type = (byIdV89("typeFilter") || {}).value || "";
+    const genre = (byIdV89("genreFilter") || {}).value || "";
+    const year = (byIdV89("yearFilter") || {}).value || "";
+    const minRating = Number(((byIdV89("ratingFilter") || {}).value || 0));
+    const sort = (byIdV89("sortFilter") || {}).value || DEFAULT_SORT_V89;
+
+    let out = Array.isArray(list) ? list.slice() : [];
+    if (type) out = out.filter(item => getType(item) === type);
+    if (genre) out = out.filter(item => getGenres(item).includes(genre));
+    if (year) out = out.filter(item => String(getYear(item) || "") === String(year));
+    if (minRating) out = out.filter(item => Number(getRating(item) || 0) >= minRating);
+
+    if (query) {
+      out = out
+        .map(item => ({ item, score: scoreSearchV89(item, query) }))
+        .filter(x => x.score > 0);
+    } else {
+      out = out.map(item => ({ item, score: 0 }));
+    }
+
+    if (sort === "rating") {
+      out.sort((a, b) => Number(getRating(b.item) || 0) - Number(getRating(a.item) || 0) || Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0));
+    } else if (sort === "votes") {
+      out.sort((a, b) => Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0) || Number(getRating(b.item) || 0) - Number(getRating(a.item) || 0));
+    } else if (sort === "year") {
+      out.sort((a, b) => Number(getYear(b.item) || 0) - Number(getYear(a.item) || 0) || Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0));
+    } else if (sort === "year_old") {
+      out.sort((a, b) => Number(getYear(a.item) || 9999) - Number(getYear(b.item) || 9999) || Number(getVotes(b.item) || 0) - Number(getVotes(a.item) || 0));
+    } else if (sort === "title") {
+      out.sort((a, b) => titleOf(a.item).localeCompare(titleOf(b.item), "ru"));
+    } else if (query) {
+      out.sort((a, b) => b.score - a.score);
+    } else {
+      out.sort((a, b) => {
+        const ar = Number(getRating(a.item) || 0);
+        const br = Number(getRating(b.item) || 0);
+        const av = Number(getVotes(a.item) || 0);
+        const bv = Number(getVotes(b.item) || 0);
+        const ay = Number(getYear(a.item) || 0);
+        const by = Number(getYear(b.item) || 0);
+        return ((br * 100000) + Math.min(bv, 250000) + by) - ((ar * 100000) + Math.min(av, 250000) + ay);
+      });
+    }
+
+    return out.map(x => x.item);
+  }
+
+  window.runSearch = async function() {
+    ensureSortOptionsV89();
+    await ensureYearFilterV89();
+
+    const input = byIdV89("searchInput");
+    const queryRaw = input ? input.value : "";
+    const query = normV89(queryRaw);
+
+    if (!hasControlsV89()) {
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+
+    if (query && query.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+
+    setStatus(query ? `Ищу: ${queryRaw}...` : "Фильтрую...");
+    const index = await ensureSearchIndex();
+    let scoped = Array.isArray(index) ? index : [];
+    if (typeof applyTabFilter === "function") scoped = applyTabFilter(scoped);
+
+    lastSearchResults = applyFiltersAndSortV89(scoped, query);
+    currentPage = 1;
+    currentPages = Math.max(1, Math.ceil(lastSearchResults.length / PAGE_SIZE));
+    const pageItems = lastSearchResults.slice(0, PAGE_SIZE);
+    currentItems = pageItems;
+    renderList(pageItems, `Найдено: ${lastSearchResults.length} · Страница 1 из ${currentPages}`);
+    setStatus(`Найдено: ${lastSearchResults.length}`);
+  };
+
+  window.renderSearchPage = function(page = 1) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE_SIZE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE_SIZE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE_SIZE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · Страница ${currentPage} из ${currentPages}`);
+  };
+
+  function bindV89() {
+    ensureSortOptionsV89();
+    ensureYearFilterV89();
+
+    ["typeFilter", "genreFilter", "yearFilter", "ratingFilter", "sortFilter"].forEach(id => {
+      const el = byIdV89(id);
+      if (!el || el.dataset.gkmV89Bound === "1") return;
+      el.dataset.gkmV89Bound = "1";
+      el.addEventListener("change", function(event) {
+        event.stopPropagation();
+        if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+        clearTimeout(window.GKM_V89_FILTER_TIMER);
+        window.GKM_V89_FILTER_TIMER = setTimeout(() => window.runSearch(), 60);
+      }, true);
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindV89);
+  else bindV89();
+})();
+
+/* === GKM V88 STABLE SEARCH / NO CRASH === */
+(function () {
+  window.GKM_V88_STABLE_SEARCH_VERSION = "v88-stable-search-no-sweep-2026-06-15";
+
+  function directPosterValueV88(m) {
+    return String(m && (
+      m.poster || m.poster_path || m.posterUrl || m.poster_url ||
+      m.image || m.imageUrl || m.cover || m.coverUrl || m.img || ""
+    ) || "").trim();
+  }
+
+  window.gkmPosterSrcV73 = function(m) {
+    const p = directPosterValueV88(m);
+    if (!p || p === "null" || p === "undefined") return "";
+    if (/^http:\/\//i.test(p)) return p.replace(/^http:/i, "https:");
+    return p;
+  };
+
+  window.gkmPosterErrorV73 = function(img) {
+    try {
+      const card = img && img.closest && img.closest(".card,.related-card");
+      if (card) card.remove();
+      else if (img) img.remove();
+      window.GKM_V88_REMOVED_BROKEN_POSTERS = (window.GKM_V88_REMOVED_BROKEN_POSTERS || 0) + 1;
+    } catch(e) {}
+  };
+
+  function normV88(v) {
+    return String(v || "")
+      .toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[’'`]/g, "")
+      .replace(/[^0-9a-zа-я一-龯ぁ-ゔァ-ヴー々〆〤:]+/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function titleHayV88(m) {
+    if (!m) return "";
+    if (m.__gkmTitleHayV88) return m.__gkmTitleHayV88;
+    m.__gkmTitleHayV88 = normV88([
+      typeof titleOf === "function" ? titleOf(m) : "",
+      m.ru, m.en, m.title, m.name, m.original_title, m.original_name,
+      m.title_ru, m.ruTitle, m.english, m.romaji,
+      ...(Array.isArray(m.aliases) ? m.aliases : []),
+      ...(Array.isArray(m.names) ? m.names : [])
+    ].join(" "));
+    return m.__gkmTitleHayV88;
+  }
+
+  function itemScoreV88(m, q) {
+    if (!q) return Number(getVotes(m) || 0);
+    const hay = titleHayV88(m);
+    if (!hay) return 0;
+    const parts = normV88(q).split(" ").filter(Boolean);
+    let s = 0;
+    if (hay === q) s += 10000000;
+    else if (hay.startsWith(q + " ")) s += 9000000;
+    else if (hay.includes(q)) s += 7000000;
+    if (parts.length && parts.every(p => hay.includes(p))) s += 6000000 + parts.length * 1000;
+    if (!s) return 0;
+    return s + Number(getVotes(m) || 0) + Number(getRating(m) || 0) * 1000;
+  }
+
+  window.renderSearchPage = function(page = 1) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE_SIZE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE_SIZE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE_SIZE);
+    renderList(currentItems, `Поиск: ${lastSearchResults.length} найдено · Страница ${currentPage} из ${currentPages}`);
+  };
+
+  window.runSearch = async function() {
+    const input = $("searchInput");
+    const q = normV88(input ? input.value : "");
+    const typeFilter = $("typeFilter");
+    const genreFilter = $("genreFilter");
+    const yearFilter = $("yearFilter");
+    const ratingFilter = $("ratingFilter");
+    const sortFilter = $("sortFilter");
+
+    const type = typeFilter ? typeFilter.value : "";
+    const genre = genreFilter ? genreFilter.value : "";
+    const year = yearFilter ? yearFilter.value : "";
+    const minRating = Number(ratingFilter ? ratingFilter.value || 0 : 0);
+    const sort = sortFilter ? sortFilter.value : "votes";
+
+    const index = await ensureSearchIndex();
+    let out = [];
+
+    for (const item of index) {
+      if (type && getType(item) !== type) continue;
+      if (genre && !getGenres(item).includes(genre)) continue;
+      if (year && getYear(item) !== year) continue;
+      if (minRating && getRating(item) < minRating) continue;
+      const score = itemScoreV88(item, q);
+      if (q && score <= 0) continue;
+      out.push({ item, score });
+    }
+
+    if (sort === "rating") out.sort((a, b) => getRating(b.item) - getRating(a.item) || getVotes(b.item) - getVotes(a.item));
+    else if (sort === "year") out.sort((a, b) => Number(getYear(b.item) || 0) - Number(getYear(a.item) || 0) || getVotes(b.item) - getVotes(a.item));
+    else if (sort === "title") out.sort((a, b) => titleOf(a.item).localeCompare(titleOf(b.item), "ru"));
+    else if (q) out.sort((a, b) => b.score - a.score);
+    else out.sort((a, b) => getVotes(b.item) - getVotes(a.item));
+
+    lastSearchResults = out.map(x => x.item);
+    renderSearchPage(1);
+    setStatus(`Поиск: ${lastSearchResults.length} найдено`);
+  };
+})();
+
 
 /* === GKM V34 MOBILE POSTER-WRAP REAL FIX === */
 (function () {
@@ -6270,3 +7482,559 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
   };
 })();
 /* === /GKM V80 HARD FIX === */
+
+/* === GKM V85 TMDB IMAGE PROXY + EMPTY CARD SWEEP === */
+(function () {
+  window.GKM_V85_TMDB_IMAGE_PROXY_VERSION = "v85-tmdb-image-proxy-empty-card-sweep-2026-06-15";
+
+  function proxiedPosterUrlV85(url) {
+    const raw = String(url || "").trim();
+    if (!raw) return raw;
+    if (!/\/\/image\.tmdb\.org\//i.test(raw)) return raw;
+    const clean = raw.replace(/^https?:\/\//i, "");
+    return "https://images.weserv.nl/?url=" + encodeURIComponent(clean) + "&w=342&output=webp";
+  }
+
+  const oldPosterSrcV85 = typeof gkmPosterSrcV73 === "function" ? gkmPosterSrcV73 : null;
+  if (oldPosterSrcV85) {
+    gkmPosterSrcV73 = function(m) {
+      return proxiedPosterUrlV85(oldPosterSrcV85(m));
+    };
+  }
+
+  function hideBrokenCardV85(img) {
+    try {
+      const card = img && img.closest && img.closest(".card,.related-card");
+      if (card) {
+        card.dataset.posterBroken = "1";
+        card.remove();
+      } else if (img) {
+        img.remove();
+      }
+      window.GKM_V85_REMOVED_EMPTY_POSTER_CARDS = (window.GKM_V85_REMOVED_EMPTY_POSTER_CARDS || 0) + 1;
+    } catch(e) {}
+  }
+
+  window.gkmPosterErrorV73 = function(img) {
+    hideBrokenCardV85(img);
+  };
+
+  function sweepEmptyPostersV85() {
+    const cards = Array.from(document.querySelectorAll(".card,.related-card"));
+    cards.forEach(card => {
+      const img = card.querySelector("img");
+      if (!img) {
+        card.remove();
+        window.GKM_V85_REMOVED_EMPTY_POSTER_CARDS = (window.GKM_V85_REMOVED_EMPTY_POSTER_CARDS || 0) + 1;
+        return;
+      }
+      const src = String(img.currentSrc || img.src || "");
+      if (!src || src.includes("dummyimage.com") || src.includes("placeholder") || src.includes("no-poster")) {
+        hideBrokenCardV85(img);
+        return;
+      }
+      if (img.complete && img.naturalWidth === 0) hideBrokenCardV85(img);
+    });
+  }
+
+  const oldRenderListV85 = typeof renderList === "function" ? renderList : null;
+  if (oldRenderListV85) {
+    renderList = function(items, label) {
+      oldRenderListV85(items, label);
+      setTimeout(sweepEmptyPostersV85, 1200);
+      setTimeout(sweepEmptyPostersV85, 3500);
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(sweepEmptyPostersV85, 2000);
+    setTimeout(sweepEmptyPostersV85, 5000);
+  });
+})();
+
+/* === GKM V86 FRANCHISE-FIRST RELATED === */
+(function () {
+  window.GKM_V86_FRANCHISE_RELATED_VERSION = "v86-franchise-first-related-2026-06-15";
+
+  const FRANCHISE_ALIASES_V86 = [
+    ["shazam", "шазам"],
+    ["deadpool", "дэдпул"],
+    ["harry potter", "гарри поттер"],
+    ["fantastic beasts", "фантастические твари"],
+    ["guardians of the galaxy", "стражи галактики"],
+    ["avengers", "мстители"],
+    ["spider man", "человек паук"],
+    ["batman", "бэтмен"],
+    ["superman", "супермен"],
+    ["matrix", "матрица"],
+    ["john wick", "джон уик"],
+    ["lord of the rings", "властелин колец"],
+    ["hobbit", "хоббит"],
+    ["star wars", "звездные войны"],
+    ["jurassic", "парк юрского периода"],
+    ["fast furious", "форсаж"],
+    ["mission impossible", "миссия невыполнима"],
+    ["bourne", "борн"],
+    ["terminator", "терминатор"],
+    ["alien", "чужой"],
+    ["predator", "хищник"],
+    ["scream", "крик"],
+    ["saw", "пила"],
+    ["conjuring", "заклятие"],
+    ["insidious", "астрал"],
+    ["kung fu panda", "кунг фу панда"],
+    ["toy story", "история игрушек"],
+    ["shrek", "шрек"],
+    ["ice age", "ледниковый период"],
+    ["cars", "тачки"],
+    ["naruto", "наруто"],
+    ["boruto", "боруто"],
+    ["bleach", "блич"],
+    ["one piece", "ван пис"],
+    ["demon slayer", "истребитель демонов"],
+    ["jujutsu kaisen", "магическая битва"]
+  ];
+
+  function normTitleV86(v) {
+    return String(v || "")
+      .toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[!?:;.,'"’`]/g, " ")
+      .replace(/[–—-]/g, " ")
+      .replace(/\b(часть|глава|фильм|сезон|season|part|chapter|movie|episode|эпизод)\b/gi, " ")
+      .replace(/\b([ivxlcdm]+|\d+)\b/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function titlesV86(item) {
+    return [
+      titleOf(item),
+      item && item.ru,
+      item && item.en,
+      item && item.title,
+      item && item.name,
+      item && item.original_title,
+      item && item.original_name
+    ].filter(Boolean);
+  }
+
+  function franchiseKeyV86(item) {
+    const titles = titlesV86(item).map(normTitleV86).filter(Boolean);
+    const hay = titles.join(" | ");
+
+    for (const pair of FRANCHISE_ALIASES_V86) {
+      const aliases = pair.map(normTitleV86);
+      if (aliases.some(a => a && hay.includes(a))) return aliases[0];
+    }
+
+    const best = titles[0] || "";
+    const beforeColon = best.split(/\s[:：]\s|:/)[0].trim();
+    const words = beforeColon.split(" ").filter(w => w.length > 2);
+    if (words.length >= 2) return words.slice(0, 3).join(" ");
+    return words[0] || "";
+  }
+
+  function sequelSignalV86(base, item) {
+    const bk = franchiseKeyV86(base);
+    const ik = franchiseKeyV86(item);
+    if (!bk || !ik || bk !== ik) return 0;
+    if (gkmRelatedKeyV66(base) === gkmRelatedKeyV66(item)) return 0;
+    return 1;
+  }
+
+  const oldScoreV86 = typeof gkmRelatedScoreV66 === "function" ? gkmRelatedScoreV66 : null;
+  if (oldScoreV86) {
+    gkmRelatedScoreV66 = function(base, item) {
+      const score = oldScoreV86(base, item);
+      const sameFranchise = sequelSignalV86(base, item);
+      if (!sameFranchise) return score;
+      const yearDistance = Math.abs(Number(getYear(base) || 0) - Number(getYear(item) || 0));
+      const closeness = Number.isFinite(yearDistance) ? Math.max(0, 40 - yearDistance) : 0;
+      return Math.max(score, 1) + 5000 + closeness;
+    };
+  }
+
+  const oldPickV86 = typeof gkmPickRelatedV66 === "function" ? gkmPickRelatedV66 : null;
+  if (oldPickV86) {
+    gkmPickRelatedV66 = function(base, pool, limit = 10) {
+      const cleaned = gkmCleanListV60(pool);
+      const franchise = cleaned
+        .filter(item => sequelSignalV86(base, item))
+        .map(item => ({ item, score: gkmRelatedScoreV66(base, item) }))
+        .sort((a, b) => b.score - a.score)
+        .map(x => x.item);
+
+      const picked = oldPickV86(base, cleaned, Math.max(limit, 20));
+      const merged = [];
+      const seen = new Set();
+
+      [...franchise, ...picked].forEach(item => {
+        const key = gkmRelatedKeyV66(item);
+        if (!key || seen.has(key)) return;
+        seen.add(key);
+        merged.push(item);
+      });
+
+      return merged.slice(0, limit);
+    };
+  }
+})();
+
+/* === GKM V91 FINAL NON-BLOCKING SEARCH OVERRIDE === */
+(function () {
+  window.GKM_V91_FINAL_SEARCH_VERSION = "v91-final-non-blocking-search-2026-06-15";
+
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const CHUNK = 2000;
+  const DEFAULT_SORT = "smart";
+  let runId = 0;
+  let timer = 0;
+
+  function $(id) { return document.getElementById(id); }
+  function yieldTurn() { return new Promise(resolve => setTimeout(resolve, 0)); }
+  function n(v) {
+    return String(v || "").toLowerCase().replaceAll("ё", "е").replace(/&/g, " and ").replace(/['’`]/g, "").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim();
+  }
+  function keyfix(s) {
+    const map = {"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};
+    return String(s || "").split("").map(ch => map[ch.toLowerCase()] || ch).join("");
+  }
+  function queryList(q) {
+    const base = n(q);
+    const out = new Set([base]);
+    const fixed = n(keyfix(base));
+    if (fixed && fixed !== base) out.add(fixed);
+    const syn = {"матрица":["matrix","the matrix"],"шазам":["shazam"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"]};
+    Object.entries(syn).forEach(([k, arr]) => { if (base === k || base.includes(k)) arr.forEach(x => out.add(n(x))); });
+    return [...out].filter(Boolean);
+  }
+  function setupControls() {
+    const sort = $("sortFilter");
+    if (sort && sort.dataset.gkmV91 !== "1") {
+      const current = sort.value || DEFAULT_SORT;
+      sort.innerHTML = [
+        ["smart", "Лучшие"],
+        ["rating", "По оценке"],
+        ["votes", "Популярные"],
+        ["year", "Новые"],
+        ["year_old", "Старые"],
+        ["title", "По названию"]
+      ].map(x => `<option value="${x[0]}">${x[1]}</option>`).join("");
+      sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT;
+      sort.dataset.gkmV91 = "1";
+    }
+    const year = $("yearFilter");
+    if (year && (!year.options || year.options.length < 2) && window.metaData && Array.isArray(window.metaData.years)) {
+      const cur = year.value;
+      year.innerHTML = `<option value="">Все годы</option>` + window.metaData.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+      if (cur) year.value = cur;
+    }
+  }
+  async function setupYears() {
+    setupControls();
+    const year = $("yearFilter");
+    if (!year || (year.options && year.options.length > 1)) return;
+    try {
+      const r = await fetch("data/fast/meta.json", { cache: "force-cache" });
+      if (!r.ok) return;
+      const meta = await r.json();
+      if (meta && Array.isArray(meta.years)) {
+        const cur = year.value;
+        year.innerHTML = `<option value="">Все годы</option>` + meta.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+        if (cur) year.value = cur;
+      }
+    } catch (e) {}
+  }
+  function hay(item) {
+    if (!item || typeof item !== "object") return "";
+    if (item.__gkmHayV91) return item.__gkmHayV91;
+    const main = typeof titleOf === "function" ? titleOf(item) : "";
+    item.__gkmHayV91 = n([main,item.ru,item.en,item.title,item.name,item.title_ru,item.ruTitle,item.originalTitle,item.original_title,item.original_name,item.english,item.title_en,item.searchTitle,...(Array.isArray(item.aliases) ? item.aliases : []),...(Array.isArray(item.names) ? item.names : [])].join(" "));
+    return item.__gkmHayV91;
+  }
+  function score(item, qs) {
+    if (!qs.length) return 1;
+    const h = hay(item);
+    if (!h) return 0;
+    const wh = " " + h + " ";
+    let best = 0;
+    for (const q of qs) {
+      if (h === q) best = Math.max(best, 10000000);
+      else if (h.startsWith(q + " ")) best = Math.max(best, 9000000);
+      else if (wh.includes(" " + q + " ")) best = Math.max(best, 8000000);
+      else if (h.includes(q)) best = Math.max(best, 7000000);
+      else {
+        const parts = q.split(" ").filter(p => p.length > 1);
+        if (parts.length && parts.every(p => h.includes(p))) best = Math.max(best, 6000000 + parts.length * 1000);
+      }
+    }
+    return best ? best + Math.min(Number(getVotes(item) || 0), 1000000) / 10 + Number(getRating(item) || 0) * 100 : 0;
+  }
+  function values() {
+    return {
+      qRaw: ($("searchInput") || {}).value || "",
+      type: ($("typeFilter") || {}).value || "",
+      genre: ($("genreFilter") || {}).value || "",
+      year: ($("yearFilter") || {}).value || "",
+      minRating: Number(($("ratingFilter") || {}).value || 0),
+      sort: ($("sortFilter") || {}).value || DEFAULT_SORT
+    };
+  }
+  function active(c) { return Boolean(n(c.qRaw) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== DEFAULT_SORT)); }
+  function pass(item, c) {
+    if (c.type && getType(item) !== c.type) return false;
+    if (c.genre && !getGenres(item).includes(c.genre)) return false;
+    if (c.year && String(getYear(item) || "") !== String(c.year)) return false;
+    if (c.minRating && Number(getRating(item) || 0) < c.minRating) return false;
+    return true;
+  }
+  function sortRows(rows, sort, hasQ) {
+    if (sort === "rating") rows.sort((a,b) => Number(getRating(b.item)||0) - Number(getRating(a.item)||0) || Number(getVotes(b.item)||0) - Number(getVotes(a.item)||0));
+    else if (sort === "votes") rows.sort((a,b) => Number(getVotes(b.item)||0) - Number(getVotes(a.item)||0) || Number(getRating(b.item)||0) - Number(getRating(a.item)||0));
+    else if (sort === "year") rows.sort((a,b) => Number(getYear(b.item)||0) - Number(getYear(a.item)||0) || Number(getVotes(b.item)||0) - Number(getVotes(a.item)||0));
+    else if (sort === "year_old") rows.sort((a,b) => Number(getYear(a.item)||9999) - Number(getYear(b.item)||9999) || Number(getVotes(b.item)||0) - Number(getVotes(a.item)||0));
+    else if (sort === "title") rows.sort((a,b) => titleOf(a.item).localeCompare(titleOf(b.item), "ru"));
+    else if (hasQ) rows.sort((a,b) => b.score - a.score);
+    else rows.sort((a,b) => (Number(getRating(b.item)||0) * 100000 + Math.min(Number(getVotes(b.item)||0), 250000) + Number(getYear(b.item)||0)) - (Number(getRating(a.item)||0) * 100000 + Math.min(Number(getVotes(a.item)||0), 250000) + Number(getYear(a.item)||0)));
+  }
+  function draw(page) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · Страница ${currentPage} из ${currentPages}`);
+  }
+  window.renderSearchPage = draw;
+  window.runSearch = async function () {
+    const myRun = ++runId;
+    setupControls();
+    await setupYears();
+    const c = values();
+    const q = n(c.qRaw);
+    if (!active(c)) {
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    if (q && q.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+    const qs = queryList(q);
+    const started = performance && performance.now ? performance.now() : Date.now();
+    setStatus(q ? `Ищу: ${c.qRaw}...` : "Фильтрую...");
+    const idx = await ensureSearchIndex();
+    if (myRun !== runId) return;
+    let src = Array.isArray(idx) ? idx : [];
+    if (typeof applyTabFilter === "function") src = applyTabFilter(src);
+    const rows = [];
+    for (let i = 0; i < src.length; i++) {
+      const item = src[i];
+      if (pass(item, c)) {
+        const s = score(item, qs);
+        if (!qs.length || s > 0) rows.push({ item, score: s });
+      }
+      if (i && i % CHUNK === 0) {
+        if (myRun !== runId) return;
+        setStatus(q ? `Ищу: ${c.qRaw}... ${Math.round(i / src.length * 100)}%` : `Фильтрую... ${Math.round(i / src.length * 100)}%`);
+        await yieldTurn();
+      }
+    }
+    if (myRun !== runId) return;
+    sortRows(rows, c.sort, Boolean(qs.length));
+    if (myRun !== runId) return;
+    lastSearchResults = rows.map(x => x.item);
+    draw(1);
+    const ended = performance && performance.now ? performance.now() : Date.now();
+    setStatus(`Найдено: ${lastSearchResults.length} · ${Math.round(ended - started)} мс`);
+  };
+  function schedule(delay) {
+    clearTimeout(timer);
+    timer = setTimeout(() => window.runSearch(), delay);
+  }
+  window.addEventListener("input", function(e) {
+    if (!(e.target && e.target.closest && e.target.closest("#searchInput"))) return;
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+    schedule(400);
+  }, true);
+  window.addEventListener("change", function(e) {
+    if (!(e.target && e.target.closest && e.target.closest("#typeFilter,#genreFilter,#yearFilter,#ratingFilter,#sortFilter"))) return;
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+    schedule(80);
+  }, true);
+  window.addEventListener("click", function(e) {
+    if (!(e.target && e.target.closest && e.target.closest("#resetBtn"))) return;
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+    ["searchInput","typeFilter","genreFilter","yearFilter","ratingFilter"].forEach(name => { const el = $(name); if (el) el.value = ""; });
+    const sort = $("sortFilter");
+    if (sort) sort.value = DEFAULT_SORT;
+    schedule(30);
+  }, true);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
+  else { setupControls(); setupYears(); }
+})();
+/* === GKM V94 FINAL WORKER SEARCH ABSOLUTE URL OVERRIDE AT EOF === */
+(function () {
+  window.GKM_V94_WORKER_ABSOLUTE_URL_VERSION = "v94-worker-absolute-url-fix-2026-06-15";
+
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const DEFAULT_SORT = "smart";
+  const SEARCH_URL = new URL("data/fast/search_index.json", window.location.href).href;
+  let timer = 0;
+  let requestId = 0;
+  let worker = null;
+
+  function byId(id) { return document.getElementById(id); }
+  function norm(value) {
+    return String(value || "").toLowerCase().replaceAll("ё", "е").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim();
+  }
+  function setupControls() {
+    const sort = byId("sortFilter");
+    if (sort && sort.dataset.gkmV94 !== "1") {
+      const current = sort.value || DEFAULT_SORT;
+      sort.innerHTML = [
+        ["smart", "Лучшие"],
+        ["rating", "По оценке"],
+        ["votes", "Популярные"],
+        ["year", "Новые"],
+        ["year_old", "Старые"],
+        ["title", "По названию"]
+      ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
+      sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT;
+      sort.dataset.gkmV94 = "1";
+    }
+  }
+  async function setupYears() {
+    setupControls();
+    const year = byId("yearFilter");
+    if (!year || (year.options && year.options.length > 1)) return;
+    try {
+      const res = await fetch("data/fast/meta.json", { cache: "force-cache" });
+      if (!res.ok) return;
+      const meta = await res.json();
+      if (!meta || !Array.isArray(meta.years)) return;
+      const current = year.value;
+      year.innerHTML = `<option value="">Все годы</option>` + meta.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+      if (current) year.value = current;
+    } catch (e) {}
+  }
+  function controls() {
+    return {
+      q: (byId("searchInput") || {}).value || "",
+      type: (byId("typeFilter") || {}).value || "",
+      genre: (byId("genreFilter") || {}).value || "",
+      year: (byId("yearFilter") || {}).value || "",
+      minRating: Number((byId("ratingFilter") || {}).value || 0),
+      sort: (byId("sortFilter") || {}).value || DEFAULT_SORT,
+      tab: typeof currentTab === "string" ? currentTab : "all"
+    };
+  }
+  function active(c) {
+    return Boolean(norm(c.q) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== DEFAULT_SORT));
+  }
+  function draw(page = 1) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · Страница ${currentPage} из ${currentPages}`);
+  }
+  function createWorker() {
+    if (worker) return worker;
+    const code = `
+      const SEARCH_URL=${JSON.stringify(SEARCH_URL)};
+      let indexPromise = null;
+      function norm(value){return String(value||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
+      function keyfix(s){const m={"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};return String(s||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
+      function queries(qRaw){const base=norm(qRaw);const out=new Set(base?[base]:[]);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"]};Object.entries(syn).forEach(([k,a])=>{if(base===k||base.includes(k))a.forEach(x=>out.add(norm(x)));});return [...out].filter(Boolean);}
+      function title(i){return String((i&&(i.ru||i.title_ru||i.name||i.title||i.en||i.original_title||i.original_name))||"");}
+      function year(i){return String((i&&i.year)||"");}
+      function typeOf(i){return String((i&&(i.type||i.category))||"");}
+      function rating(i){return Number((i&&i.rating)||(i&&i.vote_average)||0);}
+      function votes(i){return Number((i&&i.votes)||(i&&i.vote_count)||0);}
+      function genres(i){const g=i&&i.genres;if(Array.isArray(g))return g.map(String);if(typeof g==="string")return g.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);return [];}
+      function tabPass(i,tab){const t=typeOf(i);if(!tab||tab==="all")return true;if(tab==="movies")return t==="Фильм";if(tab==="series")return t==="Сериал";if(tab==="anime")return t==="Аниме";if(tab==="cartoons")return t==="Мультфильм";return true;}
+      function pass(i,c){if(!tabPass(i,c.tab))return false;if(c.type&&typeOf(i)!==c.type)return false;if(c.genre&&!genres(i).includes(c.genre))return false;if(c.year&&year(i)!==String(c.year))return false;if(c.minRating&&rating(i)<Number(c.minRating))return false;return true;}
+      function hay(i){if(i.__hay93)return i.__hay93;i.__hay93=norm([title(i),i.ru,i.en,i.title,i.name,i.original_title,i.original_name,i.english,i.searchTitle].join(" "));return i.__hay93;}
+      function score(i,qs){if(!qs.length)return 1;const h=hay(i);if(!h)return 0;const wh=" "+h+" ";let best=0;for(const q of qs){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+Math.min(votes(i),1000000)/10+rating(i)*100:0;}
+      function sortRows(rows,sort,hasQ){if(sort==="rating")rows.sort((a,b)=>rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>title(a.item).localeCompare(title(b.item),"ru"));else if(hasQ)rows.sort((a,b)=>b.score-a.score);else rows.sort((a,b)=>(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
+      async function loadIndex(){if(!indexPromise){indexPromise=fetch(SEARCH_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index load failed "+r.status);return r.json();});}return indexPromise;}
+      self.onmessage=async e=>{const {id,controls}=e.data||{};try{const started=Date.now();self.postMessage({id,status:"loading"});const index=await loadIndex();const qs=queries(controls.q);const rows=[];for(let i=0;i<index.length;i++){const item=index[i];if(!pass(item,controls))continue;const s=score(item,qs);if(!qs.length||s>0)rows.push({item,score:s});}sortRows(rows,controls.sort,Boolean(qs.length));self.postMessage({id,ok:true,ms:Date.now()-started,results:rows.map(x=>x.item)});}catch(err){self.postMessage({id,ok:false,error:String(err&&err.message||err)});}};
+    `;
+    worker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
+    worker.onmessage = event => {
+      const msg = event.data || {};
+      if (msg.id !== requestId) return;
+      if (msg.status === "loading") {
+        setStatus("Загружаю базу поиска без зависания страницы...");
+        return;
+      }
+      if (!msg.ok) {
+        setStatus("Поиск не сработал: " + (msg.error || "ошибка"));
+        return;
+      }
+      lastSearchResults = Array.isArray(msg.results) ? msg.results : [];
+      draw(1);
+      setStatus(`Найдено: ${lastSearchResults.length} · ${msg.ms || 0} мс`);
+    };
+    return worker;
+  }
+  window.renderSearchPage = draw;
+  window.runSearch = async function () {
+    setupControls();
+    await setupYears();
+    const c = controls();
+    if (!active(c)) {
+      requestId += 1;
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    const q = norm(c.q);
+    if (q && q.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+    requestId += 1;
+    setStatus(q ? `Ищу: ${c.q}...` : "Фильтрую...");
+    createWorker().postMessage({ id: requestId, controls: c });
+  };
+  function schedule(delay) {
+    clearTimeout(timer);
+    timer = setTimeout(() => window.runSearch(), delay);
+  }
+  window.addEventListener("input", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#searchInput"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    schedule(450);
+  }, true);
+  window.addEventListener("change", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#typeFilter,#genreFilter,#yearFilter,#ratingFilter,#sortFilter"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    schedule(80);
+  }, true);
+  window.addEventListener("click", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#resetBtn"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    ["searchInput", "typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(name => {
+      const el = byId(name);
+      if (el) el.value = "";
+    });
+    const sort = byId("sortFilter");
+    if (sort) sort.value = DEFAULT_SORT;
+    schedule(30);
+  }, true);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
+  else { setupControls(); setupYears(); }
+})();
