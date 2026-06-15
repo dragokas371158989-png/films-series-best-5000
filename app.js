@@ -998,7 +998,6 @@ async function loadLegacyFallbackHome(reason) {
 
   fillFilters();
   renderHome();
-
   setStatus(`Запасная база: ${homeData.total} записей · причина: ${reason || "data/fast пустая"}`);
 }
 
@@ -4394,6 +4393,166 @@ if (document.readyState === "loading") {
   window.GKM_AI_CHAT_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 })();
 
+/* === GKM V94 FINAL WORKER ABSOLUTE URL FIX === */
+(function () {
+  window.GKM_V94_WORKER_ABSOLUTE_URL_VERSION = "v94-worker-absolute-url-fix-2026-06-15";
+
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const DEFAULT_SORT = "smart";
+  const SEARCH_URL = new URL("data/fast/search_index.json", window.location.href).href;
+  let timer = 0;
+  let requestId = 0;
+  let worker = null;
+
+  function byId(id) { return document.getElementById(id); }
+  function norm(value) {
+    return String(value || "").toLowerCase().replaceAll("ё", "е").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim();
+  }
+  function setupControls() {
+    const sort = byId("sortFilter");
+    if (sort && sort.dataset.gkmV94 !== "1") {
+      const current = sort.value || DEFAULT_SORT;
+      sort.innerHTML = [
+        ["smart", "Лучшие"],
+        ["rating", "По оценке"],
+        ["votes", "Популярные"],
+        ["year", "Новые"],
+        ["year_old", "Старые"],
+        ["title", "По названию"]
+      ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
+      sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT;
+      sort.dataset.gkmV94 = "1";
+    }
+  }
+  async function setupYears() {
+    setupControls();
+    const year = byId("yearFilter");
+    if (!year || (year.options && year.options.length > 1)) return;
+    try {
+      const res = await fetch("data/fast/meta.json", { cache: "force-cache" });
+      if (!res.ok) return;
+      const meta = await res.json();
+      if (!meta || !Array.isArray(meta.years)) return;
+      const current = year.value;
+      year.innerHTML = `<option value="">Все годы</option>` + meta.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+      if (current) year.value = current;
+    } catch (e) {}
+  }
+  function controls() {
+    return {
+      q: (byId("searchInput") || {}).value || "",
+      type: (byId("typeFilter") || {}).value || "",
+      genre: (byId("genreFilter") || {}).value || "",
+      year: (byId("yearFilter") || {}).value || "",
+      minRating: Number((byId("ratingFilter") || {}).value || 0),
+      sort: (byId("sortFilter") || {}).value || DEFAULT_SORT,
+      tab: typeof currentTab === "string" ? currentTab : "all"
+    };
+  }
+  function active(c) {
+    return Boolean(norm(c.q) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== DEFAULT_SORT));
+  }
+  function draw(page = 1) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · Страница ${currentPage} из ${currentPages}`);
+  }
+  function createWorker() {
+    if (worker) return worker;
+    const code = `
+      const SEARCH_URL=${JSON.stringify(SEARCH_URL)};
+      let indexPromise=null;
+      function norm(value){return String(value||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
+      function keyfix(s){const m={"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};return String(s||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
+      function queries(qRaw){const base=norm(qRaw);const out=new Set(base?[base]:[]);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"]};Object.entries(syn).forEach(([k,a])=>{if(base===k||base.includes(k))a.forEach(x=>out.add(norm(x)));});return [...out].filter(Boolean);}
+      function title(i){return String((i&&(i.ru||i.title_ru||i.name||i.title||i.en||i.original_title||i.original_name))||"");}
+      function year(i){return String((i&&i.year)||"");}
+      function typeOf(i){return String((i&&(i.type||i.category))||"");}
+      function rating(i){return Number((i&&i.rating)||(i&&i.vote_average)||0);}
+      function votes(i){return Number((i&&i.votes)||(i&&i.vote_count)||0);}
+      function genres(i){const g=i&&i.genres;if(Array.isArray(g))return g.map(String);if(typeof g==="string")return g.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);return [];}
+      function tabPass(i,tab){const t=typeOf(i);if(!tab||tab==="all")return true;if(tab==="movies")return t==="Фильм";if(tab==="series")return t==="Сериал";if(tab==="anime")return t==="Аниме";if(tab==="cartoons")return t==="Мультфильм";return true;}
+      function pass(i,c){if(!tabPass(i,c.tab))return false;if(c.type&&typeOf(i)!==c.type)return false;if(c.genre&&!genres(i).includes(c.genre))return false;if(c.year&&year(i)!==String(c.year))return false;if(c.minRating&&rating(i)<Number(c.minRating))return false;return true;}
+      function hay(i){if(i.__hay94)return i.__hay94;i.__hay94=norm([title(i),i.ru,i.en,i.title,i.name,i.original_title,i.original_name,i.english,i.searchTitle].join(" "));return i.__hay94;}
+      function score(i,qs){if(!qs.length)return 1;const h=hay(i);if(!h)return 0;const wh=" "+h+" ";let best=0;for(const q of qs){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+Math.min(votes(i),1000000)/10+rating(i)*100:0;}
+      function sortRows(rows,sort,hasQ){if(sort==="rating")rows.sort((a,b)=>rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>title(a.item).localeCompare(title(b.item),"ru"));else if(hasQ)rows.sort((a,b)=>b.score-a.score);else rows.sort((a,b)=>(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
+      async function loadIndex(){if(!indexPromise){indexPromise=fetch(SEARCH_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index load failed "+r.status);return r.json();});}return indexPromise;}
+      self.onmessage=async e=>{const {id,controls}=e.data||{};try{const started=Date.now();self.postMessage({id,status:"loading"});const index=await loadIndex();const qs=queries(controls.q);const rows=[];for(let i=0;i<index.length;i++){const item=index[i];if(!pass(item,controls))continue;const s=score(item,qs);if(!qs.length||s>0)rows.push({item,score:s});}sortRows(rows,controls.sort,Boolean(qs.length));self.postMessage({id,ok:true,ms:Date.now()-started,results:rows.map(x=>x.item)});}catch(err){self.postMessage({id,ok:false,error:String(err&&err.message||err)});}};
+    `;
+    worker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
+    worker.onmessage = event => {
+      const msg = event.data || {};
+      if (msg.id !== requestId) return;
+      if (msg.status === "loading") {
+        setStatus("Загружаю базу поиска без зависания страницы...");
+        return;
+      }
+      if (!msg.ok) {
+        setStatus("Поиск не сработал: " + (msg.error || "ошибка"));
+        return;
+      }
+      lastSearchResults = Array.isArray(msg.results) ? msg.results : [];
+      draw(1);
+      setStatus(`Найдено: ${lastSearchResults.length} · ${msg.ms || 0} мс`);
+    };
+    return worker;
+  }
+  window.renderSearchPage = draw;
+  window.runSearch = async function () {
+    setupControls();
+    await setupYears();
+    const c = controls();
+    if (!active(c)) {
+      requestId += 1;
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    const q = norm(c.q);
+    if (q && q.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+    requestId += 1;
+    setStatus(q ? `Ищу: ${c.q}...` : "Фильтрую...");
+    createWorker().postMessage({ id: requestId, controls: c });
+  };
+  function schedule(delay) {
+    clearTimeout(timer);
+    timer = setTimeout(() => window.runSearch(), delay);
+  }
+  window.addEventListener("input", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#searchInput"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    schedule(450);
+  }, true);
+  window.addEventListener("change", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#typeFilter,#genreFilter,#yearFilter,#ratingFilter,#sortFilter"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    schedule(80);
+  }, true);
+  window.addEventListener("click", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#resetBtn"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    ["searchInput", "typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(name => {
+      const el = byId(name);
+      if (el) el.value = "";
+    });
+    const sort = byId("sortFilter");
+    if (sort) sort.value = DEFAULT_SORT;
+    schedule(30);
+  }, true);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
+  else { setupControls(); setupYears(); }
+})();
+
 /* === GKM V92 WORKER SEARCH NO PAGE FREEZE === */
 (function () {
   window.GKM_V92_WORKER_SEARCH_VERSION = "v92-worker-search-no-page-freeze-2026-06-15";
@@ -4663,12 +4822,13 @@ if (document.readyState === "loading") {
   else { setupControls(); setupYears(); }
 })();
 
-/* === GKM V93 FINAL WORKER SEARCH OVERRIDE AT EOF === */
+/* === GKM V94 FINAL WORKER SEARCH ABSOLUTE URL OVERRIDE AT EOF === */
 (function () {
-  window.GKM_V93_FINAL_WORKER_SEARCH_VERSION = "v93-final-worker-search-no-freeze-2026-06-15";
+  window.GKM_V94_WORKER_ABSOLUTE_URL_VERSION = "v94-worker-absolute-url-fix-2026-06-15";
 
   const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
   const DEFAULT_SORT = "smart";
+  const SEARCH_URL = new URL("data/fast/search_index.json", window.location.href).href;
   let timer = 0;
   let requestId = 0;
   let worker = null;
@@ -4679,7 +4839,7 @@ if (document.readyState === "loading") {
   }
   function setupControls() {
     const sort = byId("sortFilter");
-    if (sort && sort.dataset.gkmV93 !== "1") {
+    if (sort && sort.dataset.gkmV94 !== "1") {
       const current = sort.value || DEFAULT_SORT;
       sort.innerHTML = [
         ["smart", "Лучшие"],
@@ -4690,7 +4850,7 @@ if (document.readyState === "loading") {
         ["title", "По названию"]
       ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
       sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT;
-      sort.dataset.gkmV93 = "1";
+      sort.dataset.gkmV94 = "1";
     }
   }
   async function setupYears() {
@@ -4732,6 +4892,7 @@ if (document.readyState === "loading") {
   function createWorker() {
     if (worker) return worker;
     const code = `
+      const SEARCH_URL=${JSON.stringify(SEARCH_URL)};
       let indexPromise = null;
       function norm(value){return String(value||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
       function keyfix(s){const m={"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};return String(s||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
@@ -4747,7 +4908,7 @@ if (document.readyState === "loading") {
       function hay(i){if(i.__hay93)return i.__hay93;i.__hay93=norm([title(i),i.ru,i.en,i.title,i.name,i.original_title,i.original_name,i.english,i.searchTitle].join(" "));return i.__hay93;}
       function score(i,qs){if(!qs.length)return 1;const h=hay(i);if(!h)return 0;const wh=" "+h+" ";let best=0;for(const q of qs){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+Math.min(votes(i),1000000)/10+rating(i)*100:0;}
       function sortRows(rows,sort,hasQ){if(sort==="rating")rows.sort((a,b)=>rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>title(a.item).localeCompare(title(b.item),"ru"));else if(hasQ)rows.sort((a,b)=>b.score-a.score);else rows.sort((a,b)=>(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
-      async function loadIndex(){if(!indexPromise){indexPromise=fetch("data/fast/search_index.json",{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index load failed");return r.json();});}return indexPromise;}
+      async function loadIndex(){if(!indexPromise){indexPromise=fetch(SEARCH_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index load failed "+r.status);return r.json();});}return indexPromise;}
       self.onmessage=async e=>{const {id,controls}=e.data||{};try{const started=Date.now();self.postMessage({id,status:"loading"});const index=await loadIndex();const qs=queries(controls.q);const rows=[];for(let i=0;i<index.length;i++){const item=index[i];if(!pass(item,controls))continue;const s=score(item,qs);if(!qs.length||s>0)rows.push({item,score:s});}sortRows(rows,controls.sort,Boolean(qs.length));self.postMessage({id,ok:true,ms:Date.now()-started,results:rows.map(x=>x.item)});}catch(err){self.postMessage({id,ok:false,error:String(err&&err.message||err)});}};
     `;
     worker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
@@ -7748,12 +7909,13 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
   else { setupControls(); setupYears(); }
 })();
-/* === GKM V93 FINAL WORKER SEARCH OVERRIDE AT EOF === */
+/* === GKM V94 FINAL WORKER SEARCH ABSOLUTE URL OVERRIDE AT EOF === */
 (function () {
-  window.GKM_V93_FINAL_WORKER_SEARCH_VERSION = "v93-final-worker-search-no-freeze-2026-06-15";
+  window.GKM_V94_WORKER_ABSOLUTE_URL_VERSION = "v94-worker-absolute-url-fix-2026-06-15";
 
   const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
   const DEFAULT_SORT = "smart";
+  const SEARCH_URL = new URL("data/fast/search_index.json", window.location.href).href;
   let timer = 0;
   let requestId = 0;
   let worker = null;
@@ -7764,7 +7926,7 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
   }
   function setupControls() {
     const sort = byId("sortFilter");
-    if (sort && sort.dataset.gkmV93 !== "1") {
+    if (sort && sort.dataset.gkmV94 !== "1") {
       const current = sort.value || DEFAULT_SORT;
       sort.innerHTML = [
         ["smart", "Лучшие"],
@@ -7775,7 +7937,7 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
         ["title", "По названию"]
       ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
       sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT;
-      sort.dataset.gkmV93 = "1";
+      sort.dataset.gkmV94 = "1";
     }
   }
   async function setupYears() {
@@ -7817,6 +7979,7 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
   function createWorker() {
     if (worker) return worker;
     const code = `
+      const SEARCH_URL=${JSON.stringify(SEARCH_URL)};
       let indexPromise = null;
       function norm(value){return String(value||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
       function keyfix(s){const m={"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};return String(s||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
@@ -7832,7 +7995,7 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
       function hay(i){if(i.__hay93)return i.__hay93;i.__hay93=norm([title(i),i.ru,i.en,i.title,i.name,i.original_title,i.original_name,i.english,i.searchTitle].join(" "));return i.__hay93;}
       function score(i,qs){if(!qs.length)return 1;const h=hay(i);if(!h)return 0;const wh=" "+h+" ";let best=0;for(const q of qs){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+Math.min(votes(i),1000000)/10+rating(i)*100:0;}
       function sortRows(rows,sort,hasQ){if(sort==="rating")rows.sort((a,b)=>rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>title(a.item).localeCompare(title(b.item),"ru"));else if(hasQ)rows.sort((a,b)=>b.score-a.score);else rows.sort((a,b)=>(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
-      async function loadIndex(){if(!indexPromise){indexPromise=fetch("data/fast/search_index.json",{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index load failed");return r.json();});}return indexPromise;}
+      async function loadIndex(){if(!indexPromise){indexPromise=fetch(SEARCH_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index load failed "+r.status);return r.json();});}return indexPromise;}
       self.onmessage=async e=>{const {id,controls}=e.data||{};try{const started=Date.now();self.postMessage({id,status:"loading"});const index=await loadIndex();const qs=queries(controls.q);const rows=[];for(let i=0;i<index.length;i++){const item=index[i];if(!pass(item,controls))continue;const s=score(item,qs);if(!qs.length||s>0)rows.push({item,score:s});}sortRows(rows,controls.sort,Boolean(qs.length));self.postMessage({id,ok:true,ms:Date.now()-started,results:rows.map(x=>x.item)});}catch(err){self.postMessage({id,ok:false,error:String(err&&err.message||err)});}};
     `;
     worker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
@@ -7905,4 +8068,3 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
   else { setupControls(); setupYears(); }
 })();
-
