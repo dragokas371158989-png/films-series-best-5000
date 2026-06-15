@@ -203,60 +203,10 @@ function normalizeKinopoiskDoc(doc) {
 }
 
 async function searchKinopoiskMovie(query, year) {
-  if (!KINOPOISK_ENABLED) return null;
-  const key = getKinopoiskApiKey();
-  if (!key) {
-    console.info("Кинопоиск API: ключ не указан, запрос пропущен");
-    return null;
-  }
-
-  const q = String(query || "").trim();
-  if (!q) return null;
-
-  const cacheKey = `${q}|${year || ""}`.toLowerCase();
-  if (kinopoiskCache.has(cacheKey)) return kinopoiskCache.get(cacheKey);
-
-  const url = new URL(`${KINOPOISK_API_BASE}/movie/search`);
-  url.searchParams.set("page", "1");
-  url.searchParams.set("limit", "5");
-  url.searchParams.set("query", q);
-
-  const res = await fetch(url.toString(), {
-    headers: {
-      "accept": "application/json",
-      "X-API-KEY": key,
-    },
-    cache: "no-store",
-  });
-  if (!res.ok) throw new Error(`Кинопоиск API не ответил: ${res.status}`);
-
-  const data = await res.json();
-  const docs = Array.isArray(data.docs) ? data.docs : [];
-  const y = String(year || "").slice(0, 4);
-  const found = docs.find(doc => y && String(doc.year || "") === y) || docs[0] || null;
-  const normalized = normalizeKinopoiskDoc(found);
-  kinopoiskCache.set(cacheKey, normalized);
-  return normalized;
+  return null;
 }
 
 async function enrichFromKinopoisk(item) {
-  if (!item) return item;
-  const title = titleOf(item);
-  const year = getYear(item);
-  const extra = await searchKinopoiskMovie(title, year);
-  if (!extra) return item;
-
-  if (!hasPosterValue(posterValueAny(item)) && hasPosterValue(extra.poster)) item.poster = extra.poster;
-  if (!item.overview && extra.overview) item.overview = extra.overview;
-  if (!item.rating && extra.rating) item.rating = extra.rating;
-  if (!item.votes && extra.votes) item.votes = extra.votes;
-  if (!item.kinopoiskId && extra.kinopoiskId) item.kinopoiskId = extra.kinopoiskId;
-  if (!item.episodes && extra.episodes) item.episodes = extra.episodes;
-  if (!item.studio && extra.studio) item.studio = extra.studio;
-  if (!item.country && extra.country) item.country = extra.country;
-  if (!item.ageRating && extra.ageRating) item.ageRating = extra.ageRating;
-  if (!item.status && extra.status) item.status = extra.status;
-  if (!item.source) item.source = extra.source;
   return item;
 }
 
@@ -4569,6 +4519,9 @@ if (document.readyState === "loading") {
 
 window.GKM_V96_SERVER_FACTS_VERSION = "v96-server-side-kinopoisk-facts-2026-06-15";
 window.GKM_V97_WORKFLOW_FIX_VERSION = "v97-workflow-fix-server-facts-2026-06-15";
+window.GKM_V98_WORKFLOW_CACHE_FIX_VERSION = "v98-workflow-cache-fix-kinopoisk-facts-2026-06-15";
+window.GKM_V99_BROWSER_KINOPOISK_NOOP_VERSION = "v99-browser-kinopoisk-noop-2026-06-15";
+window.GKM_V100_ROOT_PATCH_VERSION = "v100-root-app-workflow-tools-fixed-2026-06-15";
 
 /* === GKM V92 WORKER SEARCH NO PAGE FREEZE === */
 (function () {
@@ -8085,6 +8038,3 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
   else { setupControls(); setupYears(); }
 })();
-
-
-window.GKM_V98_WORKFLOW_CACHE_FIX_VERSION = "v98-workflow-cache-fix-kinopoisk-facts-2026-06-15";
