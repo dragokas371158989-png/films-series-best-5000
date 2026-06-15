@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "count": 3,
+  "anime": [
+    {
+      "id": 900001,
+      "ru": "Стальной алхимик: Братство",
+      "en": "Fullmetal Alchemist: Brotherhood",
+      "year": "2009",
+      "type": "TV",
+      "episodes": "64",
+      "status": "Finished Airing",
+      "rating": 9.1,
+      "poster": "",
+      "genres": [
+        "Экшен",
+        "Приключения",
+        "Драма",
+        "Фэнтези",
+        "Сёнэн"
+      ]
+    },
+    {
+      "id": 900002,
+      "ru": "Врата Штейна",
+      "en": "Steins;Gate",
+      "year": "2011",
+      "type": "TV",
+      "episodes": "24",
+      "status": "Finished Airing",
+      "rating": 9.0,
+      "poster": "",
+      "genres": [
+        "Фантастика",
+        "Психологическое",
+        "Путешествия во времени"
+      ]
+    },
+    {
+      "id": 900003,
+      "ru": "Магическая битва",
+      "en": "Jujutsu Kaisen",
+      "year": "2020",
+      "type": "TV",
+      "episodes": "24",
+      "status": "Finished Airing",
+      "rating": 8.6,
+      "poster": "",
+      "genres": [
+        "Экшен",
+        "Сверхъестественное",
+        "Сёнэн"
+      ]
+    }
+  ]
+}
