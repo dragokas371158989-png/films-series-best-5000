@@ -7,10 +7,10 @@ const FAST_SEARCH_URL = `${FAST_BASE}/search_index.json`;
 const LEGACY_INDEX_URL = "data/index.json";
 const TMDB_ENABLED = false;
 const GKM_TMDB_OFF_VERSION = "v81-tmdb-off-local-base-2026-06-15";
-const KINOPOISK_ENABLED = true;
+const KINOPOISK_ENABLED = false;
 const KINOPOISK_API_BASE = "https://api.kinopoisk.dev/v1.4";
 const KINOPOISK_API_KEY = "";
-const GKM_KINOPOISK_API_VERSION = "v82-kinopoisk-api-2026-06-15";
+const GKM_KINOPOISK_API_VERSION = "v97-server-side-only-kinopoisk-facts-2026-06-15";
 const PAGE_SIZE = 60;
 const MIN_VOTES_FOR_TOP = 300;
 
@@ -203,60 +203,10 @@ function normalizeKinopoiskDoc(doc) {
 }
 
 async function searchKinopoiskMovie(query, year) {
-  if (!KINOPOISK_ENABLED) return null;
-  const key = getKinopoiskApiKey();
-  if (!key) {
-    console.info("Кинопоиск API: ключ не указан, запрос пропущен");
-    return null;
-  }
-
-  const q = String(query || "").trim();
-  if (!q) return null;
-
-  const cacheKey = `${q}|${year || ""}`.toLowerCase();
-  if (kinopoiskCache.has(cacheKey)) return kinopoiskCache.get(cacheKey);
-
-  const url = new URL(`${KINOPOISK_API_BASE}/movie/search`);
-  url.searchParams.set("page", "1");
-  url.searchParams.set("limit", "5");
-  url.searchParams.set("query", q);
-
-  const res = await fetch(url.toString(), {
-    headers: {
-      "accept": "application/json",
-      "X-API-KEY": key,
-    },
-    cache: "no-store",
-  });
-  if (!res.ok) throw new Error(`Кинопоиск API не ответил: ${res.status}`);
-
-  const data = await res.json();
-  const docs = Array.isArray(data.docs) ? data.docs : [];
-  const y = String(year || "").slice(0, 4);
-  const found = docs.find(doc => y && String(doc.year || "") === y) || docs[0] || null;
-  const normalized = normalizeKinopoiskDoc(found);
-  kinopoiskCache.set(cacheKey, normalized);
-  return normalized;
+  return null;
 }
 
 async function enrichFromKinopoisk(item) {
-  if (!item) return item;
-  const title = titleOf(item);
-  const year = getYear(item);
-  const extra = await searchKinopoiskMovie(title, year);
-  if (!extra) return item;
-
-  if (!hasPosterValue(posterValueAny(item)) && hasPosterValue(extra.poster)) item.poster = extra.poster;
-  if (!item.overview && extra.overview) item.overview = extra.overview;
-  if (!item.rating && extra.rating) item.rating = extra.rating;
-  if (!item.votes && extra.votes) item.votes = extra.votes;
-  if (!item.kinopoiskId && extra.kinopoiskId) item.kinopoiskId = extra.kinopoiskId;
-  if (!item.episodes && extra.episodes) item.episodes = extra.episodes;
-  if (!item.studio && extra.studio) item.studio = extra.studio;
-  if (!item.country && extra.country) item.country = extra.country;
-  if (!item.ageRating && extra.ageRating) item.ageRating = extra.ageRating;
-  if (!item.status && extra.status) item.status = extra.status;
-  if (!item.source) item.source = extra.source;
   return item;
 }
 
@@ -4568,6 +4518,9 @@ if (document.readyState === "loading") {
 })();
 
 window.GKM_V96_SERVER_FACTS_VERSION = "v96-server-side-kinopoisk-facts-2026-06-15";
+window.GKM_V97_WORKFLOW_FIX_VERSION = "v97-workflow-fix-server-facts-2026-06-15";
+window.GKM_V98_WORKFLOW_CACHE_FIX_VERSION = "v98-workflow-cache-fix-kinopoisk-facts-2026-06-15";
+window.GKM_V99_BROWSER_KINOPOISK_NOOP_VERSION = "v99-browser-kinopoisk-noop-2026-06-15";
 
 /* === GKM V92 WORKER SEARCH NO PAGE FREEZE === */
 (function () {
