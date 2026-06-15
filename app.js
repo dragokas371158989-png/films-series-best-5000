@@ -7,10 +7,10 @@ const FAST_SEARCH_URL = `${FAST_BASE}/search_index.json`;
 const LEGACY_INDEX_URL = "data/index.json";
 const TMDB_ENABLED = false;
 const GKM_TMDB_OFF_VERSION = "v81-tmdb-off-local-base-2026-06-15";
-const KINOPOISK_ENABLED = true;
+const KINOPOISK_ENABLED = false;
 const KINOPOISK_API_BASE = "https://api.kinopoisk.dev/v1.4";
 const KINOPOISK_API_KEY = "";
-const GKM_KINOPOISK_API_VERSION = "v82-kinopoisk-api-2026-06-15";
+const GKM_KINOPOISK_API_VERSION = "v97-server-side-only-kinopoisk-facts-2026-06-15";
 const PAGE_SIZE = 60;
 const MIN_VOTES_FOR_TOP = 300;
 
@@ -4568,6 +4568,7 @@ if (document.readyState === "loading") {
 })();
 
 window.GKM_V96_SERVER_FACTS_VERSION = "v96-server-side-kinopoisk-facts-2026-06-15";
+window.GKM_V97_WORKFLOW_FIX_VERSION = "v97-workflow-fix-server-facts-2026-06-15";
 
 /* === GKM V92 WORKER SEARCH NO PAGE FREEZE === */
 (function () {
@@ -8084,3 +8085,6 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
   else { setupControls(); setupYears(); }
 })();
+
+
+window.GKM_V98_WORKFLOW_CACHE_FIX_VERSION = "v98-workflow-cache-fix-kinopoisk-facts-2026-06-15";
