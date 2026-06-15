@@ -8085,3 +8085,6 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
   else { setupControls(); setupYears(); }
 })();
+
+
+window.GKM_V98_WORKFLOW_CACHE_FIX_VERSION = "v98-workflow-cache-fix-kinopoisk-facts-2026-06-15";
