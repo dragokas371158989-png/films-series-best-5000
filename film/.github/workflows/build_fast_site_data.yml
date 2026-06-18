@@ -1,0 +1,77 @@
+name: Build fast site data
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-fast-site-data
+  cancel-in-progress: true
+
+jobs:
+  build-fast-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Sync branch
+        run: git pull --rebase origin main
+
+      - name: Build fast data
+        run: python tools/build_fast_site_data.py
+
+      - name: Optional post-fix fast data
+        run: |
+          if [ -f tools/post_fix_fast_data.py ]; then
+            python tools/post_fix_fast_data.py
+          else
+            echo "tools/post_fix_fast_data.py not found, skipping"
+          fi
+
+      - name: Enrich Kinopoisk facts
+        env:
+          KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
+          GKM_KINOPOISK_FACT_LIMIT: "2000"
+        run: python tools/enrich_kinopoisk_facts.py
+
+      - name: Verify fast data
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          m=json.load(open('data/fast/meta.json',encoding='utf-8'))
+          print("count", m.get("count"))
+          print("kinopoiskFacts", m.get("kinopoiskFacts"))
+          assert int(m.get("count") or 0) > 0
+          assert Path("data/fast/search_index.json").exists()
+          PY
+
+      - name: Commit fast data
+        run: |
+          git config user.name "fast-data-bot"
+          git config user.email "fast-data-bot@users.noreply.github.com"
+          git add data/fast
+          if [ -f data/kinopoisk_facts_cache.json ]; then
+            git add data/kinopoisk_facts_cache.json
+          fi
+          if git diff --cached --quiet; then
+            echo "No fast data changes"
+            exit 0
+          fi
+          git commit -m "Build fast site data v104"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin main && break
+            echo "Push failed, retry $i"
+            sleep 5
+          done
