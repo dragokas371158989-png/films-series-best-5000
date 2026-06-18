@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v106-clean-fast-no-freeze-2026-06-18";
+const GKM_APP_CLEAN_VERSION = "v107-stable-home-details-error-fallback-2026-06-18";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -222,6 +222,7 @@ async function renderHome() {
   setStatus("Загружаю главную...");
   homeData = homeData || await fetchJson(HOME_URL);
   const sections = homeData.sections || {};
+  const homePool = [];
   const order = [
     ["popular", "Популярное"],
     ["top", "Топ"],
@@ -243,6 +244,7 @@ async function renderHome() {
   if (grid) {
     grid.innerHTML = order.map(([key, title]) => {
       const list = (sections[key] || []).filter(hasPoster).slice(0, 18);
+      homePool.push(...list);
       return `
         <section class="home-section">
           <div class="home-section-head">
@@ -254,6 +256,13 @@ async function renderHome() {
       `;
     }).join("");
   }
+  const seen = new Set();
+  currentItems = homePool.filter(item => {
+    const key = String(item && (item.id || `${titleOf(item)}|${getYear(item)}`));
+    if (!item || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
   setStatus(`Готово · ${homeData.total || 0} записей`);
 }
 
@@ -388,6 +397,27 @@ function collectVisiblePool() {
     seen.add(key);
     return true;
   });
+}
+
+function showFatalError(err) {
+  const message = err && (err.message || err.stack) || String(err || "Неизвестная ошибка");
+  console.error(err);
+  setStatus("Ошибка загрузки сайта");
+  const count = $("countText");
+  const grid = $("grid");
+  if (count) count.textContent = "Сайт не смог загрузить данные";
+  if (grid) {
+    grid.innerHTML = `
+      <section class="home-section">
+        <div class="home-section-head"><h3>Ошибка загрузки</h3></div>
+        <p style="color:#f8fbff;line-height:1.5">
+          Не загрузились файлы базы или скрипт. Проверь, что в репозитории есть
+          <b>data/fast/home.json</b>, <b>data/fast/meta.json</b> и <b>data/fast/search_index.json</b>.
+        </p>
+        <pre style="white-space:pre-wrap;color:#ffb4b4;background:#120b16;border:1px solid #5b2230;border-radius:10px;padding:12px;overflow:auto">${escapeHtml(message)}</pre>
+      </section>
+    `;
+  }
 }
 
 function factHtml(label, value) {
@@ -606,6 +636,7 @@ function bindEvents() {
 
 async function boot() {
   window.GKM_V106_CLEAN_APP_VERSION = GKM_APP_CLEAN_VERSION;
+  window.GKM_V107_STABLE_APP_VERSION = GKM_APP_CLEAN_VERSION;
   window.GKM_COUNT_POSTERS = async () => {
     const data = await fetchJson(SEARCH_URL);
     const total = Array.isArray(data) ? data.length : 0;
@@ -618,10 +649,12 @@ async function boot() {
     await renderHome();
     console.log("GKM:", GKM_APP_CLEAN_VERSION);
   } catch (err) {
-    console.error(err);
-    setStatus(`Ошибка загрузки: ${err.message || err}`);
+    showFatalError(err);
   }
 }
+
+window.addEventListener("error", event => showFatalError(event.error || event.message));
+window.addEventListener("unhandledrejection", event => showFatalError(event.reason));
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
 else boot();
