@@ -1780,3 +1780,103 @@ a {
   color: #dff7ff;
 }
 /* === /GKM V73 POSTER FALLBACK === */
+
+/* === GKM V109 RATING FIT AND FACTS FIX === */
+.grid .card-rating,
+.home-row .card-rating,
+.related-rating {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 30px !important;
+  padding: 6px 8px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  text-align: center !important;
+  line-height: 1.15 !important;
+  font-size: 12px !important;
+  font-weight: 1000 !important;
+}
+
+.grid .card-rating,
+.home-row .card-rating {
+  border-radius: 999px !important;
+  background: rgba(15, 23, 42, .86) !important;
+  border: 1px solid rgba(0, 229, 255, .34) !important;
+  color: #f8fbff !important;
+}
+
+.related-rating {
+  margin-top: 10px !important;
+  border-radius: 9px !important;
+  background: linear-gradient(135deg, #0ff0d0, #00d8ff) !important;
+  color: #001018 !important;
+}
+
+.related-cards {
+  display: flex !important;
+  gap: 14px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 4px 2px 12px !important;
+}
+
+.related-card {
+  min-width: 184px !important;
+  width: 184px !important;
+  max-width: 184px !important;
+  overflow: hidden !important;
+}
+
+.related-info {
+  padding: 10px !important;
+}
+
+.related-title {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  min-height: 38px !important;
+  max-height: 42px !important;
+}
+
+.facts-grid .fact-card,
+#detailFacts .fact-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  min-height: 70px !important;
+  padding: 12px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.facts-grid .fact-card span,
+#detailFacts .fact-card span {
+  display: block !important;
+  width: 100% !important;
+  color: #aebbf4 !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+}
+
+.facts-grid .fact-card strong,
+#detailFacts .fact-card strong {
+  display: block !important;
+  width: 100% !important;
+  color: #f8fbff !important;
+  font-size: 16px !important;
+  line-height: 1.1 !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+/* === /GKM V109 RATING FIT AND FACTS FIX === */
