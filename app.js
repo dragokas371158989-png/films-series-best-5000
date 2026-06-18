@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v101-full-fast-search-kinopoisk-data-2026-06-17";
+const GKM_APP_CLEAN_VERSION = "v105-page-worker-no-freeze-2026-06-18";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -6,7 +6,7 @@ const FAST_META_URL = `${FAST_BASE}/meta.json`;
 const FAST_SEARCH_URL = `${FAST_BASE}/search_index.json`;
 const LEGACY_INDEX_URL = "data/index.json";
 const TMDB_ENABLED = false;
-const GKM_TMDB_OFF_VERSION = "v101-full-fast-search-kinopoisk-data-2026-06-17";
+const GKM_TMDB_OFF_VERSION = "v105-page-worker-no-freeze-2026-06-18";
 const KINOPOISK_ENABLED = false;
 const KINOPOISK_API_BASE = "https://api.kinopoisk.dev/v1.4";
 const KINOPOISK_API_KEY = "";
@@ -8917,3 +8917,205 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
   else setupMeta();
 })();
 /* === /GKM V104 WORKER EOF LOCK === */
+
+/* === GKM V105 PAGE WORKER EOF LOCK: no huge result transfer === */
+(function () {
+  window.GKM_V105_PAGE_WORKER_VERSION = "v105-page-worker-no-freeze-2026-06-18";
+
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const SEARCH_URL = new URL("data/fast/search_index.json", window.location.href).href;
+  const META_URL = new URL("data/fast/meta.json", window.location.href).href;
+  let worker = null;
+  let req = 0;
+  let totalResults = 0;
+  let totalPosters = 0;
+  let currentControls = null;
+  let timer = 0;
+
+  function el(id) { return document.getElementById(id); }
+  function norm(v) { return String(v || "").toLowerCase().replaceAll("ё", "е").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim(); }
+  function hasPoster(item) {
+    const raw = String(item && item.poster || "").trim();
+    const low = raw.toLowerCase();
+    return Boolean(raw && low !== "null" && low !== "undefined" && !low.includes("dummyimage") && !low.includes("placeholder") && !low.includes("no-poster"));
+  }
+  function setTabs(tab) {
+    document.querySelectorAll(".tab[data-tab]").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.tab === tab);
+    });
+  }
+  function controls() {
+    return {
+      q: (el("searchInput") || {}).value || "",
+      type: (el("typeFilter") || {}).value || "",
+      genre: (el("genreFilter") || {}).value || "",
+      year: (el("yearFilter") || {}).value || "",
+      minRating: Number((el("ratingFilter") || {}).value || 0),
+      sort: (el("sortFilter") || {}).value || "smart",
+      tab: typeof currentTab === "string" ? currentTab : "all"
+    };
+  }
+  function active(c) {
+    return Boolean(norm(c.q) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== "smart") || (c.tab && c.tab !== "all"));
+  }
+  async function setupMeta() {
+    const sort = el("sortFilter");
+    if (sort && sort.dataset.gkmV105 !== "1") {
+      const cur = sort.value || "smart";
+      sort.innerHTML = [
+        ["smart", "Лучшие"],
+        ["rating", "По оценке"],
+        ["votes", "По голосам"],
+        ["year", "Новые"],
+        ["year_old", "Старые"],
+        ["title", "По названию"]
+      ].map(x => `<option value="${x[0]}">${x[1]}</option>`).join("");
+      sort.value = ["smart","rating","votes","year","year_old","title"].includes(cur) ? cur : "smart";
+      sort.dataset.gkmV105 = "1";
+    }
+    const yf = el("yearFilter");
+    const gf = el("genreFilter");
+    if (yf && yf.options.length > 1 && gf && gf.options.length > 1) return;
+    try {
+      const meta = await fetch(META_URL + "?v=105", { cache: "force-cache" }).then(r => r.json());
+      if (yf && yf.options.length <= 1 && Array.isArray(meta.years)) {
+        yf.innerHTML = `<option value="">Все годы</option>` + meta.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+      }
+      if (gf && gf.options.length <= 1 && Array.isArray(meta.genres)) {
+        gf.innerHTML = `<option value="">Все жанры</option>` + meta.genres.map(g => `<option value="${String(g)}">${String(g)}</option>`).join("");
+      }
+    } catch (e) {}
+  }
+  function drawPage(items, page, total, posters, ms) {
+    currentPage = Math.max(1, Number(page || 1));
+    totalResults = Number(total || 0);
+    totalPosters = Number(posters || 0);
+    currentPages = Math.max(1, Math.ceil(totalResults / PAGE));
+    currentItems = Array.isArray(items) ? items : [];
+    lastSearchResults = currentItems;
+    renderList(currentItems, `Найдено: ${totalResults} · с постерами ${totalPosters} · Страница ${currentPage} из ${currentPages}`);
+    if (typeof setStatus === "function") setStatus(`Найдено: ${totalResults} · ${ms || 0} мс · страница ${currentPage}/${currentPages}`);
+  }
+  function makeWorker() {
+    if (worker) return worker;
+    const code = `
+      const SEARCH_URL=${JSON.stringify(SEARCH_URL + "?v=105")};
+      const PAGE=${PAGE};
+      let indexPromise=null;
+      let lastRows=[];
+      let lastTotal=0;
+      let lastPosters=0;
+      function norm(v){return String(v||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
+      function keyfix(s){const m={"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};return String(s||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
+      function title(x){return String((x&&(x.ru||x.en||x.title||x.name))||"");}
+      function year(x){return String((x&&x.year)||"");}
+      function type(x){return String((x&&x.type)||"");}
+      function rating(x){return Number((x&&x.rating)||0);}
+      function votes(x){return Number((x&&x.votes)||0);}
+      function genres(x){return Array.isArray(x&&x.genres)?x.genres.map(String):[];}
+      function poster(x){const raw=String((x&&x.poster)||"").trim();const low=raw.toLowerCase();return raw&&low!=="null"&&low!=="undefined"&&!low.includes("dummyimage")&&!low.includes("placeholder")&&!low.includes("no-poster")?1:0;}
+      function tabPass(x,tab){const t=type(x);if(!tab||tab==="all")return true;if(tab==="movies")return t==="Фильм";if(tab==="series")return t==="Сериал";if(tab==="anime")return t==="Аниме";if(tab==="cartoons")return t==="Мультфильм";if(tab==="top")return rating(x)>=7&&votes(x)>=300;if(tab==="new")return Number(year(x)||0)>=2024;if(tab==="popular")return votes(x)>=1000;return true;}
+      function pass(x,c){if(!tabPass(x,c.tab))return false;const t=type(x);if(c.type&&t!==c.type)return false;if(c.genre&&!genres(x).includes(c.genre))return false;if(c.year&&year(x)!==String(c.year))return false;if(c.minRating&&rating(x)<c.minRating)return false;return true;}
+      function queries(raw){const base=norm(raw);const out=new Set(base?[base]:[]);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"],"гарри поттер":["harry potter"],"интерстеллар":["interstellar"]};Object.entries(syn).forEach(([k,a])=>{if(base===k||base.includes(k))a.forEach(x=>out.add(norm(x)));});return [...out].filter(Boolean);}
+      function hay(x){return x.__hay105||(x.__hay105=norm([x.search,title(x),x.ru,x.en,(x.genres||[]).join(" ")].join(" ")));}
+      function score(x,qs){if(!qs.length)return 1;const h=hay(x),wh=" "+h+" ";let best=0;for(const q of qs){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+poster(x)*5000+Math.min(votes(x),1000000)/10+rating(x)*100:0;}
+      function sortRows(rows,sort,hasQ){const pr=(a,b)=>poster(b.item)-poster(a.item);if(sort==="rating")rows.sort((a,b)=>pr(a,b)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQ)rows.sort((a,b)=>pr(a,b)||b.score-a.score);else rows.sort((a,b)=>pr(a,b)||(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
+      async function load(){if(!indexPromise)indexPromise=fetch(SEARCH_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index "+r.status);return r.json();});return indexPromise;}
+      function pageSlice(page){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE;return lastRows.slice(start,start+PAGE).map(x=>x.item);}
+      self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,total:lastTotal,posters:lastPosters,items:pageSlice(msg.page),ms:0});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const index=await load();const c=msg.c||{};const qs=queries(c.q);const rows=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,qs);if(!qs.length||s>0)rows.push({item,score:s});}sortRows(rows,c.sort,Boolean(qs.length));lastRows=rows;lastTotal=rows.length;lastPosters=rows.reduce((n,x)=>n+poster(x.item),0);self.postMessage({id:msg.id,ok:true,page:1,total:lastTotal,posters:lastPosters,items:pageSlice(1),ms:Date.now()-started,indexTotal:index.length,indexPosters:index.reduce((n,x)=>n+poster(x),0)});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
+    `;
+    worker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
+    worker.onmessage = e => {
+      const msg = e.data || {};
+      if (msg.id !== req) return;
+      if (msg.loading) {
+        if (typeof setStatus === "function") setStatus("Фильтрую в фоне, страница не должна зависать...");
+        return;
+      }
+      if (!msg.ok) {
+        if (typeof setStatus === "function") setStatus("Фильтр не сработал: " + (msg.error || "ошибка"));
+        return;
+      }
+      window.GKM_V105_LAST_STATS = msg;
+      drawPage(msg.items, msg.page, msg.total, msg.posters, msg.ms);
+    };
+    return worker;
+  }
+  window.renderSearchPage = function(page) {
+    req += 1;
+    makeWorker().postMessage({ id: req, mode: "page", page: Math.max(1, Number(page || 1)) });
+  };
+  window.runSearch = async function() {
+    await setupMeta();
+    const c = controls();
+    currentControls = c;
+    if (!active(c)) {
+      req += 1;
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else {
+        c.tab = currentTab;
+        req += 1;
+        makeWorker().postMessage({ id: req, c });
+      }
+      return;
+    }
+    if (norm(c.q) && norm(c.q).replace(/\s+/g, "").length < 2) {
+      if (typeof setStatus === "function") setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+    req += 1;
+    makeWorker().postMessage({ id: req, c });
+  };
+  function schedule(delay) {
+    clearTimeout(timer);
+    timer = setTimeout(() => window.runSearch(), delay);
+  }
+  window.addEventListener("input", e => {
+    if (!(e.target && e.target.closest && e.target.closest("#searchInput"))) return;
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+    schedule(180);
+  }, true);
+  window.addEventListener("change", e => {
+    if (!(e.target && e.target.closest && e.target.closest("#typeFilter,#genreFilter,#yearFilter,#ratingFilter,#sortFilter"))) return;
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+    schedule(40);
+  }, true);
+  window.addEventListener("click", e => {
+    const tabBtn = e.target && e.target.closest ? e.target.closest(".tab[data-tab]") : null;
+    if (tabBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+      currentTab = tabBtn.dataset.tab || "all";
+      setTabs(currentTab);
+      if (currentTab === "fav") return renderFavorites();
+      if (currentTab === "history") return renderHistory();
+      if (currentTab === "random") return renderRandom();
+      schedule(20);
+      return;
+    }
+    if (e.target && e.target.closest && e.target.closest("#resetBtn")) {
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+      ["searchInput","typeFilter","genreFilter","yearFilter","ratingFilter"].forEach(name => { const node = el(name); if (node) node.value = ""; });
+      const sort = el("sortFilter");
+      if (sort) sort.value = "smart";
+      currentTab = "all";
+      setTabs("all");
+      schedule(20);
+    }
+  }, true);
+  const oldRender = typeof renderList === "function" ? renderList : null;
+  if (oldRender) {
+    renderList = function(items, label) {
+      const list = Array.isArray(items) ? [...items] : [];
+      return oldRender(list.sort((a,b) => (hasPoster(b) ? 1 : 0) - (hasPoster(a) ? 1 : 0)), label);
+    };
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setupMeta);
+  else setupMeta();
+})();
+/* === /GKM V105 PAGE WORKER EOF LOCK === */
