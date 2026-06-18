@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v108-worker-url-card-ui-fix-2026-06-18";
+const GKM_APP_CLEAN_VERSION = "v109-fast-search-shards-rating-fit-2026-06-18";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -6,6 +6,8 @@ const FAST_BASE = "data/fast";
 const HOME_URL = `${FAST_BASE}/home.json`;
 const META_URL = `${FAST_BASE}/meta.json`;
 const SEARCH_URL = `${FAST_BASE}/search_index.json`;
+const SEARCH_LITE_URL = `${FAST_BASE}/search_lite.json`;
+const SEARCH_SHARDS_BASE = `${FAST_BASE}/search_shards`;
 const PAGE_SIZE = 60;
 
 let currentTab = "all";
@@ -49,7 +51,7 @@ function setStatus(text) {
 }
 
 async function fetchJson(url, cache = "force-cache") {
-  const res = await fetch(`${url}?v=106`, { cache });
+  const res = await fetch(`${url}?v=109`, { cache });
   if (!res.ok) throw new Error(`${url} ${res.status}`);
   return res.json();
 }
@@ -83,6 +85,17 @@ function getRating(item) {
 
 function getVotes(item) {
   return Number(item && (item.votes || item.vote_count || item.scored_by) || 0);
+}
+
+function formatVotes(value) {
+  const votes = Number(value || 0);
+  if (!Number.isFinite(votes) || votes <= 0) return "0";
+  if (votes >= 1000000) {
+    const short = votes >= 10000000 ? Math.round(votes / 1000000) : (votes / 1000000).toFixed(1).replace(/\.0$/, "");
+    return `${short} млн`;
+  }
+  if (votes >= 1000) return `${Math.round(votes / 1000)} тыс`;
+  return String(votes);
 }
 
 function getGenres(item) {
@@ -149,7 +162,7 @@ function cardHtml(item) {
         <h3 class="card-title">${escapeHtml(title)}</h3>
         <div class="card-meta">${escapeHtml(getYear(item) || "—")} · ${escapeHtml(getType(item))}</div>
         <div class="card-genres">${escapeHtml(getGenres(item).slice(0, 2).join(" · ") || "Жанры не указаны")}</div>
-        <div class="card-rating">★ ${rating ? rating.toFixed(1) : "—"} · ${votes} голосов</div>
+        <div class="card-rating">★ ${rating ? rating.toFixed(1) : "—"} · ${formatVotes(votes)}</div>
       </div>
     </article>
   `;
@@ -284,13 +297,17 @@ async function loadFastPage(tab, page = 1) {
 
 function makeSearchWorker() {
   if (searchWorker) return searchWorker;
-  const absoluteSearchUrl = new URL(`${SEARCH_URL}?v=108`, window.location.href).href;
+  const absoluteSearchUrl = new URL(`${SEARCH_LITE_URL}?v=109`, window.location.href).href;
+  const absoluteShardBase = new URL(`${SEARCH_SHARDS_BASE}/`, window.location.href).href;
   const code = `
     const SEARCH_URL = ${JSON.stringify(absoluteSearchUrl)};
+    const SHARD_BASE = ${JSON.stringify(absoluteShardBase)};
     const PAGE_SIZE = ${PAGE_SIZE};
     let indexPromise = null;
+    const shardPromises = new Map();
     let rows = [];
     function norm(v){return String(v||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
+    function squeeze(v){return norm(v).replace(/(.)\\1+/g,"$1");}
     function keyfix(s){const m={"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};return String(s||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
     function title(x){return String((x&&(x.ru||x.en||x.title||x.name))||"");}
     function year(x){return String((x&&x.year)||"");}
@@ -301,20 +318,23 @@ function makeSearchWorker() {
     function poster(x){const raw=String((x&&x.poster)||"").trim();const low=raw.toLowerCase();return raw&&low!=="null"&&low!=="undefined"&&!low.includes("dummyimage")&&!low.includes("placeholder")&&!low.includes("no-poster")?1:0;}
     function tabPass(x,tab){const t=type(x);if(!tab||tab==="all")return true;if(tab==="movies")return t==="Фильм";if(tab==="series")return t==="Сериал";if(tab==="anime")return t==="Аниме";if(tab==="cartoons")return t==="Мультфильм";if(tab==="top")return rating(x)>=7&&votes(x)>=300;if(tab==="new")return Number(year(x)||0)>=2024;if(tab==="popular")return votes(x)>=1000;return true;}
     function pass(x,c){if(!tabPass(x,c.tab))return false;const t=type(x);if(c.type&&t!==c.type)return false;if(c.genre&&!genres(x).includes(c.genre))return false;if(c.year&&year(x)!==String(c.year))return false;if(c.minRating&&rating(x)<Number(c.minRating))return false;return true;}
-    function queryList(raw){const base=norm(raw);const out=new Set(base?[base]:[]);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"интерстеллар":["interstellar"]};Object.entries(syn).forEach(([k,a])=>{if(base===k||base.includes(k))a.forEach(x=>out.add(norm(x)));});return [...out].filter(Boolean);}
+    function queryList(raw){const base=norm(raw);const out=new Set(base?[base]:[]);const squ=squeeze(base);if(squ&&squ!==base)out.add(squ);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const fixedSqu=squeeze(fixed);if(fixedSqu&&fixedSqu!==fixed)out.add(fixedSqu);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"интерстеллар":["interstellar"]};[...out].forEach(value=>{Object.entries(syn).forEach(([k,a])=>{if(value===k||value.includes(k))a.forEach(x=>out.add(norm(x)));});});return [...out].filter(Boolean);}
     function hay(x){return x.__hay||(x.__hay=norm([x.search,title(x),x.ru,x.en,(x.genres||[]).join(" ")].join(" ")));}
     function score(x,queries){if(!queries.length)return 1;const h=hay(x);const wh=" "+h+" ";let best=0;for(const q of queries){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+poster(x)*5000+Math.min(votes(x),1000000)/10+rating(x)*100:0;}
     function sortRows(sort, hasQuery){const pr=(a,b)=>poster(b.item)-poster(a.item);if(sort==="rating")rows.sort((a,b)=>pr(a,b)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQuery)rows.sort((a,b)=>pr(a,b)||b.score-a.score);else rows.sort((a,b)=>pr(a,b)||(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
-    async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index "+r.status);return r.json();});return indexPromise;}
+    async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_lite "+r.status);return r.json();});return indexPromise;}
+    function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
+    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=109";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)throw new Error("search_shard "+key+" "+r.status);return r.json();}));}return shardPromises.get(key);}
+    async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
     function pageItems(page){const p=Math.max(1,Number(page||1));return rows.slice((p-1)*PAGE_SIZE,p*PAGE_SIZE).map(x=>x.item);}
-    self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page),ms:0});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const index=await loadIndex();const c=msg.controls||{};const queries=queryList(c.q);rows=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)rows.push({item,score:s});}sortRows(c.sort||"smart",Boolean(queries.length));self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1),ms:Date.now()-started,indexTotal:index.length,indexPosters:index.reduce((n,x)=>n+poster(x),0)});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
+    self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page),ms:0});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const queries=queryList(c.q);const index=await candidateIndex(queries);rows=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)rows.push({item,score:s});}sortRows(c.sort||"smart",Boolean(queries.length));self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1),ms:Date.now()-started,indexTotal:index.length,indexPosters:index.reduce((n,x)=>n+poster(x),0),sharded:Boolean(queries.length)});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
   `;
   searchWorker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
   searchWorker.onmessage = event => {
     const msg = event.data || {};
     if (msg.id !== searchReq) return;
     if (msg.loading) {
-      setStatus("Фильтрую в фоне...");
+      setStatus("Ищу в быстрой базе...");
       return;
     }
     if (!msg.ok) {
@@ -515,7 +535,7 @@ function relatedCardHtml(item) {
       <div class="related-info">
         <div class="related-title">${escapeHtml(titleOf(item))}</div>
         <div class="related-meta">${escapeHtml(getYear(item) || "—")} · ${escapeHtml(getType(item))}</div>
-        <div class="related-rating">${escapeHtml(getRating(item) || "—")} · ${escapeHtml(getVotes(item))} голосов</div>
+        <div class="related-rating">★ ${escapeHtml(getRating(item) || "—")} · ${escapeHtml(formatVotes(getVotes(item)))}</div>
       </div>
     </article>
   `;
@@ -639,8 +659,9 @@ async function boot() {
   window.GKM_V106_CLEAN_APP_VERSION = GKM_APP_CLEAN_VERSION;
   window.GKM_V107_STABLE_APP_VERSION = GKM_APP_CLEAN_VERSION;
   window.GKM_V108_FIX_VERSION = GKM_APP_CLEAN_VERSION;
+  window.GKM_V109_FAST_SEARCH_VERSION = GKM_APP_CLEAN_VERSION;
   window.GKM_COUNT_POSTERS = async () => {
-    const data = await fetchJson(SEARCH_URL);
+    const data = await fetchJson(SEARCH_LITE_URL);
     const total = Array.isArray(data) ? data.length : 0;
     const withPoster = Array.isArray(data) ? data.filter(hasPoster).length : 0;
     return { total, withPoster, withoutPoster: total - withPoster };
