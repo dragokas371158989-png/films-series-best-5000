@@ -69,7 +69,7 @@ jobs:
             echo "No fast data changes"
             exit 0
           fi
-          git commit -m "Build fast site data v98"
+          git commit -m "Build fast site data v104"
           for i in 1 2 3; do
             git pull --rebase origin main && git push origin main && break
             echo "Push failed, retry $i"

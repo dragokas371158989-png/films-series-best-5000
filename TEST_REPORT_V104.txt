@@ -1,0 +1,39 @@
+GKM V104 full zip test report
+Date: 2026-06-17
+
+Changed:
+- app.js: final V104 worker search lock added at the end of the file.
+- app.js: TMDB remains disabled.
+- app.js: Kinopoisk browser API remains disabled; facts are server-side only through GitHub Actions.
+- tools/build_fast_site_data.py: fast search index now includes compact precomputed search text.
+- data/fast/search_index.json: rewritten to the compact V104 format.
+- .github/workflows/build_fast_site_data.yml: workflow commit label updated to v104.
+- Nested copies film/app.js and downloads/app.js are synchronized with the root app.js.
+- Nested workflow/tools copies in film/ and downloads/ are synchronized with the root files.
+
+Counts:
+- Fast search index: 96,213 items.
+- Fast search index with posters: 96,213.
+- Fast search index without posters: 0.
+- Fast movies: 53,936.
+- Fast series: 21,970.
+- Fast anime: 11,733.
+- Fast cartoons: 8,574.
+- Legacy chunks total: 97,047.
+- Legacy chunks with posters: 97,047.
+- Legacy chunks without posters: 0.
+
+Search checks:
+- Query "Матрица": found 23 items.
+- Query "Шазам": found 5 items.
+- Query "Наруто": found 47 items.
+
+Technical checks:
+- app.js syntax: passed with node --check.
+- film/app.js syntax: passed with node --check.
+- downloads/app.js syntax: passed with node --check.
+- Final search override: GKM_V104_WORKER_EOF_LOCK_VERSION is the last search layer in app.js.
+- Poster sorting: real posters are forced above missing/broken posters.
+- Year filter: options are loaded from data/fast/meta.json.
+- TMDB: blocked in browser.
+- Kinopoisk API key: not used in browser; workflow uses KINOPOISK_API_KEY secret.

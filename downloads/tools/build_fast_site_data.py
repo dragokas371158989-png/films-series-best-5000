@@ -11,7 +11,7 @@ PAGE_SIZE = int(os.environ.get("GKM_FAST_PAGE_SIZE", "60"))
 HOME_LIMIT = int(os.environ.get("GKM_FAST_HOME_LIMIT", "18"))
 MIN_VOTES_FOR_TOP = int(os.environ.get("GKM_MIN_VOTES_FOR_TOP", "300"))
 TMDB_ENABLED = False
-TMDB_OFF_VERSION = "v81-tmdb-off-local-base-2026-06-15"
+TMDB_OFF_VERSION = "v101-full-fast-search-kinopoisk-data-2026-06-17"
 
 GENRE_MAP = {
     "10749":"Мелодрама","36":"История","28":"Боевик","12":"Приключения","16":"Мультфильм","35":"Комедия","80":"Криминал",
@@ -666,44 +666,41 @@ def write_pages(base, tab, items):
     return {"count": len(items), "pages": pages, "pageSize": PAGE_SIZE}
 
 def search_item(x):
+    aliases = x.get("aliases", [])[:12]
+    genres = x.get("genres", [])[:6]
+    ai_words = x.get("aiWords", [])[:24]
+    search_text = compact_text(
+        x.get("ru"),
+        x.get("en"),
+        " ".join(aliases),
+        x.get("year"),
+        x.get("type"),
+        " ".join(genres),
+        " ".join(ai_words),
+        x.get("qualityTier"),
+        x.get("popularityTier"),
+        limit=260,
+    )
     return {
         "id": x.get("id"),
         "ru": x.get("ru"),
         "en": x.get("en"),
-        "aliases": x.get("aliases", [])[:20],
+        "aliases": aliases,
         "year": x.get("year"),
         "type": x.get("type"),
         "rating": x.get("rating"),
         "votes": x.get("votes"),
         "poster": x.get("poster"),
-        "genres": x.get("genres", [])[:6],
-        "overview": (x.get("overview") or "")[:180],
+        "genres": genres,
+        "overview": (x.get("overview") or "")[:120],
         "episodes": x.get("episodes") or x.get("episodeCount") or "",
         "studio": x.get("studio") or x.get("studios") or "",
         "country": x.get("country") or x.get("countries") or "",
         "status": x.get("status") or "",
         "ageRating": x.get("ageRating") or x.get("age") or "",
         "source": x.get("source"),
-        "aiTags": x.get("aiTags", [])[:8],
-        "moodTags": x.get("moodTags", [])[:6],
-        "recTags": x.get("recTags", [])[:6],
-        "aiWords": x.get("aiWords", [])[:40],
-        "recText": (x.get("recText") or "")[:420],
-        "qualityTier": x.get("qualityTier"),
-        "popularityTier": x.get("popularityTier"),
+        "search": search_text,
         "recScore": x.get("recScore"),
-        "qualityFlags": x.get("qualityFlags", []),
-        "neuroVector": x.get("neuroVector", [])[:25],
-        "decade": x.get("decade"),
-        "omegaText": (x.get("omegaText") or "")[:350],
-        "apexText": (x.get("apexText") or "")[:350],
-        "supremeText": (x.get("supremeText") or "")[:350],
-        "riskLevel": x.get("riskLevel"),
-        "ultraText": (x.get("ultraText") or "")[:350],
-        "scoreBand": x.get("scoreBand"),
-        "infinityText": (x.get("infinityText") or "")[:350],
-        "absoluteRank": x.get("absoluteRank"),
-        "absoluteText": (x.get("absoluteText") or "")[:350],
     }
 
 def main():
@@ -775,7 +772,8 @@ def main():
         "genres": genres_all,
         "years": years,
         "pages": pages,
-        "builderVersion": "v56-clean-builder-data-fix-2026-06-13",
+        "builderVersion": "v101-full-fast-search-kinopoisk-data-2026-06-17",
+        "searchIndexVersion": "v101-light-precomputed-search",
         "notes": [
             "types are fixed at build time",
             "Scooby and western cartoons are cartoons, not anime",

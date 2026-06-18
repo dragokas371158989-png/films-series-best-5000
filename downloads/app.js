@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v81-tmdb-off-local-base-2026-06-15";
+const GKM_APP_CLEAN_VERSION = "v101-full-fast-search-kinopoisk-data-2026-06-17";
 
 const FAST_BASE = "data/fast";
 const FAST_HOME_URL = `${FAST_BASE}/home.json`;
@@ -6,11 +6,11 @@ const FAST_META_URL = `${FAST_BASE}/meta.json`;
 const FAST_SEARCH_URL = `${FAST_BASE}/search_index.json`;
 const LEGACY_INDEX_URL = "data/index.json";
 const TMDB_ENABLED = false;
-const GKM_TMDB_OFF_VERSION = "v81-tmdb-off-local-base-2026-06-15";
+const GKM_TMDB_OFF_VERSION = "v101-full-fast-search-kinopoisk-data-2026-06-17";
 const KINOPOISK_ENABLED = false;
 const KINOPOISK_API_BASE = "https://api.kinopoisk.dev/v1.4";
 const KINOPOISK_API_KEY = "";
-const GKM_KINOPOISK_API_VERSION = "v97-server-side-only-kinopoisk-facts-2026-06-15";
+const GKM_KINOPOISK_API_VERSION = "v101-server-side-only-kinopoisk-facts-2026-06-17";
 const PAGE_SIZE = 60;
 const MIN_VOTES_FOR_TOP = 300;
 
@@ -4357,6 +4357,330 @@ if (document.readyState === "loading") {
   window.GKM_AI_CHAT_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
 })();
 
+/* === GKM V101 FINAL FULL ZIP FIX: light search, poster count, franchise related === */
+(function () {
+  window.GKM_V101_FULL_ZIP_VERSION = "v101-full-fast-search-kinopoisk-data-2026-06-17";
+
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const DEFAULT_SORT = "smart";
+  const SEARCH_URL = new URL("data/fast/search_index.json", window.location.href).href;
+  const META_URL = new URL("data/fast/meta.json", window.location.href).href;
+  let searchTimerV101 = 0;
+  let requestIdV101 = 0;
+  let workerV101 = null;
+
+  function byId(id) { return document.getElementById(id); }
+  function normV101(value) {
+    return String(value || "")
+      .toLowerCase()
+      .replaceAll("ё", "е")
+      .replace(/&/g, " and ")
+      .replace(/['’`]/g, "")
+      .replace(/[^\p{L}\p{N}:]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+  function hasRealPosterV101(item) {
+    const raw = String(item && (item.poster || item.posterUrl || item.poster_url || item.image || item.cover || item.img) || "").trim();
+    const low = raw.toLowerCase();
+    if (!raw || low === "null" || low === "undefined" || low === "n/a") return false;
+    if (low.includes("dummyimage") || low.includes("placeholder") || low.includes("no-poster") || low.includes("noposter")) return false;
+    return /^https?:\/\//i.test(raw) || raw.startsWith("data:image/");
+  }
+  function posterRankV101(item) {
+    return hasRealPosterV101(item) ? 1 : 0;
+  }
+  function titleV101(item) {
+    if (typeof titleOf === "function") return titleOf(item);
+    return String(item && (item.ru || item.title_ru || item.name || item.title || item.en || item.original_title || item.original_name) || "");
+  }
+  function yearV101(item) {
+    if (typeof getYear === "function") return String(getYear(item) || "");
+    return String(item && item.year || "");
+  }
+  function typeV101(item) {
+    if (typeof getType === "function") return getType(item);
+    return String(item && (item.type || item.category) || "");
+  }
+  function ratingV101(item) {
+    if (typeof getRating === "function") return Number(getRating(item) || 0);
+    return Number(item && (item.rating || item.vote_average) || 0);
+  }
+  function votesV101(item) {
+    if (typeof getVotes === "function") return Number(getVotes(item) || 0);
+    return Number(item && (item.votes || item.vote_count) || 0);
+  }
+  function genresV101(item) {
+    if (typeof getGenres === "function") return getGenres(item);
+    const g = item && item.genres;
+    if (Array.isArray(g)) return g.map(String);
+    if (typeof g === "string") return g.split(/[,|/]+/).map(x => x.trim()).filter(Boolean);
+    return [];
+  }
+  function setupControlsV101() {
+    const sort = byId("sortFilter");
+    if (sort && sort.dataset.gkmV101 !== "1") {
+      const current = sort.value || DEFAULT_SORT;
+      sort.innerHTML = [
+        ["smart", "Лучшие"],
+        ["rating", "По оценке"],
+        ["votes", "Популярные"],
+        ["year", "Новые"],
+        ["year_old", "Старые"],
+        ["title", "По названию"]
+      ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
+      sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(current) ? current : DEFAULT_SORT;
+      sort.dataset.gkmV101 = "1";
+    }
+  }
+  async function setupYearsV101() {
+    setupControlsV101();
+    const year = byId("yearFilter");
+    const genre = byId("genreFilter");
+    if (year && year.options && year.options.length > 1 && genre && genre.options && genre.options.length > 1) return;
+    try {
+      const res = await fetch(META_URL + "?v=101", { cache: "force-cache" });
+      if (!res.ok) return;
+      const meta = await res.json();
+      window.metaData = window.metaData || meta;
+      if (year && (!year.options || year.options.length <= 1) && Array.isArray(meta.years)) {
+        const current = year.value;
+        year.innerHTML = `<option value="">Все годы</option>` + meta.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+        if (current) year.value = current;
+      }
+      if (genre && (!genre.options || genre.options.length <= 1) && Array.isArray(meta.genres)) {
+        const current = genre.value;
+        genre.innerHTML = `<option value="">Все жанры</option>` + meta.genres.map(g => `<option value="${String(g)}">${String(g)}</option>`).join("");
+        if (current) genre.value = current;
+      }
+    } catch (e) {}
+  }
+  function controlsV101() {
+    return {
+      q: (byId("searchInput") || {}).value || "",
+      type: (byId("typeFilter") || {}).value || "",
+      genre: (byId("genreFilter") || {}).value || "",
+      year: (byId("yearFilter") || {}).value || "",
+      minRating: Number((byId("ratingFilter") || {}).value || 0),
+      sort: (byId("sortFilter") || {}).value || DEFAULT_SORT,
+      tab: typeof currentTab === "string" ? currentTab : "all"
+    };
+  }
+  function activeV101(c) {
+    return Boolean(normV101(c.q) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== DEFAULT_SORT));
+  }
+  function drawV101(page = 1) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE;
+    currentItems = (lastSearchResults || []).slice(start, start + PAGE);
+    const total = lastSearchResults.length;
+    const withPoster = lastSearchResults.filter(hasRealPosterV101).length;
+    renderList(currentItems, `Найдено: ${total} · с постерами ${withPoster} · Страница ${currentPage} из ${currentPages}`);
+  }
+  function createWorkerV101() {
+    if (workerV101) return workerV101;
+    const code = `
+      const SEARCH_URL=${JSON.stringify(SEARCH_URL)};
+      let indexPromise=null;
+      function norm(v){return String(v||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
+      function keyfix(s){const m={"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};return String(s||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
+      function queries(qRaw){const base=norm(qRaw);const out=new Set(base?[base]:[]);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"],"гарри поттер":["harry potter"],"интерстеллар":["interstellar"]};Object.entries(syn).forEach(([k,a])=>{if(base===k||base.includes(k))a.forEach(x=>out.add(norm(x)));});return [...out].filter(Boolean);}
+      function title(i){return String((i&&(i.ru||i.title_ru||i.name||i.title||i.en||i.original_title||i.original_name))||"");}
+      function year(i){return String((i&&i.year)||"");}
+      function typeOf(i){return String((i&&(i.type||i.category))||"");}
+      function rating(i){return Number((i&&i.rating)||(i&&i.vote_average)||0);}
+      function votes(i){return Number((i&&i.votes)||(i&&i.vote_count)||0);}
+      function genres(i){const g=i&&i.genres;if(Array.isArray(g))return g.map(String);if(typeof g==="string")return g.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);return [];}
+      function poster(i){const raw=String((i&&(i.poster||i.posterUrl||i.poster_url||i.image||i.cover||i.img))||"").trim();const low=raw.toLowerCase();return raw&&low!=="null"&&low!=="undefined"&&low!=="n/a"&&!low.includes("dummyimage")&&!low.includes("placeholder")&&!low.includes("no-poster")&&!low.includes("noposter")?1:0;}
+      function tabPass(i,tab){const t=typeOf(i);if(!tab||tab==="all")return true;if(tab==="movies")return t==="Фильм";if(tab==="series")return t==="Сериал";if(tab==="anime")return t==="Аниме";if(tab==="cartoons")return t==="Мультфильм";return true;}
+      function pass(i,c){if(!tabPass(i,c.tab))return false;if(c.type&&typeOf(i)!==c.type)return false;if(c.genre&&!genres(i).includes(c.genre))return false;if(c.year&&year(i)!==String(c.year))return false;if(c.minRating&&rating(i)<Number(c.minRating))return false;return true;}
+      function hay(i){return i.__hay101||(i.__hay101=norm([i.search,title(i),i.ru,i.en,i.title,i.name,i.original_title,i.original_name,(i.aliases||[]).join(" "),(i.genres||[]).join(" ")].join(" ")));}
+      function score(i,qs){if(!qs.length)return 1;const h=hay(i);if(!h)return 0;const wh=" "+h+" ";let best=0;for(const q of qs){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+Math.min(votes(i),1000000)/10+rating(i)*100+poster(i)*5000:0;}
+      function sortRows(rows,sort,hasQ){if(sort==="rating")rows.sort((a,b)=>poster(b.item)-poster(a.item)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>poster(b.item)-poster(a.item)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>poster(b.item)-poster(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>poster(b.item)-poster(a.item)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>poster(b.item)-poster(a.item)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQ)rows.sort((a,b)=>poster(b.item)-poster(a.item)||b.score-a.score);else rows.sort((a,b)=>poster(b.item)-poster(a.item)||(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
+      async function loadIndex(){if(!indexPromise){indexPromise=fetch(SEARCH_URL+"?v=101",{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index load failed "+r.status);return r.json();});}return indexPromise;}
+      self.onmessage=async e=>{const {id,controls}=e.data||{};try{const started=Date.now();self.postMessage({id,status:"loading"});const index=await loadIndex();const qs=queries(controls.q);const rows=[];for(let i=0;i<index.length;i++){const item=index[i];if(!pass(item,controls))continue;const s=score(item,qs);if(!qs.length||s>0)rows.push({item,score:s});}sortRows(rows,controls.sort,Boolean(qs.length));self.postMessage({id,ok:true,ms:Date.now()-started,results:rows.map(x=>x.item),total:index.length,posters:index.reduce((n,x)=>n+poster(x),0)});}catch(err){self.postMessage({id,ok:false,error:String(err&&err.message||err)});}};
+    `;
+    workerV101 = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
+    workerV101.onmessage = event => {
+      const msg = event.data || {};
+      if (msg.id !== requestIdV101) return;
+      if (msg.status === "loading") {
+        setStatus("Загружаю быструю базу поиска...");
+        return;
+      }
+      if (!msg.ok) {
+        setStatus("Поиск не сработал: " + (msg.error || "ошибка"));
+        return;
+      }
+      lastSearchResults = Array.isArray(msg.results) ? msg.results : [];
+      window.GKM_V101_LAST_SEARCH_STATS = {
+        totalIndex: msg.total || 0,
+        postersInIndex: msg.posters || 0,
+        results: lastSearchResults.length,
+        resultsWithPosters: lastSearchResults.filter(hasRealPosterV101).length,
+        ms: msg.ms || 0
+      };
+      drawV101(1);
+      setStatus(`Найдено: ${lastSearchResults.length} · ${msg.ms || 0} мс · постеров в базе ${msg.posters || 0}/${msg.total || 0}`);
+    };
+    return workerV101;
+  }
+  window.renderSearchPage = drawV101;
+  window.runSearch = async function () {
+    setupControlsV101();
+    await setupYearsV101();
+    const c = controlsV101();
+    if (!activeV101(c)) {
+      requestIdV101 += 1;
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    const q = normV101(c.q);
+    if (q && q.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+    requestIdV101 += 1;
+    setStatus(q ? `Ищу: ${c.q}...` : "Фильтрую...");
+    createWorkerV101().postMessage({ id: requestIdV101, controls: c });
+  };
+  function scheduleV101(delay) {
+    clearTimeout(searchTimerV101);
+    searchTimerV101 = setTimeout(() => window.runSearch(), delay);
+  }
+  window.addEventListener("input", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#searchInput"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    scheduleV101(220);
+  }, true);
+  window.addEventListener("change", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#typeFilter,#genreFilter,#yearFilter,#ratingFilter,#sortFilter"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    scheduleV101(60);
+  }, true);
+  window.addEventListener("click", event => {
+    if (!(event.target && event.target.closest && event.target.closest("#resetBtn"))) return;
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    ["searchInput", "typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(name => {
+      const el = byId(name);
+      if (el) el.value = "";
+    });
+    const sort = byId("sortFilter");
+    if (sort) sort.value = DEFAULT_SORT;
+    scheduleV101(30);
+  }, true);
+
+  const oldRenderListV101 = typeof renderList === "function" ? renderList : null;
+  if (oldRenderListV101) {
+    renderList = function(items, label) {
+      const list = Array.isArray(items) ? items : [];
+      const ordered = [...list].sort((a, b) => posterRankV101(b) - posterRankV101(a));
+      return oldRenderListV101(ordered, label);
+    };
+  }
+
+  function franchiseKey(item) {
+    const raw = normV101([titleV101(item), item && item.ru, item && item.en].filter(Boolean).join(" "));
+    const aliases = [
+      ["shazam", "шазам"],
+      ["matrix", "матрица"],
+      ["deadpool", "дэдпул", "дедпул"],
+      ["harry potter", "гарри поттер"],
+      ["john wick", "джон уик"],
+      ["spider man", "человек паук"],
+      ["batman", "бэтмен"],
+      ["superman", "супермен"],
+      ["avengers", "мстители"],
+      ["guardians galaxy", "стражи галактики"],
+      ["lord rings", "властелин колец"],
+      ["hobbit", "хоббит"],
+      ["star wars", "звездные войны"],
+      ["fast furious", "форсаж"],
+      ["naruto", "наруто"],
+      ["boruto", "боруто"],
+      ["bleach", "блич"],
+      ["one piece", "ван пис", "ванпис"],
+      ["jujutsu kaisen", "магическая битва"],
+      ["demon slayer", "истребитель демонов"]
+    ];
+    for (const group of aliases) {
+      if (group.some(x => raw.includes(normV101(x)))) return group[0];
+    }
+    return raw
+      .replace(/\b(часть|глава|фильм|сезон|season|part|chapter|movie|episode|эпизод|ярость|богов)\b/g, " ")
+      .replace(/\b([ivxlcdm]+|\d+)\b/g, " ")
+      .split(/\s+/)
+      .filter(w => w.length > 2)
+      .slice(0, 3)
+      .join(" ");
+  }
+  async function relatedPoolV101() {
+    if (Array.isArray(searchIndex) && searchIndex.length) return searchIndex;
+    try {
+      searchIndex = await fetchJson(FAST_SEARCH_URL, "force-cache");
+      return Array.isArray(searchIndex) ? searchIndex : [];
+    } catch (e) {
+      return collectLoadedCatalogItems();
+    }
+  }
+  if (typeof renderRelatedCardsV66 === "function") {
+    renderRelatedCardsV66 = async function(baseItem) {
+      const block = typeof gkmEnsureRelatedBlockV66 === "function" ? gkmEnsureRelatedBlockV66() : null;
+      const box = document.getElementById("relatedCards");
+      if (!box || !baseItem) return;
+      box.innerHTML = `<div class="related-loading">Подбираю похожее...</div>`;
+      const baseKey = franchiseKey(baseItem);
+      const pool = await relatedPoolV101();
+      const baseId = String(baseItem.id || "");
+      const rows = pool
+        .filter(item => item && String(item.id || "") !== baseId)
+        .map(item => {
+          const same = baseKey && franchiseKey(item) === baseKey ? 100000 : 0;
+          const genreOverlap = genresV101(baseItem).filter(g => genresV101(item).includes(g)).length * 600;
+          const yearGap = Math.abs(Number(yearV101(baseItem) || 0) - Number(yearV101(item) || 0));
+          const yearScore = Number.isFinite(yearGap) ? Math.max(0, 100 - yearGap * 4) : 0;
+          const score = same + genreOverlap + ratingV101(item) * 1000 + Math.min(votesV101(item), 100000) / 20 + yearScore + posterRankV101(item) * 10000;
+          return { item, score };
+        })
+        .filter(row => row.score > 0 && hasRealPosterV101(row.item))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 10)
+        .map(row => row.item);
+      if (!rows.length) {
+        if (block) block.style.display = "none";
+        return;
+      }
+      if (block) block.style.display = "";
+      box.innerHTML = rows.map(gkmRelatedCardHtmlV66).join("");
+      box.querySelectorAll(".related-card").forEach(card => {
+        card.addEventListener("click", () => {
+          const id = card.getAttribute("data-related-id");
+          const item = rows.find(x => String(x.id || gkmRelatedKeyV66(x)) === String(id));
+          if (item) openDetails(item);
+        });
+      });
+    };
+  }
+  window.GKM_V101_COUNT_POSTERS = async function () {
+    const list = await relatedPoolV101();
+    const total = list.length;
+    const withPoster = list.filter(hasRealPosterV101).length;
+    const stats = { total, withPoster, withoutPoster: total - withPoster };
+    console.info("GKM V101 posters", stats);
+    return stats;
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControlsV101(); setupYearsV101(); });
+  else { setupControlsV101(); setupYearsV101(); }
+})();
+/* === /GKM V101 FINAL FULL ZIP FIX === */
+
 /* === GKM V94 FINAL WORKER ABSOLUTE URL FIX === */
 (function () {
   window.GKM_V94_WORKER_ABSOLUTE_URL_VERSION = "v94-worker-absolute-url-fix-2026-06-15";
@@ -4517,10 +4841,275 @@ if (document.readyState === "loading") {
   else { setupControls(); setupYears(); }
 })();
 
+/* === GKM V102 EOF LOCK: final search must win === */
+(function () {
+  window.GKM_V102_EOF_LOCK_VERSION = "v102-eof-final-search-full-zip-2026-06-17";
+
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const SEARCH_URL = new URL("data/fast/search_index.json", window.location.href).href;
+  const META_URL = new URL("data/fast/meta.json", window.location.href).href;
+  let idxPromise = null;
+  let runId = 0;
+
+  function el(id) { return document.getElementById(id); }
+  function n(v) {
+    return String(v || "").toLowerCase().replaceAll("ё", "е").replace(/&/g, " and ").replace(/['’`]/g, "").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim();
+  }
+  function keyfix(s) {
+    const map = {"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};
+    return String(s || "").split("").map(ch => map[ch.toLowerCase()] || ch).join("");
+  }
+  function title(item) {
+    if (typeof titleOf === "function") return titleOf(item);
+    return String(item && (item.ru || item.title_ru || item.name || item.title || item.en || item.original_title || item.original_name) || "");
+  }
+  function year(item) { return typeof getYear === "function" ? String(getYear(item) || "") : String(item && item.year || ""); }
+  function type(item) { return typeof getType === "function" ? getType(item) : String(item && (item.type || item.category) || ""); }
+  function rating(item) { return typeof getRating === "function" ? Number(getRating(item) || 0) : Number(item && (item.rating || item.vote_average) || 0); }
+  function votes(item) { return typeof getVotes === "function" ? Number(getVotes(item) || 0) : Number(item && (item.votes || item.vote_count) || 0); }
+  function genres(item) {
+    if (typeof getGenres === "function") return getGenres(item);
+    const g = item && item.genres;
+    if (Array.isArray(g)) return g.map(String);
+    if (typeof g === "string") return g.split(/[,|/]+/).map(x => x.trim()).filter(Boolean);
+    return [];
+  }
+  function hasPoster(item) {
+    const raw = String(item && (item.poster || item.posterUrl || item.poster_url || item.image || item.cover || item.img) || "").trim();
+    const low = raw.toLowerCase();
+    return Boolean(raw && low !== "null" && low !== "undefined" && low !== "n/a" && !low.includes("dummyimage") && !low.includes("placeholder") && !low.includes("no-poster") && !low.includes("noposter"));
+  }
+  function posterRank(item) { return hasPoster(item) ? 1 : 0; }
+  function activeControls(c) { return Boolean(n(c.q) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== "smart")); }
+  function controls() {
+    return {
+      q: (el("searchInput") || {}).value || "",
+      type: (el("typeFilter") || {}).value || "",
+      genre: (el("genreFilter") || {}).value || "",
+      year: (el("yearFilter") || {}).value || "",
+      minRating: Number((el("ratingFilter") || {}).value || 0),
+      sort: (el("sortFilter") || {}).value || "smart",
+      tab: typeof currentTab === "string" ? currentTab : "all"
+    };
+  }
+  function setupSort() {
+    const sort = el("sortFilter");
+    if (sort && sort.dataset.gkmV102 !== "1") {
+      const cur = sort.value || "smart";
+      sort.innerHTML = [
+        ["smart", "Лучшие"],
+        ["rating", "По оценке"],
+        ["votes", "Популярные"],
+        ["year", "Новые"],
+        ["year_old", "Старые"],
+        ["title", "По названию"]
+      ].map(x => `<option value="${x[0]}">${x[1]}</option>`).join("");
+      sort.value = ["smart", "rating", "votes", "year", "year_old", "title"].includes(cur) ? cur : "smart";
+      sort.dataset.gkmV102 = "1";
+    }
+  }
+  async function setupMeta() {
+    setupSort();
+    const yf = el("yearFilter");
+    const gf = el("genreFilter");
+    if (yf && yf.options.length > 1 && gf && gf.options.length > 1) return;
+    try {
+      const meta = await fetch(META_URL + "?v=102", { cache: "force-cache" }).then(r => r.json());
+      if (yf && yf.options.length <= 1 && Array.isArray(meta.years)) {
+        const cur = yf.value;
+        yf.innerHTML = `<option value="">Все годы</option>` + meta.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+        if (cur) yf.value = cur;
+      }
+      if (gf && gf.options.length <= 1 && Array.isArray(meta.genres)) {
+        const cur = gf.value;
+        gf.innerHTML = `<option value="">Все жанры</option>` + meta.genres.map(g => `<option value="${String(g)}">${String(g)}</option>`).join("");
+        if (cur) gf.value = cur;
+      }
+    } catch (e) {}
+  }
+  function queries(raw) {
+    const base = n(raw);
+    const out = new Set(base ? [base] : []);
+    const fixed = n(keyfix(base));
+    if (fixed && fixed !== base) out.add(fixed);
+    const syn = {
+      "матрица": ["matrix", "the matrix"],
+      "шазам": ["shazam"],
+      "дэдпул": ["deadpool", "дедпул"],
+      "дедпул": ["deadpool", "дэдпул"],
+      "наруто": ["naruto"],
+      "ван пис": ["one piece", "ванпис"],
+      "ванпис": ["one piece", "ван пис"],
+      "гарри поттер": ["harry potter"],
+      "интерстеллар": ["interstellar"]
+    };
+    Object.entries(syn).forEach(([k, arr]) => { if (base === k || base.includes(k)) arr.forEach(x => out.add(n(x))); });
+    return [...out].filter(Boolean);
+  }
+  function hay(item) {
+    if (item.__gkmHay102) return item.__gkmHay102;
+    item.__gkmHay102 = n([item.search, title(item), item.ru, item.en, item.title, item.name, item.original_title, item.original_name, (item.aliases || []).join(" "), genres(item).join(" ")].join(" "));
+    return item.__gkmHay102;
+  }
+  function score(item, qs) {
+    if (!qs.length) return 1;
+    const h = hay(item);
+    const wh = " " + h + " ";
+    let best = 0;
+    for (const q of qs) {
+      if (h === q) best = Math.max(best, 10000000);
+      else if (h.startsWith(q + " ")) best = Math.max(best, 9000000);
+      else if (wh.includes(" " + q + " ")) best = Math.max(best, 8000000);
+      else if (h.includes(q)) best = Math.max(best, 7000000);
+      else {
+        const parts = q.split(" ").filter(p => p.length > 1);
+        if (parts.length && parts.every(p => h.includes(p))) best = Math.max(best, 6000000 + parts.length * 1000);
+      }
+    }
+    return best ? best + posterRank(item) * 5000 + Math.min(votes(item), 1000000) / 10 + rating(item) * 100 : 0;
+  }
+  function pass(item, c) {
+    const t = type(item);
+    if (c.tab === "movies" && t !== "Фильм") return false;
+    if (c.tab === "series" && t !== "Сериал") return false;
+    if (c.tab === "anime" && t !== "Аниме") return false;
+    if (c.tab === "cartoons" && t !== "Мультфильм") return false;
+    if (c.type && t !== c.type) return false;
+    if (c.genre && !genres(item).includes(c.genre)) return false;
+    if (c.year && year(item) !== String(c.year)) return false;
+    if (c.minRating && rating(item) < c.minRating) return false;
+    return true;
+  }
+  function sortRows(rows, sort, hasQ) {
+    const p = (a, b) => posterRank(b.item) - posterRank(a.item);
+    if (sort === "rating") rows.sort((a, b) => p(a, b) || rating(b.item) - rating(a.item) || votes(b.item) - votes(a.item));
+    else if (sort === "votes") rows.sort((a, b) => p(a, b) || votes(b.item) - votes(a.item) || rating(b.item) - rating(a.item));
+    else if (sort === "year") rows.sort((a, b) => p(a, b) || Number(year(b.item) || 0) - Number(year(a.item) || 0) || votes(b.item) - votes(a.item));
+    else if (sort === "year_old") rows.sort((a, b) => p(a, b) || Number(year(a.item) || 9999) - Number(year(b.item) || 9999) || votes(b.item) - votes(a.item));
+    else if (sort === "title") rows.sort((a, b) => p(a, b) || title(a.item).localeCompare(title(b.item), "ru"));
+    else if (hasQ) rows.sort((a, b) => p(a, b) || b.score - a.score);
+    else rows.sort((a, b) => p(a, b) || (rating(b.item) * 100000 + Math.min(votes(b.item), 250000) + Number(year(b.item) || 0)) - (rating(a.item) * 100000 + Math.min(votes(a.item), 250000) + Number(year(a.item) || 0)));
+  }
+  async function loadIndex() {
+    if (!idxPromise) idxPromise = fetch(SEARCH_URL + "?v=102", { cache: "force-cache" }).then(r => {
+      if (!r.ok) throw new Error("search_index " + r.status);
+      return r.json();
+    });
+    searchIndex = await idxPromise;
+    return Array.isArray(searchIndex) ? searchIndex : [];
+  }
+  function draw(page) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    currentItems = lastSearchResults.slice((currentPage - 1) * PAGE, currentPage * PAGE);
+    const withPoster = lastSearchResults.filter(hasPoster).length;
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · с постерами ${withPoster} · Страница ${currentPage} из ${currentPages}`);
+  }
+  window.renderSearchPage = draw;
+  window.runSearch = async function () {
+    const myRun = ++runId;
+    await setupMeta();
+    const c = controls();
+    if (!activeControls(c)) {
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    const qs = queries(c.q);
+    if (n(c.q) && n(c.q).replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+    const started = performance && performance.now ? performance.now() : Date.now();
+    setStatus(n(c.q) ? `Ищу: ${c.q}...` : "Фильтрую...");
+    const index = await loadIndex();
+    if (myRun !== runId) return;
+    const rows = [];
+    for (const item of index) {
+      if (!pass(item, c)) continue;
+      const s = score(item, qs);
+      if (!qs.length || s > 0) rows.push({ item, score: s });
+    }
+    sortRows(rows, c.sort, Boolean(qs.length));
+    if (myRun !== runId) return;
+    lastSearchResults = rows.map(x => x.item);
+    draw(1);
+    const ended = performance && performance.now ? performance.now() : Date.now();
+    const totalPosters = index.filter(hasPoster).length;
+    window.GKM_V102_LAST_SEARCH_STATS = { indexTotal: index.length, indexPosters: totalPosters, results: lastSearchResults.length, resultsPosters: lastSearchResults.filter(hasPoster).length, ms: Math.round(ended - started) };
+    setStatus(`Найдено: ${lastSearchResults.length} · ${Math.round(ended - started)} мс · постеров ${totalPosters}/${index.length}`);
+  };
+  const oldRender = typeof renderList === "function" ? renderList : null;
+  if (oldRender) {
+    renderList = function(items, label) {
+      const ordered = (Array.isArray(items) ? [...items] : []).sort((a, b) => posterRank(b) - posterRank(a));
+      return oldRender(ordered, label);
+    };
+  }
+  function franchise(item) {
+    const raw = n([title(item), item && item.ru, item && item.en].join(" "));
+    const groups = [
+      ["shazam", "шазам"], ["matrix", "матрица"], ["deadpool", "дэдпул", "дедпул"], ["harry potter", "гарри поттер"],
+      ["john wick", "джон уик"], ["spider man", "человек паук"], ["batman", "бэтмен"], ["superman", "супермен"],
+      ["avengers", "мстители"], ["lord rings", "властелин колец"], ["hobbit", "хоббит"], ["star wars", "звездные войны"],
+      ["fast furious", "форсаж"], ["naruto", "наруто"], ["one piece", "ван пис", "ванпис"], ["bleach", "блич"],
+      ["jujutsu kaisen", "магическая битва"], ["demon slayer", "истребитель демонов"]
+    ];
+    for (const g of groups) if (g.some(x => raw.includes(n(x)))) return g[0];
+    return raw.replace(/\b(часть|глава|фильм|сезон|season|part|chapter|movie|episode|эпизод|ярость|богов)\b/g, " ").replace(/\b([ivxlcdm]+|\d+)\b/g, " ").split(/\s+/).filter(w => w.length > 2).slice(0, 3).join(" ");
+  }
+  if (typeof renderRelatedCardsV66 === "function") {
+    renderRelatedCardsV66 = async function(baseItem) {
+      const block = typeof gkmEnsureRelatedBlockV66 === "function" ? gkmEnsureRelatedBlockV66() : null;
+      const box = document.getElementById("relatedCards");
+      if (!box || !baseItem) return;
+      box.innerHTML = `<div class="related-loading">Подбираю похожее...</div>`;
+      const pool = await loadIndex();
+      const bk = franchise(baseItem);
+      const baseId = String(baseItem.id || "");
+      const baseGenres = genres(baseItem);
+      const rows = pool
+        .filter(item => item && String(item.id || "") !== baseId && hasPoster(item))
+        .map(item => {
+          const same = bk && franchise(item) === bk ? 100000 : 0;
+          const genreScore = baseGenres.filter(g => genres(item).includes(g)).length * 600;
+          const gap = Math.abs(Number(year(baseItem) || 0) - Number(year(item) || 0));
+          const yScore = Number.isFinite(gap) ? Math.max(0, 100 - gap * 4) : 0;
+          return { item, score: same + genreScore + rating(item) * 1000 + Math.min(votes(item), 100000) / 20 + yScore };
+        })
+        .filter(x => x.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 10)
+        .map(x => x.item);
+      if (!rows.length) {
+        if (block) block.style.display = "none";
+        return;
+      }
+      if (block) block.style.display = "";
+      box.innerHTML = rows.map(gkmRelatedCardHtmlV66).join("");
+      box.querySelectorAll(".related-card").forEach(card => card.addEventListener("click", () => {
+        const id = card.getAttribute("data-related-id");
+        const item = rows.find(x => String(x.id || gkmRelatedKeyV66(x)) === String(id));
+        if (item) openDetails(item);
+      }));
+    };
+  }
+  window.GKM_COUNT_POSTERS = async function () {
+    const index = await loadIndex();
+    return { total: index.length, withPoster: index.filter(hasPoster).length, withoutPoster: index.filter(x => !hasPoster(x)).length };
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setupMeta);
+  else setupMeta();
+})();
+/* === /GKM V102 EOF LOCK === */
+
 window.GKM_V96_SERVER_FACTS_VERSION = "v96-server-side-kinopoisk-facts-2026-06-15";
 window.GKM_V97_WORKFLOW_FIX_VERSION = "v97-workflow-fix-server-facts-2026-06-15";
 window.GKM_V98_WORKFLOW_CACHE_FIX_VERSION = "v98-workflow-cache-fix-kinopoisk-facts-2026-06-15";
 window.GKM_V99_BROWSER_KINOPOISK_NOOP_VERSION = "v99-browser-kinopoisk-noop-2026-06-15";
+window.GKM_V100_ROOT_PATCH_VERSION = "v100-root-app-workflow-tools-fixed-2026-06-15";
 
 /* === GKM V92 WORKER SEARCH NO PAGE FREEZE === */
 (function () {
@@ -8037,3 +8626,294 @@ window.GKM_V79_10_TESTS_VERSION = "v79-no-poster-bottom-10tests-2026-06-14";
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { setupControls(); setupYears(); });
   else { setupControls(); setupYears(); }
 })();
+/* === GKM V103 TRUE EOF LOCK === */
+(function () {
+  window.GKM_V103_TRUE_EOF_LOCK_VERSION = "v103-true-eof-final-search-2026-06-17";
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const SEARCH_URL = new URL("data/fast/search_index.json", window.location.href).href;
+  const META_URL = new URL("data/fast/meta.json", window.location.href).href;
+  let indexPromise = null;
+  let searchRun = 0;
+  function id(x) { return document.getElementById(x); }
+  function norm(v) { return String(v || "").toLowerCase().replaceAll("ё", "е").replace(/&/g, " and ").replace(/['’`]/g, "").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim(); }
+  function keyfix(s) {
+    const m = {"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};
+    return String(s || "").split("").map(ch => m[ch.toLowerCase()] || ch).join("");
+  }
+  function title(x) { return typeof titleOf === "function" ? titleOf(x) : String(x && (x.ru || x.en || x.title || x.name) || ""); }
+  function year(x) { return typeof getYear === "function" ? String(getYear(x) || "") : String(x && x.year || ""); }
+  function type(x) { return typeof getType === "function" ? getType(x) : String(x && x.type || ""); }
+  function rating(x) { return typeof getRating === "function" ? Number(getRating(x) || 0) : Number(x && x.rating || 0); }
+  function votes(x) { return typeof getVotes === "function" ? Number(getVotes(x) || 0) : Number(x && x.votes || 0); }
+  function genres(x) {
+    if (typeof getGenres === "function") return getGenres(x);
+    const g = x && x.genres;
+    return Array.isArray(g) ? g.map(String) : [];
+  }
+  function hasPoster(x) {
+    const raw = String(x && (x.poster || x.posterUrl || x.poster_url || x.image || x.cover || x.img) || "").trim();
+    const low = raw.toLowerCase();
+    return Boolean(raw && low !== "null" && low !== "undefined" && low !== "n/a" && !low.includes("dummyimage") && !low.includes("placeholder") && !low.includes("no-poster") && !low.includes("noposter"));
+  }
+  function pRank(x) { return hasPoster(x) ? 1 : 0; }
+  function controls() {
+    return {
+      q: (id("searchInput") || {}).value || "",
+      type: (id("typeFilter") || {}).value || "",
+      genre: (id("genreFilter") || {}).value || "",
+      year: (id("yearFilter") || {}).value || "",
+      minRating: Number((id("ratingFilter") || {}).value || 0),
+      sort: (id("sortFilter") || {}).value || "smart",
+      tab: typeof currentTab === "string" ? currentTab : "all"
+    };
+  }
+  function active(c) { return Boolean(norm(c.q) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== "smart")); }
+  async function loadIndex() {
+    if (!indexPromise) indexPromise = fetch(SEARCH_URL + "?v=103", { cache: "force-cache" }).then(r => {
+      if (!r.ok) throw new Error("search_index " + r.status);
+      return r.json();
+    });
+    searchIndex = await indexPromise;
+    return Array.isArray(searchIndex) ? searchIndex : [];
+  }
+  async function setupMeta() {
+    const sort = id("sortFilter");
+    if (sort && sort.dataset.gkmV103 !== "1") {
+      const cur = sort.value || "smart";
+      sort.innerHTML = [["smart","Лучшие"],["rating","По оценке"],["votes","Популярные"],["year","Новые"],["year_old","Старые"],["title","По названию"]].map(x => `<option value="${x[0]}">${x[1]}</option>`).join("");
+      sort.value = ["smart","rating","votes","year","year_old","title"].includes(cur) ? cur : "smart";
+      sort.dataset.gkmV103 = "1";
+    }
+    const yf = id("yearFilter");
+    const gf = id("genreFilter");
+    if (yf && yf.options.length > 1 && gf && gf.options.length > 1) return;
+    try {
+      const meta = await fetch(META_URL + "?v=103", { cache: "force-cache" }).then(r => r.json());
+      if (yf && yf.options.length <= 1 && Array.isArray(meta.years)) yf.innerHTML = `<option value="">Все годы</option>` + meta.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+      if (gf && gf.options.length <= 1 && Array.isArray(meta.genres)) gf.innerHTML = `<option value="">Все жанры</option>` + meta.genres.map(g => `<option value="${String(g)}">${String(g)}</option>`).join("");
+    } catch (e) {}
+  }
+  function queryList(raw) {
+    const base = norm(raw);
+    const out = new Set(base ? [base] : []);
+    const fixed = norm(keyfix(base));
+    if (fixed && fixed !== base) out.add(fixed);
+    const syn = {"матрица":["matrix","the matrix"],"шазам":["shazam"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"],"гарри поттер":["harry potter"],"интерстеллар":["interstellar"]};
+    Object.entries(syn).forEach(([k, arr]) => { if (base === k || base.includes(k)) arr.forEach(x => out.add(norm(x))); });
+    return [...out].filter(Boolean);
+  }
+  function hay(x) {
+    if (x.__gkmHay103) return x.__gkmHay103;
+    x.__gkmHay103 = norm([x.search, title(x), x.ru, x.en, x.title, x.name, x.original_title, x.original_name, (x.aliases || []).join(" "), genres(x).join(" ")].join(" "));
+    return x.__gkmHay103;
+  }
+  function score(x, qs) {
+    if (!qs.length) return 1;
+    const h = hay(x);
+    const wh = " " + h + " ";
+    let best = 0;
+    for (const q of qs) {
+      if (h === q) best = Math.max(best, 10000000);
+      else if (h.startsWith(q + " ")) best = Math.max(best, 9000000);
+      else if (wh.includes(" " + q + " ")) best = Math.max(best, 8000000);
+      else if (h.includes(q)) best = Math.max(best, 7000000);
+      else {
+        const parts = q.split(" ").filter(p => p.length > 1);
+        if (parts.length && parts.every(p => h.includes(p))) best = Math.max(best, 6000000 + parts.length * 1000);
+      }
+    }
+    return best ? best + pRank(x) * 5000 + Math.min(votes(x), 1000000) / 10 + rating(x) * 100 : 0;
+  }
+  function pass(x, c) {
+    const t = type(x);
+    if (c.tab === "movies" && t !== "Фильм") return false;
+    if (c.tab === "series" && t !== "Сериал") return false;
+    if (c.tab === "anime" && t !== "Аниме") return false;
+    if (c.tab === "cartoons" && t !== "Мультфильм") return false;
+    if (c.type && t !== c.type) return false;
+    if (c.genre && !genres(x).includes(c.genre)) return false;
+    if (c.year && year(x) !== String(c.year)) return false;
+    if (c.minRating && rating(x) < c.minRating) return false;
+    return true;
+  }
+  function sortRows(rows, sort, hasQ) {
+    const pr = (a, b) => pRank(b.item) - pRank(a.item);
+    if (sort === "rating") rows.sort((a,b) => pr(a,b) || rating(b.item) - rating(a.item) || votes(b.item) - votes(a.item));
+    else if (sort === "votes") rows.sort((a,b) => pr(a,b) || votes(b.item) - votes(a.item) || rating(b.item) - rating(a.item));
+    else if (sort === "year") rows.sort((a,b) => pr(a,b) || Number(year(b.item) || 0) - Number(year(a.item) || 0) || votes(b.item) - votes(a.item));
+    else if (sort === "year_old") rows.sort((a,b) => pr(a,b) || Number(year(a.item) || 9999) - Number(year(b.item) || 9999) || votes(b.item) - votes(a.item));
+    else if (sort === "title") rows.sort((a,b) => pr(a,b) || title(a.item).localeCompare(title(b.item), "ru"));
+    else if (hasQ) rows.sort((a,b) => pr(a,b) || b.score - a.score);
+    else rows.sort((a,b) => pr(a,b) || (rating(b.item) * 100000 + Math.min(votes(b.item), 250000) + Number(year(b.item) || 0)) - (rating(a.item) * 100000 + Math.min(votes(a.item), 250000) + Number(year(a.item) || 0)));
+  }
+  function draw(page) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    currentItems = lastSearchResults.slice((currentPage - 1) * PAGE, currentPage * PAGE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · с постерами ${lastSearchResults.filter(hasPoster).length} · Страница ${currentPage} из ${currentPages}`);
+  }
+  window.renderSearchPage = draw;
+  window.runSearch = async function () {
+    const thisRun = ++searchRun;
+    await setupMeta();
+    const c = controls();
+    if (!active(c)) {
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    const q = norm(c.q);
+    if (q && q.replace(/\s+/g, "").length < 2) {
+      setStatus("Введите минимум 2 символа для поиска");
+      return;
+    }
+    const started = performance && performance.now ? performance.now() : Date.now();
+    setStatus(q ? `Ищу: ${c.q}...` : "Фильтрую...");
+    const index = await loadIndex();
+    if (thisRun !== searchRun) return;
+    const qs = queryList(c.q);
+    const rows = [];
+    for (const item of index) {
+      if (!pass(item, c)) continue;
+      const s = score(item, qs);
+      if (!qs.length || s > 0) rows.push({ item, score: s });
+    }
+    sortRows(rows, c.sort, Boolean(qs.length));
+    if (thisRun !== searchRun) return;
+    lastSearchResults = rows.map(x => x.item);
+    draw(1);
+    const ended = performance && performance.now ? performance.now() : Date.now();
+    window.GKM_V103_LAST_SEARCH_STATS = { indexTotal: index.length, indexPosters: index.filter(hasPoster).length, results: lastSearchResults.length, resultsPosters: lastSearchResults.filter(hasPoster).length, ms: Math.round(ended - started) };
+    setStatus(`Найдено: ${lastSearchResults.length} · ${Math.round(ended - started)} мс · постеров ${window.GKM_V103_LAST_SEARCH_STATS.indexPosters}/${index.length}`);
+  };
+  const oldRender = typeof renderList === "function" ? renderList : null;
+  if (oldRender) {
+    renderList = function (items, label) {
+      return oldRender((Array.isArray(items) ? [...items] : []).sort((a,b) => pRank(b) - pRank(a)), label);
+    };
+  }
+  window.GKM_COUNT_POSTERS = async function () {
+    const index = await loadIndex();
+    return { total: index.length, withPoster: index.filter(hasPoster).length, withoutPoster: index.filter(x => !hasPoster(x)).length };
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setupMeta);
+  else setupMeta();
+})();
+/* === /GKM V103 TRUE EOF LOCK === */
+
+/* === GKM V104 WORKER EOF LOCK === */
+(function () {
+  window.GKM_V104_WORKER_EOF_LOCK_VERSION = "v104-worker-final-search-2026-06-17";
+  const PAGE = typeof PAGE_SIZE === "number" && PAGE_SIZE > 0 ? PAGE_SIZE : 60;
+  const SEARCH_URL = new URL("data/fast/search_index.json", window.location.href).href;
+  const META_URL = new URL("data/fast/meta.json", window.location.href).href;
+  let worker = null;
+  let req = 0;
+  function el(id) { return document.getElementById(id); }
+  function norm(v) { return String(v || "").toLowerCase().replaceAll("ё", "е").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim(); }
+  async function setupMeta() {
+    const sort = el("sortFilter");
+    if (sort && sort.dataset.gkmV104 !== "1") {
+      const cur = sort.value || "smart";
+      sort.innerHTML = [["smart","Лучшие"],["rating","По оценке"],["votes","Популярные"],["year","Новые"],["year_old","Старые"],["title","По названию"]].map(x => `<option value="${x[0]}">${x[1]}</option>`).join("");
+      sort.value = ["smart","rating","votes","year","year_old","title"].includes(cur) ? cur : "smart";
+      sort.dataset.gkmV104 = "1";
+    }
+    const yf = el("yearFilter"), gf = el("genreFilter");
+    if (yf && yf.options.length > 1 && gf && gf.options.length > 1) return;
+    try {
+      const meta = await fetch(META_URL + "?v=104", { cache: "force-cache" }).then(r => r.json());
+      if (yf && yf.options.length <= 1 && Array.isArray(meta.years)) yf.innerHTML = `<option value="">Все годы</option>` + meta.years.map(y => `<option value="${String(y)}">${String(y)}</option>`).join("");
+      if (gf && gf.options.length <= 1 && Array.isArray(meta.genres)) gf.innerHTML = `<option value="">Все жанры</option>` + meta.genres.map(g => `<option value="${String(g)}">${String(g)}</option>`).join("");
+    } catch (e) {}
+  }
+  function controls() {
+    return {
+      q: (el("searchInput") || {}).value || "",
+      type: (el("typeFilter") || {}).value || "",
+      genre: (el("genreFilter") || {}).value || "",
+      year: (el("yearFilter") || {}).value || "",
+      minRating: Number((el("ratingFilter") || {}).value || 0),
+      sort: (el("sortFilter") || {}).value || "smart",
+      tab: typeof currentTab === "string" ? currentTab : "all"
+    };
+  }
+  function active(c) { return Boolean(norm(c.q) || c.type || c.genre || c.year || c.minRating || (c.sort && c.sort !== "smart")); }
+  function hasPoster(item) {
+    const raw = String(item && item.poster || "").trim();
+    const low = raw.toLowerCase();
+    return Boolean(raw && low !== "null" && low !== "undefined" && !low.includes("dummyimage") && !low.includes("placeholder") && !low.includes("no-poster"));
+  }
+  function draw(page = 1) {
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil((lastSearchResults || []).length / PAGE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    currentItems = lastSearchResults.slice((currentPage - 1) * PAGE, currentPage * PAGE);
+    renderList(currentItems, `Найдено: ${lastSearchResults.length} · с постерами ${lastSearchResults.filter(hasPoster).length} · Страница ${currentPage} из ${currentPages}`);
+  }
+  function makeWorker() {
+    if (worker) return worker;
+    const code = `
+      const URL=${JSON.stringify(SEARCH_URL + "?v=104")};
+      let indexPromise=null;
+      function norm(v){return String(v||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
+      function keyfix(s){const m={"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};return String(s||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
+      function title(x){return String((x&&(x.ru||x.en||x.title||x.name))||"");}
+      function year(x){return String((x&&x.year)||"");}
+      function type(x){return String((x&&x.type)||"");}
+      function rating(x){return Number((x&&x.rating)||0);}
+      function votes(x){return Number((x&&x.votes)||0);}
+      function genres(x){return Array.isArray(x&&x.genres)?x.genres.map(String):[];}
+      function poster(x){const raw=String((x&&x.poster)||"").trim();const low=raw.toLowerCase();return raw&&low!=="null"&&low!=="undefined"&&!low.includes("dummyimage")&&!low.includes("placeholder")&&!low.includes("no-poster")?1:0;}
+      function pass(x,c){const t=type(x);if(c.tab==="movies"&&t!=="Фильм")return false;if(c.tab==="series"&&t!=="Сериал")return false;if(c.tab==="anime"&&t!=="Аниме")return false;if(c.tab==="cartoons"&&t!=="Мультфильм")return false;if(c.type&&t!==c.type)return false;if(c.genre&&!genres(x).includes(c.genre))return false;if(c.year&&year(x)!==String(c.year))return false;if(c.minRating&&rating(x)<c.minRating)return false;return true;}
+      function queries(raw){const base=norm(raw);const out=new Set(base?[base]:[]);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"],"гарри поттер":["harry potter"],"интерстеллар":["interstellar"]};Object.entries(syn).forEach(([k,a])=>{if(base===k||base.includes(k))a.forEach(x=>out.add(norm(x)));});return [...out].filter(Boolean);}
+      function hay(x){return x.__hay||(x.__hay=norm([x.search,title(x),x.ru,x.en,(x.genres||[]).join(" ")].join(" ")));}
+      function score(x,qs){if(!qs.length)return 1;const h=hay(x),wh=" "+h+" ";let best=0;for(const q of qs){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+poster(x)*5000+Math.min(votes(x),1000000)/10+rating(x)*100:0;}
+      function sortRows(rows,sort,hasQ){const pr=(a,b)=>poster(b.item)-poster(a.item);if(sort==="rating")rows.sort((a,b)=>pr(a,b)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQ)rows.sort((a,b)=>pr(a,b)||b.score-a.score);else rows.sort((a,b)=>pr(a,b)||(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
+      async function load(){if(!indexPromise)indexPromise=fetch(URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index "+r.status);return r.json();});return indexPromise;}
+      self.onmessage=async e=>{const {id,c}=e.data||{};try{const started=Date.now();self.postMessage({id,loading:true});const index=await load();const qs=queries(c.q);const rows=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,qs);if(!qs.length||s>0)rows.push({item,score:s});}sortRows(rows,c.sort,Boolean(qs.length));const posters=index.reduce((n,x)=>n+poster(x),0);self.postMessage({id,ok:true,results:rows.map(x=>x.item),ms:Date.now()-started,total:index.length,posters});}catch(err){self.postMessage({id,ok:false,error:String(err&&err.message||err)});}};
+    `;
+    worker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
+    worker.onmessage = e => {
+      const msg = e.data || {};
+      if (msg.id !== req) return;
+      if (msg.loading) { setStatus("Загружаю быструю базу поиска..."); return; }
+      if (!msg.ok) { setStatus("Поиск не сработал: " + (msg.error || "ошибка")); return; }
+      lastSearchResults = Array.isArray(msg.results) ? msg.results : [];
+      searchIndex = lastSearchResults.length ? searchIndex : searchIndex;
+      window.GKM_V104_LAST_SEARCH_STATS = { indexTotal: msg.total, indexPosters: msg.posters, results: lastSearchResults.length, resultsPosters: lastSearchResults.filter(hasPoster).length, ms: msg.ms };
+      draw(1);
+      setStatus(`Найдено: ${lastSearchResults.length} · ${msg.ms || 0} мс · постеров ${msg.posters || 0}/${msg.total || 0}`);
+    };
+    return worker;
+  }
+  window.renderSearchPage = draw;
+  window.runSearch = async function () {
+    await setupMeta();
+    const c = controls();
+    if (!active(c)) {
+      req += 1;
+      lastSearchResults = [];
+      if (currentTab === "all") renderHome();
+      else await loadPage(currentTab, 1);
+      return;
+    }
+    if (norm(c.q) && norm(c.q).replace(/\s+/g, "").length < 2) { setStatus("Введите минимум 2 символа для поиска"); return; }
+    req += 1;
+    setStatus(norm(c.q) ? `Ищу: ${c.q}...` : "Фильтрую...");
+    makeWorker().postMessage({ id: req, c });
+  };
+  const oldRender = typeof renderList === "function" ? renderList : null;
+  if (oldRender) renderList = function(items, label) { return oldRender((Array.isArray(items) ? [...items] : []).sort((a,b) => (hasPoster(b)?1:0)-(hasPoster(a)?1:0)), label); };
+  window.GKM_COUNT_POSTERS = async function () {
+    const data = await fetch(SEARCH_URL + "?v=104", { cache: "force-cache" }).then(r => r.json());
+    const total = Array.isArray(data) ? data.length : 0;
+    const withPoster = Array.isArray(data) ? data.filter(hasPoster).length : 0;
+    return { total, withPoster, withoutPoster: total - withPoster };
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setupMeta);
+  else setupMeta();
+})();
+/* === /GKM V104 WORKER EOF LOCK === */
