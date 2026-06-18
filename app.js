@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v107-stable-home-details-error-fallback-2026-06-18";
+const GKM_APP_CLEAN_VERSION = "v108-worker-url-card-ui-fix-2026-06-18";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -148,8 +148,8 @@ function cardHtml(item) {
       <div class="card-body">
         <h3 class="card-title">${escapeHtml(title)}</h3>
         <div class="card-meta">${escapeHtml(getYear(item) || "—")} · ${escapeHtml(getType(item))}</div>
-        <div class="card-genres">${escapeHtml(getGenres(item).slice(0, 3).join(" · ") || "Жанры не указаны")}</div>
-        <div class="card-rating">${escapeHtml(rankLabel(item))} · ${rating ? rating.toFixed(1) : "—"} · ${votes} голосов</div>
+        <div class="card-genres">${escapeHtml(getGenres(item).slice(0, 2).join(" · ") || "Жанры не указаны")}</div>
+        <div class="card-rating">★ ${rating ? rating.toFixed(1) : "—"} · ${votes} голосов</div>
       </div>
     </article>
   `;
@@ -284,8 +284,9 @@ async function loadFastPage(tab, page = 1) {
 
 function makeSearchWorker() {
   if (searchWorker) return searchWorker;
+  const absoluteSearchUrl = new URL(`${SEARCH_URL}?v=108`, window.location.href).href;
   const code = `
-    const SEARCH_URL = ${JSON.stringify(SEARCH_URL + "?v=106")};
+    const SEARCH_URL = ${JSON.stringify(absoluteSearchUrl)};
     const PAGE_SIZE = ${PAGE_SIZE};
     let indexPromise = null;
     let rows = [];
@@ -637,6 +638,7 @@ function bindEvents() {
 async function boot() {
   window.GKM_V106_CLEAN_APP_VERSION = GKM_APP_CLEAN_VERSION;
   window.GKM_V107_STABLE_APP_VERSION = GKM_APP_CLEAN_VERSION;
+  window.GKM_V108_FIX_VERSION = GKM_APP_CLEAN_VERSION;
   window.GKM_COUNT_POSTERS = async () => {
     const data = await fetchJson(SEARCH_URL);
     const total = Array.isArray(data) ? data.length : 0;
