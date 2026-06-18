@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v109-fast-search-shards-rating-fit-2026-06-18";
+const GKM_APP_CLEAN_VERSION = "v110-search-fallback-no-empty-results-2026-06-18";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -51,7 +51,7 @@ function setStatus(text) {
 }
 
 async function fetchJson(url, cache = "force-cache") {
-  const res = await fetch(`${url}?v=109`, { cache });
+  const res = await fetch(`${url}?v=110`, { cache });
   if (!res.ok) throw new Error(`${url} ${res.status}`);
   return res.json();
 }
@@ -297,7 +297,7 @@ async function loadFastPage(tab, page = 1) {
 
 function makeSearchWorker() {
   if (searchWorker) return searchWorker;
-  const absoluteSearchUrl = new URL(`${SEARCH_LITE_URL}?v=109`, window.location.href).href;
+  const absoluteSearchUrl = new URL(`${SEARCH_LITE_URL}?v=110`, window.location.href).href;
   const absoluteShardBase = new URL(`${SEARCH_SHARDS_BASE}/`, window.location.href).href;
   const code = `
     const SEARCH_URL = ${JSON.stringify(absoluteSearchUrl)};
@@ -324,10 +324,11 @@ function makeSearchWorker() {
     function sortRows(sort, hasQuery){const pr=(a,b)=>poster(b.item)-poster(a.item);if(sort==="rating")rows.sort((a,b)=>pr(a,b)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQuery)rows.sort((a,b)=>pr(a,b)||b.score-a.score);else rows.sort((a,b)=>pr(a,b)||(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_lite "+r.status);return r.json();});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
-    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=109";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)throw new Error("search_shard "+key+" "+r.status);return r.json();}));}return shardPromises.get(key);}
+    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=110";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
+    function buildRows(index, c, queries){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page){const p=Math.max(1,Number(page||1));return rows.slice((p-1)*PAGE_SIZE,p*PAGE_SIZE).map(x=>x.item);}
-    self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page),ms:0});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const queries=queryList(c.q);const index=await candidateIndex(queries);rows=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)rows.push({item,score:s});}sortRows(c.sort||"smart",Boolean(queries.length));self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1),ms:Date.now()-started,indexTotal:index.length,indexPosters:index.reduce((n,x)=>n+poster(x),0),sharded:Boolean(queries.length)});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
+    self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page),ms:0});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const queries=queryList(c.q);let index=await candidateIndex(queries);rows=buildRows(index,c,queries);let fallback=false;if(queries.length&&rows.length===0){index=await loadIndex();rows=buildRows(index,c,queries);fallback=true;}sortRows(c.sort||"smart",Boolean(queries.length));self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1),ms:Date.now()-started,indexTotal:index.length,indexPosters:index.reduce((n,x)=>n+poster(x),0),sharded:Boolean(queries.length),fallback});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
   `;
   searchWorker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
   searchWorker.onmessage = event => {
@@ -660,6 +661,7 @@ async function boot() {
   window.GKM_V107_STABLE_APP_VERSION = GKM_APP_CLEAN_VERSION;
   window.GKM_V108_FIX_VERSION = GKM_APP_CLEAN_VERSION;
   window.GKM_V109_FAST_SEARCH_VERSION = GKM_APP_CLEAN_VERSION;
+  window.GKM_V110_SEARCH_FALLBACK_VERSION = GKM_APP_CLEAN_VERSION;
   window.GKM_COUNT_POSTERS = async () => {
     const data = await fetchJson(SEARCH_LITE_URL);
     const total = Array.isArray(data) ? data.length : 0;
