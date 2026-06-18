@@ -1211,6 +1211,79 @@ header .ai-top-btn {
   clear: both;
 }
 
+/* === GKM V108 COMPACT CARDS FIX === */
+.grid .card,
+.home-row .card {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+}
+
+.grid .card-body,
+.home-row .card-body {
+  min-height: 118px !important;
+  max-height: 126px !important;
+  padding: 10px 11px 11px !important;
+  gap: 5px !important;
+  overflow: hidden !important;
+}
+
+.grid .card-title,
+.home-row .card-title,
+.grid .card h3,
+.home-row .card h3 {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: anywhere !important;
+  min-height: 34px !important;
+  max-height: 38px !important;
+  margin: 0 !important;
+  font-size: 15px !important;
+  line-height: 1.14 !important;
+}
+
+.grid .card-meta,
+.home-row .card-meta,
+.grid .card-genres,
+.home-row .card-genres {
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  color: #b8c4ff !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+}
+
+.grid .card-rating,
+.home-row .card-rating {
+  margin-top: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  min-height: 25px !important;
+  padding: 4px 8px !important;
+  border-radius: 999px !important;
+  background: rgba(15, 23, 42, .82) !important;
+  border: 1px solid rgba(0, 229, 255, .28) !important;
+  color: #f8fbff !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+/* === /GKM V108 COMPACT CARDS FIX === */
+
 .ai-rec-card {
   position: relative;
 }
