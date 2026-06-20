@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v112-lite-action-dedupe-2026-06-19";
+const GKM_APP_CLEAN_VERSION = "v113-poster-proxy-recovery-2026-06-20";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -111,10 +111,80 @@ function hasPoster(item) {
   return Boolean(raw && low !== "null" && low !== "undefined" && low !== "n/a" && !low.includes("dummyimage") && !low.includes("placeholder") && !low.includes("no-poster") && !low.includes("noposter"));
 }
 
-function posterSrc(item) {
+function posterRawSrc(item) {
   const raw = String(item && (item.poster || item.posterUrl || item.poster_url || item.image || item.cover || item.img) || "").trim();
   if (!hasPoster(item)) return "";
   return raw.replace(/^http:/i, "https:");
+}
+
+function posterProxySrc(src) {
+  const raw = String(src || "").trim();
+  if (!raw) return "";
+  try {
+    const url = new URL(raw, location.href);
+    const host = url.hostname.toLowerCase();
+    if (host.includes("images.weserv.nl")) return "";
+    if (host === location.hostname) return "";
+    const clean = url.href.replace(/^https?:\/\//i, "");
+    return "https://images.weserv.nl/?url=" + encodeURIComponent(clean) + "&w=342&output=webp";
+  } catch (_) {
+    return "";
+  }
+}
+
+function shouldProxyFirst(src) {
+  const low = String(src || "").toLowerCase();
+  return low.includes("image.tmdb.org") || low.includes("/t/p/");
+}
+
+function posterSrc(item) {
+  const raw = posterRawSrc(item);
+  if (!raw) return "";
+  return shouldProxyFirst(raw) ? (posterProxySrc(raw) || raw) : raw;
+}
+
+function posterOriginalSrc(item) {
+  return posterRawSrc(item);
+}
+
+function posterPlaceholderHtml() {
+  return `<div class="poster-placeholder">Нет постера</div>`;
+}
+
+function recoverPosterImage(img) {
+  if (!img || img.dataset.posterDone === "1") return;
+  const original = img.dataset.originalSrc || "";
+  const proxy = posterProxySrc(original || img.currentSrc || img.src);
+  if (img.dataset.proxyTried !== "1" && proxy && img.src !== proxy) {
+    img.dataset.proxyTried = "1";
+    img.src = proxy;
+    return;
+  }
+  if (img.dataset.originalTried !== "1" && original && img.src !== original) {
+    img.dataset.originalTried = "1";
+    img.src = original;
+    return;
+  }
+  img.dataset.posterDone = "1";
+  const wrap = img.closest && img.closest(".poster-wrap");
+  if (wrap && !wrap.querySelector(".poster-placeholder")) wrap.insertAdjacentHTML("beforeend", posterPlaceholderHtml());
+  img.style.display = "none";
+}
+
+function schedulePosterRecovery(root = document) {
+  const imgs = Array.from(root.querySelectorAll ? root.querySelectorAll(".poster-wrap img, .related-poster, #detailPoster") : []);
+  for (const img of imgs) {
+    if (img.dataset.posterWatch === "1") continue;
+    img.dataset.posterWatch = "1";
+    img.addEventListener("error", () => recoverPosterImage(img));
+    img.addEventListener("load", () => { if (img.naturalWidth > 0) img.dataset.posterDone = "1"; });
+    setTimeout(() => {
+      if (!img.dataset.posterDone && (!img.complete || img.naturalWidth === 0)) recoverPosterImage(img);
+    }, 1800);
+    setTimeout(() => {
+      if (!img.dataset.posterDone && (!img.complete || img.naturalWidth === 0)) recoverPosterImage(img);
+    }, 4200);
+  }
 }
 
 function qualityScore(item) {
@@ -146,7 +216,7 @@ function cardHtml(item) {
   const id = String(item.id || `${title}|${getYear(item)}`);
   const img = posterSrc(item);
   const poster = img
-    ? `<img src="${escapeAttr(img)}" loading="lazy" decoding="async" alt="">`
+    ? `<img src="${escapeAttr(img)}" data-original-src="${escapeAttr(posterOriginalSrc(item))}" data-proxy-tried="${shouldProxyFirst(posterOriginalSrc(item)) ? "1" : "0"}" loading="lazy" decoding="async" alt="">`
     : `<div class="poster-placeholder">Нет постера</div>`;
 
   return `
@@ -177,7 +247,7 @@ function renderList(items, label) {
   const prev = $("prevBtn");
   const next = $("nextBtn");
   if (count) count.textContent = label || "";
-  if (grid) grid.innerHTML = safeItems.map(cardHtml).join("");
+  if (grid) { grid.innerHTML = safeItems.map(cardHtml).join(""); schedulePosterRecovery(grid); }
   if (page) page.textContent = `${currentPage} / ${currentPages}`;
   if (prev) prev.disabled = currentPage <= 1;
   if (next) next.disabled = currentPage >= currentPages;
@@ -470,7 +540,7 @@ function openDetails(item) {
   const meta = $("detailMeta");
   const detailGenres = $("detailGenres");
   const overview = $("detailOverview");
-  if (poster) poster.src = posterSrc(item) || "";
+  if (poster) { poster.dataset.originalSrc = posterOriginalSrc(item) || ""; poster.dataset.proxyTried = shouldProxyFirst(poster.dataset.originalSrc) ? "1" : "0"; poster.src = posterSrc(item) || ""; schedulePosterRecovery(document); }
   if (title) title.textContent = titleOf(item);
   if (meta) meta.textContent = `${getType(item)} · ${getYear(item) || "—"} · ${rankLabel(item)} · ${getRating(item) || "—"} · ${getVotes(item)} голосов`;
   if (detailGenres) detailGenres.textContent = getGenres(item).join(" · ");
@@ -534,7 +604,7 @@ function relatedCardHtml(item) {
   const img = posterSrc(item);
   return `
     <article class="related-card" data-related-id="${escapeAttr(item.id || `${titleOf(item)}|${getYear(item)}`)}">
-      ${img ? `<img class="related-poster" src="${escapeAttr(img)}" loading="lazy" decoding="async" alt="">` : ""}
+      ${img ? `<img class="related-poster" src="${escapeAttr(img)}" data-original-src="${escapeAttr(posterOriginalSrc(item))}" data-proxy-tried="${shouldProxyFirst(posterOriginalSrc(item)) ? "1" : "0"}" loading="lazy" decoding="async" alt="">` : ""}
       <div class="related-info">
         <div class="related-title">${escapeHtml(titleOf(item))}</div>
         <div class="related-meta">${escapeHtml(getYear(item) || "—")} · ${escapeHtml(getType(item))}</div>
@@ -665,6 +735,7 @@ async function boot() {
   window.GKM_V109_FAST_SEARCH_VERSION = GKM_APP_CLEAN_VERSION;
   window.GKM_V110_SEARCH_FALLBACK_VERSION = GKM_APP_CLEAN_VERSION;
   window.GKM_V111_SEARCH_LITE_404_FALLBACK_VERSION = GKM_APP_CLEAN_VERSION;
+  window.GKM_V113_POSTER_PROXY_RECOVERY_VERSION = GKM_APP_CLEAN_VERSION;
   window.GKM_COUNT_POSTERS = async () => {
     let data;
     try {
@@ -691,6 +762,3 @@ window.addEventListener("unhandledrejection", event => showFatalError(event.reas
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
 else boot();
-
-
-window.GKM_V112_GLOBAL_DEDUPE_VERSION = "v112-global-dedupe-fast-db-2026-06-19";
