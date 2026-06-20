@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v111-search-lite-404-fallback-2026-06-18";
+const GKM_APP_CLEAN_VERSION = "v112-lite-action-dedupe-2026-06-19";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -691,3 +691,6 @@ window.addEventListener("unhandledrejection", event => showFatalError(event.reas
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
 else boot();
+
+
+window.GKM_V112_GLOBAL_DEDUPE_VERSION = "v112-global-dedupe-fast-db-2026-06-19";
