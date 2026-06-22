@@ -1,4 +1,5 @@
-const GKM_APP_CLEAN_VERSION = "v113-poster-proxy-recovery-2026-06-20";
+const GKM_APP_CLEAN_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
+window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
