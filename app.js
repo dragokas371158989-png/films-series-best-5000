@@ -1386,3 +1386,6 @@ window.GKM_V130_ANIME_TOP_RANK_PAGE_CACHE_EOF_LOCK_VERSION = "v130-anime-top-ran
 
 // V131 EOF lock
 window.GKM_V131_STATIC_ANIME_TOP_FAST_EOF_LOCK_VERSION = "v131-static-anime-top-fast-no-worker-hang-2026-06-24";
+
+window.GKM_V133_MISSING_TOP_FILE_FIX_VERSION = "v133-missing-anime-top-file-fix-2026-06-24";
+console.log("GKM: v133-missing-anime-top-file-fix-2026-06-24");
