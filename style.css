@@ -1904,3 +1904,14 @@ a {
   color: #fff !important;
 }
 /* === /GKM V116 ANIME TOP 100 === */
+
+
+/* V132 studio top */
+.studio-top-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;width:100%;}
+.studio-top-card{position:relative;min-height:190px;padding:18px;border:1px solid rgba(0,229,255,.45);border-radius:18px;background:linear-gradient(180deg,rgba(30,16,80,.92),rgba(3,10,28,.95));box-shadow:0 0 18px rgba(102,51,255,.25);overflow:hidden;}
+.studio-top-card h3{margin:18px 0 12px;font-size:24px;line-height:1.1;color:#fff;text-shadow:0 0 10px rgba(194,164,255,.65);}
+.studio-rank{position:absolute;top:12px;right:12px;padding:7px 12px;border-radius:999px;background:linear-gradient(135deg,#ffd14a,#ff9a00);color:#111;font-weight:900;box-shadow:0 0 14px rgba(255,176,0,.45);}
+.studio-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.studio-stats span{padding:6px 9px;border-radius:999px;background:rgba(0,229,255,.12);border:1px solid rgba(0,229,255,.35);font-weight:800;color:#eaf7ff;}
+.studio-titles{display:flex;flex-wrap:wrap;gap:6px;}
+.studio-titles span{font-size:13px;padding:5px 8px;border-radius:10px;background:rgba(124,58,237,.25);border:1px solid rgba(168,85,247,.35);color:#eee;}
