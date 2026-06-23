@@ -1,10 +1,11 @@
-const GKM_APP_CLEAN_VERSION = "v121-anime-top-popular-fill-100-2026-06-23";
+const GKM_APP_CLEAN_VERSION = "v122-anime-top-ru-title-one-franchise-2026-06-23";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
 window.GKM_V116_ANIME_TOP_100_VERSION = "v116-anime-top-100-rating-2026-06-23";
 window.GKM_V117_ANIME_TOP_100_PEOPLE_VERSION = "v117-anime-top-100-people-rating-2026-06-23";
 window.GKM_V119_ANIME_TOP_ADAPTIVE_9M_VERSION = "v119-anime-top-adaptive-9m-2026-06-23";
 window.GKM_V120_ANIME_TOP_POPULAR_9M_VERSION = "v120-anime-top-popular-adaptive-9m-2026-06-23";
 window.GKM_V121_ANIME_TOP_FILL_100_VERSION = "v121-anime-top-popular-fill-100-2026-06-23";
+window.GKM_V122_ANIME_TOP_RU_ONE_FRANCHISE_VERSION = "v122-anime-top-ru-title-one-franchise-2026-06-23";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -57,7 +58,7 @@ function setStatus(text) {
 }
 
 async function fetchJson(url, cache = "force-cache") {
-  const res = await fetch(`${url}?v=117`, { cache });
+  const res = await fetch(`${url}?v=122`, { cache });
   if (!res.ok) throw new Error(`${url} ${res.status}`);
   return res.json();
 }
@@ -73,6 +74,123 @@ function saveSet(key, set) {
 
 function titleOf(item) {
   return String(item && (item.ru || item.title_ru || item.name || item.title || item.en || item.original_title || item.original_name) || "Без названия");
+}
+
+
+const ANIME_RU_MAP = new Map(Object.entries({
+  "attack on titan":"Атака титанов",
+  "shingeki no kyojin":"Атака титанов",
+  "death note":"Тетрадь смерти",
+  "one-punch man":"Ванпанчмен",
+  "one punch man":"Ванпанчмен",
+  "demon slayer kimetsu no yaiba":"Истребитель демонов",
+  "demon slayer":"Истребитель демонов",
+  "fullmetal alchemist brotherhood":"Стальной алхимик: Братство",
+  "fullmetal alchemist":"Стальной алхимик",
+  "sword art online":"Мастера меча онлайн",
+  "my hero academia":"Моя геройская академия",
+  "boku no hero academia":"Моя геройская академия",
+  "naruto":"Наруто",
+  "naruto shippuden":"Наруто: Ураганные хроники",
+  "your name":"Твоё имя",
+  "kimi no na wa":"Твоё имя",
+  "jujutsu kaisen":"Магическая битва",
+  "tokyo ghoul":"Токийский гуль",
+  "hunter x hunter":"Охотник х Охотник",
+  "a silent voice":"Форма голоса",
+  "koe no katachi":"Форма голоса",
+  "vinland saga":"Сага о Винланде",
+  "frieren beyond journey s end":"Провожающая в последний путь Фрирен",
+  "sousou no frieren":"Провожающая в последний путь Фрирен",
+  "steins gate":"Врата Штейна",
+  "code geass":"Код Гиас",
+  "one piece":"Ван-Пис",
+  "bleach":"Блич",
+  "dragon ball":"Драконий жемчуг",
+  "cowboy bebop":"Ковбой Бибоп",
+  "monster":"Монстр",
+  "berserk":"Берсерк",
+  "gintama":"Гинтама",
+  "dr stone":"Доктор Стоун",
+  "re zero":"Re:Zero — жизнь с нуля в другом мире",
+  "re:zero":"Re:Zero — жизнь с нуля в другом мире",
+  "86 eighty six":"86: Восемьдесят шесть",
+  "86 eighty-six":"86: Восемьдесят шесть",
+  "91 days":"91 день",
+  "dororo":"Дороро",
+  "black clover":"Чёрный клевер",
+  "chainsaw man":"Человек-бензопила",
+  "spy x family":"Семья шпиона",
+  "haikyuu":"Волейбол!!",
+  "mob psycho 100":"Моб Психо 100",
+  "violet evergarden":"Вайолет Эвергарден",
+  "neon genesis evangelion":"Евангелион",
+  "made in abyss":"Созданный в Бездне",
+  "samurai champloo":"Самурай Чамплу",
+  "jojo":"Невероятные приключения ДжоДжо",
+  "jojo s bizarre adventure":"Невероятные приключения ДжоДжо",
+  "mushoku tensei":"Реинкарнация безработного",
+  "clannad":"Кланнад",
+  "kaguya sama love is war":"Госпожа Кагуя: в любви как на войне"
+}));
+
+const ANIME_RU_OVERVIEW = new Map(Object.entries({
+  "attack on titan":"Человечество вынуждено жить за огромными стенами, спасаясь от титанов. После нападения на родной город Эрен Йегер клянётся уничтожить титанов и вступает в разведкорпус.",
+  "death note":"Старшеклассник Лайт Ягами находит тетрадь смерти, способную убивать людей по имени. Его новая власть запускает опасную игру с гениальным детективом L.",
+  "naruto":"Наруто Узумаки мечтает стать Хокаге и добиться признания деревни. Внутри него запечатан Девятихвостый лис, из-за чего путь ниндзя становится особенно тяжёлым.",
+  "naruto shippuden":"Повзрослевший Наруто возвращается в деревню и продолжает путь ниндзя, сталкиваясь с Акацуки, судьбой Саске и угрозой большой войны.",
+  "vinland saga":"Юный Торфинн оказывается втянут в жестокий мир викингов, мести и войны. Его путь постепенно превращается в историю взросления и поиска настоящей свободы.",
+  "frieren beyond journey s end":"После победы над Королём демонов эльфийка Фрирен отправляется в новое путешествие, чтобы понять людей, время и чувства, которые раньше казались ей далёкими.",
+  "sousou no frieren":"После победы над Королём демонов эльфийка Фрирен отправляется в новое путешествие, чтобы понять людей, время и чувства, которые раньше казались ей далёкими.",
+  "fullmetal alchemist brotherhood":"Братья Элрики нарушают запрет алхимии и платят страшную цену. Чтобы вернуть утраченное, они отправляются на поиски философского камня.",
+  "one-punch man":"Сайтама стал настолько сильным, что побеждает любого врага одним ударом. Теперь ему приходится искать смысл геройства в мире монстров и рейтингов.",
+  "one punch man":"Сайтама стал настолько сильным, что побеждает любого врага одним ударом. Теперь ему приходится искать смысл геройства в мире монстров и рейтингов.",
+  "demon slayer":"Тандзиро Камадо становится истребителем демонов, чтобы спасти сестру Нэдзуко и отомстить за семью, уничтоженную демоном.",
+  "demon slayer kimetsu no yaiba":"Тандзиро Камадо становится истребителем демонов, чтобы спасти сестру Нэдзуко и отомстить за семью, уничтоженную демоном.",
+  "jujutsu kaisen":"Юдзи Итадори проглатывает проклятый палец и оказывается связан с королём проклятий Сукуной. Теперь он учится сражаться с проклятиями в школе магии.",
+  "tokyo ghoul":"Канэки становится полугулем после трагического случая и вынужден жить между человеческим миром и жестокой реальностью гулей.",
+  "hunter x hunter":"Гон отправляется сдавать экзамен охотника, чтобы найти отца. На пути его ждут друзья, опасные противники и испытания, меняющие взгляд на мир.",
+  "your name":"Парень из Токио и девушка из провинции начинают загадочно меняться телами. Их связь приводит к истории о времени, памяти и судьбе.",
+  "a silent voice":"Бывший школьный хулиган пытается искупить вину перед глухой девочкой, которую когда-то обижал. История о прощении, боли и взрослении.",
+  "code geass":"Лелуш получает силу абсолютного приказа и начинает восстание против империи, скрываясь под маской Zero.",
+  "steins gate":"Группа друзей случайно открывает способ отправлять сообщения в прошлое. Игры со временем быстро приводят к тяжёлым последствиям.",
+  "one piece":"Монки Д. Луффи собирает команду и отправляется за легендарным сокровищем Ван-Пис, мечтая стать королём пиратов.",
+  "bleach":"Ичиго Куросаки получает силу синигами и начинает защищать людей от духовных чудовищ, постепенно втягиваясь в войны мира душ.",
+  "sword art online":"Игроки оказываются заперты в виртуальной MMO, где смерть в игре означает смерть в реальности. Кирито пытается пройти игру и выжить.",
+  "my hero academia":"В мире, где сверхспособности стали нормой, Изуку Мидория мечтает стать героем, несмотря на рождение без причуды.",
+  "dragon ball":"Сон Гоку проходит путь воина, сражаясь с сильнейшими противниками и защищая Землю вместе с друзьями.",
+  "cowboy bebop":"Команда охотников за головами путешествует по космосу, сталкиваясь с прошлым, преступниками и одиночеством.",
+  "monster":"Доктор Тэнма спасает мальчика, который позже становится чудовищным преступником. Чтобы исправить ошибку, он начинает опасное расследование.",
+  "black clover":"Аста родился без магии, но мечтает стать Королём магов. Упрямство и антимагический меч становятся его главным оружием.",
+  "chainsaw man":"Дэндзи заключает контракт с демоном-бензопилой и попадает в мир охотников на демонов, где желания стоят слишком дорого.",
+  "spy x family":"Шпион, киллер и девочка-телепат создают фальшивую семью, не зная настоящих секретов друг друга.",
+  "86 eighty six":"Республика ведёт войну беспилотниками, скрывая, что за машинами стоят живые подростки из отверженного сектора 86.",
+  "86 eighty-six":"Республика ведёт войну беспилотниками, скрывая, что за машинами стоят живые подростки из отверженного сектора 86."
+}));
+
+function animeKey(item) {
+  const raw = norm([item && (item.en || item.title || item.name || item.ru), item && item.original_title, item && item.original_name].filter(Boolean).join(" "));
+  for (const key of ANIME_RU_MAP.keys()) {
+    if (raw === key || raw.includes(key) || key.includes(raw)) return key;
+  }
+  return raw;
+}
+
+function displayTitle(item) {
+  if (getType(item) === "Аниме") {
+    const key = animeKey(item);
+    if (ANIME_RU_MAP.has(key)) return ANIME_RU_MAP.get(key);
+  }
+  const base = titleOf(item);
+  return base;
+}
+
+function displayOverview(item) {
+  if (getType(item) === "Аниме") {
+    const key = animeKey(item);
+    if (ANIME_RU_OVERVIEW.has(key)) return ANIME_RU_OVERVIEW.get(key);
+  }
+  return item && (item.overview_ru || item.description_ru || item.overview || item.description) || "Описание пока не добавлено.";
 }
 
 function getYear(item) {
@@ -215,7 +333,7 @@ function typeClass(item) {
 }
 
 function cardHtml(item) {
-  const title = titleOf(item);
+  const title = displayTitle(item);
   const rating = getRating(item);
   const votes = getVotes(item);
   const fav = loadSet(favKey);
@@ -374,8 +492,8 @@ async function loadFastPage(tab, page = 1) {
 
 function makeSearchWorker() {
   if (searchWorker) return searchWorker;
-  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=121`, window.location.href).href;
-  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=121`, window.location.href).href;
+  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=122`, window.location.href).href;
+  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=122`, window.location.href).href;
   const absoluteShardBase = new URL(`${SEARCH_SHARDS_BASE}/`, window.location.href).href;
   const code = `
     const SEARCH_LITE_URL = ${JSON.stringify(absoluteSearchLiteUrl)};
@@ -401,26 +519,63 @@ function makeSearchWorker() {
     function queryList(raw){const base=norm(raw);const out=new Set(base?[base]:[]);const squ=squeeze(base);if(squ&&squ!==base)out.add(squ);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const fixedSqu=squeeze(fixed);if(fixedSqu&&fixedSqu!==fixed)out.add(fixedSqu);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"интерстеллар":["interstellar"]};[...out].forEach(value=>{Object.entries(syn).forEach(([k,a])=>{if(value===k||value.includes(k))a.forEach(x=>out.add(norm(x)));});});return [...out].filter(Boolean);}
     function hay(x){return x.__hay||(x.__hay=norm([x.search,title(x),x.ru,x.en,(x.genres||[]).join(" ")].join(" ")));}
     function score(x,queries){if(!queries.length)return 1;const h=hay(x);const wh=" "+h+" ";let best=0;for(const q of queries){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+poster(x)*5000+Math.min(votes(x),1000000)/10+rating(x)*100:0;}
-    function franchiseKey(x){let s=norm(title(x));s=s.replace(/(season|part|cour|movie|final|the final|ova|special)/gi," ");s=s.replace(/(сезон|часть|фильм|финал|финальный|последняя|последний)/gi," ");s=s.replace(/\d+/g," ");s=s.replace(/[:\-–—].*$/," ");s=s.replace(/\s+/g," ").trim();const aliases=[["attack on titan","shingeki no kyojin"],["fullmetal alchemist","stalnoi alhimik"],["naruto shippuden","naruto"],["bleach thousand year blood war","bleach"],["demon slayer kimetsu no yaiba","demon slayer"],["jujutsu kaisen","jujutsu kaisen"],["one piece","one piece"],["gintama","gintama"],["code geass","code geass"],["hunter x hunter","hunter x hunter"],["steins gate","steins gate"]];for(const [a,b] of aliases){if(s.includes(a)||s.includes(b))return a;}return s.split(" ").slice(0,3).join(" ")||s;}
+    function franchiseKey(x){
+      let s=norm([title(x),x&&x.ru,x&&x.en].join(" "));
+      const pairs=[
+        ["attack on titan",["attack on titan","shingeki no kyojin","атака титанов"]],
+        ["naruto",["naruto","наруто"]],
+        ["fullmetal alchemist",["fullmetal alchemist","сталной алхимик","стальной алхимик"]],
+        ["my hero academia",["my hero academia","boku no hero academia","моя геройская академия"]],
+        ["demon slayer",["demon slayer","kimetsu no yaiba","истребитель демонов"]],
+        ["jujutsu kaisen",["jujutsu kaisen","магическая битва"]],
+        ["bleach",["bleach","блич"]],
+        ["one piece",["one piece","ван пис","ванпис"]],
+        ["hunter x hunter",["hunter x hunter","охотник"]],
+        ["code geass",["code geass","код гиас"]],
+        ["steins gate",["steins gate","steins:gate","врата штейна"]],
+        ["86",["86 eighty six","86 eighty-six"]],
+        ["gintama",["gintama","гинтама"]],
+        ["dragon ball",["dragon ball","драконий жемчуг"]],
+        ["sword art online",["sword art online","мастера меча онлайн"]],
+        ["tokyo ghoul",["tokyo ghoul","токийский гуль"]],
+        ["one punch man",["one punch man","one-punch man","ванпанчмен"]]
+      ];
+      for(const [key,arr] of pairs){ if(arr.some(v=>s.includes(norm(v)))) return key; }
+      s=s.replace(/\b(season|part|cour|movie|final|ova|special|recap|arc|chapter)\b/g," ");
+      s=s.replace(/\b(сезон|часть|фильм|финал|арка|глава|спешл|ова)\b/g," ");
+      s=s.replace(/[0-9]+/g," ").replace(/[:\-–—].*$/," ").replace(/\s+/g," ").trim();
+      return s.split(" ").slice(0,3).join(" ")||s;
+    }
     function animeTopScore(x){const v=votes(x);const r=rating(x);const y=Number(year(x)||0);return v*1000 + r*10000 + Math.max(0,2100-y);}
     function isAnimeTopBad(x){const h=hay(x);const banned=[" fan letter","fanletter"," ova"," ova ","special"," recap","summary","pilot","preview","trailer","teaser","music video","soundtrack","concert","stage play","live action","спешл","ова","рекап","краткое содержание","фан письмо","превью","трейлер","мюзикл"];return banned.some(b=>h.includes(b));}
     function applyAnimeTopDedupe(){
       const thresholds=[9000000,7000000,5000000,3000000,2000000,1500000,1000000,700000,500000,300000,100000,50000,0];
-      const sortedAll=rows.slice().filter(r=>type(r.item)==="Аниме"&&poster(r.item)).sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));
-      let clean=sortedAll.filter(r=>!isAnimeTopBad(r.item)&&rating(r.item)>=7&&votes(r.item)>=50000&&Number(year(r.item)||0)<=2025);
-      if(clean.length<100) clean=sortedAll.filter(r=>!isAnimeTopBad(r.item)&&rating(r.item)>=6.5&&votes(r.item)>=10000&&Number(year(r.item)||0)<=2025);
+      const sortedAll=rows.slice()
+        .filter(r=>type(r.item)==="Аниме"&&poster(r.item)&&!isAnimeTopBad(r.item)&&rating(r.item)>=6.8&&Number(year(r.item)||0)<=2025)
+        .sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));
       let selectedThreshold=0;
-      for(const th of thresholds){ if(clean.filter(r=>votes(r.item)>=th).length>=100){ selectedThreshold=th; break; } }
-      let source=selectedThreshold?clean.filter(r=>votes(r.item)>=selectedThreshold):clean;
-      if(source.length<100) source=clean;
-      function build(limitPerFranchise, sourceRows){const cap=new Map();const out=[];for(const row of sourceRows){const key=franchiseKey(row.item);const count=cap.get(key)||0;if(limitPerFranchise&&count>=limitPerFranchise)continue;cap.set(key,count+1);out.push(row);if(out.length>=100)break;}return out;}
-      let out=build(2,source); if(out.length<100) out=build(2,clean); if(out.length<100) out=build(3,clean); if(out.length<100) out=build(0,clean); if(out.length<100) out=build(0,sortedAll);
-      rows=out.slice(0,100); self.__animeTopThreshold=selectedThreshold;
+      for(const th of thresholds){
+        const franchises=new Set(sortedAll.filter(r=>votes(r.item)>=th).map(r=>franchiseKey(r.item)));
+        if(franchises.size>=100){ selectedThreshold=th; break; }
+      }
+      let source=selectedThreshold?sortedAll.filter(r=>votes(r.item)>=selectedThreshold):sortedAll;
+      if(new Set(source.map(r=>franchiseKey(r.item))).size<100) source=sortedAll;
+      const seen=new Set();
+      const out=[];
+      for(const row of source){
+        const key=franchiseKey(row.item);
+        if(seen.has(key)) continue;
+        seen.add(key);
+        out.push(row);
+        if(out.length>=100) break;
+      }
+      rows=out.slice(0,100);
+      self.__animeTopThreshold=selectedThreshold;
     }
     function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(sort==="rating")rows.sort((a,b)=>pr(a,b)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQuery)rows.sort((a,b)=>pr(a,b)||b.score-a.score);else rows.sort((a,b)=>pr(a,b)||(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
-    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=121";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
+    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=122";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
     function buildRows(index, c, queries){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
@@ -566,10 +721,10 @@ function openDetails(item) {
   const detailGenres = $("detailGenres");
   const overview = $("detailOverview");
   if (poster) { poster.dataset.originalSrc = posterOriginalSrc(item) || ""; poster.dataset.proxyTried = shouldProxyFirst(poster.dataset.originalSrc) ? "1" : "0"; poster.src = posterSrc(item) || ""; schedulePosterRecovery(document); }
-  if (title) title.textContent = titleOf(item);
+  if (title) title.textContent = displayTitle(item);
   if (meta) meta.textContent = `${getType(item)} · ${getYear(item) || "—"} · ${rankLabel(item)} · ${getRating(item) || "—"} · ${getVotes(item)} голосов`;
   if (detailGenres) detailGenres.textContent = getGenres(item).join(" · ");
-  if (overview) overview.textContent = item.overview || "Описание пока не добавлено.";
+  if (overview) overview.textContent = displayOverview(item);
 
   const facts = $("detailFacts");
   if (facts) {
@@ -587,7 +742,7 @@ function openDetails(item) {
     ].join("");
   }
 
-  const q = encodeURIComponent(`${titleOf(item)} ${getYear(item) || ""}`.trim());
+  const q = encodeURIComponent(`${displayTitle(item)} ${getYear(item) || ""}`.trim());
   setLink("yandexLink", `https://yandex.ru/search/?text=${q}`);
   setLink("yandexVideoLink", `https://yandex.ru/video/search?text=${q}`);
   setLink("kinopoiskLink", `https://www.kinopoisk.ru/index.php?kp_query=${q}`);
