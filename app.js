@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v132-anime-studios-required-top-2026-06-24";
+const GKM_APP_CLEAN_VERSION = "v134-studio-top-wide-ru-titles-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
 window.GKM_V116_ANIME_TOP_100_VERSION = "v116-anime-top-100-rating-2026-06-23";
 window.GKM_V117_ANIME_TOP_100_PEOPLE_VERSION = "v117-anime-top-100-people-rating-2026-06-23";
@@ -14,6 +14,7 @@ window.GKM_V129_NARUTO_SHIPPUDEN_FIX_VERSION = "v130-anime-top-rank-page-cache-f
 window.GKM_V130_ANIME_TOP_RANK_PAGE_CACHE_FIX_VERSION = "v130-anime-top-rank-page-cache-fix-2026-06-24";
 window.GKM_V131_STATIC_ANIME_TOP_FAST_VERSION = "v131-static-anime-top-fast-no-worker-hang-2026-06-24";
 window.GKM_V132_ANIME_STUDIOS_TOP_VERSION = "v132-anime-studios-required-top-2026-06-24";
+window.GKM_V134_STUDIO_TOP_WIDE_RU_VERSION = "v134-studio-top-wide-ru-titles-2026-06-24";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
