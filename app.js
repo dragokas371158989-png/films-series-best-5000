@@ -1,9 +1,10 @@
-const GKM_APP_CLEAN_VERSION = "v119-anime-top-adaptive-9m-2026-06-23";
+const GKM_APP_CLEAN_VERSION = "v121-anime-top-popular-fill-100-2026-06-23";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
 window.GKM_V116_ANIME_TOP_100_VERSION = "v116-anime-top-100-rating-2026-06-23";
 window.GKM_V117_ANIME_TOP_100_PEOPLE_VERSION = "v117-anime-top-100-people-rating-2026-06-23";
 window.GKM_V119_ANIME_TOP_ADAPTIVE_9M_VERSION = "v119-anime-top-adaptive-9m-2026-06-23";
 window.GKM_V120_ANIME_TOP_POPULAR_9M_VERSION = "v120-anime-top-popular-adaptive-9m-2026-06-23";
+window.GKM_V121_ANIME_TOP_FILL_100_VERSION = "v121-anime-top-popular-fill-100-2026-06-23";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -373,8 +374,8 @@ async function loadFastPage(tab, page = 1) {
 
 function makeSearchWorker() {
   if (searchWorker) return searchWorker;
-  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=120`, window.location.href).href;
-  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=120`, window.location.href).href;
+  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=121`, window.location.href).href;
+  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=121`, window.location.href).href;
   const absoluteShardBase = new URL(`${SEARCH_SHARDS_BASE}/`, window.location.href).href;
   const code = `
     const SEARCH_LITE_URL = ${JSON.stringify(absoluteSearchLiteUrl)};
@@ -395,20 +396,31 @@ function makeSearchWorker() {
     function genres(x){return Array.isArray(x&&x.genres)?x.genres.map(String):[];}
     function poster(x){const raw=String((x&&x.poster)||"").trim();const low=raw.toLowerCase();return raw&&low!=="null"&&low!=="undefined"&&!low.includes("dummyimage")&&!low.includes("placeholder")&&!low.includes("no-poster")?1:0;}
     function isAnimeTopCandidate(x){const t=type(x);if(t!=="Аниме")return false;const v=votes(x);const r=rating(x);const y=Number(year(x)||0);if(v<100000||r<7.4)return false;if(y&&y>2024)return false;const h=hay(x);const banned=[" fan letter","fanletter"," ova"," ova ","special"," recap","summary","pilot","preview","trailer","teaser","music video","soundtrack","concert","stage play","live action","спешл","ова","рекап","краткое содержание","фан письмо","превью","трейлер","мюзикл"];return !banned.some(b=>h.includes(b));}
-    function tabPass(x,tab){const t=type(x);if(!tab||tab==="all")return true;if(tab==="movies")return t==="Фильм";if(tab==="series")return t==="Сериал";if(tab==="anime")return t==="Аниме";if(tab==="cartoons")return t==="Мультфильм";if(tab==="top")return rating(x)>=7&&votes(x)>=300;if(tab==="anime_top")return isAnimeTopCandidate(x);if(tab==="new")return Number(year(x)||0)>=2024;if(tab==="popular")return votes(x)>=1000;return true;}
+    function tabPass(x,tab){const t=type(x);if(!tab||tab==="all")return true;if(tab==="movies")return t==="Фильм";if(tab==="series")return t==="Сериал";if(tab==="anime")return t==="Аниме";if(tab==="cartoons")return t==="Мультфильм";if(tab==="top")return rating(x)>=7&&votes(x)>=300;if(tab==="anime_top")return t==="Аниме";if(tab==="new")return Number(year(x)||0)>=2024;if(tab==="popular")return votes(x)>=1000;return true;}
     function pass(x,c){if(!tabPass(x,c.tab))return false;const t=type(x);if(c.type&&t!==c.type)return false;if(c.genre&&!genres(x).includes(c.genre))return false;if(c.year&&year(x)!==String(c.year))return false;if(c.minRating&&rating(x)<Number(c.minRating))return false;return true;}
     function queryList(raw){const base=norm(raw);const out=new Set(base?[base]:[]);const squ=squeeze(base);if(squ&&squ!==base)out.add(squ);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const fixedSqu=squeeze(fixed);if(fixedSqu&&fixedSqu!==fixed)out.add(fixedSqu);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"интерстеллар":["interstellar"]};[...out].forEach(value=>{Object.entries(syn).forEach(([k,a])=>{if(value===k||value.includes(k))a.forEach(x=>out.add(norm(x)));});});return [...out].filter(Boolean);}
     function hay(x){return x.__hay||(x.__hay=norm([x.search,title(x),x.ru,x.en,(x.genres||[]).join(" ")].join(" ")));}
     function score(x,queries){if(!queries.length)return 1;const h=hay(x);const wh=" "+h+" ";let best=0;for(const q of queries){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+poster(x)*5000+Math.min(votes(x),1000000)/10+rating(x)*100:0;}
     function franchiseKey(x){let s=norm(title(x));s=s.replace(/(season|part|cour|movie|final|the final|ova|special)/gi," ");s=s.replace(/(сезон|часть|фильм|финал|финальный|последняя|последний)/gi," ");s=s.replace(/\d+/g," ");s=s.replace(/[:\-–—].*$/," ");s=s.replace(/\s+/g," ").trim();const aliases=[["attack on titan","shingeki no kyojin"],["fullmetal alchemist","stalnoi alhimik"],["naruto shippuden","naruto"],["bleach thousand year blood war","bleach"],["demon slayer kimetsu no yaiba","demon slayer"],["jujutsu kaisen","jujutsu kaisen"],["one piece","one piece"],["gintama","gintama"],["code geass","code geass"],["hunter x hunter","hunter x hunter"],["steins gate","steins gate"]];for(const [a,b] of aliases){if(s.includes(a)||s.includes(b))return a;}return s.split(" ").slice(0,3).join(" ")||s;}
     function animeTopScore(x){const v=votes(x);const r=rating(x);const y=Number(year(x)||0);return v*1000 + r*10000 + Math.max(0,2100-y);}
-    function applyAnimeTopDedupe(){const thresholds=[9000000,7000000,5000000,3000000,2000000,1500000,1000000,700000,500000,300000,100000];const sorted=rows.slice().sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));let chosen=sorted;let chosenThreshold=0;for(const th of thresholds){const part=sorted.filter(r=>votes(r.item)>=th);if(part.length>=100){chosen=part;chosenThreshold=th;break;}}if(!chosenThreshold){for(const th of thresholds.slice().reverse()){const part=sorted.filter(r=>votes(r.item)>=th);if(part.length){chosen=part;chosenThreshold=th;}}}
-      function build(limitPerFranchise, source){const cap=new Map();const out=[];for(const row of source){const key=franchiseKey(row.item);const count=cap.get(key)||0;if(count>=limitPerFranchise)continue;cap.set(key,count+1);out.push(row);if(out.length>=100)break;}return out;}
-      let out=build(2,chosen);if(out.length<100)out=build(2,sorted);if(out.length<100)out=build(3,sorted);rows=out.slice(0,100);self.__animeTopThreshold=chosenThreshold;}
+    function isAnimeTopBad(x){const h=hay(x);const banned=[" fan letter","fanletter"," ova"," ova ","special"," recap","summary","pilot","preview","trailer","teaser","music video","soundtrack","concert","stage play","live action","спешл","ова","рекап","краткое содержание","фан письмо","превью","трейлер","мюзикл"];return banned.some(b=>h.includes(b));}
+    function applyAnimeTopDedupe(){
+      const thresholds=[9000000,7000000,5000000,3000000,2000000,1500000,1000000,700000,500000,300000,100000,50000,0];
+      const sortedAll=rows.slice().filter(r=>type(r.item)==="Аниме"&&poster(r.item)).sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));
+      let clean=sortedAll.filter(r=>!isAnimeTopBad(r.item)&&rating(r.item)>=7&&votes(r.item)>=50000&&Number(year(r.item)||0)<=2025);
+      if(clean.length<100) clean=sortedAll.filter(r=>!isAnimeTopBad(r.item)&&rating(r.item)>=6.5&&votes(r.item)>=10000&&Number(year(r.item)||0)<=2025);
+      let selectedThreshold=0;
+      for(const th of thresholds){ if(clean.filter(r=>votes(r.item)>=th).length>=100){ selectedThreshold=th; break; } }
+      let source=selectedThreshold?clean.filter(r=>votes(r.item)>=selectedThreshold):clean;
+      if(source.length<100) source=clean;
+      function build(limitPerFranchise, sourceRows){const cap=new Map();const out=[];for(const row of sourceRows){const key=franchiseKey(row.item);const count=cap.get(key)||0;if(limitPerFranchise&&count>=limitPerFranchise)continue;cap.set(key,count+1);out.push(row);if(out.length>=100)break;}return out;}
+      let out=build(2,source); if(out.length<100) out=build(2,clean); if(out.length<100) out=build(3,clean); if(out.length<100) out=build(0,clean); if(out.length<100) out=build(0,sortedAll);
+      rows=out.slice(0,100); self.__animeTopThreshold=selectedThreshold;
+    }
     function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(sort==="rating")rows.sort((a,b)=>pr(a,b)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQuery)rows.sort((a,b)=>pr(a,b)||b.score-a.score);else rows.sort((a,b)=>pr(a,b)||(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
-    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=120";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
+    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=121";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
     function buildRows(index, c, queries){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
