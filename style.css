@@ -1880,3 +1880,27 @@ a {
   word-break: normal !important;
 }
 /* === /GKM V109 RATING FIT AND FACTS FIX === */
+
+/* === GKM V116 ANIME TOP 100 === */
+.anime-rank-badge {
+  position: absolute;
+  left: 10px;
+  top: 42px;
+  z-index: 5;
+  min-width: 44px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffd54a, #ff7b00);
+  color: #170a00;
+  font-weight: 1000;
+  font-size: 15px;
+  line-height: 1;
+  box-shadow: 0 0 14px rgba(255, 196, 0, .45);
+  border: 1px solid rgba(255, 255, 255, .42);
+  text-align: center;
+}
+.tab[data-tab="anime_top"] {
+  background: linear-gradient(135deg, #ffb300, #8b2cff) !important;
+  color: #fff !important;
+}
+/* === /GKM V116 ANIME TOP 100 === */
