@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v127-anime-detail-facts-enriched-2026-06-23";
+const GKM_APP_CLEAN_VERSION = "v128-worker-hasalias-fix-2026-06-23";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
 window.GKM_V116_ANIME_TOP_100_VERSION = "v116-anime-top-100-rating-2026-06-23";
 window.GKM_V117_ANIME_TOP_100_PEOPLE_VERSION = "v117-anime-top-100-people-rating-2026-06-23";
@@ -9,6 +9,7 @@ window.GKM_V122_ANIME_TOP_RU_ONE_FRANCHISE_VERSION = "v122-anime-top-ru-title-on
 window.GKM_V125_ANIME_TITLE_ALIAS_FIX_VERSION = "v125-anime-title-alias-nanatsu-fix-2026-06-23";
 window.GKM_V126_MANUAL_TOP_100_RU_DETAILS_VERSION = "v126-manual-top-100-ru-details-clean-2026-06-23";
 window.GKM_V127_ANIME_DETAIL_FACTS_VERSION = "v127-anime-detail-facts-enriched-2026-06-23";
+window.GKM_V128_WORKER_HASALIAS_FIX_VERSION = "v128-worker-hasalias-fix-2026-06-23";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -614,6 +615,7 @@ function makeSearchWorker() {
     const shardPromises = new Map();
     let rows = [];
     function norm(v){return String(v||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
+    function hasAliasText(h,a){h=norm(h);a=norm(a);if(!h||!a)return false;if(h===a)return true;if(a.length<=4)return (" "+h+" ").includes(" "+a+" ");return h.includes(a)||a.includes(h);}
     function squeeze(v){return norm(v).replace(/(.)\\1+/g,"$1");}
     function keyfix(s){const m={"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};return String(s||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
     function title(x){return String((x&&(x.ru||x.en||x.title||x.name))||"");}
