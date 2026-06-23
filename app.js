@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v124-manual-anime-top-sorted-by-votes-2026-06-23";
+const GKM_APP_CLEAN_VERSION = "v127-anime-detail-facts-enriched-2026-06-23";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
 window.GKM_V116_ANIME_TOP_100_VERSION = "v116-anime-top-100-rating-2026-06-23";
 window.GKM_V117_ANIME_TOP_100_PEOPLE_VERSION = "v117-anime-top-100-people-rating-2026-06-23";
@@ -6,7 +6,9 @@ window.GKM_V119_ANIME_TOP_ADAPTIVE_9M_VERSION = "v119-anime-top-adaptive-9m-2026
 window.GKM_V120_ANIME_TOP_POPULAR_9M_VERSION = "v120-anime-top-popular-adaptive-9m-2026-06-23";
 window.GKM_V121_ANIME_TOP_FILL_100_VERSION = "v121-anime-top-popular-fill-100-2026-06-23";
 window.GKM_V122_ANIME_TOP_RU_ONE_FRANCHISE_VERSION = "v122-anime-top-ru-title-one-franchise-2026-06-23";
-window.GKM_V124_MANUAL_TOP_VOTES_VERSION = "v124-manual-anime-top-sorted-by-votes-2026-06-23";
+window.GKM_V125_ANIME_TITLE_ALIAS_FIX_VERSION = "v125-anime-title-alias-nanatsu-fix-2026-06-23";
+window.GKM_V126_MANUAL_TOP_100_RU_DETAILS_VERSION = "v126-manual-top-100-ru-details-clean-2026-06-23";
+window.GKM_V127_ANIME_DETAIL_FACTS_VERSION = "v127-anime-detail-facts-enriched-2026-06-23";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -108,6 +110,8 @@ const ANIME_RU_MAP = new Map(Object.entries({
   "one piece":"Ван-Пис",
   "bleach":"Блич",
   "dragon ball":"Драконий жемчуг",
+  "nanatsu no taizai":"Семь смертных грехов",
+  "seven deadly sins":"Семь смертных грехов",
   "cowboy bebop":"Ковбой Бибоп",
   "monster":"Монстр",
   "berserk":"Берсерк",
@@ -178,6 +182,20 @@ const ANIME_RU_MAP = new Map(Object.entries({
   ,"hellsing ultimate":"Хеллсинг Ultimate"
 }));
 
+// V126: additional title aliases
+Object.entries({
+  "nanatsu no taizai":"Семь смертных грехов",
+  "seven deadly sins":"Семь смертных грехов",
+  "shingeki no kyojin":"Атака титанов",
+  "attack on titan":"Атака титанов",
+  "death note":"Тетрадь смерти",
+  "jujutsu kaisen":"Магическая битва",
+  "a silent voice":"Форма голоса",
+  "koe no katachi":"Форма голоса",
+  "your name":"Твоё имя",
+  "kimi no na wa":"Твоё имя"
+}).forEach(([k,v]) => ANIME_RU_MAP.set(norm(k), v));
+
 const ANIME_RU_OVERVIEW = new Map(Object.entries({
   "attack on titan":"Человечество вынуждено жить за огромными стенами, спасаясь от титанов. После нападения на родной город Эрен Йегер клянётся уничтожить титанов и вступает в разведкорпус.",
   "death note":"Старшеклассник Лайт Ягами находит тетрадь смерти, способную убивать людей по имени. Его новая власть запускает опасную игру с гениальным детективом L.",
@@ -212,10 +230,55 @@ const ANIME_RU_OVERVIEW = new Map(Object.entries({
   "86 eighty-six":"Республика ведёт войну беспилотниками, скрывая, что за машинами стоят живые подростки из отверженного сектора 86."
 }));
 
+// V126: Russian descriptions for manual anime top details
+Object.entries({
+  "атака титанов":"Люди живут за огромными стенами, спасаясь от титанов. После падения стены Мария Эрен Йегер вступает в разведкорпус и начинает войну за свободу человечества.",
+  "сага о винланде":"Юный Торфинн растёт среди викингов, войны и мести. Его путь постепенно превращается в историю взросления, потерь и поиска земли без насилия.",
+  "ковбой бибоп":"Команда охотников за головами путешествует по космосу, ловит преступников и пытается сбежать от прошлого, которое всё равно догоняет каждого из них.",
+  "гуррен лаганн":"Симон и Камина вырываются из подземного мира и начинают безумную битву за будущее человечества, где сила духа важнее любых границ.",
+  "семь смертных грехов":"Отряд легендарных рыцарей, объявленных предателями, возвращается, чтобы спасти королевство и раскрыть заговор, угрожающий всему миру.",
+  "инициал ди":"Такуми Фудзивара случайно становится легендой уличных гонок, когда его ночные доставки тофу превращаются в школу идеального дрифта.",
+  "монстр":"Гениальный хирург спасает мальчика, который позже становится опаснейшим преступником. Доктор Тэнма отправляется на поиски, чтобы исправить ошибку прошлого.",
+  "берсерк":"Наёмник Гатс проходит через войны, предательство и тьму, пытаясь выжить в жестоком мире и сохранить человечность.",
+  "евангелион":"Подростки пилотируют гигантских Евангелионов, защищая человечество от Ангелов, пока война постепенно вскрывает страхи, одиночество и тайны мира.",
+  "самурай чамплу":"Трое странников отправляются в путь по Японии эпохи Эдо. Их путешествие смешивает самурайскую драму, комедию и хип-хоп стиль.",
+  "ван-пис":"Луффи собирает команду пиратов и отправляется на поиски легендарного сокровища Ван-Пис, чтобы стать королём пиратов.",
+  "блич: тысячелетняя кровавая война":"Ичиго и Общество душ сталкиваются с древним врагом — квинси. Начинается кровавая война, раскрывающая тайны прошлого и истинную силу героев.",
+  "блич":"Ичиго Куросаки получает силу синигами и оказывается втянут в битвы с пустыми, заговоры Общества душ и войны духовного мира.",
+  "охотник х охотник":"Гон Фрикс отправляется сдавать экзамен охотника, чтобы найти отца. На пути его ждут друзья, опасные враги и суровые испытания.",
+  "провожающая в последний путь фрирен":"Эльфийка Фрирен после победы над Королём демонов отправляется в новое путешествие, чтобы понять людей, время и ценность прожитых мгновений.",
+  "наруто":"Наруто Узумаки мечтает стать Хокаге и добиться признания деревни, несмотря на одиночество и запечатанного внутри Девятихвостого лиса.",
+  "наруто: ураганные хроники":"Повзрослевший Наруто возвращается после тренировок и сталкивается с Акацуки, судьбой Саске и войной, которая изменит мир шиноби.",
+  "тетрадь смерти":"Лайт Ягами получает тетрадь, способную убивать людей по имени, и начинает собственный суд над миром, вступая в битву умов с детективом L.",
+  "стальной алхимик: братство":"Братья Элрики нарушают запрет алхимии и платят страшную цену. Чтобы вернуть утраченное, они ищут философский камень и правду о стране.",
+  "ванпанчмен":"Сайтама стал настолько сильным, что побеждает любого врага одним ударом. Теперь ему приходится искать смысл геройства в мире монстров и рейтингов.",
+  "истребитель демонов":"Тандзиро становится истребителем демонов, чтобы спасти сестру Нэдзуко и отомстить за семью, уничтоженную демоном.",
+  "моя геройская академия":"Изуку Мидория родился без причуды, но мечтает стать героем. Встреча с Всемогущим даёт ему шанс поступить в академию героев.",
+  "твоё имя":"Парень из Токио и девушка из провинции начинают загадочно меняться телами. Их связь превращается в историю о времени, памяти и судьбе.",
+  "форма голоса":"Бывший школьный хулиган пытается искупить вину перед глухой девочкой, которую когда-то обижал. История о боли, прощении и взрослении.",
+  "код гиас: восставший лелуш":"Лелуш получает силу абсолютного приказа и начинает восстание против империи, скрываясь под маской Zero.",
+  "магическая битва":"Юдзи Итадори проглатывает проклятый палец и оказывается связан с Сукуной. Теперь он учится сражаться с проклятиями в школе магии.",
+  "токийский гуль":"Канэки становится полугулем после трагического случая и вынужден жить между человеческим миром и жестокой реальностью гулей.",
+  "чёрный клевер":"Аста родился без магии, но мечтает стать Королём магов. Его упорство и антимагический меч становятся главным оружием.",
+  "реинкарнация безработного":"Безработный мужчина перерождается в магическом мире и получает шанс прожить новую жизнь, используя знания прошлого и талант к магии.",
+  "паразит":"Инопланетные паразиты захватывают тела людей. Старшеклассник Синъити выживает после частичного заражения и вынужден сосуществовать с паразитом Миги.",
+  "триган":"Стрелок Вэш Ураган путешествует по пустынной планете, стараясь никого не убивать, хотя за ним тянется разрушительная репутация.",
+  "хеллсинг ultimate":"Организация Хеллсинг защищает Британию от сверхъестественных угроз, используя своего главного оружия — вампира Алукарда."
+}).forEach(([k,v]) => ANIME_RU_OVERVIEW.set(norm(k), v));
+
+function hasAliasText(h, a) {
+  h = norm(h);
+  a = norm(a);
+  if (!h || !a) return false;
+  if (h === a) return true;
+  if (a.length <= 4) return (" " + h + " ").includes(" " + a + " ");
+  return h.includes(a) || a.includes(h);
+}
+
 function animeKey(item) {
-  const raw = norm([item && (item.en || item.title || item.name || item.ru), item && item.original_title, item && item.original_name].filter(Boolean).join(" "));
+  const raw = norm([item && item.ru, item && item.title_ru, item && item.__manualTopTitle, item && item.en, item && item.title, item && item.name, item && item.original_title, item && item.original_name].filter(Boolean).join(" "));
   for (const key of ANIME_RU_MAP.keys()) {
-    if (raw === key || raw.includes(key) || key.includes(raw)) return key;
+    if (hasAliasText(raw, key)) return key;
   }
   return raw;
 }
@@ -231,10 +294,13 @@ function displayTitle(item) {
 
 function displayOverview(item) {
   if (getType(item) === "Аниме") {
-    const key = animeKey(item);
-    if (ANIME_RU_OVERVIEW.has(key)) return ANIME_RU_OVERVIEW.get(key);
+    const candidates = [item && item.__manualTopTitle, item && item.ru, item && item.title_ru, displayTitle(item), animeKey(item)].filter(Boolean).map(norm);
+    for (const k of candidates) {
+      if (ANIME_RU_OVERVIEW.has(k)) return ANIME_RU_OVERVIEW.get(k);
+    }
   }
-  return item && (item.overview_ru || item.description_ru || item.overview || item.description) || "Описание пока не добавлено.";
+  const text = item && (item.overview_ru || item.description_ru || item.overview || item.description);
+  return text || "Описание пока не добавлено.";
 }
 
 function getYear(item) {
@@ -595,35 +661,40 @@ function makeSearchWorker() {
     function applyAnimeTopDedupe(){
       const manual=[
         {ru:"Атака титанов", aliases:["attack on titan","shingeki no kyojin","атака титанов"]},
-        {ru:"Стальной алхимик: Братство", aliases:["fullmetal alchemist brotherhood","hagane no renkinjutsushi brotherhood","стальной алхимик братство"]},
-        {ru:"Блич: Тысячелетняя кровавая война", aliases:["bleach thousand year blood war","bleach sennen kessen hen","блич тысячелетняя кровавая война"]},
+        {ru:"Стальной алхимик: Братство", aliases:["fullmetal alchemist brotherhood","hagane no renkinjutsushi","стальной алхимик братство"]},
+        {ru:"Блич: Тысячелетняя кровавая война", aliases:["bleach thousand-year blood war","bleach sennen kessen hen","тысячелетняя кровавая война"]},
         {ru:"Легенда о героях Галактики", aliases:["legend of the galactic heroes","ginga eiyu densetsu","легенда о героях галактики"]},
         {ru:"Ван-Пис", aliases:["one piece","ван пис","ван-пис"]},
         {ru:"Охотник х Охотник", aliases:["hunter x hunter","hunter hunter","охотник х охотник"]},
-        {ru:"Провожающая в последний путь Фрирен", aliases:["frieren beyond journey s end","sousou no frieren","фрирен"]},
+        {ru:"Провожающая в последний путь Фрирен", aliases:["frieren beyond journey s end","sousou no frieren","frieren","фрирен"]},
         {ru:"Сага о Винланде", aliases:["vinland saga","сага о винланде"]},
         {ru:"Ковбой Бибоп", aliases:["cowboy bebop","kauboi bibappu","ковбой бибоп"]},
-        {ru:"Мастер Муси 2", aliases:["mushishi zoku sho","mushishi zoku-sho","мастер муси 2"]},
+        {ru:"Мастер Муси 2", aliases:["mushishi zoku-sho","mushishi zoku sho","мастер муси 2"]},
         {ru:"Королевство", aliases:["kingdom","королевство"]},
         {ru:"Серебряный клык", aliases:["ginga nagareboshi gin","silver fang","серебряный клык"]},
         {ru:"Драконий жемчуг Зет", aliases:["dragon ball z","doragon boru zetto","драконий жемчуг зет"]},
-        {ru:"Конан — мальчик из будущего", aliases:["future boy conan","mirai shonen konan","конан мальчик из будущего"]},
+        {ru:"Конан — мальчик из будущего", aliases:["future boy conan","mirai shonen conan","конан мальчик из будущего"]},
+        {ru:"Ателье колдовских колпаков", aliases:["witch hat atelier","tongari boushi no atelier","とんがり帽子のアトリエ","ателье колдовских колпаков"]},
         {ru:"Гинтама", aliases:["gintama","гинтама"]},
-        {ru:"Наруто: Ураганные хроники", aliases:["naruto shippuden","наруто ураганные хроники"]},
+        {ru:"Первородный грех Такопи", aliases:["takopi original sin","takopii no genzai","первородный грех такопи"]},
+        {ru:"Наруто: Ураганные хроники", aliases:["naruto shippuden","наруто ураганные хроники","ナルト 疾風伝"]},
         {ru:"Код Гиас: Восставший Лелуш", aliases:["code geass lelouch of the rebellion","code geass","код гиас"]},
+        {ru:"Голубые небеса Ромео", aliases:["romeo blue skies","romio no aoi sora","голубые небеса ромео"]},
         {ru:"Монстр", aliases:["monster","монстр"]},
         {ru:"Берсерк", aliases:["berserk","kenpu denki beruseruku","берсерк"]},
         {ru:"Истребитель демонов", aliases:["demon slayer","kimetsu no yaiba","истребитель демонов"]},
-        {ru:"Монолог фармацевта", aliases:["kusuriya no hitorigoto","the apothecary diaries","монолог фармацевта"]},
-        {ru:"Невероятные приключения ДжоДжо", aliases:["jojo","jojo no kimyo na boken","jojo s bizarre adventure","джоджо"]},
+        {ru:"Монолог фармацевта", aliases:["the apothecary diaries","kusuriya no hitorigoto","монолог фармацевта"]},
+        {ru:"Звёзды Айкацу!", aliases:["aikatsu stars","アイカツスターズ","звезды айкацу","звёзды айкацу"]},
+        {ru:"Невероятные приключения ДжоДжо", aliases:["jojo s bizarre adventure","jojo no kimyo na boken","jojo","джоджо"]},
         {ru:"Ванпанчмен", aliases:["one punch man","one-punch man","ванпанчмен"]},
         {ru:"Твоя апрельская ложь", aliases:["your lie in april","shigatsu wa kimi no uso","твоя апрельская ложь"]},
+        {ru:"Охотник х Охотник", aliases:["hunter x hunter 1999","hunter x hunter","охотник х охотник"]},
         {ru:"Кланнад: Продолжение истории", aliases:["clannad after story","кланнад продолжение истории"]},
-        {ru:"Госпожа Кагуя: в любви как на войне", aliases:["kaguya sama love is war","госпожа кагуя"]},
-        {ru:"Инициал Ди", aliases:["initial d","инициал d","инициал ди"]},
+        {ru:"Госпожа Кагуя: В любви как на войне", aliases:["kaguya sama love is war","kaguya-sama","госпожа кагуя"]},
+        {ru:"Инициал Ди", aliases:["initial d","инициал d","инициал ди","頭文字 d"]},
         {ru:"Бродяга Кэнсин", aliases:["rurouni kenshin","samurai x","бродяга кэнсин"]},
         {ru:"Моб Психо 100", aliases:["mob psycho 100","моб психо 100"]},
-        {ru:"Евангелион", aliases:["neon genesis evangelion","shin seiki evangelion","евангелион"]},
+        {ru:"Евангелион", aliases:["neon genesis evangelion","shin seiki evangelion","evangelion","евангелион"]},
         {ru:"Крутой учитель Онидзука", aliases:["great teacher onizuka","gto","крутой учитель онидзука"]},
         {ru:"Отчёт о буйстве духов", aliases:["yu yu hakusho","yuu yuu hakusho","отчет о буйстве духов","отчёт о буйстве духов"]},
         {ru:"Драконий жемчуг", aliases:["dragon ball","doragon boru","драконий жемчуг"]},
@@ -632,32 +703,63 @@ function makeSearchWorker() {
         {ru:"Детектив Конан", aliases:["detective conan","meitantei conan","детектив конан"]},
         {ru:"Призрак в доспехах: Синдром одиночки", aliases:["ghost in the shell stand alone complex","призрак в доспехах синдром одиночки"]},
         {ru:"Самурай Чамплу", aliases:["samurai champloo","samurai chanpuru","самурай чамплу"]},
+        {ru:"О движении Земли", aliases:["chi chikyuu no undou ni tsuite","chi chikyû no undô ni tsuite","orb on the movements of the earth","о движении земли"]},
+        {ru:"Рейтинг короля", aliases:["ranking of kings","ousama ranking","рейтинг короля"]},
+        {ru:"Врата Штейна 0", aliases:["steins gate 0","steins;gate 0","врата штейна 0"]},
+        {ru:"Дораэмон", aliases:["doraemon","дораэмон"]},
+        {ru:"Сказ о четырёх с половиной татами", aliases:["tatami galaxy","yojouhan shinwa taikei","сказ о четырех с половиной татами","сказ о четырёх с половиной татами"]},
         {ru:"Вайолет Эвергарден", aliases:["violet evergarden","вайолет эвергарден"]},
         {ru:"Город, в котором меня нет", aliases:["erased","boku dake ga inai machi","город в котором меня нет"]},
         {ru:"Наруто", aliases:["naruto","наруто"]},
         {ru:"Инуяся: Последняя глава", aliases:["inuyasha kanketsu hen","inuyasha the final act","инуяся последняя глава"]},
+        {ru:"Красавица-воин Сейлор Мун: Сейлор-звёзды", aliases:["sailor moon sailor stars","bishojo senshi sera mun sera stasu","sailor stars","сейлор звезды","сейлор звёзды"]},
         {ru:"Дандадан", aliases:["dandadan","дандадан"]},
         {ru:"Одинокий рокер", aliases:["bocchi the rock","одинокий рокер"]},
         {ru:"Человек-бензопила", aliases:["chainsaw man","человек бензопила"]},
         {ru:"Необычное такси", aliases:["odd taxi","необычное такси"]},
+        {ru:"Гинтама: Полуфинал", aliases:["gintama the semi final","gintama semi-final","гинтама полуфинал"]},
         {ru:"Для тебя, Бессмертный", aliases:["to your eternity","fumetsu no anata e","для тебя бессмертный"]},
         {ru:"Ох, уж этот экстрасенс Сайки Кусуо!", aliases:["saiki kusuo","saiki k","экстрасенс сайки"]},
         {ru:"Драконий жемчуг Супер", aliases:["dragon ball super","драконий жемчуг супер"]},
+        {ru:"Одиннадцать молний", aliases:["inazuma eleven","одиннадцать молний"]},
+        {ru:"Космические приключения Кобры", aliases:["space cobra","cobra the animation","космические приключения кобры"]},
+        {ru:"Путешествие Кино", aliases:["kino no tabi","kino's journey","путешествие кино"]},
+        {ru:"Роза Версаля", aliases:["rose of versailles","berusaiyu no bara","роза версаля"]},
         {ru:"Гуррен Лаганн", aliases:["gurren lagann","tengen toppa gurren lagann","гуррен лаганн"]},
         {ru:"Баракамон", aliases:["barakamon","баракамон"]},
+        {ru:"Май Мелоди и Куроми", aliases:["my melody kuromi","my melody and kuromi","май мелоди куроми"]},
         {ru:"Кайдзю № 8", aliases:["kaiju no 8","kaiju no. 8","кайдзю 8"]},
         {ru:"Ребёнок айдола", aliases:["oshi no ko","ребенок айдола","ребёнок айдола"]},
         {ru:"Летнее время", aliases:["summer time rendering","летнее время"]},
         {ru:"Юри на льду", aliases:["yuri on ice","юри на льду"]},
         {ru:"Семья шпиона", aliases:["spy x family","семья шпиона"]},
         {ru:"Дороро", aliases:["dororo","дороро"]},
+        {ru:"Мартовский лев", aliases:["march comes in like a lion","3-gatsu no lion","мартовский лев"]},
         {ru:"Судьба: Начало", aliases:["fate zero","fate/zero","судьба начало"]},
         {ru:"Баскетбол Куроко", aliases:["kuroko no basket","баскетбол куроко"]},
+        {ru:"Выжить на необитаемой планете", aliases:["mujin wakusei survive","uninhabited planet survive","выжить на необитаемой планете"]},
         {ru:"Реинкарнация безработного", aliases:["mushoku tensei","jobless reincarnation","реинкарнация безработного"]},
         {ru:"Чёрный клевер", aliases:["black clover","черный клевер","чёрный клевер"]},
+        {ru:"Дарованный", aliases:["given","дарованный"]},
+        {ru:"Моя геройская академия", aliases:["my hero academia","boku no hero academia","моя геройская академия"]},
         {ru:"Re:Zero — жизнь с нуля в другом мире", aliases:["re zero","re:zero","starting life in another world"]},
         {ru:"Паразит", aliases:["parasyte","kiseijuu","паразит"]},
+        {ru:"Невероятные приключения ДжоДжо 2", aliases:["jojo stardust crusaders","stardust crusaders","невероятные приключения джоджо 2"]},
+        {ru:"Добро пожаловать в N.H.K.", aliases:["welcome to the nhk","n h k ni yokoso","добро пожаловать в n h k"]},
+        {ru:"Брошенный кролик", aliases:["usagi drop","usagi droppu","брошенный кролик"]},
         {ru:"Триган", aliases:["trigun","триган"]},
+        {ru:"Хранитель священного духа", aliases:["seirei no moribito","moribito guardian of the spirit","хранитель священного духа"]},
+        {ru:"Школьный переполох", aliases:["school rumble","школьный переполох"]},
+        {ru:"Девочка-волшебница Мадока Магика", aliases:["madoka magica","mahou shoujo madoka magica","девочка волшебница мадока магика"]},
+        {ru:"Бездомная девочка Реми", aliases:["ie naki ko remi","remi nobody's girl","бездомная девочка реми"]},
+        {ru:"Хикару и Го", aliases:["hikaru no go","хикару и го"]},
+
+        {ru:"Тетрадь смерти", aliases:["death note","тетрадь смерти"]},
+        {ru:"Врата Штейна", aliases:["steins gate","steins;gate","врата штейна"]},
+        {ru:"Семь смертных грехов", aliases:["seven deadly sins","nanatsu no taizai","семь смертных грехов"]},
+        {ru:"Магическая битва", aliases:["jujutsu kaisen","магическая битва"]},
+        {ru:"Твоё имя", aliases:["your name","kimi no na wa","твое имя","твоё имя"]},
+        {ru:"Форма голоса", aliases:["a silent voice","koe no katachi","форма голоса"]},
         {ru:"Хеллсинг Ultimate", aliases:["hellsing ultimate","хеллсинг ultimate"]}
       ];
       const pool=rows.slice().filter(r=>type(r.item)==="Аниме"&&poster(r.item)&&!isAnimeTopBad(r.item));
@@ -667,7 +769,7 @@ function makeSearchWorker() {
       function rowId(row){return String((row.item&&row.item.id)||title(row.item)+"|"+year(row.item));}
       for(const spec of manual){
         const aliases=spec.aliases.map(norm);
-        const candidates=pool.filter(row=>!used.has(rowId(row))&&aliases.some(a=>{const h=rowText(row);return h===a||h.includes(a)||a.includes(h);}));
+        const candidates=pool.filter(row=>!used.has(rowId(row))&&aliases.some(a=>hasAliasText(rowText(row), a)));
         if(!candidates.length) continue;
         candidates.sort((a,b)=>poster(b.item)-poster(a.item)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));
         const best=candidates[0];
@@ -802,9 +904,94 @@ function showFatalError(err) {
   }
 }
 
+
+
+// V127: detail facts enrichment for anime where base has empty Jikan/MAL fields
+const ANIME_DETAIL_FACTS = new Map(Object.entries({
+  "атака титанов": {studio:"Wit Studio / MAPPA", country:"Япония", age:"18+", status:"Завершён", episodes:"94"},
+  "тетрадь смерти": {studio:"Madhouse", country:"Япония", age:"16+", status:"Завершён", episodes:"37"},
+  "ванпанчмен": {studio:"Madhouse / J.C.Staff", country:"Япония", age:"16+", status:"Онгоинг", episodes:"24+"},
+  "истребитель демонов": {studio:"ufotable", country:"Япония", age:"16+", status:"Онгоинг", episodes:"55+"},
+  "стальной алхимик: братство": {studio:"Bones", country:"Япония", age:"16+", status:"Завершён", episodes:"64"},
+  "стальной алхимик": {studio:"Bones", country:"Япония", age:"16+", status:"Завершён", episodes:"51"},
+  "мастера меча онлайн": {studio:"A-1 Pictures", country:"Япония", age:"16+", status:"Завершён", episodes:"96+"},
+  "моя геройская академия": {studio:"Bones", country:"Япония", age:"16+", status:"Онгоинг", episodes:"150+"},
+  "наруто": {studio:"Pierrot", country:"Япония", age:"16+", status:"Завершён", episodes:"220"},
+  "наруто: ураганные хроники": {studio:"Pierrot", country:"Япония", age:"16+", status:"Завершён", episodes:"500"},
+  "твоё имя": {studio:"CoMix Wave Films", country:"Япония", age:"12+", status:"Фильм", episodes:"1"},
+  "магическая битва": {studio:"MAPPA", country:"Япония", age:"18+", status:"Онгоинг", episodes:"47+"},
+  "токийский гуль": {studio:"Pierrot", country:"Япония", age:"18+", status:"Завершён", episodes:"48"},
+  "охотник х охотник": {studio:"Madhouse", country:"Япония", age:"16+", status:"Завершён", episodes:"148"},
+  "форма голоса": {studio:"Kyoto Animation", country:"Япония", age:"12+", status:"Фильм", episodes:"1"},
+  "сага о винланде": {studio:"Wit Studio / MAPPA", country:"Япония", age:"18+", status:"Онгоинг", episodes:"48"},
+  "провожающая в последний путь фрирен": {studio:"Madhouse", country:"Япония", age:"16+", status:"Онгоинг", episodes:"28+"},
+  "врата штейна": {studio:"White Fox", country:"Япония", age:"16+", status:"Завершён", episodes:"24"},
+  "код гиас: восставший лелуш": {studio:"Sunrise", country:"Япония", age:"16+", status:"Завершён", episodes:"50"},
+  "ван-пис": {studio:"Toei Animation", country:"Япония", age:"16+", status:"Онгоинг", episodes:"1100+"},
+  "блич": {studio:"Pierrot", country:"Япония", age:"16+", status:"Завершён", episodes:"366"},
+  "блич: тысячелетняя кровавая война": {studio:"Pierrot", country:"Япония", age:"16+", status:"Онгоинг", episodes:"40+"},
+  "драконий жемчуг": {studio:"Toei Animation", country:"Япония", age:"12+", status:"Завершён", episodes:"153"},
+  "драконий жемчуг зет": {studio:"Toei Animation", country:"Япония", age:"12+", status:"Завершён", episodes:"291"},
+  "драконий жемчуг супер": {studio:"Toei Animation", country:"Япония", age:"12+", status:"Завершён", episodes:"131"},
+  "семь смертных грехов": {studio:"A-1 Pictures / Studio Deen", country:"Япония", age:"16+", status:"Завершён", episodes:"100"},
+  "ковбой бибоп": {studio:"Sunrise", country:"Япония", age:"16+", status:"Завершён", episodes:"26"},
+  "монстр": {studio:"Madhouse", country:"Япония", age:"18+", status:"Завершён", episodes:"74"},
+  "берсерк": {studio:"OLM", country:"Япония", age:"18+", status:"Завершён", episodes:"25"},
+  "гинтама": {studio:"Sunrise / Bandai Namco Pictures", country:"Япония", age:"16+", status:"Завершён", episodes:"367"},
+  "доктор стоун": {studio:"TMS Entertainment", country:"Япония", age:"12+", status:"Онгоинг", episodes:"57+"},
+  "re:zero — жизнь с нуля в другом мире": {studio:"White Fox", country:"Япония", age:"16+", status:"Онгоинг", episodes:"50+"},
+  "86: восемьдесят шесть": {studio:"A-1 Pictures", country:"Япония", age:"16+", status:"Завершён", episodes:"23"},
+  "дороро": {studio:"MAPPA / Tezuka Productions", country:"Япония", age:"16+", status:"Завершён", episodes:"24"},
+  "чёрный клевер": {studio:"Pierrot", country:"Япония", age:"12+", status:"Завершён", episodes:"170"},
+  "человек-бензопила": {studio:"MAPPA", country:"Япония", age:"18+", status:"Онгоинг", episodes:"12+"},
+  "семья шпиона": {studio:"Wit Studio / CloverWorks", country:"Япония", age:"12+", status:"Онгоинг", episodes:"37+"},
+  "волейбол!!": {studio:"Production I.G", country:"Япония", age:"12+", status:"Завершён", episodes:"85"},
+  "моб психо 100": {studio:"Bones", country:"Япония", age:"16+", status:"Завершён", episodes:"37"},
+  "вайолет эвергарден": {studio:"Kyoto Animation", country:"Япония", age:"12+", status:"Завершён", episodes:"13"},
+  "евангелион": {studio:"Gainax / Tatsunoko", country:"Япония", age:"16+", status:"Завершён", episodes:"26"},
+  "созданный в бездне": {studio:"Kinema Citrus", country:"Япония", age:"18+", status:"Онгоинг", episodes:"25+"},
+  "самурай чамплу": {studio:"Manglobe", country:"Япония", age:"16+", status:"Завершён", episodes:"26"},
+  "невероятные приключения джоджо": {studio:"David Production", country:"Япония", age:"16+", status:"Онгоинг", episodes:"190+"},
+  "реинкарнация безработного": {studio:"Studio Bind", country:"Япония", age:"18+", status:"Онгоинг", episodes:"48+"},
+  "кланнад": {studio:"Kyoto Animation", country:"Япония", age:"12+", status:"Завершён", episodes:"47"},
+  "госпожа кагуя: в любви как на войне": {studio:"A-1 Pictures", country:"Япония", age:"16+", status:"Завершён", episodes:"37"},
+  "монолог фармацевта": {studio:"Toho Animation Studio / OLM", country:"Япония", age:"16+", status:"Онгоинг", episodes:"24+"},
+  "паразит": {studio:"Madhouse", country:"Япония", age:"18+", status:"Завершён", episodes:"24"},
+  "триган": {studio:"Madhouse", country:"Япония", age:"16+", status:"Завершён", episodes:"26"},
+  "хеллсинг ultimate": {studio:"Satelight / Madhouse / Graphinica", country:"Япония", age:"18+", status:"Завершён", episodes:"10"}
+}));
+
+function animeFactsKey(item) {
+  const candidates = [displayTitle(item), item && item.__manualTopTitle, item && item.ru, item && item.title_ru, item && item.en, item && item.title, item && item.name, item && item.original_title, item && item.original_name].filter(Boolean).map(norm);
+  for (const c of candidates) {
+    if (ANIME_DETAIL_FACTS.has(c)) return c;
+    for (const key of ANIME_DETAIL_FACTS.keys()) if (hasAliasText(c, key) || hasAliasText(key, c)) return key;
+  }
+  return "";
+}
+
+function cleanFactValue(value) {
+  if (Array.isArray(value)) return value.filter(Boolean).join(", ");
+  const text = String(value ?? "").trim();
+  if (!text || text === "—" || text === "null" || text === "undefined") return "";
+  return text;
+}
+
+function detailFactValue(item, field) {
+  const key = getType(item) === "Аниме" ? animeFactsKey(item) : "";
+  const facts = key ? ANIME_DETAIL_FACTS.get(key) : null;
+  if (field === "status") return cleanFactValue(item.status) || (facts && facts.status) || "";
+  if (field === "episodes") return cleanFactValue(item.episodes || item.episodeCount) || (facts && facts.episodes) || "";
+  if (field === "studio") return cleanFactValue(item.studio || item.studios) || (facts && facts.studio) || "";
+  if (field === "country") return cleanFactValue(item.country || item.countries) || (facts && facts.country) || (getType(item) === "Аниме" ? "Япония" : "");
+  if (field === "age") return cleanFactValue(item.ageRating || item.age) || (facts && facts.age) || "";
+  return "";
+}
+
 function factHtml(label, value) {
-  const text = Array.isArray(value) ? value.join(", ") : String(value || "");
-  return `<div class="fact-card"><span>${escapeHtml(label)}</span><strong>${escapeHtml(text || "—")}</strong></div>`;
+  const text = Array.isArray(value) ? value.filter(Boolean).join(", ") : String(value || "").trim();
+  if (!text || text === "—" || text === "null" || text === "undefined") return "";
+  return `<div class="fact-card"><span>${escapeHtml(label)}</span><strong>${escapeHtml(text)}</strong></div>`;
 }
 
 function setLink(id, url) {
@@ -841,11 +1028,11 @@ function openDetails(item) {
       factHtml("Год", getYear(item)),
       factHtml("Рейтинг", getRating(item) || "—"),
       factHtml("Голосов", getVotes(item) || "—"),
-      factHtml("Статус", item.status),
-      factHtml("Эпизоды", item.episodes || item.episodeCount),
-      factHtml("Студия", item.studio || item.studios),
-      factHtml("Страна", item.country || item.countries),
-      factHtml("Возраст", item.ageRating || item.age),
+      factHtml("Статус", detailFactValue(item, "status")),
+      factHtml("Эпизоды", detailFactValue(item, "episodes")),
+      factHtml("Студия", detailFactValue(item, "studio")),
+      factHtml("Страна", detailFactValue(item, "country")),
+      factHtml("Возраст", detailFactValue(item, "age")),
       factHtml("Источник", item.source)
     ].join("");
   }
