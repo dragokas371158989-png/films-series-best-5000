@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v128-worker-hasalias-fix-2026-06-23";
+const GKM_APP_CLEAN_VERSION = "v130-anime-top-rank-page-cache-fix-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
 window.GKM_V116_ANIME_TOP_100_VERSION = "v116-anime-top-100-rating-2026-06-23";
 window.GKM_V117_ANIME_TOP_100_PEOPLE_VERSION = "v117-anime-top-100-people-rating-2026-06-23";
@@ -10,6 +10,8 @@ window.GKM_V125_ANIME_TITLE_ALIAS_FIX_VERSION = "v125-anime-title-alias-nanatsu-
 window.GKM_V126_MANUAL_TOP_100_RU_DETAILS_VERSION = "v126-manual-top-100-ru-details-clean-2026-06-23";
 window.GKM_V127_ANIME_DETAIL_FACTS_VERSION = "v127-anime-detail-facts-enriched-2026-06-23";
 window.GKM_V128_WORKER_HASALIAS_FIX_VERSION = "v128-worker-hasalias-fix-2026-06-23";
+window.GKM_V129_NARUTO_SHIPPUDEN_FIX_VERSION = "v130-anime-top-rank-page-cache-fix-2026-06-24";
+window.GKM_V130_ANIME_TOP_RANK_PAGE_CACHE_FIX_VERSION = "v130-anime-top-rank-page-cache-fix-2026-06-24";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -62,7 +64,7 @@ function setStatus(text) {
 }
 
 async function fetchJson(url, cache = "force-cache") {
-  const res = await fetch(`${url}?v=122`, { cache });
+  const res = await fetch(`${url}?v=130`, { cache });
   if (!res.ok) throw new Error(`${url} ${res.status}`);
   return res.json();
 }
@@ -197,6 +199,18 @@ Object.entries({
   "kimi no na wa":"Твоё имя"
 }).forEach(([k,v]) => ANIME_RU_MAP.set(norm(k), v));
 
+// V129: exact Naruto/Shippuden aliases must win before broad "naruto"
+Object.entries({
+  "naruto shippuden":"Наруто: Ураганные хроники",
+  "naruto shippuuden":"Наруто: Ураганные хроники",
+  "ナルト 疾風伝":"Наруто: Ураганные хроники",
+  "naruto hurricane chronicles":"Наруто: Ураганные хроники",
+  "наруто ураганные хроники":"Наруто: Ураганные хроники",
+  "наруто: ураганные хроники":"Наруто: Ураганные хроники",
+  "naruto":"Наруто",
+  "ナルト":"Наруто"
+}).forEach(([k,v]) => ANIME_RU_MAP.set(norm(k), v));
+
 const ANIME_RU_OVERVIEW = new Map(Object.entries({
   "attack on titan":"Человечество вынуждено жить за огромными стенами, спасаясь от титанов. После нападения на родной город Эрен Йегер клянётся уничтожить титанов и вступает в разведкорпус.",
   "death note":"Старшеклассник Лайт Ягами находит тетрадь смерти, способную убивать людей по имени. Его новая власть запускает опасную игру с гениальным детективом L.",
@@ -267,6 +281,16 @@ Object.entries({
   "хеллсинг ultimate":"Организация Хеллсинг защищает Британию от сверхъестественных угроз, используя своего главного оружия — вампира Алукарда."
 }).forEach(([k,v]) => ANIME_RU_OVERVIEW.set(norm(k), v));
 
+// V129: separate Russian descriptions for Naruto and Naruto Shippuden
+Object.entries({
+  "naruto":"Наруто Узумаки — шумный и упрямый ниндзя, внутри которого запечатан Девятихвостый лис. Он мечтает стать Хокаге, доказать всем свою силу и получить признание деревни, которая долго считала его изгоем.",
+  "наруто":"Наруто Узумаки — шумный и упрямый ниндзя, внутри которого запечатан Девятихвостый лис. Он мечтает стать Хокаге, доказать всем свою силу и получить признание деревни, которая долго считала его изгоем.",
+  "naruto shippuden":"Наруто возвращается в Коноху после долгих тренировок и сталкивается с куда более серьёзными угрозами: организацией Акацуки, судьбой Саске, тайнами хвостатых зверей и войной, которая решит будущее мира шиноби.",
+  "naruto shippuuden":"Наруто возвращается в Коноху после долгих тренировок и сталкивается с куда более серьёзными угрозами: организацией Акацуки, судьбой Саске, тайнами хвостатых зверей и войной, которая решит будущее мира шиноби.",
+  "наруто ураганные хроники":"Наруто возвращается в Коноху после долгих тренировок и сталкивается с куда более серьёзными угрозами: организацией Акацуки, судьбой Саске, тайнами хвостатых зверей и войной, которая решит будущее мира шиноби.",
+  "наруто: ураганные хроники":"Наруто возвращается в Коноху после долгих тренировок и сталкивается с куда более серьёзными угрозами: организацией Акацуки, судьбой Саске, тайнами хвостатых зверей и войной, которая решит будущее мира шиноби."
+}).forEach(([k,v]) => ANIME_RU_OVERVIEW.set(norm(k), v));
+
 function hasAliasText(h, a) {
   h = norm(h);
   a = norm(a);
@@ -278,7 +302,17 @@ function hasAliasText(h, a) {
 
 function animeKey(item) {
   const raw = norm([item && item.ru, item && item.title_ru, item && item.__manualTopTitle, item && item.en, item && item.title, item && item.name, item && item.original_title, item && item.original_name].filter(Boolean).join(" "));
-  for (const key of ANIME_RU_MAP.keys()) {
+
+  // V129: broad alias "naruto" must not catch Naruto Shippuden.
+  if (hasAliasText(raw, "naruto shippuden") || hasAliasText(raw, "naruto shippuuden") || hasAliasText(raw, "наруто ураганные хроники") || hasAliasText(raw, "наруто: ураганные хроники") || hasAliasText(raw, "ナルト 疾風伝")) {
+    return norm("naruto shippuden");
+  }
+  if (hasAliasText(raw, "naruto") || hasAliasText(raw, "наруто") || hasAliasText(raw, "ナルト")) {
+    return norm("naruto");
+  }
+
+  const keys = [...ANIME_RU_MAP.keys()].sort((a, b) => b.length - a.length);
+  for (const key of keys) {
     if (hasAliasText(raw, key)) return key;
   }
   return raw;
@@ -603,8 +637,8 @@ async function loadFastPage(tab, page = 1) {
 
 function makeSearchWorker() {
   if (searchWorker) return searchWorker;
-  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=122`, window.location.href).href;
-  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=122`, window.location.href).href;
+  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=130`, window.location.href).href;
+  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=130`, window.location.href).href;
   const absoluteShardBase = new URL(`${SEARCH_SHARDS_BASE}/`, window.location.href).href;
   const code = `
     const SEARCH_LITE_URL = ${JSON.stringify(absoluteSearchLiteUrl)};
@@ -614,6 +648,7 @@ function makeSearchWorker() {
     let indexPromise = null;
     const shardPromises = new Map();
     let rows = [];
+    let animeTopCache = null;
     function norm(v){return String(v||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
     function hasAliasText(h,a){h=norm(h);a=norm(a);if(!h||!a)return false;if(h===a)return true;if(a.length<=4)return (" "+h+" ").includes(" "+a+" ");return h.includes(a)||a.includes(h);}
     function squeeze(v){return norm(v).replace(/(.)\\1+/g,"$1");}
@@ -787,11 +822,11 @@ function makeSearchWorker() {
     function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(sort==="rating")rows.sort((a,b)=>pr(a,b)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQuery)rows.sort((a,b)=>pr(a,b)||b.score-a.score);else rows.sort((a,b)=>pr(a,b)||(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
-    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=123";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
+    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=130";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
     function buildRows(index, c, queries){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
-    self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page,msg.controls&&msg.controls.tab),ms:0});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const queries=queryList(c.q);let index=await candidateIndex(queries);rows=buildRows(index,c,queries);let fallback=false;if(queries.length&&rows.length===0){index=await loadIndex();rows=buildRows(index,c,queries);fallback=true;}sortRows(c.sort||"smart",Boolean(queries.length),c.tab);if(c.tab==="anime_top")rows=rows.slice(0,100);self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1,c.tab),ms:Date.now()-started,indexTotal:index.length,indexPosters:index.reduce((n,x)=>n+poster(x),0),sharded:Boolean(queries.length),fallback});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
+    self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page,msg.controls&&msg.controls.tab),ms:0,cached:true});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const queries=queryList(c.q);let index=[];let fallback=false;let cached=false;if(c.tab==="anime_top"&&!queries.length&&animeTopCache){rows=animeTopCache.slice();cached=true;}else{index=await candidateIndex(queries);rows=buildRows(index,c,queries);if(queries.length&&rows.length===0){index=await loadIndex();rows=buildRows(index,c,queries);fallback=true;}sortRows(c.sort||"smart",Boolean(queries.length),c.tab);if(c.tab==="anime_top"){rows=rows.slice(0,100);animeTopCache=rows.slice();}}self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1,c.tab),ms:Date.now()-started,indexTotal:index.length||rows.length,indexPosters:index.length?index.reduce((n,x)=>n+poster(x),0):rows.reduce((n,x)=>n+poster(x.item||x),0),sharded:Boolean(queries.length),fallback,cached});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
   `;
   searchWorker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
   searchWorker.onmessage = event => {
@@ -840,7 +875,7 @@ function renderSearchPage(page) {
   currentMode = "search";
   currentPage = Math.max(1, Number(page || 1));
   searchReq += 1;
-  makeSearchWorker().postMessage({ id: searchReq, mode: "page", page: currentPage });
+  makeSearchWorker().postMessage({ id: searchReq, mode: "page", page: currentPage, controls: controls() });
 }
 
 function renderFavorites() {
@@ -920,6 +955,8 @@ const ANIME_DETAIL_FACTS = new Map(Object.entries({
   "моя геройская академия": {studio:"Bones", country:"Япония", age:"16+", status:"Онгоинг", episodes:"150+"},
   "наруто": {studio:"Pierrot", country:"Япония", age:"16+", status:"Завершён", episodes:"220"},
   "наруто: ураганные хроники": {studio:"Pierrot", country:"Япония", age:"16+", status:"Завершён", episodes:"500"},
+  "naruto shippuden": {studio:"Pierrot", country:"Япония", age:"16+", status:"Завершён", episodes:"500"},
+  "ナルト 疾風伝": {studio:"Pierrot", country:"Япония", age:"16+", status:"Завершён", episodes:"500"},
   "твоё имя": {studio:"CoMix Wave Films", country:"Япония", age:"12+", status:"Фильм", episodes:"1"},
   "магическая битва": {studio:"MAPPA", country:"Япония", age:"18+", status:"Онгоинг", episodes:"47+"},
   "токийский гуль": {studio:"Pierrot", country:"Япония", age:"18+", status:"Завершён", episodes:"48"},
@@ -1239,3 +1276,7 @@ window.addEventListener("unhandledrejection", event => showFatalError(event.reas
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
 else boot();
+
+
+// V130 EOF lock
+window.GKM_V130_ANIME_TOP_RANK_PAGE_CACHE_EOF_LOCK_VERSION = "v130-anime-top-rank-page-cache-fix-2026-06-24";
