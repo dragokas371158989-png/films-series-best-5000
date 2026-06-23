@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v134-studio-top-wide-ru-titles-2026-06-24";
+const GKM_APP_CLEAN_VERSION = "v135-studio-anime-list-click-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
 window.GKM_V116_ANIME_TOP_100_VERSION = "v116-anime-top-100-rating-2026-06-23";
 window.GKM_V117_ANIME_TOP_100_PEOPLE_VERSION = "v117-anime-top-100-people-rating-2026-06-23";
@@ -15,6 +15,7 @@ window.GKM_V130_ANIME_TOP_RANK_PAGE_CACHE_FIX_VERSION = "v130-anime-top-rank-pag
 window.GKM_V131_STATIC_ANIME_TOP_FAST_VERSION = "v131-static-anime-top-fast-no-worker-hang-2026-06-24";
 window.GKM_V132_ANIME_STUDIOS_TOP_VERSION = "v132-anime-studios-required-top-2026-06-24";
 window.GKM_V134_STUDIO_TOP_WIDE_RU_VERSION = "v134-studio-top-wide-ru-titles-2026-06-24";
+window.GKM_V135_STUDIO_ANIME_LIST_VERSION = "v135-studio-anime-list-click-2026-06-24";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -26,6 +27,7 @@ const SEARCH_LITE_URL = `${FAST_BASE}/search_lite.json`;
 const SEARCH_SHARDS_BASE = `${FAST_BASE}/search_shards`;
 const ANIME_TOP_MANUAL_URL = `${FAST_BASE}/anime_top_manual.json`;
 const ANIME_STUDIOS_TOP_URL = `${FAST_BASE}/anime_studios_top.json`;
+const ANIME_STUDIOS_DETAIL_URL = `${FAST_BASE}/anime_studios_detail.json`;
 const PAGE_SIZE = 60;
 
 let currentTab = "all";
@@ -69,7 +71,7 @@ function setStatus(text) {
 }
 
 async function fetchJson(url, cache = "force-cache") {
-  const res = await fetch(`${url}?v=132`, { cache });
+  const res = await fetch(`${url}?v=135`, { cache });
   if (!res.ok) throw new Error(`${url} ${res.status}`);
   return res.json();
 }
@@ -889,10 +891,18 @@ async function renderAnimeTopStatic(page = 1) {
 
 
 let animeStudiosTopData = null;
+let animeStudiosDetailData = null;
+let currentStudioName = "";
+let currentStudioItems = [];
 
 async function loadAnimeStudiosTop() {
   if (!animeStudiosTopData) animeStudiosTopData = await fetchJson(ANIME_STUDIOS_TOP_URL, "reload");
   return animeStudiosTopData;
+}
+
+async function loadAnimeStudiosDetail() {
+  if (!animeStudiosDetailData) animeStudiosDetailData = await fetchJson(ANIME_STUDIOS_DETAIL_URL, "reload");
+  return animeStudiosDetailData;
 }
 
 function studioCardHtml(row, idx) {
@@ -902,7 +912,7 @@ function studioCardHtml(row, idx) {
   const votes = Number(row && row.votes || 0);
   const titles = Array.isArray(row && row.topTitles) ? row.topTitles.slice(0, 6) : [];
   return `
-    <article class="studio-top-card">
+    <article class="studio-top-card" data-studio-name="${escapeAttr(studio)}" title="Открыть все аниме студии ${escapeAttr(studio)}">
       <div class="studio-rank">#${idx + 1}</div>
       <h3>${escapeHtml(studio)}</h3>
       <div class="studio-stats">
@@ -911,6 +921,7 @@ function studioCardHtml(row, idx) {
         <span>👥 ${escapeHtml(formatVotes(votes))}</span>
       </div>
       <div class="studio-titles">${titles.map(t => `<span>${escapeHtml(t)}</span>`).join("")}</div>
+      <button class="studio-open-btn" type="button">Открыть все ${escapeHtml(count)} аниме</button>
     </article>
   `;
 }
@@ -941,6 +952,31 @@ async function renderAnimeStudiosTop() {
   } catch (err) {
     console.error(err);
     setStatus(`Ошибка топа студий: ${err && err.message ? err.message : err}`);
+  }
+}
+
+async function renderStudioAnimeList(studio, page = 1) {
+  try {
+    currentMode = "studio_items";
+    currentTab = "anime_studios";
+    currentStudioName = studio || "";
+    setActiveTab("anime_studios");
+    setStatus(`Открываю аниме студии ${studio}...`);
+    const data = await loadAnimeStudiosDetail();
+    const map = data && data.studios ? data.studios : {};
+    const rows = Array.isArray(map[studio]) ? map[studio] : [];
+    currentStudioItems = rows;
+    currentCount = rows.length;
+    currentPage = Math.max(1, Number(page || 1));
+    currentPages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+    if (currentPage > currentPages) currentPage = currentPages;
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const list = rows.slice(start, start + PAGE_SIZE);
+    renderList(list, `🏭 ${studio} · ${rows.length} аниме · Страница ${currentPage} из ${currentPages}`);
+    setStatus(`Готово · ${studio} · ${rows.length} аниме`);
+  } catch (err) {
+    console.error(err);
+    setStatus(`Ошибка студии: ${err && err.message ? err.message : err}`);
   }
 }
 
@@ -1298,12 +1334,14 @@ function bindEvents() {
   $("prevBtn")?.addEventListener("click", () => {
     if (currentPage <= 1) return;
     if (currentMode === "anime_top_static") return renderAnimeTopStatic(currentPage - 1);
+    if (currentMode === "studio_items") return renderStudioAnimeList(currentStudioName, currentPage - 1);
     if (currentMode === "search") return renderSearchPage(currentPage - 1);
     if (currentMode === "page") return loadFastPage(currentTab, currentPage - 1);
   });
   $("nextBtn")?.addEventListener("click", () => {
     if (currentPage >= currentPages) return;
     if (currentMode === "anime_top_static") return renderAnimeTopStatic(currentPage + 1);
+    if (currentMode === "studio_items") return renderStudioAnimeList(currentStudioName, currentPage + 1);
     if (currentMode === "search") return renderSearchPage(currentPage + 1);
     if (currentMode === "page") return loadFastPage(currentTab, currentPage + 1);
   });
@@ -1318,6 +1356,12 @@ function bindEvents() {
       saveSet(favKey, fav);
       favBtn.textContent = fav.has(id) ? "♥" : "♡";
       favBtn.classList.toggle("active", fav.has(id));
+      return;
+    }
+    const studioCard = event.target.closest(".studio-top-card[data-studio-name]");
+    if (studioCard) {
+      const studio = studioCard.dataset.studioName || "";
+      if (studio) renderStudioAnimeList(studio, 1);
       return;
     }
     const card = event.target.closest(".card");
