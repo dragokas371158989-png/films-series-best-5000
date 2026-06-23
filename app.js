@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v130-anime-top-rank-page-cache-fix-2026-06-24";
+const GKM_APP_CLEAN_VERSION = "v132-anime-studios-required-top-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
 window.GKM_V116_ANIME_TOP_100_VERSION = "v116-anime-top-100-rating-2026-06-23";
 window.GKM_V117_ANIME_TOP_100_PEOPLE_VERSION = "v117-anime-top-100-people-rating-2026-06-23";
@@ -12,6 +12,8 @@ window.GKM_V127_ANIME_DETAIL_FACTS_VERSION = "v127-anime-detail-facts-enriched-2
 window.GKM_V128_WORKER_HASALIAS_FIX_VERSION = "v128-worker-hasalias-fix-2026-06-23";
 window.GKM_V129_NARUTO_SHIPPUDEN_FIX_VERSION = "v130-anime-top-rank-page-cache-fix-2026-06-24";
 window.GKM_V130_ANIME_TOP_RANK_PAGE_CACHE_FIX_VERSION = "v130-anime-top-rank-page-cache-fix-2026-06-24";
+window.GKM_V131_STATIC_ANIME_TOP_FAST_VERSION = "v131-static-anime-top-fast-no-worker-hang-2026-06-24";
+window.GKM_V132_ANIME_STUDIOS_TOP_VERSION = "v132-anime-studios-required-top-2026-06-24";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -21,6 +23,8 @@ const META_URL = `${FAST_BASE}/meta.json`;
 const SEARCH_URL = `${FAST_BASE}/search_index.json`;
 const SEARCH_LITE_URL = `${FAST_BASE}/search_lite.json`;
 const SEARCH_SHARDS_BASE = `${FAST_BASE}/search_shards`;
+const ANIME_TOP_MANUAL_URL = `${FAST_BASE}/anime_top_manual.json`;
+const ANIME_STUDIOS_TOP_URL = `${FAST_BASE}/anime_studios_top.json`;
 const PAGE_SIZE = 60;
 
 let currentTab = "all";
@@ -64,7 +68,7 @@ function setStatus(text) {
 }
 
 async function fetchJson(url, cache = "force-cache") {
-  const res = await fetch(`${url}?v=130`, { cache });
+  const res = await fetch(`${url}?v=132`, { cache });
   if (!res.ok) throw new Error(`${url} ${res.status}`);
   return res.json();
 }
@@ -637,8 +641,8 @@ async function loadFastPage(tab, page = 1) {
 
 function makeSearchWorker() {
   if (searchWorker) return searchWorker;
-  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=130`, window.location.href).href;
-  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=130`, window.location.href).href;
+  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=131`, window.location.href).href;
+  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=131`, window.location.href).href;
   const absoluteShardBase = new URL(`${SEARCH_SHARDS_BASE}/`, window.location.href).href;
   const code = `
     const SEARCH_LITE_URL = ${JSON.stringify(absoluteSearchLiteUrl)};
@@ -822,7 +826,7 @@ function makeSearchWorker() {
     function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(sort==="rating")rows.sort((a,b)=>pr(a,b)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQuery)rows.sort((a,b)=>pr(a,b)||b.score-a.score);else rows.sort((a,b)=>pr(a,b)||(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
-    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=130";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
+    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=131";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
     function buildRows(index, c, queries){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
@@ -852,8 +856,103 @@ function makeSearchWorker() {
   return searchWorker;
 }
 
+let animeTopStaticData = null;
+
+async function loadAnimeTopStatic() {
+  if (!animeTopStaticData) {
+    animeTopStaticData = await fetchJson(ANIME_TOP_MANUAL_URL, "reload");
+  }
+  return animeTopStaticData;
+}
+
+async function renderAnimeTopStatic(page = 1) {
+  try {
+    currentMode = "anime_top_static";
+    currentTab = "anime_top";
+    setActiveTab("anime_top");
+    setStatus("Открываю топ аниме...");
+    const data = await loadAnimeTopStatic();
+    const all = Array.isArray(data && data.items) ? data.items : [];
+    currentCount = all.length;
+    currentPages = Math.max(1, Math.ceil(currentCount / PAGE_SIZE));
+    currentPage = Math.min(Math.max(1, Number(page || 1)), currentPages);
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const items = all.slice(start, start + PAGE_SIZE).map((item, i) => Object.assign({}, item, { __rank: start + i + 1 }));
+    renderList(items, `🏆 Топ аниме 100 · твой список · по голосам · Страница ${currentPage} из ${currentPages}`);
+    setStatus(`Готово · топ ${currentCount} · мгновенно`);
+  } catch (err) {
+    console.error(err);
+    setStatus(`Ошибка топа: ${err && err.message ? err.message : err}`);
+  }
+}
+
+
+let animeStudiosTopData = null;
+
+async function loadAnimeStudiosTop() {
+  if (!animeStudiosTopData) animeStudiosTopData = await fetchJson(ANIME_STUDIOS_TOP_URL, "reload");
+  return animeStudiosTopData;
+}
+
+function studioCardHtml(row, idx) {
+  const studio = row && row.studio ? row.studio : "Студия";
+  const count = Number(row && row.count || 0);
+  const avg = Number(row && row.avgRating || 0);
+  const votes = Number(row && row.votes || 0);
+  const titles = Array.isArray(row && row.topTitles) ? row.topTitles.slice(0, 6) : [];
+  return `
+    <article class="studio-top-card">
+      <div class="studio-rank">#${idx + 1}</div>
+      <h3>${escapeHtml(studio)}</h3>
+      <div class="studio-stats">
+        <span>🎬 ${escapeHtml(count)} аниме</span>
+        <span>★ ${avg ? avg.toFixed(1) : "—"}</span>
+        <span>👥 ${escapeHtml(formatVotes(votes))}</span>
+      </div>
+      <div class="studio-titles">${titles.map(t => `<span>${escapeHtml(t)}</span>`).join("")}</div>
+    </article>
+  `;
+}
+
+async function renderAnimeStudiosTop() {
+  try {
+    currentMode = "anime_studios";
+    currentTab = "anime_studios";
+    currentPage = 1;
+    currentPages = 1;
+    setActiveTab("anime_studios");
+    setStatus("Открываю топ студий...");
+    const data = await loadAnimeStudiosTop();
+    const rows = Array.isArray(data && data.studios) ? data.studios : [];
+    currentItems = [];
+    currentCount = rows.length;
+    const grid = $("grid");
+    const count = $("countText");
+    const page = $("pageText");
+    const prev = $("prevBtn");
+    const next = $("nextBtn");
+    if (count) count.textContent = `🏭 Топ аниме-студий · ${rows.length} студий`;
+    if (grid) grid.innerHTML = `<section class="studio-top-grid">${rows.map(studioCardHtml).join("")}</section>`;
+    if (page) page.textContent = "1 / 1";
+    if (prev) prev.disabled = true;
+    if (next) next.disabled = true;
+    setStatus(`Готово · топ студий ${rows.length}`);
+  } catch (err) {
+    console.error(err);
+    setStatus(`Ошибка топа студий: ${err && err.message ? err.message : err}`);
+  }
+}
+
 function runSearch(page = 1) {
   const c = controls();
+  if (c.tab === "anime_top" && !norm(c.q)) {
+    renderAnimeTopStatic(page);
+    return;
+  }
+  if (c.tab === "anime_studios" && !norm(c.q)) {
+    renderAnimeStudiosTop();
+    return;
+  }
   if (!hasActiveControls(c) && c.tab === "all") {
     renderHome();
     return;
@@ -1021,7 +1120,7 @@ function detailFactValue(item, field) {
   const facts = key ? ANIME_DETAIL_FACTS.get(key) : null;
   if (field === "status") return cleanFactValue(item.status) || (facts && facts.status) || "";
   if (field === "episodes") return cleanFactValue(item.episodes || item.episodeCount) || (facts && facts.episodes) || "";
-  if (field === "studio") return cleanFactValue(item.studio || item.studios) || (facts && facts.studio) || "";
+  if (field === "studio") return cleanFactValue(item.studio || item.studios) || (facts && facts.studio) || inferAnimeStudio(item) || (isAnimeItem(item) ? "Студия не указана в источнике" : "");
   if (field === "country") return cleanFactValue(item.country || item.countries) || (facts && facts.country) || (getType(item) === "Аниме" ? "Япония" : "");
   if (field === "age") return cleanFactValue(item.ageRating || item.age) || (facts && facts.age) || "";
   return "";
@@ -1190,17 +1289,20 @@ function bindEvents() {
       if (tab === "fav") return renderFavorites();
       if (tab === "history") return renderHistory();
       if (tab === "random") return renderRandom();
+      if (tab === "anime_studios") return renderAnimeStudiosTop();
       if (tab === "all" && !hasActiveControls({ ...controls(), tab })) return renderHome();
       runSearch(1);
     });
   });
   $("prevBtn")?.addEventListener("click", () => {
     if (currentPage <= 1) return;
+    if (currentMode === "anime_top_static") return renderAnimeTopStatic(currentPage - 1);
     if (currentMode === "search") return renderSearchPage(currentPage - 1);
     if (currentMode === "page") return loadFastPage(currentTab, currentPage - 1);
   });
   $("nextBtn")?.addEventListener("click", () => {
     if (currentPage >= currentPages) return;
+    if (currentMode === "anime_top_static") return renderAnimeTopStatic(currentPage + 1);
     if (currentMode === "search") return renderSearchPage(currentPage + 1);
     if (currentMode === "page") return loadFastPage(currentTab, currentPage + 1);
   });
@@ -1280,3 +1382,7 @@ else boot();
 
 // V130 EOF lock
 window.GKM_V130_ANIME_TOP_RANK_PAGE_CACHE_EOF_LOCK_VERSION = "v130-anime-top-rank-page-cache-fix-2026-06-24";
+
+
+// V131 EOF lock
+window.GKM_V131_STATIC_ANIME_TOP_FAST_EOF_LOCK_VERSION = "v131-static-anime-top-fast-no-worker-hang-2026-06-24";
