@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v122-anime-top-ru-title-one-franchise-2026-06-23";
+const GKM_APP_CLEAN_VERSION = "v123-manual-anime-top-user-list-2026-06-23";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
 window.GKM_V116_ANIME_TOP_100_VERSION = "v116-anime-top-100-rating-2026-06-23";
 window.GKM_V117_ANIME_TOP_100_PEOPLE_VERSION = "v117-anime-top-100-people-rating-2026-06-23";
@@ -6,6 +6,7 @@ window.GKM_V119_ANIME_TOP_ADAPTIVE_9M_VERSION = "v119-anime-top-adaptive-9m-2026
 window.GKM_V120_ANIME_TOP_POPULAR_9M_VERSION = "v120-anime-top-popular-adaptive-9m-2026-06-23";
 window.GKM_V121_ANIME_TOP_FILL_100_VERSION = "v121-anime-top-popular-fill-100-2026-06-23";
 window.GKM_V122_ANIME_TOP_RU_ONE_FRANCHISE_VERSION = "v122-anime-top-ru-title-one-franchise-2026-06-23";
+window.GKM_V123_MANUAL_ANIME_TOP_VERSION = "v123-manual-anime-top-user-list-2026-06-23";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -132,6 +133,49 @@ const ANIME_RU_MAP = new Map(Object.entries({
   "mushoku tensei":"Реинкарнация безработного",
   "clannad":"Кланнад",
   "kaguya sama love is war":"Госпожа Кагуя: в любви как на войне"
+  ,"hagane no renkinjutsushi":"Стальной алхимик"
+  ,"bleach sennen kessen hen":"Блич: Тысячелетняя кровавая война"
+  ,"legend of the galactic heroes":"Легенда о героях Галактики"
+  ,"ginga eiyu densetsu":"Легенда о героях Галактики"
+  ,"mushishi zoku sho":"Мастер Муси 2"
+  ,"kingdom":"Королевство"
+  ,"ginga nagareboshi gin":"Серебряный клык"
+  ,"dragon ball z":"Драконий жемчуг Зет"
+  ,"mirai shonen konan":"Конан — мальчик из будущего"
+  ,"gintama":"Гинтама"
+  ,"takopii no genzai":"Первородный грех Такопи"
+  ,"code geass lelouch of the rebellion":"Код Гиас: Восставший Лелуш"
+  ,"kenpu denki beruseruku":"Берсерк"
+  ,"kusuriya no hitorigoto":"Монолог фармацевта"
+  ,"jojo no kimyo na boken":"Невероятные приключения ДжоДжо"
+  ,"shigatsu wa kimi no uso":"Твоя апрельская ложь"
+  ,"clannad after story":"Кланнад: Продолжение истории"
+  ,"initial d":"Инициал Ди"
+  ,"rurouni kenshin":"Бродяга Кэнсин"
+  ,"yu yu hakusho":"Отчёт о буйстве духов"
+  ,"nana":"Нана"
+  ,"meitantei conan":"Детектив Конан"
+  ,"ghost in the shell stand alone complex":"Призрак в доспехах: Синдром одиночки"
+  ,"samurai chanpuru":"Самурай Чамплу"
+  ,"violet evergarden":"Вайолет Эвергарден"
+  ,"erased":"Город, в котором меня нет"
+  ,"dandadan":"Дандадан"
+  ,"bocchi the rock":"Одинокий рокер"
+  ,"to your eternity":"Для тебя, Бессмертный"
+  ,"dragon ball super":"Драконий жемчуг Супер"
+  ,"gurren lagann":"Гуррен Лаганн"
+  ,"barakamon":"Баракамон"
+  ,"kaiju no 8":"Кайдзю № 8"
+  ,"oshi no ko":"Ребёнок айдола"
+  ,"summer time rendering":"Летнее время"
+  ,"yuri on ice":"Юри на льду"
+  ,"fate zero":"Судьба: Начало"
+  ,"kuroko no basket":"Баскетбол Куроко"
+  ,"mushoku tensei jobless reincarnation":"Реинкарнация безработного"
+  ,"re zero starting life in another world":"Re:Zero — жизнь с нуля в другом мире"
+  ,"parasyte the maxim":"Паразит"
+  ,"trigun":"Триган"
+  ,"hellsing ultimate":"Хеллсинг Ultimate"
 }));
 
 const ANIME_RU_OVERVIEW = new Map(Object.entries({
@@ -549,33 +593,96 @@ function makeSearchWorker() {
     function animeTopScore(x){const v=votes(x);const r=rating(x);const y=Number(year(x)||0);return v*1000 + r*10000 + Math.max(0,2100-y);}
     function isAnimeTopBad(x){const h=hay(x);const banned=[" fan letter","fanletter"," ova"," ova ","special"," recap","summary","pilot","preview","trailer","teaser","music video","soundtrack","concert","stage play","live action","спешл","ова","рекап","краткое содержание","фан письмо","превью","трейлер","мюзикл"];return banned.some(b=>h.includes(b));}
     function applyAnimeTopDedupe(){
-      const thresholds=[9000000,7000000,5000000,3000000,2000000,1500000,1000000,700000,500000,300000,100000,50000,0];
-      const sortedAll=rows.slice()
-        .filter(r=>type(r.item)==="Аниме"&&poster(r.item)&&!isAnimeTopBad(r.item)&&rating(r.item)>=6.8&&Number(year(r.item)||0)<=2025)
-        .sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));
-      let selectedThreshold=0;
-      for(const th of thresholds){
-        const franchises=new Set(sortedAll.filter(r=>votes(r.item)>=th).map(r=>franchiseKey(r.item)));
-        if(franchises.size>=100){ selectedThreshold=th; break; }
-      }
-      let source=selectedThreshold?sortedAll.filter(r=>votes(r.item)>=selectedThreshold):sortedAll;
-      if(new Set(source.map(r=>franchiseKey(r.item))).size<100) source=sortedAll;
-      const seen=new Set();
+      const manual=[
+        {ru:"Атака титанов", aliases:["attack on titan","shingeki no kyojin","атака титанов"]},
+        {ru:"Стальной алхимик: Братство", aliases:["fullmetal alchemist brotherhood","hagane no renkinjutsushi brotherhood","стальной алхимик братство"]},
+        {ru:"Блич: Тысячелетняя кровавая война", aliases:["bleach thousand year blood war","bleach sennen kessen hen","блич тысячелетняя кровавая война"]},
+        {ru:"Легенда о героях Галактики", aliases:["legend of the galactic heroes","ginga eiyu densetsu","легенда о героях галактики"]},
+        {ru:"Ван-Пис", aliases:["one piece","ван пис","ван-пис"]},
+        {ru:"Охотник х Охотник", aliases:["hunter x hunter","hunter hunter","охотник х охотник"]},
+        {ru:"Провожающая в последний путь Фрирен", aliases:["frieren beyond journey s end","sousou no frieren","фрирен"]},
+        {ru:"Сага о Винланде", aliases:["vinland saga","сага о винланде"]},
+        {ru:"Ковбой Бибоп", aliases:["cowboy bebop","kauboi bibappu","ковбой бибоп"]},
+        {ru:"Мастер Муси 2", aliases:["mushishi zoku sho","mushishi zoku-sho","мастер муси 2"]},
+        {ru:"Королевство", aliases:["kingdom","королевство"]},
+        {ru:"Серебряный клык", aliases:["ginga nagareboshi gin","silver fang","серебряный клык"]},
+        {ru:"Драконий жемчуг Зет", aliases:["dragon ball z","doragon boru zetto","драконий жемчуг зет"]},
+        {ru:"Конан — мальчик из будущего", aliases:["future boy conan","mirai shonen konan","конан мальчик из будущего"]},
+        {ru:"Гинтама", aliases:["gintama","гинтама"]},
+        {ru:"Наруто: Ураганные хроники", aliases:["naruto shippuden","наруто ураганные хроники"]},
+        {ru:"Код Гиас: Восставший Лелуш", aliases:["code geass lelouch of the rebellion","code geass","код гиас"]},
+        {ru:"Монстр", aliases:["monster","монстр"]},
+        {ru:"Берсерк", aliases:["berserk","kenpu denki beruseruku","берсерк"]},
+        {ru:"Истребитель демонов", aliases:["demon slayer","kimetsu no yaiba","истребитель демонов"]},
+        {ru:"Монолог фармацевта", aliases:["kusuriya no hitorigoto","the apothecary diaries","монолог фармацевта"]},
+        {ru:"Невероятные приключения ДжоДжо", aliases:["jojo","jojo no kimyo na boken","jojo s bizarre adventure","джоджо"]},
+        {ru:"Ванпанчмен", aliases:["one punch man","one-punch man","ванпанчмен"]},
+        {ru:"Твоя апрельская ложь", aliases:["your lie in april","shigatsu wa kimi no uso","твоя апрельская ложь"]},
+        {ru:"Кланнад: Продолжение истории", aliases:["clannad after story","кланнад продолжение истории"]},
+        {ru:"Госпожа Кагуя: в любви как на войне", aliases:["kaguya sama love is war","госпожа кагуя"]},
+        {ru:"Инициал Ди", aliases:["initial d","инициал d","инициал ди"]},
+        {ru:"Бродяга Кэнсин", aliases:["rurouni kenshin","samurai x","бродяга кэнсин"]},
+        {ru:"Моб Психо 100", aliases:["mob psycho 100","моб психо 100"]},
+        {ru:"Евангелион", aliases:["neon genesis evangelion","shin seiki evangelion","евангелион"]},
+        {ru:"Крутой учитель Онидзука", aliases:["great teacher onizuka","gto","крутой учитель онидзука"]},
+        {ru:"Отчёт о буйстве духов", aliases:["yu yu hakusho","yuu yuu hakusho","отчет о буйстве духов","отчёт о буйстве духов"]},
+        {ru:"Драконий жемчуг", aliases:["dragon ball","doragon boru","драконий жемчуг"]},
+        {ru:"Нана", aliases:["nana","нана"]},
+        {ru:"Мастер Муси", aliases:["mushishi","мастер муси"]},
+        {ru:"Детектив Конан", aliases:["detective conan","meitantei conan","детектив конан"]},
+        {ru:"Призрак в доспехах: Синдром одиночки", aliases:["ghost in the shell stand alone complex","призрак в доспехах синдром одиночки"]},
+        {ru:"Самурай Чамплу", aliases:["samurai champloo","samurai chanpuru","самурай чамплу"]},
+        {ru:"Вайолет Эвергарден", aliases:["violet evergarden","вайолет эвергарден"]},
+        {ru:"Город, в котором меня нет", aliases:["erased","boku dake ga inai machi","город в котором меня нет"]},
+        {ru:"Наруто", aliases:["naruto","наруто"]},
+        {ru:"Инуяся: Последняя глава", aliases:["inuyasha kanketsu hen","inuyasha the final act","инуяся последняя глава"]},
+        {ru:"Дандадан", aliases:["dandadan","дандадан"]},
+        {ru:"Одинокий рокер", aliases:["bocchi the rock","одинокий рокер"]},
+        {ru:"Человек-бензопила", aliases:["chainsaw man","человек бензопила"]},
+        {ru:"Необычное такси", aliases:["odd taxi","необычное такси"]},
+        {ru:"Для тебя, Бессмертный", aliases:["to your eternity","fumetsu no anata e","для тебя бессмертный"]},
+        {ru:"Ох, уж этот экстрасенс Сайки Кусуо!", aliases:["saiki kusuo","saiki k","экстрасенс сайки"]},
+        {ru:"Драконий жемчуг Супер", aliases:["dragon ball super","драконий жемчуг супер"]},
+        {ru:"Гуррен Лаганн", aliases:["gurren lagann","tengen toppa gurren lagann","гуррен лаганн"]},
+        {ru:"Баракамон", aliases:["barakamon","баракамон"]},
+        {ru:"Кайдзю № 8", aliases:["kaiju no 8","kaiju no. 8","кайдзю 8"]},
+        {ru:"Ребёнок айдола", aliases:["oshi no ko","ребенок айдола","ребёнок айдола"]},
+        {ru:"Летнее время", aliases:["summer time rendering","летнее время"]},
+        {ru:"Юри на льду", aliases:["yuri on ice","юри на льду"]},
+        {ru:"Семья шпиона", aliases:["spy x family","семья шпиона"]},
+        {ru:"Дороро", aliases:["dororo","дороро"]},
+        {ru:"Судьба: Начало", aliases:["fate zero","fate/zero","судьба начало"]},
+        {ru:"Баскетбол Куроко", aliases:["kuroko no basket","баскетбол куроко"]},
+        {ru:"Реинкарнация безработного", aliases:["mushoku tensei","jobless reincarnation","реинкарнация безработного"]},
+        {ru:"Чёрный клевер", aliases:["black clover","черный клевер","чёрный клевер"]},
+        {ru:"Re:Zero — жизнь с нуля в другом мире", aliases:["re zero","re:zero","starting life in another world"]},
+        {ru:"Паразит", aliases:["parasyte","kiseijuu","паразит"]},
+        {ru:"Триган", aliases:["trigun","триган"]},
+        {ru:"Хеллсинг Ultimate", aliases:["hellsing ultimate","хеллсинг ultimate"]}
+      ];
+      const pool=rows.slice().filter(r=>type(r.item)==="Аниме"&&poster(r.item)&&!isAnimeTopBad(r.item));
+      const used=new Set();
       const out=[];
-      for(const row of source){
-        const key=franchiseKey(row.item);
-        if(seen.has(key)) continue;
-        seen.add(key);
-        out.push(row);
+      function rowText(row){return norm([title(row.item),row.item&&row.item.ru,row.item&&row.item.en,row.item&&row.item.original_title,row.item&&row.item.original_name,row.item&&row.item.search].filter(Boolean).join(" "));}
+      function rowId(row){return String((row.item&&row.item.id)||title(row.item)+"|"+year(row.item));}
+      for(const spec of manual){
+        const aliases=spec.aliases.map(norm);
+        const candidates=pool.filter(row=>!used.has(rowId(row))&&aliases.some(a=>{const h=rowText(row);return h===a||h.includes(a)||a.includes(h);}));
+        if(!candidates.length) continue;
+        candidates.sort((a,b)=>poster(b.item)-poster(a.item)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));
+        const best=candidates[0];
+        best.item=Object.assign({},best.item,{ru:spec.ru,title_ru:spec.ru,__manualTopTitle:spec.ru});
+        used.add(rowId(best));
+        out.push(best);
         if(out.length>=100) break;
       }
-      rows=out.slice(0,100);
-      self.__animeTopThreshold=selectedThreshold;
+      rows=out;
+      self.__animeTopThreshold="manual-user-list";
     }
     function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(sort==="rating")rows.sort((a,b)=>pr(a,b)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQuery)rows.sort((a,b)=>pr(a,b)||b.score-a.score);else rows.sort((a,b)=>pr(a,b)||(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
-    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=122";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
+    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=123";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
     function buildRows(index, c, queries){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
@@ -598,7 +705,7 @@ function makeSearchWorker() {
     currentCount = Number(msg.count || 0);
     currentPages = Math.max(1, Math.ceil(currentCount / PAGE_SIZE));
     window.GKM_V106_LAST_SEARCH_STATS = msg;
-    const listLabel = currentTab === "anime_top" ? `🏆 Топ аниме 100 · ориентир 9M · Страница ${currentPage} из ${currentPages}` : `Найдено: ${currentCount} · Страница ${currentPage} из ${currentPages}`;
+    const listLabel = currentTab === "anime_top" ? `🏆 Топ аниме 100 · ручной список · Страница ${currentPage} из ${currentPages}` : `Найдено: ${currentCount} · Страница ${currentPage} из ${currentPages}`;
     renderList(msg.items || [], listLabel);
     setStatus(`Готово · ${currentCount} · ${msg.ms || 0} мс`);
   };
