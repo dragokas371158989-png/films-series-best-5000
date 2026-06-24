@@ -1,0 +1,111 @@
+name: Auto update catalog V144 Kinopoisk only
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Каждый день в 04:15 UTC.
+    - cron: "15 4 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-update-catalog-v144-kinopoisk
+  cancel-in-progress: false
+
+jobs:
+  auto-update-catalog-kinopoisk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Sync branch
+        run: git pull --rebase origin main
+
+      - name: Auto update raw catalog from Kinopoisk
+        env:
+          KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
+          GKM_KP_PAGES_PER_TYPE: "4"
+          GKM_KP_LIMIT: "250"
+          GKM_KP_SLEEP: "0.35"
+        run: python tools/update_catalog_kinopoisk_v144.py
+
+      - name: Build fast data
+        run: python tools/build_fast_site_data.py
+
+      - name: Optional post-fix fast data
+        run: |
+          if [ -f tools/post_fix_fast_data.py ]; then
+            python tools/post_fix_fast_data.py
+          else
+            echo "tools/post_fix_fast_data.py not found, skipping"
+          fi
+
+      - name: Enrich Kinopoisk facts
+        env:
+          KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
+          GKM_KINOPOISK_FACT_LIMIT: "3000"
+        run: |
+          if [ -f tools/enrich_kinopoisk_facts.py ]; then
+            python tools/enrich_kinopoisk_facts.py
+          else
+            echo "tools/enrich_kinopoisk_facts.py not found, skipping"
+          fi
+
+      - name: Optional dedupe database
+        run: |
+          if [ -f tools/dedupe_database_v112.py ]; then
+            python tools/dedupe_database_v112.py
+          else
+            echo "tools/dedupe_database_v112.py not found, skipping"
+          fi
+
+      - name: Optional anime studios enrich
+        run: |
+          if [ -f tools/enrich_anime_studios_v132.py ]; then
+            python tools/enrich_anime_studios_v132.py
+          else
+            echo "tools/enrich_anime_studios_v132.py not found, skipping"
+          fi
+
+      - name: Verify data
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          assert Path('data/index.json').exists(), 'data/index.json missing'
+          assert Path('data/fast/home.json').exists(), 'data/fast/home.json missing'
+          assert Path('data/fast/search_index.json').exists(), 'data/fast/search_index.json missing'
+          idx=json.load(open('data/index.json',encoding='utf-8'))
+          meta=json.load(open('data/fast/meta.json',encoding='utf-8'))
+          print('raw total:', idx.get('total'))
+          print('fast count:', meta.get('count'))
+          print('source:', idx.get('source'))
+          assert int(meta.get('count') or 0) > 0
+          PY
+
+      - name: Commit updated catalog
+        run: |
+          git config user.name "gkm-kinopoisk-catalog-bot"
+          git config user.email "gkm-kinopoisk-catalog-bot@users.noreply.github.com"
+          git add data/index.json data/chunk_*.json data/fast data/auto_update_kinopoisk_v144_report.json
+          if [ -f data/kinopoisk_facts_cache.json ]; then git add data/kinopoisk_facts_cache.json; fi
+          if git diff --cached --quiet; then
+            echo "No catalog changes"
+            exit 0
+          fi
+          git commit -m "Auto update catalog from Kinopoisk v144"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin main && break
+            echo "Push failed, retry $i"
+            sleep 5
+          done
