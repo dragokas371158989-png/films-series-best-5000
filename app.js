@@ -1,4 +1,5 @@
-const GKM_APP_CLEAN_VERSION = "v142-helper-intent-no-random-results-2026-06-24";
+const GKM_APP_CLEAN_VERSION = "v144-kinopoisk-only-auto-catalog-2026-06-24";
+window.GKM_V144_KINOPOISK_AUTO_CATALOG_VERSION = "v144-kinopoisk-only-auto-catalog-2026-06-24";
 window.GKM_V136_SAFE_ANIME_TITLE_FIX_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
 window.GKM_V137_SAFE_ALL_FRANCHISE_TITLE_FIX_VERSION = "v137-safe-all-franchise-title-fix-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
