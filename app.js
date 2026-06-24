@@ -426,6 +426,12 @@ function displayTitle(item) {
   return base;
 }
 
+
+// V139: compatibility alias for helper/older code paths.
+function getRuTitle(item) {
+  try { return displayTitle(item); } catch (e) { return titleOf(item); }
+}
+
 function displayOverview(item) {
   if (getType(item) === "Аниме") {
     const exactTitle = specificAnimeTitle(item);
@@ -1530,6 +1536,7 @@ console.log("GKM: v133-missing-anime-top-file-fix-2026-06-24");
 
 /* === GKM V138 LOCAL HELPER WORKING === */
 window.GKM_V138_LOCAL_HELPER_VERSION = "v138-local-helper-working-2026-06-24";
+window.GKM_V139_HELPER_GETRUTITLE_FIX_VERSION = "v139-helper-getrutitle-fix-2026-06-24";
 
 function gkmHelperReady(fn) {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn, { once: true });
@@ -1578,7 +1585,7 @@ function gkmHelperVisiblePool() {
 
 function gkmHelperFormatList(items) {
   return items.slice(0, 8).map((it, idx) => {
-    const title = getRuTitle(it) || titleOf(it) || "Без названия";
+    const title = displayTitle(it) || titleOf(it) || "Без названия";
     const year = getYear(it) || "—";
     const rating = ratingOf(it) || "—";
     return `${idx + 1}. ${title} (${year}) — ★ ${rating}`;
@@ -1591,7 +1598,7 @@ function gkmHelperPickByWords(words, limit = 8) {
   const pool = gkmHelperVisiblePool();
   const scored = pool.map(it => {
     const txt = gkmHelperNormalizeText([
-      getRuTitle(it), titleOf(it), it.title_en, it.original_title, it.name, it.overview,
+      displayTitle(it), titleOf(it), it.title_en, it.original_title, it.name, it.overview,
       Array.isArray(it.genres) ? it.genres.join(" ") : it.genres
     ].join(" "));
     let score = 0;
