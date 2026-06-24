@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v137-safe-all-franchise-title-fix-2026-06-24";
+const GKM_APP_CLEAN_VERSION = "v138-local-helper-working-2026-06-24";
 window.GKM_V136_SAFE_ANIME_TITLE_FIX_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
 window.GKM_V137_SAFE_ALL_FRANCHISE_TITLE_FIX_VERSION = "v137-safe-all-franchise-title-fix-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
@@ -1527,3 +1527,148 @@ window.GKM_V131_STATIC_ANIME_TOP_FAST_EOF_LOCK_VERSION = "v131-static-anime-top-
 
 window.GKM_V133_MISSING_TOP_FILE_FIX_VERSION = "v133-missing-anime-top-file-fix-2026-06-24";
 console.log("GKM: v133-missing-anime-top-file-fix-2026-06-24");
+
+/* === GKM V138 LOCAL HELPER WORKING === */
+window.GKM_V138_LOCAL_HELPER_VERSION = "v138-local-helper-working-2026-06-24";
+
+function gkmHelperReady(fn) {
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn, { once: true });
+  else fn();
+}
+
+function gkmHelperAddMessage(role, text) {
+  const box = document.getElementById("gkmAiMessages");
+  if (!box) return;
+  const div = document.createElement("div");
+  div.className = "ai-msg " + (role === "user" ? "ai-user" : "ai-bot");
+  div.innerHTML = escapeHtml(text).replace(/\n/g, "<br>");
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function gkmHelperNormalizeText(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/ё/g, "е")
+    .replace(/[«»"'`]/g, "")
+    .replace(/[^a-zа-я0-9\s:.-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function gkmHelperVisiblePool() {
+  const pool = [];
+  const seen = new Set();
+  function add(item) {
+    if (!item || typeof item !== "object") return;
+    const key = String(item.id || titleOf(item) + "|" + getYear(item));
+    if (seen.has(key)) return;
+    seen.add(key);
+    pool.push(item);
+  }
+  try { (currentItems || []).forEach(add); } catch {}
+  try {
+    Object.values(homeData || {}).forEach(v => {
+      if (Array.isArray(v)) v.forEach(add);
+      else if (v && Array.isArray(v.items)) v.items.forEach(add);
+    });
+  } catch {}
+  return pool;
+}
+
+function gkmHelperFormatList(items) {
+  return items.slice(0, 8).map((it, idx) => {
+    const title = getRuTitle(it) || titleOf(it) || "Без названия";
+    const year = getYear(it) || "—";
+    const rating = ratingOf(it) || "—";
+    return `${idx + 1}. ${title} (${year}) — ★ ${rating}`;
+  }).join("\n");
+}
+
+function gkmHelperPickByWords(words, limit = 8) {
+  const q = gkmHelperNormalizeText(words);
+  const tokens = q.split(" ").filter(Boolean);
+  const pool = gkmHelperVisiblePool();
+  const scored = pool.map(it => {
+    const txt = gkmHelperNormalizeText([
+      getRuTitle(it), titleOf(it), it.title_en, it.original_title, it.name, it.overview,
+      Array.isArray(it.genres) ? it.genres.join(" ") : it.genres
+    ].join(" "));
+    let score = 0;
+    tokens.forEach(t => { if (txt.includes(t)) score += t.length >= 4 ? 3 : 1; });
+    score += Math.min(10, Math.log10((votesOf(it) || 0) + 1));
+    score += Number(ratingOf(it) || 0) / 2;
+    return { it, score };
+  }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).map(x => x.it);
+  return scored.slice(0, limit);
+}
+
+function gkmHelperAnswer(raw) {
+  const q = gkmHelperNormalizeText(raw);
+  if (!q) return "Напиши, что хочется посмотреть: жанр, настроение или пример тайтла.";
+
+  if (q.includes("топ студ")) {
+    try { renderAnimeStudiosTop(); } catch {}
+    return "Открыл раздел «Топ студий». Там можно смотреть студии и их аниме.";
+  }
+
+  if (q.includes("топ аним") || q.includes("лучшие аним")) {
+    try { renderAnimeTopManual(1); } catch {}
+    return "Открыл «Топ аниме 100». Это твой ручной список, отсортированный по голосам.";
+  }
+
+  if (q.includes("интерстел") || q.includes("космос")) {
+    const items = gkmHelperPickByWords("космос фантастика драма interstellar space sci-fi", 6);
+    return items.length ? "Вот что можно попробовать в таком духе:\n" + gkmHelperFormatList(items) : "Попробуй: Интерстеллар, Начало, Прибытие, Марсианин, Гравитация.";
+  }
+
+  if (q.includes("наруто")) {
+    const items = gkmHelperPickByWords("naruto нaруто shippuden ninja боевые искусства приключения", 8);
+    return items.length ? "Похоже на Наруто / из этой темы:\n" + gkmHelperFormatList(items) : "Попробуй: Наруто, Наруто: Ураганные хроники, Блич, Ван-Пис, Магическая битва, Чёрный клевер.";
+  }
+
+  if (q.includes("вечер") || q.includes("посмотреть") || q.includes("посовет")) {
+    const items = gkmHelperPickByWords(q + " популярное драма боевик приключения", 8);
+    return items.length ? "Я бы выбрал вот это:\n" + gkmHelperFormatList(items) : "Скажи жанр: аниме, фильм, сериал, драма, фантастика, комедия, жёсткое или лёгкое.";
+  }
+
+  const items = gkmHelperPickByWords(q, 8);
+  if (items.length) return "Нашёл подходящие варианты:\n" + gkmHelperFormatList(items);
+
+  return "Пока не понял запрос. Напиши проще, например: «аниме как Наруто», «фильм вечером», «топ студий», «мрачное аниме».";
+}
+
+function setupGkmLocalHelper() {
+  const floatBtn = document.getElementById("gkmAiFloatBtn");
+  const dialog = document.getElementById("gkmAiDialog");
+  const closeBtn = document.getElementById("gkmAiCloseBtn");
+  const form = document.getElementById("gkmAiForm");
+  const input = document.getElementById("gkmAiInput");
+  if (!floatBtn || !dialog || !form || !input) return;
+
+  floatBtn.onclick = () => {
+    if (typeof dialog.showModal === "function") dialog.showModal();
+    else dialog.setAttribute("open", "");
+    setTimeout(() => input.focus(), 50);
+  };
+  if (closeBtn) closeBtn.onclick = () => dialog.close ? dialog.close() : dialog.removeAttribute("open");
+
+  document.querySelectorAll("[data-ai-prompt]").forEach(btn => {
+    btn.onclick = () => {
+      input.value = btn.dataset.aiPrompt || "";
+      form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+    };
+  });
+
+  form.onsubmit = (event) => {
+    event.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = "";
+    gkmHelperAddMessage("user", text);
+    setTimeout(() => gkmHelperAddMessage("bot", gkmHelperAnswer(text)), 120);
+  };
+}
+
+gkmHelperReady(setupGkmLocalHelper);
+console.log("GKM:", window.GKM_V138_LOCAL_HELPER_VERSION);
