@@ -222,17 +222,28 @@ def request_json(url: str) -> Optional[Dict[str, Any]]:
     try:
         with urlopen(req, timeout=35) as r:
             if r.status < 200 or r.status >= 300:
-                log(f"HTTP {r.status}: {url}")
-                return None
+    body = r.read().decode("utf-8", errors="ignore")
+    log(f"HTTP {r.status}: {url}")
+    log(f"BODY: {body[:2000]}")
+    raise SystemExit(1)
             return json.loads(r.read().decode("utf-8", "replace"))
-    except HTTPError as e:
-        log(f"HTTPError {e.code}: {url}")
-    except URLError as e:
-        log(f"URLError: {url} :: {e}")
-    except Exception as e:
-        log(f"request failed: {url} :: {e}")
-    return None
+   except HTTPError as e:
+    body = ""
+    try:
+        body = e.read().decode("utf-8", errors="ignore")
+    except Exception:
+        pass
+    log(f"HTTPError {e.code}: {url}")
+    log(f"BODY: {body[:2000]}")
+    raise SystemExit(1)
 
+except URLError as e:
+    log(f"URLError: {url} :: {e}")
+    raise SystemExit(1)
+
+except Exception as e:
+    log(f"request failed: {url} :: {e}")
+    raise SystemExit(1)
 
 def kinopoisk_url(kp_type: str, page: int, limit: int) -> str:
     params: List[tuple[str, Any]] = []
@@ -244,9 +255,7 @@ def kinopoisk_url(kp_type: str, page: int, limit: int) -> str:
         ("type", kp_type),
         ("sortField", "votes.kp"),
         ("sortType", "-1"),
-        ("notNullFields", "name"),
-        ("notNullFields", "poster.url"),
-        ("notNullFields", "rating.kp"),
+       
     ]
     return f"{API_BASE}/movie?" + urlencode(params)
 
