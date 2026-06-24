@@ -219,13 +219,14 @@ def request_json(url: str) -> Optional[Dict[str, Any]]:
         "X-API-KEY": API_KEY,
         "User-Agent": "GKM-Kinopoisk-AutoCatalog/144",
     })
-    try:
+        try:
         with urlopen(req, timeout=35) as r:
             if r.status < 200 or r.status >= 300:
-    body = r.read().decode("utf-8", errors="ignore")
-    log(f"HTTP {r.status}: {url}")
-    log(f"BODY: {body[:2000]}")
-    raise SystemExit(1)
+                body = r.read().decode("utf-8", errors="ignore")
+                log(f"HTTP {r.status}: {url}")
+                log(f"BODY: {body[:2000]}")
+                raise SystemExit(1)
+
             return json.loads(r.read().decode("utf-8", "replace"))
    except HTTPError as e:
     body = ""
