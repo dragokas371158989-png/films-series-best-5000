@@ -1,4 +1,4 @@
-const GKM_APP_CLEAN_VERSION = "v138-local-helper-working-2026-06-24";
+const GKM_APP_CLEAN_VERSION = "v142-helper-intent-no-random-results-2026-06-24";
 window.GKM_V136_SAFE_ANIME_TITLE_FIX_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
 window.GKM_V137_SAFE_ALL_FRANCHISE_TITLE_FIX_VERSION = "v137-safe-all-franchise-title-fix-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
@@ -1668,6 +1668,134 @@ function gkmHelperAnswer(raw) {
 
   return "Пока не понял запрос. Напиши проще, например: «аниме как Наруто», «фильм вечером», «топ студий», «мрачное аниме».";
 }
+
+
+
+/* === GKM V142 HELPER INTENT FIX === */
+window.GKM_V142_HELPER_INTENT_FIX_VERSION = "v142-helper-intent-no-random-results-2026-06-24";
+
+function gkmHelperItemType(item) {
+  try { return getType(item); } catch { return String(item && (item.type || item.category) || ""); }
+}
+
+function gkmHelperIsAnimeQuery(q) {
+  return /(^|\s)(аниме|анимэ|anime)(\s|$)/i.test(String(q || ""));
+}
+
+function gkmHelperIsFilmQuery(q) {
+  return /(^|\s)(фильм|кино|movie|film)(\s|$)/i.test(String(q || ""));
+}
+
+function gkmHelperIsSeriesQuery(q) {
+  return /(^|\s)(сериал|series|show)(\s|$)/i.test(String(q || ""));
+}
+
+function gkmHelperCleanCandidate(item) {
+  if (!item) return false;
+  const y = Number(getYear(item) || 0);
+  const currentYear = new Date().getFullYear();
+  if (y && y > currentYear) return false;
+  const title = gkmHelperNormalizeText([displayTitle(item), titleOf(item), item.title_en, item.original_title].join(" "));
+  const banned = ["fan letter", "recap", "summary", "preview", "trailer", "teaser", "music video", "soundtrack", "stage play", "concert", "фан письмо", "рекап", "трейлер", "превью"];
+  return !banned.some(x => title.includes(x));
+}
+
+function gkmHelperPickPopularByType(type, limit = 8) {
+  const pool = gkmHelperVisiblePool();
+  return pool
+    .filter(it => !type || gkmHelperItemType(it) === type)
+    .filter(gkmHelperCleanCandidate)
+    .sort((a, b) => (votesOf(b) - votesOf(a)) || (ratingOf(b) - ratingOf(a)) || (Number(getYear(b)||0) - Number(getYear(a)||0)))
+    .slice(0, limit);
+}
+
+function gkmHelperPickByWords(words, limit = 8, opts = {}) {
+  const q = gkmHelperNormalizeText(words);
+  const type = opts.type || "";
+  const tokens = q.split(" ").filter(Boolean).filter(t => t.length >= 3);
+  if (!tokens.length && !type) return [];
+  const weakWords = new Set(["подбери", "подобрать", "посоветуй", "посмотреть", "вечером", "вечер", "хочу", "что", "мне", "дай", "это"]);
+  const strongTokens = tokens.filter(t => !weakWords.has(t));
+  if (!strongTokens.length && type) return gkmHelperPickPopularByType(type, limit);
+  if (!strongTokens.length) return [];
+  const pool = gkmHelperVisiblePool();
+  const scored = pool.map(it => {
+    if (type && gkmHelperItemType(it) !== type) return { it, score: 0 };
+    if (!gkmHelperCleanCandidate(it)) return { it, score: 0 };
+    const txt = gkmHelperNormalizeText([
+      displayTitle(it), titleOf(it), it.title_en, it.original_title, it.name, it.overview,
+      Array.isArray(it.genres) ? it.genres.join(" ") : it.genres
+    ].join(" "));
+    let matchScore = 0;
+    strongTokens.forEach(t => {
+      if (txt.includes(t)) matchScore += t.length >= 5 ? 4 : 2;
+    });
+    if (matchScore <= 0) return { it, score: 0 };
+    let score = matchScore * 10;
+    score += Math.min(12, Math.log10((votesOf(it) || 0) + 1));
+    score += Number(ratingOf(it) || 0) / 2;
+    return { it, score };
+  }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).map(x => x.it);
+  return scored.slice(0, limit);
+}
+
+function gkmHelperAnswer(raw) {
+  const q = gkmHelperNormalizeText(raw);
+  if (!q) return "Напиши, что хочется посмотреть: фильм, сериал, аниме, жанр или пример тайтла.";
+
+  if (gkmHelperIsGreeting(q)) {
+    return "Привет! Я помогу подобрать фильм, сериал, аниме или мультфильм. Напиши, например: «подбери фильм», «посоветуй аниме», «как Наруто», «топ аниме», «топ студий».";
+  }
+
+  if (q.includes("топ студ")) {
+    try { renderAnimeStudiosTop(); } catch {}
+    return "Открыл раздел «Топ студий». Кликни на студию, чтобы увидеть все её аниме.";
+  }
+
+  if (q.includes("топ аним") || q.includes("лучшие аним")) {
+    try { renderAnimeTopManual(1); } catch {}
+    return "Открыл «Топ аниме 100». Там твой список, отсортированный по голосам.";
+  }
+
+  if (q.includes("интерстел") || q.includes("космос")) {
+    const items = gkmHelperPickByWords("космос фантастика драма interstellar space sci-fi", 6, { type: "Фильм" });
+    return items.length ? "В духе космоса/фантастики:\n" + gkmHelperFormatList(items) : "Попробуй: Интерстеллар, Начало, Прибытие, Марсианин, Гравитация.";
+  }
+
+  if (q.includes("наруто")) {
+    const items = gkmHelperPickByWords("naruto shippuden ninja боевые искусства приключения", 8, { type: "Аниме" });
+    return items.length ? "Похоже на Наруто или из этой темы:\n" + gkmHelperFormatList(items) : "Попробуй: Наруто, Наруто: Ураганные хроники, Блич, Ван-Пис, Магическая битва, Чёрный клевер.";
+  }
+
+  if (gkmHelperIsAnimeQuery(q)) {
+    const items = gkmHelperPickByWords(q, 8, { type: "Аниме" });
+    const list = items.length ? items : gkmHelperPickPopularByType("Аниме", 8);
+    return list.length ? "Вот популярные аниме:\n" + gkmHelperFormatList(list) : "Скажи жанр аниме: экшен, драма, романтика, мистика, спорт или что-то как Наруто.";
+  }
+
+  if (gkmHelperIsFilmQuery(q) || q.includes("вечер")) {
+    const items = gkmHelperPickByWords(q, 8, { type: "Фильм" });
+    const list = items.length ? items : gkmHelperPickPopularByType("Фильм", 8);
+    return list.length ? "Вот фильмы, которые можно посмотреть:\n" + gkmHelperFormatList(list) : "Скажи жанр фильма: фантастика, боевик, драма, комедия, ужасы.";
+  }
+
+  if (gkmHelperIsSeriesQuery(q)) {
+    const items = gkmHelperPickByWords(q, 8, { type: "Сериал" });
+    const list = items.length ? items : gkmHelperPickPopularByType("Сериал", 8);
+    return list.length ? "Вот сериалы, которые можно посмотреть:\n" + gkmHelperFormatList(list) : "Скажи жанр сериала: детектив, драма, фантастика, комедия.";
+  }
+
+  if (q.includes("посовет") || q.includes("подбери") || q.includes("посмотреть")) {
+    return "Уточни, что подобрать: фильм, сериал или аниме? Например: «подбери фильм фантастику» или «посоветуй мрачное аниме».";
+  }
+
+  const items = gkmHelperPickByWords(q, 8);
+  if (items.length) return "Нашёл подходящие варианты:\n" + gkmHelperFormatList(items);
+
+  return "Пока не понял запрос. Напиши проще: «подбери фильм», «посоветуй аниме», «как Наруто», «топ студий».";
+}
+
+console.log("GKM:", window.GKM_V142_HELPER_INTENT_FIX_VERSION);
 
 function setupGkmLocalHelper() {
   const floatBtn = document.getElementById("gkmAiFloatBtn");
