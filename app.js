@@ -462,6 +462,17 @@ function getVotes(item) {
   return Number(item && (item.votes || item.vote_count || item.scored_by) || 0);
 }
 
+// V140: helper compatibility aliases. Older helper code calls ratingOf/votesOf.
+function ratingOf(item) {
+  return getRating(item);
+}
+
+function votesOf(item) {
+  return getVotes(item);
+}
+
+window.GKM_V140_HELPER_VOTESOF_FIX_VERSION = "v140-helper-votesof-fix-2026-06-24";
+
 function formatVotes(value) {
   const votes = Number(value || 0);
   if (!Number.isFinite(votes) || votes <= 0) return "0";
