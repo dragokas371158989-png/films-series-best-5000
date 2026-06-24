@@ -1,5 +1,6 @@
-const GKM_APP_CLEAN_VERSION = "v144-kinopoisk-only-auto-catalog-2026-06-24";
+const GKM_APP_CLEAN_VERSION = "v146-votes-9000000-sort-2026-06-24";
 window.GKM_V144_KINOPOISK_AUTO_CATALOG_VERSION = "v144-kinopoisk-only-auto-catalog-2026-06-24";
+window.GKM_V146_VOTES_9000000_SORT_VERSION = "v146-votes-9000000-sort-2026-06-24";
 window.GKM_V136_SAFE_ANIME_TITLE_FIX_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
 window.GKM_V137_SAFE_ALL_FRANCHISE_TITLE_FIX_VERSION = "v137-safe-all-franchise-title-fix-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
@@ -474,6 +475,40 @@ function votesOf(item) {
 
 window.GKM_V140_HELPER_VOTESOF_FIX_VERSION = "v140-helper-votesof-fix-2026-06-24";
 
+function votes9000000Score(item) {
+  const v = Number(votesOf(item) || item.votes || 0);
+  const r = Number(ratingOf(item) || item.rating || 0);
+  if (!Number.isFinite(v) || v <= 0) return -999999;
+
+  const votesPart = Math.min(v, 9000000) / 9000000;
+  const ratingPart = Math.max(0, Math.min(r, 10)) / 10;
+  let score = votesPart * 0.90 + ratingPart * 0.10;
+
+  if (v < 10) score -= 10;
+  else if (v < 100) score -= 6;
+  else if (v < 1000) score -= 3;
+  else if (v < 10000) score -= 1.2;
+
+  if (!hasPoster(item) && v < 50000) score -= 2;
+  return score;
+}
+
+function compareByVotes9000000(a, b) {
+  const sb = votes9000000Score(b);
+  const sa = votes9000000Score(a);
+  if (sb !== sa) return sb - sa;
+
+  const vb = Number(votesOf(b) || b.votes || 0);
+  const va = Number(votesOf(a) || a.votes || 0);
+  if (vb !== va) return vb - va;
+
+  const rb = Number(ratingOf(b) || b.rating || 0);
+  const ra = Number(ratingOf(a) || a.rating || 0);
+  if (rb !== ra) return rb - ra;
+
+  return Number(getYear(b) || 0) - Number(getYear(a) || 0);
+}
+
 function formatVotes(value) {
   const votes = Number(value || 0);
   if (!Number.isFinite(votes) || votes <= 0) return "0";
@@ -776,6 +811,8 @@ function makeSearchWorker() {
     function type(x){return String((x&&x.type)||"");}
     function rating(x){return Number((x&&x.rating)||0);}
     function votes(x){return Number((x&&x.votes)||0);}
+    function votes9000000Score(x){const v=votes(x);const r=rating(x);if(!Number.isFinite(v)||v<=0)return -999999;const votesPart=Math.min(v,9000000)/9000000;const ratingPart=Math.max(0,Math.min(r,10))/10;let score=votesPart*0.90+ratingPart*0.10;if(v<10)score-=10;else if(v<100)score-=6;else if(v<1000)score-=3;else if(v<10000)score-=1.2;if(!poster(x)&&v<50000)score-=2;return score;}
+    function cmpVotes9000000Rows(a,b){const sa=votes9000000Score(a.item);const sb=votes9000000Score(b.item);if(sb!==sa)return sb-sa;const vb=votes(b.item);const va=votes(a.item);if(vb!==va)return vb-va;const rb=rating(b.item);const ra=rating(a.item);if(rb!==ra)return rb-ra;return Number(year(b.item)||0)-Number(year(a.item)||0);}
     function genres(x){return Array.isArray(x&&x.genres)?x.genres.map(String):[];}
     function poster(x){const raw=String((x&&x.poster)||"").trim();const low=raw.toLowerCase();return raw&&low!=="null"&&low!=="undefined"&&!low.includes("dummyimage")&&!low.includes("placeholder")&&!low.includes("no-poster")?1:0;}
     function isAnimeTopCandidate(x){const t=type(x);if(t!=="Аниме")return false;const v=votes(x);const r=rating(x);const y=Number(year(x)||0);if(v<100000||r<7.4)return false;if(y&&y>2024)return false;const h=hay(x);const banned=[" fan letter","fanletter"," ova"," ova ","special"," recap","summary","pilot","preview","trailer","teaser","music video","soundtrack","concert","stage play","live action","спешл","ова","рекап","краткое содержание","фан письмо","превью","трейлер","мюзикл"];return !banned.some(b=>h.includes(b));}
@@ -937,7 +974,7 @@ function makeSearchWorker() {
       self.__animeTopThreshold="manual-user-list-sorted-by-votes";
       out.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));
     }
-    function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(sort==="rating")rows.sort((a,b)=>pr(a,b)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQuery)rows.sort((a,b)=>pr(a,b)||b.score-a.score);else rows.sort((a,b)=>pr(a,b)||(rating(b.item)*100000+Math.min(votes(b.item),250000)+Number(year(b.item)||0))-(rating(a.item)*100000+Math.min(votes(a.item),250000)+Number(year(a.item)||0)));}
+    function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(sort==="rating")rows.sort((a,b)=>pr(a,b)||cmpVotes9000000Rows(a,b));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQuery)rows.sort((a,b)=>pr(a,b)||b.score-a.score||cmpVotes9000000Rows(a,b));else rows.sort((a,b)=>pr(a,b)||cmpVotes9000000Rows(a,b));}
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
     async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=131";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
