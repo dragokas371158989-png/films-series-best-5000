@@ -1,6 +1,7 @@
-const GKM_APP_CLEAN_VERSION = "v146-votes-9000000-sort-2026-06-24";
+const GKM_APP_CLEAN_VERSION = "v147-infer-anime-studio-safe-fix-2026-06-24";
 window.GKM_V144_KINOPOISK_AUTO_CATALOG_VERSION = "v144-kinopoisk-only-auto-catalog-2026-06-24";
 window.GKM_V146_VOTES_9000000_SORT_VERSION = "v146-votes-9000000-sort-2026-06-24";
+window.GKM_V147_INFER_ANIME_STUDIO_FIX_VERSION = "v147-infer-anime-studio-safe-fix-2026-06-24";
 window.GKM_V136_SAFE_ANIME_TITLE_FIX_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
 window.GKM_V137_SAFE_ALL_FRANCHISE_TITLE_FIX_VERSION = "v137-safe-all-franchise-title-fix-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
@@ -1298,6 +1299,90 @@ function cleanFactValue(value) {
   const text = String(value ?? "").trim();
   if (!text || text === "—" || text === "null" || text === "undefined") return "";
   return text;
+}
+
+
+// V147: safe helpers. Without these functions filters/details could crash on Films/Series/Cartoons.
+function isAnimeItem(item) {
+  const type = norm(getType(item));
+  const text = norm([
+    item && item.type,
+    item && item.category,
+    item && item.ru,
+    item && item.title_ru,
+    item && item.name,
+    item && item.title,
+    item && item.en,
+    ...(Array.isArray(item && item.genres) ? item.genres : [])
+  ].filter(Boolean).join(" "));
+
+  return type.includes("аниме") || text.includes("аниме") || text.includes("anime");
+}
+
+function inferAnimeStudio(item) {
+  if (!isAnimeItem(item)) return "";
+
+  const raw = norm([
+    item && item.ru,
+    item && item.title_ru,
+    item && item.__manualTopTitle,
+    item && item.en,
+    item && item.title,
+    item && item.name,
+    item && item.original_title,
+    item && item.original_name
+  ].filter(Boolean).join(" "));
+
+  const rules = [
+    [/атака титанов|shingeki|attack on titan/, "Wit Studio / MAPPA"],
+    [/тетрадь смерти|death note/, "Madhouse"],
+    [/ванпанчмен|one punch/, "Madhouse / J.C.Staff"],
+    [/истребитель демонов|kimetsu|demon slayer/, "ufotable"],
+    [/стальной алхимик|fullmetal/, "Bones"],
+    [/моя геройская академия|my hero academia|boku no hero/, "Bones"],
+    [/наруто|naruto|boruto/, "Pierrot"],
+    [/магическая битва|jujutsu/, "MAPPA"],
+    [/токийский гуль|tokyo ghoul/, "Pierrot"],
+    [/охотник х охотник|hunter x hunter/, "Madhouse"],
+    [/форма голоса|silent voice|koe no katachi/, "Kyoto Animation"],
+    [/сага о винланде|vinland/, "Wit Studio / MAPPA"],
+    [/фрирен|frieren|sousou/, "Madhouse"],
+    [/врата штейна|steins gate/, "White Fox"],
+    [/код гиас|code geass/, "Sunrise"],
+    [/ван пис|ван-пис|one piece/, "Toei Animation"],
+    [/блич|bleach/, "Pierrot"],
+    [/драконий жемчуг|dragon ball/, "Toei Animation"],
+    [/семь смертных грехов|nanatsu|seven deadly sins/, "A-1 Pictures / Studio Deen"],
+    [/ковбой бибоп|cowboy bebop/, "Sunrise"],
+    [/монстр|monster/, "Madhouse"],
+    [/берсерк|berserk/, "OLM"],
+    [/гинтама|gintama/, "Sunrise / Bandai Namco Pictures"],
+    [/доктор стоун|dr stone/, "TMS Entertainment"],
+    [/re:?zero|ре зеро|жизнь с нуля/, "White Fox"],
+    [/86|eighty six|восемьдесят шесть/, "A-1 Pictures"],
+    [/дороро|dororo/, "MAPPA / Tezuka Productions"],
+    [/черный клевер|чёрный клевер|black clover/, "Pierrot"],
+    [/человек бензопила|человек-бензопила|chainsaw/, "MAPPA"],
+    [/семья шпиона|spy family|spy x family/, "Wit Studio / CloverWorks"],
+    [/волейбол|haikyuu|haikyu/, "Production I.G"],
+    [/моб психо|mob psycho/, "Bones"],
+    [/вайолет эвергарден|violet evergarden/, "Kyoto Animation"],
+    [/евангелион|evangelion/, "Gainax / Tatsunoko"],
+    [/самурай чамплу|samurai champloo/, "Manglobe"],
+    [/джоджо|jojo/, "David Production"],
+    [/реинкарнация безработного|mushoku tensei/, "Studio Bind"],
+    [/госпожа кагуя|kaguya/, "A-1 Pictures"],
+    [/монолог фармацевта|kusuriya|apothecary/, "Toho Animation Studio / OLM"],
+    [/паразит|parasyte/, "Madhouse"],
+    [/триган|trigun/, "Madhouse"],
+    [/хеллсинг|hellsing/, "Satelight / Madhouse / Graphinica"]
+  ];
+
+  for (const [re, studio] of rules) {
+    if (re.test(raw)) return studio;
+  }
+
+  return "";
 }
 
 function detailFactValue(item, field) {
