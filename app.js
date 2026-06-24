@@ -1548,6 +1548,8 @@ console.log("GKM: v133-missing-anime-top-file-fix-2026-06-24");
 /* === GKM V138 LOCAL HELPER WORKING === */
 window.GKM_V138_LOCAL_HELPER_VERSION = "v138-local-helper-working-2026-06-24";
 window.GKM_V139_HELPER_GETRUTITLE_FIX_VERSION = "v139-helper-getrutitle-fix-2026-06-24";
+window.GKM_V140_HELPER_VOTESOF_FIX_VERSION = "v140-helper-votesof-fix-2026-06-24";
+window.GKM_V141_HELPER_GREETING_FIX_VERSION = "v141-helper-greeting-no-random-list-2026-06-24";
 
 function gkmHelperReady(fn) {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn, { once: true });
@@ -1605,15 +1607,18 @@ function gkmHelperFormatList(items) {
 
 function gkmHelperPickByWords(words, limit = 8) {
   const q = gkmHelperNormalizeText(words);
-  const tokens = q.split(" ").filter(Boolean);
+  const tokens = q.split(" ").filter(Boolean).filter(t => t.length >= 3);
+  if (!tokens.length) return [];
   const pool = gkmHelperVisiblePool();
   const scored = pool.map(it => {
     const txt = gkmHelperNormalizeText([
       displayTitle(it), titleOf(it), it.title_en, it.original_title, it.name, it.overview,
       Array.isArray(it.genres) ? it.genres.join(" ") : it.genres
     ].join(" "));
-    let score = 0;
-    tokens.forEach(t => { if (txt.includes(t)) score += t.length >= 4 ? 3 : 1; });
+    let matchScore = 0;
+    tokens.forEach(t => { if (txt.includes(t)) matchScore += t.length >= 4 ? 3 : 1; });
+    if (matchScore <= 0) return { it, score: 0 };
+    let score = matchScore * 10;
     score += Math.min(10, Math.log10((votesOf(it) || 0) + 1));
     score += Number(ratingOf(it) || 0) / 2;
     return { it, score };
@@ -1621,9 +1626,17 @@ function gkmHelperPickByWords(words, limit = 8) {
   return scored.slice(0, limit);
 }
 
+function gkmHelperIsGreeting(q) {
+  return /^(привет|прив|здарова|здорово|ку|хай|hello|hi|добрый день|добрый вечер|доброе утро)$/i.test(String(q || "").trim());
+}
+
 function gkmHelperAnswer(raw) {
   const q = gkmHelperNormalizeText(raw);
   if (!q) return "Напиши, что хочется посмотреть: жанр, настроение или пример тайтла.";
+
+  if (gkmHelperIsGreeting(q)) {
+    return "Привет! Я помогу подобрать фильм, сериал, аниме или мультфильм. Напиши, что хочется: например «мрачное аниме», «фильм на вечер», «как Наруто», «топ студий» или «порядок просмотра Блич».";
+  }
 
   if (q.includes("топ студ")) {
     try { renderAnimeStudiosTop(); } catch {}
@@ -1689,4 +1702,4 @@ function setupGkmLocalHelper() {
 }
 
 gkmHelperReady(setupGkmLocalHelper);
-console.log("GKM:", window.GKM_V138_LOCAL_HELPER_VERSION);
+console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
