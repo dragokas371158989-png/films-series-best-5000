@@ -1,4 +1,5 @@
-const GKM_APP_CLEAN_VERSION = "v135-studio-anime-list-click-2026-06-24";
+const GKM_APP_CLEAN_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
+window.GKM_V136_SAFE_ANIME_TITLE_FIX_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
 window.GKM_V116_ANIME_TOP_100_VERSION = "v116-anime-top-100-rating-2026-06-23";
 window.GKM_V117_ANIME_TOP_100_PEOPLE_VERSION = "v117-anime-top-100-people-rating-2026-06-23";
@@ -89,6 +90,63 @@ function titleOf(item) {
   return String(item && (item.ru || item.title_ru || item.name || item.title || item.en || item.original_title || item.original_name) || "Без названия");
 }
 
+
+
+
+// V136: exact titles for franchise movies/seasons must win before broad aliases.
+const ANIME_EXACT_TITLE_RULES = [
+  {re:/boruto.*naruto.*movie|boruto.*movie|боруто/iu, ru:"Боруто: Наруто. Фильм"},
+  {re:/road\s*to\s*ninja|путь\s*ниндзя/iu, ru:"Наруто: Ураганные хроники — Путь ниндзя"},
+  {re:/blood\s*prison|кровав/iu, ru:"Наруто: Ураганные хроники — Кровавая тюрьма"},
+  {re:/lost\s*tower|потерянн.*баш/iu, ru:"Наруто: Ураганные хроники — Потерянная башня"},
+  {re:/will\s*of\s*fire|вол[ия]\s*огн/iu, ru:"Наруто: Ураганные хроники — Наследники воли огня"},
+  {re:/\bbonds\b|\bсвязи\b|\bузы\b/iu, ru:"Наруто: Ураганные хроники — Узы"},
+  {re:/the\s*last.*naruto|последн.*наруто/iu, ru:"Последний: Наруто. Фильм"},
+  {re:/naruto.*shippuuden.*movie|naruto.*shippuden.*movie|shippuden.*movie|疾風伝.*劇場版/iu, ru:"Наруто: Ураганные хроники — Фильм"},
+  {re:/ninja\s*clash|land\s*of\s*snow|стране\s*снег/iu, ru:"Наруто: Битва ниндзя в Стране Снега"},
+  {re:/legend\s*of\s*the\s*stone|stone\s*of\s*gelel|камн.*гелел/iu, ru:"Наруто: Легенда о камне Гелела"},
+  {re:/crescent\s*moon|полумесяц/iu, ru:"Наруто: Стражи Королевства Полумесяца"},
+  {re:/memories\s*of\s*nobody/iu, ru:"Блич: Воспоминания ни о ком"},
+  {re:/diamonddust|diamond\s*dust|алмазн/iu, ru:"Блич: Восстание Алмазной Пыли"},
+  {re:/fade\s*to\s*black|уходя\s*в\s*темнот/iu, ru:"Блич: Уходя в темноту"},
+  {re:/hell\s*verse|адск/iu, ru:"Блич: Адская глава"},
+  {re:/sennen\s*kessen|thousand\s*year\s*blood|тысячелетн/iu, ru:"Блич: Тысячелетняя кровавая война"},
+  {re:/sacred\s*star\s*of\s*milos|milos|милос/iu, ru:"Стальной алхимик: Священная звезда Милоса"},
+  {re:/conqueror\s*of\s*shamballa|shamballa|шамбал/iu, ru:"Стальной алхимик: Завоеватель Шамбалы"},
+  {re:/brotherhood|братств/iu, ru:"Стальной алхимик: Братство"},
+  {re:/final\s*transmutation|финальн.*трансмутац/iu, ru:"Стальной алхимик: Финальная трансмутация"},
+  {re:/revenge\s*of\s*scar|месть\s*шрама/iu, ru:"Стальной алхимик: Месть Шрама"},
+  {re:/strong\s*world/iu, ru:"Ван-Пис: Сильный мир"},
+  {re:/film\s*z|one\s*piece\s*film\s*z/iu, ru:"Ван-Пис: Фильм Z"},
+  {re:/film\s*gold|one\s*piece\s*film\s*gold/iu, ru:"Ван-Пис: Золото"},
+  {re:/stampede/iu, ru:"Ван-Пис: Бегство"},
+  {re:/film\s*red|one\s*piece\s*film\s*red/iu, ru:"Ван-Пис: Красный"},
+];
+const BROAD_FRANCHISE_KEYS = new Set(["naruto","bleach","one piece","fullmetal alchemist","dragon ball","gintama","hunter x hunter"]);
+function rawAnimeTitleText(item) {
+  return [item && item.ru, item && item.title_ru, item && item.__manualTopTitle, item && item.en, item && item.title, item && item.name, item && item.original_title, item && item.original_name].filter(Boolean).join(" ");
+}
+function specificAnimeTitle(item) {
+  const raw = rawAnimeTitleText(item);
+  for (const rule of ANIME_EXACT_TITLE_RULES) {
+    if (rule.re.test(raw)) return rule.ru;
+  }
+  return "";
+}
+function isBroadFranchiseOnlyKey(key) {
+  key = norm(key);
+  return BROAD_FRANCHISE_KEYS.has(key);
+}
+function hasExtraFranchiseTitleWords(item, key) {
+  const raw = norm(rawAnimeTitleText(item));
+  key = norm(key);
+  if (!raw || !key || raw === key) return false;
+  if (key === "naruto" && (raw.includes("boruto") || raw.includes("movie") || raw.includes("gekijouban") || raw.includes("shippuden") || raw.includes("shippuuden") || raw.includes("疾風伝") || raw.includes("road to ninja") || raw.includes("blood prison") || raw.includes("last"))) return true;
+  if (key === "bleach" && (raw.includes("movie") || raw.includes("memories") || raw.includes("diamonddust") || raw.includes("fade to black") || raw.includes("hell verse") || raw.includes("sennen") || raw.includes("thousand year"))) return true;
+  if (key === "one piece" && (raw.includes("movie") || raw.includes("film") || raw.includes("strong world") || raw.includes("stampede") || raw.includes("red") || raw.includes("gold"))) return true;
+  if (key === "fullmetal alchemist" && (raw.includes("brotherhood") || raw.includes("shamballa") || raw.includes("milos") || raw.includes("scar") || raw.includes("transmutation"))) return true;
+  return false;
+}
 
 const ANIME_RU_MAP = new Map(Object.entries({
   "attack on titan":"Атака титанов",
@@ -327,8 +385,15 @@ function animeKey(item) {
 
 function displayTitle(item) {
   if (getType(item) === "Аниме") {
+    const exact = specificAnimeTitle(item);
+    if (exact) return exact;
     const key = animeKey(item);
-    if (ANIME_RU_MAP.has(key)) return ANIME_RU_MAP.get(key);
+    if (ANIME_RU_MAP.has(key)) {
+      if (isBroadFranchiseOnlyKey(key) && hasExtraFranchiseTitleWords(item, key)) {
+        return titleOf(item);
+      }
+      return ANIME_RU_MAP.get(key);
+    }
   }
   const base = titleOf(item);
   return base;
@@ -336,7 +401,8 @@ function displayTitle(item) {
 
 function displayOverview(item) {
   if (getType(item) === "Аниме") {
-    const candidates = [item && item.__manualTopTitle, item && item.ru, item && item.title_ru, displayTitle(item), animeKey(item)].filter(Boolean).map(norm);
+    const exactTitle = specificAnimeTitle(item);
+    const candidates = [item && item.__manualTopTitle, item && item.ru, item && item.title_ru, exactTitle, displayTitle(item), animeKey(item)].filter(Boolean).map(norm);
     for (const k of candidates) {
       if (ANIME_RU_OVERVIEW.has(k)) return ANIME_RU_OVERVIEW.get(k);
     }
