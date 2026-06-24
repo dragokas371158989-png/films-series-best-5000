@@ -1,5 +1,6 @@
-const GKM_APP_CLEAN_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
+const GKM_APP_CLEAN_VERSION = "v137-safe-all-franchise-title-fix-2026-06-24";
 window.GKM_V136_SAFE_ANIME_TITLE_FIX_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
+window.GKM_V137_SAFE_ALL_FRANCHISE_TITLE_FIX_VERSION = "v137-safe-all-franchise-title-fix-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
 window.GKM_V116_ANIME_TOP_100_VERSION = "v116-anime-top-100-rating-2026-06-23";
 window.GKM_V117_ANIME_TOP_100_PEOPLE_VERSION = "v117-anime-top-100-people-rating-2026-06-23";
@@ -121,8 +122,20 @@ const ANIME_EXACT_TITLE_RULES = [
   {re:/film\s*gold|one\s*piece\s*film\s*gold/iu, ru:"Ван-Пис: Золото"},
   {re:/stampede/iu, ru:"Ван-Пис: Бегство"},
   {re:/film\s*red|one\s*piece\s*film\s*red/iu, ru:"Ван-Пис: Красный"},
+
+  {re:/tokyo\s*ghoul\s*:?re\s*2|tokyo\s*ghoul.*re.*2|東京喰種.*re.*2/iu, ru:"Токийский гуль:re 2"},
+  {re:/tokyo\s*ghoul\s*:?re|東京喰種.*re/iu, ru:"Токийский гуль:re"},
+  {re:/tokyo\s*ghoul\s*(?:√|v)\s*a|tokyo\s*ghoul\s*root\s*a|東京喰種.*√a/iu, ru:"Токийский гуль √A"},
+  {re:/tokyo\s*ghoul|東京喰種|токийск.*гул/iu, ru:"Токийский гуль"},
+  {re:/dragon\s*ball\s*super|драконий\s*жемчуг\s*супер/iu, ru:"Драконий жемчуг Супер"},
+  {re:/dragon\s*ball\s*z|doragon\s*bo?ru\s*zetto|драконий\s*жемчуг\s*зет/iu, ru:"Драконий жемчуг Зет"},
+  {re:/gintama.*semi|gintama.*final|gintama.*movie|гинтама.*полуфин|гинтама.*финал/iu, ru:"Гинтама — отдельная часть"},
+  {re:/jojo.*stardust|stardust\s*crusaders/iu, ru:"Невероятные приключения ДжоДжо: Рыцари звёздной пыли"},
+  {re:/fate\/?zero|судьба.*начало/iu, ru:"Судьба: Начало"},
+  {re:/fate\/?stay|fate.*night|судьба.*ноч/iu, ru:"Судьба: Ночь схватки"},
+  {re:/detective\s*conan.*movie|meitantei\s*conan.*movie|конан.*фильм/iu, ru:"Детектив Конан — фильм"},
 ];
-const BROAD_FRANCHISE_KEYS = new Set(["naruto","bleach","one piece","fullmetal alchemist","dragon ball","gintama","hunter x hunter"]);
+const BROAD_FRANCHISE_KEYS = new Set(["naruto","bleach","one piece","fullmetal alchemist","tokyo ghoul","dragon ball","gintama","hunter x hunter","my hero academia","one punch man","jojo","fate","detective conan","sword art online"]);
 function rawAnimeTitleText(item) {
   return [item && item.ru, item && item.title_ru, item && item.__manualTopTitle, item && item.en, item && item.title, item && item.name, item && item.original_title, item && item.original_name].filter(Boolean).join(" ");
 }
@@ -145,6 +158,16 @@ function hasExtraFranchiseTitleWords(item, key) {
   if (key === "bleach" && (raw.includes("movie") || raw.includes("memories") || raw.includes("diamonddust") || raw.includes("fade to black") || raw.includes("hell verse") || raw.includes("sennen") || raw.includes("thousand year"))) return true;
   if (key === "one piece" && (raw.includes("movie") || raw.includes("film") || raw.includes("strong world") || raw.includes("stampede") || raw.includes("red") || raw.includes("gold"))) return true;
   if (key === "fullmetal alchemist" && (raw.includes("brotherhood") || raw.includes("shamballa") || raw.includes("milos") || raw.includes("scar") || raw.includes("transmutation"))) return true;
+  if (key === "tokyo ghoul" && (raw.includes("re") || raw.includes("root") || raw.includes("√") || raw.includes("ova") || raw.includes("jack") || raw.includes("pinto"))) return true;
+  if (key === "dragon ball" && (raw.includes("z") || raw.includes("super") || raw.includes("gt") || raw.includes("movie") || raw.includes("kai"))) return true;
+  if (key === "gintama" && (raw.includes("season") || raw.includes("movie") || raw.includes("semi") || raw.includes("final") || raw.includes("porori") || raw.includes("enchousen"))) return true;
+  if (key === "hunter x hunter" && (raw.includes("1999") || raw.includes("movie") || raw.includes("phantom") || raw.includes("last mission"))) return true;
+  if (key === "my hero academia" && (raw.includes("season") || raw.includes("movie") || raw.includes("heroes") || raw.includes("academia 2") || raw.includes("academia 3") || raw.includes("academia 4") || raw.includes("academia 5") || raw.includes("academia 6") || raw.includes("academia 7"))) return true;
+  if (key === "one punch man" && (raw.includes("season") || raw.includes("ova") || raw.includes("special"))) return true;
+  if (key === "jojo" && (raw.includes("stardust") || raw.includes("diamond") || raw.includes("golden") || raw.includes("stone") || raw.includes("crusaders"))) return true;
+  if (key === "fate" && (raw.includes("zero") || raw.includes("stay") || raw.includes("night") || raw.includes("grand") || raw.includes("apocrypha"))) return true;
+  if (key === "detective conan" && (raw.includes("movie") || raw.includes("film") || raw.includes("case closed"))) return true;
+  if (key === "sword art online" && (raw.includes("ii") || raw.includes("alicization") || raw.includes("ordinal") || raw.includes("progressive") || raw.includes("movie"))) return true;
   return false;
 }
 
@@ -167,6 +190,10 @@ const ANIME_RU_MAP = new Map(Object.entries({
   "kimi no na wa":"Твоё имя",
   "jujutsu kaisen":"Магическая битва",
   "tokyo ghoul":"Токийский гуль",
+  "tokyo ghoul root a":"Токийский гуль √A",
+  "tokyo ghoul va":"Токийский гуль √A",
+  "tokyo ghoul re":"Токийский гуль:re",
+  "tokyo ghoul re 2":"Токийский гуль:re 2",
   "hunter x hunter":"Охотник х Охотник",
   "a silent voice":"Форма голоса",
   "koe no katachi":"Форма голоса",
