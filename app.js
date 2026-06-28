@@ -36,6 +36,8 @@ window.GKM_V159_COMPACT_TRASH_BUTTON_VERSION = "v159-compact-trash-button-2026-0
 console.log("GKM: v159-compact-trash-button-2026-06-24");
 window.GKM_V160_CONTROLS_LAYOUT_FIX_VERSION = "v160-controls-trash-button-layout-fix-2026-06-24";
 console.log("GKM: v160-controls-trash-button-layout-fix-2026-06-24");
+window.GKM_V161_DECADE_TOPS_VERSION = "v161-decade-and-year-tops-2026-06-24";
+console.log("GKM: v161-decade-and-year-tops-2026-06-24");
 
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
@@ -935,6 +937,13 @@ function makeSearchWorker() {
       if(tab==="new_released")return y===cy && v>=500;
       // Популярное текущего года.
       if(tab==="new_popular")return y===cy && v>=1000;
+      // V161: отдельные топы по текущему году и эпохам.
+      // Они идут через общую умную сортировку: голоса главный вес, рейтинг второй.
+      if(tab==="top_current_year")return y===cy;
+      if(tab==="top_2020s")return y>=2020 && y<=2029;
+      if(tab==="top_2010s")return y>=2010 && y<=2019;
+      if(tab==="top_2000s")return y>=2000 && y<=2009;
+      if(tab==="top_1990s")return y>=1990 && y<=1999;
       if(tab==="popular")return v>=1000;
       return true;
     }
@@ -1199,7 +1208,12 @@ function makeSearchWorker() {
       new: `🆕 Новинки ${new Date().getFullYear()}+ · Страница ${currentPage} из ${currentPages}`,
       new_soon: `⏳ Скоро выйдет · Страница ${currentPage} из ${currentPages}`,
       new_released: `✅ Уже вышло ${new Date().getFullYear()} · Страница ${currentPage} из ${currentPages}`,
-      new_popular: `🔥 Популярное ${new Date().getFullYear()} · Страница ${currentPage} из ${currentPages}`
+      new_popular: `🔥 Популярное ${new Date().getFullYear()} · Страница ${currentPage} из ${currentPages}`,
+      top_current_year: `🏅 Топ ${new Date().getFullYear()} · Страница ${currentPage} из ${currentPages}`,
+      top_2020s: `🏅 Топ 2020-х · Страница ${currentPage} из ${currentPages}`,
+      top_2010s: `🏅 Топ 2010-х · Страница ${currentPage} из ${currentPages}`,
+      top_2000s: `🏅 Топ 2000-х · Страница ${currentPage} из ${currentPages}`,
+      top_1990s: `🏅 Топ 90-х · Страница ${currentPage} из ${currentPages}`
     };
     const listLabel = tabLabels[currentTab] || `Найдено: ${currentCount} · Страница ${currentPage} из ${currentPages}`;
     renderList(msg.items || [], listLabel);
