@@ -1,4 +1,4 @@
-name: Apply GKM V162 Franchise Pages
+name: Apply GKM V162 Franchise Pages Fixed
 
 on:
   workflow_dispatch:
@@ -29,6 +29,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Apply GKM V162 franchise pages"
+            git commit -m "Apply GKM V162 franchise pages fixed"
             git push
           fi
