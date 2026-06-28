@@ -34,6 +34,9 @@ window.GKM_V157_CLEAN_TRASH_TOGGLE_VERSION = "v157-clean-trash-toggle-2026-06-24
 window.GKM_V158_NEW_RELEASE_GROUPS_VERSION = "v158-new-release-groups-2026-06-24";
 window.GKM_V159_COMPACT_TRASH_BUTTON_VERSION = "v159-compact-trash-button-2026-06-24";
 console.log("GKM: v159-compact-trash-button-2026-06-24");
+window.GKM_V160_CONTROLS_LAYOUT_FIX_VERSION = "v160-controls-trash-button-layout-fix-2026-06-24";
+console.log("GKM: v160-controls-trash-button-layout-fix-2026-06-24");
+
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
