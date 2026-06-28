@@ -1,7 +1,5 @@
-const GKM_APP_CLEAN_VERSION = "v147-infer-anime-studio-safe-fix-2026-06-24";
+const GKM_APP_CLEAN_VERSION = "v144-kinopoisk-only-auto-catalog-2026-06-24";
 window.GKM_V144_KINOPOISK_AUTO_CATALOG_VERSION = "v144-kinopoisk-only-auto-catalog-2026-06-24";
-window.GKM_V146_VOTES_9000000_SORT_VERSION = "v146-votes-9000000-sort-2026-06-24";
-window.GKM_V147_INFER_ANIME_STUDIO_FIX_VERSION = "v147-infer-anime-studio-safe-fix-2026-06-24";
 window.GKM_V136_SAFE_ANIME_TITLE_FIX_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
 window.GKM_V137_SAFE_ALL_FRANCHISE_TITLE_FIX_VERSION = "v137-safe-all-franchise-title-fix-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
@@ -21,6 +19,9 @@ window.GKM_V131_STATIC_ANIME_TOP_FAST_VERSION = "v131-static-anime-top-fast-no-w
 window.GKM_V132_ANIME_STUDIOS_TOP_VERSION = "v132-anime-studios-required-top-2026-06-24";
 window.GKM_V134_STUDIO_TOP_WIDE_RU_VERSION = "v134-studio-top-wide-ru-titles-2026-06-24";
 window.GKM_V135_STUDIO_ANIME_LIST_VERSION = "v135-studio-anime-list-click-2026-06-24";
+window.GKM_V146_VOTES_9000000_SORT_VERSION = "v146-votes-9000000-sort-2026-06-24";
+window.GKM_V147_INFER_ANIME_STUDIO_FIX_VERSION = "v147-infer-anime-studio-safe-fix-2026-06-24";
+window.GKM_V148_ANTITRASH_GENRE_TOP_VERSION = "v148-antitrash-genre-top-2026-06-24";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -68,6 +69,76 @@ function escapeAttr(value) {
 
 function norm(value) {
   return String(value || "").toLowerCase().replaceAll("ё", "е").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim();
+}
+
+
+function isAnimeItem(item) {
+  const text = norm([
+    item && item.type,
+    item && item.category,
+    item && item.ru,
+    item && item.en,
+    item && item.title,
+    item && item.name,
+    item && item.source
+  ].filter(Boolean).join(" "));
+  return text.includes("аниме") || text.includes("anime") || text.includes("jikan") || text.includes("myanimelist");
+}
+
+function inferAnimeStudio(item) {
+  if (!item || !isAnimeItem(item)) return "";
+  const raw = norm([
+    item.ru,
+    item.en,
+    item.title,
+    item.name,
+    item.original_title,
+    item.original_name,
+    item.__manualTopTitle
+  ].filter(Boolean).join(" "));
+  const rules = [
+    [/attack on titan|shingeki|атака титанов|jujutsu|магическая битва|chainsaw|человек бензопила|vinland|сага о винланде/i, "MAPPA"],
+    [/death note|one punch|ванпанч|hunter|охотник|паразит|parasyte|frieren|фрирен/i, "Madhouse"],
+    [/sword art|семь смертных|seven deadly|erased|город в котором меня нет|kaguya|госпожа кагуя/i, "A-1 Pictures"],
+    [/naruto|boruto|bleach|блич|tokyo ghoul|токийский гуль|black clover|черный клевер|чёрный клевер/i, "Pierrot"],
+    [/fullmetal|стальной алхимик|my hero|моя геройская|mob psycho|моб психо|boku no hero/i, "Bones"],
+    [/demon slayer|истребитель демонов|fate|судьба/i, "ufotable"],
+    [/one piece|ван пис|dragon ball|драконий жемчуг|sailor moon|сейлор мун/i, "Toei Animation"],
+    [/code geass|код гиас|cowboy bebop|ковбой бибоп|gintama|гинтама/i, "Sunrise"],
+    [/steins|врата штейна|re zero|rezero|re:zero|akame|акаме/i, "White Fox"],
+    [/silent voice|форма голоса|violet|вайолет|clannad|кланнад|kobayashi|dragon maid/i, "Kyoto Animation"],
+    [/evangelion|евангелион/i, "Gainax / Khara"],
+    [/ghibli|spirited away|мой сосед тоторо|унесенные призраками|принцесса мононоке/i, "Studio Ghibli"],
+  ];
+  for (const [re, studio] of rules) {
+    if (re.test(raw)) return studio;
+  }
+  return "";
+}
+
+function votes9000000Score(item) {
+  const v = Number(getVotes(item) || item?.votes || 0);
+  const r = Number(getRating(item) || item?.rating || 0);
+  const y = Number(getYear(item) || item?.year || 0);
+  if (!v && !r) return 0;
+  let score = Math.min(v, 9000000) / 9000000 * 1000;
+  score += r * 12;
+  if (v < 10) score -= 1000;
+  else if (v < 100) score -= 600;
+  else if (v < 1000) score -= 250;
+  else if (v < 10000) score -= 90;
+  if (!hasPoster(item)) score -= 100;
+  if (y >= new Date().getFullYear() && v < 500) score -= 80;
+  return score;
+}
+
+function isLowTrustTopItem(item) {
+  const v = Number(getVotes(item) || item?.votes || 0);
+  const r = Number(getRating(item) || item?.rating || 0);
+  if (v < 10) return true;
+  if (r >= 9.5 && v < 1000) return true;
+  if (!hasPoster(item) && v < 500) return true;
+  return false;
 }
 
 function setStatus(text) {
@@ -476,40 +547,6 @@ function votesOf(item) {
 
 window.GKM_V140_HELPER_VOTESOF_FIX_VERSION = "v140-helper-votesof-fix-2026-06-24";
 
-function votes9000000Score(item) {
-  const v = Number(votesOf(item) || item.votes || 0);
-  const r = Number(ratingOf(item) || item.rating || 0);
-  if (!Number.isFinite(v) || v <= 0) return -999999;
-
-  const votesPart = Math.min(v, 9000000) / 9000000;
-  const ratingPart = Math.max(0, Math.min(r, 10)) / 10;
-  let score = votesPart * 0.90 + ratingPart * 0.10;
-
-  if (v < 10) score -= 10;
-  else if (v < 100) score -= 6;
-  else if (v < 1000) score -= 3;
-  else if (v < 10000) score -= 1.2;
-
-  if (!hasPoster(item) && v < 50000) score -= 2;
-  return score;
-}
-
-function compareByVotes9000000(a, b) {
-  const sb = votes9000000Score(b);
-  const sa = votes9000000Score(a);
-  if (sb !== sa) return sb - sa;
-
-  const vb = Number(votesOf(b) || b.votes || 0);
-  const va = Number(votesOf(a) || a.votes || 0);
-  if (vb !== va) return vb - va;
-
-  const rb = Number(ratingOf(b) || b.rating || 0);
-  const ra = Number(ratingOf(a) || a.rating || 0);
-  if (rb !== ra) return rb - ra;
-
-  return Number(getYear(b) || 0) - Number(getYear(a) || 0);
-}
-
 function formatVotes(value) {
   const votes = Number(value || 0);
   if (!Number.isFinite(votes) || votes <= 0) return "0";
@@ -812,8 +849,6 @@ function makeSearchWorker() {
     function type(x){return String((x&&x.type)||"");}
     function rating(x){return Number((x&&x.rating)||0);}
     function votes(x){return Number((x&&x.votes)||0);}
-    function votes9000000Score(x){const v=votes(x);const r=rating(x);if(!Number.isFinite(v)||v<=0)return -999999;const votesPart=Math.min(v,9000000)/9000000;const ratingPart=Math.max(0,Math.min(r,10))/10;let score=votesPart*0.90+ratingPart*0.10;if(v<10)score-=10;else if(v<100)score-=6;else if(v<1000)score-=3;else if(v<10000)score-=1.2;if(!poster(x)&&v<50000)score-=2;return score;}
-    function cmpVotes9000000Rows(a,b){const sa=votes9000000Score(a.item);const sb=votes9000000Score(b.item);if(sb!==sa)return sb-sa;const vb=votes(b.item);const va=votes(a.item);if(vb!==va)return vb-va;const rb=rating(b.item);const ra=rating(a.item);if(rb!==ra)return rb-ra;return Number(year(b.item)||0)-Number(year(a.item)||0);}
     function genres(x){return Array.isArray(x&&x.genres)?x.genres.map(String):[];}
     function poster(x){const raw=String((x&&x.poster)||"").trim();const low=raw.toLowerCase();return raw&&low!=="null"&&low!=="undefined"&&!low.includes("dummyimage")&&!low.includes("placeholder")&&!low.includes("no-poster")?1:0;}
     function isAnimeTopCandidate(x){const t=type(x);if(t!=="Аниме")return false;const v=votes(x);const r=rating(x);const y=Number(year(x)||0);if(v<100000||r<7.4)return false;if(y&&y>2024)return false;const h=hay(x);const banned=[" fan letter","fanletter"," ova"," ova ","special"," recap","summary","pilot","preview","trailer","teaser","music video","soundtrack","concert","stage play","live action","спешл","ова","рекап","краткое содержание","фан письмо","превью","трейлер","мюзикл"];return !banned.some(b=>h.includes(b));}
@@ -975,7 +1010,9 @@ function makeSearchWorker() {
       self.__animeTopThreshold="manual-user-list-sorted-by-votes";
       out.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));
     }
-    function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(sort==="rating")rows.sort((a,b)=>pr(a,b)||cmpVotes9000000Rows(a,b));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQuery)rows.sort((a,b)=>pr(a,b)||b.score-a.score||cmpVotes9000000Rows(a,b));else rows.sort((a,b)=>pr(a,b)||cmpVotes9000000Rows(a,b));}
+    function lowTrust(item){const v=votes(item);const r=rating(item);if(v<10)return true;if(r>=9.5&&v<1000)return true;if(!poster(item)&&v<500)return true;return false;}
+    function votes9000000Score(item){const v=votes(item);const r=rating(item);const y=Number(year(item)||0);let score=Math.min(v,9000000)/9000000*1000+r*12;if(v<10)score-=1000;else if(v<100)score-=600;else if(v<1000)score-=250;else if(v<10000)score-=90;if(!poster(item))score-=100;const cy=new Date().getFullYear();if(y>=cy&&v<500)score-=80;return score;}
+    function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(sort==="rating")rows.sort((a,b)=>pr(a,b)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQuery)rows.sort((a,b)=>pr(a,b)||b.score-a.score);else{rows=rows.filter(x=>!lowTrust(x.item));rows.sort((a,b)=>pr(a,b)||(votes9000000Score(b.item)-votes9000000Score(a.item))||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));}}
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
     async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=131";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
@@ -1301,90 +1338,6 @@ function cleanFactValue(value) {
   return text;
 }
 
-
-// V147: safe helpers. Without these functions filters/details could crash on Films/Series/Cartoons.
-function isAnimeItem(item) {
-  const type = norm(getType(item));
-  const text = norm([
-    item && item.type,
-    item && item.category,
-    item && item.ru,
-    item && item.title_ru,
-    item && item.name,
-    item && item.title,
-    item && item.en,
-    ...(Array.isArray(item && item.genres) ? item.genres : [])
-  ].filter(Boolean).join(" "));
-
-  return type.includes("аниме") || text.includes("аниме") || text.includes("anime");
-}
-
-function inferAnimeStudio(item) {
-  if (!isAnimeItem(item)) return "";
-
-  const raw = norm([
-    item && item.ru,
-    item && item.title_ru,
-    item && item.__manualTopTitle,
-    item && item.en,
-    item && item.title,
-    item && item.name,
-    item && item.original_title,
-    item && item.original_name
-  ].filter(Boolean).join(" "));
-
-  const rules = [
-    [/атака титанов|shingeki|attack on titan/, "Wit Studio / MAPPA"],
-    [/тетрадь смерти|death note/, "Madhouse"],
-    [/ванпанчмен|one punch/, "Madhouse / J.C.Staff"],
-    [/истребитель демонов|kimetsu|demon slayer/, "ufotable"],
-    [/стальной алхимик|fullmetal/, "Bones"],
-    [/моя геройская академия|my hero academia|boku no hero/, "Bones"],
-    [/наруто|naruto|boruto/, "Pierrot"],
-    [/магическая битва|jujutsu/, "MAPPA"],
-    [/токийский гуль|tokyo ghoul/, "Pierrot"],
-    [/охотник х охотник|hunter x hunter/, "Madhouse"],
-    [/форма голоса|silent voice|koe no katachi/, "Kyoto Animation"],
-    [/сага о винланде|vinland/, "Wit Studio / MAPPA"],
-    [/фрирен|frieren|sousou/, "Madhouse"],
-    [/врата штейна|steins gate/, "White Fox"],
-    [/код гиас|code geass/, "Sunrise"],
-    [/ван пис|ван-пис|one piece/, "Toei Animation"],
-    [/блич|bleach/, "Pierrot"],
-    [/драконий жемчуг|dragon ball/, "Toei Animation"],
-    [/семь смертных грехов|nanatsu|seven deadly sins/, "A-1 Pictures / Studio Deen"],
-    [/ковбой бибоп|cowboy bebop/, "Sunrise"],
-    [/монстр|monster/, "Madhouse"],
-    [/берсерк|berserk/, "OLM"],
-    [/гинтама|gintama/, "Sunrise / Bandai Namco Pictures"],
-    [/доктор стоун|dr stone/, "TMS Entertainment"],
-    [/re:?zero|ре зеро|жизнь с нуля/, "White Fox"],
-    [/86|eighty six|восемьдесят шесть/, "A-1 Pictures"],
-    [/дороро|dororo/, "MAPPA / Tezuka Productions"],
-    [/черный клевер|чёрный клевер|black clover/, "Pierrot"],
-    [/человек бензопила|человек-бензопила|chainsaw/, "MAPPA"],
-    [/семья шпиона|spy family|spy x family/, "Wit Studio / CloverWorks"],
-    [/волейбол|haikyuu|haikyu/, "Production I.G"],
-    [/моб психо|mob psycho/, "Bones"],
-    [/вайолет эвергарден|violet evergarden/, "Kyoto Animation"],
-    [/евангелион|evangelion/, "Gainax / Tatsunoko"],
-    [/самурай чамплу|samurai champloo/, "Manglobe"],
-    [/джоджо|jojo/, "David Production"],
-    [/реинкарнация безработного|mushoku tensei/, "Studio Bind"],
-    [/госпожа кагуя|kaguya/, "A-1 Pictures"],
-    [/монолог фармацевта|kusuriya|apothecary/, "Toho Animation Studio / OLM"],
-    [/паразит|parasyte/, "Madhouse"],
-    [/триган|trigun/, "Madhouse"],
-    [/хеллсинг|hellsing/, "Satelight / Madhouse / Graphinica"]
-  ];
-
-  for (const [re, studio] of rules) {
-    if (re.test(raw)) return studio;
-  }
-
-  return "";
-}
-
 function detailFactValue(item, field) {
   const key = getType(item) === "Аниме" ? animeFactsKey(item) : "";
   const facts = key ? ANIME_DETAIL_FACTS.get(key) : null;
@@ -1537,7 +1490,42 @@ function scheduleSearch(delay = 160) {
   searchTimer = setTimeout(() => runSearch(1), delay);
 }
 
+
+function installGenreTopButtons() {
+  if (document.querySelector(".gkm-genre-top-btn")) return;
+  const tabs = document.querySelector(".tabs");
+  if (!tabs) return;
+  const genres = ["Боевик", "Комедия", "Драма", "Криминал", "Фантастика", "Ужасы"];
+  genres.forEach(genre => {
+    const btn = document.createElement("button");
+    btn.className = "tab gkm-genre-top-btn";
+    btn.type = "button";
+    btn.dataset.genreTop = genre;
+    btn.textContent = "Топ " + genre.toLowerCase();
+    tabs.appendChild(btn);
+  });
+}
+
+function applyGenreTop(genre) {
+  currentTab = "all";
+  setActiveTab("all");
+  const q = $("searchInput");
+  const type = $("typeFilter");
+  const gf = $("genreFilter");
+  const sort = $("sortFilter");
+  const rating = $("ratingFilter");
+  if (q) q.value = "";
+  if (type) type.value = "";
+  if (gf) gf.value = genre;
+  if (sort) sort.value = "smart";
+  if (rating) rating.value = "0";
+  runSearch(1);
+}
+
 function bindEvents() {
+  document.querySelectorAll(".gkm-genre-top-btn[data-genre-top]").forEach(btn => {
+    btn.addEventListener("click", () => applyGenreTop(btn.dataset.genreTop || ""));
+  });
   $("searchInput")?.addEventListener("input", () => scheduleSearch(220));
   ["typeFilter", "genreFilter", "yearFilter", "ratingFilter", "sortFilter"].forEach(id => {
     $(id)?.addEventListener("change", () => scheduleSearch(60));
@@ -1641,6 +1629,7 @@ async function boot() {
     const withPoster = Array.isArray(data) ? data.filter(hasPoster).length : 0;
     return { total, withPoster, withoutPoster: total - withPoster };
   };
+  installGenreTopButtons();
   bindEvents();
   try {
     await initMeta();
