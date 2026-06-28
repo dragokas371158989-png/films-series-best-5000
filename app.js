@@ -31,7 +31,8 @@ window.GKM_V154_FORCE_SEARCH_SECTIONS_VERSION = "v154-force-search-for-sections-
 window.GKM_V155_SMART_TOP_REAL_VOTES_VERSION = "v155-smart-top-real-votes-fix-2026-06-24";
 window.GKM_V156_NEW_2026_ONLY_VERSION = "v156-new-current-year-only-2026-06-24";
 window.GKM_V157_CLEAN_TRASH_TOGGLE_VERSION = "v157-clean-trash-toggle-2026-06-24";
-console.log("GKM: v157-clean-trash-toggle-2026-06-24");
+window.GKM_V158_NEW_RELEASE_GROUPS_VERSION = "v158-new-release-groups-2026-06-24";
+console.log("GKM: v158-new-release-groups-2026-06-24");
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -909,7 +910,30 @@ function makeSearchWorker() {
     function genres(x){return Array.isArray(x&&x.genres)?x.genres.map(String):[];}
     function poster(x){const raw=String((x&&x.poster)||"").trim();const low=raw.toLowerCase();return raw&&low!=="null"&&low!=="undefined"&&!low.includes("dummyimage")&&!low.includes("placeholder")&&!low.includes("no-poster")?1:0;}
     function isAnimeTopCandidate(x){const t=type(x);if(t!=="Аниме")return false;const v=votes(x);const r=rating(x);const y=Number(year(x)||0);if(v<100000||r<7.4)return false;if(y&&y>2024)return false;const h=hay(x);const banned=[" fan letter","fanletter"," ova"," ova ","special"," recap","summary","pilot","preview","trailer","teaser","music video","soundtrack","concert","stage play","live action","спешл","ова","рекап","краткое содержание","фан письмо","превью","трейлер","мюзикл"];return !banned.some(b=>h.includes(b));}
-    function tabPass(x,tab){const t=type(x);if(!tab||tab==="all")return true;if(tab==="movies")return t==="Фильм";if(tab==="series")return t==="Сериал";if(tab==="anime")return t==="Аниме";if(tab==="cartoons")return t==="Мультфильм";if(tab==="top")return rating(x)>=7&&votes(x)>=300;if(tab==="anime_top")return t==="Аниме";if(tab==="new"){const cy=new Date().getFullYear();return Number(year(x)||0)>=cy;}if(tab==="popular")return votes(x)>=1000;return true;}
+    function tabPass(x,tab){
+      const t=type(x);
+      const y=Number(year(x)||0);
+      const v=votes(x);
+      const cy=new Date().getFullYear();
+      if(!tab||tab==="all")return true;
+      if(tab==="movies")return t==="Фильм";
+      if(tab==="series")return t==="Сериал";
+      if(tab==="anime")return t==="Аниме";
+      if(tab==="cartoons")return t==="Мультфильм";
+      if(tab==="top")return rating(x)>=7&&v>=300;
+      if(tab==="anime_top")return t==="Аниме";
+      // V158: нормальные новинки по текущему году.
+      // Новинки = только текущий год и будущие проекты, а не 2024/2025.
+      if(tab==="new")return y>=cy;
+      // Скоро выйдет = будущий год или текущий год с ещё малым числом голосов.
+      if(tab==="new_soon")return y>cy || (y===cy && v<500);
+      // Уже вышло = текущий год и уже есть нормальный след зрителей.
+      if(tab==="new_released")return y===cy && v>=500;
+      // Популярное текущего года.
+      if(tab==="new_popular")return y===cy && v>=1000;
+      if(tab==="popular")return v>=1000;
+      return true;
+    }
     function pass(x,c){if(!tabPass(x,c.tab))return false;const t=type(x);if(c.type&&t!==c.type)return false;if(c.genre&&!genres(x).includes(c.genre))return false;if(c.year&&year(x)!==String(c.year))return false;if(c.minRating&&rating(x)<Number(c.minRating))return false;return true;}
     function queryList(raw){const base=norm(raw);const out=new Set(base?[base]:[]);const squ=squeeze(base);if(squ&&squ!==base)out.add(squ);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const fixedSqu=squeeze(fixed);if(fixedSqu&&fixedSqu!==fixed)out.add(fixedSqu);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"интерстеллар":["interstellar"]};[...out].forEach(value=>{Object.entries(syn).forEach(([k,a])=>{if(value===k||value.includes(k))a.forEach(x=>out.add(norm(x)));});});return [...out].filter(Boolean);}
     function hay(x){return x.__hay||(x.__hay=norm([x.search,title(x),x.ru,x.en,(x.genres||[]).join(" ")].join(" ")));}
@@ -1114,15 +1138,17 @@ function makeSearchWorker() {
     }
     function sortRows(sort, hasQuery, tab, cleanTrash){
       const pr=(a,b)=>poster(b.item)-poster(a.item);
-      const canClean = cleanTrash !== false && tab !== "new" && tab !== "anime_top";
+      const canClean = cleanTrash !== false && !["new","new_soon","new_released","new_popular","anime_top"].includes(tab);
       if(canClean){
         rows = rows.filter(x=>!lowTrust(x.item,tab));
       }
       if(tab==="anime_top"){
         rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));
         applyAnimeTopDedupe();
-      }else if(tab==="new"){
+      }else if(tab==="new"||tab==="new_soon"||tab==="new_released"){
         rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||pr(a,b));
+      }else if(tab==="new_popular"){
+        rows.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0)||pr(a,b));
       }else if(sort==="rating"){
         rows.sort((a,b)=>rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item)||pr(a,b));
       }else if(sort==="votes"){
@@ -1164,7 +1190,14 @@ function makeSearchWorker() {
     currentCount = Number(msg.count || 0);
     currentPages = Math.max(1, Math.ceil(currentCount / PAGE_SIZE));
     window.GKM_V106_LAST_SEARCH_STATS = msg;
-    const listLabel = currentTab === "anime_top" ? `🏆 Топ аниме 100 · твой список · по голосам · Страница ${currentPage} из ${currentPages}` : `Найдено: ${currentCount} · Страница ${currentPage} из ${currentPages}`;
+    const tabLabels = {
+      anime_top: `🏆 Топ аниме 100 · твой список · по голосам · Страница ${currentPage} из ${currentPages}`,
+      new: `🆕 Новинки ${new Date().getFullYear()}+ · Страница ${currentPage} из ${currentPages}`,
+      new_soon: `⏳ Скоро выйдет · Страница ${currentPage} из ${currentPages}`,
+      new_released: `✅ Уже вышло ${new Date().getFullYear()} · Страница ${currentPage} из ${currentPages}`,
+      new_popular: `🔥 Популярное ${new Date().getFullYear()} · Страница ${currentPage} из ${currentPages}`
+    };
+    const listLabel = tabLabels[currentTab] || `Найдено: ${currentCount} · Страница ${currentPage} из ${currentPages}`;
     renderList(msg.items || [], listLabel);
     setStatus(`Готово · ${currentCount} · ${msg.ms || 0} мс`);
   };
