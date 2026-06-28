@@ -28,7 +28,8 @@ window.GKM_V151_RELATED_SAME_TYPE_VERSION = "v151-related-same-type-2026-06-24";
 window.GKM_V152_STRICT_SMART_TOP_VERSION = "v152-strict-smart-top-no-trash-2026-06-24";
 window.GKM_V153_STRICT_SECTION_TOP_VERSION = "v153-strict-section-top-no-low-votes-2026-06-24";
 window.GKM_V154_FORCE_SEARCH_SECTIONS_VERSION = "v154-force-search-for-sections-2026-06-24";
-console.log("GKM: v154-force-search-for-sections-2026-06-24");
+window.GKM_V155_SMART_TOP_REAL_VOTES_VERSION = "v155-smart-top-real-votes-fix-2026-06-24";
+console.log("GKM: v155-smart-top-real-votes-fix-2026-06-24");
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -1032,8 +1033,51 @@ function makeSearchWorker() {
       self.__animeTopThreshold="manual-user-list-sorted-by-votes";
       out.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));
     }
-    function lowTrust(item,tab){const v=votes(item);const r=rating(item);const t=type(item);const strict=(tab==="movies"||tab==="series"||tab==="cartoons"||t==="Фильм"||t==="Сериал"||t==="Мультфильм");if(strict&&v<50000)return true;if(!strict&&v<10000)return true;if(r>=9.0&&v<200000)return true;if(r>=9.5&&v<500000)return true;if(!poster(item)&&v<100000)return true;return false;}
-    function votes9000000Score(item){const v=votes(item);const r=rating(item);const y=Number(year(item)||0);let score=Math.min(v,9000000)/9000000*1000+r*12;if(v<10)score-=1000;else if(v<100)score-=600;else if(v<1000)score-=250;else if(v<10000)score-=90;if(!poster(item))score-=100;const cy=new Date().getFullYear();if(y>=cy&&v<500)score-=80;return score;}
+    function lowTrust(item,tab){
+      const v=votes(item); const r=rating(item); const t=type(item);
+      // V155: пороги под реальные данные базы. У фильмов/сериалов голоса TMDB обычно 0-40k,
+      // поэтому 50k убивало весь раздел. Аниме из MAL оставляем с более высоким порогом.
+      if(t==="Аниме"){
+        if(v<10000)return true;
+        if(r>=9.0&&v<100000)return true;
+      }else if(t==="Сериал"){
+        if(v<300)return true;
+        if(r>=9.0&&v<1000)return true;
+      }else if(t==="Фильм"||t==="Мультфильм"){
+        if(v<500)return true;
+        if(r>=9.0&&v<5000)return true;
+      }else{
+        if(v<500)return true;
+      }
+      if(!poster(item)&&v<1000)return true;
+      return false;
+    }
+    function votes9000000Score(item){
+      const v=votes(item); const r=rating(item); const y=Number(year(item)||0); const t=type(item);
+      // V155: основа — голоса, рейтинг только как второй вес.
+      // Для аниме голосов миллионы, для фильмов/сериалов TMDB голоса десятки тысяч,
+      // поэтому используем разные "верхние планки", но логика одна: больше голосов = выше.
+      let cap=9000000;
+      if(t==="Фильм")cap=40000;
+      else if(t==="Сериал")cap=27000;
+      else if(t==="Мультфильм")cap=24000;
+      else if(t==="Аниме")cap=9000000;
+      let score=Math.min(v,cap)/cap*100000 + r*100;
+      if(t==="Сериал"){
+        if(v<300)score-=100000;
+        else if(v<1000)score-=5000;
+      }else if(t==="Фильм"||t==="Мультфильм"){
+        if(v<500)score-=100000;
+        else if(v<1500)score-=3500;
+      }else if(t==="Аниме"){
+        if(v<10000)score-=100000;
+        else if(v<100000)score-=5000;
+      }
+      if(!poster(item))score-=2000;
+      const cy=new Date().getFullYear();
+      if(y>=cy&&v<1000)score-=1000;
+      return score;
+    }
     function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(sort==="rating")rows.sort((a,b)=>rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item)||pr(a,b));else if(sort==="votes")rows.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||pr(a,b));else if(sort==="year")rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item)||pr(a,b));else if(sort==="year_old")rows.sort((a,b)=>Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item)||pr(a,b));else if(sort==="title")rows.sort((a,b)=>title(a.item).localeCompare(title(b.item),"ru")||pr(a,b));else if(hasQuery)rows.sort((a,b)=>b.score-a.score||pr(a,b));else{rows=rows.filter(x=>!lowTrust(x.item,tab));rows.sort((a,b)=>(votes9000000Score(b.item)-votes9000000Score(a.item))||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0));}}
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
