@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-GKM V162 — Франшизы + порядок просмотра.
-Патчер добавляет runtime-модуль в app.js и переключает index.html на app.js?v=162.
-
+"""
+GKM V162 — Франшизы и порядок просмотра.
 Запуск из корня проекта:
 python tools/gkm_v162_apply_franchise_pages.py
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -14,9 +13,12 @@ import re
 
 ROOT = Path(".")
 APP = ROOT / "app.js"
-INDEXES = [ROOT / "index.html", ROOT / "film" / "index.html", ROOT / "downloads" / "index.html"]
+INDEXES = [
+    ROOT / "index.html",
+    ROOT / "film" / "index.html",
+    ROOT / "downloads" / "index.html",
+]
 
-VERSION = "v162-franchise-pages-watch-order-2026-06-24"
 MARKER_START = "/* GKM V162 FRANCHISE PAGES START */"
 MARKER_END = "/* GKM V162 FRANCHISE PAGES END */"
 
@@ -33,7 +35,7 @@ V162_JS = r"""
     { key: "attack_on_titan", title: "Атака титанов", aliases: ["attack on titan", "shingeki", "атака титанов", "進撃"], orderHints: ["атака титанов", "attack on titan", "season 2", "season 3", "final", "финал"] },
     { key: "tokyo_ghoul", title: "Токийский гуль", aliases: ["tokyo ghoul", "токийский гуль"], orderHints: ["tokyo ghoul", "токийский гуль", "√a", "re"] },
     { key: "one_piece", title: "Ван-Пис", aliases: ["one piece", "ван-пис", "ван пис"], orderHints: ["one piece", "ван-пис", "ван пис", "red", "stampede", "gold", "strong world"] },
-    { key: "dragon_ball", title: "Драконий жемчуг", aliases: ["dragon ball", "драконий жемчуг", "doragon"], orderHints: ["dragon ball", "драконий жемчуг", "z", "super", "gt", "broly"] },
+    { key: "dragon_ball", title: "Драконий жемчуг", aliases: ["dragon ball", "драконий жемчуг"], orderHints: ["dragon ball", "драконий жемчуг", "z", "super", "gt", "broly"] },
     { key: "fate", title: "Fate", aliases: ["fate/", "fate:", "судьба:", "судьба"], orderHints: ["fate/zero", "stay night", "unlimited blade", "heaven", "grand order"] },
     { key: "alien", title: "Чужой", aliases: ["alien", "чужой", "прометей", "prometheus", "covenant", "ромул"], orderHints: ["чужой", "alien", "чужие", "aliens", "чужой 3", "воскрешение", "прометей", "завет", "ромул"] },
     { key: "predator", title: "Хищник", aliases: ["predator", "хищник", "prey", "добыча"], orderHints: ["хищник", "predator", "predator 2", "predators", "prey", "добыча"] },
@@ -168,6 +170,10 @@ V162_JS = r"""
     });
   }
 
+  function gkmSafe(s) {
+    return String(s || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
   function gkmCard(item, idx) {
     const poster = gkmPoster(item);
     const title = gkmTitle(item);
@@ -175,7 +181,7 @@ V162_JS = r"""
     const rating = gkmRating(item) || "—";
     const votes = gkmVotes(item);
     const genres = gkmGenres(item).slice(0, 2).join(" · ");
-    const safeTitle = title.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const safeTitle = gkmSafe(title);
     const safePoster = poster ? `<img src="${String(poster).replace(/"/g, "&quot;")}" alt="${safeTitle}" loading="lazy">` : `<div class="gkm-v162-no-poster">Нет постера</div>`;
 
     return `
