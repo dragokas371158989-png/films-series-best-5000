@@ -23,6 +23,7 @@ window.GKM_V146_VOTES_9000000_SORT_VERSION = "v146-votes-9000000-sort-2026-06-24
 window.GKM_V147_INFER_ANIME_STUDIO_FIX_VERSION = "v147-infer-anime-studio-safe-fix-2026-06-24";
 window.GKM_V148_ANTITRASH_GENRE_TOP_VERSION = "v148-antitrash-genre-top-2026-06-24";
 window.GKM_V149_GENRE_TOP_FILMS_ONLY_VERSION = "v149-genre-top-films-only-2026-06-24";
+window.GKM_V150_CARD_POSTER_RAW_FIX_VERSION = "v150-card-poster-raw-fix-2026-06-24";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -594,8 +595,10 @@ function posterProxySrc(src) {
 }
 
 function shouldProxyFirst(src) {
-  const low = String(src || "").toLowerCase();
-  return low.includes("image.tmdb.org") || low.includes("/t/p/");
+  // V150: для карточек не гоняем TMDB/постеры через images.weserv.nl первым ходом.
+  // У тебя была ситуация: в карточке "Нет постера", а в модалке постер есть.
+  // Причина — прокси/ленивая загрузка мог падать на карточке, хотя оригинальная ссылка живая.
+  return false;
 }
 
 function posterSrc(item) {
@@ -638,7 +641,15 @@ function schedulePosterRecovery(root = document) {
     if (img.dataset.posterWatch === "1") continue;
     img.dataset.posterWatch = "1";
     img.addEventListener("error", () => recoverPosterImage(img));
-    img.addEventListener("load", () => { if (img.naturalWidth > 0) img.dataset.posterDone = "1"; });
+    img.addEventListener("load", () => {
+      if (img.naturalWidth > 0) {
+        img.dataset.posterDone = "1";
+        img.style.display = "";
+        const wrap = img.closest && img.closest(".poster-wrap");
+        const ph = wrap && wrap.querySelector(".poster-placeholder");
+        if (ph) ph.remove();
+      }
+    });
     setTimeout(() => {
       if (!img.dataset.posterDone && (!img.complete || img.naturalWidth === 0)) recoverPosterImage(img);
     }, 1800);
