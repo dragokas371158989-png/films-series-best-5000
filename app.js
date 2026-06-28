@@ -2168,39 +2168,214 @@ function setupGkmLocalHelper() {
 gkmHelperReady(setupGkmLocalHelper);
 console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
-/* GKM V167 FRANCHISE CLEAN QUERIES START */
+/* GKM V168 FRANCHISE WATCH ORDER START */
 (function () {
   "use strict";
 
-  window.GKM_V167_FRANCHISE_CLEAN_QUERIES_VERSION = "v167-franchise-clean-queries-2026-06-24";
+  window.GKM_V168_FRANCHISE_WATCH_ORDER_VERSION = "v168-franchise-watch-order-2026-06-24";
 
-  // V167: чистим франшизы от мусорных совпадений.
-  // Мстители ищем по "avengers", чтобы НЕ попадали "Токийские мстители".
-  // Токийский гуль ищем по "tokyo ghoul", потому что русское название в базе может быть только у фильма.
   const FRANCHISES = [
-    ["Наруто", "naruto"],
-    ["Блич", "bleach"],
-    ["Атака титанов", "attack on titan"],
-    ["Токийский гуль", "tokyo ghoul"],
-    ["Ван-Пис", "one piece"],
-    ["Драконий жемчуг", "dragon ball"],
-    ["Fate", "fate/"],
-    ["Чужой", "alien"],
-    ["Хищник", "predator"],
-    ["Мстители", "avengers"],
-    ["Железный человек", "iron man"],
-    ["Капитан Америка", "captain america"],
-    ["Тор", "thor"],
-    ["Человек-паук", "spider-man"],
-    ["Стражи галактики", "guardians of the galaxy"],
-    ["Доктор Стрэндж", "doctor strange"],
-    ["Форсаж", "fast furious"],
-    ["Гарри Поттер", "harry potter"],
-    ["Фантастические твари", "fantastic beasts"],
-    ["Властелин колец", "lord of the rings"],
-    ["Хоббит", "hobbit"],
-    ["Терминатор", "terminator"],
-    ["Матрица", "matrix"]
+    {
+      title: "Мстители / MCU",
+      search: "avengers",
+      note: "Быстрый порядок по основной линии MCU. Можно смотреть только фильмы Мстителей, но лучше с ключевыми сольниками.",
+      order: [
+        ["Железный человек", "iron man"],
+        ["Невероятный Халк", "incredible hulk"],
+        ["Железный человек 2", "iron man 2"],
+        ["Тор", "thor"],
+        ["Первый мститель", "captain america first avenger"],
+        ["Мстители", "avengers"],
+        ["Железный человек 3", "iron man 3"],
+        ["Тор 2: Царство тьмы", "thor dark world"],
+        ["Первый мститель: Другая война", "captain america winter soldier"],
+        ["Стражи Галактики", "guardians of the galaxy"],
+        ["Мстители: Эра Альтрона", "avengers age of ultron"],
+        ["Первый мститель: Противостояние", "captain america civil war"],
+        ["Доктор Стрэндж", "doctor strange"],
+        ["Стражи Галактики. Часть 2", "guardians of the galaxy vol 2"],
+        ["Человек-паук: Возвращение домой", "spider-man homecoming"],
+        ["Тор: Рагнарёк", "thor ragnarok"],
+        ["Чёрная Пантера", "black panther"],
+        ["Мстители: Война бесконечности", "avengers infinity war"],
+        ["Человек-муравей и Оса", "ant-man and the wasp"],
+        ["Капитан Марвел", "captain marvel"],
+        ["Мстители: Финал", "avengers endgame"],
+        ["Человек-паук: Вдали от дома", "spider-man far from home"]
+      ]
+    },
+    {
+      title: "Матрица",
+      search: "matrix",
+      note: "Основной порядок выхода.",
+      order: [
+        ["Матрица", "matrix"],
+        ["Аниматрица", "animatrix"],
+        ["Матрица: Перезагрузка", "matrix reloaded"],
+        ["Матрица: Революция", "matrix revolutions"],
+        ["Матрица: Воскрешение", "matrix resurrections"]
+      ]
+    },
+    {
+      title: "Хищник",
+      search: "predator",
+      note: "Можно смотреть по выходу. Кроссоверы с Чужим отдельно внутри списка.",
+      order: [
+        ["Хищник", "predator"],
+        ["Хищник 2", "predator 2"],
+        ["Чужой против Хищника", "alien vs predator"],
+        ["Чужие против Хищника: Реквием", "aliens vs predator requiem"],
+        ["Хищники", "predators"],
+        ["Хищник", "the predator"],
+        ["Добыча", "prey"],
+        ["Хищник: Планета смерти", "predator badlands"]
+      ]
+    },
+    {
+      title: "Чужой",
+      search: "alien",
+      note: "Порядок выхода. Прометей/Завет — приквелы, но новичку проще после классики.",
+      order: [
+        ["Чужой", "alien"],
+        ["Чужие", "aliens"],
+        ["Чужой 3", "alien 3"],
+        ["Чужой: Воскрешение", "alien resurrection"],
+        ["Прометей", "prometheus"],
+        ["Чужой: Завет", "alien covenant"],
+        ["Чужой: Ромул", "alien romulus"]
+      ]
+    },
+    {
+      title: "Наруто",
+      search: "naruto",
+      note: "Фильмы можно смотреть между арками, но базово порядок такой.",
+      order: [
+        ["Наруто", "naruto"],
+        ["Наруто: Фильм первый", "naruto ninja clash"],
+        ["Наруто: Великое столкновение", "naruto legend of the stone of gelel"],
+        ["Наруто: Грандиозный переполох", "naruto guardians of the crescent moon"],
+        ["Наруто: Ураганные хроники", "naruto shippuden"],
+        ["Наруто: Ураганные хроники. Фильм", "naruto shippuden movie"],
+        ["Наруто: Узы", "naruto bonds"],
+        ["Наруто: Наследники воли огня", "naruto will of fire"],
+        ["Наруто: Потерянная башня", "naruto lost tower"],
+        ["Наруто: Кровавая тюрьма", "naruto blood prison"],
+        ["Наруто: Путь ниндзя", "naruto road to ninja"],
+        ["Наруто: Последний фильм", "the last naruto"],
+        ["Боруто", "boruto"]
+      ]
+    },
+    {
+      title: "Блич",
+      search: "bleach",
+      note: "Фильмы идут отдельно от основного сюжета.",
+      order: [
+        ["Блич", "bleach"],
+        ["Блич: Воспоминания ни о ком", "bleach memories of nobody"],
+        ["Блич: Восстание алмазной пыли", "bleach diamond dust rebellion"],
+        ["Блич: Уходя в темноту", "bleach fade to black"],
+        ["Блич: Врата ада", "bleach hell verse"],
+        ["Блич: Тысячелетняя кровавая война", "bleach thousand-year blood war"]
+      ]
+    },
+    {
+      title: "Атака титанов",
+      search: "attack on titan",
+      note: "Основной сериал по сезонам.",
+      order: [
+        ["Атака титанов", "attack on titan"],
+        ["Атака титанов 2", "attack on titan season 2"],
+        ["Атака титанов 3", "attack on titan season 3"],
+        ["Атака титанов: Финал", "attack on titan final season"],
+        ["Атака титанов: Последняя атака", "attack on titan last attack"]
+      ]
+    },
+    {
+      title: "Токийский гуль",
+      search: "tokyo ghoul",
+      note: "Основной порядок просмотра.",
+      order: [
+        ["Токийский гуль", "tokyo ghoul"],
+        ["Токийский гуль √A", "tokyo ghoul root a"],
+        ["Токийский гуль: re", "tokyo ghoul re"],
+        ["Токийский гуль: re 2", "tokyo ghoul re 2"]
+      ]
+    },
+    {
+      title: "Ван-Пис",
+      search: "one piece",
+      note: "Сериал главный. Фильмы можно смотреть после знакомства с командой.",
+      order: [
+        ["Ван-Пис", "one piece"],
+        ["One Piece: Strong World", "one piece strong world"],
+        ["One Piece Film Z", "one piece film z"],
+        ["One Piece Film Gold", "one piece film gold"],
+        ["One Piece: Stampede", "one piece stampede"],
+        ["One Piece Film Red", "one piece film red"],
+        ["One Piece Live Action", "one piece live action"]
+      ]
+    },
+    {
+      title: "Гарри Поттер",
+      search: "harry potter",
+      note: "Прямой порядок выхода.",
+      order: [
+        ["Гарри Поттер и философский камень", "harry potter philosopher"],
+        ["Гарри Поттер и Тайная комната", "harry potter chamber of secrets"],
+        ["Гарри Поттер и узник Азкабана", "harry potter prisoner of azkaban"],
+        ["Гарри Поттер и Кубок огня", "harry potter goblet of fire"],
+        ["Гарри Поттер и Орден Феникса", "harry potter order of the phoenix"],
+        ["Гарри Поттер и Принц-полукровка", "harry potter half-blood prince"],
+        ["Гарри Поттер и Дары смерти: Часть 1", "harry potter deathly hallows part 1"],
+        ["Гарри Поттер и Дары смерти: Часть 2", "harry potter deathly hallows part 2"],
+        ["Фантастические твари", "fantastic beasts"]
+      ]
+    },
+    {
+      title: "Властелин колец",
+      search: "lord of the rings",
+      note: "Можно смотреть по выходу или хронологически. Здесь хронологически.",
+      order: [
+        ["Хоббит: Нежданное путешествие", "hobbit unexpected journey"],
+        ["Хоббит: Пустошь Смауга", "hobbit desolation of smaug"],
+        ["Хоббит: Битва пяти воинств", "hobbit battle of five armies"],
+        ["Властелин колец: Братство кольца", "lord of the rings fellowship"],
+        ["Властелин колец: Две крепости", "lord of the rings two towers"],
+        ["Властелин колец: Возвращение короля", "lord of the rings return of the king"],
+        ["Кольца власти", "rings of power"]
+      ]
+    },
+    {
+      title: "Форсаж",
+      search: "fast furious",
+      note: "Порядок выхода.",
+      order: [
+        ["Форсаж", "fast furious"],
+        ["Двойной форсаж", "2 fast 2 furious"],
+        ["Тройной форсаж: Токийский дрифт", "tokyo drift"],
+        ["Форсаж 4", "fast furious 4"],
+        ["Форсаж 5", "fast five"],
+        ["Форсаж 6", "fast furious 6"],
+        ["Форсаж 7", "furious 7"],
+        ["Форсаж 8", "fate of the furious"],
+        ["Хоббс и Шоу", "hobbs shaw"],
+        ["Форсаж 9", "f9"],
+        ["Форсаж 10", "fast x"]
+      ]
+    },
+    {
+      title: "Терминатор",
+      search: "terminator",
+      note: "Лучший порядок — по выходу.",
+      order: [
+        ["Терминатор", "terminator"],
+        ["Терминатор 2: Судный день", "terminator 2"],
+        ["Терминатор 3: Восстание машин", "terminator 3"],
+        ["Терминатор: Да придёт спаситель", "terminator salvation"],
+        ["Терминатор: Генезис", "terminator genisys"],
+        ["Терминатор: Тёмные судьбы", "terminator dark fate"]
+      ]
+    }
   ];
 
   function findSearchInput() {
@@ -2211,9 +2386,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       || document.querySelector("input");
   }
 
-  function closeFranchiseOverlay() {
-    document.querySelectorAll(".gkm-v167-franchise-overlay").forEach(x => x.remove());
-    document.body.classList.remove("gkm-v167-franchise-open");
+  function closeOverlay() {
+    document.querySelectorAll(".gkm-v168-overlay").forEach(x => x.remove());
   }
 
   function resetSelects() {
@@ -2226,8 +2400,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function nativeSearch(query) {
-    closeFranchiseOverlay();
-
+    closeOverlay();
     const input = findSearchInput();
     if (input) {
       input.focus();
@@ -2235,7 +2408,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       input.dispatchEvent(new Event("input", { bubbles: true }));
       input.dispatchEvent(new Event("change", { bubbles: true }));
     }
-
     resetSelects();
 
     setTimeout(() => {
@@ -2252,28 +2424,71 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           input.dispatchEvent(new KeyboardEvent("keyup", { key: "Enter", code: "Enter", bubbles: true }));
         }
       } catch (e) {}
-    }, 90);
+    }, 80);
+  }
+
+  function esc(v) {
+    return String(v || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function showOrder(fr) {
+    const overlay = document.querySelector(".gkm-v168-overlay");
+    const panel = overlay && overlay.querySelector(".gkm-v168-panel");
+    if (!panel) return;
+
+    panel.innerHTML = `
+      <div class="gkm-v168-head">
+        <div>
+          <h2>🧬 ${esc(fr.title)}</h2>
+          <p>${esc(fr.note || "Порядок просмотра")}</p>
+        </div>
+        <div class="gkm-v168-actions">
+          <button class="gkm-v168-btn" data-back="1">Назад</button>
+          <button class="gkm-v168-close" type="button">✕</button>
+        </div>
+      </div>
+
+      <div class="gkm-v168-order">
+        ${fr.order.map((row, idx) => `
+          <div class="gkm-v168-order-row">
+            <div class="gkm-v168-num">${idx + 1}</div>
+            <div class="gkm-v168-order-title">${esc(row[0])}</div>
+            <button class="gkm-v168-small" data-query="${esc(row[1])}">Найти</button>
+          </div>
+        `).join("")}
+      </div>
+
+      <div class="gkm-v168-bottom">
+        <button class="gkm-v168-btn" data-query="${esc(fr.search)}">Открыть всю франшизу поиском</button>
+      </div>
+    `;
+
+    panel.querySelector(".gkm-v168-close").addEventListener("click", closeOverlay);
+    panel.querySelector("[data-back]").addEventListener("click", openOverlay);
+    panel.querySelectorAll("[data-query]").forEach(btn => {
+      btn.addEventListener("click", () => nativeSearch(btn.dataset.query || ""));
+    });
   }
 
   function openOverlay() {
-    closeFranchiseOverlay();
+    closeOverlay();
 
     const overlay = document.createElement("div");
-    overlay.className = "gkm-v167-franchise-overlay";
+    overlay.className = "gkm-v168-overlay";
     overlay.innerHTML = `
-      <div class="gkm-v167-franchise-panel">
-        <div class="gkm-v167-franchise-head">
+      <div class="gkm-v168-panel">
+        <div class="gkm-v168-head">
           <div>
             <h2>🧬 Франшизы</h2>
-            <p>V167: очищенные запросы. Мстители больше не цепляют “Токийских мстителей”.</p>
+            <p>Теперь не просто поиск, а порядок просмотра. Нажми франшизу — покажу с чего начинать.</p>
           </div>
-          <button class="gkm-v167-close" type="button">✕</button>
+          <button class="gkm-v168-close" type="button">✕</button>
         </div>
-        <div class="gkm-v167-franchise-grid">
-          ${FRANCHISES.map(([title, query]) => `
-            <button class="gkm-v167-franchise-tile" data-query="${String(query).replace(/"/g, "&quot;")}">
-              <b>${title}</b>
-              <span>Поиск: ${query}</span>
+        <div class="gkm-v168-grid">
+          ${FRANCHISES.map((fr, idx) => `
+            <button class="gkm-v168-tile" data-idx="${idx}">
+              <b>${esc(fr.title)}</b>
+              <span>Порядок просмотра</span>
             </button>
           `).join("")}
         </div>
@@ -2281,26 +2496,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     `;
 
     document.body.appendChild(overlay);
-    document.body.classList.add("gkm-v167-franchise-open");
 
-    overlay.querySelector(".gkm-v167-close").addEventListener("click", closeFranchiseOverlay);
+    overlay.querySelector(".gkm-v168-close").addEventListener("click", closeOverlay);
     overlay.addEventListener("click", e => {
-      if (e.target === overlay) closeFranchiseOverlay();
+      if (e.target === overlay) closeOverlay();
     });
 
-    overlay.querySelectorAll(".gkm-v167-franchise-tile").forEach(btn => {
-      btn.addEventListener("click", () => nativeSearch(btn.dataset.query || ""));
+    overlay.querySelectorAll(".gkm-v168-tile").forEach(btn => {
+      btn.addEventListener("click", () => showOrder(FRANCHISES[Number(btn.dataset.idx)]));
     });
   }
 
   function addButton() {
-    document.querySelectorAll("[data-gkm-v162-franchise-btn],[data-gkm-v163-franchise-btn],[data-gkm-v164-franchise-btn],[data-gkm-v165-franchise-btn],[data-gkm-v166-franchise-btn],[data-gkm-v167-franchise-btn]").forEach(x => x.remove());
+    document.querySelectorAll("[data-gkm-v162-franchise-btn],[data-gkm-v163-franchise-btn],[data-gkm-v164-franchise-btn],[data-gkm-v165-franchise-btn],[data-gkm-v166-franchise-btn],[data-gkm-v167-franchise-btn],[data-gkm-v168-franchise-btn]").forEach(x => x.remove());
 
     const btn = document.createElement("button");
     btn.type = "button";
     btn.textContent = "🧬 Франшизы";
-    btn.dataset.gkmV167FranchiseBtn = "1";
-    btn.className = "btn gkm-v167-main-btn";
+    btn.dataset.gkmV168FranchiseBtn = "1";
+    btn.className = "btn gkm-v168-main-btn";
     btn.addEventListener("click", openOverlay);
 
     const target = document.querySelector(".tabs")
@@ -2314,51 +2528,38 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     target.appendChild(btn);
   }
 
-  function addAutoClose() {
-    document.addEventListener("click", e => {
-      const t = e.target;
-      if (!t || !document.querySelector(".gkm-v167-franchise-overlay")) return;
-
-      if (t.closest(".gkm-v167-franchise-overlay") || t.closest("[data-gkm-v167-franchise-btn]")) return;
-
-      if (t.closest(".tab") || t.closest("button") || t.closest("select") || t.closest("input") || t.closest("a")) {
-        closeFranchiseOverlay();
-      }
-    }, true);
-  }
-
   function addStyles() {
-    if (document.querySelector("#gkm-v167-franchise-overlay-style")) return;
+    if (document.querySelector("#gkm-v168-style")) return;
 
     const style = document.createElement("style");
-    style.id = "gkm-v167-franchise-overlay-style";
+    style.id = "gkm-v168-style";
     style.textContent = `
-      .gkm-v167-main-btn {
-        border: 1px solid #00d8ff;
-        background: linear-gradient(135deg,#5a25d6,#04c9f4);
+      .gkm-v168-main-btn,.gkm-v168-btn,.gkm-v168-small,.gkm-v168-tile {
+        border:1px solid #00d8ff;
+        background:linear-gradient(135deg,#5a25d6,#04c9f4);
         color:#fff;
         border-radius:14px;
         padding:12px 18px;
-        font-weight:800;
+        font-weight:900;
         cursor:pointer;
         box-shadow:0 0 18px rgba(0,216,255,.25);
         margin:6px;
       }
-      .gkm-v167-franchise-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 999999;
-        background: rgba(2, 4, 16, .72);
-        backdrop-filter: blur(4px);
-        overflow: auto;
-        padding: 28px;
+      .gkm-v168-overlay {
+        position:fixed;
+        inset:0;
+        z-index:999999;
+        background:rgba(2,4,16,.76);
+        backdrop-filter:blur(4px);
+        overflow:auto;
+        padding:28px;
       }
-      .gkm-v167-franchise-panel {
-        max-width: 1450px;
-        margin: 0 auto;
-        color: #fff;
+      .gkm-v168-panel {
+        max-width:1450px;
+        margin:0 auto;
+        color:#fff;
       }
-      .gkm-v167-franchise-head {
+      .gkm-v168-head {
         display:flex;
         justify-content:space-between;
         align-items:flex-start;
@@ -2367,19 +2568,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         margin:0 0 18px;
         border:1px solid rgba(0,216,255,.35);
         border-radius:18px;
-        background:rgba(10,8,35,.92);
+        background:rgba(10,8,35,.94);
         box-shadow:0 0 24px rgba(0,216,255,.12);
       }
-      .gkm-v167-franchise-head h2 {
+      .gkm-v168-head h2 {
         margin:0 0 8px;
         font-size:30px;
         text-shadow:0 0 16px rgba(185,125,255,.65);
       }
-      .gkm-v167-franchise-head p {
+      .gkm-v168-head p {
         margin:0;
         color:#cfc9ff;
+        line-height:1.45;
       }
-      .gkm-v167-close {
+      .gkm-v168-actions {
+        display:flex;
+        align-items:center;
+        gap:8px;
+      }
+      .gkm-v168-close {
         min-width:54px;
         min-height:48px;
         border:1px solid #00d8ff;
@@ -2390,55 +2597,101 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         font-weight:900;
         cursor:pointer;
       }
-      .gkm-v167-franchise-grid {
+      .gkm-v168-grid {
         display:grid;
         grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
         gap:14px;
       }
-      .gkm-v167-franchise-tile {
+      .gkm-v168-tile {
         text-align:left;
         min-height:112px;
         display:flex;
         flex-direction:column;
         justify-content:center;
-        border:1px solid #00d8ff;
-        background:linear-gradient(135deg,#5a25d6,#04c9f4);
-        color:#fff;
-        border-radius:14px;
-        padding:18px;
-        font-weight:800;
-        cursor:pointer;
-        box-shadow:0 0 18px rgba(0,216,255,.25);
       }
-      .gkm-v167-franchise-tile b {
+      .gkm-v168-tile b {
         font-size:22px;
         line-height:1.1;
         margin-bottom:10px;
       }
-      .gkm-v167-franchise-tile span {
+      .gkm-v168-tile span {
         color:#f0ecff;
         font-size:15px;
       }
+      .gkm-v168-order {
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+      }
+      .gkm-v168-order-row {
+        display:grid;
+        grid-template-columns:60px 1fr auto;
+        gap:12px;
+        align-items:center;
+        border:1px solid rgba(0,216,255,.28);
+        border-radius:16px;
+        background:rgba(10,8,35,.86);
+        padding:12px;
+      }
+      .gkm-v168-num {
+        width:44px;
+        height:44px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:50%;
+        background:linear-gradient(135deg,#ffae00,#b13cff);
+        color:#fff;
+        font-weight:1000;
+        font-size:20px;
+      }
+      .gkm-v168-order-title {
+        font-size:19px;
+        font-weight:900;
+        line-height:1.25;
+      }
+      .gkm-v168-small {
+        padding:10px 14px;
+        margin:0;
+      }
+      .gkm-v168-bottom {
+        margin-top:18px;
+        padding:14px;
+        border:1px solid rgba(0,216,255,.25);
+        border-radius:16px;
+        background:rgba(10,8,35,.72);
+      }
       @media(max-width:720px) {
-        .gkm-v167-franchise-overlay { padding: 12px; }
-        .gkm-v167-franchise-head { flex-direction:column; }
-        .gkm-v167-franchise-grid { grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); }
+        .gkm-v168-overlay { padding:12px; }
+        .gkm-v168-head { flex-direction:column; }
+        .gkm-v168-grid { grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); }
+        .gkm-v168-order-row { grid-template-columns:44px 1fr; }
+        .gkm-v168-small { grid-column:1 / -1; }
       }
     `;
     document.head.appendChild(style);
+  }
+
+  function addAutoClose() {
+    document.addEventListener("click", e => {
+      const t = e.target;
+      if (!t || !document.querySelector(".gkm-v168-overlay")) return;
+      if (t.closest(".gkm-v168-overlay") || t.closest("[data-gkm-v168-franchise-btn]")) return;
+      if (t.closest(".tab") || t.closest("button") || t.closest("select") || t.closest("input") || t.closest("a")) closeOverlay();
+    }, true);
   }
 
   function init() {
     addStyles();
     addButton();
     addAutoClose();
-    console.log("GKM: v167-franchise-clean-queries-2026-06-24");
+    console.log("GKM: v168-franchise-watch-order-2026-06-24");
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
-  window.GKM_V167_OPEN_FRANCHISES = openOverlay;
-  window.GKM_V167_CLOSE_FRANCHISES = closeFranchiseOverlay;
+  window.GKM_V168_OPEN_FRANCHISES = openOverlay;
+  window.GKM_V168_CLOSE_FRANCHISES = closeOverlay;
 })();
-/* GKM V167 FRANCHISE CLEAN QUERIES END */
+/* GKM V168 FRANCHISE WATCH ORDER END */
