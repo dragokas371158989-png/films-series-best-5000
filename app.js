@@ -27,7 +27,8 @@ window.GKM_V150_CARD_POSTER_RAW_FIX_VERSION = "v150-card-poster-raw-fix-2026-06-
 window.GKM_V151_RELATED_SAME_TYPE_VERSION = "v151-related-same-type-2026-06-24";
 window.GKM_V152_STRICT_SMART_TOP_VERSION = "v152-strict-smart-top-no-trash-2026-06-24";
 window.GKM_V153_STRICT_SECTION_TOP_VERSION = "v153-strict-section-top-no-low-votes-2026-06-24";
-console.log("GKM: v153-strict-section-top-no-low-votes-2026-06-24");
+window.GKM_V154_FORCE_SEARCH_SECTIONS_VERSION = "v154-force-search-for-sections-2026-06-24";
+console.log("GKM: v154-force-search-for-sections-2026-06-24");
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -1201,7 +1202,11 @@ function runSearch(page = 1) {
     renderHome();
     return;
   }
-  if (!hasActiveControls(c) && ["movies", "series", "anime", "cartoons", "top", "new", "popular"].includes(c.tab)) {
+  // V154: разделы Фильмы/Сериалы/Мультфильмы/Аниме НЕ грузим из старых fast pages,
+  // потому что fast pages уже заранее отсортированы и тащат наверх мусор 9.7 / 55 голосов.
+  // Для этих разделов всегда запускаем search-worker, где работает строгий V153/V154 антимусор.
+  // Fast pages оставляем только для служебных разделов top/new/popular.
+  if (!hasActiveControls(c) && ["top", "new", "popular"].includes(c.tab)) {
     loadFastPage(c.tab, page);
     return;
   }
