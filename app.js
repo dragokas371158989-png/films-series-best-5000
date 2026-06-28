@@ -24,6 +24,7 @@ window.GKM_V147_INFER_ANIME_STUDIO_FIX_VERSION = "v147-infer-anime-studio-safe-f
 window.GKM_V148_ANTITRASH_GENRE_TOP_VERSION = "v148-antitrash-genre-top-2026-06-24";
 window.GKM_V149_GENRE_TOP_FILMS_ONLY_VERSION = "v149-genre-top-films-only-2026-06-24";
 window.GKM_V150_CARD_POSTER_RAW_FIX_VERSION = "v150-card-poster-raw-fix-2026-06-24";
+window.GKM_V151_RELATED_SAME_TYPE_VERSION = "v151-related-same-type-2026-06-24";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -1474,25 +1475,58 @@ function ensureRelatedBlock() {
   return block;
 }
 
+function relatedTypeFamily(item) {
+  const t = norm(getType(item) || item.type || item.category || "");
+  if (t.includes("аниме") || t.includes("anime")) return "anime";
+  if (t.includes("сериал") && !t.includes("мульт")) return "series";
+  if (t.includes("мульт") || t.includes("cartoon") || t.includes("animated")) return "cartoon";
+  if (t.includes("фильм") || t.includes("movie")) return "movie";
+  return t || "other";
+}
+
+function relatedTypeLabel(family) {
+  if (family === "movie") return "фильмы";
+  if (family === "series") return "сериалы";
+  if (family === "cartoon") return "мультфильмы";
+  if (family === "anime") return "аниме";
+  return "похожее";
+}
+
 function renderRelated(base) {
   const block = ensureRelatedBlock();
   const box = $("relatedCards");
   if (!box) return;
+
+  // V151: рекомендации строго в рамках того же типа.
+  // Фильм показывает фильмы, сериал — сериалы, мультфильм — мультфильмы, аниме — аниме.
+  const baseFamily = relatedTypeFamily(base);
+  const title = block.querySelector(".links-title");
+  if (title) title.textContent = `Что посмотреть похожее · ${relatedTypeLabel(baseFamily)}`;
+
   const pool = collectVisiblePool();
   const baseId = String(base.id || "");
   const baseKey = franchiseKey(base);
   const baseGenres = getGenres(base);
+
   const rows = pool
-    .filter(item => item && String(item.id || "") !== baseId && hasPoster(item))
+    .filter(item => {
+      if (!item) return false;
+      if (String(item.id || "") === baseId) return false;
+      if (!hasPoster(item)) return false;
+      return relatedTypeFamily(item) === baseFamily;
+    })
     .map(item => {
       const same = baseKey && franchiseKey(item) === baseKey ? 100000 : 0;
       const genreScore = baseGenres.filter(g => getGenres(item).includes(g)).length * 700;
-      return { item, score: same + genreScore + getRating(item) * 1000 + Math.min(getVotes(item), 100000) / 20 };
+      const votesScore = Math.min(Number(getVotes(item) || 0), 9000000) / 90;
+      const ratingScore = Number(getRating(item) || 0) * 1000;
+      return { item, score: same + genreScore + ratingScore + votesScore };
     })
     .filter(x => x.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, 10)
     .map(x => x.item);
+
   block.style.display = rows.length ? "" : "none";
   box.innerHTML = rows.map(relatedCardHtml).join("");
 }
