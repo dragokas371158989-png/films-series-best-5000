@@ -25,6 +25,7 @@ window.GKM_V148_ANTITRASH_GENRE_TOP_VERSION = "v148-antitrash-genre-top-2026-06-
 window.GKM_V149_GENRE_TOP_FILMS_ONLY_VERSION = "v149-genre-top-films-only-2026-06-24";
 window.GKM_V150_CARD_POSTER_RAW_FIX_VERSION = "v150-card-poster-raw-fix-2026-06-24";
 window.GKM_V151_RELATED_SAME_TYPE_VERSION = "v151-related-same-type-2026-06-24";
+window.GKM_V152_STRICT_SMART_TOP_VERSION = "v152-strict-smart-top-no-trash-2026-06-24";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -138,9 +139,14 @@ function votes9000000Score(item) {
 function isLowTrustTopItem(item) {
   const v = Number(getVotes(item) || item?.votes || 0);
   const r = Number(getRating(item) || item?.rating || 0);
-  if (v < 10) return true;
-  if (r >= 9.5 && v < 1000) return true;
-  if (!hasPoster(item) && v < 500) return true;
+  const t = String(item?.type || item?.category || "").toLowerCase();
+
+  // V152: строгий антимусор для умного топа.
+  // 9.8 при 50 голосах больше не лезет выше нормальных популярных тайтлов.
+  if (v < 1000) return true;
+  if ((t.includes("фильм") || t.includes("сериал")) && v < 10000) return true;
+  if (r >= 9.0 && v < 50000) return true;
+  if (!hasPoster(item) && v < 50000) return true;
   return false;
 }
 
@@ -1023,9 +1029,9 @@ function makeSearchWorker() {
       self.__animeTopThreshold="manual-user-list-sorted-by-votes";
       out.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));
     }
-    function lowTrust(item){const v=votes(item);const r=rating(item);if(v<10)return true;if(r>=9.5&&v<1000)return true;if(!poster(item)&&v<500)return true;return false;}
+    function lowTrust(item){const v=votes(item);const r=rating(item);const t=type(item);if(v<1000)return true;if((t==="Фильм"||t==="Сериал")&&v<10000)return true;if(r>=9.0&&v<50000)return true;if(!poster(item)&&v<50000)return true;return false;}
     function votes9000000Score(item){const v=votes(item);const r=rating(item);const y=Number(year(item)||0);let score=Math.min(v,9000000)/9000000*1000+r*12;if(v<10)score-=1000;else if(v<100)score-=600;else if(v<1000)score-=250;else if(v<10000)score-=90;if(!poster(item))score-=100;const cy=new Date().getFullYear();if(y>=cy&&v<500)score-=80;return score;}
-    function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(sort==="rating")rows.sort((a,b)=>pr(a,b)||rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item));else if(sort==="votes")rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));else if(sort==="year")rows.sort((a,b)=>pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item));else if(sort==="year_old")rows.sort((a,b)=>pr(a,b)||Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item));else if(sort==="title")rows.sort((a,b)=>pr(a,b)||title(a.item).localeCompare(title(b.item),"ru"));else if(hasQuery)rows.sort((a,b)=>pr(a,b)||b.score-a.score);else{rows=rows.filter(x=>!lowTrust(x.item));rows.sort((a,b)=>pr(a,b)||(votes9000000Score(b.item)-votes9000000Score(a.item))||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));}}
+    function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(sort==="rating")rows.sort((a,b)=>rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item)||pr(a,b));else if(sort==="votes")rows.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||pr(a,b));else if(sort==="year")rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item)||pr(a,b));else if(sort==="year_old")rows.sort((a,b)=>Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item)||pr(a,b));else if(sort==="title")rows.sort((a,b)=>title(a.item).localeCompare(title(b.item),"ru")||pr(a,b));else if(hasQuery)rows.sort((a,b)=>b.score-a.score||pr(a,b));else{rows=rows.filter(x=>!lowTrust(x.item));rows.sort((a,b)=>(votes9000000Score(b.item)-votes9000000Score(a.item))||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0));}}
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
     async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=131";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
