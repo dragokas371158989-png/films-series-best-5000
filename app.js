@@ -22,6 +22,7 @@ window.GKM_V135_STUDIO_ANIME_LIST_VERSION = "v135-studio-anime-list-click-2026-0
 window.GKM_V146_VOTES_9000000_SORT_VERSION = "v146-votes-9000000-sort-2026-06-24";
 window.GKM_V147_INFER_ANIME_STUDIO_FIX_VERSION = "v147-infer-anime-studio-safe-fix-2026-06-24";
 window.GKM_V148_ANTITRASH_GENRE_TOP_VERSION = "v148-antitrash-genre-top-2026-06-24";
+window.GKM_V149_GENRE_TOP_FILMS_ONLY_VERSION = "v149-genre-top-films-only-2026-06-24";
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -1507,18 +1508,23 @@ function installGenreTopButtons() {
 }
 
 function applyGenreTop(genre) {
-  currentTab = "all";
-  setActiveTab("all");
+  // V149: genre top buttons are FILM tops, not mixed all-types tops.
+  // Before this fix anime with millions of votes dominated "Топ боевик/драма/криминал".
+  currentTab = "movies";
+  setActiveTab("movies");
+
   const q = $("searchInput");
   const type = $("typeFilter");
   const gf = $("genreFilter");
   const sort = $("sortFilter");
   const rating = $("ratingFilter");
+
   if (q) q.value = "";
-  if (type) type.value = "";
+  if (type) type.value = "Фильм";
   if (gf) gf.value = genre;
   if (sort) sort.value = "smart";
   if (rating) rating.value = "0";
+
   runSearch(1);
 }
 
