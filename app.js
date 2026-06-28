@@ -2168,39 +2168,39 @@ function setupGkmLocalHelper() {
 gkmHelperReady(setupGkmLocalHelper);
 console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
-/* GKM V166 FRANCHISE SINGLE QUERY FIX START */
+/* GKM V167 FRANCHISE CLEAN QUERIES START */
 (function () {
   "use strict";
 
-  window.GKM_V166_FRANCHISE_SINGLE_QUERY_FIX_VERSION = "v166-franchise-single-query-fix-2026-06-24";
+  window.GKM_V167_FRANCHISE_CLEAN_QUERIES_VERSION = "v167-franchise-clean-queries-2026-06-24";
 
-  // ВАЖНО:
-  // Родной поиск сайта НЕ понимает длинные запросы типа:
-  // "мстители avengers iron man captain america thor spider-man"
-  // Он воспринимает это как одну кучу слов и находит 0.
-  // Поэтому каждая франшиза открывается коротким главным запросом.
+  // V167: чистим франшизы от мусорных совпадений.
+  // Мстители ищем по "avengers", чтобы НЕ попадали "Токийские мстители".
+  // Токийский гуль ищем по "tokyo ghoul", потому что русское название в базе может быть только у фильма.
   const FRANCHISES = [
-    ["Наруто", "наруто"],
-    ["Блич", "блич"],
-    ["Атака титанов", "атака титанов"],
-    ["Токийский гуль", "токийский гуль"],
-    ["Ван-Пис", "ван-пис"],
-    ["Драконий жемчуг", "драконий жемчуг"],
-    ["Fate", "fate"],
-    ["Чужой", "чужой"],
-    ["Хищник", "хищник"],
-    ["Мстители / MCU", "мстители"],
-    ["Железный человек", "железный человек"],
-    ["Капитан Америка", "капитан америка"],
-    ["Тор", "тор"],
-    ["Человек-паук", "человек-паук"],
-    ["Форсаж", "форсаж"],
-    ["Гарри Поттер", "гарри поттер"],
-    ["Фантастические твари", "фантастические твари"],
-    ["Властелин колец", "властелин колец"],
-    ["Хоббит", "хоббит"],
-    ["Терминатор", "терминатор"],
-    ["Матрица", "матрица"]
+    ["Наруто", "naruto"],
+    ["Блич", "bleach"],
+    ["Атака титанов", "attack on titan"],
+    ["Токийский гуль", "tokyo ghoul"],
+    ["Ван-Пис", "one piece"],
+    ["Драконий жемчуг", "dragon ball"],
+    ["Fate", "fate/"],
+    ["Чужой", "alien"],
+    ["Хищник", "predator"],
+    ["Мстители", "avengers"],
+    ["Железный человек", "iron man"],
+    ["Капитан Америка", "captain america"],
+    ["Тор", "thor"],
+    ["Человек-паук", "spider-man"],
+    ["Стражи галактики", "guardians of the galaxy"],
+    ["Доктор Стрэндж", "doctor strange"],
+    ["Форсаж", "fast furious"],
+    ["Гарри Поттер", "harry potter"],
+    ["Фантастические твари", "fantastic beasts"],
+    ["Властелин колец", "lord of the rings"],
+    ["Хоббит", "hobbit"],
+    ["Терминатор", "terminator"],
+    ["Матрица", "matrix"]
   ];
 
   function findSearchInput() {
@@ -2212,8 +2212,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function closeFranchiseOverlay() {
-    document.querySelectorAll(".gkm-v166-franchise-overlay").forEach(x => x.remove());
-    document.body.classList.remove("gkm-v166-franchise-open");
+    document.querySelectorAll(".gkm-v167-franchise-overlay").forEach(x => x.remove());
+    document.body.classList.remove("gkm-v167-franchise-open");
   }
 
   function resetSelects() {
@@ -2259,19 +2259,19 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     closeFranchiseOverlay();
 
     const overlay = document.createElement("div");
-    overlay.className = "gkm-v166-franchise-overlay";
+    overlay.className = "gkm-v167-franchise-overlay";
     overlay.innerHTML = `
-      <div class="gkm-v166-franchise-panel">
-        <div class="gkm-v166-franchise-head">
+      <div class="gkm-v167-franchise-panel">
+        <div class="gkm-v167-franchise-head">
           <div>
             <h2>🧬 Франшизы</h2>
-            <p>Теперь открывает коротким точным запросом. Без длинной каши из слов, которая давала 0.</p>
+            <p>V167: очищенные запросы. Мстители больше не цепляют “Токийских мстителей”.</p>
           </div>
-          <button class="gkm-v166-close" type="button">✕</button>
+          <button class="gkm-v167-close" type="button">✕</button>
         </div>
-        <div class="gkm-v166-franchise-grid">
+        <div class="gkm-v167-franchise-grid">
           ${FRANCHISES.map(([title, query]) => `
-            <button class="gkm-v166-franchise-tile" data-query="${String(query).replace(/"/g, "&quot;")}">
+            <button class="gkm-v167-franchise-tile" data-query="${String(query).replace(/"/g, "&quot;")}">
               <b>${title}</b>
               <span>Поиск: ${query}</span>
             </button>
@@ -2281,26 +2281,26 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     `;
 
     document.body.appendChild(overlay);
-    document.body.classList.add("gkm-v166-franchise-open");
+    document.body.classList.add("gkm-v167-franchise-open");
 
-    overlay.querySelector(".gkm-v166-close").addEventListener("click", closeFranchiseOverlay);
+    overlay.querySelector(".gkm-v167-close").addEventListener("click", closeFranchiseOverlay);
     overlay.addEventListener("click", e => {
       if (e.target === overlay) closeFranchiseOverlay();
     });
 
-    overlay.querySelectorAll(".gkm-v166-franchise-tile").forEach(btn => {
+    overlay.querySelectorAll(".gkm-v167-franchise-tile").forEach(btn => {
       btn.addEventListener("click", () => nativeSearch(btn.dataset.query || ""));
     });
   }
 
   function addButton() {
-    document.querySelectorAll("[data-gkm-v162-franchise-btn],[data-gkm-v163-franchise-btn],[data-gkm-v164-franchise-btn],[data-gkm-v165-franchise-btn],[data-gkm-v166-franchise-btn]").forEach(x => x.remove());
+    document.querySelectorAll("[data-gkm-v162-franchise-btn],[data-gkm-v163-franchise-btn],[data-gkm-v164-franchise-btn],[data-gkm-v165-franchise-btn],[data-gkm-v166-franchise-btn],[data-gkm-v167-franchise-btn]").forEach(x => x.remove());
 
     const btn = document.createElement("button");
     btn.type = "button";
     btn.textContent = "🧬 Франшизы";
-    btn.dataset.gkmV166FranchiseBtn = "1";
-    btn.className = "btn gkm-v166-main-btn";
+    btn.dataset.gkmV167FranchiseBtn = "1";
+    btn.className = "btn gkm-v167-main-btn";
     btn.addEventListener("click", openOverlay);
 
     const target = document.querySelector(".tabs")
@@ -2317,9 +2317,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function addAutoClose() {
     document.addEventListener("click", e => {
       const t = e.target;
-      if (!t || !document.querySelector(".gkm-v166-franchise-overlay")) return;
+      if (!t || !document.querySelector(".gkm-v167-franchise-overlay")) return;
 
-      if (t.closest(".gkm-v166-franchise-overlay") || t.closest("[data-gkm-v166-franchise-btn]")) return;
+      if (t.closest(".gkm-v167-franchise-overlay") || t.closest("[data-gkm-v167-franchise-btn]")) return;
 
       if (t.closest(".tab") || t.closest("button") || t.closest("select") || t.closest("input") || t.closest("a")) {
         closeFranchiseOverlay();
@@ -2328,12 +2328,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function addStyles() {
-    if (document.querySelector("#gkm-v166-franchise-overlay-style")) return;
+    if (document.querySelector("#gkm-v167-franchise-overlay-style")) return;
 
     const style = document.createElement("style");
-    style.id = "gkm-v166-franchise-overlay-style";
+    style.id = "gkm-v167-franchise-overlay-style";
     style.textContent = `
-      .gkm-v166-main-btn {
+      .gkm-v167-main-btn {
         border: 1px solid #00d8ff;
         background: linear-gradient(135deg,#5a25d6,#04c9f4);
         color:#fff;
@@ -2344,7 +2344,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         box-shadow:0 0 18px rgba(0,216,255,.25);
         margin:6px;
       }
-      .gkm-v166-franchise-overlay {
+      .gkm-v167-franchise-overlay {
         position: fixed;
         inset: 0;
         z-index: 999999;
@@ -2353,12 +2353,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         overflow: auto;
         padding: 28px;
       }
-      .gkm-v166-franchise-panel {
+      .gkm-v167-franchise-panel {
         max-width: 1450px;
         margin: 0 auto;
         color: #fff;
       }
-      .gkm-v166-franchise-head {
+      .gkm-v167-franchise-head {
         display:flex;
         justify-content:space-between;
         align-items:flex-start;
@@ -2370,16 +2370,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         background:rgba(10,8,35,.92);
         box-shadow:0 0 24px rgba(0,216,255,.12);
       }
-      .gkm-v166-franchise-head h2 {
+      .gkm-v167-franchise-head h2 {
         margin:0 0 8px;
         font-size:30px;
         text-shadow:0 0 16px rgba(185,125,255,.65);
       }
-      .gkm-v166-franchise-head p {
+      .gkm-v167-franchise-head p {
         margin:0;
         color:#cfc9ff;
       }
-      .gkm-v166-close {
+      .gkm-v167-close {
         min-width:54px;
         min-height:48px;
         border:1px solid #00d8ff;
@@ -2390,12 +2390,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         font-weight:900;
         cursor:pointer;
       }
-      .gkm-v166-franchise-grid {
+      .gkm-v167-franchise-grid {
         display:grid;
         grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
         gap:14px;
       }
-      .gkm-v166-franchise-tile {
+      .gkm-v167-franchise-tile {
         text-align:left;
         min-height:112px;
         display:flex;
@@ -2410,19 +2410,19 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         cursor:pointer;
         box-shadow:0 0 18px rgba(0,216,255,.25);
       }
-      .gkm-v166-franchise-tile b {
+      .gkm-v167-franchise-tile b {
         font-size:22px;
         line-height:1.1;
         margin-bottom:10px;
       }
-      .gkm-v166-franchise-tile span {
+      .gkm-v167-franchise-tile span {
         color:#f0ecff;
         font-size:15px;
       }
       @media(max-width:720px) {
-        .gkm-v166-franchise-overlay { padding: 12px; }
-        .gkm-v166-franchise-head { flex-direction:column; }
-        .gkm-v166-franchise-grid { grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); }
+        .gkm-v167-franchise-overlay { padding: 12px; }
+        .gkm-v167-franchise-head { flex-direction:column; }
+        .gkm-v167-franchise-grid { grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); }
       }
     `;
     document.head.appendChild(style);
@@ -2432,13 +2432,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     addStyles();
     addButton();
     addAutoClose();
-    console.log("GKM: v166-franchise-single-query-fix-2026-06-24");
+    console.log("GKM: v167-franchise-clean-queries-2026-06-24");
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
-  window.GKM_V166_OPEN_FRANCHISES = openOverlay;
-  window.GKM_V166_CLOSE_FRANCHISES = closeFranchiseOverlay;
+  window.GKM_V167_OPEN_FRANCHISES = openOverlay;
+  window.GKM_V167_CLOSE_FRANCHISES = closeFranchiseOverlay;
 })();
-/* GKM V166 FRANCHISE SINGLE QUERY FIX END */
+/* GKM V167 FRANCHISE CLEAN QUERIES END */
