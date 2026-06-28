@@ -30,7 +30,8 @@ window.GKM_V153_STRICT_SECTION_TOP_VERSION = "v153-strict-section-top-no-low-vot
 window.GKM_V154_FORCE_SEARCH_SECTIONS_VERSION = "v154-force-search-for-sections-2026-06-24";
 window.GKM_V155_SMART_TOP_REAL_VOTES_VERSION = "v155-smart-top-real-votes-fix-2026-06-24";
 window.GKM_V156_NEW_2026_ONLY_VERSION = "v156-new-current-year-only-2026-06-24";
-console.log("GKM: v155-smart-top-real-votes-fix-2026-06-24");
+window.GKM_V157_CLEAN_TRASH_TOGGLE_VERSION = "v157-clean-trash-toggle-2026-06-24";
+console.log("GKM: v157-clean-trash-toggle-2026-06-24");
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -723,6 +724,37 @@ function cardHtml(item) {
   `;
 }
 
+
+const GKM_CLEAN_TRASH_STORAGE_KEY = "gkm_clean_trash_v157";
+
+function isCleanTrashEnabled() {
+  try {
+    const saved = localStorage.getItem(GKM_CLEAN_TRASH_STORAGE_KEY);
+    if (saved === null) return true;
+    return saved !== "0";
+  } catch {
+    return true;
+  }
+}
+
+function setCleanTrashEnabled(value) {
+  try {
+    localStorage.setItem(GKM_CLEAN_TRASH_STORAGE_KEY, value ? "1" : "0");
+  } catch {}
+  updateCleanTrashButton();
+}
+
+function updateCleanTrashButton() {
+  const btn = $("cleanTrashBtn");
+  if (!btn) return;
+  const enabled = isCleanTrashEnabled();
+  btn.classList.toggle("active", enabled);
+  btn.textContent = enabled ? "🧹 Мусор скрыт" : "🧹 Мусор выкл";
+  btn.title = enabled
+    ? "Сейчас скрываются ноунеймы с малым числом голосов, пустые карточки и подозрительные 9.5/10.0"
+    : "Сейчас показывается всё, включая мусорные карточки";
+}
+
 function renderList(items, label) {
   const safeItems = (Array.isArray(items) ? items : []).slice(0, PAGE_SIZE);
   currentItems = safeItems;
@@ -752,6 +784,7 @@ function controls() {
     year: $("yearFilter") ? $("yearFilter").value : "",
     minRating: Number($("ratingFilter") ? $("ratingFilter").value || 0 : 0),
     sort: $("sortFilter") ? $("sortFilter").value || "smart" : "smart",
+    cleanTrash: isCleanTrashEnabled(),
     tab: currentTab
   };
 }
@@ -1079,14 +1112,40 @@ function makeSearchWorker() {
       if(y>=cy&&v<1000)score-=1000;
       return score;
     }
-    function sortRows(sort, hasQuery, tab){const pr=(a,b)=>poster(b.item)-poster(a.item);if(tab==="anime_top"){rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));applyAnimeTopDedupe();}else if(tab==="new"){rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||pr(a,b));}else if(sort==="rating")rows.sort((a,b)=>rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item)||pr(a,b));else if(sort==="votes")rows.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||pr(a,b));else if(sort==="year")rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item)||pr(a,b));else if(sort==="year_old")rows.sort((a,b)=>Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item)||pr(a,b));else if(sort==="title")rows.sort((a,b)=>title(a.item).localeCompare(title(b.item),"ru")||pr(a,b));else if(hasQuery)rows.sort((a,b)=>b.score-a.score||pr(a,b));else{rows=rows.filter(x=>!lowTrust(x.item,tab));rows.sort((a,b)=>(votes9000000Score(b.item)-votes9000000Score(a.item))||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0));}}
+    function sortRows(sort, hasQuery, tab, cleanTrash){
+      const pr=(a,b)=>poster(b.item)-poster(a.item);
+      const canClean = cleanTrash !== false && tab !== "new" && tab !== "anime_top";
+      if(canClean){
+        rows = rows.filter(x=>!lowTrust(x.item,tab));
+      }
+      if(tab==="anime_top"){
+        rows.sort((a,b)=>pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||Number(year(b.item)||0)-Number(year(a.item)||0));
+        applyAnimeTopDedupe();
+      }else if(tab==="new"){
+        rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||pr(a,b));
+      }else if(sort==="rating"){
+        rows.sort((a,b)=>rating(b.item)-rating(a.item)||votes(b.item)-votes(a.item)||pr(a,b));
+      }else if(sort==="votes"){
+        rows.sort((a,b)=>votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||pr(a,b));
+      }else if(sort==="year"){
+        rows.sort((a,b)=>Number(year(b.item)||0)-Number(year(a.item)||0)||votes(b.item)-votes(a.item)||pr(a,b));
+      }else if(sort==="year_old"){
+        rows.sort((a,b)=>Number(year(a.item)||9999)-Number(year(b.item)||9999)||votes(b.item)-votes(a.item)||pr(a,b));
+      }else if(sort==="title"){
+        rows.sort((a,b)=>title(a.item).localeCompare(title(b.item),"ru")||pr(a,b));
+      }else if(hasQuery){
+        rows.sort((a,b)=>b.score-a.score||pr(a,b)||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item));
+      }else{
+        rows.sort((a,b)=>(votes9000000Score(b.item)-votes9000000Score(a.item))||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0));
+      }
+    }
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
     async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=131";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
     function buildRows(index, c, queries){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
-    self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page,msg.controls&&msg.controls.tab),ms:0,cached:true});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const queries=queryList(c.q);let index=[];let fallback=false;let cached=false;if(c.tab==="anime_top"&&!queries.length&&animeTopCache){rows=animeTopCache.slice();cached=true;}else{index=await candidateIndex(queries);rows=buildRows(index,c,queries);if(queries.length&&rows.length===0){index=await loadIndex();rows=buildRows(index,c,queries);fallback=true;}sortRows(c.sort||"smart",Boolean(queries.length),c.tab);if(c.tab==="anime_top"){rows=rows.slice(0,100);animeTopCache=rows.slice();}}self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1,c.tab),ms:Date.now()-started,indexTotal:index.length||rows.length,indexPosters:index.length?index.reduce((n,x)=>n+poster(x),0):rows.reduce((n,x)=>n+poster(x.item||x),0),sharded:Boolean(queries.length),fallback,cached});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
+    self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page,msg.controls&&msg.controls.tab),ms:0,cached:true});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const queries=queryList(c.q);let index=[];let fallback=false;let cached=false;if(c.tab==="anime_top"&&!queries.length&&animeTopCache){rows=animeTopCache.slice();cached=true;}else{index=await candidateIndex(queries);rows=buildRows(index,c,queries);if(queries.length&&rows.length===0){index=await loadIndex();rows=buildRows(index,c,queries);fallback=true;}sortRows(c.sort||"smart",Boolean(queries.length),c.tab,c.cleanTrash);if(c.tab==="anime_top"){rows=rows.slice(0,100);animeTopCache=rows.slice();}}self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1,c.tab),ms:Date.now()-started,indexTotal:index.length||rows.length,indexPosters:index.length?index.reduce((n,x)=>n+poster(x),0):rows.reduce((n,x)=>n+poster(x.item||x),0),sharded:Boolean(queries.length),fallback,cached});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
   `;
   searchWorker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
   searchWorker.onmessage = event => {
@@ -1639,6 +1698,11 @@ function bindEvents() {
   ["typeFilter", "genreFilter", "yearFilter", "ratingFilter", "sortFilter"].forEach(id => {
     $(id)?.addEventListener("change", () => scheduleSearch(60));
   });
+  $("cleanTrashBtn")?.addEventListener("click", () => {
+    setCleanTrashEnabled(!isCleanTrashEnabled());
+    scheduleSearch(60);
+  });
+  updateCleanTrashButton();
   $("resetBtn")?.addEventListener("click", () => {
     ["searchInput", "typeFilter", "genreFilter", "yearFilter", "ratingFilter"].forEach(id => {
       const node = $(id);
