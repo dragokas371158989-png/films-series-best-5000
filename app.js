@@ -32,7 +32,8 @@ window.GKM_V155_SMART_TOP_REAL_VOTES_VERSION = "v155-smart-top-real-votes-fix-20
 window.GKM_V156_NEW_2026_ONLY_VERSION = "v156-new-current-year-only-2026-06-24";
 window.GKM_V157_CLEAN_TRASH_TOGGLE_VERSION = "v157-clean-trash-toggle-2026-06-24";
 window.GKM_V158_NEW_RELEASE_GROUPS_VERSION = "v158-new-release-groups-2026-06-24";
-console.log("GKM: v158-new-release-groups-2026-06-24");
+window.GKM_V159_COMPACT_TRASH_BUTTON_VERSION = "v159-compact-trash-button-2026-06-24";
+console.log("GKM: v159-compact-trash-button-2026-06-24");
 const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
@@ -750,7 +751,7 @@ function updateCleanTrashButton() {
   if (!btn) return;
   const enabled = isCleanTrashEnabled();
   btn.classList.toggle("active", enabled);
-  btn.textContent = enabled ? "🧹 Мусор скрыт" : "🧹 Мусор выкл";
+  btn.textContent = enabled ? "🧹 Чисто" : "🧹 Всё";
   btn.title = enabled
     ? "Сейчас скрываются ноунеймы с малым числом голосов, пустые карточки и подозрительные 9.5/10.0"
     : "Сейчас показывается всё, включая мусорные карточки";
