@@ -23,7 +23,36 @@
   <link rel="apple-touch-icon" href="favicon.png.png">
   <link rel="stylesheet" href="style.css?v=148">
   <style>
-    .clean-trash-btn{min-width:96px;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:linear-gradient(135deg,#151b32,#263459);border:1px solid #00d5ff;color:#eaf7ff;border-radius:14px;padding:12px 12px;font-weight:800;box-shadow:0 0 14px rgba(0,213,255,.22);cursor:pointer}
+
+    /* GKM V160 — fixed controls layout: trash button no longer clipped, reset no longer stretches */
+    .controls{
+      display:grid!important;
+      grid-template-columns:minmax(280px,1fr) repeat(5,minmax(135px,170px)) 96px 118px!important;
+      gap:10px!important;
+      align-items:center!important;
+    }
+    .controls input,.controls select{min-width:0!important;width:100%!important;box-sizing:border-box!important;}
+    #cleanTrashBtn.clean-trash-btn{
+      width:96px!important;min-width:96px!important;max-width:96px!important;
+      padding:12px 8px!important;box-sizing:border-box!important;
+      white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;
+      font-size:14px!important;line-height:1.15!important;text-align:center!important;
+      justify-self:stretch!important;grid-column:auto!important;
+    }
+    #resetBtn.reset-btn{
+      width:118px!important;min-width:118px!important;max-width:118px!important;
+      grid-column:auto!important;justify-self:stretch!important;box-sizing:border-box!important;
+      padding-left:12px!important;padding-right:12px!important;
+    }
+    @media (max-width:1250px){
+      .controls{grid-template-columns:minmax(240px,1fr) repeat(3,minmax(130px,1fr)) 96px 118px!important;}
+    }
+    @media (max-width:760px){
+      .controls{grid-template-columns:1fr 1fr!important;}
+      #searchInput{grid-column:1 / -1!important;}
+      #cleanTrashBtn.clean-trash-btn,#resetBtn.reset-btn{width:100%!important;min-width:0!important;max-width:none!important;}
+    }
+    .clean-trash-btn{background:linear-gradient(135deg,#151b32,#263459);border:1px solid #00d5ff;color:#eaf7ff;border-radius:14px;font-weight:800;box-shadow:0 0 14px rgba(0,213,255,.22);cursor:pointer}
     .clean-trash-btn.active{background:linear-gradient(135deg,#00c8ff,#7b2cff);color:#03101a;box-shadow:0 0 20px rgba(0,213,255,.45)}
   </style>
 <!-- GKM V60 TESTED RELEASE -->
@@ -183,7 +212,7 @@
     </div>
   </dialog>
 
-  <script src="app.js?v=159"></script>
+  <script src="app.js?v=160"></script>
 
 <!-- GKM AI CHAT UI V58 RESTORED -->
 <button id="gkmAiFloatBtn" class="ai-float-btn" type="button" aria-label="Открыть чат">🤖</button>
