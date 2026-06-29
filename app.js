@@ -1588,6 +1588,10 @@ function openDetails(item) {
   setLink("rutubeLink", `https://rutube.ru/search/?query=${q}`);
   setLink("googleLink", `https://www.google.com/search?q=${q}`);
 
+  if (window.GKM_V199_APPLY_MODAL_EXTERNAL_LINKS) {
+    window.GKM_V199_APPLY_MODAL_EXTERNAL_LINKS(item);
+  }
+
   const favBtn = $("favBtn");
   if (favBtn) {
     const fav = loadSet(favKey);
@@ -3925,456 +3929,193 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V194 KILL V191 BADGE END */
 
-/* GKM V198 SINGLE EXTERNAL CLICK FIX START */
+
+/* GKM V199 CLEAN MODAL EXTERNAL LINKS START */
 (function () {
   "use strict";
 
-  window.GKM_V198_SINGLE_EXTERNAL_CLICK_FIX_VERSION = "v198-single-external-click-no-double-no-current-redirect-2026-06-24";
+  window.GKM_V199_CLEAN_MODAL_EXTERNAL_LINKS_VERSION = "v199-clean-modal-external-links-2026-06-29";
 
-  /*
-    V198:
-    Причина бага была в конфликте V195 + V197:
-    один обработчик открывал новую вкладку, второй/старый href или обработчик менял текущую страницу.
+  const EXTERNAL_LINK_IDS = [
+    "yandexLink",
+    "yandexVideoLink",
+    "kinopoiskLink",
+    "youtubeLink",
+    "vkLink",
+    "rutubeLink",
+    "googleLink",
+    "shikimoriLink",
+    "malLink"
+  ];
 
-    Что делает V198:
-    - V195 и V197 из app.js должны быть удалены apply-скриптом.
-    - Все внешние кнопки модалки получают href="javascript:void(0)".
-    - Все открытия идут через один обработчик V198.
-    - Ставится защита от двойного клика/двойного события touch+click.
-    - Текущая страница НИКОГДА не заменяется внешним сайтом.
-    - Дубли кнопок скрываются/удаляются.
-  */
+  const ANIME_SITES = [
+    ["Shikimori", "shikimori"],
+    ["MyAnimeList", "mal"],
+    ["AniList", "anilist"],
+    ["Anime-Planet", "animePlanet"],
+    ["AniDB", "anidb"]
+  ];
 
-  let lastOpenKey = "";
-  let lastOpenAt = 0;
-
-  function norm(v) {
-    return String(v || "")
-      .toLowerCase()
-      .replace(/ё/g, "е")
-      .replace(/[«»"']/g, "")
-      .replace(/\s+/g, " ")
-      .trim();
+  function cleanText(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
   }
 
-  function enc(v) {
-    return encodeURIComponent(String(v || "").trim());
+  function itemTitleForSearch(item) {
+    try {
+      return cleanText(displayTitle(item) || titleOf(item));
+    } catch (_) {
+      return cleanText(item && (item.ru || item.title_ru || item.name || item.title || item.en || item.original_title || item.original_name));
+    }
   }
 
-  function visible(el) {
-    if (!el || !el.getBoundingClientRect) return false;
-    const r = el.getBoundingClientRect();
-    const st = getComputedStyle(el);
-    return r.width > 20 && r.height > 15 && st.display !== "none" && st.visibility !== "hidden";
+  function itemYearForSearch(item) {
+    try { return cleanText(getYear(item)); } catch (_) { return cleanText(item && item.year); }
   }
 
-  function activeModal() {
-    const candidates = Array.from(document.querySelectorAll("[role='dialog'],.modal,.popup,.overlay,dialog,body>div,main>div,section>div"))
-      .filter(visible)
-      .filter(el => {
-        const r = el.getBoundingClientRect();
-        const t = norm(el.textContent);
-        return r.width > Math.min(520, window.innerWidth * 0.35)
-          && r.height > Math.min(300, window.innerHeight * 0.35)
-          && (
-            t.includes("что посмотреть похожее") ||
-            t.includes("смотреть / искать видео") ||
-            t.includes("найти на сайтах") ||
-            t.includes("аниме-сайты") ||
-            t.includes("кино-сайты")
-          );
-      });
+  function itemIsAnime(item) {
+    try { return Boolean(isAnimeItem(item) || getType(item) === "Аниме"); } catch (_) { return false; }
+  }
 
-    candidates.sort((a,b) => {
-      const ar = a.getBoundingClientRect();
-      const br = b.getBoundingClientRect();
-      return (br.width * br.height) - (ar.width * ar.height);
+  function buildExternalUrl(kind, query) {
+    const q = encodeURIComponent(cleanText(query));
+    switch (kind) {
+      case "yandex": return "https://yandex.ru/search/?text=" + q;
+      case "yandexVideo": return "https://yandex.ru/video/search?text=" + q;
+      case "kinopoisk": return "https://www.kinopoisk.ru/index.php?kp_query=" + q;
+      case "youtube": return "https://www.youtube.com/results?search_query=" + q;
+      case "vk": return "https://vkvideo.ru/search?q=" + q;
+      case "rutube": return "https://rutube.ru/search/?query=" + q;
+      case "google": return "https://www.google.com/search?q=" + q;
+      case "shikimori": return "https://shikimori.one/animes?search=" + q;
+      case "mal": return "https://myanimelist.net/anime.php?q=" + q;
+      case "anilist": return "https://anilist.co/search/anime?search=" + q;
+      case "animePlanet": return "https://www.anime-planet.com/anime/all?name=" + q;
+      case "anidb": return "https://anidb.net/anime/?adb.search=" + q;
+      default: return "https://www.google.com/search?q=" + q;
+    }
+  }
+
+  function markExternalLink(id, url) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.setAttribute("href", url);
+    el.setAttribute("target", "_blank");
+    el.setAttribute("rel", "noopener noreferrer");
+    el.dataset.gkmV199External = "1";
+
+    // Важно: убираем возможные старые inline-обработчики, чтобы клик не раздваивался.
+    el.onclick = null;
+  }
+
+  function setBlockVisible(id, visible) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = visible ? "" : "none";
+  }
+
+  function setFindBlockTitle(text) {
+    const firstLink = document.getElementById("yandexLink");
+    const section = firstLink && firstLink.closest("section");
+    const title = section && section.querySelector(".links-title,h3");
+    if (title) title.textContent = text;
+  }
+
+  function renderAnimeSites(title) {
+    const block = document.getElementById("animeLinksBlock");
+    const box = block && block.querySelector(".detail-buttons");
+    if (!box) return;
+
+    box.innerHTML = ANIME_SITES.map(([label, kind]) => {
+      const url = buildExternalUrl(kind, title);
+      return '<a href="' + url + '" target="_blank" rel="noopener noreferrer" data-gkm-v199-external="1">' + label + '</a>';
+    }).join("");
+  }
+
+  function removeOldConflictBlocks(dialog) {
+    if (!dialog) return;
+
+    dialog.querySelectorAll(
+      ".gkm-v198-cinema-sites," +
+      ".gkm-v198-find-sites," +
+      ".gkm-v195-find-sites," +
+      ".gkm-v197-find-sites," +
+      ".gkm-v195-sites," +
+      ".gkm-v197-sites," +
+      ".gkm-modal-sites," +
+      "[data-gkm-v195-kind]," +
+      "[data-gkm-v197-kind]," +
+      "[data-gkm-v198-kind]"
+    ).forEach(el => {
+      // Не трогаем штатные кнопки из index.html, только старые сгенерированные блоки/элементы.
+      if (!el.id || !EXTERNAL_LINK_IDS.includes(el.id)) el.remove();
     });
-
-    return candidates[0] || null;
   }
 
-  function modalTitle(modal) {
-    if (!modal) return "";
+  function dedupeModalButtons(dialog) {
+    if (!dialog) return;
+    const seen = new Set();
+    const protectedIds = new Set(EXTERNAL_LINK_IDS.concat(["favBtn"]));
 
-    const selectors = ["h1","h2",".title",".movie-title",".card-title","[class*='title']"];
-    for (const s of selectors) {
-      const el = modal.querySelector(s);
-      const v = el && String(el.textContent || "").trim();
-      if (
-        v && v.length > 1 && v.length < 140 &&
-        !norm(v).includes("что посмотреть") &&
-        !norm(v).includes("найти на сайтах") &&
-        !norm(v).includes("аниме-сайты") &&
-        !norm(v).includes("кино-сайты")
-      ) return v;
-    }
+    dialog.querySelectorAll(".detail-buttons a, .detail-buttons button").forEach(el => {
+      const label = cleanText(el.textContent).toLowerCase();
+      if (!label) return;
+      const key = label + "|" + (el.dataset.gkmV199External ? "external" : "button");
 
-    const lines = String(modal.textContent || "").split("\n").map(x => x.trim()).filter(Boolean);
-    for (const line of lines) {
-      const n = norm(line);
-      if (
-        line.length > 1 && line.length < 120 &&
-        !line.includes("★") &&
-        !n.includes("что посмотреть") &&
-        !n.includes("смотреть / искать") &&
-        !n.includes("найти на сайтах") &&
-        !n.includes("аниме-сайты") &&
-        !n.includes("кино-сайты")
-      ) return line;
-    }
-
-    return document.title || "";
-  }
-
-  function modalType(modal) {
-    const top = norm(String(modal && modal.textContent || "").slice(0, 1500));
-    if (top.includes("аниме")) return "anime";
-    if (top.includes("мультфильм")) return "cartoon";
-    if (top.includes("сериал")) return "series";
-    if (top.includes("фильм")) return "movie";
-    return "movie";
-  }
-
-  function kindFromLabel(label) {
-    const x = norm(label);
-    if (x === "в избранное" || x.includes("избранное")) return "favorite";
-
-    if (x.includes("shikimori")) return "shikimori";
-    if (x.includes("myanimelist")) return "myanimelist";
-    if (x.includes("anilist")) return "anilist";
-    if (x.includes("anime-planet")) return "anime-planet";
-    if (x.includes("anidb")) return "anidb";
-
-    if (x.includes("кинопоиск")) return "kinopoisk";
-    if (x.includes("imdb")) return "imdb";
-    if (x.includes("tmdb")) return "tmdb";
-    if (x.includes("letterboxd")) return "letterboxd";
-    if (x.includes("rotten")) return "rottentomatoes";
-
-    if (x === "яндекс") return "yandex";
-    if (x.includes("яндекс видео")) return "yandex-video";
-    if (x.includes("youtube")) return "youtube";
-    if (x.includes("vk") || x.includes("вк видео") || x.includes("vk видео")) return "vk-video";
-    if (x.includes("rutube")) return "rutube";
-    if (x.includes("google")) return "google";
-    return "";
-  }
-
-  function makeUrl(kind, title) {
-    const q = enc(title);
-    const qFilm = enc(title + " фильм");
-    const qWatch = enc(title + " смотреть");
-
-    const urls = {
-      "shikimori": "https://shikimori.one/animes?search=" + q,
-      "myanimelist": "https://myanimelist.net/anime.php?q=" + q,
-      "anilist": "https://anilist.co/search/anime?search=" + q,
-      "anime-planet": "https://www.anime-planet.com/anime/all?name=" + q,
-      "anidb": "https://anidb.net/anime/?adb.search=" + q,
-
-      "kinopoisk": "https://www.kinopoisk.ru/index.php?kp_query=" + q,
-      "imdb": "https://www.imdb.com/find/?q=" + q,
-      "tmdb": "https://www.themoviedb.org/search?query=" + q,
-      "letterboxd": "https://letterboxd.com/search/" + q + "/",
-      "rottentomatoes": "https://www.rottentomatoes.com/search?search=" + q,
-
-      "yandex": "https://yandex.ru/search/?text=" + qFilm,
-      "yandex-video": "https://yandex.ru/video/search?text=" + qWatch,
-      "youtube": "https://www.youtube.com/results?search_query=" + q,
-      "vk-video": "https://vkvideo.ru/search?q=" + q,
-      "rutube": "https://rutube.ru/search/?query=" + q,
-      "google": "https://www.google.com/search?q=" + qFilm
-    };
-
-    return urls[kind] || "";
-  }
-
-  function btn(label, kind) {
-    const a = document.createElement("a");
-    a.href = "javascript:void(0)";
-    a.textContent = label;
-    a.className = "gkm-v198-btn";
-    a.dataset.gkmV198Kind = kind;
-    if (kind !== "favorite") a.dataset.gkmExternal = "1";
-    a.setAttribute("role", "button");
-    a.setAttribute("tabindex", "0");
-    return a;
-  }
-
-  function heading(modal, text) {
-    return Array.from(modal.querySelectorAll("h1,h2,h3,b,strong,div,p,span"))
-      .find(el => norm(el.textContent) === norm(text)) || null;
-  }
-
-  function parentBlock(head) {
-    if (!head) return null;
-    let p = head.parentElement;
-    for (let i = 0; i < 5 && p; i++) {
-      if (p.querySelectorAll("button,a,[role='button']").length >= 2) return p;
-      p = p.parentElement;
-    }
-    return head.parentElement;
-  }
-
-  function markAndNeutralizeButtons(modal) {
-    const buttons = Array.from(modal.querySelectorAll("button,a,[role='button']"));
-
-    buttons.forEach(b => {
-      const oldKind = b.dataset.gkmV198Kind || b.dataset.gkmV197Kind || b.dataset.gkmV195Kind || kindFromLabel(b.textContent);
-      if (!oldKind) return;
-
-      b.dataset.gkmV198Kind = oldKind;
-      if (oldKind !== "favorite") b.dataset.gkmExternal = "1";
-      b.classList.add("gkm-v198-fixed");
-
-      // Самое важное: убираем href/target старых кнопок, чтобы текущий сайт не менялся.
-      if (b.tagName && b.tagName.toLowerCase() === "a") {
-        b.setAttribute("href", "javascript:void(0)");
-        b.removeAttribute("target");
-        b.removeAttribute("rel");
+      if (protectedIds.has(el.id)) {
+        seen.add(key);
+        return;
       }
 
-      // Убираем inline onclick, если был.
-      if (b.getAttribute("onclick")) b.removeAttribute("onclick");
+      if (seen.has(key)) el.remove();
+      else seen.add(key);
     });
   }
 
-  function removeDuplicateKinds(scope) {
-    const seen = Object.create(null);
-    Array.from(scope.querySelectorAll("[data-gkm-v198-kind],[data-gkm-v197-kind],[data-gkm-v195-kind]")).forEach(el => {
-      const kind = el.dataset.gkmV198Kind || el.dataset.gkmV197Kind || el.dataset.gkmV195Kind || kindFromLabel(el.textContent);
-      if (!kind || kind === "favorite") return;
-      if (seen[kind]) {
-        try { el.remove(); } catch(e) {}
-      } else {
-        seen[kind] = el;
-      }
-    });
-  }
+  window.GKM_V199_APPLY_MODAL_EXTERNAL_LINKS = function applyModalExternalLinks(item) {
+    const dialog = document.getElementById("detailsDialog");
+    const title = itemTitleForSearch(item);
+    const year = itemYearForSearch(item);
+    const query = cleanText((title + " " + year).trim());
+    const anime = itemIsAnime(item);
 
-  function fixSites(modal) {
-    const type = modalType(modal);
-    const animeHead = heading(modal, "Аниме-сайты") || heading(modal, "Кино-сайты");
+    removeOldConflictBlocks(dialog);
 
-    if (!animeHead) return;
+    // Старый пустой/дублирующий блок не используем: все рабочие кнопки лежат в одном чистом ряду.
+    const playerButtons = document.getElementById("playerButtons");
+    if (playerButtons) playerButtons.innerHTML = "";
+    setBlockVisible("playerBlock", false);
 
-    if (type === "anime") {
-      animeHead.textContent = "Аниме-сайты";
-      return;
+    setFindBlockTitle(anime ? "Поиск и видео" : "Кино-сайты");
+
+    markExternalLink("yandexLink", buildExternalUrl("yandex", query));
+    markExternalLink("yandexVideoLink", buildExternalUrl("yandexVideo", query));
+    markExternalLink("kinopoiskLink", buildExternalUrl("kinopoisk", query));
+    markExternalLink("youtubeLink", buildExternalUrl("youtube", query));
+    markExternalLink("vkLink", buildExternalUrl("vk", query));
+    markExternalLink("rutubeLink", buildExternalUrl("rutube", query));
+    markExternalLink("googleLink", buildExternalUrl("google", query));
+
+    setBlockVisible("animeLinksBlock", anime);
+    if (anime) {
+      renderAnimeSites(title);
     }
 
-    animeHead.textContent = "Кино-сайты";
+    dedupeModalButtons(dialog);
+  };
 
-    const block = parentBlock(animeHead) || modal;
+  document.addEventListener("click", function (event) {
+    const el = event.target.closest && event.target.closest("a[data-gkm-v199-external],button[data-gkm-v199-external]");
+    if (!el) return;
 
-    // Убираем аниме-сайты у фильмов/сериалов/мультов.
-    Array.from(block.querySelectorAll("button,a,[role='button']")).forEach(el => {
-      const k = el.dataset.gkmV198Kind || el.dataset.gkmV197Kind || el.dataset.gkmV195Kind || kindFromLabel(el.textContent);
-      if (["shikimori","myanimelist","anilist","anime-planet","anidb"].includes(k)) {
-        try { el.remove(); } catch(e) {}
-      }
-    });
+    const url = el.getAttribute("href") || el.dataset.href || "";
+    if (!/^https?:\/\//i.test(url)) return;
 
-    let wrap = modal.querySelector(".gkm-v198-cinema-sites");
-    if (!wrap) {
-      wrap = document.createElement("div");
-      wrap.className = "gkm-v198-cinema-sites";
-      animeHead.insertAdjacentElement("afterend", wrap);
-    }
-
-    [
-      ["Кинопоиск","kinopoisk"],
-      ["IMDb","imdb"],
-      ["TMDB","tmdb"],
-      ["Letterboxd","letterboxd"],
-      ["Rotten Tomatoes","rottentomatoes"]
-    ].forEach(([label, kind]) => {
-      if (!modal.querySelector("[data-gkm-v198-kind='" + kind + "']")) {
-        wrap.appendChild(btn(label, kind));
-      }
-    });
-  }
-
-  function fixFindSites(modal) {
-    const head = heading(modal, "Найти на сайтах");
-    if (!head) return;
-
-    const block = parentBlock(head) || modal;
-
-    // Старые контейнеры от V195/V197 скрывают/чистятся, чтобы не было второго ряда.
-    Array.from(modal.querySelectorAll(".gkm-v195-find-sites,.gkm-v197-find-sites")).forEach(el => {
-      try { el.remove(); } catch(e) {}
-    });
-
-    markAndNeutralizeButtons(block);
-
-    const needed = [
-      ["В избранное","favorite"],
-      ["Яндекс","yandex"],
-      ["Яндекс Видео","yandex-video"],
-      ["Кинопоиск","kinopoisk"],
-      ["YouTube","youtube"],
-      ["VK Видео","vk-video"],
-      ["Rutube","rutube"],
-      ["Google","google"]
-    ];
-
-    let wrap = modal.querySelector(".gkm-v198-find-sites");
-    if (!wrap) {
-      wrap = document.createElement("div");
-      wrap.className = "gkm-v198-find-sites";
-      head.insertAdjacentElement("afterend", wrap);
-    }
-
-    needed.forEach(([label, kind]) => {
-      if (!block.querySelector("[data-gkm-v198-kind='" + kind + "']")) {
-        wrap.appendChild(btn(label, kind));
-      }
-    });
-
-    markAndNeutralizeButtons(modal);
-    removeDuplicateKinds(block);
-  }
-
-  function fixModal() {
-    const modal = activeModal();
-    if (!modal) return;
-
-    markAndNeutralizeButtons(modal);
-    fixSites(modal);
-    fixFindSites(modal);
-    removeDuplicateKinds(modal);
-  }
-
-  function openExternalOnce(kind, title) {
-    if (!kind || kind === "favorite") return false;
-
-    const url = makeUrl(kind, title);
-    if (!url) return false;
-
-    const now = Date.now();
-    const key = kind + "|" + title + "|" + url;
-
-    // Защита от двойного срабатывания touchend + click / старых обработчиков.
-    if (key === lastOpenKey && now - lastOpenAt < 1400) return true;
-
-    lastOpenKey = key;
-    lastOpenAt = now;
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
 
     window.open(url, "_blank", "noopener,noreferrer");
-    return true;
-  }
-
-  function handleExternalEvent(e) {
-    const target = e.target && e.target.closest && e.target.closest("[data-gkm-v198-kind],[data-gkm-v197-kind],[data-gkm-v195-kind]");
-    if (!target) return;
-
-    const kind = target.dataset.gkmV198Kind || target.dataset.gkmV197Kind || target.dataset.gkmV195Kind || kindFromLabel(target.textContent);
-    if (!kind || kind === "favorite") return;
-
-    // Перехватываем максимально рано и жёстко.
-    e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-
-    const modal = activeModal() || document.body;
-    const title = modalTitle(modal);
-
-    openExternalOnce(kind, title);
-  }
-
-  function addStyles() {
-    if (document.querySelector("#gkm-v198-style")) return;
-
-    const style = document.createElement("style");
-    style.id = "gkm-v198-style";
-    style.textContent = `
-      .gkm-v198-cinema-sites,
-      .gkm-v198-find-sites {
-        display:flex;
-        flex-wrap:wrap;
-        gap:10px;
-        margin:10px 0 14px;
-      }
-
-      .gkm-v198-btn,
-      .gkm-v198-fixed[data-gkm-v198-kind],
-      .gkm-v198-fixed[data-gkm-v197-kind],
-      .gkm-v198-fixed[data-gkm-v195-kind] {
-        display:inline-flex!important;
-        align-items:center!important;
-        justify-content:center!important;
-        min-height:42px!important;
-        padding:10px 16px!important;
-        border:1px solid #00d8ff!important;
-        border-radius:14px!important;
-        background:linear-gradient(135deg,#5a25d6,#04c9f4)!important;
-        color:#fff!important;
-        font-weight:900!important;
-        text-decoration:none!important;
-        cursor:pointer!important;
-        pointer-events:auto!important;
-        user-select:none!important;
-        touch-action:manipulation!important;
-        box-shadow:0 0 14px rgba(0,216,255,.22)!important;
-      }
-
-      .gkm-v195-find-sites,
-      .gkm-v197-find-sites {
-        display:none!important;
-      }
-
-      @media(max-width:760px) {
-        .gkm-v198-cinema-sites,
-        .gkm-v198-find-sites { gap:8px; }
-
-        .gkm-v198-btn,
-        .gkm-v198-fixed[data-gkm-v198-kind],
-        .gkm-v198-fixed[data-gkm-v197-kind],
-        .gkm-v198-fixed[data-gkm-v195-kind] {
-          min-height:46px!important;
-          padding:11px 14px!important;
-          font-size:15px!important;
-        }
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
-  function schedule() {
-    clearTimeout(window.__gkmV198Timer);
-    window.__gkmV198Timer = setTimeout(function () {
-      try { fixModal(); } catch (e) { console.warn("GKM V198 fixModal", e); }
-    }, 200);
-  }
-
-  function init() {
-    addStyles();
-
-    // Ловим до старых обработчиков и до дефолтного перехода.
-    ["pointerdown", "mousedown", "touchstart", "touchend", "click"].forEach(type => {
-      document.addEventListener(type, handleExternalEvent, { capture:true, passive:false });
-    });
-
-    ["click","input","change","keyup"].forEach(type => {
-      document.addEventListener(type, schedule, true);
-    });
-
-    const obs = new MutationObserver(schedule);
-    obs.observe(document.body, { childList:true, subtree:true });
-
-    setTimeout(schedule, 200);
-    setTimeout(schedule, 800);
-    setTimeout(schedule, 1600);
-    setTimeout(schedule, 3000);
-
-    console.log("GKM: v198-single-external-click-no-double-no-current-redirect-2026-06-24");
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-  else init();
-
-  window.GKM_V198_FIX_MODAL_BUTTONS = fixModal;
+  }, true);
 })();
-/* GKM V198 SINGLE EXTERNAL CLICK FIX END */
+/* GKM V199 CLEAN MODAL EXTERNAL LINKS END */
+
