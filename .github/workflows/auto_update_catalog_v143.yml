@@ -97,8 +97,11 @@ jobs:
         run: |
           git config user.name "gkm-kinopoisk-catalog-bot"
           git config user.email "gkm-kinopoisk-catalog-bot@users.noreply.github.com"
-          git add data/index.json data/chunk_*.json data/fast data/auto_update_kinopoisk_v144_report.json
+          git add data/index.json data/chunk_*.json data/fast || true
+          if [ -f data/auto_update_kinopoisk_v144_report.json ]; then git add data/auto_update_kinopoisk_v144_report.json; fi
           if [ -f data/kinopoisk_facts_cache.json ]; then git add data/kinopoisk_facts_cache.json; fi
+          if [ -f data/anime_studios_top.json ]; then git add data/anime_studios_top.json; fi
+          if [ -f data/games_catalog.json ]; then git add data/games_catalog.json; fi
           if git diff --cached --quiet; then
             echo "No catalog changes"
             exit 0
