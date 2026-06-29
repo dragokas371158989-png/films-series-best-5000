@@ -1,4 +1,4 @@
-[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29483013/GKM_PROJECT_SCHEME_V1.md)
+[Uploading GKM_PROJECT_SCHEME_V1.md…]()
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
 
@@ -359,3 +359,11 @@ GKM V199 CLEAN MODAL EXTERNAL LINKS
 - Постеры защищены fallback-заглушкой и автозаменой Steam `header.jpg` на вертикальный `library_600x900_2x.jpg`.
 - Блок `🌍 Открыть вселенную` получил счётчик связей.
 - `index.html` подключает `app.js?v=209`.
+
+
+## GKM V210 GAME GRID BORDER FIX
+
+- Рабочая база: V209.
+- Исправлена лишняя бирюзовая рамка вокруг всей сетки игр после поиска.
+- В разделе Игры сетка не должна получать `gkm-v191-search-best`, outline или box-shadow.
+- Подключение поднято до `app.js?v=210`.
