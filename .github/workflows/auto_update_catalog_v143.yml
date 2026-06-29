@@ -34,10 +34,14 @@ jobs:
       - name: Auto update raw catalog from Kinopoisk
         env:
           KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
-          GKM_KP_PAGES_PER_TYPE: "4"
-          GKM_KP_LIMIT: "250"
-          GKM_KP_SLEEP: "0.35"
-        run: python tools/update_catalog_kinopoisk_v144.py
+          GKM_KP_PAGES_PER_TYPE: "1"
+          GKM_KP_LIMIT: "120"
+          GKM_KP_SLEEP: "0.65"
+        run: |
+          python tools/update_catalog_kinopoisk_v144.py || {
+            echo "GKM V204: Kinopoisk API limit/403 or temporary API error. Keeping existing catalog and continuing build."
+            exit 0
+          }
 
       - name: Build fast data
         run: python tools/build_fast_site_data.py
@@ -53,10 +57,10 @@ jobs:
       - name: Enrich Kinopoisk facts
         env:
           KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
-          GKM_KINOPOISK_FACT_LIMIT: "3000"
+          GKM_KINOPOISK_FACT_LIMIT: "500"
         run: |
           if [ -f tools/enrich_kinopoisk_facts.py ]; then
-            python tools/enrich_kinopoisk_facts.py
+            python tools/enrich_kinopoisk_facts.py || echo "GKM V204: Kinopoisk facts skipped because API limit/403 or temporary API error."
           else
             echo "tools/enrich_kinopoisk_facts.py not found, skipping"
           fi
@@ -100,8 +104,6 @@ jobs:
           git add data/index.json data/chunk_*.json data/fast || true
           if [ -f data/auto_update_kinopoisk_v144_report.json ]; then git add data/auto_update_kinopoisk_v144_report.json; fi
           if [ -f data/kinopoisk_facts_cache.json ]; then git add data/kinopoisk_facts_cache.json; fi
-          if [ -f data/anime_studios_top.json ]; then git add data/anime_studios_top.json; fi
-          if [ -f data/games_catalog.json ]; then git add data/games_catalog.json; fi
           if git diff --cached --quiet; then
             echo "No catalog changes"
             exit 0
