@@ -4118,13 +4118,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }, true);
 })();
 /* GKM V199 CLEAN MODAL EXTERNAL LINKS END */
-/* GKM V202 GAME HUB FULL FEATURES START */
+/* GKM V207 GAME HUB POLISH TELEGRAM START */
 (function () {
   "use strict";
 
-  window.GKM_V202_GAME_HUB_VERSION = "v206-game-hub-full-fallback-2026-06-29";
+  window.GKM_V202_GAME_HUB_VERSION = "v207-game-hub-polish-telegram-2026-06-29";
 
-  const GAMES_URL = "./data/games_catalog.json?v=206";
+  const GAMES_URL = "./data/games_catalog.json?v=207";
   const PAGE = 60;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -5288,6 +5288,33 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function itemTitle(item) { return txt(item && (item.title || item.name || item.ru || item.en || item.original_title || item.original_name)); }
   function itemKey(s) { return low(s).replace(/ё/g,"е").replace(/[^a-z0-9а-я]+/gi," ").replace(/\s+/g," ").trim(); }
 
+  function gameFallbackPoster(title, relation) {
+    const t = safeHtml(title || "Игра");
+    const r = safeHtml(relation || "игровая вселенная");
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#14002e"/><stop offset="0.48" stop-color="#241166"/><stop offset="1" stop-color="#00d5ff"/>
+        </linearGradient>
+        <radialGradient id="r" cx="50%" cy="38%" r="65%"><stop offset="0" stop-color="#ffffff" stop-opacity="0.20"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect width="600" height="900" fill="url(#g)"/>
+      <rect width="600" height="900" fill="url(#r)"/>
+      <circle cx="500" cy="110" r="120" fill="#00d5ff" opacity="0.12"/>
+      <circle cx="90" cy="780" r="150" fill="#a634ff" opacity="0.16"/>
+      <text x="50%" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="80" font-weight="900" fill="#ffffff">🎮</text>
+      <text x="50%" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="900" fill="#ffffff">${t}</text>
+      <text x="50%" y="448" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#bff6ff">${r}</text>
+      <rect x="72" y="690" width="456" height="66" rx="22" fill="#06111f" opacity="0.72" stroke="#00d5ff"/>
+      <text x="50%" y="732" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="900" fill="#dff8ff">ГОЛУБЬ · GAME HUB</text>
+    </svg>`;
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  function gamePosterFor(item) {
+    return txt(item && item.poster) || gameFallbackPoster(itemTitle(item), item && item.relationLabel);
+  }
+
   function isGameItem(item) {
     return low(item && (item.type || item.category)) === "игра" || low(item && item.section) === "games";
   }
@@ -5308,6 +5335,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       case "walkthrough": return "https://www.youtube.com/results?search_query=" + q + "%20%D0%BF%D1%80%D0%BE%D1%85%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5";
       case "system": return "https://www.google.com/search?q=" + q + "%20system%20requirements";
       case "wiki": return "https://www.google.com/search?q=" + q + "%20wiki";
+      case "protondb": return "https://www.protondb.com/search?q=" + q;
+      case "howlong": return "https://howlongtobeat.com/?q=" + q;
+      case "twitch": return "https://www.twitch.tv/search?term=" + q;
+      case "reddit": return "https://www.reddit.com/search/?q=" + q + "%20game";
+      case "telegram": return "https://t.me/share/url?url=" + encodeURIComponent(location.origin + location.pathname + "#game=" + q) + "&text=" + encodeURIComponent("🎮 " + (title || "Игра") + " — Голубь Каталог Мира");
       case "google": default: return "https://www.google.com/search?q=" + q;
     }
   }
@@ -5339,7 +5371,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const json = await res.json();
       gamesCache = Array.isArray(json) ? json : (json.items || []);
     } catch (err) {
-      console.warn("GKM V202: fallback games loaded", err);
+      console.warn("GKM V207: fallback games loaded", err);
       gamesCache = FALLBACK_GAMES;
     }
     gamesCache = gamesCache.map((item, index) => ({
@@ -5348,7 +5380,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       type: "Игра",
       category: "Игра",
       section: "games",
-      overview: item.overview || item.description || "Игровая вселенная с привязкой к фильмам, сериалам, аниме или мультфильмам."
+      overview: item.overview || item.description || "Игровая вселенная с привязкой к фильмам, сериалам, аниме или мультфильмам.",
+      poster: gamePosterFor(item)
     }));
     return gamesCache;
   }
@@ -5390,7 +5423,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     panel.className = "gkm-game-hub-panel";
     panel.innerHTML = `
       <div class="gkm-game-hub-head">
-        <div><b>🎮 Игровые вселенные V202</b><span>игра ↔ фильм / сериал / аниме / мультфильм</span></div>
+        <div><b>🎮 Игровые вселенные V207</b><span>игра ↔ фильм / сериал / аниме / мультфильм</span></div>
         <button type="button" data-gkm-game-filter-reset="1">Все игры</button>
       </div>
       <div class="gkm-game-filter-row">
@@ -5418,6 +5451,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       if (!item || !isGameItem(item)) return;
       card.classList.add("gkm-game-card");
       const poster = card.querySelector(".poster-wrap");
+      if (poster) {
+        const img = poster.querySelector("img");
+        if (img && !img.dataset.gkmV207PosterGuard) {
+          img.dataset.gkmV207PosterGuard = "1";
+          img.onerror = function () { this.onerror = null; this.src = gameFallbackPoster(itemTitle(item), item.relationLabel); };
+        }
+      }
       if (poster && !poster.querySelector(".gkm-game-relation-badge")) {
         const rel = document.createElement("div");
         rel.className = "gkm-game-relation-badge";
@@ -5439,7 +5479,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     currentTab = "games";
     gamesPage = Math.max(1, Number(page || gamesPage || 1));
     if (typeof setActiveTab === "function") setActiveTab("games");
-    if (typeof setStatus === "function") setStatus("Открываю игровые вселенные V202...");
+    if (typeof setStatus === "function") setStatus("Открываю игровые вселенные V207...");
 
     const all = await loadGames();
     const rows = filteredGames(all);
@@ -5461,7 +5501,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const next = document.getElementById("nextBtn");
 
     const relLabel = (RELATION_FILTERS.find(x => x[0] === activeRelation) || ["all", "Все"])[1];
-    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " · V202 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>Steam / Epic / GOG / гайды / похожее</span>";
+    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " · V207 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>Steam / Epic / GOG / гайды / похожее</span>";
     if (grid) {
       grid.innerHTML = slice.map(cardHtml).join("");
       cardBadgesEnhance(grid);
@@ -5470,7 +5510,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (pageText) pageText.textContent = gamesPage + " / " + gamesPages;
     if (prev) prev.disabled = gamesPage <= 1;
     if (next) next.disabled = gamesPage >= gamesPages;
-    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V202 · " + rows.length + " записей");
+    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V207 · " + rows.length + " записей");
   }
 
   function injectGamesTab() {
@@ -5487,7 +5527,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function injectStyle() {
-    if (document.getElementById("gkm-v202-style")) return;
+    if (document.getElementById("gkm-v207-style")) return;
     const style = document.createElement("style");
     style.id = "gkm-v202-style";
     style.textContent = `
@@ -5496,7 +5536,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       .gkm-game-hub-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;}
       .gkm-game-hub-head b{display:block;font-size:18px;color:#eaf7ff}.gkm-game-hub-head span{display:block;margin-top:3px;color:#a9c5e8;font-size:13px}.gkm-game-hub-head button{border:1px solid rgba(0,213,255,.35);border-radius:999px;background:rgba(0,213,255,.08);color:#dff8ff;padding:8px 12px;font-weight:800;cursor:pointer;}
       .gkm-game-filter-row{display:flex;flex-wrap:wrap;gap:8px}.gkm-game-filter{border:1px solid rgba(255,255,255,.13);border-radius:999px;background:rgba(255,255,255,.06);color:#e9e6ff;padding:8px 11px;font-weight:800;cursor:pointer}.gkm-game-filter.active{background:linear-gradient(135deg,#00d5ff,#8a2cff);color:#06111f;border-color:rgba(255,255,255,.35);box-shadow:0 0 18px rgba(0,213,255,.32)}
-      .gkm-game-card .poster-wrap{box-shadow:0 0 0 1px rgba(0,213,255,.18),0 18px 48px rgba(0,0,0,.25);} .gkm-game-card .poster-wrap img{width:100%;height:100%;object-fit:cover;object-position:center;} .gkm-game-card .poster-placeholder{background:linear-gradient(135deg,rgba(106,38,255,.35),rgba(0,213,255,.18));font-size:15px;text-align:center;padding:12px;}
+      .gkm-game-card .poster-wrap{box-shadow:0 0 0 1px rgba(0,213,255,.18),0 18px 48px rgba(0,0,0,.25);overflow:hidden;} .gkm-game-card .poster-wrap:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,0) 36%,rgba(0,0,0,.28));pointer-events:none;z-index:2}.gkm-game-card .poster-wrap img{width:100%;height:100%;object-fit:cover;object-position:center;} .gkm-game-card .poster-placeholder{background:linear-gradient(135deg,rgba(106,38,255,.35),rgba(0,213,255,.18));font-size:15px;text-align:center;padding:12px;}
       .gkm-game-relation-badge{position:absolute;left:8px;right:8px;bottom:8px;z-index:4;padding:6px 8px;border-radius:10px;background:rgba(2,10,20,.84);border:1px solid rgba(0,213,255,.42);color:#dff8ff;font-weight:800;font-size:11px;text-align:center;backdrop-filter:blur(6px);}
       .gkm-game-mini-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.gkm-game-mini-badges span{display:inline-flex;padding:4px 7px;border-radius:999px;background:rgba(0,213,255,.08);border:1px solid rgba(0,213,255,.18);font-size:11px;color:#dff8ff;font-weight:800;}
       .gkm-v202-pill{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;border:1px solid rgba(0,213,255,.38);color:#c9f6ff;background:rgba(0,213,255,.08);font-size:12px;vertical-align:middle;}
@@ -5533,6 +5573,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return '<div class="gkm-game-modal-section"><h4 class="gkm-game-modal-title">' + safeHtml(title) + '</h4>' + (hint ? '<p class="gkm-game-hint">' + safeHtml(hint) + '</p>' : '') + body + '</div>';
   }
 
+  function gameShareUrl(game) {
+    const id = encodeURIComponent(game && game.id ? game.id : itemTitle(game));
+    return location.origin + location.pathname + "#game=" + id;
+  }
+
+  function gameShareText(game) {
+    return "🎮 " + itemTitle(game) + " — Голубь Каталог Мира. Игровая вселенная, где играть и что смотреть.";
+  }
+
+  function gameShareHtml(game) {
+    const url = gameShareUrl(game);
+    const tg = "https://t.me/share/url?url=" + encodeURIComponent(url) + "&text=" + encodeURIComponent(gameShareText(game));
+    return '<div class="detail-buttons">' +
+      extLink("📲 Telegram", tg) +
+      '<button type="button" class="gkm-game-copy-btn" data-gkm-game-copy="' + safeAttr(url) + '">📋 Скопировать ссылку</button>' +
+      extLink("🔎 Google", storeSearchUrl("google", itemTitle(game))) +
+    '</div>';
+  }
+
   function gameModalHtml(game) {
     const title = itemTitle(game);
     const stores = [
@@ -5548,15 +5607,24 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       extLink("💻 Системные требования", storeSearchUrl("system", title)),
       extLink("📚 Wiki / лор", storeSearchUrl("wiki", title))
     ].join("");
+    const fresh = [
+      extLink("🐧 ProtonDB", storeSearchUrl("protondb", title)),
+      extLink("🎮 Steam Deck", storeSearchUrl("google", title + " Steam Deck")),
+      extLink("⏱ HowLongToBeat", storeSearchUrl("howlong", title)),
+      extLink("🟣 Twitch", storeSearchUrl("twitch", title)),
+      extLink("💬 Reddit", storeSearchUrl("reddit", title))
+    ].join("");
     const timeline = arr(game.chronology).length ? '<ol class="gkm-game-timeline">' + arr(game.chronology).map(x => '<li>' + safeHtml(x) + '</li>').join("") + '</ol>' : "";
     const similarGames = chipLinks(game.similarGames, " game");
     const similarMedia = chipLinks(game.similarMedia, " фильм сериал аниме");
     const vibe = arr(game.vibe).map(chip).join("");
     return [
+      sectionHtml("📲 Поделиться", gameShareHtml(game), "Можно быстро кинуть карточку в Telegram или скопировать ссылку."),
       sectionHtml("🛒 Где купить / где играть", '<div class="detail-buttons">' + stores + '</div>'),
       sectionHtml("🔗 Связанные фильмы / сериалы / аниме", '<div class="gkm-game-chip-list">' + (media || chip("Связи будут добавляться")) + '</div>'),
       sectionHtml("🎮 Во что играть после просмотра", '<div class="gkm-game-chip-list">' + play + '</div>', "Это главная фишка раздела: посмотрел проект — сразу видно, во что играть."),
       sectionHtml("▶️ Гайды и трейлеры", '<div class="detail-buttons">' + guides + '</div>'),
+      sectionHtml("⚡ Фреш-проверка", '<div class="detail-buttons">' + fresh + '</div>', "Steam Deck, ProtonDB, Twitch, Reddit и время прохождения."),
       sectionHtml("🧭 Хронология вселенной", timeline),
       sectionHtml("🎯 Похожие игры", '<div class="gkm-game-chip-list">' + similarGames + '</div>'),
       sectionHtml("🎬 Похожие фильмы / сериалы по вайбу", '<div class="gkm-game-chip-list">' + similarMedia + '</div>'),
@@ -5663,6 +5731,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }, true);
 
   document.addEventListener("click", function (event) {
+    const btn = event.target.closest && event.target.closest("[data-gkm-game-copy]");
+    if (!btn) return;
+    event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+    const url = btn.getAttribute("data-gkm-game-copy") || location.href;
+    const done = () => { btn.textContent = "✅ Ссылка скопирована"; setTimeout(() => { btn.textContent = "📋 Скопировать ссылку"; }, 1500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done).catch(() => { prompt("Скопируй ссылку:", url); });
+    else prompt("Скопируй ссылку:", url);
+  }, true);
+
+  document.addEventListener("click", function (event) {
     const el = event.target.closest && event.target.closest("a[data-gkm-v202-game-external]");
     if (!el) return;
     const url = el.getAttribute("href") || "";
@@ -5678,7 +5756,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 })();
-/* GKM V202 GAME HUB FULL FEATURES END */
+/* GKM V207 GAME HUB POLISH TELEGRAM END */
 
 
 
