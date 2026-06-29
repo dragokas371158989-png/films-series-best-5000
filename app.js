@@ -3098,59 +3098,42 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V175 WATCH ORDER GRID SORT END */
 
-/* GKM V185 SAFE BIG SITE FEATURES START */
+/* GKM V186 BUTTONS MENU FIX START */
 (function () {
   "use strict";
 
-  window.GKM_V185_SAFE_BIG_SITE_FEATURES_VERSION = "v185-safe-big-site-features-no-load-crash-2026-06-24";
-
-  /*
-    V185 FIX:
-    V184 ломал загрузку, потому что слишком рано дергал input/change и сайт пытался делать .filter у null.
-    Тут всё безопасно:
-    - НЕТ авто-восстановления поиска при старте;
-    - НЕТ принудительного input/change до загрузки базы;
-    - новые кнопки работают только по уже отрисованным карточкам;
-    - все функции завернуты в safeRun, чтобы не валить сайт;
-    - кнопка "↩ Вернуть место" восстанавливает вручную.
-  */
+  window.GKM_V186_BUTTONS_MENU_FIX_VERSION = "v186-buttons-menu-fix-2026-06-24";
 
   const LS = {
-    state: "GKM_V185_STATE",
-    history: "GKM_V185_HISTORY",
-    folders: "GKM_V185_FOLDERS",
-    quick: "GKM_V185_QUICK_FILTER"
+    quick: "GKM_V186_QUICK_FILTER",
+    history: "GKM_V186_HISTORY",
+    state: "GKM_V186_STATE",
+    folders: "GKM_V186_FOLDERS"
   };
 
   const FOLDERS = ["Смотреть позже", "Любимое", "Уже смотрел", "Брошено", "Для жены", "Аниме", "Фильмы на вечер"];
 
-  function safeRun(name, fn) {
-    try { return fn(); } catch (e) { console.warn("GKM V185 safe:", name, e); return null; }
+  function safe(name, fn) {
+    try { return fn(); } catch (e) { console.warn("GKM V186:", name, e); toast("Ошибка: " + name); return null; }
   }
 
   function norm(v) {
-    return String(v || "")
-      .toLowerCase()
-      .replace(/ё/g, "е")
-      .replace(/[«»"']/g, "")
-      .replace(/\s+/g, " ")
-      .trim();
+    return String(v || "").toLowerCase().replace(/ё/g, "е").replace(/[«»"']/g, "").replace(/\s+/g, " ").trim();
   }
 
   function esc(v) {
     return String(v || "").replace(/[&<>"']/g, s => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[s]));
   }
 
-  function loadJson(k, fb) {
-    try {
-      const v = localStorage.getItem(k);
-      return v ? JSON.parse(v) : fb;
-    } catch (e) { return fb; }
+  function load(k, fb) {
+    try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fb; } catch(e) { return fb; }
   }
 
-  function saveJson(k, v) {
-    try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {}
+  function save(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {}
   }
+
+  function text(el) { return String(el && el.textContent || ""); }
 
   function getSearchInput() {
     return document.querySelector("#search")
@@ -3160,51 +3143,52 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       || document.querySelector("input");
   }
 
-  function text(el) {
-    return String(el && el.textContent || "");
+  function isVisible(el) {
+    if (!el || !el.getBoundingClientRect) return false;
+    const r = el.getBoundingClientRect();
+    const st = getComputedStyle(el);
+    return r.width > 50 && r.height > 80 && st.display !== "none" && st.visibility !== "hidden";
   }
 
   function isCard(el) {
     if (!el || el.nodeType !== 1) return false;
+    if (el.closest && (el.closest(".gkm-v186-quickbar") || el.closest(".gkm-v186-folder-menu") || el.closest(".gkm-v186-panel"))) return false;
     const t = norm(el.textContent);
-    if (t.length < 20 || t.length > 1500) return false;
-    return !!el.querySelector("img") && (
-      t.includes("★") ||
-      t.includes("фильм") ||
-      t.includes("аниме") ||
-      t.includes("сериал") ||
-      t.includes("мультфильм")
-    );
-  }
-
-  function findGrid() {
-    const possible = Array.from(document.querySelectorAll("main,#results,#catalog,.grid,.cards,.results,section,div"));
-    let best = null, bestCards = [];
-    for (const el of possible) {
-      const cards = Array.from(el.children || []).filter(isCard);
-      if (cards.length > bestCards.length) {
-        best = el;
-        bestCards = cards;
-      }
-    }
-    return best && bestCards.length ? { grid: best, cards: bestCards } : null;
+    if (t.length < 18 || t.length > 1800) return false;
+    if (!el.querySelector("img")) return false;
+    if (!(t.includes("★") || t.includes("фильм") || t.includes("аниме") || t.includes("сериал") || t.includes("мультфильм"))) return false;
+    return isVisible(el);
   }
 
   function cards() {
-    const g = findGrid();
-    return g ? g.cards : [];
+    const raw = Array.from(document.querySelectorAll("article,.card,.movie-card,.item,[class*='card'],[class*='movie'],main div,section div"))
+      .filter(isCard);
+
+    return raw.filter(c => !raw.some(o => o !== c && o.contains(c) && isCard(o))).slice(0, 3000);
+  }
+
+  function findGrid() {
+    const cs = cards();
+    if (!cs.length) return null;
+    let best = null, count = 0;
+    const parents = new Map();
+    cs.forEach(c => {
+      const p = c.parentElement;
+      if (!p) return;
+      parents.set(p, (parents.get(p) || 0) + 1);
+    });
+    parents.forEach((n,p) => { if (n > count) { count = n; best = p; } });
+    return best ? { grid: best, cards: cs.filter(c => c.parentElement === best) } : null;
   }
 
   function parseRating(card) {
-    const t = text(card);
-    const m = t.match(/★\s*([0-9]+(?:[.,][0-9]+)?)/) || t.match(/рейтинг[^0-9]*([0-9]+(?:[.,][0-9]+)?)/i);
+    const m = text(card).match(/★\s*([0-9]+(?:[.,][0-9]+)?)/);
     const n = m ? parseFloat(m[1].replace(",", ".")) : 0;
     return Number.isFinite(n) ? n : 0;
   }
 
   function parseVotes(card) {
-    const t = text(card).replace(/\u00a0/g, " ");
-    const m = t.match(/([0-9]+(?:[.,][0-9]+)?)\s*(млн|тыс|голос)/i);
+    const m = text(card).replace(/\u00a0/g, " ").match(/([0-9]+(?:[.,][0-9]+)?)\s*(млн|тыс|голос)/i);
     if (!m) return 0;
     let n = parseFloat(m[1].replace(",", "."));
     if (!Number.isFinite(n)) return 0;
@@ -3228,8 +3212,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function titleOf(card) {
-    const selectors = [".title", ".card-title", ".movie-title", ".name", "[class*='title']", "h3", "h2", "b"];
-    for (const s of selectors) {
+    const sels = [".title", ".card-title", ".movie-title", ".name", "[class*='title']", "h3", "h2", "b"];
+    for (const s of sels) {
       const el = card.querySelector(s);
       const v = el && String(el.textContent || "").trim();
       if (v && v.length > 1 && v.length < 120 && !/^(фильм|аниме|сериал|мультфильм)$/i.test(v)) return v;
@@ -3251,407 +3235,364 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return "—";
   }
 
-  function genresOf(card) {
-    const t = norm(text(card));
-    const known = ["боевик","комедия","драма","криминал","фантастика","фэнтези","ужасы","триллер","детектив","приключения","мелодрама","документальный","история","спорт","военный","семейный","экшен"];
-    return known.filter(g => t.includes(g));
-  }
-
   function trash(card) {
-    const r = parseRating(card);
-    const v = parseVotes(card);
-    const title = norm(titleOf(card));
+    const r = parseRating(card), v = parseVotes(card), title = norm(titleOf(card));
     if (!hasPoster(card) && v < 300) return true;
     if (r >= 9.8 && v < 100) return true;
     if (v > 0 && v <= 10) return true;
     if (title.length <= 2) return true;
     if (/^[a-z0-9]{1,3}$/.test(title)) return true;
-    if (title.includes("untitled")) return true;
     return false;
   }
 
   function qualityScore(card) {
-    const r = parseRating(card);
-    const v = parseVotes(card);
-    const y = parseYear(card);
-    const title = norm(titleOf(card));
     let s = 0;
+    const r = parseRating(card), v = parseVotes(card), y = parseYear(card);
     s += hasPoster(card) ? 400 : -500;
     s += Math.min(v, 2000000) / 4500;
     s += r * 60;
     if (r >= 9.8 && v < 100) s -= 800;
     if (r >= 9.5 && v < 500) s -= 400;
     if (v > 0 && v < 50) s -= 250;
-    if (v === 0) s -= 80;
     if (y >= 2020) s += 25;
-    if (title.length <= 2 || /^[a-z0-9]{1,3}$/.test(title)) s -= 600;
     return s;
   }
 
   function sortQuality() {
     const found = findGrid();
-    if (!found || !found.cards.length) return;
-
-    const rows = found.cards.map((card, idx) => ({ card, idx, score: qualityScore(card) }));
+    if (!found || !found.cards.length) { toast("Карточки пока не найдены"); return; }
+    const rows = found.cards.map((card, idx) => ({card, idx, score: qualityScore(card)}));
     rows.sort((a,b) => (b.score - a.score) || (a.idx - b.idx));
-
     const frag = document.createDocumentFragment();
     rows.forEach(r => frag.appendChild(r.card));
     found.grid.appendChild(frag);
-
-    rows.forEach(r => {
-      r.card.classList.toggle("gkm-v185-trash-card", trash(r.card));
-      r.card.dataset.gkmV185Quality = String(Math.round(r.score));
-    });
+    rows.forEach(r => r.card.classList.toggle("gkm-v186-trash-card", trash(r.card)));
   }
 
-  function applyQuickFilter() {
-    const mode = localStorage.getItem(LS.quick) || "";
-    cards().forEach(card => {
-      let show = true;
-      const r = parseRating(card);
-      const v = parseVotes(card);
+  function applyQuick(mode, silent) {
+    localStorage.setItem(LS.quick, mode || "");
+    const cs = cards();
+    if (!cs.length) { if (!silent) toast("Карточки пока не найдены"); return; }
 
+    cs.forEach(card => {
+      let show = true;
+      const r = parseRating(card), v = parseVotes(card);
       if (mode === "normal") show = !trash(card) && hasPoster(card) && (v === 0 || v >= 100);
       if (mode === "poster") show = hasPoster(card);
       if (mode === "popular") show = v >= 10000;
       if (mode === "hideTrash") show = !trash(card);
       if (mode === "rating7") show = r >= 7;
       if (mode === "votes1000") show = v >= 1000;
-
       card.style.display = show ? "" : "none";
     });
 
-    document.querySelectorAll("[data-gkm-v185-filter]").forEach(b => b.classList.toggle("active", (b.dataset.gkmV185Filter || "") === mode));
-  }
-
-  function addQuickBar() {
-    if (document.querySelector(".gkm-v185-quickbar")) return;
-
-    const bar = document.createElement("div");
-    bar.className = "gkm-v185-quickbar";
-    bar.innerHTML = `
-      <button data-gkm-v185-filter="normal">🔥 Только норм</button>
-      <button data-gkm-v185-filter="poster">🎬 С постером</button>
-      <button data-gkm-v185-filter="popular">👑 Популярное</button>
-      <button data-gkm-v185-filter="hideTrash">🧹 Скрыть мусор</button>
-      <button data-gkm-v185-filter="rating7">⭐ 7+</button>
-      <button data-gkm-v185-filter="votes1000">🗳 от 1000</button>
-      <button data-gkm-v185-filter="">Сброс качества</button>
-      <button data-gkm-v185-random="1">🎲 Умное случайное</button>
-      <button data-gkm-v185-restore="1">↩ Вернуть место</button>
-      <button data-gkm-v185-history="1">🕘 История+</button>
-    `;
-
-    const anchor = document.querySelector(".controls") || document.querySelector(".filters") || document.querySelector("header") || document.querySelector("main") || document.body;
-    anchor.appendChild(bar);
-
-    bar.querySelectorAll("[data-gkm-v185-filter]").forEach(btn => {
-      btn.addEventListener("click", e => {
-        e.preventDefault();
-        e.stopPropagation();
-        localStorage.setItem(LS.quick, btn.dataset.gkmV185Filter || "");
-        safeRun("quick", () => { sortQuality(); applyQuickFilter(); });
-      });
-    });
-
-    bar.querySelector("[data-gkm-v185-random]")?.addEventListener("click", e => { e.preventDefault(); safeRun("random", smartRandom); });
-    bar.querySelector("[data-gkm-v185-restore]")?.addEventListener("click", e => { e.preventDefault(); safeRun("restore", restorePlaceManual); });
-    bar.querySelector("[data-gkm-v185-history]")?.addEventListener("click", e => { e.preventDefault(); safeRun("history", showHistory); });
-  }
-
-  function addMiniDetails() {
-    cards().forEach(card => {
-      if (card.querySelector(".gkm-v185-mini")) return;
-      const mini = document.createElement("div");
-      mini.className = "gkm-v185-mini";
-      mini.innerHTML = `
-        <b>${esc(titleOf(card))}</b>
-        <span>${parseYear(card) || "—"} · ${typeOf(card)} · ★ ${parseRating(card) || "—"}</span>
-        <span>${parseVotes(card).toLocaleString("ru-RU")} голосов</span>
-        <small>${esc(genresOf(card).join(" · ") || "жанры не найдены")}</small>
-      `;
-      card.style.position = card.style.position || "relative";
-      card.appendChild(mini);
-    });
-  }
-
-  function getFolders() {
-    const data = loadJson(LS.folders, null);
-    if (data && typeof data === "object") return data;
-    const init = {};
-    FOLDERS.forEach(f => init[f] = []);
-    saveJson(LS.folders, init);
-    return init;
-  }
-
-  function addFolderButtons() {
-    cards().forEach(card => {
-      if (card.querySelector(".gkm-v185-folder-btn")) return;
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "gkm-v185-folder-btn";
-      btn.textContent = "＋";
-      btn.title = "Добавить в папку";
-      btn.addEventListener("click", e => {
-        e.preventDefault();
-        e.stopPropagation();
-        showFolderMenu(card, btn);
-      });
-      card.style.position = card.style.position || "relative";
-      card.appendChild(btn);
-    });
-  }
-
-  function showFolderMenu(card, btn) {
-    document.querySelectorAll(".gkm-v185-folder-menu").forEach(x => x.remove());
-    const data = getFolders();
-    const title = titleOf(card);
-    const menu = document.createElement("div");
-    menu.className = "gkm-v185-folder-menu";
-    menu.innerHTML = `<b>Добавить:</b>${Object.keys(data).map(f => `<button data-folder="${esc(f)}">${esc(f)}</button>`).join("")}`;
-    document.body.appendChild(menu);
-    const r = btn.getBoundingClientRect();
-    menu.style.left = Math.max(8, r.left - 170) + "px";
-    menu.style.top = (r.bottom + 8) + "px";
-
-    menu.querySelectorAll("[data-folder]").forEach(x => {
-      x.addEventListener("click", e => {
-        e.preventDefault();
-        const folder = x.dataset.folder;
-        const d = getFolders();
-        d[folder] = d[folder] || [];
-        if (!d[folder].includes(title)) d[folder].unshift(title);
-        d[folder] = d[folder].slice(0, 250);
-        saveJson(LS.folders, d);
-        addHistory("folder", title + " → " + folder);
-        menu.remove();
-      });
-    });
-
-    setTimeout(() => document.addEventListener("click", function once() {
-      menu.remove();
-      document.removeEventListener("click", once, true);
-    }, true), 50);
+    document.querySelectorAll("[data-gkm-v186-filter]").forEach(b => b.classList.toggle("active", (b.dataset.gkmV186Filter || "") === (mode || "")));
+    if (!silent) toast(mode ? "Фильтр применён" : "Фильтр сброшен");
   }
 
   function smartRandom() {
     const pool = cards().filter(c => c.style.display !== "none" && !trash(c) && hasPoster(c) && parseVotes(c) >= 100);
     const fallback = cards().filter(c => c.style.display !== "none");
     const arr = pool.length ? pool : fallback;
-    if (!arr.length) return alert("Пока нет карточек для случайного выбора.");
-
+    if (!arr.length) { toast("Нет карточек для выбора"); return; }
     const pick = arr[Math.floor(Math.random() * arr.length)];
-    pick.scrollIntoView({ behavior: "smooth", block: "center" });
-    pick.classList.add("gkm-v185-random-pick");
-    setTimeout(() => pick.classList.remove("gkm-v185-random-pick"), 2200);
+    pick.scrollIntoView({behavior:"smooth", block:"center"});
+    pick.classList.add("gkm-v186-random-pick");
+    setTimeout(() => pick.classList.remove("gkm-v186-random-pick"), 2200);
     addHistory("random", titleOf(pick));
-  }
-
-  function addHistory(type, value) {
-    if (!value) return;
-    const h = loadJson(LS.history, []);
-    const item = { type, value: String(value).slice(0, 160), ts: Date.now() };
-    const clean = h.filter(x => !(x.type === item.type && x.value === item.value));
-    clean.unshift(item);
-    saveJson(LS.history, clean.slice(0, 80));
-  }
-
-  function showHistory() {
-    closePanel();
-    const h = loadJson(LS.history, []);
-    const panel = document.createElement("div");
-    panel.className = "gkm-v185-panel";
-    panel.innerHTML = `
-      <div class="gkm-v185-box">
-        <div class="gkm-v185-box-head">
-          <h2>🕘 История+</h2>
-          <button data-close="1">✕</button>
-        </div>
-        <div class="gkm-v185-box-actions">
-          <button data-clear="1">Очистить</button>
-        </div>
-        <div class="gkm-v185-history-list">
-          ${h.length ? h.map(x => `
-            <button data-q="${esc(x.value)}">
-              <b>${x.type}</b>
-              <span>${esc(x.value)}</span>
-              <em>${new Date(x.ts).toLocaleString("ru-RU")}</em>
-            </button>
-          `).join("") : "<p>История пока пустая.</p>"}
-        </div>
-      </div>
-    `;
-    document.body.appendChild(panel);
-    panel.querySelector("[data-close]")?.addEventListener("click", closePanel);
-    panel.querySelector("[data-clear]")?.addEventListener("click", () => { saveJson(LS.history, []); closePanel(); });
-    panel.querySelectorAll("[data-q]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const input = getSearchInput();
-        if (input) {
-          input.value = btn.dataset.q || "";
-          input.dispatchEvent(new Event("input", { bubbles: true }));
-          input.dispatchEvent(new Event("change", { bubbles: true }));
-        }
-        closePanel();
-      });
-    });
-  }
-
-  function closePanel() {
-    document.querySelectorAll(".gkm-v185-panel").forEach(x => x.remove());
+    toast("Выбрано: " + titleOf(pick));
   }
 
   function savePlace() {
     const input = getSearchInput();
-    const selects = Array.from(document.querySelectorAll("select")).map(s => s.value);
-    saveJson(LS.state, {
+    save(LS.state, {
       q: input ? input.value : "",
-      selects,
+      selects: Array.from(document.querySelectorAll("select")).map(s => s.value),
       scrollY: window.scrollY || 0,
       ts: Date.now()
     });
   }
 
-  function restorePlaceManual() {
-    const st = loadJson(LS.state, null);
-    if (!st) return alert("Сохранённого места пока нет.");
-
+  function restorePlace() {
+    const st = load(LS.state, null);
+    if (!st) { toast("Место ещё не сохранено"); return; }
     const input = getSearchInput();
     if (input && st.q != null) {
       input.value = st.q;
-      input.dispatchEvent(new Event("input", { bubbles: true }));
-      input.dispatchEvent(new Event("change", { bubbles: true }));
+      input.dispatchEvent(new Event("input", {bubbles:true}));
+      input.dispatchEvent(new Event("change", {bubbles:true}));
     }
-
     const selects = Array.from(document.querySelectorAll("select"));
     if (Array.isArray(st.selects)) {
-      selects.forEach((s, i) => {
+      selects.forEach((s,i) => {
         if (st.selects[i] != null) {
           s.value = st.selects[i];
-          s.dispatchEvent(new Event("change", { bubbles: true }));
+          s.dispatchEvent(new Event("change", {bubbles:true}));
         }
       });
     }
-
     setTimeout(() => window.scrollTo(0, st.scrollY || 0), 700);
+    toast("Место возвращено");
   }
 
-  function trackSearch() {
-    const input = getSearchInput();
-    const q = input && input.value && input.value.trim();
-    if (q && q.length >= 2) addHistory("search", q);
+  function addHistory(type, value) {
+    if (!value) return;
+    const h = load(LS.history, []);
+    const item = { type, value: String(value).slice(0,160), ts: Date.now() };
+    const clean = h.filter(x => !(x.type === item.type && x.value === item.value));
+    clean.unshift(item);
+    save(LS.history, clean.slice(0,80));
   }
 
-  function trackCardClick(e) {
-    const real = cards().find(c => c.contains(e.target));
-    if (!real) return;
-    addHistory("open", titleOf(real));
+  function showHistory() {
+    closePanel();
+    const h = load(LS.history, []);
+    const panel = document.createElement("div");
+    panel.className = "gkm-v186-panel";
+    panel.innerHTML = `
+      <div class="gkm-v186-box">
+        <div class="gkm-v186-box-head">
+          <h2>🕘 История+</h2>
+          <button data-gkm-v186-action="closePanel">✕</button>
+        </div>
+        <div class="gkm-v186-box-actions"><button data-gkm-v186-action="clearHistory">Очистить</button></div>
+        <div class="gkm-v186-history-list">
+          ${h.length ? h.map(x => `
+            <button data-gkm-v186-history-q="${esc(x.value)}">
+              <b>${esc(x.type)}</b><span>${esc(x.value)}</span><em>${new Date(x.ts).toLocaleString("ru-RU")}</em>
+            </button>
+          `).join("") : "<p>История пока пустая.</p>"}
+        </div>
+      </div>`;
+    document.body.appendChild(panel);
+    toast("История открыта");
   }
 
-  function fixSimilar() {
-    const modal = Array.from(document.querySelectorAll("[role='dialog'],.modal,.popup,.overlay,dialog")).find(x => {
-      const st = getComputedStyle(x);
-      return st.display !== "none" && st.visibility !== "hidden" && x.offsetHeight > 80;
+  function closePanel() { document.querySelectorAll(".gkm-v186-panel").forEach(x => x.remove()); }
+
+  function clearHistory() { save(LS.history, []); closePanel(); toast("История очищена"); }
+
+  function getFolders() {
+    const d = load(LS.folders, null);
+    if (d && typeof d === "object") return d;
+    const init = {};
+    FOLDERS.forEach(f => init[f] = []);
+    save(LS.folders, init);
+    return init;
+  }
+
+  function addFolderButtons() {
+    cards().forEach(card => {
+      if (card.querySelector(".gkm-v186-folder-btn")) return;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "gkm-v186-folder-btn";
+      btn.textContent = "+";
+      btn.title = "Добавить в папку";
+      btn.addEventListener("click", e => {
+        e.preventDefault(); e.stopPropagation();
+        safe("folderMenu", () => showFolderMenu(card, btn));
+      }, true);
+      card.style.position = card.style.position || "relative";
+      card.appendChild(btn);
     });
-    if (!modal) return;
+  }
 
-    const modalCards = Array.from(modal.querySelectorAll("*")).filter(isCard);
-    if (modalCards.length < 2) return;
+  function showFolderMenu(card, btn) {
+    document.querySelectorAll(".gkm-v186-folder-menu").forEach(x => x.remove());
+    const title = titleOf(card);
+    const d = getFolders();
+    const menu = document.createElement("div");
+    menu.className = "gkm-v186-folder-menu";
+    menu.innerHTML = `<b>Добавить:</b>${Object.keys(d).map(f => `<button data-gkm-v186-folder="${esc(f)}">${esc(f)}</button>`).join("")}`;
+    document.body.appendChild(menu);
 
-    const mainType = (() => {
-      const t = norm(text(modal).slice(0, 2500));
-      if (t.includes("аниме")) return "Аниме";
-      if (t.includes("мультфильм")) return "Мультфильм";
-      if (t.includes("сериал")) return "Сериал";
-      if (t.includes("фильм")) return "Фильм";
-      return "";
-    })();
+    const r = btn.getBoundingClientRect();
+    const w = 220;
+    let left = Math.min(window.innerWidth - w - 8, Math.max(8, r.right - w));
+    let top = r.bottom + 8;
+    const maxH = Math.min(360, window.innerHeight - 20);
+    menu.style.width = w + "px";
+    menu.style.maxHeight = maxH + "px";
+    menu.style.overflowY = "auto";
+    menu.style.left = left + "px";
+    menu.style.top = Math.min(top, window.innerHeight - maxH - 8) + "px";
 
-    modalCards.forEach(card => {
-      const bad = trash(card) || (mainType && typeOf(card) !== "—" && typeOf(card) !== mainType);
-      card.classList.toggle("gkm-v185-similar-down", bad);
+    menu.querySelectorAll("[data-gkm-v186-folder]").forEach(x => {
+      x.addEventListener("click", e => {
+        e.preventDefault(); e.stopPropagation();
+        const folder = x.dataset.gkmV186Folder;
+        const data = getFolders();
+        data[folder] = data[folder] || [];
+        if (!data[folder].includes(title)) data[folder].unshift(title);
+        data[folder] = data[folder].slice(0,250);
+        save(LS.folders, data);
+        addHistory("folder", title + " → " + folder);
+        menu.remove();
+        toast("Добавлено: " + folder);
+      }, true);
     });
+  }
+
+  function addMiniDetails() {
+    cards().forEach(card => {
+      if (card.querySelector(".gkm-v186-mini")) return;
+      const mini = document.createElement("div");
+      mini.className = "gkm-v186-mini";
+      mini.innerHTML = `<b>${esc(titleOf(card))}</b><span>${parseYear(card) || "—"} · ${typeOf(card)} · ★ ${parseRating(card) || "—"}</span><span>${parseVotes(card).toLocaleString("ru-RU")} голосов</span>`;
+      card.style.position = card.style.position || "relative";
+      card.appendChild(mini);
+    });
+  }
+
+  function typeOf(card) {
+    const t = norm(text(card));
+    if (t.includes("аниме")) return "Аниме";
+    if (t.includes("мультсериал")) return "Мультсериал";
+    if (t.includes("мультфильм")) return "Мультфильм";
+    if (t.includes("сериал")) return "Сериал";
+    if (t.includes("фильм")) return "Фильм";
+    return "—";
+  }
+
+  function addQuickBar() {
+    document.querySelectorAll(".gkm-v184-quickbar,.gkm-v185-quickbar,.gkm-v186-quickbar").forEach(x => x.remove());
+    const bar = document.createElement("div");
+    bar.className = "gkm-v186-quickbar";
+    bar.innerHTML = `
+      <button data-gkm-v186-filter="normal">🔥 Только норм</button>
+      <button data-gkm-v186-filter="poster">🎬 С постером</button>
+      <button data-gkm-v186-filter="popular">👑 Популярное</button>
+      <button data-gkm-v186-filter="hideTrash">🧹 Скрыть мусор</button>
+      <button data-gkm-v186-filter="rating7">⭐ 7+</button>
+      <button data-gkm-v186-filter="votes1000">🗳 от 1000</button>
+      <button data-gkm-v186-filter="">Сброс качества</button>
+      <button data-gkm-v186-action="random">🎲 Умное случайное</button>
+      <button data-gkm-v186-action="restore">↩ Вернуть место</button>
+      <button data-gkm-v186-action="history">🕘 История+</button>
+    `;
+    const anchor = document.querySelector(".controls") || document.querySelector(".filters") || document.querySelector("header") || document.querySelector("main") || document.body;
+    anchor.appendChild(bar);
+  }
+
+  function handleClick(e) {
+    const filterBtn = e.target.closest && e.target.closest("[data-gkm-v186-filter]");
+    if (filterBtn) {
+      e.preventDefault(); e.stopPropagation();
+      return safe("filter", () => { sortQuality(); applyQuick(filterBtn.dataset.gkmV186Filter || ""); });
+    }
+
+    const actionBtn = e.target.closest && e.target.closest("[data-gkm-v186-action]");
+    if (actionBtn) {
+      e.preventDefault(); e.stopPropagation();
+      const a = actionBtn.dataset.gkmV186Action;
+      if (a === "random") return safe("random", smartRandom);
+      if (a === "restore") return safe("restore", restorePlace);
+      if (a === "history") return safe("history", showHistory);
+      if (a === "closePanel") return safe("closePanel", closePanel);
+      if (a === "clearHistory") return safe("clearHistory", clearHistory);
+    }
+
+    const h = e.target.closest && e.target.closest("[data-gkm-v186-history-q]");
+    if (h) {
+      e.preventDefault(); e.stopPropagation();
+      const input = getSearchInput();
+      if (input) {
+        input.value = h.dataset.gkmV186HistoryQ || "";
+        input.dispatchEvent(new Event("input", {bubbles:true}));
+        input.dispatchEvent(new Event("change", {bubbles:true}));
+      }
+      closePanel();
+      return;
+    }
+
+    if (!e.target.closest || !e.target.closest(".gkm-v186-folder-menu,.gkm-v186-folder-btn")) {
+      document.querySelectorAll(".gkm-v186-folder-menu").forEach(x => x.remove());
+    }
+  }
+
+  function toast(msg) {
+    let t = document.querySelector(".gkm-v186-toast");
+    if (!t) {
+      t = document.createElement("div");
+      t.className = "gkm-v186-toast";
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(window.__gkmV186Toast);
+    window.__gkmV186Toast = setTimeout(() => t.classList.remove("show"), 1800);
+  }
+
+  function saveStateSoon() {
+    clearTimeout(window.__gkmV186Save);
+    window.__gkmV186Save = setTimeout(savePlace, 300);
   }
 
   function cycle() {
-    safeRun("addQuickBar", addQuickBar);
-    safeRun("sortQuality", sortQuality);
-    safeRun("quickFilter", applyQuickFilter);
-    safeRun("mini", addMiniDetails);
-    safeRun("folders", addFolderButtons);
-    safeRun("similar", fixSimilar);
+    safe("sortQuality", sortQuality);
+    safe("applyQuickSilent", () => applyQuick(localStorage.getItem(LS.quick) || "", true));
+    safe("mini", addMiniDetails);
+    safe("folders", addFolderButtons);
   }
 
   function schedule() {
-    clearTimeout(window.__gkmV185Timer);
-    window.__gkmV185Timer = setTimeout(cycle, 350);
+    clearTimeout(window.__gkmV186Cycle);
+    window.__gkmV186Cycle = setTimeout(cycle, 450);
   }
 
   function addStyles() {
-    if (document.querySelector("#gkm-v185-style")) return;
+    if (document.querySelector("#gkm-v186-style")) return;
     const style = document.createElement("style");
-    style.id = "gkm-v185-style";
+    style.id = "gkm-v186-style";
     style.textContent = `
-      .gkm-v185-quickbar{display:flex;flex-wrap:wrap;gap:8px;padding:10px 8px;border-top:1px solid rgba(0,216,255,.25);border-bottom:1px solid rgba(120,60,255,.25)}
-      .gkm-v185-quickbar button,.gkm-v185-panel button,.gkm-v185-folder-menu button{border:1px solid #00d8ff;background:linear-gradient(135deg,#5a25d6,#04c9f4);color:#fff;border-radius:14px;padding:10px 14px;font-weight:900;cursor:pointer;box-shadow:0 0 14px rgba(0,216,255,.22)}
-      .gkm-v185-quickbar button.active{background:linear-gradient(135deg,#ffae00,#b13cff)}
-      .gkm-v185-trash-card{opacity:.62}
-      .gkm-v185-mini{display:none;position:absolute;left:8px;right:8px;bottom:8px;z-index:60;padding:10px;border:1px solid rgba(0,216,255,.6);border-radius:14px;background:rgba(5,7,25,.94);color:#fff;box-shadow:0 0 20px rgba(0,216,255,.25);pointer-events:none}
-      *:hover>.gkm-v185-mini{display:flex;flex-direction:column;gap:4px}
-      .gkm-v185-mini b{font-size:14px}.gkm-v185-mini span,.gkm-v185-mini small{font-size:12px;color:#d7d2ff}
-      .gkm-v185-random-pick{outline:4px solid #00d8ff!important;box-shadow:0 0 35px rgba(0,216,255,.85)!important}
-      .gkm-v185-folder-btn{position:absolute;right:9px;top:42px;z-index:65;width:32px;height:32px;border-radius:50%;border:1px solid #00d8ff;background:linear-gradient(135deg,#5a25d6,#04c9f4);color:#fff;font-weight:1000;cursor:pointer}
-      .gkm-v185-folder-menu{position:fixed;z-index:9999999;width:230px;display:flex;flex-direction:column;gap:7px;padding:12px;border:1px solid rgba(0,216,255,.55);border-radius:16px;background:rgba(7,8,28,.96);color:#fff;box-shadow:0 0 24px rgba(0,216,255,.3)}
-      .gkm-v185-panel{position:fixed;inset:0;z-index:9999998;overflow:auto;padding:28px;background:rgba(2,4,16,.78);backdrop-filter:blur(4px)}
-      .gkm-v185-box{max-width:900px;margin:0 auto;padding:18px;border:1px solid rgba(0,216,255,.4);border-radius:18px;background:rgba(10,8,35,.96);color:#fff}
-      .gkm-v185-box-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.gkm-v185-box-head h2{margin:0}.gkm-v185-box-actions{margin:14px 0}
-      .gkm-v185-history-list{display:flex;flex-direction:column;gap:8px}.gkm-v185-history-list button{display:grid;grid-template-columns:100px 1fr auto;gap:10px;align-items:center;text-align:left}.gkm-v185-history-list em{color:#cfc9ff;font-style:normal;font-size:12px}
-      .gkm-v185-similar-down{opacity:.45;filter:grayscale(.6);order:9999}
-      @media(max-width:760px){.gkm-v185-history-list button{grid-template-columns:1fr}.gkm-v185-panel{padding:10px}}
+      .gkm-v186-quickbar{display:flex;flex-wrap:wrap;gap:8px;padding:10px 8px;border-top:1px solid rgba(0,216,255,.25);border-bottom:1px solid rgba(120,60,255,.25)}
+      .gkm-v186-quickbar button,.gkm-v186-panel button,.gkm-v186-folder-menu button{border:1px solid #00d8ff;background:linear-gradient(135deg,#5a25d6,#04c9f4);color:#fff;border-radius:14px;padding:10px 14px;font-weight:900;cursor:pointer;box-shadow:0 0 14px rgba(0,216,255,.22)}
+      .gkm-v186-quickbar button.active{background:linear-gradient(135deg,#ffae00,#b13cff)}
+      .gkm-v186-trash-card{opacity:.62}
+      .gkm-v186-mini{display:none;position:absolute;left:8px;right:8px;bottom:8px;z-index:60;padding:10px;border:1px solid rgba(0,216,255,.6);border-radius:14px;background:rgba(5,7,25,.94);color:#fff;box-shadow:0 0 20px rgba(0,216,255,.25);pointer-events:none}
+      *:hover>.gkm-v186-mini{display:flex;flex-direction:column;gap:4px}
+      .gkm-v186-mini b{font-size:14px}.gkm-v186-mini span{font-size:12px;color:#d7d2ff}
+      .gkm-v186-folder-btn{position:absolute!important;right:9px!important;top:72px!important;z-index:65!important;width:32px!important;height:32px!important;border-radius:50%!important;border:1px solid #00d8ff!important;background:linear-gradient(135deg,#5a25d6,#04c9f4)!important;color:#fff!important;font-weight:1000!important;cursor:pointer!important}
+      .gkm-v186-folder-menu{position:fixed!important;z-index:9999999!important;display:flex!important;flex-direction:column!important;gap:7px!important;padding:12px!important;border:1px solid rgba(0,216,255,.55)!important;border-radius:16px!important;background:rgba(7,8,28,.97)!important;color:#fff!important;box-shadow:0 0 24px rgba(0,216,255,.3)!important}
+      .gkm-v186-folder-menu b{font-size:15px;margin-bottom:3px}.gkm-v186-folder-menu button{width:100%;font-size:14px;padding:9px 10px}
+      .gkm-v186-panel{position:fixed;inset:0;z-index:9999998;overflow:auto;padding:28px;background:rgba(2,4,16,.78);backdrop-filter:blur(4px)}
+      .gkm-v186-box{max-width:900px;margin:0 auto;padding:18px;border:1px solid rgba(0,216,255,.4);border-radius:18px;background:rgba(10,8,35,.96);color:#fff}
+      .gkm-v186-box-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.gkm-v186-history-list{display:flex;flex-direction:column;gap:8px}.gkm-v186-history-list button{display:grid;grid-template-columns:100px 1fr auto;gap:10px;align-items:center;text-align:left}.gkm-v186-history-list em{color:#cfc9ff;font-style:normal;font-size:12px}
+      .gkm-v186-random-pick{outline:4px solid #00d8ff!important;box-shadow:0 0 35px rgba(0,216,255,.85)!important}
+      .gkm-v186-toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(30px);z-index:10000000;background:linear-gradient(135deg,#5a25d6,#04c9f4);color:#fff;border:1px solid #00d8ff;border-radius:14px;padding:12px 18px;font-weight:900;box-shadow:0 0 24px rgba(0,216,255,.45);opacity:0;transition:.2s}
+      .gkm-v186-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
     `;
     document.head.appendChild(style);
   }
 
   function init() {
-    // Чистим старый опасный state от V184, который мог ломать загрузку.
     try { localStorage.removeItem("GKM_V184_STATE"); } catch(e) {}
-
     addStyles();
     addQuickBar();
 
-    document.addEventListener("input", () => { safeRun("save", savePlace); schedule(); }, true);
-    document.addEventListener("change", () => { safeRun("save", savePlace); schedule(); }, true);
-    document.addEventListener("click", e => { safeRun("clickHistory", () => trackCardClick(e)); safeRun("save", savePlace); schedule(); }, true);
+    document.addEventListener("click", handleClick, true);
+    document.addEventListener("input", () => { saveStateSoon(); schedule(); }, true);
+    document.addEventListener("change", () => { saveStateSoon(); schedule(); }, true);
+    window.addEventListener("scroll", saveStateSoon, {passive:true});
+    window.addEventListener("beforeunload", savePlace);
 
-    const input = getSearchInput();
-    if (input) {
-      input.addEventListener("keydown", e => { if (e.key === "Enter") setTimeout(() => safeRun("searchHistory", trackSearch), 80); }, true);
-      input.addEventListener("blur", () => safeRun("searchHistory", trackSearch), true);
-    }
-
-    window.addEventListener("beforeunload", () => safeRun("save", savePlace));
-    window.addEventListener("scroll", () => {
-      clearTimeout(window.__gkmV185Scroll);
-      window.__gkmV185Scroll = setTimeout(() => safeRun("save", savePlace), 300);
-    }, { passive: true });
-
-    const observer = new MutationObserver(schedule);
-    observer.observe(document.body, { childList: true, subtree: true });
+    const obs = new MutationObserver(schedule);
+    obs.observe(document.body, {childList:true, subtree:true});
 
     setTimeout(schedule, 700);
     setTimeout(schedule, 1600);
-    setTimeout(schedule, 3000);
+    setTimeout(schedule, 3200);
 
-    console.log("GKM: v185-safe-big-site-features-no-load-crash-2026-06-24");
+    console.log("GKM: v186-buttons-menu-fix-2026-06-24");
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
-  window.GKM_V185_APPLY_SAFE_BIG_SITE_FEATURES = cycle;
-  window.GKM_V185_SMART_RANDOM = smartRandom;
-  window.GKM_V185_SHOW_HISTORY_PLUS = showHistory;
-  window.GKM_V185_RESTORE_PLACE = restorePlaceManual;
+  window.GKM_V186_APPLY = cycle;
+  window.GKM_V186_RANDOM = smartRandom;
+  window.GKM_V186_HISTORY = showHistory;
+  window.GKM_V186_RESTORE = restorePlace;
 })();
-/* GKM V185 SAFE BIG SITE FEATURES END */
+/* GKM V186 BUTTONS MENU FIX END */
