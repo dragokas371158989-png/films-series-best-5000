@@ -1,0 +1,35 @@
+name: Apply GKM V184 Big Site Features
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-v184-big-site-features:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Apply V184 patch
+        run: python tools/gkm_v184_apply_big_site_features.py
+
+      - name: Commit V184 files
+        run: |
+          git config user.name "actions-user"
+          git config user.email "actions@github.com"
+          git add app.js index.html film/index.html downloads/index.html tools/gkm_v184_apply_big_site_features.py .github/workflows/apply_gkm_v184_big_site_features.yml
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Apply GKM V184 big site features"
+            git push
+          fi
