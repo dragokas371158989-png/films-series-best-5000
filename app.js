@@ -3924,3 +3924,283 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V194_KILL_BADGE = killBadge;
 })();
 /* GKM V194 KILL V191 BADGE END */
+
+/* GKM V195 MODAL SITES BUTTONS FIX START */
+(function () {
+  "use strict";
+
+  window.GKM_V195_MODAL_SITES_BUTTONS_FIX_VERSION = "v195-modal-sites-buttons-fix-2026-06-24";
+
+  function norm(v) {
+    return String(v || "").toLowerCase().replace(/ё/g, "е").replace(/[«»"']/g, "").replace(/\s+/g, " ").trim();
+  }
+
+  function enc(v) { return encodeURIComponent(String(v || "").trim()); }
+
+  function isVisible(el) {
+    if (!el || !el.getBoundingClientRect) return false;
+    const r = el.getBoundingClientRect();
+    const st = getComputedStyle(el);
+    return r.width > 20 && r.height > 15 && st.display !== "none" && st.visibility !== "hidden";
+  }
+
+  function activeModal() {
+    const list = Array.from(document.querySelectorAll("[role='dialog'],.modal,.popup,.overlay,dialog"))
+      .filter(isVisible)
+      .filter(el => el.getBoundingClientRect().height > 180 && el.textContent && el.textContent.length > 100);
+
+    if (list.length) {
+      list.sort((a,b) => (b.getBoundingClientRect().width * b.getBoundingClientRect().height) - (a.getBoundingClientRect().width * a.getBoundingClientRect().height));
+      return list[0];
+    }
+
+    const fallback = Array.from(document.querySelectorAll("body > div, main > div, section > div"))
+      .filter(isVisible)
+      .filter(el => {
+        const r = el.getBoundingClientRect();
+        const t = norm(el.textContent);
+        return r.width > window.innerWidth * 0.45 && r.height > window.innerHeight * 0.45 && (t.includes("что посмотреть похожее") || t.includes("смотреть / искать видео"));
+      });
+
+    fallback.sort((a,b) => (b.getBoundingClientRect().width * b.getBoundingClientRect().height) - (a.getBoundingClientRect().width * a.getBoundingClientRect().height));
+    return fallback[0] || null;
+  }
+
+  function modalTitle(modal) {
+    if (!modal) return "";
+    const selectors = ["h1","h2",".title",".movie-title",".card-title","[class*='title']"];
+    for (const s of selectors) {
+      const el = modal.querySelector(s);
+      const v = el && String(el.textContent || "").trim();
+      if (v && v.length > 1 && v.length < 140 && !norm(v).includes("что посмотреть")) return v;
+    }
+    const lines = String(modal.textContent || "").split("\n").map(x => x.trim()).filter(Boolean);
+    for (const line of lines) {
+      if (line.length > 1 && line.length < 120 && !line.includes("★") && !norm(line).includes("что посмотреть") && !norm(line).includes("смотреть / искать")) return line;
+    }
+    return "";
+  }
+
+  function modalType(modal) {
+    const top = norm(String(modal && modal.textContent || "").slice(0, 1200));
+    if (top.includes("аниме")) return "anime";
+    if (top.includes("мультфильм")) return "cartoon";
+    if (top.includes("сериал")) return "series";
+    if (top.includes("фильм")) return "movie";
+    return "movie";
+  }
+
+  function makeUrl(kind, title) {
+    const q = enc(title);
+    const qWatch = enc(title + " смотреть");
+    const qRu = enc(title + " фильм");
+    const map = {
+      "shikimori": "https://shikimori.one/animes?search=" + q,
+      "myanimelist": "https://myanimelist.net/anime.php?q=" + q,
+      "anilist": "https://anilist.co/search/anime?search=" + q,
+      "anime-planet": "https://www.anime-planet.com/anime/all?name=" + q,
+      "anidb": "https://anidb.net/anime/?adb.search=" + q,
+      "kinopoisk": "https://www.kinopoisk.ru/index.php?kp_query=" + q,
+      "imdb": "https://www.imdb.com/find/?q=" + q,
+      "tmdb": "https://www.themoviedb.org/search?query=" + q,
+      "letterboxd": "https://letterboxd.com/search/" + q + "/",
+      "rottentomatoes": "https://www.rottentomatoes.com/search?search=" + q,
+      "yandex": "https://yandex.ru/search/?text=" + qRu,
+      "yandex-video": "https://yandex.ru/video/search?text=" + qWatch,
+      "youtube": "https://www.youtube.com/results?search_query=" + q,
+      "vk-video": "https://vkvideo.ru/search?q=" + q,
+      "rutube": "https://rutube.ru/search/?query=" + q,
+      "google": "https://www.google.com/search?q=" + qRu
+    };
+    return map[kind] || "";
+  }
+
+  function buttonKind(label) {
+    const x = norm(label);
+    if (x.includes("shikimori")) return "shikimori";
+    if (x.includes("myanimelist")) return "myanimelist";
+    if (x.includes("anilist")) return "anilist";
+    if (x.includes("anime-planet")) return "anime-planet";
+    if (x.includes("anidb")) return "anidb";
+    if (x.includes("кинопоиск")) return "kinopoisk";
+    if (x.includes("imdb")) return "imdb";
+    if (x.includes("tmdb")) return "tmdb";
+    if (x.includes("letterboxd")) return "letterboxd";
+    if (x.includes("rotten")) return "rottentomatoes";
+    if (x === "яндекс") return "yandex";
+    if (x.includes("яндекс видео")) return "yandex-video";
+    if (x.includes("youtube")) return "youtube";
+    if (x.includes("vk") || x.includes("вк видео")) return "vk-video";
+    if (x.includes("rutube")) return "rutube";
+    if (x.includes("google")) return "google";
+    return "";
+  }
+
+  function openSafe(url) {
+    if (!url) return false;
+    const w = window.open(url, "_blank", "noopener,noreferrer");
+    if (!w) location.href = url;
+    return true;
+  }
+
+  function makeBtn(label, kind) {
+    const a = document.createElement("a");
+    a.className = "gkm-v195-site-btn";
+    a.textContent = label;
+    a.href = "#";
+    a.dataset.gkmV195Kind = kind;
+    a.setAttribute("role", "button");
+    a.setAttribute("tabindex", "0");
+    return a;
+  }
+
+  function findHeading(modal, headingText) {
+    const heads = Array.from(modal.querySelectorAll("h1,h2,h3,b,strong,div,p,span"))
+      .filter(el => norm(el.textContent) === norm(headingText));
+    return heads[0] || null;
+  }
+
+  function blockAfterHeading(head) {
+    let parent = head && head.parentElement;
+    for (let i = 0; i < 4 && parent; i++) {
+      if (parent.querySelectorAll("button,a,[role='button']").length >= 2) return parent;
+      parent = parent.parentElement;
+    }
+    return head ? (head.parentElement || null) : null;
+  }
+
+  function fixSitesBlock(modal, type) {
+    const animeHead = findHeading(modal, "Аниме-сайты");
+    if (!animeHead) return;
+
+    if (type === "anime") return;
+
+    animeHead.textContent = "Кино-сайты";
+
+    const box = blockAfterHeading(animeHead) || modal;
+    Array.from(box.querySelectorAll("button,a,[role='button']")).forEach(b => {
+      const k = buttonKind(b.textContent);
+      if (["shikimori","myanimelist","anilist","anime-planet","anidb"].includes(k)) {
+        try { b.remove(); } catch(e) {}
+      }
+    });
+
+    if (!modal.querySelector("[data-gkm-v195-kind='imdb']")) {
+      const wrap = document.createElement("div");
+      wrap.className = "gkm-v195-cinema-sites";
+      [["Кинопоиск","kinopoisk"],["IMDb","imdb"],["TMDB","tmdb"],["Letterboxd","letterboxd"],["Rotten Tomatoes","rottentomatoes"]]
+        .forEach(([label, kind]) => wrap.appendChild(makeBtn(label, kind)));
+      animeHead.insertAdjacentElement("afterend", wrap);
+    }
+  }
+
+  function ensureFindSites(modal) {
+    const head = findHeading(modal, "Найти на сайтах");
+    if (!head) return;
+    let container = modal.querySelector(".gkm-v195-find-sites");
+    if (!container) {
+      container = document.createElement("div");
+      container.className = "gkm-v195-find-sites";
+      head.insertAdjacentElement("afterend", container);
+    }
+    [["Кинопоиск","kinopoisk"],["Яндекс","yandex"],["Яндекс Видео","yandex-video"],["YouTube","youtube"],["VK Видео","vk-video"],["Rutube","rutube"],["Google","google"]]
+      .forEach(([label, kind]) => {
+        if (!modal.querySelector("[data-gkm-v195-kind='" + kind + "']")) container.appendChild(makeBtn(label, kind));
+      });
+  }
+
+  function fixExistingButtons(modal, title) {
+    Array.from(modal.querySelectorAll("button,a,[role='button']")).forEach(btn => {
+      const kind = buttonKind(btn.textContent);
+      if (!kind) return;
+      btn.dataset.gkmV195Kind = kind;
+      btn.classList.add("gkm-v195-fixed-btn");
+      if (btn.tagName.toLowerCase() === "a") {
+        const url = makeUrl(kind, title);
+        if (url) {
+          btn.href = url;
+          btn.target = "_blank";
+          btn.rel = "noopener noreferrer";
+        }
+      }
+    });
+  }
+
+  function fixModal() {
+    const modal = activeModal();
+    if (!modal) return;
+    const title = modalTitle(modal);
+    if (!title) return;
+    const type = modalType(modal);
+    fixSitesBlock(modal, type);
+    ensureFindSites(modal);
+    fixExistingButtons(modal, title);
+  }
+
+  function handleOpen(e) {
+    const btn = e.target && e.target.closest && e.target.closest("[data-gkm-v195-kind]");
+    if (!btn) return;
+    const modal = activeModal() || document.body;
+    const title = modalTitle(modal);
+    const kind = btn.dataset.gkmV195Kind || buttonKind(btn.textContent);
+    const url = makeUrl(kind, title);
+    if (!url) return;
+    e.preventDefault();
+    e.stopPropagation();
+    openSafe(url);
+  }
+
+  function addStyles() {
+    if (document.querySelector("#gkm-v195-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v195-style";
+    style.textContent = `
+      .gkm-v195-cinema-sites,.gkm-v195-find-sites{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 14px}
+      .gkm-v195-site-btn,.gkm-v195-fixed-btn[data-gkm-v195-kind]{
+        display:inline-flex!important;align-items:center!important;justify-content:center!important;
+        min-height:42px!important;padding:10px 16px!important;border:1px solid #00d8ff!important;
+        border-radius:14px!important;background:linear-gradient(135deg,#5a25d6,#04c9f4)!important;
+        color:#fff!important;font-weight:900!important;text-decoration:none!important;cursor:pointer!important;
+        pointer-events:auto!important;user-select:none!important;touch-action:manipulation!important;
+        box-shadow:0 0 14px rgba(0,216,255,.22)!important
+      }
+      .gkm-v195-site-btn:hover,.gkm-v195-fixed-btn[data-gkm-v195-kind]:hover{transform:translateY(-1px);box-shadow:0 0 22px rgba(0,216,255,.35)!important}
+      @media(max-width:760px){
+        .gkm-v195-cinema-sites,.gkm-v195-find-sites{gap:8px}
+        .gkm-v195-site-btn,.gkm-v195-fixed-btn[data-gkm-v195-kind]{min-height:46px!important;padding:11px 14px!important;font-size:15px!important}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function schedule() {
+    clearTimeout(window.__gkmV195Timer);
+    window.__gkmV195Timer = setTimeout(function () {
+      try { fixModal(); } catch(e) { console.warn("GKM V195 fixModal", e); }
+    }, 300);
+  }
+
+  function init() {
+    addStyles();
+    document.addEventListener("click", handleOpen, true);
+    document.addEventListener("touchend", function(e) {
+      const btn = e.target && e.target.closest && e.target.closest("[data-gkm-v195-kind]");
+      if (btn) handleOpen(e);
+    }, {capture:true, passive:false});
+    document.addEventListener("click", schedule, true);
+    document.addEventListener("input", schedule, true);
+    document.addEventListener("change", schedule, true);
+    const obs = new MutationObserver(schedule);
+    obs.observe(document.body, {childList:true, subtree:true});
+    setTimeout(schedule, 500);
+    setTimeout(schedule, 1200);
+    setTimeout(schedule, 2500);
+    console.log("GKM: v195-modal-sites-buttons-fix-2026-06-24");
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+
+  window.GKM_V195_FIX_MODAL_BUTTONS = fixModal;
+})();
+/* GKM V195 MODAL SITES BUTTONS FIX END */
