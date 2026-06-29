@@ -4118,13 +4118,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }, true);
 })();
 /* GKM V199 CLEAN MODAL EXTERNAL LINKS END */
-/* GKM V209 GAME HUB QUALITY FIX START */
+/* GKM V210 GAME HUB QUALITY FIX START */
 (function () {
   "use strict";
 
   window.GKM_V202_GAME_HUB_VERSION = "v209-game-hub-quality-fix-2026-06-29";
 
-  const GAMES_URL = "./data/games_catalog.json?v=209";
+  const GAMES_URL = "./data/games_catalog.json?v=210";
   const PAGE = 60;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -8577,7 +8577,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const json = await res.json();
       gamesCache = Array.isArray(json) ? json : (json.items || []);
     } catch (err) {
-      console.warn("GKM V209: fallback games loaded", err);
+      console.warn("GKM V210: fallback games loaded", err);
       gamesCache = FALLBACK_GAMES;
     }
     gamesCache = gamesCache.map((item, index) => ({
@@ -8648,7 +8648,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     panel.className = "gkm-game-hub-panel";
     panel.innerHTML = `
       <div class="gkm-game-hub-head">
-        <div><b>🎮 Игровые вселенные V209</b><span>игра ↔ фильм / сериал / аниме / мультфильм</span></div>
+        <div><b>🎮 Игровые вселенные V210</b><span>игра ↔ фильм / сериал / аниме / мультфильм</span></div>
         <button type="button" data-gkm-game-filter-reset="1">Все игры</button>
       </div>
       <div class="gkm-game-filter-row">
@@ -8713,7 +8713,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     currentTab = "games";
     gamesPage = Math.max(1, Number(page || gamesPage || 1));
     if (typeof setActiveTab === "function") setActiveTab("games");
-    if (typeof setStatus === "function") setStatus("Открываю игровые вселенные V209...");
+    if (typeof setStatus === "function") setStatus("Открываю игровые вселенные V210...");
 
     const all = await loadGames();
     const rows = filteredGames(all);
@@ -8730,12 +8730,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     updateGamePanel(all);
     const count = document.getElementById("countText");
     const grid = document.getElementById("grid");
+    if (grid) {
+      grid.classList.remove("gkm-v191-search-best");
+      grid.removeAttribute("tabindex");
+      grid.style.removeProperty("outline");
+      grid.style.removeProperty("box-shadow");
+    }
     const pageText = document.getElementById("pageText");
     const prev = document.getElementById("prevBtn");
     const next = document.getElementById("nextBtn");
 
     const relLabel = (RELATION_FILTERS.find(x => x[0] === activeRelation) || ["all", "Все"])[1];
-    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " из " + all.length + " · V209 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>Steam / Epic / GOG / гайды / похожее</span>";
+    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " из " + all.length + " · V210 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>Steam / Epic / GOG / гайды / похожее</span>";
     if (grid) {
       grid.innerHTML = slice.length ? slice.map(cardHtml).join("") : `<div class="gkm-game-empty">Ничего не найдено. Сбрось фильтры или измени поиск.</div>`;
       cardBadgesEnhance(grid);
@@ -8744,7 +8750,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (pageText) pageText.textContent = gamesPage + " / " + gamesPages;
     if (prev) prev.disabled = gamesPage <= 1;
     if (next) next.disabled = gamesPage >= gamesPages;
-    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V209 · " + rows.length + " записей");
+    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V210 · " + rows.length + " записей");
   }
 
   function injectGamesTab() {
@@ -8776,6 +8782,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       .gkm-v202-pill{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;border:1px solid rgba(0,213,255,.38);color:#c9f6ff;background:rgba(0,213,255,.08);font-size:12px;vertical-align:middle;}
       .gkm-game-links-block{border:1px solid rgba(0,213,255,.25);background:linear-gradient(135deg,rgba(0,213,255,.06),rgba(134,68,255,.08));}
       .gkm-game-modal-section{margin-top:12px}.gkm-game-modal-title{margin:0 0 8px;color:#eaf7ff;font-weight:900}.gkm-game-chip-list{display:flex;flex-wrap:wrap;gap:8px}.gkm-game-chip-list span,.gkm-game-chip-list a{display:inline-flex;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 10px;background:rgba(255,255,255,.06);font-size:13px;color:#eaf7ff;text-decoration:none}.gkm-game-chip-list a{border-color:rgba(0,213,255,.32);background:rgba(0,213,255,.08);font-weight:800}.gkm-game-timeline{margin:0;padding-left:20px;color:#dfe8ff}.gkm-game-timeline li{margin:5px 0}.gkm-game-hint{color:#a9c5e8;font-size:13px;margin:4px 0 10px;}.gkm-game-universe-box{border:1px solid rgba(0,213,255,.22);border-radius:16px;padding:12px;background:linear-gradient(135deg,rgba(0,213,255,.07),rgba(138,44,255,.09));}.gkm-game-universe-name{font-weight:1000;color:#eaf7ff;margin-bottom:10px}.gkm-game-universe-col{margin:9px 0}.gkm-game-universe-col>b{display:block;color:#9eeaff;margin-bottom:6px;font-size:13px}.gkm-game-empty{grid-column:1/-1;border:1px dashed rgba(0,213,255,.35);border-radius:18px;padding:24px;text-align:center;color:#dff8ff;background:rgba(0,213,255,.06);font-weight:900}.gkm-game-universe-col .gkm-game-chip-list span{background:rgba(0,213,255,.08);border-color:rgba(0,213,255,.22)}
+      /* GKM V210 GAME GRID BORDER FIX: убираем бирюзовую рамку с общей сетки игр после поиска */
+      #grid.gkm-v191-search-best,
+      body:has(.gkm-games-tab.active) #grid.gkm-v191-search-best,
+      #grid:focus,
+      #grid:focus-visible,
+      #grid:focus-within{outline:none!important;box-shadow:none!important;border-color:transparent!important;}
+      #grid .gkm-game-card.gkm-v191-search-best{outline:none!important;box-shadow:0 0 0 1px rgba(0,213,255,.18),0 18px 48px rgba(0,0,0,.25)!important;}
+      .gkm-game-card{outline:none!important;}
+      .gkm-game-hub-panel + #grid{margin-top:12px;}
       @media(max-width:760px){.gkm-game-hub-head{display:block}.gkm-game-hub-head button{margin-top:10px}.gkm-v202-pill{display:block;margin:8px 0 0;width:max-content;max-width:100%;}.gkm-game-relation-badge{font-size:10px;padding:5px 6px;}.gkm-game-filter{font-size:12px;padding:7px 9px;}}
     `;
     document.head.appendChild(style);
@@ -9018,7 +9033,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 })();
-/* GKM V209 GAME HUB QUALITY FIX END */
+/* GKM V210 GAME HUB QUALITY FIX END */
 
 
 
