@@ -1,3 +1,4 @@
+[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29471584/GKM_PROJECT_SCHEME_V1.md)
 [Uploading GKM_PROJECT_SCHEME_V1.md…]()
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
@@ -321,3 +322,48 @@ GKM V199 CLEAN MODAL EXTERNAL LINKS
 ---
 
 Конец файла.
+
+---
+
+## GKM V200 GAME UNIVERSES PREVIEW
+
+Статус: тестовый раздел. Если не понравится, можно удалить блок `GKM V200 GAME UNIVERSES PREVIEW` из `app.js`, вернуть `index.html` на старую версию `app.js?v=198` и удалить `data/games_catalog.json`.
+
+### Что добавляет V200
+
+```mermaid
+flowchart TD
+    A[ГОЛУБЬ Каталог Мира] --> B[Фильмы]
+    A --> C[Сериалы]
+    A --> D[Аниме]
+    A --> E[Мультфильмы]
+    A --> F[🎮 Игры]
+
+    F --> F1[Игра → фильм]
+    F --> F2[Игра → сериал]
+    F --> F3[Игра → аниме]
+    F --> F4[Общая вселенная]
+
+    F1 --> S1[Steam / Epic / GOG / YouTube / Google]
+    F2 --> S1
+    F3 --> S1
+    F4 --> S1
+```
+
+### Файлы V200
+
+```txt
+app.js
+  └─ GKM V200 GAME UNIVERSES PREVIEW
+
+data/games_catalog.json
+  └─ список игр и связей игра ↔ фильм / сериал / аниме
+
+index.html
+  └─ app.js?v=200, чтобы браузер не держал старый кэш
+```
+
+### Правило
+
+Игровой раздел не должен ломать основной каталог. Он работает отдельным режимом `currentMode = "games"` и не заменяет фильмы/сериалы/аниме.
+
