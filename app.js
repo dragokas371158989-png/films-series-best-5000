@@ -635,6 +635,64 @@ function posterPlaceholderHtml() {
   return `<div class="poster-placeholder">Нет постера</div>`;
 }
 
+function isGameCatalogItem(item) {
+  const t = String(item && (item.type || item.category || item.section) || "").toLowerCase();
+  return t === "игра" || t === "games";
+}
+
+function buildGameFallbackPoster(item) {
+  const title = String(displayTitle(item) || titleOf(item) || "Игра").trim();
+  const year = String(getYear(item) || "").trim();
+  const relation = String(item && (item.relationLabel || "Игровая вселенная") || "Игровая вселенная").trim();
+  const genres = getGenres(item).slice(0, 2).join(" · ");
+  const emoji = (() => {
+    const hay = String((item && (item.relation || "")) + " " + genres + " " + title).toLowerCase();
+    if (hay.includes("horror") || hay.includes("хоррор") || hay.includes("silent hill") || hay.includes("resident evil")) return "👻";
+    if (hay.includes("anime") || hay.includes("аниме") || hay.includes("castlevania") || hay.includes("devil may cry")) return "🎴";
+    if (hay.includes("series") || hay.includes("сериал") || hay.includes("the last of us") || hay.includes("fallout")) return "📺";
+    if (hay.includes("movie") || hay.includes("фильм") || hay.includes("warcraft") || hay.includes("mario")) return "🎬";
+    if (hay.includes("rpg") || hay.includes("fantasy") || hay.includes("фэнтези")) return "🗡️";
+    return "🎮";
+  })();
+  const words = title.split(/\s+/).filter(Boolean);
+  const lines = [];
+  let line = "";
+  for (const word of words) {
+    const probe = line ? (line + " " + word) : word;
+    if (probe.length > 18 && line) {
+      lines.push(line);
+      line = word;
+      if (lines.length >= 3) break;
+    } else line = probe;
+  }
+  if (line && lines.length < 3) lines.push(line);
+  const titleLines = lines.slice(0, 3).map((text, idx) => `<text x="50%" y="${390 + idx*54}" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="800" fill="#ffffff">${String(text).replace(/[&<>]/g, '')}</text>`).join('');
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop stop-color="#14052f"/>
+        <stop offset="0.5" stop-color="#2f117f"/>
+        <stop offset="1" stop-color="#00d5ff"/>
+      </linearGradient>
+      <radialGradient id="r" cx="50%" cy="18%" r="80%">
+        <stop stop-color="#ffffff" stop-opacity="0.22"/>
+        <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="600" height="900" fill="url(#g)"/>
+    <rect width="600" height="900" fill="url(#r)"/>
+    <circle cx="300" cy="220" r="112" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.28)" stroke-width="3"/>
+    <text x="50%" y="248" text-anchor="middle" font-family="Arial, sans-serif" font-size="92">${emoji}</text>
+    ${titleLines}
+    <text x="50%" y="620" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#c8f4ff">${relation.replace(/[&<>]/g, '')}</text>
+    <text x="50%" y="664" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#e8faff">${(genres || 'ГОЛУБЬ КАТАЛОГ МИРА').replace(/[&<>]/g, '')}</text>
+    <text x="50%" y="742" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">${(year ? year + ' · ' : '') + 'Игра'}</text>
+    <text x="50%" y="822" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="800" fill="#ffffff">ГОЛУБЬ КАТАЛОГ МИРА</text>
+  </svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
 function recoverPosterImage(img) {
   if (!img || img.dataset.posterDone === "1") return;
   const original = img.dataset.originalSrc || "";
@@ -647,6 +705,12 @@ function recoverPosterImage(img) {
   if (img.dataset.originalTried !== "1" && original && img.src !== original) {
     img.dataset.originalTried = "1";
     img.src = original;
+    return;
+  }
+  const fallback = img.dataset.gkmFallbackPoster || "";
+  if (img.dataset.fallbackTried !== "1" && fallback && img.src !== fallback) {
+    img.dataset.fallbackTried = "1";
+    img.src = fallback;
     return;
   }
   img.dataset.posterDone = "1";
@@ -707,9 +771,13 @@ function cardHtml(item) {
   const fav = loadSet(favKey);
   const id = String(item.id || `${title}|${getYear(item)}`);
   const img = posterSrc(item);
+  const isGame = isGameCatalogItem(item);
+  const fallbackPoster = isGame ? buildGameFallbackPoster(item) : "";
   const poster = img
-    ? `<img src="${escapeAttr(img)}" data-original-src="${escapeAttr(posterOriginalSrc(item))}" data-proxy-tried="${shouldProxyFirst(posterOriginalSrc(item)) ? "1" : "0"}" loading="lazy" decoding="async" alt="">`
-    : `<div class="poster-placeholder">Нет постера</div>`;
+    ? `<img src="${escapeAttr(img)}" data-original-src="${escapeAttr(posterOriginalSrc(item))}" data-proxy-tried="${shouldProxyFirst(posterOriginalSrc(item)) ? "1" : "0"}" data-gkm-fallback-poster="${escapeAttr(fallbackPoster)}" loading="lazy" decoding="async" alt="">`
+    : (fallbackPoster
+        ? `<img src="${escapeAttr(fallbackPoster)}" data-original-src="" data-proxy-tried="1" data-fallback-tried="1" data-gkm-fallback-poster="${escapeAttr(fallbackPoster)}" loading="lazy" decoding="async" alt="">`
+        : `<div class="poster-placeholder">Нет постера</div>`);
 
   return `
     <article class="card" data-id="${escapeAttr(id)}">
@@ -762,8 +830,25 @@ function updateCleanTrashButton() {
     : "Сейчас показывается всё, включая мусорные карточки";
 }
 
+function dedupeVisibleItems(items, limit = null) {
+  const out = [];
+  const seen = new Set();
+  const list = Array.isArray(items) ? items : [];
+  for (const item of list) {
+    if (!item) continue;
+    const title = norm(displayTitle(item) || titleOf(item));
+    const year = String(getYear(item) || "").trim();
+    const key = title ? `${title}|${year}` : String(item.id || Math.random());
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(item);
+    if (limit && out.length >= limit) break;
+  }
+  return out;
+}
+
 function renderList(items, label) {
-  const safeItems = (Array.isArray(items) ? items : []).slice(0, PAGE_SIZE);
+  const safeItems = dedupeVisibleItems(items, PAGE_SIZE);
   currentItems = safeItems;
   const grid = $("grid");
   const count = $("countText");
@@ -851,7 +936,7 @@ async function renderHome() {
   if (next) next.disabled = true;
   if (grid) {
     grid.innerHTML = order.map(([key, title]) => {
-      const list = (sections[key] || []).filter(hasPoster).slice(0, 18);
+      const list = dedupeVisibleItems((sections[key] || []).filter(hasPoster), 18);
       homePool.push(...list);
       return `
         <section class="home-section">
@@ -864,13 +949,7 @@ async function renderHome() {
       `;
     }).join("");
   }
-  const seen = new Set();
-  currentItems = homePool.filter(item => {
-    const key = String(item && (item.id || `${titleOf(item)}|${getYear(item)}`));
-    if (!item || seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
+  currentItems = dedupeVisibleItems(homePool);
   setStatus(`Готово · ${homeData.total || 0} записей`);
 }
 
@@ -4122,9 +4201,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 (function () {
   "use strict";
 
-  window.GKM_V202_GAME_HUB_VERSION = "v202-game-hub-full-features-2026-06-29";
+  window.GKM_V202_GAME_HUB_VERSION = "v203-game-hub-fixes-2026-06-29";
 
-  const GAMES_URL = "data/games_catalog.json?v=202";
+  const GAMES_URL = "data/data/games_catalog.json?v=203";
   const PAGE = 60;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -4207,7 +4286,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const json = await res.json();
       gamesCache = Array.isArray(json) ? json : (json.items || []);
     } catch (err) {
-      console.warn("GKM V202: fallback games loaded", err);
+      console.warn("GKM V203: fallback games loaded", err);
       gamesCache = FALLBACK_GAMES;
     }
     gamesCache = gamesCache.map((item, index) => ({
@@ -4258,7 +4337,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     panel.className = "gkm-game-hub-panel";
     panel.innerHTML = `
       <div class="gkm-game-hub-head">
-        <div><b>🎮 Игровые вселенные V202</b><span>игра ↔ фильм / сериал / аниме / мультфильм</span></div>
+        <div><b>🎮 Игровые вселенные V203</b><span>игра ↔ фильм / сериал / аниме / мультфильм</span></div>
         <button type="button" data-gkm-game-filter-reset="1">Все игры</button>
       </div>
       <div class="gkm-game-filter-row">
@@ -4307,10 +4386,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     currentTab = "games";
     gamesPage = Math.max(1, Number(page || gamesPage || 1));
     if (typeof setActiveTab === "function") setActiveTab("games");
-    if (typeof setStatus === "function") setStatus("Открываю игровые вселенные V202...");
+    if (typeof setStatus === "function") setStatus("Открываю игровые вселенные V203...");
 
     const all = await loadGames();
-    const rows = filteredGames(all);
+    const rows = dedupeVisibleItems(filteredGames(all));
     gamesPages = Math.max(1, Math.ceil(rows.length / PAGE));
     gamesPage = Math.min(gamesPage, gamesPages);
     currentPage = gamesPage;
@@ -4329,7 +4408,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const next = document.getElementById("nextBtn");
 
     const relLabel = (RELATION_FILTERS.find(x => x[0] === activeRelation) || ["all", "Все"])[1];
-    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " · V202 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>Steam / Epic / GOG / гайды / похожее</span>";
+    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " · V203 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>Steam / Epic / GOG / гайды / похожее</span>";
     if (grid) {
       grid.innerHTML = slice.map(cardHtml).join("");
       cardBadgesEnhance(grid);
@@ -4338,7 +4417,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (pageText) pageText.textContent = gamesPage + " / " + gamesPages;
     if (prev) prev.disabled = gamesPage <= 1;
     if (next) next.disabled = gamesPage >= gamesPages;
-    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V202 · " + rows.length + " записей");
+    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V203 · " + rows.length + " записей");
   }
 
   function injectGamesTab() {
@@ -4370,7 +4449,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       .gkm-v202-pill{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;border:1px solid rgba(0,213,255,.38);color:#c9f6ff;background:rgba(0,213,255,.08);font-size:12px;vertical-align:middle;}
       .gkm-game-links-block{border:1px solid rgba(0,213,255,.25);background:linear-gradient(135deg,rgba(0,213,255,.06),rgba(134,68,255,.08));}
       .gkm-game-modal-section{margin-top:12px}.gkm-game-modal-title{margin:0 0 8px;color:#eaf7ff;font-weight:900}.gkm-game-chip-list{display:flex;flex-wrap:wrap;gap:8px}.gkm-game-chip-list span,.gkm-game-chip-list a{display:inline-flex;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 10px;background:rgba(255,255,255,.06);font-size:13px;color:#eaf7ff;text-decoration:none}.gkm-game-chip-list a{border-color:rgba(0,213,255,.32);background:rgba(0,213,255,.08);font-weight:800}.gkm-game-timeline{margin:0;padding-left:20px;color:#dfe8ff}.gkm-game-timeline li{margin:5px 0}.gkm-game-hint{color:#a9c5e8;font-size:13px;margin:4px 0 10px;}
-      @media(max-width:760px){.gkm-game-hub-head{display:block}.gkm-game-hub-head button{margin-top:10px}.gkm-v202-pill{display:block;margin:8px 0 0;width:max-content;max-width:100%;}.gkm-game-relation-badge{font-size:10px;padding:5px 6px;}.gkm-game-filter{font-size:12px;padding:7px 9px;}}
+      @media(max-width:760px){
+        .gkm-game-hub-head{display:block}.gkm-game-hub-head button{margin-top:10px}.gkm-v202-pill{display:block;margin:8px 0 0;width:max-content;max-width:100%;}.gkm-game-relation-badge{font-size:10px;padding:5px 6px;}.gkm-game-filter{font-size:12px;padding:7px 9px;}
+        main{padding-bottom:calc(120px + env(safe-area-inset-bottom, 0px));}
+        #grid{padding-bottom:12px;}
+        .pager{padding-bottom:calc(96px + env(safe-area-inset-bottom, 0px));}
+        .ai-float-btn{bottom:calc(86px + env(safe-area-inset-bottom, 0px)) !important;}
+      }
     `;
     document.head.appendChild(style);
   }
@@ -4475,14 +4560,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function patchOpenDetails() {
-    if (window.GKM_V202_OPEN_DETAILS_PATCHED === "1") return;
+    if (window.GKM_V203_OPEN_DETAILS_PATCHED === "1") return;
     if (typeof openDetails !== "function") return;
     const original = openDetails;
-    openDetails = function gkmV202OpenDetails(item) {
+    openDetails = function gkmV203OpenDetails(item) {
       original(item);
       setTimeout(() => applyGameModal(item), 0);
     };
-    window.GKM_V202_OPEN_DETAILS_PATCHED = "1";
+    window.GKM_V203_OPEN_DETAILS_PATCHED = "1";
   }
 
   function scheduleGamesFilter() {
