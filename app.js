@@ -3642,23 +3642,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function addBadge() {
-    if (document.querySelector(".gkm-v191-badge")) return;
-
-    const badge = document.createElement("div");
-    badge.className = "gkm-v191-badge";
-    badge.textContent = "🧠 Умная выдача V191";
-    badge.title = "V191: поиск RU/EN, мусор вниз, дубли вниз, похожие умнее. Ctrl+клик — отключить.";
-    badge.addEventListener("click", function (e) {
-      if (e.ctrlKey || e.metaKey) {
-        try {
-          localStorage.setItem(LS_DISABLED, "1");
-          location.reload();
-        } catch (err) {}
-      }
-    });
-
-    const header = document.querySelector("header") || document.body;
-    header.appendChild(badge);
+    // GKM V194: badge disabled, smart logic stays enabled.
+    document.querySelectorAll(".gkm-v191-badge,.gkm-v192-clickable-badge").forEach(function(el){ try { el.remove(); } catch(e){} });
+    return;
   }
 
   function addStyles() {
@@ -3760,20 +3746,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V191 SMART CATALOG SEARCH END */
 
-/* GKM V193 NO BADGE KEEP SMART START */
+/* GKM V194 KILL V191 BADGE START */
 (function () {
   "use strict";
 
-  window.GKM_V193_NO_BADGE_KEEP_SMART_VERSION = "v193-no-badge-keep-smart-properties-2026-06-24";
+  window.GKM_V194_KILL_V191_BADGE_VERSION = "v194-kill-v191-badge-keep-smart-2026-06-24";
 
   /*
-    V193:
-    - Убирает визуальную плашку "Умная выдача V191 / Применить умную выдачу".
-    - Свойства оставляет:
-      1) V191 умная выдача продолжает работать автоматически;
-      2) если поиск дал 0 из-за активного типа Фильмы/Сериалы, а запрос похож на аниме/франшизу,
-         автоматически пробует нажать "Все";
-      3) ручной запуск остаётся через консоль: window.GKM_V193_APPLY_SMART().
+    V194:
+    - Жёстко убирает старую плашку V191.
+    - Отключает её повторное появление.
+    - Умная выдача/поиск V191 остаются.
+    - Авто-спасение 0 результатов остаётся.
   */
 
   const ALIAS_HINTS = [
@@ -3832,29 +3816,31 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return ALIAS_HINTS.some(x => q.includes(norm(x)) || norm(x).includes(q));
   }
 
-  function removeBadge() {
-    document.querySelectorAll(".gkm-v191-badge,.gkm-v192-clickable-badge,.gkm-v192-toast").forEach(el => {
+  function killBadge() {
+    document.querySelectorAll(".gkm-v191-badge,.gkm-v192-clickable-badge,.gkm-v192-toast,.gkm-v193-toast").forEach(el => {
       try { el.remove(); } catch(e) {}
     });
   }
 
   function applySmart() {
-    removeBadge();
+    killBadge();
     try {
       if (typeof window.GKM_V191_APPLY === "function") window.GKM_V191_APPLY();
     } catch (e) {
-      console.warn("GKM V193 apply V191 failed", e);
+      console.warn("GKM V194 apply V191 failed", e);
     }
+    setTimeout(killBadge, 50);
     setTimeout(function () {
-      removeBadge();
+      killBadge();
       try {
         if (typeof window.GKM_V191_APPLY === "function") window.GKM_V191_APPLY();
       } catch (e) {}
-    }, 500);
+      killBadge();
+    }, 600);
   }
 
   function rescueZeroResults() {
-    removeBadge();
+    killBadge();
 
     const q = currentQuery();
     if (!queryLooksKnown(q)) return false;
@@ -3869,50 +3855,72 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function tick() {
-    removeBadge();
+    killBadge();
     rescueZeroResults();
   }
 
+  function addStyles() {
+    if (document.querySelector("#gkm-v194-style")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkm-v194-style";
+    style.textContent = `
+      .gkm-v191-badge,
+      .gkm-v192-clickable-badge,
+      .gkm-v192-toast,
+      .gkm-v193-toast {
+        display:none!important;
+        visibility:hidden!important;
+        opacity:0!important;
+        pointer-events:none!important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   function init() {
-    removeBadge();
+    addStyles();
+    tick();
 
     document.addEventListener("input", function () {
-      clearTimeout(window.__gkmV193Input);
-      window.__gkmV193Input = setTimeout(tick, 700);
+      clearTimeout(window.__gkmV194Input);
+      window.__gkmV194Input = setTimeout(tick, 700);
     }, true);
 
     document.addEventListener("change", function () {
-      clearTimeout(window.__gkmV193Change);
-      window.__gkmV193Change = setTimeout(tick, 700);
+      clearTimeout(window.__gkmV194Change);
+      window.__gkmV194Change = setTimeout(tick, 700);
     }, true);
 
     document.addEventListener("click", function () {
-      clearTimeout(window.__gkmV193Click);
-      window.__gkmV193Click = setTimeout(tick, 350);
+      clearTimeout(window.__gkmV194Click);
+      window.__gkmV194Click = setTimeout(tick, 250);
     }, true);
 
     const obs = new MutationObserver(function () {
-      clearTimeout(window.__gkmV193Obs);
-      window.__gkmV193Obs = setTimeout(tick, 500);
+      clearTimeout(window.__gkmV194Obs);
+      window.__gkmV194Obs = setTimeout(tick, 250);
     });
     obs.observe(document.body, {childList:true, subtree:true});
 
+    setTimeout(tick, 200);
     setTimeout(tick, 700);
     setTimeout(tick, 1700);
     setTimeout(tick, 3200);
 
-    console.log("GKM: v193-no-badge-keep-smart-properties-2026-06-24");
+    console.log("GKM: v194-kill-v191-badge-keep-smart-2026-06-24");
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
-  window.GKM_V193_APPLY_SMART = function () {
+  window.GKM_V194_APPLY_SMART = function () {
     const rescued = rescueZeroResults();
     if (!rescued) applySmart();
-    return "V193 smart applied without badge";
+    killBadge();
+    return "V194 smart applied, badge killed";
   };
 
-  window.GKM_V193_REMOVE_SMART_BADGE = removeBadge;
+  window.GKM_V194_KILL_BADGE = killBadge;
 })();
-/* GKM V193 NO BADGE KEEP SMART END */
+/* GKM V194 KILL V191 BADGE END */
