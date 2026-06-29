@@ -1,4 +1,4 @@
-[Uploading GKM_PROJECT_SCHEME_V1.md…]()
+[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29483013/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
 
@@ -347,3 +347,15 @@ GKM V199 CLEAN MODAL EXTERNAL LINKS
 - Добавлены блоки `🧭 Играть по порядку` и `🎬 Смотреть по порядку`.
 - Подключение в `index.html`: `app.js?v=208`.
 - Старую стабильную точку V207 можно вернуть заменой `app.js`, `index.html` и `data/games_catalog.json` на V207.
+
+
+---
+
+## V209 GAME HUB QUALITY FIX
+
+- Рабочая точка после V208.
+- Улучшены счётчики фильтров игрового раздела.
+- Поиск по играм учитывает вселенную, хронологию, play/watch order и связанные медиа.
+- Постеры защищены fallback-заглушкой и автозаменой Steam `header.jpg` на вертикальный `library_600x900_2x.jpg`.
+- Блок `🌍 Открыть вселенную` получил счётчик связей.
+- `index.html` подключает `app.js?v=209`.
