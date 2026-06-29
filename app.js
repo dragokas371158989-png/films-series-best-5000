@@ -3098,88 +3098,664 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V175 WATCH ORDER GRID SORT END */
 
-/* GKM V188 REMOVE QUALITY BUTTONS START */
+/* GKM V191 SMART CATALOG SEARCH START */
 (function () {
   "use strict";
 
-  window.GKM_V188_REMOVE_QUALITY_BUTTONS_VERSION = "v188-remove-quality-buttons-clean-2026-06-24";
+  window.GKM_V191_SMART_CATALOG_SEARCH_VERSION = "v191-smart-catalog-search-all-features-2026-06-24";
 
   /*
-    V188:
-    Убираем бесполезные кнопки качества из V184/V185/V186/V187.
-    Оставляем сайт чистым:
-    - без панели "Только норм / С постером / Популярное / Скрыть мусор / 7+ / от 1000";
-    - без кнопок "+" на карточках;
-    - без меню папок;
-    - без мини-плашек при наведении;
-    - без скрытых карточек от старых фильтров;
-    - без старых localStorage-фильтров.
+    V191 — стоящая фича без лишних кнопок:
+    1) Умная выдача по умолчанию:
+       - популярное выше;
+       - мусор ниже;
+       - без постера ниже;
+       - 10.0 при 2 голосах ниже;
+       - короткие левые названия ниже.
+    2) Умный поиск RU/EN:
+       - Naruto/Наруто, Avengers/Мстители, Harry Potter/Гарри Поттер и т.д.;
+       - частые опечатки и транслит.
+    3) Анти-дубли:
+       - одинаковое название+год+тип оставляет лучший вариант выше;
+       - дубли мягко уводятся вниз.
+    4) Похожие в модалке:
+       - мусор и другой тип приглушаются/уходят вниз.
+    5) Никаких новых кнопок, ничего не засоряет верх сайта.
   */
 
-  function clean() {
-    try {
-      [
-        "GKM_V184_STATE",
-        "GKM_V184_QUICK_FILTER",
-        "GKM_V185_QUICK_FILTER",
-        "GKM_V186_QUICK_FILTER",
-        "GKM_V187_QUICK_FILTER"
-      ].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+  const LS_DISABLED = "GKM_V191_DISABLED";
+  const VERSION_TEXT = "v191-smart-catalog-search-all-features-2026-06-24";
 
-      document.querySelectorAll([
-        ".gkm-v184-quickbar",
-        ".gkm-v185-quickbar",
-        ".gkm-v186-quickbar",
-        ".gkm-v187-quickbar",
-        ".gkm-v184-panel",
-        ".gkm-v185-panel",
-        ".gkm-v186-panel",
-        ".gkm-v187-panel",
-        ".gkm-v184-folder-menu",
-        ".gkm-v185-folder-menu",
-        ".gkm-v186-folder-menu",
-        ".gkm-v187-folder-menu",
-        ".gkm-v184-folder-btn",
-        ".gkm-v185-folder-btn",
-        ".gkm-v186-folder-btn",
-        ".gkm-v187-folder-btn",
-        ".gkm-v184-mini",
-        ".gkm-v185-mini",
-        ".gkm-v186-mini",
-        ".gkm-v187-mini",
-        ".gkm-v184-toast",
-        ".gkm-v185-toast",
-        ".gkm-v186-toast",
-        ".gkm-v187-toast",
-        ".gkm-v187-counter"
-      ].join(",")).forEach(function (el) {
-        try { el.remove(); } catch (e) {}
-      });
+  const SEARCH_ALIASES = [
+    ["наруто", "naruto"],
+    ["нарута", "naruto"],
+    ["naruto", "наруто"],
+    ["боруто", "boruto"],
+    ["boruto", "боруто"],
+    ["блич", "bleach"],
+    ["bleach", "блич"],
+    ["ван пис", "one piece"],
+    ["ван-пис", "one piece"],
+    ["one piece", "ван пис"],
+    ["атака титанов", "attack on titan"],
+    ["атака титан", "attack on titan"],
+    ["attack on titan", "атака титанов"],
+    ["токийский гуль", "tokyo ghoul"],
+    ["tokyo ghoul", "токийский гуль"],
+    ["тетрадь смерти", "death note"],
+    ["death note", "тетрадь смерти"],
+    ["стальной алхимик", "fullmetal alchemist"],
+    ["fullmetal alchemist", "стальной алхимик"],
+    ["охотник х охотник", "hunter x hunter"],
+    ["хантер хантер", "hunter x hunter"],
+    ["hunter x hunter", "охотник х охотник"],
+    ["клинок рассекающий демонов", "demon slayer"],
+    ["истребитель демонов", "demon slayer"],
+    ["demon slayer", "истребитель демонов"],
+    ["магическая битва", "jujutsu kaisen"],
+    ["jujutsu kaisen", "магическая битва"],
+    ["моя геройская академия", "my hero academia"],
+    ["my hero academia", "моя геройская академия"],
 
-      document.querySelectorAll(".gkm-v184-hidden,.gkm-v185-hidden,.gkm-v186-hidden,.gkm-v187-hidden,.gkm-v184-trash-card,.gkm-v185-trash-card,.gkm-v186-trash-card,.gkm-v187-trash-card,.gkm-v184-random-pick,.gkm-v185-random-pick,.gkm-v186-random-pick,.gkm-v187-random-pick,.gkm-v184-similar-down,.gkm-v185-similar-down,.gkm-v186-similar-down,.gkm-v187-similar-down").forEach(function (el) {
-        el.classList.remove(
-          "gkm-v184-hidden","gkm-v185-hidden","gkm-v186-hidden","gkm-v187-hidden",
-          "gkm-v184-trash-card","gkm-v185-trash-card","gkm-v186-trash-card","gkm-v187-trash-card",
-          "gkm-v184-random-pick","gkm-v185-random-pick","gkm-v186-random-pick","gkm-v187-random-pick",
-          "gkm-v184-similar-down","gkm-v185-similar-down","gkm-v186-similar-down","gkm-v187-similar-down"
-        );
-        el.style.removeProperty("display");
-        el.style.removeProperty("opacity");
-        el.style.removeProperty("filter");
-      });
+    ["мстители", "avengers"],
+    ["avengers", "мстители"],
+    ["мстители финал", "avengers endgame"],
+    ["avengers endgame", "мстители финал"],
+    ["война бесконечности", "infinity war"],
+    ["infinity war", "война бесконечности"],
+    ["железный человек", "iron man"],
+    ["iron man", "железный человек"],
+    ["капитан америка", "captain america"],
+    ["captain america", "капитан америка"],
+    ["тор", "thor"],
+    ["thor", "тор"],
+    ["человек паук", "spider-man"],
+    ["человек-паук", "spider-man"],
+    ["spider man", "человек паук"],
+    ["spider-man", "человек паук"],
+    ["доктор стрэндж", "doctor strange"],
+    ["doctor strange", "доктор стрэндж"],
+    ["стражи галактики", "guardians of the galaxy"],
+    ["guardians of the galaxy", "стражи галактики"],
+    ["черная пантера", "black panther"],
+    ["чёрная пантера", "black panther"],
+    ["black panther", "черная пантера"],
 
-      console.log("GKM: v188-remove-quality-buttons-clean-2026-06-24");
-    } catch (e) {
-      console.warn("GKM V188 clean failed", e);
-    }
+    ["гарри поттер", "harry potter"],
+    ["гари потер", "harry potter"],
+    ["гари поттер", "harry potter"],
+    ["гарри потер", "harry potter"],
+    ["harry potter", "гарри поттер"],
+    ["философский камень", "philosopher stone sorcerer stone"],
+    ["тайная комната", "chamber of secrets"],
+    ["узник азкабана", "prisoner of azkaban"],
+    ["кубок огня", "goblet of fire"],
+    ["орден феникса", "order of the phoenix"],
+    ["принц полукровка", "half-blood prince"],
+    ["дары смерти", "deathly hallows"],
+
+    ["матрица", "matrix"],
+    ["matrix", "матрица"],
+    ["властелин колец", "lord of the rings"],
+    ["lord of the rings", "властелин колец"],
+    ["хоббит", "hobbit"],
+    ["hobbit", "хоббит"],
+    ["звездные войны", "star wars"],
+    ["звёздные войны", "star wars"],
+    ["star wars", "звездные войны"],
+    ["форсаж", "fast furious"],
+    ["fast furious", "форсаж"],
+    ["терминатор", "terminator"],
+    ["terminator", "терминатор"],
+    ["чужой", "alien"],
+    ["alien", "чужой"],
+    ["хищник", "predator"],
+    ["predator", "хищник"],
+    ["пила", "saw"],
+    ["saw", "пила"],
+    ["заклятие", "conjuring"],
+    ["conjuring", "заклятие"],
+    ["тихое место", "quiet place"],
+    ["quiet place", "тихое место"],
+    ["пираты карибского моря", "pirates of the caribbean"],
+    ["pirates of the caribbean", "пираты карибского моря"],
+    ["парк юрского периода", "jurassic park"],
+    ["мир юрского периода", "jurassic world"],
+    ["jurassic", "юрский период"],
+    ["драконий жемчуг", "dragon ball"],
+    ["dragon ball", "драконий жемчуг"]
+  ];
+
+  const TYPO_FIXES = [
+    [/гар+и\s+пот+ер+/g, "гарри поттер"],
+    [/гари\s+поттер/g, "гарри поттер"],
+    [/гарри\s+потер/g, "гарри поттер"],
+    [/нарута/g, "наруто"],
+    [/мстител[ие]?\s+финал/g, "мстители финал"],
+    [/человек\s*паук/g, "человек паук"],
+    [/ван\s*пис/g, "ван пис"],
+    [/атака\s+титан(?!ов)/g, "атака титанов"],
+    [/токийский\s+гул/g, "токийский гуль"]
+  ];
+
+  function isDisabled() {
+    try { return localStorage.getItem(LS_DISABLED) === "1"; } catch (e) { return false; }
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", clean);
-  else clean();
+  function safe(name, fn) {
+    if (isDisabled()) return null;
+    try { return fn(); } catch (e) { console.warn("GKM V191:", name, e); return null; }
+  }
 
-  setTimeout(clean, 700);
-  setTimeout(clean, 1800);
+  function norm(v) {
+    return String(v || "")
+      .toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[«»"']/g, "")
+      .replace(/[‐‑‒–—―]/g, "-")
+      .replace(/[^a-zа-я0-9\s:.\-]/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
 
-  window.GKM_V188_CLEAN_QUALITY_BUTTONS = clean;
+  function compact(v) {
+    return norm(v).replace(/[^a-zа-я0-9]/g, "");
+  }
+
+  function text(el) {
+    return String(el && el.textContent || "");
+  }
+
+  function getSearchInput() {
+    return document.querySelector("#search")
+      || document.querySelector("#searchInput")
+      || document.querySelector("input[type='search']")
+      || document.querySelector("input[placeholder*='Поиск']")
+      || document.querySelector("input");
+  }
+
+  function parseRating(card) {
+    const t = text(card);
+    const m = t.match(/★\s*([0-9]+(?:[.,][0-9]+)?)/) || t.match(/рейтинг[^0-9]*([0-9]+(?:[.,][0-9]+)?)/i);
+    const n = m ? parseFloat(m[1].replace(",", ".")) : 0;
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  function parseVotes(card) {
+    const t = text(card).replace(/\u00a0/g, " ");
+    const m = t.match(/([0-9]+(?:[.,][0-9]+)?)\s*(млн|тыс|голос)/i);
+    if (!m) return 0;
+    let n = parseFloat(m[1].replace(",", "."));
+    if (!Number.isFinite(n)) return 0;
+    const u = String(m[2] || "").toLowerCase();
+    if (u.includes("млн")) n *= 1000000;
+    else if (u.includes("тыс")) n *= 1000;
+    return Math.round(n);
+  }
+
+  function parseYear(card) {
+    const m = text(card).match(/\b(19[0-9]{2}|20[0-9]{2}|203[0-9])\b/);
+    return m ? parseInt(m[1], 10) : 0;
+  }
+
+  function hasPoster(card) {
+    if (norm(text(card)).includes("нет постера")) return false;
+    const img = card.querySelector("img");
+    if (!img) return false;
+    const src = String(img.currentSrc || img.src || img.getAttribute("src") || "");
+    if (!src) return false;
+    return !src.includes("placeholder") && !src.includes("data:image/svg");
+  }
+
+  function titleOf(card) {
+    const sels = [".title", ".card-title", ".movie-title", ".name", "[class*='title']", "h3", "h2", "b", "strong"];
+    for (const s of sels) {
+      const el = card.querySelector(s);
+      const v = el && String(el.textContent || "").trim();
+      if (v && v.length > 1 && v.length < 120 && !/^(фильм|аниме|сериал|мультфильм)$/i.test(v)) return v;
+    }
+
+    const lines = String(card.textContent || "").split("\n").map(x => x.trim()).filter(Boolean);
+    for (const line of lines) {
+      if (line.length > 1 && line.length < 90 && !line.includes("★") && !/^\d{4}/.test(line)) return line;
+    }
+    return "Без названия";
+  }
+
+  function typeOf(card) {
+    const t = norm(text(card));
+    if (t.includes("аниме")) return "anime";
+    if (t.includes("мультсериал")) return "cartoon_series";
+    if (t.includes("мультфильм")) return "cartoon";
+    if (t.includes("сериал")) return "series";
+    if (t.includes("фильм")) return "movie";
+    return "";
+  }
+
+  function genreTokens(card) {
+    const t = norm(text(card));
+    const known = ["боевик","комедия","драма","криминал","фантастика","фэнтези","ужасы","триллер","детектив","приключения","мелодрама","документальный","история","спорт","военный","семейный","экшен"];
+    return known.filter(g => t.includes(g));
+  }
+
+  function isVisibleBasic(el) {
+    if (!el || !el.getBoundingClientRect) return false;
+    const r = el.getBoundingClientRect();
+    const st = getComputedStyle(el);
+    return r.width > 70 && r.height > 100 && st.display !== "none" && st.visibility !== "hidden";
+  }
+
+  function isCard(el) {
+    if (!el || el.nodeType !== 1) return false;
+    if (el.closest && (
+      el.closest(".gkm-v191-badge") ||
+      el.closest(".gkm-v191-panel") ||
+      el.closest(".gkm-v191-toast")
+    )) return false;
+
+    const t = norm(el.textContent);
+    if (t.length < 18 || t.length > 1900) return false;
+    if (!el.querySelector("img")) return false;
+    if (!(t.includes("★") || t.includes("фильм") || t.includes("аниме") || t.includes("сериал") || t.includes("мультфильм"))) return false;
+
+    return isVisibleBasic(el);
+  }
+
+  function allCards() {
+    const selectors = [
+      "article", ".card", ".movie-card", ".item", ".catalog-card", ".poster-card",
+      "[class*='card']", "[class*='movie']", "[class*='item']",
+      "main div", "section div"
+    ].join(",");
+
+    const raw = Array.from(document.querySelectorAll(selectors)).filter(isCard);
+    const filtered = raw.filter(c => !raw.some(o => o !== c && o.contains(c) && isCard(o)));
+    return Array.from(new Set(filtered)).slice(0, 5000);
+  }
+
+  function findMainGrid() {
+    const cs = allCards();
+    if (!cs.length) return null;
+
+    const parents = new Map();
+    cs.forEach(c => {
+      const p = c.parentElement;
+      if (p) parents.set(p, (parents.get(p) || 0) + 1);
+    });
+
+    let best = null, max = 0;
+    parents.forEach((n, p) => {
+      if (n > max) { max = n; best = p; }
+    });
+
+    if (!best) return null;
+    return { grid: best, cards: cs.filter(c => c.parentElement === best) };
+  }
+
+  function titleKey(card) {
+    let t = norm(titleOf(card));
+
+    // Убираем мусорные хвосты, которые часто плодят дубли.
+    t = t
+      .replace(/\b\d{4}\b/g, "")
+      .replace(/\b(фильм|сериал|аниме|мультфильм|мультсериал)\b/g, "")
+      .replace(/\bhd\b|\bfull\b|\bseason\b|\bсезон\b/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    return compact(t);
+  }
+
+  function trashPenalty(card) {
+    const r = parseRating(card);
+    const v = parseVotes(card);
+    const title = norm(titleOf(card));
+    let p = 0;
+
+    if (!hasPoster(card)) p += 900;
+    if (r >= 9.8 && v < 100) p += 1200;
+    if (r >= 9.5 && v < 500) p += 550;
+    if (v > 0 && v <= 10) p += 700;
+    if (v > 0 && v < 50) p += 300;
+    if (title.length <= 2) p += 900;
+    if (/^[a-z0-9]{1,3}$/.test(title)) p += 900;
+    if (title.includes("untitled") || title.includes("без названия")) p += 400;
+    if (norm(text(card)).includes("жанры не указаны")) p += 160;
+
+    return p;
+  }
+
+  function qualityScore(card) {
+    const r = parseRating(card);
+    const v = parseVotes(card);
+    const y = parseYear(card);
+    let s = 0;
+
+    s += hasPoster(card) ? 700 : -500;
+    s += Math.min(v, 3000000) / 3500;
+    s += r * 85;
+
+    if (y >= 2020) s += 40;
+    if (y >= 2026 && v < 100) s -= 200;
+
+    s -= trashPenalty(card);
+
+    return s;
+  }
+
+  function dedupePenalty(card, seen) {
+    const key = [titleKey(card), parseYear(card), typeOf(card)].join("|");
+    if (!key || key.length < 5) return 0;
+
+    if (!seen[key]) {
+      seen[key] = 1;
+      return 0;
+    }
+
+    seen[key]++;
+    return 7000 + seen[key] * 20;
+  }
+
+  function sortGridSmart() {
+    const found = findMainGrid();
+    if (!found || !found.cards.length) return;
+
+    const seen = Object.create(null);
+    const rows = found.cards.map((card, idx) => {
+      const score = qualityScore(card) - dedupePenalty(card, seen);
+      return { card, idx, score };
+    });
+
+    rows.sort((a,b) => (b.score - a.score) || (a.idx - b.idx));
+
+    const frag = document.createDocumentFragment();
+    rows.forEach(r => frag.appendChild(r.card));
+    found.grid.appendChild(frag);
+
+    rows.forEach(r => {
+      const isTrash = trashPenalty(r.card) >= 700;
+      r.card.classList.toggle("gkm-v191-soft-trash", isTrash);
+      r.card.dataset.gkmV191Score = String(Math.round(r.score));
+    });
+  }
+
+  function currentQuery() {
+    const input = getSearchInput();
+    return input ? String(input.value || "").trim() : "";
+  }
+
+  function fixedQuery(q) {
+    let x = norm(q);
+    for (const [rx, repl] of TYPO_FIXES) x = x.replace(rx, repl);
+    return x.trim();
+  }
+
+  function queryVariants(q) {
+    const base = fixedQuery(q);
+    const out = new Set();
+
+    if (base) out.add(base);
+
+    for (const [from, to] of SEARCH_ALIASES) {
+      const nf = norm(from);
+      if (!nf) continue;
+      if (base === nf || base.includes(nf) || nf.includes(base)) {
+        String(to).split("|").forEach(v => out.add(norm(v)));
+      }
+    }
+
+    // Разбиваем английские запросы вроде harry potter philosopher
+    if (base.includes("harry") && base.includes("potter")) out.add("гарри поттер");
+    if (base.includes("avengers")) out.add("мстители");
+    if (base.includes("naruto")) out.add("наруто");
+    if (base.includes("dragon") && base.includes("ball")) out.add("драконий жемчуг");
+
+    return Array.from(out).filter(Boolean).slice(0, 12);
+  }
+
+  function searchBoostScore(card, variants) {
+    if (!variants || !variants.length) return 0;
+
+    const t = norm(text(card));
+    const title = norm(titleOf(card));
+    const cTitle = compact(title);
+    let s = 0;
+
+    variants.forEach(q => {
+      const cq = compact(q);
+      if (!q || !cq) return;
+
+      if (title === q) s += 100000;
+      else if (title.includes(q)) s += 60000;
+      else if (q.includes(title) && title.length > 3) s += 30000;
+      else if (cTitle.includes(cq)) s += 26000;
+      else if (t.includes(q)) s += 12000;
+      else if (compact(t).includes(cq)) s += 8000;
+    });
+
+    return s;
+  }
+
+  function sortSearchSmart() {
+    const q = currentQuery();
+    if (!q || q.length < 2) return sortGridSmart();
+
+    const found = findMainGrid();
+    if (!found || !found.cards.length) return;
+
+    const variants = queryVariants(q);
+    const seen = Object.create(null);
+
+    const rows = found.cards.map((card, idx) => {
+      let score = qualityScore(card);
+      score += searchBoostScore(card, variants);
+      score -= dedupePenalty(card, seen);
+
+      // Если есть запрос и карточка вообще не похожа — вниз.
+      if (searchBoostScore(card, variants) <= 0) score -= 25000;
+
+      return { card, idx, score };
+    });
+
+    rows.sort((a,b) => (b.score - a.score) || (a.idx - b.idx));
+
+    const frag = document.createDocumentFragment();
+    rows.forEach(r => frag.appendChild(r.card));
+    found.grid.appendChild(frag);
+
+    rows.forEach((r, i) => {
+      r.card.classList.toggle("gkm-v191-soft-trash", trashPenalty(r.card) >= 700);
+      r.card.classList.toggle("gkm-v191-search-best", i < 3 && searchBoostScore(r.card, variants) > 0);
+      r.card.dataset.gkmV191Score = String(Math.round(r.score));
+    });
+
+    showSearchHint(q, variants);
+  }
+
+  function showSearchHint(q, variants) {
+    if (!q || !variants || variants.length <= 1) return;
+
+    let box = document.querySelector(".gkm-v191-search-hint");
+    if (!box) {
+      box = document.createElement("div");
+      box.className = "gkm-v191-search-hint";
+      const input = getSearchInput();
+      const parent = input && input.parentElement;
+      if (parent) parent.appendChild(box);
+      else document.body.appendChild(box);
+    }
+
+    const visible = variants.filter(v => v !== norm(q)).slice(0, 4);
+    if (!visible.length) {
+      box.remove();
+      return;
+    }
+
+    box.textContent = "Умный поиск: " + visible.join(" · ");
+  }
+
+  function improveSimilarModal() {
+    const modals = Array.from(document.querySelectorAll("[role='dialog'],.modal,.popup,.overlay,dialog"))
+      .filter(el => {
+        const st = getComputedStyle(el);
+        return st.display !== "none" && st.visibility !== "hidden" && el.getBoundingClientRect().height > 120;
+      });
+
+    if (!modals.length) return;
+
+    modals.forEach(modal => {
+      const modalCards = Array.from(modal.querySelectorAll("article,.card,.movie-card,.item,[class*='card'],[class*='movie'],[class*='item'],div"))
+        .filter(isCard);
+
+      if (modalCards.length < 2) return;
+
+      const headText = norm(text(modal).slice(0, 2500));
+      let wanted = "";
+      if (headText.includes("аниме")) wanted = "anime";
+      else if (headText.includes("мультфильм")) wanted = "cartoon";
+      else if (headText.includes("сериал")) wanted = "series";
+      else if (headText.includes("фильм")) wanted = "movie";
+
+      modalCards.forEach(card => {
+        const wrongType = wanted && typeOf(card) && typeOf(card) !== wanted;
+        const bad = wrongType || trashPenalty(card) >= 700;
+        card.classList.toggle("gkm-v191-similar-down", bad);
+      });
+    });
+  }
+
+  function cleanOldBadUI() {
+    [
+      ".gkm-v184-quickbar",".gkm-v185-quickbar",".gkm-v186-quickbar",".gkm-v187-quickbar",
+      ".gkm-v184-panel",".gkm-v185-panel",".gkm-v186-panel",".gkm-v187-panel",
+      ".gkm-v184-folder-btn",".gkm-v185-folder-btn",".gkm-v186-folder-btn",".gkm-v187-folder-btn",
+      ".gkm-v184-folder-menu",".gkm-v185-folder-menu",".gkm-v186-folder-menu",".gkm-v187-folder-menu",
+      ".gkm-v184-mini",".gkm-v185-mini",".gkm-v186-mini",".gkm-v187-mini"
+    ].forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => { try { el.remove(); } catch(e) {} });
+    });
+
+    document.querySelectorAll(".gkm-v184-hidden,.gkm-v185-hidden,.gkm-v186-hidden,.gkm-v187-hidden").forEach(el => {
+      el.classList.remove("gkm-v184-hidden","gkm-v185-hidden","gkm-v186-hidden","gkm-v187-hidden");
+      el.style.removeProperty("display");
+    });
+  }
+
+  function addBadge() {
+    if (document.querySelector(".gkm-v191-badge")) return;
+
+    const badge = document.createElement("div");
+    badge.className = "gkm-v191-badge";
+    badge.textContent = "🧠 Умная выдача V191";
+    badge.title = "V191: поиск RU/EN, мусор вниз, дубли вниз, похожие умнее. Ctrl+клик — отключить.";
+    badge.addEventListener("click", function (e) {
+      if (e.ctrlKey || e.metaKey) {
+        try {
+          localStorage.setItem(LS_DISABLED, "1");
+          location.reload();
+        } catch (err) {}
+      }
+    });
+
+    const header = document.querySelector("header") || document.body;
+    header.appendChild(badge);
+  }
+
+  function addStyles() {
+    if (document.querySelector("#gkm-v191-style")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkm-v191-style";
+    style.textContent = `
+      .gkm-v191-soft-trash {
+        opacity:.78;
+      }
+      .gkm-v191-similar-down {
+        opacity:.45;
+        filter:grayscale(.65);
+        order:9999;
+      }
+      .gkm-v191-search-best {
+        outline:2px solid rgba(0,216,255,.65);
+        box-shadow:0 0 18px rgba(0,216,255,.22);
+      }
+      .gkm-v191-badge {
+        position:fixed;
+        right:14px;
+        bottom:86px;
+        z-index:99990;
+        padding:8px 11px;
+        border:1px solid rgba(0,216,255,.55);
+        border-radius:999px;
+        background:linear-gradient(135deg,rgba(87,36,214,.9),rgba(0,190,230,.9));
+        color:#fff;
+        font-weight:900;
+        font-size:12px;
+        box-shadow:0 0 18px rgba(0,216,255,.25);
+        cursor:default;
+        user-select:none;
+      }
+      .gkm-v191-search-hint {
+        margin-top:6px;
+        color:#aeefff;
+        font-size:12px;
+        font-weight:800;
+        opacity:.9;
+      }
+      @media(max-width:760px) {
+        .gkm-v191-badge {display:none}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function run() {
+    cleanOldBadUI();
+    addStyles();
+    addBadge();
+
+    const q = currentQuery();
+    if (q && q.length >= 2) sortSearchSmart();
+    else sortGridSmart();
+
+    improveSimilarModal();
+  }
+
+  function schedule() {
+    clearTimeout(window.__gkmV191Timer);
+    window.__gkmV191Timer = setTimeout(function () {
+      safe("run", run);
+    }, 500);
+  }
+
+  function init() {
+    try {
+      ["GKM_V184_STATE","GKM_V184_QUICK_FILTER","GKM_V185_QUICK_FILTER","GKM_V186_QUICK_FILTER","GKM_V187_QUICK_FILTER"].forEach(k => localStorage.removeItem(k));
+    } catch(e) {}
+
+    addStyles();
+    addBadge();
+
+    document.addEventListener("input", schedule, true);
+    document.addEventListener("change", schedule, true);
+    document.addEventListener("click", schedule, true);
+
+    const obs = new MutationObserver(schedule);
+    obs.observe(document.body, { childList:true, subtree:true });
+
+    setTimeout(schedule, 700);
+    setTimeout(schedule, 1700);
+    setTimeout(schedule, 3200);
+
+    console.log("GKM: " + VERSION_TEXT);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+
+  window.GKM_V191_APPLY = function () { return safe("manual", run); };
+  window.GKM_V191_QUERY_VARIANTS = queryVariants;
+  window.GKM_V191_DISABLE = function () { localStorage.setItem(LS_DISABLED, "1"); location.reload(); };
+  window.GKM_V191_ENABLE = function () { localStorage.removeItem(LS_DISABLED); location.reload(); };
 })();
-/* GKM V188 REMOVE QUALITY BUTTONS END */
+/* GKM V191 SMART CATALOG SEARCH END */
