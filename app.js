@@ -635,64 +635,6 @@ function posterPlaceholderHtml() {
   return `<div class="poster-placeholder">Нет постера</div>`;
 }
 
-function isGameCatalogItem(item) {
-  const t = String(item && (item.type || item.category || item.section) || "").toLowerCase();
-  return t === "игра" || t === "games";
-}
-
-function buildGameFallbackPoster(item) {
-  const title = String(displayTitle(item) || titleOf(item) || "Игра").trim();
-  const year = String(getYear(item) || "").trim();
-  const relation = String(item && (item.relationLabel || "Игровая вселенная") || "Игровая вселенная").trim();
-  const genres = getGenres(item).slice(0, 2).join(" · ");
-  const emoji = (() => {
-    const hay = String((item && (item.relation || "")) + " " + genres + " " + title).toLowerCase();
-    if (hay.includes("horror") || hay.includes("хоррор") || hay.includes("silent hill") || hay.includes("resident evil")) return "👻";
-    if (hay.includes("anime") || hay.includes("аниме") || hay.includes("castlevania") || hay.includes("devil may cry")) return "🎴";
-    if (hay.includes("series") || hay.includes("сериал") || hay.includes("the last of us") || hay.includes("fallout")) return "📺";
-    if (hay.includes("movie") || hay.includes("фильм") || hay.includes("warcraft") || hay.includes("mario")) return "🎬";
-    if (hay.includes("rpg") || hay.includes("fantasy") || hay.includes("фэнтези")) return "🗡️";
-    return "🎮";
-  })();
-  const words = title.split(/\s+/).filter(Boolean);
-  const lines = [];
-  let line = "";
-  for (const word of words) {
-    const probe = line ? (line + " " + word) : word;
-    if (probe.length > 18 && line) {
-      lines.push(line);
-      line = word;
-      if (lines.length >= 3) break;
-    } else line = probe;
-  }
-  if (line && lines.length < 3) lines.push(line);
-  const titleLines = lines.slice(0, 3).map((text, idx) => `<text x="50%" y="${390 + idx*54}" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="800" fill="#ffffff">${String(text).replace(/[&<>]/g, '')}</text>`).join('');
-  const svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
-    <defs>
-      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-        <stop stop-color="#14052f"/>
-        <stop offset="0.5" stop-color="#2f117f"/>
-        <stop offset="1" stop-color="#00d5ff"/>
-      </linearGradient>
-      <radialGradient id="r" cx="50%" cy="18%" r="80%">
-        <stop stop-color="#ffffff" stop-opacity="0.22"/>
-        <stop offset="1" stop-color="#000000" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-    <rect width="600" height="900" fill="url(#g)"/>
-    <rect width="600" height="900" fill="url(#r)"/>
-    <circle cx="300" cy="220" r="112" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.28)" stroke-width="3"/>
-    <text x="50%" y="248" text-anchor="middle" font-family="Arial, sans-serif" font-size="92">${emoji}</text>
-    ${titleLines}
-    <text x="50%" y="620" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#c8f4ff">${relation.replace(/[&<>]/g, '')}</text>
-    <text x="50%" y="664" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#e8faff">${(genres || 'ГОЛУБЬ КАТАЛОГ МИРА').replace(/[&<>]/g, '')}</text>
-    <text x="50%" y="742" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">${(year ? year + ' · ' : '') + 'Игра'}</text>
-    <text x="50%" y="822" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="800" fill="#ffffff">ГОЛУБЬ КАТАЛОГ МИРА</text>
-  </svg>`;
-  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-}
-
 function recoverPosterImage(img) {
   if (!img || img.dataset.posterDone === "1") return;
   const original = img.dataset.originalSrc || "";
@@ -705,12 +647,6 @@ function recoverPosterImage(img) {
   if (img.dataset.originalTried !== "1" && original && img.src !== original) {
     img.dataset.originalTried = "1";
     img.src = original;
-    return;
-  }
-  const fallback = img.dataset.gkmFallbackPoster || "";
-  if (img.dataset.fallbackTried !== "1" && fallback && img.src !== fallback) {
-    img.dataset.fallbackTried = "1";
-    img.src = fallback;
     return;
   }
   img.dataset.posterDone = "1";
@@ -771,13 +707,9 @@ function cardHtml(item) {
   const fav = loadSet(favKey);
   const id = String(item.id || `${title}|${getYear(item)}`);
   const img = posterSrc(item);
-  const isGame = isGameCatalogItem(item);
-  const fallbackPoster = isGame ? buildGameFallbackPoster(item) : "";
   const poster = img
-    ? `<img src="${escapeAttr(img)}" data-original-src="${escapeAttr(posterOriginalSrc(item))}" data-proxy-tried="${shouldProxyFirst(posterOriginalSrc(item)) ? "1" : "0"}" data-gkm-fallback-poster="${escapeAttr(fallbackPoster)}" loading="lazy" decoding="async" alt="">`
-    : (fallbackPoster
-        ? `<img src="${escapeAttr(fallbackPoster)}" data-original-src="" data-proxy-tried="1" data-fallback-tried="1" data-gkm-fallback-poster="${escapeAttr(fallbackPoster)}" loading="lazy" decoding="async" alt="">`
-        : `<div class="poster-placeholder">Нет постера</div>`);
+    ? `<img src="${escapeAttr(img)}" data-original-src="${escapeAttr(posterOriginalSrc(item))}" data-proxy-tried="${shouldProxyFirst(posterOriginalSrc(item)) ? "1" : "0"}" loading="lazy" decoding="async" alt="">`
+    : `<div class="poster-placeholder">Нет постера</div>`;
 
   return `
     <article class="card" data-id="${escapeAttr(id)}">
@@ -830,25 +762,8 @@ function updateCleanTrashButton() {
     : "Сейчас показывается всё, включая мусорные карточки";
 }
 
-function dedupeVisibleItems(items, limit = null) {
-  const out = [];
-  const seen = new Set();
-  const list = Array.isArray(items) ? items : [];
-  for (const item of list) {
-    if (!item) continue;
-    const title = norm(displayTitle(item) || titleOf(item));
-    const year = String(getYear(item) || "").trim();
-    const key = title ? `${title}|${year}` : String(item.id || Math.random());
-    if (seen.has(key)) continue;
-    seen.add(key);
-    out.push(item);
-    if (limit && out.length >= limit) break;
-  }
-  return out;
-}
-
 function renderList(items, label) {
-  const safeItems = dedupeVisibleItems(items, PAGE_SIZE);
+  const safeItems = (Array.isArray(items) ? items : []).slice(0, PAGE_SIZE);
   currentItems = safeItems;
   const grid = $("grid");
   const count = $("countText");
@@ -936,7 +851,7 @@ async function renderHome() {
   if (next) next.disabled = true;
   if (grid) {
     grid.innerHTML = order.map(([key, title]) => {
-      const list = dedupeVisibleItems((sections[key] || []).filter(hasPoster), 18);
+      const list = (sections[key] || []).filter(hasPoster).slice(0, 18);
       homePool.push(...list);
       return `
         <section class="home-section">
@@ -949,7 +864,13 @@ async function renderHome() {
       `;
     }).join("");
   }
-  currentItems = dedupeVisibleItems(homePool);
+  const seen = new Set();
+  currentItems = homePool.filter(item => {
+    const key = String(item && (item.id || `${titleOf(item)}|${getYear(item)}`));
+    if (!item || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
   setStatus(`Готово · ${homeData.total || 0} записей`);
 }
 
@@ -4201,9 +4122,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 (function () {
   "use strict";
 
-  window.GKM_V202_GAME_HUB_VERSION = "v203-game-hub-fixes-2026-06-29";
+  window.GKM_V202_GAME_HUB_VERSION = "v206-game-hub-full-fallback-2026-06-29";
 
-  const GAMES_URL = "data/data/games_catalog.json?v=203";
+  const GAMES_URL = "./data/games_catalog.json?v=206";
   const PAGE = 60;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -4223,8 +4144,1140 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let activeRelation = "all";
 
   const FALLBACK_GAMES = [
-    { id:"game-cyberpunk-2077", title:"Cyberpunk 2077", type:"Игра", year:2020, rating:8.6, votes:720000, genres:["RPG","Киберпанк","Открытый мир"], relation:"game_to_anime", relationLabel:"игра → аниме", badges:["📺 Есть аниме","🧩 DLC","🔥 Популярное"], relatedMedia:["Cyberpunk: Edgerunners"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/1091500/library_600x900_2x.jpg", stores:{ steam:"https://store.steampowered.com/app/1091500/Cyberpunk_2077/" }, description:"Одна вселенная с аниме Cyberpunk: Edgerunners.", playAfterWatch:["Cyberpunk 2077","Cyberpunk 2077: Phantom Liberty"], chronology:["Cyberpunk 2077","Cyberpunk: Edgerunners","Phantom Liberty"], similarGames:["Deus Ex","The Ascent"], similarMedia:["Blade Runner 2049","Ghost in the Shell"], vibe:["киберпанк","неон"] },
-    { id:"game-fallout-4", title:"Fallout 4", type:"Игра", year:2015, rating:8.4, votes:850000, genres:["RPG","Постапокалипсис"], relation:"game_to_series", relationLabel:"игра → сериал", badges:["📺 Есть сериал","☢️ Постапок"], relatedMedia:["Fallout"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/377160/library_600x900_2x.jpg", stores:{ steam:"https://store.steampowered.com/app/377160/Fallout_4/" }, description:"Игровая вселенная Fallout получила сериал.", playAfterWatch:["Fallout 4","Fallout: New Vegas"], chronology:["Fallout","Fallout 3","New Vegas","Fallout 4","Fallout сериал"], similarGames:["Metro Exodus","Wasteland 3"], similarMedia:["Mad Max","Silo"], vibe:["пустошь","ретро"] }
+    {
+      "id": "game-cyberpunk-2077",
+      "title": "Cyberpunk 2077",
+      "type": "Игра",
+      "year": 2020,
+      "rating": 8.6,
+      "votes": 720000,
+      "genres": [
+        "RPG",
+        "Киберпанк",
+        "Открытый мир"
+      ],
+      "relation": "game_to_anime",
+      "relationLabel": "игра → аниме",
+      "badges": [
+        "📺 Есть аниме",
+        "🧩 DLC",
+        "🔥 Популярное"
+      ],
+      "relatedMedia": [
+        "Cyberpunk: Edgerunners"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1091500/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/1091500/Cyberpunk_2077/",
+        "gog": "https://www.gog.com/en/game/cyberpunk_2077"
+      },
+      "description": "Одна вселенная с аниме Cyberpunk: Edgerunners. Хорошо подходит для блока “посмотрел — во что играть дальше”.",
+      "playAfterWatch": [
+        "Cyberpunk 2077",
+        "Cyberpunk 2077: Phantom Liberty"
+      ],
+      "chronology": [
+        "Cyberpunk 2077",
+        "Cyberpunk: Edgerunners",
+        "Cyberpunk 2077: Phantom Liberty"
+      ],
+      "similarGames": [
+        "Deus Ex: Human Revolution",
+        "The Ascent",
+        "Watch Dogs 2"
+      ],
+      "similarMedia": [
+        "Blade Runner 2049",
+        "Ghost in the Shell",
+        "Altered Carbon"
+      ],
+      "vibe": [
+        "киберпанк",
+        "неон",
+        "мегаполис",
+        "будущее"
+      ]
+    },
+    {
+      "id": "game-the-last-of-us",
+      "title": "The Last of Us Part I",
+      "type": "Игра",
+      "year": 2022,
+      "rating": 9.2,
+      "votes": 900000,
+      "genres": [
+        "Приключение",
+        "Драма",
+        "Постапокалипсис"
+      ],
+      "relation": "game_to_series",
+      "relationLabel": "игра → сериал",
+      "badges": [
+        "📺 Есть сериал",
+        "⭐ Культовая",
+        "🎭 Драма"
+      ],
+      "relatedMedia": [
+        "The Last of Us"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1888930/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/1888930/The_Last_of_Us_Part_I/"
+      },
+      "description": "Игра, по которой снят сериал The Last of Us.",
+      "playAfterWatch": [
+        "The Last of Us Part I",
+        "The Last of Us Part II"
+      ],
+      "chronology": [
+        "The Last of Us: Left Behind",
+        "The Last of Us Part I",
+        "The Last of Us Part II",
+        "The Last of Us сериал"
+      ],
+      "similarGames": [
+        "Days Gone",
+        "A Plague Tale: Requiem",
+        "Metro Exodus"
+      ],
+      "similarMedia": [
+        "The Walking Dead",
+        "Children of Men",
+        "Logan"
+      ],
+      "vibe": [
+        "выживание",
+        "драма",
+        "постапокалипсис"
+      ]
+    },
+    {
+      "id": "game-fallout-4",
+      "title": "Fallout 4",
+      "type": "Игра",
+      "year": 2015,
+      "rating": 8.4,
+      "votes": 850000,
+      "genres": [
+        "RPG",
+        "Постапокалипсис",
+        "Открытый мир"
+      ],
+      "relation": "game_to_series",
+      "relationLabel": "игра → сериал",
+      "badges": [
+        "📺 Есть сериал",
+        "🌍 Открытый мир",
+        "☢️ Постапок"
+      ],
+      "relatedMedia": [
+        "Fallout"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/377160/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/377160/Fallout_4/"
+      },
+      "description": "Игровая вселенная Fallout получила сериал. Хороший кандидат для карточки-вселенной.",
+      "playAfterWatch": [
+        "Fallout 4",
+        "Fallout: New Vegas",
+        "Fallout 76"
+      ],
+      "chronology": [
+        "Fallout",
+        "Fallout 2",
+        "Fallout 3",
+        "Fallout: New Vegas",
+        "Fallout 4",
+        "Fallout сериал"
+      ],
+      "similarGames": [
+        "S.T.A.L.K.E.R. 2",
+        "Metro Exodus",
+        "Wasteland 3"
+      ],
+      "similarMedia": [
+        "Mad Max: Fury Road",
+        "Silo",
+        "The 100"
+      ],
+      "vibe": [
+        "пустошь",
+        "убежища",
+        "ретрофутуризм"
+      ]
+    },
+    {
+      "id": "game-witcher-3",
+      "title": "The Witcher 3: Wild Hunt",
+      "type": "Игра",
+      "year": 2015,
+      "rating": 9.5,
+      "votes": 1200000,
+      "genres": [
+        "RPG",
+        "Фэнтези",
+        "Открытый мир"
+      ],
+      "relation": "shared_universe",
+      "relationLabel": "книги → игра → сериал",
+      "badges": [
+        "📺 Есть сериал",
+        "📚 Книги",
+        "⭐ Культовая"
+      ],
+      "relatedMedia": [
+        "The Witcher",
+        "The Witcher: Nightmare of the Wolf"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/292030/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/",
+        "gog": "https://www.gog.com/en/game/the_witcher_3_wild_hunt"
+      },
+      "description": "Большая вселенная: книги, игры, сериал и анимация.",
+      "playAfterWatch": [
+        "The Witcher 3: Wild Hunt",
+        "The Witcher 2",
+        "Thronebreaker"
+      ],
+      "chronology": [
+        "Книги о Ведьмаке",
+        "The Witcher",
+        "The Witcher 2",
+        "The Witcher 3",
+        "Сериал The Witcher"
+      ],
+      "similarGames": [
+        "Dragon Age: Inquisition",
+        "Baldur’s Gate 3",
+        "Elden Ring"
+      ],
+      "similarMedia": [
+        "Game of Thrones",
+        "The Last Kingdom",
+        "Castlevania"
+      ],
+      "vibe": [
+        "фэнтези",
+        "монстры",
+        "мрачный мир"
+      ]
+    },
+    {
+      "id": "game-resident-evil-4",
+      "title": "Resident Evil 4",
+      "type": "Игра",
+      "year": 2023,
+      "rating": 9.1,
+      "votes": 650000,
+      "genres": [
+        "Хоррор",
+        "Экшен",
+        "Выживание"
+      ],
+      "relation": "game_to_movies",
+      "relationLabel": "игра → фильмы / анимация",
+      "badges": [
+        "🎬 Есть фильмы",
+        "🧟 Хоррор",
+        "⭐ Культовая"
+      ],
+      "relatedMedia": [
+        "Resident Evil",
+        "Resident Evil: Degeneration",
+        "Resident Evil: Infinite Darkness"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/2050650/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/2050650/Resident_Evil_4/"
+      },
+      "description": "Resident Evil — одна из главных игровых вселенных с фильмами, сериалами и анимацией.",
+      "playAfterWatch": [
+        "Resident Evil 2",
+        "Resident Evil 4",
+        "Resident Evil Village"
+      ],
+      "chronology": [
+        "Resident Evil 0",
+        "Resident Evil",
+        "Resident Evil 2",
+        "Resident Evil 3",
+        "Resident Evil 4",
+        "Resident Evil Village"
+      ],
+      "similarGames": [
+        "Dead Space",
+        "The Evil Within",
+        "Alan Wake 2"
+      ],
+      "similarMedia": [
+        "28 Days Later",
+        "Train to Busan",
+        "Silent Hill"
+      ],
+      "vibe": [
+        "зомби",
+        "корпорация",
+        "выживание"
+      ]
+    },
+    {
+      "id": "game-silent-hill-2",
+      "title": "Silent Hill 2",
+      "type": "Игра",
+      "year": 2024,
+      "rating": 8.8,
+      "votes": 250000,
+      "genres": [
+        "Психологический хоррор",
+        "Выживание"
+      ],
+      "relation": "game_to_movie",
+      "relationLabel": "игра → фильм",
+      "badges": [
+        "🎬 Есть фильм",
+        "🧠 Психохоррор",
+        "🌫 Атмосфера"
+      ],
+      "relatedMedia": [
+        "Silent Hill"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/2124490/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/2124490/SILENT_HILL_2/"
+      },
+      "description": "Silent Hill — игровая хоррор-вселенная, по которой выходили фильмы.",
+      "playAfterWatch": [
+        "Silent Hill 2",
+        "Silent Hill",
+        "Silent Hill 3"
+      ],
+      "chronology": [
+        "Silent Hill",
+        "Silent Hill 2",
+        "Silent Hill 3",
+        "Silent Hill фильм"
+      ],
+      "similarGames": [
+        "Alan Wake 2",
+        "The Medium",
+        "Layers of Fear"
+      ],
+      "similarMedia": [
+        "Jacob’s Ladder",
+        "The Mist",
+        "1408"
+      ],
+      "vibe": [
+        "туман",
+        "психология",
+        "кошмар"
+      ]
+    },
+    {
+      "id": "game-mortal-kombat-1",
+      "title": "Mortal Kombat 1",
+      "type": "Игра",
+      "year": 2023,
+      "rating": 8.0,
+      "votes": 320000,
+      "genres": [
+        "Файтинг",
+        "Экшен"
+      ],
+      "relation": "game_to_movies",
+      "relationLabel": "игра → фильмы / мультфильмы",
+      "badges": [
+        "🎬 Есть фильмы",
+        "🥊 Файтинг",
+        "🔥 Жестко"
+      ],
+      "relatedMedia": [
+        "Mortal Kombat",
+        "Mortal Kombat Legends"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1971870/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/1971870/Mortal_Kombat_1/"
+      },
+      "description": "Mortal Kombat удобно держать как игровую вселенную: игры, фильмы, мультфильмы и турниры.",
+      "playAfterWatch": [
+        "Mortal Kombat 1",
+        "Mortal Kombat 11"
+      ],
+      "chronology": [
+        "Mortal Kombat классика",
+        "Mortal Kombat 9",
+        "Mortal Kombat X",
+        "Mortal Kombat 11",
+        "Mortal Kombat 1"
+      ],
+      "similarGames": [
+        "Tekken 8",
+        "Street Fighter 6",
+        "Injustice 2"
+      ],
+      "similarMedia": [
+        "Bloodsport",
+        "Ninja Assassin",
+        "Mortal Kombat Legends"
+      ],
+      "vibe": [
+        "турнир",
+        "бойцы",
+        "фаталити"
+      ]
+    },
+    {
+      "id": "game-sonic-frontiers",
+      "title": "Sonic Frontiers",
+      "type": "Игра",
+      "year": 2022,
+      "rating": 8.1,
+      "votes": 190000,
+      "genres": [
+        "Платформер",
+        "Приключение"
+      ],
+      "relation": "game_to_movies",
+      "relationLabel": "игра → фильмы / мультсериалы",
+      "badges": [
+        "🎬 Есть фильмы",
+        "👨‍👩‍👧 Семейное",
+        "⚡ Быстро"
+      ],
+      "relatedMedia": [
+        "Sonic the Hedgehog",
+        "Sonic Prime"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1237320/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/1237320/Sonic_Frontiers/"
+      },
+      "description": "Sonic — яркая связка игр, фильмов и мультсериалов.",
+      "playAfterWatch": [
+        "Sonic Frontiers",
+        "Sonic Mania",
+        "Sonic Generations"
+      ],
+      "chronology": [
+        "Sonic классика",
+        "Sonic Mania",
+        "Sonic Frontiers",
+        "Sonic фильмы",
+        "Sonic Prime"
+      ],
+      "similarGames": [
+        "Crash Bandicoot 4",
+        "Spyro Reignited Trilogy",
+        "Ratchet & Clank"
+      ],
+      "similarMedia": [
+        "The Super Mario Bros. Movie",
+        "Sonic Prime",
+        "Detective Pikachu"
+      ],
+      "vibe": [
+        "скорость",
+        "семейное",
+        "приключение"
+      ]
+    },
+    {
+      "id": "game-halo-mcc",
+      "title": "Halo: The Master Chief Collection",
+      "type": "Игра",
+      "year": 2019,
+      "rating": 8.7,
+      "votes": 500000,
+      "genres": [
+        "Шутер",
+        "Фантастика"
+      ],
+      "relation": "game_to_series",
+      "relationLabel": "игра → сериал",
+      "badges": [
+        "📺 Есть сериал",
+        "🚀 Sci-Fi",
+        "🔫 Шутер"
+      ],
+      "relatedMedia": [
+        "Halo"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/976730/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/976730/Halo_The_Master_Chief_Collection/"
+      },
+      "description": "Halo — игровая sci-fi вселенная, по которой сделали сериал.",
+      "playAfterWatch": [
+        "Halo: Combat Evolved",
+        "Halo 2",
+        "Halo 3",
+        "Halo Reach"
+      ],
+      "chronology": [
+        "Halo Reach",
+        "Halo: Combat Evolved",
+        "Halo 2",
+        "Halo 3",
+        "Halo 4",
+        "Halo сериал"
+      ],
+      "similarGames": [
+        "DOOM Eternal",
+        "Destiny 2",
+        "Titanfall 2"
+      ],
+      "similarMedia": [
+        "The Expanse",
+        "Battlestar Galactica",
+        "Starship Troopers"
+      ],
+      "vibe": [
+        "космос",
+        "броня",
+        "война"
+      ]
+    },
+    {
+      "id": "game-uncharted",
+      "title": "UNCHARTED: Legacy of Thieves Collection",
+      "type": "Игра",
+      "year": 2022,
+      "rating": 8.6,
+      "votes": 300000,
+      "genres": [
+        "Приключение",
+        "Экшен"
+      ],
+      "relation": "game_to_movie",
+      "relationLabel": "игра → фильм",
+      "badges": [
+        "🎬 Есть фильм",
+        "🧭 Приключение",
+        "💎 Сокровища"
+      ],
+      "relatedMedia": [
+        "Uncharted"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1659420/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/1659420/UNCHARTED_Legacy_of_Thieves_Collection/"
+      },
+      "description": "Uncharted — приключенческая игра, которую перенесли в кино.",
+      "playAfterWatch": [
+        "Uncharted 4",
+        "Uncharted: The Lost Legacy"
+      ],
+      "chronology": [
+        "Uncharted",
+        "Uncharted 2",
+        "Uncharted 3",
+        "Uncharted 4",
+        "Uncharted фильм"
+      ],
+      "similarGames": [
+        "Tomb Raider",
+        "Indiana Jones and the Great Circle",
+        "Star Wars Jedi: Survivor"
+      ],
+      "similarMedia": [
+        "Indiana Jones",
+        "National Treasure",
+        "Tomb Raider"
+      ],
+      "vibe": [
+        "сокровища",
+        "погони",
+        "приключение"
+      ]
+    },
+    {
+      "id": "game-tomb-raider",
+      "title": "Tomb Raider",
+      "type": "Игра",
+      "year": 2013,
+      "rating": 8.5,
+      "votes": 700000,
+      "genres": [
+        "Приключение",
+        "Экшен"
+      ],
+      "relation": "game_to_movies",
+      "relationLabel": "игра → фильмы / анимация",
+      "badges": [
+        "🎬 Есть фильмы",
+        "🧗 Выживание",
+        "🏹 Лара"
+      ],
+      "relatedMedia": [
+        "Tomb Raider"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/203160/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/203160/Tomb_Raider/"
+      },
+      "description": "Tomb Raider — игровая серия с фильмами и анимационными проектами.",
+      "playAfterWatch": [
+        "Tomb Raider",
+        "Rise of the Tomb Raider",
+        "Shadow of the Tomb Raider"
+      ],
+      "chronology": [
+        "Tomb Raider",
+        "Rise of the Tomb Raider",
+        "Shadow of the Tomb Raider",
+        "Tomb Raider фильмы"
+      ],
+      "similarGames": [
+        "Uncharted",
+        "Horizon Zero Dawn",
+        "Assassin’s Creed Origins"
+      ],
+      "similarMedia": [
+        "Uncharted",
+        "Indiana Jones",
+        "The Mummy"
+      ],
+      "vibe": [
+        "гробницы",
+        "остров",
+        "выживание"
+      ]
+    },
+    {
+      "id": "game-assassins-creed",
+      "title": "Assassin's Creed Odyssey",
+      "type": "Игра",
+      "year": 2018,
+      "rating": 8.4,
+      "votes": 720000,
+      "genres": [
+        "Экшен",
+        "RPG",
+        "История"
+      ],
+      "relation": "game_to_movie",
+      "relationLabel": "игра → фильм",
+      "badges": [
+        "🎬 Есть фильм",
+        "🏛 История",
+        "🗡 Ассасины"
+      ],
+      "relatedMedia": [
+        "Assassin's Creed"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/812140/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/812140/Assassins_Creed_Odyssey/"
+      },
+      "description": "Assassin's Creed — большая игровая вселенная с фильмом и потенциалом для сериалов.",
+      "playAfterWatch": [
+        "Assassin's Creed II",
+        "Assassin's Creed Odyssey",
+        "Assassin's Creed Valhalla"
+      ],
+      "chronology": [
+        "Древний Египет",
+        "Древняя Греция",
+        "Викинги",
+        "Крестовые походы",
+        "Ренессанс",
+        "Фильм"
+      ],
+      "similarGames": [
+        "Ghost of Tsushima",
+        "Shadow of Mordor",
+        "Prince of Persia"
+      ],
+      "similarMedia": [
+        "Kingdom of Heaven",
+        "Gladiator",
+        "Marco Polo"
+      ],
+      "vibe": [
+        "история",
+        "скрытность",
+        "орден"
+      ]
+    },
+    {
+      "id": "game-castlevania",
+      "title": "Castlevania: Lords of Shadow",
+      "type": "Игра",
+      "year": 2013,
+      "rating": 8.0,
+      "votes": 180000,
+      "genres": [
+        "Экшен",
+        "Готика",
+        "Фэнтези"
+      ],
+      "relation": "game_to_anime",
+      "relationLabel": "игра → анимационный сериал",
+      "badges": [
+        "📺 Есть анимация",
+        "🧛 Вампиры",
+        "🌑 Готика"
+      ],
+      "relatedMedia": [
+        "Castlevania",
+        "Castlevania: Nocturne"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/234080/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/234080/Castlevania_Lords_of_Shadow__Ultimate_Edition/"
+      },
+      "description": "Castlevania — игровая серия, которая отлично легла в формат анимационного сериала.",
+      "playAfterWatch": [
+        "Castlevania: Lords of Shadow",
+        "Castlevania: Symphony of the Night"
+      ],
+      "chronology": [
+        "Классические Castlevania",
+        "Lords of Shadow",
+        "Castlevania анимация",
+        "Castlevania: Nocturne"
+      ],
+      "similarGames": [
+        "Bloodstained",
+        "Blasphemous",
+        "Devil May Cry 5"
+      ],
+      "similarMedia": [
+        "Vampire Hunter D",
+        "Hellsing",
+        "Berserk"
+      ],
+      "vibe": [
+        "вампиры",
+        "готика",
+        "замки"
+      ]
+    },
+    {
+      "id": "game-dota-2",
+      "title": "Dota 2",
+      "type": "Игра",
+      "year": 2013,
+      "rating": 8.2,
+      "votes": 1600000,
+      "genres": [
+        "MOBA",
+        "Фэнтези",
+        "Командная"
+      ],
+      "relation": "game_to_anime",
+      "relationLabel": "игра → аниме",
+      "badges": [
+        "📺 Есть аниме",
+        "⚔️ Командная",
+        "🔥 Популярное"
+      ],
+      "relatedMedia": [
+        "Dota: Dragon's Blood"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/570/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/570/Dota_2/"
+      },
+      "description": "Dota 2 связана с аниме Dota: Dragon's Blood.",
+      "playAfterWatch": [
+        "Dota 2"
+      ],
+      "chronology": [
+        "Dota",
+        "Dota 2",
+        "Dota: Dragon’s Blood"
+      ],
+      "similarGames": [
+        "League of Legends",
+        "Smite",
+        "Heroes of the Storm"
+      ],
+      "similarMedia": [
+        "Arcane",
+        "Dragon Prince",
+        "Castlevania"
+      ],
+      "vibe": [
+        "герои",
+        "магия",
+        "команды"
+      ]
+    },
+    {
+      "id": "game-devil-may-cry",
+      "title": "Devil May Cry 5",
+      "type": "Игра",
+      "year": 2019,
+      "rating": 8.9,
+      "votes": 520000,
+      "genres": [
+        "Слэшер",
+        "Экшен",
+        "Демоны"
+      ],
+      "relation": "game_to_anime",
+      "relationLabel": "игра → аниме",
+      "badges": [
+        "📺 Есть аниме",
+        "⚔️ Слэшер",
+        "😈 Демоны"
+      ],
+      "relatedMedia": [
+        "Devil May Cry"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/601150/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/601150/Devil_May_Cry_5/"
+      },
+      "description": "Devil May Cry — стильная игровая серия с аниме-адаптацией.",
+      "playAfterWatch": [
+        "Devil May Cry 3",
+        "Devil May Cry 5"
+      ],
+      "chronology": [
+        "Devil May Cry 3",
+        "Devil May Cry",
+        "Devil May Cry 4",
+        "Devil May Cry 5",
+        "Devil May Cry аниме"
+      ],
+      "similarGames": [
+        "Bayonetta",
+        "Metal Gear Rising",
+        "Ninja Gaiden"
+      ],
+      "similarMedia": [
+        "Hellsing",
+        "Trigun",
+        "Jujutsu Kaisen"
+      ],
+      "vibe": [
+        "стиль",
+        "демоны",
+        "слэшер"
+      ]
+    },
+    {
+      "id": "game-warcraft",
+      "title": "World of Warcraft",
+      "type": "Игра",
+      "year": 2004,
+      "rating": 8.8,
+      "votes": 2000000,
+      "genres": [
+        "MMORPG",
+        "Фэнтези"
+      ],
+      "relation": "game_to_movie",
+      "relationLabel": "игра → фильм",
+      "badges": [
+        "🎬 Есть фильм",
+        "🌍 MMORPG",
+        "🧙 Фэнтези"
+      ],
+      "relatedMedia": [
+        "Warcraft"
+      ],
+      "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%F0%9F%A7%99%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3EWarcraft%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
+      "stores": {
+        "google": "https://www.google.com/search?q=World+of+Warcraft"
+      },
+      "description": "Warcraft — огромная игровая вселенная, по которой вышел фильм.",
+      "playAfterWatch": [
+        "World of Warcraft",
+        "Warcraft III"
+      ],
+      "chronology": [
+        "Warcraft: Orcs & Humans",
+        "Warcraft III",
+        "World of Warcraft",
+        "Warcraft фильм"
+      ],
+      "similarGames": [
+        "Final Fantasy XIV",
+        "The Elder Scrolls Online",
+        "Guild Wars 2"
+      ],
+      "similarMedia": [
+        "The Lord of the Rings",
+        "The Hobbit",
+        "Dungeons & Dragons"
+      ],
+      "vibe": [
+        "орки",
+        "альянс",
+        "фэнтези"
+      ]
+    },
+    {
+      "id": "game-arcane-lol",
+      "title": "League of Legends",
+      "type": "Игра",
+      "year": 2009,
+      "rating": 8.3,
+      "votes": 1800000,
+      "genres": [
+        "MOBA",
+        "Фэнтези",
+        "Командная"
+      ],
+      "relation": "game_to_animation",
+      "relationLabel": "игра → мультсериал",
+      "badges": [
+        "📺 Есть Arcane",
+        "🔥 Популярное",
+        "⚔️ Командная"
+      ],
+      "relatedMedia": [
+        "Arcane"
+      ],
+      "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%E2%9A%94%EF%B8%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3ELeague%20of%20Legends%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
+      "stores": {
+        "google": "https://www.google.com/search?q=League+of+Legends"
+      },
+      "description": "League of Legends связана с мультсериалом Arcane.",
+      "playAfterWatch": [
+        "League of Legends",
+        "Teamfight Tactics"
+      ],
+      "chronology": [
+        "League of Legends",
+        "Arcane"
+      ],
+      "similarGames": [
+        "Dota 2",
+        "Valorant",
+        "Heroes of the Storm"
+      ],
+      "similarMedia": [
+        "Arcane",
+        "Dota: Dragon’s Blood",
+        "Castlevania"
+      ],
+      "vibe": [
+        "герои",
+        "магия",
+        "Пилтовер"
+      ]
+    },
+    {
+      "id": "game-pokemon",
+      "title": "Pokémon Legends: Arceus",
+      "type": "Игра",
+      "year": 2022,
+      "rating": 8.4,
+      "votes": 400000,
+      "genres": [
+        "RPG",
+        "Приключение",
+        "Семейное"
+      ],
+      "relation": "game_to_anime",
+      "relationLabel": "игра → аниме / фильмы",
+      "badges": [
+        "📺 Есть аниме",
+        "👨‍👩‍👧 Семейное",
+        "⭐ Культовая"
+      ],
+      "relatedMedia": [
+        "Pokémon",
+        "Detective Pikachu"
+      ],
+      "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%E2%9A%A1%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3EPok%C3%A9mon%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
+      "stores": {
+        "nintendo": "https://www.nintendo.com/search/#q=pokemon"
+      },
+      "description": "Pokémon — одна из самых больших связок игр, аниме и фильмов.",
+      "playAfterWatch": [
+        "Pokémon Legends: Arceus",
+        "Pokémon Scarlet / Violet"
+      ],
+      "chronology": [
+        "Pokémon игры",
+        "Pokémon аниме",
+        "Pokémon фильмы",
+        "Detective Pikachu"
+      ],
+      "similarGames": [
+        "Ni no Kuni",
+        "Temtem",
+        "Monster Hunter Stories 2"
+      ],
+      "similarMedia": [
+        "Digimon",
+        "Yu-Gi-Oh!",
+        "Detective Pikachu"
+      ],
+      "vibe": [
+        "монстры",
+        "детство",
+        "приключение"
+      ]
+    },
+    {
+      "id": "game-super-mario",
+      "title": "Super Mario Bros. Wonder",
+      "type": "Игра",
+      "year": 2023,
+      "rating": 8.7,
+      "votes": 300000,
+      "genres": [
+        "Платформер",
+        "Семейное"
+      ],
+      "relation": "game_to_movie",
+      "relationLabel": "игра → мультфильм",
+      "badges": [
+        "🎬 Есть мультфильм",
+        "👨‍👩‍👧 Семейное",
+        "🍄 Nintendo"
+      ],
+      "relatedMedia": [
+        "The Super Mario Bros. Movie"
+      ],
+      "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%F0%9F%8D%84%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3ESuper%20Mario%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
+      "stores": {
+        "nintendo": "https://www.nintendo.com/search/#q=super%20mario"
+      },
+      "description": "Mario — игровая серия, по которой вышел крупный мультфильм.",
+      "playAfterWatch": [
+        "Super Mario Bros. Wonder",
+        "Super Mario Odyssey",
+        "Mario Kart 8 Deluxe"
+      ],
+      "chronology": [
+        "Super Mario классика",
+        "Super Mario Odyssey",
+        "The Super Mario Bros. Movie",
+        "Super Mario Bros. Wonder"
+      ],
+      "similarGames": [
+        "Sonic Frontiers",
+        "Rayman Legends",
+        "Crash Bandicoot 4"
+      ],
+      "similarMedia": [
+        "Sonic the Hedgehog",
+        "The LEGO Movie",
+        "Wreck-It Ralph"
+      ],
+      "vibe": [
+        "семейное",
+        "платформер",
+        "весело"
+      ]
+    },
+    {
+      "id": "game-five-nights",
+      "title": "Five Nights at Freddy's",
+      "type": "Игра",
+      "year": 2014,
+      "rating": 7.8,
+      "votes": 480000,
+      "genres": [
+        "Хоррор",
+        "Инди",
+        "Выживание"
+      ],
+      "relation": "game_to_movie",
+      "relationLabel": "игра → фильм",
+      "badges": [
+        "🎬 Есть фильм",
+        "🤖 Аниматроники",
+        "🕯 Хоррор"
+      ],
+      "relatedMedia": [
+        "Five Nights at Freddy's"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/319510/library_600x900_2x.jpg",
+      "stores": {
+        "steam": "https://store.steampowered.com/app/319510/Five_Nights_at_Freddys/"
+      },
+      "description": "FNAF — пример игры, которая стала фильмом и большой фан-вселенной.",
+      "playAfterWatch": [
+        "Five Nights at Freddy's",
+        "Five Nights at Freddy's 2"
+      ],
+      "chronology": [
+        "FNAF",
+        "FNAF 2",
+        "FNAF 3",
+        "FNAF фильм"
+      ],
+      "similarGames": [
+        "Poppy Playtime",
+        "Bendy and the Ink Machine",
+        "Little Nightmares"
+      ],
+      "similarMedia": [
+        "Child’s Play",
+        "Willy’s Wonderland",
+        "M3GAN"
+      ],
+      "vibe": [
+        "аниматроники",
+        "скримеры",
+        "тайна"
+      ]
+    },
+    {
+      "id": "game-alan-wake-2",
+      "title": "Alan Wake 2",
+      "type": "Игра",
+      "year": 2023,
+      "rating": 8.9,
+      "votes": 260000,
+      "genres": [
+        "Хоррор",
+        "Детектив",
+        "Триллер"
+      ],
+      "relation": "vibe_media",
+      "relationLabel": "игра ↔ кино-вайб",
+      "badges": [
+        "🎬 Кино-вайб",
+        "🧠 Психотриллер",
+        "🌲 Мистика"
+      ],
+      "relatedMedia": [
+        "Twin Peaks",
+        "True Detective"
+      ],
+      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/108710/library_600x900_2x.jpg",
+      "stores": {
+        "epic": "https://store.epicgames.com/p/alan-wake-2"
+      },
+      "description": "Не прямая экранизация, но очень кинематографичная игра. Хороша для блока “похожие по вайбу”.",
+      "playAfterWatch": [
+        "Alan Wake Remastered",
+        "Alan Wake 2",
+        "Control"
+      ],
+      "chronology": [
+        "Alan Wake",
+        "Control",
+        "Alan Wake 2"
+      ],
+      "similarGames": [
+        "Control",
+        "Silent Hill 2",
+        "The Evil Within"
+      ],
+      "similarMedia": [
+        "Twin Peaks",
+        "True Detective",
+        "The X-Files"
+      ],
+      "vibe": [
+        "лес",
+        "писатель",
+        "кошмар"
+      ]
+    }
   ];
 
   function txt(v) { return String(v == null ? "" : v).trim(); }
@@ -4286,7 +5339,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const json = await res.json();
       gamesCache = Array.isArray(json) ? json : (json.items || []);
     } catch (err) {
-      console.warn("GKM V203: fallback games loaded", err);
+      console.warn("GKM V202: fallback games loaded", err);
       gamesCache = FALLBACK_GAMES;
     }
     gamesCache = gamesCache.map((item, index) => ({
@@ -4337,7 +5390,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     panel.className = "gkm-game-hub-panel";
     panel.innerHTML = `
       <div class="gkm-game-hub-head">
-        <div><b>🎮 Игровые вселенные V203</b><span>игра ↔ фильм / сериал / аниме / мультфильм</span></div>
+        <div><b>🎮 Игровые вселенные V202</b><span>игра ↔ фильм / сериал / аниме / мультфильм</span></div>
         <button type="button" data-gkm-game-filter-reset="1">Все игры</button>
       </div>
       <div class="gkm-game-filter-row">
@@ -4386,10 +5439,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     currentTab = "games";
     gamesPage = Math.max(1, Number(page || gamesPage || 1));
     if (typeof setActiveTab === "function") setActiveTab("games");
-    if (typeof setStatus === "function") setStatus("Открываю игровые вселенные V203...");
+    if (typeof setStatus === "function") setStatus("Открываю игровые вселенные V202...");
 
     const all = await loadGames();
-    const rows = dedupeVisibleItems(filteredGames(all));
+    const rows = filteredGames(all);
     gamesPages = Math.max(1, Math.ceil(rows.length / PAGE));
     gamesPage = Math.min(gamesPage, gamesPages);
     currentPage = gamesPage;
@@ -4408,7 +5461,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const next = document.getElementById("nextBtn");
 
     const relLabel = (RELATION_FILTERS.find(x => x[0] === activeRelation) || ["all", "Все"])[1];
-    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " · V203 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>Steam / Epic / GOG / гайды / похожее</span>";
+    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " · V202 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>Steam / Epic / GOG / гайды / похожее</span>";
     if (grid) {
       grid.innerHTML = slice.map(cardHtml).join("");
       cardBadgesEnhance(grid);
@@ -4417,7 +5470,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (pageText) pageText.textContent = gamesPage + " / " + gamesPages;
     if (prev) prev.disabled = gamesPage <= 1;
     if (next) next.disabled = gamesPage >= gamesPages;
-    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V203 · " + rows.length + " записей");
+    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V202 · " + rows.length + " записей");
   }
 
   function injectGamesTab() {
@@ -4449,13 +5502,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       .gkm-v202-pill{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;border:1px solid rgba(0,213,255,.38);color:#c9f6ff;background:rgba(0,213,255,.08);font-size:12px;vertical-align:middle;}
       .gkm-game-links-block{border:1px solid rgba(0,213,255,.25);background:linear-gradient(135deg,rgba(0,213,255,.06),rgba(134,68,255,.08));}
       .gkm-game-modal-section{margin-top:12px}.gkm-game-modal-title{margin:0 0 8px;color:#eaf7ff;font-weight:900}.gkm-game-chip-list{display:flex;flex-wrap:wrap;gap:8px}.gkm-game-chip-list span,.gkm-game-chip-list a{display:inline-flex;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 10px;background:rgba(255,255,255,.06);font-size:13px;color:#eaf7ff;text-decoration:none}.gkm-game-chip-list a{border-color:rgba(0,213,255,.32);background:rgba(0,213,255,.08);font-weight:800}.gkm-game-timeline{margin:0;padding-left:20px;color:#dfe8ff}.gkm-game-timeline li{margin:5px 0}.gkm-game-hint{color:#a9c5e8;font-size:13px;margin:4px 0 10px;}
-      @media(max-width:760px){
-        .gkm-game-hub-head{display:block}.gkm-game-hub-head button{margin-top:10px}.gkm-v202-pill{display:block;margin:8px 0 0;width:max-content;max-width:100%;}.gkm-game-relation-badge{font-size:10px;padding:5px 6px;}.gkm-game-filter{font-size:12px;padding:7px 9px;}
-        main{padding-bottom:calc(120px + env(safe-area-inset-bottom, 0px));}
-        #grid{padding-bottom:12px;}
-        .pager{padding-bottom:calc(96px + env(safe-area-inset-bottom, 0px));}
-        .ai-float-btn{bottom:calc(86px + env(safe-area-inset-bottom, 0px)) !important;}
-      }
+      @media(max-width:760px){.gkm-game-hub-head{display:block}.gkm-game-hub-head button{margin-top:10px}.gkm-v202-pill{display:block;margin:8px 0 0;width:max-content;max-width:100%;}.gkm-game-relation-badge{font-size:10px;padding:5px 6px;}.gkm-game-filter{font-size:12px;padding:7px 9px;}}
     `;
     document.head.appendChild(style);
   }
@@ -4560,14 +5607,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function patchOpenDetails() {
-    if (window.GKM_V203_OPEN_DETAILS_PATCHED === "1") return;
+    if (window.GKM_V202_OPEN_DETAILS_PATCHED === "1") return;
     if (typeof openDetails !== "function") return;
     const original = openDetails;
-    openDetails = function gkmV203OpenDetails(item) {
+    openDetails = function gkmV202OpenDetails(item) {
       original(item);
       setTimeout(() => applyGameModal(item), 0);
     };
-    window.GKM_V203_OPEN_DETAILS_PATCHED = "1";
+    window.GKM_V202_OPEN_DETAILS_PATCHED = "1";
   }
 
   function scheduleGamesFilter() {
