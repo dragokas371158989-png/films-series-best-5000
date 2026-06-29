@@ -2168,215 +2168,333 @@ function setupGkmLocalHelper() {
 gkmHelperReady(setupGkmLocalHelper);
 console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
-/* GKM V168 FRANCHISE WATCH ORDER START */
+/* GKM V172 FULL FRANCHISE CATALOG START */
 (function () {
   "use strict";
 
-  window.GKM_V168_FRANCHISE_WATCH_ORDER_VERSION = "v168-franchise-watch-order-2026-06-24";
+  window.GKM_V172_FULL_FRANCHISE_CATALOG_VERSION = "v172-full-franchise-catalog-2026-06-24";
 
   const FRANCHISES = [
     {
+      key: "mcu",
       title: "Мстители / MCU",
-      search: "avengers",
-      note: "Быстрый порядок по основной линии MCU. Можно смотреть только фильмы Мстителей, но лучше с ключевыми сольниками.",
+      note: "Полная база MCU: сольники + Мстители + Стражи + Человек-паук + Доктор Стрэндж. Не ищем одним словом avengers, потому что так показывается только 6 карточек.",
+      aliases: [
+        "железный человек", "iron man",
+        "невероятный халк", "incredible hulk",
+        "тор", "thor",
+        "первый мститель", "captain america",
+        "мстители", "avengers",
+        "стражи галактики", "guardians of the galaxy",
+        "доктор стрэндж", "doctor strange",
+        "человек-паук", "spider-man", "spiderman",
+        "черная пантера", "чёрная пантера", "black panther",
+        "человек-муравей", "ant-man",
+        "капитан марвел", "captain marvel",
+        "вдова", "black widow",
+        "шан-чи", "shang-chi",
+        "вечные", "eternals",
+        "marvel"
+      ],
       order: [
-        ["Железный человек", "iron man"],
-        ["Невероятный Халк", "incredible hulk"],
-        ["Железный человек 2", "iron man 2"],
-        ["Тор", "thor"],
-        ["Первый мститель", "captain america first avenger"],
-        ["Мстители", "avengers"],
-        ["Железный человек 3", "iron man 3"],
-        ["Тор 2: Царство тьмы", "thor dark world"],
-        ["Первый мститель: Другая война", "captain america winter soldier"],
-        ["Стражи Галактики", "guardians of the galaxy"],
-        ["Мстители: Эра Альтрона", "avengers age of ultron"],
-        ["Первый мститель: Противостояние", "captain america civil war"],
-        ["Доктор Стрэндж", "doctor strange"],
-        ["Стражи Галактики. Часть 2", "guardians of the galaxy vol 2"],
-        ["Человек-паук: Возвращение домой", "spider-man homecoming"],
-        ["Тор: Рагнарёк", "thor ragnarok"],
-        ["Чёрная Пантера", "black panther"],
-        ["Мстители: Война бесконечности", "avengers infinity war"],
-        ["Человек-муравей и Оса", "ant-man and the wasp"],
-        ["Капитан Марвел", "captain marvel"],
-        ["Мстители: Финал", "avengers endgame"],
-        ["Человек-паук: Вдали от дома", "spider-man far from home"]
+        ["Железный человек", ["железный человек", "iron man"], ["2", "3"]],
+        ["Невероятный Халк", ["невероятный халк", "incredible hulk"], []],
+        ["Железный человек 2", ["железный человек 2", "iron man 2"], []],
+        ["Тор", ["тор", "thor"], ["рагнарек", "ragnarok", "царство", "dark world", "любовь", "thunder"]],
+        ["Первый мститель", ["первый мститель", "captain america first avenger"], ["другая", "противостояние", "winter", "civil"]],
+        ["Мстители", ["мстители", "avengers"], ["эра", "альтрона", "война", "бесконечности", "финал", "endgame", "ultron", "infinity"]],
+        ["Железный человек 3", ["железный человек 3", "iron man 3"], []],
+        ["Тор 2: Царство тьмы", ["тор 2", "царство тьмы", "dark world"], []],
+        ["Первый мститель: Другая война", ["другая война", "winter soldier"], []],
+        ["Стражи Галактики", ["стражи галактики", "guardians of the galaxy"], ["часть 2", "vol. 2", "vol 2", "3"]],
+        ["Мстители: Эра Альтрона", ["эра альтрона", "age of ultron"], []],
+        ["Первый мститель: Противостояние", ["противостояние", "civil war"], []],
+        ["Доктор Стрэндж", ["доктор стрэндж", "doctor strange"], ["мультивселен", "madness"]],
+        ["Стражи Галактики. Часть 2", ["стражи галактики часть 2", "guardians of the galaxy vol. 2", "guardians of the galaxy vol 2"], []],
+        ["Человек-паук: Возвращение домой", ["возвращение домой", "homecoming"], []],
+        ["Тор: Рагнарёк", ["рагнарек", "ragnarok"], []],
+        ["Чёрная Пантера", ["черная пантера", "чёрная пантера", "black panther"], ["ваканда", "wakanda"]],
+        ["Мстители: Война бесконечности", ["война бесконечности", "infinity war"], []],
+        ["Человек-муравей и Оса", ["человек-муравей и оса", "ant-man and the wasp"], ["квантомания", "quantumania"]],
+        ["Капитан Марвел", ["капитан марвел", "captain marvel"], []],
+        ["Мстители: Финал", ["финал", "endgame"], []],
+        ["Человек-паук: Вдали от дома", ["вдали от дома", "far from home"], []],
+        ["Чёрная вдова", ["черная вдова", "чёрная вдова", "black widow"], []],
+        ["Шан-Чи", ["шан-чи", "shang-chi"], []],
+        ["Вечные", ["вечные", "eternals"], []],
+        ["Человек-паук: Нет пути домой", ["нет пути домой", "no way home"], []],
+        ["Доктор Стрэндж: В мультивселенной безумия", ["мультивселенной безумия", "multiverse of madness"], []],
+        ["Тор: Любовь и гром", ["любовь и гром", "love and thunder"], []],
+        ["Чёрная Пантера: Ваканда навеки", ["ваканда навеки", "wakanda forever"], []],
+        ["Стражи Галактики. Часть 3", ["стражи галактики часть 3", "guardians of the galaxy vol. 3", "guardians of the galaxy vol 3"], []],
+        ["Человек-муравей и Оса: Квантомания", ["квантомания", "quantumania"], []]
       ]
     },
     {
-      title: "Матрица",
-      search: "matrix",
-      note: "Основной порядок выхода.",
-      order: [
-        ["Матрица", "matrix"],
-        ["Аниматрица", "animatrix"],
-        ["Матрица: Перезагрузка", "matrix reloaded"],
-        ["Матрица: Революция", "matrix revolutions"],
-        ["Матрица: Воскрешение", "matrix resurrections"]
-      ]
-    },
-    {
-      title: "Хищник",
-      search: "predator",
-      note: "Можно смотреть по выходу. Кроссоверы с Чужим отдельно внутри списка.",
-      order: [
-        ["Хищник", "predator"],
-        ["Хищник 2", "predator 2"],
-        ["Чужой против Хищника", "alien vs predator"],
-        ["Чужие против Хищника: Реквием", "aliens vs predator requiem"],
-        ["Хищники", "predators"],
-        ["Хищник", "the predator"],
-        ["Добыча", "prey"],
-        ["Хищник: Планета смерти", "predator badlands"]
-      ]
-    },
-    {
-      title: "Чужой",
-      search: "alien",
-      note: "Порядок выхода. Прометей/Завет — приквелы, но новичку проще после классики.",
-      order: [
-        ["Чужой", "alien"],
-        ["Чужие", "aliens"],
-        ["Чужой 3", "alien 3"],
-        ["Чужой: Воскрешение", "alien resurrection"],
-        ["Прометей", "prometheus"],
-        ["Чужой: Завет", "alien covenant"],
-        ["Чужой: Ромул", "alien romulus"]
-      ]
-    },
-    {
-      title: "Наруто",
-      search: "naruto",
-      note: "Фильмы можно смотреть между арками, но базово порядок такой.",
-      order: [
-        ["Наруто", "naruto"],
-        ["Наруто: Фильм первый", "naruto ninja clash"],
-        ["Наруто: Великое столкновение", "naruto legend of the stone of gelel"],
-        ["Наруто: Грандиозный переполох", "naruto guardians of the crescent moon"],
-        ["Наруто: Ураганные хроники", "naruto shippuden"],
-        ["Наруто: Ураганные хроники. Фильм", "naruto shippuden movie"],
-        ["Наруто: Узы", "naruto bonds"],
-        ["Наруто: Наследники воли огня", "naruto will of fire"],
-        ["Наруто: Потерянная башня", "naruto lost tower"],
-        ["Наруто: Кровавая тюрьма", "naruto blood prison"],
-        ["Наруто: Путь ниндзя", "naruto road to ninja"],
-        ["Наруто: Последний фильм", "the last naruto"],
-        ["Боруто", "boruto"]
-      ]
-    },
-    {
-      title: "Блич",
-      search: "bleach",
-      note: "Фильмы идут отдельно от основного сюжета.",
-      order: [
-        ["Блич", "bleach"],
-        ["Блич: Воспоминания ни о ком", "bleach memories of nobody"],
-        ["Блич: Восстание алмазной пыли", "bleach diamond dust rebellion"],
-        ["Блич: Уходя в темноту", "bleach fade to black"],
-        ["Блич: Врата ада", "bleach hell verse"],
-        ["Блич: Тысячелетняя кровавая война", "bleach thousand-year blood war"]
-      ]
-    },
-    {
-      title: "Атака титанов",
-      search: "attack on titan",
-      note: "Основной сериал по сезонам.",
-      order: [
-        ["Атака титанов", "attack on titan"],
-        ["Атака титанов 2", "attack on titan season 2"],
-        ["Атака титанов 3", "attack on titan season 3"],
-        ["Атака титанов: Финал", "attack on titan final season"],
-        ["Атака титанов: Последняя атака", "attack on titan last attack"]
-      ]
-    },
-    {
-      title: "Токийский гуль",
-      search: "tokyo ghoul",
-      note: "Основной порядок просмотра.",
-      order: [
-        ["Токийский гуль", "tokyo ghoul"],
-        ["Токийский гуль √A", "tokyo ghoul root a"],
-        ["Токийский гуль: re", "tokyo ghoul re"],
-        ["Токийский гуль: re 2", "tokyo ghoul re 2"]
-      ]
-    },
-    {
-      title: "Ван-Пис",
-      search: "one piece",
-      note: "Сериал главный. Фильмы можно смотреть после знакомства с командой.",
-      order: [
-        ["Ван-Пис", "one piece"],
-        ["One Piece: Strong World", "one piece strong world"],
-        ["One Piece Film Z", "one piece film z"],
-        ["One Piece Film Gold", "one piece film gold"],
-        ["One Piece: Stampede", "one piece stampede"],
-        ["One Piece Film Red", "one piece film red"],
-        ["One Piece Live Action", "one piece live action"]
-      ]
-    },
-    {
+      key: "harry",
       title: "Гарри Поттер",
-      search: "harry potter",
-      note: "Прямой порядок выхода.",
+      note: "Порядок выхода. Фантастические твари отдельно после основной восьмёрки.",
+      aliases: ["гарри поттер", "harry potter", "фантастические твари", "fantastic beasts"],
       order: [
-        ["Гарри Поттер и философский камень", "harry potter philosopher"],
-        ["Гарри Поттер и Тайная комната", "harry potter chamber of secrets"],
-        ["Гарри Поттер и узник Азкабана", "harry potter prisoner of azkaban"],
-        ["Гарри Поттер и Кубок огня", "harry potter goblet of fire"],
-        ["Гарри Поттер и Орден Феникса", "harry potter order of the phoenix"],
-        ["Гарри Поттер и Принц-полукровка", "harry potter half-blood prince"],
-        ["Гарри Поттер и Дары смерти: Часть 1", "harry potter deathly hallows part 1"],
-        ["Гарри Поттер и Дары смерти: Часть 2", "harry potter deathly hallows part 2"],
-        ["Фантастические твари", "fantastic beasts"]
+        ["Гарри Поттер и философский камень", ["философ", "philosopher", "sorcerer", "камень"], []],
+        ["Гарри Поттер и Тайная комната", ["тайная комната", "chamber"], []],
+        ["Гарри Поттер и узник Азкабана", ["узник азкабана", "prisoner"], []],
+        ["Гарри Поттер и Кубок огня", ["кубок огня", "goblet"], []],
+        ["Гарри Поттер и Орден Феникса", ["орден феникса", "order of the phoenix"], []],
+        ["Гарри Поттер и Принц-полукровка", ["принц-полукровка", "принц полукровка", "half-blood"], []],
+        ["Гарри Поттер и Дары смерти: Часть 1", ["дары смерти часть 1", "дары смерти: часть 1", "deathly hallows part 1"], []],
+        ["Гарри Поттер и Дары смерти: Часть 2", ["дары смерти часть 2", "дары смерти: часть 2", "deathly hallows part 2"], []],
+        ["Фантастические твари", ["фантастические твари", "fantastic beasts"], []]
       ]
     },
     {
-      title: "Властелин колец",
-      search: "lord of the rings",
-      note: "Можно смотреть по выходу или хронологически. Здесь хронологически.",
+      key: "alien",
+      title: "Чужой",
+      note: "Витрина берёт только настоящую франшизу, без Бена 10 и прочего мусора по слову alien.",
+      aliases: ["чужой", "alien", "aliens", "прометей", "prometheus", "завет", "covenant", "ромул", "romulus"],
       order: [
-        ["Хоббит: Нежданное путешествие", "hobbit unexpected journey"],
-        ["Хоббит: Пустошь Смауга", "hobbit desolation of smaug"],
-        ["Хоббит: Битва пяти воинств", "hobbit battle of five armies"],
-        ["Властелин колец: Братство кольца", "lord of the rings fellowship"],
-        ["Властелин колец: Две крепости", "lord of the rings two towers"],
-        ["Властелин колец: Возвращение короля", "lord of the rings return of the king"],
-        ["Кольца власти", "rings of power"]
+        ["Чужой", ["чужой", "alien"], ["против", "воскрешение", "завет", "ромул", "земля", "3"]],
+        ["Чужие", ["чужие", "aliens"], ["против"]],
+        ["Чужой 3", ["чужой 3", "alien 3"], []],
+        ["Чужой: Воскрешение", ["воскрешение", "resurrection"], []],
+        ["Прометей", ["прометей", "prometheus"], []],
+        ["Чужой: Завет", ["завет", "covenant"], []],
+        ["Чужой: Ромул", ["ромул", "romulus"], []],
+        ["Чужой против Хищника", ["чужой против хищника", "alien vs predator", "avp"], ["реквием"]],
+        ["Чужие против Хищника: Реквием", ["реквием", "requiem"], []]
       ]
     },
     {
+      key: "predator",
+      title: "Хищник",
+      note: "Только основная франшиза + кроссоверы с Чужим.",
+      aliases: ["хищник", "predator", "predators", "prey", "добыча"],
+      order: [
+        ["Хищник", ["хищник", "predator"], [" 2", "2", "против", "убийца", "планета", "реквием", "добыча", "prey"]],
+        ["Хищник 2", ["хищник 2", "predator 2"], []],
+        ["Чужой против Хищника", ["чужой против хищника", "alien vs predator", "avp"], ["реквием"]],
+        ["Чужие против Хищника: Реквием", ["реквием", "requiem"], []],
+        ["Хищники", ["хищники", "predators"], []],
+        ["Хищник / Убийца убийц", ["убийца убийц", "the predator"], []],
+        ["Добыча", ["добыча", "prey"], []],
+        ["Хищник: Планета смерти", ["планета смерти", "badlands"], []]
+      ]
+    },
+    {
+      key: "matrix",
+      title: "Матрица",
+      note: "Основной порядок просмотра.",
+      aliases: ["матрица", "matrix", "аниматрица", "animatrix"],
+      order: [
+        ["Матрица", ["матрица", "the matrix"], ["времени", "перезагрузка", "революция", "воскрешение"]],
+        ["Аниматрица", ["аниматрица", "animatrix"], []],
+        ["Матрица: Перезагрузка", ["перезагрузка", "reloaded"], []],
+        ["Матрица: Революция", ["революция", "revolutions"], []],
+        ["Матрица: Воскрешение", ["воскрешение", "resurrections"], []]
+      ]
+    },
+    {
+      key: "naruto",
+      title: "Наруто",
+      note: "Сериал главный, фильмы можно смотреть между арками.",
+      aliases: ["наруто", "naruto", "боруто", "boruto"],
+      order: [
+        ["Наруто", ["наруто", "naruto"], ["боруто", "boruto", "shippuden", "ураганные"]],
+        ["Наруто: Ураганные хроники", ["ураганные хроники", "shippuden"], []],
+        ["Наруто: Последний фильм", ["последний", "the last"], []],
+        ["Боруто", ["боруто", "boruto"], []]
+      ]
+    },
+    {
+      key: "fast",
       title: "Форсаж",
-      search: "fast furious",
       note: "Порядок выхода.",
+      aliases: ["форсаж", "fast furious", "fast & furious", "f9", "fast x", "hobbs", "shaw"],
       order: [
-        ["Форсаж", "fast furious"],
-        ["Двойной форсаж", "2 fast 2 furious"],
-        ["Тройной форсаж: Токийский дрифт", "tokyo drift"],
-        ["Форсаж 4", "fast furious 4"],
-        ["Форсаж 5", "fast five"],
-        ["Форсаж 6", "fast furious 6"],
-        ["Форсаж 7", "furious 7"],
-        ["Форсаж 8", "fate of the furious"],
-        ["Хоббс и Шоу", "hobbs shaw"],
-        ["Форсаж 9", "f9"],
-        ["Форсаж 10", "fast x"]
-      ]
-    },
-    {
-      title: "Терминатор",
-      search: "terminator",
-      note: "Лучший порядок — по выходу.",
-      order: [
-        ["Терминатор", "terminator"],
-        ["Терминатор 2: Судный день", "terminator 2"],
-        ["Терминатор 3: Восстание машин", "terminator 3"],
-        ["Терминатор: Да придёт спаситель", "terminator salvation"],
-        ["Терминатор: Генезис", "terminator genisys"],
-        ["Терминатор: Тёмные судьбы", "terminator dark fate"]
+        ["Форсаж", ["форсаж", "fast furious"], ["2", "3", "4", "5", "6", "7", "8", "9", "10", "x"]],
+        ["Двойной форсаж", ["двойной", "2 fast"], []],
+        ["Тройной форсаж: Токийский дрифт", ["токийский дрифт", "tokyo drift"], []],
+        ["Форсаж 4", ["форсаж 4", "fast furious 4"], []],
+        ["Форсаж 5", ["форсаж 5", "fast five"], []],
+        ["Форсаж 6", ["форсаж 6"], []],
+        ["Форсаж 7", ["форсаж 7", "furious 7"], []],
+        ["Форсаж 8", ["форсаж 8", "fate of the furious"], []],
+        ["Хоббс и Шоу", ["хоббс", "hobbs", "shaw"], []],
+        ["Форсаж 9", ["форсаж 9", "f9"], []],
+        ["Форсаж 10", ["форсаж 10", "fast x"], []]
       ]
     }
   ];
+
+  let DATA_CACHE = null;
+
+  function norm(v) {
+    return String(v || "")
+      .toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[«»"']/g, "")
+      .replace(/[^\p{L}\p{N}:&/\-. ]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function esc(v) {
+    return String(v || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function titleOf(it) {
+    return String(it?.ru || it?.name || it?.title || it?.en || it?.alternativeName || it?.originalTitle || "").trim();
+  }
+
+  function yearOf(it) {
+    const y = parseInt(String(it?.year || it?.releaseYear || "0").slice(0, 4), 10);
+    return Number.isFinite(y) ? y : 0;
+  }
+
+  function ratingOf(it) {
+    const r = Number(it?.rating || it?.kpRating || it?.ratingKinopoisk || 0);
+    return Number.isFinite(r) ? r : 0;
+  }
+
+  function votesOf(it) {
+    const v = Number(it?.votes || it?.kpVotes || it?.votesKp || 0);
+    return Number.isFinite(v) ? v : 0;
+  }
+
+  function posterOf(it) {
+    return it?.poster || it?.posterUrl || it?.image || it?.img || it?.poster_url || "";
+  }
+
+  function typeOf(it) {
+    return String(it?.type || it?.category || it?.kind || "—");
+  }
+
+  function collect(data, out) {
+    if (!data) return out;
+    if (Array.isArray(data)) {
+      for (const x of data) {
+        if (x && typeof x === "object") {
+          if (titleOf(x)) out.push(x);
+          else collect(x, out);
+        }
+      }
+      return out;
+    }
+    if (typeof data === "object") {
+      for (const k of ["items", "docs", "results", "data", "movies", "anime", "popular", "top", "cards", "list"]) {
+        if (Array.isArray(data[k])) collect(data[k], out);
+      }
+      for (const v of Object.values(data)) {
+        if (Array.isArray(v)) collect(v, out);
+      }
+    }
+    return out;
+  }
+
+  async function fetchJson(url) {
+    try {
+      const res = await fetch(url + (url.includes("?") ? "&" : "?") + "_v172=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) return null;
+      return await res.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function loadAllData() {
+    if (DATA_CACHE) return DATA_CACHE;
+
+    let out = [];
+
+    // Сначала лёгкие индексы.
+    collect(await fetchJson("data/fast/search_index.json"), out);
+    collect(await fetchJson("data/fast/home.json"), out);
+    collect(await fetchJson("data/fast/search_lite.json"), out);
+
+    // Если индекс урезан — читаем chunk через data/index.json, но только по запросу во франшизе, не на старте сайта.
+    if (out.length < 5000) {
+      const idx = await fetchJson("data/index.json");
+      if (idx && Array.isArray(idx.chunks)) {
+        for (const chunk of idx.chunks.slice(0, 260)) {
+          collect(await fetchJson(String(chunk)), out);
+        }
+      }
+    }
+
+    // Фолбэк: что уже есть в памяти сайта.
+    for (const k of Object.keys(window).filter(k => /item|movie|catalog|database|all|search|data/i.test(k))) {
+      try { collect(window[k], out); } catch (e) {}
+    }
+
+    const seen = new Set();
+    const unique = [];
+
+    for (const it of out) {
+      const title = titleOf(it);
+      if (!title) continue;
+      const key = String(it.id || it.kinopoiskId || it.kpId || "") || (norm(title) + "::" + yearOf(it));
+      if (seen.has(key)) continue;
+      seen.add(key);
+      unique.push(it);
+    }
+
+    DATA_CACHE = unique;
+    window.GKM_V172_FULL_FRANCHISE_CACHE = unique;
+    console.log("GKM V172 data loaded:", unique.length);
+    return unique;
+  }
+
+  function textOf(it) {
+    return norm([it?.ru, it?.name, it?.title, it?.en, it?.alternativeName, it?.originalTitle].filter(Boolean).join(" "));
+  }
+
+  function hasAny(text, arr) {
+    return (arr || []).some(x => text.includes(norm(x)));
+  }
+
+  function orderScore(it, fr) {
+    const text = textOf(it);
+
+    for (let i = 0; i < fr.order.length; i++) {
+      const row = fr.order[i];
+      const aliases = row[1] || [];
+      const block = row[2] || [];
+      if (hasAny(text, aliases) && !hasAny(text, block)) {
+        return i + 1;
+      }
+    }
+
+    return 9999;
+  }
+
+  function isFranchiseItem(it, fr) {
+    const text = textOf(it);
+    if (!text) return false;
+
+    // Для MCU не берём всё подряд по слову marvel, если нет сильного совпадения.
+    if (fr.key === "mcu") {
+      const strong = fr.aliases.filter(x => x !== "marvel");
+      return hasAny(text, strong);
+    }
+
+    return hasAny(text, fr.aliases);
+  }
+
+  function filteredItems(all, fr) {
+    const rows = all.filter(it => isFranchiseItem(it, fr));
+
+    rows.sort((a, b) => {
+      const sa = orderScore(a, fr);
+      const sb = orderScore(b, fr);
+      if (sa !== sb) return sa - sb;
+      const ya = yearOf(a);
+      const yb = yearOf(b);
+      if (ya !== yb) return ya - yb;
+      return votesOf(b) - votesOf(a);
+    });
+
+    return rows;
+  }
 
   function findSearchInput() {
     return document.querySelector("#search")
@@ -2384,10 +2502,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       || document.querySelector("input[type='search']")
       || document.querySelector("input[placeholder*='Поиск']")
       || document.querySelector("input");
-  }
-
-  function closeOverlay() {
-    document.querySelectorAll(".gkm-v168-overlay").forEach(x => x.remove());
   }
 
   function resetSelects() {
@@ -2401,6 +2515,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function nativeSearch(query) {
     closeOverlay();
+
     const input = findSearchInput();
     if (input) {
       input.focus();
@@ -2408,6 +2523,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       input.dispatchEvent(new Event("input", { bubbles: true }));
       input.dispatchEvent(new Event("change", { bubbles: true }));
     }
+
     resetSelects();
 
     setTimeout(() => {
@@ -2427,95 +2543,170 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }, 80);
   }
 
-  function esc(v) {
-    return String(v || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
+  function cardHtml(it, idx, fr) {
+    const title = titleOf(it);
+    const poster = posterOf(it);
+    const score = orderScore(it, fr);
+    const badge = score < 9999 ? `<div class="gkm-v172-badge">#${score} смотреть</div>` : "";
+    const img = poster ? `<img src="${String(poster).replace(/"/g, "&quot;")}" alt="${esc(title)}" loading="lazy">` : `<div class="gkm-v172-no-poster">Нет постера</div>`;
 
-  function showOrder(fr) {
-    const overlay = document.querySelector(".gkm-v168-overlay");
-    const panel = overlay && overlay.querySelector(".gkm-v168-panel");
-    if (!panel) return;
-
-    panel.innerHTML = `
-      <div class="gkm-v168-head">
-        <div>
-          <h2>🧬 ${esc(fr.title)}</h2>
-          <p>${esc(fr.note || "Порядок просмотра")}</p>
-        </div>
-        <div class="gkm-v168-actions">
-          <button class="gkm-v168-btn" data-back="1">Назад</button>
-          <button class="gkm-v168-close" type="button">✕</button>
+    return `
+      <div class="gkm-v172-card">
+        ${badge}
+        <div class="gkm-v172-poster">${img}</div>
+        <div class="gkm-v172-info">
+          <b>${esc(title)}</b>
+          <span>${yearOf(it) || "—"} · ${esc(typeOf(it))}</span>
+          <em>★ ${ratingOf(it) || "—"} · ${votesOf(it).toLocaleString("ru-RU")} голосов</em>
+          <button class="gkm-v172-small" data-search="${esc(title)}">Найти</button>
         </div>
       </div>
+    `;
+  }
 
-      <div class="gkm-v168-order">
+  function orderListHtml(fr) {
+    return `
+      <div class="gkm-v172-order-list">
         ${fr.order.map((row, idx) => `
-          <div class="gkm-v168-order-row">
-            <div class="gkm-v168-num">${idx + 1}</div>
-            <div class="gkm-v168-order-title">${esc(row[0])}</div>
-            <button class="gkm-v168-small" data-query="${esc(row[1])}">Найти</button>
+          <div class="gkm-v172-order-row">
+            <div class="gkm-v172-num">${idx + 1}</div>
+            <div class="gkm-v172-order-title">${esc(row[0])}</div>
+            <button class="gkm-v172-small" data-search="${esc(row[0])}">Найти эту часть</button>
           </div>
         `).join("")}
       </div>
+    `;
+  }
 
-      <div class="gkm-v168-bottom">
-        <button class="gkm-v168-btn" data-query="${esc(fr.search)}">Открыть всю франшизу поиском</button>
+  function panel() {
+    let overlay = document.querySelector(".gkm-v172-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.className = "gkm-v172-overlay";
+      overlay.innerHTML = `<div class="gkm-v172-panel"></div>`;
+      document.body.appendChild(overlay);
+      overlay.addEventListener("click", e => {
+        if (e.target === overlay) closeOverlay();
+      });
+    }
+    return overlay.querySelector(".gkm-v172-panel");
+  }
+
+  function closeOverlay() {
+    document.querySelectorAll(".gkm-v172-overlay").forEach(x => x.remove());
+  }
+
+  function openHub() {
+    const p = panel();
+    p.innerHTML = `
+      <div class="gkm-v172-head">
+        <div>
+          <h2>🧬 Франшизы</h2>
+          <p>V172: полная витрина франшизы берётся из базы сайта, а не из одного поиска типа avengers.</p>
+        </div>
+        <button class="gkm-v172-close">✕</button>
+      </div>
+      <div class="gkm-v172-grid">
+        ${FRANCHISES.map(fr => `
+          <button class="gkm-v172-tile" data-fr="${fr.key}">
+            <b>${esc(fr.title)}</b>
+            <span>Порядок + вся база</span>
+          </button>
+        `).join("")}
       </div>
     `;
 
-    panel.querySelector(".gkm-v168-close").addEventListener("click", closeOverlay);
-    panel.querySelector("[data-back]").addEventListener("click", openOverlay);
-    panel.querySelectorAll("[data-query]").forEach(btn => {
-      btn.addEventListener("click", () => nativeSearch(btn.dataset.query || ""));
+    p.querySelector(".gkm-v172-close").addEventListener("click", closeOverlay);
+    p.querySelectorAll("[data-fr]").forEach(btn => {
+      btn.addEventListener("click", () => openFranchise(btn.dataset.fr));
     });
   }
 
-  function openOverlay() {
-    closeOverlay();
+  async function openFranchise(key) {
+    const fr = FRANCHISES.find(x => x.key === key) || FRANCHISES[0];
+    const p = panel();
 
-    const overlay = document.createElement("div");
-    overlay.className = "gkm-v168-overlay";
-    overlay.innerHTML = `
-      <div class="gkm-v168-panel">
-        <div class="gkm-v168-head">
-          <div>
-            <h2>🧬 Франшизы</h2>
-            <p>Теперь не просто поиск, а порядок просмотра. Нажми франшизу — покажу с чего начинать.</p>
-          </div>
-          <button class="gkm-v168-close" type="button">✕</button>
+    p.innerHTML = `
+      <div class="gkm-v172-head">
+        <div>
+          <h2>🧬 ${esc(fr.title)}</h2>
+          <p>Загружаю полную базу франшизы...</p>
         </div>
-        <div class="gkm-v168-grid">
-          ${FRANCHISES.map((fr, idx) => `
-            <button class="gkm-v168-tile" data-idx="${idx}">
-              <b>${esc(fr.title)}</b>
-              <span>Порядок просмотра</span>
-            </button>
-          `).join("")}
+        <div class="gkm-v172-actions">
+          <button class="gkm-v172-btn" data-back="1">Назад</button>
+          <button class="gkm-v172-close">✕</button>
         </div>
       </div>
     `;
 
-    document.body.appendChild(overlay);
+    p.querySelector(".gkm-v172-close").addEventListener("click", closeOverlay);
+    p.querySelector("[data-back]").addEventListener("click", openHub);
 
-    overlay.querySelector(".gkm-v168-close").addEventListener("click", closeOverlay);
-    overlay.addEventListener("click", e => {
-      if (e.target === overlay) closeOverlay();
+    const all = await loadAllData();
+    const rows = filteredItems(all, fr);
+
+    p.innerHTML = `
+      <div class="gkm-v172-head">
+        <div>
+          <h2>🧬 ${esc(fr.title)}</h2>
+          <p>${esc(fr.note)}<br><b>Найдено в базе: ${rows.length}</b></p>
+        </div>
+        <div class="gkm-v172-actions">
+          <button class="gkm-v172-btn" data-back="1">Назад</button>
+          <button class="gkm-v172-close">✕</button>
+        </div>
+      </div>
+
+      <div class="gkm-v172-tabs">
+        <button class="gkm-v172-btn active" data-tab="base">Вся база франшизы</button>
+        <button class="gkm-v172-btn" data-tab="order">Порядок просмотра</button>
+      </div>
+
+      <div class="gkm-v172-content" data-content="base">
+        ${rows.length ? `<div class="gkm-v172-cards">${rows.map((it, idx) => cardHtml(it, idx, fr)).join("")}</div>` : `<div class="gkm-v172-empty">В базе сайта не нашёл эту франшизу. Попробуй открыть поиском.</div>`}
+      </div>
+
+      <div class="gkm-v172-content" data-content="order" style="display:none">
+        ${orderListHtml(fr)}
+      </div>
+
+      <div class="gkm-v172-bottom">
+        <button class="gkm-v172-btn" data-native="${esc(fr.aliases[0] || fr.title)}">Открыть обычным поиском</button>
+      </div>
+    `;
+
+    p.querySelector(".gkm-v172-close").addEventListener("click", closeOverlay);
+    p.querySelector("[data-back]").addEventListener("click", openHub);
+
+    p.querySelectorAll("[data-tab]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        p.querySelectorAll("[data-tab]").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const tab = btn.dataset.tab;
+        p.querySelectorAll("[data-content]").forEach(c => {
+          c.style.display = c.dataset.content === tab ? "" : "none";
+        });
+      });
     });
 
-    overlay.querySelectorAll(".gkm-v168-tile").forEach(btn => {
-      btn.addEventListener("click", () => showOrder(FRANCHISES[Number(btn.dataset.idx)]));
+    p.querySelectorAll("[data-search]").forEach(btn => {
+      btn.addEventListener("click", () => nativeSearch(btn.dataset.search || ""));
+    });
+
+    p.querySelector("[data-native]")?.addEventListener("click", e => {
+      nativeSearch(e.currentTarget.dataset.native || fr.title);
     });
   }
 
   function addButton() {
-    document.querySelectorAll("[data-gkm-v162-franchise-btn],[data-gkm-v163-franchise-btn],[data-gkm-v164-franchise-btn],[data-gkm-v165-franchise-btn],[data-gkm-v166-franchise-btn],[data-gkm-v167-franchise-btn],[data-gkm-v168-franchise-btn]").forEach(x => x.remove());
+    document.querySelectorAll("[data-gkm-v162-franchise-btn],[data-gkm-v163-franchise-btn],[data-gkm-v164-franchise-btn],[data-gkm-v165-franchise-btn],[data-gkm-v166-franchise-btn],[data-gkm-v167-franchise-btn],[data-gkm-v168-franchise-btn],[data-gkm-v172-franchise-btn]").forEach(x => x.remove());
 
     const btn = document.createElement("button");
     btn.type = "button";
     btn.textContent = "🧬 Франшизы";
-    btn.dataset.gkmV168FranchiseBtn = "1";
-    btn.className = "btn gkm-v168-main-btn";
-    btn.addEventListener("click", openOverlay);
+    btn.dataset.gkmV172FranchiseBtn = "1";
+    btn.className = "btn gkm-v172-main-btn";
+    btn.addEventListener("click", openHub);
 
     const target = document.querySelector(".tabs")
       || document.querySelector(".nav")
@@ -2529,12 +2720,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function addStyles() {
-    if (document.querySelector("#gkm-v168-style")) return;
+    if (document.querySelector("#gkm-v172-style")) return;
 
     const style = document.createElement("style");
-    style.id = "gkm-v168-style";
+    style.id = "gkm-v172-style";
     style.textContent = `
-      .gkm-v168-main-btn,.gkm-v168-btn,.gkm-v168-small,.gkm-v168-tile {
+      .gkm-v172-main-btn,.gkm-v172-btn,.gkm-v172-small,.gkm-v172-tile{
         border:1px solid #00d8ff;
         background:linear-gradient(135deg,#5a25d6,#04c9f4);
         color:#fff;
@@ -2545,21 +2736,21 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         box-shadow:0 0 18px rgba(0,216,255,.25);
         margin:6px;
       }
-      .gkm-v168-overlay {
+      .gkm-v172-overlay{
         position:fixed;
         inset:0;
         z-index:999999;
-        background:rgba(2,4,16,.76);
+        background:rgba(2,4,16,.78);
         backdrop-filter:blur(4px);
         overflow:auto;
         padding:28px;
       }
-      .gkm-v168-panel {
-        max-width:1450px;
+      .gkm-v172-panel{
+        max-width:1500px;
         margin:0 auto;
         color:#fff;
       }
-      .gkm-v168-head {
+      .gkm-v172-head{
         display:flex;
         justify-content:space-between;
         align-items:flex-start;
@@ -2571,22 +2762,17 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         background:rgba(10,8,35,.94);
         box-shadow:0 0 24px rgba(0,216,255,.12);
       }
-      .gkm-v168-head h2 {
+      .gkm-v172-head h2{
         margin:0 0 8px;
         font-size:30px;
         text-shadow:0 0 16px rgba(185,125,255,.65);
       }
-      .gkm-v168-head p {
+      .gkm-v172-head p{
         margin:0;
         color:#cfc9ff;
         line-height:1.45;
       }
-      .gkm-v168-actions {
-        display:flex;
-        align-items:center;
-        gap:8px;
-      }
-      .gkm-v168-close {
+      .gkm-v172-close{
         min-width:54px;
         min-height:48px;
         border:1px solid #00d8ff;
@@ -2597,33 +2783,57 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         font-weight:900;
         cursor:pointer;
       }
-      .gkm-v168-grid {
+      .gkm-v172-actions{display:flex;align-items:center;gap:8px}
+      .gkm-v172-grid{
         display:grid;
         grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
         gap:14px;
       }
-      .gkm-v168-tile {
+      .gkm-v172-tile{
         text-align:left;
         min-height:112px;
         display:flex;
         flex-direction:column;
         justify-content:center;
       }
-      .gkm-v168-tile b {
-        font-size:22px;
-        line-height:1.1;
-        margin-bottom:10px;
+      .gkm-v172-tile b{font-size:22px;line-height:1.1;margin-bottom:10px}
+      .gkm-v172-tile span{color:#f0ecff;font-size:15px}
+      .gkm-v172-tabs{margin:0 0 14px}
+      .gkm-v172-tabs .active{background:linear-gradient(135deg,#ffae00,#b13cff)}
+      .gkm-v172-cards{
+        display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(185px,1fr));
+        gap:14px;
       }
-      .gkm-v168-tile span {
-        color:#f0ecff;
-        font-size:15px;
+      .gkm-v172-card{
+        position:relative;
+        border:1px solid rgba(0,216,255,.35);
+        border-radius:18px;
+        overflow:hidden;
+        background:rgba(6,8,24,.88);
       }
-      .gkm-v168-order {
-        display:flex;
-        flex-direction:column;
-        gap:10px;
+      .gkm-v172-poster{height:280px;background:rgba(80,40,150,.48);display:flex;align-items:center;justify-content:center;font-weight:900}
+      .gkm-v172-poster img{width:100%;height:100%;object-fit:cover;display:block}
+      .gkm-v172-info{padding:10px;display:flex;flex-direction:column;gap:6px}
+      .gkm-v172-info b{font-size:16px;line-height:1.1}
+      .gkm-v172-info span{color:#cfc9ff;font-size:13px}
+      .gkm-v172-info em{font-style:normal;border:1px solid #00d8ff;border-radius:999px;padding:6px 8px;color:#fff;background:rgba(0,216,255,.11);font-weight:800;font-size:13px}
+      .gkm-v172-badge{
+        position:absolute;
+        left:8px;
+        top:42px;
+        z-index:5;
+        padding:7px 10px;
+        border-radius:999px;
+        background:linear-gradient(135deg,#ffae00,#b13cff);
+        color:#fff;
+        font-weight:1000;
+        font-size:13px;
+        line-height:1;
+        box-shadow:0 0 14px rgba(255,160,0,.45);
       }
-      .gkm-v168-order-row {
+      .gkm-v172-order-list{display:flex;flex-direction:column;gap:10px}
+      .gkm-v172-order-row{
         display:grid;
         grid-template-columns:60px 1fr auto;
         gap:12px;
@@ -2633,341 +2843,36 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         background:rgba(10,8,35,.86);
         padding:12px;
       }
-      .gkm-v168-num {
-        width:44px;
-        height:44px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        border-radius:50%;
-        background:linear-gradient(135deg,#ffae00,#b13cff);
-        color:#fff;
-        font-weight:1000;
-        font-size:20px;
+      .gkm-v172-num{
+        width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+        border-radius:50%;background:linear-gradient(135deg,#ffae00,#b13cff);
+        color:#fff;font-weight:1000;font-size:20px;
       }
-      .gkm-v168-order-title {
-        font-size:19px;
-        font-weight:900;
-        line-height:1.25;
-      }
-      .gkm-v168-small {
-        padding:10px 14px;
-        margin:0;
-      }
-      .gkm-v168-bottom {
-        margin-top:18px;
-        padding:14px;
-        border:1px solid rgba(0,216,255,.25);
-        border-radius:16px;
-        background:rgba(10,8,35,.72);
-      }
-      @media(max-width:720px) {
-        .gkm-v168-overlay { padding:12px; }
-        .gkm-v168-head { flex-direction:column; }
-        .gkm-v168-grid { grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); }
-        .gkm-v168-order-row { grid-template-columns:44px 1fr; }
-        .gkm-v168-small { grid-column:1 / -1; }
+      .gkm-v172-order-title{font-size:19px;font-weight:900;line-height:1.25}
+      .gkm-v172-bottom{margin-top:18px;padding:14px;border:1px solid rgba(0,216,255,.25);border-radius:16px;background:rgba(10,8,35,.72)}
+      .gkm-v172-empty{padding:24px;border:1px solid rgba(255,60,120,.45);border-radius:18px;background:rgba(40,8,24,.72)}
+      @media(max-width:720px){
+        .gkm-v172-overlay{padding:12px}
+        .gkm-v172-head{flex-direction:column}
+        .gkm-v172-cards{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+        .gkm-v172-poster{height:220px}
+        .gkm-v172-order-row{grid-template-columns:44px 1fr}
+        .gkm-v172-small{grid-column:1/-1}
       }
     `;
     document.head.appendChild(style);
-  }
-
-  function addAutoClose() {
-    document.addEventListener("click", e => {
-      const t = e.target;
-      if (!t || !document.querySelector(".gkm-v168-overlay")) return;
-      if (t.closest(".gkm-v168-overlay") || t.closest("[data-gkm-v168-franchise-btn]")) return;
-      if (t.closest(".tab") || t.closest("button") || t.closest("select") || t.closest("input") || t.closest("a")) closeOverlay();
-    }, true);
   }
 
   function init() {
     addStyles();
     addButton();
-    addAutoClose();
-    console.log("GKM: v168-franchise-watch-order-2026-06-24");
+    console.log("GKM: v172-full-franchise-catalog-2026-06-24");
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
-  window.GKM_V168_OPEN_FRANCHISES = openOverlay;
-  window.GKM_V168_CLOSE_FRANCHISES = closeOverlay;
+  window.GKM_V172_OPEN_FRANCHISES = openHub;
+  window.GKM_V172_LOAD_FULL_FRANCHISE_DATA = loadAllData;
 })();
-/* GKM V168 FRANCHISE WATCH ORDER END */
-
-/* GKM V170 PRECISE FRANCHISE RESULT ORDER START */
-(function () {
-  "use strict";
-
-  window.GKM_V170_PRECISE_FRANCHISE_RESULT_ORDER_VERSION = "v170-precise-franchise-result-order-2026-06-24";
-
-  const ORDERS = [
-    {
-      key: "alien",
-      detect: ["alien", "чужой"],
-      order: [
-        { n: 1, label: "Чужой", aliases: ["чужой", "alien"], block: ["против", "воскрешение", "завет", "ромул", "3", "земля"] },
-        { n: 2, label: "Чужие", aliases: ["чужие", "aliens"], block: ["против"] },
-        { n: 3, label: "Чужой 3", aliases: ["чужой 3", "alien 3"] },
-        { n: 4, label: "Чужой: Воскрешение", aliases: ["воскрешение", "resurrection"] },
-        { n: 5, label: "Прометей", aliases: ["прометей", "prometheus"] },
-        { n: 6, label: "Чужой: Завет", aliases: ["завет", "covenant"] },
-        { n: 7, label: "Чужой: Ромул", aliases: ["ромул", "romulus"] },
-        { n: 8, label: "Чужой против Хищника", aliases: ["чужой против хищника", "alien vs predator", "avp"] },
-        { n: 9, label: "Чужие против Хищника: Реквием", aliases: ["реквием", "requiem"] }
-      ]
-    },
-    {
-      key: "predator",
-      detect: ["predator", "хищник"],
-      order: [
-        { n: 1, label: "Хищник", aliases: ["хищник", "predator"], block: [" 2", "2", "против", "убийца", "планета", "реквием", "добыча", "prey", "badlands"] },
-        { n: 2, label: "Хищник 2", aliases: ["хищник 2", "predator 2"] },
-        { n: 3, label: "Чужой против Хищника", aliases: ["чужой против хищника", "alien vs predator", "avp"] },
-        { n: 4, label: "Чужие против Хищника: Реквием", aliases: ["реквием", "requiem"] },
-        { n: 5, label: "Хищники", aliases: ["хищники", "predators"] },
-        { n: 6, label: "Хищник / Хищник: Убийца убийц", aliases: ["хищник: убийца", "убийца убийц", "the predator"] },
-        { n: 7, label: "Добыча", aliases: ["добыча", "prey"] },
-        { n: 8, label: "Хищник: Планета смерти", aliases: ["планета смерти", "badlands"] }
-      ]
-    },
-    {
-      key: "harry",
-      detect: ["harry potter", "гарри поттер"],
-      order: [
-        { n: 1, label: "Философский камень", aliases: ["философ", "philosopher", "sorcerer", "камень"] },
-        { n: 2, label: "Тайная комната", aliases: ["тайная комната", "chamber"] },
-        { n: 3, label: "Узник Азкабана", aliases: ["узник азкабана", "prisoner"] },
-        { n: 4, label: "Кубок огня", aliases: ["кубок огня", "goblet"] },
-        { n: 5, label: "Орден Феникса", aliases: ["орден феникса", "order of the phoenix"] },
-        { n: 6, label: "Принц-полукровка", aliases: ["принц-полукровка", "принц полукровка", "half-blood"] },
-        { n: 7, label: "Дары смерти: Часть 1", aliases: ["дары смерти часть 1", "дары смерти: часть 1", "deathly hallows part 1"] },
-        { n: 8, label: "Дары смерти: Часть 2", aliases: ["дары смерти часть 2", "дары смерти: часть 2", "deathly hallows part 2"] }
-      ]
-    },
-    {
-      key: "matrix",
-      detect: ["matrix", "матрица"],
-      order: [
-        { n: 1, label: "Матрица", aliases: ["матрица", "the matrix"], block: ["времени", "перезагрузка", "революция", "воскрешение"] },
-        { n: 2, label: "Аниматрица", aliases: ["аниматрица", "animatrix"] },
-        { n: 3, label: "Матрица: Перезагрузка", aliases: ["перезагрузка", "reloaded"] },
-        { n: 4, label: "Матрица: Революция", aliases: ["революция", "revolutions"] },
-        { n: 5, label: "Матрица: Воскрешение", aliases: ["воскрешение", "resurrections"] }
-      ]
-    },
-    {
-      key: "avengers",
-      detect: ["avengers", "мстители"],
-      order: [
-        { n: 1, label: "Мстители", aliases: ["мстители", "the avengers"], block: ["война", "финал", "эра", "альтрона", "величайшие", "команда"] },
-        { n: 2, label: "Мстители: Эра Альтрона", aliases: ["эра альтрона", "age of ultron"] },
-        { n: 3, label: "Мстители: Война бесконечности", aliases: ["война бесконечности", "infinity war"] },
-        { n: 4, label: "Мстители: Финал", aliases: ["финал", "endgame"] }
-      ]
-    }
-  ];
-
-  function norm(v) {
-    return String(v || "").toLowerCase().replace(/ё/g, "е").replace(/[«»"']/g, "").replace(/\s+/g, " ").trim();
-  }
-
-  function inputQuery() {
-    const input = document.querySelector("#search")
-      || document.querySelector("#searchInput")
-      || document.querySelector("input[type='search']")
-      || document.querySelector("input[placeholder*='Поиск']")
-      || document.querySelector("input");
-    return norm(input && input.value);
-  }
-
-  function currentOrder() {
-    const q = inputQuery();
-    if (!q) return null;
-    return ORDERS.find(o => o.detect.some(d => q.includes(norm(d))));
-  }
-
-  function isCard(el) {
-    if (!el || el.nodeType !== 1) return false;
-    const text = norm(el.textContent);
-    if (text.length < 25 || text.length > 900) return false;
-    const hasPoster = !!el.querySelector("img");
-    const hasRating = text.includes("★") || text.includes("фильм") || text.includes("аниме") || text.includes("сериал") || text.includes("мультфильм");
-    return hasPoster && hasRating;
-  }
-
-  function cardTitle(card) {
-    const selectors = [
-      ".title", ".card-title", ".movie-title", ".name",
-      "[class*='title']", "h3", "h2", "b"
-    ];
-    for (const s of selectors) {
-      const el = card.querySelector(s);
-      if (el) {
-        const t = norm(el.textContent);
-        if (t && !["фильм", "аниме", "сериал", "мультфильм"].includes(t)) return t;
-      }
-    }
-
-    const lines = String(card.textContent || "").split("\n").map(x => x.trim()).filter(Boolean);
-    for (const line of lines) {
-      const t = norm(line);
-      if (!t) continue;
-      if (["фильм", "аниме", "сериал", "мультфильм"].includes(t)) continue;
-      if (t.includes("★") || /^\d{4}/.test(t)) continue;
-      if (t.length > 2 && t.length < 80) return t;
-    }
-    return norm(card.textContent);
-  }
-
-  function bestGrid() {
-    const possible = Array.from(document.querySelectorAll("main, #results, #catalog, .grid, .cards, .results, section, div"));
-    let best = null;
-    let bestCards = [];
-
-    for (const el of possible) {
-      const direct = Array.from(el.children || []).filter(isCard);
-      if (direct.length > bestCards.length) {
-        best = el;
-        bestCards = direct;
-      }
-    }
-
-    if (bestCards.length >= 2) return { grid: best, cards: bestCards };
-    return null;
-  }
-
-  function matchRule(title, rule) {
-    const t = norm(title);
-
-    for (const bad of (rule.block || [])) {
-      if (t.includes(norm(bad))) return false;
-    }
-
-    return rule.aliases.some(a => t.includes(norm(a)));
-  }
-
-  function score(title, order) {
-    for (const rule of order.order) {
-      if (matchRule(title, rule)) return rule.n;
-    }
-    return 9999;
-  }
-
-  function addBadge(card, n, label) {
-    card.querySelectorAll(".gkm-v170-order-badge").forEach(x => x.remove());
-    const badge = document.createElement("div");
-    badge.className = "gkm-v170-order-badge";
-    badge.textContent = "#" + n + " смотреть";
-    card.style.position = card.style.position || "relative";
-    card.appendChild(badge);
-    card.title = "Порядок просмотра: " + n + ". " + label;
-  }
-
-  function labelByNumber(order, n) {
-    const row = order.order.find(x => x.n === n);
-    return row ? row.label : "";
-  }
-
-  function applyPreciseOrder() {
-    const order = currentOrder();
-    if (!order) return;
-
-    const found = bestGrid();
-    if (!found) return;
-
-    const rows = found.cards.map((card, idx) => {
-      const title = cardTitle(card);
-      const s = score(title, order);
-      return { card, idx, title, score: s };
-    });
-
-    const matched = rows.filter(r => r.score < 9999);
-    if (!matched.length) return;
-
-    rows.sort((a, b) => {
-      if (a.score !== b.score) return a.score - b.score;
-      return a.idx - b.idx;
-    });
-
-    const fragment = document.createDocumentFragment();
-    rows.forEach(r => fragment.appendChild(r.card));
-    found.grid.appendChild(fragment);
-
-    rows.forEach(r => {
-      if (r.score < 9999) addBadge(r.card, r.score, labelByNumber(order, r.score));
-      else r.card.querySelectorAll(".gkm-v170-order-badge").forEach(x => x.remove());
-    });
-
-    console.log("GKM V170 precise order:", order.key, matched.map(x => [x.score, x.title]));
-  }
-
-  function patchOverlayText() {
-    // Исправляем подсказку в V168 для Чужого и Хищника, чтобы не путало с приквелами.
-    document.querySelectorAll(".gkm-v168-head p").forEach(p => {
-      const h = norm(p.closest(".gkm-v168-panel")?.querySelector("h2")?.textContent || "");
-      if (h.includes("чужой")) {
-        p.textContent = "Порядок выхода. Прометей и Завет — приквелы, но новичку проще смотреть после классики.";
-      }
-      if (h.includes("хищник")) {
-        p.textContent = "Порядок выхода. Кроссоверы с Чужим стоят между Хищник 2 и Хищники.";
-      }
-    });
-  }
-
-  function addStyles() {
-    if (document.querySelector("#gkm-v170-style")) return;
-    const style = document.createElement("style");
-    style.id = "gkm-v170-style";
-    style.textContent = `
-      .gkm-v170-order-badge{
-        position:absolute;
-        left:8px;
-        top:42px;
-        z-index:30;
-        padding:7px 10px;
-        border-radius:999px;
-        background:linear-gradient(135deg,#ffae00,#b13cff);
-        color:#fff;
-        font-weight:1000;
-        font-size:13px;
-        line-height:1;
-        box-shadow:0 0 14px rgba(255,160,0,.45);
-        pointer-events:none;
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
-  function schedule() {
-    clearTimeout(window.__gkmV170Timer);
-    window.__gkmV170Timer = setTimeout(() => {
-      applyPreciseOrder();
-      patchOverlayText();
-    }, 350);
-  }
-
-  function init() {
-    addStyles();
-
-    document.addEventListener("input", schedule, true);
-    document.addEventListener("change", schedule, true);
-    document.addEventListener("click", schedule, true);
-
-    const observer = new MutationObserver(schedule);
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    setTimeout(schedule, 400);
-    setTimeout(schedule, 1200);
-    setTimeout(schedule, 2200);
-
-    console.log("GKM: v170-precise-franchise-result-order-2026-06-24");
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-  else init();
-
-  window.GKM_V170_APPLY_PRECISE_FRANCHISE_ORDER = applyPreciseOrder;
-})();
-/* GKM V170 PRECISE FRANCHISE RESULT ORDER END */
+/* GKM V172 FULL FRANCHISE CATALOG END */
