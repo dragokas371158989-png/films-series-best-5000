@@ -3759,3 +3759,238 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V191_ENABLE = function () { localStorage.removeItem(LS_DISABLED); location.reload(); };
 })();
 /* GKM V191 SMART CATALOG SEARCH END */
+
+/* GKM V192 CLICKABLE SMART BADGE START */
+(function () {
+  "use strict";
+
+  window.GKM_V192_CLICKABLE_SMART_BADGE_VERSION = "v192-clickable-smart-badge-no-zero-results-2026-06-24";
+
+  /*
+    V192 FIX:
+    - В V191 плашка "Умная выдача" была индикатором, а не кнопкой.
+    - Теперь она кликабельная: жмёшь — принудительно применяет умную выдачу.
+    - Если поиск даёт 0 из-за выбранного типа "Фильмы/Сериалы", а запрос похож на аниме/франшизу,
+      V192 пробует автоматически нажать "Все", чтобы результат появился.
+  */
+
+  const ALIAS_HINTS = [
+    "наруто","naruto","боруто","boruto","блич","bleach","ван пис","one piece",
+    "атака титанов","attack on titan","токийский гуль","tokyo ghoul",
+    "тетрадь смерти","death note","драконий жемчуг","dragon ball",
+    "мстители","avengers","гарри поттер","harry potter","человек паук","spider",
+    "матрица","matrix","чужой","alien","хищник","predator"
+  ];
+
+  function norm(v) {
+    return String(v || "").toLowerCase().replace(/ё/g, "е").replace(/\s+/g, " ").trim();
+  }
+
+  function getSearchInput() {
+    return document.querySelector("#search")
+      || document.querySelector("#searchInput")
+      || document.querySelector("input[type='search']")
+      || document.querySelector("input[placeholder*='Поиск']")
+      || document.querySelector("input");
+  }
+
+  function currentQuery() {
+    const input = getSearchInput();
+    return input ? norm(input.value) : "";
+  }
+
+  function looksZeroResults() {
+    const t = norm(document.body && document.body.textContent || "");
+    return t.includes("найдено: 0") || t.includes("найдено 0") || t.includes("страница 1 из 1") && t.includes("найдено: 0");
+  }
+
+  function isVisible(el) {
+    if (!el || !el.getBoundingClientRect) return false;
+    const r = el.getBoundingClientRect();
+    const st = getComputedStyle(el);
+    return r.width > 20 && r.height > 15 && st.display !== "none" && st.visibility !== "hidden";
+  }
+
+  function findAllButton() {
+    const candidates = Array.from(document.querySelectorAll("button,a,[role='button'],.btn,div,span"))
+      .filter(isVisible)
+      .filter(el => norm(el.textContent) === "все");
+
+    // Предпочитаем верхние кнопки разделов, а не случайный текст.
+    candidates.sort((a,b) => {
+      const ra = a.getBoundingClientRect();
+      const rb = b.getBoundingClientRect();
+      return (ra.top - rb.top) || (ra.left - rb.left);
+    });
+
+    return candidates[0] || null;
+  }
+
+  function queryLooksKnown(q) {
+    if (!q) return false;
+    return ALIAS_HINTS.some(x => q.includes(norm(x)) || norm(x).includes(q));
+  }
+
+  function toast(msg) {
+    let t = document.querySelector(".gkm-v192-toast");
+    if (!t) {
+      t = document.createElement("div");
+      t.className = "gkm-v192-toast";
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(window.__gkmV192Toast);
+    window.__gkmV192Toast = setTimeout(() => t.classList.remove("show"), 2200);
+  }
+
+  function applySmart() {
+    try {
+      if (typeof window.GKM_V191_APPLY === "function") window.GKM_V191_APPLY();
+    } catch (e) {
+      console.warn("GKM V192 apply V191 failed", e);
+    }
+
+    setTimeout(function () {
+      try {
+        if (typeof window.GKM_V191_APPLY === "function") window.GKM_V191_APPLY();
+      } catch (e) {}
+    }, 500);
+  }
+
+  function rescueZeroResults() {
+    const q = currentQuery();
+    if (!queryLooksKnown(q)) return false;
+    if (!looksZeroResults()) return false;
+
+    const allBtn = findAllButton();
+    if (!allBtn) return false;
+
+    allBtn.click();
+    toast("Был выбран не тот раздел. Переключаю на “Все”");
+    setTimeout(applySmart, 900);
+    return true;
+  }
+
+  function makeBadgeClickable() {
+    let badge = document.querySelector(".gkm-v191-badge");
+
+    if (!badge) {
+      badge = document.createElement("div");
+      badge.className = "gkm-v191-badge gkm-v192-clickable-badge";
+      document.body.appendChild(badge);
+    }
+
+    badge.classList.add("gkm-v192-clickable-badge");
+    badge.textContent = "🧠 Применить умную выдачу";
+    badge.title = "Нажми — применить умную выдачу. Если 0 результатов из-за раздела, переключит на “Все”.";
+
+    if (badge.dataset.gkmV192Bound === "1") return;
+    badge.dataset.gkmV192Bound = "1";
+
+    badge.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const rescued = rescueZeroResults();
+      if (!rescued) {
+        applySmart();
+        toast("Умная выдача применена");
+      }
+    }, true);
+  }
+
+  function autoRescueOnZero() {
+    // Не делаем мгновенно при загрузке, только после того как сайт уже отрисовался.
+    setTimeout(function () {
+      if (rescueZeroResults()) return;
+    }, 900);
+  }
+
+  function addStyles() {
+    if (document.querySelector("#gkm-v192-style")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkm-v192-style";
+    style.textContent = `
+      .gkm-v192-clickable-badge,
+      .gkm-v191-badge.gkm-v192-clickable-badge {
+        cursor:pointer!important;
+        pointer-events:auto!important;
+        user-select:none!important;
+        z-index:999999!important;
+        padding:10px 13px!important;
+      }
+      .gkm-v192-clickable-badge:hover {
+        transform:scale(1.04);
+        box-shadow:0 0 28px rgba(0,216,255,.55)!important;
+      }
+      .gkm-v192-toast {
+        position:fixed;
+        left:50%;
+        bottom:26px;
+        transform:translateX(-50%) translateY(30px);
+        z-index:1000000;
+        background:linear-gradient(135deg,#5a25d6,#04c9f4);
+        color:#fff;
+        border:1px solid #00d8ff;
+        border-radius:14px;
+        padding:12px 18px;
+        font-weight:900;
+        box-shadow:0 0 24px rgba(0,216,255,.45);
+        opacity:0;
+        transition:.2s;
+      }
+      .gkm-v192-toast.show {
+        opacity:1;
+        transform:translateX(-50%) translateY(0);
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function init() {
+    addStyles();
+    makeBadgeClickable();
+    autoRescueOnZero();
+
+    document.addEventListener("input", function () {
+      setTimeout(function () {
+        makeBadgeClickable();
+        rescueZeroResults();
+      }, 700);
+    }, true);
+
+    document.addEventListener("change", function () {
+      setTimeout(function () {
+        makeBadgeClickable();
+        rescueZeroResults();
+      }, 700);
+    }, true);
+
+    document.addEventListener("click", function () {
+      setTimeout(makeBadgeClickable, 300);
+    }, true);
+
+    const obs = new MutationObserver(function () {
+      clearTimeout(window.__gkmV192Obs);
+      window.__gkmV192Obs = setTimeout(function () {
+        makeBadgeClickable();
+        rescueZeroResults();
+      }, 500);
+    });
+    obs.observe(document.body, {childList:true, subtree:true});
+
+    console.log("GKM: v192-clickable-smart-badge-no-zero-results-2026-06-24");
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+
+  window.GKM_V192_APPLY_SMART = function () {
+    const rescued = rescueZeroResults();
+    if (!rescued) applySmart();
+    return "V192 applied";
+  };
+})();
+/* GKM V192 CLICKABLE SMART BADGE END */
