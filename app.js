@@ -4118,4 +4118,344 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }, true);
 })();
 /* GKM V199 CLEAN MODAL EXTERNAL LINKS END */
+/* GKM V200 GAME UNIVERSES PREVIEW START */
+(function () {
+  "use strict";
+
+  window.GKM_V200_GAME_UNIVERSES_PREVIEW_VERSION = "v200-game-universes-preview-2026-06-29";
+
+  const GAMES_URL = "data/games_catalog.json?v=200";
+  const PAGE = 60;
+  let gamesCache = null;
+  let gamesPage = 1;
+  let gamesPages = 1;
+  let gamesFilterTimer = 0;
+
+  const FALLBACK_GAMES = [
+    { id:"game-cyberpunk-2077", title:"Cyberpunk 2077", type:"Игра", year:2020, rating:8.6, votes:720000, genres:["RPG","Киберпанк","Открытый мир"], relation:"game_to_anime", relationLabel:"игра → аниме", relatedMedia:["Cyberpunk: Edgerunners"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg", stores:{ steam:"https://store.steampowered.com/app/1091500/Cyberpunk_2077/", gog:"https://www.gog.com/en/game/cyberpunk_2077" }, description:"Игра связана с аниме Cyberpunk: Edgerunners. Хороший пример общей вселенной: игра, дополнения и аниме смотрятся как единый мир." },
+    { id:"game-the-last-of-us", title:"The Last of Us Part I", type:"Игра", year:2022, rating:9.2, votes:900000, genres:["Приключение","Драма","Постапокалипсис"], relation:"game_to_series", relationLabel:"игра → сериал", relatedMedia:["The Last of Us"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/1888930/header.jpg", stores:{ steam:"https://store.steampowered.com/app/1888930/The_Last_of_Us_Part_I/" }, description:"Игра, по которой снят сериал The Last of Us. В разделе нужна как эталон связки игра → сериал." },
+    { id:"game-fallout-4", title:"Fallout 4", type:"Игра", year:2015, rating:8.4, votes:850000, genres:["RPG","Постапокалипсис","Открытый мир"], relation:"game_to_series", relationLabel:"игра → сериал", relatedMedia:["Fallout"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/377160/header.jpg", stores:{ steam:"https://store.steampowered.com/app/377160/Fallout_4/" }, description:"Игровая вселенная Fallout получила сериал. Подходит для карточки-вселенной: игры, сериал, лор и фракции." },
+    { id:"game-witcher-3", title:"The Witcher 3: Wild Hunt", type:"Игра", year:2015, rating:9.5, votes:1200000, genres:["RPG","Фэнтези","Открытый мир"], relation:"shared_universe", relationLabel:"книги → игра → сериал", relatedMedia:["The Witcher", "The Witcher: Nightmare of the Wolf"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg", stores:{ steam:"https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/", gog:"https://www.gog.com/en/game/the_witcher_3_wild_hunt" }, description:"Большая вселенная: книги, игры, сериал и анимация. Для каталога это пример связки разных типов контента." },
+    { id:"game-resident-evil-4", title:"Resident Evil 4", type:"Игра", year:2023, rating:9.1, votes:650000, genres:["Хоррор","Экшен","Выживание"], relation:"game_to_movies", relationLabel:"игра → фильмы / анимация", relatedMedia:["Resident Evil", "Resident Evil: Degeneration", "Resident Evil: Infinite Darkness"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg", stores:{ steam:"https://store.steampowered.com/app/2050650/Resident_Evil_4/" }, description:"Resident Evil — одна из главных игровых вселенных с фильмами, сериалами и анимацией." },
+    { id:"game-silent-hill-2", title:"Silent Hill 2", type:"Игра", year:2024, rating:8.8, votes:250000, genres:["Психологический хоррор","Выживание"], relation:"game_to_movie", relationLabel:"игра → фильм", relatedMedia:["Silent Hill"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/2124490/header.jpg", stores:{ steam:"https://store.steampowered.com/app/2124490/SILENT_HILL_2/" }, description:"Silent Hill — игровая хоррор-вселенная, по которой выходили фильмы." },
+    { id:"game-mortal-kombat-1", title:"Mortal Kombat 1", type:"Игра", year:2023, rating:8.0, votes:320000, genres:["Файтинг","Экшен"], relation:"game_to_movies", relationLabel:"игра → фильмы / мультфильмы", relatedMedia:["Mortal Kombat", "Mortal Kombat Legends"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/1971870/header.jpg", stores:{ steam:"https://store.steampowered.com/app/1971870/Mortal_Kombat_1/" }, description:"Mortal Kombat удобно держать как игровую вселенную: игры, фильмы, мультфильмы, персонажи и турниры." },
+    { id:"game-sonic-frontiers", title:"Sonic Frontiers", type:"Игра", year:2022, rating:8.1, votes:190000, genres:["Платформер","Приключение"], relation:"game_to_movies", relationLabel:"игра → фильмы / мультсериалы", relatedMedia:["Sonic the Hedgehog", "Sonic Prime"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/1237320/header.jpg", stores:{ steam:"https://store.steampowered.com/app/1237320/Sonic_Frontiers/" }, description:"Sonic — яркая связка игр, фильмов и мультсериалов." },
+    { id:"game-halo-mcc", title:"Halo: The Master Chief Collection", type:"Игра", year:2019, rating:8.7, votes:500000, genres:["Шутер","Фантастика"], relation:"game_to_series", relationLabel:"игра → сериал", relatedMedia:["Halo"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/976730/header.jpg", stores:{ steam:"https://store.steampowered.com/app/976730/Halo_The_Master_Chief_Collection/" }, description:"Halo — игровая sci-fi вселенная, по которой сделали сериал." },
+    { id:"game-uncharted", title:"UNCHARTED: Legacy of Thieves Collection", type:"Игра", year:2022, rating:8.6, votes:300000, genres:["Приключение","Экшен"], relation:"game_to_movie", relationLabel:"игра → фильм", relatedMedia:["Uncharted"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/1659420/header.jpg", stores:{ steam:"https://store.steampowered.com/app/1659420/UNCHARTED_Legacy_of_Thieves_Collection/" }, description:"Uncharted — пример приключенческой игры, которую перенесли в кино." },
+    { id:"game-tomb-raider", title:"Tomb Raider", type:"Игра", year:2013, rating:8.5, votes:700000, genres:["Приключение","Экшен"], relation:"game_to_movies", relationLabel:"игра → фильмы / анимация", relatedMedia:["Tomb Raider"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/203160/header.jpg", stores:{ steam:"https://store.steampowered.com/app/203160/Tomb_Raider/" }, description:"Tomb Raider — игровая серия с фильмами и анимационными проектами." },
+    { id:"game-assassins-creed", title:"Assassin's Creed Odyssey", type:"Игра", year:2018, rating:8.4, votes:720000, genres:["Экшен","RPG","История"], relation:"game_to_movie", relationLabel:"игра → фильм", relatedMedia:["Assassin's Creed"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/812140/header.jpg", stores:{ steam:"https://store.steampowered.com/app/812140/Assassins_Creed_Odyssey/" }, description:"Assassin's Creed — большая игровая вселенная, по которой уже есть фильм и потенциал для сериалов." },
+    { id:"game-castlevania", title:"Castlevania: Lords of Shadow", type:"Игра", year:2013, rating:8.0, votes:180000, genres:["Экшен","Готика","Фэнтези"], relation:"game_to_anime", relationLabel:"игра → анимационный сериал", relatedMedia:["Castlevania", "Castlevania: Nocturne"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/234080/header.jpg", stores:{ steam:"https://store.steampowered.com/app/234080/Castlevania_Lords_of_Shadow__Ultimate_Edition/" }, description:"Castlevania — игровая серия, которая отлично легла в формат анимационного сериала." },
+    { id:"game-dota-2", title:"Dota 2", type:"Игра", year:2013, rating:8.2, votes:1600000, genres:["MOBA","Фэнтези","Командная"], relation:"game_to_anime", relationLabel:"игра → аниме", relatedMedia:["Dota: Dragon's Blood"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/570/header.jpg", stores:{ steam:"https://store.steampowered.com/app/570/Dota_2/" }, description:"Dota 2 связана с аниме Dota: Dragon's Blood. Хороший пример расширения игровой вселенной." },
+    { id:"game-devil-may-cry", title:"Devil May Cry 5", type:"Игра", year:2019, rating:8.9, votes:520000, genres:["Слэшер","Экшен","Демоны"], relation:"game_to_anime", relationLabel:"игра → аниме", relatedMedia:["Devil May Cry"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/601150/header.jpg", stores:{ steam:"https://store.steampowered.com/app/601150/Devil_May_Cry_5/" }, description:"Devil May Cry — стильная игровая серия с аниме-адаптацией." },
+    { id:"game-warcraft", title:"World of Warcraft", type:"Игра", year:2004, rating:8.8, votes:2000000, genres:["MMORPG","Фэнтези"], relation:"game_to_movie", relationLabel:"игра → фильм", relatedMedia:["Warcraft"], poster:"https://cdn.akamai.steamstatic.com/steam/apps/1294950/header.jpg", stores:{ google:"https://www.google.com/search?q=World+of+Warcraft" }, description:"Warcraft — огромная игровая вселенная, по которой вышел фильм." }
+  ];
+
+  function clean(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+  }
+
+  function enc(value) {
+    return encodeURIComponent(clean(value));
+  }
+
+  function isGameItem(item) {
+    return clean(item && (item.type || item.category)).toLowerCase() === "игра" || clean(item && item.section).toLowerCase() === "games";
+  }
+
+  function storeSearchUrl(kind, title) {
+    const q = enc(title);
+    switch (kind) {
+      case "steam": return "https://store.steampowered.com/search/?term=" + q;
+      case "epic": return "https://store.epicgames.com/browse?q=" + q + "&sortBy=relevancy&sortDir=DESC&count=40";
+      case "gog": return "https://www.gog.com/en/games?query=" + q;
+      case "playstation": return "https://store.playstation.com/search/" + q;
+      case "xbox": return "https://www.xbox.com/search?q=" + q;
+      case "nintendo": return "https://www.nintendo.com/us/search/#q=" + q;
+      case "pcgw": return "https://www.pcgamingwiki.com/w/index.php?search=" + q;
+      case "metacritic": return "https://www.metacritic.com/search/" + q + "/";
+      case "youtube": return "https://www.youtube.com/results?search_query=" + q + "%20game%20trailer";
+      default: return "https://www.google.com/search?q=" + q;
+    }
+  }
+
+  function getStoreUrl(item, kind) {
+    const stores = item && item.stores || {};
+    return stores[kind] || storeSearchUrl(kind, item && (item.title || item.name || item.ru));
+  }
+
+  function gameSortScore(item) {
+    return Number(item.rating || 0) * 1000000 + Math.min(Number(item.votes || 0), 2000000) + Number(item.year || 0);
+  }
+
+  function gameHay(item) {
+    return [item.title, item.name, item.ru, item.year, item.relationLabel, item.relation, item.description, (item.genres || []).join(" "), (item.relatedMedia || []).join(" ")].join(" ").toLowerCase();
+  }
+
+  async function loadGames() {
+    if (gamesCache) return gamesCache;
+    try {
+      const res = await fetch(GAMES_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error("games_catalog fetch failed " + res.status);
+      const json = await res.json();
+      gamesCache = Array.isArray(json) ? json : (json.items || []);
+    } catch (err) {
+      console.warn("GKM V200: fallback games loaded", err);
+      gamesCache = FALLBACK_GAMES;
+    }
+    gamesCache = gamesCache.map((item, index) => ({
+      ...item,
+      id: item.id || ("game-" + index + "-" + clean(item.title || item.name).toLowerCase().replace(/[^a-z0-9а-яё]+/gi, "-")),
+      type: "Игра",
+      category: "Игра",
+      section: "games",
+      source: item.source || "GKM Games V200"
+    }));
+    return gamesCache;
+  }
+
+  function filteredGames(list) {
+    const qNode = document.getElementById("searchInput");
+    const sortNode = document.getElementById("sortFilter");
+    const yearNode = document.getElementById("yearFilter");
+    const genreNode = document.getElementById("genreFilter");
+    const ratingNode = document.getElementById("ratingFilter");
+    const q = clean(qNode && qNode.value).toLowerCase();
+    const year = clean(yearNode && yearNode.value);
+    const genre = clean(genreNode && genreNode.value).toLowerCase();
+    const minRating = Number(ratingNode && ratingNode.value || 0);
+    const sort = clean(sortNode && sortNode.value) || "smart";
+
+    let rows = list.filter(item => {
+      if (q && !gameHay(item).includes(q)) return false;
+      if (year && String(item.year || "") !== year) return false;
+      if (genre && !(item.genres || []).join(" ").toLowerCase().includes(genre)) return false;
+      if (minRating && Number(item.rating || 0) < minRating) return false;
+      return true;
+    });
+
+    rows.sort((a, b) => {
+      if (sort === "year") return Number(b.year || 0) - Number(a.year || 0);
+      if (sort === "title") return clean(a.title || a.name).localeCompare(clean(b.title || b.name), "ru");
+      if (sort === "rating") return Number(b.rating || 0) - Number(a.rating || 0);
+      if (sort === "votes") return Number(b.votes || 0) - Number(a.votes || 0);
+      return gameSortScore(b) - gameSortScore(a);
+    });
+    return rows;
+  }
+
+  function cardBadgesEnhance(root) {
+    if (!root) return;
+    root.querySelectorAll(".card").forEach(card => {
+      const id = card.getAttribute("data-id");
+      const item = (currentItems || []).find(x => String(x.id || (x.title + "|" + x.year)) === id);
+      if (!item || !isGameItem(item)) return;
+      card.classList.add("gkm-game-card");
+      const poster = card.querySelector(".poster-wrap");
+      if (poster && !poster.querySelector(".gkm-game-relation-badge")) {
+        const rel = document.createElement("div");
+        rel.className = "gkm-game-relation-badge";
+        rel.textContent = item.relationLabel || "игровая вселенная";
+        poster.appendChild(rel);
+      }
+    });
+  }
+
+  async function renderGames(page) {
+    currentMode = "games";
+    currentTab = "games";
+    gamesPage = Math.max(1, Number(page || gamesPage || 1));
+    if (typeof setActiveTab === "function") setActiveTab("games");
+    if (typeof setStatus === "function") setStatus("Открываю игровые вселенные...");
+
+    const all = await loadGames();
+    const rows = filteredGames(all);
+    gamesPages = Math.max(1, Math.ceil(rows.length / PAGE));
+    gamesPage = Math.min(gamesPage, gamesPages);
+    currentPage = gamesPage;
+    currentPages = gamesPages;
+    currentCount = rows.length;
+
+    const start = (gamesPage - 1) * PAGE;
+    const slice = rows.slice(start, start + PAGE);
+
+    const count = document.getElementById("countText");
+    const grid = document.getElementById("grid");
+    const pageText = document.getElementById("pageText");
+    const prev = document.getElementById("prevBtn");
+    const next = document.getElementById("nextBtn");
+
+    currentItems = slice;
+    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " · тест V200 <span class='gkm-v200-pill'>игра ↔ кино / сериал / аниме</span>";
+    if (grid) {
+      grid.innerHTML = slice.map(cardHtml).join("");
+      cardBadgesEnhance(grid);
+      schedulePosterRecovery(grid);
+    }
+    if (pageText) pageText.textContent = gamesPage + " / " + gamesPages;
+    if (prev) prev.disabled = gamesPage <= 1;
+    if (next) next.disabled = gamesPage >= gamesPages;
+    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V200 · " + rows.length + " записей");
+  }
+
+  function injectGamesTab() {
+    const tabs = document.querySelector(".tabs");
+    if (!tabs || tabs.querySelector('[data-tab="games"]')) return;
+    const btn = document.createElement("button");
+    btn.className = "tab gkm-games-tab";
+    btn.dataset.tab = "games";
+    btn.type = "button";
+    btn.textContent = "🎮 Игры";
+    const anime = tabs.querySelector('[data-tab="anime"]');
+    if (anime && anime.nextSibling) tabs.insertBefore(btn, anime.nextSibling);
+    else tabs.appendChild(btn);
+  }
+
+  function injectStyle() {
+    if (document.getElementById("gkm-v200-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v200-style";
+    style.textContent = `
+      .gkm-games-tab{background:linear-gradient(135deg,rgba(0,213,255,.18),rgba(150,70,255,.22))!important;border-color:rgba(0,213,255,.45)!important;}
+      .gkm-game-card .poster-wrap{box-shadow:0 0 0 1px rgba(0,213,255,.18),0 18px 48px rgba(0,0,0,.25);}
+      .gkm-game-relation-badge{position:absolute;left:8px;right:8px;bottom:8px;z-index:4;padding:6px 8px;border-radius:10px;background:rgba(2,10,20,.82);border:1px solid rgba(0,213,255,.42);color:#dff8ff;font-weight:800;font-size:11px;text-align:center;backdrop-filter:blur(6px);}
+      .gkm-v200-pill{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;border:1px solid rgba(0,213,255,.38);color:#c9f6ff;background:rgba(0,213,255,.08);font-size:12px;vertical-align:middle;}
+      .gkm-game-links-block{border:1px solid rgba(0,213,255,.25);background:linear-gradient(135deg,rgba(0,213,255,.06),rgba(134,68,255,.08));}
+      .gkm-game-related-list{margin:8px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
+      .gkm-game-related-list span{display:inline-flex;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:6px 9px;background:rgba(255,255,255,.06);font-size:13px;}
+      @media(max-width:760px){.gkm-v200-pill{display:block;margin:8px 0 0;width:max-content;max-width:100%;}.gkm-game-relation-badge{font-size:10px;padding:5px 6px;}}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function ensureGameLinksBlock() {
+    let block = document.getElementById("gameLinksBlock");
+    if (block) return block;
+    block = document.createElement("section");
+    block.id = "gameLinksBlock";
+    block.className = "links-block gkm-game-links-block";
+    block.innerHTML = '<h3 class="links-title">🎮 Игровые магазины и базы</h3><div id="gameStoreButtons" class="detail-buttons"></div><div id="gameRelatedMedia" class="gkm-game-related-list"></div>';
+    const animeBlock = document.getElementById("animeLinksBlock");
+    if (animeBlock && animeBlock.parentNode) animeBlock.parentNode.insertBefore(block, animeBlock.nextSibling);
+    else document.querySelector(".dialog-content")?.appendChild(block);
+    return block;
+  }
+
+  function linkHtml(label, url) {
+    return '<a href="' + escapeAttr(url) + '" target="_blank" rel="noopener noreferrer" data-gkm-v200-game-external="1">' + escapeHtml(label) + '</a>';
+  }
+
+  function applyGameModal(item) {
+    const block = ensureGameLinksBlock();
+    const buttons = document.getElementById("gameStoreButtons");
+    const related = document.getElementById("gameRelatedMedia");
+    const game = isGameItem(item);
+    if (!block) return;
+    block.style.display = game ? "" : "none";
+    if (!game) return;
+
+    const title = item.title || item.name || item.ru || "";
+    if (buttons) {
+      buttons.innerHTML = [
+        ["Steam", getStoreUrl(item, "steam")],
+        ["Epic Games", getStoreUrl(item, "epic")],
+        ["GOG", getStoreUrl(item, "gog")],
+        ["PlayStation", getStoreUrl(item, "playstation")],
+        ["Xbox", getStoreUrl(item, "xbox")],
+        ["Nintendo", getStoreUrl(item, "nintendo")],
+        ["PCGamingWiki", getStoreUrl(item, "pcgw")],
+        ["Metacritic", getStoreUrl(item, "metacritic")],
+        ["YouTube трейлер", getStoreUrl(item, "youtube")],
+        ["Google", storeSearchUrl("google", title)]
+      ].map(x => linkHtml(x[0], x[1])).join("");
+    }
+    if (related) {
+      const list = Array.isArray(item.relatedMedia) ? item.relatedMedia : [];
+      related.innerHTML = list.length ? list.map(x => "<span>Связано: " + escapeHtml(x) + "</span>").join("") : "<span>Связанные фильмы/сериалы будут добавляться</span>";
+    }
+
+    const findTitle = document.getElementById("yandexLink")?.closest("section")?.querySelector(".links-title,h3");
+    if (findTitle) findTitle.textContent = "Поиск игры / видео";
+  }
+
+  function patchOpenDetails() {
+    if (window.GKM_V200_OPEN_DETAILS_PATCHED === "1") return;
+    if (typeof openDetails !== "function") return;
+    const original = openDetails;
+    openDetails = function gkmV200OpenDetails(item) {
+      original(item);
+      setTimeout(() => applyGameModal(item), 0);
+    };
+    window.GKM_V200_OPEN_DETAILS_PATCHED = "1";
+  }
+
+  function scheduleGamesFilter() {
+    clearTimeout(gamesFilterTimer);
+    gamesFilterTimer = setTimeout(() => renderGames(1), 80);
+  }
+
+  document.addEventListener("click", function (event) {
+    const tab = event.target.closest && event.target.closest('.tab[data-tab="games"]');
+    if (tab) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      renderGames(1);
+      return;
+    }
+
+    if (currentMode === "games") {
+      const prev = event.target.closest && event.target.closest("#prevBtn");
+      const next = event.target.closest && event.target.closest("#nextBtn");
+      if (prev) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        if (gamesPage > 1) renderGames(gamesPage - 1);
+      }
+      if (next) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        if (gamesPage < gamesPages) renderGames(gamesPage + 1);
+      }
+    }
+  }, true);
+
+  document.addEventListener("input", function (event) {
+    if (currentMode !== "games") return;
+    if (!event.target.closest || !event.target.closest(".controls")) return;
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    scheduleGamesFilter();
+  }, true);
+
+  document.addEventListener("change", function (event) {
+    if (currentMode !== "games") return;
+    if (!event.target.closest || !event.target.closest(".controls")) return;
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    scheduleGamesFilter();
+  }, true);
+
+  document.addEventListener("click", function (event) {
+    const el = event.target.closest && event.target.closest("a[data-gkm-v200-game-external]");
+    if (!el) return;
+    const url = el.getAttribute("href") || "";
+    if (!/^https?:\/\//i.test(url)) return;
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    window.open(url, "_blank", "noopener,noreferrer");
+  }, true);
+
+  function init() {
+    injectStyle();
+    injectGamesTab();
+    patchOpenDetails();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+/* GKM V200 GAME UNIVERSES PREVIEW END */
 
