@@ -1,0 +1,35 @@
+name: Apply GKM V175 Watch Order Grid Sort
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-v175-watch-order:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Apply V175 patch
+        run: python tools/gkm_v175_apply_watch_order_grid_sort.py
+
+      - name: Commit V175 files
+        run: |
+          git config user.name "actions-user"
+          git config user.email "actions@github.com"
+          git add app.js index.html film/index.html downloads/index.html tools/gkm_v175_apply_watch_order_grid_sort.py .github/workflows/apply_gkm_v175_watch_order_grid_sort.yml
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Apply GKM V175 watch order grid sort"
+            git push
+          fi
