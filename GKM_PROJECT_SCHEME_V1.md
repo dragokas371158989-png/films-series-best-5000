@@ -1,4 +1,4 @@
-[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29471584/GKM_PROJECT_SCHEME_V1.md)
+[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29472266/GKM_PROJECT_SCHEME_V1.md)
 [Uploading GKM_PROJECT_SCHEME_V1.md…]()
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
@@ -367,3 +367,8 @@ index.html
 
 Игровой раздел не должен ломать основной каталог. Он работает отдельным режимом `currentMode = "games"` и не заменяет фильмы/сериалы/аниме.
 
+
+
+## GKM V201 GAME POSTERS FIX
+
+V201 исправляет внешний вид постеров в разделе 🎮 Игры. В V200 часть карточек брала широкие Steam header-изображения, поэтому они плохо обрезались в вертикальной карточке. В V201 для Steam используются вертикальные `library_600x900_2x.jpg`, а для временно отсутствующих постеров допускается SVG-заглушка в стиле проекта.
