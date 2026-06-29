@@ -2696,69 +2696,84 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V168 FRANCHISE WATCH ORDER END */
 
-/* GKM V169 FRANCHISE GRID ORDER START */
+/* GKM V170 PRECISE FRANCHISE RESULT ORDER START */
 (function () {
   "use strict";
 
-  window.GKM_V169_FRANCHISE_GRID_ORDER_VERSION = "v169-franchise-grid-order-badges-2026-06-24";
+  window.GKM_V170_PRECISE_FRANCHISE_RESULT_ORDER_VERSION = "v170-precise-franchise-result-order-2026-06-24";
 
   const ORDERS = [
     {
-      key: "harry",
-      detect: ["harry potter", "гарри поттер"],
+      key: "alien",
+      detect: ["alien", "чужой"],
       order: [
-        ["Гарри Поттер и философский камень", ["философ", "philosopher", "sorcerer", "камень"]],
-        ["Гарри Поттер и Тайная комната", ["тайная комната", "chamber"]],
-        ["Гарри Поттер и узник Азкабана", ["узник азкабана", "prisoner"]],
-        ["Гарри Поттер и Кубок огня", ["кубок огня", "goblet"]],
-        ["Гарри Поттер и Орден Феникса", ["орден феникса", "order of the phoenix"]],
-        ["Гарри Поттер и Принц-полукровка", ["принц-полукровка", "принц полукровка", "half-blood"]],
-        ["Гарри Поттер и Дары смерти: Часть 1", ["дары смерти часть 1", "дары смерти: часть 1", "deathly hallows part 1"]],
-        ["Гарри Поттер и Дары смерти: Часть 2", ["дары смерти часть 2", "дары смерти: часть 2", "deathly hallows part 2"]],
-        ["Фантастические твари", ["фантастические твари", "fantastic beasts"]]
-      ]
-    },
-    {
-      key: "matrix",
-      detect: ["matrix", "матрица"],
-      order: [
-        ["Матрица", ["матрица", "the matrix"]],
-        ["Аниматрица", ["аниматрица", "animatrix"]],
-        ["Матрица: Перезагрузка", ["перезагрузка", "reloaded"]],
-        ["Матрица: Революция", ["революция", "revolutions"]],
-        ["Матрица: Воскрешение", ["воскрешение", "resurrections"]]
-      ]
-    },
-    {
-      key: "avengers",
-      detect: ["avengers", "мстители"],
-      order: [
-        ["Мстители", ["мстители", "the avengers"]],
-        ["Мстители: Эра Альтрона", ["эра альтрона", "age of ultron"]],
-        ["Мстители: Война бесконечности", ["война бесконечности", "infinity war"]],
-        ["Мстители: Финал", ["финал", "endgame"]]
+        { n: 1, label: "Чужой", aliases: ["чужой", "alien"], block: ["против", "воскрешение", "завет", "ромул", "3", "земля"] },
+        { n: 2, label: "Чужие", aliases: ["чужие", "aliens"], block: ["против"] },
+        { n: 3, label: "Чужой 3", aliases: ["чужой 3", "alien 3"] },
+        { n: 4, label: "Чужой: Воскрешение", aliases: ["воскрешение", "resurrection"] },
+        { n: 5, label: "Прометей", aliases: ["прометей", "prometheus"] },
+        { n: 6, label: "Чужой: Завет", aliases: ["завет", "covenant"] },
+        { n: 7, label: "Чужой: Ромул", aliases: ["ромул", "romulus"] },
+        { n: 8, label: "Чужой против Хищника", aliases: ["чужой против хищника", "alien vs predator", "avp"] },
+        { n: 9, label: "Чужие против Хищника: Реквием", aliases: ["реквием", "requiem"] }
       ]
     },
     {
       key: "predator",
       detect: ["predator", "хищник"],
       order: [
-        ["Хищник", ["хищник", "predator"]],
-        ["Хищник 2", ["хищник 2", "predator 2"]],
-        ["Чужой против Хищника", ["чужой против хищника", "alien vs predator"]],
-        ["Чужие против Хищника: Реквием", ["реквием", "requiem"]],
-        ["Хищники", ["хищники", "predators"]],
-        ["Добыча", ["добыча", "prey"]],
-        ["Хищник: Планета смерти", ["планета смерти", "badlands"]]
+        { n: 1, label: "Хищник", aliases: ["хищник", "predator"], block: [" 2", "2", "против", "убийца", "планета", "реквием", "добыча", "prey", "badlands"] },
+        { n: 2, label: "Хищник 2", aliases: ["хищник 2", "predator 2"] },
+        { n: 3, label: "Чужой против Хищника", aliases: ["чужой против хищника", "alien vs predator", "avp"] },
+        { n: 4, label: "Чужие против Хищника: Реквием", aliases: ["реквием", "requiem"] },
+        { n: 5, label: "Хищники", aliases: ["хищники", "predators"] },
+        { n: 6, label: "Хищник / Хищник: Убийца убийц", aliases: ["хищник: убийца", "убийца убийц", "the predator"] },
+        { n: 7, label: "Добыча", aliases: ["добыча", "prey"] },
+        { n: 8, label: "Хищник: Планета смерти", aliases: ["планета смерти", "badlands"] }
+      ]
+    },
+    {
+      key: "harry",
+      detect: ["harry potter", "гарри поттер"],
+      order: [
+        { n: 1, label: "Философский камень", aliases: ["философ", "philosopher", "sorcerer", "камень"] },
+        { n: 2, label: "Тайная комната", aliases: ["тайная комната", "chamber"] },
+        { n: 3, label: "Узник Азкабана", aliases: ["узник азкабана", "prisoner"] },
+        { n: 4, label: "Кубок огня", aliases: ["кубок огня", "goblet"] },
+        { n: 5, label: "Орден Феникса", aliases: ["орден феникса", "order of the phoenix"] },
+        { n: 6, label: "Принц-полукровка", aliases: ["принц-полукровка", "принц полукровка", "half-blood"] },
+        { n: 7, label: "Дары смерти: Часть 1", aliases: ["дары смерти часть 1", "дары смерти: часть 1", "deathly hallows part 1"] },
+        { n: 8, label: "Дары смерти: Часть 2", aliases: ["дары смерти часть 2", "дары смерти: часть 2", "deathly hallows part 2"] }
+      ]
+    },
+    {
+      key: "matrix",
+      detect: ["matrix", "матрица"],
+      order: [
+        { n: 1, label: "Матрица", aliases: ["матрица", "the matrix"], block: ["времени", "перезагрузка", "революция", "воскрешение"] },
+        { n: 2, label: "Аниматрица", aliases: ["аниматрица", "animatrix"] },
+        { n: 3, label: "Матрица: Перезагрузка", aliases: ["перезагрузка", "reloaded"] },
+        { n: 4, label: "Матрица: Революция", aliases: ["революция", "revolutions"] },
+        { n: 5, label: "Матрица: Воскрешение", aliases: ["воскрешение", "resurrections"] }
+      ]
+    },
+    {
+      key: "avengers",
+      detect: ["avengers", "мстители"],
+      order: [
+        { n: 1, label: "Мстители", aliases: ["мстители", "the avengers"], block: ["война", "финал", "эра", "альтрона", "величайшие", "команда"] },
+        { n: 2, label: "Мстители: Эра Альтрона", aliases: ["эра альтрона", "age of ultron"] },
+        { n: 3, label: "Мстители: Война бесконечности", aliases: ["война бесконечности", "infinity war"] },
+        { n: 4, label: "Мстители: Финал", aliases: ["финал", "endgame"] }
       ]
     }
   ];
 
   function norm(v) {
-    return String(v || "").toLowerCase().replace(/ё/g, "е").replace(/\s+/g, " ").trim();
+    return String(v || "").toLowerCase().replace(/ё/g, "е").replace(/[«»"']/g, "").replace(/\s+/g, " ").trim();
   }
 
-  function getSearchText() {
+  function inputQuery() {
     const input = document.querySelector("#search")
       || document.querySelector("#searchInput")
       || document.querySelector("input[type='search']")
@@ -2767,134 +2782,150 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return norm(input && input.value);
   }
 
-  function detectOrder() {
-    const q = getSearchText();
+  function currentOrder() {
+    const q = inputQuery();
     if (!q) return null;
     return ORDERS.find(o => o.detect.some(d => q.includes(norm(d))));
   }
 
-  function getCards(root) {
-    const directSelectors = [".card", ".movie-card", ".item-card", ".catalog-card", "[class*='card']"];
-    for (const s of directSelectors) {
-      const cards = Array.from(root.querySelectorAll(":scope > " + s));
-      if (cards.length >= 2) return cards;
-    }
-
-    const children = Array.from(root.children || []);
-    return children.filter(el => {
-      const text = norm(el.textContent);
-      return text.length > 20 && text.length < 900 && (el.querySelector("img") || text.includes("★"));
-    });
-  }
-
-  function findGrid() {
-    const candidates = [
-      document.querySelector(".grid"),
-      document.querySelector(".cards"),
-      document.querySelector(".results"),
-      document.querySelector("#results"),
-      document.querySelector("#catalog"),
-      document.querySelector("main")
-    ].filter(Boolean);
-
-    for (const c of candidates) {
-      if (getCards(c).length >= 2) return c;
-    }
-
-    let best = null;
-    let bestCount = 0;
-    for (const el of Array.from(document.querySelectorAll("body *"))) {
-      const count = getCards(el).length;
-      if (count > bestCount) {
-        best = el;
-        bestCount = count;
-      }
-    }
-    return bestCount >= 2 ? best : null;
+  function isCard(el) {
+    if (!el || el.nodeType !== 1) return false;
+    const text = norm(el.textContent);
+    if (text.length < 25 || text.length > 900) return false;
+    const hasPoster = !!el.querySelector("img");
+    const hasRating = text.includes("★") || text.includes("фильм") || text.includes("аниме") || text.includes("сериал") || text.includes("мультфильм");
+    return hasPoster && hasRating;
   }
 
   function cardTitle(card) {
-    const titleEl = card.querySelector(".title,.card-title,h3,h2,b");
-    if (titleEl) return norm(titleEl.textContent);
+    const selectors = [
+      ".title", ".card-title", ".movie-title", ".name",
+      "[class*='title']", "h3", "h2", "b"
+    ];
+    for (const s of selectors) {
+      const el = card.querySelector(s);
+      if (el) {
+        const t = norm(el.textContent);
+        if (t && !["фильм", "аниме", "сериал", "мультфильм"].includes(t)) return t;
+      }
+    }
 
     const lines = String(card.textContent || "").split("\n").map(x => x.trim()).filter(Boolean);
     for (const line of lines) {
-      const l = norm(line);
-      if (!l || ["фильм","аниме","мультфильм","сериал"].includes(l)) continue;
-      if (l.includes("★") || /^\d{4}/.test(l)) continue;
-      return l;
+      const t = norm(line);
+      if (!t) continue;
+      if (["фильм", "аниме", "сериал", "мультфильм"].includes(t)) continue;
+      if (t.includes("★") || /^\d{4}/.test(t)) continue;
+      if (t.length > 2 && t.length < 80) return t;
     }
     return norm(card.textContent);
   }
 
-  function scoreCard(card, order) {
-    const title = cardTitle(card);
-    let best = 9999;
-    order.order.forEach((row, idx) => {
-      for (const alias of row[1]) {
-        const a = norm(alias);
-        if (a && title.includes(a)) best = Math.min(best, idx);
+  function bestGrid() {
+    const possible = Array.from(document.querySelectorAll("main, #results, #catalog, .grid, .cards, .results, section, div"));
+    let best = null;
+    let bestCards = [];
+
+    for (const el of possible) {
+      const direct = Array.from(el.children || []).filter(isCard);
+      if (direct.length > bestCards.length) {
+        best = el;
+        bestCards = direct;
       }
-    });
-    return best;
+    }
+
+    if (bestCards.length >= 2) return { grid: best, cards: bestCards };
+    return null;
   }
 
-  function addBadge(card, num) {
-    card.querySelectorAll(".gkm-v169-order-badge").forEach(x => x.remove());
+  function matchRule(title, rule) {
+    const t = norm(title);
+
+    for (const bad of (rule.block || [])) {
+      if (t.includes(norm(bad))) return false;
+    }
+
+    return rule.aliases.some(a => t.includes(norm(a)));
+  }
+
+  function score(title, order) {
+    for (const rule of order.order) {
+      if (matchRule(title, rule)) return rule.n;
+    }
+    return 9999;
+  }
+
+  function addBadge(card, n, label) {
+    card.querySelectorAll(".gkm-v170-order-badge").forEach(x => x.remove());
     const badge = document.createElement("div");
-    badge.className = "gkm-v169-order-badge";
-    badge.textContent = "#" + num + " смотреть";
+    badge.className = "gkm-v170-order-badge";
+    badge.textContent = "#" + n + " смотреть";
     card.style.position = card.style.position || "relative";
     card.appendChild(badge);
+    card.title = "Порядок просмотра: " + n + ". " + label;
   }
 
-  function applyOrder() {
-    const order = detectOrder();
+  function labelByNumber(order, n) {
+    const row = order.order.find(x => x.n === n);
+    return row ? row.label : "";
+  }
+
+  function applyPreciseOrder() {
+    const order = currentOrder();
     if (!order) return;
 
-    const grid = findGrid();
-    if (!grid) return;
+    const found = bestGrid();
+    if (!found) return;
 
-    const cards = getCards(grid);
-    if (cards.length < 2) return;
-
-    const rows = cards.map((card, originalIndex) => ({
-      card,
-      score: scoreCard(card, order),
-      originalIndex
-    }));
+    const rows = found.cards.map((card, idx) => {
+      const title = cardTitle(card);
+      const s = score(title, order);
+      return { card, idx, title, score: s };
+    });
 
     const matched = rows.filter(r => r.score < 9999);
     if (!matched.length) return;
 
     rows.sort((a, b) => {
       if (a.score !== b.score) return a.score - b.score;
-      return a.originalIndex - b.originalIndex;
+      return a.idx - b.idx;
     });
 
-    const frag = document.createDocumentFragment();
-    rows.forEach(r => frag.appendChild(r.card));
-    grid.appendChild(frag);
+    const fragment = document.createDocumentFragment();
+    rows.forEach(r => fragment.appendChild(r.card));
+    found.grid.appendChild(fragment);
 
     rows.forEach(r => {
-      if (r.score < 9999) addBadge(r.card, r.score + 1);
-      else r.card.querySelectorAll(".gkm-v169-order-badge").forEach(x => x.remove());
+      if (r.score < 9999) addBadge(r.card, r.score, labelByNumber(order, r.score));
+      else r.card.querySelectorAll(".gkm-v170-order-badge").forEach(x => x.remove());
     });
 
-    console.log("GKM V169 ordered grid:", order.key, matched.length);
+    console.log("GKM V170 precise order:", order.key, matched.map(x => [x.score, x.title]));
+  }
+
+  function patchOverlayText() {
+    // Исправляем подсказку в V168 для Чужого и Хищника, чтобы не путало с приквелами.
+    document.querySelectorAll(".gkm-v168-head p").forEach(p => {
+      const h = norm(p.closest(".gkm-v168-panel")?.querySelector("h2")?.textContent || "");
+      if (h.includes("чужой")) {
+        p.textContent = "Порядок выхода. Прометей и Завет — приквелы, но новичку проще смотреть после классики.";
+      }
+      if (h.includes("хищник")) {
+        p.textContent = "Порядок выхода. Кроссоверы с Чужим стоят между Хищник 2 и Хищники.";
+      }
+    });
   }
 
   function addStyles() {
-    if (document.querySelector("#gkm-v169-style")) return;
-
+    if (document.querySelector("#gkm-v170-style")) return;
     const style = document.createElement("style");
-    style.id = "gkm-v169-style";
+    style.id = "gkm-v170-style";
     style.textContent = `
-      .gkm-v169-order-badge {
+      .gkm-v170-order-badge{
         position:absolute;
         left:8px;
         top:42px;
-        z-index:20;
+        z-index:30;
         padding:7px 10px;
         border-radius:999px;
         background:linear-gradient(135deg,#ffae00,#b13cff);
@@ -2909,28 +2940,34 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     document.head.appendChild(style);
   }
 
-  function scheduleApply() {
-    clearTimeout(window.__gkmV169Timer);
-    window.__gkmV169Timer = setTimeout(applyOrder, 300);
+  function schedule() {
+    clearTimeout(window.__gkmV170Timer);
+    window.__gkmV170Timer = setTimeout(() => {
+      applyPreciseOrder();
+      patchOverlayText();
+    }, 350);
   }
 
   function init() {
     addStyles();
-    document.addEventListener("input", scheduleApply, true);
-    document.addEventListener("change", scheduleApply, true);
-    document.addEventListener("click", scheduleApply, true);
 
-    const observer = new MutationObserver(scheduleApply);
+    document.addEventListener("input", schedule, true);
+    document.addEventListener("change", schedule, true);
+    document.addEventListener("click", schedule, true);
+
+    const observer = new MutationObserver(schedule);
     observer.observe(document.body, { childList: true, subtree: true });
 
-    setTimeout(applyOrder, 500);
-    setTimeout(applyOrder, 1400);
-    console.log("GKM: v169-franchise-grid-order-badges-2026-06-24");
+    setTimeout(schedule, 400);
+    setTimeout(schedule, 1200);
+    setTimeout(schedule, 2200);
+
+    console.log("GKM: v170-precise-franchise-result-order-2026-06-24");
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
-  window.GKM_V169_APPLY_FRANCHISE_GRID_ORDER = applyOrder;
+  window.GKM_V170_APPLY_PRECISE_FRANCHISE_ORDER = applyPreciseOrder;
 })();
-/* GKM V169 FRANCHISE GRID ORDER END */
+/* GKM V170 PRECISE FRANCHISE RESULT ORDER END */
