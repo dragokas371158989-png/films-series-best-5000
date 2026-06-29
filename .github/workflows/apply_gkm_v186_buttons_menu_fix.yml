@@ -1,0 +1,31 @@
+name: Apply GKM V186 Buttons Menu Fix
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-v186-buttons-menu-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Apply V186 patch
+        run: python tools/gkm_v186_apply_buttons_menu_fix.py
+      - name: Commit V186 files
+        run: |
+          git config user.name "actions-user"
+          git config user.email "actions@github.com"
+          git add app.js index.html film/index.html downloads/index.html tools/gkm_v186_apply_buttons_menu_fix.py .github/workflows/apply_gkm_v186_buttons_menu_fix.yml
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Apply GKM V186 buttons menu fix"
+            git push
+          fi
