@@ -4118,13 +4118,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }, true);
 })();
 /* GKM V199 CLEAN MODAL EXTERNAL LINKS END */
-/* GKM V207 GAME HUB POLISH TELEGRAM START */
+/* GKM V208 GAME UNIVERSES EXPANSION START */
 (function () {
   "use strict";
 
-  window.GKM_V202_GAME_HUB_VERSION = "v207-game-hub-polish-telegram-2026-06-29";
+  window.GKM_V202_GAME_HUB_VERSION = "v208-game-universes-expansion-2026-06-29";
 
-  const GAMES_URL = "./data/games_catalog.json?v=207";
+  const GAMES_URL = "./data/games_catalog.json?v=208";
   const PAGE = 60;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -4133,6 +4133,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     ["game_to_series", "Игра → сериал"],
     ["game_to_anime", "Игра → аниме"],
     ["game_to_animation", "Игра → мульт"],
+    ["media_to_game", "Фильм/аниме → игра"],
     ["shared_universe", "Общая вселенная"],
     ["vibe_media", "Кино-вайб"]
   ];
@@ -4145,1140 +4146,4332 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   const FALLBACK_GAMES = [
     {
-      "id": "game-cyberpunk-2077",
-      "title": "Cyberpunk 2077",
-      "type": "Игра",
-      "year": 2020,
-      "rating": 8.6,
-      "votes": 720000,
-      "genres": [
-        "RPG",
-        "Киберпанк",
-        "Открытый мир"
-      ],
-      "relation": "game_to_anime",
-      "relationLabel": "игра → аниме",
-      "badges": [
-        "📺 Есть аниме",
-        "🧩 DLC",
-        "🔥 Популярное"
-      ],
-      "relatedMedia": [
-        "Cyberpunk: Edgerunners"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1091500/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/1091500/Cyberpunk_2077/",
-        "gog": "https://www.gog.com/en/game/cyberpunk_2077"
-      },
-      "description": "Одна вселенная с аниме Cyberpunk: Edgerunners. Хорошо подходит для блока “посмотрел — во что играть дальше”.",
-      "playAfterWatch": [
-        "Cyberpunk 2077",
-        "Cyberpunk 2077: Phantom Liberty"
-      ],
-      "chronology": [
-        "Cyberpunk 2077",
-        "Cyberpunk: Edgerunners",
-        "Cyberpunk 2077: Phantom Liberty"
-      ],
-      "similarGames": [
-        "Deus Ex: Human Revolution",
-        "The Ascent",
-        "Watch Dogs 2"
-      ],
-      "similarMedia": [
-        "Blade Runner 2049",
-        "Ghost in the Shell",
-        "Altered Carbon"
-      ],
-      "vibe": [
-        "киберпанк",
-        "неон",
-        "мегаполис",
-        "будущее"
-      ]
+        "id": "game-cyberpunk-2077",
+        "title": "Cyberpunk 2077",
+        "type": "Игра",
+        "year": 2020,
+        "rating": 8.6,
+        "votes": 720000,
+        "genres": [
+            "RPG",
+            "Киберпанк",
+            "Открытый мир"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → аниме",
+        "badges": [
+            "📺 Есть аниме",
+            "🧩 DLC",
+            "🔥 Популярное"
+        ],
+        "relatedMedia": [
+            "Cyberpunk: Edgerunners"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1091500/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1091500/Cyberpunk_2077/",
+            "gog": "https://www.gog.com/en/game/cyberpunk_2077"
+        },
+        "description": "Одна вселенная с аниме Cyberpunk: Edgerunners. Хорошо подходит для блока “посмотрел — во что играть дальше”.",
+        "playAfterWatch": [
+            "Cyberpunk 2077",
+            "Cyberpunk 2077: Phantom Liberty"
+        ],
+        "chronology": [
+            "Cyberpunk 2077",
+            "Cyberpunk: Edgerunners",
+            "Cyberpunk 2077: Phantom Liberty"
+        ],
+        "similarGames": [
+            "Deus Ex: Human Revolution",
+            "The Ascent",
+            "Watch Dogs 2"
+        ],
+        "similarMedia": [
+            "Blade Runner 2049",
+            "Ghost in the Shell",
+            "Altered Carbon"
+        ],
+        "vibe": [
+            "киберпанк",
+            "неон",
+            "мегаполис",
+            "будущее"
+        ],
+        "universe": {
+            "name": "Cyberpunk",
+            "games": [
+                "Cyberpunk 2077",
+                "Phantom Liberty"
+            ],
+            "anime": [
+                "Cyberpunk: Edgerunners"
+            ],
+            "movies": [
+                "Blade Runner 2049 по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "Cyberpunk: Edgerunners"
+        ],
+        "playOrder": [
+            "Cyberpunk 2077",
+            "Cyberpunk: Edgerunners",
+            "Cyberpunk 2077: Phantom Liberty"
+        ]
     },
     {
-      "id": "game-the-last-of-us",
-      "title": "The Last of Us Part I",
-      "type": "Игра",
-      "year": 2022,
-      "rating": 9.2,
-      "votes": 900000,
-      "genres": [
-        "Приключение",
-        "Драма",
-        "Постапокалипсис"
-      ],
-      "relation": "game_to_series",
-      "relationLabel": "игра → сериал",
-      "badges": [
-        "📺 Есть сериал",
-        "⭐ Культовая",
-        "🎭 Драма"
-      ],
-      "relatedMedia": [
-        "The Last of Us"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1888930/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/1888930/The_Last_of_Us_Part_I/"
-      },
-      "description": "Игра, по которой снят сериал The Last of Us.",
-      "playAfterWatch": [
-        "The Last of Us Part I",
-        "The Last of Us Part II"
-      ],
-      "chronology": [
-        "The Last of Us: Left Behind",
-        "The Last of Us Part I",
-        "The Last of Us Part II",
-        "The Last of Us сериал"
-      ],
-      "similarGames": [
-        "Days Gone",
-        "A Plague Tale: Requiem",
-        "Metro Exodus"
-      ],
-      "similarMedia": [
-        "The Walking Dead",
-        "Children of Men",
-        "Logan"
-      ],
-      "vibe": [
-        "выживание",
-        "драма",
-        "постапокалипсис"
-      ]
+        "id": "game-the-last-of-us",
+        "title": "The Last of Us Part I",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 9.2,
+        "votes": 900000,
+        "genres": [
+            "Приключение",
+            "Драма",
+            "Постапокалипсис"
+        ],
+        "relation": "game_to_series",
+        "relationLabel": "игра → сериал",
+        "badges": [
+            "📺 Есть сериал",
+            "⭐ Культовая",
+            "🎭 Драма"
+        ],
+        "relatedMedia": [
+            "The Last of Us"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1888930/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1888930/The_Last_of_Us_Part_I/"
+        },
+        "description": "Игра, по которой снят сериал The Last of Us.",
+        "playAfterWatch": [
+            "The Last of Us Part I",
+            "The Last of Us Part II"
+        ],
+        "chronology": [
+            "The Last of Us: Left Behind",
+            "The Last of Us Part I",
+            "The Last of Us Part II",
+            "The Last of Us сериал"
+        ],
+        "similarGames": [
+            "Days Gone",
+            "A Plague Tale: Requiem",
+            "Metro Exodus"
+        ],
+        "similarMedia": [
+            "The Walking Dead",
+            "Children of Men",
+            "Logan"
+        ],
+        "vibe": [
+            "выживание",
+            "драма",
+            "постапокалипсис"
+        ],
+        "watchOrder": [
+            "The Last of Us"
+        ],
+        "playOrder": [
+            "The Last of Us: Left Behind",
+            "The Last of Us Part I",
+            "The Last of Us Part II",
+            "The Last of Us сериал"
+        ]
     },
     {
-      "id": "game-fallout-4",
-      "title": "Fallout 4",
-      "type": "Игра",
-      "year": 2015,
-      "rating": 8.4,
-      "votes": 850000,
-      "genres": [
-        "RPG",
-        "Постапокалипсис",
-        "Открытый мир"
-      ],
-      "relation": "game_to_series",
-      "relationLabel": "игра → сериал",
-      "badges": [
-        "📺 Есть сериал",
-        "🌍 Открытый мир",
-        "☢️ Постапок"
-      ],
-      "relatedMedia": [
-        "Fallout"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/377160/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/377160/Fallout_4/"
-      },
-      "description": "Игровая вселенная Fallout получила сериал. Хороший кандидат для карточки-вселенной.",
-      "playAfterWatch": [
-        "Fallout 4",
-        "Fallout: New Vegas",
-        "Fallout 76"
-      ],
-      "chronology": [
-        "Fallout",
-        "Fallout 2",
-        "Fallout 3",
-        "Fallout: New Vegas",
-        "Fallout 4",
-        "Fallout сериал"
-      ],
-      "similarGames": [
-        "S.T.A.L.K.E.R. 2",
-        "Metro Exodus",
-        "Wasteland 3"
-      ],
-      "similarMedia": [
-        "Mad Max: Fury Road",
-        "Silo",
-        "The 100"
-      ],
-      "vibe": [
-        "пустошь",
-        "убежища",
-        "ретрофутуризм"
-      ]
+        "id": "game-fallout-4",
+        "title": "Fallout 4",
+        "type": "Игра",
+        "year": 2015,
+        "rating": 8.4,
+        "votes": 850000,
+        "genres": [
+            "RPG",
+            "Постапокалипсис",
+            "Открытый мир"
+        ],
+        "relation": "game_to_series",
+        "relationLabel": "игра → сериал",
+        "badges": [
+            "📺 Есть сериал",
+            "🌍 Открытый мир",
+            "☢️ Постапок"
+        ],
+        "relatedMedia": [
+            "Fallout"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/377160/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/377160/Fallout_4/"
+        },
+        "description": "Игровая вселенная Fallout получила сериал. Хороший кандидат для карточки-вселенной.",
+        "playAfterWatch": [
+            "Fallout 4",
+            "Fallout: New Vegas",
+            "Fallout 76"
+        ],
+        "chronology": [
+            "Fallout",
+            "Fallout 2",
+            "Fallout 3",
+            "Fallout: New Vegas",
+            "Fallout 4",
+            "Fallout сериал"
+        ],
+        "similarGames": [
+            "S.T.A.L.K.E.R. 2",
+            "Metro Exodus",
+            "Wasteland 3"
+        ],
+        "similarMedia": [
+            "Mad Max: Fury Road",
+            "Silo",
+            "The 100"
+        ],
+        "vibe": [
+            "пустошь",
+            "убежища",
+            "ретрофутуризм"
+        ],
+        "universe": {
+            "name": "Fallout",
+            "games": [
+                "Fallout",
+                "Fallout 2",
+                "Fallout 3",
+                "Fallout: New Vegas",
+                "Fallout 4",
+                "Fallout 76"
+            ],
+            "series": [
+                "Fallout"
+            ]
+        },
+        "watchOrder": [
+            "Fallout"
+        ],
+        "playOrder": [
+            "Fallout",
+            "Fallout 2",
+            "Fallout 3",
+            "Fallout: New Vegas",
+            "Fallout 4",
+            "Fallout сериал"
+        ]
     },
     {
-      "id": "game-witcher-3",
-      "title": "The Witcher 3: Wild Hunt",
-      "type": "Игра",
-      "year": 2015,
-      "rating": 9.5,
-      "votes": 1200000,
-      "genres": [
-        "RPG",
-        "Фэнтези",
-        "Открытый мир"
-      ],
-      "relation": "shared_universe",
-      "relationLabel": "книги → игра → сериал",
-      "badges": [
-        "📺 Есть сериал",
-        "📚 Книги",
-        "⭐ Культовая"
-      ],
-      "relatedMedia": [
-        "The Witcher",
-        "The Witcher: Nightmare of the Wolf"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/292030/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/",
-        "gog": "https://www.gog.com/en/game/the_witcher_3_wild_hunt"
-      },
-      "description": "Большая вселенная: книги, игры, сериал и анимация.",
-      "playAfterWatch": [
-        "The Witcher 3: Wild Hunt",
-        "The Witcher 2",
-        "Thronebreaker"
-      ],
-      "chronology": [
-        "Книги о Ведьмаке",
-        "The Witcher",
-        "The Witcher 2",
-        "The Witcher 3",
-        "Сериал The Witcher"
-      ],
-      "similarGames": [
-        "Dragon Age: Inquisition",
-        "Baldur’s Gate 3",
-        "Elden Ring"
-      ],
-      "similarMedia": [
-        "Game of Thrones",
-        "The Last Kingdom",
-        "Castlevania"
-      ],
-      "vibe": [
-        "фэнтези",
-        "монстры",
-        "мрачный мир"
-      ]
+        "id": "game-witcher-3",
+        "title": "The Witcher 3: Wild Hunt",
+        "type": "Игра",
+        "year": 2015,
+        "rating": 9.5,
+        "votes": 1200000,
+        "genres": [
+            "RPG",
+            "Фэнтези",
+            "Открытый мир"
+        ],
+        "relation": "shared_universe",
+        "relationLabel": "книги → игра → сериал",
+        "badges": [
+            "📺 Есть сериал",
+            "📚 Книги",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "The Witcher",
+            "The Witcher: Nightmare of the Wolf"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/292030/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/",
+            "gog": "https://www.gog.com/en/game/the_witcher_3_wild_hunt"
+        },
+        "description": "Большая вселенная: книги, игры, сериал и анимация.",
+        "playAfterWatch": [
+            "The Witcher 3: Wild Hunt",
+            "The Witcher 2",
+            "Thronebreaker"
+        ],
+        "chronology": [
+            "Книги о Ведьмаке",
+            "The Witcher",
+            "The Witcher 2",
+            "The Witcher 3",
+            "Сериал The Witcher"
+        ],
+        "similarGames": [
+            "Dragon Age: Inquisition",
+            "Baldur’s Gate 3",
+            "Elden Ring"
+        ],
+        "similarMedia": [
+            "Game of Thrones",
+            "The Last Kingdom",
+            "Castlevania"
+        ],
+        "vibe": [
+            "фэнтези",
+            "монстры",
+            "мрачный мир"
+        ],
+        "universe": {
+            "name": "The Witcher",
+            "games": [
+                "The Witcher",
+                "The Witcher 2",
+                "The Witcher 3",
+                "Thronebreaker"
+            ],
+            "series": [
+                "The Witcher"
+            ],
+            "animation": [
+                "Nightmare of the Wolf"
+            ]
+        },
+        "watchOrder": [
+            "The Witcher",
+            "The Witcher: Nightmare of the Wolf"
+        ],
+        "playOrder": [
+            "Книги о Ведьмаке",
+            "The Witcher",
+            "The Witcher 2",
+            "The Witcher 3",
+            "Сериал The Witcher"
+        ]
     },
     {
-      "id": "game-resident-evil-4",
-      "title": "Resident Evil 4",
-      "type": "Игра",
-      "year": 2023,
-      "rating": 9.1,
-      "votes": 650000,
-      "genres": [
-        "Хоррор",
-        "Экшен",
-        "Выживание"
-      ],
-      "relation": "game_to_movies",
-      "relationLabel": "игра → фильмы / анимация",
-      "badges": [
-        "🎬 Есть фильмы",
-        "🧟 Хоррор",
-        "⭐ Культовая"
-      ],
-      "relatedMedia": [
-        "Resident Evil",
-        "Resident Evil: Degeneration",
-        "Resident Evil: Infinite Darkness"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/2050650/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/2050650/Resident_Evil_4/"
-      },
-      "description": "Resident Evil — одна из главных игровых вселенных с фильмами, сериалами и анимацией.",
-      "playAfterWatch": [
-        "Resident Evil 2",
-        "Resident Evil 4",
-        "Resident Evil Village"
-      ],
-      "chronology": [
-        "Resident Evil 0",
-        "Resident Evil",
-        "Resident Evil 2",
-        "Resident Evil 3",
-        "Resident Evil 4",
-        "Resident Evil Village"
-      ],
-      "similarGames": [
-        "Dead Space",
-        "The Evil Within",
-        "Alan Wake 2"
-      ],
-      "similarMedia": [
-        "28 Days Later",
-        "Train to Busan",
-        "Silent Hill"
-      ],
-      "vibe": [
-        "зомби",
-        "корпорация",
-        "выживание"
-      ]
+        "id": "game-resident-evil-4",
+        "title": "Resident Evil 4",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 9.1,
+        "votes": 650000,
+        "genres": [
+            "Хоррор",
+            "Экшен",
+            "Выживание"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы / анимация",
+        "badges": [
+            "🎬 Есть фильмы",
+            "🧟 Хоррор",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "Resident Evil",
+            "Resident Evil: Degeneration",
+            "Resident Evil: Infinite Darkness"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/2050650/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/2050650/Resident_Evil_4/"
+        },
+        "description": "Resident Evil — одна из главных игровых вселенных с фильмами, сериалами и анимацией.",
+        "playAfterWatch": [
+            "Resident Evil 2",
+            "Resident Evil 4",
+            "Resident Evil Village"
+        ],
+        "chronology": [
+            "Resident Evil 0",
+            "Resident Evil",
+            "Resident Evil 2",
+            "Resident Evil 3",
+            "Resident Evil 4",
+            "Resident Evil Village"
+        ],
+        "similarGames": [
+            "Dead Space",
+            "The Evil Within",
+            "Alan Wake 2"
+        ],
+        "similarMedia": [
+            "28 Days Later",
+            "Train to Busan",
+            "Silent Hill"
+        ],
+        "vibe": [
+            "зомби",
+            "корпорация",
+            "выживание"
+        ],
+        "universe": {
+            "name": "Resident Evil",
+            "games": [
+                "Resident Evil 0",
+                "Resident Evil",
+                "Resident Evil 2",
+                "Resident Evil 3",
+                "Resident Evil 4",
+                "Resident Evil 7",
+                "Resident Evil Village"
+            ],
+            "movies": [
+                "Resident Evil",
+                "Resident Evil: Apocalypse",
+                "Welcome to Raccoon City"
+            ],
+            "animation": [
+                "Degeneration",
+                "Damnation",
+                "Vendetta",
+                "Infinite Darkness"
+            ]
+        },
+        "watchOrder": [
+            "Resident Evil",
+            "Resident Evil: Degeneration",
+            "Resident Evil: Infinite Darkness"
+        ],
+        "playOrder": [
+            "Resident Evil 0",
+            "Resident Evil",
+            "Resident Evil 2",
+            "Resident Evil 3",
+            "Resident Evil 4",
+            "Resident Evil Village"
+        ]
     },
     {
-      "id": "game-silent-hill-2",
-      "title": "Silent Hill 2",
-      "type": "Игра",
-      "year": 2024,
-      "rating": 8.8,
-      "votes": 250000,
-      "genres": [
-        "Психологический хоррор",
-        "Выживание"
-      ],
-      "relation": "game_to_movie",
-      "relationLabel": "игра → фильм",
-      "badges": [
-        "🎬 Есть фильм",
-        "🧠 Психохоррор",
-        "🌫 Атмосфера"
-      ],
-      "relatedMedia": [
-        "Silent Hill"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/2124490/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/2124490/SILENT_HILL_2/"
-      },
-      "description": "Silent Hill — игровая хоррор-вселенная, по которой выходили фильмы.",
-      "playAfterWatch": [
-        "Silent Hill 2",
-        "Silent Hill",
-        "Silent Hill 3"
-      ],
-      "chronology": [
-        "Silent Hill",
-        "Silent Hill 2",
-        "Silent Hill 3",
-        "Silent Hill фильм"
-      ],
-      "similarGames": [
-        "Alan Wake 2",
-        "The Medium",
-        "Layers of Fear"
-      ],
-      "similarMedia": [
-        "Jacob’s Ladder",
-        "The Mist",
-        "1408"
-      ],
-      "vibe": [
-        "туман",
-        "психология",
-        "кошмар"
-      ]
+        "id": "game-silent-hill-2",
+        "title": "Silent Hill 2",
+        "type": "Игра",
+        "year": 2024,
+        "rating": 8.8,
+        "votes": 250000,
+        "genres": [
+            "Психологический хоррор",
+            "Выживание"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🧠 Психохоррор",
+            "🌫 Атмосфера"
+        ],
+        "relatedMedia": [
+            "Silent Hill"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/2124490/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/2124490/SILENT_HILL_2/"
+        },
+        "description": "Silent Hill — игровая хоррор-вселенная, по которой выходили фильмы.",
+        "playAfterWatch": [
+            "Silent Hill 2",
+            "Silent Hill",
+            "Silent Hill 3"
+        ],
+        "chronology": [
+            "Silent Hill",
+            "Silent Hill 2",
+            "Silent Hill 3",
+            "Silent Hill фильм"
+        ],
+        "similarGames": [
+            "Alan Wake 2",
+            "The Medium",
+            "Layers of Fear"
+        ],
+        "similarMedia": [
+            "Jacob’s Ladder",
+            "The Mist",
+            "1408"
+        ],
+        "vibe": [
+            "туман",
+            "психология",
+            "кошмар"
+        ],
+        "watchOrder": [
+            "Silent Hill"
+        ],
+        "playOrder": [
+            "Silent Hill",
+            "Silent Hill 2",
+            "Silent Hill 3",
+            "Silent Hill фильм"
+        ]
     },
     {
-      "id": "game-mortal-kombat-1",
-      "title": "Mortal Kombat 1",
-      "type": "Игра",
-      "year": 2023,
-      "rating": 8.0,
-      "votes": 320000,
-      "genres": [
-        "Файтинг",
-        "Экшен"
-      ],
-      "relation": "game_to_movies",
-      "relationLabel": "игра → фильмы / мультфильмы",
-      "badges": [
-        "🎬 Есть фильмы",
-        "🥊 Файтинг",
-        "🔥 Жестко"
-      ],
-      "relatedMedia": [
-        "Mortal Kombat",
-        "Mortal Kombat Legends"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1971870/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/1971870/Mortal_Kombat_1/"
-      },
-      "description": "Mortal Kombat удобно держать как игровую вселенную: игры, фильмы, мультфильмы и турниры.",
-      "playAfterWatch": [
-        "Mortal Kombat 1",
-        "Mortal Kombat 11"
-      ],
-      "chronology": [
-        "Mortal Kombat классика",
-        "Mortal Kombat 9",
-        "Mortal Kombat X",
-        "Mortal Kombat 11",
-        "Mortal Kombat 1"
-      ],
-      "similarGames": [
-        "Tekken 8",
-        "Street Fighter 6",
-        "Injustice 2"
-      ],
-      "similarMedia": [
-        "Bloodsport",
-        "Ninja Assassin",
-        "Mortal Kombat Legends"
-      ],
-      "vibe": [
-        "турнир",
-        "бойцы",
-        "фаталити"
-      ]
+        "id": "game-mortal-kombat-1",
+        "title": "Mortal Kombat 1",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.0,
+        "votes": 320000,
+        "genres": [
+            "Файтинг",
+            "Экшен"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы / мультфильмы",
+        "badges": [
+            "🎬 Есть фильмы",
+            "🥊 Файтинг",
+            "🔥 Жестко"
+        ],
+        "relatedMedia": [
+            "Mortal Kombat",
+            "Mortal Kombat Legends"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1971870/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1971870/Mortal_Kombat_1/"
+        },
+        "description": "Mortal Kombat удобно держать как игровую вселенную: игры, фильмы, мультфильмы и турниры.",
+        "playAfterWatch": [
+            "Mortal Kombat 1",
+            "Mortal Kombat 11"
+        ],
+        "chronology": [
+            "Mortal Kombat классика",
+            "Mortal Kombat 9",
+            "Mortal Kombat X",
+            "Mortal Kombat 11",
+            "Mortal Kombat 1"
+        ],
+        "similarGames": [
+            "Tekken 8",
+            "Street Fighter 6",
+            "Injustice 2"
+        ],
+        "similarMedia": [
+            "Bloodsport",
+            "Ninja Assassin",
+            "Mortal Kombat Legends"
+        ],
+        "vibe": [
+            "турнир",
+            "бойцы",
+            "фаталити"
+        ],
+        "universe": {
+            "name": "Mortal Kombat",
+            "games": [
+                "Mortal Kombat 9",
+                "Mortal Kombat X",
+                "Mortal Kombat 11",
+                "Mortal Kombat 1"
+            ],
+            "movies": [
+                "Mortal Kombat 1995",
+                "Mortal Kombat 2021"
+            ],
+            "animation": [
+                "Mortal Kombat Legends"
+            ]
+        },
+        "watchOrder": [
+            "Mortal Kombat",
+            "Mortal Kombat Legends"
+        ],
+        "playOrder": [
+            "Mortal Kombat классика",
+            "Mortal Kombat 9",
+            "Mortal Kombat X",
+            "Mortal Kombat 11",
+            "Mortal Kombat 1"
+        ]
     },
     {
-      "id": "game-sonic-frontiers",
-      "title": "Sonic Frontiers",
-      "type": "Игра",
-      "year": 2022,
-      "rating": 8.1,
-      "votes": 190000,
-      "genres": [
-        "Платформер",
-        "Приключение"
-      ],
-      "relation": "game_to_movies",
-      "relationLabel": "игра → фильмы / мультсериалы",
-      "badges": [
-        "🎬 Есть фильмы",
-        "👨‍👩‍👧 Семейное",
-        "⚡ Быстро"
-      ],
-      "relatedMedia": [
-        "Sonic the Hedgehog",
-        "Sonic Prime"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1237320/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/1237320/Sonic_Frontiers/"
-      },
-      "description": "Sonic — яркая связка игр, фильмов и мультсериалов.",
-      "playAfterWatch": [
-        "Sonic Frontiers",
-        "Sonic Mania",
-        "Sonic Generations"
-      ],
-      "chronology": [
-        "Sonic классика",
-        "Sonic Mania",
-        "Sonic Frontiers",
-        "Sonic фильмы",
-        "Sonic Prime"
-      ],
-      "similarGames": [
-        "Crash Bandicoot 4",
-        "Spyro Reignited Trilogy",
-        "Ratchet & Clank"
-      ],
-      "similarMedia": [
-        "The Super Mario Bros. Movie",
-        "Sonic Prime",
-        "Detective Pikachu"
-      ],
-      "vibe": [
-        "скорость",
-        "семейное",
-        "приключение"
-      ]
+        "id": "game-sonic-frontiers",
+        "title": "Sonic Frontiers",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.1,
+        "votes": 190000,
+        "genres": [
+            "Платформер",
+            "Приключение"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы / мультсериалы",
+        "badges": [
+            "🎬 Есть фильмы",
+            "👨‍👩‍👧 Семейное",
+            "⚡ Быстро"
+        ],
+        "relatedMedia": [
+            "Sonic the Hedgehog",
+            "Sonic Prime"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1237320/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1237320/Sonic_Frontiers/"
+        },
+        "description": "Sonic — яркая связка игр, фильмов и мультсериалов.",
+        "playAfterWatch": [
+            "Sonic Frontiers",
+            "Sonic Mania",
+            "Sonic Generations"
+        ],
+        "chronology": [
+            "Sonic классика",
+            "Sonic Mania",
+            "Sonic Frontiers",
+            "Sonic фильмы",
+            "Sonic Prime"
+        ],
+        "similarGames": [
+            "Crash Bandicoot 4",
+            "Spyro Reignited Trilogy",
+            "Ratchet & Clank"
+        ],
+        "similarMedia": [
+            "The Super Mario Bros. Movie",
+            "Sonic Prime",
+            "Detective Pikachu"
+        ],
+        "vibe": [
+            "скорость",
+            "семейное",
+            "приключение"
+        ],
+        "universe": {
+            "name": "Sonic",
+            "games": [
+                "Sonic Mania",
+                "Sonic Generations",
+                "Sonic Frontiers"
+            ],
+            "movies": [
+                "Sonic the Hedgehog",
+                "Sonic 2",
+                "Sonic 3"
+            ],
+            "series": [
+                "Sonic Prime"
+            ]
+        },
+        "watchOrder": [
+            "Sonic the Hedgehog",
+            "Sonic Prime"
+        ],
+        "playOrder": [
+            "Sonic классика",
+            "Sonic Mania",
+            "Sonic Frontiers",
+            "Sonic фильмы",
+            "Sonic Prime"
+        ]
     },
     {
-      "id": "game-halo-mcc",
-      "title": "Halo: The Master Chief Collection",
-      "type": "Игра",
-      "year": 2019,
-      "rating": 8.7,
-      "votes": 500000,
-      "genres": [
-        "Шутер",
-        "Фантастика"
-      ],
-      "relation": "game_to_series",
-      "relationLabel": "игра → сериал",
-      "badges": [
-        "📺 Есть сериал",
-        "🚀 Sci-Fi",
-        "🔫 Шутер"
-      ],
-      "relatedMedia": [
-        "Halo"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/976730/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/976730/Halo_The_Master_Chief_Collection/"
-      },
-      "description": "Halo — игровая sci-fi вселенная, по которой сделали сериал.",
-      "playAfterWatch": [
-        "Halo: Combat Evolved",
-        "Halo 2",
-        "Halo 3",
-        "Halo Reach"
-      ],
-      "chronology": [
-        "Halo Reach",
-        "Halo: Combat Evolved",
-        "Halo 2",
-        "Halo 3",
-        "Halo 4",
-        "Halo сериал"
-      ],
-      "similarGames": [
-        "DOOM Eternal",
-        "Destiny 2",
-        "Titanfall 2"
-      ],
-      "similarMedia": [
-        "The Expanse",
-        "Battlestar Galactica",
-        "Starship Troopers"
-      ],
-      "vibe": [
-        "космос",
-        "броня",
-        "война"
-      ]
+        "id": "game-halo-mcc",
+        "title": "Halo: The Master Chief Collection",
+        "type": "Игра",
+        "year": 2019,
+        "rating": 8.7,
+        "votes": 500000,
+        "genres": [
+            "Шутер",
+            "Фантастика"
+        ],
+        "relation": "game_to_series",
+        "relationLabel": "игра → сериал",
+        "badges": [
+            "📺 Есть сериал",
+            "🚀 Sci-Fi",
+            "🔫 Шутер"
+        ],
+        "relatedMedia": [
+            "Halo"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/976730/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/976730/Halo_The_Master_Chief_Collection/"
+        },
+        "description": "Halo — игровая sci-fi вселенная, по которой сделали сериал.",
+        "playAfterWatch": [
+            "Halo: Combat Evolved",
+            "Halo 2",
+            "Halo 3",
+            "Halo Reach"
+        ],
+        "chronology": [
+            "Halo Reach",
+            "Halo: Combat Evolved",
+            "Halo 2",
+            "Halo 3",
+            "Halo 4",
+            "Halo сериал"
+        ],
+        "similarGames": [
+            "DOOM Eternal",
+            "Destiny 2",
+            "Titanfall 2"
+        ],
+        "similarMedia": [
+            "The Expanse",
+            "Battlestar Galactica",
+            "Starship Troopers"
+        ],
+        "vibe": [
+            "космос",
+            "броня",
+            "война"
+        ],
+        "universe": {
+            "name": "Halo",
+            "games": [
+                "Halo Reach",
+                "Halo CE",
+                "Halo 2",
+                "Halo 3",
+                "Halo 4",
+                "Halo Infinite"
+            ],
+            "series": [
+                "Halo"
+            ]
+        },
+        "watchOrder": [
+            "Halo"
+        ],
+        "playOrder": [
+            "Halo Reach",
+            "Halo: Combat Evolved",
+            "Halo 2",
+            "Halo 3",
+            "Halo 4",
+            "Halo сериал"
+        ]
     },
     {
-      "id": "game-uncharted",
-      "title": "UNCHARTED: Legacy of Thieves Collection",
-      "type": "Игра",
-      "year": 2022,
-      "rating": 8.6,
-      "votes": 300000,
-      "genres": [
-        "Приключение",
-        "Экшен"
-      ],
-      "relation": "game_to_movie",
-      "relationLabel": "игра → фильм",
-      "badges": [
-        "🎬 Есть фильм",
-        "🧭 Приключение",
-        "💎 Сокровища"
-      ],
-      "relatedMedia": [
-        "Uncharted"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1659420/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/1659420/UNCHARTED_Legacy_of_Thieves_Collection/"
-      },
-      "description": "Uncharted — приключенческая игра, которую перенесли в кино.",
-      "playAfterWatch": [
-        "Uncharted 4",
-        "Uncharted: The Lost Legacy"
-      ],
-      "chronology": [
-        "Uncharted",
-        "Uncharted 2",
-        "Uncharted 3",
-        "Uncharted 4",
-        "Uncharted фильм"
-      ],
-      "similarGames": [
-        "Tomb Raider",
-        "Indiana Jones and the Great Circle",
-        "Star Wars Jedi: Survivor"
-      ],
-      "similarMedia": [
-        "Indiana Jones",
-        "National Treasure",
-        "Tomb Raider"
-      ],
-      "vibe": [
-        "сокровища",
-        "погони",
-        "приключение"
-      ]
+        "id": "game-uncharted",
+        "title": "UNCHARTED: Legacy of Thieves Collection",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.6,
+        "votes": 300000,
+        "genres": [
+            "Приключение",
+            "Экшен"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🧭 Приключение",
+            "💎 Сокровища"
+        ],
+        "relatedMedia": [
+            "Uncharted"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1659420/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1659420/UNCHARTED_Legacy_of_Thieves_Collection/"
+        },
+        "description": "Uncharted — приключенческая игра, которую перенесли в кино.",
+        "playAfterWatch": [
+            "Uncharted 4",
+            "Uncharted: The Lost Legacy"
+        ],
+        "chronology": [
+            "Uncharted",
+            "Uncharted 2",
+            "Uncharted 3",
+            "Uncharted 4",
+            "Uncharted фильм"
+        ],
+        "similarGames": [
+            "Tomb Raider",
+            "Indiana Jones and the Great Circle",
+            "Star Wars Jedi: Survivor"
+        ],
+        "similarMedia": [
+            "Indiana Jones",
+            "National Treasure",
+            "Tomb Raider"
+        ],
+        "vibe": [
+            "сокровища",
+            "погони",
+            "приключение"
+        ],
+        "watchOrder": [
+            "Uncharted"
+        ],
+        "playOrder": [
+            "Uncharted",
+            "Uncharted 2",
+            "Uncharted 3",
+            "Uncharted 4",
+            "Uncharted фильм"
+        ]
     },
     {
-      "id": "game-tomb-raider",
-      "title": "Tomb Raider",
-      "type": "Игра",
-      "year": 2013,
-      "rating": 8.5,
-      "votes": 700000,
-      "genres": [
-        "Приключение",
-        "Экшен"
-      ],
-      "relation": "game_to_movies",
-      "relationLabel": "игра → фильмы / анимация",
-      "badges": [
-        "🎬 Есть фильмы",
-        "🧗 Выживание",
-        "🏹 Лара"
-      ],
-      "relatedMedia": [
-        "Tomb Raider"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/203160/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/203160/Tomb_Raider/"
-      },
-      "description": "Tomb Raider — игровая серия с фильмами и анимационными проектами.",
-      "playAfterWatch": [
-        "Tomb Raider",
-        "Rise of the Tomb Raider",
-        "Shadow of the Tomb Raider"
-      ],
-      "chronology": [
-        "Tomb Raider",
-        "Rise of the Tomb Raider",
-        "Shadow of the Tomb Raider",
-        "Tomb Raider фильмы"
-      ],
-      "similarGames": [
-        "Uncharted",
-        "Horizon Zero Dawn",
-        "Assassin’s Creed Origins"
-      ],
-      "similarMedia": [
-        "Uncharted",
-        "Indiana Jones",
-        "The Mummy"
-      ],
-      "vibe": [
-        "гробницы",
-        "остров",
-        "выживание"
-      ]
+        "id": "game-tomb-raider",
+        "title": "Tomb Raider",
+        "type": "Игра",
+        "year": 2013,
+        "rating": 8.5,
+        "votes": 700000,
+        "genres": [
+            "Приключение",
+            "Экшен"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы / анимация",
+        "badges": [
+            "🎬 Есть фильмы",
+            "🧗 Выживание",
+            "🏹 Лара"
+        ],
+        "relatedMedia": [
+            "Tomb Raider"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/203160/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/203160/Tomb_Raider/"
+        },
+        "description": "Tomb Raider — игровая серия с фильмами и анимационными проектами.",
+        "playAfterWatch": [
+            "Tomb Raider",
+            "Rise of the Tomb Raider",
+            "Shadow of the Tomb Raider"
+        ],
+        "chronology": [
+            "Tomb Raider",
+            "Rise of the Tomb Raider",
+            "Shadow of the Tomb Raider",
+            "Tomb Raider фильмы"
+        ],
+        "similarGames": [
+            "Uncharted",
+            "Horizon Zero Dawn",
+            "Assassin’s Creed Origins"
+        ],
+        "similarMedia": [
+            "Uncharted",
+            "Indiana Jones",
+            "The Mummy"
+        ],
+        "vibe": [
+            "гробницы",
+            "остров",
+            "выживание"
+        ],
+        "universe": {
+            "name": "Tomb Raider",
+            "games": [
+                "Tomb Raider",
+                "Rise of the Tomb Raider",
+                "Shadow of the Tomb Raider"
+            ],
+            "movies": [
+                "Lara Croft: Tomb Raider",
+                "Tomb Raider 2018"
+            ],
+            "animation": [
+                "Tomb Raider: The Legend of Lara Croft"
+            ]
+        },
+        "watchOrder": [
+            "Tomb Raider"
+        ],
+        "playOrder": [
+            "Tomb Raider",
+            "Rise of the Tomb Raider",
+            "Shadow of the Tomb Raider",
+            "Tomb Raider фильмы"
+        ]
     },
     {
-      "id": "game-assassins-creed",
-      "title": "Assassin's Creed Odyssey",
-      "type": "Игра",
-      "year": 2018,
-      "rating": 8.4,
-      "votes": 720000,
-      "genres": [
-        "Экшен",
-        "RPG",
-        "История"
-      ],
-      "relation": "game_to_movie",
-      "relationLabel": "игра → фильм",
-      "badges": [
-        "🎬 Есть фильм",
-        "🏛 История",
-        "🗡 Ассасины"
-      ],
-      "relatedMedia": [
-        "Assassin's Creed"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/812140/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/812140/Assassins_Creed_Odyssey/"
-      },
-      "description": "Assassin's Creed — большая игровая вселенная с фильмом и потенциалом для сериалов.",
-      "playAfterWatch": [
-        "Assassin's Creed II",
-        "Assassin's Creed Odyssey",
-        "Assassin's Creed Valhalla"
-      ],
-      "chronology": [
-        "Древний Египет",
-        "Древняя Греция",
-        "Викинги",
-        "Крестовые походы",
-        "Ренессанс",
-        "Фильм"
-      ],
-      "similarGames": [
-        "Ghost of Tsushima",
-        "Shadow of Mordor",
-        "Prince of Persia"
-      ],
-      "similarMedia": [
-        "Kingdom of Heaven",
-        "Gladiator",
-        "Marco Polo"
-      ],
-      "vibe": [
-        "история",
-        "скрытность",
-        "орден"
-      ]
+        "id": "game-assassins-creed",
+        "title": "Assassin's Creed Odyssey",
+        "type": "Игра",
+        "year": 2018,
+        "rating": 8.4,
+        "votes": 720000,
+        "genres": [
+            "Экшен",
+            "RPG",
+            "История"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🏛 История",
+            "🗡 Ассасины"
+        ],
+        "relatedMedia": [
+            "Assassin's Creed"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/812140/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/812140/Assassins_Creed_Odyssey/"
+        },
+        "description": "Assassin's Creed — большая игровая вселенная с фильмом и потенциалом для сериалов.",
+        "playAfterWatch": [
+            "Assassin's Creed II",
+            "Assassin's Creed Odyssey",
+            "Assassin's Creed Valhalla"
+        ],
+        "chronology": [
+            "Древний Египет",
+            "Древняя Греция",
+            "Викинги",
+            "Крестовые походы",
+            "Ренессанс",
+            "Фильм"
+        ],
+        "similarGames": [
+            "Ghost of Tsushima",
+            "Shadow of Mordor",
+            "Prince of Persia"
+        ],
+        "similarMedia": [
+            "Kingdom of Heaven",
+            "Gladiator",
+            "Marco Polo"
+        ],
+        "vibe": [
+            "история",
+            "скрытность",
+            "орден"
+        ],
+        "watchOrder": [
+            "Assassin's Creed"
+        ],
+        "playOrder": [
+            "Древний Египет",
+            "Древняя Греция",
+            "Викинги",
+            "Крестовые походы",
+            "Ренессанс",
+            "Фильм"
+        ]
     },
     {
-      "id": "game-castlevania",
-      "title": "Castlevania: Lords of Shadow",
-      "type": "Игра",
-      "year": 2013,
-      "rating": 8.0,
-      "votes": 180000,
-      "genres": [
-        "Экшен",
-        "Готика",
-        "Фэнтези"
-      ],
-      "relation": "game_to_anime",
-      "relationLabel": "игра → анимационный сериал",
-      "badges": [
-        "📺 Есть анимация",
-        "🧛 Вампиры",
-        "🌑 Готика"
-      ],
-      "relatedMedia": [
-        "Castlevania",
-        "Castlevania: Nocturne"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/234080/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/234080/Castlevania_Lords_of_Shadow__Ultimate_Edition/"
-      },
-      "description": "Castlevania — игровая серия, которая отлично легла в формат анимационного сериала.",
-      "playAfterWatch": [
-        "Castlevania: Lords of Shadow",
-        "Castlevania: Symphony of the Night"
-      ],
-      "chronology": [
-        "Классические Castlevania",
-        "Lords of Shadow",
-        "Castlevania анимация",
-        "Castlevania: Nocturne"
-      ],
-      "similarGames": [
-        "Bloodstained",
-        "Blasphemous",
-        "Devil May Cry 5"
-      ],
-      "similarMedia": [
-        "Vampire Hunter D",
-        "Hellsing",
-        "Berserk"
-      ],
-      "vibe": [
-        "вампиры",
-        "готика",
-        "замки"
-      ]
+        "id": "game-castlevania",
+        "title": "Castlevania: Lords of Shadow",
+        "type": "Игра",
+        "year": 2013,
+        "rating": 8.0,
+        "votes": 180000,
+        "genres": [
+            "Экшен",
+            "Готика",
+            "Фэнтези"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → анимационный сериал",
+        "badges": [
+            "📺 Есть анимация",
+            "🧛 Вампиры",
+            "🌑 Готика"
+        ],
+        "relatedMedia": [
+            "Castlevania",
+            "Castlevania: Nocturne"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/234080/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/234080/Castlevania_Lords_of_Shadow__Ultimate_Edition/"
+        },
+        "description": "Castlevania — игровая серия, которая отлично легла в формат анимационного сериала.",
+        "playAfterWatch": [
+            "Castlevania: Lords of Shadow",
+            "Castlevania: Symphony of the Night"
+        ],
+        "chronology": [
+            "Классические Castlevania",
+            "Lords of Shadow",
+            "Castlevania анимация",
+            "Castlevania: Nocturne"
+        ],
+        "similarGames": [
+            "Bloodstained",
+            "Blasphemous",
+            "Devil May Cry 5"
+        ],
+        "similarMedia": [
+            "Vampire Hunter D",
+            "Hellsing",
+            "Berserk"
+        ],
+        "vibe": [
+            "вампиры",
+            "готика",
+            "замки"
+        ],
+        "universe": {
+            "name": "Castlevania",
+            "games": [
+                "Castlevania III",
+                "Symphony of the Night",
+                "Lords of Shadow"
+            ],
+            "anime": [
+                "Castlevania",
+                "Castlevania: Nocturne"
+            ]
+        },
+        "watchOrder": [
+            "Castlevania",
+            "Castlevania: Nocturne"
+        ],
+        "playOrder": [
+            "Классические Castlevania",
+            "Lords of Shadow",
+            "Castlevania анимация",
+            "Castlevania: Nocturne"
+        ]
     },
     {
-      "id": "game-dota-2",
-      "title": "Dota 2",
-      "type": "Игра",
-      "year": 2013,
-      "rating": 8.2,
-      "votes": 1600000,
-      "genres": [
-        "MOBA",
-        "Фэнтези",
-        "Командная"
-      ],
-      "relation": "game_to_anime",
-      "relationLabel": "игра → аниме",
-      "badges": [
-        "📺 Есть аниме",
-        "⚔️ Командная",
-        "🔥 Популярное"
-      ],
-      "relatedMedia": [
-        "Dota: Dragon's Blood"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/570/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/570/Dota_2/"
-      },
-      "description": "Dota 2 связана с аниме Dota: Dragon's Blood.",
-      "playAfterWatch": [
-        "Dota 2"
-      ],
-      "chronology": [
-        "Dota",
-        "Dota 2",
-        "Dota: Dragon’s Blood"
-      ],
-      "similarGames": [
-        "League of Legends",
-        "Smite",
-        "Heroes of the Storm"
-      ],
-      "similarMedia": [
-        "Arcane",
-        "Dragon Prince",
-        "Castlevania"
-      ],
-      "vibe": [
-        "герои",
-        "магия",
-        "команды"
-      ]
+        "id": "game-dota-2",
+        "title": "Dota 2",
+        "type": "Игра",
+        "year": 2013,
+        "rating": 8.2,
+        "votes": 1600000,
+        "genres": [
+            "MOBA",
+            "Фэнтези",
+            "Командная"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → аниме",
+        "badges": [
+            "📺 Есть аниме",
+            "⚔️ Командная",
+            "🔥 Популярное"
+        ],
+        "relatedMedia": [
+            "Dota: Dragon's Blood"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/570/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/570/Dota_2/"
+        },
+        "description": "Dota 2 связана с аниме Dota: Dragon's Blood.",
+        "playAfterWatch": [
+            "Dota 2"
+        ],
+        "chronology": [
+            "Dota",
+            "Dota 2",
+            "Dota: Dragon’s Blood"
+        ],
+        "similarGames": [
+            "League of Legends",
+            "Smite",
+            "Heroes of the Storm"
+        ],
+        "similarMedia": [
+            "Arcane",
+            "Dragon Prince",
+            "Castlevania"
+        ],
+        "vibe": [
+            "герои",
+            "магия",
+            "команды"
+        ],
+        "universe": {
+            "name": "Dota",
+            "games": [
+                "Dota 2"
+            ],
+            "anime": [
+                "Dota: Dragon’s Blood"
+            ]
+        },
+        "watchOrder": [
+            "Dota: Dragon's Blood"
+        ],
+        "playOrder": [
+            "Dota",
+            "Dota 2",
+            "Dota: Dragon’s Blood"
+        ]
     },
     {
-      "id": "game-devil-may-cry",
-      "title": "Devil May Cry 5",
-      "type": "Игра",
-      "year": 2019,
-      "rating": 8.9,
-      "votes": 520000,
-      "genres": [
-        "Слэшер",
-        "Экшен",
-        "Демоны"
-      ],
-      "relation": "game_to_anime",
-      "relationLabel": "игра → аниме",
-      "badges": [
-        "📺 Есть аниме",
-        "⚔️ Слэшер",
-        "😈 Демоны"
-      ],
-      "relatedMedia": [
-        "Devil May Cry"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/601150/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/601150/Devil_May_Cry_5/"
-      },
-      "description": "Devil May Cry — стильная игровая серия с аниме-адаптацией.",
-      "playAfterWatch": [
-        "Devil May Cry 3",
-        "Devil May Cry 5"
-      ],
-      "chronology": [
-        "Devil May Cry 3",
-        "Devil May Cry",
-        "Devil May Cry 4",
-        "Devil May Cry 5",
-        "Devil May Cry аниме"
-      ],
-      "similarGames": [
-        "Bayonetta",
-        "Metal Gear Rising",
-        "Ninja Gaiden"
-      ],
-      "similarMedia": [
-        "Hellsing",
-        "Trigun",
-        "Jujutsu Kaisen"
-      ],
-      "vibe": [
-        "стиль",
-        "демоны",
-        "слэшер"
-      ]
+        "id": "game-devil-may-cry",
+        "title": "Devil May Cry 5",
+        "type": "Игра",
+        "year": 2019,
+        "rating": 8.9,
+        "votes": 520000,
+        "genres": [
+            "Слэшер",
+            "Экшен",
+            "Демоны"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → аниме",
+        "badges": [
+            "📺 Есть аниме",
+            "⚔️ Слэшер",
+            "😈 Демоны"
+        ],
+        "relatedMedia": [
+            "Devil May Cry"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/601150/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/601150/Devil_May_Cry_5/"
+        },
+        "description": "Devil May Cry — стильная игровая серия с аниме-адаптацией.",
+        "playAfterWatch": [
+            "Devil May Cry 3",
+            "Devil May Cry 5"
+        ],
+        "chronology": [
+            "Devil May Cry 3",
+            "Devil May Cry",
+            "Devil May Cry 4",
+            "Devil May Cry 5",
+            "Devil May Cry аниме"
+        ],
+        "similarGames": [
+            "Bayonetta",
+            "Metal Gear Rising",
+            "Ninja Gaiden"
+        ],
+        "similarMedia": [
+            "Hellsing",
+            "Trigun",
+            "Jujutsu Kaisen"
+        ],
+        "vibe": [
+            "стиль",
+            "демоны",
+            "слэшер"
+        ],
+        "watchOrder": [
+            "Devil May Cry"
+        ],
+        "playOrder": [
+            "Devil May Cry 3",
+            "Devil May Cry",
+            "Devil May Cry 4",
+            "Devil May Cry 5",
+            "Devil May Cry аниме"
+        ]
     },
     {
-      "id": "game-warcraft",
-      "title": "World of Warcraft",
-      "type": "Игра",
-      "year": 2004,
-      "rating": 8.8,
-      "votes": 2000000,
-      "genres": [
-        "MMORPG",
-        "Фэнтези"
-      ],
-      "relation": "game_to_movie",
-      "relationLabel": "игра → фильм",
-      "badges": [
-        "🎬 Есть фильм",
-        "🌍 MMORPG",
-        "🧙 Фэнтези"
-      ],
-      "relatedMedia": [
-        "Warcraft"
-      ],
-      "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%F0%9F%A7%99%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3EWarcraft%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
-      "stores": {
-        "google": "https://www.google.com/search?q=World+of+Warcraft"
-      },
-      "description": "Warcraft — огромная игровая вселенная, по которой вышел фильм.",
-      "playAfterWatch": [
-        "World of Warcraft",
-        "Warcraft III"
-      ],
-      "chronology": [
-        "Warcraft: Orcs & Humans",
-        "Warcraft III",
-        "World of Warcraft",
-        "Warcraft фильм"
-      ],
-      "similarGames": [
-        "Final Fantasy XIV",
-        "The Elder Scrolls Online",
-        "Guild Wars 2"
-      ],
-      "similarMedia": [
-        "The Lord of the Rings",
-        "The Hobbit",
-        "Dungeons & Dragons"
-      ],
-      "vibe": [
-        "орки",
-        "альянс",
-        "фэнтези"
-      ]
+        "id": "game-warcraft",
+        "title": "World of Warcraft",
+        "type": "Игра",
+        "year": 2004,
+        "rating": 8.8,
+        "votes": 2000000,
+        "genres": [
+            "MMORPG",
+            "Фэнтези"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🌍 MMORPG",
+            "🧙 Фэнтези"
+        ],
+        "relatedMedia": [
+            "Warcraft"
+        ],
+        "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%F0%9F%A7%99%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3EWarcraft%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
+        "stores": {
+            "google": "https://www.google.com/search?q=World+of+Warcraft"
+        },
+        "description": "Warcraft — огромная игровая вселенная, по которой вышел фильм.",
+        "playAfterWatch": [
+            "World of Warcraft",
+            "Warcraft III"
+        ],
+        "chronology": [
+            "Warcraft: Orcs & Humans",
+            "Warcraft III",
+            "World of Warcraft",
+            "Warcraft фильм"
+        ],
+        "similarGames": [
+            "Final Fantasy XIV",
+            "The Elder Scrolls Online",
+            "Guild Wars 2"
+        ],
+        "similarMedia": [
+            "The Lord of the Rings",
+            "The Hobbit",
+            "Dungeons & Dragons"
+        ],
+        "vibe": [
+            "орки",
+            "альянс",
+            "фэнтези"
+        ],
+        "universe": {
+            "name": "Warcraft",
+            "games": [
+                "Warcraft III",
+                "World of Warcraft"
+            ],
+            "movies": [
+                "Warcraft"
+            ]
+        },
+        "watchOrder": [
+            "Warcraft"
+        ],
+        "playOrder": [
+            "Warcraft: Orcs & Humans",
+            "Warcraft III",
+            "World of Warcraft",
+            "Warcraft фильм"
+        ]
     },
     {
-      "id": "game-arcane-lol",
-      "title": "League of Legends",
-      "type": "Игра",
-      "year": 2009,
-      "rating": 8.3,
-      "votes": 1800000,
-      "genres": [
-        "MOBA",
-        "Фэнтези",
-        "Командная"
-      ],
-      "relation": "game_to_animation",
-      "relationLabel": "игра → мультсериал",
-      "badges": [
-        "📺 Есть Arcane",
-        "🔥 Популярное",
-        "⚔️ Командная"
-      ],
-      "relatedMedia": [
-        "Arcane"
-      ],
-      "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%E2%9A%94%EF%B8%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3ELeague%20of%20Legends%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
-      "stores": {
-        "google": "https://www.google.com/search?q=League+of+Legends"
-      },
-      "description": "League of Legends связана с мультсериалом Arcane.",
-      "playAfterWatch": [
-        "League of Legends",
-        "Teamfight Tactics"
-      ],
-      "chronology": [
-        "League of Legends",
-        "Arcane"
-      ],
-      "similarGames": [
-        "Dota 2",
-        "Valorant",
-        "Heroes of the Storm"
-      ],
-      "similarMedia": [
-        "Arcane",
-        "Dota: Dragon’s Blood",
-        "Castlevania"
-      ],
-      "vibe": [
-        "герои",
-        "магия",
-        "Пилтовер"
-      ]
+        "id": "game-arcane-lol",
+        "title": "League of Legends",
+        "type": "Игра",
+        "year": 2009,
+        "rating": 8.3,
+        "votes": 1800000,
+        "genres": [
+            "MOBA",
+            "Фэнтези",
+            "Командная"
+        ],
+        "relation": "game_to_animation",
+        "relationLabel": "игра → мультсериал",
+        "badges": [
+            "📺 Есть Arcane",
+            "🔥 Популярное",
+            "⚔️ Командная"
+        ],
+        "relatedMedia": [
+            "Arcane"
+        ],
+        "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%E2%9A%94%EF%B8%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3ELeague%20of%20Legends%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
+        "stores": {
+            "google": "https://www.google.com/search?q=League+of+Legends"
+        },
+        "description": "League of Legends связана с мультсериалом Arcane.",
+        "playAfterWatch": [
+            "League of Legends",
+            "Teamfight Tactics"
+        ],
+        "chronology": [
+            "League of Legends",
+            "Arcane"
+        ],
+        "similarGames": [
+            "Dota 2",
+            "Valorant",
+            "Heroes of the Storm"
+        ],
+        "similarMedia": [
+            "Arcane",
+            "Dota: Dragon’s Blood",
+            "Castlevania"
+        ],
+        "vibe": [
+            "герои",
+            "магия",
+            "Пилтовер"
+        ],
+        "watchOrder": [
+            "Arcane"
+        ],
+        "playOrder": [
+            "League of Legends",
+            "Arcane"
+        ]
     },
     {
-      "id": "game-pokemon",
-      "title": "Pokémon Legends: Arceus",
-      "type": "Игра",
-      "year": 2022,
-      "rating": 8.4,
-      "votes": 400000,
-      "genres": [
-        "RPG",
-        "Приключение",
-        "Семейное"
-      ],
-      "relation": "game_to_anime",
-      "relationLabel": "игра → аниме / фильмы",
-      "badges": [
-        "📺 Есть аниме",
-        "👨‍👩‍👧 Семейное",
-        "⭐ Культовая"
-      ],
-      "relatedMedia": [
-        "Pokémon",
-        "Detective Pikachu"
-      ],
-      "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%E2%9A%A1%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3EPok%C3%A9mon%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
-      "stores": {
-        "nintendo": "https://www.nintendo.com/search/#q=pokemon"
-      },
-      "description": "Pokémon — одна из самых больших связок игр, аниме и фильмов.",
-      "playAfterWatch": [
-        "Pokémon Legends: Arceus",
-        "Pokémon Scarlet / Violet"
-      ],
-      "chronology": [
-        "Pokémon игры",
-        "Pokémon аниме",
-        "Pokémon фильмы",
-        "Detective Pikachu"
-      ],
-      "similarGames": [
-        "Ni no Kuni",
-        "Temtem",
-        "Monster Hunter Stories 2"
-      ],
-      "similarMedia": [
-        "Digimon",
-        "Yu-Gi-Oh!",
-        "Detective Pikachu"
-      ],
-      "vibe": [
-        "монстры",
-        "детство",
-        "приключение"
-      ]
+        "id": "game-pokemon",
+        "title": "Pokémon Legends: Arceus",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.4,
+        "votes": 400000,
+        "genres": [
+            "RPG",
+            "Приключение",
+            "Семейное"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → аниме / фильмы",
+        "badges": [
+            "📺 Есть аниме",
+            "👨‍👩‍👧 Семейное",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "Pokémon",
+            "Detective Pikachu"
+        ],
+        "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%E2%9A%A1%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3EPok%C3%A9mon%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
+        "stores": {
+            "nintendo": "https://www.nintendo.com/search/#q=pokemon"
+        },
+        "description": "Pokémon — одна из самых больших связок игр, аниме и фильмов.",
+        "playAfterWatch": [
+            "Pokémon Legends: Arceus",
+            "Pokémon Scarlet / Violet"
+        ],
+        "chronology": [
+            "Pokémon игры",
+            "Pokémon аниме",
+            "Pokémon фильмы",
+            "Detective Pikachu"
+        ],
+        "similarGames": [
+            "Ni no Kuni",
+            "Temtem",
+            "Monster Hunter Stories 2"
+        ],
+        "similarMedia": [
+            "Digimon",
+            "Yu-Gi-Oh!",
+            "Detective Pikachu"
+        ],
+        "vibe": [
+            "монстры",
+            "детство",
+            "приключение"
+        ],
+        "universe": {
+            "name": "Pokémon",
+            "games": [
+                "Pokémon Red/Blue",
+                "Pokémon Legends: Arceus",
+                "Pokémon Scarlet/Violet"
+            ],
+            "anime": [
+                "Pokémon"
+            ],
+            "movies": [
+                "Detective Pikachu"
+            ]
+        },
+        "watchOrder": [
+            "Pokémon",
+            "Detective Pikachu"
+        ],
+        "playOrder": [
+            "Pokémon игры",
+            "Pokémon аниме",
+            "Pokémon фильмы",
+            "Detective Pikachu"
+        ]
     },
     {
-      "id": "game-super-mario",
-      "title": "Super Mario Bros. Wonder",
-      "type": "Игра",
-      "year": 2023,
-      "rating": 8.7,
-      "votes": 300000,
-      "genres": [
-        "Платформер",
-        "Семейное"
-      ],
-      "relation": "game_to_movie",
-      "relationLabel": "игра → мультфильм",
-      "badges": [
-        "🎬 Есть мультфильм",
-        "👨‍👩‍👧 Семейное",
-        "🍄 Nintendo"
-      ],
-      "relatedMedia": [
-        "The Super Mario Bros. Movie"
-      ],
-      "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%F0%9F%8D%84%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3ESuper%20Mario%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
-      "stores": {
-        "nintendo": "https://www.nintendo.com/search/#q=super%20mario"
-      },
-      "description": "Mario — игровая серия, по которой вышел крупный мультфильм.",
-      "playAfterWatch": [
-        "Super Mario Bros. Wonder",
-        "Super Mario Odyssey",
-        "Mario Kart 8 Deluxe"
-      ],
-      "chronology": [
-        "Super Mario классика",
-        "Super Mario Odyssey",
-        "The Super Mario Bros. Movie",
-        "Super Mario Bros. Wonder"
-      ],
-      "similarGames": [
-        "Sonic Frontiers",
-        "Rayman Legends",
-        "Crash Bandicoot 4"
-      ],
-      "similarMedia": [
-        "Sonic the Hedgehog",
-        "The LEGO Movie",
-        "Wreck-It Ralph"
-      ],
-      "vibe": [
-        "семейное",
-        "платформер",
-        "весело"
-      ]
+        "id": "game-super-mario",
+        "title": "Super Mario Bros. Wonder",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.7,
+        "votes": 300000,
+        "genres": [
+            "Платформер",
+            "Семейное"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → мультфильм",
+        "badges": [
+            "🎬 Есть мультфильм",
+            "👨‍👩‍👧 Семейное",
+            "🍄 Nintendo"
+        ],
+        "relatedMedia": [
+            "The Super Mario Bros. Movie"
+        ],
+        "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%F0%9F%8D%84%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3ESuper%20Mario%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
+        "stores": {
+            "nintendo": "https://www.nintendo.com/search/#q=super%20mario"
+        },
+        "description": "Mario — игровая серия, по которой вышел крупный мультфильм.",
+        "playAfterWatch": [
+            "Super Mario Bros. Wonder",
+            "Super Mario Odyssey",
+            "Mario Kart 8 Deluxe"
+        ],
+        "chronology": [
+            "Super Mario классика",
+            "Super Mario Odyssey",
+            "The Super Mario Bros. Movie",
+            "Super Mario Bros. Wonder"
+        ],
+        "similarGames": [
+            "Sonic Frontiers",
+            "Rayman Legends",
+            "Crash Bandicoot 4"
+        ],
+        "similarMedia": [
+            "Sonic the Hedgehog",
+            "The LEGO Movie",
+            "Wreck-It Ralph"
+        ],
+        "vibe": [
+            "семейное",
+            "платформер",
+            "весело"
+        ],
+        "universe": {
+            "name": "Super Mario",
+            "games": [
+                "Super Mario Bros. Wonder",
+                "Mario Odyssey",
+                "Mario Kart 8"
+            ],
+            "movies": [
+                "The Super Mario Bros. Movie"
+            ]
+        },
+        "watchOrder": [
+            "The Super Mario Bros. Movie"
+        ],
+        "playOrder": [
+            "Super Mario классика",
+            "Super Mario Odyssey",
+            "The Super Mario Bros. Movie",
+            "Super Mario Bros. Wonder"
+        ]
     },
     {
-      "id": "game-five-nights",
-      "title": "Five Nights at Freddy's",
-      "type": "Игра",
-      "year": 2014,
-      "rating": 7.8,
-      "votes": 480000,
-      "genres": [
-        "Хоррор",
-        "Инди",
-        "Выживание"
-      ],
-      "relation": "game_to_movie",
-      "relationLabel": "игра → фильм",
-      "badges": [
-        "🎬 Есть фильм",
-        "🤖 Аниматроники",
-        "🕯 Хоррор"
-      ],
-      "relatedMedia": [
-        "Five Nights at Freddy's"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/319510/library_600x900_2x.jpg",
-      "stores": {
-        "steam": "https://store.steampowered.com/app/319510/Five_Nights_at_Freddys/"
-      },
-      "description": "FNAF — пример игры, которая стала фильмом и большой фан-вселенной.",
-      "playAfterWatch": [
-        "Five Nights at Freddy's",
-        "Five Nights at Freddy's 2"
-      ],
-      "chronology": [
-        "FNAF",
-        "FNAF 2",
-        "FNAF 3",
-        "FNAF фильм"
-      ],
-      "similarGames": [
-        "Poppy Playtime",
-        "Bendy and the Ink Machine",
-        "Little Nightmares"
-      ],
-      "similarMedia": [
-        "Child’s Play",
-        "Willy’s Wonderland",
-        "M3GAN"
-      ],
-      "vibe": [
-        "аниматроники",
-        "скримеры",
-        "тайна"
-      ]
+        "id": "game-five-nights",
+        "title": "Five Nights at Freddy's",
+        "type": "Игра",
+        "year": 2014,
+        "rating": 7.8,
+        "votes": 480000,
+        "genres": [
+            "Хоррор",
+            "Инди",
+            "Выживание"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🤖 Аниматроники",
+            "🕯 Хоррор"
+        ],
+        "relatedMedia": [
+            "Five Nights at Freddy's"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/319510/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/319510/Five_Nights_at_Freddys/"
+        },
+        "description": "FNAF — пример игры, которая стала фильмом и большой фан-вселенной.",
+        "playAfterWatch": [
+            "Five Nights at Freddy's",
+            "Five Nights at Freddy's 2"
+        ],
+        "chronology": [
+            "FNAF",
+            "FNAF 2",
+            "FNAF 3",
+            "FNAF фильм"
+        ],
+        "similarGames": [
+            "Poppy Playtime",
+            "Bendy and the Ink Machine",
+            "Little Nightmares"
+        ],
+        "similarMedia": [
+            "Child’s Play",
+            "Willy’s Wonderland",
+            "M3GAN"
+        ],
+        "vibe": [
+            "аниматроники",
+            "скримеры",
+            "тайна"
+        ],
+        "watchOrder": [
+            "Five Nights at Freddy's"
+        ],
+        "playOrder": [
+            "FNAF",
+            "FNAF 2",
+            "FNAF 3",
+            "FNAF фильм"
+        ]
     },
     {
-      "id": "game-alan-wake-2",
-      "title": "Alan Wake 2",
-      "type": "Игра",
-      "year": 2023,
-      "rating": 8.9,
-      "votes": 260000,
-      "genres": [
-        "Хоррор",
-        "Детектив",
-        "Триллер"
-      ],
-      "relation": "vibe_media",
-      "relationLabel": "игра ↔ кино-вайб",
-      "badges": [
-        "🎬 Кино-вайб",
-        "🧠 Психотриллер",
-        "🌲 Мистика"
-      ],
-      "relatedMedia": [
-        "Twin Peaks",
-        "True Detective"
-      ],
-      "poster": "https://cdn.akamai.steamstatic.com/steam/apps/108710/library_600x900_2x.jpg",
-      "stores": {
-        "epic": "https://store.epicgames.com/p/alan-wake-2"
-      },
-      "description": "Не прямая экранизация, но очень кинематографичная игра. Хороша для блока “похожие по вайбу”.",
-      "playAfterWatch": [
-        "Alan Wake Remastered",
-        "Alan Wake 2",
-        "Control"
-      ],
-      "chronology": [
-        "Alan Wake",
-        "Control",
-        "Alan Wake 2"
-      ],
-      "similarGames": [
-        "Control",
-        "Silent Hill 2",
-        "The Evil Within"
-      ],
-      "similarMedia": [
-        "Twin Peaks",
-        "True Detective",
-        "The X-Files"
-      ],
-      "vibe": [
-        "лес",
-        "писатель",
-        "кошмар"
-      ]
+        "id": "game-alan-wake-2",
+        "title": "Alan Wake 2",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.9,
+        "votes": 260000,
+        "genres": [
+            "Хоррор",
+            "Детектив",
+            "Триллер"
+        ],
+        "relation": "vibe_media",
+        "relationLabel": "игра ↔ кино-вайб",
+        "badges": [
+            "🎬 Кино-вайб",
+            "🧠 Психотриллер",
+            "🌲 Мистика"
+        ],
+        "relatedMedia": [
+            "Twin Peaks",
+            "True Detective"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/108710/library_600x900_2x.jpg",
+        "stores": {
+            "epic": "https://store.epicgames.com/p/alan-wake-2"
+        },
+        "description": "Не прямая экранизация, но очень кинематографичная игра. Хороша для блока “похожие по вайбу”.",
+        "playAfterWatch": [
+            "Alan Wake Remastered",
+            "Alan Wake 2",
+            "Control"
+        ],
+        "chronology": [
+            "Alan Wake",
+            "Control",
+            "Alan Wake 2"
+        ],
+        "similarGames": [
+            "Control",
+            "Silent Hill 2",
+            "The Evil Within"
+        ],
+        "similarMedia": [
+            "Twin Peaks",
+            "True Detective",
+            "The X-Files"
+        ],
+        "vibe": [
+            "лес",
+            "писатель",
+            "кошмар"
+        ],
+        "universe": {
+            "name": "Remedy Connected Universe",
+            "games": [
+                "Alan Wake",
+                "Control",
+                "Alan Wake 2"
+            ],
+            "movies": [
+                "Twin Peaks по вайбу"
+            ],
+            "series": [
+                "психологический триллер по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "Twin Peaks",
+            "True Detective"
+        ],
+        "playOrder": [
+            "Alan Wake",
+            "Control",
+            "Alan Wake 2"
+        ]
+    },
+    {
+        "id": "game-doom-eternal",
+        "title": "DOOM Eternal",
+        "type": "Игра",
+        "year": 2020,
+        "rating": 8.9,
+        "votes": 520000,
+        "genres": [
+            "Шутер",
+            "Демоны",
+            "Экшен"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы",
+        "badges": [
+            "🎬 Есть фильм",
+            "🔫 Шутер",
+            "🔥 Адреналин"
+        ],
+        "relatedMedia": [
+            "Doom",
+            "Doom: Annihilation"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/782330/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/782330/DOOM_Eternal/"
+        },
+        "description": "DOOM — культовая игровая серия с киноадаптациями и мощным экшен-вайбом.",
+        "playAfterWatch": [
+            "DOOM Eternal",
+            "DOOM 2016"
+        ],
+        "chronology": [
+            "DOOM",
+            "DOOM II",
+            "DOOM 3",
+            "DOOM 2016",
+            "DOOM Eternal"
+        ],
+        "similarGames": [
+            "Wolfenstein II",
+            "Quake",
+            "Shadow Warrior"
+        ],
+        "similarMedia": [
+            "Doom",
+            "Event Horizon",
+            "Aliens"
+        ],
+        "vibe": [
+            "демоны",
+            "металл",
+            "мясо"
+        ],
+        "universe": {
+            "name": "DOOM",
+            "games": [
+                "DOOM",
+                "DOOM II",
+                "DOOM 3",
+                "DOOM 2016",
+                "DOOM Eternal"
+            ],
+            "movies": [
+                "Doom",
+                "Doom: Annihilation"
+            ]
+        },
+        "watchOrder": [
+            "Doom",
+            "Doom: Annihilation"
+        ],
+        "playOrder": [
+            "DOOM",
+            "DOOM II",
+            "DOOM 3",
+            "DOOM 2016",
+            "DOOM Eternal"
+        ]
+    },
+    {
+        "id": "game-borderlands-3",
+        "title": "Borderlands 3",
+        "type": "Игра",
+        "year": 2019,
+        "rating": 8.2,
+        "votes": 400000,
+        "genres": [
+            "Лутер-шутер",
+            "Кооператив",
+            "Постапокалипсис"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🤝 Кооп",
+            "💥 Лут"
+        ],
+        "relatedMedia": [
+            "Borderlands"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/397540/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/397540/Borderlands_3/"
+        },
+        "description": "Borderlands — игровая безумная вселенная с экранизацией.",
+        "playAfterWatch": [
+            "Borderlands 2",
+            "Borderlands 3",
+            "Tiny Tina’s Wonderlands"
+        ],
+        "chronology": [
+            "Borderlands",
+            "Borderlands 2",
+            "Borderlands: The Pre-Sequel",
+            "Borderlands 3",
+            "Borderlands фильм"
+        ],
+        "similarGames": [
+            "Destiny 2",
+            "Warframe",
+            "Rage 2"
+        ],
+        "similarMedia": [
+            "Guardians of the Galaxy",
+            "Mad Max: Fury Road"
+        ],
+        "vibe": [
+            "хаос",
+            "лут",
+            "пушки"
+        ],
+        "universe": {
+            "name": "Borderlands",
+            "games": [
+                "Borderlands",
+                "Borderlands 2",
+                "The Pre-Sequel",
+                "Borderlands 3"
+            ],
+            "movies": [
+                "Borderlands"
+            ]
+        },
+        "watchOrder": [
+            "Borderlands"
+        ],
+        "playOrder": [
+            "Borderlands",
+            "Borderlands 2",
+            "Borderlands: The Pre-Sequel",
+            "Borderlands 3",
+            "Borderlands фильм"
+        ]
+    },
+    {
+        "id": "game-minecraft",
+        "title": "Minecraft",
+        "type": "Игра",
+        "year": 2011,
+        "rating": 9.0,
+        "votes": 1100000,
+        "genres": [
+            "Песочница",
+            "Выживание",
+            "Креатив"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🧱 Песочница",
+            "👨‍👩‍👧 Семейное"
+        ],
+        "relatedMedia": [
+            "A Minecraft Movie"
+        ],
+        "poster": "",
+        "stores": {},
+        "description": "Minecraft — огромная игровая вселенная с киноадаптацией.",
+        "playAfterWatch": [
+            "Minecraft",
+            "Minecraft Dungeons"
+        ],
+        "chronology": [
+            "Minecraft",
+            "Minecraft Dungeons",
+            "Minecraft Legends",
+            "A Minecraft Movie"
+        ],
+        "similarGames": [
+            "Terraria",
+            "Roblox",
+            "LEGO Worlds"
+        ],
+        "similarMedia": [
+            "The LEGO Movie",
+            "A Minecraft Movie"
+        ],
+        "vibe": [
+            "кубы",
+            "строительство",
+            "выживание"
+        ],
+        "universe": {
+            "name": "Minecraft",
+            "games": [
+                "Minecraft",
+                "Minecraft Dungeons",
+                "Minecraft Legends"
+            ],
+            "movies": [
+                "A Minecraft Movie"
+            ]
+        },
+        "watchOrder": [
+            "A Minecraft Movie"
+        ],
+        "playOrder": [
+            "Minecraft",
+            "Minecraft Dungeons",
+            "Minecraft Legends",
+            "A Minecraft Movie"
+        ]
+    },
+    {
+        "id": "game-gran-turismo-7",
+        "title": "Gran Turismo 7",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.0,
+        "votes": 210000,
+        "genres": [
+            "Гонки",
+            "Симулятор"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🏎 Гонки",
+            "🎯 Реальная история"
+        ],
+        "relatedMedia": [
+            "Gran Turismo"
+        ],
+        "poster": "",
+        "stores": {},
+        "description": "Gran Turismo — гоночная серия, вокруг которой снят фильм про путь игрока в реальный спорт.",
+        "playAfterWatch": [
+            "Gran Turismo 7"
+        ],
+        "chronology": [
+            "Gran Turismo серия",
+            "Gran Turismo фильм"
+        ],
+        "similarGames": [
+            "Forza Motorsport",
+            "F1 24",
+            "Assetto Corsa Competizione"
+        ],
+        "similarMedia": [
+            "Ford v Ferrari",
+            "Rush",
+            "Gran Turismo"
+        ],
+        "vibe": [
+            "гонки",
+            "скорость",
+            "спорт"
+        ],
+        "universe": {
+            "name": "Gran Turismo",
+            "games": [
+                "Gran Turismo серия",
+                "Gran Turismo 7"
+            ],
+            "movies": [
+                "Gran Turismo"
+            ]
+        },
+        "watchOrder": [
+            "Gran Turismo"
+        ],
+        "playOrder": [
+            "Gran Turismo серия",
+            "Gran Turismo фильм"
+        ]
+    },
+    {
+        "id": "game-twisted-metal",
+        "title": "Twisted Metal",
+        "type": "Игра",
+        "year": 2012,
+        "rating": 7.5,
+        "votes": 150000,
+        "genres": [
+            "Аркадные гонки",
+            "Экшен"
+        ],
+        "relation": "game_to_series",
+        "relationLabel": "игра → сериал",
+        "badges": [
+            "📺 Есть сериал",
+            "🚗 Разрушения",
+            "🤡 Безумие"
+        ],
+        "relatedMedia": [
+            "Twisted Metal"
+        ],
+        "poster": "",
+        "stores": {},
+        "description": "Twisted Metal — игровая серия про автохаос, получившая сериал.",
+        "playAfterWatch": [
+            "Twisted Metal"
+        ],
+        "chronology": [
+            "Twisted Metal серия",
+            "Twisted Metal сериал"
+        ],
+        "similarGames": [
+            "Carmageddon",
+            "Wreckfest",
+            "Mad Max"
+        ],
+        "similarMedia": [
+            "Mad Max: Fury Road",
+            "Twisted Metal"
+        ],
+        "vibe": [
+            "хаос",
+            "машины",
+            "постапок"
+        ],
+        "universe": {
+            "name": "Twisted Metal",
+            "games": [
+                "Twisted Metal серия"
+            ],
+            "series": [
+                "Twisted Metal"
+            ]
+        },
+        "watchOrder": [
+            "Twisted Metal"
+        ],
+        "playOrder": [
+            "Twisted Metal серия",
+            "Twisted Metal сериал"
+        ]
+    },
+    {
+        "id": "game-max-payne-3",
+        "title": "Max Payne 3",
+        "type": "Игра",
+        "year": 2012,
+        "rating": 8.7,
+        "votes": 290000,
+        "genres": [
+            "Шутер",
+            "Ну noir",
+            "Драма"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🕶 Noir",
+            "🔫 Bullet time"
+        ],
+        "relatedMedia": [
+            "Max Payne"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/204100/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/204100/Max_Payne_3/"
+        },
+        "description": "Max Payne — мрачная игровая серия с киноадаптацией.",
+        "playAfterWatch": [
+            "Max Payne",
+            "Max Payne 2",
+            "Max Payne 3"
+        ],
+        "chronology": [
+            "Max Payne",
+            "Max Payne 2",
+            "Max Payne фильм",
+            "Max Payne 3"
+        ],
+        "similarGames": [
+            "Alan Wake 2",
+            "Control",
+            "Mafia"
+        ],
+        "similarMedia": [
+            "John Wick",
+            "Sin City",
+            "Max Payne"
+        ],
+        "vibe": [
+            "noir",
+            "месть",
+            "замедление"
+        ],
+        "universe": {
+            "name": "Max Payne",
+            "games": [
+                "Max Payne",
+                "Max Payne 2",
+                "Max Payne 3"
+            ],
+            "movies": [
+                "Max Payne"
+            ]
+        },
+        "watchOrder": [
+            "Max Payne"
+        ],
+        "playOrder": [
+            "Max Payne",
+            "Max Payne 2",
+            "Max Payne фильм",
+            "Max Payne 3"
+        ]
+    },
+    {
+        "id": "game-hitman-woa",
+        "title": "HITMAN World of Assassination",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.8,
+        "votes": 360000,
+        "genres": [
+            "Стелс",
+            "Песочница",
+            "Экшен"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы",
+        "badges": [
+            "🎬 Есть фильмы",
+            "🕵️ Стелс",
+            "🎯 Убийца"
+        ],
+        "relatedMedia": [
+            "Hitman",
+            "Hitman: Agent 47"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1659040/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1659040/HITMAN_World_of_Assassination/"
+        },
+        "description": "Hitman — игра про Агента 47 с несколькими фильмами.",
+        "playAfterWatch": [
+            "HITMAN World of Assassination"
+        ],
+        "chronology": [
+            "Hitman: Codename 47",
+            "Blood Money",
+            "Absolution",
+            "HITMAN Trilogy",
+            "Hitman фильмы"
+        ],
+        "similarGames": [
+            "Splinter Cell",
+            "Dishonored",
+            "Sniper Elite"
+        ],
+        "similarMedia": [
+            "John Wick",
+            "The Killer",
+            "Hitman"
+        ],
+        "vibe": [
+            "стелс",
+            "контракты",
+            "агент"
+        ],
+        "universe": {
+            "name": "Hitman",
+            "games": [
+                "Hitman серия",
+                "HITMAN World of Assassination"
+            ],
+            "movies": [
+                "Hitman",
+                "Hitman: Agent 47"
+            ]
+        },
+        "watchOrder": [
+            "Hitman",
+            "Hitman: Agent 47"
+        ],
+        "playOrder": [
+            "Hitman: Codename 47",
+            "Blood Money",
+            "Absolution",
+            "HITMAN Trilogy",
+            "Hitman фильмы"
+        ]
+    },
+    {
+        "id": "game-far-cry-3",
+        "title": "Far Cry 3",
+        "type": "Игра",
+        "year": 2012,
+        "rating": 8.8,
+        "votes": 430000,
+        "genres": [
+            "Шутер",
+            "Открытый мир",
+            "Тропики"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🌴 Остров",
+            "🧠 Безумие"
+        ],
+        "relatedMedia": [
+            "Far Cry"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/220240/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/220240/Far_Cry_3/"
+        },
+        "description": "Far Cry — серия шутеров с экранизацией и сильным вайбом выживания.",
+        "playAfterWatch": [
+            "Far Cry 3",
+            "Far Cry 4",
+            "Far Cry 5",
+            "Far Cry 6"
+        ],
+        "chronology": [
+            "Far Cry",
+            "Far Cry 2",
+            "Far Cry 3",
+            "Far Cry фильм"
+        ],
+        "similarGames": [
+            "Crysis",
+            "Just Cause 3",
+            "Ghost Recon Wildlands"
+        ],
+        "similarMedia": [
+            "Apocalypse Now",
+            "Predator",
+            "Far Cry"
+        ],
+        "vibe": [
+            "остров",
+            "безумие",
+            "выживание"
+        ],
+        "universe": {
+            "name": "Far Cry",
+            "games": [
+                "Far Cry",
+                "Far Cry 2",
+                "Far Cry 3",
+                "Far Cry 4",
+                "Far Cry 5",
+                "Far Cry 6"
+            ],
+            "movies": [
+                "Far Cry"
+            ]
+        },
+        "watchOrder": [
+            "Far Cry"
+        ],
+        "playOrder": [
+            "Far Cry",
+            "Far Cry 2",
+            "Far Cry 3",
+            "Far Cry фильм"
+        ]
+    },
+    {
+        "id": "game-tekken-8",
+        "title": "TEKKEN 8",
+        "type": "Игра",
+        "year": 2024,
+        "rating": 8.5,
+        "votes": 220000,
+        "genres": [
+            "Файтинг",
+            "Турнир"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы / аниме",
+        "badges": [
+            "🎬 Есть фильм",
+            "🥊 Файтинг",
+            "🔥 Турнир"
+        ],
+        "relatedMedia": [
+            "Tekken",
+            "Tekken: Bloodline"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1778820/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1778820/TEKKEN_8/"
+        },
+        "description": "Tekken — файтинг-вселенная с фильмами и аниме.",
+        "playAfterWatch": [
+            "TEKKEN 8",
+            "Tekken 7"
+        ],
+        "chronology": [
+            "Tekken 3",
+            "Tekken 5",
+            "Tekken 7",
+            "TEKKEN 8",
+            "Tekken: Bloodline"
+        ],
+        "similarGames": [
+            "Mortal Kombat 1",
+            "Street Fighter 6",
+            "Soulcalibur VI"
+        ],
+        "similarMedia": [
+            "Bloodsport",
+            "Mortal Kombat",
+            "Tekken: Bloodline"
+        ],
+        "vibe": [
+            "турнир",
+            "семья",
+            "драки"
+        ],
+        "universe": {
+            "name": "Tekken",
+            "games": [
+                "Tekken серия",
+                "Tekken 7",
+                "TEKKEN 8"
+            ],
+            "movies": [
+                "Tekken"
+            ],
+            "anime": [
+                "Tekken: Bloodline"
+            ]
+        },
+        "watchOrder": [
+            "Tekken",
+            "Tekken: Bloodline"
+        ],
+        "playOrder": [
+            "Tekken 3",
+            "Tekken 5",
+            "Tekken 7",
+            "TEKKEN 8",
+            "Tekken: Bloodline"
+        ]
+    },
+    {
+        "id": "game-street-fighter-6",
+        "title": "Street Fighter 6",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.6,
+        "votes": 260000,
+        "genres": [
+            "Файтинг",
+            "Аркада"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы / анимация",
+        "badges": [
+            "🎬 Есть фильмы",
+            "🥊 Файтинг",
+            "🌍 Турнир"
+        ],
+        "relatedMedia": [
+            "Street Fighter",
+            "Street Fighter II: The Animated Movie"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1364780/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1364780/Street_Fighter_6/"
+        },
+        "description": "Street Fighter — классика файтингов с кино и анимацией.",
+        "playAfterWatch": [
+            "Street Fighter 6"
+        ],
+        "chronology": [
+            "Street Fighter II",
+            "Street Fighter IV",
+            "Street Fighter V",
+            "Street Fighter 6"
+        ],
+        "similarGames": [
+            "Tekken 8",
+            "Mortal Kombat 1",
+            "King of Fighters XV"
+        ],
+        "similarMedia": [
+            "Bloodsport",
+            "Street Fighter"
+        ],
+        "vibe": [
+            "аркада",
+            "бойцы",
+            "турнир"
+        ],
+        "universe": {
+            "name": "Street Fighter",
+            "games": [
+                "Street Fighter серия",
+                "Street Fighter 6"
+            ],
+            "movies": [
+                "Street Fighter"
+            ],
+            "animation": [
+                "Street Fighter II: The Animated Movie"
+            ]
+        },
+        "watchOrder": [
+            "Street Fighter",
+            "Street Fighter II: The Animated Movie"
+        ],
+        "playOrder": [
+            "Street Fighter II",
+            "Street Fighter IV",
+            "Street Fighter V",
+            "Street Fighter 6"
+        ]
+    },
+    {
+        "id": "game-final-fantasy-vii-remake",
+        "title": "Final Fantasy VII Remake Intergrade",
+        "type": "Игра",
+        "year": 2021,
+        "rating": 9.0,
+        "votes": 520000,
+        "genres": [
+            "JRPG",
+            "Фэнтези",
+            "Sci-Fi"
+        ],
+        "relation": "game_to_animation",
+        "relationLabel": "игра → фильм / анимация",
+        "badges": [
+            "🎬 Есть фильм",
+            "✨ JRPG",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "Final Fantasy VII: Advent Children"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1462040/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1462040/FINAL_FANTASY_VII_REMAKE_INTERGRADE/"
+        },
+        "description": "Final Fantasy VII — отдельная крупная вселенная с фильмом Advent Children.",
+        "playAfterWatch": [
+            "Final Fantasy VII Remake",
+            "Final Fantasy VII Rebirth"
+        ],
+        "chronology": [
+            "Final Fantasy VII",
+            "Crisis Core",
+            "Advent Children",
+            "Remake",
+            "Rebirth"
+        ],
+        "similarGames": [
+            "Persona 5 Royal",
+            "Tales of Arise",
+            "NieR:Automata"
+        ],
+        "similarMedia": [
+            "Final Fantasy VII: Advent Children",
+            "Akira по вайбу"
+        ],
+        "vibe": [
+            "магия",
+            "технофэнтези",
+            "команда"
+        ],
+        "universe": {
+            "name": "Final Fantasy VII",
+            "games": [
+                "Final Fantasy VII",
+                "Crisis Core",
+                "FFVII Remake",
+                "FFVII Rebirth"
+            ],
+            "animation": [
+                "Final Fantasy VII: Advent Children"
+            ]
+        },
+        "watchOrder": [
+            "Final Fantasy VII: Advent Children"
+        ],
+        "playOrder": [
+            "Final Fantasy VII",
+            "Crisis Core",
+            "Advent Children",
+            "Remake",
+            "Rebirth"
+        ]
+    },
+    {
+        "id": "game-persona-5-royal",
+        "title": "Persona 5 Royal",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 9.3,
+        "votes": 400000,
+        "genres": [
+            "JRPG",
+            "Аниме",
+            "Школа"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → аниме",
+        "badges": [
+            "📺 Есть аниме",
+            "🎭 Стиль",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "Persona 5: The Animation"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1687950/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1687950/Persona_5_Royal/"
+        },
+        "description": "Persona 5 — стильная JRPG с аниме-адаптацией.",
+        "playAfterWatch": [
+            "Persona 5 Royal",
+            "Persona 5 Strikers"
+        ],
+        "chronology": [
+            "Persona 5",
+            "Persona 5 Royal",
+            "Persona 5: The Animation",
+            "Persona 5 Strikers"
+        ],
+        "similarGames": [
+            "Shin Megami Tensei V",
+            "Yakuza: Like a Dragon",
+            "Danganronpa"
+        ],
+        "similarMedia": [
+            "Death Note",
+            "Durarara!!",
+            "Persona 5: The Animation"
+        ],
+        "vibe": [
+            "стиль",
+            "школа",
+            "метавселенная"
+        ],
+        "universe": {
+            "name": "Persona 5",
+            "games": [
+                "Persona 5",
+                "Persona 5 Royal",
+                "Persona 5 Strikers"
+            ],
+            "anime": [
+                "Persona 5: The Animation"
+            ]
+        },
+        "watchOrder": [
+            "Persona 5: The Animation"
+        ],
+        "playOrder": [
+            "Persona 5",
+            "Persona 5 Royal",
+            "Persona 5: The Animation",
+            "Persona 5 Strikers"
+        ]
+    },
+    {
+        "id": "game-nier-automata",
+        "title": "NieR:Automata",
+        "type": "Игра",
+        "year": 2017,
+        "rating": 9.1,
+        "votes": 650000,
+        "genres": [
+            "JRPG",
+            "Экшен",
+            "Философия"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → аниме",
+        "badges": [
+            "📺 Есть аниме",
+            "🤖 Андроиды",
+            "🧠 Философия"
+        ],
+        "relatedMedia": [
+            "NieR:Automata Ver1.1a"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/524220/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/524220/NieRAutomata/"
+        },
+        "description": "NieR:Automata получила аниме-адаптацию и хорошо ложится в раздел “игра ↔ аниме”.",
+        "playAfterWatch": [
+            "NieR:Automata",
+            "NieR Replicant"
+        ],
+        "chronology": [
+            "NieR Replicant",
+            "NieR:Automata",
+            "NieR:Automata Ver1.1a"
+        ],
+        "similarGames": [
+            "Devil May Cry 5",
+            "Bayonetta",
+            "Metal Gear Rising"
+        ],
+        "similarMedia": [
+            "Ghost in the Shell",
+            "Ergo Proxy",
+            "NieR:Automata Ver1.1a"
+        ],
+        "vibe": [
+            "андроиды",
+            "меланхолия",
+            "постапок"
+        ],
+        "universe": {
+            "name": "NieR",
+            "games": [
+                "NieR Replicant",
+                "NieR:Automata"
+            ],
+            "anime": [
+                "NieR:Automata Ver1.1a"
+            ]
+        },
+        "watchOrder": [
+            "NieR:Automata Ver1.1a"
+        ],
+        "playOrder": [
+            "NieR Replicant",
+            "NieR:Automata",
+            "NieR:Automata Ver1.1a"
+        ]
+    },
+    {
+        "id": "game-dragon-age-inquisition",
+        "title": "Dragon Age: Inquisition",
+        "type": "Игра",
+        "year": 2014,
+        "rating": 8.6,
+        "votes": 320000,
+        "genres": [
+            "RPG",
+            "Фэнтези",
+            "Партия"
+        ],
+        "relation": "game_to_animation",
+        "relationLabel": "игра → мультсериал",
+        "badges": [
+            "📺 Есть мультсериал",
+            "🐉 Фэнтези",
+            "🧙 Магия"
+        ],
+        "relatedMedia": [
+            "Dragon Age: Absolution"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1222690/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1222690/Dragon_Age_Inquisition/"
+        },
+        "description": "Dragon Age — фэнтези-вселенная BioWare с анимацией.",
+        "playAfterWatch": [
+            "Dragon Age: Origins",
+            "Dragon Age II",
+            "Dragon Age: Inquisition"
+        ],
+        "chronology": [
+            "Dragon Age: Origins",
+            "Dragon Age II",
+            "Inquisition",
+            "Absolution"
+        ],
+        "similarGames": [
+            "Baldur’s Gate 3",
+            "The Witcher 3",
+            "Divinity: Original Sin 2"
+        ],
+        "similarMedia": [
+            "The Witcher",
+            "Castlevania",
+            "Dragon Age: Absolution"
+        ],
+        "vibe": [
+            "магия",
+            "драконы",
+            "партия"
+        ],
+        "universe": {
+            "name": "Dragon Age",
+            "games": [
+                "Origins",
+                "Dragon Age II",
+                "Inquisition",
+                "Veilguard"
+            ],
+            "animation": [
+                "Dragon Age: Absolution"
+            ]
+        },
+        "watchOrder": [
+            "Dragon Age: Absolution"
+        ],
+        "playOrder": [
+            "Dragon Age: Origins",
+            "Dragon Age II",
+            "Inquisition",
+            "Absolution"
+        ]
+    },
+    {
+        "id": "game-mass-effect-legendary",
+        "title": "Mass Effect Legendary Edition",
+        "type": "Игра",
+        "year": 2021,
+        "rating": 9.2,
+        "votes": 500000,
+        "genres": [
+            "RPG",
+            "Sci-Fi",
+            "Космос"
+        ],
+        "relation": "vibe_media",
+        "relationLabel": "игра ↔ кино-вайб",
+        "badges": [
+            "🚀 Sci-Fi",
+            "🌌 Космос",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "The Expanse",
+            "Star Trek",
+            "Battlestar Galactica"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1328670/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1328670/Mass_Effect_Legendary_Edition/"
+        },
+        "description": "Mass Effect пока лучше работает как кино-вайб: космос, команда, выборы и большая sci-fi вселенная.",
+        "playAfterWatch": [
+            "Mass Effect Legendary Edition",
+            "Mass Effect Andromeda"
+        ],
+        "chronology": [
+            "Mass Effect",
+            "Mass Effect 2",
+            "Mass Effect 3",
+            "Andromeda"
+        ],
+        "similarGames": [
+            "Starfield",
+            "Dragon Age: Inquisition",
+            "The Outer Worlds"
+        ],
+        "similarMedia": [
+            "The Expanse",
+            "Star Trek",
+            "Guardians of the Galaxy"
+        ],
+        "vibe": [
+            "космос",
+            "команда",
+            "выбор"
+        ],
+        "universe": {
+            "name": "Mass Effect",
+            "games": [
+                "Mass Effect",
+                "Mass Effect 2",
+                "Mass Effect 3",
+                "Andromeda"
+            ],
+            "movies": [
+                "Guardians of the Galaxy по вайбу"
+            ],
+            "series": [
+                "The Expanse по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "The Expanse",
+            "Star Trek",
+            "Battlestar Galactica"
+        ],
+        "playOrder": [
+            "Mass Effect",
+            "Mass Effect 2",
+            "Mass Effect 3",
+            "Andromeda"
+        ]
+    },
+    {
+        "id": "game-baldurs-gate-3",
+        "title": "Baldur’s Gate 3",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 9.6,
+        "votes": 900000,
+        "genres": [
+            "RPG",
+            "D&D",
+            "Фэнтези"
+        ],
+        "relation": "vibe_media",
+        "relationLabel": "игра ↔ фэнтези-вайб",
+        "badges": [
+            "🐉 D&D",
+            "⭐ Культовая",
+            "🧙 Партия"
+        ],
+        "relatedMedia": [
+            "Dungeons & Dragons: Honor Among Thieves"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1086940/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1086940/Baldurs_Gate_3/"
+        },
+        "description": "Baldur’s Gate 3 можно связывать с D&D-фильмами и фэнтези-вайбом.",
+        "playAfterWatch": [
+            "Baldur’s Gate 3"
+        ],
+        "chronology": [
+            "Baldur’s Gate",
+            "Baldur’s Gate II",
+            "Baldur’s Gate 3"
+        ],
+        "similarGames": [
+            "Divinity: Original Sin 2",
+            "Dragon Age: Origins",
+            "Pathfinder: Wrath of the Righteous"
+        ],
+        "similarMedia": [
+            "Dungeons & Dragons: Honor Among Thieves",
+            "The Legend of Vox Machina"
+        ],
+        "vibe": [
+            "D&D",
+            "кубы",
+            "партия"
+        ],
+        "universe": {
+            "name": "Dungeons & Dragons / Baldur’s Gate",
+            "games": [
+                "Baldur’s Gate",
+                "Baldur’s Gate II",
+                "Baldur’s Gate 3"
+            ],
+            "movies": [
+                "Dungeons & Dragons: Honor Among Thieves"
+            ],
+            "animation": [
+                "The Legend of Vox Machina по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "Dungeons & Dragons: Honor Among Thieves"
+        ],
+        "playOrder": [
+            "Baldur’s Gate",
+            "Baldur’s Gate II",
+            "Baldur’s Gate 3"
+        ]
+    },
+    {
+        "id": "game-elden-ring",
+        "title": "Elden Ring",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 9.4,
+        "votes": 850000,
+        "genres": [
+            "Souls-like",
+            "Фэнтези",
+            "Открытый мир"
+        ],
+        "relation": "vibe_media",
+        "relationLabel": "игра ↔ тёмное фэнтези",
+        "badges": [
+            "🐉 Тёмное фэнтези",
+            "⭐ Культовая",
+            "⚔️ Боссфайт"
+        ],
+        "relatedMedia": [
+            "Berserk",
+            "Game of Thrones"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1245620/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1245620/ELDEN_RING/"
+        },
+        "description": "Elden Ring хорошо работает через вайб: тёмное фэнтези, боссы, лор и разрушенный мир.",
+        "playAfterWatch": [
+            "Elden Ring",
+            "Shadow of the Erdtree"
+        ],
+        "chronology": [
+            "Elden Ring",
+            "Shadow of the Erdtree"
+        ],
+        "similarGames": [
+            "Dark Souls III",
+            "Sekiro",
+            "Lords of the Fallen"
+        ],
+        "similarMedia": [
+            "Berserk",
+            "Game of Thrones",
+            "The Green Knight"
+        ],
+        "vibe": [
+            "мрак",
+            "боссы",
+            "лор"
+        ],
+        "universe": {
+            "name": "Elden Ring",
+            "games": [
+                "Elden Ring",
+                "Shadow of the Erdtree"
+            ],
+            "movies": [
+                "Berserk / Game of Thrones по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "Berserk",
+            "Game of Thrones"
+        ],
+        "playOrder": [
+            "Elden Ring",
+            "Shadow of the Erdtree"
+        ]
+    },
+    {
+        "id": "game-star-wars-jedi-survivor",
+        "title": "Star Wars Jedi: Survivor",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.5,
+        "votes": 300000,
+        "genres": [
+            "Экшен",
+            "Star Wars",
+            "Приключение"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм/сериал → игра",
+        "badges": [
+            "🎬 По кино-вселенной",
+            "⚔️ Джедаи",
+            "🚀 Космос"
+        ],
+        "relatedMedia": [
+            "Star Wars",
+            "Obi-Wan Kenobi",
+            "Andor"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1774580/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1774580/STAR_WARS_Jedi_Survivor/"
+        },
+        "description": "Star Wars — пример обратной связи: кино-вселенная → игры.",
+        "playAfterWatch": [
+            "Jedi: Fallen Order",
+            "Jedi: Survivor"
+        ],
+        "chronology": [
+            "Episode III",
+            "Jedi: Fallen Order",
+            "Jedi: Survivor",
+            "Andor",
+            "Obi-Wan Kenobi"
+        ],
+        "similarGames": [
+            "Battlefront II",
+            "Knights of the Old Republic",
+            "The Force Unleashed"
+        ],
+        "similarMedia": [
+            "Star Wars",
+            "Andor",
+            "The Mandalorian"
+        ],
+        "vibe": [
+            "джедаи",
+            "космос",
+            "сила"
+        ],
+        "universe": {
+            "name": "Star Wars",
+            "games": [
+                "KOTOR",
+                "Jedi: Fallen Order",
+                "Jedi: Survivor",
+                "Battlefront"
+            ],
+            "movies": [
+                "Star Wars Episodes"
+            ],
+            "series": [
+                "Andor",
+                "The Mandalorian",
+                "Obi-Wan Kenobi"
+            ]
+        },
+        "watchOrder": [
+            "Star Wars",
+            "Obi-Wan Kenobi",
+            "Andor"
+        ],
+        "playOrder": [
+            "Episode III",
+            "Jedi: Fallen Order",
+            "Jedi: Survivor",
+            "Andor",
+            "Obi-Wan Kenobi"
+        ]
+    },
+    {
+        "id": "game-batman-arkham-knight",
+        "title": "Batman: Arkham Knight",
+        "type": "Игра",
+        "year": 2015,
+        "rating": 8.9,
+        "votes": 520000,
+        "genres": [
+            "Экшен",
+            "Супергерои",
+            "Детектив"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "комикс/фильм → игра",
+        "badges": [
+            "🦇 Batman",
+            "🎬 Кино-вселенная",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "Batman",
+            "The Dark Knight",
+            "Batman: The Animated Series"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/208650/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/208650/Batman_Arkham_Knight/"
+        },
+        "description": "Batman Arkham — игровая ветка большой DC-вселенной.",
+        "playAfterWatch": [
+            "Arkham Asylum",
+            "Arkham City",
+            "Arkham Knight"
+        ],
+        "chronology": [
+            "Arkham Origins",
+            "Arkham Asylum",
+            "Arkham City",
+            "Arkham Knight"
+        ],
+        "similarGames": [
+            "Marvel’s Spider-Man",
+            "Middle-earth: Shadow of War",
+            "Mad Max"
+        ],
+        "similarMedia": [
+            "The Dark Knight",
+            "Batman Begins",
+            "Batman: The Animated Series"
+        ],
+        "vibe": [
+            "ночь",
+            "детектив",
+            "супергерой"
+        ],
+        "universe": {
+            "name": "Batman / Arkham",
+            "games": [
+                "Arkham Origins",
+                "Asylum",
+                "City",
+                "Knight"
+            ],
+            "movies": [
+                "Batman Begins",
+                "The Dark Knight",
+                "The Batman"
+            ],
+            "animation": [
+                "Batman: The Animated Series"
+            ]
+        },
+        "watchOrder": [
+            "Batman",
+            "The Dark Knight",
+            "Batman: The Animated Series"
+        ],
+        "playOrder": [
+            "Arkham Origins",
+            "Arkham Asylum",
+            "Arkham City",
+            "Arkham Knight"
+        ]
+    },
+    {
+        "id": "game-spider-man-remastered",
+        "title": "Marvel’s Spider-Man Remastered",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.8,
+        "votes": 420000,
+        "genres": [
+            "Экшен",
+            "Супергерои",
+            "Открытый мир"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "комикс/фильм → игра",
+        "badges": [
+            "🕷 Spider-Man",
+            "🎬 Кино-вселенная",
+            "🌆 Нью-Йорк"
+        ],
+        "relatedMedia": [
+            "Spider-Man",
+            "Spider-Man: Into the Spider-Verse"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1817070/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1817070/Marvels_SpiderMan_Remastered/"
+        },
+        "description": "Spider-Man — игровая часть большой Marvel-вселенной.",
+        "playAfterWatch": [
+            "Marvel’s Spider-Man",
+            "Miles Morales",
+            "Spider-Man 2"
+        ],
+        "chronology": [
+            "Spider-Man Remastered",
+            "Miles Morales",
+            "Spider-Man 2"
+        ],
+        "similarGames": [
+            "Batman: Arkham Knight",
+            "Sunset Overdrive",
+            "Infamous Second Son"
+        ],
+        "similarMedia": [
+            "Spider-Man 2",
+            "Into the Spider-Verse",
+            "No Way Home"
+        ],
+        "vibe": [
+            "паутина",
+            "город",
+            "супергерой"
+        ],
+        "universe": {
+            "name": "Spider-Man",
+            "games": [
+                "Spider-Man Remastered",
+                "Miles Morales",
+                "Spider-Man 2"
+            ],
+            "movies": [
+                "Spider-Man фильмы",
+                "Spider-Verse"
+            ]
+        },
+        "watchOrder": [
+            "Spider-Man",
+            "Spider-Man: Into the Spider-Verse"
+        ],
+        "playOrder": [
+            "Spider-Man Remastered",
+            "Miles Morales",
+            "Spider-Man 2"
+        ]
+    },
+    {
+        "id": "game-hogwarts-legacy",
+        "title": "Hogwarts Legacy",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.7,
+        "votes": 600000,
+        "genres": [
+            "RPG",
+            "Магия",
+            "Открытый мир"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм/книга → игра",
+        "badges": [
+            "🪄 Harry Potter",
+            "🎬 Кино-вселенная",
+            "🏰 Хогвартс"
+        ],
+        "relatedMedia": [
+            "Harry Potter",
+            "Fantastic Beasts"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/990080/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/990080/Hogwarts_Legacy/"
+        },
+        "description": "Hogwarts Legacy — игра по вселенной Harry Potter.",
+        "playAfterWatch": [
+            "Hogwarts Legacy"
+        ],
+        "chronology": [
+            "Fantastic Beasts эпоха",
+            "Hogwarts Legacy",
+            "Harry Potter фильмы"
+        ],
+        "similarGames": [
+            "The Witcher 3",
+            "Dragon Age: Inquisition",
+            "Baldur’s Gate 3"
+        ],
+        "similarMedia": [
+            "Harry Potter",
+            "Fantastic Beasts"
+        ],
+        "vibe": [
+            "магия",
+            "школа",
+            "замок"
+        ],
+        "universe": {
+            "name": "Wizarding World",
+            "games": [
+                "Hogwarts Legacy"
+            ],
+            "movies": [
+                "Harry Potter",
+                "Fantastic Beasts"
+            ]
+        },
+        "watchOrder": [
+            "Harry Potter",
+            "Fantastic Beasts"
+        ],
+        "playOrder": [
+            "Fantastic Beasts эпоха",
+            "Hogwarts Legacy",
+            "Harry Potter фильмы"
+        ]
+    },
+    {
+        "id": "game-middle-earth-shadow-of-war",
+        "title": "Middle-earth: Shadow of War",
+        "type": "Игра",
+        "year": 2017,
+        "rating": 8.3,
+        "votes": 350000,
+        "genres": [
+            "Экшен",
+            "Фэнтези",
+            "Открытый мир"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "книга/фильм → игра",
+        "badges": [
+            "💍 LOTR",
+            "🎬 Кино-вселенная",
+            "⚔️ Орки"
+        ],
+        "relatedMedia": [
+            "The Lord of the Rings",
+            "The Hobbit"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/356190/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/356190/Middleearth_Shadow_of_War/"
+        },
+        "description": "Middle-earth — игры по миру Tolkien и кинотрилогиям.",
+        "playAfterWatch": [
+            "Shadow of Mordor",
+            "Shadow of War"
+        ],
+        "chronology": [
+            "The Hobbit",
+            "Shadow of Mordor",
+            "Shadow of War",
+            "The Lord of the Rings"
+        ],
+        "similarGames": [
+            "Assassin’s Creed Odyssey",
+            "The Witcher 3",
+            "Dragon Age"
+        ],
+        "similarMedia": [
+            "The Lord of the Rings",
+            "The Hobbit",
+            "Rings of Power"
+        ],
+        "vibe": [
+            "орки",
+            "кольцо",
+            "фэнтези"
+        ],
+        "universe": {
+            "name": "Middle-earth",
+            "games": [
+                "Shadow of Mordor",
+                "Shadow of War"
+            ],
+            "movies": [
+                "The Lord of the Rings",
+                "The Hobbit"
+            ],
+            "series": [
+                "Rings of Power"
+            ]
+        },
+        "watchOrder": [
+            "The Lord of the Rings",
+            "The Hobbit"
+        ],
+        "playOrder": [
+            "The Hobbit",
+            "Shadow of Mordor",
+            "Shadow of War",
+            "The Lord of the Rings"
+        ]
+    },
+    {
+        "id": "game-jurassic-world-evolution-2",
+        "title": "Jurassic World Evolution 2",
+        "type": "Игра",
+        "year": 2021,
+        "rating": 8.0,
+        "votes": 180000,
+        "genres": [
+            "Стратегия",
+            "Динозавры",
+            "Парк"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🦖 Jurassic",
+            "🎬 Кино-вселенная",
+            "🏗 Менеджмент"
+        ],
+        "relatedMedia": [
+            "Jurassic Park",
+            "Jurassic World"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1244460/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1244460/Jurassic_World_Evolution_2/"
+        },
+        "description": "Jurassic World Evolution — игра по франшизе Jurassic Park / Jurassic World.",
+        "playAfterWatch": [
+            "Jurassic World Evolution 2"
+        ],
+        "chronology": [
+            "Jurassic Park",
+            "Jurassic World",
+            "Jurassic World Evolution",
+            "Evolution 2"
+        ],
+        "similarGames": [
+            "Planet Zoo",
+            "Prehistoric Kingdom",
+            "Two Point Campus"
+        ],
+        "similarMedia": [
+            "Jurassic Park",
+            "Jurassic World"
+        ],
+        "vibe": [
+            "динозавры",
+            "парк",
+            "катастрофа"
+        ],
+        "universe": {
+            "name": "Jurassic Park / World",
+            "games": [
+                "Jurassic World Evolution",
+                "Evolution 2"
+            ],
+            "movies": [
+                "Jurassic Park",
+                "Jurassic World"
+            ]
+        },
+        "watchOrder": [
+            "Jurassic Park",
+            "Jurassic World"
+        ],
+        "playOrder": [
+            "Jurassic Park",
+            "Jurassic World",
+            "Jurassic World Evolution",
+            "Evolution 2"
+        ]
+    },
+    {
+        "id": "game-south-park-stick-of-truth",
+        "title": "South Park: The Stick of Truth",
+        "type": "Игра",
+        "year": 2014,
+        "rating": 8.4,
+        "votes": 240000,
+        "genres": [
+            "RPG",
+            "Комедия",
+            "Сатира"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "мультсериал → игра",
+        "badges": [
+            "📺 Мультсериал",
+            "😂 Комедия",
+            "🧻 Сатира"
+        ],
+        "relatedMedia": [
+            "South Park"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/213670/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/213670/South_Park_The_Stick_of_Truth/"
+        },
+        "description": "South Park — пример мультсериал → игра.",
+        "playAfterWatch": [
+            "The Stick of Truth",
+            "The Fractured But Whole"
+        ],
+        "chronology": [
+            "South Park сериал",
+            "The Stick of Truth",
+            "The Fractured But Whole"
+        ],
+        "similarGames": [
+            "High on Life",
+            "The Simpsons Game",
+            "Family Guy Video Game"
+        ],
+        "similarMedia": [
+            "South Park",
+            "The Simpsons"
+        ],
+        "vibe": [
+            "сатира",
+            "юмор",
+            "абсурд"
+        ],
+        "universe": {
+            "name": "South Park",
+            "games": [
+                "The Stick of Truth",
+                "The Fractured But Whole"
+            ],
+            "series": [
+                "South Park"
+            ]
+        },
+        "watchOrder": [
+            "South Park"
+        ],
+        "playOrder": [
+            "South Park сериал",
+            "The Stick of Truth",
+            "The Fractured But Whole"
+        ]
+    },
+    {
+        "id": "game-lego-star-wars",
+        "title": "LEGO Star Wars: The Skywalker Saga",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.2,
+        "votes": 330000,
+        "genres": [
+            "LEGO",
+            "Star Wars",
+            "Семейное"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Star Wars",
+            "🧱 LEGO",
+            "👨‍👩‍👧 Семейное"
+        ],
+        "relatedMedia": [
+            "Star Wars"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/920210/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/920210/LEGO_Star_Wars_The_Skywalker_Saga/"
+        },
+        "description": "LEGO Star Wars — семейная игровая версия кино-вселенной Star Wars.",
+        "playAfterWatch": [
+            "LEGO Star Wars: The Skywalker Saga"
+        ],
+        "chronology": [
+            "Star Wars Episodes I-IX",
+            "LEGO Star Wars"
+        ],
+        "similarGames": [
+            "LEGO Marvel Super Heroes",
+            "LEGO Jurassic World",
+            "Sackboy"
+        ],
+        "similarMedia": [
+            "Star Wars",
+            "The LEGO Movie"
+        ],
+        "vibe": [
+            "лего",
+            "семейное",
+            "космос"
+        ],
+        "universe": {
+            "name": "LEGO Star Wars",
+            "games": [
+                "LEGO Star Wars games"
+            ],
+            "movies": [
+                "Star Wars Episodes I-IX"
+            ]
+        },
+        "watchOrder": [
+            "Star Wars"
+        ],
+        "playOrder": [
+            "Star Wars Episodes I-IX",
+            "LEGO Star Wars"
+        ]
+    },
+    {
+        "id": "game-prince-of-persia-lost-crown",
+        "title": "Prince of Persia: The Lost Crown",
+        "type": "Игра",
+        "year": 2024,
+        "rating": 8.6,
+        "votes": 160000,
+        "genres": [
+            "Метроидвания",
+            "Экшен",
+            "Платформер"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "⚔️ Платформер",
+            "🕌 Восток"
+        ],
+        "relatedMedia": [
+            "Prince of Persia: The Sands of Time"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/2751000/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/2751000/Prince_of_Persia_The_Lost_Crown/"
+        },
+        "description": "Prince of Persia — игровая серия с фильмом The Sands of Time.",
+        "playAfterWatch": [
+            "The Lost Crown",
+            "The Sands of Time"
+        ],
+        "chronology": [
+            "Prince of Persia классика",
+            "Sands of Time",
+            "The Lost Crown",
+            "фильм"
+        ],
+        "similarGames": [
+            "Ori and the Will of the Wisps",
+            "Hollow Knight",
+            "Assassin’s Creed Mirage"
+        ],
+        "similarMedia": [
+            "Prince of Persia: The Sands of Time",
+            "Aladdin по вайбу"
+        ],
+        "vibe": [
+            "восток",
+            "паркур",
+            "время"
+        ],
+        "universe": {
+            "name": "Prince of Persia",
+            "games": [
+                "Prince of Persia классика",
+                "Sands of Time",
+                "The Lost Crown"
+            ],
+            "movies": [
+                "Prince of Persia: The Sands of Time"
+            ]
+        },
+        "watchOrder": [
+            "Prince of Persia: The Sands of Time"
+        ],
+        "playOrder": [
+            "Prince of Persia классика",
+            "Sands of Time",
+            "The Lost Crown",
+            "фильм"
+        ]
+    },
+    {
+        "id": "game-assassins-creed-mirage",
+        "title": "Assassin’s Creed Mirage",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.0,
+        "votes": 250000,
+        "genres": [
+            "Стелс",
+            "История",
+            "Паркур"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🗡 Ассасины",
+            "🏛 История"
+        ],
+        "relatedMedia": [
+            "Assassin’s Creed"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/3035570/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/search/?term=Assassin%27s%20Creed%20Mirage"
+        },
+        "description": "Assassin’s Creed — большая игровая серия с фильмом.",
+        "playAfterWatch": [
+            "Assassin’s Creed II",
+            "Black Flag",
+            "Origins",
+            "Odyssey",
+            "Mirage"
+        ],
+        "chronology": [
+            "Assassin’s Creed II",
+            "Black Flag",
+            "Origins",
+            "Odyssey",
+            "Mirage",
+            "фильм"
+        ],
+        "similarGames": [
+            "Ghost of Tsushima",
+            "Prince of Persia",
+            "Hitman"
+        ],
+        "similarMedia": [
+            "Assassin’s Creed",
+            "Kingdom of Heaven"
+        ],
+        "vibe": [
+            "история",
+            "паркур",
+            "тайный орден"
+        ],
+        "universe": {
+            "name": "Assassin’s Creed",
+            "games": [
+                "AC II",
+                "Black Flag",
+                "Origins",
+                "Odyssey",
+                "Valhalla",
+                "Mirage"
+            ],
+            "movies": [
+                "Assassin’s Creed"
+            ]
+        },
+        "watchOrder": [
+            "Assassin’s Creed"
+        ],
+        "playOrder": [
+            "Assassin’s Creed II",
+            "Black Flag",
+            "Origins",
+            "Odyssey",
+            "Mirage",
+            "фильм"
+        ]
+    },
+    {
+        "id": "game-control",
+        "title": "Control Ultimate Edition",
+        "type": "Игра",
+        "year": 2020,
+        "rating": 8.6,
+        "votes": 300000,
+        "genres": [
+            "Экшен",
+            "Паранормальное",
+            "Remedy"
+        ],
+        "relation": "vibe_media",
+        "relationLabel": "игра ↔ кино-вайб",
+        "badges": [
+            "🌀 Remedy",
+            "🧠 Паранормальное",
+            "🌌 RCU"
+        ],
+        "relatedMedia": [
+            "Alan Wake",
+            "Twin Peaks",
+            "The X-Files"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/870780/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/870780/Control_Ultimate_Edition/"
+        },
+        "description": "Control связан с Alan Wake внутри Remedy Connected Universe.",
+        "playAfterWatch": [
+            "Control",
+            "Alan Wake 2"
+        ],
+        "chronology": [
+            "Alan Wake",
+            "Control",
+            "Alan Wake 2"
+        ],
+        "similarGames": [
+            "Alan Wake 2",
+            "Quantum Break",
+            "SCP: Secret Files"
+        ],
+        "similarMedia": [
+            "Twin Peaks",
+            "The X-Files",
+            "Severance"
+        ],
+        "vibe": [
+            "паранормальное",
+            "федеральное бюро",
+            "измерения"
+        ],
+        "universe": {
+            "name": "Remedy Connected Universe",
+            "games": [
+                "Alan Wake",
+                "Control",
+                "Alan Wake 2"
+            ],
+            "series": [
+                "Twin Peaks / The X-Files по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "Alan Wake",
+            "Twin Peaks",
+            "The X-Files"
+        ],
+        "playOrder": [
+            "Alan Wake",
+            "Control",
+            "Alan Wake 2"
+        ]
+    },
+    {
+        "id": "game-avatar-frontiers-of-pandora",
+        "title": "Avatar: Frontiers of Pandora",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 7.8,
+        "votes": 180000,
+        "genres": [
+            "Открытый мир",
+            "Sci-Fi",
+            "Приключение"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Avatar",
+            "🌿 Пандора",
+            "🚀 Sci-Fi"
+        ],
+        "relatedMedia": [
+            "Avatar",
+            "Avatar: The Way of Water"
+        ],
+        "poster": "",
+        "stores": {},
+        "description": "Avatar: Frontiers of Pandora — игра по кино-вселенной Avatar.",
+        "playAfterWatch": [
+            "Avatar: Frontiers of Pandora"
+        ],
+        "chronology": [
+            "Avatar",
+            "Avatar: The Way of Water",
+            "Frontiers of Pandora"
+        ],
+        "similarGames": [
+            "Far Cry 6",
+            "Horizon Forbidden West",
+            "Crysis"
+        ],
+        "similarMedia": [
+            "Avatar",
+            "Avatar: The Way of Water"
+        ],
+        "vibe": [
+            "природа",
+            "пандора",
+            "sci-fi"
+        ],
+        "universe": {
+            "name": "Avatar",
+            "games": [
+                "Frontiers of Pandora"
+            ],
+            "movies": [
+                "Avatar",
+                "The Way of Water"
+            ]
+        },
+        "watchOrder": [
+            "Avatar",
+            "Avatar: The Way of Water"
+        ],
+        "playOrder": [
+            "Avatar",
+            "Avatar: The Way of Water",
+            "Frontiers of Pandora"
+        ]
+    },
+    {
+        "id": "game-transformers-fall-of-cybertron",
+        "title": "Transformers: Fall of Cybertron",
+        "type": "Игра",
+        "year": 2012,
+        "rating": 8.1,
+        "votes": 120000,
+        "genres": [
+            "Экшен",
+            "Роботы",
+            "Sci-Fi"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "мульт/фильм → игра",
+        "badges": [
+            "🤖 Transformers",
+            "🎬 Кино-вселенная",
+            "🚗 Роботы"
+        ],
+        "relatedMedia": [
+            "Transformers",
+            "Transformers: Prime"
+        ],
+        "poster": "",
+        "stores": {},
+        "description": "Transformers — вселенная с мультсериалами, фильмами и играми.",
+        "playAfterWatch": [
+            "War for Cybertron",
+            "Fall of Cybertron"
+        ],
+        "chronology": [
+            "Transformers G1",
+            "War for Cybertron",
+            "Fall of Cybertron",
+            "Transformers фильмы"
+        ],
+        "similarGames": [
+            "Armored Core VI",
+            "Titanfall 2",
+            "MechWarrior 5"
+        ],
+        "similarMedia": [
+            "Transformers",
+            "Bumblebee",
+            "Transformers: Prime"
+        ],
+        "vibe": [
+            "роботы",
+            "кибертрон",
+            "трансформация"
+        ],
+        "universe": {
+            "name": "Transformers",
+            "games": [
+                "War for Cybertron",
+                "Fall of Cybertron"
+            ],
+            "movies": [
+                "Transformers films"
+            ],
+            "animation": [
+                "Transformers G1",
+                "Transformers: Prime"
+            ]
+        },
+        "watchOrder": [
+            "Transformers",
+            "Transformers: Prime"
+        ],
+        "playOrder": [
+            "Transformers G1",
+            "War for Cybertron",
+            "Fall of Cybertron",
+            "Transformers фильмы"
+        ]
+    },
+    {
+        "id": "game-mad-max",
+        "title": "Mad Max",
+        "type": "Игра",
+        "year": 2015,
+        "rating": 8.0,
+        "votes": 280000,
+        "genres": [
+            "Экшен",
+            "Открытый мир",
+            "Пустошь"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Mad Max",
+            "🚗 Пустошь",
+            "💥 Экшен"
+        ],
+        "relatedMedia": [
+            "Mad Max: Fury Road",
+            "Mad Max"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/234140/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/234140/Mad_Max/"
+        },
+        "description": "Mad Max — игра по кино-вселенной постапокалипсиса.",
+        "playAfterWatch": [
+            "Mad Max"
+        ],
+        "chronology": [
+            "Mad Max фильмы",
+            "Mad Max игра",
+            "Fury Road"
+        ],
+        "similarGames": [
+            "Fallout 4",
+            "Rage 2",
+            "Days Gone"
+        ],
+        "similarMedia": [
+            "Mad Max",
+            "Fury Road",
+            "Furiosa"
+        ],
+        "vibe": [
+            "пустошь",
+            "машины",
+            "выживание"
+        ],
+        "universe": {
+            "name": "Mad Max",
+            "games": [
+                "Mad Max"
+            ],
+            "movies": [
+                "Mad Max",
+                "Fury Road",
+                "Furiosa"
+            ]
+        },
+        "watchOrder": [
+            "Mad Max: Fury Road",
+            "Mad Max"
+        ],
+        "playOrder": [
+            "Mad Max фильмы",
+            "Mad Max игра",
+            "Fury Road"
+        ]
+    },
+    {
+        "id": "game-ghostbusters-spirits-unleashed",
+        "title": "Ghostbusters: Spirits Unleashed",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 7.4,
+        "votes": 90000,
+        "genres": [
+            "Кооператив",
+            "Комедия",
+            "Охота на призраков"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Ghostbusters",
+            "👻 Кооп",
+            "😂 Комедия"
+        ],
+        "relatedMedia": [
+            "Ghostbusters"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/2383990/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/2383990/Ghostbusters_Spirits_Unleashed/"
+        },
+        "description": "Ghostbusters — фильмовая франшиза с играми.",
+        "playAfterWatch": [
+            "Ghostbusters: Spirits Unleashed"
+        ],
+        "chronology": [
+            "Ghostbusters фильмы",
+            "Ghostbusters: The Video Game",
+            "Spirits Unleashed"
+        ],
+        "similarGames": [
+            "Phasmophobia",
+            "Luigi’s Mansion",
+            "Midnight Ghost Hunt"
+        ],
+        "similarMedia": [
+            "Ghostbusters",
+            "Beetlejuice"
+        ],
+        "vibe": [
+            "призраки",
+            "команда",
+            "комедия"
+        ],
+        "universe": {
+            "name": "Ghostbusters",
+            "games": [
+                "The Video Game",
+                "Spirits Unleashed"
+            ],
+            "movies": [
+                "Ghostbusters films"
+            ]
+        },
+        "watchOrder": [
+            "Ghostbusters"
+        ],
+        "playOrder": [
+            "Ghostbusters фильмы",
+            "Ghostbusters: The Video Game",
+            "Spirits Unleashed"
+        ]
+    },
+    {
+        "id": "game-alien-isolation",
+        "title": "Alien: Isolation",
+        "type": "Игра",
+        "year": 2014,
+        "rating": 8.7,
+        "votes": 320000,
+        "genres": [
+            "Хоррор",
+            "Выживание",
+            "Sci-Fi"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Alien",
+            "👽 Хоррор",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "Alien",
+            "Aliens"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/214490/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/214490/Alien_Isolation/"
+        },
+        "description": "Alien: Isolation — один из лучших примеров фильм → игра.",
+        "playAfterWatch": [
+            "Alien: Isolation"
+        ],
+        "chronology": [
+            "Alien",
+            "Aliens",
+            "Alien: Isolation"
+        ],
+        "similarGames": [
+            "Dead Space",
+            "Resident Evil 2",
+            "SOMA"
+        ],
+        "similarMedia": [
+            "Alien",
+            "Aliens",
+            "The Thing"
+        ],
+        "vibe": [
+            "космос",
+            "чужой",
+            "выживание"
+        ],
+        "universe": {
+            "name": "Alien",
+            "games": [
+                "Alien: Isolation",
+                "Aliens: Fireteam Elite"
+            ],
+            "movies": [
+                "Alien",
+                "Aliens",
+                "Prometheus"
+            ]
+        },
+        "watchOrder": [
+            "Alien",
+            "Aliens"
+        ],
+        "playOrder": [
+            "Alien",
+            "Aliens",
+            "Alien: Isolation"
+        ]
+    },
+    {
+        "id": "game-predator-hunting-grounds",
+        "title": "Predator: Hunting Grounds",
+        "type": "Игра",
+        "year": 2020,
+        "rating": 7.2,
+        "votes": 100000,
+        "genres": [
+            "Мультиплеер",
+            "Шутер",
+            "Хищник"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Predator",
+            "👽 Охота",
+            "🔫 PvP"
+        ],
+        "relatedMedia": [
+            "Predator",
+            "Prey"
+        ],
+        "poster": "",
+        "stores": {},
+        "description": "Predator — кино-вселенная с играми про охоту.",
+        "playAfterWatch": [
+            "Predator: Hunting Grounds"
+        ],
+        "chronology": [
+            "Predator",
+            "Predator 2",
+            "Prey",
+            "Hunting Grounds"
+        ],
+        "similarGames": [
+            "Aliens: Fireteam Elite",
+            "Evolve",
+            "Dead by Daylight"
+        ],
+        "similarMedia": [
+            "Predator",
+            "Prey",
+            "Alien vs Predator"
+        ],
+        "vibe": [
+            "джунгли",
+            "охота",
+            "инопланетянин"
+        ],
+        "universe": {
+            "name": "Predator",
+            "games": [
+                "Predator: Hunting Grounds",
+                "Alien vs Predator"
+            ],
+            "movies": [
+                "Predator",
+                "Prey"
+            ]
+        },
+        "watchOrder": [
+            "Predator",
+            "Prey"
+        ],
+        "playOrder": [
+            "Predator",
+            "Predator 2",
+            "Prey",
+            "Hunting Grounds"
+        ]
+    },
+    {
+        "id": "game-robocop-rogue-city",
+        "title": "RoboCop: Rogue City",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.1,
+        "votes": 140000,
+        "genres": [
+            "Шутер",
+            "Киберпанк",
+            "Экшен"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 RoboCop",
+            "🤖 Киберпанк",
+            "🔫 Шутер"
+        ],
+        "relatedMedia": [
+            "RoboCop"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1681430/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1681430/RoboCop_Rogue_City/"
+        },
+        "description": "RoboCop: Rogue City — современный пример фильм → игра.",
+        "playAfterWatch": [
+            "RoboCop: Rogue City"
+        ],
+        "chronology": [
+            "RoboCop фильмы",
+            "Rogue City"
+        ],
+        "similarGames": [
+            "Terminator: Resistance",
+            "Cyberpunk 2077",
+            "Deus Ex"
+        ],
+        "similarMedia": [
+            "RoboCop",
+            "Terminator",
+            "Total Recall"
+        ],
+        "vibe": [
+            "киберпанк",
+            "полиция",
+            "робот"
+        ],
+        "universe": {
+            "name": "RoboCop",
+            "games": [
+                "RoboCop: Rogue City"
+            ],
+            "movies": [
+                "RoboCop films"
+            ]
+        },
+        "watchOrder": [
+            "RoboCop"
+        ],
+        "playOrder": [
+            "RoboCop фильмы",
+            "Rogue City"
+        ]
+    },
+    {
+        "id": "game-terminator-resistance",
+        "title": "Terminator: Resistance",
+        "type": "Игра",
+        "year": 2019,
+        "rating": 7.8,
+        "votes": 130000,
+        "genres": [
+            "Шутер",
+            "Sci-Fi",
+            "Постапокалипсис"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Terminator",
+            "🤖 Skynet",
+            "🔫 Шутер"
+        ],
+        "relatedMedia": [
+            "The Terminator",
+            "Terminator 2"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/954740/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/954740/Terminator_Resistance/"
+        },
+        "description": "Terminator: Resistance — игра по кино-вселенной Terminator.",
+        "playAfterWatch": [
+            "Terminator: Resistance"
+        ],
+        "chronology": [
+            "Terminator",
+            "Terminator 2",
+            "Terminator: Resistance"
+        ],
+        "similarGames": [
+            "RoboCop: Rogue City",
+            "Metro Exodus",
+            "Cyberpunk 2077"
+        ],
+        "similarMedia": [
+            "The Terminator",
+            "Terminator 2",
+            "The Matrix"
+        ],
+        "vibe": [
+            "роботы",
+            "будущее",
+            "сопротивление"
+        ],
+        "universe": {
+            "name": "Terminator",
+            "games": [
+                "Terminator: Resistance"
+            ],
+            "movies": [
+                "The Terminator",
+                "Terminator 2"
+            ]
+        },
+        "watchOrder": [
+            "The Terminator",
+            "Terminator 2"
+        ],
+        "playOrder": [
+            "Terminator",
+            "Terminator 2",
+            "Terminator: Resistance"
+        ]
+    },
+    {
+        "id": "game-blade-runner-enhanced",
+        "title": "Blade Runner: Enhanced Edition",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 7.2,
+        "votes": 70000,
+        "genres": [
+            "Квест",
+            "Киберпанк",
+            "Детектив"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Blade Runner",
+            "🌃 Киберпанк",
+            "🕵️ Детектив"
+        ],
+        "relatedMedia": [
+            "Blade Runner",
+            "Blade Runner 2049"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1678420/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1678420/Blade_Runner_Enhanced_Edition/"
+        },
+        "description": "Blade Runner — культовый фильм с игровой адаптацией и сильной связью по вайбу с Cyberpunk.",
+        "playAfterWatch": [
+            "Blade Runner: Enhanced Edition"
+        ],
+        "chronology": [
+            "Blade Runner",
+            "Blade Runner game",
+            "Blade Runner 2049"
+        ],
+        "similarGames": [
+            "Cyberpunk 2077",
+            "Deus Ex",
+            "Observer"
+        ],
+        "similarMedia": [
+            "Blade Runner",
+            "Blade Runner 2049",
+            "Ghost in the Shell"
+        ],
+        "vibe": [
+            "неон",
+            "дождь",
+            "репликанты"
+        ],
+        "universe": {
+            "name": "Blade Runner",
+            "games": [
+                "Blade Runner game"
+            ],
+            "movies": [
+                "Blade Runner",
+                "Blade Runner 2049"
+            ]
+        },
+        "watchOrder": [
+            "Blade Runner",
+            "Blade Runner 2049"
+        ],
+        "playOrder": [
+            "Blade Runner",
+            "Blade Runner game",
+            "Blade Runner 2049"
+        ]
+    },
+    {
+        "id": "game-the-walking-dead",
+        "title": "The Walking Dead: The Telltale Definitive Series",
+        "type": "Игра",
+        "year": 2020,
+        "rating": 9.0,
+        "votes": 300000,
+        "genres": [
+            "Интерактивное кино",
+            "Зомби",
+            "Драма"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "комикс/сериал → игра",
+        "badges": [
+            "📺 Есть сериал",
+            "🧟 Зомби",
+            "🎭 Драма"
+        ],
+        "relatedMedia": [
+            "The Walking Dead"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1449690/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1449690/The_Walking_Dead_The_Telltale_Definitive_Series/"
+        },
+        "description": "The Walking Dead — связка комиксов, сериала и игр Telltale.",
+        "playAfterWatch": [
+            "The Walking Dead Telltale"
+        ],
+        "chronology": [
+            "комиксы",
+            "сериал",
+            "Telltale Season 1",
+            "Season 2",
+            "A New Frontier",
+            "Final Season"
+        ],
+        "similarGames": [
+            "The Last of Us",
+            "Life is Strange",
+            "Detroit: Become Human"
+        ],
+        "similarMedia": [
+            "The Walking Dead",
+            "Train to Busan",
+            "The Last of Us"
+        ],
+        "vibe": [
+            "зомби",
+            "выбор",
+            "драма"
+        ],
+        "universe": {
+            "name": "The Walking Dead",
+            "games": [
+                "Telltale series"
+            ],
+            "series": [
+                "The Walking Dead"
+            ],
+            "movies": [
+                "зомби-кино по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "The Walking Dead"
+        ],
+        "playOrder": [
+            "комиксы",
+            "сериал",
+            "Telltale Season 1",
+            "Season 2",
+            "A New Frontier",
+            "Final Season"
+        ]
     }
-  ];
+];
 
   function txt(v) { return String(v == null ? "" : v).trim(); }
   function low(v) { return txt(v).toLowerCase(); }
@@ -5371,7 +8564,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const json = await res.json();
       gamesCache = Array.isArray(json) ? json : (json.items || []);
     } catch (err) {
-      console.warn("GKM V207: fallback games loaded", err);
+      console.warn("GKM V208: fallback games loaded", err);
       gamesCache = FALLBACK_GAMES;
     }
     gamesCache = gamesCache.map((item, index) => ({
@@ -5423,7 +8616,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     panel.className = "gkm-game-hub-panel";
     panel.innerHTML = `
       <div class="gkm-game-hub-head">
-        <div><b>🎮 Игровые вселенные V207</b><span>игра ↔ фильм / сериал / аниме / мультфильм</span></div>
+        <div><b>🎮 Игровые вселенные V208</b><span>игра ↔ фильм / сериал / аниме / мультфильм</span></div>
         <button type="button" data-gkm-game-filter-reset="1">Все игры</button>
       </div>
       <div class="gkm-game-filter-row">
@@ -5501,7 +8694,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const next = document.getElementById("nextBtn");
 
     const relLabel = (RELATION_FILTERS.find(x => x[0] === activeRelation) || ["all", "Все"])[1];
-    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " · V207 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>Steam / Epic / GOG / гайды / похожее</span>";
+    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " · V208 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>Steam / Epic / GOG / гайды / похожее</span>";
     if (grid) {
       grid.innerHTML = slice.map(cardHtml).join("");
       cardBadgesEnhance(grid);
@@ -5510,7 +8703,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (pageText) pageText.textContent = gamesPage + " / " + gamesPages;
     if (prev) prev.disabled = gamesPage <= 1;
     if (next) next.disabled = gamesPage >= gamesPages;
-    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V207 · " + rows.length + " записей");
+    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V208 · " + rows.length + " записей");
   }
 
   function injectGamesTab() {
@@ -5529,7 +8722,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function injectStyle() {
     if (document.getElementById("gkm-v207-style")) return;
     const style = document.createElement("style");
-    style.id = "gkm-v202-style";
+    style.id = "gkm-v208-style";
     style.textContent = `
       .gkm-games-tab{background:linear-gradient(135deg,rgba(0,213,255,.20),rgba(150,70,255,.30))!important;border-color:rgba(0,213,255,.55)!important;box-shadow:0 0 18px rgba(0,213,255,.18)!important;}
       .gkm-game-hub-panel{display:none;margin:10px 0 18px;padding:14px;border:1px solid rgba(0,213,255,.25);border-radius:18px;background:linear-gradient(135deg,rgba(0,213,255,.06),rgba(134,68,255,.08));box-shadow:0 16px 40px rgba(0,0,0,.22);}
@@ -5541,7 +8734,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       .gkm-game-mini-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.gkm-game-mini-badges span{display:inline-flex;padding:4px 7px;border-radius:999px;background:rgba(0,213,255,.08);border:1px solid rgba(0,213,255,.18);font-size:11px;color:#dff8ff;font-weight:800;}
       .gkm-v202-pill{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;border:1px solid rgba(0,213,255,.38);color:#c9f6ff;background:rgba(0,213,255,.08);font-size:12px;vertical-align:middle;}
       .gkm-game-links-block{border:1px solid rgba(0,213,255,.25);background:linear-gradient(135deg,rgba(0,213,255,.06),rgba(134,68,255,.08));}
-      .gkm-game-modal-section{margin-top:12px}.gkm-game-modal-title{margin:0 0 8px;color:#eaf7ff;font-weight:900}.gkm-game-chip-list{display:flex;flex-wrap:wrap;gap:8px}.gkm-game-chip-list span,.gkm-game-chip-list a{display:inline-flex;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 10px;background:rgba(255,255,255,.06);font-size:13px;color:#eaf7ff;text-decoration:none}.gkm-game-chip-list a{border-color:rgba(0,213,255,.32);background:rgba(0,213,255,.08);font-weight:800}.gkm-game-timeline{margin:0;padding-left:20px;color:#dfe8ff}.gkm-game-timeline li{margin:5px 0}.gkm-game-hint{color:#a9c5e8;font-size:13px;margin:4px 0 10px;}
+      .gkm-game-modal-section{margin-top:12px}.gkm-game-modal-title{margin:0 0 8px;color:#eaf7ff;font-weight:900}.gkm-game-chip-list{display:flex;flex-wrap:wrap;gap:8px}.gkm-game-chip-list span,.gkm-game-chip-list a{display:inline-flex;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 10px;background:rgba(255,255,255,.06);font-size:13px;color:#eaf7ff;text-decoration:none}.gkm-game-chip-list a{border-color:rgba(0,213,255,.32);background:rgba(0,213,255,.08);font-weight:800}.gkm-game-timeline{margin:0;padding-left:20px;color:#dfe8ff}.gkm-game-timeline li{margin:5px 0}.gkm-game-hint{color:#a9c5e8;font-size:13px;margin:4px 0 10px;}.gkm-game-universe-box{border:1px solid rgba(0,213,255,.22);border-radius:16px;padding:12px;background:linear-gradient(135deg,rgba(0,213,255,.07),rgba(138,44,255,.09));}.gkm-game-universe-name{font-weight:1000;color:#eaf7ff;margin-bottom:10px}.gkm-game-universe-col{margin:9px 0}.gkm-game-universe-col>b{display:block;color:#9eeaff;margin-bottom:6px;font-size:13px}
       @media(max-width:760px){.gkm-game-hub-head{display:block}.gkm-game-hub-head button{margin-top:10px}.gkm-v202-pill{display:block;margin:8px 0 0;width:max-content;max-width:100%;}.gkm-game-relation-badge{font-size:10px;padding:5px 6px;}.gkm-game-filter{font-size:12px;padding:7px 9px;}}
     `;
     document.head.appendChild(style);
@@ -5592,6 +8785,26 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     '</div>';
   }
 
+
+  function universeList(title, list) {
+    const rows = arr(list);
+    if (!rows.length) return "";
+    return '<div class="gkm-game-universe-col"><b>' + safeHtml(title) + '</b><div class="gkm-game-chip-list">' + rows.map(chip).join("") + '</div></div>';
+  }
+
+  function gameUniverseHtml(game) {
+    const u = game && game.universe && typeof game.universe === "object" ? game.universe : {};
+    const name = u.name || game.universeName || itemTitle(game);
+    const html = [
+      universeList("🎮 Игры", u.games || game.playOrder || game.chronology),
+      universeList("🎬 Фильмы", u.movies || u.films),
+      universeList("📺 Сериалы", u.series),
+      universeList("🧩 Аниме / мульт", [].concat(arr(u.anime), arr(u.animation), arr(u.cartoon)))
+    ].join("");
+    if (!html) return "";
+    return '<div class="gkm-game-universe-box"><div class="gkm-game-universe-name">🌍 ' + safeHtml(name) + '</div>' + html + '</div>';
+  }
+
   function gameModalHtml(game) {
     const title = itemTitle(game);
     const stores = [
@@ -5601,6 +8814,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     ].map(x => extLink(x[0], x[1])).join("");
     const media = chipLinks(game.relatedMedia, " смотреть");
     const play = chipLinks(game.playAfterWatch || [title], " купить игра");
+    const universe = gameUniverseHtml(game);
+    const playOrder = chipLinks(game.playOrder || game.chronology || game.playAfterWatch || [title], " порядок прохождения");
+    const watchOrder = chipLinks(game.watchOrder || game.relatedMedia, " смотреть по порядку");
     const guides = [
       extLink("▶️ Трейлер", getStoreUrl(game, "youtube")),
       extLink("🧩 Прохождение", storeSearchUrl("walkthrough", title)),
@@ -5620,6 +8836,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const vibe = arr(game.vibe).map(chip).join("");
     return [
       sectionHtml("📲 Поделиться", gameShareHtml(game), "Можно быстро кинуть карточку в Telegram или скопировать ссылку."),
+      sectionHtml("🌍 Открыть вселенную", universe, "Игры, фильмы, сериалы, аниме и мультфильмы вокруг одной франшизы."),
+      sectionHtml("🧭 Играть по порядку", '<div class="gkm-game-chip-list">' + playOrder + '</div>', "Быстрый порядок для прохождения или знакомства с серией."),
+      sectionHtml("🎬 Смотреть по порядку", '<div class="gkm-game-chip-list">' + (watchOrder || media || chip("Связи будут добавляться")) + '</div>', "Фильмы, сериалы, аниме или мультфильмы по этой вселенной."),
       sectionHtml("🛒 Где купить / где играть", '<div class="detail-buttons">' + stores + '</div>'),
       sectionHtml("🔗 Связанные фильмы / сериалы / аниме", '<div class="gkm-game-chip-list">' + (media || chip("Связи будут добавляться")) + '</div>'),
       sectionHtml("🎮 Во что играть после просмотра", '<div class="gkm-game-chip-list">' + play + '</div>', "Это главная фишка раздела: посмотрел проект — сразу видно, во что играть."),
@@ -5756,7 +8975,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 })();
-/* GKM V207 GAME HUB POLISH TELEGRAM END */
+/* GKM V208 GAME UNIVERSES EXPANSION END */
 
 
 
