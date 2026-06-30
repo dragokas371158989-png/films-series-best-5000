@@ -1,4 +1,5 @@
 [Uploading GKM_PROJECT_SCHEME_V1.md…]()
+[Uploading GKM_PROJECT_SCHEME_V1.md…]()
 [GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29503592/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
@@ -525,3 +526,7 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 - создан валидный data/fast/search_lite.json из рабочей базы
 - cache bust быстрых индексов поиска повышен до v249
 - цель: убрать ошибку Unterminated string in JSON at position 46998755
+
+## GKM V250 NORMAL HOME GRID RESTORE
+- отключена сломанная главная витрина Популярное/Топ/Новинки
+- главная снова открывает обычную сетку карточек через fast page all/page_0001.json
