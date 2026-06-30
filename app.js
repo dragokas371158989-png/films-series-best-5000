@@ -4124,7 +4124,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   window.GKM_V202_GAME_HUB_VERSION = "v211-game-collections-fast-posters-2026-06-29";
 
-  const GAMES_URL = "./data/games_catalog.json?v=241";
+  const GAMES_URL = "./data/games_catalog.json?v=242";
   const PAGE = 24;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -9147,7 +9147,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=241";
+  const BOOKS_URL = "./data/books_catalog.json?v=242";
   const BOOKS_SPLIT_URLS = ["./data/books/manga.json?v=222","./data/books/ranobe.json?v=222","./data/books/books.json?v=222","./data/books/comics.json?v=222"];
   const PAGE = 24;
   const BOOK_PAGE = 18;
@@ -10034,7 +10034,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=224",
     "./data/games/franchises.json?v=224"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=241";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=242";
   const GAME_PAGE_SIZE = 18;
   let gameDB = null;
   let gamePage = 1;
@@ -10350,7 +10350,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=226",
     "./data/games/franchises.json?v=226"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=241";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=242";
   const PAGE_SIZE = 18;
   let db = null;
   let page = 1;
@@ -10942,145 +10942,33 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
 
 
-/* GKM V241 CARTOON/ANIME/FILM TYPE + SYNOPSIS FIX START */
+/* GKM V242 SAFE LOAD RESTORE + LIGHT QUALITY FIX START */
 (function(){
-  const GKM_V241 = {"доктор стрэндж в мультивселенной безумия": {"type": "Фильм", "year": 2022, "text": "Доктор Стивен Стрэндж сталкивается с последствиями вмешательства в ткань реальности и встречает Америку Чавес — девушку, способную открывать проходы между вселенными. За её силой охотится Ванда Максимофф, пережившая личную трагедию и готовая пойти на опасные поступки ради возвращения семьи. Стрэнджу приходится путешествовать по альтернативным мирам, сталкиваться с другими версиями знакомых героев и решать, где проходит граница между спасением и разрушением. Это супергеройский фильм Marvel с магией, мультивселенной, хоррор-атмосферой и конфликтом между болью, властью и ответственностью."}, "doctor strange in the multiverse of madness": {"type": "Фильм", "year": 2022, "text": "Доктор Стивен Стрэндж сталкивается с последствиями вмешательства в ткань реальности и встречает Америку Чавес — девушку, способную открывать проходы между вселенными. За её силой охотится Ванда Максимофф, пережившая личную трагедию и готовая пойти на опасные поступки ради возвращения семьи. Стрэнджу приходится путешествовать по альтернативным мирам, сталкиваться с другими версиями знакомых героев и решать, где проходит граница между спасением и разрушением. Это супергеройский фильм Marvel с магией, мультивселенной, хоррор-атмосферой и конфликтом между болью, властью и ответственностью."}, "унесенные призраками": {"type": "Аниме", "year": 2001, "text": "Девочка Тихиро вместе с родителями случайно попадает в загадочный мир духов, богов и странных существ. Когда родители превращаются в свиней, Тихиро вынуждена работать в бане ведьмы Юбабы, чтобы выжить и найти способ вернуть семью. Постепенно она взрослеет, учится не бояться, помогает другим и открывает в себе силу, о которой раньше не знала. Это волшебное аниме Хаяо Миядзаки о взрослении, памяти, жадности, доброте и путешествии ребёнка через мир, где каждое правило нужно понять самому."}, "spirited away": {"type": "Аниме", "year": 2001, "text": "Девочка Тихиро вместе с родителями случайно попадает в загадочный мир духов, богов и странных существ. Когда родители превращаются в свиней, Тихиро вынуждена работать в бане ведьмы Юбабы, чтобы выжить и найти способ вернуть семью. Постепенно она взрослеет, учится не бояться, помогает другим и открывает в себе силу, о которой раньше не знала. Это волшебное аниме Хаяо Миядзаки о взрослении, памяти, жадности, доброте и путешествии ребёнка через мир, где каждое правило нужно понять самому."}, "человек паук через вселенные": {"type": "Мультфильм", "year": 2018, "text": "Подросток Майлз Моралес получает способности Человека-паука и оказывается втянут в историю с коллайдером, который открывает проходы между измерениями. В его мир попадают разные версии Человека-паука, и Майлзу приходится быстро понять, что герой — это не костюм и не идеальность, а готовность подняться после падения. Это яркий анимационный супергеройский фильм о взрослении, ответственности, семье и праве стать своим собственным героем."}, "spider man into the spider verse": {"type": "Мультфильм", "year": 2018, "text": "Подросток Майлз Моралес получает способности Человека-паука и оказывается втянут в историю с коллайдером, который открывает проходы между измерениями. В его мир попадают разные версии Человека-паука, и Майлзу приходится быстро понять, что герой — это не костюм и не идеальность, а готовность подняться после падения. Это яркий анимационный супергеройский фильм о взрослении, ответственности, семье и праве стать своим собственным героем."}, "ходячий замок": {"type": "Аниме", "year": 2004, "text": "Юная Софи становится жертвой проклятия и превращается в старуху. В поисках выхода она попадает в волшебный ходячий замок мага Хаула — загадочного и ранимого волшебника, который сам скрывается от войны и собственных страхов. Вместе с огненным демоном Кальцифером и странной семьёй замка Софи постепенно меняет не только свою судьбу, но и сердце Хаула. Это аниме о любви, войне, принятии себя, старении, магии и внутренней свободе."}, "howls moving castle": {"type": "Аниме", "year": 2004, "text": "Юная Софи становится жертвой проклятия и превращается в старуху. В поисках выхода она попадает в волшебный ходячий замок мага Хаула — загадочного и ранимого волшебника, который сам скрывается от войны и собственных страхов. Вместе с огненным демоном Кальцифером и странной семьёй замка Софи постепенно меняет не только свою судьбу, но и сердце Хаула. Это аниме о любви, войне, принятии себя, старении, магии и внутренней свободе."}, "в поисках немо": {"type": "Мультфильм", "year": 2003, "text": "Рыбка-клоун Марлин отправляется через океан на поиски сына Немо, которого забрали люди. В пути он встречает забывчивую, но добрую Дори и постепенно учится отпускать страх, доверять другим и верить в самостоятельность сына. Это трогательный мультфильм о семье, тревоге родителей, дружбе и большом приключении в океане."}, "корпорация монстров": {"type": "Мультфильм", "year": 2001, "text": "В мире монстров энергия города добывается из детских криков, а лучшие пугатели каждый день выходят на работу через двери в человеческий мир. Когда маленькая девочка Бу случайно попадает к монстрам, Салли и Майк понимают, что привычная система построена на страхе и лжи. Это тёплый мультфильм о дружбе, доброте и мире, где смех оказывается сильнее страха."}, "шрек": {"type": "Мультфильм", "year": 2001, "text": "Огр Шрек живёт один на болоте и не хочет связываться с людьми, но его спокойствие нарушают сказочные существа, изгнанные лордом Фаркуадом. Чтобы вернуть свой дом, Шрек отправляется спасать принцессу Фиону вместе с болтливым Ослом. Это смешная сказка наоборот о принятии себя, дружбе и том, что настоящая красота не всегда выглядит как в книжках."}, "рататуй": {"type": "Мультфильм", "year": 2007, "text": "Крыс Реми мечтает стать поваром, хотя сама мысль о крысе на кухне кажется людям кошмаром. Судьба сводит его с неуклюжим Лингвини, и вместе они пытаются готовить в парижском ресторане. Это тёплый мультфильм о таланте, мечте, вкусе, дружбе и праве заниматься тем, к чему у тебя лежит сердце."}, "зверополис": {"type": "Мультфильм", "year": 2016, "text": "Крольчиха Джуди Хоппс мечтает стать настоящим полицейским в огромном городе, где живут разные звери. Вместе с хитрым лисом Ником она расследует странное дело о пропавших хищниках и постепенно раскрывает заговор, связанный со страхом и предрассудками. Это детективный мультфильм о мечте, доверии, стереотипах и смелости идти против ожиданий."}, "холодное сердце": {"type": "Мультфильм", "year": 2013, "text": "Принцесса Эльза с детства скрывает магическую силу льда, боясь навредить близким. Когда её тайна раскрывается, королевство погружается в вечную зиму, а сестра Анна отправляется вернуть Эльзу домой. В пути Анна встречает Кристоффа, Свена и снеговика Олафа. Это музыкальный мультфильм о сестринской любви, страхе, принятии себя и силе быть честным с тем, кто ты есть."}, "суперсемейка": {"type": "Мультфильм", "year": 2004, "text": "Семья бывших супергероев живёт обычной жизнью после запрета геройской деятельности. Боб Парр скучает по прошлому и тайно возвращается к подвигам, но это втягивает всю семью в опасную историю. Это мультфильм о семье, ответственности, кризисе среднего возраста, командной работе и том, что настоящая сила раскрывается, когда близкие действуют вместе."}, "город героев": {"type": "Мультфильм", "year": 2014, "text": "Юный изобретатель Хиро теряет брата и находит поддержку в медицинском роботе Бэймаксе. Вместе с друзьями он пытается раскрыть тайну опасного злодея и превращает команду студентов в супергероев. Это тёплый и динамичный мультфильм о потере, дружбе, технологиях, заботе и взрослении через боль."}, "гадкий я": {"type": "Мультфильм", "year": 2010, "text": "Суперзлодей Грю мечтает совершить грандиозное преступление и украсть Луну, но его планы меняются, когда в его жизнь попадают три девочки-сироты. Постепенно человек, привыкший быть злодеем, учится заботе, привязанности и ответственности. Это комедийный мультфильм о семье, переменах и том, как любовь может разрушить даже самый злодейский план."}};
-
-  function txt(v){ return String(v == null ? "" : v).trim(); }
-  function key(v){
-    return txt(v).toLowerCase()
-      .replace(/ё/g,"е")
-      .replace(/[«»"“”'’`]/g,"")
-      .replace(/\([^)]*\)/g," ")
-      .replace(/\b(19\d{2}|20\d{2})\b/g," ")
-      .replace(/\b(фильм|сериал|аниме|мультфильм|мульт|игра|книга|манга|комикс)\b/g," ")
-      .replace(/[^a-z0-9а-я]+/g," ")
-      .replace(/\s+/g," ")
-      .trim();
-  }
-  function titleOf241(item){
-    try { if (typeof displayTitle === "function") return displayTitle(item); } catch(e){}
-    return txt(item && (item.title || item.name || item.ru || item.en || item.original_title || item.originalTitle));
-  }
-  function getFix(itemOrTitle){
-    const k = typeof itemOrTitle === "string" ? key(itemOrTitle) : key(titleOf241(itemOrTitle));
-    if (GKM_V241[k]) return GKM_V241[k];
-    for (const name in GKM_V241) {
-      if (k.includes(name) || name.includes(k)) return GKM_V241[name];
-    }
-    return null;
-  }
-  function applyFix(item){
-    if (!item || typeof item !== "object") return item;
-    const fix = getFix(item);
-    if (!fix) return item;
-    item.type = fix.type;
-    item.year = fix.year;
-    if (item.category && /^(фильм|сериал|аниме|мультфильм|мульт|movie|series|anime|cartoon)$/i.test(String(item.category))) item.category = fix.type;
-    if (item.media_type) {
-      item.media_type = fix.type === "Фильм" ? "movie" : fix.type === "Аниме" ? "anime" : fix.type === "Мультфильм" ? "cartoon" : item.media_type;
-    }
-    ["overview_ru","description_ru","overview","description"].forEach(k => {
-      const old = txt(item[k]);
-      if (old.length < 140 || /описание помогает|каталог|специально расширено|без просмотра трейлера/i.test(old)) item[k] = fix.text;
-    });
-    return item;
-  }
-
-  const oldGetType = typeof getType === "function" ? getType : null;
-  getType = function(item){
-    const fix = getFix(item);
-    if (fix) return fix.type;
-    return oldGetType ? oldGetType(item) : txt(item && item.type);
+  const FIXES = {
+    "доктор стрэндж в мультивселенной безумия": {type:"Фильм", year:2022, text:"Доктор Стивен Стрэндж сталкивается с последствиями вмешательства в ткань реальности и встречает Америку Чавес — девушку, способную открывать проходы между вселенными. За её силой охотится Ванда Максимофф, пережившая личную трагедию и готовая пойти на опасные поступки ради возвращения семьи. Стрэнджу приходится путешествовать по альтернативным мирам, сталкиваться с другими версиями знакомых героев и решать, где проходит граница между спасением и разрушением. Это супергеройский фильм Marvel с магией, мультивселенной, хоррор-атмосферой и конфликтом между болью, властью и ответственностью."},
+    "doctor strange in the multiverse of madness": {type:"Фильм", year:2022, text:"Доктор Стивен Стрэндж сталкивается с последствиями вмешательства в ткань реальности и встречает Америку Чавес — девушку, способную открывать проходы между вселенными. За её силой охотится Ванда Максимофф, пережившая личную трагедию и готовая пойти на опасные поступки ради возвращения семьи. Стрэнджу приходится путешествовать по альтернативным мирам, сталкиваться с другими версиями знакомых героев и решать, где проходит граница между спасением и разрушением. Это супергеройский фильм Marvel с магией, мультивселенной, хоррор-атмосферой и конфликтом между болью, властью и ответственностью."},
+    "унесенные призраками": {type:"Аниме", year:2001, text:"Девочка Тихиро вместе с родителями случайно попадает в загадочный мир духов, богов и странных существ. Когда родители превращаются в свиней, Тихиро вынуждена работать в бане ведьмы Юбабы, чтобы выжить и найти способ вернуть семью. Постепенно она взрослеет, учится не бояться, помогает другим и открывает в себе силу, о которой раньше не знала. Это волшебное аниме Хаяо Миядзаки о взрослении, памяти, жадности, доброте и путешествии ребёнка через мир, где каждое правило нужно понять самому."},
+    "spirited away": {type:"Аниме", year:2001, text:"Девочка Тихиро вместе с родителями случайно попадает в загадочный мир духов, богов и странных существ. Когда родители превращаются в свиней, Тихиро вынуждена работать в бане ведьмы Юбабы, чтобы выжить и найти способ вернуть семью. Постепенно она взрослеет, учится не бояться, помогает другим и открывает в себе силу, о которой раньше не знала. Это волшебное аниме Хаяо Миядзаки о взрослении, памяти, жадности, доброте и путешествии ребёнка через мир, где каждое правило нужно понять самому."},
+    "человек паук через вселенные": {type:"Мультфильм", year:2018, text:"Подросток Майлз Моралес получает способности Человека-паука и оказывается втянут в историю с коллайдером, который открывает проходы между измерениями. В его мир попадают разные версии Человека-паука, и Майлзу приходится быстро понять, что герой — это не костюм и не идеальность, а готовность подняться после падения. Это яркий анимационный супергеройский фильм о взрослении, ответственности, семье и праве стать своим собственным героем."},
+    "ходячий замок": {type:"Аниме", year:2004, text:"Юная Софи становится жертвой проклятия и превращается в старуху. В поисках выхода она попадает в волшебный ходячий замок мага Хаула — загадочного и ранимого волшебника, который сам скрывается от войны и собственных страхов. Вместе с огненным демоном Кальцифером и странной семьёй замка Софи постепенно меняет не только свою судьбу, но и сердце Хаула. Это аниме о любви, войне, принятии себя, старении, магии и внутренней свободе."},
+    "в поисках немо": {type:"Мультфильм", year:2003, text:"Рыбка-клоун Марлин отправляется через океан на поиски сына Немо, которого забрали люди. В пути он встречает забывчивую, но добрую Дори и постепенно учится отпускать страх, доверять другим и верить в самостоятельность сына. Это трогательный мультфильм о семье, тревоге родителей, дружбе и большом приключении в океане."},
+    "корпорация монстров": {type:"Мультфильм", year:2001, text:"В мире монстров энергия города добывается из детских криков, а лучшие пугатели каждый день выходят на работу через двери в человеческий мир. Когда маленькая девочка Бу случайно попадает к монстрам, Салли и Майк понимают, что привычная система построена на страхе и лжи. Это тёплый мультфильм о дружбе, доброте и мире, где смех оказывается сильнее страха."},
+    "шрек": {type:"Мультфильм", year:2001, text:"Огр Шрек живёт один на болоте и не хочет связываться с людьми, но его спокойствие нарушают сказочные существа, изгнанные лордом Фаркуадом. Чтобы вернуть свой дом, Шрек отправляется спасать принцессу Фиону вместе с болтливым Ослом. Это смешная сказка наоборот о принятии себя, дружбе и том, что настоящая красота не всегда выглядит как в книжках."},
+    "рататуй": {type:"Мультфильм", year:2007, text:"Крыс Реми мечтает стать поваром, хотя сама мысль о крысе на кухне кажется людям кошмаром. Судьба сводит его с неуклюжим Лингвини, и вместе они пытаются готовить в парижском ресторане. Это тёплый мультфильм о таланте, мечте, вкусе, дружбе и праве заниматься тем, к чему у тебя лежит сердце."},
+    "зверополис": {type:"Мультфильм", year:2016, text:"Крольчиха Джуди Хоппс мечтает стать настоящим полицейским в огромном городе, где живут разные звери. Вместе с хитрым лисом Ником она расследует странное дело о пропавших хищниках и постепенно раскрывает заговор, связанный со страхом и предрассудками. Это детективный мультфильм о мечте, доверии, стереотипах и смелости идти против ожиданий."},
+    "холодное сердце": {type:"Мультфильм", year:2013, text:"Принцесса Эльза с детства скрывает магическую силу льда, боясь навредить близким. Когда её тайна раскрывается, королевство погружается в вечную зиму, а сестра Анна отправляется вернуть Эльзу домой. В пути Анна встречает Кристоффа, Свена и снеговика Олафа. Это музыкальный мультфильм о сестринской любви, страхе, принятии себя и силе быть честным с тем, кто ты есть."},
+    "суперсемейка": {type:"Мультфильм", year:2004, text:"Семья бывших супергероев живёт обычной жизнью после запрета геройской деятельности. Боб Парр скучает по прошлому и тайно возвращается к подвигам, но это втягивает всю семью в опасную историю. Это мультфильм о семье, ответственности, кризисе среднего возраста, командной работе и том, что настоящая сила раскрывается, когда близкие действуют вместе."},
+    "город героев": {type:"Мультфильм", year:2014, text:"Юный изобретатель Хиро теряет брата и находит поддержку в медицинском роботе Бэймаксе. Вместе с друзьями он пытается раскрыть тайну опасного злодея и превращает команду студентов в супергероев. Это тёплый и динамичный мультфильм о потере, дружбе, технологиях, заботе и взрослении через боль."},
+    "гадкий я": {type:"Мультфильм", year:2010, text:"Суперзлодей Грю мечтает совершить грандиозное преступление и украсть Луну, но его планы меняются, когда в его жизнь попадают три девочки-сироты. Постепенно человек, привыкший быть злодеем, учится заботе, привязанности и ответственности. Это комедийный мультфильм о семье, переменах и том, как любовь может разрушить даже самый злодейский план."}
   };
-
-  const oldGetYear = typeof getYear === "function" ? getYear : null;
-  getYear = function(item){
-    const fix = getFix(item);
-    if (fix) return fix.year;
-    return oldGetYear ? oldGetYear(item) : txt(item && item.year);
-  };
-
-  const oldDisplayOverview = typeof displayOverview === "function" ? displayOverview : null;
-  displayOverview = function(item){
-    applyFix(item);
-    const fix = getFix(item);
-    if (fix) return fix.text;
-    if (oldDisplayOverview) {
-      const old = txt(oldDisplayOverview(item));
-      if (old.length > 120 && !/описание помогает|каталог|специально расширено|без просмотра трейлера/i.test(old)) return old;
-    }
-    const title = titleOf241(item);
-    const type = oldGetType ? oldGetType(item) : txt(item && item.type || "Проект");
-    return `${title} — ${String(type).toLowerCase()}. Описание пока короткое, но карточка должна помогать понять сюжет, атмосферу и настроение проекта перед выбором.`;
-  };
-
-  function activeTab(){
-    const a = document.querySelector('.tab.active,[data-tab].active');
-    return a && a.dataset ? a.dataset.tab : "";
-  }
-  function fixArrays(){
-    ["currentItems","items","allItems","filteredItems","catalog","movies","series","anime","cartoons"].forEach(name => {
-      try { if (Array.isArray(window[name])) window[name].forEach(applyFix); } catch(e){}
-    });
-  }
-  function removeWrongCards(){
-    const tab = activeTab();
-    if (!tab || tab === "all") return;
-    const cards = Array.from(document.querySelectorAll("#grid .card,.grid .card"));
-    for (const card of cards) {
-      const title = txt((card.querySelector(".card-title,h3,.title") || {}).textContent);
-      const badge = txt((card.querySelector(".badge,.card-badge") || {}).textContent).toLowerCase();
-      const fix = getFix(title);
-      const type = fix ? fix.type.toLowerCase() : badge;
-      let ok = true;
-      if (tab === "movies") ok = type.includes("фильм");
-      if (tab === "series") ok = type.includes("сериал");
-      if (tab === "anime") ok = type.includes("аниме");
-      if (tab === "cartoons") ok = type.includes("мульт");
-      if (tab === "games") ok = type.includes("игра");
-      if (tab === "books") ok = type.includes("книга") || type.includes("манга") || type.includes("комик") || type.includes("раноб");
-      if (!ok) card.remove();
-      else if (fix) {
-        const badgeEl = card.querySelector(".badge,.card-badge");
-        if (badgeEl) badgeEl.textContent = fix.type;
-        const meta = card.querySelector(".card-meta,.meta");
-        if (meta) meta.textContent = meta.textContent.replace(/(19\d{2}|20\d{2})/, String(fix.year)).replace(/Фильм|Мультфильм|Аниме|Сериал/g, fix.type);
-      }
-    }
-  }
-  function patchModal(){
-    const title = txt(document.getElementById("detailTitle") && document.getElementById("detailTitle").textContent);
-    if (!title) return;
-    const fix = getFix(title);
-    if (!fix) return;
-    const overview = document.getElementById("detailOverview");
-    if (overview) overview.textContent = fix.text;
-    const meta = document.getElementById("detailMeta");
-    if (meta) meta.textContent = meta.textContent.replace(/Фильм|Мультфильм|Аниме|Сериал/g, fix.type).replace(/(19\d{2}|20\d{2})/, String(fix.year));
-    const typeFact = Array.from(document.querySelectorAll(".fact-card")).find(x => /тип/i.test(x.textContent));
-    if (typeFact) {
-      const strong = typeFact.querySelector("strong");
-      if (strong) strong.textContent = fix.type;
-    }
-    const yearFact = Array.from(document.querySelectorAll(".fact-card")).find(x => /год/i.test(x.textContent));
-    if (yearFact) {
-      const strong = yearFact.querySelector("strong");
-      if (strong) strong.textContent = fix.year;
-    }
-  }
-  function run(){
-    fixArrays();
-    removeWrongCards();
-    patchModal();
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
-  else run();
-  document.addEventListener("click", function(){ setTimeout(run,80); setTimeout(run,300); setTimeout(run,800); }, true);
-  const obs = new MutationObserver(function(){ setTimeout(run,80); });
-  obs.observe(document.documentElement, {childList:true, subtree:true, characterData:true});
+  function txt(v){return String(v==null?"":v).trim()}
+  function key(v){return txt(v).toLowerCase().replace(/ё/g,"е").replace(/[«»"“”'’`]/g,"").replace(/\([^)]*\)/g," ").replace(/\b(19\d{2}|20\d{2})\b/g," ").replace(/[^a-z0-9а-я]+/g," ").replace(/\s+/g," ").trim()}
+  function title(){return txt(document.getElementById("detailTitle")&&document.getElementById("detailTitle").textContent)}
+  function findFix(v){const k=key(v); if(FIXES[k]) return FIXES[k]; for(const n in FIXES){if(k.includes(n)||n.includes(k)) return FIXES[n]} return null}
+  function patchModal(){const t=title(); if(!t) return; const f=findFix(t); if(!f) return; const ov=document.getElementById("detailOverview"); if(ov) ov.textContent=f.text; const meta=document.getElementById("detailMeta"); if(meta) meta.textContent=meta.textContent.replace(/Фильм|Мультфильм|Аниме|Сериал/g,f.type).replace(/(19\d{2}|20\d{2})/,String(f.year)); const genres=document.getElementById("detailGenres"); if(genres) genres.textContent=genres.textContent.replace(/Фильм|Мультфильм|Аниме|Сериал/g,f.type); Array.from(document.querySelectorAll(".fact-card")).forEach(c=>{const s=c.querySelector("strong"); if(!s)return; if(/тип/i.test(c.textContent)) s.textContent=f.type; if(/год/i.test(c.textContent)) s.textContent=f.year;});}
+  function patchCards(){const active=document.querySelector('.tab.active,[data-tab].active'); const tab=active&&active.dataset?active.dataset.tab:""; if(!tab||tab==="all") return; Array.from(document.querySelectorAll("#grid .card,.grid .card")).forEach(card=>{const ttl=txt((card.querySelector(".card-title,h3,.title")||{}).textContent); const f=findFix(ttl); let type=f?f.type.toLowerCase():txt((card.querySelector(".badge,.card-badge")||{}).textContent).toLowerCase(); let ok=true; if(tab==="movies") ok=type.includes("фильм"); if(tab==="anime") ok=type.includes("аниме"); if(tab==="cartoons") ok=type.includes("мульт"); if(tab==="series") ok=type.includes("сериал"); if(tab==="games") ok=type.includes("игра"); if(tab==="books") ok=type.includes("книга")||type.includes("манга")||type.includes("комик")||type.includes("раноб"); if(!ok){card.remove();return} if(f){const b=card.querySelector(".badge,.card-badge"); if(b)b.textContent=f.type; const m=card.querySelector(".card-meta,.meta"); if(m)m.textContent=m.textContent.replace(/Фильм|Мультфильм|Аниме|Сериал/g,f.type).replace(/(19\d{2}|20\d{2})/,String(f.year));}})}
+  function safe(){try{patchModal(); patchCards()}catch(e){console.warn("GKM V242 safe fix error",e)}}
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",safe);else safe();
+  document.addEventListener("click",function(){setTimeout(safe,80);setTimeout(safe,300);setTimeout(safe,900)},true);
 })();
-/* GKM V241 CARTOON/ANIME/FILM TYPE + SYNOPSIS FIX END */
-
-
-/* GKM V241 - no style changes */
+/* GKM V242 SAFE LOAD RESTORE + LIGHT QUALITY FIX END */
