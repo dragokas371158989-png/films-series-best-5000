@@ -24,18 +24,21 @@
   <link rel="stylesheet" href="style.css?v=148">
 
   <style>
-    /* GKM V160 — fixed controls layout: trash button no longer clipped, reset no longer stretches */
+    /* GKM V160 — fixed controls layout */
     .controls{
       display:grid!important;
       grid-template-columns:minmax(280px,1fr) repeat(5,minmax(135px,170px)) 96px 118px!important;
       gap:10px!important;
       align-items:center!important;
     }
-    .controls input,.controls select{
+
+    .controls input,
+    .controls select{
       min-width:0!important;
       width:100%!important;
       box-sizing:border-box!important;
     }
+
     #cleanTrashBtn.clean-trash-btn{
       width:96px!important;
       min-width:96px!important;
@@ -51,6 +54,7 @@
       justify-self:stretch!important;
       grid-column:auto!important;
     }
+
     #resetBtn.reset-btn{
       width:118px!important;
       min-width:118px!important;
@@ -61,18 +65,22 @@
       padding-left:12px!important;
       padding-right:12px!important;
     }
+
     @media (max-width:1250px){
       .controls{
         grid-template-columns:minmax(240px,1fr) repeat(3,minmax(130px,1fr)) 96px 118px!important;
       }
     }
+
     @media (max-width:760px){
       .controls{
         grid-template-columns:1fr 1fr!important;
       }
+
       #searchInput{
         grid-column:1 / -1!important;
       }
+
       #cleanTrashBtn.clean-trash-btn,
       #resetBtn.reset-btn{
         width:100%!important;
@@ -80,6 +88,7 @@
         max-width:none!important;
       }
     }
+
     .clean-trash-btn{
       background:linear-gradient(135deg,#151b32,#263459);
       border:1px solid #00d5ff;
@@ -89,6 +98,7 @@
       box-shadow:0 0 14px rgba(0,213,255,.22);
       cursor:pointer;
     }
+
     .clean-trash-btn.active{
       background:linear-gradient(135deg,#00c8ff,#7b2cff);
       color:#03101a;
@@ -96,25 +106,7 @@
     }
   </style>
 
-  <!-- GKM V60 TESTED RELEASE -->
-  <!-- GKM V62 CLEAN ONLY REPLACE ROOT -->
-  <!-- GKM V63 NO SCROLL BUTTONS -->
-  <!-- GKM V64 HELPER CLOSE FIX -->
-  <!-- GKM V65 BALANCED HOME -->
-  <!-- GKM V66 RELATED CARDS -->
-  <!-- GKM V67 VOTES FIRST -->
-  <!-- GKM V68 STRICT DEPARTMENT PAGES -->
-  <!-- GKM V69 FAST PAGES NO FREEZE -->
-  <!-- GKM V70 STRICT TABS VOTE BUCKETS -->
-  <!-- GKM V71 PAGER BUFFER NO SEARCH -->
-  <!-- GKM V72 HARD PAGER TABS -->
-  <!-- GKM V73 POSTER REPAIR -->
-  <!-- GKM V74 REAL POSTERS FIRST -->
-  <!-- GKM V75 NO FALLBACK FIRST PAGES -->
-  <!-- GKM V76 HIDE NO POSTERS -->
-  <!-- GKM V77 DEEP RETESTED -->
-  <!-- GKM V78 SAFE SEARCH -->
-  <!-- GKM V79 NO POSTER BOTTOM -->
+  <!-- GKM V246 CLEAN INDEX -->
 </head>
 
 <body>
@@ -135,6 +127,10 @@
       <option value="Сериал">Сериалы</option>
       <option value="Аниме">Аниме</option>
       <option value="Мультфильм">Мультфильмы</option>
+      <option value="Игра">Игры</option>
+      <option value="Книга">Книги</option>
+      <option value="Манга">Манга</option>
+      <option value="Комикс">Комиксы</option>
     </select>
 
     <select id="genreFilter">
@@ -170,6 +166,10 @@
     <button class="tab" data-tab="series" type="button">Сериалы</button>
     <button class="tab" data-tab="cartoons" type="button">Мультфильмы</button>
     <button class="tab" data-tab="anime" type="button">Аниме</button>
+    <button class="tab" data-tab="games" type="button">🎮 Игры</button>
+    <button class="tab" data-tab="books" type="button">📚 Книги/Манга</button>
+    <button class="tab" data-tab="franchises" type="button">🧬 Франшизы</button>
+
     <button class="tab" data-tab="anime_top" type="button">Топ аниме 100</button>
     <button class="tab" data-tab="anime_studios" type="button">Топ студий</button>
     <button class="tab" data-tab="top" type="button">Топ 250</button>
@@ -258,7 +258,7 @@
     </div>
   </dialog>
 
-  <script src="app.js?v=245"></script>
+  <script src="app.js?v=246"></script>
 
   <!-- GKM AI CHAT UI V58 RESTORED -->
   <button id="gkmAiFloatBtn" class="ai-float-btn" type="button" aria-label="Открыть чат">🤖</button>
