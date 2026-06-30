@@ -1,4 +1,4 @@
-[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29504341/GKM_PROJECT_SCHEME_V1.md)
+[Uploading GKM_PROJECT_SCHEME_V1.md…]()
 [GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29503592/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
@@ -504,3 +504,8 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 - жёсткий фикс описаний: если описание короткое, модалка получает расширенное полное описание по жанрам, рейтингу, связи с франшизой и похожим проектам
 - для игр обогащаются все 360 записей
 - app.js?v=228
+
+## GKM V229 RELATED CARDS COLOR FIX
+- исправлено: похожие карточки в модалке выглядели чёрно-белыми / затемнёнными
+- сняты grayscale/filter/opacity/mix-blend-mode с related/similar карточек
+- постеры похожих проектов теперь должны быть цветными
