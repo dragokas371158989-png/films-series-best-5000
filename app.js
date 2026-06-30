@@ -9147,7 +9147,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=212";
+  const BOOKS_URL = "./data/books_catalog.json?v=213";
   const PAGE = 24;
   let booksCache = null;
   let booksPage = 1;
@@ -9229,7 +9229,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const json = await res.json();
       booksCache = Array.isArray(json) ? json : (json.items || []);
     } catch (err) {
-      console.warn("GKM V212: fallback books loaded", err);
+      console.warn("GKM V213: fallback books loaded", err);
       booksCache = FALLBACK_BOOKS;
     }
     booksCache = booksCache.map((item, index) => ({
@@ -9381,7 +9381,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (gamePanel) gamePanel.style.display = "none";
     updateBookFilters(all, rows);
     const count = document.getElementById("countText");
-    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V212`;
+    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V213`;
     const grid = document.getElementById("grid");
     if (grid) {
       grid.classList.remove("gkm-v191-search-best", "gkm-v191-spotlight", "gkm-v191-highlight");
@@ -9557,3 +9557,79 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();
 /* GKM V212 BOOKS MANGA COMICS FOUNDATION END */
+
+
+
+/* GKM V213 CLEAN BUTTON SYSTEM + BOOK COVERS START */
+(function(){
+  const MAIN_TABS = new Set(["all","movies","series","cartoons","anime","games","books"]);
+  function injectV213Style(){
+    if (document.getElementById("gkm-v213-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v213-style";
+    style.textContent = `
+      .tabs{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+      .gkm-v213-main-row,.gkm-v213-sub-row{display:flex;flex-wrap:wrap;gap:10px;width:100%;align-items:center}
+      .gkm-v213-main-row .tab{min-height:48px;padding:12px 18px;border-radius:16px;font-size:15px;font-weight:900;letter-spacing:.01em;box-shadow:0 8px 22px rgba(69,26,132,.20);border-width:1px!important}
+      .gkm-v213-sub-row .tab{min-height:42px;padding:10px 15px;border-radius:14px;font-size:14px;font-weight:850;opacity:.98;box-shadow:0 6px 18px rgba(69,26,132,.15);border-width:1px!important}
+      .tabs .tab{transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;}
+      .tabs .tab:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,212,255,.18)}
+      .tabs .tab:not(.active){background:linear-gradient(135deg,rgba(73,33,173,.82),rgba(88,39,196,.72))!important;border-color:rgba(0,212,255,.32)!important}
+      .tabs .tab.active{background:linear-gradient(135deg,#7c3cff,#00d4ff)!important;border-color:rgba(255,255,255,.55)!important;color:#fff!important;box-shadow:0 0 20px rgba(0,212,255,.26), 0 8px 26px rgba(124,60,255,.24)!important}
+      .gkm-books-panel{padding:18px 18px 16px;border-radius:24px;background:linear-gradient(135deg,rgba(255,209,102,.08),rgba(255,92,138,.04))!important;border:1px solid rgba(255,209,102,.22)!important;box-shadow:0 20px 38px rgba(0,0,0,.16)}
+      .gkm-books-panel-title{font-size:18px!important;line-height:1.15;margin-bottom:6px!important}
+      .gkm-books-panel-subtitle{font-size:14px;line-height:1.35;opacity:.78;max-width:900px}
+      .gkm-books-filter-row{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 0}
+      .gkm-book-filter{padding:8px 12px!important;border-radius:999px!important;font-size:13px!important;font-weight:800!important;line-height:1.1;background:rgba(255,255,255,.045)!important;border:1px solid rgba(255,209,102,.20)!important;box-shadow:none!important}
+      .gkm-book-filter:hover{transform:translateY(-1px);border-color:rgba(255,209,102,.38)!important}
+      .gkm-book-filter.active{background:linear-gradient(135deg,#ffd166,#ff8a6d)!important;color:#1c0d07!important;border-color:rgba(255,255,255,.42)!important;box-shadow:0 10px 22px rgba(255,138,109,.18)!important}
+      .gkm-book-filter.reset{background:rgba(255,255,255,.035)!important;color:#f1d7c3!important}
+      .gkm-book-card .poster-wrap{background:linear-gradient(135deg,#111a38,#6c123d)!important}
+      .gkm-book-card .poster-wrap img{object-fit:cover;filter:saturate(1.05) contrast(1.02)}
+      .gkm-book-card .poster-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,10,0) 40%,rgba(5,5,10,.18) 100%);pointer-events:none}
+      .gkm-book-relation-badge{left:10px!important;right:10px!important;bottom:10px!important;padding:8px 10px!important;border-radius:14px!important;font-size:11px!important;background:rgba(12,8,5,.72)!important;border-color:rgba(255,209,102,.26)!important}
+      @media (max-width: 900px){
+        .tabs{gap:8px}
+        .gkm-v213-main-row,.gkm-v213-sub-row{overflow:auto;flex-wrap:nowrap;padding-bottom:4px;scrollbar-width:none}
+        .gkm-v213-main-row::-webkit-scrollbar,.gkm-v213-sub-row::-webkit-scrollbar{display:none}
+        .gkm-v213-main-row .tab,.gkm-v213-sub-row .tab{white-space:nowrap}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function normalizeRows(){
+    const nav = document.querySelector('.tabs');
+    if (!nav) return;
+    let mainRow = nav.querySelector('.gkm-v213-main-row');
+    let subRow = nav.querySelector('.gkm-v213-sub-row');
+    if (!mainRow) {
+      mainRow = document.createElement('div');
+      mainRow.className = 'gkm-v213-main-row';
+      nav.prepend(mainRow);
+    }
+    if (!subRow) {
+      subRow = document.createElement('div');
+      subRow.className = 'gkm-v213-sub-row';
+      nav.appendChild(subRow);
+    }
+    const tabs = Array.from(nav.querySelectorAll(':scope > .tab, :scope > .gkm-v213-main-row > .tab, :scope > .gkm-v213-sub-row > .tab'));
+    tabs.forEach(btn => {
+      const tab = (btn.dataset && btn.dataset.tab) || '';
+      if (MAIN_TABS.has(tab)) mainRow.appendChild(btn);
+      else subRow.appendChild(btn);
+    });
+  }
+
+  function applyBookCountPillStyle(){
+    const count = document.getElementById('countText');
+    if (count && /Книги\/Манга/.test(count.textContent || '')) count.classList.add('gkm-v213-book-count');
+  }
+
+  function run(){ injectV213Style(); normalizeRows(); applyBookCountPillStyle(); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ run(); setTimeout(run, 250); setTimeout(run, 1200); });
+  } else { run(); setTimeout(run, 250); setTimeout(run, 1200); }
+  document.addEventListener('click', function(e){ if (e.target.closest('.tab,[data-gkm-book-kind],[data-gkm-book-collection],[data-gkm-book-reset]')) setTimeout(run, 80); });
+})();
+/* GKM V213 CLEAN BUTTON SYSTEM + BOOK COVERS END */
