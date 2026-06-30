@@ -1,18 +1,1 @@
-{
-  "studios": [
-    {
-      "studio": "MAPPA",
-      "count": 2,
-      "avgRating": 8.6,
-      "votes": 5000000,
-      "topTitles": ["Атака титанов", "Магическая битва"]
-    },
-    {
-      "studio": "Pierrot",
-      "count": 2,
-      "avgRating": 8.2,
-      "votes": 4000000,
-      "topTitles": ["Наруто", "Блич"]
-    }
-  ]
-}
+{"version":"v260-anime-studios-generated-2026-07-01","studios":[{"studio":"MAPPA","count":25,"avgRating":8.3,"votes":19606964,"topTitles":["Атака титанов","Магическая битва","Человек-бензопила","Сага о Винланде","Shingeki no Bahamut: Genesis"]},{"studio":"Bones","count":23,"avgRating":7.7,"votes":15238993,"topTitles":["Стальной алхимик: Братство","Моя геройская академия","Моб Психо 100","Стальной алхимик","Hitorijime My Hero"]},{"studio":"ufotable","count":74,"avgRating":7.5,"votes":13956533,"topTitles":["Истребитель демонов","Fate/Zero","Fate/Zero 2nd Season","Fate/stay night: Unlimited Blade Works","Fate/stay night: Unlimited Blade Works 2nd Season"]},{"studio":"Pierrot","count":34,"avgRating":7.4,"votes":13885099,"topTitles":["Наруто","Токийский гуль","Наруто: Ураганные хроники","Блич","Чёрный клевер"]},{"studio":"A-1 Pictures","count":40,"avgRating":7.6,"votes":13471953,"topTitles":["Мастера меча онлайн","Boku dake ga Inai Machi","Nanatsu no Taizai","Kaguya-sama wa Kokurasetai? Tensai-tachi no Renai Zunousen","Nanatsu no Taizai: Imashime no Fukkatsu"]},{"studio":"Madhouse","count":75,"avgRating":7.5,"votes":12694478,"topTitles":["Тетрадь смерти","Ванпанчмен","Охотник х Охотник","Паразит","Провожающая в последний путь Фрирен"]},{"studio":"Toei Animation","count":80,"avgRating":7.4,"votes":9081055,"topTitles":["Ван-Пис","Dragon Ball Z","Dragon Ball","Dragon Ball Super","Dragon Ball GT"]},{"studio":"White Fox","count":16,"avgRating":8.1,"votes":8228575,"topTitles":["Re:Zero. Жизнь с нуля в альтернативном мире","Врата Штейна","Akame ga Kill!","Aho Girl","Убийца Акаме!"]},{"studio":"Kyoto Animation","count":19,"avgRating":7.9,"votes":6855767,"topTitles":["Koe no Katachi","Вайолет Эвергарден","Clannad","Kobayashi-san Chi no Maid Dragon","Clannad: After Story"]},{"studio":"Studio Deen / Kadokawa","count":16,"avgRating":7.9,"votes":6730413,"topTitles":["Этот замечательный мир!","Повелитель","Звёздное дитя"]},{"studio":"Sunrise","count":39,"avgRating":8.0,"votes":5958867,"topTitles":["Код Гиас","Ковбой Бибоп","Gintama°","Gintama': Enchousen","Gintama Movie 2: Kanketsu-hen - Yorozuya yo Eien Nare"]},{"studio":"Wit Studio","count":12,"avgRating":7.9,"votes":5712942,"topTitles":["Волейбол!!","Семья шпиона","Лучшая подача","Волейбольный клуб старшей школы Сэйин"]},{"studio":"Gainax / Khara","count":10,"avgRating":7.5,"votes":3163986,"topTitles":["Евангелион","Тиби-Ева: Школьные дни"]},{"studio":"Trigger / Gainax","count":14,"avgRating":7.9,"votes":2545406,"topTitles":["Kill la Kill","Tengen Toppa Gurren Lagann","World Trigger","Tengen Toppa Gurren Lagann Movie 2: Lagann-hen","Tengen Toppa Gurren Lagann Movie 1: Gurren-hen"]},{"studio":"Geno Studio","count":18,"avgRating":7.8,"votes":1709759,"topTitles":["Kenpuu Denki Berserk","Berserk","Golden Kamuy","Berserk: Ougon Jidai-hen I - Haou no Tamago","Berserk: Ougon Jidai-hen III - Kourin"]},{"studio":"Studio Ghibli","count":2,"avgRating":8.4,"votes":1425096,"topTitles":["Sen to Chihiro no Kamikakushi","Мой сосед Тоторо"]}]}
