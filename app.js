@@ -9147,7 +9147,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=214";
+  const BOOKS_URL = "./data/books_catalog.json?v=215";
   const PAGE = 24;
   let booksCache = null;
   let booksPage = 1;
@@ -9229,7 +9229,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const json = await res.json();
       booksCache = Array.isArray(json) ? json : (json.items || []);
     } catch (err) {
-      console.warn("GKM V214: fallback books loaded", err);
+      console.warn("GKM V215: fallback books loaded", err);
       booksCache = FALLBACK_BOOKS;
     }
     booksCache = booksCache.map((item, index) => ({
@@ -9381,7 +9381,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (gamePanel) gamePanel.style.display = "none";
     updateBookFilters(all, rows);
     const count = document.getElementById("countText");
-    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V214`;
+    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V215`;
     const grid = document.getElementById("grid");
     if (grid) {
       grid.classList.remove("gkm-v191-search-best", "gkm-v191-spotlight", "gkm-v191-highlight");
@@ -9692,3 +9692,34 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   document.addEventListener("click", function(){ setTimeout(run, 120); });
 })();
  /* GKM V214 REAL BOOK MANGA COMICS COVERS END */
+
+
+
+/* GKM V215 BOOKS MANGA COMICS EXPANSION START */
+(function(){
+  function inject(){
+    if (document.getElementById("gkm-v215-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v215-style";
+    style.textContent = `
+      .gkm-books-panel-title::after{
+        content:" · расширенная база V215";
+        font-size:12px;
+        font-weight:800;
+        opacity:.65;
+        margin-left:8px;
+      }
+      .gkm-book-card .poster-wrap img{
+        transition:transform .25s ease, filter .25s ease;
+      }
+      .gkm-book-card:hover .poster-wrap img{
+        transform:scale(1.025);
+        filter:saturate(1.12) contrast(1.06);
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", inject);
+  else inject();
+})();
+ /* GKM V215 BOOKS MANGA COMICS EXPANSION END */
