@@ -11307,3 +11307,227 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V258 HARD DEDUPE CANONICAL TITLES END */
 
+
+
+/* GKM V259 DESCRIPTION RELATED RESTORE START */
+(function(){
+  window.GKM_V259_DESCRIPTION_RELATED_RESTORE_VERSION = "v259-description-related-color-restore-2026-06-30";
+
+  function tx(v){ return String(v == null ? "" : v).trim(); }
+  function nm(v){
+    return tx(v).toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[’`]/g, "'")
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function titleForDesc(item){
+    try {
+      if (typeof displayTitle === "function") return tx(displayTitle(item));
+    } catch {}
+    return tx(item && (item.ru || item.title_ru || item.title || item.name || item.en || item.original_title || item.original_name));
+  }
+
+  function typeForDesc(item){
+    try {
+      if (typeof getType === "function") return tx(getType(item));
+    } catch {}
+    return tx(item && (item.type || item.category || item.kind));
+  }
+
+  function yearForDesc(item){
+    try {
+      if (typeof getYear === "function") return tx(getYear(item));
+    } catch {}
+    const raw = tx(item && (item.year || item.release_date || item.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+
+  function genresForDesc(item){
+    try {
+      if (typeof getGenres === "function") {
+        const g = getGenres(item);
+        if (Array.isArray(g)) return g.filter(Boolean).map(String);
+      }
+    } catch {}
+    const raw = item && item.genres;
+    if (Array.isArray(raw)) return raw.filter(Boolean).map(String);
+    if (typeof raw === "string") return raw.split(/[,|/]+/).map(x => x.trim()).filter(Boolean);
+    return [];
+  }
+
+  const DESC_MAP = new Map(Object.entries({
+    "интерстеллар": "Когда Земля становится непригодной для жизни, группа исследователей отправляется через червоточину к далёким планетам. Их задача — найти новый дом для человечества, а для Купера это ещё и борьба между долгом перед миром и любовью к семье.",
+    "побег из шоушенка": "Банкир Энди Дюфрейн получает пожизненный срок за преступление, которого, по его словам, не совершал. В тюрьме Шоушенк он находит друга, учится выживать и годами готовит путь к свободе.",
+    "крестный отец": "История семьи Корлеоне — могущественного мафиозного клана, где власть, преданность и кровь связаны неразрывно. Майкл Корлеоне пытается держаться в стороне, но постепенно становится наследником семейной империи.",
+    "темный рыцарь": "Бэтмен, комиссар Гордон и прокурор Харви Дент пытаются очистить Готэм от преступности. Но появление Джокера превращает борьбу за порядок в испытание, где под ударом оказываются мораль и надежда города.",
+    "криминальное чтиво": "Несколько криминальных историй переплетаются вокруг гангстеров, боксёра, босса мафии и случайных решений. Чёрный юмор, насилие и диалоги складываются в культовую мозаику криминального мира.",
+    "форрест гамп": "Форрест Гамп с простым сердцем проходит через ключевые события американской истории, сам того не желая меняя судьбы людей вокруг. Его жизнь — история любви, дружбы и верности мечте.",
+    "бойцовский клуб": "Офисный работник, страдающий от бессонницы и пустоты, встречает харизматичного Тайлера Дёрдена. Вместе они создают подпольный бойцовский клуб, который быстро превращается во что-то куда опаснее.",
+    "начало": "Доминик Кобб умеет проникать в сны и красть идеи из подсознания. Последняя миссия требует невозможного — не украсть мысль, а внедрить её, пока границы сна и реальности начинают рушиться.",
+    "матрица": "Хакер Нео узнаёт, что привычный мир — лишь симуляция, созданная машинами. Перед ним открывается настоящая реальность и выбор: принять правду или вернуться к удобной иллюзии.",
+    "семь": "Два детектива расследуют серию убийств, построенных вокруг семи смертных грехов. Чем ближе они к преступнику, тем сильнее дело превращается в психологическую ловушку.",
+    "властелин колец братство кольца": "Фродо Бэггинс получает Кольцо Всевластия и отправляется в опасный путь, чтобы уничтожить его в огне Роковой горы. Так начинается путешествие Братства, от которого зависит судьба Средиземья.",
+    "властелин колец две крепости": "Братство распалось, но борьба продолжается. Фродо и Сэм идут к Мордору, Арагорн и союзники готовятся к войне, а силы Саурона и Сарумана усиливают давление на свободные народы.",
+    "властелин колец возвращение короля": "Финальная битва за Средиземье приближается. Пока армии людей встречают тьму у ворот Мордора, Фродо и Сэм делают последний шаг к Роковой горе.",
+    "человек паук нет пути домой": "После раскрытия личности Питера Паркера его жизнь рушится. Попытка исправить всё магией открывает двери мультивселенной и приводит к встрече с врагами из других миров.",
+    "песочный человек": "Морфей, повелитель снов, освобождается после долгого заточения и пытается вернуть утраченную власть. Его путь проходит через миры людей, богов, кошмаров и древних долгов.",
+    "тетрадь смерти": "Старшеклассник Лайт Ягами находит тетрадь, способную убивать людей по имени. Его новая власть запускает опасную игру с гениальным детективом L.",
+    "slam dunk": "Ханамити Сакураги приходит в баскетбол ради девушки, но постепенно открывает в себе настоящий азарт спортсмена. Команда Сёхоку проходит путь от школьных конфликтов к большим матчам.",
+    "атака титанов": "Человечество живёт за огромными стенами, спасаясь от титанов. После разрушительного нападения Эрен Йегер вступает в разведкорпус и начинает путь, который изменит судьбу всего мира."
+  }));
+
+  function descKey(item){
+    let s = nm(titleForDesc(item));
+    s = s.replace(/\s+—\s+(1|2|3|4|5|6|7)\s+сезон$/i, "");
+    s = s.replace(/\s+—\s+финальный\s+сезон$/i, "");
+    s = s.replace(/\s+(1|2|3|4|5|6|7)\s+сезон$/i, "");
+    s = s.replace(/\s+финальный\s+сезон$/i, "");
+    s = s.replace(/\s+\d{4}$/i, "");
+    if (s.includes("побег из шоушенка") || s.includes("shawshank")) return "побег из шоушенка";
+    if (s.includes("криминальное чтиво") || s.includes("pulp fiction")) return "криминальное чтиво";
+    if (s.includes("форрест гамп") || s.includes("forrest gump")) return "форрест гамп";
+    if (s.includes("бойцовский клуб") || s.includes("fight club")) return "бойцовский клуб";
+    if (s.includes("крестный отец") || s.includes("godfather")) return "крестный отец";
+    if (s.includes("интерстеллар") || s.includes("interstellar")) return "интерстеллар";
+    if (s.includes("темный рыцарь") || s.includes("dark knight")) return "темный рыцарь";
+    if (s.includes("матрица") || s.includes("matrix")) return "матрица";
+    if (s.includes("начало") || s.includes("inception")) return "начало";
+    if (s.includes("семь") || s.includes("se7en")) return "семь";
+    if (s.includes("человек паук нет пути домой") || s.includes("spider man no way home")) return "человек паук нет пути домой";
+    if (s.includes("песочный человек") || s.includes("sandman")) return "песочный человек";
+    if (s.includes("тетрадь смерти") || s.includes("death note")) return "тетрадь смерти";
+    if (s.includes("slam dunk")) return "slam dunk";
+    if (s.includes("атака титанов") || s.includes("attack on titan") || s.includes("shingeki")) return "атака титанов";
+    if (s.includes("властелин колец возвращение короля") || s.includes("return of the king")) return "властелин колец возвращение короля";
+    if (s.includes("властелин колец братство кольца") || s.includes("fellowship")) return "властелин колец братство кольца";
+    if (s.includes("властелин колец две крепости") || s.includes("two towers")) return "властелин колец две крепости";
+    return s;
+  }
+
+  function smartFallback(item){
+    const title = titleForDesc(item) || "Проект";
+    const type = typeForDesc(item) || "Каталог";
+    const year = yearForDesc(item);
+    const genres = genresForDesc(item).slice(0, 3).join(", ");
+    const g = genres ? ` Жанры: ${genres}.` : "";
+    const y = year ? ` ${year} год.` : "";
+    return `${title} — ${type.toLowerCase()} из каталога «Голубь Каталог Мира».${y}${g} Карточка будет дополнена подробным описанием позже.`;
+  }
+
+  const oldDisplayOverview = typeof displayOverview === "function" ? displayOverview : null;
+  displayOverview = function(item){
+    let text = "";
+    try {
+      text = oldDisplayOverview ? tx(oldDisplayOverview(item)) : "";
+    } catch {
+      text = "";
+    }
+
+    const bad =
+      !text ||
+      text.length < 40 ||
+      /описание пока не добавлено/i.test(text);
+
+    if (!bad) return text;
+
+    const key = descKey(item);
+    if (DESC_MAP.has(key)) return DESC_MAP.get(key);
+
+    const raw = tx(item && (
+      item.description_ru ||
+      item.overview_ru ||
+      item.description ||
+      item.overview ||
+      item.plot ||
+      item.synopsis
+    ));
+
+    if (raw && raw.length >= 40 && !/описание пока не добавлено/i.test(raw)) return raw;
+
+    return smartFallback(item);
+  };
+
+  function forceOverviewText(){
+    try {
+      const box = document.getElementById("detailOverview");
+      if (!box || !window.selectedItem) return;
+      const text = displayOverview(window.selectedItem);
+      if (text && (!box.textContent || /описание пока не добавлено/i.test(box.textContent) || box.textContent.trim().length < 40)) {
+        box.textContent = text;
+      }
+    } catch {}
+  }
+
+  const oldOpenDetails = typeof openDetails === "function" ? openDetails : null;
+  if (oldOpenDetails) {
+    openDetails = function(item){
+      window.selectedItem = item;
+      const res = oldOpenDetails(item);
+      setTimeout(forceOverviewText, 0);
+      setTimeout(forceOverviewText, 120);
+      return res;
+    };
+  }
+
+  const st = document.createElement("style");
+  st.textContent = `
+    #detailOverview{
+      color:#fff!important;
+      opacity:1!important;
+      filter:none!important;
+      mix-blend-mode:normal!important;
+      white-space:pre-wrap!important;
+      line-height:1.55!important;
+    }
+    .related-card,
+    .related-card *,
+    .related-poster,
+    .related-card img,
+    .related-poster img,
+    .detail-related img,
+    #relatedGrid img,
+    #relatedList img{
+      filter:none!important;
+      opacity:1!important;
+      mix-blend-mode:normal!important;
+      -webkit-filter:none!important;
+    }
+    .related-card::before,
+    .related-card::after{
+      display:none!important;
+      opacity:0!important;
+    }
+  `;
+  document.head.appendChild(st);
+
+  function fixRelatedImages(){
+    try {
+      document.querySelectorAll(".related-card img,.related-poster,#relatedGrid img,#relatedList img,.detail-related img").forEach(img => {
+        img.style.filter = "none";
+        img.style.webkitFilter = "none";
+        img.style.opacity = "1";
+        img.style.mixBlendMode = "normal";
+      });
+    } catch {}
+  }
+
+  document.addEventListener("click", () => {
+    setTimeout(fixRelatedImages, 50);
+    setTimeout(fixRelatedImages, 300);
+    setTimeout(forceOverviewText, 50);
+    setTimeout(forceOverviewText, 300);
+  }, true);
+
+  new MutationObserver(() => {
+    fixRelatedImages();
+    forceOverviewText();
+  }).observe(document.documentElement, { childList:true, subtree:true });
+
+  console.log("GKM V259: descriptions restored and related cards color fixed");
+})();
+/* GKM V259 DESCRIPTION RELATED RESTORE END */
+
