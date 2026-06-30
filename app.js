@@ -9142,3 +9142,418 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
 
 
+
+/* GKM V212 BOOKS MANGA COMICS FOUNDATION START
+   Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
+*/
+(function () {
+  const BOOKS_URL = "./data/books_catalog.json?v=212";
+  const PAGE = 24;
+  let booksCache = null;
+  let booksPage = 1;
+  let booksPages = 1;
+  let activeKind = "all";
+  let activeBookCollection = "all";
+  let booksFilterTimer = null;
+
+  function txt(v) { return String(v == null ? "" : v).trim(); }
+  function low(v) { return txt(v).toLowerCase(); }
+  function esc(v) { try { return escapeHtml(v); } catch { return txt(v).replace(/[&<>\"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[s])); } }
+  function attr(v) { try { return escapeAttr(v); } catch { return esc(v); } }
+  function arr(v) { return Array.isArray(v) ? v.filter(Boolean).map(txt) : (txt(v) ? [txt(v)] : []); }
+  function itemTitle(item) { return txt(item && (item.title || item.name || item.ru || item.en || item.originalTitle || item.original_title || item.original_name)); }
+  function itemKey(s) { return low(s).replace(/ё/g, "е").replace(/[^a-z0-9а-я]+/gi, " ").replace(/\s+/g, " ").trim(); }
+  function isBookItem(item) { const s = low(item && item.section); const t = low(item && (item.type || item.category)); return s === "books" || ["книга","манга","комикс","ранобэ","новелла"].includes(t); }
+
+  const FALLBACK_BOOKS = [
+    { id:"book-witcher-last-wish", title:"Ведьмак: Последнее желание", type:"Книга", category:"Книги", section:"books", year:1993, rating:8.7, votes:120000, genres:["фэнтези","монстры"], relation:"book_to_game_series", relationLabel:"Книга → игры → сериал", universeName:"The Witcher", relatedMedia:["The Witcher","The Witcher 3"], readOrder:["Последнее желание","Меч Предназначения","Кровь эльфов"], watchOrder:["The Witcher"], playOrder:["The Witcher 3"], vibe:["магия","моральный выбор"], description:"Стартовая книга для входа во вселенную Ведьмака." },
+    { id:"manga-attack-on-titan", title:"Атака титанов", type:"Манга", category:"Манга", section:"books", year:2009, rating:9.0, votes:250000, genres:["тёмное фэнтези","экшен"], relation:"manga_to_anime_games", relationLabel:"Манга → аниме → игры", universeName:"Attack on Titan", relatedMedia:["Attack on Titan"], readOrder:["манга главы 1–139"], watchOrder:["Attack on Titan Season 1","Final Season"], playOrder:["Attack on Titan 2"], vibe:["титаны","война"], description:"Манга-первоисточник для аниме Attack on Titan." },
+    { id:"comic-batman-year-one", title:"Бэтмен: Год первый", type:"Комикс", category:"Комиксы", section:"books", year:1987, rating:8.8, votes:95000, genres:["супергерои","нуар"], relation:"comic_to_movies_games", relationLabel:"Комикс → фильмы → игры", universeName:"Batman", relatedMedia:["Batman Begins","The Batman","Batman Arkham"], readOrder:["Year One","The Long Halloween"], watchOrder:["Batman Begins","The Batman"], playOrder:["Batman Arkham series"], vibe:["Готэм","детектив"], description:"Один из лучших входов в комиксную вселенную Бэтмена." }
+  ];
+
+  function bookFallbackPoster(title, type) {
+    const t = esc(title || "Книга");
+    const kind = esc(type || "книги / манга / комиксы");
+    const icon = low(type).includes("манга") ? "📖" : (low(type).includes("комик") ? "💥" : "📚");
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1d0b06"/><stop offset=".45" stop-color="#5a2812"/><stop offset="1" stop-color="#ffd166"/></linearGradient><radialGradient id="r" cx="50%" cy="30%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".20"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>
+      <rect width="600" height="900" fill="url(#g)"/><rect width="600" height="900" fill="url(#r)"/>
+      <circle cx="500" cy="120" r="130" fill="#ffd166" opacity=".18"/><circle cx="80" cy="770" r="160" fill="#ff5c8a" opacity=".16"/>
+      <text x="50%" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="82" font-weight="900" fill="#fff">${icon}</text>
+      <text x="50%" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="900" fill="#fff">${t}</text>
+      <text x="50%" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#fff1bd">${kind}</text>
+      <rect x="70" y="690" width="460" height="68" rx="22" fill="#130b07" opacity=".74" stroke="#ffd166"/>
+      <text x="50%" y="733" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="900" fill="#fff6d6">ГОЛУБЬ · BOOK HUB</text>
+    </svg>`;
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  function bookPosterFor(item) { return txt(item && item.poster) || bookFallbackPoster(itemTitle(item), item && item.type); }
+
+  function bookLinkUrl(kind, title) {
+    const q = encodeURIComponent(title || "book");
+    switch (kind) {
+      case "googleBooks": return "https://www.google.com/search?tbm=bks&q=" + q;
+      case "goodreads": return "https://www.goodreads.com/search?q=" + q;
+      case "litres": return "https://www.litres.ru/search/?q=" + q;
+      case "authorToday": return "https://author.today/search?q=" + q;
+      case "mangalib": return "https://mangalib.me/ru/search?type=manga&q=" + q;
+      case "mangadex": return "https://mangadex.org/search?q=" + q;
+      case "readmanga": return "https://www.google.com/search?q=" + q + "%20ReadManga";
+      case "comics": return "https://www.google.com/search?q=" + q + "%20comic%20read%20order";
+      case "wiki": return "https://www.google.com/search?q=" + q + "%20wiki";
+      case "telegram": return "https://t.me/share/url?url=" + encodeURIComponent(location.origin + location.pathname + "#book=" + q) + "&text=" + encodeURIComponent("📚 " + (title || "Книга") + " — Голубь Каталог Мира");
+      case "google": default: return "https://www.google.com/search?q=" + q;
+    }
+  }
+
+  function extLink(label, url) { return `<a class="external-link gkm-book-external" data-gkm-v212-book-external="1" href="${attr(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`; }
+  function chip(label) { return `<span class="gkm-book-chip">${esc(label)}</span>`; }
+  function chipLinks(list, suffix) { return arr(list).map(x => extLink(x, bookLinkUrl("google", x + " " + (suffix || "")))).join(""); }
+  function sectionHtml(title, body, hint) { if (!txt(body)) return ""; return `<section class="gkm-book-section"><h3>${esc(title)}</h3>${hint ? `<div class="gkm-book-hint">${esc(hint)}</div>` : ""}<div>${body}</div></section>`; }
+
+  function bookHay(item) {
+    return itemKey([
+      itemTitle(item), item && item.originalTitle, item && item.type, item && item.category, item && item.relation, item && item.relationLabel,
+      arr(item && item.genres).join(" "), arr(item && item.badges).join(" "), arr(item && item.relatedMedia).join(" "),
+      arr(item && item.readOrder).join(" "), arr(item && item.watchOrder).join(" "), arr(item && item.playOrder).join(" "),
+      arr(item && item.vibe).join(" "), item && item.universeName, item && item.description
+    ].filter(Boolean).join(" "));
+  }
+
+  async function loadBooks() {
+    if (booksCache) return booksCache;
+    try {
+      const res = await fetch(BOOKS_URL, { cache: "force-cache" });
+      if (!res.ok) throw new Error("books_catalog fetch failed " + res.status);
+      const json = await res.json();
+      booksCache = Array.isArray(json) ? json : (json.items || []);
+    } catch (err) {
+      console.warn("GKM V212: fallback books loaded", err);
+      booksCache = FALLBACK_BOOKS;
+    }
+    booksCache = booksCache.map((item, index) => ({
+      ...item,
+      id: item.id || ("book-" + index + "-" + itemKey(item.title || item.name).replace(/\s+/g,"-")),
+      section: "books",
+      overview: item.overview || item.description || "Раздел книг, манги и комиксов с привязкой к фильмам, сериалам, аниме и играм.",
+      poster: bookPosterFor(item)
+    }));
+    return booksCache;
+  }
+
+  function controlsState() {
+    const q = itemKey(document.getElementById("searchInput")?.value || "");
+    const genre = txt(document.getElementById("genreFilter")?.value || "");
+    const year = txt(document.getElementById("yearFilter")?.value || "");
+    const rating = Number(document.getElementById("ratingFilter")?.value || 0);
+    const sort = txt(document.getElementById("sortFilter")?.value || "smart");
+    return { q, genre, year, rating, sort };
+  }
+
+  function inKind(item, kind) {
+    if (!kind || kind === "all") return true;
+    const t = low(item && item.type);
+    if (kind === "books") return t.includes("книга");
+    if (kind === "manga") return t.includes("манга") || t.includes("ранобэ") || t.includes("новел");
+    if (kind === "comics") return t.includes("комик");
+    if (kind === "sources") return bookHay(item).includes("первоисточник") || bookHay(item).includes("книга");
+    return true;
+  }
+
+  function inCollection(item, key) {
+    if (!key || key === "all") return true;
+    const hay = bookHay(item);
+    const r = txt(item && item.relation);
+    if (key === "to_movies") return r.includes("movie") || hay.includes("фильм");
+    if (key === "to_series") return r.includes("series") || hay.includes("сериал");
+    if (key === "to_anime") return r.includes("anime") || hay.includes("аниме");
+    if (key === "to_games") return r.includes("game") || hay.includes("игр");
+    if (key === "fantasy") return hay.includes("фэнтези") || hay.includes("магия");
+    if (key === "scifi") return hay.includes("фантаст") || hay.includes("космос") || hay.includes("киберпанк");
+    if (key === "superheroes") return hay.includes("супергер") || hay.includes("marvel") || hay.includes("dc");
+    if (key === "cult") return Number(item.rating || 0) >= 8.7 || hay.includes("культовая");
+    return true;
+  }
+
+  function filteredBooks(all) {
+    const c = controlsState();
+    let rows = all.filter(item => inKind(item, activeKind) && inCollection(item, activeBookCollection));
+    if (c.q) rows = rows.filter(item => bookHay(item).includes(c.q));
+    if (c.genre) rows = rows.filter(item => arr(item.genres).some(g => itemKey(g) === itemKey(c.genre) || itemKey(g).includes(itemKey(c.genre))));
+    if (c.year) rows = rows.filter(item => String(item.year || "") === String(c.year));
+    if (c.rating) rows = rows.filter(item => Number(item.rating || 0) >= c.rating);
+    rows.sort((a,b) => {
+      if (c.sort === "year_desc" || c.sort === "new") return Number(b.year || 0) - Number(a.year || 0);
+      if (c.sort === "year_asc") return Number(a.year || 0) - Number(b.year || 0);
+      if (c.sort === "rating") return Number(b.rating || 0) - Number(a.rating || 0);
+      return (Number(b.rating || 0) * 1000000 + Math.min(Number(b.votes || 0), 300000)) - (Number(a.rating || 0) * 1000000 + Math.min(Number(a.votes || 0), 300000));
+    });
+    return rows;
+  }
+
+  function ensureBooksTab() {
+    const tabs = document.querySelector(".tabs") || document.querySelector(".nav-tabs") || document.querySelector("header .tabs");
+    if (!tabs || tabs.querySelector('[data-tab="books"]')) return;
+    const btn = document.createElement("button");
+    btn.className = "tab gkm-books-tab";
+    btn.dataset.tab = "books";
+    btn.type = "button";
+    btn.textContent = "📚 Книги/Манга";
+    tabs.appendChild(btn);
+  }
+
+  function ensureBooksPanel() {
+    const grid = document.getElementById("grid");
+    if (!grid || document.getElementById("gkmBooksHubPanel")) return;
+    const panel = document.createElement("section");
+    panel.id = "gkmBooksHubPanel";
+    panel.className = "gkm-books-panel";
+    panel.style.display = "none";
+    panel.innerHTML = `
+      <div class="gkm-books-panel-title">📚 Книги · Манга · Комиксы</div>
+      <div class="gkm-books-panel-subtitle">Идея автора проекта: единый Каталог Мира, где первоисточники связаны с фильмами, сериалами, аниме и играми.</div>
+      <div class="gkm-books-filter-row" id="gkmBookKindFilters"></div>
+      <div class="gkm-books-filter-row gkm-books-collections" id="gkmBookCollections"></div>
+    `;
+    grid.parentNode.insertBefore(panel, grid);
+  }
+
+  function button(label, key, active, attrName, count) {
+    return `<button type="button" class="gkm-book-filter${active ? " active" : ""}" ${attrName}="${attr(key)}">${esc(label)}${typeof count === "number" ? ` · ${count}` : ""}</button>`;
+  }
+
+  function updateBookFilters(all, rows) {
+    const kinds = document.getElementById("gkmBookKindFilters");
+    const cols = document.getElementById("gkmBookCollections");
+    if (kinds) {
+      const defs = [["all","Все"],["books","Книги"],["manga","Манга/ранобэ"],["comics","Комиксы"],["sources","Первоисточники"]];
+      kinds.innerHTML = defs.map(([k,l]) => button(l, k, activeKind === k, "data-gkm-book-kind", all.filter(x => inKind(x,k)).length)).join("");
+    }
+    if (cols) {
+      const defs = [["all","Все связи"],["to_movies","→ фильмы"],["to_series","→ сериалы"],["to_anime","→ аниме"],["to_games","→ игры"],["fantasy","Фэнтези"],["scifi","Фантастика"],["superheroes","Супергерои"],["cult","Культовые"]];
+      cols.innerHTML = defs.map(([k,l]) => button(l, k, activeBookCollection === k, "data-gkm-book-collection", all.filter(x => inCollection(x,k)).length)).join("") + '<button type="button" class="gkm-book-filter reset" data-gkm-book-reset="1">Сбросить</button>';
+    }
+  }
+
+  function enhanceBookCards(root) {
+    if (!root) return;
+    root.querySelectorAll(".card").forEach(card => {
+      const id = card.getAttribute("data-id");
+      const item = (currentItems || []).find(x => String(x.id || (x.title + "|" + x.year)) === id);
+      if (!item || !isBookItem(item)) return;
+      card.classList.add("gkm-book-card");
+      const poster = card.querySelector(".poster-wrap");
+      if (poster) {
+        const img = poster.querySelector("img");
+        if (img && !img.dataset.gkmV212PosterGuard) {
+          img.dataset.gkmV212PosterGuard = "1";
+          img.loading = "lazy";
+          img.decoding = "async";
+          img.onerror = function () { this.onerror = null; this.src = bookFallbackPoster(itemTitle(item), item.type); };
+        }
+        if (!poster.querySelector(".gkm-book-relation-badge")) {
+          const b = document.createElement("div");
+          b.className = "gkm-book-relation-badge";
+          b.textContent = item.relationLabel || item.type || "Книга";
+          poster.appendChild(b);
+        }
+      }
+    });
+  }
+
+  async function renderBooks(page) {
+    currentMode = "books";
+    currentTab = "books";
+    booksPage = Math.max(1, Number(page || booksPage || 1));
+    if (typeof setActiveTab === "function") setActiveTab("books");
+    const all = await loadBooks();
+    const rows = filteredBooks(all);
+    booksPages = Math.max(1, Math.ceil(rows.length / PAGE));
+    booksPage = Math.min(booksPage, booksPages);
+    currentPage = booksPage; currentPages = booksPages;
+    const start = (booksPage - 1) * PAGE;
+    const slice = rows.slice(start, start + PAGE);
+    currentItems = slice;
+    const panel = document.getElementById("gkmBooksHubPanel");
+    if (panel) panel.style.display = "";
+    const gamePanel = document.getElementById("gkmGameHubPanel");
+    if (gamePanel) gamePanel.style.display = "none";
+    updateBookFilters(all, rows);
+    const count = document.getElementById("countText");
+    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V212`;
+    const grid = document.getElementById("grid");
+    if (grid) {
+      grid.classList.remove("gkm-v191-search-best", "gkm-v191-spotlight", "gkm-v191-highlight");
+      grid.style.outline = "none"; grid.style.boxShadow = "none"; grid.style.borderColor = "transparent";
+      grid.innerHTML = slice.length ? slice.map(cardHtml).join("") : `<div class="gkm-book-empty">Ничего не найдено. Сбрось фильтры или измени поиск.</div>`;
+      enhanceBookCards(grid);
+      if (typeof schedulePosterRecovery === "function") schedulePosterRecovery(grid);
+    }
+    const pageText = document.getElementById("pageText");
+    const prev = document.getElementById("prevBtn");
+    const next = document.getElementById("nextBtn");
+    if (pageText) pageText.textContent = booksPage + " / " + booksPages;
+    if (prev) prev.disabled = booksPage <= 1;
+    if (next) next.disabled = booksPage >= booksPages;
+  }
+
+  function bookShareHtml(item) {
+    const title = itemTitle(item);
+    const url = location.origin + location.pathname + "#book=" + encodeURIComponent(title);
+    return `<div class="detail-buttons">${extLink("📲 Telegram", bookLinkUrl("telegram", title))}<button type="button" class="external-link gkm-book-copy" data-gkm-book-copy="${attr(url)}">📋 Скопировать ссылку</button>${extLink("🔎 Google", bookLinkUrl("google", title))}</div>`;
+  }
+
+  function orderList(title, list) {
+    const rows = arr(list);
+    if (!rows.length) return "";
+    return `<div class="gkm-book-order-title">${esc(title)}</div><ol class="gkm-book-order">${rows.map(x => `<li>${esc(x)}</li>`).join("")}</ol>`;
+  }
+
+  function bookModalHtml(item) {
+    const title = itemTitle(item);
+    const read = orderList("📚 Читать по порядку", item.readOrder || [title]);
+    const watch = orderList("🎬 Смотреть по порядку", item.watchOrder || item.relatedMedia);
+    const play = orderList("🎮 Играть по порядку", item.playOrder);
+    const links = [
+      extLink("Google Books", bookLinkUrl("googleBooks", title)), extLink("Goodreads", bookLinkUrl("goodreads", title)), extLink("ЛитРес", bookLinkUrl("litres", title)), extLink("Author.Today", bookLinkUrl("authorToday", title)),
+      extLink("MangaLib", bookLinkUrl("mangalib", title)), extLink("MangaDex", bookLinkUrl("mangadex", title)), extLink("ReadManga", bookLinkUrl("readmanga", title)), extLink("Wiki / порядок", bookLinkUrl("wiki", title))
+    ].join("");
+    const related = chipLinks(item.relatedMedia, " фильм сериал аниме игра");
+    const vibe = arr(item.vibe).map(chip).join("");
+    const badges = arr(item.badges).map(chip).join("");
+    const start = `<div class="gkm-book-start-box"><b>🧭 С чего начать:</b><br>${arr(item.readOrder).length ? esc(arr(item.readOrder)[0]) : esc(title)}${arr(item.watchOrder).length ? " → потом можно смотреть: " + esc(arr(item.watchOrder)[0]) : ""}${arr(item.playOrder).length ? " → потом играть: " + esc(arr(item.playOrder)[0]) : ""}</div>`;
+    return [
+      sectionHtml("📲 Поделиться", bookShareHtml(item), "Карточку можно быстро кинуть в Telegram или скопировать ссылку."),
+      sectionHtml("🧭 С чего начать вселенную", start, "Главная фишка раздела: видно, откуда начинать книгу/мангу/комикс и куда идти дальше."),
+      sectionHtml("📚 Читать / искать", '<div class="detail-buttons">' + links + '</div>'),
+      sectionHtml("🔗 Связанное кино / аниме / игры", '<div class="gkm-book-chip-list">' + (related || chip("Связи будут добавляться")) + '</div>'),
+      sectionHtml("🧩 Порядок", read + watch + play),
+      sectionHtml("✨ Метки", '<div class="gkm-book-chip-list">' + (badges || chip(item.type || "Книга")) + '</div>'),
+      sectionHtml("🎭 Вайб", '<div class="gkm-book-chip-list">' + vibe + '</div>')
+    ].join("");
+  }
+
+  function ensureBookLinksBlock() {
+    const dialog = document.getElementById("detailsDialog");
+    if (!dialog) return null;
+    let block = document.getElementById("bookHubLinksBlock");
+    if (block) return block;
+    block = document.createElement("section");
+    block.id = "bookHubLinksBlock";
+    block.className = "detail-section gkm-book-modal-block";
+    block.innerHTML = '<h2>📚 Book Hub</h2><div id="bookHubBody"></div>';
+    const host = document.getElementById("detailLinks")?.parentNode || dialog.querySelector(".details-body") || dialog;
+    host.appendChild(block);
+    return block;
+  }
+
+  async function relatedBooksForMedia(item) {
+    const title = itemKey(itemTitle(item));
+    if (!title) return [];
+    const books = await loadBooks();
+    return books.filter(book => arr(book.relatedMedia).some(m => {
+      const k = itemKey(m);
+      return k && (k === title || k.includes(title) || title.includes(k));
+    })).slice(0, 8);
+  }
+
+  function mediaBookBlockHtml(books, mediaTitle) {
+    if (!books.length) return "";
+    const links = books.map(b => extLink(itemTitle(b), bookLinkUrl("google", itemTitle(b) + " читать порядок"))).join("");
+    const chips = books.map(b => chip((b.relationLabel || "связь") + " · " + itemTitle(b))).join("");
+    return sectionHtml("📚 Первоисточник / книга / манга", '<div class="detail-buttons">' + links + '</div>', "Найдено по связке с “" + mediaTitle + "”.") + sectionHtml("🔗 Связь с Book Hub", '<div class="gkm-book-chip-list">' + chips + '</div>');
+  }
+
+  async function applyBookModal(item) {
+    const block = ensureBookLinksBlock();
+    const body = document.getElementById("bookHubBody");
+    if (!block || !body) return;
+    if (isBookItem(item)) {
+      block.style.display = "";
+      body.innerHTML = bookModalHtml(item);
+      return;
+    }
+    const related = await relatedBooksForMedia(item);
+    if (related.length) {
+      block.style.display = "";
+      body.innerHTML = mediaBookBlockHtml(related, itemTitle(item));
+    } else {
+      block.style.display = "none"; body.innerHTML = "";
+    }
+  }
+
+  function patchOpenDetails() {
+    if (window.GKM_V212_OPEN_DETAILS_PATCHED === "1") return;
+    if (typeof openDetails !== "function") return;
+    const original = openDetails;
+    openDetails = function gkmV212OpenDetails(item) {
+      original(item);
+      setTimeout(() => applyBookModal(item), 0);
+    };
+    window.GKM_V212_OPEN_DETAILS_PATCHED = "1";
+  }
+
+  function injectStyle() {
+    if (document.getElementById("gkm-v212-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v212-style";
+    style.textContent = `
+      .gkm-books-tab{background:linear-gradient(135deg,rgba(255,209,102,.20),rgba(255,92,138,.24))!important;border-color:rgba(255,209,102,.55)!important;box-shadow:0 0 18px rgba(255,209,102,.16)!important;}
+      .gkm-books-panel{margin:14px 0 18px;padding:16px;border:1px solid rgba(255,209,102,.28);border-radius:22px;background:linear-gradient(135deg,rgba(255,209,102,.09),rgba(255,92,138,.06));box-shadow:0 18px 38px rgba(0,0,0,.18)}
+      .gkm-books-panel-title{font-size:22px;font-weight:900;color:#fff;margin-bottom:5px}.gkm-books-panel-subtitle{opacity:.82;margin-bottom:12px;line-height:1.35}
+      .gkm-books-filter-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.gkm-book-filter{border:1px solid rgba(255,209,102,.32);background:rgba(255,255,255,.06);color:#fff;border-radius:999px;padding:9px 12px;font-weight:800;cursor:pointer}.gkm-book-filter.active{background:linear-gradient(135deg,#ffd166,#ff5c8a);color:#170a06;box-shadow:0 0 18px rgba(255,209,102,.30)}.gkm-book-filter.reset{opacity:.86}
+      .gkm-book-card .poster-wrap{background:linear-gradient(135deg,#1d0b06,#5a2812)}.gkm-book-relation-badge{position:absolute;left:8px;right:8px;bottom:8px;z-index:5;padding:7px 9px;border-radius:14px;background:rgba(12,8,5,.76);border:1px solid rgba(255,209,102,.38);font-size:11px;font-weight:900;color:#fff6d6;text-align:center;backdrop-filter:blur(8px)}
+      .gkm-book-modal-block{border-color:rgba(255,209,102,.30)!important;background:linear-gradient(135deg,rgba(255,209,102,.08),rgba(255,92,138,.05))!important}.gkm-book-section{margin:12px 0;padding:12px;border:1px solid rgba(255,209,102,.18);border-radius:18px;background:rgba(255,255,255,.04)}.gkm-book-section h3{margin:0 0 8px;font-size:17px}.gkm-book-hint{opacity:.75;font-size:13px;margin:-3px 0 9px}.gkm-book-chip-list{display:flex;flex-wrap:wrap;gap:7px}.gkm-book-chip{display:inline-flex;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,209,102,.23);background:rgba(255,209,102,.08);font-weight:800}.gkm-book-start-box{padding:12px;border-radius:16px;background:rgba(255,209,102,.11);border:1px solid rgba(255,209,102,.22);line-height:1.45}.gkm-book-order-title{font-weight:900;margin:8px 0 4px}.gkm-book-order{margin:0 0 8px 22px}.gkm-book-empty{grid-column:1/-1;padding:30px;text-align:center;border:1px dashed rgba(255,209,102,.3);border-radius:18px;opacity:.9}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function scheduleBooksFilter() { clearTimeout(booksFilterTimer); booksFilterTimer = setTimeout(() => renderBooks(1), 80); }
+
+  document.addEventListener("click", function(event) {
+    const tab = event.target.closest && event.target.closest('.tab[data-tab="books"]');
+    if (tab) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); renderBooks(1); return; }
+    const kind = event.target.closest && event.target.closest('[data-gkm-book-kind]');
+    if (kind) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); activeKind = kind.dataset.gkmBookKind || "all"; renderBooks(1); return; }
+    const col = event.target.closest && event.target.closest('[data-gkm-book-collection]');
+    if (col) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); activeBookCollection = col.dataset.gkmBookCollection || "all"; renderBooks(1); return; }
+    const reset = event.target.closest && event.target.closest('[data-gkm-book-reset]');
+    if (reset) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); activeKind = "all"; activeBookCollection = "all"; renderBooks(1); return; }
+    if (currentMode === "books") {
+      const prev = event.target.closest && event.target.closest("#prevBtn");
+      const next = event.target.closest && event.target.closest("#nextBtn");
+      if (prev) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); if (booksPage > 1) renderBooks(booksPage - 1); return; }
+      if (next) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); if (booksPage < booksPages) renderBooks(booksPage + 1); return; }
+    } else {
+      const panel = document.getElementById("gkmBooksHubPanel");
+      if (panel) panel.style.display = "none";
+    }
+  }, true);
+
+  document.addEventListener("input", function(event) { if (currentMode !== "books") return; if (!event.target.closest || !event.target.closest(".controls")) return; event.stopPropagation(); event.stopImmediatePropagation(); scheduleBooksFilter(); }, true);
+  document.addEventListener("change", function(event) { if (currentMode !== "books") return; if (!event.target.closest || !event.target.closest(".controls")) return; event.stopPropagation(); event.stopImmediatePropagation(); scheduleBooksFilter(); }, true);
+
+  document.addEventListener("click", function(event) {
+    const btn = event.target.closest && event.target.closest("[data-gkm-book-copy]");
+    if (!btn) return;
+    event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+    const url = btn.getAttribute("data-gkm-book-copy") || location.href;
+    const done = () => { btn.textContent = "✅ Ссылка скопирована"; setTimeout(() => { btn.textContent = "📋 Скопировать ссылку"; }, 1500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done).catch(() => prompt("Скопируй ссылку:", url));
+    else prompt("Скопируй ссылку:", url);
+  }, true);
+
+  document.addEventListener("click", function(event) {
+    const el = event.target.closest && event.target.closest("a[data-gkm-v212-book-external]");
+    if (!el) return;
+    const url = el.getAttribute("href") || "";
+    if (!/^https?:\/\//i.test(url)) return;
+    event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+    window.open(url, "_blank", "noopener,noreferrer");
+  }, true);
+
+  function init() { injectStyle(); ensureBooksTab(); ensureBooksPanel(); patchOpenDetails(); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+/* GKM V212 BOOKS MANGA COMICS FOUNDATION END */
