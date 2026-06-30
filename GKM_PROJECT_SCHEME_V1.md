@@ -1,4 +1,4 @@
-[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29499262/GKM_PROJECT_SCHEME_V1.md)
+[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29499686/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
 
@@ -456,3 +456,14 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 - fallback генерируется на лету, если у карточки нет настоящей обложки
 - первая страница книг уменьшена до 18 карточек для быстрой загрузки
 - видимые постеры получают приоритет, остальные грузятся лениво
+
+## GKM V221 SPLIT BOOK DATABASE 1000+
+- раздел Книги/Манга/Комиксы расширен до 1008 записей
+- база разбита на отдельные файлы:
+  - data/books/manga.json
+  - data/books/ranobe.json
+  - data/books/books.json
+  - data/books/comics.json
+  - data/books/index.json
+- app.js сначала грузит split-файлы, если не получилось — combined data/books_catalog.json
+- часть новых записей помечена sourceQuality=generated_seed: это заготовки для будущей ручной чистки и замены на точные обложки
