@@ -4124,7 +4124,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   window.GKM_V202_GAME_HUB_VERSION = "v211-game-collections-fast-posters-2026-06-29";
 
-  const GAMES_URL = "./data/games_catalog.json?v=238";
+  const GAMES_URL = "./data/games_catalog.json?v=239";
   const PAGE = 24;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -9147,7 +9147,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=238";
+  const BOOKS_URL = "./data/books_catalog.json?v=239";
   const BOOKS_SPLIT_URLS = ["./data/books/manga.json?v=222","./data/books/ranobe.json?v=222","./data/books/books.json?v=222","./data/books/comics.json?v=222"];
   const PAGE = 24;
   const BOOK_PAGE = 18;
@@ -10034,7 +10034,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=224",
     "./data/games/franchises.json?v=224"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=238";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=239";
   const GAME_PAGE_SIZE = 18;
   let gameDB = null;
   let gamePage = 1;
@@ -10350,7 +10350,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=226",
     "./data/games/franchises.json?v=226"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=238";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=239";
   const PAGE_SIZE = 18;
   let db = null;
   let page = 1;
@@ -10778,4 +10778,70 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V237 DEDUPE FIX - no style changes */
 
 
-/* GKM V238 RELATED CARDS COLOR ONLY - no layout/data changes */
+
+/* GKM V239 HARD DOM DEDUPE FALLBACK START */
+(function(){
+  function txt(v){ return String(v == null ? "" : v).trim(); }
+  function key(v){
+    return txt(v).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[«»"“”'’`]/g,"")
+      .replace(/\([^)]*\)/g," ")
+      .replace(/\b(19\d{2}|20\d{2})\b/g," ")
+      .replace(/[^a-z0-9а-я]+/g," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function dedupeCards(){
+    const grid = document.getElementById("grid") || document.querySelector(".grid");
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll(".card"));
+    if (!cards.length) return;
+    const seen = new Set();
+    let hidden = 0;
+    for (const card of cards) {
+      const title = key((card.querySelector(".card-title,h3,.title") || {}).textContent || "");
+      const type = key((card.querySelector(".card-badge,.badge,.card-meta,.meta") || {}).textContent || "");
+      if (!title) continue;
+      let group = "movie";
+      if (type.includes("сериал")) group = "series";
+      else if (type.includes("аниме")) group = "anime";
+      else if (type.includes("мульт")) group = "cartoon";
+      else if (type.includes("игра")) group = "game";
+      else if (type.includes("книга") || type.includes("манга") || type.includes("комик")) group = "book";
+      const k = group + "::" + title;
+      if (seen.has(k)) {
+        card.remove();
+        hidden++;
+      } else {
+        seen.add(k);
+      }
+    }
+    if (hidden) {
+      console.info("GKM V239: DOM duplicates removed", hidden);
+      const count = document.getElementById("countText");
+      if (count && !/дубли убраны/i.test(count.textContent || "")) {
+        count.textContent = (count.textContent || "").replace(/\s*·\s*дубли убраны/g,"") + " · дубли убраны";
+      }
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", dedupeCards);
+  else dedupeCards();
+
+  document.addEventListener("click", function(){
+    setTimeout(dedupeCards, 80);
+    setTimeout(dedupeCards, 260);
+    setTimeout(dedupeCards, 700);
+  }, true);
+
+  let t = null;
+  const obs = new MutationObserver(function(){
+    clearTimeout(t);
+    t = setTimeout(dedupeCards, 80);
+  });
+  obs.observe(document.documentElement, {childList:true, subtree:true});
+})();
+ /* GKM V239 HARD DOM DEDUPE FALLBACK END */
+
+
+/* GKM V239 HARD DATA DEDUPE - no style changes */
