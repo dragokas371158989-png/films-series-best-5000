@@ -9833,3 +9833,191 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   else inject();
 })();
  /* GKM V222 ALL BOOK POSTERS FIX END */
+
+
+
+/* GKM V223 UNIVERSAL DESCRIPTIONS FIX START */
+(function(){
+  function txt(v){ return String(v == null ? "" : v).trim(); }
+  function low(v){ return txt(v).toLowerCase(); }
+  function arr(v){ return Array.isArray(v) ? v.filter(Boolean).map(txt) : (txt(v) ? [txt(v)] : []); }
+  function esc(v){
+    try { return escapeHtml(v); }
+    catch(e){ return txt(v).replace(/[&<>"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[s])); }
+  }
+  function titleOf(item){
+    return txt(item && (item.title || item.name || item.ru || item.en || item.originalTitle || item.original_title || item.original_name)) || "Проект";
+  }
+  function kindOf(item){
+    const s = low(item && (item.section || item.category || item.type || item.media_type));
+    if (s.includes("book") || s.includes("книга") || s.includes("манга") || s.includes("комик") || s.includes("ранобэ")) return "book";
+    if (s.includes("game") || s.includes("игра")) return "game";
+    if (s.includes("anime") || s.includes("аниме")) return "anime";
+    if (s.includes("cartoon") || s.includes("мульт")) return "cartoon";
+    if (s.includes("series") || s.includes("сериал") || s.includes("tv")) return "series";
+    if (s.includes("movie") || s.includes("фильм")) return "movie";
+    return "media";
+  }
+  function realDescription(item){
+    const fields = [
+      item && item.description,
+      item && item.overview,
+      item && item.shortDescription,
+      item && item.short_description,
+      item && item.plot,
+      item && item.annotation
+    ];
+    return txt(fields.find(x => txt(x).length > 40));
+  }
+  function yearOf(item){ return txt(item && (item.year || item.releaseYear || item.first_air_date || item.release_date)); }
+  function ratingOf(item){ return txt(item && (item.rating || item.kpRating || item.vote_average)); }
+  function genreText(item){ return arr(item && item.genres).slice(0,5).join(", "); }
+  function relatedText(item){ return arr(item && (item.relatedMedia || item.related || item.watchOrder || item.playOrder)).slice(0,5).join(", "); }
+
+  const vibeDict = {
+    movie: "Так как просмотр внутри каталога не встроен, описание помогает заранее понять настроение, жанр и смысл проекта перед переходом на внешние сайты.",
+    series: "Сериал раскрывается дольше фильма: важны персонажи, темп, сезоны и атмосфера. Описание помогает понять, стоит ли начинать длинную историю.",
+    anime: "В аниме важны стиль, арки персонажей, визуал, первоисточник и настроение. Описание помогает понять, подходит ли проект под нужный вайб.",
+    cartoon: "Анимация может быть семейной, приключенческой или серьёзной. Описание помогает отличить лёгкий мульт от полноценной истории.",
+    game: "Игровая карточка показывает, во что играть, с чем связана вселенная и какие фильмы, сериалы, книги или аниме могут быть рядом.",
+    book: "Книжная карточка показывает первоисточник, связь с экранизациями, играми и аниме, а также помогает понять, с чего начинать вселенную.",
+    media: "Карточка помогает быстро понять тип проекта, жанры, рейтинг, связи и общий смысл перед выбором."
+  };
+
+  function generatedDescription(item){
+    const title = titleOf(item);
+    const kind = kindOf(item);
+    const year = yearOf(item);
+    const rating = ratingOf(item);
+    const genres = genreText(item);
+    const relation = txt(item && (item.relationLabel || item.relation));
+    const universe = txt(item && item.universeName);
+    const related = relatedText(item);
+
+    let p1 = "";
+    if (kind === "game") {
+      p1 = `${title} — игровая карточка в Каталоге Мира${year ? ` (${year})` : ""}. Здесь собрана информация о жанре, атмосфере и связях игры с фильмами, сериалами, аниме, книгами или комиксами.`;
+    } else if (kind === "book") {
+      p1 = `${title} — карточка раздела книг, манги, ранобэ и комиксов${year ? ` (${year})` : ""}. Она помогает понять, является ли произведение первоисточником и с какими экранизациями, играми или аниме оно связано.`;
+    } else if (kind === "anime") {
+      p1 = `${title} — аниме-проект${year ? ` (${year})` : ""}. Карточка помогает оценить жанр, настроение, рейтинг и понять, стоит ли переходить к просмотру или поиску связанных материалов.`;
+    } else if (kind === "series") {
+      p1 = `${title} — сериал${year ? ` (${year})` : ""}. Перед выбором полезно смотреть не только рейтинг, но и жанры, длительность, темп и общую атмосферу.`;
+    } else if (kind === "cartoon") {
+      p1 = `${title} — анимационный проект${year ? ` (${year})` : ""}. Он может быть лёгким семейным просмотром или полноценной историей со своей вселенной.`;
+    } else {
+      p1 = `${title} — проект из каталога${year ? ` (${year})` : ""}. Карточка нужна, чтобы быстро понять, что это за история, какой у неё жанр, рейтинг и с чем она связана.`;
+    }
+
+    let details = [];
+    if (genres) details.push(`Жанры: ${genres}.`);
+    if (rating) details.push(`Рейтинг: ${rating}.`);
+    if (relation) details.push(`Связь: ${relation}.`);
+    if (universe) details.push(`Вселенная: ${universe}.`);
+    if (related) details.push(`Связанные проекты: ${related}.`);
+
+    const p2 = details.length ? details.join(" ") : vibeDict[kind];
+    const p3 = vibeDict[kind];
+    return `${p1}\n\n${p2}\n\n${p3}`;
+  }
+
+  function fullDescription(item){
+    const d = realDescription(item);
+    if (d && d.length >= 220) return d;
+    if (d && d.length > 40) return d + "\n\n" + generatedDescription(item);
+    return generatedDescription(item);
+  }
+
+  function findModal(){
+    return document.querySelector(".modal.open, .modal.show, #modal, #detailsModal, .details-modal, .gkm-modal") || document.querySelector('[role="dialog"]');
+  }
+
+  function injectDescriptionBlock(item){
+    const modal = findModal();
+    if (!modal || !item) return;
+
+    const old = modal.querySelector("#gkmV223DescriptionBlock");
+    if (old) old.remove();
+
+    const body =
+      modal.querySelector(".modal-body") ||
+      modal.querySelector(".details-body") ||
+      modal.querySelector(".modal-content") ||
+      modal;
+
+    const desc = fullDescription(item);
+    const block = document.createElement("section");
+    block.id = "gkmV223DescriptionBlock";
+    block.className = "gkm-v223-description-block";
+    block.innerHTML = `
+      <h3>📖 Подробное описание</h3>
+      <div class="gkm-v223-description-text">${esc(desc).replace(/\n\n/g, "</p><p>").replace(/^/, "<p>").replace(/$/, "</p>")}</div>
+    `;
+
+    const existingOverview =
+      body.querySelector(".overview") ||
+      body.querySelector(".description") ||
+      body.querySelector(".details-description") ||
+      body.querySelector(".modal-description");
+
+    if (existingOverview && existingOverview.parentNode) {
+      existingOverview.parentNode.insertBefore(block, existingOverview.nextSibling);
+    } else {
+      body.appendChild(block);
+    }
+  }
+
+  function patchOpenDetails(){
+    if (window.GKM_V223_DESCRIPTIONS_PATCHED === "1") return;
+    if (typeof openDetails !== "function") return;
+    const old = openDetails;
+    openDetails = function gkmV223OpenDetails(item){
+      const res = old.apply(this, arguments);
+      setTimeout(function(){ injectDescriptionBlock(item); }, 80);
+      setTimeout(function(){ injectDescriptionBlock(item); }, 350);
+      return res;
+    };
+    window.GKM_V223_DESCRIPTIONS_PATCHED = "1";
+  }
+
+  function injectStyle(){
+    if (document.getElementById("gkm-v223-description-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v223-description-style";
+    style.textContent = `
+      .gkm-v223-description-block{
+        margin:14px 0;
+        padding:15px 16px;
+        border-radius:18px;
+        border:1px solid rgba(0,212,255,.24);
+        background:linear-gradient(135deg,rgba(0,212,255,.07),rgba(124,60,255,.06));
+        box-shadow:0 12px 30px rgba(0,0,0,.18);
+      }
+      .gkm-v223-description-block h3{
+        margin:0 0 10px;
+        font-size:18px;
+        font-weight:900;
+        color:#fff;
+      }
+      .gkm-v223-description-text{
+        color:rgba(255,255,255,.88);
+        line-height:1.55;
+        font-size:14px;
+      }
+      .gkm-v223-description-text p{ margin:0 0 10px; }
+      .gkm-v223-description-text p:last-child{ margin-bottom:0; }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function run(){
+    injectStyle();
+    patchOpenDetails();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+  else run();
+  setTimeout(run, 500);
+  setTimeout(run, 1500);
+})();
+ /* GKM V223 UNIVERSAL DESCRIPTIONS FIX END */
