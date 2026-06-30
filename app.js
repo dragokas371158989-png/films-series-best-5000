@@ -9147,8 +9147,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=221";
-  const BOOKS_SPLIT_URLS = ["./data/books/manga.json?v=221","./data/books/ranobe.json?v=221","./data/books/books.json?v=221","./data/books/comics.json?v=221"];
+  const BOOKS_URL = "./data/books_catalog.json?v=222";
+  const BOOKS_SPLIT_URLS = ["./data/books/manga.json?v=222","./data/books/ranobe.json?v=222","./data/books/books.json?v=222","./data/books/comics.json?v=222"];
   const PAGE = 24;
   const BOOK_PAGE = 18;
   let booksCache = null;
@@ -9239,16 +9239,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       });
       if (!merged.length) throw new Error("split books empty");
       booksCache = merged;
-      console.info("GKM V221: split books loaded", booksCache.length);
+      console.info("GKM V222: split books loaded", booksCache.length);
     } catch (err) {
       try {
         const res = await fetch(BOOKS_URL, { cache: "force-cache" });
         if (!res.ok) throw new Error("books_catalog fetch failed " + res.status);
         const json = await res.json();
         booksCache = Array.isArray(json) ? json : (json.items || []);
-        console.info("GKM V221: combined books loaded", booksCache.length);
+        console.info("GKM V222: combined books loaded", booksCache.length);
       } catch (err2) {
-        console.warn("GKM V221: fallback books loaded", err, err2);
+        console.warn("GKM V222: fallback books loaded", err, err2);
         booksCache = FALLBACK_BOOKS;
       }
     }
@@ -9392,8 +9392,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     booksPages = Math.max(1, Math.ceil(rows.length / BOOK_PAGE));
     booksPage = Math.min(booksPage, booksPages);
     currentPage = booksPage; currentPages = booksPages;
-    const start = (booksPage - 1) * PAGE;
-    const slice = rows.slice(start, start + PAGE);
+    const start = (booksPage - 1) * BOOK_PAGE;
+    const slice = rows.slice(start, start + BOOK_PAGE).map(item => ({
+      ...item,
+      poster: txt(item.poster) || bookFallbackPoster(itemTitle(item), item.type)
+    }));
     currentItems = slice;
     const panel = document.getElementById("gkmBooksHubPanel");
     if (panel) panel.style.display = "";
@@ -9401,7 +9404,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (gamePanel) gamePanel.style.display = "none";
     updateBookFilters(all, rows);
     const count = document.getElementById("countText");
-    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V221`;
+    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V222`;
     const grid = document.getElementById("grid");
     if (grid) {
       grid.classList.remove("gkm-v191-search-best", "gkm-v191-spotlight", "gkm-v191-highlight");
@@ -9792,3 +9795,41 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   else inject();
 })();
 /* GKM V221 SPLIT BOOK DATABASE 1000+ END */
+
+
+
+/* GKM V222 ALL BOOK POSTERS FIX START */
+(function(){
+  function inject(){
+    if (document.getElementById("gkm-v222-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v222-style";
+    style.textContent = `
+      .gkm-books-panel-title::after{
+        content:" · V222 all posters";
+        font-size:12px;
+        font-weight:850;
+        opacity:.72;
+        margin-left:8px;
+      }
+      .gkm-book-card .poster-wrap{
+        background:linear-gradient(135deg,#111a38,#3a1671,#94522c)!important;
+      }
+      .gkm-book-card .poster-wrap img{
+        width:100%;
+        height:100%;
+        object-fit:cover!important;
+        object-position:center!important;
+        min-height:100%;
+      }
+      .gkm-book-card .no-poster,
+      .gkm-book-card .poster-placeholder{
+        display:none!important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", inject);
+  else inject();
+})();
+ /* GKM V222 ALL BOOK POSTERS FIX END */
