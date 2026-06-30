@@ -10958,3 +10958,352 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V257 DUPLICATE TITLES SEASONS FIX END */
 
+
+
+/* GKM V258 HARD DEDUPE CANONICAL TITLES START */
+(function(){
+  window.GKM_V258_HARD_DEDUPE_CANONICAL_TITLES_VERSION = "v258-hard-dedupe-canonical-titles-2026-06-30";
+
+  function t(v){ return String(v == null ? "" : v).trim(); }
+
+  function n(v){
+    return t(v).toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[’`]/g, "'")
+      .replace(/\.\.\.$/, "")
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function yearOf(item){
+    try { if (typeof getYear === "function") return t(getYear(item)); } catch {}
+    const raw = t(item && (item.year || item.release_date || item.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+
+  function typeOf(item){
+    try { if (typeof getType === "function") return t(getType(item)); } catch {}
+    return t(item && (item.type || item.category || item.kind));
+  }
+
+  function baseTitle(item){
+    try { if (typeof displayTitle === "function") return t(displayTitle(item)); } catch {}
+    return t(item && (item.ru || item.title_ru || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
+  }
+
+  function rawTitle(item){
+    return t(item && [
+      item.ru,
+      item.title_ru,
+      item.title,
+      item.name,
+      item.en,
+      item.original_title,
+      item.original_name,
+      item.__manualTopTitle
+    ].filter(Boolean).join(" "));
+  }
+
+  function posterKey(item){
+    const raw = t(item && (item.poster || item.posterUrl || item.poster_url || item.image || item.cover || item.img));
+    return raw ? raw.replace(/\?.*$/, "").toLowerCase() : "";
+  }
+
+  function canonTitle(title){
+    let s = n(title);
+
+    // Убираем уже добавленные суффиксы от прошлых патчей, чтобы сравнивать основу.
+    s = s.replace(/\s+(1|2|3|4|5|6|7)\s+сезон$/, "");
+    s = s.replace(/\s+финальный\s+сезон$/, "");
+    s = s.replace(/\s+final\s+season$/, "");
+    s = s.replace(/\s+tybw$/, "");
+    s = s.replace(/\s+классика$/, "");
+    s = s.replace(/\s+\d{4}$/, "");
+    s = s.replace(/\s+#\d+$/, "");
+
+    // Канонизация известных франшиз.
+    if (s.includes("побег из шоушенка") || s.includes("shawshank")) return "побег из шоушенка";
+    if (s.includes("криминальное чтиво") || s.includes("pulp fiction")) return "криминальное чтиво";
+    if (s.includes("форрест гамп") || s.includes("forrest gump")) return "форрест гамп";
+    if (s.includes("бойцовский клуб") || s.includes("fight club")) return "бойцовский клуб";
+    if (s.includes("крестный отец") || s.includes("godfather")) return "крестный отец";
+    if (s.includes("интерстеллар") || s.includes("interstellar")) return "интерстеллар";
+    if (s.includes("темный рыцарь") || s.includes("dark knight")) return "темный рыцарь";
+    if (s.includes("матрица") || s.includes("matrix")) return "матрица";
+    if (s.includes("начало") || s.includes("inception")) return "начало";
+    if (s.includes("семь") || s.includes("se7en")) return "семь";
+
+    if (s.includes("властелин колец возвращение короля") || s.includes("lord of the rings return of the king")) return "властелин колец возвращение короля";
+    if (s.includes("властелин колец братство кольца") || s.includes("lord of the rings fellowship")) return "властелин колец братство кольца";
+    if (s.includes("властелин колец две крепости") || s.includes("lord of the rings two towers")) return "властелин колец две крепости";
+
+    // Автосгенерированные коллекции тоже сравниваем как одну основу.
+    s = s.replace(/\s+том\s+\d+$/, "");
+    s = s.replace(/\s+выпуск\s+\d+$/, "");
+    s = s.replace(/\s+collection\s+\d+$/, "");
+    s = s.replace(/\s+collection$/, " collection");
+
+    return s;
+  }
+
+  function isAnimeLike(item){
+    const type = n(typeOf(item));
+    const hay = n(rawTitle(item) + " " + baseTitle(item));
+    return type.includes("аниме") || hay.includes("anime") || hay.includes("shingeki") || hay.includes("attack on titan") || hay.includes("naruto") || hay.includes("bleach");
+  }
+
+  function seasonSuffix(item){
+    const y = yearOf(item);
+    const hay = n(rawTitle(item) + " " + baseTitle(item));
+    const base = n(baseTitle(item));
+
+    const explicit =
+      rawTitle(item).match(/(?:season|сезон)\s*(\d+)/i) ||
+      rawTitle(item).match(/(\d+)\s*(?:season|сезон)/i) ||
+      rawTitle(item).match(/part\s*(\d+)/i) ||
+      rawTitle(item).match(/част[ьи]\s*(\d+)/i);
+
+    if (explicit) return `${explicit[1]} сезон`;
+
+    if (base.includes("атака титанов") || hay.includes("attack on titan") || hay.includes("shingeki")) {
+      if (y === "2013") return "1 сезон";
+      if (y === "2017") return "2 сезон";
+      if (y === "2018" || y === "2019") return "3 сезон";
+      if (y === "2020" || y === "2021" || y === "2022" || y === "2023") return "финальный сезон";
+    }
+
+    if (base.includes("моя геройская академия") || hay.includes("my hero academia") || hay.includes("boku no hero")) {
+      if (y === "2016") return "1 сезон";
+      if (y === "2017") return "2 сезон";
+      if (y === "2018") return "3 сезон";
+      if (y === "2019" || y === "2020") return "4 сезон";
+      if (y === "2021") return "5 сезон";
+      if (y === "2022") return "6 сезон";
+      if (y === "2024") return "7 сезон";
+    }
+
+    if (base.includes("токийский гуль") || hay.includes("tokyo ghoul")) {
+      if (hay.includes("root") || hay.includes("√") || y === "2015") return "√A";
+      if (hay.includes("re") || y === "2018") return "re";
+      if (y === "2014") return "1 сезон";
+    }
+
+    if (base.includes("наруто") || hay.includes("naruto")) {
+      if (hay.includes("shippuden") || hay.includes("shippuuden") || hay.includes("ураган")) return "Ураганные хроники";
+      if (hay.includes("boruto") || hay.includes("боруто")) return "Боруто";
+      if (y === "2002") return "1 сезон";
+      if (y === "2007") return "Ураганные хроники";
+    }
+
+    if (base.includes("блич") || hay.includes("bleach")) {
+      if (hay.includes("thousand") || hay.includes("sennen") || y === "2022") return "TYBW";
+      if (y === "2004") return "классика";
+    }
+
+    return y || "";
+  }
+
+  function canonicalYearFor(key){
+    const map = {
+      "побег из шоушенка": "1994",
+      "криминальное чтиво": "1994",
+      "форрест гамп": "1994",
+      "бойцовский клуб": "1999",
+      "крестный отец": "1972",
+      "интерстеллар": "2014",
+      "темный рыцарь": "2008",
+      "матрица": "1999",
+      "начало": "2010",
+      "семь": "1995",
+      "властелин колец возвращение короля": "2003",
+      "властелин колец братство кольца": "2001",
+      "властелин колец две крепости": "2002"
+    };
+    return map[key] || "";
+  }
+
+  function itemScore(item, key){
+    const y = yearOf(item);
+    const poster = posterKey(item) ? 100000 : 0;
+    let rating = 0;
+    let votes = 0;
+    try { rating = typeof getRating === "function" ? Number(getRating(item) || 0) : Number(item.rating || 0); } catch {}
+    try { votes = typeof getVotes === "function" ? Number(getVotes(item) || 0) : Number(item.votes || 0); } catch {}
+
+    const cy = canonicalYearFor(key);
+    let yearBonus = 0;
+    if (cy && y === cy) yearBonus = 10000000;
+    if (cy && y !== cy) yearBonus = -10000000;
+
+    return yearBonus + poster + rating * 1000 + Math.min(votes, 10000000) / 100 + Number(y || 0);
+  }
+
+  function isStrictDedupeType(item){
+    const type = n(typeOf(item));
+    if (type.includes("фильм")) return true;
+    if (type.includes("книга")) return true;
+    if (type.includes("комик")) return true;
+    if (type.includes("раноб")) return true;
+    if (type.includes("игра")) return true;
+    return false;
+  }
+
+  function v258FixItems(items){
+    const arr = Array.isArray(items) ? items.filter(Boolean) : [];
+    const groups = new Map();
+
+    for (const item of arr) {
+      const base = canonTitle(baseTitle(item));
+      const type = n(typeOf(item));
+      const anime = isAnimeLike(item);
+
+      // Для аниме ключ = название + сезон/год, чтобы разные сезоны НЕ удалять.
+      const key = anime
+        ? `${type}|${base}|${seasonSuffix(item)}`
+        : `${type}|${base}`;
+
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(item);
+    }
+
+    const result = [];
+
+    for (const [key, group] of groups.entries()) {
+      const first = group[0];
+
+      if (group.length === 1) {
+        decorateTitle(first, group);
+        result.push(first);
+        continue;
+      }
+
+      const anime = isAnimeLike(first);
+
+      if (anime) {
+        // Внутри одного сезона оставляем лучшую карточку.
+        const best = group.slice().sort((a,b) => itemScore(b, canonTitle(baseTitle(b))) - itemScore(a, canonTitle(baseTitle(a))))[0];
+        decorateTitle(best, group);
+        result.push(best);
+      } else if (isStrictDedupeType(first)) {
+        // Фильмы/книги/игры/комиксы: одно название = одна карточка.
+        const ckey = canonTitle(baseTitle(first));
+        const best = group.slice().sort((a,b) => itemScore(b, ckey) - itemScore(a, ckey))[0];
+        delete best.__gkmV257Title;
+        delete best.__gkmV258Title;
+        result.push(best);
+      } else {
+        const best = group.slice().sort((a,b) => itemScore(b, canonTitle(baseTitle(b))) - itemScore(a, canonTitle(baseTitle(a))))[0];
+        result.push(best);
+      }
+    }
+
+    // Второй проход: если всё равно одинаковые title/type на странице — подписываем только аниме, остальное режем.
+    const seen = new Map();
+    const final = [];
+
+    for (const item of result) {
+      const key = `${n(baseTitle(item))}|${n(typeOf(item))}`;
+      if (!seen.has(key)) {
+        seen.set(key, [item]);
+        final.push(item);
+      } else {
+        const bucket = seen.get(key);
+        if (isAnimeLike(item)) {
+          bucket.push(item);
+          final.push(item);
+        } else {
+          // не-аниме дубль на странице — выкинуть.
+        }
+      }
+    }
+
+    // Подписать аниме-группы с одинаковой основой.
+    for (const bucket of seen.values()) {
+      if (bucket.length <= 1) continue;
+      const used = new Set();
+      for (const item of bucket) {
+        if (!isAnimeLike(item)) continue;
+        const base = oldBaseTitle(item);
+        let suffix = seasonSuffix(item) || yearOf(item) || "часть";
+        let title = `${base} — ${suffix}`;
+        let i = 2;
+        while (used.has(n(title))) {
+          title = `${base} — ${suffix} #${i}`;
+          i++;
+        }
+        used.add(n(title));
+        item.__gkmV258Title = title;
+      }
+    }
+
+    return final;
+  }
+
+  function oldBaseTitle(item){
+    const old = item && (item.__gkmV257Title || item.__gkmV258Title);
+    if (old) {
+      return t(old)
+        .replace(/\s+—\s+(1|2|3|4|5|6|7)\s+сезон$/i, "")
+        .replace(/\s+—\s+финальный\s+сезон$/i, "")
+        .replace(/\s+—\s+\d{4}$/i, "")
+        .replace(/\s+#\d+$/i, "");
+    }
+    return baseTitle(item);
+  }
+
+  function decorateTitle(item){
+    if (!item) return;
+    if (isAnimeLike(item)) {
+      const suffix = seasonSuffix(item);
+      if (suffix) item.__gkmV258Title = `${oldBaseTitle(item)} — ${suffix}`;
+    }
+  }
+
+  const oldDisplayTitle = typeof displayTitle === "function" ? displayTitle : null;
+  if (oldDisplayTitle) {
+    displayTitle = function(item){
+      if (item && item.__gkmV258Title) return item.__gkmV258Title;
+      if (item && item.__gkmV257Title) return item.__gkmV257Title;
+      return oldDisplayTitle(item);
+    };
+  }
+
+  const oldRenderList = typeof renderList === "function" ? renderList : null;
+  if (oldRenderList) {
+    renderList = function(items, label){
+      const before = Array.isArray(items) ? items.length : 0;
+      const fixed = v258FixItems(items);
+      const after = fixed.length;
+      let out = label || "";
+      if (before !== after) {
+        out = `${out.replace(/\s*·\s*дубли убраны:\s*\d+/g, "")} · дубли убраны: ${before - after}`;
+      }
+      return oldRenderList(fixed, out);
+    };
+  }
+
+  const oldOpenDetails = typeof openDetails === "function" ? openDetails : null;
+  if (oldOpenDetails) {
+    openDetails = function(item){
+      if (item && (item.__gkmV258Title || item.__gkmV257Title)) {
+        const oldRu = item.ru;
+        const oldTitle = item.title;
+        try {
+          item.ru = item.__gkmV258Title || item.__gkmV257Title;
+          item.title = item.__gkmV258Title || item.__gkmV257Title;
+          return oldOpenDetails(item);
+        } finally {
+          item.ru = oldRu;
+          item.title = oldTitle;
+        }
+      }
+      return oldOpenDetails(item);
+    };
+  }
+
+  console.log("GKM V258: hard dedupe films/books/games, anime separated by seasons");
+})();
+/* GKM V258 HARD DEDUPE CANONICAL TITLES END */
+
