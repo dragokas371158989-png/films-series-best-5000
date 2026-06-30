@@ -1,260 +1,1936 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ГОЛУБЬ Каталог Мира — фильмы, сериалы, аниме и мультфильмы</title>
+:root{
+  --bg:#03040b;
+  --panel:#080b18;
+  --panel2:#10152b;
+  --card:#090d1c;
+  --text:#f3f7ff;
+  --muted:#aeb8e8;
+  --accent:#7b2cff;
+  --accent2:#00e5ff;
+  --danger:#ff3b6b;
+  --border:rgba(123,44,255,.45);
+  --shadow:rgba(0,0,0,.65);
+}
 
-  <meta name="description" content="ГОЛУБЬ Каталог Мира — быстрый онлайн-каталог фильмов, сериалов, аниме и мультфильмов с поиском, фильтрами, рейтингами, новинками и избранным.">
-  <meta name="keywords" content="Голубь Каталог Мира, фильмы, сериалы, аниме, мультфильмы, каталог фильмов, топ фильмов, новинки кино, популярные сериалы, лучшее аниме">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="ГОЛУБЬ Каталог Мира">
-  <link rel="canonical" href="https://dragokas371158989-png.github.io/films-series-best-5000/">
+*{box-sizing:border-box}
 
-  <meta property="og:url" content="https://dragokas371158989-png.github.io/films-series-best-5000/">
-  <meta property="og:title" content="ГОЛУБЬ Каталог Мира">
-  <meta property="og:description" content="Фильмы, сериалы, аниме и мультфильмы с поиском, фильтрами и рейтингами.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="logo-banner.png.png">
-  <meta property="og:locale" content="ru_RU">
+html{scroll-behavior:auto}
 
-  <link rel="icon" type="image/png" href="favicon.png.png">
-  <link rel="shortcut icon" type="image/png" href="favicon.png.png">
-  <link rel="apple-touch-icon" href="favicon.png.png">
-  <link rel="stylesheet" href="style.css?v=148">
-  <style>
+body{
+  margin:0;
+  font-family:Arial,system-ui,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(123,44,255,.28), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(0,229,255,.13), transparent 30%),
+    linear-gradient(180deg,#03040b 0%,#07091a 45%,#02030a 100%);
+  overflow-x:hidden;
+}
 
-    /* GKM V160 — fixed controls layout: trash button no longer clipped, reset no longer stretches */
-    .controls{
-      display:grid!important;
-      grid-template-columns:minmax(280px,1fr) repeat(5,minmax(135px,170px)) 96px 118px!important;
-      gap:10px!important;
-      align-items:center!important;
-    }
-    .controls input,.controls select{min-width:0!important;width:100%!important;box-sizing:border-box!important;}
-    #cleanTrashBtn.clean-trash-btn{
-      width:96px!important;min-width:96px!important;max-width:96px!important;
-      padding:12px 8px!important;box-sizing:border-box!important;
-      white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;
-      font-size:14px!important;line-height:1.15!important;text-align:center!important;
-      justify-self:stretch!important;grid-column:auto!important;
-    }
-    #resetBtn.reset-btn{
-      width:118px!important;min-width:118px!important;max-width:118px!important;
-      grid-column:auto!important;justify-self:stretch!important;box-sizing:border-box!important;
-      padding-left:12px!important;padding-right:12px!important;
-    }
-    @media (max-width:1250px){
-      .controls{grid-template-columns:minmax(240px,1fr) repeat(3,minmax(130px,1fr)) 96px 118px!important;}
-    }
-    @media (max-width:760px){
-      .controls{grid-template-columns:1fr 1fr!important;}
-      #searchInput{grid-column:1 / -1!important;}
-      #cleanTrashBtn.clean-trash-btn,#resetBtn.reset-btn{width:100%!important;min-width:0!important;max-width:none!important;}
-    }
-    .clean-trash-btn{background:linear-gradient(135deg,#151b32,#263459);border:1px solid #00d5ff;color:#eaf7ff;border-radius:14px;font-weight:800;box-shadow:0 0 14px rgba(0,213,255,.22);cursor:pointer}
-    .clean-trash-btn.active{background:linear-gradient(135deg,#00c8ff,#7b2cff);color:#03101a;box-shadow:0 0 20px rgba(0,213,255,.45)}
-  </style>
-<!-- GKM V60 TESTED RELEASE -->
-<!-- GKM V62 CLEAN ONLY REPLACE ROOT -->
-<!-- GKM V63 NO SCROLL BUTTONS -->
-<!-- GKM V64 HELPER CLOSE FIX -->
-<!-- GKM V65 BALANCED HOME -->
-<!-- GKM V66 RELATED CARDS -->
-<!-- GKM V67 VOTES FIRST -->
-<!-- GKM V68 STRICT DEPARTMENT PAGES -->
-<!-- GKM V69 FAST PAGES NO FREEZE -->
-<!-- GKM V70 STRICT TABS VOTE BUCKETS -->
-<!-- GKM V71 PAGER BUFFER NO SEARCH -->
-<!-- GKM V72 HARD PAGER TABS -->
-<!-- GKM V73 POSTER REPAIR -->
-<!-- GKM V74 REAL POSTERS FIRST -->
-<!-- GKM V75 NO FALLBACK FIRST PAGES -->
-<!-- GKM V76 HIDE NO POSTERS -->
-<!-- GKM V77 DEEP RETESTED -->
-<!-- GKM V78 SAFE SEARCH -->
-<!-- GKM V79 NO POSTER BOTTOM -->
-</head>
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(123,44,255,.08) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(0,229,255,.045) 1px, transparent 1px);
+  background-size:44px 44px;
+  mask-image:linear-gradient(to bottom, black, transparent 85%);
+  z-index:-2;
+}
 
-<body>
-  <header class="topbar">
-    <div class="logo-row">
-      <img class="site-logo" src="logo-banner.png.png" alt="ГОЛУБЬ Каталог Мира">
-      <p id="statusText" class="status-text">Загрузка...</p>
-        <button id="gkmAiTopBtn" class="ai-top-btn" type="button">🤖 Помощник</button>
-    </div>
-  </header>
+body::after{
+  content:"ГОЛУБЬ";
+  position:fixed;
+  inset:auto 0 10vh 0;
+  z-index:-1;
+  pointer-events:none;
+  text-align:center;
+  font-size:22vw;
+  font-weight:1000;
+  letter-spacing:.08em;
+  color:rgba(123,44,255,.055);
+  text-shadow:0 0 42px rgba(123,44,255,.12);
+}
 
-  <section class="controls" aria-label="Фильтры">
-    <input id="searchInput" type="search" placeholder="Поиск: Матрица, Наруто, Во все тяжкие..." autocomplete="off">
+button,select,input,a{font:inherit}
 
-    <select id="typeFilter">
-      <option value="">Все типы</option>
-      <option value="Фильм">Фильмы</option>
-      <option value="Сериал">Сериалы</option>
-      <option value="Аниме">Аниме</option>
-      <option value="Мультфильм">Мультфильмы</option>
-    </select>
+.topbar{
+  display:flex;
+  justify-content:center;
+  padding:8px 16px 28px;
+  min-height:178px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(123,44,255,.34), transparent 42%),
+    linear-gradient(180deg,rgba(5,7,20,.98),rgba(5,7,20,.72));
+  border-bottom:1px solid rgba(123,44,255,.55);
+  box-shadow:0 0 32px rgba(123,44,255,.22);
+}
 
-    <select id="genreFilter">
-      <option value="">Все жанры</option>
-    </select>
+.logo-row{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
 
-    <select id="yearFilter">
-      <option value="">Все годы</option>
-    </select>
+.site-logo{
+  display:block;
+  width:min(460px,94vw);
+  max-height:135px;
+  object-fit:contain;
+  filter:
+    drop-shadow(0 0 16px rgba(123,44,255,.85))
+    drop-shadow(0 0 28px rgba(0,229,255,.25));
+}
 
-    <select id="ratingFilter">
-      <option value="0">Любой рейтинг</option>
-      <option value="7">от 7.0</option>
-      <option value="8">от 8.0</option>
-      <option value="9">от 9.0</option>
-    </select>
+.status-text{
+  margin:6px 0 0;
+  min-height:20px;
+  color:#b9c4ff;
+  font-size:14px;
+}
 
-    <select id="sortFilter">
-      <option value="smart">Умный топ</option>
-      <option value="rating">По рейтингу</option>
-      <option value="votes">По голосам</option>
-      <option value="year">По году</option>
-      <option value="title">По названию</option>
-    </select>
+.controls{
+  display:grid;
+  grid-template-columns:minmax(260px,1fr) repeat(5,minmax(130px,180px)) 120px;
+  gap:12px;
+  padding:14px 16px;
+  border-bottom:1px solid rgba(0,229,255,.22);
+  background:rgba(5,7,20,.62);
+  backdrop-filter:blur(10px);
+}
 
-    <button id="cleanTrashBtn" class="clean-trash-btn active" type="button">🧹 Чисто</button>
-    <button id="resetBtn" class="reset-btn" type="button">Сброс</button>
-  </section>
+.controls input,
+.controls select{
+  min-width:0;
+  background:rgba(8,11,24,.92);
+  color:#f3f7ff;
+  border:1px solid rgba(0,229,255,.45);
+  border-radius:14px;
+  padding:12px 14px;
+  box-shadow:inset 0 0 18px rgba(0,229,255,.05),0 0 14px rgba(123,44,255,.12);
+}
 
-  <nav class="tabs" aria-label="Разделы">
-    <button class="tab active" data-tab="all" type="button">Все</button>
-    <button class="tab" data-tab="movies" type="button">Фильмы</button>
-    <button class="tab" data-tab="series" type="button">Сериалы</button>
-    <button class="tab" data-tab="cartoons" type="button">Мультфильмы</button>
-    <button class="tab" data-tab="anime" type="button">Аниме</button>
-    <button class="tab" data-tab="anime_top" type="button">Топ аниме 100</button>
-    <button class="tab" data-tab="anime_studios" type="button">Топ студий</button>
-    <button class="tab" data-tab="top" type="button">Топ 250</button>
-    <button class="tab" data-tab="new" type="button">Новинки</button>
-    <button class="tab" data-tab="new_soon" type="button">Скоро выйдет</button>
-    <button class="tab" data-tab="new_released" type="button">Уже вышло</button>
-    <button class="tab" data-tab="new_popular" type="button">Популярное 2026</button>
-    <button class="tab" data-tab="top_current_year" type="button">Топ 2026</button>
-    <button class="tab" data-tab="top_2020s" type="button">Топ 2020-х</button>
-    <button class="tab" data-tab="top_2010s" type="button">Топ 2010-х</button>
-    <button class="tab" data-tab="top_2000s" type="button">Топ 2000-х</button>
-    <button class="tab" data-tab="top_1990s" type="button">Топ 90-х</button>
-    <button class="tab" data-tab="popular" type="button">Популярное</button>
-    <button class="tab" data-tab="fav" type="button">Избранное</button>
-    <button class="tab" data-tab="history" type="button">История</button>
-    <button class="tab" data-tab="random" type="button">Случайное</button>
-  </nav>
+.controls input:focus,
+.controls select:focus{
+  outline:none;
+  border-color:rgba(0,229,255,.92);
+  box-shadow:0 0 22px rgba(0,229,255,.22);
+}
 
-  <section class="seo-text">
-    <h1>Голубь Каталог Мира — каталог фильмов, сериалов, аниме и мультфильмов</h1>
-    <p>
-      Удобный онлайн-каталог с постерами, рейтингами, жанрами и годами выхода.
-      Здесь можно быстро найти фильм, сериал, мультфильм, аниме, новинку или популярный проект.
-    </p>
-  </section>
+.reset-btn{
+  border:1px solid rgba(255,140,180,.65);
+  background:linear-gradient(180deg,#ff3b6b,#7b1235);
+  color:white;
+  border-radius:14px;
+  padding:12px 14px;
+  cursor:pointer;
+  font-weight:900;
+  box-shadow:0 0 16px rgba(255,59,107,.35),0 10px 24px rgba(0,0,0,.45);
+}
 
-  <main>
-    <div id="countText" class="count"></div>
-    <div id="grid" class="grid"></div>
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:14px 16px;
+  border-bottom:1px solid rgba(123,44,255,.38);
+  background:rgba(3,4,11,.38);
+}
 
-    <div class="pager">
-      <button id="prevBtn" type="button">Назад</button>
-      <span id="pageText"></span>
-      <button id="nextBtn" type="button">Вперёд</button>
-    </div>
-  </main>
+.tab,
+.pager button,
+.detail-buttons a,
+.detail-buttons button{
+  border:1px solid rgba(0,229,255,.45);
+  background:linear-gradient(180deg,rgba(123,44,255,.95),rgba(31,21,92,.95));
+  color:white;
+  border-radius:14px;
+  padding:11px 17px;
+  cursor:pointer;
+  text-decoration:none;
+  font-weight:900;
+  box-shadow:0 0 14px rgba(123,44,255,.34),0 10px 24px rgba(0,0,0,.38);
+}
 
-  <dialog id="detailsDialog">
-    <div class="dialog-content">
-      <button id="closeDialog" class="close" type="button" aria-label="Закрыть">×</button>
+.tab.active{
+  background:linear-gradient(180deg,#00e5ff,#7b2cff);
+  color:#03040b;
+  border-color:#5cf4ff;
+  box-shadow:0 0 18px rgba(0,229,255,.58),0 0 30px rgba(123,44,255,.42);
+}
 
-      <section class="details">
-        <div class="detail-poster-box">
-          <img id="detailPoster" alt="">
-        </div>
+.seo-text{
+  width:min(1120px,calc(100% - 32px));
+  margin:18px 16px 14px;
+  padding:20px 22px;
+  border:1px solid rgba(123,44,255,.42);
+  border-radius:18px;
+  background:rgba(5,7,20,.62);
+  color:#dbe5ff;
+}
 
-        <div class="detail-info">
-          <h2 id="detailTitle"></h2>
-          <p id="detailMeta"></p>
-          <p id="detailGenres"></p>
-          <p id="detailOverview"></p>
-        </div>
-      </section>
+.seo-text h1{
+  margin:0 0 10px;
+  font-size:24px;
+  text-shadow:0 0 14px rgba(123,44,255,.6);
+}
 
-      <section id="detailFacts" class="facts-grid"></section>
+.seo-text p{margin:0;line-height:1.55}
 
-      <section id="playerBlock" class="links-block">
-        <h3 class="links-title">Смотреть / искать видео</h3>
-        <div id="playerButtons" class="detail-buttons"></div>
-      </section>
+main{
+  padding:12px 16px 42px;
+}
 
-      <section id="animeLinksBlock" class="links-block">
-        <h3 class="links-title">Аниме-сайты</h3>
-        <div class="detail-buttons">
-          <a id="shikimoriLink" target="_blank" rel="noreferrer">Shikimori</a>
-          <a id="malLink" target="_blank" rel="noreferrer">MyAnimeList</a>
-          <a id="anilistLink" target="_blank" rel="noreferrer">AniList</a>
-          <a id="animePlanetLink" target="_blank" rel="noreferrer">Anime-Planet</a>
-          <a id="anidbLink" target="_blank" rel="noreferrer">AniDB</a>
-        </div>
-      </section>
+.count{
+  margin:0 0 12px;
+  color:#c9d3ff;
+}
 
-      <section class="links-block">
-        <h3 class="links-title">Найти на сайтах</h3>
-        <div class="detail-buttons">
-          <button id="favBtn" type="button">В избранное</button>
-          <a id="yandexLink" target="_blank" rel="noreferrer">Яндекс</a>
-          <a id="yandexVideoLink" target="_blank" rel="noreferrer">Яндекс Видео</a>
-          <a id="kinopoiskLink" target="_blank" rel="noreferrer">Кинопоиск</a>
-          <a id="youtubeLink" target="_blank" rel="noreferrer">YouTube</a>
-          <a id="vkLink" target="_blank" rel="noreferrer">VK Видео</a>
-          <a id="rutubeLink" target="_blank" rel="noreferrer">Rutube</a>
-          <a id="googleLink" target="_blank" rel="noreferrer">Google</a>
-        </div>
-      </section>
-    </div>
-  </dialog>
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(178px,1fr));
+  gap:16px;
+}
 
-  <script src="app.js?v=230"></script>
+.home-hero,
+.home-section{
+  grid-column:1/-1;
+}
 
-<!-- GKM AI CHAT UI V58 RESTORED -->
-<button id="gkmAiFloatBtn" class="ai-float-btn" type="button" aria-label="Открыть чат">🤖</button>
+.home-hero{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  padding:22px;
+  border:1px solid rgba(0,229,255,.35);
+  border-radius:20px;
+  background:radial-gradient(circle at top left, rgba(0,229,255,.16), transparent 35%),
+    linear-gradient(135deg, rgba(91,33,255,.42), rgba(2,6,23,.96));
+  box-shadow:0 0 28px rgba(91,33,255,.22);
+}
 
-<dialog id="gkmAiDialog" class="ai-dialog">
-  <div class="ai-box">
-    <div class="ai-head">
-      <div>
-        <div class="ai-title">Голубь помощник</div>
-        <div class="ai-subtitle">Советы по фильмам, аниме и сериалам</div>
-      </div>
-      <button id="gkmAiCloseBtn" class="ai-close" type="button">✕</button>
-    </div>
+.home-hero h2{margin:0 0 8px;font-size:28px}
+.home-hero p{margin:0;color:#c7d2fe}
 
-    <div id="gkmAiMessages" class="ai-messages">
-      <div class="ai-msg ai-bot">
-        Привет. Я помогу подобрать фильм, сериал, аниме или мультфильм. Например: «посоветуй аниме как Наруто» или «что посмотреть вечером?»
-      </div>
-    </div>
+.home-section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:10px 0 14px;
+}
 
-    <div class="ai-quick">
-      <button type="button" data-ai-prompt="Посоветуй мне топ аниме с сильным главным героем">Топ аниме</button>
-      <button type="button" data-ai-prompt="Что посмотреть вечером из фильмов?">Фильм вечером</button>
-      <button type="button" data-ai-prompt="Найди что-то похожее на Интерстеллар">Как Интерстеллар</button>
-    </div>
+.home-section-head h3{margin:0;font-size:22px}
 
-    <form id="gkmAiForm" class="ai-form">
-      <input id="gkmAiInput" autocomplete="off" maxlength="500" placeholder="Напиши вопрос..." />
-      <button id="gkmAiSendBtn" type="submit">Отправить</button>
-    </form>
+.home-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+  gap:16px;
+}
 
-    <div class="ai-note">
-      Пока это локальный помощник по каталогу. Для настоящих ответов нужен Worker/Vercel с API ключом.
-    </div>
-  </div>
-</dialog>
-<!-- /GKM AI CHAT UI V58 RESTORED -->
+.card{
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  border-radius:18px;
+  background:linear-gradient(180deg,rgba(16,21,43,.96),rgba(5,8,20,.98));
+  border:1px solid rgba(123,44,255,.55);
+  box-shadow:0 0 0 1px rgba(0,229,255,.08),0 18px 44px rgba(0,0,0,.66),0 0 28px rgba(123,44,255,.14);
+  transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease;
+  content-visibility:auto;
+  contain-intrinsic-size:340px 230px;
+}
 
-</body>
-</html>
+.card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(0,229,255,.9);
+  box-shadow:0 0 24px rgba(0,229,255,.30),0 24px 52px rgba(0,0,0,.70);
+}
+
+.poster-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio:2/3;
+  overflow:hidden;
+  background:radial-gradient(circle,rgba(123,44,255,.22),rgba(3,4,11,.95));
+}
+
+.poster-wrap img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+
+.poster-placeholder{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:12px;
+  color:rgba(255,255,255,.52);
+  font-weight:900;
+}
+
+.card-badges{
+  position:absolute;
+  top:7px;
+  left:7px;
+  right:48px;
+  z-index:6;
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  pointer-events:none;
+}
+
+.card-badge{
+  min-height:22px;
+  padding:3px 7px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:1000;
+  color:white;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(37,99,235,.95);
+  box-shadow:0 0 12px rgba(0,0,0,.35);
+}
+
+.badge-anime{background:linear-gradient(180deg,rgba(124,58,237,.95),rgba(49,46,129,.95))}
+.badge-cartoon{background:linear-gradient(180deg,rgba(236,72,153,.95),rgba(157,23,77,.95))}
+.badge-series{background:linear-gradient(180deg,rgba(14,165,233,.95),rgba(12,74,110,.95))}
+.badge-top{background:linear-gradient(180deg,rgba(245,158,11,.98),rgba(180,83,9,.98));color:#111827}
+.badge-new{background:linear-gradient(180deg,rgba(34,197,94,.95),rgba(21,128,61,.95))}
+
+.card-fav-btn{
+  position:absolute;
+  top:8px;
+  right:8px;
+  z-index:8;
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(2,6,23,.80);
+  color:white;
+  cursor:pointer;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(8px);
+}
+
+.card-fav-btn.active{
+  background:linear-gradient(180deg,#ff2f7d,#6d28d9);
+}
+
+.card-body{
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  min-height:170px;
+}
+
+.card-title{
+  margin:0 0 8px;
+  min-height:42px;
+  color:white;
+  font-weight:1000;
+  line-height:1.15;
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  text-shadow:0 0 8px rgba(123,44,255,.55);
+}
+
+.meta{
+  margin:0 0 9px;
+  color:#b5c0ee;
+  font-size:14px;
+  line-height:1.25;
+}
+
+.rating{
+  margin-top:auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  border-radius:12px;
+  padding:7px 10px;
+  font-weight:1000;
+  letter-spacing:.3px;
+  color:#02030a;
+  text-shadow:none;
+}
+
+.rank-s{background:linear-gradient(180deg,#fff,#00e5ff 45%,#7b2cff);box-shadow:0 0 18px rgba(0,229,255,.72)}
+.rank-a{background:linear-gradient(180deg,#00ffb3,#00c8ff);box-shadow:0 0 18px rgba(0,255,179,.52)}
+.rank-b{background:linear-gradient(180deg,#ffe66d,#ff9f1c);box-shadow:0 0 18px rgba(255,214,80,.45)}
+.rank-c{background:linear-gradient(180deg,#b9c4ff,#6474d9);box-shadow:0 0 14px rgba(130,150,255,.38)}
+.rank-d{background:linear-gradient(180deg,#9ca3af,#4b5563);color:white}
+
+.pager{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  padding:26px 0 8px;
+}
+
+.pager button{min-width:130px}
+.pager button:disabled{opacity:.45;cursor:not-allowed}
+#pageText{color:#c7d2fe}
+
+dialog{
+  border:1px solid rgba(0,229,255,.55);
+  background:linear-gradient(180deg,rgba(12,16,38,.98),rgba(4,6,18,.98));
+  color:var(--text);
+  border-radius:18px;
+  max-width:min(1100px,calc(100% - 24px));
+  width:1040px;
+  max-height:92vh;
+  padding:0;
+  overflow:auto;
+  box-shadow:0 0 36px rgba(123,44,255,.5),0 30px 90px rgba(0,0,0,.75);
+}
+
+dialog::backdrop{background:rgba(0,0,0,.72)}
+
+.dialog-content{position:relative;padding:22px}
+
+.close{
+  position:sticky;
+  top:10px;
+  float:right;
+  z-index:20;
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  background:linear-gradient(180deg,#7b2cff,#25135d);
+  color:#fff;
+  border:1px solid rgba(0,229,255,.45);
+  cursor:pointer;
+  font-size:28px;
+}
+
+.details{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:22px;
+  clear:both;
+}
+
+.detail-poster-box img{
+  width:260px;
+  border-radius:14px;
+  background:#081221;
+}
+
+.detail-info h2{margin:0 0 12px;font-size:30px}
+#detailMeta,#detailGenres{color:#b5c0ee}
+#detailOverview{line-height:1.55;color:#f8fbff}
+
+.facts-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
+  margin-top:18px;
+}
+
+.fact-card{
+  background:rgba(15,23,42,.72);
+  border:1px solid rgba(148,163,184,.18);
+  border-radius:14px;
+  padding:12px;
+}
+
+.fact-label{color:#94a3b8;font-size:12px;margin-bottom:5px}
+.fact-value{font-weight:1000}
+
+.links-block{
+  margin-top:20px;
+  padding-top:14px;
+  border-top:1px solid rgba(123,44,255,.32);
+}
+
+.links-title{margin:0 0 12px}
+
+.detail-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.player-list{
+  display:grid;
+  gap:10px;
+  margin-top:12px;
+}
+
+.player-item{
+  background:rgba(15,23,42,.72);
+  border:1px solid rgba(34,211,238,.22);
+  border-radius:14px;
+  padding:12px;
+}
+
+.player-item iframe{
+  width:100%;
+  aspect-ratio:16/9;
+  border:0;
+  border-radius:12px;
+  background:#000;
+}
+
+@media(max-width:1100px){
+  .controls{grid-template-columns:1fr 1fr 1fr}
+}
+
+@media(max-width:760px){
+  .topbar{min-height:132px}
+  .site-logo{max-height:96px}
+  .controls{grid-template-columns:1fr;padding:12px}
+  .tabs{padding:10px 12px}
+  main{padding:10px 12px 32px}
+  .seo-text{width:calc(100% - 24px);margin:14px 12px;padding:16px}
+  .grid,.home-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .card-body{min-height:154px;padding:10px}
+  .card-title{font-size:14px}
+  .meta{font-size:12px}
+  .rating{font-size:14px;min-height:38px}
+  .details{grid-template-columns:1fr}
+  .detail-poster-box img{width:190px}
+}
+
+
+/* === GKM Detail Card Upgrade V2.4 === */
+
+#detailsDialog {
+  width: min(1080px, calc(100vw - 28px));
+}
+
+.dialog-content {
+  padding: 22px 22px 26px;
+}
+
+.details {
+  align-items: start;
+}
+
+.detail-poster-box {
+  position: sticky;
+  top: 16px;
+}
+
+.detail-poster-box img {
+  box-shadow: 0 0 24px rgba(0,229,255,.20), 0 18px 42px rgba(0,0,0,.42);
+}
+
+.detail-info {
+  min-width: 0;
+}
+
+#detailTitle {
+  font-size: clamp(26px, 3vw, 42px);
+  line-height: 1.08;
+  margin-bottom: 10px;
+  text-shadow: 0 0 16px rgba(123,44,255,.55);
+}
+
+#detailMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  align-items: center;
+  margin: 0 0 12px;
+  color: #dbeafe;
+}
+
+#detailMeta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  border: 1px solid rgba(148,163,184,.22);
+  background: rgba(15,23,42,.68);
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-weight: 800;
+}
+
+.detail-type-pill {
+  background: linear-gradient(180deg, #2563eb, #4c1d95) !important;
+  border-color: rgba(34,211,238,.45) !important;
+}
+
+.detail-rating-pill {
+  color: #02030a !important;
+  border: 0 !important;
+}
+
+#detailGenres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0 0 14px;
+}
+
+.genre-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 27px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(123,44,255,.18);
+  border: 1px solid rgba(123,44,255,.42);
+  color: #dbeafe;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+#detailOverview {
+  max-width: 760px;
+  max-height: 275px;
+  overflow: auto;
+  padding: 14px 16px;
+  border: 1px solid rgba(34,211,238,.20);
+  border-radius: 16px;
+  background: rgba(2,6,23,.42);
+  line-height: 1.62;
+}
+
+.facts-grid {
+  margin-top: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.fact-card {
+  min-height: 86px;
+  box-shadow: inset 0 0 18px rgba(0,229,255,.035);
+}
+
+.fact-value {
+  overflow-wrap: anywhere;
+}
+
+.links-block {
+  margin-top: 18px;
+}
+
+.detail-buttons a,
+.detail-buttons button {
+  min-height: 44px;
+}
+
+.detail-buttons a.watch-direct {
+  background: linear-gradient(180deg, #22c55e, #15803d) !important;
+  border-color: rgba(134,239,172,.65) !important;
+}
+
+@media(max-width:760px) {
+  .detail-poster-box {
+    position: static;
+  }
+
+  #detailOverview {
+    max-height: 240px;
+  }
+}
+
+
+/* === GKM V4 SPEED LITE OVERRIDES === */
+.controls { backdrop-filter: none !important; }
+.site-logo { filter: drop-shadow(0 0 10px rgba(123,44,255,.55)) !important; }
+.card {
+  box-shadow: 0 10px 26px rgba(0,0,0,.48), 0 0 12px rgba(123,44,255,.10) !important;
+  transition: transform .08s linear, border-color .08s linear !important;
+}
+.card:hover {
+  transform: none !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.52), 0 0 14px rgba(0,229,255,.16) !important;
+}
+.rating,.rank-s,.rank-a,.rank-b,.rank-c,.rank-d { box-shadow: none !important; }
+dialog { backdrop-filter: none !important; }
+.detail-poster-box img { box-shadow: 0 12px 28px rgba(0,0,0,.42) !important; }
+body::after { text-shadow: none !important; }
+@media (max-width:760px){
+  .grid,.home-row{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+  .topbar{min-height:118px !important;}
+  .site-logo{max-height:88px !important;}
+}
+
+
+/* === GKM AI CHAT BUTTONS V5 === */
+.ai-top-btn {
+  position: static !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto 0;
+  border: 1px solid rgba(0,229,255,.45);
+  background: linear-gradient(135deg, rgba(123,44,255,.92), rgba(0,229,255,.72));
+  color: white;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 900;
+  letter-spacing: .2px;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(0,0,0,.35);
+}
+
+.ai-float-btn {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 60;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,229,255,.55);
+  background: linear-gradient(135deg, #7b2cff, #00e5ff);
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0,0,0,.5), 0 0 22px rgba(0,229,255,.22);
+}
+
+.ai-dialog {
+  border: 0;
+  padding: 0;
+  width: min(94vw, 460px);
+  max-height: 84vh;
+  border-radius: 22px;
+  background: transparent;
+  color: #fff;
+}
+
+.ai-dialog::backdrop {
+  background: rgba(0,0,0,.62);
+}
+
+.ai-box {
+  border: 1px solid rgba(0,229,255,.24);
+  background: radial-gradient(circle at top, rgba(123,44,255,.28), transparent 34%), rgba(10,12,24,.98);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,.72);
+}
+
+.ai-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.ai-title {
+  font-size: 18px;
+  font-weight: 1000;
+}
+
+.ai-subtitle {
+  margin-top: 3px;
+  color: rgba(255,255,255,.62);
+  font-size: 12px;
+}
+
+.ai-close {
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.ai-messages {
+  padding: 14px;
+  height: min(48vh, 360px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ai-msg {
+  width: fit-content;
+  max-width: 88%;
+  padding: 10px 12px;
+  border-radius: 15px;
+  line-height: 1.35;
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+
+.ai-bot {
+  align-self: flex-start;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.1);
+}
+
+.ai-user {
+  align-self: flex-end;
+  background: rgba(0,229,255,.16);
+  border: 1px solid rgba(0,229,255,.22);
+}
+
+.ai-quick {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 0 14px 12px;
+}
+
+.ai-quick button {
+  flex: 0 0 auto;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.ai-form {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px 14px;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.ai-form input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.07);
+  color: #fff;
+  border-radius: 14px;
+  padding: 12px;
+  outline: none;
+}
+
+.ai-form button {
+  border: 0;
+  background: linear-gradient(135deg, #7b2cff, #00e5ff);
+  color: #fff;
+  border-radius: 14px;
+  padding: 0 13px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.ai-note {
+  padding: 0 14px 14px;
+  color: rgba(255,255,255,.48);
+  font-size: 11px;
+}
+
+@media (max-width: 760px) {
+  .ai-top-btn {
+  position: static !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto 0;
+  border: 1px solid rgba(0,229,255,.45);
+  background: linear-gradient(135deg, rgba(123,44,255,.92), rgba(0,229,255,.72));
+  color: white;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 900;
+  letter-spacing: .2px;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(0,0,0,.35);
+}
+
+  .ai-float-btn {
+    right: 14px;
+    bottom: 14px;
+  }
+}
+
+
+/* === GKM V6 FREE HELPER FIXES === */
+.ai-top-btn {
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+}
+
+.logo-row .ai-top-btn,
+.topbar .ai-top-btn,
+header .ai-top-btn {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ai-note {
+  display: none !important;
+}
+
+.ai-float-btn {
+  bottom: 18px !important;
+}
+
+.ai-msg a,
+.ai-msg button {
+  color: #fff;
+}
+
+.ai-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.ai-action-row button {
+  border: 1px solid rgba(0,229,255,.22);
+  background: rgba(0,229,255,.12);
+  color: #fff;
+  border-radius: 999px;
+  padding: 7px 9px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .ai-top-btn {
+    position: static !important;
+    width: auto !important;
+    margin-top: 8px !important;
+    padding: 9px 13px !important;
+  }
+}
+
+.gkm-ai-picked {
+  outline: 3px solid rgba(0,229,255,.85) !important;
+  box-shadow: 0 0 24px rgba(0,229,255,.55) !important;
+}
+
+
+/* === GKM V7 SMART VISUAL HELPER === */
+.ai-rec-card{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  margin-top:10px;
+  padding:10px;
+  border:1px solid rgba(0,229,255,.18);
+  border-radius:14px;
+  background:rgba(255,255,255,.035);
+}
+.ai-rec-poster{
+  width:62px;
+  height:92px;
+  border-radius:10px;
+  object-fit:cover;
+  flex:0 0 62px;
+  background:#0b1020;
+  border:1px solid rgba(123,44,255,.25);
+}
+.ai-rec-info{
+  min-width:0;
+  flex:1;
+}
+.ai-rec-title{
+  font-weight:900;
+  color:#fff;
+  margin-bottom:4px;
+  line-height:1.22;
+}
+.ai-rec-meta{
+  font-size:12px;
+  color:#c9d3ff;
+  line-height:1.35;
+}
+
+
+/* === GKM V8 AI RECOMMENDATION FIX === */
+.ai-rec-msg {
+  max-width: 96% !important;
+}
+
+.ai-rec-card {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid rgba(0,229,255,.28);
+  border-radius: 14px;
+  background: rgba(255,255,255,.045);
+}
+
+.ai-rec-poster {
+  width: 72px;
+  height: 104px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex: 0 0 72px;
+  background: #0b1020;
+  border: 1px solid rgba(123,44,255,.35);
+}
+
+.ai-rec-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.ai-rec-title {
+  font-weight: 1000;
+  color: #fff;
+  margin-bottom: 6px;
+  line-height: 1.15;
+  font-size: 14px;
+}
+
+.ai-rec-meta {
+  font-size: 12px;
+  color: #c9d3ff;
+  line-height: 1.35;
+  margin-top: 3px;
+}
+
+.ai-messages {
+  scrollbar-width: thin;
+}
+
+.gkm-ai-picked {
+  outline: 3px solid rgba(0,229,255,.85) !important;
+  box-shadow: 0 0 24px rgba(0,229,255,.55) !important;
+}
+
+
+/* === GKM V9 MAX SMART HELPER STYLE === */
+.ai-rec-msg {
+  max-width: 98% !important;
+}
+
+.ai-rec-card {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid rgba(0,229,255,.30);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0,229,255,.055), rgba(123,44,255,.055));
+}
+
+.ai-rec-poster {
+  width: 74px;
+  height: 108px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex: 0 0 74px;
+  background: #0b1020;
+  border: 1px solid rgba(123,44,255,.38);
+}
+
+.ai-rec-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.ai-rec-title {
+  font-weight: 1000;
+  color: #fff;
+  margin-bottom: 6px;
+  line-height: 1.15;
+  font-size: 14px;
+}
+
+.ai-rec-meta {
+  font-size: 12px;
+  color: #c9d3ff;
+  line-height: 1.35;
+  margin-top: 3px;
+}
+
+.ai-rec-why {
+  margin-top: 7px;
+  font-size: 12px;
+  color: #9eeeff;
+  line-height: 1.35;
+}
+
+.ai-messages {
+  scrollbar-width: thin;
+}
+
+.gkm-ai-picked {
+  outline: 3px solid rgba(0,229,255,.85) !important;
+  box-shadow: 0 0 24px rgba(0,229,255,.55) !important;
+}
+
+
+/* === GKM V10 ULTRA SMART HELPER STYLE === */
+.ai-rec-msg {
+  max-width: 98% !important;
+}
+
+.ai-rec-card {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid rgba(0,229,255,.34);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0,229,255,.065), rgba(123,44,255,.07));
+}
+
+.ai-rec-poster {
+  width: 76px;
+  height: 112px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex: 0 0 76px;
+  background: #0b1020;
+  border: 1px solid rgba(123,44,255,.42);
+}
+
+.ai-rec-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.ai-rec-title {
+  font-weight: 1000;
+  color: #fff;
+  margin-bottom: 6px;
+  line-height: 1.15;
+  font-size: 14px;
+}
+
+.ai-rec-meta {
+  font-size: 12px;
+  color: #c9d3ff;
+  line-height: 1.35;
+  margin-top: 3px;
+}
+
+.ai-rec-why {
+  margin-top: 7px;
+  font-size: 12px;
+  color: #9eeeff;
+  line-height: 1.35;
+}
+
+.ai-messages {
+  scrollbar-width: thin;
+}
+
+.gkm-ai-picked {
+  outline: 3px solid rgba(0,229,255,.85) !important;
+  box-shadow: 0 0 24px rgba(0,229,255,.55) !important;
+}
+
+
+/* === GKM V11 BRAIN TAGS HELPER STYLE === */
+.ai-rec-why {
+  margin-top: 8px;
+  padding: 7px 9px;
+  border-left: 3px solid rgba(0,229,255,.65);
+  background: rgba(0,229,255,.055);
+  border-radius: 8px;
+}
+
+
+/* === GKM V12 LEARNING HELPER STYLE === */
+.ai-action-row button {
+  user-select: none;
+}
+
+.ai-action-row button:hover {
+  filter: brightness(1.12);
+}
+
+.ai-rec-why {
+  border-left-color: rgba(75,255,190,.75) !important;
+}
+
+
+/* === GKM V13 DIRECTOR HELPER STYLE === */
+.ai-rec-card {
+  transition: transform .08s linear, border-color .08s linear;
+}
+
+.ai-rec-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0,229,255,.55);
+}
+
+.ai-rec-title {
+  letter-spacing: .1px;
+}
+
+
+/* === GKM V14 ORACLE HELPER STYLE === */
+.ai-action-row button {
+  border-color: rgba(75,255,190,.22);
+}
+
+.ai-action-row button:nth-child(1) {
+  background: rgba(0,229,255,.16);
+}
+
+
+/* === GKM V15 SEMANTIC ORACLE STYLE === */
+.ai-rec-why {
+  color: #b8fff1 !important;
+}
+
+.ai-rec-title::first-letter {
+  color: #9eeeff;
+}
+
+
+/* === GKM V16 CONTEXT ORACLE STYLE === */
+.ai-rec-msg::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* === GKM V108 COMPACT CARDS FIX === */
+.grid .card,
+.home-row .card {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+}
+
+.grid .card-body,
+.home-row .card-body {
+  min-height: 118px !important;
+  max-height: 126px !important;
+  padding: 10px 11px 11px !important;
+  gap: 5px !important;
+  overflow: hidden !important;
+}
+
+.grid .card-title,
+.home-row .card-title,
+.grid .card h3,
+.home-row .card h3 {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: anywhere !important;
+  min-height: 34px !important;
+  max-height: 38px !important;
+  margin: 0 !important;
+  font-size: 15px !important;
+  line-height: 1.14 !important;
+}
+
+.grid .card-meta,
+.home-row .card-meta,
+.grid .card-genres,
+.home-row .card-genres {
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  color: #b8c4ff !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+}
+
+.grid .card-rating,
+.home-row .card-rating {
+  margin-top: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  min-height: 25px !important;
+  padding: 4px 8px !important;
+  border-radius: 999px !important;
+  background: rgba(15, 23, 42, .82) !important;
+  border: 1px solid rgba(0, 229, 255, .28) !important;
+  color: #f8fbff !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+/* === /GKM V108 COMPACT CARDS FIX === */
+
+.ai-rec-card {
+  position: relative;
+}
+
+.ai-rec-card::after {
+  content: "context";
+  position: absolute;
+  right: 8px;
+  bottom: 6px;
+  font-size: 9px;
+  color: rgba(158,238,255,.28);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+
+/* === GKM V17 FINAL BRAIN STYLE === */
+.ai-rec-card { overflow: hidden; }
+.ai-rec-title { text-wrap: balance; }
+.ai-rec-why::before { content: "🧠 "; }
+
+
+/* === GKM V18 TITAN HELPER STYLE === */
+.ai-match-row {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  overflow: hidden;
+  margin: 7px 0 4px;
+}
+
+.ai-match-row span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(123,44,255,.95), rgba(0,229,255,.95), rgba(75,255,190,.95));
+}
+
+.ai-rec-card {
+  border-color: rgba(75,255,190,.30) !important;
+}
+
+
+/* === GKM V19 GODMODE STYLE === */
+.ai-msg.ai-bot {
+  border-left: 2px solid rgba(75,255,190,.18);
+}
+
+.ai-match-row span {
+  box-shadow: 0 0 12px rgba(0,229,255,.35);
+}
+
+.ai-rec-card::before {
+  content: "GODMODE";
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 9px;
+  font-weight: 900;
+  color: rgba(75,255,190,.38);
+  letter-spacing: .08em;
+}
+
+
+/* === GKM V20 NEURO HELPER STYLE === */
+.ai-msg.ai-bot {
+  white-space: pre-wrap;
+}
+
+.ai-rec-card::before {
+  content: "NEURO";
+}
+
+.ai-action-row button {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+}
+
+
+/* === GKM V21 OMEGA STYLE === */
+.ai-rec-card::before {
+  content: "OMEGA";
+}
+
+.ai-msg.ai-bot:first-letter {
+  color: #9effdf;
+}
+
+.ai-action-row button:active {
+  transform: scale(.98);
+}
+
+
+/* === GKM V22 APEX STYLE === */
+.ai-rec-card::before {
+  content: "APEX";
+}
+
+.ai-action-row button {
+  border-radius: 999px;
+}
+
+.ai-msg.ai-bot {
+  background-image: linear-gradient(135deg, rgba(75,255,190,.025), rgba(0,229,255,.015));
+}
+
+
+/* === GKM V23 SUPREME STYLE === */
+.ai-rec-card::before {
+  content: "SUPREME";
+}
+
+.ai-rec-card {
+  background-image:
+    linear-gradient(135deg, rgba(75,255,190,.08), rgba(0,229,255,.045), rgba(123,44,255,.045));
+}
+
+.ai-action-row button:first-child {
+  font-weight: 900;
+}
+
+
+/* === GKM V24 ULTRA INSTINCT STYLE === */
+.ai-rec-card::before {
+  content: "ULTRA";
+}
+
+.ai-match-row span {
+  background: linear-gradient(90deg, rgba(255,255,255,.85), rgba(0,229,255,.95), rgba(75,255,190,.95), rgba(255,222,89,.95));
+}
+
+.ai-msg.ai-bot {
+  border-left-color: rgba(255,222,89,.22);
+}
+
+
+/* === GKM V25 INFINITY STYLE === */
+.ai-rec-card::before {
+  content: "INFINITY";
+}
+
+.ai-rec-card {
+  box-shadow: 0 0 0 1px rgba(255,255,255,.03), 0 12px 36px rgba(0,0,0,.18);
+}
+
+.ai-match-row span {
+  animation: gkmInfinityGlow 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes gkmInfinityGlow {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.25); }
+}
+
+
+/* === GKM V26 ABSOLUTE STYLE === */
+.ai-rec-card::before {
+  content: "ABSOLUTE";
+}
+
+.ai-rec-card {
+  border-color: rgba(255,222,89,.32) !important;
+}
+
+.ai-action-row button:hover {
+  transform: translateY(-1px);
+}
+
+
+
+
+
+
+/* === GKM V34 MOBILE POSTER-WRAP CSS REAL FIX === */
+@media (max-width: 768px) {
+  .card {
+    content-visibility: visible !important;
+    contain-intrinsic-size: auto !important;
+    min-height: 340px !important;
+  }
+
+  .poster-wrap {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    aspect-ratio: 2 / 3 !important;
+    min-height: 190px !important;
+    max-height: none !important;
+    height: auto !important;
+    overflow: hidden !important;
+    background: #111827 !important;
+    position: relative !important;
+  }
+
+  .poster-wrap img,
+  .poster-wrap picture,
+  .gkm-mobile-poster-real {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 190px !important;
+    object-fit: cover !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .poster-placeholder {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 190px !important;
+  }
+
+  .card-badges,
+  .card-fav-btn {
+    z-index: 5 !important;
+  }
+}
+
+
+
+
+
+
+/* === GKM V37 REAL RU TITLES CSS === */
+.gkm-original-title {
+  margin-top: 3px;
+  font-size: 11px;
+  line-height: 1.2;
+  opacity: .58;
+  color: #9ca3af;
+}
+
+#gkmRuTitleToggle {
+  border: 1px solid rgba(139,220,255,.35);
+  background: rgba(16,24,39,.78);
+  color: #dff7ff;
+  border-radius: 999px;
+  padding: 8px 11px;
+  font-size: 13px;
+  cursor: pointer;
+  margin: 4px;
+}
+
+#gkmRuTitleToggle:hover {
+  background: rgba(27,38,59,.95);
+}
+
+@media (max-width: 768px) {
+  .gkm-original-title {
+    font-size: 10px;
+    max-height: 26px;
+    overflow: hidden;
+  }
+
+  #gkmRuTitleToggle {
+    font-size: 12px;
+    padding: 7px 9px;
+  }
+}
+
+
+/* === GKM V38 BUTTONS FIX CSS === */
+button,
+a {
+  touch-action: manipulation;
+}
+
+.hero button,
+.hero a,
+.popular button,
+.popular a,
+#popular button,
+#popular a {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+
+/* === GKM V39 CARD TITLE FULL CSS === */
+.card,
+.movie-card,
+.item-card,
+.catalog-card {
+  height: auto !important;
+}
+
+.card-title,
+.movie-title,
+.item-title,
+.card h3,
+.movie-card h3,
+.item-card h3 {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
+  max-height: none !important;
+  min-height: auto !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  line-height: 1.12 !important;
+}
+
+/* Чтобы длинное русское название не давило рейтинг вниз */
+.card .meta,
+.movie-card .meta,
+.item-card .meta {
+  margin-top: 6px !important;
+}
+
+.card .score,
+.movie-card .score,
+.item-card .score,
+.card .rating-badge,
+.movie-card .rating-badge,
+.item-card .rating-badge {
+  margin-top: 8px !important;
+}
+
+@media (max-width: 768px) {
+  .card-title,
+  .movie-title,
+  .item-title,
+  .card h3,
+  .movie-card h3,
+  .item-card h3 {
+    font-size: 15px !important;
+    line-height: 1.15 !important;
+    max-height: none !important;
+  }
+
+  .card,
+  .movie-card,
+  .item-card,
+  .catalog-card {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+}
+
+
+/* === GKM V40 NO TITLE CUT CSS === */
+.card-title,
+.movie-title,
+.item-title,
+.card-name,
+.card__title,
+.card h3,
+.movie-card h3,
+.item-card h3 {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
+  max-height: none !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+/* Чуть меньше шрифт, чтобы русские названия помещались аккуратнее */
+.card-title,
+.movie-title,
+.item-title,
+.card-name,
+.card__title {
+  font-size: 16px !important;
+  line-height: 1.12 !important;
+}
+
+@media (max-width: 768px) {
+  .card-title,
+  .movie-title,
+  .item-title,
+  .card-name,
+  .card__title,
+  .card h3,
+  .movie-card h3,
+  .item-card h3 {
+    font-size: 14px !important;
+    line-height: 1.12 !important;
+  }
+}
+
+
+/* === GKM V44 FORCE ANIME-SITES CSS === */
+.gkm-force-anime-sites {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(139,92,246,.35);
+}
+
+
+/* === GKM V66 RELATED CARDS === */
+.related-block {
+  margin-top: 18px;
+}
+
+.related-cards {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 4px 2px 12px;
+  scroll-snap-type: x mandatory;
+}
+
+.related-card {
+  min-width: 190px;
+  width: 190px;
+  border: 1px solid rgba(123, 44, 255, .65);
+  border-radius: 16px;
+  background: rgba(9, 12, 30, .92);
+  overflow: hidden;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.related-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 229, 255, .9);
+  box-shadow: 0 0 22px rgba(0, 229, 255, .22);
+}
+
+.related-poster {
+  width: 100%;
+  height: 255px;
+  object-fit: cover;
+  display: block;
+  background: #10162a;
+}
+
+.related-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d8e6ff;
+  font-weight: 900;
+  text-align: center;
+}
+
+.related-info {
+  padding: 12px;
+}
+
+.related-title {
+  color: #fff;
+  font-weight: 1000;
+  font-size: 16px;
+  line-height: 1.08;
+  text-shadow: 0 0 10px rgba(123,44,255,.65);
+  margin-bottom: 9px;
+}
+
+.related-meta {
+  color: #cbd6ff;
+  font-size: 13px;
+  line-height: 1.25;
+  margin-top: 6px;
+}
+
+.related-rating {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #00e5ff, #00ffb3);
+  color: #001018;
+  font-weight: 1000;
+  font-size: 13px;
+}
+
+.related-loading {
+  color: #cbd6ff;
+  padding: 14px;
+  border: 1px solid rgba(0,229,255,.25);
+  border-radius: 14px;
+}
+/* === /GKM V66 RELATED CARDS === */
+
+/* === GKM V73 POSTER FALLBACK === */
+.poster-fallback-img {
+  object-fit: cover;
+  filter: saturate(1.05);
+}
+.poster-placeholder {
+  background: linear-gradient(135deg, rgba(28,42,107,.85), rgba(58,20,120,.85));
+  color: #dff7ff;
+}
+/* === /GKM V73 POSTER FALLBACK === */
+
+/* === GKM V109 RATING FIT AND FACTS FIX === */
+.grid .card-rating,
+.home-row .card-rating,
+.related-rating {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 30px !important;
+  padding: 6px 8px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  text-align: center !important;
+  line-height: 1.15 !important;
+  font-size: 12px !important;
+  font-weight: 1000 !important;
+}
+
+.grid .card-rating,
+.home-row .card-rating {
+  border-radius: 999px !important;
+  background: rgba(15, 23, 42, .86) !important;
+  border: 1px solid rgba(0, 229, 255, .34) !important;
+  color: #f8fbff !important;
+}
+
+.related-rating {
+  margin-top: 10px !important;
+  border-radius: 9px !important;
+  background: linear-gradient(135deg, #0ff0d0, #00d8ff) !important;
+  color: #001018 !important;
+}
+
+.related-cards {
+  display: flex !important;
+  gap: 14px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 4px 2px 12px !important;
+}
+
+.related-card {
+  min-width: 184px !important;
+  width: 184px !important;
+  max-width: 184px !important;
+  overflow: hidden !important;
+}
+
+.related-info {
+  padding: 10px !important;
+}
+
+.related-title {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  min-height: 38px !important;
+  max-height: 42px !important;
+}
+
+.facts-grid .fact-card,
+#detailFacts .fact-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  min-height: 70px !important;
+  padding: 12px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.facts-grid .fact-card span,
+#detailFacts .fact-card span {
+  display: block !important;
+  width: 100% !important;
+  color: #aebbf4 !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+}
+
+.facts-grid .fact-card strong,
+#detailFacts .fact-card strong {
+  display: block !important;
+  width: 100% !important;
+  color: #f8fbff !important;
+  font-size: 16px !important;
+  line-height: 1.1 !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+/* === /GKM V109 RATING FIT AND FACTS FIX === */
+
+/* === GKM V116 ANIME TOP 100 === */
+.anime-rank-badge {
+  position: absolute;
+  left: 10px;
+  top: 42px;
+  z-index: 5;
+  min-width: 44px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffd54a, #ff7b00);
+  color: #170a00;
+  font-weight: 1000;
+  font-size: 15px;
+  line-height: 1;
+  box-shadow: 0 0 14px rgba(255, 196, 0, .45);
+  border: 1px solid rgba(255, 255, 255, .42);
+  text-align: center;
+}
+.tab[data-tab="anime_top"] {
+  background: linear-gradient(135deg, #ffb300, #8b2cff) !important;
+  color: #fff !important;
+}
+/* === /GKM V116 ANIME TOP 100 === */
+
+
+/* V132 studio top */
+.studio-top-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;width:100%;}
+.studio-top-card{position:relative;min-height:190px;padding:18px;border:1px solid rgba(0,229,255,.45);border-radius:18px;background:linear-gradient(180deg,rgba(30,16,80,.92),rgba(3,10,28,.95));box-shadow:0 0 18px rgba(102,51,255,.25);overflow:hidden;}
+.studio-top-card h3{margin:18px 0 12px;font-size:24px;line-height:1.1;color:#fff;text-shadow:0 0 10px rgba(194,164,255,.65);}
+.studio-rank{position:absolute;top:12px;right:12px;padding:7px 12px;border-radius:999px;background:linear-gradient(135deg,#ffd14a,#ff9a00);color:#111;font-weight:900;box-shadow:0 0 14px rgba(255,176,0,.45);}
+.studio-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.studio-stats span{padding:6px 9px;border-radius:999px;background:rgba(0,229,255,.12);border:1px solid rgba(0,229,255,.35);font-weight:800;color:#eaf7ff;}
+.studio-titles{display:flex;flex-wrap:wrap;gap:6px;}
+.studio-titles span{font-size:13px;padding:5px 8px;border-radius:10px;background:rgba(124,58,237,.25);border:1px solid rgba(168,85,247,.35);color:#eee;}
+
+
+/* === GKM V134: studio top wide layout + readable chips === */
+body #grid:has(.studio-top-grid){display:block !important;}
+.studio-top-grid{grid-column:1 / -1 !important;display:grid !important;grid-template-columns:repeat(auto-fill,minmax(310px,1fr)) !important;gap:18px !important;width:100% !important;max-width:1800px !important;padding:4px 8px 30px !important;box-sizing:border-box !important;}
+.studio-top-card{min-height:260px !important;padding:22px !important;border-radius:20px !important;}
+.studio-top-card h3{font-size:28px !important;margin:14px 0 16px !important;word-break:break-word !important;}
+.studio-stats{display:flex !important;flex-wrap:wrap !important;gap:10px !important;margin-bottom:16px !important;}
+.studio-stats span{display:inline-flex !important;align-items:center !important;min-height:30px !important;padding:6px 10px !important;border:1px solid rgba(0,229,255,.55) !important;border-radius:999px !important;background:rgba(0,24,48,.72) !important;font-weight:900 !important;white-space:nowrap !important;}
+.studio-titles{display:flex !important;flex-wrap:wrap !important;gap:8px !important;}
+.studio-titles span{display:inline-flex !important;max-width:100% !important;padding:7px 10px !important;border-radius:10px !important;background:rgba(112,58,205,.62) !important;border:1px solid rgba(190,150,255,.35) !important;color:#fff !important;font-size:13px !important;font-weight:800 !important;line-height:1.2 !important;white-space:normal !important;}
+@media(max-width:720px){.studio-top-grid{grid-template-columns:1fr !important;padding:0 10px 24px !important}.studio-top-card h3{font-size:24px !important}}
+
+
+/* GKM V135 studio list click */
+.studio-top-card{cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;}
+.studio-top-card:hover{transform:translateY(-3px);border-color:#00e5ff;box-shadow:0 0 22px rgba(0,229,255,.22);}
+.studio-open-btn{margin-top:14px;border:1px solid rgba(0,229,255,.65);background:linear-gradient(135deg,#5624d9,#00cfff);color:white;border-radius:14px;padding:9px 13px;font-weight:900;cursor:pointer;box-shadow:0 0 14px rgba(0,229,255,.18);}
+.studio-open-btn:hover{filter:brightness(1.12);}
