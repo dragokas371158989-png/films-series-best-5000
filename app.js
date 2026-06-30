@@ -4124,7 +4124,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   window.GKM_V202_GAME_HUB_VERSION = "v211-game-collections-fast-posters-2026-06-29";
 
-  const GAMES_URL = "./data/games_catalog.json?v=211";
+  const GAMES_URL = "./data/games_catalog.json?v=227";
   const PAGE = 24;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -8593,7 +8593,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const json = await res.json();
       gamesCache = Array.isArray(json) ? json : (json.items || []);
     } catch (err) {
-      console.warn("GKM V211: fallback games loaded", err);
+      console.warn("GKM V227: fallback games loaded", err);
       gamesCache = FALLBACK_GAMES;
     }
     gamesCache = gamesCache.map((item, index) => ({
@@ -8707,7 +8707,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     panel.className = "gkm-game-hub-panel";
     panel.innerHTML = `
       <div class="gkm-game-hub-head">
-        <div><b>🎮 Игровые вселенные V211</b><span>подборки, похожее и быстрые постеры</span></div>
+        <div><b>🎮 Игровые вселенные V227</b><span>подборки, похожее и быстрые постеры</span></div>
         <button type="button" data-gkm-game-filter-reset="1">Все игры</button>
       </div>
       <div class="gkm-game-filter-label">Тип связи</div>
@@ -8839,7 +8839,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     const relLabel = (RELATION_FILTERS.find(x => x[0] === activeRelation) || ["all", "Все"])[1];
     const collLabel = (COLLECTION_FILTERS.find(x => x[0] === activeCollection) || ["all", "Все подборки"])[1];
-    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " из " + all.length + " · V211 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>" + safeHtml(collLabel) + "</span> <span class='gkm-v202-pill'>быстрые постеры</span>";
+    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " из " + all.length + " · V227 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>" + safeHtml(collLabel) + "</span> <span class='gkm-v202-pill'>быстрые постеры</span>";
     if (grid) {
       grid.innerHTML = slice.length ? slice.map(cardHtml).join("") : `<div class="gkm-game-empty">Ничего не найдено. Сбрось фильтры или измени поиск.</div>`;
       cardBadgesEnhance(grid);
@@ -8849,7 +8849,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (pageText) pageText.textContent = gamesPage + " / " + gamesPages;
     if (prev) prev.disabled = gamesPage <= 1;
     if (next) next.disabled = gamesPage >= gamesPages;
-    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V211 · " + rows.length + " записей");
+    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V227 · " + rows.length + " записей");
   }
 
   function injectGamesTab() {
@@ -10572,3 +10572,20 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_FORCE_GAMES_V226 = render;
 })();
 /* GKM V226 FORCE GAME DATABASE 360 FIX END */
+
+
+/* GKM V227 DIRECT GAME URL FIX START */
+(function(){
+  function run(){
+    const count = document.getElementById("countText");
+    if (count && /Игровые вселенные/.test(count.textContent||"")) {
+      count.innerHTML = count.innerHTML.replace(/V211/g,"V227").replace(/59 записей/g,"360 записей");
+    }
+    const panel = document.getElementById("gkmGameHubPanel");
+    if (panel) panel.innerHTML = panel.innerHTML.replace(/V211/g,"V227");
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function(){run(); setTimeout(run,500);});
+  else {run(); setTimeout(run,500);}
+  document.addEventListener("click", function(){setTimeout(run,150); setTimeout(run,700);}, true);
+})();
+/* GKM V227 DIRECT GAME URL FIX END */
