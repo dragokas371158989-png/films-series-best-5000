@@ -1,5 +1,5 @@
-const GKM_APP_CLEAN_VERSION = "v232-disabled-v144-kinopoisk-only-auto-catalog-2026-06-24";
-window.GKM_V144_KINOPOISK_AUTO_CATALOG_VERSION = "v232-disabled-v144-kinopoisk-only-auto-catalog-2026-06-24";
+const GKM_APP_CLEAN_VERSION = "v144-kinopoisk-only-auto-catalog-2026-06-24";
+window.GKM_V144_KINOPOISK_AUTO_CATALOG_VERSION = "v144-kinopoisk-only-auto-catalog-2026-06-24";
 window.GKM_V136_SAFE_ANIME_TITLE_FIX_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
 window.GKM_V137_SAFE_ALL_FRANCHISE_TITLE_FIX_VERSION = "v137-safe-all-franchise-title-fix-2026-06-24";
 window.GKM_V114_RUSSIAN_POSTERS_VERSION = "v114-kinopoisk-russian-posters-2026-06-20";
@@ -4124,7 +4124,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   window.GKM_V202_GAME_HUB_VERSION = "v211-game-collections-fast-posters-2026-06-29";
 
-  const GAMES_URL = "./data/games_catalog.json?v=233";
+  const GAMES_URL = "./data/games_catalog.json?v=235";
   const PAGE = 24;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -9147,7 +9147,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=222";
+  const BOOKS_URL = "./data/books_catalog.json?v=235";
   const BOOKS_SPLIT_URLS = ["./data/books/manga.json?v=222","./data/books/ranobe.json?v=222","./data/books/books.json?v=222","./data/books/comics.json?v=222"];
   const PAGE = 24;
   const BOOK_PAGE = 18;
@@ -10034,7 +10034,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=224",
     "./data/games/franchises.json?v=224"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=233";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=235";
   const GAME_PAGE_SIZE = 18;
   let gameDB = null;
   let gamePage = 1;
@@ -10350,7 +10350,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=226",
     "./data/games/franchises.json?v=226"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=233";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=235";
   const PAGE_SIZE = 18;
   let db = null;
   let page = 1;
@@ -10574,180 +10574,4 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V226 FORCE GAME DATABASE 360 FIX END */
 
 
-/* GKM V232: V144 auto update disabled, cache bump v232 */
-
-
-
-/* GKM V233 REAL MODAL DESCRIPTION + POSTER RESTORE START */
-(function(){
-  function txt(v){ return String(v == null ? "" : v).trim(); }
-  function norm(v){
-    return txt(v).toLowerCase()
-      .replace(/ё/g,"е")
-      .replace(/[«»"“”'’`]/g,"")
-      .replace(/[^a-z0-9а-я]+/g," ")
-      .replace(/\s+/g," ")
-      .trim();
-  }
-  function arr(v){
-    if (Array.isArray(v)) return v.filter(Boolean).map(x => txt(x)).filter(Boolean);
-    if (typeof v === "string") return v.split(/[,|/·]+/).map(x => x.trim()).filter(Boolean);
-    return [];
-  }
-  function getTitle(item){ return txt(item && (item.title || item.name || item.ru || item.en || item.original_title || item.originalTitle)); }
-  function getType2(item){ return txt(item && (item.type || item.category || item.section || item.media_type)) || "Проект"; }
-  function getYear2(item){
-    const raw = txt(item && (item.year || item.release_date || item.first_air_date || item.date));
-    const m = raw.match(/(19\d{2}|20\d{2})/);
-    return m ? m[1] : raw;
-  }
-  function getGenres2(item){
-    try { if (typeof getGenres === "function") return getGenres(item); } catch(e){}
-    return arr(item && item.genres);
-  }
-  function svgPoster(item){
-    const title = (getTitle(item) || "Без названия").replace(/[&<>"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[s]));
-    const type = getType2(item);
-    const isGame = norm(type).includes("игра") || norm(type).includes("game");
-    const icon = isGame ? "🎮" : norm(type).includes("аниме") ? "✨" : norm(type).includes("книга") ? "📚" : norm(type).includes("комик") ? "💥" : "🎬";
-    const c1 = isGame ? "#080b28" : "#0a0d26";
-    const c2 = isGame ? "#25105f" : "#35156e";
-    const c3 = isGame ? "#00d4ff" : "#8b5cf6";
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
-      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset=".55" stop-color="${c2}"/><stop offset="1" stop-color="${c3}"/></linearGradient></defs>
-      <rect width="600" height="900" fill="url(#g)"/>
-      <circle cx="480" cy="130" r="160" fill="#fff" opacity=".09"/>
-      <circle cx="90" cy="780" r="180" fill="#fff" opacity=".07"/>
-      <rect x="34" y="34" width="532" height="832" rx="30" fill="none" stroke="rgba(255,255,255,.22)"/>
-      <text x="50%" y="160" text-anchor="middle" font-family="Arial" font-size="84" font-weight="900" fill="#fff">${icon}</text>
-      <text x="50%" y="230" text-anchor="middle" font-family="Arial" font-size="21" font-weight="800" fill="#ffffffaa">ГОЛУБЬ · КАТАЛОГ МИРА</text>
-      <foreignObject x="55" y="320" width="490" height="250">
-        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Arial,sans-serif;color:white;font-size:42px;font-weight:900;text-align:center;line-height:1.1;text-shadow:0 2px 16px rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;height:100%;word-break:break-word;">${title}</div>
-      </foreignObject>
-      <rect x="82" y="690" width="436" height="76" rx="24" fill="rgba(10,10,18,.58)" stroke="rgba(255,255,255,.26)"/>
-      <text x="50%" y="738" text-anchor="middle" font-family="Arial" font-size="23" font-weight="850" fill="#fff">${type}</text>
-    </svg>`;
-    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
-  }
-  function realPoster(item){
-    const raw = txt(item && (item.poster || item.posterUrl || item.poster_url || item.image || item.cover || item.img));
-    if (raw && !/placeholder|dummy|no-poster|noposter/i.test(raw)) return raw.replace(/^http:/i,"https:");
-    return svgPoster(item || {title: currentTitle(), type: currentType()});
-  }
-
-  const SYN = {
-    "побег из шоушенка":"Банкир Энди Дюфрейн получает пожизненный срок за убийство жены и её любовника, хотя сам утверждает, что невиновен. В тюрьме Шоушенк он сталкивается с жестокими порядками, давлением охраны и жизнью, где у человека почти не остаётся надежды. Постепенно Энди находит друга в заключённом Реде, помогает администрации с финансами и годами сохраняет спокойствие, ум и внутреннюю свободу. Это сильная тюремная драма о дружбе, несправедливости, выдержке и надежде, которая может держать человека даже там, где у него отняли всё.",
-    "бойцовский клуб":"Главный герой страдает от бессонницы, пустоты и ощущения, что его жизнь превратилась в работу, покупки и бессмысленные правила. После встречи с Тайлером Дёрденом он создаёт подпольный бойцовский клуб, где мужчины выпускают злость и впервые чувствуют себя живыми. Но простые драки быстро превращаются в опасное движение. Это мрачная история о кризисе личности, потреблении, подавленной агрессии и свободе, которая выходит из-под контроля.",
-    "крестный отец":"История семьи Корлеоне — могущественного мафиозного клана, где власть держится на страхе, уважении, деньгах и семейной верности. Дон Вито Корлеоне старается сохранить влияние семьи, но война между преступными группировками втягивает в этот мир его младшего сына Майкла. Он не хотел становиться частью мафии, но обстоятельства постепенно превращают его в нового главу семьи. Это криминальная сага о власти, крови, предательстве, семье и цене, которую человек платит за контроль.",
-    "интерстеллар":"Земля умирает: урожаи гибнут, пыльные бури становятся обычным делом, а человечество теряет будущее. Бывший пилот Купер отправляется через червоточину в космос, чтобы найти новую планету для людей. На Земле остаются его дети, и связь с дочерью Мёрф становится главным сердцем истории. Это фантастическая драма о времени, любви, жертве, космосе и попытке спасти человечество, даже если цена — собственная жизнь.",
-    "темный рыцарь":"Готэм сталкивается с Джокером — преступником, который не ищет денег или власти, а хочет доказать, что любой порядок можно разрушить. Бэтмен, Гордон и Харви Дент пытаются остановить хаос, но Джокер заставляет их делать тяжёлый моральный выбор. Это супергеройский криминальный триллер о справедливости, страхе, символах и цене, которую платит герой, чтобы защитить город.",
-    "джокер":"Артур Флек живёт в Готэме, работает клоуном и мечтает стать комиком, но постоянно сталкивается с унижением, бедностью, болезнью и равнодушием людей. Его одиночество и боль постепенно превращаются в злость, а город, полный напряжения, делает из него символ хаоса. Это психологическая драма о сломанном человеке, обществе, которое не замечает слабых, и рождении образа Джокера.",
-    "матрица":"Хакер Нео узнаёт, что привычный мир — не реальность, а симуляция, созданная машинами для контроля над людьми. Морфеус и Тринити показывают ему настоящий мир, где человечество порабощено, а люди используются как источник энергии. Нео должен понять, кто он на самом деле, и принять роль в борьбе против системы. Это культовая фантастика о свободе выбора, пробуждении, контроле и границе между иллюзией и реальностью.",
-    "форрест гамп":"Форрест Гамп — простой, добрый и искренний человек, который неожиданно проходит через важнейшие события американской истории. Он становится спортсменом, солдатом, бизнесменом и героем, но внутри остаётся тем же человеком, который любит Дженни и верит в простые вещи. Это история о судьбе, любви, потере, доброте и о том, как человек без хитрости может пройти огромный путь и остаться настоящим.",
-    "атака титанов":"Люди живут за огромными стенами, спасаясь от титанов — гигантов, пожирающих людей. После разрушения стены Эрен Йегер теряет дом и клянётся уничтожить титанов. Вместе с Микасой и Армином он вступает в армию, но чем дальше идёт война, тем сложнее становится правда о мире. Это мрачное аниме о свободе, мести, войне, пропаганде и том, как ненависть меняет людей.",
-    "наруто":"Наруто Узумаки — шумный подросток-ниндзя, которого деревня отвергала из-за запечатанного внутри него Девятихвостого лиса. Он мечтает стать Хокаге, чтобы добиться признания и доказать свою ценность. Вместе с Саске, Сакурой и Какаши он проходит миссии, тренировки и тяжёлые испытания. Это история о дружбе, одиночестве, силе воли, боли прошлого и желании быть принятым.",
-    "cyberpunk 2077":"Cyberpunk 2077 переносит в Найт-Сити — город корпораций, банд, имплантов и неоновой грязи. Игрок становится V, наёмником, который после опасного задания получает в голову цифровой след легендарного Джонни Сильверхенда. Теперь V ищет способ выжить, пока город предлагает сделки, предательства и шанс стать легендой. Это RPG о личности, цене бессмертия, свободе выбора и мире, где тело и память стали товаром.",
-    "elden ring":"Elden Ring отправляет игрока в Междуземье — разрушенный фэнтези-мир, где полубоги, древние силы и проклятия оставили после себя руины, чудовищ и легенды. Игрок сам выбирает путь, исследует земли, сражается с боссами и постепенно собирает смысл мира через локации, предметы и встречи. Это игра для тех, кто любит мрачное фэнтези, сложные битвы и чувство настоящего открытия."
-  };
-
-  function makeDescription(item){
-    const title = getTitle(item);
-    const k = norm(title);
-    if (SYN[k]) return SYN[k];
-    for (const s in SYN){ if (k.includes(s) || s.includes(k)) return SYN[s]; }
-
-    const old = txt(item && (item.overview_ru || item.description_ru || item.overview || item.description || item.plot));
-    if (old.length > 160 && !/каталог|специально расширено|без просмотра трейлера/i.test(old)) return old;
-
-    const type = getType2(item);
-    const year = getYear2(item);
-    const genres = getGenres2(item).slice(0,4);
-    const rel = txt(item && (item.relationLabel || item.relation));
-    const related = arr(item && (item.relatedMedia || item.similarMedia || item.watchOrder || item.playOrder)).slice(0,4);
-
-    let out = `${title || "Этот проект"} — ${type.toLowerCase()}${year ? " " + year + " года" : ""}`;
-    if (genres.length) out += ` в жанрах ${genres.join(", ")}`;
-    out += ". ";
-
-    if (old.length > 50) out += old.replace(/[,\s]+$/,"") + ". ";
-
-    const g = genres.join(" ").toLowerCase();
-    if (g.includes("драма")) out += "В центре истории — конфликт персонажей, внутренний выбор и эмоциональное развитие. ";
-    if (g.includes("криминал")) out += "Криминальная линия добавляет риск, давление, нарушение закона и столкновение человека с системой. ";
-    if (g.includes("фантаст")) out += "Фантастическая часть строит мир с необычными правилами, технологиями или идеями. ";
-    if (g.includes("фэнтези")) out += "Фэнтези делает акцент на мире, мифологии, силе героев и большом приключении. ";
-    if (g.includes("ужас") || g.includes("хоррор")) out += "Хоррор держит на тревоге, опасности и ощущении, что герой может не выбраться. ";
-    if (g.includes("боев") || g.includes("экшен")) out += "Экшен даёт динамику, столкновения и зрелищные события. ";
-    if (g.includes("триллер") || g.includes("детектив")) out += "Триллерная часть держит интерес через тайну, напряжение и постепенное раскрытие правды. ";
-    if (rel) out += `Связь с другими источниками: ${rel}. `;
-    if (related.length) out += `Похожие или связанные проекты: ${related.join(", ")}. `;
-    return out.trim();
-  }
-
-  const oldDisplayOverview = typeof displayOverview === "function" ? displayOverview : null;
-  displayOverview = function(item){ return makeDescription(item); };
-
-  const oldPosterSrc = typeof posterSrc === "function" ? posterSrc : null;
-  const oldPosterRawSrc = typeof posterRawSrc === "function" ? posterRawSrc : null;
-  posterRawSrc = function(item){
-    let raw = "";
-    try { raw = oldPosterRawSrc ? oldPosterRawSrc(item) : ""; } catch(e){}
-    return raw || realPoster(item);
-  };
-  posterOriginalSrc = function(item){ return posterRawSrc(item); };
-  posterSrc = function(item){ return posterRawSrc(item); };
-  hasPoster = function(item){ return true; };
-
-  function currentTitle(){ return txt(document.getElementById("detailTitle") && document.getElementById("detailTitle").textContent); }
-  function currentType(){ return txt((document.getElementById("detailMeta") && document.getElementById("detailMeta").textContent || "").split("·")[0]); }
-
-  function patchModal(item){
-    const overview = document.getElementById("detailOverview");
-    if (!overview) return;
-    if (!item) {
-      item = {
-        title: currentTitle(),
-        type: currentType(),
-        year: ((document.getElementById("detailMeta")?.textContent || "").match(/(19\d{2}|20\d{2})/) || [,""])[1],
-        genres: (document.getElementById("detailGenres")?.textContent || "").split("·").map(x=>x.trim()).filter(Boolean),
-        description: overview.textContent
-      };
-    }
-    const next = makeDescription(item);
-    if (next) overview.textContent = next;
-    const poster = document.getElementById("detailPoster");
-    if (poster && (!poster.src || poster.naturalWidth === 0)) {
-      const p = realPoster(item);
-      poster.src = p;
-      poster.dataset.originalSrc = p;
-    }
-  }
-
-  const oldOpen = typeof openDetails === "function" ? openDetails : null;
-  if (oldOpen && !window.GKM_V233_OPEN_PATCHED) {
-    openDetails = function(item){
-      const r = oldOpen.apply(this, arguments);
-      setTimeout(()=>patchModal(item), 30);
-      setTimeout(()=>patchModal(item), 160);
-      setTimeout(()=>patchModal(item), 500);
-      return r;
-    };
-    window.GKM_V233_OPEN_PATCHED = "1";
-  }
-
-  function injectStyle(){
-    if (document.getElementById("gkm-v233-js-style")) return;
-    const s = document.createElement("style");
-    s.id = "gkm-v233-js-style";
-    s.textContent = `
-      #detailsDialog .facts-grid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))!important;gap:12px!important}
-      #detailsDialog .fact-card{display:flex!important;flex-direction:column!important;padding:14px!important;border-radius:14px!important;border:1px solid rgba(0,212,255,.22)!important;background:#0b142b!important}
-      #detailsDialog .related-card,#detailsDialog .related-card *{filter:none!important;opacity:1!important;mix-blend-mode:normal!important}
-      #detailsDialog #detailOverview{white-space:normal!important;line-height:1.65!important;font-size:17px!important}
-    `;
-    document.head.appendChild(s);
-  }
-  injectStyle();
-  document.addEventListener("click", function(){ setTimeout(()=>patchModal(null), 200); setTimeout(()=>patchModal(null), 700); }, true);
-})();
- /* GKM V233 REAL MODAL DESCRIPTION + POSTER RESTORE END */
+/* GKM V235 CLEAN ROLLBACK FROM GOOD ZIP - no broken overrides */
