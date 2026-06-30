@@ -1,4 +1,4 @@
-[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29499686/GKM_PROJECT_SCHEME_V1.md)
+[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29499980/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
 
@@ -467,3 +467,9 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
   - data/books/index.json
 - app.js сначала грузит split-файлы, если не получилось — combined data/books_catalog.json
 - часть новых записей помечена sourceQuality=generated_seed: это заготовки для будущей ручной чистки и замены на точные обложки
+
+## GKM V222 ALL BOOK POSTERS FIX
+- исправлено "Нет постера" в разделе Книги/Манга/Комиксы
+- для каждой видимой карточки без poster генерируется красивая обложка
+- если внешняя обложка не загрузилась, включается fallback-обложка
+- скорость сохранена: обложки генерируются только для текущей страницы, а не для всех 1008 сразу
