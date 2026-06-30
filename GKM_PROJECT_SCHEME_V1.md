@@ -1,4 +1,4 @@
-[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29497818/GKM_PROJECT_SCHEME_V1.md)
+[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29498410/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
 
@@ -431,3 +431,10 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 2. Вернуть index.html с app.js?v=211.
 3. Удалить data/books_catalog.json.
 ```
+
+
+## GKM V213 CLEAN BUTTON SYSTEM + BOOK COVERS
+- аккуратная система кнопок: главные разделы отдельно, подборки отдельно
+- компактные чипы для фильтров книг/манги/комиксов
+- обложки для книг, манги и комиксов
+- улучшенная визуальная структура разделов
