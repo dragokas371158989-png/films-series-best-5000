@@ -10021,3 +10021,142 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(run, 1500);
 })();
  /* GKM V223 UNIVERSAL DESCRIPTIONS FIX END */
+
+
+
+/* GKM V224 GAME DATABASE EXPANSION 360 START */
+(function(){
+  const GAME_SPLIT_URLS = [
+    "./data/games/game_to_movies.json?v=224",
+    "./data/games/game_to_series.json?v=224",
+    "./data/games/game_to_anime.json?v=224",
+    "./data/games/media_to_games.json?v=224",
+    "./data/games/cult_games.json?v=224",
+    "./data/games/franchises.json?v=224"
+  ];
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=224";
+  const GAME_PAGE_SIZE = 18;
+  let gameDB = null;
+  let gamePage = 1;
+
+  function txt(v){return String(v == null ? "" : v).trim();}
+  function safe(v){try{return escapeHtml(v)}catch(e){return txt(v).replace(/[&<>"]/g, s=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[s]))}}
+  function low(v){return txt(v).toLowerCase().replace(/ё/g,"е");}
+  function key(v){return low(v).replace(/[^a-z0-9а-я]+/gi," ").replace(/\s+/g," ").trim();}
+  function arr(v){return Array.isArray(v)?v.filter(Boolean).map(txt):(txt(v)?[txt(v)]:[]);}
+  function titleOf(i){return txt(i && (i.title || i.name));}
+
+  function gameFallbackPoster(title){
+    const t = safe(title || "Игра");
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#090d2b"/><stop offset=".55" stop-color="#241066"/><stop offset="1" stop-color="#00d4ff"/></linearGradient><radialGradient id="r" cx="50%" cy="20%" r="75%"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>
+      <rect width="600" height="900" fill="url(#g)"/><rect width="600" height="900" fill="url(#r)"/>
+      <circle cx="485" cy="130" r="150" fill="#00d4ff" opacity=".16"/><circle cx="95" cy="770" r="175" fill="#8b5cf6" opacity=".20"/>
+      <rect x="34" y="34" width="532" height="832" rx="30" fill="none" stroke="rgba(255,255,255,.18)"/>
+      <text x="50%" y="165" text-anchor="middle" font-family="Arial" font-size="86" font-weight="900" fill="#fff">🎮</text>
+      <text x="50%" y="238" text-anchor="middle" font-family="Arial" font-size="21" font-weight="800" fill="#ffffff99">ГОЛУБЬ · GAME HUB</text>
+      <foreignObject x="55" y="330" width="490" height="210"><div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Arial,sans-serif;color:white;font-size:42px;font-weight:900;text-align:center;line-height:1.1;text-shadow:0 2px 16px rgba(0,0,0,.45);">${t}</div></foreignObject>
+      <rect x="82" y="690" width="436" height="76" rx="24" fill="rgba(10,10,18,.58)" stroke="rgba(255,255,255,.26)"/>
+      <text x="50%" y="738" text-anchor="middle" font-family="Arial" font-size="23" font-weight="850" fill="#fff">Игровая вселенная</text>
+    </svg>`;
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  async function loadGameDB(){
+    if (gameDB) return gameDB;
+    try {
+      const settled = await Promise.allSettled(GAME_SPLIT_URLS.map(url => fetch(url, {cache:"force-cache"}).then(r=>{if(!r.ok) throw new Error(url+" "+r.status); return r.json();})));
+      const merged = [];
+      settled.forEach(r => { if (r.status === "fulfilled") merged.push(...(Array.isArray(r.value) ? r.value : (r.value.items || []))); });
+      if (!merged.length) throw new Error("game split empty");
+      gameDB = merged;
+      console.info("GKM V224: split games loaded", gameDB.length);
+    } catch(e) {
+      const res = await fetch(GAME_COMBINED_URL, {cache:"force-cache"});
+      if (!res.ok) throw e;
+      const json = await res.json();
+      gameDB = Array.isArray(json) ? json : (json.items || []);
+      console.info("GKM V224: combined games loaded", gameDB.length);
+    }
+    gameDB = gameDB.map((item, idx) => ({...item, section:"games", id:item.id || ("game-"+idx+"-"+key(item.title).replace(/\s+/g,"-"))}));
+    return gameDB;
+  }
+
+  function hay(item){
+    return key([titleOf(item), item.universeName, item.relationLabel, item.relation, arr(item.genres).join(" "), arr(item.platforms).join(" "), arr(item.relatedMedia).join(" "), arr(item.vibe).join(" "), item.description].join(" "));
+  }
+  function filterRows(all){
+    const q = key(document.getElementById("searchInput")?.value || "");
+    let rows = all.slice();
+    if (q) rows = rows.filter(x => hay(x).includes(q));
+    const rating = Number(document.getElementById("ratingFilter")?.value || 0);
+    if (rating) rows = rows.filter(x => Number(x.rating || 0) >= rating);
+    const genre = key(document.getElementById("genreFilter")?.value || "");
+    if (genre) rows = rows.filter(x => arr(x.genres).some(g=>key(g).includes(genre)));
+    rows.sort((a,b)=>(Number(b.rating||0)*1000000+Math.min(Number(b.votes||0),900000))-(Number(a.rating||0)*1000000+Math.min(Number(a.votes||0),900000)));
+    return rows;
+  }
+
+  function gameCardHtml(item){
+    const title = safe(titleOf(item));
+    const fallback = gameFallbackPoster(titleOf(item));
+    const poster = txt(item.poster) || fallback;
+    const genre = arr(item.genres).slice(0,2).join(" · ");
+    return `<article class="card gkm-v224-game-card" data-id="${safe(item.id)}"><div class="poster-wrap"><img src="${poster}" alt="${title}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${fallback}'"><span class="badge">Игра</span><button class="fav" type="button">♡</button><div class="gkm-game-relation-badge">${safe(item.relationLabel || "Игровая вселенная")}</div></div><div class="card-body"><h3>${title}</h3><div class="meta">${safe(item.year || "")} · Игра</div><div class="genres">${safe(genre)}</div><div class="rating">★ ${safe(item.rating || "—")} · ${safe(item.votes ? Math.round(item.votes/1000)+" тыс" : "")}</div></div></article>`;
+  }
+
+  async function renderGameHub(page){
+    window.currentMode = "games";
+    window.currentTab = "games";
+    const all = await loadGameDB();
+    gamePage = Math.max(1, Number(page || gamePage || 1));
+    const rows = filterRows(all);
+    const pages = Math.max(1, Math.ceil(rows.length / GAME_PAGE_SIZE));
+    gamePage = Math.min(gamePage, pages);
+    const start = (gamePage - 1) * GAME_PAGE_SIZE;
+    const slice = rows.slice(start, start + GAME_PAGE_SIZE);
+    window.currentItems = slice;
+    const count = document.getElementById("countText");
+    if (count) count.innerHTML = `🎮 Игровые вселенные · ${rows.length} из ${all.length} · V224 <span class="gkm-v202-pill">расширенная база</span>`;
+    const grid = document.getElementById("grid");
+    if (grid) {
+      grid.innerHTML = slice.length ? slice.map(gameCardHtml).join("") : `<div class="gkm-book-empty">Игры не найдены. Сбрось поиск или фильтры.</div>`;
+      grid.classList.remove("gkm-v191-search-best","gkm-v191-spotlight","gkm-v191-highlight");
+      grid.style.outline="none";grid.style.boxShadow="none";
+    }
+    const pt=document.getElementById("pageText"), pr=document.getElementById("prevBtn"), nx=document.getElementById("nextBtn");
+    if(pt) pt.textContent = gamePage + " / " + pages;
+    if(pr) pr.disabled = gamePage <= 1;
+    if(nx) nx.disabled = gamePage >= pages;
+  }
+
+  function patch(){
+    document.addEventListener("click", function(e){
+      const games = e.target.closest && e.target.closest('.tab[data-tab="games"]');
+      if (games) setTimeout(()=>renderGameHub(1), 30);
+    }, true);
+    const search = document.getElementById("searchInput");
+    if (search && !search.dataset.gkmV224Games) {
+      search.dataset.gkmV224Games = "1";
+      search.addEventListener("input", function(){ if ((window.currentTab||window.currentMode) === "games") setTimeout(()=>renderGameHub(1), 90); });
+    }
+    const prev=document.getElementById("prevBtn"), next=document.getElementById("nextBtn");
+    if(prev && !prev.dataset.gkmV224Games) { prev.dataset.gkmV224Games="1"; prev.addEventListener("click",()=>{if((window.currentTab||window.currentMode)==="games") renderGameHub(gamePage-1);}, true); }
+    if(next && !next.dataset.gkmV224Games) { next.dataset.gkmV224Games="1"; next.addEventListener("click",()=>{if((window.currentTab||window.currentMode)==="games") renderGameHub(gamePage+1);}, true); }
+  }
+
+  function inject(){
+    if (document.getElementById("gkm-v224-style")) return;
+    const style=document.createElement("style");style.id="gkm-v224-style";style.textContent=`
+      .gkm-v224-game-card{contain:layout paint style;content-visibility:auto;contain-intrinsic-size:260px 430px}
+      .gkm-v224-game-card .poster-wrap{background:linear-gradient(135deg,#090d2b,#241066,#00d4ff)!important}
+      .gkm-v224-game-card .poster-wrap img{width:100%;height:100%;object-fit:cover!important}
+      .gkm-game-relation-badge{position:absolute;left:10px;right:10px;bottom:10px;z-index:5;padding:8px 10px;border-radius:14px;background:rgba(4,12,22,.75);border:1px solid rgba(0,212,255,.35);font-size:11px;font-weight:900;color:#e8fbff;text-align:center;backdrop-filter:blur(8px)}
+    `;document.head.appendChild(style);
+  }
+
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>{inject();patch();});
+  else {inject();patch();}
+  window.GKM_V224_RENDER_GAMES = renderGameHub;
+})();
+/* GKM V224 GAME DATABASE EXPANSION 360 END */
