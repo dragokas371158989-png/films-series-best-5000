@@ -1,4 +1,4 @@
-[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29507349/GKM_PROJECT_SCHEME_V1.md)
+[Uploading GKM_PROJECT_SCHEME_V1.md…]()
 [GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29506740/GKM_PROJECT_SCHEME_V1.md)
 [GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29503592/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
@@ -508,3 +508,7 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 - исправлено задвоение карточек по названию и типу
 - без изменений стилей и баз
 - при дублях сохраняется лучший вариант по постеру/голосам/рейтингу/описанию
+
+## GKM V238 RELATED CARDS COLOR ONLY FIX
+- исправлен серый/чёрно-белый вид похожих карточек в модалке
+- без изменений логики описаний, дедупа, базы и сетки
