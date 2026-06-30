@@ -4124,7 +4124,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   window.GKM_V202_GAME_HUB_VERSION = "v211-game-collections-fast-posters-2026-06-29";
 
-  const GAMES_URL = "./data/games_catalog.json?v=239";
+  const GAMES_URL = "./data/games_catalog.json?v=240";
   const PAGE = 24;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -9147,7 +9147,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=239";
+  const BOOKS_URL = "./data/books_catalog.json?v=240";
   const BOOKS_SPLIT_URLS = ["./data/books/manga.json?v=222","./data/books/ranobe.json?v=222","./data/books/books.json?v=222","./data/books/comics.json?v=222"];
   const PAGE = 24;
   const BOOK_PAGE = 18;
@@ -10034,7 +10034,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=224",
     "./data/games/franchises.json?v=224"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=239";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=240";
   const GAME_PAGE_SIZE = 18;
   let gameDB = null;
   let gamePage = 1;
@@ -10350,7 +10350,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=226",
     "./data/games/franchises.json?v=226"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=239";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=240";
   const PAGE_SIZE = 18;
   let db = null;
   let page = 1;
@@ -10845,3 +10845,97 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
 
 /* GKM V239 HARD DATA DEDUPE - no style changes */
+
+
+/* GKM V240 RUNTIME DATA QUALITY + DESCRIPTION RESTORE START */
+(function(){
+  const FIX = {
+    "побег из шоушенка":{year:1994,type:"Фильм"},"the shawshank redemption":{year:1994,type:"Фильм"},
+    "криминальное чтиво":{year:1994,type:"Фильм"},"pulp fiction":{year:1994,type:"Фильм"},
+    "форрест гамп":{year:1994,type:"Фильм"},"forrest gump":{year:1994,type:"Фильм"},
+    "крестный отец":{year:1972,type:"Фильм"},"the godfather":{year:1972,type:"Фильм"},
+    "интерстеллар":{year:2014,type:"Фильм"},"interstellar":{year:2014,type:"Фильм"},
+    "темный рыцарь":{year:2008,type:"Фильм"},"тёмный рыцарь":{year:2008,type:"Фильм"},"the dark knight":{year:2008,type:"Фильм"},
+    "начало":{year:2010,type:"Фильм"},"inception":{year:2010,type:"Фильм"},
+    "бойцовский клуб":{year:1999,type:"Фильм"},"fight club":{year:1999,type:"Фильм"},
+    "семь":{year:1995,type:"Фильм"},"se7en":{year:1995,type:"Фильм"},
+    "паразиты":{year:2019,type:"Фильм"},"parasite":{year:2019,type:"Фильм"},
+    "властелин колец возвращение короля":{year:2003,type:"Фильм"},"the lord of the rings the return of the king":{year:2003,type:"Фильм"},
+    "властелин колец братство кольца":{year:2001,type:"Фильм"},"the lord of the rings the fellowship of the ring":{year:2001,type:"Фильм"},
+    "властелин колец две крепости":{year:2002,type:"Фильм"},"the lord of the rings the two towers":{year:2002,type:"Фильм"},
+    "в поисках немо":{year:2003,type:"Мультфильм"},"finding nemo":{year:2003,type:"Мультфильм"},
+    "корпорация монстров":{year:2001,type:"Мультфильм"},"monsters inc":{year:2001,type:"Мультфильм"},
+    "шрек":{year:2001,type:"Мультфильм"},"shrek":{year:2001,type:"Мультфильм"},
+    "рататуй":{year:2007,type:"Мультфильм"},"ratatouille":{year:2007,type:"Мультфильм"},
+    "зверополис":{year:2016,type:"Мультфильм"},"zootopia":{year:2016,type:"Мультфильм"},
+    "аладдин":{year:1992,type:"Мультфильм"},"aladdin":{year:1992,type:"Мультфильм"},
+    "история игрушек":{year:1995,type:"Мультфильм"},"toy story":{year:1995,type:"Мультфильм"},
+    "атака титанов":{year:2013,type:"Аниме"},"attack on titan":{year:2013,type:"Аниме"},
+    "наруто":{year:2002,type:"Аниме"},"naruto":{year:2002,type:"Аниме"},
+    "ван пис":{year:1999,type:"Аниме"},"one piece":{year:1999,type:"Аниме"},
+    "тетрадь смерти":{year:2006,type:"Аниме"},"death note":{year:2006,type:"Аниме"}
+  };
+  const SYN = {
+    "побег из шоушенка":"Банкир Энди Дюфрейн получает пожизненный срок за убийство жены и её любовника, хотя сам утверждает, что невиновен. В тюрьме Шоушенк он сталкивается с жестокими порядками, давлением охраны и жизнью, где у человека почти не остаётся надежды. Постепенно Энди находит друга в заключённом Реде, помогает администрации с финансами и годами сохраняет спокойствие, ум и внутреннюю свободу. Это сильная тюремная драма о дружбе, несправедливости, выдержке и надежде.",
+    "бойцовский клуб":"Главный герой страдает от бессонницы, пустоты и ощущения, что его жизнь превратилась в работу, покупки и бессмысленные правила. После встречи с Тайлером Дёрденом он создаёт подпольный бойцовский клуб, где мужчины выпускают злость и впервые чувствуют себя живыми. Но простые драки быстро превращаются в опасное движение. Это мрачная история о кризисе личности, потреблении, подавленной агрессии и свободе, которая выходит из-под контроля.",
+    "крестный отец":"История семьи Корлеоне — могущественного мафиозного клана, где власть держится на страхе, уважении, деньгах и семейной верности. Дон Вито Корлеоне старается сохранить влияние семьи, но война между преступными группировками втягивает в этот мир его младшего сына Майкла. Он не хотел становиться частью мафии, но обстоятельства постепенно превращают его в нового главу семьи. Это криминальная сага о власти, крови, предательстве, семье и цене контроля.",
+    "интерстеллар":"Земля умирает: урожаи гибнут, пыльные бури становятся обычным делом, а человечество теряет будущее. Бывший пилот Купер отправляется через червоточину в космос, чтобы найти новую планету для людей. На Земле остаются его дети, и связь с дочерью Мёрф становится главным сердцем истории. Это фантастическая драма о времени, любви, жертве и попытке спасти человечество.",
+    "темный рыцарь":"Готэм сталкивается с Джокером — преступником, который не ищет денег или власти, а хочет доказать, что любой порядок можно разрушить. Бэтмен, комиссар Гордон и Харви Дент пытаются остановить хаос, но Джокер заставляет их делать тяжёлый моральный выбор. Это криминальный супергеройский триллер о справедливости, страхе, символах и цене, которую платит герой, чтобы защитить город.",
+    "криминальное чтиво":"Несколько криминальных историй переплетаются вокруг гангстеров, боксёра, загадочного чемодана, случайных смертей и странных разговоров. Герои постоянно оказываются в ситуациях, где насилие, юмор и абсурд идут рядом. Это стильное криминальное кино о случайности, выборе, долгах, страхе и людях, которые живут по правилам преступного мира, но всё равно попадают в хаос.",
+    "форрест гамп":"Форрест Гамп — простой, добрый и искренний человек, который неожиданно проходит через важнейшие события американской истории. Он становится спортсменом, солдатом, бизнесменом и героем, но внутри остаётся тем же человеком, который любит Дженни и верит в простые вещи. Это история о судьбе, любви, потере, доброте и о том, как человек без хитрости может пройти огромный путь и остаться настоящим.",
+    "начало":"Доминик Кобб умеет проникать в сны людей и красть идеи из подсознания. Ему предлагают почти невозможную задачу — не украсть мысль, а внедрить её так, чтобы человек поверил, будто она родилась сама. Ради шанса вернуться к детям Кобб собирает команду и погружается в многоуровневый мир снов. Это фантастический триллер о памяти, вине, реальности и цене, которую человек платит за желание исправить прошлое.",
+    "в поисках немо":"Рыбка-клоун Марлин отправляется через океан на поиски сына Немо, которого забрали люди. В пути он встречает забывчивую, но добрую Дори и постепенно учится отпускать страх, доверять другим и верить в самостоятельность сына. Это трогательный мультфильм о семье, тревоге родителей, дружбе и большом приключении в океане.",
+    "шрек":"Огр Шрек живёт один на болоте и не хочет связываться с людьми, но его спокойствие нарушают сказочные существа, изгнанные лордом Фаркуадом. Чтобы вернуть свой дом, Шрек отправляется спасать принцессу Фиону вместе с болтливым Ослом. Это смешная и добрая сказка наоборот о принятии себя, дружбе и том, что настоящая красота не всегда выглядит как в книжках.",
+    "атака титанов":"Люди живут за огромными стенами, спасаясь от титанов — гигантов, пожирающих людей. После разрушения стены Эрен Йегер теряет дом и клянётся уничтожить титанов. Вместе с Микасой и Армином он вступает в армию, но чем дальше идёт война, тем сложнее становится правда о мире. Это мрачное аниме о свободе, мести, войне, пропаганде и том, как ненависть меняет людей.",
+    "наруто":"Наруто Узумаки — шумный подросток-ниндзя, которого деревня отвергала из-за запечатанного внутри него Девятихвостого лиса. Он мечтает стать Хокаге, чтобы добиться признания и доказать свою ценность. Вместе с Саске, Сакурой и Какаши он проходит миссии, тренировки и тяжёлые испытания. Это история о дружбе, одиночестве, силе воли, боли прошлого и желании быть принятым.",
+    "ван пис":"Монки Д. Луффи отправляется в море, чтобы найти легендарное сокровище One Piece и стать Королём пиратов. По пути он собирает команду, где у каждого есть своя мечта и своя боль. Их путешествие превращается в огромную историю о свободе, дружбе, приключениях, жестоких режимах и тайнах мира. Это аниме для тех, кто любит большие вселенные, юмор, драму и долгий путь к мечте."
+  };
+  function txt(v){return String(v == null ? "" : v).trim();}
+  function key(v){return txt(v).toLowerCase().replace(/ё/g,"е").replace(/[«»"“”'’`]/g,"").replace(/\([^)]*\)/g," ").replace(/\b(19\d{2}|20\d{2})\b/g," ").replace(/\b(фильм|сериал|аниме|мультфильм|мульт|игра|книга|манга|комикс)\b/g," ").replace(/[^a-z0-9а-я]+/g," ").replace(/\s+/g," ").trim();}
+  function title(item){try{if(typeof displayTitle==="function")return displayTitle(item)}catch(e){} return txt(item&&(item.title||item.name||item.ru||item.en||item.original_title||item.originalTitle));}
+  function genres(item){try{if(typeof getGenres==="function")return getGenres(item)}catch(e){} return Array.isArray(item&&item.genres)?item.genres:[];}
+  function applyFix(item){
+    if(!item||typeof item!=="object")return item;
+    const k=key(title(item));
+    if(FIX[k]){item.year=FIX[k].year;item.type=FIX[k].type;if(/^(фильм|сериал|аниме|мультфильм|мульт|movie|series|anime|cartoon)$/i.test(String(item.category||"")))item.category=FIX[k].type;}
+    if(SYN[k]) ["overview_ru","description_ru","overview","description"].forEach(d=>{if(!item[d]||String(item[d]).length<120||/каталог|специально расширено|без просмотра трейлера/i.test(String(item[d]))) item[d]=SYN[k];});
+    return item;
+  }
+  const oldDisplayOverview=typeof displayOverview==="function"?displayOverview:null;
+  displayOverview=function(item){
+    applyFix(item); const k=key(title(item)); if(SYN[k])return SYN[k];
+    if(oldDisplayOverview){const old=txt(oldDisplayOverview(item)); if(old.length>120&&!/каталог|специально расширено|без просмотра трейлера/i.test(old)) return old;}
+    const g=genres(item).slice(0,3); let out=`${title(item)} — ${String((item&&item.type)||"проект").toLowerCase()}`; if(g.length)out+=` в жанрах ${g.join(", ")}`; return out+". Описание помогает понять сюжет, атмосферу и настроение проекта перед выбором.";
+  };
+  function fixArrays(){["currentItems","items","allItems","filteredItems","catalog","movies","series","anime","cartoons"].forEach(n=>{try{if(Array.isArray(window[n]))window[n].forEach(applyFix)}catch(e){}})}
+  function activeTab(){const a=document.querySelector('.tab.active,[data-tab].active');return a&&a.dataset?a.dataset.tab:"";}
+  function removeWrongCards(){
+    const tab=activeTab(); if(!tab||tab==="all")return;
+    document.querySelectorAll('#grid .card,.grid .card').forEach(card=>{
+      const badge=txt((card.querySelector('.badge,.card-badge')||{}).textContent).toLowerCase();
+      let ok=true;
+      if(tab==="movies")ok=badge.includes("фильм");
+      if(tab==="series")ok=badge.includes("сериал");
+      if(tab==="anime")ok=badge.includes("аниме");
+      if(tab==="cartoons")ok=badge.includes("мульт");
+      if(tab==="games")ok=badge.includes("игра");
+      if(tab==="books")ok=badge.includes("книга")||badge.includes("манга")||badge.includes("комик")||badge.includes("раноб");
+      if(!ok)card.remove();
+    });
+  }
+  function fixDomMeta(){
+    document.querySelectorAll('#grid .card,.grid .card').forEach(card=>{
+      const titleEl=card.querySelector('.card-title,h3,.title'); if(!titleEl)return;
+      const k=key(titleEl.textContent); const fx=FIX[k]; if(!fx)return;
+      const badge=card.querySelector('.badge,.card-badge'); if(badge)badge.textContent=fx.type;
+      const meta=card.querySelector('.card-meta,.meta'); if(meta)meta.textContent=meta.textContent.replace(/(19\d{2}|20\d{2})/,fx.year).replace(/Фильм|Сериал|Аниме|Мультфильм|Мульт/i,fx.type);
+    });
+  }
+  function run(){fixArrays();fixDomMeta();removeWrongCards();}
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
+  document.addEventListener("click",()=>{setTimeout(run,80);setTimeout(run,300);},true);
+  const obs=new MutationObserver(()=>setTimeout(run,80)); obs.observe(document.documentElement,{childList:true,subtree:true});
+})();
+/* GKM V240 RUNTIME DATA QUALITY + DESCRIPTION RESTORE END */
+
+/* GKM V240 compact runtime fix */
