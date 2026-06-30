@@ -1,3 +1,4 @@
+[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29503972/GKM_PROJECT_SCHEME_V1.md)
 [GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29503592/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
@@ -496,3 +497,9 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 - V226 принудительно подменяет рендер игр на расширенную базу
 - если старый V211 отрисовался первым, V226 перерисовывает раздел
 - ожидаемый результат: Игровые вселенные · 360 из 360 · V226
+
+## GKM V227 DIRECT GAME URL FIX
+- исправлено: внутри app.js старый GAMES_URL указывал на games_catalog.json?v=211
+- теперь игры грузятся из games_catalog.json?v=227
+- подписи V211 заменены на V227
+- ожидаемый результат: Игры показывают 360 записей, а не 59
