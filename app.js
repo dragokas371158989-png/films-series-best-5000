@@ -10709,3 +10709,252 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V256 CORE GENERATED POSTERS CSS END */
 
+
+
+/* GKM V257 DUPLICATE TITLES SEASONS FIX START */
+(function(){
+  window.GKM_V257_DUPLICATE_TITLES_SEASONS_VERSION = "v257-duplicate-titles-seasons-fix-2026-06-30";
+
+  function v257Text(v){
+    return String(v == null ? "" : v).trim();
+  }
+
+  function v257Norm(v){
+    return v257Text(v)
+      .toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[’`]/g, "'")
+      .replace(/[^a-z0-9а-я]+/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function v257Year(item){
+    try {
+      if (typeof getYear === "function") return v257Text(getYear(item));
+    } catch {}
+    const raw = v257Text(item && (item.year || item.release_date || item.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+
+  function v257Type(item){
+    try {
+      if (typeof getType === "function") return v257Text(getType(item));
+    } catch {}
+    return v257Text(item && (item.type || item.category || item.kind));
+  }
+
+  function v257BaseTitle(item){
+    try {
+      if (typeof displayTitle === "function") return v257Text(displayTitle(item));
+    } catch {}
+    return v257Text(item && (item.ru || item.title_ru || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
+  }
+
+  function v257RawTitle(item){
+    return v257Text(item && [
+      item.ru,
+      item.title_ru,
+      item.title,
+      item.name,
+      item.en,
+      item.original_title,
+      item.original_name,
+      item.__manualTopTitle
+    ].filter(Boolean).join(" "));
+  }
+
+  function v257SeasonFromText(item){
+    const raw = v257RawTitle(item);
+    const low = raw.toLowerCase();
+
+    const explicit =
+      raw.match(/(?:season|сезон)\s*(\d+)/i) ||
+      raw.match(/(\d+)\s*(?:season|сезон)/i) ||
+      raw.match(/part\s*(\d+)/i) ||
+      raw.match(/част[ьи]\s*(\d+)/i);
+
+    if (explicit) return `${explicit[1]} сезон`;
+
+    const y = v257Year(item);
+    const base = v257Norm(v257BaseTitle(item));
+    const h = v257Norm(raw);
+
+    // Атака титанов — по годам, чтобы было понятно 1/2/3/final.
+    if (base.includes("атака титанов") || h.includes("attack on titan") || h.includes("shingeki")) {
+      if (y === "2013") return "1 сезон";
+      if (y === "2017") return "2 сезон";
+      if (y === "2018" || y === "2019") return "3 сезон";
+      if (y === "2020" || y === "2021" || y === "2022" || y === "2023") return "финальный сезон";
+    }
+
+    if (base.includes("моя геройская академия") || h.includes("my hero academia") || h.includes("boku no hero")) {
+      if (y === "2016") return "1 сезон";
+      if (y === "2017") return "2 сезон";
+      if (y === "2018") return "3 сезон";
+      if (y === "2019" || y === "2020") return "4 сезон";
+      if (y === "2021") return "5 сезон";
+      if (y === "2022") return "6 сезон";
+      if (y === "2024") return "7 сезон";
+    }
+
+    if (base.includes("мастера меча онлайн") || h.includes("sword art online")) {
+      if (y === "2012") return "1 сезон";
+      if (y === "2014") return "2 сезон";
+      if (y === "2018" || y === "2019" || y === "2020") return "Alicization";
+    }
+
+    if (base.includes("токийский гуль") || h.includes("tokyo ghoul")) {
+      if (h.includes("root") || h.includes("√") || y === "2015") return "√A";
+      if (h.includes("re") || y === "2018") return "re";
+      if (y === "2014") return "1 сезон";
+    }
+
+    if (base.includes("блич") || h.includes("bleach")) {
+      if (h.includes("thousand") || h.includes("sennen") || y === "2022") return "TYBW";
+      if (y === "2004") return "классика";
+    }
+
+    if (base.includes("наруто") || h.includes("naruto")) {
+      if (h.includes("shippuden") || h.includes("shippuuden") || h.includes("ураган")) return "Ураганные хроники";
+      if (h.includes("boruto") || h.includes("боруто")) return "Боруто";
+      if (y === "2002") return "1 сезон";
+      if (y === "2007") return "Ураганные хроники";
+    }
+
+    if (base.includes("ван пис") || base.includes("ван-пис") || h.includes("one piece")) {
+      if (h.includes("film") || h.includes("movie")) return "фильм";
+      if (y) return `${y}`;
+    }
+
+    return "";
+  }
+
+  function v257KnownBadMovieDuplicate(title, year){
+    const t = v257Norm(title);
+    const y = v257Text(year);
+    const canonical = {
+      "побег из шоушенка": "1994",
+      "криминальное чтиво": "1994",
+      "форрест гамп": "1994",
+      "бойцовский клуб": "1999",
+      "крестный отец": "1972",
+      "интерстеллар": "2014",
+      "темный рыцарь": "2008"
+    };
+    return canonical[t] && canonical[t] !== y;
+  }
+
+  function v257DecorateList(items){
+    const arr = Array.isArray(items) ? items.filter(Boolean) : [];
+    const exactSeen = new Set();
+    const cleaned = [];
+
+    // 1. Сначала убираем прямые дубли: один и тот же title/type/year.
+    for (const item of arr) {
+      const title = v257BaseTitle(item);
+      const type = v257Type(item);
+      const year = v257Year(item);
+      const exactKey = `${v257Norm(title)}|${v257Norm(type)}|${year}`;
+
+      // У известных фильмов убираем неправильные "фантомные" годы.
+      if (v257KnownBadMovieDuplicate(title, year)) continue;
+
+      if (exactSeen.has(exactKey)) continue;
+      exactSeen.add(exactKey);
+      cleaned.push(item);
+    }
+
+    // 2. Группируем одинаковые названия одного типа.
+    const groups = new Map();
+    for (const item of cleaned) {
+      const key = `${v257Norm(v257BaseTitle(item))}|${v257Norm(v257Type(item))}`;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(item);
+    }
+
+    // 3. Если одинаковое название встречается несколько раз, НЕ скрываем,
+    // а подписываем год/сезон, чтобы было понятно чем они отличаются.
+    for (const group of groups.values()) {
+      if (group.length <= 1) {
+        delete group[0].__gkmV257Title;
+        continue;
+      }
+
+      const used = new Set();
+
+      for (const item of group) {
+        const base = v257BaseTitle(item);
+        const type = v257Type(item);
+        const year = v257Year(item);
+        const season = v257SeasonFromText(item);
+        let suffix = "";
+
+        if (season) suffix = season;
+        else if (year) suffix = year;
+        else suffix = "часть";
+
+        let title = `${base} — ${suffix}`;
+
+        // Если всё равно совпало — добавляем год или номер.
+        let n = 2;
+        const orig = title;
+        while (used.has(v257Norm(title))) {
+          title = `${orig} #${n}`;
+          n++;
+        }
+
+        used.add(v257Norm(title));
+        item.__gkmV257Title = title;
+      }
+    }
+
+    return cleaned;
+  }
+
+  const oldDisplayTitle = typeof displayTitle === "function" ? displayTitle : null;
+  if (oldDisplayTitle) {
+    displayTitle = function(item){
+      if (item && item.__gkmV257Title) return item.__gkmV257Title;
+      return oldDisplayTitle(item);
+    };
+  }
+
+  const oldRenderList = typeof renderList === "function" ? renderList : null;
+  if (oldRenderList) {
+    renderList = function(items, label){
+      const before = Array.isArray(items) ? items.length : 0;
+      const fixed = v257DecorateList(items);
+      const after = fixed.length;
+      let outLabel = label || "";
+      if (before !== after) {
+        outLabel = `${outLabel} · дубли убраны: ${before - after}`;
+      }
+      return oldRenderList(fixed, outLabel);
+    };
+  }
+
+  const oldOpenDetails = typeof openDetails === "function" ? openDetails : null;
+  if (oldOpenDetails) {
+    openDetails = function(item){
+      if (item && item.__gkmV257Title) {
+        const oldRu = item.ru;
+        const oldTitle = item.title;
+        try {
+          item.ru = item.__gkmV257Title;
+          item.title = item.__gkmV257Title;
+          return oldOpenDetails(item);
+        } finally {
+          item.ru = oldRu;
+          item.title = oldTitle;
+        }
+      }
+      return oldOpenDetails(item);
+    };
+  }
+
+  console.log("GKM V257: duplicate titles decorated by season/year, exact duplicates removed");
+})();
+/* GKM V257 DUPLICATE TITLES SEASONS FIX END */
+
