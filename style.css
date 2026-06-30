@@ -1934,3 +1934,18 @@ body #grid:has(.studio-top-grid){display:block !important;}
 .studio-top-card:hover{transform:translateY(-3px);border-color:#00e5ff;box-shadow:0 0 22px rgba(0,229,255,.22);}
 .studio-open-btn{margin-top:14px;border:1px solid rgba(0,229,255,.65);background:linear-gradient(135deg,#5624d9,#00cfff);color:white;border-radius:14px;padding:9px 13px;font-weight:900;cursor:pointer;box-shadow:0 0 14px rgba(0,229,255,.18);}
 .studio-open-btn:hover{filter:brightness(1.12);}
+
+
+/* GKM V252 RELATED CARDS COLOR + MODAL DESCRIPTION FIX */
+.related-card,
+.related-card *,
+.related-poster,
+.related-card img {
+  filter: none !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+}
+.related-card::before,
+.related-card::after { display: none !important; }
+.related-poster { object-fit: cover !important; background: #10162a !important; }
+#detailOverview { white-space: pre-wrap !important; line-height: 1.55 !important; }
