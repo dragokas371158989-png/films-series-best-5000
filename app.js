@@ -528,107 +528,16 @@ function getRuTitle(item) {
   try { return displayTitle(item); } catch (e) { return titleOf(item); }
 }
 
-const GKM_V236_SYNOPSIS = new Map(Object.entries({
-  "побег из шоушенка": "Банкир Энди Дюфрейн получает пожизненный срок за убийство жены и её любовника, хотя сам утверждает, что невиновен. В тюрьме Шоушенк он сталкивается с жестокими порядками, давлением охраны и жизнью, где у человека почти не остаётся надежды. Постепенно Энди находит друга в заключённом Реде, помогает администрации с финансами и годами сохраняет спокойствие, ум и внутреннюю свободу. Это сильная тюремная драма о дружбе, несправедливости, выдержке и надежде.",
-  "бойцовский клуб": "Главный герой страдает от бессонницы, пустоты и ощущения, что его жизнь превратилась в работу, покупки и бессмысленные правила. После встречи с Тайлером Дёрденом он создаёт подпольный бойцовский клуб, где мужчины выпускают злость и впервые чувствуют себя живыми. Но простые драки быстро превращаются в опасное движение. Это мрачная история о кризисе личности, потреблении, подавленной агрессии и свободе, которая выходит из-под контроля.",
-  "крестный отец": "История семьи Корлеоне — могущественного мафиозного клана, где власть держится на страхе, уважении, деньгах и семейной верности. Дон Вито Корлеоне старается сохранить влияние семьи, но война между преступными группировками втягивает в этот мир его младшего сына Майкла. Он не хотел становиться частью мафии, но обстоятельства постепенно превращают его в нового главу семьи. Это криминальная сага о власти, крови, предательстве, семье и цене контроля.",
-  "интерстеллар": "Земля умирает: урожаи гибнут, пыльные бури становятся обычным делом, а человечество теряет будущее. Бывший пилот Купер отправляется через червоточину в космос, чтобы найти новую планету для людей. На Земле остаются его дети, и связь с дочерью Мёрф становится главным сердцем истории. Это фантастическая драма о времени, любви, жертве и попытке спасти человечество.",
-  "темный рыцарь": "Готэм сталкивается с Джокером — преступником, который не ищет денег или власти, а хочет доказать, что любой порядок можно разрушить. Бэтмен, комиссар Гордон и Харви Дент пытаются остановить хаос, но Джокер заставляет их делать тяжёлый моральный выбор. Это криминальный супергеройский триллер о справедливости, страхе, символах и цене, которую платит герой, чтобы защитить город.",
-  "джокер": "Артур Флек живёт в Готэме, работает клоуном и мечтает стать комиком, но постоянно сталкивается с унижением, бедностью, болезнью и равнодушием людей. Его одиночество и боль постепенно превращаются в злость, а город, полный напряжения, делает из него символ хаоса. Это психологическая драма о сломанном человеке, обществе, которое не замечает слабых, и рождении опасного образа.",
-  "матрица": "Хакер Нео узнаёт, что привычный мир — не реальность, а симуляция, созданная машинами для контроля над людьми. Морфеус и Тринити показывают ему настоящий мир, где человечество порабощено, а люди используются как источник энергии. Нео должен понять, кто он на самом деле, и принять роль в борьбе против системы. Это культовая фантастика о свободе выбора, пробуждении, контроле и границе между иллюзией и реальностью.",
-  "форрест гамп": "Форрест Гамп — простой, добрый и искренний человек, который неожиданно проходит через важнейшие события американской истории. Он становится спортсменом, солдатом, бизнесменом и героем, но внутри остаётся тем же человеком, который любит Дженни и верит в простые вещи. Это история о судьбе, любви, потере, доброте и о том, как человек без хитрости может пройти огромный путь и остаться настоящим.",
-  "криминальное чтиво": "Несколько криминальных историй переплетаются вокруг гангстеров, боксёра, загадочного чемодана, случайных смертей и странных разговоров. Герои постоянно оказываются в ситуациях, где насилие, юмор и абсурд идут рядом. Это стильное криминальное кино о случайности, выборе, долгах, страхе и людях, которые живут по правилам преступного мира, но всё равно попадают в хаос.",
-  "властелин колец братство кольца": "Хоббит Фродо получает Кольцо Всевластия — древний артефакт, от которого зависит судьба Средиземья. Чтобы не дать Саурону вернуть силу, Фродо должен отправиться к Роковой горе и уничтожить кольцо. В путь с ним идут люди, эльф, гном, маг и друзья-хоббиты. Это начало большого фэнтези-путешествия о дружбе, соблазне властью, страхе перед злом и маленьких героях, которым приходится нести огромную ношу.",
-  "начало": "Доминик Кобб умеет проникать в сны людей и красть идеи из подсознания. Ему предлагают почти невозможную задачу — не украсть мысль, а внедрить её так, чтобы человек поверил, будто она родилась сама. Ради шанса вернуться к детям Кобб собирает команду и погружается в многоуровневый мир снов. Это фантастический триллер о памяти, вине, реальности и цене, которую человек платит за желание исправить прошлое.",
-  "семь": "Два детектива расследуют серию жестоких убийств, каждое из которых связано с одним из семи смертных грехов. Молодой и вспыльчивый Миллс работает вместе с опытным Сомерсетом, который уже почти потерял веру в людей. Чем дальше продвигается расследование, тем яснее становится, что убийца ведёт их к заранее продуманному финалу. Это мрачный триллер о зле, наказании, одержимости и моральной ловушке.",
-  "паразиты": "Бедная семья Кимов постепенно проникает в дом богатой семьи Пак, выдавая себя за профессионалов: репетитора, арт-терапевта, водителя и домработницу. Сначала всё похоже на хитрую аферу, но за красивым домом скрывается куда более тёмная и опасная история. Это социальная драма с элементами триллера о бедности, классовой пропасти, зависти и том, как хрупкая ложь может привести к катастрофе.",
-  "атака титанов": "Люди живут за огромными стенами, спасаясь от титанов — гигантов, пожирающих людей. После разрушения стены Эрен Йегер теряет дом и клянётся уничтожить титанов. Вместе с Микасой и Армином он вступает в армию, но чем дальше идёт война, тем сложнее становится правда о мире. Это мрачное аниме о свободе, мести, войне, пропаганде и том, как ненависть меняет людей.",
-  "наруто": "Наруто Узумаки — шумный подросток-ниндзя, которого деревня отвергала из-за запечатанного внутри него Девятихвостого лиса. Он мечтает стать Хокаге, чтобы добиться признания и доказать свою ценность. Вместе с Саске, Сакурой и Какаши он проходит миссии, тренировки и тяжёлые испытания. Это история о дружбе, одиночестве, силе воли, боли прошлого и желании быть принятым.",
-  "ван пис": "Монки Д. Луффи отправляется в море, чтобы найти легендарное сокровище One Piece и стать Королём пиратов. По пути он собирает команду, где у каждого есть своя мечта и своя боль. Их путешествие превращается в огромную историю о свободе, дружбе, приключениях, жестоких режимах и тайнах мира. Это аниме для тех, кто любит большие вселенные, юмор, драму и долгий путь к мечте.",
-  "тетрадь смерти": "Лайт Ягами находит тетрадь, которая убивает человека, если записать его имя. Решив очистить мир от преступников, он становится загадочным убийцей Кирой. Его противником становится гениальный детектив L, и между ними начинается опасная интеллектуальная дуэль. Это психологический триллер о власти, морали, гордыне и том, как человек может превратиться в монстра, если решит, что имеет право судить всех.",
-  "берсерк": "Гатс — одинокий воин с огромным мечом и тяжёлым прошлым. Его путь связан с войной, наёмниками, демонами, предательством и Гриффитом — человеком, чья мечта о власти меняет судьбы всех вокруг. Это тёмное фэнтези о боли, ярости, дружбе, травме, амбициях и попытке выжить в мире, где чудовища бывают не только снаружи, но и внутри людей.",
-  "киберпанк 2077": "Cyberpunk 2077 переносит в Найт-Сити — город корпораций, банд, имплантов и неоновой грязи. Игрок становится V, наёмником, который после опасного задания получает в голову цифровой след легендарного Джонни Сильверхенда. Теперь V ищет способ выжить, пока город предлагает сделки, предательства и шанс стать легендой. Это RPG о личности, цене бессмертия, свободе выбора и мире, где тело и память стали товаром.",
-  "cyberpunk 2077": "Cyberpunk 2077 переносит в Найт-Сити — город корпораций, банд, имплантов и неоновой грязи. Игрок становится V, наёмником, который после опасного задания получает в голову цифровой след легендарного Джонни Сильверхенда. Теперь V ищет способ выжить, пока город предлагает сделки, предательства и шанс стать легендой. Это RPG о личности, цене бессмертия, свободе выбора и мире, где тело и память стали товаром.",
-  "elden ring": "Elden Ring отправляет игрока в Междуземье — разрушенный фэнтези-мир, где полубоги, древние силы и проклятия оставили после себя руины, чудовищ и легенды. Игрок сам выбирает путь, исследует земли, сражается с боссами и постепенно собирает смысл мира через локации, предметы и встречи. Это игра для тех, кто любит мрачное фэнтези, сложные битвы и чувство настоящего открытия.",
-  "baldurs gate 3": "Baldur's Gate 3 — ролевая игра во вселенной Dungeons & Dragons, где герой заражён паразитом иллитида и должен найти способ избавиться от угрозы. Игрок собирает спутников, принимает решения, которые меняют сюжет и отношения, сражается пошагово и проходит ситуации разными способами. Это RPG про свободу выбора, последствия, характеры персонажей и настоящее фэнтези-приключение.",
-  "the last of us part i": "The Last of Us Part I рассказывает о Джоэле и Элли, которые проходят через разрушенную Америку после грибковой пандемии. Джоэл должен доставить девочку к Цикадам, потому что её иммунитет может стать ключом к спасению людей. Но дорога постепенно превращает задание в личную связь. Это тяжёлая и эмоциональная игра о потере, доверии, жестокости выживания и выборе между долгом и любовью.",
-  "ведьмак 3 дикая охота": "Геральт из Ривии ищет Цири — девушку с древней силой, за которой охотится Дикая Охота. Путешествие проходит через военные земли, проклятые деревни, дворцовые интриги, ведьм, чудовищ и личные выборы. Это мрачная фэнтези-RPG о семье, судьбе, войне, цене нейтралитета и мире, где чудовища часто выглядят человечнее людей.",
-  "the witcher 3 wild hunt": "Геральт из Ривии ищет Цири — девушку с древней силой, за которой охотится Дикая Охота. Путешествие проходит через военные земли, проклятые деревни, дворцовые интриги, ведьм, чудовищ и личные выборы. Это мрачная фэнтези-RPG о семье, судьбе, войне, цене нейтралитета и мире, где чудовища часто выглядят человечнее людей."
-}));
-
-function gkmV236NormTitle(v) {
-  return String(v || "")
-    .toLowerCase()
-    .replace(/ё/g, "е")
-    .replace(/[«»"“”'’`]/g, "")
-    .replace(/[^a-z0-9а-я]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function gkmV236CleanText(v) {
-  return String(v || "")
-    .replace(/\s+/g, " ")
-    .replace(/В каталоге.*$/i, "")
-    .replace(/это описание специально расширено.*$/i, "")
-    .replace(/без просмотра трейлера.*$/i, "")
-    .trim();
-}
-
-function gkmV236SmartOverview(item) {
-  const title = displayTitle(item) || titleOf(item);
-  const key = gkmV236NormTitle(title);
-  if (GKM_V236_SYNOPSIS.has(key)) return GKM_V236_SYNOPSIS.get(key);
-  for (const [k, v] of GKM_V236_SYNOPSIS.entries()) {
-    if (key.includes(k) || k.includes(key)) return v;
-  }
-
-  const old = gkmV236CleanText(item && (item.overview_ru || item.description_ru || item.overview || item.description || item.plot));
-  if (old.length >= 180 && /[.!?…]$/.test(old)) return old;
-  if (old.length >= 120 && !/описание пока не добавлено/i.test(old)) return old + (old.endsWith(".") ? "" : ".");
-
-  const type = getType(item);
-  const year = getYear(item);
-  const genres = getGenres(item).slice(0, 4);
-  const rating = getRating(item);
-  const rel = item && (item.relationLabel || item.relation || item.universeName);
-  const related = Array.isArray(item && item.relatedMedia) ? item.relatedMedia.slice(0, 4) : [];
-
-  let out = `${title} — ${String(type).toLowerCase()}${year ? " " + year + " года" : ""}`;
-  if (genres.length) out += ` в жанрах ${genres.join(", ")}`;
-  out += ". ";
-
-  if (old.length > 40) out += old.replace(/[,\s]+$/, "") + ". ";
-
-  const g = genres.join(" ").toLowerCase();
-  if (g.includes("драма")) out += "В центре истории — конфликт персонажей, внутренний выбор и эмоциональное развитие. ";
-  if (g.includes("криминал")) out += "Криминальная линия добавляет риск, давление, нарушение закона и столкновение человека с системой. ";
-  if (g.includes("фантаст")) out += "Фантастическая часть строит мир с необычными правилами, технологиями или идеями. ";
-  if (g.includes("фэнтези")) out += "Фэнтези делает акцент на мире, мифологии, силе героев и большом приключении. ";
-  if (g.includes("ужас") || g.includes("хоррор")) out += "Хоррор держит на тревоге, опасности и ощущении, что герой может не выбраться. ";
-  if (g.includes("боев") || g.includes("экшен")) out += "Экшен даёт динамику, столкновения и зрелищные события. ";
-  if (g.includes("триллер") || g.includes("детектив")) out += "Триллерная часть держит интерес через тайну, напряжение и постепенное раскрытие правды. ";
-  if (g.includes("комед")) out += "Комедийная часть делает историю легче, живее и добавляет юмор в развитие событий. ";
-
-  if (rel) out += `Связь с другими источниками или вселенной: ${rel}. `;
-  if (related.length) out += `Похожие или связанные проекты: ${related.join(", ")}. `;
-  if (rating) out += `Оценка около ${Number(rating).toFixed(1)} помогает понять общий уровень интереса к проекту.`;
-
-  return out.trim();
-}
-
 function displayOverview(item) {
   if (getType(item) === "Аниме") {
     const exactTitle = specificAnimeTitle(item);
     const candidates = [item && item.__manualTopTitle, item && item.ru, item && item.title_ru, exactTitle, displayTitle(item), animeKey(item)].filter(Boolean).map(norm);
     for (const k of candidates) {
-      if (ANIME_RU_OVERVIEW.has(k)) {
-        const animeText = ANIME_RU_OVERVIEW.get(k);
-        if (animeText && animeText.length >= 160) return animeText;
-      }
+      if (ANIME_RU_OVERVIEW.has(k)) return ANIME_RU_OVERVIEW.get(k);
     }
   }
-  return gkmV236SmartOverview(item);
+  const text = item && (item.overview_ru || item.description_ru || item.overview || item.description);
+  return text || "Описание пока не добавлено.";
 }
 
 function getYear(item) {
@@ -4215,7 +4124,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   window.GKM_V202_GAME_HUB_VERSION = "v211-game-collections-fast-posters-2026-06-29";
 
-  const GAMES_URL = "./data/games_catalog.json?v=236";
+  const GAMES_URL = "./data/games_catalog.json?v=237";
   const PAGE = 24;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -9238,7 +9147,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=236";
+  const BOOKS_URL = "./data/books_catalog.json?v=237";
   const BOOKS_SPLIT_URLS = ["./data/books/manga.json?v=222","./data/books/ranobe.json?v=222","./data/books/books.json?v=222","./data/books/comics.json?v=222"];
   const PAGE = 24;
   const BOOK_PAGE = 18;
@@ -10125,7 +10034,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=224",
     "./data/games/franchises.json?v=224"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=236";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=237";
   const GAME_PAGE_SIZE = 18;
   let gameDB = null;
   let gamePage = 1;
@@ -10441,7 +10350,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=226",
     "./data/games/franchises.json?v=226"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=236";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=237";
   const PAGE_SIZE = 18;
   let db = null;
   let page = 1;
@@ -10668,4 +10577,202 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V235 CLEAN ROLLBACK FROM GOOD ZIP - no broken overrides */
 
 
-/* GKM V236 DESCRIPTION ONLY FIX - no layout changes */
+
+/* GKM V237 GLOBAL DEDUPE FIX START */
+(function(){
+  function txt(v){ return String(v == null ? "" : v).trim(); }
+  function low(v){ return txt(v).toLowerCase().replace(/ё/g, "е"); }
+  function cleanTitle(v){
+    return low(v)
+      .replace(/[«»"“”'’`]/g, "")
+      .replace(/\([^)]*\)/g, " ")
+      .replace(/\b(фильм|сериал|аниме|мультфильм|мульт|игра|книга|манга|комикс)\b/g, " ")
+      .replace(/\b(19\d{2}|20\d{2})\b/g, " ")
+      .replace(/[^a-z0-9а-я]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+  function typeOf(item){
+    try { if (typeof getType === "function") return getType(item); } catch(e){}
+    return txt(item && (item.type || item.category || item.media_type || item.section));
+  }
+  function titleOf(item){
+    try { if (typeof displayTitle === "function") return displayTitle(item); } catch(e){}
+    try { if (typeof titleOf === "function") return titleOf(item); } catch(e){}
+    return txt(item && (item.title || item.name || item.ru || item.en || item.original_title || item.originalTitle));
+  }
+  function yearOf(item){
+    try { if (typeof getYear === "function") return getYear(item); } catch(e){}
+    const raw = txt(item && (item.year || item.release_date || item.first_air_date || item.date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+  function ratingOf(item){
+    try { if (typeof getRating === "function") return Number(getRating(item)) || 0; } catch(e){}
+    return Number(item && (item.rating || item.vote_average || item.kpRating)) || 0;
+  }
+  function votesOf(item){
+    try { if (typeof getVotes === "function") return Number(getVotes(item)) || 0; } catch(e){}
+    return Number(item && (item.votes || item.vote_count || item.scored_by || item.popularity)) || 0;
+  }
+  function posterOf(item){
+    const raw = txt(item && (item.poster || item.posterUrl || item.poster_url || item.image || item.cover || item.img));
+    return raw && !/placeholder|no-poster|noposter/i.test(raw);
+  }
+  function sourceRank(item){
+    const s = low(item && (item.source || item.list || item.collection || item.provider || item.origin));
+    if (s.includes("tmdb")) return 50;
+    if (s.includes("kinopoisk") || s.includes("kp")) return 45;
+    if (s.includes("top_rated")) return 40;
+    if (s.includes("manual")) return 35;
+    if (s.includes("movie_top_rated")) return 30;
+    return 10;
+  }
+  function score(item){
+    return (posterOf(item) ? 100000000 : 0)
+      + Math.min(votesOf(item), 1000000) * 10
+      + ratingOf(item) * 100000
+      + sourceRank(item) * 1000
+      + (txt(item && (item.overview || item.description || item.overview_ru || item.description_ru)).length > 120 ? 50000 : 0);
+  }
+  function dedupeKey(item){
+    const t = cleanTitle(titleOf(item));
+    const type = low(typeOf(item));
+    // Для фильмов/сериалов/аниме дубли обычно по названию. Год специально НЕ включаем,
+    // потому что у тебя один и тот же фильм пришёл как 2019 и 1994.
+    let group = "media";
+    if (type.includes("сериал") || type.includes("series")) group = "series";
+    else if (type.includes("аниме")) group = "anime";
+    else if (type.includes("мульт")) group = "cartoon";
+    else if (type.includes("игра") || type.includes("game")) group = "game";
+    else if (type.includes("книга") || type.includes("манга") || type.includes("комик") || type.includes("раноб")) group = "book";
+    else if (type.includes("фильм") || type.includes("movie")) group = "movie";
+    return group + "::" + t;
+  }
+  function dedupeList(list){
+    if (!Array.isArray(list)) return list;
+    const map = new Map();
+    const order = [];
+    for (const item of list) {
+      if (!item || typeof item !== "object") continue;
+      const key = dedupeKey(item);
+      if (!key || key.endsWith("::")) {
+        order.push(item);
+        continue;
+      }
+      const prev = map.get(key);
+      if (!prev) {
+        map.set(key, item);
+        order.push(key);
+      } else if (score(item) > score(prev)) {
+        map.set(key, item);
+      }
+    }
+    return order.map(x => typeof x === "string" ? map.get(x) : x).filter(Boolean);
+  }
+
+  function patchArray(name){
+    try {
+      if (Array.isArray(window[name])) {
+        const before = window[name].length;
+        window[name] = dedupeList(window[name]);
+        if (before !== window[name].length) console.info("GKM V237 dedupe", name, before, "→", window[name].length);
+      }
+    } catch(e){}
+  }
+
+  function patchKnownArrays(){
+    [
+      "items","allItems","catalog","CATALOG","movies","series","anime","cartoons",
+      "currentItems","filteredItems","smartItems","autoCatalog","data"
+    ].forEach(patchArray);
+  }
+
+  // Перехватываем renderCards: перед отрисовкой убираем дубли.
+  if (typeof renderCards === "function" && !window.GKM_V237_RENDER_CARDS_PATCHED) {
+    const oldRenderCards = renderCards;
+    renderCards = function(list){
+      const clean = dedupeList(list);
+      window.currentItems = clean;
+      return oldRenderCards.apply(this, [clean]);
+    };
+    window.GKM_V237_RENDER_CARDS_PATCHED = "1";
+  }
+
+  // Перехватываем applyFilters, если он возвращает/рисует список.
+  if (typeof applyFilters === "function" && !window.GKM_V237_FILTERS_PATCHED) {
+    const oldApplyFilters = applyFilters;
+    applyFilters = function(){
+      const res = oldApplyFilters.apply(this, arguments);
+      setTimeout(function(){
+        patchKnownArrays();
+        if (Array.isArray(window.currentItems) && typeof renderCards === "function") {
+          const clean = dedupeList(window.currentItems);
+          if (clean.length !== window.currentItems.length) {
+            window.currentItems = clean;
+            renderCards(clean);
+            const count = document.getElementById("countText");
+            if (count && /Найдено:/i.test(count.textContent || "")) {
+              count.textContent = "Найдено: " + clean.length + " · дубли убраны";
+            }
+          }
+        }
+      }, 40);
+      return res;
+    };
+    window.GKM_V237_FILTERS_PATCHED = "1";
+  }
+
+  // Если карточки уже отрисованы дублями, скрываем дубль прямо в DOM.
+  function dedupeDOM(){
+    const cards = Array.from(document.querySelectorAll("#grid .card, .grid .card"));
+    if (!cards.length) return;
+    const seen = new Set();
+    let hidden = 0;
+    for (const card of cards) {
+      const titleEl = card.querySelector(".card-title, h3, .title");
+      const typeEl = card.querySelector(".card-badge, .badge, .meta, .card-meta");
+      const title = cleanTitle(titleEl && titleEl.textContent);
+      const type = low(typeEl && typeEl.textContent);
+      const group = type.includes("сериал") ? "series" : type.includes("аниме") ? "anime" : type.includes("мульт") ? "cartoon" : type.includes("игра") ? "game" : type.includes("книга") || type.includes("манга") || type.includes("комик") ? "book" : "movie";
+      const key = group + "::" + title;
+      if (!title) continue;
+      if (seen.has(key)) {
+        card.style.display = "none";
+        card.dataset.gkmV237Duplicate = "1";
+        hidden++;
+      } else {
+        seen.add(key);
+        if (card.dataset.gkmV237Duplicate) {
+          card.style.display = "";
+          delete card.dataset.gkmV237Duplicate;
+        }
+      }
+    }
+    if (hidden) console.info("GKM V237 DOM duplicates hidden", hidden);
+  }
+
+  function boot(){
+    patchKnownArrays();
+    dedupeDOM();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+
+  document.addEventListener("click", function(){
+    setTimeout(boot, 80);
+    setTimeout(boot, 300);
+  }, true);
+
+  let t = null;
+  const obs = new MutationObserver(function(){
+    clearTimeout(t);
+    t = setTimeout(dedupeDOM, 80);
+  });
+  obs.observe(document.documentElement, {childList:true, subtree:true});
+})();
+ /* GKM V237 GLOBAL DEDUPE FIX END */
+
+
+/* GKM V237 DEDUPE FIX - no style changes */
