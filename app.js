@@ -11558,3 +11558,248 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
 
 /* GKM V246 JSON PATH FIX - absolute /data json paths redirected to ./data */
+/* GKM V247 FORCE NORMAL GRID FIX START */
+(function () {
+  if (window.GKM_V247_FORCE_NORMAL_GRID_FIX) return;
+  window.GKM_V247_FORCE_NORMAL_GRID_FIX = "1";
+
+  function $(id) {
+    return document.getElementById(id);
+  }
+
+  function txt(v) {
+    return String(v == null ? "" : v).trim();
+  }
+
+  function safeTitle(item) {
+    try {
+      if (typeof displayTitle === "function") return displayTitle(item);
+    } catch (e) {}
+
+    try {
+      if (typeof titleOf === "function") return titleOf(item);
+    } catch (e) {}
+
+    return txt(
+      item &&
+        (item.title ||
+          item.name ||
+          item.ru ||
+          item.en ||
+          item.original_title ||
+          item.originalTitle)
+    );
+  }
+
+  function safeType(item) {
+    try {
+      if (typeof getType === "function") return getType(item);
+    } catch (e) {}
+
+    return txt(item && (item.type || item.category || item.media_type)) || "Фильм";
+  }
+
+  function safeYear(item) {
+    try {
+      if (typeof getYear === "function") return getYear(item);
+    } catch (e) {}
+
+    const raw = txt(item && (item.year || item.release_date || item.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+
+  function safeRating(item) {
+    try {
+      if (typeof getRating === "function") return Number(getRating(item)) || 0;
+    } catch (e) {}
+
+    return Number(item && (item.rating || item.vote_average || item.kpRating)) || 0;
+  }
+
+  function safeVotes(item) {
+    try {
+      if (typeof getVotes === "function") return Number(getVotes(item)) || 0;
+    } catch (e) {}
+
+    return Number(item && (item.votes || item.vote_count || item.scored_by || item.popularity)) || 0;
+  }
+
+  function safeGenres(item) {
+    try {
+      if (typeof getGenres === "function") return getGenres(item);
+    } catch (e) {}
+
+    if (Array.isArray(item && item.genres)) return item.genres;
+    return [];
+  }
+
+  function safePoster(item) {
+    try {
+      if (typeof posterSrc === "function") {
+        const p = posterSrc(item);
+        if (p) return p;
+      }
+    } catch (e) {}
+
+    return txt(
+      item &&
+        (item.poster ||
+          item.posterUrl ||
+          item.poster_url ||
+          item.image ||
+          item.cover ||
+          item.img)
+    );
+  }
+
+  function esc(v) {
+    return txt(v).replace(/[&<>"]/g, function (s) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;"
+      }[s];
+    });
+  }
+
+  function cardHtml(item, index) {
+    const title = safeTitle(item);
+    const type = safeType(item);
+    const year = safeYear(item);
+    const rating = safeRating(item);
+    const votes = safeVotes(item);
+    const genres = safeGenres(item).slice(0, 2).join(" · ");
+    const poster = safePoster(item);
+
+    const id = esc(
+      txt(item && item.id) ||
+        title + "|" + year + "|" + index
+    );
+
+    return `
+      <article class="card" data-id="${id}">
+        <div class="poster-wrap">
+          <span class="badge card-badge">${esc(type)}</span>
+          <button class="fav card-fav-btn" type="button" data-fav-id="${id}">♡</button>
+          ${
+            poster
+              ? `<img src="${esc(poster)}" loading="lazy" decoding="async" alt="${esc(title)}">`
+              : `<div class="poster-placeholder">Нет постера</div>`
+          }
+        </div>
+
+        <div class="card-body">
+          <h3 class="card-title">${esc(title)}</h3>
+          <div class="card-meta">${esc(year || "—")} · ${esc(type)}</div>
+          <div class="card-genres">${esc(genres || "Жанры не указаны")}</div>
+          <div class="card-rating">★ ${rating ? rating.toFixed(1) : "—"} · ${votes ? votes.toLocaleString("ru-RU") : "0"}</div>
+        </div>
+      </article>
+    `;
+  }
+
+  function getBestItems() {
+    const names = [
+      "currentItems",
+      "filteredItems",
+      "allItems",
+      "items",
+      "catalog",
+      "movies"
+    ];
+
+    for (const name of names) {
+      try {
+        if (Array.isArray(window[name]) && window[name].length) {
+          return window[name];
+        }
+      } catch (e) {}
+    }
+
+    return [];
+  }
+
+  function looksLikeBrokenHome() {
+    const grid = $("grid");
+    if (!grid) return false;
+
+    const text = grid.textContent || "";
+    const cards = grid.querySelectorAll(".card").length;
+
+    if (cards > 0) return false;
+
+    return (
+      text.includes("Популярное") ||
+      text.includes("Топ") ||
+      text.includes("Новинки") ||
+      text.includes("Фильмы") ||
+      text.includes("Сериалы") ||
+      grid.querySelector("button")
+    );
+  }
+
+  function forceNormalGrid() {
+    const grid = $("grid");
+    if (!grid) return;
+
+    if (!looksLikeBrokenHome()) return;
+
+    const items = getBestItems();
+
+    if (!items.length) {
+      console.warn("GKM V247: нет массива карточек для восстановления сетки");
+      return;
+    }
+
+    const pageSize = 60;
+    const pageItems = items.slice(0, pageSize);
+
+    grid.innerHTML = pageItems.map(cardHtml).join("");
+
+    const count = $("countText");
+    if (count) {
+      count.textContent = "Найдено: " + items.length + " · обычная сетка восстановлена";
+    }
+
+    const pageText = $("pageText");
+    if (pageText) {
+      pageText.textContent = "1 / " + Math.max(1, Math.ceil(items.length / pageSize));
+    }
+
+    console.log("GKM V247: обычная сетка восстановлена:", pageItems.length, "из", items.length);
+  }
+
+  function boot() {
+    setTimeout(forceNormalGrid, 100);
+    setTimeout(forceNormalGrid, 500);
+    setTimeout(forceNormalGrid, 1200);
+    setTimeout(forceNormalGrid, 2500);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+
+  document.addEventListener(
+    "click",
+    function () {
+      setTimeout(forceNormalGrid, 100);
+      setTimeout(forceNormalGrid, 500);
+    },
+    true
+  );
+
+  const observer = new MutationObserver(function () {
+    setTimeout(forceNormalGrid, 100);
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true
+  });
+})();
+/* GKM V247 FORCE NORMAL GRID FIX END */
