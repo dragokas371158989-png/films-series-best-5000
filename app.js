@@ -10824,3 +10824,95 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 })();
 /* GKM V228 HARD POSTERS + FULL DESCRIPTIONS FIX END */
+
+
+
+/* GKM V229 RELATED CARDS COLOR FIX START */
+(function(){
+  function inject(){
+    if (document.getElementById("gkm-v229-related-color-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v229-related-color-style";
+    style.textContent = `
+      #detailsDialog .related-card,
+      #detailsDialog .related-card *,
+      #detailsDialog [class*="related"],
+      #detailsDialog [class*="similar"]{
+        filter:none!important;
+        -webkit-filter:none!important;
+        opacity:1!important;
+        mix-blend-mode:normal!important;
+      }
+
+      #detailsDialog .related-card img,
+      #detailsDialog .related-poster,
+      #detailsDialog .related-card .poster-wrap img,
+      #detailsDialog [class*="related"] img,
+      #detailsDialog [class*="similar"] img{
+        filter:none!important;
+        -webkit-filter:none!important;
+        opacity:1!important;
+        mix-blend-mode:normal!important;
+        transform:none;
+        object-fit:cover;
+      }
+
+      #detailsDialog .related-card::before,
+      #detailsDialog .related-card::after,
+      #detailsDialog [class*="related"]::before,
+      #detailsDialog [class*="related"]::after,
+      #detailsDialog [class*="similar"]::before,
+      #detailsDialog [class*="similar"]::after{
+        filter:none!important;
+        -webkit-filter:none!important;
+        opacity:0!important;
+        background:none!important;
+        mix-blend-mode:normal!important;
+      }
+
+      #detailsDialog .related-card{
+        background:rgba(10,18,38,.86)!important;
+        border:1px solid rgba(0,212,255,.18)!important;
+      }
+
+      #detailsDialog .related-card:hover{
+        transform:translateY(-2px);
+        box-shadow:0 14px 34px rgba(0,212,255,.16);
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function repair(){
+    document.querySelectorAll('#detailsDialog .related-card, #detailsDialog [class*="related"], #detailsDialog [class*="similar"]').forEach(el => {
+      el.style.filter = "none";
+      el.style.webkitFilter = "none";
+      el.style.opacity = "1";
+      el.style.mixBlendMode = "normal";
+    });
+    document.querySelectorAll('#detailsDialog .related-card img, #detailsDialog .related-poster, #detailsDialog [class*="related"] img, #detailsDialog [class*="similar"] img').forEach(img => {
+      img.style.filter = "none";
+      img.style.webkitFilter = "none";
+      img.style.opacity = "1";
+      img.style.mixBlendMode = "normal";
+    });
+  }
+
+  function run(){
+    inject();
+    repair();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+  else run();
+
+  document.addEventListener("click", function(){
+    setTimeout(run, 80);
+    setTimeout(run, 300);
+    setTimeout(run, 900);
+  }, true);
+
+  const obs = new MutationObserver(function(){ setTimeout(run, 50); });
+  obs.observe(document.documentElement, {childList:true, subtree:true});
+})();
+ /* GKM V229 RELATED CARDS COLOR FIX END */
