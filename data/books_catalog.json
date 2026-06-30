@@ -1,0 +1,983 @@
+[
+  {
+    "id": "book-witcher-last-wish",
+    "title": "Ведьмак: Последнее желание",
+    "originalTitle": "The Last Wish",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1993,
+    "rating": 8.7,
+    "votes": 120000,
+    "genres": [
+      "фэнтези",
+      "приключения",
+      "тёмное фэнтези"
+    ],
+    "badges": [
+      "первоисточник",
+      "есть игры",
+      "есть сериал"
+    ],
+    "relation": "book_to_game_series",
+    "relationLabel": "Книга → игры → сериал",
+    "universeName": "The Witcher",
+    "relatedMedia": [
+      "The Witcher",
+      "The Witcher 3: Wild Hunt",
+      "The Witcher: Nightmare of the Wolf"
+    ],
+    "readOrder": [
+      "Последнее желание",
+      "Меч Предназначения",
+      "Кровь эльфов",
+      "Час Презрения",
+      "Крещение огнём",
+      "Башня Ласточки",
+      "Владычица Озера"
+    ],
+    "watchOrder": [
+      "сериал The Witcher",
+      "аниме Nightmare of the Wolf"
+    ],
+    "playOrder": [
+      "The Witcher",
+      "The Witcher 2",
+      "The Witcher 3: Wild Hunt"
+    ],
+    "vibe": [
+      "монстры",
+      "магия",
+      "моральный выбор"
+    ],
+    "description": "Стартовая книга с рассказами о Геральте. Главный вход во вселенную Ведьмака."
+  },
+  {
+    "id": "book-dune",
+    "title": "Дюна",
+    "originalTitle": "Dune",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1965,
+    "rating": 8.8,
+    "votes": 180000,
+    "genres": [
+      "фантастика",
+      "политика",
+      "космос"
+    ],
+    "badges": [
+      "культовая",
+      "есть фильмы",
+      "есть игры"
+    ],
+    "relation": "book_to_movies_games",
+    "relationLabel": "Книга → фильмы → игры",
+    "universeName": "Dune",
+    "relatedMedia": [
+      "Dune",
+      "Dune: Part Two",
+      "Dune: Awakening"
+    ],
+    "readOrder": [
+      "Дюна",
+      "Мессия Дюны",
+      "Дети Дюны",
+      "Бог-Император Дюны"
+    ],
+    "watchOrder": [
+      "Dune 2021",
+      "Dune: Part Two"
+    ],
+    "playOrder": [
+      "Dune: Spice Wars",
+      "Dune: Awakening"
+    ],
+    "vibe": [
+      "пустыня",
+      "империя",
+      "политика",
+      "пророк"
+    ],
+    "description": "Культовая научная фантастика, из которой выросли фильмы, игры и огромная вселенная."
+  },
+  {
+    "id": "manga-attack-on-titan",
+    "title": "Атака титанов",
+    "originalTitle": "Shingeki no Kyojin",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 2009,
+    "rating": 9.0,
+    "votes": 250000,
+    "genres": [
+      "тёмное фэнтези",
+      "экшен",
+      "драма"
+    ],
+    "badges": [
+      "есть аниме",
+      "культовая"
+    ],
+    "relation": "manga_to_anime_games",
+    "relationLabel": "Манга → аниме → игры",
+    "universeName": "Attack on Titan",
+    "relatedMedia": [
+      "Attack on Titan",
+      "Attack on Titan 2"
+    ],
+    "readOrder": [
+      "манга главы 1–139"
+    ],
+    "watchOrder": [
+      "Attack on Titan Season 1",
+      "Season 2",
+      "Season 3",
+      "Final Season"
+    ],
+    "playOrder": [
+      "Attack on Titan",
+      "Attack on Titan 2"
+    ],
+    "vibe": [
+      "титаны",
+      "война",
+      "мрачная тайна"
+    ],
+    "description": "Манга-первоисточник для одного из самых популярных аниме последних лет."
+  },
+  {
+    "id": "manga-demon-slayer",
+    "title": "Истребитель демонов",
+    "originalTitle": "Kimetsu no Yaiba",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 2016,
+    "rating": 8.5,
+    "votes": 210000,
+    "genres": [
+      "сёнен",
+      "демоны",
+      "экшен"
+    ],
+    "badges": [
+      "есть аниме",
+      "есть фильмы"
+    ],
+    "relation": "manga_to_anime_movies",
+    "relationLabel": "Манга → аниме → фильмы",
+    "universeName": "Demon Slayer",
+    "relatedMedia": [
+      "Demon Slayer",
+      "Mugen Train"
+    ],
+    "readOrder": [
+      "манга тома 1–23"
+    ],
+    "watchOrder": [
+      "Season 1",
+      "Mugen Train",
+      "Entertainment District",
+      "Swordsmith Village",
+      "Hashira Training"
+    ],
+    "vibe": [
+      "демоны",
+      "катаны",
+      "семья"
+    ],
+    "description": "Манга, по которой сняли аниме и фильмы Demon Slayer."
+  },
+  {
+    "id": "manga-jujutsu-kaisen",
+    "title": "Магическая битва",
+    "originalTitle": "Jujutsu Kaisen",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 2018,
+    "rating": 8.6,
+    "votes": 190000,
+    "genres": [
+      "сёнен",
+      "проклятия",
+      "экшен"
+    ],
+    "badges": [
+      "есть аниме",
+      "культовая"
+    ],
+    "relation": "manga_to_anime",
+    "relationLabel": "Манга → аниме",
+    "universeName": "Jujutsu Kaisen",
+    "relatedMedia": [
+      "Jujutsu Kaisen",
+      "Jujutsu Kaisen 0"
+    ],
+    "readOrder": [
+      "Jujutsu Kaisen 0",
+      "манга основная серия"
+    ],
+    "watchOrder": [
+      "Jujutsu Kaisen 0",
+      "Season 1",
+      "Season 2"
+    ],
+    "vibe": [
+      "проклятия",
+      "маги",
+      "тёмный сёнен"
+    ],
+    "description": "Манга-первоисточник для аниме Jujutsu Kaisen."
+  },
+  {
+    "id": "manga-naruto",
+    "title": "Наруто",
+    "originalTitle": "Naruto",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 1999,
+    "rating": 8.9,
+    "votes": 300000,
+    "genres": [
+      "сёнен",
+      "ниндзя",
+      "приключения"
+    ],
+    "badges": [
+      "есть аниме",
+      "есть игры",
+      "культовая"
+    ],
+    "relation": "manga_to_anime_games",
+    "relationLabel": "Манга → аниме → игры",
+    "universeName": "Naruto",
+    "relatedMedia": [
+      "Naruto",
+      "Naruto Shippuden",
+      "Naruto Ultimate Ninja Storm"
+    ],
+    "readOrder": [
+      "Naruto манга 1–700"
+    ],
+    "watchOrder": [
+      "Naruto",
+      "Naruto Shippuden",
+      "The Last"
+    ],
+    "playOrder": [
+      "Ultimate Ninja Storm series"
+    ],
+    "vibe": [
+      "ниндзя",
+      "дружба",
+      "битвы"
+    ],
+    "description": "Одна из главных манг и аниме-вселенных."
+  },
+  {
+    "id": "manga-one-piece",
+    "title": "Ван-Пис",
+    "originalTitle": "One Piece",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 1997,
+    "rating": 9.2,
+    "votes": 330000,
+    "genres": [
+      "сёнен",
+      "пираты",
+      "приключения"
+    ],
+    "badges": [
+      "есть аниме",
+      "есть сериал",
+      "есть игры"
+    ],
+    "relation": "manga_to_anime_series_games",
+    "relationLabel": "Манга → аниме → сериал → игры",
+    "universeName": "One Piece",
+    "relatedMedia": [
+      "One Piece",
+      "One Piece live action",
+      "One Piece Odyssey"
+    ],
+    "readOrder": [
+      "манга One Piece"
+    ],
+    "watchOrder": [
+      "One Piece anime",
+      "One Piece live action"
+    ],
+    "playOrder": [
+      "One Piece Odyssey",
+      "Pirate Warriors"
+    ],
+    "vibe": [
+      "пираты",
+      "мечта",
+      "большой мир"
+    ],
+    "description": "Огромная пиратская вселенная, где манга связана с аниме, сериалом и играми."
+  },
+  {
+    "id": "comic-batman-year-one",
+    "title": "Бэтмен: Год первый",
+    "originalTitle": "Batman: Year One",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 1987,
+    "rating": 8.8,
+    "votes": 95000,
+    "genres": [
+      "супергерои",
+      "нуар",
+      "криминал"
+    ],
+    "badges": [
+      "DC",
+      "есть фильмы",
+      "культовая"
+    ],
+    "relation": "comic_to_movies_games",
+    "relationLabel": "Комикс → фильмы → игры",
+    "universeName": "Batman",
+    "relatedMedia": [
+      "Batman Begins",
+      "The Batman",
+      "Batman Arkham"
+    ],
+    "readOrder": [
+      "Year One",
+      "The Long Halloween",
+      "Dark Victory"
+    ],
+    "watchOrder": [
+      "Batman Begins",
+      "The Dark Knight",
+      "The Batman"
+    ],
+    "playOrder": [
+      "Batman Arkham Asylum",
+      "Arkham City",
+      "Arkham Knight"
+    ],
+    "vibe": [
+      "нуар",
+      "Готэм",
+      "детектив"
+    ],
+    "description": "Один из лучших входов в комиксную вселенную Бэтмена."
+  },
+  {
+    "id": "comic-watchmen",
+    "title": "Хранители",
+    "originalTitle": "Watchmen",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 1986,
+    "rating": 9.1,
+    "votes": 110000,
+    "genres": [
+      "супергерои",
+      "драма",
+      "антиутопия"
+    ],
+    "badges": [
+      "культовая",
+      "есть фильм",
+      "есть сериал"
+    ],
+    "relation": "comic_to_movie_series",
+    "relationLabel": "Комикс → фильм → сериал",
+    "universeName": "Watchmen",
+    "relatedMedia": [
+      "Watchmen",
+      "Watchmen HBO"
+    ],
+    "readOrder": [
+      "Watchmen graphic novel"
+    ],
+    "watchOrder": [
+      "Watchmen 2009",
+      "Watchmen HBO"
+    ],
+    "vibe": [
+      "антигерои",
+      "политика",
+      "мрачный мир"
+    ],
+    "description": "Культовый графический роман, связанный с фильмом и сериалом."
+  },
+  {
+    "id": "comic-spider-man",
+    "title": "Человек-паук",
+    "originalTitle": "Spider-Man",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 1962,
+    "rating": 8.7,
+    "votes": 140000,
+    "genres": [
+      "супергерои",
+      "приключения",
+      "Marvel"
+    ],
+    "badges": [
+      "Marvel",
+      "есть фильмы",
+      "есть игры"
+    ],
+    "relation": "comic_to_movies_games",
+    "relationLabel": "Комикс → фильмы → игры",
+    "universeName": "Spider-Man",
+    "relatedMedia": [
+      "Spider-Man",
+      "Spider-Man 2",
+      "Into the Spider-Verse",
+      "Marvel's Spider-Man"
+    ],
+    "watchOrder": [
+      "Spider-Man trilogy",
+      "The Amazing Spider-Man",
+      "MCU Spider-Man",
+      "Spider-Verse"
+    ],
+    "playOrder": [
+      "Marvel's Spider-Man",
+      "Miles Morales",
+      "Spider-Man 2"
+    ],
+    "vibe": [
+      "Нью-Йорк",
+      "герой",
+      "мультивселенная"
+    ],
+    "description": "Комиксная основа фильмов, мультфильмов и игр про Человека-паука."
+  },
+  {
+    "id": "book-lord-of-the-rings",
+    "title": "Властелин колец",
+    "originalTitle": "The Lord of the Rings",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1954,
+    "rating": 9.2,
+    "votes": 350000,
+    "genres": [
+      "фэнтези",
+      "эпос",
+      "приключения"
+    ],
+    "badges": [
+      "культовая",
+      "есть фильмы",
+      "есть игры"
+    ],
+    "relation": "book_to_movies_games",
+    "relationLabel": "Книга → фильмы → игры",
+    "universeName": "Middle-earth",
+    "relatedMedia": [
+      "The Lord of the Rings",
+      "The Hobbit",
+      "Shadow of Mordor"
+    ],
+    "readOrder": [
+      "Хоббит",
+      "Властелин колец",
+      "Сильмариллион"
+    ],
+    "watchOrder": [
+      "The Hobbit trilogy",
+      "The Lord of the Rings trilogy"
+    ],
+    "playOrder": [
+      "Shadow of Mordor",
+      "Shadow of War"
+    ],
+    "vibe": [
+      "Средиземье",
+      "кольцо",
+      "эпик"
+    ],
+    "description": "Книжная основа Средиземья, фильмов и игр."
+  },
+  {
+    "id": "book-harry-potter",
+    "title": "Гарри Поттер",
+    "originalTitle": "Harry Potter",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1997,
+    "rating": 8.9,
+    "votes": 400000,
+    "genres": [
+      "фэнтези",
+      "магия",
+      "приключения"
+    ],
+    "badges": [
+      "есть фильмы",
+      "есть игры",
+      "культовая"
+    ],
+    "relation": "book_to_movies_games",
+    "relationLabel": "Книга → фильмы → игры",
+    "universeName": "Wizarding World",
+    "relatedMedia": [
+      "Harry Potter",
+      "Fantastic Beasts",
+      "Hogwarts Legacy"
+    ],
+    "readOrder": [
+      "Философский камень",
+      "Тайная комната",
+      "Узник Азкабана",
+      "Кубок огня",
+      "Орден Феникса",
+      "Принц-полукровка",
+      "Дары смерти"
+    ],
+    "watchOrder": [
+      "Harry Potter 1–8",
+      "Fantastic Beasts"
+    ],
+    "playOrder": [
+      "Hogwarts Legacy"
+    ],
+    "vibe": [
+      "магия",
+      "школа",
+      "волшебный мир"
+    ],
+    "description": "Книжная основа фильмов и игры Hogwarts Legacy."
+  },
+  {
+    "id": "book-metro-2033",
+    "title": "Метро 2033",
+    "originalTitle": "Metro 2033",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2005,
+    "rating": 8.2,
+    "votes": 120000,
+    "genres": [
+      "постапокалипсис",
+      "фантастика",
+      "хоррор"
+    ],
+    "badges": [
+      "есть игры",
+      "постапокалипсис"
+    ],
+    "relation": "book_to_games",
+    "relationLabel": "Книга → игры",
+    "universeName": "Metro",
+    "relatedMedia": [
+      "Metro 2033",
+      "Metro Last Light",
+      "Metro Exodus"
+    ],
+    "readOrder": [
+      "Метро 2033",
+      "Метро 2034",
+      "Метро 2035"
+    ],
+    "playOrder": [
+      "Metro 2033",
+      "Metro Last Light",
+      "Metro Exodus"
+    ],
+    "vibe": [
+      "метро",
+      "мутанты",
+      "выживание"
+    ],
+    "description": "Российская книжная вселенная, ставшая игровой серией Metro."
+  },
+  {
+    "id": "book-roadside-picnic",
+    "title": "Пикник на обочине",
+    "originalTitle": "Roadside Picnic",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1972,
+    "rating": 8.6,
+    "votes": 90000,
+    "genres": [
+      "фантастика",
+      "зона",
+      "философия"
+    ],
+    "badges": [
+      "есть фильм",
+      "повлияла на игры"
+    ],
+    "relation": "book_to_movie_game_vibe",
+    "relationLabel": "Книга → фильм → игровой вайб",
+    "universeName": "S.T.A.L.K.E.R. vibe",
+    "relatedMedia": [
+      "Stalker",
+      "S.T.A.L.K.E.R."
+    ],
+    "readOrder": [
+      "Пикник на обочине"
+    ],
+    "watchOrder": [
+      "Сталкер"
+    ],
+    "playOrder": [
+      "S.T.A.L.K.E.R. Shadow of Chernobyl",
+      "S.T.A.L.K.E.R. 2"
+    ],
+    "vibe": [
+      "зона",
+      "аномалии",
+      "сталкер"
+    ],
+    "description": "Книга Стругацких, связанная по духу с фильмом Сталкер и игровой культурой S.T.A.L.K.E.R."
+  },
+  {
+    "id": "book-1984",
+    "title": "1984",
+    "originalTitle": "Nineteen Eighty-Four",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1949,
+    "rating": 8.8,
+    "votes": 260000,
+    "genres": [
+      "антиутопия",
+      "политика",
+      "драма"
+    ],
+    "badges": [
+      "культовая",
+      "есть фильмы"
+    ],
+    "relation": "book_to_movies",
+    "relationLabel": "Книга → фильмы",
+    "universeName": "1984",
+    "relatedMedia": [
+      "1984"
+    ],
+    "readOrder": [
+      "1984"
+    ],
+    "watchOrder": [
+      "1984 film"
+    ],
+    "vibe": [
+      "антиутопия",
+      "контроль",
+      "Большой брат"
+    ],
+    "description": "Культовая антиутопия, которую часто связывают с фильмами и играми по вайбу."
+  },
+  {
+    "id": "book-blade-runner",
+    "title": "Мечтают ли андроиды об электроовцах?",
+    "originalTitle": "Do Androids Dream of Electric Sheep?",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1968,
+    "rating": 8.2,
+    "votes": 80000,
+    "genres": [
+      "киберпанк",
+      "фантастика",
+      "андроиды"
+    ],
+    "badges": [
+      "есть фильм",
+      "киберпанк"
+    ],
+    "relation": "book_to_movie_vibe",
+    "relationLabel": "Книга → фильм → киберпанк-вайб",
+    "universeName": "Blade Runner",
+    "relatedMedia": [
+      "Blade Runner",
+      "Blade Runner 2049",
+      "Cyberpunk 2077"
+    ],
+    "readOrder": [
+      "Do Androids Dream of Electric Sheep?"
+    ],
+    "watchOrder": [
+      "Blade Runner",
+      "Blade Runner 2049"
+    ],
+    "playOrder": [
+      "Cyberpunk 2077 по вайбу"
+    ],
+    "vibe": [
+      "андроиды",
+      "нуар",
+      "киберпанк"
+    ],
+    "description": "Книга, из которой вырос мир Blade Runner и целый пласт киберпанк-вайба."
+  },
+  {
+    "id": "manga-death-note",
+    "title": "Тетрадь смерти",
+    "originalTitle": "Death Note",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 2003,
+    "rating": 8.9,
+    "votes": 250000,
+    "genres": [
+      "триллер",
+      "детектив",
+      "сверхъестественное"
+    ],
+    "badges": [
+      "есть аниме",
+      "есть фильмы",
+      "культовая"
+    ],
+    "relation": "manga_to_anime_movies",
+    "relationLabel": "Манга → аниме → фильмы",
+    "universeName": "Death Note",
+    "relatedMedia": [
+      "Death Note"
+    ],
+    "readOrder": [
+      "манга Death Note"
+    ],
+    "watchOrder": [
+      "аниме Death Note",
+      "японские фильмы",
+      "Netflix film"
+    ],
+    "vibe": [
+      "интеллектуальная дуэль",
+      "детектив",
+      "смерть"
+    ],
+    "description": "Манга, по которой сняли культовое аниме и несколько фильмов."
+  },
+  {
+    "id": "manga-berserk",
+    "title": "Берсерк",
+    "originalTitle": "Berserk",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 1989,
+    "rating": 9.4,
+    "votes": 220000,
+    "genres": [
+      "тёмное фэнтези",
+      "драма",
+      "экшен"
+    ],
+    "badges": [
+      "культовая",
+      "есть аниме",
+      "есть игры"
+    ],
+    "relation": "manga_to_anime_games",
+    "relationLabel": "Манга → аниме → игры",
+    "universeName": "Berserk",
+    "relatedMedia": [
+      "Berserk"
+    ],
+    "readOrder": [
+      "манга Berserk"
+    ],
+    "watchOrder": [
+      "Berserk 1997",
+      "Golden Age Arc"
+    ],
+    "playOrder": [
+      "Berserk and the Band of the Hawk"
+    ],
+    "vibe": [
+      "мрак",
+      "меч",
+      "демоны"
+    ],
+    "description": "Одна из самых влиятельных тёмных фэнтези-манг."
+  },
+  {
+    "id": "comic-invincible",
+    "title": "Неуязвимый",
+    "originalTitle": "Invincible",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 2003,
+    "rating": 8.8,
+    "votes": 90000,
+    "genres": [
+      "супергерои",
+      "драма",
+      "жестокий экшен"
+    ],
+    "badges": [
+      "есть мультсериал",
+      "культовая"
+    ],
+    "relation": "comic_to_animation",
+    "relationLabel": "Комикс → мультсериал",
+    "universeName": "Invincible",
+    "relatedMedia": [
+      "Invincible"
+    ],
+    "readOrder": [
+      "Invincible comics"
+    ],
+    "watchOrder": [
+      "Invincible Season 1",
+      "Season 2"
+    ],
+    "vibe": [
+      "супергерои",
+      "жесть",
+      "отцы и дети"
+    ],
+    "description": "Комикс, по которому сделали популярный взрослый мультсериал."
+  },
+  {
+    "id": "comic-the-boys",
+    "title": "Пацаны",
+    "originalTitle": "The Boys",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 2006,
+    "rating": 8.3,
+    "votes": 110000,
+    "genres": [
+      "супергерои",
+      "сатира",
+      "жестокий экшен"
+    ],
+    "badges": [
+      "есть сериал",
+      "жёсткое"
+    ],
+    "relation": "comic_to_series",
+    "relationLabel": "Комикс → сериал",
+    "universeName": "The Boys",
+    "relatedMedia": [
+      "The Boys",
+      "Gen V"
+    ],
+    "readOrder": [
+      "The Boys comics"
+    ],
+    "watchOrder": [
+      "The Boys",
+      "Gen V"
+    ],
+    "vibe": [
+      "антисупергерои",
+      "сатира",
+      "кровь"
+    ],
+    "description": "Комикс-первоисточник сериала The Boys."
+  },
+  {
+    "id": "book-game-of-thrones",
+    "title": "Песнь льда и пламени",
+    "originalTitle": "A Song of Ice and Fire",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1996,
+    "rating": 9.0,
+    "votes": 280000,
+    "genres": [
+      "фэнтези",
+      "политика",
+      "драма"
+    ],
+    "badges": [
+      "есть сериал",
+      "культовая"
+    ],
+    "relation": "book_to_series_games",
+    "relationLabel": "Книга → сериал → игры",
+    "universeName": "Game of Thrones",
+    "relatedMedia": [
+      "Game of Thrones",
+      "House of the Dragon"
+    ],
+    "readOrder": [
+      "Игра престолов",
+      "Битва королей",
+      "Буря мечей",
+      "Пир стервятников",
+      "Танец с драконами"
+    ],
+    "watchOrder": [
+      "Game of Thrones",
+      "House of the Dragon"
+    ],
+    "playOrder": [
+      "Game of Thrones games"
+    ],
+    "vibe": [
+      "драконы",
+      "интриги",
+      "война домов"
+    ],
+    "description": "Книжная основа Игры престолов и Дома дракона."
+  },
+  {
+    "id": "book-expanse",
+    "title": "Пространство",
+    "originalTitle": "The Expanse",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2011,
+    "rating": 8.7,
+    "votes": 70000,
+    "genres": [
+      "космос",
+      "фантастика",
+      "политика"
+    ],
+    "badges": [
+      "есть сериал"
+    ],
+    "relation": "book_to_series",
+    "relationLabel": "Книга → сериал",
+    "universeName": "The Expanse",
+    "relatedMedia": [
+      "The Expanse"
+    ],
+    "readOrder": [
+      "Leviathan Wakes",
+      "Caliban's War",
+      "Abaddon's Gate"
+    ],
+    "watchOrder": [
+      "The Expanse"
+    ],
+    "vibe": [
+      "космос",
+      "колонии",
+      "реализм"
+    ],
+    "description": "Книжная космоопера, по которой сняли сериал The Expanse."
+  }
+]
