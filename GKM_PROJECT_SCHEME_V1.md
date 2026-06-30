@@ -1,4 +1,4 @@
-[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29503263/GKM_PROJECT_SCHEME_V1.md)
+[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29503566/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
 
@@ -484,3 +484,9 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 - добавлена split-структура data/games/*
 - добавлены fallback-постеры для игр без poster
 - combined data/games_catalog.json оставлен как запасной вариант
+
+## GKM V225 MODAL FULL DESCRIPTION FIX
+- описание теперь принудительно добавляется прямо в открытую модалку карточки
+- работает даже если исходное описание короткое или обрезанное
+- добавлен блок "📖 Подробное описание" для фильмов, сериалов, аниме, мультфильмов, игр, книг, манги, ранобэ и комиксов
+- старый короткий обрезок описания визуально приглушается, чтобы не мешал
