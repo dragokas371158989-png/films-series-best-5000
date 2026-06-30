@@ -1,4 +1,93 @@
 const GKM_APP_CLEAN_VERSION = "v144-kinopoisk-only-auto-catalog-2026-06-24";
+
+/* GKM V245 JSON LOAD SAFE FIX START */
+(function(){
+  if (window.GKM_V245_JSON_SAFE_INSTALLED) return;
+  window.GKM_V245_JSON_SAFE_INSTALLED = "1";
+
+  const badJsonFiles = [];
+  const originalFetch = window.fetch.bind(window);
+
+  function isJsonUrl(url){
+    try {
+      const s = String(url && (url.url || url) || "");
+      return /\.json(?:\?|$)/i.test(s);
+    } catch(e){
+      return false;
+    }
+  }
+
+  function emptyJsonFor(url, errorText){
+    const s = String(url && (url.url || url) || "");
+    badJsonFiles.push({url:s, error:String(errorText || "")});
+    console.warn("GKM V245: bad JSON skipped:", s, errorText);
+
+    const payload = JSON.stringify({
+      items: [],
+      data: [],
+      files: [],
+      total: 0,
+      __gkm_bad_json_skipped: true,
+      __gkm_url: s,
+      __gkm_error: String(errorText || "")
+    });
+
+    return new Response(payload, {
+      status: 200,
+      statusText: "OK",
+      headers: {"Content-Type":"application/json;charset=utf-8"}
+    });
+  }
+
+  window.fetch = async function(input, init){
+    const res = await originalFetch(input, init);
+    if (!isJsonUrl(input)) return res;
+
+    const url = String(input && (input.url || input) || "");
+    const clone = res.clone();
+
+    // Проверяем JSON заранее. Если файл битый, возвращаем пустой безопасный JSON,
+    // чтобы сайт не падал целиком.
+    try {
+      const text = await clone.text();
+      try {
+        JSON.parse(text);
+        return new Response(text, {
+          status: res.status,
+          statusText: res.statusText,
+          headers: res.headers
+        });
+      } catch(parseErr) {
+        return emptyJsonFor(url, parseErr && parseErr.message ? parseErr.message : parseErr);
+      }
+    } catch(readErr) {
+      return emptyJsonFor(url, readErr && readErr.message ? readErr.message : readErr);
+    }
+  };
+
+  window.addEventListener("error", function(e){
+    const msg = String(e && (e.message || e.error && e.error.message) || "");
+    if (/JSON|Unterminated string|Unexpected end|Unexpected token/i.test(msg)) {
+      console.warn("GKM V245: JSON error caught:", msg);
+      const status = document.getElementById("loadStatus") || document.querySelector(".load-status,.status");
+      if (status) {
+        status.textContent = "Часть базы пропущена: найден битый JSON. Остальные данные грузятся.";
+      }
+    }
+  }, true);
+
+  window.addEventListener("unhandledrejection", function(e){
+    const msg = String(e && e.reason && (e.reason.message || e.reason) || "");
+    if (/JSON|Unterminated string|Unexpected end|Unexpected token/i.test(msg)) {
+      console.warn("GKM V245: JSON promise error caught:", msg);
+      e.preventDefault && e.preventDefault();
+    }
+  });
+
+  window.GKM_V245_BAD_JSON_FILES = badJsonFiles;
+})();
+/* GKM V245 JSON LOAD SAFE FIX END */
+
 window.GKM_V144_KINOPOISK_AUTO_CATALOG_VERSION = "v144-kinopoisk-only-auto-catalog-2026-06-24";
 window.GKM_V136_SAFE_ANIME_TITLE_FIX_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
 window.GKM_V137_SAFE_ALL_FRANCHISE_TITLE_FIX_VERSION = "v137-safe-all-franchise-title-fix-2026-06-24";
@@ -4124,7 +4213,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   window.GKM_V202_GAME_HUB_VERSION = "v211-game-collections-fast-posters-2026-06-29";
 
-  const GAMES_URL = "./data/games_catalog.json?v=242";
+  const GAMES_URL = "./data/games_catalog.json?v=245";
   const PAGE = 24;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -9147,7 +9236,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=242";
+  const BOOKS_URL = "./data/books_catalog.json?v=245";
   const BOOKS_SPLIT_URLS = ["./data/books/manga.json?v=222","./data/books/ranobe.json?v=222","./data/books/books.json?v=222","./data/books/comics.json?v=222"];
   const PAGE = 24;
   const BOOK_PAGE = 18;
@@ -10034,7 +10123,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=224",
     "./data/games/franchises.json?v=224"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=242";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=245";
   const GAME_PAGE_SIZE = 18;
   let gameDB = null;
   let gamePage = 1;
@@ -10350,7 +10439,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=226",
     "./data/games/franchises.json?v=226"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=242";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=245";
   const PAGE_SIZE = 18;
   let db = null;
   let page = 1;
@@ -10972,3 +11061,458 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   document.addEventListener("click",function(){setTimeout(safe,80);setTimeout(safe,300);setTimeout(safe,900)},true);
 })();
 /* GKM V242 SAFE LOAD RESTORE + LIGHT QUALITY FIX END */
+
+
+
+/* GKM V243 GAME POSTERS HARD FIX START */
+(function(){
+  const GKM_V243_GAME_POSTERS = {
+  "baldurs gate 3": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/library_600x900_2x.jpg",
+  "baldur s gate 3": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/library_600x900_2x.jpg",
+  "elden ring": "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/library_600x900_2x.jpg",
+  "the witcher 3 wild hunt": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/library_600x900_2x.jpg",
+  "the last of us part i": "https://cdn.cloudflare.steamstatic.com/steam/apps/1888930/library_600x900_2x.jpg",
+  "world of warcraft": "https://cdn.cloudflare.steamstatic.com/steam/apps/2357570/library_600x900_2x.jpg",
+  "league of legends": "https://images.igdb.com/igdb/image/upload/t_cover_big/co49wj.jpg",
+  "minecraft": "https://images.igdb.com/igdb/image/upload/t_cover_big/co8fu6.jpg",
+  "the legend of zelda breath of the wild": "https://images.igdb.com/igdb/image/upload/t_cover_big/co3p2d.jpg",
+  "assassins creed": "https://cdn.cloudflare.steamstatic.com/steam/apps/812140/library_600x900_2x.jpg",
+  "devil may cry": "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/library_600x900_2x.jpg",
+  "silent hill": "https://cdn.cloudflare.steamstatic.com/steam/apps/2124490/library_600x900_2x.jpg",
+  "marvel games": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/library_600x900_2x.jpg",
+  "marvels spider man": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/library_600x900_2x.jpg",
+  "cyberpunk 2077": "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/library_600x900_2x.jpg",
+  "fallout": "https://cdn.cloudflare.steamstatic.com/steam/apps/377160/library_600x900_2x.jpg",
+  "resident evil": "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/library_600x900_2x.jpg",
+  "death stranding": "https://cdn.cloudflare.steamstatic.com/steam/apps/1850570/library_600x900_2x.jpg",
+  "metal gear solid": "https://cdn.cloudflare.steamstatic.com/steam/apps/2131630/library_600x900_2x.jpg",
+  "doom eternal": "https://cdn.cloudflare.steamstatic.com/steam/apps/782330/library_600x900_2x.jpg",
+  "borderlands 3": "https://cdn.cloudflare.steamstatic.com/steam/apps/397540/library_600x900_2x.jpg",
+  "five nights at freddys": "https://cdn.cloudflare.steamstatic.com/steam/apps/319510/library_600x900_2x.jpg",
+  "cuphead": "https://cdn.cloudflare.steamstatic.com/steam/apps/268910/library_600x900_2x.jpg",
+  "nier automata": "https://cdn.cloudflare.steamstatic.com/steam/apps/524220/library_600x900_2x.jpg",
+  "persona 5 royal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1687950/library_600x900_2x.jpg",
+  "dragon age origins": "https://cdn.cloudflare.steamstatic.com/steam/apps/47810/library_600x900_2x.jpg",
+  "mass effect": "https://cdn.cloudflare.steamstatic.com/steam/apps/1328670/library_600x900_2x.jpg",
+  "metro exodus": "https://cdn.cloudflare.steamstatic.com/steam/apps/412020/library_600x900_2x.jpg",
+  "stalker": "https://cdn.cloudflare.steamstatic.com/steam/apps/4500/library_600x900_2x.jpg",
+  "hogwarts legacy": "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/library_600x900_2x.jpg",
+  "star wars jedi fallen order": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172380/library_600x900_2x.jpg",
+  "star wars jedi survivor": "https://cdn.cloudflare.steamstatic.com/steam/apps/1774580/library_600x900_2x.jpg",
+  "batman arkham city": "https://cdn.cloudflare.steamstatic.com/steam/apps/200260/library_600x900_2x.jpg",
+  "batman arkham asylum": "https://cdn.cloudflare.steamstatic.com/steam/apps/35140/library_600x900_2x.jpg",
+  "god of war": "https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/library_600x900_2x.jpg",
+  "horizon zero dawn": "https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/library_600x900_2x.jpg",
+  "ghost of tsushima": "https://cdn.cloudflare.steamstatic.com/steam/apps/2215430/library_600x900_2x.jpg",
+  "detroit become human": "https://cdn.cloudflare.steamstatic.com/steam/apps/1222140/library_600x900_2x.jpg",
+  "life is strange": "https://cdn.cloudflare.steamstatic.com/steam/apps/319630/library_600x900_2x.jpg",
+  "dead space": "https://cdn.cloudflare.steamstatic.com/steam/apps/1693980/library_600x900_2x.jpg",
+  "outlast": "https://cdn.cloudflare.steamstatic.com/steam/apps/238320/library_600x900_2x.jpg",
+  "amnesia the dark descent": "https://cdn.cloudflare.steamstatic.com/steam/apps/57300/library_600x900_2x.jpg",
+  "control": "https://cdn.cloudflare.steamstatic.com/steam/apps/870780/library_600x900_2x.jpg",
+  "portal 2": "https://cdn.cloudflare.steamstatic.com/steam/apps/620/library_600x900_2x.jpg",
+  "half life 2": "https://cdn.cloudflare.steamstatic.com/steam/apps/220/library_600x900_2x.jpg",
+  "bioshock": "https://cdn.cloudflare.steamstatic.com/steam/apps/409710/library_600x900_2x.jpg",
+  "dishonored": "https://cdn.cloudflare.steamstatic.com/steam/apps/205100/library_600x900_2x.jpg",
+  "dark souls": "https://cdn.cloudflare.steamstatic.com/steam/apps/570940/library_600x900_2x.jpg",
+  "bloodborne": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1rba.jpg",
+  "sekiro": "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/library_600x900_2x.jpg"
+};
+
+  function txt(v){ return String(v == null ? "" : v).trim(); }
+  function key(v){
+    return txt(v).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[«»"“”'’`]/g,"")
+      .replace(/&/g," and ")
+      .replace(/[^a-z0-9а-я]+/g," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function titleOfGame(item){
+    return txt(item && (item.title || item.name || item.ru || item.en || item.original_title || item.originalTitle));
+  }
+  function isGame(item){
+    const t = txt(item && (item.type || item.category || item.section || item.media_type)).toLowerCase();
+    return t.includes("игра") || t.includes("game") || t === "games";
+  }
+  function isCollection(item){
+    const t = key(titleOfGame(item));
+    return /выпуск|collection|games|tie in|cult pc|horror games|movie tie|marvel games|dc games|anime games|pc games/.test(t) ||
+      item && (item.kind === "collection" || item.isCollection === true || item.sourceQuality === "generated_seed");
+  }
+  function bestKnownPoster(item){
+    const k = key(titleOfGame(item));
+    if (GKM_V243_GAME_POSTERS[k]) return GKM_V243_GAME_POSTERS[k];
+    for (const name in GKM_V243_GAME_POSTERS) {
+      if (k.includes(name) || name.includes(k)) return GKM_V243_GAME_POSTERS[name];
+    }
+    return "";
+  }
+  function rawPoster(item){
+    if (!item) return "";
+    const candidates = [
+      item.poster,
+      item.cover,
+      item.coverUrl,
+      item.cover_url,
+      item.image,
+      item.imageUrl,
+      item.image_url,
+      item.background,
+      item.background_image,
+      item.thumbnail,
+      item.steamCapsule,
+      item.steam_capsule,
+      item.igdbCover,
+      item.igdb_cover,
+      item.header_image
+    ];
+    if (Array.isArray(item.screenshots) && item.screenshots[0]) candidates.push(item.screenshots[0]);
+    for (const p of candidates) {
+      const s = txt(p);
+      if (s && !/placeholder|no-poster|noposter|data:image\/svg/i.test(s)) return s.replace(/^http:/i,"https:");
+    }
+    return "";
+  }
+  function collectionPoster(item){
+    const title = titleOfGame(item) || "Game Collection";
+    const t = key(title);
+    let emoji = "🎮", c1 = "#090d2b", c2 = "#25105f", c3 = "#00d4ff", label = "GAME HUB";
+    if (t.includes("horror") || t.includes("silent hill")) { emoji = "🩸"; c1="#15060b"; c2="#4c0519"; c3="#ef4444"; label="HORROR COLLECTION"; }
+    else if (t.includes("cult") || t.includes("pc")) { emoji = "💾"; c1="#070b1f"; c2="#312e81"; c3="#22d3ee"; label="CULT PC COLLECTION"; }
+    else if (t.includes("movie")) { emoji = "🎬"; c1="#12091f"; c2="#581c87"; c3="#f97316"; label="MOVIE TIE-IN"; }
+    else if (t.includes("marvel")) { emoji = "🦸"; c1="#1b0707"; c2="#7f1d1d"; c3="#ef4444"; label="MARVEL GAMES"; }
+    else if (t.includes("anime")) { emoji = "✨"; c1="#17072b"; c2="#7c3aed"; c3="#ec4899"; label="ANIME GAMES"; }
+    else if (t.includes("assassin")) { emoji = "🗡️"; c1="#08111f"; c2="#334155"; c3="#22d3ee"; label="ASSASSIN COLLECTION"; }
+    const safeTitle = title.replace(/[&<>"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[s]));
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset=".55" stop-color="${c2}"/><stop offset="1" stop-color="${c3}"/></linearGradient>
+        <radialGradient id="r" cx="50%" cy="18%" r="80%"><stop offset="0" stop-color="#fff" stop-opacity=".20"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect width="600" height="900" fill="url(#g)"/>
+      <rect width="600" height="900" fill="url(#r)"/>
+      <circle cx="485" cy="130" r="155" fill="#fff" opacity=".08"/>
+      <circle cx="90" cy="780" r="185" fill="#fff" opacity=".07"/>
+      <rect x="34" y="34" width="532" height="832" rx="30" fill="none" stroke="rgba(255,255,255,.22)"/>
+      <text x="50%" y="155" text-anchor="middle" font-family="Arial" font-size="84" font-weight="900" fill="#fff">${emoji}</text>
+      <text x="50%" y="224" text-anchor="middle" font-family="Arial" font-size="20" font-weight="900" fill="#ffffffaa">ГОЛУБЬ · ${label}</text>
+      <foreignObject x="55" y="320" width="490" height="250">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Arial,sans-serif;color:white;font-size:42px;font-weight:900;text-align:center;line-height:1.1;text-shadow:0 2px 16px rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;height:100%;word-break:break-word;">${safeTitle}</div>
+      </foreignObject>
+      <rect x="82" y="690" width="436" height="76" rx="24" fill="rgba(10,10,18,.62)" stroke="rgba(255,255,255,.28)"/>
+      <text x="50%" y="738" text-anchor="middle" font-family="Arial" font-size="23" font-weight="850" fill="#fff">Подборка игр</text>
+      <text x="50%" y="800" text-anchor="middle" font-family="Arial" font-size="20" font-weight="800" fill="#ffffffc8">постер V243</text>
+    </svg>`;
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+  function fallbackGamePoster(item){
+    const title = titleOfGame(item) || "Игра";
+    const safeTitle = title.replace(/[&<>"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[s]));
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#080b28"/><stop offset=".55" stop-color="#25105f"/><stop offset="1" stop-color="#00d4ff"/></linearGradient></defs>
+      <rect width="600" height="900" fill="url(#g)"/>
+      <circle cx="480" cy="130" r="155" fill="#00d4ff" opacity=".16"/>
+      <circle cx="90" cy="780" r="180" fill="#8b5cf6" opacity=".20"/>
+      <rect x="34" y="34" width="532" height="832" rx="30" fill="none" stroke="rgba(255,255,255,.18)"/>
+      <text x="50%" y="165" text-anchor="middle" font-family="Arial" font-size="86" font-weight="900" fill="#fff">🎮</text>
+      <text x="50%" y="238" text-anchor="middle" font-family="Arial" font-size="21" font-weight="800" fill="#ffffff99">ГОЛУБЬ · GAME HUB</text>
+      <foreignObject x="55" y="330" width="490" height="220"><div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Arial,sans-serif;color:white;font-size:42px;font-weight:900;text-align:center;line-height:1.1;text-shadow:0 2px 16px rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;height:100%;word-break:break-word;">${safeTitle}</div></foreignObject>
+      <rect x="82" y="690" width="436" height="76" rx="24" fill="rgba(10,10,18,.58)" stroke="rgba(255,255,255,.26)"/>
+      <text x="50%" y="738" text-anchor="middle" font-family="Arial" font-size="23" font-weight="850" fill="#fff">Игровая вселенная</text>
+    </svg>`;
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+  function getPoster(item){
+    if (!isGame(item)) return "";
+    const known = bestKnownPoster(item);
+    if (known) return known;
+    const raw = rawPoster(item);
+    if (raw) return raw;
+    if (isCollection(item)) return collectionPoster(item);
+    return fallbackGamePoster(item);
+  }
+  function enrichItem(item){
+    if (!item || !isGame(item)) return item;
+    const p = getPoster(item);
+    item.poster = p;
+    item.cover = p;
+    item.image = p;
+    return item;
+  }
+  function patchArrays(){
+    ["currentItems","items","allItems","filteredItems","games","catalog"].forEach(name => {
+      try {
+        if (Array.isArray(window[name])) window[name].forEach(enrichItem);
+      } catch(e){}
+    });
+  }
+  const oldPosterSrc = typeof posterSrc === "function" ? posterSrc : null;
+  posterSrc = function(item){
+    if (isGame(item)) return getPoster(enrichItem(item));
+    return oldPosterSrc ? oldPosterSrc(item) : rawPoster(item);
+  };
+  if (typeof posterRawSrc === "function") {
+    const oldPosterRawSrc = posterRawSrc;
+    posterRawSrc = function(item){
+      if (isGame(item)) return getPoster(enrichItem(item));
+      return oldPosterRawSrc(item);
+    };
+  }
+  if (typeof gameCardHtml === "function" && !window.GKM_V243_GAME_CARD_PATCHED) {
+    const oldGameCardHtml = gameCardHtml;
+    gameCardHtml = function(item){
+      enrichItem(item);
+      let html = oldGameCardHtml(item);
+      const p = getPoster(item);
+      if (p) {
+        html = html.replace(/<img\s+src="[^"]*"/i, `<img src="${p}"`);
+        html = html.replace(/<img\s+src='[^']*'/i, `<img src='${p}'`);
+      }
+      return html;
+    };
+    window.GKM_V243_GAME_CARD_PATCHED = "1";
+  }
+  function patchDom(){
+    patchArrays();
+    const cards = Array.from(document.querySelectorAll("#grid .card,.grid .card"));
+    for (const card of cards) {
+      const badge = txt((card.querySelector(".badge,.card-badge") || {}).textContent).toLowerCase();
+      if (!badge.includes("игра")) continue;
+      const title = txt((card.querySelector(".card-title,h3,.title") || {}).textContent);
+      const fake = {title, type:"Игра"};
+      const p = getPoster(fake);
+      const img = card.querySelector("img");
+      const placeholder = card.querySelector(".poster-placeholder");
+      if (img) {
+        if (!img.src || /data:image\/svg|placeholder|no-poster|noposter/i.test(img.src)) img.src = p;
+        img.onerror = function(){ this.onerror=null; this.src = isCollection(fake) ? collectionPoster(fake) : fallbackGamePoster(fake); };
+      } else if (placeholder) {
+        const wrap = card.querySelector(".poster-wrap") || placeholder.parentNode;
+        if (wrap) {
+          const im = document.createElement("img");
+          im.src = p;
+          im.loading = "lazy";
+          im.decoding = "async";
+          im.alt = title;
+          im.onerror = function(){ this.onerror=null; this.src = isCollection(fake) ? collectionPoster(fake) : fallbackGamePoster(fake); };
+          placeholder.replaceWith(im);
+        }
+      }
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", patchDom);
+  else patchDom();
+  document.addEventListener("click", function(){ setTimeout(patchDom,80); setTimeout(patchDom,300); setTimeout(patchDom,900); }, true);
+  const obs = new MutationObserver(function(){ setTimeout(patchDom,80); });
+  obs.observe(document.documentElement, {childList:true, subtree:true});
+})();
+/* GKM V243 GAME POSTERS HARD FIX END */
+
+
+/* GKM V243 GAME POSTERS HARD FIX - no style/data changes */
+
+
+
+/* GKM V244 STRICT SECTION TYPE FIX START */
+(function(){
+  const TYPE_FIX = {
+  "унесенные призраками": "Аниме",
+  "spirited away": "Аниме",
+  "мой сосед тоторо": "Аниме",
+  "my neighbor totoro": "Аниме",
+  "могила светлячков": "Аниме",
+  "grave of the fireflies": "Аниме",
+  "принцесса мононоке": "Аниме",
+  "princess mononoke": "Аниме",
+  "ходячий замок": "Аниме",
+  "howls moving castle": "Аниме",
+  "рыбка поньо на утесе": "Аниме",
+  "поньо": "Аниме",
+  "ponyo": "Аниме",
+  "истребитель демонов": "Аниме",
+  "demon slayer": "Аниме",
+  "наруто": "Аниме",
+  "naruto": "Аниме",
+  "атака титанов": "Аниме",
+  "attack on titan": "Аниме",
+  "тетрадь смерти": "Аниме",
+  "death note": "Аниме",
+  "ван пис": "Аниме",
+  "one piece": "Аниме",
+  "берсерк": "Аниме",
+  "berserk": "Аниме",
+  "магическая битва": "Аниме",
+  "jujutsu kaisen": "Аниме",
+  "клинок рассекающий демонов": "Аниме",
+  "аркейн": "Сериал",
+  "arcane": "Сериал",
+  "непобедимый": "Сериал",
+  "invincible": "Сериал",
+  "обученный мультик": "Сериал",
+  "обычный мультик": "Сериал",
+  "regular show": "Сериал",
+  "наруто ураганные хроники": "Аниме",
+  "naruto shippuden": "Аниме",
+  "человек паук через вселенные": "Мультфильм",
+  "spider man into the spider verse": "Мультфильм",
+  "человек паук паутина вселенных": "Мультфильм",
+  "spider man across the spider verse": "Мультфильм",
+  "дикий робот": "Мультфильм",
+  "the wild robot": "Мультфильм",
+  "кот в сапогах 2 последнее желание": "Мультфильм",
+  "puss in boots the last wish": "Мультфильм",
+  "суперсемейка": "Мультфильм",
+  "the incredibles": "Мультфильм",
+  "шрек": "Мультфильм",
+  "shrek": "Мультфильм",
+  "рататуй": "Мультфильм",
+  "ratatouille": "Мультфильм",
+  "зверополис": "Мультфильм",
+  "zootopia": "Мультфильм",
+  "холодное сердце": "Мультфильм",
+  "frozen": "Мультфильм",
+  "город героев": "Мультфильм",
+  "big hero 6": "Мультфильм",
+  "гадкий я": "Мультфильм",
+  "despicable me": "Мультфильм",
+  "в поисках немо": "Мультфильм",
+  "finding nemo": "Мультфильм",
+  "корпорация монстров": "Мультфильм",
+  "monsters inc": "Мультфильм",
+  "коралина": "Мультфильм",
+  "coraline": "Мультфильм",
+  "как приручить дракона": "Мультфильм",
+  "how to train your dragon": "Мультфильм",
+  "лука": "Мультфильм",
+  "luca": "Мультфильм",
+  "райя и последний дракон": "Мультфильм",
+  "raya and the last dragon": "Мультфильм",
+  "вперед": "Мультфильм",
+  "onward": "Мультфильм",
+  "стальной гигант": "Мультфильм",
+  "the iron giant": "Мультфильм",
+  "головоломка": "Мультфильм",
+  "inside out": "Мультфильм",
+  "бесподобный мистер фокс": "Мультфильм",
+  "fantastic mr fox": "Мультфильм"
+};
+
+  function txt(v){ return String(v == null ? "" : v).trim(); }
+  function key(v){
+    return txt(v).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[«»"“”'’`]/g,"")
+      .replace(/&/g," and ")
+      .replace(/[:;,.!?]+/g," ")
+      .replace(/\([^)]*\)/g," ")
+      .replace(/\b(19\d{2}|20\d{2})\b/g," ")
+      .replace(/\b(фильм|сериал|аниме|мультфильм|мульт|игра|книга|манга|комикс)\b/g," ")
+      .replace(/[^a-z0-9а-я]+/g," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function titleFromItem(item){
+    try { if (typeof displayTitle === "function") return displayTitle(item); } catch(e){}
+    return txt(item && (item.title || item.name || item.ru || item.en || item.original_title || item.originalTitle));
+  }
+  function fixForTitle(title){
+    const k = key(title);
+    if (TYPE_FIX[k]) return TYPE_FIX[k];
+    for (const name in TYPE_FIX) {
+      if (k.includes(name) || name.includes(k)) return TYPE_FIX[name];
+    }
+    return "";
+  }
+  function applyItemFix(item){
+    if (!item || typeof item !== "object") return item;
+    const fixed = fixForTitle(titleFromItem(item));
+    if (!fixed) return item;
+    item.type = fixed;
+    if (item.category && /^(фильм|сериал|аниме|мультфильм|мульт|movie|series|anime|cartoon|tv)$/i.test(String(item.category))) item.category = fixed;
+    if (item.media_type) {
+      item.media_type = fixed === "Фильм" ? "movie" : fixed === "Сериал" ? "tv" : fixed === "Аниме" ? "anime" : fixed === "Мультфильм" ? "cartoon" : item.media_type;
+    }
+    return item;
+  }
+
+  function currentTab(){
+    const active = document.querySelector('.tab.active,[data-tab].active');
+    return active && active.dataset ? active.dataset.tab : "";
+  }
+  function allowedInTab(type, tab){
+    type = txt(type).toLowerCase();
+    if (!tab || tab === "all") return true;
+    if (tab === "movies") return type.includes("фильм");
+    if (tab === "series") return type.includes("сериал");
+    if (tab === "anime") return type.includes("аниме");
+    if (tab === "cartoons") return type.includes("мульт");
+    if (tab === "games") return type.includes("игра");
+    if (tab === "books") return type.includes("книга") || type.includes("манга") || type.includes("комик") || type.includes("раноб");
+    return true;
+  }
+  function fixArrays(){
+    ["currentItems","items","allItems","filteredItems","catalog","movies","series","anime","cartoons","games"].forEach(name => {
+      try {
+        if (Array.isArray(window[name])) window[name].forEach(applyItemFix);
+      } catch(e){}
+    });
+  }
+  function fixCards(){
+    const tab = currentTab();
+    const cards = Array.from(document.querySelectorAll("#grid .card,.grid .card"));
+    for (const card of cards) {
+      const titleEl = card.querySelector(".card-title,h3,.title");
+      const badgeEl = card.querySelector(".badge,.card-badge");
+      const metaEl = card.querySelector(".card-meta,.meta");
+      const title = txt(titleEl && titleEl.textContent);
+      const fixed = fixForTitle(title);
+      let type = fixed || txt(badgeEl && badgeEl.textContent) || txt(metaEl && metaEl.textContent);
+      if (fixed) {
+        if (badgeEl) badgeEl.textContent = fixed;
+        if (metaEl) metaEl.textContent = metaEl.textContent.replace(/Фильм|Сериал|Аниме|Мультфильм|Мульт/g, fixed);
+      }
+      if (!allowedInTab(type, tab)) card.remove();
+    }
+    const count = document.getElementById("countText");
+    if (count && tab && tab !== "all" && !/раздел очищен/i.test(count.textContent || "")) {
+      count.textContent = (count.textContent || "").replace(/\s*·\s*раздел очищен/g,"") + " · раздел очищен";
+    }
+  }
+  function patchModal(){
+    const title = txt(document.getElementById("detailTitle") && document.getElementById("detailTitle").textContent);
+    const fixed = fixForTitle(title);
+    if (!fixed) return;
+    const meta = document.getElementById("detailMeta");
+    if (meta) meta.textContent = meta.textContent.replace(/Фильм|Сериал|Аниме|Мультфильм|Мульт/g, fixed);
+    const facts = Array.from(document.querySelectorAll(".fact-card"));
+    for (const f of facts) {
+      if (/тип/i.test(f.textContent)) {
+        const strong = f.querySelector("strong");
+        if (strong) strong.textContent = fixed;
+      }
+    }
+  }
+  function run(){
+    fixArrays();
+    fixCards();
+    patchModal();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+  else run();
+  document.addEventListener("click", function(){ setTimeout(run,80); setTimeout(run,260); setTimeout(run,700); }, true);
+  let timer = null;
+  const obs = new MutationObserver(function(){
+    clearTimeout(timer);
+    timer = setTimeout(run,80);
+  });
+  obs.observe(document.documentElement, {childList:true, subtree:true});
+})();
+/* GKM V244 STRICT SECTION TYPE FIX END */
+
+
+/* GKM V244 STRICT SECTION TYPE FIX - no style/data changes */
+
+
+/* GKM V245 JSON LOAD SAFE FIX - skips broken JSON chunks */
