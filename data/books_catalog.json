@@ -1067,5 +1067,1426 @@
     "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23111a38%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%233b2b7a%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22glow%22%20cx%3D%2250%25%22%20cy%3D%2225%25%22%20r%3D%2270%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffffff%22%20stop-opacity%3D%220.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%20%20%3Cfilter%20id%3D%22blur%22%3E%3CfeGaussianBlur%20stdDeviation%3D%2220%22/%3E%3C/filter%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23glow%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22482%22%20cy%3D%22232%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%220.15%22%20filter%3D%22url%28%23blur%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22760%22%20r%3D%22180%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.06%22%20filter%3D%22url%28%23blur%29%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2228%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20opacity%3D%220.7%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2284%22%20font-weight%3D%22900%22%20fill%3D%22%23ffffff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22230%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2222%22%20font-weight%3D%22800%22%20fill%3D%22%23fff4%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2242%22%20font-weight%3D%22900%22%20fill%3D%22%23ffffff%22%3E%D0%9F%D1%80%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D1%81%D1%82%D0%B2%D0%BE%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2288%22%20y%3D%22690%22%20width%3D%22424%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.56%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.25%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22737%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2224%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff%22%3EThe%20Expanse%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22815%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22700%22%20fill%3D%22%23fff8%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
     "coverSource": "OpenLibrary ISBN cover",
     "coverMode": "real"
+  },
+  {
+    "id": "manga-chainsaw-man",
+    "title": "Человек-бензопила",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 2018,
+    "rating": 8.8,
+    "votes": 210000,
+    "genres": [
+      "сёэн",
+      "экшен",
+      "демоны"
+    ],
+    "relation": "manga_to_anime",
+    "relationLabel": "Манга → аниме",
+    "universeName": "Chainsaw Man",
+    "relatedMedia": [
+      "Chainsaw Man"
+    ],
+    "readOrder": [
+      "Человек-бензопила том 1"
+    ],
+    "watchOrder": [
+      "Chainsaw Man"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "демоны",
+      "жесть",
+      "чёрный юмор"
+    ],
+    "badges": [],
+    "description": "Манга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1974709930-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2326071a%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%237b1748%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff7a90%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ff7a90%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%96%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9C%D0%90%D0%9D%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%A7%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA-%D0%B1%D0%B5%D0%BD%D0%B7%D0%BE%D0%BF%D0%B8%D0%BB%D0%B0%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EChainsaw%20Man%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "manga-tokyo-ghoul",
+    "title": "Токийский гуль",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 2011,
+    "rating": 8.5,
+    "votes": 180000,
+    "genres": [
+      "тёмное фэнтези",
+      "хоррор"
+    ],
+    "relation": "manga_to_anime",
+    "relationLabel": "Манга → аниме",
+    "universeName": "Tokyo Ghoul",
+    "relatedMedia": [
+      "Tokyo Ghoul"
+    ],
+    "readOrder": [
+      "Tokyo Ghoul том 1"
+    ],
+    "watchOrder": [
+      "Tokyo Ghoul"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "гуль",
+      "трагедия"
+    ],
+    "badges": [],
+    "description": "Манга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1421580365-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2326071a%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%237b1748%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff7a90%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ff7a90%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%96%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9C%D0%90%D0%9D%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%A2%D0%BE%D0%BA%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B3%D1%83%D0%BB%D1%8C%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3ETokyo%20Ghoul%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "manga-fullmetal-alchemist",
+    "title": "Стальной алхимик",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 2001,
+    "rating": 9.1,
+    "votes": 260000,
+    "genres": [
+      "фэнтези",
+      "приключение"
+    ],
+    "relation": "manga_to_anime_games",
+    "relationLabel": "Манга → аниме → игры",
+    "universeName": "Fullmetal Alchemist",
+    "relatedMedia": [
+      "Fullmetal Alchemist Brotherhood"
+    ],
+    "readOrder": [
+      "Fullmetal Alchemist том 1"
+    ],
+    "watchOrder": [
+      "Brotherhood"
+    ],
+    "playOrder": [
+      "Fullmetal Alchemist games"
+    ],
+    "vibe": [
+      "алхимия",
+      "братья"
+    ],
+    "badges": [],
+    "description": "Манга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1591169208-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2326071a%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%237b1748%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff7a90%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ff7a90%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%96%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9C%D0%90%D0%9D%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%A1%D1%82%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9%20%D0%B0%D0%BB%D1%85%D0%B8%D0%BC%D0%B8%D0%BA%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EFullmetal%20Alchemist%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "manga-bleach",
+    "title": "Блич",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 2001,
+    "rating": 8.6,
+    "votes": 230000,
+    "genres": [
+      "сёэн",
+      "экшен"
+    ],
+    "relation": "manga_to_anime_games",
+    "relationLabel": "Манга → аниме → игры",
+    "universeName": "Bleach",
+    "relatedMedia": [
+      "Bleach"
+    ],
+    "readOrder": [
+      "Bleach том 1"
+    ],
+    "watchOrder": [
+      "Bleach"
+    ],
+    "playOrder": [
+      "Bleach games"
+    ],
+    "vibe": [
+      "синигами",
+      "мечи"
+    ],
+    "badges": [],
+    "description": "Манга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1591164419-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2326071a%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%237b1748%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff7a90%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ff7a90%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%96%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9C%D0%90%D0%9D%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%91%D0%BB%D0%B8%D1%87%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EBleach%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "manga-hunter-x-hunter",
+    "title": "Hunter x Hunter",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 1998,
+    "rating": 9.0,
+    "votes": 210000,
+    "genres": [
+      "сёэн",
+      "приключение"
+    ],
+    "relation": "manga_to_anime_games",
+    "relationLabel": "Манга → аниме → игры",
+    "universeName": "Hunter x Hunter",
+    "relatedMedia": [
+      "Hunter x Hunter"
+    ],
+    "readOrder": [
+      "Hunter x Hunter том 1"
+    ],
+    "watchOrder": [
+      "Hunter x Hunter 2011"
+    ],
+    "playOrder": [
+      "Hunter x Hunter games"
+    ],
+    "vibe": [
+      "нен",
+      "турнир"
+    ],
+    "badges": [],
+    "description": "Манга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1591167531-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2326071a%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%237b1748%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff7a90%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ff7a90%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%96%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9C%D0%90%D0%9D%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3EHunter%20x%20Hunter%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EHunter%20x%20Hunter%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "manga-vagabond",
+    "title": "Бродяга",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 1998,
+    "rating": 9.3,
+    "votes": 150000,
+    "genres": [
+      "самураи",
+      "драма"
+    ],
+    "relation": "manga_source",
+    "relationLabel": "Манга / первоисточник",
+    "universeName": "Vagabond",
+    "relatedMedia": [
+      "Miyamoto Musashi"
+    ],
+    "readOrder": [
+      "Vagabond том 1"
+    ],
+    "watchOrder": [],
+    "playOrder": [],
+    "vibe": [
+      "самураи",
+      "путь воина"
+    ],
+    "badges": [],
+    "description": "Манга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1591160340-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2326071a%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%237b1748%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff7a90%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ff7a90%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%96%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9C%D0%90%D0%9D%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%91%D1%80%D0%BE%D0%B4%D1%8F%D0%B3%D0%B0%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EVagabond%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "manga-vinland-saga",
+    "title": "Сага о Винланде",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 2005,
+    "rating": 9.1,
+    "votes": 190000,
+    "genres": [
+      "история",
+      "викинги"
+    ],
+    "relation": "manga_to_anime",
+    "relationLabel": "Манга → аниме",
+    "universeName": "Vinland Saga",
+    "relatedMedia": [
+      "Vinland Saga"
+    ],
+    "readOrder": [
+      "Vinland Saga том 1"
+    ],
+    "watchOrder": [
+      "Vinland Saga"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "викинги",
+      "месть"
+    ],
+    "badges": [],
+    "description": "Манга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1612624200-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2326071a%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%237b1748%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff7a90%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ff7a90%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%96%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9C%D0%90%D0%9D%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%A1%D0%B0%D0%B3%D0%B0%20%D0%BE%20%D0%92%D0%B8%D0%BD%D0%BB%D0%B0%D0%BD%D0%B4%D0%B5%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EVinland%20Saga%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "manga-monster",
+    "title": "Монстр",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 1994,
+    "rating": 9.1,
+    "votes": 120000,
+    "genres": [
+      "триллер",
+      "детектив"
+    ],
+    "relation": "manga_to_anime",
+    "relationLabel": "Манга → аниме",
+    "universeName": "Monster",
+    "relatedMedia": [
+      "Monster"
+    ],
+    "readOrder": [
+      "Monster том 1"
+    ],
+    "watchOrder": [
+      "Monster"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "психология",
+      "детектив"
+    ],
+    "badges": [],
+    "description": "Манга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1591166411-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2326071a%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%237b1748%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff7a90%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ff7a90%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%96%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9C%D0%90%D0%9D%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%9C%D0%BE%D0%BD%D1%81%D1%82%D1%80%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EMonster%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "manga-akira",
+    "title": "Акира",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 1982,
+    "rating": 8.9,
+    "votes": 140000,
+    "genres": [
+      "киберпанк",
+      "фантастика"
+    ],
+    "relation": "manga_to_anime_movie",
+    "relationLabel": "Манга → аниме-фильм",
+    "universeName": "Akira",
+    "relatedMedia": [
+      "Akira"
+    ],
+    "readOrder": [
+      "Akira том 1"
+    ],
+    "watchOrder": [
+      "Akira film"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "киберпанк",
+      "нео-токио"
+    ],
+    "badges": [],
+    "description": "Манга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1935429000-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2326071a%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%237b1748%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff7a90%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ff7a90%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%96%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9C%D0%90%D0%9D%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%90%D0%BA%D0%B8%D1%80%D0%B0%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EAkira%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "manga-ghost-in-the-shell",
+    "title": "Призрак в доспехах",
+    "type": "Манга",
+    "category": "Манга",
+    "section": "books",
+    "year": 1989,
+    "rating": 8.7,
+    "votes": 130000,
+    "genres": [
+      "киберпанк",
+      "философия"
+    ],
+    "relation": "manga_to_anime_movies",
+    "relationLabel": "Манга → аниме → фильмы",
+    "universeName": "Ghost in the Shell",
+    "relatedMedia": [
+      "Ghost in the Shell"
+    ],
+    "readOrder": [
+      "Ghost in the Shell"
+    ],
+    "watchOrder": [
+      "Ghost in the Shell"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "киберпанк",
+      "киборги"
+    ],
+    "badges": [],
+    "description": "Манга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1935429019-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2326071a%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%237b1748%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff7a90%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ff7a90%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%96%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9C%D0%90%D0%9D%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%9F%D1%80%D0%B8%D0%B7%D1%80%D0%B0%D0%BA%20%D0%B2%20%D0%B4%D0%BE%D1%81%D0%BF%D0%B5%D1%85%D0%B0%D1%85%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EGhost%20in%20the%20Shell%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-hobbit",
+    "title": "Хоббит",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1937,
+    "rating": 8.8,
+    "votes": 420000,
+    "genres": [
+      "фэнтези",
+      "приключение"
+    ],
+    "relation": "book_to_movies_games",
+    "relationLabel": "Книга → фильмы → игры",
+    "universeName": "Middle-earth",
+    "relatedMedia": [
+      "The Hobbit",
+      "Lord of the Rings"
+    ],
+    "readOrder": [
+      "Хоббит",
+      "Властелин колец"
+    ],
+    "watchOrder": [
+      "The Hobbit movies"
+    ],
+    "playOrder": [
+      "Middle-earth games"
+    ],
+    "vibe": [
+      "эпик",
+      "гномы"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0618260307-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%A5%D0%BE%D0%B1%D0%B1%D0%B8%D1%82%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EMiddle-earth%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-hunger-games",
+    "title": "Голодные игры",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2008,
+    "rating": 8.1,
+    "votes": 560000,
+    "genres": [
+      "антиутопия",
+      "выживание"
+    ],
+    "relation": "book_to_movies",
+    "relationLabel": "Книга → фильмы",
+    "universeName": "The Hunger Games",
+    "relatedMedia": [
+      "The Hunger Games"
+    ],
+    "readOrder": [
+      "Голодные игры"
+    ],
+    "watchOrder": [
+      "The Hunger Games films"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "арена",
+      "антиутопия"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0439023483-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%93%D0%BE%D0%BB%D0%BE%D0%B4%D0%BD%D1%8B%D0%B5%20%D0%B8%D0%B3%D1%80%D1%8B%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EThe%20Hunger%20Games%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-maze-runner",
+    "title": "Бегущий в лабиринте",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2009,
+    "rating": 7.9,
+    "votes": 260000,
+    "genres": [
+      "антиутопия",
+      "подростковое"
+    ],
+    "relation": "book_to_movies",
+    "relationLabel": "Книга → фильмы",
+    "universeName": "Maze Runner",
+    "relatedMedia": [
+      "The Maze Runner"
+    ],
+    "readOrder": [
+      "Бегущий в лабиринте"
+    ],
+    "watchOrder": [
+      "Maze Runner films"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "лабиринт",
+      "выживание"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0385737955-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%91%D0%B5%D0%B3%D1%83%D1%89%D0%B8%D0%B9%20%D0%B2%3C/text%3E%3Ctext%20x%3D%2250%25%22%20y%3D%22405%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%BB%D0%B0%D0%B1%D0%B8%D1%80%D0%B8%D0%BD%D1%82%D0%B5%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EMaze%20Runner%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-percy-jackson",
+    "title": "Перси Джексон",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2005,
+    "rating": 8.2,
+    "votes": 390000,
+    "genres": [
+      "фэнтези",
+      "мифология"
+    ],
+    "relation": "book_to_movies_series",
+    "relationLabel": "Книга → фильмы → сериал",
+    "universeName": "Percy Jackson",
+    "relatedMedia": [
+      "Percy Jackson"
+    ],
+    "readOrder": [
+      "Похититель молний"
+    ],
+    "watchOrder": [
+      "Percy Jackson series"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "мифы",
+      "подростки"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0786838655-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%9F%D0%B5%D1%80%D1%81%D0%B8%20%D0%94%D0%B6%D0%B5%D0%BA%D1%81%D0%BE%D0%BD%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EPercy%20Jackson%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-wheel-of-time",
+    "title": "Колесо времени",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1990,
+    "rating": 8.5,
+    "votes": 240000,
+    "genres": [
+      "фэнтези",
+      "эпос"
+    ],
+    "relation": "book_to_series",
+    "relationLabel": "Книга → сериал",
+    "universeName": "The Wheel of Time",
+    "relatedMedia": [
+      "The Wheel of Time"
+    ],
+    "readOrder": [
+      "Око мира"
+    ],
+    "watchOrder": [
+      "The Wheel of Time"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "магия",
+      "эпик"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0812511816-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%9A%D0%BE%D0%BB%D0%B5%D1%81%D0%BE%20%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EThe%20Wheel%20of%20Time%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-foundation",
+    "title": "Основание",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1951,
+    "rating": 8.5,
+    "votes": 310000,
+    "genres": [
+      "фантастика",
+      "космос"
+    ],
+    "relation": "book_to_series",
+    "relationLabel": "Книга → сериал",
+    "universeName": "Foundation",
+    "relatedMedia": [
+      "Foundation"
+    ],
+    "readOrder": [
+      "Основание"
+    ],
+    "watchOrder": [
+      "Foundation"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "империя",
+      "психоистория"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0553293354-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EFoundation%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-silo",
+    "title": "Бункер",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2011,
+    "rating": 8.2,
+    "votes": 160000,
+    "genres": [
+      "постапокалипсис",
+      "тайна"
+    ],
+    "relation": "book_to_series",
+    "relationLabel": "Книга → сериал",
+    "universeName": "Silo",
+    "relatedMedia": [
+      "Silo"
+    ],
+    "readOrder": [
+      "Wool"
+    ],
+    "watchOrder": [
+      "Silo"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "бункер",
+      "тайна"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1476733953-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%91%D1%83%D0%BD%D0%BA%D0%B5%D1%80%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3ESilo%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-good-omens",
+    "title": "Благие знамения",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1990,
+    "rating": 8.4,
+    "votes": 220000,
+    "genres": [
+      "фэнтези",
+      "комедия"
+    ],
+    "relation": "book_to_series",
+    "relationLabel": "Книга → сериал",
+    "universeName": "Good Omens",
+    "relatedMedia": [
+      "Good Omens"
+    ],
+    "readOrder": [
+      "Благие знамения"
+    ],
+    "watchOrder": [
+      "Good Omens"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "ангелы",
+      "демоны"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0060853980-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%91%D0%BB%D0%B0%D0%B3%D0%B8%D0%B5%20%D0%B7%D0%BD%D0%B0%D0%BC%D0%B5%D0%BD%D0%B8%D1%8F%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EGood%20Omens%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-american-gods",
+    "title": "Американские боги",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2001,
+    "rating": 8.1,
+    "votes": 260000,
+    "genres": [
+      "фэнтези",
+      "мифология"
+    ],
+    "relation": "book_to_series",
+    "relationLabel": "Книга → сериал",
+    "universeName": "American Gods",
+    "relatedMedia": [
+      "American Gods"
+    ],
+    "readOrder": [
+      "Американские боги"
+    ],
+    "watchOrder": [
+      "American Gods"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "боги",
+      "дорога"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0380973650-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%90%D0%BC%D0%B5%D1%80%D0%B8%D0%BA%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B5%20%D0%B1%D0%BE%D0%B3%D0%B8%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EAmerican%20Gods%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-altered-carbon",
+    "title": "Видоизменённый углерод",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2002,
+    "rating": 8.0,
+    "votes": 120000,
+    "genres": [
+      "киберпанк",
+      "детектив"
+    ],
+    "relation": "book_to_series",
+    "relationLabel": "Книга → сериал",
+    "universeName": "Altered Carbon",
+    "relatedMedia": [
+      "Altered Carbon"
+    ],
+    "readOrder": [
+      "Altered Carbon"
+    ],
+    "watchOrder": [
+      "Altered Carbon"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "киберпанк",
+      "бессмертие"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0345457684-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%92%D0%B8%D0%B4%D0%BE%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D1%91%D0%BD%D0%BD%D1%8B%D0%B9%3C/text%3E%3Ctext%20x%3D%2250%25%22%20y%3D%22405%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D1%83%D0%B3%D0%BB%D0%B5%D1%80%D0%BE%D0%B4%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EAltered%20Carbon%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "comic-sandman",
+    "title": "Песочный человек",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 1989,
+    "rating": 9.0,
+    "votes": 170000,
+    "genres": [
+      "фэнтези",
+      "мифология"
+    ],
+    "relation": "comic_to_series",
+    "relationLabel": "Комикс → сериал",
+    "universeName": "The Sandman",
+    "relatedMedia": [
+      "The Sandman"
+    ],
+    "readOrder": [
+      "Preludes & Nocturnes"
+    ],
+    "watchOrder": [
+      "The Sandman"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "сны",
+      "мифы"
+    ],
+    "badges": [],
+    "description": "Комикс / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1401225756-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2309182c%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%23145d88%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffd166%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ffd166%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%92%A5%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9E%D0%9C%D0%98%D0%9A%D0%A1%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%9F%D0%B5%D1%81%D0%BE%D1%87%D0%BD%D1%8B%D0%B9%20%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EThe%20Sandman%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "comic-v-for-vendetta",
+    "title": "V — значит вендетта",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 1982,
+    "rating": 8.8,
+    "votes": 150000,
+    "genres": [
+      "антиутопия",
+      "политика"
+    ],
+    "relation": "comic_to_movie",
+    "relationLabel": "Комикс → фильм",
+    "universeName": "V for Vendetta",
+    "relatedMedia": [
+      "V for Vendetta"
+    ],
+    "readOrder": [
+      "V for Vendetta"
+    ],
+    "watchOrder": [
+      "V for Vendetta"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "маска",
+      "революция"
+    ],
+    "badges": [],
+    "description": "Комикс / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/140120841X-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2309182c%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%23145d88%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffd166%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ffd166%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%92%A5%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9E%D0%9C%D0%98%D0%9A%D0%A1%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3EV%20%E2%80%94%20%D0%B7%D0%BD%D0%B0%D1%87%D0%B8%D1%82%3C/text%3E%3Ctext%20x%3D%2250%25%22%20y%3D%22405%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%B2%D0%B5%D0%BD%D0%B4%D0%B5%D1%82%D1%82%D0%B0%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EV%20for%20Vendetta%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "comic-sin-city",
+    "title": "Город грехов",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 1991,
+    "rating": 8.4,
+    "votes": 100000,
+    "genres": [
+      "нуар",
+      "криминал"
+    ],
+    "relation": "comic_to_movies",
+    "relationLabel": "Комикс → фильмы",
+    "universeName": "Sin City",
+    "relatedMedia": [
+      "Sin City"
+    ],
+    "readOrder": [
+      "Sin City"
+    ],
+    "watchOrder": [
+      "Sin City"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "нуар",
+      "жесткость"
+    ],
+    "badges": [],
+    "description": "Комикс / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1593072937-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2309182c%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%23145d88%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffd166%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ffd166%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%92%A5%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9E%D0%9C%D0%98%D0%9A%D0%A1%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%93%D0%BE%D1%80%D0%BE%D0%B4%20%D0%B3%D1%80%D0%B5%D1%85%D0%BE%D0%B2%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3ESin%20City%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "comic-hellboy",
+    "title": "Хеллбой",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 1993,
+    "rating": 8.4,
+    "votes": 90000,
+    "genres": [
+      "демоны",
+      "супернатурал"
+    ],
+    "relation": "comic_to_movies_games",
+    "relationLabel": "Комикс → фильмы → игры",
+    "universeName": "Hellboy",
+    "relatedMedia": [
+      "Hellboy"
+    ],
+    "readOrder": [
+      "Seed of Destruction"
+    ],
+    "watchOrder": [
+      "Hellboy films"
+    ],
+    "playOrder": [
+      "Hellboy games"
+    ],
+    "vibe": [
+      "демоны",
+      "оккультизм"
+    ],
+    "badges": [],
+    "description": "Комикс / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1593070942-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2309182c%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%23145d88%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffd166%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ffd166%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%92%A5%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9E%D0%9C%D0%98%D0%9A%D0%A1%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%A5%D0%B5%D0%BB%D0%BB%D0%B1%D0%BE%D0%B9%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EHellboy%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "comic-the-walking-dead",
+    "title": "Ходячие мертвецы",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 2003,
+    "rating": 8.6,
+    "votes": 210000,
+    "genres": [
+      "зомби",
+      "драма"
+    ],
+    "relation": "comic_to_series_games",
+    "relationLabel": "Комикс → сериал → игры",
+    "universeName": "The Walking Dead",
+    "relatedMedia": [
+      "The Walking Dead"
+    ],
+    "readOrder": [
+      "Days Gone Bye"
+    ],
+    "watchOrder": [
+      "The Walking Dead"
+    ],
+    "playOrder": [
+      "Telltale The Walking Dead"
+    ],
+    "vibe": [
+      "зомби",
+      "выживание"
+    ],
+    "badges": [],
+    "description": "Комикс / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1582403589-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2309182c%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%23145d88%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffd166%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ffd166%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%92%A5%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9E%D0%9C%D0%98%D0%9A%D0%A1%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%A5%D0%BE%D0%B4%D1%8F%D1%87%D0%B8%D0%B5%20%D0%BC%D0%B5%D1%80%D1%82%D0%B2%D0%B5%D1%86%D1%8B%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EThe%20Walking%20Dead%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "comic-300",
+    "title": "300 спартанцев",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 1998,
+    "rating": 8.0,
+    "votes": 80000,
+    "genres": [
+      "история",
+      "экшен"
+    ],
+    "relation": "comic_to_movie",
+    "relationLabel": "Комикс → фильм",
+    "universeName": "300",
+    "relatedMedia": [
+      "300"
+    ],
+    "readOrder": [
+      "300"
+    ],
+    "watchOrder": [
+      "300"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "спарта",
+      "битва"
+    ],
+    "badges": [],
+    "description": "Комикс / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1569714029-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2309182c%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%23145d88%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffd166%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ffd166%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%92%A5%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9E%D0%9C%D0%98%D0%9A%D0%A1%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E300%20%D1%81%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BD%D1%86%D0%B5%D0%B2%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3E300%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "comic-kick-ass",
+    "title": "Пипец",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 2008,
+    "rating": 7.9,
+    "votes": 85000,
+    "genres": [
+      "супергерои",
+      "чёрный юмор"
+    ],
+    "relation": "comic_to_movies",
+    "relationLabel": "Комикс → фильмы",
+    "universeName": "Kick-Ass",
+    "relatedMedia": [
+      "Kick-Ass"
+    ],
+    "readOrder": [
+      "Kick-Ass"
+    ],
+    "watchOrder": [
+      "Kick-Ass"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "жесть",
+      "сатира"
+    ],
+    "badges": [],
+    "description": "Комикс / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0785132619-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2309182c%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%23145d88%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffd166%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ffd166%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%92%A5%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9E%D0%9C%D0%98%D0%9A%D0%A1%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%9F%D0%B8%D0%BF%D0%B5%D1%86%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EKick-Ass%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "comic-scott-pilgrim",
+    "title": "Скотт Пилигрим",
+    "type": "Комикс",
+    "category": "Комиксы",
+    "section": "books",
+    "year": 2004,
+    "rating": 8.2,
+    "votes": 110000,
+    "genres": [
+      "комедия",
+      "игровой вайб"
+    ],
+    "relation": "comic_to_movie_anime_game",
+    "relationLabel": "Комикс → фильм → аниме → игра",
+    "universeName": "Scott Pilgrim",
+    "relatedMedia": [
+      "Scott Pilgrim vs. the World"
+    ],
+    "readOrder": [
+      "Scott Pilgrim"
+    ],
+    "watchOrder": [
+      "Scott Pilgrim film",
+      "Scott Pilgrim Takes Off"
+    ],
+    "playOrder": [
+      "Scott Pilgrim game"
+    ],
+    "vibe": [
+      "ретро",
+      "игры"
+    ],
+    "badges": [],
+    "description": "Комикс / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1932664084-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2309182c%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%23145d88%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffd166%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%23ffd166%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%92%A5%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9E%D0%9C%D0%98%D0%9A%D0%A1%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%A1%D0%BA%D0%BE%D1%82%D1%82%20%D0%9F%D0%B8%D0%BB%D0%B8%D0%B3%D1%80%D0%B8%D0%BC%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EScott%20Pilgrim%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-mistborn",
+    "title": "Рождённый туманом",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2006,
+    "rating": 8.7,
+    "votes": 280000,
+    "genres": [
+      "фэнтези",
+      "магия"
+    ],
+    "relation": "book_source",
+    "relationLabel": "Книга / фэнтези-вселенная",
+    "universeName": "Mistborn",
+    "relatedMedia": [
+      "Mistborn"
+    ],
+    "readOrder": [
+      "Последняя империя"
+    ],
+    "watchOrder": [],
+    "playOrder": [],
+    "vibe": [
+      "магия",
+      "ограбление"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/076531178X-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%A0%D0%BE%D0%B6%D0%B4%D1%91%D0%BD%D0%BD%D1%8B%D0%B9%20%D1%82%D1%83%D0%BC%D0%B0%D0%BD%D0%BE%D0%BC%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EMistborn%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-stormlight",
+    "title": "Путь королей",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2010,
+    "rating": 9.1,
+    "votes": 290000,
+    "genres": [
+      "фэнтези",
+      "эпос"
+    ],
+    "relation": "book_source",
+    "relationLabel": "Книга / фэнтези-вселенная",
+    "universeName": "Stormlight Archive",
+    "relatedMedia": [
+      "Stormlight Archive"
+    ],
+    "readOrder": [
+      "Путь королей"
+    ],
+    "watchOrder": [],
+    "playOrder": [],
+    "vibe": [
+      "эпик",
+      "шторм"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0765326353-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%9F%D1%83%D1%82%D1%8C%20%D0%BA%D0%BE%D1%80%D0%BE%D0%BB%D0%B5%D0%B9%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EStormlight%20Archive%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-name-of-the-wind",
+    "title": "Имя ветра",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2007,
+    "rating": 8.8,
+    "votes": 330000,
+    "genres": [
+      "фэнтези",
+      "магия"
+    ],
+    "relation": "book_source",
+    "relationLabel": "Книга / фэнтези-вселенная",
+    "universeName": "Kingkiller Chronicle",
+    "relatedMedia": [
+      "The Name of the Wind"
+    ],
+    "readOrder": [
+      "Имя ветра"
+    ],
+    "watchOrder": [],
+    "playOrder": [],
+    "vibe": [
+      "магия",
+      "музыка"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/075640407X-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%98%D0%BC%D1%8F%20%D0%B2%D0%B5%D1%82%D1%80%D0%B0%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EKingkiller%20Chronicle%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-red-rising",
+    "title": "Алое восстание",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2014,
+    "rating": 8.5,
+    "votes": 210000,
+    "genres": [
+      "фантастика",
+      "революция"
+    ],
+    "relation": "book_source",
+    "relationLabel": "Книга / sci-fi-вселенная",
+    "universeName": "Red Rising",
+    "relatedMedia": [
+      "Red Rising"
+    ],
+    "readOrder": [
+      "Алое восстание"
+    ],
+    "watchOrder": [],
+    "playOrder": [],
+    "vibe": [
+      "марс",
+      "революция"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0345539788-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%90%D0%BB%D0%BE%D0%B5%20%D0%B2%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%B8%D0%B5%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3ERed%20Rising%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-ready-player-one",
+    "title": "Первому игроку приготовиться",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2011,
+    "rating": 8.0,
+    "votes": 310000,
+    "genres": [
+      "игры",
+      "фантастика"
+    ],
+    "relation": "book_to_movie",
+    "relationLabel": "Книга → фильм",
+    "universeName": "Ready Player One",
+    "relatedMedia": [
+      "Ready Player One"
+    ],
+    "readOrder": [
+      "Первому игроку приготовиться"
+    ],
+    "watchOrder": [
+      "Ready Player One"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "игры",
+      "виртуальность"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/030788743X-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%9F%D0%B5%D1%80%D0%B2%D0%BE%D0%BC%D1%83%20%D0%B8%D0%B3%D1%80%D0%BE%D0%BA%D1%83%3C/text%3E%3Ctext%20x%3D%2250%25%22%20y%3D%22405%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%BF%D1%80%D0%B8%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%B8%D1%82%D1%8C%D1%81%D1%8F%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EReady%20Player%20One%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-enders-game",
+    "title": "Игра Эндера",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1985,
+    "rating": 8.3,
+    "votes": 330000,
+    "genres": [
+      "фантастика",
+      "космос"
+    ],
+    "relation": "book_to_movie",
+    "relationLabel": "Книга → фильм",
+    "universeName": "Ender's Game",
+    "relatedMedia": [
+      "Ender's Game"
+    ],
+    "readOrder": [
+      "Игра Эндера"
+    ],
+    "watchOrder": [
+      "Ender's Game"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "космос",
+      "стратегия"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0812550706-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%98%D0%B3%D1%80%D0%B0%20%D0%AD%D0%BD%D0%B4%D0%B5%D1%80%D0%B0%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EEnder%27s%20Game%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-the-martian",
+    "title": "Марсианин",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 2011,
+    "rating": 8.5,
+    "votes": 360000,
+    "genres": [
+      "фантастика",
+      "выживание"
+    ],
+    "relation": "book_to_movie",
+    "relationLabel": "Книга → фильм",
+    "universeName": "The Martian",
+    "relatedMedia": [
+      "The Martian"
+    ],
+    "readOrder": [
+      "Марсианин"
+    ],
+    "watchOrder": [
+      "The Martian"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "марс",
+      "наука"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0553418025-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%9C%D0%B0%D1%80%D1%81%D0%B8%D0%B0%D0%BD%D0%B8%D0%BD%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EThe%20Martian%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-jurassic-park",
+    "title": "Парк юрского периода",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1990,
+    "rating": 8.2,
+    "votes": 290000,
+    "genres": [
+      "динозавры",
+      "фантастика"
+    ],
+    "relation": "book_to_movies_games",
+    "relationLabel": "Книга → фильмы → игры",
+    "universeName": "Jurassic Park",
+    "relatedMedia": [
+      "Jurassic Park"
+    ],
+    "readOrder": [
+      "Парк юрского периода"
+    ],
+    "watchOrder": [
+      "Jurassic Park films"
+    ],
+    "playOrder": [
+      "Jurassic World Evolution"
+    ],
+    "vibe": [
+      "динозавры",
+      "парк"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/0345538986-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%9F%D0%B0%D1%80%D0%BA%20%D1%8E%D1%80%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%3C/text%3E%3Ctext%20x%3D%2250%25%22%20y%3D%22405%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%BF%D0%B5%D1%80%D0%B8%D0%BE%D0%B4%D0%B0%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EJurassic%20Park%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-it",
+    "title": "Оно",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1986,
+    "rating": 8.4,
+    "votes": 430000,
+    "genres": [
+      "ужасы",
+      "клоун"
+    ],
+    "relation": "book_to_movies",
+    "relationLabel": "Книга → фильмы",
+    "universeName": "It",
+    "relatedMedia": [
+      "It"
+    ],
+    "readOrder": [
+      "Оно"
+    ],
+    "watchOrder": [
+      "It films"
+    ],
+    "playOrder": [],
+    "vibe": [
+      "ужасы",
+      "пеннивайз"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/1501142976-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%9E%D0%BD%D0%BE%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EIt%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
+  },
+  {
+    "id": "book-witcher-blood-of-elves",
+    "title": "Ведьмак: Кровь эльфов",
+    "type": "Книга",
+    "category": "Книги",
+    "section": "books",
+    "year": 1994,
+    "rating": 8.6,
+    "votes": 150000,
+    "genres": [
+      "фэнтези",
+      "магия"
+    ],
+    "relation": "book_to_game_series",
+    "relationLabel": "Книга → игры → сериал",
+    "universeName": "The Witcher",
+    "relatedMedia": [
+      "The Witcher"
+    ],
+    "readOrder": [
+      "Последнее желание",
+      "Меч Предназначения",
+      "Кровь эльфов"
+    ],
+    "watchOrder": [
+      "The Witcher"
+    ],
+    "playOrder": [
+      "The Witcher 3"
+    ],
+    "vibe": [
+      "магия",
+      "цинтра"
+    ],
+    "badges": [],
+    "description": "Книга / первоисточник, связанный с экранизациями, играми или общей вселенной.",
+    "poster": "https://covers.openlibrary.org/b/isbn/031602919X-L.jpg",
+    "fallbackPoster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101832%22/%3E%3Cstop%20offset%3D%22.58%22%20stop-color%3D%22%232e367d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ad7ff%22/%3E%3C/linearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.20%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%0A%20%20%20%20%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22135%22%20r%3D%22150%22%20fill%3D%22%236ad7ff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22780%22%20r%3D%22165%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2234%22%20y%3D%2234%22%20width%3D%22532%22%20height%3D%22832%22%20rx%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22155%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2282%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%F0%9F%93%9A%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff99%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%C2%B7%20%D0%9A%D0%9D%D0%98%D0%93%D0%90%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22355%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D0%92%D0%B5%D0%B4%D1%8C%D0%BC%D0%B0%D0%BA%3A%20%D0%9A%D1%80%D0%BE%D0%B2%D1%8C%3C/text%3E%3Ctext%20x%3D%2250%25%22%20y%3D%22405%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23fff%22%3E%D1%8D%D0%BB%D1%8C%D1%84%D0%BE%D0%B2%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%2282%22%20y%3D%22690%22%20width%3D%22436%22%20height%3D%2276%22%20rx%3D%2224%22%20fill%3D%22rgba%2810%2C10%2C18%2C.58%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.26%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22738%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22850%22%20fill%3D%22%23fff%22%3EThe%20Witcher%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%22817%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22750%22%20fill%3D%22%23ffffffaa%22%3EBOOK%20HUB%20%C2%B7%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+    "coverMode": "real",
+    "coverSource": "OpenLibrary ISBN cover"
   }
 ]
