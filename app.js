@@ -10890,3 +10890,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 })();
 /* GKM V253 REAL POSTERS FOR GAMES / BOOKS / MANGA / COMICS END */
+
+
+/* GKM V255 LOCAL POSTER ENRICH READY MARKER START */
+window.GKM_V255_LOCAL_POSTER_ENRICH_VERSION = "v255-local-json-posters-no-keys-2026-06-30";
+console.log("GKM V255: poster enrichment script ready. Run tools/build_posters_no_keys.js to write posters into JSON.");
+/* GKM V255 LOCAL POSTER ENRICH READY MARKER END */
+
