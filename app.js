@@ -587,16 +587,136 @@ function getGenres(item) {
   return [];
 }
 
+
+/* GKM V256 CORE GENERATED POSTERS HELPERS START */
+window.GKM_V256_CORE_GENERATED_POSTERS_VERSION = "v256-core-generated-posters-no-net-needed-2026-06-30";
+
+function gkmV256Text(v) {
+  return String(v == null ? "" : v).trim();
+}
+
+function gkmV256BadPoster(src) {
+  const s = gkmV256Text(src).toLowerCase();
+  if (!s) return true;
+  if (s === "null" || s === "undefined" || s === "n/a") return true;
+  if (s.includes("нет постера")) return true;
+  if (s.includes("dummyimage")) return true;
+  if (s.includes("placeholder")) return true;
+  if (s.includes("no-poster") || s.includes("noposter")) return true;
+  return false;
+}
+
+function gkmV256XmlEscape(s) {
+  return gkmV256Text(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function gkmV256WrapTitle(title, max = 18) {
+  const words = gkmV256Text(title).split(/\s+/).filter(Boolean);
+  const lines = [];
+  let line = "";
+  for (const w of words) {
+    if ((line + " " + w).trim().length > max && line) {
+      lines.push(line);
+      line = w;
+    } else {
+      line = (line + " " + w).trim();
+    }
+  }
+  if (line) lines.push(line);
+  return lines.slice(0, 4);
+}
+
+function gkmV256CoverColors(type, title) {
+  const t = gkmV256Text(type).toLowerCase();
+  if (t.includes("игр")) return ["#07111f", "#1641ff", "#00d5ff"];
+  if (t.includes("манг")) return ["#170414", "#b90042", "#ff4fd8"];
+  if (t.includes("комик")) return ["#091021", "#f4c400", "#ff2c55"];
+  if (t.includes("раноб")) return ["#12051f", "#6d38ff", "#ffcf5a"];
+  if (t.includes("книг")) return ["#08131f", "#0ca678", "#00d5ff"];
+  return ["#07111f", "#1641ff", "#00d5ff"];
+}
+
+function gkmV256CoverIcon(type) {
+  const t = gkmV256Text(type).toLowerCase();
+  if (t.includes("игр")) return "🎮";
+  if (t.includes("манг")) return "🗯️";
+  if (t.includes("комик")) return "⚡";
+  if (t.includes("раноб")) return "📖";
+  if (t.includes("книг")) return "📚";
+  if (t.includes("аниме")) return "🌸";
+  return "🕊️";
+}
+
+function gkmV256CoverLabel(type) {
+  const t = gkmV256Text(type).toLowerCase();
+  if (t.includes("игр")) return "GAME COVER";
+  if (t.includes("манг")) return "MANGA COVER";
+  if (t.includes("комик")) return "COMIC COVER";
+  if (t.includes("раноб")) return "LIGHT NOVEL";
+  if (t.includes("книг")) return "BOOK COVER";
+  if (t.includes("аниме")) return "ANIME COVER";
+  return "CATALOG COVER";
+}
+
+function gkmV256MakeCover(item) {
+  let title = "";
+  let type = "";
+  try { title = typeof displayTitle === "function" ? displayTitle(item) : ""; } catch {}
+  title = gkmV256Text(title || (item && (item.ru || item.title_ru || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия");
+  try { type = typeof getType === "function" ? getType(item) : ""; } catch {}
+  type = gkmV256Text(type || (item && (item.type || item.category || item.kind)) || "Каталог");
+
+  const colors = gkmV256CoverColors(type, title);
+  const icon = gkmV256CoverIcon(type);
+  const label = gkmV256CoverLabel(type);
+  const lines = gkmV256WrapTitle(title, 18);
+  const fontSize = lines.length > 2 ? 39 : 47;
+  const titleSvg = lines.map((line, i) =>
+    `<text x="50%" y="${360 + i * 58}" text-anchor="middle" font-family="Arial, sans-serif" font-size="${fontSize}" font-weight="900" fill="#ffffff">${gkmV256XmlEscape(line)}</text>`
+  ).join("");
+
+  const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="${colors[0]}" offset="0"/>
+      <stop stop-color="${colors[1]}" offset="0.58"/>
+      <stop stop-color="${colors[2]}" offset="1"/>
+    </linearGradient>
+    <radialGradient id="r" cx="50%" cy="30%" r="75%">
+      <stop stop-color="#ffffff" stop-opacity="0.28" offset="0"/>
+      <stop stop-color="#000000" stop-opacity="0" offset="1"/>
+    </radialGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="600" height="900" fill="url(#g)"/>
+  <rect width="600" height="900" fill="url(#r)"/>
+  <circle cx="95" cy="120" r="110" fill="#ffffff" opacity="0.08"/>
+  <circle cx="510" cy="760" r="150" fill="#000000" opacity="0.18"/>
+  <path d="M0 700 C130 630 230 760 360 680 C470 610 550 650 600 610 L600 900 L0 900 Z" fill="#000000" opacity="0.22"/>
+  <rect x="44" y="44" width="512" height="812" rx="34" fill="none" stroke="#ffffff" stroke-opacity="0.34" stroke-width="4"/>
+  <text x="50%" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="92" filter="url(#shadow)">${gkmV256XmlEscape(icon)}</text>
+  <text x="50%" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="800" fill="#dff7ff" letter-spacing="4">${gkmV256XmlEscape(label)}</text>
+  ${titleSvg}
+  <text x="50%" y="790" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="900" fill="#ffffff" opacity="0.95">ГОЛУБЬ КАТАЛОГ МИРА</text>
+  <text x="50%" y="830" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#dff7ff" opacity="0.85">generated cover art</text>
+</svg>`;
+
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
+/* GKM V256 CORE GENERATED POSTERS HELPERS END */
+
 function hasPoster(item) {
   const raw = String(item && (item.poster || item.posterUrl || item.poster_url || item.image || item.cover || item.img) || "").trim();
-  const low = raw.toLowerCase();
-  return Boolean(raw && low !== "null" && low !== "undefined" && low !== "n/a" && !low.includes("dummyimage") && !low.includes("placeholder") && !low.includes("no-poster") && !low.includes("noposter"));
+  return !gkmV256BadPoster(raw) || Boolean(item);
 }
 
 function posterRawSrc(item) {
   const raw = String(item && (item.poster || item.posterUrl || item.poster_url || item.image || item.cover || item.img) || "").trim();
-  if (!hasPoster(item)) return "";
-  return raw.replace(/^http:/i, "https:");
+  if (!gkmV256BadPoster(raw)) return raw.replace(/^http:/i, "https:");
+  return gkmV256MakeCover(item);
 }
 
 function posterProxySrc(src) {
@@ -632,7 +752,7 @@ function posterOriginalSrc(item) {
 }
 
 function posterPlaceholderHtml() {
-  return `<div class="poster-placeholder">Нет постера</div>`;
+  return "";
 }
 
 function recoverPosterImage(img) {
@@ -10580,320 +10700,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V249 VALID SEARCH_LITE FIX - generated valid data/fast/search_lite.json and cache v249 */
 
 
-/* GKM V253 REAL POSTERS FOR GAMES / BOOKS / MANGA / COMICS START */
+/* GKM V256 CORE GENERATED POSTERS CSS START */
 (function(){
-  try {
-    window.GKM_V253_REAL_POSTERS_VERSION = "v253-real-posters-games-books-manga-comics-2026-06-30";
-    const REAL_POSTER_CACHE_KEY = "gkm_real_poster_cache_v253";
-    const realPosterCache = (() => {
-      try {
-        const raw = JSON.parse(localStorage.getItem(REAL_POSTER_CACHE_KEY) || "{}");
-        return raw && typeof raw === "object" ? raw : {};
-      } catch {
-        return {};
-      }
-    })();
-
-    function saveRealPosterCache(){
-      try { localStorage.setItem(REAL_POSTER_CACHE_KEY, JSON.stringify(realPosterCache)); } catch {}
-    }
-    function normalizePosterKey(v){
-      return String(v || "").toLowerCase().replace(/ё/g, "е").replace(/[^a-z0-9а-я]+/gi, " ").replace(/\s+/g, " ").trim();
-    }
-    function cleanPosterTitle(v){
-      return String(v || "")
-        .replace(/\b(v\d{2,4}|split db\s*\d+\+?)\b/gi, "")
-        .replace(/[:\-–—]\s*(том|выпуск|часть|сборник|collection|vol\.?|issue)\s*\d+[a-zа-я0-9-]*/gi, "")
-        .replace(/\b(том|выпуск|часть|сборник|collection|vol\.?|issue)\s*\d+[a-zа-я0-9-]*/gi, "")
-        .replace(/\s+/g, " ").trim();
-    }
-    function isFakePosterUrl(src){
-      const low = String(src || "").trim().toLowerCase();
-      if (!low) return true;
-      return low === "null" || low === "undefined" || low === "n/a" || low.startsWith("data:image") || low.includes("dummyimage") || low.includes("placeholder") || low.includes("no-poster") || low.includes("noposter");
-    }
-
-    if (typeof posterSrc === "function") {
-      const posterSrcOriginal = posterSrc;
-      const posterOriginalSrcOriginal = typeof posterOriginalSrc === "function" ? posterOriginalSrc : null;
-      posterSrc = function(item){
-        const raw = posterOriginalSrcOriginal ? posterOriginalSrcOriginal(item) : (item && (item.poster || item.posterUrl || item.poster_url || item.image || item.cover || item.img) || "");
-        if (isFakePosterUrl(raw)) return "";
-        return posterSrcOriginal(item);
-      };
-      if (posterOriginalSrcOriginal) {
-        posterOriginalSrc = function(item){
-          const raw = posterOriginalSrcOriginal(item);
-          return isFakePosterUrl(raw) ? "" : raw;
-        };
-      }
-    }
-
-    function titleFromNode(root){
-      const el = root && (root.querySelector(".card-title, h3, h2, .item-title, .title") || root.closest && root.closest("dialog") && document.getElementById("detailTitle"));
-      return String(el && el.textContent || "").trim();
-    }
-    function typeFromNode(root){
-      const badge = root && root.querySelector(".card-badge, .badge, .type-badge");
-      const meta = root && root.querySelector(".card-meta, .meta, .item-meta");
-      const txt = String((badge && badge.textContent) || (meta && meta.textContent) || "");
-      if (/раноб/i.test(txt)) return "Ранобэ";
-      if (/манг/i.test(txt)) return "Манга";
-      if (/комик/i.test(txt)) return "Комикс";
-      if (/книг/i.test(txt)) return "Книга";
-      if (/игр/i.test(txt)) return "Игра";
-      return "";
-    }
-    function yearFromNode(root){
-      const meta = root && root.querySelector(".card-meta, .meta, .item-meta");
-      const txt = String(meta && meta.textContent || "");
-      const m = txt.match(/(19|20)\d{2}/);
-      return m ? m[0] : "";
-    }
-    function posterKey(meta){
-      return [meta.type || "", normalizePosterKey(cleanPosterTitle(meta.title)), meta.year || ""].join("|");
-    }
-    function makeWikiQuery(meta){
-      const t = cleanPosterTitle(meta.title);
-      switch (meta.type) {
-        case "Игра": return `${t} video game`;
-        case "Манга": return `${t} manga`;
-        case "Комикс": return `${t} comic book`;
-        case "Ранобэ": return `${t} light novel`;
-        case "Книга": return `${t} novel`;
-        default: return t;
-      }
-    }
-    async function fetchJson(url){
-      const res = await fetch(url, { mode: "cors" });
-      if (!res.ok) throw new Error(`fetch failed ${res.status}`);
-      return await res.json();
-    }
-    function fixGoogleThumb(url){
-      let out = String(url || "").replace(/^http:/i, "https:");
-      out = out.replace(/&zoom=\d+/gi, "&zoom=2");
-      out = out.replace(/zoom=\d+/gi, "zoom=2");
-      return out;
-    }
-    function scoreTitleMatch(candidate, meta){
-      const a = normalizePosterKey(candidate);
-      const b = normalizePosterKey(cleanPosterTitle(meta.title));
-      if (!a || !b) return 0;
-      if (a === b) return 100;
-      if (a.startsWith(b) || b.startsWith(a)) return 70;
-      if (a.includes(b) || b.includes(a)) return 50;
-      let score = 0;
-      const parts = b.split(" ").filter(Boolean);
-      for (const p of parts) if (a.includes(p)) score += 5;
-      return score;
-    }
-    async function resolveFromGoogleBooks(meta){
-      const base = cleanPosterTitle(meta.title);
-      if (!base) return "";
-      const queries = [];
-      if (meta.type === "Манга") queries.push(`intitle:"${base}" manga`);
-      if (meta.type === "Комикс") queries.push(`intitle:"${base}" comic`);
-      if (meta.type === "Ранобэ") queries.push(`intitle:"${base}" light novel`);
-      queries.push(`intitle:"${base}"`);
-      for (const q of queries) {
-        try {
-          const data = await fetchJson(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(q)}&maxResults=5&printType=books&langRestrict=en`);
-          const list = Array.isArray(data && data.items) ? data.items : [];
-          const pick = list
-            .map(x => ({ item: x, score: scoreTitleMatch(x && x.volumeInfo && x.volumeInfo.title, meta) }))
-            .sort((a,b) => b.score - a.score)
-            .find(x => x.score >= 40 && x.item && x.item.volumeInfo && x.item.volumeInfo.imageLinks && (x.item.volumeInfo.imageLinks.thumbnail || x.item.volumeInfo.imageLinks.smallThumbnail));
-          if (pick) {
-            const link = pick.item.volumeInfo.imageLinks.thumbnail || pick.item.volumeInfo.imageLinks.smallThumbnail;
-            if (link) return fixGoogleThumb(link);
-          }
-        } catch {}
-      }
-      return "";
-    }
-    async function resolveFromOpenLibrary(meta){
-      const base = cleanPosterTitle(meta.title);
-      if (!base) return "";
-      try {
-        const data = await fetchJson(`https://openlibrary.org/search.json?title=${encodeURIComponent(base)}&limit=10`);
-        const docs = Array.isArray(data && data.docs) ? data.docs : [];
-        const pick = docs
-          .map(x => ({ item: x, score: scoreTitleMatch(x && x.title, meta) }))
-          .sort((a,b) => b.score - a.score)
-          .find(x => x.score >= 40 && x.item && x.item.cover_i);
-        if (pick && pick.item.cover_i) return `https://covers.openlibrary.org/b/id/${pick.item.cover_i}-L.jpg`;
-      } catch {}
-      return "";
-    }
-    async function resolveFromSteam(meta){
-      const base = cleanPosterTitle(meta.title);
-      if (!base) return "";
-      try {
-        const data = await fetchJson(`https://store.steampowered.com/api/storesearch/?term=${encodeURIComponent(base)}&l=english&cc=us`);
-        const items = Array.isArray(data && data.items) ? data.items : [];
-        const pick = items
-          .map(x => ({ item: x, score: scoreTitleMatch(x && x.name, meta) }))
-          .sort((a,b) => b.score - a.score)
-          .find(x => x.score >= 45 && x.item && x.item.id);
-        if (pick && pick.item && pick.item.id) {
-          return `https://cdn.akamai.steamstatic.com/steam/apps/${pick.item.id}/library_600x900_2x.jpg`;
-        }
-      } catch {}
-      return "";
-    }
-    async function resolveFromWikipedia(meta){
-      const q = makeWikiQuery(meta);
-      if (!q) return "";
-      try {
-        const data = await fetchJson(`https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=5&prop=pageimages&pithumbsize=800&piprop=thumbnail`);
-        const pages = Object.values(data && data.query && data.query.pages || {});
-        const pick = pages
-          .map(x => ({ item: x, score: scoreTitleMatch(x && x.title, meta) }))
-          .sort((a,b) => b.score - a.score)
-          .find(x => x.score >= 30 && x.item && x.item.thumbnail && x.item.thumbnail.source);
-        return pick && pick.item && pick.item.thumbnail ? pick.item.thumbnail.source : "";
-      } catch {}
-      return "";
-    }
-    async function resolveRealPoster(meta){
-      const key = posterKey(meta);
-      if (!meta || !meta.title) return "";
-      if (realPosterCache[key]) return realPosterCache[key];
-      let src = "";
-      if (meta.type === "Игра") {
-        src = await resolveFromSteam(meta) || await resolveFromWikipedia(meta);
-      } else if (["Книга", "Манга", "Комикс", "Ранобэ"].includes(meta.type)) {
-        src = await resolveFromGoogleBooks(meta) || await resolveFromOpenLibrary(meta) || await resolveFromWikipedia(meta);
-      } else {
-        src = await resolveFromWikipedia(meta);
-      }
-      if (src) {
-        realPosterCache[key] = src;
-        saveRealPosterCache();
-      }
-      return src;
-    }
-    function ensurePosterImg(wrap){
-      let img = wrap.querySelector("img");
-      if (!img) {
-        img = document.createElement("img");
-        img.alt = "";
-        img.loading = "lazy";
-        img.decoding = "async";
-        const ph = wrap.querySelector(".poster-placeholder");
-        if (ph) ph.replaceWith(img);
-        else wrap.appendChild(img);
-      }
-      return img;
-    }
-
-    const realPosterQueue = [];
-    let realPosterActive = 0;
-    const REAL_POSTER_MAX = 4;
-    function pushRealPosterJob(fn){
-      realPosterQueue.push(fn);
-      pumpRealPosterQueue();
-    }
-    function pumpRealPosterQueue(){
-      while (realPosterActive < REAL_POSTER_MAX && realPosterQueue.length) {
-        const job = realPosterQueue.shift();
-        realPosterActive += 1;
-        Promise.resolve().then(job).catch(()=>{}).finally(() => {
-          realPosterActive -= 1;
-          pumpRealPosterQueue();
-        });
-      }
-    }
-
-    function readMetaFromCard(card){
-      return { title: titleFromNode(card), type: typeFromNode(card), year: yearFromNode(card) };
-    }
-
-    function upgradeCardPoster(card){
-      const wrap = card && card.querySelector && card.querySelector(".poster-wrap");
-      if (!wrap) return;
-      const img = wrap.querySelector("img");
-      const current = String((img && (img.dataset.originalSrc || img.getAttribute("src") || img.src)) || "");
-      if (!isFakePosterUrl(current)) return;
-      if (wrap.dataset.realPosterState === "1") return;
-      const meta = readMetaFromCard(card);
-      if (!meta.title || !["Игра","Книга","Манга","Комикс","Ранобэ"].includes(meta.type)) return;
-      wrap.dataset.realPosterState = "1";
-      pushRealPosterJob(async () => {
-        const src = await resolveRealPoster(meta);
-        if (!src) { wrap.dataset.realPosterState = "0"; return; }
-        const liveWrap = card.querySelector(".poster-wrap");
-        if (!liveWrap) return;
-        const liveImg = ensurePosterImg(liveWrap);
-        liveImg.src = src;
-        liveImg.dataset.originalSrc = src;
-        liveImg.dataset.proxyTried = "0";
-        liveImg.alt = meta.title;
-        liveWrap.querySelectorAll(".poster-placeholder").forEach(x => x.remove());
-      });
-    }
-
-    function upgradeDetailPoster(){
-      const poster = document.getElementById("detailPoster");
-      const titleEl = document.getElementById("detailTitle");
-      if (!poster || !titleEl) return;
-      const current = String(poster.dataset.originalSrc || poster.getAttribute("src") || poster.src || "");
-      if (!isFakePosterUrl(current)) return;
-      if (poster.dataset.realPosterState === "1") return;
-      const metaText = String((document.getElementById("detailMeta") && document.getElementById("detailMeta").textContent) || "");
-      let type = "";
-      if (/раноб/i.test(metaText)) type = "Ранобэ";
-      else if (/манг/i.test(metaText)) type = "Манга";
-      else if (/комик/i.test(metaText)) type = "Комикс";
-      else if (/книг/i.test(metaText)) type = "Книга";
-      else if (/игр/i.test(metaText)) type = "Игра";
-      const yearMatch = metaText.match(/(19|20)\d{2}/);
-      const meta = { title: String(titleEl.textContent || "").trim(), type, year: yearMatch ? yearMatch[0] : "" };
-      if (!meta.title || !meta.type) return;
-      poster.dataset.realPosterState = "1";
-      pushRealPosterJob(async () => {
-        const src = await resolveRealPoster(meta);
-        if (!src) { poster.dataset.realPosterState = "0"; return; }
-        poster.src = src;
-        poster.dataset.originalSrc = src;
-      });
-    }
-
-    function scanRealPosters(root){
-      try {
-        const scope = root && root.querySelectorAll ? root : document;
-        scope.querySelectorAll(".card").forEach(upgradeCardPoster);
-        upgradeDetailPoster();
-      } catch {}
-    }
-
-    const scanLater = (() => {
-      let timer = null;
-      return function(){
-        clearTimeout(timer);
-        timer = setTimeout(() => scanRealPosters(document), 120);
-      };
-    })();
-
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", () => scanRealPosters(document));
-    } else {
-      scanRealPosters(document);
-    }
-    window.addEventListener("load", () => scanRealPosters(document));
-    document.addEventListener("click", scanLater, true);
-    document.addEventListener("input", scanLater, true);
-    document.addEventListener("change", scanLater, true);
-    new MutationObserver(scanLater).observe(document.documentElement, { childList: true, subtree: true });
-  } catch (err) {
-    console.warn("GKM V253 real poster patch failed", err);
-  }
+  const st = document.createElement("style");
+  st.textContent = ".poster-placeholder{display:none!important}.poster-wrap img{display:block!important;opacity:1!important;filter:none!important;mix-blend-mode:normal!important}";
+  document.head.appendChild(st);
+  console.log("GKM V256 core: generated covers replace empty posters");
 })();
-/* GKM V253 REAL POSTERS FOR GAMES / BOOKS / MANGA / COMICS END */
-
-
-/* GKM V255 LOCAL POSTER ENRICH READY MARKER START */
-window.GKM_V255_LOCAL_POSTER_ENRICH_VERSION = "v255-local-json-posters-no-keys-2026-06-30";
-console.log("GKM V255: poster enrichment script ready. Run tools/build_posters_no_keys.js to write posters into JSON.");
-/* GKM V255 LOCAL POSTER ENRICH READY MARKER END */
+/* GKM V256 CORE GENERATED POSTERS CSS END */
 
