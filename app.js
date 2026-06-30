@@ -10160,3 +10160,180 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V224_RENDER_GAMES = renderGameHub;
 })();
 /* GKM V224 GAME DATABASE EXPANSION 360 END */
+
+
+
+/* GKM V225 MODAL FULL DESCRIPTION FIX START */
+(function(){
+  function txt(v){ return String(v == null ? "" : v).trim(); }
+  function esc(v){
+    return txt(v).replace(/[&<>"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[s]));
+  }
+  function clean(v){
+    return txt(v).replace(/\s+/g, " ").trim();
+  }
+  function modalRoot(){
+    const nodes = Array.from(document.querySelectorAll('[role="dialog"], .modal, .details-modal, .gkm-modal, #modal, #detailsModal'));
+    return nodes.find(n => {
+      const st = getComputedStyle(n);
+      const r = n.getBoundingClientRect();
+      return st.display !== "none" && st.visibility !== "hidden" && r.width > 300 && r.height > 250;
+    }) || null;
+  }
+  function modalTitle(modal){
+    const h = modal.querySelector("h1, .modal-title, .details-title, .title, h2, h3");
+    return clean(h && h.textContent) || "Проект";
+  }
+  function modalType(modal){
+    const text = clean(modal.textContent).toLowerCase();
+    if (text.includes("аниме")) return "аниме";
+    if (text.includes("сериал")) return "сериал";
+    if (text.includes("мульт")) return "мультфильм";
+    if (text.includes("игра")) return "игра";
+    if (text.includes("манга")) return "манга";
+    if (text.includes("ранобэ")) return "ранобэ";
+    if (text.includes("комикс")) return "комикс";
+    if (text.includes("книга")) return "книга";
+    if (text.includes("фильм")) return "фильм";
+    return "проект";
+  }
+  function modalMeta(modal){
+    const text = clean(modal.textContent);
+    const year = (text.match(/\b(19\d{2}|20\d{2})\b/) || [])[1] || "";
+    const rating = (text.match(/Рейтинг\s*([0-9.]+)/i) || text.match(/★\s*([0-9.]+)/) || [])[1] || "";
+    let genres = "";
+    const possible = Array.from(modal.querySelectorAll(".genres, .genre, .meta, .details-meta, .modal-meta, p, div"))
+      .map(x => clean(x.textContent))
+      .filter(x => x && x.length < 120);
+    const g = possible.find(x => /драма|криминал|фантаст|фэнтези|боевик|комед|ужас|триллер|детектив|приключ|роман|спорт|аниме|rpg|экшен/i.test(x));
+    if (g) genres = g;
+    return {year, rating, genres};
+  }
+  function shortExistingDescription(modal){
+    const boxes = Array.from(modal.querySelectorAll("p, .overview, .description, .details-description, .modal-description, .plot, .summary, .card-description, [class*='description'], [class*='overview']"));
+    let best = "";
+    for (const b of boxes) {
+      const t = clean(b.textContent);
+      if (t.length > best.length && t.length > 25 && t.length < 800 && !/тип год рейтинг голосов источник/i.test(t)) best = t;
+    }
+    return best;
+  }
+  function genreHint(genres){
+    const g = genres.toLowerCase();
+    if (g.includes("драма")) return "В центре обычно конфликт персонажей, моральный выбор и эмоциональная история.";
+    if (g.includes("криминал")) return "Криминальная часть добавляет напряжение, риск, расследование, тюрьму, преступление или борьбу с системой.";
+    if (g.includes("фантаст")) return "Фантастическая часть важна для мира, правил вселенной, технологий или необычной идеи.";
+    if (g.includes("фэнтези")) return "Фэнтези делает акцент на мире, магии, мифологии, приключении и развитии героев.";
+    if (g.includes("ужас") || g.includes("хоррор")) return "Хоррор-вайб строится на тревоге, опасности, неизвестности и атмосфере страха.";
+    if (g.includes("комед")) return "Комедийная часть нужна для лёгкого темпа, юмора и более расслабленного просмотра.";
+    if (g.includes("боев") || g.includes("экшен")) return "Экшен делает упор на динамику, столкновения, движение и зрелищность.";
+    if (g.includes("детектив") || g.includes("триллер")) return "Детективно-триллерная часть держит интерес через тайну, расследование и постепенное раскрытие.";
+    if (g.includes("приключ")) return "Приключенческий жанр делает историю более дорожной, событийной и насыщенной.";
+    return "Жанры помогают заранее понять темп, настроение и ожидания от просмотра.";
+  }
+  function typeHint(type){
+    if (type === "фильм") return "Фильм удобен для одного законченного просмотра: за короткое время он должен дать завязку, конфликт, развитие и финал.";
+    if (type === "сериал") return "Сериал раскрывается дольше: важны герои, сезонные арки, темп и желание возвращаться к истории.";
+    if (type === "аниме") return "В аниме часто важны стиль, арки персонажей, первоисточник, визуальная подача и эмоциональные пики.";
+    if (type === "мультфильм") return "Анимационный формат может быть лёгким, семейным или серьёзным — лучше смотреть на жанры и общий вайб.";
+    if (type === "игра") return "В игре важны не только сюжет и сеттинг, но и жанр геймплея: экшен, RPG, хоррор, открытый мир или интерактивное кино.";
+    if (type === "книга" || type === "манга" || type === "ранобэ" || type === "комикс") return "Для чтения важно понять, это первоисточник или часть большой вселенной, и есть ли рядом фильм, сериал, аниме или игра.";
+    return "Карточка помогает понять, стоит ли открывать внешние сайты и знакомиться с проектом дальше.";
+  }
+  function buildFullDescription(modal){
+    const title = modalTitle(modal);
+    const type = modalType(modal);
+    const meta = modalMeta(modal);
+    const old = shortExistingDescription(modal);
+
+    let intro = `${title} — ${type}${meta.year ? ` ${meta.year} года` : ""} из каталога «Голубь Каталог Мира».`;
+    let base = old && old.length > 35 ? old : "Короткое описание в источнике отсутствует или слишком маленькое, поэтому карточка дополняется понятным пояснением по типу, жанрам и атмосфере.";
+
+    const ratingLine = meta.rating ? `Рейтинг ${meta.rating} помогает быстро оценить общую популярность и качество по базе каталога.` : "Рейтинг и метаданные помогают быстрее сравнить этот проект с похожими.";
+    const genreLine = meta.genres ? `По жанрам и метаданным: ${meta.genres}. ${genreHint(meta.genres)}` : "Жанры в карточке помогают понять, будет ли это драма, экшен, хоррор, фантастика, фэнтези, комедия или другой формат.";
+
+    return [
+      intro,
+      base,
+      genreLine,
+      ratingLine,
+      typeHint(type),
+      "Так как сайт работает как каталог и навигатор, а не как онлайн-кинотеатр, это описание нужно, чтобы перед переходом на внешние сайты ты понимал, что собираешься смотреть, читать или во что играть."
+    ];
+  }
+  function inject(modal){
+    if (!modal) return;
+    const title = modalTitle(modal);
+    if (!title || title === "Проект") return;
+
+    let block = modal.querySelector("#gkmV225FullDescription");
+    if (!block) {
+      block = document.createElement("section");
+      block.id = "gkmV225FullDescription";
+      block.className = "gkm-v225-full-description";
+      const anchor =
+        modal.querySelector(".overview, .description, .details-description, .modal-description, .plot, .summary, [class*='description'], [class*='overview']") ||
+        modal.querySelector(".modal-body, .details-body, .modal-content") ||
+        modal.firstElementChild ||
+        modal;
+      if (anchor && anchor.parentNode && anchor !== modal) anchor.parentNode.insertBefore(block, anchor.nextSibling);
+      else modal.appendChild(block);
+    }
+
+    const lines = buildFullDescription(modal);
+    block.innerHTML = `
+      <h3>📖 Подробное описание</h3>
+      <div>${lines.map(x => `<p>${esc(x)}</p>`).join("")}</div>
+    `;
+
+    // визуально убираем слишком короткий старый кусок, если он выглядит как обрезок
+    Array.from(modal.querySelectorAll(".overview, .description, .details-description, .modal-description, .plot, .summary, [class*='description'], [class*='overview']")).forEach(el => {
+      if (el.id === "gkmV225FullDescription" || el.closest("#gkmV225FullDescription")) return;
+      const t = clean(el.textContent);
+      if (t.length > 20 && t.length < 180) el.classList.add("gkm-v225-short-desc-muted");
+    });
+  }
+  function run(){
+    const m = modalRoot();
+    if (m) inject(m);
+  }
+  function style(){
+    if (document.getElementById("gkm-v225-style")) return;
+    const s = document.createElement("style");
+    s.id = "gkm-v225-style";
+    s.textContent = `
+      .gkm-v225-full-description{
+        margin:16px 0;
+        padding:16px 18px;
+        border-radius:18px;
+        border:1px solid rgba(0,212,255,.28);
+        background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(124,60,255,.08));
+        box-shadow:0 16px 34px rgba(0,0,0,.22);
+      }
+      .gkm-v225-full-description h3{
+        margin:0 0 10px;
+        font-size:19px;
+        font-weight:950;
+        color:#fff;
+      }
+      .gkm-v225-full-description p{
+        margin:0 0 10px;
+        color:rgba(255,255,255,.9);
+        line-height:1.58;
+        font-size:14.5px;
+      }
+      .gkm-v225-full-description p:last-child{margin-bottom:0}
+      .gkm-v225-short-desc-muted{
+        opacity:.45!important;
+      }
+    `;
+    document.head.appendChild(s);
+  }
+  style();
+  const obs = new MutationObserver(function(){ setTimeout(run, 60); });
+  obs.observe(document.documentElement, {childList:true, subtree:true, attributes:true, attributeFilter:["class","style","open"]});
+  document.addEventListener("click", function(){ setTimeout(run, 120); setTimeout(run, 420); }, true);
+  document.addEventListener("DOMContentLoaded", function(){ style(); setTimeout(run, 300); });
+  setInterval(run, 1200);
+})();
+ /* GKM V225 MODAL FULL DESCRIPTION FIX END */
