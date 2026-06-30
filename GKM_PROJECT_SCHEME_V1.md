@@ -1,4 +1,4 @@
-[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29506740/GKM_PROJECT_SCHEME_V1.md)
+[Uploading GKM_PROJECT_SCHEME_V1.md…]()
 [GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29503592/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
@@ -502,3 +502,8 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 - откат на рабочую версию из films-series-best-5000-main (6)(2).zip
 - убраны последствия сломанных V228-V234
 - cache bump app.js?v=235
+
+## GKM V236 DESCRIPTION ONLY FIX
+- исправление только описаний через displayOverview
+- без изменений style.css, сетки, модалки и баз
+- добавлены ручные синопсисы для популярных проектов
