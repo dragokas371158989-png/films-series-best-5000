@@ -1,4 +1,4 @@
-[Uploading GKM_PROJECT_SCHEME_V1.md…]()
+[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29509069/GKM_PROJECT_SCHEME_V1.md)
 [GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29506740/GKM_PROJECT_SCHEME_V1.md)
 [GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29503592/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
@@ -519,3 +519,8 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 ## GKM V240 RUNTIME DATA QUALITY + DESCRIPTION RESTORE
 - компактный runtime fix: годы, типы, описания и фильтр активных разделов
 - style.css и базы не трогались
+
+## GKM V241 CARTOON/ANIME/FILM TYPE + SYNOPSIS FIX
+- точечный runtime-фильтр типов для известных ошибок
+- добавлены синопсисы для мультфильмов/аниме/Доктора Стрэнджа
+- без изменений style.css и data
