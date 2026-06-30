@@ -530,3 +530,23 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 ## GKM V250 NORMAL HOME GRID RESTORE
 - отключена сломанная главная витрина Популярное/Топ/Новинки
 - главная снова открывает обычную сетку карточек через fast page all/page_0001.json
+---
+
+## GKM V260 ANIME TOP / STUDIOS FAST FIX
+
+Дата: 2026-07-01  
+Рабочая зона: `app.js`, `data/fast/*`
+
+### Что было сломано
+
+Кнопки:
+
+- `Топ аниме 100`
+- `Топ студий`
+
+искали файлы:
+
+```text
+data/fast/anime_top_manual.json
+data/fast/anime_studios_top.json
+data/fast/anime_studios_detail.json
