@@ -9147,7 +9147,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=216";
+  const BOOKS_URL = "./data/books_catalog.json?v=221";
+  const BOOKS_SPLIT_URLS = ["./data/books/manga.json?v=221","./data/books/ranobe.json?v=221","./data/books/books.json?v=221","./data/books/comics.json?v=221"];
   const PAGE = 24;
   const BOOK_PAGE = 18;
   let booksCache = null;
@@ -9225,13 +9226,31 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   async function loadBooks() {
     if (booksCache) return booksCache;
     try {
-      const res = await fetch(BOOKS_URL, { cache: "force-cache" });
-      if (!res.ok) throw new Error("books_catalog fetch failed " + res.status);
-      const json = await res.json();
-      booksCache = Array.isArray(json) ? json : (json.items || []);
+      const settled = await Promise.allSettled(BOOKS_SPLIT_URLS.map(url => fetch(url, { cache: "force-cache" }).then(res => {
+        if (!res.ok) throw new Error(url + " " + res.status);
+        return res.json();
+      })));
+      const merged = [];
+      settled.forEach(r => {
+        if (r.status === "fulfilled") {
+          const chunk = Array.isArray(r.value) ? r.value : (r.value.items || []);
+          merged.push(...chunk);
+        }
+      });
+      if (!merged.length) throw new Error("split books empty");
+      booksCache = merged;
+      console.info("GKM V221: split books loaded", booksCache.length);
     } catch (err) {
-      console.warn("GKM V216: fallback books loaded", err);
-      booksCache = FALLBACK_BOOKS;
+      try {
+        const res = await fetch(BOOKS_URL, { cache: "force-cache" });
+        if (!res.ok) throw new Error("books_catalog fetch failed " + res.status);
+        const json = await res.json();
+        booksCache = Array.isArray(json) ? json : (json.items || []);
+        console.info("GKM V221: combined books loaded", booksCache.length);
+      } catch (err2) {
+        console.warn("GKM V221: fallback books loaded", err, err2);
+        booksCache = FALLBACK_BOOKS;
+      }
     }
     booksCache = booksCache.map((item, index) => ({
       ...item,
@@ -9382,7 +9401,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (gamePanel) gamePanel.style.display = "none";
     updateBookFilters(all, rows);
     const count = document.getElementById("countText");
-    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V216`;
+    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V221`;
     const grid = document.getElementById("grid");
     if (grid) {
       grid.classList.remove("gkm-v191-search-best", "gkm-v191-spotlight", "gkm-v191-highlight");
@@ -9755,3 +9774,21 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   document.addEventListener("click", function(){setTimeout(run,120);});
 })();
  /* GKM V216 MAX BOOK BASE + FAST LOAD END */
+
+/* GKM V221 SPLIT BOOK DATABASE 1000+ START */
+(function(){
+  function inject(){
+    if (document.getElementById("gkm-v221-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v221-style";
+    style.textContent = `
+      .gkm-books-panel-title::after{content:" · V221 split DB 1000+"!important;font-size:12px;font-weight:850;opacity:.72;margin-left:8px}
+      .gkm-book-card{contain:layout paint style;content-visibility:auto;contain-intrinsic-size:260px 430px}
+      .gkm-book-card .poster-wrap img{decoding:async}
+    `;
+    document.head.appendChild(style);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", inject);
+  else inject();
+})();
+/* GKM V221 SPLIT BOOK DATABASE 1000+ END */
