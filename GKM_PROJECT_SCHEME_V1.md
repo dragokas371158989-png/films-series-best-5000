@@ -1,3 +1,4 @@
+[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29506340/GKM_PROJECT_SCHEME_V1.md)
 [Uploading GKM_PROJECT_SCHEME_V1.md…]()
 [GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29503592/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
@@ -519,3 +520,9 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 - жёстко удаляет шаблонные описания про каталог
 - подставляет сюжетные синопсисы в detailOverview после открытия карточки
 - исправляет случай, когда старые V228/V230 наблюдатели перебивали нормальное описание
+
+## GKM V233 MODAL STYLE + REAL DESCRIPTION RESTORE
+- восстановлены стили модального окна: сетка, постер, факты, кнопки, похожие карточки
+- исправлено описание: оно снова подменяется нормальным синопсисом, а не коротким обрезком
+- похожие карточки стали цветными, без серого фильтра
+- постер fallback работает для пустых карточек
