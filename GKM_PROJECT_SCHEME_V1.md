@@ -1,4 +1,4 @@
-[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29498947/GKM_PROJECT_SCHEME_V1.md)
+[GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29499262/GKM_PROJECT_SCHEME_V1.md)
 # GKM PROJECT SCHEME V1
 # «Голубь Каталог Мира» — карта сайта и логика проекта
 
@@ -449,3 +449,10 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 - добавлены новые манга, книги, комиксы и первоисточники
 - сохранены реальные cover-ссылки и fallback-обложки
 - связи с фильмами, сериалами, аниме и играми расширены
+
+## GKM V216 MAX BOOK BASE + FAST LOAD
+- раздел Книги/Манга расширен до 119 карточек
+- JSON облегчен: тяжёлые встроенные fallback-обложки убраны
+- fallback генерируется на лету, если у карточки нет настоящей обложки
+- первая страница книг уменьшена до 18 карточек для быстрой загрузки
+- видимые постеры получают приоритет, остальные грузятся лениво
