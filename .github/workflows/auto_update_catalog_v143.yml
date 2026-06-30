@@ -1,6 +1,4 @@
-# Disabled by GKM V235 rollback
-# Old V144 auto update can overwrite current site state.
-name: DISABLED - auto_update_catalog_v143
+name: DISABLED Auto update catalog V144 Kinopoisk only
 
 on:
   workflow_dispatch:
@@ -9,4 +7,4 @@ jobs:
   disabled:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Disabled old V144 auto update by GKM V235 rollback."
+      - run: echo "Disabled in V248 stable restore to prevent old auto catalog overwrites."
