@@ -519,3 +519,9 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 - жёстко удаляет шаблонные описания про каталог
 - подставляет сюжетные синопсисы в detailOverview после открытия карточки
 - исправляет случай, когда старые V228/V230 наблюдатели перебивали нормальное описание
+
+
+## GKM V249 VALID SEARCH_LITE FIX
+- создан валидный data/fast/search_lite.json из рабочей базы
+- cache bust быстрых индексов поиска повышен до v249
+- цель: убрать ошибку Unterminated string in JSON at position 46998755
