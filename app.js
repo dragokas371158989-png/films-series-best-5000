@@ -1,5 +1,44 @@
 const GKM_APP_CLEAN_VERSION = "v144-kinopoisk-only-auto-catalog-2026-06-24";
 
+
+/* GKM V246 JSON PATH FIX START */
+(function(){
+  if (window.GKM_V246_JSON_PATH_FIX) return;
+  window.GKM_V246_JSON_PATH_FIX = "1";
+
+  const originalFetchV246 = window.fetch.bind(window);
+
+  function fixJsonPath(input) {
+    try {
+      const raw = String(input && (input.url || input) || "");
+
+      // GitHub Pages проект живёт в /films-series-best-5000/,
+      // поэтому абсолютный путь /data/file.json уходит в корень домена и даёт 404.
+      if (/^\/data\/.+\.json(?:\?|$)/i.test(raw)) {
+        return "." + raw;
+      }
+
+      if (/^\/films-series-best-5000\/data\/.+\.json(?:\?|$)/i.test(raw)) {
+        return "." + raw.replace(/^\/films-series-best-5000/i, "");
+      }
+
+      return input;
+    } catch (e) {
+      return input;
+    }
+  }
+
+  window.fetch = function(input, init) {
+    const fixed = fixJsonPath(input);
+    if (fixed !== input) {
+      console.info("GKM V246: JSON path fixed:", input, "→", fixed);
+    }
+    return originalFetchV246(fixed, init);
+  };
+})();
+/* GKM V246 JSON PATH FIX END */
+
+
 /* GKM V245 JSON LOAD SAFE FIX START */
 (function(){
   if (window.GKM_V245_JSON_SAFE_INSTALLED) return;
@@ -4213,7 +4252,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   window.GKM_V202_GAME_HUB_VERSION = "v211-game-collections-fast-posters-2026-06-29";
 
-  const GAMES_URL = "./data/games_catalog.json?v=245";
+  const GAMES_URL = "./data/games_catalog.json?v=246";
   const PAGE = 24;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -9236,7 +9275,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=245";
+  const BOOKS_URL = "./data/books_catalog.json?v=246";
   const BOOKS_SPLIT_URLS = ["./data/books/manga.json?v=222","./data/books/ranobe.json?v=222","./data/books/books.json?v=222","./data/books/comics.json?v=222"];
   const PAGE = 24;
   const BOOK_PAGE = 18;
@@ -10123,7 +10162,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=224",
     "./data/games/franchises.json?v=224"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=245";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=246";
   const GAME_PAGE_SIZE = 18;
   let gameDB = null;
   let gamePage = 1;
@@ -10439,7 +10478,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     "./data/games/cult_games.json?v=226",
     "./data/games/franchises.json?v=226"
   ];
-  const GAME_COMBINED_URL = "./data/games_catalog.json?v=245";
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=246";
   const PAGE_SIZE = 18;
   let db = null;
   let page = 1;
@@ -11516,3 +11555,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
 
 /* GKM V245 JSON LOAD SAFE FIX - skips broken JSON chunks */
+
+
+/* GKM V246 JSON PATH FIX - absolute /data json paths redirected to ./data */
