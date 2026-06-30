@@ -9147,7 +9147,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=213";
+  const BOOKS_URL = "./data/books_catalog.json?v=214";
   const PAGE = 24;
   let booksCache = null;
   let booksPage = 1;
@@ -9229,7 +9229,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const json = await res.json();
       booksCache = Array.isArray(json) ? json : (json.items || []);
     } catch (err) {
-      console.warn("GKM V213: fallback books loaded", err);
+      console.warn("GKM V214: fallback books loaded", err);
       booksCache = FALLBACK_BOOKS;
     }
     booksCache = booksCache.map((item, index) => ({
@@ -9350,7 +9350,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           img.dataset.gkmV212PosterGuard = "1";
           img.loading = "lazy";
           img.decoding = "async";
-          img.onerror = function () { this.onerror = null; this.src = bookFallbackPoster(itemTitle(item), item.type); };
+          img.onerror = function () { this.onerror = null; this.src = item.fallbackPoster || bookFallbackPoster(itemTitle(item), item.type); };
         }
         if (!poster.querySelector(".gkm-book-relation-badge")) {
           const b = document.createElement("div");
@@ -9381,7 +9381,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (gamePanel) gamePanel.style.display = "none";
     updateBookFilters(all, rows);
     const count = document.getElementById("countText");
-    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V213`;
+    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V214`;
     const grid = document.getElementById("grid");
     if (grid) {
       grid.classList.remove("gkm-v191-search-best", "gkm-v191-spotlight", "gkm-v191-highlight");
@@ -9633,3 +9633,62 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   document.addEventListener('click', function(e){ if (e.target.closest('.tab,[data-gkm-book-kind],[data-gkm-book-collection],[data-gkm-book-reset]')) setTimeout(run, 80); });
 })();
 /* GKM V213 CLEAN BUTTON SYSTEM + BOOK COVERS END */
+
+
+
+/* GKM V214 REAL BOOK MANGA COMICS COVERS START */
+(function(){
+  function injectV214Style(){
+    if (document.getElementById("gkm-v214-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v214-style";
+    style.textContent = `
+      .gkm-book-card .poster-wrap img[src^="https://covers.openlibrary.org"]{
+        object-fit:cover!important;
+        object-position:center!important;
+        filter:saturate(1.08) contrast(1.04);
+      }
+      .gkm-book-card .poster-wrap:has(img[src^="https://covers.openlibrary.org"])::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:linear-gradient(180deg,rgba(0,0,0,0) 42%,rgba(0,0,0,.22) 100%);
+        z-index:2;
+        pointer-events:none;
+      }
+      .gkm-book-card .gkm-book-relation-badge{
+        z-index:6!important;
+      }
+      .gkm-v214-cover-note{
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
+        padding:6px 9px;
+        border-radius:999px;
+        border:1px solid rgba(255,209,102,.22);
+        background:rgba(255,209,102,.07);
+        font-size:12px;
+        font-weight:800;
+        color:#fff3cf;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function markRealCovers(){
+    document.querySelectorAll(".gkm-book-card").forEach(card => {
+      const img = card.querySelector(".poster-wrap img");
+      if (!img) return;
+      if ((img.currentSrc || img.src || "").includes("covers.openlibrary.org")) {
+        card.classList.add("gkm-book-real-cover");
+      }
+    });
+  }
+
+  function run(){ injectV214Style(); markRealCovers(); }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function(){ run(); setTimeout(run, 500); setTimeout(run, 1500); });
+  } else { run(); setTimeout(run, 500); setTimeout(run, 1500); }
+  document.addEventListener("click", function(){ setTimeout(run, 120); });
+})();
+ /* GKM V214 REAL BOOK MANGA COMICS COVERS END */
