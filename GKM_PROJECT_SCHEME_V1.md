@@ -1,3 +1,4 @@
+[Uploading GKM_PROJECT_SCHEME_V1_V260_UPDATED.txt…]()
 [Uploading GKM_PROJECT_SCHEME_V1.md…]()
 [Uploading GKM_PROJECT_SCHEME_V1.md…]()
 [GKM_PROJECT_SCHEME_V1.md](https://github.com/user-attachments/files/29503592/GKM_PROJECT_SCHEME_V1.md)
@@ -530,23 +531,77 @@ GKM V212 BOOKS MANGA COMICS FOUNDATION
 ## GKM V250 NORMAL HOME GRID RESTORE
 - отключена сломанная главная витрина Популярное/Топ/Новинки
 - главная снова открывает обычную сетку карточек через fast page all/page_0001.json
+
+
 ---
 
 ## GKM V260 ANIME TOP / STUDIOS FAST FIX
 
 Дата: 2026-07-01  
-Рабочая зона: `app.js`, `data/fast/*`
+Рабочая зона: `app.js`, `index.html`, `data/fast/*`
 
-### Что было сломано
+### Что исправлено
 
-Кнопки:
+- `index.html` поднят до `app.js?v=260`, чтобы GitHub Pages не держал старый кэш.
+- `fetchJson()` поднят до cache bust `?v=260`.
+- `search_lite`, `search_index` и `search_shards` в Web Worker подняты до `v=260`.
+- `Топ аниме 100` больше не берётся из ручного `anime_top_manual.json` как основной источник.
+- `Топ аниме 100` строится из общей быстрой базы и сортируется строго по голосам сверху вниз.
+- Если в базе нет тайтлов на 4 000 000 голосов, первым идёт максимум базы, дальше ниже по голосам.
+- Убран старый перехват `renderAnimeTopStatic()` из `runSearch()`.
+- `anime_top_manual.json` всё равно обновлён как запасной файл в правильном формате `{ "items": [] }`.
+- `anime_studios_top.json` и `anime_studios_detail.json` сгенерированы заново не на 2 тестовые студии, а по общей базе.
 
-- `Топ аниме 100`
-- `Топ студий`
-
-искали файлы:
+### Правильная логика `Топ аниме 100`
 
 ```text
-data/fast/anime_top_manual.json
-data/fast/anime_studios_top.json
-data/fast/anime_studios_detail.json
+Топ аниме 100
+ ├─ источник: data/fast/search_lite.json / search_index.json
+ ├─ тип: только Аниме
+ ├─ мусорные OVA/recap/trailer/special отсекаются
+ ├─ сортировка №1: votes по убыванию
+ ├─ сортировка №2: rating по убыванию
+ ├─ сортировка №3: наличие постера
+ └─ сортировка №4: год
+```
+
+### Важное правило
+
+```text
+Не возвращать старый перехват:
+
+if (c.tab === "anime_top" && !norm(c.q)) {
+  renderAnimeTopStatic(page);
+  return;
+}
+```
+
+Иначе кнопка снова будет брать ручной JSON вместо общей базы.
+
+### Формат быстрых JSON
+
+`data/fast/anime_top_manual.json`:
+
+```json
+{
+  "items": []
+}
+```
+
+`data/fast/anime_studios_top.json`:
+
+```json
+{
+  "studios": []
+}
+```
+
+`data/fast/anime_studios_detail.json`:
+
+```json
+{
+  "studios": {}
+}
+```
+
+Конец V260.
