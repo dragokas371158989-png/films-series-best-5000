@@ -1,1 +1,18 @@
-
+{
+  "studios": [
+    {
+      "studio": "MAPPA",
+      "count": 2,
+      "avgRating": 8.6,
+      "votes": 5000000,
+      "topTitles": ["Атака титанов", "Магическая битва"]
+    },
+    {
+      "studio": "Pierrot",
+      "count": 2,
+      "avgRating": 8.2,
+      "votes": 4000000,
+      "topTitles": ["Наруто", "Блич"]
+    }
+  ]
+}
