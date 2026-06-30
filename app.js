@@ -10337,3 +10337,238 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setInterval(run, 1200);
 })();
  /* GKM V225 MODAL FULL DESCRIPTION FIX END */
+
+
+
+/* GKM V226 FORCE GAME DATABASE 360 FIX START */
+(function(){
+  const GAME_SPLIT_URLS = [
+    "./data/games/game_to_movies.json?v=226",
+    "./data/games/game_to_series.json?v=226",
+    "./data/games/game_to_anime.json?v=226",
+    "./data/games/media_to_games.json?v=226",
+    "./data/games/cult_games.json?v=226",
+    "./data/games/franchises.json?v=226"
+  ];
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=226";
+  const PAGE_SIZE = 18;
+  let db = null;
+  let page = 1;
+
+  function txt(v){return String(v == null ? "" : v).trim();}
+  function esc(v){return txt(v).replace(/[&<>"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[s]));}
+  function low(v){return txt(v).toLowerCase().replace(/ё/g,"е");}
+  function key(v){return low(v).replace(/[^a-z0-9а-я]+/g," ").replace(/\s+/g," ").trim();}
+  function arr(v){return Array.isArray(v)?v.filter(Boolean).map(txt):(txt(v)?[txt(v)]:[]);}
+  function titleOf(i){return txt(i && (i.title || i.name || i.ru || i.en));}
+
+  function fallback(title){
+    const t = esc(title || "Игра");
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#080b28"/>
+          <stop offset=".55" stop-color="#25105f"/>
+          <stop offset="1" stop-color="#00d4ff"/>
+        </linearGradient>
+        <radialGradient id="r" cx="50%" cy="20%" r="75%">
+          <stop offset="0" stop-color="#fff" stop-opacity=".18"/>
+          <stop offset="1" stop-color="#000" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="600" height="900" fill="url(#g)"/>
+      <rect width="600" height="900" fill="url(#r)"/>
+      <circle cx="480" cy="130" r="155" fill="#00d4ff" opacity=".16"/>
+      <circle cx="90" cy="780" r="180" fill="#8b5cf6" opacity=".20"/>
+      <rect x="34" y="34" width="532" height="832" rx="30" fill="none" stroke="rgba(255,255,255,.18)"/>
+      <text x="50%" y="165" text-anchor="middle" font-family="Arial" font-size="86" font-weight="900" fill="#fff">🎮</text>
+      <text x="50%" y="238" text-anchor="middle" font-family="Arial" font-size="21" font-weight="800" fill="#ffffff99">ГОЛУБЬ · GAME HUB</text>
+      <foreignObject x="55" y="330" width="490" height="220">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Arial,sans-serif;color:white;font-size:42px;font-weight:900;text-align:center;line-height:1.1;text-shadow:0 2px 16px rgba(0,0,0,.45);">${t}</div>
+      </foreignObject>
+      <rect x="82" y="690" width="436" height="76" rx="24" fill="rgba(10,10,18,.58)" stroke="rgba(255,255,255,.26)"/>
+      <text x="50%" y="738" text-anchor="middle" font-family="Arial" font-size="23" font-weight="850" fill="#fff">Игровая вселенная</text>
+    </svg>`;
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  async function loadGames(){
+    if (db) return db;
+    try {
+      const settled = await Promise.allSettled(GAME_SPLIT_URLS.map(url =>
+        fetch(url, {cache:"force-cache"}).then(r => {
+          if (!r.ok) throw new Error(url + " " + r.status);
+          return r.json();
+        })
+      ));
+      const merged = [];
+      settled.forEach(r => {
+        if (r.status === "fulfilled") merged.push(...(Array.isArray(r.value) ? r.value : (r.value.items || [])));
+      });
+      if (!merged.length) throw new Error("empty split");
+      db = merged;
+      console.info("GKM V226: split games loaded", db.length);
+    } catch(e) {
+      const res = await fetch(GAME_COMBINED_URL, {cache:"force-cache"});
+      if (!res.ok) throw e;
+      const json = await res.json();
+      db = Array.isArray(json) ? json : (json.items || []);
+      console.info("GKM V226: combined games loaded", db.length);
+    }
+    db = db.map((x,i)=>({...x, section:"games", type:x.type || "Игра", id:x.id || ("game-v226-"+i)}));
+    return db;
+  }
+
+  function isGamesActive(){
+    const active = document.querySelector('.tab.active[data-tab="games"], .tab[data-tab="games"].active, [data-tab="games"].active');
+    const count = document.getElementById("countText");
+    return !!active || (count && /игров/i.test(count.textContent || ""));
+  }
+
+  function hay(x){
+    return key([
+      titleOf(x), x.relationLabel, x.relation, x.universeName, x.description,
+      arr(x.genres).join(" "), arr(x.platforms).join(" "), arr(x.relatedMedia).join(" "), arr(x.vibe).join(" ")
+    ].join(" "));
+  }
+
+  function filtered(all){
+    const q = key(document.getElementById("searchInput")?.value || "");
+    let rows = all.slice();
+    if (q) rows = rows.filter(x => hay(x).includes(q));
+    const rating = Number(document.getElementById("ratingFilter")?.value || 0);
+    if (rating) rows = rows.filter(x => Number(x.rating || 0) >= rating);
+    const genre = key(document.getElementById("genreFilter")?.value || "");
+    if (genre) rows = rows.filter(x => arr(x.genres).some(g => key(g).includes(genre)));
+    rows.sort((a,b)=>(Number(b.rating||0)*1000000+Math.min(Number(b.votes||0),900000))-(Number(a.rating||0)*1000000+Math.min(Number(a.votes||0),900000)));
+    return rows;
+  }
+
+  function card(x){
+    const title = esc(titleOf(x));
+    const fb = fallback(titleOf(x));
+    const poster = txt(x.poster) || fb;
+    const genre = arr(x.genres).slice(0,2).join(" · ");
+    const rel = txt(x.relationLabel) || "Игровая вселенная";
+    return `<article class="card gkm-v226-game-card" data-id="${esc(x.id)}">
+      <div class="poster-wrap">
+        <img src="${poster}" alt="${title}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${fb}'">
+        <span class="badge">Игра</span>
+        <button class="fav" type="button">♡</button>
+        <div class="gkm-v226-game-relation">${esc(rel)}</div>
+      </div>
+      <div class="card-body">
+        <h3>${title}</h3>
+        <div class="meta">${esc(x.year || "")} · Игра</div>
+        <div class="genres">${esc(genre)}</div>
+        <div class="rating">★ ${esc(x.rating || "—")} · ${esc(x.votes ? Math.round(Number(x.votes)/1000)+" тыс" : "")}</div>
+      </div>
+    </article>`;
+  }
+
+  async function render(forcePage){
+    const all = await loadGames();
+    page = Math.max(1, Number(forcePage || page || 1));
+    const rows = filtered(all);
+    const pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+    page = Math.min(page, pages);
+    const slice = rows.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+    const count = document.getElementById("countText");
+    if (count) count.innerHTML = `🎮 Игровые вселенные · ${rows.length} из ${all.length} · V226 <span class="gkm-v226-pill">forced DB</span>`;
+
+    const grid = document.getElementById("grid");
+    if (grid) {
+      grid.innerHTML = slice.length ? slice.map(card).join("") : `<div class="gkm-book-empty">Игры не найдены. Сбрось поиск или фильтры.</div>`;
+      grid.classList.remove("gkm-v191-search-best","gkm-v191-spotlight","gkm-v191-highlight");
+      grid.style.outline = "none";
+      grid.style.boxShadow = "none";
+    }
+
+    const pt = document.getElementById("pageText");
+    const prev = document.getElementById("prevBtn");
+    const next = document.getElementById("nextBtn");
+    if (pt) pt.textContent = page + " / " + pages;
+    if (prev) prev.disabled = page <= 1;
+    if (next) next.disabled = page >= pages;
+
+    window.currentMode = "games";
+    window.currentTab = "games";
+  }
+
+  function markGamesTab(){
+    document.querySelectorAll(".tab, [data-tab]").forEach(b => {
+      if (b.dataset && b.dataset.tab === "games") b.classList.add("active");
+      else if (b.classList && b.dataset && ["all","movies","series","cartoons","anime","books"].includes(b.dataset.tab)) b.classList.remove("active");
+    });
+  }
+
+  function bind(){
+    document.addEventListener("click", function(e){
+      const tab = e.target.closest && e.target.closest('[data-tab="games"]');
+      if (tab) {
+        e.preventDefault();
+        e.stopPropagation();
+        markGamesTab();
+        page = 1;
+        setTimeout(()=>render(1), 20);
+        setTimeout(()=>render(1), 220);
+      }
+    }, true);
+
+    const search = document.getElementById("searchInput");
+    if (search && !search.dataset.gkmV226) {
+      search.dataset.gkmV226 = "1";
+      search.addEventListener("input", function(){
+        if (isGamesActive()) { page = 1; setTimeout(()=>render(1), 80); }
+      });
+    }
+
+    const prev = document.getElementById("prevBtn");
+    const next = document.getElementById("nextBtn");
+    if (prev && !prev.dataset.gkmV226) {
+      prev.dataset.gkmV226 = "1";
+      prev.addEventListener("click", function(e){
+        if (isGamesActive()) { e.preventDefault(); e.stopPropagation(); render(page - 1); }
+      }, true);
+    }
+    if (next && !next.dataset.gkmV226) {
+      next.dataset.gkmV226 = "1";
+      next.addEventListener("click", function(e){
+        if (isGamesActive()) { e.preventDefault(); e.stopPropagation(); render(page + 1); }
+      }, true);
+    }
+  }
+
+  function style(){
+    if (document.getElementById("gkm-v226-style")) return;
+    const s = document.createElement("style");
+    s.id = "gkm-v226-style";
+    s.textContent = `
+      .gkm-v226-game-card{contain:layout paint style;content-visibility:auto;contain-intrinsic-size:260px 430px}
+      .gkm-v226-game-card .poster-wrap{background:linear-gradient(135deg,#090d2b,#241066,#00d4ff)!important}
+      .gkm-v226-game-card .poster-wrap img{width:100%;height:100%;object-fit:cover!important}
+      .gkm-v226-game-relation{position:absolute;left:10px;right:10px;bottom:10px;z-index:5;padding:8px 10px;border-radius:14px;background:rgba(4,12,22,.78);border:1px solid rgba(0,212,255,.35);font-size:11px;font-weight:900;color:#e8fbff;text-align:center;backdrop-filter:blur(8px)}
+      .gkm-v226-pill{display:inline-flex;margin-left:8px;padding:4px 8px;border-radius:999px;border:1px solid rgba(0,212,255,.35);background:rgba(0,212,255,.12);font-size:12px;font-weight:900;color:#dffbff}
+    `;
+    document.head.appendChild(s);
+  }
+
+  function boot(){
+    style();
+    bind();
+    setTimeout(function(){
+      if (isGamesActive()) render(1);
+    }, 350);
+    setTimeout(function(){
+      const count = document.getElementById("countText");
+      if (count && /V211|59 запис/i.test(count.textContent || "")) render(1);
+    }, 900);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+
+  window.GKM_FORCE_GAMES_V226 = render;
+})();
+/* GKM V226 FORCE GAME DATABASE 360 FIX END */
