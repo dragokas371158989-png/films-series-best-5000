@@ -528,23 +528,111 @@ function getRuTitle(item) {
   try { return displayTitle(item); } catch (e) { return titleOf(item); }
 }
 
+
+const GKM_V252_DESCRIPTIONS = {
+  "побег из шоушенка": "Банкир Энди Дюфрейн получает пожизненный срок за убийство жены и её любовника, хотя сам утверждает, что невиновен. В тюрьме Шоушенк он сталкивается с жестокими порядками, давлением охраны и жизнью, где у человека почти не остаётся надежды. Постепенно Энди находит друга в заключённом Реде, помогает администрации с финансами и годами сохраняет спокойствие, ум и внутреннюю свободу. Это сильная тюремная драма о дружбе, несправедливости, выдержке и надежде.",
+  "the shawshank redemption": "Банкир Энди Дюфрейн получает пожизненный срок за убийство жены и её любовника, хотя сам утверждает, что невиновен. В тюрьме Шоушенк он сталкивается с жестокими порядками, давлением охраны и жизнью, где у человека почти не остаётся надежды. Постепенно Энди находит друга в заключённом Реде, помогает администрации с финансами и годами сохраняет спокойствие, ум и внутреннюю свободу. Это сильная тюремная драма о дружбе, несправедливости, выдержке и надежде.",
+  "стальной алхимик братство": "Братья Эдвард и Альфонс Элрики нарушают главный запрет алхимии, пытаясь вернуть умершую мать, и платят страшную цену. Чтобы вернуть утраченное, они отправляются на поиски философского камня и постепенно раскрывают заговор, связанный с армией, войной, искусственными людьми и судьбой целой страны. Это приключенческое аниме о цене силы, братстве, вине, взрослении и выборе между личной болью и ответственностью перед другими.",
+  "fullmetal alchemist brotherhood": "Братья Эдвард и Альфонс Элрики нарушают главный запрет алхимии, пытаясь вернуть умершую мать, и платят страшную цену. Чтобы вернуть утраченное, они отправляются на поиски философского камня и постепенно раскрывают заговор, связанный с армией, войной, искусственными людьми и судьбой целой страны. Это приключенческое аниме о цене силы, братстве, вине, взрослении и выборе между личной болью и ответственностью перед другими.",
+  "атака титанов": "Люди живут за огромными стенами, защищаясь от титанов — чудовищ, пожирающих людей. После разрушения стены Эрен Йегер теряет дом и клянётся уничтожить титанов, вступая в разведкорпус вместе с Микасой и Армином. Чем дальше герои узнают правду о мире, тем сильнее история превращается из борьбы за выживание в тяжёлую драму о войне, свободе, мести, пропаганде и цене ненависти.",
+  "attack on titan": "Люди живут за огромными стенами, защищаясь от титанов — чудовищ, пожирающих людей. После разрушения стены Эрен Йегер теряет дом и клянётся уничтожить титанов, вступая в разведкорпус вместе с Микасой и Армином. Чем дальше герои узнают правду о мире, тем сильнее история превращается из борьбы за выживание в тяжёлую драму о войне, свободе, мести, пропаганде и цене ненависти.",
+  "твоё имя": "Старшеклассники Мицуха и Таки неожиданно начинают меняться телами, хотя живут в разных местах и почти ничего не знают друг о друге. Сначала это выглядит как странная игра, но постепенно между ними возникает связь, которая выходит за пределы обычного времени и памяти. Это романтическое аниме о судьбе, расстоянии, взрослении, утрате и желании найти человека, которого сердце помнит даже тогда, когда разум уже забыл.",
+  "охотник х охотник": "Гон Фрикс мечтает стать охотником, чтобы найти отца и понять, почему тот выбрал опасную жизнь вместо семьи. На экзамене охотников он знакомится с Киллуа, Курапикой и Леорио, а затем попадает в мир, где сила, дружба и мораль постоянно проверяются жестокими испытаниями. Это приключенческое аниме с сильной системой способностей, турнирами, драмой и неожиданно тёмными арками.",
+  "код гиас": "Изгнанный принц Лелуш получает силу Гиас, позволяющую приказывать людям, и начинает войну против империи Британии под маской загадочного лидера Зеро. Его цель — создать мир, где его сестра сможет жить спокойно, но путь к этому быстро превращается в цепь манипуляций, жертв и политических игр. Это драматическое аниме о власти, революции, мести, стратегии и цене идеалов.",
+  "врата штейна": "Группа друзей случайно открывает способ отправлять сообщения в прошлое и начинает менять события, не понимая, какие последствия это вызовет. Главный герой Окабэ всё глубже погружается в петли времени, пытаясь спасти близких и сохранить рассудок. Это научно-фантастическое аниме о времени, выборе, дружбе, ошибках и цене попыток исправить прошлое.",
+  "форрест гамп": "Форрест Гамп — простой и добрый человек, который проходит через важнейшие события американской истории, сам не всегда понимая, насколько сильно влияет на людей вокруг. Его жизнь полна случайностей, любви, дружбы, потерь и веры в то, что надо просто идти вперёд. Это трогательная драма с юмором о судьбе, доброте, памяти и умении оставаться собой.",
+  "криминальное чтиво": "Несколько криминальных историй переплетаются вокруг гангстеров, боксёра, загадочного чемодана и людей, которые постоянно оказываются на грани абсурда и смерти. Фильм держится на диалогах, чёрном юморе, нелинейном сюжете и резких поворотах. Это культовая криминальная картина о случайности, насилии, выборе и странной логике преступного мира.",
+  "бойцовский клуб": "Офисный работник страдает бессонницей и ощущает пустоту обычной жизни, пока не встречает харизматичного Тайлера Дёрдена. Вместе они создают подпольный бойцовский клуб, который быстро превращается во что-то гораздо более опасное. Это мрачная драма о потреблении, мужской злости, раздвоенности, саморазрушении и бунте против бессмысленной рутины.",
+  "интерстеллар": "Земля медленно становится непригодной для жизни, и бывший пилот Купер отправляется через космический тоннель на поиски нового дома для человечества. Его путь связан с чёрными дырами, временем, гравитацией и разлукой с дочерью. Это масштабная научная фантастика о любви, долге, семье, выживании и цене решений, которые могут спасти будущее.",
+  "темный рыцарь": "Бэтмен сталкивается с Джокером — преступником, который не ищет денег или власти, а хочет доказать, что любой порядок можно разрушить хаосом. Готэм оказывается перед моральным испытанием, где герои и обычные люди вынуждены выбирать между страхом, справедливостью и жертвой. Это мрачный супергеройский триллер о хаосе, принципах и цене символа.",
+  "крестный отец": "Семья Корлеоне управляет криминальной империей, где власть держится на уважении, страхе и семейных обязательствах. Когда на дона Вито совершают покушение, его младший сын Майкл постепенно втягивается в дела семьи и меняется сильнее, чем сам ожидал. Это классическая криминальная сага о власти, семье, предательстве, традициях и превращении человека в наследника системы."
+};
+
+const GKM_V252_YEAR_FIX = {
+  "побег из шоушенка": "1994", "the shawshank redemption": "1994",
+  "бойцовский клуб": "1999", "fight club": "1999",
+  "криминальное чтиво": "1994", "pulp fiction": "1994",
+  "форрест гамп": "1994", "forrest gump": "1994",
+  "крестный отец": "1972", "the godfather": "1972",
+  "интерстеллар": "2014", "interstellar": "2014",
+  "темный рыцарь": "2008", "the dark knight": "2008"
+};
+
+function gkmV252TitleKey(item) {
+  return norm([displayTitle(item), titleOf(item), item && item.ru, item && item.en, item && item.title, item && item.name].filter(Boolean).join(" "));
+}
+
+function makeSmartOverview(item) {
+  const title = displayTitle(item) || titleOf(item) || "Проект";
+  const type = getType(item) || "Проект";
+  const year = getYear(item) || "";
+  const genres = getGenres(item).filter(Boolean).slice(0, 4);
+  const rating = getRating(item);
+  const votes = getVotes(item);
+  const genreText = genres.length ? genres.join(", ") : "смешанных жанрах";
+  const voteText = votes ? ` с оценкой около ${Number(rating || 0).toFixed(1)} и аудиторией ${formatVotes(votes)}` : "";
+  return `${title} — ${String(type).toLowerCase()}${year ? " " + year + " года" : ""} в жанрах: ${genreText}${voteText}. Описание в базе пока неполное, но карточка помогает понять направление: жанры, рейтинг, год, постер и похожие проекты. Подойдёт, если нужно быстро выбрать, стоит ли открывать этот проект дальше.`;
+}
+
+function gkmV252DedupeKey(item) {
+  let t = norm(displayTitle(item) || titleOf(item) || item && item.title || "");
+  t = t.replace(/(сезон|season|серия|episode|ova|movie|фильм|часть|part)/g, " ")
+       .replace(/(19\d{2}|20\d{2})/g, " ")
+       .replace(/([ivxlcdm]+|\d+)/g, " ")
+       .replace(/\s+/g, " ").trim();
+  return (getType(item) || "") + "|" + t;
+}
+
+function gkmV252Quality(item) {
+  const poster = hasPoster(item) ? 100000000 : 0;
+  const votes = Math.min(Number(getVotes(item) || 0), 10000000);
+  const rating = Number(getRating(item) || 0) * 100000;
+  const year = Number(getYear(item) || 0) || 0;
+  const desc = String(item && (item.overview_ru || item.description_ru || item.overview || item.description) || "").length;
+  return poster + votes + rating + year + desc;
+}
+
+function dedupeItemsStrict(items) {
+  const map = new Map();
+  for (const item of (Array.isArray(items) ? items : [])) {
+    if (!item) continue;
+    const k = gkmV252DedupeKey(item);
+    if (!k || k.endsWith("|")) continue;
+    const old = map.get(k);
+    if (!old || gkmV252Quality(item) > gkmV252Quality(old)) map.set(k, item);
+  }
+  return Array.from(map.values());
+}
+
 function displayOverview(item) {
+  const title = displayTitle(item) || titleOf(item) || "";
+  const k = norm([title, item && item.ru, item && item.en, item && item.title, item && item.name].filter(Boolean).join(" "));
+  const exactKey = GKM_V252_DESCRIPTIONS[k] ? k : Object.keys(GKM_V252_DESCRIPTIONS).find(x => k.includes(x) || x.includes(k));
+  if (exactKey) return GKM_V252_DESCRIPTIONS[exactKey];
+
   if (getType(item) === "Аниме") {
     const exactTitle = specificAnimeTitle(item);
     const candidates = [item && item.__manualTopTitle, item && item.ru, item && item.title_ru, exactTitle, displayTitle(item), animeKey(item)].filter(Boolean).map(norm);
-    for (const k of candidates) {
-      if (ANIME_RU_OVERVIEW.has(k)) return ANIME_RU_OVERVIEW.get(k);
+    for (const c of candidates) {
+      if (GKM_V252_DESCRIPTIONS[c]) return GKM_V252_DESCRIPTIONS[c];
+      if (ANIME_RU_OVERVIEW.has(c)) return ANIME_RU_OVERVIEW.get(c);
     }
   }
-  const text = item && (item.overview_ru || item.description_ru || item.overview || item.description);
-  return text || "Описание пока не добавлено.";
+
+  const text = item && (item.overview_ru || item.description_ru || item.overview || item.description || item.synopsis);
+  if (text && String(text).trim().length > 35 && !/описание пока не добавлено|описание помогает|каталог/i.test(String(text))) return text;
+  return makeSmartOverview(item);
 }
 
 function getYear(item) {
+  const key = gkmV252TitleKey(item);
+  const fixedKey = GKM_V252_YEAR_FIX[key] ? key : Object.keys(GKM_V252_YEAR_FIX).find(x => key.includes(x) || x.includes(key));
+  if (fixedKey) return GKM_V252_YEAR_FIX[fixedKey];
   const raw = String(item && (item.year || item.release_date || item.first_air_date) || "");
   const found = raw.match(/(19\d{2}|20\d{2})/);
   return found ? found[1] : raw;
 }
+
 
 function getType(item) {
   return String(item && (item.type || item.category) || "Фильм");
@@ -763,14 +851,17 @@ function updateCleanTrashButton() {
 }
 
 function renderList(items, label) {
-  const safeItems = (Array.isArray(items) ? items : []).slice(0, PAGE_SIZE);
+  const inputItems = Array.isArray(items) ? items : [];
+  const deduped = dedupeItemsStrict(inputItems);
+  const safeItems = deduped.slice(0, PAGE_SIZE);
   currentItems = safeItems;
   const grid = $("grid");
   const count = $("countText");
   const page = $("pageText");
   const prev = $("prevBtn");
   const next = $("nextBtn");
-  if (count) count.textContent = label || "";
+  const removed = inputItems.length - deduped.length;
+  if (count) count.textContent = (label || "") + (removed > 0 ? ` · дубли убраны: ${removed}` : "");
   if (grid) { grid.innerHTML = safeItems.map(cardHtml).join(""); schedulePosterRecovery(grid); }
   if (page) page.textContent = `${currentPage} / ${currentPages}`;
   if (prev) prev.disabled = currentPage <= 1;
@@ -850,7 +941,7 @@ async function loadFastPage(tab, page = 1) {
 function makeSearchWorker() {
   if (searchWorker) return searchWorker;
   const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=251`, window.location.href).href;
-  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=249`, window.location.href).href;
+  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=252`, window.location.href).href;
   const absoluteShardBase = new URL(`${SEARCH_SHARDS_BASE}/`, window.location.href).href;
   const code = `
     const SEARCH_LITE_URL = ${JSON.stringify(absoluteSearchLiteUrl)};
@@ -1137,7 +1228,7 @@ function makeSearchWorker() {
     }
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
-    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=249";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
+    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=252";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
     function buildRows(index, c, queries){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
@@ -1637,12 +1728,17 @@ function renderRelated(base) {
   const baseKey = franchiseKey(base);
   const baseGenres = getGenres(base);
 
+  const seenRelated = new Set();
   const rows = pool
     .filter(item => {
       if (!item) return false;
       if (String(item.id || "") === baseId) return false;
       if (!hasPoster(item)) return false;
-      return relatedTypeFamily(item) === baseFamily;
+      if (relatedTypeFamily(item) !== baseFamily) return false;
+      const dk = gkmV252DedupeKey(item);
+      if (seenRelated.has(dk)) return false;
+      seenRelated.add(dk);
+      return true;
     })
     .map(item => {
       const same = baseKey && franchiseKey(item) === baseKey ? 100000 : 0;
@@ -10534,7 +10630,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V232: V144 auto update disabled, cache bump v232 */
 
 
-/* GKM V249 VALID SEARCH_LITE FIX - generated valid data/fast/search_lite.json and cache v249 */
+/* GKM V249 VALID SEARCH_LITE FIX - generated valid data/fast/search_lite.json and cache v252 */
 
 
 /* GKM V251 RESTORE VISUAL STYLE + NORMAL GRID */
+
+
+/* GKM V252 DEDUPE + DESCRIPTIONS + RELATED COLOR FIX */
+(function(){
+  function runDomFix(){
+    try {
+      document.querySelectorAll('.related-card,.related-poster,.related-card img').forEach(el=>{
+        el.style.filter='none'; el.style.opacity='1'; el.style.mixBlendMode='normal';
+      });
+      const ov = document.getElementById('detailOverview');
+      if (ov && /Описание пока не добавлено/i.test(ov.textContent || '') && window.selectedItem) {
+        ov.textContent = displayOverview(window.selectedItem);
+      }
+    } catch(e){}
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', runDomFix); else runDomFix();
+  document.addEventListener('click', function(){ setTimeout(runDomFix, 80); setTimeout(runDomFix, 400); }, true);
+})();
