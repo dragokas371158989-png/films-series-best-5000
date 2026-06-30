@@ -1,4 +1,7 @@
-name: DISABLED Auto update catalog V144 Kinopoisk only
+# Disabled by GKM V232
+# Reason: old V144 Kinopoisk auto update can overwrite current catalog data and trigger old module loading.
+# Original file was: auto_update_catalog_v143.yml
+name: DISABLED - auto_update_catalog_v143
 
 on:
   workflow_dispatch:
@@ -7,4 +10,5 @@ jobs:
   disabled:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Disabled in V248 stable restore to prevent old auto catalog overwrites."
+      - name: Disabled
+        run: echo "This old V144 auto update workflow is disabled by GKM V232."

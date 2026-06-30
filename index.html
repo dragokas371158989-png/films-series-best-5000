@@ -74,6 +74,38 @@
 <!-- GKM V77 DEEP RETESTED -->
 <!-- GKM V78 SAFE SEARCH -->
 <!-- GKM V79 NO POSTER BOTTOM -->
+
+<script>
+/* GKM V232 CSS FAILSAFE */
+(function(){
+  function cssOk(){
+    try {
+      var b = document.body;
+      if (!b) return true;
+      var bg = getComputedStyle(b).backgroundColor;
+      return !(bg === "rgba(0, 0, 0, 0)" || bg === "transparent" || bg === "rgb(255, 255, 255)");
+    } catch(e){ return true; }
+  }
+  function inject(){
+    if (document.getElementById("gkm-v232-css-failsafe")) return;
+    var s = document.createElement("style");
+    s.id = "gkm-v232-css-failsafe";
+    s.textContent = `
+      html,body{background:#050816!important;color:#eef4ff!important;font-family:Inter,Arial,sans-serif!important}
+      header,.hero,.toolbar,.tabs,.subtabs,main{background:transparent!important}
+      button,.tab,select,input{border-radius:14px!important;border:1px solid rgba(0,212,255,.35)!important;background:linear-gradient(135deg,#35156e,#14b8ff)!important;color:#fff!important;font-weight:800!important;padding:10px 14px!important}
+      input,select{background:#071126!important}
+      .card{background:#081225!important;border:1px solid rgba(0,212,255,.25)!important;border-radius:18px!important;overflow:hidden!important;color:#fff!important}
+      .grid{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(180px,1fr))!important;gap:16px!important}
+      .poster-wrap img{width:100%!important;height:270px!important;object-fit:cover!important}
+      #detailsDialog{background:#080d22!important;color:#fff!important;border:1px solid #00d4ff!important;border-radius:18px!important}
+    `;
+    document.head.appendChild(s);
+  }
+  window.addEventListener("load", function(){ setTimeout(function(){ if(!cssOk()) inject(); }, 300); });
+})();
+</script>
+
 </head>
 
 <body>
@@ -217,7 +249,7 @@
     </div>
   </dialog>
 
-  <script src="app.js?v=248"></script>
+  <script src="app.js?v=232"></script>
 
 <!-- GKM AI CHAT UI V58 RESTORED -->
 <button id="gkmAiFloatBtn" class="ai-float-btn" type="button" aria-label="Открыть чат">🤖</button>
