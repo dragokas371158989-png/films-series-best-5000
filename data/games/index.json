@@ -1,0 +1,30 @@
+{
+  "version": 224,
+  "total": 360,
+  "files": [
+    {
+      "file": "game_to_movies.json",
+      "count": 158
+    },
+    {
+      "file": "game_to_series.json",
+      "count": 46
+    },
+    {
+      "file": "game_to_anime.json",
+      "count": 76
+    },
+    {
+      "file": "media_to_games.json",
+      "count": 72
+    },
+    {
+      "file": "cult_games.json",
+      "count": 8
+    },
+    {
+      "file": "franchises.json",
+      "count": 0
+    }
+  ]
+}
