@@ -4122,9 +4122,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 (function () {
   "use strict";
 
-  window.GKM_V202_GAME_HUB_VERSION = "v211-game-collections-fast-posters-2026-06-29";
+  window.GKM_V202_GAME_HUB_VERSION = "v228-hard-posters-full-descriptions-2026-06-30";
 
-  const GAMES_URL = "./data/games_catalog.json?v=227";
+  const GAMES_URL = "./data/games_catalog.json?v=228";
   const PAGE = 24;
   const RELATION_FILTERS = [
     ["all", "Все"],
@@ -8593,7 +8593,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const json = await res.json();
       gamesCache = Array.isArray(json) ? json : (json.items || []);
     } catch (err) {
-      console.warn("GKM V227: fallback games loaded", err);
+      console.warn("GKM V211: fallback games loaded", err);
       gamesCache = FALLBACK_GAMES;
     }
     gamesCache = gamesCache.map((item, index) => ({
@@ -8707,7 +8707,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     panel.className = "gkm-game-hub-panel";
     panel.innerHTML = `
       <div class="gkm-game-hub-head">
-        <div><b>🎮 Игровые вселенные V227</b><span>подборки, похожее и быстрые постеры</span></div>
+        <div><b>🎮 Игровые вселенные V211</b><span>подборки, похожее и быстрые постеры</span></div>
         <button type="button" data-gkm-game-filter-reset="1">Все игры</button>
       </div>
       <div class="gkm-game-filter-label">Тип связи</div>
@@ -8839,7 +8839,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     const relLabel = (RELATION_FILTERS.find(x => x[0] === activeRelation) || ["all", "Все"])[1];
     const collLabel = (COLLECTION_FILTERS.find(x => x[0] === activeCollection) || ["all", "Все подборки"])[1];
-    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " из " + all.length + " · V227 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>" + safeHtml(collLabel) + "</span> <span class='gkm-v202-pill'>быстрые постеры</span>";
+    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " из " + all.length + " · V211 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>" + safeHtml(collLabel) + "</span> <span class='gkm-v202-pill'>быстрые постеры</span>";
     if (grid) {
       grid.innerHTML = slice.length ? slice.map(cardHtml).join("") : `<div class="gkm-game-empty">Ничего не найдено. Сбрось фильтры или измени поиск.</div>`;
       cardBadgesEnhance(grid);
@@ -8849,7 +8849,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (pageText) pageText.textContent = gamesPage + " / " + gamesPages;
     if (prev) prev.disabled = gamesPage <= 1;
     if (next) next.disabled = gamesPage >= gamesPages;
-    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V227 · " + rows.length + " записей");
+    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V211 · " + rows.length + " записей");
   }
 
   function injectGamesTab() {
@@ -10574,18 +10574,253 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V226 FORCE GAME DATABASE 360 FIX END */
 
 
-/* GKM V227 DIRECT GAME URL FIX START */
+/* GKM V228 HARD POSTERS + FULL DESCRIPTIONS FIX START */
 (function(){
-  function run(){
-    const count = document.getElementById("countText");
-    if (count && /Игровые вселенные/.test(count.textContent||"")) {
-      count.innerHTML = count.innerHTML.replace(/V211/g,"V227").replace(/59 записей/g,"360 записей");
-    }
-    const panel = document.getElementById("gkmGameHubPanel");
-    if (panel) panel.innerHTML = panel.innerHTML.replace(/V211/g,"V227");
+  const __gkm228_oldDisplayOverview = typeof displayOverview === "function" ? displayOverview : (item => String(item && (item.overview_ru || item.description_ru || item.overview || item.description) || ""));
+  const __gkm228_oldPosterRawSrc = typeof posterRawSrc === "function" ? posterRawSrc : (item => String(item && (item.poster || item.posterUrl || item.poster_url || item.image || item.cover || item.img) || "").trim());
+  const __gkm228_oldLoadGameDB = typeof loadGameDB === "function" ? loadGameDB : null;
+
+  function gkm228TypeLabel(item){
+    const t = String(item && (item.type || item.category) || "").trim();
+    if (!t) return "Проект";
+    return t;
   }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function(){run(); setTimeout(run,500);});
-  else {run(); setTimeout(run,500);}
-  document.addEventListener("click", function(){setTimeout(run,150); setTimeout(run,700);}, true);
+
+  function gkm228Norm(v){ return String(v == null ? "" : v).trim(); }
+  function gkm228Arr(v){ return Array.isArray(v) ? v.filter(Boolean).map(x => String(x).trim()).filter(Boolean) : (typeof v === 'string' ? v.split(/[,|/]+/).map(x => x.trim()).filter(Boolean) : []); }
+  function gkm228Esc(v){ return String(v == null ? '' : v).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s])); }
+  function gkm228Title(item){ return gkm228Norm(item && (item.title || item.name || item.ru || item.en || item.original_title)); }
+  function gkm228Year(item){ return gkm228Norm(item && (item.year || item.release_date || item.first_air_date || item.date)); }
+  function gkm228Genres(item){
+    if (typeof getGenres === 'function') {
+      try { return getGenres(item); } catch(e) {}
+    }
+    return gkm228Arr(item && item.genres);
+  }
+
+  function gkm228PickPalette(item){
+    const type = gkm228TypeLabel(item).toLowerCase();
+    if (type.includes('аниме') || type.includes('манга')) return ['#24104f','#7c3aed','#ff4fd8'];
+    if (type.includes('сериал')) return ['#071a3d','#0e7490','#38bdf8'];
+    if (type.includes('мульт')) return ['#3b0b55','#8b5cf6','#22d3ee'];
+    if (type.includes('книга') || type.includes('раноб') || type.includes('комикс')) return ['#3b1c09','#8b5a2b','#f6c76e'];
+    if (type.includes('игра')) return ['#080b28','#25105f','#00d4ff'];
+    return ['#090b2f','#42116b','#ff7a18'];
+  }
+
+  function gkm228SynthPoster(item){
+    const title = gkm228Esc(gkm228Title(item) || 'Без названия');
+    const type = gkm228Esc(gkm228TypeLabel(item));
+    const year = gkm228Esc(gkm228Year(item));
+    const rel = gkm228Esc(gkm228Norm(item && (item.relationLabel || item.universeName || 'Каталог Мира')));
+    const [c1,c2,c3] = gkm228PickPalette(item);
+    const icon = type.toLowerCase().includes('игра') ? '🎮' : type.toLowerCase().includes('книга') ? '📚' : type.toLowerCase().includes('комикс') ? '💥' : type.toLowerCase().includes('манга') ? '📖' : type.toLowerCase().includes('аниме') ? '✨' : type.toLowerCase().includes('сериал') ? '🎬' : '🎞️';
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="${c1}"/>
+          <stop offset="0.55" stop-color="${c2}"/>
+          <stop offset="1" stop-color="${c3}"/>
+        </linearGradient>
+        <radialGradient id="r" cx="50%" cy="18%" r="80%">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/>
+          <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="600" height="900" fill="url(#g)"/>
+      <rect width="600" height="900" fill="url(#r)"/>
+      <circle cx="485" cy="125" r="150" fill="#ffffff" opacity="0.08"/>
+      <circle cx="95" cy="790" r="175" fill="#ffffff" opacity="0.06"/>
+      <rect x="34" y="34" width="532" height="832" rx="28" fill="none" stroke="rgba(255,255,255,.22)"/>
+      <text x="50%" y="155" text-anchor="middle" font-family="Arial" font-size="84" font-weight="900" fill="#fff">${icon}</text>
+      <text x="50%" y="220" text-anchor="middle" font-family="Arial" font-size="20" font-weight="800" fill="#ffffffaa">ГОЛУБЬ · КАТАЛОГ МИРА</text>
+      <foreignObject x="52" y="315" width="496" height="250">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Arial,sans-serif;color:white;font-size:42px;font-weight:900;text-align:center;line-height:1.08;text-shadow:0 2px 16px rgba(0,0,0,.55);word-break:break-word;display:flex;align-items:center;justify-content:center;height:100%;">${title}</div>
+      </foreignObject>
+      <rect x="72" y="678" width="456" height="74" rx="22" fill="rgba(10,10,18,.58)" stroke="rgba(255,255,255,.24)"/>
+      <text x="50%" y="724" text-anchor="middle" font-family="Arial" font-size="22" font-weight="800" fill="#fff">${type}${year ? ' · ' + year : ''}</text>
+      <text x="50%" y="792" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#ffffffd0">${rel}</text>
+    </svg>`;
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  }
+
+  function gkm228BestPoster(item){
+    let raw = '';
+    try { raw = __gkm228_oldPosterRawSrc(item) || ''; } catch(e) { raw = ''; }
+    raw = String(raw || '').trim();
+    if (raw) return raw.replace(/^http:/i, 'https:');
+    return gkm228SynthPoster(item);
+  }
+
+  function gkm228GameParagraphs(item){
+    const out = [];
+    const title = gkm228Title(item) || 'Эта игра';
+    const genres = gkm228Genres(item);
+    const rel = gkm228Norm(item && (item.relationLabel || item.relation));
+    const universe = gkm228Norm(item && (item.universeName || item.universe));
+    const related = gkm228Arr(item && item.relatedMedia).slice(0,4);
+    const vibe = gkm228Arr(item && item.vibe).slice(0,4);
+    const base = gkm228Norm(item && (item.description_ru || item.overview_ru || item.description || item.overview));
+    if (base) out.push(base.replace(/\s+/g,' ').trim());
+    let p2 = `${title} — это ${gkm228TypeLabel(item).toLowerCase()}${gkm228Year(item) ? ' ' + gkm228Year(item) + ' года' : ''}`;
+    if (genres.length) p2 += ` в жанрах ${genres.slice(0,3).join(', ')}`;
+    p2 += '.';
+    out.push(p2);
+    let p3 = '';
+    if (rel) p3 += `Связь с другими источниками: ${rel}. `;
+    if (universe) p3 += `Проект входит во вселенную ${universe}. `;
+    if (related.length) p3 += `Рядом по теме и атмосфере: ${related.join(', ')}. `;
+    if (vibe.length) p3 += `По настроению это ${vibe.join(', ')}.`;
+    if (p3.trim()) out.push(p3.trim());
+    const simGames = gkm228Arr(item && item.similarGames).slice(0,4);
+    const simMedia = gkm228Arr(item && item.similarMedia).slice(0,4);
+    let p4 = '';
+    if (simGames.length) p4 += `Если понравится, можно смотреть в сторону: ${simGames.join(', ')}. `;
+    if (simMedia.length) p4 += `Из похожих фильмов/сериалов/аниме рядом: ${simMedia.join(', ')}. `;
+    if (item && item.playAfterWatch) p4 += `Сценарий карточки: ${item.playAfterWatch}.`;
+    if (p4.trim()) out.push(p4.trim());
+    return out;
+  }
+
+  function gkm228UniversalOverview(item){
+    const original = gkm228Norm(__gkm228_oldDisplayOverview(item) || '');
+    const title = gkm228Title(item) || 'Этот проект';
+    const type = gkm228TypeLabel(item);
+    const year = gkm228Year(item);
+    const genres = gkm228Genres(item);
+    const rating = typeof getRating === 'function' ? getRating(item) : Number(item && item.rating || 0);
+    const votes = typeof formatVotes === 'function' ? formatVotes((typeof getVotes === 'function' ? getVotes(item) : Number(item && item.votes || 0))) : '';
+    const related = gkm228Arr(item && (item.relatedMedia || item.related || item.similarMedia)).slice(0,4);
+    const baseParts = [];
+    if (original && original.length >= 180) return original;
+    if (original) baseParts.push(original);
+
+    let p2 = `${title} — ${type.toLowerCase()}${year ? ' ' + year + ' года' : ''}`;
+    if (genres.length) p2 += ` в жанрах ${genres.slice(0,3).join(', ')}`;
+    if (rating) p2 += `. Средняя оценка — ${Number(rating).toFixed(1)}`;
+    if (votes && votes !== '0') p2 += ` при аудитории около ${votes}`;
+    p2 += '.';
+    baseParts.push(p2.replace(/\.\./g,'.'));
+
+    let p3 = '';
+    if (related.length) p3 += `Если ищешь что-то рядом по настроению или тематике, обрати внимание на: ${related.join(', ')}. `;
+    if (item && item.relationLabel) p3 += `Внутри каталога этот материал отмечен как «${gkm228Norm(item.relationLabel)}». `;
+    if (item && item.universeName) p3 += `Он связан со вселенной ${gkm228Norm(item.universeName)}. `;
+    if (p3.trim()) baseParts.push(p3.trim());
+
+    const moods = gkm228Arr(item && (item.vibe || item.tags)).slice(0,4);
+    let p4 = `${title} подойдёт тем, кто хочет заранее понять, чего ждать`;
+    const aspects = [];
+    if (genres.length) aspects.push(`по жанрам: ${genres.slice(0,3).join(', ')}`);
+    if (moods.length) aspects.push(`по атмосфере: ${moods.join(', ')}`);
+    if (aspects.length) p4 += ' — ' + aspects.join('; ');
+    p4 += '. В каталоге это описание специально расширено, чтобы можно было выбрать проект даже без просмотра трейлера или видео.';
+    baseParts.push(p4);
+
+    return baseParts.join(' ');
+  }
+
+  function gkm228EnrichGameItem(item){
+    if (!item || typeof item !== 'object') return item;
+    if (!item.poster) item.poster = gkm228BestPoster(item);
+    const full = gkm228GameParagraphs(item).join(' ');
+    if (!item.description_ru || String(item.description_ru).trim().length < 180) item.description_ru = full;
+    if (!item.overview_ru || String(item.overview_ru).trim().length < 180) item.overview_ru = full;
+    if (!item.description || String(item.description).trim().length < 180) item.description = full;
+    if (!item.overview || String(item.overview).trim().length < 180) item.overview = full;
+    return item;
+  }
+
+  hasPoster = function(item){ return !!gkm228BestPoster(item); };
+  posterRawSrc = function(item){ return gkm228BestPoster(item); };
+  posterOriginalSrc = function(item){ return gkm228BestPoster(item); };
+  posterSrc = function(item){ return gkm228BestPoster(item); };
+
+  displayOverview = function(item){
+    if (item && String(gkm228TypeLabel(item)).toLowerCase().includes('игра')) {
+      gkm228EnrichGameItem(item);
+      return gkm228Norm(item.overview_ru || item.description_ru || item.overview || item.description) || gkm228UniversalOverview(item);
+    }
+    return gkm228UniversalOverview(item);
+  };
+
+  if (__gkm228_oldLoadGameDB) {
+    loadGameDB = async function(){
+      const rows = await __gkm228_oldLoadGameDB();
+      for (const row of rows) gkm228EnrichGameItem(row);
+      console.info('GKM V228: games posters+descriptions enriched', rows.length);
+      return rows;
+    };
+  }
+
+  gameCardHtml = function(item){
+    const title = typeof safe === 'function' ? safe(titleOf(item)) : gkm228Esc(gkm228Title(item));
+    const poster = gkm228BestPoster(item);
+    const genre = gkm228Arr(item && item.genres).slice(0,2).join(' · ');
+    const relation = gkm228Esc(gkm228Norm(item && (item.relationLabel || 'Игровая вселенная')));
+    const rating = gkm228Esc(item && item.rating ? item.rating : '—');
+    const votes = gkm228Esc(item && item.votes ? Math.round(Number(item.votes)/1000) + ' тыс' : '');
+    return `<article class="card gkm-v224-game-card" data-id="${gkm228Esc(item && item.id)}"><div class="poster-wrap"><img src="${poster}" data-original-src="${poster}" data-proxy-tried="1" alt="${title}" loading="eager" decoding="async" onerror="this.onerror=null;this.src='${poster}'"><span class="badge">Игра</span><button class="fav" type="button">♡</button><div class="gkm-game-relation-badge">${relation}</div></div><div class="card-body"><h3>${title}</h3><div class="meta">${gkm228Esc(item && item.year || '')} · Игра</div><div class="genres">${gkm228Esc(genre)}</div><div class="rating">★ ${rating}${votes ? ' · ' + votes : ''}</div></div></article>`;
+  };
+
+  function gkm228PatchOverviewNode(){
+    const node = document.getElementById('detailOverview');
+    if (!node) return;
+    node.style.whiteSpace = 'pre-line';
+    node.style.lineHeight = '1.65';
+    node.style.maxHeight = 'none';
+    node.style.display = 'block';
+    node.style.padding = '16px 18px';
+    node.style.borderRadius = '18px';
+    node.style.border = '1px solid rgba(0,212,255,.28)';
+    node.style.background = 'rgba(4,12,28,.35)';
+  }
+
+  function gkm228ObserveModal(){
+    gkm228PatchOverviewNode();
+    const titleNode = document.getElementById('detailTitle');
+    const metaNode = document.getElementById('detailMeta');
+    const genresNode = document.getElementById('detailGenres');
+    const overviewNode = document.getElementById('detailOverview');
+    if (!overviewNode) return;
+    const obs = new MutationObserver(()=>{
+      gkm228PatchOverviewNode();
+      const text = gkm228Norm(overviewNode.textContent || '');
+      const title = gkm228Norm(titleNode && titleNode.textContent || '');
+      const meta = gkm228Norm(metaNode && metaNode.textContent || '');
+      const genres = gkm228Norm(genresNode && genresNode.textContent || '');
+      if (!title) return;
+      if (text.length >= 180) return;
+      const pseudo = {
+        title,
+        description: text,
+        overview: text,
+        type: meta.split('·')[0] ? meta.split('·')[0].trim() : 'Проект',
+        year: (meta.match(/(19\d{2}|20\d{2})/) || [,''])[1],
+        genres: genres ? genres.split('·').map(x=>x.trim()).filter(Boolean) : []
+      };
+      overviewNode.textContent = gkm228UniversalOverview(pseudo);
+    });
+    obs.observe(overviewNode, {childList:true, characterData:true, subtree:true});
+  }
+
+  function gkm228InjectStyle(){
+    if (document.getElementById('gkm-v228-style')) return;
+    const style = document.createElement('style');
+    style.id = 'gkm-v228-style';
+    style.textContent = `
+      #detailOverview{font-size:18px!important;color:#eaf7ff!important}
+      .gkm-v224-game-card .poster-wrap img{display:block!important;opacity:1!important}
+      .poster-placeholder{display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;font-weight:900;line-height:1.2;background:linear-gradient(135deg,#111737,#35156e,#00d4ff);color:#fff;border-radius:18px;min-height:260px}
+    `;
+    document.head.appendChild(style);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ gkm228InjectStyle(); gkm228ObserveModal(); });
+  } else {
+    gkm228InjectStyle();
+    gkm228ObserveModal();
+  }
 })();
-/* GKM V227 DIRECT GAME URL FIX END */
+/* GKM V228 HARD POSTERS + FULL DESCRIPTIONS FIX END */
