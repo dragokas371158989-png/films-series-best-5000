@@ -9147,8 +9147,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
    Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
 */
 (function () {
-  const BOOKS_URL = "./data/books_catalog.json?v=215";
+  const BOOKS_URL = "./data/books_catalog.json?v=216";
   const PAGE = 24;
+  const BOOK_PAGE = 18;
   let booksCache = null;
   let booksPage = 1;
   let booksPages = 1;
@@ -9229,7 +9230,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const json = await res.json();
       booksCache = Array.isArray(json) ? json : (json.items || []);
     } catch (err) {
-      console.warn("GKM V215: fallback books loaded", err);
+      console.warn("GKM V216: fallback books loaded", err);
       booksCache = FALLBACK_BOOKS;
     }
     booksCache = booksCache.map((item, index) => ({
@@ -9237,7 +9238,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       id: item.id || ("book-" + index + "-" + itemKey(item.title || item.name).replace(/\s+/g,"-")),
       section: "books",
       overview: item.overview || item.description || "Раздел книг, манги и комиксов с привязкой к фильмам, сериалам, аниме и играм.",
-      poster: bookPosterFor(item)
+      poster: txt(item.poster)
     }));
     return booksCache;
   }
@@ -9369,7 +9370,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (typeof setActiveTab === "function") setActiveTab("books");
     const all = await loadBooks();
     const rows = filteredBooks(all);
-    booksPages = Math.max(1, Math.ceil(rows.length / PAGE));
+    booksPages = Math.max(1, Math.ceil(rows.length / BOOK_PAGE));
     booksPage = Math.min(booksPage, booksPages);
     currentPage = booksPage; currentPages = booksPages;
     const start = (booksPage - 1) * PAGE;
@@ -9381,7 +9382,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (gamePanel) gamePanel.style.display = "none";
     updateBookFilters(all, rows);
     const count = document.getElementById("countText");
-    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V215`;
+    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V216`;
     const grid = document.getElementById("grid");
     if (grid) {
       grid.classList.remove("gkm-v191-search-best", "gkm-v191-spotlight", "gkm-v191-highlight");
@@ -9723,3 +9724,34 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   else inject();
 })();
  /* GKM V215 BOOKS MANGA COMICS EXPANSION END */
+
+
+
+/* GKM V216 MAX BOOK BASE + FAST LOAD START */
+(function(){
+  function inject(){
+    if (document.getElementById("gkm-v216-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v216-style";
+    style.textContent = `
+      .gkm-books-panel-title::after{content:" · MAX база V216";font-size:12px;font-weight:850;opacity:.68;margin-left:8px}
+      .gkm-book-card .poster-wrap img{content-visibility:auto}
+      .gkm-book-card{contain:layout paint style;content-visibility:auto;contain-intrinsic-size:260px 430px}
+      .gkm-v216-fast-note{display:inline-flex;margin-left:8px;padding:4px 8px;border-radius:999px;border:1px solid rgba(0,212,255,.22);background:rgba(0,212,255,.07);font-size:12px;font-weight:850;color:#c9f7ff}
+    `;
+    document.head.appendChild(style);
+  }
+  function boostVisibleBookImages(){
+    document.querySelectorAll(".gkm-book-card .poster-wrap img").forEach((img, i) => {
+      img.decoding = "async";
+      img.loading = i < 8 ? "eager" : "lazy";
+      if (i < 8) img.fetchPriority = "high";
+      else img.fetchPriority = "low";
+    });
+  }
+  function run(){inject(); boostVisibleBookImages();}
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function(){run(); setTimeout(run,600);});
+  else {run(); setTimeout(run,600);}
+  document.addEventListener("click", function(){setTimeout(run,120);});
+})();
+ /* GKM V216 MAX BOOK BASE + FAST LOAD END */
