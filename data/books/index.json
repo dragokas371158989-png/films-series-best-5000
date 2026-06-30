@@ -1,0 +1,26 @@
+{
+  "version": 221,
+  "total": 1008,
+  "files": [
+    {
+      "file": "manga.json",
+      "label": "Манга",
+      "count": 221
+    },
+    {
+      "file": "ranobe.json",
+      "label": "Ранобэ",
+      "count": 80
+    },
+    {
+      "file": "books.json",
+      "label": "Книги",
+      "count": 524
+    },
+    {
+      "file": "comics.json",
+      "label": "Комиксы",
+      "count": 183
+    }
+  ]
+}
