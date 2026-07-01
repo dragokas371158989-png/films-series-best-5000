@@ -38,8 +38,10 @@ window.GKM_V160_CONTROLS_LAYOUT_FIX_VERSION = "v160-controls-trash-button-layout
 console.log("GKM: v160-controls-trash-button-layout-fix-2026-06-24");
 window.GKM_V161_DECADE_TOPS_VERSION = "v161-decade-and-year-tops-2026-06-24";
 console.log("GKM: v161-decade-and-year-tops-2026-06-24");
+window.GKM_V262_CARTOONS_NO_ANIME_FIX_VERSION = "v262-cartoons-no-anime-sort-fix-2026-07-01";
+console.log("GKM: v262-cartoons-no-anime-sort-fix-2026-07-01");
 
-window.GKM_V260_ANIME_TOP_VOTES_STUDIOS_FIX_VERSION = "v260-anime-top-votes-studios-fix-2026-07-01";
+window.GKM_V262_ANIME_TOP_VOTES_STUDIOS_FIX_VERSION = "v260-anime-top-votes-studios-fix-2026-07-01";
 console.log("GKM: v260-anime-top-votes-studios-fix-2026-07-01");
 
 const TMDB_ENABLED = false;
@@ -172,7 +174,7 @@ function setStatus(text) {
 }
 
 async function fetchJson(url, cache = "force-cache") {
-  const res = await fetch(`${url}?v=260`, { cache });
+  const res = await fetch(`${url}?v=262`, { cache });
   if (!res.ok) throw new Error(`${url} ${res.status}`);
   return res.json();
 }
@@ -1015,8 +1017,8 @@ async function loadFastPage(tab, page = 1) {
 
 function makeSearchWorker() {
   if (searchWorker) return searchWorker;
-  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=260`, window.location.href).href;
-  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=260`, window.location.href).href;
+  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=262`, window.location.href).href;
+  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=262`, window.location.href).href;
   const absoluteShardBase = new URL(`${SEARCH_SHARDS_BASE}/`, window.location.href).href;
   const code = `
     const SEARCH_LITE_URL = ${JSON.stringify(absoluteSearchLiteUrl)};
@@ -1038,6 +1040,48 @@ function makeSearchWorker() {
     function votes(x){return Number((x&&x.votes)||0);}
     function genres(x){return Array.isArray(x&&x.genres)?x.genres.map(String):[];}
     function poster(x){const raw=String((x&&x.poster)||"").trim();const low=raw.toLowerCase();return raw&&low!=="null"&&low!=="undefined"&&!low.includes("dummyimage")&&!low.includes("placeholder")&&!low.includes("no-poster")?1:0;}
+    function isStrictAnime(x){
+      const t=type(x);
+      const h=hay(x);
+      const g=(Array.isArray(x&&x.genres)?x.genres:[]).map(String).join(" ");
+      const source=String((x&&x.source)||"").toLowerCase();
+      if(t!=="Аниме")return false;
+      if(t==="Мультфильм")return false;
+      if(h.includes("мультфильм")||h.includes("мультсериал")||h.includes("disney")||h.includes("pixar")||h.includes("marvel"))return false;
+      return source.includes("jikan")||source.includes("myanimelist")||h.includes("myanimelist")||norm(g).includes("аниме")||h.includes(" anime ");
+    }
+    function isAnimeLikeAny(x){
+      const h=hay(x);
+      const g=norm((Array.isArray(x&&x.genres)?x.genres:[]).join(" "));
+      const source=String((x&&x.source)||"").toLowerCase();
+      if(type(x)==="Аниме")return true;
+      if(source.includes("jikan")||source.includes("myanimelist"))return true;
+      if(g.includes("аниме"))return true;
+      const animeWords=[
+        "anime","myanimelist","shikimori","anilist","mappa","pierrot","madhouse","ufotable","toei animation","studio ghibli","ghibli",
+        "hayao miyazaki","miyazaki","makoto shinkai","shinkai","satoshi kon","mamoru hosoda",
+        "spirited away","sen to chihiro","унесенные призраками","унесённые призраками","tvoe imya","твое имя","твоё имя","your name","kimi no na wa",
+        "ponyo","gake no ue no ponyo","понио","princess mononoke","принцесса мононоке","my neighbor totoro","totorо","totoro","тоторо",
+        "howl s moving castle","ходячий замок","castle in the sky","небесный замок","nausicaa","навсикая","kiki s delivery","ведьмина служба доставки",
+        "suzume","судзумэ","weathering with you","дитя погоды","garden of words","сад изящных слов","5 centimeters per second","5 сантиметров в секунду",
+        "a silent voice","koe no katachi","форма голоса","akira","perfect blue","paprika","tokyo godfathers","wolf children","summer wars",
+        "demon slayer","kimetsu","истребитель демонов","jujutsu","магическая битва","attack on titan","shingeki","атака титанов",
+        "naruto","наруто","bleach","блич","one piece","ван пис","ван-пис","dragon ball","драконий жемчуг","pokemon","покемон",
+        "evangelion","евангелион","cowboy bebop","ковбой бибоп","ghost in the shell","призрак в доспехах","violet evergarden","вайолет",
+        "made in abyss","созданный в бездне","belle","ryu to sobakasu","boku no hero","моя геройская","black clover","черный клевер","чёрный клевер"
+      ];
+      return animeWords.some(w=>h.includes(norm(w)));
+    }
+    function isPureCartoon(x){
+      if(type(x)!=="Мультфильм")return false;
+      if(isAnimeLikeAny(x))return false;
+      const h=hay(x);
+      const banned=["disney twisted wonderland","доктор стрэндж в мультивселенной безумия"];
+      if(banned.some(b=>h.includes(norm(b))))return false;
+      return true;
+    }
+    function animeTopMinVotes(){return 800000;}
+
     function isAnimeTopCandidate(x){const t=type(x);if(t!=="Аниме")return false;const v=votes(x);const r=rating(x);const y=Number(year(x)||0);if(v<100000||r<7.4)return false;if(y&&y>2024)return false;const h=hay(x);const banned=[" fan letter","fanletter"," ova"," ova ","special"," recap","summary","pilot","preview","trailer","teaser","music video","soundtrack","concert","stage play","live action","спешл","ова","рекап","краткое содержание","фан письмо","превью","трейлер","мюзикл"];return !banned.some(b=>h.includes(b));}
     function tabPass(x,tab){
       const t=type(x);
@@ -1048,9 +1092,9 @@ function makeSearchWorker() {
       if(tab==="movies")return t==="Фильм";
       if(tab==="series")return t==="Сериал";
       if(tab==="anime")return t==="Аниме";
-      if(tab==="cartoons")return t==="Мультфильм";
+      if(tab==="cartoons")return isPureCartoon(x);
       if(tab==="top")return rating(x)>=7&&v>=300;
-      if(tab==="anime_top")return t==="Аниме" && v>0;
+      if(tab==="anime_top")return isStrictAnime(x) && v>=animeTopMinVotes();
       // V158: нормальные новинки по текущему году.
       // Новинки = только текущий год и будущие проекты, а не 2024/2025.
       if(tab==="new")return y>=cy;
@@ -1279,9 +1323,10 @@ function makeSearchWorker() {
         rows = rows.filter(x=>!lowTrust(x.item,tab));
       }
       if(tab==="anime_top"){
-        // V260: Топ аниме 100 = строго по голосам: максимум голосов сверху, дальше ниже.
-        // Если в базе нет 4 млн голосов, первым будет ближайший максимум базы (например 3 млн), без пустой выдачи.
-        rows = rows.filter(x=>type(x.item)==="Аниме" && votes(x.item)>0 && !isAnimeTopBad(x.item));
+        // V261: Топ аниме 100 = только настоящие Аниме из MAL/Jikan, без Мультфильмов.
+        // Сортировка строго по голосам сверху вниз. В текущей базе максимум MAL около 3 млн,
+        // поэтому режем мусор снизу: 10к/18к/433к в топ не попадают.
+        rows = rows.filter(x=>isStrictAnime(x.item) && votes(x.item)>=animeTopMinVotes() && !isAnimeTopBad(x.item));
         rows.sort((a,b)=>
           votes(b.item)-votes(a.item) ||
           rating(b.item)-rating(a.item) ||
@@ -1310,7 +1355,7 @@ function makeSearchWorker() {
     }
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
-    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=260";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
+    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=262";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
     function buildRows(index, c, queries){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
@@ -1334,7 +1379,7 @@ function makeSearchWorker() {
     currentPages = Math.max(1, Math.ceil(currentCount / PAGE_SIZE));
     window.GKM_V106_LAST_SEARCH_STATS = msg;
     const tabLabels = {
-      anime_top: `🏆 Топ аниме 100 · по голосам сверху вниз · Страница ${currentPage} из ${currentPages}`,
+      anime_top: `🏆 Топ аниме 100 · только аниме · по голосам · Страница ${currentPage} из ${currentPages}`,
       new: `🆕 Новинки ${new Date().getFullYear()}+ · Страница ${currentPage} из ${currentPages}`,
       new_soon: `⏳ Скоро выйдет · Страница ${currentPage} из ${currentPages}`,
       new_released: `✅ Уже вышло ${new Date().getFullYear()} · Страница ${currentPage} из ${currentPages}`,
@@ -1475,7 +1520,7 @@ async function renderStudioAnimeList(studio, page = 1) {
 
 function runSearch(page = 1) {
   const c = controls();
-  // V260: Топ аниме больше не берём из ручного anime_top_manual.json.
+  // V261: Топ аниме больше не берём из ручного anime_top_manual.json.
   // Он строится из общей быстрой базы через worker и сортируется строго по votes по убыванию.
   if (c.tab === "anime_studios" && !norm(c.q)) {
     renderAnimeStudiosTop();
