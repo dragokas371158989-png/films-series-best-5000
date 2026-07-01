@@ -11532,1254 +11532,293 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V259 DESCRIPTION RELATED RESTORE END */
 
 
-
-/* GKM V260 SMART HELPER ALL CATALOG START */
+/* GKM V304 STRICT HELPER ROUTER LIVE TESTED START */
 (function(){
-  window.GKM_V260_SMART_HELPER_ALL_CATALOG_VERSION = "v260-smart-helper-all-catalog-2026-07-01";
+  window.GKM_V304_STRICT_HELPER_ROUTER_LIVE_TESTED_VERSION = "v304-strict-helper-router-live-tested-2026-07-01";
 
-  const V260_PAGE_SIZE = 60;
-  let v260PoolPromise = null;
-  let v260PoolCache = [];
-
-  function s(v){ return String(v == null ? "" : v).trim(); }
-
-  function n(v){
-    return s(v).toLowerCase()
-      .replace(/ё/g, "е")
-      .replace(/[’`]/g, "'")
-      .replace(/&/g, " and ")
-      .replace(/[^\p{L}\p{N}]+/gu, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  function uniqKey(item){
-    return s(item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) ||
-      `${n(titleOf260(item))}|${yearOf260(item)}|${n(typeOf260(item))}`;
-  }
-
-  function titleOf260(item){
-    try { if (typeof displayTitle === "function") return s(displayTitle(item)); } catch {}
-    return s(item && (item.ru || item.title_ru || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
-  }
-
-  function rawTitleOf260(item){
-    return s(item && [
-      item.ru,
-      item.title_ru,
-      item.title,
-      item.name,
-      item.en,
-      item.original_title,
-      item.original_name,
-      item.__manualTopTitle
-    ].filter(Boolean).join(" "));
-  }
-
-  function typeOf260(item){
-    try { if (typeof getType === "function") return s(getType(item)); } catch {}
-    return s(item && (item.type || item.category || item.kind)) || "Каталог";
-  }
-
-  function yearOf260(item){
-    try { if (typeof getYear === "function") return s(getYear(item)); } catch {}
-    const raw = s(item && (item.year || item.release_date || item.first_air_date));
-    const m = raw.match(/(19\d{2}|20\d{2})/);
-    return m ? m[1] : raw;
-  }
-
-  function ratingOf260(item){
-    try { if (typeof getRating === "function") return Number(getRating(item) || 0); } catch {}
-    try { if (typeof ratingOf === "function") return Number(ratingOf(item) || 0); } catch {}
-    return Number(item && (item.rating || item.vote_average || item.score) || 0);
-  }
-
-  function votesOf260(item){
-    try { if (typeof getVotes === "function") return Number(getVotes(item) || 0); } catch {}
-    try { if (typeof votesOf === "function") return Number(votesOf(item) || 0); } catch {}
-    return Number(item && (item.votes || item.vote_count || item.scored_by || item.members) || 0);
-  }
-
-  function genresOf260(item){
-    try {
-      if (typeof getGenres === "function") {
-        const g = getGenres(item);
-        if (Array.isArray(g)) return g.filter(Boolean).map(String);
-      }
-    } catch {}
-    const raw = item && (item.genres || item.genre || item.tags);
-    if (Array.isArray(raw)) return raw.filter(Boolean).map(String);
-    if (typeof raw === "string") return raw.split(/[,|/]+/).map(x => x.trim()).filter(Boolean);
-    return [];
-  }
-
-  function hay260(item){
-    return n([
-      titleOf260(item),
-      rawTitleOf260(item),
-      item && item.search,
-      item && item.overview,
-      item && item.description,
-      item && item.synopsis,
-      typeOf260(item),
-      genresOf260(item).join(" "),
-      item && item.source
-    ].filter(Boolean).join(" "));
-  }
-
-  function typeBucket260(item){
-    const type = n(typeOf260(item));
-    const hay = hay260(item);
-
-    if (type.includes("аниме") || hay.includes("anime") || hay.includes("jikan") || hay.includes("myanimelist")) return "anime";
-    if (type.includes("сериал") || type.includes("series") || type.includes("show")) return "series";
-    if (type.includes("мульт") || type.includes("cartoon")) return "cartoons";
-    if (type.includes("фильм") || type.includes("movie") || type.includes("film")) return "movies";
-    if (type.includes("игр") || type.includes("game")) return "games";
-    if (type.includes("манг") || type.includes("manga")) return "manga";
-    if (type.includes("раноб") || hay.includes("light novel")) return "ranobe";
-    if (type.includes("комик") || type.includes("comic")) return "comics";
-    if (type.includes("книг") || type.includes("book")) return "books";
-
-    return "all";
-  }
-
-  function parseList260(json){
-    const out = [];
-    if (!json) return out;
-
-    if (Array.isArray(json)) return json.filter(x => x && typeof x === "object");
-
-    if (Array.isArray(json.items)) out.push(...json.items);
-    if (Array.isArray(json.data)) out.push(...json.data);
-    if (Array.isArray(json.results)) out.push(...json.results);
-
-    if (json.sections && typeof json.sections === "object") {
-      for (const v of Object.values(json.sections)) {
-        if (Array.isArray(v)) out.push(...v);
-        else if (v && Array.isArray(v.items)) out.push(...v.items);
-      }
-    }
-
-    return out.filter(x => x && typeof x === "object");
-  }
-
-  async function fetchJson260(url){
-    try {
-      const res = await fetch(url, { cache:"force-cache" });
-      if (!res.ok) return null;
-      return await res.json();
-    } catch {
-      return null;
-    }
-  }
-
-  function addUnique260(list, seen, item){
-    if (!item || typeof item !== "object") return;
-    const key = uniqKey(item);
-    if (seen.has(key)) return;
-    seen.add(key);
-    list.push(item);
-  }
-
-  async function loadPool260(){
-    if (v260PoolPromise) return v260PoolPromise;
-
-    v260PoolPromise = (async () => {
-      const list = [];
-      const seen = new Set();
-
-      // 1. Уже открытые карточки.
-      try { (currentItems || []).forEach(item => addUnique260(list, seen, item)); } catch {}
-
-      // 2. Главная.
-      try {
-        const sections = homeData && homeData.sections ? homeData.sections : {};
-        Object.values(sections).forEach(v => {
-          if (Array.isArray(v)) v.forEach(item => addUnique260(list, seen, item));
-          else if (v && Array.isArray(v.items)) v.items.forEach(item => addUnique260(list, seen, item));
-        });
-      } catch {}
-
-      // 3. Основной индекс.
-      const urls = [
-        "data/fast/search_lite.json?v=260",
-        "data/fast/search_index.json?v=260",
-        "data/games_catalog.json?v=260",
-        "data/books_catalog.json?v=260",
-        "data/games/cult_games.json?v=260",
-        "data/games/franchises.json?v=260",
-        "data/books/books.json?v=260",
-        "data/books/manga.json?v=260",
-        "data/books/comics.json?v=260",
-        "data/books/ranobe.json?v=260"
-      ];
-
-      for (const url of urls) {
-        const json = await fetchJson260(url);
-        parseList260(json).forEach(item => addUnique260(list, seen, item));
-      }
-
-      v260PoolCache = list;
-      return list;
-    })();
-
-    return v260PoolPromise;
-  }
-
-  const RU_EN260 = {
-    "космос": ["space","sci fi","science fiction","fantasy","фантастика"],
-    "фантастика": ["sci fi","science fiction","space","future","cyberpunk"],
-    "боевик": ["action","fight","battle","superhero"],
-    "драма": ["drama"],
-    "комедия": ["comedy","funny"],
-    "ужасы": ["horror","thriller","мистика"],
-    "мистика": ["mystery","supernatural","horror"],
-    "детектив": ["detective","crime","mystery"],
-    "романтика": ["romance","love"],
-    "спорт": ["sport","sports"],
-    "магия": ["magic","fantasy"],
-    "фэнтези": ["fantasy","magic"],
-    "недооцененные": ["hidden gem","underrated"],
-    "популярные": ["popular","top"],
-    "игра": ["game","игры"],
-    "книга": ["book","books"],
-    "манга": ["manga"],
-    "комикс": ["comic","comics"],
-    "ранобэ": ["light novel","ranobe"]
-  };
-
-  function queryTokens260(q){
-    const weak = new Set([
-      "подбери","подобрать","посоветуй","посоветовать","найди","найти","покажи","дай",
-      "мне","что","чтобы","хочу","можно","посмотреть","вечер","вечером","топ","лучшие",
-      "какой","какие","что нибудь","что-нибудь","похожее","похожие","типо","типа",
-      "сериал","сериалы","фильм","фильмы","аниме","анимэ","мульт","мультик","мультфильм",
-      "игра","игры","книга","книги","манга","комикс","комиксы","ранобэ"
-    ]);
-
-    const base = n(q);
-    const tokens = base.split(" ").filter(x => x.length >= 2);
-    const expanded = new Set(tokens);
-
-    for (const token of tokens) {
-      if (RU_EN260[token]) RU_EN260[token].forEach(x => n(x).split(" ").forEach(y => expanded.add(y)));
-    }
-
-    return [...expanded].filter(x => x.length >= 2 && !weak.has(x));
-  }
-
-  function detectIntent260(q){
-    const x = n(q);
-
-    const wants = {
-      bucket: "all",
-      mood: "",
-      minRating: 0,
-      sort: "smart",
-      openAction: ""
-    };
-
-    if (/\b(аниме|анимэ|anime)\b/.test(x)) wants.bucket = "anime";
-    else if (/\b(сериал|сериалы|series|show)\b/.test(x)) wants.bucket = "series";
-    else if (/\b(мульт|мультик|мультфильм|cartoon)\b/.test(x)) wants.bucket = "cartoons";
-    else if (/\b(фильм|фильмы|кино|movie|film)\b/.test(x)) wants.bucket = "movies";
-    else if (/\b(игра|игры|game|games)\b/.test(x)) wants.bucket = "games";
-    else if (/\b(книга|книги|book|books)\b/.test(x)) wants.bucket = "books";
-    else if (/\b(манга|manga)\b/.test(x)) wants.bucket = "manga";
-    else if (/\b(комикс|комиксы|comic|comics)\b/.test(x)) wants.bucket = "comics";
-    else if (/\b(ранобэ|ранобе|light novel)\b/.test(x)) wants.bucket = "ranobe";
-
-    if (x.includes("жест") || x.includes("мрач") || x.includes("темн")) wants.mood = "dark";
-    if (x.includes("легк") || x.includes("добро") || x.includes("смешн") || x.includes("угар")) wants.mood = "light";
-    if (x.includes("кров") || x.includes("жесть") || x.includes("мясо")) wants.mood = "hard";
-    if (x.includes("романт") || x.includes("любов")) wants.mood = "romance";
-    if (x.includes("страш") || x.includes("ужас") || x.includes("хоррор")) wants.mood = "horror";
-    if (x.includes("детектив") || x.includes("расслед")) wants.mood = "detective";
-    if (x.includes("космос") || x.includes("sci") || x.includes("фантаст")) wants.mood = "sci";
-    if (x.includes("маг") || x.includes("фэнтези")) wants.mood = "fantasy";
-
-    if (x.includes("топ") || x.includes("лучшие") || x.includes("популяр")) wants.sort = "top";
-    if (x.includes("нов") || x.includes("2026") || x.includes("2025")) wants.sort = "new";
-    if (x.includes("недооцен")) wants.sort = "hidden";
-
-    if (x.includes("открой") || x.includes("перейди") || x.includes("покажи раздел")) wants.openAction = "open";
-
-    return wants;
-  }
-
-  function moodTokens260(mood){
-    if (mood === "dark") return ["dark","grim","psychological","crime","thriller","horror","драма","триллер","криминал","мистика"];
-    if (mood === "light") return ["comedy","family","adventure","slice","комедия","семейное","приключения"];
-    if (mood === "hard") return ["horror","blood","violent","seinen","thriller","ужасы","триллер","боевик"];
-    if (mood === "romance") return ["romance","love","school","drama","романтика","любовь","драма"];
-    if (mood === "horror") return ["horror","supernatural","mystery","ужасы","мистика","триллер"];
-    if (mood === "detective") return ["detective","crime","mystery","thriller","детектив","криминал","расследование"];
-    if (mood === "sci") return ["space","sci","science","future","cyberpunk","фантастика","космос"];
-    if (mood === "fantasy") return ["fantasy","magic","dragon","rpg","фэнтези","магия"];
-    return [];
-  }
-
-  function cleanCandidate260(item){
-    if (!item) return false;
-
-    const y = Number(yearOf260(item) || 0);
-    const currentYear = new Date().getFullYear();
-    if (y && y > currentYear + 2) return false;
-
-    const h = hay260(item);
-    const banned = [
-      "trailer","teaser","preview","recap","summary","soundtrack","music video","concert",
-      "stage play","fan letter","behind the scenes","трейлер","тизер","превью","рекап",
-      "краткое содержание","саундтрек","концерт"
-    ];
-    if (banned.some(x => h.includes(x))) return false;
-
-    const title = n(titleOf260(item));
-    if (!title || title === "без названия") return false;
-
-    return true;
-  }
-
-  function typePass260(item, bucket){
-    if (!bucket || bucket === "all") return true;
-
-    const b = typeBucket260(item);
-
-    if (bucket === "books") return b === "books" || b === "ranobe";
-    if (bucket === "manga") return b === "manga";
-    if (bucket === "comics") return b === "comics";
-    if (bucket === "games") return b === "games";
-    if (bucket === "movies") return b === "movies";
-    if (bucket === "series") return b === "series";
-    if (bucket === "anime") return b === "anime";
-    if (bucket === "cartoons") return b === "cartoons";
-
-    return b === bucket;
-  }
-
-  function scoreItem260(item, tokens, intent, originalQ){
-    if (!cleanCandidate260(item)) return 0;
-    if (!typePass260(item, intent.bucket)) return 0;
-
-    const h = hay260(item);
-    const title = n(titleOf260(item));
-    const raw = n(rawTitleOf260(item));
-    const genres = n(genresOf260(item).join(" "));
-    const type = n(typeOf260(item));
-
-    let score = 0;
-
-    for (const token of tokens) {
-      if (!token) continue;
-      if (title === token || raw === token) score += 120;
-      else if (title.includes(token)) score += 55;
-      else if (raw.includes(token)) score += 45;
-      else if (genres.includes(token)) score += 38;
-      else if (h.includes(token)) score += 18;
-    }
-
-    for (const mt of moodTokens260(intent.mood)) {
-      const m = n(mt);
-      if (genres.includes(m)) score += 32;
-      else if (h.includes(m)) score += 15;
-    }
-
-    // Если запрос "как Наруто / типа Интерстеллар" — ищем по жанрам похожего тайтла.
-    const qn = n(originalQ);
-    if (qn.includes("как ") || qn.includes("типо ") || qn.includes("типа ") || qn.includes("похож")) {
-      if (h.includes("приключ") || h.includes("action") || h.includes("экшен")) score += 8;
-    }
-
-    const rating = ratingOf260(item);
-    const votes = votesOf260(item);
-    const year = Number(yearOf260(item) || 0);
-
-    if (intent.sort === "top") score += Math.min(80, Math.log10(votes + 1) * 13) + rating * 8;
-    else if (intent.sort === "new") score += year >= 2020 ? (year - 2019) * 8 : 0;
-    else if (intent.sort === "hidden") score += rating * 10 - Math.min(30, Math.log10(votes + 1) * 5);
-    else score += Math.min(45, Math.log10(votes + 1) * 8) + rating * 5;
-
-    // Слабый бонус за наличие постера.
-    try { if (typeof hasPoster === "function" && hasPoster(item)) score += 8; } catch {}
-
-    return score;
-  }
-
-  function dedupe260(items){
-    const map = new Map();
-
-    for (const item of items) {
-      const bucket = typeBucket260(item);
-      const key = `${bucket}|${n(titleOf260(item))}|${yearOf260(item)}`;
-      const old = map.get(key);
-      if (!old) {
-        map.set(key, item);
-        continue;
-      }
-      const a = ratingOf260(item) * 1000 + votesOf260(item);
-      const b = ratingOf260(old) * 1000 + votesOf260(old);
-      if (a > b) map.set(key, item);
-    }
-
-    return [...map.values()];
-  }
-
-  async function search260(raw, limit = 10){
-    const intent = detectIntent260(raw);
-    const tokens = queryTokens260(raw);
-    const pool = await loadPool260();
-
-    let scored = pool
-      .map(item => ({ item, score: scoreItem260(item, tokens, intent, raw) }))
-      .filter(x => x.score > 0);
-
-    // Если токенов нет, но тип понятен — выдаём топ по типу.
-    if (!scored.length && intent.bucket !== "all") {
-      scored = pool
-        .filter(item => typePass260(item, intent.bucket))
-        .filter(cleanCandidate260)
-        .map(item => ({ item, score: ratingOf260(item) * 10 + Math.min(80, Math.log10(votesOf260(item) + 1) * 12) }));
-    }
-
-    scored.sort((a,b) => b.score - a.score);
-    return dedupe260(scored.map(x => x.item)).slice(0, limit);
-  }
-
-  function format260(items){
-    if (!items.length) return "";
-    return items.map((it, i) => {
-      const title = titleOf260(it);
-      const year = yearOf260(it) || "—";
-      const type = typeOf260(it);
-      const rating = ratingOf260(it);
-      const votes = votesOf260(it);
-      const genres = genresOf260(it).slice(0, 2).join(", ");
-      const r = rating ? `★ ${rating.toFixed ? rating.toFixed(1) : rating}` : "★ —";
-      const v = votes ? ` · ${votes >= 1000000 ? (votes/1000000).toFixed(1).replace(".0","") + " млн" : votes >= 1000 ? Math.round(votes/1000) + " тыс" : votes}` : "";
-      return `${i + 1}. ${title} (${year}) — ${type} · ${r}${v}${genres ? " · " + genres : ""}`;
-    }).join("\n");
-  }
-
-  function helpText260(){
-    return [
-      "Я теперь ищу по всему каталогу: фильмы, сериалы, аниме, мультфильмы, игры, книги, манга, комиксы и ранобэ.",
-      "",
-      "Пиши нормально по смыслу:",
-      "• подбери мрачное аниме",
-      "• фильмы про космос",
-      "• игры фэнтези rpg",
-      "• манга ужасы",
-      "• комиксы marvel",
-      "• книги по играм",
-      "• что-то как Наруто",
-      "• топ фильмов 90-х"
-    ].join("\n");
-  }
-
-  async function answer260(raw){
-    const q = n(raw);
-    if (!q) return "Напиши запрос: жанр, настроение, тип или пример тайтла.";
-
-    if (/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(q)) {
-      return "Привет. Я прокачан: ищу по фильмам, сериалам, аниме, мультам, играм, книгам, манге, комиксам и ранобэ. Напиши что хочешь найти.";
-    }
-
-    if (q.includes("помощ") || q.includes("что умеешь") || q.includes("как искать")) {
-      return helpText260();
-    }
-
-    if (q.includes("топ студ")) {
-      try { renderAnimeStudiosTop(); } catch {}
-      return "Открыл «Топ студий».";
-    }
-
-    if (q.includes("топ аним")) {
-      try { renderAnimeTopManual(1); } catch {}
-      return "Открыл «Топ аниме 100».";
-    }
-
-    const items = await search260(raw, 10);
-
-    if (items.length) {
-      const intent = detectIntent260(raw);
-      const headMap = {
-        movies: "Нашёл фильмы:",
-        series: "Нашёл сериалы:",
-        anime: "Нашёл аниме:",
-        cartoons: "Нашёл мультфильмы:",
-        games: "Нашёл игры:",
-        books: "Нашёл книги:",
-        manga: "Нашёл мангу:",
-        comics: "Нашёл комиксы:",
-        ranobe: "Нашёл ранобэ:",
-        all: "Нашёл варианты:"
-      };
-
-      return `${headMap[intent.bucket] || "Нашёл варианты:"}\n${format260(items)}`;
-    }
-
-    return [
-      "Не нашёл нормальные совпадения.",
-      "Попробуй проще или конкретнее:",
-      "«игры rpg фэнтези», «манга ужасы», «фильмы космос», «аниме школа романтика», «комиксы marvel»."
-    ].join("\n");
-  }
-
-  function installHelper260(){
-    const form = document.getElementById("gkmAiForm");
-    const input = document.getElementById("gkmAiInput");
-    const dialog = document.getElementById("gkmAiDialog");
-    const floatBtn = document.getElementById("gkmAiFloatBtn");
-    const closeBtn = document.getElementById("gkmAiCloseBtn");
-
-    if (floatBtn && dialog && input) {
-      floatBtn.onclick = () => {
-        if (typeof dialog.showModal === "function") dialog.showModal();
-        else dialog.setAttribute("open", "");
-        setTimeout(() => input.focus(), 50);
-      };
-    }
-
-    if (closeBtn && dialog) {
-      closeBtn.onclick = () => dialog.close ? dialog.close() : dialog.removeAttribute("open");
-    }
-
-    if (!form || !input) return;
-
-    form.onsubmit = async (event) => {
-      event.preventDefault();
-      const text = input.value.trim();
-      if (!text) return;
-      input.value = "";
-
-      if (typeof gkmHelperAddMessage === "function") gkmHelperAddMessage("user", text);
-      if (typeof gkmHelperAddMessage === "function") gkmHelperAddMessage("bot", "Ищу по всему каталогу...");
-
-      try {
-        const answer = await answer260(text);
-        const box = document.getElementById("gkmAiMessages");
-        if (box) {
-          const last = box.lastElementChild;
-          if (last && last.classList.contains("ai-bot") && last.textContent.includes("Ищу по всему каталогу")) {
-            last.innerHTML = escapeHtml(answer).replace(/\n/g, "<br>");
-            box.scrollTop = box.scrollHeight;
-            return;
-          }
-        }
-        if (typeof gkmHelperAddMessage === "function") gkmHelperAddMessage("bot", answer);
-      } catch (e) {
-        if (typeof gkmHelperAddMessage === "function") {
-          gkmHelperAddMessage("bot", "Ошибка поиска помощника. Но сайт живой. Попробуй запрос проще.");
-        }
-        console.warn("GKM V260 helper error", e);
-      }
-    };
-
-    document.querySelectorAll("[data-ai-prompt]").forEach(btn => {
-      btn.onclick = () => {
-        input.value = btn.dataset.aiPrompt || "";
-        form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
-      };
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", installHelper260, { once:true });
-  } else {
-    installHelper260();
-  }
-
-  setTimeout(installHelper260, 500);
-  setTimeout(installHelper260, 1500);
-
-  // прогреваем пул после загрузки, чтобы первый поиск был быстрее
-  setTimeout(() => { loadPool260().catch(()=>{}); }, 1200);
-
-  console.log("GKM V260: smart helper now searches all catalog categories");
-})();
-/* GKM V260 SMART HELPER ALL CATALOG END */
-
-
-
-/* GKM V300 ULTRA HELPER START */
-(function(){
-  window.GKM_V300_ULTRA_HELPER_VERSION = "v300-ultra-helper-all-catalog-router-ranking-actions-2026-07-01";
-
-  const V300_LIMIT = 12;
-  let poolPromise = null;
-  let pool = [];
+  const LIMIT = 10;
+  const CACHE = new Map();
   let lastResults = [];
   let lastQuery = "";
 
-  function txt(v){ return String(v == null ? "" : v).trim(); }
-
-  function norm(v){
-    return txt(v)
-      .toLowerCase()
-      .replace(/ё/g, "е")
-      .replace(/[’`]/g, "'")
-      .replace(/&/g, " and ")
-      .replace(/[^\p{L}\p{N}]+/gu, " ")
-      .replace(/\s+/g, " ")
+  function T(v){ return String(v == null ? "" : v).trim(); }
+  function N(v){
+    return T(v).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[’`]/g,"'")
+      .replace(/&/g," and ")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
       .trim();
   }
+  function words(v){ return N(v).split(" ").filter(Boolean); }
+  function hasWord(v, arr){ const set = new Set(words(v)); return arr.some(x => set.has(x)); }
+  function E(v){ return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch])); }
 
-  function title(item){
-    try { if (typeof displayTitle === "function") return txt(displayTitle(item)); } catch {}
-    return txt(item && (item.ru || item.title_ru || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
-  }
+  function title(it){ try{ if(typeof displayTitle==="function") return T(displayTitle(it)); }catch{} return T(it&&(it.ru||it.title_ru||it.title||it.name||it.en||it.original_title||it.original_name))||"Без названия"; }
+  function rawTitle(it){ return T(it&&[it.ru,it.title_ru,it.title,it.name,it.en,it.original_title,it.original_name,it.__manualTopTitle].filter(Boolean).join(" ")); }
+  function type(it){ try{ if(typeof getType==="function") return T(getType(it)); }catch{} return T(it&&(it.type||it.category||it.kind))||"Каталог"; }
+  function year(it){ try{ if(typeof getYear==="function") return T(getYear(it)); }catch{} const raw=T(it&&(it.year||it.release_date||it.first_air_date)); const m=raw.match(/(19\d{2}|20\d{2})/); return m?m[1]:raw; }
+  function rating(it){ try{ if(typeof getRating==="function") return Number(getRating(it)||0); }catch{} try{ if(typeof ratingOf==="function") return Number(ratingOf(it)||0); }catch{} return Number(it&&(it.rating||it.vote_average||it.score)||0); }
+  function votes(it){ try{ if(typeof getVotes==="function") return Number(getVotes(it)||0); }catch{} try{ if(typeof votesOf==="function") return Number(votesOf(it)||0); }catch{} return Number(it&&(it.votes||it.vote_count||it.scored_by||it.members)||0); }
+  function genres(it){ try{ if(typeof getGenres==="function"){ const g=getGenres(it); if(Array.isArray(g)) return g.filter(Boolean).map(String); } }catch{} const r=it&&(it.genres||it.genre||it.tags); if(Array.isArray(r)) return r.filter(Boolean).map(String); if(typeof r==="string") return r.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean); return []; }
+  function key(it){ return T(it&&(it.id||it.kinopoiskId||it.tmdbId||it.mal_id||it.slug)) || `${N(title(it))}|${year(it)}|${N(type(it))}`; }
+  function hay(it){ return N([title(it),rawTitle(it),it&&it.search,it&&it.overview,it&&it.description,it&&it.synopsis,type(it),genres(it).join(" "),it&&it.source].filter(Boolean).join(" ")); }
 
-  function rawTitle(item){
-    return txt(item && [
-      item.ru,
-      item.title_ru,
-      item.title,
-      item.name,
-      item.en,
-      item.original_title,
-      item.original_name,
-      item.__manualTopTitle
-    ].filter(Boolean).join(" "));
-  }
-
-  function type(item){
-    try { if (typeof getType === "function") return txt(getType(item)); } catch {}
-    return txt(item && (item.type || item.category || item.kind)) || "Каталог";
-  }
-
-  function year(item){
-    try { if (typeof getYear === "function") return txt(getYear(item)); } catch {}
-    const raw = txt(item && (item.year || item.release_date || item.first_air_date));
-    const m = raw.match(/(19\d{2}|20\d{2})/);
-    return m ? m[1] : raw;
-  }
-
-  function rating(item){
-    try { if (typeof getRating === "function") return Number(getRating(item) || 0); } catch {}
-    try { if (typeof ratingOf === "function") return Number(ratingOf(item) || 0); } catch {}
-    return Number(item && (item.rating || item.vote_average || item.score) || 0);
-  }
-
-  function votes(item){
-    try { if (typeof getVotes === "function") return Number(getVotes(item) || 0); } catch {}
-    try { if (typeof votesOf === "function") return Number(votesOf(item) || 0); } catch {}
-    return Number(item && (item.votes || item.vote_count || item.scored_by || item.members) || 0);
-  }
-
-  function genres(item){
-    try {
-      if (typeof getGenres === "function") {
-        const g = getGenres(item);
-        if (Array.isArray(g)) return g.filter(Boolean).map(String);
-      }
-    } catch {}
-    const raw = item && (item.genres || item.genre || item.tags);
-    if (Array.isArray(raw)) return raw.filter(Boolean).map(String);
-    if (typeof raw === "string") return raw.split(/[,|/]+/).map(x => x.trim()).filter(Boolean);
-    return [];
-  }
-
-  function idKey(item){
-    return txt(item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) ||
-      `${norm(title(item))}|${year(item)}|${norm(type(item))}`;
-  }
-
-  function hay(item){
-    return norm([
-      title(item),
-      rawTitle(item),
-      item && item.search,
-      item && item.overview,
-      item && item.description,
-      item && item.synopsis,
-      type(item),
-      genres(item).join(" "),
-      item && item.source
-    ].filter(Boolean).join(" "));
-  }
-
-  function bucket(item){
-    const t = norm(type(item));
-    const h = hay(item);
-
-    if (t.includes("аниме") || h.includes("anime") || h.includes("jikan") || h.includes("myanimelist")) return "anime";
-    if (t.includes("сериал") || t.includes("series") || t.includes("show")) return "series";
-    if (t.includes("мульт") || t.includes("cartoon")) return "cartoons";
-    if (t.includes("фильм") || t.includes("movie") || t.includes("film")) return "movies";
-    if (t.includes("игр") || t.includes("game")) return "games";
-    if (t.includes("манг") || t.includes("manga")) return "manga";
-    if (t.includes("раноб") || h.includes("light novel") || h.includes("ranobe")) return "ranobe";
-    if (t.includes("комик") || t.includes("comic")) return "comics";
-    if (t.includes("книг") || t.includes("book")) return "books";
-
+  function bucket(it){
+    const t=N(type(it)), h=hay(it);
+    if(hasWord(t,["манга","manga"]) || hasWord(h,["manga"])) return "manga";
+    if(hasWord(t,["ранобэ","ранобе"]) || h.includes("light novel") || hasWord(h,["ranobe"])) return "ranobe";
+    if(hasWord(t,["комикс","комиксы","comic","comics"]) || hasWord(h,["comic","comics"])) return "comics";
+    if(hasWord(t,["книга","книги","book","books"])) return "books";
+    if(hasWord(t,["игра","игры","game","games"])) return "games";
+    if(hasWord(t,["аниме","анимэ","anime"]) || hasWord(h,["anime","jikan","myanimelist"])) return "anime";
+    if(hasWord(t,["сериал","сериалы","series","show"])) return "series";
+    if(hasWord(t,["мульт","мультик","мультфильм","cartoon","cartoons"])) return "cartoons";
+    if(hasWord(t,["фильм","фильмы","кино","movie","movies","film","films"])) return "movies";
     return "all";
   }
 
-  function parseJson(json){
-    const out = [];
-    if (!json) return out;
-
-    if (Array.isArray(json)) return json.filter(x => x && typeof x === "object");
-
-    if (Array.isArray(json.items)) out.push(...json.items);
-    if (Array.isArray(json.data)) out.push(...json.data);
-    if (Array.isArray(json.results)) out.push(...json.results);
-
-    if (json.sections && typeof json.sections === "object") {
-      for (const v of Object.values(json.sections)) {
-        if (Array.isArray(v)) out.push(...v);
-        else if (v && Array.isArray(v.items)) out.push(...v.items);
+  function parseJson(j){
+    const out=[];
+    if(!j) return out;
+    if(Array.isArray(j)) return j.filter(x=>x&&typeof x==="object");
+    if(Array.isArray(j.items)) out.push(...j.items);
+    if(Array.isArray(j.data)) out.push(...j.data);
+    if(Array.isArray(j.results)) out.push(...j.results);
+    if(j.sections&&typeof j.sections==="object"){
+      for(const v of Object.values(j.sections)){
+        if(Array.isArray(v)) out.push(...v);
+        else if(v&&Array.isArray(v.items)) out.push(...v.items);
       }
     }
-
-    return out.filter(x => x && typeof x === "object");
+    return out.filter(x=>x&&typeof x==="object");
   }
-
-  async function fj(url){
-    try {
-      const res = await fetch(url, { cache:"force-cache" });
-      if (!res.ok) return null;
-      return await res.json();
-    } catch {
-      return null;
-    }
+  async function fetchJson(url){
+    if(CACHE.has(url)) return CACHE.get(url);
+    try{ const res=await fetch(url,{cache:"force-cache"}); if(!res.ok) return []; const arr=parseJson(await res.json()); CACHE.set(url,arr); return arr; }catch{ return []; }
   }
-
-  function add(list, seen, item){
-    if (!item || typeof item !== "object") return;
-    const key = idKey(item);
-    if (seen.has(key)) return;
-    seen.add(key);
-    list.push(item);
-  }
-
-  async function loadPool(){
-    if (poolPromise) return poolPromise;
-
-    poolPromise = (async () => {
-      const list = [];
-      const seen = new Set();
-
-      try { (currentItems || []).forEach(item => add(list, seen, item)); } catch {}
-
-      try {
-        const sections = homeData && homeData.sections ? homeData.sections : {};
-        Object.values(sections).forEach(v => {
-          if (Array.isArray(v)) v.forEach(item => add(list, seen, item));
-          else if (v && Array.isArray(v.items)) v.items.forEach(item => add(list, seen, item));
-        });
-      } catch {}
-
-      const urls = [
-        "data/fast/home.json?v=300",
-        "data/fast/search_lite.json?v=300",
-        "data/fast/search_index.json?v=300",
-        "data/games_catalog.json?v=300",
-        "data/books_catalog.json?v=300",
-        "data/games/cult_games.json?v=300",
-        "data/games/franchises.json?v=300",
-        "data/games/game_to_movies.json?v=300",
-        "data/games/game_to_series.json?v=300",
-        "data/games/game_to_anime.json?v=300",
-        "data/games/media_to_games.json?v=300",
-        "data/books/books.json?v=300",
-        "data/books/manga.json?v=300",
-        "data/books/comics.json?v=300",
-        "data/books/ranobe.json?v=300"
-      ];
-
-      for (const url of urls) {
-        const json = await fj(url);
-        parseJson(json).forEach(item => add(list, seen, item));
-      }
-
-      pool = list;
-      return list;
-    })();
-
-    return poolPromise;
-  }
-
-  const ruMap = {
-    "космос": ["space","sci fi","science fiction","future","фантастика"],
-    "фантастика": ["sci fi","science fiction","space","future","cyberpunk","космос"],
-    "киберпанк": ["cyberpunk","future","sci fi"],
-    "боевик": ["action","fight","battle","superhero","экшен"],
-    "экшен": ["action","fight","battle","боевик"],
-    "драма": ["drama"],
-    "комедия": ["comedy","funny","юмор"],
-    "юмор": ["comedy","funny","комедия"],
-    "ужасы": ["horror","thriller","мистика","страшное"],
-    "хоррор": ["horror","ужасы","thriller"],
-    "мистика": ["mystery","supernatural","horror","ужасы"],
-    "детектив": ["detective","crime","mystery","расследование"],
-    "расследование": ["detective","crime","mystery","детектив"],
-    "романтика": ["romance","love","любовь"],
-    "любовь": ["romance","love","романтика"],
-    "спорт": ["sport","sports"],
-    "магия": ["magic","fantasy","фэнтези"],
-    "фэнтези": ["fantasy","magic","dragon","rpg","магия"],
-    "школа": ["school","slice of life"],
-    "самураи": ["samurai","sword"],
-    "ниндзя": ["ninja","naruto"],
-    "пираты": ["pirate","one piece"],
-    "зомби": ["zombie","undead"],
-    "вампиры": ["vampire"],
-    "роботы": ["robot","mecha"],
-    "меха": ["mecha","robot"],
-    "супергерои": ["superhero","marvel","dc"],
-    "марвел": ["marvel","superhero"],
-    "дс": ["dc","superhero"],
-    "игра": ["game","игры"],
-    "игры": ["game","игра"],
-    "книга": ["book","books","книги"],
-    "книги": ["book","books","книга"],
-    "манга": ["manga"],
-    "комикс": ["comic","comics"],
-    "комиксы": ["comic","comics"],
-    "ранобэ": ["light novel","ranobe"],
-    "топ": ["popular","best","рейтинг"],
-    "лучшие": ["best","top","popular"],
-    "популярные": ["popular","top"]
-  };
-
-  const weak = new Set([
-    "подбери","подобрать","посоветуй","посоветовать","найди","найти","покажи","дай",
-    "мне","что","чтобы","хочу","можно","посмотреть","вечер","вечером","лучшие",
-    "какой","какие","что нибудь","что-нибудь","похожее","похожие","типо","типа",
-    "плиз","пожалуйста","ну","гоу","давай","каталог","из","по","про","для","на",
-    "с","и","или","а","в","во"
-  ]);
-
-  function tokens(q){
-    const base = norm(q);
-    const parts = base.split(" ").filter(x => x.length >= 2);
-    const out = new Set(parts);
-
-    for (const p of parts) {
-      if (ruMap[p]) ruMap[p].forEach(x => norm(x).split(" ").forEach(y => out.add(y)));
-    }
-
-    return [...out].filter(x => x.length >= 2 && !weak.has(x));
-  }
-
-  function intent(q){
-    const x = norm(q);
-    const out = {
-      bucket: "all",
-      mood: "",
-      sort: "smart",
-      yearMin: 0,
-      yearMax: 9999,
-      onlyTop: false,
-      open: false,
-      count: V300_LIMIT
-    };
-
-    const count = x.match(/\b(\d{1,2})\b/);
-    if (count) out.count = Math.max(3, Math.min(20, Number(count[1])));
-
-    if (/\b(аниме|анимэ|anime)\b/.test(x)) out.bucket = "anime";
-    else if (/\b(сериал|сериалы|series|show)\b/.test(x)) out.bucket = "series";
-    else if (/\b(мульт|мультик|мультфильм|cartoon)\b/.test(x)) out.bucket = "cartoons";
-    else if (/\b(фильм|фильмы|кино|movie|film)\b/.test(x)) out.bucket = "movies";
-    else if (/\b(игра|игры|game|games)\b/.test(x)) out.bucket = "games";
-    else if (/\b(книга|книги|book|books)\b/.test(x)) out.bucket = "books";
-    else if (/\b(манга|manga)\b/.test(x)) out.bucket = "manga";
-    else if (/\b(комикс|комиксы|comic|comics)\b/.test(x)) out.bucket = "comics";
-    else if (/\b(ранобэ|ранобе|light novel)\b/.test(x)) out.bucket = "ranobe";
-
-    if (x.includes("90 х") || x.includes("90е") || x.includes("90s")) { out.yearMin = 1990; out.yearMax = 1999; }
-    if (x.includes("2000")) { out.yearMin = 2000; out.yearMax = 2009; }
-    if (x.includes("2010")) { out.yearMin = 2010; out.yearMax = 2019; }
-    if (x.includes("2020")) { out.yearMin = 2020; out.yearMax = 2029; }
-    const yr = x.match(/\b(19\d{2}|20\d{2})\b/);
-    if (yr) { out.yearMin = Number(yr[1]); out.yearMax = Number(yr[1]); }
-
-    if (x.includes("жест") || x.includes("мрач") || x.includes("темн")) out.mood = "dark";
-    if (x.includes("легк") || x.includes("добро") || x.includes("смешн") || x.includes("угар")) out.mood = "light";
-    if (x.includes("кров") || x.includes("мясо")) out.mood = "hard";
-    if (x.includes("романт") || x.includes("любов")) out.mood = "romance";
-    if (x.includes("страш") || x.includes("ужас") || x.includes("хоррор")) out.mood = "horror";
-    if (x.includes("детектив") || x.includes("расслед")) out.mood = "detective";
-    if (x.includes("космос") || x.includes("sci") || x.includes("фантаст")) out.mood = "sci";
-    if (x.includes("маг") || x.includes("фэнтези")) out.mood = "fantasy";
-    if (x.includes("спорт")) out.mood = "sport";
-    if (x.includes("школ")) out.mood = "school";
-
-    if (x.includes("топ") || x.includes("лучшие") || x.includes("популяр")) { out.sort = "top"; out.onlyTop = true; }
-    if (x.includes("нов") || x.includes("свежее")) out.sort = "new";
-    if (x.includes("недооцен")) out.sort = "hidden";
-    if (x.includes("открой") || x.includes("перейди") || x.includes("покажи раздел")) out.open = true;
-
+  function currentPool(){
+    const out=[], seen=new Set();
+    function add(it){ if(!it||typeof it!=="object") return; const k=key(it); if(seen.has(k)) return; seen.add(k); out.push(it); }
+    try{ (currentItems||[]).forEach(add); }catch{}
+    try{ const sections=homeData&&homeData.sections?homeData.sections:{}; Object.values(sections).forEach(v=>{ if(Array.isArray(v)) v.forEach(add); else if(v&&Array.isArray(v.items)) v.items.forEach(add); }); }catch{}
     return out;
   }
 
+  function detectIntent(q){
+    const w = new Set(words(q));
+    const x=N(q);
+    const out={bucket:"all",mood:"",sort:"smart",count:LIMIT,yearMin:0,yearMax:9999,explain:false,random:false};
+
+    if(["аниме","анимэ","анимз","anime"].some(a=>w.has(a))) out.bucket="anime";
+    else if(["сериал","сериалы","series","show"].some(a=>w.has(a))) out.bucket="series";
+    else if(["мульт","мультик","мультфильм","cartoon","cartoons"].some(a=>w.has(a))) out.bucket="cartoons";
+    else if(["фильм","фильмы","кино","movie","movies","film","films"].some(a=>w.has(a))) out.bucket="movies";
+    else if(["игра","игры","game","games"].some(a=>w.has(a))) out.bucket="games";
+    else if(["книга","книги","book","books"].some(a=>w.has(a))) out.bucket="books";
+    else if(["манга","manga"].some(a=>w.has(a))) out.bucket="manga";
+    else if(["комикс","комиксы","comic","comics"].some(a=>w.has(a))) out.bucket="comics";
+    else if(["ранобэ","ранобе"].some(a=>w.has(a)) || x.includes("light novel")) out.bucket="ranobe";
+
+    if(x.includes("90 х")||x.includes("90е")||x.includes("90s")){out.yearMin=1990;out.yearMax=1999;}
+    if(x.includes("2000")){out.yearMin=2000;out.yearMax=2009;}
+    if(x.includes("2010")){out.yearMin=2010;out.yearMax=2019;}
+    if(x.includes("2020")){out.yearMin=2020;out.yearMax=2029;}
+    const yr=x.match(/\b(19\d{2}|20\d{2})\b/);
+    if(yr){out.yearMin=Number(yr[1]);out.yearMax=Number(yr[1]);}
+
+    if(x.includes("жест")||x.includes("мрач")||x.includes("темн")) out.mood="dark";
+    if(x.includes("легк")||x.includes("добро")||x.includes("смешн")||x.includes("угар")) out.mood="light";
+    if(x.includes("кров")||x.includes("мясо")) out.mood="hard";
+    if(x.includes("романт")||x.includes("любов")) out.mood="romance";
+    if(x.includes("страш")||x.includes("ужас")||x.includes("хоррор")) out.mood="horror";
+    if(x.includes("детектив")||x.includes("расслед")) out.mood="detective";
+    if(x.includes("космос")||x.includes("sci")||x.includes("фантаст")) out.mood="sci";
+    if(x.includes("маг")||x.includes("фэнтези")||x.includes("rpg")||x.includes("рпг")) out.mood="fantasy";
+    if(x.includes("спорт")) out.mood="sport";
+    if(x.includes("школ")) out.mood="school";
+
+    if(x.includes("топ")||x.includes("лучшие")||x.includes("популяр")) out.sort="top";
+    if(x.includes("нов")||x.includes("свежее")) out.sort="new";
+    if(x.includes("недооцен")) out.sort="hidden";
+    if(x.includes("рандом")||x.includes("случайн")) out.random=true;
+    out.explain=x.includes("объясни")||x.includes("почему");
+    return out;
+  }
+
+  const RU={
+    космос:["space","sci","science","future","фантастика"], фантастика:["sci","science","space","future","cyberpunk"],
+    киберпанк:["cyberpunk","future"], боевик:["action","fight","battle","экшен"], экшен:["action","fight","battle"],
+    комедия:["comedy","funny","юмор"], юмор:["comedy","funny"], ужасы:["horror","thriller","мистика"], хоррор:["horror","thriller"],
+    мистика:["mystery","supernatural","horror"], детектив:["detective","crime","mystery"], романтика:["romance","love"], любовь:["romance","love"],
+    спорт:["sport"], магия:["magic","fantasy"], фэнтези:["fantasy","magic","dragon","rpg"], рпг:["rpg","fantasy"], школа:["school","slice"],
+    марвел:["marvel","superhero"], комиксы:["comic","comics"], комикс:["comic","comics"], манга:["manga"], ранобэ:["light","novel","ranobe"],
+    игры:["game"], игра:["game"], книги:["book"], книга:["book"]
+  };
+  const WEAK=new Set("подбери подобрать посоветуй посоветовать найди найти покажи дай мне что чтобы хочу можно посмотреть вечер вечером какой какие похожее похожие типо типа плиз пожалуйста ну гоу давай каталог из по про для на с и или а в во как".split(" "));
+  function tokens(q){
+    const out=new Set();
+    words(q).filter(x=>x.length>=2).forEach(p=>{ out.add(p); if(RU[p]) RU[p].forEach(x=>words(x).forEach(y=>out.add(y))); });
+    return [...out].filter(x=>x.length>=2&&!WEAK.has(x));
+  }
   function moodWords(m){
-    if (m === "dark") return ["dark","grim","psychological","crime","thriller","horror","драма","триллер","криминал","мистика","сверхъестественное"];
-    if (m === "light") return ["comedy","family","adventure","slice","комедия","семейное","приключения","повседневность"];
-    if (m === "hard") return ["horror","blood","violent","seinen","thriller","ужасы","триллер","боевик","сэйнэн"];
-    if (m === "romance") return ["romance","love","school","drama","романтика","любовь","драма"];
-    if (m === "horror") return ["horror","supernatural","mystery","ужасы","мистика","триллер"];
-    if (m === "detective") return ["detective","crime","mystery","thriller","детектив","криминал","расследование"];
-    if (m === "sci") return ["space","sci","science","future","cyberpunk","фантастика","космос"];
-    if (m === "fantasy") return ["fantasy","magic","dragon","rpg","фэнтези","магия"];
-    if (m === "sport") return ["sport","sports","спорт"];
-    if (m === "school") return ["school","slice","romance","школа","повседневность"];
-    return [];
+    return ({
+      dark:["dark","grim","psychological","crime","thriller","horror","драма","триллер","криминал","мистика"],
+      light:["comedy","family","adventure","slice","комедия","семейное","приключения"],
+      hard:["horror","blood","violent","seinen","thriller","ужасы","триллер","боевик"],
+      romance:["romance","love","school","drama","романтика","любовь"],
+      horror:["horror","supernatural","mystery","ужасы","мистика","триллер"],
+      detective:["detective","crime","mystery","thriller","детектив","криминал"],
+      sci:["space","sci","science","future","cyberpunk","фантастика","космос"],
+      fantasy:["fantasy","magic","dragon","rpg","фэнтези","магия"],
+      sport:["sport","спорт"],
+      school:["school","slice","romance","школа"]
+    }[m]||[]);
   }
-
-  function clean(item){
-    if (!item) return false;
-    const y = Number(year(item) || 0);
-    const current = new Date().getFullYear();
-    if (y && y > current + 3) return false;
-
-    const h = hay(item);
-    const banned = [
-      "trailer","teaser","preview","recap","summary","soundtrack","music video","concert",
-      "stage play","fan letter","behind the scenes","трейлер","тизер","превью","рекап",
-      "краткое содержание","саундтрек","концерт"
-    ];
-    if (banned.some(x => h.includes(x))) return false;
-
-    const ttl = norm(title(item));
-    if (!ttl || ttl === "без названия") return false;
-
-    return true;
+  function urlsForIntent(it){
+    const b=it.bucket;
+    if(b==="games") return ["data/games_catalog.json?v=304","data/games/cult_games.json?v=304","data/games/franchises.json?v=304","data/games/game_to_movies.json?v=304","data/games/game_to_series.json?v=304","data/games/game_to_anime.json?v=304","data/games/media_to_games.json?v=304"];
+    if(b==="books"||b==="manga"||b==="comics"||b==="ranobe") return ["data/books_catalog.json?v=304","data/books/books.json?v=304","data/books/manga.json?v=304","data/books/comics.json?v=304","data/books/ranobe.json?v=304"];
+    return ["data/fast/search_lite.json?v=304"];
   }
-
-  function bucketPass(item, b){
-    if (!b || b === "all") return true;
-    const x = bucket(item);
-    if (b === "books") return x === "books" || x === "ranobe";
-    return x === b;
+  async function poolFor(q){
+    const it=detectIntent(q);
+    const list=currentPool(), seen=new Set(list.map(key));
+    for(const url of urlsForIntent(it)){
+      const arr=await fetchJson(url);
+      for(const item of arr){ const k=key(item); if(seen.has(k)) continue; seen.add(k); list.push(item); }
+    }
+    return list;
   }
-
-  function score(item, tk, it, q){
-    if (!clean(item)) return 0;
-    if (!bucketPass(item, it.bucket)) return 0;
-
-    const y = Number(year(item) || 0);
-    if (y && (y < it.yearMin || y > it.yearMax)) return 0;
-
-    const h = hay(item);
-    const ttl = norm(title(item));
-    const raw = norm(rawTitle(item));
-    const gen = norm(genres(item).join(" "));
-    const typ = norm(type(item));
-
-    let sc = 0;
-
-    for (const token of tk) {
-      if (!token) continue;
-      if (ttl === token || raw === token) sc += 180;
-      else if (ttl.includes(token)) sc += 80;
-      else if (raw.includes(token)) sc += 60;
-      else if (gen.includes(token)) sc += 55;
-      else if (typ.includes(token)) sc += 25;
-      else if (h.includes(token)) sc += 18;
+  function clean(it){
+    if(!it) return false;
+    const y=Number(year(it)||0), cur=new Date().getFullYear();
+    if(y&&y>cur+3) return false;
+    const h=hay(it);
+    if(["trailer","teaser","preview","recap","summary","soundtrack","трейлер","тизер","превью","рекап"].some(x=>h.includes(x))) return false;
+    const ttl=N(title(it));
+    return !!ttl&&ttl!=="без названия";
+  }
+  function bucketPass(it,b){
+    if(!b||b==="all") return true;
+    const x=bucket(it);
+    if(b==="books") return x==="books"||x==="ranobe";
+    return x===b;
+  }
+  function score(it,tk,itn){
+    if(!clean(it)||!bucketPass(it,itn.bucket)) return 0;
+    const y=Number(year(it)||0);
+    if(y&&(y<itn.yearMin||y>itn.yearMax)) return 0;
+    const h=hay(it), ttl=N(title(it)), raw=N(rawTitle(it)), gen=N(genres(it).join(" ")), typ=N(type(it));
+    let sc=0;
+    for(const token of tk){
+      if(ttl===token||raw===token) sc+=200;
+      else if(ttl.includes(token)) sc+=90;
+      else if(raw.includes(token)) sc+=65;
+      else if(gen.includes(token)) sc+=60;
+      else if(typ.includes(token)) sc+=28;
+      else if(h.includes(token)) sc+=18;
     }
-
-    for (const mw of moodWords(it.mood)) {
-      const m = norm(mw);
-      if (gen.includes(m)) sc += 45;
-      else if (ttl.includes(m) || raw.includes(m)) sc += 28;
-      else if (h.includes(m)) sc += 18;
+    for(const mw of moodWords(itn.mood)){
+      const m=N(mw);
+      if(gen.includes(m)) sc+=50;
+      else if(ttl.includes(m)||raw.includes(m)) sc+=30;
+      else if(h.includes(m)) sc+=18;
     }
-
-    const qn = norm(q);
-    if (qn.includes("как") || qn.includes("типо") || qn.includes("типа") || qn.includes("похож")) {
-      // Бонус за совпадение жанров/тональности, когда просят "как что-то"
-      if (h.includes("приключ") || h.includes("action") || h.includes("экшен")) sc += 10;
-      if (h.includes("драма") || h.includes("drama")) sc += 8;
-    }
-
-    const r = rating(item);
-    const v = votes(item);
-    if (it.sort === "top") sc += Math.min(100, Math.log10(v + 1) * 16) + r * 10;
-    else if (it.sort === "new") sc += y >= 2020 ? (y - 2019) * 12 : 0;
-    else if (it.sort === "hidden") sc += r * 14 - Math.min(35, Math.log10(v + 1) * 6);
-    else sc += Math.min(55, Math.log10(v + 1) * 9) + r * 6;
-
-    try { if (typeof hasPoster === "function" && hasPoster(item)) sc += 8; } catch {}
-
+    const r=rating(it), v=votes(it);
+    if(itn.sort==="top") sc+=Math.min(110,Math.log10(v+1)*17)+r*11;
+    else if(itn.sort==="new") sc+=y>=2020?(y-2019)*12:0;
+    else if(itn.sort==="hidden") sc+=r*14-Math.min(45,Math.log10(v+1)*7);
+    else sc+=Math.min(60,Math.log10(v+1)*9)+r*6;
+    if(itn.bucket!=="all" && tk.length<=2) sc+=40;
     return sc;
   }
-
   function dedupe(items){
-    const map = new Map();
-    for (const item of items) {
-      const key = `${bucket(item)}|${norm(title(item))}|${year(item)}`;
-      const old = map.get(key);
-      if (!old) {
-        map.set(key, item);
-        continue;
-      }
-      const a = rating(item) * 100000 + votes(item);
-      const b = rating(old) * 100000 + votes(old);
-      if (a > b) map.set(key, item);
+    const map=new Map();
+    for(const it of items){
+      const k=`${bucket(it)}|${N(title(it))}|${year(it)}`;
+      const old=map.get(k);
+      if(!old||rating(it)*100000+votes(it)>rating(old)*100000+votes(old)) map.set(k,it);
     }
     return [...map.values()];
   }
-
-  async function find(q, lim){
-    const it = intent(q);
-    const tk = tokens(q);
-    const data = await loadPool();
-
-    let arr = data
-      .map(item => ({ item, score: score(item, tk, it, q) }))
-      .filter(x => x.score > 0)
-      .sort((a,b) => b.score - a.score)
-      .map(x => x.item);
-
-    if (!arr.length && it.bucket !== "all") {
-      arr = data
-        .filter(item => clean(item) && bucketPass(item, it.bucket))
-        .sort((a,b) => (rating(b)*100000 + votes(b)) - (rating(a)*100000 + votes(a)));
-    }
-
-    const result = dedupe(arr).slice(0, lim || it.count || V300_LIMIT);
-    lastResults = result;
-    lastQuery = q;
-    return result;
+  async function search(q){
+    const itn=detectIntent(q), tk=tokens(q), data=await poolFor(q);
+    let arr=data.map(it=>({it,sc:score(it,tk,itn)})).filter(x=>x.sc>0).sort((a,b)=>b.sc-a.sc).map(x=>x.it);
+    if(!arr.length&&itn.bucket!=="all") arr=data.filter(it=>clean(it)&&bucketPass(it,itn.bucket)).sort((a,b)=>(rating(b)*100000+votes(b))-(rating(a)*100000+votes(a)));
+    if(itn.random) arr=arr.sort(()=>Math.random()-.5);
+    const res=dedupe(arr).slice(0,itn.count||LIMIT);
+    lastResults=res; lastQuery=q;
+    return {items:res,intent:itn,tk};
   }
-
-  function fmtVotes(v){
-    v = Number(v || 0);
-    if (!v) return "";
-    if (v >= 1000000) return (v / 1000000).toFixed(1).replace(".0","") + " млн";
-    if (v >= 1000) return Math.round(v / 1000) + " тыс";
-    return String(v);
+  function fmtVotes(v){ v=Number(v||0); if(!v)return""; if(v>=1000000)return(v/1000000).toFixed(1).replace(".0","")+" млн"; if(v>=1000)return Math.round(v/1000)+" тыс"; return String(v); }
+  function why(it,itn,tk){
+    const out=[], g=genres(it).slice(0,3).join(", ");
+    if(g)out.push("жанры: "+g); if(rating(it))out.push("рейтинг "+rating(it).toFixed(1)); if(votes(it))out.push(fmtVotes(votes(it))+" голосов"); if(itn.mood)out.push("настроение: "+itn.mood); if(tk.length)out.push("совпало: "+tk.slice(0,3).join(", "));
+    return out.slice(0,3).join("; ");
   }
-
-  function fmt(items){
-    if (!items.length) return "";
-    return items.map((it, i) => {
-      const r = rating(it);
-      const v = votes(it);
-      const gs = genres(it).slice(0, 2).join(", ");
-      return `${i + 1}. ${title(it)} (${year(it) || "—"}) — ${type(it)} · ${r ? "★ " + r.toFixed(1) : "★ —"}${v ? " · " + fmtVotes(v) : ""}${gs ? " · " + gs : ""}`;
-    }).join("\n");
+  function fmt(items,itn,tk){
+    return items.map((it,i)=>`${i+1}. ${title(it)} (${year(it)||"—"}) — ${type(it)} · ${rating(it)?"★ "+rating(it).toFixed(1):"★ —"}${votes(it)?" · "+fmtVotes(votes(it)):""}${genres(it).slice(0,2).length?" · "+genres(it).slice(0,2).join(", "):""}${itn.explain?"\n   почему: "+why(it,itn,tk):""}`).join("\n");
   }
-
   function openResult(num){
-    const index = Number(num) - 1;
-    const item = lastResults[index];
-    if (!item) return `Нет результата под номером ${num}. Сначала сделай поиск.`;
-    try {
-      if (typeof openDetails === "function") {
-        openDetails(item);
-        return `Открыл: ${title(item)}`;
-      }
-    } catch {}
-    return `Нашёл: ${title(item)}, но открыть карточку не получилось.`;
+    const it=lastResults[Number(num)-1];
+    if(!it) return `Нет результата под номером ${num}. Сначала сделай поиск.`;
+    try{ if(typeof openDetails==="function"){ openDetails(it); return "Открыл: "+title(it); } }catch{}
+    return "Нашёл: "+title(it)+", но открыть не получилось.";
   }
-
-  function help(){
-    return [
-      "V300 помощник умеет искать по всему каталогу:",
-      "фильмы, сериалы, аниме, мультфильмы, игры, книги, манга, комиксы, ранобэ.",
-      "",
-      "Примеры:",
-      "• игры rpg фэнтези",
-      "• манга ужасы",
-      "• комиксы marvel",
-      "• книги по играм",
-      "• фильмы про космос",
-      "• мрачное аниме",
-      "• сериал детектив",
-      "• топ фильмов 90-х",
-      "• открой 1"
-    ].join("\n");
+  function compare(a,b){
+    const A=lastResults[Number(a)-1], B=lastResults[Number(b)-1];
+    if(!A||!B) return "Сначала сделай поиск, потом напиши: сравни 1 и 2.";
+    const pick=rating(A)!==rating(B)?(rating(A)>rating(B)?A:B):(votes(A)>votes(B)?A:B);
+    return `${title(A)}: ★ ${rating(A)||"—"} · ${fmtVotes(votes(A))||"0"} голосов\n${title(B)}: ★ ${rating(B)||"—"} · ${fmtVotes(votes(B))||"0"} голосов\nЯ бы выбрал: ${title(pick)}.`;
   }
-
+  function plan(){
+    if(!lastResults.length) return "Сначала попроси подборку, потом напиши: сделай план.";
+    const p=lastResults.slice(0,3);
+    return ["План просмотра:",`1. Начать с: ${title(p[0])}`,p[1]?`2. Потом: ${title(p[1])}`:"",p[2]?`3. На финал: ${title(p[2])}`:"","Если хочешь — напиши «открой 1»."].filter(Boolean).join("\n");
+  }
+  function help(){ return ["V304 строгий помощник:","• если просишь аниме — книги/сериалы не подмешивает","• если просишь игры — только игры","• если просишь мангу — только манга","• команды: открой 1, сравни 1 и 2, сделай план","Примеры: анимэ фантастика; аниме; анимз; игры rpg; манга ужасы; фильмы космос"].join("\n"); }
   async function answer(q){
-    const x = norm(q);
-
-    if (!x) return "Напиши что ищем: тип, жанр, настроение или пример.";
-    if (/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x)) {
-      return "Привет. Я V300: ищу по всему каталогу и могу открыть результат по номеру. Напиши запрос.";
-    }
-    if (x.includes("помощ") || x.includes("что умеешь") || x.includes("как искать")) return help();
-
-    const open = x.match(/(?:открой|открыть|покажи)\s+(\d{1,2})/);
-    if (open) return openResult(open[1]);
-
-    if (x.includes("еще") || x.includes("ещё") || x.includes("следующие")) {
-      if (!lastQuery) return "Сначала сделай поиск, потом проси ещё.";
-      const more = await find(lastQuery, 20);
-      const next = more.slice(10, 20);
-      return next.length ? `Ещё варианты:\n${fmt(next)}` : "Больше нормальных вариантов не нашёл.";
-    }
-
-    if (x.includes("топ студ")) {
-      try { renderAnimeStudiosTop(); return "Открыл «Топ студий»."; } catch {}
-    }
-    if (x.includes("топ аним")) {
-      try { renderAnimeTopManual(1); return "Открыл «Топ аниме 100»."; } catch {}
-    }
-
-    const items = await find(q, V300_LIMIT);
-    if (!items.length) {
-      return [
-        "Не нашёл нормальные совпадения.",
-        "Попробуй так:",
-        "«игры rpg фэнтези», «манга ужасы», «фильмы космос», «аниме школа романтика», «комиксы marvel»."
-      ].join("\n");
-    }
-
-    const it = intent(q);
-    const heads = {
-      movies:"Нашёл фильмы:",
-      series:"Нашёл сериалы:",
-      anime:"Нашёл аниме:",
-      cartoons:"Нашёл мультфильмы:",
-      games:"Нашёл игры:",
-      books:"Нашёл книги:",
-      manga:"Нашёл мангу:",
-      comics:"Нашёл комиксы:",
-      ranobe:"Нашёл ранобэ:",
-      all:"Нашёл варианты:"
-    };
-
-    return `${heads[it.bucket] || "Нашёл варианты:"}\n${fmt(items)}\n\nМожно написать: открой 1`;
+    const x=N(q);
+    if(!x) return "Напиши что ищем.";
+    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x)) return "Привет. Я V304: строгий помощник. Если просишь аниме — покажу именно аниме, без книг и сериалов.";
+    if(x.includes("помощ")||x.includes("что умеешь")||x.includes("как искать")) return help();
+    const op=x.match(/(?:открой|открыть|покажи)\s+(\d{1,2})/); if(op) return openResult(op[1]);
+    const cmp=x.match(/сравни\s+(\d{1,2})\s+(?:и|с)\s+(\d{1,2})/); if(cmp) return compare(cmp[1],cmp[2]);
+    if(x.includes("план")||x.includes("марафон")) return plan();
+    if(x.includes("еще")||x.includes("ещё")) return lastQuery ? (await answer(lastQuery)) : "Сначала сделай поиск.";
+    const res=await search(q);
+    if(!res.items.length) return "Не нашёл именно в нужном разделе. Попробуй: «аниме фантастика», «топ аниме», «аниме магия», «мрачное аниме».";
+    const heads={movies:"Нашёл фильмы:",series:"Нашёл сериалы:",anime:"Нашёл аниме:",cartoons:"Нашёл мультфильмы:",games:"Нашёл игры:",books:"Нашёл книги:",manga:"Нашёл мангу:",comics:"Нашёл комиксы:",ranobe:"Нашёл ранобэ:",all:"Нашёл варианты:"};
+    return `${heads[res.intent.bucket]||"Нашёл варианты:"}\n${fmt(res.items,res.intent,res.tk)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
   }
-
-  function addMsg(role, text){
-    if (typeof gkmHelperAddMessage === "function") {
-      gkmHelperAddMessage(role, text);
-      return;
-    }
-
-    const box = document.getElementById("gkmAiMessages");
-    if (!box) return;
-    const div = document.createElement("div");
-    div.className = role === "user" ? "ai-user" : "ai-bot";
-    div.innerHTML = String(text).replace(/[&<>"']/g, ch => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    }[ch])).replace(/\n/g, "<br>");
-    box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
+  function addMsg(role,text){
+    if(typeof gkmHelperAddMessage==="function"){ gkmHelperAddMessage(role,text); return; }
+    const box=document.getElementById("gkmAiMessages"); if(!box)return;
+    const div=document.createElement("div"); div.className=role==="user"?"ai-user":"ai-bot"; div.innerHTML=E(text).replace(/\n/g,"<br>"); box.appendChild(div); box.scrollTop=box.scrollHeight;
   }
-
   function install(){
-    const form = document.getElementById("gkmAiForm");
-    const input = document.getElementById("gkmAiInput");
-    const dialog = document.getElementById("gkmAiDialog");
-    const floatBtn = document.getElementById("gkmAiFloatBtn");
-    const closeBtn = document.getElementById("gkmAiCloseBtn");
-
-    if (floatBtn && dialog && input) {
-      floatBtn.onclick = () => {
-        if (typeof dialog.showModal === "function") dialog.showModal();
-        else dialog.setAttribute("open", "");
-        setTimeout(() => input.focus(), 50);
-      };
-    }
-
-    if (closeBtn && dialog) {
-      closeBtn.onclick = () => dialog.close ? dialog.close() : dialog.removeAttribute("open");
-    }
-
-    if (!form || !input) return;
-
-    form.onsubmit = async (e) => {
-      e.preventDefault();
-      const q = input.value.trim();
-      if (!q) return;
-      input.value = "";
-      addMsg("user", q);
-      addMsg("bot", "V300 ищет по всему каталогу...");
-
-      try {
-        const out = await answer(q);
-        const box = document.getElementById("gkmAiMessages");
-        if (box) {
-          const last = box.lastElementChild;
-          if (last && last.classList.contains("ai-bot") && last.textContent.includes("V300 ищет")) {
-            last.innerHTML = String(out).replace(/[&<>"']/g, ch => ({
-              "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-            }[ch])).replace(/\n/g, "<br>");
-            box.scrollTop = box.scrollHeight;
-            return;
-          }
-        }
-        addMsg("bot", out);
-      } catch (err) {
-        console.warn("GKM V300 helper error", err);
-        addMsg("bot", "Помощник словил ошибку поиска. Попробуй запрос проще.");
-      }
+    const form=document.getElementById("gkmAiForm"), input=document.getElementById("gkmAiInput"), dialog=document.getElementById("gkmAiDialog"), floatBtn=document.getElementById("gkmAiFloatBtn"), closeBtn=document.getElementById("gkmAiCloseBtn");
+    if(floatBtn&&dialog&&input) floatBtn.onclick=()=>{ if(typeof dialog.showModal==="function") dialog.showModal(); else dialog.setAttribute("open",""); setTimeout(()=>input.focus(),50); };
+    if(closeBtn&&dialog) closeBtn.onclick=()=>dialog.close?dialog.close():dialog.removeAttribute("open");
+    if(!form||!input) return;
+    form.dataset.v260Installed="0"; form.dataset.v300Installed="0"; form.dataset.v301Installed="0"; form.dataset.v302Installed="0"; form.dataset.v303Installed="0"; form.dataset.v304Installed="1";
+    form.onsubmit=async e=>{
+      e.preventDefault(); if(e.stopPropagation)e.stopPropagation();
+      const q=input.value.trim(); if(!q)return; input.value="";
+      addMsg("user",q); addMsg("bot","V304 ищет строго по нужному разделу...");
+      try{
+        const out=await answer(q);
+        const box=document.getElementById("gkmAiMessages");
+        if(box){ const last=box.lastElementChild; if(last&&last.classList.contains("ai-bot")&&last.textContent.includes("V304 ищет")){ last.innerHTML=E(out).replace(/\n/g,"<br>"); box.scrollTop=box.scrollHeight; return; } }
+        addMsg("bot",out);
+      }catch(err){ console.warn("GKM V304 helper error",err); addMsg("bot","Помощник словил ошибку. Попробуй запрос проще."); }
     };
   }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, { once:true });
-  else install();
-
-  setTimeout(install, 500);
-  setTimeout(install, 1500);
-  setTimeout(() => loadPool().catch(()=>{}), 1000);
-
-  console.log("GKM V300: ultra helper installed");
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",install,{once:true}); else install();
+  setTimeout(install,300); setTimeout(install,1000); setTimeout(install,2000);
+  console.log("GKM V304: strict helper router live-tested installed");
 })();
-/* GKM V300 ULTRA HELPER END */
-
-
-/* GKM V301 AI-LIKE HELPER START */
-(function(){
-  window.GKM_V301_AI_LIKE_HELPER_VERSION = "v301-ai-like-helper-tested-100-2026-07-01";
-  const LIMIT=12, STORE_KEY="gkm_v301_helper_memory";
-  let poolPromise=null, pool=[], lastResults=[], lastQuery="", lastOffset=0;
-
-  function T(v){return String(v==null?"":v).trim();}
-  function N(v){return T(v).toLowerCase().replace(/ё/g,"е").replace(/[’`]/g,"'").replace(/&/g," and ").replace(/[^\p{L}\p{N}]+/gu," ").replace(/\s+/g," ").trim();}
-  function E(v){return String(v==null?"":v).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));}
-  function mem(){try{return JSON.parse(localStorage.getItem(STORE_KEY)||"{}")||{};}catch{return{};}}
-  function saveMem(m){try{localStorage.setItem(STORE_KEY,JSON.stringify(m));}catch{}}
-  function remember(k,v){const m=mem();m[k]=v;m.updatedAt=Date.now();saveMem(m);}
-
-  function title(it){try{if(typeof displayTitle==="function")return T(displayTitle(it));}catch{}return T(it&&(it.ru||it.title_ru||it.title||it.name||it.en||it.original_title||it.original_name))||"Без названия";}
-  function rawTitle(it){return T(it&&[it.ru,it.title_ru,it.title,it.name,it.en,it.original_title,it.original_name,it.__manualTopTitle].filter(Boolean).join(" "));}
-  function type(it){try{if(typeof getType==="function")return T(getType(it));}catch{}return T(it&&(it.type||it.category||it.kind))||"Каталог";}
-  function year(it){try{if(typeof getYear==="function")return T(getYear(it));}catch{}const raw=T(it&&(it.year||it.release_date||it.first_air_date));const m=raw.match(/(19\d{2}|20\d{2})/);return m?m[1]:raw;}
-  function rating(it){try{if(typeof getRating==="function")return Number(getRating(it)||0);}catch{}try{if(typeof ratingOf==="function")return Number(ratingOf(it)||0);}catch{}return Number(it&&(it.rating||it.vote_average||it.score)||0);}
-  function votes(it){try{if(typeof getVotes==="function")return Number(getVotes(it)||0);}catch{}try{if(typeof votesOf==="function")return Number(votesOf(it)||0);}catch{}return Number(it&&(it.votes||it.vote_count||it.scored_by||it.members)||0);}
-  function genres(it){try{if(typeof getGenres==="function"){const g=getGenres(it);if(Array.isArray(g))return g.filter(Boolean).map(String);}}catch{}const r=it&&(it.genres||it.genre||it.tags);if(Array.isArray(r))return r.filter(Boolean).map(String);if(typeof r==="string")return r.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);return [];}
-  function idKey(it){return T(it&&(it.id||it.kinopoiskId||it.tmdbId||it.mal_id||it.slug))||`${N(title(it))}|${year(it)}|${N(type(it))}`;}
-  function hay(it){return N([title(it),rawTitle(it),it&&it.search,it&&it.overview,it&&it.description,it&&it.synopsis,type(it),genres(it).join(" "),it&&it.source].filter(Boolean).join(" "));}
-  function bucket(it){const t=N(type(it)),h=hay(it);if(t.includes("аниме")||h.includes("anime")||h.includes("jikan")||h.includes("myanimelist"))return"anime";if(t.includes("сериал")||t.includes("series")||t.includes("show"))return"series";if(t.includes("мульт")||t.includes("cartoon"))return"cartoons";if(t.includes("фильм")||t.includes("movie")||t.includes("film"))return"movies";if(t.includes("игр")||t.includes("game"))return"games";if(t.includes("манг")||t.includes("manga"))return"manga";if(t.includes("раноб")||h.includes("light novel")||h.includes("ranobe"))return"ranobe";if(t.includes("комик")||t.includes("comic"))return"comics";if(t.includes("книг")||t.includes("book"))return"books";return"all";}
-  function parseJson(j){const o=[];if(!j)return o;if(Array.isArray(j))return j.filter(x=>x&&typeof x==="object");if(Array.isArray(j.items))o.push(...j.items);if(Array.isArray(j.data))o.push(...j.data);if(Array.isArray(j.results))o.push(...j.results);if(j.sections&&typeof j.sections==="object"){for(const v of Object.values(j.sections)){if(Array.isArray(v))o.push(...v);else if(v&&Array.isArray(v.items))o.push(...v.items);}}return o.filter(x=>x&&typeof x==="object");}
-  async function FJ(url){try{const r=await fetch(url,{cache:"force-cache"});if(!r.ok)return null;return await r.json();}catch{return null;}}
-  function add(list,seen,it){if(!it||typeof it!=="object")return;const k=idKey(it);if(seen.has(k))return;seen.add(k);list.push(it);}
-  async function loadPool(){if(poolPromise)return poolPromise;poolPromise=(async()=>{const list=[],seen=new Set();try{(currentItems||[]).forEach(it=>add(list,seen,it));}catch{}try{const s=homeData&&homeData.sections?homeData.sections:{};Object.values(s).forEach(v=>{if(Array.isArray(v))v.forEach(it=>add(list,seen,it));else if(v&&Array.isArray(v.items))v.items.forEach(it=>add(list,seen,it));});}catch{}const urls=["data/fast/home.json?v=301","data/fast/search_lite.json?v=301","data/fast/search_index.json?v=301","data/games_catalog.json?v=301","data/books_catalog.json?v=301","data/games/cult_games.json?v=301","data/games/franchises.json?v=301","data/games/game_to_movies.json?v=301","data/games/game_to_series.json?v=301","data/games/game_to_anime.json?v=301","data/games/media_to_games.json?v=301","data/books/books.json?v=301","data/books/manga.json?v=301","data/books/comics.json?v=301","data/books/ranobe.json?v=301"];for(const u of urls){const j=await FJ(u);parseJson(j).forEach(it=>add(list,seen,it));}pool=list;return list;})();return poolPromise;}
-
-  const RU={"космос":["space","sci fi","science fiction","future","фантастика"],"фантастика":["sci fi","science fiction","space","future","cyberpunk","космос"],"киберпанк":["cyberpunk","future","sci fi"],"боевик":["action","fight","battle","superhero","экшен"],"экшен":["action","fight","battle","боевик"],"драма":["drama"],"комедия":["comedy","funny","юмор"],"юмор":["comedy","funny","комедия"],"ужасы":["horror","thriller","мистика","страшное"],"хоррор":["horror","ужасы","thriller"],"мистика":["mystery","supernatural","horror","ужасы"],"детектив":["detective","crime","mystery","расследование"],"расследование":["detective","crime","mystery","детектив"],"романтика":["romance","love","любовь"],"любовь":["romance","love","романтика"],"спорт":["sport","sports"],"магия":["magic","fantasy","фэнтези"],"фэнтези":["fantasy","magic","dragon","rpg","магия"],"рпг":["rpg","role playing","fantasy"],"школа":["school","slice of life"],"самураи":["samurai","sword"],"ниндзя":["ninja","naruto"],"пираты":["pirate","one piece"],"зомби":["zombie","undead"],"вампиры":["vampire"],"роботы":["robot","mecha"],"меха":["mecha","robot"],"супергерои":["superhero","marvel","dc"],"марвел":["marvel","superhero"],"дс":["dc","superhero"],"dc":["dc","superhero"],"игра":["game","игры"],"игры":["game","игра"],"книга":["book","books","книги"],"книги":["book","books","книга"],"манга":["manga"],"комикс":["comic","comics"],"комиксы":["comic","comics"],"ранобэ":["light novel","ranobe"],"топ":["popular","best","рейтинг"],"лучшие":["best","top","popular"],"популярные":["popular","top"]};
-  const WEAK=new Set(["подбери","подобрать","посоветуй","посоветовать","найди","найти","покажи","дай","мне","что","чтобы","хочу","можно","посмотреть","вечер","вечером","лучшие","какой","какие","что нибудь","что-нибудь","похожее","похожие","типо","типа","плиз","пожалуйста","ну","гоу","давай","каталог","из","по","про","для","на","с","и","или","а","в","во","как","около","примерно"]);
-  function translitFix(q){const m={q:"й",w:"ц",e:"у",r:"к",t:"е",y:"н",u:"г",i:"ш",o:"щ",p:"з","[":"х","]":"ъ",a:"ф",s:"ы",d:"в",f:"а",g:"п",h:"р",j:"о",k:"л",l:"д",";":"ж","'":"э",z:"я",x:"ч",c:"с",v:"м",b:"и",n:"т",m:"ь",",":"б",".":"ю"};return String(q||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
-  function tokens(q){const variants=[q,translitFix(q)],out=new Set();for(const v of variants){for(const p of N(v).split(" ").filter(x=>x.length>=2)){out.add(p);if(RU[p])RU[p].forEach(x=>N(x).split(" ").forEach(y=>out.add(y)));}}return[...out].filter(x=>x.length>=2&&!WEAK.has(x));}
-  function detectIntent(q){const x=N(q),m=mem(),out={bucket:"all",mood:"",sort:"smart",yearMin:0,yearMax:9999,count:12,explain:false,random:false};const c=x.match(/\b(\d{1,2})\b/);if(c)out.count=Math.max(3,Math.min(20,Number(c[1])));if(/\b(аниме|анимэ|anime)\b/.test(x))out.bucket="anime";else if(/\b(сериал|сериалы|series|show)\b/.test(x))out.bucket="series";else if(/\b(мульт|мультик|мультфильм|cartoon)\b/.test(x))out.bucket="cartoons";else if(/\b(фильм|фильмы|кино|movie|film)\b/.test(x))out.bucket="movies";else if(/\b(игра|игры|game|games)\b/.test(x))out.bucket="games";else if(/\b(книга|книги|book|books)\b/.test(x))out.bucket="books";else if(/\b(манга|manga)\b/.test(x))out.bucket="manga";else if(/\b(комикс|комиксы|comic|comics)\b/.test(x))out.bucket="comics";else if(/\b(ранобэ|ранобе|light novel)\b/.test(x))out.bucket="ranobe";else if(m.lastBucket)out.bucket=m.lastBucket;if(x.includes("90 х")||x.includes("90е")||x.includes("90s")){out.yearMin=1990;out.yearMax=1999;}if(x.includes("2000")){out.yearMin=2000;out.yearMax=2009;}if(x.includes("2010")){out.yearMin=2010;out.yearMax=2019;}if(x.includes("2020")){out.yearMin=2020;out.yearMax=2029;}const yr=x.match(/\b(19\d{2}|20\d{2})\b/);if(yr){out.yearMin=Number(yr[1]);out.yearMax=Number(yr[1]);}if(x.includes("жест")||x.includes("мрач")||x.includes("темн"))out.mood="dark";if(x.includes("легк")||x.includes("добро")||x.includes("смешн")||x.includes("угар"))out.mood="light";if(x.includes("кров")||x.includes("мясо"))out.mood="hard";if(x.includes("романт")||x.includes("любов"))out.mood="romance";if(x.includes("страш")||x.includes("ужас")||x.includes("хоррор"))out.mood="horror";if(x.includes("детектив")||x.includes("расслед"))out.mood="detective";if(x.includes("космос")||x.includes("sci")||x.includes("фантаст"))out.mood="sci";if(x.includes("маг")||x.includes("фэнтези")||x.includes("rpg")||x.includes("рпг"))out.mood="fantasy";if(x.includes("спорт"))out.mood="sport";if(x.includes("школ"))out.mood="school";if(!out.mood&&m.lastMood)out.mood=m.lastMood;if(x.includes("топ")||x.includes("лучшие")||x.includes("популяр"))out.sort="top";if(x.includes("нов")||x.includes("свежее"))out.sort="new";if(x.includes("недооцен"))out.sort="hidden";if(x.includes("рандом")||x.includes("случайн"))out.random=true;out.explain=x.includes("объясни")||x.includes("почему");return out;}
-
-  function moodWords(m){return({dark:["dark","grim","psychological","crime","thriller","horror","драма","триллер","криминал","мистика"],light:["comedy","family","adventure","slice","комедия","семейное","приключения"],hard:["horror","blood","violent","seinen","thriller","ужасы","триллер","боевик"],romance:["romance","love","school","drama","романтика","любовь"],horror:["horror","supernatural","mystery","ужасы","мистика","триллер"],detective:["detective","crime","mystery","thriller","детектив","криминал"],sci:["space","sci","science","future","cyberpunk","фантастика","космос"],fantasy:["fantasy","magic","dragon","rpg","фэнтези","магия"],sport:["sport","sports","спорт"],school:["school","slice","romance","школа"]}[m]||[]);}
-  function clean(it){if(!it)return false;const y=Number(year(it)||0),cur=new Date().getFullYear();if(y&&y>cur+3)return false;const h=hay(it);if(["trailer","teaser","preview","recap","summary","soundtrack","music video","concert","stage play","fan letter","трейлер","тизер","превью","рекап","саундтрек"].some(x=>h.includes(x)))return false;const ttl=N(title(it));return !!ttl&&ttl!=="без названия";}
-  function bucketPass(it,b){if(!b||b==="all")return true;const x=bucket(it);if(b==="books")return x==="books"||x==="ranobe";return x===b;}
-  function itemWhy(it,intent,tk){const why=[];const g=genres(it).slice(0,3).join(", ");if(g)why.push("жанры: "+g);if(rating(it))why.push("рейтинг "+rating(it).toFixed(1));if(votes(it))why.push(fmtVotes(votes(it))+" голосов");if(intent.mood)why.push("настроение: "+intent.mood);if(tk.length)why.push("совпало: "+tk.slice(0,3).join(", "));return why.slice(0,3).join("; ");}
-  function score(it,tk,intent,q){if(!clean(it)||!bucketPass(it,intent.bucket))return 0;const y=Number(year(it)||0);if(y&&(y<intent.yearMin||y>intent.yearMax))return 0;const h=hay(it),ttl=N(title(it)),raw=N(rawTitle(it)),gen=N(genres(it).join(" ")),typ=N(type(it));let sc=0;for(const token of tk){if(ttl===token||raw===token)sc+=200;else if(ttl.includes(token))sc+=90;else if(raw.includes(token))sc+=65;else if(gen.includes(token))sc+=60;else if(typ.includes(token))sc+=28;else if(h.includes(token))sc+=18;}for(const mw of moodWords(intent.mood)){const m=N(mw);if(gen.includes(m))sc+=50;else if(ttl.includes(m)||raw.includes(m))sc+=30;else if(h.includes(m))sc+=18;}const qn=N(q);if(qn.includes("как")||qn.includes("типо")||qn.includes("типа")||qn.includes("похож")){if(h.includes("приключ")||h.includes("action")||h.includes("экшен"))sc+=12;if(h.includes("драма")||h.includes("drama"))sc+=10;if(h.includes("fantasy")||h.includes("фэнтези"))sc+=10;}const r=rating(it),v=votes(it);if(intent.sort==="top")sc+=Math.min(110,Math.log10(v+1)*17)+r*11;else if(intent.sort==="new")sc+=y>=2020?(y-2019)*12:0;else if(intent.sort==="hidden")sc+=r*14-Math.min(45,Math.log10(v+1)*7);else sc+=Math.min(60,Math.log10(v+1)*9)+r*6;try{if(typeof hasPoster==="function"&&hasPoster(it))sc+=8;}catch{}return sc;}
-  function dedupe(items){const map=new Map();for(const it of items){const k=`${bucket(it)}|${N(title(it))}|${year(it)}`;const old=map.get(k);if(!old){map.set(k,it);continue;}if(rating(it)*100000+votes(it)>rating(old)*100000+votes(old))map.set(k,it);}return[...map.values()];}
-  async function search(q,limit){const intent=detectIntent(q),tk=tokens(q),data=await loadPool();let arr=data.map(it=>({it,sc:score(it,tk,intent,q)})).filter(x=>x.sc>0).sort((a,b)=>b.sc-a.sc).map(x=>x.it);if(!arr.length&&intent.bucket!=="all")arr=data.filter(it=>clean(it)&&bucketPass(it,intent.bucket)).sort((a,b)=>(rating(b)*100000+votes(b))-(rating(a)*100000+votes(a)));if(intent.random)arr=arr.sort(()=>Math.random()-.5);const res=dedupe(arr).slice(0,limit||intent.count||LIMIT);lastResults=res;lastQuery=q;lastOffset=0;remember("lastBucket",intent.bucket);remember("lastMood",intent.mood);return res;}
-  function fmtVotes(v){v=Number(v||0);if(!v)return"";if(v>=1000000)return(v/1000000).toFixed(1).replace(".0","")+" млн";if(v>=1000)return Math.round(v/1000)+" тыс";return String(v);}
-  function fmt(items,intent,tk,why){return items.map((it,i)=>`${i+1}. ${title(it)} (${year(it)||"—"}) — ${type(it)} · ${rating(it)?"★ "+rating(it).toFixed(1):"★ —"}${votes(it)?" · "+fmtVotes(votes(it)):""}${genres(it).slice(0,2).length?" · "+genres(it).slice(0,2).join(", "):""}${why?"\n   почему: "+itemWhy(it,intent,tk):""}`).join("\n");}
-  function openResult(num){const it=lastResults[Number(num)-1];if(!it)return`Нет результата под номером ${num}. Сначала сделай поиск.`;try{if(typeof openDetails==="function"){openDetails(it);return"Открыл: "+title(it);}}catch{}return"Нашёл: "+title(it)+", но открыть карточку не получилось.";}
-  function compareResults(a,b){const A=lastResults[Number(a)-1],B=lastResults[Number(b)-1];if(!A||!B)return"Сначала сделай поиск, потом напиши: сравни 1 и 2.";let pick=rating(A)!==rating(B)?(rating(A)>rating(B)?A:B):(votes(A)>votes(B)?A:B);return`${title(A)}: ★ ${rating(A)||"—"} · ${fmtVotes(votes(A))||"0"} голосов\n${title(B)}: ★ ${rating(B)||"—"} · ${fmtVotes(votes(B))||"0"} голосов\nЯ бы выбрал: ${title(pick)}.`;}
-  function plan(){if(!lastResults.length)return"Сначала попроси подборку, потом напиши: сделай план.";const p=lastResults.slice(0,3);return["План просмотра:",`1. Начать с: ${title(p[0])}`,p[1]?`2. Потом: ${title(p[1])}`:"",p[2]?`3. На финал: ${title(p[2])}`:"","Если хочешь — напиши «открой 1»."].filter(Boolean).join("\n");}
-  function help(){return["V301 почти-ИИ помощник:","• ищет по фильмам, сериалам, аниме, мультам, играм, книгам, манге, комиксам, ранобэ","• понимает настроение, жанр, год, десятилетие","• объясняет почему подобрал","• команды: открой 1, сравни 1 и 2, ещё, сделай план","Примеры: игры rpg фэнтези; манга ужасы; тёмное аниме с магией; фильмы космос 2010-х; что-то как Наруто"].join("\n");}
-  async function answer(q){const x=N(q);if(!x)return"Напиши что ищем: тип, жанр, настроение или пример.";if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x))return"Привет. Я V301: почти-ИИ поиск по всему каталогу.";if(x.includes("помощ")||x.includes("что умеешь")||x.includes("как искать"))return help();const op=x.match(/(?:открой|открыть|покажи)\s+(\d{1,2})/);if(op)return openResult(op[1]);const cmp=x.match(/сравни\s+(\d{1,2})\s+(?:и|с)\s+(\d{1,2})/);if(cmp)return compareResults(cmp[1],cmp[2]);if(x.includes("план")||x.includes("марафон"))return plan();if(x.includes("еще")||x.includes("ещё")||x.includes("следующие")){if(!lastQuery)return"Сначала сделай поиск, потом проси ещё.";const more=await search(lastQuery,24);lastOffset+=12;const next=more.slice(lastOffset,lastOffset+12);return next.length?"Ещё варианты:\n"+fmt(next,detectIntent(lastQuery),tokens(lastQuery),false):"Больше нормальных вариантов не нашёл.";}if(x.includes("топ студ")){try{renderAnimeStudiosTop();return"Открыл «Топ студий».";}catch{}}if(x.includes("топ аним")){try{renderAnimeTopManual(1);return"Открыл «Топ аниме 100».";}catch{}}const intent=detectIntent(q),tk=tokens(q),items=await search(q,intent.count||LIMIT);if(!items.length)return"Не нашёл нормальные совпадения. Попробуй: «игры rpg фэнтези», «манга ужасы», «фильмы космос», «комиксы marvel».";const heads={movies:"Нашёл фильмы:",series:"Нашёл сериалы:",anime:"Нашёл аниме:",cartoons:"Нашёл мультфильмы:",games:"Нашёл игры:",books:"Нашёл книги:",manga:"Нашёл мангу:",comics:"Нашёл комиксы:",ranobe:"Нашёл ранобэ:",all:"Нашёл варианты:"};return`${heads[intent.bucket]||"Нашёл варианты:"}\n${fmt(items,intent,tk,intent.explain)}\n\nКоманды: «открой 1», «сравни 1 и 2», «ещё», «сделай план».`;}
-  function addMsg(role,text){if(typeof gkmHelperAddMessage==="function"){gkmHelperAddMessage(role,text);return;}const box=document.getElementById("gkmAiMessages");if(!box)return;const div=document.createElement("div");div.className=role==="user"?"ai-user":"ai-bot";div.innerHTML=E(text).replace(/\n/g,"<br>");box.appendChild(div);box.scrollTop=box.scrollHeight;}
-  function install(){const form=document.getElementById("gkmAiForm"),input=document.getElementById("gkmAiInput"),dialog=document.getElementById("gkmAiDialog"),floatBtn=document.getElementById("gkmAiFloatBtn"),closeBtn=document.getElementById("gkmAiCloseBtn");if(floatBtn&&dialog&&input)floatBtn.onclick=()=>{if(typeof dialog.showModal==="function")dialog.showModal();else dialog.setAttribute("open","");setTimeout(()=>input.focus(),50);};if(closeBtn&&dialog)closeBtn.onclick=()=>dialog.close?dialog.close():dialog.removeAttribute("open");if(!form||!input||form.dataset.v301Installed==="1")return;form.dataset.v301Installed="1";form.onsubmit=async e=>{e.preventDefault();const q=input.value.trim();if(!q)return;input.value="";addMsg("user",q);addMsg("bot","V301 думаю по всему каталогу...");try{const out=await answer(q),box=document.getElementById("gkmAiMessages");if(box){const last=box.lastElementChild;if(last&&last.classList.contains("ai-bot")&&last.textContent.includes("V301 думаю")){last.innerHTML=E(out).replace(/\n/g,"<br>");box.scrollTop=box.scrollHeight;return;}}addMsg("bot",out);}catch(err){console.warn("GKM V301 helper error",err);addMsg("bot","Помощник словил ошибку. Попробуй запрос проще.");}};}
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
-  setTimeout(install,500);setTimeout(install,1500);setTimeout(()=>loadPool().catch(()=>{}),1000);
-  console.log("GKM V301: AI-like helper installed");
-})();
-/* GKM V301 AI-LIKE HELPER END */
+/* GKM V304 STRICT HELPER ROUTER LIVE TESTED END */
 
