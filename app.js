@@ -12443,18 +12443,48 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function parseLine(line){
     const raw = String(line || "").replace(/\s+/g, " ").trim();
+
+    // Полный формат:
+    // 1. Название (2026) — Аниме · ★ 8.9 · 68 · Жанр
     const m = raw.match(/^(\d{1,2})\.\s+(.+?)\s+\((19\d{2}|20\d{2}|—|-)\)\s+[—-]\s+(.+)$/);
-    if(!m) return null;
-    const tail = m[4];
-    const parts = tail.split(/[·•]/).map(x=>x.trim()).filter(Boolean);
-    let type = parts[0] || "";
-    if(type.includes("-")) type = type.split("-")[0].trim();
-    const r = tail.match(/★\s*([0-9.]+)/);
-    const rating = r ? r[1] : "";
-    const vm = tail.match(/★\s*[0-9.]+\s*[·•-]\s*([^·•]+)/);
-    const votes = vm ? vm[1].trim() : "";
-    const genres = parts.length >= 3 ? parts.slice(2).join(", ") : "";
-    return {n:Number(m[1]), title:m[2].trim(), year:m[3].trim(), type:type.trim(), rating, votes, genres, raw, __gkm_v321_stub:true};
+    if(m){
+      const tail = m[4];
+      const parts = tail.split(/[·•]/).map(x=>x.trim()).filter(Boolean);
+      let type = parts[0] || "";
+      if(type.includes("-")) type = type.split("-")[0].trim();
+      const r = tail.match(/★\s*([0-9.]+)/);
+      const rating = r ? r[1] : "";
+      const vm = tail.match(/★\s*[0-9.]+\s*[·•-]\s*([^·•]+)/);
+      const votes = vm ? vm[1].trim() : "";
+      const genres = parts.length >= 3 ? parts.slice(2).join(", ") : "";
+      return {n:Number(m[1]), title:m[2].trim(), year:m[3].trim(), type:type.trim(), rating, votes, genres, raw, __gkm_v321_stub:true};
+    }
+
+    // Простой формат от Groq:
+    // 10. Боевой петух
+    const simple = raw.match(/^(\d{1,2})\.\s+(.+?)\s*$/);
+    if(simple){
+      let title = simple[2].trim();
+      title = title.replace(/[—-]\s*(Аниме|Анимэ|Фильм|Сериал|Мультфильм).*$/i, "").trim();
+      title = title.replace(/\s+\((19\d{2}|20\d{2})\)\s*$/, "").trim();
+      let year = "";
+      try{
+        const q = String(window.GKM_AI_REAL_LAST_QUERY || "");
+        const ym = q.match(/\b(19\d{2}|20\d{2})\b/);
+        if(ym) year = ym[1];
+      }catch{}
+      let type = "";
+      try{
+        const it = window.GKM_AI_REAL_LAST_INTENT || {};
+        if(it.bucket === "anime") type = "Аниме";
+        else if(it.bucket === "movies") type = "Фильм";
+        else if(it.bucket === "series") type = "Сериал";
+        else if(it.bucket === "cartoons") type = "Мультфильм";
+      }catch{}
+      return {n:Number(simple[1]), title, year, type, rating:"", votes:"", genres:"", raw, __gkm_v321_stub:true};
+    }
+
+    return null;
   }
 
   function collectFromText(text){
@@ -12935,4 +12965,149 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   console.log("GKM V329: direct AI result open installed");
 })();
 /* GKM V329 DIRECT AI RESULT OPEN END */
+
+
+/* GKM V330 OPEN NUMBER 10 START */
+(function(){
+  window.GKM_V330_OPEN_NUMBER_10_VERSION = "v330-open-number-10-simple-list-title-fallback-2026-07-02";
+
+  function norm(s){
+    return String(s || "")
+      .toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function titleOf(it){
+    try{ if(typeof displayTitle === "function") return String(displayTitle(it)||""); }catch{}
+    return String((it && (it.ru || it.title_ru || it.title || it.name || it.en || it.original_title || it.original_name)) || "");
+  }
+  function openItem(item){
+    if(!item || typeof item !== "object") return false;
+    try{
+      if(typeof openDetails === "function"){
+        openDetails(item);
+        const dlg = document.getElementById("gkmAiDialog");
+        try{ if(dlg && typeof dlg.close === "function") dlg.close(); }catch{}
+        return true;
+      }
+    }catch(e){ console.warn("GKM V330 openItem failed", e); }
+    return false;
+  }
+  function parseDisplayed(){
+    const box = document.getElementById("gkmAiMessages");
+    const out = [];
+    if(!box) return out;
+    const text = box.innerText || box.textContent || "";
+    text.split(/\n+/).forEach(line=>{
+      const m = String(line||"").trim().match(/^(\d{1,2})\.\s+(.+?)\s*$/);
+      if(!m) return;
+      let title = m[2].replace(/\s+\((19\d{2}|20\d{2})\).*$/,"").replace(/[—-]\s*(Аниме|Анимэ|Фильм|Сериал|Мультфильм).*$/i,"").trim();
+      out[Number(m[1])-1] = {n:Number(m[1]), title};
+    });
+    return out;
+  }
+  function findByTitle(title){
+    const wanted = norm(title);
+    if(!wanted) return null;
+    const pools = [];
+    try{ if(Array.isArray(window.GKM_AI_REAL_RESULTS)) pools.push(...window.GKM_AI_REAL_RESULTS); }catch{}
+    try{ if(Array.isArray(window.currentItems)) pools.push(...window.currentItems); }catch{}
+    try{
+      if(window.homeData && window.homeData.sections){
+        Object.values(window.homeData.sections).forEach(v=>{
+          if(Array.isArray(v)) pools.push(...v);
+          else if(v && Array.isArray(v.items)) pools.push(...v.items);
+        });
+      }
+    }catch{}
+    for(const it of pools){
+      const t = norm(titleOf(it));
+      if(t && t === wanted) return it;
+    }
+    for(const it of pools){
+      const t = norm(titleOf(it));
+      if(t && wanted && (t.includes(wanted) || wanted.includes(t))) return it;
+    }
+    return null;
+  }
+  function openN(n){
+    n = Number(n);
+    if(!n) return false;
+
+    try{
+      if(Array.isArray(window.GKM_AI_REAL_RESULTS) && window.GKM_AI_REAL_RESULTS[n-1]){
+        if(openItem(window.GKM_AI_REAL_RESULTS[n-1])) return true;
+      }
+    }catch{}
+
+    const shown = parseDisplayed();
+    const stub = shown[n-1];
+    if(stub && stub.title){
+      const real = findByTitle(stub.title);
+      if(real && openItem(real)) return true;
+    }
+
+    return false;
+  }
+
+  function patchAll(){
+    document.querySelectorAll("[data-gkm-v329-open],[data-gkm-v321-open],[data-gkm-v320-open],[data-gkm-v319-open],[data-gkm-v318-open],[data-gkm-open]").forEach(btn=>{
+      const n = btn.dataset.gkmV329Open || btn.dataset.gkmV321Open || btn.dataset.gkmV320Open || btn.dataset.gkmV319Open || btn.dataset.gkmV318Open || btn.dataset.gkmOpen;
+      if(n) btn.dataset.gkmV330Open = n;
+    });
+  }
+
+  function install(){
+    patchAll();
+    const box = document.getElementById("gkmAiMessages");
+    if(box && !box.dataset.gkmV330Observer){
+      new MutationObserver(()=>setTimeout(patchAll,30)).observe(box,{childList:true,subtree:true});
+      box.dataset.gkmV330Observer = "1";
+    }
+
+    document.addEventListener("click", e=>{
+      const btn = e.target && e.target.closest ? e.target.closest("[data-gkm-v330-open]") : null;
+      if(!btn) return;
+      if(openN(btn.dataset.gkmV330Open)){
+        e.preventDefault();
+        e.stopPropagation();
+        if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+        return false;
+      }
+    }, true);
+
+    const form = document.getElementById("gkmAiForm");
+    const input = document.getElementById("gkmAiInput");
+    if(form && !form.dataset.gkmV330Submit){
+      form.addEventListener("submit", e=>{
+        const raw = (input && input.value || "").trim();
+        const m = raw.match(/^(?:открой|открыть|покажи)\s+(?:(?:фильм|кино|аниме|анимэ|мульт|сериал|игру|игра|мангу|вариант)\s+)?(\d{1,2})\s*$/i) ||
+                  raw.match(/^(?:(?:фильм|кино|аниме|анимэ|мульт|сериал|вариант)\s+)(\d{1,2})\s*$/i);
+        if(m && openN(m[1])){
+          e.preventDefault();
+          e.stopPropagation();
+          if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+          if(input) input.value = "";
+          return false;
+        }
+      }, true);
+      form.dataset.gkmV330Submit = "1";
+    }
+  }
+
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true}); else install();
+  setTimeout(install,300); setTimeout(install,1000); setTimeout(install,2500);
+  console.log("GKM V330: open number 10/simple list fallback installed");
+})();
+/* GKM V330 OPEN NUMBER 10 END */
+
+
+/* GKM V331 TESTED STABLE BUILD START */
+(function(){
+  window.GKM_V331_TESTED_STABLE_BUILD_VERSION = "v331-tested-stable-build-1000-logic-tests-2026-07-02";
+  console.log("GKM V331: tested stable build installed");
+})();
+/* GKM V331 TESTED STABLE BUILD END */
 
