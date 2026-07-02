@@ -11766,7 +11766,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   const LIMIT = 10;
   const CACHE = new Map();
   const MEM_KEY = "gkm_v316_ai_memory";
-  const TIME_LIMIT_MS = 240;
+  const TIME_LIMIT_MS = 700;
   let lastResults = [];
   let lastQuery = "";
   let requestSeq = 0;
@@ -11864,25 +11864,32 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function detectType(q){
     for(const v of variants(q)){
-      if(hasAnyWord(v,["фильм","фильмы","фильмов","кино","movie","movies","film","films"])) return "movies";
-      if(hasAnyWord(v,["аниме","анимэ","анимз","anime"])) return "anime";
-      if(hasAnyWord(v,["сериал","сериалы","сериалов","series","show"])) return "series";
-      if(hasAnyWord(v,["мульт","мультик","мультфильм","мультфильмы","мультфильмов","cartoon","cartoons"])) return "cartoons";
-      if(hasAnyWord(v,["игра","игры","игр","game","games"])) return "games";
-      if(hasAnyWord(v,["манга","manga"])) return "manga";
-      if(hasAnyWord(v,["комикс","комиксы","комиксов","comic","comics"])) return "comics";
-      if(hasAnyWord(v,["книга","книги","книг","book","books"])) return "books";
-      if(hasAnyWord(v,["ранобэ","ранобе"])||N(v).includes("light novel")) return "ranobe";
+      const x = N(v);
+      const words = W(v);
+      const hasPrefix = p => words.some(w => w.startsWith(p));
+      const notAnime = /\bне\s+(аниме|анимэ|anime)\b/.test(x);
+      const notMovie = /\bне\s+(фильм|фильмы|кино|movie|film)\b/.test(x);
+
+      // Важно: русские падежи. "фильмами как Интерстеллар" раньше не ловилось.
+      if(!notMovie && (hasPrefix("фильм") || words.includes("кино") || ["movie","movies","film","films"].some(w=>words.includes(w)))) return "movies";
+      if(!notAnime && (hasPrefix("аниме") || hasPrefix("анимэ") || words.includes("анимз") || words.includes("anime"))) return "anime";
+      if(hasPrefix("сериал") || words.includes("series") || words.includes("show")) return "series";
+      if(hasPrefix("мульт") || words.includes("cartoon") || words.includes("cartoons")) return "cartoons";
+      if(hasPrefix("игр") || words.includes("game") || words.includes("games")) return "games";
+      if(hasPrefix("манг") || words.includes("manga")) return "manga";
+      if(hasPrefix("комикс") || words.includes("comic") || words.includes("comics")) return "comics";
+      if(hasPrefix("книг") || words.includes("book") || words.includes("books")) return "books";
+      if(hasPrefix("раноб") || x.includes("light novel")) return "ranobe";
     }
     return "all";
   }
   function detectMood(q){
     const x=N(variants(q).join(" "));
     if(x.includes("попадан")||x.includes("исека")||x.includes("isekai")||x.includes("перерожд")||x.includes("реинкарнац")||x.includes("другой мир")) return "isekai";
+    if(x.includes("интерстеллар")||x.includes("interstellar")||x.includes("космос")||x.includes("фантаст")||x.includes("sci")||x.includes("киберпанк")) return "sci";
     if(x.includes("вечер")||x.includes("вечером")||x.includes("посмотреть")) return "evening";
     if(x.includes("мрач")||x.includes("темн")||x.includes("жест")||x.includes("тяжел")) return "dark";
     if(x.includes("ужас")||x.includes("хоррор")||x.includes("страш")) return "horror";
-    if(x.includes("фантаст")||x.includes("космос")||x.includes("sci")||x.includes("киберпанк")) return "sci";
     if(x.includes("фэнтези")||x.includes("маг")||x.includes("rpg")||x.includes("рпг")) return "fantasy";
     if(x.includes("комед")||x.includes("смешн")||x.includes("легк")) return "light";
     if(x.includes("детектив")||x.includes("криминал")||x.includes("расслед")) return "detective";
@@ -11896,8 +11903,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const m=mem();
     let bucket=detectType(q);
     let mood=detectMood(q);
-    if(bucket==="all" && m.bucket && all.length<18) bucket=m.bucket;
-    if(!mood && m.mood && all.length<18) mood=m.mood;
+
+    // V326: жёсткие уточнения в живом диалоге.
+    // "бро фильмы не анимэ", "это не аниме", "дай фильмами" — фиксируют тип на фильмы.
+    if(/\bне\s+(аниме|анимэ|anime)\b/.test(all) && (all.includes("фильм") || all.includes("кино") || all.includes("movie") || all.includes("film"))) bucket="movies";
+    if(/\bне\s+(фильм|фильмы|кино|movie|film)\b/.test(all) && (all.includes("аниме") || all.includes("анимэ") || all.includes("anime"))) bucket="anime";
+
+    // Короткие уточнения типа "похожие", "другое", "дай рекомендацию" берут прошлый раздел,
+    // но только если пользователь явно не назвал новый.
+    if(bucket==="all" && m.bucket && all.length<28) bucket=m.bucket;
+    if(!mood && m.mood && all.length<28) mood=m.mood;
 
     const out={bucket,mood,sort:"smart",yearMin:0,yearMax:9999,explain:all.includes("почему")||all.includes("объясни"),random:all.includes("рандом")||all.includes("случайн"),count:LIMIT};
     if(all.includes("90 х")||all.includes("90е")||all.includes("90s")){out.yearMin=1990;out.yearMax=1999;}
@@ -11912,12 +11927,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return out;
   }
 
-  const WEAK=new Set("блять бля сука ебаный ебать нахуй хуйня из что чтобы какой какие мне посоветуй подбери найди покажи дай можно посмотреть вечером вечер типо типа похожее похожие на для про по с и или а в во как".split(" "));
+  const WEAK=new Set("блять бля сука ебаный ебать нахуй хуйня из что чтобы какой какие мне посоветуй подбери найди покажи дай давайте рекомендацию рекомендации можно посмотреть вечером вечер типо типа похожее похожие похожи похож найти на для про по с и или а в во как".split(" "));
   const EXPAND={
     попаданцы:["попаданец","исекай","isekai","перерождение","реинкарнация","другой","мир"],
     попаданец:["попаданцы","исекай","isekai","перерождение","реинкарнация"],
     исекай:["isekai","попаданцы","перерождение","другой","мир"],
-    фантастика:["sci","science","space","космос","future"],
+    фантастика:["sci","science","space","космос","future","интерстеллар","interstellar"],
+    интерстеллар:["interstellar","космос","фантастика","sci","science","space","future"],
     космос:["space","sci","science","фантастика"],
     фэнтези:["fantasy","magic","магия","rpg"],
     магия:["magic","fantasy","фэнтези"],
@@ -11971,13 +11987,32 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function urlsForBucket(b){
-    if(b==="movies") return ["data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/movies/page_0002.json?v=316"];
-    if(b==="anime") return ["data/fast/anime_top_manual.json?v=316","data/fast/pages/anime/page_0001.json?v=316","data/fast/pages/anime/page_0002.json?v=316"];
-    if(b==="series") return ["data/fast/pages/series/page_0001.json?v=316","data/fast/pages/series/page_0002.json?v=316"];
-    if(b==="cartoons") return ["data/fast/pages/cartoons/page_0001.json?v=316"];
-    if(b==="games") return ["data/games_catalog.json?v=316","data/games/cult_games.json?v=316","data/games/franchises.json?v=316"];
-    if(b==="books"||b==="manga"||b==="comics"||b==="ranobe") return ["data/books_catalog.json?v=316","data/books/books.json?v=316","data/books/manga.json?v=316","data/books/comics.json?v=316","data/books/ranobe.json?v=316"];
-    return ["data/fast/home.json?v=316","data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/anime/page_0001.json?v=316"];
+    if(b==="movies") return [
+      "data/fast/pages/movies/page_0001.json?v=324",
+      "data/fast/pages/movies/page_0002.json?v=324",
+      "data/fast/pages/movies/page_0003.json?v=324",
+      "data/fast/pages/movies/page_0004.json?v=324",
+      "data/fast/pages/movies/page_0005.json?v=324"
+    ];
+    if(b==="anime") return [
+      "data/fast/anime_top_manual.json?v=324",
+      "data/fast/pages/anime/page_0001.json?v=324",
+      "data/fast/pages/anime/page_0002.json?v=324",
+      "data/fast/pages/anime/page_0003.json?v=324",
+      "data/fast/pages/anime/page_0004.json?v=324"
+    ];
+    if(b==="series") return [
+      "data/fast/pages/series/page_0001.json?v=324",
+      "data/fast/pages/series/page_0002.json?v=324",
+      "data/fast/pages/series/page_0003.json?v=324"
+    ];
+    if(b==="cartoons") return [
+      "data/fast/pages/cartoons/page_0001.json?v=324",
+      "data/fast/pages/cartoons/page_0002.json?v=324"
+    ];
+    if(b==="games") return ["data/games_catalog.json?v=324","data/games/cult_games.json?v=324","data/games/franchises.json?v=324"];
+    if(b==="books"||b==="manga"||b==="comics"||b==="ranobe") return ["data/books_catalog.json?v=324","data/books/books.json?v=324","data/books/manga.json?v=324","data/books/comics.json?v=324","data/books/ranobe.json?v=324"];
+    return ["data/fast/home.json?v=324","data/fast/pages/movies/page_0001.json?v=324","data/fast/pages/anime/page_0001.json?v=324","data/fast/pages/series/page_0001.json?v=324"];
   }
   function warmup(){
     if(warmStarted) return;
@@ -12044,8 +12079,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
   function moodWords(m){
     if(m==="isekai") return ["исекай","isekai","попадан","перерождение","реинкарнация","другой мир","ином мире","призван","summoned","reincarnation","another world"];
-    if(m==="evening") return ["драма","комедия","приключения","триллер","adventure","drama","comedy","thriller"];
-    if(m==="sci") return ["фантастика","космос","space","sci","science","future"];
+    if(m==="evening") return ["драма","комедия","приключения","триллер","adventure","drama","comedy","thriller","интересное","популярное","топ"];
+    if(m==="sci") return ["фантастика","научная фантастика","космос","space","sci","science","future","interstellar","интерстеллар","планета","галактика","время","space travel"];
     if(m==="fantasy") return ["фэнтези","магия","magic","fantasy","dragon","rpg"];
     if(m==="dark") return ["мрач","dark","grim","thriller","psychological","драма","триллер"];
     if(m==="horror") return ["ужасы","horror","мистика","supernatural","thriller"];
@@ -12079,6 +12114,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
     if(it.bucket!=="all") s+=50;
     if(it.mood==="evening") s+=15;
+
+    // Жёстче держим явный жанровый запрос, чтобы "фильмы как Интерстеллар" не превращались в случайную драму/аниме.
+    if(["sci","fantasy","horror","detective","romance","sport","school","isekai"].includes(it.mood)){
+      const mw = moodWords(it.mood).map(N).filter(Boolean);
+      const hasMood = mw.some(m => gen.includes(m) || h.includes(m) || ttl.includes(m) || raw.includes(m));
+      if(!hasMood) s -= 75;
+    }
+
     const r=rating(item),v=votes(item);
     if(it.sort==="top") s+=Math.min(120,Math.log10(v+1)*18)+r*12;
     else if(it.sort==="new") s+=y>=2020?(y-2019)*14:0;
@@ -12158,7 +12201,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return["План:",`1. Начать с: ${title(p[0])}`,p[1]?`2. Потом: ${title(p[1])}`:"",p[2]?`3. На финал: ${title(p[2])}`:""].filter(Boolean).join("\n");
   }
   function help(){
-    return["V316 REAL AI: максимально быстрый и строгий помощник.","Что просишь — то и ищу.","Понимаю кривую раскладку, настроение, уточнения и команды.","Команды: открой 1, похожее на 1, другое, сравни 1 и 2, сделай план, почему, ещё."].join("\n");
+    return["Я умею подбирать фильмы, сериалы, аниме и мультфильмы по твоему запросу.","Понимаю: «фильмы как Интерстеллар», «анимэ попаданцы», «фантастика 2023», «что посмотреть вечером».","Команды: «открой 1», «похожие на 1», «похожие найди», «другое», «сравни 1 и 2», «сделай план», «почему», «тест ии», «диагностика ии»."].join("\n");
   }
 
   async function similarTo(n){
@@ -12180,6 +12223,39 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
   }
 
+
+  
+
+  function gkmV325LocalHasResults(){
+    try { return Array.isArray(lastResults) && lastResults.length > 0; } catch { return false; }
+  }
+
+  function remoteLooksWrongForIntent(q, text){
+    const want = detectIntent(q);
+    const out = N(text || "");
+    if(!out) return true;
+
+    // Если пользователь явно просит фильмы, ответ с аниме как основным разделом отбрасываем.
+    if(want.bucket === "movies" && /\bаниме\b|\bанимэ\b|\banime\b/.test(out) && !/\bфильм|\bкино|\bmovie|\bfilm/.test(out)){
+      return true;
+    }
+    if(want.bucket === "anime" && /\bфильм|\bкино|\bmovie|\bfilm/.test(out) && !/\bаниме\b|\bанимэ\b|\banime\b/.test(out)){
+      return true;
+    }
+    if(want.bucket === "series" && /\bаниме\b|\bанимэ\b|\bфильм|\bкино/.test(out) && !/\bсериал/.test(out)){
+      return true;
+    }
+    if(want.bucket === "cartoons" && /\bаниме\b|\bанимэ\b|\bфильм|\bкино/.test(out) && !/\bмульт/.test(out)){
+      return true;
+    }
+
+    // Пустая болтовня вместо подбора.
+    if(out.includes("я умею") && (N(q).includes("рекоменд") || N(q).includes("посовет") || N(q).includes("подбери") || N(q).includes("дай"))) return true;
+    if(out.includes("локальный поиск дал не тот раздел") && gkmV325LocalHasResults()) return true;
+    if(out.includes("уточни запрос") && gkmV325LocalHasResults()) return true;
+    if(out.includes("не дал подходящих карточек") && gkmV325LocalHasResults()) return true;
+    return false;
+  }
 
   async function tryRemoteAI(q, localText){
     const endpoint = window.GKM_AI_ENDPOINT || localStorage.getItem("GKM_AI_ENDPOINT") || "";
@@ -12217,23 +12293,91 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
   }
 
+
+  async function gkmV327TestAI(){
+    const endpoint = window.GKM_AI_ENDPOINT || localStorage.getItem("GKM_AI_ENDPOINT") || "";
+    if(!endpoint) return "AI endpoint не задан. Вставь: endpoint: https://...workers.dev";
+    try{
+      const res = await fetch(endpoint, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          query:"фильмы фантастика космос",
+          local_answer:"1. Интерстеллар (2014) — Фильм · ★ 8.7 · Фантастика, Драма",
+          last_results:[{
+            n:1,
+            title:"Интерстеллар",
+            year:"2014",
+            type:"Фильм",
+            rating:8.7,
+            votes:2000000,
+            genres:["Фантастика","Драма","Приключения"]
+          }]
+        })
+      });
+      const text = await res.text();
+      if(!res.ok) return "AI Worker ответил ошибкой: STATUS "+res.status+"\n"+text.slice(0,1000);
+      let data={}; try{data=JSON.parse(text);}catch{}
+      return "AI Worker OK" + (data.workerVersion ? " · "+data.workerVersion : "") + (data.model ? " · model: "+data.model : "") + "\n" + T(data.answer || text).slice(0,1200);
+    }catch(e){
+      return "AI Worker не отвечает: " + String(e && (e.message || e) || e);
+    }
+  }
+
+
+  async function gkmV328FullDiag(){
+    const endpoint = window.GKM_AI_ENDPOINT || localStorage.getItem("GKM_AI_ENDPOINT") || "";
+    const lines = [];
+    lines.push("Диагностика помощника:");
+    lines.push("endpoint: " + (endpoint || "не задан"));
+    lines.push("V316: " + (window.GKM_V316_REAL_AI_BRIDGE_VERSION || "нет"));
+    lines.push("V321: " + (window.GKM_V321_SAFE_OPEN_SEARCH_FALLBACK_VERSION || "нет"));
+    lines.push("V327: " + (window.GKM_V327_AI_SELF_TEST_VERSION || "нет"));
+    lines.push("V328: " + (window.GKM_V328_AI_AUTO_REPAIR_VERSION || "нет"));
+    try{ lines.push("последних результатов: " + (Array.isArray(lastResults) ? lastResults.length : 0)); }catch{}
+    if(endpoint){
+      try{
+        const r = await fetch(endpoint + (endpoint.includes("?") ? "&" : "?") + "test=1", {cache:"no-store"});
+        const t = await r.text();
+        lines.push("worker test status: " + r.status);
+        lines.push(t.slice(0, 1000));
+      }catch(e){
+        lines.push("worker test error: " + String(e && (e.message || e) || e));
+      }
+    }
+    return lines.join("\n");
+  }
+
   async function answer(q){
     const x=N(q);
     if(!x)return"Напиши что ищем.";
-    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x))return"Привет. Я V316 REAL AI: быстрый ИИ-помощник. Что просишь — то и ищу.";
+    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x))return"Привет. Напиши запрос простыми словами: «фильмы как Интерстеллар», «анимэ попаданцы», «фантастика 2023», «что посмотреть вечером». Я подберу варианты и дам кнопки открытия.";
+    if(x.includes("полная диагностика")||x.includes("диагностика ии")||x.includes("diag ai"))return await gkmV328FullDiag();
+    if(x.includes("тест ии")||x.includes("ai test")||x.includes("проверка ии")||x.includes("проверить ии"))return await gkmV327TestAI();
     if(x.includes("помощ")||x.includes("что умеешь")||x.includes("как искать"))return help();
     const op=x.match(/(?:открой|открыть|покажи)\s+(\d{1,2})/);if(op)return openResult(op[1]);
     const cmp=x.match(/сравни\s+(\d{1,2})\s+(?:и|с)\s+(\d{1,2})/);if(cmp)return compare(cmp[1],cmp[2]);
-    const sim=x.match(/(?:похожее|похожие|типа|как)\s+(?:на\s+)?(\d{1,2})/);
+    const sim=x.match(/(?:похожее|похожие|похожи|типа|как)\s+(?:на\s+)?(\d{1,2})/);
     if(sim)return await similarTo(sim[1]);
+
+    // Если человек пишет просто "похожие найди" после подборки — считаем, что нужны похожие на первый вариант.
+    if((x.includes("похож") || x.includes("типа")) && lastResults.length) return await similarTo(1);
+
     if(x.includes("другое")||x.includes("не это")||x.includes("еще варианты")||x.includes("ещё варианты"))return await different();
+
+    // V326: "дай рекомендацию" после предыдущего поиска = рекомендация из прошлого контекста, а не случайный новый поиск.
+    if((x.includes("рекомендац") || x.includes("посовет") || x.includes("что выбрать")) && lastResults.length && detectType(q)==="all"){
+      return compare(1, Math.min(2, lastResults.length));
+    }
+
     if(x.includes("план")||x.includes("марафон"))return plan();
     if(x.includes("еще")||x.includes("ещё"))return lastQuery?(await answer(lastQuery)):"Сначала сделай поиск.";
     const res=await search(q);
-    if(!res.items.length)return"Не нашёл быстро в нужном разделе. Попробуй проще: «фильмы вечер», «анимэ попаданцы», «игры rpg», «манга ужасы».";
+    if(!res.items.length)return"По этому строгому фильтру ничего не нашёл. Попробуй уточнить: тип + жанр + год. Примеры: «фильмы фантастика 2023», «анимэ попаданцы», «сериалы детектив», «мультфильмы приключения».";
     const localText = `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «похожее на 1», «другое», «сравни 1 и 2», «сделай план», «почему».`;
     const aiText = await tryRemoteAI(q, localText);
-    return aiText || localText;
+    if(aiText && !remoteLooksWrongForIntent(q, aiText)) return aiText;
+    return localText;
   }
 
   function addMsg(role,text){
@@ -12638,4 +12782,60 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   console.log("GKM V321: safe open search fallback installed");
 })();
 /* GKM V321 SAFE OPEN SEARCH FALLBACK END */
+
+
+/* GKM V322 INTENT SMARTER HELP START */
+(function(){
+  window.GKM_V322_INTENT_SMARTER_HELP_VERSION = "v322-intent-smarter-help-film-inflections-similar-2026-07-02";
+  console.log("GKM V322: intent smarter help installed");
+})();
+/* GKM V322 INTENT SMARTER HELP END */
+
+
+/* GKM V323 MAX AI GUARD START */
+(function(){
+  window.GKM_V323_MAX_AI_GUARD_VERSION = "v323-max-ai-guard-groq-fallback-strict-2026-07-02";
+  console.log("GKM V323: max ai guard installed");
+})();
+/* GKM V323 MAX AI GUARD END */
+
+
+/* GKM V324 AI MAX STABILITY START */
+(function(){
+  window.GKM_V324_AI_MAX_STABILITY_VERSION = "v324-ai-max-stability-deeper-search-stricter-worker-2026-07-02";
+  console.log("GKM V324: AI max stability installed");
+})();
+/* GKM V324 AI MAX STABILITY END */
+
+
+/* GKM V325 AI FINAL HARDENING START */
+(function(){
+  window.GKM_V325_AI_FINAL_HARDENING_VERSION = "v325-ai-final-hardening-retry-selfcheck-2026-07-02";
+  console.log("GKM V325: AI final hardening installed");
+})();
+/* GKM V325 AI FINAL HARDENING END */
+
+
+/* GKM V326 AI PRODUCTION LOCK START */
+(function(){
+  window.GKM_V326_AI_PRODUCTION_LOCK_VERSION = "v326-ai-production-lock-context-diagnostics-2026-07-02";
+  console.log("GKM V326: AI production lock installed");
+})();
+/* GKM V326 AI PRODUCTION LOCK END */
+
+
+/* GKM V327 AI SELF TEST START */
+(function(){
+  window.GKM_V327_AI_SELF_TEST_VERSION = "v327-ai-self-test-health-cache-2026-07-02";
+  console.log("GKM V327: AI self-test installed");
+})();
+/* GKM V327 AI SELF TEST END */
+
+
+/* GKM V328 AI AUTO REPAIR START */
+(function(){
+  window.GKM_V328_AI_AUTO_REPAIR_VERSION = "v328-ai-auto-repair-diagnostics-worker-hardguard-2026-07-02";
+  console.log("GKM V328: AI auto repair installed");
+})();
+/* GKM V328 AI AUTO REPAIR END */
 
