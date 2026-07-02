@@ -12281,3 +12281,169 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   console.log("GKM V316: REAL AI bridge installed");
 })();
 /* GKM V316 REAL AI BRIDGE END */
+
+
+/* GKM V317 AI UX SAFE ADDON START */
+(function(){
+  window.GKM_V317_AI_UX_SAFE_ADDON_VERSION = "v317-ai-ux-safe-addon-click-results-autofocus-2026-07-02";
+
+  function q(id){ return document.getElementById(id); }
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, ch => ({
+      "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
+    }[ch]));
+  }
+
+  function getLastResults(){ return window.GKM_LAST_CLICKABLE_RESULTS || []; }
+
+  function setLastResultsFromText(text){
+    const results = [];
+    const lines = String(text || "").split(/\n+/);
+    for(const line of lines){
+      const m = line.match(/^\s*(\d{1,2})\.\s+(.+?)\s+\((\d{4}|—|-)\)\s+—\s+(.+?)(?:\s+·|\s+-|\s*$)/);
+      if(!m) continue;
+      const n = Number(m[1]);
+      if(!n || n > 30) continue;
+      results[n-1] = { __gkm_click_stub:true, title:m[2].trim(), year:m[3].trim(), type:m[4].trim() };
+    }
+    if(results.length) window.GKM_LAST_CLICKABLE_RESULTS = results;
+  }
+
+  function findCardByStub(stub){
+    if(!stub) return null;
+    const wantedTitle = String(stub.title || "").toLowerCase().replace(/ё/g,"е").trim();
+    const wantedYear = String(stub.year || "").trim();
+    const pools = [];
+    try{ if(Array.isArray(window.currentItems)) pools.push(...window.currentItems); }catch{}
+    try{
+      if(window.homeData && window.homeData.sections){
+        Object.values(window.homeData.sections).forEach(v=>{
+          if(Array.isArray(v)) pools.push(...v);
+          else if(v && Array.isArray(v.items)) pools.push(...v.items);
+        });
+      }
+    }catch{}
+    function titleOf(it){
+      try{ if(typeof displayTitle === "function") return String(displayTitle(it)||""); }catch{}
+      return String((it && (it.ru || it.title_ru || it.title || it.name || it.en || it.original_title || it.original_name)) || "");
+    }
+    function yearOf(it){
+      try{ if(typeof getYear === "function") return String(getYear(it)||""); }catch{}
+      const raw = String((it && (it.year || it.release_date || it.first_air_date)) || "");
+      const m = raw.match(/(19\d{2}|20\d{2})/);
+      return m ? m[1] : raw;
+    }
+    for(const it of pools){
+      const t = titleOf(it).toLowerCase().replace(/ё/g,"е").trim();
+      const y = yearOf(it);
+      if(t === wantedTitle && (!wantedYear || wantedYear === "—" || wantedYear === "-" || y === wantedYear)) return it;
+    }
+    for(const it of pools){
+      const t = titleOf(it).toLowerCase().replace(/ё/g,"е").trim();
+      if(t && wantedTitle && (t.includes(wantedTitle) || wantedTitle.includes(t))) return it;
+    }
+    return null;
+  }
+
+  function openByNumber(n){
+    n = Number(n);
+    if(!n) return;
+    const list = getLastResults();
+    let item = list[n-1];
+    if(item && item.__gkm_click_stub) item = findCardByStub(item) || item;
+    if(item && !item.__gkm_click_stub){
+      try{
+        if(typeof openDetails === "function"){
+          openDetails(item);
+          return;
+        }
+      }catch(e){ console.warn("GKM V317 openDetails failed", e); }
+    }
+    const input = q("gkmAiInput");
+    const form = q("gkmAiForm");
+    if(input && form){
+      input.value = "открой " + n;
+      form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit", {bubbles:true, cancelable:true}));
+    }
+  }
+
+  function makeResultLinesClickable(root){
+    if(!root) return;
+    const botNodes = root.matches && root.matches(".ai-bot,.gkm-ai-message,.gkm-ai-bot")
+      ? [root]
+      : Array.from(root.querySelectorAll ? root.querySelectorAll(".ai-bot,.gkm-ai-message,.gkm-ai-bot") : []);
+    botNodes.forEach(node=>{
+      if(node.dataset.gkmV317Clickable === "1") return;
+      const text = node.innerText || node.textContent || "";
+      if(!/^\s*1\./m.test(text)) return;
+      setLastResultsFromText(text);
+      const html = esc(text).replace(/(^|\n)(\s*)(\d{1,2})\.\s+([^\n]+)/g, (all, br, sp, num, rest) => {
+        return `${br}${sp}<button type="button" class="gkm-ai-result-open" data-gkm-open="${num}" title="Открыть карточку ${num}">${num}. ${rest}</button>`;
+      }).replace(/\n/g, "<br>");
+      node.innerHTML = html;
+      node.dataset.gkmV317Clickable = "1";
+    });
+  }
+
+  function installClickStyle(){
+    if(q("gkm-v317-ai-ux-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v317-ai-ux-style";
+    style.textContent = `
+      .gkm-ai-result-open{display:block;width:100%;text-align:left;margin:3px 0;padding:7px 9px;border-radius:12px;border:1px solid rgba(0,191,255,.28);background:rgba(0,191,255,.08);color:inherit;font:inherit;line-height:1.28;cursor:pointer;}
+      .gkm-ai-result-open:hover{background:rgba(0,191,255,.18);border-color:rgba(0,191,255,.55);transform:translateY(-1px);}
+      .gkm-ai-result-open:active{transform:translateY(0);}
+      #gkmAiInput:focus{box-shadow:0 0 0 2px rgba(0,191,255,.35),0 0 18px rgba(0,191,255,.22);}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function focusInput(){
+    const input = q("gkmAiInput");
+    if(!input) return;
+    setTimeout(()=>input.focus({preventScroll:true}), 30);
+    setTimeout(()=>input.focus({preventScroll:true}), 180);
+    setTimeout(()=>input.focus({preventScroll:true}), 500);
+  }
+
+  function install(){
+    installClickStyle();
+    const input = q("gkmAiInput"), dialog = q("gkmAiDialog"), floatBtn = q("gkmAiFloatBtn"), messages = q("gkmAiMessages");
+    if(floatBtn && !floatBtn.dataset.gkmV317Focus){
+      const old = floatBtn.onclick;
+      floatBtn.onclick = function(ev){ if(typeof old === "function") old.call(this, ev); focusInput(); };
+      floatBtn.dataset.gkmV317Focus = "1";
+    }
+    if(dialog && !dialog.dataset.gkmV317Focus){
+      dialog.addEventListener("toggle", ()=>{ if(dialog.open) focusInput(); });
+      dialog.addEventListener("click", ()=>{ if(dialog.open) focusInput(); }, {once:false});
+      dialog.dataset.gkmV317Focus = "1";
+    }
+    if(messages && !messages.dataset.gkmV317Observer){
+      const obs = new MutationObserver(muts=>{
+        muts.forEach(m=>{ m.addedNodes && m.addedNodes.forEach(n=>{ if(n.nodeType === 1) makeResultLinesClickable(n); }); });
+      });
+      obs.observe(messages, {childList:true, subtree:true});
+      messages.dataset.gkmV317Observer = "1";
+      makeResultLinesClickable(messages);
+    }
+    document.addEventListener("click", function(e){
+      const btn = e.target && e.target.closest ? e.target.closest(".gkm-ai-result-open") : null;
+      if(!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      openByNumber(btn.dataset.gkmOpen);
+    }, true);
+    const form = q("gkmAiForm");
+    if(form && !form.dataset.gkmV317AfterSubmit){
+      form.addEventListener("submit", ()=>setTimeout(()=>makeResultLinesClickable(q("gkmAiMessages")), 700));
+      form.dataset.gkmV317AfterSubmit = "1";
+    }
+    if(input) focusInput();
+  }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true}); else install();
+  setTimeout(install, 300); setTimeout(install, 1000); setTimeout(install, 2200);
+  console.log("GKM V317: AI UX safe addon installed");
+})();
+/* GKM V317 AI UX SAFE ADDON END */
+
