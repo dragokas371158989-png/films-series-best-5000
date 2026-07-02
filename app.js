@@ -13190,3 +13190,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V331 TESTED STABLE BUILD END */
 
+
+/* GKM V335 DEPLOY SAFE VERIFIED START */
+(function(){
+  window.GKM_V335_DEPLOY_SAFE_VERIFIED_VERSION = "v335-deploy-safe-verified-from-upload-2026-07-02";
+  console.log("GKM V335: deploy safe verified build installed");
+})();
+/* GKM V335 DEPLOY SAFE VERIFIED END */
+
