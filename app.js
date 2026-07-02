@@ -12283,9 +12283,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V316 REAL AI BRIDGE END */
 
 
-/* GKM V320 SAFE OPEN BUTTONS START */
+/* GKM V321 SAFE OPEN SEARCH FALLBACK START */
 (function(){
-  window.GKM_V320_SAFE_OPEN_BUTTONS_VERSION = "v320-safe-open-buttons-no-nested-blue-boxes-2026-07-02";
+  window.GKM_V321_SAFE_OPEN_SEARCH_FALLBACK_VERSION = "v321-safe-open-search-fallback-2026-07-02";
 
   function $(id){ return document.getElementById(id); }
   function esc(s){
@@ -12308,7 +12308,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const vm = tail.match(/★\s*[0-9.]+\s*[·•-]\s*([^·•]+)/);
     const votes = vm ? vm[1].trim() : "";
     const genres = parts.length >= 3 ? parts.slice(2).join(", ") : "";
-    return {n:Number(m[1]), title:m[2].trim(), year:m[3].trim(), type:type.trim(), rating, votes, genres, raw, __gkm_v320_stub:true};
+    return {n:Number(m[1]), title:m[2].trim(), year:m[3].trim(), type:type.trim(), rating, votes, genres, raw, __gkm_v321_stub:true};
   }
 
   function collectFromText(text){
@@ -12352,14 +12352,22 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const text = node ? (node.innerText || node.textContent || "") : "";
     const arr = collectFromText(text);
     if(arr.length){
-      window.GKM_V320_LAST_RESULTS = arr;
+      window.GKM_V321_LAST_RESULTS = arr;
       window.GKM_LAST_CLICKABLE_RESULTS = arr;
     }
     return arr;
   }
 
   function getResults(){
-    return window.GKM_V320_LAST_RESULTS || window.GKM_LAST_CLICKABLE_RESULTS || [];
+    return window.GKM_V321_LAST_RESULTS || window.GKM_LAST_CLICKABLE_RESULTS || [];
+  }
+
+  function sameType(a,b){
+    const A=norm(a), B=norm(b);
+    if(!A || !B) return true;
+    if(A.includes(B) || B.includes(A)) return true;
+    if((A.includes("фильм") && B.includes("movie")) || (B.includes("фильм") && A.includes("movie"))) return true;
+    return false;
   }
 
   function findExact(stub){
@@ -12370,7 +12378,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     for(const it of pools()){
       const t = norm(titleOf(it));
       const y = yearOf(it);
-      if(t === wanted && (!wantedYear || wantedYear==="—" || wantedYear==="-" || y === wantedYear)) return it;
+      if(t === wanted && (!wantedYear || wantedYear==="—" || wantedYear==="-" || y === wantedYear)){
+        return it;
+      }
     }
     for(const it of pools()){
       const t = norm(titleOf(it));
@@ -12378,7 +12388,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const ty = norm(typeOf(it));
       const titleOk = t && wanted && (t === wanted || t.includes(wanted) || wanted.includes(t));
       const yearOk = (!wantedYear || wantedYear==="—" || wantedYear==="-" || y === wantedYear);
-      const typeOk = !wantedType || !ty || ty.includes(wantedType) || wantedType.includes(ty);
+      const typeOk = sameType(ty, wantedType);
       if(titleOk && yearOk && typeOk) return it;
     }
     return null;
@@ -12394,20 +12404,20 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     box.scrollTop = box.scrollHeight;
   }
 
-  function showMini(stub){
+  function showMini(stub, note){
     if(!stub) return true;
-    let dlg = $("gkmV320MiniCard");
+    let dlg = $("gkmV321MiniCard");
     if(!dlg){
       dlg = document.createElement("dialog");
-      dlg.id = "gkmV320MiniCard";
-      dlg.innerHTML = `<div class="gkm-v320-card">
-        <button class="gkm-v320-close" type="button">×</button>
+      dlg.id = "gkmV321MiniCard";
+      dlg.innerHTML = `<div class="gkm-v321-card">
+        <button class="gkm-v321-close" type="button">×</button>
         <h2></h2>
-        <div class="gkm-v320-meta"></div>
-        <div class="gkm-v320-note"></div>
+        <div class="gkm-v321-meta"></div>
+        <div class="gkm-v321-note"></div>
       </div>`;
       document.body.appendChild(dlg);
-      dlg.querySelector(".gkm-v320-close").onclick = ()=>dlg.close();
+      dlg.querySelector(".gkm-v321-close").onclick = ()=>dlg.close();
       dlg.addEventListener("click", e=>{ if(e.target === dlg) dlg.close(); });
     }
     dlg.querySelector("h2").textContent = stub.title || "Карточка";
@@ -12417,10 +12427,62 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(stub.rating) meta.push("★ " + stub.rating);
     if(stub.votes) meta.push(stub.votes);
     if(stub.genres) meta.push(stub.genres);
-    dlg.querySelector(".gkm-v320-meta").textContent = meta.join(" · ");
-    dlg.querySelector(".gkm-v320-note").textContent =
-      "Безопасная карточка из ответа помощника. Точную карточку сайта в загруженных данных не нашёл, поэтому левый тайтл не открываю.";
+    dlg.querySelector(".gkm-v321-meta").textContent = meta.join(" · ");
+    dlg.querySelector(".gkm-v321-note").textContent =
+      note || "Безопасная карточка из ответа помощника. Левый тайтл не открываю.";
     if(typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open","");
+    return true;
+  }
+
+  function closeHelper(){
+    const dlg = $("gkmAiDialog");
+    try{ if(dlg && typeof dlg.close === "function") dlg.close(); }catch{}
+  }
+
+  function setSiteSearch(stub){
+    const q = $("searchInput");
+    const type = $("typeFilter");
+    const year = $("yearFilter");
+    if(q) q.value = stub.title || "";
+    if(type && stub.type){
+      const t = String(stub.type);
+      const opts = Array.from(type.options || []);
+      const exact = opts.find(o => norm(o.value) === norm(t) || norm(o.textContent) === norm(t));
+      if(exact) type.value = exact.value;
+      else if(norm(t).includes("фильм")) type.value = "Фильм";
+      else if(norm(t).includes("аниме") || norm(t).includes("анимэ")) type.value = "Аниме";
+      else if(norm(t).includes("сериал")) type.value = "Сериал";
+      else if(norm(t).includes("мульт")) type.value = "Мультфильм";
+    }
+    if(year && stub.year && /^(19|20)\d{2}$/.test(String(stub.year))){
+      const opt = Array.from(year.options || []).find(o => String(o.value) === String(stub.year));
+      if(opt) year.value = String(stub.year);
+    }
+  }
+
+  function searchAndMaybeOpen(stub){
+    setSiteSearch(stub);
+    closeHelper();
+    try{
+      if(typeof runSearch === "function"){
+        runSearch(1);
+      } else {
+        const q = $("searchInput");
+        if(q) q.dispatchEvent(new Event("input", {bubbles:true}));
+      }
+    }catch(e){ console.warn("GKM V321 runSearch failed", e); }
+
+    addBotText("Точной карточки сразу не было в загруженном списке. Я вывел поиск по сайту: «" + (stub.title || "") + "». Если совпадений несколько — выбери нужную карточку.");
+
+    // После поиска пробуем открыть точное совпадение, когда currentItems обновятся.
+    [900, 1800, 3200].forEach(ms=>{
+      setTimeout(()=>{
+        const real = findExact(stub);
+        if(real){
+          try{ if(typeof openDetails === "function") openDetails(real); }catch{}
+        }
+      }, ms);
+    });
     return true;
   }
 
@@ -12429,58 +12491,76 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(!n) return false;
     const stub = getResults()[n-1];
     if(!stub){
-      addBotText("Не вижу вариант №" + n + ". Сначала сделай подборку, потом нажми кнопку «Открыть 1».");
+      addBotText("Не вижу вариант №" + n + ". Сначала сделай подборку, потом нажми «Открыть 1».");
       return true;
     }
-    const real = stub.__gkm_v320_stub || stub.__gkm_stub || stub.__gkm_v319_stub ? findExact(stub) : stub;
-    if(real && !(real.__gkm_v320_stub || real.__gkm_stub || real.__gkm_v319_stub)){
-      try{ if(typeof openDetails === "function"){ openDetails(real); return true; } }catch(e){ console.warn("GKM V320 openDetails failed", e); }
+    const real = stub.__gkm_v321_stub || stub.__gkm_v320_stub || stub.__gkm_stub || stub.__gkm_v319_stub ? findExact(stub) : stub;
+    if(real && !(real.__gkm_v321_stub || real.__gkm_v320_stub || real.__gkm_stub || real.__gkm_v319_stub)){
+      try{ if(typeof openDetails === "function"){ openDetails(real); return true; } }catch(e){ console.warn("GKM V321 openDetails failed", e); }
     }
-    return showMini(stub);
+    return searchAndMaybeOpen(stub);
   }
 
   function style(){
-    if($("gkm-v320-style")) return;
+    if($("gkm-v321-style")) return;
     const st = document.createElement("style");
-    st.id = "gkm-v320-style";
+    st.id = "gkm-v321-style";
     st.textContent = `
-      .gkm-v320-openbar{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 4px 0}
-      .gkm-v320-openbtn{border:1px solid rgba(0,191,255,.55);background:linear-gradient(135deg,#2336b6,#15b9ee);color:#fff;border-radius:12px;padding:7px 10px;font-weight:800;cursor:pointer;line-height:1;font-size:13px}
-      .gkm-v320-openbtn:hover{filter:brightness(1.12);transform:translateY(-1px)}
+      .gkm-v321-openbar{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 4px 0}
+      .gkm-v321-openbtn{border:1px solid rgba(0,191,255,.55);background:linear-gradient(135deg,#2336b6,#15b9ee);color:#fff;border-radius:12px;padding:7px 10px;font-weight:800;cursor:pointer;line-height:1;font-size:13px}
+      .gkm-v321-openbtn:hover{filter:brightness(1.12);transform:translateY(-1px)}
       #gkmAiInput:focus{box-shadow:0 0 0 2px rgba(0,191,255,.40),0 0 20px rgba(0,191,255,.22)!important}
-      #gkmV320MiniCard{border:1px solid #00bfff;border-radius:20px;background:#0a1022;color:#fff;max-width:min(760px,92vw);padding:0;box-shadow:0 0 45px rgba(0,191,255,.35)}
-      #gkmV320MiniCard::backdrop{background:rgba(0,0,0,.72)}
-      .gkm-v320-card{padding:24px 28px;position:relative}.gkm-v320-close{position:absolute;right:14px;top:12px;border:0;border-radius:12px;background:#129ee9;color:#fff;font-size:24px;width:42px;height:42px;cursor:pointer}.gkm-v320-card h2{margin:0 52px 12px 0;font-size:28px}.gkm-v320-meta{padding:12px 14px;border-radius:12px;background:rgba(0,191,255,.12);border:1px solid rgba(0,191,255,.28);font-weight:700}.gkm-v320-note{margin-top:14px;opacity:.82;line-height:1.45}
+      #gkmV321MiniCard{border:1px solid #00bfff;border-radius:20px;background:#0a1022;color:#fff;max-width:min(760px,92vw);padding:0;box-shadow:0 0 45px rgba(0,191,255,.35)}
+      #gkmV321MiniCard::backdrop{background:rgba(0,0,0,.72)}
+      .gkm-v321-card{padding:24px 28px;position:relative}.gkm-v321-close{position:absolute;right:14px;top:12px;border:0;border-radius:12px;background:#129ee9;color:#fff;font-size:24px;width:42px;height:42px;cursor:pointer}.gkm-v321-card h2{margin:0 52px 12px 0;font-size:28px}.gkm-v321-meta{padding:12px 14px;border-radius:12px;background:rgba(0,191,255,.12);border:1px solid rgba(0,191,255,.28);font-weight:700}.gkm-v321-note{margin-top:14px;opacity:.82;line-height:1.45}
     `;
     document.head.appendChild(st);
   }
 
+  function cleanOldBars(root){
+    if(!root || !root.querySelectorAll) return;
+    root.querySelectorAll(".gkm-v317-openbar,.gkm-v318-openbar,.gkm-v319-openbar,.gkm-v320-openbar,.gkm-v321-openbar").forEach(x=>x.remove());
+  }
+
   function addButtonsToNode(node){
-    if(!node || node.dataset.gkmV320Buttons === "1") return;
+    if(!node) return;
+    cleanOldBars(node);
     const arr = saveFromNode(node);
     if(!arr.length) return;
 
-    // Не переписываем текст ответа, чтобы не было синих вложенных коробок.
+    const sig = arr.map(x => x ? (x.title + "|" + x.year + "|" + x.type) : "").join(";");
+    if(node.dataset.gkmV321Sig === sig && node.querySelector(".gkm-v321-openbar")) return;
+
     const bar = document.createElement("div");
-    bar.className = "gkm-v320-openbar";
+    bar.className = "gkm-v321-openbar";
     arr.forEach((item, idx)=>{
       if(!item) return;
       const b = document.createElement("button");
       b.type = "button";
-      b.className = "gkm-v320-openbtn";
-      b.dataset.gkmV320Open = String(idx+1);
+      b.className = "gkm-v321-openbtn";
+      b.dataset.gkmV321Open = String(idx+1);
       b.textContent = "Открыть " + (idx+1);
       bar.appendChild(b);
     });
     node.appendChild(bar);
-    node.dataset.gkmV320Buttons = "1";
+    node.dataset.gkmV321Sig = sig;
+  }
+
+  function isMessageNode(n){
+    if(!n || n.nodeType !== 1) return false;
+    const c = String(n.className || "");
+    return c.includes("ai-bot") || c.includes("gkm-ai-message") || c.includes("gkm-ai-bot");
   }
 
   function scan(root){
+    if(!root) return;
     const nodes=[];
-    if(root && root.nodeType === 1 && /^\s*1\./m.test(root.innerText || root.textContent || "")) nodes.push(root);
-    if(root && root.querySelectorAll) root.querySelectorAll(".ai-bot,.gkm-ai-message,.gkm-ai-bot").forEach(n=>nodes.push(n));
-    nodes.forEach(addButtonsToNode);
+    if(isMessageNode(root)) nodes.push(root);
+    if(root.querySelectorAll) root.querySelectorAll(".ai-bot,.gkm-ai-message,.gkm-ai-bot").forEach(n=>nodes.push(n));
+    nodes.forEach(n=>{
+      const text = n.innerText || n.textContent || "";
+      if(/^\s*1\./m.test(text)) addButtonsToNode(n);
+    });
   }
 
   function focusInput(){
@@ -12497,37 +12577,39 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const floatBtn = $("gkmAiFloatBtn");
     const dialog = $("gkmAiDialog");
 
-    if(floatBtn && !floatBtn.dataset.gkmV320Focus){
+    if(messages) cleanOldBars(messages);
+
+    if(floatBtn && !floatBtn.dataset.gkmV321Focus){
       floatBtn.addEventListener("click", focusInput, true);
-      floatBtn.dataset.gkmV320Focus = "1";
+      floatBtn.dataset.gkmV321Focus = "1";
     }
-    if(dialog && !dialog.dataset.gkmV320Focus){
+    if(dialog && !dialog.dataset.gkmV321Focus){
       dialog.addEventListener("toggle", ()=>{ if(dialog.open) focusInput(); });
       dialog.addEventListener("click", ()=>{ if(dialog.open) focusInput(); }, true);
-      dialog.dataset.gkmV320Focus = "1";
+      dialog.dataset.gkmV321Focus = "1";
     }
     if(input) focusInput();
 
-    if(messages && !messages.dataset.gkmV320Observer){
+    if(messages && !messages.dataset.gkmV321Observer){
       new MutationObserver(muts=>{
         muts.forEach(m=>m.addedNodes && m.addedNodes.forEach(n=>{ if(n.nodeType === 1) setTimeout(()=>scan(n), 30); }));
       }).observe(messages, {childList:true, subtree:true});
-      messages.dataset.gkmV320Observer = "1";
+      messages.dataset.gkmV321Observer = "1";
       scan(messages);
     }
 
     document.addEventListener("click", e=>{
-      const btn = e.target && e.target.closest ? e.target.closest("[data-gkm-v320-open]") : null;
+      const btn = e.target && e.target.closest ? e.target.closest("[data-gkm-v321-open]") : null;
       if(!btn) return;
       e.preventDefault();
       e.stopPropagation();
       if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-      openResult(btn.dataset.gkmV320Open);
+      openResult(btn.dataset.gkmV321Open);
       focusInput();
       return false;
     }, true);
 
-    if(form && !form.dataset.gkmV320OpenIntercept){
+    if(form && !form.dataset.gkmV321OpenIntercept){
       form.addEventListener("submit", e=>{
         const raw = (input && input.value || "").trim();
         const m = raw.match(/^(?:открой|открыть|покажи)\s+(?:(?:фильм|кино|аниме|анимэ|мульт|сериал|игру|игра|мангу|вариант)\s+)?(\d{1,2})\s*$/i) ||
@@ -12544,7 +12626,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         setTimeout(()=>scan(messages), 650);
         setTimeout(()=>scan(messages), 1500);
       }, true);
-      form.dataset.gkmV320OpenIntercept = "1";
+      form.dataset.gkmV321OpenIntercept = "1";
     }
   }
 
@@ -12553,7 +12635,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install, 900);
   setTimeout(install, 2000);
 
-  console.log("GKM V320: safe open buttons installed");
+  console.log("GKM V321: safe open search fallback installed");
 })();
-/* GKM V320 SAFE OPEN BUTTONS END */
+/* GKM V321 SAFE OPEN SEARCH FALLBACK END */
 
