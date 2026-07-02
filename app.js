@@ -506,7 +506,86 @@ function animeKey(item) {
   return raw;
 }
 
+
+/* GKM V334 NORMAL TITLES START */
+function gkmV334Text(item) {
+  return [item && item.ru, item && item.title_ru, item && item.__manualTopTitle, item && item.en, item && item.title, item && item.name, item && item.original_title, item && item.original_name, item && item.search, (item && item.genres || []).join(" ")]
+    .filter(Boolean).join(" ");
+}
+function gkmV334Has(raw, list) {
+  raw = norm(raw);
+  return list.some(x => raw.includes(norm(x)));
+}
+function gkmV334NormalAnimeTitle(item) {
+  if (!item || getType(item) !== "Аниме" && getType(item) !== "Мультфильм") return "";
+  const raw = gkmV334Text(item);
+  const r = norm(raw);
+  const baseTitle = norm(titleOf(item));
+  const y = Number(getYear(item) || 0);
+  const t = getType(item);
+  const v = getVotes(item);
+  const rate = getRating(item);
+
+  // Naruto / Naruto Shippuden. Исправляет "Наруто — 2004" на нормальные названия.
+  if (gkmV334Has(raw, ["naruto", "наруто", "ナルト"]) || baseTitle.includes("наруто")) {
+    if (gkmV334Has(raw, ["boruto", "боруто"])) return "Боруто: Наруто. Фильм";
+    if (gkmV334Has(raw, ["the last", "последний"]) || y === 2014) return "Последний: Наруто. Фильм";
+    if (gkmV334Has(raw, ["road to ninja", "путь ниндзя"]) || (y === 2012 && t === "Мультфильм")) return "Наруто: Ураганные хроники — Путь ниндзя";
+    if (gkmV334Has(raw, ["blood prison", "кровав"]) || (y === 2011 && v >= 20000 && v < 60000)) return "Наруто: Ураганные хроники — Кровавая тюрьма";
+    if (gkmV334Has(raw, ["lost tower", "потерянн", "баш"]) || (y === 2010 && v >= 10000)) return "Наруто: Ураганные хроники — Потерянная башня";
+    if (gkmV334Has(raw, ["will of fire", "воля огня", "наследники"]) || y === 2009) return "Наруто: Ураганные хроники — Наследники воли огня";
+    if (gkmV334Has(raw, ["bonds", "связи", "узы"]) || y === 2008) return "Наруто: Ураганные хроники — Узы";
+    if (gkmV334Has(raw, ["shippuden", "shippuuden", "疾風伝", "ураганные хроники"]) && y === 2007 && v > 500000) return "Наруто: Ураганные хроники";
+    if (gkmV334Has(raw, ["shippuden", "shippuuden", "疾風伝", "ураганные хроники"]) && y === 2007) return "Наруто: Ураганные хроники — Фильм";
+    if (gkmV334Has(raw, ["rock lee", "рок ли", "sd"]) || (y === 2012 && t === "Аниме")) return "Наруто SD: Рок Ли и его друзья-ниндзя";
+    if (gkmV334Has(raw, ["x ut", "ut"]) || y === 2011) return "Наруто x UT";
+    if (gkmV334Has(raw, ["ninja clash", "land of snow", "стране снега"]) || y === 2004) return "Наруто: Битва ниндзя в Стране Снега";
+    if (gkmV334Has(raw, ["stone of gelel", "камень гелела"]) || y === 2005) return "Наруто: Легенда о камне Гелела";
+    if (gkmV334Has(raw, ["crescent moon", "полумесяц"]) || y === 2006) return "Наруто: Стражи Королевства Полумесяца";
+    if (y === 2003) return "Наруто: Перекрёстки";
+    if (y === 2022) return "Наруто: Юбилейный спецвыпуск";
+    if (y === 2002 && v > 500000) return "Наруто";
+  }
+
+  // Bleach movies / seasons by year/title.
+  if (gkmV334Has(raw, ["bleach", "блич"])) {
+    if (gkmV334Has(raw, ["thousand", "sennen", "тысячелетн"])) return "Блич: Тысячелетняя кровавая война";
+    if (gkmV334Has(raw, ["memories of nobody"]) || y === 2006) return "Блич: Воспоминания ни о ком";
+    if (gkmV334Has(raw, ["diamonddust", "diamond dust"]) || y === 2007) return "Блич: Восстание Алмазной Пыли";
+    if (gkmV334Has(raw, ["fade to black"]) || y === 2008) return "Блич: Уходя в темноту";
+    if (gkmV334Has(raw, ["hell verse"]) || y === 2010) return "Блич: Адская глава";
+  }
+
+  // One Piece common movies.
+  if (gkmV334Has(raw, ["one piece", "ван пис", "ван-пис", "ванпис"])) {
+    if (gkmV334Has(raw, ["film red"]) || y === 2022) return "Ван-Пис: Красный";
+    if (gkmV334Has(raw, ["stampede"]) || y === 2019) return "Ван-Пис: Бегство";
+    if (gkmV334Has(raw, ["film gold"]) || y === 2016) return "Ван-Пис: Золото";
+    if (gkmV334Has(raw, ["film z"]) || y === 2012) return "Ван-Пис: Фильм Z";
+    if (gkmV334Has(raw, ["strong world"]) || y === 2009) return "Ван-Пис: Сильный мир";
+  }
+
+  // Fullmetal Alchemist.
+  if (gkmV334Has(raw, ["fullmetal alchemist", "стальной алхимик", "сталной алхимик"])) {
+    if (gkmV334Has(raw, ["brotherhood"]) || y === 2009) return "Стальной алхимик: Братство";
+    if (gkmV334Has(raw, ["shamballa"]) || y === 2005) return "Стальной алхимик: Завоеватель Шамбалы";
+    if (gkmV334Has(raw, ["milos"]) || y === 2011) return "Стальной алхимик: Священная звезда Милоса";
+  }
+
+  // Защита от голых названий вида "Франшиза — 2012".
+  const bare = titleOf(item).match(/^(.+?)\s+[—-]\s+(19\d{2}|20\d{2})$/);
+  if (bare && getType(item)) {
+    return `${bare[1].trim()} — ${getType(item).toLowerCase()} ${bare[2]}`;
+  }
+
+  return "";
+}
+window.GKM_V334_NORMAL_TITLES_VERSION = "v334-normal-titles-no-year-only-2026-07-02";
+/* GKM V334 NORMAL TITLES END */
+
 function displayTitle(item) {
+  const v334Title = gkmV334NormalAnimeTitle(item);
+  if (v334Title) return v334Title;
   if (getType(item) === "Аниме") {
     const exact = specificAnimeTitle(item);
     if (exact) return exact;
