@@ -12152,6 +12152,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(it.random) arr=arr.sort(()=>Math.random()-0.5);
     const res=dedupe(arr).slice(0,it.count);
     lastResults=res;lastQuery=q;remember(it);
+    try{ window.GKM_AI_REAL_RESULTS = res; window.GKM_AI_REAL_LAST_QUERY = q; window.GKM_AI_REAL_LAST_INTENT = it; }catch{}
     return {items:res,intent:it,tokens:tk};
   }
 
@@ -12212,6 +12213,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const items = res.items.filter(x => itemKey(x) !== itemKey(base)).slice(0, LIMIT);
     if(!items.length) return "Похожее быстро не нашёл. Попробуй обычным запросом.";
     lastResults = items;
+    try{ window.GKM_AI_REAL_RESULTS = items; window.GKM_AI_REAL_LAST_QUERY = q; }catch{}
     return `Похожее на ${title(base)}:\n${fmt(items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
   }
 
@@ -12838,4 +12840,99 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   console.log("GKM V328: AI auto repair installed");
 })();
 /* GKM V328 AI AUTO REPAIR END */
+
+
+/* GKM V329 DIRECT AI RESULT OPEN START */
+(function(){
+  window.GKM_V329_DIRECT_AI_RESULT_OPEN_VERSION = "v329-direct-ai-result-open-no-search-zero-2026-07-02";
+
+  function isRealItem(x){
+    return x && typeof x === "object" && !x.__gkm_v321_stub && !x.__gkm_v320_stub && !x.__gkm_stub;
+  }
+
+  function openReal(n){
+    n = Number(n);
+    if(!n) return false;
+    let item = null;
+    try{
+      if(Array.isArray(window.GKM_AI_REAL_RESULTS)){
+        item = window.GKM_AI_REAL_RESULTS[n - 1];
+      }
+    }catch{}
+    if(isRealItem(item)){
+      try{
+        if(typeof openDetails === "function"){
+          openDetails(item);
+          const dlg = document.getElementById("gkmAiDialog");
+          try{ if(dlg && typeof dlg.close === "function") dlg.close(); }catch{}
+          return true;
+        }
+      }catch(e){
+        console.warn("GKM V329 direct openDetails failed", e);
+      }
+    }
+    return false;
+  }
+
+  function patchButtons(root){
+    if(!root || !root.querySelectorAll) return;
+    root.querySelectorAll("[data-gkm-v321-open],[data-gkm-v320-open],[data-gkm-v319-open],[data-gkm-v318-open],[data-gkm-open]").forEach(btn=>{
+      if(btn.dataset.gkmV329Direct === "1") return;
+      const n = btn.dataset.gkmV321Open || btn.dataset.gkmV320Open || btn.dataset.gkmV319Open || btn.dataset.gkmV318Open || btn.dataset.gkmOpen;
+      if(!n) return;
+      btn.dataset.gkmV329Open = n;
+      btn.dataset.gkmV329Direct = "1";
+    });
+  }
+
+  function install(){
+    const box = document.getElementById("gkmAiMessages");
+    if(box && !box.dataset.gkmV329Observer){
+      patchButtons(box);
+      new MutationObserver(muts=>{
+        muts.forEach(m=>m.addedNodes && m.addedNodes.forEach(n=>{
+          if(n.nodeType === 1) setTimeout(()=>patchButtons(n), 20);
+        }));
+      }).observe(box,{childList:true,subtree:true});
+      box.dataset.gkmV329Observer = "1";
+    }
+
+    document.addEventListener("click", e=>{
+      const btn = e.target && e.target.closest ? e.target.closest("[data-gkm-v329-open]") : null;
+      if(!btn) return;
+      const n = btn.dataset.gkmV329Open;
+      if(openReal(n)){
+        e.preventDefault();
+        e.stopPropagation();
+        if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+        return false;
+      }
+    }, true);
+
+    const form = document.getElementById("gkmAiForm");
+    const input = document.getElementById("gkmAiInput");
+    if(form && !form.dataset.gkmV329DirectSubmit){
+      form.addEventListener("submit", e=>{
+        const raw=(input && input.value || "").trim();
+        const m=raw.match(/^(?:открой|открыть|покажи)\s+(?:(?:фильм|кино|аниме|анимэ|мульт|сериал|игру|игра|мангу|вариант)\s+)?(\d{1,2})\s*$/i) ||
+                raw.match(/^(?:(?:фильм|кино|аниме|анимэ|мульт|сериал|вариант)\s+)(\d{1,2})\s*$/i);
+        if(m && openReal(m[1])){
+          e.preventDefault();
+          e.stopPropagation();
+          if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+          if(input) input.value = "";
+          return false;
+        }
+      }, true);
+      form.dataset.gkmV329DirectSubmit = "1";
+    }
+  }
+
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true}); else install();
+  setTimeout(install, 300);
+  setTimeout(install, 1000);
+  setTimeout(install, 2200);
+  console.log("GKM V329: direct AI result open installed");
+})();
+/* GKM V329 DIRECT AI RESULT OPEN END */
 
