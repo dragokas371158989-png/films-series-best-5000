@@ -12283,25 +12283,46 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V316 REAL AI BRIDGE END */
 
 
-/* GKM V319 SAFE RESULT OPEN START */
+/* GKM V320 SAFE OPEN BUTTONS START */
 (function(){
-  window.GKM_V319_SAFE_RESULT_OPEN_VERSION = "v319-safe-result-open-no-wrong-card-2026-07-02";
+  window.GKM_V320_SAFE_OPEN_BUTTONS_VERSION = "v320-safe-open-buttons-no-nested-blue-boxes-2026-07-02";
 
   function $(id){ return document.getElementById(id); }
   function esc(s){
     return String(s == null ? "" : s).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
   }
   function norm(s){
-    return String(s || "")
-      .toLowerCase()
-      .replace(/ё/g, "е")
-      .replace(/[^\p{L}\p{N}]+/gu, " ")
-      .trim();
+    return String(s || "").toLowerCase().replace(/ё/g,"е").replace(/[^\p{L}\p{N}]+/gu," ").trim();
+  }
+
+  function parseLine(line){
+    const raw = String(line || "").replace(/\s+/g, " ").trim();
+    const m = raw.match(/^(\d{1,2})\.\s+(.+?)\s+\((19\d{2}|20\d{2}|—|-)\)\s+[—-]\s+(.+)$/);
+    if(!m) return null;
+    const tail = m[4];
+    const parts = tail.split(/[·•]/).map(x=>x.trim()).filter(Boolean);
+    let type = parts[0] || "";
+    if(type.includes("-")) type = type.split("-")[0].trim();
+    const r = tail.match(/★\s*([0-9.]+)/);
+    const rating = r ? r[1] : "";
+    const vm = tail.match(/★\s*[0-9.]+\s*[·•-]\s*([^·•]+)/);
+    const votes = vm ? vm[1].trim() : "";
+    const genres = parts.length >= 3 ? parts.slice(2).join(", ") : "";
+    return {n:Number(m[1]), title:m[2].trim(), year:m[3].trim(), type:type.trim(), rating, votes, genres, raw, __gkm_v320_stub:true};
+  }
+
+  function collectFromText(text){
+    const arr=[];
+    String(text || "").split(/\n+/).forEach(line=>{
+      const item = parseLine(line);
+      if(item && item.n) arr[item.n-1] = item;
+    });
+    return arr;
   }
 
   function titleOf(it){
     try{ if(typeof displayTitle === "function") return String(displayTitle(it)||""); }catch{}
-    return String((it && (it.ru || it.title_ru || it.title || it.name || it.en || it.original_title || it.original_name || it.__manualTopTitle)) || "");
+    return String((it && (it.ru || it.title_ru || it.title || it.name || it.en || it.original_title || it.original_name)) || "");
   }
   function yearOf(it){
     try{ if(typeof getYear === "function") return String(getYear(it)||""); }catch{}
@@ -12313,14 +12334,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     try{ if(typeof getType === "function") return String(getType(it)||""); }catch{}
     return String((it && (it.type || it.category || it.kind)) || "");
   }
-  function genresOf(it){
-    try{ if(typeof getGenres === "function"){ const g=getGenres(it); if(Array.isArray(g)) return g.map(String); } }catch{}
-    const r = it && (it.genres || it.genre || it.tags);
-    if(Array.isArray(r)) return r.map(String);
-    if(typeof r === "string") return r.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
-    return [];
-  }
-
   function pools(){
     const out=[];
     try{ if(Array.isArray(window.currentItems)) out.push(...window.currentItems); }catch{}
@@ -12335,56 +12348,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return out;
   }
 
-  function parseLine(line){
-    const raw = String(line || "").replace(/\s+/g, " ").trim();
-    const m = raw.match(/^(\d{1,2})\.\s+(.+?)\s+\((19\d{2}|20\d{2}|—|-)\)\s+[—-]\s+(.+)$/);
-    if(!m) return null;
-
-    const tail = m[4];
-    const parts = tail.split(/[·•]/).map(x=>x.trim()).filter(Boolean);
-    let type = parts[0] || "";
-    if(type.includes("-")) type = type.split("-")[0].trim();
-    const r = tail.match(/★\s*([0-9.]+)/);
-    const rating = r ? r[1] : "";
-    let votes = "";
-    const vm = tail.match(/★\s*[0-9.]+\s*[·•-]\s*([^·•]+)/);
-    if(vm) votes = vm[1].trim();
-    let genres = "";
-    if(parts.length >= 3) genres = parts.slice(2).join(", ");
-    return {
-      n: Number(m[1]),
-      title: m[2].trim(),
-      year: m[3].trim(),
-      type: type.trim(),
-      rating,
-      votes,
-      genres,
-      raw,
-      __gkm_v319_stub: true
-    };
-  }
-
-  function collectFromText(text){
-    const arr=[];
-    String(text || "").split(/\n+/).forEach(line=>{
-      const item = parseLine(line);
-      if(item && item.n) arr[item.n - 1] = item;
-    });
-    return arr;
-  }
-
-  function saveResultsFromNode(node){
+  function saveFromNode(node){
     const text = node ? (node.innerText || node.textContent || "") : "";
     const arr = collectFromText(text);
     if(arr.length){
-      window.GKM_V319_LAST_RESULTS = arr;
+      window.GKM_V320_LAST_RESULTS = arr;
       window.GKM_LAST_CLICKABLE_RESULTS = arr;
     }
     return arr;
   }
 
   function getResults(){
-    return window.GKM_V319_LAST_RESULTS || window.GKM_LAST_CLICKABLE_RESULTS || [];
+    return window.GKM_V320_LAST_RESULTS || window.GKM_LAST_CLICKABLE_RESULTS || [];
   }
 
   function findExact(stub){
@@ -12392,44 +12367,47 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const wanted = norm(stub.title);
     const wantedYear = String(stub.year || "").trim();
     const wantedType = norm(stub.type);
-    const list = pools();
-
-    for(const it of list){
+    for(const it of pools()){
       const t = norm(titleOf(it));
       const y = yearOf(it);
-      if(t === wanted && (!wantedYear || wantedYear === "—" || wantedYear === "-" || y === wantedYear)){
-        return it;
-      }
+      if(t === wanted && (!wantedYear || wantedYear==="—" || wantedYear==="-" || y === wantedYear)) return it;
     }
-
-    // Строгий безопасный поиск: открываем только если год совпал и название почти одно и то же.
-    for(const it of list){
+    for(const it of pools()){
       const t = norm(titleOf(it));
       const y = yearOf(it);
       const ty = norm(typeOf(it));
       const titleOk = t && wanted && (t === wanted || t.includes(wanted) || wanted.includes(t));
-      const yearOk = (!wantedYear || wantedYear === "—" || wantedYear === "-" || y === wantedYear);
+      const yearOk = (!wantedYear || wantedYear==="—" || wantedYear==="-" || y === wantedYear);
       const typeOk = !wantedType || !ty || ty.includes(wantedType) || wantedType.includes(ty);
       if(titleOk && yearOk && typeOk) return it;
     }
-
     return null;
+  }
+
+  function addBotText(text){
+    const box = $("gkmAiMessages");
+    if(!box) return;
+    const div = document.createElement("div");
+    div.className = "ai-bot";
+    div.innerHTML = esc(text).replace(/\n/g,"<br>");
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
   }
 
   function showMini(stub){
     if(!stub) return true;
-    let dlg = $("gkmV319MiniCard");
+    let dlg = $("gkmV320MiniCard");
     if(!dlg){
       dlg = document.createElement("dialog");
-      dlg.id = "gkmV319MiniCard";
-      dlg.innerHTML = `<div class="gkm-v319-card">
-        <button class="gkm-v319-close" type="button">×</button>
+      dlg.id = "gkmV320MiniCard";
+      dlg.innerHTML = `<div class="gkm-v320-card">
+        <button class="gkm-v320-close" type="button">×</button>
         <h2></h2>
-        <div class="gkm-v319-meta"></div>
-        <div class="gkm-v319-note"></div>
+        <div class="gkm-v320-meta"></div>
+        <div class="gkm-v320-note"></div>
       </div>`;
       document.body.appendChild(dlg);
-      dlg.querySelector(".gkm-v319-close").onclick = ()=>dlg.close();
+      dlg.querySelector(".gkm-v320-close").onclick = ()=>dlg.close();
       dlg.addEventListener("click", e=>{ if(e.target === dlg) dlg.close(); });
     }
     dlg.querySelector("h2").textContent = stub.title || "Карточка";
@@ -12439,91 +12417,70 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(stub.rating) meta.push("★ " + stub.rating);
     if(stub.votes) meta.push(stub.votes);
     if(stub.genres) meta.push(stub.genres);
-    dlg.querySelector(".gkm-v319-meta").textContent = meta.join(" · ");
-    dlg.querySelector(".gkm-v319-note").textContent =
-      "Открыл безопасную карточку из ответа помощника. Точную карточку сайта в уже загруженных данных не нашёл, поэтому НЕ открываю левый фильм/аниме.";
-    if(typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");
+    dlg.querySelector(".gkm-v320-meta").textContent = meta.join(" · ");
+    dlg.querySelector(".gkm-v320-note").textContent =
+      "Безопасная карточка из ответа помощника. Точную карточку сайта в загруженных данных не нашёл, поэтому левый тайтл не открываю.";
+    if(typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open","");
     return true;
-  }
-
-  function addBotText(text){
-    try{
-      if(typeof gkmHelperAddMessage === "function"){ gkmHelperAddMessage("bot", text); return; }
-    }catch{}
-    const box = $("gkmAiMessages");
-    if(!box) return;
-    const div=document.createElement("div");
-    div.className="ai-bot";
-    div.innerHTML=esc(text).replace(/\n/g,"<br>");
-    box.appendChild(div);
-    box.scrollTop=box.scrollHeight;
   }
 
   function openResult(n){
     n = Number(n);
     if(!n) return false;
-    const list = getResults();
-    const stub = list[n - 1];
-
+    const stub = getResults()[n-1];
     if(!stub){
-      addBotText("Не вижу результат №" + n + ". Сначала сделай подборку, потом нажми на вариант или напиши «открой 1».");
+      addBotText("Не вижу вариант №" + n + ". Сначала сделай подборку, потом нажми кнопку «Открыть 1».");
       return true;
     }
-
-    const real = stub.__gkm_v319_stub || stub.__gkm_stub ? findExact(stub) : stub;
-
-    if(real && !(real.__gkm_v319_stub || real.__gkm_stub)){
-      try{
-        if(typeof openDetails === "function"){
-          openDetails(real);
-          return true;
-        }
-      }catch(e){
-        console.warn("GKM V319 openDetails failed", e);
-      }
+    const real = stub.__gkm_v320_stub || stub.__gkm_stub || stub.__gkm_v319_stub ? findExact(stub) : stub;
+    if(real && !(real.__gkm_v320_stub || real.__gkm_stub || real.__gkm_v319_stub)){
+      try{ if(typeof openDetails === "function"){ openDetails(real); return true; } }catch(e){ console.warn("GKM V320 openDetails failed", e); }
     }
-
     return showMini(stub);
   }
 
   function style(){
-    if($("gkm-v319-style")) return;
-    const st=document.createElement("style");
-    st.id="gkm-v319-style";
-    st.textContent=`
-      .gkm-v319-clickline,.gkm-ai-result-open,.gkm-v318-clickline{
-        display:block;width:100%;text-align:left;margin:4px 0;padding:9px 11px;border-radius:12px;
-        border:1px solid rgba(0,191,255,.35);background:rgba(0,191,255,.10);color:inherit;font:inherit;font-weight:800;line-height:1.28;cursor:pointer;
-      }
-      .gkm-v319-clickline:hover,.gkm-ai-result-open:hover,.gkm-v318-clickline:hover{
-        background:rgba(0,191,255,.22);border-color:rgba(0,191,255,.65);transform:translateY(-1px)
-      }
+    if($("gkm-v320-style")) return;
+    const st = document.createElement("style");
+    st.id = "gkm-v320-style";
+    st.textContent = `
+      .gkm-v320-openbar{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 4px 0}
+      .gkm-v320-openbtn{border:1px solid rgba(0,191,255,.55);background:linear-gradient(135deg,#2336b6,#15b9ee);color:#fff;border-radius:12px;padding:7px 10px;font-weight:800;cursor:pointer;line-height:1;font-size:13px}
+      .gkm-v320-openbtn:hover{filter:brightness(1.12);transform:translateY(-1px)}
       #gkmAiInput:focus{box-shadow:0 0 0 2px rgba(0,191,255,.40),0 0 20px rgba(0,191,255,.22)!important}
-      #gkmV319MiniCard{border:1px solid #00bfff;border-radius:20px;background:#0a1022;color:#fff;max-width:min(760px,92vw);padding:0;box-shadow:0 0 45px rgba(0,191,255,.35)}
-      #gkmV319MiniCard::backdrop{background:rgba(0,0,0,.72)}
-      .gkm-v319-card{padding:24px 28px;position:relative}.gkm-v319-close{position:absolute;right:14px;top:12px;border:0;border-radius:12px;background:#129ee9;color:#fff;font-size:24px;width:42px;height:42px;cursor:pointer}.gkm-v319-card h2{margin:0 52px 12px 0;font-size:28px}.gkm-v319-meta{padding:12px 14px;border-radius:12px;background:rgba(0,191,255,.12);border:1px solid rgba(0,191,255,.28);font-weight:700}.gkm-v319-note{margin-top:14px;opacity:.82;line-height:1.45}
+      #gkmV320MiniCard{border:1px solid #00bfff;border-radius:20px;background:#0a1022;color:#fff;max-width:min(760px,92vw);padding:0;box-shadow:0 0 45px rgba(0,191,255,.35)}
+      #gkmV320MiniCard::backdrop{background:rgba(0,0,0,.72)}
+      .gkm-v320-card{padding:24px 28px;position:relative}.gkm-v320-close{position:absolute;right:14px;top:12px;border:0;border-radius:12px;background:#129ee9;color:#fff;font-size:24px;width:42px;height:42px;cursor:pointer}.gkm-v320-card h2{margin:0 52px 12px 0;font-size:28px}.gkm-v320-meta{padding:12px 14px;border-radius:12px;background:rgba(0,191,255,.12);border:1px solid rgba(0,191,255,.28);font-weight:700}.gkm-v320-note{margin-top:14px;opacity:.82;line-height:1.45}
     `;
     document.head.appendChild(st);
   }
 
-  function clickify(root){
-    if(!root) return;
-    const nodes=[];
-    if(root.nodeType === 1 && /^\s*1\./m.test(root.innerText || root.textContent || "")) nodes.push(root);
-    if(root.querySelectorAll) root.querySelectorAll(".ai-bot,.gkm-ai-message,.gkm-ai-bot").forEach(n=>nodes.push(n));
+  function addButtonsToNode(node){
+    if(!node || node.dataset.gkmV320Buttons === "1") return;
+    const arr = saveFromNode(node);
+    if(!arr.length) return;
 
-    nodes.forEach(node=>{
-      if(node.dataset.gkmV319Clickable === "1") return;
-      const text = node.innerText || node.textContent || "";
-      if(!/^\s*1\./m.test(text)) return;
-      const arr = saveResultsFromNode(node);
-      if(!arr.length) return;
-      const html = esc(text)
-        .replace(/(^|\n)(\s*)(\d{1,2})\.\s+([^\n]+)/g, (all, br, sp, num, rest)=>`${br}${sp}<button type="button" class="gkm-v319-clickline" data-gkm-v319-open="${num}" title="Открыть вариант ${num}">${num}. ${rest}</button>`)
-        .replace(/\n/g, "<br>");
-      node.innerHTML = html;
-      node.dataset.gkmV319Clickable = "1";
+    // Не переписываем текст ответа, чтобы не было синих вложенных коробок.
+    const bar = document.createElement("div");
+    bar.className = "gkm-v320-openbar";
+    arr.forEach((item, idx)=>{
+      if(!item) return;
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "gkm-v320-openbtn";
+      b.dataset.gkmV320Open = String(idx+1);
+      b.textContent = "Открыть " + (idx+1);
+      bar.appendChild(b);
     });
+    node.appendChild(bar);
+    node.dataset.gkmV320Buttons = "1";
+  }
+
+  function scan(root){
+    const nodes=[];
+    if(root && root.nodeType === 1 && /^\s*1\./m.test(root.innerText || root.textContent || "")) nodes.push(root);
+    if(root && root.querySelectorAll) root.querySelectorAll(".ai-bot,.gkm-ai-message,.gkm-ai-bot").forEach(n=>nodes.push(n));
+    nodes.forEach(addButtonsToNode);
   }
 
   function focusInput(){
@@ -12534,45 +12491,43 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function install(){
     style();
-
     const messages = $("gkmAiMessages");
     const input = $("gkmAiInput");
     const form = $("gkmAiForm");
     const floatBtn = $("gkmAiFloatBtn");
     const dialog = $("gkmAiDialog");
 
-    if(floatBtn && !floatBtn.dataset.gkmV319Focus){
+    if(floatBtn && !floatBtn.dataset.gkmV320Focus){
       floatBtn.addEventListener("click", focusInput, true);
-      floatBtn.dataset.gkmV319Focus = "1";
+      floatBtn.dataset.gkmV320Focus = "1";
     }
-    if(dialog && !dialog.dataset.gkmV319Focus){
+    if(dialog && !dialog.dataset.gkmV320Focus){
       dialog.addEventListener("toggle", ()=>{ if(dialog.open) focusInput(); });
       dialog.addEventListener("click", ()=>{ if(dialog.open) focusInput(); }, true);
-      dialog.dataset.gkmV319Focus = "1";
+      dialog.dataset.gkmV320Focus = "1";
     }
     if(input) focusInput();
 
-    if(messages && !messages.dataset.gkmV319Observer){
+    if(messages && !messages.dataset.gkmV320Observer){
       new MutationObserver(muts=>{
-        muts.forEach(m=>m.addedNodes && m.addedNodes.forEach(n=>{ if(n.nodeType === 1) setTimeout(()=>clickify(n), 30); }));
+        muts.forEach(m=>m.addedNodes && m.addedNodes.forEach(n=>{ if(n.nodeType === 1) setTimeout(()=>scan(n), 30); }));
       }).observe(messages, {childList:true, subtree:true});
-      messages.dataset.gkmV319Observer = "1";
-      clickify(messages);
+      messages.dataset.gkmV320Observer = "1";
+      scan(messages);
     }
 
-    // Главный фикс: перехватываем и клики, и команды открыть ДО старого помощника.
     document.addEventListener("click", e=>{
-      const btn = e.target && e.target.closest ? e.target.closest("[data-gkm-v319-open],[data-gkm-v318-open],[data-gkm-open]") : null;
+      const btn = e.target && e.target.closest ? e.target.closest("[data-gkm-v320-open]") : null;
       if(!btn) return;
       e.preventDefault();
       e.stopPropagation();
       if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-      openResult(btn.dataset.gkmV319Open || btn.dataset.gkmV318Open || btn.dataset.gkmOpen);
+      openResult(btn.dataset.gkmV320Open);
       focusInput();
       return false;
     }, true);
 
-    if(form && !form.dataset.gkmV319OpenIntercept){
+    if(form && !form.dataset.gkmV320OpenIntercept){
       form.addEventListener("submit", e=>{
         const raw = (input && input.value || "").trim();
         const m = raw.match(/^(?:открой|открыть|покажи)\s+(?:(?:фильм|кино|аниме|анимэ|мульт|сериал|игру|игра|мангу|вариант)\s+)?(\d{1,2})\s*$/i) ||
@@ -12586,10 +12541,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           focusInput();
           return false;
         }
-        setTimeout(()=>clickify(messages), 650);
-        setTimeout(()=>clickify(messages), 1500);
+        setTimeout(()=>scan(messages), 650);
+        setTimeout(()=>scan(messages), 1500);
       }, true);
-      form.dataset.gkmV319OpenIntercept = "1";
+      form.dataset.gkmV320OpenIntercept = "1";
     }
   }
 
@@ -12598,7 +12553,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install, 900);
   setTimeout(install, 2000);
 
-  console.log("GKM V319: safe result open installed");
+  console.log("GKM V320: safe open buttons installed");
 })();
-/* GKM V319 SAFE RESULT OPEN END */
+/* GKM V320 SAFE OPEN BUTTONS END */
 
