@@ -531,14 +531,14 @@ function gkmV334NormalAnimeTitle(item) {
     if (gkmV334Has(raw, ["boruto", "боруто"])) return "Боруто: Наруто. Фильм";
     if (gkmV334Has(raw, ["the last", "последний"]) || y === 2014) return "Последний: Наруто. Фильм";
     if (gkmV334Has(raw, ["road to ninja", "путь ниндзя"]) || (y === 2012 && t === "Мультфильм")) return "Наруто: Ураганные хроники — Путь ниндзя";
-    if (gkmV334Has(raw, ["blood prison", "кровав"]) || (y === 2011 && v >= 20000 && v < 60000)) return "Наруто: Ураганные хроники — Кровавая тюрьма";
+    if (gkmV334Has(raw, ["blood prison", "кровав"]) || (y === 2011 && t === "Мультфильм")) return "Наруто: Ураганные хроники — Кровавая тюрьма";
     if (gkmV334Has(raw, ["lost tower", "потерянн", "баш"]) || (y === 2010 && v >= 10000)) return "Наруто: Ураганные хроники — Потерянная башня";
     if (gkmV334Has(raw, ["will of fire", "воля огня", "наследники"]) || y === 2009) return "Наруто: Ураганные хроники — Наследники воли огня";
     if (gkmV334Has(raw, ["bonds", "связи", "узы"]) || y === 2008) return "Наруто: Ураганные хроники — Узы";
     if (gkmV334Has(raw, ["shippuden", "shippuuden", "疾風伝", "ураганные хроники"]) && y === 2007 && v > 500000) return "Наруто: Ураганные хроники";
     if (gkmV334Has(raw, ["shippuden", "shippuuden", "疾風伝", "ураганные хроники"]) && y === 2007) return "Наруто: Ураганные хроники — Фильм";
     if (gkmV334Has(raw, ["rock lee", "рок ли", "sd"]) || (y === 2012 && t === "Аниме")) return "Наруто SD: Рок Ли и его друзья-ниндзя";
-    if (gkmV334Has(raw, ["x ut", "ut"]) || y === 2011) return "Наруто x UT";
+    if (gkmV334Has(raw, ["x ut", "x-ut", "×ut"]) || (y === 2011 && t === "Аниме" && v < 100000)) return "Наруто x UT";
     if (gkmV334Has(raw, ["ninja clash", "land of snow", "стране снега"]) || y === 2004) return "Наруто: Битва ниндзя в Стране Снега";
     if (gkmV334Has(raw, ["stone of gelel", "камень гелела"]) || y === 2005) return "Наруто: Легенда о камне Гелела";
     if (gkmV334Has(raw, ["crescent moon", "полумесяц"]) || y === 2006) return "Наруто: Стражи Королевства Полумесяца";
@@ -13198,76 +13198,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V335 DEPLOY SAFE VERIFIED END */
 
-/* GKM V337 NORMAL TITLES FINAL OVERRIDE START */
+
+/* GKM V338 NORMAL TITLES UT FIX START */
 (function(){
-  window.GKM_V337_NORMAL_TITLES_FINAL_OVERRIDE_VERSION = "v337-normal-titles-final-override-2026-07-02";
-
-  function v337Text(v){ return String(v == null ? "" : v).trim(); }
-  function v337Norm(v){ return v337Text(v).toLowerCase().replace(/ё/g,"е").replace(/[^\p{L}\p{N}]+/gu," ").replace(/\s+/g," ").trim(); }
-  function v337Year(item){ try{ if(typeof getYear === "function") return v337Text(getYear(item)); }catch{} return v337Text(item && item.year); }
-  function v337Type(item){ try{ if(typeof getType === "function") return v337Text(getType(item)); }catch{} return v337Text(item && item.type); }
-  function v337Votes(item){ try{ if(typeof getVotes === "function") return Number(getVotes(item)||0); }catch{} return Number(item && item.votes || 0); }
-  function v337Raw(item){
-    return [item && item.ru, item && item.title_ru, item && item.__manualTopTitle, item && item.en, item && item.title, item && item.name, item && item.original_title, item && item.original_name, item && item.search, item && item.__gkmV257Title, (item && item.genres || []).join(" ")].filter(Boolean).join(" ");
-  }
-  function v337Has(raw, list){ raw=v337Norm(raw); return list.some(x=>raw.includes(v337Norm(x))); }
-  function v337TitleOf(item){ return v337Text(item && (item.ru || item.title_ru || item.name || item.title || item.en || item.original_title || item.original_name)) || "Без названия"; }
-
-  function v337NormalTitle(item){
-    if(!item) return "";
-    const type = v337Type(item);
-    if(type !== "Аниме" && type !== "Мультфильм") return "";
-    const raw = v337Raw(item);
-    const y = Number(v337Year(item) || 0);
-    const votes = v337Votes(item);
-    const base = v337Norm(v337TitleOf(item));
-
-    if(v337Has(raw,["naruto","наруто","ナルト"]) || base.includes("наруто")){
-      if(v337Has(raw,["boruto","боруто"])) return "Боруто: Наруто. Фильм";
-      if(v337Has(raw,["the last","последний"]) || y===2014) return "Последний: Наруто. Фильм";
-      if(v337Has(raw,["road to ninja","путь ниндзя"]) || (y===2012 && type==="Мультфильм")) return "Наруто: Ураганные хроники — Путь ниндзя";
-      if(v337Has(raw,["blood prison","кровав"])) return "Наруто: Ураганные хроники — Кровавая тюрьма";
-      if(v337Has(raw,["lost tower","потерянн","баш"])) return "Наруто: Ураганные хроники — Потерянная башня";
-      if(v337Has(raw,["will of fire","воля огня","наследники"]) || y===2009) return "Наруто: Ураганные хроники — Наследники воли огня";
-      if(v337Has(raw,["bonds","kizuna","связи","узы"]) || y===2008) return "Наруто: Ураганные хроники — Узы";
-      if(v337Has(raw,["rock lee","рок ли","sd"]) || (y===2012 && type==="Аниме" && votes < 100000)) return "Наруто SD: Рок Ли и его друзья-ниндзя";
-      if(v337Has(raw,["x ut","x-ut","×ut"]) || (y===2011 && votes < 50000)) return "Наруто x UT";
-      if(v337Has(raw,["ninja clash","land of snow","стране снега"]) || y===2004) return "Наруто: Битва ниндзя в Стране Снега";
-      if(v337Has(raw,["stone of gelel","камень гелела"]) || y===2005) return "Наруто: Легенда о камне Гелела";
-      if(v337Has(raw,["crescent moon","полумесяц"]) || y===2006) return "Наруто: Стражи Королевства Полумесяца";
-      if(v337Has(raw,["shippuden","shippuuden","疾風伝","ураганные хроники"]) && y===2007 && votes>500000) return "Наруто: Ураганные хроники";
-      if(v337Has(raw,["shippuden","shippuuden","疾風伝","ураганные хроники"]) && y===2007) return "Наруто: Ураганные хроники — Фильм";
-      if(y===2003) return "Наруто: Перекрёстки";
-      if(y===2022) return "Наруто: Юбилейный спецвыпуск";
-      if(y===2002 && votes>500000) return "Наруто";
-    }
-
-    if(v337Has(raw,["bleach","блич"])){
-      if(v337Has(raw,["thousand","sennen","тысячелетн"])) return "Блич: Тысячелетняя кровавая война";
-      if(v337Has(raw,["memories of nobody"]) || y===2006) return "Блич: Воспоминания ни о ком";
-      if(v337Has(raw,["diamonddust","diamond dust"]) || y===2007) return "Блич: Восстание Алмазной Пыли";
-      if(v337Has(raw,["fade to black"]) || y===2008) return "Блич: Уходя в темноту";
-      if(v337Has(raw,["hell verse"]) || y===2010) return "Блич: Адская глава";
-    }
-
-    const shown = v337Text(item && item.__gkmV257Title) || v337TitleOf(item);
-    const bare = shown.match(/^(.+?)\s+[—-]\s+(19\d{2}|20\d{2})$/);
-    if(bare && type) return `${bare[1].trim()} — ${type.toLowerCase()} ${bare[2]}`;
-    return "";
-  }
-
-  const prevDisplayTitle = typeof displayTitle === "function" ? displayTitle : null;
-  if(prevDisplayTitle){
-    displayTitle = function(item){
-      const fixed = v337NormalTitle(item);
-      if(fixed) return fixed;
-      return prevDisplayTitle(item);
-    };
-  }
-
-  // Если V257 уже успел подписать дубли как "Наруто — 2004", чистим при следующем рендере.
-  window.GKM_V337_NORMAL_TITLE_FIX = v337NormalTitle;
-  console.log("GKM V337: normal titles final override installed");
+  window.GKM_V338_NORMAL_TITLES_UT_FIX_VERSION = "v338-normal-titles-ut-fix-2026-07-02";
+  console.log("GKM V338: normal titles UT fix installed");
 })();
-/* GKM V337 NORMAL TITLES FINAL OVERRIDE END */
+/* GKM V338 NORMAL TITLES UT FIX END */
 
