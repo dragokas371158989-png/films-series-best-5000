@@ -13206,3 +13206,94 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V338 NORMAL TITLES UT FIX END */
 
+
+/* GKM V339 NARUTO TITLE FINAL START */
+(function(){
+  window.GKM_V339_NARUTO_TITLE_FINAL_VERSION = "v339-naruto-title-final-no-xut-spread-2026-07-02";
+
+  function txt(v){ return String(v == null ? "" : v).trim(); }
+  function nrm(v){ return txt(v).toLowerCase().replace(/ё/g,"е").replace(/[^\p{L}\p{N}]+/gu," ").replace(/\s+/g," ").trim(); }
+  function yearOf(item){ try{ if(typeof getYear === "function") return Number(getYear(item)||0); }catch{} return Number(item && item.year || 0); }
+  function typeOf(item){ try{ if(typeof getType === "function") return txt(getType(item)); }catch{} return txt(item && item.type); }
+  function votesOf(item){ try{ if(typeof getVotes === "function") return Number(getVotes(item)||0); }catch{} return Number(item && item.votes || 0); }
+  function titleRaw(item){
+    let prev = "";
+    try{
+      if(window.GKM_V337_NORMAL_TITLE_FIX) prev = window.GKM_V337_NORMAL_TITLE_FIX(item) || "";
+      else if(window.GKM_V334_NORMAL_TITLES_VERSION && typeof gkmV334NormalAnimeTitle === "function") prev = gkmV334NormalAnimeTitle(item) || "";
+    }catch{}
+    return [
+      prev,
+      item && item.ru,
+      item && item.title_ru,
+      item && item.__manualTopTitle,
+      item && item.en,
+      item && item.title,
+      item && item.name,
+      item && item.original_title,
+      item && item.original_name,
+      item && item.search,
+      item && item.__gkmV257Title,
+      item && item.poster,
+      item && item.poster_path,
+      item && item.backdrop_path,
+      (item && item.genres || []).join(" ")
+    ].filter(Boolean).join(" ");
+  }
+
+  function isNaruto(item){
+    const raw = nrm(titleRaw(item));
+    return raw.includes("наруто") || raw.includes("naruto") || raw.includes("ナルト") || raw.includes("shippuden") || raw.includes("ураганные хроники");
+  }
+
+  function narutoTitle(item){
+    if(!item || !isNaruto(item)) return "";
+    const type = typeOf(item);
+    if(type !== "Аниме" && type !== "Мультфильм") return "";
+
+    const y = yearOf(item);
+    const v = votesOf(item);
+    const raw = nrm(titleRaw(item));
+
+    // Важно: годовые правила идут ДО проверки x UT.
+    // Иначе старый кривой title "Наруто x UT — 2004" снова заразит все карточки.
+    if(y === 2002 && type === "Аниме" && v >= 500000) return "Наруто";
+    if(y === 2002) return "Наруто: Найти багровый четырёхлистный клевер!";
+    if(y === 2003) return "Наруто: Перекрёстки";
+    if(y === 2004) return "Наруто: Битва ниндзя в Стране Снега";
+    if(y === 2005) return "Наруто: Легенда о камне Гелела";
+    if(y === 2006) return "Наруто: Стражи Королевства Полумесяца";
+    if(y === 2007 && type === "Аниме" && v >= 500000) return "Наруто: Ураганные хроники";
+    if(y === 2007) return "Наруто: Ураганные хроники — Фильм";
+    if(y === 2008) return "Наруто: Ураганные хроники — Узы";
+    if(y === 2009) return "Наруто: Ураганные хроники — Наследники воли огня";
+    if(y === 2010) return "Наруто: Ураганные хроники — Потерянная башня";
+    if(y === 2011 && type === "Мультфильм") return "Наруто: Ураганные хроники — Кровавая тюрьма";
+    if(y === 2011) return "Наруто x UT";
+    if(y === 2012 && type === "Мультфильм") return "Наруто: Ураганные хроники — Путь ниндзя";
+    if(y === 2012) return "Наруто SD: Рок Ли и его друзья-ниндзя";
+    if(y === 2013) return "Наруто: Ураганные хроники — специальный выпуск";
+    if(y === 2014) return "Последний: Наруто. Фильм";
+    if(y === 2015) return "Боруто: Наруто. Фильм";
+    if(y === 2022) return "Наруто: Юбилейный спецвыпуск";
+
+    // Только если год не распознан, тогда разрешаем настоящий x UT по raw.
+    if(raw.includes("x ut") || raw.includes("xut")) return "Наруто x UT";
+
+    return "";
+  }
+
+  const oldDisplayTitle = typeof displayTitle === "function" ? displayTitle : null;
+  if(oldDisplayTitle){
+    displayTitle = function(item){
+      const fixed = narutoTitle(item);
+      if(fixed) return fixed;
+      return oldDisplayTitle(item);
+    };
+  }
+
+  window.GKM_V339_NARUTO_TITLE_FIX = narutoTitle;
+  console.log("GKM V339: Naruto title final no-xUT-spread installed");
+})();
+/* GKM V339 NARUTO TITLE FINAL END */
+
