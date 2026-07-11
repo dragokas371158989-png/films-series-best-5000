@@ -12290,30 +12290,38 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V316 REAL AI BRIDGE END */
 
 
-/* GKM V328 IMMERSIVE POSTER TUNNEL WALL START */
+/* GKM V329 REFERENCE FISHEYE POSTER MOSAIC START */
 (function(){
-  window.GKM_V328_IMMERSIVE_POSTER_TUNNEL_WALL_VERSION = "v328-immersive-poster-tunnel-wall-hover-card-reset-2026-07-11";
+  window.GKM_V329_REFERENCE_FISHEYE_POSTER_MOSAIC_VERSION = "v329-reference-fisheye-poster-mosaic-hover-reset-2026-07-11";
 
-  const UNIQUE_LIMIT_DESKTOP = 4200;
-  const UNIQUE_LIMIT_MOBILE = 1400;
+  const UNIQUE_LIMIT_DESKTOP = 2200;
+  const UNIQUE_LIMIT_MOBILE = 900;
 
   let uniqueItems = [];
   let currentKind = "all";
   let isOpen = false;
+  let rafId = 0;
+  let resizeTimer = 0;
+  let autoFloat = false;
   let isDragging = false;
+  let dragMoved = false;
   let startX = 0;
   let startY = 0;
   let rotX = 0;
-  let rotY = -8;
-  let zoom = 180;
+  let rotY = 0;
   let targetRotX = 0;
-  let targetRotY = -8;
-  let targetZoom = 180;
-  let rafId = 0;
-  let autoSpin = true;
-  let hoveredTile = null;
-  let resizeTimer = 0;
-  let wallState = { rows:0, cols:0, used:0, baseZoom:180, baseRotX:0, baseRotY:-8 };
+  let targetRotY = 0;
+  let zoom = 105;
+  let targetZoom = 105;
+  let activeRecord = null;
+  let tileRecords = [];
+  let changedRecords = new Set();
+  let wallState = {
+    rows:0, cols:0, used:0,
+    stepX:20, stepY:30,
+    gridW:0, gridH:0,
+    baseZoom:105
+  };
 
   function t(v){ return String(v == null ? "" : v).trim(); }
   function esc(v){
@@ -12372,6 +12380,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       it.thumbnail || it.backdrop || it.backdrop_path
     ));
   }
+  function backdropOf(it){
+    return t(it && (
+      it.backdrop || it.backdrop_url || it.backdropUrl || it.backdrop_path ||
+      it.wide || it.banner || it.hero || it.image || it.poster || it.poster_url
+    )) || imgOf(it);
+  }
   function keyOf(it){
     return t(it && (it.id || it.kinopoiskId || it.tmdbId || it.mal_id || it.slug))
       || `${n(titleOf(it))}|${yearOf(it)}|${n(typeOf(it))}`;
@@ -12411,14 +12425,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return ({all:"Всё",movies:"Фильмы",series:"Сериалы",anime:"Аниме",cartoons:"Мультфильмы"}[kind] || "Каталог");
   }
   function pageUrls(kind){
-    const urls = ["data/fast/home.json?v=327"];
+    const urls = ["data/fast/home.json?v=329"];
     const cats = kind && kind !== "all"
       ? ({movies:["movies"], series:["series"], anime:["anime"], cartoons:["cartoons"]}[kind] || ["movies","series","anime","cartoons"])
       : ["movies","series","anime","cartoons"];
     const pages = window.innerWidth < 700 ? 7 : 9;
     cats.forEach(cat=>{
       for(let i=1;i<=pages;i++){
-        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=327`);
+        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=329`);
       }
     });
     return urls;
@@ -12455,283 +12469,385 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return uniqueItems;
   }
 
-  function ensureCss(){
-    ["gkmV325Css","gkmV327Css"].forEach(id=>{
-      const old = document.getElementById(id);
-      if(old) old.remove();
-    });
-    if(document.getElementById("gkmV328Css")) return;
-    const st = document.createElement("style");
-    st.id = "gkmV328Css";
-    st.textContent = `
-      #gkmV328Btn{
-        position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;
-        border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
-        color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;
-        box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)
-      }
-      #gkmV328Overlay{
-        position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;
-        background:
-          radial-gradient(circle at 50% 42%,rgba(255,255,255,.08),transparent 8%),
-          radial-gradient(circle at 20% 14%,rgba(0,190,255,.16),transparent 34%),
-          radial-gradient(circle at 82% 84%,rgba(130,35,255,.18),transparent 42%),
-          linear-gradient(90deg,#021625 0%,#021a34 48%,#1f1051 100%);
-      }
-      #gkmV328Overlay.open{display:block}
-      .gkmV328Top{
-        position:absolute;left:0;right:0;top:0;z-index:18;display:flex;justify-content:space-between;gap:12px;
-        padding:8px 14px 0 14px;pointer-events:none
-      }
-      .gkmV328Title{font-size:22px;font-weight:950;text-shadow:0 0 18px rgba(0,180,255,.46)}
-      .gkmV328Sub{font-size:12px;color:rgba(255,255,255,.82)}
-      .gkmV328Actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
-      .gkmV328Actions button{
-        border:1px solid rgba(0,220,255,.34);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.86));
-        color:#fff;border-radius:14px;padding:10px 13px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)
-      }
-      .gkmV328Actions button:hover{filter:brightness(1.15)}
-      .gkmV328Actions button.is-active{box-shadow:0 0 0 2px rgba(255,255,255,.22) inset,0 0 22px rgba(0,200,255,.32);filter:brightness(1.12)}
-      #gkmV328Scene{position:absolute;inset:0;perspective:920px;overflow:hidden;cursor:grab;user-select:none;touch-action:none}
-      #gkmV328Scene.drag{cursor:grabbing}
-      #gkmV328World{position:absolute;left:50%;top:50%;width:1px;height:1px;transform-style:preserve-3d;will-change:transform}
-      .gkmV328Tile{
-        position:absolute;left:0;top:0;width:20px;height:30px;margin-left:-10px;margin-top:-15px;border:0;padding:0;border-radius:4px;
-        overflow:hidden;background:#071227;outline:1px solid rgba(255,255,255,.06);box-shadow:0 1px 6px rgba(0,0,0,.34);
-        cursor:pointer;transform-style:preserve-3d;will-change:transform,filter;transition:transform .14s ease, filter .12s ease, box-shadow .12s ease, opacity .12s ease
-      }
-      .gkmV328Tile::before{
-        content:"";position:absolute;inset:0;background-image:var(--poster);background-size:cover;background-position:center;
-        filter:saturate(1.08) contrast(1.04)
-      }
-      .gkmV328Tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.14),transparent 58%)}
-      .gkmV328Tile.is-hover{
-        z-index:999;filter:brightness(1.3) saturate(1.2)!important;
-        box-shadow:0 8px 24px rgba(0,0,0,.58),0 0 24px rgba(0,190,255,.35)
-      }
-      #gkmV328Preview{
-        position:fixed;display:none;z-index:24;width:min(520px,calc(100vw - 32px));max-width:520px;
-        background:linear-gradient(135deg,rgba(9,18,43,.97),rgba(13,23,58,.95));
-        border:1px solid rgba(0,220,255,.33);border-radius:18px;box-shadow:0 20px 70px rgba(0,0,0,.6),0 0 30px rgba(0,170,255,.22);
-        padding:12px;backdrop-filter:blur(12px);pointer-events:none
-      }
-      #gkmV328Preview.open{display:block}
-      .gkmV328PreviewInner{display:grid;grid-template-columns:145px 1fr;gap:12px;align-items:start}
-      #gkmV328Preview img{width:145px;height:218px;object-fit:cover;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.5)}
-      .gkmV328PreviewText h3{margin:0 0 6px 0;font-size:24px;line-height:1.05}
-      .gkmV328PreviewMeta{font-size:12px;color:rgba(255,255,255,.78);margin-bottom:6px}
-      .gkmV328PreviewDesc{font-size:12px;color:rgba(255,255,255,.86);line-height:1.35;max-height:122px;overflow:hidden}
-      .gkmV328Info{
-        position:absolute;left:16px;bottom:16px;z-index:12;max-width:min(560px,calc(100vw - 32px));
-        background:rgba(5,14,34,.78);border:1px solid rgba(0,220,255,.24);border-radius:18px;
-        padding:12px 14px;color:#fff;backdrop-filter:blur(12px);pointer-events:none
-      }
-      .gkmV328Info b{display:block;font-size:17px;margin-bottom:4px}
-      .gkmV328Info .meta{color:rgba(255,255,255,.75);font-size:13px}
-      .gkmV328Hint{position:absolute;right:20px;bottom:18px;z-index:12;color:rgba(255,255,255,.62);font-size:12px;text-align:right;pointer-events:none}
-      @media(max-width:700px){
-        #gkmV328Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
-        .gkmV328Top{padding:8px 10px 0 10px}.gkmV328Title{font-size:18px}.gkmV328Sub{font-size:11px}
-        .gkmV328Actions button{padding:8px 9px;font-size:12px}
-        #gkmV328World{top:52%}
-        .gkmV328Tile{width:14px;height:21px;margin-left:-7px;margin-top:-10.5px;border-radius:3px}
-        #gkmV328Preview{left:10px!important;right:10px!important;top:auto!important;bottom:84px!important;width:auto!important;min-width:unset;max-width:none}
-        .gkmV328PreviewInner{grid-template-columns:78px 1fr;gap:10px}
-        #gkmV328Preview img{width:78px;height:116px}.gkmV328PreviewText h3{font-size:16px}.gkmV328PreviewDesc{display:none}
-        .gkmV328Info{left:10px;right:10px;bottom:12px;max-width:none}.gkmV328Hint{display:none}
-      }
-    `;
-    document.head.appendChild(st);
-  }
-
   function removeOldUi(){
     [
       "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn",
-      "gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn","gkmV327Btn",
-      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay","gkmV327Overlay",
-      "gkmV325Preview","gkmV327Preview"
+      "gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn","gkmV327Btn","gkmV328Btn",
+      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay","gkmV327Overlay","gkmV328Overlay",
+      "gkmV325Preview","gkmV327Preview","gkmV328Preview"
     ].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.remove();
+    });
+    ["gkmV325Css","gkmV327Css","gkmV328Css"].forEach(id=>{
       const el = document.getElementById(id);
       if(el) el.remove();
     });
   }
 
+  function ensureCss(){
+    if(document.getElementById("gkmV329Css")) return;
+    const st = document.createElement("style");
+    st.id = "gkmV329Css";
+    st.textContent = `
+      #gkmV329Btn{
+        position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;
+        border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
+        color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;
+        box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)
+      }
+      #gkmV329Overlay{
+        position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;background:#02040b;
+      }
+      #gkmV329Overlay.open{display:block}
+      #gkmV329Overlay::before{
+        content:"";position:absolute;inset:-20%;pointer-events:none;
+        background:
+          radial-gradient(circle at 50% 50%,rgba(31,80,150,.15),transparent 30%),
+          radial-gradient(circle at 16% 22%,rgba(0,190,255,.12),transparent 33%),
+          radial-gradient(circle at 84% 78%,rgba(112,35,255,.13),transparent 37%),
+          #02040b;
+      }
+      .gkmV329Top{
+        position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+        padding:8px 12px 0 12px;pointer-events:none
+      }
+      .gkmV329Heading{
+        max-width:min(610px,48vw);padding:7px 10px;border-radius:14px;
+        background:linear-gradient(90deg,rgba(1,15,32,.82),rgba(1,15,32,.34),transparent);
+        text-shadow:0 2px 14px rgba(0,0,0,.85)
+      }
+      .gkmV329Title{font-size:21px;font-weight:950;line-height:1.04}
+      .gkmV329Sub{font-size:11px;color:rgba(255,255,255,.78);margin-top:3px}
+      .gkmV329Actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
+      .gkmV329Actions button{
+        border:1px solid rgba(0,220,255,.34);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));
+        color:#fff;border-radius:13px;padding:9px 12px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)
+      }
+      .gkmV329Actions button:hover{filter:brightness(1.16)}
+      .gkmV329Actions button.is-active{box-shadow:0 0 0 2px rgba(255,255,255,.22) inset,0 0 22px rgba(0,200,255,.32);filter:brightness(1.12)}
+      #gkmV329Scene{
+        position:absolute;inset:0;z-index:2;perspective:1120px;overflow:hidden;cursor:crosshair;user-select:none;touch-action:none
+      }
+      #gkmV329Scene.drag{cursor:grabbing}
+      #gkmV329World{
+        position:absolute;left:50%;top:50%;width:1px;height:1px;transform-style:preserve-3d;will-change:transform
+      }
+      .gkmV329Tile{
+        position:absolute;left:0;top:0;border:0;padding:0;overflow:hidden;background:#07111e;
+        border-radius:3px;outline:1px solid rgba(255,255,255,.055);box-shadow:0 1px 4px rgba(0,0,0,.42);
+        transform-style:preserve-3d;will-change:transform,filter,opacity;
+        transition:transform .17s cubic-bezier(.2,.8,.2,1),filter .14s ease,box-shadow .14s ease,opacity .14s ease;
+        pointer-events:none
+      }
+      .gkmV329Tile::before{
+        content:"";position:absolute;inset:0;background-image:var(--poster);background-size:cover;background-position:center;
+        filter:saturate(1.08) contrast(1.06) brightness(.94)
+      }
+      .gkmV329Tile::after{
+        content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.13),transparent 56%)
+      }
+      .gkmV329Tile.is-lens{filter:brightness(1.16) saturate(1.16)}
+      .gkmV329Tile.is-active{
+        z-index:999;filter:brightness(1.32) saturate(1.22)!important;
+        outline:1px solid rgba(85,225,255,.8);box-shadow:0 12px 32px rgba(0,0,0,.7),0 0 28px rgba(0,205,255,.44)
+      }
+      #gkmV329Preview{
+        position:fixed;left:50%;top:50%;z-index:26;width:min(860px,82vw);min-height:320px;display:block;
+        opacity:0;visibility:hidden;transform:translate(-50%,-50%) scale(.91);transition:opacity .16s ease,transform .19s ease,visibility .16s;
+        border:1px solid rgba(73,207,255,.42);border-radius:24px;overflow:hidden;
+        background:#071124;box-shadow:0 28px 110px rgba(0,0,0,.78),0 0 44px rgba(0,155,255,.22);
+        pointer-events:none;backdrop-filter:blur(14px)
+      }
+      #gkmV329Preview.open{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
+      #gkmV329Preview::before{
+        content:"";position:absolute;inset:-18px;background-image:linear-gradient(90deg,rgba(3,8,20,.93) 0%,rgba(3,8,20,.84) 45%,rgba(3,8,20,.60) 100%),var(--backdrop);
+        background-size:cover;background-position:center;filter:blur(5px) saturate(1.08);transform:scale(1.06)
+      }
+      #gkmV329Preview::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,6,16,.82),rgba(1,6,16,.42) 58%,rgba(1,6,16,.58))}
+      .gkmV329PreviewInner{position:relative;z-index:2;display:grid;grid-template-columns:190px 1fr;gap:22px;min-height:320px;padding:22px}
+      #gkmV329Preview img{width:190px;height:285px;object-fit:cover;border-radius:16px;box-shadow:0 18px 44px rgba(0,0,0,.66)}
+      .gkmV329PreviewText{align-self:center;text-shadow:0 2px 10px rgba(0,0,0,.8)}
+      .gkmV329PreviewText h3{margin:0 0 10px;font-size:34px;line-height:1.02;letter-spacing:-.5px}
+      .gkmV329PreviewMeta{font-size:14px;color:rgba(255,255,255,.86);margin-bottom:10px;line-height:1.45}
+      .gkmV329PreviewGenres{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 12px}
+      .gkmV329PreviewGenres span{padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.13);font-size:11px}
+      .gkmV329PreviewDesc{font-size:14px;color:rgba(255,255,255,.9);line-height:1.46;max-height:120px;overflow:hidden}
+      .gkmV329PreviewHint{margin-top:13px;font-size:12px;color:rgba(98,224,255,.95);font-weight:800}
+      .gkmV329Info{
+        position:absolute;left:14px;bottom:14px;z-index:18;max-width:min(510px,calc(100vw - 28px));
+        background:rgba(2,10,24,.76);border:1px solid rgba(0,205,255,.22);border-radius:15px;
+        padding:10px 13px;color:#fff;backdrop-filter:blur(10px);pointer-events:none;box-shadow:0 10px 32px rgba(0,0,0,.35)
+      }
+      .gkmV329Info b{display:block;font-size:15px;margin-bottom:3px}
+      .gkmV329Info .meta{color:rgba(255,255,255,.72);font-size:11px}
+      .gkmV329Hint{position:absolute;right:17px;bottom:15px;z-index:18;color:rgba(255,255,255,.58);font-size:11px;text-align:right;pointer-events:none;text-shadow:0 2px 8px #000}
+      @media(max-width:700px){
+        #gkmV329Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
+        .gkmV329Top{padding:6px 7px 0}.gkmV329Heading{max-width:46vw;padding:6px 7px}.gkmV329Title{font-size:15px}.gkmV329Sub{display:none}
+        .gkmV329Actions{gap:4px}.gkmV329Actions button{padding:7px 8px;font-size:10px;border-radius:10px}
+        #gkmV329Preview{width:calc(100vw - 18px);min-height:226px;border-radius:17px}
+        .gkmV329PreviewInner{grid-template-columns:104px 1fr;gap:12px;min-height:226px;padding:11px}
+        #gkmV329Preview img{width:104px;height:156px;border-radius:10px}
+        .gkmV329PreviewText h3{font-size:20px;margin-bottom:6px}.gkmV329PreviewMeta{font-size:11px;margin-bottom:4px}
+        .gkmV329PreviewGenres{gap:4px;margin:5px 0}.gkmV329PreviewGenres span{font-size:9px;padding:3px 6px}
+        .gkmV329PreviewDesc{font-size:11px;max-height:64px;line-height:1.35}.gkmV329PreviewHint{font-size:10px;margin-top:6px}
+        .gkmV329Info{left:8px;right:8px;bottom:8px;max-width:none;padding:8px 10px}.gkmV329Hint{display:none}
+      }
+      @media(prefers-reduced-motion:reduce){
+        .gkmV329Tile,#gkmV329Preview{transition:none!important}
+      }
+    `;
+    document.head.appendChild(st);
+  }
+
   function syncKindButtons(){
-    document.querySelectorAll("#gkmV328Overlay [data-kind]").forEach(btn=>{
+    document.querySelectorAll("#gkmV329Overlay [data-kind]").forEach(btn=>{
       btn.classList.toggle("is-active", btn.dataset.kind === currentKind);
     });
   }
 
   function ensureUi(){
     removeOldUi();
+    ensureCss();
 
-    if(!document.getElementById("gkmV328Btn")){
+    if(!document.getElementById("gkmV329Btn")){
       const btn = document.createElement("button");
-      btn.id = "gkmV328Btn";
+      btn.id = "gkmV329Btn";
       btn.type = "button";
       btn.textContent = "🌌 3D стена";
       btn.onclick = () => openWall("all");
       document.body.appendChild(btn);
     }
 
-    if(document.getElementById("gkmV328Overlay")) return;
+    if(document.getElementById("gkmV329Overlay")) return;
 
     const overlay = document.createElement("div");
-    overlay.id = "gkmV328Overlay";
+    overlay.id = "gkmV329Overlay";
     overlay.innerHTML = `
-      <div class="gkmV328Top">
-        <div>
-          <div class="gkmV328Title">🌌 3D туннель постеров V328</div>
-          <div class="gkmV328Sub">Как в референсе: постеры заполняют весь экран и изгибаются тоннелем. Навёл — большая карточка, увёл — всё вернулось.</div>
+      <div class="gkmV329Top">
+        <div class="gkmV329Heading">
+          <div class="gkmV329Title">🌌 3D мозаика постеров V329</div>
+          <div class="gkmV329Sub">Как в референсе: цельное полотно на весь экран, локальная «линза» под мышкой, после ухода всё возвращается.</div>
         </div>
-        <div class="gkmV328Actions">
+        <div class="gkmV329Actions">
           <button data-kind="all">Все</button>
           <button data-kind="movies">Фильмы</button>
           <button data-kind="series">Сериалы</button>
           <button data-kind="anime">Аниме</button>
           <button data-kind="cartoons">Мульты</button>
-          <button id="gkmV328AutoBtn">⏸ Авто</button>
-          <button id="gkmV328MixBtn">🔀 Микс</button>
-          <button id="gkmV328CloseBtn">✕</button>
+          <button id="gkmV329AutoBtn">▶ Авто</button>
+          <button id="gkmV329MixBtn">🔀 Микс</button>
+          <button id="gkmV329CloseBtn">✕</button>
         </div>
       </div>
-      <div id="gkmV328Scene"><div id="gkmV328World"></div></div>
-      <div id="gkmV328Preview"></div>
-      <div class="gkmV328Info"><b>Загрузка...</b><div class="meta">Собираю уникальные постеры без жёстких дублей.</div></div>
-      <div class="gkmV328Hint">наведение — превью<br>увёл мышку — возврат<br>клик — открыть карточку</div>
+      <div id="gkmV329Scene"><div id="gkmV329World"></div></div>
+      <div id="gkmV329Preview"></div>
+      <div class="gkmV329Info"><b>Загрузка...</b><div class="meta">Собираю уникальные постеры.</div></div>
+      <div class="gkmV329Hint">мышь — линза и карточка<br>клик — открыть карточку<br>зажать и вести — наклон</div>
     `;
     document.body.appendChild(overlay);
 
     overlay.querySelectorAll("[data-kind]").forEach(btn=>{
       btn.onclick = async () => {
-        hidePreview();
+        resetLens();
         await loadWallItems(btn.dataset.kind);
-        buildWall(true);
+        buildWall();
         syncKindButtons();
       };
     });
 
-    document.getElementById("gkmV328CloseBtn").onclick = () => closeWall();
-    document.getElementById("gkmV328MixBtn").onclick = () => {
+    document.getElementById("gkmV329CloseBtn").onclick = () => closeWall();
+    document.getElementById("gkmV329MixBtn").onclick = () => {
+      resetLens();
       uniqueItems.sort(()=>Math.random()-.5);
-      buildWall(true);
+      buildWall();
     };
-    document.getElementById("gkmV328AutoBtn").onclick = () => {
-      autoSpin = !autoSpin;
-      document.getElementById("gkmV328AutoBtn").textContent = autoSpin ? "⏸ Авто" : "▶ Авто";
+    document.getElementById("gkmV329AutoBtn").onclick = () => {
+      autoFloat = !autoFloat;
+      document.getElementById("gkmV329AutoBtn").textContent = autoFloat ? "⏸ Авто" : "▶ Авто";
     };
 
-    const scene = document.getElementById("gkmV328Scene");
+    const scene = document.getElementById("gkmV329Scene");
     scene.addEventListener("pointerdown", e=>{
-      if(e.target.closest(".gkmV328Tile")) return;
-      hidePreview();
+      if(e.button !== 0) return;
       isDragging = true;
+      dragMoved = false;
       startX = e.clientX;
       startY = e.clientY;
       scene.classList.add("drag");
       try{ scene.setPointerCapture(e.pointerId); }catch(err){}
     });
     scene.addEventListener("pointermove", e=>{
-      if(!isDragging) return;
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-      startX = e.clientX;
-      startY = e.clientY;
-      targetRotY += dx * .18;
-      targetRotX = Math.max(-18, Math.min(18, targetRotX - dy * .08));
+      if(isDragging){
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        if(Math.abs(dx) + Math.abs(dy) > 3) dragMoved = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        targetRotY = Math.max(-9, Math.min(9, targetRotY + dx * .025));
+        targetRotX = Math.max(-7, Math.min(7, targetRotX - dy * .025));
+        resetLens(false);
+        return;
+      }
+      applyLens(e.clientX, e.clientY);
     });
-    function endDrag(e){
+    scene.addEventListener("pointerup", e=>{
+      const shouldOpen = isDragging && !dragMoved && activeRecord;
       isDragging = false;
       scene.classList.remove("drag");
       try{ scene.releasePointerCapture(e.pointerId); }catch(err){}
-    }
-    scene.addEventListener("pointerup", endDrag);
-    scene.addEventListener("pointercancel", endDrag);
-    scene.addEventListener("pointerleave", ()=>{ if(!isDragging) hidePreview(); });
+      if(shouldOpen) openSiteCard(activeRecord.item);
+      else applyLens(e.clientX, e.clientY);
+    });
+    scene.addEventListener("pointercancel", ()=>{
+      isDragging = false;
+      dragMoved = false;
+      scene.classList.remove("drag");
+      resetLens();
+    });
+    scene.addEventListener("pointerleave", ()=>{
+      if(!isDragging) resetLens();
+    });
     scene.addEventListener("wheel", e=>{
       e.preventDefault();
-      targetZoom = Math.max(-60, Math.min(420, targetZoom + e.deltaY * -0.16));
+      targetZoom = Math.max(30, Math.min(230, targetZoom + e.deltaY * -.12));
     }, {passive:false});
-
-    overlay.addEventListener("click", e=>{
-      if(e.target === overlay) closeWall();
-    });
 
     window.GKM_OPEN_3D_WALL = () => openWall("all");
     syncKindButtons();
   }
 
-  function setWallSummary(){
-    const box = document.querySelector(".gkmV328Info");
+  function chooseGrid(count, vw, vh){
+    const targetAspect = vw / vh;
+    const tileAspect = .67;
+    let best = null;
+    const maxRows = Math.min(window.innerWidth < 700 ? 38 : 46, Math.floor(Math.sqrt(count) * 1.7));
+    for(let rows=12; rows<=maxRows; rows++){
+      const cols = Math.floor(count / rows);
+      if(cols < 18) continue;
+      const used = rows * cols;
+      const physicalAspect = (cols / rows) * tileAspect;
+      const aspectError = Math.abs(Math.log(physicalAspect / targetAspect));
+      const waste = (count - used) / count;
+      const score = aspectError + waste * .24;
+      if(!best || score < best.score) best = {rows, cols, used, score};
+    }
+    if(best) return best;
+    const rows = Math.max(10, Math.floor(Math.sqrt(count / Math.max(1, targetAspect / tileAspect))));
+    const cols = Math.max(18, Math.floor(count / rows));
+    return {rows, cols, used:rows*cols, score:0};
+  }
+
+  function setSummary(){
+    const box = document.querySelector(".gkmV329Info");
     if(!box) return;
-    const total = uniqueItems.length;
-    const used = wallState.used || total;
-    box.innerHTML = `<b>${esc(kindLabel(currentKind))} — ${used} постеров</b><div class="meta">Иммерсивный тоннель на весь экран. Без размножения карточек. Навёл — большая карточка, увёл — точный возврат.</div>`;
+    box.innerHTML = `<b>${esc(kindLabel(currentKind))} — ${wallState.used} уникальных постеров</b><div class="meta">Цельная мозаика без столбов и пустого центра. Наведение создаёт локальную линзу, уход мыши возвращает исходную сетку.</div>`;
   }
 
   function setInfo(it){
-    const box = document.querySelector(".gkmV328Info");
+    const box = document.querySelector(".gkmV329Info");
     if(!box || !it) return;
     const r = ratingOf(it);
     box.innerHTML = `<b>${esc(titleOf(it))}</b><div class="meta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>`;
   }
 
-  function placePreview(prev, evt){
-    if(window.innerWidth < 700 || !evt || typeof evt.clientX !== "number") return;
-    const rect = prev.getBoundingClientRect();
-    const gap = 28;
-    let x = evt.clientX < window.innerWidth * 0.56 ? evt.clientX + gap : evt.clientX - rect.width - gap;
-    let y = evt.clientY - rect.height * 0.46;
-    if(x + rect.width > window.innerWidth - 12) x = window.innerWidth - rect.width - 12;
-    if(x < 12) x = 12;
-    if(y + rect.height > window.innerHeight - 12) y = window.innerHeight - rect.height - 12;
-    if(y < 72) y = 72;
-    prev.style.left = x + "px";
-    prev.style.top = y + "px";
-    prev.style.right = "auto";
-    prev.style.bottom = "auto";
-  }
-
-  function showPreview(it, evt, tileEl){
-    const prev = document.getElementById("gkmV328Preview");
-    if(!prev || !it || !tileEl) return;
-
-    if(hoveredTile && hoveredTile !== tileEl){
-      hoveredTile.classList.remove("is-hover");
-      if(hoveredTile.dataset.baseTransform) hoveredTile.style.transform = hoveredTile.dataset.baseTransform;
-    }
-
-    hoveredTile = tileEl;
-    tileEl.classList.add("is-hover");
-    const base = tileEl.dataset.baseTransform || tileEl.style.transform;
-    tileEl.style.transform = `${base} scale(3.0) translateZ(105px)`;
-
+  function showPreview(record){
+    const prev = document.getElementById("gkmV329Preview");
+    if(!prev || !record) return;
+    const it = record.item;
     const r = ratingOf(it);
-    const genres = genresOf(it).slice(0,4).join(" · ");
+    const genres = genresOf(it).slice(0,5);
+    prev.style.setProperty("--backdrop", `url("${safeUrl(backdropOf(it))}")`);
     prev.innerHTML = `
-      <div class="gkmV328PreviewInner">
+      <div class="gkmV329PreviewInner">
         <img src="${esc(imgOf(it))}" alt="${esc(titleOf(it))}">
-        <div class="gkmV328PreviewText">
+        <div class="gkmV329PreviewText">
           <h3>${esc(titleOf(it))}</h3>
-          <div class="gkmV328PreviewMeta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}${genres ? "<br>" + esc(genres) : ""}</div>
-          <div class="gkmV328PreviewDesc">${esc(overviewOf(it))}</div>
+          <div class="gkmV329PreviewMeta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>
+          <div class="gkmV329PreviewGenres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div>
+          <div class="gkmV329PreviewDesc">${esc(overviewOf(it))}</div>
+          <div class="gkmV329PreviewHint">Клик мышкой — открыть полную карточку</div>
         </div>
       </div>
     `;
     prev.classList.add("open");
-    placePreview(prev, evt);
     setInfo(it);
   }
 
   function hidePreview(){
-    const prev = document.getElementById("gkmV328Preview");
+    const prev = document.getElementById("gkmV329Preview");
     if(prev) prev.classList.remove("open");
-    if(hoveredTile){
-      hoveredTile.classList.remove("is-hover");
-      if(hoveredTile.dataset.baseTransform) hoveredTile.style.transform = hoveredTile.dataset.baseTransform;
+  }
+
+  function restoreRecord(record){
+    if(!record || !record.el) return;
+    record.el.classList.remove("is-lens","is-active");
+    record.el.style.transform = record.baseTransform;
+  }
+
+  function resetLens(updateSummary=true){
+    changedRecords.forEach(restoreRecord);
+    changedRecords.clear();
+    activeRecord = null;
+    hidePreview();
+    if(updateSummary && isOpen) setSummary();
+  }
+
+  function recordAtPointer(clientX, clientY){
+    if(!wallState.rows || !wallState.cols) return null;
+    const x = clientX - window.innerWidth * .5;
+    const y = clientY - window.innerHeight * .5;
+    const col = Math.max(0, Math.min(wallState.cols - 1, Math.round((x + wallState.gridW * .5) / wallState.stepX)));
+    const row = Math.max(0, Math.min(wallState.rows - 1, Math.round((y + wallState.gridH * .5) / wallState.stepY)));
+    return tileRecords[row * wallState.cols + col] || null;
+  }
+
+  function applyLens(clientX, clientY){
+    if(!isOpen || isDragging || !tileRecords.length) return;
+    const center = recordAtPointer(clientX, clientY);
+    if(!center) return resetLens();
+
+    const px = clientX - window.innerWidth * .5;
+    const py = clientY - window.innerHeight * .5;
+    const radiusX = Math.max(100, wallState.stepX * 6.7);
+    const radiusY = Math.max(105, wallState.stepY * 5.1);
+    const rowRadius = Math.ceil(radiusY / wallState.stepY) + 1;
+    const colRadius = Math.ceil(radiusX / wallState.stepX) + 1;
+    const nextChanged = new Set();
+
+    for(let row=Math.max(0,center.row-rowRadius); row<=Math.min(wallState.rows-1,center.row+rowRadius); row++){
+      for(let col=Math.max(0,center.col-colRadius); col<=Math.min(wallState.cols-1,center.col+colRadius); col++){
+        const rec = tileRecords[row * wallState.cols + col];
+        if(!rec) continue;
+        const dx = rec.x - px;
+        const dy = rec.y - py;
+        const d = Math.sqrt((dx*dx)/(radiusX*radiusX) + (dy*dy)/(radiusY*radiusY));
+        if(d > 1) continue;
+        const power = Math.pow(1 - d, 2.15);
+        const pushX = dx * power * .62;
+        const pushY = dy * power * .62;
+        const lift = power * 205;
+        const scale = 1 + power * 1.36;
+        rec.el.classList.add("is-lens");
+        rec.el.style.transform = `translate3d(${rec.x + pushX}px,${rec.y + pushY}px,${rec.z + lift}px) rotateX(${rec.rx}deg) rotateY(${rec.ry}deg) scale(${scale})`;
+        nextChanged.add(rec);
+      }
     }
-    hoveredTile = null;
-    if(isOpen) setWallSummary();
+
+    changedRecords.forEach(rec=>{
+      if(!nextChanged.has(rec)) restoreRecord(rec);
+    });
+    changedRecords = nextChanged;
+
+    if(activeRecord && activeRecord !== center){
+      activeRecord.el.classList.remove("is-active");
+    }
+    activeRecord = center;
+    center.el.classList.add("is-active");
+    center.el.style.transform = `translate3d(${center.x}px,${center.y}px,${center.z + 315}px) rotateX(${center.rx}deg) rotateY(${center.ry}deg) scale(3.15)`;
+    changedRecords.add(center);
+    showPreview(center);
   }
 
   function tryOpenByKnownFunctions(it){
@@ -12761,29 +12877,31 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }, 80);
   }
 
-  function applyWorld(){
-    const world = document.getElementById("gkmV328World");
-    if(world) world.style.transform = `translateZ(${zoom}px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  function applyWorld(autoX=0, autoY=0){
+    const world = document.getElementById("gkmV329World");
+    if(world) world.style.transform = `translateZ(${zoom}px) rotateX(${rotX + autoX}deg) rotateY(${rotY + autoY}deg)`;
   }
 
-  function animate(){
+  function animate(ts){
     if(!isOpen) return;
-    rotX += (targetRotX - rotX) * .10;
-    rotY += (targetRotY - rotY) * .10;
-    zoom += (targetZoom - zoom) * .12;
-    if(autoSpin && !isDragging && !hoveredTile) targetRotY += .022;
-    applyWorld();
+    rotX += (targetRotX - rotX) * .09;
+    rotY += (targetRotY - rotY) * .09;
+    zoom += (targetZoom - zoom) * .11;
+    const autoX = autoFloat ? Math.sin(ts * .00032) * 1.15 : 0;
+    const autoY = autoFloat ? Math.sin(ts * .00024) * 1.9 : 0;
+    applyWorld(autoX, autoY);
     rafId = requestAnimationFrame(animate);
   }
 
   function buildWall(){
-    const world = document.getElementById("gkmV328World");
+    const world = document.getElementById("gkmV329World");
     if(!world) return;
+    resetLens(false);
     world.innerHTML = "";
-    hidePreview();
+    tileRecords = [];
 
     if(!uniqueItems.length){
-      const box = document.querySelector(".gkmV328Info");
+      const box = document.querySelector(".gkmV329Info");
       if(box) box.innerHTML = `<b>Постеры не найдены</b><div class="meta">Нет уникальных постеров для этого раздела.</div>`;
       return;
     }
@@ -12791,93 +12909,74 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const mobile = window.innerWidth < 700;
     const vw = Math.max(360, window.innerWidth);
     const vh = Math.max(520, window.innerHeight);
-    const usableH = vh * (mobile ? 1.02 : 1.08);
-    const targetTileH = mobile ? 20 : 27;
-    let rows = Math.max(mobile ? 24 : 28, Math.min(mobile ? 46 : 52, Math.round(usableH / targetTileH)));
-    let cols = Math.max(mobile ? 34 : 48, Math.ceil(uniqueItems.length / rows));
-
-    // Не размножаем постеры. Если данных меньше — делаем сетку крупнее, а не повторяем карточки.
-    if(uniqueItems.length < rows * (mobile ? 34 : 48)){
-      cols = Math.max(18, Math.ceil(uniqueItems.length / rows));
-    }
-    while(rows > 16 && Math.ceil(uniqueItems.length / rows) < (mobile ? 24 : 34)) rows--;
-    cols = Math.max(18, Math.ceil(uniqueItems.length / rows));
-
-    const usedItems = uniqueItems.slice(0, rows * cols);
-    const stepY = usableH / Math.max(1, rows - 1);
-    const tileH = Math.max(mobile ? 15 : 19, Math.min(mobile ? 24 : 31, stepY * 0.98));
-    const tileW = tileH * 0.67;
-    const stepX = tileW * 0.97;
-
-    // Почти круговая внутренняя стена: по краям постеры уходят глубоко и дают эффект тоннеля.
-    const arcDeg = mobile ? 286 : 306;
-    const arcRad = arcDeg * Math.PI / 180;
-    const radiusByGrid = (cols * stepX) / arcRad;
-    const radius = Math.max(vw * (mobile ? 0.52 : 0.44), radiusByGrid);
-    const yShift = (rows - 1) * stepY * 0.5;
+    const limit = mobile ? UNIQUE_LIMIT_MOBILE : UNIQUE_LIMIT_DESKTOP;
+    const available = Math.min(uniqueItems.length, limit);
+    const grid = chooseGrid(available, vw, vh);
+    const usedItems = uniqueItems.slice(0, grid.used);
+    const overscanX = mobile ? 1.12 : 1.09;
+    const overscanY = mobile ? 1.10 : 1.08;
+    const gridW = vw * overscanX;
+    const gridH = vh * overscanY;
+    const stepX = gridW / Math.max(1, grid.cols - 1);
+    const stepY = gridH / Math.max(1, grid.rows - 1);
+    const tileW = Math.max(9, stepX * .91);
+    const tileH = Math.max(14, stepY * .91);
+    const curveDepth = mobile ? 128 : 175;
 
     wallState = {
-      rows,
-      cols,
-      used: usedItems.length,
-      baseZoom: Math.round(radius * (mobile ? 0.70 : 0.74)),
-      baseRotX: mobile ? 1 : 0,
-      baseRotY: -10
+      rows:grid.rows,
+      cols:grid.cols,
+      used:grid.used,
+      stepX,
+      stepY,
+      gridW,
+      gridH,
+      baseZoom: mobile ? 72 : 105
     };
 
+    const frag = document.createDocumentFragment();
     usedItems.forEach((it, i)=>{
-      const col = i % cols;
-      const row = Math.floor(i / cols);
-      const nx = cols <= 1 ? 0 : col / (cols - 1);
-      const ang = (-arcDeg / 2 + nx * arcDeg) * Math.PI / 180;
-      const x = Math.sin(ang) * radius;
-      const z = Math.cos(ang) * radius - radius;
-      const y = row * stepY - yShift;
-      const ry = -ang * 180 / Math.PI;
+      const row = Math.floor(i / grid.cols);
+      const col = i % grid.cols;
+      const x = col * stepX - gridW * .5;
+      const y = row * stepY - gridH * .5;
+      const nx = gridW ? x / (gridW * .5) : 0;
+      const ny = gridH ? y / (gridH * .5) : 0;
+      const edge = Math.min(1.65, nx*nx + ny*ny);
+      const z = 52 - edge * curveDepth;
+      const ry = -nx * (mobile ? 12 : 16);
+      const rx = ny * (mobile ? 8 : 11);
 
-      const tile = document.createElement("button");
-      tile.type = "button";
-      tile.className = "gkmV328Tile";
+      const tile = document.createElement("div");
+      tile.className = "gkmV329Tile";
       tile.style.width = tileW + "px";
       tile.style.height = tileH + "px";
       tile.style.marginLeft = (-tileW/2) + "px";
       tile.style.marginTop = (-tileH/2) + "px";
       tile.style.setProperty("--poster", `url("${safeUrl(imgOf(it))}")`);
-
-      const baseTransform = `translate3d(${x}px,${y}px,${z}px) rotateY(${ry}deg)`;
-      tile.dataset.baseTransform = baseTransform;
+      const baseTransform = `translate3d(${x}px,${y}px,${z}px) rotateX(${rx}deg) rotateY(${ry}deg)`;
       tile.style.transform = baseTransform;
-      tile.title = titleOf(it);
+      tile.setAttribute("aria-label", titleOf(it));
 
-      tile.addEventListener("mouseenter", e => showPreview(it, e, tile));
-      tile.addEventListener("mousemove", e => {
-        const prev = document.getElementById("gkmV328Preview");
-        if(prev && prev.classList.contains("open")) placePreview(prev, e);
-      });
-      tile.addEventListener("mouseleave", hidePreview);
-      tile.addEventListener("click", e=>{
-        e.preventDefault();
-        e.stopPropagation();
-        openSiteCard(it);
-      });
-
-      world.appendChild(tile);
+      const record = {item:it, el:tile, row, col, x, y, z, rx, ry, baseTransform};
+      tileRecords.push(record);
+      frag.appendChild(tile);
     });
+    world.appendChild(frag);
 
-    setWallSummary();
-    rotX = wallState.baseRotX;
-    rotY = wallState.baseRotY;
+    rotX = 0;
+    rotY = 0;
+    targetRotX = 0;
+    targetRotY = 0;
     zoom = wallState.baseZoom;
-    targetRotX = wallState.baseRotX;
-    targetRotY = wallState.baseRotY;
     targetZoom = wallState.baseZoom;
+    setSummary();
     applyWorld();
   }
 
   async function openWall(kind="all"){
-    ensureCss();
     ensureUi();
-    const overlay = document.getElementById("gkmV328Overlay");
+    const overlay = document.getElementById("gkmV329Overlay");
     if(!overlay) return;
     overlay.classList.add("open");
     document.body.style.overflow = "hidden";
@@ -12886,7 +12985,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(kind !== currentKind || !uniqueItems.length){
       await loadWallItems(kind);
     }
-
     buildWall();
     syncKindButtons();
 
@@ -12895,11 +12993,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function closeWall(full=true){
-    const overlay = document.getElementById("gkmV328Overlay");
+    const overlay = document.getElementById("gkmV329Overlay");
     if(overlay) overlay.classList.remove("open");
     document.body.style.overflow = "";
-    hidePreview();
+    resetLens(false);
     isOpen = false;
+    isDragging = false;
+    dragMoved = false;
     if(full && rafId){
       cancelAnimationFrame(rafId);
       rafId = 0;
@@ -12910,11 +13010,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(()=>{
       if(isOpen) buildWall();
-    }, 120);
+    }, 130);
   }
 
   function install(){
-    ensureCss();
     ensureUi();
   }
 
@@ -12922,13 +13021,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   else install();
 
   window.addEventListener("resize", onResize);
-  window.addEventListener("blur", hidePreview);
+  window.addEventListener("blur", ()=>resetLens());
   document.addEventListener("keydown", e=>{ if(e.key === "Escape" && isOpen) closeWall(); });
 
   setTimeout(install, 500);
   setTimeout(install, 1400);
 
-  console.log("GKM V328: immersive poster tunnel wall installed");
+  console.log("GKM V329: reference fisheye poster mosaic installed");
 })();
-/* GKM V328 IMMERSIVE POSTER TUNNEL WALL END */
+/* GKM V329 REFERENCE FISHEYE POSTER MOSAIC END */
 
