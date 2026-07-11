@@ -110,8 +110,8 @@
   <link rel="dns-prefetch" href="//cdn.myanimelist.net">
   <link rel="preconnect" href="https://image.tmdb.org" crossorigin>
   <link rel="preconnect" href="https://cdn.myanimelist.net" crossorigin>
-  <link rel="prefetch" href="data/fast/poster_wall_v333/manifest.json?v=333" as="fetch">
-  <link rel="prefetch" href="data/fast/poster_wall_v333/seed_all.json?v=333" as="fetch">
+  <link rel="preload" href="data/fast/poster_wall_v333/manifest.json?v=333" as="fetch" crossorigin="anonymous" fetchpriority="high">
+  <link rel="preload" href="data/fast/poster_wall_v333/seed_all.json?v=333" as="fetch" crossorigin="anonymous" fetchpriority="high">
 </head>
 
 <body>
@@ -255,7 +255,7 @@
     </div>
   </dialog>
 
-  <script src="app.js?v=333"></script>
+  <script src="app.js?v=334"></script>
 
 <!-- GKM AI CHAT UI V58 RESTORED -->
 <button id="gkmAiFloatBtn" class="ai-float-btn" type="button" aria-label="Открыть чат">🤖</button>
