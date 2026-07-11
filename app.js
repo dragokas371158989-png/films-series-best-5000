@@ -506,86 +506,7 @@ function animeKey(item) {
   return raw;
 }
 
-
-/* GKM V334 NORMAL TITLES START */
-function gkmV334Text(item) {
-  return [item && item.ru, item && item.title_ru, item && item.__manualTopTitle, item && item.en, item && item.title, item && item.name, item && item.original_title, item && item.original_name, item && item.search, (item && item.genres || []).join(" ")]
-    .filter(Boolean).join(" ");
-}
-function gkmV334Has(raw, list) {
-  raw = norm(raw);
-  return list.some(x => raw.includes(norm(x)));
-}
-function gkmV334NormalAnimeTitle(item) {
-  if (!item || getType(item) !== "Аниме" && getType(item) !== "Мультфильм") return "";
-  const raw = gkmV334Text(item);
-  const r = norm(raw);
-  const baseTitle = norm(titleOf(item));
-  const y = Number(getYear(item) || 0);
-  const t = getType(item);
-  const v = getVotes(item);
-  const rate = getRating(item);
-
-  // Naruto / Naruto Shippuden. Исправляет "Наруто — 2004" на нормальные названия.
-  if (gkmV334Has(raw, ["naruto", "наруто", "ナルト"]) || baseTitle.includes("наруто")) {
-    if (gkmV334Has(raw, ["boruto", "боруто"])) return "Боруто: Наруто. Фильм";
-    if (gkmV334Has(raw, ["the last", "последний"]) || y === 2014) return "Последний: Наруто. Фильм";
-    if (gkmV334Has(raw, ["road to ninja", "путь ниндзя"]) || (y === 2012 && t === "Мультфильм")) return "Наруто: Ураганные хроники — Путь ниндзя";
-    if (gkmV334Has(raw, ["blood prison", "кровав"]) || (y === 2011 && t === "Мультфильм")) return "Наруто: Ураганные хроники — Кровавая тюрьма";
-    if (gkmV334Has(raw, ["lost tower", "потерянн", "баш"]) || (y === 2010 && v >= 10000)) return "Наруто: Ураганные хроники — Потерянная башня";
-    if (gkmV334Has(raw, ["will of fire", "воля огня", "наследники"]) || y === 2009) return "Наруто: Ураганные хроники — Наследники воли огня";
-    if (gkmV334Has(raw, ["bonds", "связи", "узы"]) || y === 2008) return "Наруто: Ураганные хроники — Узы";
-    if (gkmV334Has(raw, ["shippuden", "shippuuden", "疾風伝", "ураганные хроники"]) && y === 2007 && v > 500000) return "Наруто: Ураганные хроники";
-    if (gkmV334Has(raw, ["shippuden", "shippuuden", "疾風伝", "ураганные хроники"]) && y === 2007) return "Наруто: Ураганные хроники — Фильм";
-    if (gkmV334Has(raw, ["rock lee", "рок ли", "sd"]) || (y === 2012 && t === "Аниме")) return "Наруто SD: Рок Ли и его друзья-ниндзя";
-    if (gkmV334Has(raw, ["x ut", "x-ut", "×ut"]) || (y === 2011 && t === "Аниме" && v < 100000)) return "Наруто x UT";
-    if (gkmV334Has(raw, ["ninja clash", "land of snow", "стране снега"]) || y === 2004) return "Наруто: Битва ниндзя в Стране Снега";
-    if (gkmV334Has(raw, ["stone of gelel", "камень гелела"]) || y === 2005) return "Наруто: Легенда о камне Гелела";
-    if (gkmV334Has(raw, ["crescent moon", "полумесяц"]) || y === 2006) return "Наруто: Стражи Королевства Полумесяца";
-    if (y === 2003) return "Наруто: Перекрёстки";
-    if (y === 2022) return "Наруто: Юбилейный спецвыпуск";
-    if (y === 2002 && v > 500000) return "Наруто";
-  }
-
-  // Bleach movies / seasons by year/title.
-  if (gkmV334Has(raw, ["bleach", "блич"])) {
-    if (gkmV334Has(raw, ["thousand", "sennen", "тысячелетн"])) return "Блич: Тысячелетняя кровавая война";
-    if (gkmV334Has(raw, ["memories of nobody"]) || y === 2006) return "Блич: Воспоминания ни о ком";
-    if (gkmV334Has(raw, ["diamonddust", "diamond dust"]) || y === 2007) return "Блич: Восстание Алмазной Пыли";
-    if (gkmV334Has(raw, ["fade to black"]) || y === 2008) return "Блич: Уходя в темноту";
-    if (gkmV334Has(raw, ["hell verse"]) || y === 2010) return "Блич: Адская глава";
-  }
-
-  // One Piece common movies.
-  if (gkmV334Has(raw, ["one piece", "ван пис", "ван-пис", "ванпис"])) {
-    if (gkmV334Has(raw, ["film red"]) || y === 2022) return "Ван-Пис: Красный";
-    if (gkmV334Has(raw, ["stampede"]) || y === 2019) return "Ван-Пис: Бегство";
-    if (gkmV334Has(raw, ["film gold"]) || y === 2016) return "Ван-Пис: Золото";
-    if (gkmV334Has(raw, ["film z"]) || y === 2012) return "Ван-Пис: Фильм Z";
-    if (gkmV334Has(raw, ["strong world"]) || y === 2009) return "Ван-Пис: Сильный мир";
-  }
-
-  // Fullmetal Alchemist.
-  if (gkmV334Has(raw, ["fullmetal alchemist", "стальной алхимик", "сталной алхимик"])) {
-    if (gkmV334Has(raw, ["brotherhood"]) || y === 2009) return "Стальной алхимик: Братство";
-    if (gkmV334Has(raw, ["shamballa"]) || y === 2005) return "Стальной алхимик: Завоеватель Шамбалы";
-    if (gkmV334Has(raw, ["milos"]) || y === 2011) return "Стальной алхимик: Священная звезда Милоса";
-  }
-
-  // Защита от голых названий вида "Франшиза — 2012".
-  const bare = titleOf(item).match(/^(.+?)\s+[—-]\s+(19\d{2}|20\d{2})$/);
-  if (bare && getType(item)) {
-    return `${bare[1].trim()} — ${getType(item).toLowerCase()} ${bare[2]}`;
-  }
-
-  return "";
-}
-window.GKM_V334_NORMAL_TITLES_VERSION = "v334-normal-titles-no-year-only-2026-07-02";
-/* GKM V334 NORMAL TITLES END */
-
 function displayTitle(item) {
-  const v334Title = gkmV334NormalAnimeTitle(item);
-  if (v334Title) return v334Title;
   if (getType(item) === "Аниме") {
     const exact = specificAnimeTitle(item);
     if (exact) return exact;
@@ -11845,7 +11766,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   const LIMIT = 10;
   const CACHE = new Map();
   const MEM_KEY = "gkm_v316_ai_memory";
-  const TIME_LIMIT_MS = 700;
+  const TIME_LIMIT_MS = 240;
   let lastResults = [];
   let lastQuery = "";
   let requestSeq = 0;
@@ -11943,32 +11864,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function detectType(q){
     for(const v of variants(q)){
-      const x = N(v);
-      const words = W(v);
-      const hasPrefix = p => words.some(w => w.startsWith(p));
-      const notAnime = /\bне\s+(аниме|анимэ|anime)\b/.test(x);
-      const notMovie = /\bне\s+(фильм|фильмы|кино|movie|film)\b/.test(x);
-
-      // Важно: русские падежи. "фильмами как Интерстеллар" раньше не ловилось.
-      if(!notMovie && (hasPrefix("фильм") || words.includes("кино") || ["movie","movies","film","films"].some(w=>words.includes(w)))) return "movies";
-      if(!notAnime && (hasPrefix("аниме") || hasPrefix("анимэ") || words.includes("анимз") || words.includes("anime"))) return "anime";
-      if(hasPrefix("сериал") || words.includes("series") || words.includes("show")) return "series";
-      if(hasPrefix("мульт") || words.includes("cartoon") || words.includes("cartoons")) return "cartoons";
-      if(hasPrefix("игр") || words.includes("game") || words.includes("games")) return "games";
-      if(hasPrefix("манг") || words.includes("manga")) return "manga";
-      if(hasPrefix("комикс") || words.includes("comic") || words.includes("comics")) return "comics";
-      if(hasPrefix("книг") || words.includes("book") || words.includes("books")) return "books";
-      if(hasPrefix("раноб") || x.includes("light novel")) return "ranobe";
+      if(hasAnyWord(v,["фильм","фильмы","фильмов","кино","movie","movies","film","films"])) return "movies";
+      if(hasAnyWord(v,["аниме","анимэ","анимз","anime"])) return "anime";
+      if(hasAnyWord(v,["сериал","сериалы","сериалов","series","show"])) return "series";
+      if(hasAnyWord(v,["мульт","мультик","мультфильм","мультфильмы","мультфильмов","cartoon","cartoons"])) return "cartoons";
+      if(hasAnyWord(v,["игра","игры","игр","game","games"])) return "games";
+      if(hasAnyWord(v,["манга","manga"])) return "manga";
+      if(hasAnyWord(v,["комикс","комиксы","комиксов","comic","comics"])) return "comics";
+      if(hasAnyWord(v,["книга","книги","книг","book","books"])) return "books";
+      if(hasAnyWord(v,["ранобэ","ранобе"])||N(v).includes("light novel")) return "ranobe";
     }
     return "all";
   }
   function detectMood(q){
     const x=N(variants(q).join(" "));
     if(x.includes("попадан")||x.includes("исека")||x.includes("isekai")||x.includes("перерожд")||x.includes("реинкарнац")||x.includes("другой мир")) return "isekai";
-    if(x.includes("интерстеллар")||x.includes("interstellar")||x.includes("космос")||x.includes("фантаст")||x.includes("sci")||x.includes("киберпанк")) return "sci";
     if(x.includes("вечер")||x.includes("вечером")||x.includes("посмотреть")) return "evening";
     if(x.includes("мрач")||x.includes("темн")||x.includes("жест")||x.includes("тяжел")) return "dark";
     if(x.includes("ужас")||x.includes("хоррор")||x.includes("страш")) return "horror";
+    if(x.includes("фантаст")||x.includes("космос")||x.includes("sci")||x.includes("киберпанк")) return "sci";
     if(x.includes("фэнтези")||x.includes("маг")||x.includes("rpg")||x.includes("рпг")) return "fantasy";
     if(x.includes("комед")||x.includes("смешн")||x.includes("легк")) return "light";
     if(x.includes("детектив")||x.includes("криминал")||x.includes("расслед")) return "detective";
@@ -11982,16 +11896,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const m=mem();
     let bucket=detectType(q);
     let mood=detectMood(q);
-
-    // V326: жёсткие уточнения в живом диалоге.
-    // "бро фильмы не анимэ", "это не аниме", "дай фильмами" — фиксируют тип на фильмы.
-    if(/\bне\s+(аниме|анимэ|anime)\b/.test(all) && (all.includes("фильм") || all.includes("кино") || all.includes("movie") || all.includes("film"))) bucket="movies";
-    if(/\bне\s+(фильм|фильмы|кино|movie|film)\b/.test(all) && (all.includes("аниме") || all.includes("анимэ") || all.includes("anime"))) bucket="anime";
-
-    // Короткие уточнения типа "похожие", "другое", "дай рекомендацию" берут прошлый раздел,
-    // но только если пользователь явно не назвал новый.
-    if(bucket==="all" && m.bucket && all.length<28) bucket=m.bucket;
-    if(!mood && m.mood && all.length<28) mood=m.mood;
+    if(bucket==="all" && m.bucket && all.length<18) bucket=m.bucket;
+    if(!mood && m.mood && all.length<18) mood=m.mood;
 
     const out={bucket,mood,sort:"smart",yearMin:0,yearMax:9999,explain:all.includes("почему")||all.includes("объясни"),random:all.includes("рандом")||all.includes("случайн"),count:LIMIT};
     if(all.includes("90 х")||all.includes("90е")||all.includes("90s")){out.yearMin=1990;out.yearMax=1999;}
@@ -12006,13 +11912,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return out;
   }
 
-  const WEAK=new Set("блять бля сука ебаный ебать нахуй хуйня из что чтобы какой какие мне посоветуй подбери найди покажи дай давайте рекомендацию рекомендации можно посмотреть вечером вечер типо типа похожее похожие похожи похож найти на для про по с и или а в во как".split(" "));
+  const WEAK=new Set("блять бля сука ебаный ебать нахуй хуйня из что чтобы какой какие мне посоветуй подбери найди покажи дай можно посмотреть вечером вечер типо типа похожее похожие на для про по с и или а в во как".split(" "));
   const EXPAND={
     попаданцы:["попаданец","исекай","isekai","перерождение","реинкарнация","другой","мир"],
     попаданец:["попаданцы","исекай","isekai","перерождение","реинкарнация"],
     исекай:["isekai","попаданцы","перерождение","другой","мир"],
-    фантастика:["sci","science","space","космос","future","интерстеллар","interstellar"],
-    интерстеллар:["interstellar","космос","фантастика","sci","science","space","future"],
+    фантастика:["sci","science","space","космос","future"],
     космос:["space","sci","science","фантастика"],
     фэнтези:["fantasy","magic","магия","rpg"],
     магия:["magic","fantasy","фэнтези"],
@@ -12066,32 +11971,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function urlsForBucket(b){
-    if(b==="movies") return [
-      "data/fast/pages/movies/page_0001.json?v=324",
-      "data/fast/pages/movies/page_0002.json?v=324",
-      "data/fast/pages/movies/page_0003.json?v=324",
-      "data/fast/pages/movies/page_0004.json?v=324",
-      "data/fast/pages/movies/page_0005.json?v=324"
-    ];
-    if(b==="anime") return [
-      "data/fast/anime_top_manual.json?v=324",
-      "data/fast/pages/anime/page_0001.json?v=324",
-      "data/fast/pages/anime/page_0002.json?v=324",
-      "data/fast/pages/anime/page_0003.json?v=324",
-      "data/fast/pages/anime/page_0004.json?v=324"
-    ];
-    if(b==="series") return [
-      "data/fast/pages/series/page_0001.json?v=324",
-      "data/fast/pages/series/page_0002.json?v=324",
-      "data/fast/pages/series/page_0003.json?v=324"
-    ];
-    if(b==="cartoons") return [
-      "data/fast/pages/cartoons/page_0001.json?v=324",
-      "data/fast/pages/cartoons/page_0002.json?v=324"
-    ];
-    if(b==="games") return ["data/games_catalog.json?v=324","data/games/cult_games.json?v=324","data/games/franchises.json?v=324"];
-    if(b==="books"||b==="manga"||b==="comics"||b==="ranobe") return ["data/books_catalog.json?v=324","data/books/books.json?v=324","data/books/manga.json?v=324","data/books/comics.json?v=324","data/books/ranobe.json?v=324"];
-    return ["data/fast/home.json?v=324","data/fast/pages/movies/page_0001.json?v=324","data/fast/pages/anime/page_0001.json?v=324","data/fast/pages/series/page_0001.json?v=324"];
+    if(b==="movies") return ["data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/movies/page_0002.json?v=316"];
+    if(b==="anime") return ["data/fast/anime_top_manual.json?v=316","data/fast/pages/anime/page_0001.json?v=316","data/fast/pages/anime/page_0002.json?v=316"];
+    if(b==="series") return ["data/fast/pages/series/page_0001.json?v=316","data/fast/pages/series/page_0002.json?v=316"];
+    if(b==="cartoons") return ["data/fast/pages/cartoons/page_0001.json?v=316"];
+    if(b==="games") return ["data/games_catalog.json?v=316","data/games/cult_games.json?v=316","data/games/franchises.json?v=316"];
+    if(b==="books"||b==="manga"||b==="comics"||b==="ranobe") return ["data/books_catalog.json?v=316","data/books/books.json?v=316","data/books/manga.json?v=316","data/books/comics.json?v=316","data/books/ranobe.json?v=316"];
+    return ["data/fast/home.json?v=316","data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/anime/page_0001.json?v=316"];
   }
   function warmup(){
     if(warmStarted) return;
@@ -12158,8 +12044,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
   function moodWords(m){
     if(m==="isekai") return ["исекай","isekai","попадан","перерождение","реинкарнация","другой мир","ином мире","призван","summoned","reincarnation","another world"];
-    if(m==="evening") return ["драма","комедия","приключения","триллер","adventure","drama","comedy","thriller","интересное","популярное","топ"];
-    if(m==="sci") return ["фантастика","научная фантастика","космос","space","sci","science","future","interstellar","интерстеллар","планета","галактика","время","space travel"];
+    if(m==="evening") return ["драма","комедия","приключения","триллер","adventure","drama","comedy","thriller"];
+    if(m==="sci") return ["фантастика","космос","space","sci","science","future"];
     if(m==="fantasy") return ["фэнтези","магия","magic","fantasy","dragon","rpg"];
     if(m==="dark") return ["мрач","dark","grim","thriller","psychological","драма","триллер"];
     if(m==="horror") return ["ужасы","horror","мистика","supernatural","thriller"];
@@ -12193,14 +12079,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
     if(it.bucket!=="all") s+=50;
     if(it.mood==="evening") s+=15;
-
-    // Жёстче держим явный жанровый запрос, чтобы "фильмы как Интерстеллар" не превращались в случайную драму/аниме.
-    if(["sci","fantasy","horror","detective","romance","sport","school","isekai"].includes(it.mood)){
-      const mw = moodWords(it.mood).map(N).filter(Boolean);
-      const hasMood = mw.some(m => gen.includes(m) || h.includes(m) || ttl.includes(m) || raw.includes(m));
-      if(!hasMood) s -= 75;
-    }
-
     const r=rating(item),v=votes(item);
     if(it.sort==="top") s+=Math.min(120,Math.log10(v+1)*18)+r*12;
     else if(it.sort==="new") s+=y>=2020?(y-2019)*14:0;
@@ -12231,7 +12109,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(it.random) arr=arr.sort(()=>Math.random()-0.5);
     const res=dedupe(arr).slice(0,it.count);
     lastResults=res;lastQuery=q;remember(it);
-    try{ window.GKM_AI_REAL_RESULTS = res; window.GKM_AI_REAL_LAST_QUERY = q; window.GKM_AI_REAL_LAST_INTENT = it; }catch{}
     return {items:res,intent:it,tokens:tk};
   }
 
@@ -12281,7 +12158,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return["План:",`1. Начать с: ${title(p[0])}`,p[1]?`2. Потом: ${title(p[1])}`:"",p[2]?`3. На финал: ${title(p[2])}`:""].filter(Boolean).join("\n");
   }
   function help(){
-    return["Я умею подбирать фильмы, сериалы, аниме и мультфильмы по твоему запросу.","Понимаю: «фильмы как Интерстеллар», «анимэ попаданцы», «фантастика 2023», «что посмотреть вечером».","Команды: «открой 1», «похожие на 1», «похожие найди», «другое», «сравни 1 и 2», «сделай план», «почему», «тест ии», «диагностика ии»."].join("\n");
+    return["V316 REAL AI: максимально быстрый и строгий помощник.","Что просишь — то и ищу.","Понимаю кривую раскладку, настроение, уточнения и команды.","Команды: открой 1, похожее на 1, другое, сравни 1 и 2, сделай план, почему, ещё."].join("\n");
   }
 
   async function similarTo(n){
@@ -12292,7 +12169,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const items = res.items.filter(x => itemKey(x) !== itemKey(base)).slice(0, LIMIT);
     if(!items.length) return "Похожее быстро не нашёл. Попробуй обычным запросом.";
     lastResults = items;
-    try{ window.GKM_AI_REAL_RESULTS = items; window.GKM_AI_REAL_LAST_QUERY = q; }catch{}
     return `Похожее на ${title(base)}:\n${fmt(items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
   }
 
@@ -12304,39 +12180,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
   }
 
-
-  
-
-  function gkmV325LocalHasResults(){
-    try { return Array.isArray(lastResults) && lastResults.length > 0; } catch { return false; }
-  }
-
-  function remoteLooksWrongForIntent(q, text){
-    const want = detectIntent(q);
-    const out = N(text || "");
-    if(!out) return true;
-
-    // Если пользователь явно просит фильмы, ответ с аниме как основным разделом отбрасываем.
-    if(want.bucket === "movies" && /\bаниме\b|\bанимэ\b|\banime\b/.test(out) && !/\bфильм|\bкино|\bmovie|\bfilm/.test(out)){
-      return true;
-    }
-    if(want.bucket === "anime" && /\bфильм|\bкино|\bmovie|\bfilm/.test(out) && !/\bаниме\b|\bанимэ\b|\banime\b/.test(out)){
-      return true;
-    }
-    if(want.bucket === "series" && /\bаниме\b|\bанимэ\b|\bфильм|\bкино/.test(out) && !/\bсериал/.test(out)){
-      return true;
-    }
-    if(want.bucket === "cartoons" && /\bаниме\b|\bанимэ\b|\bфильм|\bкино/.test(out) && !/\bмульт/.test(out)){
-      return true;
-    }
-
-    // Пустая болтовня вместо подбора.
-    if(out.includes("я умею") && (N(q).includes("рекоменд") || N(q).includes("посовет") || N(q).includes("подбери") || N(q).includes("дай"))) return true;
-    if(out.includes("локальный поиск дал не тот раздел") && gkmV325LocalHasResults()) return true;
-    if(out.includes("уточни запрос") && gkmV325LocalHasResults()) return true;
-    if(out.includes("не дал подходящих карточек") && gkmV325LocalHasResults()) return true;
-    return false;
-  }
 
   async function tryRemoteAI(q, localText){
     const endpoint = window.GKM_AI_ENDPOINT || localStorage.getItem("GKM_AI_ENDPOINT") || "";
@@ -12374,91 +12217,23 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
   }
 
-
-  async function gkmV327TestAI(){
-    const endpoint = window.GKM_AI_ENDPOINT || localStorage.getItem("GKM_AI_ENDPOINT") || "";
-    if(!endpoint) return "AI endpoint не задан. Вставь: endpoint: https://...workers.dev";
-    try{
-      const res = await fetch(endpoint, {
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          query:"фильмы фантастика космос",
-          local_answer:"1. Интерстеллар (2014) — Фильм · ★ 8.7 · Фантастика, Драма",
-          last_results:[{
-            n:1,
-            title:"Интерстеллар",
-            year:"2014",
-            type:"Фильм",
-            rating:8.7,
-            votes:2000000,
-            genres:["Фантастика","Драма","Приключения"]
-          }]
-        })
-      });
-      const text = await res.text();
-      if(!res.ok) return "AI Worker ответил ошибкой: STATUS "+res.status+"\n"+text.slice(0,1000);
-      let data={}; try{data=JSON.parse(text);}catch{}
-      return "AI Worker OK" + (data.workerVersion ? " · "+data.workerVersion : "") + (data.model ? " · model: "+data.model : "") + "\n" + T(data.answer || text).slice(0,1200);
-    }catch(e){
-      return "AI Worker не отвечает: " + String(e && (e.message || e) || e);
-    }
-  }
-
-
-  async function gkmV328FullDiag(){
-    const endpoint = window.GKM_AI_ENDPOINT || localStorage.getItem("GKM_AI_ENDPOINT") || "";
-    const lines = [];
-    lines.push("Диагностика помощника:");
-    lines.push("endpoint: " + (endpoint || "не задан"));
-    lines.push("V316: " + (window.GKM_V316_REAL_AI_BRIDGE_VERSION || "нет"));
-    lines.push("V321: " + (window.GKM_V321_SAFE_OPEN_SEARCH_FALLBACK_VERSION || "нет"));
-    lines.push("V327: " + (window.GKM_V327_AI_SELF_TEST_VERSION || "нет"));
-    lines.push("V328: " + (window.GKM_V328_AI_AUTO_REPAIR_VERSION || "нет"));
-    try{ lines.push("последних результатов: " + (Array.isArray(lastResults) ? lastResults.length : 0)); }catch{}
-    if(endpoint){
-      try{
-        const r = await fetch(endpoint + (endpoint.includes("?") ? "&" : "?") + "test=1", {cache:"no-store"});
-        const t = await r.text();
-        lines.push("worker test status: " + r.status);
-        lines.push(t.slice(0, 1000));
-      }catch(e){
-        lines.push("worker test error: " + String(e && (e.message || e) || e));
-      }
-    }
-    return lines.join("\n");
-  }
-
   async function answer(q){
     const x=N(q);
     if(!x)return"Напиши что ищем.";
-    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x))return"Привет. Напиши запрос простыми словами: «фильмы как Интерстеллар», «анимэ попаданцы», «фантастика 2023», «что посмотреть вечером». Я подберу варианты и дам кнопки открытия.";
-    if(x.includes("полная диагностика")||x.includes("диагностика ии")||x.includes("diag ai"))return await gkmV328FullDiag();
-    if(x.includes("тест ии")||x.includes("ai test")||x.includes("проверка ии")||x.includes("проверить ии"))return await gkmV327TestAI();
+    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x))return"Привет. Я V316 REAL AI: быстрый ИИ-помощник. Что просишь — то и ищу.";
     if(x.includes("помощ")||x.includes("что умеешь")||x.includes("как искать"))return help();
     const op=x.match(/(?:открой|открыть|покажи)\s+(\d{1,2})/);if(op)return openResult(op[1]);
     const cmp=x.match(/сравни\s+(\d{1,2})\s+(?:и|с)\s+(\d{1,2})/);if(cmp)return compare(cmp[1],cmp[2]);
-    const sim=x.match(/(?:похожее|похожие|похожи|типа|как)\s+(?:на\s+)?(\d{1,2})/);
+    const sim=x.match(/(?:похожее|похожие|типа|как)\s+(?:на\s+)?(\d{1,2})/);
     if(sim)return await similarTo(sim[1]);
-
-    // Если человек пишет просто "похожие найди" после подборки — считаем, что нужны похожие на первый вариант.
-    if((x.includes("похож") || x.includes("типа")) && lastResults.length) return await similarTo(1);
-
     if(x.includes("другое")||x.includes("не это")||x.includes("еще варианты")||x.includes("ещё варианты"))return await different();
-
-    // V326: "дай рекомендацию" после предыдущего поиска = рекомендация из прошлого контекста, а не случайный новый поиск.
-    if((x.includes("рекомендац") || x.includes("посовет") || x.includes("что выбрать")) && lastResults.length && detectType(q)==="all"){
-      return compare(1, Math.min(2, lastResults.length));
-    }
-
     if(x.includes("план")||x.includes("марафон"))return plan();
     if(x.includes("еще")||x.includes("ещё"))return lastQuery?(await answer(lastQuery)):"Сначала сделай поиск.";
     const res=await search(q);
-    if(!res.items.length)return"По этому строгому фильтру ничего не нашёл. Попробуй уточнить: тип + жанр + год. Примеры: «фильмы фантастика 2023», «анимэ попаданцы», «сериалы детектив», «мультфильмы приключения».";
+    if(!res.items.length)return"Не нашёл быстро в нужном разделе. Попробуй проще: «фильмы вечер», «анимэ попаданцы», «игры rpg», «манга ужасы».";
     const localText = `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «похожее на 1», «другое», «сравни 1 и 2», «сделай план», «почему».`;
     const aiText = await tryRemoteAI(q, localText);
-    if(aiText && !remoteLooksWrongForIntent(q, aiText)) return aiText;
-    return localText;
+    return aiText || localText;
   }
 
   function addMsg(role,text){
@@ -12508,792 +12283,485 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V316 REAL AI BRIDGE END */
 
 
-/* GKM V321 SAFE OPEN SEARCH FALLBACK START */
+/* GKM V317 3D POSTER WALL DEMO START */
 (function(){
-  window.GKM_V321_SAFE_OPEN_SEARCH_FALLBACK_VERSION = "v321-safe-open-search-fallback-2026-07-02";
+  window.GKM_V317_3D_POSTER_WALL_VERSION = "v317-3d-poster-wall-demo-2026-07-01";
 
-  function $(id){ return document.getElementById(id); }
-  function esc(s){
-    return String(s == null ? "" : s).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
-  }
-  function norm(s){
-    return String(s || "").toLowerCase().replace(/ё/g,"е").replace(/[^\p{L}\p{N}]+/gu," ").trim();
-  }
+  const WALL_LIMIT = 180;
+  let wallItems = [];
+  let wallBuilt = false;
+  let autoTimer = null;
+  let rotationY = 0;
+  let rotationX = -8;
+  let isDragging = false;
+  let lastX = 0;
+  let lastY = 0;
 
-  function parseLine(line){
-    const raw = String(line || "").replace(/\s+/g, " ").trim();
-
-    // Полный формат:
-    // 1. Название (2026) — Аниме · ★ 8.9 · 68 · Жанр
-    const m = raw.match(/^(\d{1,2})\.\s+(.+?)\s+\((19\d{2}|20\d{2}|—|-)\)\s+[—-]\s+(.+)$/);
-    if(m){
-      const tail = m[4];
-      const parts = tail.split(/[·•]/).map(x=>x.trim()).filter(Boolean);
-      let type = parts[0] || "";
-      if(type.includes("-")) type = type.split("-")[0].trim();
-      const r = tail.match(/★\s*([0-9.]+)/);
-      const rating = r ? r[1] : "";
-      const vm = tail.match(/★\s*[0-9.]+\s*[·•-]\s*([^·•]+)/);
-      const votes = vm ? vm[1].trim() : "";
-      const genres = parts.length >= 3 ? parts.slice(2).join(", ") : "";
-      return {n:Number(m[1]), title:m[2].trim(), year:m[3].trim(), type:type.trim(), rating, votes, genres, raw, __gkm_v321_stub:true};
-    }
-
-    // Простой формат от Groq:
-    // 10. Боевой петух
-    const simple = raw.match(/^(\d{1,2})\.\s+(.+?)\s*$/);
-    if(simple){
-      let title = simple[2].trim();
-      title = title.replace(/[—-]\s*(Аниме|Анимэ|Фильм|Сериал|Мультфильм).*$/i, "").trim();
-      title = title.replace(/\s+\((19\d{2}|20\d{2})\)\s*$/, "").trim();
-      let year = "";
-      try{
-        const q = String(window.GKM_AI_REAL_LAST_QUERY || "");
-        const ym = q.match(/\b(19\d{2}|20\d{2})\b/);
-        if(ym) year = ym[1];
-      }catch{}
-      let type = "";
-      try{
-        const it = window.GKM_AI_REAL_LAST_INTENT || {};
-        if(it.bucket === "anime") type = "Аниме";
-        else if(it.bucket === "movies") type = "Фильм";
-        else if(it.bucket === "series") type = "Сериал";
-        else if(it.bucket === "cartoons") type = "Мультфильм";
-      }catch{}
-      return {n:Number(simple[1]), title, year, type, rating:"", votes:"", genres:"", raw, __gkm_v321_stub:true};
-    }
-
-    return null;
-  }
-
-  function collectFromText(text){
-    const arr=[];
-    String(text || "").split(/\n+/).forEach(line=>{
-      const item = parseLine(line);
-      if(item && item.n) arr[item.n-1] = item;
-    });
-    return arr;
-  }
-
-  function titleOf(it){
-    try{ if(typeof displayTitle === "function") return String(displayTitle(it)||""); }catch{}
-    return String((it && (it.ru || it.title_ru || it.title || it.name || it.en || it.original_title || it.original_name)) || "");
-  }
-  function yearOf(it){
-    try{ if(typeof getYear === "function") return String(getYear(it)||""); }catch{}
-    const raw = String((it && (it.year || it.release_date || it.first_air_date)) || "");
-    const m = raw.match(/(19\d{2}|20\d{2})/);
-    return m ? m[1] : raw;
-  }
-  function typeOf(it){
-    try{ if(typeof getType === "function") return String(getType(it)||""); }catch{}
-    return String((it && (it.type || it.category || it.kind)) || "");
-  }
-  function pools(){
-    const out=[];
-    try{ if(Array.isArray(window.currentItems)) out.push(...window.currentItems); }catch{}
-    try{
-      if(window.homeData && window.homeData.sections){
-        Object.values(window.homeData.sections).forEach(v=>{
-          if(Array.isArray(v)) out.push(...v);
-          else if(v && Array.isArray(v.items)) out.push(...v.items);
-        });
-      }
-    }catch{}
-    return out;
-  }
-
-  function saveFromNode(node){
-    const text = node ? (node.innerText || node.textContent || "") : "";
-    const arr = collectFromText(text);
-    if(arr.length){
-      window.GKM_V321_LAST_RESULTS = arr;
-      window.GKM_LAST_CLICKABLE_RESULTS = arr;
-    }
-    return arr;
-  }
-
-  function getResults(){
-    return window.GKM_V321_LAST_RESULTS || window.GKM_LAST_CLICKABLE_RESULTS || [];
-  }
-
-  function sameType(a,b){
-    const A=norm(a), B=norm(b);
-    if(!A || !B) return true;
-    if(A.includes(B) || B.includes(A)) return true;
-    if((A.includes("фильм") && B.includes("movie")) || (B.includes("фильм") && A.includes("movie"))) return true;
-    return false;
-  }
-
-  function findExact(stub){
-    if(!stub) return null;
-    const wanted = norm(stub.title);
-    const wantedYear = String(stub.year || "").trim();
-    const wantedType = norm(stub.type);
-    for(const it of pools()){
-      const t = norm(titleOf(it));
-      const y = yearOf(it);
-      if(t === wanted && (!wantedYear || wantedYear==="—" || wantedYear==="-" || y === wantedYear)){
-        return it;
-      }
-    }
-    for(const it of pools()){
-      const t = norm(titleOf(it));
-      const y = yearOf(it);
-      const ty = norm(typeOf(it));
-      const titleOk = t && wanted && (t === wanted || t.includes(wanted) || wanted.includes(t));
-      const yearOk = (!wantedYear || wantedYear==="—" || wantedYear==="-" || y === wantedYear);
-      const typeOk = sameType(ty, wantedType);
-      if(titleOk && yearOk && typeOk) return it;
-    }
-    return null;
-  }
-
-  function addBotText(text){
-    const box = $("gkmAiMessages");
-    if(!box) return;
-    const div = document.createElement("div");
-    div.className = "ai-bot";
-    div.innerHTML = esc(text).replace(/\n/g,"<br>");
-    box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
-  }
-
-  function showMini(stub, note){
-    if(!stub) return true;
-    let dlg = $("gkmV321MiniCard");
-    if(!dlg){
-      dlg = document.createElement("dialog");
-      dlg.id = "gkmV321MiniCard";
-      dlg.innerHTML = `<div class="gkm-v321-card">
-        <button class="gkm-v321-close" type="button">×</button>
-        <h2></h2>
-        <div class="gkm-v321-meta"></div>
-        <div class="gkm-v321-note"></div>
-      </div>`;
-      document.body.appendChild(dlg);
-      dlg.querySelector(".gkm-v321-close").onclick = ()=>dlg.close();
-      dlg.addEventListener("click", e=>{ if(e.target === dlg) dlg.close(); });
-    }
-    dlg.querySelector("h2").textContent = stub.title || "Карточка";
-    const meta=[];
-    if(stub.type) meta.push(stub.type);
-    if(stub.year && stub.year !== "—") meta.push(stub.year);
-    if(stub.rating) meta.push("★ " + stub.rating);
-    if(stub.votes) meta.push(stub.votes);
-    if(stub.genres) meta.push(stub.genres);
-    dlg.querySelector(".gkm-v321-meta").textContent = meta.join(" · ");
-    dlg.querySelector(".gkm-v321-note").textContent =
-      note || "Безопасная карточка из ответа помощника. Левый тайтл не открываю.";
-    if(typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open","");
-    return true;
-  }
-
-  function closeHelper(){
-    const dlg = $("gkmAiDialog");
-    try{ if(dlg && typeof dlg.close === "function") dlg.close(); }catch{}
-  }
-
-  function setSiteSearch(stub){
-    const q = $("searchInput");
-    const type = $("typeFilter");
-    const year = $("yearFilter");
-    if(q) q.value = stub.title || "";
-    if(type && stub.type){
-      const t = String(stub.type);
-      const opts = Array.from(type.options || []);
-      const exact = opts.find(o => norm(o.value) === norm(t) || norm(o.textContent) === norm(t));
-      if(exact) type.value = exact.value;
-      else if(norm(t).includes("фильм")) type.value = "Фильм";
-      else if(norm(t).includes("аниме") || norm(t).includes("анимэ")) type.value = "Аниме";
-      else if(norm(t).includes("сериал")) type.value = "Сериал";
-      else if(norm(t).includes("мульт")) type.value = "Мультфильм";
-    }
-    if(year && stub.year && /^(19|20)\d{2}$/.test(String(stub.year))){
-      const opt = Array.from(year.options || []).find(o => String(o.value) === String(stub.year));
-      if(opt) year.value = String(stub.year);
-    }
-  }
-
-  function searchAndMaybeOpen(stub){
-    setSiteSearch(stub);
-    closeHelper();
-    try{
-      if(typeof runSearch === "function"){
-        runSearch(1);
-      } else {
-        const q = $("searchInput");
-        if(q) q.dispatchEvent(new Event("input", {bubbles:true}));
-      }
-    }catch(e){ console.warn("GKM V321 runSearch failed", e); }
-
-    addBotText("Точной карточки сразу не было в загруженном списке. Я вывел поиск по сайту: «" + (stub.title || "") + "». Если совпадений несколько — выбери нужную карточку.");
-
-    // После поиска пробуем открыть точное совпадение, когда currentItems обновятся.
-    [900, 1800, 3200].forEach(ms=>{
-      setTimeout(()=>{
-        const real = findExact(stub);
-        if(real){
-          try{ if(typeof openDetails === "function") openDetails(real); }catch{}
-        }
-      }, ms);
-    });
-    return true;
-  }
-
-  function openResult(n){
-    n = Number(n);
-    if(!n) return false;
-    const stub = getResults()[n-1];
-    if(!stub){
-      addBotText("Не вижу вариант №" + n + ". Сначала сделай подборку, потом нажми «Открыть 1».");
-      return true;
-    }
-    const real = stub.__gkm_v321_stub || stub.__gkm_v320_stub || stub.__gkm_stub || stub.__gkm_v319_stub ? findExact(stub) : stub;
-    if(real && !(real.__gkm_v321_stub || real.__gkm_v320_stub || real.__gkm_stub || real.__gkm_v319_stub)){
-      try{ if(typeof openDetails === "function"){ openDetails(real); return true; } }catch(e){ console.warn("GKM V321 openDetails failed", e); }
-    }
-    return searchAndMaybeOpen(stub);
-  }
-
-  function style(){
-    if($("gkm-v321-style")) return;
-    const st = document.createElement("style");
-    st.id = "gkm-v321-style";
-    st.textContent = `
-      .gkm-v321-openbar{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 4px 0}
-      .gkm-v321-openbtn{border:1px solid rgba(0,191,255,.55);background:linear-gradient(135deg,#2336b6,#15b9ee);color:#fff;border-radius:12px;padding:7px 10px;font-weight:800;cursor:pointer;line-height:1;font-size:13px}
-      .gkm-v321-openbtn:hover{filter:brightness(1.12);transform:translateY(-1px)}
-      #gkmAiInput:focus{box-shadow:0 0 0 2px rgba(0,191,255,.40),0 0 20px rgba(0,191,255,.22)!important}
-      #gkmV321MiniCard{border:1px solid #00bfff;border-radius:20px;background:#0a1022;color:#fff;max-width:min(760px,92vw);padding:0;box-shadow:0 0 45px rgba(0,191,255,.35)}
-      #gkmV321MiniCard::backdrop{background:rgba(0,0,0,.72)}
-      .gkm-v321-card{padding:24px 28px;position:relative}.gkm-v321-close{position:absolute;right:14px;top:12px;border:0;border-radius:12px;background:#129ee9;color:#fff;font-size:24px;width:42px;height:42px;cursor:pointer}.gkm-v321-card h2{margin:0 52px 12px 0;font-size:28px}.gkm-v321-meta{padding:12px 14px;border-radius:12px;background:rgba(0,191,255,.12);border:1px solid rgba(0,191,255,.28);font-weight:700}.gkm-v321-note{margin-top:14px;opacity:.82;line-height:1.45}
-    `;
-    document.head.appendChild(st);
-  }
-
-  function cleanOldBars(root){
-    if(!root || !root.querySelectorAll) return;
-    root.querySelectorAll(".gkm-v317-openbar,.gkm-v318-openbar,.gkm-v319-openbar,.gkm-v320-openbar,.gkm-v321-openbar").forEach(x=>x.remove());
-  }
-
-  function addButtonsToNode(node){
-    if(!node) return;
-    cleanOldBars(node);
-    const arr = saveFromNode(node);
-    if(!arr.length) return;
-
-    const sig = arr.map(x => x ? (x.title + "|" + x.year + "|" + x.type) : "").join(";");
-    if(node.dataset.gkmV321Sig === sig && node.querySelector(".gkm-v321-openbar")) return;
-
-    const bar = document.createElement("div");
-    bar.className = "gkm-v321-openbar";
-    arr.forEach((item, idx)=>{
-      if(!item) return;
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "gkm-v321-openbtn";
-      b.dataset.gkmV321Open = String(idx+1);
-      b.textContent = "Открыть " + (idx+1);
-      bar.appendChild(b);
-    });
-    node.appendChild(bar);
-    node.dataset.gkmV321Sig = sig;
-  }
-
-  function isMessageNode(n){
-    if(!n || n.nodeType !== 1) return false;
-    const c = String(n.className || "");
-    return c.includes("ai-bot") || c.includes("gkm-ai-message") || c.includes("gkm-ai-bot");
-  }
-
-  function scan(root){
-    if(!root) return;
-    const nodes=[];
-    if(isMessageNode(root)) nodes.push(root);
-    if(root.querySelectorAll) root.querySelectorAll(".ai-bot,.gkm-ai-message,.gkm-ai-bot").forEach(n=>nodes.push(n));
-    nodes.forEach(n=>{
-      const text = n.innerText || n.textContent || "";
-      if(/^\s*1\./m.test(text)) addButtonsToNode(n);
-    });
-  }
-
-  function focusInput(){
-    const input = $("gkmAiInput");
-    if(!input) return;
-    [20,120,350,800].forEach(ms=>setTimeout(()=>{ try{input.focus({preventScroll:true});}catch{input.focus();} }, ms));
-  }
-
-  function install(){
-    style();
-    const messages = $("gkmAiMessages");
-    const input = $("gkmAiInput");
-    const form = $("gkmAiForm");
-    const floatBtn = $("gkmAiFloatBtn");
-    const dialog = $("gkmAiDialog");
-
-    if(messages) cleanOldBars(messages);
-
-    if(floatBtn && !floatBtn.dataset.gkmV321Focus){
-      floatBtn.addEventListener("click", focusInput, true);
-      floatBtn.dataset.gkmV321Focus = "1";
-    }
-    if(dialog && !dialog.dataset.gkmV321Focus){
-      dialog.addEventListener("toggle", ()=>{ if(dialog.open) focusInput(); });
-      dialog.addEventListener("click", ()=>{ if(dialog.open) focusInput(); }, true);
-      dialog.dataset.gkmV321Focus = "1";
-    }
-    if(input) focusInput();
-
-    if(messages && !messages.dataset.gkmV321Observer){
-      new MutationObserver(muts=>{
-        muts.forEach(m=>m.addedNodes && m.addedNodes.forEach(n=>{ if(n.nodeType === 1) setTimeout(()=>scan(n), 30); }));
-      }).observe(messages, {childList:true, subtree:true});
-      messages.dataset.gkmV321Observer = "1";
-      scan(messages);
-    }
-
-    document.addEventListener("click", e=>{
-      const btn = e.target && e.target.closest ? e.target.closest("[data-gkm-v321-open]") : null;
-      if(!btn) return;
-      e.preventDefault();
-      e.stopPropagation();
-      if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-      openResult(btn.dataset.gkmV321Open);
-      focusInput();
-      return false;
-    }, true);
-
-    if(form && !form.dataset.gkmV321OpenIntercept){
-      form.addEventListener("submit", e=>{
-        const raw = (input && input.value || "").trim();
-        const m = raw.match(/^(?:открой|открыть|покажи)\s+(?:(?:фильм|кино|аниме|анимэ|мульт|сериал|игру|игра|мангу|вариант)\s+)?(\d{1,2})\s*$/i) ||
-                  raw.match(/^(?:(?:фильм|кино|аниме|анимэ|мульт|сериал|вариант)\s+)(\d{1,2})\s*$/i);
-        if(m){
-          e.preventDefault();
-          e.stopPropagation();
-          if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-          if(input) input.value = "";
-          openResult(m[1]);
-          focusInput();
-          return false;
-        }
-        setTimeout(()=>scan(messages), 650);
-        setTimeout(()=>scan(messages), 1500);
-      }, true);
-      form.dataset.gkmV321OpenIntercept = "1";
-    }
-  }
-
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true}); else install();
-  setTimeout(install, 250);
-  setTimeout(install, 900);
-  setTimeout(install, 2000);
-
-  console.log("GKM V321: safe open search fallback installed");
-})();
-/* GKM V321 SAFE OPEN SEARCH FALLBACK END */
-
-
-/* GKM V322 INTENT SMARTER HELP START */
-(function(){
-  window.GKM_V322_INTENT_SMARTER_HELP_VERSION = "v322-intent-smarter-help-film-inflections-similar-2026-07-02";
-  console.log("GKM V322: intent smarter help installed");
-})();
-/* GKM V322 INTENT SMARTER HELP END */
-
-
-/* GKM V323 MAX AI GUARD START */
-(function(){
-  window.GKM_V323_MAX_AI_GUARD_VERSION = "v323-max-ai-guard-groq-fallback-strict-2026-07-02";
-  console.log("GKM V323: max ai guard installed");
-})();
-/* GKM V323 MAX AI GUARD END */
-
-
-/* GKM V324 AI MAX STABILITY START */
-(function(){
-  window.GKM_V324_AI_MAX_STABILITY_VERSION = "v324-ai-max-stability-deeper-search-stricter-worker-2026-07-02";
-  console.log("GKM V324: AI max stability installed");
-})();
-/* GKM V324 AI MAX STABILITY END */
-
-
-/* GKM V325 AI FINAL HARDENING START */
-(function(){
-  window.GKM_V325_AI_FINAL_HARDENING_VERSION = "v325-ai-final-hardening-retry-selfcheck-2026-07-02";
-  console.log("GKM V325: AI final hardening installed");
-})();
-/* GKM V325 AI FINAL HARDENING END */
-
-
-/* GKM V326 AI PRODUCTION LOCK START */
-(function(){
-  window.GKM_V326_AI_PRODUCTION_LOCK_VERSION = "v326-ai-production-lock-context-diagnostics-2026-07-02";
-  console.log("GKM V326: AI production lock installed");
-})();
-/* GKM V326 AI PRODUCTION LOCK END */
-
-
-/* GKM V327 AI SELF TEST START */
-(function(){
-  window.GKM_V327_AI_SELF_TEST_VERSION = "v327-ai-self-test-health-cache-2026-07-02";
-  console.log("GKM V327: AI self-test installed");
-})();
-/* GKM V327 AI SELF TEST END */
-
-
-/* GKM V328 AI AUTO REPAIR START */
-(function(){
-  window.GKM_V328_AI_AUTO_REPAIR_VERSION = "v328-ai-auto-repair-diagnostics-worker-hardguard-2026-07-02";
-  console.log("GKM V328: AI auto repair installed");
-})();
-/* GKM V328 AI AUTO REPAIR END */
-
-
-/* GKM V329 DIRECT AI RESULT OPEN START */
-(function(){
-  window.GKM_V329_DIRECT_AI_RESULT_OPEN_VERSION = "v329-direct-ai-result-open-no-search-zero-2026-07-02";
-
-  function isRealItem(x){
-    return x && typeof x === "object" && !x.__gkm_v321_stub && !x.__gkm_v320_stub && !x.__gkm_stub;
-  }
-
-  function openReal(n){
-    n = Number(n);
-    if(!n) return false;
-    let item = null;
-    try{
-      if(Array.isArray(window.GKM_AI_REAL_RESULTS)){
-        item = window.GKM_AI_REAL_RESULTS[n - 1];
-      }
-    }catch{}
-    if(isRealItem(item)){
-      try{
-        if(typeof openDetails === "function"){
-          openDetails(item);
-          const dlg = document.getElementById("gkmAiDialog");
-          try{ if(dlg && typeof dlg.close === "function") dlg.close(); }catch{}
-          return true;
-        }
-      }catch(e){
-        console.warn("GKM V329 direct openDetails failed", e);
-      }
-    }
-    return false;
-  }
-
-  function patchButtons(root){
-    if(!root || !root.querySelectorAll) return;
-    root.querySelectorAll("[data-gkm-v321-open],[data-gkm-v320-open],[data-gkm-v319-open],[data-gkm-v318-open],[data-gkm-open]").forEach(btn=>{
-      if(btn.dataset.gkmV329Direct === "1") return;
-      const n = btn.dataset.gkmV321Open || btn.dataset.gkmV320Open || btn.dataset.gkmV319Open || btn.dataset.gkmV318Open || btn.dataset.gkmOpen;
-      if(!n) return;
-      btn.dataset.gkmV329Open = n;
-      btn.dataset.gkmV329Direct = "1";
-    });
-  }
-
-  function install(){
-    const box = document.getElementById("gkmAiMessages");
-    if(box && !box.dataset.gkmV329Observer){
-      patchButtons(box);
-      new MutationObserver(muts=>{
-        muts.forEach(m=>m.addedNodes && m.addedNodes.forEach(n=>{
-          if(n.nodeType === 1) setTimeout(()=>patchButtons(n), 20);
-        }));
-      }).observe(box,{childList:true,subtree:true});
-      box.dataset.gkmV329Observer = "1";
-    }
-
-    document.addEventListener("click", e=>{
-      const btn = e.target && e.target.closest ? e.target.closest("[data-gkm-v329-open]") : null;
-      if(!btn) return;
-      const n = btn.dataset.gkmV329Open;
-      if(openReal(n)){
-        e.preventDefault();
-        e.stopPropagation();
-        if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-        return false;
-      }
-    }, true);
-
-    const form = document.getElementById("gkmAiForm");
-    const input = document.getElementById("gkmAiInput");
-    if(form && !form.dataset.gkmV329DirectSubmit){
-      form.addEventListener("submit", e=>{
-        const raw=(input && input.value || "").trim();
-        const m=raw.match(/^(?:открой|открыть|покажи)\s+(?:(?:фильм|кино|аниме|анимэ|мульт|сериал|игру|игра|мангу|вариант)\s+)?(\d{1,2})\s*$/i) ||
-                raw.match(/^(?:(?:фильм|кино|аниме|анимэ|мульт|сериал|вариант)\s+)(\d{1,2})\s*$/i);
-        if(m && openReal(m[1])){
-          e.preventDefault();
-          e.stopPropagation();
-          if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-          if(input) input.value = "";
-          return false;
-        }
-      }, true);
-      form.dataset.gkmV329DirectSubmit = "1";
-    }
-  }
-
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true}); else install();
-  setTimeout(install, 300);
-  setTimeout(install, 1000);
-  setTimeout(install, 2200);
-  console.log("GKM V329: direct AI result open installed");
-})();
-/* GKM V329 DIRECT AI RESULT OPEN END */
-
-
-/* GKM V330 OPEN NUMBER 10 START */
-(function(){
-  window.GKM_V330_OPEN_NUMBER_10_VERSION = "v330-open-number-10-simple-list-title-fallback-2026-07-02";
-
-  function norm(s){
-    return String(s || "")
-      .toLowerCase()
+  function t(v){ return String(v == null ? "" : v).trim(); }
+  function n(v){
+    return t(v).toLowerCase()
       .replace(/ё/g,"е")
       .replace(/[^\p{L}\p{N}]+/gu," ")
       .replace(/\s+/g," ")
       .trim();
   }
+  function esc(v){
+    return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[ch]));
+  }
   function titleOf(it){
-    try{ if(typeof displayTitle === "function") return String(displayTitle(it)||""); }catch{}
-    return String((it && (it.ru || it.title_ru || it.title || it.name || it.en || it.original_title || it.original_name)) || "");
+    try { if (typeof displayTitle === "function") return t(displayTitle(it)); } catch {}
+    return t(it && (it.ru || it.title_ru || it.title || it.name || it.en || it.original_title || it.original_name)) || "Без названия";
   }
-  function openItem(item){
-    if(!item || typeof item !== "object") return false;
-    try{
-      if(typeof openDetails === "function"){
-        openDetails(item);
-        const dlg = document.getElementById("gkmAiDialog");
-        try{ if(dlg && typeof dlg.close === "function") dlg.close(); }catch{}
-        return true;
-      }
-    }catch(e){ console.warn("GKM V330 openItem failed", e); }
-    return false;
+  function typeOf(it){
+    try { if (typeof getType === "function") return t(getType(it)); } catch {}
+    return t(it && (it.type || it.category || it.kind)) || "Каталог";
   }
-  function parseDisplayed(){
-    const box = document.getElementById("gkmAiMessages");
+  function yearOf(it){
+    try { if (typeof getYear === "function") return t(getYear(it)); } catch {}
+    const raw = t(it && (it.year || it.release_date || it.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+  function imgOf(it){
+    return t(it && (
+      it.poster ||
+      it.poster_url ||
+      it.posterUrl ||
+      it.image ||
+      it.img ||
+      it.cover ||
+      it.cover_url ||
+      it.thumbnail ||
+      it.backdrop ||
+      it.backdrop_path
+    ));
+  }
+  function ratingOfWall(it){
+    try { if (typeof getRating === "function") return Number(getRating(it) || 0); } catch {}
+    return Number(it && (it.rating || it.vote_average || it.score) || 0);
+  }
+  function keyOf(it){
+    return t(it && (it.id || it.kinopoiskId || it.tmdbId || it.mal_id || it.slug)) || `${n(titleOf(it))}|${yearOf(it)}|${n(typeOf(it))}`;
+  }
+  function parseJson(j){
     const out = [];
-    if(!box) return out;
-    const text = box.innerText || box.textContent || "";
-    text.split(/\n+/).forEach(line=>{
-      const m = String(line||"").trim().match(/^(\d{1,2})\.\s+(.+?)\s*$/);
-      if(!m) return;
-      let title = m[2].replace(/\s+\((19\d{2}|20\d{2})\).*$/,"").replace(/[—-]\s*(Аниме|Анимэ|Фильм|Сериал|Мультфильм).*$/i,"").trim();
-      out[Number(m[1])-1] = {n:Number(m[1]), title};
-    });
-    return out;
+    if(!j) return out;
+    if(Array.isArray(j)) out.push(...j);
+    if(Array.isArray(j.items)) out.push(...j.items);
+    if(Array.isArray(j.data)) out.push(...j.data);
+    if(Array.isArray(j.results)) out.push(...j.results);
+    if(j.sections && typeof j.sections === "object"){
+      Object.values(j.sections).forEach(v=>{
+        if(Array.isArray(v)) out.push(...v);
+        else if(v && Array.isArray(v.items)) out.push(...v.items);
+      });
+    }
+    return out.filter(x=>x && typeof x === "object");
   }
-  function findByTitle(title){
-    const wanted = norm(title);
-    if(!wanted) return null;
-    const pools = [];
-    try{ if(Array.isArray(window.GKM_AI_REAL_RESULTS)) pools.push(...window.GKM_AI_REAL_RESULTS); }catch{}
-    try{ if(Array.isArray(window.currentItems)) pools.push(...window.currentItems); }catch{}
+  async function fetchJson(url){
     try{
-      if(window.homeData && window.homeData.sections){
-        Object.values(window.homeData.sections).forEach(v=>{
-          if(Array.isArray(v)) pools.push(...v);
-          else if(v && Array.isArray(v.items)) pools.push(...v.items);
+      const res = await fetch(url, { cache:"force-cache" });
+      if(!res.ok) return [];
+      return parseJson(await res.json());
+    }catch{
+      return [];
+    }
+  }
+  async function loadWallItems(){
+    const urls = [
+      "data/fast/home.json?v=317",
+      "data/fast/pages/movies/page_0001.json?v=317",
+      "data/fast/pages/anime/page_0001.json?v=317",
+      "data/fast/pages/series/page_0001.json?v=317",
+      "data/fast/pages/cartoons/page_0001.json?v=317"
+    ];
+    const found = [];
+    const seen = new Set();
+    function add(it){
+      if(!it) return;
+      const k = keyOf(it);
+      if(seen.has(k)) return;
+      const img = imgOf(it);
+      if(!img) return;
+      seen.add(k);
+      found.push(it);
+    }
+
+    try { (currentItems || []).forEach(add); } catch {}
+    try {
+      if(homeData && homeData.sections){
+        Object.values(homeData.sections).forEach(v=>{
+          if(Array.isArray(v)) v.forEach(add);
+          else if(v && Array.isArray(v.items)) v.items.forEach(add);
         });
       }
-    }catch{}
-    for(const it of pools){
-      const t = norm(titleOf(it));
-      if(t && t === wanted) return it;
-    }
-    for(const it of pools){
-      const t = norm(titleOf(it));
-      if(t && wanted && (t.includes(wanted) || wanted.includes(t))) return it;
-    }
-    return null;
-  }
-  function openN(n){
-    n = Number(n);
-    if(!n) return false;
+    } catch {}
 
-    try{
-      if(Array.isArray(window.GKM_AI_REAL_RESULTS) && window.GKM_AI_REAL_RESULTS[n-1]){
-        if(openItem(window.GKM_AI_REAL_RESULTS[n-1])) return true;
+    const arrs = await Promise.all(urls.map(fetchJson));
+    arrs.flat().forEach(add);
+
+    found.sort((a,b)=>(ratingOfWall(b)||0)-(ratingOfWall(a)||0));
+    wallItems = found.slice(0, WALL_LIMIT);
+    return wallItems;
+  }
+
+  function ensureCss(){
+    if(document.getElementById("gkm3dWallCss")) return;
+    const css = document.createElement("style");
+    css.id = "gkm3dWallCss";
+    css.textContent = `
+      #gkm3dWallBtn{
+        border:1px solid rgba(0,220,255,.35);
+        background:linear-gradient(135deg,rgba(23,36,88,.95),rgba(0,175,255,.75));
+        color:#fff;
+        border-radius:18px;
+        padding:12px 18px;
+        font-weight:800;
+        cursor:pointer;
+        box-shadow:0 0 18px rgba(0,180,255,.22);
+        margin:6px;
       }
-    }catch{}
-
-    const shown = parseDisplayed();
-    const stub = shown[n-1];
-    if(stub && stub.title){
-      const real = findByTitle(stub.title);
-      if(real && openItem(real)) return true;
-    }
-
-    return false;
+      #gkm3dWallBtn:hover{transform:translateY(-1px);box-shadow:0 0 24px rgba(0,180,255,.38)}
+      #gkm3dWallOverlay{
+        position:fixed;
+        inset:0;
+        z-index:99998;
+        display:none;
+        background:
+          radial-gradient(circle at 30% 10%,rgba(0,185,255,.18),transparent 35%),
+          radial-gradient(circle at 70% 80%,rgba(159,40,255,.18),transparent 40%),
+          #030713;
+        color:#fff;
+        overflow:hidden;
+      }
+      #gkm3dWallOverlay.open{display:block}
+      .gkm3dTop{
+        position:absolute;
+        left:18px;
+        right:18px;
+        top:14px;
+        z-index:3;
+        display:flex;
+        align-items:center;
+        gap:12px;
+        justify-content:space-between;
+        pointer-events:none;
+      }
+      .gkm3dTitle{
+        pointer-events:none;
+        font-size:22px;
+        font-weight:900;
+        text-shadow:0 0 18px rgba(0,180,255,.55);
+      }
+      .gkm3dSub{
+        font-size:13px;
+        color:rgba(255,255,255,.72);
+        margin-top:4px;
+      }
+      .gkm3dActions{display:flex;gap:8px;pointer-events:auto}
+      .gkm3dActions button{
+        border:1px solid rgba(0,220,255,.35);
+        background:rgba(9,18,42,.8);
+        color:#fff;
+        border-radius:14px;
+        padding:10px 13px;
+        font-weight:800;
+        cursor:pointer;
+        backdrop-filter:blur(10px);
+      }
+      .gkm3dActions button:hover{background:rgba(0,150,255,.35)}
+      #gkm3dScene{
+        position:absolute;
+        inset:72px 0 0;
+        perspective:1100px;
+        overflow:hidden;
+        cursor:grab;
+        user-select:none;
+      }
+      #gkm3dScene.drag{cursor:grabbing}
+      #gkm3dTunnel{
+        position:absolute;
+        left:50%;
+        top:50%;
+        width:1px;
+        height:1px;
+        transform-style:preserve-3d;
+        transition:transform .08s linear;
+      }
+      .gkm3dCard{
+        position:absolute;
+        width:92px;
+        height:138px;
+        left:-46px;
+        top:-69px;
+        transform-style:preserve-3d;
+        border-radius:13px;
+        overflow:hidden;
+        background:#101a33;
+        border:1px solid rgba(255,255,255,.13);
+        box-shadow:0 12px 32px rgba(0,0,0,.45),0 0 18px rgba(0,180,255,.08);
+        cursor:pointer;
+      }
+      .gkm3dCard img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        display:block;
+        filter:saturate(1.15) contrast(1.06);
+      }
+      .gkm3dCard::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:linear-gradient(to top,rgba(0,0,0,.68),transparent 48%);
+        opacity:.85;
+      }
+      .gkm3dCard span{
+        position:absolute;
+        left:7px;
+        right:7px;
+        bottom:7px;
+        z-index:1;
+        font-size:10px;
+        line-height:1.15;
+        font-weight:800;
+        text-shadow:0 1px 4px #000;
+      }
+      .gkm3dCard:hover{
+        box-shadow:0 18px 46px rgba(0,0,0,.55),0 0 28px rgba(0,190,255,.38);
+      }
+      #gkm3dInfo{
+        position:absolute;
+        left:20px;
+        bottom:18px;
+        z-index:4;
+        max-width:min(540px,calc(100vw - 40px));
+        background:rgba(7,14,34,.72);
+        border:1px solid rgba(0,220,255,.28);
+        border-radius:18px;
+        padding:14px 16px;
+        backdrop-filter:blur(12px);
+        box-shadow:0 0 26px rgba(0,180,255,.12);
+      }
+      #gkm3dInfo b{font-size:18px}
+      #gkm3dInfo div{color:rgba(255,255,255,.78);font-size:13px;margin-top:5px}
+      .gkm3dHint{
+        position:absolute;
+        right:20px;
+        bottom:18px;
+        z-index:4;
+        color:rgba(255,255,255,.62);
+        font-size:12px;
+        text-align:right;
+      }
+      @media(max-width:700px){
+        .gkm3dCard{width:68px;height:102px;left:-34px;top:-51px;border-radius:10px}
+        .gkm3dCard span{display:none}
+        #gkm3dScene{inset:84px 0 0}
+        .gkm3dTitle{font-size:18px}
+        #gkm3dInfo{bottom:12px;left:12px;right:12px}
+        .gkm3dHint{display:none}
+      }
+    `;
+    document.head.appendChild(css);
   }
 
-  function patchAll(){
-    document.querySelectorAll("[data-gkm-v329-open],[data-gkm-v321-open],[data-gkm-v320-open],[data-gkm-v319-open],[data-gkm-v318-open],[data-gkm-open]").forEach(btn=>{
-      const n = btn.dataset.gkmV329Open || btn.dataset.gkmV321Open || btn.dataset.gkmV320Open || btn.dataset.gkmV319Open || btn.dataset.gkmV318Open || btn.dataset.gkmOpen;
-      if(n) btn.dataset.gkmV330Open = n;
+  function ensureOverlay(){
+    if(document.getElementById("gkm3dWallOverlay")) return;
+    const overlay = document.createElement("div");
+    overlay.id = "gkm3dWallOverlay";
+    overlay.innerHTML = `
+      <div class="gkm3dTop">
+        <div>
+          <div class="gkm3dTitle">🌌 3D стена каталога</div>
+          <div class="gkm3dSub">Постеры на 3D-сфере/тоннеле. Тяни мышкой или пальцем.</div>
+        </div>
+        <div class="gkm3dActions">
+          <button id="gkm3dAutoBtn">⏸ Авто</button>
+          <button id="gkm3dShuffleBtn">🔀 Перемешать</button>
+          <button id="gkm3dCloseBtn">✕ Закрыть</button>
+        </div>
+      </div>
+      <div id="gkm3dScene"><div id="gkm3dTunnel"></div></div>
+      <div id="gkm3dInfo"><b>Загрузка...</b><div>Собираю постеры из каталога.</div></div>
+      <div class="gkm3dHint">ЛКМ/палец — вращать<br>клик по постеру — открыть карточку</div>
+    `;
+    document.body.appendChild(overlay);
+
+    document.getElementById("gkm3dCloseBtn").onclick = closeWall;
+    document.getElementById("gkm3dShuffleBtn").onclick = () => {
+      wallItems.sort(()=>Math.random()-.5);
+      buildWall(true);
+    };
+    document.getElementById("gkm3dAutoBtn").onclick = () => {
+      if(autoTimer){
+        stopAuto();
+        document.getElementById("gkm3dAutoBtn").textContent = "▶ Авто";
+      } else {
+        startAuto();
+        document.getElementById("gkm3dAutoBtn").textContent = "⏸ Авто";
+      }
+    };
+
+    const scene = document.getElementById("gkm3dScene");
+    scene.addEventListener("pointerdown", e=>{
+      isDragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      scene.classList.add("drag");
+      try{ scene.setPointerCapture(e.pointerId); }catch{}
     });
+    scene.addEventListener("pointermove", e=>{
+      if(!isDragging) return;
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - lastY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      rotationY += dx * .22;
+      rotationX = Math.max(-45, Math.min(25, rotationX - dy * .14));
+      applyRotation();
+    });
+    scene.addEventListener("pointerup", e=>{
+      isDragging = false;
+      scene.classList.remove("drag");
+      try{ scene.releasePointerCapture(e.pointerId); }catch{}
+    });
+  }
+
+  function ensureButton(){
+    if(document.getElementById("gkm3dWallBtn")) return;
+    const btn = document.createElement("button");
+    btn.id = "gkm3dWallBtn";
+    btn.type = "button";
+    btn.textContent = "🌌 3D стена";
+
+    const parent =
+      document.querySelector(".hero-actions") ||
+      document.querySelector(".filters") ||
+      document.querySelector(".top-actions") ||
+      document.querySelector(".chips") ||
+      document.querySelector("main") ||
+      document.body;
+
+    if(parent === document.body) {
+      btn.style.position = "fixed";
+      btn.style.right = "18px";
+      btn.style.bottom = "88px";
+      btn.style.zIndex = "9000";
+      document.body.appendChild(btn);
+    } else {
+      parent.appendChild(btn);
+    }
+    btn.onclick = openWall;
+  }
+
+  function applyRotation(){
+    const tunnel = document.getElementById("gkm3dTunnel");
+    if(!tunnel) return;
+    tunnel.style.transform = `translateZ(-620px) rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+  }
+
+  function buildWall(force=false){
+    const tunnel = document.getElementById("gkm3dTunnel");
+    if(!tunnel) return;
+    if(wallBuilt && !force) return;
+    wallBuilt = true;
+    tunnel.innerHTML = "";
+
+    const count = Math.min(wallItems.length, WALL_LIMIT);
+    if(!count){
+      document.getElementById("gkm3dInfo").innerHTML = `<b>Постеры не найдены</b><div>Открой раздел с карточками и попробуй ещё раз.</div>`;
+      return;
+    }
+
+    const cols = 30;
+    const rows = Math.ceil(count / cols);
+    const radius = window.innerWidth < 700 ? 520 : 760;
+    const yGap = window.innerWidth < 700 ? 98 : 132;
+
+    for(let i=0;i<count;i++){
+      const it = wallItems[i];
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      const angle = (col / cols) * 360;
+      const y = (row - rows/2) * yGap;
+      const zJitter = (row % 2) * 22;
+      const card = document.createElement("div");
+      card.className = "gkm3dCard";
+      card.style.transform = `rotateY(${angle}deg) translateZ(${radius + zJitter}px) translateY(${y}px) rotateY(180deg)`;
+      card.innerHTML = `<img loading="lazy" src="${esc(imgOf(it))}" alt=""><span>${esc(titleOf(it))}</span>`;
+      card.onclick = ev => {
+        ev.stopPropagation();
+        showInfo(it);
+        try{
+          if(typeof openDetails === "function") openDetails(it);
+        }catch{}
+      };
+      card.onmouseenter = () => showInfo(it);
+      tunnel.appendChild(card);
+    }
+    applyRotation();
+    showInfo(wallItems[0]);
+  }
+
+  function showInfo(it){
+    const box = document.getElementById("gkm3dInfo");
+    if(!box || !it) return;
+    const r = ratingOfWall(it);
+    box.innerHTML = `<b>${esc(titleOf(it))}</b><div>${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + r.toFixed(1) : ""}</div>`;
+  }
+
+  async function openWall(){
+    ensureCss();
+    ensureOverlay();
+    const overlay = document.getElementById("gkm3dWallOverlay");
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+
+    if(!wallItems.length){
+      wallItems = await loadWallItems();
+    }
+    buildWall(!wallBuilt);
+    startAuto();
+  }
+
+  function closeWall(){
+    const overlay = document.getElementById("gkm3dWallOverlay");
+    if(overlay) overlay.classList.remove("open");
+    document.body.style.overflow = "";
+    stopAuto();
+  }
+
+  function startAuto(){
+    stopAuto();
+    autoTimer = setInterval(()=>{
+      if(isDragging) return;
+      rotationY += .18;
+      applyRotation();
+    }, 16);
+  }
+  function stopAuto(){
+    if(autoTimer) clearInterval(autoTimer);
+    autoTimer = null;
   }
 
   function install(){
-    patchAll();
-    const box = document.getElementById("gkmAiMessages");
-    if(box && !box.dataset.gkmV330Observer){
-      new MutationObserver(()=>setTimeout(patchAll,30)).observe(box,{childList:true,subtree:true});
-      box.dataset.gkmV330Observer = "1";
-    }
-
-    document.addEventListener("click", e=>{
-      const btn = e.target && e.target.closest ? e.target.closest("[data-gkm-v330-open]") : null;
-      if(!btn) return;
-      if(openN(btn.dataset.gkmV330Open)){
-        e.preventDefault();
-        e.stopPropagation();
-        if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-        return false;
-      }
-    }, true);
-
-    const form = document.getElementById("gkmAiForm");
-    const input = document.getElementById("gkmAiInput");
-    if(form && !form.dataset.gkmV330Submit){
-      form.addEventListener("submit", e=>{
-        const raw = (input && input.value || "").trim();
-        const m = raw.match(/^(?:открой|открыть|покажи)\s+(?:(?:фильм|кино|аниме|анимэ|мульт|сериал|игру|игра|мангу|вариант)\s+)?(\d{1,2})\s*$/i) ||
-                  raw.match(/^(?:(?:фильм|кино|аниме|анимэ|мульт|сериал|вариант)\s+)(\d{1,2})\s*$/i);
-        if(m && openN(m[1])){
-          e.preventDefault();
-          e.stopPropagation();
-          if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-          if(input) input.value = "";
-          return false;
-        }
-      }, true);
-      form.dataset.gkmV330Submit = "1";
-    }
+    ensureCss();
+    ensureButton();
+    ensureOverlay();
   }
 
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true}); else install();
-  setTimeout(install,300); setTimeout(install,1000); setTimeout(install,2500);
-  console.log("GKM V330: open number 10/simple list fallback installed");
-})();
-/* GKM V330 OPEN NUMBER 10 END */
-
-
-/* GKM V331 TESTED STABLE BUILD START */
-(function(){
-  window.GKM_V331_TESTED_STABLE_BUILD_VERSION = "v331-tested-stable-build-1000-logic-tests-2026-07-02";
-  console.log("GKM V331: tested stable build installed");
-})();
-/* GKM V331 TESTED STABLE BUILD END */
-
-
-/* GKM V335 DEPLOY SAFE VERIFIED START */
-(function(){
-  window.GKM_V335_DEPLOY_SAFE_VERIFIED_VERSION = "v335-deploy-safe-verified-from-upload-2026-07-02";
-  console.log("GKM V335: deploy safe verified build installed");
-})();
-/* GKM V335 DEPLOY SAFE VERIFIED END */
-
-
-/* GKM V338 NORMAL TITLES UT FIX START */
-(function(){
-  window.GKM_V338_NORMAL_TITLES_UT_FIX_VERSION = "v338-normal-titles-ut-fix-2026-07-02";
-  console.log("GKM V338: normal titles UT fix installed");
-})();
-/* GKM V338 NORMAL TITLES UT FIX END */
-
-
-/* GKM V339 NARUTO TITLE FINAL START */
-(function(){
-  window.GKM_V339_NARUTO_TITLE_FINAL_VERSION = "v339-naruto-title-final-no-xut-spread-2026-07-02";
-
-  function txt(v){ return String(v == null ? "" : v).trim(); }
-  function nrm(v){ return txt(v).toLowerCase().replace(/ё/g,"е").replace(/[^\p{L}\p{N}]+/gu," ").replace(/\s+/g," ").trim(); }
-  function yearOf(item){ try{ if(typeof getYear === "function") return Number(getYear(item)||0); }catch{} return Number(item && item.year || 0); }
-  function typeOf(item){ try{ if(typeof getType === "function") return txt(getType(item)); }catch{} return txt(item && item.type); }
-  function votesOf(item){ try{ if(typeof getVotes === "function") return Number(getVotes(item)||0); }catch{} return Number(item && item.votes || 0); }
-  function titleRaw(item){
-    let prev = "";
-    try{
-      if(window.GKM_V337_NORMAL_TITLE_FIX) prev = window.GKM_V337_NORMAL_TITLE_FIX(item) || "";
-      else if(window.GKM_V334_NORMAL_TITLES_VERSION && typeof gkmV334NormalAnimeTitle === "function") prev = gkmV334NormalAnimeTitle(item) || "";
-    }catch{}
-    return [
-      prev,
-      item && item.ru,
-      item && item.title_ru,
-      item && item.__manualTopTitle,
-      item && item.en,
-      item && item.title,
-      item && item.name,
-      item && item.original_title,
-      item && item.original_name,
-      item && item.search,
-      item && item.__gkmV257Title,
-      item && item.poster,
-      item && item.poster_path,
-      item && item.backdrop_path,
-      (item && item.genres || []).join(" ")
-    ].filter(Boolean).join(" ");
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", install, { once:true });
+  } else {
+    install();
   }
+  setTimeout(install, 500);
+  setTimeout(install, 1500);
 
-  function isNaruto(item){
-    const raw = nrm(titleRaw(item));
-    return raw.includes("наруто") || raw.includes("naruto") || raw.includes("ナルト") || raw.includes("shippuden") || raw.includes("ураганные хроники");
-  }
-
-  function narutoTitle(item){
-    if(!item || !isNaruto(item)) return "";
-    const type = typeOf(item);
-    if(type !== "Аниме" && type !== "Мультфильм") return "";
-
-    const y = yearOf(item);
-    const v = votesOf(item);
-    const raw = nrm(titleRaw(item));
-
-    // Важно: годовые правила идут ДО проверки x UT.
-    // Иначе старый кривой title "Наруто x UT — 2004" снова заразит все карточки.
-    if(y === 2002 && type === "Аниме" && v >= 500000) return "Наруто";
-    if(y === 2002) return "Наруто: Найти багровый четырёхлистный клевер!";
-    if(y === 2003) return "Наруто: Перекрёстки";
-    if(y === 2004) return "Наруто: Битва ниндзя в Стране Снега";
-    if(y === 2005) return "Наруто: Легенда о камне Гелела";
-    if(y === 2006) return "Наруто: Стражи Королевства Полумесяца";
-    if(y === 2007 && type === "Аниме" && v >= 500000) return "Наруто: Ураганные хроники";
-    if(y === 2007) return "Наруто: Ураганные хроники — Фильм";
-    if(y === 2008) return "Наруто: Ураганные хроники — Узы";
-    if(y === 2009) return "Наруто: Ураганные хроники — Наследники воли огня";
-    if(y === 2010) return "Наруто: Ураганные хроники — Потерянная башня";
-    if(y === 2011 && type === "Мультфильм") return "Наруто: Ураганные хроники — Кровавая тюрьма";
-    if(y === 2011) return "Наруто x UT";
-    if(y === 2012 && type === "Мультфильм") return "Наруто: Ураганные хроники — Путь ниндзя";
-    if(y === 2012) return "Наруто SD: Рок Ли и его друзья-ниндзя";
-    if(y === 2013) return "Наруто: Ураганные хроники — специальный выпуск";
-    if(y === 2014) return "Последний: Наруто. Фильм";
-    if(y === 2015) return "Боруто: Наруто. Фильм";
-    if(y === 2022) return "Наруто: Юбилейный спецвыпуск";
-
-    // Только если год не распознан, тогда разрешаем настоящий x UT по raw.
-    if(raw.includes("x ut") || raw.includes("xut")) return "Наруто x UT";
-
-    return "";
-  }
-
-  const oldDisplayTitle = typeof displayTitle === "function" ? displayTitle : null;
-  if(oldDisplayTitle){
-    displayTitle = function(item){
-      const fixed = narutoTitle(item);
-      if(fixed) return fixed;
-      return oldDisplayTitle(item);
-    };
-  }
-
-  window.GKM_V339_NARUTO_TITLE_FIX = narutoTitle;
-  console.log("GKM V339: Naruto title final no-xUT-spread installed");
+  console.log("GKM V317: 3D poster wall demo installed");
 })();
-/* GKM V339 NARUTO TITLE FINAL END */
+/* GKM V317 3D POSTER WALL DEMO END */
 
