@@ -12290,9 +12290,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V316 REAL AI BRIDGE END */
 
 
-/* GKM V329 REFERENCE FISHEYE POSTER MOSAIC START */
+/* GKM V330 SIDE PREVIEW FISHEYE POSTER MOSAIC START */
 (function(){
-  window.GKM_V329_REFERENCE_FISHEYE_POSTER_MOSAIC_VERSION = "v329-reference-fisheye-poster-mosaic-hover-reset-2026-07-11";
+  window.GKM_V330_SIDE_PREVIEW_FISHEYE_POSTER_MOSAIC_VERSION = "v330-side-preview-fisheye-poster-mosaic-no-center-block-2026-07-11";
 
   const UNIQUE_LIMIT_DESKTOP = 2200;
   const UNIQUE_LIMIT_MOBILE = 900;
@@ -12474,7 +12474,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn",
       "gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn","gkmV327Btn","gkmV328Btn",
       "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay","gkmV327Overlay","gkmV328Overlay",
-      "gkmV325Preview","gkmV327Preview","gkmV328Preview"
+      "gkmV325Preview","gkmV327Preview","gkmV328Preview","gkmV329Preview","gkmV330Preview"
     ].forEach(id=>{
       const el = document.getElementById(id);
       if(el) el.remove();
@@ -12486,21 +12486,22 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function ensureCss(){
-    if(document.getElementById("gkmV329Css")) return;
+    const oldCss = document.getElementById("gkmV329Css"); if(oldCss) oldCss.remove();
+    if(document.getElementById("gkmV330Css")) return;
     const st = document.createElement("style");
-    st.id = "gkmV329Css";
+    st.id = "gkmV330Css";
     st.textContent = `
-      #gkmV329Btn{
+      #gkmV330Btn{
         position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;
         border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
         color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;
         box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)
       }
-      #gkmV329Overlay{
+      #gkmV330Overlay{
         position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;background:#02040b;
       }
-      #gkmV329Overlay.open{display:block}
-      #gkmV329Overlay::before{
+      #gkmV330Overlay.open{display:block}
+      #gkmV330Overlay::before{
         content:"";position:absolute;inset:-20%;pointer-events:none;
         background:
           radial-gradient(circle at 50% 50%,rgba(31,80,150,.15),transparent 30%),
@@ -12508,101 +12509,101 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           radial-gradient(circle at 84% 78%,rgba(112,35,255,.13),transparent 37%),
           #02040b;
       }
-      .gkmV329Top{
+      .gkmV330Top{
         position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
         padding:8px 12px 0 12px;pointer-events:none
       }
-      .gkmV329Heading{
+      .gkmV330Heading{
         max-width:min(610px,48vw);padding:7px 10px;border-radius:14px;
         background:linear-gradient(90deg,rgba(1,15,32,.82),rgba(1,15,32,.34),transparent);
         text-shadow:0 2px 14px rgba(0,0,0,.85)
       }
-      .gkmV329Title{font-size:21px;font-weight:950;line-height:1.04}
-      .gkmV329Sub{font-size:11px;color:rgba(255,255,255,.78);margin-top:3px}
-      .gkmV329Actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
-      .gkmV329Actions button{
+      .gkmV330Title{font-size:21px;font-weight:950;line-height:1.04}
+      .gkmV330Sub{font-size:11px;color:rgba(255,255,255,.78);margin-top:3px}
+      .gkmV330Actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
+      .gkmV330Actions button{
         border:1px solid rgba(0,220,255,.34);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));
         color:#fff;border-radius:13px;padding:9px 12px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)
       }
-      .gkmV329Actions button:hover{filter:brightness(1.16)}
-      .gkmV329Actions button.is-active{box-shadow:0 0 0 2px rgba(255,255,255,.22) inset,0 0 22px rgba(0,200,255,.32);filter:brightness(1.12)}
-      #gkmV329Scene{
+      .gkmV330Actions button:hover{filter:brightness(1.16)}
+      .gkmV330Actions button.is-active{box-shadow:0 0 0 2px rgba(255,255,255,.22) inset,0 0 22px rgba(0,200,255,.32);filter:brightness(1.12)}
+      #gkmV330Scene{
         position:absolute;inset:0;z-index:2;perspective:1120px;overflow:hidden;cursor:crosshair;user-select:none;touch-action:none
       }
-      #gkmV329Scene.drag{cursor:grabbing}
-      #gkmV329World{
+      #gkmV330Scene.drag{cursor:grabbing}
+      #gkmV330World{
         position:absolute;left:50%;top:50%;width:1px;height:1px;transform-style:preserve-3d;will-change:transform
       }
-      .gkmV329Tile{
+      .gkmV330Tile{
         position:absolute;left:0;top:0;border:0;padding:0;overflow:hidden;background:#07111e;
         border-radius:3px;outline:1px solid rgba(255,255,255,.055);box-shadow:0 1px 4px rgba(0,0,0,.42);
         transform-style:preserve-3d;will-change:transform,filter,opacity;
         transition:transform .17s cubic-bezier(.2,.8,.2,1),filter .14s ease,box-shadow .14s ease,opacity .14s ease;
         pointer-events:none
       }
-      .gkmV329Tile::before{
+      .gkmV330Tile::before{
         content:"";position:absolute;inset:0;background-image:var(--poster);background-size:cover;background-position:center;
         filter:saturate(1.08) contrast(1.06) brightness(.94)
       }
-      .gkmV329Tile::after{
+      .gkmV330Tile::after{
         content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.13),transparent 56%)
       }
-      .gkmV329Tile.is-lens{filter:brightness(1.16) saturate(1.16)}
-      .gkmV329Tile.is-active{
+      .gkmV330Tile.is-lens{filter:brightness(1.16) saturate(1.16)}
+      .gkmV330Tile.is-active{
         z-index:999;filter:brightness(1.32) saturate(1.22)!important;
         outline:1px solid rgba(85,225,255,.8);box-shadow:0 12px 32px rgba(0,0,0,.7),0 0 28px rgba(0,205,255,.44)
       }
-      #gkmV329Preview{
-        position:fixed;left:50%;top:50%;z-index:26;width:min(860px,82vw);min-height:320px;display:block;
-        opacity:0;visibility:hidden;transform:translate(-50%,-50%) scale(.91);transition:opacity .16s ease,transform .19s ease,visibility .16s;
+      #gkmV330Preview{
+        position:fixed;left:20px;top:96px;z-index:26;width:min(640px,36vw);min-height:300px;display:block;
+        opacity:0;visibility:hidden;transform:translateY(10px) scale(.965);transition:opacity .16s ease,transform .19s ease,visibility .16s,left .12s ease,top .12s ease;
         border:1px solid rgba(73,207,255,.42);border-radius:24px;overflow:hidden;
         background:#071124;box-shadow:0 28px 110px rgba(0,0,0,.78),0 0 44px rgba(0,155,255,.22);
         pointer-events:none;backdrop-filter:blur(14px)
       }
-      #gkmV329Preview.open{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
-      #gkmV329Preview::before{
+      #gkmV330Preview.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+      #gkmV330Preview::before{
         content:"";position:absolute;inset:-18px;background-image:linear-gradient(90deg,rgba(3,8,20,.93) 0%,rgba(3,8,20,.84) 45%,rgba(3,8,20,.60) 100%),var(--backdrop);
         background-size:cover;background-position:center;filter:blur(5px) saturate(1.08);transform:scale(1.06)
       }
-      #gkmV329Preview::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,6,16,.82),rgba(1,6,16,.42) 58%,rgba(1,6,16,.58))}
-      .gkmV329PreviewInner{position:relative;z-index:2;display:grid;grid-template-columns:190px 1fr;gap:22px;min-height:320px;padding:22px}
-      #gkmV329Preview img{width:190px;height:285px;object-fit:cover;border-radius:16px;box-shadow:0 18px 44px rgba(0,0,0,.66)}
-      .gkmV329PreviewText{align-self:center;text-shadow:0 2px 10px rgba(0,0,0,.8)}
-      .gkmV329PreviewText h3{margin:0 0 10px;font-size:34px;line-height:1.02;letter-spacing:-.5px}
-      .gkmV329PreviewMeta{font-size:14px;color:rgba(255,255,255,.86);margin-bottom:10px;line-height:1.45}
-      .gkmV329PreviewGenres{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 12px}
-      .gkmV329PreviewGenres span{padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.13);font-size:11px}
-      .gkmV329PreviewDesc{font-size:14px;color:rgba(255,255,255,.9);line-height:1.46;max-height:120px;overflow:hidden}
-      .gkmV329PreviewHint{margin-top:13px;font-size:12px;color:rgba(98,224,255,.95);font-weight:800}
-      .gkmV329Info{
+      #gkmV330Preview::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,6,16,.82),rgba(1,6,16,.42) 58%,rgba(1,6,16,.58))}
+      .gkmV330PreviewInner{position:relative;z-index:2;display:grid;grid-template-columns:190px 1fr;gap:22px;min-height:320px;padding:22px}
+      #gkmV330Preview img{width:190px;height:285px;object-fit:cover;border-radius:16px;box-shadow:0 18px 44px rgba(0,0,0,.66)}
+      .gkmV330PreviewText{align-self:center;text-shadow:0 2px 10px rgba(0,0,0,.8)}
+      .gkmV330PreviewText h3{margin:0 0 10px;font-size:34px;line-height:1.02;letter-spacing:-.5px}
+      .gkmV330PreviewMeta{font-size:14px;color:rgba(255,255,255,.86);margin-bottom:10px;line-height:1.45}
+      .gkmV330PreviewGenres{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 12px}
+      .gkmV330PreviewGenres span{padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.13);font-size:11px}
+      .gkmV330PreviewDesc{font-size:14px;color:rgba(255,255,255,.9);line-height:1.46;max-height:120px;overflow:hidden}
+      .gkmV330PreviewHint{margin-top:13px;font-size:12px;color:rgba(98,224,255,.95);font-weight:800}
+      .gkmV330Info{
         position:absolute;left:14px;bottom:14px;z-index:18;max-width:min(510px,calc(100vw - 28px));
         background:rgba(2,10,24,.76);border:1px solid rgba(0,205,255,.22);border-radius:15px;
         padding:10px 13px;color:#fff;backdrop-filter:blur(10px);pointer-events:none;box-shadow:0 10px 32px rgba(0,0,0,.35)
       }
-      .gkmV329Info b{display:block;font-size:15px;margin-bottom:3px}
-      .gkmV329Info .meta{color:rgba(255,255,255,.72);font-size:11px}
-      .gkmV329Hint{position:absolute;right:17px;bottom:15px;z-index:18;color:rgba(255,255,255,.58);font-size:11px;text-align:right;pointer-events:none;text-shadow:0 2px 8px #000}
+      .gkmV330Info b{display:block;font-size:15px;margin-bottom:3px}
+      .gkmV330Info .meta{color:rgba(255,255,255,.72);font-size:11px}
+      .gkmV330Hint{position:absolute;right:17px;bottom:15px;z-index:18;color:rgba(255,255,255,.58);font-size:11px;text-align:right;pointer-events:none;text-shadow:0 2px 8px #000}
       @media(max-width:700px){
-        #gkmV329Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
-        .gkmV329Top{padding:6px 7px 0}.gkmV329Heading{max-width:46vw;padding:6px 7px}.gkmV329Title{font-size:15px}.gkmV329Sub{display:none}
-        .gkmV329Actions{gap:4px}.gkmV329Actions button{padding:7px 8px;font-size:10px;border-radius:10px}
-        #gkmV329Preview{width:calc(100vw - 18px);min-height:226px;border-radius:17px}
-        .gkmV329PreviewInner{grid-template-columns:104px 1fr;gap:12px;min-height:226px;padding:11px}
-        #gkmV329Preview img{width:104px;height:156px;border-radius:10px}
-        .gkmV329PreviewText h3{font-size:20px;margin-bottom:6px}.gkmV329PreviewMeta{font-size:11px;margin-bottom:4px}
-        .gkmV329PreviewGenres{gap:4px;margin:5px 0}.gkmV329PreviewGenres span{font-size:9px;padding:3px 6px}
-        .gkmV329PreviewDesc{font-size:11px;max-height:64px;line-height:1.35}.gkmV329PreviewHint{font-size:10px;margin-top:6px}
-        .gkmV329Info{left:8px;right:8px;bottom:8px;max-width:none;padding:8px 10px}.gkmV329Hint{display:none}
+        #gkmV330Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
+        .gkmV330Top{padding:6px 7px 0}.gkmV330Heading{max-width:46vw;padding:6px 7px}.gkmV330Title{font-size:15px}.gkmV330Sub{display:none}
+        .gkmV330Actions{gap:4px}.gkmV330Actions button{padding:7px 8px;font-size:10px;border-radius:10px}
+        #gkmV330Preview{left:9px!important;top:auto!important;right:9px!important;bottom:72px!important;width:auto;min-height:226px;border-radius:17px}
+        .gkmV330PreviewInner{grid-template-columns:104px 1fr;gap:12px;min-height:226px;padding:11px}
+        #gkmV330Preview img{width:104px;height:156px;border-radius:10px}
+        .gkmV330PreviewText h3{font-size:20px;margin-bottom:6px}.gkmV330PreviewMeta{font-size:11px;margin-bottom:4px}
+        .gkmV330PreviewGenres{gap:4px;margin:5px 0}.gkmV330PreviewGenres span{font-size:9px;padding:3px 6px}
+        .gkmV330PreviewDesc{font-size:11px;max-height:64px;line-height:1.35}.gkmV330PreviewHint{font-size:10px;margin-top:6px}
+        .gkmV330Info{left:8px;right:8px;bottom:8px;max-width:none;padding:8px 10px}.gkmV330Hint{display:none}
       }
       @media(prefers-reduced-motion:reduce){
-        .gkmV329Tile,#gkmV329Preview{transition:none!important}
+        .gkmV330Tile,#gkmV330Preview{transition:none!important}
       }
     `;
     document.head.appendChild(st);
   }
 
   function syncKindButtons(){
-    document.querySelectorAll("#gkmV329Overlay [data-kind]").forEach(btn=>{
+    document.querySelectorAll("#gkmV330Overlay [data-kind]").forEach(btn=>{
       btn.classList.toggle("is-active", btn.dataset.kind === currentKind);
     });
   }
@@ -12611,40 +12612,46 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     removeOldUi();
     ensureCss();
 
-    if(!document.getElementById("gkmV329Btn")){
+    const oldBtn = document.getElementById("gkmV329Btn");
+    if(oldBtn) oldBtn.remove();
+
+    if(!document.getElementById("gkmV330Btn")){
       const btn = document.createElement("button");
-      btn.id = "gkmV329Btn";
+      btn.id = "gkmV330Btn";
       btn.type = "button";
       btn.textContent = "🌌 3D стена";
       btn.onclick = () => openWall("all");
       document.body.appendChild(btn);
     }
 
-    if(document.getElementById("gkmV329Overlay")) return;
+    const oldOverlay = document.getElementById("gkmV329Overlay");
+    if(oldOverlay) oldOverlay.remove();
+
+    if(document.getElementById("gkmV330Overlay")) return;
 
     const overlay = document.createElement("div");
-    overlay.id = "gkmV329Overlay";
+    overlay.id = "gkmV330Overlay";
     overlay.innerHTML = `
-      <div class="gkmV329Top">
-        <div class="gkmV329Heading">
-          <div class="gkmV329Title">🌌 3D мозаика постеров V329</div>
-          <div class="gkmV329Sub">Как в референсе: цельное полотно на весь экран, локальная «линза» под мышкой, после ухода всё возвращается.</div>
+      <div class="gkmV330Top">
+        <div class="gkmV330Heading">
+          <div class="gkmV330Title">🌌 3D мозаика постеров V330</div>
+          <div class="gkmV330Sub">Цельное полотно на весь экран. Карточка больше не лезет в центр: показывается сбоку, чтобы не перекрывать середину сетки.</div>
         </div>
-        <div class="gkmV329Actions">
+        <div class="gkmV330Actions">
           <button data-kind="all">Все</button>
           <button data-kind="movies">Фильмы</button>
           <button data-kind="series">Сериалы</button>
           <button data-kind="anime">Аниме</button>
           <button data-kind="cartoons">Мульты</button>
-          <button id="gkmV329AutoBtn">▶ Авто</button>
-          <button id="gkmV329MixBtn">🔀 Микс</button>
-          <button id="gkmV329CloseBtn">✕</button>
+          <button id="gkmV330AutoBtn">▶ Авто</button>
+          <button id="gkmV330MixBtn">🔀 Микс</button>
+          <button id="gkmV330CloseBtn">✕</button>
         </div>
       </div>
-      <div id="gkmV329Scene"><div id="gkmV329World"></div></div>
-      <div id="gkmV329Preview"></div>
-      <div class="gkmV329Info"><b>Загрузка...</b><div class="meta">Собираю уникальные постеры.</div></div>
-      <div class="gkmV329Hint">мышь — линза и карточка<br>клик — открыть карточку<br>зажать и вести — наклон</div>
+      <div id="gkmV330Scene"><div id="gkmV330World"></div></div>
+      <div id="gkmV330Preview"></div>
+      <div class="gkmV330Info"><b>Загрузка...</b><div class="meta">Собираю уникальные постеры.</div></div>
+      <div class="gkmV330Hint">мышь — линза и карточка сбоку<br>клик — открыть карточку<br>зажать и вести — наклон</div>
     `;
     document.body.appendChild(overlay);
 
@@ -12657,18 +12664,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       };
     });
 
-    document.getElementById("gkmV329CloseBtn").onclick = () => closeWall();
-    document.getElementById("gkmV329MixBtn").onclick = () => {
+    document.getElementById("gkmV330CloseBtn").onclick = () => closeWall();
+    document.getElementById("gkmV330MixBtn").onclick = () => {
       resetLens();
       uniqueItems.sort(()=>Math.random()-.5);
       buildWall();
     };
-    document.getElementById("gkmV329AutoBtn").onclick = () => {
+    document.getElementById("gkmV330AutoBtn").onclick = () => {
       autoFloat = !autoFloat;
-      document.getElementById("gkmV329AutoBtn").textContent = autoFloat ? "⏸ Авто" : "▶ Авто";
+      document.getElementById("gkmV330AutoBtn").textContent = autoFloat ? "⏸ Авто" : "▶ Авто";
     };
 
-    const scene = document.getElementById("gkmV329Scene");
+    const scene = document.getElementById("gkmV330Scene");
     scene.addEventListener("pointerdown", e=>{
       if(e.button !== 0) return;
       isDragging = true;
@@ -12740,43 +12747,73 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function setSummary(){
-    const box = document.querySelector(".gkmV329Info");
+    const box = document.querySelector(".gkmV330Info");
     if(!box) return;
     box.innerHTML = `<b>${esc(kindLabel(currentKind))} — ${wallState.used} уникальных постеров</b><div class="meta">Цельная мозаика без столбов и пустого центра. Наведение создаёт локальную линзу, уход мыши возвращает исходную сетку.</div>`;
   }
 
   function setInfo(it){
-    const box = document.querySelector(".gkmV329Info");
+    const box = document.querySelector(".gkmV330Info");
     if(!box || !it) return;
     const r = ratingOf(it);
     box.innerHTML = `<b>${esc(titleOf(it))}</b><div class="meta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>`;
   }
 
-  function showPreview(record){
-    const prev = document.getElementById("gkmV329Preview");
+  function placePreview(prev, clientX, clientY){
+    if(!prev) return;
+    if(window.innerWidth < 700){
+      prev.style.left = "9px";
+      prev.style.right = "9px";
+      prev.style.top = "auto";
+      prev.style.bottom = "72px";
+      return;
+    }
+    const gap = 26;
+    const margin = 14;
+    prev.style.left = "20px";
+    prev.style.top = "96px";
+    prev.style.right = "auto";
+    prev.style.bottom = "auto";
+    const rect = prev.getBoundingClientRect();
+    const prefRight = clientX <= window.innerWidth * 0.54;
+    let x = prefRight ? clientX + gap : clientX - rect.width - gap;
+    if(x + rect.width > window.innerWidth - margin) x = window.innerWidth - rect.width - margin;
+    if(x < margin) x = margin;
+    let y = clientY - rect.height * 0.5;
+    const topMin = 74;
+    const topMax = window.innerHeight - rect.height - 14;
+    if(y < topMin) y = topMin;
+    if(y > topMax) y = topMax;
+    prev.style.left = Math.round(x) + "px";
+    prev.style.top = Math.round(y) + "px";
+  }
+
+  function showPreview(record, clientX, clientY){
+    const prev = document.getElementById("gkmV330Preview");
     if(!prev || !record) return;
     const it = record.item;
     const r = ratingOf(it);
     const genres = genresOf(it).slice(0,5);
     prev.style.setProperty("--backdrop", `url("${safeUrl(backdropOf(it))}")`);
     prev.innerHTML = `
-      <div class="gkmV329PreviewInner">
+      <div class="gkmV330PreviewInner">
         <img src="${esc(imgOf(it))}" alt="${esc(titleOf(it))}">
-        <div class="gkmV329PreviewText">
+        <div class="gkmV330PreviewText">
           <h3>${esc(titleOf(it))}</h3>
-          <div class="gkmV329PreviewMeta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>
-          <div class="gkmV329PreviewGenres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div>
-          <div class="gkmV329PreviewDesc">${esc(overviewOf(it))}</div>
-          <div class="gkmV329PreviewHint">Клик мышкой — открыть полную карточку</div>
+          <div class="gkmV330PreviewMeta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>
+          <div class="gkmV330PreviewGenres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div>
+          <div class="gkmV330PreviewDesc">${esc(overviewOf(it))}</div>
+          <div class="gkmV330PreviewHint">Клик мышкой — открыть полную карточку</div>
         </div>
       </div>
     `;
     prev.classList.add("open");
+    placePreview(prev, clientX, clientY);
     setInfo(it);
   }
 
   function hidePreview(){
-    const prev = document.getElementById("gkmV329Preview");
+    const prev = document.getElementById("gkmV330Preview");
     if(prev) prev.classList.remove("open");
   }
 
@@ -12847,7 +12884,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     center.el.classList.add("is-active");
     center.el.style.transform = `translate3d(${center.x}px,${center.y}px,${center.z + 315}px) rotateX(${center.rx}deg) rotateY(${center.ry}deg) scale(3.15)`;
     changedRecords.add(center);
-    showPreview(center);
+    showPreview(center, clientX, clientY);
   }
 
   function tryOpenByKnownFunctions(it){
@@ -12878,7 +12915,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function applyWorld(autoX=0, autoY=0){
-    const world = document.getElementById("gkmV329World");
+    const world = document.getElementById("gkmV330World");
     if(world) world.style.transform = `translateZ(${zoom}px) rotateX(${rotX + autoX}deg) rotateY(${rotY + autoY}deg)`;
   }
 
@@ -12894,14 +12931,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function buildWall(){
-    const world = document.getElementById("gkmV329World");
+    const world = document.getElementById("gkmV330World");
     if(!world) return;
     resetLens(false);
     world.innerHTML = "";
     tileRecords = [];
 
     if(!uniqueItems.length){
-      const box = document.querySelector(".gkmV329Info");
+      const box = document.querySelector(".gkmV330Info");
       if(box) box.innerHTML = `<b>Постеры не найдены</b><div class="meta">Нет уникальных постеров для этого раздела.</div>`;
       return;
     }
@@ -12948,7 +12985,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const rx = ny * (mobile ? 8 : 11);
 
       const tile = document.createElement("div");
-      tile.className = "gkmV329Tile";
+      tile.className = "gkmV330Tile";
       tile.style.width = tileW + "px";
       tile.style.height = tileH + "px";
       tile.style.marginLeft = (-tileW/2) + "px";
@@ -12976,7 +13013,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   async function openWall(kind="all"){
     ensureUi();
-    const overlay = document.getElementById("gkmV329Overlay");
+    const overlay = document.getElementById("gkmV330Overlay");
     if(!overlay) return;
     overlay.classList.add("open");
     document.body.style.overflow = "hidden";
@@ -12993,7 +13030,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function closeWall(full=true){
-    const overlay = document.getElementById("gkmV329Overlay");
+    const overlay = document.getElementById("gkmV330Overlay");
     if(overlay) overlay.classList.remove("open");
     document.body.style.overflow = "";
     resetLens(false);
@@ -13027,7 +13064,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install, 500);
   setTimeout(install, 1400);
 
-  console.log("GKM V329: reference fisheye poster mosaic installed");
+  console.log("GKM V330: side preview fisheye poster mosaic installed");
 })();
-/* GKM V329 REFERENCE FISHEYE POSTER MOSAIC END */
+/* GKM V330 SIDE PREVIEW FISHEYE POSTER MOSAIC END */
 
