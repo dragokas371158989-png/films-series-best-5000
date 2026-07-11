@@ -12282,10 +12282,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V316 REAL AI BRIDGE END */
 
-
-/* GKM V317 3D POSTER WALL DEMO START */
+/* GKM V318 3D POSTER WALL FIXED START */
 (function(){
-  window.GKM_V317_3D_POSTER_WALL_VERSION = "v317-3d-poster-wall-demo-2026-07-01";
+  window.GKM_V318_3D_POSTER_WALL_FIXED_VERSION = "v318-3d-poster-wall-fixed-visible-button-2026-07-01";
 
   const WALL_LIMIT = 180;
   let wallItems = [];
@@ -12371,11 +12370,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
   async function loadWallItems(){
     const urls = [
-      "data/fast/home.json?v=317",
-      "data/fast/pages/movies/page_0001.json?v=317",
-      "data/fast/pages/anime/page_0001.json?v=317",
-      "data/fast/pages/series/page_0001.json?v=317",
-      "data/fast/pages/cartoons/page_0001.json?v=317"
+      "data/fast/home.json?v=318",
+      "data/fast/pages/movies/page_0001.json?v=318",
+      "data/fast/pages/anime/page_0001.json?v=318",
+      "data/fast/pages/series/page_0001.json?v=318",
+      "data/fast/pages/cartoons/page_0001.json?v=318"
     ];
     const found = [];
     const seen = new Set();
@@ -12413,14 +12412,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     css.id = "gkm3dWallCss";
     css.textContent = `
       #gkm3dWallBtn{
-        border:1px solid rgba(0,220,255,.35);
-        background:linear-gradient(135deg,rgba(23,36,88,.95),rgba(0,175,255,.75));
+        position:fixed!important;
+        right:18px!important;
+        bottom:92px!important;
+        z-index:99997!important;
+        border:1px solid rgba(0,220,255,.5);
+        background:linear-gradient(135deg,rgba(83,34,190,.98),rgba(0,175,255,.92));
         color:#fff;
         border-radius:18px;
-        padding:12px 18px;
-        font-weight:800;
+        padding:13px 18px;
+        font-weight:900;
         cursor:pointer;
-        box-shadow:0 0 18px rgba(0,180,255,.22);
+        box-shadow:0 0 26px rgba(0,180,255,.45),0 10px 24px rgba(0,0,0,.35);
         margin:6px;
       }
       #gkm3dWallBtn:hover{transform:translateY(-1px);box-shadow:0 0 24px rgba(0,180,255,.38)}
@@ -12563,6 +12566,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         .gkm3dTitle{font-size:18px}
         #gkm3dInfo{bottom:12px;left:12px;right:12px}
         .gkm3dHint{display:none}
+        #gkm3dWallBtn{right:14px!important;bottom:82px!important;padding:12px 14px!important;border-radius:16px!important}
       }
     `;
     document.head.appendChild(css);
@@ -12631,30 +12635,34 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function ensureButton(){
-    if(document.getElementById("gkm3dWallBtn")) return;
-    const btn = document.createElement("button");
-    btn.id = "gkm3dWallBtn";
-    btn.type = "button";
-    btn.textContent = "🌌 3D стена";
-
-    const parent =
-      document.querySelector(".hero-actions") ||
-      document.querySelector(".filters") ||
-      document.querySelector(".top-actions") ||
-      document.querySelector(".chips") ||
-      document.querySelector("main") ||
-      document.body;
-
-    if(parent === document.body) {
-      btn.style.position = "fixed";
-      btn.style.right = "18px";
-      btn.style.bottom = "88px";
-      btn.style.zIndex = "9000";
+    let btn = document.getElementById("gkm3dWallBtn");
+    if(!btn){
+      btn = document.createElement("button");
+      btn.id = "gkm3dWallBtn";
+      btn.type = "button";
+      btn.textContent = "🌌 3D стена";
       document.body.appendChild(btn);
-    } else {
-      parent.appendChild(btn);
     }
+    btn.style.display = "block";
+    btn.style.opacity = "1";
+    btn.style.visibility = "visible";
     btn.onclick = openWall;
+
+    // Дублируем кнопку рядом с Помощником, если верхняя зона есть.
+    if(!document.getElementById("gkm3dWallTopBtn")){
+      const topBtn = document.createElement("button");
+      topBtn.id = "gkm3dWallTopBtn";
+      topBtn.type = "button";
+      topBtn.textContent = "🌌 3D стена";
+      topBtn.style.cssText = "border:1px solid rgba(0,220,255,.35);background:linear-gradient(135deg,#5125b8,#12a8ff);color:#fff;border-radius:14px;padding:10px 14px;font-weight:900;cursor:pointer;margin:6px;box-shadow:0 0 18px rgba(0,180,255,.28)";
+      topBtn.onclick = openWall;
+
+      const anchor = document.querySelector(".hero") || document.querySelector("header") || document.querySelector("main") || document.body;
+      if(anchor && anchor !== document.body) anchor.appendChild(topBtn);
+      else document.body.appendChild(topBtn);
+    }
+
+    window.GKM_OPEN_3D_WALL = openWall;
   }
 
   function applyRotation(){
@@ -12761,7 +12769,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install, 500);
   setTimeout(install, 1500);
 
-  console.log("GKM V317: 3D poster wall demo installed");
+  console.log("GKM V318: 3D poster wall demo installed");
 })();
-/* GKM V317 3D POSTER WALL DEMO END */
-
+/* GKM V318 3D POSTER WALL FIXED END */
