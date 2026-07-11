@@ -11766,18 +11766,31 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V306 RICH DESCRIPTIONS FIX END */
 
-/* GKM V316 REAL AI BRIDGE START */
+/* GKM V336 GOLUB AI 1000 LVL START */
 (function(){
-  window.GKM_V316_REAL_AI_BRIDGE_VERSION = "v316-real-ai-bridge-local-fast-plus-worker-2026-07-01";
+  window.GKM_V336_GOLUB_AI_1000_LVL_VERSION = "v336-golub-ai-1000-lvl-full-catalog-worker-2026-07-12";
+  window.GKM_V336_AI_MODEL_DEFAULT = "gpt-5.6-terra";
 
-  const LIMIT = 10;
+  const LIMIT = 12;
   const CACHE = new Map();
-  const MEM_KEY = "gkm_v316_ai_memory";
-  const TIME_LIMIT_MS = 240;
+  const MEM_KEY = "gkm_v336_ai_memory";
+  const HISTORY_KEY = "gkm_v336_ai_history";
+  const WALL_BASE = "data/fast/poster_wall_v333";
+  const WALL_VERSION = "v336";
+  const TIME_LIMIT_MS = 900;
   let lastResults = [];
   let lastQuery = "";
   let requestSeq = 0;
   let warmStarted = false;
+  let wallManifest = null;
+  let wallSeed = [];
+  let manifestPromise = null;
+  let seedPromise = null;
+  const fullPools = {movies:[],series:[],anime:[],cartoons:[]};
+  const fullKeys = {movies:new Set(),series:new Set(),anime:new Set(),cartoons:new Set()};
+  const loadedFiles = new Set();
+  const filePromises = new Map();
+  let chatHistory = loadHistory();
 
   function T(v){ return String(v == null ? "" : v).trim(); }
   function N(v){
@@ -11797,6 +11810,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
   function mem(){ try { return JSON.parse(localStorage.getItem(MEM_KEY)||"{}")||{}; } catch { return {}; } }
   function saveMem(m){ try { localStorage.setItem(MEM_KEY, JSON.stringify(m)); } catch {} }
+  function loadHistory(){ try { const x=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]"); return Array.isArray(x)?x.slice(-12):[]; } catch { return []; } }
+  function saveHistory(){ try { localStorage.setItem(HISTORY_KEY,JSON.stringify(chatHistory.slice(-12))); } catch {} }
+  function pushHistory(role,text){ chatHistory.push({role,text:T(text).slice(0,1800),at:Date.now()}); chatHistory=chatHistory.slice(-12); saveHistory(); }
   function remember(it){
     const m = mem();
     if(it.bucket && it.bucket !== "all") m.bucket = it.bucket;
@@ -11951,7 +11967,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function parseJson(j){
     const out=[];
     if(!j) return out;
-    if(Array.isArray(j)) return j.filter(x=>x&&typeof x==="object");
+    if(Array.isArray(j)) return j;
     if(Array.isArray(j.items)) out.push(...j.items);
     if(Array.isArray(j.data)) out.push(...j.data);
     if(Array.isArray(j.results)) out.push(...j.results);
@@ -11963,12 +11979,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
     return out.filter(x=>x&&typeof x==="object");
   }
-  async function fetchJson(url){
+  async function fetchJson(url,priority="auto"){
     if(CACHE.has(url)) return CACHE.get(url);
     try{
-      const res=await fetch(url,{cache:"force-cache"});
+      const res=await fetch(url,{cache:"force-cache",priority});
       if(!res.ok){ CACHE.set(url,[]); return []; }
-      const arr=parseJson(await res.json());
+      const data=await res.json();
+      const arr=parseJson(data);
       CACHE.set(url,arr);
       return arr;
     }catch{
@@ -11976,61 +11993,116 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       return [];
     }
   }
-
-  function urlsForBucket(b){
-    if(b==="movies") return ["data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/movies/page_0002.json?v=316"];
-    if(b==="anime") return ["data/fast/anime_top_manual.json?v=316","data/fast/pages/anime/page_0001.json?v=316","data/fast/pages/anime/page_0002.json?v=316"];
-    if(b==="series") return ["data/fast/pages/series/page_0001.json?v=316","data/fast/pages/series/page_0002.json?v=316"];
-    if(b==="cartoons") return ["data/fast/pages/cartoons/page_0001.json?v=316"];
-    if(b==="games") return ["data/games_catalog.json?v=316","data/games/cult_games.json?v=316","data/games/franchises.json?v=316"];
-    if(b==="books"||b==="manga"||b==="comics"||b==="ranobe") return ["data/books_catalog.json?v=316","data/books/books.json?v=316","data/books/manga.json?v=316","data/books/comics.json?v=316","data/books/ranobe.json?v=316"];
-    return ["data/fast/home.json?v=316","data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/anime/page_0001.json?v=316"];
+  function decodePoster(code){
+    const raw=T(code);
+    if(raw.startsWith("t:")) return `https://image.tmdb.org/t/p/w342/${raw.slice(2)}`;
+    if(raw.startsWith("m:")) return `https://cdn.myanimelist.net/${raw.slice(2)}`;
+    return raw.startsWith("u:")?raw.slice(2):raw;
+  }
+  function expandCompact(row){
+    if(!Array.isArray(row)) return row;
+    const tm=["Фильм","Сериал","Аниме","Мультфильм"];
+    return {
+      id:row[0],ru:row[1]||"",en:row[2]||"",year:row[3]||"",
+      type:typeof row[4]==="number"?(tm[row[4]]||"Каталог"):(row[4]||"Каталог"),
+      rating:Number(row[5]||0),votes:Number(row[6]||0),poster:decodePoster(row[7]),
+      genres:typeof row[8]==="string"?row[8].split("|").filter(Boolean):(row[8]||[]),
+      source:row[9]||"",status:row[10]||"",__gkmV336Compact:true
+    };
+  }
+  function bucketFromCompact(item){
+    const b=itemBucket(item);
+    return ["movies","series","anime","cartoons"].includes(b)?b:"movies";
+  }
+  function appendFull(kind,rows){
+    const pool=fullPools[kind],keys=fullKeys[kind];
+    for(const raw of rows){
+      const item=expandCompact(raw);
+      if(!item||typeof item!=="object") continue;
+      const k=itemKey(item);
+      if(!k||keys.has(k)) continue;
+      keys.add(k);pool.push(item);
+    }
+    return pool;
+  }
+  async function loadManifest(){
+    if(wallManifest) return wallManifest;
+    if(!manifestPromise){
+      manifestPromise=fetch(`${WALL_BASE}/manifest.json?v=${WALL_VERSION}`,{cache:"force-cache",priority:"high"})
+        .then(r=>{if(!r.ok) throw new Error("manifest "+r.status);return r.json();})
+        .then(x=>wallManifest=x||{})
+        .catch(()=>{manifestPromise=null;return null;});
+    }
+    return manifestPromise;
+  }
+  async function loadSeed(){
+    if(wallSeed.length) return wallSeed;
+    if(!seedPromise){
+      seedPromise=loadManifest().then(m=>{
+        if(!m) return [];
+        return fetch(`${WALL_BASE}/${m.seed||"seed_all.json"}?v=${WALL_VERSION}`,{cache:"force-cache",priority:"high"})
+          .then(r=>r.ok?r.json():[]);
+      }).then(rows=>{
+        wallSeed=parseJson(rows).map(expandCompact).filter(Boolean);
+        for(const it of wallSeed){ const b=bucketFromCompact(it); appendFull(b,[it]); }
+        return wallSeed;
+      }).catch(()=>{seedPromise=null;return [];});
+    }
+    return seedPromise;
+  }
+  async function loadFile(kind,file,priority="auto"){
+    const key=kind+":"+file;
+    if(loadedFiles.has(key)) return fullPools[kind];
+    if(!filePromises.has(key)){
+      filePromises.set(key,fetch(`${WALL_BASE}/${file}?v=${WALL_VERSION}`,{cache:"force-cache",priority})
+        .then(r=>r.ok?r.json():[])
+        .then(rows=>{loadedFiles.add(key);appendFull(kind,parseJson(rows));return fullPools[kind];})
+        .catch(()=>fullPools[kind]));
+    }
+    return filePromises.get(key);
+  }
+  async function loadKind(kind,deep=false){
+    const m=await loadManifest();
+    if(!m||!m.kinds||!m.kinds[kind]) return fullPools[kind]||[];
+    const files=m.kinds[kind].files||[];
+    const take=deep?files:files.slice(0,Math.min(2,files.length));
+    await Promise.all(take.map((f,i)=>loadFile(kind,f,i===0?"high":"auto")));
+    if(!deep){
+      const rest=files.slice(take.length);
+      const bg=()=>rest.forEach(f=>loadFile(kind,f,"low"));
+      if("requestIdleCallback" in window) requestIdleCallback(bg,{timeout:3500}); else setTimeout(bg,1200);
+    }
+    return fullPools[kind]||[];
+  }
+  function isDeepQuery(q){
+    const x=N(q);
+    return /по всей базе|полный поиск|глубокий поиск|найди точно|конкретно/.test(x) || /[«"].{3,}[»"]/.test(String(q||""));
   }
   function warmup(){
     if(warmStarted) return;
     warmStarted=true;
-    const urls=["data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/anime/page_0001.json?v=316","data/fast/home.json?v=316"];
-    const run=()=>urls.forEach(u=>fetchJson(u));
-    if("requestIdleCallback" in window) requestIdleCallback(run,{timeout:1500});
-    else setTimeout(run,600);
+    const run=()=>loadSeed();
+    if("requestIdleCallback" in window) requestIdleCallback(run,{timeout:1200}); else setTimeout(run,350);
   }
-
   async function getPool(q){
-    const it=detectIntent(q);
-    const list=[],seen=new Set();
+    const it=detectIntent(q),deep=isDeepQuery(q),list=[],seen=new Set();
     function add(item){
       if(!item||typeof item!=="object") return;
-      const k=itemKey(item);
-      if(seen.has(k)) return;
-      seen.add(k);
-      list.push(item);
+      const k=itemKey(item);if(!k||seen.has(k)) return;seen.add(k);list.push(item);
     }
-
-    if(it.bucket==="all"){
-      try{(currentItems||[]).forEach(add);}catch{}
-      try{
-        const sections=homeData&&homeData.sections?homeData.sections:{};
-        Object.values(sections).forEach(v=>{
-          if(Array.isArray(v)) v.forEach(add);
-          else if(v&&Array.isArray(v.items)) v.items.forEach(add);
-        });
-      }catch{}
+    try{(currentItems||[]).forEach(add);}catch{}
+    const seed=await loadSeed();seed.forEach(add);
+    const kinds=it.bucket==="all"?["movies","series","anime","cartoons"]:[it.bucket];
+    const valid=kinds.filter(k=>fullPools[k]);
+    const timeout=new Promise(resolve=>setTimeout(()=>resolve("__timeout__"),deep?4800:TIME_LIMIT_MS));
+    const work=Promise.all(valid.map(k=>loadKind(k,deep)));
+    const result=await Promise.race([work,timeout]);
+    if(result!=="__timeout__") result.forEach(arr=>arr.forEach(add));
+    else valid.forEach(k=>fullPools[k].forEach(add));
+    if(!list.length){
+      const fallback=["data/fast/home.json?v=336","data/fast/pages/movies/page_0001.json?v=336","data/fast/pages/anime/page_0001.json?v=336"];
+      const arrs=await Promise.all(fallback.map(u=>fetchJson(u)));arrs.flat().forEach(add);
     }
-
-    const urls = urlsForBucket(it.bucket);
-    const timeout = new Promise(resolve => setTimeout(() => resolve("__timeout__"), TIME_LIMIT_MS));
-    const load = Promise.all(urls.map(u => fetchJson(u)));
-    const result = await Promise.race([load, timeout]);
-
-    if(result === "__timeout__"){
-      // Если сеть тормозит, отдаём то, что уже есть, не подвешиваем окно.
-      for(const u of urls){
-        if(CACHE.has(u)) CACHE.get(u).forEach(add);
-      }
-      return list;
-    }
-
-    result.forEach(arr => arr.forEach(add));
     return list;
   }
 
@@ -12165,7 +12237,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return["План:",`1. Начать с: ${title(p[0])}`,p[1]?`2. Потом: ${title(p[1])}`:"",p[2]?`3. На финал: ${title(p[2])}`:""].filter(Boolean).join("\n");
   }
   function help(){
-    return["V316 REAL AI: максимально быстрый и строгий помощник.","Что просишь — то и ищу.","Понимаю кривую раскладку, настроение, уточнения и команды.","Команды: открой 1, похожее на 1, другое, сравни 1 и 2, сделай план, почему, ещё."].join("\n");
+    return["ГОЛУБЬ AI V336 — помощник 1000 LVL.","Ищет по компактной базе всего каталога, понимает настроение, жанры, годы и кривую раскладку.","Команды: открой 1, похожее на 1, другое, сравни 1 и 2, марафон, полный поиск, статус AI.","Настоящий AI включается через Cloudflare Worker; без Worker остаётся быстрый локальный режим."].join("\n");
   }
 
   async function similarTo(n){
@@ -12193,13 +12265,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(!endpoint) return "";
     try{
       const controller = new AbortController();
-      const timer = setTimeout(()=>controller.abort(), 2200);
+      const timer = setTimeout(()=>controller.abort(), 7000);
       const payload = {
         query: q,
         local_answer: localText,
-        site_version: "V316",
-        instruction: "Ответь по-русски, коротко, как умный помощник каталога. Не смешивай разделы. Объясни выбор простыми словами.",
-        last_results: lastResults.slice(0, 10).map((x,i)=>({
+        site_version: "V336",
+        requested_model: window.GKM_V336_AI_MODEL_DEFAULT,
+        instruction: "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов, чтобы команды открыть 1 и сравнить 1 и 2 работали.",
+        conversation: chatHistory.slice(-8),
+        memory: mem(),
+        last_results: lastResults.slice(0, 12).map((x,i)=>({
           n:i+1,
           title:title(x),
           type:type(x),
@@ -12225,9 +12300,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   async function answer(q){
-    const x=N(q);
-    if(!x)return"Напиши что ищем.";
-    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x))return"Привет. Я V316 REAL AI: быстрый ИИ-помощник. Что просишь — то и ищу.";
+    const raw=T(q),x=N(q);
+    if(!x)return"Напиши, что ищем.";
+    const ep=raw.match(/^endpoint\s*:\s*(https:\/\/\S+)/i);
+    if(ep){ localStorage.setItem("GKM_AI_ENDPOINT",ep[1]); return "AI endpoint сохранён. Проверка: напиши «статус AI»."; }
+    if(/сбросить endpoint|удалить endpoint|отключить ai/.test(x)){ localStorage.removeItem("GKM_AI_ENDPOINT"); return "AI endpoint удалён. Работаю в локальном режиме."; }
+    if(/очистить память|сбросить память/.test(x)){ localStorage.removeItem(MEM_KEY);localStorage.removeItem(HISTORY_KEY);chatHistory=[];return "Память помощника очищена."; }
+    if(/статус ai|статус помощника|какой ai/.test(x)){
+      const endpoint=window.GKM_AI_ENDPOINT||localStorage.getItem("GKM_AI_ENDPOINT")||"";
+      const counts=Object.fromEntries(Object.entries(fullPools).map(([k,v])=>[k,v.length]));
+      return `ГОЛУБЬ AI V336\nРежим: ${endpoint?"Cloudflare Worker + OpenAI":"локальный"}\nМодель по умолчанию Worker: ${window.GKM_V336_AI_MODEL_DEFAULT}\nЗагружено в память: ${JSON.stringify(counts)}\nEndpoint: ${endpoint||"не задан"}`;
+    }
+    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x))return"Привет. Я ГОЛУБЬ AI V336. Могу искать по всему каталогу, сравнивать, объяснять и открывать карточки.";
     if(x.includes("помощ")||x.includes("что умеешь")||x.includes("как искать"))return help();
     const op=x.match(/(?:открой|открыть|покажи)\s+(\d{1,2})/);if(op)return openResult(op[1]);
     const cmp=x.match(/сравни\s+(\d{1,2})\s+(?:и|с)\s+(\d{1,2})/);if(cmp)return compare(cmp[1],cmp[2]);
@@ -12252,7 +12336,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const box=document.getElementById("gkmAiMessages");
     if(box){
       const last=box.lastElementChild;
-      if(last&&last.classList.contains("ai-bot")&&last.textContent.includes("V316")){
+      if(last&&last.classList.contains("ai-bot")&&last.textContent.includes("V336")){
         last.innerHTML=E(text).replace(/\n/g,"<br>");box.scrollTop=box.scrollHeight;return true;
       }
     }
@@ -12265,18 +12349,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
     if(closeBtn&&dialog)closeBtn.onclick=()=>dialog.close?dialog.close():dialog.removeAttribute("open");
     if(!form||!input)return;
-    form.dataset.v260Installed="0";form.dataset.v300Installed="0";form.dataset.v301Installed="0";form.dataset.v302Installed="0";form.dataset.v303Installed="0";form.dataset.v304Installed="0";form.dataset.v305Installed="0";form.dataset.v307IsekaiInstalled="0";form.dataset.v308Installed="0";form.dataset.v309Installed="0";form.dataset.v310Installed="0";form.dataset.v311Installed="0";form.dataset.v312Installed="0";form.dataset.v316Installed="1";
+    form.dataset.v260Installed="0";form.dataset.v300Installed="0";form.dataset.v301Installed="0";form.dataset.v302Installed="0";form.dataset.v303Installed="0";form.dataset.v304Installed="0";form.dataset.v305Installed="0";form.dataset.v307IsekaiInstalled="0";form.dataset.v308Installed="0";form.dataset.v309Installed="0";form.dataset.v310Installed="0";form.dataset.v311Installed="0";form.dataset.v312Installed="0";form.dataset.v316Installed="0";form.dataset.v336Installed="1";
     form.onsubmit=async e=>{
       e.preventDefault();if(e.stopPropagation)e.stopPropagation();
       const q=input.value.trim();if(!q)return;input.value="";
       const seq=++requestSeq;
-      addMsg("user",q);addMsg("bot","V316 REAL AI думаю быстро...");
+      addMsg("user",q);addMsg("bot","ГОЛУБЬ AI V336 ищет по каталогу...");
       try{
         const out=await answer(q);
         if(seq!==requestSeq)return;
         if(!replaceLastBot(out))addMsg("bot",out);
       }catch(err){
-        console.warn("GKM V316 helper error",err);
+        console.warn("GKM V336 helper error",err);
         const msg="Помощник словил ошибку. Напиши проще: «фильмы вечер» или «анимэ попаданцы».";
         if(!replaceLastBot(msg))addMsg("bot",msg);
       }
@@ -12285,9 +12369,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
   setTimeout(install,100);setTimeout(install,450);setTimeout(install,900);
-  console.log("GKM V316: REAL AI bridge installed");
+  console.log("GKM V336: GOLUB AI 1000 LVL installed");
 })();
-/* GKM V316 REAL AI BRIDGE END */
+/* GKM V336 GOLUB AI 1000 LVL END */
 
 
 /* GKM V334 INSTANT LOD CANVAS POSTER MOSAIC START */
