@@ -12290,17 +12290,20 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V316 REAL AI BRIDGE END */
 
 
-/* GKM V333 FAST STREAMING CANVAS POSTER MOSAIC START */
+/* GKM V334 INSTANT LOD CANVAS POSTER MOSAIC START */
 (function(){
-  window.GKM_V333_FAST_STREAMING_CANVAS_POSTER_MOSAIC_VERSION = "v333-fast-streaming-canvas-poster-mosaic-chunked-index-2026-07-11";
+  window.GKM_V334_INSTANT_LOD_CANVAS_POSTER_MOSAIC_VERSION = "v334-instant-lod-canvas-poster-mosaic-fast-first-screen-2026-07-11";
 
   const DESKTOP_MIN_VISIBLE = 3000;
   const DESKTOP_MAX_VISIBLE = 5200;
   const MOBILE_MIN_VISIBLE = 700;
   const MOBILE_MAX_VISIBLE = 1500;
-  const DESKTOP_LOAD_CONCURRENCY = 32;
-  const MOBILE_LOAD_CONCURRENCY = 14;
-  const MAX_IMAGE_CACHE = 6200;
+  const DESKTOP_LOAD_CONCURRENCY = 64;
+  const MOBILE_LOAD_CONCURRENCY = 22;
+  const DESKTOP_MACRO_TARGET = 280;
+  const MOBILE_MACRO_TARGET = 110;
+  const FINE_LOAD_FALLBACK_MS = 520;
+  const MAX_IMAGE_CACHE = 7200;
   const WALL_DATA_BASE = "data/fast/poster_wall_v333";
   const WALL_DATA_VERSION = "333";
   const WALL_KINDS = ["movies","series","anime","cartoons"];
@@ -12345,9 +12348,17 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let viewportH = 0;
   let gridState = {rows:0, cols:0, stepX:0, stepY:0, tileW:0, tileH:0, used:0};
 
-  let loadQueue = [];
+  let highLoadQueue = [];
+  let normalLoadQueue = [];
   let activeLoads = 0;
   let loadedCount = 0;
+  let macroRecords = [];
+  let macroLoadedCount = 0;
+  let macroState = {rows:0,cols:0,stepX:0,stepY:0};
+  let fineLoadingStarted = false;
+  let fineLoadTimer = 0;
+  let firstImageAt = 0;
+  let buildStartedAt = 0;
   let dirtyDrawRaf = 0;
   let summaryTimer = 0;
   const dirtyRecords = new Set();
@@ -12407,6 +12418,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     try{ if(typeof posterSrc === "function") return t(posterSrc(it)); }catch(e){}
     return rawImageOf(it);
   }
+  function tinyImageOf(it){
+    if(it && it.__gkmTinyPoster) return t(it.__gkmTinyPoster);
+    const raw = normalImageOf(it) || rawImageOf(it);
+    return optimizedPosterUrl(raw,"w45");
+  }
   function backdropOf(it){
     return t(it && (it.backdrop || it.backdrop_url || it.backdropUrl || it.backdrop_path || it.banner || it.wide)) || normalImageOf(it);
   }
@@ -12438,6 +12454,28 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return [];
   }
 
+  function ensureConnectionHints(){
+    const hosts=["https://image.tmdb.org","https://cdn.myanimelist.net","https://images.weserv.nl"];
+    for(const href of hosts){
+      const key=href.replace(/[^a-z0-9]/gi,"");
+      if(!document.getElementById("gkmV334Preconnect"+key)){
+        const link=document.createElement("link");
+        link.id="gkmV334Preconnect"+key;
+        link.rel="preconnect";
+        link.href=href;
+        link.crossOrigin="anonymous";
+        document.head.appendChild(link);
+      }
+      if(!document.getElementById("gkmV334Dns"+key)){
+        const dns=document.createElement("link");
+        dns.id="gkmV334Dns"+key;
+        dns.rel="dns-prefetch";
+        dns.href=href;
+        document.head.appendChild(dns);
+      }
+    }
+  }
+
   async function loadManifest(){
     if(wallManifest) return wallManifest;
     if(!manifestPromise){
@@ -12453,16 +12491,20 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const raw=t(code);
     if(raw.startsWith("t:")){
       const path=raw.slice(2);
-      return {thumb:`https://image.tmdb.org/t/p/w92/${path}`,original:`https://image.tmdb.org/t/p/w342/${path}`};
+      return {
+        tiny:`https://image.tmdb.org/t/p/w45/${path}`,
+        thumb:`https://image.tmdb.org/t/p/w92/${path}`,
+        original:`https://image.tmdb.org/t/p/w342/${path}`
+      };
     }
     if(raw.startsWith("m:")){
       const path=raw.slice(2);
       const original=`https://cdn.myanimelist.net/${path}`;
       const thumb=original.replace(/l(\.(?:jpe?g|png|webp))$/i,"$1");
-      return {thumb,original};
+      return {tiny:thumb,thumb,original};
     }
     const original=raw.startsWith("u:")?raw.slice(2):raw;
-    return {thumb:optimizedPosterUrl(original),original};
+    return {tiny:optimizedPosterUrl(original,"w45"),thumb:optimizedPosterUrl(original,"w92"),original};
   }
 
   function expandCompactRow(row){
@@ -12475,7 +12517,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       rating:Number(row[5]||0),votes:Number(row[6]||0),poster:poster.original,
       genres:typeof row[8]==="string"?row[8].split("|").filter(Boolean):(row[8]||[]),
       source:row[9]||"",status:row[10]||"",
-      __gkmThumbPoster:poster.thumb,__gkmOriginalPoster:poster.original
+      __gkmTinyPoster:poster.tiny,__gkmThumbPoster:poster.thumb,__gkmOriginalPoster:poster.original
     };
   }
 
@@ -12619,36 +12661,36 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function removeOldUi(){
     const ids = [
-      "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn","gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn","gkmV327Btn","gkmV328Btn","gkmV329Btn","gkmV330Btn","gkmV331Btn","gkmV332Btn",
-      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay","gkmV327Overlay","gkmV328Overlay","gkmV329Overlay","gkmV330Overlay","gkmV331Overlay","gkmV332Overlay",
-      "gkmV325Preview","gkmV327Preview","gkmV328Preview","gkmV329Preview","gkmV330Preview","gkmV331Preview","gkmV332Preview"
+      "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn","gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn","gkmV327Btn","gkmV328Btn","gkmV329Btn","gkmV330Btn","gkmV331Btn","gkmV332Btn","gkmV333Btn",
+      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay","gkmV327Overlay","gkmV328Overlay","gkmV329Overlay","gkmV330Overlay","gkmV331Overlay","gkmV332Overlay","gkmV333Overlay",
+      "gkmV325Preview","gkmV327Preview","gkmV328Preview","gkmV329Preview","gkmV330Preview","gkmV331Preview","gkmV332Preview","gkmV333Preview"
     ];
     ids.forEach(id=>{ const el=document.getElementById(id); if(el) el.remove(); });
-    ["gkmV325Css","gkmV327Css","gkmV328Css","gkmV329Css","gkmV330Css","gkmV331Css","gkmV332Css"].forEach(id=>{ const el=document.getElementById(id); if(el) el.remove(); });
+    ["gkmV325Css","gkmV327Css","gkmV328Css","gkmV329Css","gkmV330Css","gkmV331Css","gkmV332Css","gkmV333Css"].forEach(id=>{ const el=document.getElementById(id); if(el) el.remove(); });
   }
 
   function ensureCss(){
-    if(document.getElementById("gkmV333Css")) return;
+    if(document.getElementById("gkmV334Css")) return;
     const st = document.createElement("style");
-    st.id = "gkmV333Css";
+    st.id = "gkmV334Css";
     st.textContent = `
-      #gkmV333Btn{position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)}
-      #gkmV333Overlay{position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;background:#02040b}
-      #gkmV333Overlay.open{display:block}
-      #gkmV333Scene{position:absolute;inset:0;z-index:2;overflow:hidden;cursor:crosshair;user-select:none;touch-action:none;background:radial-gradient(circle at 50% 48%,rgba(25,75,142,.17),transparent 38%),linear-gradient(110deg,#041522,#07102b 56%,#1f0e48)}
-      #gkmV333Stage{position:absolute;inset:0;overflow:hidden}
-      #gkmV333Base,#gkmV333Fx{position:absolute;inset:0;width:100%;height:100%;display:block}
-      #gkmV333Fx{pointer-events:none}
-      .gkmV333Top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:8px 12px 0;pointer-events:none}
-      .gkmV333Heading{max-width:min(650px,49vw);padding:7px 10px;border-radius:14px;background:linear-gradient(90deg,rgba(1,15,32,.88),rgba(1,15,32,.40),transparent);text-shadow:0 2px 14px rgba(0,0,0,.85)}
-      .gkmV333Title{font-size:21px;font-weight:950;line-height:1.04}.gkmV333Sub{font-size:11px;color:rgba(255,255,255,.78);margin-top:3px}
-      .gkmV333Actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}.gkmV333Actions button{border:1px solid rgba(0,220,255,.34);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));color:#fff;border-radius:13px;padding:9px 12px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)}.gkmV333Actions button:hover{filter:brightness(1.16)}.gkmV333Actions button.is-active{box-shadow:0 0 0 2px rgba(255,255,255,.22) inset,0 0 22px rgba(0,200,255,.32);filter:brightness(1.12)}
-      #gkmV333Preview{position:fixed;left:20px;top:96px;z-index:36;width:min(620px,35vw);min-height:292px;opacity:0;visibility:hidden;transform:translateY(10px) scale(.965);transition:opacity .14s ease,transform .17s ease,visibility .14s,left .10s ease,top .10s ease;border:1px solid rgba(73,207,255,.42);border-radius:22px;overflow:hidden;background:#071124;box-shadow:0 28px 100px rgba(0,0,0,.76),0 0 40px rgba(0,155,255,.22);pointer-events:none;backdrop-filter:blur(14px)}
-      #gkmV333Preview.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}#gkmV333Preview::before{content:"";position:absolute;inset:-18px;background-image:linear-gradient(90deg,rgba(3,8,20,.94),rgba(3,8,20,.82) 47%,rgba(3,8,20,.58)),var(--backdrop);background-size:cover;background-position:center;filter:blur(5px) saturate(1.08);transform:scale(1.06)}#gkmV333Preview::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,6,16,.80),rgba(1,6,16,.38) 58%,rgba(1,6,16,.58))}
-      .gkmV333PreviewInner{position:relative;z-index:2;display:grid;grid-template-columns:174px 1fr;gap:20px;min-height:292px;padding:20px}#gkmV333Preview img{width:174px;height:261px;object-fit:cover;border-radius:15px;box-shadow:0 18px 44px rgba(0,0,0,.66)}.gkmV333PreviewText{align-self:center;text-shadow:0 2px 10px rgba(0,0,0,.8)}.gkmV333PreviewText h3{margin:0 0 9px;font-size:31px;line-height:1.03}.gkmV333PreviewMeta{font-size:13px;color:rgba(255,255,255,.86);margin-bottom:8px}.gkmV333PreviewGenres{display:flex;gap:6px;flex-wrap:wrap;margin:7px 0 10px}.gkmV333PreviewGenres span{padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.13);font-size:10px}.gkmV333PreviewDesc{font-size:13px;color:rgba(255,255,255,.9);line-height:1.43;max-height:108px;overflow:hidden}.gkmV333PreviewHint{margin-top:11px;font-size:11px;color:rgba(98,224,255,.95);font-weight:800}
-      .gkmV333Info{position:absolute;left:14px;bottom:14px;z-index:28;max-width:min(620px,calc(100vw - 28px));background:rgba(2,10,24,.80);border:1px solid rgba(0,205,255,.22);border-radius:15px;padding:10px 13px;color:#fff;backdrop-filter:blur(10px);pointer-events:none;box-shadow:0 10px 32px rgba(0,0,0,.35)}.gkmV333Info b{display:block;font-size:15px;margin-bottom:3px}.gkmV333Info .meta{color:rgba(255,255,255,.72);font-size:11px}.gkmV333Hint{position:absolute;right:17px;bottom:15px;z-index:28;color:rgba(255,255,255,.62);font-size:11px;text-align:right;pointer-events:none;text-shadow:0 2px 8px #000}
-      @media(max-width:700px){#gkmV333Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}.gkmV333Top{padding:6px 7px 0}.gkmV333Heading{max-width:44vw;padding:6px 7px}.gkmV333Title{font-size:15px}.gkmV333Sub{display:none}.gkmV333Actions{gap:4px}.gkmV333Actions button{padding:7px 8px;font-size:10px;border-radius:10px}#gkmV333Preview{left:9px!important;top:auto!important;right:9px!important;bottom:72px!important;width:auto;min-height:218px;border-radius:17px}.gkmV333PreviewInner{grid-template-columns:96px 1fr;gap:11px;min-height:218px;padding:10px}#gkmV333Preview img{width:96px;height:144px;border-radius:10px}.gkmV333PreviewText h3{font-size:19px;margin-bottom:5px}.gkmV333PreviewMeta{font-size:10px;margin-bottom:3px}.gkmV333PreviewGenres{gap:4px;margin:4px 0}.gkmV333PreviewGenres span{font-size:8px;padding:3px 5px}.gkmV333PreviewDesc{font-size:10px;max-height:58px;line-height:1.3}.gkmV333PreviewHint{font-size:9px;margin-top:5px}.gkmV333Info{left:8px;right:8px;bottom:8px;max-width:none;padding:8px 10px}.gkmV333Hint{display:none}}
-      @media(prefers-reduced-motion:reduce){#gkmV333Preview{transition:none!important}}
+      #gkmV334Btn{position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)}
+      #gkmV334Overlay{position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;background:#02040b}
+      #gkmV334Overlay.open{display:block}
+      #gkmV334Scene{position:absolute;inset:0;z-index:2;overflow:hidden;cursor:crosshair;user-select:none;touch-action:none;background:radial-gradient(circle at 50% 48%,rgba(25,75,142,.17),transparent 38%),linear-gradient(110deg,#041522,#07102b 56%,#1f0e48)}
+      #gkmV334Stage{position:absolute;inset:0;overflow:hidden}
+      #gkmV334Base,#gkmV334Fx{position:absolute;inset:0;width:100%;height:100%;display:block}
+      #gkmV334Fx{pointer-events:none}
+      .gkmV334Top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:8px 12px 0;pointer-events:none}
+      .gkmV334Heading{max-width:min(650px,49vw);padding:7px 10px;border-radius:14px;background:linear-gradient(90deg,rgba(1,15,32,.88),rgba(1,15,32,.40),transparent);text-shadow:0 2px 14px rgba(0,0,0,.85)}
+      .gkmV334Title{font-size:21px;font-weight:950;line-height:1.04}.gkmV334Sub{font-size:11px;color:rgba(255,255,255,.78);margin-top:3px}
+      .gkmV334Actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}.gkmV334Actions button{border:1px solid rgba(0,220,255,.34);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));color:#fff;border-radius:13px;padding:9px 12px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)}.gkmV334Actions button:hover{filter:brightness(1.16)}.gkmV334Actions button.is-active{box-shadow:0 0 0 2px rgba(255,255,255,.22) inset,0 0 22px rgba(0,200,255,.32);filter:brightness(1.12)}
+      #gkmV334Preview{position:fixed;left:20px;top:96px;z-index:36;width:min(620px,35vw);min-height:292px;opacity:0;visibility:hidden;transform:translateY(10px) scale(.965);transition:opacity .14s ease,transform .17s ease,visibility .14s,left .10s ease,top .10s ease;border:1px solid rgba(73,207,255,.42);border-radius:22px;overflow:hidden;background:#071124;box-shadow:0 28px 100px rgba(0,0,0,.76),0 0 40px rgba(0,155,255,.22);pointer-events:none;backdrop-filter:blur(14px)}
+      #gkmV334Preview.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}#gkmV334Preview::before{content:"";position:absolute;inset:-18px;background-image:linear-gradient(90deg,rgba(3,8,20,.94),rgba(3,8,20,.82) 47%,rgba(3,8,20,.58)),var(--backdrop);background-size:cover;background-position:center;filter:blur(5px) saturate(1.08);transform:scale(1.06)}#gkmV334Preview::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,6,16,.80),rgba(1,6,16,.38) 58%,rgba(1,6,16,.58))}
+      .gkmV334PreviewInner{position:relative;z-index:2;display:grid;grid-template-columns:174px 1fr;gap:20px;min-height:292px;padding:20px}#gkmV334Preview img{width:174px;height:261px;object-fit:cover;border-radius:15px;box-shadow:0 18px 44px rgba(0,0,0,.66)}.gkmV334PreviewText{align-self:center;text-shadow:0 2px 10px rgba(0,0,0,.8)}.gkmV334PreviewText h3{margin:0 0 9px;font-size:31px;line-height:1.03}.gkmV334PreviewMeta{font-size:13px;color:rgba(255,255,255,.86);margin-bottom:8px}.gkmV334PreviewGenres{display:flex;gap:6px;flex-wrap:wrap;margin:7px 0 10px}.gkmV334PreviewGenres span{padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.13);font-size:10px}.gkmV334PreviewDesc{font-size:13px;color:rgba(255,255,255,.9);line-height:1.43;max-height:108px;overflow:hidden}.gkmV334PreviewHint{margin-top:11px;font-size:11px;color:rgba(98,224,255,.95);font-weight:800}
+      .gkmV334Info{position:absolute;left:14px;bottom:14px;z-index:28;max-width:min(620px,calc(100vw - 28px));background:rgba(2,10,24,.80);border:1px solid rgba(0,205,255,.22);border-radius:15px;padding:10px 13px;color:#fff;backdrop-filter:blur(10px);pointer-events:none;box-shadow:0 10px 32px rgba(0,0,0,.35)}.gkmV334Info b{display:block;font-size:15px;margin-bottom:3px}.gkmV334Info .meta{color:rgba(255,255,255,.72);font-size:11px}.gkmV334Hint{position:absolute;right:17px;bottom:15px;z-index:28;color:rgba(255,255,255,.62);font-size:11px;text-align:right;pointer-events:none;text-shadow:0 2px 8px #000}
+      @media(max-width:700px){#gkmV334Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}.gkmV334Top{padding:6px 7px 0}.gkmV334Heading{max-width:44vw;padding:6px 7px}.gkmV334Title{font-size:15px}.gkmV334Sub{display:none}.gkmV334Actions{gap:4px}.gkmV334Actions button{padding:7px 8px;font-size:10px;border-radius:10px}#gkmV334Preview{left:9px!important;top:auto!important;right:9px!important;bottom:72px!important;width:auto;min-height:218px;border-radius:17px}.gkmV334PreviewInner{grid-template-columns:96px 1fr;gap:11px;min-height:218px;padding:10px}#gkmV334Preview img{width:96px;height:144px;border-radius:10px}.gkmV334PreviewText h3{font-size:19px;margin-bottom:5px}.gkmV334PreviewMeta{font-size:10px;margin-bottom:3px}.gkmV334PreviewGenres{gap:4px;margin:4px 0}.gkmV334PreviewGenres span{font-size:8px;padding:3px 5px}.gkmV334PreviewDesc{font-size:10px;max-height:58px;line-height:1.3}.gkmV334PreviewHint{font-size:9px;margin-top:5px}.gkmV334Info{left:8px;right:8px;bottom:8px;max-width:none;padding:8px 10px}.gkmV334Hint{display:none}}
+      @media(prefers-reduced-motion:reduce){#gkmV334Preview{transition:none!important}}
     `;
     document.head.appendChild(st);
   }
@@ -12656,9 +12698,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function ensureUi(){
     removeOldUi();
     ensureCss();
-    if(!document.getElementById("gkmV333Btn")){
+    if(!document.getElementById("gkmV334Btn")){
       const btn = document.createElement("button");
-      btn.id = "gkmV333Btn";
+      btn.id = "gkmV334Btn";
       btn.type = "button";
       btn.textContent = "🌌 3D стена";
       btn.onclick = ()=>openWall("all");
@@ -12666,26 +12708,26 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       btn.addEventListener("focus",warmupData,{once:true});
       document.body.appendChild(btn);
     }
-    if(document.getElementById("gkmV333Overlay")) return;
+    if(document.getElementById("gkmV334Overlay")) return;
     const overlay = document.createElement("div");
-    overlay.id = "gkmV333Overlay";
+    overlay.id = "gkmV334Overlay";
     overlay.innerHTML = `
-      <div class="gkmV333Top">
-        <div class="gkmV333Heading"><div class="gkmV333Title">🌌 Быстрая Canvas-мозаика V333</div><div class="gkmV333Sub">Быстрый старт из компактных пакетов: экран заполняется равномерно, полный каталог догружается в фоне.</div></div>
-        <div class="gkmV333Actions">
+      <div class="gkmV334Top">
+        <div class="gkmV334Heading"><div class="gkmV334Title">🌌 Мгновенная Canvas-мозаика V334</div><div class="gkmV334Sub">Двухэтапная загрузка: сначала крупная настоящая мозаика заполняет весь экран, затем незаметно уточняется до нескольких тысяч постеров.</div></div>
+        <div class="gkmV334Actions">
           <button data-kind="all">Все</button><button data-kind="movies">Фильмы</button><button data-kind="series">Сериалы</button><button data-kind="anime">Аниме</button><button data-kind="cartoons">Мульты</button>
-          <button id="gkmV333MixBtn">⏭ Другой набор</button><button id="gkmV333CloseBtn">✕</button>
+          <button id="gkmV334MixBtn">⏭ Другой набор</button><button id="gkmV334CloseBtn">✕</button>
         </div>
       </div>
-      <div id="gkmV333Scene"><div id="gkmV333Stage"><canvas id="gkmV333Base"></canvas><canvas id="gkmV333Fx"></canvas></div></div>
-      <div id="gkmV333Preview"></div>
-      <div class="gkmV333Info"><b>Загрузка каталога...</b><div class="meta">Загружаю быстрый пакет постеров.</div></div>
-      <div class="gkmV333Hint">быстрая потоковая загрузка постеров<br>наведение — линза и карточка<br>клик — открыть полную карточку</div>
+      <div id="gkmV334Scene"><div id="gkmV334Stage"><canvas id="gkmV334Base"></canvas><canvas id="gkmV334Fx"></canvas></div></div>
+      <div id="gkmV334Preview"></div>
+      <div class="gkmV334Info"><b>Загрузка каталога...</b><div class="meta">Загружаю быстрый пакет постеров.</div></div>
+      <div class="gkmV334Hint">быстрый первый экран → затем полная детализация<br>наведение — линза и карточка<br>клик — открыть полную карточку</div>
     `;
     document.body.appendChild(overlay);
 
-    baseCanvas = document.getElementById("gkmV333Base");
-    fxCanvas = document.getElementById("gkmV333Fx");
+    baseCanvas = document.getElementById("gkmV334Base");
+    fxCanvas = document.getElementById("gkmV334Fx");
     baseCtx = baseCanvas.getContext("2d", {alpha:false,desynchronized:true});
     fxCtx = fxCanvas.getContext("2d", {alpha:true,desynchronized:true});
 
@@ -12696,10 +12738,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         syncKindButtons();
       };
     });
-    document.getElementById("gkmV333MixBtn").onclick = ()=>buildWall(false);
-    document.getElementById("gkmV333CloseBtn").onclick = ()=>closeWall();
+    document.getElementById("gkmV334MixBtn").onclick = ()=>buildWall(false);
+    document.getElementById("gkmV334CloseBtn").onclick = ()=>closeWall();
 
-    const scene = document.getElementById("gkmV333Scene");
+    const scene = document.getElementById("gkmV334Scene");
     scene.addEventListener("pointermove", e=>{
       pendingPointer = {x:e.clientX,y:e.clientY};
       if(!pointerRaf){
@@ -12721,7 +12763,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function syncKindButtons(){
-    document.querySelectorAll("#gkmV333Overlay [data-kind]").forEach(btn=>btn.classList.toggle("is-active",btn.dataset.kind===currentKind));
+    document.querySelectorAll("#gkmV334Overlay [data-kind]").forEach(btn=>btn.classList.toggle("is-active",btn.dataset.kind===currentKind));
   }
 
   function resizeCanvas(){
@@ -12781,13 +12823,28 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function drawBaseRecord(rec){
     if(!isOpen||rec.token!==buildToken) return;
     if(!drawCover(baseCtx,rec.img,rec.x,rec.y,rec.w,rec.h)) drawPlaceholder(baseCtx,rec);
+    if(rec.isMacro&&fineLoadingStarted){
+      const minCol=clamp(Math.floor(rec.x/gridState.stepX),0,gridState.cols-1);
+      const maxCol=clamp(Math.ceil((rec.x+rec.w)/gridState.stepX),0,gridState.cols-1);
+      const minRow=clamp(Math.floor(rec.y/gridState.stepY),0,gridState.rows-1);
+      const maxRow=clamp(Math.ceil((rec.y+rec.h)/gridState.stepY),0,gridState.rows-1);
+      for(let row=minRow;row<=maxRow;row++){
+        for(let col=minCol;col<=maxCol;col++){
+          const fine=records[row*gridState.cols+col];
+          if(fine&&fine.loaded) drawCover(baseCtx,fine.img,fine.x,fine.y,fine.w,fine.h);
+        }
+      }
+    }
   }
 
   function flushDirtyDraws(){
     dirtyDrawRaf=0;
     const list=[...dirtyRecords];
     dirtyRecords.clear();
-    for(const rec of list) drawBaseRecord(rec);
+    const macros=list.filter(r=>r.isMacro);
+    const fine=list.filter(r=>!r.isMacro);
+    for(const rec of macros) drawBaseRecord(rec);
+    for(const rec of fine) drawBaseRecord(rec);
   }
 
   function scheduleBaseDraw(rec){
@@ -12797,23 +12854,26 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function scheduleSummaryUpdate(){
     if(summaryTimer) return;
-    summaryTimer=setTimeout(()=>{summaryTimer=0;updateSummary();},180);
+    summaryTimer=setTimeout(()=>{summaryTimer=0;updateSummary();},260);
   }
 
   function drawBase(){
     baseCtx.clearRect(0,0,viewportW,viewportH);
-    baseCtx.fillStyle = "#030712";
+    baseCtx.fillStyle="#030712";
     baseCtx.fillRect(0,0,viewportW,viewportH);
-    records.forEach(drawBaseRecord);
+    for(const rec of records) drawPlaceholder(baseCtx,rec);
+    for(const rec of macroRecords) if(rec.loaded) drawBaseRecord(rec);
+    for(const rec of records) if(rec.loaded) drawBaseRecord(rec);
   }
 
-  function optimizedPosterUrl(raw){
+  function optimizedPosterUrl(raw,size="w45"){
     const s=t(raw);
     if(!s||s.startsWith("data:")||s.startsWith("blob:")) return s;
     try{
       const u=new URL(s,location.href);
       if(u.hostname.includes("image.tmdb.org")){
-        u.pathname=u.pathname.replace(/\/t\/p\/(?:w\d+|original)\//,"/t/p/w92/");
+        const wanted=size==="w92"?"w92":"w45";
+        u.pathname=u.pathname.replace(/\/t\/p\/(?:w\d+|original)\//,`/t/p/${wanted}/`);
         return u.href;
       }
       if(u.hostname.includes("cdn.myanimelist.net")){
@@ -12832,16 +12892,100 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const u=new URL(s,location.href);
       if(u.hostname===location.hostname || u.hostname.includes("images.weserv.nl")) return "";
       const clean=u.href.replace(/^https?:\/\//i,"");
-      return "https://images.weserv.nl/?url="+encodeURIComponent(clean)+"&w=104&h=156&fit=cover&output=webp&q=68";
+      return "https://images.weserv.nl/?url="+encodeURIComponent(clean)+"&w=52&h=78&fit=cover&output=webp&q=58";
     }catch(e){ return ""; }
   }
 
-  function posterCandidates(it){
-    const thumb=normalImageOf(it)||rawImageOf(it);
-    const original=rawImageOf(it)||thumb;
-    const list=[optimizedPosterUrl(thumb),thumb,optimizedPosterUrl(original),original,tinyProxyUrl(original),generatedImageOf(it)];
+  function posterCandidates(it,mode="fine"){
+    const tiny=tinyImageOf(it)||normalImageOf(it)||rawImageOf(it);
+    const thumb=normalImageOf(it)||tiny||rawImageOf(it);
+    const original=rawImageOf(it)||thumb||tiny;
+    const list=mode==="macro"
+      ? [optimizedPosterUrl(thumb,"w92"),thumb,optimizedPosterUrl(original,"w92"),original,tinyProxyUrl(original),generatedImageOf(it)]
+      : [optimizedPosterUrl(tiny,"w45"),tiny,optimizedPosterUrl(thumb,"w45"),thumb,tinyProxyUrl(original),generatedImageOf(it)];
     const seen=new Set();
     return list.filter(v=>{const s=t(v);if(!s||seen.has(s))return false;seen.add(s);return true;});
+  }
+
+  function cachedImageForRecord(rec){
+    const mode=rec&&rec.isMacro?"macro":"fine";
+    for(const url of posterCandidates(rec.item,mode)){
+      const entry=imageCache.get(url);
+      if(entry&&entry.state==="loaded"&&entry.img){entry.used=Date.now();return entry.img;}
+    }
+    return null;
+  }
+
+  function hydrateRecordFromMemory(rec){
+    if(!rec||rec.loaded) return false;
+    const img=cachedImageForRecord(rec);
+    if(!img) return false;
+    rec.img=img;rec.loaded=true;
+    if(rec.isMacro){
+      macroLoadedCount++;
+      if(rec.sourceRec&&!rec.sourceRec.loaded){rec.sourceRec.img=img;rec.sourceRec.loaded=true;loadedCount++;}
+    }else loadedCount++;
+    return true;
+  }
+
+  function buildMacroRecords(){
+    const mobile=window.innerWidth<700;
+    const target=mobile?MOBILE_MACRO_TARGET:DESKTOP_MACRO_TARGET;
+    const tileAspect=.67;
+    const ratio=(viewportW/Math.max(1,viewportH))/tileAspect;
+    let rows=Math.max(6,Math.round(Math.sqrt(target/Math.max(.25,ratio))));
+    let cols=Math.max(10,Math.ceil(target/rows));
+    while(rows*cols<target) cols++;
+    const stepX=viewportW/cols,stepY=viewportH/rows;
+    macroState={rows,cols,stepX,stepY};
+    const list=[];
+    for(let row=0;row<rows;row++){
+      for(let col=0;col<cols;col++){
+        const fineRow=clamp(Math.floor((row+.5)*gridState.rows/rows),0,gridState.rows-1);
+        const fineCol=clamp(Math.floor((col+.5)*gridState.cols/cols),0,gridState.cols-1);
+        const source=records[fineRow*gridState.cols+fineCol];
+        if(!source) continue;
+        list.push({
+          item:source.item,sourceRec:source,isMacro:true,row:fineRow,col:fineCol,
+          macroRow:row,macroCol:col,x:col*stepX,y:row*stepY,w:stepX+1,h:stepY+1,
+          img:null,loaded:false,loading:false,queued:false,failed:false,priority:true,
+          color:source.color,token:buildToken
+        });
+      }
+    }
+    return list;
+  }
+
+  function macroLoadOrder(){
+    return macroRecords.slice().sort((a,b)=>{
+      const pa=BAYER4[a.macroRow&3][a.macroCol&3],pb=BAYER4[b.macroRow&3][b.macroCol&3];
+      if(pa!==pb) return pa-pb;
+      const ax=a.x+a.w*.5-viewportW*.5,ay=a.y+a.h*.5-viewportH*.5;
+      const bx=b.x+b.w*.5-viewportW*.5,by=b.y+b.h*.5-viewportH*.5;
+      return ax*ax+ay*ay-(bx*bx+by*by);
+    });
+  }
+
+  function fineLoadOrder(){
+    return records.slice().sort((a,b)=>{
+      const pa=BAYER4[a.row&3][a.col&3],pb=BAYER4[b.row&3][b.col&3];
+      if(pa!==pb) return pa-pb;
+      const ax=a.x+a.w*.5-viewportW*.5,ay=a.y+a.h*.5-viewportH*.5;
+      const bx=b.x+b.w*.5-viewportW*.5,by=b.y+b.h*.5-viewportH*.5;
+      return ax*ax+ay*ay-(bx*bx+by*by);
+    });
+  }
+
+  function maybeStartFineLoading(force=false){
+    if(fineLoadingStarted||!isOpen) return;
+    const threshold=Math.min(macroRecords.length,Math.max(36,Math.ceil(macroRecords.length*.20)));
+    if(!force&&macroLoadedCount<threshold) return;
+    fineLoadingStarted=true;
+    if(fineLoadTimer){clearTimeout(fineLoadTimer);fineLoadTimer=0;}
+    const ordered=fineLoadOrder();
+    ordered.slice(0,Math.min(520,ordered.length)).forEach(rec=>rec.priority=true);
+    enqueueRecords(ordered,false);
+    updateSummary();
   }
 
   function cacheImage(url,priority="auto"){
@@ -12849,17 +12993,22 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(cached){
       cached.used=Date.now();
       if(cached.state==="loaded") return Promise.resolve(cached.img);
-      if(cached.state==="failed") return Promise.reject(new Error("cached fail"));
-      return cached.promise;
+      if(cached.state==="failed"&&Date.now()-(cached.failedAt||0)<20000) return Promise.reject(new Error("cached fail"));
+      if(cached.state==="loading") return cached.promise;
+      imageCache.delete(url);
     }
-    const entry={state:"loading",img:null,used:Date.now(),promise:null};
+    const entry={state:"loading",img:null,used:Date.now(),failedAt:0,promise:null};
     entry.promise=new Promise((resolve,reject)=>{
       const img=new Image();
       img.decoding="async";
       img.referrerPolicy="no-referrer";
       try{ img.fetchPriority=priority; }catch(e){}
-      img.onload=()=>{entry.state="loaded";entry.img=img;entry.used=Date.now();resolve(img);};
-      img.onerror=()=>{entry.state="failed";entry.used=Date.now();reject(new Error("image load failed"));};
+      img.onload=()=>{
+        entry.state="loaded";entry.img=img;entry.used=Date.now();
+        if(!firstImageAt) firstImageAt=performance.now();
+        resolve(img);
+      };
+      img.onerror=()=>{entry.state="failed";entry.failedAt=Date.now();entry.used=Date.now();reject(new Error("image load failed"));};
       img.src=url;
     });
     imageCache.set(url,entry);
@@ -12875,15 +13024,26 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   async function loadRecordImage(rec){
     if(rec.token!==buildToken) return;
-    const candidates=posterCandidates(rec.item);
+    const mode=rec.isMacro?"macro":"fine";
+    const candidates=posterCandidates(rec.item,mode);
     for(const url of candidates){
       try{
         const img=await cacheImage(url,rec.priority?"high":"auto");
         if(rec.token!==buildToken) return;
         rec.img=img;
         rec.loaded=true;
-        loadedCount++;
-        scheduleBaseDraw(rec);
+        if(rec.isMacro){
+          macroLoadedCount++;
+          if(rec.sourceRec&&!rec.sourceRec.loaded){
+            rec.sourceRec.img=img;rec.sourceRec.loaded=true;loadedCount++;
+            scheduleBaseDraw(rec.sourceRec);
+          }
+          scheduleBaseDraw(rec);
+          maybeStartFineLoading(false);
+        }else{
+          loadedCount++;
+          scheduleBaseDraw(rec);
+        }
         if(activeRecord===rec&&pendingPointer) renderLens(pendingPointer.x,pendingPointer.y);
         scheduleSummaryUpdate();
         trimImageCache();
@@ -12891,32 +13051,39 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       }catch(e){}
     }
     rec.failed=true;
+    if(rec.isMacro) maybeStartFineLoading(false);
   }
 
   function enqueueRecords(list,priority=false){
+    const targetQueue=priority?highLoadQueue:normalLoadQueue;
     for(const rec of list){
       if(!rec||rec.loaded||rec.loading||rec.token!==buildToken) continue;
       if(priority) rec.priority=true;
       if(rec.queued){
         if(priority){
-          const idx=loadQueue.indexOf(rec);
-          if(idx>0){loadQueue.splice(idx,1);loadQueue.unshift(rec);}
+          let idx=normalLoadQueue.indexOf(rec);
+          if(idx>=0){normalLoadQueue.splice(idx,1);highLoadQueue.push(rec);}
         }
         continue;
       }
       rec.queued=true;
-      if(priority) loadQueue.unshift(rec); else loadQueue.push(rec);
+      targetQueue.push(rec);
     }
     pumpQueue();
   }
 
   function pumpQueue(){
     const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
-    const slow=connection&&/2g|slow-2g/.test(connection.effectiveType||"");
-    const base=window.innerWidth<700?MOBILE_LOAD_CONCURRENCY:DESKTOP_LOAD_CONCURRENCY;
+    const effective=connection&&connection.effectiveType||"";
+    const saveData=Boolean(connection&&connection.saveData);
+    const slow=saveData||/2g|slow-2g/.test(effective);
+    const cores=Math.max(4,Number(navigator.hardwareConcurrency||8));
+    const desktopAdaptive=clamp(cores*5,42,DESKTOP_LOAD_CONCURRENCY);
+    const mobileAdaptive=clamp(cores*2,12,MOBILE_LOAD_CONCURRENCY);
+    const base=window.innerWidth<700?mobileAdaptive:desktopAdaptive;
     const limit=slow?Math.min(base,8):base;
-    while(activeLoads<limit&&loadQueue.length){
-      const rec=loadQueue.shift();
+    while(activeLoads<limit&&(highLoadQueue.length||normalLoadQueue.length)){
+      const rec=highLoadQueue.length?highLoadQueue.shift():normalLoadQueue.shift();
       if(!rec||rec.token!==buildToken){if(rec)rec.queued=false;continue;}
       rec.queued=false;rec.loading=true;activeLoads++;
       loadRecordImage(rec).finally(()=>{rec.loading=false;activeLoads--;pumpQueue();});
@@ -12924,14 +13091,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function updateSummary(){
-    const box=document.querySelector(".gkmV333Info");
+    const box=document.querySelector(".gkmV334Info");
     if(!box) return;
     const total=totalCatalogCount||currentPool.length;
-    box.innerHTML=`<b>${esc(kindLabel(currentKind))} — ${gridState.used} постеров на Canvas</b><div class="meta">Загружено: ${loadedCount}/${gridState.used}. Быстрый пул: ${currentPool.length}. Весь каталог: ${total}. Компактные пакеты и мини-постеры загружаются в фоне.</div>`;
+    const phase=fineLoadingStarted?"точная сетка":"быстрый первый экран";
+    const elapsed=buildStartedAt?Math.max(0,performance.now()-buildStartedAt):0;
+    box.innerHTML=`<b>${esc(kindLabel(currentKind))} — ${gridState.used} постеров на Canvas</b><div class="meta">Этап: ${phase}. Быстрых блоков: ${macroLoadedCount}/${macroRecords.length}. Точных постеров: ${loadedCount}/${gridState.used}. Каталог: ${total}.${elapsed?" Запуск: "+Math.round(elapsed)+" мс.":""}</div>`;
   }
 
   function setInfo(it){
-    const box=document.querySelector(".gkmV333Info");
+    const box=document.querySelector(".gkmV334Info");
     if(!box||!it) return;
     const r=ratingOf(it);
     box.innerHTML=`<b>${esc(titleOf(it))}</b><div class="meta">${esc(typeOf(it))}${yearOf(it)?" · "+esc(yearOf(it)):""}${r?" · ★ "+r.toFixed(1):""} · Canvas-мозаика</div>`;
@@ -12949,15 +13118,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function showPreview(rec,x,y){
-    const prev=document.getElementById("gkmV333Preview");
+    const prev=document.getElementById("gkmV334Preview");
     if(!prev||!rec) return;
     if(lastPreviewRecord!==rec){
       const it=rec.item,r=ratingOf(it),genres=genresOf(it).slice(0,5);
       const previewSrc=rawImageOf(it)||normalImageOf(it)||generatedImageOf(it);
       const original=rawImageOf(it)||previewSrc;
       prev.style.setProperty("--backdrop",`url("${String(backdropOf(it)||previewSrc).replace(/"/g,"%22")}")`);
-      prev.innerHTML=`<div class="gkmV333PreviewInner"><img id="gkmV333PreviewImg" src="${esc(previewSrc)}" data-original-src="${esc(original)}" alt="${esc(titleOf(it))}"><div class="gkmV333PreviewText"><h3>${esc(titleOf(it))}</h3><div class="gkmV333PreviewMeta">${esc(typeOf(it))}${yearOf(it)?" · "+esc(yearOf(it)):""}${r?" · ★ "+r.toFixed(1):""}</div><div class="gkmV333PreviewGenres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div><div class="gkmV333PreviewDesc">${esc(overviewOf(it))}</div><div class="gkmV333PreviewHint">Клик — открыть полную карточку</div></div></div>`;
-      const pi=document.getElementById("gkmV333PreviewImg");
+      prev.innerHTML=`<div class="gkmV334PreviewInner"><img id="gkmV334PreviewImg" src="${esc(previewSrc)}" data-original-src="${esc(original)}" alt="${esc(titleOf(it))}"><div class="gkmV334PreviewText"><h3>${esc(titleOf(it))}</h3><div class="gkmV334PreviewMeta">${esc(typeOf(it))}${yearOf(it)?" · "+esc(yearOf(it)):""}${r?" · ★ "+r.toFixed(1):""}</div><div class="gkmV334PreviewGenres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div><div class="gkmV334PreviewDesc">${esc(overviewOf(it))}</div><div class="gkmV334PreviewHint">Клик — открыть полную карточку</div></div></div>`;
+      const pi=document.getElementById("gkmV334PreviewImg");
       if(pi) pi.addEventListener("error",()=>{try{if(typeof recoverPosterImage==="function")recoverPosterImage(pi);else pi.src=generatedImageOf(it);}catch(e){pi.src=generatedImageOf(it);}},{once:true});
       lastPreviewRecord=rec;
       setInfo(rec.item);
@@ -12967,7 +13136,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function hidePreview(){
-    const prev=document.getElementById("gkmV333Preview");
+    const prev=document.getElementById("gkmV334Preview");
     if(prev) prev.classList.remove("open");
     lastPreviewRecord=null;
   }
@@ -12976,7 +13145,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(!gridState.rows||!gridState.cols) return null;
     const col=clamp(Math.floor(x/gridState.stepX),0,gridState.cols-1);
     const row=clamp(Math.floor(y/gridState.stepY),0,gridState.rows-1);
-    return records[row*gridState.cols+col]||null;
+    const fine=records[row*gridState.cols+col]||null;
+    if(fine&&fine.loaded) return fine;
+    if(macroState.rows&&macroState.cols){
+      const mc=clamp(Math.floor(x/macroState.stepX),0,macroState.cols-1);
+      const mr=clamp(Math.floor(y/macroState.stepY),0,macroState.rows-1);
+      const macro=macroRecords[mr*macroState.cols+mc]||null;
+      if(macro&&macro.loaded) return macro;
+    }
+    return fine;
   }
 
   function renderRecordOnFx(rec,x,y,w,h,alpha=1){
@@ -13054,14 +13231,21 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     ensureUi();
     buildToken++;
     const token=buildToken;
-    loadQueue=[];
+    highLoadQueue=[];
+    normalLoadQueue=[];
     dirtyRecords.clear();
     loadedCount=0;
+    macroLoadedCount=0;
+    macroRecords=[];
+    fineLoadingStarted=false;
+    firstImageAt=0;
+    buildStartedAt=performance.now();
+    if(fineLoadTimer){clearTimeout(fineLoadTimer);fineLoadTimer=0;}
     activeRecord=null;
     lastPreviewRecord=null;
     resetLens();
-    const box=document.querySelector(".gkmV333Info");
-    if(box) box.innerHTML=`<b>Быстрый запуск ${esc(kindLabel(currentKind))}...</b><div class="meta">Загружаю компактный пакет вместо 58-МБ поискового индекса.</div>`;
+    const box=document.querySelector(".gkmV334Info");
+    if(box) box.innerHTML=`<b>Мгновенный запуск ${esc(kindLabel(currentKind))}...</b><div class="meta">Сначала заполняю экран несколькими сотнями настоящих постеров, затем уточняю до полной мозаики.</div>`;
     const target=visibleTarget();
     currentPool=await getKindPool(currentKind);
     if(token!==buildToken) return;
@@ -13080,24 +13264,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const y=row*stepY-(gridH-viewportH)*.5;
       return {item,row,col,x,y,w:tileW,h:tileH,img:null,loaded:false,loading:false,queued:false,failed:false,priority:false,color:hashColor(item),token};
     });
+    macroRecords=buildMacroRecords();
+
+    // Повторное открытие и уже просмотренные наборы рисуются из памяти сразу.
+    for(const rec of macroRecords) hydrateRecordFromMemory(rec);
+    for(const rec of records) hydrateRecordFromMemory(rec);
     drawBase();
     updateSummary();
-    const ordered=records.slice().sort((a,b)=>{
-      const pa=BAYER4[a.row&3][a.col&3],pb=BAYER4[b.row&3][b.col&3];
-      if(pa!==pb) return pa-pb;
-      const acx=a.x+a.w*.5-viewportW*.5,acy=a.y+a.h*.5-viewportH*.5;
-      const bcx=b.x+b.w*.5-viewportW*.5,bcy=b.y+b.h*.5-viewportH*.5;
-      return acx*acx+acy*acy-(bcx*bcx+bcy*bcy);
-    });
-    ordered.slice(0,Math.min(320,ordered.length)).forEach(rec=>rec.priority=true);
-    enqueueRecords(ordered,false);
+
+    // Сначала несколько сотен крупных реальных постеров равномерно закрывают экран.
+    enqueueRecords(macroLoadOrder(),true);
+    fineLoadTimer=setTimeout(()=>maybeStartFineLoading(true),FINE_LOAD_FALLBACK_MS);
+    if(macroLoadedCount>=Math.min(macroRecords.length,Math.max(36,Math.ceil(macroRecords.length*.20)))) maybeStartFineLoading(false);
     syncKindButtons();
     scheduleBackgroundCatalog();
   }
 
   async function openWall(kind="all"){
     ensureUi();
-    const overlay=document.getElementById("gkmV333Overlay");
+    const overlay=document.getElementById("gkmV334Overlay");
     if(!overlay) return;
     currentKind=kind||"all";
     overlay.classList.add("open");
@@ -13107,18 +13292,20 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function closeWall(full=true){
-    const overlay=document.getElementById("gkmV333Overlay");
+    const overlay=document.getElementById("gkmV334Overlay");
     if(overlay) overlay.classList.remove("open");
     document.body.style.overflow="";
     isOpen=false;
     buildToken++;
-    loadQueue=[];
+    highLoadQueue=[];
+    normalLoadQueue=[];
     dirtyRecords.clear();
+    if(fineLoadTimer){clearTimeout(fineLoadTimer);fineLoadTimer=0;}
     if(dirtyDrawRaf){cancelAnimationFrame(dirtyDrawRaf);dirtyDrawRaf=0;}
     pendingPointer=null;
     pointerDown=null;
     resetLens();
-    if(full){records=[];visibleItems=[];}
+    if(full){records=[];macroRecords=[];visibleItems=[];}
   }
 
   function onResize(){
@@ -13127,8 +13314,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function install(){
+    ensureConnectionHints();
     ensureUi();
-    setTimeout(warmupData,1600);
+    setTimeout(warmupData,60);
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",install,{once:true}); else install();
   window.addEventListener("resize",onResize);
@@ -13136,14 +13324,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&isOpen) closeWall(); });
   setTimeout(install,500);setTimeout(install,1400);
 
-  window.GKM_V333_DEBUG={
-    getState:()=>({isOpen,currentKind,totalCatalogCount,poolSize:currentPool.length,allLoadedPool:allPool.length,visibleCount:gridState.used,loadedCount,rows:gridState.rows,cols:gridState.cols,activeLoads,queuedLoads:loadQueue.length,canvasDpr,canvasCount:document.querySelectorAll("#gkmV333Overlay canvas").length,posterDomNodes:document.querySelectorAll("#gkmV333Overlay .gkmV333Tile,#gkmV333Overlay img:not(#gkmV333PreviewImg)").length,loadedChunks:Object.fromEntries(WALL_KINDS.map(k=>[k,loadedChunks[k].size])),activeTitle:activeRecord?titleOf(activeRecord.item):""}),
+  window.GKM_V334_DEBUG={
+    getState:()=>({
+      isOpen,currentKind,totalCatalogCount,poolSize:currentPool.length,allLoadedPool:allPool.length,
+      visibleCount:gridState.used,loadedCount,macroLoadedCount,macroCount:macroRecords.length,
+      phase:fineLoadingStarted?"fine":"macro",activeLoads,
+      queuedLoads:highLoadQueue.length+normalLoadQueue.length,highQueued:highLoadQueue.length,normalQueued:normalLoadQueue.length,
+      canvasDpr,canvasCount:document.querySelectorAll("#gkmV334Overlay canvas").length,
+      posterDomNodes:document.querySelectorAll("#gkmV334Overlay .gkmV334Tile,#gkmV334Overlay img:not(#gkmV334PreviewImg)").length,
+      loadedChunks:Object.fromEntries(WALL_KINDS.map(k=>[k,loadedChunks[k].size])),
+      firstImageMs:firstImageAt&&buildStartedAt?Math.round(firstImageAt-buildStartedAt):0,
+      activeTitle:activeRecord?titleOf(activeRecord.item):""
+    }),
     rebuild:()=>buildWall(false),
-    warmup:warmupData
+    warmup:warmupData,
+    startFine:()=>maybeStartFineLoading(true)
   };
 
-  console.log("GKM V333: fast streaming canvas poster mosaic installed");
+  console.log("GKM V334: instant LOD canvas poster mosaic installed");
 })();
-/* GKM V333 FAST STREAMING CANVAS POSTER MOSAIC END */
+/* GKM V334 INSTANT LOD CANVAS POSTER MOSAIC END */
 
 
