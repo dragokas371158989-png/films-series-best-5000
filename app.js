@@ -12283,37 +12283,38 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V316 REAL AI BRIDGE END */
 
 
-/* GKM V321 MOSAIC TUNNEL WALL OPEN FIX START */
+/* GKM V322 REFERENCE MOSAIC WALL START */
 (function(){
-  window.GKM_V321_MOSAIC_TUNNEL_WALL_VERSION = "v321-mosaic-tunnel-wall-open-fix-2026-07-11";
+  window.GKM_V322_REFERENCE_MOSAIC_WALL_VERSION = "v322-reference-mosaic-wall-dense-open-cards-2026-07-11";
 
-  const MAX_UNIQUE = 260;
-  const TILE_COUNT_DESKTOP = 520;
-  const TILE_COUNT_MOBILE = 260;
+  const UNIQUE_LIMIT = 260;
+  const TILE_COUNT_DESKTOP = 1560;
+  const TILE_COUNT_MOBILE = 680;
 
   let uniqueItems = [];
   let wallItems = [];
   let wallBuilt = false;
   let autoTimer = null;
   let flyTimer = null;
-  let rotX = 0;
-  let rotY = 0;
-  let zoomZ = -180;
+  let rotX = 7;
+  let rotY = -16;
+  let zoomZ = -260;
   let targetRotX = 0;
   let targetRotY = 0;
-  let targetZoomZ = 0;
+  let targetZoomZ = 80;
   let isDragging = false;
-  let moved = false;
   let lastX = 0;
   let lastY = 0;
   let currentKind = "all";
-  let selectedItem = null;
 
   function t(v){ return String(v == null ? "" : v).trim(); }
   function esc(v){
     return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
       "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
     }[ch]));
+  }
+  function safeUrl(v){
+    return String(v || "").replace(/"/g, "%22").replace(/\)/g, "%29");
   }
   function n(v){
     return t(v).toLowerCase()
@@ -12324,30 +12325,30 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function titleOf(it){
-    try { if (typeof displayTitle === "function") return t(displayTitle(it)); } catch {}
+    try { if(typeof displayTitle === "function") return t(displayTitle(it)); } catch {}
     return t(it && (it.ru || it.title_ru || it.title || it.name || it.en || it.original_title || it.original_name)) || "Без названия";
   }
   function typeOf(it){
-    try { if (typeof getType === "function") return t(getType(it)); } catch {}
+    try { if(typeof getType === "function") return t(getType(it)); } catch {}
     return t(it && (it.type || it.category || it.kind)) || "Каталог";
   }
   function yearOf(it){
-    try { if (typeof getYear === "function") return t(getYear(it)); } catch {}
+    try { if(typeof getYear === "function") return t(getYear(it)); } catch {}
     const raw = t(it && (it.year || it.release_date || it.first_air_date));
     const m = raw.match(/(19\d{2}|20\d{2})/);
     return m ? m[1] : raw;
   }
   function ratingOf(it){
-    try { if (typeof getRating === "function") return Number(getRating(it) || 0); } catch {}
+    try { if(typeof getRating === "function") return Number(getRating(it) || 0); } catch {}
     return Number(it && (it.rating || it.vote_average || it.score) || 0);
   }
   function overviewOf(it){
-    try { if (typeof displayOverview === "function") return t(displayOverview(it)); } catch {}
+    try { if(typeof displayOverview === "function") return t(displayOverview(it)); } catch {}
     return t(it && (it.overview || it.description || it.synopsis || it.plot)) || "Описание будет добавлено позже.";
   }
   function genresOf(it){
     try {
-      if (typeof getGenres === "function") {
+      if(typeof getGenres === "function"){
         const g = getGenres(it);
         if(Array.isArray(g)) return g.filter(Boolean).map(String);
       }
@@ -12382,12 +12383,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         else if(v && Array.isArray(v.items)) out.push(...v.items);
       });
     }
-    return out.filter(x => x && typeof x === "object");
+    return out.filter(x=>x && typeof x === "object");
   }
 
   async function fetchJson(url){
     try{
-      const res = await fetch(url, { cache:"force-cache" });
+      const res = await fetch(url, {cache:"force-cache"});
       if(!res.ok) return [];
       return parseJson(await res.json());
     }catch{
@@ -12409,11 +12410,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     currentKind = kind || "all";
 
     const urls = [
-      "data/fast/home.json?v=321",
-      "data/fast/pages/movies/page_0001.json?v=321",
-      "data/fast/pages/series/page_0001.json?v=321",
-      "data/fast/pages/anime/page_0001.json?v=321",
-      "data/fast/pages/cartoons/page_0001.json?v=321"
+      "data/fast/home.json?v=322",
+      "data/fast/pages/movies/page_0001.json?v=322",
+      "data/fast/pages/series/page_0001.json?v=322",
+      "data/fast/pages/anime/page_0001.json?v=322",
+      "data/fast/pages/cartoons/page_0001.json?v=322"
     ];
 
     const found = [];
@@ -12429,38 +12430,40 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       found.push(it);
     }
 
-    try { (currentItems || []).forEach(add); } catch {}
-    try {
-      if (homeData && homeData.sections) {
+    try{ (currentItems || []).forEach(add); }catch{}
+    try{
+      if(homeData && homeData.sections){
         Object.values(homeData.sections).forEach(v=>{
           if(Array.isArray(v)) v.forEach(add);
           else if(v && Array.isArray(v.items)) v.items.forEach(add);
         });
       }
-    } catch {}
+    }catch{}
 
     const arrs = await Promise.all(urls.map(fetchJson));
     arrs.flat().forEach(add);
 
     found.sort((a,b)=>(ratingOf(b)||0)-(ratingOf(a)||0));
-    uniqueItems = found.slice(0, MAX_UNIQUE);
+    uniqueItems = found.slice(0, UNIQUE_LIMIT);
 
     const target = window.innerWidth < 700 ? TILE_COUNT_MOBILE : TILE_COUNT_DESKTOP;
     wallItems = [];
+
     if(uniqueItems.length){
       for(let i=0;i<target;i++){
-        wallItems.push(uniqueItems[i % uniqueItems.length]);
+        // повторяем, но слегка перемешиваем индекс, чтобы не было одинаковых полос
+        wallItems.push(uniqueItems[(i * 7 + Math.floor(i / 11)) % uniqueItems.length]);
       }
     }
     return wallItems;
   }
 
   function ensureCss(){
-    if(document.getElementById("gkmV321WallCss")) return;
+    if(document.getElementById("gkmV322Css")) return;
     const css = document.createElement("style");
-    css.id = "gkmV321WallCss";
+    css.id = "gkmV322Css";
     css.textContent = `
-      #gkmV321Btn{
+      #gkmV322Btn{
         position:fixed!important;
         right:18px!important;
         bottom:92px!important;
@@ -12474,53 +12477,54 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         cursor:pointer;
         box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35);
       }
-      #gkmV321Overlay{
+      #gkmV322Overlay{
         position:fixed;
         inset:0;
         z-index:99998;
         display:none;
         overflow:hidden;
-        background:
-          radial-gradient(circle at 52% 32%,rgba(255,255,255,.12),transparent 10%),
-          radial-gradient(circle at 28% 18%,rgba(0,190,255,.18),transparent 35%),
-          radial-gradient(circle at 80% 80%,rgba(122,40,255,.22),transparent 38%),
-          #020817;
         color:#fff;
+        background:
+          radial-gradient(circle at 52% 34%, rgba(255,255,255,.13), transparent 8%),
+          radial-gradient(circle at 51% 34%, rgba(0,0,0,.42), transparent 15%),
+          radial-gradient(circle at 24% 14%, rgba(0,190,255,.16), transparent 34%),
+          radial-gradient(circle at 82% 84%, rgba(130,35,255,.22), transparent 42%),
+          #020817;
       }
-      #gkmV321Overlay.open{display:block}
+      #gkmV322Overlay.open{display:block}
 
-      .gkmV321Top{
+      .gkmV322Top{
         position:absolute;
-        left:18px;
-        right:18px;
-        top:12px;
-        z-index:8;
+        left:16px;
+        right:16px;
+        top:10px;
+        z-index:12;
         display:flex;
         justify-content:space-between;
-        gap:14px;
+        gap:12px;
         pointer-events:none;
       }
-      .gkmV321Title{
+      .gkmV322Title{
         font-size:23px;
         font-weight:950;
         text-shadow:0 0 18px rgba(0,180,255,.46);
       }
-      .gkmV321Sub{
+      .gkmV322Sub{
         margin-top:4px;
         font-size:13px;
-        color:rgba(255,255,255,.75);
+        color:rgba(255,255,255,.76);
       }
-      .gkmV321Actions{
+      .gkmV322Actions{
         display:flex;
         gap:8px;
         flex-wrap:wrap;
         justify-content:flex-end;
         pointer-events:auto;
       }
-      .gkmV321Actions button,
-      .gkmV321PreviewActions button{
-        border:1px solid rgba(0,220,255,.32);
-        background:linear-gradient(135deg,rgba(58,37,150,.93),rgba(0,138,220,.86));
+      .gkmV322Actions button,
+      .gkmV322CardActions button{
+        border:1px solid rgba(0,220,255,.34);
+        background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.86));
         color:#fff;
         border-radius:14px;
         padding:10px 13px;
@@ -12528,124 +12532,133 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         cursor:pointer;
         box-shadow:0 0 16px rgba(0,170,255,.18);
       }
-      .gkmV321Actions button:hover,
-      .gkmV321PreviewActions button:hover{filter:brightness(1.15)}
+      .gkmV322Actions button:hover,
+      .gkmV322CardActions button:hover{filter:brightness(1.15)}
 
-      #gkmV321Scene{
+      #gkmV322Scene{
         position:absolute;
         inset:70px 0 0;
-        perspective:980px;
+        perspective:900px;
         overflow:hidden;
         cursor:grab;
         user-select:none;
         touch-action:none;
       }
-      #gkmV321Scene.drag{cursor:grabbing}
-      #gkmV321World{
+      #gkmV322Scene.drag{cursor:grabbing}
+
+      #gkmV322World{
         position:absolute;
         left:50%;
-        top:48%;
+        top:50%;
         width:1px;
         height:1px;
         transform-style:preserve-3d;
         will-change:transform;
       }
 
-      .gkmV321Tile{
+      .gkmV322Tile{
         position:absolute;
-        width:34px;
-        height:52px;
-        left:-17px;
-        top:-26px;
+        width:24px;
+        height:36px;
+        left:-12px;
+        top:-18px;
         border:0;
         padding:0;
-        border-radius:9px;
+        border-radius:7px;
         overflow:hidden;
-        background:#0c1530;
-        box-shadow:0 7px 16px rgba(0,0,0,.48),0 0 8px rgba(0,180,255,.08);
+        background:#0b1430;
+        box-shadow:0 4px 10px rgba(0,0,0,.5),0 0 7px rgba(0,180,255,.10);
+        outline:1px solid rgba(255,255,255,.08);
         transform-style:preserve-3d;
         will-change:transform,filter;
         cursor:pointer;
-        outline:1px solid rgba(255,255,255,.09);
       }
-      .gkmV321Tile::before{
+      .gkmV322Tile::before{
         content:"";
         position:absolute;
         inset:0;
         background-image:var(--poster);
         background-size:cover;
         background-position:center;
-        filter:saturate(1.15) contrast(1.05);
+        filter:saturate(1.18) contrast(1.06);
       }
-      .gkmV321Tile::after{
+      .gkmV322Tile::after{
         content:"";
         position:absolute;
         inset:0;
-        background:linear-gradient(to top,rgba(0,0,0,.35),transparent 50%);
-        opacity:.55;
+        background:linear-gradient(to top,rgba(0,0,0,.35),transparent 54%);
+        opacity:.45;
       }
-      .gkmV321Tile:hover{
-        filter:brightness(1.25) saturate(1.25);
-        box-shadow:0 10px 22px rgba(0,0,0,.62),0 0 22px rgba(0,180,255,.42);
-        z-index:5;
+      .gkmV322Tile:hover{
+        filter:brightness(1.28) saturate(1.3);
+        box-shadow:0 8px 20px rgba(0,0,0,.65),0 0 22px rgba(0,180,255,.42);
+        z-index:6;
       }
 
-      #gkmV321Preview{
+      #gkmV322Card{
         position:absolute;
-        z-index:9;
+        z-index:14;
         left:50%;
         top:50%;
-        transform:translate(-50%,-50%);
-        width:min(660px,calc(100vw - 40px));
-        min-height:260px;
+        transform:translate(-50%,-50%) scale(.96);
+        width:min(720px, calc(100vw - 44px));
+        min-height:300px;
         display:none;
-        grid-template-columns:170px 1fr;
-        gap:18px;
-        padding:18px;
-        border-radius:22px;
-        border:1px solid rgba(0,220,255,.34);
+        grid-template-columns:190px 1fr;
+        gap:20px;
+        padding:20px;
+        border-radius:24px;
+        border:1px solid rgba(0,220,255,.38);
         background:
-          linear-gradient(135deg,rgba(7,16,38,.88),rgba(12,20,54,.78)),
-          radial-gradient(circle at 80% 10%,rgba(0,180,255,.22),transparent 40%);
-        box-shadow:0 0 46px rgba(0,180,255,.26),0 20px 80px rgba(0,0,0,.7);
-        backdrop-filter:blur(14px);
+          linear-gradient(135deg,rgba(7,16,38,.92),rgba(12,20,54,.84)),
+          radial-gradient(circle at 80% 10%,rgba(0,180,255,.22),transparent 42%);
+        box-shadow:0 0 58px rgba(0,180,255,.32),0 24px 90px rgba(0,0,0,.72);
+        backdrop-filter:blur(15px);
       }
-      #gkmV321Preview.open{display:grid}
-      #gkmV321Preview img{
-        width:170px;
-        height:250px;
+      #gkmV322Card.open{
+        display:grid;
+        animation:gkmV322CardIn .18s ease forwards;
+      }
+      @keyframes gkmV322CardIn{
+        from{opacity:0;transform:translate(-50%,-50%) scale(.88)}
+        to{opacity:1;transform:translate(-50%,-50%) scale(1)}
+      }
+      #gkmV322Card img{
+        width:190px;
+        height:280px;
         object-fit:cover;
-        border-radius:15px;
-        box-shadow:0 14px 40px rgba(0,0,0,.55);
+        border-radius:16px;
+        box-shadow:0 16px 44px rgba(0,0,0,.58);
       }
-      .gkmV321PreviewText h2{
+      .gkmV322CardText h2{
         margin:0 0 8px;
-        font-size:28px;
+        font-size:30px;
         line-height:1.05;
       }
-      .gkmV321PreviewMeta{
-        color:rgba(255,255,255,.78);
+      .gkmV322Meta{
+        color:rgba(255,255,255,.8);
         font-size:14px;
         margin-bottom:10px;
       }
-      .gkmV321PreviewDesc{
-        color:rgba(255,255,255,.82);
+      .gkmV322Desc{
+        color:rgba(255,255,255,.84);
         font-size:14px;
         line-height:1.45;
-        max-height:86px;
+        max-height:105px;
         overflow:hidden;
       }
-      .gkmV321PreviewActions{
-        margin-top:14px;
+      .gkmV322CardActions{
+        margin-top:16px;
         display:flex;
         gap:8px;
         flex-wrap:wrap;
       }
-      #gkmV321Info{
+
+      #gkmV322Info{
         position:absolute;
-        left:20px;
-        bottom:18px;
-        z-index:7;
+        left:18px;
+        bottom:16px;
+        z-index:10;
         max-width:min(520px,calc(100vw - 40px));
         background:rgba(5,14,34,.78);
         border:1px solid rgba(0,220,255,.24);
@@ -12655,13 +12668,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         backdrop-filter:blur(12px);
         pointer-events:none;
       }
-      #gkmV321Info b{display:block;font-size:17px;margin-bottom:4px}
-      #gkmV321Info .meta{color:rgba(255,255,255,.75);font-size:13px}
-      .gkmV321Hint{
+      #gkmV322Info b{display:block;font-size:17px;margin-bottom:4px}
+      #gkmV322Info .meta{color:rgba(255,255,255,.75);font-size:13px}
+      .gkmV322Hint{
         position:absolute;
         right:20px;
         bottom:18px;
-        z-index:7;
+        z-index:10;
         color:rgba(255,255,255,.6);
         font-size:12px;
         text-align:right;
@@ -12669,63 +12682,65 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       }
 
       @media(max-width:700px){
-        #gkmV321Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
-        .gkmV321Top{left:10px;right:10px;top:10px}
-        .gkmV321Title{font-size:18px}
-        .gkmV321Sub{font-size:11px}
-        .gkmV321Actions button{padding:8px 9px;font-size:12px}
-        #gkmV321Scene{inset:96px 0 0}
-        .gkmV321Tile{width:22px;height:34px;left:-11px;top:-17px;border-radius:6px}
-        #gkmV321Preview{
-          width:calc(100vw - 24px);
-          grid-template-columns:100px 1fr;
+        #gkmV322Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
+        .gkmV322Top{left:10px;right:10px;top:10px}
+        .gkmV322Title{font-size:18px}
+        .gkmV322Sub{font-size:11px}
+        .gkmV322Actions button{padding:8px 9px;font-size:12px}
+        #gkmV322Scene{inset:96px 0 0}
+        .gkmV322Tile{width:16px;height:24px;left:-8px;top:-12px;border-radius:5px}
+        #gkmV322Card{
+          width:calc(100vw - 22px);
+          grid-template-columns:92px 1fr;
           gap:12px;
           padding:12px;
+          min-height:unset;
         }
-        #gkmV321Preview img{width:100px;height:148px}
-        .gkmV321PreviewText h2{font-size:20px}
-        .gkmV321PreviewDesc{display:none}
-        #gkmV321Info{left:12px;right:12px;bottom:12px;max-width:none}
-        .gkmV321Hint{display:none}
+        #gkmV322Card img{width:92px;height:136px;border-radius:12px}
+        .gkmV322CardText h2{font-size:20px}
+        .gkmV322Desc{display:none}
+        .gkmV322CardActions button{padding:8px 10px;font-size:12px}
+        #gkmV322Info{left:12px;right:12px;bottom:12px;max-width:none}
+        .gkmV322Hint{display:none}
       }
     `;
     document.head.appendChild(css);
   }
 
   function ensureUi(){
-    if(!document.getElementById("gkmV321Btn")){
+    if(!document.getElementById("gkmV322Btn")){
       const btn = document.createElement("button");
-      btn.id = "gkmV321Btn";
+      btn.id = "gkmV322Btn";
       btn.type = "button";
       btn.textContent = "🌌 3D стена";
       btn.onclick = () => openWall("all");
       document.body.appendChild(btn);
     }
 
-    if(!document.getElementById("gkmV321Overlay")){
+    if(!document.getElementById("gkmV322Overlay")){
       const overlay = document.createElement("div");
-      overlay.id = "gkmV321Overlay";
+      overlay.id = "gkmV322Overlay";
       overlay.innerHTML = `
-        <div class="gkmV321Top">
+        <div class="gkmV322Top">
           <div>
-            <div class="gkmV321Title">🌌 3D стена постеров</div>
-            <div class="gkmV321Sub">Теперь ближе к примеру: мелкая плотная сетка, живая перспектива, клик открывает постер.</div>
+            <div class="gkmV322Title">🌌 3D стена постеров</div>
+            <div class="gkmV322Sub">Мелкая плотная мозаика как на референсе. Клик по постеру открывает карточку.</div>
           </div>
-          <div class="gkmV321Actions">
+          <div class="gkmV322Actions">
             <button data-kind="all">Все</button>
             <button data-kind="movies">Фильмы</button>
             <button data-kind="series">Сериалы</button>
             <button data-kind="anime">Аниме</button>
-            <button id="gkmV321FlyBtn">🚀 Полёт</button>
-            <button id="gkmV321AutoBtn">⏸ Авто</button>
-            <button id="gkmV321ShuffleBtn">🔀 Микс</button>
-            <button id="gkmV321CloseBtn">✕</button>
+            <button id="gkmV322FlyBtn">🚀 Полёт</button>
+            <button id="gkmV322AutoBtn">⏸ Авто</button>
+            <button id="gkmV322ShuffleBtn">🔀 Микс</button>
+            <button id="gkmV322CloseBtn">✕</button>
           </div>
         </div>
-        <div id="gkmV321Scene"><div id="gkmV321World"></div></div>
-        <div id="gkmV321Preview"></div>
-        <div id="gkmV321Info"><b>Загрузка...</b><div class="meta">Собираю постеры из каталога.</div></div>
-        <div class="gkmV321Hint">ЛКМ / палец — вращать<br>колесо — зум<br>клик — открыть постер</div>
+        <div id="gkmV322Scene"><div id="gkmV322World"></div></div>
+        <div id="gkmV322Card"></div>
+        <div id="gkmV322Info"><b>Загрузка...</b><div class="meta">Собираю постеры из каталога.</div></div>
+        <div class="gkmV322Hint">ЛКМ / палец — вращать<br>колесо — зум<br>клик — открыть карточку</div>
       `;
       document.body.appendChild(overlay);
 
@@ -12734,124 +12749,125 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           wallBuilt = false;
           uniqueItems = [];
           wallItems = [];
-          hidePreview();
+          hideCard();
           openWall(btn.dataset.kind);
         };
       });
 
-      document.getElementById("gkmV321CloseBtn").onclick = () => closeWall(true);
-      document.getElementById("gkmV321ShuffleBtn").onclick = () => {
-        uniqueItems.sort(() => Math.random() - 0.5);
-        const target = window.innerWidth < 700 ? TILE_COUNT_MOBILE : TILE_COUNT_DESKTOP;
-        wallItems = [];
-        if(uniqueItems.length){
-          for(let i=0;i<target;i++) wallItems.push(uniqueItems[i % uniqueItems.length]);
-        }
+      document.getElementById("gkmV322CloseBtn").onclick = () => closeWall(true);
+      document.getElementById("gkmV322ShuffleBtn").onclick = () => {
+        uniqueItems.sort(()=>Math.random()-.5);
+        rebuildRepeatedWallItems();
         buildWall(true);
       };
-      document.getElementById("gkmV321AutoBtn").onclick = () => {
+      document.getElementById("gkmV322AutoBtn").onclick = () => {
         if(autoTimer){
           stopAuto();
-          document.getElementById("gkmV321AutoBtn").textContent = "▶ Авто";
-        } else {
+          document.getElementById("gkmV322AutoBtn").textContent = "▶ Авто";
+        }else{
           startAuto();
-          document.getElementById("gkmV321AutoBtn").textContent = "⏸ Авто";
+          document.getElementById("gkmV322AutoBtn").textContent = "⏸ Авто";
         }
       };
-      document.getElementById("gkmV321FlyBtn").onclick = () => startFlyIn();
+      document.getElementById("gkmV322FlyBtn").onclick = () => startFlyIn();
 
-      const scene = document.getElementById("gkmV321Scene");
+      const scene = document.getElementById("gkmV322Scene");
 
-      scene.addEventListener("pointerdown", e => {
-        if(e.target.closest(".gkmV321Tile")) return;
-        hidePreview();
+      scene.addEventListener("pointerdown", e=>{
+        if(e.target.closest(".gkmV322Tile")) return;
+        hideCard();
         isDragging = true;
-        moved = false;
         lastX = e.clientX;
         lastY = e.clientY;
         scene.classList.add("drag");
-        try { scene.setPointerCapture(e.pointerId); } catch {}
+        try{ scene.setPointerCapture(e.pointerId); }catch{}
       });
 
-      scene.addEventListener("pointermove", e => {
+      scene.addEventListener("pointermove", e=>{
         if(!isDragging) return;
         const dx = e.clientX - lastX;
         const dy = e.clientY - lastY;
-        if(Math.abs(dx) + Math.abs(dy) > 4) moved = true;
         lastX = e.clientX;
         lastY = e.clientY;
-        rotY += dx * 0.22;
-        rotX = Math.max(-26, Math.min(26, rotX - dy * 0.12));
-        targetRotX = rotX;
-        targetRotY = rotY;
-        applyWorldRotation();
+        rotY += dx * .18;
+        rotX = Math.max(-28, Math.min(28, rotX - dy * .11));
+        applyWorld();
       });
 
-      scene.addEventListener("pointerup", e => {
+      scene.addEventListener("pointerup", e=>{
         isDragging = false;
         scene.classList.remove("drag");
-        try { scene.releasePointerCapture(e.pointerId); } catch {}
+        try{ scene.releasePointerCapture(e.pointerId); }catch{}
       });
 
       scene.addEventListener("wheel", e=>{
         e.preventDefault();
-        zoomZ = Math.max(-520, Math.min(800, zoomZ + e.deltaY * -0.48));
+        zoomZ = Math.max(-560, Math.min(760, zoomZ + e.deltaY * -0.5));
         targetZoomZ = zoomZ;
-        applyWorldRotation();
-      }, { passive:false });
+        applyWorld();
+      }, {passive:false});
     }
 
     window.GKM_OPEN_3D_WALL = () => openWall("all");
   }
 
+  function rebuildRepeatedWallItems(){
+    const target = window.innerWidth < 700 ? TILE_COUNT_MOBILE : TILE_COUNT_DESKTOP;
+    wallItems = [];
+    if(uniqueItems.length){
+      for(let i=0;i<target;i++){
+        wallItems.push(uniqueItems[(i * 7 + Math.floor(i / 11)) % uniqueItems.length]);
+      }
+    }
+  }
+
   function showInfo(it){
-    const box = document.getElementById("gkmV321Info");
+    const box = document.getElementById("gkmV322Info");
     if(!box || !it) return;
-    const rating = ratingOf(it);
-    box.innerHTML = `<b>${esc(titleOf(it))}</b><div class="meta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${rating ? " · ★ " + Number(rating).toFixed(1) : ""}</div>`;
+    const r = ratingOf(it);
+    box.innerHTML = `<b>${esc(titleOf(it))}</b><div class="meta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>`;
   }
 
-  function hidePreview(){
-    const p = document.getElementById("gkmV321Preview");
-    if(p) p.classList.remove("open");
+  function hideCard(){
+    const card = document.getElementById("gkmV322Card");
+    if(card) card.classList.remove("open");
   }
 
-  function showPreview(it){
-    selectedItem = it;
+  function showCard(it){
     showInfo(it);
+    const card = document.getElementById("gkmV322Card");
+    if(!card) return;
 
-    const p = document.getElementById("gkmV321Preview");
-    if(!p) return;
-
-    const rating = ratingOf(it);
+    const r = ratingOf(it);
     const genres = genresOf(it).slice(0,4).join(" · ");
-    p.innerHTML = `
+    const overview = overviewOf(it);
+
+    card.innerHTML = `
       <img src="${esc(imgOf(it))}" alt="${esc(titleOf(it))}">
-      <div class="gkmV321PreviewText">
+      <div class="gkmV322CardText">
         <h2>${esc(titleOf(it))}</h2>
-        <div class="gkmV321PreviewMeta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${rating ? " · ★ " + Number(rating).toFixed(1) : ""}${genres ? " · " + esc(genres) : ""}</div>
-        <div class="gkmV321PreviewDesc">${esc(overviewOf(it))}</div>
-        <div class="gkmV321PreviewActions">
-          <button id="gkmV321OpenCardBtn">Открыть карточку</button>
-          <button id="gkmV321ClosePreviewBtn">Закрыть</button>
+        <div class="gkmV322Meta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}${genres ? " · " + esc(genres) : ""}</div>
+        <div class="gkmV322Desc">${esc(overview)}</div>
+        <div class="gkmV322CardActions">
+          <button id="gkmV322OpenSiteCard">Открыть карточку сайта</button>
+          <button id="gkmV322CloseCard">Закрыть</button>
         </div>
       </div>
     `;
-    p.classList.add("open");
+    card.classList.add("open");
 
-    document.getElementById("gkmV321OpenCardBtn").onclick = () => openRealCard(it);
-    document.getElementById("gkmV321ClosePreviewBtn").onclick = hidePreview;
+    document.getElementById("gkmV322CloseCard").onclick = hideCard;
+    document.getElementById("gkmV322OpenSiteCard").onclick = () => openSiteCard(it);
   }
 
-  function openRealCard(it){
+  function openSiteCard(it){
     closeWall(false);
 
-    setTimeout(() => {
-      // Важно: пробуем прямые функции из app.js, не только window.
-      try { if(typeof openDetails === "function"){ openDetails(it); return; } } catch {}
-      try { if(typeof openTitleModal === "function"){ openTitleModal(it); return; } } catch {}
-      try { if(typeof showDetails === "function"){ showDetails(it); return; } } catch {}
-      try { if(typeof showModal === "function"){ showModal(it); return; } } catch {}
+    setTimeout(()=>{
+      try{ if(typeof openDetails === "function"){ openDetails(it); return; } }catch{}
+      try{ if(typeof openTitleModal === "function"){ openTitleModal(it); return; } }catch{}
+      try{ if(typeof showDetails === "function"){ showDetails(it); return; } }catch{}
+      try{ if(typeof showModal === "function"){ showModal(it); return; } }catch{}
 
       const funcs = ["openDetails","openTitleModal","showDetails","showModal","openCard","openMovie"];
       for(const fn of funcs){
@@ -12864,42 +12880,44 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       }
 
       alert(titleOf(it));
-    }, 80);
+    }, 90);
   }
 
-  function applyWorldRotation(){
-    const world = document.getElementById("gkmV321World");
+  function applyWorld(){
+    const world = document.getElementById("gkmV322World");
     if(!world) return;
     world.style.transform = `translateZ(${zoomZ}px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   }
 
   function animateTo(){
-    rotX += (targetRotX - rotX) * 0.08;
-    rotY += (targetRotY - rotY) * 0.08;
-    zoomZ += (targetZoomZ - zoomZ) * 0.08;
-    applyWorldRotation();
+    rotX += (targetRotX - rotX) * .075;
+    rotY += (targetRotY - rotY) * .075;
+    zoomZ += (targetZoomZ - zoomZ) * .075;
+    applyWorld();
   }
 
-  function buildWall(force = false){
-    const world = document.getElementById("gkmV321World");
+  function buildWall(force=false){
+    const world = document.getElementById("gkmV322World");
     if(!world) return;
     if(wallBuilt && !force) return;
+
     wallBuilt = true;
     world.innerHTML = "";
 
     if(!wallItems.length){
-      document.getElementById("gkmV321Info").innerHTML = `<b>Постеры не найдены</b><div class="meta">Открой основной каталог и попробуй ещё раз.</div>`;
+      document.getElementById("gkmV322Info").innerHTML = `<b>Постеры не найдены</b><div class="meta">Открой основной каталог и попробуй ещё раз.</div>`;
       return;
     }
 
     const mobile = window.innerWidth < 700;
-    const cols = mobile ? 26 : 52;
+    const cols = mobile ? 34 : 78;
     const rows = Math.ceil(wallItems.length / cols);
-    const spreadX = mobile ? 560 : 1180;
-    const spreadY = mobile ? 360 : 640;
-    const depthMax = mobile ? 520 : 760;
 
-    for(let i=0; i<wallItems.length; i++){
+    const spreadX = mobile ? 610 : 1600;
+    const spreadY = mobile ? 430 : 860;
+    const depthMax = mobile ? 620 : 980;
+
+    for(let i=0;i<wallItems.length;i++){
       const it = wallItems[i];
       const col = i % cols;
       const row = Math.floor(i / cols);
@@ -12907,53 +12925,47 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const nx = cols <= 1 ? 0 : (col / (cols - 1)) * 2 - 1;
       const ny = rows <= 1 ? 0 : (row / (rows - 1)) * 2 - 1;
 
-      const dist = Math.sqrt(nx * nx + ny * ny);
-      const pull = Math.max(0, 1 - Math.min(dist, 1.2));
+      const dist = Math.sqrt(nx*nx + ny*ny);
+      const pull = Math.max(0, 1 - Math.min(dist, 1.15));
 
-      const vortex = Math.pow(pull, 1.9);
-      const x = nx * spreadX * (1 + vortex * 0.18);
-      const y = ny * spreadY * (1 + vortex * 0.10);
-      const z = -(vortex * depthMax);
+      const vortex = Math.pow(pull, 2.1);
+      const ring = Math.sin((dist * 10.5) + (row * .16)) * 14;
 
-      const bendY = nx * 46;
-      const bendX = -ny * 26;
-      const twist = (nx * ny) * 14;
-      const scale = 0.86 + Math.min(0.24, vortex * 0.24);
+      const x = nx * spreadX * (1 + vortex * .28);
+      const y = ny * spreadY * (1 + vortex * .18);
+      const z = -(vortex * depthMax) + ring;
 
-      const card = document.createElement("button");
-      card.type = "button";
-      card.className = "gkmV321Tile";
-      card.style.setProperty("--poster", `url("${imgOf(it).replace(/"/g, "%22")}")`);
-      card.style.transform = `translate3d(${x}px, ${y}px, ${z}px) rotateY(${bendY + twist}deg) rotateX(${bendX}deg) scale(${scale})`;
-      card.title = titleOf(it);
+      const bendY = nx * 32;
+      const bendX = -ny * 22;
+      const twist = nx * ny * 18;
+      const scale = .88 + Math.min(.26, vortex * .26);
 
-      card.addEventListener("pointerdown", ev => {
-        ev.stopPropagation();
-        moved = false;
-      });
-      card.addEventListener("pointermove", ev => {
-        // Если пользователь тащит именно по постеру, не считаем это кликом.
-        moved = true;
-      });
-      card.addEventListener("mouseenter", () => showInfo(it));
-      card.addEventListener("click", ev => {
+      const tile = document.createElement("button");
+      tile.type = "button";
+      tile.className = "gkmV322Tile";
+      tile.title = titleOf(it);
+      tile.style.setProperty("--poster", `url("${safeUrl(imgOf(it))}")`);
+      tile.style.transform = `translate3d(${x}px,${y}px,${z}px) rotateY(${bendY + twist}deg) rotateX(${bendX}deg) scale(${scale})`;
+
+      tile.addEventListener("mouseenter", () => showInfo(it));
+      tile.addEventListener("click", ev=>{
         ev.preventDefault();
         ev.stopPropagation();
-        showPreview(it);
+        showCard(it);
       });
 
-      world.appendChild(card);
+      world.appendChild(tile);
     }
 
     if(wallItems[0]) showInfo(wallItems[0]);
-    applyWorldRotation();
+    applyWorld();
   }
 
   async function openWall(kind="all"){
     ensureCss();
     ensureUi();
 
-    const overlay = document.getElementById("gkmV321Overlay");
+    const overlay = document.getElementById("gkmV322Overlay");
     overlay.classList.add("open");
     document.body.style.overflow = "hidden";
 
@@ -12969,22 +12981,22 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     buildWall(!wallBuilt);
 
-    rotX = 24;
-    rotY = -54;
-    zoomZ = -620;
-    targetRotX = 0;
-    targetRotY = -4;
-    targetZoomZ = 90;
+    rotX = 22;
+    rotY = -46;
+    zoomZ = -740;
+    targetRotX = 4;
+    targetRotY = -10;
+    targetZoomZ = 60;
 
     startFlyIn();
     startAuto();
   }
 
-  function closeWall(stopSpin = true){
-    const overlay = document.getElementById("gkmV321Overlay");
+  function closeWall(stopSpin=true){
+    const overlay = document.getElementById("gkmV322Overlay");
     if(overlay) overlay.classList.remove("open");
     document.body.style.overflow = "";
-    hidePreview();
+    hideCard();
     if(stopSpin){
       stopAuto();
       stopFly();
@@ -12994,7 +13006,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function startFlyIn(){
     stopFly();
     flyTimer = setInterval(animateTo, 16);
-    setTimeout(stopFly, 1400);
+    setTimeout(stopFly, 1550);
   }
 
   function stopFly(){
@@ -13004,10 +13016,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function startAuto(){
     stopAuto();
-    autoTimer = setInterval(() => {
+    autoTimer = setInterval(()=>{
       if(isDragging || flyTimer) return;
-      rotY += 0.055;
-      applyWorldRotation();
+      rotY += .038;
+      applyWorld();
     }, 16);
   }
 
@@ -13022,15 +13034,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", install, { once:true });
-  } else {
+    document.addEventListener("DOMContentLoaded", install, {once:true});
+  }else{
     install();
   }
 
   setTimeout(install, 500);
   setTimeout(install, 1500);
 
-  console.log("GKM V321: mosaic tunnel wall open fix installed");
+  console.log("GKM V322: reference mosaic wall installed");
 })();
-/* GKM V321 MOSAIC TUNNEL WALL OPEN FIX END */
+/* GKM V322 REFERENCE MOSAIC WALL END */
 
