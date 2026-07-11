@@ -1,0 +1,38 @@
+GKM V317 — 3D Poster Wall Demo
+
+Что добавлено:
+1. Отдельная кнопка/раздел:
+   🌌 3D стена
+
+2. Эффект:
+   постеры на 3D-сфере/тоннеле
+   можно крутить мышкой или пальцем
+   автопрокрутка
+   кнопка перемешать
+   клик по постеру открывает карточку, если openDetails доступен
+
+3. Данные:
+   берёт постеры из:
+   data/fast/home.json
+   data/fast/pages/movies/page_0001.json
+   data/fast/pages/anime/page_0001.json
+   data/fast/pages/series/page_0001.json
+   data/fast/pages/cartoons/page_0001.json
+   плюс currentItems/homeData, если они уже загружены
+
+4. Безопасно:
+   это отдельный демо-раздел, основной каталог не ломает
+
+Что заменить:
+app_js_V317.txt -> app.js
+index_html_V317.txt -> index.html
+
+Коммит:
+Apply V317 3d poster wall demo
+
+Проверка:
+https://dragokas371158989-png.github.io/films-series-best-5000/?v=317
+Ctrl+F5
+
+Ищи кнопку:
+🌌 3D стена
