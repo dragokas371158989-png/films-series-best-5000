@@ -12290,14 +12290,20 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V316 REAL AI BRIDGE END */
 
 
-/* GKM V330 SIDE PREVIEW FISHEYE POSTER MOSAIC START */
+/* GKM V331 VIRTUALIZED FULL CATALOG POSTER MOSAIC START */
 (function(){
-  window.GKM_V330_SIDE_PREVIEW_FISHEYE_POSTER_MOSAIC_VERSION = "v330-side-preview-fisheye-poster-mosaic-no-center-block-2026-07-11";
+  window.GKM_V331_VIRTUALIZED_FULL_CATALOG_POSTER_MOSAIC_VERSION = "v331-virtualized-full-catalog-poster-mosaic-89k-pool-2026-07-11";
 
-  const UNIQUE_LIMIT_DESKTOP = 2200;
-  const UNIQUE_LIMIT_MOBILE = 900;
+  const RENDER_LIMIT_DESKTOP = 840;
+  const RENDER_LIMIT_MOBILE = 360;
+  const POSTER_BATCH = 36;
 
   let uniqueItems = [];
+  let fullCatalogPool = [];
+  let fullCatalogLoaded = false;
+  let sampleCursor = 0;
+  let pendingPointer = null;
+  let lensRaf = 0;
   let currentKind = "all";
   let isOpen = false;
   let rafId = 0;
@@ -12425,56 +12431,71 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return ({all:"Всё",movies:"Фильмы",series:"Сериалы",anime:"Аниме",cartoons:"Мультфильмы"}[kind] || "Каталог");
   }
   function pageUrls(kind){
-    const urls = ["data/fast/home.json?v=329"];
+    const urls = ["data/fast/home.json?v=331"];
     const cats = kind && kind !== "all"
       ? ({movies:["movies"], series:["series"], anime:["anime"], cartoons:["cartoons"]}[kind] || ["movies","series","anime","cartoons"])
       : ["movies","series","anime","cartoons"];
     const pages = window.innerWidth < 700 ? 7 : 9;
     cats.forEach(cat=>{
       for(let i=1;i<=pages;i++){
-        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=329`);
+        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=331`);
       }
     });
     return urls;
   }
-  async function loadWallItems(kind="all"){
-    currentKind = kind || "all";
-    const found = [];
-    const seen = new Set();
-
-    function add(it){
-      if(!it || !passKind(it, currentKind)) return;
-      if(!imgOf(it)) return;
-      const k = keyOf(it);
-      if(seen.has(k)) return;
-      seen.add(k);
-      found.push(it);
-    }
-
-    try{ (currentItems || []).forEach(add); }catch(e){}
+  async function loadFullCatalog(){
+    if(fullCatalogLoaded) return fullCatalogPool;
+    let data = [];
     try{
-      if(homeData && homeData.sections){
-        Object.values(homeData.sections).forEach(v=>{
-          if(Array.isArray(v)) v.forEach(add);
-          else if(v && Array.isArray(v.items)) v.items.forEach(add);
-        });
+      const res = await fetch(`${SEARCH_LITE_URL}?v=331`, {cache:"force-cache"});
+      if(res.ok){
+        const json = await res.json();
+        data = Array.isArray(json) ? json : parseJson(json);
       }
     }catch(e){}
+    if(!data.length){
+      const arrs = await Promise.all(pageUrls("all").map(fetchJson));
+      data = arrs.flat();
+    }
+    const seen = new Set();
+    fullCatalogPool = data.filter(it=>{
+      if(!it) return false;
+      const k = keyOf(it);
+      if(seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
+    fullCatalogLoaded = true;
+    return fullCatalogPool;
+  }
 
-    const arrs = await Promise.all(pageUrls(currentKind).map(fetchJson));
-    arrs.flat().forEach(add);
+  function makeSample(source, limit){
+    if(source.length <= limit) return source.slice();
+    const out = [];
+    const step = Math.max(1, Math.floor(source.length / limit));
+    let index = sampleCursor % source.length;
+    for(let i=0;i<limit;i++){
+      out.push(source[index]);
+      index = (index + step) % source.length;
+    }
+    sampleCursor = (sampleCursor + Math.max(31, Math.floor(source.length / 97))) % source.length;
+    return out;
+  }
 
-    found.sort((a,b)=>(ratingOf(b)||0)-(ratingOf(a)||0));
-    uniqueItems = found.slice(0, window.innerWidth < 700 ? UNIQUE_LIMIT_MOBILE : UNIQUE_LIMIT_DESKTOP);
+  async function loadWallItems(kind="all"){
+    currentKind = kind || "all";
+    const all = await loadFullCatalog();
+    const filtered = all.filter(it=>passKind(it,currentKind));
+    uniqueItems = filtered;
     return uniqueItems;
   }
 
   function removeOldUi(){
     [
       "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn",
-      "gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn","gkmV327Btn","gkmV328Btn",
-      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay","gkmV327Overlay","gkmV328Overlay",
-      "gkmV325Preview","gkmV327Preview","gkmV328Preview","gkmV329Preview","gkmV330Preview"
+      "gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn","gkmV327Btn","gkmV328Btn","gkmV329Btn","gkmV330Btn",
+      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay","gkmV327Overlay","gkmV328Overlay","gkmV329Overlay","gkmV330Overlay",
+      "gkmV325Preview","gkmV327Preview","gkmV328Preview","gkmV329Preview","gkmV331Preview"
     ].forEach(id=>{
       const el = document.getElementById(id);
       if(el) el.remove();
@@ -12487,21 +12508,21 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function ensureCss(){
     const oldCss = document.getElementById("gkmV329Css"); if(oldCss) oldCss.remove();
-    if(document.getElementById("gkmV330Css")) return;
+    if(document.getElementById("gkmV331Css")) return;
     const st = document.createElement("style");
-    st.id = "gkmV330Css";
+    st.id = "gkmV331Css";
     st.textContent = `
-      #gkmV330Btn{
+      #gkmV331Btn{
         position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;
         border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
         color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;
         box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)
       }
-      #gkmV330Overlay{
+      #gkmV331Overlay{
         position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;background:#02040b;
       }
-      #gkmV330Overlay.open{display:block}
-      #gkmV330Overlay::before{
+      #gkmV331Overlay.open{display:block}
+      #gkmV331Overlay::before{
         content:"";position:absolute;inset:-20%;pointer-events:none;
         background:
           radial-gradient(circle at 50% 50%,rgba(31,80,150,.15),transparent 30%),
@@ -12509,101 +12530,101 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           radial-gradient(circle at 84% 78%,rgba(112,35,255,.13),transparent 37%),
           #02040b;
       }
-      .gkmV330Top{
+      .gkmV331Top{
         position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
         padding:8px 12px 0 12px;pointer-events:none
       }
-      .gkmV330Heading{
+      .gkmV331Heading{
         max-width:min(610px,48vw);padding:7px 10px;border-radius:14px;
         background:linear-gradient(90deg,rgba(1,15,32,.82),rgba(1,15,32,.34),transparent);
         text-shadow:0 2px 14px rgba(0,0,0,.85)
       }
-      .gkmV330Title{font-size:21px;font-weight:950;line-height:1.04}
-      .gkmV330Sub{font-size:11px;color:rgba(255,255,255,.78);margin-top:3px}
-      .gkmV330Actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
-      .gkmV330Actions button{
+      .gkmV331Title{font-size:21px;font-weight:950;line-height:1.04}
+      .gkmV331Sub{font-size:11px;color:rgba(255,255,255,.78);margin-top:3px}
+      .gkmV331Actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
+      .gkmV331Actions button{
         border:1px solid rgba(0,220,255,.34);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));
         color:#fff;border-radius:13px;padding:9px 12px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)
       }
-      .gkmV330Actions button:hover{filter:brightness(1.16)}
-      .gkmV330Actions button.is-active{box-shadow:0 0 0 2px rgba(255,255,255,.22) inset,0 0 22px rgba(0,200,255,.32);filter:brightness(1.12)}
-      #gkmV330Scene{
+      .gkmV331Actions button:hover{filter:brightness(1.16)}
+      .gkmV331Actions button.is-active{box-shadow:0 0 0 2px rgba(255,255,255,.22) inset,0 0 22px rgba(0,200,255,.32);filter:brightness(1.12)}
+      #gkmV331Scene{
         position:absolute;inset:0;z-index:2;perspective:1120px;overflow:hidden;cursor:crosshair;user-select:none;touch-action:none
       }
-      #gkmV330Scene.drag{cursor:grabbing}
-      #gkmV330World{
+      #gkmV331Scene.drag{cursor:grabbing}
+      #gkmV331World{
         position:absolute;left:50%;top:50%;width:1px;height:1px;transform-style:preserve-3d;will-change:transform
       }
-      .gkmV330Tile{
+      .gkmV331Tile{
         position:absolute;left:0;top:0;border:0;padding:0;overflow:hidden;background:#07111e;
         border-radius:3px;outline:1px solid rgba(255,255,255,.055);box-shadow:0 1px 4px rgba(0,0,0,.42);
         transform-style:preserve-3d;will-change:transform,filter,opacity;
         transition:transform .17s cubic-bezier(.2,.8,.2,1),filter .14s ease,box-shadow .14s ease,opacity .14s ease;
         pointer-events:none
       }
-      .gkmV330Tile::before{
-        content:"";position:absolute;inset:0;background-image:var(--poster);background-size:cover;background-position:center;
-        filter:saturate(1.08) contrast(1.06) brightness(.94)
+      .gkmV331Tile img{
+        position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;
+        filter:saturate(1.08) contrast(1.06) brightness(.94);background:#091426
       }
-      .gkmV330Tile::after{
+      .gkmV331Tile::after{
         content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.13),transparent 56%)
       }
-      .gkmV330Tile.is-lens{filter:brightness(1.16) saturate(1.16)}
-      .gkmV330Tile.is-active{
+      .gkmV331Tile.is-lens{filter:brightness(1.16) saturate(1.16)}
+      .gkmV331Tile.is-active{
         z-index:999;filter:brightness(1.32) saturate(1.22)!important;
         outline:1px solid rgba(85,225,255,.8);box-shadow:0 12px 32px rgba(0,0,0,.7),0 0 28px rgba(0,205,255,.44)
       }
-      #gkmV330Preview{
+      #gkmV331Preview{
         position:fixed;left:20px;top:96px;z-index:26;width:min(640px,36vw);min-height:300px;display:block;
         opacity:0;visibility:hidden;transform:translateY(10px) scale(.965);transition:opacity .16s ease,transform .19s ease,visibility .16s,left .12s ease,top .12s ease;
         border:1px solid rgba(73,207,255,.42);border-radius:24px;overflow:hidden;
         background:#071124;box-shadow:0 28px 110px rgba(0,0,0,.78),0 0 44px rgba(0,155,255,.22);
         pointer-events:none;backdrop-filter:blur(14px)
       }
-      #gkmV330Preview.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
-      #gkmV330Preview::before{
+      #gkmV331Preview.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+      #gkmV331Preview::before{
         content:"";position:absolute;inset:-18px;background-image:linear-gradient(90deg,rgba(3,8,20,.93) 0%,rgba(3,8,20,.84) 45%,rgba(3,8,20,.60) 100%),var(--backdrop);
         background-size:cover;background-position:center;filter:blur(5px) saturate(1.08);transform:scale(1.06)
       }
-      #gkmV330Preview::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,6,16,.82),rgba(1,6,16,.42) 58%,rgba(1,6,16,.58))}
-      .gkmV330PreviewInner{position:relative;z-index:2;display:grid;grid-template-columns:190px 1fr;gap:22px;min-height:320px;padding:22px}
-      #gkmV330Preview img{width:190px;height:285px;object-fit:cover;border-radius:16px;box-shadow:0 18px 44px rgba(0,0,0,.66)}
-      .gkmV330PreviewText{align-self:center;text-shadow:0 2px 10px rgba(0,0,0,.8)}
-      .gkmV330PreviewText h3{margin:0 0 10px;font-size:34px;line-height:1.02;letter-spacing:-.5px}
-      .gkmV330PreviewMeta{font-size:14px;color:rgba(255,255,255,.86);margin-bottom:10px;line-height:1.45}
-      .gkmV330PreviewGenres{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 12px}
-      .gkmV330PreviewGenres span{padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.13);font-size:11px}
-      .gkmV330PreviewDesc{font-size:14px;color:rgba(255,255,255,.9);line-height:1.46;max-height:120px;overflow:hidden}
-      .gkmV330PreviewHint{margin-top:13px;font-size:12px;color:rgba(98,224,255,.95);font-weight:800}
-      .gkmV330Info{
+      #gkmV331Preview::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,6,16,.82),rgba(1,6,16,.42) 58%,rgba(1,6,16,.58))}
+      .gkmV331PreviewInner{position:relative;z-index:2;display:grid;grid-template-columns:190px 1fr;gap:22px;min-height:320px;padding:22px}
+      #gkmV331Preview img{width:190px;height:285px;object-fit:cover;border-radius:16px;box-shadow:0 18px 44px rgba(0,0,0,.66)}
+      .gkmV331PreviewText{align-self:center;text-shadow:0 2px 10px rgba(0,0,0,.8)}
+      .gkmV331PreviewText h3{margin:0 0 10px;font-size:34px;line-height:1.02;letter-spacing:-.5px}
+      .gkmV331PreviewMeta{font-size:14px;color:rgba(255,255,255,.86);margin-bottom:10px;line-height:1.45}
+      .gkmV331PreviewGenres{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 12px}
+      .gkmV331PreviewGenres span{padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.13);font-size:11px}
+      .gkmV331PreviewDesc{font-size:14px;color:rgba(255,255,255,.9);line-height:1.46;max-height:120px;overflow:hidden}
+      .gkmV331PreviewHint{margin-top:13px;font-size:12px;color:rgba(98,224,255,.95);font-weight:800}
+      .gkmV331Info{
         position:absolute;left:14px;bottom:14px;z-index:18;max-width:min(510px,calc(100vw - 28px));
         background:rgba(2,10,24,.76);border:1px solid rgba(0,205,255,.22);border-radius:15px;
         padding:10px 13px;color:#fff;backdrop-filter:blur(10px);pointer-events:none;box-shadow:0 10px 32px rgba(0,0,0,.35)
       }
-      .gkmV330Info b{display:block;font-size:15px;margin-bottom:3px}
-      .gkmV330Info .meta{color:rgba(255,255,255,.72);font-size:11px}
-      .gkmV330Hint{position:absolute;right:17px;bottom:15px;z-index:18;color:rgba(255,255,255,.58);font-size:11px;text-align:right;pointer-events:none;text-shadow:0 2px 8px #000}
+      .gkmV331Info b{display:block;font-size:15px;margin-bottom:3px}
+      .gkmV331Info .meta{color:rgba(255,255,255,.72);font-size:11px}
+      .gkmV331Hint{position:absolute;right:17px;bottom:15px;z-index:18;color:rgba(255,255,255,.58);font-size:11px;text-align:right;pointer-events:none;text-shadow:0 2px 8px #000}
       @media(max-width:700px){
-        #gkmV330Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
-        .gkmV330Top{padding:6px 7px 0}.gkmV330Heading{max-width:46vw;padding:6px 7px}.gkmV330Title{font-size:15px}.gkmV330Sub{display:none}
-        .gkmV330Actions{gap:4px}.gkmV330Actions button{padding:7px 8px;font-size:10px;border-radius:10px}
-        #gkmV330Preview{left:9px!important;top:auto!important;right:9px!important;bottom:72px!important;width:auto;min-height:226px;border-radius:17px}
-        .gkmV330PreviewInner{grid-template-columns:104px 1fr;gap:12px;min-height:226px;padding:11px}
-        #gkmV330Preview img{width:104px;height:156px;border-radius:10px}
-        .gkmV330PreviewText h3{font-size:20px;margin-bottom:6px}.gkmV330PreviewMeta{font-size:11px;margin-bottom:4px}
-        .gkmV330PreviewGenres{gap:4px;margin:5px 0}.gkmV330PreviewGenres span{font-size:9px;padding:3px 6px}
-        .gkmV330PreviewDesc{font-size:11px;max-height:64px;line-height:1.35}.gkmV330PreviewHint{font-size:10px;margin-top:6px}
-        .gkmV330Info{left:8px;right:8px;bottom:8px;max-width:none;padding:8px 10px}.gkmV330Hint{display:none}
+        #gkmV331Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
+        .gkmV331Top{padding:6px 7px 0}.gkmV331Heading{max-width:46vw;padding:6px 7px}.gkmV331Title{font-size:15px}.gkmV331Sub{display:none}
+        .gkmV331Actions{gap:4px}.gkmV331Actions button{padding:7px 8px;font-size:10px;border-radius:10px}
+        #gkmV331Preview{left:9px!important;top:auto!important;right:9px!important;bottom:72px!important;width:auto;min-height:226px;border-radius:17px}
+        .gkmV331PreviewInner{grid-template-columns:104px 1fr;gap:12px;min-height:226px;padding:11px}
+        #gkmV331Preview img{width:104px;height:156px;border-radius:10px}
+        .gkmV331PreviewText h3{font-size:20px;margin-bottom:6px}.gkmV331PreviewMeta{font-size:11px;margin-bottom:4px}
+        .gkmV331PreviewGenres{gap:4px;margin:5px 0}.gkmV331PreviewGenres span{font-size:9px;padding:3px 6px}
+        .gkmV331PreviewDesc{font-size:11px;max-height:64px;line-height:1.35}.gkmV331PreviewHint{font-size:10px;margin-top:6px}
+        .gkmV331Info{left:8px;right:8px;bottom:8px;max-width:none;padding:8px 10px}.gkmV331Hint{display:none}
       }
       @media(prefers-reduced-motion:reduce){
-        .gkmV330Tile,#gkmV330Preview{transition:none!important}
+        .gkmV331Tile,#gkmV331Preview{transition:none!important}
       }
     `;
     document.head.appendChild(st);
   }
 
   function syncKindButtons(){
-    document.querySelectorAll("#gkmV330Overlay [data-kind]").forEach(btn=>{
+    document.querySelectorAll("#gkmV331Overlay [data-kind]").forEach(btn=>{
       btn.classList.toggle("is-active", btn.dataset.kind === currentKind);
     });
   }
@@ -12615,9 +12636,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const oldBtn = document.getElementById("gkmV329Btn");
     if(oldBtn) oldBtn.remove();
 
-    if(!document.getElementById("gkmV330Btn")){
+    if(!document.getElementById("gkmV331Btn")){
       const btn = document.createElement("button");
-      btn.id = "gkmV330Btn";
+      btn.id = "gkmV331Btn";
       btn.type = "button";
       btn.textContent = "🌌 3D стена";
       btn.onclick = () => openWall("all");
@@ -12627,31 +12648,31 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const oldOverlay = document.getElementById("gkmV329Overlay");
     if(oldOverlay) oldOverlay.remove();
 
-    if(document.getElementById("gkmV330Overlay")) return;
+    if(document.getElementById("gkmV331Overlay")) return;
 
     const overlay = document.createElement("div");
-    overlay.id = "gkmV330Overlay";
+    overlay.id = "gkmV331Overlay";
     overlay.innerHTML = `
-      <div class="gkmV330Top">
-        <div class="gkmV330Heading">
-          <div class="gkmV330Title">🌌 3D мозаика постеров V330</div>
-          <div class="gkmV330Sub">Цельное полотно на весь экран. Карточка больше не лезет в центр: показывается сбоку, чтобы не перекрывать середину сетки.</div>
+      <div class="gkmV331Top">
+        <div class="gkmV331Heading">
+          <div class="gkmV331Title">🌌 3D мозаика постеров V331</div>
+          <div class="gkmV331Sub">Быстрая виртуальная мозаика: весь каталог участвует в выборе, но одновременно рисуется только безопасный набор постеров.</div>
         </div>
-        <div class="gkmV330Actions">
+        <div class="gkmV331Actions">
           <button data-kind="all">Все</button>
           <button data-kind="movies">Фильмы</button>
           <button data-kind="series">Сериалы</button>
           <button data-kind="anime">Аниме</button>
           <button data-kind="cartoons">Мульты</button>
-          <button id="gkmV330AutoBtn">▶ Авто</button>
-          <button id="gkmV330MixBtn">🔀 Микс</button>
-          <button id="gkmV330CloseBtn">✕</button>
+          <button id="gkmV331AutoBtn">▶ Авто</button>
+          <button id="gkmV331MixBtn">⏭ Другой набор</button>
+          <button id="gkmV331CloseBtn">✕</button>
         </div>
       </div>
-      <div id="gkmV330Scene"><div id="gkmV330World"></div></div>
-      <div id="gkmV330Preview"></div>
-      <div class="gkmV330Info"><b>Загрузка...</b><div class="meta">Собираю уникальные постеры.</div></div>
-      <div class="gkmV330Hint">мышь — линза и карточка сбоку<br>клик — открыть карточку<br>зажать и вести — наклон</div>
+      <div id="gkmV331Scene"><div id="gkmV331World"></div></div>
+      <div id="gkmV331Preview"></div>
+      <div class="gkmV331Info"><b>Загрузка...</b><div class="meta">Собираю уникальные постеры.</div></div>
+      <div class="gkmV331Hint">мышь — линза и карточка сбоку<br>клик — открыть карточку<br>зажать и вести — наклон</div>
     `;
     document.body.appendChild(overlay);
 
@@ -12664,18 +12685,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       };
     });
 
-    document.getElementById("gkmV330CloseBtn").onclick = () => closeWall();
-    document.getElementById("gkmV330MixBtn").onclick = () => {
+    document.getElementById("gkmV331CloseBtn").onclick = () => closeWall();
+    document.getElementById("gkmV331MixBtn").onclick = () => {
       resetLens();
-      uniqueItems.sort(()=>Math.random()-.5);
+      sampleCursor = (sampleCursor + 997) % Math.max(1, uniqueItems.length);
       buildWall();
     };
-    document.getElementById("gkmV330AutoBtn").onclick = () => {
+    document.getElementById("gkmV331AutoBtn").onclick = () => {
       autoFloat = !autoFloat;
-      document.getElementById("gkmV330AutoBtn").textContent = autoFloat ? "⏸ Авто" : "▶ Авто";
+      document.getElementById("gkmV331AutoBtn").textContent = autoFloat ? "⏸ Авто" : "▶ Авто";
     };
 
-    const scene = document.getElementById("gkmV330Scene");
+    const scene = document.getElementById("gkmV331Scene");
     scene.addEventListener("pointerdown", e=>{
       if(e.button !== 0) return;
       isDragging = true;
@@ -12697,7 +12718,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         resetLens(false);
         return;
       }
-      applyLens(e.clientX, e.clientY);
+      pendingPointer = {x:e.clientX,y:e.clientY};
+      if(!lensRaf){
+        lensRaf = requestAnimationFrame(()=>{
+          lensRaf = 0;
+          if(pendingPointer) applyLens(pendingPointer.x, pendingPointer.y);
+        });
+      }
     });
     scene.addEventListener("pointerup", e=>{
       const shouldOpen = isDragging && !dragMoved && activeRecord;
@@ -12747,13 +12774,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function setSummary(){
-    const box = document.querySelector(".gkmV330Info");
+    const box = document.querySelector(".gkmV331Info");
     if(!box) return;
-    box.innerHTML = `<b>${esc(kindLabel(currentKind))} — ${wallState.used} уникальных постеров</b><div class="meta">Цельная мозаика без столбов и пустого центра. Наведение создаёт локальную линзу, уход мыши возвращает исходную сетку.</div>`;
+    box.innerHTML = `<b>${esc(kindLabel(currentKind))} — показано ${wallState.used} из ${uniqueItems.length}</b><div class="meta">Весь загруженный каталог участвует в смене наборов. Для скорости одновременно отображается ограниченное число постеров; кнопка «Другой набор» показывает следующие записи.</div>`;
   }
 
   function setInfo(it){
-    const box = document.querySelector(".gkmV330Info");
+    const box = document.querySelector(".gkmV331Info");
     if(!box || !it) return;
     const r = ratingOf(it);
     box.innerHTML = `<b>${esc(titleOf(it))}</b><div class="meta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>`;
@@ -12789,21 +12816,21 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function showPreview(record, clientX, clientY){
-    const prev = document.getElementById("gkmV330Preview");
+    const prev = document.getElementById("gkmV331Preview");
     if(!prev || !record) return;
     const it = record.item;
     const r = ratingOf(it);
     const genres = genresOf(it).slice(0,5);
     prev.style.setProperty("--backdrop", `url("${safeUrl(backdropOf(it))}")`);
     prev.innerHTML = `
-      <div class="gkmV330PreviewInner">
+      <div class="gkmV331PreviewInner">
         <img src="${esc(imgOf(it))}" alt="${esc(titleOf(it))}">
-        <div class="gkmV330PreviewText">
+        <div class="gkmV331PreviewText">
           <h3>${esc(titleOf(it))}</h3>
-          <div class="gkmV330PreviewMeta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>
-          <div class="gkmV330PreviewGenres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div>
-          <div class="gkmV330PreviewDesc">${esc(overviewOf(it))}</div>
-          <div class="gkmV330PreviewHint">Клик мышкой — открыть полную карточку</div>
+          <div class="gkmV331PreviewMeta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>
+          <div class="gkmV331PreviewGenres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div>
+          <div class="gkmV331PreviewDesc">${esc(overviewOf(it))}</div>
+          <div class="gkmV331PreviewHint">Клик мышкой — открыть полную карточку</div>
         </div>
       </div>
     `;
@@ -12813,7 +12840,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function hidePreview(){
-    const prev = document.getElementById("gkmV330Preview");
+    const prev = document.getElementById("gkmV331Preview");
     if(prev) prev.classList.remove("open");
   }
 
@@ -12915,7 +12942,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function applyWorld(autoX=0, autoY=0){
-    const world = document.getElementById("gkmV330World");
+    const world = document.getElementById("gkmV331World");
     if(world) world.style.transform = `translateZ(${zoom}px) rotateX(${rotX + autoX}deg) rotateY(${rotY + autoY}deg)`;
   }
 
@@ -12931,14 +12958,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function buildWall(){
-    const world = document.getElementById("gkmV330World");
+    const world = document.getElementById("gkmV331World");
     if(!world) return;
     resetLens(false);
     world.innerHTML = "";
     tileRecords = [];
 
     if(!uniqueItems.length){
-      const box = document.querySelector(".gkmV330Info");
+      const box = document.querySelector(".gkmV331Info");
       if(box) box.innerHTML = `<b>Постеры не найдены</b><div class="meta">Нет уникальных постеров для этого раздела.</div>`;
       return;
     }
@@ -12946,10 +12973,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const mobile = window.innerWidth < 700;
     const vw = Math.max(360, window.innerWidth);
     const vh = Math.max(520, window.innerHeight);
-    const limit = mobile ? UNIQUE_LIMIT_MOBILE : UNIQUE_LIMIT_DESKTOP;
-    const available = Math.min(uniqueItems.length, limit);
+    const limit = mobile ? RENDER_LIMIT_MOBILE : RENDER_LIMIT_DESKTOP;
+    const sampled = makeSample(uniqueItems, limit);
+    const available = sampled.length;
     const grid = chooseGrid(available, vw, vh);
-    const usedItems = uniqueItems.slice(0, grid.used);
+    const usedItems = sampled.slice(0, grid.used);
     const overscanX = mobile ? 1.12 : 1.09;
     const overscanY = mobile ? 1.10 : 1.08;
     const gridW = vw * overscanX;
@@ -12985,12 +13013,19 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const rx = ny * (mobile ? 8 : 11);
 
       const tile = document.createElement("div");
-      tile.className = "gkmV330Tile";
+      tile.className = "gkmV331Tile";
       tile.style.width = tileW + "px";
       tile.style.height = tileH + "px";
       tile.style.marginLeft = (-tileW/2) + "px";
       tile.style.marginTop = (-tileH/2) + "px";
-      tile.style.setProperty("--poster", `url("${safeUrl(imgOf(it))}")`);
+      const image = document.createElement("img");
+      image.alt = "";
+      image.loading = "lazy";
+      image.decoding = "async";
+      image.dataset.src = (typeof posterSrc === "function" ? posterSrc(it) : imgOf(it));
+      image.dataset.originalSrc = (typeof posterOriginalSrc === "function" ? posterOriginalSrc(it) : imgOf(it));
+      image.addEventListener("error", ()=>{ try{ if(typeof recoverPosterImage === "function") recoverPosterImage(image); }catch(e){} });
+      tile.appendChild(image);
       const baseTransform = `translate3d(${x}px,${y}px,${z}px) rotateX(${rx}deg) rotateY(${ry}deg)`;
       tile.style.transform = baseTransform;
       tile.setAttribute("aria-label", titleOf(it));
@@ -13000,6 +13035,17 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       frag.appendChild(tile);
     });
     world.appendChild(frag);
+    const images = Array.from(world.querySelectorAll("img[data-src]"));
+    let imageIndex = 0;
+    function loadBatch(){
+      const end = Math.min(images.length, imageIndex + POSTER_BATCH);
+      for(; imageIndex < end; imageIndex++){
+        const img = images[imageIndex];
+        if(img && !img.src) img.src = img.dataset.src || img.dataset.originalSrc || "";
+      }
+      if(imageIndex < images.length && isOpen) requestAnimationFrame(loadBatch);
+    }
+    requestAnimationFrame(loadBatch);
 
     rotX = 0;
     rotY = 0;
@@ -13013,7 +13059,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   async function openWall(kind="all"){
     ensureUi();
-    const overlay = document.getElementById("gkmV330Overlay");
+    const overlay = document.getElementById("gkmV331Overlay");
     if(!overlay) return;
     overlay.classList.add("open");
     document.body.style.overflow = "hidden";
@@ -13030,7 +13076,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function closeWall(full=true){
-    const overlay = document.getElementById("gkmV330Overlay");
+    const overlay = document.getElementById("gkmV331Overlay");
     if(overlay) overlay.classList.remove("open");
     document.body.style.overflow = "";
     resetLens(false);
@@ -13064,7 +13110,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install, 500);
   setTimeout(install, 1400);
 
-  console.log("GKM V330: side preview fisheye poster mosaic installed");
+  console.log("GKM V331: virtualized full catalog poster mosaic installed");
 })();
-/* GKM V330 SIDE PREVIEW FISHEYE POSTER MOSAIC END */
+/* GKM V331 VIRTUALIZED FULL CATALOG POSTER MOSAIC END */
 
