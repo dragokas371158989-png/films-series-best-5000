@@ -1,0 +1,109 @@
+name: GKM V339 Safe Daily Catalog Update
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v339-safe-daily-update
+  cancel-in-progress: false
+
+jobs:
+  update-catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync main
+        run: git pull --rebase origin main
+
+      - name: Verify updater files and secret
+        env:
+          KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
+        run: |
+          test -f tools/gkm_v339_safe_auto_update.py
+          test -f tools/gkm_v339_build_poster_wall.py
+          test -f tools/build_fast_site_data.py
+          test -n "$KINOPOISK_API_KEY"
+          echo "V339 updater files and secret found"
+
+      - name: Safe append-only Kinopoisk update
+        env:
+          KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
+          GKM_KP_PAGES_PER_TYPE: "2"
+          GKM_KP_LIMIT: "250"
+          GKM_AUTO_UPDATE_CHUNK_SIZE: "500"
+        run: python tools/gkm_v339_safe_auto_update.py
+
+      - name: Build fast site data
+        run: python tools/build_fast_site_data.py
+
+      - name: Optional fast-data post-fix
+        run: |
+          if [ -f tools/post_fix_fast_data.py ]; then
+            python tools/post_fix_fast_data.py
+          fi
+
+      - name: Rebuild compact poster wall data
+        run: python tools/gkm_v339_build_poster_wall.py
+
+      - name: Validate generated data
+        run: |
+          python tools/gkm_v339_safe_auto_update.py --validate-only
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          meta_path = Path('data/fast/meta.json')
+          wall_path = Path('data/fast/poster_wall_v333/manifest.json')
+          search_path = Path('data/fast/search_index.json')
+
+          assert meta_path.exists(), 'Missing data/fast/meta.json'
+          assert wall_path.exists(), 'Missing data/fast/poster_wall_v333/manifest.json'
+          assert search_path.exists(), 'Missing data/fast/search_index.json'
+
+          meta = json.loads(meta_path.read_text(encoding='utf-8'))
+          wall = json.loads(wall_path.read_text(encoding='utf-8'))
+          search = json.loads(search_path.read_text(encoding='utf-8'))
+
+          assert isinstance(search, list) and len(search) > 0
+          assert int(meta.get('count') or 0) == len(search)
+          assert int(wall.get('total') or 0) > 0
+          assert int(wall.get('total') or 0) <= len(search)
+
+          print('fast count:', meta.get('count'))
+          print('search count:', len(search))
+          print('wall count:', wall.get('total'))
+          print('wall source:', wall.get('source'))
+          PY
+
+      - name: Commit updated catalog
+        run: |
+          git config user.name "gkm-update-bot"
+          git config user.email "gkm-update-bot@users.noreply.github.com"
+          git add data tools/gkm_v339_safe_auto_update.py tools/gkm_v339_build_poster_wall.py .github/workflows/gkm_v339_safe_auto_update.yml
+          if git diff --cached --quiet; then
+            echo "No catalog changes"
+            exit 0
+          fi
+          git commit -m "Auto update catalog V339 safe"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin main && exit 0
+            sleep 6
+          done
+          exit 1
