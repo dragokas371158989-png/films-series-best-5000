@@ -11766,17 +11766,17 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V306 RICH DESCRIPTIONS FIX END */
 
-/* GKM V336 GOLUB AI 1000 LVL START */
+/* GKM V340 GOLUB AI GROQ 1000 LVL START */
 (function(){
-  window.GKM_V336_GOLUB_AI_1000_LVL_VERSION = "v336-golub-ai-1000-lvl-full-catalog-worker-2026-07-12";
-  window.GKM_V336_AI_MODEL_DEFAULT = "gpt-5.6-terra";
+  window.GKM_V340_GOLUB_AI_GROQ_1000_LVL_VERSION = "v340-golub-ai-groq-1000-lvl-full-catalog-worker-2026-07-12";
+  window.GKM_V340_AI_MODEL_DEFAULT = "openai/gpt-oss-120b";
 
   const LIMIT = 12;
   const CACHE = new Map();
   const MEM_KEY = "gkm_v336_ai_memory";
   const HISTORY_KEY = "gkm_v336_ai_history";
   const WALL_BASE = "data/fast/poster_wall_v333";
-  const WALL_VERSION = "v336";
+  const WALL_VERSION = "v340";
   const TIME_LIMIT_MS = 900;
   let lastResults = [];
   let lastQuery = "";
@@ -12237,7 +12237,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return["План:",`1. Начать с: ${title(p[0])}`,p[1]?`2. Потом: ${title(p[1])}`:"",p[2]?`3. На финал: ${title(p[2])}`:""].filter(Boolean).join("\n");
   }
   function help(){
-    return["ГОЛУБЬ AI V336 — помощник 1000 LVL.","Ищет по компактной базе всего каталога, понимает настроение, жанры, годы и кривую раскладку.","Команды: открой 1, похожее на 1, другое, сравни 1 и 2, марафон, полный поиск, статус AI.","Настоящий AI включается через Cloudflare Worker; без Worker остаётся быстрый локальный режим."].join("\n");
+    return["ГОЛУБЬ AI V340 — помощник 1000 LVL.","Ищет по компактной базе всего каталога, понимает настроение, жанры, годы и кривую раскладку.","Команды: открой 1, похожее на 1, другое, сравни 1 и 2, марафон, полный поиск, статус AI.","Настоящий AI включается через Cloudflare Worker + Groq; без Worker остаётся быстрый локальный режим."].join("\n");
   }
 
   async function similarTo(n){
@@ -12269,8 +12269,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const payload = {
         query: q,
         local_answer: localText,
-        site_version: "V336",
-        requested_model: window.GKM_V336_AI_MODEL_DEFAULT,
+        site_version: "V340",
+        requested_model: window.GKM_V340_AI_MODEL_DEFAULT,
         instruction: "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов, чтобы команды открыть 1 и сравнить 1 и 2 работали.",
         conversation: chatHistory.slice(-8),
         memory: mem(),
@@ -12309,9 +12309,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(/статус ai|статус помощника|какой ai/.test(x)){
       const endpoint=window.GKM_AI_ENDPOINT||localStorage.getItem("GKM_AI_ENDPOINT")||"";
       const counts=Object.fromEntries(Object.entries(fullPools).map(([k,v])=>[k,v.length]));
-      return `ГОЛУБЬ AI V336\nРежим: ${endpoint?"Cloudflare Worker + OpenAI":"локальный"}\nМодель по умолчанию Worker: ${window.GKM_V336_AI_MODEL_DEFAULT}\nЗагружено в память: ${JSON.stringify(counts)}\nEndpoint: ${endpoint||"не задан"}`;
+      return `ГОЛУБЬ AI V340\nРежим: ${endpoint?"Cloudflare Worker + Groq":"локальный"}\nМодель по умолчанию Worker: ${window.GKM_V340_AI_MODEL_DEFAULT}\nЗагружено в память: ${JSON.stringify(counts)}\nEndpoint: ${endpoint||"не задан"}`;
     }
-    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x))return"Привет. Я ГОЛУБЬ AI V336. Могу искать по всему каталогу, сравнивать, объяснять и открывать карточки.";
+    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x))return"Привет. Я ГОЛУБЬ AI V340. Могу искать по всему каталогу, сравнивать, объяснять и открывать карточки.";
     if(x.includes("помощ")||x.includes("что умеешь")||x.includes("как искать"))return help();
     const op=x.match(/(?:открой|открыть|покажи)\s+(\d{1,2})/);if(op)return openResult(op[1]);
     const cmp=x.match(/сравни\s+(\d{1,2})\s+(?:и|с)\s+(\d{1,2})/);if(cmp)return compare(cmp[1],cmp[2]);
@@ -12354,7 +12354,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       e.preventDefault();if(e.stopPropagation)e.stopPropagation();
       const q=input.value.trim();if(!q)return;input.value="";
       const seq=++requestSeq;
-      addMsg("user",q);addMsg("bot","ГОЛУБЬ AI V336 ищет по каталогу...");
+      addMsg("user",q);addMsg("bot","ГОЛУБЬ AI V340 ищет по каталогу...");
       try{
         const out=await answer(q);
         if(seq!==requestSeq)return;
@@ -12369,9 +12369,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
   setTimeout(install,100);setTimeout(install,450);setTimeout(install,900);
-  console.log("GKM V336: GOLUB AI 1000 LVL installed");
+  console.log("GKM V340: GOLUB AI 1000 LVL installed");
 })();
-/* GKM V336 GOLUB AI 1000 LVL END */
+/* GKM V340 GOLUB AI GROQ 1000 LVL END */
 
 
 /* GKM V334 INSTANT LOD CANVAS POSTER MOSAIC START */
