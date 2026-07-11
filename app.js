@@ -12290,26 +12290,42 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V316 REAL AI BRIDGE END */
 
 
-/* GKM V332 CANVAS FULL CATALOG POSTER MOSAIC START */
+/* GKM V333 FAST STREAMING CANVAS POSTER MOSAIC START */
 (function(){
-  window.GKM_V332_CANVAS_FULL_CATALOG_POSTER_MOSAIC_VERSION = "v332-canvas-full-catalog-poster-mosaic-4k-visible-2026-07-11";
+  window.GKM_V333_FAST_STREAMING_CANVAS_POSTER_MOSAIC_VERSION = "v333-fast-streaming-canvas-poster-mosaic-chunked-index-2026-07-11";
 
-  const DESKTOP_MIN_VISIBLE = 2600;
-  const DESKTOP_MAX_VISIBLE = 4800;
-  const MOBILE_MIN_VISIBLE = 650;
-  const MOBILE_MAX_VISIBLE = 1400;
-  const DESKTOP_LOAD_CONCURRENCY = 14;
-  const MOBILE_LOAD_CONCURRENCY = 8;
-  const MAX_IMAGE_CACHE = 5600;
+  const DESKTOP_MIN_VISIBLE = 3000;
+  const DESKTOP_MAX_VISIBLE = 5200;
+  const MOBILE_MIN_VISIBLE = 700;
+  const MOBILE_MAX_VISIBLE = 1500;
+  const DESKTOP_LOAD_CONCURRENCY = 32;
+  const MOBILE_LOAD_CONCURRENCY = 14;
+  const MAX_IMAGE_CACHE = 6200;
+  const WALL_DATA_BASE = "data/fast/poster_wall_v333";
+  const WALL_DATA_VERSION = "333";
+  const WALL_KINDS = ["movies","series","anime","cartoons"];
+  const BAYER4 = [[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
 
-  let fullCatalogPool = [];
-  let fullCatalogLoaded = false;
   let currentKind = "all";
   let currentPool = [];
   let visibleItems = [];
   let records = [];
-  let kindPools = new Map();
   let sampleCursors = Object.create(null);
+
+  let wallManifest = null;
+  let manifestPromise = null;
+  let seedPromise = null;
+  let seedPool = [];
+  let allPool = [];
+  const allPoolKeys = new Set();
+  const kindPools = {movies:[],series:[],anime:[],cartoons:[]};
+  const kindPoolKeys = {movies:new Set(),series:new Set(),anime:new Set(),cartoons:new Set()};
+  const loadedChunks = {movies:new Set(),series:new Set(),anime:new Set(),cartoons:new Set()};
+  const chunkPromises = new Map();
+  let totalCatalogCount = 0;
+  let backgroundStarted = false;
+  let backgroundTimer = 0;
+  let backgroundKindCursor = 0;
 
   let isOpen = false;
   let buildToken = 0;
@@ -12332,6 +12348,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let loadQueue = [];
   let activeLoads = 0;
   let loadedCount = 0;
+  let dirtyDrawRaf = 0;
+  let summaryTimer = 0;
+  const dirtyRecords = new Set();
   const imageCache = new Map();
 
   function t(v){ return String(v == null ? "" : v).trim(); }
@@ -12379,10 +12398,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return [];
   }
   function rawImageOf(it){
+    if(it && it.__gkmOriginalPoster) return t(it.__gkmOriginalPoster);
     try{ if(typeof posterOriginalSrc === "function") return t(posterOriginalSrc(it)); }catch(e){}
     return t(it && (it.poster || it.poster_url || it.posterUrl || it.image || it.img || it.cover || it.cover_url || it.thumbnail));
   }
   function normalImageOf(it){
+    if(it && it.__gkmThumbPoster) return t(it.__gkmThumbPoster);
     try{ if(typeof posterSrc === "function") return t(posterSrc(it)); }catch(e){}
     return rawImageOf(it);
   }
@@ -12411,66 +12432,159 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return true;
   }
   function parseJson(j){
-    const out = [];
-    if(!j) return out;
-    if(Array.isArray(j)) out.push(...j);
-    if(Array.isArray(j.items)) out.push(...j.items);
-    if(Array.isArray(j.data)) out.push(...j.data);
-    if(Array.isArray(j.results)) out.push(...j.results);
-    if(j.sections && typeof j.sections === "object"){
-      Object.values(j.sections).forEach(v=>{
-        if(Array.isArray(v)) out.push(...v);
-        else if(v && Array.isArray(v.items)) out.push(...v.items);
-      });
-    }
-    return out.filter(x=>x && typeof x === "object");
+    if(Array.isArray(j)) return j;
+    if(j && Array.isArray(j.items)) return j.items;
+    if(j && Array.isArray(j.data)) return j.data;
+    return [];
   }
 
-  async function loadFullCatalog(){
-    if(fullCatalogLoaded) return fullCatalogPool;
-    let data = [];
-    const url = (typeof SEARCH_LITE_URL !== "undefined" && SEARCH_LITE_URL) ? SEARCH_LITE_URL : "data/fast/search_lite.json";
-    try{
-      const res = await fetch(`${url}${String(url).includes("?") ? "&" : "?"}v=332`, {cache:"force-cache"});
-      if(res.ok) data = parseJson(await res.json());
-    }catch(e){}
-    if(!data.length){
-      try{
-        if(Array.isArray(currentItems)) data.push(...currentItems);
-      }catch(e){}
-      try{
-        if(homeData && homeData.sections){
-          Object.values(homeData.sections).forEach(v=>{
-            if(Array.isArray(v)) data.push(...v);
-            else if(v && Array.isArray(v.items)) data.push(...v.items);
-          });
-        }
-      }catch(e){}
+  async function loadManifest(){
+    if(wallManifest) return wallManifest;
+    if(!manifestPromise){
+      manifestPromise=fetch(`${WALL_DATA_BASE}/manifest.json?v=${WALL_DATA_VERSION}`,{cache:"force-cache",priority:"high"})
+        .then(r=>{ if(!r.ok) throw new Error("poster wall manifest "+r.status); return r.json(); })
+        .then(data=>{ wallManifest=data||{}; totalCatalogCount=Number(wallManifest.total||0); return wallManifest; })
+        .catch(err=>{ manifestPromise=null; throw err; });
     }
-    const seen = new Set();
-    fullCatalogPool = data.filter(it=>{
-      const k = keyOf(it);
-      if(!k || seen.has(k)) return false;
-      seen.add(k);
-      return true;
-    });
-    fullCatalogLoaded = true;
-    kindPools.set("all", fullCatalogPool);
-    return fullCatalogPool;
+    return manifestPromise;
+  }
+
+  function decodePosterCode(code){
+    const raw=t(code);
+    if(raw.startsWith("t:")){
+      const path=raw.slice(2);
+      return {thumb:`https://image.tmdb.org/t/p/w92/${path}`,original:`https://image.tmdb.org/t/p/w342/${path}`};
+    }
+    if(raw.startsWith("m:")){
+      const path=raw.slice(2);
+      const original=`https://cdn.myanimelist.net/${path}`;
+      const thumb=original.replace(/l(\.(?:jpe?g|png|webp))$/i,"$1");
+      return {thumb,original};
+    }
+    const original=raw.startsWith("u:")?raw.slice(2):raw;
+    return {thumb:optimizedPosterUrl(original),original};
+  }
+
+  function expandCompactRow(row){
+    if(!Array.isArray(row)) return row;
+    const typeMap=["Фильм","Сериал","Аниме","Мультфильм"];
+    const poster=decodePosterCode(row[7]);
+    return {
+      id:row[0],ru:row[1]||"",en:row[2]||"",year:row[3]||"",
+      type:typeof row[4]==="number"?typeMap[row[4]]:(row[4]||"Каталог"),
+      rating:Number(row[5]||0),votes:Number(row[6]||0),poster:poster.original,
+      genres:typeof row[8]==="string"?row[8].split("|").filter(Boolean):(row[8]||[]),
+      source:row[9]||"",status:row[10]||"",
+      __gkmThumbPoster:poster.thumb,__gkmOriginalPoster:poster.original
+    };
+  }
+
+  function appendItems(kind,items){
+    const pool=kindPools[kind];
+    const keys=kindPoolKeys[kind];
+    for(const item of items){
+      const k=keyOf(item);
+      if(!k||keys.has(k)) continue;
+      keys.add(k); pool.push(item);
+      if(!allPoolKeys.has(k)){ allPoolKeys.add(k); allPool.push(item); }
+    }
+  }
+
+  async function loadSeed(){
+    if(seedPool.length) return seedPool;
+    if(!seedPromise){
+      seedPromise=loadManifest().then(manifest=>fetch(`${WALL_DATA_BASE}/${manifest.seed||"seed_all.json"}?v=${WALL_DATA_VERSION}`,{cache:"force-cache",priority:"high"}))
+        .then(r=>{ if(!r.ok) throw new Error("poster wall seed "+r.status); return r.json(); })
+        .then(rows=>{
+          seedPool=parseJson(rows).map(expandCompactRow);
+          for(const item of seedPool){ const k=keyOf(item); if(k&&!allPoolKeys.has(k)){ allPoolKeys.add(k); allPool.push(item); } }
+          return seedPool;
+        }).catch(err=>{ seedPromise=null; throw err; });
+    }
+    return seedPromise;
+  }
+
+  async function loadKindChunk(kind,index,priority="auto"){
+    await loadManifest();
+    const files=wallManifest&&wallManifest.kinds&&wallManifest.kinds[kind]&&wallManifest.kinds[kind].files||[];
+    if(index<0||index>=files.length) return [];
+    if(loadedChunks[kind].has(index)) return kindPools[kind];
+    const key=`${kind}:${index}`;
+    if(!chunkPromises.has(key)){
+      const promise=fetch(`${WALL_DATA_BASE}/${files[index]}?v=${WALL_DATA_VERSION}`,{cache:"force-cache",priority})
+        .then(r=>{ if(!r.ok) throw new Error(files[index]+" "+r.status); return r.json(); })
+        .then(rows=>{
+          const items=parseJson(rows).map(expandCompactRow);
+          loadedChunks[kind].add(index);
+          appendItems(kind,items);
+          return items;
+        }).finally(()=>chunkPromises.delete(key));
+      chunkPromises.set(key,promise);
+    }
+    await chunkPromises.get(key);
+    return kindPools[kind];
+  }
+
+  function nextUnloadedChunk(kind){
+    const files=wallManifest&&wallManifest.kinds&&wallManifest.kinds[kind]&&wallManifest.kinds[kind].files||[];
+    for(let i=0;i<files.length;i++) if(!loadedChunks[kind].has(i)) return i;
+    return -1;
+  }
+
+  async function ensurePool(kind,minCount){
+    await loadManifest();
+    if(kind==="all"){
+      await loadSeed();
+      return allPool;
+    }
+    while(kindPools[kind].length<minCount){
+      const next=nextUnloadedChunk(kind);
+      if(next<0) break;
+      await loadKindChunk(kind,next,"high");
+    }
+    return kindPools[kind];
+  }
+
+  function scheduleBackgroundCatalog(){
+    if(backgroundStarted) return;
+    backgroundStarted=true;
+    const started=Date.now();
+    const step=async()=>{
+      if(!isOpen){ backgroundStarted=false; return; }
+      await loadManifest().catch(()=>null);
+      let picked="";
+      for(let i=0;i<WALL_KINDS.length;i++){
+        const kind=WALL_KINDS[(backgroundKindCursor+i)%WALL_KINDS.length];
+        if(nextUnloadedChunk(kind)>=0){ picked=kind; backgroundKindCursor=(backgroundKindCursor+i+1)%WALL_KINDS.length; break; }
+      }
+      if(!picked) return;
+      const next=nextUnloadedChunk(picked);
+      if(next>=0) await loadKindChunk(picked,next,"low").catch(()=>null);
+      const schedule=window.requestIdleCallback||((fn)=>setTimeout(fn,220));
+      schedule(()=>step(),{timeout:1500});
+    };
+    const waitForVisiblePosters=()=>{
+      if(!isOpen){ backgroundStarted=false; return; }
+      const enough=loadedCount>=Math.min(900,Math.ceil(records.length*.24));
+      if(enough||Date.now()-started>8000) step();
+      else backgroundTimer=setTimeout(waitForVisiblePosters,450);
+    };
+    clearTimeout(backgroundTimer);
+    backgroundTimer=setTimeout(waitForVisiblePosters,2600);
+  }
+
+  function warmupData(){
+    loadManifest().then(()=>loadSeed()).catch(()=>{});
   }
 
   async function getKindPool(kind){
-    await loadFullCatalog();
-    if(kindPools.has(kind)) return kindPools.get(kind);
-    const pool = fullCatalogPool.filter(it=>passKind(it,kind));
-    kindPools.set(kind,pool);
-    return pool;
+    const target=visibleTarget();
+    await ensurePool(kind,target);
+    return kind==="all"?allPool:kindPools[kind];
   }
 
   function gcd(a,b){
-    a = Math.abs(a); b = Math.abs(b);
-    while(b){ const x = a % b; a = b; b = x; }
-    return a || 1;
+    a=Math.abs(a);b=Math.abs(b);while(b){const x=a%b;a=b;b=x;}return a||1;
   }
   function samplePool(pool,count,kind){
     if(pool.length <= count) return pool.slice();
@@ -12505,36 +12619,36 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function removeOldUi(){
     const ids = [
-      "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn","gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn","gkmV327Btn","gkmV328Btn","gkmV329Btn","gkmV330Btn","gkmV331Btn",
-      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay","gkmV327Overlay","gkmV328Overlay","gkmV329Overlay","gkmV330Overlay","gkmV331Overlay",
-      "gkmV325Preview","gkmV327Preview","gkmV328Preview","gkmV329Preview","gkmV330Preview","gkmV331Preview"
+      "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn","gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn","gkmV327Btn","gkmV328Btn","gkmV329Btn","gkmV330Btn","gkmV331Btn","gkmV332Btn",
+      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay","gkmV327Overlay","gkmV328Overlay","gkmV329Overlay","gkmV330Overlay","gkmV331Overlay","gkmV332Overlay",
+      "gkmV325Preview","gkmV327Preview","gkmV328Preview","gkmV329Preview","gkmV330Preview","gkmV331Preview","gkmV332Preview"
     ];
     ids.forEach(id=>{ const el=document.getElementById(id); if(el) el.remove(); });
-    ["gkmV325Css","gkmV327Css","gkmV328Css","gkmV329Css","gkmV330Css","gkmV331Css"].forEach(id=>{ const el=document.getElementById(id); if(el) el.remove(); });
+    ["gkmV325Css","gkmV327Css","gkmV328Css","gkmV329Css","gkmV330Css","gkmV331Css","gkmV332Css"].forEach(id=>{ const el=document.getElementById(id); if(el) el.remove(); });
   }
 
   function ensureCss(){
-    if(document.getElementById("gkmV332Css")) return;
+    if(document.getElementById("gkmV333Css")) return;
     const st = document.createElement("style");
-    st.id = "gkmV332Css";
+    st.id = "gkmV333Css";
     st.textContent = `
-      #gkmV332Btn{position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)}
-      #gkmV332Overlay{position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;background:#02040b}
-      #gkmV332Overlay.open{display:block}
-      #gkmV332Scene{position:absolute;inset:0;z-index:2;overflow:hidden;cursor:crosshair;user-select:none;touch-action:none;background:radial-gradient(circle at 50% 48%,rgba(25,75,142,.17),transparent 38%),linear-gradient(110deg,#041522,#07102b 56%,#1f0e48)}
-      #gkmV332Stage{position:absolute;inset:0;overflow:hidden}
-      #gkmV332Base,#gkmV332Fx{position:absolute;inset:0;width:100%;height:100%;display:block}
-      #gkmV332Fx{pointer-events:none}
-      .gkmV332Top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:8px 12px 0;pointer-events:none}
-      .gkmV332Heading{max-width:min(650px,49vw);padding:7px 10px;border-radius:14px;background:linear-gradient(90deg,rgba(1,15,32,.88),rgba(1,15,32,.40),transparent);text-shadow:0 2px 14px rgba(0,0,0,.85)}
-      .gkmV332Title{font-size:21px;font-weight:950;line-height:1.04}.gkmV332Sub{font-size:11px;color:rgba(255,255,255,.78);margin-top:3px}
-      .gkmV332Actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}.gkmV332Actions button{border:1px solid rgba(0,220,255,.34);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));color:#fff;border-radius:13px;padding:9px 12px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)}.gkmV332Actions button:hover{filter:brightness(1.16)}.gkmV332Actions button.is-active{box-shadow:0 0 0 2px rgba(255,255,255,.22) inset,0 0 22px rgba(0,200,255,.32);filter:brightness(1.12)}
-      #gkmV332Preview{position:fixed;left:20px;top:96px;z-index:36;width:min(620px,35vw);min-height:292px;opacity:0;visibility:hidden;transform:translateY(10px) scale(.965);transition:opacity .14s ease,transform .17s ease,visibility .14s,left .10s ease,top .10s ease;border:1px solid rgba(73,207,255,.42);border-radius:22px;overflow:hidden;background:#071124;box-shadow:0 28px 100px rgba(0,0,0,.76),0 0 40px rgba(0,155,255,.22);pointer-events:none;backdrop-filter:blur(14px)}
-      #gkmV332Preview.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}#gkmV332Preview::before{content:"";position:absolute;inset:-18px;background-image:linear-gradient(90deg,rgba(3,8,20,.94),rgba(3,8,20,.82) 47%,rgba(3,8,20,.58)),var(--backdrop);background-size:cover;background-position:center;filter:blur(5px) saturate(1.08);transform:scale(1.06)}#gkmV332Preview::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,6,16,.80),rgba(1,6,16,.38) 58%,rgba(1,6,16,.58))}
-      .gkmV332PreviewInner{position:relative;z-index:2;display:grid;grid-template-columns:174px 1fr;gap:20px;min-height:292px;padding:20px}#gkmV332Preview img{width:174px;height:261px;object-fit:cover;border-radius:15px;box-shadow:0 18px 44px rgba(0,0,0,.66)}.gkmV332PreviewText{align-self:center;text-shadow:0 2px 10px rgba(0,0,0,.8)}.gkmV332PreviewText h3{margin:0 0 9px;font-size:31px;line-height:1.03}.gkmV332PreviewMeta{font-size:13px;color:rgba(255,255,255,.86);margin-bottom:8px}.gkmV332PreviewGenres{display:flex;gap:6px;flex-wrap:wrap;margin:7px 0 10px}.gkmV332PreviewGenres span{padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.13);font-size:10px}.gkmV332PreviewDesc{font-size:13px;color:rgba(255,255,255,.9);line-height:1.43;max-height:108px;overflow:hidden}.gkmV332PreviewHint{margin-top:11px;font-size:11px;color:rgba(98,224,255,.95);font-weight:800}
-      .gkmV332Info{position:absolute;left:14px;bottom:14px;z-index:28;max-width:min(620px,calc(100vw - 28px));background:rgba(2,10,24,.80);border:1px solid rgba(0,205,255,.22);border-radius:15px;padding:10px 13px;color:#fff;backdrop-filter:blur(10px);pointer-events:none;box-shadow:0 10px 32px rgba(0,0,0,.35)}.gkmV332Info b{display:block;font-size:15px;margin-bottom:3px}.gkmV332Info .meta{color:rgba(255,255,255,.72);font-size:11px}.gkmV332Hint{position:absolute;right:17px;bottom:15px;z-index:28;color:rgba(255,255,255,.62);font-size:11px;text-align:right;pointer-events:none;text-shadow:0 2px 8px #000}
-      @media(max-width:700px){#gkmV332Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}.gkmV332Top{padding:6px 7px 0}.gkmV332Heading{max-width:44vw;padding:6px 7px}.gkmV332Title{font-size:15px}.gkmV332Sub{display:none}.gkmV332Actions{gap:4px}.gkmV332Actions button{padding:7px 8px;font-size:10px;border-radius:10px}#gkmV332Preview{left:9px!important;top:auto!important;right:9px!important;bottom:72px!important;width:auto;min-height:218px;border-radius:17px}.gkmV332PreviewInner{grid-template-columns:96px 1fr;gap:11px;min-height:218px;padding:10px}#gkmV332Preview img{width:96px;height:144px;border-radius:10px}.gkmV332PreviewText h3{font-size:19px;margin-bottom:5px}.gkmV332PreviewMeta{font-size:10px;margin-bottom:3px}.gkmV332PreviewGenres{gap:4px;margin:4px 0}.gkmV332PreviewGenres span{font-size:8px;padding:3px 5px}.gkmV332PreviewDesc{font-size:10px;max-height:58px;line-height:1.3}.gkmV332PreviewHint{font-size:9px;margin-top:5px}.gkmV332Info{left:8px;right:8px;bottom:8px;max-width:none;padding:8px 10px}.gkmV332Hint{display:none}}
-      @media(prefers-reduced-motion:reduce){#gkmV332Preview{transition:none!important}}
+      #gkmV333Btn{position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)}
+      #gkmV333Overlay{position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;background:#02040b}
+      #gkmV333Overlay.open{display:block}
+      #gkmV333Scene{position:absolute;inset:0;z-index:2;overflow:hidden;cursor:crosshair;user-select:none;touch-action:none;background:radial-gradient(circle at 50% 48%,rgba(25,75,142,.17),transparent 38%),linear-gradient(110deg,#041522,#07102b 56%,#1f0e48)}
+      #gkmV333Stage{position:absolute;inset:0;overflow:hidden}
+      #gkmV333Base,#gkmV333Fx{position:absolute;inset:0;width:100%;height:100%;display:block}
+      #gkmV333Fx{pointer-events:none}
+      .gkmV333Top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:8px 12px 0;pointer-events:none}
+      .gkmV333Heading{max-width:min(650px,49vw);padding:7px 10px;border-radius:14px;background:linear-gradient(90deg,rgba(1,15,32,.88),rgba(1,15,32,.40),transparent);text-shadow:0 2px 14px rgba(0,0,0,.85)}
+      .gkmV333Title{font-size:21px;font-weight:950;line-height:1.04}.gkmV333Sub{font-size:11px;color:rgba(255,255,255,.78);margin-top:3px}
+      .gkmV333Actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}.gkmV333Actions button{border:1px solid rgba(0,220,255,.34);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));color:#fff;border-radius:13px;padding:9px 12px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)}.gkmV333Actions button:hover{filter:brightness(1.16)}.gkmV333Actions button.is-active{box-shadow:0 0 0 2px rgba(255,255,255,.22) inset,0 0 22px rgba(0,200,255,.32);filter:brightness(1.12)}
+      #gkmV333Preview{position:fixed;left:20px;top:96px;z-index:36;width:min(620px,35vw);min-height:292px;opacity:0;visibility:hidden;transform:translateY(10px) scale(.965);transition:opacity .14s ease,transform .17s ease,visibility .14s,left .10s ease,top .10s ease;border:1px solid rgba(73,207,255,.42);border-radius:22px;overflow:hidden;background:#071124;box-shadow:0 28px 100px rgba(0,0,0,.76),0 0 40px rgba(0,155,255,.22);pointer-events:none;backdrop-filter:blur(14px)}
+      #gkmV333Preview.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}#gkmV333Preview::before{content:"";position:absolute;inset:-18px;background-image:linear-gradient(90deg,rgba(3,8,20,.94),rgba(3,8,20,.82) 47%,rgba(3,8,20,.58)),var(--backdrop);background-size:cover;background-position:center;filter:blur(5px) saturate(1.08);transform:scale(1.06)}#gkmV333Preview::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,6,16,.80),rgba(1,6,16,.38) 58%,rgba(1,6,16,.58))}
+      .gkmV333PreviewInner{position:relative;z-index:2;display:grid;grid-template-columns:174px 1fr;gap:20px;min-height:292px;padding:20px}#gkmV333Preview img{width:174px;height:261px;object-fit:cover;border-radius:15px;box-shadow:0 18px 44px rgba(0,0,0,.66)}.gkmV333PreviewText{align-self:center;text-shadow:0 2px 10px rgba(0,0,0,.8)}.gkmV333PreviewText h3{margin:0 0 9px;font-size:31px;line-height:1.03}.gkmV333PreviewMeta{font-size:13px;color:rgba(255,255,255,.86);margin-bottom:8px}.gkmV333PreviewGenres{display:flex;gap:6px;flex-wrap:wrap;margin:7px 0 10px}.gkmV333PreviewGenres span{padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.13);font-size:10px}.gkmV333PreviewDesc{font-size:13px;color:rgba(255,255,255,.9);line-height:1.43;max-height:108px;overflow:hidden}.gkmV333PreviewHint{margin-top:11px;font-size:11px;color:rgba(98,224,255,.95);font-weight:800}
+      .gkmV333Info{position:absolute;left:14px;bottom:14px;z-index:28;max-width:min(620px,calc(100vw - 28px));background:rgba(2,10,24,.80);border:1px solid rgba(0,205,255,.22);border-radius:15px;padding:10px 13px;color:#fff;backdrop-filter:blur(10px);pointer-events:none;box-shadow:0 10px 32px rgba(0,0,0,.35)}.gkmV333Info b{display:block;font-size:15px;margin-bottom:3px}.gkmV333Info .meta{color:rgba(255,255,255,.72);font-size:11px}.gkmV333Hint{position:absolute;right:17px;bottom:15px;z-index:28;color:rgba(255,255,255,.62);font-size:11px;text-align:right;pointer-events:none;text-shadow:0 2px 8px #000}
+      @media(max-width:700px){#gkmV333Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}.gkmV333Top{padding:6px 7px 0}.gkmV333Heading{max-width:44vw;padding:6px 7px}.gkmV333Title{font-size:15px}.gkmV333Sub{display:none}.gkmV333Actions{gap:4px}.gkmV333Actions button{padding:7px 8px;font-size:10px;border-radius:10px}#gkmV333Preview{left:9px!important;top:auto!important;right:9px!important;bottom:72px!important;width:auto;min-height:218px;border-radius:17px}.gkmV333PreviewInner{grid-template-columns:96px 1fr;gap:11px;min-height:218px;padding:10px}#gkmV333Preview img{width:96px;height:144px;border-radius:10px}.gkmV333PreviewText h3{font-size:19px;margin-bottom:5px}.gkmV333PreviewMeta{font-size:10px;margin-bottom:3px}.gkmV333PreviewGenres{gap:4px;margin:4px 0}.gkmV333PreviewGenres span{font-size:8px;padding:3px 5px}.gkmV333PreviewDesc{font-size:10px;max-height:58px;line-height:1.3}.gkmV333PreviewHint{font-size:9px;margin-top:5px}.gkmV333Info{left:8px;right:8px;bottom:8px;max-width:none;padding:8px 10px}.gkmV333Hint{display:none}}
+      @media(prefers-reduced-motion:reduce){#gkmV333Preview{transition:none!important}}
     `;
     document.head.appendChild(st);
   }
@@ -12542,34 +12656,36 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function ensureUi(){
     removeOldUi();
     ensureCss();
-    if(!document.getElementById("gkmV332Btn")){
+    if(!document.getElementById("gkmV333Btn")){
       const btn = document.createElement("button");
-      btn.id = "gkmV332Btn";
+      btn.id = "gkmV333Btn";
       btn.type = "button";
       btn.textContent = "🌌 3D стена";
       btn.onclick = ()=>openWall("all");
+      btn.addEventListener("pointerenter",warmupData,{once:true});
+      btn.addEventListener("focus",warmupData,{once:true});
       document.body.appendChild(btn);
     }
-    if(document.getElementById("gkmV332Overlay")) return;
+    if(document.getElementById("gkmV333Overlay")) return;
     const overlay = document.createElement("div");
-    overlay.id = "gkmV332Overlay";
+    overlay.id = "gkmV333Overlay";
     overlay.innerHTML = `
-      <div class="gkmV332Top">
-        <div class="gkmV332Heading"><div class="gkmV332Title">🌌 Canvas-мозаика постеров V332</div><div class="gkmV332Sub">Без тысяч DOM-карточек: несколько тысяч постеров рисуются двумя canvas. Весь каталог участвует в наборах.</div></div>
-        <div class="gkmV332Actions">
+      <div class="gkmV333Top">
+        <div class="gkmV333Heading"><div class="gkmV333Title">🌌 Быстрая Canvas-мозаика V333</div><div class="gkmV333Sub">Быстрый старт из компактных пакетов: экран заполняется равномерно, полный каталог догружается в фоне.</div></div>
+        <div class="gkmV333Actions">
           <button data-kind="all">Все</button><button data-kind="movies">Фильмы</button><button data-kind="series">Сериалы</button><button data-kind="anime">Аниме</button><button data-kind="cartoons">Мульты</button>
-          <button id="gkmV332MixBtn">⏭ Другой набор</button><button id="gkmV332CloseBtn">✕</button>
+          <button id="gkmV333MixBtn">⏭ Другой набор</button><button id="gkmV333CloseBtn">✕</button>
         </div>
       </div>
-      <div id="gkmV332Scene"><div id="gkmV332Stage"><canvas id="gkmV332Base"></canvas><canvas id="gkmV332Fx"></canvas></div></div>
-      <div id="gkmV332Preview"></div>
-      <div class="gkmV332Info"><b>Загрузка каталога...</b><div class="meta">Подготавливаю Canvas-мозаику.</div></div>
-      <div class="gkmV332Hint">несколько тысяч постеров на canvas<br>наведение — линза и карточка<br>клик — открыть полную карточку</div>
+      <div id="gkmV333Scene"><div id="gkmV333Stage"><canvas id="gkmV333Base"></canvas><canvas id="gkmV333Fx"></canvas></div></div>
+      <div id="gkmV333Preview"></div>
+      <div class="gkmV333Info"><b>Загрузка каталога...</b><div class="meta">Загружаю быстрый пакет постеров.</div></div>
+      <div class="gkmV333Hint">быстрая потоковая загрузка постеров<br>наведение — линза и карточка<br>клик — открыть полную карточку</div>
     `;
     document.body.appendChild(overlay);
 
-    baseCanvas = document.getElementById("gkmV332Base");
-    fxCanvas = document.getElementById("gkmV332Fx");
+    baseCanvas = document.getElementById("gkmV333Base");
+    fxCanvas = document.getElementById("gkmV333Fx");
     baseCtx = baseCanvas.getContext("2d", {alpha:false,desynchronized:true});
     fxCtx = fxCanvas.getContext("2d", {alpha:true,desynchronized:true});
 
@@ -12580,10 +12696,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         syncKindButtons();
       };
     });
-    document.getElementById("gkmV332MixBtn").onclick = ()=>buildWall(false);
-    document.getElementById("gkmV332CloseBtn").onclick = ()=>closeWall();
+    document.getElementById("gkmV333MixBtn").onclick = ()=>buildWall(false);
+    document.getElementById("gkmV333CloseBtn").onclick = ()=>closeWall();
 
-    const scene = document.getElementById("gkmV332Scene");
+    const scene = document.getElementById("gkmV333Scene");
     scene.addEventListener("pointermove", e=>{
       pendingPointer = {x:e.clientX,y:e.clientY};
       if(!pointerRaf){
@@ -12605,13 +12721,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function syncKindButtons(){
-    document.querySelectorAll("#gkmV332Overlay [data-kind]").forEach(btn=>btn.classList.toggle("is-active",btn.dataset.kind===currentKind));
+    document.querySelectorAll("#gkmV333Overlay [data-kind]").forEach(btn=>btn.classList.toggle("is-active",btn.dataset.kind===currentKind));
   }
 
   function resizeCanvas(){
     viewportW = Math.max(360,window.innerWidth);
     viewportH = Math.max(500,window.innerHeight);
-    canvasDpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1.15 : 1.35);
+    canvasDpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1 : 1.10);
     [baseCanvas,fxCanvas].forEach(canvas=>{
       canvas.width = Math.max(1,Math.round(viewportW*canvasDpr));
       canvas.height = Math.max(1,Math.round(viewportH*canvasDpr));
@@ -12620,7 +12736,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     });
     baseCtx.setTransform(canvasDpr,0,0,canvasDpr,0,0);
     fxCtx.setTransform(canvasDpr,0,0,canvasDpr,0,0);
-    baseCtx.imageSmoothingEnabled = true;
+    baseCtx.imageSmoothingEnabled = false;
     fxCtx.imageSmoothingEnabled = true;
   }
 
@@ -12663,8 +12779,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function drawBaseRecord(rec){
-    if(!isOpen || rec.token!==buildToken) return;
+    if(!isOpen||rec.token!==buildToken) return;
     if(!drawCover(baseCtx,rec.img,rec.x,rec.y,rec.w,rec.h)) drawPlaceholder(baseCtx,rec);
+  }
+
+  function flushDirtyDraws(){
+    dirtyDrawRaf=0;
+    const list=[...dirtyRecords];
+    dirtyRecords.clear();
+    for(const rec of list) drawBaseRecord(rec);
+  }
+
+  function scheduleBaseDraw(rec){
+    if(rec) dirtyRecords.add(rec);
+    if(!dirtyDrawRaf) dirtyDrawRaf=requestAnimationFrame(flushDirtyDraws);
+  }
+
+  function scheduleSummaryUpdate(){
+    if(summaryTimer) return;
+    summaryTimer=setTimeout(()=>{summaryTimer=0;updateSummary();},180);
   }
 
   function drawBase(){
@@ -12675,15 +12808,19 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function optimizedPosterUrl(raw){
-    const s = t(raw);
-    if(!s || s.startsWith("data:") || s.startsWith("blob:")) return s;
+    const s=t(raw);
+    if(!s||s.startsWith("data:")||s.startsWith("blob:")) return s;
     try{
-      const u = new URL(s,location.href);
+      const u=new URL(s,location.href);
       if(u.hostname.includes("image.tmdb.org")){
-        u.pathname = u.pathname.replace(/\/t\/p\/(?:w\d+|original)\//,"/t/p/w92/");
+        u.pathname=u.pathname.replace(/\/t\/p\/(?:w\d+|original)\//,"/t/p/w92/");
         return u.href;
       }
-      if(u.hostname === location.hostname) return u.href;
+      if(u.hostname.includes("cdn.myanimelist.net")){
+        u.pathname=u.pathname.replace(/l(\.(?:jpe?g|png|webp))$/i,"$1");
+        return u.href;
+      }
+      if(u.hostname===location.hostname) return u.href;
     }catch(e){}
     return s;
   }
@@ -12700,14 +12837,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function posterCandidates(it){
-    const raw = normalImageOf(it) || rawImageOf(it);
-    const original = rawImageOf(it) || raw;
-    const list = [optimizedPosterUrl(raw), optimizedPosterUrl(original), raw, original, tinyProxyUrl(original), generatedImageOf(it)];
-    const seen = new Set();
-    return list.filter(v=>{ const s=t(v); if(!s || seen.has(s)) return false; seen.add(s); return true; });
+    const thumb=normalImageOf(it)||rawImageOf(it);
+    const original=rawImageOf(it)||thumb;
+    const list=[optimizedPosterUrl(thumb),thumb,optimizedPosterUrl(original),original,tinyProxyUrl(original),generatedImageOf(it)];
+    const seen=new Set();
+    return list.filter(v=>{const s=t(v);if(!s||seen.has(s))return false;seen.add(s);return true;});
   }
 
-  function cacheImage(url){
+  function cacheImage(url,priority="auto"){
     const cached=imageCache.get(url);
     if(cached){
       cached.used=Date.now();
@@ -12719,8 +12856,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     entry.promise=new Promise((resolve,reject)=>{
       const img=new Image();
       img.decoding="async";
-      img.onload=()=>{ entry.state="loaded"; entry.img=img; entry.used=Date.now(); resolve(img); };
-      img.onerror=()=>{ entry.state="failed"; entry.used=Date.now(); reject(new Error("image load failed")); };
+      img.referrerPolicy="no-referrer";
+      try{ img.fetchPriority=priority; }catch(e){}
+      img.onload=()=>{entry.state="loaded";entry.img=img;entry.used=Date.now();resolve(img);};
+      img.onerror=()=>{entry.state="failed";entry.used=Date.now();reject(new Error("image load failed"));};
       img.src=url;
     });
     imageCache.set(url,entry);
@@ -12739,14 +12878,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const candidates=posterCandidates(rec.item);
     for(const url of candidates){
       try{
-        const img=await cacheImage(url);
+        const img=await cacheImage(url,rec.priority?"high":"auto");
         if(rec.token!==buildToken) return;
         rec.img=img;
         rec.loaded=true;
         loadedCount++;
-        drawBaseRecord(rec);
-        if(activeRecord===rec && pendingPointer) renderLens(pendingPointer.x,pendingPointer.y);
-        if(loadedCount===1 || loadedCount%40===0 || loadedCount===records.length) updateSummary();
+        scheduleBaseDraw(rec);
+        if(activeRecord===rec&&pendingPointer) renderLens(pendingPointer.x,pendingPointer.y);
+        scheduleSummaryUpdate();
         trimImageCache();
         return;
       }catch(e){}
@@ -12755,37 +12894,44 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function enqueueRecords(list,priority=false){
-    const fresh=list.filter(rec=>rec && !rec.loaded && !rec.loading && !rec.queued && rec.token===buildToken);
-    fresh.forEach(rec=>rec.queued=true);
-    if(priority) loadQueue.unshift(...fresh);
-    else loadQueue.push(...fresh);
+    for(const rec of list){
+      if(!rec||rec.loaded||rec.loading||rec.token!==buildToken) continue;
+      if(priority) rec.priority=true;
+      if(rec.queued){
+        if(priority){
+          const idx=loadQueue.indexOf(rec);
+          if(idx>0){loadQueue.splice(idx,1);loadQueue.unshift(rec);}
+        }
+        continue;
+      }
+      rec.queued=true;
+      if(priority) loadQueue.unshift(rec); else loadQueue.push(rec);
+    }
     pumpQueue();
   }
 
   function pumpQueue(){
-    const limit=window.innerWidth<700?MOBILE_LOAD_CONCURRENCY:DESKTOP_LOAD_CONCURRENCY;
-    while(activeLoads<limit && loadQueue.length){
+    const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
+    const slow=connection&&/2g|slow-2g/.test(connection.effectiveType||"");
+    const base=window.innerWidth<700?MOBILE_LOAD_CONCURRENCY:DESKTOP_LOAD_CONCURRENCY;
+    const limit=slow?Math.min(base,8):base;
+    while(activeLoads<limit&&loadQueue.length){
       const rec=loadQueue.shift();
-      if(!rec || rec.token!==buildToken){ if(rec) rec.queued=false; continue; }
-      rec.queued=false;
-      rec.loading=true;
-      activeLoads++;
-      loadRecordImage(rec).finally(()=>{
-        rec.loading=false;
-        activeLoads--;
-        pumpQueue();
-      });
+      if(!rec||rec.token!==buildToken){if(rec)rec.queued=false;continue;}
+      rec.queued=false;rec.loading=true;activeLoads++;
+      loadRecordImage(rec).finally(()=>{rec.loading=false;activeLoads--;pumpQueue();});
     }
   }
 
   function updateSummary(){
-    const box=document.querySelector(".gkmV332Info");
+    const box=document.querySelector(".gkmV333Info");
     if(!box) return;
-    box.innerHTML=`<b>${esc(kindLabel(currentKind))} — ${gridState.used} постеров на Canvas</b><div class="meta">Загружено изображений: ${loadedCount}/${gridState.used}. Общий пул: ${currentPool.length}. В DOM нет тысяч карточек — только два canvas и одно превью.</div>`;
+    const total=totalCatalogCount||currentPool.length;
+    box.innerHTML=`<b>${esc(kindLabel(currentKind))} — ${gridState.used} постеров на Canvas</b><div class="meta">Загружено: ${loadedCount}/${gridState.used}. Быстрый пул: ${currentPool.length}. Весь каталог: ${total}. Компактные пакеты и мини-постеры загружаются в фоне.</div>`;
   }
 
   function setInfo(it){
-    const box=document.querySelector(".gkmV332Info");
+    const box=document.querySelector(".gkmV333Info");
     if(!box||!it) return;
     const r=ratingOf(it);
     box.innerHTML=`<b>${esc(titleOf(it))}</b><div class="meta">${esc(typeOf(it))}${yearOf(it)?" · "+esc(yearOf(it)):""}${r?" · ★ "+r.toFixed(1):""} · Canvas-мозаика</div>`;
@@ -12803,27 +12949,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function showPreview(rec,x,y){
-    const prev=document.getElementById("gkmV332Preview");
+    const prev=document.getElementById("gkmV333Preview");
     if(!prev||!rec) return;
     if(lastPreviewRecord!==rec){
       const it=rec.item,r=ratingOf(it),genres=genresOf(it).slice(0,5);
-      const previewSrc=normalImageOf(it)||rawImageOf(it)||generatedImageOf(it);
+      const previewSrc=rawImageOf(it)||normalImageOf(it)||generatedImageOf(it);
       const original=rawImageOf(it)||previewSrc;
       prev.style.setProperty("--backdrop",`url("${String(backdropOf(it)||previewSrc).replace(/"/g,"%22")}")`);
-      prev.innerHTML=`<div class="gkmV332PreviewInner"><img id="gkmV332PreviewImg" src="${esc(previewSrc)}" data-original-src="${esc(original)}" alt="${esc(titleOf(it))}"><div class="gkmV332PreviewText"><h3>${esc(titleOf(it))}</h3><div class="gkmV332PreviewMeta">${esc(typeOf(it))}${yearOf(it)?" · "+esc(yearOf(it)):""}${r?" · ★ "+r.toFixed(1):""}</div><div class="gkmV332PreviewGenres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div><div class="gkmV332PreviewDesc">${esc(overviewOf(it))}</div><div class="gkmV332PreviewHint">Клик — открыть полную карточку</div></div></div>`;
-      const pi=document.getElementById("gkmV332PreviewImg");
-      if(pi){
-        pi.addEventListener("error",()=>{ try{ if(typeof recoverPosterImage==="function") recoverPosterImage(pi); else pi.src=generatedImageOf(it); }catch(e){ pi.src=generatedImageOf(it); } },{once:true});
-      }
+      prev.innerHTML=`<div class="gkmV333PreviewInner"><img id="gkmV333PreviewImg" src="${esc(previewSrc)}" data-original-src="${esc(original)}" alt="${esc(titleOf(it))}"><div class="gkmV333PreviewText"><h3>${esc(titleOf(it))}</h3><div class="gkmV333PreviewMeta">${esc(typeOf(it))}${yearOf(it)?" · "+esc(yearOf(it)):""}${r?" · ★ "+r.toFixed(1):""}</div><div class="gkmV333PreviewGenres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div><div class="gkmV333PreviewDesc">${esc(overviewOf(it))}</div><div class="gkmV333PreviewHint">Клик — открыть полную карточку</div></div></div>`;
+      const pi=document.getElementById("gkmV333PreviewImg");
+      if(pi) pi.addEventListener("error",()=>{try{if(typeof recoverPosterImage==="function")recoverPosterImage(pi);else pi.src=generatedImageOf(it);}catch(e){pi.src=generatedImageOf(it);}},{once:true});
       lastPreviewRecord=rec;
+      setInfo(rec.item);
     }
     prev.classList.add("open");
     placePreview(prev,x,y);
-    setInfo(rec.item);
   }
 
   function hidePreview(){
-    const prev=document.getElementById("gkmV332Preview");
+    const prev=document.getElementById("gkmV333Preview");
     if(prev) prev.classList.remove("open");
     lastPreviewRecord=null;
   }
@@ -12911,18 +13055,20 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     buildToken++;
     const token=buildToken;
     loadQueue=[];
+    dirtyRecords.clear();
     loadedCount=0;
     activeRecord=null;
     lastPreviewRecord=null;
     resetLens();
-    const box=document.querySelector(".gkmV332Info");
-    if(box) box.innerHTML=`<b>Подготавливаю ${esc(kindLabel(currentKind))}...</b><div class="meta">Выбираю несколько тысяч записей из общего каталога.</div>`;
+    const box=document.querySelector(".gkmV333Info");
+    if(box) box.innerHTML=`<b>Быстрый запуск ${esc(kindLabel(currentKind))}...</b><div class="meta">Загружаю компактный пакет вместо 58-МБ поискового индекса.</div>`;
+    const target=visibleTarget();
     currentPool=await getKindPool(currentKind);
     if(token!==buildToken) return;
     if(resetCursor) sampleCursors[currentKind]=0;
     resizeCanvas();
-    const target=Math.min(currentPool.length,visibleTarget());
-    visibleItems=samplePool(currentPool,target,currentKind);
+    const wanted=Math.min(currentPool.length,target);
+    visibleItems=samplePool(currentPool,wanted,currentKind);
     const grid=chooseGrid(visibleItems.length,viewportW,viewportH);
     const gridW=viewportW*1.025,gridH=viewportH*1.035;
     const stepX=gridW/grid.cols,stepY=gridH/grid.rows;
@@ -12932,22 +13078,26 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const row=Math.floor(i/grid.cols),col=i%grid.cols;
       const x=col*stepX-(gridW-viewportW)*.5;
       const y=row*stepY-(gridH-viewportH)*.5;
-      return {item,row,col,x,y,w:tileW,h:tileH,img:null,loaded:false,loading:false,queued:false,failed:false,color:hashColor(item),token};
+      return {item,row,col,x,y,w:tileW,h:tileH,img:null,loaded:false,loading:false,queued:false,failed:false,priority:false,color:hashColor(item),token};
     });
     drawBase();
     updateSummary();
     const ordered=records.slice().sort((a,b)=>{
+      const pa=BAYER4[a.row&3][a.col&3],pb=BAYER4[b.row&3][b.col&3];
+      if(pa!==pb) return pa-pb;
       const acx=a.x+a.w*.5-viewportW*.5,acy=a.y+a.h*.5-viewportH*.5;
       const bcx=b.x+b.w*.5-viewportW*.5,bcy=b.y+b.h*.5-viewportH*.5;
       return acx*acx+acy*acy-(bcx*bcx+bcy*bcy);
     });
+    ordered.slice(0,Math.min(320,ordered.length)).forEach(rec=>rec.priority=true);
     enqueueRecords(ordered,false);
     syncKindButtons();
+    scheduleBackgroundCatalog();
   }
 
   async function openWall(kind="all"){
     ensureUi();
-    const overlay=document.getElementById("gkmV332Overlay");
+    const overlay=document.getElementById("gkmV333Overlay");
     if(!overlay) return;
     currentKind=kind||"all";
     overlay.classList.add("open");
@@ -12957,16 +13107,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function closeWall(full=true){
-    const overlay=document.getElementById("gkmV332Overlay");
+    const overlay=document.getElementById("gkmV333Overlay");
     if(overlay) overlay.classList.remove("open");
     document.body.style.overflow="";
     isOpen=false;
     buildToken++;
     loadQueue=[];
+    dirtyRecords.clear();
+    if(dirtyDrawRaf){cancelAnimationFrame(dirtyDrawRaf);dirtyDrawRaf=0;}
     pendingPointer=null;
     pointerDown=null;
     resetLens();
-    if(full){ records=[]; visibleItems=[]; }
+    if(full){records=[];visibleItems=[];}
   }
 
   function onResize(){
@@ -12974,20 +13126,24 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     resizeTimer=setTimeout(()=>{ if(isOpen) buildWall(false); },180);
   }
 
-  function install(){ ensureUi(); }
+  function install(){
+    ensureUi();
+    setTimeout(warmupData,1600);
+  }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",install,{once:true}); else install();
   window.addEventListener("resize",onResize);
   window.addEventListener("blur",resetLens);
   document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&isOpen) closeWall(); });
   setTimeout(install,500);setTimeout(install,1400);
 
-  window.GKM_V332_DEBUG={
-    getState:()=>({isOpen,currentKind,poolSize:currentPool.length,visibleCount:gridState.used,loadedCount,rows:gridState.rows,cols:gridState.cols,canvasCount:document.querySelectorAll("#gkmV332Overlay canvas").length,posterDomNodes:document.querySelectorAll("#gkmV332Overlay .gkmV332Tile,#gkmV332Overlay img:not(#gkmV332PreviewImg)").length,activeTitle:activeRecord?titleOf(activeRecord.item):""}),
-    rebuild:()=>buildWall(false)
+  window.GKM_V333_DEBUG={
+    getState:()=>({isOpen,currentKind,totalCatalogCount,poolSize:currentPool.length,allLoadedPool:allPool.length,visibleCount:gridState.used,loadedCount,rows:gridState.rows,cols:gridState.cols,activeLoads,queuedLoads:loadQueue.length,canvasDpr,canvasCount:document.querySelectorAll("#gkmV333Overlay canvas").length,posterDomNodes:document.querySelectorAll("#gkmV333Overlay .gkmV333Tile,#gkmV333Overlay img:not(#gkmV333PreviewImg)").length,loadedChunks:Object.fromEntries(WALL_KINDS.map(k=>[k,loadedChunks[k].size])),activeTitle:activeRecord?titleOf(activeRecord.item):""}),
+    rebuild:()=>buildWall(false),
+    warmup:warmupData
   };
 
-  console.log("GKM V332: canvas full catalog poster mosaic installed");
+  console.log("GKM V333: fast streaming canvas poster mosaic installed");
 })();
-/* GKM V332 CANVAS FULL CATALOG POSTER MOSAIC END */
+/* GKM V333 FAST STREAMING CANVAS POSTER MOSAIC END */
 
 
