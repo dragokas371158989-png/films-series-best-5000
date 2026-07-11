@@ -12290,12 +12290,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V316 REAL AI BRIDGE END */
 
 
-/* GKM V327 FULLPAGE CONNECTED POSTER WALL START */
+/* GKM V328 IMMERSIVE POSTER TUNNEL WALL START */
 (function(){
-  window.GKM_V327_FULLPAGE_CONNECTED_POSTER_WALL_VERSION = "v327-fullpage-connected-poster-wall-hover-reset-2026-07-11";
+  window.GKM_V328_IMMERSIVE_POSTER_TUNNEL_WALL_VERSION = "v328-immersive-poster-tunnel-wall-hover-card-reset-2026-07-11";
 
-  const UNIQUE_LIMIT_DESKTOP = 2400;
-  const UNIQUE_LIMIT_MOBILE = 900;
+  const UNIQUE_LIMIT_DESKTOP = 4200;
+  const UNIQUE_LIMIT_MOBILE = 1400;
 
   let uniqueItems = [];
   let currentKind = "all";
@@ -12415,7 +12415,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const cats = kind && kind !== "all"
       ? ({movies:["movies"], series:["series"], anime:["anime"], cartoons:["cartoons"]}[kind] || ["movies","series","anime","cartoons"])
       : ["movies","series","anime","cartoons"];
-    const pages = window.innerWidth < 700 ? 6 : 9;
+    const pages = window.innerWidth < 700 ? 7 : 9;
     cats.forEach(cat=>{
       for(let i=1;i<=pages;i++){
         urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=327`);
@@ -12456,19 +12456,21 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function ensureCss(){
-    const old = document.getElementById("gkmV325Css");
-    if(old) old.remove();
-    if(document.getElementById("gkmV327Css")) return;
+    ["gkmV325Css","gkmV327Css"].forEach(id=>{
+      const old = document.getElementById(id);
+      if(old) old.remove();
+    });
+    if(document.getElementById("gkmV328Css")) return;
     const st = document.createElement("style");
-    st.id = "gkmV327Css";
+    st.id = "gkmV328Css";
     st.textContent = `
-      #gkmV327Btn{
+      #gkmV328Btn{
         position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;
         border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
         color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;
         box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)
       }
-      #gkmV327Overlay{
+      #gkmV328Overlay{
         position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;
         background:
           radial-gradient(circle at 50% 42%,rgba(255,255,255,.08),transparent 8%),
@@ -12476,67 +12478,67 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           radial-gradient(circle at 82% 84%,rgba(130,35,255,.18),transparent 42%),
           linear-gradient(90deg,#021625 0%,#021a34 48%,#1f1051 100%);
       }
-      #gkmV327Overlay.open{display:block}
-      .gkmV327Top{
+      #gkmV328Overlay.open{display:block}
+      .gkmV328Top{
         position:absolute;left:0;right:0;top:0;z-index:18;display:flex;justify-content:space-between;gap:12px;
         padding:8px 14px 0 14px;pointer-events:none
       }
-      .gkmV327Title{font-size:22px;font-weight:950;text-shadow:0 0 18px rgba(0,180,255,.46)}
-      .gkmV327Sub{font-size:12px;color:rgba(255,255,255,.82)}
-      .gkmV327Actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
-      .gkmV327Actions button{
+      .gkmV328Title{font-size:22px;font-weight:950;text-shadow:0 0 18px rgba(0,180,255,.46)}
+      .gkmV328Sub{font-size:12px;color:rgba(255,255,255,.82)}
+      .gkmV328Actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
+      .gkmV328Actions button{
         border:1px solid rgba(0,220,255,.34);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.86));
         color:#fff;border-radius:14px;padding:10px 13px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)
       }
-      .gkmV327Actions button:hover{filter:brightness(1.15)}
-      .gkmV327Actions button.is-active{box-shadow:0 0 0 2px rgba(255,255,255,.22) inset,0 0 22px rgba(0,200,255,.32);filter:brightness(1.12)}
-      #gkmV327Scene{position:absolute;inset:0;perspective:1200px;overflow:hidden;cursor:grab;user-select:none;touch-action:none}
-      #gkmV327Scene.drag{cursor:grabbing}
-      #gkmV327World{position:absolute;left:50%;top:54%;width:1px;height:1px;transform-style:preserve-3d;will-change:transform}
-      .gkmV327Tile{
-        position:absolute;left:0;top:0;width:18px;height:27px;margin-left:-9px;margin-top:-13.5px;border:0;padding:0;border-radius:4px;
+      .gkmV328Actions button:hover{filter:brightness(1.15)}
+      .gkmV328Actions button.is-active{box-shadow:0 0 0 2px rgba(255,255,255,.22) inset,0 0 22px rgba(0,200,255,.32);filter:brightness(1.12)}
+      #gkmV328Scene{position:absolute;inset:0;perspective:920px;overflow:hidden;cursor:grab;user-select:none;touch-action:none}
+      #gkmV328Scene.drag{cursor:grabbing}
+      #gkmV328World{position:absolute;left:50%;top:50%;width:1px;height:1px;transform-style:preserve-3d;will-change:transform}
+      .gkmV328Tile{
+        position:absolute;left:0;top:0;width:20px;height:30px;margin-left:-10px;margin-top:-15px;border:0;padding:0;border-radius:4px;
         overflow:hidden;background:#071227;outline:1px solid rgba(255,255,255,.06);box-shadow:0 1px 6px rgba(0,0,0,.34);
-        cursor:pointer;transform-style:preserve-3d;will-change:transform,filter;transition:transform .10s ease, filter .10s ease, box-shadow .10s ease, opacity .10s ease
+        cursor:pointer;transform-style:preserve-3d;will-change:transform,filter;transition:transform .14s ease, filter .12s ease, box-shadow .12s ease, opacity .12s ease
       }
-      .gkmV327Tile::before{
+      .gkmV328Tile::before{
         content:"";position:absolute;inset:0;background-image:var(--poster);background-size:cover;background-position:center;
         filter:saturate(1.08) contrast(1.04)
       }
-      .gkmV327Tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.14),transparent 58%)}
-      .gkmV327Tile.is-hover{
+      .gkmV328Tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.14),transparent 58%)}
+      .gkmV328Tile.is-hover{
         z-index:999;filter:brightness(1.3) saturate(1.2)!important;
         box-shadow:0 8px 24px rgba(0,0,0,.58),0 0 24px rgba(0,190,255,.35)
       }
-      #gkmV327Preview{
-        position:fixed;display:none;z-index:24;min-width:290px;max-width:390px;
+      #gkmV328Preview{
+        position:fixed;display:none;z-index:24;width:min(520px,calc(100vw - 32px));max-width:520px;
         background:linear-gradient(135deg,rgba(9,18,43,.97),rgba(13,23,58,.95));
         border:1px solid rgba(0,220,255,.33);border-radius:18px;box-shadow:0 20px 70px rgba(0,0,0,.6),0 0 30px rgba(0,170,255,.22);
         padding:12px;backdrop-filter:blur(12px);pointer-events:none
       }
-      #gkmV327Preview.open{display:block}
-      .gkmV327PreviewInner{display:grid;grid-template-columns:104px 1fr;gap:12px;align-items:start}
-      #gkmV327Preview img{width:104px;height:154px;object-fit:cover;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.5)}
-      .gkmV327PreviewText h3{margin:0 0 6px 0;font-size:19px;line-height:1.05}
-      .gkmV327PreviewMeta{font-size:12px;color:rgba(255,255,255,.78);margin-bottom:6px}
-      .gkmV327PreviewDesc{font-size:12px;color:rgba(255,255,255,.86);line-height:1.35;max-height:88px;overflow:hidden}
-      .gkmV327Info{
+      #gkmV328Preview.open{display:block}
+      .gkmV328PreviewInner{display:grid;grid-template-columns:145px 1fr;gap:12px;align-items:start}
+      #gkmV328Preview img{width:145px;height:218px;object-fit:cover;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+      .gkmV328PreviewText h3{margin:0 0 6px 0;font-size:24px;line-height:1.05}
+      .gkmV328PreviewMeta{font-size:12px;color:rgba(255,255,255,.78);margin-bottom:6px}
+      .gkmV328PreviewDesc{font-size:12px;color:rgba(255,255,255,.86);line-height:1.35;max-height:122px;overflow:hidden}
+      .gkmV328Info{
         position:absolute;left:16px;bottom:16px;z-index:12;max-width:min(560px,calc(100vw - 32px));
         background:rgba(5,14,34,.78);border:1px solid rgba(0,220,255,.24);border-radius:18px;
         padding:12px 14px;color:#fff;backdrop-filter:blur(12px);pointer-events:none
       }
-      .gkmV327Info b{display:block;font-size:17px;margin-bottom:4px}
-      .gkmV327Info .meta{color:rgba(255,255,255,.75);font-size:13px}
-      .gkmV327Hint{position:absolute;right:20px;bottom:18px;z-index:12;color:rgba(255,255,255,.62);font-size:12px;text-align:right;pointer-events:none}
+      .gkmV328Info b{display:block;font-size:17px;margin-bottom:4px}
+      .gkmV328Info .meta{color:rgba(255,255,255,.75);font-size:13px}
+      .gkmV328Hint{position:absolute;right:20px;bottom:18px;z-index:12;color:rgba(255,255,255,.62);font-size:12px;text-align:right;pointer-events:none}
       @media(max-width:700px){
-        #gkmV327Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
-        .gkmV327Top{padding:8px 10px 0 10px}.gkmV327Title{font-size:18px}.gkmV327Sub{font-size:11px}
-        .gkmV327Actions button{padding:8px 9px;font-size:12px}
-        #gkmV327World{top:56%}
-        .gkmV327Tile{width:14px;height:21px;margin-left:-7px;margin-top:-10.5px;border-radius:3px}
-        #gkmV327Preview{left:10px!important;right:10px!important;top:auto!important;bottom:84px!important;min-width:unset;max-width:none}
-        .gkmV327PreviewInner{grid-template-columns:78px 1fr;gap:10px}
-        #gkmV327Preview img{width:78px;height:116px}.gkmV327PreviewText h3{font-size:16px}.gkmV327PreviewDesc{display:none}
-        .gkmV327Info{left:10px;right:10px;bottom:12px;max-width:none}.gkmV327Hint{display:none}
+        #gkmV328Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
+        .gkmV328Top{padding:8px 10px 0 10px}.gkmV328Title{font-size:18px}.gkmV328Sub{font-size:11px}
+        .gkmV328Actions button{padding:8px 9px;font-size:12px}
+        #gkmV328World{top:52%}
+        .gkmV328Tile{width:14px;height:21px;margin-left:-7px;margin-top:-10.5px;border-radius:3px}
+        #gkmV328Preview{left:10px!important;right:10px!important;top:auto!important;bottom:84px!important;width:auto!important;min-width:unset;max-width:none}
+        .gkmV328PreviewInner{grid-template-columns:78px 1fr;gap:10px}
+        #gkmV328Preview img{width:78px;height:116px}.gkmV328PreviewText h3{font-size:16px}.gkmV328PreviewDesc{display:none}
+        .gkmV328Info{left:10px;right:10px;bottom:12px;max-width:none}.gkmV328Hint{display:none}
       }
     `;
     document.head.appendChild(st);
@@ -12555,7 +12557,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function syncKindButtons(){
-    document.querySelectorAll("#gkmV327Overlay [data-kind]").forEach(btn=>{
+    document.querySelectorAll("#gkmV328Overlay [data-kind]").forEach(btn=>{
       btn.classList.toggle("is-active", btn.dataset.kind === currentKind);
     });
   }
@@ -12563,40 +12565,40 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function ensureUi(){
     removeOldUi();
 
-    if(!document.getElementById("gkmV327Btn")){
+    if(!document.getElementById("gkmV328Btn")){
       const btn = document.createElement("button");
-      btn.id = "gkmV327Btn";
+      btn.id = "gkmV328Btn";
       btn.type = "button";
       btn.textContent = "🌌 3D стена";
       btn.onclick = () => openWall("all");
       document.body.appendChild(btn);
     }
 
-    if(document.getElementById("gkmV327Overlay")) return;
+    if(document.getElementById("gkmV328Overlay")) return;
 
     const overlay = document.createElement("div");
-    overlay.id = "gkmV327Overlay";
+    overlay.id = "gkmV328Overlay";
     overlay.innerHTML = `
-      <div class="gkmV327Top">
+      <div class="gkmV328Top">
         <div>
-          <div class="gkmV327Title">🌌 3D стена постеров V327</div>
-          <div class="gkmV327Sub">Полноэкранная цельная сетка. Навёл — превью, увёл мышку — возврат, клик — открыть карточку.</div>
+          <div class="gkmV328Title">🌌 3D туннель постеров V328</div>
+          <div class="gkmV328Sub">Как в референсе: постеры заполняют весь экран и изгибаются тоннелем. Навёл — большая карточка, увёл — всё вернулось.</div>
         </div>
-        <div class="gkmV327Actions">
+        <div class="gkmV328Actions">
           <button data-kind="all">Все</button>
           <button data-kind="movies">Фильмы</button>
           <button data-kind="series">Сериалы</button>
           <button data-kind="anime">Аниме</button>
           <button data-kind="cartoons">Мульты</button>
-          <button id="gkmV327AutoBtn">⏸ Авто</button>
-          <button id="gkmV327MixBtn">🔀 Микс</button>
-          <button id="gkmV327CloseBtn">✕</button>
+          <button id="gkmV328AutoBtn">⏸ Авто</button>
+          <button id="gkmV328MixBtn">🔀 Микс</button>
+          <button id="gkmV328CloseBtn">✕</button>
         </div>
       </div>
-      <div id="gkmV327Scene"><div id="gkmV327World"></div></div>
-      <div id="gkmV327Preview"></div>
-      <div class="gkmV327Info"><b>Загрузка...</b><div class="meta">Собираю уникальные постеры без жёстких дублей.</div></div>
-      <div class="gkmV327Hint">наведение — превью<br>увёл мышку — возврат<br>клик — открыть карточку</div>
+      <div id="gkmV328Scene"><div id="gkmV328World"></div></div>
+      <div id="gkmV328Preview"></div>
+      <div class="gkmV328Info"><b>Загрузка...</b><div class="meta">Собираю уникальные постеры без жёстких дублей.</div></div>
+      <div class="gkmV328Hint">наведение — превью<br>увёл мышку — возврат<br>клик — открыть карточку</div>
     `;
     document.body.appendChild(overlay);
 
@@ -12609,19 +12611,19 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       };
     });
 
-    document.getElementById("gkmV327CloseBtn").onclick = () => closeWall();
-    document.getElementById("gkmV327MixBtn").onclick = () => {
+    document.getElementById("gkmV328CloseBtn").onclick = () => closeWall();
+    document.getElementById("gkmV328MixBtn").onclick = () => {
       uniqueItems.sort(()=>Math.random()-.5);
       buildWall(true);
     };
-    document.getElementById("gkmV327AutoBtn").onclick = () => {
+    document.getElementById("gkmV328AutoBtn").onclick = () => {
       autoSpin = !autoSpin;
-      document.getElementById("gkmV327AutoBtn").textContent = autoSpin ? "⏸ Авто" : "▶ Авто";
+      document.getElementById("gkmV328AutoBtn").textContent = autoSpin ? "⏸ Авто" : "▶ Авто";
     };
 
-    const scene = document.getElementById("gkmV327Scene");
+    const scene = document.getElementById("gkmV328Scene");
     scene.addEventListener("pointerdown", e=>{
-      if(e.target.closest(".gkmV327Tile")) return;
+      if(e.target.closest(".gkmV328Tile")) return;
       hidePreview();
       isDragging = true;
       startX = e.clientX;
@@ -12660,15 +12662,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function setWallSummary(){
-    const box = document.querySelector(".gkmV327Info");
+    const box = document.querySelector(".gkmV328Info");
     if(!box) return;
     const total = uniqueItems.length;
     const used = wallState.used || total;
-    box.innerHTML = `<b>${esc(kindLabel(currentKind))} — ${used} постеров</b><div class="meta">Полноэкранная цельная стена. Без диких дублей. Навёл — показал карточку, увёл мышку — вернул стену в исходное состояние.</div>`;
+    box.innerHTML = `<b>${esc(kindLabel(currentKind))} — ${used} постеров</b><div class="meta">Иммерсивный тоннель на весь экран. Без размножения карточек. Навёл — большая карточка, увёл — точный возврат.</div>`;
   }
 
   function setInfo(it){
-    const box = document.querySelector(".gkmV327Info");
+    const box = document.querySelector(".gkmV328Info");
     if(!box || !it) return;
     const r = ratingOf(it);
     box.innerHTML = `<b>${esc(titleOf(it))}</b><div class="meta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>`;
@@ -12676,23 +12678,22 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function placePreview(prev, evt){
     if(window.innerWidth < 700 || !evt || typeof evt.clientX !== "number") return;
-    prev.style.left = "-9999px";
-    prev.style.top = "-9999px";
-    prev.style.right = "auto";
-    prev.style.bottom = "auto";
     const rect = prev.getBoundingClientRect();
-    let x = evt.clientX + 24;
-    let y = evt.clientY - 22;
-    if(x + rect.width > window.innerWidth - 10) x = evt.clientX - rect.width - 24;
-    if(y + rect.height > window.innerHeight - 10) y = window.innerHeight - rect.height - 10;
+    const gap = 28;
+    let x = evt.clientX < window.innerWidth * 0.56 ? evt.clientX + gap : evt.clientX - rect.width - gap;
+    let y = evt.clientY - rect.height * 0.46;
+    if(x + rect.width > window.innerWidth - 12) x = window.innerWidth - rect.width - 12;
+    if(x < 12) x = 12;
+    if(y + rect.height > window.innerHeight - 12) y = window.innerHeight - rect.height - 12;
     if(y < 72) y = 72;
-    if(x < 10) x = 10;
     prev.style.left = x + "px";
     prev.style.top = y + "px";
+    prev.style.right = "auto";
+    prev.style.bottom = "auto";
   }
 
   function showPreview(it, evt, tileEl){
-    const prev = document.getElementById("gkmV327Preview");
+    const prev = document.getElementById("gkmV328Preview");
     if(!prev || !it || !tileEl) return;
 
     if(hoveredTile && hoveredTile !== tileEl){
@@ -12703,17 +12704,17 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     hoveredTile = tileEl;
     tileEl.classList.add("is-hover");
     const base = tileEl.dataset.baseTransform || tileEl.style.transform;
-    tileEl.style.transform = `${base} scale(2.55) translateZ(72px)`;
+    tileEl.style.transform = `${base} scale(3.0) translateZ(105px)`;
 
     const r = ratingOf(it);
     const genres = genresOf(it).slice(0,4).join(" · ");
     prev.innerHTML = `
-      <div class="gkmV327PreviewInner">
+      <div class="gkmV328PreviewInner">
         <img src="${esc(imgOf(it))}" alt="${esc(titleOf(it))}">
-        <div class="gkmV327PreviewText">
+        <div class="gkmV328PreviewText">
           <h3>${esc(titleOf(it))}</h3>
-          <div class="gkmV327PreviewMeta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}${genres ? "<br>" + esc(genres) : ""}</div>
-          <div class="gkmV327PreviewDesc">${esc(overviewOf(it))}</div>
+          <div class="gkmV328PreviewMeta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}${genres ? "<br>" + esc(genres) : ""}</div>
+          <div class="gkmV328PreviewDesc">${esc(overviewOf(it))}</div>
         </div>
       </div>
     `;
@@ -12723,7 +12724,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function hidePreview(){
-    const prev = document.getElementById("gkmV327Preview");
+    const prev = document.getElementById("gkmV328Preview");
     if(prev) prev.classList.remove("open");
     if(hoveredTile){
       hoveredTile.classList.remove("is-hover");
@@ -12761,7 +12762,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function applyWorld(){
-    const world = document.getElementById("gkmV327World");
+    const world = document.getElementById("gkmV328World");
     if(world) world.style.transform = `translateZ(${zoom}px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   }
 
@@ -12776,47 +12777,52 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function buildWall(){
-    const world = document.getElementById("gkmV327World");
+    const world = document.getElementById("gkmV328World");
     if(!world) return;
     world.innerHTML = "";
     hidePreview();
 
     if(!uniqueItems.length){
-      const box = document.querySelector(".gkmV327Info");
+      const box = document.querySelector(".gkmV328Info");
       if(box) box.innerHTML = `<b>Постеры не найдены</b><div class="meta">Нет уникальных постеров для этого раздела.</div>`;
       return;
     }
 
     const mobile = window.innerWidth < 700;
-    const tileW = mobile ? 14 : 18;
-    const tileH = mobile ? 21 : 27;
-    const stepX = mobile ? 13.2 : 17.1;
-    const stepY = mobile ? 19.2 : 24.0;
-    const minCols = mobile ? 24 : 44;
-    const maxRows = mobile ? 34 : 42;
-    const desiredRows = Math.max(mobile ? 16 : 20, Math.min(maxRows, Math.ceil((window.innerHeight * (mobile ? 0.88 : 0.94)) / stepY) + 2));
-    let rows = Math.max(10, Math.min(desiredRows, Math.floor(uniqueItems.length / minCols) || desiredRows));
-    let cols = Math.max(minCols, Math.ceil(uniqueItems.length / rows));
-    const capacity = rows * cols;
-    const usedItems = uniqueItems.slice(0, capacity);
+    const vw = Math.max(360, window.innerWidth);
+    const vh = Math.max(520, window.innerHeight);
+    const usableH = vh * (mobile ? 1.02 : 1.08);
+    const targetTileH = mobile ? 20 : 27;
+    let rows = Math.max(mobile ? 24 : 28, Math.min(mobile ? 46 : 52, Math.round(usableH / targetTileH)));
+    let cols = Math.max(mobile ? 34 : 48, Math.ceil(uniqueItems.length / rows));
 
-    while(rows > 10 && usedItems.length / rows < minCols){
-      rows -= 1;
-      cols = Math.max(minCols, Math.ceil(usedItems.length / rows));
+    // Не размножаем постеры. Если данных меньше — делаем сетку крупнее, а не повторяем карточки.
+    if(uniqueItems.length < rows * (mobile ? 34 : 48)){
+      cols = Math.max(18, Math.ceil(uniqueItems.length / rows));
     }
+    while(rows > 16 && Math.ceil(uniqueItems.length / rows) < (mobile ? 24 : 34)) rows--;
+    cols = Math.max(18, Math.ceil(uniqueItems.length / rows));
 
-    const arcDeg = mobile ? 210 : 228;
+    const usedItems = uniqueItems.slice(0, rows * cols);
+    const stepY = usableH / Math.max(1, rows - 1);
+    const tileH = Math.max(mobile ? 15 : 19, Math.min(mobile ? 24 : 31, stepY * 0.98));
+    const tileW = tileH * 0.67;
+    const stepX = tileW * 0.97;
+
+    // Почти круговая внутренняя стена: по краям постеры уходят глубоко и дают эффект тоннеля.
+    const arcDeg = mobile ? 286 : 306;
     const arcRad = arcDeg * Math.PI / 180;
-    const radius = Math.max(mobile ? 220 : 360, (cols * stepX) / arcRad);
+    const radiusByGrid = (cols * stepX) / arcRad;
+    const radius = Math.max(vw * (mobile ? 0.52 : 0.44), radiusByGrid);
     const yShift = (rows - 1) * stepY * 0.5;
 
     wallState = {
       rows,
       cols,
       used: usedItems.length,
-      baseZoom: Math.round(Math.max(mobile ? 95 : 140, radius * (mobile ? 0.40 : 0.38))),
+      baseZoom: Math.round(radius * (mobile ? 0.70 : 0.74)),
       baseRotX: mobile ? 1 : 0,
-      baseRotY: -8
+      baseRotY: -10
     };
 
     usedItems.forEach((it, i)=>{
@@ -12828,21 +12834,26 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const z = Math.cos(ang) * radius - radius;
       const y = row * stepY - yShift;
       const ry = -ang * 180 / Math.PI;
+
       const tile = document.createElement("button");
       tile.type = "button";
-      tile.className = "gkmV327Tile";
+      tile.className = "gkmV328Tile";
       tile.style.width = tileW + "px";
       tile.style.height = tileH + "px";
       tile.style.marginLeft = (-tileW/2) + "px";
       tile.style.marginTop = (-tileH/2) + "px";
       tile.style.setProperty("--poster", `url("${safeUrl(imgOf(it))}")`);
+
       const baseTransform = `translate3d(${x}px,${y}px,${z}px) rotateY(${ry}deg)`;
       tile.dataset.baseTransform = baseTransform;
       tile.style.transform = baseTransform;
       tile.title = titleOf(it);
 
       tile.addEventListener("mouseenter", e => showPreview(it, e, tile));
-      tile.addEventListener("mousemove", e => showPreview(it, e, tile));
+      tile.addEventListener("mousemove", e => {
+        const prev = document.getElementById("gkmV328Preview");
+        if(prev && prev.classList.contains("open")) placePreview(prev, e);
+      });
       tile.addEventListener("mouseleave", hidePreview);
       tile.addEventListener("click", e=>{
         e.preventDefault();
@@ -12866,7 +12877,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   async function openWall(kind="all"){
     ensureCss();
     ensureUi();
-    const overlay = document.getElementById("gkmV327Overlay");
+    const overlay = document.getElementById("gkmV328Overlay");
     if(!overlay) return;
     overlay.classList.add("open");
     document.body.style.overflow = "hidden";
@@ -12884,7 +12895,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function closeWall(full=true){
-    const overlay = document.getElementById("gkmV327Overlay");
+    const overlay = document.getElementById("gkmV328Overlay");
     if(overlay) overlay.classList.remove("open");
     document.body.style.overflow = "";
     hidePreview();
@@ -12917,7 +12928,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install, 500);
   setTimeout(install, 1400);
 
-  console.log("GKM V327: fullpage connected poster wall installed");
+  console.log("GKM V328: immersive poster tunnel wall installed");
 })();
-/* GKM V327 FULLPAGE CONNECTED POSTER WALL END */
+/* GKM V328 IMMERSIVE POSTER TUNNEL WALL END */
 
