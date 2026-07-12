@@ -1,8 +1,8 @@
 /* GKM V344 FULL CATALOG AI SEARCH WORKER */
 "use strict";
 
-const VERSION = "v344.7-strict-type-year-genre-votes-2026-07-12";
-const DB_NAME = "gkm_ai_search_v344";
+const VERSION = "v344.8-double-hard-filter-year-genre-votes-2026-07-12";
+const DB_NAME = "gkm_ai_search_v3448";
 const DB_VERSION = 1;
 const STORE_NAME = "chunks";
 const DEFAULT_BASE = "data/fast/poster_wall_v333";
@@ -333,6 +333,95 @@ function clean(item) {
     .some(x => item.__hay.includes(x));
 }
 
+function parseHardConstraints(query, supplied) {
+  const q = normalize(query || "");
+  const hard = Object.assign({
+    bucket: "all",
+    yearMin: 0,
+    yearMax: 9999,
+    exactYear: false,
+    genre: "",
+    genreWords: [],
+    minVotes: 0,
+    popularityFirst: false
+  }, supplied || {});
+
+  if (!hard.bucket || hard.bucket === "all") {
+    if (/\bфильм\w*|\bкино\b|\bmovie\w*|\bfilm\w*/.test(q)) hard.bucket = "movies";
+    else if (/\bсериал\w*|\bseries\b|\bshow\b/.test(q)) hard.bucket = "series";
+    else if (/\bаниме\b|\bанимэ\b|\banime\b/.test(q)) hard.bucket = "anime";
+    else if (/\bмульт\w*|\bcartoon\w*/.test(q)) hard.bucket = "cartoons";
+  }
+
+  if (!hard.exactYear) {
+    const range = q.match(/(?:от|с)\s*(19\d{2}|20\d{2})\s*(?:до|по|-)\s*(19\d{2}|20\d{2})/);
+    if (range) {
+      hard.yearMin = Number(range[1]);
+      hard.yearMax = Number(range[2]);
+      hard.exactYear = true;
+    } else {
+      const years = [...q.matchAll(/\b(19\d{2}|20\d{2})\b/g)].map(m => Number(m[1]));
+      if (years.length) {
+        hard.yearMin = Math.min(...years);
+        hard.yearMax = Math.max(...years);
+        hard.exactYear = true;
+      }
+    }
+  }
+
+  if (!hard.genreWords || !hard.genreWords.length) {
+    const defs = [
+      ["horror", /ужас|хоррор|страш/, ["ужас", "horror"]],
+      ["sci", /фантаст|sci[\s-]?fi/, ["фантаст", "science fiction", "sci fi"]],
+      ["fantasy", /фэнтези|fantasy/, ["фэнтези", "fantasy"]],
+      ["detective", /детектив|расслед|mystery/, ["детектив", "detective", "mystery"]],
+      ["crime", /криминал|crime/, ["криминал", "crime"]],
+      ["thriller", /триллер|thriller/, ["триллер", "thriller"]],
+      ["comedy", /комед|смешн|comedy/, ["комед", "comedy"]],
+      ["drama", /драм|drama/, ["драм", "drama"]],
+      ["romance", /романт|мелодрам|любов|romance/, ["романт", "мелодрам", "romance"]],
+      ["action", /боевик|action/, ["боевик", "action"]],
+      ["adventure", /приключ|adventure/, ["приключ", "adventure"]]
+    ];
+    const found = defs.find(def => def[1].test(q));
+    if (found) {
+      hard.genre = found[0];
+      hard.genreWords = found[2];
+    }
+  }
+
+  const isSelection =
+    hard.bucket !== "all" ||
+    Boolean(hard.genre) ||
+    Boolean(hard.exactYear) ||
+    /посоветуй|подбери|найди|покажи|дай|топ|лучшие|популяр|на вечер|что посмотреть/.test(q);
+
+  if (isSelection && !/без ограничения по голосам|не учитывать голоса/.test(q)) {
+    hard.minVotes = Math.max(Number(hard.minVotes || 0), 500);
+    hard.popularityFirst = true;
+  }
+  return hard;
+}
+
+function matchesHard(item, hard) {
+  if (!item || !hard) return false;
+  if (hard.bucket && hard.bucket !== "all" && item.__kind !== hard.bucket) return false;
+
+  if (hard.exactYear) {
+    if (!item.year || item.year < Number(hard.yearMin) || item.year > Number(hard.yearMax)) return false;
+  }
+
+  if ((item.votes || 0) < Number(hard.minVotes || 0)) return false;
+
+  const required = Array.isArray(hard.genreWords)
+    ? hard.genreWords.map(normalize).filter(Boolean)
+    : [];
+  if (required.length) {
+    if (!item.__genresN || !required.some(word => item.__genresN.includes(word))) return false;
+  }
+  return true;
+}
+
 function scoreItem(item, intent, tokens) {
   if (!clean(item)) return 0;
   if (intent.bucket && intent.bucket !== "all" && item.__kind !== intent.bucket) return 0;
@@ -408,22 +497,47 @@ function dedupeTop(entries, limit) {
 async function runSearch(message) {
   const requestId = message.id;
   const intent = message.intent || { bucket: "all", yearMin: 0, yearMax: 9999, sort: "smart" };
+  const hard = parseHardConstraints(message.query || "", message.hardConstraints || {});
   const tokens = Array.isArray(message.tokens) ? message.tokens : words(message.query || "");
-  const resultLimit = Math.max(1, Math.min(50, Number(message.limit || 30)));
-  const topLimit = Math.max(resultLimit * 5, 80);
+  const resultLimit = Math.max(1, Math.min(200, Number(message.limit || 120)));
+  const topLimit = Math.max(resultLimit * 5, 300);
+
+  if (hard.bucket && hard.bucket !== "all") intent.bucket = hard.bucket;
+  if (hard.exactYear) {
+    intent.yearMin = hard.yearMin;
+    intent.yearMax = hard.yearMax;
+  }
+  intent.minVotes = Math.max(Number(intent.minVotes || 0), Number(hard.minVotes || 0));
+  intent.popularityFirst = Boolean(intent.popularityFirst || hard.popularityFirst);
+
   const kinds = intent.bucket && intent.bucket !== "all" ? [intent.bucket] : KIND_NAMES.slice();
   const pools = [];
   for (const kind of kinds) pools.push(await loadKind(kind, requestId));
 
-  self.postMessage({ type: "PROGRESS", id: requestId, phase: "scanning", scanned: 0, total: pools.reduce((sum, pool) => sum + pool.length, 0) });
+  self.postMessage({
+    type: "PROGRESS",
+    id: requestId,
+    phase: "scanning",
+    scanned: 0,
+    total: pools.reduce((sum, pool) => sum + pool.length, 0)
+  });
+
   const top = [];
   let scanned = 0;
   const total = pools.reduce((sum, pool) => sum + pool.length, 0);
+
   for (const pool of pools) {
     for (const item of pool) {
+      // FIRST NON-NEGOTIABLE CHECK IN THE WORKER.
+      if (!matchesHard(item, hard)) {
+        scanned += 1;
+        continue;
+      }
+
       const score = scoreItem(item, intent, tokens);
       if (score > 0) insertTop(top, { item, score }, topLimit);
       scanned += 1;
+
       if (scanned % 12000 === 0) {
         self.postMessage({ type: "PROGRESS", id: requestId, phase: "scanning", scanned, total });
         await new Promise(resolve => setTimeout(resolve, 0));
@@ -432,36 +546,40 @@ async function runSearch(message) {
   }
 
   let entries = dedupeTop(top, resultLimit);
+
+  // Hard fallback: constraints remain active; nothing is relaxed.
   if (!entries.length) {
     const fallback = [];
     for (const pool of pools) {
       for (const item of pool) {
-        if (!clean(item)) continue;
-        if (intent.bucket && intent.bucket !== "all" && item.__kind !== intent.bucket) continue;
-        if (item.year && (item.year < Number(intent.yearMin || 0) || item.year > Number(intent.yearMax || 9999))) continue;
-        if (item.rating < Number(intent.ratingMin || 0) || item.rating > Number(intent.ratingMax || 10)) continue;
-        if ((item.votes || 0) < Number(intent.minVotes || 0)) continue;
-        if (intent.strictGenre) {
-          const required = strictGenreWords(intent.mood).map(normalize).filter(Boolean);
-          if (required.length && !required.some(word => item.__genresN.includes(word))) continue;
-        }
-        const popularity = intent.popularityFirst
-          ? (item.votes || 0) * 100 + (item.rating || 0)
-          : (item.rating || 0) * 100000 + (item.votes || 0);
+        if (!clean(item) || !matchesHard(item, hard)) continue;
+        const popularity = (item.votes || 0) * 1000 + (item.rating || 0) * 10;
         insertTop(fallback, { item, score: popularity }, topLimit);
       }
     }
     entries = dedupeTop(fallback, resultLimit);
   }
-  if (intent.random && entries.length > 1) entries.sort(() => Math.random() - 0.5);
+
+  entries.sort((a, b) =>
+    (b.item.votes || 0) - (a.item.votes || 0) ||
+    (b.item.rating || 0) - (a.item.rating || 0)
+  );
+
   return {
     items: entries.slice(0, resultLimit).map(entry => publicItem(entry.item)),
     scores: entries.slice(0, resultLimit).map(entry => Math.round(entry.score * 100) / 100),
     searched: total,
     kinds,
+    hardConstraints: hard,
     manifestTotal: Number(manifest && manifest.total || total),
-    counts: Object.fromEntries(KIND_NAMES.map(kind => [kind, Number(manifest && manifest.kinds && manifest.kinds[kind] && manifest.kinds[kind].count || 0)])),
-    loadedCounts: Object.fromEntries(KIND_NAMES.map(kind => [kind, (kindPools.get(kind) || []).length])),
+    counts: Object.fromEntries(KIND_NAMES.map(kind => [
+      kind,
+      Number(manifest && manifest.kinds && manifest.kinds[kind] && manifest.kinds[kind].count || 0)
+    ])),
+    loadedCounts: Object.fromEntries(KIND_NAMES.map(kind => [
+      kind,
+      (kindPools.get(kind) || []).length
+    ])),
     cacheHits,
     networkLoads,
     manifestVersion: manifestKey

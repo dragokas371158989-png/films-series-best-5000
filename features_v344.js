@@ -1,4 +1,4 @@
-window.GKM_V3447_STRICT_CATALOG_FILTERS_VERSION = "v344.7-strict-type-year-genre-votes-2026-07-12";
+window.GKM_V3448_DOUBLE_HARD_FILTER_VERSION = "v344.8-double-hard-filter-year-genre-votes-2026-07-12";
 window.GKM_V3443_POPULAR_VOTES_VERSION = "v344.3-popular-votes-min-500-2026-07-12";
 window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-12";
 /* GKM V344 FEATURE BUNDLE
@@ -9467,7 +9467,7 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
   const MEM_KEY = "gkm_v344_ai_memory";
   const HISTORY_KEY = "gkm_v344_ai_history";
   const WALL_BASE = "data/fast/poster_wall_v333";
-  const SEARCH_WORKER_URL = "ai_search_worker_v344.js?v=3447";
+  const SEARCH_WORKER_URL = "ai_search_worker_v344.js?v=3448";
   const DEFAULT_RECOMMENDATION_MIN_VOTES = 500;
   const POPULAR_PRIORITY_VOTES = 1000000;
   const FALLBACK_CACHE = new Map();
@@ -9606,6 +9606,94 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
     if(x.includes("вечер")||x.includes("вечером")||x.includes("посмотреть")) return "evening";
     return "";
   }
+  function parseHardQueryConstraints(q){
+    const x=N(q);
+    const hard={
+      bucket:detectType(q),
+      yearMin:0,
+      yearMax:9999,
+      exactYear:false,
+      genre:"",
+      genreWords:[],
+      minVotes:0,
+      popularityFirst:false
+    };
+
+    const range=x.match(/(?:от|с)\s*(19\d{2}|20\d{2})\s*(?:до|по|-)\s*(19\d{2}|20\d{2})/);
+    if(range){
+      hard.yearMin=Number(range[1]);
+      hard.yearMax=Number(range[2]);
+      hard.exactYear=true;
+    }else{
+      const years=[...x.matchAll(/\b(19\d{2}|20\d{2})\b/g)].map(m=>Number(m[1]));
+      if(years.length){
+        hard.yearMin=Math.min(...years);
+        hard.yearMax=Math.max(...years);
+        hard.exactYear=true;
+      }
+    }
+
+    const genres=[
+      {id:"horror",rx:/ужас|хоррор|страш/,words:["ужас","horror"]},
+      {id:"sci",rx:/фантаст|научн\w*\s+фантаст|sci[\s-]?fi/,words:["фантаст","science fiction","sci fi"]},
+      {id:"fantasy",rx:/фэнтези|fantasy/,words:["фэнтези","fantasy"]},
+      {id:"detective",rx:/детектив|расслед|mystery/,words:["детектив","detective","mystery"]},
+      {id:"crime",rx:/криминал|crime/,words:["криминал","crime"]},
+      {id:"thriller",rx:/триллер|thriller/,words:["триллер","thriller"]},
+      {id:"comedy",rx:/комед|смешн|comedy/,words:["комед","comedy"]},
+      {id:"drama",rx:/драм|drama/,words:["драм","drama"]},
+      {id:"romance",rx:/романт|мелодрам|любов|romance/,words:["романт","мелодрам","romance"]},
+      {id:"action",rx:/боевик|action/,words:["боевик","action"]},
+      {id:"adventure",rx:/приключ|adventure/,words:["приключ","adventure"]},
+      {id:"sport",rx:/спорт|sport/,words:["спорт","sport"]}
+    ];
+    const found=genres.find(g=>g.rx.test(x));
+    if(found){
+      hard.genre=found.id;
+      hard.genreWords=found.words;
+    }
+
+    const voteMatch=x.match(/(?:от|минимум|не меньше)\s*(\d+(?:[.,]\d+)?)\s*(млн|миллион\w*|тыс\w*|тысяч\w*)?\s*(?:голос\w*|оцен\w*)/);
+    if(voteMatch){
+      let value=Number(voteMatch[1].replace(",","."));
+      const unit=N(voteMatch[2]||"");
+      if(unit.startsWith("млн")||unit.startsWith("миллион"))value*=1000000;
+      else if(unit.startsWith("тыс")||unit.startsWith("тысяч"))value*=1000;
+      hard.minVotes=Math.max(0,Math.round(value));
+    }
+
+    const catalogSelection =
+      hard.bucket!=="all" ||
+      Boolean(hard.genre) ||
+      hard.exactYear ||
+      /посоветуй|подбери|найди|покажи|дай|топ|лучшие|популяр|на вечер|что посмотреть/.test(x);
+
+    if(catalogSelection && !/без ограничения по голосам|не учитывать голоса/.test(x)){
+      hard.minVotes=Math.max(hard.minVotes,DEFAULT_RECOMMENDATION_MIN_VOTES);
+      hard.popularityFirst=true;
+    }
+    return hard;
+  }
+
+  function matchesHardQuery(item,hard){
+    if(!item||!hard)return false;
+    if(hard.bucket&&hard.bucket!=="all"&&!passType(item,hard.bucket))return false;
+
+    const y=Number(year(item)||0);
+    if(hard.exactYear){
+      if(!y||y<hard.yearMin||y>hard.yearMax)return false;
+    }
+
+    const v=Number(votes(item)||0);
+    if(v<Number(hard.minVotes||0))return false;
+
+    if(hard.genreWords&&hard.genreWords.length){
+      const g=N(genres(item).join(" "));
+      if(!g||!hard.genreWords.map(N).some(word=>word&&g.includes(word)))return false;
+    }
+    return true;
+  }
+
   function detectIntent(q){
     const all=N(variants(q).join(" "));
     const m=mem();
@@ -9873,15 +9961,67 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
     const res=dedupe(arr).slice(0,it.count);lastResults=res;lastQuery=q;remember(it);return{items:res,intent:it,tokens:tk,searched:data.length,fallback:true};
   }
   async function search(q,onProgress){
-    const it=detectIntent(q),tk=tokens(q);
-    if(!["all","movies","series","anime","cartoons"].includes(it.bucket))return await fallbackSearch(q);
+    const it=detectIntent(q),tk=tokens(q),hard=parseHardQueryConstraints(q);
+
+    // Hard constraints always win over the soft intent.
+    if(hard.bucket!=="all")it.bucket=hard.bucket;
+    if(hard.exactYear){
+      it.yearMin=hard.yearMin;
+      it.yearMax=hard.yearMax;
+    }
+    if(hard.genre){
+      it.mood=hard.genre==="crime"?"detective":hard.genre;
+      it.strictGenre=true;
+    }
+    it.minVotes=Math.max(Number(it.minVotes||0),Number(hard.minVotes||0));
+    it.popularityFirst=Boolean(hard.popularityFirst||it.popularityFirst);
+
+    if(!["all","movies","series","anime","cartoons"].includes(it.bucket)){
+      const fallback=await fallbackSearch(q);
+      const checked=dedupe((fallback.items||[]).filter(item=>matchesHardQuery(item,hard))).slice(0,it.count);
+      lastResults=checked;
+      return{...fallback,items:checked,intent:it,hard};
+    }
+
     try{
-      const result=await workerCall("SEARCH",{query:q,intent:it,tokens:tk,limit:Math.max(30,it.count*3)},{timeout:60000,onProgress});
-      const res=dedupe((result&&result.items)||[]).slice(0,it.count);
-      if(!res.length)return await fallbackSearch(q);
-      lastResults=res;lastQuery=q;remember(it);workerState=result||workerState;
-      return{items:res,intent:it,tokens:tk,searched:Number(result&&result.searched||0),fullCatalog:true,result};
-    }catch(error){console.warn("GKM V344 full-catalog search fallback",error);return await fallbackSearch(q);}
+      const result=await workerCall("SEARCH",{
+        query:q,
+        intent:it,
+        hardConstraints:hard,
+        tokens:tk,
+        limit:Math.max(120,it.count*12)
+      },{timeout:60000,onProgress});
+
+      // SECOND CHECK IN THE MAIN THREAD.
+      // A result cannot be shown or opened unless it passes every requested condition.
+      const checked=dedupe(((result&&result.items)||[])
+        .filter(item=>matchesHardQuery(item,hard)))
+        .sort((a,b)=>votes(b)-votes(a)||rating(b)-rating(a))
+        .slice(0,it.count);
+
+      lastResults=checked;
+      lastQuery=q;
+      remember(it);
+      workerState=result||workerState;
+      return{
+        items:checked,
+        intent:it,
+        hard,
+        tokens:tk,
+        searched:Number(result&&result.searched||0),
+        fullCatalog:true,
+        result
+      };
+    }catch(error){
+      console.warn("GKM V344.8 full-catalog search error",error);
+      const fallback=await fallbackSearch(q);
+      const checked=dedupe((fallback.items||[])
+        .filter(item=>matchesHardQuery(item,hard)))
+        .sort((a,b)=>votes(b)-votes(a)||rating(b)-rating(a))
+        .slice(0,it.count);
+      lastResults=checked;
+      return{...fallback,items:checked,intent:it,hard};
+    }
   }
 
   function fmtVotes(v){
@@ -9933,8 +10073,11 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
     const loaded=collectLoadedItems();
     const match=loaded.find(item=>{
       const id=T(item&&(item.id||item.kinopoiskId||item.tmdbId||item.mal_id));
-      if(wantedId && id && wantedId===id) return true;
-      return wantedTitle && N(title(item))===wantedTitle && (!wantedYear || !year(item) || T(year(item))===wantedYear);
+      const sameTitle=wantedTitle&&N(title(item))===wantedTitle;
+      const sameYear=!wantedYear||!year(item)||T(year(item))===wantedYear;
+      const sameType=!compact.type||N(type(item))===N(type(compact));
+      if(wantedId&&id&&wantedId===id)return sameTitle&&sameYear&&sameType;
+      return sameTitle&&sameYear&&sameType;
     });
     return match || compact;
   }
@@ -10185,9 +10328,13 @@ Endpoint: ${endpoint||"не задан"}`;
 
     const res=await search(q,onProgress);
     if(!res.items.length){
-      if(res.intent&&res.intent.strictGenre)return`Не нашёл точных совпадений по жанру, году и минимуму ${fmtVotes(res.intent.minVotes||0)} голосов. Я не буду подсовывать другой жанр. Измени год либо напиши «без ограничения по голосам».`;
-      if(res.intent&&Number(res.intent.minVotes||0)>0)return`Не нашёл достаточно вариантов с минимум ${fmtVotes(res.intent.minVotes)} голосов. Уточни жанр/годы или напиши «без ограничения по голосам».`;
-      return"Не нашёл быстро в нужном разделе. Попробуй проще: «фильмы вечер», «анимэ попаданцы», «игры rpg», «манга ужасы».";
+      const h=res.hard||parseHardQueryConstraints(q);
+      const parts=[];
+      if(h.bucket&&h.bucket!=="all")parts.push(`тип: ${h.bucket}`);
+      if(h.genre)parts.push(`жанр: ${h.genre}`);
+      if(h.exactYear)parts.push(h.yearMin===h.yearMax?`год: ${h.yearMin}`:`годы: ${h.yearMin}–${h.yearMax}`);
+      if(h.minVotes)parts.push(`минимум голосов: ${h.minVotes}`);
+      return`Точных вариантов не найдено (${parts.join(", ")}). Другой жанр, другой год и карточки с малым числом голосов я подставлять не буду.`;
     }
     pendingCards=res.items.slice(0,12);
     const popularityNote=res.intent&&res.intent.popularityFirst
@@ -10268,7 +10415,9 @@ Endpoint: ${endpoint||"не задан"}`;
       getLastResultCount: () => lastResults.length,
       renderLastResults: () => appendResultCardsToLastBot(lastResults),
       openResult: number => openResult(number),
-      getWorkerState: () => workerState
+      getWorkerState: () => workerState,
+      parseHardQuery: q => parseHardQueryConstraints(q),
+      validateItem: (item,q) => matchesHardQuery(item,parseHardQueryConstraints(q))
     };
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
