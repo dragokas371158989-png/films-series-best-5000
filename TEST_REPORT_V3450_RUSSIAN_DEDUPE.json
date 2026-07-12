@@ -1,0 +1,19 @@
+{
+  "version": "V3450",
+  "mode": "apply",
+  "stats": {
+    "primary_before": 97416,
+    "titles_localized": 57670,
+    "genres_localized": 92102,
+    "descriptions_russianized": 58818,
+    "duplicates_removed": 899,
+    "primary_after": 96521,
+    "search_total": 97885,
+    "derived_files_localized": 3497,
+    "derived_duplicates_removed": 2,
+    "ui_patched": 1,
+    "static_pages_localized": 15545,
+    "titles_cyrillic_after": 96521,
+    "titles_total_after": 96521
+  }
+}
