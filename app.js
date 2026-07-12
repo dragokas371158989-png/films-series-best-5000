@@ -11766,19 +11766,21 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V306 RICH DESCRIPTIONS FIX END */
 
-/* GKM V342 HUMAN HYBRID AI WEATHER FULL CATALOG START */
+/* GKM V343 HUMAN AI WEATHER CLICKABLE CARDS FULL CATALOG START */
 (function(){
-  window.GKM_V342_HUMAN_HYBRID_AI_WEATHER_FULL_CATALOG_VERSION = "v342-human-hybrid-ai-weather-full-catalog-2026-07-12";
-  window.GKM_V342_AI_MODEL_DEFAULT = "openai/gpt-oss-120b";
+  window.GKM_V343_HUMAN_AI_WEATHER_CLICKABLE_CARDS_FULL_CATALOG_VERSION = "v343-human-ai-weather-clickable-cards-full-catalog-2026-07-12";
+  window.GKM_V343_HUMAN_HYBRID_AI_WEATHER_FULL_CATALOG_VERSION = window.GKM_V343_HUMAN_AI_WEATHER_CLICKABLE_CARDS_FULL_CATALOG_VERSION;
+  window.GKM_V343_AI_MODEL_DEFAULT = "openai/gpt-oss-120b";
 
   const LIMIT = 12;
   const MEM_KEY = "gkm_v342_ai_memory";
   const HISTORY_KEY = "gkm_v342_ai_history";
   const WALL_BASE = "data/fast/poster_wall_v333";
-  const SEARCH_WORKER_URL = "ai_search_worker_v342.js?v=342";
+  const SEARCH_WORKER_URL = "ai_search_worker_v343.js?v=343";
   const FALLBACK_CACHE = new Map();
   let lastResults = [];
   let lastQuery = "";
+  let pendingCards = [];
   let requestSeq = 0;
   let warmStarted = false;
   let searchWorker = null;
@@ -12035,7 +12037,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     });
   }
   async function getWorkerStatus(){try{return await workerCall("STATUS",{}, {timeout:15000});}catch{return workerState;}}
-  function warmup(){if(warmStarted)return;warmStarted=true;const run=()=>ensureSearchWorker().catch(error=>console.warn("GKM V342 worker warmup",error));if("requestIdleCallback" in window)requestIdleCallback(run,{timeout:1000});else setTimeout(run,250);}
+  function warmup(){if(warmStarted)return;warmStarted=true;const run=()=>ensureSearchWorker().catch(error=>console.warn("GKM V343 worker warmup",error));if("requestIdleCallback" in window)requestIdleCallback(run,{timeout:1000});else setTimeout(run,250);}
 
   function clean(item){
     if(!item) return false;
@@ -12123,7 +12125,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       if(!res.length)return await fallbackSearch(q);
       lastResults=res;lastQuery=q;remember(it);workerState=result||workerState;
       return{items:res,intent:it,tokens:tk,searched:Number(result&&result.searched||0),fullCatalog:true,result};
-    }catch(error){console.warn("GKM V342 full-catalog search fallback",error);return await fallbackSearch(q);}
+    }catch(error){console.warn("GKM V343 full-catalog search fallback",error);return await fallbackSearch(q);}
   }
 
   function fmtVotes(v){
@@ -12154,11 +12156,49 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }).join("\n");
   }
 
+  function collectLoadedItems(){
+    const out=[];
+    try{ if(Array.isArray(currentItems)) out.push(...currentItems); }catch{}
+    try{
+      if(homeData && homeData.sections){
+        Object.values(homeData.sections).forEach(section=>{
+          if(Array.isArray(section)) out.push(...section);
+          else if(section && Array.isArray(section.items)) out.push(...section.items);
+        });
+      }
+    }catch{}
+    return out;
+  }
+  function resolveOpenItem(compact){
+    if(!compact) return compact;
+    const wantedId=T(compact.id||compact.kinopoiskId||compact.tmdbId||compact.mal_id);
+    const wantedTitle=N(title(compact));
+    const wantedYear=T(year(compact));
+    const loaded=collectLoadedItems();
+    const match=loaded.find(item=>{
+      const id=T(item&&(item.id||item.kinopoiskId||item.tmdbId||item.mal_id));
+      if(wantedId && id && wantedId===id) return true;
+      return wantedTitle && N(title(item))===wantedTitle && (!wantedYear || !year(item) || T(year(item))===wantedYear);
+    });
+    return match || compact;
+  }
+  function openCatalogItem(item){
+    if(!item) return false;
+    const dialog=document.getElementById("gkmAiDialog");
+    try{ if(dialog && dialog.open && typeof dialog.close==="function") dialog.close(); }catch{}
+    const resolved=resolveOpenItem(item);
+    try{
+      if(typeof openDetails==="function"){
+        setTimeout(()=>openDetails(resolved),40);
+        return true;
+      }
+    }catch(error){ console.warn("GKM V343 open card",error); }
+    return false;
+  }
   function openResult(n){
     const item=lastResults[Number(n)-1];
     if(!item)return`Нет результата под номером ${n}. Сначала сделай поиск.`;
-    try{if(typeof openDetails==="function"){openDetails(item);return"Открыл: "+title(item);}}catch{}
-    return"Нашёл: "+title(item)+", но открыть не получилось.";
+    return openCatalogItem(item) ? "Открываю карточку: "+title(item) : "Нашёл: "+title(item)+", но открыть не получилось.";
   }
   function compare(a,b){
     const A=lastResults[Number(a)-1],B=lastResults[Number(b)-1];
@@ -12183,6 +12223,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const items = res.items.filter(x => itemKey(x) !== itemKey(base)).slice(0, LIMIT);
     if(!items.length) return "Похожее быстро не нашёл. Попробуй обычным запросом.";
     lastResults = items;
+    pendingCards=items.slice(0,12);
     return `Похожее на ${title(base)}:\n${fmt(items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
   }
 
@@ -12191,10 +12232,64 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const q = lastQuery + " рандом другое";
     const res = await search(q);
     if(!res.items.length) return "Других вариантов быстро не нашёл.";
+    pendingCards=res.items.slice(0,12);
     return `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
   }
 
 
+
+  function ensureV343Styles(){
+    if(document.getElementById("gkmV343AiStyles")) return;
+    const style=document.createElement("style");
+    style.id="gkmV343AiStyles";
+    style.textContent=`
+      #gkmAiDialog .ai-subtitle{max-width:310px}
+      .gkm-v343-ai-cards{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}
+      .gkm-v343-ai-card{width:100%;display:grid;grid-template-columns:58px minmax(0,1fr);gap:10px;align-items:center;text-align:left;padding:8px;border:1px solid rgba(0,210,255,.28);border-radius:14px;background:linear-gradient(135deg,rgba(18,31,63,.96),rgba(20,15,54,.96));color:#fff;cursor:pointer;box-shadow:0 7px 18px rgba(0,0,0,.28);transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease}
+      .gkm-v343-ai-card:hover{transform:translateY(-1px);border-color:rgba(0,220,255,.72);box-shadow:0 9px 24px rgba(0,180,255,.17)}
+      .gkm-v343-ai-card img{width:58px;height:82px;object-fit:cover;border-radius:9px;background:#071124}
+      .gkm-v343-ai-card-main{min-width:0}
+      .gkm-v343-ai-card-title{display:block;font-size:14px;font-weight:900;line-height:1.18;margin-bottom:5px;white-space:normal}
+      .gkm-v343-ai-card-meta{display:block;font-size:11px;line-height:1.35;color:rgba(255,255,255,.72);margin-bottom:7px}
+      .gkm-v343-ai-card-open{display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:9px;background:linear-gradient(135deg,#5b3ce7,#00aeea);font-size:11px;font-weight:900;color:#fff}
+      #gkmAiMessages .ai-bot{overflow:visible}
+      @media(max-width:520px){.gkm-v343-ai-card{grid-template-columns:50px minmax(0,1fr)}.gkm-v343-ai-card img{width:50px;height:72px}}
+    `;
+    document.head.appendChild(style);
+  }
+  function posterOf(item){
+    try{ if(typeof posterSrc==="function") return T(posterSrc(item)); }catch{}
+    return T(item&&(item.poster||item.poster_url||item.image||item.cover||item.thumbnail));
+  }
+  function resultCardsHtml(items){
+    return items.slice(0,12).map((item,index)=>{
+      const meta=[type(item),year(item),rating(item)?"★ "+rating(item).toFixed(1):""].filter(Boolean).join(" · ");
+      const poster=posterOf(item);
+      return `<button type="button" class="gkm-v343-ai-card" data-gkm-result-index="${index}">
+        ${poster?`<img src="${E(poster)}" alt="${E(title(item))}" loading="lazy">`:`<span style="display:block;width:58px;height:82px;border-radius:9px;background:#10172b"></span>`}
+        <span class="gkm-v343-ai-card-main">
+          <span class="gkm-v343-ai-card-title">${index+1}. ${E(title(item))}</span>
+          <span class="gkm-v343-ai-card-meta">${E(meta)}</span>
+          <span class="gkm-v343-ai-card-open">Открыть карточку →</span>
+        </span>
+      </button>`;
+    }).join("");
+  }
+  function appendResultCardsToLastBot(items){
+    if(!Array.isArray(items)||!items.length) return;
+    const box=document.getElementById("gkmAiMessages");
+    const last=box&&box.lastElementChild;
+    if(!last||!last.classList.contains("ai-bot")) return;
+    const old=last.querySelector(".gkm-v343-ai-cards");if(old)old.remove();
+    const wrap=document.createElement("div");wrap.className="gkm-v343-ai-cards";wrap.innerHTML=resultCardsHtml(items);
+    wrap.addEventListener("click",event=>{
+      const button=event.target.closest("[data-gkm-result-index]");if(!button)return;
+      event.preventDefault();event.stopPropagation();
+      const item=items[Number(button.dataset.gkmResultIndex)];
+      if(!openCatalogItem(item))alert("Не получилось открыть карточку: "+title(item));
+    });
+    last.appendChild(wrap);box.scrollTop=box.scrollHeight;
+  }
 
   function renderRichText(value){
     let html=E(value);
@@ -12225,7 +12320,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const x=N(q);
     if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)/.test(x))return"Привет! Рад тебя видеть. Можем просто пообщаться или подобрать что-нибудь из каталога.";
     if(/как дела|как ты/.test(x))return"Всё отлично, на связи и готов помочь. Как у тебя дела?";
-    if(/кто ты|что ты/.test(x))return"Я ГОЛУБЬ AI V342: могу общаться на обычные темы, отвечать на вопросы, показывать живую погоду и искать по всему каталогу.";
+    if(/кто ты|что ты/.test(x))return"Я ГОЛУБЬ AI V343: могу общаться на обычные темы, отвечать на вопросы, показывать живую погоду и искать по всему каталогу.";
     return"Я понял вопрос, но сейчас не смог получить ответ от Groq. Попробуй ещё раз через несколько секунд.";
   }
 
@@ -12240,8 +12335,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         query: q,
         mode,
         local_answer: localText,
-        site_version: "V342",
-        requested_model: window.GKM_V342_AI_MODEL_DEFAULT,
+        site_version: "V343",
+        requested_model: window.GKM_V343_AI_MODEL_DEFAULT,
         instruction: mode === "catalog"
           ? "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов."
           : "Ты Голубь AI — живой собеседник. Отвечай естественно, дружелюбно и по делу. Поддерживай обычный разговор и не своди любой вопрос к каталогу.",
@@ -12271,6 +12366,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       clearTimeout(timer);
       if(!res.ok) return "";
       const data = await res.json();
+      if(data && data.resolvedCity){const m=mem();m.city=T(data.resolvedCity);saveMem(m);}
       return T(data && (data.answer || data.text || data.message));
     }catch{
       return "";
@@ -12278,6 +12374,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   async function answer(q,onProgress){
+    pendingCards=[];
     const raw=T(q),x=N(q);
     if(!x)return"Напиши вопрос.";
     const ep=raw.match(/^endpoint\s*:\s*(https:\/\/\S+)/i);
@@ -12291,12 +12388,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(/статус ai|статус помощника|какой ai/.test(x)){
       const endpoint=window.GKM_AI_ENDPOINT||localStorage.getItem("GKM_AI_ENDPOINT")||"";
       const st=await getWorkerStatus();const counts=st&&st.counts||{},loaded=st&&st.loadedCounts||{};
-      return `ГОЛУБЬ AI V342
+      return `ГОЛУБЬ AI V343
 Режим общения: ${endpoint?"Cloudflare Worker + Groq":"Groq не подключён"}
-Модель Worker: ${window.GKM_V342_AI_MODEL_DEFAULT}
+Модель Worker: ${window.GKM_V343_AI_MODEL_DEFAULT}
 Обычный диалог: включён
-Живая погода: включена через Open-Meteo
+Живая погода: включена, склонения городов поддерживаются
 Поиск: полный каталог через Web Worker
+Кликабельные карточки: включены
 Каталог: ${Number(st&&st.manifestTotal||0).toLocaleString("ru-RU")} записей
 Разделы: фильмы ${counts.movies||0}, сериалы ${counts.series||0}, аниме ${counts.anime||0}, мультфильмы ${counts.cartoons||0}
 Сейчас в памяти потока: ${JSON.stringify(loaded)}
@@ -12327,6 +12425,7 @@ Endpoint: ${endpoint||"не задан"}`;
 
     const res=await search(q,onProgress);
     if(!res.items.length)return"Не нашёл быстро в нужном разделе. Попробуй проще: «фильмы вечер», «анимэ попаданцы», «игры rpg», «манга ужасы».";
+    pendingCards=res.items.slice(0,12);
     const localText = `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «похожее на 1», «другое», «сравни 1 и 2», «сделай план», «почему».`;
     const aiText = await tryRemoteAI(q, localText, "catalog");
     return aiText || localText;
@@ -12341,31 +12440,34 @@ Endpoint: ${endpoint||"не задан"}`;
     const box=document.getElementById("gkmAiMessages");if(!box)return false;
     const last=box.lastElementChild;if(!last||!last.classList.contains("ai-bot"))return false;
     const old=T(last.textContent);
-    if(force||old.includes("V341")||old.includes("V342")||old.includes("ищет")||old.includes("загружает")||old.includes("проверяет")){last.innerHTML=renderRichText(text);box.scrollTop=box.scrollHeight;return true;}
+    if(force||old.includes("V341")||old.includes("V343")||old.includes("ищет")||old.includes("загружает")||old.includes("проверяет")){last.innerHTML=renderRichText(text);box.scrollTop=box.scrollHeight;return true;}
     return false;
   }
 
   function install(){
+    ensureV343Styles();
     const form=document.getElementById("gkmAiForm"),input=document.getElementById("gkmAiInput"),dialog=document.getElementById("gkmAiDialog"),floatBtn=document.getElementById("gkmAiFloatBtn"),closeBtn=document.getElementById("gkmAiCloseBtn");
+    const subtitle=dialog&&dialog.querySelector(".ai-subtitle");if(subtitle)subtitle.textContent="Общение, погода и полный каталог";
     if(floatBtn&&dialog&&input){
       floatBtn.onclick=()=>{if(typeof dialog.showModal==="function")dialog.showModal();else dialog.setAttribute("open","");setTimeout(()=>input.focus(),50);warmup();};
     }
     if(closeBtn&&dialog)closeBtn.onclick=()=>dialog.close?dialog.close():dialog.removeAttribute("open");
     if(!form||!input)return;
-    form.dataset.v260Installed="0";form.dataset.v300Installed="0";form.dataset.v301Installed="0";form.dataset.v302Installed="0";form.dataset.v303Installed="0";form.dataset.v304Installed="0";form.dataset.v305Installed="0";form.dataset.v307IsekaiInstalled="0";form.dataset.v308Installed="0";form.dataset.v309Installed="0";form.dataset.v310Installed="0";form.dataset.v311Installed="0";form.dataset.v312Installed="0";form.dataset.v316Installed="0";form.dataset.v336Installed="0";form.dataset.v340Installed="0";form.dataset.v341Installed="0";form.dataset.v342Installed="1";
+    form.dataset.v260Installed="0";form.dataset.v300Installed="0";form.dataset.v301Installed="0";form.dataset.v302Installed="0";form.dataset.v303Installed="0";form.dataset.v304Installed="0";form.dataset.v305Installed="0";form.dataset.v307IsekaiInstalled="0";form.dataset.v308Installed="0";form.dataset.v309Installed="0";form.dataset.v310Installed="0";form.dataset.v311Installed="0";form.dataset.v312Installed="0";form.dataset.v316Installed="0";form.dataset.v336Installed="0";form.dataset.v340Installed="0";form.dataset.v341Installed="0";form.dataset.v343Installed="1";
     form.onsubmit=async e=>{
       e.preventDefault();if(e.stopPropagation)e.stopPropagation();
       const q=input.value.trim();if(!q)return;input.value="";
       const seq=++requestSeq;
-      addMsg("user",q);pushHistory("user",q);addMsg("bot","ГОЛУБЬ AI V342 думает…");
+      addMsg("user",q);pushHistory("user",q);addMsg("bot","ГОЛУБЬ AI V343 думает…");
       try{
         const onProgress=progress=>{if(seq===requestSeq)replaceLastBot(progressText(progress),true);};
         const out=await answer(q,onProgress);
         if(seq!==requestSeq)return;
         pushHistory("assistant",out);
         if(!replaceLastBot(out,true))addMsg("bot",out);
+        appendResultCardsToLastBot(pendingCards);
       }catch(err){
-        console.warn("GKM V342 helper error",err);
+        console.warn("GKM V343 helper error",err);
         const msg="Помощник словил ошибку. Попробуй повторить вопрос через несколько секунд.";
         pushHistory("assistant",msg);
         if(!replaceLastBot(msg,true))addMsg("bot",msg);
@@ -12375,9 +12477,9 @@ Endpoint: ${endpoint||"не задан"}`;
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
   setTimeout(install,100);setTimeout(install,450);setTimeout(install,900);
-  console.log("GKM V342: human hybrid AI + weather + full catalog installed");
+  console.log("GKM V343: human hybrid AI + weather + full catalog installed");
 })();
-/* GKM V342 HUMAN HYBRID AI WEATHER FULL CATALOG END */
+/* GKM V343 HUMAN AI WEATHER CLICKABLE CARDS FULL CATALOG END */
 
 
 /* GKM V334 INSTANT LOD CANVAS POSTER MOSAIC START */
