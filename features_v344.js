@@ -1,3 +1,4 @@
+window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-12";
 /* GKM V344 FEATURE BUNDLE
  * Loaded after app.js. Contains helper, franchise, documentation, AI and poster-wall extensions.
  */
@@ -1439,6 +1440,17 @@
     if (!modals.length) return;
 
     modals.forEach(modal => {
+      // V344.2: карточка подробностей уже сама фильтрует похожие проекты.
+      // V191 ошибочно видел скрытый блок «Аниме-сайты», принимал любую карточку
+      // фильма за аниме и накладывал grayscale + opacity.
+      if (modal.id === "detailsDialog") {
+        modal.classList.remove("gkm-v191-similar-down", "gkm-v191-soft-trash");
+        modal.querySelectorAll(".gkm-v191-similar-down,.gkm-v191-soft-trash").forEach(el => {
+          el.classList.remove("gkm-v191-similar-down", "gkm-v191-soft-trash");
+        });
+        return;
+      }
+
       const modalCards = Array.from(modal.querySelectorAll("article,.card,.movie-card,.item,[class*='card'],[class*='movie'],[class*='item'],div"))
         .filter(isCard);
 
@@ -1495,6 +1507,17 @@
         opacity:.45;
         filter:grayscale(.65);
         order:9999;
+      }
+      /* V344.2: никогда не обесцвечивать основную карточку подробностей */
+      #detailsDialog.gkm-v191-similar-down,
+      #detailsDialog .gkm-v191-similar-down,
+      #detailsDialog.gkm-v191-soft-trash,
+      #detailsDialog .gkm-v191-soft-trash {
+        opacity:1!important;
+        filter:none!important;
+        -webkit-filter:none!important;
+        mix-blend-mode:normal!important;
+        order:initial!important;
       }
       .gkm-v191-search-best {
         outline:2px solid rgba(0,216,255,.65);
