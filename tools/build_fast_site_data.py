@@ -10,6 +10,7 @@ INDEX_PATH = DATA_DIR / "index.json"
 PAGE_SIZE = int(os.environ.get("GKM_FAST_PAGE_SIZE", "60"))
 HOME_LIMIT = int(os.environ.get("GKM_FAST_HOME_LIMIT", "18"))
 MIN_VOTES_FOR_TOP = int(os.environ.get("GKM_MIN_VOTES_FOR_TOP", "300"))
+SEARCH_LITE_LIMIT = int(os.environ.get("GKM_SEARCH_LITE_LIMIT", "15000"))
 TMDB_ENABLED = False
 TMDB_OFF_VERSION = "v101-full-fast-search-kinopoisk-data-2026-06-17"
 
@@ -352,6 +353,14 @@ def overview_of(item):
             return v
     return ""
 
+def generated_overview(title, item_type, year, genres):
+    title = clean_text(title) or "Проект"
+    item_type = clean_text(item_type).lower() or "проект"
+    year_text = f" {year} года" if year else ""
+    genre_text = ", ".join(genres[:3]) if genres else ""
+    tail = f" Жанры: {genre_text}." if genre_text else ""
+    return f"«{title}» — {item_type}{year_text} из каталога «ГОЛУБЬ Каталог Мира».{tail} Описание будет дополнено после следующего обновления данных."
+
 def stable_id(item, i):
     for k in ("id", "uid", "tmdbId", "tmdb_id", "kinopoiskId", "filmId", "mal_id", "malId", "shikimori_id"):
         if item.get(k) not in (None, ""):
@@ -537,6 +546,12 @@ def card_item(raw, i):
         "genres": genres,
         "overview": overview_of(raw),
     }
+    if not x["overview"]:
+        x["overview"] = generated_overview(x["ru"], x["type"], x["year"], x["genres"])
+        x["overviewGenerated"] = True
+    else:
+        x["overviewGenerated"] = False
+
     x.update(pick_extra(raw))
     x["source"] = clean_text(x.get("source") or raw.get("provider") or "")
     x["episodes"] = x.get("episodes") or x.get("episodeCount") or ""
@@ -650,6 +665,32 @@ def dedupe(raw_items):
     print(f"Type stats: {type_stats}")
     return out
 
+
+def page_item(x):
+    """Fields required by cards/details, without heavy recommender internals."""
+    keep = (
+        "id", "ru", "en", "aliases", "year", "type", "rating", "votes",
+        "poster", "backdrop", "genres", "overview", "overviewGenerated",
+        "episodes", "episodeCount", "studio", "studios", "country", "countries",
+        "status", "ageRating", "age", "source", "recScore",
+        "player", "playerUrl", "video", "videoUrl", "url", "src", "iframe",
+        "rutube", "watchUrl", "watch", "trailer", "trailerUrl", "players",
+        "videoLinks", "links", "sources", "tmdbId", "tmdb_id", "kinopoiskId",
+        "filmId", "mal_id", "malId", "shikimori_id"
+    )
+    out = {}
+    for key in keep:
+        value = x.get(key)
+        if value not in (None, "", [], {}):
+            out[key] = value
+    out.setdefault("id", x.get("id"))
+    out.setdefault("ru", x.get("ru"))
+    out.setdefault("type", x.get("type"))
+    out.setdefault("rating", x.get("rating") or 0)
+    out.setdefault("votes", x.get("votes") or 0)
+    out.setdefault("genres", x.get("genres") or [])
+    return out
+
 def write_pages(base, tab, items):
     d = base / "pages" / tab
     d.mkdir(parents=True, exist_ok=True)
@@ -661,7 +702,7 @@ def write_pages(base, tab, items):
             "pages": pages,
             "count": len(items),
             "pageSize": PAGE_SIZE,
-            "items": items[(page - 1) * PAGE_SIZE:page * PAGE_SIZE],
+            "items": [page_item(x) for x in items[(page - 1) * PAGE_SIZE:page * PAGE_SIZE]],
         })
     return {"count": len(items), "pages": pages, "pageSize": PAGE_SIZE}
 
@@ -701,6 +742,7 @@ def search_item(x):
         "source": x.get("source"),
         "search": search_text,
         "recScore": x.get("recScore"),
+        "overviewGenerated": bool(x.get("overviewGenerated")),
     }
 
 def main():
@@ -750,13 +792,13 @@ def main():
         "generatedAt": now_iso(),
         "total": len(items),
         "sections": {
-            "popular": popular[:HOME_LIMIT],
-            "top": top[:HOME_LIMIT],
-            "new": new_items[:HOME_LIMIT],
-            "anime": anime[:HOME_LIMIT],
-            "movies": movies[:HOME_LIMIT],
-            "series": series[:HOME_LIMIT],
-            "cartoons": cartoons[:HOME_LIMIT],
+            "popular": [page_item(x) for x in popular[:HOME_LIMIT]],
+            "top": [page_item(x) for x in top[:HOME_LIMIT]],
+            "new": [page_item(x) for x in new_items[:HOME_LIMIT]],
+            "anime": [page_item(x) for x in anime[:HOME_LIMIT]],
+            "movies": [page_item(x) for x in movies[:HOME_LIMIT]],
+            "series": [page_item(x) for x in series[:HOME_LIMIT]],
+            "cartoons": [page_item(x) for x in cartoons[:HOME_LIMIT]],
         }
     }
 
@@ -772,18 +814,24 @@ def main():
         "genres": genres_all,
         "years": years,
         "pages": pages,
-        "builderVersion": "v101-full-fast-search-kinopoisk-data-2026-06-17",
-        "searchIndexVersion": "v101-light-precomputed-search",
+        "builderVersion": "v344-light-pages-search-lite-generated-overviews-2026-07-12",
+        "searchIndexVersion": "v344-full-plus-lite-fallback",
         "notes": [
             "types are fixed at build time",
             "Scooby and western cartoons are cartoons, not anime",
             "anime aliases are deduped at build time",
-            "browser app.js should stay light/stable"
+            "browser app.js should stay light/stable",
+            "search_lite contains the highest-ranked items for fast first search",
+            "missing descriptions receive deterministic generated fallbacks",
+            "page JSON contains only browser-required fields to reduce data/fast size"
         ]
     }
 
+    search_lite = search_index[:max(1000, min(SEARCH_LITE_LIMIT, len(search_index)))]
+
     save_json(FAST_TMP_DIR / "home.json", home)
     save_json(FAST_TMP_DIR / "search_index.json", search_index)
+    save_json(FAST_TMP_DIR / "search_lite.json", search_lite)
     save_json(FAST_TMP_DIR / "meta.json", meta)
 
     if FAST_DIR.exists():
@@ -795,6 +843,7 @@ def main():
     print(f"count={len(items)}")
     print(f"dedupeRemoved={meta['dedupeRemoved']}")
     print(f"pages_all={pages['all']['pages']}")
+    print(f"search_lite={len(search_lite)}")
     print(f"anime={pages['anime']['count']} cartoons={pages['cartoons']['count']}")
 
 if __name__ == "__main__":
