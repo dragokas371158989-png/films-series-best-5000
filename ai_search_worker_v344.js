@@ -1,8 +1,8 @@
-/* GKM V343 FULL CATALOG AI SEARCH WORKER */
+/* GKM V344 FULL CATALOG AI SEARCH WORKER */
 "use strict";
 
-const VERSION = "v343-full-catalog-web-worker-ai-search-2026-07-12";
-const DB_NAME = "gkm_ai_search_v342";
+const VERSION = "v344-full-catalog-web-worker-ai-search-2026-07-12";
+const DB_NAME = "gkm_ai_search_v344";
 const DB_VERSION = 1;
 const STORE_NAME = "chunks";
 const DEFAULT_BASE = "data/fast/poster_wall_v333";
