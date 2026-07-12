@@ -1,0 +1,95 @@
+name: GKM V344 One-Time Cleanup and SEO Repair
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v344-one-time-cleanup
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync main
+        run: git pull --rebase origin main
+
+      - name: Verify V344 files
+        run: |
+          test -f app.js
+          test -f index.html
+          test -f features_v344.js
+          test -f ai_search_worker_v344.js
+          test -f tools/gkm_v344_maintenance.py
+          test -f tools/gkm_v344_build_poster_wall.py
+          test -f favicon-192.png
+          test -f favicon-32.png
+          test -f logo-banner.webp
+
+      - name: Run full maintenance
+        run: python tools/gkm_v344_maintenance.py --mode all
+
+      - name: Rebuild poster wall with strict dedupe
+        run: python tools/gkm_v344_build_poster_wall.py
+
+      - name: Validate JavaScript and Python
+        run: |
+          node --check app.js
+          node --check features_v344.js
+          node --check ai_search_worker_v344.js
+          python -m py_compile tools/build_fast_site_data.py tools/gkm_v344_build_poster_wall.py tools/gkm_v344_maintenance.py tools/dedupe_database_v112.py
+
+      - name: Validate JSON-LD and sitemap
+        run: |
+          python - <<'PY'
+          import html, json, re
+          from pathlib import Path
+          rx = re.compile(r'<script\s+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', re.I|re.S)
+          pages = [p for p in Path('film').glob('*.html') if p.name != 'index.html']
+          valid = 0
+          for path in pages:
+              text = path.read_text(encoding='utf-8', errors='replace')
+              m = rx.search(text)
+              if not m:
+                  continue
+              json.loads(html.unescape(m.group(1)))
+              valid += 1
+          sitemap = Path('sitemap.xml').read_text(encoding='utf-8')
+          urls = sitemap.count('<url>')
+          assert valid == len(pages), (valid, len(pages))
+          assert urls >= len(pages), (urls, len(pages))
+          print('valid JSON-LD:', valid)
+          print('sitemap URLs:', urls)
+          PY
+
+      - name: Commit V344 cleanup
+        run: |
+          git config user.name "gkm-maintenance-bot"
+          git config user.email "gkm-maintenance-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No cleanup changes"
+            exit 0
+          fi
+          git commit -m "Apply V344 cleanup SEO workflow and AI cards"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin main && exit 0
+            sleep 6
+          done
+          exit 1
