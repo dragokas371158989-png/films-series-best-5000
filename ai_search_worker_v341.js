@@ -1,8 +1,8 @@
-/* GKM V341 FULL CATALOG AI SEARCH WORKER */
+/* GKM V342 FULL CATALOG AI SEARCH WORKER */
 "use strict";
 
-const VERSION = "v341-full-catalog-web-worker-ai-search-2026-07-12";
-const DB_NAME = "gkm_ai_search_v341";
+const VERSION = "v342-full-catalog-web-worker-ai-search-2026-07-12";
+const DB_NAME = "gkm_ai_search_v342";
 const DB_VERSION = 1;
 const STORE_NAME = "chunks";
 const DEFAULT_BASE = "data/fast/poster_wall_v333";
@@ -64,7 +64,7 @@ function compactToItem(row, fallbackKind) {
     genres: typeof row[8] === "string" ? row[8].split("|").filter(Boolean) : (row[8] || []),
     source: row[9] || "",
     status: row[10] || "",
-    __gkmV341Compact: true,
+    __gkmV342Compact: true,
     __kind: typeCode >= 0 ? kindMap[typeCode] : fallbackKind
   }, fallbackKind);
 }
@@ -128,7 +128,7 @@ function publicItem(item) {
     source: item.source,
     status: item.status,
     overview: item.overview,
-    __gkmV341Compact: true
+    __gkmV342Compact: true
   };
 }
 
