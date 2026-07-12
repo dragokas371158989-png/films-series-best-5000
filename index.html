@@ -106,6 +106,12 @@
 })();
 </script>
 
+  <link rel="dns-prefetch" href="//image.tmdb.org">
+  <link rel="dns-prefetch" href="//cdn.myanimelist.net">
+  <link rel="preconnect" href="https://image.tmdb.org" crossorigin>
+  <link rel="preconnect" href="https://cdn.myanimelist.net" crossorigin>
+  <link rel="preload" href="data/fast/poster_wall_v333/manifest.json?v=333" as="fetch" crossorigin="anonymous" fetchpriority="high">
+  <link rel="preload" href="data/fast/poster_wall_v333/seed_all.json?v=333" as="fetch" crossorigin="anonymous" fetchpriority="high">
 </head>
 
 <body>
@@ -222,28 +228,28 @@
         <div id="playerButtons" class="detail-buttons"></div>
       </section>
 
-      <section id="animeLinksBlock" class="links-block" hidden>
+      <section id="animeLinksBlock" class="links-block">
         <h3 class="links-title">Аниме-сайты</h3>
         <div class="detail-buttons">
-          <a id="shikimoriLink" target="_blank" rel="noopener noreferrer" data-gkm-v326-external="1">Shikimori</a>
-          <a id="malLink" target="_blank" rel="noopener noreferrer" data-gkm-v326-external="1">MyAnimeList</a>
-          <a id="anilistLink" target="_blank" rel="noopener noreferrer" data-gkm-v326-external="1">AniList</a>
-          <a id="animePlanetLink" target="_blank" rel="noopener noreferrer" data-gkm-v326-external="1">Anime-Planet</a>
-          <a id="anidbLink" target="_blank" rel="noopener noreferrer" data-gkm-v326-external="1">AniDB</a>
+          <a id="shikimoriLink" target="_blank" rel="noreferrer">Shikimori</a>
+          <a id="malLink" target="_blank" rel="noreferrer">MyAnimeList</a>
+          <a id="anilistLink" target="_blank" rel="noreferrer">AniList</a>
+          <a id="animePlanetLink" target="_blank" rel="noreferrer">Anime-Planet</a>
+          <a id="anidbLink" target="_blank" rel="noreferrer">AniDB</a>
         </div>
       </section>
 
-      <section id="cinemaLinksBlock" class="links-block">
-        <h3 class="links-title">Кино-сайты</h3>
+      <section class="links-block">
+        <h3 class="links-title">Найти на сайтах</h3>
         <div class="detail-buttons">
           <button id="favBtn" type="button">В избранное</button>
-          <a id="yandexLink" target="_blank" rel="noopener noreferrer" data-gkm-v326-external="1">Яндекс</a>
-          <a id="yandexVideoLink" target="_blank" rel="noopener noreferrer" data-gkm-v326-external="1">Яндекс Видео</a>
-          <a id="kinopoiskLink" target="_blank" rel="noopener noreferrer" data-gkm-v326-external="1">Кинопоиск</a>
-          <a id="youtubeLink" target="_blank" rel="noopener noreferrer" data-gkm-v326-external="1">YouTube</a>
-          <a id="vkLink" target="_blank" rel="noopener noreferrer" data-gkm-v326-external="1">VK Видео</a>
-          <a id="rutubeLink" target="_blank" rel="noopener noreferrer" data-gkm-v326-external="1">Rutube</a>
-          <a id="googleLink" target="_blank" rel="noopener noreferrer" data-gkm-v326-external="1">Google</a>
+          <a id="yandexLink" target="_blank" rel="noreferrer">Яндекс</a>
+          <a id="yandexVideoLink" target="_blank" rel="noreferrer">Яндекс Видео</a>
+          <a id="kinopoiskLink" target="_blank" rel="noreferrer">Кинопоиск</a>
+          <a id="youtubeLink" target="_blank" rel="noreferrer">YouTube</a>
+          <a id="vkLink" target="_blank" rel="noreferrer">VK Видео</a>
+          <a id="rutubeLink" target="_blank" rel="noreferrer">Rutube</a>
+          <a id="googleLink" target="_blank" rel="noreferrer">Google</a>
         </div>
       </section>
     </div>
@@ -282,7 +288,7 @@
     </form>
 
     <div class="ai-note">
-      Пока это локальный помощник по каталогу. Для настоящих ответов нужен Worker/Vercel с API ключом.
+      ГОЛУБЬ AI V341: полный поиск по каталогу работает в отдельном Web Worker. Groq объясняет подборки из реальных карточек.
     </div>
   </div>
 </dialog>
