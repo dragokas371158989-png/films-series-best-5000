@@ -1,7 +1,7 @@
 /* GKM V344 FULL CATALOG AI SEARCH WORKER */
 "use strict";
 
-const VERSION = "v344-full-catalog-web-worker-ai-search-2026-07-12";
+const VERSION = "v344.3-full-catalog-popular-votes-min-500-2026-07-12";
 const DB_NAME = "gkm_ai_search_v344";
 const DB_VERSION = 1;
 const STORE_NAME = "chunks";
@@ -325,6 +325,7 @@ function scoreItem(item, intent, tokens) {
   if (intent.bucket && intent.bucket !== "all" && item.__kind !== intent.bucket) return 0;
   if (item.year && (item.year < Number(intent.yearMin || 0) || item.year > Number(intent.yearMax || 9999))) return 0;
   if (item.rating < Number(intent.ratingMin || 0) || item.rating > Number(intent.ratingMax || 10)) return 0;
+  if ((item.votes || 0) < Number(intent.minVotes || 0)) return 0;
   let score = 0;
   for (const rawToken of tokens || []) {
     const token = normalize(rawToken);
@@ -346,7 +347,15 @@ function scoreItem(item, intent, tokens) {
   if (intent.bucket && intent.bucket !== "all") score += 52;
   const rating = item.rating || 0;
   const votes = item.votes || 0;
-  if (intent.sort === "top") score += Math.min(125, Math.log10(votes + 1) * 19) + rating * 12;
+  if (intent.popularityFirst) {
+    score += Math.min(520, Math.log10(votes + 1) * 78);
+    if (votes >= Number(intent.popularPriorityVotes || 1000000)) score += 220;
+    else if (votes >= 500000) score += 185;
+    else if (votes >= 100000) score += 145;
+    else if (votes >= 10000) score += 95;
+    else if (votes >= 1000) score += 55;
+  }
+  if (intent.sort === "top") score += Math.min(150, Math.log10(votes + 1) * 22) + rating * 12;
   else if (intent.sort === "new") score += item.year >= 2020 ? (item.year - 2019) * 14 : 0;
   else if (intent.sort === "hidden") score += rating * 12 - Math.min(50, Math.log10(votes + 1) * 8);
   else score += Math.min(72, Math.log10(votes + 1) * 10) + rating * 7;
@@ -411,7 +420,13 @@ async function runSearch(message) {
     for (const pool of pools) {
       for (const item of pool) {
         if (!clean(item)) continue;
-        const popularity = (item.rating || 0) * 100000 + (item.votes || 0);
+        if (intent.bucket && intent.bucket !== "all" && item.__kind !== intent.bucket) continue;
+        if (item.year && (item.year < Number(intent.yearMin || 0) || item.year > Number(intent.yearMax || 9999))) continue;
+        if (item.rating < Number(intent.ratingMin || 0) || item.rating > Number(intent.ratingMax || 10)) continue;
+        if ((item.votes || 0) < Number(intent.minVotes || 0)) continue;
+        const popularity = intent.popularityFirst
+          ? (item.votes || 0) * 100 + (item.rating || 0)
+          : (item.rating || 0) * 100000 + (item.votes || 0);
         insertTop(fallback, { item, score: popularity }, topLimit);
       }
     }

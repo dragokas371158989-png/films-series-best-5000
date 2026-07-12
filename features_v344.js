@@ -1,3 +1,4 @@
+window.GKM_V3443_POPULAR_VOTES_VERSION = "v344.3-popular-votes-min-500-2026-07-12";
 window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-12";
 /* GKM V344 FEATURE BUNDLE
  * Loaded after app.js. Contains helper, franchise, documentation, AI and poster-wall extensions.
@@ -9461,7 +9462,9 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
   const MEM_KEY = "gkm_v344_ai_memory";
   const HISTORY_KEY = "gkm_v344_ai_history";
   const WALL_BASE = "data/fast/poster_wall_v333";
-  const SEARCH_WORKER_URL = "ai_search_worker_v344.js?v=344";
+  const SEARCH_WORKER_URL = "ai_search_worker_v344.js?v=3443";
+  const DEFAULT_RECOMMENDATION_MIN_VOTES = 500;
+  const POPULAR_PRIORITY_VOTES = 1000000;
   const FALLBACK_CACHE = new Map();
   let lastResults = [];
   let lastQuery = "";
@@ -9605,7 +9608,19 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
     if(bucket==="all" && m.bucket && all.length<18) bucket=m.bucket;
     if(!mood && m.mood && all.length<18) mood=m.mood;
 
-    const out={bucket,mood,sort:"smart",yearMin:0,yearMax:9999,ratingMin:0,ratingMax:10,explain:all.includes("почему")||all.includes("объясни"),random:all.includes("рандом")||all.includes("случайн"),count:LIMIT};
+    const recommendationMode =
+      /посоветуй|подбери|что посмотреть|на вечер|вечером|лучшие|топ|популяр|жанр/.test(all) ||
+      Boolean(mood) ||
+      /(?:после|начиная с|до|раньше|перед)\s*(?:19\d{2}|20\d{2})/.test(all);
+    const out={
+      bucket,mood,sort:"smart",yearMin:0,yearMax:9999,ratingMin:0,ratingMax:10,
+      minVotes: recommendationMode ? DEFAULT_RECOMMENDATION_MIN_VOTES : 0,
+      popularityFirst: recommendationMode,
+      popularPriorityVotes: POPULAR_PRIORITY_VOTES,
+      explain:all.includes("почему")||all.includes("объясни"),
+      random:all.includes("рандом")||all.includes("случайн"),
+      count:LIMIT
+    };
     const requestedCount=all.match(/(?:топ|посоветуй|подбери|найди|покажи|дай)\s+(\d{1,2})\b/);
     if(requestedCount)out.count=Math.max(1,Math.min(20,Number(requestedCount[1])));
     if(all.includes("90 х")||all.includes("90е")||all.includes("90s")){out.yearMin=1990;out.yearMax=1999;}
@@ -9621,9 +9636,27 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
     const ratingBelow=all.match(/(?:рейтинг(?:ом)?\s*)?(?:ниже|до|не выше)\s*(\d+(?:[.,]\d+)?)/);
     if(ratingAbove)out.ratingMin=Math.max(0,Math.min(10,Number(ratingAbove[1].replace(",","."))));
     if(ratingBelow)out.ratingMax=Math.max(0,Math.min(10,Number(ratingBelow[1].replace(",","."))));
+    function parseVoteAmount(raw, unit){
+      let value=Number(String(raw||"0").replace(",","."));
+      const u=N(unit||"");
+      if(u.startsWith("млн")||u.startsWith("миллион"))value*=1000000;
+      else if(u.startsWith("тыс")||u.startsWith("тысяч"))value*=1000;
+      return Math.max(0,Math.round(value));
+    }
+    const votesA=all.match(/(?:от|минимум|не меньше|выше)\s*(\d+(?:[.,]\d+)?)\s*(млн|миллион\w*|тыс\w*|тысяч\w*)?\s*(?:голос\w*|оцен\w*)/);
+    const votesB=all.match(/(?:голос\w*|оцен\w*)\s*(?:от|минимум|не меньше|выше)\s*(\d+(?:[.,]\d+)?)\s*(млн|миллион\w*|тыс\w*|тысяч\w*)?/);
+    const voteMatch=votesA||votesB;
+    if(voteMatch){
+      out.minVotes=parseVoteAmount(voteMatch[1],voteMatch[2]);
+      out.popularityFirst=true;
+    }
+    if(/без ограничения по голосам|любое число голосов|не учитывать голоса/.test(all)){
+      out.minVotes=0;
+      out.popularityFirst=false;
+    }
     if(all.includes("топ")||all.includes("лучшие")||all.includes("популяр"))out.sort="top";
     if(all.includes("нов")||all.includes("свежее"))out.sort="new";
-    if(all.includes("недооцен"))out.sort="hidden";
+    if(all.includes("недооцен")){out.sort="hidden";out.minVotes=0;out.popularityFirst=false;}
     return out;
   }
 
@@ -9755,9 +9788,10 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
   }
   function score(item,it,tk){
     if(!clean(item)||!passType(item,it.bucket)) return 0;
-    const y=Number(year(item)||0),r=rating(item);
+    const y=Number(year(item)||0),r=rating(item),v=votes(item);
     if(y&&(y<it.yearMin||y>it.yearMax)) return 0;
     if(r<Number(it.ratingMin||0)||r>Number(it.ratingMax||10))return 0;
+    if(v<Number(it.minVotes||0))return 0;
     const ttl=N(title(item)),raw=N(rawTitle(item)),h=hay(item),gen=N(genres(item).join(" ")),typ=N(type(item));
     let s=0;
     for(const token of tk){
@@ -9777,11 +9811,18 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
     }
     if(it.bucket!=="all") s+=50;
     if(it.mood==="evening") s+=15;
-    const v=votes(item);
-    if(it.sort==="top") s+=Math.min(120,Math.log10(v+1)*18)+r*12;
+    if(it.popularityFirst){
+      s+=Math.min(520,Math.log10(v+1)*78);
+      if(v>=Number(it.popularPriorityVotes||1000000))s+=220;
+      else if(v>=500000)s+=185;
+      else if(v>=100000)s+=145;
+      else if(v>=10000)s+=95;
+      else if(v>=1000)s+=55;
+    }
+    if(it.sort==="top") s+=Math.min(150,Math.log10(v+1)*22)+r*12;
     else if(it.sort==="new") s+=y>=2020?(y-2019)*14:0;
     else if(it.sort==="hidden") s+=r*12-Math.min(50,Math.log10(v+1)*8);
-    else s+=Math.min(70,Math.log10(v+1)*10)+r*7;
+    else s+=Math.min(90,Math.log10(v+1)*13)+r*7;
     return s;
   }
   function dedupe(items){
@@ -9797,7 +9838,15 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
     const it=detectIntent(q),tk=tokens(q);let data=fallbackPool();
     if(!data.length){const arrs=await Promise.all([fetchJson("data/fast/home.json?v=341"),fetchJson("data/fast/pages/movies/page_0001.json?v=341"),fetchJson("data/fast/pages/series/page_0001.json?v=341"),fetchJson("data/fast/pages/anime/page_0001.json?v=341"),fetchJson("data/fast/pages/cartoons/page_0001.json?v=341")]);data=arrs.flat();}
     let arr=data.map(item=>({item,score:score(item,it,tk)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).map(x=>x.item);
-    if(!arr.length&&it.bucket!=="all")arr=data.filter(item=>clean(item)&&passType(item,it.bucket)).sort((a,b)=>(rating(b)*100000+votes(b))-(rating(a)*100000+votes(a)));
+    if(!arr.length&&it.bucket!=="all")arr=data.filter(item=>{
+      const y=Number(year(item)||0),r=rating(item),v=votes(item);
+      return clean(item)&&passType(item,it.bucket)&&
+        (!y||(y>=it.yearMin&&y<=it.yearMax))&&
+        r>=Number(it.ratingMin||0)&&r<=Number(it.ratingMax||10)&&
+        v>=Number(it.minVotes||0);
+    }).sort((a,b)=>it.popularityFirst
+      ? votes(b)-votes(a)||rating(b)-rating(a)
+      : (rating(b)*100000+votes(b))-(rating(a)*100000+votes(a)));
     if(it.random)arr=arr.sort(()=>Math.random()-.5);
     const res=dedupe(arr).slice(0,it.count);lastResults=res;lastQuery=q;remember(it);return{items:res,intent:it,tokens:tk,searched:data.length,fallback:true};
   }
@@ -10027,7 +10076,7 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
         site_version: "V344",
         requested_model: window.GKM_V344_AI_MODEL_DEFAULT,
         instruction: mode === "catalog"
-          ? "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов."
+          ? "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов. При подборках уважай порядок популярности и не предлагай позиции с малым числом голосов."
           : "Ты Голубь AI — живой собеседник. Отвечай естественно, дружелюбно и по делу. Поддерживай обычный разговор и не своди любой вопрос к каталогу.",
         conversation: chatHistory.slice(-8),
         memory: mem(),
@@ -10113,9 +10162,15 @@ Endpoint: ${endpoint||"не задан"}`;
     }
 
     const res=await search(q,onProgress);
-    if(!res.items.length)return"Не нашёл быстро в нужном разделе. Попробуй проще: «фильмы вечер», «анимэ попаданцы», «игры rpg», «манга ужасы».";
+    if(!res.items.length){
+      if(res.intent&&Number(res.intent.minVotes||0)>0)return`Не нашёл достаточно вариантов с минимум ${fmtVotes(res.intent.minVotes)} голосов. Уточни жанр/годы или напиши «без ограничения по голосам».`;
+      return"Не нашёл быстро в нужном разделе. Попробуй проще: «фильмы вечер», «анимэ попаданцы», «игры rpg», «манга ужасы».";
+    }
     pendingCards=res.items.slice(0,12);
-    const localText = `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «похожее на 1», «другое», «сравни 1 и 2», «сделай план», «почему».`;
+    const popularityNote=res.intent&&res.intent.popularityFirst
+      ? `Фильтр популярности: минимум ${fmtVotes(res.intent.minVotes)} голосов; сначала самые популярные.\n`
+      : "";
+    const localText = `${popularityNote}${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «похожее на 1», «другое», «сравни 1 и 2», «сделай план», «почему».`;
     const aiText = await tryRemoteAI(q, localText, "catalog");
     return aiText || localText;
   }
