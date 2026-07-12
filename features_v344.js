@@ -1,4 +1,4 @@
-window.GKM_V3448_DOUBLE_HARD_FILTER_VERSION = "v344.8-double-hard-filter-year-genre-votes-2026-07-12";
+window.GKM_V3449_FINAL_OUTPUT_GATE_VERSION = "v344.9-final-raw-output-gate-2026-07-12";
 window.GKM_V3443_POPULAR_VOTES_VERSION = "v344.3-popular-votes-min-500-2026-07-12";
 window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-12";
 /* GKM V344 FEATURE BUNDLE
@@ -9675,6 +9675,73 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
     return hard;
   }
 
+  function rawTypeText(item){
+    return N(item&&(
+      item.type||item.category||item.kind||item.media_type||item.__kind||""
+    ));
+  }
+
+  function rawYearNumber(item){
+    const raw=T(item&&(
+      item.year||item.release_date||item.first_air_date||item.date||""
+    ));
+    const m=raw.match(/(19\d{2}|20\d{2})/);
+    return m?Number(m[1]):0;
+  }
+
+  function rawVotesNumber(item){
+    const value=item&&(
+      item.votes??item.vote_count??item.scored_by??item.members??0
+    );
+    const n=Number(value);
+    return Number.isFinite(n)?n:0;
+  }
+
+  function rawGenresText(item){
+    const raw=item&&(item.genres??item.genre??item.tags??[]);
+    if(Array.isArray(raw)){
+      return N(raw.map(x=>x&&typeof x==="object"?(x.name||x.title||""):x).filter(Boolean).join(" "));
+    }
+    return N(raw);
+  }
+
+  function rawBucketMatches(item,bucket){
+    if(!bucket||bucket==="all")return true;
+    const t=rawTypeText(item);
+    const k=N(item&&item.__kind);
+    if(bucket==="movies")return k==="movies"||t.includes("фильм")||t.includes("movie")||t.includes("film");
+    if(bucket==="series")return k==="series"||t.includes("сериал")||t.includes("series")||t.includes("show");
+    if(bucket==="anime")return k==="anime"||t.includes("аниме")||t.includes("anime");
+    if(bucket==="cartoons")return k==="cartoons"||t.includes("мульт")||t.includes("cartoon");
+    return true;
+  }
+
+  function passesFinalRawGate(item,hard){
+    if(!item||!hard)return false;
+    if(!rawBucketMatches(item,hard.bucket))return false;
+
+    if(hard.exactYear){
+      const y=rawYearNumber(item);
+      if(!y||y<Number(hard.yearMin)||y>Number(hard.yearMax))return false;
+    }
+
+    if(rawVotesNumber(item)<Number(hard.minVotes||0))return false;
+
+    if(Array.isArray(hard.genreWords)&&hard.genreWords.length){
+      const genreText=rawGenresText(item);
+      const required=hard.genreWords.map(N).filter(Boolean);
+      if(!genreText||!required.some(word=>genreText.includes(word)))return false;
+    }
+
+    return true;
+  }
+
+  function finalRawGate(items,hard){
+    return dedupe((Array.isArray(items)?items:[])
+      .filter(item=>passesFinalRawGate(item,hard)))
+      .sort((a,b)=>rawVotesNumber(b)-rawVotesNumber(a)||rating(b)-rating(a));
+  }
+
   function matchesHardQuery(item,hard){
     if(!item||!hard)return false;
     if(hard.bucket&&hard.bucket!=="all"&&!passType(item,hard.bucket))return false;
@@ -10131,7 +10198,8 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
     const q = lastQuery + " рандом другое";
     const res = await search(q);
     if(!res.items.length) return "Других вариантов быстро не нашёл.";
-    pendingCards=res.items.slice(0,12);
+    pendingCards=finalRawGate(res.items,finalHard).slice(0,12);
+    lastResults=pendingCards.slice();
     return `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
   }
 
@@ -10327,8 +10395,17 @@ Endpoint: ${endpoint||"не задан"}`;
     }
 
     const res=await search(q,onProgress);
+
+    // V344.9 FINAL OUTPUT GATE:
+    // even if an older search path returned garbage, it cannot be displayed or opened.
+    const finalHard=res.hard||parseHardQueryConstraints(q);
+    const finalItems=finalRawGate(res.items,finalHard).slice(0,Number(res.intent&&res.intent.count||LIMIT));
+    res.items=finalItems;
+    res.hard=finalHard;
+    lastResults=finalItems;
+
     if(!res.items.length){
-      const h=res.hard||parseHardQueryConstraints(q);
+      const h=finalHard;
       const parts=[];
       if(h.bucket&&h.bucket!=="all")parts.push(`тип: ${h.bucket}`);
       if(h.genre)parts.push(`жанр: ${h.genre}`);
@@ -10417,7 +10494,19 @@ Endpoint: ${endpoint||"не задан"}`;
       openResult: number => openResult(number),
       getWorkerState: () => workerState,
       parseHardQuery: q => parseHardQueryConstraints(q),
-      validateItem: (item,q) => matchesHardQuery(item,parseHardQueryConstraints(q))
+      validateItem: (item,q) => passesFinalRawGate(item,parseHardQueryConstraints(q)),
+      auditLastResults: q => {
+        const hard=parseHardQueryConstraints(q);
+        return lastResults.map((item,index)=>({
+          number:index+1,
+          title:title(item),
+          type:rawTypeText(item),
+          year:rawYearNumber(item),
+          votes:rawVotesNumber(item),
+          genres:rawGenresText(item),
+          pass:passesFinalRawGate(item,hard)
+        }));
+      }
     };
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
