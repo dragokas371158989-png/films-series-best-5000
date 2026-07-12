@@ -11766,16 +11766,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V306 RICH DESCRIPTIONS FIX END */
 
-/* GKM V341 FULL CATALOG WEB WORKER AI SEARCH START */
+/* GKM V342 HUMAN HYBRID AI WEATHER FULL CATALOG START */
 (function(){
-  window.GKM_V341_FULL_CATALOG_WEB_WORKER_AI_SEARCH_VERSION = "v341-full-catalog-web-worker-ai-search-indexeddb-2026-07-12";
-  window.GKM_V341_AI_MODEL_DEFAULT = "openai/gpt-oss-120b";
+  window.GKM_V342_HUMAN_HYBRID_AI_WEATHER_FULL_CATALOG_VERSION = "v342-human-hybrid-ai-weather-full-catalog-2026-07-12";
+  window.GKM_V342_AI_MODEL_DEFAULT = "openai/gpt-oss-120b";
 
   const LIMIT = 12;
-  const MEM_KEY = "gkm_v341_ai_memory";
-  const HISTORY_KEY = "gkm_v341_ai_history";
+  const MEM_KEY = "gkm_v342_ai_memory";
+  const HISTORY_KEY = "gkm_v342_ai_history";
   const WALL_BASE = "data/fast/poster_wall_v333";
-  const SEARCH_WORKER_URL = "ai_search_worker_v341.js?v=341";
+  const SEARCH_WORKER_URL = "ai_search_worker_v342.js?v=342";
   const FALLBACK_CACHE = new Map();
   let lastResults = [];
   let lastQuery = "";
@@ -12035,7 +12035,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     });
   }
   async function getWorkerStatus(){try{return await workerCall("STATUS",{}, {timeout:15000});}catch{return workerState;}}
-  function warmup(){if(warmStarted)return;warmStarted=true;const run=()=>ensureSearchWorker().catch(error=>console.warn("GKM V341 worker warmup",error));if("requestIdleCallback" in window)requestIdleCallback(run,{timeout:1000});else setTimeout(run,250);}
+  function warmup(){if(warmStarted)return;warmStarted=true;const run=()=>ensureSearchWorker().catch(error=>console.warn("GKM V342 worker warmup",error));if("requestIdleCallback" in window)requestIdleCallback(run,{timeout:1000});else setTimeout(run,250);}
 
   function clean(item){
     if(!item) return false;
@@ -12123,7 +12123,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       if(!res.length)return await fallbackSearch(q);
       lastResults=res;lastQuery=q;remember(it);workerState=result||workerState;
       return{items:res,intent:it,tokens:tk,searched:Number(result&&result.searched||0),fullCatalog:true,result};
-    }catch(error){console.warn("GKM V341 full-catalog search fallback",error);return await fallbackSearch(q);}
+    }catch(error){console.warn("GKM V342 full-catalog search fallback",error);return await fallbackSearch(q);}
   }
 
   function fmtVotes(v){
@@ -12195,21 +12195,64 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
 
-  async function tryRemoteAI(q, localText){
+
+  function renderRichText(value){
+    let html=E(value);
+    html=html.replace(/\*\*([^*\n]+)\*\*/g,"<strong>$1</strong>");
+    html=html.replace(/`([^`\n]+)`/g,"<code>$1</code>");
+    html=html.replace(/(^|\s)\*([^*\n]+)\*(?=\s|$)/g,"$1<em>$2</em>");
+    return html.replace(/\n/g,"<br>");
+  }
+
+  function isWeatherQuery(q){
+    const x=N(q);
+    return /(?:погод|температур|дожд|снег|ветер|градус|прогноз погоды|weather|forecast)/.test(x);
+  }
+  function extractWeatherCity(q){
+    const raw=T(q).replace(/[?!.,]+$/g,"");
+    let m=raw.match(/(?:погода|прогноз|температура|дождь|снег|ветер)[^\n]*?\s(?:в|на)\s+([\p{L} .'-]{2,60})$/iu);
+    if(!m)m=raw.match(/^город\s*:\s*([\p{L} .'-]{2,60})$/iu);
+    return m?T(m[1]).replace(/\s+(?:сегодня|завтра|сейчас)$/iu,"").trim():"";
+  }
+  function isCatalogQuery(q){
+    const x=N(q);
+    if(detectType(q)!=="all")return true;
+    if(/(?:что посмотреть|посмотреть вечером|по всему каталогу|каталог|кино|тайтл|персонаж|жанр|рейтинг|похожее на|открой \d|сравни \d|марафон)/.test(x))return true;
+    if(detectMood(q) && /(?:посоветуй|подбери|подборк|найди|покажи|дай|топ|лучшие)/.test(x))return true;
+    return false;
+  }
+  function generalFallback(q){
+    const x=N(q);
+    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)/.test(x))return"Привет! Рад тебя видеть. Можем просто пообщаться или подобрать что-нибудь из каталога.";
+    if(/как дела|как ты/.test(x))return"Всё отлично, на связи и готов помочь. Как у тебя дела?";
+    if(/кто ты|что ты/.test(x))return"Я ГОЛУБЬ AI V342: могу общаться на обычные темы, отвечать на вопросы, показывать живую погоду и искать по всему каталогу.";
+    return"Я понял вопрос, но сейчас не смог получить ответ от Groq. Попробуй ещё раз через несколько секунд.";
+  }
+
+  async function tryRemoteAI(q, localText, mode="catalog"){
+
     const endpoint = window.GKM_AI_ENDPOINT || localStorage.getItem("GKM_AI_ENDPOINT") || "";
     if(!endpoint) return "";
     try{
       const controller = new AbortController();
-      const timer = setTimeout(()=>controller.abort(), 7000);
+      const timer = setTimeout(()=>controller.abort(), 15000);
       const payload = {
         query: q,
+        mode,
         local_answer: localText,
-        site_version: "V341",
-        requested_model: window.GKM_V341_AI_MODEL_DEFAULT,
-        instruction: "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов, чтобы команды открыть 1 и сравнить 1 и 2 работали.",
+        site_version: "V342",
+        requested_model: window.GKM_V342_AI_MODEL_DEFAULT,
+        instruction: mode === "catalog"
+          ? "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов."
+          : "Ты Голубь AI — живой собеседник. Отвечай естественно, дружелюбно и по делу. Поддерживай обычный разговор и не своди любой вопрос к каталогу.",
         conversation: chatHistory.slice(-8),
         memory: mem(),
-        last_results: lastResults.slice(0, 12).map((x,i)=>({
+        client_context: {
+          localTime: new Date().toString(),
+          isoTime: new Date().toISOString(),
+          timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone || "")
+        },
+        last_results: mode === "catalog" ? lastResults.slice(0, 12).map((x,i)=>({
           n:i+1,
           title:title(x),
           type:type(x),
@@ -12217,7 +12260,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           rating:rating(x),
           votes:votes(x),
           genres:genres(x)
-        }))
+        })) : []
       };
       const res = await fetch(endpoint, {
         method:"POST",
@@ -12236,50 +12279,69 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   async function answer(q,onProgress){
     const raw=T(q),x=N(q);
-    if(!x)return"Напиши, что ищем.";
+    if(!x)return"Напиши вопрос.";
     const ep=raw.match(/^endpoint\s*:\s*(https:\/\/\S+)/i);
     if(ep){ localStorage.setItem("GKM_AI_ENDPOINT",ep[1]); return "AI endpoint сохранён. Проверка: напиши «статус AI»."; }
-    if(/сбросить endpoint|удалить endpoint|отключить ai/.test(x)){ localStorage.removeItem("GKM_AI_ENDPOINT"); return "AI endpoint удалён. Работаю в локальном режиме."; }
-    if(/очистить память|сбросить память/.test(x)){ localStorage.removeItem(MEM_KEY);localStorage.removeItem(HISTORY_KEY);chatHistory=[];return "Память помощника очищена."; }
+    if(/сбросить endpoint|удалить endpoint|отключить ai/.test(x)){ localStorage.removeItem("GKM_AI_ENDPOINT"); return "AI endpoint удалён. Общение с Groq отключено, поиск по каталогу остаётся локальным."; }
+    if(/очистить память|сбросить память/.test(x)){ localStorage.removeItem(MEM_KEY);localStorage.removeItem(HISTORY_KEY);chatHistory=[];return"Память помощника очищена."; }
+
+    const cityCmd=raw.match(/^город\s*:\s*([\p{L} .'-]{2,60})$/iu);
+    if(cityCmd){ const m=mem();m.city=T(cityCmd[1]);saveMem(m);return`Город сохранён: ${m.city}. Теперь можно просто спросить: «какая погода?»`; }
+
     if(/статус ai|статус помощника|какой ai/.test(x)){
       const endpoint=window.GKM_AI_ENDPOINT||localStorage.getItem("GKM_AI_ENDPOINT")||"";
       const st=await getWorkerStatus();const counts=st&&st.counts||{},loaded=st&&st.loadedCounts||{};
-      return `ГОЛУБЬ AI V341
-Режим: ${endpoint?"Cloudflare Worker + Groq":"локальный Groq не подключён"}
-Модель Worker: ${window.GKM_V341_AI_MODEL_DEFAULT}
+      return `ГОЛУБЬ AI V342
+Режим общения: ${endpoint?"Cloudflare Worker + Groq":"Groq не подключён"}
+Модель Worker: ${window.GKM_V342_AI_MODEL_DEFAULT}
+Обычный диалог: включён
+Живая погода: включена через Open-Meteo
 Поиск: полный каталог через Web Worker
 Каталог: ${Number(st&&st.manifestTotal||0).toLocaleString("ru-RU")} записей
 Разделы: фильмы ${counts.movies||0}, сериалы ${counts.series||0}, аниме ${counts.anime||0}, мультфильмы ${counts.cartoons||0}
 Сейчас в памяти потока: ${JSON.stringify(loaded)}
 Кеш браузера: ${st&&st.indexedDb?"IndexedDB включён":"недоступен"}
+Сохранённый город: ${mem().city||"не задан"}
 Endpoint: ${endpoint||"не задан"}`;
     }
-    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x))return"Привет. Я ГОЛУБЬ AI V341. Ищу по полному каталогу через отдельный поток, сравниваю и открываю карточки.";
-    if(x.includes("помощ")||x.includes("что умеешь")||x.includes("как искать"))return help();
+
+    if(x.includes("помощ")||x.includes("что умеешь")||x.includes("как искать"))return help()+"\n\nТакже можешь просто поздороваться, задать обычный вопрос или спросить погоду. Для погоды: «погода в Краснодаре» либо сначала «город: Краснодар».";
     const op=x.match(/(?:открой|открыть|покажи)\s+(\d{1,2})/);if(op)return openResult(op[1]);
     const cmp=x.match(/сравни\s+(\d{1,2})\s+(?:и|с)\s+(\d{1,2})/);if(cmp)return compare(cmp[1],cmp[2]);
-    const sim=x.match(/(?:похожее|похожие|типа|как)\s+(?:на\s+)?(\d{1,2})/);
-    if(sim)return await similarTo(sim[1]);
+    const sim=x.match(/(?:похожее|похожие|типа|как)\s+(?:на\s+)?(\d{1,2})/);if(sim)return await similarTo(sim[1]);
     if(x.includes("другое")||x.includes("не это")||x.includes("еще варианты")||x.includes("ещё варианты"))return await different();
     if(x.includes("план")||x.includes("марафон"))return plan();
-    if(x.includes("еще")||x.includes("ещё"))return lastQuery?(await answer(lastQuery)):"Сначала сделай поиск.";
+    if(x.includes("еще")||x.includes("ещё"))return lastQuery?(await answer(lastQuery,onProgress)):"Сначала сделай поиск.";
+
+    if(isWeatherQuery(q)){
+      const foundCity=extractWeatherCity(q);
+      if(foundCity){const m=mem();m.city=foundCity;saveMem(m);}
+      const weatherText=await tryRemoteAI(q,"","weather");
+      return weatherText||"Не получилось получить погоду. Напиши город точнее, например: «погода в Краснодаре».";
+    }
+
+    if(!isCatalogQuery(q)){
+      const generalText=await tryRemoteAI(q,"","general");
+      return generalText||generalFallback(q);
+    }
+
     const res=await search(q,onProgress);
     if(!res.items.length)return"Не нашёл быстро в нужном разделе. Попробуй проще: «фильмы вечер», «анимэ попаданцы», «игры rpg», «манга ужасы».";
     const localText = `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «похожее на 1», «другое», «сравни 1 и 2», «сделай план», «почему».`;
-    const aiText = await tryRemoteAI(q, localText);
+    const aiText = await tryRemoteAI(q, localText, "catalog");
     return aiText || localText;
   }
 
   function addMsg(role,text){
     if(typeof gkmHelperAddMessage==="function"){gkmHelperAddMessage(role,text);return;}
     const box=document.getElementById("gkmAiMessages");if(!box)return;
-    const div=document.createElement("div");div.className=role==="user"?"ai-user":"ai-bot";div.innerHTML=E(text).replace(/\n/g,"<br>");box.appendChild(div);box.scrollTop=box.scrollHeight;
+    const div=document.createElement("div");div.className=role==="user"?"ai-user":"ai-bot";div.innerHTML=renderRichText(text);box.appendChild(div);box.scrollTop=box.scrollHeight;
   }
   function replaceLastBot(text,force=false){
     const box=document.getElementById("gkmAiMessages");if(!box)return false;
     const last=box.lastElementChild;if(!last||!last.classList.contains("ai-bot"))return false;
     const old=T(last.textContent);
-    if(force||old.includes("V341")||old.includes("ищет")||old.includes("загружает")||old.includes("проверяет")){last.innerHTML=E(text).replace(/\n/g,"<br>");box.scrollTop=box.scrollHeight;return true;}
+    if(force||old.includes("V341")||old.includes("V342")||old.includes("ищет")||old.includes("загружает")||old.includes("проверяет")){last.innerHTML=renderRichText(text);box.scrollTop=box.scrollHeight;return true;}
     return false;
   }
 
@@ -12290,20 +12352,22 @@ Endpoint: ${endpoint||"не задан"}`;
     }
     if(closeBtn&&dialog)closeBtn.onclick=()=>dialog.close?dialog.close():dialog.removeAttribute("open");
     if(!form||!input)return;
-    form.dataset.v260Installed="0";form.dataset.v300Installed="0";form.dataset.v301Installed="0";form.dataset.v302Installed="0";form.dataset.v303Installed="0";form.dataset.v304Installed="0";form.dataset.v305Installed="0";form.dataset.v307IsekaiInstalled="0";form.dataset.v308Installed="0";form.dataset.v309Installed="0";form.dataset.v310Installed="0";form.dataset.v311Installed="0";form.dataset.v312Installed="0";form.dataset.v316Installed="0";form.dataset.v336Installed="0";form.dataset.v340Installed="0";form.dataset.v341Installed="1";
+    form.dataset.v260Installed="0";form.dataset.v300Installed="0";form.dataset.v301Installed="0";form.dataset.v302Installed="0";form.dataset.v303Installed="0";form.dataset.v304Installed="0";form.dataset.v305Installed="0";form.dataset.v307IsekaiInstalled="0";form.dataset.v308Installed="0";form.dataset.v309Installed="0";form.dataset.v310Installed="0";form.dataset.v311Installed="0";form.dataset.v312Installed="0";form.dataset.v316Installed="0";form.dataset.v336Installed="0";form.dataset.v340Installed="0";form.dataset.v341Installed="0";form.dataset.v342Installed="1";
     form.onsubmit=async e=>{
       e.preventDefault();if(e.stopPropagation)e.stopPropagation();
       const q=input.value.trim();if(!q)return;input.value="";
       const seq=++requestSeq;
-      addMsg("user",q);addMsg("bot","ГОЛУБЬ AI V341 готовит полный поиск…");
+      addMsg("user",q);pushHistory("user",q);addMsg("bot","ГОЛУБЬ AI V342 думает…");
       try{
         const onProgress=progress=>{if(seq===requestSeq)replaceLastBot(progressText(progress),true);};
         const out=await answer(q,onProgress);
         if(seq!==requestSeq)return;
+        pushHistory("assistant",out);
         if(!replaceLastBot(out,true))addMsg("bot",out);
       }catch(err){
-        console.warn("GKM V341 helper error",err);
-        const msg="Помощник словил ошибку. Напиши проще: «фильмы вечер» или «анимэ попаданцы».";
+        console.warn("GKM V342 helper error",err);
+        const msg="Помощник словил ошибку. Попробуй повторить вопрос через несколько секунд.";
+        pushHistory("assistant",msg);
         if(!replaceLastBot(msg,true))addMsg("bot",msg);
       }
     };
@@ -12311,9 +12375,9 @@ Endpoint: ${endpoint||"не задан"}`;
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
   setTimeout(install,100);setTimeout(install,450);setTimeout(install,900);
-  console.log("GKM V341: full catalog Web Worker AI search installed");
+  console.log("GKM V342: human hybrid AI + weather + full catalog installed");
 })();
-/* GKM V341 FULL CATALOG WEB WORKER AI SEARCH END */
+/* GKM V342 HUMAN HYBRID AI WEATHER FULL CATALOG END */
 
 
 /* GKM V334 INSTANT LOD CANVAS POSTER MOSAIC START */
