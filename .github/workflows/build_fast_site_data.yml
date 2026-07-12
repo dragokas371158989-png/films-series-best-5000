@@ -1,4 +1,4 @@
-name: Build fast site data
+name: Build fast site data V344
 
 on:
   workflow_dispatch:
@@ -7,12 +7,14 @@ permissions:
   contents: write
 
 concurrency:
-  group: build-fast-site-data
+  group: build-fast-site-data-v344
   cancel-in-progress: true
 
 jobs:
   build-fast-data:
     runs-on: ubuntu-latest
+    timeout-minutes: 90
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,15 +22,26 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Set up Python
+      - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.12"
 
       - name: Sync branch
         run: git pull --rebase origin main
 
+      - name: Verify scripts
+        run: |
+          test -f tools/build_fast_site_data.py
+          test -f tools/dedupe_database_v112.py
+          test -f tools/gkm_v344_build_poster_wall.py
+          test -f tools/gkm_v344_maintenance.py
+          test -f features_v344.js
+          test -f ai_search_worker_v344.js
+
       - name: Build fast data
+        env:
+          GKM_SEARCH_LITE_LIMIT: "15000"
         run: python tools/build_fast_site_data.py
 
       - name: Optional post-fix fast data
@@ -39,32 +52,48 @@ jobs:
             echo "tools/post_fix_fast_data.py not found, skipping"
           fi
 
-      - name: Enrich Kinopoisk facts
+      - name: Enrich Kinopoisk facts when key exists
         env:
           KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
           GKM_KINOPOISK_FACT_LIMIT: "2000"
-        run: python tools/enrich_kinopoisk_facts.py
+        run: |
+          if [ -n "$KINOPOISK_API_KEY" ] && [ -f tools/enrich_kinopoisk_facts.py ]; then
+            python tools/enrich_kinopoisk_facts.py
+          else
+            echo "Kinopoisk facts enrichment skipped"
+          fi
 
       - name: Dedupe database V112
         run: python tools/dedupe_database_v112.py
+
+      - name: Rebuild poster wall
+        run: python tools/gkm_v344_build_poster_wall.py
+
+      - name: Maintain fast assets
+        run: python tools/gkm_v344_maintenance.py --mode fast
 
       - name: Verify fast data
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          m=json.load(open('data/fast/meta.json',encoding='utf-8'))
-          print("count", m.get("count"))
-          print("kinopoiskFacts", m.get("kinopoiskFacts"))
-          assert int(m.get("count") or 0) > 0
-          assert Path("data/fast/search_index.json").exists()
+          meta=json.loads(Path('data/fast/meta.json').read_text(encoding='utf-8'))
+          search=json.loads(Path('data/fast/search_index.json').read_text(encoding='utf-8'))
+          lite=json.loads(Path('data/fast/search_lite.json').read_text(encoding='utf-8'))
+          wall=json.loads(Path('data/fast/poster_wall_v333/manifest.json').read_text(encoding='utf-8'))
+          assert int(meta.get('count') or 0) == len(search)
+          assert 1000 <= len(lite) <= len(search)
+          assert 0 < int(wall.get('total') or 0) <= len(search)
+          print('count', len(search))
+          print('search_lite', len(lite))
+          print('wall', wall.get('total'))
           PY
 
       - name: Commit fast data
         run: |
           git config user.name "fast-data-bot"
           git config user.email "fast-data-bot@users.noreply.github.com"
-          git add data/fast data/chunk_*.json data/chunks tools/dedupe_database_v112.py TEST_REPORT_V112_DEDUPE.txt || true
+          git add data/fast data/chunk_*.json data/chunks tools/dedupe_database_v112.py tools/build_fast_site_data.py tools/gkm_v344_build_poster_wall.py tools/gkm_v344_maintenance.py TEST_REPORT_V112_DEDUPE.txt TEST_REPORT_V344_MAINTENANCE.json || true
           if [ -f data/kinopoisk_facts_cache.json ]; then
             git add data/kinopoisk_facts_cache.json
           fi
@@ -72,9 +101,10 @@ jobs:
             echo "No fast data changes"
             exit 0
           fi
-          git commit -m "Build fast site data v112 dedupe"
+          git commit -m "Build fast site data V344"
           for i in 1 2 3; do
-            git pull --rebase origin main && git push origin main && break
+            git pull --rebase origin main && git push origin main && exit 0
             echo "Push failed, retry $i"
             sleep 5
           done
+          exit 1
