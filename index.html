@@ -15,13 +15,18 @@
   <meta property="og:title" content="ГОЛУБЬ Каталог Мира">
   <meta property="og:description" content="Фильмы, сериалы, аниме и мультфильмы с поиском, фильтрами и рейтингами.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="logo-banner.png.png">
+  <meta property="og:image" content="logo-banner.webp">
   <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ГОЛУБЬ Каталог Мира">
+  <meta name="twitter:description" content="Фильмы, сериалы, аниме и мультфильмы с поиском, фильтрами и рейтингами.">
+  <meta name="twitter:image" content="https://dragokas371158989-png.github.io/films-series-best-5000/logo-banner.webp">
 
-  <link rel="icon" type="image/png" href="favicon.png.png">
-  <link rel="shortcut icon" type="image/png" href="favicon.png.png">
-  <link rel="apple-touch-icon" href="favicon.png.png">
-  <link rel="stylesheet" href="style.css?v=251">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="shortcut icon" type="image/png" href="favicon-192.png">
+  <link rel="apple-touch-icon" href="favicon-192.png">
+  <link rel="stylesheet" href="style.css?v=344">
   <style>
 
     /* GKM V160 — fixed controls layout: trash button no longer clipped, reset no longer stretches */
@@ -110,14 +115,14 @@
   <link rel="dns-prefetch" href="//cdn.myanimelist.net">
   <link rel="preconnect" href="https://image.tmdb.org" crossorigin>
   <link rel="preconnect" href="https://cdn.myanimelist.net" crossorigin>
-  <link rel="preload" href="data/fast/poster_wall_v333/manifest.json?v=333" as="fetch" crossorigin="anonymous" fetchpriority="high">
-  <link rel="preload" href="data/fast/poster_wall_v333/seed_all.json?v=333" as="fetch" crossorigin="anonymous" fetchpriority="high">
+  <link rel="preload" href="data/fast/poster_wall_v333/manifest.json?v=344" as="fetch" crossorigin="anonymous" fetchpriority="high">
+  <link rel="preload" href="data/fast/poster_wall_v333/seed_all.json?v=344" as="fetch" crossorigin="anonymous" fetchpriority="high">
 </head>
 
 <body>
   <header class="topbar">
     <div class="logo-row">
-      <img class="site-logo" src="logo-banner.png.png" alt="ГОЛУБЬ Каталог Мира">
+      <img class="site-logo" src="logo-banner.webp" alt="ГОЛУБЬ Каталог Мира">
       <p id="statusText" class="status-text">Загрузка...</p>
         <button id="gkmAiTopBtn" class="ai-top-btn" type="button">🤖 Помощник</button>
     </div>
@@ -204,7 +209,7 @@
     </div>
   </main>
 
-  <dialog id="detailsDialog">
+  <dialog id="detailsDialog" aria-labelledby="detailTitle">
     <div class="dialog-content">
       <button id="closeDialog" class="close" type="button" aria-label="Закрыть">×</button>
 
@@ -255,19 +260,20 @@
     </div>
   </dialog>
 
-  <script src="app.js?v=343"></script>
+  <script src="app.js?v=344"></script>
+  <script src="features_v344.js?v=344"></script>
 
 <!-- GKM AI CHAT UI V58 RESTORED -->
 <button id="gkmAiFloatBtn" class="ai-float-btn" type="button" aria-label="Открыть чат">🤖</button>
 
-<dialog id="gkmAiDialog" class="ai-dialog">
+<dialog id="gkmAiDialog" class="ai-dialog" aria-labelledby="gkmAiDialogTitle">
   <div class="ai-box">
     <div class="ai-head">
       <div>
-        <div class="ai-title">Голубь помощник</div>
+        <div id="gkmAiDialogTitle" class="ai-title">Голубь помощник</div>
         <div class="ai-subtitle">Общение, погода и полный каталог</div>
       </div>
-      <button id="gkmAiCloseBtn" class="ai-close" type="button">✕</button>
+      <button id="gkmAiCloseBtn" class="ai-close" type="button" aria-label="Закрыть помощника">✕</button>
     </div>
 
     <div id="gkmAiMessages" class="ai-messages">
@@ -288,7 +294,7 @@
     </form>
 
     <div class="ai-note">
-      ГОЛУБЬ AI V341: полный поиск по каталогу работает в отдельном Web Worker. Groq объясняет подборки из реальных карточек.
+      ГОЛУБЬ AI V344: полный каталог, живой диалог, погода и кликабельные карточки.
     </div>
   </div>
 </dialog>
