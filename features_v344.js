@@ -1,3 +1,4 @@
+window.GKM_V3445_ALL_IN_ONE_FIX_VERSION = "v344.5-buttons-color-favicon-2026-07-12";
 window.GKM_V3443_POPULAR_VOTES_VERSION = "v344.3-popular-votes-min-500-2026-07-12";
 window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-12";
 /* GKM V344 FEATURE BUNDLE
@@ -1444,7 +1445,7 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
       // V344.2: карточка подробностей уже сама фильтрует похожие проекты.
       // V191 ошибочно видел скрытый блок «Аниме-сайты», принимал любую карточку
       // фильма за аниме и накладывал grayscale + opacity.
-      if (modal.id === "detailsDialog") {
+      if (modal.id === "detailsDialog" || modal.id === "gkmAiDialog") {
         modal.classList.remove("gkm-v191-similar-down", "gkm-v191-soft-trash");
         modal.querySelectorAll(".gkm-v191-similar-down,.gkm-v191-soft-trash").forEach(el => {
           el.classList.remove("gkm-v191-similar-down", "gkm-v191-soft-trash");
@@ -1513,7 +1514,11 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
       #detailsDialog.gkm-v191-similar-down,
       #detailsDialog .gkm-v191-similar-down,
       #detailsDialog.gkm-v191-soft-trash,
-      #detailsDialog .gkm-v191-soft-trash {
+      #detailsDialog .gkm-v191-soft-trash,
+      #gkmAiDialog.gkm-v191-similar-down,
+      #gkmAiDialog .gkm-v191-similar-down,
+      #gkmAiDialog.gkm-v191-soft-trash,
+      #gkmAiDialog .gkm-v191-soft-trash {
         opacity:1!important;
         filter:none!important;
         -webkit-filter:none!important;
@@ -10196,6 +10201,27 @@ Endpoint: ${endpoint||"не задан"}`;
       floatBtn.onclick=()=>{if(typeof dialog.showModal==="function")dialog.showModal();else dialog.setAttribute("open","");setTimeout(()=>input.focus(),50);warmup();};
     }
     if(closeBtn&&dialog)closeBtn.onclick=()=>dialog.close?dialog.close():dialog.removeAttribute("open");
+
+    // V344.4: быстрые кнопки помощника снова работают после разделения app.js/features_v344.js.
+    // Нажатие подставляет готовый запрос и запускает тот же submit, что и кнопка «Отправить».
+    if(dialog&&form&&input){
+      dialog.querySelectorAll("[data-ai-prompt]").forEach(btn=>{
+        btn.onclick=event=>{
+          event.preventDefault();
+          event.stopPropagation();
+          const prompt=T(btn.getAttribute("data-ai-prompt"));
+          if(!prompt)return;
+          input.value=prompt;
+          input.dispatchEvent(new Event("input",{bubbles:true}));
+          if(typeof form.requestSubmit==="function"){
+            form.requestSubmit();
+          }else{
+            form.dispatchEvent(new Event("submit",{bubbles:true,cancelable:true}));
+          }
+        };
+      });
+    }
+
     if(!form||!input)return;
     form.dataset.v260Installed="0";form.dataset.v300Installed="0";form.dataset.v301Installed="0";form.dataset.v302Installed="0";form.dataset.v303Installed="0";form.dataset.v304Installed="0";form.dataset.v305Installed="0";form.dataset.v307IsekaiInstalled="0";form.dataset.v308Installed="0";form.dataset.v309Installed="0";form.dataset.v310Installed="0";form.dataset.v311Installed="0";form.dataset.v312Installed="0";form.dataset.v316Installed="0";form.dataset.v336Installed="0";form.dataset.v340Installed="0";form.dataset.v341Installed="0";form.dataset.v343Installed="0";form.dataset.v344Installed="1";
     form.onsubmit=async e=>{
@@ -11299,4 +11325,163 @@ Endpoint: ${endpoint||"не задан"}`;
 })();
 /* GKM V334 INSTANT LOD CANVAS POSTER MOSAIC END */
 
+/* GKM V344.5 ALL-IN-ONE HOTFIX START */
+(function(){
+  "use strict";
+  if (window.__GKM_V3445_ALL_IN_ONE__) return;
+  window.__GKM_V3445_ALL_IN_ONE__ = true;
 
+  function installStyles(){
+    if (document.getElementById("gkm-v3445-hotfix-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v3445-hotfix-style";
+    style.textContent = `
+      #detailsDialog,
+      #detailsDialog *,
+      #gkmAiDialog,
+      #gkmAiDialog * {
+        filter:none!important;
+        -webkit-filter:none!important;
+        mix-blend-mode:normal!important;
+      }
+
+      #detailsDialog.gkm-v191-soft-trash,
+      #detailsDialog .gkm-v191-soft-trash,
+      #detailsDialog.gkm-v191-similar-down,
+      #detailsDialog .gkm-v191-similar-down,
+      #gkmAiDialog.gkm-v191-soft-trash,
+      #gkmAiDialog .gkm-v191-soft-trash,
+      #gkmAiDialog.gkm-v191-similar-down,
+      #gkmAiDialog .gkm-v191-similar-down {
+        opacity:1!important;
+        filter:none!important;
+        -webkit-filter:none!important;
+        order:initial!important;
+      }
+
+      #detailsDialog img,
+      #gkmAiDialog .gkm-ai-result-card img,
+      #gkmAiDialog .ai-result-card img {
+        opacity:1!important;
+        filter:none!important;
+        -webkit-filter:none!important;
+      }
+
+      #gkmAiDialog .ai-quick,
+      #gkmAiDialog [data-ai-prompt] {
+        pointer-events:auto!important;
+        opacity:1!important;
+      }
+
+      #gkmAiDialog .ai-quick {
+        position:sticky!important;
+        bottom:0!important;
+        z-index:2147483000!important;
+      }
+
+      #gkmAiDialog [data-ai-prompt] {
+        position:relative!important;
+        z-index:2147483001!important;
+        cursor:pointer!important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function restoreColors(){
+    ["detailsDialog","gkmAiDialog"].forEach(id=>{
+      const dialog = document.getElementById(id);
+      if (!dialog) return;
+
+      dialog.classList.remove("gkm-v191-soft-trash","gkm-v191-similar-down");
+      dialog.style.setProperty("filter","none","important");
+      dialog.style.setProperty("-webkit-filter","none","important");
+
+      dialog.querySelectorAll(
+        ".gkm-v191-soft-trash,.gkm-v191-similar-down"
+      ).forEach(el=>{
+        el.classList.remove("gkm-v191-soft-trash","gkm-v191-similar-down");
+        el.style.setProperty("opacity","1","important");
+        el.style.setProperty("filter","none","important");
+        el.style.setProperty("-webkit-filter","none","important");
+      });
+    });
+  }
+
+  function submitQuickPrompt(button){
+    const input = document.getElementById("gkmAiInput");
+    const form = document.getElementById("gkmAiForm");
+    if (!input || !form) return;
+
+    const prompt = String(button.getAttribute("data-ai-prompt") || "").trim();
+    if (!prompt) return;
+
+    input.value = prompt;
+    input.dispatchEvent(new Event("input",{bubbles:true}));
+    input.dispatchEvent(new Event("change",{bubbles:true}));
+
+    setTimeout(()=>{
+      if (typeof form.requestSubmit === "function") {
+        form.requestSubmit();
+      } else {
+        const submitEvent = new Event("submit",{bubbles:true,cancelable:true});
+        form.dispatchEvent(submitEvent);
+      }
+    },0);
+  }
+
+  document.addEventListener("click",event=>{
+    const button = event.target && event.target.closest
+      ? event.target.closest("#gkmAiDialog [data-ai-prompt]")
+      : null;
+    if (!button) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    submitQuickPrompt(button);
+  },true);
+
+  function install(){
+    installStyles();
+    restoreColors();
+
+    const dialog = document.getElementById("gkmAiDialog");
+    if (dialog) {
+      dialog.querySelectorAll("[data-ai-prompt]").forEach(btn=>{
+        btn.disabled = false;
+        btn.removeAttribute("aria-disabled");
+      });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded",install,{once:true});
+  } else {
+    install();
+  }
+
+  const observer = new MutationObserver(()=>restoreColors());
+  observer.observe(document.documentElement,{
+    subtree:true,
+    childList:true,
+    attributes:true,
+    attributeFilter:["class","style","open"]
+  });
+
+  setTimeout(install,100);
+  setTimeout(install,500);
+  setTimeout(install,1200);
+
+  window.GKM_V3445_DEBUG = {
+    restoreColors,
+    testQuickButton(index=0){
+      const buttons = document.querySelectorAll("#gkmAiDialog [data-ai-prompt]");
+      if (buttons[index]) submitQuickPrompt(buttons[index]);
+      return buttons.length;
+    }
+  };
+
+  console.log("GKM V344.5: buttons + modal colors + favicon compatibility installed");
+})();
+/* GKM V344.5 ALL-IN-ONE HOTFIX END */
