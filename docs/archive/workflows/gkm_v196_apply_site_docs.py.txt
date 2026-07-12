@@ -1,3 +1,5 @@
+Archived by GKM V344. This file is documentation only and is not executed by GitHub Actions.
+
 name: Apply GKM V196 Site Docs
 
 on:

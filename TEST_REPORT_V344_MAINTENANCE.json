@@ -1,0 +1,70 @@
+{
+  "version": "V344",
+  "generatedAt": "2026-07-12T15:01:46Z",
+  "mode": "all",
+  "workflows": {
+    "archived": [
+      "apply_gkm_v162_franchise_pages.yml",
+      "apply_gkm_v175_watch_order_grid_sort.yml",
+      "apply_gkm_v184_big_site_features.yml",
+      "apply_gkm_v185_safe_big_site_features.yml",
+      "apply_gkm_v186_buttons_menu_fix.yml",
+      "gkm_v196_apply_site_docs.py",
+      "gkm_v339_safe_auto_update.yml"
+    ],
+    "alreadyMissing": []
+  },
+  "dedupeScript": {
+    "changed": true,
+    "exists": true
+  },
+  "assets": {
+    "htmlTouched": 3,
+    "removed": [
+      "logo-banner.png.png",
+      "favicon.png.png",
+      "1",
+      "tools/gkm_v339_build_poster_wall.py"
+    ]
+  },
+  "rootSeo": {
+    "changed": false
+  },
+  "jsonLd": {
+    "checked": 23926,
+    "changed": 23926,
+    "valid": 23926,
+    "failures": []
+  },
+  "sitemap": {
+    "version": "V344",
+    "generatedAt": "2026-07-12T15:01:55Z",
+    "policy": "Curated static SEO subset; the interactive catalog remains the source of truth for the full database.",
+    "baseUrl": "https://dragokas371158989-png.github.io/films-series-best-5000/",
+    "staticFilmPages": 23926,
+    "sitemapUrls": 23930
+  },
+  "generatedOverviews": {
+    "changed": true,
+    "generated": 51062,
+    "count": 93739
+  },
+  "searchLite": {
+    "created": true,
+    "sourceCount": 93739,
+    "liteCount": 15000,
+    "bytes": 16540742
+  },
+  "validation": {
+    "app": true,
+    "index": true,
+    "features": true,
+    "aiWorker": true,
+    "searchLite": true,
+    "sitemap": true,
+    "favicon": true,
+    "logo": true,
+    "dedupeScript": true,
+    "ok": true
+  }
+}

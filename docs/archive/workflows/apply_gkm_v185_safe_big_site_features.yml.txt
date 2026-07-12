@@ -1,0 +1,37 @@
+Archived by GKM V344. This file is documentation only and is not executed by GitHub Actions.
+
+name: Apply GKM V185 Safe Big Site Features
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-v185-safe-big-site-features:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Apply V185 patch
+        run: python tools/gkm_v185_apply_safe_big_site_features.py
+
+      - name: Commit V185 files
+        run: |
+          git config user.name "actions-user"
+          git config user.email "actions@github.com"
+          git add app.js index.html film/index.html downloads/index.html tools/gkm_v185_apply_safe_big_site_features.py .github/workflows/apply_gkm_v185_safe_big_site_features.yml
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Apply GKM V185 safe big site features"
+            git push
+          fi
