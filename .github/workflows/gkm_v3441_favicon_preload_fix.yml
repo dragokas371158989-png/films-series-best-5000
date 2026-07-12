@@ -1,0 +1,65 @@
+name: GKM V344.1 Fix Favicons and Preload Warnings
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v3441-favicon-preload-fix
+  cancel-in-progress: false
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync main
+        run: |
+          git pull --rebase origin main
+
+      - name: Verify V344.1 files
+        run: |
+          test -f favicon.ico
+          test -f favicon-32.png
+          test -f favicon-192.png
+          test -f tools/gkm_v3441_fix_favicon_preload.py
+
+      - name: Patch all HTML files
+        run: |
+          python tools/gkm_v3441_fix_favicon_preload.py
+
+      - name: Validate root page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text = Path('index.html').read_text(encoding='utf-8')
+          assert 'favicon.ico' in text
+          assert 'poster_wall_v333/manifest.json?v=344" as="fetch"' not in text
+          assert 'poster_wall_v333/seed_all.json?v=344" as="fetch"' not in text
+          print('Root favicon and preload validation: PASS')
+          PY
+
+      - name: Commit V344.1 fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Apply V344.1 favicon and preload warning fix"
+            git push origin HEAD:main
+          fi
