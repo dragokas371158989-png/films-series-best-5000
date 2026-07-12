@@ -1,7 +1,7 @@
-/* GKM V342 FULL CATALOG AI SEARCH WORKER */
+/* GKM V343 FULL CATALOG AI SEARCH WORKER */
 "use strict";
 
-const VERSION = "v342-full-catalog-web-worker-ai-search-2026-07-12";
+const VERSION = "v343-full-catalog-web-worker-ai-search-2026-07-12";
 const DB_NAME = "gkm_ai_search_v342";
 const DB_VERSION = 1;
 const STORE_NAME = "chunks";
@@ -64,7 +64,7 @@ function compactToItem(row, fallbackKind) {
     genres: typeof row[8] === "string" ? row[8].split("|").filter(Boolean) : (row[8] || []),
     source: row[9] || "",
     status: row[10] || "",
-    __gkmV342Compact: true,
+    __gkmV343Compact: true,
     __kind: typeCode >= 0 ? kindMap[typeCode] : fallbackKind
   }, fallbackKind);
 }
@@ -128,7 +128,7 @@ function publicItem(item) {
     source: item.source,
     status: item.status,
     overview: item.overview,
-    __gkmV342Compact: true
+    __gkmV343Compact: true
   };
 }
 
@@ -204,7 +204,7 @@ function absolute(path) {
 
 async function fetchManifest(force = false) {
   if (manifest && !force) return manifest;
-  const url = absolute(`${baseUrl}/manifest.json?v=341&t=${force ? Date.now() : "init"}`);
+  const url = absolute(`${baseUrl}/manifest.json?v=343&t=${force ? Date.now() : "init"}`);
   const response = await fetch(url, { cache: "no-store" });
   if (!response.ok) throw new Error(`manifest ${response.status}`);
   const next = await response.json();
