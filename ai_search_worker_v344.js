@@ -1,7 +1,7 @@
 /* GKM V344 FULL CATALOG AI SEARCH WORKER */
 "use strict";
 
-const VERSION = "v344.3-full-catalog-popular-votes-min-500-2026-07-12";
+const VERSION = "v344.7-strict-type-year-genre-votes-2026-07-12";
 const DB_NAME = "gkm_ai_search_v344";
 const DB_VERSION = 1;
 const STORE_NAME = "chunks";
@@ -295,6 +295,19 @@ async function loadKind(kind, requestId) {
   return promise;
 }
 
+function strictGenreWords(mood) {
+  const map = {
+    horror: ["ужас", "horror"],
+    sci: ["фантаст", "science fiction", "sci fi", "sci-fi"],
+    fantasy: ["фэнтези", "fantasy"],
+    detective: ["детектив", "detective", "mystery"],
+    romance: ["романтика", "мелодрама", "romance"],
+    sport: ["спорт", "sport"],
+    school: ["школа", "school"]
+  };
+  return map[mood] || [];
+}
+
 function moodWords(mood) {
   const map = {
     isekai: ["исекай", "isekai", "попадан", "перерождение", "реинкарнация", "другой мир", "summoned", "reincarnation", "another world"],
@@ -326,6 +339,10 @@ function scoreItem(item, intent, tokens) {
   if (item.year && (item.year < Number(intent.yearMin || 0) || item.year > Number(intent.yearMax || 9999))) return 0;
   if (item.rating < Number(intent.ratingMin || 0) || item.rating > Number(intent.ratingMax || 10)) return 0;
   if ((item.votes || 0) < Number(intent.minVotes || 0)) return 0;
+  if (intent.strictGenre) {
+    const required = strictGenreWords(intent.mood).map(normalize).filter(Boolean);
+    if (required.length && !required.some(word => item.__genresN.includes(word))) return 0;
+  }
   let score = 0;
   for (const rawToken of tokens || []) {
     const token = normalize(rawToken);
@@ -424,6 +441,10 @@ async function runSearch(message) {
         if (item.year && (item.year < Number(intent.yearMin || 0) || item.year > Number(intent.yearMax || 9999))) continue;
         if (item.rating < Number(intent.ratingMin || 0) || item.rating > Number(intent.ratingMax || 10)) continue;
         if ((item.votes || 0) < Number(intent.minVotes || 0)) continue;
+        if (intent.strictGenre) {
+          const required = strictGenreWords(intent.mood).map(normalize).filter(Boolean);
+          if (required.length && !required.some(word => item.__genresN.includes(word))) continue;
+        }
         const popularity = intent.popularityFirst
           ? (item.votes || 0) * 100 + (item.rating || 0)
           : (item.rating || 0) * 100000 + (item.votes || 0);

@@ -1,4 +1,4 @@
-window.GKM_V3446_EMERGENCY_MEMORY_FIX_VERSION = "v344.6-remove-v3445-observer-loop-2026-07-12";
+window.GKM_V3447_STRICT_CATALOG_FILTERS_VERSION = "v344.7-strict-type-year-genre-votes-2026-07-12";
 window.GKM_V3443_POPULAR_VOTES_VERSION = "v344.3-popular-votes-min-500-2026-07-12";
 window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-12";
 /* GKM V344 FEATURE BUNDLE
@@ -9467,7 +9467,7 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
   const MEM_KEY = "gkm_v344_ai_memory";
   const HISTORY_KEY = "gkm_v344_ai_history";
   const WALL_BASE = "data/fast/poster_wall_v333";
-  const SEARCH_WORKER_URL = "ai_search_worker_v344.js?v=3443";
+  const SEARCH_WORKER_URL = "ai_search_worker_v344.js?v=3447";
   const DEFAULT_RECOMMENDATION_MIN_VOTES = 500;
   const POPULAR_PRIORITY_VOTES = 1000000;
   const FALLBACK_CACHE = new Map();
@@ -9593,16 +9593,17 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
   function detectMood(q){
     const x=N(variants(q).join(" "));
     if(x.includes("попадан")||x.includes("исека")||x.includes("isekai")||x.includes("перерожд")||x.includes("реинкарнац")||x.includes("другой мир")) return "isekai";
-    if(x.includes("вечер")||x.includes("вечером")||x.includes("посмотреть")) return "evening";
-    if(x.includes("мрач")||x.includes("темн")||x.includes("жест")||x.includes("тяжел")) return "dark";
+    // V344.7: явный жанр важнее общего пожелания «на вечер».
     if(x.includes("ужас")||x.includes("хоррор")||x.includes("страш")) return "horror";
     if(x.includes("фантаст")||x.includes("космос")||x.includes("sci")||x.includes("киберпанк")) return "sci";
     if(x.includes("фэнтези")||x.includes("маг")||x.includes("rpg")||x.includes("рпг")) return "fantasy";
-    if(x.includes("комед")||x.includes("смешн")||x.includes("легк")) return "light";
     if(x.includes("детектив")||x.includes("криминал")||x.includes("расслед")) return "detective";
     if(x.includes("романт")||x.includes("любов")) return "romance";
     if(x.includes("спорт")) return "sport";
     if(x.includes("школ")) return "school";
+    if(x.includes("мрач")||x.includes("темн")||x.includes("жест")||x.includes("тяжел")) return "dark";
+    if(x.includes("комед")||x.includes("смешн")||x.includes("легк")) return "light";
+    if(x.includes("вечер")||x.includes("вечером")||x.includes("посмотреть")) return "evening";
     return "";
   }
   function detectIntent(q){
@@ -9622,6 +9623,7 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
       minVotes: recommendationMode ? DEFAULT_RECOMMENDATION_MIN_VOTES : 0,
       popularityFirst: recommendationMode,
       popularPriorityVotes: POPULAR_PRIORITY_VOTES,
+      strictGenre:["horror","sci","fantasy","detective","romance","sport","school"].includes(mood),
       explain:all.includes("почему")||all.includes("объясни"),
       random:all.includes("рандом")||all.includes("случайн"),
       count:LIMIT
@@ -9777,6 +9779,16 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
     if(b==="books") return ib==="books"||ib==="ranobe";
     return ib===b;
   }
+  function strictGenreWords(m){
+    if(m==="horror") return ["ужас","horror"];
+    if(m==="sci") return ["фантаст","science fiction","sci fi","sci-fi"];
+    if(m==="fantasy") return ["фэнтези","fantasy"];
+    if(m==="detective") return ["детектив","detective","mystery"];
+    if(m==="romance") return ["романтика","мелодрама","romance"];
+    if(m==="sport") return ["спорт","sport"];
+    if(m==="school") return ["школа","school"];
+    return [];
+  }
   function moodWords(m){
     if(m==="isekai") return ["исекай","isekai","попадан","перерождение","реинкарнация","другой мир","ином мире","призван","summoned","reincarnation","another world"];
     if(m==="evening") return ["драма","комедия","приключения","триллер","adventure","drama","comedy","thriller"];
@@ -9798,6 +9810,10 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
     if(r<Number(it.ratingMin||0)||r>Number(it.ratingMax||10))return 0;
     if(v<Number(it.minVotes||0))return 0;
     const ttl=N(title(item)),raw=N(rawTitle(item)),h=hay(item),gen=N(genres(item).join(" ")),typ=N(type(item));
+    if(it.strictGenre){
+      const required=strictGenreWords(it.mood).map(N).filter(Boolean);
+      if(required.length&&!required.some(word=>gen.includes(word)))return 0;
+    }
     let s=0;
     for(const token of tk){
       if(ttl===token||raw===token) s+=200;
@@ -9848,7 +9864,8 @@ window.GKM_V3442_MODAL_COLOR_FIX_VERSION = "v344.2-modal-full-color-fix-2026-07-
       return clean(item)&&passType(item,it.bucket)&&
         (!y||(y>=it.yearMin&&y<=it.yearMax))&&
         r>=Number(it.ratingMin||0)&&r<=Number(it.ratingMax||10)&&
-        v>=Number(it.minVotes||0);
+        v>=Number(it.minVotes||0)&&
+        (!it.strictGenre||strictGenreWords(it.mood).map(N).some(word=>N(genres(item).join(" ")).includes(word)));
     }).sort((a,b)=>it.popularityFirst
       ? votes(b)-votes(a)||rating(b)-rating(a)
       : (rating(b)*100000+votes(b))-(rating(a)*100000+votes(a)));
@@ -10168,6 +10185,7 @@ Endpoint: ${endpoint||"не задан"}`;
 
     const res=await search(q,onProgress);
     if(!res.items.length){
+      if(res.intent&&res.intent.strictGenre)return`Не нашёл точных совпадений по жанру, году и минимуму ${fmtVotes(res.intent.minVotes||0)} голосов. Я не буду подсовывать другой жанр. Измени год либо напиши «без ограничения по голосам».`;
       if(res.intent&&Number(res.intent.minVotes||0)>0)return`Не нашёл достаточно вариантов с минимум ${fmtVotes(res.intent.minVotes)} голосов. Уточни жанр/годы или напиши «без ограничения по голосам».`;
       return"Не нашёл быстро в нужном разделе. Попробуй проще: «фильмы вечер», «анимэ попаданцы», «игры rpg», «манга ужасы».";
     }
@@ -10176,8 +10194,9 @@ Endpoint: ${endpoint||"не задан"}`;
       ? `Фильтр популярности: минимум ${fmtVotes(res.intent.minVotes)} голосов; сначала самые популярные.\n`
       : "";
     const localText = `${popularityNote}${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «похожее на 1», «другое», «сравни 1 и 2», «сделай план», «почему».`;
-    const aiText = await tryRemoteAI(q, localText, "catalog");
-    return aiText || localText;
+    // V344.7: каталог отвечает только реальными результатами поиска.
+    // Groq больше не может заменить список общим текстом или выдумать неподходящий жанр.
+    return localText;
   }
 
   function addMsg(role,text){
