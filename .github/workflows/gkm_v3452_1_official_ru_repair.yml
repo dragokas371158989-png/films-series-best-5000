@@ -1,0 +1,149 @@
+name: GKM V3452.1 Repair Official Russian Titles
+
+on:
+  workflow_dispatch:
+    inputs:
+      tmdb_limit:
+        description: "TMDB records to process; 0 means all"
+        required: false
+        default: "0"
+      shikimori_individual_limit:
+        description: "Individual Shikimori fallbacks after batch requests"
+        required: false
+        default: "500"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v3452-1-official-russian-repair
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
+      TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+      TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
+      GKM_RU_TMDB_LIMIT: ${{ inputs.tmdb_limit }}
+      GKM_SHIKI_INDIVIDUAL_LIMIT: ${{ inputs.shikimori_individual_limit }}
+      GKM_SHIKI_BATCH_SIZE: "50"
+      GKM_SHIKI_DELAY: "0.85"
+      GKM_RU_TMDB_WORKERS: "8"
+      GKM_RU_KP_WORKERS: "4"
+
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create backup branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          BACKUP="backup-before-v3452-1-${GITHUB_RUN_ID}"
+          git branch "$BACKUP"
+          git push origin "$BACKUP"
+          echo "BACKUP_BRANCH=$BACKUP" >> "$GITHUB_ENV"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Repair all official Russian metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/gkm_v3452_1_official_ru_repair.py .
+
+      - name: Validate JavaScript
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check app.js
+          node --check features_v344.js
+          node --check ai_search_worker_v344.js
+
+      - name: Validate JSON and critical anime titles
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import glob, json, re, sys
+
+          for path in glob.glob("data/**/*.json", recursive=True):
+              with open(path, encoding="utf-8") as fh:
+                  json.load(fh)
+
+          rows=json.load(open("data/fast/search_index.json",encoding="utf-8"))
+          by_id={str(x.get("id")):x for x in rows if isinstance(x,dict)}
+          alias_to_item={}
+          for item in rows:
+              if not isinstance(item,dict):
+                  continue
+              for alias in item.get("mergedDuplicateIds") or []:
+                  alias_to_item[str(alias)]=item
+
+          required={
+              "mal_1002":"Top wo Nerae 2! Diebuster",
+              "mal_35082":"Hibike! Euphonium Movie 2: Todoketai Melody",
+              "mal_10049":"Nurarihyon no Mago: Sennen Makyou",
+          }
+          bad_old={
+              "Гунбустер 2",
+              "Саунд! Еуфониум те Мовие: Мэй те Мелодий Рич Йоу!",
+              "Нура: Рисе оф те Йокай Клан - Демон Капитал",
+          }
+          for iid,original in required.items():
+              item=by_id.get(iid) or alias_to_item.get(iid)
+              if not item:
+                  # Last fallback: find by preserved original/aliases.
+                  item=next((x for x in rows if original in [str(x.get("en") or ""),*(str(a) for a in x.get("aliases") or [])]),None)
+              if not item:
+                  raise SystemExit(f"Missing smoke work after dedupe: {iid} / {original}")
+              title=str(item.get("ru") or "")
+              if not re.search(r"[А-Яа-яЁё]",title):
+                  raise SystemExit(f"No Russian title for {iid}: {title}")
+              if title in bad_old or title==original:
+                  raise SystemExit(f"Old English/transliteration remains for {iid}: {title}")
+
+          report=json.load(open("TEST_REPORT_V3452_1_OFFICIAL_RU_REPAIR.json",encoding="utf-8"))
+          stats=report.get("stats",{})
+          if int(stats.get("shikimori_candidates",0)) <= 0:
+              raise SystemExit("V3452.1 found zero Shikimori candidates")
+          resolved=int(stats.get("shikimori_titles_resolved",0))+int(stats.get("shikimori_individual_resolved",0))
+          if resolved <= 0 and int(stats.get("official_cache_items",0)) <= 0:
+              raise SystemExit("V3452.1 resolved zero Shikimori Russian titles")
+
+          print("JSON: PASS")
+          print("Critical anime titles: PASS")
+          print("Shikimori candidates:",stats.get("shikimori_candidates"))
+          print("Shikimori resolved:",resolved)
+          PY
+
+      - name: Commit repaired site
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Apply V3452.1 official Russian title repair"
+          git push origin HEAD:main
+
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          echo "### GKM V3452.1" >> "$GITHUB_STEP_SUMMARY"
+          echo "Backup branch: \`${BACKUP_BRANCH:-not-created}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Report: \`TEST_REPORT_V3452_1_OFFICIAL_RU_REPAIR.json\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Unresolved: \`data/unresolved_official_ru_v3452_1.json\`" >> "$GITHUB_STEP_SUMMARY"
