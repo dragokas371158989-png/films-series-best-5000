@@ -1,0 +1,31 @@
+{
+  "version": "V3452.2",
+  "mode": "apply",
+  "stats": {
+    "official_cache_items": 5917,
+    "official_mapped_ids": 7974,
+    "items_updated": 23749,
+    "json_files_checked": 389,
+    "json_files_changed": 7,
+    "wall_files_checked": 23,
+    "html_pages_checked": 738,
+    "html_pages_changed": 738
+  },
+  "controlTitles": {
+    "mal_1002": {
+      "expected": "Дайбастер: Дотянись до неба! 2",
+      "actual": "Дайбастер: Дотянись до неба! 2",
+      "pass": true
+    },
+    "mal_35082": {
+      "expected": "Звучи, эуфониум! Пусть мелодия дойдёт до тебя",
+      "actual": "Звучи, эуфониум! Пусть мелодия дойдёт до тебя",
+      "pass": true
+    },
+    "mal_10049": {
+      "expected": "Внук Нурарихёна: Тысячелетняя столица духов",
+      "actual": "Внук Нурарихёна: Тысячелетняя столица духов",
+      "pass": true
+    }
+  }
+}
