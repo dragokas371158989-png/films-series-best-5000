@@ -1,0 +1,102 @@
+name: GKM V3454 Rebuild Anime Top and Studios
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - GKM V344 Safe Daily Catalog Update
+      - GKM V3453.1 Full Russian Site and Genre Fix
+      - GKM V3453.1 Sync Russian Cache After Daily Update
+    types:
+      - completed
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v3454-rebuild-anime-buttons
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Rebuild anime top and studio databases
+        run: python tools/gkm_v3454_rebuild_anime_buttons.py
+
+      - name: Validate generated files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          top=json.loads(Path("data/fast/anime_top_manual.json").read_text(encoding="utf-8"))
+          studios=json.loads(Path("data/fast/anime_studios_top.json").read_text(encoding="utf-8"))
+          detail=json.loads(Path("data/fast/anime_studios_detail.json").read_text(encoding="utf-8"))
+          report=json.loads(Path("TEST_REPORT_V3454_ANIME_BUTTONS.json").read_text(encoding="utf-8"))
+
+          assert len(top.get("items",[])) >= 50, len(top.get("items",[]))
+          assert studios.get("studios"), "anime_studios_top.json is empty"
+          assert detail.get("studios"), "anime_studios_detail.json is empty"
+          assert all(report.get("tests",{}).values()), report
+          print("V3454 validation: PASS")
+          print("Top anime:",len(top["items"]))
+          print("Studios:",len(studios["studios"]))
+          PY
+
+      - name: Commit repaired buttons data
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gkm-v3454-bot"
+          git config user.email "gkm-v3454-bot@users.noreply.github.com"
+
+          git add \
+            data/fast/anime_top_manual.json \
+            data/fast/anime_studios_top.json \
+            data/fast/anime_studios_detail.json \
+            tools/gkm_v3454_rebuild_anime_buttons.py \
+            .github/workflows/gkm_v3454_rebuild_anime_buttons.yml \
+            TEST_REPORT_V3454_ANIME_BUTTONS.json
+
+          if [ -d film/data/fast ]; then
+            git add \
+              film/data/fast/anime_top_manual.json \
+              film/data/fast/anime_studios_top.json \
+              film/data/fast/anime_studios_detail.json || true
+          fi
+
+          if git diff --cached --quiet; then
+            echo "Anime top/studio data is already current"
+            exit 0
+          fi
+
+          git commit -m "Apply V3454 restore anime top and studio buttons"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          echo "### GKM V3454" >> "$GITHUB_STEP_SUMMARY"
+          echo "Restored data for **Топ аниме 100** and **Топ студий**." >> "$GITHUB_STEP_SUMMARY"
+          echo "Report: \`TEST_REPORT_V3454_ANIME_BUTTONS.json\`" >> "$GITHUB_STEP_SUMMARY"
