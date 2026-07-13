@@ -1,0 +1,29 @@
+{
+  "version": "V3451",
+  "mode": "apply",
+  "online": true,
+  "stats": {
+    "prefetch_items": 103883,
+    "shikimori_candidates": 0,
+    "kinopoisk_candidates": 0,
+    "tmdb_candidates": 0,
+    "primary_before": 96521,
+    "genres_localized": 6823,
+    "primary_after": 96521,
+    "titles_localized": 4989,
+    "descriptions_russianized": 4990,
+    "fallback_transliterated_titles": 4909,
+    "duplicates_removed": 34,
+    "search_total": 97885,
+    "poster_wall_rows_localized": 95594,
+    "poster_wall_total_after": 95745,
+    "derived_files_localized": 3497,
+    "ui_patched": 1,
+    "static_pages_localized": 16020,
+    "titles_cyrillic_after": 96521,
+    "titles_total_after": 96521,
+    "latin_display_titles_after": 0,
+    "official_cache_items": 0
+  },
+  "fallback_transliterated_examples": []
+}
