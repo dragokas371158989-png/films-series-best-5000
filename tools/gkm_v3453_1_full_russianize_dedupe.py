@@ -387,6 +387,7 @@ def conservative_dedupe(items: list[dict], stats: Counter) -> list[dict]:
 
 def load_official_cache() -> dict[str, dict]:
     candidates = [
+        ROOT / "data" / "ru_complete_cache_v3453_1.json",
         ROOT / "data" / "ru_complete_cache_v3453.json",
         ROOT / "data" / "ru_official_cache_v3452_1.json",
         ROOT / "data" / "ru_official_cache_v3452.json",
