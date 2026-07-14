@@ -3,26 +3,26 @@
   "status": "success",
   "safetyLimitBytes": 98566144,
   "full": {
-    "records": 98457,
-    "changedRecords": 98457,
+    "records": 99025,
+    "changedRecords": 99025,
     "emptyIds": 0,
-    "searchCharsBefore": 24357299,
-    "searchCharsAfter": 15198259,
+    "searchCharsBefore": 24500216,
+    "searchCharsAfter": 15299818,
     "path": "data/fast/search_index.json",
-    "bytesBefore": 110942179,
-    "bytesAfter": 96360985,
-    "savedBytes": 14581194
+    "bytesBefore": 111591390,
+    "bytesAfter": 96945408,
+    "savedBytes": 14645982
   },
   "lite": {
     "records": 15000,
     "changedRecords": 15000,
     "emptyIds": 0,
-    "searchCharsBefore": 3855506,
-    "searchCharsAfter": 2873358,
+    "searchCharsBefore": 3855341,
+    "searchCharsAfter": 2876031,
     "path": "data/fast/search_lite.json",
-    "bytesBefore": 18192828,
-    "bytesAfter": 16586099,
-    "savedBytes": 1606729
+    "bytesBefore": 18197169,
+    "bytesAfter": 16594236,
+    "savedBytes": 1602933
   },
   "tests": {
     "fullIndexValid": true,
