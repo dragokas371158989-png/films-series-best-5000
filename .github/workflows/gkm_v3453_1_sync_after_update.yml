@@ -56,11 +56,56 @@ jobs:
 
           git config user.name "gkm-v3453-1-sync-bot"
           git config user.email "gkm-v3453-1-sync-bot@users.noreply.github.com"
-          git add data film anime-tv TEST_REPORT_V3453_1_FULL_RUSSIAN.json
+
+          echo "All generated changes before commit:"
+          git status --short
+
+          # The localization script also updates root-level derived JSON files.
+          # Stage every generated repository change so rebase never sees leftovers.
+          git add -A
+
           if git diff --cached --quiet; then
             echo "Already synchronized"
             exit 0
           fi
+
+          echo "Staged synchronization changes:"
+          git diff --cached --stat
+
           git commit -m "Reapply V3453.1 Russian localization after catalog update"
-          git pull --rebase origin main
-          git push origin HEAD:main
+
+          # Nothing may remain outside the commit before rebase.
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "Additional generated files appeared after commit; including them:"
+            git status --short
+            git add -A
+            git commit --amend --no-edit
+          fi
+
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "::error::Working tree is still not clean before rebase"
+            git status --short
+            exit 1
+          fi
+
+          for attempt in 1 2 3 4 5; do
+            echo "Publish attempt $attempt/5"
+            git fetch origin main
+
+            if ! git rebase origin/main; then
+              echo "::error::Rebase conflict while publishing Russian synchronization"
+              git status --short || true
+              git rebase --abort || true
+              exit 1
+            fi
+
+            if git push origin HEAD:main; then
+              echo "Russian synchronization published successfully"
+              exit 0
+            fi
+
+            sleep $((attempt * 8))
+          done
+
+          echo "::error::Could not push Russian synchronization after 5 attempts"
+          exit 1
