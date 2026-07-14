@@ -1,0 +1,332 @@
+{
+  "version": "V3460.1",
+  "status": "warning",
+  "generatedAt": "2026-07-14T09:11:21.489640+00:00",
+  "commit": "5be43394acd4d4759d04713ec07c76036d7d7a43",
+  "runUrl": "https://github.com/dragokas371158989-png/films-series-best-5000/actions/runs/29320674675",
+  "summary": {
+    "catalogRecords": 94757,
+    "searchLiteRecords": 94757,
+    "animeTopRecords": 100,
+    "studioRecords": 12,
+    "posterWallRecords": 93985,
+    "staticPages": 23927,
+    "untranslatedTitles": 0,
+    "latinGenres": 0,
+    "duplicateIds": 0,
+    "criticalFailures": 0,
+    "warnings": 1
+  },
+  "checks": [
+    {
+      "id": "file:index.html",
+      "name": "Файл index.html",
+      "ok": true,
+      "level": "critical",
+      "details": "15921 байт"
+    },
+    {
+      "id": "file:style.css",
+      "name": "Файл style.css",
+      "ok": true,
+      "level": "critical",
+      "details": "42191 байт"
+    },
+    {
+      "id": "file:app.js",
+      "name": "Файл app.js",
+      "ok": true,
+      "level": "critical",
+      "details": "132117 байт"
+    },
+    {
+      "id": "file:features_v344.js",
+      "name": "Файл features_v344.js",
+      "ok": true,
+      "level": "critical",
+      "details": "507098 байт"
+    },
+    {
+      "id": "file:ai_search_worker_v344.js",
+      "name": "Файл ai_search_worker_v344.js",
+      "ok": true,
+      "level": "critical",
+      "details": "23001 байт"
+    },
+    {
+      "id": "file:data/fast/search_index.json",
+      "name": "Файл data/fast/search_index.json",
+      "ok": true,
+      "level": "critical",
+      "details": "101906785 байт"
+    },
+    {
+      "id": "file:data/fast/search_lite.json",
+      "name": "Файл data/fast/search_lite.json",
+      "ok": true,
+      "level": "critical",
+      "details": "43609207 байт"
+    },
+    {
+      "id": "file:data/fast/meta.json",
+      "name": "Файл data/fast/meta.json",
+      "ok": true,
+      "level": "critical",
+      "details": "4629 байт"
+    },
+    {
+      "id": "file:data/fast/poster_wall_v333/manifest.json",
+      "name": "Файл data/fast/poster_wall_v333/manifest.json",
+      "ok": true,
+      "level": "critical",
+      "details": "825 байт"
+    },
+    {
+      "id": "file:data/fast/anime_top_manual.json",
+      "name": "Файл data/fast/anime_top_manual.json",
+      "ok": true,
+      "level": "critical",
+      "details": "104351 байт"
+    },
+    {
+      "id": "file:data/fast/anime_studios_top.json",
+      "name": "Файл data/fast/anime_studios_top.json",
+      "ok": true,
+      "level": "critical",
+      "details": "4495 байт"
+    },
+    {
+      "id": "file:data/fast/anime_studios_detail.json",
+      "name": "Файл data/fast/anime_studios_detail.json",
+      "ok": true,
+      "level": "critical",
+      "details": "544207 байт"
+    },
+    {
+      "id": "js:app.js",
+      "name": "JavaScript app.js",
+      "ok": true,
+      "level": "critical",
+      "details": "OK"
+    },
+    {
+      "id": "js:features_v344.js",
+      "name": "JavaScript features_v344.js",
+      "ok": true,
+      "level": "critical",
+      "details": "OK"
+    },
+    {
+      "id": "js:ai_search_worker_v344.js",
+      "name": "JavaScript ai_search_worker_v344.js",
+      "ok": true,
+      "level": "critical",
+      "details": "OK"
+    },
+    {
+      "id": "search:count",
+      "name": "Основной каталог",
+      "ok": true,
+      "level": "critical",
+      "details": "94757 записей"
+    },
+    {
+      "id": "search:duplicates",
+      "name": "Дубли ID в каталоге",
+      "ok": true,
+      "level": "critical",
+      "details": "0"
+    },
+    {
+      "id": "search:russianTitles",
+      "name": "Русские названия",
+      "ok": true,
+      "level": "critical",
+      "details": "без русского: 0"
+    },
+    {
+      "id": "search:russianGenres",
+      "name": "Русские жанры",
+      "ok": true,
+      "level": "critical",
+      "details": "с латиницей: 0"
+    },
+    {
+      "id": "search:emptyIds",
+      "name": "Записи без ID",
+      "ok": true,
+      "level": "critical",
+      "details": "0"
+    },
+    {
+      "id": "search:lite",
+      "name": "Облегчённый индекс",
+      "ok": true,
+      "level": "critical",
+      "details": "94757 записей"
+    },
+    {
+      "id": "meta:count",
+      "name": "Счётчик meta.json",
+      "ok": false,
+      "level": "warning",
+      "details": "meta=95746, каталог=94757"
+    },
+    {
+      "id": "anime:top",
+      "name": "Топ аниме",
+      "ok": true,
+      "level": "critical",
+      "details": "100 записей"
+    },
+    {
+      "id": "anime:studios",
+      "name": "Топ студий",
+      "ok": true,
+      "level": "critical",
+      "details": "студий: 12, деталей: 12"
+    },
+    {
+      "id": "wall:rows",
+      "name": "3D-стена",
+      "ok": true,
+      "level": "critical",
+      "details": "93985 карточек, 22 частей"
+    },
+    {
+      "id": "wall:duplicates",
+      "name": "Дубли внутри 3D-стены",
+      "ok": true,
+      "level": "warning",
+      "details": "0"
+    },
+    {
+      "id": "json:fast",
+      "name": "JSON в data/fast",
+      "ok": true,
+      "level": "critical",
+      "details": "проверено: 31, ошибок: 0"
+    },
+    {
+      "id": "pages:static",
+      "name": "Статические карточки",
+      "ok": true,
+      "level": "warning",
+      "details": "23927 страниц"
+    },
+    {
+      "id": "workflow:core",
+      "name": "Основные workflows",
+      "ok": true,
+      "level": "warning",
+      "details": "Все присутствуют"
+    }
+  ],
+  "details": {
+    "files": {
+      "index.html": {
+        "exists": true,
+        "size": 15921
+      },
+      "style.css": {
+        "exists": true,
+        "size": 42191
+      },
+      "app.js": {
+        "exists": true,
+        "size": 132117
+      },
+      "features_v344.js": {
+        "exists": true,
+        "size": 507098
+      },
+      "ai_search_worker_v344.js": {
+        "exists": true,
+        "size": 23001
+      },
+      "data/fast/search_index.json": {
+        "exists": true,
+        "size": 101906785
+      },
+      "data/fast/search_lite.json": {
+        "exists": true,
+        "size": 43609207
+      },
+      "data/fast/meta.json": {
+        "exists": true,
+        "size": 4629
+      },
+      "data/fast/poster_wall_v333/manifest.json": {
+        "exists": true,
+        "size": 825
+      },
+      "data/fast/anime_top_manual.json": {
+        "exists": true,
+        "size": 104351
+      },
+      "data/fast/anime_studios_top.json": {
+        "exists": true,
+        "size": 4495
+      },
+      "data/fast/anime_studios_detail.json": {
+        "exists": true,
+        "size": 544207
+      }
+    },
+    "javascript": {
+      "app.js": {
+        "ok": true,
+        "message": "OK"
+      },
+      "features_v344.js": {
+        "ok": true,
+        "message": "OK"
+      },
+      "ai_search_worker_v344.js": {
+        "ok": true,
+        "message": "OK"
+      }
+    },
+    "search": {
+      "ok": true,
+      "count": 94757,
+      "emptyIds": 0,
+      "emptyTitles": 0,
+      "duplicateIds": 0,
+      "duplicateIdExamples": [],
+      "untranslatedTitles": 0,
+      "untranslatedTitleExamples": [],
+      "latinGenres": 0,
+      "latinGenreExamples": [],
+      "types": {
+        "Фильм": 58946,
+        "Сериал": 22406,
+        "Аниме": 10624,
+        "Мультфильм": 1496,
+        "Мультсериал": 1285
+      }
+    },
+    "posterWall": {
+      "ok": true,
+      "manifestTotal": 93985,
+      "manifestVersion": "v3453.1-full-russian",
+      "sourceTotal": 95746,
+      "shards": 22,
+      "rows": 93985,
+      "duplicateIdsInsideKinds": 0,
+      "parseErrors": []
+    },
+    "fastJson": {
+      "checked": 31,
+      "errors": 0,
+      "examples": []
+    },
+    "types": {
+      "Фильм": 58946,
+      "Сериал": 22406,
+      "Аниме": 10624,
+      "Мультфильм": 1496,
+      "Мультсериал": 1285
+    }
+  }
+}
