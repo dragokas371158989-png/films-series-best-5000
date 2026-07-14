@@ -112,19 +112,40 @@ jobs:
           git config user.email "gkm-update-bot@users.noreply.github.com"
 
           echo "Largest generated files before commit:"
-          find data -type f -printf '%s %p\n' \
-            | sort -nr \
-            | head -20 \
-            | awk '{printf "%.2f MiB  %s\n",$1/1024/1024,$2}'
+          python - <<'PY'
+          from pathlib import Path
 
-          too_large="$(
-            find data -type f -size +94M -print
-          )"
-          if [[ -n "$too_large" ]]; then
-            echo "::error::Generated files exceed the 94 MiB safety limit:"
-            echo "$too_large"
-            exit 1
-          fi
+          limit = 94 * 1024 * 1024
+          files = []
+
+          for path in Path("data").rglob("*"):
+              if not path.is_file():
+                  continue
+              try:
+                  size = path.stat().st_size
+              except OSError:
+                  continue
+              files.append((size, path.as_posix()))
+
+          files.sort(reverse=True)
+
+          for size, path in files[:20]:
+              print(f"{size / 1024 / 1024:.2f} MiB  {path}")
+
+          oversized = [
+              (size, path)
+              for size, path in files
+              if size >= limit
+          ]
+
+          if oversized:
+              print("::error::Generated files exceed the 94 MiB safety limit:")
+              for size, path in oversized:
+                  print(f"{size / 1024 / 1024:.2f} MiB  {path}")
+              raise SystemExit(1)
+
+          print("File-size safety gate: PASS")
+          PY
 
           paths=(
             data
@@ -152,6 +173,10 @@ jobs:
             echo "No catalog changes"
             exit 0
           fi
+
+          echo "Staged changes:"
+          git status --short
+          git diff --cached --stat
 
           git commit -m "Auto update catalog V344 safe compact"
 
