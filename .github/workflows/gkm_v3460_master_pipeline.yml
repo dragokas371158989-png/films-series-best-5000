@@ -1,4 +1,4 @@
-name: GKM V3460.3 One-Button Stable Update
+name: GKM V3460.3.3 One-Button Stable Update
 
 on:
   workflow_dispatch:
@@ -186,50 +186,56 @@ jobs:
             LAST_UPDATED_AT="$updated_at"
           }
 
+          dispatch_and_wait() {
+            local sequence="$1"
+            local label="$2"
+            local workflow="$3"
+            local dispatched_at
+
+            dispatched_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+            echo "Dispatching: $label"
+            echo "Workflow: $workflow"
+            echo "Dispatch time: $dispatched_at"
+
+            gh workflow run "$workflow" --ref "$TARGET_BRANCH"
+
+            wait_for_run \
+              "$sequence" \
+              "$label" \
+              "$workflow" \
+              "workflow_dispatch" \
+              "$dispatched_at"
+          }
+
           pipeline_start="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           echo "Master pipeline started at: $pipeline_start"
+          echo "Every stage is explicitly started with workflow_dispatch."
 
-          echo "Dispatching V344 catalog update..."
-          gh workflow run gkm_v344_safe_auto_update.yml --ref "$TARGET_BRANCH"
-
-          wait_for_run \
+          dispatch_and_wait \
             "1" \
             "V344 — обновление каталога" \
-            "gkm_v344_safe_auto_update.yml" \
-            "workflow_dispatch" \
-            "$pipeline_start"
-          stage1_finished="$LAST_UPDATED_AT"
+            "gkm_v344_safe_auto_update.yml"
 
-          wait_for_run \
+          dispatch_and_wait \
             "2" \
             "V3453.1 — возврат русификации" \
-            "gkm_v3453_1_sync_after_update.yml" \
-            "workflow_run" \
-            "$stage1_finished"
-          stage2_finished="$LAST_UPDATED_AT"
+            "gkm_v3453_1_sync_after_update.yml"
 
-          wait_for_run \
+          dispatch_and_wait \
             "3" \
             "V3454 — топ аниме и студии" \
-            "gkm_v3454_rebuild_anime_buttons.yml" \
-            "workflow_run" \
-            "$stage2_finished"
-          stage3_finished="$LAST_UPDATED_AT"
+            "gkm_v3454_rebuild_anime_buttons.yml"
 
-          wait_for_run \
+          dispatch_and_wait \
             "4" \
             "V3460.2 — синхронизация meta.json" \
-            "gkm_v3460_sync_meta.yml" \
-            "workflow_run" \
-            "$stage3_finished"
-          stage4_finished="$LAST_UPDATED_AT"
+            "gkm_v3460_sync_meta.yml"
 
-          wait_for_run \
+          dispatch_and_wait \
             "5" \
             "V3460 — финальная проверка здоровья" \
-            "gkm_v3460_health_audit.yml" \
-            "workflow_run" \
-            "$stage4_finished"
+            "gkm_v3460_health_audit.yml"
 
       - name: Refresh repository after final health commit
         shell: bash
@@ -250,7 +256,7 @@ jobs:
           import json
           from pathlib import Path
 
-          print("### GKM V3460.3 — единое стабильное обновление")
+          print("### GKM V3460.3.3 — единое стабильное обновление")
           print()
 
           report_path=Path("TEST_REPORT_V3460_3_MASTER_PIPELINE.json")
