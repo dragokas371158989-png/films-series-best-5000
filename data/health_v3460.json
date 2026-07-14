@@ -1,9 +1,9 @@
 {
   "version": "V3460.1",
-  "status": "warning",
-  "generatedAt": "2026-07-14T09:11:21.489640+00:00",
-  "commit": "5be43394acd4d4759d04713ec07c76036d7d7a43",
-  "runUrl": "https://github.com/dragokas371158989-png/films-series-best-5000/actions/runs/29320674675",
+  "status": "healthy",
+  "generatedAt": "2026-07-14T10:04:04.871736+00:00",
+  "commit": "7b35a6125968895e2ad7923ac28bf114e2488a4a",
+  "runUrl": "https://github.com/dragokas371158989-png/films-series-best-5000/actions/runs/29323894892",
   "summary": {
     "catalogRecords": 94757,
     "searchLiteRecords": 94757,
@@ -15,7 +15,7 @@
     "latinGenres": 0,
     "duplicateIds": 0,
     "criticalFailures": 0,
-    "warnings": 1
+    "warnings": 0
   },
   "checks": [
     {
@@ -72,7 +72,7 @@
       "name": "Файл data/fast/meta.json",
       "ok": true,
       "level": "critical",
-      "details": "4629 байт"
+      "details": "6810 байт"
     },
     {
       "id": "file:data/fast/poster_wall_v333/manifest.json",
@@ -168,9 +168,9 @@
     {
       "id": "meta:count",
       "name": "Счётчик meta.json",
-      "ok": false,
+      "ok": true,
       "level": "warning",
-      "details": "meta=95746, каталог=94757"
+      "details": "meta=94757, каталог=94757"
     },
     {
       "id": "anime:top",
@@ -254,7 +254,7 @@
       },
       "data/fast/meta.json": {
         "exists": true,
-        "size": 4629
+        "size": 6810
       },
       "data/fast/poster_wall_v333/manifest.json": {
         "exists": true,
