@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows:
-      - GKM V344 Safe Daily Catalog Update
       - GKM V3453.1 Full Russian Site and Genre Fix
       - GKM V3453.1 Sync Russian Cache After Daily Update
     types:
