@@ -1,0 +1,37 @@
+{
+  "version": "V3460.2",
+  "status": "success",
+  "metaPath": "data/fast/meta.json",
+  "filmMetaMirrored": true,
+  "diagnostics": {
+    "catalogCount": 94757,
+    "primaryChunkCount": 94757,
+    "rawCount": 97416,
+    "dedupeRemoved": 2659,
+    "pageSize": 60,
+    "genres": 120,
+    "years": 131,
+    "buckets": {
+      "movies": 58946,
+      "series": 22406,
+      "anime": 10624,
+      "cartoons": 2781,
+      "other": 0
+    },
+    "wallSourceTotal": 95746
+  },
+  "validation": {
+    "tests": {
+      "countMatchesCatalog": true,
+      "allPageCountMatches": true,
+      "allPageSizeValid": true,
+      "allPageTotalValid": true,
+      "genresPresent": true,
+      "genresContainNoLatin": true,
+      "yearsPresent": true,
+      "syncVersionPresent": true
+    },
+    "latinGenreExamples": [],
+    "pass": true
+  }
+}
