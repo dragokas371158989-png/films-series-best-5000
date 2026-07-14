@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Состояние сайта — Голубь Каталог Мира</title>
+  <style>
+    :root{
+      --bg:#050716;
+      --panel:#0c1126;
+      --panel2:#15102d;
+      --line:#42228a;
+      --text:#f5f7ff;
+      --muted:#aab2cf;
+      --ok:#26d980;
+      --warn:#ffbd3d;
+      --bad:#ff4d73;
+      --accent:#29c7ff;
+      --violet:#8249ff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 18% -10%,rgba(130,73,255,.27),transparent 36rem),
+        radial-gradient(circle at 95% 0,rgba(41,199,255,.16),transparent 35rem),
+        var(--bg);
+    }
+    .wrap{width:min(1180px,calc(100% - 28px));margin:0 auto;padding:28px 0 60px}
+    .hero{
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:24px;
+      background:linear-gradient(135deg,rgba(21,16,45,.96),rgba(7,13,31,.96));
+      box-shadow:0 0 45px rgba(91,41,206,.18);
+    }
+    .top{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    h1{font-size:clamp(26px,5vw,46px);margin:0 0 8px}
+    .sub{color:var(--muted);margin:0}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    button,a.btn{
+      border:1px solid #246eaa;
+      border-radius:14px;
+      padding:11px 16px;
+      background:linear-gradient(135deg,var(--violet),var(--accent));
+      color:white;font-weight:800;text-decoration:none;cursor:pointer;
+    }
+    .status{
+      display:inline-flex;align-items:center;gap:10px;
+      margin-top:20px;padding:11px 15px;border-radius:999px;font-weight:900
+    }
+    .status.healthy{background:rgba(38,217,128,.14);color:#72f0b2;border:1px solid rgba(38,217,128,.5)}
+    .status.warning{background:rgba(255,189,61,.13);color:#ffd67d;border:1px solid rgba(255,189,61,.5)}
+    .status.critical{background:rgba(255,77,115,.13);color:#ff8ca5;border:1px solid rgba(255,77,115,.5)}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
+    .metric,.check,.live{
+      border:1px solid rgba(86,63,155,.65);
+      border-radius:17px;background:rgba(10,15,35,.88)
+    }
+    .metric{padding:16px}
+    .metric .v{font-size:27px;font-weight:950}
+    .metric .k{color:var(--muted);font-size:13px;margin-top:5px}
+    h2{margin:30px 0 13px;font-size:23px}
+    .checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .check,.live{padding:14px;display:flex;gap:12px;align-items:flex-start}
+    .dot{width:13px;height:13px;border-radius:50%;margin-top:4px;flex:none;background:var(--warn);box-shadow:0 0 13px currentColor}
+    .check.ok .dot,.live.ok .dot{background:var(--ok)}
+    .check.bad .dot,.live.bad .dot{background:var(--bad)}
+    .name{font-weight:850}
+    .details{color:var(--muted);font-size:13px;margin-top:4px;word-break:break-word}
+    .meta{margin-top:17px;color:var(--muted);font-size:13px}
+    .live-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .loading{opacity:.7}
+    code{color:#7ee4ff}
+    @media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:650px){.checks,.live-grid{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.wrap{width:min(100% - 18px,1180px)}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="top">
+        <div>
+          <h1>Состояние сайта</h1>
+          <p class="sub">Голубь Каталог Мира · V3460 стабильное ядро</p>
+        </div>
+        <div class="actions">
+          <button id="refresh">Проверить сейчас</button>
+          <a class="btn" href="./">Открыть каталог</a>
+        </div>
+      </div>
+      <div id="status" class="status warning">Загрузка отчёта…</div>
+      <div id="metrics" class="grid"></div>
+      <div id="meta" class="meta"></div>
+    </section>
+
+    <h2>Проверки репозитория</h2>
+    <section id="checks" class="checks"></section>
+
+    <h2>Проверки живого сайта</h2>
+    <section id="live" class="live-grid"></section>
+  </main>
+
+  <script>
+    const healthUrl = `data/health_v3460.json?t=${Date.now()}`;
+    const liveTargets = [
+      ["Главная страница", "./"],
+      ["Основной поиск", "data/fast/search_index.json"],
+      ["Топ аниме", "data/fast/anime_top_manual.json"],
+      ["Топ студий", "data/fast/anime_studios_top.json"],
+      ["Карточки студий", "data/fast/anime_studios_detail.json"],
+      ["3D-стена", "data/fast/poster_wall_v333/manifest.json"],
+      ["AI Web Worker", "ai_search_worker_v344.js"],
+      ["Cloudflare-помощник", "https://golub-ai-v340.dragokas371158989.workers.dev/"]
+    ];
+
+    const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[ch]));
+
+    const fmt = n => new Intl.NumberFormat("ru-RU").format(Number(n || 0));
+
+    function renderSnapshot(data){
+      const status = document.getElementById("status");
+      const labels = {
+        healthy:"Сайт исправен",
+        warning:"Есть предупреждения",
+        critical:"Найдены критические ошибки"
+      };
+      status.className = `status ${data.status || "warning"}`;
+      status.textContent = labels[data.status] || data.status;
+
+      const s = data.summary || {};
+      const metrics = [
+        ["Записей", s.catalogRecords],
+        ["3D-стена", s.posterWallRecords],
+        ["Топ аниме", s.animeTopRecords],
+        ["Студий", s.studioRecords],
+        ["Без русского", s.untranslatedTitles],
+        ["Жанры с латиницей", s.latinGenres],
+        ["Дубли ID", s.duplicateIds],
+        ["Критических ошибок", s.criticalFailures],
+      ];
+      document.getElementById("metrics").innerHTML = metrics.map(([key,value]) =>
+        `<article class="metric"><div class="v">${fmt(value)}</div><div class="k">${esc(key)}</div></article>`
+      ).join("");
+
+      document.getElementById("checks").innerHTML = (data.checks || []).map(check =>
+        `<article class="check ${check.ok ? "ok" : "bad"}">
+          <span class="dot"></span>
+          <div>
+            <div class="name">${esc(check.name)}</div>
+            <div class="details">${esc(check.details || "")}</div>
+          </div>
+        </article>`
+      ).join("");
+
+      const date = data.generatedAt ? new Date(data.generatedAt).toLocaleString("ru-RU") : "неизвестно";
+      const commit = data.commit ? data.commit.slice(0, 10) : "нет";
+      document.getElementById("meta").innerHTML =
+        `Отчёт: <b>${esc(date)}</b> · версия: <b>${esc(data.version)}</b> · commit: <code>${esc(commit)}</code>`;
+    }
+
+    async function loadSnapshot(){
+      const response = await fetch(`data/health_v3460.json?t=${Date.now()}`, {cache:"no-store"});
+      if(!response.ok) throw new Error(`health JSON: ${response.status}`);
+      renderSnapshot(await response.json());
+    }
+
+    function liveCard(name){
+      const card = document.createElement("article");
+      card.className = "live loading";
+      card.innerHTML = `<span class="dot"></span><div><div class="name">${esc(name)}</div><div class="details">Проверка…</div></div>`;
+      return card;
+    }
+
+    async function checkLive(){
+      const box = document.getElementById("live");
+      box.innerHTML = "";
+      for(const [name,url] of liveTargets){
+        const card = liveCard(name);
+        box.appendChild(card);
+        try{
+          const response = await fetch(`${url}${url.includes("?") ? "&" : "?"}t=${Date.now()}`, {cache:"no-store"});
+          let extra = "";
+          if(url.includes("workers.dev") && response.ok){
+            try{
+              const payload = await response.clone().json();
+              extra = payload.service ? ` · ${payload.service}` : "";
+            }catch{}
+          }
+          card.className = `live ${response.ok ? "ok" : "bad"}`;
+          card.querySelector(".details").textContent = `${response.status} ${response.statusText}${extra}`;
+        }catch(error){
+          card.className = "live bad";
+          card.querySelector(".details").textContent = error.message || String(error);
+        }
+      }
+    }
+
+    async function refreshAll(){
+      document.getElementById("status").textContent = "Обновление…";
+      try{ await loadSnapshot(); }
+      catch(error){
+        const status = document.getElementById("status");
+        status.className = "status critical";
+        status.textContent = `Нет отчёта: ${error.message}`;
+      }
+      await checkLive();
+    }
+
+    document.getElementById("refresh").addEventListener("click", refreshAll);
+    refreshAll();
+  </script>
+</body>
+</html>
