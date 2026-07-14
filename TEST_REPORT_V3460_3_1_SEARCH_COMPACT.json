@@ -1,0 +1,35 @@
+{
+  "version": "V3460.3.1",
+  "status": "success",
+  "safetyLimitBytes": 98566144,
+  "full": {
+    "records": 96151,
+    "changedRecords": 96151,
+    "emptyIds": 0,
+    "searchCharsBefore": 23774511,
+    "searchCharsAfter": 14825230,
+    "path": "data/fast/search_index.json",
+    "bytesBefore": 108406240,
+    "bytesAfter": 94150698,
+    "savedBytes": 14255542
+  },
+  "lite": {
+    "records": 15000,
+    "changedRecords": 15000,
+    "emptyIds": 0,
+    "searchCharsBefore": 3855502,
+    "searchCharsAfter": 2872500,
+    "path": "data/fast/search_lite.json",
+    "bytesBefore": 18188819,
+    "bytesAfter": 16581581,
+    "savedBytes": 1607238
+  },
+  "tests": {
+    "fullIndexValid": true,
+    "liteIndexValid": true,
+    "fullIndexBelowSafetyLimit": true,
+    "liteNotLargerThanFull": true,
+    "fullIdsPresent": true,
+    "searchHelperPresent": true
+  }
+}
