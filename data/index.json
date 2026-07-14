@@ -1,6 +1,6 @@
 {
   "version": "v339-safe-auto-update-complete-workflow-2026-07-12",
-  "total": 98990,
+  "total": 99586,
   "chunkSize": 500,
   "chunks": [
     "data/chunk_0001.json",
@@ -200,8 +200,10 @@
     "data/chunk_0195.json",
     "data/chunk_0196.json",
     "data/chunk_0197.json",
-    "data/chunk_0198.json"
+    "data/chunk_0198.json",
+    "data/chunk_0199.json",
+    "data/chunk_0200.json"
   ],
-  "updatedAt": "2026-07-14T19:39:34Z",
+  "updatedAt": "2026-07-14T20:18:04Z",
   "source": "kinopoisk.dev safe append-only"
 }
