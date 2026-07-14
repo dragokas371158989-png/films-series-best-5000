@@ -1,0 +1,122 @@
+name: GKM V3460.2 Sync Catalog Metadata
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - GKM V3454 Rebuild Anime Top and Studios
+    types:
+      - completed
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v3460-2-sync-catalog-metadata
+  cancel-in-progress: true
+
+jobs:
+  sync-meta:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Synchronize meta.json with the live catalog
+        run: python tools/gkm_v3460_sync_meta.py
+
+      - name: Validate synchronized metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          rows=json.loads(
+              Path("data/fast/search_index.json").read_text(encoding="utf-8")
+          )
+          meta=json.loads(
+              Path("data/fast/meta.json").read_text(encoding="utf-8")
+          )
+          report=json.loads(
+              Path("TEST_REPORT_V3460_2_META_SYNC.json").read_text(encoding="utf-8")
+          )
+
+          assert meta["count"] == len(rows), (meta["count"],len(rows))
+          assert meta["pages"]["all"]["count"] == len(rows)
+          assert meta["metaSyncVersion"] == "V3460.2"
+          assert report["validation"]["pass"] is True, report
+          print("V3460.2 metadata validation: PASS")
+          print("Catalog records:",len(rows))
+          print("meta.json count:",meta["count"])
+          PY
+
+      - name: Commit synchronized metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gkm-v3460-2-meta-bot"
+          git config user.email "gkm-v3460-2-meta-bot@users.noreply.github.com"
+
+          git add \
+            data/fast/meta.json \
+            tools/gkm_v3460_sync_meta.py \
+            .github/workflows/gkm_v3460_sync_meta.yml \
+            .github/workflows/gkm_v3460_health_audit.yml \
+            TEST_REPORT_V3460_2_META_SYNC.json
+
+          if [ -f film/data/fast/meta.json ]; then
+            git add film/data/fast/meta.json
+          fi
+
+          if git diff --cached --quiet; then
+            echo "Metadata is already synchronized"
+            exit 0
+          fi
+
+          git commit -m "Apply V3460.2 synchronize catalog metadata"
+
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            git push origin HEAD:main && exit 0
+            sleep 6
+          done
+          exit 1
+
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+
+          path=Path("TEST_REPORT_V3460_2_META_SYNC.json")
+          if not path.exists():
+              print("### GKM V3460.2 report was not generated")
+              raise SystemExit()
+
+          report=json.loads(path.read_text(encoding="utf-8"))
+          d=report["diagnostics"]
+          print("### GKM V3460.2 Metadata Sync")
+          print()
+          print(f"- Catalog: **{d['catalogCount']}**")
+          print(f"- meta.json: **{d['catalogCount']}**")
+          print(f"- Genres: **{d['genres']}**")
+          print(f"- Years: **{d['years']}**")
+          print(f"- Status: **{report['status']}**")
+          PY
