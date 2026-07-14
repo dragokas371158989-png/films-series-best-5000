@@ -68,6 +68,9 @@ jobs:
       - name: Maintain search lite and SEO
         run: python tools/gkm_v344_maintenance.py --mode fast
 
+      - name: Keep search indexes below GitHub file limit
+        run: python tools/gkm_v3460_compact_search_index.py
+
       - name: Validate generated data and code
         run: |
           python tools/gkm_v339_safe_auto_update.py --validate-only
@@ -89,23 +92,88 @@ jobs:
           assert 0 < int(wall.get('total') or 0) <= len(search)
           assert wall.get('version', '').startswith('v344-')
           assert int(wall.get('sourceTotal') or 0) == len(search)
+          full_size = Path('data/fast/search_index.json').stat().st_size
+          lite_size = Path('data/fast/search_lite.json').stat().st_size
+          assert full_size < 94 * 1024 * 1024, full_size
+          assert lite_size <= full_size, (lite_size, full_size)
           print('count:', len(search))
           print('search_lite:', len(lite))
           print('wall:', wall.get('total'))
+          print('search_index_bytes:', full_size)
+          print('search_lite_bytes:', lite_size)
           PY
 
       - name: Commit updated catalog
+        shell: bash
         run: |
+          set -euo pipefail
+
           git config user.name "gkm-update-bot"
           git config user.email "gkm-update-bot@users.noreply.github.com"
-          git add data tools/build_fast_site_data.py tools/gkm_v339_safe_auto_update.py tools/gkm_v344_build_poster_wall.py tools/gkm_v344_maintenance.py .github/workflows/gkm_v344_safe_auto_update.yml TEST_REPORT_V344_MAINTENANCE.json
+
+          echo "Largest generated files before commit:"
+          find data -type f -printf '%s %p\n' \
+            | sort -nr \
+            | head -20 \
+            | awk '{printf "%.2f MiB  %s\n",$1/1024/1024,$2}'
+
+          too_large="$(
+            find data -type f -size +94M -print
+          )"
+          if [[ -n "$too_large" ]]; then
+            echo "::error::Generated files exceed the 94 MiB safety limit:"
+            echo "$too_large"
+            exit 1
+          fi
+
+          paths=(
+            data
+            tools/build_fast_site_data.py
+            tools/gkm_v339_safe_auto_update.py
+            tools/gkm_v344_build_poster_wall.py
+            tools/gkm_v344_maintenance.py
+            tools/gkm_v3460_compact_search_index.py
+            .github/workflows/gkm_v344_safe_auto_update.yml
+          )
+
+          optional=(
+            TEST_REPORT_V344_MAINTENANCE.json
+            TEST_REPORT_V3460_3_1_SEARCH_COMPACT.json
+          )
+
+          git add -- "${paths[@]}"
+          for path in "${optional[@]}"; do
+            if [[ -e "$path" ]]; then
+              git add -- "$path"
+            fi
+          done
+
           if git diff --cached --quiet; then
             echo "No catalog changes"
             exit 0
           fi
-          git commit -m "Auto update catalog V344 safe"
-          for i in 1 2 3; do
-            git pull --rebase origin main && git push origin main && exit 0
-            sleep 6
+
+          git commit -m "Auto update catalog V344 safe compact"
+
+          for attempt in 1 2 3 4 5; do
+            echo "Push attempt $attempt/5"
+
+            git fetch origin main
+
+            if ! git rebase origin/main; then
+              echo "::error::Rebase conflict while publishing catalog update"
+              git status --short || true
+              git rebase --abort || true
+              exit 1
+            fi
+
+            if git push origin HEAD:main; then
+              echo "Catalog update published successfully"
+              exit 0
+            fi
+
+            sleep $((attempt * 8))
           done
+
+          echo "::error::Could not push catalog update after 5 attempts"
           exit 1
