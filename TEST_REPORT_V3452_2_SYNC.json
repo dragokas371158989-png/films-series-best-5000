@@ -4,12 +4,14 @@
   "stats": {
     "official_cache_items": 5917,
     "official_mapped_ids": 7974,
-    "items_updated": 23749,
-    "json_files_checked": 389,
-    "json_files_changed": 7,
+    "json_files_checked": 404,
+    "items_updated": 21276,
+    "json_files_changed": 5,
+    "wall_rows_updated": 443,
     "wall_files_checked": 23,
+    "wall_files_changed": 3,
     "html_pages_checked": 738,
-    "html_pages_changed": 738
+    "html_pages_changed": 3
   },
   "controlTitles": {
     "mal_1002": {
