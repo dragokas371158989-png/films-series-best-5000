@@ -38,6 +38,9 @@ jobs:
       - name: Reapply completed Russian caches
         run: python tools/gkm_v3453_1_sync_after_update.py
 
+      - name: Compact rebuilt search indexes
+        run: python tools/gkm_v3460_compact_search_index.py
+
       - name: Validate and commit synchronized site
         shell: bash
         run: |
@@ -50,8 +53,55 @@ jobs:
           )
           stats=report["stats"]
           assert stats["untranslated_titles_after"] == 0
+          assert stats["untranslated_descriptions_after"] == 0
           assert stats["english_genres_after"] == 0
           assert stats["duplicate_ids_after"] == 0
+
+          full=Path("data/fast/search_index.json")
+          lite=Path("data/fast/search_lite.json")
+          limit=94 * 1024 * 1024
+
+          assert full.exists() and full.stat().st_size < limit, full.stat().st_size
+          assert lite.exists() and lite.stat().st_size < limit, lite.stat().st_size
+
+          print("Russian synchronization validation: PASS")
+          print("search_index:",round(full.stat().st_size/1024/1024,2),"MiB")
+          print("search_lite:",round(lite.stat().st_size/1024/1024,2),"MiB")
+          PY
+
+          echo "Largest files after Russian synchronization:"
+          python - <<'PY'
+          from pathlib import Path
+
+          limit=94 * 1024 * 1024
+          files=[]
+
+          for root in ("data","film","anime-tv"):
+              base=Path(root)
+              if not base.exists():
+                  continue
+              for path in base.rglob("*"):
+                  if not path.is_file():
+                      continue
+                  try:
+                      size=path.stat().st_size
+                  except OSError:
+                      continue
+                  files.append((size,path.as_posix()))
+
+          files.sort(reverse=True)
+
+          for size,path in files[:20]:
+              print(f"{size/1024/1024:.2f} MiB  {path}")
+
+          oversized=[(size,path) for size,path in files if size >= limit]
+          if oversized:
+              print("::error::Files exceed the 94 MiB safety limit:")
+              for size,path in oversized:
+                  print(f"{size/1024/1024:.2f} MiB  {path}")
+              raise SystemExit(1)
+
+          print("Russian synchronization file-size gate: PASS")
           PY
 
           git config user.name "gkm-v3453-1-sync-bot"
@@ -63,6 +113,7 @@ jobs:
           # The localization script also updates root-level derived JSON files.
           # Stage every generated repository change so rebase never sees leftovers.
           git add -A
+          git add tools/gkm_v3460_compact_search_index.py
 
           if git diff --cached --quiet; then
             echo "Already synchronized"
