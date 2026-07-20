@@ -1,6 +1,4 @@
-const GKM_BUILD_VERSION = "344";
-const GKM_APP_CLEAN_VERSION = "v344-cleanup-seo-workflow-ai-cards-2026-07-12";
-window.GKM_V344_CLEANUP_SEO_WORKFLOW_AI_CARDS_VERSION = GKM_APP_CLEAN_VERSION;
+const GKM_APP_CLEAN_VERSION = "v232-disabled-v144-kinopoisk-only-auto-catalog-2026-06-24";
 window.GKM_V144_KINOPOISK_AUTO_CATALOG_VERSION = "v232-disabled-v144-kinopoisk-only-auto-catalog-2026-06-24";
 window.GKM_V136_SAFE_ANIME_TITLE_FIX_VERSION = "v136-safe-anime-franchise-title-fix-2026-06-24";
 window.GKM_V137_SAFE_ALL_FRANCHISE_TITLE_FIX_VERSION = "v137-safe-all-franchise-title-fix-2026-06-24";
@@ -171,8 +169,7 @@ function setStatus(text) {
 }
 
 async function fetchJson(url, cache = "force-cache") {
-  const sep = String(url).includes("?") ? "&" : "?";
-  const res = await fetch(`${url}${sep}v=${GKM_BUILD_VERSION}`, { cache });
+  const res = await fetch(`${url}?v=135`, { cache });
   if (!res.ok) throw new Error(`${url} ${res.status}`);
   return res.json();
 }
@@ -1015,17 +1012,15 @@ async function loadFastPage(tab, page = 1) {
 
 function makeSearchWorker() {
   if (searchWorker) return searchWorker;
-  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=${GKM_BUILD_VERSION}`, window.location.href).href;
-  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=${GKM_BUILD_VERSION}`, window.location.href).href;
+  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=249`, window.location.href).href;
+  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=249`, window.location.href).href;
   const absoluteShardBase = new URL(`${SEARCH_SHARDS_BASE}/`, window.location.href).href;
   const code = `
     const SEARCH_LITE_URL = ${JSON.stringify(absoluteSearchLiteUrl)};
     const SEARCH_FULL_URL = ${JSON.stringify(absoluteSearchFullUrl)};
     const SHARD_BASE = ${JSON.stringify(absoluteShardBase)};
     const PAGE_SIZE = ${PAGE_SIZE};
-    const GKM_BUILD_VERSION = ${JSON.stringify(GKM_BUILD_VERSION)};
     let indexPromise = null;
-    let fullIndexPromise = null;
     const shardPromises = new Map();
     let rows = [];
     let animeTopCache = null;
@@ -1303,14 +1298,13 @@ function makeSearchWorker() {
         rows.sort((a,b)=>(votes9000000Score(b.item)-votes9000000Score(a.item))||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)||pr(a,b)||Number(year(b.item)||0)-Number(year(a.item)||0));
       }
     }
-    async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return loadFullIndex();});return indexPromise;}
-    async function loadFullIndex(){if(!fullIndexPromise)fullIndexPromise=fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("search_index "+r.status);return r.json();});return fullIndexPromise;}
+    async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
-    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v="+GKM_BUILD_VERSION;shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
-    async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out.length?out:loadIndex();}
+    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=249";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
+    async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
     function buildRows(index, c, queries){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
-    self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page,msg.controls&&msg.controls.tab),ms:0,cached:true});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const queries=queryList(c.q);let index=[];let fallback=false;let cached=false;if(c.tab==="anime_top"&&!queries.length&&animeTopCache){rows=animeTopCache.slice();cached=true;}else{index=await candidateIndex(queries);rows=buildRows(index,c,queries);if(queries.length&&rows.length===0){index=await loadFullIndex();rows=buildRows(index,c,queries);fallback=true;}sortRows(c.sort||"smart",Boolean(queries.length),c.tab,c.cleanTrash);if(c.tab==="anime_top"){rows=rows.slice(0,100);animeTopCache=rows.slice();}}self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1,c.tab),ms:Date.now()-started,indexTotal:index.length||rows.length,indexPosters:index.length?index.reduce((n,x)=>n+poster(x),0):rows.reduce((n,x)=>n+poster(x.item||x),0),sharded:Boolean(queries.length),fallback,cached});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
+    self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page,msg.controls&&msg.controls.tab),ms:0,cached:true});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const queries=queryList(c.q);let index=[];let fallback=false;let cached=false;if(c.tab==="anime_top"&&!queries.length&&animeTopCache){rows=animeTopCache.slice();cached=true;}else{index=await candidateIndex(queries);rows=buildRows(index,c,queries);if(queries.length&&rows.length===0){index=await loadIndex();rows=buildRows(index,c,queries);fallback=true;}sortRows(c.sort||"smart",Boolean(queries.length),c.tab,c.cleanTrash);if(c.tab==="anime_top"){rows=rows.slice(0,100);animeTopCache=rows.slice();}}self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1,c.tab),ms:Date.now()-started,indexTotal:index.length||rows.length,indexPosters:index.length?index.reduce((n,x)=>n+poster(x),0):rows.reduce((n,x)=>n+poster(x.item||x),0),sharded:Boolean(queries.length),fallback,cached});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
   `;
   searchWorker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
   searchWorker.onmessage = event => {
@@ -1667,29 +1661,7 @@ function setLink(id, url) {
   if (node) node.href = url;
 }
 
-window.GKM_OPEN_DETAILS_BEFORE_HOOKS = window.GKM_OPEN_DETAILS_BEFORE_HOOKS || [];
-window.GKM_OPEN_DETAILS_AFTER_HOOKS = window.GKM_OPEN_DETAILS_AFTER_HOOKS || [];
-window.GKM_registerOpenDetailsHook = function registerOpenDetailsHook(handler, options = {}) {
-  if (typeof handler !== "function") return false;
-  const phase = options.phase === "before" ? "before" : "after";
-  const list = phase === "before" ? window.GKM_OPEN_DETAILS_BEFORE_HOOKS : window.GKM_OPEN_DETAILS_AFTER_HOOKS;
-  const id = String(options.id || handler.name || `hook-${list.length + 1}`);
-  if (list.some(entry => entry.id === id)) return false;
-  list.push({ id, handler });
-  return true;
-};
-
 function openDetails(item) {
-  let resolvedItem = item;
-  for (const entry of window.GKM_OPEN_DETAILS_BEFORE_HOOKS) {
-    try {
-      const next = entry.handler(resolvedItem);
-      if (next && typeof next === "object") resolvedItem = next;
-    } catch (error) {
-      console.warn("GKM openDetails before hook failed", entry.id, error);
-    }
-  }
-  item = resolvedItem;
   selectedItem = item;
   const id = String(item.id || `${titleOf(item)}|${getYear(item)}`);
   const history = (() => {
@@ -1736,8 +1708,8 @@ function openDetails(item) {
   setLink("rutubeLink", `https://rutube.ru/search/?query=${q}`);
   setLink("googleLink", `https://www.google.com/search?q=${q}`);
 
-  if (window.GKM_V326_APPLY_MODAL_EXTERNAL_LINKS) {
-    window.GKM_V326_APPLY_MODAL_EXTERNAL_LINKS(item);
+  if (window.GKM_V199_APPLY_MODAL_EXTERNAL_LINKS) {
+    window.GKM_V199_APPLY_MODAL_EXTERNAL_LINKS(item);
   }
 
   const favBtn = $("favBtn");
@@ -1756,18 +1728,7 @@ function openDetails(item) {
   renderRelated(item);
   if (dialog && typeof dialog.showModal === "function") dialog.showModal();
   else if (dialog) dialog.setAttribute("open", "open");
-
-  for (const entry of window.GKM_OPEN_DETAILS_AFTER_HOOKS) {
-    try {
-      const result = entry.handler(item);
-      if (result && typeof result.catch === "function") result.catch(error => console.warn("GKM openDetails async hook failed", entry.id, error));
-    } catch (error) {
-      console.warn("GKM openDetails after hook failed", entry.id, error);
-    }
-  }
 }
-
-window.openDetails = openDetails;
 
 function franchiseKey(item) {
   const raw = norm([titleOf(item), item.ru, item.en].join(" "));
@@ -2044,4 +2005,11636 @@ window.GKM_V131_STATIC_ANIME_TOP_FAST_EOF_LOCK_VERSION = "v131-static-anime-top-
 window.GKM_V133_MISSING_TOP_FILE_FIX_VERSION = "v133-missing-anime-top-file-fix-2026-06-24";
 console.log("GKM: v133-missing-anime-top-file-fix-2026-06-24");
 
-/* Optional and legacy-compatible features continue in features_v344.js. */
+/* === GKM V138 LOCAL HELPER WORKING === */
+window.GKM_V138_LOCAL_HELPER_VERSION = "v138-local-helper-working-2026-06-24";
+window.GKM_V139_HELPER_GETRUTITLE_FIX_VERSION = "v139-helper-getrutitle-fix-2026-06-24";
+window.GKM_V140_HELPER_VOTESOF_FIX_VERSION = "v140-helper-votesof-fix-2026-06-24";
+window.GKM_V141_HELPER_GREETING_FIX_VERSION = "v141-helper-greeting-no-random-list-2026-06-24";
+
+function gkmHelperReady(fn) {
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn, { once: true });
+  else fn();
+}
+
+function gkmHelperAddMessage(role, text) {
+  const box = document.getElementById("gkmAiMessages");
+  if (!box) return;
+  const div = document.createElement("div");
+  div.className = "ai-msg " + (role === "user" ? "ai-user" : "ai-bot");
+  div.innerHTML = escapeHtml(text).replace(/\n/g, "<br>");
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function gkmHelperNormalizeText(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/ё/g, "е")
+    .replace(/[«»"'`]/g, "")
+    .replace(/[^a-zа-я0-9\s:.-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function gkmHelperVisiblePool() {
+  const pool = [];
+  const seen = new Set();
+  function add(item) {
+    if (!item || typeof item !== "object") return;
+    const key = String(item.id || titleOf(item) + "|" + getYear(item));
+    if (seen.has(key)) return;
+    seen.add(key);
+    pool.push(item);
+  }
+  try { (currentItems || []).forEach(add); } catch {}
+  try {
+    Object.values(homeData || {}).forEach(v => {
+      if (Array.isArray(v)) v.forEach(add);
+      else if (v && Array.isArray(v.items)) v.items.forEach(add);
+    });
+  } catch {}
+  return pool;
+}
+
+function gkmHelperFormatList(items) {
+  return items.slice(0, 8).map((it, idx) => {
+    const title = displayTitle(it) || titleOf(it) || "Без названия";
+    const year = getYear(it) || "—";
+    const rating = ratingOf(it) || "—";
+    return `${idx + 1}. ${title} (${year}) — ★ ${rating}`;
+  }).join("\n");
+}
+
+function gkmHelperPickByWords(words, limit = 8) {
+  const q = gkmHelperNormalizeText(words);
+  const tokens = q.split(" ").filter(Boolean).filter(t => t.length >= 3);
+  if (!tokens.length) return [];
+  const pool = gkmHelperVisiblePool();
+  const scored = pool.map(it => {
+    const txt = gkmHelperNormalizeText([
+      displayTitle(it), titleOf(it), it.title_en, it.original_title, it.name, it.overview,
+      Array.isArray(it.genres) ? it.genres.join(" ") : it.genres
+    ].join(" "));
+    let matchScore = 0;
+    tokens.forEach(t => { if (txt.includes(t)) matchScore += t.length >= 4 ? 3 : 1; });
+    if (matchScore <= 0) return { it, score: 0 };
+    let score = matchScore * 10;
+    score += Math.min(10, Math.log10((votesOf(it) || 0) + 1));
+    score += Number(ratingOf(it) || 0) / 2;
+    return { it, score };
+  }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).map(x => x.it);
+  return scored.slice(0, limit);
+}
+
+function gkmHelperIsGreeting(q) {
+  return /^(привет|прив|здарова|здорово|ку|хай|hello|hi|добрый день|добрый вечер|доброе утро)$/i.test(String(q || "").trim());
+}
+
+function gkmHelperAnswer(raw) {
+  const q = gkmHelperNormalizeText(raw);
+  if (!q) return "Напиши, что хочется посмотреть: жанр, настроение или пример тайтла.";
+
+  if (gkmHelperIsGreeting(q)) {
+    return "Привет! Я помогу подобрать фильм, сериал, аниме или мультфильм. Напиши, что хочется: например «мрачное аниме», «фильм на вечер», «как Наруто», «топ студий» или «порядок просмотра Блич».";
+  }
+
+  if (q.includes("топ студ")) {
+    try { renderAnimeStudiosTop(); } catch {}
+    return "Открыл раздел «Топ студий». Там можно смотреть студии и их аниме.";
+  }
+
+  if (q.includes("топ аним") || q.includes("лучшие аним")) {
+    try { renderAnimeTopManual(1); } catch {}
+    return "Открыл «Топ аниме 100». Это твой ручной список, отсортированный по голосам.";
+  }
+
+  if (q.includes("интерстел") || q.includes("космос")) {
+    const items = gkmHelperPickByWords("космос фантастика драма interstellar space sci-fi", 6);
+    return items.length ? "Вот что можно попробовать в таком духе:\n" + gkmHelperFormatList(items) : "Попробуй: Интерстеллар, Начало, Прибытие, Марсианин, Гравитация.";
+  }
+
+  if (q.includes("наруто")) {
+    const items = gkmHelperPickByWords("naruto нaруто shippuden ninja боевые искусства приключения", 8);
+    return items.length ? "Похоже на Наруто / из этой темы:\n" + gkmHelperFormatList(items) : "Попробуй: Наруто, Наруто: Ураганные хроники, Блич, Ван-Пис, Магическая битва, Чёрный клевер.";
+  }
+
+  if (q.includes("вечер") || q.includes("посмотреть") || q.includes("посовет")) {
+    const items = gkmHelperPickByWords(q + " популярное драма боевик приключения", 8);
+    return items.length ? "Я бы выбрал вот это:\n" + gkmHelperFormatList(items) : "Скажи жанр: аниме, фильм, сериал, драма, фантастика, комедия, жёсткое или лёгкое.";
+  }
+
+  const items = gkmHelperPickByWords(q, 8);
+  if (items.length) return "Нашёл подходящие варианты:\n" + gkmHelperFormatList(items);
+
+  return "Пока не понял запрос. Напиши проще, например: «аниме как Наруто», «фильм вечером», «топ студий», «мрачное аниме».";
+}
+
+
+
+/* === GKM V142 HELPER INTENT FIX === */
+window.GKM_V142_HELPER_INTENT_FIX_VERSION = "v142-helper-intent-no-random-results-2026-06-24";
+
+function gkmHelperItemType(item) {
+  try { return getType(item); } catch { return String(item && (item.type || item.category) || ""); }
+}
+
+function gkmHelperIsAnimeQuery(q) {
+  return /(^|\s)(аниме|анимэ|anime)(\s|$)/i.test(String(q || ""));
+}
+
+function gkmHelperIsFilmQuery(q) {
+  return /(^|\s)(фильм|кино|movie|film)(\s|$)/i.test(String(q || ""));
+}
+
+function gkmHelperIsSeriesQuery(q) {
+  return /(^|\s)(сериал|series|show)(\s|$)/i.test(String(q || ""));
+}
+
+function gkmHelperCleanCandidate(item) {
+  if (!item) return false;
+  const y = Number(getYear(item) || 0);
+  const currentYear = new Date().getFullYear();
+  if (y && y > currentYear) return false;
+  const title = gkmHelperNormalizeText([displayTitle(item), titleOf(item), item.title_en, item.original_title].join(" "));
+  const banned = ["fan letter", "recap", "summary", "preview", "trailer", "teaser", "music video", "soundtrack", "stage play", "concert", "фан письмо", "рекап", "трейлер", "превью"];
+  return !banned.some(x => title.includes(x));
+}
+
+function gkmHelperPickPopularByType(type, limit = 8) {
+  const pool = gkmHelperVisiblePool();
+  return pool
+    .filter(it => !type || gkmHelperItemType(it) === type)
+    .filter(gkmHelperCleanCandidate)
+    .sort((a, b) => (votesOf(b) - votesOf(a)) || (ratingOf(b) - ratingOf(a)) || (Number(getYear(b)||0) - Number(getYear(a)||0)))
+    .slice(0, limit);
+}
+
+function gkmHelperPickByWords(words, limit = 8, opts = {}) {
+  const q = gkmHelperNormalizeText(words);
+  const type = opts.type || "";
+  const tokens = q.split(" ").filter(Boolean).filter(t => t.length >= 3);
+  if (!tokens.length && !type) return [];
+  const weakWords = new Set(["подбери", "подобрать", "посоветуй", "посмотреть", "вечером", "вечер", "хочу", "что", "мне", "дай", "это"]);
+  const strongTokens = tokens.filter(t => !weakWords.has(t));
+  if (!strongTokens.length && type) return gkmHelperPickPopularByType(type, limit);
+  if (!strongTokens.length) return [];
+  const pool = gkmHelperVisiblePool();
+  const scored = pool.map(it => {
+    if (type && gkmHelperItemType(it) !== type) return { it, score: 0 };
+    if (!gkmHelperCleanCandidate(it)) return { it, score: 0 };
+    const txt = gkmHelperNormalizeText([
+      displayTitle(it), titleOf(it), it.title_en, it.original_title, it.name, it.overview,
+      Array.isArray(it.genres) ? it.genres.join(" ") : it.genres
+    ].join(" "));
+    let matchScore = 0;
+    strongTokens.forEach(t => {
+      if (txt.includes(t)) matchScore += t.length >= 5 ? 4 : 2;
+    });
+    if (matchScore <= 0) return { it, score: 0 };
+    let score = matchScore * 10;
+    score += Math.min(12, Math.log10((votesOf(it) || 0) + 1));
+    score += Number(ratingOf(it) || 0) / 2;
+    return { it, score };
+  }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).map(x => x.it);
+  return scored.slice(0, limit);
+}
+
+function gkmHelperAnswer(raw) {
+  const q = gkmHelperNormalizeText(raw);
+  if (!q) return "Напиши, что хочется посмотреть: фильм, сериал, аниме, жанр или пример тайтла.";
+
+  if (gkmHelperIsGreeting(q)) {
+    return "Привет! Я помогу подобрать фильм, сериал, аниме или мультфильм. Напиши, например: «подбери фильм», «посоветуй аниме», «как Наруто», «топ аниме», «топ студий».";
+  }
+
+  if (q.includes("топ студ")) {
+    try { renderAnimeStudiosTop(); } catch {}
+    return "Открыл раздел «Топ студий». Кликни на студию, чтобы увидеть все её аниме.";
+  }
+
+  if (q.includes("топ аним") || q.includes("лучшие аним")) {
+    try { renderAnimeTopManual(1); } catch {}
+    return "Открыл «Топ аниме 100». Там твой список, отсортированный по голосам.";
+  }
+
+  if (q.includes("интерстел") || q.includes("космос")) {
+    const items = gkmHelperPickByWords("космос фантастика драма interstellar space sci-fi", 6, { type: "Фильм" });
+    return items.length ? "В духе космоса/фантастики:\n" + gkmHelperFormatList(items) : "Попробуй: Интерстеллар, Начало, Прибытие, Марсианин, Гравитация.";
+  }
+
+  if (q.includes("наруто")) {
+    const items = gkmHelperPickByWords("naruto shippuden ninja боевые искусства приключения", 8, { type: "Аниме" });
+    return items.length ? "Похоже на Наруто или из этой темы:\n" + gkmHelperFormatList(items) : "Попробуй: Наруто, Наруто: Ураганные хроники, Блич, Ван-Пис, Магическая битва, Чёрный клевер.";
+  }
+
+  if (gkmHelperIsAnimeQuery(q)) {
+    const items = gkmHelperPickByWords(q, 8, { type: "Аниме" });
+    const list = items.length ? items : gkmHelperPickPopularByType("Аниме", 8);
+    return list.length ? "Вот популярные аниме:\n" + gkmHelperFormatList(list) : "Скажи жанр аниме: экшен, драма, романтика, мистика, спорт или что-то как Наруто.";
+  }
+
+  if (gkmHelperIsFilmQuery(q) || q.includes("вечер")) {
+    const items = gkmHelperPickByWords(q, 8, { type: "Фильм" });
+    const list = items.length ? items : gkmHelperPickPopularByType("Фильм", 8);
+    return list.length ? "Вот фильмы, которые можно посмотреть:\n" + gkmHelperFormatList(list) : "Скажи жанр фильма: фантастика, боевик, драма, комедия, ужасы.";
+  }
+
+  if (gkmHelperIsSeriesQuery(q)) {
+    const items = gkmHelperPickByWords(q, 8, { type: "Сериал" });
+    const list = items.length ? items : gkmHelperPickPopularByType("Сериал", 8);
+    return list.length ? "Вот сериалы, которые можно посмотреть:\n" + gkmHelperFormatList(list) : "Скажи жанр сериала: детектив, драма, фантастика, комедия.";
+  }
+
+  if (q.includes("посовет") || q.includes("подбери") || q.includes("посмотреть")) {
+    return "Уточни, что подобрать: фильм, сериал или аниме? Например: «подбери фильм фантастику» или «посоветуй мрачное аниме».";
+  }
+
+  const items = gkmHelperPickByWords(q, 8);
+  if (items.length) return "Нашёл подходящие варианты:\n" + gkmHelperFormatList(items);
+
+  return "Пока не понял запрос. Напиши проще: «подбери фильм», «посоветуй аниме», «как Наруто», «топ студий».";
+}
+
+console.log("GKM:", window.GKM_V142_HELPER_INTENT_FIX_VERSION);
+
+function setupGkmLocalHelper() {
+  const floatBtn = document.getElementById("gkmAiFloatBtn");
+  const dialog = document.getElementById("gkmAiDialog");
+  const closeBtn = document.getElementById("gkmAiCloseBtn");
+  const form = document.getElementById("gkmAiForm");
+  const input = document.getElementById("gkmAiInput");
+  if (!floatBtn || !dialog || !form || !input) return;
+
+  floatBtn.onclick = () => {
+    if (typeof dialog.showModal === "function") dialog.showModal();
+    else dialog.setAttribute("open", "");
+    setTimeout(() => input.focus(), 50);
+  };
+  if (closeBtn) closeBtn.onclick = () => dialog.close ? dialog.close() : dialog.removeAttribute("open");
+
+  document.querySelectorAll("[data-ai-prompt]").forEach(btn => {
+    btn.onclick = () => {
+      input.value = btn.dataset.aiPrompt || "";
+      form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+    };
+  });
+
+  form.onsubmit = (event) => {
+    event.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = "";
+    gkmHelperAddMessage("user", text);
+    setTimeout(() => gkmHelperAddMessage("bot", gkmHelperAnswer(text)), 120);
+  };
+}
+
+gkmHelperReady(setupGkmLocalHelper);
+console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
+
+/* GKM V174 FAST CLEAN FRANCHISES START */
+(function () {
+  "use strict";
+
+  window.GKM_V174_FAST_CLEAN_FRANCHISES_VERSION = "v174-fast-clean-franchises-no-garbage-2026-06-24";
+
+  // V174: убрал тяжёлую "полную базу франшизы".
+  // Больше НЕ грузим все chunk-файлы и НЕ собираем мусор по словам Predator / Alien / Naruto.
+  // Франшиза = быстрый понятный порядок просмотра + кнопки "Найти эту часть" и "Открыть обычным поиском".
+
+  const FRANCHISES = [
+    {
+      key: "naruto",
+      title: "Наруто",
+      query: "наруто",
+      note: "Порядок без мусора. Сначала сериал, потом фильмы, потом Shippuden, The Last и Boruto.",
+      order: [
+        ["Наруто", "наруто"],
+        ["Наруто: Битва ниндзя в Стране Снега", "наруто страна снега"],
+        ["Наруто: Легенда о камне Гелела", "наруто камень гелела"],
+        ["Наруто: Стражи королевства Полумесяца", "наруто полумесяц"],
+        ["Наруто: Ураганные хроники", "наруто ураганные хроники"],
+        ["Наруто: Ураганные хроники — Фильм", "наруто ураганные хроники фильм"],
+        ["Наруто: Узы", "наруто узы"],
+        ["Наруто: Наследники воли огня", "наруто наследники воли огня"],
+        ["Наруто: Потерянная башня", "наруто потерянная башня"],
+        ["Наруто: Кровавая тюрьма", "наруто кровавая тюрьма"],
+        ["Наруто: Путь ниндзя", "наруто путь ниндзя"],
+        ["Последний: Наруто. Фильм", "последний наруто фильм"],
+        ["Боруто", "боруто"]
+      ]
+    },
+    {
+      key: "mcu",
+      title: "Мстители / MCU",
+      query: "мстители",
+      note: "Основная линия MCU. Это порядок просмотра, а не грязный поиск всей базы.",
+      order: [
+        ["Железный человек", "железный человек"],
+        ["Невероятный Халк", "невероятный халк"],
+        ["Железный человек 2", "железный человек 2"],
+        ["Тор", "тор"],
+        ["Первый мститель", "первый мститель"],
+        ["Мстители", "мстители"],
+        ["Железный человек 3", "железный человек 3"],
+        ["Тор 2: Царство тьмы", "тор царство тьмы"],
+        ["Первый мститель: Другая война", "первый мститель другая война"],
+        ["Стражи Галактики", "стражи галактики"],
+        ["Мстители: Эра Альтрона", "мстители эра альтрона"],
+        ["Первый мститель: Противостояние", "первый мститель противостояние"],
+        ["Доктор Стрэндж", "доктор стрэндж"],
+        ["Стражи Галактики. Часть 2", "стражи галактики часть 2"],
+        ["Человек-паук: Возвращение домой", "человек паук возвращение домой"],
+        ["Тор: Рагнарёк", "тор рагнарек"],
+        ["Чёрная Пантера", "черная пантера"],
+        ["Мстители: Война бесконечности", "мстители война бесконечности"],
+        ["Человек-муравей и Оса", "человек муравей и оса"],
+        ["Капитан Марвел", "капитан марвел"],
+        ["Мстители: Финал", "мстители финал"],
+        ["Человек-паук: Вдали от дома", "человек паук вдали от дома"],
+        ["Чёрная вдова", "черная вдова"],
+        ["Шан-Чи", "шан-чи"],
+        ["Вечные", "вечные"],
+        ["Человек-паук: Нет пути домой", "человек паук нет пути домой"],
+        ["Доктор Стрэндж: В мультивселенной безумия", "доктор стрэндж мультивселенной безумия"],
+        ["Тор: Любовь и гром", "тор любовь и гром"],
+        ["Чёрная Пантера: Ваканда навеки", "черная пантера ваканда навеки"],
+        ["Стражи Галактики. Часть 3", "стражи галактики часть 3"],
+        ["Человек-муравей и Оса: Квантомания", "человек муравей оса квантомания"]
+      ]
+    },
+    {
+      key: "harry",
+      title: "Гарри Поттер",
+      query: "гарри поттер",
+      note: "Порядок выхода.",
+      order: [
+        ["Гарри Поттер и философский камень", "гарри поттер философский камень"],
+        ["Гарри Поттер и Тайная комната", "гарри поттер тайная комната"],
+        ["Гарри Поттер и узник Азкабана", "гарри поттер узник азкабана"],
+        ["Гарри Поттер и Кубок огня", "гарри поттер кубок огня"],
+        ["Гарри Поттер и Орден Феникса", "гарри поттер орден феникса"],
+        ["Гарри Поттер и Принц-полукровка", "гарри поттер принц полукровка"],
+        ["Гарри Поттер и Дары смерти: Часть 1", "гарри поттер дары смерти часть 1"],
+        ["Гарри Поттер и Дары смерти: Часть 2", "гарри поттер дары смерти часть 2"],
+        ["Фантастические твари и где они обитают", "фантастические твари"],
+        ["Фантастические твари: Преступления Грин-де-Вальда", "фантастические твари преступления грин де вальда"],
+        ["Фантастические твари: Тайны Дамблдора", "фантастические твари тайны дамблдора"]
+      ]
+    },
+    {
+      key: "alien",
+      title: "Чужой",
+      query: "чужой",
+      note: "Только настоящая франшиза. Без Бена 10, Алиениста и прочего мусора.",
+      order: [
+        ["Чужой", "чужой 1979"],
+        ["Чужие", "чужие 1986"],
+        ["Чужой 3", "чужой 3"],
+        ["Чужой: Воскрешение", "чужой воскрешение"],
+        ["Прометей", "прометей"],
+        ["Чужой: Завет", "чужой завет"],
+        ["Чужой: Ромул", "чужой ромул"],
+        ["Чужой против Хищника", "чужой против хищника"],
+        ["Чужие против Хищника: Реквием", "чужие против хищника реквием"]
+      ]
+    },
+    {
+      key: "predator",
+      title: "Хищник",
+      query: "хищник",
+      note: "Только основная франшиза и кроссоверы. Без сексуальных predator, National Geographic и прочего мусора.",
+      order: [
+        ["Хищник", "хищник 1987"],
+        ["Хищник 2", "хищник 2"],
+        ["Чужой против Хищника", "чужой против хищника"],
+        ["Чужие против Хищника: Реквием", "чужие против хищника реквием"],
+        ["Хищники", "хищники 2010"],
+        ["Хищник", "хищник 2018"],
+        ["Добыча", "добыча prey"],
+        ["Хищник: Убийца убийц", "хищник убийца убийц"],
+        ["Хищник: Планета смерти", "хищник планета смерти"]
+      ]
+    },
+    {
+      key: "matrix",
+      title: "Матрица",
+      query: "матрица",
+      note: "Основной порядок.",
+      order: [
+        ["Матрица", "матрица 1999"],
+        ["Аниматрица", "аниматрица"],
+        ["Матрица: Перезагрузка", "матрица перезагрузка"],
+        ["Матрица: Революция", "матрица революция"],
+        ["Матрица: Воскрешение", "матрица воскрешение"]
+      ]
+    },
+    {
+      key: "bleach",
+      title: "Блич",
+      query: "блич",
+      note: "Основной сериал, фильмы, затем TYBW.",
+      order: [
+        ["Блич", "блич"],
+        ["Блич: Воспоминания ни о ком", "блич воспоминания ни о ком"],
+        ["Блич: Восстание алмазной пыли", "блич восстание алмазной пыли"],
+        ["Блич: Уходя в темноту", "блич уходя в темноту"],
+        ["Блич: Врата ада", "блич врата ада"],
+        ["Блич: Тысячелетняя кровавая война", "блич тысячелетняя кровавая война"]
+      ]
+    },
+    {
+      key: "aot",
+      title: "Атака титанов",
+      query: "атака титанов",
+      note: "Сезоны по порядку.",
+      order: [
+        ["Атака титанов", "атака титанов"],
+        ["Атака титанов 2", "атака титанов 2"],
+        ["Атака титанов 3", "атака титанов 3"],
+        ["Атака титанов: Финал", "атака титанов финал"],
+        ["Атака титанов: Последняя атака", "атака титанов последняя атака"]
+      ]
+    },
+    {
+      key: "tokyo",
+      title: "Токийский гуль",
+      query: "токийский гуль",
+      note: "Основной порядок.",
+      order: [
+        ["Токийский гуль", "токийский гуль"],
+        ["Токийский гуль √A", "токийский гуль root a"],
+        ["Токийский гуль: re", "токийский гуль re"]
+      ]
+    },
+    {
+      key: "onepiece",
+      title: "Ван-Пис",
+      query: "ван-пис",
+      note: "Сериал главный, фильмы отдельно после знакомства с командой.",
+      order: [
+        ["Ван-Пис", "ван-пис"],
+        ["One Piece: Strong World", "one piece strong world"],
+        ["One Piece Film Z", "one piece film z"],
+        ["One Piece Film Gold", "one piece film gold"],
+        ["One Piece: Stampede", "one piece stampede"],
+        ["One Piece Film Red", "one piece film red"]
+      ]
+    },
+    {
+      key: "fast",
+      title: "Форсаж",
+      query: "форсаж",
+      note: "Порядок выхода.",
+      order: [
+        ["Форсаж", "форсаж"],
+        ["Двойной форсаж", "двойной форсаж"],
+        ["Тройной форсаж: Токийский дрифт", "тройной форсаж токийский дрифт"],
+        ["Форсаж 4", "форсаж 4"],
+        ["Форсаж 5", "форсаж 5"],
+        ["Форсаж 6", "форсаж 6"],
+        ["Форсаж 7", "форсаж 7"],
+        ["Форсаж 8", "форсаж 8"],
+        ["Хоббс и Шоу", "хоббс шоу"],
+        ["Форсаж 9", "форсаж 9"],
+        ["Форсаж 10", "форсаж 10"]
+      ]
+    },
+    {
+      key: "lotr",
+      title: "Властелин колец",
+      query: "властелин колец",
+      note: "Хронологически: Хоббит → Властелин колец.",
+      order: [
+        ["Хоббит: Нежданное путешествие", "хоббит нежданное путешествие"],
+        ["Хоббит: Пустошь Смауга", "хоббит пустошь смауга"],
+        ["Хоббит: Битва пяти воинств", "хоббит битва пяти воинств"],
+        ["Властелин колец: Братство кольца", "властелин колец братство кольца"],
+        ["Властелин колец: Две крепости", "властелин колец две крепости"],
+        ["Властелин колец: Возвращение короля", "властелин колец возвращение короля"],
+        ["Кольца власти", "кольца власти"]
+      ]
+    },
+    {
+      key: "terminator",
+      title: "Терминатор",
+      query: "терминатор",
+      note: "Лучше смотреть по выходу.",
+      order: [
+        ["Терминатор", "терминатор"],
+        ["Терминатор 2: Судный день", "терминатор 2"],
+        ["Терминатор 3: Восстание машин", "терминатор 3"],
+        ["Терминатор: Да придёт спаситель", "терминатор да придет спаситель"],
+        ["Терминатор: Генезис", "терминатор генезис"],
+        ["Терминатор: Тёмные судьбы", "терминатор темные судьбы"]
+      ]
+    },
+    {
+      key: "dragonball",
+      title: "Драконий жемчуг",
+      query: "драконий жемчуг",
+      note: "Простой порядок аниме-линии.",
+      order: [
+        ["Dragon Ball", "dragon ball"],
+        ["Dragon Ball Z", "dragon ball z"],
+        ["Dragon Ball GT", "dragon ball gt"],
+        ["Dragon Ball Kai", "dragon ball kai"],
+        ["Dragon Ball Super", "dragon ball super"]
+      ]
+    },
+    {
+      key: "fate",
+      title: "Fate",
+      query: "fate",
+      note: "Простой порядок для входа.",
+      order: [
+        ["Fate/Zero", "fate zero"],
+        ["Fate/stay night", "fate stay night"],
+        ["Fate/stay night: Unlimited Blade Works", "fate unlimited blade works"],
+        ["Fate/stay night: Heaven's Feel", "fate heaven feel"],
+        ["Fate/Apocrypha", "fate apocrypha"],
+        ["Fate/Grand Order", "fate grand order"]
+      ]
+    }
+  ];
+
+  function esc(v) {
+    return String(v || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function findSearchInput() {
+    return document.querySelector("#search")
+      || document.querySelector("#searchInput")
+      || document.querySelector("input[type='search']")
+      || document.querySelector("input[placeholder*='Поиск']")
+      || document.querySelector("input");
+  }
+
+  function resetSelects() {
+    document.querySelectorAll("select").forEach(sel => {
+      try {
+        sel.selectedIndex = 0;
+        sel.dispatchEvent(new Event("change", { bubbles: true }));
+      } catch (e) {}
+    });
+  }
+
+  function nativeSearch(query) {
+    closeOverlay();
+
+    const input = findSearchInput();
+    if (input) {
+      input.focus();
+      input.value = query;
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+
+    resetSelects();
+
+    setTimeout(() => {
+      try {
+        if (typeof window.runSearch === "function") {
+          window.runSearch(1);
+          return;
+        }
+      } catch (e) {}
+
+      try {
+        if (input) {
+          input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", code: "Enter", bubbles: true }));
+          input.dispatchEvent(new KeyboardEvent("keyup", { key: "Enter", code: "Enter", bubbles: true }));
+        }
+      } catch (e) {}
+    }, 80);
+  }
+
+  function closeOverlay() {
+    document.querySelectorAll(".gkm-v174-overlay").forEach(x => x.remove());
+  }
+
+  function panel() {
+    let overlay = document.querySelector(".gkm-v174-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.className = "gkm-v174-overlay";
+      overlay.innerHTML = `<div class="gkm-v174-panel"></div>`;
+      document.body.appendChild(overlay);
+      overlay.addEventListener("click", e => {
+        if (e.target === overlay) closeOverlay();
+      });
+    }
+    return overlay.querySelector(".gkm-v174-panel");
+  }
+
+  function openHub() {
+    const p = panel();
+    p.innerHTML = `
+      <div class="gkm-v174-head">
+        <div>
+          <h2>🧬 Франшизы</h2>
+          <p>V174: быстро и чисто. Без загрузки всей базы и без мусорных карточек. Тут только порядок просмотра.</p>
+        </div>
+        <button class="gkm-v174-close">✕</button>
+      </div>
+      <div class="gkm-v174-grid">
+        ${FRANCHISES.map(fr => `
+          <button class="gkm-v174-tile" data-fr="${fr.key}">
+            <b>${esc(fr.title)}</b>
+            <span>Порядок просмотра</span>
+          </button>
+        `).join("")}
+      </div>
+    `;
+
+    p.querySelector(".gkm-v174-close").addEventListener("click", closeOverlay);
+    p.querySelectorAll("[data-fr]").forEach(btn => {
+      btn.addEventListener("click", () => openFranchise(btn.dataset.fr));
+    });
+  }
+
+  function openFranchise(key) {
+    const fr = FRANCHISES.find(x => x.key === key) || FRANCHISES[0];
+    const p = panel();
+
+    p.innerHTML = `
+      <div class="gkm-v174-head">
+        <div>
+          <h2>🧬 ${esc(fr.title)}</h2>
+          <p>${esc(fr.note)}<br><b>${fr.order.length} пунктов в порядке просмотра.</b></p>
+        </div>
+        <div class="gkm-v174-actions">
+          <button class="gkm-v174-btn" data-back="1">Назад</button>
+          <button class="gkm-v174-close">✕</button>
+        </div>
+      </div>
+
+      <div class="gkm-v174-order-list">
+        ${fr.order.map((row, idx) => `
+          <div class="gkm-v174-order-row">
+            <div class="gkm-v174-num">${idx + 1}</div>
+            <div class="gkm-v174-order-title">${esc(row[0])}</div>
+            <button class="gkm-v174-small" data-search="${esc(row[1])}">Найти эту часть</button>
+          </div>
+        `).join("")}
+      </div>
+
+      <div class="gkm-v174-bottom">
+        <button class="gkm-v174-btn" data-search="${esc(fr.query)}">Открыть обычным поиском</button>
+        <span>Обычный поиск может показать лишнее — порядок выше чистый.</span>
+      </div>
+    `;
+
+    p.querySelector(".gkm-v174-close").addEventListener("click", closeOverlay);
+    p.querySelector("[data-back]").addEventListener("click", openHub);
+    p.querySelectorAll("[data-search]").forEach(btn => {
+      btn.addEventListener("click", () => nativeSearch(btn.dataset.search || ""));
+    });
+  }
+
+  function addButton() {
+    document.querySelectorAll(
+      "[data-gkm-v162-franchise-btn],[data-gkm-v163-franchise-btn],[data-gkm-v164-franchise-btn],[data-gkm-v165-franchise-btn],[data-gkm-v166-franchise-btn],[data-gkm-v167-franchise-btn],[data-gkm-v168-franchise-btn],[data-gkm-v172-franchise-btn],[data-gkm-v173-franchise-btn],[data-gkm-v174-franchise-btn]"
+    ).forEach(x => x.remove());
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = "🧬 Франшизы";
+    btn.dataset.gkmV174FranchiseBtn = "1";
+    btn.className = "btn gkm-v174-main-btn";
+    btn.addEventListener("click", openHub);
+
+    const target = document.querySelector(".tabs")
+      || document.querySelector(".nav")
+      || document.querySelector(".buttons")
+      || document.querySelector(".filter-buttons")
+      || document.querySelector(".controls")
+      || document.querySelector("header")
+      || document.body;
+
+    target.appendChild(btn);
+  }
+
+  function addStyles() {
+    if (document.querySelector("#gkm-v174-style")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkm-v174-style";
+    style.textContent = `
+      .gkm-v174-main-btn,.gkm-v174-btn,.gkm-v174-small,.gkm-v174-tile {
+        border:1px solid #00d8ff;
+        background:linear-gradient(135deg,#5a25d6,#04c9f4);
+        color:#fff;
+        border-radius:14px;
+        padding:12px 18px;
+        font-weight:900;
+        cursor:pointer;
+        box-shadow:0 0 18px rgba(0,216,255,.25);
+        margin:6px;
+      }
+      .gkm-v174-overlay {
+        position:fixed;
+        inset:0;
+        z-index:999999;
+        background:rgba(2,4,16,.78);
+        backdrop-filter:blur(4px);
+        overflow:auto;
+        padding:28px;
+      }
+      .gkm-v174-panel {
+        max-width:1450px;
+        margin:0 auto;
+        color:#fff;
+      }
+      .gkm-v174-head {
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-start;
+        gap:16px;
+        padding:18px;
+        margin:0 0 18px;
+        border:1px solid rgba(0,216,255,.35);
+        border-radius:18px;
+        background:rgba(10,8,35,.94);
+        box-shadow:0 0 24px rgba(0,216,255,.12);
+      }
+      .gkm-v174-head h2 {
+        margin:0 0 8px;
+        font-size:30px;
+        text-shadow:0 0 16px rgba(185,125,255,.65);
+      }
+      .gkm-v174-head p {
+        margin:0;
+        color:#cfc9ff;
+        line-height:1.45;
+      }
+      .gkm-v174-close {
+        min-width:54px;
+        min-height:48px;
+        border:1px solid #00d8ff;
+        background:linear-gradient(135deg,#5a25d6,#04c9f4);
+        color:#fff;
+        border-radius:14px;
+        font-size:24px;
+        font-weight:900;
+        cursor:pointer;
+      }
+      .gkm-v174-actions { display:flex; align-items:center; gap:8px; }
+      .gkm-v174-grid {
+        display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+        gap:14px;
+      }
+      .gkm-v174-tile {
+        text-align:left;
+        min-height:112px;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+      }
+      .gkm-v174-tile b {
+        font-size:22px;
+        line-height:1.1;
+        margin-bottom:10px;
+      }
+      .gkm-v174-tile span {
+        color:#f0ecff;
+        font-size:15px;
+      }
+      .gkm-v174-order-list {
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+      }
+      .gkm-v174-order-row {
+        display:grid;
+        grid-template-columns:60px 1fr auto;
+        gap:12px;
+        align-items:center;
+        border:1px solid rgba(0,216,255,.28);
+        border-radius:16px;
+        background:rgba(10,8,35,.86);
+        padding:12px;
+      }
+      .gkm-v174-num {
+        width:44px;
+        height:44px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:50%;
+        background:linear-gradient(135deg,#ffae00,#b13cff);
+        color:#fff;
+        font-weight:1000;
+        font-size:20px;
+      }
+      .gkm-v174-order-title {
+        font-size:19px;
+        font-weight:900;
+        line-height:1.25;
+      }
+      .gkm-v174-small {
+        margin:0;
+      }
+      .gkm-v174-bottom {
+        margin-top:18px;
+        padding:14px;
+        border:1px solid rgba(0,216,255,.25);
+        border-radius:16px;
+        background:rgba(10,8,35,.72);
+        display:flex;
+        flex-wrap:wrap;
+        align-items:center;
+        gap:12px;
+      }
+      .gkm-v174-bottom span {
+        color:#cfc9ff;
+        font-weight:700;
+      }
+      @media(max-width:720px) {
+        .gkm-v174-overlay { padding:12px; }
+        .gkm-v174-head { flex-direction:column; }
+        .gkm-v174-grid { grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); }
+        .gkm-v174-order-row { grid-template-columns:44px 1fr; }
+        .gkm-v174-small { grid-column:1 / -1; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function init() {
+    addStyles();
+    addButton();
+    console.log("GKM: v174-fast-clean-franchises-no-garbage-2026-06-24");
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+
+  window.GKM_V174_OPEN_FRANCHISES = openHub;
+  window.GKM_V174_CLOSE_FRANCHISES = closeOverlay;
+})();
+/* GKM V174 FAST CLEAN FRANCHISES END */
+
+/* GKM V175 WATCH ORDER GRID SORT START */
+(function () {
+  "use strict";
+
+  window.GKM_V175_WATCH_ORDER_GRID_SORT_VERSION = "v175-watch-order-grid-sort-2026-06-24";
+
+  // V175: порядок просмотра применяется к обычной сетке поиска.
+  // Без загрузки всей базы. Только сортировка уже найденных карточек.
+  // Смысл: поиск "наруто" / "хищник" / "гарри поттер" не должен показывать рандом,
+  // а должен переставлять карточки в порядок просмотра.
+
+  const FRANCHISE_RULES = [
+    {
+      key: "naruto",
+      detect: ["наруто", "naruto", "боруто", "boruto"],
+      rules: [
+        { n: 13, label: "Боруто", must: ["боруто", "boruto"] },
+        { n: 12, label: "Последний: Наруто. Фильм", must: ["последний", "the last"] },
+        { n: 11, label: "Наруто: Путь ниндзя", must: ["путь", "road to ninja"] },
+        { n: 10, label: "Наруто: Кровавая тюрьма", must: ["кровавая", "blood prison"] },
+        { n: 9, label: "Наруто: Потерянная башня", must: ["потерянная", "lost tower"] },
+        { n: 8, label: "Наруто: Наследники воли огня", must: ["наследники", "will of fire"] },
+        { n: 7, label: "Наруто: Узы", must: ["узы", "bonds"] },
+        { n: 6, label: "Наруто: Ураганные хроники — Фильм", must: ["ураганные", "фильм"], not: ["узы", "наследники", "потерянная", "кровавая", "путь", "последний"] },
+        { n: 5, label: "Наруто: Ураганные хроники", must: ["ураганные хроники", "shippuden"], not: ["фильм", "movie", "узы", "bonds", "наследники", "lost", "tower", "blood", "prison", "road", "путь", "последний"] },
+        { n: 4, label: "Наруто: Стражи королевства Полумесяца", must: ["полумесяц", "crescent"] },
+        { n: 3, label: "Наруто: Легенда о камне Гелела", must: ["камн", "gelel", "大激突"] },
+        { n: 2, label: "Наруто: Битва ниндзя в Стране Снега", must: ["стране снега", "land of snow", "snow", "雪姫"] },
+        { n: 1, label: "Наруто", must: ["наруто", "naruto"], not: ["ураганные", "shippuden", "боруто", "boruto", "последний", "the last", "узы", "bonds", "путь", "road", "кровавая", "blood", "потерянная", "lost", "наследники", "will", "стране снега", "snow", "камн", "gelel", "полумесяц", "crescent"] }
+      ]
+    },
+    {
+      key: "mcu",
+      detect: ["мстители", "avengers", "железный человек", "iron man", "тор", "thor", "первый мститель", "captain america", "стражи галактики", "доктор стрэндж", "человек-паук"],
+      rules: [
+        { n: 31, label: "Человек-муравей и Оса: Квантомания", must: ["квантомания", "quantumania"] },
+        { n: 30, label: "Стражи Галактики. Часть 3", must: ["стражи", "часть 3", "vol. 3", "vol 3"] },
+        { n: 29, label: "Чёрная Пантера: Ваканда навеки", must: ["ваканда", "wakanda"] },
+        { n: 28, label: "Тор: Любовь и гром", must: ["любовь", "гром", "love", "thunder"] },
+        { n: 27, label: "Доктор Стрэндж: В мультивселенной безумия", must: ["мультивселен", "madness"] },
+        { n: 26, label: "Человек-паук: Нет пути домой", must: ["нет пути домой", "no way home"] },
+        { n: 25, label: "Вечные", must: ["вечные", "eternals"] },
+        { n: 24, label: "Шан-Чи", must: ["шан-чи", "shang-chi"] },
+        { n: 23, label: "Чёрная вдова", must: ["черная вдова", "чёрная вдова", "black widow"] },
+        { n: 22, label: "Человек-паук: Вдали от дома", must: ["вдали от дома", "far from home"] },
+        { n: 21, label: "Мстители: Финал", must: ["финал", "endgame"] },
+        { n: 20, label: "Капитан Марвел", must: ["капитан марвел", "captain marvel"] },
+        { n: 19, label: "Человек-муравей и Оса", must: ["человек-муравей и оса", "человек муравей и оса", "ant-man and the wasp"], not: ["квантомания", "quantumania"] },
+        { n: 18, label: "Мстители: Война бесконечности", must: ["война бесконечности", "infinity war"] },
+        { n: 17, label: "Чёрная Пантера", must: ["черная пантера", "чёрная пантера", "black panther"], not: ["ваканда", "wakanda"] },
+        { n: 16, label: "Тор: Рагнарёк", must: ["рагнарек", "ragnarok"] },
+        { n: 15, label: "Человек-паук: Возвращение домой", must: ["возвращение домой", "homecoming"] },
+        { n: 14, label: "Стражи Галактики. Часть 2", must: ["стражи", "часть 2", "vol. 2", "vol 2"] },
+        { n: 13, label: "Доктор Стрэндж", must: ["доктор стрэндж", "doctor strange"], not: ["мультивселен", "madness"] },
+        { n: 12, label: "Первый мститель: Противостояние", must: ["противостояние", "civil war"] },
+        { n: 11, label: "Мстители: Эра Альтрона", must: ["эра альтрона", "age of ultron"] },
+        { n: 10, label: "Стражи Галактики", must: ["стражи галактики", "guardians of the galaxy"], not: ["часть 2", "vol. 2", "vol 2", "часть 3", "vol. 3", "vol 3"] },
+        { n: 9, label: "Первый мститель: Другая война", must: ["другая война", "winter soldier"] },
+        { n: 8, label: "Тор 2: Царство тьмы", must: ["царство тьмы", "dark world", "тор 2", "thor 2"] },
+        { n: 7, label: "Железный человек 3", must: ["железный человек 3", "iron man 3"] },
+        { n: 6, label: "Мстители", must: ["мстители", "avengers"], not: ["эра", "альтрона", "война", "бесконечности", "финал", "endgame", "ultron", "infinity", "команда", "величайшие"] },
+        { n: 5, label: "Первый мститель", must: ["первый мститель", "captain america"], not: ["другая", "противостояние", "winter", "civil"] },
+        { n: 4, label: "Тор", must: ["тор", "thor"], not: ["рагнарек", "ragnarok", "царство", "dark world", "любовь", "thunder"] },
+        { n: 3, label: "Железный человек 2", must: ["железный человек 2", "iron man 2"] },
+        { n: 2, label: "Невероятный Халк", must: ["невероятный халк", "incredible hulk"] },
+        { n: 1, label: "Железный человек", must: ["железный человек", "iron man"], not: [" 2", " 3", "2", "3"] }
+      ]
+    },
+    {
+      key: "harry",
+      detect: ["гарри поттер", "harry potter", "фантастические твари"],
+      rules: [
+        { n: 11, label: "Фантастические твари: Тайны Дамблдора", must: ["тайны дамблдора", "secrets of dumbledore"] },
+        { n: 10, label: "Фантастические твари: Преступления Грин-де-Вальда", must: ["преступления", "grindelwald"] },
+        { n: 9, label: "Фантастические твари", must: ["фантастические твари", "fantastic beasts"] },
+        { n: 8, label: "Дары смерти: Часть 2", must: ["дары смерти часть 2", "deathly hallows part 2"] },
+        { n: 7, label: "Дары смерти: Часть 1", must: ["дары смерти часть 1", "deathly hallows part 1"] },
+        { n: 6, label: "Принц-полукровка", must: ["принц-полукровка", "принц полукровка", "half-blood"] },
+        { n: 5, label: "Орден Феникса", must: ["орден феникса", "order of the phoenix"] },
+        { n: 4, label: "Кубок огня", must: ["кубок огня", "goblet"] },
+        { n: 3, label: "Узник Азкабана", must: ["узник азкабана", "prisoner"] },
+        { n: 2, label: "Тайная комната", must: ["тайная комната", "chamber"] },
+        { n: 1, label: "Философский камень", must: ["философ", "philosopher", "sorcerer", "камень"] }
+      ]
+    },
+    {
+      key: "predator",
+      detect: ["хищник", "predator", "predators", "prey", "добыча"],
+      rules: [
+        { n: 9, label: "Хищник: Планета смерти", must: ["планета смерти", "badlands"] },
+        { n: 8, label: "Хищник: Убийца убийц", must: ["убийца убийц", "killer of killers"] },
+        { n: 7, label: "Добыча", must: ["добыча", "prey"] },
+        { n: 6, label: "Хищник", must: ["хищник", "the predator"], not: [" 2", "2", "против", "убийца", "планета", "реквием", "добыча", "prey", "predators"] },
+        { n: 5, label: "Хищники", must: ["хищники", "predators"], not: ["sexual", "fail", "moments", "crucified"] },
+        { n: 4, label: "Чужие против Хищника: Реквием", must: ["реквием", "requiem"] },
+        { n: 3, label: "Чужой против Хищника", must: ["чужой против хищника", "alien vs predator", "avp"], not: ["реквием"] },
+        { n: 2, label: "Хищник 2", must: ["хищник 2", "predator 2"] },
+        { n: 1, label: "Хищник", must: ["хищник", "predator"], not: [" 2", "2", "против", "убийца", "планета", "реквием", "добыча", "prey", "predators", "sexual", "fail", "moments", "crucified", "последний крик"] }
+      ],
+      garbage: ["sexual predator", "predator fail", "predators moments", "predators crucified", "последний крик", "national geographic"]
+    },
+    {
+      key: "alien",
+      detect: ["чужой", "alien", "aliens", "прометей", "prometheus", "ромул", "romulus"],
+      rules: [
+        { n: 9, label: "Чужие против Хищника: Реквием", must: ["реквием", "requiem"] },
+        { n: 8, label: "Чужой против Хищника", must: ["чужой против хищника", "alien vs predator", "avp"], not: ["реквием"] },
+        { n: 7, label: "Чужой: Ромул", must: ["ромул", "romulus"] },
+        { n: 6, label: "Чужой: Завет", must: ["завет", "covenant"] },
+        { n: 5, label: "Прометей", must: ["прометей", "prometheus"] },
+        { n: 4, label: "Чужой: Воскрешение", must: ["воскрешение", "resurrection"] },
+        { n: 3, label: "Чужой 3", must: ["чужой 3", "alien 3"] },
+        { n: 2, label: "Чужие", must: ["чужие", "aliens"], not: ["против"] },
+        { n: 1, label: "Чужой", must: ["чужой", "alien"], not: ["против", "воскрешение", "завет", "ромул", "земля", "3", "prometheus", "covenant", "romulus"] }
+      ],
+      garbage: ["бен 10", "ben 10", "алиенист", "alienist", "ancient aliens", "древние пришельцы"]
+    },
+    {
+      key: "matrix",
+      detect: ["матрица", "matrix"],
+      rules: [
+        { n: 5, label: "Матрица: Воскрешение", must: ["воскрешение", "resurrections"] },
+        { n: 4, label: "Матрица: Революция", must: ["революция", "revolutions"] },
+        { n: 3, label: "Матрица: Перезагрузка", must: ["перезагрузка", "reloaded"] },
+        { n: 2, label: "Аниматрица", must: ["аниматрица", "animatrix"] },
+        { n: 1, label: "Матрица", must: ["матрица", "the matrix"], not: ["времени", "перезагрузка", "революция", "воскрешение"] }
+      ]
+    },
+    {
+      key: "fast",
+      detect: ["форсаж", "fast furious", "fast & furious", "fast x"],
+      rules: [
+        { n: 11, label: "Форсаж 10", must: ["форсаж 10", "fast x"] },
+        { n: 10, label: "Форсаж 9", must: ["форсаж 9", "f9"] },
+        { n: 9, label: "Хоббс и Шоу", must: ["хоббс", "hobbs", "shaw"] },
+        { n: 8, label: "Форсаж 8", must: ["форсаж 8", "fate of the furious"] },
+        { n: 7, label: "Форсаж 7", must: ["форсаж 7", "furious 7"] },
+        { n: 6, label: "Форсаж 6", must: ["форсаж 6"] },
+        { n: 5, label: "Форсаж 5", must: ["форсаж 5", "fast five"] },
+        { n: 4, label: "Форсаж 4", must: ["форсаж 4"] },
+        { n: 3, label: "Токийский дрифт", must: ["токийский дрифт", "tokyo drift"] },
+        { n: 2, label: "Двойной форсаж", must: ["двойной", "2 fast"] },
+        { n: 1, label: "Форсаж", must: ["форсаж", "fast furious"], not: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "x", "хоббс", "shaw"] }
+      ]
+    }
+  ];
+
+  function norm(v) {
+    return String(v || "")
+      .toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[«»"']/g, "")
+      .replace(/[^\p{L}\p{N}:&/\-. ]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function getSearchInput() {
+    return document.querySelector("#search")
+      || document.querySelector("#searchInput")
+      || document.querySelector("input[type='search']")
+      || document.querySelector("input[placeholder*='Поиск']")
+      || document.querySelector("input");
+  }
+
+  function getQuery() {
+    const input = getSearchInput();
+    return norm(input && input.value);
+  }
+
+  function detectFranchise() {
+    const q = getQuery();
+    if (!q) return null;
+    return FRANCHISE_RULES.find(fr => fr.detect.some(x => q.includes(norm(x))));
+  }
+
+  function hasAny(text, list) {
+    return (list || []).some(x => text.includes(norm(x)));
+  }
+
+  function isGarbage(text, fr) {
+    return hasAny(text, fr.garbage || []);
+  }
+
+  function scoreText(text, fr) {
+    if (isGarbage(text, fr)) return { score: 99999, label: "", garbage: true };
+
+    for (const rule of fr.rules) {
+      if (hasAny(text, rule.must) && !hasAny(text, rule.not || [])) {
+        return { score: rule.n, label: rule.label, garbage: false };
+      }
+    }
+
+    return { score: 9999, label: "", garbage: false };
+  }
+
+  function isCard(el) {
+    if (!el || el.nodeType !== 1) return false;
+    const text = norm(el.textContent);
+    if (text.length < 25 || text.length > 1100) return false;
+    return !!el.querySelector("img") && (
+      text.includes("★") ||
+      text.includes("фильм") ||
+      text.includes("аниме") ||
+      text.includes("сериал") ||
+      text.includes("мультфильм")
+    );
+  }
+
+  function findGrid() {
+    const possible = Array.from(document.querySelectorAll("main,#results,#catalog,.grid,.cards,.results,section,div"));
+    let best = null;
+    let bestCards = [];
+
+    for (const el of possible) {
+      const cards = Array.from(el.children || []).filter(isCard);
+      if (cards.length > bestCards.length) {
+        best = el;
+        bestCards = cards;
+      }
+    }
+
+    return bestCards.length >= 2 ? { grid: best, cards: bestCards } : null;
+  }
+
+  function addBadge(card, n, label) {
+    card.querySelectorAll(".gkm-v175-order-badge,.gkm-v173-order-badge,.gkm-v171-order-badge,.gkm-v170-order-badge,.gkm-v169-order-badge").forEach(x => x.remove());
+
+    const badge = document.createElement("div");
+    badge.className = "gkm-v175-order-badge";
+    badge.textContent = "#" + n + " смотреть";
+
+    card.style.position = card.style.position || "relative";
+    card.appendChild(badge);
+    card.title = "Порядок просмотра: " + n + ". " + label;
+  }
+
+  function clearOldBadges(card) {
+    card.querySelectorAll(".gkm-v175-order-badge,.gkm-v173-order-badge,.gkm-v171-order-badge,.gkm-v170-order-badge,.gkm-v169-order-badge").forEach(x => x.remove());
+  }
+
+  function applyOrder() {
+    const fr = detectFranchise();
+    const found = findGrid();
+
+    if (!found) return;
+
+    // Если запрос не франшизный — просто убираем старые бейджи.
+    if (!fr) {
+      found.cards.forEach(clearOldBadges);
+      return;
+    }
+
+    const rows = found.cards.map((card, idx) => {
+      const text = norm(card.textContent || "");
+      const s = scoreText(text, fr);
+      return { card, idx, score: s.score, label: s.label, garbage: s.garbage };
+    });
+
+    const matched = rows.filter(r => r.score < 9999);
+    if (!matched.length) return;
+
+    rows.sort((a, b) => {
+      if (a.score !== b.score) return a.score - b.score;
+      return a.idx - b.idx;
+    });
+
+    const frag = document.createDocumentFragment();
+    rows.forEach(r => frag.appendChild(r.card));
+    found.grid.appendChild(frag);
+
+    rows.forEach(r => {
+      clearOldBadges(r.card);
+
+      if (r.score < 9999) {
+        addBadge(r.card, r.score, r.label);
+      }
+
+      // Мусор полностью не удаляем, но гасим и кидаем в самый низ.
+      if (r.garbage) {
+        r.card.style.opacity = "0.35";
+        r.card.style.filter = "grayscale(0.8)";
+        r.card.title = "Похоже на мусорный результат, не часть франшизы";
+      } else {
+        r.card.style.opacity = "";
+        r.card.style.filter = "";
+      }
+    });
+
+    console.log("GKM V175 order applied:", fr.key, matched.map(x => [x.score, x.label]));
+  }
+
+  function addStyles() {
+    if (document.querySelector("#gkm-v175-style")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkm-v175-style";
+    style.textContent = `
+      .gkm-v175-order-badge {
+        position:absolute;
+        left:8px;
+        top:42px;
+        z-index:45;
+        padding:7px 10px;
+        border-radius:999px;
+        background:linear-gradient(135deg,#ffae00,#b13cff);
+        color:#fff;
+        font-weight:1000;
+        font-size:13px;
+        line-height:1;
+        box-shadow:0 0 14px rgba(255,160,0,.45);
+        pointer-events:none;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function schedule() {
+    clearTimeout(window.__gkmV175Timer);
+    window.__gkmV175Timer = setTimeout(applyOrder, 300);
+  }
+
+  function init() {
+    addStyles();
+
+    document.addEventListener("input", schedule, true);
+    document.addEventListener("change", schedule, true);
+    document.addEventListener("click", schedule, true);
+
+    const observer = new MutationObserver(schedule);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    setTimeout(schedule, 500);
+    setTimeout(schedule, 1200);
+    setTimeout(schedule, 2200);
+
+    console.log("GKM: v175-watch-order-grid-sort-2026-06-24");
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+
+  window.GKM_V175_APPLY_WATCH_ORDER_GRID_SORT = applyOrder;
+})();
+/* GKM V175 WATCH ORDER GRID SORT END */
+
+/* GKM V191 SMART CATALOG SEARCH START */
+(function () {
+  "use strict";
+
+  window.GKM_V191_SMART_CATALOG_SEARCH_VERSION = "v191-smart-catalog-search-all-features-2026-06-24";
+
+  /*
+    V191 — стоящая фича без лишних кнопок:
+    1) Умная выдача по умолчанию:
+       - популярное выше;
+       - мусор ниже;
+       - без постера ниже;
+       - 10.0 при 2 голосах ниже;
+       - короткие левые названия ниже.
+    2) Умный поиск RU/EN:
+       - Naruto/Наруто, Avengers/Мстители, Harry Potter/Гарри Поттер и т.д.;
+       - частые опечатки и транслит.
+    3) Анти-дубли:
+       - одинаковое название+год+тип оставляет лучший вариант выше;
+       - дубли мягко уводятся вниз.
+    4) Похожие в модалке:
+       - мусор и другой тип приглушаются/уходят вниз.
+    5) Никаких новых кнопок, ничего не засоряет верх сайта.
+  */
+
+  const LS_DISABLED = "GKM_V191_DISABLED";
+  const VERSION_TEXT = "v191-smart-catalog-search-all-features-2026-06-24";
+
+  const SEARCH_ALIASES = [
+    ["наруто", "naruto"],
+    ["нарута", "naruto"],
+    ["naruto", "наруто"],
+    ["боруто", "boruto"],
+    ["boruto", "боруто"],
+    ["блич", "bleach"],
+    ["bleach", "блич"],
+    ["ван пис", "one piece"],
+    ["ван-пис", "one piece"],
+    ["one piece", "ван пис"],
+    ["атака титанов", "attack on titan"],
+    ["атака титан", "attack on titan"],
+    ["attack on titan", "атака титанов"],
+    ["токийский гуль", "tokyo ghoul"],
+    ["tokyo ghoul", "токийский гуль"],
+    ["тетрадь смерти", "death note"],
+    ["death note", "тетрадь смерти"],
+    ["стальной алхимик", "fullmetal alchemist"],
+    ["fullmetal alchemist", "стальной алхимик"],
+    ["охотник х охотник", "hunter x hunter"],
+    ["хантер хантер", "hunter x hunter"],
+    ["hunter x hunter", "охотник х охотник"],
+    ["клинок рассекающий демонов", "demon slayer"],
+    ["истребитель демонов", "demon slayer"],
+    ["demon slayer", "истребитель демонов"],
+    ["магическая битва", "jujutsu kaisen"],
+    ["jujutsu kaisen", "магическая битва"],
+    ["моя геройская академия", "my hero academia"],
+    ["my hero academia", "моя геройская академия"],
+
+    ["мстители", "avengers"],
+    ["avengers", "мстители"],
+    ["мстители финал", "avengers endgame"],
+    ["avengers endgame", "мстители финал"],
+    ["война бесконечности", "infinity war"],
+    ["infinity war", "война бесконечности"],
+    ["железный человек", "iron man"],
+    ["iron man", "железный человек"],
+    ["капитан америка", "captain america"],
+    ["captain america", "капитан америка"],
+    ["тор", "thor"],
+    ["thor", "тор"],
+    ["человек паук", "spider-man"],
+    ["человек-паук", "spider-man"],
+    ["spider man", "человек паук"],
+    ["spider-man", "человек паук"],
+    ["доктор стрэндж", "doctor strange"],
+    ["doctor strange", "доктор стрэндж"],
+    ["стражи галактики", "guardians of the galaxy"],
+    ["guardians of the galaxy", "стражи галактики"],
+    ["черная пантера", "black panther"],
+    ["чёрная пантера", "black panther"],
+    ["black panther", "черная пантера"],
+
+    ["гарри поттер", "harry potter"],
+    ["гари потер", "harry potter"],
+    ["гари поттер", "harry potter"],
+    ["гарри потер", "harry potter"],
+    ["harry potter", "гарри поттер"],
+    ["философский камень", "philosopher stone sorcerer stone"],
+    ["тайная комната", "chamber of secrets"],
+    ["узник азкабана", "prisoner of azkaban"],
+    ["кубок огня", "goblet of fire"],
+    ["орден феникса", "order of the phoenix"],
+    ["принц полукровка", "half-blood prince"],
+    ["дары смерти", "deathly hallows"],
+
+    ["матрица", "matrix"],
+    ["matrix", "матрица"],
+    ["властелин колец", "lord of the rings"],
+    ["lord of the rings", "властелин колец"],
+    ["хоббит", "hobbit"],
+    ["hobbit", "хоббит"],
+    ["звездные войны", "star wars"],
+    ["звёздные войны", "star wars"],
+    ["star wars", "звездные войны"],
+    ["форсаж", "fast furious"],
+    ["fast furious", "форсаж"],
+    ["терминатор", "terminator"],
+    ["terminator", "терминатор"],
+    ["чужой", "alien"],
+    ["alien", "чужой"],
+    ["хищник", "predator"],
+    ["predator", "хищник"],
+    ["пила", "saw"],
+    ["saw", "пила"],
+    ["заклятие", "conjuring"],
+    ["conjuring", "заклятие"],
+    ["тихое место", "quiet place"],
+    ["quiet place", "тихое место"],
+    ["пираты карибского моря", "pirates of the caribbean"],
+    ["pirates of the caribbean", "пираты карибского моря"],
+    ["парк юрского периода", "jurassic park"],
+    ["мир юрского периода", "jurassic world"],
+    ["jurassic", "юрский период"],
+    ["драконий жемчуг", "dragon ball"],
+    ["dragon ball", "драконий жемчуг"]
+  ];
+
+  const TYPO_FIXES = [
+    [/гар+и\s+пот+ер+/g, "гарри поттер"],
+    [/гари\s+поттер/g, "гарри поттер"],
+    [/гарри\s+потер/g, "гарри поттер"],
+    [/нарута/g, "наруто"],
+    [/мстител[ие]?\s+финал/g, "мстители финал"],
+    [/человек\s*паук/g, "человек паук"],
+    [/ван\s*пис/g, "ван пис"],
+    [/атака\s+титан(?!ов)/g, "атака титанов"],
+    [/токийский\s+гул/g, "токийский гуль"]
+  ];
+
+  function isDisabled() {
+    try { return localStorage.getItem(LS_DISABLED) === "1"; } catch (e) { return false; }
+  }
+
+  function safe(name, fn) {
+    if (isDisabled()) return null;
+    try { return fn(); } catch (e) { console.warn("GKM V191:", name, e); return null; }
+  }
+
+  function norm(v) {
+    return String(v || "")
+      .toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[«»"']/g, "")
+      .replace(/[‐‑‒–—―]/g, "-")
+      .replace(/[^a-zа-я0-9\s:.\-]/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function compact(v) {
+    return norm(v).replace(/[^a-zа-я0-9]/g, "");
+  }
+
+  function text(el) {
+    return String(el && el.textContent || "");
+  }
+
+  function getSearchInput() {
+    return document.querySelector("#search")
+      || document.querySelector("#searchInput")
+      || document.querySelector("input[type='search']")
+      || document.querySelector("input[placeholder*='Поиск']")
+      || document.querySelector("input");
+  }
+
+  function parseRating(card) {
+    const t = text(card);
+    const m = t.match(/★\s*([0-9]+(?:[.,][0-9]+)?)/) || t.match(/рейтинг[^0-9]*([0-9]+(?:[.,][0-9]+)?)/i);
+    const n = m ? parseFloat(m[1].replace(",", ".")) : 0;
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  function parseVotes(card) {
+    const t = text(card).replace(/\u00a0/g, " ");
+    const m = t.match(/([0-9]+(?:[.,][0-9]+)?)\s*(млн|тыс|голос)/i);
+    if (!m) return 0;
+    let n = parseFloat(m[1].replace(",", "."));
+    if (!Number.isFinite(n)) return 0;
+    const u = String(m[2] || "").toLowerCase();
+    if (u.includes("млн")) n *= 1000000;
+    else if (u.includes("тыс")) n *= 1000;
+    return Math.round(n);
+  }
+
+  function parseYear(card) {
+    const m = text(card).match(/\b(19[0-9]{2}|20[0-9]{2}|203[0-9])\b/);
+    return m ? parseInt(m[1], 10) : 0;
+  }
+
+  function hasPoster(card) {
+    if (norm(text(card)).includes("нет постера")) return false;
+    const img = card.querySelector("img");
+    if (!img) return false;
+    const src = String(img.currentSrc || img.src || img.getAttribute("src") || "");
+    if (!src) return false;
+    return !src.includes("placeholder") && !src.includes("data:image/svg");
+  }
+
+  function titleOf(card) {
+    const sels = [".title", ".card-title", ".movie-title", ".name", "[class*='title']", "h3", "h2", "b", "strong"];
+    for (const s of sels) {
+      const el = card.querySelector(s);
+      const v = el && String(el.textContent || "").trim();
+      if (v && v.length > 1 && v.length < 120 && !/^(фильм|аниме|сериал|мультфильм)$/i.test(v)) return v;
+    }
+
+    const lines = String(card.textContent || "").split("\n").map(x => x.trim()).filter(Boolean);
+    for (const line of lines) {
+      if (line.length > 1 && line.length < 90 && !line.includes("★") && !/^\d{4}/.test(line)) return line;
+    }
+    return "Без названия";
+  }
+
+  function typeOf(card) {
+    const t = norm(text(card));
+    if (t.includes("аниме")) return "anime";
+    if (t.includes("мультсериал")) return "cartoon_series";
+    if (t.includes("мультфильм")) return "cartoon";
+    if (t.includes("сериал")) return "series";
+    if (t.includes("фильм")) return "movie";
+    return "";
+  }
+
+  function genreTokens(card) {
+    const t = norm(text(card));
+    const known = ["боевик","комедия","драма","криминал","фантастика","фэнтези","ужасы","триллер","детектив","приключения","мелодрама","документальный","история","спорт","военный","семейный","экшен"];
+    return known.filter(g => t.includes(g));
+  }
+
+  function isVisibleBasic(el) {
+    if (!el || !el.getBoundingClientRect) return false;
+    const r = el.getBoundingClientRect();
+    const st = getComputedStyle(el);
+    return r.width > 70 && r.height > 100 && st.display !== "none" && st.visibility !== "hidden";
+  }
+
+  function isCard(el) {
+    if (!el || el.nodeType !== 1) return false;
+    if (el.closest && (
+      el.closest(".gkm-v191-badge") ||
+      el.closest(".gkm-v191-panel") ||
+      el.closest(".gkm-v191-toast")
+    )) return false;
+
+    const t = norm(el.textContent);
+    if (t.length < 18 || t.length > 1900) return false;
+    if (!el.querySelector("img")) return false;
+    if (!(t.includes("★") || t.includes("фильм") || t.includes("аниме") || t.includes("сериал") || t.includes("мультфильм"))) return false;
+
+    return isVisibleBasic(el);
+  }
+
+  function allCards() {
+    const selectors = [
+      "article", ".card", ".movie-card", ".item", ".catalog-card", ".poster-card",
+      "[class*='card']", "[class*='movie']", "[class*='item']",
+      "main div", "section div"
+    ].join(",");
+
+    const raw = Array.from(document.querySelectorAll(selectors)).filter(isCard);
+    const filtered = raw.filter(c => !raw.some(o => o !== c && o.contains(c) && isCard(o)));
+    return Array.from(new Set(filtered)).slice(0, 5000);
+  }
+
+  function findMainGrid() {
+    const cs = allCards();
+    if (!cs.length) return null;
+
+    const parents = new Map();
+    cs.forEach(c => {
+      const p = c.parentElement;
+      if (p) parents.set(p, (parents.get(p) || 0) + 1);
+    });
+
+    let best = null, max = 0;
+    parents.forEach((n, p) => {
+      if (n > max) { max = n; best = p; }
+    });
+
+    if (!best) return null;
+    return { grid: best, cards: cs.filter(c => c.parentElement === best) };
+  }
+
+  function titleKey(card) {
+    let t = norm(titleOf(card));
+
+    // Убираем мусорные хвосты, которые часто плодят дубли.
+    t = t
+      .replace(/\b\d{4}\b/g, "")
+      .replace(/\b(фильм|сериал|аниме|мультфильм|мультсериал)\b/g, "")
+      .replace(/\bhd\b|\bfull\b|\bseason\b|\bсезон\b/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    return compact(t);
+  }
+
+  function trashPenalty(card) {
+    const r = parseRating(card);
+    const v = parseVotes(card);
+    const title = norm(titleOf(card));
+    let p = 0;
+
+    if (!hasPoster(card)) p += 900;
+    if (r >= 9.8 && v < 100) p += 1200;
+    if (r >= 9.5 && v < 500) p += 550;
+    if (v > 0 && v <= 10) p += 700;
+    if (v > 0 && v < 50) p += 300;
+    if (title.length <= 2) p += 900;
+    if (/^[a-z0-9]{1,3}$/.test(title)) p += 900;
+    if (title.includes("untitled") || title.includes("без названия")) p += 400;
+    if (norm(text(card)).includes("жанры не указаны")) p += 160;
+
+    return p;
+  }
+
+  function qualityScore(card) {
+    const r = parseRating(card);
+    const v = parseVotes(card);
+    const y = parseYear(card);
+    let s = 0;
+
+    s += hasPoster(card) ? 700 : -500;
+    s += Math.min(v, 3000000) / 3500;
+    s += r * 85;
+
+    if (y >= 2020) s += 40;
+    if (y >= 2026 && v < 100) s -= 200;
+
+    s -= trashPenalty(card);
+
+    return s;
+  }
+
+  function dedupePenalty(card, seen) {
+    const key = [titleKey(card), parseYear(card), typeOf(card)].join("|");
+    if (!key || key.length < 5) return 0;
+
+    if (!seen[key]) {
+      seen[key] = 1;
+      return 0;
+    }
+
+    seen[key]++;
+    return 7000 + seen[key] * 20;
+  }
+
+  function sortGridSmart() {
+    const found = findMainGrid();
+    if (!found || !found.cards.length) return;
+
+    const seen = Object.create(null);
+    const rows = found.cards.map((card, idx) => {
+      const score = qualityScore(card) - dedupePenalty(card, seen);
+      return { card, idx, score };
+    });
+
+    rows.sort((a,b) => (b.score - a.score) || (a.idx - b.idx));
+
+    const frag = document.createDocumentFragment();
+    rows.forEach(r => frag.appendChild(r.card));
+    found.grid.appendChild(frag);
+
+    rows.forEach(r => {
+      const isTrash = trashPenalty(r.card) >= 700;
+      r.card.classList.toggle("gkm-v191-soft-trash", isTrash);
+      r.card.dataset.gkmV191Score = String(Math.round(r.score));
+    });
+  }
+
+  function currentQuery() {
+    const input = getSearchInput();
+    return input ? String(input.value || "").trim() : "";
+  }
+
+  function fixedQuery(q) {
+    let x = norm(q);
+    for (const [rx, repl] of TYPO_FIXES) x = x.replace(rx, repl);
+    return x.trim();
+  }
+
+  function queryVariants(q) {
+    const base = fixedQuery(q);
+    const out = new Set();
+
+    if (base) out.add(base);
+
+    for (const [from, to] of SEARCH_ALIASES) {
+      const nf = norm(from);
+      if (!nf) continue;
+      if (base === nf || base.includes(nf) || nf.includes(base)) {
+        String(to).split("|").forEach(v => out.add(norm(v)));
+      }
+    }
+
+    // Разбиваем английские запросы вроде harry potter philosopher
+    if (base.includes("harry") && base.includes("potter")) out.add("гарри поттер");
+    if (base.includes("avengers")) out.add("мстители");
+    if (base.includes("naruto")) out.add("наруто");
+    if (base.includes("dragon") && base.includes("ball")) out.add("драконий жемчуг");
+
+    return Array.from(out).filter(Boolean).slice(0, 12);
+  }
+
+  function searchBoostScore(card, variants) {
+    if (!variants || !variants.length) return 0;
+
+    const t = norm(text(card));
+    const title = norm(titleOf(card));
+    const cTitle = compact(title);
+    let s = 0;
+
+    variants.forEach(q => {
+      const cq = compact(q);
+      if (!q || !cq) return;
+
+      if (title === q) s += 100000;
+      else if (title.includes(q)) s += 60000;
+      else if (q.includes(title) && title.length > 3) s += 30000;
+      else if (cTitle.includes(cq)) s += 26000;
+      else if (t.includes(q)) s += 12000;
+      else if (compact(t).includes(cq)) s += 8000;
+    });
+
+    return s;
+  }
+
+  function sortSearchSmart() {
+    const q = currentQuery();
+    if (!q || q.length < 2) return sortGridSmart();
+
+    const found = findMainGrid();
+    if (!found || !found.cards.length) return;
+
+    const variants = queryVariants(q);
+    const seen = Object.create(null);
+
+    const rows = found.cards.map((card, idx) => {
+      let score = qualityScore(card);
+      score += searchBoostScore(card, variants);
+      score -= dedupePenalty(card, seen);
+
+      // Если есть запрос и карточка вообще не похожа — вниз.
+      if (searchBoostScore(card, variants) <= 0) score -= 25000;
+
+      return { card, idx, score };
+    });
+
+    rows.sort((a,b) => (b.score - a.score) || (a.idx - b.idx));
+
+    const frag = document.createDocumentFragment();
+    rows.forEach(r => frag.appendChild(r.card));
+    found.grid.appendChild(frag);
+
+    rows.forEach((r, i) => {
+      r.card.classList.toggle("gkm-v191-soft-trash", trashPenalty(r.card) >= 700);
+      r.card.classList.toggle("gkm-v191-search-best", i < 3 && searchBoostScore(r.card, variants) > 0);
+      r.card.dataset.gkmV191Score = String(Math.round(r.score));
+    });
+
+    showSearchHint(q, variants);
+  }
+
+  function showSearchHint(q, variants) {
+    if (!q || !variants || variants.length <= 1) return;
+
+    let box = document.querySelector(".gkm-v191-search-hint");
+    if (!box) {
+      box = document.createElement("div");
+      box.className = "gkm-v191-search-hint";
+      const input = getSearchInput();
+      const parent = input && input.parentElement;
+      if (parent) parent.appendChild(box);
+      else document.body.appendChild(box);
+    }
+
+    const visible = variants.filter(v => v !== norm(q)).slice(0, 4);
+    if (!visible.length) {
+      box.remove();
+      return;
+    }
+
+    box.textContent = "Умный поиск: " + visible.join(" · ");
+  }
+
+  function improveSimilarModal() {
+    const modals = Array.from(document.querySelectorAll("[role='dialog'],.modal,.popup,.overlay,dialog"))
+      .filter(el => {
+        const st = getComputedStyle(el);
+        return st.display !== "none" && st.visibility !== "hidden" && el.getBoundingClientRect().height > 120;
+      });
+
+    if (!modals.length) return;
+
+    modals.forEach(modal => {
+      const modalCards = Array.from(modal.querySelectorAll("article,.card,.movie-card,.item,[class*='card'],[class*='movie'],[class*='item'],div"))
+        .filter(isCard);
+
+      if (modalCards.length < 2) return;
+
+      const headText = norm(text(modal).slice(0, 2500));
+      let wanted = "";
+      if (headText.includes("аниме")) wanted = "anime";
+      else if (headText.includes("мультфильм")) wanted = "cartoon";
+      else if (headText.includes("сериал")) wanted = "series";
+      else if (headText.includes("фильм")) wanted = "movie";
+
+      modalCards.forEach(card => {
+        const wrongType = wanted && typeOf(card) && typeOf(card) !== wanted;
+        const bad = wrongType || trashPenalty(card) >= 700;
+        card.classList.toggle("gkm-v191-similar-down", bad);
+      });
+    });
+  }
+
+  function cleanOldBadUI() {
+    [
+      ".gkm-v184-quickbar",".gkm-v185-quickbar",".gkm-v186-quickbar",".gkm-v187-quickbar",
+      ".gkm-v184-panel",".gkm-v185-panel",".gkm-v186-panel",".gkm-v187-panel",
+      ".gkm-v184-folder-btn",".gkm-v185-folder-btn",".gkm-v186-folder-btn",".gkm-v187-folder-btn",
+      ".gkm-v184-folder-menu",".gkm-v185-folder-menu",".gkm-v186-folder-menu",".gkm-v187-folder-menu",
+      ".gkm-v184-mini",".gkm-v185-mini",".gkm-v186-mini",".gkm-v187-mini"
+    ].forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => { try { el.remove(); } catch(e) {} });
+    });
+
+    document.querySelectorAll(".gkm-v184-hidden,.gkm-v185-hidden,.gkm-v186-hidden,.gkm-v187-hidden").forEach(el => {
+      el.classList.remove("gkm-v184-hidden","gkm-v185-hidden","gkm-v186-hidden","gkm-v187-hidden");
+      el.style.removeProperty("display");
+    });
+  }
+
+  function addBadge() {
+    // GKM V194: badge disabled, smart logic stays enabled.
+    document.querySelectorAll(".gkm-v191-badge,.gkm-v192-clickable-badge").forEach(function(el){ try { el.remove(); } catch(e){} });
+    return;
+  }
+
+  function addStyles() {
+    if (document.querySelector("#gkm-v191-style")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkm-v191-style";
+    style.textContent = `
+      .gkm-v191-soft-trash {
+        opacity:.78;
+      }
+      .gkm-v191-similar-down {
+        opacity:.45;
+        filter:grayscale(.65);
+        order:9999;
+      }
+      .gkm-v191-search-best {
+        outline:2px solid rgba(0,216,255,.65);
+        box-shadow:0 0 18px rgba(0,216,255,.22);
+      }
+      .gkm-v191-badge {
+        position:fixed;
+        right:14px;
+        bottom:86px;
+        z-index:99990;
+        padding:8px 11px;
+        border:1px solid rgba(0,216,255,.55);
+        border-radius:999px;
+        background:linear-gradient(135deg,rgba(87,36,214,.9),rgba(0,190,230,.9));
+        color:#fff;
+        font-weight:900;
+        font-size:12px;
+        box-shadow:0 0 18px rgba(0,216,255,.25);
+        cursor:default;
+        user-select:none;
+      }
+      .gkm-v191-search-hint {
+        margin-top:6px;
+        color:#aeefff;
+        font-size:12px;
+        font-weight:800;
+        opacity:.9;
+      }
+      @media(max-width:760px) {
+        .gkm-v191-badge {display:none}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function run() {
+    cleanOldBadUI();
+    addStyles();
+    addBadge();
+
+    const q = currentQuery();
+    if (q && q.length >= 2) sortSearchSmart();
+    else sortGridSmart();
+
+    improveSimilarModal();
+  }
+
+  function schedule() {
+    clearTimeout(window.__gkmV191Timer);
+    window.__gkmV191Timer = setTimeout(function () {
+      safe("run", run);
+    }, 500);
+  }
+
+  function init() {
+    try {
+      ["GKM_V184_STATE","GKM_V184_QUICK_FILTER","GKM_V185_QUICK_FILTER","GKM_V186_QUICK_FILTER","GKM_V187_QUICK_FILTER"].forEach(k => localStorage.removeItem(k));
+    } catch(e) {}
+
+    addStyles();
+    addBadge();
+
+    document.addEventListener("input", schedule, true);
+    document.addEventListener("change", schedule, true);
+    document.addEventListener("click", schedule, true);
+
+    const obs = new MutationObserver(schedule);
+    obs.observe(document.body, { childList:true, subtree:true });
+
+    setTimeout(schedule, 700);
+    setTimeout(schedule, 1700);
+    setTimeout(schedule, 3200);
+
+    console.log("GKM: " + VERSION_TEXT);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+
+  window.GKM_V191_APPLY = function () { return safe("manual", run); };
+  window.GKM_V191_QUERY_VARIANTS = queryVariants;
+  window.GKM_V191_DISABLE = function () { localStorage.setItem(LS_DISABLED, "1"); location.reload(); };
+  window.GKM_V191_ENABLE = function () { localStorage.removeItem(LS_DISABLED); location.reload(); };
+})();
+/* GKM V191 SMART CATALOG SEARCH END */
+
+/* GKM V194 KILL V191 BADGE START */
+(function () {
+  "use strict";
+
+  window.GKM_V194_KILL_V191_BADGE_VERSION = "v194-kill-v191-badge-keep-smart-2026-06-24";
+
+  /*
+    V194:
+    - Жёстко убирает старую плашку V191.
+    - Отключает её повторное появление.
+    - Умная выдача/поиск V191 остаются.
+    - Авто-спасение 0 результатов остаётся.
+  */
+
+  const ALIAS_HINTS = [
+    "наруто","naruto","боруто","boruto","блич","bleach","ван пис","one piece",
+    "атака титанов","attack on titan","токийский гуль","tokyo ghoul",
+    "тетрадь смерти","death note","драконий жемчуг","dragon ball",
+    "мстители","avengers","гарри поттер","harry potter","человек паук","spider",
+    "матрица","matrix","чужой","alien","хищник","predator"
+  ];
+
+  function norm(v) {
+    return String(v || "").toLowerCase().replace(/ё/g, "е").replace(/\s+/g, " ").trim();
+  }
+
+  function getSearchInput() {
+    return document.querySelector("#search")
+      || document.querySelector("#searchInput")
+      || document.querySelector("input[type='search']")
+      || document.querySelector("input[placeholder*='Поиск']")
+      || document.querySelector("input");
+  }
+
+  function currentQuery() {
+    const input = getSearchInput();
+    return input ? norm(input.value) : "";
+  }
+
+  function looksZeroResults() {
+    const t = norm(document.body && document.body.textContent || "");
+    return t.includes("найдено: 0") || t.includes("найдено 0");
+  }
+
+  function isVisible(el) {
+    if (!el || !el.getBoundingClientRect) return false;
+    const r = el.getBoundingClientRect();
+    const st = getComputedStyle(el);
+    return r.width > 20 && r.height > 15 && st.display !== "none" && st.visibility !== "hidden";
+  }
+
+  function findAllButton() {
+    const candidates = Array.from(document.querySelectorAll("button,a,[role='button'],.btn,div,span"))
+      .filter(isVisible)
+      .filter(el => norm(el.textContent) === "все");
+
+    candidates.sort((a,b) => {
+      const ra = a.getBoundingClientRect();
+      const rb = b.getBoundingClientRect();
+      return (ra.top - rb.top) || (ra.left - rb.left);
+    });
+
+    return candidates[0] || null;
+  }
+
+  function queryLooksKnown(q) {
+    if (!q) return false;
+    return ALIAS_HINTS.some(x => q.includes(norm(x)) || norm(x).includes(q));
+  }
+
+  function killBadge() {
+    document.querySelectorAll(".gkm-v191-badge,.gkm-v192-clickable-badge,.gkm-v192-toast,.gkm-v193-toast").forEach(el => {
+      try { el.remove(); } catch(e) {}
+    });
+  }
+
+  function applySmart() {
+    killBadge();
+    try {
+      if (typeof window.GKM_V191_APPLY === "function") window.GKM_V191_APPLY();
+    } catch (e) {
+      console.warn("GKM V194 apply V191 failed", e);
+    }
+    setTimeout(killBadge, 50);
+    setTimeout(function () {
+      killBadge();
+      try {
+        if (typeof window.GKM_V191_APPLY === "function") window.GKM_V191_APPLY();
+      } catch (e) {}
+      killBadge();
+    }, 600);
+  }
+
+  function rescueZeroResults() {
+    killBadge();
+
+    const q = currentQuery();
+    if (!queryLooksKnown(q)) return false;
+    if (!looksZeroResults()) return false;
+
+    const allBtn = findAllButton();
+    if (!allBtn) return false;
+
+    allBtn.click();
+    setTimeout(applySmart, 900);
+    return true;
+  }
+
+  function tick() {
+    killBadge();
+    rescueZeroResults();
+  }
+
+  function addStyles() {
+    if (document.querySelector("#gkm-v194-style")) return;
+
+    const style = document.createElement("style");
+    style.id = "gkm-v194-style";
+    style.textContent = `
+      .gkm-v191-badge,
+      .gkm-v192-clickable-badge,
+      .gkm-v192-toast,
+      .gkm-v193-toast {
+        display:none!important;
+        visibility:hidden!important;
+        opacity:0!important;
+        pointer-events:none!important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function init() {
+    addStyles();
+    tick();
+
+    document.addEventListener("input", function () {
+      clearTimeout(window.__gkmV194Input);
+      window.__gkmV194Input = setTimeout(tick, 700);
+    }, true);
+
+    document.addEventListener("change", function () {
+      clearTimeout(window.__gkmV194Change);
+      window.__gkmV194Change = setTimeout(tick, 700);
+    }, true);
+
+    document.addEventListener("click", function () {
+      clearTimeout(window.__gkmV194Click);
+      window.__gkmV194Click = setTimeout(tick, 250);
+    }, true);
+
+    const obs = new MutationObserver(function () {
+      clearTimeout(window.__gkmV194Obs);
+      window.__gkmV194Obs = setTimeout(tick, 250);
+    });
+    obs.observe(document.body, {childList:true, subtree:true});
+
+    setTimeout(tick, 200);
+    setTimeout(tick, 700);
+    setTimeout(tick, 1700);
+    setTimeout(tick, 3200);
+
+    console.log("GKM: v194-kill-v191-badge-keep-smart-2026-06-24");
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+
+  window.GKM_V194_APPLY_SMART = function () {
+    const rescued = rescueZeroResults();
+    if (!rescued) applySmart();
+    killBadge();
+    return "V194 smart applied, badge killed";
+  };
+
+  window.GKM_V194_KILL_BADGE = killBadge;
+})();
+/* GKM V194 KILL V191 BADGE END */
+
+
+/* GKM V199 CLEAN MODAL EXTERNAL LINKS START */
+(function () {
+  "use strict";
+
+  window.GKM_V199_CLEAN_MODAL_EXTERNAL_LINKS_VERSION = "v199-clean-modal-external-links-2026-06-29";
+
+  const EXTERNAL_LINK_IDS = [
+    "yandexLink",
+    "yandexVideoLink",
+    "kinopoiskLink",
+    "youtubeLink",
+    "vkLink",
+    "rutubeLink",
+    "googleLink",
+    "shikimoriLink",
+    "malLink"
+  ];
+
+  const ANIME_SITES = [
+    ["Shikimori", "shikimori"],
+    ["MyAnimeList", "mal"],
+    ["AniList", "anilist"],
+    ["Anime-Planet", "animePlanet"],
+    ["AniDB", "anidb"]
+  ];
+
+  function cleanText(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+  }
+
+  function itemTitleForSearch(item) {
+    try {
+      return cleanText(displayTitle(item) || titleOf(item));
+    } catch (_) {
+      return cleanText(item && (item.ru || item.title_ru || item.name || item.title || item.en || item.original_title || item.original_name));
+    }
+  }
+
+  function itemYearForSearch(item) {
+    try { return cleanText(getYear(item)); } catch (_) { return cleanText(item && item.year); }
+  }
+
+  function itemIsAnime(item) {
+    try { return Boolean(isAnimeItem(item) || getType(item) === "Аниме"); } catch (_) { return false; }
+  }
+
+  function buildExternalUrl(kind, query) {
+    const q = encodeURIComponent(cleanText(query));
+    switch (kind) {
+      case "yandex": return "https://yandex.ru/search/?text=" + q;
+      case "yandexVideo": return "https://yandex.ru/video/search?text=" + q;
+      case "kinopoisk": return "https://www.kinopoisk.ru/index.php?kp_query=" + q;
+      case "youtube": return "https://www.youtube.com/results?search_query=" + q;
+      case "vk": return "https://vkvideo.ru/search?q=" + q;
+      case "rutube": return "https://rutube.ru/search/?query=" + q;
+      case "google": return "https://www.google.com/search?q=" + q;
+      case "shikimori": return "https://shikimori.one/animes?search=" + q;
+      case "mal": return "https://myanimelist.net/anime.php?q=" + q;
+      case "anilist": return "https://anilist.co/search/anime?search=" + q;
+      case "animePlanet": return "https://www.anime-planet.com/anime/all?name=" + q;
+      case "anidb": return "https://anidb.net/anime/?adb.search=" + q;
+      default: return "https://www.google.com/search?q=" + q;
+    }
+  }
+
+  function markExternalLink(id, url) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.setAttribute("href", url);
+    el.setAttribute("target", "_blank");
+    el.setAttribute("rel", "noopener noreferrer");
+    el.dataset.gkmV199External = "1";
+
+    // Важно: убираем возможные старые inline-обработчики, чтобы клик не раздваивался.
+    el.onclick = null;
+  }
+
+  function setBlockVisible(id, visible) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = visible ? "" : "none";
+  }
+
+  function setFindBlockTitle(text) {
+    const firstLink = document.getElementById("yandexLink");
+    const section = firstLink && firstLink.closest("section");
+    const title = section && section.querySelector(".links-title,h3");
+    if (title) title.textContent = text;
+  }
+
+  function renderAnimeSites(title) {
+    const block = document.getElementById("animeLinksBlock");
+    const box = block && block.querySelector(".detail-buttons");
+    if (!box) return;
+
+    box.innerHTML = ANIME_SITES.map(([label, kind]) => {
+      const url = buildExternalUrl(kind, title);
+      return '<a href="' + url + '" target="_blank" rel="noopener noreferrer" data-gkm-v199-external="1">' + label + '</a>';
+    }).join("");
+  }
+
+  function removeOldConflictBlocks(dialog) {
+    if (!dialog) return;
+
+    dialog.querySelectorAll(
+      ".gkm-v198-cinema-sites," +
+      ".gkm-v198-find-sites," +
+      ".gkm-v195-find-sites," +
+      ".gkm-v197-find-sites," +
+      ".gkm-v195-sites," +
+      ".gkm-v197-sites," +
+      ".gkm-modal-sites," +
+      "[data-gkm-v195-kind]," +
+      "[data-gkm-v197-kind]," +
+      "[data-gkm-v198-kind]"
+    ).forEach(el => {
+      // Не трогаем штатные кнопки из index.html, только старые сгенерированные блоки/элементы.
+      if (!el.id || !EXTERNAL_LINK_IDS.includes(el.id)) el.remove();
+    });
+  }
+
+  function dedupeModalButtons(dialog) {
+    if (!dialog) return;
+    const seen = new Set();
+    const protectedIds = new Set(EXTERNAL_LINK_IDS.concat(["favBtn"]));
+
+    dialog.querySelectorAll(".detail-buttons a, .detail-buttons button").forEach(el => {
+      const label = cleanText(el.textContent).toLowerCase();
+      if (!label) return;
+      const key = label + "|" + (el.dataset.gkmV199External ? "external" : "button");
+
+      if (protectedIds.has(el.id)) {
+        seen.add(key);
+        return;
+      }
+
+      if (seen.has(key)) el.remove();
+      else seen.add(key);
+    });
+  }
+
+  window.GKM_V199_APPLY_MODAL_EXTERNAL_LINKS = function applyModalExternalLinks(item) {
+    const dialog = document.getElementById("detailsDialog");
+    const title = itemTitleForSearch(item);
+    const year = itemYearForSearch(item);
+    const query = cleanText((title + " " + year).trim());
+    const anime = itemIsAnime(item);
+
+    removeOldConflictBlocks(dialog);
+
+    // Старый пустой/дублирующий блок не используем: все рабочие кнопки лежат в одном чистом ряду.
+    const playerButtons = document.getElementById("playerButtons");
+    if (playerButtons) playerButtons.innerHTML = "";
+    setBlockVisible("playerBlock", false);
+
+    setFindBlockTitle(anime ? "Поиск и видео" : "Кино-сайты");
+
+    markExternalLink("yandexLink", buildExternalUrl("yandex", query));
+    markExternalLink("yandexVideoLink", buildExternalUrl("yandexVideo", query));
+    markExternalLink("kinopoiskLink", buildExternalUrl("kinopoisk", query));
+    markExternalLink("youtubeLink", buildExternalUrl("youtube", query));
+    markExternalLink("vkLink", buildExternalUrl("vk", query));
+    markExternalLink("rutubeLink", buildExternalUrl("rutube", query));
+    markExternalLink("googleLink", buildExternalUrl("google", query));
+
+    setBlockVisible("animeLinksBlock", anime);
+    if (anime) {
+      renderAnimeSites(title);
+    }
+
+    dedupeModalButtons(dialog);
+  };
+
+  document.addEventListener("click", function (event) {
+    const el = event.target.closest && event.target.closest("a[data-gkm-v199-external],button[data-gkm-v199-external]");
+    if (!el) return;
+
+    const url = el.getAttribute("href") || el.dataset.href || "";
+    if (!/^https?:\/\//i.test(url)) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    window.open(url, "_blank", "noopener,noreferrer");
+  }, true);
+})();
+/* GKM V199 CLEAN MODAL EXTERNAL LINKS END */
+/* GKM V211 GAME COLLECTIONS + FAST POSTERS START */
+(function () {
+  "use strict";
+
+  window.GKM_V202_GAME_HUB_VERSION = "v211-game-collections-fast-posters-2026-06-29";
+
+  const GAMES_URL = "./data/games_catalog.json?v=232";
+  const PAGE = 24;
+  const RELATION_FILTERS = [
+    ["all", "Все"],
+    ["game_to_movie", "Игра → фильм"],
+    ["game_to_movies", "Игра → фильмы"],
+    ["game_to_series", "Игра → сериал"],
+    ["game_to_anime", "Игра → аниме"],
+    ["game_to_animation", "Игра → мульт"],
+    ["media_to_game", "Фильм/аниме → игра"],
+    ["shared_universe", "Общая вселенная"],
+    ["vibe_media", "Кино-вайб"]
+  ];
+
+  const COLLECTION_FILTERS = [
+    ["all", "Все подборки"],
+    ["best_adaptations", "🎬 Лучшие экранизации"],
+    ["series", "📺 Есть сериал"],
+    ["anime", "🌸 Есть аниме"],
+    ["horror", "🧟 Хоррор / зомби"],
+    ["fantasy", "⚔️ Фэнтези"],
+    ["scifi", "🚀 Фантастика"],
+    ["cyberpunk", "👾 Киберпанк"],
+    ["fighting", "👊 Файтинги"],
+    ["family", "👶 Семейное"],
+    ["cult", "🔥 Культовые"],
+    ["new", "🆕 Новые"]
+  ];
+
+  let gamesCache = null;
+  let gamesPage = 1;
+  let gamesPages = 1;
+  let gamesFilterTimer = 0;
+  let activeRelation = "all";
+  let activeCollection = "all";
+
+  const FALLBACK_GAMES = [
+    {
+        "id": "game-cyberpunk-2077",
+        "title": "Cyberpunk 2077",
+        "type": "Игра",
+        "year": 2020,
+        "rating": 8.6,
+        "votes": 720000,
+        "genres": [
+            "RPG",
+            "Киберпанк",
+            "Открытый мир"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → аниме",
+        "badges": [
+            "📺 Есть аниме",
+            "🧩 DLC",
+            "🔥 Популярное"
+        ],
+        "relatedMedia": [
+            "Cyberpunk: Edgerunners"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1091500/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1091500/Cyberpunk_2077/",
+            "gog": "https://www.gog.com/en/game/cyberpunk_2077"
+        },
+        "description": "Одна вселенная с аниме Cyberpunk: Edgerunners. Хорошо подходит для блока “посмотрел — во что играть дальше”.",
+        "playAfterWatch": [
+            "Cyberpunk 2077",
+            "Cyberpunk 2077: Phantom Liberty"
+        ],
+        "chronology": [
+            "Cyberpunk 2077",
+            "Cyberpunk: Edgerunners",
+            "Cyberpunk 2077: Phantom Liberty"
+        ],
+        "similarGames": [
+            "Deus Ex: Human Revolution",
+            "The Ascent",
+            "Watch Dogs 2"
+        ],
+        "similarMedia": [
+            "Blade Runner 2049",
+            "Ghost in the Shell",
+            "Altered Carbon"
+        ],
+        "vibe": [
+            "киберпанк",
+            "неон",
+            "мегаполис",
+            "будущее"
+        ],
+        "universe": {
+            "name": "Cyberpunk",
+            "games": [
+                "Cyberpunk 2077",
+                "Phantom Liberty"
+            ],
+            "anime": [
+                "Cyberpunk: Edgerunners"
+            ],
+            "movies": [
+                "Blade Runner 2049 по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "Cyberpunk: Edgerunners"
+        ],
+        "playOrder": [
+            "Cyberpunk 2077",
+            "Cyberpunk: Edgerunners",
+            "Cyberpunk 2077: Phantom Liberty"
+        ]
+    },
+    {
+        "id": "game-the-last-of-us",
+        "title": "The Last of Us Part I",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 9.2,
+        "votes": 900000,
+        "genres": [
+            "Приключение",
+            "Драма",
+            "Постапокалипсис"
+        ],
+        "relation": "game_to_series",
+        "relationLabel": "игра → сериал",
+        "badges": [
+            "📺 Есть сериал",
+            "⭐ Культовая",
+            "🎭 Драма"
+        ],
+        "relatedMedia": [
+            "The Last of Us"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1888930/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1888930/The_Last_of_Us_Part_I/"
+        },
+        "description": "Игра, по которой снят сериал The Last of Us.",
+        "playAfterWatch": [
+            "The Last of Us Part I",
+            "The Last of Us Part II"
+        ],
+        "chronology": [
+            "The Last of Us: Left Behind",
+            "The Last of Us Part I",
+            "The Last of Us Part II",
+            "The Last of Us сериал"
+        ],
+        "similarGames": [
+            "Days Gone",
+            "A Plague Tale: Requiem",
+            "Metro Exodus"
+        ],
+        "similarMedia": [
+            "The Walking Dead",
+            "Children of Men",
+            "Logan"
+        ],
+        "vibe": [
+            "выживание",
+            "драма",
+            "постапокалипсис"
+        ],
+        "watchOrder": [
+            "The Last of Us"
+        ],
+        "playOrder": [
+            "The Last of Us: Left Behind",
+            "The Last of Us Part I",
+            "The Last of Us Part II",
+            "The Last of Us сериал"
+        ]
+    },
+    {
+        "id": "game-fallout-4",
+        "title": "Fallout 4",
+        "type": "Игра",
+        "year": 2015,
+        "rating": 8.4,
+        "votes": 850000,
+        "genres": [
+            "RPG",
+            "Постапокалипсис",
+            "Открытый мир"
+        ],
+        "relation": "game_to_series",
+        "relationLabel": "игра → сериал",
+        "badges": [
+            "📺 Есть сериал",
+            "🌍 Открытый мир",
+            "☢️ Постапок"
+        ],
+        "relatedMedia": [
+            "Fallout"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/377160/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/377160/Fallout_4/"
+        },
+        "description": "Игровая вселенная Fallout получила сериал. Хороший кандидат для карточки-вселенной.",
+        "playAfterWatch": [
+            "Fallout 4",
+            "Fallout: New Vegas",
+            "Fallout 76"
+        ],
+        "chronology": [
+            "Fallout",
+            "Fallout 2",
+            "Fallout 3",
+            "Fallout: New Vegas",
+            "Fallout 4",
+            "Fallout сериал"
+        ],
+        "similarGames": [
+            "S.T.A.L.K.E.R. 2",
+            "Metro Exodus",
+            "Wasteland 3"
+        ],
+        "similarMedia": [
+            "Mad Max: Fury Road",
+            "Silo",
+            "The 100"
+        ],
+        "vibe": [
+            "пустошь",
+            "убежища",
+            "ретрофутуризм"
+        ],
+        "universe": {
+            "name": "Fallout",
+            "games": [
+                "Fallout",
+                "Fallout 2",
+                "Fallout 3",
+                "Fallout: New Vegas",
+                "Fallout 4",
+                "Fallout 76"
+            ],
+            "series": [
+                "Fallout"
+            ]
+        },
+        "watchOrder": [
+            "Fallout"
+        ],
+        "playOrder": [
+            "Fallout",
+            "Fallout 2",
+            "Fallout 3",
+            "Fallout: New Vegas",
+            "Fallout 4",
+            "Fallout сериал"
+        ]
+    },
+    {
+        "id": "game-witcher-3",
+        "title": "The Witcher 3: Wild Hunt",
+        "type": "Игра",
+        "year": 2015,
+        "rating": 9.5,
+        "votes": 1200000,
+        "genres": [
+            "RPG",
+            "Фэнтези",
+            "Открытый мир"
+        ],
+        "relation": "shared_universe",
+        "relationLabel": "книги → игра → сериал",
+        "badges": [
+            "📺 Есть сериал",
+            "📚 Книги",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "The Witcher",
+            "The Witcher: Nightmare of the Wolf"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/292030/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/",
+            "gog": "https://www.gog.com/en/game/the_witcher_3_wild_hunt"
+        },
+        "description": "Большая вселенная: книги, игры, сериал и анимация.",
+        "playAfterWatch": [
+            "The Witcher 3: Wild Hunt",
+            "The Witcher 2",
+            "Thronebreaker"
+        ],
+        "chronology": [
+            "Книги о Ведьмаке",
+            "The Witcher",
+            "The Witcher 2",
+            "The Witcher 3",
+            "Сериал The Witcher"
+        ],
+        "similarGames": [
+            "Dragon Age: Inquisition",
+            "Baldur’s Gate 3",
+            "Elden Ring"
+        ],
+        "similarMedia": [
+            "Game of Thrones",
+            "The Last Kingdom",
+            "Castlevania"
+        ],
+        "vibe": [
+            "фэнтези",
+            "монстры",
+            "мрачный мир"
+        ],
+        "universe": {
+            "name": "The Witcher",
+            "games": [
+                "The Witcher",
+                "The Witcher 2",
+                "The Witcher 3",
+                "Thronebreaker"
+            ],
+            "series": [
+                "The Witcher"
+            ],
+            "animation": [
+                "Nightmare of the Wolf"
+            ]
+        },
+        "watchOrder": [
+            "The Witcher",
+            "The Witcher: Nightmare of the Wolf"
+        ],
+        "playOrder": [
+            "Книги о Ведьмаке",
+            "The Witcher",
+            "The Witcher 2",
+            "The Witcher 3",
+            "Сериал The Witcher"
+        ]
+    },
+    {
+        "id": "game-resident-evil-4",
+        "title": "Resident Evil 4",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 9.1,
+        "votes": 650000,
+        "genres": [
+            "Хоррор",
+            "Экшен",
+            "Выживание"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы / анимация",
+        "badges": [
+            "🎬 Есть фильмы",
+            "🧟 Хоррор",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "Resident Evil",
+            "Resident Evil: Degeneration",
+            "Resident Evil: Infinite Darkness"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/2050650/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/2050650/Resident_Evil_4/"
+        },
+        "description": "Resident Evil — одна из главных игровых вселенных с фильмами, сериалами и анимацией.",
+        "playAfterWatch": [
+            "Resident Evil 2",
+            "Resident Evil 4",
+            "Resident Evil Village"
+        ],
+        "chronology": [
+            "Resident Evil 0",
+            "Resident Evil",
+            "Resident Evil 2",
+            "Resident Evil 3",
+            "Resident Evil 4",
+            "Resident Evil Village"
+        ],
+        "similarGames": [
+            "Dead Space",
+            "The Evil Within",
+            "Alan Wake 2"
+        ],
+        "similarMedia": [
+            "28 Days Later",
+            "Train to Busan",
+            "Silent Hill"
+        ],
+        "vibe": [
+            "зомби",
+            "корпорация",
+            "выживание"
+        ],
+        "universe": {
+            "name": "Resident Evil",
+            "games": [
+                "Resident Evil 0",
+                "Resident Evil",
+                "Resident Evil 2",
+                "Resident Evil 3",
+                "Resident Evil 4",
+                "Resident Evil 7",
+                "Resident Evil Village"
+            ],
+            "movies": [
+                "Resident Evil",
+                "Resident Evil: Apocalypse",
+                "Welcome to Raccoon City"
+            ],
+            "animation": [
+                "Degeneration",
+                "Damnation",
+                "Vendetta",
+                "Infinite Darkness"
+            ]
+        },
+        "watchOrder": [
+            "Resident Evil",
+            "Resident Evil: Degeneration",
+            "Resident Evil: Infinite Darkness"
+        ],
+        "playOrder": [
+            "Resident Evil 0",
+            "Resident Evil",
+            "Resident Evil 2",
+            "Resident Evil 3",
+            "Resident Evil 4",
+            "Resident Evil Village"
+        ]
+    },
+    {
+        "id": "game-silent-hill-2",
+        "title": "Silent Hill 2",
+        "type": "Игра",
+        "year": 2024,
+        "rating": 8.8,
+        "votes": 250000,
+        "genres": [
+            "Психологический хоррор",
+            "Выживание"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🧠 Психохоррор",
+            "🌫 Атмосфера"
+        ],
+        "relatedMedia": [
+            "Silent Hill"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/2124490/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/2124490/SILENT_HILL_2/"
+        },
+        "description": "Silent Hill — игровая хоррор-вселенная, по которой выходили фильмы.",
+        "playAfterWatch": [
+            "Silent Hill 2",
+            "Silent Hill",
+            "Silent Hill 3"
+        ],
+        "chronology": [
+            "Silent Hill",
+            "Silent Hill 2",
+            "Silent Hill 3",
+            "Silent Hill фильм"
+        ],
+        "similarGames": [
+            "Alan Wake 2",
+            "The Medium",
+            "Layers of Fear"
+        ],
+        "similarMedia": [
+            "Jacob’s Ladder",
+            "The Mist",
+            "1408"
+        ],
+        "vibe": [
+            "туман",
+            "психология",
+            "кошмар"
+        ],
+        "watchOrder": [
+            "Silent Hill"
+        ],
+        "playOrder": [
+            "Silent Hill",
+            "Silent Hill 2",
+            "Silent Hill 3",
+            "Silent Hill фильм"
+        ]
+    },
+    {
+        "id": "game-mortal-kombat-1",
+        "title": "Mortal Kombat 1",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.0,
+        "votes": 320000,
+        "genres": [
+            "Файтинг",
+            "Экшен"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы / мультфильмы",
+        "badges": [
+            "🎬 Есть фильмы",
+            "🥊 Файтинг",
+            "🔥 Жестко"
+        ],
+        "relatedMedia": [
+            "Mortal Kombat",
+            "Mortal Kombat Legends"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1971870/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1971870/Mortal_Kombat_1/"
+        },
+        "description": "Mortal Kombat удобно держать как игровую вселенную: игры, фильмы, мультфильмы и турниры.",
+        "playAfterWatch": [
+            "Mortal Kombat 1",
+            "Mortal Kombat 11"
+        ],
+        "chronology": [
+            "Mortal Kombat классика",
+            "Mortal Kombat 9",
+            "Mortal Kombat X",
+            "Mortal Kombat 11",
+            "Mortal Kombat 1"
+        ],
+        "similarGames": [
+            "Tekken 8",
+            "Street Fighter 6",
+            "Injustice 2"
+        ],
+        "similarMedia": [
+            "Bloodsport",
+            "Ninja Assassin",
+            "Mortal Kombat Legends"
+        ],
+        "vibe": [
+            "турнир",
+            "бойцы",
+            "фаталити"
+        ],
+        "universe": {
+            "name": "Mortal Kombat",
+            "games": [
+                "Mortal Kombat 9",
+                "Mortal Kombat X",
+                "Mortal Kombat 11",
+                "Mortal Kombat 1"
+            ],
+            "movies": [
+                "Mortal Kombat 1995",
+                "Mortal Kombat 2021"
+            ],
+            "animation": [
+                "Mortal Kombat Legends"
+            ]
+        },
+        "watchOrder": [
+            "Mortal Kombat",
+            "Mortal Kombat Legends"
+        ],
+        "playOrder": [
+            "Mortal Kombat классика",
+            "Mortal Kombat 9",
+            "Mortal Kombat X",
+            "Mortal Kombat 11",
+            "Mortal Kombat 1"
+        ]
+    },
+    {
+        "id": "game-sonic-frontiers",
+        "title": "Sonic Frontiers",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.1,
+        "votes": 190000,
+        "genres": [
+            "Платформер",
+            "Приключение"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы / мультсериалы",
+        "badges": [
+            "🎬 Есть фильмы",
+            "👨‍👩‍👧 Семейное",
+            "⚡ Быстро"
+        ],
+        "relatedMedia": [
+            "Sonic the Hedgehog",
+            "Sonic Prime"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1237320/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1237320/Sonic_Frontiers/"
+        },
+        "description": "Sonic — яркая связка игр, фильмов и мультсериалов.",
+        "playAfterWatch": [
+            "Sonic Frontiers",
+            "Sonic Mania",
+            "Sonic Generations"
+        ],
+        "chronology": [
+            "Sonic классика",
+            "Sonic Mania",
+            "Sonic Frontiers",
+            "Sonic фильмы",
+            "Sonic Prime"
+        ],
+        "similarGames": [
+            "Crash Bandicoot 4",
+            "Spyro Reignited Trilogy",
+            "Ratchet & Clank"
+        ],
+        "similarMedia": [
+            "The Super Mario Bros. Movie",
+            "Sonic Prime",
+            "Detective Pikachu"
+        ],
+        "vibe": [
+            "скорость",
+            "семейное",
+            "приключение"
+        ],
+        "universe": {
+            "name": "Sonic",
+            "games": [
+                "Sonic Mania",
+                "Sonic Generations",
+                "Sonic Frontiers"
+            ],
+            "movies": [
+                "Sonic the Hedgehog",
+                "Sonic 2",
+                "Sonic 3"
+            ],
+            "series": [
+                "Sonic Prime"
+            ]
+        },
+        "watchOrder": [
+            "Sonic the Hedgehog",
+            "Sonic Prime"
+        ],
+        "playOrder": [
+            "Sonic классика",
+            "Sonic Mania",
+            "Sonic Frontiers",
+            "Sonic фильмы",
+            "Sonic Prime"
+        ]
+    },
+    {
+        "id": "game-halo-mcc",
+        "title": "Halo: The Master Chief Collection",
+        "type": "Игра",
+        "year": 2019,
+        "rating": 8.7,
+        "votes": 500000,
+        "genres": [
+            "Шутер",
+            "Фантастика"
+        ],
+        "relation": "game_to_series",
+        "relationLabel": "игра → сериал",
+        "badges": [
+            "📺 Есть сериал",
+            "🚀 Sci-Fi",
+            "🔫 Шутер"
+        ],
+        "relatedMedia": [
+            "Halo"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/976730/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/976730/Halo_The_Master_Chief_Collection/"
+        },
+        "description": "Halo — игровая sci-fi вселенная, по которой сделали сериал.",
+        "playAfterWatch": [
+            "Halo: Combat Evolved",
+            "Halo 2",
+            "Halo 3",
+            "Halo Reach"
+        ],
+        "chronology": [
+            "Halo Reach",
+            "Halo: Combat Evolved",
+            "Halo 2",
+            "Halo 3",
+            "Halo 4",
+            "Halo сериал"
+        ],
+        "similarGames": [
+            "DOOM Eternal",
+            "Destiny 2",
+            "Titanfall 2"
+        ],
+        "similarMedia": [
+            "The Expanse",
+            "Battlestar Galactica",
+            "Starship Troopers"
+        ],
+        "vibe": [
+            "космос",
+            "броня",
+            "война"
+        ],
+        "universe": {
+            "name": "Halo",
+            "games": [
+                "Halo Reach",
+                "Halo CE",
+                "Halo 2",
+                "Halo 3",
+                "Halo 4",
+                "Halo Infinite"
+            ],
+            "series": [
+                "Halo"
+            ]
+        },
+        "watchOrder": [
+            "Halo"
+        ],
+        "playOrder": [
+            "Halo Reach",
+            "Halo: Combat Evolved",
+            "Halo 2",
+            "Halo 3",
+            "Halo 4",
+            "Halo сериал"
+        ]
+    },
+    {
+        "id": "game-uncharted",
+        "title": "UNCHARTED: Legacy of Thieves Collection",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.6,
+        "votes": 300000,
+        "genres": [
+            "Приключение",
+            "Экшен"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🧭 Приключение",
+            "💎 Сокровища"
+        ],
+        "relatedMedia": [
+            "Uncharted"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1659420/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1659420/UNCHARTED_Legacy_of_Thieves_Collection/"
+        },
+        "description": "Uncharted — приключенческая игра, которую перенесли в кино.",
+        "playAfterWatch": [
+            "Uncharted 4",
+            "Uncharted: The Lost Legacy"
+        ],
+        "chronology": [
+            "Uncharted",
+            "Uncharted 2",
+            "Uncharted 3",
+            "Uncharted 4",
+            "Uncharted фильм"
+        ],
+        "similarGames": [
+            "Tomb Raider",
+            "Indiana Jones and the Great Circle",
+            "Star Wars Jedi: Survivor"
+        ],
+        "similarMedia": [
+            "Indiana Jones",
+            "National Treasure",
+            "Tomb Raider"
+        ],
+        "vibe": [
+            "сокровища",
+            "погони",
+            "приключение"
+        ],
+        "watchOrder": [
+            "Uncharted"
+        ],
+        "playOrder": [
+            "Uncharted",
+            "Uncharted 2",
+            "Uncharted 3",
+            "Uncharted 4",
+            "Uncharted фильм"
+        ]
+    },
+    {
+        "id": "game-tomb-raider",
+        "title": "Tomb Raider",
+        "type": "Игра",
+        "year": 2013,
+        "rating": 8.5,
+        "votes": 700000,
+        "genres": [
+            "Приключение",
+            "Экшен"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы / анимация",
+        "badges": [
+            "🎬 Есть фильмы",
+            "🧗 Выживание",
+            "🏹 Лара"
+        ],
+        "relatedMedia": [
+            "Tomb Raider"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/203160/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/203160/Tomb_Raider/"
+        },
+        "description": "Tomb Raider — игровая серия с фильмами и анимационными проектами.",
+        "playAfterWatch": [
+            "Tomb Raider",
+            "Rise of the Tomb Raider",
+            "Shadow of the Tomb Raider"
+        ],
+        "chronology": [
+            "Tomb Raider",
+            "Rise of the Tomb Raider",
+            "Shadow of the Tomb Raider",
+            "Tomb Raider фильмы"
+        ],
+        "similarGames": [
+            "Uncharted",
+            "Horizon Zero Dawn",
+            "Assassin’s Creed Origins"
+        ],
+        "similarMedia": [
+            "Uncharted",
+            "Indiana Jones",
+            "The Mummy"
+        ],
+        "vibe": [
+            "гробницы",
+            "остров",
+            "выживание"
+        ],
+        "universe": {
+            "name": "Tomb Raider",
+            "games": [
+                "Tomb Raider",
+                "Rise of the Tomb Raider",
+                "Shadow of the Tomb Raider"
+            ],
+            "movies": [
+                "Lara Croft: Tomb Raider",
+                "Tomb Raider 2018"
+            ],
+            "animation": [
+                "Tomb Raider: The Legend of Lara Croft"
+            ]
+        },
+        "watchOrder": [
+            "Tomb Raider"
+        ],
+        "playOrder": [
+            "Tomb Raider",
+            "Rise of the Tomb Raider",
+            "Shadow of the Tomb Raider",
+            "Tomb Raider фильмы"
+        ]
+    },
+    {
+        "id": "game-assassins-creed",
+        "title": "Assassin's Creed Odyssey",
+        "type": "Игра",
+        "year": 2018,
+        "rating": 8.4,
+        "votes": 720000,
+        "genres": [
+            "Экшен",
+            "RPG",
+            "История"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🏛 История",
+            "🗡 Ассасины"
+        ],
+        "relatedMedia": [
+            "Assassin's Creed"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/812140/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/812140/Assassins_Creed_Odyssey/"
+        },
+        "description": "Assassin's Creed — большая игровая вселенная с фильмом и потенциалом для сериалов.",
+        "playAfterWatch": [
+            "Assassin's Creed II",
+            "Assassin's Creed Odyssey",
+            "Assassin's Creed Valhalla"
+        ],
+        "chronology": [
+            "Древний Египет",
+            "Древняя Греция",
+            "Викинги",
+            "Крестовые походы",
+            "Ренессанс",
+            "Фильм"
+        ],
+        "similarGames": [
+            "Ghost of Tsushima",
+            "Shadow of Mordor",
+            "Prince of Persia"
+        ],
+        "similarMedia": [
+            "Kingdom of Heaven",
+            "Gladiator",
+            "Marco Polo"
+        ],
+        "vibe": [
+            "история",
+            "скрытность",
+            "орден"
+        ],
+        "watchOrder": [
+            "Assassin's Creed"
+        ],
+        "playOrder": [
+            "Древний Египет",
+            "Древняя Греция",
+            "Викинги",
+            "Крестовые походы",
+            "Ренессанс",
+            "Фильм"
+        ]
+    },
+    {
+        "id": "game-castlevania",
+        "title": "Castlevania: Lords of Shadow",
+        "type": "Игра",
+        "year": 2013,
+        "rating": 8.0,
+        "votes": 180000,
+        "genres": [
+            "Экшен",
+            "Готика",
+            "Фэнтези"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → анимационный сериал",
+        "badges": [
+            "📺 Есть анимация",
+            "🧛 Вампиры",
+            "🌑 Готика"
+        ],
+        "relatedMedia": [
+            "Castlevania",
+            "Castlevania: Nocturne"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/234080/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/234080/Castlevania_Lords_of_Shadow__Ultimate_Edition/"
+        },
+        "description": "Castlevania — игровая серия, которая отлично легла в формат анимационного сериала.",
+        "playAfterWatch": [
+            "Castlevania: Lords of Shadow",
+            "Castlevania: Symphony of the Night"
+        ],
+        "chronology": [
+            "Классические Castlevania",
+            "Lords of Shadow",
+            "Castlevania анимация",
+            "Castlevania: Nocturne"
+        ],
+        "similarGames": [
+            "Bloodstained",
+            "Blasphemous",
+            "Devil May Cry 5"
+        ],
+        "similarMedia": [
+            "Vampire Hunter D",
+            "Hellsing",
+            "Berserk"
+        ],
+        "vibe": [
+            "вампиры",
+            "готика",
+            "замки"
+        ],
+        "universe": {
+            "name": "Castlevania",
+            "games": [
+                "Castlevania III",
+                "Symphony of the Night",
+                "Lords of Shadow"
+            ],
+            "anime": [
+                "Castlevania",
+                "Castlevania: Nocturne"
+            ]
+        },
+        "watchOrder": [
+            "Castlevania",
+            "Castlevania: Nocturne"
+        ],
+        "playOrder": [
+            "Классические Castlevania",
+            "Lords of Shadow",
+            "Castlevania анимация",
+            "Castlevania: Nocturne"
+        ]
+    },
+    {
+        "id": "game-dota-2",
+        "title": "Dota 2",
+        "type": "Игра",
+        "year": 2013,
+        "rating": 8.2,
+        "votes": 1600000,
+        "genres": [
+            "MOBA",
+            "Фэнтези",
+            "Командная"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → аниме",
+        "badges": [
+            "📺 Есть аниме",
+            "⚔️ Командная",
+            "🔥 Популярное"
+        ],
+        "relatedMedia": [
+            "Dota: Dragon's Blood"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/570/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/570/Dota_2/"
+        },
+        "description": "Dota 2 связана с аниме Dota: Dragon's Blood.",
+        "playAfterWatch": [
+            "Dota 2"
+        ],
+        "chronology": [
+            "Dota",
+            "Dota 2",
+            "Dota: Dragon’s Blood"
+        ],
+        "similarGames": [
+            "League of Legends",
+            "Smite",
+            "Heroes of the Storm"
+        ],
+        "similarMedia": [
+            "Arcane",
+            "Dragon Prince",
+            "Castlevania"
+        ],
+        "vibe": [
+            "герои",
+            "магия",
+            "команды"
+        ],
+        "universe": {
+            "name": "Dota",
+            "games": [
+                "Dota 2"
+            ],
+            "anime": [
+                "Dota: Dragon’s Blood"
+            ]
+        },
+        "watchOrder": [
+            "Dota: Dragon's Blood"
+        ],
+        "playOrder": [
+            "Dota",
+            "Dota 2",
+            "Dota: Dragon’s Blood"
+        ]
+    },
+    {
+        "id": "game-devil-may-cry",
+        "title": "Devil May Cry 5",
+        "type": "Игра",
+        "year": 2019,
+        "rating": 8.9,
+        "votes": 520000,
+        "genres": [
+            "Слэшер",
+            "Экшен",
+            "Демоны"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → аниме",
+        "badges": [
+            "📺 Есть аниме",
+            "⚔️ Слэшер",
+            "😈 Демоны"
+        ],
+        "relatedMedia": [
+            "Devil May Cry"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/601150/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/601150/Devil_May_Cry_5/"
+        },
+        "description": "Devil May Cry — стильная игровая серия с аниме-адаптацией.",
+        "playAfterWatch": [
+            "Devil May Cry 3",
+            "Devil May Cry 5"
+        ],
+        "chronology": [
+            "Devil May Cry 3",
+            "Devil May Cry",
+            "Devil May Cry 4",
+            "Devil May Cry 5",
+            "Devil May Cry аниме"
+        ],
+        "similarGames": [
+            "Bayonetta",
+            "Metal Gear Rising",
+            "Ninja Gaiden"
+        ],
+        "similarMedia": [
+            "Hellsing",
+            "Trigun",
+            "Jujutsu Kaisen"
+        ],
+        "vibe": [
+            "стиль",
+            "демоны",
+            "слэшер"
+        ],
+        "watchOrder": [
+            "Devil May Cry"
+        ],
+        "playOrder": [
+            "Devil May Cry 3",
+            "Devil May Cry",
+            "Devil May Cry 4",
+            "Devil May Cry 5",
+            "Devil May Cry аниме"
+        ]
+    },
+    {
+        "id": "game-warcraft",
+        "title": "World of Warcraft",
+        "type": "Игра",
+        "year": 2004,
+        "rating": 8.8,
+        "votes": 2000000,
+        "genres": [
+            "MMORPG",
+            "Фэнтези"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🌍 MMORPG",
+            "🧙 Фэнтези"
+        ],
+        "relatedMedia": [
+            "Warcraft"
+        ],
+        "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%F0%9F%A7%99%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3EWarcraft%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
+        "stores": {
+            "google": "https://www.google.com/search?q=World+of+Warcraft"
+        },
+        "description": "Warcraft — огромная игровая вселенная, по которой вышел фильм.",
+        "playAfterWatch": [
+            "World of Warcraft",
+            "Warcraft III"
+        ],
+        "chronology": [
+            "Warcraft: Orcs & Humans",
+            "Warcraft III",
+            "World of Warcraft",
+            "Warcraft фильм"
+        ],
+        "similarGames": [
+            "Final Fantasy XIV",
+            "The Elder Scrolls Online",
+            "Guild Wars 2"
+        ],
+        "similarMedia": [
+            "The Lord of the Rings",
+            "The Hobbit",
+            "Dungeons & Dragons"
+        ],
+        "vibe": [
+            "орки",
+            "альянс",
+            "фэнтези"
+        ],
+        "universe": {
+            "name": "Warcraft",
+            "games": [
+                "Warcraft III",
+                "World of Warcraft"
+            ],
+            "movies": [
+                "Warcraft"
+            ]
+        },
+        "watchOrder": [
+            "Warcraft"
+        ],
+        "playOrder": [
+            "Warcraft: Orcs & Humans",
+            "Warcraft III",
+            "World of Warcraft",
+            "Warcraft фильм"
+        ]
+    },
+    {
+        "id": "game-arcane-lol",
+        "title": "League of Legends",
+        "type": "Игра",
+        "year": 2009,
+        "rating": 8.3,
+        "votes": 1800000,
+        "genres": [
+            "MOBA",
+            "Фэнтези",
+            "Командная"
+        ],
+        "relation": "game_to_animation",
+        "relationLabel": "игра → мультсериал",
+        "badges": [
+            "📺 Есть Arcane",
+            "🔥 Популярное",
+            "⚔️ Командная"
+        ],
+        "relatedMedia": [
+            "Arcane"
+        ],
+        "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%E2%9A%94%EF%B8%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3ELeague%20of%20Legends%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
+        "stores": {
+            "google": "https://www.google.com/search?q=League+of+Legends"
+        },
+        "description": "League of Legends связана с мультсериалом Arcane.",
+        "playAfterWatch": [
+            "League of Legends",
+            "Teamfight Tactics"
+        ],
+        "chronology": [
+            "League of Legends",
+            "Arcane"
+        ],
+        "similarGames": [
+            "Dota 2",
+            "Valorant",
+            "Heroes of the Storm"
+        ],
+        "similarMedia": [
+            "Arcane",
+            "Dota: Dragon’s Blood",
+            "Castlevania"
+        ],
+        "vibe": [
+            "герои",
+            "магия",
+            "Пилтовер"
+        ],
+        "watchOrder": [
+            "Arcane"
+        ],
+        "playOrder": [
+            "League of Legends",
+            "Arcane"
+        ]
+    },
+    {
+        "id": "game-pokemon",
+        "title": "Pokémon Legends: Arceus",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.4,
+        "votes": 400000,
+        "genres": [
+            "RPG",
+            "Приключение",
+            "Семейное"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → аниме / фильмы",
+        "badges": [
+            "📺 Есть аниме",
+            "👨‍👩‍👧 Семейное",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "Pokémon",
+            "Detective Pikachu"
+        ],
+        "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%E2%9A%A1%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3EPok%C3%A9mon%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
+        "stores": {
+            "nintendo": "https://www.nintendo.com/search/#q=pokemon"
+        },
+        "description": "Pokémon — одна из самых больших связок игр, аниме и фильмов.",
+        "playAfterWatch": [
+            "Pokémon Legends: Arceus",
+            "Pokémon Scarlet / Violet"
+        ],
+        "chronology": [
+            "Pokémon игры",
+            "Pokémon аниме",
+            "Pokémon фильмы",
+            "Detective Pikachu"
+        ],
+        "similarGames": [
+            "Ni no Kuni",
+            "Temtem",
+            "Monster Hunter Stories 2"
+        ],
+        "similarMedia": [
+            "Digimon",
+            "Yu-Gi-Oh!",
+            "Detective Pikachu"
+        ],
+        "vibe": [
+            "монстры",
+            "детство",
+            "приключение"
+        ],
+        "universe": {
+            "name": "Pokémon",
+            "games": [
+                "Pokémon Red/Blue",
+                "Pokémon Legends: Arceus",
+                "Pokémon Scarlet/Violet"
+            ],
+            "anime": [
+                "Pokémon"
+            ],
+            "movies": [
+                "Detective Pikachu"
+            ]
+        },
+        "watchOrder": [
+            "Pokémon",
+            "Detective Pikachu"
+        ],
+        "playOrder": [
+            "Pokémon игры",
+            "Pokémon аниме",
+            "Pokémon фильмы",
+            "Detective Pikachu"
+        ]
+    },
+    {
+        "id": "game-super-mario",
+        "title": "Super Mario Bros. Wonder",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.7,
+        "votes": 300000,
+        "genres": [
+            "Платформер",
+            "Семейное"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → мультфильм",
+        "badges": [
+            "🎬 Есть мультфильм",
+            "👨‍👩‍👧 Семейное",
+            "🍄 Nintendo"
+        ],
+        "relatedMedia": [
+            "The Super Mario Bros. Movie"
+        ],
+        "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20600%20900%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2313002d%22/%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%231f1b86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2300d5ff%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.22%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23000%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%3Crect%20width%3D%22600%22%20height%3D%22900%22%20fill%3D%22url%28%23r%29%22/%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22150%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2282%22%3E%F0%9F%8D%84%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3ESuper%20Mario%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22500%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23bfefff%22%3E%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%3C/text%3E%0A%3Ctext%20x%3D%2250%25%22%20y%3D%22800%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%3E%D0%93%D0%9E%D0%9B%D0%A3%D0%91%D0%AC%20%D0%9A%D0%90%D0%A2%D0%90%D0%9B%D0%9E%D0%93%20%D0%9C%D0%98%D0%A0%D0%90%3C/text%3E%0A%3C/svg%3E",
+        "stores": {
+            "nintendo": "https://www.nintendo.com/search/#q=super%20mario"
+        },
+        "description": "Mario — игровая серия, по которой вышел крупный мультфильм.",
+        "playAfterWatch": [
+            "Super Mario Bros. Wonder",
+            "Super Mario Odyssey",
+            "Mario Kart 8 Deluxe"
+        ],
+        "chronology": [
+            "Super Mario классика",
+            "Super Mario Odyssey",
+            "The Super Mario Bros. Movie",
+            "Super Mario Bros. Wonder"
+        ],
+        "similarGames": [
+            "Sonic Frontiers",
+            "Rayman Legends",
+            "Crash Bandicoot 4"
+        ],
+        "similarMedia": [
+            "Sonic the Hedgehog",
+            "The LEGO Movie",
+            "Wreck-It Ralph"
+        ],
+        "vibe": [
+            "семейное",
+            "платформер",
+            "весело"
+        ],
+        "universe": {
+            "name": "Super Mario",
+            "games": [
+                "Super Mario Bros. Wonder",
+                "Mario Odyssey",
+                "Mario Kart 8"
+            ],
+            "movies": [
+                "The Super Mario Bros. Movie"
+            ]
+        },
+        "watchOrder": [
+            "The Super Mario Bros. Movie"
+        ],
+        "playOrder": [
+            "Super Mario классика",
+            "Super Mario Odyssey",
+            "The Super Mario Bros. Movie",
+            "Super Mario Bros. Wonder"
+        ]
+    },
+    {
+        "id": "game-five-nights",
+        "title": "Five Nights at Freddy's",
+        "type": "Игра",
+        "year": 2014,
+        "rating": 7.8,
+        "votes": 480000,
+        "genres": [
+            "Хоррор",
+            "Инди",
+            "Выживание"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🤖 Аниматроники",
+            "🕯 Хоррор"
+        ],
+        "relatedMedia": [
+            "Five Nights at Freddy's"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/319510/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/319510/Five_Nights_at_Freddys/"
+        },
+        "description": "FNAF — пример игры, которая стала фильмом и большой фан-вселенной.",
+        "playAfterWatch": [
+            "Five Nights at Freddy's",
+            "Five Nights at Freddy's 2"
+        ],
+        "chronology": [
+            "FNAF",
+            "FNAF 2",
+            "FNAF 3",
+            "FNAF фильм"
+        ],
+        "similarGames": [
+            "Poppy Playtime",
+            "Bendy and the Ink Machine",
+            "Little Nightmares"
+        ],
+        "similarMedia": [
+            "Child’s Play",
+            "Willy’s Wonderland",
+            "M3GAN"
+        ],
+        "vibe": [
+            "аниматроники",
+            "скримеры",
+            "тайна"
+        ],
+        "watchOrder": [
+            "Five Nights at Freddy's"
+        ],
+        "playOrder": [
+            "FNAF",
+            "FNAF 2",
+            "FNAF 3",
+            "FNAF фильм"
+        ]
+    },
+    {
+        "id": "game-alan-wake-2",
+        "title": "Alan Wake 2",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.9,
+        "votes": 260000,
+        "genres": [
+            "Хоррор",
+            "Детектив",
+            "Триллер"
+        ],
+        "relation": "vibe_media",
+        "relationLabel": "игра ↔ кино-вайб",
+        "badges": [
+            "🎬 Кино-вайб",
+            "🧠 Психотриллер",
+            "🌲 Мистика"
+        ],
+        "relatedMedia": [
+            "Twin Peaks",
+            "True Detective"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/108710/library_600x900_2x.jpg",
+        "stores": {
+            "epic": "https://store.epicgames.com/p/alan-wake-2"
+        },
+        "description": "Не прямая экранизация, но очень кинематографичная игра. Хороша для блока “похожие по вайбу”.",
+        "playAfterWatch": [
+            "Alan Wake Remastered",
+            "Alan Wake 2",
+            "Control"
+        ],
+        "chronology": [
+            "Alan Wake",
+            "Control",
+            "Alan Wake 2"
+        ],
+        "similarGames": [
+            "Control",
+            "Silent Hill 2",
+            "The Evil Within"
+        ],
+        "similarMedia": [
+            "Twin Peaks",
+            "True Detective",
+            "The X-Files"
+        ],
+        "vibe": [
+            "лес",
+            "писатель",
+            "кошмар"
+        ],
+        "universe": {
+            "name": "Remedy Connected Universe",
+            "games": [
+                "Alan Wake",
+                "Control",
+                "Alan Wake 2"
+            ],
+            "movies": [
+                "Twin Peaks по вайбу"
+            ],
+            "series": [
+                "психологический триллер по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "Twin Peaks",
+            "True Detective"
+        ],
+        "playOrder": [
+            "Alan Wake",
+            "Control",
+            "Alan Wake 2"
+        ]
+    },
+    {
+        "id": "game-doom-eternal",
+        "title": "DOOM Eternal",
+        "type": "Игра",
+        "year": 2020,
+        "rating": 8.9,
+        "votes": 520000,
+        "genres": [
+            "Шутер",
+            "Демоны",
+            "Экшен"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы",
+        "badges": [
+            "🎬 Есть фильм",
+            "🔫 Шутер",
+            "🔥 Адреналин"
+        ],
+        "relatedMedia": [
+            "Doom",
+            "Doom: Annihilation"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/782330/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/782330/DOOM_Eternal/"
+        },
+        "description": "DOOM — культовая игровая серия с киноадаптациями и мощным экшен-вайбом.",
+        "playAfterWatch": [
+            "DOOM Eternal",
+            "DOOM 2016"
+        ],
+        "chronology": [
+            "DOOM",
+            "DOOM II",
+            "DOOM 3",
+            "DOOM 2016",
+            "DOOM Eternal"
+        ],
+        "similarGames": [
+            "Wolfenstein II",
+            "Quake",
+            "Shadow Warrior"
+        ],
+        "similarMedia": [
+            "Doom",
+            "Event Horizon",
+            "Aliens"
+        ],
+        "vibe": [
+            "демоны",
+            "металл",
+            "мясо"
+        ],
+        "universe": {
+            "name": "DOOM",
+            "games": [
+                "DOOM",
+                "DOOM II",
+                "DOOM 3",
+                "DOOM 2016",
+                "DOOM Eternal"
+            ],
+            "movies": [
+                "Doom",
+                "Doom: Annihilation"
+            ]
+        },
+        "watchOrder": [
+            "Doom",
+            "Doom: Annihilation"
+        ],
+        "playOrder": [
+            "DOOM",
+            "DOOM II",
+            "DOOM 3",
+            "DOOM 2016",
+            "DOOM Eternal"
+        ]
+    },
+    {
+        "id": "game-borderlands-3",
+        "title": "Borderlands 3",
+        "type": "Игра",
+        "year": 2019,
+        "rating": 8.2,
+        "votes": 400000,
+        "genres": [
+            "Лутер-шутер",
+            "Кооператив",
+            "Постапокалипсис"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🤝 Кооп",
+            "💥 Лут"
+        ],
+        "relatedMedia": [
+            "Borderlands"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/397540/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/397540/Borderlands_3/"
+        },
+        "description": "Borderlands — игровая безумная вселенная с экранизацией.",
+        "playAfterWatch": [
+            "Borderlands 2",
+            "Borderlands 3",
+            "Tiny Tina’s Wonderlands"
+        ],
+        "chronology": [
+            "Borderlands",
+            "Borderlands 2",
+            "Borderlands: The Pre-Sequel",
+            "Borderlands 3",
+            "Borderlands фильм"
+        ],
+        "similarGames": [
+            "Destiny 2",
+            "Warframe",
+            "Rage 2"
+        ],
+        "similarMedia": [
+            "Guardians of the Galaxy",
+            "Mad Max: Fury Road"
+        ],
+        "vibe": [
+            "хаос",
+            "лут",
+            "пушки"
+        ],
+        "universe": {
+            "name": "Borderlands",
+            "games": [
+                "Borderlands",
+                "Borderlands 2",
+                "The Pre-Sequel",
+                "Borderlands 3"
+            ],
+            "movies": [
+                "Borderlands"
+            ]
+        },
+        "watchOrder": [
+            "Borderlands"
+        ],
+        "playOrder": [
+            "Borderlands",
+            "Borderlands 2",
+            "Borderlands: The Pre-Sequel",
+            "Borderlands 3",
+            "Borderlands фильм"
+        ]
+    },
+    {
+        "id": "game-minecraft",
+        "title": "Minecraft",
+        "type": "Игра",
+        "year": 2011,
+        "rating": 9.0,
+        "votes": 1100000,
+        "genres": [
+            "Песочница",
+            "Выживание",
+            "Креатив"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🧱 Песочница",
+            "👨‍👩‍👧 Семейное"
+        ],
+        "relatedMedia": [
+            "A Minecraft Movie"
+        ],
+        "poster": "",
+        "stores": {},
+        "description": "Minecraft — огромная игровая вселенная с киноадаптацией.",
+        "playAfterWatch": [
+            "Minecraft",
+            "Minecraft Dungeons"
+        ],
+        "chronology": [
+            "Minecraft",
+            "Minecraft Dungeons",
+            "Minecraft Legends",
+            "A Minecraft Movie"
+        ],
+        "similarGames": [
+            "Terraria",
+            "Roblox",
+            "LEGO Worlds"
+        ],
+        "similarMedia": [
+            "The LEGO Movie",
+            "A Minecraft Movie"
+        ],
+        "vibe": [
+            "кубы",
+            "строительство",
+            "выживание"
+        ],
+        "universe": {
+            "name": "Minecraft",
+            "games": [
+                "Minecraft",
+                "Minecraft Dungeons",
+                "Minecraft Legends"
+            ],
+            "movies": [
+                "A Minecraft Movie"
+            ]
+        },
+        "watchOrder": [
+            "A Minecraft Movie"
+        ],
+        "playOrder": [
+            "Minecraft",
+            "Minecraft Dungeons",
+            "Minecraft Legends",
+            "A Minecraft Movie"
+        ]
+    },
+    {
+        "id": "game-gran-turismo-7",
+        "title": "Gran Turismo 7",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.0,
+        "votes": 210000,
+        "genres": [
+            "Гонки",
+            "Симулятор"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🏎 Гонки",
+            "🎯 Реальная история"
+        ],
+        "relatedMedia": [
+            "Gran Turismo"
+        ],
+        "poster": "",
+        "stores": {},
+        "description": "Gran Turismo — гоночная серия, вокруг которой снят фильм про путь игрока в реальный спорт.",
+        "playAfterWatch": [
+            "Gran Turismo 7"
+        ],
+        "chronology": [
+            "Gran Turismo серия",
+            "Gran Turismo фильм"
+        ],
+        "similarGames": [
+            "Forza Motorsport",
+            "F1 24",
+            "Assetto Corsa Competizione"
+        ],
+        "similarMedia": [
+            "Ford v Ferrari",
+            "Rush",
+            "Gran Turismo"
+        ],
+        "vibe": [
+            "гонки",
+            "скорость",
+            "спорт"
+        ],
+        "universe": {
+            "name": "Gran Turismo",
+            "games": [
+                "Gran Turismo серия",
+                "Gran Turismo 7"
+            ],
+            "movies": [
+                "Gran Turismo"
+            ]
+        },
+        "watchOrder": [
+            "Gran Turismo"
+        ],
+        "playOrder": [
+            "Gran Turismo серия",
+            "Gran Turismo фильм"
+        ]
+    },
+    {
+        "id": "game-twisted-metal",
+        "title": "Twisted Metal",
+        "type": "Игра",
+        "year": 2012,
+        "rating": 7.5,
+        "votes": 150000,
+        "genres": [
+            "Аркадные гонки",
+            "Экшен"
+        ],
+        "relation": "game_to_series",
+        "relationLabel": "игра → сериал",
+        "badges": [
+            "📺 Есть сериал",
+            "🚗 Разрушения",
+            "🤡 Безумие"
+        ],
+        "relatedMedia": [
+            "Twisted Metal"
+        ],
+        "poster": "",
+        "stores": {},
+        "description": "Twisted Metal — игровая серия про автохаос, получившая сериал.",
+        "playAfterWatch": [
+            "Twisted Metal"
+        ],
+        "chronology": [
+            "Twisted Metal серия",
+            "Twisted Metal сериал"
+        ],
+        "similarGames": [
+            "Carmageddon",
+            "Wreckfest",
+            "Mad Max"
+        ],
+        "similarMedia": [
+            "Mad Max: Fury Road",
+            "Twisted Metal"
+        ],
+        "vibe": [
+            "хаос",
+            "машины",
+            "постапок"
+        ],
+        "universe": {
+            "name": "Twisted Metal",
+            "games": [
+                "Twisted Metal серия"
+            ],
+            "series": [
+                "Twisted Metal"
+            ]
+        },
+        "watchOrder": [
+            "Twisted Metal"
+        ],
+        "playOrder": [
+            "Twisted Metal серия",
+            "Twisted Metal сериал"
+        ]
+    },
+    {
+        "id": "game-max-payne-3",
+        "title": "Max Payne 3",
+        "type": "Игра",
+        "year": 2012,
+        "rating": 8.7,
+        "votes": 290000,
+        "genres": [
+            "Шутер",
+            "Ну noir",
+            "Драма"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🕶 Noir",
+            "🔫 Bullet time"
+        ],
+        "relatedMedia": [
+            "Max Payne"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/204100/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/204100/Max_Payne_3/"
+        },
+        "description": "Max Payne — мрачная игровая серия с киноадаптацией.",
+        "playAfterWatch": [
+            "Max Payne",
+            "Max Payne 2",
+            "Max Payne 3"
+        ],
+        "chronology": [
+            "Max Payne",
+            "Max Payne 2",
+            "Max Payne фильм",
+            "Max Payne 3"
+        ],
+        "similarGames": [
+            "Alan Wake 2",
+            "Control",
+            "Mafia"
+        ],
+        "similarMedia": [
+            "John Wick",
+            "Sin City",
+            "Max Payne"
+        ],
+        "vibe": [
+            "noir",
+            "месть",
+            "замедление"
+        ],
+        "universe": {
+            "name": "Max Payne",
+            "games": [
+                "Max Payne",
+                "Max Payne 2",
+                "Max Payne 3"
+            ],
+            "movies": [
+                "Max Payne"
+            ]
+        },
+        "watchOrder": [
+            "Max Payne"
+        ],
+        "playOrder": [
+            "Max Payne",
+            "Max Payne 2",
+            "Max Payne фильм",
+            "Max Payne 3"
+        ]
+    },
+    {
+        "id": "game-hitman-woa",
+        "title": "HITMAN World of Assassination",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.8,
+        "votes": 360000,
+        "genres": [
+            "Стелс",
+            "Песочница",
+            "Экшен"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы",
+        "badges": [
+            "🎬 Есть фильмы",
+            "🕵️ Стелс",
+            "🎯 Убийца"
+        ],
+        "relatedMedia": [
+            "Hitman",
+            "Hitman: Agent 47"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1659040/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1659040/HITMAN_World_of_Assassination/"
+        },
+        "description": "Hitman — игра про Агента 47 с несколькими фильмами.",
+        "playAfterWatch": [
+            "HITMAN World of Assassination"
+        ],
+        "chronology": [
+            "Hitman: Codename 47",
+            "Blood Money",
+            "Absolution",
+            "HITMAN Trilogy",
+            "Hitman фильмы"
+        ],
+        "similarGames": [
+            "Splinter Cell",
+            "Dishonored",
+            "Sniper Elite"
+        ],
+        "similarMedia": [
+            "John Wick",
+            "The Killer",
+            "Hitman"
+        ],
+        "vibe": [
+            "стелс",
+            "контракты",
+            "агент"
+        ],
+        "universe": {
+            "name": "Hitman",
+            "games": [
+                "Hitman серия",
+                "HITMAN World of Assassination"
+            ],
+            "movies": [
+                "Hitman",
+                "Hitman: Agent 47"
+            ]
+        },
+        "watchOrder": [
+            "Hitman",
+            "Hitman: Agent 47"
+        ],
+        "playOrder": [
+            "Hitman: Codename 47",
+            "Blood Money",
+            "Absolution",
+            "HITMAN Trilogy",
+            "Hitman фильмы"
+        ]
+    },
+    {
+        "id": "game-far-cry-3",
+        "title": "Far Cry 3",
+        "type": "Игра",
+        "year": 2012,
+        "rating": 8.8,
+        "votes": 430000,
+        "genres": [
+            "Шутер",
+            "Открытый мир",
+            "Тропики"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🌴 Остров",
+            "🧠 Безумие"
+        ],
+        "relatedMedia": [
+            "Far Cry"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/220240/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/220240/Far_Cry_3/"
+        },
+        "description": "Far Cry — серия шутеров с экранизацией и сильным вайбом выживания.",
+        "playAfterWatch": [
+            "Far Cry 3",
+            "Far Cry 4",
+            "Far Cry 5",
+            "Far Cry 6"
+        ],
+        "chronology": [
+            "Far Cry",
+            "Far Cry 2",
+            "Far Cry 3",
+            "Far Cry фильм"
+        ],
+        "similarGames": [
+            "Crysis",
+            "Just Cause 3",
+            "Ghost Recon Wildlands"
+        ],
+        "similarMedia": [
+            "Apocalypse Now",
+            "Predator",
+            "Far Cry"
+        ],
+        "vibe": [
+            "остров",
+            "безумие",
+            "выживание"
+        ],
+        "universe": {
+            "name": "Far Cry",
+            "games": [
+                "Far Cry",
+                "Far Cry 2",
+                "Far Cry 3",
+                "Far Cry 4",
+                "Far Cry 5",
+                "Far Cry 6"
+            ],
+            "movies": [
+                "Far Cry"
+            ]
+        },
+        "watchOrder": [
+            "Far Cry"
+        ],
+        "playOrder": [
+            "Far Cry",
+            "Far Cry 2",
+            "Far Cry 3",
+            "Far Cry фильм"
+        ]
+    },
+    {
+        "id": "game-tekken-8",
+        "title": "TEKKEN 8",
+        "type": "Игра",
+        "year": 2024,
+        "rating": 8.5,
+        "votes": 220000,
+        "genres": [
+            "Файтинг",
+            "Турнир"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы / аниме",
+        "badges": [
+            "🎬 Есть фильм",
+            "🥊 Файтинг",
+            "🔥 Турнир"
+        ],
+        "relatedMedia": [
+            "Tekken",
+            "Tekken: Bloodline"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1778820/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1778820/TEKKEN_8/"
+        },
+        "description": "Tekken — файтинг-вселенная с фильмами и аниме.",
+        "playAfterWatch": [
+            "TEKKEN 8",
+            "Tekken 7"
+        ],
+        "chronology": [
+            "Tekken 3",
+            "Tekken 5",
+            "Tekken 7",
+            "TEKKEN 8",
+            "Tekken: Bloodline"
+        ],
+        "similarGames": [
+            "Mortal Kombat 1",
+            "Street Fighter 6",
+            "Soulcalibur VI"
+        ],
+        "similarMedia": [
+            "Bloodsport",
+            "Mortal Kombat",
+            "Tekken: Bloodline"
+        ],
+        "vibe": [
+            "турнир",
+            "семья",
+            "драки"
+        ],
+        "universe": {
+            "name": "Tekken",
+            "games": [
+                "Tekken серия",
+                "Tekken 7",
+                "TEKKEN 8"
+            ],
+            "movies": [
+                "Tekken"
+            ],
+            "anime": [
+                "Tekken: Bloodline"
+            ]
+        },
+        "watchOrder": [
+            "Tekken",
+            "Tekken: Bloodline"
+        ],
+        "playOrder": [
+            "Tekken 3",
+            "Tekken 5",
+            "Tekken 7",
+            "TEKKEN 8",
+            "Tekken: Bloodline"
+        ]
+    },
+    {
+        "id": "game-street-fighter-6",
+        "title": "Street Fighter 6",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.6,
+        "votes": 260000,
+        "genres": [
+            "Файтинг",
+            "Аркада"
+        ],
+        "relation": "game_to_movies",
+        "relationLabel": "игра → фильмы / анимация",
+        "badges": [
+            "🎬 Есть фильмы",
+            "🥊 Файтинг",
+            "🌍 Турнир"
+        ],
+        "relatedMedia": [
+            "Street Fighter",
+            "Street Fighter II: The Animated Movie"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1364780/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1364780/Street_Fighter_6/"
+        },
+        "description": "Street Fighter — классика файтингов с кино и анимацией.",
+        "playAfterWatch": [
+            "Street Fighter 6"
+        ],
+        "chronology": [
+            "Street Fighter II",
+            "Street Fighter IV",
+            "Street Fighter V",
+            "Street Fighter 6"
+        ],
+        "similarGames": [
+            "Tekken 8",
+            "Mortal Kombat 1",
+            "King of Fighters XV"
+        ],
+        "similarMedia": [
+            "Bloodsport",
+            "Street Fighter"
+        ],
+        "vibe": [
+            "аркада",
+            "бойцы",
+            "турнир"
+        ],
+        "universe": {
+            "name": "Street Fighter",
+            "games": [
+                "Street Fighter серия",
+                "Street Fighter 6"
+            ],
+            "movies": [
+                "Street Fighter"
+            ],
+            "animation": [
+                "Street Fighter II: The Animated Movie"
+            ]
+        },
+        "watchOrder": [
+            "Street Fighter",
+            "Street Fighter II: The Animated Movie"
+        ],
+        "playOrder": [
+            "Street Fighter II",
+            "Street Fighter IV",
+            "Street Fighter V",
+            "Street Fighter 6"
+        ]
+    },
+    {
+        "id": "game-final-fantasy-vii-remake",
+        "title": "Final Fantasy VII Remake Intergrade",
+        "type": "Игра",
+        "year": 2021,
+        "rating": 9.0,
+        "votes": 520000,
+        "genres": [
+            "JRPG",
+            "Фэнтези",
+            "Sci-Fi"
+        ],
+        "relation": "game_to_animation",
+        "relationLabel": "игра → фильм / анимация",
+        "badges": [
+            "🎬 Есть фильм",
+            "✨ JRPG",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "Final Fantasy VII: Advent Children"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1462040/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1462040/FINAL_FANTASY_VII_REMAKE_INTERGRADE/"
+        },
+        "description": "Final Fantasy VII — отдельная крупная вселенная с фильмом Advent Children.",
+        "playAfterWatch": [
+            "Final Fantasy VII Remake",
+            "Final Fantasy VII Rebirth"
+        ],
+        "chronology": [
+            "Final Fantasy VII",
+            "Crisis Core",
+            "Advent Children",
+            "Remake",
+            "Rebirth"
+        ],
+        "similarGames": [
+            "Persona 5 Royal",
+            "Tales of Arise",
+            "NieR:Automata"
+        ],
+        "similarMedia": [
+            "Final Fantasy VII: Advent Children",
+            "Akira по вайбу"
+        ],
+        "vibe": [
+            "магия",
+            "технофэнтези",
+            "команда"
+        ],
+        "universe": {
+            "name": "Final Fantasy VII",
+            "games": [
+                "Final Fantasy VII",
+                "Crisis Core",
+                "FFVII Remake",
+                "FFVII Rebirth"
+            ],
+            "animation": [
+                "Final Fantasy VII: Advent Children"
+            ]
+        },
+        "watchOrder": [
+            "Final Fantasy VII: Advent Children"
+        ],
+        "playOrder": [
+            "Final Fantasy VII",
+            "Crisis Core",
+            "Advent Children",
+            "Remake",
+            "Rebirth"
+        ]
+    },
+    {
+        "id": "game-persona-5-royal",
+        "title": "Persona 5 Royal",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 9.3,
+        "votes": 400000,
+        "genres": [
+            "JRPG",
+            "Аниме",
+            "Школа"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → аниме",
+        "badges": [
+            "📺 Есть аниме",
+            "🎭 Стиль",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "Persona 5: The Animation"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1687950/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1687950/Persona_5_Royal/"
+        },
+        "description": "Persona 5 — стильная JRPG с аниме-адаптацией.",
+        "playAfterWatch": [
+            "Persona 5 Royal",
+            "Persona 5 Strikers"
+        ],
+        "chronology": [
+            "Persona 5",
+            "Persona 5 Royal",
+            "Persona 5: The Animation",
+            "Persona 5 Strikers"
+        ],
+        "similarGames": [
+            "Shin Megami Tensei V",
+            "Yakuza: Like a Dragon",
+            "Danganronpa"
+        ],
+        "similarMedia": [
+            "Death Note",
+            "Durarara!!",
+            "Persona 5: The Animation"
+        ],
+        "vibe": [
+            "стиль",
+            "школа",
+            "метавселенная"
+        ],
+        "universe": {
+            "name": "Persona 5",
+            "games": [
+                "Persona 5",
+                "Persona 5 Royal",
+                "Persona 5 Strikers"
+            ],
+            "anime": [
+                "Persona 5: The Animation"
+            ]
+        },
+        "watchOrder": [
+            "Persona 5: The Animation"
+        ],
+        "playOrder": [
+            "Persona 5",
+            "Persona 5 Royal",
+            "Persona 5: The Animation",
+            "Persona 5 Strikers"
+        ]
+    },
+    {
+        "id": "game-nier-automata",
+        "title": "NieR:Automata",
+        "type": "Игра",
+        "year": 2017,
+        "rating": 9.1,
+        "votes": 650000,
+        "genres": [
+            "JRPG",
+            "Экшен",
+            "Философия"
+        ],
+        "relation": "game_to_anime",
+        "relationLabel": "игра → аниме",
+        "badges": [
+            "📺 Есть аниме",
+            "🤖 Андроиды",
+            "🧠 Философия"
+        ],
+        "relatedMedia": [
+            "NieR:Automata Ver1.1a"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/524220/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/524220/NieRAutomata/"
+        },
+        "description": "NieR:Automata получила аниме-адаптацию и хорошо ложится в раздел “игра ↔ аниме”.",
+        "playAfterWatch": [
+            "NieR:Automata",
+            "NieR Replicant"
+        ],
+        "chronology": [
+            "NieR Replicant",
+            "NieR:Automata",
+            "NieR:Automata Ver1.1a"
+        ],
+        "similarGames": [
+            "Devil May Cry 5",
+            "Bayonetta",
+            "Metal Gear Rising"
+        ],
+        "similarMedia": [
+            "Ghost in the Shell",
+            "Ergo Proxy",
+            "NieR:Automata Ver1.1a"
+        ],
+        "vibe": [
+            "андроиды",
+            "меланхолия",
+            "постапок"
+        ],
+        "universe": {
+            "name": "NieR",
+            "games": [
+                "NieR Replicant",
+                "NieR:Automata"
+            ],
+            "anime": [
+                "NieR:Automata Ver1.1a"
+            ]
+        },
+        "watchOrder": [
+            "NieR:Automata Ver1.1a"
+        ],
+        "playOrder": [
+            "NieR Replicant",
+            "NieR:Automata",
+            "NieR:Automata Ver1.1a"
+        ]
+    },
+    {
+        "id": "game-dragon-age-inquisition",
+        "title": "Dragon Age: Inquisition",
+        "type": "Игра",
+        "year": 2014,
+        "rating": 8.6,
+        "votes": 320000,
+        "genres": [
+            "RPG",
+            "Фэнтези",
+            "Партия"
+        ],
+        "relation": "game_to_animation",
+        "relationLabel": "игра → мультсериал",
+        "badges": [
+            "📺 Есть мультсериал",
+            "🐉 Фэнтези",
+            "🧙 Магия"
+        ],
+        "relatedMedia": [
+            "Dragon Age: Absolution"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1222690/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1222690/Dragon_Age_Inquisition/"
+        },
+        "description": "Dragon Age — фэнтези-вселенная BioWare с анимацией.",
+        "playAfterWatch": [
+            "Dragon Age: Origins",
+            "Dragon Age II",
+            "Dragon Age: Inquisition"
+        ],
+        "chronology": [
+            "Dragon Age: Origins",
+            "Dragon Age II",
+            "Inquisition",
+            "Absolution"
+        ],
+        "similarGames": [
+            "Baldur’s Gate 3",
+            "The Witcher 3",
+            "Divinity: Original Sin 2"
+        ],
+        "similarMedia": [
+            "The Witcher",
+            "Castlevania",
+            "Dragon Age: Absolution"
+        ],
+        "vibe": [
+            "магия",
+            "драконы",
+            "партия"
+        ],
+        "universe": {
+            "name": "Dragon Age",
+            "games": [
+                "Origins",
+                "Dragon Age II",
+                "Inquisition",
+                "Veilguard"
+            ],
+            "animation": [
+                "Dragon Age: Absolution"
+            ]
+        },
+        "watchOrder": [
+            "Dragon Age: Absolution"
+        ],
+        "playOrder": [
+            "Dragon Age: Origins",
+            "Dragon Age II",
+            "Inquisition",
+            "Absolution"
+        ]
+    },
+    {
+        "id": "game-mass-effect-legendary",
+        "title": "Mass Effect Legendary Edition",
+        "type": "Игра",
+        "year": 2021,
+        "rating": 9.2,
+        "votes": 500000,
+        "genres": [
+            "RPG",
+            "Sci-Fi",
+            "Космос"
+        ],
+        "relation": "vibe_media",
+        "relationLabel": "игра ↔ кино-вайб",
+        "badges": [
+            "🚀 Sci-Fi",
+            "🌌 Космос",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "The Expanse",
+            "Star Trek",
+            "Battlestar Galactica"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1328670/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1328670/Mass_Effect_Legendary_Edition/"
+        },
+        "description": "Mass Effect пока лучше работает как кино-вайб: космос, команда, выборы и большая sci-fi вселенная.",
+        "playAfterWatch": [
+            "Mass Effect Legendary Edition",
+            "Mass Effect Andromeda"
+        ],
+        "chronology": [
+            "Mass Effect",
+            "Mass Effect 2",
+            "Mass Effect 3",
+            "Andromeda"
+        ],
+        "similarGames": [
+            "Starfield",
+            "Dragon Age: Inquisition",
+            "The Outer Worlds"
+        ],
+        "similarMedia": [
+            "The Expanse",
+            "Star Trek",
+            "Guardians of the Galaxy"
+        ],
+        "vibe": [
+            "космос",
+            "команда",
+            "выбор"
+        ],
+        "universe": {
+            "name": "Mass Effect",
+            "games": [
+                "Mass Effect",
+                "Mass Effect 2",
+                "Mass Effect 3",
+                "Andromeda"
+            ],
+            "movies": [
+                "Guardians of the Galaxy по вайбу"
+            ],
+            "series": [
+                "The Expanse по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "The Expanse",
+            "Star Trek",
+            "Battlestar Galactica"
+        ],
+        "playOrder": [
+            "Mass Effect",
+            "Mass Effect 2",
+            "Mass Effect 3",
+            "Andromeda"
+        ]
+    },
+    {
+        "id": "game-baldurs-gate-3",
+        "title": "Baldur’s Gate 3",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 9.6,
+        "votes": 900000,
+        "genres": [
+            "RPG",
+            "D&D",
+            "Фэнтези"
+        ],
+        "relation": "vibe_media",
+        "relationLabel": "игра ↔ фэнтези-вайб",
+        "badges": [
+            "🐉 D&D",
+            "⭐ Культовая",
+            "🧙 Партия"
+        ],
+        "relatedMedia": [
+            "Dungeons & Dragons: Honor Among Thieves"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1086940/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1086940/Baldurs_Gate_3/"
+        },
+        "description": "Baldur’s Gate 3 можно связывать с D&D-фильмами и фэнтези-вайбом.",
+        "playAfterWatch": [
+            "Baldur’s Gate 3"
+        ],
+        "chronology": [
+            "Baldur’s Gate",
+            "Baldur’s Gate II",
+            "Baldur’s Gate 3"
+        ],
+        "similarGames": [
+            "Divinity: Original Sin 2",
+            "Dragon Age: Origins",
+            "Pathfinder: Wrath of the Righteous"
+        ],
+        "similarMedia": [
+            "Dungeons & Dragons: Honor Among Thieves",
+            "The Legend of Vox Machina"
+        ],
+        "vibe": [
+            "D&D",
+            "кубы",
+            "партия"
+        ],
+        "universe": {
+            "name": "Dungeons & Dragons / Baldur’s Gate",
+            "games": [
+                "Baldur’s Gate",
+                "Baldur’s Gate II",
+                "Baldur’s Gate 3"
+            ],
+            "movies": [
+                "Dungeons & Dragons: Honor Among Thieves"
+            ],
+            "animation": [
+                "The Legend of Vox Machina по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "Dungeons & Dragons: Honor Among Thieves"
+        ],
+        "playOrder": [
+            "Baldur’s Gate",
+            "Baldur’s Gate II",
+            "Baldur’s Gate 3"
+        ]
+    },
+    {
+        "id": "game-elden-ring",
+        "title": "Elden Ring",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 9.4,
+        "votes": 850000,
+        "genres": [
+            "Souls-like",
+            "Фэнтези",
+            "Открытый мир"
+        ],
+        "relation": "vibe_media",
+        "relationLabel": "игра ↔ тёмное фэнтези",
+        "badges": [
+            "🐉 Тёмное фэнтези",
+            "⭐ Культовая",
+            "⚔️ Боссфайт"
+        ],
+        "relatedMedia": [
+            "Berserk",
+            "Game of Thrones"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1245620/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1245620/ELDEN_RING/"
+        },
+        "description": "Elden Ring хорошо работает через вайб: тёмное фэнтези, боссы, лор и разрушенный мир.",
+        "playAfterWatch": [
+            "Elden Ring",
+            "Shadow of the Erdtree"
+        ],
+        "chronology": [
+            "Elden Ring",
+            "Shadow of the Erdtree"
+        ],
+        "similarGames": [
+            "Dark Souls III",
+            "Sekiro",
+            "Lords of the Fallen"
+        ],
+        "similarMedia": [
+            "Berserk",
+            "Game of Thrones",
+            "The Green Knight"
+        ],
+        "vibe": [
+            "мрак",
+            "боссы",
+            "лор"
+        ],
+        "universe": {
+            "name": "Elden Ring",
+            "games": [
+                "Elden Ring",
+                "Shadow of the Erdtree"
+            ],
+            "movies": [
+                "Berserk / Game of Thrones по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "Berserk",
+            "Game of Thrones"
+        ],
+        "playOrder": [
+            "Elden Ring",
+            "Shadow of the Erdtree"
+        ]
+    },
+    {
+        "id": "game-star-wars-jedi-survivor",
+        "title": "Star Wars Jedi: Survivor",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.5,
+        "votes": 300000,
+        "genres": [
+            "Экшен",
+            "Star Wars",
+            "Приключение"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм/сериал → игра",
+        "badges": [
+            "🎬 По кино-вселенной",
+            "⚔️ Джедаи",
+            "🚀 Космос"
+        ],
+        "relatedMedia": [
+            "Star Wars",
+            "Obi-Wan Kenobi",
+            "Andor"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1774580/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1774580/STAR_WARS_Jedi_Survivor/"
+        },
+        "description": "Star Wars — пример обратной связи: кино-вселенная → игры.",
+        "playAfterWatch": [
+            "Jedi: Fallen Order",
+            "Jedi: Survivor"
+        ],
+        "chronology": [
+            "Episode III",
+            "Jedi: Fallen Order",
+            "Jedi: Survivor",
+            "Andor",
+            "Obi-Wan Kenobi"
+        ],
+        "similarGames": [
+            "Battlefront II",
+            "Knights of the Old Republic",
+            "The Force Unleashed"
+        ],
+        "similarMedia": [
+            "Star Wars",
+            "Andor",
+            "The Mandalorian"
+        ],
+        "vibe": [
+            "джедаи",
+            "космос",
+            "сила"
+        ],
+        "universe": {
+            "name": "Star Wars",
+            "games": [
+                "KOTOR",
+                "Jedi: Fallen Order",
+                "Jedi: Survivor",
+                "Battlefront"
+            ],
+            "movies": [
+                "Star Wars Episodes"
+            ],
+            "series": [
+                "Andor",
+                "The Mandalorian",
+                "Obi-Wan Kenobi"
+            ]
+        },
+        "watchOrder": [
+            "Star Wars",
+            "Obi-Wan Kenobi",
+            "Andor"
+        ],
+        "playOrder": [
+            "Episode III",
+            "Jedi: Fallen Order",
+            "Jedi: Survivor",
+            "Andor",
+            "Obi-Wan Kenobi"
+        ]
+    },
+    {
+        "id": "game-batman-arkham-knight",
+        "title": "Batman: Arkham Knight",
+        "type": "Игра",
+        "year": 2015,
+        "rating": 8.9,
+        "votes": 520000,
+        "genres": [
+            "Экшен",
+            "Супергерои",
+            "Детектив"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "комикс/фильм → игра",
+        "badges": [
+            "🦇 Batman",
+            "🎬 Кино-вселенная",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "Batman",
+            "The Dark Knight",
+            "Batman: The Animated Series"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/208650/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/208650/Batman_Arkham_Knight/"
+        },
+        "description": "Batman Arkham — игровая ветка большой DC-вселенной.",
+        "playAfterWatch": [
+            "Arkham Asylum",
+            "Arkham City",
+            "Arkham Knight"
+        ],
+        "chronology": [
+            "Arkham Origins",
+            "Arkham Asylum",
+            "Arkham City",
+            "Arkham Knight"
+        ],
+        "similarGames": [
+            "Marvel’s Spider-Man",
+            "Middle-earth: Shadow of War",
+            "Mad Max"
+        ],
+        "similarMedia": [
+            "The Dark Knight",
+            "Batman Begins",
+            "Batman: The Animated Series"
+        ],
+        "vibe": [
+            "ночь",
+            "детектив",
+            "супергерой"
+        ],
+        "universe": {
+            "name": "Batman / Arkham",
+            "games": [
+                "Arkham Origins",
+                "Asylum",
+                "City",
+                "Knight"
+            ],
+            "movies": [
+                "Batman Begins",
+                "The Dark Knight",
+                "The Batman"
+            ],
+            "animation": [
+                "Batman: The Animated Series"
+            ]
+        },
+        "watchOrder": [
+            "Batman",
+            "The Dark Knight",
+            "Batman: The Animated Series"
+        ],
+        "playOrder": [
+            "Arkham Origins",
+            "Arkham Asylum",
+            "Arkham City",
+            "Arkham Knight"
+        ]
+    },
+    {
+        "id": "game-spider-man-remastered",
+        "title": "Marvel’s Spider-Man Remastered",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.8,
+        "votes": 420000,
+        "genres": [
+            "Экшен",
+            "Супергерои",
+            "Открытый мир"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "комикс/фильм → игра",
+        "badges": [
+            "🕷 Spider-Man",
+            "🎬 Кино-вселенная",
+            "🌆 Нью-Йорк"
+        ],
+        "relatedMedia": [
+            "Spider-Man",
+            "Spider-Man: Into the Spider-Verse"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1817070/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1817070/Marvels_SpiderMan_Remastered/"
+        },
+        "description": "Spider-Man — игровая часть большой Marvel-вселенной.",
+        "playAfterWatch": [
+            "Marvel’s Spider-Man",
+            "Miles Morales",
+            "Spider-Man 2"
+        ],
+        "chronology": [
+            "Spider-Man Remastered",
+            "Miles Morales",
+            "Spider-Man 2"
+        ],
+        "similarGames": [
+            "Batman: Arkham Knight",
+            "Sunset Overdrive",
+            "Infamous Second Son"
+        ],
+        "similarMedia": [
+            "Spider-Man 2",
+            "Into the Spider-Verse",
+            "No Way Home"
+        ],
+        "vibe": [
+            "паутина",
+            "город",
+            "супергерой"
+        ],
+        "universe": {
+            "name": "Spider-Man",
+            "games": [
+                "Spider-Man Remastered",
+                "Miles Morales",
+                "Spider-Man 2"
+            ],
+            "movies": [
+                "Spider-Man фильмы",
+                "Spider-Verse"
+            ]
+        },
+        "watchOrder": [
+            "Spider-Man",
+            "Spider-Man: Into the Spider-Verse"
+        ],
+        "playOrder": [
+            "Spider-Man Remastered",
+            "Miles Morales",
+            "Spider-Man 2"
+        ]
+    },
+    {
+        "id": "game-hogwarts-legacy",
+        "title": "Hogwarts Legacy",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.7,
+        "votes": 600000,
+        "genres": [
+            "RPG",
+            "Магия",
+            "Открытый мир"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм/книга → игра",
+        "badges": [
+            "🪄 Harry Potter",
+            "🎬 Кино-вселенная",
+            "🏰 Хогвартс"
+        ],
+        "relatedMedia": [
+            "Harry Potter",
+            "Fantastic Beasts"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/990080/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/990080/Hogwarts_Legacy/"
+        },
+        "description": "Hogwarts Legacy — игра по вселенной Harry Potter.",
+        "playAfterWatch": [
+            "Hogwarts Legacy"
+        ],
+        "chronology": [
+            "Fantastic Beasts эпоха",
+            "Hogwarts Legacy",
+            "Harry Potter фильмы"
+        ],
+        "similarGames": [
+            "The Witcher 3",
+            "Dragon Age: Inquisition",
+            "Baldur’s Gate 3"
+        ],
+        "similarMedia": [
+            "Harry Potter",
+            "Fantastic Beasts"
+        ],
+        "vibe": [
+            "магия",
+            "школа",
+            "замок"
+        ],
+        "universe": {
+            "name": "Wizarding World",
+            "games": [
+                "Hogwarts Legacy"
+            ],
+            "movies": [
+                "Harry Potter",
+                "Fantastic Beasts"
+            ]
+        },
+        "watchOrder": [
+            "Harry Potter",
+            "Fantastic Beasts"
+        ],
+        "playOrder": [
+            "Fantastic Beasts эпоха",
+            "Hogwarts Legacy",
+            "Harry Potter фильмы"
+        ]
+    },
+    {
+        "id": "game-middle-earth-shadow-of-war",
+        "title": "Middle-earth: Shadow of War",
+        "type": "Игра",
+        "year": 2017,
+        "rating": 8.3,
+        "votes": 350000,
+        "genres": [
+            "Экшен",
+            "Фэнтези",
+            "Открытый мир"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "книга/фильм → игра",
+        "badges": [
+            "💍 LOTR",
+            "🎬 Кино-вселенная",
+            "⚔️ Орки"
+        ],
+        "relatedMedia": [
+            "The Lord of the Rings",
+            "The Hobbit"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/356190/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/356190/Middleearth_Shadow_of_War/"
+        },
+        "description": "Middle-earth — игры по миру Tolkien и кинотрилогиям.",
+        "playAfterWatch": [
+            "Shadow of Mordor",
+            "Shadow of War"
+        ],
+        "chronology": [
+            "The Hobbit",
+            "Shadow of Mordor",
+            "Shadow of War",
+            "The Lord of the Rings"
+        ],
+        "similarGames": [
+            "Assassin’s Creed Odyssey",
+            "The Witcher 3",
+            "Dragon Age"
+        ],
+        "similarMedia": [
+            "The Lord of the Rings",
+            "The Hobbit",
+            "Rings of Power"
+        ],
+        "vibe": [
+            "орки",
+            "кольцо",
+            "фэнтези"
+        ],
+        "universe": {
+            "name": "Middle-earth",
+            "games": [
+                "Shadow of Mordor",
+                "Shadow of War"
+            ],
+            "movies": [
+                "The Lord of the Rings",
+                "The Hobbit"
+            ],
+            "series": [
+                "Rings of Power"
+            ]
+        },
+        "watchOrder": [
+            "The Lord of the Rings",
+            "The Hobbit"
+        ],
+        "playOrder": [
+            "The Hobbit",
+            "Shadow of Mordor",
+            "Shadow of War",
+            "The Lord of the Rings"
+        ]
+    },
+    {
+        "id": "game-jurassic-world-evolution-2",
+        "title": "Jurassic World Evolution 2",
+        "type": "Игра",
+        "year": 2021,
+        "rating": 8.0,
+        "votes": 180000,
+        "genres": [
+            "Стратегия",
+            "Динозавры",
+            "Парк"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🦖 Jurassic",
+            "🎬 Кино-вселенная",
+            "🏗 Менеджмент"
+        ],
+        "relatedMedia": [
+            "Jurassic Park",
+            "Jurassic World"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1244460/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1244460/Jurassic_World_Evolution_2/"
+        },
+        "description": "Jurassic World Evolution — игра по франшизе Jurassic Park / Jurassic World.",
+        "playAfterWatch": [
+            "Jurassic World Evolution 2"
+        ],
+        "chronology": [
+            "Jurassic Park",
+            "Jurassic World",
+            "Jurassic World Evolution",
+            "Evolution 2"
+        ],
+        "similarGames": [
+            "Planet Zoo",
+            "Prehistoric Kingdom",
+            "Two Point Campus"
+        ],
+        "similarMedia": [
+            "Jurassic Park",
+            "Jurassic World"
+        ],
+        "vibe": [
+            "динозавры",
+            "парк",
+            "катастрофа"
+        ],
+        "universe": {
+            "name": "Jurassic Park / World",
+            "games": [
+                "Jurassic World Evolution",
+                "Evolution 2"
+            ],
+            "movies": [
+                "Jurassic Park",
+                "Jurassic World"
+            ]
+        },
+        "watchOrder": [
+            "Jurassic Park",
+            "Jurassic World"
+        ],
+        "playOrder": [
+            "Jurassic Park",
+            "Jurassic World",
+            "Jurassic World Evolution",
+            "Evolution 2"
+        ]
+    },
+    {
+        "id": "game-south-park-stick-of-truth",
+        "title": "South Park: The Stick of Truth",
+        "type": "Игра",
+        "year": 2014,
+        "rating": 8.4,
+        "votes": 240000,
+        "genres": [
+            "RPG",
+            "Комедия",
+            "Сатира"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "мультсериал → игра",
+        "badges": [
+            "📺 Мультсериал",
+            "😂 Комедия",
+            "🧻 Сатира"
+        ],
+        "relatedMedia": [
+            "South Park"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/213670/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/213670/South_Park_The_Stick_of_Truth/"
+        },
+        "description": "South Park — пример мультсериал → игра.",
+        "playAfterWatch": [
+            "The Stick of Truth",
+            "The Fractured But Whole"
+        ],
+        "chronology": [
+            "South Park сериал",
+            "The Stick of Truth",
+            "The Fractured But Whole"
+        ],
+        "similarGames": [
+            "High on Life",
+            "The Simpsons Game",
+            "Family Guy Video Game"
+        ],
+        "similarMedia": [
+            "South Park",
+            "The Simpsons"
+        ],
+        "vibe": [
+            "сатира",
+            "юмор",
+            "абсурд"
+        ],
+        "universe": {
+            "name": "South Park",
+            "games": [
+                "The Stick of Truth",
+                "The Fractured But Whole"
+            ],
+            "series": [
+                "South Park"
+            ]
+        },
+        "watchOrder": [
+            "South Park"
+        ],
+        "playOrder": [
+            "South Park сериал",
+            "The Stick of Truth",
+            "The Fractured But Whole"
+        ]
+    },
+    {
+        "id": "game-lego-star-wars",
+        "title": "LEGO Star Wars: The Skywalker Saga",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 8.2,
+        "votes": 330000,
+        "genres": [
+            "LEGO",
+            "Star Wars",
+            "Семейное"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Star Wars",
+            "🧱 LEGO",
+            "👨‍👩‍👧 Семейное"
+        ],
+        "relatedMedia": [
+            "Star Wars"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/920210/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/920210/LEGO_Star_Wars_The_Skywalker_Saga/"
+        },
+        "description": "LEGO Star Wars — семейная игровая версия кино-вселенной Star Wars.",
+        "playAfterWatch": [
+            "LEGO Star Wars: The Skywalker Saga"
+        ],
+        "chronology": [
+            "Star Wars Episodes I-IX",
+            "LEGO Star Wars"
+        ],
+        "similarGames": [
+            "LEGO Marvel Super Heroes",
+            "LEGO Jurassic World",
+            "Sackboy"
+        ],
+        "similarMedia": [
+            "Star Wars",
+            "The LEGO Movie"
+        ],
+        "vibe": [
+            "лего",
+            "семейное",
+            "космос"
+        ],
+        "universe": {
+            "name": "LEGO Star Wars",
+            "games": [
+                "LEGO Star Wars games"
+            ],
+            "movies": [
+                "Star Wars Episodes I-IX"
+            ]
+        },
+        "watchOrder": [
+            "Star Wars"
+        ],
+        "playOrder": [
+            "Star Wars Episodes I-IX",
+            "LEGO Star Wars"
+        ]
+    },
+    {
+        "id": "game-prince-of-persia-lost-crown",
+        "title": "Prince of Persia: The Lost Crown",
+        "type": "Игра",
+        "year": 2024,
+        "rating": 8.6,
+        "votes": 160000,
+        "genres": [
+            "Метроидвания",
+            "Экшен",
+            "Платформер"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "⚔️ Платформер",
+            "🕌 Восток"
+        ],
+        "relatedMedia": [
+            "Prince of Persia: The Sands of Time"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/2751000/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/2751000/Prince_of_Persia_The_Lost_Crown/"
+        },
+        "description": "Prince of Persia — игровая серия с фильмом The Sands of Time.",
+        "playAfterWatch": [
+            "The Lost Crown",
+            "The Sands of Time"
+        ],
+        "chronology": [
+            "Prince of Persia классика",
+            "Sands of Time",
+            "The Lost Crown",
+            "фильм"
+        ],
+        "similarGames": [
+            "Ori and the Will of the Wisps",
+            "Hollow Knight",
+            "Assassin’s Creed Mirage"
+        ],
+        "similarMedia": [
+            "Prince of Persia: The Sands of Time",
+            "Aladdin по вайбу"
+        ],
+        "vibe": [
+            "восток",
+            "паркур",
+            "время"
+        ],
+        "universe": {
+            "name": "Prince of Persia",
+            "games": [
+                "Prince of Persia классика",
+                "Sands of Time",
+                "The Lost Crown"
+            ],
+            "movies": [
+                "Prince of Persia: The Sands of Time"
+            ]
+        },
+        "watchOrder": [
+            "Prince of Persia: The Sands of Time"
+        ],
+        "playOrder": [
+            "Prince of Persia классика",
+            "Sands of Time",
+            "The Lost Crown",
+            "фильм"
+        ]
+    },
+    {
+        "id": "game-assassins-creed-mirage",
+        "title": "Assassin’s Creed Mirage",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.0,
+        "votes": 250000,
+        "genres": [
+            "Стелс",
+            "История",
+            "Паркур"
+        ],
+        "relation": "game_to_movie",
+        "relationLabel": "игра → фильм",
+        "badges": [
+            "🎬 Есть фильм",
+            "🗡 Ассасины",
+            "🏛 История"
+        ],
+        "relatedMedia": [
+            "Assassin’s Creed"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/3035570/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/search/?term=Assassin%27s%20Creed%20Mirage"
+        },
+        "description": "Assassin’s Creed — большая игровая серия с фильмом.",
+        "playAfterWatch": [
+            "Assassin’s Creed II",
+            "Black Flag",
+            "Origins",
+            "Odyssey",
+            "Mirage"
+        ],
+        "chronology": [
+            "Assassin’s Creed II",
+            "Black Flag",
+            "Origins",
+            "Odyssey",
+            "Mirage",
+            "фильм"
+        ],
+        "similarGames": [
+            "Ghost of Tsushima",
+            "Prince of Persia",
+            "Hitman"
+        ],
+        "similarMedia": [
+            "Assassin’s Creed",
+            "Kingdom of Heaven"
+        ],
+        "vibe": [
+            "история",
+            "паркур",
+            "тайный орден"
+        ],
+        "universe": {
+            "name": "Assassin’s Creed",
+            "games": [
+                "AC II",
+                "Black Flag",
+                "Origins",
+                "Odyssey",
+                "Valhalla",
+                "Mirage"
+            ],
+            "movies": [
+                "Assassin’s Creed"
+            ]
+        },
+        "watchOrder": [
+            "Assassin’s Creed"
+        ],
+        "playOrder": [
+            "Assassin’s Creed II",
+            "Black Flag",
+            "Origins",
+            "Odyssey",
+            "Mirage",
+            "фильм"
+        ]
+    },
+    {
+        "id": "game-control",
+        "title": "Control Ultimate Edition",
+        "type": "Игра",
+        "year": 2020,
+        "rating": 8.6,
+        "votes": 300000,
+        "genres": [
+            "Экшен",
+            "Паранормальное",
+            "Remedy"
+        ],
+        "relation": "vibe_media",
+        "relationLabel": "игра ↔ кино-вайб",
+        "badges": [
+            "🌀 Remedy",
+            "🧠 Паранормальное",
+            "🌌 RCU"
+        ],
+        "relatedMedia": [
+            "Alan Wake",
+            "Twin Peaks",
+            "The X-Files"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/870780/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/870780/Control_Ultimate_Edition/"
+        },
+        "description": "Control связан с Alan Wake внутри Remedy Connected Universe.",
+        "playAfterWatch": [
+            "Control",
+            "Alan Wake 2"
+        ],
+        "chronology": [
+            "Alan Wake",
+            "Control",
+            "Alan Wake 2"
+        ],
+        "similarGames": [
+            "Alan Wake 2",
+            "Quantum Break",
+            "SCP: Secret Files"
+        ],
+        "similarMedia": [
+            "Twin Peaks",
+            "The X-Files",
+            "Severance"
+        ],
+        "vibe": [
+            "паранормальное",
+            "федеральное бюро",
+            "измерения"
+        ],
+        "universe": {
+            "name": "Remedy Connected Universe",
+            "games": [
+                "Alan Wake",
+                "Control",
+                "Alan Wake 2"
+            ],
+            "series": [
+                "Twin Peaks / The X-Files по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "Alan Wake",
+            "Twin Peaks",
+            "The X-Files"
+        ],
+        "playOrder": [
+            "Alan Wake",
+            "Control",
+            "Alan Wake 2"
+        ]
+    },
+    {
+        "id": "game-avatar-frontiers-of-pandora",
+        "title": "Avatar: Frontiers of Pandora",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 7.8,
+        "votes": 180000,
+        "genres": [
+            "Открытый мир",
+            "Sci-Fi",
+            "Приключение"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Avatar",
+            "🌿 Пандора",
+            "🚀 Sci-Fi"
+        ],
+        "relatedMedia": [
+            "Avatar",
+            "Avatar: The Way of Water"
+        ],
+        "poster": "",
+        "stores": {},
+        "description": "Avatar: Frontiers of Pandora — игра по кино-вселенной Avatar.",
+        "playAfterWatch": [
+            "Avatar: Frontiers of Pandora"
+        ],
+        "chronology": [
+            "Avatar",
+            "Avatar: The Way of Water",
+            "Frontiers of Pandora"
+        ],
+        "similarGames": [
+            "Far Cry 6",
+            "Horizon Forbidden West",
+            "Crysis"
+        ],
+        "similarMedia": [
+            "Avatar",
+            "Avatar: The Way of Water"
+        ],
+        "vibe": [
+            "природа",
+            "пандора",
+            "sci-fi"
+        ],
+        "universe": {
+            "name": "Avatar",
+            "games": [
+                "Frontiers of Pandora"
+            ],
+            "movies": [
+                "Avatar",
+                "The Way of Water"
+            ]
+        },
+        "watchOrder": [
+            "Avatar",
+            "Avatar: The Way of Water"
+        ],
+        "playOrder": [
+            "Avatar",
+            "Avatar: The Way of Water",
+            "Frontiers of Pandora"
+        ]
+    },
+    {
+        "id": "game-transformers-fall-of-cybertron",
+        "title": "Transformers: Fall of Cybertron",
+        "type": "Игра",
+        "year": 2012,
+        "rating": 8.1,
+        "votes": 120000,
+        "genres": [
+            "Экшен",
+            "Роботы",
+            "Sci-Fi"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "мульт/фильм → игра",
+        "badges": [
+            "🤖 Transformers",
+            "🎬 Кино-вселенная",
+            "🚗 Роботы"
+        ],
+        "relatedMedia": [
+            "Transformers",
+            "Transformers: Prime"
+        ],
+        "poster": "",
+        "stores": {},
+        "description": "Transformers — вселенная с мультсериалами, фильмами и играми.",
+        "playAfterWatch": [
+            "War for Cybertron",
+            "Fall of Cybertron"
+        ],
+        "chronology": [
+            "Transformers G1",
+            "War for Cybertron",
+            "Fall of Cybertron",
+            "Transformers фильмы"
+        ],
+        "similarGames": [
+            "Armored Core VI",
+            "Titanfall 2",
+            "MechWarrior 5"
+        ],
+        "similarMedia": [
+            "Transformers",
+            "Bumblebee",
+            "Transformers: Prime"
+        ],
+        "vibe": [
+            "роботы",
+            "кибертрон",
+            "трансформация"
+        ],
+        "universe": {
+            "name": "Transformers",
+            "games": [
+                "War for Cybertron",
+                "Fall of Cybertron"
+            ],
+            "movies": [
+                "Transformers films"
+            ],
+            "animation": [
+                "Transformers G1",
+                "Transformers: Prime"
+            ]
+        },
+        "watchOrder": [
+            "Transformers",
+            "Transformers: Prime"
+        ],
+        "playOrder": [
+            "Transformers G1",
+            "War for Cybertron",
+            "Fall of Cybertron",
+            "Transformers фильмы"
+        ]
+    },
+    {
+        "id": "game-mad-max",
+        "title": "Mad Max",
+        "type": "Игра",
+        "year": 2015,
+        "rating": 8.0,
+        "votes": 280000,
+        "genres": [
+            "Экшен",
+            "Открытый мир",
+            "Пустошь"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Mad Max",
+            "🚗 Пустошь",
+            "💥 Экшен"
+        ],
+        "relatedMedia": [
+            "Mad Max: Fury Road",
+            "Mad Max"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/234140/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/234140/Mad_Max/"
+        },
+        "description": "Mad Max — игра по кино-вселенной постапокалипсиса.",
+        "playAfterWatch": [
+            "Mad Max"
+        ],
+        "chronology": [
+            "Mad Max фильмы",
+            "Mad Max игра",
+            "Fury Road"
+        ],
+        "similarGames": [
+            "Fallout 4",
+            "Rage 2",
+            "Days Gone"
+        ],
+        "similarMedia": [
+            "Mad Max",
+            "Fury Road",
+            "Furiosa"
+        ],
+        "vibe": [
+            "пустошь",
+            "машины",
+            "выживание"
+        ],
+        "universe": {
+            "name": "Mad Max",
+            "games": [
+                "Mad Max"
+            ],
+            "movies": [
+                "Mad Max",
+                "Fury Road",
+                "Furiosa"
+            ]
+        },
+        "watchOrder": [
+            "Mad Max: Fury Road",
+            "Mad Max"
+        ],
+        "playOrder": [
+            "Mad Max фильмы",
+            "Mad Max игра",
+            "Fury Road"
+        ]
+    },
+    {
+        "id": "game-ghostbusters-spirits-unleashed",
+        "title": "Ghostbusters: Spirits Unleashed",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 7.4,
+        "votes": 90000,
+        "genres": [
+            "Кооператив",
+            "Комедия",
+            "Охота на призраков"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Ghostbusters",
+            "👻 Кооп",
+            "😂 Комедия"
+        ],
+        "relatedMedia": [
+            "Ghostbusters"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/2383990/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/2383990/Ghostbusters_Spirits_Unleashed/"
+        },
+        "description": "Ghostbusters — фильмовая франшиза с играми.",
+        "playAfterWatch": [
+            "Ghostbusters: Spirits Unleashed"
+        ],
+        "chronology": [
+            "Ghostbusters фильмы",
+            "Ghostbusters: The Video Game",
+            "Spirits Unleashed"
+        ],
+        "similarGames": [
+            "Phasmophobia",
+            "Luigi’s Mansion",
+            "Midnight Ghost Hunt"
+        ],
+        "similarMedia": [
+            "Ghostbusters",
+            "Beetlejuice"
+        ],
+        "vibe": [
+            "призраки",
+            "команда",
+            "комедия"
+        ],
+        "universe": {
+            "name": "Ghostbusters",
+            "games": [
+                "The Video Game",
+                "Spirits Unleashed"
+            ],
+            "movies": [
+                "Ghostbusters films"
+            ]
+        },
+        "watchOrder": [
+            "Ghostbusters"
+        ],
+        "playOrder": [
+            "Ghostbusters фильмы",
+            "Ghostbusters: The Video Game",
+            "Spirits Unleashed"
+        ]
+    },
+    {
+        "id": "game-alien-isolation",
+        "title": "Alien: Isolation",
+        "type": "Игра",
+        "year": 2014,
+        "rating": 8.7,
+        "votes": 320000,
+        "genres": [
+            "Хоррор",
+            "Выживание",
+            "Sci-Fi"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Alien",
+            "👽 Хоррор",
+            "⭐ Культовая"
+        ],
+        "relatedMedia": [
+            "Alien",
+            "Aliens"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/214490/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/214490/Alien_Isolation/"
+        },
+        "description": "Alien: Isolation — один из лучших примеров фильм → игра.",
+        "playAfterWatch": [
+            "Alien: Isolation"
+        ],
+        "chronology": [
+            "Alien",
+            "Aliens",
+            "Alien: Isolation"
+        ],
+        "similarGames": [
+            "Dead Space",
+            "Resident Evil 2",
+            "SOMA"
+        ],
+        "similarMedia": [
+            "Alien",
+            "Aliens",
+            "The Thing"
+        ],
+        "vibe": [
+            "космос",
+            "чужой",
+            "выживание"
+        ],
+        "universe": {
+            "name": "Alien",
+            "games": [
+                "Alien: Isolation",
+                "Aliens: Fireteam Elite"
+            ],
+            "movies": [
+                "Alien",
+                "Aliens",
+                "Prometheus"
+            ]
+        },
+        "watchOrder": [
+            "Alien",
+            "Aliens"
+        ],
+        "playOrder": [
+            "Alien",
+            "Aliens",
+            "Alien: Isolation"
+        ]
+    },
+    {
+        "id": "game-predator-hunting-grounds",
+        "title": "Predator: Hunting Grounds",
+        "type": "Игра",
+        "year": 2020,
+        "rating": 7.2,
+        "votes": 100000,
+        "genres": [
+            "Мультиплеер",
+            "Шутер",
+            "Хищник"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Predator",
+            "👽 Охота",
+            "🔫 PvP"
+        ],
+        "relatedMedia": [
+            "Predator",
+            "Prey"
+        ],
+        "poster": "",
+        "stores": {},
+        "description": "Predator — кино-вселенная с играми про охоту.",
+        "playAfterWatch": [
+            "Predator: Hunting Grounds"
+        ],
+        "chronology": [
+            "Predator",
+            "Predator 2",
+            "Prey",
+            "Hunting Grounds"
+        ],
+        "similarGames": [
+            "Aliens: Fireteam Elite",
+            "Evolve",
+            "Dead by Daylight"
+        ],
+        "similarMedia": [
+            "Predator",
+            "Prey",
+            "Alien vs Predator"
+        ],
+        "vibe": [
+            "джунгли",
+            "охота",
+            "инопланетянин"
+        ],
+        "universe": {
+            "name": "Predator",
+            "games": [
+                "Predator: Hunting Grounds",
+                "Alien vs Predator"
+            ],
+            "movies": [
+                "Predator",
+                "Prey"
+            ]
+        },
+        "watchOrder": [
+            "Predator",
+            "Prey"
+        ],
+        "playOrder": [
+            "Predator",
+            "Predator 2",
+            "Prey",
+            "Hunting Grounds"
+        ]
+    },
+    {
+        "id": "game-robocop-rogue-city",
+        "title": "RoboCop: Rogue City",
+        "type": "Игра",
+        "year": 2023,
+        "rating": 8.1,
+        "votes": 140000,
+        "genres": [
+            "Шутер",
+            "Киберпанк",
+            "Экшен"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 RoboCop",
+            "🤖 Киберпанк",
+            "🔫 Шутер"
+        ],
+        "relatedMedia": [
+            "RoboCop"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1681430/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1681430/RoboCop_Rogue_City/"
+        },
+        "description": "RoboCop: Rogue City — современный пример фильм → игра.",
+        "playAfterWatch": [
+            "RoboCop: Rogue City"
+        ],
+        "chronology": [
+            "RoboCop фильмы",
+            "Rogue City"
+        ],
+        "similarGames": [
+            "Terminator: Resistance",
+            "Cyberpunk 2077",
+            "Deus Ex"
+        ],
+        "similarMedia": [
+            "RoboCop",
+            "Terminator",
+            "Total Recall"
+        ],
+        "vibe": [
+            "киберпанк",
+            "полиция",
+            "робот"
+        ],
+        "universe": {
+            "name": "RoboCop",
+            "games": [
+                "RoboCop: Rogue City"
+            ],
+            "movies": [
+                "RoboCop films"
+            ]
+        },
+        "watchOrder": [
+            "RoboCop"
+        ],
+        "playOrder": [
+            "RoboCop фильмы",
+            "Rogue City"
+        ]
+    },
+    {
+        "id": "game-terminator-resistance",
+        "title": "Terminator: Resistance",
+        "type": "Игра",
+        "year": 2019,
+        "rating": 7.8,
+        "votes": 130000,
+        "genres": [
+            "Шутер",
+            "Sci-Fi",
+            "Постапокалипсис"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Terminator",
+            "🤖 Skynet",
+            "🔫 Шутер"
+        ],
+        "relatedMedia": [
+            "The Terminator",
+            "Terminator 2"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/954740/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/954740/Terminator_Resistance/"
+        },
+        "description": "Terminator: Resistance — игра по кино-вселенной Terminator.",
+        "playAfterWatch": [
+            "Terminator: Resistance"
+        ],
+        "chronology": [
+            "Terminator",
+            "Terminator 2",
+            "Terminator: Resistance"
+        ],
+        "similarGames": [
+            "RoboCop: Rogue City",
+            "Metro Exodus",
+            "Cyberpunk 2077"
+        ],
+        "similarMedia": [
+            "The Terminator",
+            "Terminator 2",
+            "The Matrix"
+        ],
+        "vibe": [
+            "роботы",
+            "будущее",
+            "сопротивление"
+        ],
+        "universe": {
+            "name": "Terminator",
+            "games": [
+                "Terminator: Resistance"
+            ],
+            "movies": [
+                "The Terminator",
+                "Terminator 2"
+            ]
+        },
+        "watchOrder": [
+            "The Terminator",
+            "Terminator 2"
+        ],
+        "playOrder": [
+            "Terminator",
+            "Terminator 2",
+            "Terminator: Resistance"
+        ]
+    },
+    {
+        "id": "game-blade-runner-enhanced",
+        "title": "Blade Runner: Enhanced Edition",
+        "type": "Игра",
+        "year": 2022,
+        "rating": 7.2,
+        "votes": 70000,
+        "genres": [
+            "Квест",
+            "Киберпанк",
+            "Детектив"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "фильм → игра",
+        "badges": [
+            "🎬 Blade Runner",
+            "🌃 Киберпанк",
+            "🕵️ Детектив"
+        ],
+        "relatedMedia": [
+            "Blade Runner",
+            "Blade Runner 2049"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1678420/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1678420/Blade_Runner_Enhanced_Edition/"
+        },
+        "description": "Blade Runner — культовый фильм с игровой адаптацией и сильной связью по вайбу с Cyberpunk.",
+        "playAfterWatch": [
+            "Blade Runner: Enhanced Edition"
+        ],
+        "chronology": [
+            "Blade Runner",
+            "Blade Runner game",
+            "Blade Runner 2049"
+        ],
+        "similarGames": [
+            "Cyberpunk 2077",
+            "Deus Ex",
+            "Observer"
+        ],
+        "similarMedia": [
+            "Blade Runner",
+            "Blade Runner 2049",
+            "Ghost in the Shell"
+        ],
+        "vibe": [
+            "неон",
+            "дождь",
+            "репликанты"
+        ],
+        "universe": {
+            "name": "Blade Runner",
+            "games": [
+                "Blade Runner game"
+            ],
+            "movies": [
+                "Blade Runner",
+                "Blade Runner 2049"
+            ]
+        },
+        "watchOrder": [
+            "Blade Runner",
+            "Blade Runner 2049"
+        ],
+        "playOrder": [
+            "Blade Runner",
+            "Blade Runner game",
+            "Blade Runner 2049"
+        ]
+    },
+    {
+        "id": "game-the-walking-dead",
+        "title": "The Walking Dead: The Telltale Definitive Series",
+        "type": "Игра",
+        "year": 2020,
+        "rating": 9.0,
+        "votes": 300000,
+        "genres": [
+            "Интерактивное кино",
+            "Зомби",
+            "Драма"
+        ],
+        "relation": "media_to_game",
+        "relationLabel": "комикс/сериал → игра",
+        "badges": [
+            "📺 Есть сериал",
+            "🧟 Зомби",
+            "🎭 Драма"
+        ],
+        "relatedMedia": [
+            "The Walking Dead"
+        ],
+        "poster": "https://cdn.akamai.steamstatic.com/steam/apps/1449690/library_600x900_2x.jpg",
+        "stores": {
+            "steam": "https://store.steampowered.com/app/1449690/The_Walking_Dead_The_Telltale_Definitive_Series/"
+        },
+        "description": "The Walking Dead — связка комиксов, сериала и игр Telltale.",
+        "playAfterWatch": [
+            "The Walking Dead Telltale"
+        ],
+        "chronology": [
+            "комиксы",
+            "сериал",
+            "Telltale Season 1",
+            "Season 2",
+            "A New Frontier",
+            "Final Season"
+        ],
+        "similarGames": [
+            "The Last of Us",
+            "Life is Strange",
+            "Detroit: Become Human"
+        ],
+        "similarMedia": [
+            "The Walking Dead",
+            "Train to Busan",
+            "The Last of Us"
+        ],
+        "vibe": [
+            "зомби",
+            "выбор",
+            "драма"
+        ],
+        "universe": {
+            "name": "The Walking Dead",
+            "games": [
+                "Telltale series"
+            ],
+            "series": [
+                "The Walking Dead"
+            ],
+            "movies": [
+                "зомби-кино по вайбу"
+            ]
+        },
+        "watchOrder": [
+            "The Walking Dead"
+        ],
+        "playOrder": [
+            "комиксы",
+            "сериал",
+            "Telltale Season 1",
+            "Season 2",
+            "A New Frontier",
+            "Final Season"
+        ]
+    }
+];
+
+  function txt(v) { return String(v == null ? "" : v).trim(); }
+  function low(v) { return txt(v).toLowerCase(); }
+  function safeHtml(v) { try { return escapeHtml(v); } catch { return txt(v).replace(/[&<>"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[s])); } }
+  function safeAttr(v) { try { return escapeAttr(v); } catch { return safeHtml(v); } }
+  function arr(v) { return Array.isArray(v) ? v.filter(Boolean).map(txt) : (txt(v) ? [txt(v)] : []); }
+  function itemTitle(item) { return txt(item && (item.title || item.name || item.ru || item.en || item.original_title || item.original_name)); }
+  function itemKey(s) { return low(s).replace(/ё/g,"е").replace(/[^a-z0-9а-я]+/gi," ").replace(/\s+/g," ").trim(); }
+
+  function gameFallbackPoster(title, relation) {
+    const t = safeHtml(title || "Игра");
+    const r = safeHtml(relation || "игровая вселенная");
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#14002e"/><stop offset="0.48" stop-color="#241166"/><stop offset="1" stop-color="#00d5ff"/>
+        </linearGradient>
+        <radialGradient id="r" cx="50%" cy="38%" r="65%"><stop offset="0" stop-color="#ffffff" stop-opacity="0.20"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect width="600" height="900" fill="url(#g)"/>
+      <rect width="600" height="900" fill="url(#r)"/>
+      <circle cx="500" cy="110" r="120" fill="#00d5ff" opacity="0.12"/>
+      <circle cx="90" cy="780" r="150" fill="#a634ff" opacity="0.16"/>
+      <text x="50%" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="80" font-weight="900" fill="#ffffff">🎮</text>
+      <text x="50%" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="900" fill="#ffffff">${t}</text>
+      <text x="50%" y="448" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#bff6ff">${r}</text>
+      <rect x="72" y="690" width="456" height="66" rx="22" fill="#06111f" opacity="0.72" stroke="#00d5ff"/>
+      <text x="50%" y="732" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="900" fill="#dff8ff">ГОЛУБЬ · GAME HUB</text>
+    </svg>`;
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  function normalizeGamePosterUrl(url) {
+    const u = txt(url);
+    if (!u) return "";
+    // Steam sometimes gives wide headers; for our vertical cards prefer library poster.
+    return u.replace(/\/header\.jpg(?:\?.*)?$/i, "/library_600x900_2x.jpg");
+  }
+
+  function gamePosterFor(item) {
+    return normalizeGamePosterUrl(item && item.poster) || gameFallbackPoster(itemTitle(item), item && item.relationLabel);
+  }
+
+  function isGameItem(item) {
+    return low(item && (item.type || item.category)) === "игра" || low(item && item.section) === "games";
+  }
+
+  function storeSearchUrl(kind, title) {
+    const q = encodeURIComponent(title || "game");
+    switch (kind) {
+      case "steam": return "https://store.steampowered.com/search/?term=" + q;
+      case "epic": return "https://store.epicgames.com/browse?q=" + q + "&sortBy=relevancy&sortDir=DESC&count=40";
+      case "gog": return "https://www.gog.com/en/games?query=" + q;
+      case "playstation": return "https://store.playstation.com/search/" + q;
+      case "xbox": return "https://www.xbox.com/search?q=" + q;
+      case "nintendo": return "https://www.nintendo.com/search/#q=" + q;
+      case "pcgw": return "https://www.pcgamingwiki.com/w/index.php?search=" + q;
+      case "metacritic": return "https://www.metacritic.com/search/" + q + "/";
+      case "opencritic": return "https://opencritic.com/search?criteria=" + q;
+      case "youtube": return "https://www.youtube.com/results?search_query=" + q + "%20game%20trailer";
+      case "walkthrough": return "https://www.youtube.com/results?search_query=" + q + "%20%D0%BF%D1%80%D0%BE%D1%85%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5";
+      case "system": return "https://www.google.com/search?q=" + q + "%20system%20requirements";
+      case "wiki": return "https://www.google.com/search?q=" + q + "%20wiki";
+      case "protondb": return "https://www.protondb.com/search?q=" + q;
+      case "howlong": return "https://howlongtobeat.com/?q=" + q;
+      case "twitch": return "https://www.twitch.tv/search?term=" + q;
+      case "reddit": return "https://www.reddit.com/search/?q=" + q + "%20game";
+      case "telegram": return "https://t.me/share/url?url=" + encodeURIComponent(location.origin + location.pathname + "#game=" + q) + "&text=" + encodeURIComponent("🎮 " + (title || "Игра") + " — Голубь Каталог Мира");
+      case "google": default: return "https://www.google.com/search?q=" + q;
+    }
+  }
+
+  function getStoreUrl(item, kind) {
+    const stores = item && item.stores && typeof item.stores === "object" ? item.stores : {};
+    return stores[kind] || storeSearchUrl(kind, itemTitle(item));
+  }
+
+  function gameSortScore(item) {
+    return Number(item.rating || 0) * 1000000 + Math.min(Number(item.votes || 0), 3000000) + Number(item.year || 0) * 20;
+  }
+
+  function gameHay(item) {
+    return itemKey([
+      itemTitle(item), item && item.relationLabel, item && item.relation,
+      arr(item && item.genres).join(" "), arr(item && item.relatedMedia).join(" "),
+      arr(item && item.badges).join(" "), arr(item && item.vibe).join(" "),
+      arr(item && item.similarGames).join(" "), arr(item && item.similarMedia).join(" "),
+      arr(item && item.chronology).join(" "), arr(item && item.playOrder).join(" "), arr(item && item.watchOrder).join(" "),
+      item && item.universeName, item && item.universe && item.universe.name,
+      item && item.universe && arr(item.universe.games).join(" "),
+      item && item.universe && arr(item.universe.movies || item.universe.films).join(" "),
+      item && item.universe && arr(item.universe.series).join(" "),
+      item && item.universe && arr(item.universe.anime).join(" "),
+      item && item.description
+    ].filter(Boolean).join(" "));
+  }
+
+  async function loadGames() {
+    if (gamesCache) return gamesCache;
+    try {
+      const res = await fetch(GAMES_URL, { cache: "force-cache" });
+      if (!res.ok) throw new Error("games_catalog fetch failed " + res.status);
+      const json = await res.json();
+      gamesCache = Array.isArray(json) ? json : (json.items || []);
+    } catch (err) {
+      console.warn("GKM V211: fallback games loaded", err);
+      gamesCache = FALLBACK_GAMES;
+    }
+    gamesCache = gamesCache.map((item, index) => ({
+      ...item,
+      id: item.id || ("game-" + index + "-" + itemKey(item.title || item.name).replace(/\s+/g,"-")),
+      type: "Игра",
+      category: "Игра",
+      section: "games",
+      overview: item.overview || item.description || "Игровая вселенная с привязкой к фильмам, сериалам, аниме или мультфильмам.",
+      poster: gamePosterFor(item)
+    }));
+    return gamesCache;
+  }
+
+  function controlsState() {
+    const q = itemKey(document.getElementById("searchInput")?.value || "");
+    const genre = txt(document.getElementById("genreFilter")?.value || "");
+    const year = txt(document.getElementById("yearFilter")?.value || "");
+    const rating = Number(document.getElementById("ratingFilter")?.value || 0);
+    const sort = txt(document.getElementById("sortFilter")?.value || "smart");
+    return { q, genre, year, rating, sort };
+  }
+
+  function gameCollectionHay(item) {
+    return gameHay(item) + " " + itemKey([item && item.relation, item && item.relationLabel, arr(item && item.genres).join(" "), arr(item && item.badges).join(" "), arr(item && item.vibe).join(" "), arr(item && item.relatedMedia).join(" ")].filter(Boolean).join(" "));
+  }
+
+  function gameInCollection(item, key) {
+    if (!key || key === "all") return true;
+    const hay = gameCollectionHay(item);
+    const relation = txt(item && item.relation);
+    const rating = Number(item && item.rating || 0);
+    const year = Number(item && item.year || 0);
+    if (key === "best_adaptations") return rating >= 8.2 && (relation.includes("movie") || relation.includes("series") || relation.includes("anime") || relation.includes("animation") || hay.includes("фильм") || hay.includes("сериал") || hay.includes("аниме"));
+    if (key === "series") return relation === "game_to_series" || hay.includes("есть сериал") || hay.includes("сериал");
+    if (key === "anime") return relation === "game_to_anime" || hay.includes("есть аниме") || hay.includes("аниме");
+    if (key === "horror") return hay.includes("хоррор") || hay.includes("ужас") || hay.includes("зомби") || hay.includes("мистика");
+    if (key === "fantasy") return hay.includes("фэнтези") || hay.includes("магия") || hay.includes("rpg");
+    if (key === "scifi") return hay.includes("фантаст") || hay.includes("космос") || hay.includes("sci") || hay.includes("будущее");
+    if (key === "cyberpunk") return hay.includes("киберпанк") || hay.includes("cyberpunk") || hay.includes("неон");
+    if (key === "fighting") return hay.includes("файтинг") || hay.includes("боевые") || hay.includes("драки");
+    if (key === "family") return hay.includes("семей") || hay.includes("мульт") || hay.includes("дет") || hay.includes("sonic") || hay.includes("mario") || hay.includes("minecraft") || hay.includes("pokemon");
+    if (key === "cult") return rating >= 8.7 || hay.includes("культ") || hay.includes("легенд");
+    if (key === "new") return year >= 2020;
+    return true;
+  }
+
+  function collectionCounts(all) {
+    const counts = {};
+    COLLECTION_FILTERS.forEach(x => { counts[x[0]] = 0; });
+    (all || []).filter(item => {
+      const st = controlsState();
+      if (activeRelation !== "all" && txt(item.relation) !== activeRelation) return false;
+      if (activeCollection !== "all" && !gameInCollection(item, activeCollection)) return false;
+      if (st.q && !gameHay(item).includes(st.q)) return false;
+      if (st.genre && !arr(item.genres).includes(st.genre)) return false;
+      if (st.year && String(item.year || "") !== st.year) return false;
+      if (st.rating && Number(item.rating || 0) < st.rating) return false;
+      return true;
+    }).forEach(item => {
+      COLLECTION_FILTERS.forEach(x => { if (gameInCollection(item, x[0])) counts[x[0]] = (counts[x[0]] || 0) + 1; });
+    });
+    return counts;
+  }
+
+  function filteredGames(all) {
+    const st = controlsState();
+    let rows = (all || []).filter(item => {
+      if (activeRelation !== "all" && txt(item.relation) !== activeRelation) return false;
+      if (st.q && !gameHay(item).includes(st.q)) return false;
+      if (st.genre && !arr(item.genres).includes(st.genre)) return false;
+      if (st.year && String(item.year || "") !== st.year) return false;
+      if (st.rating && Number(item.rating || 0) < st.rating) return false;
+      return true;
+    });
+    rows.sort((a, b) => {
+      if (st.sort === "title") return itemTitle(a).localeCompare(itemTitle(b), "ru");
+      if (st.sort === "year") return Number(b.year || 0) - Number(a.year || 0);
+      if (st.sort === "rating") return Number(b.rating || 0) - Number(a.rating || 0);
+      if (st.sort === "votes") return Number(b.votes || 0) - Number(a.votes || 0);
+      return gameSortScore(b) - gameSortScore(a);
+    });
+    return rows;
+  }
+
+  function gameMatchesBaseControls(item) {
+    const st = controlsState();
+    if (activeCollection !== "all" && !gameInCollection(item, activeCollection)) return false;
+    if (st.q && !gameHay(item).includes(st.q)) return false;
+    if (st.genre && !arr(item.genres).includes(st.genre)) return false;
+    if (st.year && String(item.year || "") !== st.year) return false;
+    if (st.rating && Number(item.rating || 0) < st.rating) return false;
+    return true;
+  }
+
+  function relationCounts(all) {
+    const base = (all || []).filter(gameMatchesBaseControls);
+    const counts = { all: base.length };
+    base.forEach(item => {
+      const key = txt(item.relation) || "other";
+      counts[key] = (counts[key] || 0) + 1;
+    });
+    return counts;
+  }
+
+  function ensureGamePanel() {
+    let panel = document.getElementById("gkmGameHubPanel");
+    if (panel) return panel;
+    panel = document.createElement("section");
+    panel.id = "gkmGameHubPanel";
+    panel.className = "gkm-game-hub-panel";
+    panel.innerHTML = `
+      <div class="gkm-game-hub-head">
+        <div><b>🎮 Игровые вселенные V211</b><span>подборки, похожее и быстрые постеры</span></div>
+        <button type="button" data-gkm-game-filter-reset="1">Все игры</button>
+      </div>
+      <div class="gkm-game-filter-label">Тип связи</div>
+      <div class="gkm-game-filter-row">
+        ${RELATION_FILTERS.map(x => `<button type="button" class="gkm-game-filter" data-gkm-game-filter="${safeAttr(x[0])}">${safeHtml(x[1])} <span class="gkm-game-filter-count" data-gkm-game-filter-count="${safeAttr(x[0])}">0</span></button>`).join("")}
+      </div>
+      <div class="gkm-game-filter-label">Подборки</div>
+      <div class="gkm-game-filter-row gkm-game-collections-row">
+        ${COLLECTION_FILTERS.map(x => `<button type="button" class="gkm-game-filter gkm-game-collection" data-gkm-game-collection="${safeAttr(x[0])}">${safeHtml(x[1])} <span class="gkm-game-filter-count" data-gkm-game-collection-count="${safeAttr(x[0])}">0</span></button>`).join("")}
+      </div>
+    `;
+    const grid = document.getElementById("grid");
+    if (grid && grid.parentNode) grid.parentNode.insertBefore(panel, grid);
+    return panel;
+  }
+
+  function updateGamePanel(all) {
+    const panel = ensureGamePanel();
+    panel.style.display = currentMode === "games" ? "" : "none";
+    panel.querySelectorAll("[data-gkm-game-filter]").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.gkmGameFilter === activeRelation);
+    });
+    panel.querySelectorAll("[data-gkm-game-collection]").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.gkmGameCollection === activeCollection);
+    });
+    if (all && all.length) {
+      const counts = relationCounts(all);
+      const ccounts = collectionCounts(all);
+      panel.querySelectorAll("[data-gkm-game-filter-count]").forEach(el => {
+        const key = el.dataset.gkmGameFilterCount || "all";
+        el.textContent = String(counts[key] || 0);
+      });
+      panel.querySelectorAll("[data-gkm-game-collection-count]").forEach(el => {
+        const key = el.dataset.gkmGameCollectionCount || "all";
+        el.textContent = String(ccounts[key] || 0);
+      });
+      const reset = panel.querySelector("[data-gkm-game-filter-reset]");
+      if (reset) reset.textContent = "Все игры · " + all.length;
+    }
+  }
+
+  function cardBadgesEnhance(root) {
+    if (!root) return;
+    root.querySelectorAll(".card").forEach(card => {
+      const id = card.getAttribute("data-id");
+      const item = (currentItems || []).find(x => String(x.id || (x.title + "|" + x.year)) === id);
+      if (!item || !isGameItem(item)) return;
+      card.classList.add("gkm-game-card");
+      const poster = card.querySelector(".poster-wrap");
+      if (poster) {
+        const img = poster.querySelector("img");
+        if (img && !img.dataset.gkmV207PosterGuard) {
+          img.dataset.gkmV207PosterGuard = "1";
+          img.onerror = function () { this.onerror = null; this.src = gameFallbackPoster(itemTitle(item), item.relationLabel); };
+        }
+      }
+      if (poster && !poster.querySelector(".gkm-game-relation-badge")) {
+        const rel = document.createElement("div");
+        rel.className = "gkm-game-relation-badge";
+        rel.textContent = item.relationLabel || "игровая вселенная";
+        poster.appendChild(rel);
+      }
+      const info = card.querySelector(".card-info") || card;
+      if (info && !info.querySelector(".gkm-game-mini-badges")) {
+        const badges = document.createElement("div");
+        badges.className = "gkm-game-mini-badges";
+        badges.innerHTML = arr(item.badges).slice(0, 3).map(b => `<span>${safeHtml(b)}</span>`).join("");
+        info.appendChild(badges);
+      }
+    });
+  }
+
+  function optimizeVisibleGamePosters(root) {
+    if (!root) return;
+    const imgs = Array.from(root.querySelectorAll('.gkm-game-card .poster-wrap img'));
+    imgs.forEach((img, index) => {
+      img.decoding = 'async';
+      if (index < 10) {
+        img.loading = 'eager';
+        try { img.fetchPriority = 'high'; } catch {}
+      } else {
+        img.loading = 'lazy';
+        try { img.fetchPriority = 'low'; } catch {}
+      }
+      if (!img.getAttribute('width')) img.setAttribute('width', '300');
+      if (!img.getAttribute('height')) img.setAttribute('height', '450');
+    });
+    imgs.slice(0, 6).forEach(img => {
+      const src = img.currentSrc || img.src;
+      if (!src || src.startsWith('data:')) return;
+      const pre = new Image();
+      pre.decoding = 'async';
+      try { pre.fetchPriority = 'high'; } catch {}
+      pre.src = src;
+    });
+  }
+
+  async function renderGames(page) {
+    currentMode = "games";
+    currentTab = "games";
+    gamesPage = Math.max(1, Number(page || gamesPage || 1));
+    if (typeof setActiveTab === "function") setActiveTab("games");
+    if (typeof setStatus === "function") setStatus("Открываю игровые вселенные V211...");
+
+    const all = await loadGames();
+    const rows = filteredGames(all);
+    gamesPages = Math.max(1, Math.ceil(rows.length / PAGE));
+    gamesPage = Math.min(gamesPage, gamesPages);
+    currentPage = gamesPage;
+    currentPages = gamesPages;
+    currentCount = rows.length;
+
+    const start = (gamesPage - 1) * PAGE;
+    const slice = rows.slice(start, start + PAGE);
+    currentItems = slice;
+
+    updateGamePanel(all);
+    const count = document.getElementById("countText");
+    const grid = document.getElementById("grid");
+    if (grid) {
+      grid.classList.remove("gkm-v191-search-best");
+      grid.removeAttribute("tabindex");
+      grid.style.removeProperty("outline");
+      grid.style.removeProperty("box-shadow");
+    }
+    const pageText = document.getElementById("pageText");
+    const prev = document.getElementById("prevBtn");
+    const next = document.getElementById("nextBtn");
+
+    const relLabel = (RELATION_FILTERS.find(x => x[0] === activeRelation) || ["all", "Все"])[1];
+    const collLabel = (COLLECTION_FILTERS.find(x => x[0] === activeCollection) || ["all", "Все подборки"])[1];
+    if (count) count.innerHTML = "🎮 Игровые вселенные · " + rows.length + " из " + all.length + " · V211 <span class='gkm-v202-pill'>" + safeHtml(relLabel) + "</span> <span class='gkm-v202-pill'>" + safeHtml(collLabel) + "</span> <span class='gkm-v202-pill'>быстрые постеры</span>";
+    if (grid) {
+      grid.innerHTML = slice.length ? slice.map(cardHtml).join("") : `<div class="gkm-game-empty">Ничего не найдено. Сбрось фильтры или измени поиск.</div>`;
+      cardBadgesEnhance(grid);
+      optimizeVisibleGamePosters(grid);
+      try { schedulePosterRecovery(grid); } catch {}
+    }
+    if (pageText) pageText.textContent = gamesPage + " / " + gamesPages;
+    if (prev) prev.disabled = gamesPage <= 1;
+    if (next) next.disabled = gamesPage >= gamesPages;
+    if (typeof setStatus === "function") setStatus("🎮 Игровые вселенные V211 · " + rows.length + " записей");
+  }
+
+  function injectGamesTab() {
+    const tabs = document.querySelector(".tabs");
+    if (!tabs || tabs.querySelector('[data-tab="games"]')) return;
+    const btn = document.createElement("button");
+    btn.className = "tab gkm-games-tab";
+    btn.dataset.tab = "games";
+    btn.type = "button";
+    btn.textContent = "🎮 Игры";
+    const anime = tabs.querySelector('[data-tab="anime"]');
+    if (anime && anime.nextSibling) tabs.insertBefore(btn, anime.nextSibling);
+    else tabs.appendChild(btn);
+  }
+
+  function injectStyle() {
+    if (document.getElementById("gkm-v209-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v209-style";
+    style.textContent = `
+      .gkm-games-tab{background:linear-gradient(135deg,rgba(0,213,255,.20),rgba(150,70,255,.30))!important;border-color:rgba(0,213,255,.55)!important;box-shadow:0 0 18px rgba(0,213,255,.18)!important;}
+      .gkm-game-hub-panel{display:none;margin:10px 0 18px;padding:14px;border:1px solid rgba(0,213,255,.25);border-radius:18px;background:linear-gradient(135deg,rgba(0,213,255,.06),rgba(134,68,255,.08));box-shadow:0 16px 40px rgba(0,0,0,.22);}
+      .gkm-game-hub-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;}
+      .gkm-game-hub-head b{display:block;font-size:18px;color:#eaf7ff}.gkm-game-hub-head span{display:block;margin-top:3px;color:#a9c5e8;font-size:13px}.gkm-game-hub-head button{border:1px solid rgba(0,213,255,.35);border-radius:999px;background:rgba(0,213,255,.08);color:#dff8ff;padding:8px 12px;font-weight:800;cursor:pointer;}
+      .gkm-game-filter-label{margin:10px 0 7px;color:#9eeaff;font-size:12px;font-weight:1000;text-transform:uppercase;letter-spacing:.06em}.gkm-game-filter-row{display:flex;flex-wrap:wrap;gap:8px}.gkm-game-filter{border:1px solid rgba(255,255,255,.13);border-radius:999px;background:rgba(255,255,255,.06);color:#e9e6ff;padding:8px 11px;font-weight:800;cursor:pointer}.gkm-game-filter.active{background:linear-gradient(135deg,#00d5ff,#8a2cff);color:#06111f;border-color:rgba(255,255,255,.35);box-shadow:0 0 18px rgba(0,213,255,.32)}.gkm-game-filter-count{display:inline-flex;align-items:center;justify-content:center;min-width:22px;margin-left:5px;padding:2px 6px;border-radius:999px;background:rgba(255,255,255,.14);font-size:11px}.gkm-game-filter.active .gkm-game-filter-count{background:rgba(6,17,31,.22);color:#06111f}
+      .gkm-game-card .poster-wrap{content-visibility:auto;contain-intrinsic-size:260px 390px;background:linear-gradient(135deg,rgba(20,0,46,.9),rgba(0,213,255,.10));box-shadow:0 0 0 1px rgba(0,213,255,.18),0 18px 48px rgba(0,0,0,.25);overflow:hidden;} .gkm-game-card .poster-wrap:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,0) 36%,rgba(0,0,0,.28));pointer-events:none;z-index:2}.gkm-game-card .poster-wrap img{width:100%;height:100%;object-fit:cover;object-position:center;background:linear-gradient(135deg,#14002e,#06111f);} .gkm-game-card .poster-placeholder{background:linear-gradient(135deg,rgba(106,38,255,.35),rgba(0,213,255,.18));font-size:15px;text-align:center;padding:12px;}
+      .gkm-game-relation-badge{position:absolute;left:8px;right:8px;bottom:8px;z-index:4;padding:6px 8px;border-radius:10px;background:rgba(2,10,20,.84);border:1px solid rgba(0,213,255,.42);color:#dff8ff;font-weight:800;font-size:11px;text-align:center;backdrop-filter:blur(6px);}
+      .gkm-game-mini-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.gkm-game-mini-badges span{display:inline-flex;padding:4px 7px;border-radius:999px;background:rgba(0,213,255,.08);border:1px solid rgba(0,213,255,.18);font-size:11px;color:#dff8ff;font-weight:800;}
+      .gkm-v202-pill{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;border:1px solid rgba(0,213,255,.38);color:#c9f6ff;background:rgba(0,213,255,.08);font-size:12px;vertical-align:middle;}
+      .gkm-game-links-block{border:1px solid rgba(0,213,255,.25);background:linear-gradient(135deg,rgba(0,213,255,.06),rgba(134,68,255,.08));}
+      .gkm-game-modal-section{margin-top:12px}.gkm-game-modal-title{margin:0 0 8px;color:#eaf7ff;font-weight:900}.gkm-game-chip-list{display:flex;flex-wrap:wrap;gap:8px}.gkm-game-chip-list span,.gkm-game-chip-list a{display:inline-flex;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 10px;background:rgba(255,255,255,.06);font-size:13px;color:#eaf7ff;text-decoration:none}.gkm-game-chip-list a{border-color:rgba(0,213,255,.32);background:rgba(0,213,255,.08);font-weight:800}.gkm-game-timeline{margin:0;padding-left:20px;color:#dfe8ff}.gkm-game-timeline li{margin:5px 0}.gkm-game-hint{color:#a9c5e8;font-size:13px;margin:4px 0 10px;}.gkm-game-universe-box{border:1px solid rgba(0,213,255,.22);border-radius:16px;padding:12px;background:linear-gradient(135deg,rgba(0,213,255,.07),rgba(138,44,255,.09));}.gkm-game-universe-name{font-weight:1000;color:#eaf7ff;margin-bottom:10px}.gkm-game-universe-col{margin:9px 0}.gkm-game-universe-col>b{display:block;color:#9eeaff;margin-bottom:6px;font-size:13px}.gkm-game-empty{grid-column:1/-1;border:1px dashed rgba(0,213,255,.35);border-radius:18px;padding:24px;text-align:center;color:#dff8ff;background:rgba(0,213,255,.06);font-weight:900}.gkm-game-universe-col .gkm-game-chip-list span{background:rgba(0,213,255,.08);border-color:rgba(0,213,255,.22)}
+      /* GKM V211 GAME GRID BORDER FIX: убираем бирюзовую рамку с общей сетки игр после поиска */
+      #grid.gkm-v191-search-best,
+      body:has(.gkm-games-tab.active) #grid.gkm-v191-search-best,
+      #grid:focus,
+      #grid:focus-visible,
+      #grid:focus-within{outline:none!important;box-shadow:none!important;border-color:transparent!important;}
+      #grid .gkm-game-card.gkm-v191-search-best{outline:none!important;box-shadow:0 0 0 1px rgba(0,213,255,.18),0 18px 48px rgba(0,0,0,.25)!important;}
+      .gkm-game-card{outline:none!important;}
+      .gkm-game-hub-panel + #grid{margin-top:12px;}
+      @media(max-width:760px){.gkm-game-hub-head{display:block}.gkm-game-hub-head button{margin-top:10px}.gkm-v202-pill{display:block;margin:8px 0 0;width:max-content;max-width:100%;}.gkm-game-relation-badge{font-size:10px;padding:5px 6px;}.gkm-game-filter{font-size:12px;padding:7px 9px;}}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function ensureGameLinksBlock() {
+    let block = document.getElementById("gameLinksBlock");
+    if (block) return block;
+    block = document.createElement("section");
+    block.id = "gameLinksBlock";
+    block.className = "links-block gkm-game-links-block";
+    block.innerHTML = '<h3 class="links-title">🎮 Игровой хаб</h3><div id="gameHubBody"></div>';
+    const animeBlock = document.getElementById("animeLinksBlock");
+    if (animeBlock && animeBlock.parentNode) animeBlock.parentNode.insertBefore(block, animeBlock.nextSibling);
+    else document.querySelector(".dialog-content")?.appendChild(block);
+    return block;
+  }
+
+  function extLink(label, url) {
+    return '<a href="' + safeAttr(url) + '" target="_blank" rel="noopener noreferrer" data-gkm-v202-game-external="1">' + safeHtml(label) + '</a>';
+  }
+  function chip(label) { return '<span>' + safeHtml(label) + '</span>'; }
+  function chipLinks(list, searchSuffix) {
+    return arr(list).map(x => extLink(x, storeSearchUrl("google", x + (searchSuffix || "")))).join("");
+  }
+
+  function sectionHtml(title, body, hint) {
+    if (!body) return "";
+    return '<div class="gkm-game-modal-section"><h4 class="gkm-game-modal-title">' + safeHtml(title) + '</h4>' + (hint ? '<p class="gkm-game-hint">' + safeHtml(hint) + '</p>' : '') + body + '</div>';
+  }
+
+  function gameShareUrl(game) {
+    const id = encodeURIComponent(game && game.id ? game.id : itemTitle(game));
+    return location.origin + location.pathname + "#game=" + id;
+  }
+
+  function gameShareText(game) {
+    return "🎮 " + itemTitle(game) + " — Голубь Каталог Мира. Игровая вселенная, где играть и что смотреть.";
+  }
+
+  function gameShareHtml(game) {
+    const url = gameShareUrl(game);
+    const tg = "https://t.me/share/url?url=" + encodeURIComponent(url) + "&text=" + encodeURIComponent(gameShareText(game));
+    return '<div class="detail-buttons">' +
+      extLink("📲 Telegram", tg) +
+      '<button type="button" class="gkm-game-copy-btn" data-gkm-game-copy="' + safeAttr(url) + '">📋 Скопировать ссылку</button>' +
+      extLink("🔎 Google", storeSearchUrl("google", itemTitle(game))) +
+    '</div>';
+  }
+
+
+  function universeList(title, list) {
+    const rows = arr(list);
+    if (!rows.length) return "";
+    return '<div class="gkm-game-universe-col"><b>' + safeHtml(title) + '</b><div class="gkm-game-chip-list">' + rows.map(chip).join("") + '</div></div>';
+  }
+
+  function gameUniverseHtml(game) {
+    const u = game && game.universe && typeof game.universe === "object" ? game.universe : {};
+    const name = u.name || game.universeName || itemTitle(game);
+    const html = [
+      universeList("🎮 Игры", u.games || game.playOrder || game.chronology),
+      universeList("🎬 Фильмы", u.movies || u.films),
+      universeList("📺 Сериалы", u.series),
+      universeList("🧩 Аниме / мульт", [].concat(arr(u.anime), arr(u.animation), arr(u.cartoon)))
+    ].join("");
+    if (!html) return "";
+    const total = arr(u.games || game.playOrder || game.chronology).length + arr(u.movies || u.films).length + arr(u.series).length + arr(u.anime).length + arr(u.animation).length + arr(u.cartoon).length;
+    const meta = total ? '<div class="gkm-game-hint">Всего связей в блоке: ' + total + '</div>' : '';
+    return '<div class="gkm-game-universe-box"><div class="gkm-game-universe-name">🌍 ' + safeHtml(name) + '</div>' + meta + html + '</div>';
+  }
+
+  function gameModalHtml(game) {
+    const title = itemTitle(game);
+    const stores = [
+      ["Steam", getStoreUrl(game, "steam")], ["Epic", getStoreUrl(game, "epic")], ["GOG", getStoreUrl(game, "gog")],
+      ["PlayStation", getStoreUrl(game, "playstation")], ["Xbox", getStoreUrl(game, "xbox")], ["Nintendo", getStoreUrl(game, "nintendo")],
+      ["PCGamingWiki", getStoreUrl(game, "pcgw")], ["Metacritic", getStoreUrl(game, "metacritic")], ["OpenCritic", getStoreUrl(game, "opencritic")]
+    ].map(x => extLink(x[0], x[1])).join("");
+    const media = chipLinks(game.relatedMedia, " смотреть");
+    const play = chipLinks(game.playAfterWatch || [title], " купить игра");
+    const universe = gameUniverseHtml(game);
+    const playOrder = chipLinks(game.playOrder || game.chronology || game.playAfterWatch || [title], " порядок прохождения");
+    const watchOrder = chipLinks(game.watchOrder || game.relatedMedia, " смотреть по порядку");
+    const guides = [
+      extLink("▶️ Трейлер", getStoreUrl(game, "youtube")),
+      extLink("🧩 Прохождение", storeSearchUrl("walkthrough", title)),
+      extLink("💻 Системные требования", storeSearchUrl("system", title)),
+      extLink("📚 Wiki / лор", storeSearchUrl("wiki", title))
+    ].join("");
+    const fresh = [
+      extLink("🐧 ProtonDB", storeSearchUrl("protondb", title)),
+      extLink("🎮 Steam Deck", storeSearchUrl("google", title + " Steam Deck")),
+      extLink("⏱ HowLongToBeat", storeSearchUrl("howlong", title)),
+      extLink("🟣 Twitch", storeSearchUrl("twitch", title)),
+      extLink("💬 Reddit", storeSearchUrl("reddit", title))
+    ].join("");
+    const timeline = arr(game.chronology).length ? '<ol class="gkm-game-timeline">' + arr(game.chronology).map(x => '<li>' + safeHtml(x) + '</li>').join("") + '</ol>' : "";
+    const similarGames = chipLinks(game.similarGames, " game");
+    const similarMedia = chipLinks(game.similarMedia, " фильм сериал аниме");
+    const vibe = arr(game.vibe).map(chip).join("");
+    return [
+      sectionHtml("📲 Поделиться", gameShareHtml(game), "Можно быстро кинуть карточку в Telegram или скопировать ссылку."),
+      sectionHtml("🌍 Открыть вселенную", universe, "Игры, фильмы, сериалы, аниме и мультфильмы вокруг одной франшизы."),
+      sectionHtml("🧭 Играть по порядку", '<div class="gkm-game-chip-list">' + playOrder + '</div>', "Быстрый порядок для прохождения или знакомства с серией."),
+      sectionHtml("🎬 Смотреть по порядку", '<div class="gkm-game-chip-list">' + (watchOrder || media || chip("Связи будут добавляться")) + '</div>', "Фильмы, сериалы, аниме или мультфильмы по этой вселенной."),
+      sectionHtml("🛒 Где купить / где играть", '<div class="detail-buttons">' + stores + '</div>'),
+      sectionHtml("🔗 Связанные фильмы / сериалы / аниме", '<div class="gkm-game-chip-list">' + (media || chip("Связи будут добавляться")) + '</div>'),
+      sectionHtml("🎮 Во что играть после просмотра", '<div class="gkm-game-chip-list">' + play + '</div>', "Это главная фишка раздела: посмотрел проект — сразу видно, во что играть."),
+      sectionHtml("▶️ Гайды и трейлеры", '<div class="detail-buttons">' + guides + '</div>'),
+      sectionHtml("⚡ Фреш-проверка", '<div class="detail-buttons">' + fresh + '</div>', "Steam Deck, ProtonDB, Twitch, Reddit и время прохождения."),
+      sectionHtml("🧭 Хронология вселенной", timeline),
+      sectionHtml("🎯 Похожие игры", '<div class="gkm-game-chip-list">' + similarGames + '</div>'),
+      sectionHtml("🎬 Похожие фильмы / сериалы по вайбу", '<div class="gkm-game-chip-list">' + similarMedia + '</div>'),
+      sectionHtml("✨ Вайб", '<div class="gkm-game-chip-list">' + vibe + '</div>')
+    ].join("");
+  }
+
+  async function relatedGamesForMedia(item) {
+    const title = itemKey(itemTitle(item));
+    if (!title) return [];
+    const games = await loadGames();
+    return games.filter(game => arr(game.relatedMedia).some(m => {
+      const k = itemKey(m);
+      return k && (k === title || k.includes(title) || title.includes(k));
+    })).slice(0, 8);
+  }
+
+  function mediaGameBlockHtml(games, mediaTitle) {
+    if (!games.length) return "";
+    const play = games.map(g => extLink(itemTitle(g), storeSearchUrl("google", itemTitle(g) + " купить играть"))).join("");
+    const universes = games.map(g => chip((g.relationLabel || "связь") + " · " + itemTitle(g))).join("");
+    return [
+      sectionHtml("🎮 Во что играть после просмотра", '<div class="gkm-game-chip-list">' + play + '</div>', "Найдено по связке с “" + mediaTitle + "”."),
+      sectionHtml("🔗 Игровая связь", '<div class="gkm-game-chip-list">' + universes + '</div>')
+    ].join("");
+  }
+
+  async function applyGameModal(item) {
+    const block = ensureGameLinksBlock();
+    const body = document.getElementById("gameHubBody");
+    if (!block || !body) return;
+    const game = isGameItem(item);
+    if (game) {
+      block.style.display = "";
+      body.innerHTML = gameModalHtml(item);
+      const findTitle = document.getElementById("yandexLink")?.closest("section")?.querySelector(".links-title,h3");
+      if (findTitle) findTitle.textContent = "Поиск игры / видео";
+      return;
+    }
+    const related = await relatedGamesForMedia(item);
+    if (related.length) {
+      block.style.display = "";
+      body.innerHTML = mediaGameBlockHtml(related, itemTitle(item));
+    } else {
+      block.style.display = "none";
+      body.innerHTML = "";
+    }
+  }
+
+  function patchOpenDetails() {
+    if (window.GKM_V202_OPEN_DETAILS_PATCHED === "1") return;
+    if (typeof openDetails !== "function") return;
+    const original = openDetails;
+    openDetails = function gkmV202OpenDetails(item) {
+      original(item);
+      setTimeout(() => applyGameModal(item), 0);
+    };
+    window.GKM_V202_OPEN_DETAILS_PATCHED = "1";
+  }
+
+  function scheduleGamesFilter() {
+    clearTimeout(gamesFilterTimer);
+    gamesFilterTimer = setTimeout(() => renderGames(1), 80);
+  }
+
+  document.addEventListener("click", function (event) {
+    const tab = event.target.closest && event.target.closest('.tab[data-tab="games"]');
+    if (tab) {
+      event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+      renderGames(1); return;
+    }
+    const filter = event.target.closest && event.target.closest("[data-gkm-game-filter]");
+    if (filter) {
+      event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+      activeRelation = filter.dataset.gkmGameFilter || "all";
+      renderGames(1); return;
+    }
+    const collection = event.target.closest && event.target.closest("[data-gkm-game-collection]");
+    if (collection) {
+      event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+      activeCollection = collection.dataset.gkmGameCollection || "all";
+      renderGames(1); return;
+    }
+    const reset = event.target.closest && event.target.closest("[data-gkm-game-filter-reset]");
+    if (reset) {
+      event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+      activeRelation = "all"; activeCollection = "all"; renderGames(1); return;
+    }
+    if (currentMode === "games") {
+      const prev = event.target.closest && event.target.closest("#prevBtn");
+      const next = event.target.closest && event.target.closest("#nextBtn");
+      if (prev) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); if (gamesPage > 1) renderGames(gamesPage - 1); }
+      if (next) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); if (gamesPage < gamesPages) renderGames(gamesPage + 1); }
+    } else {
+      const panel = document.getElementById("gkmGameHubPanel");
+      if (panel) panel.style.display = "none";
+    }
+  }, true);
+
+  document.addEventListener("input", function (event) {
+    if (currentMode !== "games") return;
+    if (!event.target.closest || !event.target.closest(".controls")) return;
+    event.stopPropagation(); event.stopImmediatePropagation(); scheduleGamesFilter();
+  }, true);
+
+  document.addEventListener("change", function (event) {
+    if (currentMode !== "games") return;
+    if (!event.target.closest || !event.target.closest(".controls")) return;
+    event.stopPropagation(); event.stopImmediatePropagation(); scheduleGamesFilter();
+  }, true);
+
+  document.addEventListener("click", function (event) {
+    const btn = event.target.closest && event.target.closest("[data-gkm-game-copy]");
+    if (!btn) return;
+    event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+    const url = btn.getAttribute("data-gkm-game-copy") || location.href;
+    const done = () => { btn.textContent = "✅ Ссылка скопирована"; setTimeout(() => { btn.textContent = "📋 Скопировать ссылку"; }, 1500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done).catch(() => { prompt("Скопируй ссылку:", url); });
+    else prompt("Скопируй ссылку:", url);
+  }, true);
+
+  document.addEventListener("click", function (event) {
+    const el = event.target.closest && event.target.closest("a[data-gkm-v202-game-external]");
+    if (!el) return;
+    const url = el.getAttribute("href") || "";
+    if (!/^https?:\/\//i.test(url)) return;
+    event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+    window.open(url, "_blank", "noopener,noreferrer");
+  }, true);
+
+  function init() {
+    injectStyle(); injectGamesTab(); ensureGamePanel(); updateGamePanel(); patchOpenDetails();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+/* GKM V211 GAME COLLECTIONS + FAST POSTERS END */
+
+
+
+
+/* GKM V212 BOOKS MANGA COMICS FOUNDATION START
+   Идея пользователя: единый Каталог Мира — фильмы, сериалы, аниме, мультики, игры, книги, манга и комиксы.
+*/
+(function () {
+  const BOOKS_URL = "./data/books_catalog.json?v=222";
+  const BOOKS_SPLIT_URLS = ["./data/books/manga.json?v=222","./data/books/ranobe.json?v=222","./data/books/books.json?v=222","./data/books/comics.json?v=222"];
+  const PAGE = 24;
+  const BOOK_PAGE = 18;
+  let booksCache = null;
+  let booksPage = 1;
+  let booksPages = 1;
+  let activeKind = "all";
+  let activeBookCollection = "all";
+  let booksFilterTimer = null;
+
+  function txt(v) { return String(v == null ? "" : v).trim(); }
+  function low(v) { return txt(v).toLowerCase(); }
+  function esc(v) { try { return escapeHtml(v); } catch { return txt(v).replace(/[&<>\"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[s])); } }
+  function attr(v) { try { return escapeAttr(v); } catch { return esc(v); } }
+  function arr(v) { return Array.isArray(v) ? v.filter(Boolean).map(txt) : (txt(v) ? [txt(v)] : []); }
+  function itemTitle(item) { return txt(item && (item.title || item.name || item.ru || item.en || item.originalTitle || item.original_title || item.original_name)); }
+  function itemKey(s) { return low(s).replace(/ё/g, "е").replace(/[^a-z0-9а-я]+/gi, " ").replace(/\s+/g, " ").trim(); }
+  function isBookItem(item) { const s = low(item && item.section); const t = low(item && (item.type || item.category)); return s === "books" || ["книга","манга","комикс","ранобэ","новелла"].includes(t); }
+
+  const FALLBACK_BOOKS = [
+    { id:"book-witcher-last-wish", title:"Ведьмак: Последнее желание", type:"Книга", category:"Книги", section:"books", year:1993, rating:8.7, votes:120000, genres:["фэнтези","монстры"], relation:"book_to_game_series", relationLabel:"Книга → игры → сериал", universeName:"The Witcher", relatedMedia:["The Witcher","The Witcher 3"], readOrder:["Последнее желание","Меч Предназначения","Кровь эльфов"], watchOrder:["The Witcher"], playOrder:["The Witcher 3"], vibe:["магия","моральный выбор"], description:"Стартовая книга для входа во вселенную Ведьмака." },
+    { id:"manga-attack-on-titan", title:"Атака титанов", type:"Манга", category:"Манга", section:"books", year:2009, rating:9.0, votes:250000, genres:["тёмное фэнтези","экшен"], relation:"manga_to_anime_games", relationLabel:"Манга → аниме → игры", universeName:"Attack on Titan", relatedMedia:["Attack on Titan"], readOrder:["манга главы 1–139"], watchOrder:["Attack on Titan Season 1","Final Season"], playOrder:["Attack on Titan 2"], vibe:["титаны","война"], description:"Манга-первоисточник для аниме Attack on Titan." },
+    { id:"comic-batman-year-one", title:"Бэтмен: Год первый", type:"Комикс", category:"Комиксы", section:"books", year:1987, rating:8.8, votes:95000, genres:["супергерои","нуар"], relation:"comic_to_movies_games", relationLabel:"Комикс → фильмы → игры", universeName:"Batman", relatedMedia:["Batman Begins","The Batman","Batman Arkham"], readOrder:["Year One","The Long Halloween"], watchOrder:["Batman Begins","The Batman"], playOrder:["Batman Arkham series"], vibe:["Готэм","детектив"], description:"Один из лучших входов в комиксную вселенную Бэтмена." }
+  ];
+
+  function bookFallbackPoster(title, type) {
+    const t = esc(title || "Книга");
+    const kind = esc(type || "книги / манга / комиксы");
+    const icon = low(type).includes("манга") ? "📖" : (low(type).includes("комик") ? "💥" : "📚");
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1d0b06"/><stop offset=".45" stop-color="#5a2812"/><stop offset="1" stop-color="#ffd166"/></linearGradient><radialGradient id="r" cx="50%" cy="30%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".20"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>
+      <rect width="600" height="900" fill="url(#g)"/><rect width="600" height="900" fill="url(#r)"/>
+      <circle cx="500" cy="120" r="130" fill="#ffd166" opacity=".18"/><circle cx="80" cy="770" r="160" fill="#ff5c8a" opacity=".16"/>
+      <text x="50%" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="82" font-weight="900" fill="#fff">${icon}</text>
+      <text x="50%" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="900" fill="#fff">${t}</text>
+      <text x="50%" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#fff1bd">${kind}</text>
+      <rect x="70" y="690" width="460" height="68" rx="22" fill="#130b07" opacity=".74" stroke="#ffd166"/>
+      <text x="50%" y="733" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="900" fill="#fff6d6">ГОЛУБЬ · BOOK HUB</text>
+    </svg>`;
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  function bookPosterFor(item) { return txt(item && item.poster) || bookFallbackPoster(itemTitle(item), item && item.type); }
+
+  function bookLinkUrl(kind, title) {
+    const q = encodeURIComponent(title || "book");
+    switch (kind) {
+      case "googleBooks": return "https://www.google.com/search?tbm=bks&q=" + q;
+      case "goodreads": return "https://www.goodreads.com/search?q=" + q;
+      case "litres": return "https://www.litres.ru/search/?q=" + q;
+      case "authorToday": return "https://author.today/search?q=" + q;
+      case "mangalib": return "https://mangalib.me/ru/search?type=manga&q=" + q;
+      case "mangadex": return "https://mangadex.org/search?q=" + q;
+      case "readmanga": return "https://www.google.com/search?q=" + q + "%20ReadManga";
+      case "comics": return "https://www.google.com/search?q=" + q + "%20comic%20read%20order";
+      case "wiki": return "https://www.google.com/search?q=" + q + "%20wiki";
+      case "telegram": return "https://t.me/share/url?url=" + encodeURIComponent(location.origin + location.pathname + "#book=" + q) + "&text=" + encodeURIComponent("📚 " + (title || "Книга") + " — Голубь Каталог Мира");
+      case "google": default: return "https://www.google.com/search?q=" + q;
+    }
+  }
+
+  function extLink(label, url) { return `<a class="external-link gkm-book-external" data-gkm-v212-book-external="1" href="${attr(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`; }
+  function chip(label) { return `<span class="gkm-book-chip">${esc(label)}</span>`; }
+  function chipLinks(list, suffix) { return arr(list).map(x => extLink(x, bookLinkUrl("google", x + " " + (suffix || "")))).join(""); }
+  function sectionHtml(title, body, hint) { if (!txt(body)) return ""; return `<section class="gkm-book-section"><h3>${esc(title)}</h3>${hint ? `<div class="gkm-book-hint">${esc(hint)}</div>` : ""}<div>${body}</div></section>`; }
+
+  function bookHay(item) {
+    return itemKey([
+      itemTitle(item), item && item.originalTitle, item && item.type, item && item.category, item && item.relation, item && item.relationLabel,
+      arr(item && item.genres).join(" "), arr(item && item.badges).join(" "), arr(item && item.relatedMedia).join(" "),
+      arr(item && item.readOrder).join(" "), arr(item && item.watchOrder).join(" "), arr(item && item.playOrder).join(" "),
+      arr(item && item.vibe).join(" "), item && item.universeName, item && item.description
+    ].filter(Boolean).join(" "));
+  }
+
+  async function loadBooks() {
+    if (booksCache) return booksCache;
+    try {
+      const settled = await Promise.allSettled(BOOKS_SPLIT_URLS.map(url => fetch(url, { cache: "force-cache" }).then(res => {
+        if (!res.ok) throw new Error(url + " " + res.status);
+        return res.json();
+      })));
+      const merged = [];
+      settled.forEach(r => {
+        if (r.status === "fulfilled") {
+          const chunk = Array.isArray(r.value) ? r.value : (r.value.items || []);
+          merged.push(...chunk);
+        }
+      });
+      if (!merged.length) throw new Error("split books empty");
+      booksCache = merged;
+      console.info("GKM V222: split books loaded", booksCache.length);
+    } catch (err) {
+      try {
+        const res = await fetch(BOOKS_URL, { cache: "force-cache" });
+        if (!res.ok) throw new Error("books_catalog fetch failed " + res.status);
+        const json = await res.json();
+        booksCache = Array.isArray(json) ? json : (json.items || []);
+        console.info("GKM V222: combined books loaded", booksCache.length);
+      } catch (err2) {
+        console.warn("GKM V222: fallback books loaded", err, err2);
+        booksCache = FALLBACK_BOOKS;
+      }
+    }
+    booksCache = booksCache.map((item, index) => ({
+      ...item,
+      id: item.id || ("book-" + index + "-" + itemKey(item.title || item.name).replace(/\s+/g,"-")),
+      section: "books",
+      overview: item.overview || item.description || "Раздел книг, манги и комиксов с привязкой к фильмам, сериалам, аниме и играм.",
+      poster: txt(item.poster)
+    }));
+    return booksCache;
+  }
+
+  function controlsState() {
+    const q = itemKey(document.getElementById("searchInput")?.value || "");
+    const genre = txt(document.getElementById("genreFilter")?.value || "");
+    const year = txt(document.getElementById("yearFilter")?.value || "");
+    const rating = Number(document.getElementById("ratingFilter")?.value || 0);
+    const sort = txt(document.getElementById("sortFilter")?.value || "smart");
+    return { q, genre, year, rating, sort };
+  }
+
+  function inKind(item, kind) {
+    if (!kind || kind === "all") return true;
+    const t = low(item && item.type);
+    if (kind === "books") return t.includes("книга");
+    if (kind === "manga") return t.includes("манга") || t.includes("ранобэ") || t.includes("новел");
+    if (kind === "comics") return t.includes("комик");
+    if (kind === "sources") return bookHay(item).includes("первоисточник") || bookHay(item).includes("книга");
+    return true;
+  }
+
+  function inCollection(item, key) {
+    if (!key || key === "all") return true;
+    const hay = bookHay(item);
+    const r = txt(item && item.relation);
+    if (key === "to_movies") return r.includes("movie") || hay.includes("фильм");
+    if (key === "to_series") return r.includes("series") || hay.includes("сериал");
+    if (key === "to_anime") return r.includes("anime") || hay.includes("аниме");
+    if (key === "to_games") return r.includes("game") || hay.includes("игр");
+    if (key === "fantasy") return hay.includes("фэнтези") || hay.includes("магия");
+    if (key === "scifi") return hay.includes("фантаст") || hay.includes("космос") || hay.includes("киберпанк");
+    if (key === "superheroes") return hay.includes("супергер") || hay.includes("marvel") || hay.includes("dc");
+    if (key === "cult") return Number(item.rating || 0) >= 8.7 || hay.includes("культовая");
+    return true;
+  }
+
+  function filteredBooks(all) {
+    const c = controlsState();
+    let rows = all.filter(item => inKind(item, activeKind) && inCollection(item, activeBookCollection));
+    if (c.q) rows = rows.filter(item => bookHay(item).includes(c.q));
+    if (c.genre) rows = rows.filter(item => arr(item.genres).some(g => itemKey(g) === itemKey(c.genre) || itemKey(g).includes(itemKey(c.genre))));
+    if (c.year) rows = rows.filter(item => String(item.year || "") === String(c.year));
+    if (c.rating) rows = rows.filter(item => Number(item.rating || 0) >= c.rating);
+    rows.sort((a,b) => {
+      if (c.sort === "year_desc" || c.sort === "new") return Number(b.year || 0) - Number(a.year || 0);
+      if (c.sort === "year_asc") return Number(a.year || 0) - Number(b.year || 0);
+      if (c.sort === "rating") return Number(b.rating || 0) - Number(a.rating || 0);
+      return (Number(b.rating || 0) * 1000000 + Math.min(Number(b.votes || 0), 300000)) - (Number(a.rating || 0) * 1000000 + Math.min(Number(a.votes || 0), 300000));
+    });
+    return rows;
+  }
+
+  function ensureBooksTab() {
+    const tabs = document.querySelector(".tabs") || document.querySelector(".nav-tabs") || document.querySelector("header .tabs");
+    if (!tabs || tabs.querySelector('[data-tab="books"]')) return;
+    const btn = document.createElement("button");
+    btn.className = "tab gkm-books-tab";
+    btn.dataset.tab = "books";
+    btn.type = "button";
+    btn.textContent = "📚 Книги/Манга";
+    tabs.appendChild(btn);
+  }
+
+  function ensureBooksPanel() {
+    const grid = document.getElementById("grid");
+    if (!grid || document.getElementById("gkmBooksHubPanel")) return;
+    const panel = document.createElement("section");
+    panel.id = "gkmBooksHubPanel";
+    panel.className = "gkm-books-panel";
+    panel.style.display = "none";
+    panel.innerHTML = `
+      <div class="gkm-books-panel-title">📚 Книги · Манга · Комиксы</div>
+      <div class="gkm-books-panel-subtitle">Идея автора проекта: единый Каталог Мира, где первоисточники связаны с фильмами, сериалами, аниме и играми.</div>
+      <div class="gkm-books-filter-row" id="gkmBookKindFilters"></div>
+      <div class="gkm-books-filter-row gkm-books-collections" id="gkmBookCollections"></div>
+    `;
+    grid.parentNode.insertBefore(panel, grid);
+  }
+
+  function button(label, key, active, attrName, count) {
+    return `<button type="button" class="gkm-book-filter${active ? " active" : ""}" ${attrName}="${attr(key)}">${esc(label)}${typeof count === "number" ? ` · ${count}` : ""}</button>`;
+  }
+
+  function updateBookFilters(all, rows) {
+    const kinds = document.getElementById("gkmBookKindFilters");
+    const cols = document.getElementById("gkmBookCollections");
+    if (kinds) {
+      const defs = [["all","Все"],["books","Книги"],["manga","Манга/ранобэ"],["comics","Комиксы"],["sources","Первоисточники"]];
+      kinds.innerHTML = defs.map(([k,l]) => button(l, k, activeKind === k, "data-gkm-book-kind", all.filter(x => inKind(x,k)).length)).join("");
+    }
+    if (cols) {
+      const defs = [["all","Все связи"],["to_movies","→ фильмы"],["to_series","→ сериалы"],["to_anime","→ аниме"],["to_games","→ игры"],["fantasy","Фэнтези"],["scifi","Фантастика"],["superheroes","Супергерои"],["cult","Культовые"]];
+      cols.innerHTML = defs.map(([k,l]) => button(l, k, activeBookCollection === k, "data-gkm-book-collection", all.filter(x => inCollection(x,k)).length)).join("") + '<button type="button" class="gkm-book-filter reset" data-gkm-book-reset="1">Сбросить</button>';
+    }
+  }
+
+  function enhanceBookCards(root) {
+    if (!root) return;
+    root.querySelectorAll(".card").forEach(card => {
+      const id = card.getAttribute("data-id");
+      const item = (currentItems || []).find(x => String(x.id || (x.title + "|" + x.year)) === id);
+      if (!item || !isBookItem(item)) return;
+      card.classList.add("gkm-book-card");
+      const poster = card.querySelector(".poster-wrap");
+      if (poster) {
+        const img = poster.querySelector("img");
+        if (img && !img.dataset.gkmV212PosterGuard) {
+          img.dataset.gkmV212PosterGuard = "1";
+          img.loading = "lazy";
+          img.decoding = "async";
+          img.onerror = function () { this.onerror = null; this.src = item.fallbackPoster || bookFallbackPoster(itemTitle(item), item.type); };
+        }
+        if (!poster.querySelector(".gkm-book-relation-badge")) {
+          const b = document.createElement("div");
+          b.className = "gkm-book-relation-badge";
+          b.textContent = item.relationLabel || item.type || "Книга";
+          poster.appendChild(b);
+        }
+      }
+    });
+  }
+
+  async function renderBooks(page) {
+    currentMode = "books";
+    currentTab = "books";
+    booksPage = Math.max(1, Number(page || booksPage || 1));
+    if (typeof setActiveTab === "function") setActiveTab("books");
+    const all = await loadBooks();
+    const rows = filteredBooks(all);
+    booksPages = Math.max(1, Math.ceil(rows.length / BOOK_PAGE));
+    booksPage = Math.min(booksPage, booksPages);
+    currentPage = booksPage; currentPages = booksPages;
+    const start = (booksPage - 1) * BOOK_PAGE;
+    const slice = rows.slice(start, start + BOOK_PAGE).map(item => ({
+      ...item,
+      poster: txt(item.poster) || bookFallbackPoster(itemTitle(item), item.type)
+    }));
+    currentItems = slice;
+    const panel = document.getElementById("gkmBooksHubPanel");
+    if (panel) panel.style.display = "";
+    const gamePanel = document.getElementById("gkmGameHubPanel");
+    if (gamePanel) gamePanel.style.display = "none";
+    updateBookFilters(all, rows);
+    const count = document.getElementById("countText");
+    if (count) count.textContent = `📚 Книги/Манга · ${rows.length} из ${all.length} · V222`;
+    const grid = document.getElementById("grid");
+    if (grid) {
+      grid.classList.remove("gkm-v191-search-best", "gkm-v191-spotlight", "gkm-v191-highlight");
+      grid.style.outline = "none"; grid.style.boxShadow = "none"; grid.style.borderColor = "transparent";
+      grid.innerHTML = slice.length ? slice.map(cardHtml).join("") : `<div class="gkm-book-empty">Ничего не найдено. Сбрось фильтры или измени поиск.</div>`;
+      enhanceBookCards(grid);
+      if (typeof schedulePosterRecovery === "function") schedulePosterRecovery(grid);
+    }
+    const pageText = document.getElementById("pageText");
+    const prev = document.getElementById("prevBtn");
+    const next = document.getElementById("nextBtn");
+    if (pageText) pageText.textContent = booksPage + " / " + booksPages;
+    if (prev) prev.disabled = booksPage <= 1;
+    if (next) next.disabled = booksPage >= booksPages;
+  }
+
+  function bookShareHtml(item) {
+    const title = itemTitle(item);
+    const url = location.origin + location.pathname + "#book=" + encodeURIComponent(title);
+    return `<div class="detail-buttons">${extLink("📲 Telegram", bookLinkUrl("telegram", title))}<button type="button" class="external-link gkm-book-copy" data-gkm-book-copy="${attr(url)}">📋 Скопировать ссылку</button>${extLink("🔎 Google", bookLinkUrl("google", title))}</div>`;
+  }
+
+  function orderList(title, list) {
+    const rows = arr(list);
+    if (!rows.length) return "";
+    return `<div class="gkm-book-order-title">${esc(title)}</div><ol class="gkm-book-order">${rows.map(x => `<li>${esc(x)}</li>`).join("")}</ol>`;
+  }
+
+  function bookModalHtml(item) {
+    const title = itemTitle(item);
+    const read = orderList("📚 Читать по порядку", item.readOrder || [title]);
+    const watch = orderList("🎬 Смотреть по порядку", item.watchOrder || item.relatedMedia);
+    const play = orderList("🎮 Играть по порядку", item.playOrder);
+    const links = [
+      extLink("Google Books", bookLinkUrl("googleBooks", title)), extLink("Goodreads", bookLinkUrl("goodreads", title)), extLink("ЛитРес", bookLinkUrl("litres", title)), extLink("Author.Today", bookLinkUrl("authorToday", title)),
+      extLink("MangaLib", bookLinkUrl("mangalib", title)), extLink("MangaDex", bookLinkUrl("mangadex", title)), extLink("ReadManga", bookLinkUrl("readmanga", title)), extLink("Wiki / порядок", bookLinkUrl("wiki", title))
+    ].join("");
+    const related = chipLinks(item.relatedMedia, " фильм сериал аниме игра");
+    const vibe = arr(item.vibe).map(chip).join("");
+    const badges = arr(item.badges).map(chip).join("");
+    const start = `<div class="gkm-book-start-box"><b>🧭 С чего начать:</b><br>${arr(item.readOrder).length ? esc(arr(item.readOrder)[0]) : esc(title)}${arr(item.watchOrder).length ? " → потом можно смотреть: " + esc(arr(item.watchOrder)[0]) : ""}${arr(item.playOrder).length ? " → потом играть: " + esc(arr(item.playOrder)[0]) : ""}</div>`;
+    return [
+      sectionHtml("📲 Поделиться", bookShareHtml(item), "Карточку можно быстро кинуть в Telegram или скопировать ссылку."),
+      sectionHtml("🧭 С чего начать вселенную", start, "Главная фишка раздела: видно, откуда начинать книгу/мангу/комикс и куда идти дальше."),
+      sectionHtml("📚 Читать / искать", '<div class="detail-buttons">' + links + '</div>'),
+      sectionHtml("🔗 Связанное кино / аниме / игры", '<div class="gkm-book-chip-list">' + (related || chip("Связи будут добавляться")) + '</div>'),
+      sectionHtml("🧩 Порядок", read + watch + play),
+      sectionHtml("✨ Метки", '<div class="gkm-book-chip-list">' + (badges || chip(item.type || "Книга")) + '</div>'),
+      sectionHtml("🎭 Вайб", '<div class="gkm-book-chip-list">' + vibe + '</div>')
+    ].join("");
+  }
+
+  function ensureBookLinksBlock() {
+    const dialog = document.getElementById("detailsDialog");
+    if (!dialog) return null;
+    let block = document.getElementById("bookHubLinksBlock");
+    if (block) return block;
+    block = document.createElement("section");
+    block.id = "bookHubLinksBlock";
+    block.className = "detail-section gkm-book-modal-block";
+    block.innerHTML = '<h2>📚 Book Hub</h2><div id="bookHubBody"></div>';
+    const host = document.getElementById("detailLinks")?.parentNode || dialog.querySelector(".details-body") || dialog;
+    host.appendChild(block);
+    return block;
+  }
+
+  async function relatedBooksForMedia(item) {
+    const title = itemKey(itemTitle(item));
+    if (!title) return [];
+    const books = await loadBooks();
+    return books.filter(book => arr(book.relatedMedia).some(m => {
+      const k = itemKey(m);
+      return k && (k === title || k.includes(title) || title.includes(k));
+    })).slice(0, 8);
+  }
+
+  function mediaBookBlockHtml(books, mediaTitle) {
+    if (!books.length) return "";
+    const links = books.map(b => extLink(itemTitle(b), bookLinkUrl("google", itemTitle(b) + " читать порядок"))).join("");
+    const chips = books.map(b => chip((b.relationLabel || "связь") + " · " + itemTitle(b))).join("");
+    return sectionHtml("📚 Первоисточник / книга / манга", '<div class="detail-buttons">' + links + '</div>', "Найдено по связке с “" + mediaTitle + "”.") + sectionHtml("🔗 Связь с Book Hub", '<div class="gkm-book-chip-list">' + chips + '</div>');
+  }
+
+  async function applyBookModal(item) {
+    const block = ensureBookLinksBlock();
+    const body = document.getElementById("bookHubBody");
+    if (!block || !body) return;
+    if (isBookItem(item)) {
+      block.style.display = "";
+      body.innerHTML = bookModalHtml(item);
+      return;
+    }
+    const related = await relatedBooksForMedia(item);
+    if (related.length) {
+      block.style.display = "";
+      body.innerHTML = mediaBookBlockHtml(related, itemTitle(item));
+    } else {
+      block.style.display = "none"; body.innerHTML = "";
+    }
+  }
+
+  function patchOpenDetails() {
+    if (window.GKM_V212_OPEN_DETAILS_PATCHED === "1") return;
+    if (typeof openDetails !== "function") return;
+    const original = openDetails;
+    openDetails = function gkmV212OpenDetails(item) {
+      original(item);
+      setTimeout(() => applyBookModal(item), 0);
+    };
+    window.GKM_V212_OPEN_DETAILS_PATCHED = "1";
+  }
+
+  function injectStyle() {
+    if (document.getElementById("gkm-v212-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v212-style";
+    style.textContent = `
+      .gkm-books-tab{background:linear-gradient(135deg,rgba(255,209,102,.20),rgba(255,92,138,.24))!important;border-color:rgba(255,209,102,.55)!important;box-shadow:0 0 18px rgba(255,209,102,.16)!important;}
+      .gkm-books-panel{margin:14px 0 18px;padding:16px;border:1px solid rgba(255,209,102,.28);border-radius:22px;background:linear-gradient(135deg,rgba(255,209,102,.09),rgba(255,92,138,.06));box-shadow:0 18px 38px rgba(0,0,0,.18)}
+      .gkm-books-panel-title{font-size:22px;font-weight:900;color:#fff;margin-bottom:5px}.gkm-books-panel-subtitle{opacity:.82;margin-bottom:12px;line-height:1.35}
+      .gkm-books-filter-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.gkm-book-filter{border:1px solid rgba(255,209,102,.32);background:rgba(255,255,255,.06);color:#fff;border-radius:999px;padding:9px 12px;font-weight:800;cursor:pointer}.gkm-book-filter.active{background:linear-gradient(135deg,#ffd166,#ff5c8a);color:#170a06;box-shadow:0 0 18px rgba(255,209,102,.30)}.gkm-book-filter.reset{opacity:.86}
+      .gkm-book-card .poster-wrap{background:linear-gradient(135deg,#1d0b06,#5a2812)}.gkm-book-relation-badge{position:absolute;left:8px;right:8px;bottom:8px;z-index:5;padding:7px 9px;border-radius:14px;background:rgba(12,8,5,.76);border:1px solid rgba(255,209,102,.38);font-size:11px;font-weight:900;color:#fff6d6;text-align:center;backdrop-filter:blur(8px)}
+      .gkm-book-modal-block{border-color:rgba(255,209,102,.30)!important;background:linear-gradient(135deg,rgba(255,209,102,.08),rgba(255,92,138,.05))!important}.gkm-book-section{margin:12px 0;padding:12px;border:1px solid rgba(255,209,102,.18);border-radius:18px;background:rgba(255,255,255,.04)}.gkm-book-section h3{margin:0 0 8px;font-size:17px}.gkm-book-hint{opacity:.75;font-size:13px;margin:-3px 0 9px}.gkm-book-chip-list{display:flex;flex-wrap:wrap;gap:7px}.gkm-book-chip{display:inline-flex;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,209,102,.23);background:rgba(255,209,102,.08);font-weight:800}.gkm-book-start-box{padding:12px;border-radius:16px;background:rgba(255,209,102,.11);border:1px solid rgba(255,209,102,.22);line-height:1.45}.gkm-book-order-title{font-weight:900;margin:8px 0 4px}.gkm-book-order{margin:0 0 8px 22px}.gkm-book-empty{grid-column:1/-1;padding:30px;text-align:center;border:1px dashed rgba(255,209,102,.3);border-radius:18px;opacity:.9}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function scheduleBooksFilter() { clearTimeout(booksFilterTimer); booksFilterTimer = setTimeout(() => renderBooks(1), 80); }
+
+  document.addEventListener("click", function(event) {
+    const tab = event.target.closest && event.target.closest('.tab[data-tab="books"]');
+    if (tab) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); renderBooks(1); return; }
+    const kind = event.target.closest && event.target.closest('[data-gkm-book-kind]');
+    if (kind) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); activeKind = kind.dataset.gkmBookKind || "all"; renderBooks(1); return; }
+    const col = event.target.closest && event.target.closest('[data-gkm-book-collection]');
+    if (col) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); activeBookCollection = col.dataset.gkmBookCollection || "all"; renderBooks(1); return; }
+    const reset = event.target.closest && event.target.closest('[data-gkm-book-reset]');
+    if (reset) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); activeKind = "all"; activeBookCollection = "all"; renderBooks(1); return; }
+    if (currentMode === "books") {
+      const prev = event.target.closest && event.target.closest("#prevBtn");
+      const next = event.target.closest && event.target.closest("#nextBtn");
+      if (prev) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); if (booksPage > 1) renderBooks(booksPage - 1); return; }
+      if (next) { event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); if (booksPage < booksPages) renderBooks(booksPage + 1); return; }
+    } else {
+      const panel = document.getElementById("gkmBooksHubPanel");
+      if (panel) panel.style.display = "none";
+    }
+  }, true);
+
+  document.addEventListener("input", function(event) { if (currentMode !== "books") return; if (!event.target.closest || !event.target.closest(".controls")) return; event.stopPropagation(); event.stopImmediatePropagation(); scheduleBooksFilter(); }, true);
+  document.addEventListener("change", function(event) { if (currentMode !== "books") return; if (!event.target.closest || !event.target.closest(".controls")) return; event.stopPropagation(); event.stopImmediatePropagation(); scheduleBooksFilter(); }, true);
+
+  document.addEventListener("click", function(event) {
+    const btn = event.target.closest && event.target.closest("[data-gkm-book-copy]");
+    if (!btn) return;
+    event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+    const url = btn.getAttribute("data-gkm-book-copy") || location.href;
+    const done = () => { btn.textContent = "✅ Ссылка скопирована"; setTimeout(() => { btn.textContent = "📋 Скопировать ссылку"; }, 1500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done).catch(() => prompt("Скопируй ссылку:", url));
+    else prompt("Скопируй ссылку:", url);
+  }, true);
+
+  document.addEventListener("click", function(event) {
+    const el = event.target.closest && event.target.closest("a[data-gkm-v212-book-external]");
+    if (!el) return;
+    const url = el.getAttribute("href") || "";
+    if (!/^https?:\/\//i.test(url)) return;
+    event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+    window.open(url, "_blank", "noopener,noreferrer");
+  }, true);
+
+  function init() { injectStyle(); ensureBooksTab(); ensureBooksPanel(); patchOpenDetails(); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+/* GKM V212 BOOKS MANGA COMICS FOUNDATION END */
+
+
+
+/* GKM V213 CLEAN BUTTON SYSTEM + BOOK COVERS START */
+(function(){
+  const MAIN_TABS = new Set(["all","movies","series","cartoons","anime","games","books"]);
+  function injectV213Style(){
+    if (document.getElementById("gkm-v213-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v213-style";
+    style.textContent = `
+      .tabs{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+      .gkm-v213-main-row,.gkm-v213-sub-row{display:flex;flex-wrap:wrap;gap:10px;width:100%;align-items:center}
+      .gkm-v213-main-row .tab{min-height:48px;padding:12px 18px;border-radius:16px;font-size:15px;font-weight:900;letter-spacing:.01em;box-shadow:0 8px 22px rgba(69,26,132,.20);border-width:1px!important}
+      .gkm-v213-sub-row .tab{min-height:42px;padding:10px 15px;border-radius:14px;font-size:14px;font-weight:850;opacity:.98;box-shadow:0 6px 18px rgba(69,26,132,.15);border-width:1px!important}
+      .tabs .tab{transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;}
+      .tabs .tab:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,212,255,.18)}
+      .tabs .tab:not(.active){background:linear-gradient(135deg,rgba(73,33,173,.82),rgba(88,39,196,.72))!important;border-color:rgba(0,212,255,.32)!important}
+      .tabs .tab.active{background:linear-gradient(135deg,#7c3cff,#00d4ff)!important;border-color:rgba(255,255,255,.55)!important;color:#fff!important;box-shadow:0 0 20px rgba(0,212,255,.26), 0 8px 26px rgba(124,60,255,.24)!important}
+      .gkm-books-panel{padding:18px 18px 16px;border-radius:24px;background:linear-gradient(135deg,rgba(255,209,102,.08),rgba(255,92,138,.04))!important;border:1px solid rgba(255,209,102,.22)!important;box-shadow:0 20px 38px rgba(0,0,0,.16)}
+      .gkm-books-panel-title{font-size:18px!important;line-height:1.15;margin-bottom:6px!important}
+      .gkm-books-panel-subtitle{font-size:14px;line-height:1.35;opacity:.78;max-width:900px}
+      .gkm-books-filter-row{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 0}
+      .gkm-book-filter{padding:8px 12px!important;border-radius:999px!important;font-size:13px!important;font-weight:800!important;line-height:1.1;background:rgba(255,255,255,.045)!important;border:1px solid rgba(255,209,102,.20)!important;box-shadow:none!important}
+      .gkm-book-filter:hover{transform:translateY(-1px);border-color:rgba(255,209,102,.38)!important}
+      .gkm-book-filter.active{background:linear-gradient(135deg,#ffd166,#ff8a6d)!important;color:#1c0d07!important;border-color:rgba(255,255,255,.42)!important;box-shadow:0 10px 22px rgba(255,138,109,.18)!important}
+      .gkm-book-filter.reset{background:rgba(255,255,255,.035)!important;color:#f1d7c3!important}
+      .gkm-book-card .poster-wrap{background:linear-gradient(135deg,#111a38,#6c123d)!important}
+      .gkm-book-card .poster-wrap img{object-fit:cover;filter:saturate(1.05) contrast(1.02)}
+      .gkm-book-card .poster-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,10,0) 40%,rgba(5,5,10,.18) 100%);pointer-events:none}
+      .gkm-book-relation-badge{left:10px!important;right:10px!important;bottom:10px!important;padding:8px 10px!important;border-radius:14px!important;font-size:11px!important;background:rgba(12,8,5,.72)!important;border-color:rgba(255,209,102,.26)!important}
+      @media (max-width: 900px){
+        .tabs{gap:8px}
+        .gkm-v213-main-row,.gkm-v213-sub-row{overflow:auto;flex-wrap:nowrap;padding-bottom:4px;scrollbar-width:none}
+        .gkm-v213-main-row::-webkit-scrollbar,.gkm-v213-sub-row::-webkit-scrollbar{display:none}
+        .gkm-v213-main-row .tab,.gkm-v213-sub-row .tab{white-space:nowrap}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function normalizeRows(){
+    const nav = document.querySelector('.tabs');
+    if (!nav) return;
+    let mainRow = nav.querySelector('.gkm-v213-main-row');
+    let subRow = nav.querySelector('.gkm-v213-sub-row');
+    if (!mainRow) {
+      mainRow = document.createElement('div');
+      mainRow.className = 'gkm-v213-main-row';
+      nav.prepend(mainRow);
+    }
+    if (!subRow) {
+      subRow = document.createElement('div');
+      subRow.className = 'gkm-v213-sub-row';
+      nav.appendChild(subRow);
+    }
+    const tabs = Array.from(nav.querySelectorAll(':scope > .tab, :scope > .gkm-v213-main-row > .tab, :scope > .gkm-v213-sub-row > .tab'));
+    tabs.forEach(btn => {
+      const tab = (btn.dataset && btn.dataset.tab) || '';
+      if (MAIN_TABS.has(tab)) mainRow.appendChild(btn);
+      else subRow.appendChild(btn);
+    });
+  }
+
+  function applyBookCountPillStyle(){
+    const count = document.getElementById('countText');
+    if (count && /Книги\/Манга/.test(count.textContent || '')) count.classList.add('gkm-v213-book-count');
+  }
+
+  function run(){ injectV213Style(); normalizeRows(); applyBookCountPillStyle(); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ run(); setTimeout(run, 250); setTimeout(run, 1200); });
+  } else { run(); setTimeout(run, 250); setTimeout(run, 1200); }
+  document.addEventListener('click', function(e){ if (e.target.closest('.tab,[data-gkm-book-kind],[data-gkm-book-collection],[data-gkm-book-reset]')) setTimeout(run, 80); });
+})();
+/* GKM V213 CLEAN BUTTON SYSTEM + BOOK COVERS END */
+
+
+
+/* GKM V214 REAL BOOK MANGA COMICS COVERS START */
+(function(){
+  function injectV214Style(){
+    if (document.getElementById("gkm-v214-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v214-style";
+    style.textContent = `
+      .gkm-book-card .poster-wrap img[src^="https://covers.openlibrary.org"]{
+        object-fit:cover!important;
+        object-position:center!important;
+        filter:saturate(1.08) contrast(1.04);
+      }
+      .gkm-book-card .poster-wrap:has(img[src^="https://covers.openlibrary.org"])::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:linear-gradient(180deg,rgba(0,0,0,0) 42%,rgba(0,0,0,.22) 100%);
+        z-index:2;
+        pointer-events:none;
+      }
+      .gkm-book-card .gkm-book-relation-badge{
+        z-index:6!important;
+      }
+      .gkm-v214-cover-note{
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
+        padding:6px 9px;
+        border-radius:999px;
+        border:1px solid rgba(255,209,102,.22);
+        background:rgba(255,209,102,.07);
+        font-size:12px;
+        font-weight:800;
+        color:#fff3cf;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function markRealCovers(){
+    document.querySelectorAll(".gkm-book-card").forEach(card => {
+      const img = card.querySelector(".poster-wrap img");
+      if (!img) return;
+      if ((img.currentSrc || img.src || "").includes("covers.openlibrary.org")) {
+        card.classList.add("gkm-book-real-cover");
+      }
+    });
+  }
+
+  function run(){ injectV214Style(); markRealCovers(); }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function(){ run(); setTimeout(run, 500); setTimeout(run, 1500); });
+  } else { run(); setTimeout(run, 500); setTimeout(run, 1500); }
+  document.addEventListener("click", function(){ setTimeout(run, 120); });
+})();
+ /* GKM V214 REAL BOOK MANGA COMICS COVERS END */
+
+
+
+/* GKM V215 BOOKS MANGA COMICS EXPANSION START */
+(function(){
+  function inject(){
+    if (document.getElementById("gkm-v215-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v215-style";
+    style.textContent = `
+      .gkm-books-panel-title::after{
+        content:" · расширенная база V215";
+        font-size:12px;
+        font-weight:800;
+        opacity:.65;
+        margin-left:8px;
+      }
+      .gkm-book-card .poster-wrap img{
+        transition:transform .25s ease, filter .25s ease;
+      }
+      .gkm-book-card:hover .poster-wrap img{
+        transform:scale(1.025);
+        filter:saturate(1.12) contrast(1.06);
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", inject);
+  else inject();
+})();
+ /* GKM V215 BOOKS MANGA COMICS EXPANSION END */
+
+
+
+/* GKM V216 MAX BOOK BASE + FAST LOAD START */
+(function(){
+  function inject(){
+    if (document.getElementById("gkm-v216-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v216-style";
+    style.textContent = `
+      .gkm-books-panel-title::after{content:" · MAX база V216";font-size:12px;font-weight:850;opacity:.68;margin-left:8px}
+      .gkm-book-card .poster-wrap img{content-visibility:auto}
+      .gkm-book-card{contain:layout paint style;content-visibility:auto;contain-intrinsic-size:260px 430px}
+      .gkm-v216-fast-note{display:inline-flex;margin-left:8px;padding:4px 8px;border-radius:999px;border:1px solid rgba(0,212,255,.22);background:rgba(0,212,255,.07);font-size:12px;font-weight:850;color:#c9f7ff}
+    `;
+    document.head.appendChild(style);
+  }
+  function boostVisibleBookImages(){
+    document.querySelectorAll(".gkm-book-card .poster-wrap img").forEach((img, i) => {
+      img.decoding = "async";
+      img.loading = i < 8 ? "eager" : "lazy";
+      if (i < 8) img.fetchPriority = "high";
+      else img.fetchPriority = "low";
+    });
+  }
+  function run(){inject(); boostVisibleBookImages();}
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function(){run(); setTimeout(run,600);});
+  else {run(); setTimeout(run,600);}
+  document.addEventListener("click", function(){setTimeout(run,120);});
+})();
+ /* GKM V216 MAX BOOK BASE + FAST LOAD END */
+
+/* GKM V221 SPLIT BOOK DATABASE 1000+ START */
+(function(){
+  function inject(){
+    if (document.getElementById("gkm-v221-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v221-style";
+    style.textContent = `
+      .gkm-books-panel-title::after{content:" · V221 split DB 1000+"!important;font-size:12px;font-weight:850;opacity:.72;margin-left:8px}
+      .gkm-book-card{contain:layout paint style;content-visibility:auto;contain-intrinsic-size:260px 430px}
+      .gkm-book-card .poster-wrap img{decoding:async}
+    `;
+    document.head.appendChild(style);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", inject);
+  else inject();
+})();
+/* GKM V221 SPLIT BOOK DATABASE 1000+ END */
+
+
+
+/* GKM V222 ALL BOOK POSTERS FIX START */
+(function(){
+  function inject(){
+    if (document.getElementById("gkm-v222-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v222-style";
+    style.textContent = `
+      .gkm-books-panel-title::after{
+        content:" · V222 all posters";
+        font-size:12px;
+        font-weight:850;
+        opacity:.72;
+        margin-left:8px;
+      }
+      .gkm-book-card .poster-wrap{
+        background:linear-gradient(135deg,#111a38,#3a1671,#94522c)!important;
+      }
+      .gkm-book-card .poster-wrap img{
+        width:100%;
+        height:100%;
+        object-fit:cover!important;
+        object-position:center!important;
+        min-height:100%;
+      }
+      .gkm-book-card .no-poster,
+      .gkm-book-card .poster-placeholder{
+        display:none!important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", inject);
+  else inject();
+})();
+ /* GKM V222 ALL BOOK POSTERS FIX END */
+
+
+
+/* GKM V223 UNIVERSAL DESCRIPTIONS FIX START */
+(function(){
+  function txt(v){ return String(v == null ? "" : v).trim(); }
+  function low(v){ return txt(v).toLowerCase(); }
+  function arr(v){ return Array.isArray(v) ? v.filter(Boolean).map(txt) : (txt(v) ? [txt(v)] : []); }
+  function esc(v){
+    try { return escapeHtml(v); }
+    catch(e){ return txt(v).replace(/[&<>"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[s])); }
+  }
+  function titleOf(item){
+    return txt(item && (item.title || item.name || item.ru || item.en || item.originalTitle || item.original_title || item.original_name)) || "Проект";
+  }
+  function kindOf(item){
+    const s = low(item && (item.section || item.category || item.type || item.media_type));
+    if (s.includes("book") || s.includes("книга") || s.includes("манга") || s.includes("комик") || s.includes("ранобэ")) return "book";
+    if (s.includes("game") || s.includes("игра")) return "game";
+    if (s.includes("anime") || s.includes("аниме")) return "anime";
+    if (s.includes("cartoon") || s.includes("мульт")) return "cartoon";
+    if (s.includes("series") || s.includes("сериал") || s.includes("tv")) return "series";
+    if (s.includes("movie") || s.includes("фильм")) return "movie";
+    return "media";
+  }
+  function realDescription(item){
+    const fields = [
+      item && item.description,
+      item && item.overview,
+      item && item.shortDescription,
+      item && item.short_description,
+      item && item.plot,
+      item && item.annotation
+    ];
+    return txt(fields.find(x => txt(x).length > 40));
+  }
+  function yearOf(item){ return txt(item && (item.year || item.releaseYear || item.first_air_date || item.release_date)); }
+  function ratingOf(item){ return txt(item && (item.rating || item.kpRating || item.vote_average)); }
+  function genreText(item){ return arr(item && item.genres).slice(0,5).join(", "); }
+  function relatedText(item){ return arr(item && (item.relatedMedia || item.related || item.watchOrder || item.playOrder)).slice(0,5).join(", "); }
+
+  const vibeDict = {
+    movie: "Так как просмотр внутри каталога не встроен, описание помогает заранее понять настроение, жанр и смысл проекта перед переходом на внешние сайты.",
+    series: "Сериал раскрывается дольше фильма: важны персонажи, темп, сезоны и атмосфера. Описание помогает понять, стоит ли начинать длинную историю.",
+    anime: "В аниме важны стиль, арки персонажей, визуал, первоисточник и настроение. Описание помогает понять, подходит ли проект под нужный вайб.",
+    cartoon: "Анимация может быть семейной, приключенческой или серьёзной. Описание помогает отличить лёгкий мульт от полноценной истории.",
+    game: "Игровая карточка показывает, во что играть, с чем связана вселенная и какие фильмы, сериалы, книги или аниме могут быть рядом.",
+    book: "Книжная карточка показывает первоисточник, связь с экранизациями, играми и аниме, а также помогает понять, с чего начинать вселенную.",
+    media: "Карточка помогает быстро понять тип проекта, жанры, рейтинг, связи и общий смысл перед выбором."
+  };
+
+  function generatedDescription(item){
+    const title = titleOf(item);
+    const kind = kindOf(item);
+    const year = yearOf(item);
+    const rating = ratingOf(item);
+    const genres = genreText(item);
+    const relation = txt(item && (item.relationLabel || item.relation));
+    const universe = txt(item && item.universeName);
+    const related = relatedText(item);
+
+    let p1 = "";
+    if (kind === "game") {
+      p1 = `${title} — игровая карточка в Каталоге Мира${year ? ` (${year})` : ""}. Здесь собрана информация о жанре, атмосфере и связях игры с фильмами, сериалами, аниме, книгами или комиксами.`;
+    } else if (kind === "book") {
+      p1 = `${title} — карточка раздела книг, манги, ранобэ и комиксов${year ? ` (${year})` : ""}. Она помогает понять, является ли произведение первоисточником и с какими экранизациями, играми или аниме оно связано.`;
+    } else if (kind === "anime") {
+      p1 = `${title} — аниме-проект${year ? ` (${year})` : ""}. Карточка помогает оценить жанр, настроение, рейтинг и понять, стоит ли переходить к просмотру или поиску связанных материалов.`;
+    } else if (kind === "series") {
+      p1 = `${title} — сериал${year ? ` (${year})` : ""}. Перед выбором полезно смотреть не только рейтинг, но и жанры, длительность, темп и общую атмосферу.`;
+    } else if (kind === "cartoon") {
+      p1 = `${title} — анимационный проект${year ? ` (${year})` : ""}. Он может быть лёгким семейным просмотром или полноценной историей со своей вселенной.`;
+    } else {
+      p1 = `${title} — проект из каталога${year ? ` (${year})` : ""}. Карточка нужна, чтобы быстро понять, что это за история, какой у неё жанр, рейтинг и с чем она связана.`;
+    }
+
+    let details = [];
+    if (genres) details.push(`Жанры: ${genres}.`);
+    if (rating) details.push(`Рейтинг: ${rating}.`);
+    if (relation) details.push(`Связь: ${relation}.`);
+    if (universe) details.push(`Вселенная: ${universe}.`);
+    if (related) details.push(`Связанные проекты: ${related}.`);
+
+    const p2 = details.length ? details.join(" ") : vibeDict[kind];
+    const p3 = vibeDict[kind];
+    return `${p1}\n\n${p2}\n\n${p3}`;
+  }
+
+  function fullDescription(item){
+    const d = realDescription(item);
+    if (d && d.length >= 220) return d;
+    if (d && d.length > 40) return d + "\n\n" + generatedDescription(item);
+    return generatedDescription(item);
+  }
+
+  function findModal(){
+    return document.querySelector(".modal.open, .modal.show, #modal, #detailsModal, .details-modal, .gkm-modal") || document.querySelector('[role="dialog"]');
+  }
+
+  function injectDescriptionBlock(item){
+    const modal = findModal();
+    if (!modal || !item) return;
+
+    const old = modal.querySelector("#gkmV223DescriptionBlock");
+    if (old) old.remove();
+
+    const body =
+      modal.querySelector(".modal-body") ||
+      modal.querySelector(".details-body") ||
+      modal.querySelector(".modal-content") ||
+      modal;
+
+    const desc = fullDescription(item);
+    const block = document.createElement("section");
+    block.id = "gkmV223DescriptionBlock";
+    block.className = "gkm-v223-description-block";
+    block.innerHTML = `
+      <h3>📖 Подробное описание</h3>
+      <div class="gkm-v223-description-text">${esc(desc).replace(/\n\n/g, "</p><p>").replace(/^/, "<p>").replace(/$/, "</p>")}</div>
+    `;
+
+    const existingOverview =
+      body.querySelector(".overview") ||
+      body.querySelector(".description") ||
+      body.querySelector(".details-description") ||
+      body.querySelector(".modal-description");
+
+    if (existingOverview && existingOverview.parentNode) {
+      existingOverview.parentNode.insertBefore(block, existingOverview.nextSibling);
+    } else {
+      body.appendChild(block);
+    }
+  }
+
+  function patchOpenDetails(){
+    if (window.GKM_V223_DESCRIPTIONS_PATCHED === "1") return;
+    if (typeof openDetails !== "function") return;
+    const old = openDetails;
+    openDetails = function gkmV223OpenDetails(item){
+      const res = old.apply(this, arguments);
+      setTimeout(function(){ injectDescriptionBlock(item); }, 80);
+      setTimeout(function(){ injectDescriptionBlock(item); }, 350);
+      return res;
+    };
+    window.GKM_V223_DESCRIPTIONS_PATCHED = "1";
+  }
+
+  function injectStyle(){
+    if (document.getElementById("gkm-v223-description-style")) return;
+    const style = document.createElement("style");
+    style.id = "gkm-v223-description-style";
+    style.textContent = `
+      .gkm-v223-description-block{
+        margin:14px 0;
+        padding:15px 16px;
+        border-radius:18px;
+        border:1px solid rgba(0,212,255,.24);
+        background:linear-gradient(135deg,rgba(0,212,255,.07),rgba(124,60,255,.06));
+        box-shadow:0 12px 30px rgba(0,0,0,.18);
+      }
+      .gkm-v223-description-block h3{
+        margin:0 0 10px;
+        font-size:18px;
+        font-weight:900;
+        color:#fff;
+      }
+      .gkm-v223-description-text{
+        color:rgba(255,255,255,.88);
+        line-height:1.55;
+        font-size:14px;
+      }
+      .gkm-v223-description-text p{ margin:0 0 10px; }
+      .gkm-v223-description-text p:last-child{ margin-bottom:0; }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function run(){
+    injectStyle();
+    patchOpenDetails();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+  else run();
+  setTimeout(run, 500);
+  setTimeout(run, 1500);
+})();
+ /* GKM V223 UNIVERSAL DESCRIPTIONS FIX END */
+
+
+
+/* GKM V224 GAME DATABASE EXPANSION 360 START */
+(function(){
+  const GAME_SPLIT_URLS = [
+    "./data/games/game_to_movies.json?v=224",
+    "./data/games/game_to_series.json?v=224",
+    "./data/games/game_to_anime.json?v=224",
+    "./data/games/media_to_games.json?v=224",
+    "./data/games/cult_games.json?v=224",
+    "./data/games/franchises.json?v=224"
+  ];
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=232";
+  const GAME_PAGE_SIZE = 18;
+  let gameDB = null;
+  let gamePage = 1;
+
+  function txt(v){return String(v == null ? "" : v).trim();}
+  function safe(v){try{return escapeHtml(v)}catch(e){return txt(v).replace(/[&<>"]/g, s=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[s]))}}
+  function low(v){return txt(v).toLowerCase().replace(/ё/g,"е");}
+  function key(v){return low(v).replace(/[^a-z0-9а-я]+/gi," ").replace(/\s+/g," ").trim();}
+  function arr(v){return Array.isArray(v)?v.filter(Boolean).map(txt):(txt(v)?[txt(v)]:[]);}
+  function titleOf(i){return txt(i && (i.title || i.name));}
+
+  function gameFallbackPoster(title){
+    const t = safe(title || "Игра");
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#090d2b"/><stop offset=".55" stop-color="#241066"/><stop offset="1" stop-color="#00d4ff"/></linearGradient><radialGradient id="r" cx="50%" cy="20%" r="75%"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>
+      <rect width="600" height="900" fill="url(#g)"/><rect width="600" height="900" fill="url(#r)"/>
+      <circle cx="485" cy="130" r="150" fill="#00d4ff" opacity=".16"/><circle cx="95" cy="770" r="175" fill="#8b5cf6" opacity=".20"/>
+      <rect x="34" y="34" width="532" height="832" rx="30" fill="none" stroke="rgba(255,255,255,.18)"/>
+      <text x="50%" y="165" text-anchor="middle" font-family="Arial" font-size="86" font-weight="900" fill="#fff">🎮</text>
+      <text x="50%" y="238" text-anchor="middle" font-family="Arial" font-size="21" font-weight="800" fill="#ffffff99">ГОЛУБЬ · GAME HUB</text>
+      <foreignObject x="55" y="330" width="490" height="210"><div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Arial,sans-serif;color:white;font-size:42px;font-weight:900;text-align:center;line-height:1.1;text-shadow:0 2px 16px rgba(0,0,0,.45);">${t}</div></foreignObject>
+      <rect x="82" y="690" width="436" height="76" rx="24" fill="rgba(10,10,18,.58)" stroke="rgba(255,255,255,.26)"/>
+      <text x="50%" y="738" text-anchor="middle" font-family="Arial" font-size="23" font-weight="850" fill="#fff">Игровая вселенная</text>
+    </svg>`;
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  async function loadGameDB(){
+    if (gameDB) return gameDB;
+    try {
+      const settled = await Promise.allSettled(GAME_SPLIT_URLS.map(url => fetch(url, {cache:"force-cache"}).then(r=>{if(!r.ok) throw new Error(url+" "+r.status); return r.json();})));
+      const merged = [];
+      settled.forEach(r => { if (r.status === "fulfilled") merged.push(...(Array.isArray(r.value) ? r.value : (r.value.items || []))); });
+      if (!merged.length) throw new Error("game split empty");
+      gameDB = merged;
+      console.info("GKM V224: split games loaded", gameDB.length);
+    } catch(e) {
+      const res = await fetch(GAME_COMBINED_URL, {cache:"force-cache"});
+      if (!res.ok) throw e;
+      const json = await res.json();
+      gameDB = Array.isArray(json) ? json : (json.items || []);
+      console.info("GKM V224: combined games loaded", gameDB.length);
+    }
+    gameDB = gameDB.map((item, idx) => ({...item, section:"games", id:item.id || ("game-"+idx+"-"+key(item.title).replace(/\s+/g,"-"))}));
+    return gameDB;
+  }
+
+  function hay(item){
+    return key([titleOf(item), item.universeName, item.relationLabel, item.relation, arr(item.genres).join(" "), arr(item.platforms).join(" "), arr(item.relatedMedia).join(" "), arr(item.vibe).join(" "), item.description].join(" "));
+  }
+  function filterRows(all){
+    const q = key(document.getElementById("searchInput")?.value || "");
+    let rows = all.slice();
+    if (q) rows = rows.filter(x => hay(x).includes(q));
+    const rating = Number(document.getElementById("ratingFilter")?.value || 0);
+    if (rating) rows = rows.filter(x => Number(x.rating || 0) >= rating);
+    const genre = key(document.getElementById("genreFilter")?.value || "");
+    if (genre) rows = rows.filter(x => arr(x.genres).some(g=>key(g).includes(genre)));
+    rows.sort((a,b)=>(Number(b.rating||0)*1000000+Math.min(Number(b.votes||0),900000))-(Number(a.rating||0)*1000000+Math.min(Number(a.votes||0),900000)));
+    return rows;
+  }
+
+  function gameCardHtml(item){
+    const title = safe(titleOf(item));
+    const fallback = gameFallbackPoster(titleOf(item));
+    const poster = txt(item.poster) || fallback;
+    const genre = arr(item.genres).slice(0,2).join(" · ");
+    return `<article class="card gkm-v224-game-card" data-id="${safe(item.id)}"><div class="poster-wrap"><img src="${poster}" alt="${title}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${fallback}'"><span class="badge">Игра</span><button class="fav" type="button">♡</button><div class="gkm-game-relation-badge">${safe(item.relationLabel || "Игровая вселенная")}</div></div><div class="card-body"><h3>${title}</h3><div class="meta">${safe(item.year || "")} · Игра</div><div class="genres">${safe(genre)}</div><div class="rating">★ ${safe(item.rating || "—")} · ${safe(item.votes ? Math.round(item.votes/1000)+" тыс" : "")}</div></div></article>`;
+  }
+
+  async function renderGameHub(page){
+    window.currentMode = "games";
+    window.currentTab = "games";
+    const all = await loadGameDB();
+    gamePage = Math.max(1, Number(page || gamePage || 1));
+    const rows = filterRows(all);
+    const pages = Math.max(1, Math.ceil(rows.length / GAME_PAGE_SIZE));
+    gamePage = Math.min(gamePage, pages);
+    const start = (gamePage - 1) * GAME_PAGE_SIZE;
+    const slice = rows.slice(start, start + GAME_PAGE_SIZE);
+    window.currentItems = slice;
+    const count = document.getElementById("countText");
+    if (count) count.innerHTML = `🎮 Игровые вселенные · ${rows.length} из ${all.length} · V224 <span class="gkm-v202-pill">расширенная база</span>`;
+    const grid = document.getElementById("grid");
+    if (grid) {
+      grid.innerHTML = slice.length ? slice.map(gameCardHtml).join("") : `<div class="gkm-book-empty">Игры не найдены. Сбрось поиск или фильтры.</div>`;
+      grid.classList.remove("gkm-v191-search-best","gkm-v191-spotlight","gkm-v191-highlight");
+      grid.style.outline="none";grid.style.boxShadow="none";
+    }
+    const pt=document.getElementById("pageText"), pr=document.getElementById("prevBtn"), nx=document.getElementById("nextBtn");
+    if(pt) pt.textContent = gamePage + " / " + pages;
+    if(pr) pr.disabled = gamePage <= 1;
+    if(nx) nx.disabled = gamePage >= pages;
+  }
+
+  function patch(){
+    document.addEventListener("click", function(e){
+      const games = e.target.closest && e.target.closest('.tab[data-tab="games"]');
+      if (games) setTimeout(()=>renderGameHub(1), 30);
+    }, true);
+    const search = document.getElementById("searchInput");
+    if (search && !search.dataset.gkmV224Games) {
+      search.dataset.gkmV224Games = "1";
+      search.addEventListener("input", function(){ if ((window.currentTab||window.currentMode) === "games") setTimeout(()=>renderGameHub(1), 90); });
+    }
+    const prev=document.getElementById("prevBtn"), next=document.getElementById("nextBtn");
+    if(prev && !prev.dataset.gkmV224Games) { prev.dataset.gkmV224Games="1"; prev.addEventListener("click",()=>{if((window.currentTab||window.currentMode)==="games") renderGameHub(gamePage-1);}, true); }
+    if(next && !next.dataset.gkmV224Games) { next.dataset.gkmV224Games="1"; next.addEventListener("click",()=>{if((window.currentTab||window.currentMode)==="games") renderGameHub(gamePage+1);}, true); }
+  }
+
+  function inject(){
+    if (document.getElementById("gkm-v224-style")) return;
+    const style=document.createElement("style");style.id="gkm-v224-style";style.textContent=`
+      .gkm-v224-game-card{contain:layout paint style;content-visibility:auto;contain-intrinsic-size:260px 430px}
+      .gkm-v224-game-card .poster-wrap{background:linear-gradient(135deg,#090d2b,#241066,#00d4ff)!important}
+      .gkm-v224-game-card .poster-wrap img{width:100%;height:100%;object-fit:cover!important}
+      .gkm-game-relation-badge{position:absolute;left:10px;right:10px;bottom:10px;z-index:5;padding:8px 10px;border-radius:14px;background:rgba(4,12,22,.75);border:1px solid rgba(0,212,255,.35);font-size:11px;font-weight:900;color:#e8fbff;text-align:center;backdrop-filter:blur(8px)}
+    `;document.head.appendChild(style);
+  }
+
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>{inject();patch();});
+  else {inject();patch();}
+  window.GKM_V224_RENDER_GAMES = renderGameHub;
+})();
+/* GKM V224 GAME DATABASE EXPANSION 360 END */
+
+
+
+/* GKM V225 MODAL FULL DESCRIPTION FIX START */
+(function(){
+  function txt(v){ return String(v == null ? "" : v).trim(); }
+  function esc(v){
+    return txt(v).replace(/[&<>"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[s]));
+  }
+  function clean(v){
+    return txt(v).replace(/\s+/g, " ").trim();
+  }
+  function modalRoot(){
+    const nodes = Array.from(document.querySelectorAll('[role="dialog"], .modal, .details-modal, .gkm-modal, #modal, #detailsModal'));
+    return nodes.find(n => {
+      const st = getComputedStyle(n);
+      const r = n.getBoundingClientRect();
+      return st.display !== "none" && st.visibility !== "hidden" && r.width > 300 && r.height > 250;
+    }) || null;
+  }
+  function modalTitle(modal){
+    const h = modal.querySelector("h1, .modal-title, .details-title, .title, h2, h3");
+    return clean(h && h.textContent) || "Проект";
+  }
+  function modalType(modal){
+    const text = clean(modal.textContent).toLowerCase();
+    if (text.includes("аниме")) return "аниме";
+    if (text.includes("сериал")) return "сериал";
+    if (text.includes("мульт")) return "мультфильм";
+    if (text.includes("игра")) return "игра";
+    if (text.includes("манга")) return "манга";
+    if (text.includes("ранобэ")) return "ранобэ";
+    if (text.includes("комикс")) return "комикс";
+    if (text.includes("книга")) return "книга";
+    if (text.includes("фильм")) return "фильм";
+    return "проект";
+  }
+  function modalMeta(modal){
+    const text = clean(modal.textContent);
+    const year = (text.match(/\b(19\d{2}|20\d{2})\b/) || [])[1] || "";
+    const rating = (text.match(/Рейтинг\s*([0-9.]+)/i) || text.match(/★\s*([0-9.]+)/) || [])[1] || "";
+    let genres = "";
+    const possible = Array.from(modal.querySelectorAll(".genres, .genre, .meta, .details-meta, .modal-meta, p, div"))
+      .map(x => clean(x.textContent))
+      .filter(x => x && x.length < 120);
+    const g = possible.find(x => /драма|криминал|фантаст|фэнтези|боевик|комед|ужас|триллер|детектив|приключ|роман|спорт|аниме|rpg|экшен/i.test(x));
+    if (g) genres = g;
+    return {year, rating, genres};
+  }
+  function shortExistingDescription(modal){
+    const boxes = Array.from(modal.querySelectorAll("p, .overview, .description, .details-description, .modal-description, .plot, .summary, .card-description, [class*='description'], [class*='overview']"));
+    let best = "";
+    for (const b of boxes) {
+      const t = clean(b.textContent);
+      if (t.length > best.length && t.length > 25 && t.length < 800 && !/тип год рейтинг голосов источник/i.test(t)) best = t;
+    }
+    return best;
+  }
+  function genreHint(genres){
+    const g = genres.toLowerCase();
+    if (g.includes("драма")) return "В центре обычно конфликт персонажей, моральный выбор и эмоциональная история.";
+    if (g.includes("криминал")) return "Криминальная часть добавляет напряжение, риск, расследование, тюрьму, преступление или борьбу с системой.";
+    if (g.includes("фантаст")) return "Фантастическая часть важна для мира, правил вселенной, технологий или необычной идеи.";
+    if (g.includes("фэнтези")) return "Фэнтези делает акцент на мире, магии, мифологии, приключении и развитии героев.";
+    if (g.includes("ужас") || g.includes("хоррор")) return "Хоррор-вайб строится на тревоге, опасности, неизвестности и атмосфере страха.";
+    if (g.includes("комед")) return "Комедийная часть нужна для лёгкого темпа, юмора и более расслабленного просмотра.";
+    if (g.includes("боев") || g.includes("экшен")) return "Экшен делает упор на динамику, столкновения, движение и зрелищность.";
+    if (g.includes("детектив") || g.includes("триллер")) return "Детективно-триллерная часть держит интерес через тайну, расследование и постепенное раскрытие.";
+    if (g.includes("приключ")) return "Приключенческий жанр делает историю более дорожной, событийной и насыщенной.";
+    return "Жанры помогают заранее понять темп, настроение и ожидания от просмотра.";
+  }
+  function typeHint(type){
+    if (type === "фильм") return "Фильм удобен для одного законченного просмотра: за короткое время он должен дать завязку, конфликт, развитие и финал.";
+    if (type === "сериал") return "Сериал раскрывается дольше: важны герои, сезонные арки, темп и желание возвращаться к истории.";
+    if (type === "аниме") return "В аниме часто важны стиль, арки персонажей, первоисточник, визуальная подача и эмоциональные пики.";
+    if (type === "мультфильм") return "Анимационный формат может быть лёгким, семейным или серьёзным — лучше смотреть на жанры и общий вайб.";
+    if (type === "игра") return "В игре важны не только сюжет и сеттинг, но и жанр геймплея: экшен, RPG, хоррор, открытый мир или интерактивное кино.";
+    if (type === "книга" || type === "манга" || type === "ранобэ" || type === "комикс") return "Для чтения важно понять, это первоисточник или часть большой вселенной, и есть ли рядом фильм, сериал, аниме или игра.";
+    return "Карточка помогает понять, стоит ли открывать внешние сайты и знакомиться с проектом дальше.";
+  }
+  function buildFullDescription(modal){
+    const title = modalTitle(modal);
+    const type = modalType(modal);
+    const meta = modalMeta(modal);
+    const old = shortExistingDescription(modal);
+
+    let intro = `${title} — ${type}${meta.year ? ` ${meta.year} года` : ""} из каталога «Голубь Каталог Мира».`;
+    let base = old && old.length > 35 ? old : "Короткое описание в источнике отсутствует или слишком маленькое, поэтому карточка дополняется понятным пояснением по типу, жанрам и атмосфере.";
+
+    const ratingLine = meta.rating ? `Рейтинг ${meta.rating} помогает быстро оценить общую популярность и качество по базе каталога.` : "Рейтинг и метаданные помогают быстрее сравнить этот проект с похожими.";
+    const genreLine = meta.genres ? `По жанрам и метаданным: ${meta.genres}. ${genreHint(meta.genres)}` : "Жанры в карточке помогают понять, будет ли это драма, экшен, хоррор, фантастика, фэнтези, комедия или другой формат.";
+
+    return [
+      intro,
+      base,
+      genreLine,
+      ratingLine,
+      typeHint(type),
+      "Так как сайт работает как каталог и навигатор, а не как онлайн-кинотеатр, это описание нужно, чтобы перед переходом на внешние сайты ты понимал, что собираешься смотреть, читать или во что играть."
+    ];
+  }
+  function inject(modal){
+    if (!modal) return;
+    const title = modalTitle(modal);
+    if (!title || title === "Проект") return;
+
+    let block = modal.querySelector("#gkmV225FullDescription");
+    if (!block) {
+      block = document.createElement("section");
+      block.id = "gkmV225FullDescription";
+      block.className = "gkm-v225-full-description";
+      const anchor =
+        modal.querySelector(".overview, .description, .details-description, .modal-description, .plot, .summary, [class*='description'], [class*='overview']") ||
+        modal.querySelector(".modal-body, .details-body, .modal-content") ||
+        modal.firstElementChild ||
+        modal;
+      if (anchor && anchor.parentNode && anchor !== modal) anchor.parentNode.insertBefore(block, anchor.nextSibling);
+      else modal.appendChild(block);
+    }
+
+    const lines = buildFullDescription(modal);
+    block.innerHTML = `
+      <h3>📖 Подробное описание</h3>
+      <div>${lines.map(x => `<p>${esc(x)}</p>`).join("")}</div>
+    `;
+
+    // визуально убираем слишком короткий старый кусок, если он выглядит как обрезок
+    Array.from(modal.querySelectorAll(".overview, .description, .details-description, .modal-description, .plot, .summary, [class*='description'], [class*='overview']")).forEach(el => {
+      if (el.id === "gkmV225FullDescription" || el.closest("#gkmV225FullDescription")) return;
+      const t = clean(el.textContent);
+      if (t.length > 20 && t.length < 180) el.classList.add("gkm-v225-short-desc-muted");
+    });
+  }
+  function run(){
+    const m = modalRoot();
+    if (m) inject(m);
+  }
+  function style(){
+    if (document.getElementById("gkm-v225-style")) return;
+    const s = document.createElement("style");
+    s.id = "gkm-v225-style";
+    s.textContent = `
+      .gkm-v225-full-description{
+        margin:16px 0;
+        padding:16px 18px;
+        border-radius:18px;
+        border:1px solid rgba(0,212,255,.28);
+        background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(124,60,255,.08));
+        box-shadow:0 16px 34px rgba(0,0,0,.22);
+      }
+      .gkm-v225-full-description h3{
+        margin:0 0 10px;
+        font-size:19px;
+        font-weight:950;
+        color:#fff;
+      }
+      .gkm-v225-full-description p{
+        margin:0 0 10px;
+        color:rgba(255,255,255,.9);
+        line-height:1.58;
+        font-size:14.5px;
+      }
+      .gkm-v225-full-description p:last-child{margin-bottom:0}
+      .gkm-v225-short-desc-muted{
+        opacity:.45!important;
+      }
+    `;
+    document.head.appendChild(s);
+  }
+  style();
+  const obs = new MutationObserver(function(){ setTimeout(run, 60); });
+  obs.observe(document.documentElement, {childList:true, subtree:true, attributes:true, attributeFilter:["class","style","open"]});
+  document.addEventListener("click", function(){ setTimeout(run, 120); setTimeout(run, 420); }, true);
+  document.addEventListener("DOMContentLoaded", function(){ style(); setTimeout(run, 300); });
+  setInterval(run, 1200);
+})();
+ /* GKM V225 MODAL FULL DESCRIPTION FIX END */
+
+
+
+/* GKM V226 FORCE GAME DATABASE 360 FIX START */
+(function(){
+  const GAME_SPLIT_URLS = [
+    "./data/games/game_to_movies.json?v=226",
+    "./data/games/game_to_series.json?v=226",
+    "./data/games/game_to_anime.json?v=226",
+    "./data/games/media_to_games.json?v=226",
+    "./data/games/cult_games.json?v=226",
+    "./data/games/franchises.json?v=226"
+  ];
+  const GAME_COMBINED_URL = "./data/games_catalog.json?v=232";
+  const PAGE_SIZE = 18;
+  let db = null;
+  let page = 1;
+
+  function txt(v){return String(v == null ? "" : v).trim();}
+  function esc(v){return txt(v).replace(/[&<>"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[s]));}
+  function low(v){return txt(v).toLowerCase().replace(/ё/g,"е");}
+  function key(v){return low(v).replace(/[^a-z0-9а-я]+/g," ").replace(/\s+/g," ").trim();}
+  function arr(v){return Array.isArray(v)?v.filter(Boolean).map(txt):(txt(v)?[txt(v)]:[]);}
+  function titleOf(i){return txt(i && (i.title || i.name || i.ru || i.en));}
+
+  function fallback(title){
+    const t = esc(title || "Игра");
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#080b28"/>
+          <stop offset=".55" stop-color="#25105f"/>
+          <stop offset="1" stop-color="#00d4ff"/>
+        </linearGradient>
+        <radialGradient id="r" cx="50%" cy="20%" r="75%">
+          <stop offset="0" stop-color="#fff" stop-opacity=".18"/>
+          <stop offset="1" stop-color="#000" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="600" height="900" fill="url(#g)"/>
+      <rect width="600" height="900" fill="url(#r)"/>
+      <circle cx="480" cy="130" r="155" fill="#00d4ff" opacity=".16"/>
+      <circle cx="90" cy="780" r="180" fill="#8b5cf6" opacity=".20"/>
+      <rect x="34" y="34" width="532" height="832" rx="30" fill="none" stroke="rgba(255,255,255,.18)"/>
+      <text x="50%" y="165" text-anchor="middle" font-family="Arial" font-size="86" font-weight="900" fill="#fff">🎮</text>
+      <text x="50%" y="238" text-anchor="middle" font-family="Arial" font-size="21" font-weight="800" fill="#ffffff99">ГОЛУБЬ · GAME HUB</text>
+      <foreignObject x="55" y="330" width="490" height="220">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Arial,sans-serif;color:white;font-size:42px;font-weight:900;text-align:center;line-height:1.1;text-shadow:0 2px 16px rgba(0,0,0,.45);">${t}</div>
+      </foreignObject>
+      <rect x="82" y="690" width="436" height="76" rx="24" fill="rgba(10,10,18,.58)" stroke="rgba(255,255,255,.26)"/>
+      <text x="50%" y="738" text-anchor="middle" font-family="Arial" font-size="23" font-weight="850" fill="#fff">Игровая вселенная</text>
+    </svg>`;
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  async function loadGames(){
+    if (db) return db;
+    try {
+      const settled = await Promise.allSettled(GAME_SPLIT_URLS.map(url =>
+        fetch(url, {cache:"force-cache"}).then(r => {
+          if (!r.ok) throw new Error(url + " " + r.status);
+          return r.json();
+        })
+      ));
+      const merged = [];
+      settled.forEach(r => {
+        if (r.status === "fulfilled") merged.push(...(Array.isArray(r.value) ? r.value : (r.value.items || [])));
+      });
+      if (!merged.length) throw new Error("empty split");
+      db = merged;
+      console.info("GKM V226: split games loaded", db.length);
+    } catch(e) {
+      const res = await fetch(GAME_COMBINED_URL, {cache:"force-cache"});
+      if (!res.ok) throw e;
+      const json = await res.json();
+      db = Array.isArray(json) ? json : (json.items || []);
+      console.info("GKM V226: combined games loaded", db.length);
+    }
+    db = db.map((x,i)=>({...x, section:"games", type:x.type || "Игра", id:x.id || ("game-v226-"+i)}));
+    return db;
+  }
+
+  function isGamesActive(){
+    const active = document.querySelector('.tab.active[data-tab="games"], .tab[data-tab="games"].active, [data-tab="games"].active');
+    const count = document.getElementById("countText");
+    return !!active || (count && /игров/i.test(count.textContent || ""));
+  }
+
+  function hay(x){
+    return key([
+      titleOf(x), x.relationLabel, x.relation, x.universeName, x.description,
+      arr(x.genres).join(" "), arr(x.platforms).join(" "), arr(x.relatedMedia).join(" "), arr(x.vibe).join(" ")
+    ].join(" "));
+  }
+
+  function filtered(all){
+    const q = key(document.getElementById("searchInput")?.value || "");
+    let rows = all.slice();
+    if (q) rows = rows.filter(x => hay(x).includes(q));
+    const rating = Number(document.getElementById("ratingFilter")?.value || 0);
+    if (rating) rows = rows.filter(x => Number(x.rating || 0) >= rating);
+    const genre = key(document.getElementById("genreFilter")?.value || "");
+    if (genre) rows = rows.filter(x => arr(x.genres).some(g => key(g).includes(genre)));
+    rows.sort((a,b)=>(Number(b.rating||0)*1000000+Math.min(Number(b.votes||0),900000))-(Number(a.rating||0)*1000000+Math.min(Number(a.votes||0),900000)));
+    return rows;
+  }
+
+  function card(x){
+    const title = esc(titleOf(x));
+    const fb = fallback(titleOf(x));
+    const poster = txt(x.poster) || fb;
+    const genre = arr(x.genres).slice(0,2).join(" · ");
+    const rel = txt(x.relationLabel) || "Игровая вселенная";
+    return `<article class="card gkm-v226-game-card" data-id="${esc(x.id)}">
+      <div class="poster-wrap">
+        <img src="${poster}" alt="${title}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${fb}'">
+        <span class="badge">Игра</span>
+        <button class="fav" type="button">♡</button>
+        <div class="gkm-v226-game-relation">${esc(rel)}</div>
+      </div>
+      <div class="card-body">
+        <h3>${title}</h3>
+        <div class="meta">${esc(x.year || "")} · Игра</div>
+        <div class="genres">${esc(genre)}</div>
+        <div class="rating">★ ${esc(x.rating || "—")} · ${esc(x.votes ? Math.round(Number(x.votes)/1000)+" тыс" : "")}</div>
+      </div>
+    </article>`;
+  }
+
+  async function render(forcePage){
+    const all = await loadGames();
+    page = Math.max(1, Number(forcePage || page || 1));
+    const rows = filtered(all);
+    const pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+    page = Math.min(page, pages);
+    const slice = rows.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+    const count = document.getElementById("countText");
+    if (count) count.innerHTML = `🎮 Игровые вселенные · ${rows.length} из ${all.length} · V226 <span class="gkm-v226-pill">forced DB</span>`;
+
+    const grid = document.getElementById("grid");
+    if (grid) {
+      grid.innerHTML = slice.length ? slice.map(card).join("") : `<div class="gkm-book-empty">Игры не найдены. Сбрось поиск или фильтры.</div>`;
+      grid.classList.remove("gkm-v191-search-best","gkm-v191-spotlight","gkm-v191-highlight");
+      grid.style.outline = "none";
+      grid.style.boxShadow = "none";
+    }
+
+    const pt = document.getElementById("pageText");
+    const prev = document.getElementById("prevBtn");
+    const next = document.getElementById("nextBtn");
+    if (pt) pt.textContent = page + " / " + pages;
+    if (prev) prev.disabled = page <= 1;
+    if (next) next.disabled = page >= pages;
+
+    window.currentMode = "games";
+    window.currentTab = "games";
+  }
+
+  function markGamesTab(){
+    document.querySelectorAll(".tab, [data-tab]").forEach(b => {
+      if (b.dataset && b.dataset.tab === "games") b.classList.add("active");
+      else if (b.classList && b.dataset && ["all","movies","series","cartoons","anime","books"].includes(b.dataset.tab)) b.classList.remove("active");
+    });
+  }
+
+  function bind(){
+    document.addEventListener("click", function(e){
+      const tab = e.target.closest && e.target.closest('[data-tab="games"]');
+      if (tab) {
+        e.preventDefault();
+        e.stopPropagation();
+        markGamesTab();
+        page = 1;
+        setTimeout(()=>render(1), 20);
+        setTimeout(()=>render(1), 220);
+      }
+    }, true);
+
+    const search = document.getElementById("searchInput");
+    if (search && !search.dataset.gkmV226) {
+      search.dataset.gkmV226 = "1";
+      search.addEventListener("input", function(){
+        if (isGamesActive()) { page = 1; setTimeout(()=>render(1), 80); }
+      });
+    }
+
+    const prev = document.getElementById("prevBtn");
+    const next = document.getElementById("nextBtn");
+    if (prev && !prev.dataset.gkmV226) {
+      prev.dataset.gkmV226 = "1";
+      prev.addEventListener("click", function(e){
+        if (isGamesActive()) { e.preventDefault(); e.stopPropagation(); render(page - 1); }
+      }, true);
+    }
+    if (next && !next.dataset.gkmV226) {
+      next.dataset.gkmV226 = "1";
+      next.addEventListener("click", function(e){
+        if (isGamesActive()) { e.preventDefault(); e.stopPropagation(); render(page + 1); }
+      }, true);
+    }
+  }
+
+  function style(){
+    if (document.getElementById("gkm-v226-style")) return;
+    const s = document.createElement("style");
+    s.id = "gkm-v226-style";
+    s.textContent = `
+      .gkm-v226-game-card{contain:layout paint style;content-visibility:auto;contain-intrinsic-size:260px 430px}
+      .gkm-v226-game-card .poster-wrap{background:linear-gradient(135deg,#090d2b,#241066,#00d4ff)!important}
+      .gkm-v226-game-card .poster-wrap img{width:100%;height:100%;object-fit:cover!important}
+      .gkm-v226-game-relation{position:absolute;left:10px;right:10px;bottom:10px;z-index:5;padding:8px 10px;border-radius:14px;background:rgba(4,12,22,.78);border:1px solid rgba(0,212,255,.35);font-size:11px;font-weight:900;color:#e8fbff;text-align:center;backdrop-filter:blur(8px)}
+      .gkm-v226-pill{display:inline-flex;margin-left:8px;padding:4px 8px;border-radius:999px;border:1px solid rgba(0,212,255,.35);background:rgba(0,212,255,.12);font-size:12px;font-weight:900;color:#dffbff}
+    `;
+    document.head.appendChild(s);
+  }
+
+  function boot(){
+    style();
+    bind();
+    setTimeout(function(){
+      if (isGamesActive()) render(1);
+    }, 350);
+    setTimeout(function(){
+      const count = document.getElementById("countText");
+      if (count && /V211|59 запис/i.test(count.textContent || "")) render(1);
+    }, 900);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+
+  window.GKM_FORCE_GAMES_V226 = render;
+})();
+/* GKM V226 FORCE GAME DATABASE 360 FIX END */
+
+
+/* GKM V232: V144 auto update disabled, cache bump v232 */
+
+
+/* GKM V249 VALID SEARCH_LITE FIX - generated valid data/fast/search_lite.json and cache v249 */
+
+
+/* GKM V256 CORE GENERATED POSTERS CSS START */
+(function(){
+  const st = document.createElement("style");
+  st.textContent = ".poster-placeholder{display:none!important}.poster-wrap img{display:block!important;opacity:1!important;filter:none!important;mix-blend-mode:normal!important}";
+  document.head.appendChild(st);
+  console.log("GKM V256 core: generated covers replace empty posters");
+})();
+/* GKM V256 CORE GENERATED POSTERS CSS END */
+
+
+
+/* GKM V257 DUPLICATE TITLES SEASONS FIX START */
+(function(){
+  window.GKM_V257_DUPLICATE_TITLES_SEASONS_VERSION = "v257-duplicate-titles-seasons-fix-2026-06-30";
+
+  function v257Text(v){
+    return String(v == null ? "" : v).trim();
+  }
+
+  function v257Norm(v){
+    return v257Text(v)
+      .toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[’`]/g, "'")
+      .replace(/[^a-z0-9а-я]+/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function v257Year(item){
+    try {
+      if (typeof getYear === "function") return v257Text(getYear(item));
+    } catch {}
+    const raw = v257Text(item && (item.year || item.release_date || item.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+
+  function v257Type(item){
+    try {
+      if (typeof getType === "function") return v257Text(getType(item));
+    } catch {}
+    return v257Text(item && (item.type || item.category || item.kind));
+  }
+
+  function v257BaseTitle(item){
+    try {
+      if (typeof displayTitle === "function") return v257Text(displayTitle(item));
+    } catch {}
+    return v257Text(item && (item.ru || item.title_ru || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
+  }
+
+  function v257RawTitle(item){
+    return v257Text(item && [
+      item.ru,
+      item.title_ru,
+      item.title,
+      item.name,
+      item.en,
+      item.original_title,
+      item.original_name,
+      item.__manualTopTitle
+    ].filter(Boolean).join(" "));
+  }
+
+  function v257SeasonFromText(item){
+    const raw = v257RawTitle(item);
+    const low = raw.toLowerCase();
+
+    const explicit =
+      raw.match(/(?:season|сезон)\s*(\d+)/i) ||
+      raw.match(/(\d+)\s*(?:season|сезон)/i) ||
+      raw.match(/part\s*(\d+)/i) ||
+      raw.match(/част[ьи]\s*(\d+)/i);
+
+    if (explicit) return `${explicit[1]} сезон`;
+
+    const y = v257Year(item);
+    const base = v257Norm(v257BaseTitle(item));
+    const h = v257Norm(raw);
+
+    // Атака титанов — по годам, чтобы было понятно 1/2/3/final.
+    if (base.includes("атака титанов") || h.includes("attack on titan") || h.includes("shingeki")) {
+      if (y === "2013") return "1 сезон";
+      if (y === "2017") return "2 сезон";
+      if (y === "2018" || y === "2019") return "3 сезон";
+      if (y === "2020" || y === "2021" || y === "2022" || y === "2023") return "финальный сезон";
+    }
+
+    if (base.includes("моя геройская академия") || h.includes("my hero academia") || h.includes("boku no hero")) {
+      if (y === "2016") return "1 сезон";
+      if (y === "2017") return "2 сезон";
+      if (y === "2018") return "3 сезон";
+      if (y === "2019" || y === "2020") return "4 сезон";
+      if (y === "2021") return "5 сезон";
+      if (y === "2022") return "6 сезон";
+      if (y === "2024") return "7 сезон";
+    }
+
+    if (base.includes("мастера меча онлайн") || h.includes("sword art online")) {
+      if (y === "2012") return "1 сезон";
+      if (y === "2014") return "2 сезон";
+      if (y === "2018" || y === "2019" || y === "2020") return "Alicization";
+    }
+
+    if (base.includes("токийский гуль") || h.includes("tokyo ghoul")) {
+      if (h.includes("root") || h.includes("√") || y === "2015") return "√A";
+      if (h.includes("re") || y === "2018") return "re";
+      if (y === "2014") return "1 сезон";
+    }
+
+    if (base.includes("блич") || h.includes("bleach")) {
+      if (h.includes("thousand") || h.includes("sennen") || y === "2022") return "TYBW";
+      if (y === "2004") return "классика";
+    }
+
+    if (base.includes("наруто") || h.includes("naruto")) {
+      if (h.includes("shippuden") || h.includes("shippuuden") || h.includes("ураган")) return "Ураганные хроники";
+      if (h.includes("boruto") || h.includes("боруто")) return "Боруто";
+      if (y === "2002") return "1 сезон";
+      if (y === "2007") return "Ураганные хроники";
+    }
+
+    if (base.includes("ван пис") || base.includes("ван-пис") || h.includes("one piece")) {
+      if (h.includes("film") || h.includes("movie")) return "фильм";
+      if (y) return `${y}`;
+    }
+
+    return "";
+  }
+
+  function v257KnownBadMovieDuplicate(title, year){
+    const t = v257Norm(title);
+    const y = v257Text(year);
+    const canonical = {
+      "побег из шоушенка": "1994",
+      "криминальное чтиво": "1994",
+      "форрест гамп": "1994",
+      "бойцовский клуб": "1999",
+      "крестный отец": "1972",
+      "интерстеллар": "2014",
+      "темный рыцарь": "2008"
+    };
+    return canonical[t] && canonical[t] !== y;
+  }
+
+  function v257DecorateList(items){
+    const arr = Array.isArray(items) ? items.filter(Boolean) : [];
+    const exactSeen = new Set();
+    const cleaned = [];
+
+    // 1. Сначала убираем прямые дубли: один и тот же title/type/year.
+    for (const item of arr) {
+      const title = v257BaseTitle(item);
+      const type = v257Type(item);
+      const year = v257Year(item);
+      const exactKey = `${v257Norm(title)}|${v257Norm(type)}|${year}`;
+
+      // У известных фильмов убираем неправильные "фантомные" годы.
+      if (v257KnownBadMovieDuplicate(title, year)) continue;
+
+      if (exactSeen.has(exactKey)) continue;
+      exactSeen.add(exactKey);
+      cleaned.push(item);
+    }
+
+    // 2. Группируем одинаковые названия одного типа.
+    const groups = new Map();
+    for (const item of cleaned) {
+      const key = `${v257Norm(v257BaseTitle(item))}|${v257Norm(v257Type(item))}`;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(item);
+    }
+
+    // 3. Если одинаковое название встречается несколько раз, НЕ скрываем,
+    // а подписываем год/сезон, чтобы было понятно чем они отличаются.
+    for (const group of groups.values()) {
+      if (group.length <= 1) {
+        delete group[0].__gkmV257Title;
+        continue;
+      }
+
+      const used = new Set();
+
+      for (const item of group) {
+        const base = v257BaseTitle(item);
+        const type = v257Type(item);
+        const year = v257Year(item);
+        const season = v257SeasonFromText(item);
+        let suffix = "";
+
+        if (season) suffix = season;
+        else if (year) suffix = year;
+        else suffix = "часть";
+
+        let title = `${base} — ${suffix}`;
+
+        // Если всё равно совпало — добавляем год или номер.
+        let n = 2;
+        const orig = title;
+        while (used.has(v257Norm(title))) {
+          title = `${orig} #${n}`;
+          n++;
+        }
+
+        used.add(v257Norm(title));
+        item.__gkmV257Title = title;
+      }
+    }
+
+    return cleaned;
+  }
+
+  const oldDisplayTitle = typeof displayTitle === "function" ? displayTitle : null;
+  if (oldDisplayTitle) {
+    displayTitle = function(item){
+      if (item && item.__gkmV257Title) return item.__gkmV257Title;
+      return oldDisplayTitle(item);
+    };
+  }
+
+  const oldRenderList = typeof renderList === "function" ? renderList : null;
+  if (oldRenderList) {
+    renderList = function(items, label){
+      const before = Array.isArray(items) ? items.length : 0;
+      const fixed = v257DecorateList(items);
+      const after = fixed.length;
+      let outLabel = label || "";
+      if (before !== after) {
+        outLabel = `${outLabel} · дубли убраны: ${before - after}`;
+      }
+      return oldRenderList(fixed, outLabel);
+    };
+  }
+
+  const oldOpenDetails = typeof openDetails === "function" ? openDetails : null;
+  if (oldOpenDetails) {
+    openDetails = function(item){
+      if (item && item.__gkmV257Title) {
+        const oldRu = item.ru;
+        const oldTitle = item.title;
+        try {
+          item.ru = item.__gkmV257Title;
+          item.title = item.__gkmV257Title;
+          return oldOpenDetails(item);
+        } finally {
+          item.ru = oldRu;
+          item.title = oldTitle;
+        }
+      }
+      return oldOpenDetails(item);
+    };
+  }
+
+  console.log("GKM V257: duplicate titles decorated by season/year, exact duplicates removed");
+})();
+/* GKM V257 DUPLICATE TITLES SEASONS FIX END */
+
+
+
+/* GKM V258 HARD DEDUPE CANONICAL TITLES START */
+(function(){
+  window.GKM_V258_HARD_DEDUPE_CANONICAL_TITLES_VERSION = "v258-hard-dedupe-canonical-titles-2026-06-30";
+
+  function t(v){ return String(v == null ? "" : v).trim(); }
+
+  function n(v){
+    return t(v).toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[’`]/g, "'")
+      .replace(/\.\.\.$/, "")
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function yearOf(item){
+    try { if (typeof getYear === "function") return t(getYear(item)); } catch {}
+    const raw = t(item && (item.year || item.release_date || item.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+
+  function typeOf(item){
+    try { if (typeof getType === "function") return t(getType(item)); } catch {}
+    return t(item && (item.type || item.category || item.kind));
+  }
+
+  function baseTitle(item){
+    try { if (typeof displayTitle === "function") return t(displayTitle(item)); } catch {}
+    return t(item && (item.ru || item.title_ru || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
+  }
+
+  function rawTitle(item){
+    return t(item && [
+      item.ru,
+      item.title_ru,
+      item.title,
+      item.name,
+      item.en,
+      item.original_title,
+      item.original_name,
+      item.__manualTopTitle
+    ].filter(Boolean).join(" "));
+  }
+
+  function posterKey(item){
+    const raw = t(item && (item.poster || item.posterUrl || item.poster_url || item.image || item.cover || item.img));
+    return raw ? raw.replace(/\?.*$/, "").toLowerCase() : "";
+  }
+
+  function canonTitle(title){
+    let s = n(title);
+
+    // Убираем уже добавленные суффиксы от прошлых патчей, чтобы сравнивать основу.
+    s = s.replace(/\s+(1|2|3|4|5|6|7)\s+сезон$/, "");
+    s = s.replace(/\s+финальный\s+сезон$/, "");
+    s = s.replace(/\s+final\s+season$/, "");
+    s = s.replace(/\s+tybw$/, "");
+    s = s.replace(/\s+классика$/, "");
+    s = s.replace(/\s+\d{4}$/, "");
+    s = s.replace(/\s+#\d+$/, "");
+
+    // Канонизация известных франшиз.
+    if (s.includes("побег из шоушенка") || s.includes("shawshank")) return "побег из шоушенка";
+    if (s.includes("криминальное чтиво") || s.includes("pulp fiction")) return "криминальное чтиво";
+    if (s.includes("форрест гамп") || s.includes("forrest gump")) return "форрест гамп";
+    if (s.includes("бойцовский клуб") || s.includes("fight club")) return "бойцовский клуб";
+    if (s.includes("крестный отец") || s.includes("godfather")) return "крестный отец";
+    if (s.includes("интерстеллар") || s.includes("interstellar")) return "интерстеллар";
+    if (s.includes("темный рыцарь") || s.includes("dark knight")) return "темный рыцарь";
+    if (s.includes("матрица") || s.includes("matrix")) return "матрица";
+    if (s.includes("начало") || s.includes("inception")) return "начало";
+    if (s.includes("семь") || s.includes("se7en")) return "семь";
+
+    if (s.includes("властелин колец возвращение короля") || s.includes("lord of the rings return of the king")) return "властелин колец возвращение короля";
+    if (s.includes("властелин колец братство кольца") || s.includes("lord of the rings fellowship")) return "властелин колец братство кольца";
+    if (s.includes("властелин колец две крепости") || s.includes("lord of the rings two towers")) return "властелин колец две крепости";
+
+    // Автосгенерированные коллекции тоже сравниваем как одну основу.
+    s = s.replace(/\s+том\s+\d+$/, "");
+    s = s.replace(/\s+выпуск\s+\d+$/, "");
+    s = s.replace(/\s+collection\s+\d+$/, "");
+    s = s.replace(/\s+collection$/, " collection");
+
+    return s;
+  }
+
+  function isAnimeLike(item){
+    const type = n(typeOf(item));
+    const hay = n(rawTitle(item) + " " + baseTitle(item));
+    return type.includes("аниме") || hay.includes("anime") || hay.includes("shingeki") || hay.includes("attack on titan") || hay.includes("naruto") || hay.includes("bleach");
+  }
+
+  function seasonSuffix(item){
+    const y = yearOf(item);
+    const hay = n(rawTitle(item) + " " + baseTitle(item));
+    const base = n(baseTitle(item));
+
+    const explicit =
+      rawTitle(item).match(/(?:season|сезон)\s*(\d+)/i) ||
+      rawTitle(item).match(/(\d+)\s*(?:season|сезон)/i) ||
+      rawTitle(item).match(/part\s*(\d+)/i) ||
+      rawTitle(item).match(/част[ьи]\s*(\d+)/i);
+
+    if (explicit) return `${explicit[1]} сезон`;
+
+    if (base.includes("атака титанов") || hay.includes("attack on titan") || hay.includes("shingeki")) {
+      if (y === "2013") return "1 сезон";
+      if (y === "2017") return "2 сезон";
+      if (y === "2018" || y === "2019") return "3 сезон";
+      if (y === "2020" || y === "2021" || y === "2022" || y === "2023") return "финальный сезон";
+    }
+
+    if (base.includes("моя геройская академия") || hay.includes("my hero academia") || hay.includes("boku no hero")) {
+      if (y === "2016") return "1 сезон";
+      if (y === "2017") return "2 сезон";
+      if (y === "2018") return "3 сезон";
+      if (y === "2019" || y === "2020") return "4 сезон";
+      if (y === "2021") return "5 сезон";
+      if (y === "2022") return "6 сезон";
+      if (y === "2024") return "7 сезон";
+    }
+
+    if (base.includes("токийский гуль") || hay.includes("tokyo ghoul")) {
+      if (hay.includes("root") || hay.includes("√") || y === "2015") return "√A";
+      if (hay.includes("re") || y === "2018") return "re";
+      if (y === "2014") return "1 сезон";
+    }
+
+    if (base.includes("наруто") || hay.includes("naruto")) {
+      if (hay.includes("shippuden") || hay.includes("shippuuden") || hay.includes("ураган")) return "Ураганные хроники";
+      if (hay.includes("boruto") || hay.includes("боруто")) return "Боруто";
+      if (y === "2002") return "1 сезон";
+      if (y === "2007") return "Ураганные хроники";
+    }
+
+    if (base.includes("блич") || hay.includes("bleach")) {
+      if (hay.includes("thousand") || hay.includes("sennen") || y === "2022") return "TYBW";
+      if (y === "2004") return "классика";
+    }
+
+    return y || "";
+  }
+
+  function canonicalYearFor(key){
+    const map = {
+      "побег из шоушенка": "1994",
+      "криминальное чтиво": "1994",
+      "форрест гамп": "1994",
+      "бойцовский клуб": "1999",
+      "крестный отец": "1972",
+      "интерстеллар": "2014",
+      "темный рыцарь": "2008",
+      "матрица": "1999",
+      "начало": "2010",
+      "семь": "1995",
+      "властелин колец возвращение короля": "2003",
+      "властелин колец братство кольца": "2001",
+      "властелин колец две крепости": "2002"
+    };
+    return map[key] || "";
+  }
+
+  function itemScore(item, key){
+    const y = yearOf(item);
+    const poster = posterKey(item) ? 100000 : 0;
+    let rating = 0;
+    let votes = 0;
+    try { rating = typeof getRating === "function" ? Number(getRating(item) || 0) : Number(item.rating || 0); } catch {}
+    try { votes = typeof getVotes === "function" ? Number(getVotes(item) || 0) : Number(item.votes || 0); } catch {}
+
+    const cy = canonicalYearFor(key);
+    let yearBonus = 0;
+    if (cy && y === cy) yearBonus = 10000000;
+    if (cy && y !== cy) yearBonus = -10000000;
+
+    return yearBonus + poster + rating * 1000 + Math.min(votes, 10000000) / 100 + Number(y || 0);
+  }
+
+  function isStrictDedupeType(item){
+    const type = n(typeOf(item));
+    if (type.includes("фильм")) return true;
+    if (type.includes("книга")) return true;
+    if (type.includes("комик")) return true;
+    if (type.includes("раноб")) return true;
+    if (type.includes("игра")) return true;
+    return false;
+  }
+
+  function v258FixItems(items){
+    const arr = Array.isArray(items) ? items.filter(Boolean) : [];
+    const groups = new Map();
+
+    for (const item of arr) {
+      const base = canonTitle(baseTitle(item));
+      const type = n(typeOf(item));
+      const anime = isAnimeLike(item);
+
+      // Для аниме ключ = название + сезон/год, чтобы разные сезоны НЕ удалять.
+      const key = anime
+        ? `${type}|${base}|${seasonSuffix(item)}`
+        : `${type}|${base}`;
+
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(item);
+    }
+
+    const result = [];
+
+    for (const [key, group] of groups.entries()) {
+      const first = group[0];
+
+      if (group.length === 1) {
+        decorateTitle(first, group);
+        result.push(first);
+        continue;
+      }
+
+      const anime = isAnimeLike(first);
+
+      if (anime) {
+        // Внутри одного сезона оставляем лучшую карточку.
+        const best = group.slice().sort((a,b) => itemScore(b, canonTitle(baseTitle(b))) - itemScore(a, canonTitle(baseTitle(a))))[0];
+        decorateTitle(best, group);
+        result.push(best);
+      } else if (isStrictDedupeType(first)) {
+        // Фильмы/книги/игры/комиксы: одно название = одна карточка.
+        const ckey = canonTitle(baseTitle(first));
+        const best = group.slice().sort((a,b) => itemScore(b, ckey) - itemScore(a, ckey))[0];
+        delete best.__gkmV257Title;
+        delete best.__gkmV258Title;
+        result.push(best);
+      } else {
+        const best = group.slice().sort((a,b) => itemScore(b, canonTitle(baseTitle(b))) - itemScore(a, canonTitle(baseTitle(a))))[0];
+        result.push(best);
+      }
+    }
+
+    // Второй проход: если всё равно одинаковые title/type на странице — подписываем только аниме, остальное режем.
+    const seen = new Map();
+    const final = [];
+
+    for (const item of result) {
+      const key = `${n(baseTitle(item))}|${n(typeOf(item))}`;
+      if (!seen.has(key)) {
+        seen.set(key, [item]);
+        final.push(item);
+      } else {
+        const bucket = seen.get(key);
+        if (isAnimeLike(item)) {
+          bucket.push(item);
+          final.push(item);
+        } else {
+          // не-аниме дубль на странице — выкинуть.
+        }
+      }
+    }
+
+    // Подписать аниме-группы с одинаковой основой.
+    for (const bucket of seen.values()) {
+      if (bucket.length <= 1) continue;
+      const used = new Set();
+      for (const item of bucket) {
+        if (!isAnimeLike(item)) continue;
+        const base = oldBaseTitle(item);
+        let suffix = seasonSuffix(item) || yearOf(item) || "часть";
+        let title = `${base} — ${suffix}`;
+        let i = 2;
+        while (used.has(n(title))) {
+          title = `${base} — ${suffix} #${i}`;
+          i++;
+        }
+        used.add(n(title));
+        item.__gkmV258Title = title;
+      }
+    }
+
+    return final;
+  }
+
+  function oldBaseTitle(item){
+    const old = item && (item.__gkmV257Title || item.__gkmV258Title);
+    if (old) {
+      return t(old)
+        .replace(/\s+—\s+(1|2|3|4|5|6|7)\s+сезон$/i, "")
+        .replace(/\s+—\s+финальный\s+сезон$/i, "")
+        .replace(/\s+—\s+\d{4}$/i, "")
+        .replace(/\s+#\d+$/i, "");
+    }
+    return baseTitle(item);
+  }
+
+  function decorateTitle(item){
+    if (!item) return;
+    if (isAnimeLike(item)) {
+      const suffix = seasonSuffix(item);
+      if (suffix) item.__gkmV258Title = `${oldBaseTitle(item)} — ${suffix}`;
+    }
+  }
+
+  const oldDisplayTitle = typeof displayTitle === "function" ? displayTitle : null;
+  if (oldDisplayTitle) {
+    displayTitle = function(item){
+      if (item && item.__gkmV258Title) return item.__gkmV258Title;
+      if (item && item.__gkmV257Title) return item.__gkmV257Title;
+      return oldDisplayTitle(item);
+    };
+  }
+
+  const oldRenderList = typeof renderList === "function" ? renderList : null;
+  if (oldRenderList) {
+    renderList = function(items, label){
+      const before = Array.isArray(items) ? items.length : 0;
+      const fixed = v258FixItems(items);
+      const after = fixed.length;
+      let out = label || "";
+      if (before !== after) {
+        out = `${out.replace(/\s*·\s*дубли убраны:\s*\d+/g, "")} · дубли убраны: ${before - after}`;
+      }
+      return oldRenderList(fixed, out);
+    };
+  }
+
+  const oldOpenDetails = typeof openDetails === "function" ? openDetails : null;
+  if (oldOpenDetails) {
+    openDetails = function(item){
+      if (item && (item.__gkmV258Title || item.__gkmV257Title)) {
+        const oldRu = item.ru;
+        const oldTitle = item.title;
+        try {
+          item.ru = item.__gkmV258Title || item.__gkmV257Title;
+          item.title = item.__gkmV258Title || item.__gkmV257Title;
+          return oldOpenDetails(item);
+        } finally {
+          item.ru = oldRu;
+          item.title = oldTitle;
+        }
+      }
+      return oldOpenDetails(item);
+    };
+  }
+
+  console.log("GKM V258: hard dedupe films/books/games, anime separated by seasons");
+})();
+/* GKM V258 HARD DEDUPE CANONICAL TITLES END */
+
+
+
+/* GKM V259 DESCRIPTION RELATED RESTORE START */
+(function(){
+  window.GKM_V259_DESCRIPTION_RELATED_RESTORE_VERSION = "v259-description-related-color-restore-2026-06-30";
+
+  function tx(v){ return String(v == null ? "" : v).trim(); }
+  function nm(v){
+    return tx(v).toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[’`]/g, "'")
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function titleForDesc(item){
+    try {
+      if (typeof displayTitle === "function") return tx(displayTitle(item));
+    } catch {}
+    return tx(item && (item.ru || item.title_ru || item.title || item.name || item.en || item.original_title || item.original_name));
+  }
+
+  function typeForDesc(item){
+    try {
+      if (typeof getType === "function") return tx(getType(item));
+    } catch {}
+    return tx(item && (item.type || item.category || item.kind));
+  }
+
+  function yearForDesc(item){
+    try {
+      if (typeof getYear === "function") return tx(getYear(item));
+    } catch {}
+    const raw = tx(item && (item.year || item.release_date || item.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+
+  function genresForDesc(item){
+    try {
+      if (typeof getGenres === "function") {
+        const g = getGenres(item);
+        if (Array.isArray(g)) return g.filter(Boolean).map(String);
+      }
+    } catch {}
+    const raw = item && item.genres;
+    if (Array.isArray(raw)) return raw.filter(Boolean).map(String);
+    if (typeof raw === "string") return raw.split(/[,|/]+/).map(x => x.trim()).filter(Boolean);
+    return [];
+  }
+
+  const DESC_MAP = new Map(Object.entries({
+    "интерстеллар": "Когда Земля становится непригодной для жизни, группа исследователей отправляется через червоточину к далёким планетам. Их задача — найти новый дом для человечества, а для Купера это ещё и борьба между долгом перед миром и любовью к семье.",
+    "побег из шоушенка": "Банкир Энди Дюфрейн получает пожизненный срок за преступление, которого, по его словам, не совершал. В тюрьме Шоушенк он находит друга, учится выживать и годами готовит путь к свободе.",
+    "крестный отец": "История семьи Корлеоне — могущественного мафиозного клана, где власть, преданность и кровь связаны неразрывно. Майкл Корлеоне пытается держаться в стороне, но постепенно становится наследником семейной империи.",
+    "темный рыцарь": "Бэтмен, комиссар Гордон и прокурор Харви Дент пытаются очистить Готэм от преступности. Но появление Джокера превращает борьбу за порядок в испытание, где под ударом оказываются мораль и надежда города.",
+    "криминальное чтиво": "Несколько криминальных историй переплетаются вокруг гангстеров, боксёра, босса мафии и случайных решений. Чёрный юмор, насилие и диалоги складываются в культовую мозаику криминального мира.",
+    "форрест гамп": "Форрест Гамп с простым сердцем проходит через ключевые события американской истории, сам того не желая меняя судьбы людей вокруг. Его жизнь — история любви, дружбы и верности мечте.",
+    "бойцовский клуб": "Офисный работник, страдающий от бессонницы и пустоты, встречает харизматичного Тайлера Дёрдена. Вместе они создают подпольный бойцовский клуб, который быстро превращается во что-то куда опаснее.",
+    "начало": "Доминик Кобб умеет проникать в сны и красть идеи из подсознания. Последняя миссия требует невозможного — не украсть мысль, а внедрить её, пока границы сна и реальности начинают рушиться.",
+    "матрица": "Хакер Нео узнаёт, что привычный мир — лишь симуляция, созданная машинами. Перед ним открывается настоящая реальность и выбор: принять правду или вернуться к удобной иллюзии.",
+    "семь": "Два детектива расследуют серию убийств, построенных вокруг семи смертных грехов. Чем ближе они к преступнику, тем сильнее дело превращается в психологическую ловушку.",
+    "властелин колец братство кольца": "Фродо Бэггинс получает Кольцо Всевластия и отправляется в опасный путь, чтобы уничтожить его в огне Роковой горы. Так начинается путешествие Братства, от которого зависит судьба Средиземья.",
+    "властелин колец две крепости": "Братство распалось, но борьба продолжается. Фродо и Сэм идут к Мордору, Арагорн и союзники готовятся к войне, а силы Саурона и Сарумана усиливают давление на свободные народы.",
+    "властелин колец возвращение короля": "Финальная битва за Средиземье приближается. Пока армии людей встречают тьму у ворот Мордора, Фродо и Сэм делают последний шаг к Роковой горе.",
+    "человек паук нет пути домой": "После раскрытия личности Питера Паркера его жизнь рушится. Попытка исправить всё магией открывает двери мультивселенной и приводит к встрече с врагами из других миров.",
+    "песочный человек": "Морфей, повелитель снов, освобождается после долгого заточения и пытается вернуть утраченную власть. Его путь проходит через миры людей, богов, кошмаров и древних долгов.",
+    "тетрадь смерти": "Старшеклассник Лайт Ягами находит тетрадь, способную убивать людей по имени. Его новая власть запускает опасную игру с гениальным детективом L.",
+    "slam dunk": "Ханамити Сакураги приходит в баскетбол ради девушки, но постепенно открывает в себе настоящий азарт спортсмена. Команда Сёхоку проходит путь от школьных конфликтов к большим матчам.",
+    "атака титанов": "Человечество живёт за огромными стенами, спасаясь от титанов. После разрушительного нападения Эрен Йегер вступает в разведкорпус и начинает путь, который изменит судьбу всего мира."
+  }));
+
+  function descKey(item){
+    let s = nm(titleForDesc(item));
+    s = s.replace(/\s+—\s+(1|2|3|4|5|6|7)\s+сезон$/i, "");
+    s = s.replace(/\s+—\s+финальный\s+сезон$/i, "");
+    s = s.replace(/\s+(1|2|3|4|5|6|7)\s+сезон$/i, "");
+    s = s.replace(/\s+финальный\s+сезон$/i, "");
+    s = s.replace(/\s+\d{4}$/i, "");
+    if (s.includes("побег из шоушенка") || s.includes("shawshank")) return "побег из шоушенка";
+    if (s.includes("криминальное чтиво") || s.includes("pulp fiction")) return "криминальное чтиво";
+    if (s.includes("форрест гамп") || s.includes("forrest gump")) return "форрест гамп";
+    if (s.includes("бойцовский клуб") || s.includes("fight club")) return "бойцовский клуб";
+    if (s.includes("крестный отец") || s.includes("godfather")) return "крестный отец";
+    if (s.includes("интерстеллар") || s.includes("interstellar")) return "интерстеллар";
+    if (s.includes("темный рыцарь") || s.includes("dark knight")) return "темный рыцарь";
+    if (s.includes("матрица") || s.includes("matrix")) return "матрица";
+    if (s.includes("начало") || s.includes("inception")) return "начало";
+    if (s.includes("семь") || s.includes("se7en")) return "семь";
+    if (s.includes("человек паук нет пути домой") || s.includes("spider man no way home")) return "человек паук нет пути домой";
+    if (s.includes("песочный человек") || s.includes("sandman")) return "песочный человек";
+    if (s.includes("тетрадь смерти") || s.includes("death note")) return "тетрадь смерти";
+    if (s.includes("slam dunk")) return "slam dunk";
+    if (s.includes("атака титанов") || s.includes("attack on titan") || s.includes("shingeki")) return "атака титанов";
+    if (s.includes("властелин колец возвращение короля") || s.includes("return of the king")) return "властелин колец возвращение короля";
+    if (s.includes("властелин колец братство кольца") || s.includes("fellowship")) return "властелин колец братство кольца";
+    if (s.includes("властелин колец две крепости") || s.includes("two towers")) return "властелин колец две крепости";
+    return s;
+  }
+
+  function smartFallback(item){
+    const title = titleForDesc(item) || "Проект";
+    const type = typeForDesc(item) || "Каталог";
+    const year = yearForDesc(item);
+    const genres = genresForDesc(item).slice(0, 3).join(", ");
+    const g = genres ? ` Жанры: ${genres}.` : "";
+    const y = year ? ` ${year} год.` : "";
+    return `${title} — ${type.toLowerCase()} из каталога «Голубь Каталог Мира».${y}${g} Карточка будет дополнена подробным описанием позже.`;
+  }
+
+  const oldDisplayOverview = typeof displayOverview === "function" ? displayOverview : null;
+  displayOverview = function(item){
+    let text = "";
+    try {
+      text = oldDisplayOverview ? tx(oldDisplayOverview(item)) : "";
+    } catch {
+      text = "";
+    }
+
+    const bad =
+      !text ||
+      text.length < 40 ||
+      /описание пока не добавлено/i.test(text);
+
+    if (!bad) return text;
+
+    const key = descKey(item);
+    if (DESC_MAP.has(key)) return DESC_MAP.get(key);
+
+    const raw = tx(item && (
+      item.description_ru ||
+      item.overview_ru ||
+      item.description ||
+      item.overview ||
+      item.plot ||
+      item.synopsis
+    ));
+
+    if (raw && raw.length >= 40 && !/описание пока не добавлено/i.test(raw)) return raw;
+
+    return smartFallback(item);
+  };
+
+  function forceOverviewText(){
+    try {
+      const box = document.getElementById("detailOverview");
+      if (!box || !window.selectedItem) return;
+      const text = displayOverview(window.selectedItem);
+      if (text && (!box.textContent || /описание пока не добавлено/i.test(box.textContent) || box.textContent.trim().length < 40)) {
+        box.textContent = text;
+      }
+    } catch {}
+  }
+
+  const oldOpenDetails = typeof openDetails === "function" ? openDetails : null;
+  if (oldOpenDetails) {
+    openDetails = function(item){
+      window.selectedItem = item;
+      const res = oldOpenDetails(item);
+      setTimeout(forceOverviewText, 0);
+      setTimeout(forceOverviewText, 120);
+      return res;
+    };
+  }
+
+  const st = document.createElement("style");
+  st.textContent = `
+    #detailOverview{
+      color:#fff!important;
+      opacity:1!important;
+      filter:none!important;
+      mix-blend-mode:normal!important;
+      white-space:pre-wrap!important;
+      line-height:1.55!important;
+    }
+    .related-card,
+    .related-card *,
+    .related-poster,
+    .related-card img,
+    .related-poster img,
+    .detail-related img,
+    #relatedGrid img,
+    #relatedList img{
+      filter:none!important;
+      opacity:1!important;
+      mix-blend-mode:normal!important;
+      -webkit-filter:none!important;
+    }
+    .related-card::before,
+    .related-card::after{
+      display:none!important;
+      opacity:0!important;
+    }
+  `;
+  document.head.appendChild(st);
+
+  function fixRelatedImages(){
+    try {
+      document.querySelectorAll(".related-card img,.related-poster,#relatedGrid img,#relatedList img,.detail-related img").forEach(img => {
+        img.style.filter = "none";
+        img.style.webkitFilter = "none";
+        img.style.opacity = "1";
+        img.style.mixBlendMode = "normal";
+      });
+    } catch {}
+  }
+
+  document.addEventListener("click", () => {
+    setTimeout(fixRelatedImages, 50);
+    setTimeout(fixRelatedImages, 300);
+    setTimeout(forceOverviewText, 50);
+    setTimeout(forceOverviewText, 300);
+  }, true);
+
+  new MutationObserver(() => {
+    fixRelatedImages();
+    forceOverviewText();
+  }).observe(document.documentElement, { childList:true, subtree:true });
+
+  console.log("GKM V259: descriptions restored and related cards color fixed");
+})();
+/* GKM V259 DESCRIPTION RELATED RESTORE END */
+
+
+
+
+/* GKM V306 RICH DESCRIPTIONS FIX START */
+(function(){
+  window.GKM_V306_RICH_DESCRIPTIONS_FIX_VERSION = "v306-rich-descriptions-fix-2026-07-01";
+
+  function tx(v){ return String(v == null ? "" : v).trim(); }
+  function nm(v){
+    return tx(v)
+      .toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[’`]/g,"'")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+
+  function titleOf(item){
+    try { if (typeof displayTitle === "function") return tx(displayTitle(item)); } catch {}
+    return tx(item && (item.ru || item.title_ru || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
+  }
+  function typeOf(item){
+    try { if (typeof getType === "function") return tx(getType(item)); } catch {}
+    return tx(item && (item.type || item.category || item.kind)) || "Каталог";
+  }
+  function yearOf(item){
+    try { if (typeof getYear === "function") return tx(getYear(item)); } catch {}
+    const raw = tx(item && (item.year || item.release_date || item.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+  function ratingOf306(item){
+    try { if (typeof getRating === "function") return Number(getRating(item) || 0); } catch {}
+    return Number(item && (item.rating || item.vote_average || item.score) || 0);
+  }
+  function genresOf(item){
+    try {
+      if (typeof getGenres === "function") {
+        const g = getGenres(item);
+        if (Array.isArray(g)) return g.filter(Boolean).map(String);
+      }
+    } catch {}
+    const raw = item && (item.genres || item.genre || item.tags);
+    if (Array.isArray(raw)) return raw.filter(Boolean).map(String);
+    if (typeof raw === "string") return raw.split(/[,|/]+/).map(x => x.trim()).filter(Boolean);
+    return [];
+  }
+
+  function descKey(item){
+    const raw = nm([
+      titleOf(item),
+      item && item.ru,
+      item && item.title_ru,
+      item && item.title,
+      item && item.name,
+      item && item.en,
+      item && item.original_title,
+      item && item.original_name
+    ].filter(Boolean).join(" "));
+
+    if (raw.includes("mouretsu pirates") || raw.includes("bodacious space pirates") || raw.includes("moretsu pirates")) return "mouretsu pirates";
+    if (raw.includes("ataка титанов") || raw.includes("атака титанов") || raw.includes("attack on titan") || raw.includes("shingeki")) return "attack on titan";
+    if (raw.includes("стальной алхимик") || raw.includes("fullmetal alchemist")) return "fullmetal alchemist";
+    if (raw.includes("тетрадь смерти") || raw.includes("death note")) return "death note";
+    if (raw.includes("ванпанчмен") || raw.includes("one punch man")) return "one punch man";
+    if (raw.includes("истребитель демонов") || raw.includes("demon slayer") || raw.includes("kimetsu")) return "demon slayer";
+    if (raw.includes("твое имя") || raw.includes("твоё имя") || raw.includes("your name") || raw.includes("kimi no na")) return "your name";
+    if (raw.includes("охотник х охотник") || raw.includes("hunter x hunter")) return "hunter x hunter";
+    if (raw.includes("магическая битва") || raw.includes("jujutsu kaisen")) return "jujutsu kaisen";
+    if (raw.includes("моя геройская академия") || raw.includes("my hero academia") || raw.includes("boku no hero")) return "my hero academia";
+    if (raw.includes("наруто") || raw.includes("naruto")) return "naruto";
+    if (raw.includes("форма голоса") || raw.includes("silent voice") || raw.includes("koe no katachi")) return "silent voice";
+    if (raw.includes("мастера меча онлайн") || raw.includes("sword art online")) return "sword art online";
+    if (raw.includes("токийский гуль") || raw.includes("tokyo ghoul")) return "tokyo ghoul";
+    if (raw.includes("код гиас") || raw.includes("code geass")) return "code geass";
+    if (raw.includes("врата штейна") || raw.includes("steins gate")) return "steins gate";
+    if (raw.includes("ван пис") || raw.includes("ван-пис") || raw.includes("one piece")) return "one piece";
+    if (raw.includes("берсерк") || raw.includes("berserk")) return "berserk";
+    if (raw.includes("slam dunk")) return "slam dunk";
+
+    if (raw.includes("интерстеллар") || raw.includes("interstellar")) return "interstellar";
+    if (raw.includes("побег из шоушенка") || raw.includes("shawshank")) return "shawshank";
+    if (raw.includes("крестный отец") || raw.includes("godfather")) return "godfather";
+    if (raw.includes("темный рыцарь") || raw.includes("тёмный рыцарь") || raw.includes("dark knight")) return "dark knight";
+    if (raw.includes("криминальное чтиво") || raw.includes("pulp fiction")) return "pulp fiction";
+    if (raw.includes("форрест гамп") || raw.includes("forrest gump")) return "forrest gump";
+    if (raw.includes("бойцовский клуб") || raw.includes("fight club")) return "fight club";
+    if (raw.includes("матрица") || raw.includes("matrix")) return "matrix";
+    if (raw.includes("начало") || raw.includes("inception")) return "inception";
+
+    return raw;
+  }
+
+  const DESCRIPTIONS = {
+    "mouretsu pirates": "Марика Като — обычная школьница, которая неожиданно узнаёт, что унаследовала капитанское кресло космического пиратского корабля «Бентенмару». Вместо спокойной жизни её ждут рейды, политика, космические маршруты, контракты и команда, которая проверит, готова ли она быть настоящим капитаном. Лёгкая приключенческая фантастика про космос, ответственность и пиратский дух без лишней мрачности.",
+    "attack on titan": "Люди живут за гигантскими стенами, спасаясь от титанов, пожирающих людей. После разрушительного нападения Эрен Йегер вступает в разведкорпус, чтобы отомстить и узнать правду о мире за стенами. История постепенно превращается из выживания в жёсткую военную драму о свободе, страхе и цене выбора.",
+    "fullmetal alchemist": "Братья Элрики нарушают главный закон алхимии, пытаясь вернуть мать, и платят страшную цену. Теперь они ищут философский камень, чтобы восстановить свои тела, но за поисками скрываются военные тайны, заговоры и вопросы о цене человеческой жизни.",
+    "death note": "Лайт Ягами находит тетрадь, убивающую людей по имени, и решает построить новый мир без преступников. Его действия привлекают внимание гениального детектива L, и между ними начинается интеллектуальная дуэль, где каждая ошибка может стать последней.",
+    "one punch man": "Сайтама стал настолько сильным, что побеждает любого врага одним ударом, но из-за этого потерял азарт к геройской жизни. Пародия на супергеройские истории быстро превращается в яркий экшен с монстрами, рейтингами героев и абсурдным юмором.",
+    "demon slayer": "Тандзиро Камадо теряет семью после нападения демонов, а его сестра Нэдзуко сама становится демоном. Чтобы спасти её и отомстить, он вступает в корпус истребителей демонов и проходит тяжёлый путь через битвы, тренировки и личные потери.",
+    "your name": "Парень из Токио и девушка из провинциального городка начинают загадочно меняться телами во сне. Сначала это кажется странной игрой, но постепенно их связь приводит к тайне, способной изменить судьбу целого города.",
+    "hunter x hunter": "Гон Фрикс отправляется сдавать опасный экзамен на охотника, чтобы найти своего отца. На пути он встречает друзей и врагов, а лёгкое приключение постепенно раскрывает жестокий мир, где сила, хитрость и характер решают всё.",
+    "jujutsu kaisen": "Юдзи Итадори проглатывает проклятый артефакт и становится сосудом могущественного демона Сукуны. Чтобы выжить и помогать людям, он вступает в школу магов, где учится бороться с проклятиями и платить цену за силу.",
+    "my hero academia": "В мире, где почти у всех есть сверхспособности, Идзуку Мидория рождается без дара, но мечтает стать героем. Получив шанс от величайшего героя, он поступает в академию и учится быть не просто сильным, а настоящим символом надежды.",
+    "naruto": "Наруто Узумаки — шумный ниндзя-сирота, мечтающий стать Хокаге и получить признание деревни. Его путь начинается с простых миссий, но постепенно раскрывает войны, древние кланы, дружбу, предательство и силу не сдаваться.",
+    "silent voice": "Бывший школьный хулиган пытается искупить вину перед глухой девушкой, над которой издевался в детстве. Тихая, тяжёлая и честная история о травле, одиночестве, взрослении и попытке снова научиться общаться.",
+    "sword art online": "Тысячи игроков оказываются заперты в виртуальной MMORPG, где смерть в игре означает смерть в реальности. Кирито пытается пройти смертельные уровни и выжить, пока виртуальный мир становится для игроков новой жизнью.",
+    "tokyo ghoul": "Кэн Канэки после трагического случая становится наполовину гулем — существом, питающимся людьми. Он вынужден учиться жить между двумя мирами, где люди боятся монстров, а монстры боятся людей.",
+    "code geass": "Лелуш получает силу абсолютного приказа и начинает войну против империи, захватившей Японию. Под маской Zero он строит революцию, где стратегия, жертвы и личная месть переплетаются с судьбой целого мира.",
+    "steins gate": "Группа друзей случайно открывает способ отправлять сообщения в прошлое. Игра со временем быстро выходит из-под контроля, превращаясь в драму о последствиях, потерях и попытках спасти тех, кто дорог.",
+    "one piece": "Манки D. Луффи собирает команду пиратов и отправляется за легендарным сокровищем One Piece. Большое приключение про свободу, дружбу, мечты и острова, где за ярким юмором скрываются серьёзные драмы.",
+    "berserk": "Гатс, мечник с огромным клинком, проходит через войну, предательство и демонический кошмар. Мрачное фэнтези о ярости, травме, судьбе и попытке выжить в мире, где сила часто значит больше морали.",
+    "slam dunk": "Ханамити Сакураги приходит в баскетбол ради девушки, но постепенно действительно увлекается игрой. История школьной команды, тренировок, характера и матчей, где каждый игрок растёт не только физически, но и внутренне.",
+
+    "interstellar": "Когда Земля становится непригодной для жизни, группа исследователей отправляется через червоточину к далёким планетам. Их задача — найти новый дом для человечества, а для Купера это ещё и выбор между долгом перед миром и любовью к семье.",
+    "shawshank": "Банкир Энди Дюфрейн получает пожизненный срок за преступление, которого, по его словам, не совершал. В тюрьме Шоушенк он находит друга, учится выживать и годами готовит путь к свободе.",
+    "godfather": "История семьи Корлеоне — могущественного мафиозного клана, где власть, преданность и кровь связаны неразрывно. Майкл Корлеоне пытается держаться в стороне, но постепенно становится наследником семейной империи.",
+    "dark knight": "Бэтмен, комиссар Гордон и прокурор Харви Дент пытаются очистить Готэм от преступности. Но появление Джокера превращает борьбу за порядок в испытание, где под ударом оказываются мораль и надежда города.",
+    "pulp fiction": "Несколько криминальных историй переплетаются вокруг гангстеров, боксёра, босса мафии и случайных решений. Чёрный юмор, насилие и диалоги складываются в культовую мозаику криминального мира.",
+    "forrest gump": "Форрест Гамп с простым сердцем проходит через ключевые события американской истории, сам того не желая меняя судьбы людей вокруг. Его жизнь — история любви, дружбы и верности мечте.",
+    "fight club": "Офисный работник, страдающий от бессонницы и пустоты, встречает харизматичного Тайлера Дёрдена. Вместе они создают подпольный бойцовский клуб, который быстро превращается во что-то куда опаснее.",
+    "matrix": "Хакер Нео узнаёт, что привычный мир — лишь симуляция, созданная машинами. Перед ним открывается настоящая реальность и выбор: принять правду или вернуться к удобной иллюзии.",
+    "inception": "Доминик Кобб умеет проникать в сны и красть идеи из подсознания. Последняя миссия требует невозможного — не украсть мысль, а внедрить её, пока границы сна и реальности начинают рушиться."
+  };
+
+  function isBadDesc(text){
+    const s = tx(text);
+    if (!s) return true;
+    if (s.length < 80) return true;
+    if (/описание пока не добавлено/i.test(s)) return true;
+    if (/карточка будет дополнена подробным описанием позже/i.test(s)) return true;
+    if (/из каталога «?голубь каталог мира/i.test(s)) return true;
+    return false;
+  }
+
+  function smartDesc(item){
+    const name = titleOf(item);
+    const type = typeOf(item).toLowerCase();
+    const y = yearOf(item);
+    const gs = genresOf(item).filter(Boolean);
+    const gText = gs.length ? gs.slice(0, 4).join(", ") : "жанры не указаны";
+    const r = ratingOf306(item);
+
+    const h = nm([name, type, gText].join(" "));
+    let tone = "";
+    if (h.includes("космос") || h.includes("space") || h.includes("sci") || h.includes("фантаст")) {
+      tone = " В центре — фантастическая идея, приключение и ощущение большого мира за пределами привычной реальности.";
+    } else if (h.includes("маг") || h.includes("фэнтези") || h.includes("fantasy") || h.includes("rpg")) {
+      tone = " История держится на фэнтези-атмосфере, магии, приключениях и столкновении героев с силами, которые больше обычной жизни.";
+    } else if (h.includes("ужас") || h.includes("horror") || h.includes("мист")) {
+      tone = " Акцент сделан на напряжении, тайне и ощущении угрозы, которое постепенно давит на героев.";
+    } else if (h.includes("роман") || h.includes("love") || h.includes("драма")) {
+      tone = " Главный интерес здесь — персонажи, их отношения, личные решения и последствия этих решений.";
+    } else if (h.includes("боев") || h.includes("экшен") || h.includes("action")) {
+      tone = " Много движения, конфликтов и сцен, где характер героев раскрывается через действие.";
+    } else {
+      tone = " Карточка подходит для быстрого выбора по жанру, году и рейтингу, без лишнего мусора в выдаче.";
+    }
+
+    return `${name} — ${type || "проект"}${y ? ` ${y} года` : ""}. Жанры: ${gText}.${r ? ` Рейтинг: ${r.toFixed(1)}.` : ""}${tone}`;
+  }
+
+  const oldDisplayOverview = typeof displayOverview === "function" ? displayOverview : null;
+  displayOverview = function(item){
+    let old = "";
+    try { old = oldDisplayOverview ? tx(oldDisplayOverview(item)) : ""; } catch {}
+    if (!isBadDesc(old)) return old;
+
+    const key = descKey(item);
+    if (DESCRIPTIONS[key]) return DESCRIPTIONS[key];
+
+    const raw = tx(item && (
+      item.description_ru ||
+      item.overview_ru ||
+      item.description ||
+      item.overview ||
+      item.plot ||
+      item.synopsis
+    ));
+    if (!isBadDesc(raw)) return raw;
+
+    return smartDesc(item);
+  };
+
+  function forceDesc(){
+    try{
+      const box = document.getElementById("detailOverview");
+      const item = window.selectedItem || window.currentDetailItem || window.detailItem;
+      if (!box || !item) return;
+      const txt = displayOverview(item);
+      if (txt && isBadDesc(box.textContent)) box.textContent = txt;
+    }catch{}
+  }
+
+  const oldOpenDetails = typeof openDetails === "function" ? openDetails : null;
+  if (oldOpenDetails) {
+    openDetails = function(item){
+      window.selectedItem = item;
+      window.currentDetailItem = item;
+      const res = oldOpenDetails(item);
+      setTimeout(forceDesc, 0);
+      setTimeout(forceDesc, 80);
+      setTimeout(forceDesc, 250);
+      return res;
+    };
+  }
+
+  document.addEventListener("click", () => {
+    setTimeout(forceDesc, 80);
+    setTimeout(forceDesc, 250);
+  }, true);
+
+  const st = document.createElement("style");
+  st.textContent = `
+    #detailOverview{
+      color:#fff!important;
+      opacity:1!important;
+      white-space:pre-wrap!important;
+      line-height:1.55!important;
+    }
+  `;
+  document.head.appendChild(st);
+
+  console.log("GKM V306: rich descriptions fixed");
+})();
+/* GKM V306 RICH DESCRIPTIONS FIX END */
+
+/* GKM V316 REAL AI BRIDGE START */
+(function(){
+  window.GKM_V316_REAL_AI_BRIDGE_VERSION = "v316-real-ai-bridge-local-fast-plus-worker-2026-07-01";
+
+  const LIMIT = 10;
+  const CACHE = new Map();
+  const MEM_KEY = "gkm_v316_ai_memory";
+  const TIME_LIMIT_MS = 240;
+  let lastResults = [];
+  let lastQuery = "";
+  let requestSeq = 0;
+  let warmStarted = false;
+
+  function T(v){ return String(v == null ? "" : v).trim(); }
+  function N(v){
+    return T(v).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[’`]/g,"'")
+      .replace(/&/g," and ")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function W(v){ return N(v).split(" ").filter(Boolean); }
+  function E(v){
+    return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[ch]));
+  }
+  function mem(){ try { return JSON.parse(localStorage.getItem(MEM_KEY)||"{}")||{}; } catch { return {}; } }
+  function saveMem(m){ try { localStorage.setItem(MEM_KEY, JSON.stringify(m)); } catch {} }
+  function remember(it){
+    const m = mem();
+    if(it.bucket && it.bucket !== "all") m.bucket = it.bucket;
+    if(it.mood) m.mood = it.mood;
+    m.updatedAt = Date.now();
+    saveMem(m);
+  }
+  function hasAnyWord(q, arr){
+    const set = new Set(W(q));
+    return arr.some(x => set.has(x));
+  }
+
+  function fixLayout(q){
+    const map={q:"й",w:"ц",e:"у",r:"к",t:"е",y:"н",u:"г",i:"ш",o:"щ",p:"з","[":"х","]":"ъ",a:"ф",s:"ы",d:"в",f:"а",g:"п",h:"р",j:"о",k:"л",l:"д",";":"ж","'":"э",z:"я",x:"ч",c:"с",v:"м",b:"и",n:"т",m:"ь",",":"б",".":"ю"};
+    return String(q||"").split("").map(ch=>map[ch.toLowerCase()]||ch).join("");
+  }
+  function variants(q){
+    const f=fixLayout(q);
+    return f!==q ? [q,f] : [q];
+  }
+
+  function title(it){
+    try { if(typeof displayTitle==="function") return T(displayTitle(it)); } catch {}
+    return T(it&&(it.ru||it.title_ru||it.title||it.name||it.en||it.original_title||it.original_name))||"Без названия";
+  }
+  function rawTitle(it){ return T(it&&[it.ru,it.title_ru,it.title,it.name,it.en,it.original_title,it.original_name,it.__manualTopTitle].filter(Boolean).join(" ")); }
+  function type(it){
+    try { if(typeof getType==="function") return T(getType(it)); } catch {}
+    return T(it&&(it.type||it.category||it.kind))||"Каталог";
+  }
+  function year(it){
+    try { if(typeof getYear==="function") return T(getYear(it)); } catch {}
+    const raw=T(it&&(it.year||it.release_date||it.first_air_date));
+    const m=raw.match(/(19\d{2}|20\d{2})/);
+    return m?m[1]:raw;
+  }
+  function rating(it){
+    try { if(typeof getRating==="function") return Number(getRating(it)||0); } catch {}
+    try { if(typeof ratingOf==="function") return Number(ratingOf(it)||0); } catch {}
+    return Number(it&&(it.rating||it.vote_average||it.score)||0);
+  }
+  function votes(it){
+    try { if(typeof getVotes==="function") return Number(getVotes(it)||0); } catch {}
+    try { if(typeof votesOf==="function") return Number(votesOf(it)||0); } catch {}
+    return Number(it&&(it.votes||it.vote_count||it.scored_by||it.members)||0);
+  }
+  function genres(it){
+    try{ if(typeof getGenres==="function"){ const g=getGenres(it); if(Array.isArray(g)) return g.filter(Boolean).map(String); } }catch{}
+    const r=it&&(it.genres||it.genre||it.tags);
+    if(Array.isArray(r)) return r.filter(Boolean).map(String);
+    if(typeof r==="string") return r.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
+    return [];
+  }
+  function itemKey(it){
+    return T(it&&(it.id||it.kinopoiskId||it.tmdbId||it.mal_id||it.slug))||`${N(title(it))}|${year(it)}|${N(type(it))}`;
+  }
+  function hay(it){ return N([title(it),rawTitle(it),type(it),genres(it).join(" "),it&&it.overview,it&&it.description,it&&it.synopsis,it&&it.source].filter(Boolean).join(" ")); }
+
+  function itemBucket(it){
+    const set=new Set(W(type(it)));
+    if(set.has("манга")||set.has("manga")) return "manga";
+    if(set.has("ранобэ")||set.has("ранобе")||set.has("ranobe")||N(type(it)).includes("light novel")) return "ranobe";
+    if(set.has("комикс")||set.has("комиксы")||set.has("comic")||set.has("comics")) return "comics";
+    if(set.has("книга")||set.has("книги")||set.has("book")||set.has("books")) return "books";
+    if(set.has("игра")||set.has("игры")||set.has("game")||set.has("games")) return "games";
+    if(set.has("аниме")||set.has("анимэ")||set.has("anime")) return "anime";
+    if(set.has("сериал")||set.has("сериалы")||set.has("series")||set.has("show")) return "series";
+    if(set.has("мульт")||set.has("мультик")||set.has("мультфильм")||set.has("cartoon")||set.has("cartoons")) return "cartoons";
+    if(set.has("фильм")||set.has("фильмы")||set.has("фильмов")||set.has("кино")||set.has("movie")||set.has("movies")||set.has("film")||set.has("films")) return "movies";
+    return "all";
+  }
+
+  function detectType(q){
+    for(const v of variants(q)){
+      if(hasAnyWord(v,["фильм","фильмы","фильмов","кино","movie","movies","film","films"])) return "movies";
+      if(hasAnyWord(v,["аниме","анимэ","анимз","anime"])) return "anime";
+      if(hasAnyWord(v,["сериал","сериалы","сериалов","series","show"])) return "series";
+      if(hasAnyWord(v,["мульт","мультик","мультфильм","мультфильмы","мультфильмов","cartoon","cartoons"])) return "cartoons";
+      if(hasAnyWord(v,["игра","игры","игр","game","games"])) return "games";
+      if(hasAnyWord(v,["манга","manga"])) return "manga";
+      if(hasAnyWord(v,["комикс","комиксы","комиксов","comic","comics"])) return "comics";
+      if(hasAnyWord(v,["книга","книги","книг","book","books"])) return "books";
+      if(hasAnyWord(v,["ранобэ","ранобе"])||N(v).includes("light novel")) return "ranobe";
+    }
+    return "all";
+  }
+  function detectMood(q){
+    const x=N(variants(q).join(" "));
+    if(x.includes("попадан")||x.includes("исека")||x.includes("isekai")||x.includes("перерожд")||x.includes("реинкарнац")||x.includes("другой мир")) return "isekai";
+    if(x.includes("вечер")||x.includes("вечером")||x.includes("посмотреть")) return "evening";
+    if(x.includes("мрач")||x.includes("темн")||x.includes("жест")||x.includes("тяжел")) return "dark";
+    if(x.includes("ужас")||x.includes("хоррор")||x.includes("страш")) return "horror";
+    if(x.includes("фантаст")||x.includes("космос")||x.includes("sci")||x.includes("киберпанк")) return "sci";
+    if(x.includes("фэнтези")||x.includes("маг")||x.includes("rpg")||x.includes("рпг")) return "fantasy";
+    if(x.includes("комед")||x.includes("смешн")||x.includes("легк")) return "light";
+    if(x.includes("детектив")||x.includes("криминал")||x.includes("расслед")) return "detective";
+    if(x.includes("романт")||x.includes("любов")) return "romance";
+    if(x.includes("спорт")) return "sport";
+    if(x.includes("школ")) return "school";
+    return "";
+  }
+  function detectIntent(q){
+    const all=N(variants(q).join(" "));
+    const m=mem();
+    let bucket=detectType(q);
+    let mood=detectMood(q);
+    if(bucket==="all" && m.bucket && all.length<18) bucket=m.bucket;
+    if(!mood && m.mood && all.length<18) mood=m.mood;
+
+    const out={bucket,mood,sort:"smart",yearMin:0,yearMax:9999,explain:all.includes("почему")||all.includes("объясни"),random:all.includes("рандом")||all.includes("случайн"),count:LIMIT};
+    if(all.includes("90 х")||all.includes("90е")||all.includes("90s")){out.yearMin=1990;out.yearMax=1999;}
+    if(all.includes("2000")){out.yearMin=2000;out.yearMax=2009;}
+    if(all.includes("2010")){out.yearMin=2010;out.yearMax=2019;}
+    if(all.includes("2020")){out.yearMin=2020;out.yearMax=2029;}
+    const y=all.match(/\b(19\d{2}|20\d{2})\b/);
+    if(y){out.yearMin=Number(y[1]);out.yearMax=Number(y[1]);}
+    if(all.includes("топ")||all.includes("лучшие")||all.includes("популяр")) out.sort="top";
+    if(all.includes("нов")||all.includes("свежее")) out.sort="new";
+    if(all.includes("недооцен")) out.sort="hidden";
+    return out;
+  }
+
+  const WEAK=new Set("блять бля сука ебаный ебать нахуй хуйня из что чтобы какой какие мне посоветуй подбери найди покажи дай можно посмотреть вечером вечер типо типа похожее похожие на для про по с и или а в во как".split(" "));
+  const EXPAND={
+    попаданцы:["попаданец","исекай","isekai","перерождение","реинкарнация","другой","мир"],
+    попаданец:["попаданцы","исекай","isekai","перерождение","реинкарнация"],
+    исекай:["isekai","попаданцы","перерождение","другой","мир"],
+    фантастика:["sci","science","space","космос","future"],
+    космос:["space","sci","science","фантастика"],
+    фэнтези:["fantasy","magic","магия","rpg"],
+    магия:["magic","fantasy","фэнтези"],
+    ужасы:["horror","мистика","страшное"],
+    хоррор:["horror","ужасы"],
+    детектив:["crime","mystery","криминал"],
+    вечер:["драма","комедия","приключения","триллер"],
+    вечером:["драма","комедия","приключения","триллер"],
+    попкорн:["комедия","приключения","боевик"],
+    семейное:["family","семейное","приключения"]
+  };
+  function tokens(q){
+    const out=new Set();
+    for(const v of variants(q)){
+      for(const p of W(v)){
+        if(p.length<2||WEAK.has(p)) continue;
+        out.add(p);
+        if(EXPAND[p]) EXPAND[p].forEach(x=>W(x).forEach(y=>out.add(y)));
+      }
+    }
+    return [...out];
+  }
+
+  function parseJson(j){
+    const out=[];
+    if(!j) return out;
+    if(Array.isArray(j)) return j.filter(x=>x&&typeof x==="object");
+    if(Array.isArray(j.items)) out.push(...j.items);
+    if(Array.isArray(j.data)) out.push(...j.data);
+    if(Array.isArray(j.results)) out.push(...j.results);
+    if(j.sections&&typeof j.sections==="object"){
+      for(const v of Object.values(j.sections)){
+        if(Array.isArray(v)) out.push(...v);
+        else if(v&&Array.isArray(v.items)) out.push(...v.items);
+      }
+    }
+    return out.filter(x=>x&&typeof x==="object");
+  }
+  async function fetchJson(url){
+    if(CACHE.has(url)) return CACHE.get(url);
+    try{
+      const res=await fetch(url,{cache:"force-cache"});
+      if(!res.ok){ CACHE.set(url,[]); return []; }
+      const arr=parseJson(await res.json());
+      CACHE.set(url,arr);
+      return arr;
+    }catch{
+      CACHE.set(url,[]);
+      return [];
+    }
+  }
+
+  function urlsForBucket(b){
+    if(b==="movies") return ["data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/movies/page_0002.json?v=316"];
+    if(b==="anime") return ["data/fast/anime_top_manual.json?v=316","data/fast/pages/anime/page_0001.json?v=316","data/fast/pages/anime/page_0002.json?v=316"];
+    if(b==="series") return ["data/fast/pages/series/page_0001.json?v=316","data/fast/pages/series/page_0002.json?v=316"];
+    if(b==="cartoons") return ["data/fast/pages/cartoons/page_0001.json?v=316"];
+    if(b==="games") return ["data/games_catalog.json?v=316","data/games/cult_games.json?v=316","data/games/franchises.json?v=316"];
+    if(b==="books"||b==="manga"||b==="comics"||b==="ranobe") return ["data/books_catalog.json?v=316","data/books/books.json?v=316","data/books/manga.json?v=316","data/books/comics.json?v=316","data/books/ranobe.json?v=316"];
+    return ["data/fast/home.json?v=316","data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/anime/page_0001.json?v=316"];
+  }
+  function warmup(){
+    if(warmStarted) return;
+    warmStarted=true;
+    const urls=["data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/anime/page_0001.json?v=316","data/fast/home.json?v=316"];
+    const run=()=>urls.forEach(u=>fetchJson(u));
+    if("requestIdleCallback" in window) requestIdleCallback(run,{timeout:1500});
+    else setTimeout(run,600);
+  }
+
+  async function getPool(q){
+    const it=detectIntent(q);
+    const list=[],seen=new Set();
+    function add(item){
+      if(!item||typeof item!=="object") return;
+      const k=itemKey(item);
+      if(seen.has(k)) return;
+      seen.add(k);
+      list.push(item);
+    }
+
+    if(it.bucket==="all"){
+      try{(currentItems||[]).forEach(add);}catch{}
+      try{
+        const sections=homeData&&homeData.sections?homeData.sections:{};
+        Object.values(sections).forEach(v=>{
+          if(Array.isArray(v)) v.forEach(add);
+          else if(v&&Array.isArray(v.items)) v.items.forEach(add);
+        });
+      }catch{}
+    }
+
+    const urls = urlsForBucket(it.bucket);
+    const timeout = new Promise(resolve => setTimeout(() => resolve("__timeout__"), TIME_LIMIT_MS));
+    const load = Promise.all(urls.map(u => fetchJson(u)));
+    const result = await Promise.race([load, timeout]);
+
+    if(result === "__timeout__"){
+      // Если сеть тормозит, отдаём то, что уже есть, не подвешиваем окно.
+      for(const u of urls){
+        if(CACHE.has(u)) CACHE.get(u).forEach(add);
+      }
+      return list;
+    }
+
+    result.forEach(arr => arr.forEach(add));
+    return list;
+  }
+
+  function clean(item){
+    if(!item) return false;
+    const ttl=N(title(item));
+    if(!ttl||ttl==="без названия") return false;
+    const y=Number(year(item)||0);
+    if(y&&y>new Date().getFullYear()+3) return false;
+    const h=hay(item);
+    return !["trailer","teaser","preview","recap","summary","soundtrack","трейлер","тизер","превью","рекап"].some(x=>h.includes(x));
+  }
+  function passType(item,b){
+    if(!b||b==="all") return true;
+    const ib=itemBucket(item);
+    if(b==="books") return ib==="books"||ib==="ranobe";
+    return ib===b;
+  }
+  function moodWords(m){
+    if(m==="isekai") return ["исекай","isekai","попадан","перерождение","реинкарнация","другой мир","ином мире","призван","summoned","reincarnation","another world"];
+    if(m==="evening") return ["драма","комедия","приключения","триллер","adventure","drama","comedy","thriller"];
+    if(m==="sci") return ["фантастика","космос","space","sci","science","future"];
+    if(m==="fantasy") return ["фэнтези","магия","magic","fantasy","dragon","rpg"];
+    if(m==="dark") return ["мрач","dark","grim","thriller","psychological","драма","триллер"];
+    if(m==="horror") return ["ужасы","horror","мистика","supernatural","thriller"];
+    if(m==="detective") return ["детектив","криминал","crime","mystery","detective"];
+    if(m==="romance") return ["романтика","любовь","romance","love"];
+    if(m==="light") return ["комедия","семейное","comedy","family","adventure"];
+    if(m==="sport") return ["спорт","sport"];
+    if(m==="school") return ["школа","school","slice"];
+    return [];
+  }
+  function score(item,it,tk){
+    if(!clean(item)||!passType(item,it.bucket)) return 0;
+    const y=Number(year(item)||0);
+    if(y&&(y<it.yearMin||y>it.yearMax)) return 0;
+    const ttl=N(title(item)),raw=N(rawTitle(item)),h=hay(item),gen=N(genres(item).join(" ")),typ=N(type(item));
+    let s=0;
+    for(const token of tk){
+      if(ttl===token||raw===token) s+=200;
+      else if(ttl.includes(token)) s+=90;
+      else if(raw.includes(token)) s+=70;
+      else if(gen.includes(token)) s+=65;
+      else if(h.includes(token)) s+=25;
+      else if(typ.includes(token)) s+=20;
+    }
+    for(const mw of moodWords(it.mood)){
+      const m=N(mw);
+      if(!m) continue;
+      if(gen.includes(m)) s+=85;
+      else if(h.includes(m)) s+=45;
+      else if(ttl.includes(m)||raw.includes(m)) s+=45;
+    }
+    if(it.bucket!=="all") s+=50;
+    if(it.mood==="evening") s+=15;
+    const r=rating(item),v=votes(item);
+    if(it.sort==="top") s+=Math.min(120,Math.log10(v+1)*18)+r*12;
+    else if(it.sort==="new") s+=y>=2020?(y-2019)*14:0;
+    else if(it.sort==="hidden") s+=r*12-Math.min(50,Math.log10(v+1)*8);
+    else s+=Math.min(70,Math.log10(v+1)*10)+r*7;
+    return s;
+  }
+  function dedupe(items){
+    const map=new Map();
+    for(const item of items){
+      const k=`${itemBucket(item)}|${N(title(item))}|${year(item)}`;
+      const old=map.get(k);
+      if(!old||rating(item)*100000+votes(item)>rating(old)*100000+votes(old)) map.set(k,item);
+    }
+    return [...map.values()];
+  }
+  async function search(q){
+    const it=detectIntent(q),tk=tokens(q),data=await getPool(q);
+    let arr=data.map(item=>({item,score:score(item,it,tk)}))
+      .filter(x=>x.score>0)
+      .sort((a,b)=>b.score-a.score)
+      .map(x=>x.item);
+
+    if(!arr.length&&it.bucket!=="all"){
+      arr=data.filter(item=>clean(item)&&passType(item,it.bucket))
+        .sort((a,b)=>(rating(b)*100000+votes(b))-(rating(a)*100000+votes(a)));
+    }
+    if(it.random) arr=arr.sort(()=>Math.random()-0.5);
+    const res=dedupe(arr).slice(0,it.count);
+    lastResults=res;lastQuery=q;remember(it);
+    return {items:res,intent:it,tokens:tk};
+  }
+
+  function fmtVotes(v){
+    v=Number(v||0);
+    if(!v)return"";
+    if(v>=1000000)return(v/1000000).toFixed(1).replace(".0","")+" млн";
+    if(v>=1000)return Math.round(v/1000)+" тыс";
+    return String(v);
+  }
+  function why(item,it){
+    const out=[],g=genres(item).slice(0,3).join(", ");
+    if(g)out.push("жанры: "+g);
+    if(rating(item))out.push("рейтинг "+rating(item).toFixed(1));
+    if(votes(item))out.push(fmtVotes(votes(item))+" голосов");
+    if(it.mood)out.push("под запрос: "+it.mood);
+    return out.slice(0,3).join("; ");
+  }
+  function intro(it){
+    if(it.bucket==="movies"&&it.mood==="evening") return "На вечер из фильмов я бы начал с этого:";
+    if(it.bucket==="anime"&&it.mood==="isekai") return "По анимэ-попаданцам/исекаю вот нормальные варианты:";
+    const map={movies:"Нашёл фильмы:",anime:"Нашёл аниме:",series:"Нашёл сериалы:",cartoons:"Нашёл мультфильмы:",games:"Нашёл игры:",books:"Нашёл книги:",manga:"Нашёл мангу:",comics:"Нашёл комиксы:",ranobe:"Нашёл ранобэ:"};
+    return map[it.bucket]||"Нашёл варианты:";
+  }
+  function fmt(items,it){
+    return items.map((item,i)=>{
+      const g=genres(item).slice(0,2).join(", ");
+      return `${i+1}. ${title(item)} (${year(item)||"—"}) — ${type(item)} · ${rating(item)?"★ "+rating(item).toFixed(1):"★ —"}${votes(item)?" · "+fmtVotes(votes(item)):""}${g?" · "+g:""}${it.explain?"\n   почему: "+why(item,it):""}`;
+    }).join("\n");
+  }
+
+  function openResult(n){
+    const item=lastResults[Number(n)-1];
+    if(!item)return`Нет результата под номером ${n}. Сначала сделай поиск.`;
+    try{if(typeof openDetails==="function"){openDetails(item);return"Открыл: "+title(item);}}catch{}
+    return"Нашёл: "+title(item)+", но открыть не получилось.";
+  }
+  function compare(a,b){
+    const A=lastResults[Number(a)-1],B=lastResults[Number(b)-1];
+    if(!A||!B)return"Сначала сделай поиск, потом напиши: сравни 1 и 2.";
+    const pick=rating(A)!==rating(B)?(rating(A)>rating(B)?A:B):(votes(A)>votes(B)?A:B);
+    return`${title(A)}: ★ ${rating(A)||"—"} · ${fmtVotes(votes(A))||"0"} голосов\n${title(B)}: ★ ${rating(B)||"—"} · ${fmtVotes(votes(B))||"0"} голосов\nЯ бы выбрал: ${title(pick)}.`;
+  }
+  function plan(){
+    if(!lastResults.length)return"Сначала попроси подборку, потом напиши: сделай план.";
+    const p=lastResults.slice(0,3);
+    return["План:",`1. Начать с: ${title(p[0])}`,p[1]?`2. Потом: ${title(p[1])}`:"",p[2]?`3. На финал: ${title(p[2])}`:""].filter(Boolean).join("\n");
+  }
+  function help(){
+    return["V316 REAL AI: максимально быстрый и строгий помощник.","Что просишь — то и ищу.","Понимаю кривую раскладку, настроение, уточнения и команды.","Команды: открой 1, похожее на 1, другое, сравни 1 и 2, сделай план, почему, ещё."].join("\n");
+  }
+
+  async function similarTo(n){
+    const base = lastResults[Number(n)-1];
+    if(!base) return "Сначала сделай подборку, потом напиши: похожее на 1.";
+    const q = `${type(base)} ${genres(base).slice(0,3).join(" ")} похожее на ${title(base)}`;
+    const res = await search(q);
+    const items = res.items.filter(x => itemKey(x) !== itemKey(base)).slice(0, LIMIT);
+    if(!items.length) return "Похожее быстро не нашёл. Попробуй обычным запросом.";
+    lastResults = items;
+    return `Похожее на ${title(base)}:\n${fmt(items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
+  }
+
+  async function different(){
+    if(!lastQuery) return "Сначала сделай подборку.";
+    const q = lastQuery + " рандом другое";
+    const res = await search(q);
+    if(!res.items.length) return "Других вариантов быстро не нашёл.";
+    return `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
+  }
+
+
+  async function tryRemoteAI(q, localText){
+    const endpoint = window.GKM_AI_ENDPOINT || localStorage.getItem("GKM_AI_ENDPOINT") || "";
+    if(!endpoint) return "";
+    try{
+      const controller = new AbortController();
+      const timer = setTimeout(()=>controller.abort(), 2200);
+      const payload = {
+        query: q,
+        local_answer: localText,
+        site_version: "V316",
+        instruction: "Ответь по-русски, коротко, как умный помощник каталога. Не смешивай разделы. Объясни выбор простыми словами.",
+        last_results: lastResults.slice(0, 10).map((x,i)=>({
+          n:i+1,
+          title:title(x),
+          type:type(x),
+          year:year(x),
+          rating:rating(x),
+          votes:votes(x),
+          genres:genres(x)
+        }))
+      };
+      const res = await fetch(endpoint, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(payload),
+        signal:controller.signal
+      });
+      clearTimeout(timer);
+      if(!res.ok) return "";
+      const data = await res.json();
+      return T(data && (data.answer || data.text || data.message));
+    }catch{
+      return "";
+    }
+  }
+
+  async function answer(q){
+    const x=N(q);
+    if(!x)return"Напиши что ищем.";
+    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x))return"Привет. Я V316 REAL AI: быстрый ИИ-помощник. Что просишь — то и ищу.";
+    if(x.includes("помощ")||x.includes("что умеешь")||x.includes("как искать"))return help();
+    const op=x.match(/(?:открой|открыть|покажи)\s+(\d{1,2})/);if(op)return openResult(op[1]);
+    const cmp=x.match(/сравни\s+(\d{1,2})\s+(?:и|с)\s+(\d{1,2})/);if(cmp)return compare(cmp[1],cmp[2]);
+    const sim=x.match(/(?:похожее|похожие|типа|как)\s+(?:на\s+)?(\d{1,2})/);
+    if(sim)return await similarTo(sim[1]);
+    if(x.includes("другое")||x.includes("не это")||x.includes("еще варианты")||x.includes("ещё варианты"))return await different();
+    if(x.includes("план")||x.includes("марафон"))return plan();
+    if(x.includes("еще")||x.includes("ещё"))return lastQuery?(await answer(lastQuery)):"Сначала сделай поиск.";
+    const res=await search(q);
+    if(!res.items.length)return"Не нашёл быстро в нужном разделе. Попробуй проще: «фильмы вечер», «анимэ попаданцы», «игры rpg», «манга ужасы».";
+    const localText = `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «похожее на 1», «другое», «сравни 1 и 2», «сделай план», «почему».`;
+    const aiText = await tryRemoteAI(q, localText);
+    return aiText || localText;
+  }
+
+  function addMsg(role,text){
+    if(typeof gkmHelperAddMessage==="function"){gkmHelperAddMessage(role,text);return;}
+    const box=document.getElementById("gkmAiMessages");if(!box)return;
+    const div=document.createElement("div");div.className=role==="user"?"ai-user":"ai-bot";div.innerHTML=E(text).replace(/\n/g,"<br>");box.appendChild(div);box.scrollTop=box.scrollHeight;
+  }
+  function replaceLastBot(text){
+    const box=document.getElementById("gkmAiMessages");
+    if(box){
+      const last=box.lastElementChild;
+      if(last&&last.classList.contains("ai-bot")&&last.textContent.includes("V316")){
+        last.innerHTML=E(text).replace(/\n/g,"<br>");box.scrollTop=box.scrollHeight;return true;
+      }
+    }
+    return false;
+  }
+  function install(){
+    const form=document.getElementById("gkmAiForm"),input=document.getElementById("gkmAiInput"),dialog=document.getElementById("gkmAiDialog"),floatBtn=document.getElementById("gkmAiFloatBtn"),closeBtn=document.getElementById("gkmAiCloseBtn");
+    if(floatBtn&&dialog&&input){
+      floatBtn.onclick=()=>{if(typeof dialog.showModal==="function")dialog.showModal();else dialog.setAttribute("open","");setTimeout(()=>input.focus(),50);warmup();};
+    }
+    if(closeBtn&&dialog)closeBtn.onclick=()=>dialog.close?dialog.close():dialog.removeAttribute("open");
+    if(!form||!input)return;
+    form.dataset.v260Installed="0";form.dataset.v300Installed="0";form.dataset.v301Installed="0";form.dataset.v302Installed="0";form.dataset.v303Installed="0";form.dataset.v304Installed="0";form.dataset.v305Installed="0";form.dataset.v307IsekaiInstalled="0";form.dataset.v308Installed="0";form.dataset.v309Installed="0";form.dataset.v310Installed="0";form.dataset.v311Installed="0";form.dataset.v312Installed="0";form.dataset.v316Installed="1";
+    form.onsubmit=async e=>{
+      e.preventDefault();if(e.stopPropagation)e.stopPropagation();
+      const q=input.value.trim();if(!q)return;input.value="";
+      const seq=++requestSeq;
+      addMsg("user",q);addMsg("bot","V316 REAL AI думаю быстро...");
+      try{
+        const out=await answer(q);
+        if(seq!==requestSeq)return;
+        if(!replaceLastBot(out))addMsg("bot",out);
+      }catch(err){
+        console.warn("GKM V316 helper error",err);
+        const msg="Помощник словил ошибку. Напиши проще: «фильмы вечер» или «анимэ попаданцы».";
+        if(!replaceLastBot(msg))addMsg("bot",msg);
+      }
+    };
+    warmup();
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
+  setTimeout(install,100);setTimeout(install,450);setTimeout(install,900);
+  console.log("GKM V316: REAL AI bridge installed");
+})();
+/* GKM V316 REAL AI BRIDGE END */
+
+
+/* GKM V325 UNIQUE CONNECTED POSTER WALL START */
+(function(){
+  window.GKM_V325_UNIQUE_CONNECTED_POSTER_WALL_VERSION = "v325-unique-connected-poster-wall-no-repeats-2026-07-11";
+
+  const UNIQUE_LIMIT_DESKTOP = 1400;
+  const UNIQUE_LIMIT_MOBILE = 650;
+
+  let uniqueItems = [];
+  let currentKind = "all";
+  let wallBuilt = false;
+  let isOpen = false;
+  let isDragging = false;
+  let startX = 0;
+  let startY = 0;
+  let rotX = 2;
+  let rotY = -10;
+  let zoom = 95;
+  let targetRotX = 2;
+  let targetRotY = -10;
+  let targetZoom = 95;
+  let rafId = 0;
+  let autoSpin = true;
+  let hoveredTile = null;
+
+  function t(v){ return String(v == null ? "" : v).trim(); }
+  function esc(v){
+    return String(v == null ? "" : v).replace(/[&<>"']/g, s => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[s]));
+  }
+  function safeUrl(v){
+    return String(v || "").replace(/"/g,"%22").replace(/\)/g,"%29");
+  }
+  function n(v){
+    return t(v).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function titleOf(it){
+    try{ if(typeof displayTitle === "function") return t(displayTitle(it)); }catch(e){}
+    return t(it && (it.ru || it.title_ru || it.title || it.name || it.en || it.original_title || it.original_name)) || "Без названия";
+  }
+  function typeOf(it){
+    try{ if(typeof getType === "function") return t(getType(it)); }catch(e){}
+    return t(it && (it.type || it.category || it.kind)) || "Каталог";
+  }
+  function yearOf(it){
+    try{ if(typeof getYear === "function") return t(getYear(it)); }catch(e){}
+    const raw = t(it && (it.year || it.release_date || it.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+  function ratingOf(it){
+    try{ if(typeof getRating === "function") return Number(getRating(it) || 0); }catch(e){}
+    return Number(it && (it.rating || it.vote_average || it.score) || 0);
+  }
+  function overviewOf(it){
+    try{ if(typeof displayOverview === "function") return t(displayOverview(it)); }catch(e){}
+    return t(it && (it.overview || it.description || it.synopsis || it.plot)) || "Описание будет добавлено позже.";
+  }
+  function genresOf(it){
+    try{
+      if(typeof getGenres === "function"){
+        const g = getGenres(it);
+        if(Array.isArray(g)) return g.filter(Boolean).map(String);
+      }
+    }catch(e){}
+    const raw = it && (it.genres || it.genre || it.tags);
+    if(Array.isArray(raw)) return raw.filter(Boolean).map(String);
+    if(typeof raw === "string") return raw.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
+    return [];
+  }
+  function imgOf(it){
+    return t(it && (
+      it.poster || it.poster_url || it.posterUrl ||
+      it.image || it.img || it.cover || it.cover_url ||
+      it.thumbnail || it.backdrop || it.backdrop_path
+    ));
+  }
+  function keyOf(it){
+    return t(it && (it.id || it.kinopoiskId || it.tmdbId || it.mal_id || it.slug))
+      || `${n(titleOf(it))}|${yearOf(it)}|${n(typeOf(it))}`;
+  }
+  function parseJson(j){
+    const out = [];
+    if(!j) return out;
+    if(Array.isArray(j)) out.push(...j);
+    if(Array.isArray(j.items)) out.push(...j.items);
+    if(Array.isArray(j.data)) out.push(...j.data);
+    if(Array.isArray(j.results)) out.push(...j.results);
+    if(j.sections && typeof j.sections === "object"){
+      Object.values(j.sections).forEach(v=>{
+        if(Array.isArray(v)) out.push(...v);
+        else if(v && Array.isArray(v.items)) out.push(...v.items);
+      });
+    }
+    return out.filter(x=>x && typeof x === "object");
+  }
+  async function fetchJson(url){
+    try{
+      const res = await fetch(url, {cache:"force-cache"});
+      if(!res.ok) return [];
+      return parseJson(await res.json());
+    }catch(e){ return []; }
+  }
+  function passKind(it, kind){
+    if(!kind || kind === "all") return true;
+    const tp = n(typeOf(it));
+    if(kind === "movies") return tp.includes("фильм") || tp.includes("movie");
+    if(kind === "series") return tp.includes("сериал") || tp.includes("series");
+    if(kind === "anime") return tp.includes("аниме") || tp.includes("anime");
+    if(kind === "cartoons") return tp.includes("мульт") || tp.includes("cartoon");
+    return true;
+  }
+  function pageUrls(kind){
+    const urls = ["data/fast/home.json?v=325"];
+    const cats = kind && kind !== "all"
+      ? ({movies:["movies"], series:["series"], anime:["anime"], cartoons:["cartoons"]}[kind] || ["movies","series","anime","cartoons"])
+      : ["movies","series","anime","cartoons"];
+
+    const pages = window.innerWidth < 700 ? 4 : 9;
+    cats.forEach(cat=>{
+      for(let i=1;i<=pages;i++){
+        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=325`);
+      }
+    });
+    return urls;
+  }
+  async function loadWallItems(kind="all"){
+    currentKind = kind || "all";
+    const found = [];
+    const seen = new Set();
+
+    function add(it){
+      if(!it || !passKind(it, currentKind)) return;
+      if(!imgOf(it)) return;
+      const k = keyOf(it);
+      if(seen.has(k)) return;
+      seen.add(k);
+      found.push(it);
+    }
+
+    try{ (currentItems || []).forEach(add); }catch(e){}
+    try{
+      if(homeData && homeData.sections){
+        Object.values(homeData.sections).forEach(v=>{
+          if(Array.isArray(v)) v.forEach(add);
+          else if(v && Array.isArray(v.items)) v.items.forEach(add);
+        });
+      }
+    }catch(e){}
+
+    const arrs = await Promise.all(pageUrls(currentKind).map(fetchJson));
+    arrs.flat().forEach(add);
+
+    found.sort((a,b)=>(ratingOf(b)||0)-(ratingOf(a)||0));
+    uniqueItems = found.slice(0, window.innerWidth < 700 ? UNIQUE_LIMIT_MOBILE : UNIQUE_LIMIT_DESKTOP);
+    return uniqueItems;
+  }
+
+  function ensureCss(){
+    if(document.getElementById("gkmV325Css")) return;
+    const st = document.createElement("style");
+    st.id = "gkmV325Css";
+    st.textContent = `
+      #gkmV325Btn{
+        position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;
+        border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
+        color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;
+        box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)
+      }
+      #gkmV325Overlay{
+        position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;
+        background:
+          radial-gradient(circle at 50% 42%,rgba(255,255,255,.10),transparent 7%),
+          radial-gradient(circle at 24% 14%,rgba(0,190,255,.16),transparent 34%),
+          radial-gradient(circle at 82% 84%,rgba(130,35,255,.22),transparent 42%),
+          #020817;
+      }
+      #gkmV325Overlay.open{display:block}
+      .gkmV325Top{
+        position:absolute;left:0;right:0;top:0;z-index:18;display:flex;justify-content:space-between;gap:12px;
+        padding:8px 14px 0 14px;pointer-events:none
+      }
+      .gkmV325Title{font-size:22px;font-weight:950;text-shadow:0 0 18px rgba(0,180,255,.46)}
+      .gkmV325Sub{font-size:12px;color:rgba(255,255,255,.8)}
+      .gkmV325Actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
+      .gkmV325Actions button,.gkmV325PreviewActions button{
+        border:1px solid rgba(0,220,255,.34);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.86));
+        color:#fff;border-radius:14px;padding:10px 13px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)
+      }
+      .gkmV325Actions button:hover,.gkmV325PreviewActions button:hover{filter:brightness(1.15)}
+      #gkmV325Scene{position:absolute;inset:58px 0 0;perspective:1000px;overflow:hidden;cursor:grab;user-select:none;touch-action:none}
+      #gkmV325Scene.drag{cursor:grabbing}
+      #gkmV325World{position:absolute;left:50%;top:50%;width:1px;height:1px;transform-style:preserve-3d;will-change:transform}
+      .gkmV325Tile{
+        position:absolute;left:0;top:0;width:18px;height:28px;margin-left:-9px;margin-top:-14px;border:0;padding:0;border-radius:4px;
+        overflow:hidden;background:#071227;outline:1px solid rgba(255,255,255,.07);box-shadow:0 2px 7px rgba(0,0,0,.38);
+        cursor:pointer;transform-style:preserve-3d;will-change:transform,filter;transition:filter .12s ease,box-shadow .12s ease
+      }
+      .gkmV325Tile::before{
+        content:"";position:absolute;inset:0;background-image:var(--poster);background-size:cover;background-position:center;
+        filter:saturate(1.08) contrast(1.04)
+      }
+      .gkmV325Tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.16),transparent 60%)}
+      .gkmV325Tile.is-hover{
+        z-index:999;filter:brightness(1.28) saturate(1.18)!important;
+        box-shadow:0 8px 22px rgba(0,0,0,.58),0 0 24px rgba(0,190,255,.35)
+      }
+      #gkmV325Preview{
+        position:absolute;display:none;z-index:24;min-width:280px;max-width:380px;
+        background:linear-gradient(135deg,rgba(9,18,43,.96),rgba(13,23,58,.93));
+        border:1px solid rgba(0,220,255,.33);border-radius:18px;box-shadow:0 20px 70px rgba(0,0,0,.6),0 0 30px rgba(0,170,255,.22);
+        padding:12px;backdrop-filter:blur(12px);pointer-events:auto
+      }
+      #gkmV325Preview.open{display:block}
+      .gkmV325PreviewInner{display:grid;grid-template-columns:100px 1fr;gap:12px;align-items:start}
+      #gkmV325Preview img{width:100px;height:150px;object-fit:cover;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+      .gkmV325PreviewText h3{margin:0 0 6px 0;font-size:19px;line-height:1.05}
+      .gkmV325PreviewMeta{font-size:12px;color:rgba(255,255,255,.78);margin-bottom:6px}
+      .gkmV325PreviewDesc{font-size:12px;color:rgba(255,255,255,.86);line-height:1.35;max-height:84px;overflow:hidden}
+      .gkmV325PreviewActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+      .gkmV325Info{
+        position:absolute;left:16px;bottom:16px;z-index:12;max-width:min(520px,calc(100vw - 32px));
+        background:rgba(5,14,34,.78);border:1px solid rgba(0,220,255,.24);border-radius:18px;
+        padding:12px 14px;color:#fff;backdrop-filter:blur(12px);pointer-events:none
+      }
+      .gkmV325Info b{display:block;font-size:17px;margin-bottom:4px}
+      .gkmV325Info .meta{color:rgba(255,255,255,.75);font-size:13px}
+      .gkmV325Hint{position:absolute;right:20px;bottom:18px;z-index:12;color:rgba(255,255,255,.6);font-size:12px;text-align:right;pointer-events:none}
+      @media(max-width:700px){
+        #gkmV325Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
+        .gkmV325Top{padding:8px 10px 0 10px}.gkmV325Title{font-size:18px}.gkmV325Sub{font-size:11px}
+        .gkmV325Actions button{padding:8px 9px;font-size:12px}
+        #gkmV325Scene{inset:96px 0 0}.gkmV325Tile{width:14px;height:22px;margin-left:-7px;margin-top:-11px;border-radius:3px}
+        #gkmV325Preview{left:10px!important;right:10px!important;top:auto!important;bottom:82px!important;min-width:unset;max-width:none}
+        .gkmV325PreviewInner{grid-template-columns:78px 1fr;gap:10px}
+        #gkmV325Preview img{width:78px;height:116px}.gkmV325PreviewText h3{font-size:16px}.gkmV325PreviewDesc{display:none}
+        .gkmV325Info{left:10px;right:10px;bottom:12px;max-width:none}.gkmV325Hint{display:none}
+      }
+    `;
+    document.head.appendChild(st);
+  }
+
+  function removeOldUi(){
+    [
+      "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn",
+      "gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn",
+      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay"
+    ].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.remove();
+    });
+  }
+
+  function ensureUi(){
+    removeOldUi();
+
+    if(!document.getElementById("gkmV325Btn")){
+      const btn = document.createElement("button");
+      btn.id = "gkmV325Btn";
+      btn.type = "button";
+      btn.textContent = "🌌 3D стена";
+      btn.onclick = () => openWall("all");
+      document.body.appendChild(btn);
+    }
+
+    if(document.getElementById("gkmV325Overlay")) return;
+
+    const overlay = document.createElement("div");
+    overlay.id = "gkmV325Overlay";
+    overlay.innerHTML = `
+      <div class="gkmV325Top">
+        <div>
+          <div class="gkmV325Title">🌌 3D стена постеров V325</div>
+          <div class="gkmV325Sub">Без повторов: каждый постер уникальный. Наведение — увеличить и показать карточку. Клик — открыть отдельно.</div>
+        </div>
+        <div class="gkmV325Actions">
+          <button data-kind="all">Все</button>
+          <button data-kind="movies">Фильмы</button>
+          <button data-kind="series">Сериалы</button>
+          <button data-kind="anime">Аниме</button>
+          <button id="gkmV325AutoBtn">⏸ Авто</button>
+          <button id="gkmV325MixBtn">🔀 Микс</button>
+          <button id="gkmV325CloseBtn">✕</button>
+        </div>
+      </div>
+      <div id="gkmV325Scene"><div id="gkmV325World"></div></div>
+      <div id="gkmV325Preview"></div>
+      <div class="gkmV325Info"><b>Загрузка...</b><div class="meta">Собираю уникальные постеры.</div></div>
+      <div class="gkmV325Hint">Без дублей<br>наведение — карточка<br>клик — открыть</div>
+    `;
+    document.body.appendChild(overlay);
+
+    overlay.querySelectorAll("[data-kind]").forEach(btn=>{
+      btn.onclick = async () => {
+        uniqueItems = [];
+        wallBuilt = false;
+        hidePreview();
+        await loadWallItems(btn.dataset.kind);
+        buildWall(true);
+      };
+    });
+
+    document.getElementById("gkmV325CloseBtn").onclick = () => closeWall();
+    document.getElementById("gkmV325MixBtn").onclick = () => {
+      uniqueItems.sort(()=>Math.random()-.5);
+      buildWall(true);
+    };
+    document.getElementById("gkmV325AutoBtn").onclick = () => {
+      autoSpin = !autoSpin;
+      document.getElementById("gkmV325AutoBtn").textContent = autoSpin ? "⏸ Авто" : "▶ Авто";
+    };
+
+    const scene = document.getElementById("gkmV325Scene");
+    scene.addEventListener("pointerdown", e=>{
+      if(e.target.closest(".gkmV325Tile")) return;
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      scene.classList.add("drag");
+      try{ scene.setPointerCapture(e.pointerId); }catch(err){}
+    });
+    scene.addEventListener("pointermove", e=>{
+      if(!isDragging) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      startX = e.clientX;
+      startY = e.clientY;
+      targetRotY += dx * .18;
+      targetRotX = Math.max(-22, Math.min(22, targetRotX - dy * .10));
+    });
+    scene.addEventListener("pointerup", e=>{
+      isDragging = false;
+      scene.classList.remove("drag");
+      try{ scene.releasePointerCapture(e.pointerId); }catch(err){}
+    });
+    scene.addEventListener("wheel", e=>{
+      e.preventDefault();
+      targetZoom = Math.max(-180, Math.min(420, targetZoom + e.deltaY * -0.20));
+    }, {passive:false});
+
+    window.GKM_OPEN_3D_WALL = () => openWall("all");
+  }
+
+  function setInfo(it){
+    const box = document.querySelector(".gkmV325Info");
+    if(!box || !it) return;
+    const r = ratingOf(it);
+    box.innerHTML = `<b>${esc(titleOf(it))}</b><div class="meta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>`;
+  }
+
+  function showPreview(it, evt, tileEl){
+    const prev = document.getElementById("gkmV325Preview");
+    if(!prev || !it) return;
+
+    if(hoveredTile && hoveredTile !== tileEl){
+      hoveredTile.classList.remove("is-hover");
+      if(hoveredTile.dataset.baseTransform) hoveredTile.style.transform = hoveredTile.dataset.baseTransform;
+    }
+
+    hoveredTile = tileEl;
+    if(tileEl){
+      tileEl.classList.add("is-hover");
+      const base = tileEl.dataset.baseTransform || tileEl.style.transform;
+      tileEl.style.transform = base + " scale(2.25) translateZ(30px)";
+    }
+
+    const r = ratingOf(it);
+    const genres = genresOf(it).slice(0,4).join(" · ");
+
+    prev.innerHTML = `
+      <div class="gkmV325PreviewInner">
+        <img src="${esc(imgOf(it))}" alt="${esc(titleOf(it))}">
+        <div class="gkmV325PreviewText">
+          <h3>${esc(titleOf(it))}</h3>
+          <div class="gkmV325PreviewMeta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}${genres ? "<br>" + esc(genres) : ""}</div>
+          <div class="gkmV325PreviewDesc">${esc(overviewOf(it))}</div>
+          <div class="gkmV325PreviewActions"><button id="gkmV325OpenCardBtn">Открыть карточку</button></div>
+        </div>
+      </div>
+    `;
+    prev.classList.add("open");
+    setInfo(it);
+
+    if(window.innerWidth >= 700 && evt){
+      const rect = prev.getBoundingClientRect();
+      let x = evt.clientX + 22;
+      let y = evt.clientY - 18;
+      if(x + rect.width > window.innerWidth - 10) x = evt.clientX - rect.width - 22;
+      if(y + rect.height > window.innerHeight - 10) y = window.innerHeight - rect.height - 10;
+      if(y < 76) y = 76;
+      prev.style.left = x + "px";
+      prev.style.top = y + "px";
+      prev.style.right = "auto";
+      prev.style.bottom = "auto";
+    }
+
+    const btn = document.getElementById("gkmV325OpenCardBtn");
+    if(btn) btn.onclick = ev => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      openSiteCard(it);
+    };
+  }
+
+  function hidePreview(){
+    const prev = document.getElementById("gkmV325Preview");
+    if(prev) prev.classList.remove("open");
+    if(hoveredTile){
+      hoveredTile.classList.remove("is-hover");
+      if(hoveredTile.dataset.baseTransform) hoveredTile.style.transform = hoveredTile.dataset.baseTransform;
+    }
+    hoveredTile = null;
+  }
+
+  function tryOpenByKnownFunctions(it){
+    // Важно: openDetails в твоём app.js есть как обычная функция, поэтому eval нужен.
+    const names = ["openDetails","openTitleModal","showDetails","showModal","openCard","openMovie","openItemModal"];
+    for(const fn of names){
+      try{
+        const f = eval(fn);
+        if(typeof f === "function"){
+          f(it);
+          return true;
+        }
+      }catch(e){}
+      try{
+        if(typeof window[fn] === "function"){
+          window[fn](it);
+          return true;
+        }
+      }catch(e){}
+    }
+    return false;
+  }
+
+  function openSiteCard(it){
+    closeWall(false);
+    setTimeout(()=>{
+      if(!tryOpenByKnownFunctions(it)) alert(titleOf(it));
+    }, 100);
+  }
+
+  function applyWorld(){
+    const world = document.getElementById("gkmV325World");
+    if(world) world.style.transform = `translateZ(${zoom}px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  }
+
+  function animate(){
+    if(!isOpen) return;
+    rotX += (targetRotX - rotX) * .10;
+    rotY += (targetRotY - rotY) * .10;
+    zoom += (targetZoom - zoom) * .12;
+    if(autoSpin && !isDragging && !hoveredTile) targetRotY += .025;
+    applyWorld();
+    rafId = requestAnimationFrame(animate);
+  }
+
+  function buildWall(force=false){
+    const world = document.getElementById("gkmV325World");
+    if(!world) return;
+    world.innerHTML = "";
+    hidePreview();
+
+    if(!uniqueItems.length){
+      document.querySelector(".gkmV325Info").innerHTML = `<b>Постеры не найдены</b><div class="meta">Нет уникальных постеров для этого раздела.</div>`;
+      return;
+    }
+
+    const mobile = window.innerWidth < 700;
+    const cols = mobile ? 46 : 88;
+    const rows = Math.ceil(uniqueItems.length / cols);
+    const tileW = mobile ? 14 : 18;
+    const tileH = mobile ? 22 : 28;
+    const stepX = mobile ? 13.6 : 17.6;
+    const stepY = mobile ? 21.5 : 27.0;
+    const radius = mobile ? 370 : 800;
+    const arc = mobile ? 142 : 164;
+    const yShift = (rows - 1) * stepY * .5;
+
+    uniqueItems.forEach((it, i)=>{
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      const nx = cols <= 1 ? 0 : col / (cols - 1);
+      const ang = (-arc / 2 + nx * arc) * Math.PI / 180;
+      const x = Math.sin(ang) * radius;
+      const z = Math.cos(ang) * radius - radius;
+      const y = row * stepY - yShift;
+      const ry = -ang * 180 / Math.PI;
+
+      const tile = document.createElement("button");
+      tile.type = "button";
+      tile.className = "gkmV325Tile";
+      tile.style.width = tileW + "px";
+      tile.style.height = tileH + "px";
+      tile.style.marginLeft = (-tileW/2) + "px";
+      tile.style.marginTop = (-tileH/2) + "px";
+      tile.style.setProperty("--poster", `url("${safeUrl(imgOf(it))}")`);
+
+      const baseTransform = `translate3d(${x}px,${y}px,${z}px) rotateY(${ry}deg)`;
+      tile.dataset.baseTransform = baseTransform;
+      tile.style.transform = baseTransform;
+      tile.title = titleOf(it);
+
+      tile.addEventListener("mouseenter", e => showPreview(it, e, tile));
+      tile.addEventListener("mousemove", e => showPreview(it, e, tile));
+      tile.addEventListener("mouseleave", () => setTimeout(hidePreview, 45));
+      tile.addEventListener("click", e=>{
+        e.preventDefault();
+        e.stopPropagation();
+        openSiteCard(it);
+      });
+
+      world.appendChild(tile);
+    });
+
+    setInfo(uniqueItems[0]);
+    wallBuilt = true;
+    applyWorld();
+  }
+
+  async function openWall(kind="all"){
+    ensureCss();
+    ensureUi();
+    const overlay = document.getElementById("gkmV325Overlay");
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+    isOpen = true;
+
+    if(kind !== currentKind || !uniqueItems.length){
+      await loadWallItems(kind);
+    }
+
+    buildWall(true);
+
+    rotX = 2;
+    rotY = -12;
+    zoom = 95;
+    targetRotX = 2;
+    targetRotY = -12;
+    targetZoom = 95;
+
+    if(rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(animate);
+  }
+
+  function closeWall(full=true){
+    const overlay = document.getElementById("gkmV325Overlay");
+    if(overlay) overlay.classList.remove("open");
+    document.body.style.overflow = "";
+    hidePreview();
+    isOpen = false;
+    if(full && rafId){
+      cancelAnimationFrame(rafId);
+      rafId = 0;
+    }
+  }
+
+  function install(){
+    ensureCss();
+    ensureUi();
+  }
+
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true});
+  else install();
+
+  setTimeout(install, 500);
+  setTimeout(install, 1400);
+
+  console.log("GKM V325: unique connected poster wall installed");
+})();
+/* GKM V325 UNIQUE CONNECTED POSTER WALL END */
+
+
+/* GKM V326 LOCAL REGISTRATION WATCHED LIST START */
+(function(){
+  window.GKM_V326_LOCAL_REGISTRATION_WATCHED_LIST_VERSION = "v326-local-registration-watched-list-2026-07-11";
+
+  const STORE_KEY = "gkm_v326_local_profiles";
+  const CURRENT_KEY = "gkm_v326_current_profile";
+  const MAX_PER_SECTION = 800;
+
+  let lastDetailsItem = null;
+  let activeTab = "all";
+
+  function t(v){ return String(v == null ? "" : v).trim(); }
+  function norm(v){
+    return t(v).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function esc(v){
+    return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[ch]));
+  }
+
+  function titleOfV326(item){
+    try { if (typeof displayTitle === "function") return t(displayTitle(item)); } catch {}
+    return t(item && (item.ru || item.title_ru || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
+  }
+  function typeOfV326(item){
+    try { if (typeof getType === "function") return t(getType(item)); } catch {}
+    return t(item && (item.type || item.category || item.kind)) || "Каталог";
+  }
+  function yearOfV326(item){
+    try { if (typeof getYear === "function") return t(getYear(item)); } catch {}
+    const raw = t(item && (item.year || item.release_date || item.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+  function ratingOfV326(item){
+    try { if (typeof getRating === "function") return t(getRating(item)); } catch {}
+    return t(item && (item.rating || item.vote_average || item.score));
+  }
+  function posterOfV326(item){
+    return t(item && (
+      item.poster || item.poster_url || item.posterUrl ||
+      item.image || item.img || item.cover || item.cover_url ||
+      item.thumbnail || item.backdrop || item.backdrop_path
+    ));
+  }
+  function keyOfV326(item){
+    return t(item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug))
+      || `${norm(titleOfV326(item))}|${yearOfV326(item)}|${norm(typeOfV326(item))}`;
+  }
+  function sectionOf(item){
+    const tp = norm(typeOfV326(item));
+    if(tp.includes("аниме") || tp.includes("anime")) return "anime";
+    if(tp.includes("сериал") || tp.includes("series")) return "series";
+    if(tp.includes("мульт") || tp.includes("cartoon")) return "cartoons";
+    if(tp.includes("фильм") || tp.includes("movie")) return "movies";
+    return "other";
+  }
+  function sectionTitle(section){
+    return {
+      all:"Все",
+      movies:"Фильмы",
+      series:"Сериалы",
+      anime:"Аниме",
+      cartoons:"Мультфильмы",
+      other:"Другое"
+    }[section] || section;
+  }
+
+  function readStore(){
+    try {
+      const raw = JSON.parse(localStorage.getItem(STORE_KEY) || "{}");
+      if(!raw || typeof raw !== "object") return {profiles:{}};
+      if(!raw.profiles || typeof raw.profiles !== "object") raw.profiles = {};
+      return raw;
+    } catch {
+      return {profiles:{}};
+    }
+  }
+  function writeStore(store){
+    localStorage.setItem(STORE_KEY, JSON.stringify(store));
+  }
+  function currentName(){
+    return t(localStorage.getItem(CURRENT_KEY));
+  }
+  function makeProfile(name, pin){
+    return {
+      name,
+      pin: t(pin),
+      createdAt: Date.now(),
+      watched: {
+        movies: [],
+        series: [],
+        anime: [],
+        cartoons: [],
+        other: []
+      }
+    };
+  }
+  function getProfile(){
+    const name = currentName();
+    if(!name) return null;
+    const store = readStore();
+    return store.profiles[name] || null;
+  }
+  function saveProfile(profile){
+    const store = readStore();
+    store.profiles[profile.name] = profile;
+    writeStore(store);
+    localStorage.setItem(CURRENT_KEY, profile.name);
+  }
+  function ensureProfileLists(profile){
+    if(!profile.watched || typeof profile.watched !== "object") profile.watched = {};
+    ["movies","series","anime","cartoons","other"].forEach(k=>{
+      if(!Array.isArray(profile.watched[k])) profile.watched[k] = [];
+    });
+    return profile;
+  }
+
+  function snapshot(item){
+    // Храним достаточно данных, чтобы список не пропадал после обновления
+    // и карточку можно было открыть даже после перезагрузки страницы.
+    return {
+      _gkmV326Snapshot: true,
+      addedAt: Date.now(),
+      key: keyOfV326(item),
+      id: item && item.id,
+      kinopoiskId: item && item.kinopoiskId,
+      tmdbId: item && item.tmdbId,
+      mal_id: item && item.mal_id,
+      ru: titleOfV326(item),
+      title: item && (item.title || item.name || item.en || item.original_title || item.original_name),
+      type: typeOfV326(item),
+      year: yearOfV326(item),
+      rating: ratingOfV326(item),
+      poster: posterOfV326(item),
+      genres: (() => {
+        try {
+          if(typeof getGenres === "function") {
+            const g = getGenres(item);
+            if(Array.isArray(g)) return g.slice(0, 8);
+          }
+        } catch {}
+        return item && item.genres ? item.genres : [];
+      })(),
+      overview: (() => {
+        try { if(typeof displayOverview === "function") return displayOverview(item); } catch {}
+        return item && (item.overview || item.description || item.synopsis || item.plot) || "";
+      })(),
+      source: item && item.source,
+      raw: item
+    };
+  }
+
+  function isWatched(item){
+    const profile = getProfile();
+    if(!profile || !item) return false;
+    ensureProfileLists(profile);
+    const sec = sectionOf(item);
+    const key = keyOfV326(item);
+    return profile.watched[sec].some(x => String(x.key) === String(key));
+  }
+
+  function addWatched(item){
+    const profile = getProfile();
+    if(!profile) {
+      openProfilePanel();
+      showV326Toast("Сначала создай локальный профиль.");
+      return false;
+    }
+
+    ensureProfileLists(profile);
+    const sec = sectionOf(item);
+    const key = keyOfV326(item);
+    profile.watched[sec] = profile.watched[sec].filter(x => String(x.key) !== String(key));
+    profile.watched[sec].unshift(snapshot(item));
+    profile.watched[sec] = profile.watched[sec].slice(0, MAX_PER_SECTION);
+    saveProfile(profile);
+    showV326Toast(`Добавлено в «Я смотрел»: ${titleOfV326(item)}`);
+    renderProfilePanel();
+    updateWatchButton(item);
+    return true;
+  }
+
+  function removeWatched(item){
+    const profile = getProfile();
+    if(!profile || !item) return false;
+    ensureProfileLists(profile);
+    const sec = sectionOf(item);
+    const key = keyOfV326(item);
+    profile.watched[sec] = profile.watched[sec].filter(x => String(x.key) !== String(key));
+    saveProfile(profile);
+    showV326Toast(`Удалено из «Я смотрел»: ${titleOfV326(item)}`);
+    renderProfilePanel();
+    updateWatchButton(item);
+    return true;
+  }
+
+  function toggleWatched(item){
+    if(isWatched(item)) return removeWatched(item);
+    return addWatched(item);
+  }
+
+  function allWatched(profile){
+    ensureProfileLists(profile);
+    return ["movies","series","anime","cartoons","other"].flatMap(k => profile.watched[k].map(x => ({...x, _section:k})));
+  }
+
+  function ensureCss(){
+    if(document.getElementById("gkmV326Css")) return;
+    const css = document.createElement("style");
+    css.id = "gkmV326Css";
+    css.textContent = `
+      #gkmV326ProfileBtn{
+        position:fixed;
+        right:18px;
+        bottom:148px;
+        z-index:99996;
+        border:1px solid rgba(0,220,255,.45);
+        background:linear-gradient(135deg,rgba(64,35,170,.98),rgba(0,150,255,.94));
+        color:#fff;
+        border-radius:18px;
+        padding:12px 16px;
+        font-weight:900;
+        cursor:pointer;
+        box-shadow:0 0 24px rgba(0,180,255,.32),0 10px 28px rgba(0,0,0,.34);
+      }
+      #gkmV326ProfileBtn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+      #gkmV326Panel{
+        position:fixed;
+        inset:0;
+        z-index:99999;
+        display:none;
+        background:rgba(2,5,15,.72);
+        color:#fff;
+        backdrop-filter:blur(8px);
+      }
+      #gkmV326Panel.open{display:block}
+      .gkmV326Box{
+        position:absolute;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%);
+        width:min(980px,calc(100vw - 28px));
+        max-height:min(820px,calc(100vh - 28px));
+        overflow:auto;
+        background:
+          radial-gradient(circle at 15% 5%,rgba(0,180,255,.18),transparent 35%),
+          linear-gradient(135deg,rgba(7,16,40,.98),rgba(12,20,56,.96));
+        border:1px solid rgba(0,220,255,.34);
+        border-radius:24px;
+        box-shadow:0 0 55px rgba(0,170,255,.25),0 22px 90px rgba(0,0,0,.72);
+        padding:20px;
+      }
+      .gkmV326Head{
+        display:flex;
+        justify-content:space-between;
+        gap:12px;
+        align-items:flex-start;
+        margin-bottom:16px;
+      }
+      .gkmV326Title{
+        font-size:24px;
+        font-weight:950;
+        text-shadow:0 0 18px rgba(0,180,255,.44);
+      }
+      .gkmV326Sub{
+        margin-top:4px;
+        font-size:13px;
+        color:rgba(255,255,255,.75);
+      }
+      .gkmV326Close{
+        border:1px solid rgba(0,220,255,.34);
+        background:linear-gradient(135deg,rgba(64,35,170,.95),rgba(0,150,255,.9));
+        color:#fff;
+        border-radius:14px;
+        padding:10px 14px;
+        font-weight:900;
+        cursor:pointer;
+      }
+      .gkmV326Login{
+        display:grid;
+        gap:12px;
+        max-width:460px;
+      }
+      .gkmV326Login input{
+        width:100%;
+        box-sizing:border-box;
+        border:1px solid rgba(0,220,255,.3);
+        background:#061022;
+        color:#fff;
+        border-radius:14px;
+        padding:13px 14px;
+        font-size:15px;
+        outline:none;
+      }
+      .gkmV326Actions, .gkmV326Tabs{
+        display:flex;
+        flex-wrap:wrap;
+        gap:9px;
+        margin:12px 0;
+      }
+      .gkmV326Actions button,
+      .gkmV326Tabs button,
+      .gkmV326Item button,
+      #gkmV326WatchBtn{
+        border:1px solid rgba(0,220,255,.34);
+        background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.86));
+        color:#fff;
+        border-radius:14px;
+        padding:10px 13px;
+        font-weight:850;
+        cursor:pointer;
+        box-shadow:0 0 14px rgba(0,170,255,.14);
+      }
+      .gkmV326Tabs button.active{
+        background:linear-gradient(135deg,rgba(0,160,255,.98),rgba(81,39,190,.98));
+        box-shadow:0 0 22px rgba(0,170,255,.36);
+      }
+      .gkmV326Stats{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+        gap:10px;
+        margin:12px 0 14px;
+      }
+      .gkmV326Stat{
+        border:1px solid rgba(0,220,255,.22);
+        background:rgba(7,18,40,.76);
+        border-radius:16px;
+        padding:12px;
+      }
+      .gkmV326Stat b{display:block;font-size:22px;margin-bottom:3px}
+      .gkmV326Stat span{color:rgba(255,255,255,.72);font-size:13px}
+      .gkmV326Grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+        gap:12px;
+      }
+      .gkmV326Item{
+        display:grid;
+        grid-template-columns:72px 1fr;
+        gap:12px;
+        border:1px solid rgba(0,220,255,.22);
+        background:rgba(7,18,40,.72);
+        border-radius:18px;
+        padding:10px;
+        min-height:112px;
+      }
+      .gkmV326Item img{
+        width:72px;
+        height:104px;
+        object-fit:cover;
+        border-radius:12px;
+        background:#091326;
+      }
+      .gkmV326Item h4{
+        margin:0 0 6px;
+        font-size:16px;
+        line-height:1.15;
+      }
+      .gkmV326Meta{
+        color:rgba(255,255,255,.72);
+        font-size:12px;
+        margin-bottom:8px;
+      }
+      .gkmV326ItemActions{
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
+        margin-top:8px;
+      }
+      .gkmV326Empty{
+        border:1px dashed rgba(0,220,255,.25);
+        color:rgba(255,255,255,.72);
+        border-radius:18px;
+        padding:20px;
+        text-align:center;
+      }
+      #gkmV326Toast{
+        position:fixed;
+        left:50%;
+        bottom:24px;
+        transform:translateX(-50%);
+        z-index:100000;
+        display:none;
+        max-width:min(640px,calc(100vw - 30px));
+        background:rgba(7,18,40,.94);
+        border:1px solid rgba(0,220,255,.34);
+        color:#fff;
+        padding:12px 16px;
+        border-radius:16px;
+        box-shadow:0 0 30px rgba(0,170,255,.26);
+        font-weight:800;
+      }
+      #gkmV326Toast.show{display:block}
+      #gkmV326WatchBtn.watched{
+        background:linear-gradient(135deg,rgba(0,160,100,.95),rgba(0,150,255,.86));
+      }
+      @media(max-width:700px){
+        #gkmV326ProfileBtn{
+          right:14px;
+          bottom:136px;
+          padding:11px 13px;
+        }
+        .gkmV326Box{
+          width:calc(100vw - 18px);
+          max-height:calc(100vh - 18px);
+          padding:14px;
+        }
+        .gkmV326Title{font-size:20px}
+        .gkmV326Grid{grid-template-columns:1fr}
+      }
+    `;
+    document.head.appendChild(css);
+  }
+
+  function ensureUi(){
+    if(!document.getElementById("gkmV326ProfileBtn")){
+      const btn = document.createElement("button");
+      btn.id = "gkmV326ProfileBtn";
+      btn.type = "button";
+      btn.textContent = "👤 Мой список";
+      btn.onclick = openProfilePanel;
+      document.body.appendChild(btn);
+    }
+
+    if(!document.getElementById("gkmV326Panel")){
+      const panel = document.createElement("div");
+      panel.id = "gkmV326Panel";
+      panel.innerHTML = `<div class="gkmV326Box" id="gkmV326Box"></div>`;
+      document.body.appendChild(panel);
+      panel.addEventListener("click", e => {
+        if(e.target === panel) closeProfilePanel();
+      });
+    }
+
+    if(!document.getElementById("gkmV326Toast")){
+      const toast = document.createElement("div");
+      toast.id = "gkmV326Toast";
+      document.body.appendChild(toast);
+    }
+
+    renderProfilePanel();
+  }
+
+  function showV326Toast(text){
+    const toast = document.getElementById("gkmV326Toast");
+    if(!toast) return;
+    toast.textContent = text;
+    toast.classList.add("show");
+    clearTimeout(showV326Toast._timer);
+    showV326Toast._timer = setTimeout(()=>toast.classList.remove("show"), 2400);
+  }
+
+  function openProfilePanel(){
+    ensureCss();
+    ensureUi();
+    renderProfilePanel();
+    const p = document.getElementById("gkmV326Panel");
+    if(p) p.classList.add("open");
+  }
+  function closeProfilePanel(){
+    const p = document.getElementById("gkmV326Panel");
+    if(p) p.classList.remove("open");
+  }
+
+  function loginOrRegister(mode){
+    const nameInput = document.getElementById("gkmV326NameInput");
+    const pinInput = document.getElementById("gkmV326PinInput");
+    const name = t(nameInput && nameInput.value).replace(/[^\p{L}\p{N}_\- ]/gu,"").slice(0,32);
+    const pin = t(pinInput && pinInput.value).slice(0,32);
+
+    if(!name){
+      showV326Toast("Введи ник профиля.");
+      return;
+    }
+
+    const store = readStore();
+    const exists = !!store.profiles[name];
+
+    if(mode === "register"){
+      if(exists){
+        showV326Toast("Такой профиль уже есть. Нажми «Войти».");
+        return;
+      }
+      const profile = makeProfile(name, pin);
+      store.profiles[name] = profile;
+      writeStore(store);
+      localStorage.setItem(CURRENT_KEY, name);
+      showV326Toast(`Профиль создан: ${name}`);
+      renderProfilePanel();
+      return;
+    }
+
+    if(!exists){
+      showV326Toast("Профиля нет. Нажми «Создать профиль».");
+      return;
+    }
+
+    const profile = store.profiles[name];
+    if(t(profile.pin) && t(profile.pin) !== pin){
+      showV326Toast("PIN не подходит.");
+      return;
+    }
+
+    localStorage.setItem(CURRENT_KEY, name);
+    showV326Toast(`Вошёл в профиль: ${name}`);
+    renderProfilePanel();
+  }
+
+  function logout(){
+    localStorage.removeItem(CURRENT_KEY);
+    showV326Toast("Вышел из профиля.");
+    renderProfilePanel();
+    updateWatchButton(lastDetailsItem);
+  }
+
+  function deleteProfile(){
+    const profile = getProfile();
+    if(!profile) return;
+    if(!confirm(`Удалить локальный профиль «${profile.name}» и весь список?`)) return;
+    const store = readStore();
+    delete store.profiles[profile.name];
+    writeStore(store);
+    localStorage.removeItem(CURRENT_KEY);
+    showV326Toast("Профиль удалён.");
+    renderProfilePanel();
+    updateWatchButton(lastDetailsItem);
+  }
+
+  function renderProfilePanel(){
+    const box = document.getElementById("gkmV326Box");
+    if(!box) return;
+
+    const profile = getProfile();
+
+    if(!profile){
+      box.innerHTML = `
+        <div class="gkmV326Head">
+          <div>
+            <div class="gkmV326Title">👤 Локальная регистрация</div>
+            <div class="gkmV326Sub">
+              Это профиль внутри браузера. Он нужен, чтобы список «Я смотрел» не обнулялся после обновления страницы.
+              На другом устройстве без сервера он не появится.
+            </div>
+          </div>
+          <button class="gkmV326Close" id="gkmV326ClosePanel">✕</button>
+        </div>
+
+        <div class="gkmV326Login">
+          <input id="gkmV326NameInput" placeholder="Ник профиля, например Sasha" autocomplete="username">
+          <input id="gkmV326PinInput" placeholder="PIN необязательно" autocomplete="current-password">
+          <div class="gkmV326Actions">
+            <button id="gkmV326RegisterBtn">Создать профиль</button>
+            <button id="gkmV326LoginBtn">Войти</button>
+          </div>
+        </div>
+      `;
+      document.getElementById("gkmV326ClosePanel").onclick = closeProfilePanel;
+      document.getElementById("gkmV326RegisterBtn").onclick = () => loginOrRegister("register");
+      document.getElementById("gkmV326LoginBtn").onclick = () => loginOrRegister("login");
+      return;
+    }
+
+    ensureProfileLists(profile);
+
+    const counts = {
+      movies: profile.watched.movies.length,
+      series: profile.watched.series.length,
+      anime: profile.watched.anime.length,
+      cartoons: profile.watched.cartoons.length,
+      other: profile.watched.other.length,
+    };
+    const total = Object.values(counts).reduce((a,b)=>a+b,0);
+
+    const sections = ["all","movies","series","anime","cartoons","other"];
+    const items = activeTab === "all" ? allWatched(profile) : profile.watched[activeTab].map(x => ({...x, _section:activeTab}));
+
+    box.innerHTML = `
+      <div class="gkmV326Head">
+        <div>
+          <div class="gkmV326Title">👤 ${esc(profile.name)} · Я смотрел</div>
+          <div class="gkmV326Sub">Список хранится локально в браузере и не пропадает после обновления страницы.</div>
+        </div>
+        <button class="gkmV326Close" id="gkmV326ClosePanel">✕</button>
+      </div>
+
+      <div class="gkmV326Stats">
+        <div class="gkmV326Stat"><b>${total}</b><span>Всего</span></div>
+        <div class="gkmV326Stat"><b>${counts.movies}</b><span>Фильмы</span></div>
+        <div class="gkmV326Stat"><b>${counts.series}</b><span>Сериалы</span></div>
+        <div class="gkmV326Stat"><b>${counts.anime}</b><span>Аниме</span></div>
+        <div class="gkmV326Stat"><b>${counts.cartoons}</b><span>Мультфильмы</span></div>
+      </div>
+
+      <div class="gkmV326Tabs">
+        ${sections.map(s => `<button data-tab="${s}" class="${activeTab===s?"active":""}">${sectionTitle(s)}</button>`).join("")}
+      </div>
+
+      <div class="gkmV326Actions">
+        <button id="gkmV326LogoutBtn">Выйти</button>
+        <button id="gkmV326DeleteProfileBtn">Удалить профиль</button>
+      </div>
+
+      <div class="gkmV326Grid">
+        ${items.length ? items.map(renderWatchedItem).join("") : `<div class="gkmV326Empty">Пока пусто. Открой карточку фильма/аниме/сериала и нажми «✅ Я смотрел».</div>`}
+      </div>
+    `;
+
+    document.getElementById("gkmV326ClosePanel").onclick = closeProfilePanel;
+    document.getElementById("gkmV326LogoutBtn").onclick = logout;
+    document.getElementById("gkmV326DeleteProfileBtn").onclick = deleteProfile;
+
+    box.querySelectorAll("[data-tab]").forEach(btn=>{
+      btn.onclick = () => {
+        activeTab = btn.dataset.tab;
+        renderProfilePanel();
+      };
+    });
+
+    box.querySelectorAll("[data-open-key]").forEach(btn=>{
+      btn.onclick = () => {
+        const sec = btn.dataset.section;
+        const key = btn.dataset.openKey;
+        const p = getProfile();
+        if(!p) return;
+        const list = ensureProfileLists(p).watched[sec] || [];
+        const item = list.find(x => String(x.key) === String(key));
+        if(item) openSavedItem(item);
+      };
+    });
+
+    box.querySelectorAll("[data-remove-key]").forEach(btn=>{
+      btn.onclick = () => {
+        const sec = btn.dataset.section;
+        const key = btn.dataset.removeKey;
+        const p = getProfile();
+        if(!p) return;
+        ensureProfileLists(p);
+        p.watched[sec] = p.watched[sec].filter(x => String(x.key) !== String(key));
+        saveProfile(p);
+        renderProfilePanel();
+        updateWatchButton(lastDetailsItem);
+      };
+    });
+  }
+
+  function renderWatchedItem(item){
+    const img = item.poster || posterOfV326(item.raw || item);
+    const title = item.ru || titleOfV326(item.raw || item);
+    const meta = `${sectionTitle(item._section)}${item.year ? " · " + item.year : ""}${item.rating ? " · ★ " + item.rating : ""}`;
+    return `
+      <div class="gkmV326Item">
+        <img src="${esc(img)}" alt="">
+        <div>
+          <h4>${esc(title)}</h4>
+          <div class="gkmV326Meta">${esc(meta)}</div>
+          <div class="gkmV326ItemActions">
+            <button data-open-key="${esc(item.key)}" data-section="${esc(item._section)}">Открыть</button>
+            <button data-remove-key="${esc(item.key)}" data-section="${esc(item._section)}">Удалить</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function openSavedItem(item){
+    closeProfilePanel();
+    const data = item.raw || item;
+    setTimeout(()=>{
+      try { if(typeof openDetails === "function") { openDetails(data); return; } } catch {}
+      try { if(typeof openTitleModal === "function") { openTitleModal(data); return; } } catch {}
+      try { if(typeof showDetails === "function") { showDetails(data); return; } } catch {}
+      try { if(typeof window.openDetails === "function") { window.openDetails(data); return; } } catch {}
+      alert(titleOfV326(data));
+    }, 80);
+  }
+
+  function ensureWatchButton(item){
+    const favBtn = document.getElementById("favBtn");
+    const holder = favBtn ? favBtn.parentElement : document.querySelector("#detailsDialog .detail-buttons");
+    if(!holder) return;
+
+    let btn = document.getElementById("gkmV326WatchBtn");
+    if(!btn){
+      btn = document.createElement("button");
+      btn.id = "gkmV326WatchBtn";
+      btn.type = "button";
+      if(favBtn && favBtn.nextSibling) holder.insertBefore(btn, favBtn.nextSibling);
+      else holder.insertBefore(btn, holder.firstChild);
+    }
+
+    btn.onclick = () => {
+      if(!lastDetailsItem && item) lastDetailsItem = item;
+      if(lastDetailsItem) toggleWatched(lastDetailsItem);
+      else showV326Toast("Сначала открой карточку.");
+    };
+
+    updateWatchButton(item || lastDetailsItem);
+  }
+
+  function updateWatchButton(item){
+    const btn = document.getElementById("gkmV326WatchBtn");
+    if(!btn) return;
+
+    const profile = getProfile();
+    if(!profile){
+      btn.textContent = "👤 Войти, чтобы сохранить";
+      btn.classList.remove("watched");
+      return;
+    }
+
+    if(item && isWatched(item)){
+      btn.textContent = "✅ Уже смотрел";
+      btn.classList.add("watched");
+    } else {
+      btn.textContent = "✅ Я смотрел";
+      btn.classList.remove("watched");
+    }
+  }
+
+  function patchOpenDetails(){
+    try {
+      if(window.GKM_V326_OPEN_DETAILS_PATCHED === "1") return;
+      if(typeof openDetails !== "function") return;
+
+      const old = openDetails;
+      openDetails = function gkmV326OpenDetails(item){
+        lastDetailsItem = item;
+        const res = old.apply(this, arguments);
+        setTimeout(()=> {
+          ensureWatchButton(item);
+          updateWatchButton(item);
+        }, 0);
+        return res;
+      };
+      window.GKM_V326_OPEN_DETAILS_PATCHED = "1";
+    } catch {}
+  }
+
+  function observeDialog(){
+    const dialog = document.getElementById("detailsDialog");
+    if(!dialog || dialog.dataset.gkmV326Observed === "1") return;
+    dialog.dataset.gkmV326Observed = "1";
+    const obs = new MutationObserver(()=> {
+      if(dialog.open || dialog.hasAttribute("open")){
+        setTimeout(()=>ensureWatchButton(lastDetailsItem), 0);
+      }
+    });
+    obs.observe(dialog, {attributes:true, attributeFilter:["open"]});
+  }
+
+  function install(){
+    ensureCss();
+    ensureUi();
+    patchOpenDetails();
+    observeDialog();
+    ensureWatchButton(lastDetailsItem);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", install, {once:true});
+  } else {
+    install();
+  }
+
+  setTimeout(install, 500);
+  setTimeout(install, 1500);
+  setTimeout(install, 3000);
+
+  console.log("GKM V326: local registration watched list installed");
+})();
+/* GKM V326 LOCAL REGISTRATION WATCHED LIST END */
+
