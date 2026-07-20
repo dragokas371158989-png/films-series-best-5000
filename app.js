@@ -14088,14 +14088,564 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V329 COLLAPSED FRANCHISE CATALOG END */
 
 
-/* GKM V332 CANVAS POSTER MOSAIC START */
+
+
+/* GKM V333 STRONG COLLECTIONS COLOR FIX START */
 (function(){
-  window.GKM_V332_CANVAS_POSTER_MOSAIC_VERSION = "v332-canvas-poster-mosaic-restore-2026-07-11";
+  window.GKM_V333_STRONG_COLLECTIONS_COLOR_FIX_VERSION = "v333-strong-collections-color-fix-2026-07-11";
+
+  function t(v){ return String(v == null ? "" : v).trim(); }
+  function n(v){
+    return t(v).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function esc(v){
+    return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[ch]));
+  }
+
+  function rawTitle(item){
+    return [
+      item && item.ru,
+      item && item.title_ru,
+      item && item.__manualTopTitle,
+      item && item.en,
+      item && item.title,
+      item && item.name,
+      item && item.original_title,
+      item && item.original_name,
+      item && Array.isArray(item.aliases) ? item.aliases.join(" ") : ""
+    ].filter(Boolean).join(" ");
+  }
+  function titleOfV333(item){
+    try { if(typeof displayTitle === "function") return t(displayTitle(item)); } catch {}
+    return t(item && (item.ru || item.title_ru || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
+  }
+  function typeOfV333(item){
+    try { if(typeof getType === "function") return t(getType(item)); } catch {}
+    return t(item && (item.type || item.category || item.kind)) || "Каталог";
+  }
+  function yearOfV333(item){
+    try { if(typeof getYear === "function") return t(getYear(item)); } catch {}
+    const raw = t(item && (item.year || item.release_date || item.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+  function ratingOfV333(item){
+    try { if(typeof getRating === "function") return Number(getRating(item) || 0); } catch {}
+    return Number(item && (item.rating || item.vote_average || item.score) || 0);
+  }
+  function votesOfV333(item){
+    try { if(typeof getVotes === "function") return Number(getVotes(item) || 0); } catch {}
+    return Number(item && (item.votes || item.vote_count || item.scored_by) || 0);
+  }
+  function posterOfV333(item){
+    try { if(typeof posterSrc === "function") return t(posterSrc(item)); } catch {}
+    return t(item && (item.poster || item.poster_url || item.posterUrl || item.image || item.img || item.cover || item.cover_url || item.thumbnail || item.backdrop || item.backdrop_path));
+  }
+  function genresOfV333(item){
+    try {
+      if(typeof getGenres === "function") {
+        const g = getGenres(item);
+        if(Array.isArray(g)) return g.filter(Boolean).map(String);
+      }
+    } catch {}
+    const raw = item && (item.genres || item.genre || item.tags);
+    if(Array.isArray(raw)) return raw.filter(Boolean).map(String);
+    if(typeof raw === "string") return raw.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
+    return [];
+  }
+  function hasPosterV333(item){
+    return !!posterOfV333(item);
+  }
+  function itemId(item){
+    return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOfV333(item)}|${yearOfV333(item)}`);
+  }
+  function familyType(item){
+    const s = n(typeOfV333(item) || item?.type || item?.category || "");
+    if(s.includes("аниме") || s.includes("anime")) return "anime";
+    if(s.includes("сериал") || s.includes("series")) return "series";
+    if(s.includes("мульт") || s.includes("cartoon")) return "cartoon";
+    if(s.includes("фильм") || s.includes("movie")) return "movie";
+    return "other";
+  }
+
+  // Расширенный список франшиз. Главное: добавил "Стражи Галактики" и усилил фильмы.
+  const RULES = [
+    ["guardians-galaxy", "Стражи Галактики", ["стражи галактики","guardians of the galaxy","guardians galaxy"]],
+    ["thor", "Тор", ["тор рагнарек","тор любовь и гром","тор темный мир","тор тёмный мир","thor ragnarok","thor love and thunder","thor the dark world"]],
+    ["iron-man", "Железный человек", ["железный человек","iron man"]],
+    ["captain-america", "Первый мститель", ["первый мститель","капитан америка","captain america"]],
+    ["doctor-strange", "Доктор Стрэндж", ["доктор стрэндж","доктор страндж","doctor strange"]],
+    ["black-panther", "Чёрная Пантера", ["черная пантера","чёрная пантера","black panther"]],
+    ["ant-man", "Человек-муравей", ["человек муравей","человек-муравей","ant man","ant-man"]],
+    ["venom", "Веном", ["веном","venom"]],
+    ["spider-man", "Человек-паук", ["человек паук","человек-паук","spider man","spiderman"]],
+    ["avengers", "Мстители", ["мстители","avengers"]],
+    ["x-men", "Люди Икс", ["люди икс","x men","x-men","росомаха","wolverine","logan"]],
+    ["deadpool", "Дэдпул", ["дэдпул","дедпул","deadpool"]],
+    ["fantastic-four", "Фантастическая четвёрка", ["фантастическая четверка","фантастическая четвёрка","fantastic four"]],
+
+    ["sherlock-holmes", "Шерлок Холмс", ["шерлок холмс","sherlock holmes"]],
+    ["home-alone", "Один дома", ["один дома","home alone"]],
+    ["pirates-caribbean", "Пираты Карибского моря", ["пираты карибского моря","pirates of the caribbean"]],
+    ["hobbit", "Хоббит", ["хоббит","hobbit"]],
+    ["lord-of-the-rings", "Властелин колец", ["властелин колец","lord of the rings"]],
+    ["harry-potter", "Гарри Поттер", ["гарри поттер","harry potter"]],
+    ["fantastic-beasts", "Фантастические твари", ["фантастические твари","fantastic beasts"]],
+    ["matrix", "Матрица", ["матрица","matrix"]],
+    ["men-in-black", "Люди в чёрном", ["люди в черном","люди в чёрном","men in black"]],
+    ["john-wick", "Джон Уик", ["джон уик","john wick"]],
+    ["fast-furious", "Форсаж", ["форсаж","fast furious","fast and furious"]],
+    ["star-wars", "Звёздные войны", ["звездные войны","звёздные войны","star wars"]],
+    ["star-trek", "Звёздный путь", ["звездный путь","звёздный путь","star trek"]],
+    ["terminator", "Терминатор", ["терминатор","terminator"]],
+    ["alien", "Чужой", ["чужой","alien"]],
+    ["predator", "Хищник", ["хищник","predator"]],
+    ["saw", "Пила", ["пила","saw"]],
+    ["scream", "Крик", ["крик","scream"]],
+    ["conjuring", "Заклятие", ["заклятие","conjuring","annabelle","аннабель","монахиня","nun"]],
+    ["insidious", "Астрал", ["астрал","insidious"]],
+    ["avatar", "Аватар", ["аватар","avatar"]],
+    ["jurassic", "Парк / Мир Юрского периода", ["парк юрского периода","мир юрского периода","jurassic park","jurassic world"]],
+    ["mission-impossible", "Миссия невыполнима", ["миссия невыполнима","mission impossible"]],
+    ["transformers", "Трансформеры", ["трансформеры","transformers"]],
+    ["godzilla", "Годзилла", ["годзилла","godzilla"]],
+    ["king-kong", "Кинг-Конг", ["кинг конг","king kong"]],
+    ["hunger-games", "Голодные игры", ["голодные игры","hunger games"]],
+    ["maze-runner", "Бегущий в лабиринте", ["бегущий в лабиринте","maze runner"]],
+    ["divergent", "Дивергент", ["дивергент","divergent"]],
+    ["twilight", "Сумерки", ["сумерки","twilight"]],
+    ["narnia", "Хроники Нарнии", ["хроники нарнии","narnia"]],
+    ["planet-apes", "Планета обезьян", ["планета обезьян","planet of the apes"]],
+    ["mad-max", "Безумный Макс", ["безумный макс","mad max"]],
+    ["rocky", "Рокки", ["рокки","rocky","creed","крид"]],
+    ["rambo", "Рэмбо", ["рэмбо","rambo"]],
+    ["jumanji", "Джуманджи", ["джуманджи","jumanji"]],
+    ["national-treasure", "Сокровище нации", ["сокровище нации","national treasure"]],
+
+    ["shrek", "Шрек", ["шрек","shrek"]],
+    ["ice-age", "Ледниковый период", ["ледниковый период","ice age"]],
+    ["madagascar", "Мадагаскар", ["мадагаскар","madagascar"]],
+    ["kung-fu-panda", "Кунг-фу Панда", ["кунг фу панда","кунг-фу панда","kung fu panda"]],
+    ["how-to-train-dragon", "Как приручить дракона", ["как приручить дракона","how to train your dragon"]],
+    ["toy-story", "История игрушек", ["история игрушек","toy story"]],
+    ["cars", "Тачки", ["тачки","cars"]],
+    ["despicable-me", "Гадкий я / Миньоны", ["гадкий я","minions","миньоны","despicable me"]],
+    ["hotel-transylvania", "Монстры на каникулах", ["монстры на каникулах","hotel transylvania"]],
+    ["boss-baby", "Босс-молокосос", ["босс молокосос","босс-молокосос","boss baby"]],
+
+    ["attack-on-titan", "Атака титанов", ["атака титанов","shingeki no kyojin","attack on titan"]],
+    ["naruto", "Наруто", ["наруто","naruto","shippuden","shippuuden","疾風伝","boruto"]],
+    ["bleach", "Блич", ["блич","bleach","sennen kessen","thousand year blood","tybw"]],
+    ["one-piece", "Ван-Пис", ["ван пис","ванпис","one piece"]],
+    ["fullmetal-alchemist", "Стальной алхимик", ["стальной алхимик","fullmetal alchemist","hagane no renkinjutsushi"]],
+    ["tokyo-ghoul", "Токийский гуль", ["токийский гуль","tokyo ghoul"]],
+    ["dragon-ball", "Драконий жемчуг", ["драконий жемчуг","dragon ball"]],
+    ["gintama", "Гинтама", ["гинтама","gintama"]],
+    ["hunter-x-hunter", "Охотник x Охотник", ["hunter x hunter","охотник х охотник","охотник hunter"]],
+    ["my-hero-academia", "Моя геройская академия", ["моя геройская академия","my hero academia","boku no hero academia"]],
+    ["one-punch-man", "Ванпанчмен", ["ванпанчмен","one punch man"]],
+    ["jojo", "ДжоДжо", ["джоджо","jojo","jojo s bizarre"]],
+    ["fate", "Fate", ["fate stay","fate zero","судьба ночь","судьба начало","fate grand order"]],
+    ["detective-conan", "Детектив Конан", ["детектив конан","detective conan","meitantei conan"]],
+    ["sword-art-online", "Мастера меча онлайн", ["мастера меча онлайн","sword art online"]],
+    ["demon-slayer", "Истребитель демонов", ["истребитель демонов","kimetsu no yaiba","demon slayer"]],
+    ["jujutsu-kaisen", "Магическая битва", ["магическая битва","jujutsu kaisen"]],
+    ["black-clover", "Чёрный клевер", ["черный клевер","чёрный клевер","black clover"]],
+    ["code-geass", "Код Гиас", ["код гиас","code geass"]],
+    ["evangelion", "Евангелион", ["евангелион","evangelion"]],
+    ["ghost-in-shell", "Призрак в доспехах", ["призрак в доспехах","ghost in the shell"]],
+    ["berserk", "Берсерк", ["берсерк","berserk"]],
+    ["made-in-abyss", "Созданный в бездне", ["созданный в бездне","made in abyss"]],
+    ["re-zero", "Re:Zero", ["re zero","rezero","жизнь с нуля","re starting life"]],
+    ["monogatari", "Monogatari", ["monogatari","bakemonogatari"]],
+    ["mob-psycho", "Моб Психо 100", ["mob psycho","моб психо"]],
+    ["haikyuu", "Волейбол!!", ["haikyuu","волейбол"]],
+    ["overlord", "Overlord", ["overlord","владыка"]],
+    ["konosuba", "Konosuba", ["konosuba","kono subarashii"]],
+    ["vinland-saga", "Сага о Винланде", ["сага о винланде","vinland saga"]],
+    ["initial-d", "Initial D", ["initial d","инициал ди"]],
+    ["solo-leveling", "Поднятие уровня в одиночку", ["solo leveling","поднятие уровня в одиночку"]],
+    ["frieren", "Фрирен", ["frieren","фрирен"]],
+    ["slam-dunk", "Слэм-данк", ["slam dunk","слэм данк"]]
+  ];
+
+  const STOP_WORDS = new Set([
+    "the","and","или","это","как","мой","моя","мое","моё","наш","наша","для","при","под","над","год","года",
+    "фильм","movie","season","сезон","часть","part","final","финал","special","спешл","ova","ona","tv",
+    "глава","chapter","эпизод","episode","история","новый","новая","новое"
+  ]);
+
+  function stripCollectionNoise(s){
+    return n(s)
+      .replace(/\b(the|a|an)\b/g, " ")
+      .replace(/\b(season|сезон|part|часть|movie|фильм|ova|ona|special|спешл|tv|final|финал|arc|chapter|глава|episode|эпизод|collection|коллекция)\b/g, " ")
+      .replace(/\b(1st|2nd|3rd|4th|5th|6th|7th|8th|9th|первый|второй|третий|четвертый|четвёртый|последний)\b/g, " ")
+      .replace(/\b(19\d{2}|20\d{2}|\d+|i|ii|iii|iv|v|vi|vii|viii|ix|x)\b/g, " ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+
+  function weakBaseFromTitle(title){
+    let s = stripCollectionNoise(title);
+    // Берём базу до двоеточия/тире, если она длинная: "Шерлок Холмс: Игра теней" -> "шерлок холмс".
+    const original = n(title);
+    const split = original.split(/\s(?:—|-|:)\s|:/)[0];
+    if(split && split.length >= 8) s = stripCollectionNoise(split);
+
+    const words = s.split(" ").filter(w => w.length > 2 && !STOP_WORDS.has(w));
+    if(words.length < 2) return "";
+    return words.slice(0, 3).join(" ");
+  }
+
+  function familyInfo(item){
+    const raw = n(rawTitle(item));
+    for(const [key, label, aliases] of RULES){
+      if(aliases.some(a => raw.includes(n(a)))) {
+        return { key: familyType(item) + ":" + key, label, strong: true };
+      }
+    }
+
+    const base = weakBaseFromTitle(titleOfV333(item));
+    if(base && base.length >= 7) {
+      return { key: familyType(item) + ":weak:" + base, label: titleOfV333(item).split(/\s(?:—|-|:)\s|:/)[0].trim() || titleOfV333(item), strong: false };
+    }
+
+    return { key:"", label:"", strong:false };
+  }
+
+  function collectionQuality(item){
+    const r = ratingOfV333(item);
+    const v = votesOfV333(item);
+    const y = Number(yearOfV333(item) || 0);
+    const raw = n(rawTitle(item));
+    let baseBonus = 0;
+
+    if(raw.includes("season 1") || raw.includes("1 сезон")) baseBonus += 100000000;
+    if(raw.includes("часть 1") || raw.includes("part 1")) baseBonus += 60000000;
+    if(raw.includes("shingeki no kyojin") && !raw.includes("season") && !raw.includes("movie")) baseBonus += 100000000;
+    if(raw.includes("guardians of the galaxy") && !raw.includes("vol 2") && !raw.includes("vol 3") && !raw.includes("часть 2") && !raw.includes("часть 3")) baseBonus += 100000000;
+    if(raw.includes("наруто") && !raw.includes("ураган") && !raw.includes("shippuden") && !raw.includes("movie")) baseBonus += 60000000;
+    if(raw.includes("one piece") && !raw.includes("movie") && !raw.includes("special")) baseBonus += 60000000;
+
+    return (hasPosterV333(item) ? 1000000000 : 0) + baseBonus + Math.min(v, 5000000) + r * 100000 + y;
+  }
+
+  function sortCollectionItems(rows){
+    return rows.slice().sort((a,b)=>{
+      const ya = Number(yearOfV333(a) || 9999);
+      const yb = Number(yearOfV333(b) || 9999);
+      if(ya !== yb) return ya - yb;
+      return ratingOfV333(b) - ratingOfV333(a);
+    });
+  }
+
+  function cloneAsCollection(rep, group, info){
+    const out = Object.assign({}, rep);
+    out.__gkmCollectionCount = group.length;
+    out.__gkmCollectionKey = info.key;
+    out.__gkmCollectionLabel = info.label;
+    out.__gkmCollectionItems = sortCollectionItems(group);
+    out.ru = info.label || titleOfV333(rep);
+    out.title_ru = info.label || titleOfV333(rep);
+    out.__manualTopTitle = info.label || titleOfV333(rep);
+    return out;
+  }
+
+  function shouldCollapseGroup(info, group){
+    if(!info || !info.key || group.length <= 1) return false;
+    if(info.strong && group.length >= 2) return true;
+
+    // Слабые автогруппы схлопываем только когда база реально повторяется
+    // и это не одна случайная карточка.
+    return group.length >= 2;
+  }
+
+  window.GKM_V333_RULES_COUNT = RULES.length;
+
+  // ВАЖНО: renderList уже вызывает GKM_V329_COLLAPSE_FRANCHISE_LIST.
+  // Мы переопределяем эту функцию, чтобы исправить логику без ломания старого renderList.
+  window.GKM_V329_COLLAPSE_FRANCHISE_LIST = function gkmV333CollapseFranchiseList(items){
+    const list = Array.isArray(items) ? items : [];
+    const groups = new Map();
+    const singles = [];
+
+    list.forEach((item, index)=>{
+      const info = familyInfo(item);
+      if(!info.key) {
+        singles.push({ item, index });
+        return;
+      }
+      if(!groups.has(info.key)) groups.set(info.key, { info, rows: [] });
+      groups.get(info.key).rows.push({ item, index });
+    });
+
+    const output = [];
+    let removed = 0;
+    let collections = 0;
+
+    groups.forEach(g=>{
+      const rows = g.rows;
+      if(shouldCollapseGroup(g.info, rows)){
+        const sorted = rows.slice().sort((a,b)=>collectionQuality(b.item)-collectionQuality(a.item));
+        const rep = sorted[0].item;
+        const groupItems = rows.map(x=>x.item);
+        output.push({
+          item: cloneAsCollection(rep, groupItems, g.info),
+          index: Math.min(...rows.map(x=>x.index))
+        });
+        removed += rows.length - 1;
+        collections += 1;
+      } else {
+        rows.forEach(x=>output.push(x));
+      }
+    });
+
+    singles.forEach(x=>output.push(x));
+    output.sort((a,b)=>a.index-b.index);
+
+    return {
+      items: output.map(x=>x.item),
+      removed,
+      collections
+    };
+  };
+
+  function ensureV333Css(){
+    if(document.getElementById("gkmV333Css")) return;
+    const css = document.createElement("style");
+    css.id = "gkmV333Css";
+    css.textContent = `
+      .gkm-v329-collection-badge,
+      .gkm-v333-collection-badge{
+        background:linear-gradient(135deg,#00c8ff,#6936ff)!important;
+        color:#fff!important;
+        border:1px solid rgba(255,255,255,.22)!important;
+        box-shadow:0 0 18px rgba(0,180,255,.36)!important;
+      }
+
+      #detailsDialog,
+      #detailsDialog::backdrop{
+        color:#fff!important;
+      }
+      #detailsDialog::backdrop{
+        background:rgba(0,0,0,.72)!important;
+        backdrop-filter:blur(4px)!important;
+      }
+      #detailsDialog .dialog-content{
+        background:
+          radial-gradient(circle at 18% 4%,rgba(0,180,255,.16),transparent 32%),
+          linear-gradient(135deg,#080d22,#080b1c 62%,#0a102a)!important;
+        color:#fff!important;
+        border:1px solid rgba(0,220,255,.26)!important;
+        box-shadow:0 0 44px rgba(0,180,255,.22),0 20px 80px rgba(0,0,0,.68)!important;
+      }
+      #detailTitle,#detailMeta,#detailGenres,#detailOverview,.links-title{
+        color:#fff!important;
+      }
+      #detailMeta,#detailGenres,#detailOverview{
+        opacity:.92!important;
+      }
+      #detailFacts .fact,
+      .facts-grid .fact,
+      #detailsDialog .links-block{
+        background:rgba(8,19,43,.82)!important;
+        color:#fff!important;
+        border:1px solid rgba(0,220,255,.20)!important;
+        box-shadow:none!important;
+      }
+      #detailsDialog .detail-buttons a,
+      #detailsDialog .detail-buttons button{
+        background:linear-gradient(135deg,rgba(60,38,160,.95),rgba(0,140,220,.90))!important;
+        color:#fff!important;
+        border:1px solid rgba(0,220,255,.32)!important;
+      }
+
+      #gkmFamilyBlock{
+        margin-top:18px!important;
+        border-top:1px solid rgba(130,65,255,.45)!important;
+        padding-top:14px!important;
+        color:#fff!important;
+      }
+      #gkmFamilyBlock .gkm-family-card{
+        background:rgba(8,18,42,.92)!important;
+        color:#fff!important;
+        border:1px solid rgba(0,220,255,.25)!important;
+        box-shadow:0 10px 24px rgba(0,0,0,.28)!important;
+      }
+      #gkmFamilyBlock .gkm-family-card:hover{
+        transform:translateY(-3px)!important;
+        border-color:rgba(0,220,255,.62)!important;
+        box-shadow:0 0 28px rgba(0,180,255,.20),0 16px 34px rgba(0,0,0,.38)!important;
+      }
+      #gkmFamilyBlock .gkm-family-card.active{
+        border-color:rgba(0,255,160,.75)!important;
+        box-shadow:0 0 24px rgba(0,255,160,.16)!important;
+      }
+      #gkmFamilyBlock .gkm-family-poster{
+        width:100%!important;
+        aspect-ratio:2/3!important;
+        object-fit:cover!important;
+        display:block!important;
+        background:#071326!important;
+        filter:saturate(1.08) contrast(1.03)!important;
+      }
+      #gkmFamilyBlock .gkm-family-info{
+        background:rgba(5,12,30,.86)!important;
+        padding:10px!important;
+      }
+      #gkmFamilyBlock .gkm-family-title{
+        color:#fff!important;
+      }
+      #gkmFamilyBlock .gkm-family-alt,
+      #gkmFamilyBlock .gkm-family-meta,
+      #gkmFamilyBlock .gkm-family-sub{
+        color:rgba(255,255,255,.76)!important;
+      }
+    `;
+    document.head.appendChild(css);
+  }
+
+  function ensureFamilyBlock(){
+    let block = document.getElementById("gkmFamilyBlock");
+    if(block) return block;
+    block = document.createElement("section");
+    block.id = "gkmFamilyBlock";
+    block.className = "links-block";
+    const related = document.getElementById("relatedBlock");
+    const player = document.getElementById("playerBlock");
+    if(related && related.parentNode) related.parentNode.insertBefore(block, related);
+    else if(player && player.parentNode) player.parentNode.insertBefore(block, player);
+    else document.querySelector("#detailsDialog .dialog-content")?.appendChild(block);
+    return block;
+  }
+
+  function labelPart(item){
+    const raw = n(rawTitle(item));
+    if(raw.includes("season 1") || raw.includes("1 сезон")) return "Сезон 1";
+    if(raw.includes("season 2") || raw.includes("2 сезон") || raw.includes("часть 2") || raw.includes("vol 2")) return "Часть / сезон 2";
+    if(raw.includes("season 3") || raw.includes("3 сезон") || raw.includes("часть 3") || raw.includes("vol 3")) return "Часть / сезон 3";
+    if(raw.includes("final season") || raw.includes("финал")) return "Финал";
+    if(raw.includes("movie") || raw.includes("фильм")) return "Фильм";
+    if(raw.includes("ova") || raw.includes("special") || raw.includes("спешл")) return "OVA / Спец";
+    return "";
+  }
+
+  function familyCardHtml(item, base){
+    const id = itemId(item);
+    const img = posterOfV333(item);
+    const title = titleOfV333(item);
+    const altRaw = [
+      item && item.en,
+      item && item.title,
+      item && item.name,
+      item && item.original_title,
+      item && item.original_name
+    ].filter(Boolean).map(t).find(x=>n(x) !== n(title)) || "";
+    const part = labelPart(item);
+    const votes = votesOfV333(item);
+    const meta = `${part ? part + " · " : ""}${yearOfV333(item) || "—"} · ★ ${ratingOfV333(item) || "—"}${votes ? " · " + (typeof formatVotes === "function" ? formatVotes(votes) : votes) : ""}`;
+    return `
+      <button class="gkm-family-card ${itemId(item) === itemId(base) ? "active" : ""}" data-gkm-v333-id="${esc(id)}" type="button">
+        ${img ? `<img class="gkm-family-poster" src="${esc(img)}" loading="lazy" decoding="async" alt="">` : `<div class="gkm-family-poster"></div>`}
+        <div class="gkm-family-info">
+          <div class="gkm-family-title">${esc(title)}</div>
+          <div class="gkm-family-alt">${esc(altRaw || part || "")}</div>
+          <div class="gkm-family-meta">${esc(meta)}</div>
+        </div>
+      </button>
+    `;
+  }
+
+  function renderCollectionInsideDetails(collectionItem){
+    if(!collectionItem || !Array.isArray(collectionItem.__gkmCollectionItems) || collectionItem.__gkmCollectionItems.length <= 1) return;
+
+    ensureV333Css();
+    const block = ensureFamilyBlock();
+    const rows = sortCollectionItems(collectionItem.__gkmCollectionItems);
+    const label = collectionItem.__gkmCollectionLabel || titleOfV333(collectionItem);
+    const map = new Map(rows.map(x=>[itemId(x), x]));
+
+    block.style.display = "";
+    block.innerHTML = `
+      <div class="gkm-family-head">
+        <div>
+          <h3>Все части / сезоны · ${esc(label)}</h3>
+          <div class="gkm-family-sub">В списке каталога оставлена одна карточка-коллекция, а все части собраны здесь.</div>
+        </div>
+      </div>
+      <div class="gkm-family-row">
+        ${rows.map(x=>familyCardHtml(x, collectionItem)).join("")}
+      </div>
+    `;
+
+    block.querySelectorAll("[data-gkm-v333-id]").forEach(btn=>{
+      btn.onclick = () => {
+        const item = map.get(btn.dataset.gkmV333Id);
+        if(item && typeof openDetails === "function") openDetails(item);
+      };
+    });
+  }
+
+  function patchOpenDetails(){
+    try {
+      if(window.GKM_V333_OPEN_DETAILS_PATCHED === "1") return;
+      if(typeof openDetails !== "function") return;
+
+      const oldOpenDetails = openDetails;
+      openDetails = function gkmV333OpenDetails(item){
+        const res = oldOpenDetails.apply(this, arguments);
+        setTimeout(()=> {
+          ensureV333Css();
+          if(item && item.__gkmCollectionItems) renderCollectionInsideDetails(item);
+        }, 40);
+        return res;
+      };
+
+      window.GKM_V333_OPEN_DETAILS_PATCHED = "1";
+    } catch {}
+  }
+
+  function repaintCurrentList(){
+    // если стартовая отрисовка уже прошла до V333 — перерисуем текущую страницу через новый collapse
+    try {
+      if(Array.isArray(currentItems) && currentItems.length && typeof renderList === "function") {
+        const text = document.getElementById("countText")?.textContent || "";
+        renderList(currentItems, text);
+      }
+    } catch {}
+  }
+
+  function install(){
+    ensureV333Css();
+    patchOpenDetails();
+  }
+
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true});
+  else install();
+
+  setTimeout(install, 300);
+  setTimeout(repaintCurrentList, 900);
+
+  console.log("GKM V333: strong collections and color fix installed");
+})();
+/* GKM V333 STRONG COLLECTIONS COLOR FIX END */
+
+
+/* GKM V334 CANVAS MOSAIC DENSE RESTORE START */
+(function(){
+  window.GKM_V334_CANVAS_MOSAIC_DENSE_RESTORE_VERSION = "v334-canvas-mosaic-dense-restore-2026-07-11";
 
   const CACHE = new Map();
   const IMG_CACHE = new Map();
   let items = [];
   let visibleItems = [];
+  let paintItems = [];
   let currentKind = "anime";
   let canvas = null;
   let ctx = null;
@@ -14105,8 +14655,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let tileH = 24;
   let cols = 1;
   let rows = 1;
+  let ox = 0;
+  let oy = 56;
   let drawTimer = 0;
   let shuffleSeed = 0;
+  let loadedCount = 0;
 
   function t(v){ return String(v == null ? "" : v).trim(); }
   function esc(v){
@@ -14159,6 +14712,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     try{ if(typeof posterSrc === "function") return t(posterSrc(item)); }catch(e){}
     return t(item && (item.poster || item.poster_url || item.posterUrl || item.image || item.img || item.cover || item.cover_url || item.thumbnail || item.backdrop || item.backdrop_path));
   }
+  function posterOriginalOf(item){
+    try{ if(typeof posterOriginalSrc === "function") return t(posterOriginalSrc(item)); }catch(e){}
+    return posterOf(item);
+  }
   function keyOf(item){
     return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOf(item)}|${yearOf(item)}|${posterOf(item)}`);
   }
@@ -14174,7 +14731,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(kind === "all") return true;
     return familyOf(item) === kind;
   }
-
   function parseJson(j){
     const out = [];
     if(!j) return out;
@@ -14190,7 +14746,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
     return out.filter(x=>x && typeof x === "object");
   }
-
   async function fetchJson(url){
     if(CACHE.has(url)) return CACHE.get(url);
     const p = fetch(url, {cache:"force-cache"})
@@ -14200,7 +14755,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     CACHE.set(url, p);
     return p;
   }
-
   function localPool(){
     const out = [];
     try{ if(Array.isArray(currentItems)) out.push(...currentItems); }catch(e){}
@@ -14214,7 +14768,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }catch(e){}
     return out;
   }
-
   function uniqueList(arr){
     const seen = new Set();
     const out = [];
@@ -14227,9 +14780,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     });
     return out;
   }
-
   function urlsFor(kind){
-    const urls = ["data/fast/home.json?v=332"];
+    const urls = ["data/fast/home.json?v=334"];
     const map = {
       anime:["anime"],
       movies:["movies"],
@@ -14241,20 +14793,95 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const maxPages = kind === "all" ? 28 : (kind === "anime" ? 80 : 42);
     cats.forEach(cat=>{
       for(let i=1;i<=maxPages;i++){
-        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=332`);
+        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=334`);
       }
     });
     return urls;
   }
 
+  function posterProxy(url){
+    try{
+      if(typeof posterProxySrc === "function") return posterProxySrc(url);
+    }catch(e){}
+    return "";
+  }
+
+  function imageFor(item){
+    const raw = posterOf(item);
+    const original = posterOriginalOf(item) || raw;
+    const cacheKey = original || raw;
+    if(!cacheKey) return null;
+    if(IMG_CACHE.has(cacheKey)) return IMG_CACHE.get(cacheKey);
+
+    const img = new Image();
+    img.decoding = "async";
+    img.loading = "eager";
+    img.referrerPolicy = "no-referrer";
+    img.__ok = false;
+    img.__bad = false;
+    img.__proxyTried = false;
+    img.__raw = raw;
+    img.__original = original;
+
+    img.onload = () => {
+      img.__ok = true;
+      img.__bad = false;
+      loadedCount++;
+      rebuildPaintItems();
+      if(loadedCount % 40 === 0) {
+        setStatus(`${labelKind(currentKind)} — ${paintItems.length} постеров на Canvas`, `Загружено изображений: ${loadedCount}/${items.length}. Общий пул: ${items.length}.`);
+      }
+      scheduleDraw();
+    };
+
+    img.onerror = () => {
+      const proxy = posterProxy(img.__original || img.__raw);
+      if(!img.__proxyTried && proxy && img.src !== proxy){
+        img.__proxyTried = true;
+        img.src = proxy;
+        return;
+      }
+      img.__bad = true;
+      rebuildPaintItems();
+      scheduleDraw();
+    };
+
+    IMG_CACHE.set(cacheKey, img);
+    img.src = raw || original;
+    return img;
+  }
+
+  function rebuildPaintItems(){
+    const ok = [];
+    for(const item of visibleItems){
+      const img = imageFor(item);
+      if(img && img.__ok) ok.push(item);
+    }
+    paintItems = ok;
+  }
+
+  function preloadVisibleImages(){
+    loadedCount = 0;
+    const list = visibleItems.slice(0, Math.min(visibleItems.length, 5600));
+    let i = 0;
+    function tick(){
+      const end = Math.min(i + 100, list.length);
+      for(; i<end; i++) imageFor(list[i]);
+      rebuildPaintItems();
+      scheduleDraw();
+      if(i < list.length && isOpen) setTimeout(tick, 30);
+    }
+    tick();
+  }
+
   async function loadItems(kind="anime"){
     currentKind = kind;
-    setStatus("Загрузка каталога...");
+    setStatus("Загрузка каталога...", "Собираю постеры для Canvas-мозаики.");
     const base = localPool().filter(x=>passKind(x, kind));
     const all = [...base];
-
     const urls = urlsFor(kind);
     const step = 12;
+
     for(let i=0;i<urls.length;i+=step){
       const part = urls.slice(i, i+step);
       // eslint-disable-next-line no-await-in-loop
@@ -14264,7 +14891,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         items = uniqueList(all);
         visibleItems = items.slice();
         if(shuffleSeed) shuffle(visibleItems);
-        setStatus(`${labelKind(kind)} — ${items.length} постеров на Canvas`, `Загружено страниц: ${Math.min(i+step, urls.length)}/${urls.length}. DOM не течёт — рисуем в canvas.`);
+        rebuildPaintItems();
+        setStatus(`${labelKind(kind)} — ${paintItems.length || items.length} постеров на Canvas`, `Загружено страниц: ${Math.min(i+step, urls.length)}/${urls.length}. Дырки убраны — мозаика уплотняется по мере загрузки.`);
         scheduleDraw();
       }
     }
@@ -14272,7 +14900,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     items = uniqueList(all);
     visibleItems = items.slice();
     if(shuffleSeed) shuffle(visibleItems);
-    setStatus(`${labelKind(kind)} — ${items.length} постеров на Canvas`, `Загружено изображений: 0/${items.length}. Общий пул: ${items.length}.`);
+    rebuildPaintItems();
+    setStatus(`${labelKind(kind)} — ${paintItems.length || items.length} постеров на Canvas`, `Загружено изображений: 0/${items.length}. Общий пул: ${items.length}.`);
     preloadVisibleImages();
     scheduleDraw();
   }
@@ -14299,233 +14928,64 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }[kind] || "Каталог";
   }
 
-  function imageFor(url){
-    if(!url) return null;
-    if(IMG_CACHE.has(url)) return IMG_CACHE.get(url);
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.decoding = "async";
-    img.loading = "eager";
-    img.onload = () => {
-      img.__ok = true;
-      loadedCount++;
-      if(loadedCount % 40 === 0) {
-        setStatus(`${labelKind(currentKind)} — ${items.length} постеров на Canvas`, `Загружено изображений: ${loadedCount}/${items.length}. Общий пул: ${items.length}.`);
-        scheduleDraw();
-      }
-    };
-    img.onerror = () => { img.__bad = true; };
-    IMG_CACHE.set(url, img);
-    img.src = url;
-    return img;
-  }
-
-  let loadedCount = 0;
-  function preloadVisibleImages(){
-    loadedCount = 0;
-    const list = visibleItems.slice(0, Math.min(visibleItems.length, 5200));
-    let i = 0;
-    function tick(){
-      const end = Math.min(i + 80, list.length);
-      for(; i<end; i++) imageFor(posterOf(list[i]));
-      if(i < list.length && isOpen) setTimeout(tick, 30);
-      else scheduleDraw();
-    }
-    tick();
-  }
-
   function ensureCss(){
     if(document.getElementById("gkmV332Css")) return;
     const css = document.createElement("style");
     css.id = "gkmV332Css";
     css.textContent = `
       #gkmV332Btn{
-        position:fixed!important;
-        right:18px!important;
-        bottom:92px!important;
-        z-index:99997!important;
-        border:1px solid rgba(0,220,255,.45);
-        background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
-        color:#fff;
-        border-radius:18px;
-        padding:13px 18px;
-        font-weight:900;
-        cursor:pointer;
+        position:fixed!important; right:18px!important; bottom:92px!important; z-index:99997!important;
+        border:1px solid rgba(0,220,255,.45); background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
+        color:#fff; border-radius:18px; padding:13px 18px; font-weight:900; cursor:pointer;
         box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35);
       }
-      #gkmV332Overlay{
-        position:fixed;
-        inset:0;
-        display:none;
-        z-index:99998;
-        overflow:hidden;
-        color:#fff;
-        background:#020817;
-      }
-      #gkmV332Overlay.open{display:block}
-      #gkmV332Canvas{
-        position:absolute;
-        inset:0;
-        width:100%;
-        height:100%;
-        display:block;
-        background:#020817;
-      }
+      #gkmV332Overlay{ position:fixed; inset:0; display:none; z-index:99998; overflow:hidden; color:#fff; background:#020817; }
+      #gkmV332Overlay.open{ display:block; }
+      #gkmV332Canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; background:#020817; }
       .gkmV332Shade{
-        position:absolute;
-        inset:0;
-        pointer-events:none;
+        position:absolute; inset:0; pointer-events:none;
         background:
           radial-gradient(circle at 50% 42%,rgba(0,0,0,.03),transparent 16%),
           linear-gradient(to bottom,rgba(0,0,0,.24),transparent 14%,transparent 84%,rgba(0,0,0,.35));
       }
-      .gkmV332Top{
-        position:absolute;
-        left:14px;
-        right:14px;
-        top:10px;
-        z-index:5;
-        display:flex;
-        align-items:flex-start;
-        justify-content:space-between;
-        gap:12px;
-        pointer-events:none;
-      }
-      .gkmV332Title{
-        font-size:22px;
-        font-weight:950;
-        text-shadow:0 0 12px rgba(0,0,0,.9),0 0 22px rgba(0,180,255,.45);
-      }
-      .gkmV332Sub{
-        margin-top:3px;
-        font-size:12px;
-        color:rgba(255,255,255,.86);
-        text-shadow:0 0 8px rgba(0,0,0,.9);
-      }
-      .gkmV332Actions{
-        display:flex;
-        gap:8px;
-        flex-wrap:wrap;
-        justify-content:flex-end;
-        pointer-events:auto;
-      }
+      .gkmV332Top{ position:absolute; left:14px; right:14px; top:10px; z-index:5; display:flex; align-items:flex-start; justify-content:space-between; gap:12px; pointer-events:none; }
+      .gkmV332Title{ font-size:22px; font-weight:950; text-shadow:0 0 12px rgba(0,0,0,.9),0 0 22px rgba(0,180,255,.45); }
+      .gkmV332Sub{ margin-top:3px; font-size:12px; color:rgba(255,255,255,.86); text-shadow:0 0 8px rgba(0,0,0,.9); }
+      .gkmV332Actions{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; pointer-events:auto; }
       .gkmV332Actions button{
-        border:1px solid rgba(0,220,255,.36);
-        background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));
-        color:#fff;
-        border-radius:14px;
-        padding:10px 13px;
-        font-weight:850;
-        cursor:pointer;
-        box-shadow:0 0 16px rgba(0,170,255,.18);
+        border:1px solid rgba(0,220,255,.36); background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));
+        color:#fff; border-radius:14px; padding:10px 13px; font-weight:850; cursor:pointer; box-shadow:0 0 16px rgba(0,170,255,.18);
       }
       .gkmV332Actions button:hover{filter:brightness(1.15)}
       #gkmV332Preview{
-        position:absolute;
-        z-index:6;
-        left:50%;
-        top:50%;
-        transform:translate(-50%,-50%);
-        width:min(560px,calc(100vw - 42px));
-        display:none;
-        grid-template-columns:150px 1fr;
-        gap:18px;
-        padding:18px;
-        border-radius:22px;
-        border:1px solid rgba(255,255,255,.14);
-        background:rgba(15,15,18,.86);
-        box-shadow:0 22px 90px rgba(0,0,0,.72),0 0 34px rgba(0,200,255,.16);
-        backdrop-filter:blur(11px);
-        pointer-events:none;
+        position:absolute; z-index:6; left:50%; top:50%; transform:translate(-50%,-50%);
+        width:min(560px,calc(100vw - 42px)); display:none; grid-template-columns:150px 1fr; gap:18px; padding:18px;
+        border-radius:22px; border:1px solid rgba(255,255,255,.14); background:rgba(15,15,18,.86);
+        box-shadow:0 22px 90px rgba(0,0,0,.72),0 0 34px rgba(0,200,255,.16); backdrop-filter:blur(11px); pointer-events:none;
       }
       #gkmV332Preview.open{display:grid}
-      #gkmV332Preview img{
-        width:150px;
-        height:220px;
-        object-fit:cover;
-        border-radius:13px;
-        background:#111;
-        box-shadow:0 14px 34px rgba(0,0,0,.55);
-      }
-      .gkmV332PText h2{
-        margin:0 0 8px;
-        font-size:26px;
-        line-height:1.05;
-      }
-      .gkmV332Meta{
-        color:rgba(255,255,255,.78);
-        font-size:13px;
-        margin-bottom:8px;
-      }
-      .gkmV332Genres{
-        display:flex;
-        gap:5px;
-        flex-wrap:wrap;
-        margin-bottom:8px;
-      }
-      .gkmV332Genres span{
-        font-size:10px;
-        color:#fff;
-        background:rgba(255,255,255,.12);
-        border-radius:999px;
-        padding:4px 7px;
-      }
-      .gkmV332Desc{
-        font-size:12px;
-        line-height:1.45;
-        color:rgba(255,255,255,.84);
-        max-height:88px;
-        overflow:hidden;
-      }
-      .gkmV332OpenHint{
-        margin-top:10px;
-        font-size:12px;
-        color:#28d7ff;
-        font-weight:900;
-      }
+      #gkmV332Preview img{width:150px; height:220px; object-fit:cover; border-radius:13px; background:#111; box-shadow:0 14px 34px rgba(0,0,0,.55);}
+      .gkmV332PText h2{margin:0 0 8px; font-size:26px; line-height:1.05;}
+      .gkmV332Meta{color:rgba(255,255,255,.78); font-size:13px; margin-bottom:8px;}
+      .gkmV332Genres{display:flex; gap:5px; flex-wrap:wrap; margin-bottom:8px;}
+      .gkmV332Genres span{font-size:10px; color:#fff; background:rgba(255,255,255,.12); border-radius:999px; padding:4px 7px;}
+      .gkmV332Desc{font-size:12px; line-height:1.45; color:rgba(255,255,255,.84); max-height:88px; overflow:hidden;}
+      .gkmV332OpenHint{margin-top:10px; font-size:12px; color:#28d7ff; font-weight:900;}
       #gkmV332Status{
-        position:absolute;
-        left:14px;
-        bottom:14px;
-        z-index:5;
-        width:min(470px,calc(100vw - 28px));
-        border:1px solid rgba(0,220,255,.28);
-        background:rgba(6,13,30,.82);
-        border-radius:18px;
-        padding:12px 14px;
-        box-shadow:0 0 24px rgba(0,180,255,.14);
-        backdrop-filter:blur(8px);
+        position:absolute; left:14px; bottom:14px; z-index:5; width:min(470px,calc(100vw - 28px));
+        border:1px solid rgba(0,220,255,.28); background:rgba(6,13,30,.82); border-radius:18px; padding:12px 14px;
+        box-shadow:0 0 24px rgba(0,180,255,.14); backdrop-filter:blur(8px);
       }
-      #gkmV332Status b{display:block;font-size:16px;margin-bottom:4px}
-      #gkmV332Status div{font-size:11px;color:rgba(255,255,255,.72);line-height:1.35}
-      .gkmV332Hint{
-        position:absolute;
-        right:18px;
-        bottom:18px;
-        z-index:5;
-        color:rgba(255,255,255,.7);
-        font-size:11px;
-        text-align:right;
-        text-shadow:0 0 8px #000;
-        pointer-events:none;
-      }
+      #gkmV332Status b{display:block; font-size:16px; margin-bottom:4px}
+      #gkmV332Status div{font-size:11px; color:rgba(255,255,255,.72); line-height:1.35}
+      .gkmV332Hint{position:absolute; right:18px; bottom:18px; z-index:5; color:rgba(255,255,255,.7); font-size:11px; text-align:right; text-shadow:0 0 8px #000; pointer-events:none;}
       @media(max-width:700px){
         #gkmV332Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
-        .gkmV332Title{font-size:17px}
-        .gkmV332Sub{font-size:10px}
-        .gkmV332Actions button{padding:8px 9px;font-size:12px}
+        .gkmV332Title{font-size:17px}.gkmV332Sub{font-size:10px}.gkmV332Actions button{padding:8px 9px;font-size:12px}
         .gkmV332Top{left:8px;right:8px;top:8px}
-        #gkmV332Preview{
-          width:calc(100vw - 20px);
-          grid-template-columns:92px 1fr;
-          gap:10px;
-          padding:12px;
-        }
-        #gkmV332Preview img{width:92px;height:136px}
-        .gkmV332PText h2{font-size:18px}
-        .gkmV332Desc{display:none}
-        #gkmV332Status{left:10px;bottom:10px;width:calc(100vw - 20px)}
-        .gkmV332Hint{display:none}
+        #gkmV332Preview{width:calc(100vw - 20px);grid-template-columns:92px 1fr;gap:10px;padding:12px}
+        #gkmV332Preview img{width:92px;height:136px}.gkmV332PText h2{font-size:18px}.gkmV332Desc{display:none}
+        #gkmV332Status{left:10px;bottom:10px;width:calc(100vw - 20px)}.gkmV332Hint{display:none}
       }
     `;
     document.head.appendChild(css);
@@ -14544,7 +15004,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function ensureUi(){
     removeOldWallUi();
-
     if(!document.getElementById("gkmV332Btn")){
       const btn = document.createElement("button");
       btn.id = "gkmV332Btn";
@@ -14553,7 +15012,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       btn.onclick = () => openMosaic("anime");
       document.body.appendChild(btn);
     }
-
     if(document.getElementById("gkmV332Overlay")) return;
 
     const overlay = document.createElement("div");
@@ -14592,6 +15050,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     document.getElementById("gkmV332Shuffle").onclick = () => {
       shuffleSeed += 1;
       shuffle(visibleItems);
+      rebuildPaintItems();
       hoveredIndex = -1;
       hidePreview();
       scheduleDraw();
@@ -14604,7 +15063,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       scheduleDraw();
     });
     canvas.addEventListener("click", () => {
-      const item = visibleItems[hoveredIndex];
+      const item = paintItems[hoveredIndex];
       if(item) openItem(item);
     });
     window.addEventListener("resize", () => {
@@ -14635,22 +15094,28 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     const w = window.innerWidth;
     const h = window.innerHeight;
-    const count = Math.max(visibleItems.length, 1);
+    const count = Math.max(paintItems.length || visibleItems.length, 1);
     const ratio = 2 / 3;
+    const topPad = window.innerWidth < 700 ? 62 : 52;
+    const bottomPad = window.innerWidth < 700 ? 110 : 140;
+    const availH = Math.max(120, h - topPad - bottomPad);
 
-    cols = Math.max(28, Math.ceil(Math.sqrt(count * w / h / ratio)));
+    cols = Math.max(28, Math.ceil(Math.sqrt(count * w / availH / ratio)));
     rows = Math.ceil(count / cols);
     tileW = Math.max(8, Math.floor(w / cols));
     tileH = Math.max(12, Math.floor(tileW / ratio));
 
-    // Если по высоте не влезает — делаем ещё мельче.
     const neededH = rows * tileH;
-    if(neededH > h * 1.08){
-      tileH = Math.max(10, Math.floor(h / rows));
+    if(neededH > availH){
+      tileH = Math.max(10, Math.floor(availH / rows));
       tileW = Math.max(7, Math.floor(tileH * ratio));
       cols = Math.max(cols, Math.ceil(w / tileW));
       rows = Math.ceil(count / cols);
     }
+
+    const gridW = cols * tileW;
+    ox = Math.floor((w - gridW) / 2);
+    oy = topPad;
   }
 
   function scheduleDraw(){
@@ -14667,27 +15132,19 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     ctx.fillStyle = "#020817";
     ctx.fillRect(0,0,w,h);
 
-    const count = visibleItems.length;
-    const gridW = cols * tileW;
-    const gridH = rows * tileH;
-    const ox = Math.floor((w - gridW) / 2);
-    const oy = Math.floor((h - gridH) / 2);
+    const drawList = paintItems.length ? paintItems : [];
+    const count = drawList.length;
 
     for(let i=0;i<count;i++){
-      const item = visibleItems[i];
+      const item = drawList[i];
       const col = i % cols;
       const row = Math.floor(i / cols);
       const x = ox + col * tileW;
       const y = oy + row * tileH;
-      const img = imageFor(posterOf(item));
-
+      const img = imageFor(item);
       if(img && img.__ok){
         try{ ctx.drawImage(img, x, y, tileW, tileH); }catch(e){}
-      } else {
-        ctx.fillStyle = "rgba(15,28,58,.82)";
-        ctx.fillRect(x, y, tileW, tileH);
       }
-
       if(i === hoveredIndex){
         ctx.save();
         ctx.strokeStyle = "rgba(0,220,255,.95)";
@@ -14708,24 +15165,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function indexAt(clientX, clientY){
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    const gridW = cols * tileW;
-    const gridH = rows * tileH;
-    const ox = Math.floor((w - gridW) / 2);
-    const oy = Math.floor((h - gridH) / 2);
     const col = Math.floor((clientX - ox) / tileW);
     const row = Math.floor((clientY - oy) / tileH);
     if(col < 0 || row < 0 || col >= cols || row >= rows) return -1;
     const idx = row * cols + col;
-    return idx >= 0 && idx < visibleItems.length ? idx : -1;
+    return idx >= 0 && idx < paintItems.length ? idx : -1;
   }
 
   function onMove(e){
     const idx = indexAt(e.clientX, e.clientY);
     if(idx === hoveredIndex) return;
     hoveredIndex = idx;
-    const item = visibleItems[idx];
+    const item = paintItems[idx];
     if(item) showPreview(item);
     else hidePreview();
     scheduleDraw();
@@ -14794,14 +15245,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(kind !== currentKind || !items.length){
       items = [];
       visibleItems = [];
+      paintItems = [];
       await loadItems(kind);
     } else {
+      rebuildPaintItems();
       scheduleDraw();
     }
     preloadVisibleImages();
   }
 
-  function closeMosaic(full=true){
+  function closeMosaic(){
     const overlay = document.getElementById("gkmV332Overlay");
     if(overlay) overlay.classList.remove("open");
     document.body.style.overflow = "";
@@ -14818,7 +15271,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install, 500);
   setTimeout(install, 1400);
 
-  console.log("GKM V332: canvas poster mosaic restored");
+  console.log("GKM V334: canvas mosaic dense restore installed");
 })();
-/* GKM V332 CANVAS POSTER MOSAIC END */
+/* GKM V334 CANVAS MOSAIC DENSE RESTORE END */
 
