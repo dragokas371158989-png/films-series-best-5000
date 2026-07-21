@@ -14088,9 +14088,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V329 COLLAPSED FRANCHISE CATALOG END */
 
 
-/* GKM V332 CANVAS POSTER MOSAIC START */
+/* GKM V336 FAST SMOOTH CANVAS MOSAIC START */
 (function(){
   window.GKM_V332_CANVAS_POSTER_MOSAIC_VERSION = "v332-canvas-poster-mosaic-restore-2026-07-11";
+  window.GKM_V336_FAST_SMOOTH_CANVAS_VERSION = "v336-fast-smooth-canvas-2026-07-11";
 
   const CACHE = new Map();
   const IMG_CACHE = new Map();
@@ -14105,8 +14106,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let tileH = 24;
   let cols = 1;
   let rows = 1;
-  let drawTimer = 0;
+  let drawQueued = 0;
   let shuffleSeed = 0;
+  let previewKey = "";
 
   function t(v){ return String(v == null ? "" : v).trim(); }
   function esc(v){
@@ -14304,12 +14306,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(IMG_CACHE.has(url)) return IMG_CACHE.get(url);
     const img = new Image();
     img.crossOrigin = "anonymous";
+    img.referrerPolicy = "no-referrer";
     img.decoding = "async";
     img.loading = "eager";
     img.onload = () => {
       img.__ok = true;
       loadedCount++;
-      if(loadedCount % 40 === 0) {
+      if(loadedCount % 24 === 0 || loadedCount <= 12) {
         setStatus(`${labelKind(currentKind)} — ${items.length} постеров на Canvas`, `Загружено изображений: ${loadedCount}/${items.length}. Общий пул: ${items.length}.`);
         scheduleDraw();
       }
@@ -14326,10 +14329,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const list = visibleItems.slice(0, Math.min(visibleItems.length, 5200));
     let i = 0;
     function tick(){
-      const end = Math.min(i + 80, list.length);
+      const end = Math.min(i + 140, list.length);
       for(; i<end; i++) imageFor(posterOf(list[i]));
-      if(i < list.length && isOpen) setTimeout(tick, 30);
-      else scheduleDraw();
+      scheduleDraw();
+      if(i < list.length && isOpen) setTimeout(tick, 16);
     }
     tick();
   }
@@ -14356,13 +14359,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       #gkmV332Overlay{
         position:fixed;
         inset:0;
-        display:none;
+        display:block;
+        visibility:hidden;
+        opacity:0;
         z-index:99998;
         overflow:hidden;
         color:#fff;
         background:#020817;
+        transition:opacity .22s ease, visibility .22s ease;
       }
-      #gkmV332Overlay.open{display:block}
+      #gkmV332Overlay.open{visibility:visible; opacity:1}
       #gkmV332Canvas{
         position:absolute;
         inset:0;
@@ -14425,9 +14431,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         z-index:6;
         left:50%;
         top:50%;
-        transform:translate(-50%,-50%);
+        transform:translate(-50%,-50%) scale(.975);
         width:min(560px,calc(100vw - 42px));
-        display:none;
+        display:grid;
         grid-template-columns:150px 1fr;
         gap:18px;
         padding:18px;
@@ -14437,8 +14443,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         box-shadow:0 22px 90px rgba(0,0,0,.72),0 0 34px rgba(0,200,255,.16);
         backdrop-filter:blur(11px);
         pointer-events:none;
+        opacity:0;
+        visibility:hidden;
+        transition:opacity .16s ease, transform .16s ease, visibility .16s ease;
       }
-      #gkmV332Preview.open{display:grid}
+      #gkmV332Preview.open{opacity:1; visibility:visible; transform:translate(-50%,-50%) scale(1)}
       #gkmV332Preview img{
         width:150px;
         height:220px;
@@ -14654,8 +14663,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function scheduleDraw(){
-    clearTimeout(drawTimer);
-    drawTimer = setTimeout(draw, 20);
+    if(drawQueued || !isOpen) return;
+    drawQueued = requestAnimationFrame(() => {
+      drawQueued = 0;
+      draw();
+    });
   }
 
   function draw(){
@@ -14734,9 +14746,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function showPreview(item){
     const p = document.getElementById("gkmV332Preview");
     if(!p || !item) return;
-    const r = ratingOf(item);
-    const genres = genresOf(item).slice(0,5);
-    p.innerHTML = `
+    const key = keyOf(item);
+    if(previewKey !== key){
+      const r = ratingOf(item);
+      const genres = genresOf(item).slice(0,5);
+      p.innerHTML = `
       <img src="${esc(posterOf(item))}" alt="">
       <div class="gkmV332PText">
         <h2>${esc(titleOf(item))}</h2>
@@ -14745,13 +14759,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         <div class="gkmV332Desc">${esc(overviewOf(item))}</div>
         <div class="gkmV332OpenHint">Клик — открыть полную карточку</div>
       </div>
-    `;
+      `;
+      previewKey = key;
+    }
     p.classList.add("open");
   }
 
   function hidePreview(){
     const p = document.getElementById("gkmV332Preview");
     if(p) p.classList.remove("open");
+    previewKey = "";
   }
 
   function tryOpen(item){
@@ -14807,6 +14824,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     document.body.style.overflow = "";
     hidePreview();
     isOpen = false;
+    if(drawQueued){
+      cancelAnimationFrame(drawQueued);
+      drawQueued = 0;
+    }
   }
 
   function install(){
@@ -14818,9 +14839,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install, 500);
   setTimeout(install, 1400);
 
-  console.log("GKM V332: canvas poster mosaic restored");
+  console.log("GKM V336: fast smooth canvas mosaic installed");
 })();
-/* GKM V332 CANVAS POSTER MOSAIC END */
+/* GKM V336 FAST SMOOTH CANVAS MOSAIC END */
 
 
 /* GKM V333 STRONG COLLECTIONS COLOR FIX START */
