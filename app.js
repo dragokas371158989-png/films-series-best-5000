@@ -15090,38 +15090,31 @@ Endpoint: ${endpoint||"не задан"}`;
 })();
 /* GKM V344 WALL AI WEATHER MERGE END */
 
-/* GKM V325 UNIQUE CONNECTED POSTER WALL START */
+/* GKM V332 CANVAS POSTER MOSAIC START */
 (function(){
-  window.GKM_V325_UNIQUE_CONNECTED_POSTER_WALL_VERSION = "v325-unique-connected-poster-wall-no-repeats-2026-07-11";
+  window.GKM_V332_CANVAS_POSTER_MOSAIC_VERSION = "v332-canvas-poster-mosaic-restore-2026-07-11";
 
-  const UNIQUE_LIMIT_DESKTOP = 1400;
-  const UNIQUE_LIMIT_MOBILE = 650;
-
-  let uniqueItems = [];
-  let currentKind = "all";
-  let wallBuilt = false;
+  const CACHE = new Map();
+  const IMG_CACHE = new Map();
+  let items = [];
+  let visibleItems = [];
+  let currentKind = "anime";
+  let canvas = null;
+  let ctx = null;
   let isOpen = false;
-  let isDragging = false;
-  let startX = 0;
-  let startY = 0;
-  let rotX = 2;
-  let rotY = -10;
-  let zoom = 95;
-  let targetRotX = 2;
-  let targetRotY = -10;
-  let targetZoom = 95;
-  let rafId = 0;
-  let autoSpin = true;
-  let hoveredTile = null;
+  let hoveredIndex = -1;
+  let tileW = 16;
+  let tileH = 24;
+  let cols = 1;
+  let rows = 1;
+  let drawTimer = 0;
+  let shuffleSeed = 0;
 
   function t(v){ return String(v == null ? "" : v).trim(); }
   function esc(v){
-    return String(v == null ? "" : v).replace(/[&<>"']/g, s => ({
+    return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
       "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    }[s]));
-  }
-  function safeUrl(v){
-    return String(v || "").replace(/"/g,"%22").replace(/\)/g,"%29");
+    }[ch]));
   }
   function n(v){
     return t(v).toLowerCase()
@@ -15130,51 +15123,60 @@ Endpoint: ${endpoint||"не задан"}`;
       .replace(/\s+/g," ")
       .trim();
   }
-  function titleOf(it){
-    try{ if(typeof displayTitle === "function") return t(displayTitle(it)); }catch(e){}
-    return t(it && (it.ru || it.title_ru || it.title || it.name || it.en || it.original_title || it.original_name)) || "Без названия";
+  function titleOf(item){
+    try{ if(typeof displayTitle === "function") return t(displayTitle(item)); }catch(e){}
+    return t(item && (item.ru || item.title_ru || item.__manualTopTitle || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
   }
-  function typeOf(it){
-    try{ if(typeof getType === "function") return t(getType(it)); }catch(e){}
-    return t(it && (it.type || it.category || it.kind)) || "Каталог";
+  function typeOf(item){
+    try{ if(typeof getType === "function") return t(getType(item)); }catch(e){}
+    return t(item && (item.type || item.category || item.kind)) || "Каталог";
   }
-  function yearOf(it){
-    try{ if(typeof getYear === "function") return t(getYear(it)); }catch(e){}
-    const raw = t(it && (it.year || it.release_date || it.first_air_date));
+  function yearOf(item){
+    try{ if(typeof getYear === "function") return t(getYear(item)); }catch(e){}
+    const raw = t(item && (item.year || item.release_date || item.first_air_date));
     const m = raw.match(/(19\d{2}|20\d{2})/);
     return m ? m[1] : raw;
   }
-  function ratingOf(it){
-    try{ if(typeof getRating === "function") return Number(getRating(it) || 0); }catch(e){}
-    return Number(it && (it.rating || it.vote_average || it.score) || 0);
+  function ratingOf(item){
+    try{ if(typeof getRating === "function") return Number(getRating(item) || 0); }catch(e){}
+    return Number(item && (item.rating || item.vote_average || item.score) || 0);
   }
-  function overviewOf(it){
-    try{ if(typeof displayOverview === "function") return t(displayOverview(it)); }catch(e){}
-    return t(it && (it.overview || it.description || it.synopsis || it.plot)) || "Описание будет добавлено позже.";
+  function overviewOf(item){
+    try{ if(typeof displayOverview === "function") return t(displayOverview(item)); }catch(e){}
+    return t(item && (item.overview || item.description || item.synopsis || item.plot)) || "Описание будет добавлено позже.";
   }
-  function genresOf(it){
+  function genresOf(item){
     try{
       if(typeof getGenres === "function"){
-        const g = getGenres(it);
+        const g = getGenres(item);
         if(Array.isArray(g)) return g.filter(Boolean).map(String);
       }
     }catch(e){}
-    const raw = it && (it.genres || it.genre || it.tags);
+    const raw = item && (item.genres || item.genre || item.tags);
     if(Array.isArray(raw)) return raw.filter(Boolean).map(String);
     if(typeof raw === "string") return raw.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
     return [];
   }
-  function imgOf(it){
-    return t(it && (
-      it.poster || it.poster_url || it.posterUrl ||
-      it.image || it.img || it.cover || it.cover_url ||
-      it.thumbnail || it.backdrop || it.backdrop_path
-    ));
+  function posterOf(item){
+    try{ if(typeof posterSrc === "function") return t(posterSrc(item)); }catch(e){}
+    return t(item && (item.poster || item.poster_url || item.posterUrl || item.image || item.img || item.cover || item.cover_url || item.thumbnail || item.backdrop || item.backdrop_path));
   }
-  function keyOf(it){
-    return t(it && (it.id || it.kinopoiskId || it.tmdbId || it.mal_id || it.slug))
-      || `${n(titleOf(it))}|${yearOf(it)}|${n(typeOf(it))}`;
+  function keyOf(item){
+    return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOf(item)}|${yearOf(item)}|${posterOf(item)}`);
   }
+  function familyOf(item){
+    const s = n(typeOf(item));
+    if(s.includes("аниме") || s.includes("anime")) return "anime";
+    if(s.includes("сериал") || s.includes("series")) return "series";
+    if(s.includes("мульт") || s.includes("cartoon")) return "cartoons";
+    if(s.includes("фильм") || s.includes("movie")) return "movies";
+    return "other";
+  }
+  function passKind(item, kind){
+    if(kind === "all") return true;
+    return familyOf(item) === kind;
+  }
+
   function parseJson(j){
     const out = [];
     if(!j) return out;
@@ -15190,157 +15192,352 @@ Endpoint: ${endpoint||"не задан"}`;
     }
     return out.filter(x=>x && typeof x === "object");
   }
-  async function fetchJson(url){
-    try{
-      const res = await fetch(url, {cache:"force-cache"});
-      if(!res.ok) return [];
-      return parseJson(await res.json());
-    }catch(e){ return []; }
-  }
-  function passKind(it, kind){
-    if(!kind || kind === "all") return true;
-    const tp = n(typeOf(it));
-    if(kind === "movies") return tp.includes("фильм") || tp.includes("movie");
-    if(kind === "series") return tp.includes("сериал") || tp.includes("series");
-    if(kind === "anime") return tp.includes("аниме") || tp.includes("anime");
-    if(kind === "cartoons") return tp.includes("мульт") || tp.includes("cartoon");
-    return true;
-  }
-  function pageUrls(kind){
-    const urls = ["data/fast/home.json?v=325"];
-    const cats = kind && kind !== "all"
-      ? ({movies:["movies"], series:["series"], anime:["anime"], cartoons:["cartoons"]}[kind] || ["movies","series","anime","cartoons"])
-      : ["movies","series","anime","cartoons"];
 
-    const pages = window.innerWidth < 700 ? 4 : 9;
+  async function fetchJson(url){
+    if(CACHE.has(url)) return CACHE.get(url);
+    const p = fetch(url, {cache:"force-cache"})
+      .then(r => r.ok ? r.json() : null)
+      .then(parseJson)
+      .catch(()=>[]);
+    CACHE.set(url, p);
+    return p;
+  }
+
+  function localPool(){
+    const out = [];
+    try{ if(Array.isArray(currentItems)) out.push(...currentItems); }catch(e){}
+    try{
+      if(homeData && homeData.sections){
+        Object.values(homeData.sections).forEach(v=>{
+          if(Array.isArray(v)) out.push(...v);
+          else if(v && Array.isArray(v.items)) out.push(...v.items);
+        });
+      }
+    }catch(e){}
+    return out;
+  }
+
+  function uniqueList(arr){
+    const seen = new Set();
+    const out = [];
+    arr.forEach(item=>{
+      if(!item || !posterOf(item)) return;
+      const k = keyOf(item);
+      if(seen.has(k)) return;
+      seen.add(k);
+      out.push(item);
+    });
+    return out;
+  }
+
+  function urlsFor(kind){
+    const urls = ["data/fast/home.json?v=332"];
+    const map = {
+      anime:["anime"],
+      movies:["movies"],
+      series:["series"],
+      cartoons:["cartoons"],
+      all:["anime","movies","series","cartoons"]
+    };
+    const cats = map[kind] || ["anime"];
+    const maxPages = kind === "all" ? 28 : (kind === "anime" ? 80 : 42);
     cats.forEach(cat=>{
-      for(let i=1;i<=pages;i++){
-        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=325`);
+      for(let i=1;i<=maxPages;i++){
+        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=332`);
       }
     });
     return urls;
   }
-  async function loadWallItems(kind="all"){
-    currentKind = kind || "all";
-    const found = [];
-    const seen = new Set();
 
-    function add(it){
-      if(!it || !passKind(it, currentKind)) return;
-      if(!imgOf(it)) return;
-      const k = keyOf(it);
-      if(seen.has(k)) return;
-      seen.add(k);
-      found.push(it);
+  async function loadItems(kind="anime"){
+    currentKind = kind;
+    setStatus("Загрузка каталога...");
+    const base = localPool().filter(x=>passKind(x, kind));
+    const all = [...base];
+
+    const urls = urlsFor(kind);
+    const step = 12;
+    for(let i=0;i<urls.length;i+=step){
+      const part = urls.slice(i, i+step);
+      // eslint-disable-next-line no-await-in-loop
+      const chunks = await Promise.all(part.map(fetchJson));
+      all.push(...chunks.flat().filter(x=>passKind(x, kind)));
+      if(isOpen) {
+        items = uniqueList(all);
+        visibleItems = items.slice();
+        if(shuffleSeed) shuffle(visibleItems);
+        setStatus(`${labelKind(kind)} — ${items.length} постеров на Canvas`, `Загружено страниц: ${Math.min(i+step, urls.length)}/${urls.length}. DOM не течёт — рисуем в canvas.`);
+        scheduleDraw();
+      }
     }
 
-    try{ (currentItems || []).forEach(add); }catch(e){}
-    try{
-      if(homeData && homeData.sections){
-        Object.values(homeData.sections).forEach(v=>{
-          if(Array.isArray(v)) v.forEach(add);
-          else if(v && Array.isArray(v.items)) v.items.forEach(add);
-        });
+    items = uniqueList(all);
+    visibleItems = items.slice();
+    if(shuffleSeed) shuffle(visibleItems);
+    setStatus(`${labelKind(kind)} — ${items.length} постеров на Canvas`, `Загружено изображений: 0/${items.length}. Общий пул: ${items.length}.`);
+    preloadVisibleImages();
+    scheduleDraw();
+  }
+
+  function shuffle(arr){
+    let seed = Date.now() + shuffleSeed;
+    function rnd(){
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      return seed / 4294967296;
+    }
+    for(let i=arr.length-1;i>0;i--){
+      const j = Math.floor(rnd() * (i+1));
+      [arr[i],arr[j]] = [arr[j],arr[i]];
+    }
+  }
+
+  function labelKind(kind){
+    return {
+      all:"Все",
+      anime:"Аниме",
+      movies:"Фильмы",
+      series:"Сериалы",
+      cartoons:"Мульты"
+    }[kind] || "Каталог";
+  }
+
+  function imageFor(url){
+    if(!url) return null;
+    if(IMG_CACHE.has(url)) return IMG_CACHE.get(url);
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.decoding = "async";
+    img.loading = "eager";
+    img.onload = () => {
+      img.__ok = true;
+      loadedCount++;
+      if(loadedCount % 40 === 0) {
+        setStatus(`${labelKind(currentKind)} — ${items.length} постеров на Canvas`, `Загружено изображений: ${loadedCount}/${items.length}. Общий пул: ${items.length}.`);
+        scheduleDraw();
       }
-    }catch(e){}
+    };
+    img.onerror = () => { img.__bad = true; };
+    IMG_CACHE.set(url, img);
+    img.src = url;
+    return img;
+  }
 
-    const arrs = await Promise.all(pageUrls(currentKind).map(fetchJson));
-    arrs.flat().forEach(add);
-
-    found.sort((a,b)=>(ratingOf(b)||0)-(ratingOf(a)||0));
-    uniqueItems = found.slice(0, window.innerWidth < 700 ? UNIQUE_LIMIT_MOBILE : UNIQUE_LIMIT_DESKTOP);
-    return uniqueItems;
+  let loadedCount = 0;
+  function preloadVisibleImages(){
+    loadedCount = 0;
+    const list = visibleItems.slice(0, Math.min(visibleItems.length, 5200));
+    let i = 0;
+    function tick(){
+      const end = Math.min(i + 80, list.length);
+      for(; i<end; i++) imageFor(posterOf(list[i]));
+      if(i < list.length && isOpen) setTimeout(tick, 30);
+      else scheduleDraw();
+    }
+    tick();
   }
 
   function ensureCss(){
-    if(document.getElementById("gkmV325Css")) return;
-    const st = document.createElement("style");
-    st.id = "gkmV325Css";
-    st.textContent = `
-      #gkmV325Btn{
-        position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;
-        border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
-        color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;
-        box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)
+    if(document.getElementById("gkmV332Css")) return;
+    const css = document.createElement("style");
+    css.id = "gkmV332Css";
+    css.textContent = `
+      #gkmV332Btn{
+        position:fixed!important;
+        right:18px!important;
+        bottom:92px!important;
+        z-index:99997!important;
+        border:1px solid rgba(0,220,255,.45);
+        background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
+        color:#fff;
+        border-radius:18px;
+        padding:13px 18px;
+        font-weight:900;
+        cursor:pointer;
+        box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35);
       }
-      #gkmV325Overlay{
-        position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;
+      #gkmV332Overlay{
+        position:fixed;
+        inset:0;
+        display:none;
+        z-index:99998;
+        overflow:hidden;
+        color:#fff;
+        background:#020817;
+      }
+      #gkmV332Overlay.open{display:block}
+      #gkmV332Canvas{
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        display:block;
+        background:#020817;
+      }
+      .gkmV332Shade{
+        position:absolute;
+        inset:0;
+        pointer-events:none;
         background:
-          radial-gradient(circle at 50% 42%,rgba(255,255,255,.10),transparent 7%),
-          radial-gradient(circle at 24% 14%,rgba(0,190,255,.16),transparent 34%),
-          radial-gradient(circle at 82% 84%,rgba(130,35,255,.22),transparent 42%),
-          #020817;
+          radial-gradient(circle at 50% 42%,rgba(0,0,0,.03),transparent 16%),
+          linear-gradient(to bottom,rgba(0,0,0,.24),transparent 14%,transparent 84%,rgba(0,0,0,.35));
       }
-      #gkmV325Overlay.open{display:block}
-      .gkmV325Top{
-        position:absolute;left:0;right:0;top:0;z-index:18;display:flex;justify-content:space-between;gap:12px;
-        padding:8px 14px 0 14px;pointer-events:none
+      .gkmV332Top{
+        position:absolute;
+        left:14px;
+        right:14px;
+        top:10px;
+        z-index:5;
+        display:flex;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap:12px;
+        pointer-events:none;
       }
-      .gkmV325Title{font-size:22px;font-weight:950;text-shadow:0 0 18px rgba(0,180,255,.46)}
-      .gkmV325Sub{font-size:12px;color:rgba(255,255,255,.8)}
-      .gkmV325Actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
-      .gkmV325Actions button,.gkmV325PreviewActions button{
-        border:1px solid rgba(0,220,255,.34);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.86));
-        color:#fff;border-radius:14px;padding:10px 13px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)
+      .gkmV332Title{
+        font-size:22px;
+        font-weight:950;
+        text-shadow:0 0 12px rgba(0,0,0,.9),0 0 22px rgba(0,180,255,.45);
       }
-      .gkmV325Actions button:hover,.gkmV325PreviewActions button:hover{filter:brightness(1.15)}
-      #gkmV325Scene{position:absolute;inset:58px 0 0;perspective:1000px;overflow:hidden;cursor:grab;user-select:none;touch-action:none}
-      #gkmV325Scene.drag{cursor:grabbing}
-      #gkmV325World{position:absolute;left:50%;top:50%;width:1px;height:1px;transform-style:preserve-3d;will-change:transform}
-      .gkmV325Tile{
-        position:absolute;left:0;top:0;width:18px;height:28px;margin-left:-9px;margin-top:-14px;border:0;padding:0;border-radius:4px;
-        overflow:hidden;background:#071227;outline:1px solid rgba(255,255,255,.07);box-shadow:0 2px 7px rgba(0,0,0,.38);
-        cursor:pointer;transform-style:preserve-3d;will-change:transform,filter;transition:filter .12s ease,box-shadow .12s ease
+      .gkmV332Sub{
+        margin-top:3px;
+        font-size:12px;
+        color:rgba(255,255,255,.86);
+        text-shadow:0 0 8px rgba(0,0,0,.9);
       }
-      .gkmV325Tile::before{
-        content:"";position:absolute;inset:0;background-image:var(--poster);background-size:cover;background-position:center;
-        filter:saturate(1.08) contrast(1.04)
+      .gkmV332Actions{
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
+        justify-content:flex-end;
+        pointer-events:auto;
       }
-      .gkmV325Tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.16),transparent 60%)}
-      .gkmV325Tile.is-hover{
-        z-index:999;filter:brightness(1.28) saturate(1.18)!important;
-        box-shadow:0 8px 22px rgba(0,0,0,.58),0 0 24px rgba(0,190,255,.35)
+      .gkmV332Actions button{
+        border:1px solid rgba(0,220,255,.36);
+        background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));
+        color:#fff;
+        border-radius:14px;
+        padding:10px 13px;
+        font-weight:850;
+        cursor:pointer;
+        box-shadow:0 0 16px rgba(0,170,255,.18);
       }
-      #gkmV325Preview{
-        position:absolute;display:none;z-index:24;min-width:280px;max-width:380px;
-        background:linear-gradient(135deg,rgba(9,18,43,.96),rgba(13,23,58,.93));
-        border:1px solid rgba(0,220,255,.33);border-radius:18px;box-shadow:0 20px 70px rgba(0,0,0,.6),0 0 30px rgba(0,170,255,.22);
-        padding:12px;backdrop-filter:blur(12px);pointer-events:auto
+      .gkmV332Actions button:hover{filter:brightness(1.15)}
+      #gkmV332Preview{
+        position:absolute;
+        z-index:6;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%);
+        width:min(560px,calc(100vw - 42px));
+        display:none;
+        grid-template-columns:150px 1fr;
+        gap:18px;
+        padding:18px;
+        border-radius:22px;
+        border:1px solid rgba(255,255,255,.14);
+        background:rgba(15,15,18,.86);
+        box-shadow:0 22px 90px rgba(0,0,0,.72),0 0 34px rgba(0,200,255,.16);
+        backdrop-filter:blur(11px);
+        pointer-events:none;
       }
-      #gkmV325Preview.open{display:block}
-      .gkmV325PreviewInner{display:grid;grid-template-columns:100px 1fr;gap:12px;align-items:start}
-      #gkmV325Preview img{width:100px;height:150px;object-fit:cover;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.5)}
-      .gkmV325PreviewText h3{margin:0 0 6px 0;font-size:19px;line-height:1.05}
-      .gkmV325PreviewMeta{font-size:12px;color:rgba(255,255,255,.78);margin-bottom:6px}
-      .gkmV325PreviewDesc{font-size:12px;color:rgba(255,255,255,.86);line-height:1.35;max-height:84px;overflow:hidden}
-      .gkmV325PreviewActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-      .gkmV325Info{
-        position:absolute;left:16px;bottom:16px;z-index:12;max-width:min(520px,calc(100vw - 32px));
-        background:rgba(5,14,34,.78);border:1px solid rgba(0,220,255,.24);border-radius:18px;
-        padding:12px 14px;color:#fff;backdrop-filter:blur(12px);pointer-events:none
+      #gkmV332Preview.open{display:grid}
+      #gkmV332Preview img{
+        width:150px;
+        height:220px;
+        object-fit:cover;
+        border-radius:13px;
+        background:#111;
+        box-shadow:0 14px 34px rgba(0,0,0,.55);
       }
-      .gkmV325Info b{display:block;font-size:17px;margin-bottom:4px}
-      .gkmV325Info .meta{color:rgba(255,255,255,.75);font-size:13px}
-      .gkmV325Hint{position:absolute;right:20px;bottom:18px;z-index:12;color:rgba(255,255,255,.6);font-size:12px;text-align:right;pointer-events:none}
+      .gkmV332PText h2{
+        margin:0 0 8px;
+        font-size:26px;
+        line-height:1.05;
+      }
+      .gkmV332Meta{
+        color:rgba(255,255,255,.78);
+        font-size:13px;
+        margin-bottom:8px;
+      }
+      .gkmV332Genres{
+        display:flex;
+        gap:5px;
+        flex-wrap:wrap;
+        margin-bottom:8px;
+      }
+      .gkmV332Genres span{
+        font-size:10px;
+        color:#fff;
+        background:rgba(255,255,255,.12);
+        border-radius:999px;
+        padding:4px 7px;
+      }
+      .gkmV332Desc{
+        font-size:12px;
+        line-height:1.45;
+        color:rgba(255,255,255,.84);
+        max-height:88px;
+        overflow:hidden;
+      }
+      .gkmV332OpenHint{
+        margin-top:10px;
+        font-size:12px;
+        color:#28d7ff;
+        font-weight:900;
+      }
+      #gkmV332Status{
+        position:absolute;
+        left:14px;
+        bottom:14px;
+        z-index:5;
+        width:min(470px,calc(100vw - 28px));
+        border:1px solid rgba(0,220,255,.28);
+        background:rgba(6,13,30,.82);
+        border-radius:18px;
+        padding:12px 14px;
+        box-shadow:0 0 24px rgba(0,180,255,.14);
+        backdrop-filter:blur(8px);
+      }
+      #gkmV332Status b{display:block;font-size:16px;margin-bottom:4px}
+      #gkmV332Status div{font-size:11px;color:rgba(255,255,255,.72);line-height:1.35}
+      .gkmV332Hint{
+        position:absolute;
+        right:18px;
+        bottom:18px;
+        z-index:5;
+        color:rgba(255,255,255,.7);
+        font-size:11px;
+        text-align:right;
+        text-shadow:0 0 8px #000;
+        pointer-events:none;
+      }
       @media(max-width:700px){
-        #gkmV325Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
-        .gkmV325Top{padding:8px 10px 0 10px}.gkmV325Title{font-size:18px}.gkmV325Sub{font-size:11px}
-        .gkmV325Actions button{padding:8px 9px;font-size:12px}
-        #gkmV325Scene{inset:96px 0 0}.gkmV325Tile{width:14px;height:22px;margin-left:-7px;margin-top:-11px;border-radius:3px}
-        #gkmV325Preview{left:10px!important;right:10px!important;top:auto!important;bottom:82px!important;min-width:unset;max-width:none}
-        .gkmV325PreviewInner{grid-template-columns:78px 1fr;gap:10px}
-        #gkmV325Preview img{width:78px;height:116px}.gkmV325PreviewText h3{font-size:16px}.gkmV325PreviewDesc{display:none}
-        .gkmV325Info{left:10px;right:10px;bottom:12px;max-width:none}.gkmV325Hint{display:none}
+        #gkmV332Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
+        .gkmV332Title{font-size:17px}
+        .gkmV332Sub{font-size:10px}
+        .gkmV332Actions button{padding:8px 9px;font-size:12px}
+        .gkmV332Top{left:8px;right:8px;top:8px}
+        #gkmV332Preview{
+          width:calc(100vw - 20px);
+          grid-template-columns:92px 1fr;
+          gap:10px;
+          padding:12px;
+        }
+        #gkmV332Preview img{width:92px;height:136px}
+        .gkmV332PText h2{font-size:18px}
+        .gkmV332Desc{display:none}
+        #gkmV332Status{left:10px;bottom:10px;width:calc(100vw - 20px)}
+        .gkmV332Hint{display:none}
       }
     `;
-    document.head.appendChild(st);
+    document.head.appendChild(css);
   }
 
-  function removeOldUi(){
+  function removeOldWallUi(){
     [
       "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn",
-      "gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn",
-      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay"
+      "gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn",
+      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay"
     ].forEach(id=>{
       const el = document.getElementById(id);
       if(el) el.remove();
@@ -15348,180 +15545,230 @@ Endpoint: ${endpoint||"не задан"}`;
   }
 
   function ensureUi(){
-    removeOldUi();
+    removeOldWallUi();
 
-    if(!document.getElementById("gkmV325Btn")){
+    if(!document.getElementById("gkmV332Btn")){
       const btn = document.createElement("button");
-      btn.id = "gkmV325Btn";
+      btn.id = "gkmV332Btn";
       btn.type = "button";
-      btn.textContent = "🌌 3D стена";
-      btn.onclick = () => openWall("all");
+      btn.textContent = "🖼️ Canvas-мозаика";
+      btn.onclick = () => openMosaic("anime");
       document.body.appendChild(btn);
     }
 
-    if(document.getElementById("gkmV325Overlay")) return;
+    if(document.getElementById("gkmV332Overlay")) return;
 
     const overlay = document.createElement("div");
-    overlay.id = "gkmV325Overlay";
+    overlay.id = "gkmV332Overlay";
     overlay.innerHTML = `
-      <div class="gkmV325Top">
+      <canvas id="gkmV332Canvas"></canvas>
+      <div class="gkmV332Shade"></div>
+      <div class="gkmV332Top">
         <div>
-          <div class="gkmV325Title">🌌 3D стена постеров V325</div>
-          <div class="gkmV325Sub">Без повторов: каждый постер уникальный. Наведение — увеличить и показать карточку. Клик — открыть отдельно.</div>
+          <div class="gkmV332Title">🖼️ Canvas-мозаика постеров V332</div>
+          <div class="gkmV332Sub">Без тысяч DOM-карточек: рисуем тысячи постеров на Canvas. Наведение — превью, клик — открыть.</div>
         </div>
-        <div class="gkmV325Actions">
+        <div class="gkmV332Actions">
           <button data-kind="all">Все</button>
           <button data-kind="movies">Фильмы</button>
           <button data-kind="series">Сериалы</button>
           <button data-kind="anime">Аниме</button>
-          <button id="gkmV325AutoBtn">⏸ Авто</button>
-          <button id="gkmV325MixBtn">🔀 Микс</button>
-          <button id="gkmV325CloseBtn">✕</button>
+          <button data-kind="cartoons">Мульты</button>
+          <button id="gkmV332Shuffle">⏭ Другой набор</button>
+          <button id="gkmV332Close">✕</button>
         </div>
       </div>
-      <div id="gkmV325Scene"><div id="gkmV325World"></div></div>
-      <div id="gkmV325Preview"></div>
-      <div class="gkmV325Info"><b>Загрузка...</b><div class="meta">Собираю уникальные постеры.</div></div>
-      <div class="gkmV325Hint">Без дублей<br>наведение — карточка<br>клик — открыть</div>
+      <div id="gkmV332Preview"></div>
+      <div id="gkmV332Status"><b>Готовлю мозаику...</b><div>Загрузка...</div></div>
+      <div class="gkmV332Hint">наведение — карточка<br>клик — открыть полную карточку</div>
     `;
     document.body.appendChild(overlay);
 
+    canvas = document.getElementById("gkmV332Canvas");
+    ctx = canvas.getContext("2d", {alpha:false});
+
     overlay.querySelectorAll("[data-kind]").forEach(btn=>{
-      btn.onclick = async () => {
-        uniqueItems = [];
-        wallBuilt = false;
-        hidePreview();
-        await loadWallItems(btn.dataset.kind);
-        buildWall(true);
-      };
+      btn.onclick = () => openMosaic(btn.dataset.kind);
     });
-
-    document.getElementById("gkmV325CloseBtn").onclick = () => closeWall();
-    document.getElementById("gkmV325MixBtn").onclick = () => {
-      uniqueItems.sort(()=>Math.random()-.5);
-      buildWall(true);
-    };
-    document.getElementById("gkmV325AutoBtn").onclick = () => {
-      autoSpin = !autoSpin;
-      document.getElementById("gkmV325AutoBtn").textContent = autoSpin ? "⏸ Авто" : "▶ Авто";
+    document.getElementById("gkmV332Close").onclick = closeMosaic;
+    document.getElementById("gkmV332Shuffle").onclick = () => {
+      shuffleSeed += 1;
+      shuffle(visibleItems);
+      hoveredIndex = -1;
+      hidePreview();
+      scheduleDraw();
     };
 
-    const scene = document.getElementById("gkmV325Scene");
-    scene.addEventListener("pointerdown", e=>{
-      if(e.target.closest(".gkmV325Tile")) return;
-      isDragging = true;
-      startX = e.clientX;
-      startY = e.clientY;
-      scene.classList.add("drag");
-      try{ scene.setPointerCapture(e.pointerId); }catch(err){}
+    canvas.addEventListener("mousemove", onMove);
+    canvas.addEventListener("mouseleave", () => {
+      hoveredIndex = -1;
+      hidePreview();
+      scheduleDraw();
     });
-    scene.addEventListener("pointermove", e=>{
-      if(!isDragging) return;
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-      startX = e.clientX;
-      startY = e.clientY;
-      targetRotY += dx * .18;
-      targetRotX = Math.max(-22, Math.min(22, targetRotX - dy * .10));
+    canvas.addEventListener("click", () => {
+      const item = visibleItems[hoveredIndex];
+      if(item) openItem(item);
     });
-    scene.addEventListener("pointerup", e=>{
-      isDragging = false;
-      scene.classList.remove("drag");
-      try{ scene.releasePointerCapture(e.pointerId); }catch(err){}
+    window.addEventListener("resize", () => {
+      if(isOpen) {
+        resizeCanvas();
+        scheduleDraw();
+      }
     });
-    scene.addEventListener("wheel", e=>{
-      e.preventDefault();
-      targetZoom = Math.max(-180, Math.min(420, targetZoom + e.deltaY * -0.20));
-    }, {passive:false});
 
-    window.GKM_OPEN_3D_WALL = () => openWall("all");
+    window.GKM_OPEN_3D_WALL = () => openMosaic("anime");
+    window.GKM_OPEN_CANVAS_MOSAIC = () => openMosaic("anime");
   }
 
-  function setInfo(it){
-    const box = document.querySelector(".gkmV325Info");
-    if(!box || !it) return;
-    const r = ratingOf(it);
-    box.innerHTML = `<b>${esc(titleOf(it))}</b><div class="meta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>`;
+  function setStatus(title, sub){
+    const st = document.getElementById("gkmV332Status");
+    if(!st) return;
+    st.innerHTML = `<b>${esc(title || "Canvas-мозаика")}</b><div>${esc(sub || "")}</div>`;
   }
 
-  function showPreview(it, evt, tileEl){
-    const prev = document.getElementById("gkmV325Preview");
-    if(!prev || !it) return;
+  function resizeCanvas(){
+    if(!canvas || !ctx) return;
+    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    canvas.width = Math.floor(window.innerWidth * dpr);
+    canvas.height = Math.floor(window.innerHeight * dpr);
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
 
-    if(hoveredTile && hoveredTile !== tileEl){
-      hoveredTile.classList.remove("is-hover");
-      if(hoveredTile.dataset.baseTransform) hoveredTile.style.transform = hoveredTile.dataset.baseTransform;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const count = Math.max(visibleItems.length, 1);
+    const ratio = 2 / 3;
+
+    cols = Math.max(28, Math.ceil(Math.sqrt(count * w / h / ratio)));
+    rows = Math.ceil(count / cols);
+    tileW = Math.max(8, Math.floor(w / cols));
+    tileH = Math.max(12, Math.floor(tileW / ratio));
+
+    // Если по высоте не влезает — делаем ещё мельче.
+    const neededH = rows * tileH;
+    if(neededH > h * 1.08){
+      tileH = Math.max(10, Math.floor(h / rows));
+      tileW = Math.max(7, Math.floor(tileH * ratio));
+      cols = Math.max(cols, Math.ceil(w / tileW));
+      rows = Math.ceil(count / cols);
     }
+  }
 
-    hoveredTile = tileEl;
-    if(tileEl){
-      tileEl.classList.add("is-hover");
-      const base = tileEl.dataset.baseTransform || tileEl.style.transform;
-      tileEl.style.transform = base + " scale(2.25) translateZ(30px)";
+  function scheduleDraw(){
+    clearTimeout(drawTimer);
+    drawTimer = setTimeout(draw, 20);
+  }
+
+  function draw(){
+    if(!isOpen || !ctx || !canvas) return;
+    resizeCanvas();
+
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    ctx.fillStyle = "#020817";
+    ctx.fillRect(0,0,w,h);
+
+    const count = visibleItems.length;
+    const gridW = cols * tileW;
+    const gridH = rows * tileH;
+    const ox = Math.floor((w - gridW) / 2);
+    const oy = Math.floor((h - gridH) / 2);
+
+    for(let i=0;i<count;i++){
+      const item = visibleItems[i];
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      const x = ox + col * tileW;
+      const y = oy + row * tileH;
+      const img = imageFor(posterOf(item));
+
+      if(img && img.__ok){
+        try{ ctx.drawImage(img, x, y, tileW, tileH); }catch(e){}
+      } else {
+        ctx.fillStyle = "rgba(15,28,58,.82)";
+        ctx.fillRect(x, y, tileW, tileH);
+      }
+
+      if(i === hoveredIndex){
+        ctx.save();
+        ctx.strokeStyle = "rgba(0,220,255,.95)";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x-1,y-1,tileW+2,tileH+2);
+        const bigW = Math.min(180, tileW * 7);
+        const bigH = Math.min(260, tileH * 7);
+        const bx = Math.max(10, Math.min(w - bigW - 10, x + tileW + 12));
+        const by = Math.max(70, Math.min(h - bigH - 20, y - bigH / 3));
+        ctx.shadowColor = "rgba(0,200,255,.7)";
+        ctx.shadowBlur = 22;
+        if(img && img.__ok) {
+          try{ ctx.drawImage(img, bx, by, bigW, bigH); }catch(e){}
+        }
+        ctx.restore();
+      }
     }
+  }
 
-    const r = ratingOf(it);
-    const genres = genresOf(it).slice(0,4).join(" · ");
+  function indexAt(clientX, clientY){
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const gridW = cols * tileW;
+    const gridH = rows * tileH;
+    const ox = Math.floor((w - gridW) / 2);
+    const oy = Math.floor((h - gridH) / 2);
+    const col = Math.floor((clientX - ox) / tileW);
+    const row = Math.floor((clientY - oy) / tileH);
+    if(col < 0 || row < 0 || col >= cols || row >= rows) return -1;
+    const idx = row * cols + col;
+    return idx >= 0 && idx < visibleItems.length ? idx : -1;
+  }
 
-    prev.innerHTML = `
-      <div class="gkmV325PreviewInner">
-        <img src="${esc(imgOf(it))}" alt="${esc(titleOf(it))}">
-        <div class="gkmV325PreviewText">
-          <h3>${esc(titleOf(it))}</h3>
-          <div class="gkmV325PreviewMeta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}${genres ? "<br>" + esc(genres) : ""}</div>
-          <div class="gkmV325PreviewDesc">${esc(overviewOf(it))}</div>
-          <div class="gkmV325PreviewActions"><button id="gkmV325OpenCardBtn">Открыть карточку</button></div>
-        </div>
+  function onMove(e){
+    const idx = indexAt(e.clientX, e.clientY);
+    if(idx === hoveredIndex) return;
+    hoveredIndex = idx;
+    const item = visibleItems[idx];
+    if(item) showPreview(item);
+    else hidePreview();
+    scheduleDraw();
+  }
+
+  function showPreview(item){
+    const p = document.getElementById("gkmV332Preview");
+    if(!p || !item) return;
+    const r = ratingOf(item);
+    const genres = genresOf(item).slice(0,5);
+    p.innerHTML = `
+      <img src="${esc(posterOf(item))}" alt="">
+      <div class="gkmV332PText">
+        <h2>${esc(titleOf(item))}</h2>
+        <div class="gkmV332Meta">${esc(typeOf(item))}${yearOf(item) ? " · " + esc(yearOf(item)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>
+        <div class="gkmV332Genres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div>
+        <div class="gkmV332Desc">${esc(overviewOf(item))}</div>
+        <div class="gkmV332OpenHint">Клик — открыть полную карточку</div>
       </div>
     `;
-    prev.classList.add("open");
-    setInfo(it);
-
-    if(window.innerWidth >= 700 && evt){
-      const rect = prev.getBoundingClientRect();
-      let x = evt.clientX + 22;
-      let y = evt.clientY - 18;
-      if(x + rect.width > window.innerWidth - 10) x = evt.clientX - rect.width - 22;
-      if(y + rect.height > window.innerHeight - 10) y = window.innerHeight - rect.height - 10;
-      if(y < 76) y = 76;
-      prev.style.left = x + "px";
-      prev.style.top = y + "px";
-      prev.style.right = "auto";
-      prev.style.bottom = "auto";
-    }
-
-    const btn = document.getElementById("gkmV325OpenCardBtn");
-    if(btn) btn.onclick = ev => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      openSiteCard(it);
-    };
+    p.classList.add("open");
   }
 
   function hidePreview(){
-    const prev = document.getElementById("gkmV325Preview");
-    if(prev) prev.classList.remove("open");
-    if(hoveredTile){
-      hoveredTile.classList.remove("is-hover");
-      if(hoveredTile.dataset.baseTransform) hoveredTile.style.transform = hoveredTile.dataset.baseTransform;
-    }
-    hoveredTile = null;
+    const p = document.getElementById("gkmV332Preview");
+    if(p) p.classList.remove("open");
   }
 
-  function tryOpenByKnownFunctions(it){
-    // Важно: openDetails в твоём app.js есть как обычная функция, поэтому eval нужен.
+  function tryOpen(item){
     const names = ["openDetails","openTitleModal","showDetails","showModal","openCard","openMovie","openItemModal"];
-    for(const fn of names){
+    for(const name of names){
       try{
-        const f = eval(fn);
-        if(typeof f === "function"){
-          f(it);
+        const f = eval(name);
+        if(typeof f === "function") {
+          f(item);
           return true;
         }
       }catch(e){}
       try{
-        if(typeof window[fn] === "function"){
-          window[fn](it);
+        if(typeof window[name] === "function") {
+          window[name](item);
           return true;
         }
       }catch(e){}
@@ -15529,149 +15776,60 @@ Endpoint: ${endpoint||"не задан"}`;
     return false;
   }
 
-  function openSiteCard(it){
-    closeWall(false);
+  function openItem(item){
+    closeMosaic(false);
     setTimeout(()=>{
-      if(!tryOpenByKnownFunctions(it)) alert(titleOf(it));
-    }, 100);
+      if(!tryOpen(item)) alert(titleOf(item));
+    }, 90);
   }
 
-  function applyWorld(){
-    const world = document.getElementById("gkmV325World");
-    if(world) world.style.transform = `translateZ(${zoom}px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-  }
-
-  function animate(){
-    if(!isOpen) return;
-    rotX += (targetRotX - rotX) * .10;
-    rotY += (targetRotY - rotY) * .10;
-    zoom += (targetZoom - zoom) * .12;
-    if(autoSpin && !isDragging && !hoveredTile) targetRotY += .025;
-    applyWorld();
-    rafId = requestAnimationFrame(animate);
-  }
-
-  function buildWall(force=false){
-    const world = document.getElementById("gkmV325World");
-    if(!world) return;
-    world.innerHTML = "";
-    hidePreview();
-
-    if(!uniqueItems.length){
-      document.querySelector(".gkmV325Info").innerHTML = `<b>Постеры не найдены</b><div class="meta">Нет уникальных постеров для этого раздела.</div>`;
-      return;
-    }
-
-    const mobile = window.innerWidth < 700;
-    const cols = mobile ? 46 : 88;
-    const rows = Math.ceil(uniqueItems.length / cols);
-    const tileW = mobile ? 14 : 18;
-    const tileH = mobile ? 22 : 28;
-    const stepX = mobile ? 13.6 : 17.6;
-    const stepY = mobile ? 21.5 : 27.0;
-    const radius = mobile ? 370 : 800;
-    const arc = mobile ? 142 : 164;
-    const yShift = (rows - 1) * stepY * .5;
-
-    uniqueItems.forEach((it, i)=>{
-      const col = i % cols;
-      const row = Math.floor(i / cols);
-      const nx = cols <= 1 ? 0 : col / (cols - 1);
-      const ang = (-arc / 2 + nx * arc) * Math.PI / 180;
-      const x = Math.sin(ang) * radius;
-      const z = Math.cos(ang) * radius - radius;
-      const y = row * stepY - yShift;
-      const ry = -ang * 180 / Math.PI;
-
-      const tile = document.createElement("button");
-      tile.type = "button";
-      tile.className = "gkmV325Tile";
-      tile.style.width = tileW + "px";
-      tile.style.height = tileH + "px";
-      tile.style.marginLeft = (-tileW/2) + "px";
-      tile.style.marginTop = (-tileH/2) + "px";
-      tile.style.setProperty("--poster", `url("${safeUrl(imgOf(it))}")`);
-
-      const baseTransform = `translate3d(${x}px,${y}px,${z}px) rotateY(${ry}deg)`;
-      tile.dataset.baseTransform = baseTransform;
-      tile.style.transform = baseTransform;
-      tile.title = titleOf(it);
-
-      tile.addEventListener("mouseenter", e => showPreview(it, e, tile));
-      tile.addEventListener("mousemove", e => showPreview(it, e, tile));
-      tile.addEventListener("mouseleave", () => setTimeout(hidePreview, 45));
-      tile.addEventListener("click", e=>{
-        e.preventDefault();
-        e.stopPropagation();
-        openSiteCard(it);
-      });
-
-      world.appendChild(tile);
-    });
-
-    setInfo(uniqueItems[0]);
-    wallBuilt = true;
-    applyWorld();
-  }
-
-  async function openWall(kind="all"){
+  async function openMosaic(kind="anime"){
     ensureCss();
     ensureUi();
-    const overlay = document.getElementById("gkmV325Overlay");
+    const overlay = document.getElementById("gkmV332Overlay");
     overlay.classList.add("open");
     document.body.style.overflow = "hidden";
     isOpen = true;
+    hoveredIndex = -1;
+    hidePreview();
 
-    if(kind !== currentKind || !uniqueItems.length){
-      await loadWallItems(kind);
+    if(kind !== currentKind || !items.length){
+      items = [];
+      visibleItems = [];
+      await loadItems(kind);
+    } else {
+      scheduleDraw();
     }
-
-    buildWall(true);
-
-    rotX = 2;
-    rotY = -12;
-    zoom = 95;
-    targetRotX = 2;
-    targetRotY = -12;
-    targetZoom = 95;
-
-    if(rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(animate);
+    preloadVisibleImages();
   }
 
-  function closeWall(full=true){
-    const overlay = document.getElementById("gkmV325Overlay");
+  function closeMosaic(full=true){
+    const overlay = document.getElementById("gkmV332Overlay");
     if(overlay) overlay.classList.remove("open");
     document.body.style.overflow = "";
     hidePreview();
     isOpen = false;
-    if(full && rafId){
-      cancelAnimationFrame(rafId);
-      rafId = 0;
-    }
   }
 
   function install(){
     ensureCss();
     ensureUi();
   }
-
   if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true});
   else install();
-
   setTimeout(install, 500);
   setTimeout(install, 1400);
 
-  console.log("GKM V325: unique connected poster wall installed");
+  console.log("GKM V332: canvas poster mosaic restored");
 })();
-/* GKM V325 UNIQUE CONNECTED POSTER WALL END */
+/* GKM V332 CANVAS POSTER MOSAIC END */
 
 
-/* GKM V345 RESTORE V325 WALL KEEP V344 AI START */
+/* GKM V346 RESTORE EXACT V332 CANVAS KEEP AI START */
 (function(){
-  window.GKM_V345_RESTORE_V325_WALL_KEEP_V344_AI_VERSION =
-    "v345-restore-v325-wall-keep-v344-ai-2026-07-21";
-  console.log("GKM V345: exact V325 wall restored; V344 AI/weather preserved");
+  window.GKM_V346_RESTORE_EXACT_V332_CANVAS_KEEP_AI_VERSION =
+    "v346-restore-exact-v332-canvas-keep-ai-2026-07-21";
+  console.log("GKM V346: exact V332 Canvas mosaic restored; V344 AI/weather preserved");
 })();
-/* GKM V345 RESTORE V325 WALL KEEP V344 AI END */
+/* GKM V346 RESTORE EXACT V332 CANVAS KEEP AI END */
 
