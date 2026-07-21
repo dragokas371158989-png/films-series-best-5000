@@ -14887,9 +14887,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V337 HONEST COLLECTIONS FIX END */
 
 
-/* GKM V343 SOFT FISHEYE VIDEO WALL START */
+/* GKM V3431 WALL FILL AND LOGO HOTFIX START */
 (function(){
-  window.GKM_V343_SOFT_FISHEYE_VIDEO_WALL_VERSION = "v343-soft-fisheye-video-wall-2026-07-21";
+  window.GKM_V3431_WALL_FILL_LOGO_HOTFIX_VERSION = "v3431-wall-fill-logo-hotfix-2026-07-21";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
@@ -14929,6 +14929,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   let loadToken = 0;
   let loadCursor = 0;
+  let loadOrder=[];
   let activeLoads = 0;
   let loadedCount = 0;
   let itemLoaded = [];
@@ -14946,8 +14947,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let motionFrame = 0;
   let lensDirty = false;
 
-  const FIRST_CONCURRENCY = 44;
-  const REST_CONCURRENCY = 24;
+  const FIRST_CONCURRENCY = 64;
+  const REST_CONCURRENCY = 32;
   const LENS_SIZE = 330;
   const LENS_RADIUS = LENS_SIZE / 2;
 
@@ -15085,7 +15086,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
   }
   function urlsFor(kind){
-    const urls=["data/fast/home.json?v=343"];
+    const urls=["data/fast/home.json?v=3431"];
     const map={
       anime:["anime"],
       movies:["movies"],
@@ -15097,7 +15098,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const maxPages=kind==="all"?24:(kind==="anime"?72:40);
     cats.forEach(cat=>{
       for(let i=1;i<=maxPages;i++){
-        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=343`);
+        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=3431`);
       }
     });
     return urls;
@@ -15134,21 +15135,32 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const availableH=Math.max(220,h-topPad-bottomPad);
 
     let best=null;
-    for(let cw=7;cw<=16;cw++){
-      const ch=Math.max(10,Math.round(cw*1.52));
-      const c=Math.max(30,Math.floor(w/cw));
-      const r=Math.ceil(count/c);
-      const gh=r*ch;
-      const gw=c*cw;
-      const score=Math.abs(availableH-gh)*5+Math.abs(w-gw);
-      if(!best||score<best.score) best={cw,ch,c,r,score};
+
+    // Заполняем всю ширину и минимизируем большой пустой хвост последнего ряда.
+    for(let candidateCols=90;candidateCols<=280;candidateCols++){
+      const cw=w/candidateCols;
+      if(cw<6||cw>18) continue;
+
+      const ch=cw*1.52;
+      const candidateRows=Math.ceil(count/candidateCols);
+      const gridHeight=candidateRows*ch;
+      const emptyCells=candidateRows*candidateCols-count;
+
+      const heightPenalty=Math.abs(availableH-gridHeight)*7;
+      const emptyPenalty=emptyCells*2.6;
+      const cellPenalty=Math.abs(cw-10.5)*2;
+      const score=heightPenalty+emptyPenalty+cellPenalty;
+
+      if(!best||score<best.score){
+        best={score,cols:candidateCols,rows:candidateRows,cw,ch};
+      }
     }
 
     cellW=best.cw;
     cellH=best.ch;
-    cols=best.c;
-    rows=best.r;
-    ox=Math.floor((w-cols*cellW)/2);
+    cols=best.cols;
+    rows=best.rows;
+    ox=0;
     oy=topPad;
   }
 
@@ -15173,8 +15185,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function placeholderColor(index){
-    const hue=(index*37)%190+175;
-    return `hsl(${hue} 28% ${10+(index%4)}%)`;
+    return index % 2 ? "#081225" : "#0a162c";
   }
 
   function paintSkeleton(){
@@ -15289,12 +15300,38 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     });
   }
 
+  function gcd(a,b){
+    while(b){
+      const next=a%b;
+      a=b;
+      b=next;
+    }
+    return Math.abs(a);
+  }
+
+  function buildDistributedLoadOrder(count){
+    if(count<=1) return count===1?[0]:[];
+
+    let step=Math.max(3,Math.floor(count*0.61803398875));
+    if(step%2===0) step+=1;
+    while(gcd(step,count)!==1) step+=2;
+
+    const order=new Array(count);
+    let index=0;
+    for(let i=0;i<count;i++){
+      order[i]=index;
+      index=(index+step)%count;
+    }
+    return order;
+  }
+
   function pumpQueue(token){
     if(token!==loadToken||!isOpen) return;
     const limit=loadCursor<900?FIRST_CONCURRENCY:REST_CONCURRENCY;
 
     while(activeLoads<limit&&loadCursor<wallItems.length){
-      const index=loadCursor++;
+      const orderPosition=loadCursor++;
+      const index=loadOrder[orderPosition];
       activeLoads++;
       loadThumb(index,token).finally(()=>{
         activeLoads--;
@@ -15303,7 +15340,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         if(loadedCount%120===0||loadCursor===wallItems.length){
           setStatus(
             `${labelKind(currentKind)} — ${wallItems.length} постеров`,
-            `Загружено ${Math.min(loadedCount,wallItems.length)}/${wallItems.length}. Без повторов; линза и карточка работают отдельно от сетки.`
+            `Загружено ${Math.min(loadedCount,wallItems.length)}/${wallItems.length}. Низ, середина и верх заполняются одновременно; без повторов.`
           );
         }
         pumpQueue(token);
@@ -15315,6 +15352,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     loadToken++;
     const token=loadToken;
     loadCursor=0;
+    loadOrder=buildDistributedLoadOrder(wallItems.length);
     activeLoads=0;
     loadedCount=0;
     itemLoaded=new Array(wallItems.length).fill(false);
@@ -15593,7 +15631,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     setStatus(
       `${labelKind(kind)} — ${wallItems.length} постеров`,
-      "Каталог собран. Постеры загружаются в свои ячейки без повторов."
+      "Каталог собран. Постеры загружаются равномерно по всей стене, в свои ячейки и без повторов."
     );
     startImageQueue();
   }
@@ -15715,7 +15753,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div class="gkmV343Shade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V343</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V343.1</div>
           <div class="gkmV343Sub">Мягкий «рыбий глаз» без видимого круга. Карточка плавно следует за мышью.</div>
         </div>
         <div class="gkmV343Actions">
@@ -15830,7 +15868,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V343: soft fisheye video wall installed");
+  console.log("GKM V343.1: wall fill and logo hotfix installed");
 })();
-/* GKM V343 SOFT FISHEYE VIDEO WALL END */
+/* GKM V3431 WALL FILL AND LOGO HOTFIX END */
 
