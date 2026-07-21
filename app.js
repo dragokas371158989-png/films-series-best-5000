@@ -14365,952 +14365,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V337 HONEST COLLECTIONS FIX END */
 
 
-/* GKM V343 SOFT FISHEYE VIDEO WALL START */
-(function(){
-  window.GKM_V343_SOFT_FISHEYE_VIDEO_WALL_VERSION = "v343-soft-fisheye-video-wall-2026-07-21";
-
-  const JSON_CACHE = new Map();
-  const THUMB_CACHE = new Map();
-
-  const EXPECTED_COUNTS = {
-    anime: 4400,
-    movies: 5200,
-    series: 3600,
-    cartoons: 2600,
-    all: 9000
-  };
-
-  let canvas = null;
-  let ctx = null;
-  let bufferCanvas = null;
-  let bufferCtx = null;
-  let lensCanvas = null;
-  let lensCtx = null;
-
-  let isOpen = false;
-  let currentKind = "anime";
-  let wallItems = [];
-  let allItems = [];
-  let layoutCount = EXPECTED_COUNTS.anime;
-
-  let cols = 1;
-  let rows = 1;
-  let cellW = 10;
-  let cellH = 15;
-  let ox = 0;
-  let oy = 44;
-
-  let hoverIndex = -1;
-  let hoverTimer = 0;
-  let activePreviewPane = 0;
-  let previewKey = "";
-
-  let loadToken = 0;
-  let loadCursor = 0;
-  let activeLoads = 0;
-  let loadedCount = 0;
-  let itemLoaded = [];
-  let shuffleSeed = 0;
-
-  let pointerInside = false;
-  let pointerTargetX = 0;
-  let pointerTargetY = 0;
-  let pointerX = 0;
-  let pointerY = 0;
-  let previewX = 0;
-  let previewY = 0;
-  let previewTargetX = 0;
-  let previewTargetY = 0;
-  let motionFrame = 0;
-  let lensDirty = false;
-
-  const FIRST_CONCURRENCY = 44;
-  const REST_CONCURRENCY = 24;
-  const LENS_SIZE = 330;
-  const LENS_RADIUS = LENS_SIZE / 2;
-
-  function t(v){ return String(v == null ? "" : v).trim(); }
-  function esc(v){
-    return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    }[ch]));
-  }
-  function n(v){
-    return t(v).toLowerCase()
-      .replace(/ё/g,"е")
-      .replace(/[^\p{L}\p{N}]+/gu," ")
-      .replace(/\s+/g," ")
-      .trim();
-  }
-  function clamp(v,min,max){ return Math.max(min,Math.min(max,v)); }
-
-  function titleOf(item){
-    try{ if(typeof displayTitle === "function") return t(displayTitle(item)); }catch(e){}
-    return t(item && (item.ru || item.title_ru || item.__manualTopTitle || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
-  }
-  function typeOf(item){
-    try{ if(typeof getType === "function") return t(getType(item)); }catch(e){}
-    return t(item && (item.type || item.category || item.kind)) || "Каталог";
-  }
-  function yearOf(item){
-    try{ if(typeof getYear === "function") return t(getYear(item)); }catch(e){}
-    const raw = t(item && (item.year || item.release_date || item.first_air_date));
-    const m = raw.match(/(19\d{2}|20\d{2})/);
-    return m ? m[1] : raw;
-  }
-  function ratingOf(item){
-    try{ if(typeof getRating === "function") return Number(getRating(item) || 0); }catch(e){}
-    return Number(item && (item.rating || item.vote_average || item.score) || 0);
-  }
-  function overviewOf(item){
-    try{ if(typeof displayOverview === "function") return t(displayOverview(item)); }catch(e){}
-    return t(item && (item.overview || item.description || item.synopsis || item.plot)) || "Описание будет добавлено позже.";
-  }
-  function genresOf(item){
-    try{
-      if(typeof getGenres === "function"){
-        const g = getGenres(item);
-        if(Array.isArray(g)) return g.filter(Boolean).map(String);
-      }
-    }catch(e){}
-    const raw = item && (item.genres || item.genre || item.tags);
-    if(Array.isArray(raw)) return raw.filter(Boolean).map(String);
-    if(typeof raw === "string") return raw.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
-    return [];
-  }
-  function posterOf(item){
-    try{ if(typeof posterSrc === "function") return t(posterSrc(item)); }catch(e){}
-    return t(item && (item.poster || item.poster_url || item.posterUrl || item.image || item.img || item.cover || item.cover_url || item.thumbnail || item.backdrop || item.backdrop_path));
-  }
-  function originalPosterOf(item){
-    try{ if(typeof posterOriginalSrc === "function") return t(posterOriginalSrc(item)); }catch(e){}
-    return posterOf(item);
-  }
-  function keyOf(item){
-    return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOf(item)}|${yearOf(item)}|${posterOf(item)}`);
-  }
-  function familyOf(item){
-    const s = n(typeOf(item));
-    if(s.includes("аниме") || s.includes("anime")) return "anime";
-    if(s.includes("сериал") || s.includes("series")) return "series";
-    if(s.includes("мульт") || s.includes("cartoon")) return "cartoons";
-    if(s.includes("фильм") || s.includes("movie")) return "movies";
-    return "other";
-  }
-  function passKind(item,kind){ return kind === "all" || familyOf(item) === kind; }
-  function labelKind(kind){
-    return {all:"Все",anime:"Аниме",movies:"Фильмы",series:"Сериалы",cartoons:"Мульты"}[kind] || "Каталог";
-  }
-
-  function parseJson(j){
-    const out = [];
-    if(!j) return out;
-    if(Array.isArray(j)) out.push(...j);
-    if(Array.isArray(j.items)) out.push(...j.items);
-    if(Array.isArray(j.data)) out.push(...j.data);
-    if(Array.isArray(j.results)) out.push(...j.results);
-    if(j.sections && typeof j.sections === "object"){
-      Object.values(j.sections).forEach(v=>{
-        if(Array.isArray(v)) out.push(...v);
-        else if(v && Array.isArray(v.items)) out.push(...v.items);
-      });
-    }
-    return out.filter(x=>x && typeof x === "object");
-  }
-  async function fetchJson(url){
-    if(JSON_CACHE.has(url)) return JSON_CACHE.get(url);
-    const p = fetch(url,{cache:"force-cache"})
-      .then(r=>r.ok?r.json():null)
-      .then(parseJson)
-      .catch(()=>[]);
-    JSON_CACHE.set(url,p);
-    return p;
-  }
-  function localPool(){
-    const out = [];
-    try{ if(Array.isArray(currentItems)) out.push(...currentItems); }catch(e){}
-    try{
-      if(homeData && homeData.sections){
-        Object.values(homeData.sections).forEach(v=>{
-          if(Array.isArray(v)) out.push(...v);
-          else if(v && Array.isArray(v.items)) out.push(...v.items);
-        });
-      }
-    }catch(e){}
-    return out;
-  }
-  function uniqueList(arr){
-    const seen = new Set();
-    const out = [];
-    for(const item of arr){
-      if(!item || !posterOf(item)) continue;
-      const k = keyOf(item);
-      if(seen.has(k)) continue;
-      seen.add(k);
-      out.push(item);
-    }
-    return out;
-  }
-  function shuffle(arr){
-    let seed = (Date.now()+shuffleSeed)>>>0;
-    function rnd(){
-      seed=(seed*1664525+1013904223)>>>0;
-      return seed/4294967296;
-    }
-    for(let i=arr.length-1;i>0;i--){
-      const j=Math.floor(rnd()*(i+1));
-      [arr[i],arr[j]]=[arr[j],arr[i]];
-    }
-  }
-  function urlsFor(kind){
-    const urls=["data/fast/home.json?v=343"];
-    const map={
-      anime:["anime"],
-      movies:["movies"],
-      series:["series"],
-      cartoons:["cartoons"],
-      all:["anime","movies","series","cartoons"]
-    };
-    const cats=map[kind]||["anime"];
-    const maxPages=kind==="all"?24:(kind==="anime"?72:40);
-    cats.forEach(cat=>{
-      for(let i=1;i<=maxPages;i++){
-        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=343`);
-      }
-    });
-    return urls;
-  }
-
-  function smallPosterUrl(item){
-    const raw=originalPosterOf(item)||posterOf(item);
-    if(!raw) return "";
-    try{
-      const url=new URL(raw,location.href);
-      if(url.hostname.toLowerCase().includes("images.weserv.nl")){
-        url.searchParams.set("w","48");
-        url.searchParams.set("h","72");
-        url.searchParams.set("fit","cover");
-        url.searchParams.set("output","webp");
-        url.searchParams.set("q","58");
-        return url.href;
-      }
-      if(url.hostname===location.hostname) return url.href;
-      const clean=url.href.replace(/^https?:\/\//i,"");
-      return "https://images.weserv.nl/?url="+encodeURIComponent(clean)+"&w=48&h=72&fit=cover&output=webp&q=58";
-    }catch(e){
-      return raw;
-    }
-  }
-  function fullPosterUrl(item){ return originalPosterOf(item)||posterOf(item); }
-
-  function computeGrid(){
-    const w=window.innerWidth;
-    const h=window.innerHeight;
-    const count=Math.max(layoutCount,wallItems.length,1);
-    const topPad=42;
-    const bottomPad=72;
-    const availableH=Math.max(220,h-topPad-bottomPad);
-
-    let best=null;
-    for(let cw=7;cw<=16;cw++){
-      const ch=Math.max(10,Math.round(cw*1.52));
-      const c=Math.max(30,Math.floor(w/cw));
-      const r=Math.ceil(count/c);
-      const gh=r*ch;
-      const gw=c*cw;
-      const score=Math.abs(availableH-gh)*5+Math.abs(w-gw);
-      if(!best||score<best.score) best={cw,ch,c,r,score};
-    }
-
-    cellW=best.cw;
-    cellH=best.ch;
-    cols=best.c;
-    rows=best.r;
-    ox=Math.floor((w-cols*cellW)/2);
-    oy=topPad;
-  }
-
-  function resizeCanvases(){
-    if(!canvas||!ctx) return;
-    const w=window.innerWidth;
-    const h=window.innerHeight;
-
-    canvas.width=w;
-    canvas.height=h;
-    canvas.style.width=w+"px";
-    canvas.style.height=h+"px";
-
-    if(!bufferCanvas){
-      bufferCanvas=document.createElement("canvas");
-      bufferCtx=bufferCanvas.getContext("2d",{alpha:false});
-    }
-    bufferCanvas.width=w;
-    bufferCanvas.height=h;
-
-    computeGrid();
-  }
-
-  function placeholderColor(index){
-    const hue=(index*37)%190+175;
-    return `hsl(${hue} 28% ${10+(index%4)}%)`;
-  }
-
-  function paintSkeleton(){
-    resizeCanvases();
-    bufferCtx.fillStyle="#020817";
-    bufferCtx.fillRect(0,0,bufferCanvas.width,bufferCanvas.height);
-
-    const count=Math.max(layoutCount,wallItems.length);
-    for(let i=0;i<count;i++){
-      const col=i%cols;
-      const row=Math.floor(i/cols);
-      const x=ox+col*cellW;
-      const y=oy+row*cellH;
-      bufferCtx.fillStyle=placeholderColor(i);
-      bufferCtx.fillRect(x,y,cellW,cellH);
-    }
-    presentBuffer();
-    lensDirty=true;
-  }
-
-  function drawCover(targetCtx,img,x,y,w,h){
-    const sw=img.naturalWidth||img.width;
-    const sh=img.naturalHeight||img.height;
-    if(!sw||!sh) return;
-    const srcRatio=sw/sh;
-    const dstRatio=w/h;
-    let sx=0,sy=0,sWidth=sw,sHeight=sh;
-    if(srcRatio>dstRatio){
-      sWidth=sh*dstRatio;
-      sx=(sw-sWidth)/2;
-    }else{
-      sHeight=sw/dstRatio;
-      sy=(sh-sHeight)/2;
-    }
-    targetCtx.drawImage(img,sx,sy,sWidth,sHeight,x,y,w,h);
-  }
-
-  function drawTile(index,img){
-    if(!bufferCtx||index<0||index>=wallItems.length||!img) return;
-    const col=index%cols;
-    const row=Math.floor(index/cols);
-    const x=ox+col*cellW;
-    const y=oy+row*cellH;
-    try{
-      drawCover(bufferCtx,img,x,y,cellW,cellH);
-      if(isOpen&&ctx) drawCover(ctx,img,x,y,cellW,cellH);
-      lensDirty=true;
-    }catch(e){}
-  }
-
-  function presentBuffer(){
-    if(!isOpen||!ctx||!bufferCanvas) return;
-    ctx.drawImage(bufferCanvas,0,0);
-  }
-
-  function getThumbRecord(item){
-    const url=smallPosterUrl(item);
-    if(!url) return null;
-    if(THUMB_CACHE.has(url)) return THUMB_CACHE.get(url);
-    const rec={url,state:"idle",img:null,callbacks:[]};
-    THUMB_CACHE.set(url,rec);
-    return rec;
-  }
-
-  function loadThumb(index,token){
-    return new Promise(resolve=>{
-      if(token!==loadToken||index>=wallItems.length){ resolve(); return; }
-
-      const item=wallItems[index];
-      const rec=getThumbRecord(item);
-      if(!rec){ resolve(); return; }
-
-      const finish=img=>{
-        if(token===loadToken&&img){
-          itemLoaded[index]=true;
-          drawTile(index,img);
-        }
-        resolve();
-      };
-
-      if(rec.state==="loaded"&&rec.img){ finish(rec.img); return; }
-      if(rec.state==="loading"){ rec.callbacks.push(finish); return; }
-
-      rec.state="loading";
-      rec.callbacks.push(finish);
-
-      const img=new Image();
-      img.decoding="async";
-      img.referrerPolicy="no-referrer";
-
-      const complete=success=>{
-        if(success){
-          rec.state="loaded";
-          rec.img=img;
-          loadedCount++;
-        }else{
-          rec.state="failed";
-        }
-        const callbacks=rec.callbacks.splice(0);
-        callbacks.forEach(cb=>cb(success?img:null));
-      };
-
-      img.onload=()=>complete(true);
-      img.onerror=()=>{
-        const raw=fullPosterUrl(item);
-        if(raw&&img.src!==raw){
-          img.onerror=()=>complete(false);
-          img.src=raw;
-        }else complete(false);
-      };
-      img.src=rec.url;
-    });
-  }
-
-  function pumpQueue(token){
-    if(token!==loadToken||!isOpen) return;
-    const limit=loadCursor<900?FIRST_CONCURRENCY:REST_CONCURRENCY;
-
-    while(activeLoads<limit&&loadCursor<wallItems.length){
-      const index=loadCursor++;
-      activeLoads++;
-      loadThumb(index,token).finally(()=>{
-        activeLoads--;
-        if(token!==loadToken) return;
-
-        if(loadedCount%120===0||loadCursor===wallItems.length){
-          setStatus(
-            `${labelKind(currentKind)} — ${wallItems.length} постеров`,
-            `Загружено ${Math.min(loadedCount,wallItems.length)}/${wallItems.length}. Без повторов; линза и карточка работают отдельно от сетки.`
-          );
-        }
-        pumpQueue(token);
-      });
-    }
-  }
-
-  function startImageQueue(){
-    loadToken++;
-    const token=loadToken;
-    loadCursor=0;
-    activeLoads=0;
-    loadedCount=0;
-    itemLoaded=new Array(wallItems.length).fill(false);
-
-    paintSkeleton();
-    pumpQueue(token);
-  }
-
-  function indexAt(clientX,clientY){
-    const col=Math.floor((clientX-ox)/cellW);
-    const row=Math.floor((clientY-oy)/cellH);
-    if(col<0||row<0||col>=cols||row>=rows) return -1;
-    const idx=row*cols+col;
-    return idx>=0&&idx<wallItems.length?idx:-1;
-  }
-
-  function previewPaneHtml(item){
-    const r=ratingOf(item);
-    const genres=genresOf(item).slice(0,5);
-    const thumb=smallPosterUrl(item);
-    return `
-      <img class="gkmV343PreviewPoster" src="${esc(thumb||posterOf(item))}" data-full="${esc(fullPosterUrl(item))}" alt="">
-      <div class="gkmV343PText">
-        <h2>${esc(titleOf(item))}</h2>
-        <div class="gkmV343Meta">${esc(typeOf(item))}${yearOf(item)?" · "+esc(yearOf(item)):""}${r?" · ★ "+Number(r).toFixed(1):""}</div>
-        <div class="gkmV343Genres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div>
-        <div class="gkmV343Desc">${esc(overviewOf(item))}</div>
-        <div class="gkmV343OpenHint">Клик — открыть полную карточку</div>
-      </div>
-    `;
-  }
-
-  function upgradePreviewPoster(pane){
-    const img=pane&&pane.querySelector(".gkmV343PreviewPoster");
-    if(!img) return;
-    const full=img.dataset.full;
-    if(!full||full===img.src) return;
-    const high=new Image();
-    high.decoding="async";
-    high.referrerPolicy="no-referrer";
-    high.onload=()=>{
-      if(img.isConnected){
-        img.style.opacity=".68";
-        requestAnimationFrame(()=>{
-          img.src=full;
-          img.style.opacity="1";
-        });
-      }
-    };
-    high.src=full;
-  }
-
-  function showPreview(item){
-    const preview=document.getElementById("gkmV343Preview");
-    if(!preview||!item) return;
-
-    const key=keyOf(item);
-    if(previewKey===key) return;
-    previewKey=key;
-
-    const nextPaneIndex=activePreviewPane===0?1:0;
-    const oldPane=preview.querySelector(`[data-pane="${activePreviewPane}"]`);
-    const nextPane=preview.querySelector(`[data-pane="${nextPaneIndex}"]`);
-
-    nextPane.innerHTML=previewPaneHtml(item);
-    nextPane.classList.remove("active");
-    preview.classList.add("open");
-
-    requestAnimationFrame(()=>{
-      if(oldPane) oldPane.classList.remove("active");
-      nextPane.classList.add("active");
-      activePreviewPane=nextPaneIndex;
-      setTimeout(()=>upgradePreviewPoster(nextPane),80);
-    });
-  }
-
-  function hidePreview(){
-    clearTimeout(hoverTimer);
-    previewKey="";
-    const preview=document.getElementById("gkmV343Preview");
-    if(!preview) return;
-    preview.classList.remove("open");
-    preview.querySelectorAll(".gkmV343Pane").forEach(p=>p.classList.remove("active"));
-  }
-
-  function renderSoftFisheye(){
-    if(!pointerInside||!lensCanvas||!lensCtx||!bufferCanvas||!lensDirty) return;
-    lensDirty=false;
-
-    const size=LENS_SIZE;
-    const radius=LENS_RADIUS;
-    lensCtx.clearRect(0,0,size,size);
-    lensCtx.imageSmoothingEnabled=true;
-    lensCtx.imageSmoothingQuality="high";
-
-    // Несколько мягких колец дают выпуклость, а не грубое круглое увеличение.
-    const rings=6;
-    for(let ring=0;ring<rings;ring++){
-      const outer=radius*(1-ring/rings);
-      const inner=radius*(1-(ring+1)/rings);
-      const mid=(outer+inner)/2;
-      const strength=1+0.48*Math.pow(1-mid/radius,1.55);
-      const srcRadius=radius/strength;
-
-      lensCtx.save();
-      const path=new Path2D();
-      path.arc(radius,radius,outer,0,Math.PI*2);
-      path.arc(radius,radius,inner,0,Math.PI*2,true);
-      lensCtx.clip(path,"evenodd");
-
-      const sx=clamp(pointerX-srcRadius,0,Math.max(0,bufferCanvas.width-srcRadius*2));
-      const sy=clamp(pointerY-srcRadius,0,Math.max(0,bufferCanvas.height-srcRadius*2));
-      lensCtx.drawImage(
-        bufferCanvas,
-        sx,sy,srcRadius*2,srcRadius*2,
-        0,0,size,size
-      );
-      lensCtx.restore();
-    }
-
-    lensCanvas.style.left=`${pointerX-radius}px`;
-    lensCanvas.style.top=`${pointerY-radius}px`;
-  }
-
-  function updatePreviewTarget(){
-    const preview=document.getElementById("gkmV343Preview");
-    if(!preview) return;
-
-    const cardW=Math.min(560,window.innerWidth-42);
-    const cardH=window.innerWidth<700?164:258;
-    const gap=82;
-
-    let tx=pointerTargetX+gap;
-    if(tx+cardW>window.innerWidth-12) tx=pointerTargetX-cardW-gap;
-    tx=clamp(tx,10,Math.max(10,window.innerWidth-cardW-10));
-
-    let ty=pointerTargetY-cardH/2;
-    ty=clamp(ty,62,Math.max(62,window.innerHeight-cardH-14));
-
-    previewTargetX=tx;
-    previewTargetY=ty;
-  }
-
-  function motionLoop(){
-    if(!isOpen){
-      motionFrame=0;
-      return;
-    }
-
-    const previousX=pointerX;
-    const previousY=pointerY;
-
-    pointerX+=(pointerTargetX-pointerX)*0.18;
-    pointerY+=(pointerTargetY-pointerY)*0.18;
-    previewX+=(previewTargetX-previewX)*0.14;
-    previewY+=(previewTargetY-previewY)*0.14;
-
-    const moved=Math.abs(pointerX-previousX)+Math.abs(pointerY-previousY);
-    if(moved>.15) lensDirty=true;
-
-    if(pointerInside){
-      renderSoftFisheye();
-
-      const preview=document.getElementById("gkmV343Preview");
-      if(preview){
-        const velocityX=pointerTargetX-pointerX;
-        const velocityY=pointerTargetY-pointerY;
-        const rotateY=clamp(velocityX*.045,-7,7);
-        const rotateX=clamp(-velocityY*.035,-5,5);
-
-        preview.style.setProperty("--gkm-x",`${previewX}px`);
-        preview.style.setProperty("--gkm-y",`${previewY}px`);
-        preview.style.setProperty("--gkm-rx",`${rotateX}deg`);
-        preview.style.setProperty("--gkm-ry",`${rotateY}deg`);
-      }
-    }
-
-    motionFrame=requestAnimationFrame(motionLoop);
-  }
-
-  function startMotionLoop(){
-    if(!motionFrame) motionFrame=requestAnimationFrame(motionLoop);
-  }
-
-  function onMove(e){
-    pointerTargetX=e.clientX;
-    pointerTargetY=e.clientY;
-    updatePreviewTarget();
-
-    if(!pointerInside){
-      pointerInside=true;
-      pointerX=pointerTargetX;
-      pointerY=pointerTargetY;
-      previewX=previewTargetX;
-      previewY=previewTargetY;
-      lensDirty=true;
-      const lens=document.getElementById("gkmV343Lens");
-      if(lens) lens.classList.add("open");
-      startMotionLoop();
-    }
-
-    const index=indexAt(e.clientX,e.clientY);
-    if(index===hoverIndex) return;
-    hoverIndex=index;
-
-    clearTimeout(hoverTimer);
-    if(index>=0){
-      hoverTimer=setTimeout(()=>{
-        if(hoverIndex===index) showPreview(wallItems[index]);
-      },48);
-    }else{
-      hidePreview();
-    }
-  }
-
-  function pointerLeave(){
-    hoverIndex=-1;
-    pointerInside=false;
-    hidePreview();
-    const lens=document.getElementById("gkmV343Lens");
-    if(lens) lens.classList.remove("open");
-  }
-
-  function tryOpen(item){
-    const names=["openDetails","openTitleModal","showDetails","showModal","openCard","openMovie","openItemModal"];
-    for(const name of names){
-      try{
-        if(typeof window[name]==="function"){ window[name](item); return true; }
-      }catch(e){}
-      try{
-        const f=eval(name);
-        if(typeof f==="function"){ f(item); return true; }
-      }catch(e){}
-    }
-    return false;
-  }
-
-  function openItem(item){
-    closeWall();
-    setTimeout(()=>{
-      if(!tryOpen(item)) alert(titleOf(item));
-    },80);
-  }
-
-  function setStatus(title,sub){
-    const st=document.getElementById("gkmV343Status");
-    if(!st) return;
-    st.innerHTML=`<b>${esc(title||"Canvas-мозаика")}</b><div>${esc(sub||"")}</div>`;
-  }
-
-  async function loadWall(kind){
-    currentKind=kind;
-    layoutCount=EXPECTED_COUNTS[kind]||4400;
-    allItems=uniqueList(localPool().filter(x=>passKind(x,kind)));
-    wallItems=allItems.slice();
-
-    // Сразу рисуем плотную сетку ожидаемого размера, поэтому постеры не становятся огромными.
-    paintSkeleton();
-
-    const urls=urlsFor(kind);
-    const chunkSize=18;
-    for(let i=0;i<urls.length;i+=chunkSize){
-      const part=urls.slice(i,i+chunkSize);
-      // eslint-disable-next-line no-await-in-loop
-      const chunks=await Promise.all(part.map(fetchJson));
-      allItems.push(...chunks.flat().filter(x=>passKind(x,kind)));
-      setStatus(
-        "Собираю каталог...",
-        `Страницы ${Math.min(i+chunkSize,urls.length)}/${urls.length}. Сетка остаётся плотной и резкой.`
-      );
-    }
-
-    wallItems=uniqueList(allItems);
-    if(shuffleSeed) shuffle(wallItems);
-    layoutCount=wallItems.length;
-
-    setStatus(
-      `${labelKind(kind)} — ${wallItems.length} постеров`,
-      "Каталог собран. Постеры загружаются в свои ячейки без повторов."
-    );
-    startImageQueue();
-  }
-
-  function removeOldUi(){
-    [
-      "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn","gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn",
-      "gkmV332Btn","gkmV334Btn","gkmV336Btn","gkmV338Btn","gkmV339Btn","gkmV340Btn","gkmV341Btn","gkmV342Btn",
-      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay",
-      "gkmV332Overlay","gkmV334Overlay","gkmV336Overlay","gkmV338Overlay","gkmV339Overlay","gkmV340Overlay","gkmV341Overlay","gkmV342Overlay"
-    ].forEach(id=>{
-      const el=document.getElementById(id);
-      if(el) el.remove();
-    });
-  }
-
-  function ensureCss(){
-    if(document.getElementById("gkmV343Css")) return;
-    const css=document.createElement("style");
-    css.id="gkmV343Css";
-    css.textContent=`
-      #gkmV343Btn{
-        position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;
-        border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
-        color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;
-        box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)
-      }
-      #gkmV343Overlay{position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;background:#020817}
-      #gkmV343Overlay.open{display:block}
-      #gkmV343Canvas{position:absolute;inset:0;width:100%;height:100%;display:block;background:#020817}
-      #gkmV343Lens{
-        position:absolute;z-index:5;width:${LENS_SIZE}px;height:${LENS_SIZE}px;pointer-events:none;
-        opacity:0;transform:scale(.9);transition:opacity .14s ease,transform .18s cubic-bezier(.2,.8,.2,1);
-        -webkit-mask-image:radial-gradient(circle,#000 0 54%,rgba(0,0,0,.94) 66%,rgba(0,0,0,.42) 82%,transparent 100%);
-        mask-image:radial-gradient(circle,#000 0 54%,rgba(0,0,0,.94) 66%,rgba(0,0,0,.42) 82%,transparent 100%);
-        filter:drop-shadow(0 9px 22px rgba(0,0,0,.25));
-        will-change:left,top,opacity,transform
-      }
-      #gkmV343Lens.open{opacity:1;transform:scale(1)}
-      .gkmV343Shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,.18),transparent 13%,transparent 86%,rgba(0,0,0,.28))}
-      .gkmV343Top{position:absolute;left:12px;right:12px;top:10px;z-index:8;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;pointer-events:none}
-      .gkmV343Title{font-size:22px;font-weight:950;text-shadow:0 0 12px rgba(0,0,0,.9),0 0 22px rgba(0,180,255,.45)}
-      .gkmV343Sub{margin-top:3px;font-size:12px;color:rgba(255,255,255,.86);text-shadow:0 0 8px rgba(0,0,0,.9)}
-      .gkmV343Actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
-      .gkmV343Actions button{
-        border:1px solid rgba(0,220,255,.36);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));
-        color:#fff;border-radius:14px;padding:10px 13px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)
-      }
-      .gkmV343Actions button:hover{filter:brightness(1.15)}
-      #gkmV343Preview{
-        position:absolute;z-index:7;left:0;top:0;width:min(560px,calc(100vw - 42px));height:258px;
-        transform:perspective(950px) translate3d(var(--gkm-x,20px),var(--gkm-y,80px),0)
-          rotateX(var(--gkm-rx,0deg)) rotateY(var(--gkm-ry,0deg)) scale(.97);
-        transform-origin:center;opacity:0;pointer-events:none;
-        transition:opacity .16s ease,filter .18s ease;
-        filter:drop-shadow(0 24px 45px rgba(0,0,0,.58));
-        will-change:transform,opacity
-      }
-      #gkmV343Preview.open{opacity:1}
-      .gkmV343Pane{
-        position:absolute;inset:0;display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px;
-        border-radius:22px;border:1px solid rgba(255,255,255,.14);
-        background:linear-gradient(135deg,rgba(14,18,26,.94),rgba(20,20,22,.91));
-        box-shadow:0 0 28px rgba(0,190,255,.10);backdrop-filter:blur(10px);
-        opacity:0;transform:translateY(8px) scale(.985);
-        transition:opacity .17s ease,transform .20s cubic-bezier(.2,.8,.2,1)
-      }
-      .gkmV343Pane.active{opacity:1;transform:translateY(0) scale(1)}
-      .gkmV343PreviewPoster{
-        width:150px;height:220px;object-fit:cover;border-radius:13px;background:#111;
-        box-shadow:0 14px 34px rgba(0,0,0,.55);transition:opacity .15s ease
-      }
-      .gkmV343PText h2{margin:0 0 8px;font-size:26px;line-height:1.05}
-      .gkmV343Meta{color:rgba(255,255,255,.78);font-size:13px;margin-bottom:8px}
-      .gkmV343Genres{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
-      .gkmV343Genres span{font-size:10px;color:#fff;background:rgba(255,255,255,.12);border-radius:999px;padding:4px 7px}
-      .gkmV343Desc{font-size:12px;line-height:1.45;color:rgba(255,255,255,.84);max-height:88px;overflow:hidden}
-      .gkmV343OpenHint{margin-top:10px;font-size:12px;color:#28d7ff;font-weight:900}
-      #gkmV343Status{
-        position:absolute;left:14px;bottom:14px;z-index:8;width:min(470px,calc(100vw - 28px));
-        border:1px solid rgba(0,220,255,.28);background:rgba(6,13,30,.82);border-radius:18px;padding:12px 14px;
-        box-shadow:0 0 24px rgba(0,180,255,.14);backdrop-filter:blur(8px)
-      }
-      #gkmV343Status b{display:block;font-size:16px;margin-bottom:4px}
-      #gkmV343Status div{font-size:11px;color:rgba(255,255,255,.72);line-height:1.35}
-      .gkmV343Hint{position:absolute;right:18px;bottom:18px;z-index:8;color:rgba(255,255,255,.7);font-size:11px;text-align:right;text-shadow:0 0 8px #000;pointer-events:none}
-      @media(max-width:700px){
-        #gkmV343Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
-        .gkmV343Title{font-size:17px}.gkmV343Sub{font-size:10px}.gkmV343Actions button{padding:8px 9px;font-size:12px}
-        .gkmV343Top{left:8px;right:8px;top:8px}
-        #gkmV343Lens{display:none}
-        #gkmV343Preview{width:calc(100vw - 20px);height:164px}
-        .gkmV343Pane{grid-template-columns:92px 1fr;gap:10px;padding:12px}
-        .gkmV343PreviewPoster{width:92px;height:136px}.gkmV343PText h2{font-size:18px}.gkmV343Desc{display:none}
-        #gkmV343Status{left:10px;bottom:10px;width:calc(100vw - 20px)}.gkmV343Hint{display:none}
-      }
-    `;
-    document.head.appendChild(css);
-  }
-
-  function ensureUi(){
-    removeOldUi();
-
-    if(!document.getElementById("gkmV343Btn")){
-      const btn=document.createElement("button");
-      btn.id="gkmV343Btn";
-      btn.type="button";
-      btn.textContent="🖼️ Canvas-мозаика";
-      btn.onclick=()=>openWall("anime");
-      document.body.appendChild(btn);
-    }
-    if(document.getElementById("gkmV343Overlay")) return;
-
-    const overlay=document.createElement("div");
-    overlay.id="gkmV343Overlay";
-    overlay.innerHTML=`
-      <canvas id="gkmV343Canvas"></canvas>
-      <canvas id="gkmV343Lens" width="${LENS_SIZE}" height="${LENS_SIZE}"></canvas>
-      <div class="gkmV343Shade"></div>
-      <div class="gkmV343Top">
-        <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V343</div>
-          <div class="gkmV343Sub">Мягкий «рыбий глаз» без видимого круга. Карточка плавно следует за мышью.</div>
-        </div>
-        <div class="gkmV343Actions">
-          <button data-kind="all">Все</button>
-          <button data-kind="movies">Фильмы</button>
-          <button data-kind="series">Сериалы</button>
-          <button data-kind="anime">Аниме</button>
-          <button data-kind="cartoons">Мульты</button>
-          <button id="gkmV343Shuffle">⏭ Другой набор</button>
-          <button id="gkmV343Close">✕</button>
-        </div>
-      </div>
-      <div id="gkmV343Preview">
-        <div class="gkmV343Pane" data-pane="0"></div>
-        <div class="gkmV343Pane" data-pane="1"></div>
-      </div>
-      <div id="gkmV343Status"><b>Открываю стенку...</b><div>Готовлю плотную сетку.</div></div>
-      <div class="gkmV343Hint">движение — мягкий «рыбий глаз»<br>клик — открыть полную карточку</div>
-    `;
-    document.body.appendChild(overlay);
-
-    canvas=document.getElementById("gkmV343Canvas");
-    ctx=canvas.getContext("2d",{alpha:false});
-    lensCanvas=document.getElementById("gkmV343Lens");
-    lensCtx=lensCanvas.getContext("2d",{alpha:true});
-
-    overlay.querySelectorAll("[data-kind]").forEach(btn=>{
-      btn.onclick=()=>openWall(btn.dataset.kind);
-    });
-    document.getElementById("gkmV343Close").onclick=closeWall;
-    document.getElementById("gkmV343Shuffle").onclick=()=>{
-      shuffleSeed++;
-      shuffle(wallItems);
-      hoverIndex=-1;
-      hidePreview();
-      startImageQueue();
-    };
-
-    canvas.addEventListener("pointermove",onMove,{passive:true});
-    canvas.addEventListener("pointerleave",pointerLeave);
-    canvas.addEventListener("click",()=>{
-      const item=wallItems[hoverIndex];
-      if(item) openItem(item);
-    });
-
-    window.addEventListener("resize",()=>{
-      if(isOpen){
-        pointerLeave();
-        startImageQueue();
-      }
-    });
-
-    window.GKM_OPEN_3D_WALL=()=>openWall("anime");
-    window.GKM_OPEN_CANVAS_MOSAIC=()=>openWall("anime");
-  }
-
-  async function openWall(kind="anime"){
-    ensureCss();
-    ensureUi();
-
-    const overlay=document.getElementById("gkmV343Overlay");
-    overlay.classList.add("open");
-    document.body.style.overflow="hidden";
-    isOpen=true;
-    hoverIndex=-1;
-    pointerInside=false;
-    hidePreview();
-
-    pointerTargetX=pointerX=window.innerWidth/2;
-    pointerTargetY=pointerY=window.innerHeight/2;
-    previewX=previewTargetX=Math.max(10,window.innerWidth/2-280);
-    previewY=previewTargetY=Math.max(62,window.innerHeight/2-129);
-    startMotionLoop();
-
-    if(kind!==currentKind||!wallItems.length){
-      loadToken++;
-      allItems=[];
-      wallItems=[];
-      currentKind=kind;
-      layoutCount=EXPECTED_COUNTS[kind]||4400;
-      paintSkeleton();
-      await loadWall(kind);
-    }else{
-      presentBuffer();
-    }
-  }
-
-  function closeWall(){
-    const overlay=document.getElementById("gkmV343Overlay");
-    if(overlay) overlay.classList.remove("open");
-    document.body.style.overflow="";
-    isOpen=false;
-    pointerInside=false;
-    loadToken++;
-
-    if(motionFrame){
-      cancelAnimationFrame(motionFrame);
-      motionFrame=0;
-    }
-    hidePreview();
-    const lens=document.getElementById("gkmV343Lens");
-    if(lens) lens.classList.remove("open");
-  }
-
-  function install(){
-    ensureCss();
-    ensureUi();
-  }
-
-  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",install,{once:true});
-  else install();
-  setTimeout(install,500);
-  setTimeout(install,1400);
-
-  console.log("GKM V343: soft fisheye video wall installed");
-})();
-/* GKM V343 SOFT FISHEYE VIDEO WALL END */
 
 /* GKM V343 HUMAN AI WEATHER CLICKABLE CARDS FULL CATALOG START */
 (function(){
@@ -16035,4 +15089,589 @@ Endpoint: ${endpoint||"не задан"}`;
   console.log("GKM V344: wall + human AI + live weather merged");
 })();
 /* GKM V344 WALL AI WEATHER MERGE END */
+
+/* GKM V325 UNIQUE CONNECTED POSTER WALL START */
+(function(){
+  window.GKM_V325_UNIQUE_CONNECTED_POSTER_WALL_VERSION = "v325-unique-connected-poster-wall-no-repeats-2026-07-11";
+
+  const UNIQUE_LIMIT_DESKTOP = 1400;
+  const UNIQUE_LIMIT_MOBILE = 650;
+
+  let uniqueItems = [];
+  let currentKind = "all";
+  let wallBuilt = false;
+  let isOpen = false;
+  let isDragging = false;
+  let startX = 0;
+  let startY = 0;
+  let rotX = 2;
+  let rotY = -10;
+  let zoom = 95;
+  let targetRotX = 2;
+  let targetRotY = -10;
+  let targetZoom = 95;
+  let rafId = 0;
+  let autoSpin = true;
+  let hoveredTile = null;
+
+  function t(v){ return String(v == null ? "" : v).trim(); }
+  function esc(v){
+    return String(v == null ? "" : v).replace(/[&<>"']/g, s => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[s]));
+  }
+  function safeUrl(v){
+    return String(v || "").replace(/"/g,"%22").replace(/\)/g,"%29");
+  }
+  function n(v){
+    return t(v).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function titleOf(it){
+    try{ if(typeof displayTitle === "function") return t(displayTitle(it)); }catch(e){}
+    return t(it && (it.ru || it.title_ru || it.title || it.name || it.en || it.original_title || it.original_name)) || "Без названия";
+  }
+  function typeOf(it){
+    try{ if(typeof getType === "function") return t(getType(it)); }catch(e){}
+    return t(it && (it.type || it.category || it.kind)) || "Каталог";
+  }
+  function yearOf(it){
+    try{ if(typeof getYear === "function") return t(getYear(it)); }catch(e){}
+    const raw = t(it && (it.year || it.release_date || it.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+  function ratingOf(it){
+    try{ if(typeof getRating === "function") return Number(getRating(it) || 0); }catch(e){}
+    return Number(it && (it.rating || it.vote_average || it.score) || 0);
+  }
+  function overviewOf(it){
+    try{ if(typeof displayOverview === "function") return t(displayOverview(it)); }catch(e){}
+    return t(it && (it.overview || it.description || it.synopsis || it.plot)) || "Описание будет добавлено позже.";
+  }
+  function genresOf(it){
+    try{
+      if(typeof getGenres === "function"){
+        const g = getGenres(it);
+        if(Array.isArray(g)) return g.filter(Boolean).map(String);
+      }
+    }catch(e){}
+    const raw = it && (it.genres || it.genre || it.tags);
+    if(Array.isArray(raw)) return raw.filter(Boolean).map(String);
+    if(typeof raw === "string") return raw.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
+    return [];
+  }
+  function imgOf(it){
+    return t(it && (
+      it.poster || it.poster_url || it.posterUrl ||
+      it.image || it.img || it.cover || it.cover_url ||
+      it.thumbnail || it.backdrop || it.backdrop_path
+    ));
+  }
+  function keyOf(it){
+    return t(it && (it.id || it.kinopoiskId || it.tmdbId || it.mal_id || it.slug))
+      || `${n(titleOf(it))}|${yearOf(it)}|${n(typeOf(it))}`;
+  }
+  function parseJson(j){
+    const out = [];
+    if(!j) return out;
+    if(Array.isArray(j)) out.push(...j);
+    if(Array.isArray(j.items)) out.push(...j.items);
+    if(Array.isArray(j.data)) out.push(...j.data);
+    if(Array.isArray(j.results)) out.push(...j.results);
+    if(j.sections && typeof j.sections === "object"){
+      Object.values(j.sections).forEach(v=>{
+        if(Array.isArray(v)) out.push(...v);
+        else if(v && Array.isArray(v.items)) out.push(...v.items);
+      });
+    }
+    return out.filter(x=>x && typeof x === "object");
+  }
+  async function fetchJson(url){
+    try{
+      const res = await fetch(url, {cache:"force-cache"});
+      if(!res.ok) return [];
+      return parseJson(await res.json());
+    }catch(e){ return []; }
+  }
+  function passKind(it, kind){
+    if(!kind || kind === "all") return true;
+    const tp = n(typeOf(it));
+    if(kind === "movies") return tp.includes("фильм") || tp.includes("movie");
+    if(kind === "series") return tp.includes("сериал") || tp.includes("series");
+    if(kind === "anime") return tp.includes("аниме") || tp.includes("anime");
+    if(kind === "cartoons") return tp.includes("мульт") || tp.includes("cartoon");
+    return true;
+  }
+  function pageUrls(kind){
+    const urls = ["data/fast/home.json?v=325"];
+    const cats = kind && kind !== "all"
+      ? ({movies:["movies"], series:["series"], anime:["anime"], cartoons:["cartoons"]}[kind] || ["movies","series","anime","cartoons"])
+      : ["movies","series","anime","cartoons"];
+
+    const pages = window.innerWidth < 700 ? 4 : 9;
+    cats.forEach(cat=>{
+      for(let i=1;i<=pages;i++){
+        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=325`);
+      }
+    });
+    return urls;
+  }
+  async function loadWallItems(kind="all"){
+    currentKind = kind || "all";
+    const found = [];
+    const seen = new Set();
+
+    function add(it){
+      if(!it || !passKind(it, currentKind)) return;
+      if(!imgOf(it)) return;
+      const k = keyOf(it);
+      if(seen.has(k)) return;
+      seen.add(k);
+      found.push(it);
+    }
+
+    try{ (currentItems || []).forEach(add); }catch(e){}
+    try{
+      if(homeData && homeData.sections){
+        Object.values(homeData.sections).forEach(v=>{
+          if(Array.isArray(v)) v.forEach(add);
+          else if(v && Array.isArray(v.items)) v.items.forEach(add);
+        });
+      }
+    }catch(e){}
+
+    const arrs = await Promise.all(pageUrls(currentKind).map(fetchJson));
+    arrs.flat().forEach(add);
+
+    found.sort((a,b)=>(ratingOf(b)||0)-(ratingOf(a)||0));
+    uniqueItems = found.slice(0, window.innerWidth < 700 ? UNIQUE_LIMIT_MOBILE : UNIQUE_LIMIT_DESKTOP);
+    return uniqueItems;
+  }
+
+  function ensureCss(){
+    if(document.getElementById("gkmV325Css")) return;
+    const st = document.createElement("style");
+    st.id = "gkmV325Css";
+    st.textContent = `
+      #gkmV325Btn{
+        position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;
+        border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
+        color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;
+        box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)
+      }
+      #gkmV325Overlay{
+        position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;
+        background:
+          radial-gradient(circle at 50% 42%,rgba(255,255,255,.10),transparent 7%),
+          radial-gradient(circle at 24% 14%,rgba(0,190,255,.16),transparent 34%),
+          radial-gradient(circle at 82% 84%,rgba(130,35,255,.22),transparent 42%),
+          #020817;
+      }
+      #gkmV325Overlay.open{display:block}
+      .gkmV325Top{
+        position:absolute;left:0;right:0;top:0;z-index:18;display:flex;justify-content:space-between;gap:12px;
+        padding:8px 14px 0 14px;pointer-events:none
+      }
+      .gkmV325Title{font-size:22px;font-weight:950;text-shadow:0 0 18px rgba(0,180,255,.46)}
+      .gkmV325Sub{font-size:12px;color:rgba(255,255,255,.8)}
+      .gkmV325Actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
+      .gkmV325Actions button,.gkmV325PreviewActions button{
+        border:1px solid rgba(0,220,255,.34);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.86));
+        color:#fff;border-radius:14px;padding:10px 13px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)
+      }
+      .gkmV325Actions button:hover,.gkmV325PreviewActions button:hover{filter:brightness(1.15)}
+      #gkmV325Scene{position:absolute;inset:58px 0 0;perspective:1000px;overflow:hidden;cursor:grab;user-select:none;touch-action:none}
+      #gkmV325Scene.drag{cursor:grabbing}
+      #gkmV325World{position:absolute;left:50%;top:50%;width:1px;height:1px;transform-style:preserve-3d;will-change:transform}
+      .gkmV325Tile{
+        position:absolute;left:0;top:0;width:18px;height:28px;margin-left:-9px;margin-top:-14px;border:0;padding:0;border-radius:4px;
+        overflow:hidden;background:#071227;outline:1px solid rgba(255,255,255,.07);box-shadow:0 2px 7px rgba(0,0,0,.38);
+        cursor:pointer;transform-style:preserve-3d;will-change:transform,filter;transition:filter .12s ease,box-shadow .12s ease
+      }
+      .gkmV325Tile::before{
+        content:"";position:absolute;inset:0;background-image:var(--poster);background-size:cover;background-position:center;
+        filter:saturate(1.08) contrast(1.04)
+      }
+      .gkmV325Tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.16),transparent 60%)}
+      .gkmV325Tile.is-hover{
+        z-index:999;filter:brightness(1.28) saturate(1.18)!important;
+        box-shadow:0 8px 22px rgba(0,0,0,.58),0 0 24px rgba(0,190,255,.35)
+      }
+      #gkmV325Preview{
+        position:absolute;display:none;z-index:24;min-width:280px;max-width:380px;
+        background:linear-gradient(135deg,rgba(9,18,43,.96),rgba(13,23,58,.93));
+        border:1px solid rgba(0,220,255,.33);border-radius:18px;box-shadow:0 20px 70px rgba(0,0,0,.6),0 0 30px rgba(0,170,255,.22);
+        padding:12px;backdrop-filter:blur(12px);pointer-events:auto
+      }
+      #gkmV325Preview.open{display:block}
+      .gkmV325PreviewInner{display:grid;grid-template-columns:100px 1fr;gap:12px;align-items:start}
+      #gkmV325Preview img{width:100px;height:150px;object-fit:cover;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+      .gkmV325PreviewText h3{margin:0 0 6px 0;font-size:19px;line-height:1.05}
+      .gkmV325PreviewMeta{font-size:12px;color:rgba(255,255,255,.78);margin-bottom:6px}
+      .gkmV325PreviewDesc{font-size:12px;color:rgba(255,255,255,.86);line-height:1.35;max-height:84px;overflow:hidden}
+      .gkmV325PreviewActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+      .gkmV325Info{
+        position:absolute;left:16px;bottom:16px;z-index:12;max-width:min(520px,calc(100vw - 32px));
+        background:rgba(5,14,34,.78);border:1px solid rgba(0,220,255,.24);border-radius:18px;
+        padding:12px 14px;color:#fff;backdrop-filter:blur(12px);pointer-events:none
+      }
+      .gkmV325Info b{display:block;font-size:17px;margin-bottom:4px}
+      .gkmV325Info .meta{color:rgba(255,255,255,.75);font-size:13px}
+      .gkmV325Hint{position:absolute;right:20px;bottom:18px;z-index:12;color:rgba(255,255,255,.6);font-size:12px;text-align:right;pointer-events:none}
+      @media(max-width:700px){
+        #gkmV325Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
+        .gkmV325Top{padding:8px 10px 0 10px}.gkmV325Title{font-size:18px}.gkmV325Sub{font-size:11px}
+        .gkmV325Actions button{padding:8px 9px;font-size:12px}
+        #gkmV325Scene{inset:96px 0 0}.gkmV325Tile{width:14px;height:22px;margin-left:-7px;margin-top:-11px;border-radius:3px}
+        #gkmV325Preview{left:10px!important;right:10px!important;top:auto!important;bottom:82px!important;min-width:unset;max-width:none}
+        .gkmV325PreviewInner{grid-template-columns:78px 1fr;gap:10px}
+        #gkmV325Preview img{width:78px;height:116px}.gkmV325PreviewText h3{font-size:16px}.gkmV325PreviewDesc{display:none}
+        .gkmV325Info{left:10px;right:10px;bottom:12px;max-width:none}.gkmV325Hint{display:none}
+      }
+    `;
+    document.head.appendChild(st);
+  }
+
+  function removeOldUi(){
+    [
+      "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn",
+      "gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn",
+      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay"
+    ].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.remove();
+    });
+  }
+
+  function ensureUi(){
+    removeOldUi();
+
+    if(!document.getElementById("gkmV325Btn")){
+      const btn = document.createElement("button");
+      btn.id = "gkmV325Btn";
+      btn.type = "button";
+      btn.textContent = "🌌 3D стена";
+      btn.onclick = () => openWall("all");
+      document.body.appendChild(btn);
+    }
+
+    if(document.getElementById("gkmV325Overlay")) return;
+
+    const overlay = document.createElement("div");
+    overlay.id = "gkmV325Overlay";
+    overlay.innerHTML = `
+      <div class="gkmV325Top">
+        <div>
+          <div class="gkmV325Title">🌌 3D стена постеров V325</div>
+          <div class="gkmV325Sub">Без повторов: каждый постер уникальный. Наведение — увеличить и показать карточку. Клик — открыть отдельно.</div>
+        </div>
+        <div class="gkmV325Actions">
+          <button data-kind="all">Все</button>
+          <button data-kind="movies">Фильмы</button>
+          <button data-kind="series">Сериалы</button>
+          <button data-kind="anime">Аниме</button>
+          <button id="gkmV325AutoBtn">⏸ Авто</button>
+          <button id="gkmV325MixBtn">🔀 Микс</button>
+          <button id="gkmV325CloseBtn">✕</button>
+        </div>
+      </div>
+      <div id="gkmV325Scene"><div id="gkmV325World"></div></div>
+      <div id="gkmV325Preview"></div>
+      <div class="gkmV325Info"><b>Загрузка...</b><div class="meta">Собираю уникальные постеры.</div></div>
+      <div class="gkmV325Hint">Без дублей<br>наведение — карточка<br>клик — открыть</div>
+    `;
+    document.body.appendChild(overlay);
+
+    overlay.querySelectorAll("[data-kind]").forEach(btn=>{
+      btn.onclick = async () => {
+        uniqueItems = [];
+        wallBuilt = false;
+        hidePreview();
+        await loadWallItems(btn.dataset.kind);
+        buildWall(true);
+      };
+    });
+
+    document.getElementById("gkmV325CloseBtn").onclick = () => closeWall();
+    document.getElementById("gkmV325MixBtn").onclick = () => {
+      uniqueItems.sort(()=>Math.random()-.5);
+      buildWall(true);
+    };
+    document.getElementById("gkmV325AutoBtn").onclick = () => {
+      autoSpin = !autoSpin;
+      document.getElementById("gkmV325AutoBtn").textContent = autoSpin ? "⏸ Авто" : "▶ Авто";
+    };
+
+    const scene = document.getElementById("gkmV325Scene");
+    scene.addEventListener("pointerdown", e=>{
+      if(e.target.closest(".gkmV325Tile")) return;
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      scene.classList.add("drag");
+      try{ scene.setPointerCapture(e.pointerId); }catch(err){}
+    });
+    scene.addEventListener("pointermove", e=>{
+      if(!isDragging) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      startX = e.clientX;
+      startY = e.clientY;
+      targetRotY += dx * .18;
+      targetRotX = Math.max(-22, Math.min(22, targetRotX - dy * .10));
+    });
+    scene.addEventListener("pointerup", e=>{
+      isDragging = false;
+      scene.classList.remove("drag");
+      try{ scene.releasePointerCapture(e.pointerId); }catch(err){}
+    });
+    scene.addEventListener("wheel", e=>{
+      e.preventDefault();
+      targetZoom = Math.max(-180, Math.min(420, targetZoom + e.deltaY * -0.20));
+    }, {passive:false});
+
+    window.GKM_OPEN_3D_WALL = () => openWall("all");
+  }
+
+  function setInfo(it){
+    const box = document.querySelector(".gkmV325Info");
+    if(!box || !it) return;
+    const r = ratingOf(it);
+    box.innerHTML = `<b>${esc(titleOf(it))}</b><div class="meta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>`;
+  }
+
+  function showPreview(it, evt, tileEl){
+    const prev = document.getElementById("gkmV325Preview");
+    if(!prev || !it) return;
+
+    if(hoveredTile && hoveredTile !== tileEl){
+      hoveredTile.classList.remove("is-hover");
+      if(hoveredTile.dataset.baseTransform) hoveredTile.style.transform = hoveredTile.dataset.baseTransform;
+    }
+
+    hoveredTile = tileEl;
+    if(tileEl){
+      tileEl.classList.add("is-hover");
+      const base = tileEl.dataset.baseTransform || tileEl.style.transform;
+      tileEl.style.transform = base + " scale(2.25) translateZ(30px)";
+    }
+
+    const r = ratingOf(it);
+    const genres = genresOf(it).slice(0,4).join(" · ");
+
+    prev.innerHTML = `
+      <div class="gkmV325PreviewInner">
+        <img src="${esc(imgOf(it))}" alt="${esc(titleOf(it))}">
+        <div class="gkmV325PreviewText">
+          <h3>${esc(titleOf(it))}</h3>
+          <div class="gkmV325PreviewMeta">${esc(typeOf(it))}${yearOf(it) ? " · " + esc(yearOf(it)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}${genres ? "<br>" + esc(genres) : ""}</div>
+          <div class="gkmV325PreviewDesc">${esc(overviewOf(it))}</div>
+          <div class="gkmV325PreviewActions"><button id="gkmV325OpenCardBtn">Открыть карточку</button></div>
+        </div>
+      </div>
+    `;
+    prev.classList.add("open");
+    setInfo(it);
+
+    if(window.innerWidth >= 700 && evt){
+      const rect = prev.getBoundingClientRect();
+      let x = evt.clientX + 22;
+      let y = evt.clientY - 18;
+      if(x + rect.width > window.innerWidth - 10) x = evt.clientX - rect.width - 22;
+      if(y + rect.height > window.innerHeight - 10) y = window.innerHeight - rect.height - 10;
+      if(y < 76) y = 76;
+      prev.style.left = x + "px";
+      prev.style.top = y + "px";
+      prev.style.right = "auto";
+      prev.style.bottom = "auto";
+    }
+
+    const btn = document.getElementById("gkmV325OpenCardBtn");
+    if(btn) btn.onclick = ev => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      openSiteCard(it);
+    };
+  }
+
+  function hidePreview(){
+    const prev = document.getElementById("gkmV325Preview");
+    if(prev) prev.classList.remove("open");
+    if(hoveredTile){
+      hoveredTile.classList.remove("is-hover");
+      if(hoveredTile.dataset.baseTransform) hoveredTile.style.transform = hoveredTile.dataset.baseTransform;
+    }
+    hoveredTile = null;
+  }
+
+  function tryOpenByKnownFunctions(it){
+    // Важно: openDetails в твоём app.js есть как обычная функция, поэтому eval нужен.
+    const names = ["openDetails","openTitleModal","showDetails","showModal","openCard","openMovie","openItemModal"];
+    for(const fn of names){
+      try{
+        const f = eval(fn);
+        if(typeof f === "function"){
+          f(it);
+          return true;
+        }
+      }catch(e){}
+      try{
+        if(typeof window[fn] === "function"){
+          window[fn](it);
+          return true;
+        }
+      }catch(e){}
+    }
+    return false;
+  }
+
+  function openSiteCard(it){
+    closeWall(false);
+    setTimeout(()=>{
+      if(!tryOpenByKnownFunctions(it)) alert(titleOf(it));
+    }, 100);
+  }
+
+  function applyWorld(){
+    const world = document.getElementById("gkmV325World");
+    if(world) world.style.transform = `translateZ(${zoom}px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  }
+
+  function animate(){
+    if(!isOpen) return;
+    rotX += (targetRotX - rotX) * .10;
+    rotY += (targetRotY - rotY) * .10;
+    zoom += (targetZoom - zoom) * .12;
+    if(autoSpin && !isDragging && !hoveredTile) targetRotY += .025;
+    applyWorld();
+    rafId = requestAnimationFrame(animate);
+  }
+
+  function buildWall(force=false){
+    const world = document.getElementById("gkmV325World");
+    if(!world) return;
+    world.innerHTML = "";
+    hidePreview();
+
+    if(!uniqueItems.length){
+      document.querySelector(".gkmV325Info").innerHTML = `<b>Постеры не найдены</b><div class="meta">Нет уникальных постеров для этого раздела.</div>`;
+      return;
+    }
+
+    const mobile = window.innerWidth < 700;
+    const cols = mobile ? 46 : 88;
+    const rows = Math.ceil(uniqueItems.length / cols);
+    const tileW = mobile ? 14 : 18;
+    const tileH = mobile ? 22 : 28;
+    const stepX = mobile ? 13.6 : 17.6;
+    const stepY = mobile ? 21.5 : 27.0;
+    const radius = mobile ? 370 : 800;
+    const arc = mobile ? 142 : 164;
+    const yShift = (rows - 1) * stepY * .5;
+
+    uniqueItems.forEach((it, i)=>{
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      const nx = cols <= 1 ? 0 : col / (cols - 1);
+      const ang = (-arc / 2 + nx * arc) * Math.PI / 180;
+      const x = Math.sin(ang) * radius;
+      const z = Math.cos(ang) * radius - radius;
+      const y = row * stepY - yShift;
+      const ry = -ang * 180 / Math.PI;
+
+      const tile = document.createElement("button");
+      tile.type = "button";
+      tile.className = "gkmV325Tile";
+      tile.style.width = tileW + "px";
+      tile.style.height = tileH + "px";
+      tile.style.marginLeft = (-tileW/2) + "px";
+      tile.style.marginTop = (-tileH/2) + "px";
+      tile.style.setProperty("--poster", `url("${safeUrl(imgOf(it))}")`);
+
+      const baseTransform = `translate3d(${x}px,${y}px,${z}px) rotateY(${ry}deg)`;
+      tile.dataset.baseTransform = baseTransform;
+      tile.style.transform = baseTransform;
+      tile.title = titleOf(it);
+
+      tile.addEventListener("mouseenter", e => showPreview(it, e, tile));
+      tile.addEventListener("mousemove", e => showPreview(it, e, tile));
+      tile.addEventListener("mouseleave", () => setTimeout(hidePreview, 45));
+      tile.addEventListener("click", e=>{
+        e.preventDefault();
+        e.stopPropagation();
+        openSiteCard(it);
+      });
+
+      world.appendChild(tile);
+    });
+
+    setInfo(uniqueItems[0]);
+    wallBuilt = true;
+    applyWorld();
+  }
+
+  async function openWall(kind="all"){
+    ensureCss();
+    ensureUi();
+    const overlay = document.getElementById("gkmV325Overlay");
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+    isOpen = true;
+
+    if(kind !== currentKind || !uniqueItems.length){
+      await loadWallItems(kind);
+    }
+
+    buildWall(true);
+
+    rotX = 2;
+    rotY = -12;
+    zoom = 95;
+    targetRotX = 2;
+    targetRotY = -12;
+    targetZoom = 95;
+
+    if(rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(animate);
+  }
+
+  function closeWall(full=true){
+    const overlay = document.getElementById("gkmV325Overlay");
+    if(overlay) overlay.classList.remove("open");
+    document.body.style.overflow = "";
+    hidePreview();
+    isOpen = false;
+    if(full && rafId){
+      cancelAnimationFrame(rafId);
+      rafId = 0;
+    }
+  }
+
+  function install(){
+    ensureCss();
+    ensureUi();
+  }
+
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true});
+  else install();
+
+  setTimeout(install, 500);
+  setTimeout(install, 1400);
+
+  console.log("GKM V325: unique connected poster wall installed");
+})();
+/* GKM V325 UNIQUE CONNECTED POSTER WALL END */
+
+
+/* GKM V345 RESTORE V325 WALL KEEP V344 AI START */
+(function(){
+  window.GKM_V345_RESTORE_V325_WALL_KEEP_V344_AI_VERSION =
+    "v345-restore-v325-wall-keep-v344-ai-2026-07-21";
+  console.log("GKM V345: exact V325 wall restored; V344 AI/weather preserved");
+})();
+/* GKM V345 RESTORE V325 WALL KEEP V344 AI END */
 
