@@ -14365,6 +14365,952 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V337 HONEST COLLECTIONS FIX END */
 
 
+/* GKM V343 SOFT FISHEYE VIDEO WALL START */
+(function(){
+  window.GKM_V343_SOFT_FISHEYE_VIDEO_WALL_VERSION = "v343-soft-fisheye-video-wall-2026-07-21";
+
+  const JSON_CACHE = new Map();
+  const THUMB_CACHE = new Map();
+
+  const EXPECTED_COUNTS = {
+    anime: 4400,
+    movies: 5200,
+    series: 3600,
+    cartoons: 2600,
+    all: 9000
+  };
+
+  let canvas = null;
+  let ctx = null;
+  let bufferCanvas = null;
+  let bufferCtx = null;
+  let lensCanvas = null;
+  let lensCtx = null;
+
+  let isOpen = false;
+  let currentKind = "anime";
+  let wallItems = [];
+  let allItems = [];
+  let layoutCount = EXPECTED_COUNTS.anime;
+
+  let cols = 1;
+  let rows = 1;
+  let cellW = 10;
+  let cellH = 15;
+  let ox = 0;
+  let oy = 44;
+
+  let hoverIndex = -1;
+  let hoverTimer = 0;
+  let activePreviewPane = 0;
+  let previewKey = "";
+
+  let loadToken = 0;
+  let loadCursor = 0;
+  let activeLoads = 0;
+  let loadedCount = 0;
+  let itemLoaded = [];
+  let shuffleSeed = 0;
+
+  let pointerInside = false;
+  let pointerTargetX = 0;
+  let pointerTargetY = 0;
+  let pointerX = 0;
+  let pointerY = 0;
+  let previewX = 0;
+  let previewY = 0;
+  let previewTargetX = 0;
+  let previewTargetY = 0;
+  let motionFrame = 0;
+  let lensDirty = false;
+
+  const FIRST_CONCURRENCY = 44;
+  const REST_CONCURRENCY = 24;
+  const LENS_SIZE = 330;
+  const LENS_RADIUS = LENS_SIZE / 2;
+
+  function t(v){ return String(v == null ? "" : v).trim(); }
+  function esc(v){
+    return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[ch]));
+  }
+  function n(v){
+    return t(v).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function clamp(v,min,max){ return Math.max(min,Math.min(max,v)); }
+
+  function titleOf(item){
+    try{ if(typeof displayTitle === "function") return t(displayTitle(item)); }catch(e){}
+    return t(item && (item.ru || item.title_ru || item.__manualTopTitle || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
+  }
+  function typeOf(item){
+    try{ if(typeof getType === "function") return t(getType(item)); }catch(e){}
+    return t(item && (item.type || item.category || item.kind)) || "Каталог";
+  }
+  function yearOf(item){
+    try{ if(typeof getYear === "function") return t(getYear(item)); }catch(e){}
+    const raw = t(item && (item.year || item.release_date || item.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+  function ratingOf(item){
+    try{ if(typeof getRating === "function") return Number(getRating(item) || 0); }catch(e){}
+    return Number(item && (item.rating || item.vote_average || item.score) || 0);
+  }
+  function overviewOf(item){
+    try{ if(typeof displayOverview === "function") return t(displayOverview(item)); }catch(e){}
+    return t(item && (item.overview || item.description || item.synopsis || item.plot)) || "Описание будет добавлено позже.";
+  }
+  function genresOf(item){
+    try{
+      if(typeof getGenres === "function"){
+        const g = getGenres(item);
+        if(Array.isArray(g)) return g.filter(Boolean).map(String);
+      }
+    }catch(e){}
+    const raw = item && (item.genres || item.genre || item.tags);
+    if(Array.isArray(raw)) return raw.filter(Boolean).map(String);
+    if(typeof raw === "string") return raw.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
+    return [];
+  }
+  function posterOf(item){
+    try{ if(typeof posterSrc === "function") return t(posterSrc(item)); }catch(e){}
+    return t(item && (item.poster || item.poster_url || item.posterUrl || item.image || item.img || item.cover || item.cover_url || item.thumbnail || item.backdrop || item.backdrop_path));
+  }
+  function originalPosterOf(item){
+    try{ if(typeof posterOriginalSrc === "function") return t(posterOriginalSrc(item)); }catch(e){}
+    return posterOf(item);
+  }
+  function keyOf(item){
+    return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOf(item)}|${yearOf(item)}|${posterOf(item)}`);
+  }
+  function familyOf(item){
+    const s = n(typeOf(item));
+    if(s.includes("аниме") || s.includes("anime")) return "anime";
+    if(s.includes("сериал") || s.includes("series")) return "series";
+    if(s.includes("мульт") || s.includes("cartoon")) return "cartoons";
+    if(s.includes("фильм") || s.includes("movie")) return "movies";
+    return "other";
+  }
+  function passKind(item,kind){ return kind === "all" || familyOf(item) === kind; }
+  function labelKind(kind){
+    return {all:"Все",anime:"Аниме",movies:"Фильмы",series:"Сериалы",cartoons:"Мульты"}[kind] || "Каталог";
+  }
+
+  function parseJson(j){
+    const out = [];
+    if(!j) return out;
+    if(Array.isArray(j)) out.push(...j);
+    if(Array.isArray(j.items)) out.push(...j.items);
+    if(Array.isArray(j.data)) out.push(...j.data);
+    if(Array.isArray(j.results)) out.push(...j.results);
+    if(j.sections && typeof j.sections === "object"){
+      Object.values(j.sections).forEach(v=>{
+        if(Array.isArray(v)) out.push(...v);
+        else if(v && Array.isArray(v.items)) out.push(...v.items);
+      });
+    }
+    return out.filter(x=>x && typeof x === "object");
+  }
+  async function fetchJson(url){
+    if(JSON_CACHE.has(url)) return JSON_CACHE.get(url);
+    const p = fetch(url,{cache:"force-cache"})
+      .then(r=>r.ok?r.json():null)
+      .then(parseJson)
+      .catch(()=>[]);
+    JSON_CACHE.set(url,p);
+    return p;
+  }
+  function localPool(){
+    const out = [];
+    try{ if(Array.isArray(currentItems)) out.push(...currentItems); }catch(e){}
+    try{
+      if(homeData && homeData.sections){
+        Object.values(homeData.sections).forEach(v=>{
+          if(Array.isArray(v)) out.push(...v);
+          else if(v && Array.isArray(v.items)) out.push(...v.items);
+        });
+      }
+    }catch(e){}
+    return out;
+  }
+  function uniqueList(arr){
+    const seen = new Set();
+    const out = [];
+    for(const item of arr){
+      if(!item || !posterOf(item)) continue;
+      const k = keyOf(item);
+      if(seen.has(k)) continue;
+      seen.add(k);
+      out.push(item);
+    }
+    return out;
+  }
+  function shuffle(arr){
+    let seed = (Date.now()+shuffleSeed)>>>0;
+    function rnd(){
+      seed=(seed*1664525+1013904223)>>>0;
+      return seed/4294967296;
+    }
+    for(let i=arr.length-1;i>0;i--){
+      const j=Math.floor(rnd()*(i+1));
+      [arr[i],arr[j]]=[arr[j],arr[i]];
+    }
+  }
+  function urlsFor(kind){
+    const urls=["data/fast/home.json?v=343"];
+    const map={
+      anime:["anime"],
+      movies:["movies"],
+      series:["series"],
+      cartoons:["cartoons"],
+      all:["anime","movies","series","cartoons"]
+    };
+    const cats=map[kind]||["anime"];
+    const maxPages=kind==="all"?24:(kind==="anime"?72:40);
+    cats.forEach(cat=>{
+      for(let i=1;i<=maxPages;i++){
+        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=343`);
+      }
+    });
+    return urls;
+  }
+
+  function smallPosterUrl(item){
+    const raw=originalPosterOf(item)||posterOf(item);
+    if(!raw) return "";
+    try{
+      const url=new URL(raw,location.href);
+      if(url.hostname.toLowerCase().includes("images.weserv.nl")){
+        url.searchParams.set("w","48");
+        url.searchParams.set("h","72");
+        url.searchParams.set("fit","cover");
+        url.searchParams.set("output","webp");
+        url.searchParams.set("q","58");
+        return url.href;
+      }
+      if(url.hostname===location.hostname) return url.href;
+      const clean=url.href.replace(/^https?:\/\//i,"");
+      return "https://images.weserv.nl/?url="+encodeURIComponent(clean)+"&w=48&h=72&fit=cover&output=webp&q=58";
+    }catch(e){
+      return raw;
+    }
+  }
+  function fullPosterUrl(item){ return originalPosterOf(item)||posterOf(item); }
+
+  function computeGrid(){
+    const w=window.innerWidth;
+    const h=window.innerHeight;
+    const count=Math.max(layoutCount,wallItems.length,1);
+    const topPad=42;
+    const bottomPad=72;
+    const availableH=Math.max(220,h-topPad-bottomPad);
+
+    let best=null;
+    for(let cw=7;cw<=16;cw++){
+      const ch=Math.max(10,Math.round(cw*1.52));
+      const c=Math.max(30,Math.floor(w/cw));
+      const r=Math.ceil(count/c);
+      const gh=r*ch;
+      const gw=c*cw;
+      const score=Math.abs(availableH-gh)*5+Math.abs(w-gw);
+      if(!best||score<best.score) best={cw,ch,c,r,score};
+    }
+
+    cellW=best.cw;
+    cellH=best.ch;
+    cols=best.c;
+    rows=best.r;
+    ox=Math.floor((w-cols*cellW)/2);
+    oy=topPad;
+  }
+
+  function resizeCanvases(){
+    if(!canvas||!ctx) return;
+    const w=window.innerWidth;
+    const h=window.innerHeight;
+
+    canvas.width=w;
+    canvas.height=h;
+    canvas.style.width=w+"px";
+    canvas.style.height=h+"px";
+
+    if(!bufferCanvas){
+      bufferCanvas=document.createElement("canvas");
+      bufferCtx=bufferCanvas.getContext("2d",{alpha:false});
+    }
+    bufferCanvas.width=w;
+    bufferCanvas.height=h;
+
+    computeGrid();
+  }
+
+  function placeholderColor(index){
+    const hue=(index*37)%190+175;
+    return `hsl(${hue} 28% ${10+(index%4)}%)`;
+  }
+
+  function paintSkeleton(){
+    resizeCanvases();
+    bufferCtx.fillStyle="#020817";
+    bufferCtx.fillRect(0,0,bufferCanvas.width,bufferCanvas.height);
+
+    const count=Math.max(layoutCount,wallItems.length);
+    for(let i=0;i<count;i++){
+      const col=i%cols;
+      const row=Math.floor(i/cols);
+      const x=ox+col*cellW;
+      const y=oy+row*cellH;
+      bufferCtx.fillStyle=placeholderColor(i);
+      bufferCtx.fillRect(x,y,cellW,cellH);
+    }
+    presentBuffer();
+    lensDirty=true;
+  }
+
+  function drawCover(targetCtx,img,x,y,w,h){
+    const sw=img.naturalWidth||img.width;
+    const sh=img.naturalHeight||img.height;
+    if(!sw||!sh) return;
+    const srcRatio=sw/sh;
+    const dstRatio=w/h;
+    let sx=0,sy=0,sWidth=sw,sHeight=sh;
+    if(srcRatio>dstRatio){
+      sWidth=sh*dstRatio;
+      sx=(sw-sWidth)/2;
+    }else{
+      sHeight=sw/dstRatio;
+      sy=(sh-sHeight)/2;
+    }
+    targetCtx.drawImage(img,sx,sy,sWidth,sHeight,x,y,w,h);
+  }
+
+  function drawTile(index,img){
+    if(!bufferCtx||index<0||index>=wallItems.length||!img) return;
+    const col=index%cols;
+    const row=Math.floor(index/cols);
+    const x=ox+col*cellW;
+    const y=oy+row*cellH;
+    try{
+      drawCover(bufferCtx,img,x,y,cellW,cellH);
+      if(isOpen&&ctx) drawCover(ctx,img,x,y,cellW,cellH);
+      lensDirty=true;
+    }catch(e){}
+  }
+
+  function presentBuffer(){
+    if(!isOpen||!ctx||!bufferCanvas) return;
+    ctx.drawImage(bufferCanvas,0,0);
+  }
+
+  function getThumbRecord(item){
+    const url=smallPosterUrl(item);
+    if(!url) return null;
+    if(THUMB_CACHE.has(url)) return THUMB_CACHE.get(url);
+    const rec={url,state:"idle",img:null,callbacks:[]};
+    THUMB_CACHE.set(url,rec);
+    return rec;
+  }
+
+  function loadThumb(index,token){
+    return new Promise(resolve=>{
+      if(token!==loadToken||index>=wallItems.length){ resolve(); return; }
+
+      const item=wallItems[index];
+      const rec=getThumbRecord(item);
+      if(!rec){ resolve(); return; }
+
+      const finish=img=>{
+        if(token===loadToken&&img){
+          itemLoaded[index]=true;
+          drawTile(index,img);
+        }
+        resolve();
+      };
+
+      if(rec.state==="loaded"&&rec.img){ finish(rec.img); return; }
+      if(rec.state==="loading"){ rec.callbacks.push(finish); return; }
+
+      rec.state="loading";
+      rec.callbacks.push(finish);
+
+      const img=new Image();
+      img.decoding="async";
+      img.referrerPolicy="no-referrer";
+
+      const complete=success=>{
+        if(success){
+          rec.state="loaded";
+          rec.img=img;
+          loadedCount++;
+        }else{
+          rec.state="failed";
+        }
+        const callbacks=rec.callbacks.splice(0);
+        callbacks.forEach(cb=>cb(success?img:null));
+      };
+
+      img.onload=()=>complete(true);
+      img.onerror=()=>{
+        const raw=fullPosterUrl(item);
+        if(raw&&img.src!==raw){
+          img.onerror=()=>complete(false);
+          img.src=raw;
+        }else complete(false);
+      };
+      img.src=rec.url;
+    });
+  }
+
+  function pumpQueue(token){
+    if(token!==loadToken||!isOpen) return;
+    const limit=loadCursor<900?FIRST_CONCURRENCY:REST_CONCURRENCY;
+
+    while(activeLoads<limit&&loadCursor<wallItems.length){
+      const index=loadCursor++;
+      activeLoads++;
+      loadThumb(index,token).finally(()=>{
+        activeLoads--;
+        if(token!==loadToken) return;
+
+        if(loadedCount%120===0||loadCursor===wallItems.length){
+          setStatus(
+            `${labelKind(currentKind)} — ${wallItems.length} постеров`,
+            `Загружено ${Math.min(loadedCount,wallItems.length)}/${wallItems.length}. Без повторов; линза и карточка работают отдельно от сетки.`
+          );
+        }
+        pumpQueue(token);
+      });
+    }
+  }
+
+  function startImageQueue(){
+    loadToken++;
+    const token=loadToken;
+    loadCursor=0;
+    activeLoads=0;
+    loadedCount=0;
+    itemLoaded=new Array(wallItems.length).fill(false);
+
+    paintSkeleton();
+    pumpQueue(token);
+  }
+
+  function indexAt(clientX,clientY){
+    const col=Math.floor((clientX-ox)/cellW);
+    const row=Math.floor((clientY-oy)/cellH);
+    if(col<0||row<0||col>=cols||row>=rows) return -1;
+    const idx=row*cols+col;
+    return idx>=0&&idx<wallItems.length?idx:-1;
+  }
+
+  function previewPaneHtml(item){
+    const r=ratingOf(item);
+    const genres=genresOf(item).slice(0,5);
+    const thumb=smallPosterUrl(item);
+    return `
+      <img class="gkmV343PreviewPoster" src="${esc(thumb||posterOf(item))}" data-full="${esc(fullPosterUrl(item))}" alt="">
+      <div class="gkmV343PText">
+        <h2>${esc(titleOf(item))}</h2>
+        <div class="gkmV343Meta">${esc(typeOf(item))}${yearOf(item)?" · "+esc(yearOf(item)):""}${r?" · ★ "+Number(r).toFixed(1):""}</div>
+        <div class="gkmV343Genres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div>
+        <div class="gkmV343Desc">${esc(overviewOf(item))}</div>
+        <div class="gkmV343OpenHint">Клик — открыть полную карточку</div>
+      </div>
+    `;
+  }
+
+  function upgradePreviewPoster(pane){
+    const img=pane&&pane.querySelector(".gkmV343PreviewPoster");
+    if(!img) return;
+    const full=img.dataset.full;
+    if(!full||full===img.src) return;
+    const high=new Image();
+    high.decoding="async";
+    high.referrerPolicy="no-referrer";
+    high.onload=()=>{
+      if(img.isConnected){
+        img.style.opacity=".68";
+        requestAnimationFrame(()=>{
+          img.src=full;
+          img.style.opacity="1";
+        });
+      }
+    };
+    high.src=full;
+  }
+
+  function showPreview(item){
+    const preview=document.getElementById("gkmV343Preview");
+    if(!preview||!item) return;
+
+    const key=keyOf(item);
+    if(previewKey===key) return;
+    previewKey=key;
+
+    const nextPaneIndex=activePreviewPane===0?1:0;
+    const oldPane=preview.querySelector(`[data-pane="${activePreviewPane}"]`);
+    const nextPane=preview.querySelector(`[data-pane="${nextPaneIndex}"]`);
+
+    nextPane.innerHTML=previewPaneHtml(item);
+    nextPane.classList.remove("active");
+    preview.classList.add("open");
+
+    requestAnimationFrame(()=>{
+      if(oldPane) oldPane.classList.remove("active");
+      nextPane.classList.add("active");
+      activePreviewPane=nextPaneIndex;
+      setTimeout(()=>upgradePreviewPoster(nextPane),80);
+    });
+  }
+
+  function hidePreview(){
+    clearTimeout(hoverTimer);
+    previewKey="";
+    const preview=document.getElementById("gkmV343Preview");
+    if(!preview) return;
+    preview.classList.remove("open");
+    preview.querySelectorAll(".gkmV343Pane").forEach(p=>p.classList.remove("active"));
+  }
+
+  function renderSoftFisheye(){
+    if(!pointerInside||!lensCanvas||!lensCtx||!bufferCanvas||!lensDirty) return;
+    lensDirty=false;
+
+    const size=LENS_SIZE;
+    const radius=LENS_RADIUS;
+    lensCtx.clearRect(0,0,size,size);
+    lensCtx.imageSmoothingEnabled=true;
+    lensCtx.imageSmoothingQuality="high";
+
+    // Несколько мягких колец дают выпуклость, а не грубое круглое увеличение.
+    const rings=6;
+    for(let ring=0;ring<rings;ring++){
+      const outer=radius*(1-ring/rings);
+      const inner=radius*(1-(ring+1)/rings);
+      const mid=(outer+inner)/2;
+      const strength=1+0.48*Math.pow(1-mid/radius,1.55);
+      const srcRadius=radius/strength;
+
+      lensCtx.save();
+      const path=new Path2D();
+      path.arc(radius,radius,outer,0,Math.PI*2);
+      path.arc(radius,radius,inner,0,Math.PI*2,true);
+      lensCtx.clip(path,"evenodd");
+
+      const sx=clamp(pointerX-srcRadius,0,Math.max(0,bufferCanvas.width-srcRadius*2));
+      const sy=clamp(pointerY-srcRadius,0,Math.max(0,bufferCanvas.height-srcRadius*2));
+      lensCtx.drawImage(
+        bufferCanvas,
+        sx,sy,srcRadius*2,srcRadius*2,
+        0,0,size,size
+      );
+      lensCtx.restore();
+    }
+
+    lensCanvas.style.left=`${pointerX-radius}px`;
+    lensCanvas.style.top=`${pointerY-radius}px`;
+  }
+
+  function updatePreviewTarget(){
+    const preview=document.getElementById("gkmV343Preview");
+    if(!preview) return;
+
+    const cardW=Math.min(560,window.innerWidth-42);
+    const cardH=window.innerWidth<700?164:258;
+    const gap=82;
+
+    let tx=pointerTargetX+gap;
+    if(tx+cardW>window.innerWidth-12) tx=pointerTargetX-cardW-gap;
+    tx=clamp(tx,10,Math.max(10,window.innerWidth-cardW-10));
+
+    let ty=pointerTargetY-cardH/2;
+    ty=clamp(ty,62,Math.max(62,window.innerHeight-cardH-14));
+
+    previewTargetX=tx;
+    previewTargetY=ty;
+  }
+
+  function motionLoop(){
+    if(!isOpen){
+      motionFrame=0;
+      return;
+    }
+
+    const previousX=pointerX;
+    const previousY=pointerY;
+
+    pointerX+=(pointerTargetX-pointerX)*0.18;
+    pointerY+=(pointerTargetY-pointerY)*0.18;
+    previewX+=(previewTargetX-previewX)*0.14;
+    previewY+=(previewTargetY-previewY)*0.14;
+
+    const moved=Math.abs(pointerX-previousX)+Math.abs(pointerY-previousY);
+    if(moved>.15) lensDirty=true;
+
+    if(pointerInside){
+      renderSoftFisheye();
+
+      const preview=document.getElementById("gkmV343Preview");
+      if(preview){
+        const velocityX=pointerTargetX-pointerX;
+        const velocityY=pointerTargetY-pointerY;
+        const rotateY=clamp(velocityX*.045,-7,7);
+        const rotateX=clamp(-velocityY*.035,-5,5);
+
+        preview.style.setProperty("--gkm-x",`${previewX}px`);
+        preview.style.setProperty("--gkm-y",`${previewY}px`);
+        preview.style.setProperty("--gkm-rx",`${rotateX}deg`);
+        preview.style.setProperty("--gkm-ry",`${rotateY}deg`);
+      }
+    }
+
+    motionFrame=requestAnimationFrame(motionLoop);
+  }
+
+  function startMotionLoop(){
+    if(!motionFrame) motionFrame=requestAnimationFrame(motionLoop);
+  }
+
+  function onMove(e){
+    pointerTargetX=e.clientX;
+    pointerTargetY=e.clientY;
+    updatePreviewTarget();
+
+    if(!pointerInside){
+      pointerInside=true;
+      pointerX=pointerTargetX;
+      pointerY=pointerTargetY;
+      previewX=previewTargetX;
+      previewY=previewTargetY;
+      lensDirty=true;
+      const lens=document.getElementById("gkmV343Lens");
+      if(lens) lens.classList.add("open");
+      startMotionLoop();
+    }
+
+    const index=indexAt(e.clientX,e.clientY);
+    if(index===hoverIndex) return;
+    hoverIndex=index;
+
+    clearTimeout(hoverTimer);
+    if(index>=0){
+      hoverTimer=setTimeout(()=>{
+        if(hoverIndex===index) showPreview(wallItems[index]);
+      },48);
+    }else{
+      hidePreview();
+    }
+  }
+
+  function pointerLeave(){
+    hoverIndex=-1;
+    pointerInside=false;
+    hidePreview();
+    const lens=document.getElementById("gkmV343Lens");
+    if(lens) lens.classList.remove("open");
+  }
+
+  function tryOpen(item){
+    const names=["openDetails","openTitleModal","showDetails","showModal","openCard","openMovie","openItemModal"];
+    for(const name of names){
+      try{
+        if(typeof window[name]==="function"){ window[name](item); return true; }
+      }catch(e){}
+      try{
+        const f=eval(name);
+        if(typeof f==="function"){ f(item); return true; }
+      }catch(e){}
+    }
+    return false;
+  }
+
+  function openItem(item){
+    closeWall();
+    setTimeout(()=>{
+      if(!tryOpen(item)) alert(titleOf(item));
+    },80);
+  }
+
+  function setStatus(title,sub){
+    const st=document.getElementById("gkmV343Status");
+    if(!st) return;
+    st.innerHTML=`<b>${esc(title||"Canvas-мозаика")}</b><div>${esc(sub||"")}</div>`;
+  }
+
+  async function loadWall(kind){
+    currentKind=kind;
+    layoutCount=EXPECTED_COUNTS[kind]||4400;
+    allItems=uniqueList(localPool().filter(x=>passKind(x,kind)));
+    wallItems=allItems.slice();
+
+    // Сразу рисуем плотную сетку ожидаемого размера, поэтому постеры не становятся огромными.
+    paintSkeleton();
+
+    const urls=urlsFor(kind);
+    const chunkSize=18;
+    for(let i=0;i<urls.length;i+=chunkSize){
+      const part=urls.slice(i,i+chunkSize);
+      // eslint-disable-next-line no-await-in-loop
+      const chunks=await Promise.all(part.map(fetchJson));
+      allItems.push(...chunks.flat().filter(x=>passKind(x,kind)));
+      setStatus(
+        "Собираю каталог...",
+        `Страницы ${Math.min(i+chunkSize,urls.length)}/${urls.length}. Сетка остаётся плотной и резкой.`
+      );
+    }
+
+    wallItems=uniqueList(allItems);
+    if(shuffleSeed) shuffle(wallItems);
+    layoutCount=wallItems.length;
+
+    setStatus(
+      `${labelKind(kind)} — ${wallItems.length} постеров`,
+      "Каталог собран. Постеры загружаются в свои ячейки без повторов."
+    );
+    startImageQueue();
+  }
+
+  function removeOldUi(){
+    [
+      "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn","gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn",
+      "gkmV332Btn","gkmV334Btn","gkmV336Btn","gkmV338Btn","gkmV339Btn","gkmV340Btn","gkmV341Btn","gkmV342Btn",
+      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay",
+      "gkmV332Overlay","gkmV334Overlay","gkmV336Overlay","gkmV338Overlay","gkmV339Overlay","gkmV340Overlay","gkmV341Overlay","gkmV342Overlay"
+    ].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.remove();
+    });
+  }
+
+  function ensureCss(){
+    if(document.getElementById("gkmV343Css")) return;
+    const css=document.createElement("style");
+    css.id="gkmV343Css";
+    css.textContent=`
+      #gkmV343Btn{
+        position:fixed!important;right:18px!important;bottom:92px!important;z-index:99997!important;
+        border:1px solid rgba(0,220,255,.45);background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
+        color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;
+        box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35)
+      }
+      #gkmV343Overlay{position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;background:#020817}
+      #gkmV343Overlay.open{display:block}
+      #gkmV343Canvas{position:absolute;inset:0;width:100%;height:100%;display:block;background:#020817}
+      #gkmV343Lens{
+        position:absolute;z-index:5;width:${LENS_SIZE}px;height:${LENS_SIZE}px;pointer-events:none;
+        opacity:0;transform:scale(.9);transition:opacity .14s ease,transform .18s cubic-bezier(.2,.8,.2,1);
+        -webkit-mask-image:radial-gradient(circle,#000 0 54%,rgba(0,0,0,.94) 66%,rgba(0,0,0,.42) 82%,transparent 100%);
+        mask-image:radial-gradient(circle,#000 0 54%,rgba(0,0,0,.94) 66%,rgba(0,0,0,.42) 82%,transparent 100%);
+        filter:drop-shadow(0 9px 22px rgba(0,0,0,.25));
+        will-change:left,top,opacity,transform
+      }
+      #gkmV343Lens.open{opacity:1;transform:scale(1)}
+      .gkmV343Shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,.18),transparent 13%,transparent 86%,rgba(0,0,0,.28))}
+      .gkmV343Top{position:absolute;left:12px;right:12px;top:10px;z-index:8;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;pointer-events:none}
+      .gkmV343Title{font-size:22px;font-weight:950;text-shadow:0 0 12px rgba(0,0,0,.9),0 0 22px rgba(0,180,255,.45)}
+      .gkmV343Sub{margin-top:3px;font-size:12px;color:rgba(255,255,255,.86);text-shadow:0 0 8px rgba(0,0,0,.9)}
+      .gkmV343Actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
+      .gkmV343Actions button{
+        border:1px solid rgba(0,220,255,.36);background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));
+        color:#fff;border-radius:14px;padding:10px 13px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)
+      }
+      .gkmV343Actions button:hover{filter:brightness(1.15)}
+      #gkmV343Preview{
+        position:absolute;z-index:7;left:0;top:0;width:min(560px,calc(100vw - 42px));height:258px;
+        transform:perspective(950px) translate3d(var(--gkm-x,20px),var(--gkm-y,80px),0)
+          rotateX(var(--gkm-rx,0deg)) rotateY(var(--gkm-ry,0deg)) scale(.97);
+        transform-origin:center;opacity:0;pointer-events:none;
+        transition:opacity .16s ease,filter .18s ease;
+        filter:drop-shadow(0 24px 45px rgba(0,0,0,.58));
+        will-change:transform,opacity
+      }
+      #gkmV343Preview.open{opacity:1}
+      .gkmV343Pane{
+        position:absolute;inset:0;display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px;
+        border-radius:22px;border:1px solid rgba(255,255,255,.14);
+        background:linear-gradient(135deg,rgba(14,18,26,.94),rgba(20,20,22,.91));
+        box-shadow:0 0 28px rgba(0,190,255,.10);backdrop-filter:blur(10px);
+        opacity:0;transform:translateY(8px) scale(.985);
+        transition:opacity .17s ease,transform .20s cubic-bezier(.2,.8,.2,1)
+      }
+      .gkmV343Pane.active{opacity:1;transform:translateY(0) scale(1)}
+      .gkmV343PreviewPoster{
+        width:150px;height:220px;object-fit:cover;border-radius:13px;background:#111;
+        box-shadow:0 14px 34px rgba(0,0,0,.55);transition:opacity .15s ease
+      }
+      .gkmV343PText h2{margin:0 0 8px;font-size:26px;line-height:1.05}
+      .gkmV343Meta{color:rgba(255,255,255,.78);font-size:13px;margin-bottom:8px}
+      .gkmV343Genres{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+      .gkmV343Genres span{font-size:10px;color:#fff;background:rgba(255,255,255,.12);border-radius:999px;padding:4px 7px}
+      .gkmV343Desc{font-size:12px;line-height:1.45;color:rgba(255,255,255,.84);max-height:88px;overflow:hidden}
+      .gkmV343OpenHint{margin-top:10px;font-size:12px;color:#28d7ff;font-weight:900}
+      #gkmV343Status{
+        position:absolute;left:14px;bottom:14px;z-index:8;width:min(470px,calc(100vw - 28px));
+        border:1px solid rgba(0,220,255,.28);background:rgba(6,13,30,.82);border-radius:18px;padding:12px 14px;
+        box-shadow:0 0 24px rgba(0,180,255,.14);backdrop-filter:blur(8px)
+      }
+      #gkmV343Status b{display:block;font-size:16px;margin-bottom:4px}
+      #gkmV343Status div{font-size:11px;color:rgba(255,255,255,.72);line-height:1.35}
+      .gkmV343Hint{position:absolute;right:18px;bottom:18px;z-index:8;color:rgba(255,255,255,.7);font-size:11px;text-align:right;text-shadow:0 0 8px #000;pointer-events:none}
+      @media(max-width:700px){
+        #gkmV343Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
+        .gkmV343Title{font-size:17px}.gkmV343Sub{font-size:10px}.gkmV343Actions button{padding:8px 9px;font-size:12px}
+        .gkmV343Top{left:8px;right:8px;top:8px}
+        #gkmV343Lens{display:none}
+        #gkmV343Preview{width:calc(100vw - 20px);height:164px}
+        .gkmV343Pane{grid-template-columns:92px 1fr;gap:10px;padding:12px}
+        .gkmV343PreviewPoster{width:92px;height:136px}.gkmV343PText h2{font-size:18px}.gkmV343Desc{display:none}
+        #gkmV343Status{left:10px;bottom:10px;width:calc(100vw - 20px)}.gkmV343Hint{display:none}
+      }
+    `;
+    document.head.appendChild(css);
+  }
+
+  function ensureUi(){
+    removeOldUi();
+
+    if(!document.getElementById("gkmV343Btn")){
+      const btn=document.createElement("button");
+      btn.id="gkmV343Btn";
+      btn.type="button";
+      btn.textContent="🖼️ Canvas-мозаика";
+      btn.onclick=()=>openWall("anime");
+      document.body.appendChild(btn);
+    }
+    if(document.getElementById("gkmV343Overlay")) return;
+
+    const overlay=document.createElement("div");
+    overlay.id="gkmV343Overlay";
+    overlay.innerHTML=`
+      <canvas id="gkmV343Canvas"></canvas>
+      <canvas id="gkmV343Lens" width="${LENS_SIZE}" height="${LENS_SIZE}"></canvas>
+      <div class="gkmV343Shade"></div>
+      <div class="gkmV343Top">
+        <div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V343</div>
+          <div class="gkmV343Sub">Мягкий «рыбий глаз» без видимого круга. Карточка плавно следует за мышью.</div>
+        </div>
+        <div class="gkmV343Actions">
+          <button data-kind="all">Все</button>
+          <button data-kind="movies">Фильмы</button>
+          <button data-kind="series">Сериалы</button>
+          <button data-kind="anime">Аниме</button>
+          <button data-kind="cartoons">Мульты</button>
+          <button id="gkmV343Shuffle">⏭ Другой набор</button>
+          <button id="gkmV343Close">✕</button>
+        </div>
+      </div>
+      <div id="gkmV343Preview">
+        <div class="gkmV343Pane" data-pane="0"></div>
+        <div class="gkmV343Pane" data-pane="1"></div>
+      </div>
+      <div id="gkmV343Status"><b>Открываю стенку...</b><div>Готовлю плотную сетку.</div></div>
+      <div class="gkmV343Hint">движение — мягкий «рыбий глаз»<br>клик — открыть полную карточку</div>
+    `;
+    document.body.appendChild(overlay);
+
+    canvas=document.getElementById("gkmV343Canvas");
+    ctx=canvas.getContext("2d",{alpha:false});
+    lensCanvas=document.getElementById("gkmV343Lens");
+    lensCtx=lensCanvas.getContext("2d",{alpha:true});
+
+    overlay.querySelectorAll("[data-kind]").forEach(btn=>{
+      btn.onclick=()=>openWall(btn.dataset.kind);
+    });
+    document.getElementById("gkmV343Close").onclick=closeWall;
+    document.getElementById("gkmV343Shuffle").onclick=()=>{
+      shuffleSeed++;
+      shuffle(wallItems);
+      hoverIndex=-1;
+      hidePreview();
+      startImageQueue();
+    };
+
+    canvas.addEventListener("pointermove",onMove,{passive:true});
+    canvas.addEventListener("pointerleave",pointerLeave);
+    canvas.addEventListener("click",()=>{
+      const item=wallItems[hoverIndex];
+      if(item) openItem(item);
+    });
+
+    window.addEventListener("resize",()=>{
+      if(isOpen){
+        pointerLeave();
+        startImageQueue();
+      }
+    });
+
+    window.GKM_OPEN_3D_WALL=()=>openWall("anime");
+    window.GKM_OPEN_CANVAS_MOSAIC=()=>openWall("anime");
+  }
+
+  async function openWall(kind="anime"){
+    ensureCss();
+    ensureUi();
+
+    const overlay=document.getElementById("gkmV343Overlay");
+    overlay.classList.add("open");
+    document.body.style.overflow="hidden";
+    isOpen=true;
+    hoverIndex=-1;
+    pointerInside=false;
+    hidePreview();
+
+    pointerTargetX=pointerX=window.innerWidth/2;
+    pointerTargetY=pointerY=window.innerHeight/2;
+    previewX=previewTargetX=Math.max(10,window.innerWidth/2-280);
+    previewY=previewTargetY=Math.max(62,window.innerHeight/2-129);
+    startMotionLoop();
+
+    if(kind!==currentKind||!wallItems.length){
+      loadToken++;
+      allItems=[];
+      wallItems=[];
+      currentKind=kind;
+      layoutCount=EXPECTED_COUNTS[kind]||4400;
+      paintSkeleton();
+      await loadWall(kind);
+    }else{
+      presentBuffer();
+    }
+  }
+
+  function closeWall(){
+    const overlay=document.getElementById("gkmV343Overlay");
+    if(overlay) overlay.classList.remove("open");
+    document.body.style.overflow="";
+    isOpen=false;
+    pointerInside=false;
+    loadToken++;
+
+    if(motionFrame){
+      cancelAnimationFrame(motionFrame);
+      motionFrame=0;
+    }
+    hidePreview();
+    const lens=document.getElementById("gkmV343Lens");
+    if(lens) lens.classList.remove("open");
+  }
+
+  function install(){
+    ensureCss();
+    ensureUi();
+  }
+
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",install,{once:true});
+  else install();
+  setTimeout(install,500);
+  setTimeout(install,1400);
+
+  console.log("GKM V343: soft fisheye video wall installed");
+})();
+/* GKM V343 SOFT FISHEYE VIDEO WALL END */
 
 /* GKM V343 HUMAN AI WEATHER CLICKABLE CARDS FULL CATALOG START */
 (function(){
@@ -15089,747 +16035,4 @@ Endpoint: ${endpoint||"не задан"}`;
   console.log("GKM V344: wall + human AI + live weather merged");
 })();
 /* GKM V344 WALL AI WEATHER MERGE END */
-
-/* GKM V332 CANVAS POSTER MOSAIC START */
-(function(){
-  window.GKM_V332_CANVAS_POSTER_MOSAIC_VERSION = "v332-canvas-poster-mosaic-restore-2026-07-11";
-
-  const CACHE = new Map();
-  const IMG_CACHE = new Map();
-  let items = [];
-  let visibleItems = [];
-  let currentKind = "anime";
-  let canvas = null;
-  let ctx = null;
-  let isOpen = false;
-  let hoveredIndex = -1;
-  let tileW = 16;
-  let tileH = 24;
-  let cols = 1;
-  let rows = 1;
-  let drawTimer = 0;
-  let shuffleSeed = 0;
-
-  function t(v){ return String(v == null ? "" : v).trim(); }
-  function esc(v){
-    return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    }[ch]));
-  }
-  function n(v){
-    return t(v).toLowerCase()
-      .replace(/ё/g,"е")
-      .replace(/[^\p{L}\p{N}]+/gu," ")
-      .replace(/\s+/g," ")
-      .trim();
-  }
-  function titleOf(item){
-    try{ if(typeof displayTitle === "function") return t(displayTitle(item)); }catch(e){}
-    return t(item && (item.ru || item.title_ru || item.__manualTopTitle || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
-  }
-  function typeOf(item){
-    try{ if(typeof getType === "function") return t(getType(item)); }catch(e){}
-    return t(item && (item.type || item.category || item.kind)) || "Каталог";
-  }
-  function yearOf(item){
-    try{ if(typeof getYear === "function") return t(getYear(item)); }catch(e){}
-    const raw = t(item && (item.year || item.release_date || item.first_air_date));
-    const m = raw.match(/(19\d{2}|20\d{2})/);
-    return m ? m[1] : raw;
-  }
-  function ratingOf(item){
-    try{ if(typeof getRating === "function") return Number(getRating(item) || 0); }catch(e){}
-    return Number(item && (item.rating || item.vote_average || item.score) || 0);
-  }
-  function overviewOf(item){
-    try{ if(typeof displayOverview === "function") return t(displayOverview(item)); }catch(e){}
-    return t(item && (item.overview || item.description || item.synopsis || item.plot)) || "Описание будет добавлено позже.";
-  }
-  function genresOf(item){
-    try{
-      if(typeof getGenres === "function"){
-        const g = getGenres(item);
-        if(Array.isArray(g)) return g.filter(Boolean).map(String);
-      }
-    }catch(e){}
-    const raw = item && (item.genres || item.genre || item.tags);
-    if(Array.isArray(raw)) return raw.filter(Boolean).map(String);
-    if(typeof raw === "string") return raw.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
-    return [];
-  }
-  function posterOf(item){
-    try{ if(typeof posterSrc === "function") return t(posterSrc(item)); }catch(e){}
-    return t(item && (item.poster || item.poster_url || item.posterUrl || item.image || item.img || item.cover || item.cover_url || item.thumbnail || item.backdrop || item.backdrop_path));
-  }
-  function keyOf(item){
-    return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOf(item)}|${yearOf(item)}|${posterOf(item)}`);
-  }
-  function familyOf(item){
-    const s = n(typeOf(item));
-    if(s.includes("аниме") || s.includes("anime")) return "anime";
-    if(s.includes("сериал") || s.includes("series")) return "series";
-    if(s.includes("мульт") || s.includes("cartoon")) return "cartoons";
-    if(s.includes("фильм") || s.includes("movie")) return "movies";
-    return "other";
-  }
-  function passKind(item, kind){
-    if(kind === "all") return true;
-    return familyOf(item) === kind;
-  }
-
-  function parseJson(j){
-    const out = [];
-    if(!j) return out;
-    if(Array.isArray(j)) out.push(...j);
-    if(Array.isArray(j.items)) out.push(...j.items);
-    if(Array.isArray(j.data)) out.push(...j.data);
-    if(Array.isArray(j.results)) out.push(...j.results);
-    if(j.sections && typeof j.sections === "object"){
-      Object.values(j.sections).forEach(v=>{
-        if(Array.isArray(v)) out.push(...v);
-        else if(v && Array.isArray(v.items)) out.push(...v.items);
-      });
-    }
-    return out.filter(x=>x && typeof x === "object");
-  }
-
-  async function fetchJson(url){
-    if(CACHE.has(url)) return CACHE.get(url);
-    const p = fetch(url, {cache:"force-cache"})
-      .then(r => r.ok ? r.json() : null)
-      .then(parseJson)
-      .catch(()=>[]);
-    CACHE.set(url, p);
-    return p;
-  }
-
-  function localPool(){
-    const out = [];
-    try{ if(Array.isArray(currentItems)) out.push(...currentItems); }catch(e){}
-    try{
-      if(homeData && homeData.sections){
-        Object.values(homeData.sections).forEach(v=>{
-          if(Array.isArray(v)) out.push(...v);
-          else if(v && Array.isArray(v.items)) out.push(...v.items);
-        });
-      }
-    }catch(e){}
-    return out;
-  }
-
-  function uniqueList(arr){
-    const seen = new Set();
-    const out = [];
-    arr.forEach(item=>{
-      if(!item || !posterOf(item)) return;
-      const k = keyOf(item);
-      if(seen.has(k)) return;
-      seen.add(k);
-      out.push(item);
-    });
-    return out;
-  }
-
-  function urlsFor(kind){
-    const urls = ["data/fast/home.json?v=332"];
-    const map = {
-      anime:["anime"],
-      movies:["movies"],
-      series:["series"],
-      cartoons:["cartoons"],
-      all:["anime","movies","series","cartoons"]
-    };
-    const cats = map[kind] || ["anime"];
-    const maxPages = kind === "all" ? 28 : (kind === "anime" ? 80 : 42);
-    cats.forEach(cat=>{
-      for(let i=1;i<=maxPages;i++){
-        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=332`);
-      }
-    });
-    return urls;
-  }
-
-  async function loadItems(kind="anime"){
-    currentKind = kind;
-    setStatus("Загрузка каталога...");
-    const base = localPool().filter(x=>passKind(x, kind));
-    const all = [...base];
-
-    const urls = urlsFor(kind);
-    const step = 12;
-    for(let i=0;i<urls.length;i+=step){
-      const part = urls.slice(i, i+step);
-      // eslint-disable-next-line no-await-in-loop
-      const chunks = await Promise.all(part.map(fetchJson));
-      all.push(...chunks.flat().filter(x=>passKind(x, kind)));
-      if(isOpen) {
-        items = uniqueList(all);
-        visibleItems = items.slice();
-        if(shuffleSeed) shuffle(visibleItems);
-        setStatus(`${labelKind(kind)} — ${items.length} постеров на Canvas`, `Загружено страниц: ${Math.min(i+step, urls.length)}/${urls.length}. DOM не течёт — рисуем в canvas.`);
-        scheduleDraw();
-      }
-    }
-
-    items = uniqueList(all);
-    visibleItems = items.slice();
-    if(shuffleSeed) shuffle(visibleItems);
-    setStatus(`${labelKind(kind)} — ${items.length} постеров на Canvas`, `Загружено изображений: 0/${items.length}. Общий пул: ${items.length}.`);
-    preloadVisibleImages();
-    scheduleDraw();
-  }
-
-  function shuffle(arr){
-    let seed = Date.now() + shuffleSeed;
-    function rnd(){
-      seed = (seed * 1664525 + 1013904223) >>> 0;
-      return seed / 4294967296;
-    }
-    for(let i=arr.length-1;i>0;i--){
-      const j = Math.floor(rnd() * (i+1));
-      [arr[i],arr[j]] = [arr[j],arr[i]];
-    }
-  }
-
-  function labelKind(kind){
-    return {
-      all:"Все",
-      anime:"Аниме",
-      movies:"Фильмы",
-      series:"Сериалы",
-      cartoons:"Мульты"
-    }[kind] || "Каталог";
-  }
-
-  function imageFor(url){
-    if(!url) return null;
-    if(IMG_CACHE.has(url)) return IMG_CACHE.get(url);
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.decoding = "async";
-    img.loading = "eager";
-    img.onload = () => {
-      img.__ok = true;
-      loadedCount++;
-      if(loadedCount % 40 === 0) {
-        setStatus(`${labelKind(currentKind)} — ${items.length} постеров на Canvas`, `Загружено изображений: ${loadedCount}/${items.length}. Общий пул: ${items.length}.`);
-        scheduleDraw();
-      }
-    };
-    img.onerror = () => { img.__bad = true; };
-    IMG_CACHE.set(url, img);
-    img.src = url;
-    return img;
-  }
-
-  let loadedCount = 0;
-  function preloadVisibleImages(){
-    loadedCount = 0;
-    const list = visibleItems.slice(0, Math.min(visibleItems.length, 5200));
-    let i = 0;
-    function tick(){
-      const end = Math.min(i + 80, list.length);
-      for(; i<end; i++) imageFor(posterOf(list[i]));
-      if(i < list.length && isOpen) setTimeout(tick, 30);
-      else scheduleDraw();
-    }
-    tick();
-  }
-
-  function ensureCss(){
-    if(document.getElementById("gkmV332Css")) return;
-    const css = document.createElement("style");
-    css.id = "gkmV332Css";
-    css.textContent = `
-      #gkmV332Btn{
-        position:fixed!important;
-        right:18px!important;
-        bottom:92px!important;
-        z-index:99997!important;
-        border:1px solid rgba(0,220,255,.45);
-        background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
-        color:#fff;
-        border-radius:18px;
-        padding:13px 18px;
-        font-weight:900;
-        cursor:pointer;
-        box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35);
-      }
-      #gkmV332Overlay{
-        position:fixed;
-        inset:0;
-        display:none;
-        z-index:99998;
-        overflow:hidden;
-        color:#fff;
-        background:#020817;
-      }
-      #gkmV332Overlay.open{display:block}
-      #gkmV332Canvas{
-        position:absolute;
-        inset:0;
-        width:100%;
-        height:100%;
-        display:block;
-        background:#020817;
-      }
-      .gkmV332Shade{
-        position:absolute;
-        inset:0;
-        pointer-events:none;
-        background:
-          radial-gradient(circle at 50% 42%,rgba(0,0,0,.03),transparent 16%),
-          linear-gradient(to bottom,rgba(0,0,0,.24),transparent 14%,transparent 84%,rgba(0,0,0,.35));
-      }
-      .gkmV332Top{
-        position:absolute;
-        left:14px;
-        right:14px;
-        top:10px;
-        z-index:5;
-        display:flex;
-        align-items:flex-start;
-        justify-content:space-between;
-        gap:12px;
-        pointer-events:none;
-      }
-      .gkmV332Title{
-        font-size:22px;
-        font-weight:950;
-        text-shadow:0 0 12px rgba(0,0,0,.9),0 0 22px rgba(0,180,255,.45);
-      }
-      .gkmV332Sub{
-        margin-top:3px;
-        font-size:12px;
-        color:rgba(255,255,255,.86);
-        text-shadow:0 0 8px rgba(0,0,0,.9);
-      }
-      .gkmV332Actions{
-        display:flex;
-        gap:8px;
-        flex-wrap:wrap;
-        justify-content:flex-end;
-        pointer-events:auto;
-      }
-      .gkmV332Actions button{
-        border:1px solid rgba(0,220,255,.36);
-        background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));
-        color:#fff;
-        border-radius:14px;
-        padding:10px 13px;
-        font-weight:850;
-        cursor:pointer;
-        box-shadow:0 0 16px rgba(0,170,255,.18);
-      }
-      .gkmV332Actions button:hover{filter:brightness(1.15)}
-      #gkmV332Preview{
-        position:absolute;
-        z-index:6;
-        left:50%;
-        top:50%;
-        transform:translate(-50%,-50%);
-        width:min(560px,calc(100vw - 42px));
-        display:none;
-        grid-template-columns:150px 1fr;
-        gap:18px;
-        padding:18px;
-        border-radius:22px;
-        border:1px solid rgba(255,255,255,.14);
-        background:rgba(15,15,18,.86);
-        box-shadow:0 22px 90px rgba(0,0,0,.72),0 0 34px rgba(0,200,255,.16);
-        backdrop-filter:blur(11px);
-        pointer-events:none;
-      }
-      #gkmV332Preview.open{display:grid}
-      #gkmV332Preview img{
-        width:150px;
-        height:220px;
-        object-fit:cover;
-        border-radius:13px;
-        background:#111;
-        box-shadow:0 14px 34px rgba(0,0,0,.55);
-      }
-      .gkmV332PText h2{
-        margin:0 0 8px;
-        font-size:26px;
-        line-height:1.05;
-      }
-      .gkmV332Meta{
-        color:rgba(255,255,255,.78);
-        font-size:13px;
-        margin-bottom:8px;
-      }
-      .gkmV332Genres{
-        display:flex;
-        gap:5px;
-        flex-wrap:wrap;
-        margin-bottom:8px;
-      }
-      .gkmV332Genres span{
-        font-size:10px;
-        color:#fff;
-        background:rgba(255,255,255,.12);
-        border-radius:999px;
-        padding:4px 7px;
-      }
-      .gkmV332Desc{
-        font-size:12px;
-        line-height:1.45;
-        color:rgba(255,255,255,.84);
-        max-height:88px;
-        overflow:hidden;
-      }
-      .gkmV332OpenHint{
-        margin-top:10px;
-        font-size:12px;
-        color:#28d7ff;
-        font-weight:900;
-      }
-      #gkmV332Status{
-        position:absolute;
-        left:14px;
-        bottom:14px;
-        z-index:5;
-        width:min(470px,calc(100vw - 28px));
-        border:1px solid rgba(0,220,255,.28);
-        background:rgba(6,13,30,.82);
-        border-radius:18px;
-        padding:12px 14px;
-        box-shadow:0 0 24px rgba(0,180,255,.14);
-        backdrop-filter:blur(8px);
-      }
-      #gkmV332Status b{display:block;font-size:16px;margin-bottom:4px}
-      #gkmV332Status div{font-size:11px;color:rgba(255,255,255,.72);line-height:1.35}
-      .gkmV332Hint{
-        position:absolute;
-        right:18px;
-        bottom:18px;
-        z-index:5;
-        color:rgba(255,255,255,.7);
-        font-size:11px;
-        text-align:right;
-        text-shadow:0 0 8px #000;
-        pointer-events:none;
-      }
-      @media(max-width:700px){
-        #gkmV332Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
-        .gkmV332Title{font-size:17px}
-        .gkmV332Sub{font-size:10px}
-        .gkmV332Actions button{padding:8px 9px;font-size:12px}
-        .gkmV332Top{left:8px;right:8px;top:8px}
-        #gkmV332Preview{
-          width:calc(100vw - 20px);
-          grid-template-columns:92px 1fr;
-          gap:10px;
-          padding:12px;
-        }
-        #gkmV332Preview img{width:92px;height:136px}
-        .gkmV332PText h2{font-size:18px}
-        .gkmV332Desc{display:none}
-        #gkmV332Status{left:10px;bottom:10px;width:calc(100vw - 20px)}
-        .gkmV332Hint{display:none}
-      }
-    `;
-    document.head.appendChild(css);
-  }
-
-  function removeOldWallUi(){
-    [
-      "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn",
-      "gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn",
-      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay"
-    ].forEach(id=>{
-      const el = document.getElementById(id);
-      if(el) el.remove();
-    });
-  }
-
-  function ensureUi(){
-    removeOldWallUi();
-
-    if(!document.getElementById("gkmV332Btn")){
-      const btn = document.createElement("button");
-      btn.id = "gkmV332Btn";
-      btn.type = "button";
-      btn.textContent = "🖼️ Canvas-мозаика";
-      btn.onclick = () => openMosaic("anime");
-      document.body.appendChild(btn);
-    }
-
-    if(document.getElementById("gkmV332Overlay")) return;
-
-    const overlay = document.createElement("div");
-    overlay.id = "gkmV332Overlay";
-    overlay.innerHTML = `
-      <canvas id="gkmV332Canvas"></canvas>
-      <div class="gkmV332Shade"></div>
-      <div class="gkmV332Top">
-        <div>
-          <div class="gkmV332Title">🖼️ Canvas-мозаика постеров V332</div>
-          <div class="gkmV332Sub">Без тысяч DOM-карточек: рисуем тысячи постеров на Canvas. Наведение — превью, клик — открыть.</div>
-        </div>
-        <div class="gkmV332Actions">
-          <button data-kind="all">Все</button>
-          <button data-kind="movies">Фильмы</button>
-          <button data-kind="series">Сериалы</button>
-          <button data-kind="anime">Аниме</button>
-          <button data-kind="cartoons">Мульты</button>
-          <button id="gkmV332Shuffle">⏭ Другой набор</button>
-          <button id="gkmV332Close">✕</button>
-        </div>
-      </div>
-      <div id="gkmV332Preview"></div>
-      <div id="gkmV332Status"><b>Готовлю мозаику...</b><div>Загрузка...</div></div>
-      <div class="gkmV332Hint">наведение — карточка<br>клик — открыть полную карточку</div>
-    `;
-    document.body.appendChild(overlay);
-
-    canvas = document.getElementById("gkmV332Canvas");
-    ctx = canvas.getContext("2d", {alpha:false});
-
-    overlay.querySelectorAll("[data-kind]").forEach(btn=>{
-      btn.onclick = () => openMosaic(btn.dataset.kind);
-    });
-    document.getElementById("gkmV332Close").onclick = closeMosaic;
-    document.getElementById("gkmV332Shuffle").onclick = () => {
-      shuffleSeed += 1;
-      shuffle(visibleItems);
-      hoveredIndex = -1;
-      hidePreview();
-      scheduleDraw();
-    };
-
-    canvas.addEventListener("mousemove", onMove);
-    canvas.addEventListener("mouseleave", () => {
-      hoveredIndex = -1;
-      hidePreview();
-      scheduleDraw();
-    });
-    canvas.addEventListener("click", () => {
-      const item = visibleItems[hoveredIndex];
-      if(item) openItem(item);
-    });
-    window.addEventListener("resize", () => {
-      if(isOpen) {
-        resizeCanvas();
-        scheduleDraw();
-      }
-    });
-
-    window.GKM_OPEN_3D_WALL = () => openMosaic("anime");
-    window.GKM_OPEN_CANVAS_MOSAIC = () => openMosaic("anime");
-  }
-
-  function setStatus(title, sub){
-    const st = document.getElementById("gkmV332Status");
-    if(!st) return;
-    st.innerHTML = `<b>${esc(title || "Canvas-мозаика")}</b><div>${esc(sub || "")}</div>`;
-  }
-
-  function resizeCanvas(){
-    if(!canvas || !ctx) return;
-    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-    canvas.width = Math.floor(window.innerWidth * dpr);
-    canvas.height = Math.floor(window.innerHeight * dpr);
-    canvas.style.width = window.innerWidth + "px";
-    canvas.style.height = window.innerHeight + "px";
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    const count = Math.max(visibleItems.length, 1);
-    const ratio = 2 / 3;
-
-    cols = Math.max(28, Math.ceil(Math.sqrt(count * w / h / ratio)));
-    rows = Math.ceil(count / cols);
-    tileW = Math.max(8, Math.floor(w / cols));
-    tileH = Math.max(12, Math.floor(tileW / ratio));
-
-    // Если по высоте не влезает — делаем ещё мельче.
-    const neededH = rows * tileH;
-    if(neededH > h * 1.08){
-      tileH = Math.max(10, Math.floor(h / rows));
-      tileW = Math.max(7, Math.floor(tileH * ratio));
-      cols = Math.max(cols, Math.ceil(w / tileW));
-      rows = Math.ceil(count / cols);
-    }
-  }
-
-  function scheduleDraw(){
-    clearTimeout(drawTimer);
-    drawTimer = setTimeout(draw, 20);
-  }
-
-  function draw(){
-    if(!isOpen || !ctx || !canvas) return;
-    resizeCanvas();
-
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    ctx.fillStyle = "#020817";
-    ctx.fillRect(0,0,w,h);
-
-    const count = visibleItems.length;
-    const gridW = cols * tileW;
-    const gridH = rows * tileH;
-    const ox = Math.floor((w - gridW) / 2);
-    const oy = Math.floor((h - gridH) / 2);
-
-    for(let i=0;i<count;i++){
-      const item = visibleItems[i];
-      const col = i % cols;
-      const row = Math.floor(i / cols);
-      const x = ox + col * tileW;
-      const y = oy + row * tileH;
-      const img = imageFor(posterOf(item));
-
-      if(img && img.__ok){
-        try{ ctx.drawImage(img, x, y, tileW, tileH); }catch(e){}
-      } else {
-        ctx.fillStyle = "rgba(15,28,58,.82)";
-        ctx.fillRect(x, y, tileW, tileH);
-      }
-
-      if(i === hoveredIndex){
-        ctx.save();
-        ctx.strokeStyle = "rgba(0,220,255,.95)";
-        ctx.lineWidth = 2;
-        ctx.strokeRect(x-1,y-1,tileW+2,tileH+2);
-        const bigW = Math.min(180, tileW * 7);
-        const bigH = Math.min(260, tileH * 7);
-        const bx = Math.max(10, Math.min(w - bigW - 10, x + tileW + 12));
-        const by = Math.max(70, Math.min(h - bigH - 20, y - bigH / 3));
-        ctx.shadowColor = "rgba(0,200,255,.7)";
-        ctx.shadowBlur = 22;
-        if(img && img.__ok) {
-          try{ ctx.drawImage(img, bx, by, bigW, bigH); }catch(e){}
-        }
-        ctx.restore();
-      }
-    }
-  }
-
-  function indexAt(clientX, clientY){
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    const gridW = cols * tileW;
-    const gridH = rows * tileH;
-    const ox = Math.floor((w - gridW) / 2);
-    const oy = Math.floor((h - gridH) / 2);
-    const col = Math.floor((clientX - ox) / tileW);
-    const row = Math.floor((clientY - oy) / tileH);
-    if(col < 0 || row < 0 || col >= cols || row >= rows) return -1;
-    const idx = row * cols + col;
-    return idx >= 0 && idx < visibleItems.length ? idx : -1;
-  }
-
-  function onMove(e){
-    const idx = indexAt(e.clientX, e.clientY);
-    if(idx === hoveredIndex) return;
-    hoveredIndex = idx;
-    const item = visibleItems[idx];
-    if(item) showPreview(item);
-    else hidePreview();
-    scheduleDraw();
-  }
-
-  function showPreview(item){
-    const p = document.getElementById("gkmV332Preview");
-    if(!p || !item) return;
-    const r = ratingOf(item);
-    const genres = genresOf(item).slice(0,5);
-    p.innerHTML = `
-      <img src="${esc(posterOf(item))}" alt="">
-      <div class="gkmV332PText">
-        <h2>${esc(titleOf(item))}</h2>
-        <div class="gkmV332Meta">${esc(typeOf(item))}${yearOf(item) ? " · " + esc(yearOf(item)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>
-        <div class="gkmV332Genres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div>
-        <div class="gkmV332Desc">${esc(overviewOf(item))}</div>
-        <div class="gkmV332OpenHint">Клик — открыть полную карточку</div>
-      </div>
-    `;
-    p.classList.add("open");
-  }
-
-  function hidePreview(){
-    const p = document.getElementById("gkmV332Preview");
-    if(p) p.classList.remove("open");
-  }
-
-  function tryOpen(item){
-    const names = ["openDetails","openTitleModal","showDetails","showModal","openCard","openMovie","openItemModal"];
-    for(const name of names){
-      try{
-        const f = eval(name);
-        if(typeof f === "function") {
-          f(item);
-          return true;
-        }
-      }catch(e){}
-      try{
-        if(typeof window[name] === "function") {
-          window[name](item);
-          return true;
-        }
-      }catch(e){}
-    }
-    return false;
-  }
-
-  function openItem(item){
-    closeMosaic(false);
-    setTimeout(()=>{
-      if(!tryOpen(item)) alert(titleOf(item));
-    }, 90);
-  }
-
-  async function openMosaic(kind="anime"){
-    ensureCss();
-    ensureUi();
-    const overlay = document.getElementById("gkmV332Overlay");
-    overlay.classList.add("open");
-    document.body.style.overflow = "hidden";
-    isOpen = true;
-    hoveredIndex = -1;
-    hidePreview();
-
-    if(kind !== currentKind || !items.length){
-      items = [];
-      visibleItems = [];
-      await loadItems(kind);
-    } else {
-      scheduleDraw();
-    }
-    preloadVisibleImages();
-  }
-
-  function closeMosaic(full=true){
-    const overlay = document.getElementById("gkmV332Overlay");
-    if(overlay) overlay.classList.remove("open");
-    document.body.style.overflow = "";
-    hidePreview();
-    isOpen = false;
-  }
-
-  function install(){
-    ensureCss();
-    ensureUi();
-  }
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true});
-  else install();
-  setTimeout(install, 500);
-  setTimeout(install, 1400);
-
-  console.log("GKM V332: canvas poster mosaic restored");
-})();
-/* GKM V332 CANVAS POSTER MOSAIC END */
-
-
-/* GKM V346 RESTORE EXACT V332 CANVAS KEEP AI START */
-(function(){
-  window.GKM_V346_RESTORE_EXACT_V332_CANVAS_KEEP_AI_VERSION =
-    "v346-restore-exact-v332-canvas-keep-ai-2026-07-21";
-  console.log("GKM V346: exact V332 Canvas mosaic restored; V344 AI/weather preserved");
-})();
-/* GKM V346 RESTORE EXACT V332 CANVAS KEEP AI END */
 
