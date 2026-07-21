@@ -11767,528 +11767,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 })();
 /* GKM V306 RICH DESCRIPTIONS FIX END */
 
-/* GKM V316 REAL AI BRIDGE START */
-(function(){
-  window.GKM_V316_REAL_AI_BRIDGE_VERSION = "v316-real-ai-bridge-local-fast-plus-worker-2026-07-01";
-
-  const LIMIT = 10;
-  const CACHE = new Map();
-  const MEM_KEY = "gkm_v316_ai_memory";
-  const TIME_LIMIT_MS = 240;
-  let lastResults = [];
-  let lastQuery = "";
-  let requestSeq = 0;
-  let warmStarted = false;
-
-  function T(v){ return String(v == null ? "" : v).trim(); }
-  function N(v){
-    return T(v).toLowerCase()
-      .replace(/ё/g,"е")
-      .replace(/[’`]/g,"'")
-      .replace(/&/g," and ")
-      .replace(/[^\p{L}\p{N}]+/gu," ")
-      .replace(/\s+/g," ")
-      .trim();
-  }
-  function W(v){ return N(v).split(" ").filter(Boolean); }
-  function E(v){
-    return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    }[ch]));
-  }
-  function mem(){ try { return JSON.parse(localStorage.getItem(MEM_KEY)||"{}")||{}; } catch { return {}; } }
-  function saveMem(m){ try { localStorage.setItem(MEM_KEY, JSON.stringify(m)); } catch {} }
-  function remember(it){
-    const m = mem();
-    if(it.bucket && it.bucket !== "all") m.bucket = it.bucket;
-    if(it.mood) m.mood = it.mood;
-    m.updatedAt = Date.now();
-    saveMem(m);
-  }
-  function hasAnyWord(q, arr){
-    const set = new Set(W(q));
-    return arr.some(x => set.has(x));
-  }
-
-  function fixLayout(q){
-    const map={q:"й",w:"ц",e:"у",r:"к",t:"е",y:"н",u:"г",i:"ш",o:"щ",p:"з","[":"х","]":"ъ",a:"ф",s:"ы",d:"в",f:"а",g:"п",h:"р",j:"о",k:"л",l:"д",";":"ж","'":"э",z:"я",x:"ч",c:"с",v:"м",b:"и",n:"т",m:"ь",",":"б",".":"ю"};
-    return String(q||"").split("").map(ch=>map[ch.toLowerCase()]||ch).join("");
-  }
-  function variants(q){
-    const f=fixLayout(q);
-    return f!==q ? [q,f] : [q];
-  }
-
-  function title(it){
-    try { if(typeof displayTitle==="function") return T(displayTitle(it)); } catch {}
-    return T(it&&(it.ru||it.title_ru||it.title||it.name||it.en||it.original_title||it.original_name))||"Без названия";
-  }
-  function rawTitle(it){ return T(it&&[it.ru,it.title_ru,it.title,it.name,it.en,it.original_title,it.original_name,it.__manualTopTitle].filter(Boolean).join(" ")); }
-  function type(it){
-    try { if(typeof getType==="function") return T(getType(it)); } catch {}
-    return T(it&&(it.type||it.category||it.kind))||"Каталог";
-  }
-  function year(it){
-    try { if(typeof getYear==="function") return T(getYear(it)); } catch {}
-    const raw=T(it&&(it.year||it.release_date||it.first_air_date));
-    const m=raw.match(/(19\d{2}|20\d{2})/);
-    return m?m[1]:raw;
-  }
-  function rating(it){
-    try { if(typeof getRating==="function") return Number(getRating(it)||0); } catch {}
-    try { if(typeof ratingOf==="function") return Number(ratingOf(it)||0); } catch {}
-    return Number(it&&(it.rating||it.vote_average||it.score)||0);
-  }
-  function votes(it){
-    try { if(typeof getVotes==="function") return Number(getVotes(it)||0); } catch {}
-    try { if(typeof votesOf==="function") return Number(votesOf(it)||0); } catch {}
-    return Number(it&&(it.votes||it.vote_count||it.scored_by||it.members)||0);
-  }
-  function genres(it){
-    try{ if(typeof getGenres==="function"){ const g=getGenres(it); if(Array.isArray(g)) return g.filter(Boolean).map(String); } }catch{}
-    const r=it&&(it.genres||it.genre||it.tags);
-    if(Array.isArray(r)) return r.filter(Boolean).map(String);
-    if(typeof r==="string") return r.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
-    return [];
-  }
-  function itemKey(it){
-    return T(it&&(it.id||it.kinopoiskId||it.tmdbId||it.mal_id||it.slug))||`${N(title(it))}|${year(it)}|${N(type(it))}`;
-  }
-  function hay(it){ return N([title(it),rawTitle(it),type(it),genres(it).join(" "),it&&it.overview,it&&it.description,it&&it.synopsis,it&&it.source].filter(Boolean).join(" ")); }
-
-  function itemBucket(it){
-    const set=new Set(W(type(it)));
-    if(set.has("манга")||set.has("manga")) return "manga";
-    if(set.has("ранобэ")||set.has("ранобе")||set.has("ranobe")||N(type(it)).includes("light novel")) return "ranobe";
-    if(set.has("комикс")||set.has("комиксы")||set.has("comic")||set.has("comics")) return "comics";
-    if(set.has("книга")||set.has("книги")||set.has("book")||set.has("books")) return "books";
-    if(set.has("игра")||set.has("игры")||set.has("game")||set.has("games")) return "games";
-    if(set.has("аниме")||set.has("анимэ")||set.has("anime")) return "anime";
-    if(set.has("сериал")||set.has("сериалы")||set.has("series")||set.has("show")) return "series";
-    if(set.has("мульт")||set.has("мультик")||set.has("мультфильм")||set.has("cartoon")||set.has("cartoons")) return "cartoons";
-    if(set.has("фильм")||set.has("фильмы")||set.has("фильмов")||set.has("кино")||set.has("movie")||set.has("movies")||set.has("film")||set.has("films")) return "movies";
-    return "all";
-  }
-
-  function detectType(q){
-    for(const v of variants(q)){
-      if(hasAnyWord(v,["фильм","фильмы","фильмов","кино","movie","movies","film","films"])) return "movies";
-      if(hasAnyWord(v,["аниме","анимэ","анимз","anime"])) return "anime";
-      if(hasAnyWord(v,["сериал","сериалы","сериалов","series","show"])) return "series";
-      if(hasAnyWord(v,["мульт","мультик","мультфильм","мультфильмы","мультфильмов","cartoon","cartoons"])) return "cartoons";
-      if(hasAnyWord(v,["игра","игры","игр","game","games"])) return "games";
-      if(hasAnyWord(v,["манга","manga"])) return "manga";
-      if(hasAnyWord(v,["комикс","комиксы","комиксов","comic","comics"])) return "comics";
-      if(hasAnyWord(v,["книга","книги","книг","book","books"])) return "books";
-      if(hasAnyWord(v,["ранобэ","ранобе"])||N(v).includes("light novel")) return "ranobe";
-    }
-    return "all";
-  }
-  function detectMood(q){
-    const x=N(variants(q).join(" "));
-    if(x.includes("попадан")||x.includes("исека")||x.includes("isekai")||x.includes("перерожд")||x.includes("реинкарнац")||x.includes("другой мир")) return "isekai";
-    if(x.includes("вечер")||x.includes("вечером")||x.includes("посмотреть")) return "evening";
-    if(x.includes("мрач")||x.includes("темн")||x.includes("жест")||x.includes("тяжел")) return "dark";
-    if(x.includes("ужас")||x.includes("хоррор")||x.includes("страш")) return "horror";
-    if(x.includes("фантаст")||x.includes("космос")||x.includes("sci")||x.includes("киберпанк")) return "sci";
-    if(x.includes("фэнтези")||x.includes("маг")||x.includes("rpg")||x.includes("рпг")) return "fantasy";
-    if(x.includes("комед")||x.includes("смешн")||x.includes("легк")) return "light";
-    if(x.includes("детектив")||x.includes("криминал")||x.includes("расслед")) return "detective";
-    if(x.includes("романт")||x.includes("любов")) return "romance";
-    if(x.includes("спорт")) return "sport";
-    if(x.includes("школ")) return "school";
-    return "";
-  }
-  function detectIntent(q){
-    const all=N(variants(q).join(" "));
-    const m=mem();
-    let bucket=detectType(q);
-    let mood=detectMood(q);
-    if(bucket==="all" && m.bucket && all.length<18) bucket=m.bucket;
-    if(!mood && m.mood && all.length<18) mood=m.mood;
-
-    const out={bucket,mood,sort:"smart",yearMin:0,yearMax:9999,explain:all.includes("почему")||all.includes("объясни"),random:all.includes("рандом")||all.includes("случайн"),count:LIMIT};
-    if(all.includes("90 х")||all.includes("90е")||all.includes("90s")){out.yearMin=1990;out.yearMax=1999;}
-    if(all.includes("2000")){out.yearMin=2000;out.yearMax=2009;}
-    if(all.includes("2010")){out.yearMin=2010;out.yearMax=2019;}
-    if(all.includes("2020")){out.yearMin=2020;out.yearMax=2029;}
-    const y=all.match(/\b(19\d{2}|20\d{2})\b/);
-    if(y){out.yearMin=Number(y[1]);out.yearMax=Number(y[1]);}
-    if(all.includes("топ")||all.includes("лучшие")||all.includes("популяр")) out.sort="top";
-    if(all.includes("нов")||all.includes("свежее")) out.sort="new";
-    if(all.includes("недооцен")) out.sort="hidden";
-    return out;
-  }
-
-  const WEAK=new Set("блять бля сука ебаный ебать нахуй хуйня из что чтобы какой какие мне посоветуй подбери найди покажи дай можно посмотреть вечером вечер типо типа похожее похожие на для про по с и или а в во как".split(" "));
-  const EXPAND={
-    попаданцы:["попаданец","исекай","isekai","перерождение","реинкарнация","другой","мир"],
-    попаданец:["попаданцы","исекай","isekai","перерождение","реинкарнация"],
-    исекай:["isekai","попаданцы","перерождение","другой","мир"],
-    фантастика:["sci","science","space","космос","future"],
-    космос:["space","sci","science","фантастика"],
-    фэнтези:["fantasy","magic","магия","rpg"],
-    магия:["magic","fantasy","фэнтези"],
-    ужасы:["horror","мистика","страшное"],
-    хоррор:["horror","ужасы"],
-    детектив:["crime","mystery","криминал"],
-    вечер:["драма","комедия","приключения","триллер"],
-    вечером:["драма","комедия","приключения","триллер"],
-    попкорн:["комедия","приключения","боевик"],
-    семейное:["family","семейное","приключения"]
-  };
-  function tokens(q){
-    const out=new Set();
-    for(const v of variants(q)){
-      for(const p of W(v)){
-        if(p.length<2||WEAK.has(p)) continue;
-        out.add(p);
-        if(EXPAND[p]) EXPAND[p].forEach(x=>W(x).forEach(y=>out.add(y)));
-      }
-    }
-    return [...out];
-  }
-
-  function parseJson(j){
-    const out=[];
-    if(!j) return out;
-    if(Array.isArray(j)) return j.filter(x=>x&&typeof x==="object");
-    if(Array.isArray(j.items)) out.push(...j.items);
-    if(Array.isArray(j.data)) out.push(...j.data);
-    if(Array.isArray(j.results)) out.push(...j.results);
-    if(j.sections&&typeof j.sections==="object"){
-      for(const v of Object.values(j.sections)){
-        if(Array.isArray(v)) out.push(...v);
-        else if(v&&Array.isArray(v.items)) out.push(...v.items);
-      }
-    }
-    return out.filter(x=>x&&typeof x==="object");
-  }
-  async function fetchJson(url){
-    if(CACHE.has(url)) return CACHE.get(url);
-    try{
-      const res=await fetch(url,{cache:"force-cache"});
-      if(!res.ok){ CACHE.set(url,[]); return []; }
-      const arr=parseJson(await res.json());
-      CACHE.set(url,arr);
-      return arr;
-    }catch{
-      CACHE.set(url,[]);
-      return [];
-    }
-  }
-
-  function urlsForBucket(b){
-    if(b==="movies") return ["data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/movies/page_0002.json?v=316"];
-    if(b==="anime") return ["data/fast/anime_top_manual.json?v=316","data/fast/pages/anime/page_0001.json?v=316","data/fast/pages/anime/page_0002.json?v=316"];
-    if(b==="series") return ["data/fast/pages/series/page_0001.json?v=316","data/fast/pages/series/page_0002.json?v=316"];
-    if(b==="cartoons") return ["data/fast/pages/cartoons/page_0001.json?v=316"];
-    if(b==="games") return ["data/games_catalog.json?v=316","data/games/cult_games.json?v=316","data/games/franchises.json?v=316"];
-    if(b==="books"||b==="manga"||b==="comics"||b==="ranobe") return ["data/books_catalog.json?v=316","data/books/books.json?v=316","data/books/manga.json?v=316","data/books/comics.json?v=316","data/books/ranobe.json?v=316"];
-    return ["data/fast/home.json?v=316","data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/anime/page_0001.json?v=316"];
-  }
-  function warmup(){
-    if(warmStarted) return;
-    warmStarted=true;
-    const urls=["data/fast/pages/movies/page_0001.json?v=316","data/fast/pages/anime/page_0001.json?v=316","data/fast/home.json?v=316"];
-    const run=()=>urls.forEach(u=>fetchJson(u));
-    if("requestIdleCallback" in window) requestIdleCallback(run,{timeout:1500});
-    else setTimeout(run,600);
-  }
-
-  async function getPool(q){
-    const it=detectIntent(q);
-    const list=[],seen=new Set();
-    function add(item){
-      if(!item||typeof item!=="object") return;
-      const k=itemKey(item);
-      if(seen.has(k)) return;
-      seen.add(k);
-      list.push(item);
-    }
-
-    if(it.bucket==="all"){
-      try{(currentItems||[]).forEach(add);}catch{}
-      try{
-        const sections=homeData&&homeData.sections?homeData.sections:{};
-        Object.values(sections).forEach(v=>{
-          if(Array.isArray(v)) v.forEach(add);
-          else if(v&&Array.isArray(v.items)) v.items.forEach(add);
-        });
-      }catch{}
-    }
-
-    const urls = urlsForBucket(it.bucket);
-    const timeout = new Promise(resolve => setTimeout(() => resolve("__timeout__"), TIME_LIMIT_MS));
-    const load = Promise.all(urls.map(u => fetchJson(u)));
-    const result = await Promise.race([load, timeout]);
-
-    if(result === "__timeout__"){
-      // Если сеть тормозит, отдаём то, что уже есть, не подвешиваем окно.
-      for(const u of urls){
-        if(CACHE.has(u)) CACHE.get(u).forEach(add);
-      }
-      return list;
-    }
-
-    result.forEach(arr => arr.forEach(add));
-    return list;
-  }
-
-  function clean(item){
-    if(!item) return false;
-    const ttl=N(title(item));
-    if(!ttl||ttl==="без названия") return false;
-    const y=Number(year(item)||0);
-    if(y&&y>new Date().getFullYear()+3) return false;
-    const h=hay(item);
-    return !["trailer","teaser","preview","recap","summary","soundtrack","трейлер","тизер","превью","рекап"].some(x=>h.includes(x));
-  }
-  function passType(item,b){
-    if(!b||b==="all") return true;
-    const ib=itemBucket(item);
-    if(b==="books") return ib==="books"||ib==="ranobe";
-    return ib===b;
-  }
-  function moodWords(m){
-    if(m==="isekai") return ["исекай","isekai","попадан","перерождение","реинкарнация","другой мир","ином мире","призван","summoned","reincarnation","another world"];
-    if(m==="evening") return ["драма","комедия","приключения","триллер","adventure","drama","comedy","thriller"];
-    if(m==="sci") return ["фантастика","космос","space","sci","science","future"];
-    if(m==="fantasy") return ["фэнтези","магия","magic","fantasy","dragon","rpg"];
-    if(m==="dark") return ["мрач","dark","grim","thriller","psychological","драма","триллер"];
-    if(m==="horror") return ["ужасы","horror","мистика","supernatural","thriller"];
-    if(m==="detective") return ["детектив","криминал","crime","mystery","detective"];
-    if(m==="romance") return ["романтика","любовь","romance","love"];
-    if(m==="light") return ["комедия","семейное","comedy","family","adventure"];
-    if(m==="sport") return ["спорт","sport"];
-    if(m==="school") return ["школа","school","slice"];
-    return [];
-  }
-  function score(item,it,tk){
-    if(!clean(item)||!passType(item,it.bucket)) return 0;
-    const y=Number(year(item)||0);
-    if(y&&(y<it.yearMin||y>it.yearMax)) return 0;
-    const ttl=N(title(item)),raw=N(rawTitle(item)),h=hay(item),gen=N(genres(item).join(" ")),typ=N(type(item));
-    let s=0;
-    for(const token of tk){
-      if(ttl===token||raw===token) s+=200;
-      else if(ttl.includes(token)) s+=90;
-      else if(raw.includes(token)) s+=70;
-      else if(gen.includes(token)) s+=65;
-      else if(h.includes(token)) s+=25;
-      else if(typ.includes(token)) s+=20;
-    }
-    for(const mw of moodWords(it.mood)){
-      const m=N(mw);
-      if(!m) continue;
-      if(gen.includes(m)) s+=85;
-      else if(h.includes(m)) s+=45;
-      else if(ttl.includes(m)||raw.includes(m)) s+=45;
-    }
-    if(it.bucket!=="all") s+=50;
-    if(it.mood==="evening") s+=15;
-    const r=rating(item),v=votes(item);
-    if(it.sort==="top") s+=Math.min(120,Math.log10(v+1)*18)+r*12;
-    else if(it.sort==="new") s+=y>=2020?(y-2019)*14:0;
-    else if(it.sort==="hidden") s+=r*12-Math.min(50,Math.log10(v+1)*8);
-    else s+=Math.min(70,Math.log10(v+1)*10)+r*7;
-    return s;
-  }
-  function dedupe(items){
-    const map=new Map();
-    for(const item of items){
-      const k=`${itemBucket(item)}|${N(title(item))}|${year(item)}`;
-      const old=map.get(k);
-      if(!old||rating(item)*100000+votes(item)>rating(old)*100000+votes(old)) map.set(k,item);
-    }
-    return [...map.values()];
-  }
-  async function search(q){
-    const it=detectIntent(q),tk=tokens(q),data=await getPool(q);
-    let arr=data.map(item=>({item,score:score(item,it,tk)}))
-      .filter(x=>x.score>0)
-      .sort((a,b)=>b.score-a.score)
-      .map(x=>x.item);
-
-    if(!arr.length&&it.bucket!=="all"){
-      arr=data.filter(item=>clean(item)&&passType(item,it.bucket))
-        .sort((a,b)=>(rating(b)*100000+votes(b))-(rating(a)*100000+votes(a)));
-    }
-    if(it.random) arr=arr.sort(()=>Math.random()-0.5);
-    const res=dedupe(arr).slice(0,it.count);
-    lastResults=res;lastQuery=q;remember(it);
-    return {items:res,intent:it,tokens:tk};
-  }
-
-  function fmtVotes(v){
-    v=Number(v||0);
-    if(!v)return"";
-    if(v>=1000000)return(v/1000000).toFixed(1).replace(".0","")+" млн";
-    if(v>=1000)return Math.round(v/1000)+" тыс";
-    return String(v);
-  }
-  function why(item,it){
-    const out=[],g=genres(item).slice(0,3).join(", ");
-    if(g)out.push("жанры: "+g);
-    if(rating(item))out.push("рейтинг "+rating(item).toFixed(1));
-    if(votes(item))out.push(fmtVotes(votes(item))+" голосов");
-    if(it.mood)out.push("под запрос: "+it.mood);
-    return out.slice(0,3).join("; ");
-  }
-  function intro(it){
-    if(it.bucket==="movies"&&it.mood==="evening") return "На вечер из фильмов я бы начал с этого:";
-    if(it.bucket==="anime"&&it.mood==="isekai") return "По анимэ-попаданцам/исекаю вот нормальные варианты:";
-    const map={movies:"Нашёл фильмы:",anime:"Нашёл аниме:",series:"Нашёл сериалы:",cartoons:"Нашёл мультфильмы:",games:"Нашёл игры:",books:"Нашёл книги:",manga:"Нашёл мангу:",comics:"Нашёл комиксы:",ranobe:"Нашёл ранобэ:"};
-    return map[it.bucket]||"Нашёл варианты:";
-  }
-  function fmt(items,it){
-    return items.map((item,i)=>{
-      const g=genres(item).slice(0,2).join(", ");
-      return `${i+1}. ${title(item)} (${year(item)||"—"}) — ${type(item)} · ${rating(item)?"★ "+rating(item).toFixed(1):"★ —"}${votes(item)?" · "+fmtVotes(votes(item)):""}${g?" · "+g:""}${it.explain?"\n   почему: "+why(item,it):""}`;
-    }).join("\n");
-  }
-
-  function openResult(n){
-    const item=lastResults[Number(n)-1];
-    if(!item)return`Нет результата под номером ${n}. Сначала сделай поиск.`;
-    try{if(typeof openDetails==="function"){openDetails(item);return"Открыл: "+title(item);}}catch{}
-    return"Нашёл: "+title(item)+", но открыть не получилось.";
-  }
-  function compare(a,b){
-    const A=lastResults[Number(a)-1],B=lastResults[Number(b)-1];
-    if(!A||!B)return"Сначала сделай поиск, потом напиши: сравни 1 и 2.";
-    const pick=rating(A)!==rating(B)?(rating(A)>rating(B)?A:B):(votes(A)>votes(B)?A:B);
-    return`${title(A)}: ★ ${rating(A)||"—"} · ${fmtVotes(votes(A))||"0"} голосов\n${title(B)}: ★ ${rating(B)||"—"} · ${fmtVotes(votes(B))||"0"} голосов\nЯ бы выбрал: ${title(pick)}.`;
-  }
-  function plan(){
-    if(!lastResults.length)return"Сначала попроси подборку, потом напиши: сделай план.";
-    const p=lastResults.slice(0,3);
-    return["План:",`1. Начать с: ${title(p[0])}`,p[1]?`2. Потом: ${title(p[1])}`:"",p[2]?`3. На финал: ${title(p[2])}`:""].filter(Boolean).join("\n");
-  }
-  function help(){
-    return["V316 REAL AI: максимально быстрый и строгий помощник.","Что просишь — то и ищу.","Понимаю кривую раскладку, настроение, уточнения и команды.","Команды: открой 1, похожее на 1, другое, сравни 1 и 2, сделай план, почему, ещё."].join("\n");
-  }
-
-  async function similarTo(n){
-    const base = lastResults[Number(n)-1];
-    if(!base) return "Сначала сделай подборку, потом напиши: похожее на 1.";
-    const q = `${type(base)} ${genres(base).slice(0,3).join(" ")} похожее на ${title(base)}`;
-    const res = await search(q);
-    const items = res.items.filter(x => itemKey(x) !== itemKey(base)).slice(0, LIMIT);
-    if(!items.length) return "Похожее быстро не нашёл. Попробуй обычным запросом.";
-    lastResults = items;
-    return `Похожее на ${title(base)}:\n${fmt(items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
-  }
-
-  async function different(){
-    if(!lastQuery) return "Сначала сделай подборку.";
-    const q = lastQuery + " рандом другое";
-    const res = await search(q);
-    if(!res.items.length) return "Других вариантов быстро не нашёл.";
-    return `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
-  }
-
-
-  async function tryRemoteAI(q, localText){
-    const endpoint = window.GKM_AI_ENDPOINT || localStorage.getItem("GKM_AI_ENDPOINT") || "";
-    if(!endpoint) return "";
-    try{
-      const controller = new AbortController();
-      const timer = setTimeout(()=>controller.abort(), 2200);
-      const payload = {
-        query: q,
-        local_answer: localText,
-        site_version: "V316",
-        instruction: "Ответь по-русски, коротко, как умный помощник каталога. Не смешивай разделы. Объясни выбор простыми словами.",
-        last_results: lastResults.slice(0, 10).map((x,i)=>({
-          n:i+1,
-          title:title(x),
-          type:type(x),
-          year:year(x),
-          rating:rating(x),
-          votes:votes(x),
-          genres:genres(x)
-        }))
-      };
-      const res = await fetch(endpoint, {
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify(payload),
-        signal:controller.signal
-      });
-      clearTimeout(timer);
-      if(!res.ok) return "";
-      const data = await res.json();
-      return T(data && (data.answer || data.text || data.message));
-    }catch{
-      return "";
-    }
-  }
-
-  async function answer(q){
-    const x=N(q);
-    if(!x)return"Напиши что ищем.";
-    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)$/i.test(x))return"Привет. Я V316 REAL AI: быстрый ИИ-помощник. Что просишь — то и ищу.";
-    if(x.includes("помощ")||x.includes("что умеешь")||x.includes("как искать"))return help();
-    const op=x.match(/(?:открой|открыть|покажи)\s+(\d{1,2})/);if(op)return openResult(op[1]);
-    const cmp=x.match(/сравни\s+(\d{1,2})\s+(?:и|с)\s+(\d{1,2})/);if(cmp)return compare(cmp[1],cmp[2]);
-    const sim=x.match(/(?:похожее|похожие|типа|как)\s+(?:на\s+)?(\d{1,2})/);
-    if(sim)return await similarTo(sim[1]);
-    if(x.includes("другое")||x.includes("не это")||x.includes("еще варианты")||x.includes("ещё варианты"))return await different();
-    if(x.includes("план")||x.includes("марафон"))return plan();
-    if(x.includes("еще")||x.includes("ещё"))return lastQuery?(await answer(lastQuery)):"Сначала сделай поиск.";
-    const res=await search(q);
-    if(!res.items.length)return"Не нашёл быстро в нужном разделе. Попробуй проще: «фильмы вечер», «анимэ попаданцы», «игры rpg», «манга ужасы».";
-    const localText = `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «похожее на 1», «другое», «сравни 1 и 2», «сделай план», «почему».`;
-    const aiText = await tryRemoteAI(q, localText);
-    return aiText || localText;
-  }
-
-  function addMsg(role,text){
-    if(typeof gkmHelperAddMessage==="function"){gkmHelperAddMessage(role,text);return;}
-    const box=document.getElementById("gkmAiMessages");if(!box)return;
-    const div=document.createElement("div");div.className=role==="user"?"ai-user":"ai-bot";div.innerHTML=E(text).replace(/\n/g,"<br>");box.appendChild(div);box.scrollTop=box.scrollHeight;
-  }
-  function replaceLastBot(text){
-    const box=document.getElementById("gkmAiMessages");
-    if(box){
-      const last=box.lastElementChild;
-      if(last&&last.classList.contains("ai-bot")&&last.textContent.includes("V316")){
-        last.innerHTML=E(text).replace(/\n/g,"<br>");box.scrollTop=box.scrollHeight;return true;
-      }
-    }
-    return false;
-  }
-  function install(){
-    const form=document.getElementById("gkmAiForm"),input=document.getElementById("gkmAiInput"),dialog=document.getElementById("gkmAiDialog"),floatBtn=document.getElementById("gkmAiFloatBtn"),closeBtn=document.getElementById("gkmAiCloseBtn");
-    if(floatBtn&&dialog&&input){
-      floatBtn.onclick=()=>{if(typeof dialog.showModal==="function")dialog.showModal();else dialog.setAttribute("open","");setTimeout(()=>input.focus(),50);warmup();};
-    }
-    if(closeBtn&&dialog)closeBtn.onclick=()=>dialog.close?dialog.close():dialog.removeAttribute("open");
-    if(!form||!input)return;
-    form.dataset.v260Installed="0";form.dataset.v300Installed="0";form.dataset.v301Installed="0";form.dataset.v302Installed="0";form.dataset.v303Installed="0";form.dataset.v304Installed="0";form.dataset.v305Installed="0";form.dataset.v307IsekaiInstalled="0";form.dataset.v308Installed="0";form.dataset.v309Installed="0";form.dataset.v310Installed="0";form.dataset.v311Installed="0";form.dataset.v312Installed="0";form.dataset.v316Installed="1";
-    form.onsubmit=async e=>{
-      e.preventDefault();if(e.stopPropagation)e.stopPropagation();
-      const q=input.value.trim();if(!q)return;input.value="";
-      const seq=++requestSeq;
-      addMsg("user",q);addMsg("bot","V316 REAL AI думаю быстро...");
-      try{
-        const out=await answer(q);
-        if(seq!==requestSeq)return;
-        if(!replaceLastBot(out))addMsg("bot",out);
-      }catch(err){
-        console.warn("GKM V316 helper error",err);
-        const msg="Помощник словил ошибку. Напиши проще: «фильмы вечер» или «анимэ попаданцы».";
-        if(!replaceLastBot(msg))addMsg("bot",msg);
-      }
-    };
-    warmup();
-  }
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
-  setTimeout(install,100);setTimeout(install,450);setTimeout(install,900);
-  console.log("GKM V316: REAL AI bridge installed");
-})();
-/* GKM V316 REAL AI BRIDGE END */
 
 
 
@@ -14887,9 +14365,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V337 HONEST COLLECTIONS FIX END */
 
 
-/* GKM V3432 FULLSCREEN FAST WALL START */
+/* GKM V343 SOFT FISHEYE VIDEO WALL START */
 (function(){
-  window.GKM_V3432_FULLSCREEN_FAST_WALL_VERSION = "v3432-fullscreen-fast-wall-2026-07-21";
+  window.GKM_V343_SOFT_FISHEYE_VIDEO_WALL_VERSION = "v343-soft-fisheye-video-wall-2026-07-21";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
@@ -14901,41 +14379,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     cartoons: 2600,
     all: 9000
   };
-
-  function targetWallCount(kind){
-    const w=window.innerWidth;
-
-    // Не грузим 9 000 изображений одновременно.
-    // Один плотный экранный набор выглядит так же, но открывается заметно быстрее.
-    if(w<700) return 1200;
-    if(w<=1366) return kind==="all"?2600:2400;
-    if(w<=1700) return kind==="all"?3400:3200;
-    return kind==="all"?4400:4000;
-  }
-
-  function selectWallSubset(items,kind){
-    const list=Array.isArray(items)?items:[];
-    const target=Math.min(list.length,targetWallCount(kind));
-    if(list.length<=target){
-      const all=list.slice();
-      if(shuffleSeed) shuffle(all);
-      return all;
-    }
-
-    const selected=new Array(target);
-    const offset=(shuffleSeed*9973)%list.length;
-    let step=Math.max(3,Math.floor(list.length/target*997)+1);
-
-    while(gcd(step,list.length)!==1) step+=1;
-
-    let index=offset;
-    for(let i=0;i<target;i++){
-      selected[i]=list[index];
-      index=(index+step)%list.length;
-    }
-
-    return selected;
-  }
 
   let canvas = null;
   let ctx = null;
@@ -14964,7 +14407,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   let loadToken = 0;
   let loadCursor = 0;
-  let loadOrder=[];
   let activeLoads = 0;
   let loadedCount = 0;
   let itemLoaded = [];
@@ -14982,8 +14424,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let motionFrame = 0;
   let lensDirty = false;
 
-  const FIRST_CONCURRENCY = 96;
-  const REST_CONCURRENCY = 48;
+  const FIRST_CONCURRENCY = 44;
+  const REST_CONCURRENCY = 24;
   const LENS_SIZE = 330;
   const LENS_RADIUS = LENS_SIZE / 2;
 
@@ -15121,7 +14563,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
   }
   function urlsFor(kind){
-    const urls=["data/fast/home.json?v=3432"];
+    const urls=["data/fast/home.json?v=343"];
     const map={
       anime:["anime"],
       movies:["movies"],
@@ -15133,7 +14575,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const maxPages=kind==="all"?24:(kind==="anime"?72:40);
     cats.forEach(cat=>{
       for(let i=1;i<=maxPages;i++){
-        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=3432`);
+        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=343`);
       }
     });
     return urls;
@@ -15142,60 +14584,23 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function smallPosterUrl(item){
     const raw=originalPosterOf(item)||posterOf(item);
     if(!raw) return "";
-
     try{
       const url=new URL(raw,location.href);
-      const host=url.hostname.toLowerCase();
-
-      // TMDB: берём маленькую картинку напрямую, без дополнительного прокси.
-      if(host==="image.tmdb.org"){
-        url.pathname=url.pathname.replace(/\/t\/p\/(?:original|w\d+)\//,"/t/p/w92/");
-        return url.href;
-      }
-
-      // У этих CDN уже оптимизированная выдача и прямой URL быстрее weserv.
-      if(
-        host.includes("myanimelist.net")||
-        host.includes("shikimori")||
-        host.includes("anilibria")||
-        host.includes("kinopoisk")||
-        host.includes("yandex.net")||
-        host===location.hostname
-      ){
-        return url.href;
-      }
-
-      // Если ссылка уже через weserv — уменьшаем параметры.
-      if(host.includes("images.weserv.nl")){
+      if(url.hostname.toLowerCase().includes("images.weserv.nl")){
         url.searchParams.set("w","48");
         url.searchParams.set("h","72");
         url.searchParams.set("fit","cover");
         url.searchParams.set("output","webp");
-        url.searchParams.set("q","54");
+        url.searchParams.set("q","58");
         return url.href;
       }
-
-      // Остальные источники сначала пробуем напрямую.
-      return url.href;
-    }catch(e){
-      return raw;
-    }
-  }
-
-  function proxySmallPosterUrl(item){
-    const raw=originalPosterOf(item)||posterOf(item);
-    if(!raw) return "";
-
-    try{
-      const url=new URL(raw,location.href);
       if(url.hostname===location.hostname) return url.href;
       const clean=url.href.replace(/^https?:\/\//i,"");
-      return "https://images.weserv.nl/?url="+encodeURIComponent(clean)+"&w=48&h=72&fit=cover&output=webp&q=54";
+      return "https://images.weserv.nl/?url="+encodeURIComponent(clean)+"&w=48&h=72&fit=cover&output=webp&q=58";
     }catch(e){
       return raw;
     }
   }
-
   function fullPosterUrl(item){ return originalPosterOf(item)||posterOf(item); }
 
   function computeGrid(){
@@ -15203,55 +14608,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const h=window.innerHeight;
     const count=Math.max(layoutCount,wallItems.length,1);
     const topPad=42;
-    const bottomPad=0;
+    const bottomPad=72;
     const availableH=Math.max(220,h-topPad-bottomPad);
 
     let best=null;
-
-    // Подбираем количество колонок, затем точно растягиваем сетку
-    // по ширине и высоте экрана. Нижней пустой полосы больше нет.
-    for(let candidateCols=80;candidateCols<=300;candidateCols++){
-      const candidateRows=Math.ceil(count/candidateCols);
-      const cw=w/candidateCols;
-      const ch=availableH/candidateRows;
-
-      if(cw<5||cw>20||ch<8||ch>30) continue;
-
-      const ratio=cw/ch;
-      const emptyCells=candidateRows*candidateCols-count;
-      const ratioPenalty=Math.abs(ratio-0.6667)*1200;
-      const emptyPenalty=emptyCells*0.32;
-      const sizePenalty=Math.abs(cw-10.5)*1.8;
-      const score=ratioPenalty+emptyPenalty+sizePenalty;
-
-      if(!best||score<best.score){
-        best={
-          score,
-          cols:candidateCols,
-          rows:candidateRows,
-          cw,
-          ch
-        };
-      }
-    }
-
-    if(!best){
-      best={
-        cols:Math.max(1,Math.ceil(Math.sqrt(count*window.innerWidth/availableH))),
-        rows:1,
-        cw:10,
-        ch:15
-      };
-      best.rows=Math.ceil(count/best.cols);
-      best.cw=w/best.cols;
-      best.ch=availableH/best.rows;
+    for(let cw=7;cw<=16;cw++){
+      const ch=Math.max(10,Math.round(cw*1.52));
+      const c=Math.max(30,Math.floor(w/cw));
+      const r=Math.ceil(count/c);
+      const gh=r*ch;
+      const gw=c*cw;
+      const score=Math.abs(availableH-gh)*5+Math.abs(w-gw);
+      if(!best||score<best.score) best={cw,ch,c,r,score};
     }
 
     cellW=best.cw;
     cellH=best.ch;
-    cols=best.cols;
-    rows=best.rows;
-    ox=0;
+    cols=best.c;
+    rows=best.r;
+    ox=Math.floor((w-cols*cellW)/2);
     oy=topPad;
   }
 
@@ -15276,7 +14651,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function placeholderColor(index){
-    return index % 2 ? "#081225" : "#0a162c";
+    const hue=(index*37)%190+175;
+    return `hsl(${hue} 28% ${10+(index%4)}%)`;
   }
 
   function paintSkeleton(){
@@ -15366,12 +14742,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const img=new Image();
       img.decoding="async";
       img.referrerPolicy="no-referrer";
-      img.fetchPriority=index<700?"high":"low";
-
-      let fallbackStage=0;
-      const direct=rec.url;
-      const proxy=proxySmallPosterUrl(item);
-      const full=fullPosterUrl(item);
 
       const complete=success=>{
         if(success){
@@ -15387,48 +14757,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
       img.onload=()=>complete(true);
       img.onerror=()=>{
-        fallbackStage++;
-
-        if(fallbackStage===1&&proxy&&proxy!==img.src){
-          img.src=proxy;
-          return;
-        }
-
-        if(fallbackStage===2&&full&&full!==img.src){
-          img.src=full;
-          return;
-        }
-
-        complete(false);
+        const raw=fullPosterUrl(item);
+        if(raw&&img.src!==raw){
+          img.onerror=()=>complete(false);
+          img.src=raw;
+        }else complete(false);
       };
-
-      img.src=direct;
+      img.src=rec.url;
     });
-  }
-
-  function gcd(a,b){
-    while(b){
-      const next=a%b;
-      a=b;
-      b=next;
-    }
-    return Math.abs(a);
-  }
-
-  function buildDistributedLoadOrder(count){
-    if(count<=1) return count===1?[0]:[];
-
-    let step=Math.max(3,Math.floor(count*0.61803398875));
-    if(step%2===0) step+=1;
-    while(gcd(step,count)!==1) step+=2;
-
-    const order=new Array(count);
-    let index=0;
-    for(let i=0;i<count;i++){
-      order[i]=index;
-      index=(index+step)%count;
-    }
-    return order;
   }
 
   function pumpQueue(token){
@@ -15436,8 +14772,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const limit=loadCursor<900?FIRST_CONCURRENCY:REST_CONCURRENCY;
 
     while(activeLoads<limit&&loadCursor<wallItems.length){
-      const orderPosition=loadCursor++;
-      const index=loadOrder[orderPosition];
+      const index=loadCursor++;
       activeLoads++;
       loadThumb(index,token).finally(()=>{
         activeLoads--;
@@ -15446,7 +14781,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         if(loadedCount%120===0||loadCursor===wallItems.length){
           setStatus(
             `${labelKind(currentKind)} — ${wallItems.length} постеров`,
-            `Загружено ${Math.min(loadedCount,wallItems.length)}/${wallItems.length}. Экран заполняется до самого низа; загружается только быстрый экранный набор.`
+            `Загружено ${Math.min(loadedCount,wallItems.length)}/${wallItems.length}. Без повторов; линза и карточка работают отдельно от сетки.`
           );
         }
         pumpQueue(token);
@@ -15458,7 +14793,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     loadToken++;
     const token=loadToken;
     loadCursor=0;
-    loadOrder=buildDistributedLoadOrder(wallItems.length);
     activeLoads=0;
     loadedCount=0;
     itemLoaded=new Array(wallItems.length).fill(false);
@@ -15731,13 +15065,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       );
     }
 
-    const uniqueItems=uniqueList(allItems);
-    wallItems=selectWallSubset(uniqueItems,kind);
+    wallItems=uniqueList(allItems);
+    if(shuffleSeed) shuffle(wallItems);
     layoutCount=wallItems.length;
 
     setStatus(
-      `${labelKind(kind)} — набор ${wallItems.length} из ${uniqueItems.length}`,
-      "Загружаю только один плотный экранный набор. Кнопка «Другой набор» покажет остальные постеры."
+      `${labelKind(kind)} — ${wallItems.length} постеров`,
+      "Каталог собран. Постеры загружаются в свои ячейки без повторов."
     );
     startImageQueue();
   }
@@ -15817,7 +15151,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       .gkmV343Desc{font-size:12px;line-height:1.45;color:rgba(255,255,255,.84);max-height:88px;overflow:hidden}
       .gkmV343OpenHint{margin-top:10px;font-size:12px;color:#28d7ff;font-weight:900}
       #gkmV343Status{
-        position:absolute;left:14px;bottom:8px;z-index:8;width:min(470px,calc(100vw - 28px));
+        position:absolute;left:14px;bottom:14px;z-index:8;width:min(470px,calc(100vw - 28px));
         border:1px solid rgba(0,220,255,.28);background:rgba(6,13,30,.82);border-radius:18px;padding:12px 14px;
         box-shadow:0 0 24px rgba(0,180,255,.14);backdrop-filter:blur(8px)
       }
@@ -15859,8 +15193,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div class="gkmV343Shade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V343.2</div>
-          <div class="gkmV343Sub">Полный экран без нижней пустоты. Быстрый набор постеров и мягкий «рыбий глаз».</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V343</div>
+          <div class="gkmV343Sub">Мягкий «рыбий глаз» без видимого круга. Карточка плавно следует за мышью.</div>
         </div>
         <div class="gkmV343Actions">
           <button data-kind="all">Все</button>
@@ -15892,15 +15226,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     document.getElementById("gkmV343Close").onclick=closeWall;
     document.getElementById("gkmV343Shuffle").onclick=()=>{
       shuffleSeed++;
-      const uniqueItems=uniqueList(allItems);
-      wallItems=selectWallSubset(uniqueItems,currentKind);
-      layoutCount=wallItems.length;
+      shuffle(wallItems);
       hoverIndex=-1;
       hidePreview();
-      setStatus(
-        `${labelKind(currentKind)} — новый набор ${wallItems.length} из ${uniqueItems.length}`,
-        "Показываю другой набор без загрузки всех постеров одновременно."
-      );
       startImageQueue();
     };
 
@@ -15980,7 +15308,731 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V343.2: fullscreen fast wall installed");
+  console.log("GKM V343: soft fisheye video wall installed");
 })();
-/* GKM V3432 FULLSCREEN FAST WALL END */
+/* GKM V343 SOFT FISHEYE VIDEO WALL END */
+
+/* GKM V343 HUMAN AI WEATHER CLICKABLE CARDS FULL CATALOG START */
+(function(){
+  window.GKM_V343_HUMAN_AI_WEATHER_CLICKABLE_CARDS_FULL_CATALOG_VERSION = "v343-human-ai-weather-clickable-cards-full-catalog-2026-07-12";
+  window.GKM_V343_HUMAN_HYBRID_AI_WEATHER_FULL_CATALOG_VERSION = window.GKM_V343_HUMAN_AI_WEATHER_CLICKABLE_CARDS_FULL_CATALOG_VERSION;
+  window.GKM_V343_AI_MODEL_DEFAULT = "openai/gpt-oss-120b";
+
+  const LIMIT = 12;
+  const MEM_KEY = "gkm_v342_ai_memory";
+  const HISTORY_KEY = "gkm_v342_ai_history";
+  const WALL_BASE = "data/fast/poster_wall_v333";
+  const SEARCH_WORKER_URL = "ai_search_worker_v343.js?v=344";
+  const FALLBACK_CACHE = new Map();
+  let lastResults = [];
+  let lastQuery = "";
+  let pendingCards = [];
+  let requestSeq = 0;
+  let warmStarted = false;
+  let searchWorker = null;
+  let workerInitPromise = null;
+  let workerState = null;
+  let workerMessageSeq = 0;
+  const workerPending = new Map();
+  let chatHistory = loadHistory();
+
+  function T(v){ return String(v == null ? "" : v).trim(); }
+  function N(v){
+    return T(v).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[’`]/g,"'")
+      .replace(/&/g," and ")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function W(v){ return N(v).split(" ").filter(Boolean); }
+  function E(v){
+    return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[ch]));
+  }
+  function mem(){ try { return JSON.parse(localStorage.getItem(MEM_KEY)||"{}")||{}; } catch { return {}; } }
+  function saveMem(m){ try { localStorage.setItem(MEM_KEY, JSON.stringify(m)); } catch {} }
+  function loadHistory(){ try { const x=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]"); return Array.isArray(x)?x.slice(-12):[]; } catch { return []; } }
+  function saveHistory(){ try { localStorage.setItem(HISTORY_KEY,JSON.stringify(chatHistory.slice(-12))); } catch {} }
+  function pushHistory(role,text){ chatHistory.push({role,text:T(text).slice(0,1800),at:Date.now()}); chatHistory=chatHistory.slice(-12); saveHistory(); }
+  function remember(it){
+    const m = mem();
+    if(it.bucket && it.bucket !== "all") m.bucket = it.bucket;
+    if(it.mood) m.mood = it.mood;
+    m.updatedAt = Date.now();
+    saveMem(m);
+  }
+  function hasAnyWord(q, arr){
+    const set = new Set(W(q));
+    return arr.some(x => set.has(x));
+  }
+
+  function fixLayout(q){
+    const map={q:"й",w:"ц",e:"у",r:"к",t:"е",y:"н",u:"г",i:"ш",o:"щ",p:"з","[":"х","]":"ъ",a:"ф",s:"ы",d:"в",f:"а",g:"п",h:"р",j:"о",k:"л",l:"д",";":"ж","'":"э",z:"я",x:"ч",c:"с",v:"м",b:"и",n:"т",m:"ь",",":"б",".":"ю"};
+    return String(q||"").split("").map(ch=>map[ch.toLowerCase()]||ch).join("");
+  }
+  function variants(q){
+    const f=fixLayout(q);
+    return f!==q ? [q,f] : [q];
+  }
+
+  function title(it){
+    try { if(typeof displayTitle==="function") return T(displayTitle(it)); } catch {}
+    return T(it&&(it.ru||it.title_ru||it.title||it.name||it.en||it.original_title||it.original_name))||"Без названия";
+  }
+  function rawTitle(it){ return T(it&&[it.ru,it.title_ru,it.title,it.name,it.en,it.original_title,it.original_name,it.__manualTopTitle].filter(Boolean).join(" ")); }
+  function type(it){
+    try { if(typeof getType==="function") return T(getType(it)); } catch {}
+    return T(it&&(it.type||it.category||it.kind))||"Каталог";
+  }
+  function year(it){
+    try { if(typeof getYear==="function") return T(getYear(it)); } catch {}
+    const raw=T(it&&(it.year||it.release_date||it.first_air_date));
+    const m=raw.match(/(19\d{2}|20\d{2})/);
+    return m?m[1]:raw;
+  }
+  function rating(it){
+    try { if(typeof getRating==="function") return Number(getRating(it)||0); } catch {}
+    try { if(typeof ratingOf==="function") return Number(ratingOf(it)||0); } catch {}
+    return Number(it&&(it.rating||it.vote_average||it.score)||0);
+  }
+  function votes(it){
+    try { if(typeof getVotes==="function") return Number(getVotes(it)||0); } catch {}
+    try { if(typeof votesOf==="function") return Number(votesOf(it)||0); } catch {}
+    return Number(it&&(it.votes||it.vote_count||it.scored_by||it.members)||0);
+  }
+  function genres(it){
+    try{ if(typeof getGenres==="function"){ const g=getGenres(it); if(Array.isArray(g)) return g.filter(Boolean).map(String); } }catch{}
+    const r=it&&(it.genres||it.genre||it.tags);
+    if(Array.isArray(r)) return r.filter(Boolean).map(String);
+    if(typeof r==="string") return r.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
+    return [];
+  }
+  function itemKey(it){
+    return T(it&&(it.id||it.kinopoiskId||it.tmdbId||it.mal_id||it.slug))||`${N(title(it))}|${year(it)}|${N(type(it))}`;
+  }
+  function hay(it){ return N([title(it),rawTitle(it),type(it),genres(it).join(" "),it&&it.overview,it&&it.description,it&&it.synopsis,it&&it.source].filter(Boolean).join(" ")); }
+
+  function itemBucket(it){
+    const set=new Set(W(type(it)));
+    if(set.has("манга")||set.has("manga")) return "manga";
+    if(set.has("ранобэ")||set.has("ранобе")||set.has("ranobe")||N(type(it)).includes("light novel")) return "ranobe";
+    if(set.has("комикс")||set.has("комиксы")||set.has("comic")||set.has("comics")) return "comics";
+    if(set.has("книга")||set.has("книги")||set.has("book")||set.has("books")) return "books";
+    if(set.has("игра")||set.has("игры")||set.has("game")||set.has("games")) return "games";
+    if(set.has("аниме")||set.has("анимэ")||set.has("anime")) return "anime";
+    if(set.has("сериал")||set.has("сериалы")||set.has("series")||set.has("show")) return "series";
+    if(set.has("мульт")||set.has("мультик")||set.has("мультфильм")||set.has("cartoon")||set.has("cartoons")) return "cartoons";
+    if(set.has("фильм")||set.has("фильмы")||set.has("фильмов")||set.has("кино")||set.has("movie")||set.has("movies")||set.has("film")||set.has("films")) return "movies";
+    return "all";
+  }
+
+  function detectType(q){
+    for(const v of variants(q)){
+      if(hasAnyWord(v,["фильм","фильмы","фильмов","кино","movie","movies","film","films"])) return "movies";
+      if(hasAnyWord(v,["аниме","анимэ","анимз","anime"])) return "anime";
+      if(hasAnyWord(v,["сериал","сериалы","сериалов","series","show"])) return "series";
+      if(hasAnyWord(v,["мульт","мультик","мультфильм","мультфильмы","мультфильмов","cartoon","cartoons"])) return "cartoons";
+      if(hasAnyWord(v,["игра","игры","игр","game","games"])) return "games";
+      if(hasAnyWord(v,["манга","manga"])) return "manga";
+      if(hasAnyWord(v,["комикс","комиксы","комиксов","comic","comics"])) return "comics";
+      if(hasAnyWord(v,["книга","книги","книг","book","books"])) return "books";
+      if(hasAnyWord(v,["ранобэ","ранобе"])||N(v).includes("light novel")) return "ranobe";
+    }
+    return "all";
+  }
+  function detectMood(q){
+    const x=N(variants(q).join(" "));
+    if(x.includes("попадан")||x.includes("исека")||x.includes("isekai")||x.includes("перерожд")||x.includes("реинкарнац")||x.includes("другой мир")) return "isekai";
+    if(x.includes("вечер")||x.includes("вечером")||x.includes("посмотреть")) return "evening";
+    if(x.includes("мрач")||x.includes("темн")||x.includes("жест")||x.includes("тяжел")) return "dark";
+    if(x.includes("ужас")||x.includes("хоррор")||x.includes("страш")) return "horror";
+    if(x.includes("фантаст")||x.includes("космос")||x.includes("sci")||x.includes("киберпанк")) return "sci";
+    if(x.includes("фэнтези")||x.includes("маг")||x.includes("rpg")||x.includes("рпг")) return "fantasy";
+    if(x.includes("комед")||x.includes("смешн")||x.includes("легк")) return "light";
+    if(x.includes("детектив")||x.includes("криминал")||x.includes("расслед")) return "detective";
+    if(x.includes("романт")||x.includes("любов")) return "romance";
+    if(x.includes("спорт")) return "sport";
+    if(x.includes("школ")) return "school";
+    return "";
+  }
+  function detectIntent(q){
+    const all=N(variants(q).join(" "));
+    const m=mem();
+    let bucket=detectType(q);
+    let mood=detectMood(q);
+    if(bucket==="all" && m.bucket && all.length<18) bucket=m.bucket;
+    if(!mood && m.mood && all.length<18) mood=m.mood;
+
+    const out={bucket,mood,sort:"smart",yearMin:0,yearMax:9999,ratingMin:0,ratingMax:10,explain:all.includes("почему")||all.includes("объясни"),random:all.includes("рандом")||all.includes("случайн"),count:LIMIT};
+    const requestedCount=all.match(/(?:топ|посоветуй|подбери|найди|покажи|дай)\s+(\d{1,2})\b/);
+    if(requestedCount)out.count=Math.max(1,Math.min(20,Number(requestedCount[1])));
+    if(all.includes("90 х")||all.includes("90е")||all.includes("90s")){out.yearMin=1990;out.yearMax=1999;}
+    if(all.includes("2000 е")||all.includes("2000е")){out.yearMin=2000;out.yearMax=2009;}
+    if(all.includes("2010 е")||all.includes("2010е")){out.yearMin=2010;out.yearMax=2019;}
+    if(all.includes("2020 е")||all.includes("2020е")){out.yearMin=2020;out.yearMax=2029;}
+    const after=all.match(/(?:после|начиная с|с)\s*(19\d{2}|20\d{2})/);
+    const before=all.match(/(?:до|раньше|перед)\s*(19\d{2}|20\d{2})/);
+    if(after)out.yearMin=Number(after[1])+(all.includes("после")?1:0);
+    if(before)out.yearMax=Number(before[1])-(all.includes("раньше")||all.includes("перед")?1:0);
+    if(!after&&!before){const y=all.match(/\b(19\d{2}|20\d{2})\b/);if(y){out.yearMin=Number(y[1]);out.yearMax=Number(y[1]);}}
+    const ratingAbove=all.match(/(?:рейтинг(?:ом)?\s*)?(?:выше|от|не ниже)\s*(\d+(?:[.,]\d+)?)/);
+    const ratingBelow=all.match(/(?:рейтинг(?:ом)?\s*)?(?:ниже|до|не выше)\s*(\d+(?:[.,]\d+)?)/);
+    if(ratingAbove)out.ratingMin=Math.max(0,Math.min(10,Number(ratingAbove[1].replace(",","."))));
+    if(ratingBelow)out.ratingMax=Math.max(0,Math.min(10,Number(ratingBelow[1].replace(",","."))));
+    if(all.includes("топ")||all.includes("лучшие")||all.includes("популяр"))out.sort="top";
+    if(all.includes("нов")||all.includes("свежее"))out.sort="new";
+    if(all.includes("недооцен"))out.sort="hidden";
+    return out;
+  }
+
+  const WEAK=new Set("блять бля сука ебаный ебать нахуй хуйня из что чтобы какой какие мне посоветуй подбери найди покажи дай можно посмотреть вечером вечер типо типа похожее похожие на для про по с и или а в во как".split(" "));
+  const EXPAND={
+    попаданцы:["попаданец","исекай","isekai","перерождение","реинкарнация","другой","мир"],
+    попаданец:["попаданцы","исекай","isekai","перерождение","реинкарнация"],
+    исекай:["isekai","попаданцы","перерождение","другой","мир"],
+    фантастика:["sci","science","space","космос","future"],
+    космос:["space","sci","science","фантастика"],
+    фэнтези:["fantasy","magic","магия","rpg"],
+    магия:["magic","fantasy","фэнтези"],
+    ужасы:["horror","мистика","страшное"],
+    хоррор:["horror","ужасы"],
+    детектив:["crime","mystery","криминал"],
+    вечер:["драма","комедия","приключения","триллер"],
+    вечером:["драма","комедия","приключения","триллер"],
+    попкорн:["комедия","приключения","боевик"],
+    семейное:["family","семейное","приключения"]
+  };
+  function tokens(q){
+    const out=new Set();
+    for(const v of variants(q)){
+      for(const p of W(v)){
+        if(p.length<2||WEAK.has(p)) continue;
+        out.add(p);
+        if(EXPAND[p]) EXPAND[p].forEach(x=>W(x).forEach(y=>out.add(y)));
+      }
+    }
+    return [...out];
+  }
+
+  function parseJson(j){
+    const out=[];
+    if(!j)return out;
+    if(Array.isArray(j))return j;
+    if(Array.isArray(j.items))out.push(...j.items);
+    if(Array.isArray(j.data))out.push(...j.data);
+    if(Array.isArray(j.results))out.push(...j.results);
+    if(j.sections&&typeof j.sections==="object")for(const v of Object.values(j.sections)){if(Array.isArray(v))out.push(...v);else if(v&&Array.isArray(v.items))out.push(...v.items);}
+    return out.filter(x=>x&&typeof x==="object");
+  }
+  async function fetchJson(url){
+    if(FALLBACK_CACHE.has(url))return FALLBACK_CACHE.get(url);
+    try{const res=await fetch(url,{cache:"force-cache"});if(!res.ok){FALLBACK_CACHE.set(url,[]);return[];}const arr=parseJson(await res.json());FALLBACK_CACHE.set(url,arr);return arr;}catch{FALLBACK_CACHE.set(url,[]);return[];}
+  }
+  function fallbackPool(){
+    const out=[],seen=new Set();
+    function add(item){if(!item||typeof item!=="object")return;const k=itemKey(item);if(!k||seen.has(k))return;seen.add(k);out.push(item);}
+    try{(currentItems||[]).forEach(add);}catch{}
+    try{if(homeData&&homeData.sections)Object.values(homeData.sections).forEach(v=>{if(Array.isArray(v))v.forEach(add);else if(v&&Array.isArray(v.items))v.items.forEach(add);});}catch{}
+    return out;
+  }
+  function kindLabel(kind){return({movies:"фильмы",series:"сериалы",anime:"аниме",cartoons:"мультфильмы"}[kind]||kind||"каталог");}
+  function progressText(p){
+    if(!p)return"ГОЛУБЬ AI V341 выполняет полный поиск…";
+    if(p.phase==="loading")return`ГОЛУБЬ AI V341 загружает ${kindLabel(p.kind)}: ${p.loadedFiles||0}/${p.totalFiles||0} файлов · ${p.loadedItems||0} записей…`;
+    if(p.phase==="scanning")return`ГОЛУБЬ AI V341 проверяет полный каталог: ${p.scanned||0}/${p.total||0}…`;
+    return"ГОЛУБЬ AI V341 выполняет полный поиск…";
+  }
+  function terminateSearchWorker(){
+    if(searchWorker){try{searchWorker.terminate();}catch{}searchWorker=null;}
+    workerInitPromise=null;
+    for(const pending of workerPending.values()){clearTimeout(pending.timer);pending.reject(new Error("AI search worker restarted"));}
+    workerPending.clear();
+  }
+  function ensureSearchWorker(){
+    if(workerInitPromise)return workerInitPromise;
+    workerInitPromise=new Promise((resolve,reject)=>{
+      if(typeof Worker!=="function"){workerInitPromise=null;reject(new Error("Web Worker is not supported"));return;}
+      try{searchWorker=new Worker(new URL(SEARCH_WORKER_URL,document.baseURI).href);}catch(error){workerInitPromise=null;reject(error);return;}
+      searchWorker.onmessage=event=>{
+        const msg=event.data||{},pending=workerPending.get(msg.id);
+        if(msg.type==="PROGRESS"){if(pending&&typeof pending.onProgress==="function")pending.onProgress(msg);return;}
+        if(!pending)return;workerPending.delete(msg.id);clearTimeout(pending.timer);
+        if(msg.type==="ERROR")pending.reject(new Error(msg.error||"Worker error"));else pending.resolve(msg.result);
+      };
+      searchWorker.onerror=event=>{
+        const error=new Error(event&&event.message||"AI search worker failed");
+        for(const pending of workerPending.values()){clearTimeout(pending.timer);pending.reject(error);}workerPending.clear();searchWorker=null;workerInitPromise=null;
+      };
+      const id=++workerMessageSeq;
+      const timer=setTimeout(()=>{workerPending.delete(id);terminateSearchWorker();reject(new Error("AI search worker init timeout"));},15000);
+      workerPending.set(id,{resolve:result=>{clearTimeout(timer);workerState=result;resolve(result);},reject:error=>{clearTimeout(timer);workerInitPromise=null;reject(error);},timer,onProgress:null});
+      searchWorker.postMessage({type:"INIT",id,baseUrl:WALL_BASE});
+    });
+    return workerInitPromise;
+  }
+  async function workerCall(type,payload={},options={}){
+    await ensureSearchWorker();if(!searchWorker)throw new Error("AI search worker unavailable");
+    const id=++workerMessageSeq,timeout=Number(options.timeout||45000);
+    return new Promise((resolve,reject)=>{
+      const timer=setTimeout(()=>{workerPending.delete(id);reject(new Error(`${type} timeout`));},timeout);
+      workerPending.set(id,{resolve:result=>{if(result&&result.manifestTotal!=null)workerState=result;resolve(result);},reject,timer,onProgress:options.onProgress});
+      searchWorker.postMessage({type,id,...payload});
+    });
+  }
+  async function getWorkerStatus(){try{return await workerCall("STATUS",{}, {timeout:15000});}catch{return workerState;}}
+  function warmup(){if(warmStarted)return;warmStarted=true;const run=()=>ensureSearchWorker().catch(error=>console.warn("GKM V343 worker warmup",error));if("requestIdleCallback" in window)requestIdleCallback(run,{timeout:1000});else setTimeout(run,250);}
+
+  function clean(item){
+    if(!item) return false;
+    const ttl=N(title(item));
+    if(!ttl||ttl==="без названия") return false;
+    const y=Number(year(item)||0);
+    if(y&&y>new Date().getFullYear()+3) return false;
+    const h=hay(item);
+    return !["trailer","teaser","preview","recap","summary","soundtrack","трейлер","тизер","превью","рекап"].some(x=>h.includes(x));
+  }
+  function passType(item,b){
+    if(!b||b==="all") return true;
+    const ib=itemBucket(item);
+    if(b==="books") return ib==="books"||ib==="ranobe";
+    return ib===b;
+  }
+  function moodWords(m){
+    if(m==="isekai") return ["исекай","isekai","попадан","перерождение","реинкарнация","другой мир","ином мире","призван","summoned","reincarnation","another world"];
+    if(m==="evening") return ["драма","комедия","приключения","триллер","adventure","drama","comedy","thriller"];
+    if(m==="sci") return ["фантастика","космос","space","sci","science","future"];
+    if(m==="fantasy") return ["фэнтези","магия","magic","fantasy","dragon","rpg"];
+    if(m==="dark") return ["мрач","dark","grim","thriller","psychological","драма","триллер"];
+    if(m==="horror") return ["ужасы","horror","мистика","supernatural","thriller"];
+    if(m==="detective") return ["детектив","криминал","crime","mystery","detective"];
+    if(m==="romance") return ["романтика","любовь","romance","love"];
+    if(m==="light") return ["комедия","семейное","comedy","family","adventure"];
+    if(m==="sport") return ["спорт","sport"];
+    if(m==="school") return ["школа","school","slice"];
+    return [];
+  }
+  function score(item,it,tk){
+    if(!clean(item)||!passType(item,it.bucket)) return 0;
+    const y=Number(year(item)||0),r=rating(item);
+    if(y&&(y<it.yearMin||y>it.yearMax)) return 0;
+    if(r<Number(it.ratingMin||0)||r>Number(it.ratingMax||10))return 0;
+    const ttl=N(title(item)),raw=N(rawTitle(item)),h=hay(item),gen=N(genres(item).join(" ")),typ=N(type(item));
+    let s=0;
+    for(const token of tk){
+      if(ttl===token||raw===token) s+=200;
+      else if(ttl.includes(token)) s+=90;
+      else if(raw.includes(token)) s+=70;
+      else if(gen.includes(token)) s+=65;
+      else if(h.includes(token)) s+=25;
+      else if(typ.includes(token)) s+=20;
+    }
+    for(const mw of moodWords(it.mood)){
+      const m=N(mw);
+      if(!m) continue;
+      if(gen.includes(m)) s+=85;
+      else if(h.includes(m)) s+=45;
+      else if(ttl.includes(m)||raw.includes(m)) s+=45;
+    }
+    if(it.bucket!=="all") s+=50;
+    if(it.mood==="evening") s+=15;
+    const v=votes(item);
+    if(it.sort==="top") s+=Math.min(120,Math.log10(v+1)*18)+r*12;
+    else if(it.sort==="new") s+=y>=2020?(y-2019)*14:0;
+    else if(it.sort==="hidden") s+=r*12-Math.min(50,Math.log10(v+1)*8);
+    else s+=Math.min(70,Math.log10(v+1)*10)+r*7;
+    return s;
+  }
+  function dedupe(items){
+    const map=new Map();
+    for(const item of items){
+      const k=`${itemBucket(item)}|${N(title(item))}|${year(item)}`;
+      const old=map.get(k);
+      if(!old||rating(item)*100000+votes(item)>rating(old)*100000+votes(old)) map.set(k,item);
+    }
+    return [...map.values()];
+  }
+  async function fallbackSearch(q){
+    const it=detectIntent(q),tk=tokens(q);let data=fallbackPool();
+    if(!data.length){const arrs=await Promise.all([fetchJson("data/fast/home.json?v=341"),fetchJson("data/fast/pages/movies/page_0001.json?v=341"),fetchJson("data/fast/pages/series/page_0001.json?v=341"),fetchJson("data/fast/pages/anime/page_0001.json?v=341"),fetchJson("data/fast/pages/cartoons/page_0001.json?v=341")]);data=arrs.flat();}
+    let arr=data.map(item=>({item,score:score(item,it,tk)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).map(x=>x.item);
+    if(!arr.length&&it.bucket!=="all")arr=data.filter(item=>clean(item)&&passType(item,it.bucket)).sort((a,b)=>(rating(b)*100000+votes(b))-(rating(a)*100000+votes(a)));
+    if(it.random)arr=arr.sort(()=>Math.random()-.5);
+    const res=dedupe(arr).slice(0,it.count);lastResults=res;lastQuery=q;remember(it);return{items:res,intent:it,tokens:tk,searched:data.length,fallback:true};
+  }
+  async function search(q,onProgress){
+    const it=detectIntent(q),tk=tokens(q);
+    if(!["all","movies","series","anime","cartoons"].includes(it.bucket))return await fallbackSearch(q);
+    try{
+      const result=await workerCall("SEARCH",{query:q,intent:it,tokens:tk,limit:Math.max(30,it.count*3)},{timeout:60000,onProgress});
+      const res=dedupe((result&&result.items)||[]).slice(0,it.count);
+      if(!res.length)return await fallbackSearch(q);
+      lastResults=res;lastQuery=q;remember(it);workerState=result||workerState;
+      return{items:res,intent:it,tokens:tk,searched:Number(result&&result.searched||0),fullCatalog:true,result};
+    }catch(error){console.warn("GKM V343 full-catalog search fallback",error);return await fallbackSearch(q);}
+  }
+
+  function fmtVotes(v){
+    v=Number(v||0);
+    if(!v)return"";
+    if(v>=1000000)return(v/1000000).toFixed(1).replace(".0","")+" млн";
+    if(v>=1000)return Math.round(v/1000)+" тыс";
+    return String(v);
+  }
+  function why(item,it){
+    const out=[],g=genres(item).slice(0,3).join(", ");
+    if(g)out.push("жанры: "+g);
+    if(rating(item))out.push("рейтинг "+rating(item).toFixed(1));
+    if(votes(item))out.push(fmtVotes(votes(item))+" голосов");
+    if(it.mood)out.push("под запрос: "+it.mood);
+    return out.slice(0,3).join("; ");
+  }
+  function intro(it){
+    if(it.bucket==="movies"&&it.mood==="evening") return "На вечер из фильмов я бы начал с этого:";
+    if(it.bucket==="anime"&&it.mood==="isekai") return "По анимэ-попаданцам/исекаю вот нормальные варианты:";
+    const map={movies:"Нашёл фильмы:",anime:"Нашёл аниме:",series:"Нашёл сериалы:",cartoons:"Нашёл мультфильмы:",games:"Нашёл игры:",books:"Нашёл книги:",manga:"Нашёл мангу:",comics:"Нашёл комиксы:",ranobe:"Нашёл ранобэ:"};
+    return map[it.bucket]||"Нашёл варианты:";
+  }
+  function fmt(items,it){
+    return items.map((item,i)=>{
+      const g=genres(item).slice(0,2).join(", ");
+      return `${i+1}. ${title(item)} (${year(item)||"—"}) — ${type(item)} · ${rating(item)?"★ "+rating(item).toFixed(1):"★ —"}${votes(item)?" · "+fmtVotes(votes(item)):""}${g?" · "+g:""}${it.explain?"\n   почему: "+why(item,it):""}`;
+    }).join("\n");
+  }
+
+  function collectLoadedItems(){
+    const out=[];
+    try{ if(Array.isArray(currentItems)) out.push(...currentItems); }catch{}
+    try{
+      if(homeData && homeData.sections){
+        Object.values(homeData.sections).forEach(section=>{
+          if(Array.isArray(section)) out.push(...section);
+          else if(section && Array.isArray(section.items)) out.push(...section.items);
+        });
+      }
+    }catch{}
+    return out;
+  }
+  function resolveOpenItem(compact){
+    if(!compact) return compact;
+    const wantedId=T(compact.id||compact.kinopoiskId||compact.tmdbId||compact.mal_id);
+    const wantedTitle=N(title(compact));
+    const wantedYear=T(year(compact));
+    const loaded=collectLoadedItems();
+    const match=loaded.find(item=>{
+      const id=T(item&&(item.id||item.kinopoiskId||item.tmdbId||item.mal_id));
+      if(wantedId && id && wantedId===id) return true;
+      return wantedTitle && N(title(item))===wantedTitle && (!wantedYear || !year(item) || T(year(item))===wantedYear);
+    });
+    return match || compact;
+  }
+  function openCatalogItem(item){
+    if(!item) return false;
+    const dialog=document.getElementById("gkmAiDialog");
+    try{ if(dialog && dialog.open && typeof dialog.close==="function") dialog.close(); }catch{}
+    const resolved=resolveOpenItem(item);
+    try{
+      if(typeof openDetails==="function"){
+        setTimeout(()=>openDetails(resolved),40);
+        return true;
+      }
+    }catch(error){ console.warn("GKM V343 open card",error); }
+    return false;
+  }
+  function openResult(n){
+    const item=lastResults[Number(n)-1];
+    if(!item)return`Нет результата под номером ${n}. Сначала сделай поиск.`;
+    return openCatalogItem(item) ? "Открываю карточку: "+title(item) : "Нашёл: "+title(item)+", но открыть не получилось.";
+  }
+  function compare(a,b){
+    const A=lastResults[Number(a)-1],B=lastResults[Number(b)-1];
+    if(!A||!B)return"Сначала сделай поиск, потом напиши: сравни 1 и 2.";
+    const pick=rating(A)!==rating(B)?(rating(A)>rating(B)?A:B):(votes(A)>votes(B)?A:B);
+    return`${title(A)}: ★ ${rating(A)||"—"} · ${fmtVotes(votes(A))||"0"} голосов\n${title(B)}: ★ ${rating(B)||"—"} · ${fmtVotes(votes(B))||"0"} голосов\nЯ бы выбрал: ${title(pick)}.`;
+  }
+  function plan(){
+    if(!lastResults.length)return"Сначала попроси подборку, потом напиши: сделай план.";
+    const p=lastResults.slice(0,3);
+    return["План:",`1. Начать с: ${title(p[0])}`,p[1]?`2. Потом: ${title(p[1])}`:"",p[2]?`3. На финал: ${title(p[2])}`:""].filter(Boolean).join("\n");
+  }
+  function help(){
+    return["ГОЛУБЬ AI V341 — полный каталог 1000 LVL.","Ищет через отдельный Web Worker по всем частям каталога, кеширует их в IndexedDB и не тормозит страницу.","Команды: открой 1, похожее на 1, другое, сравни 1 и 2, марафон, полный поиск, статус AI.","Groq объясняет подборку из реальных карточек; если Worker поиска недоступен, включается безопасный локальный резерв."].join("\n");
+  }
+
+  async function similarTo(n){
+    const base = lastResults[Number(n)-1];
+    if(!base) return "Сначала сделай подборку, потом напиши: похожее на 1.";
+    const q = `${type(base)} ${genres(base).slice(0,3).join(" ")} похожее на ${title(base)}`;
+    const res = await search(q);
+    const items = res.items.filter(x => itemKey(x) !== itemKey(base)).slice(0, LIMIT);
+    if(!items.length) return "Похожее быстро не нашёл. Попробуй обычным запросом.";
+    lastResults = items;
+    pendingCards=items.slice(0,12);
+    return `Похожее на ${title(base)}:\n${fmt(items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
+  }
+
+  async function different(){
+    if(!lastQuery) return "Сначала сделай подборку.";
+    const q = lastQuery + " рандом другое";
+    const res = await search(q);
+    if(!res.items.length) return "Других вариантов быстро не нашёл.";
+    pendingCards=res.items.slice(0,12);
+    return `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «сравни 1 и 2», «сделай план».`;
+  }
+
+
+
+  function ensureV343Styles(){
+    if(document.getElementById("gkmV343AiStyles")) return;
+    const style=document.createElement("style");
+    style.id="gkmV343AiStyles";
+    style.textContent=`
+      #gkmAiDialog .ai-subtitle{max-width:310px}
+      .gkm-v343-ai-cards{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}
+      .gkm-v343-ai-card{width:100%;display:grid;grid-template-columns:58px minmax(0,1fr);gap:10px;align-items:center;text-align:left;padding:8px;border:1px solid rgba(0,210,255,.28);border-radius:14px;background:linear-gradient(135deg,rgba(18,31,63,.96),rgba(20,15,54,.96));color:#fff;cursor:pointer;box-shadow:0 7px 18px rgba(0,0,0,.28);transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease}
+      .gkm-v343-ai-card:hover{transform:translateY(-1px);border-color:rgba(0,220,255,.72);box-shadow:0 9px 24px rgba(0,180,255,.17)}
+      .gkm-v343-ai-card img{width:58px;height:82px;object-fit:cover;border-radius:9px;background:#071124}
+      .gkm-v343-ai-card-main{min-width:0}
+      .gkm-v343-ai-card-title{display:block;font-size:14px;font-weight:900;line-height:1.18;margin-bottom:5px;white-space:normal}
+      .gkm-v343-ai-card-meta{display:block;font-size:11px;line-height:1.35;color:rgba(255,255,255,.72);margin-bottom:7px}
+      .gkm-v343-ai-card-open{display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:9px;background:linear-gradient(135deg,#5b3ce7,#00aeea);font-size:11px;font-weight:900;color:#fff}
+      #gkmAiMessages .ai-bot{overflow:visible}
+      @media(max-width:520px){.gkm-v343-ai-card{grid-template-columns:50px minmax(0,1fr)}.gkm-v343-ai-card img{width:50px;height:72px}}
+    `;
+    document.head.appendChild(style);
+  }
+  function posterOf(item){
+    try{ if(typeof posterSrc==="function") return T(posterSrc(item)); }catch{}
+    return T(item&&(item.poster||item.poster_url||item.image||item.cover||item.thumbnail));
+  }
+  function resultCardsHtml(items){
+    return items.slice(0,12).map((item,index)=>{
+      const meta=[type(item),year(item),rating(item)?"★ "+rating(item).toFixed(1):""].filter(Boolean).join(" · ");
+      const poster=posterOf(item);
+      return `<button type="button" class="gkm-v343-ai-card" data-gkm-result-index="${index}">
+        ${poster?`<img src="${E(poster)}" alt="${E(title(item))}" loading="lazy">`:`<span style="display:block;width:58px;height:82px;border-radius:9px;background:#10172b"></span>`}
+        <span class="gkm-v343-ai-card-main">
+          <span class="gkm-v343-ai-card-title">${index+1}. ${E(title(item))}</span>
+          <span class="gkm-v343-ai-card-meta">${E(meta)}</span>
+          <span class="gkm-v343-ai-card-open">Открыть карточку →</span>
+        </span>
+      </button>`;
+    }).join("");
+  }
+  function appendResultCardsToLastBot(items){
+    if(!Array.isArray(items)||!items.length) return;
+    const box=document.getElementById("gkmAiMessages");
+    const last=box&&box.lastElementChild;
+    if(!last||!last.classList.contains("ai-bot")) return;
+    const old=last.querySelector(".gkm-v343-ai-cards");if(old)old.remove();
+    const wrap=document.createElement("div");wrap.className="gkm-v343-ai-cards";wrap.innerHTML=resultCardsHtml(items);
+    wrap.addEventListener("click",event=>{
+      const button=event.target.closest("[data-gkm-result-index]");if(!button)return;
+      event.preventDefault();event.stopPropagation();
+      const item=items[Number(button.dataset.gkmResultIndex)];
+      if(!openCatalogItem(item))alert("Не получилось открыть карточку: "+title(item));
+    });
+    last.appendChild(wrap);box.scrollTop=box.scrollHeight;
+  }
+
+  function renderRichText(value){
+    let html=E(value);
+    html=html.replace(/\*\*([^*\n]+)\*\*/g,"<strong>$1</strong>");
+    html=html.replace(/`([^`\n]+)`/g,"<code>$1</code>");
+    html=html.replace(/(^|\s)\*([^*\n]+)\*(?=\s|$)/g,"$1<em>$2</em>");
+    return html.replace(/\n/g,"<br>");
+  }
+
+  function isWeatherQuery(q){
+    const x=N(q);
+    return /(?:погод|температур|дожд|снег|ветер|градус|прогноз погоды|weather|forecast)/.test(x);
+  }
+  function extractWeatherCity(q){
+    const raw=T(q).replace(/[?!.,]+$/g,"");
+    let m=raw.match(/(?:погода|прогноз|температура|дождь|снег|ветер)[^\n]*?\s(?:в|на)\s+([\p{L} .'-]{2,60})$/iu);
+    if(!m)m=raw.match(/^город\s*:\s*([\p{L} .'-]{2,60})$/iu);
+    return m?T(m[1]).replace(/\s+(?:сегодня|завтра|сейчас)$/iu,"").trim():"";
+  }
+  function isCatalogQuery(q){
+    const x=N(q);
+    if(detectType(q)!=="all")return true;
+    if(/(?:что посмотреть|посмотреть вечером|по всему каталогу|каталог|кино|тайтл|персонаж|жанр|рейтинг|похожее на|открой \d|сравни \d|марафон)/.test(x))return true;
+    if(detectMood(q) && /(?:посоветуй|подбери|подборк|найди|покажи|дай|топ|лучшие)/.test(x))return true;
+    return false;
+  }
+  function generalFallback(q){
+    const x=N(q);
+    if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)/.test(x))return"Привет! Рад тебя видеть. Можем просто пообщаться или подобрать что-нибудь из каталога.";
+    if(/как дела|как ты/.test(x))return"Всё отлично, на связи и готов помочь. Как у тебя дела?";
+    if(/кто ты|что ты/.test(x))return"Я ГОЛУБЬ AI V343: могу общаться на обычные темы, отвечать на вопросы, показывать живую погоду и искать по всему каталогу.";
+    return"Я понял вопрос, но сейчас не смог получить ответ от Groq. Попробуй ещё раз через несколько секунд.";
+  }
+
+  async function tryRemoteAI(q, localText, mode="catalog"){
+
+    const endpoint = window.GKM_AI_ENDPOINT || localStorage.getItem("GKM_AI_ENDPOINT") || "";
+    if(!endpoint) return "";
+    try{
+      const controller = new AbortController();
+      const timer = setTimeout(()=>controller.abort(), 15000);
+      const payload = {
+        query: q,
+        mode,
+        local_answer: localText,
+        site_version: "V344",
+        requested_model: window.GKM_V343_AI_MODEL_DEFAULT,
+        instruction: mode === "catalog"
+          ? "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов."
+          : "Ты Голубь AI — живой собеседник. Отвечай естественно, дружелюбно и по делу. Поддерживай обычный разговор и не своди любой вопрос к каталогу.",
+        conversation: chatHistory.slice(-8),
+        memory: mem(),
+        client_context: {
+          localTime: new Date().toString(),
+          isoTime: new Date().toISOString(),
+          timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone || "")
+        },
+        last_results: mode === "catalog" ? lastResults.slice(0, 12).map((x,i)=>({
+          n:i+1,
+          title:title(x),
+          type:type(x),
+          year:year(x),
+          rating:rating(x),
+          votes:votes(x),
+          genres:genres(x)
+        })) : []
+      };
+      const res = await fetch(endpoint, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(payload),
+        signal:controller.signal
+      });
+      clearTimeout(timer);
+      if(!res.ok) return "";
+      const data = await res.json();
+      if(data && data.resolvedCity){const m=mem();m.city=T(data.resolvedCity);saveMem(m);}
+      return T(data && (data.answer || data.text || data.message));
+    }catch{
+      return "";
+    }
+  }
+
+  async function answer(q,onProgress){
+    pendingCards=[];
+    const raw=T(q),x=N(q);
+    if(!x)return"Напиши вопрос.";
+    const ep=raw.match(/^endpoint\s*:\s*(https:\/\/\S+)/i);
+    if(ep){ localStorage.setItem("GKM_AI_ENDPOINT",ep[1]); return "AI endpoint сохранён. Проверка: напиши «статус AI»."; }
+    if(/сбросить endpoint|удалить endpoint|отключить ai/.test(x)){ localStorage.removeItem("GKM_AI_ENDPOINT"); return "AI endpoint удалён. Общение с Groq отключено, поиск по каталогу остаётся локальным."; }
+    if(/очистить память|сбросить память/.test(x)){ localStorage.removeItem(MEM_KEY);localStorage.removeItem(HISTORY_KEY);chatHistory=[];return"Память помощника очищена."; }
+
+    const cityCmd=raw.match(/^город\s*:\s*([\p{L} .'-]{2,60})$/iu);
+    if(cityCmd){ const m=mem();m.city=T(cityCmd[1]);saveMem(m);return`Город сохранён: ${m.city}. Теперь можно просто спросить: «какая погода?»`; }
+
+    if(/статус ai|статус помощника|какой ai/.test(x)){
+      const endpoint=window.GKM_AI_ENDPOINT||localStorage.getItem("GKM_AI_ENDPOINT")||"";
+      const st=await getWorkerStatus();const counts=st&&st.counts||{},loaded=st&&st.loadedCounts||{};
+      return `ГОЛУБЬ AI V343
+Режим общения: ${endpoint?"Cloudflare Worker + Groq":"Groq не подключён"}
+Модель Worker: ${window.GKM_V343_AI_MODEL_DEFAULT}
+Обычный диалог: включён
+Живая погода: включена, склонения городов поддерживаются
+Поиск: полный каталог через Web Worker
+Кликабельные карточки: включены
+Каталог: ${Number(st&&st.manifestTotal||0).toLocaleString("ru-RU")} записей
+Разделы: фильмы ${counts.movies||0}, сериалы ${counts.series||0}, аниме ${counts.anime||0}, мультфильмы ${counts.cartoons||0}
+Сейчас в памяти потока: ${JSON.stringify(loaded)}
+Кеш браузера: ${st&&st.indexedDb?"IndexedDB включён":"недоступен"}
+Сохранённый город: ${mem().city||"не задан"}
+Endpoint: ${endpoint||"не задан"}`;
+    }
+
+    if(x.includes("помощ")||x.includes("что умеешь")||x.includes("как искать"))return help()+"\n\nТакже можешь просто поздороваться, задать обычный вопрос или спросить погоду. Для погоды: «погода в Краснодаре» либо сначала «город: Краснодар».";
+    const op=x.match(/(?:открой|открыть|покажи)\s+(\d{1,2})/);if(op)return openResult(op[1]);
+    const cmp=x.match(/сравни\s+(\d{1,2})\s+(?:и|с)\s+(\d{1,2})/);if(cmp)return compare(cmp[1],cmp[2]);
+    const sim=x.match(/(?:похожее|похожие|типа|как)\s+(?:на\s+)?(\d{1,2})/);if(sim)return await similarTo(sim[1]);
+    if(x.includes("другое")||x.includes("не это")||x.includes("еще варианты")||x.includes("ещё варианты"))return await different();
+    if(x.includes("план")||x.includes("марафон"))return plan();
+    if(x.includes("еще")||x.includes("ещё"))return lastQuery?(await answer(lastQuery,onProgress)):"Сначала сделай поиск.";
+
+    if(isWeatherQuery(q)){
+      const foundCity=extractWeatherCity(q);
+      if(foundCity){const m=mem();m.city=foundCity;saveMem(m);}
+      const weatherText=await tryRemoteAI(q,"","weather");
+      return weatherText||"Не получилось получить погоду. Напиши город точнее, например: «погода в Краснодаре».";
+    }
+
+    if(!isCatalogQuery(q)){
+      const generalText=await tryRemoteAI(q,"","general");
+      return generalText||generalFallback(q);
+    }
+
+    const res=await search(q,onProgress);
+    if(!res.items.length)return"Не нашёл быстро в нужном разделе. Попробуй проще: «фильмы вечер», «анимэ попаданцы», «игры rpg», «манга ужасы».";
+    pendingCards=res.items.slice(0,12);
+    const localText = `${intro(res.intent)}\n${fmt(res.items,res.intent)}\n\nКоманды: «открой 1», «похожее на 1», «другое», «сравни 1 и 2», «сделай план», «почему».`;
+    const aiText = await tryRemoteAI(q, localText, "catalog");
+    return aiText || localText;
+  }
+
+  function addMsg(role,text){
+    if(typeof gkmHelperAddMessage==="function"){gkmHelperAddMessage(role,text);return;}
+    const box=document.getElementById("gkmAiMessages");if(!box)return;
+    const div=document.createElement("div");div.className=role==="user"?"ai-user":"ai-bot";div.innerHTML=renderRichText(text);box.appendChild(div);box.scrollTop=box.scrollHeight;
+  }
+  function replaceLastBot(text,force=false){
+    const box=document.getElementById("gkmAiMessages");if(!box)return false;
+    const last=box.lastElementChild;if(!last||!last.classList.contains("ai-bot"))return false;
+    const old=T(last.textContent);
+    if(force||old.includes("V341")||old.includes("V343")||old.includes("ищет")||old.includes("загружает")||old.includes("проверяет")){last.innerHTML=renderRichText(text);box.scrollTop=box.scrollHeight;return true;}
+    return false;
+  }
+
+  function install(){
+    ensureV343Styles();
+    const form=document.getElementById("gkmAiForm"),input=document.getElementById("gkmAiInput"),dialog=document.getElementById("gkmAiDialog"),floatBtn=document.getElementById("gkmAiFloatBtn"),closeBtn=document.getElementById("gkmAiCloseBtn");
+    const subtitle=dialog&&dialog.querySelector(".ai-subtitle");if(subtitle)subtitle.textContent="Общение, погода и полный каталог";
+    if(floatBtn&&dialog&&input){
+      floatBtn.onclick=()=>{if(typeof dialog.showModal==="function")dialog.showModal();else dialog.setAttribute("open","");setTimeout(()=>input.focus(),50);warmup();};
+    }
+    if(closeBtn&&dialog)closeBtn.onclick=()=>dialog.close?dialog.close():dialog.removeAttribute("open");
+    if(!form||!input)return;
+    form.dataset.v260Installed="0";form.dataset.v300Installed="0";form.dataset.v301Installed="0";form.dataset.v302Installed="0";form.dataset.v303Installed="0";form.dataset.v304Installed="0";form.dataset.v305Installed="0";form.dataset.v307IsekaiInstalled="0";form.dataset.v308Installed="0";form.dataset.v309Installed="0";form.dataset.v310Installed="0";form.dataset.v311Installed="0";form.dataset.v312Installed="0";form.dataset.v316Installed="0";form.dataset.v336Installed="0";form.dataset.v340Installed="0";form.dataset.v341Installed="0";form.dataset.v343Installed="1";
+    form.onsubmit=async e=>{
+      e.preventDefault();if(e.stopPropagation)e.stopPropagation();
+      const q=input.value.trim();if(!q)return;input.value="";
+      const seq=++requestSeq;
+      addMsg("user",q);pushHistory("user",q);addMsg("bot","ГОЛУБЬ AI V343 думает…");
+      try{
+        const onProgress=progress=>{if(seq===requestSeq)replaceLastBot(progressText(progress),true);};
+        const out=await answer(q,onProgress);
+        if(seq!==requestSeq)return;
+        pushHistory("assistant",out);
+        if(!replaceLastBot(out,true))addMsg("bot",out);
+        appendResultCardsToLastBot(pendingCards);
+      }catch(err){
+        console.warn("GKM V343 helper error",err);
+        const msg="Помощник словил ошибку. Попробуй повторить вопрос через несколько секунд.";
+        pushHistory("assistant",msg);
+        if(!replaceLastBot(msg,true))addMsg("bot",msg);
+      }
+    };
+    warmup();
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
+  setTimeout(install,100);setTimeout(install,450);setTimeout(install,900);
+  console.log("GKM V343: human hybrid AI + weather + full catalog installed");
+})();
+/* GKM V343 HUMAN AI WEATHER CLICKABLE CARDS FULL CATALOG END */
+
+
+/* GKM V344 WALL AI WEATHER MERGE START */
+(function(){
+  window.GKM_V344_WALL_AI_WEATHER_MERGE_VERSION =
+    "v344-wall-ai-weather-merge-2026-07-21";
+  console.log("GKM V344: wall + human AI + live weather merged");
+})();
+/* GKM V344 WALL AI WEATHER MERGE END */
 
