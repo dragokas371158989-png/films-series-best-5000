@@ -14887,9 +14887,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V337 HONEST COLLECTIONS FIX END */
 
 
-/* GKM V3431 WALL FILL AND LOGO HOTFIX START */
+/* GKM V3432 FULLSCREEN FAST WALL START */
 (function(){
-  window.GKM_V3431_WALL_FILL_LOGO_HOTFIX_VERSION = "v3431-wall-fill-logo-hotfix-2026-07-21";
+  window.GKM_V3432_FULLSCREEN_FAST_WALL_VERSION = "v3432-fullscreen-fast-wall-2026-07-21";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
@@ -14901,6 +14901,41 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     cartoons: 2600,
     all: 9000
   };
+
+  function targetWallCount(kind){
+    const w=window.innerWidth;
+
+    // Не грузим 9 000 изображений одновременно.
+    // Один плотный экранный набор выглядит так же, но открывается заметно быстрее.
+    if(w<700) return 1200;
+    if(w<=1366) return kind==="all"?2600:2400;
+    if(w<=1700) return kind==="all"?3400:3200;
+    return kind==="all"?4400:4000;
+  }
+
+  function selectWallSubset(items,kind){
+    const list=Array.isArray(items)?items:[];
+    const target=Math.min(list.length,targetWallCount(kind));
+    if(list.length<=target){
+      const all=list.slice();
+      if(shuffleSeed) shuffle(all);
+      return all;
+    }
+
+    const selected=new Array(target);
+    const offset=(shuffleSeed*9973)%list.length;
+    let step=Math.max(3,Math.floor(list.length/target*997)+1);
+
+    while(gcd(step,list.length)!==1) step+=1;
+
+    let index=offset;
+    for(let i=0;i<target;i++){
+      selected[i]=list[index];
+      index=(index+step)%list.length;
+    }
+
+    return selected;
+  }
 
   let canvas = null;
   let ctx = null;
@@ -14947,8 +14982,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let motionFrame = 0;
   let lensDirty = false;
 
-  const FIRST_CONCURRENCY = 64;
-  const REST_CONCURRENCY = 32;
+  const FIRST_CONCURRENCY = 96;
+  const REST_CONCURRENCY = 48;
   const LENS_SIZE = 330;
   const LENS_RADIUS = LENS_SIZE / 2;
 
@@ -15086,7 +15121,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
   }
   function urlsFor(kind){
-    const urls=["data/fast/home.json?v=3431"];
+    const urls=["data/fast/home.json?v=3432"];
     const map={
       anime:["anime"],
       movies:["movies"],
@@ -15098,7 +15133,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const maxPages=kind==="all"?24:(kind==="anime"?72:40);
     cats.forEach(cat=>{
       for(let i=1;i<=maxPages;i++){
-        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=3431`);
+        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=3432`);
       }
     });
     return urls;
@@ -15107,23 +15142,60 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function smallPosterUrl(item){
     const raw=originalPosterOf(item)||posterOf(item);
     if(!raw) return "";
+
     try{
       const url=new URL(raw,location.href);
-      if(url.hostname.toLowerCase().includes("images.weserv.nl")){
+      const host=url.hostname.toLowerCase();
+
+      // TMDB: берём маленькую картинку напрямую, без дополнительного прокси.
+      if(host==="image.tmdb.org"){
+        url.pathname=url.pathname.replace(/\/t\/p\/(?:original|w\d+)\//,"/t/p/w92/");
+        return url.href;
+      }
+
+      // У этих CDN уже оптимизированная выдача и прямой URL быстрее weserv.
+      if(
+        host.includes("myanimelist.net")||
+        host.includes("shikimori")||
+        host.includes("anilibria")||
+        host.includes("kinopoisk")||
+        host.includes("yandex.net")||
+        host===location.hostname
+      ){
+        return url.href;
+      }
+
+      // Если ссылка уже через weserv — уменьшаем параметры.
+      if(host.includes("images.weserv.nl")){
         url.searchParams.set("w","48");
         url.searchParams.set("h","72");
         url.searchParams.set("fit","cover");
         url.searchParams.set("output","webp");
-        url.searchParams.set("q","58");
+        url.searchParams.set("q","54");
         return url.href;
       }
-      if(url.hostname===location.hostname) return url.href;
-      const clean=url.href.replace(/^https?:\/\//i,"");
-      return "https://images.weserv.nl/?url="+encodeURIComponent(clean)+"&w=48&h=72&fit=cover&output=webp&q=58";
+
+      // Остальные источники сначала пробуем напрямую.
+      return url.href;
     }catch(e){
       return raw;
     }
   }
+
+  function proxySmallPosterUrl(item){
+    const raw=originalPosterOf(item)||posterOf(item);
+    if(!raw) return "";
+
+    try{
+      const url=new URL(raw,location.href);
+      if(url.hostname===location.hostname) return url.href;
+      const clean=url.href.replace(/^https?:\/\//i,"");
+      return "https://images.weserv.nl/?url="+encodeURIComponent(clean)+"&w=48&h=72&fit=cover&output=webp&q=54";
+    }catch(e){
+      return raw;
+    }
+  }
+
   function fullPosterUrl(item){ return originalPosterOf(item)||posterOf(item); }
 
   function computeGrid(){
@@ -15131,29 +15203,48 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const h=window.innerHeight;
     const count=Math.max(layoutCount,wallItems.length,1);
     const topPad=42;
-    const bottomPad=72;
+    const bottomPad=0;
     const availableH=Math.max(220,h-topPad-bottomPad);
 
     let best=null;
 
-    // Заполняем всю ширину и минимизируем большой пустой хвост последнего ряда.
-    for(let candidateCols=90;candidateCols<=280;candidateCols++){
-      const cw=w/candidateCols;
-      if(cw<6||cw>18) continue;
-
-      const ch=cw*1.52;
+    // Подбираем количество колонок, затем точно растягиваем сетку
+    // по ширине и высоте экрана. Нижней пустой полосы больше нет.
+    for(let candidateCols=80;candidateCols<=300;candidateCols++){
       const candidateRows=Math.ceil(count/candidateCols);
-      const gridHeight=candidateRows*ch;
-      const emptyCells=candidateRows*candidateCols-count;
+      const cw=w/candidateCols;
+      const ch=availableH/candidateRows;
 
-      const heightPenalty=Math.abs(availableH-gridHeight)*7;
-      const emptyPenalty=emptyCells*2.6;
-      const cellPenalty=Math.abs(cw-10.5)*2;
-      const score=heightPenalty+emptyPenalty+cellPenalty;
+      if(cw<5||cw>20||ch<8||ch>30) continue;
+
+      const ratio=cw/ch;
+      const emptyCells=candidateRows*candidateCols-count;
+      const ratioPenalty=Math.abs(ratio-0.6667)*1200;
+      const emptyPenalty=emptyCells*0.32;
+      const sizePenalty=Math.abs(cw-10.5)*1.8;
+      const score=ratioPenalty+emptyPenalty+sizePenalty;
 
       if(!best||score<best.score){
-        best={score,cols:candidateCols,rows:candidateRows,cw,ch};
+        best={
+          score,
+          cols:candidateCols,
+          rows:candidateRows,
+          cw,
+          ch
+        };
       }
+    }
+
+    if(!best){
+      best={
+        cols:Math.max(1,Math.ceil(Math.sqrt(count*window.innerWidth/availableH))),
+        rows:1,
+        cw:10,
+        ch:15
+      };
+      best.rows=Math.ceil(count/best.cols);
+      best.cw=w/best.cols;
+      best.ch=availableH/best.rows;
     }
 
     cellW=best.cw;
@@ -15275,6 +15366,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const img=new Image();
       img.decoding="async";
       img.referrerPolicy="no-referrer";
+      img.fetchPriority=index<700?"high":"low";
+
+      let fallbackStage=0;
+      const direct=rec.url;
+      const proxy=proxySmallPosterUrl(item);
+      const full=fullPosterUrl(item);
 
       const complete=success=>{
         if(success){
@@ -15290,13 +15387,22 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
       img.onload=()=>complete(true);
       img.onerror=()=>{
-        const raw=fullPosterUrl(item);
-        if(raw&&img.src!==raw){
-          img.onerror=()=>complete(false);
-          img.src=raw;
-        }else complete(false);
+        fallbackStage++;
+
+        if(fallbackStage===1&&proxy&&proxy!==img.src){
+          img.src=proxy;
+          return;
+        }
+
+        if(fallbackStage===2&&full&&full!==img.src){
+          img.src=full;
+          return;
+        }
+
+        complete(false);
       };
-      img.src=rec.url;
+
+      img.src=direct;
     });
   }
 
@@ -15340,7 +15446,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         if(loadedCount%120===0||loadCursor===wallItems.length){
           setStatus(
             `${labelKind(currentKind)} — ${wallItems.length} постеров`,
-            `Загружено ${Math.min(loadedCount,wallItems.length)}/${wallItems.length}. Низ, середина и верх заполняются одновременно; без повторов.`
+            `Загружено ${Math.min(loadedCount,wallItems.length)}/${wallItems.length}. Экран заполняется до самого низа; загружается только быстрый экранный набор.`
           );
         }
         pumpQueue(token);
@@ -15625,13 +15731,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       );
     }
 
-    wallItems=uniqueList(allItems);
-    if(shuffleSeed) shuffle(wallItems);
+    const uniqueItems=uniqueList(allItems);
+    wallItems=selectWallSubset(uniqueItems,kind);
     layoutCount=wallItems.length;
 
     setStatus(
-      `${labelKind(kind)} — ${wallItems.length} постеров`,
-      "Каталог собран. Постеры загружаются равномерно по всей стене, в свои ячейки и без повторов."
+      `${labelKind(kind)} — набор ${wallItems.length} из ${uniqueItems.length}`,
+      "Загружаю только один плотный экранный набор. Кнопка «Другой набор» покажет остальные постеры."
     );
     startImageQueue();
   }
@@ -15711,7 +15817,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       .gkmV343Desc{font-size:12px;line-height:1.45;color:rgba(255,255,255,.84);max-height:88px;overflow:hidden}
       .gkmV343OpenHint{margin-top:10px;font-size:12px;color:#28d7ff;font-weight:900}
       #gkmV343Status{
-        position:absolute;left:14px;bottom:14px;z-index:8;width:min(470px,calc(100vw - 28px));
+        position:absolute;left:14px;bottom:8px;z-index:8;width:min(470px,calc(100vw - 28px));
         border:1px solid rgba(0,220,255,.28);background:rgba(6,13,30,.82);border-radius:18px;padding:12px 14px;
         box-shadow:0 0 24px rgba(0,180,255,.14);backdrop-filter:blur(8px)
       }
@@ -15753,8 +15859,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div class="gkmV343Shade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V343.1</div>
-          <div class="gkmV343Sub">Мягкий «рыбий глаз» без видимого круга. Карточка плавно следует за мышью.</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V343.2</div>
+          <div class="gkmV343Sub">Полный экран без нижней пустоты. Быстрый набор постеров и мягкий «рыбий глаз».</div>
         </div>
         <div class="gkmV343Actions">
           <button data-kind="all">Все</button>
@@ -15786,9 +15892,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     document.getElementById("gkmV343Close").onclick=closeWall;
     document.getElementById("gkmV343Shuffle").onclick=()=>{
       shuffleSeed++;
-      shuffle(wallItems);
+      const uniqueItems=uniqueList(allItems);
+      wallItems=selectWallSubset(uniqueItems,currentKind);
+      layoutCount=wallItems.length;
       hoverIndex=-1;
       hidePreview();
+      setStatus(
+        `${labelKind(currentKind)} — новый набор ${wallItems.length} из ${uniqueItems.length}`,
+        "Показываю другой набор без загрузки всех постеров одновременно."
+      );
       startImageQueue();
     };
 
@@ -15868,7 +15980,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V343.1: wall fill and logo hotfix installed");
+  console.log("GKM V343.2: fullscreen fast wall installed");
 })();
-/* GKM V3431 WALL FILL AND LOGO HOTFIX END */
+/* GKM V3432 FULLSCREEN FAST WALL END */
 
