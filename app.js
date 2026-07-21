@@ -14088,6 +14088,739 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V329 COLLAPSED FRANCHISE CATALOG END */
 
 
+/* GKM V332 CANVAS POSTER MOSAIC START */
+(function(){
+  window.GKM_V332_CANVAS_POSTER_MOSAIC_VERSION = "v332-canvas-poster-mosaic-restore-2026-07-11";
+
+  const CACHE = new Map();
+  const IMG_CACHE = new Map();
+  let items = [];
+  let visibleItems = [];
+  let currentKind = "anime";
+  let canvas = null;
+  let ctx = null;
+  let isOpen = false;
+  let hoveredIndex = -1;
+  let tileW = 16;
+  let tileH = 24;
+  let cols = 1;
+  let rows = 1;
+  let drawTimer = 0;
+  let shuffleSeed = 0;
+
+  function t(v){ return String(v == null ? "" : v).trim(); }
+  function esc(v){
+    return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[ch]));
+  }
+  function n(v){
+    return t(v).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function titleOf(item){
+    try{ if(typeof displayTitle === "function") return t(displayTitle(item)); }catch(e){}
+    return t(item && (item.ru || item.title_ru || item.__manualTopTitle || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
+  }
+  function typeOf(item){
+    try{ if(typeof getType === "function") return t(getType(item)); }catch(e){}
+    return t(item && (item.type || item.category || item.kind)) || "Каталог";
+  }
+  function yearOf(item){
+    try{ if(typeof getYear === "function") return t(getYear(item)); }catch(e){}
+    const raw = t(item && (item.year || item.release_date || item.first_air_date));
+    const m = raw.match(/(19\d{2}|20\d{2})/);
+    return m ? m[1] : raw;
+  }
+  function ratingOf(item){
+    try{ if(typeof getRating === "function") return Number(getRating(item) || 0); }catch(e){}
+    return Number(item && (item.rating || item.vote_average || item.score) || 0);
+  }
+  function overviewOf(item){
+    try{ if(typeof displayOverview === "function") return t(displayOverview(item)); }catch(e){}
+    return t(item && (item.overview || item.description || item.synopsis || item.plot)) || "Описание будет добавлено позже.";
+  }
+  function genresOf(item){
+    try{
+      if(typeof getGenres === "function"){
+        const g = getGenres(item);
+        if(Array.isArray(g)) return g.filter(Boolean).map(String);
+      }
+    }catch(e){}
+    const raw = item && (item.genres || item.genre || item.tags);
+    if(Array.isArray(raw)) return raw.filter(Boolean).map(String);
+    if(typeof raw === "string") return raw.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
+    return [];
+  }
+  function posterOf(item){
+    try{ if(typeof posterSrc === "function") return t(posterSrc(item)); }catch(e){}
+    return t(item && (item.poster || item.poster_url || item.posterUrl || item.image || item.img || item.cover || item.cover_url || item.thumbnail || item.backdrop || item.backdrop_path));
+  }
+  function keyOf(item){
+    return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOf(item)}|${yearOf(item)}|${posterOf(item)}`);
+  }
+  function familyOf(item){
+    const s = n(typeOf(item));
+    if(s.includes("аниме") || s.includes("anime")) return "anime";
+    if(s.includes("сериал") || s.includes("series")) return "series";
+    if(s.includes("мульт") || s.includes("cartoon")) return "cartoons";
+    if(s.includes("фильм") || s.includes("movie")) return "movies";
+    return "other";
+  }
+  function passKind(item, kind){
+    if(kind === "all") return true;
+    return familyOf(item) === kind;
+  }
+
+  function parseJson(j){
+    const out = [];
+    if(!j) return out;
+    if(Array.isArray(j)) out.push(...j);
+    if(Array.isArray(j.items)) out.push(...j.items);
+    if(Array.isArray(j.data)) out.push(...j.data);
+    if(Array.isArray(j.results)) out.push(...j.results);
+    if(j.sections && typeof j.sections === "object"){
+      Object.values(j.sections).forEach(v=>{
+        if(Array.isArray(v)) out.push(...v);
+        else if(v && Array.isArray(v.items)) out.push(...v.items);
+      });
+    }
+    return out.filter(x=>x && typeof x === "object");
+  }
+
+  async function fetchJson(url){
+    if(CACHE.has(url)) return CACHE.get(url);
+    const p = fetch(url, {cache:"force-cache"})
+      .then(r => r.ok ? r.json() : null)
+      .then(parseJson)
+      .catch(()=>[]);
+    CACHE.set(url, p);
+    return p;
+  }
+
+  function localPool(){
+    const out = [];
+    try{ if(Array.isArray(currentItems)) out.push(...currentItems); }catch(e){}
+    try{
+      if(homeData && homeData.sections){
+        Object.values(homeData.sections).forEach(v=>{
+          if(Array.isArray(v)) out.push(...v);
+          else if(v && Array.isArray(v.items)) out.push(...v.items);
+        });
+      }
+    }catch(e){}
+    return out;
+  }
+
+  function uniqueList(arr){
+    const seen = new Set();
+    const out = [];
+    arr.forEach(item=>{
+      if(!item || !posterOf(item)) return;
+      const k = keyOf(item);
+      if(seen.has(k)) return;
+      seen.add(k);
+      out.push(item);
+    });
+    return out;
+  }
+
+  function urlsFor(kind){
+    const urls = ["data/fast/home.json?v=332"];
+    const map = {
+      anime:["anime"],
+      movies:["movies"],
+      series:["series"],
+      cartoons:["cartoons"],
+      all:["anime","movies","series","cartoons"]
+    };
+    const cats = map[kind] || ["anime"];
+    const maxPages = kind === "all" ? 28 : (kind === "anime" ? 80 : 42);
+    cats.forEach(cat=>{
+      for(let i=1;i<=maxPages;i++){
+        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=332`);
+      }
+    });
+    return urls;
+  }
+
+  async function loadItems(kind="anime"){
+    currentKind = kind;
+    setStatus("Загрузка каталога...");
+    const base = localPool().filter(x=>passKind(x, kind));
+    const all = [...base];
+
+    const urls = urlsFor(kind);
+    const step = 12;
+    for(let i=0;i<urls.length;i+=step){
+      const part = urls.slice(i, i+step);
+      // eslint-disable-next-line no-await-in-loop
+      const chunks = await Promise.all(part.map(fetchJson));
+      all.push(...chunks.flat().filter(x=>passKind(x, kind)));
+      if(isOpen) {
+        items = uniqueList(all);
+        visibleItems = items.slice();
+        if(shuffleSeed) shuffle(visibleItems);
+        setStatus(`${labelKind(kind)} — ${items.length} постеров на Canvas`, `Загружено страниц: ${Math.min(i+step, urls.length)}/${urls.length}. DOM не течёт — рисуем в canvas.`);
+        scheduleDraw();
+      }
+    }
+
+    items = uniqueList(all);
+    visibleItems = items.slice();
+    if(shuffleSeed) shuffle(visibleItems);
+    setStatus(`${labelKind(kind)} — ${items.length} постеров на Canvas`, `Загружено изображений: 0/${items.length}. Общий пул: ${items.length}.`);
+    preloadVisibleImages();
+    scheduleDraw();
+  }
+
+  function shuffle(arr){
+    let seed = Date.now() + shuffleSeed;
+    function rnd(){
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      return seed / 4294967296;
+    }
+    for(let i=arr.length-1;i>0;i--){
+      const j = Math.floor(rnd() * (i+1));
+      [arr[i],arr[j]] = [arr[j],arr[i]];
+    }
+  }
+
+  function labelKind(kind){
+    return {
+      all:"Все",
+      anime:"Аниме",
+      movies:"Фильмы",
+      series:"Сериалы",
+      cartoons:"Мульты"
+    }[kind] || "Каталог";
+  }
+
+  function imageFor(url){
+    if(!url) return null;
+    if(IMG_CACHE.has(url)) return IMG_CACHE.get(url);
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.decoding = "async";
+    img.loading = "eager";
+    img.onload = () => {
+      img.__ok = true;
+      loadedCount++;
+      if(loadedCount % 40 === 0) {
+        setStatus(`${labelKind(currentKind)} — ${items.length} постеров на Canvas`, `Загружено изображений: ${loadedCount}/${items.length}. Общий пул: ${items.length}.`);
+        scheduleDraw();
+      }
+    };
+    img.onerror = () => { img.__bad = true; };
+    IMG_CACHE.set(url, img);
+    img.src = url;
+    return img;
+  }
+
+  let loadedCount = 0;
+  function preloadVisibleImages(){
+    loadedCount = 0;
+    const list = visibleItems.slice(0, Math.min(visibleItems.length, 5200));
+    let i = 0;
+    function tick(){
+      const end = Math.min(i + 80, list.length);
+      for(; i<end; i++) imageFor(posterOf(list[i]));
+      if(i < list.length && isOpen) setTimeout(tick, 30);
+      else scheduleDraw();
+    }
+    tick();
+  }
+
+  function ensureCss(){
+    if(document.getElementById("gkmV332Css")) return;
+    const css = document.createElement("style");
+    css.id = "gkmV332Css";
+    css.textContent = `
+      #gkmV332Btn{
+        position:fixed!important;
+        right:18px!important;
+        bottom:92px!important;
+        z-index:99997!important;
+        border:1px solid rgba(0,220,255,.45);
+        background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
+        color:#fff;
+        border-radius:18px;
+        padding:13px 18px;
+        font-weight:900;
+        cursor:pointer;
+        box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35);
+      }
+      #gkmV332Overlay{
+        position:fixed;
+        inset:0;
+        display:none;
+        z-index:99998;
+        overflow:hidden;
+        color:#fff;
+        background:#020817;
+      }
+      #gkmV332Overlay.open{display:block}
+      #gkmV332Canvas{
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        display:block;
+        background:#020817;
+      }
+      .gkmV332Shade{
+        position:absolute;
+        inset:0;
+        pointer-events:none;
+        background:
+          radial-gradient(circle at 50% 42%,rgba(0,0,0,.03),transparent 16%),
+          linear-gradient(to bottom,rgba(0,0,0,.24),transparent 14%,transparent 84%,rgba(0,0,0,.35));
+      }
+      .gkmV332Top{
+        position:absolute;
+        left:14px;
+        right:14px;
+        top:10px;
+        z-index:5;
+        display:flex;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap:12px;
+        pointer-events:none;
+      }
+      .gkmV332Title{
+        font-size:22px;
+        font-weight:950;
+        text-shadow:0 0 12px rgba(0,0,0,.9),0 0 22px rgba(0,180,255,.45);
+      }
+      .gkmV332Sub{
+        margin-top:3px;
+        font-size:12px;
+        color:rgba(255,255,255,.86);
+        text-shadow:0 0 8px rgba(0,0,0,.9);
+      }
+      .gkmV332Actions{
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
+        justify-content:flex-end;
+        pointer-events:auto;
+      }
+      .gkmV332Actions button{
+        border:1px solid rgba(0,220,255,.36);
+        background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));
+        color:#fff;
+        border-radius:14px;
+        padding:10px 13px;
+        font-weight:850;
+        cursor:pointer;
+        box-shadow:0 0 16px rgba(0,170,255,.18);
+      }
+      .gkmV332Actions button:hover{filter:brightness(1.15)}
+      #gkmV332Preview{
+        position:absolute;
+        z-index:6;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%);
+        width:min(560px,calc(100vw - 42px));
+        display:none;
+        grid-template-columns:150px 1fr;
+        gap:18px;
+        padding:18px;
+        border-radius:22px;
+        border:1px solid rgba(255,255,255,.14);
+        background:rgba(15,15,18,.86);
+        box-shadow:0 22px 90px rgba(0,0,0,.72),0 0 34px rgba(0,200,255,.16);
+        backdrop-filter:blur(11px);
+        pointer-events:none;
+      }
+      #gkmV332Preview.open{display:grid}
+      #gkmV332Preview img{
+        width:150px;
+        height:220px;
+        object-fit:cover;
+        border-radius:13px;
+        background:#111;
+        box-shadow:0 14px 34px rgba(0,0,0,.55);
+      }
+      .gkmV332PText h2{
+        margin:0 0 8px;
+        font-size:26px;
+        line-height:1.05;
+      }
+      .gkmV332Meta{
+        color:rgba(255,255,255,.78);
+        font-size:13px;
+        margin-bottom:8px;
+      }
+      .gkmV332Genres{
+        display:flex;
+        gap:5px;
+        flex-wrap:wrap;
+        margin-bottom:8px;
+      }
+      .gkmV332Genres span{
+        font-size:10px;
+        color:#fff;
+        background:rgba(255,255,255,.12);
+        border-radius:999px;
+        padding:4px 7px;
+      }
+      .gkmV332Desc{
+        font-size:12px;
+        line-height:1.45;
+        color:rgba(255,255,255,.84);
+        max-height:88px;
+        overflow:hidden;
+      }
+      .gkmV332OpenHint{
+        margin-top:10px;
+        font-size:12px;
+        color:#28d7ff;
+        font-weight:900;
+      }
+      #gkmV332Status{
+        position:absolute;
+        left:14px;
+        bottom:14px;
+        z-index:5;
+        width:min(470px,calc(100vw - 28px));
+        border:1px solid rgba(0,220,255,.28);
+        background:rgba(6,13,30,.82);
+        border-radius:18px;
+        padding:12px 14px;
+        box-shadow:0 0 24px rgba(0,180,255,.14);
+        backdrop-filter:blur(8px);
+      }
+      #gkmV332Status b{display:block;font-size:16px;margin-bottom:4px}
+      #gkmV332Status div{font-size:11px;color:rgba(255,255,255,.72);line-height:1.35}
+      .gkmV332Hint{
+        position:absolute;
+        right:18px;
+        bottom:18px;
+        z-index:5;
+        color:rgba(255,255,255,.7);
+        font-size:11px;
+        text-align:right;
+        text-shadow:0 0 8px #000;
+        pointer-events:none;
+      }
+      @media(max-width:700px){
+        #gkmV332Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
+        .gkmV332Title{font-size:17px}
+        .gkmV332Sub{font-size:10px}
+        .gkmV332Actions button{padding:8px 9px;font-size:12px}
+        .gkmV332Top{left:8px;right:8px;top:8px}
+        #gkmV332Preview{
+          width:calc(100vw - 20px);
+          grid-template-columns:92px 1fr;
+          gap:10px;
+          padding:12px;
+        }
+        #gkmV332Preview img{width:92px;height:136px}
+        .gkmV332PText h2{font-size:18px}
+        .gkmV332Desc{display:none}
+        #gkmV332Status{left:10px;bottom:10px;width:calc(100vw - 20px)}
+        .gkmV332Hint{display:none}
+      }
+    `;
+    document.head.appendChild(css);
+  }
+
+  function removeOldWallUi(){
+    [
+      "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn",
+      "gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn",
+      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay"
+    ].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.remove();
+    });
+  }
+
+  function ensureUi(){
+    removeOldWallUi();
+
+    if(!document.getElementById("gkmV332Btn")){
+      const btn = document.createElement("button");
+      btn.id = "gkmV332Btn";
+      btn.type = "button";
+      btn.textContent = "🖼️ Canvas-мозаика";
+      btn.onclick = () => openMosaic("anime");
+      document.body.appendChild(btn);
+    }
+
+    if(document.getElementById("gkmV332Overlay")) return;
+
+    const overlay = document.createElement("div");
+    overlay.id = "gkmV332Overlay";
+    overlay.innerHTML = `
+      <canvas id="gkmV332Canvas"></canvas>
+      <div class="gkmV332Shade"></div>
+      <div class="gkmV332Top">
+        <div>
+          <div class="gkmV332Title">🖼️ Canvas-мозаика постеров V332</div>
+          <div class="gkmV332Sub">Без тысяч DOM-карточек: рисуем тысячи постеров на Canvas. Наведение — превью, клик — открыть.</div>
+        </div>
+        <div class="gkmV332Actions">
+          <button data-kind="all">Все</button>
+          <button data-kind="movies">Фильмы</button>
+          <button data-kind="series">Сериалы</button>
+          <button data-kind="anime">Аниме</button>
+          <button data-kind="cartoons">Мульты</button>
+          <button id="gkmV332Shuffle">⏭ Другой набор</button>
+          <button id="gkmV332Close">✕</button>
+        </div>
+      </div>
+      <div id="gkmV332Preview"></div>
+      <div id="gkmV332Status"><b>Готовлю мозаику...</b><div>Загрузка...</div></div>
+      <div class="gkmV332Hint">наведение — карточка<br>клик — открыть полную карточку</div>
+    `;
+    document.body.appendChild(overlay);
+
+    canvas = document.getElementById("gkmV332Canvas");
+    ctx = canvas.getContext("2d", {alpha:false});
+
+    overlay.querySelectorAll("[data-kind]").forEach(btn=>{
+      btn.onclick = () => openMosaic(btn.dataset.kind);
+    });
+    document.getElementById("gkmV332Close").onclick = closeMosaic;
+    document.getElementById("gkmV332Shuffle").onclick = () => {
+      shuffleSeed += 1;
+      shuffle(visibleItems);
+      hoveredIndex = -1;
+      hidePreview();
+      scheduleDraw();
+    };
+
+    canvas.addEventListener("mousemove", onMove);
+    canvas.addEventListener("mouseleave", () => {
+      hoveredIndex = -1;
+      hidePreview();
+      scheduleDraw();
+    });
+    canvas.addEventListener("click", () => {
+      const item = visibleItems[hoveredIndex];
+      if(item) openItem(item);
+    });
+    window.addEventListener("resize", () => {
+      if(isOpen) {
+        resizeCanvas();
+        scheduleDraw();
+      }
+    });
+
+    window.GKM_OPEN_3D_WALL = () => openMosaic("anime");
+    window.GKM_OPEN_CANVAS_MOSAIC = () => openMosaic("anime");
+  }
+
+  function setStatus(title, sub){
+    const st = document.getElementById("gkmV332Status");
+    if(!st) return;
+    st.innerHTML = `<b>${esc(title || "Canvas-мозаика")}</b><div>${esc(sub || "")}</div>`;
+  }
+
+  function resizeCanvas(){
+    if(!canvas || !ctx) return;
+    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    canvas.width = Math.floor(window.innerWidth * dpr);
+    canvas.height = Math.floor(window.innerHeight * dpr);
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const count = Math.max(visibleItems.length, 1);
+    const ratio = 2 / 3;
+
+    cols = Math.max(28, Math.ceil(Math.sqrt(count * w / h / ratio)));
+    rows = Math.ceil(count / cols);
+    tileW = Math.max(8, Math.floor(w / cols));
+    tileH = Math.max(12, Math.floor(tileW / ratio));
+
+    // Если по высоте не влезает — делаем ещё мельче.
+    const neededH = rows * tileH;
+    if(neededH > h * 1.08){
+      tileH = Math.max(10, Math.floor(h / rows));
+      tileW = Math.max(7, Math.floor(tileH * ratio));
+      cols = Math.max(cols, Math.ceil(w / tileW));
+      rows = Math.ceil(count / cols);
+    }
+  }
+
+  function scheduleDraw(){
+    clearTimeout(drawTimer);
+    drawTimer = setTimeout(draw, 20);
+  }
+
+  function draw(){
+    if(!isOpen || !ctx || !canvas) return;
+    resizeCanvas();
+
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    ctx.fillStyle = "#020817";
+    ctx.fillRect(0,0,w,h);
+
+    const count = visibleItems.length;
+    const gridW = cols * tileW;
+    const gridH = rows * tileH;
+    const ox = Math.floor((w - gridW) / 2);
+    const oy = Math.floor((h - gridH) / 2);
+
+    for(let i=0;i<count;i++){
+      const item = visibleItems[i];
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      const x = ox + col * tileW;
+      const y = oy + row * tileH;
+      const img = imageFor(posterOf(item));
+
+      if(img && img.__ok){
+        try{ ctx.drawImage(img, x, y, tileW, tileH); }catch(e){}
+      } else {
+        ctx.fillStyle = "rgba(15,28,58,.82)";
+        ctx.fillRect(x, y, tileW, tileH);
+      }
+
+      if(i === hoveredIndex){
+        ctx.save();
+        ctx.strokeStyle = "rgba(0,220,255,.95)";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x-1,y-1,tileW+2,tileH+2);
+        const bigW = Math.min(180, tileW * 7);
+        const bigH = Math.min(260, tileH * 7);
+        const bx = Math.max(10, Math.min(w - bigW - 10, x + tileW + 12));
+        const by = Math.max(70, Math.min(h - bigH - 20, y - bigH / 3));
+        ctx.shadowColor = "rgba(0,200,255,.7)";
+        ctx.shadowBlur = 22;
+        if(img && img.__ok) {
+          try{ ctx.drawImage(img, bx, by, bigW, bigH); }catch(e){}
+        }
+        ctx.restore();
+      }
+    }
+  }
+
+  function indexAt(clientX, clientY){
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const gridW = cols * tileW;
+    const gridH = rows * tileH;
+    const ox = Math.floor((w - gridW) / 2);
+    const oy = Math.floor((h - gridH) / 2);
+    const col = Math.floor((clientX - ox) / tileW);
+    const row = Math.floor((clientY - oy) / tileH);
+    if(col < 0 || row < 0 || col >= cols || row >= rows) return -1;
+    const idx = row * cols + col;
+    return idx >= 0 && idx < visibleItems.length ? idx : -1;
+  }
+
+  function onMove(e){
+    const idx = indexAt(e.clientX, e.clientY);
+    if(idx === hoveredIndex) return;
+    hoveredIndex = idx;
+    const item = visibleItems[idx];
+    if(item) showPreview(item);
+    else hidePreview();
+    scheduleDraw();
+  }
+
+  function showPreview(item){
+    const p = document.getElementById("gkmV332Preview");
+    if(!p || !item) return;
+    const r = ratingOf(item);
+    const genres = genresOf(item).slice(0,5);
+    p.innerHTML = `
+      <img src="${esc(posterOf(item))}" alt="">
+      <div class="gkmV332PText">
+        <h2>${esc(titleOf(item))}</h2>
+        <div class="gkmV332Meta">${esc(typeOf(item))}${yearOf(item) ? " · " + esc(yearOf(item)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>
+        <div class="gkmV332Genres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div>
+        <div class="gkmV332Desc">${esc(overviewOf(item))}</div>
+        <div class="gkmV332OpenHint">Клик — открыть полную карточку</div>
+      </div>
+    `;
+    p.classList.add("open");
+  }
+
+  function hidePreview(){
+    const p = document.getElementById("gkmV332Preview");
+    if(p) p.classList.remove("open");
+  }
+
+  function tryOpen(item){
+    const names = ["openDetails","openTitleModal","showDetails","showModal","openCard","openMovie","openItemModal"];
+    for(const name of names){
+      try{
+        const f = eval(name);
+        if(typeof f === "function") {
+          f(item);
+          return true;
+        }
+      }catch(e){}
+      try{
+        if(typeof window[name] === "function") {
+          window[name](item);
+          return true;
+        }
+      }catch(e){}
+    }
+    return false;
+  }
+
+  function openItem(item){
+    closeMosaic(false);
+    setTimeout(()=>{
+      if(!tryOpen(item)) alert(titleOf(item));
+    }, 90);
+  }
+
+  async function openMosaic(kind="anime"){
+    ensureCss();
+    ensureUi();
+    const overlay = document.getElementById("gkmV332Overlay");
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+    isOpen = true;
+    hoveredIndex = -1;
+    hidePreview();
+
+    if(kind !== currentKind || !items.length){
+      items = [];
+      visibleItems = [];
+      await loadItems(kind);
+    } else {
+      scheduleDraw();
+    }
+    preloadVisibleImages();
+  }
+
+  function closeMosaic(full=true){
+    const overlay = document.getElementById("gkmV332Overlay");
+    if(overlay) overlay.classList.remove("open");
+    document.body.style.overflow = "";
+    hidePreview();
+    isOpen = false;
+  }
+
+  function install(){
+    ensureCss();
+    ensureUi();
+  }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true});
+  else install();
+  setTimeout(install, 500);
+  setTimeout(install, 1400);
+
+  console.log("GKM V332: canvas poster mosaic restored");
+})();
+/* GKM V332 CANVAS POSTER MOSAIC END */
 
 
 /* GKM V333 STRONG COLLECTIONS COLOR FIX START */
@@ -14637,641 +15370,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V333 STRONG COLLECTIONS COLOR FIX END */
 
 
-/* GKM V334 CANVAS MOSAIC DENSE RESTORE START */
+/* GKM V335 EXACT ROLLBACK MARKER START */
 (function(){
-  window.GKM_V334_CANVAS_MOSAIC_DENSE_RESTORE_VERSION = "v334-canvas-mosaic-dense-restore-2026-07-11";
-
-  const CACHE = new Map();
-  const IMG_CACHE = new Map();
-  let items = [];
-  let visibleItems = [];
-  let paintItems = [];
-  let currentKind = "anime";
-  let canvas = null;
-  let ctx = null;
-  let isOpen = false;
-  let hoveredIndex = -1;
-  let tileW = 16;
-  let tileH = 24;
-  let cols = 1;
-  let rows = 1;
-  let ox = 0;
-  let oy = 56;
-  let drawTimer = 0;
-  let shuffleSeed = 0;
-  let loadedCount = 0;
-
-  function t(v){ return String(v == null ? "" : v).trim(); }
-  function esc(v){
-    return String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    }[ch]));
-  }
-  function n(v){
-    return t(v).toLowerCase()
-      .replace(/ё/g,"е")
-      .replace(/[^\p{L}\p{N}]+/gu," ")
-      .replace(/\s+/g," ")
-      .trim();
-  }
-  function titleOf(item){
-    try{ if(typeof displayTitle === "function") return t(displayTitle(item)); }catch(e){}
-    return t(item && (item.ru || item.title_ru || item.__manualTopTitle || item.title || item.name || item.en || item.original_title || item.original_name)) || "Без названия";
-  }
-  function typeOf(item){
-    try{ if(typeof getType === "function") return t(getType(item)); }catch(e){}
-    return t(item && (item.type || item.category || item.kind)) || "Каталог";
-  }
-  function yearOf(item){
-    try{ if(typeof getYear === "function") return t(getYear(item)); }catch(e){}
-    const raw = t(item && (item.year || item.release_date || item.first_air_date));
-    const m = raw.match(/(19\d{2}|20\d{2})/);
-    return m ? m[1] : raw;
-  }
-  function ratingOf(item){
-    try{ if(typeof getRating === "function") return Number(getRating(item) || 0); }catch(e){}
-    return Number(item && (item.rating || item.vote_average || item.score) || 0);
-  }
-  function overviewOf(item){
-    try{ if(typeof displayOverview === "function") return t(displayOverview(item)); }catch(e){}
-    return t(item && (item.overview || item.description || item.synopsis || item.plot)) || "Описание будет добавлено позже.";
-  }
-  function genresOf(item){
-    try{
-      if(typeof getGenres === "function"){
-        const g = getGenres(item);
-        if(Array.isArray(g)) return g.filter(Boolean).map(String);
-      }
-    }catch(e){}
-    const raw = item && (item.genres || item.genre || item.tags);
-    if(Array.isArray(raw)) return raw.filter(Boolean).map(String);
-    if(typeof raw === "string") return raw.split(/[,|/]+/).map(x=>x.trim()).filter(Boolean);
-    return [];
-  }
-  function posterOf(item){
-    try{ if(typeof posterSrc === "function") return t(posterSrc(item)); }catch(e){}
-    return t(item && (item.poster || item.poster_url || item.posterUrl || item.image || item.img || item.cover || item.cover_url || item.thumbnail || item.backdrop || item.backdrop_path));
-  }
-  function posterOriginalOf(item){
-    try{ if(typeof posterOriginalSrc === "function") return t(posterOriginalSrc(item)); }catch(e){}
-    return posterOf(item);
-  }
-  function keyOf(item){
-    return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOf(item)}|${yearOf(item)}|${posterOf(item)}`);
-  }
-  function familyOf(item){
-    const s = n(typeOf(item));
-    if(s.includes("аниме") || s.includes("anime")) return "anime";
-    if(s.includes("сериал") || s.includes("series")) return "series";
-    if(s.includes("мульт") || s.includes("cartoon")) return "cartoons";
-    if(s.includes("фильм") || s.includes("movie")) return "movies";
-    return "other";
-  }
-  function passKind(item, kind){
-    if(kind === "all") return true;
-    return familyOf(item) === kind;
-  }
-  function parseJson(j){
-    const out = [];
-    if(!j) return out;
-    if(Array.isArray(j)) out.push(...j);
-    if(Array.isArray(j.items)) out.push(...j.items);
-    if(Array.isArray(j.data)) out.push(...j.data);
-    if(Array.isArray(j.results)) out.push(...j.results);
-    if(j.sections && typeof j.sections === "object"){
-      Object.values(j.sections).forEach(v=>{
-        if(Array.isArray(v)) out.push(...v);
-        else if(v && Array.isArray(v.items)) out.push(...v.items);
-      });
-    }
-    return out.filter(x=>x && typeof x === "object");
-  }
-  async function fetchJson(url){
-    if(CACHE.has(url)) return CACHE.get(url);
-    const p = fetch(url, {cache:"force-cache"})
-      .then(r => r.ok ? r.json() : null)
-      .then(parseJson)
-      .catch(()=>[]);
-    CACHE.set(url, p);
-    return p;
-  }
-  function localPool(){
-    const out = [];
-    try{ if(Array.isArray(currentItems)) out.push(...currentItems); }catch(e){}
-    try{
-      if(homeData && homeData.sections){
-        Object.values(homeData.sections).forEach(v=>{
-          if(Array.isArray(v)) out.push(...v);
-          else if(v && Array.isArray(v.items)) out.push(...v.items);
-        });
-      }
-    }catch(e){}
-    return out;
-  }
-  function uniqueList(arr){
-    const seen = new Set();
-    const out = [];
-    arr.forEach(item=>{
-      if(!item || !posterOf(item)) return;
-      const k = keyOf(item);
-      if(seen.has(k)) return;
-      seen.add(k);
-      out.push(item);
-    });
-    return out;
-  }
-  function urlsFor(kind){
-    const urls = ["data/fast/home.json?v=334"];
-    const map = {
-      anime:["anime"],
-      movies:["movies"],
-      series:["series"],
-      cartoons:["cartoons"],
-      all:["anime","movies","series","cartoons"]
-    };
-    const cats = map[kind] || ["anime"];
-    const maxPages = kind === "all" ? 28 : (kind === "anime" ? 80 : 42);
-    cats.forEach(cat=>{
-      for(let i=1;i<=maxPages;i++){
-        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=334`);
-      }
-    });
-    return urls;
-  }
-
-  function posterProxy(url){
-    try{
-      if(typeof posterProxySrc === "function") return posterProxySrc(url);
-    }catch(e){}
-    return "";
-  }
-
-  function imageFor(item){
-    const raw = posterOf(item);
-    const original = posterOriginalOf(item) || raw;
-    const cacheKey = original || raw;
-    if(!cacheKey) return null;
-    if(IMG_CACHE.has(cacheKey)) return IMG_CACHE.get(cacheKey);
-
-    const img = new Image();
-    img.decoding = "async";
-    img.loading = "eager";
-    img.referrerPolicy = "no-referrer";
-    img.__ok = false;
-    img.__bad = false;
-    img.__proxyTried = false;
-    img.__raw = raw;
-    img.__original = original;
-
-    img.onload = () => {
-      img.__ok = true;
-      img.__bad = false;
-      loadedCount++;
-      rebuildPaintItems();
-      if(loadedCount % 40 === 0) {
-        setStatus(`${labelKind(currentKind)} — ${paintItems.length} постеров на Canvas`, `Загружено изображений: ${loadedCount}/${items.length}. Общий пул: ${items.length}.`);
-      }
-      scheduleDraw();
-    };
-
-    img.onerror = () => {
-      const proxy = posterProxy(img.__original || img.__raw);
-      if(!img.__proxyTried && proxy && img.src !== proxy){
-        img.__proxyTried = true;
-        img.src = proxy;
-        return;
-      }
-      img.__bad = true;
-      rebuildPaintItems();
-      scheduleDraw();
-    };
-
-    IMG_CACHE.set(cacheKey, img);
-    img.src = raw || original;
-    return img;
-  }
-
-  function rebuildPaintItems(){
-    const ok = [];
-    for(const item of visibleItems){
-      const img = imageFor(item);
-      if(img && img.__ok) ok.push(item);
-    }
-    paintItems = ok;
-  }
-
-  function preloadVisibleImages(){
-    loadedCount = 0;
-    const list = visibleItems.slice(0, Math.min(visibleItems.length, 5600));
-    let i = 0;
-    function tick(){
-      const end = Math.min(i + 100, list.length);
-      for(; i<end; i++) imageFor(list[i]);
-      rebuildPaintItems();
-      scheduleDraw();
-      if(i < list.length && isOpen) setTimeout(tick, 30);
-    }
-    tick();
-  }
-
-  async function loadItems(kind="anime"){
-    currentKind = kind;
-    setStatus("Загрузка каталога...", "Собираю постеры для Canvas-мозаики.");
-    const base = localPool().filter(x=>passKind(x, kind));
-    const all = [...base];
-    const urls = urlsFor(kind);
-    const step = 12;
-
-    for(let i=0;i<urls.length;i+=step){
-      const part = urls.slice(i, i+step);
-      // eslint-disable-next-line no-await-in-loop
-      const chunks = await Promise.all(part.map(fetchJson));
-      all.push(...chunks.flat().filter(x=>passKind(x, kind)));
-      if(isOpen) {
-        items = uniqueList(all);
-        visibleItems = items.slice();
-        if(shuffleSeed) shuffle(visibleItems);
-        rebuildPaintItems();
-        setStatus(`${labelKind(kind)} — ${paintItems.length || items.length} постеров на Canvas`, `Загружено страниц: ${Math.min(i+step, urls.length)}/${urls.length}. Дырки убраны — мозаика уплотняется по мере загрузки.`);
-        scheduleDraw();
-      }
-    }
-
-    items = uniqueList(all);
-    visibleItems = items.slice();
-    if(shuffleSeed) shuffle(visibleItems);
-    rebuildPaintItems();
-    setStatus(`${labelKind(kind)} — ${paintItems.length || items.length} постеров на Canvas`, `Загружено изображений: 0/${items.length}. Общий пул: ${items.length}.`);
-    preloadVisibleImages();
-    scheduleDraw();
-  }
-
-  function shuffle(arr){
-    let seed = Date.now() + shuffleSeed;
-    function rnd(){
-      seed = (seed * 1664525 + 1013904223) >>> 0;
-      return seed / 4294967296;
-    }
-    for(let i=arr.length-1;i>0;i--){
-      const j = Math.floor(rnd() * (i+1));
-      [arr[i],arr[j]] = [arr[j],arr[i]];
-    }
-  }
-
-  function labelKind(kind){
-    return {
-      all:"Все",
-      anime:"Аниме",
-      movies:"Фильмы",
-      series:"Сериалы",
-      cartoons:"Мульты"
-    }[kind] || "Каталог";
-  }
-
-  function ensureCss(){
-    if(document.getElementById("gkmV332Css")) return;
-    const css = document.createElement("style");
-    css.id = "gkmV332Css";
-    css.textContent = `
-      #gkmV332Btn{
-        position:fixed!important; right:18px!important; bottom:92px!important; z-index:99997!important;
-        border:1px solid rgba(0,220,255,.45); background:linear-gradient(135deg,rgba(78,35,193,.98),rgba(0,172,255,.95));
-        color:#fff; border-radius:18px; padding:13px 18px; font-weight:900; cursor:pointer;
-        box-shadow:0 0 28px rgba(0,180,255,.38),0 10px 30px rgba(0,0,0,.35);
-      }
-      #gkmV332Overlay{ position:fixed; inset:0; display:none; z-index:99998; overflow:hidden; color:#fff; background:#020817; }
-      #gkmV332Overlay.open{ display:block; }
-      #gkmV332Canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; background:#020817; }
-      .gkmV332Shade{
-        position:absolute; inset:0; pointer-events:none;
-        background:
-          radial-gradient(circle at 50% 42%,rgba(0,0,0,.03),transparent 16%),
-          linear-gradient(to bottom,rgba(0,0,0,.24),transparent 14%,transparent 84%,rgba(0,0,0,.35));
-      }
-      .gkmV332Top{ position:absolute; left:14px; right:14px; top:10px; z-index:5; display:flex; align-items:flex-start; justify-content:space-between; gap:12px; pointer-events:none; }
-      .gkmV332Title{ font-size:22px; font-weight:950; text-shadow:0 0 12px rgba(0,0,0,.9),0 0 22px rgba(0,180,255,.45); }
-      .gkmV332Sub{ margin-top:3px; font-size:12px; color:rgba(255,255,255,.86); text-shadow:0 0 8px rgba(0,0,0,.9); }
-      .gkmV332Actions{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; pointer-events:auto; }
-      .gkmV332Actions button{
-        border:1px solid rgba(0,220,255,.36); background:linear-gradient(135deg,rgba(58,37,150,.94),rgba(0,138,220,.88));
-        color:#fff; border-radius:14px; padding:10px 13px; font-weight:850; cursor:pointer; box-shadow:0 0 16px rgba(0,170,255,.18);
-      }
-      .gkmV332Actions button:hover{filter:brightness(1.15)}
-      #gkmV332Preview{
-        position:absolute; z-index:6; left:50%; top:50%; transform:translate(-50%,-50%);
-        width:min(560px,calc(100vw - 42px)); display:none; grid-template-columns:150px 1fr; gap:18px; padding:18px;
-        border-radius:22px; border:1px solid rgba(255,255,255,.14); background:rgba(15,15,18,.86);
-        box-shadow:0 22px 90px rgba(0,0,0,.72),0 0 34px rgba(0,200,255,.16); backdrop-filter:blur(11px); pointer-events:none;
-      }
-      #gkmV332Preview.open{display:grid}
-      #gkmV332Preview img{width:150px; height:220px; object-fit:cover; border-radius:13px; background:#111; box-shadow:0 14px 34px rgba(0,0,0,.55);}
-      .gkmV332PText h2{margin:0 0 8px; font-size:26px; line-height:1.05;}
-      .gkmV332Meta{color:rgba(255,255,255,.78); font-size:13px; margin-bottom:8px;}
-      .gkmV332Genres{display:flex; gap:5px; flex-wrap:wrap; margin-bottom:8px;}
-      .gkmV332Genres span{font-size:10px; color:#fff; background:rgba(255,255,255,.12); border-radius:999px; padding:4px 7px;}
-      .gkmV332Desc{font-size:12px; line-height:1.45; color:rgba(255,255,255,.84); max-height:88px; overflow:hidden;}
-      .gkmV332OpenHint{margin-top:10px; font-size:12px; color:#28d7ff; font-weight:900;}
-      #gkmV332Status{
-        position:absolute; left:14px; bottom:14px; z-index:5; width:min(470px,calc(100vw - 28px));
-        border:1px solid rgba(0,220,255,.28); background:rgba(6,13,30,.82); border-radius:18px; padding:12px 14px;
-        box-shadow:0 0 24px rgba(0,180,255,.14); backdrop-filter:blur(8px);
-      }
-      #gkmV332Status b{display:block; font-size:16px; margin-bottom:4px}
-      #gkmV332Status div{font-size:11px; color:rgba(255,255,255,.72); line-height:1.35}
-      .gkmV332Hint{position:absolute; right:18px; bottom:18px; z-index:5; color:rgba(255,255,255,.7); font-size:11px; text-align:right; text-shadow:0 0 8px #000; pointer-events:none;}
-      @media(max-width:700px){
-        #gkmV332Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
-        .gkmV332Title{font-size:17px}.gkmV332Sub{font-size:10px}.gkmV332Actions button{padding:8px 9px;font-size:12px}
-        .gkmV332Top{left:8px;right:8px;top:8px}
-        #gkmV332Preview{width:calc(100vw - 20px);grid-template-columns:92px 1fr;gap:10px;padding:12px}
-        #gkmV332Preview img{width:92px;height:136px}.gkmV332PText h2{font-size:18px}.gkmV332Desc{display:none}
-        #gkmV332Status{left:10px;bottom:10px;width:calc(100vw - 20px)}.gkmV332Hint{display:none}
-      }
-    `;
-    document.head.appendChild(css);
-  }
-
-  function removeOldWallUi(){
-    [
-      "gkmV317WallBtn","gkm3dWallBtn","gkm3dWallTopBtn",
-      "gkmV319Btn","gkmV320Btn","gkmV321Btn","gkmV322Btn","gkmV323Btn","gkmV324Btn","gkmV325Btn",
-      "gkmV317WallOverlay","gkm3dWallOverlay","gkmV319Overlay","gkmV320Overlay","gkmV321Overlay","gkmV322Overlay","gkmV323Overlay","gkmV324Overlay","gkmV325Overlay"
-    ].forEach(id=>{
-      const el = document.getElementById(id);
-      if(el) el.remove();
-    });
-  }
-
-  function ensureUi(){
-    removeOldWallUi();
-    if(!document.getElementById("gkmV332Btn")){
-      const btn = document.createElement("button");
-      btn.id = "gkmV332Btn";
-      btn.type = "button";
-      btn.textContent = "🖼️ Canvas-мозаика";
-      btn.onclick = () => openMosaic("anime");
-      document.body.appendChild(btn);
-    }
-    if(document.getElementById("gkmV332Overlay")) return;
-
-    const overlay = document.createElement("div");
-    overlay.id = "gkmV332Overlay";
-    overlay.innerHTML = `
-      <canvas id="gkmV332Canvas"></canvas>
-      <div class="gkmV332Shade"></div>
-      <div class="gkmV332Top">
-        <div>
-          <div class="gkmV332Title">🖼️ Canvas-мозаика постеров V332</div>
-          <div class="gkmV332Sub">Без тысяч DOM-карточек: рисуем тысячи постеров на Canvas. Наведение — превью, клик — открыть.</div>
-        </div>
-        <div class="gkmV332Actions">
-          <button data-kind="all">Все</button>
-          <button data-kind="movies">Фильмы</button>
-          <button data-kind="series">Сериалы</button>
-          <button data-kind="anime">Аниме</button>
-          <button data-kind="cartoons">Мульты</button>
-          <button id="gkmV332Shuffle">⏭ Другой набор</button>
-          <button id="gkmV332Close">✕</button>
-        </div>
-      </div>
-      <div id="gkmV332Preview"></div>
-      <div id="gkmV332Status"><b>Готовлю мозаику...</b><div>Загрузка...</div></div>
-      <div class="gkmV332Hint">наведение — карточка<br>клик — открыть полную карточку</div>
-    `;
-    document.body.appendChild(overlay);
-
-    canvas = document.getElementById("gkmV332Canvas");
-    ctx = canvas.getContext("2d", {alpha:false});
-
-    overlay.querySelectorAll("[data-kind]").forEach(btn=>{
-      btn.onclick = () => openMosaic(btn.dataset.kind);
-    });
-    document.getElementById("gkmV332Close").onclick = closeMosaic;
-    document.getElementById("gkmV332Shuffle").onclick = () => {
-      shuffleSeed += 1;
-      shuffle(visibleItems);
-      rebuildPaintItems();
-      hoveredIndex = -1;
-      hidePreview();
-      scheduleDraw();
-    };
-
-    canvas.addEventListener("mousemove", onMove);
-    canvas.addEventListener("mouseleave", () => {
-      hoveredIndex = -1;
-      hidePreview();
-      scheduleDraw();
-    });
-    canvas.addEventListener("click", () => {
-      const item = paintItems[hoveredIndex];
-      if(item) openItem(item);
-    });
-    window.addEventListener("resize", () => {
-      if(isOpen) {
-        resizeCanvas();
-        scheduleDraw();
-      }
-    });
-
-    window.GKM_OPEN_3D_WALL = () => openMosaic("anime");
-    window.GKM_OPEN_CANVAS_MOSAIC = () => openMosaic("anime");
-  }
-
-  function setStatus(title, sub){
-    const st = document.getElementById("gkmV332Status");
-    if(!st) return;
-    st.innerHTML = `<b>${esc(title || "Canvas-мозаика")}</b><div>${esc(sub || "")}</div>`;
-  }
-
-  function resizeCanvas(){
-    if(!canvas || !ctx) return;
-    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-    canvas.width = Math.floor(window.innerWidth * dpr);
-    canvas.height = Math.floor(window.innerHeight * dpr);
-    canvas.style.width = window.innerWidth + "px";
-    canvas.style.height = window.innerHeight + "px";
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    const count = Math.max(paintItems.length || visibleItems.length, 1);
-    const ratio = 2 / 3;
-    const topPad = window.innerWidth < 700 ? 62 : 52;
-    const bottomPad = window.innerWidth < 700 ? 110 : 140;
-    const availH = Math.max(120, h - topPad - bottomPad);
-
-    cols = Math.max(28, Math.ceil(Math.sqrt(count * w / availH / ratio)));
-    rows = Math.ceil(count / cols);
-    tileW = Math.max(8, Math.floor(w / cols));
-    tileH = Math.max(12, Math.floor(tileW / ratio));
-
-    const neededH = rows * tileH;
-    if(neededH > availH){
-      tileH = Math.max(10, Math.floor(availH / rows));
-      tileW = Math.max(7, Math.floor(tileH * ratio));
-      cols = Math.max(cols, Math.ceil(w / tileW));
-      rows = Math.ceil(count / cols);
-    }
-
-    const gridW = cols * tileW;
-    ox = Math.floor((w - gridW) / 2);
-    oy = topPad;
-  }
-
-  function scheduleDraw(){
-    clearTimeout(drawTimer);
-    drawTimer = setTimeout(draw, 20);
-  }
-
-  function draw(){
-    if(!isOpen || !ctx || !canvas) return;
-    resizeCanvas();
-
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    ctx.fillStyle = "#020817";
-    ctx.fillRect(0,0,w,h);
-
-    const drawList = paintItems.length ? paintItems : [];
-    const count = drawList.length;
-
-    for(let i=0;i<count;i++){
-      const item = drawList[i];
-      const col = i % cols;
-      const row = Math.floor(i / cols);
-      const x = ox + col * tileW;
-      const y = oy + row * tileH;
-      const img = imageFor(item);
-      if(img && img.__ok){
-        try{ ctx.drawImage(img, x, y, tileW, tileH); }catch(e){}
-      }
-      if(i === hoveredIndex){
-        ctx.save();
-        ctx.strokeStyle = "rgba(0,220,255,.95)";
-        ctx.lineWidth = 2;
-        ctx.strokeRect(x-1,y-1,tileW+2,tileH+2);
-        const bigW = Math.min(180, tileW * 7);
-        const bigH = Math.min(260, tileH * 7);
-        const bx = Math.max(10, Math.min(w - bigW - 10, x + tileW + 12));
-        const by = Math.max(70, Math.min(h - bigH - 20, y - bigH / 3));
-        ctx.shadowColor = "rgba(0,200,255,.7)";
-        ctx.shadowBlur = 22;
-        if(img && img.__ok) {
-          try{ ctx.drawImage(img, bx, by, bigW, bigH); }catch(e){}
-        }
-        ctx.restore();
-      }
-    }
-  }
-
-  function indexAt(clientX, clientY){
-    const col = Math.floor((clientX - ox) / tileW);
-    const row = Math.floor((clientY - oy) / tileH);
-    if(col < 0 || row < 0 || col >= cols || row >= rows) return -1;
-    const idx = row * cols + col;
-    return idx >= 0 && idx < paintItems.length ? idx : -1;
-  }
-
-  function onMove(e){
-    const idx = indexAt(e.clientX, e.clientY);
-    if(idx === hoveredIndex) return;
-    hoveredIndex = idx;
-    const item = paintItems[idx];
-    if(item) showPreview(item);
-    else hidePreview();
-    scheduleDraw();
-  }
-
-  function showPreview(item){
-    const p = document.getElementById("gkmV332Preview");
-    if(!p || !item) return;
-    const r = ratingOf(item);
-    const genres = genresOf(item).slice(0,5);
-    p.innerHTML = `
-      <img src="${esc(posterOf(item))}" alt="">
-      <div class="gkmV332PText">
-        <h2>${esc(titleOf(item))}</h2>
-        <div class="gkmV332Meta">${esc(typeOf(item))}${yearOf(item) ? " · " + esc(yearOf(item)) : ""}${r ? " · ★ " + Number(r).toFixed(1) : ""}</div>
-        <div class="gkmV332Genres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div>
-        <div class="gkmV332Desc">${esc(overviewOf(item))}</div>
-        <div class="gkmV332OpenHint">Клик — открыть полную карточку</div>
-      </div>
-    `;
-    p.classList.add("open");
-  }
-
-  function hidePreview(){
-    const p = document.getElementById("gkmV332Preview");
-    if(p) p.classList.remove("open");
-  }
-
-  function tryOpen(item){
-    const names = ["openDetails","openTitleModal","showDetails","showModal","openCard","openMovie","openItemModal"];
-    for(const name of names){
-      try{
-        const f = eval(name);
-        if(typeof f === "function") {
-          f(item);
-          return true;
-        }
-      }catch(e){}
-      try{
-        if(typeof window[name] === "function") {
-          window[name](item);
-          return true;
-        }
-      }catch(e){}
-    }
-    return false;
-  }
-
-  function openItem(item){
-    closeMosaic(false);
-    setTimeout(()=>{
-      if(!tryOpen(item)) alert(titleOf(item));
-    }, 90);
-  }
-
-  async function openMosaic(kind="anime"){
-    ensureCss();
-    ensureUi();
-    const overlay = document.getElementById("gkmV332Overlay");
-    overlay.classList.add("open");
-    document.body.style.overflow = "hidden";
-    isOpen = true;
-    hoveredIndex = -1;
-    hidePreview();
-
-    if(kind !== currentKind || !items.length){
-      items = [];
-      visibleItems = [];
-      paintItems = [];
-      await loadItems(kind);
-    } else {
-      rebuildPaintItems();
-      scheduleDraw();
-    }
-    preloadVisibleImages();
-  }
-
-  function closeMosaic(){
-    const overlay = document.getElementById("gkmV332Overlay");
-    if(overlay) overlay.classList.remove("open");
-    document.body.style.overflow = "";
-    hidePreview();
-    isOpen = false;
-  }
-
-  function install(){
-    ensureCss();
-    ensureUi();
-  }
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once:true});
-  else install();
-  setTimeout(install, 500);
-  setTimeout(install, 1400);
-
-  console.log("GKM V334: canvas mosaic dense restore installed");
+  window.GKM_V335_EXACT_CANVAS_V332_KEEP_COLLECTIONS_VERSION = "v335-exact-canvas-v332-keep-collections-2026-07-11";
+  console.log("GKM V335: exact rollback to original V332 canvas block, catalog collection fixes kept");
 })();
-/* GKM V334 CANVAS MOSAIC DENSE RESTORE END */
+/* GKM V335 EXACT ROLLBACK MARKER END */
 
