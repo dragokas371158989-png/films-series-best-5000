@@ -1,0 +1,17 @@
+{
+  "version": "V3460.3.4",
+  "tests": {
+    "python_syntax": "PASS",
+    "uploaded_repo_test": "PASS",
+    "full_before_bytes": 98860831,
+    "full_after_bytes": 90047753,
+    "full_before_mib": 94.28,
+    "full_after_mib": 85.88,
+    "lite_before_mib": 16.29,
+    "lite_after_mib": 15.1,
+    "full_below_94_mib": "PASS",
+    "all_runtime_tests": "PASS",
+    "full_records_preserved": 100156,
+    "saved_mib": 8.4
+  }
+}
