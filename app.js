@@ -14367,7 +14367,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
 /* GKM V348 FULL VIEWPORT CANVAS FISHEYE START */
 (function(){
-  window.GKM_V348_5X_CANVAS_POSTER_LOADING_VERSION = "v348-5x-canvas-poster-loading-2026-07-22";
+  window.GKM_V348_FAST_MULTI_SOURCE_POSTERS_VERSION = "v348-fast-multi-source-posters-2026-07-22";
+  window.GKM_V348_5X_CANVAS_POSTER_LOADING_VERSION = window.GKM_V348_FAST_MULTI_SOURCE_POSTERS_VERSION;
   window.GKM_V348_FULL_VIEWPORT_CANVAS_FISHEYE_VERSION = window.GKM_V348_5X_CANVAS_POSTER_LOADING_VERSION;
   window.GKM_V343_SOFT_FISHEYE_VIDEO_WALL_VERSION = window.GKM_V348_FULL_VIEWPORT_CANVAS_FISHEYE_VERSION;
 
@@ -14593,6 +14594,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function smallPosterUrl(item){
     const raw=originalPosterOf(item)||posterOf(item);
     if(!raw) return "";
+    if(/^(?:data:|blob:)/i.test(raw)) return raw;
     try{
       const url=new URL(raw,location.href);
       if(url.hostname.toLowerCase().includes("images.weserv.nl")){
@@ -14611,6 +14613,59 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
   }
   function fullPosterUrl(item){ return originalPosterOf(item)||posterOf(item); }
+
+  function directSmallPosterUrl(item){
+    const raw=fullPosterUrl(item);
+    if(!raw) return "";
+    if(/^(?:data:|blob:)/i.test(raw)) return raw;
+    try{
+      const url=new URL(raw,location.href);
+      const host=url.hostname.toLowerCase();
+      if(host===location.hostname) return url.href;
+      if(host==="image.tmdb.org"||host==="media.themoviedb.org"){
+        url.pathname=url.pathname.replace(/\/t\/p\/[^/]+\//i,"/t/p/w92/");
+        return url.href;
+      }
+      if(
+        host.includes("kinopoiskapiunofficial.tech")||
+        host.includes("st.kp.yandex.net")||
+        host.includes("avatars.mds.yandex.net")
+      ) return url.href;
+    }catch(e){}
+    return "";
+  }
+
+  function alternateDirectPosterUrl(item){
+    const direct=directSmallPosterUrl(item);
+    if(!direct) return "";
+    try{
+      const url=new URL(direct,location.href);
+      if(url.hostname.toLowerCase()==="image.tmdb.org") url.hostname="media.themoviedb.org";
+      else if(url.hostname.toLowerCase()==="media.themoviedb.org") url.hostname="image.tmdb.org";
+      else return "";
+      return url.href;
+    }catch(e){ return ""; }
+  }
+
+  function posterCandidates(item){
+    const raw=fullPosterUrl(item);
+    if(!raw) return [];
+    const direct=directSmallPosterUrl(item);
+    const alternate=alternateDirectPosterUrl(item);
+    const proxy=smallPosterUrl(item);
+    let directFirst=false;
+    try{
+      const host=new URL(raw,location.href).hostname.toLowerCase();
+      directFirst=(
+        host==="image.tmdb.org"||host==="media.themoviedb.org"||
+        host.includes("kinopoiskapiunofficial.tech")||
+        host.includes("st.kp.yandex.net")||
+        host.includes("avatars.mds.yandex.net")
+      );
+    }catch(e){}
+    const ordered=directFirst?[direct,alternate,proxy,raw]:[proxy,direct,alternate,raw];
+    return [...new Set(ordered.filter(Boolean))];
+  }
 
   function getCanvasBounds(){
     const overlay=canvas&&canvas.closest("#gkmV343Overlay");
@@ -14749,11 +14804,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function getThumbRecord(item){
-    const url=smallPosterUrl(item);
-    if(!url) return null;
-    if(THUMB_CACHE.has(url)) return THUMB_CACHE.get(url);
-    const rec={url,state:"idle",img:null,callbacks:[]};
-    THUMB_CACHE.set(url,rec);
+    const candidates=posterCandidates(item);
+    if(!candidates.length) return null;
+    const key=candidates.join("\n");
+    if(THUMB_CACHE.has(key)) return THUMB_CACHE.get(key);
+    const rec={key,candidates,state:"idle",img:null,callbacks:[]};
+    THUMB_CACHE.set(key,rec);
     return rec;
   }
 
@@ -14783,31 +14839,60 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       rec.state="loading";
       rec.callbacks.push(finish);
 
-      const img=new Image();
-      img.decoding="async";
-      img.referrerPolicy="no-referrer";
-      try{ img.fetchPriority=index<visibleCount?"high":"low"; }catch(e){}
+      const candidates=rec.candidates;
+      const started=new Set();
+      const timers=[];
+      let failed=0;
+      let settled=false;
 
-      const complete=success=>{
-        if(success){
+      const complete=winner=>{
+        if(settled) return;
+        settled=true;
+        timers.forEach(clearTimeout);
+        if(winner){
           rec.state="loaded";
-          rec.img=img;
+          rec.img=winner;
         }else{
           rec.state="failed";
         }
         const callbacks=rec.callbacks.splice(0);
-        callbacks.forEach(cb=>cb(success?img:null));
+        callbacks.forEach(cb=>cb(winner||null));
       };
 
-      img.onload=()=>complete(true);
-      img.onerror=()=>{
-        const raw=fullPosterUrl(item);
-        if(raw&&img.src!==raw){
-          img.onerror=()=>complete(false);
-          img.src=raw;
-        }else complete(false);
+      const launch=position=>{
+        if(settled||position>=candidates.length||started.has(position)) return;
+        started.add(position);
+
+        const img=new Image();
+        let done=false;
+        img.decoding="async";
+        img.referrerPolicy="no-referrer";
+        try{ img.fetchPriority=index<visibleCount?"high":"low"; }catch(e){}
+
+        const fail=()=>{
+          if(done||settled) return;
+          done=true;
+          failed++;
+          launch(position+1);
+          if(failed>=candidates.length) complete(null);
+        };
+
+        img.onload=()=>{
+          if(done||settled) return;
+          done=true;
+          complete(img);
+        };
+        img.onerror=fail;
+        timers.push(setTimeout(fail,4500));
+        img.src=candidates[position];
       };
-      img.src=rec.url;
+
+      launch(0);
+      const hedgeDelays=[0,260,650,1100];
+      for(let position=1;position<candidates.length;position++){
+        const delay=hedgeDelays[position]||1100+(position-3)*350;
+        timers.push(setTimeout(()=>launch(position),delay));
+      }
     });
   }
 
@@ -14886,7 +14971,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function previewPaneHtml(item){
     const r=ratingOf(item);
     const genres=genresOf(item).slice(0,5);
-    const thumb=smallPosterUrl(item);
+    const thumb=posterCandidates(item)[0]||smallPosterUrl(item);
     return `
       <img class="gkmV343PreviewPoster" src="${esc(thumb||posterOf(item))}" data-full="${esc(fullPosterUrl(item))}" alt="">
       <div class="gkmV343PText">
@@ -15413,7 +15498,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V348: full viewport canvas fisheye + 5x poster loading installed");
+  console.log("GKM V348: 5x canvas loading + fast multi-source movie/series posters installed");
 })();
 /* GKM V348 FULL VIEWPORT CANVAS FISHEYE END */
 
