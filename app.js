@@ -14367,7 +14367,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
 /* GKM V348 FULL VIEWPORT CANVAS FISHEYE START */
 (function(){
-  window.GKM_V348_FULL_VIEWPORT_CANVAS_FISHEYE_VERSION = "v348-full-viewport-canvas-fisheye-2026-07-21";
+  window.GKM_V348_5X_CANVAS_POSTER_LOADING_VERSION = "v348-5x-canvas-poster-loading-2026-07-22";
+  window.GKM_V348_FULL_VIEWPORT_CANVAS_FISHEYE_VERSION = window.GKM_V348_5X_CANVAS_POSTER_LOADING_VERSION;
   window.GKM_V343_SOFT_FISHEYE_VIDEO_WALL_VERSION = window.GKM_V348_FULL_VIEWPORT_CANVAS_FISHEYE_VERSION;
 
   const JSON_CACHE = new Map();
@@ -14407,6 +14408,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   let loadToken = 0;
   let loadCursor = 0;
+  let loadOrder = [];
   let activeLoads = 0;
   let loadedCount = 0;
   let loadedVisibleCount = 0;
@@ -14428,8 +14430,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let motionFrame = 0;
   let lensDirty = false;
 
-  const FIRST_CONCURRENCY = 44;
-  const REST_CONCURRENCY = 10;
+  const FIRST_CONCURRENCY = 220;
+  const REST_CONCURRENCY = 50;
   const INITIAL_PAGE_BATCH = 18;
   const TARGET_CELL_W = 18;
   const TARGET_CELL_H = 27;
@@ -14784,6 +14786,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const img=new Image();
       img.decoding="async";
       img.referrerPolicy="no-referrer";
+      try{ img.fetchPriority=index<visibleCount?"high":"low"; }catch(e){}
 
       const complete=success=>{
         if(success){
@@ -14811,16 +14814,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function pumpQueue(token){
     if(token!==loadToken||!isOpen) return;
 
-    while(loadCursor<wallItems.length){
+    while(loadCursor<loadOrder.length){
       const limit=loadCursor<visibleCount?FIRST_CONCURRENCY:REST_CONCURRENCY;
       if(activeLoads>=limit) break;
-      const index=loadCursor++;
+      const index=loadOrder[loadCursor++];
       activeLoads++;
       loadThumb(index,token).finally(()=>{
         if(token!==loadToken) return;
         activeLoads=Math.max(0,activeLoads-1);
 
-        if((loadedVisibleCount>0&&loadedVisibleCount%120===0)||loadCursor===wallItems.length){
+        if((index<visibleCount&&loadedVisibleCount>0&&loadedVisibleCount%240===0)||loadCursor===loadOrder.length){
           setStatus(
             `${labelKind(currentKind)} — ${wallItems.length} постеров`,
             `На экране ${Math.min(loadedVisibleCount,visibleCount)}/${visibleCount}. Остальные постеры догружаются фоном без повторов.`
@@ -14829,6 +14832,28 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         pumpQueue(token);
       });
     }
+  }
+
+  function buildLoadOrder(){
+    const visibleTotal=Math.min(visibleCount,wallItems.length);
+    const order=[];
+    const seen=new Uint8Array(visibleTotal);
+
+    // Сначала равномерно покрываем весь экран, затем заполняем промежутки.
+    for(const step of [8,4,2,1]){
+      for(let row=0;row<rows;row+=step){
+        for(let col=0;col<cols;col+=step){
+          const index=row*cols+col;
+          if(index<visibleTotal&&!seen[index]){
+            seen[index]=1;
+            order.push(index);
+          }
+        }
+      }
+    }
+
+    for(let index=visibleTotal;index<wallItems.length;index++) order.push(index);
+    return order;
   }
 
   function startImageQueue(){
@@ -14841,6 +14866,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     itemLoaded=new Array(wallItems.length).fill(false);
 
     paintSkeleton();
+    loadOrder=buildLoadOrder();
     pumpQueue(token);
   }
 
@@ -15387,7 +15413,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V348: full viewport canvas fisheye installed");
+  console.log("GKM V348: full viewport canvas fisheye + 5x poster loading installed");
 })();
 /* GKM V348 FULL VIEWPORT CANVAS FISHEYE END */
 
