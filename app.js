@@ -14367,7 +14367,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
 /* GKM V348 FULL VIEWPORT CANVAS FISHEYE START */
 (function(){
-  window.GKM_V348_FAST_MULTI_SOURCE_POSTERS_VERSION = "v348-fast-multi-source-posters-2026-07-22";
+  window.GKM_V348_FAST_YANDEX_THUMBNAILS_VERSION = "v348-fast-yandex-48x72-thumbnails-2026-07-22";
+  window.GKM_V348_FAST_MULTI_SOURCE_POSTERS_VERSION = window.GKM_V348_FAST_YANDEX_THUMBNAILS_VERSION;
   window.GKM_V348_5X_CANVAS_POSTER_LOADING_VERSION = window.GKM_V348_FAST_MULTI_SOURCE_POSTERS_VERSION;
   window.GKM_V348_FULL_VIEWPORT_CANVAS_FISHEYE_VERSION = window.GKM_V348_5X_CANVAS_POSTER_LOADING_VERSION;
   window.GKM_V343_SOFT_FISHEYE_VIDEO_WALL_VERSION = window.GKM_V348_FULL_VIEWPORT_CANVAS_FISHEYE_VERSION;
@@ -14591,8 +14592,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return urls;
   }
 
-  function smallPosterUrl(item){
-    const raw=originalPosterOf(item)||posterOf(item);
+  function thumbnailProxyUrl(raw){
     if(!raw) return "";
     if(/^(?:data:|blob:)/i.test(raw)) return raw;
     try{
@@ -14612,6 +14612,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       return raw;
     }
   }
+  function smallPosterUrl(item){
+    return thumbnailProxyUrl(originalPosterOf(item)||posterOf(item));
+  }
   function fullPosterUrl(item){ return originalPosterOf(item)||posterOf(item); }
 
   function directSmallPosterUrl(item){
@@ -14626,10 +14629,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         url.pathname=url.pathname.replace(/\/t\/p\/[^/]+\//i,"/t/p/w92/");
         return url.href;
       }
+      if(host.includes("avatars.mds.yandex.net")){
+        url.pathname=url.pathname.replace(/\/\d+x\d+$/i,"/48x72");
+        return url.href;
+      }
       if(
         host.includes("kinopoiskapiunofficial.tech")||
-        host.includes("st.kp.yandex.net")||
-        host.includes("avatars.mds.yandex.net")
+        host.includes("st.kp.yandex.net")
       ) return url.href;
     }catch(e){}
     return "";
@@ -14652,7 +14658,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(!raw) return [];
     const direct=directSmallPosterUrl(item);
     const alternate=alternateDirectPosterUrl(item);
-    const proxy=smallPosterUrl(item);
+    const proxy=thumbnailProxyUrl(direct||raw);
     let directFirst=false;
     try{
       const host=new URL(raw,location.href).hostname.toLowerCase();
@@ -15498,7 +15504,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V348: 5x canvas loading + fast multi-source movie/series posters installed");
+  console.log("GKM V348: fast 48x72 Yandex/TMDB canvas thumbnails installed");
 })();
 /* GKM V348 FULL VIEWPORT CANVAS FISHEYE END */
 
