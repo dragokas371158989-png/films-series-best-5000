@@ -1,0 +1,100 @@
+name: GKM V350 Repair Card Colors and Descriptions
+
+on:
+  workflow_dispatch:
+    inputs:
+      tmdb_limit:
+        description: "TMDB descriptions to process; 0 means all"
+        required: false
+        default: "0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v350-cards-descriptions
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
+      TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+      TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
+      GKM_RU_TMDB_LIMIT: ${{ inputs.tmdb_limit }}
+      GKM_SHIKI_INDIVIDUAL_LIMIT: "1000"
+      GKM_SHIKI_BATCH_SIZE: "50"
+      GKM_SHIKI_DELAY: "0.85"
+      GKM_RU_TMDB_WORKERS: "8"
+      GKM_RU_KP_WORKERS: "4"
+
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Create recovery branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          backup="backup-before-v350-${GITHUB_RUN_ID}"
+          git branch "$backup"
+          git push origin "$backup"
+          echo "BACKUP_BRANCH=$backup" >> "$GITHUB_ENV"
+
+      - name: Enrich official descriptions
+        run: python tools/gkm_v3452_1_official_ru_repair.py .
+
+      - name: Repair derived catalog files
+        env:
+          GKM_SEARCH_LITE_LIMIT: "15000"
+        run: python tools/gkm_v349_safe_repair.py
+
+      - name: Validate cards and descriptions
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check app.js
+          python -m py_compile tools/gkm_v3452_1_official_ru_repair.py
+          python tools/gkm_v350_description_audit.py
+          python tools/gkm_v349_integrity_audit.py --strict
+
+      - name: Commit repaired site
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gkm-v350-repair-bot"
+          git config user.email "gkm-v350-repair-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Apply V350 card colour and description repair"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Publish summary
+        if: always()
+        shell: bash
+        run: |
+          echo "### GKM V350 — карточки и описания" >> "$GITHUB_STEP_SUMMARY"
+          echo "Отчёт: \`TEST_REPORT_V350_CARDS_DESCRIPTIONS.json\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Ветка восстановления: \`${BACKUP_BRANCH:-not-created}\`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gkm-v350-cards-descriptions-report
+          retention-days: 30
+          path: TEST_REPORT_V350_CARDS_DESCRIPTIONS.json
