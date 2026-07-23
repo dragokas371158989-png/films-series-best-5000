@@ -1,89 +1,84 @@
 {
   "version": "V349",
   "status": "success",
-  "startedAt": "2026-07-23T19:37:21.590699+00:00",
-  "finishedAt": "2026-07-23T19:41:39.064583+00:00",
+  "startedAt": "2026-07-23T21:09:43.951137+00:00",
+  "finishedAt": "2026-07-23T21:13:58.155718+00:00",
   "steps": [
     {
       "label": "Archive malformed workflow filenames",
       "script": "internal:archive_malformed_workflows",
       "returnCode": 0,
-      "archived": [
-        {
-          "from": ".github/workflows/gkm_v3453_full_russian_site.yml gkm_v3453_sync_after_update.yml",
-          "to": ".github/workflows-disabled/gkm_v3453_full_russian_site.legacy.yml.txt"
-        }
-      ]
+      "archived": []
     },
     {
       "label": "Offline Russian cache synchronization",
       "script": "tools/gkm_v3453_1_sync_after_update.py",
       "returnCode": 0,
-      "startedAt": "2026-07-23T19:37:21.591221+00:00",
-      "finishedAt": "2026-07-23T19:38:29.582668+00:00"
+      "startedAt": "2026-07-23T21:09:43.951399+00:00",
+      "finishedAt": "2026-07-23T21:11:01.277178+00:00"
     },
     {
       "label": "Repair static page identity",
       "script": "tools/gkm_v349_repair_static_pages.py",
       "returnCode": 0,
-      "startedAt": "2026-07-23T19:38:29.582766+00:00",
-      "finishedAt": "2026-07-23T19:38:52.149626+00:00"
+      "startedAt": "2026-07-23T21:11:01.277274+00:00",
+      "finishedAt": "2026-07-23T21:11:21.550234+00:00"
     },
     {
       "label": "Rebuild root fast data",
       "script": "tools/build_fast_site_data.py",
       "returnCode": 0,
-      "startedAt": "2026-07-23T19:38:52.149723+00:00",
-      "finishedAt": "2026-07-23T19:40:39.373356+00:00"
+      "startedAt": "2026-07-23T21:11:21.550331+00:00",
+      "finishedAt": "2026-07-23T21:13:00.962804+00:00"
     },
     {
       "label": "Rebuild poster wall",
       "script": "tools/gkm_v344_build_poster_wall.py",
       "returnCode": 0,
-      "startedAt": "2026-07-23T19:40:39.373459+00:00",
-      "finishedAt": "2026-07-23T19:40:43.084316+00:00"
+      "startedAt": "2026-07-23T21:13:00.962933+00:00",
+      "finishedAt": "2026-07-23T21:13:04.513224+00:00"
     },
     {
       "label": "Compact root and mirror search indexes",
       "script": "tools/gkm_v3460_compact_search_index.py",
       "returnCode": 0,
-      "startedAt": "2026-07-23T19:40:43.084412+00:00",
-      "finishedAt": "2026-07-23T19:40:59.929176+00:00"
+      "startedAt": "2026-07-23T21:13:04.513323+00:00",
+      "finishedAt": "2026-07-23T21:13:20.400216+00:00"
     },
     {
       "label": "Rebuild anime top and studio data",
       "script": "tools/gkm_v3454_rebuild_anime_buttons.py",
       "returnCode": 0,
-      "startedAt": "2026-07-23T19:40:59.929273+00:00",
-      "finishedAt": "2026-07-23T19:41:04.464547+00:00"
+      "startedAt": "2026-07-23T21:13:20.400313+00:00",
+      "finishedAt": "2026-07-23T21:13:24.855064+00:00"
     },
     {
       "label": "Synchronize catalog metadata",
       "script": "tools/gkm_v3460_sync_meta.py",
       "returnCode": 0,
-      "startedAt": "2026-07-23T19:41:04.464640+00:00",
-      "finishedAt": "2026-07-23T19:41:08.451502+00:00"
+      "startedAt": "2026-07-23T21:13:24.855161+00:00",
+      "finishedAt": "2026-07-23T21:13:28.764537+00:00"
     },
     {
       "label": "Mirror fast data to /film",
       "script": "internal:mirror_fast_data",
       "returnCode": 0,
       "files": 3808,
-      "bytes": 339011502
+      "bytes": 339320171
     },
     {
       "label": "Refresh health snapshot",
       "script": "tools/gkm_v3460_health_audit.py",
       "returnCode": 0,
-      "startedAt": "2026-07-23T19:41:09.652868+00:00",
-      "finishedAt": "2026-07-23T19:41:13.307004+00:00"
+      "startedAt": "2026-07-23T21:13:30.042873+00:00",
+      "finishedAt": "2026-07-23T21:13:33.736762+00:00"
     },
     {
       "label": "Run final V349 integrity gate",
       "script": "tools/gkm_v349_integrity_audit.py",
       "returnCode": 0,
-      "startedAt": "2026-07-23T19:41:13.307118+00:00",
-      "finishedAt": "2026-07-23T19:41:39.064559+00:00"
+      "startedAt": "2026-07-23T21:13:33.736848+00:00",
+      "finishedAt": "2026-07-23T21:13:58.155700+00:00"
     }
   ]
 }

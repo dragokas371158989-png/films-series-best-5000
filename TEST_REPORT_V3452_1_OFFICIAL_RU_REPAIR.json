@@ -3,40 +3,941 @@
   "mode": "apply",
   "online": true,
   "stats": {
-    "previous_cache_items_imported": 0,
-    "prefetch_items": 103849,
-    "shikimori_total_mal_ids": 5930,
-    "shikimori_candidates": 5930,
-    "shikimori_titles_resolved": 5767,
-    "shikimori_batches_completed": 119,
-    "official_http_errors": 3,
-    "shikimori_batch_failures": 3,
-    "shikimori_individual_resolved": 150,
+    "prefetch_items": 112391,
+    "shikimori_total_mal_ids": 5926,
+    "shikimori_candidates": 13,
     "shikimori_unresolved": 13,
-    "shikimori_individual_requests": 163,
-    "kinopoisk_candidates": 0,
-    "tmdb_candidates": 0,
-    "primary_before": 96521,
-    "official_titles_applied": 5917,
-    "titles_localized": 5873,
-    "official_overviews_applied": 146,
-    "duplicates_removed": 1764,
-    "cross_source_duplicates_removed": 1764,
-    "primary_after": 94757,
-    "search_total": 96121,
-    "poster_wall_rows_localized": 93985,
-    "poster_wall_duplicates_removed": 1760,
-    "poster_seed_duplicates_removed": 110,
-    "poster_wall_total_after": 93985,
-    "derived_files_localized": 3497,
-    "derived_duplicates_removed": 40,
+    "shikimori_batches_completed": 1,
+    "shikimori_individual_requests": 13,
+    "kinopoisk_candidates": 9414,
+    "kinopoisk_titles_resolved": 179,
+    "official_http_errors": 9234,
+    "tmdb_candidates": 53454,
+    "tmdb_titles_resolved": 5932,
+    "tmdb_overviews_resolved": 4257,
+    "primary_before": 105063,
+    "genres_localized": 17509,
+    "official_titles_applied": 11979,
+    "official_overviews_applied": 4633,
+    "titles_localized": 560,
+    "descriptions_russianized": 3924,
+    "duplicates_removed": 1772,
+    "cross_source_duplicates_removed": 1772,
+    "primary_after": 103354,
+    "search_total": 104718,
+    "poster_wall_rows_localized": 102466,
+    "poster_wall_duplicates_removed": 19,
+    "poster_seed_duplicates_removed": 1,
+    "poster_wall_total_after": 102466,
+    "derived_files_localized": 3778,
     "ui_patched": 1,
-    "static_pages_localized": 1213,
-    "titles_cyrillic_after": 94757,
-    "titles_total_after": 94757,
+    "static_pages_localized": 16454,
+    "titles_cyrillic_after": 103354,
+    "titles_total_after": 103354,
     "latin_display_titles_after": 0,
-    "official_cache_items": 5917,
-    "merged_duplicate_alias_ids": 2658
+    "official_cache_items": 11903,
+    "merged_duplicate_alias_ids": 4366
   },
-  "fallback_transliterated_examples": []
+  "fallback_transliterated_examples": [
+    {
+      "id": "kp_1220920",
+      "ru": "Истребитель демонов",
+      "en": "Kimetsu no Yaiba",
+      "year": 2019,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1274280",
+      "ru": "Сага о Винланде",
+      "en": "Vinland Saga",
+      "year": 2019,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1381125",
+      "ru": "Магическая битва",
+      "en": "Jujutsu Kaisen",
+      "year": 2020,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_942544",
+      "ru": "Оне Пункх Ман",
+      "en": "One Punch Man",
+      "year": 2015,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Argos V3453"
+    },
+    {
+      "id": "kp_283290",
+      "ru": "Наруто",
+      "en": "Naruto",
+      "year": 2002,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_95323",
+      "ru": "Евангелион",
+      "en": "Shin Seiki Evangelion",
+      "year": 1995,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_257376",
+      "ru": "Берсерк",
+      "en": "Kenpu denki baruseruku",
+      "year": 1997,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_382731",
+      "ru": "Ван-Пис",
+      "en": "One Piece",
+      "year": 1999,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_707636",
+      "ru": "Невероятные приключения ДжоДжо",
+      "en": "JoJo no Kimyou na Bouken",
+      "year": 2012,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1238721",
+      "ru": "На твоей волне",
+      "en": "Kimi to, nami ni noretara",
+      "year": 2019,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_452973",
+      "ru": "Гуррен-Лаганн",
+      "en": "Tengen toppa gurren lagann",
+      "year": 2007,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1433828",
+      "ru": "Лимонные девочки",
+      "en": "Shoujo Ramune",
+      "year": 2016,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_5401195",
+      "ru": "Фрирен, провожающая в последний путь",
+      "en": "Sousou no Frieren",
+      "year": 2023,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_521613",
+      "ru": "Президент – горничная!",
+      "en": "Kaichou wa meido-sama!",
+      "year": 2010,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_41956",
+      "ru": "Конец Евангелиона",
+      "en": "Shinseiki Evangelion Gekijoban: Air/Magokoro wo, kimi ni",
+      "year": 1997,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1048155",
+      "ru": "Добро пожаловать в класс превосходства",
+      "en": "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e",
+      "year": 2017,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1096004",
+      "ru": "Проза бродячих псов. Фильм",
+      "en": "Bungo sutorei doggusu: deddo appuru",
+      "year": 2018,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_5428398",
+      "ru": "Рубеж Шангри-Ла",
+      "en": "Shangri-La Frontier: Kusoge Hunter, Kamige ni Idoman to su",
+      "year": 2023,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1103876",
+      "ru": "Девушки и танки",
+      "en": "Girls und Panzer das Finale",
+      "year": 2017,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_8236",
+      "ru": "D: Жажда крови",
+      "en": "Vampire Hunter D",
+      "year": 2001,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1231054",
+      "ru": "Госпожа Кагуя: В любви как на войне",
+      "en": "Kaguya-sama wa Kokurasetai: Tensai-tachi no Renai Zunousen",
+      "year": 2019,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_463031",
+      "ru": "Ад Данте: Анимированный эпос",
+      "en": "Dante's Inferno: An Animated Epic",
+      "year": 2010,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1175513",
+      "ru": "Убийца гоблинов",
+      "en": "Goblin Slayer",
+      "year": 2018,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_276480",
+      "ru": "Евангелион 1.0: Ты (не) один",
+      "en": "Evangelion: 1.0 You Are (Not) Alone",
+      "year": 2007,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_601774",
+      "ru": "Наруто 8: Кровавая тюрьма",
+      "en": "Gekijouban Naruto: Buraddo purizun",
+      "year": 2011,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_5134622",
+      "ru": "Великая небесная стена",
+      "en": "Tengoku Daimakyou",
+      "year": 2023,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_917289",
+      "ru": "Разве плохо искать себе пару в подземелье?",
+      "en": "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka",
+      "year": 2015,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1201287",
+      "ru": "Связанные миры",
+      "en": "Ashita sekai ga owaru to shite mo",
+      "year": 2019,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_84987",
+      "ru": "Последняя фантазия VII: Дети пришествия",
+      "en": "Fainaru fantajî sebun adobento chirudoren",
+      "year": 2005,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_5264039",
+      "ru": "Истребитель демонов: Собрание высших лун и деревня кузнецов",
+      "en": "Kimetsu no Yaiba: Jougen Shuuketsu, Soshite Katanakaji no Sato e",
+      "year": 2023,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_993582",
+      "ru": "Ганц: О – Миссия Осака",
+      "en": "Gantz: O",
+      "year": 2016,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_403013",
+      "ru": "Наруто 5",
+      "en": "Gekijô ban Naruto: Shippûden - Kizuna",
+      "year": 2008,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_566513",
+      "ru": "Сверхъестественное: Анимация",
+      "en": "Supernatural: The Anime",
+      "year": 2011,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_569215",
+      "ru": "Бакуман.",
+      "en": "Bakuman.",
+      "year": 2010,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_5447036",
+      "ru": "Истребитель демонов: На тренировку столпов",
+      "en": "Kimetsu no Yaiba: Hashira Geiko-hen",
+      "year": 2024,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1111916",
+      "ru": "Марш смерти в рапсодию параллельного мира",
+      "en": "Death March kara Hajimaru Isekai Kyousoukyoku",
+      "year": 2018,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_230611",
+      "ru": "Драконий жемчуг",
+      "en": "Dragon Ball",
+      "year": 1995,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_841287",
+      "ru": "И всё-таки мир прекрасен",
+      "en": "Soredemo sekai wa utsukushii",
+      "year": 2014,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1289116",
+      "ru": "Моя геройская академия. Фильм 2: Герои восстанут",
+      "en": "Boku no Hero Academia the Movie 2: Heroes:Rising",
+      "year": 2019,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": 46260,
+      "ru": "Круиз",
+      "en": "ナルト",
+      "year": 2002,
+      "type": "Аниме",
+      "source": "tmdb",
+      "localizationSource": "TMDB ru-RU V3452"
+    },
+    {
+      "id": "kp_933724",
+      "ru": "Бандитос",
+      "en": "Gyangusuta",
+      "year": 2015,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_6527080",
+      "ru": "Повелитель: Священное королевство",
+      "en": "Overlord Movie 3: Sei Oukoku-hen",
+      "year": 2024,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_481421",
+      "ru": "Учитель-мафиози Реборн!",
+      "en": "Katei Kyoshi Hitman Reborn!",
+      "year": 2006,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": 62715,
+      "ru": "Убийство на Тибре",
+      "en": "ドラゴンボール超（スーパー）",
+      "year": 2015,
+      "type": "Аниме",
+      "source": "tmdb",
+      "localizationSource": "TMDB ru-RU V3452"
+    },
+    {
+      "id": "kp_316233",
+      "ru": "Город чудищ",
+      "en": "Yoju toshi",
+      "year": 1987,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1376678",
+      "ru": "Эйфория",
+      "en": "Euphoria",
+      "year": 2011,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1301892",
+      "ru": "Психопаспорт: Грешники системы",
+      "en": "Psycho-Pass: Sinners of the System",
+      "year": 2019,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1204222",
+      "ru": "Колдунья в погонах. Фильм",
+      "en": "Gekijouban Youjo Senki",
+      "year": 2019,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_762022",
+      "ru": "Истории ран",
+      "en": "Kizumonogatari",
+      "year": 2015,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_6468597",
+      "ru": "Фэйбл",
+      "en": "The Fable",
+      "year": 2024,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_839108",
+      "ru": "Судьба: Ночь схватки. Клинков бесконечный край",
+      "en": "Fate/stay night: Unlimited Blade Works",
+      "year": 2014,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_5147334",
+      "ru": "Реинкарнация сильнейшего оммёдзи: Эти монстры слишком слабые по сравнению с моим ёкаем",
+      "en": "Saikyou Onmyouji no Isekai Tenseiki",
+      "year": 2023,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_95238",
+      "ru": "Пчелка Майя",
+      "en": "Mitsubachi Mâya no bôken",
+      "year": 1975,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_119318",
+      "ru": "Игра разума",
+      "en": "Maindo gemu",
+      "year": 2004,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1009284",
+      "ru": "Синий экзорцист 2",
+      "en": "Ao no ekusoshisuto: Kyoto fujô ô-hen",
+      "year": 2017,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_95267",
+      "ru": "Джек в стране чудес",
+      "en": "Jack and the Beanstalk",
+      "year": 1974,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_639033",
+      "ru": "Рыба",
+      "en": "Gyo",
+      "year": 2012,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_9222873",
+      "ru": "Тацуки Фудзимото: С 17 до 26",
+      "en": "Tatsuki Fujimoto 17-26",
+      "year": 2025,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1348051",
+      "ru": "Дарованный",
+      "en": "Given",
+      "year": 2020,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1042658",
+      "ru": "Блейм!",
+      "en": "Blame! Movie",
+      "year": 2017,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_4843390",
+      "ru": "Истребитель демонов: Битва в доме Цудзуми",
+      "en": "Kimetsu no Yaiba: Tsuzumi Yashiki-hen",
+      "year": 2021,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_733281",
+      "ru": "Одиннадцать молний",
+      "en": "Inazuma Eleven",
+      "year": 2008,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_423069",
+      "ru": "Граница пустоты: Сад грешников. Фильм пятый",
+      "en": "Gekijô ban Kara no kyôkai: Dai go shô - Mujun rasen",
+      "year": 2008,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": 12609,
+      "ru": "Помогите! Я рыба",
+      "en": "ドラゴンボール",
+      "year": 1986,
+      "type": "Аниме",
+      "source": "tmdb",
+      "localizationSource": "TMDB ru-RU V3452"
+    },
+    {
+      "id": "kp_676944",
+      "ru": "Сумеречная Дева и Амнезия",
+      "en": "Dusk Maiden of Amnesia",
+      "year": 2012,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_803225",
+      "ru": "Театр тьмы",
+      "en": "Yami shibai",
+      "year": 2013,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_455441",
+      "ru": "Милый дом Чии",
+      "en": "Chi's Sweet Home",
+      "year": 2008,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_591748",
+      "ru": "Теккен: Кровная месть",
+      "en": "Tekken: Blood Vengeance",
+      "year": 2011,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1111801",
+      "ru": "Кошачий рай",
+      "en": "Nekopara",
+      "year": 2017,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": 61222,
+      "ru": "Дом",
+      "en": "BoJack Horseman",
+      "year": 2014,
+      "type": "Аниме",
+      "source": "tmdb",
+      "localizationSource": "TMDB ru-RU V3452"
+    },
+    {
+      "id": "kp_978388",
+      "ru": "Тёмный дворецкий: Глава об убийстве",
+      "en": "Black Butler: Book of Murder",
+      "year": 2014,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_4504503",
+      "ru": "Баки Ханма",
+      "en": "Hanma Baki: Son of Ogre",
+      "year": 2021,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1313575",
+      "ru": "Путешествие Элайны",
+      "en": "Majo no Tabitabi",
+      "year": 2020,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_591751",
+      "ru": "Хелло Китти",
+      "en": "Hello Kitty and Friends",
+      "year": 1991,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1354115",
+      "ru": "Моё семнадцатое лето",
+      "en": "Cider no You ni Kotoba ga Wakiagaru",
+      "year": 2020,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_7513002",
+      "ru": "Звёзды классики",
+      "en": "Classic Stars",
+      "year": 2025,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_4999603",
+      "ru": "Дзюндзи Ито: Маньяк",
+      "en": "Itou Junji: Maniac",
+      "year": 2023,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": 70881,
+      "ru": "Анна Каренина",
+      "en": "BORUTO-ボルト- NARUTO NEXT GENERATIONS",
+      "year": 2017,
+      "type": "Аниме",
+      "source": "tmdb",
+      "localizationSource": "TMDB ru-RU V3452"
+    },
+    {
+      "id": "kp_4640396",
+      "ru": "Плавучий дом",
+      "en": "Ame wo Tsugeru Hyouryuu Danchi",
+      "year": 2022,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": 31911,
+      "ru": "Мистер Прекрасный",
+      "en": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+      "year": 2009,
+      "type": "Аниме",
+      "source": "tmdb",
+      "localizationSource": "TMDB ru-RU V3452"
+    },
+    {
+      "id": "kp_5962119",
+      "ru": "Вечно дисквалифицирован",
+      "en": "Isekai Shikkaku",
+      "year": 2024,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1252453",
+      "ru": "Почему Вы здесь, сэнсэй?",
+      "en": "Nande Koko ni Sensei ga!?",
+      "year": 2019,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_408720",
+      "ru": "Двенадцать месяцев",
+      "en": "Sekai Meisaku Douwa: Mori wa Ikiteiru",
+      "year": 1980,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_843903",
+      "ru": "Танец клинка",
+      "en": "Seirei Tsukai no Blade Dance",
+      "year": 2014,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": 31132,
+      "ru": "Киллер",
+      "en": "Regular Show",
+      "year": 2010,
+      "type": "Аниме",
+      "source": "tmdb",
+      "localizationSource": "TMDB ru-RU V3452"
+    },
+    {
+      "id": "kp_818882",
+      "ru": "Игры богов",
+      "en": "Kamigami no asobi",
+      "year": 2014,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1443814",
+      "ru": "Спригган",
+      "en": "Spriggan",
+      "year": 2022,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_841846",
+      "ru": "Хори и Миямура",
+      "en": "Hori-san to Miyamura-kun",
+      "year": 2012,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": 890,
+      "ru": "Сестра сна",
+      "en": "新世紀エヴァンゲリオン",
+      "year": 1995,
+      "type": "Аниме",
+      "source": "tmdb",
+      "localizationSource": "TMDB ru-RU V3452"
+    },
+    {
+      "id": "kp_256493",
+      "ru": "Школьные войны",
+      "en": "Ikki tousen",
+      "year": 2003,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_490129",
+      "ru": "Упавшая с небес",
+      "en": "Sora no otoshimono",
+      "year": 2009,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_5111566",
+      "ru": "Убийца романтики",
+      "en": "Romantic Killer",
+      "year": 2022,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1138887",
+      "ru": "Сияние утра и Касэ-сан",
+      "en": "Asagao to Kase-san.",
+      "year": 2018,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1311121",
+      "ru": "Да как меня можешь любить только ты?",
+      "en": "Ore wo Suki nano wa Omae dake ka yo",
+      "year": 2019,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": 30991,
+      "ru": "Проклятие живых мертвецов",
+      "en": "カウボーイビバップ",
+      "year": 1998,
+      "type": "Аниме",
+      "source": "tmdb",
+      "localizationSource": "TMDB ru-RU V3452"
+    },
+    {
+      "id": "kp_1212708",
+      "ru": "Бегущий по лезвию: Чёрный лотос",
+      "en": "Blade Runner: Black Lotus",
+      "year": 2021,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_4511972",
+      "ru": "Духовные хроники",
+      "en": "Seirei Gensouki",
+      "year": 2021,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1372664",
+      "ru": "Без ума от его пальцев: Только мы вдвоём после закрытия салона",
+      "en": "Ore no Yubi de Midarero.: Heitengo Futarikiri no Salon de...",
+      "year": 2020,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_574179",
+      "ru": "Принцесса медуз",
+      "en": "Kurage hime",
+      "year": 2010,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    },
+    {
+      "id": "kp_1292641",
+      "ru": "Клинок бессмертного",
+      "en": "Mugen no Juunin: Immortal",
+      "year": 2019,
+      "type": "Аниме",
+      "source": "kinopoisk_auto_v339",
+      "localizationSource": "Existing Russian"
+    }
+  ]
 }

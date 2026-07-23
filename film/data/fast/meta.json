@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-07-23T19:41:07Z",
-  "rawCount": 105063,
-  "count": 102485,
-  "dedupeRemoved": 2578,
+  "generatedAt": "2026-07-23T21:13:27Z",
+  "rawCount": 103354,
+  "count": 102469,
+  "dedupeRemoved": 885,
   "pageSize": 60,
   "homeLimit": 18,
   "genres": [
@@ -261,37 +261,37 @@
   ],
   "pages": {
     "all": {
-      "count": 102485,
-      "pages": 1709,
+      "count": 102469,
+      "pages": 1708,
       "pageSize": 60
     },
     "movies": {
-      "count": 53869,
-      "pages": 898,
+      "count": 54011,
+      "pages": 901,
       "pageSize": 60
     },
     "series": {
-      "count": 23519,
+      "count": 23511,
       "pages": 392,
       "pageSize": 60
     },
     "anime": {
-      "count": 11060,
-      "pages": 185,
+      "count": 10846,
+      "pages": 181,
       "pageSize": 60
     },
     "cartoons": {
-      "count": 14037,
-      "pages": 234,
+      "count": 14101,
+      "pages": 236,
       "pageSize": 60
     },
     "new": {
-      "count": 5857,
+      "count": 5853,
       "pages": 98,
       "pageSize": 60
     },
     "popular": {
-      "count": 15318,
+      "count": 15319,
       "pages": 256,
       "pageSize": 60
     },
@@ -316,10 +316,10 @@
   "metaSyncVersion": "V3460.2",
   "metaSyncSource": "data/fast/search_index.json",
   "catalogBreakdown": {
-    "movies": 53869,
-    "series": 23519,
-    "anime": 11060,
-    "cartoons": 14037,
+    "movies": 54011,
+    "series": 23511,
+    "anime": 10846,
+    "cartoons": 14101,
     "other": 0
   }
 }

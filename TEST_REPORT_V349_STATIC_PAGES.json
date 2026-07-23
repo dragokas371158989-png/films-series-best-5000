@@ -1,13 +1,13 @@
 {
   "version": "V349",
-  "generatedAt": "2026-07-23T19:38:52.002783+00:00",
+  "generatedAt": "2026-07-23T21:11:21.407818+00:00",
   "status": "success",
   "stats": {
     "pages": 23926,
     "matchedByTmdb": 4780,
-    "matchedByTitle": 11674,
-    "safeFallback": 7472,
-    "updated": 23926,
+    "matchedByTitle": 12349,
+    "safeFallback": 6797,
+    "updated": 7974,
     "unresolved": 0
   },
   "unresolvedExamples": []

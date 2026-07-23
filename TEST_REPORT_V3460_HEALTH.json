@@ -1,15 +1,15 @@
 {
   "version": "V3460.1",
   "status": "healthy",
-  "generatedAt": "2026-07-23T19:41:13.272939+00:00",
-  "commit": "3c2f10da2701f23c690b05f8f31e7e6ba8002463",
-  "runUrl": "https://github.com/dragokas371158989-png/films-series-best-5000/actions/runs/30038599683",
+  "generatedAt": "2026-07-23T21:13:33.703527+00:00",
+  "commit": "0f54fb9b1b53a2c612cc1ceeff97c37c3b2f885e",
+  "runUrl": "https://github.com/dragokas371158989-png/films-series-best-5000/actions/runs/30040252935",
   "summary": {
-    "catalogRecords": 102485,
+    "catalogRecords": 102469,
     "searchLiteRecords": 15000,
     "animeTopRecords": 100,
     "studioRecords": 12,
-    "posterWallRecords": 102485,
+    "posterWallRecords": 102469,
     "staticPages": 23927,
     "untranslatedTitles": 0,
     "latinGenres": 0,
@@ -30,14 +30,14 @@
       "name": "Файл style.css",
       "ok": true,
       "level": "critical",
-      "details": "42191 байт"
+      "details": "44135 байт"
     },
     {
       "id": "file:app.js",
       "name": "Файл app.js",
       "ok": true,
       "level": "critical",
-      "details": "730546 байт"
+      "details": "732438 байт"
     },
     {
       "id": "file:features_v344.js",
@@ -58,21 +58,21 @@
       "name": "Файл data/fast/search_index.json",
       "ok": true,
       "level": "critical",
-      "details": "88607754 байт"
+      "details": "88614542 байт"
     },
     {
       "id": "file:data/fast/search_lite.json",
       "name": "Файл data/fast/search_lite.json",
       "ok": true,
       "level": "critical",
-      "details": "14664443 байт"
+      "details": "14664779 байт"
     },
     {
       "id": "file:data/fast/meta.json",
       "name": "Файл data/fast/meta.json",
       "ok": true,
       "level": "critical",
-      "details": "6775 байт"
+      "details": "6774 байт"
     },
     {
       "id": "file:data/fast/poster_wall_v333/manifest.json",
@@ -86,21 +86,21 @@
       "name": "Файл data/fast/anime_top_manual.json",
       "ok": true,
       "level": "critical",
-      "details": "87645 байт"
+      "details": "87534 байт"
     },
     {
       "id": "file:data/fast/anime_studios_top.json",
       "name": "Файл data/fast/anime_studios_top.json",
       "ok": true,
       "level": "critical",
-      "details": "4496 байт"
+      "details": "4499 байт"
     },
     {
       "id": "file:data/fast/anime_studios_detail.json",
       "name": "Файл data/fast/anime_studios_detail.json",
       "ok": true,
       "level": "critical",
-      "details": "456292 байт"
+      "details": "441533 байт"
     },
     {
       "id": "js:app.js",
@@ -128,7 +128,7 @@
       "name": "Основной каталог",
       "ok": true,
       "level": "critical",
-      "details": "102485 записей"
+      "details": "102469 записей"
     },
     {
       "id": "search:duplicates",
@@ -170,7 +170,7 @@
       "name": "Счётчик meta.json",
       "ok": true,
       "level": "warning",
-      "details": "meta=102485, каталог=102485"
+      "details": "meta=102469, каталог=102469"
     },
     {
       "id": "anime:top",
@@ -191,7 +191,7 @@
       "name": "3D-стена",
       "ok": true,
       "level": "critical",
-      "details": "102485 карточек, 22 частей"
+      "details": "102469 карточек, 22 частей"
     },
     {
       "id": "wall:duplicates",
@@ -230,11 +230,11 @@
       },
       "style.css": {
         "exists": true,
-        "size": 42191
+        "size": 44135
       },
       "app.js": {
         "exists": true,
-        "size": 730546
+        "size": 732438
       },
       "features_v344.js": {
         "exists": true,
@@ -246,15 +246,15 @@
       },
       "data/fast/search_index.json": {
         "exists": true,
-        "size": 88607754
+        "size": 88614542
       },
       "data/fast/search_lite.json": {
         "exists": true,
-        "size": 14664443
+        "size": 14664779
       },
       "data/fast/meta.json": {
         "exists": true,
-        "size": 6775
+        "size": 6774
       },
       "data/fast/poster_wall_v333/manifest.json": {
         "exists": true,
@@ -262,15 +262,15 @@
       },
       "data/fast/anime_top_manual.json": {
         "exists": true,
-        "size": 87645
+        "size": 87534
       },
       "data/fast/anime_studios_top.json": {
         "exists": true,
-        "size": 4496
+        "size": 4499
       },
       "data/fast/anime_studios_detail.json": {
         "exists": true,
-        "size": 456292
+        "size": 441533
       }
     },
     "javascript": {
@@ -289,7 +289,7 @@
     },
     "search": {
       "ok": true,
-      "count": 102485,
+      "count": 102469,
       "emptyIds": 0,
       "emptyTitles": 0,
       "duplicateIds": 0,
@@ -299,19 +299,19 @@
       "latinGenres": 0,
       "latinGenreExamples": [],
       "types": {
-        "Фильм": 53869,
-        "Сериал": 23519,
-        "Мультфильм": 14037,
-        "Аниме": 11060
+        "Фильм": 54011,
+        "Сериал": 23511,
+        "Мультфильм": 14101,
+        "Аниме": 10846
       }
     },
     "posterWall": {
       "ok": true,
-      "manifestTotal": 102485,
+      "manifestTotal": 102469,
       "manifestVersion": "v344-strict-kind-id-dedupe-poster-wall-2026-07-12",
-      "sourceTotal": 102485,
+      "sourceTotal": 102469,
       "shards": 22,
-      "rows": 102485,
+      "rows": 102469,
       "duplicateIdsInsideKinds": 0,
       "parseErrors": []
     },
@@ -321,10 +321,10 @@
       "examples": []
     },
     "types": {
-      "Фильм": 53869,
-      "Сериал": 23519,
-      "Мультфильм": 14037,
-      "Аниме": 11060
+      "Фильм": 54011,
+      "Сериал": 23511,
+      "Мультфильм": 14101,
+      "Аниме": 10846
     }
   }
 }
