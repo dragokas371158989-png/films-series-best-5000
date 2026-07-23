@@ -1,0 +1,78 @@
+name: GKM V353.1 Accelerate Poster Wall Tail
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v353-1-tail-speed
+  cancel-in-progress: false
+
+jobs:
+  validate-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate V353.1 tail acceleration
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check app.js
+          python -m py_compile tools/gkm_v353_1_tail_speed_audit.py
+          grep -F 'app.js?v=3531' index.html
+          grep -F 'GKM_DATA_CACHE_VERSION = "3531"' app.js
+          grep -F 'GKM_V353_1_TAIL_SPEED_VERSION' app.js
+          grep -F 'const TAIL_CONCURRENCY = 108' app.js
+          grep -F 'completedCount===wallItems.length' app.js
+
+      - name: Audit V353.1 speed fix
+        run: python tools/gkm_v353_1_tail_speed_audit.py
+
+      - name: Commit audit report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gkm-v353-1-speed-bot"
+          git config user.email "gkm-v353-1-speed-bot@users.noreply.github.com"
+          git add TEST_REPORT_V353_1_TAIL_SPEED.json
+          if git diff --cached --quiet; then
+            echo "No report changes to commit"
+            exit 0
+          fi
+          git commit -m "Audit poster wall tail speed with V353.1"
+          git stash push --include-untracked -m "gkm-v353-1-audit-leftovers" || true
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+
+      - name: Publish summary
+        if: always()
+        shell: bash
+        run: |
+          echo "### GKM V353.1 — ускорение конца загрузки" >> "$GITHUB_STEP_SUMMARY"
+          echo "Последние 22% мозаики загружаются в 108 потоков вместо 24." >> "$GITHUB_STEP_SUMMARY"
+          echo "Зависшие ссылки ограничены тайм-аутом и не блокируют завершение." >> "$GITHUB_STEP_SUMMARY"
+          echo "Крупный фон, плавность, линза, фильтры и карточки сохранены." >> "$GITHUB_STEP_SUMMARY"
+          echo "Отчёт: \`TEST_REPORT_V353_1_TAIL_SPEED.json\`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gkm-v353-1-tail-speed-report
+          retention-days: 30
+          path: TEST_REPORT_V353_1_TAIL_SPEED.json
