@@ -1,0 +1,83 @@
+{
+  "version": "V353",
+  "goal": "large posters first, then a progressive full-screen small mosaic",
+  "staticChecks": {
+    "app_cache_v353": true,
+    "v353_runtime_marker": true,
+    "full_viewport_balanced_layout": true,
+    "large_posters_load_first": true,
+    "small_posters_fade_over_background": true,
+    "no_dark_small_placeholder_grid": true,
+    "background_kept_until_tile_is_ready": true,
+    "no_artificial_poster_repeats": true,
+    "filters_lens_preview_and_open_preserved": true,
+    "runtime_test_api": true
+  },
+  "layoutCases": [
+    {
+      "input": {
+        "count": 4321,
+        "width": 1920,
+        "height": 1080
+      },
+      "rows": 40,
+      "minimumColumns": 108,
+      "maximumColumns": 109,
+      "checks": {
+        "all_items_have_cells": true,
+        "all_rows_are_balanced": true,
+        "rows_fill_full_height": true,
+        "every_row_fills_full_width": true
+      }
+    },
+    {
+      "input": {
+        "count": 5200,
+        "width": 2560,
+        "height": 1440
+      },
+      "rows": 44,
+      "minimumColumns": 118,
+      "maximumColumns": 119,
+      "checks": {
+        "all_items_have_cells": true,
+        "all_rows_are_balanced": true,
+        "rows_fill_full_height": true,
+        "every_row_fills_full_width": true
+      }
+    },
+    {
+      "input": {
+        "count": 2600,
+        "width": 1366,
+        "height": 768
+      },
+      "rows": 31,
+      "minimumColumns": 83,
+      "maximumColumns": 84,
+      "checks": {
+        "all_items_have_cells": true,
+        "all_rows_are_balanced": true,
+        "rows_fill_full_height": true,
+        "every_row_fills_full_width": true
+      }
+    },
+    {
+      "input": {
+        "count": 9000,
+        "width": 390,
+        "height": 844
+      },
+      "rows": 114,
+      "minimumColumns": 78,
+      "maximumColumns": 79,
+      "checks": {
+        "all_items_have_cells": true,
+        "all_rows_are_balanced": true,
+        "rows_fill_full_height": true,
+        "every_row_fills_full_width": true
+      }
+    }
+  ],
+  "mathematicalLayoutPassed": true
+}
