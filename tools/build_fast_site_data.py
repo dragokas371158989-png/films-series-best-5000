@@ -13,6 +13,12 @@ MIN_VOTES_FOR_TOP = int(os.environ.get("GKM_MIN_VOTES_FOR_TOP", "300"))
 SEARCH_LITE_LIMIT = int(os.environ.get("GKM_SEARCH_LITE_LIMIT", "15000"))
 TMDB_ENABLED = False
 TMDB_OFF_VERSION = "v101-full-fast-search-kinopoisk-data-2026-06-17"
+PRESERVED_FAST_PATHS = (
+    "anime_top_manual.json",
+    "anime_studios_top.json",
+    "anime_studios_detail.json",
+    "poster_wall_v333",
+)
 
 GENRE_MAP = {
     "10749":"Мелодрама","36":"История","28":"Боевик","12":"Приключения","16":"Мультфильм","35":"Комедия","80":"Криминал",
@@ -248,26 +254,34 @@ def all_names(item):
     return [v for v in vals if v]
 
 def title_rule_for(item):
-    hay = norm_latin(" ".join(all_names(item)))
+    normalized_names = {
+        norm_latin(value)
+        for value in all_names(item)
+        if norm_latin(value)
+    }
     best = None
     best_len = 0
     for key, ru, aliases in TITLE_RULES:
         candidates = [key] + aliases
         for c in candidates:
             nc = norm_latin(c)
-            if nc and nc in hay and len(nc) > best_len:
+            # Exact aliases only. Substring matching changed unrelated titles:
+            # "Roofman" matched "fma", and "Jojo Rabbit" matched "jojo".
+            if nc and nc in normalized_names and len(nc) > best_len:
                 best = (key, ru, aliases)
                 best_len = len(nc)
     return best
 
 def title_of(item):
-    rule = title_rule_for(item)
-    if rule:
-        return rule[1]
+    # Existing official Russian titles are authoritative. TITLE_RULES are only
+    # a fallback for records that do not yet have a Cyrillic title.
     for k in ("ru", "title_ru", "ruTitle", "nameRu", "titleRu", "russian"):
         v = clean_text(item.get(k))
         if v and has_cyr(v):
             return v
+    rule = title_rule_for(item)
+    if rule:
+        return rule[1]
     return clean_text(item.get("title") or item.get("name") or item.get("nameRu") or item.get("nameEn") or item.get("en") or item.get("originalTitle") or item.get("titleOriginal") or item.get("nameOriginal") or item.get("original_title") or "")
 
 def en_of(item):
@@ -279,7 +293,11 @@ def en_of(item):
 
 def aliases_of(item):
     vals = []
-    rule = title_rule_for(item)
+    has_official_ru = any(
+        clean_text(item.get(key)) and has_cyr(item.get(key))
+        for key in ("ru", "title_ru", "ruTitle", "nameRu", "titleRu", "russian")
+    )
+    rule = None if has_official_ru else title_rule_for(item)
     if rule:
         vals += [rule[0], rule[1]] + list(rule[2])
     vals += all_names(item)
@@ -527,13 +545,14 @@ def compact_text(*parts, limit=800):
     return clean_text(" ".join(str(x or "") for x in parts))[:limit]
 
 def card_item(raw, i):
-    title = title_of(raw)
+    item_id = stable_id(raw, i)
+    title = title_of(raw) or f"Проект без названия {item_id}"
     en = en_of(raw)
     genres = genres_of(raw)
     item_type = type_of(raw)
 
     x = {
-        "id": stable_id(raw, i),
+        "id": item_id,
         "ru": title,
         "en": en,
         "aliases": aliases_of(raw),
@@ -546,6 +565,13 @@ def card_item(raw, i):
         "genres": genres,
         "overview": overview_of(raw),
     }
+    merged_ids = [
+        clean_text(value)
+        for value in (raw.get("mergedDuplicateIds") or [])
+        if clean_text(value) and clean_text(value) != x["id"]
+    ]
+    if merged_ids:
+        x["mergedDuplicateIds"] = list(dict.fromkeys(merged_ids))
     if not x["overview"]:
         x["overview"] = generated_overview(x["ru"], x["type"], x["year"], x["genres"])
         x["overviewGenerated"] = True
@@ -603,27 +629,29 @@ def quality(x):
     )
 
 def canonical_rule_key(item):
-    hay = norm_latin(" ".join([item.get("ru",""), item.get("en",""), " ".join(item.get("aliases", []))]))
+    # Do not collapse a specific official Russian title to a franchise base.
+    if has_cyr(item.get("ru")):
+        return ""
+    normalized_names = {
+        norm_latin(value)
+        for value in [
+            item.get("ru", ""),
+            item.get("en", ""),
+            *(item.get("aliases", []) or []),
+        ]
+        if norm_latin(value)
+    }
     best = ""
     best_len = 0
     for key, ru, aliases in TITLE_RULES:
         candidates = [key, ru] + aliases
         for c in candidates:
             nc = norm_latin(c)
-            if nc and nc in hay and len(nc) > best_len:
+            if nc and nc in normalized_names and len(nc) > best_len:
                 best = norm_latin(ru)
                 best_len = len(nc)
     if best:
-        # сохраняем сезон/часть, чтобы не склеить разные сезоны
-        season = ""
-        m = re.search(r"(season|сезон)\s*(\d+)", hay)
-        if m:
-            season = " season " + m.group(2)
-        part = ""
-        m2 = re.search(r"(part|часть)\s*(\d+)", hay)
-        if m2:
-            part = " part " + m2.group(2)
-        return best + season + part
+        return best
     return ""
 
 def dedupe_key(item):
@@ -645,6 +673,46 @@ def collect_items():
         raw.extend(items)
     return raw
 
+def merge_deduped_items(winner, loser):
+    result = dict(winner)
+
+    aliases, seen_aliases = [], set()
+    for value in [
+        *(winner.get("aliases") or []),
+        winner.get("ru"),
+        winner.get("en"),
+        *(loser.get("aliases") or []),
+        loser.get("ru"),
+        loser.get("en"),
+    ]:
+        value = clean_text(value)
+        key = norm_latin(value)
+        if value and key and key not in seen_aliases:
+            seen_aliases.add(key)
+            aliases.append(value)
+    result["aliases"] = aliases[:40]
+
+    merged_ids, seen_ids = [], set()
+    for value in [
+        *(winner.get("mergedDuplicateIds") or []),
+        loser.get("id"),
+        *(loser.get("mergedDuplicateIds") or []),
+    ]:
+        value = clean_text(value)
+        if value and value != clean_text(result.get("id")) and value not in seen_ids:
+            seen_ids.add(value)
+            merged_ids.append(value)
+    if merged_ids:
+        result["mergedDuplicateIds"] = merged_ids
+
+    for key, value in loser.items():
+        if key in {"id", "aliases", "mergedDuplicateIds"}:
+            continue
+        if result.get(key) in (None, "", [], {}) and value not in (None, "", [], {}):
+            result[key] = value
+    return result
+
+
 def dedupe(raw_items):
     best, skipped = {}, 0
     type_stats = {"Фильм":0, "Сериал":0, "Аниме":0, "Мультфильм":0}
@@ -655,8 +723,14 @@ def dedupe(raw_items):
             skipped += 1
             continue
         key = dedupe_key(item)
-        if key not in best or quality(item) > quality(best[key]):
+        if key not in best:
             best[key] = item
+            continue
+        current = best[key]
+        if quality(item) > quality(current):
+            best[key] = merge_deduped_items(item, current)
+        else:
+            best[key] = merge_deduped_items(current, item)
     out = list(best.values())
     for x in out:
         type_stats[x.get("type", "Фильм")] = type_stats.get(x.get("type","Фильм"), 0) + 1
@@ -676,7 +750,7 @@ def page_item(x):
         "player", "playerUrl", "video", "videoUrl", "url", "src", "iframe",
         "rutube", "watchUrl", "watch", "trailer", "trailerUrl", "players",
         "videoLinks", "links", "sources", "tmdbId", "tmdb_id", "kinopoiskId",
-        "filmId", "mal_id", "malId", "shikimori_id"
+        "filmId", "mal_id", "malId", "shikimori_id", "mergedDuplicateIds"
     )
     out = {}
     for key in keep:
@@ -743,6 +817,7 @@ def search_item(x):
         "search": search_text,
         "recScore": x.get("recScore"),
         "overviewGenerated": bool(x.get("overviewGenerated")),
+        "mergedDuplicateIds": x.get("mergedDuplicateIds") or [],
     }
 
 def main():
@@ -833,6 +908,20 @@ def main():
     save_json(FAST_TMP_DIR / "search_index.json", search_index)
     save_json(FAST_TMP_DIR / "search_lite.json", search_lite)
     save_json(FAST_TMP_DIR / "meta.json", meta)
+
+    # Keep derived assets available during the atomic directory swap. The
+    # scheduled workflow rebuilds them immediately afterwards, but an
+    # interrupted build must not break the live anime buttons or 3D wall.
+    if FAST_DIR.exists():
+        for relative in PRESERVED_FAST_PATHS:
+            source = FAST_DIR / relative
+            target = FAST_TMP_DIR / relative
+            if not source.exists() or target.exists():
+                continue
+            if source.is_dir():
+                shutil.copytree(source, target)
+            else:
+                shutil.copy2(source, target)
 
     if FAST_DIR.exists():
         shutil.rmtree(FAST_DIR)

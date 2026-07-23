@@ -169,7 +169,9 @@ def inspect_search_index(path: Path) -> dict:
         title = title_of(item)
         if not title:
             empty_titles += 1
-        elif not CYR.search(title):
+        elif not CYR.search(title) and not (
+            re.sub(r"[\W_]+", "", title, flags=re.UNICODE).isdigit()
+        ):
             untranslated_titles.append({"id": iid, "title": title})
 
         for genre in genres_of(item):

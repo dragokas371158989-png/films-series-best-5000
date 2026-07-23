@@ -43,6 +43,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "TEST_REPORT_V3453_1_FULL_RUSSIAN.json"
 OFFICIAL_CACHE_OUT = ROOT / "data" / "ru_complete_cache_v3453_1.json"
 MACHINE_CACHE_PATH = ROOT / "data" / "ru_machine_cache_v3453_1.json"
+SEARCH_LITE_LIMIT = int(os.environ.get("GKM_SEARCH_LITE_LIMIT", "15000"))
 
 CYR = re.compile(r"[А-Яа-яЁё]")
 LAT = re.compile(r"[A-Za-z]")
@@ -843,7 +844,7 @@ def rebuild_search(items: list[dict]):
             "poster": row["poster"], "genres": row["genres"],
             "search": row["search"],
         }
-        for row in rows
+        for row in rows[:max(1000, min(SEARCH_LITE_LIMIT, len(rows)))]
     ]
     for base in (ROOT / "data" / "fast", ROOT / "film" / "data" / "fast"):
         write_json(base / "search_index.json", rows)
@@ -895,8 +896,8 @@ def update_json_tree(value: Any, by_id: dict[str, dict]) -> bool:
 
 def update_derived_json(by_id: dict[str, dict]):
     patterns = (
-        "data/fast/pages/*.json",
-        "film/data/fast/pages/*.json",
+        "data/fast/pages/**/*.json",
+        "film/data/fast/pages/**/*.json",
         "data/fast/home.json",
         "film/data/fast/home.json",
         "anime_updates.json",
@@ -988,7 +989,13 @@ def update_static_pages(by_id: dict[str, dict], stats: Counter):
     for path in film.glob("*.html"):
         text = path.read_text(encoding="utf-8", errors="replace")
         match = re.search(r'data-id=["\']([^"\']+)', text)
-        iid = match.group(1) if match else path.stem
+        # A numeric filename is a provider-specific ID, not the stable catalog
+        # ID. Falling back to path.stem corrupted thousands of static pages
+        # when IDs from TMDB, series and anime happened to collide.
+        if not match:
+            stats["static_pages_skipped_without_stable_id"] += 1
+            continue
+        iid = match.group(1)
         item = by_id.get(str(iid))
         if not item:
             continue
