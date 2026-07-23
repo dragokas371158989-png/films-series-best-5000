@@ -1,0 +1,82 @@
+name: GKM V351 Repair All Card Details
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v351-all-card-details
+  cancel-in-progress: false
+
+jobs:
+  repair-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate V351 UI repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check app.js
+          python -m py_compile tools/gkm_v351_all_card_details_audit.py
+          grep -F 'app.js?v=351' index.html
+          grep -F 'style.css?v=351' index.html
+          grep -F 'GKM_DATA_CACHE_VERSION = "351"' app.js
+
+      - name: Audit every catalog type
+        run: python tools/gkm_v351_all_card_details_audit.py
+
+      - name: Run full integrity audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f tools/gkm_v349_integrity_audit.py ]]; then
+            python tools/gkm_v349_integrity_audit.py --strict
+          else
+            echo "Optional V349 integrity audit is not present; V351 audit completed."
+          fi
+
+      - name: Commit audit report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gkm-v351-repair-bot"
+          git config user.email "gkm-v351-repair-bot@users.noreply.github.com"
+          git add TEST_REPORT_V351_ALL_CARD_DETAILS.json
+          if git diff --cached --quiet; then
+            echo "No report changes to commit"
+            exit 0
+          fi
+          git commit -m "Audit all card details with V351"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Publish summary
+        if: always()
+        shell: bash
+        run: |
+          echo "### GKM V351 — все карточки" >> "$GITHUB_STEP_SUMMARY"
+          echo "Проверены фильмы, сериалы, аниме, мультфильмы, игры и книги/манга." >> "$GITHUB_STEP_SUMMARY"
+          echo "Отчёт: \`TEST_REPORT_V351_ALL_CARD_DETAILS.json\`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gkm-v351-all-card-details-report
+          retention-days: 30
+          path: TEST_REPORT_V351_ALL_CARD_DETAILS.json
