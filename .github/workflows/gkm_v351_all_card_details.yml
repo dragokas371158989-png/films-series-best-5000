@@ -62,7 +62,11 @@ jobs:
             exit 0
           fi
           git commit -m "Audit all card details with V351"
-          git pull --rebase origin main
+          # Полный аудит может обновить дополнительные отчёты. Они не относятся
+          # к коммиту V351, поэтому временно убираем их перед rebase.
+          git stash push --include-untracked -m "gkm-v351-audit-leftovers" || true
+          git fetch origin main
+          git rebase origin/main
           git push origin HEAD:main
 
       - name: Publish summary
