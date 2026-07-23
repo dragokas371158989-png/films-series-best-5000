@@ -43,6 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
+const GKM_DATA_CACHE_VERSION = "350";
 const HOME_URL = `${FAST_BASE}/home.json`;
 const META_URL = `${FAST_BASE}/meta.json`;
 const SEARCH_URL = `${FAST_BASE}/search_index.json`;
@@ -168,8 +169,14 @@ function setStatus(text) {
   if (node) node.textContent = text || "";
 }
 
+function withDataVersion(url) {
+  const value = String(url || "");
+  if (value.includes(`gkmv=${GKM_DATA_CACHE_VERSION}`)) return value;
+  return `${value}${value.includes("?") ? "&" : "?"}gkmv=${GKM_DATA_CACHE_VERSION}`;
+}
+
 async function fetchJson(url, cache = "force-cache") {
-  const res = await fetch(`${url}?v=135`, { cache });
+  const res = await fetch(withDataVersion(url), { cache });
   if (!res.ok) throw new Error(`${url} ${res.status}`);
   return res.json();
 }
@@ -540,6 +547,16 @@ function displayOverview(item) {
   return text || "Описание пока не добавлено.";
 }
 
+function detailTheme(item) {
+  const type = norm(getType(item));
+  if (type.includes("аниме")) return "anime";
+  if (type.includes("мульт")) return "cartoon";
+  if (type.includes("сериал")) return "series";
+  if (type.includes("игра")) return "game";
+  if (type.includes("книга") || type.includes("манга") || type.includes("комик") || type.includes("раноб")) return "book";
+  return "movie";
+}
+
 function getYear(item) {
   const raw = String(item && (item.year || item.release_date || item.first_air_date) || "");
   const found = raw.match(/(19\d{2}|20\d{2})/);
@@ -770,6 +787,15 @@ function recoverPosterImage(img) {
     return;
   }
   img.dataset.posterDone = "1";
+  if (img.classList && img.classList.contains("related-poster")) {
+    const card = img.closest(".related-card");
+    if (card) {
+      card.classList.add("poster-missing");
+      if (!card.querySelector(".related-empty")) {
+        img.insertAdjacentHTML("afterend", '<div class="related-poster related-empty">Постер загружается</div>');
+      }
+    }
+  }
   const wrap = img.closest && img.closest(".poster-wrap");
   if (wrap && !wrap.querySelector(".poster-placeholder")) wrap.insertAdjacentHTML("beforeend", posterPlaceholderHtml());
   img.style.display = "none";
@@ -785,6 +811,11 @@ function schedulePosterRecovery(root = document) {
       if (img.naturalWidth > 0) {
         img.dataset.posterDone = "1";
         img.style.display = "";
+        const card = img.closest && img.closest(".related-card");
+        if (card) {
+          card.classList.remove("poster-missing");
+          card.querySelector(".related-empty")?.remove();
+        }
         const wrap = img.closest && img.closest(".poster-wrap");
         const ph = wrap && wrap.querySelector(".poster-placeholder");
         if (ph) ph.remove();
@@ -979,7 +1010,10 @@ async function renderHome() {
   if (next) next.disabled = true;
   if (grid) {
     grid.innerHTML = order.map(([key, title]) => {
-      const list = (sections[key] || []).filter(hasPoster).slice(0, 18);
+      const list = (sections[key] || [])
+        .filter(hasPoster)
+        .filter(item => key === "new" ? getVotes(item) >= 100 : !isLowTrustTopItem(item))
+        .slice(0, 18);
       homePool.push(...list);
       return `
         <section class="home-section">
@@ -1020,8 +1054,8 @@ async function loadFastPage(tab, page = 1) {
 
 function makeSearchWorker() {
   if (searchWorker) return searchWorker;
-  const absoluteSearchLiteUrl = new URL(`${SEARCH_LITE_URL}?v=249`, window.location.href).href;
-  const absoluteSearchFullUrl = new URL(`${SEARCH_URL}?v=249`, window.location.href).href;
+  const absoluteSearchLiteUrl = new URL(withDataVersion(SEARCH_LITE_URL), window.location.href).href;
+  const absoluteSearchFullUrl = new URL(withDataVersion(SEARCH_URL), window.location.href).href;
   const absoluteShardBase = new URL(`${SEARCH_SHARDS_BASE}/`, window.location.href).href;
   const code = `
     const SEARCH_LITE_URL = ${JSON.stringify(absoluteSearchLiteUrl)};
@@ -1308,7 +1342,7 @@ function makeSearchWorker() {
     }
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
-    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=SHARD_BASE+encodeURIComponent(key)+".json?v=249";shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
+    async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=withDataVersion(SHARD_BASE+encodeURIComponent(key)+".json");shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
     function buildRows(index, c, queries){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
@@ -1685,6 +1719,7 @@ function openDetails(item) {
   const meta = $("detailMeta");
   const detailGenres = $("detailGenres");
   const overview = $("detailOverview");
+  if (dialog) dialog.dataset.mediaTheme = detailTheme(item);
   if (poster) { poster.dataset.originalSrc = posterOriginalSrc(item) || ""; poster.dataset.proxyTried = shouldProxyFirst(poster.dataset.originalSrc) ? "1" : "0"; poster.src = posterSrc(item) || ""; schedulePosterRecovery(document); }
   if (title) title.textContent = displayTitle(item);
   if (meta) meta.textContent = `${getType(item)} · ${getYear(item) || "—"} · ${rankLabel(item)} · ${getRating(item) || "—"} · ${getVotes(item)} голосов`;
@@ -9974,7 +10009,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     catch(e){ return txt(v).replace(/[&<>"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[s])); }
   }
   function titleOf(item){
-    return txt(item && (item.title || item.name || item.ru || item.en || item.originalTitle || item.original_title || item.original_name)) || "Проект";
+    return txt(item && (item.ru || item.title_ru || item.title || item.name || item.en || item.originalTitle || item.original_title || item.original_name)) || "Проект";
   }
   function kindOf(item){
     const s = low(item && (item.section || item.category || item.type || item.media_type));
@@ -9988,8 +10023,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
   function realDescription(item){
     const fields = [
-      item && item.description,
+      item && item.overview_ru,
+      item && item.description_ru,
       item && item.overview,
+      item && item.description,
       item && item.shortDescription,
       item && item.short_description,
       item && item.plot,
@@ -10057,7 +10094,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function findModal(){
-    return document.querySelector(".modal.open, .modal.show, #modal, #detailsModal, .details-modal, .gkm-modal") || document.querySelector('[role="dialog"]');
+    return document.querySelector("#detailsDialog[open], .modal.open, .modal.show, #modal, #detailsModal, .details-modal, .gkm-modal") || document.querySelector('[role="dialog"]');
   }
 
   function injectDescriptionBlock(item){
@@ -10083,6 +10120,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     `;
 
     const existingOverview =
+      body.querySelector("#detailOverview") ||
       body.querySelector(".overview") ||
       body.querySelector(".description") ||
       body.querySelector(".details-description") ||
@@ -12919,12 +12957,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return out.filter(x=>x && typeof x === "object");
   }
   async function fetchJson(url){
-    if(CACHE.has(url)) return CACHE.get(url);
-    const promise = fetch(url, {cache:"force-cache"})
+    const versionedUrl = withDataVersion(url);
+    if(CACHE.has(versionedUrl)) return CACHE.get(versionedUrl);
+    const promise = fetch(versionedUrl, {cache:"force-cache"})
       .then(r => r.ok ? r.json() : null)
       .then(parseJson)
       .catch(()=>[]);
-    CACHE.set(url, promise);
+    CACHE.set(versionedUrl, promise);
     return promise;
   }
   function localPool(){
@@ -14518,12 +14557,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return out.filter(x=>x && typeof x === "object");
   }
   async function fetchJson(url){
-    if(JSON_CACHE.has(url)) return JSON_CACHE.get(url);
-    const p = fetch(url,{cache:"force-cache"})
+    const versionedUrl=withDataVersion(url);
+    if(JSON_CACHE.has(versionedUrl)) return JSON_CACHE.get(versionedUrl);
+    const p = fetch(versionedUrl,{cache:"force-cache"})
       .then(r=>r.ok?r.json():null)
       .then(parseJson)
       .catch(()=>[]);
-    JSON_CACHE.set(url,p);
+    JSON_CACHE.set(versionedUrl,p);
     return p;
   }
   function localPool(){
@@ -15318,7 +15358,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   const MEM_KEY = "gkm_v342_ai_memory";
   const HISTORY_KEY = "gkm_v342_ai_history";
   const WALL_BASE = "data/fast/poster_wall_v333";
-  const SEARCH_WORKER_URL = "ai_search_worker_v343.js?v=344";
+  const SEARCH_WORKER_URL = "ai_search_worker_v343.js?v=3491";
   const FALLBACK_CACHE = new Map();
   let lastResults = [];
   let lastQuery = "";
@@ -15524,8 +15564,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return out.filter(x=>x&&typeof x==="object");
   }
   async function fetchJson(url){
-    if(FALLBACK_CACHE.has(url))return FALLBACK_CACHE.get(url);
-    try{const res=await fetch(url,{cache:"force-cache"});if(!res.ok){FALLBACK_CACHE.set(url,[]);return[];}const arr=parseJson(await res.json());FALLBACK_CACHE.set(url,arr);return arr;}catch{FALLBACK_CACHE.set(url,[]);return[];}
+    const versionedUrl=withDataVersion(url);
+    if(FALLBACK_CACHE.has(versionedUrl))return FALLBACK_CACHE.get(versionedUrl);
+    try{const res=await fetch(versionedUrl,{cache:"force-cache"});if(!res.ok){FALLBACK_CACHE.set(versionedUrl,[]);return[];}const arr=parseJson(await res.json());FALLBACK_CACHE.set(versionedUrl,arr);return arr;}catch{FALLBACK_CACHE.set(versionedUrl,[]);return[];}
   }
   function fallbackPool(){
     const out=[],seen=new Set();

@@ -1949,3 +1949,40 @@ body #grid:has(.studio-top-grid){display:block !important;}
 .related-card::after { display: none !important; }
 .related-poster { object-fit: cover !important; background: #10162a !important; }
 #detailOverview { white-space: pre-wrap !important; line-height: 1.55 !important; }
+
+/* GKM V350 — stable colour themes for every opened card */
+#detailsDialog {
+  --detail-accent: #00d4ff;
+  --detail-accent-2: #7b2cff;
+}
+#detailsDialog[data-media-theme="movie"] { --detail-accent:#00d4ff; --detail-accent-2:#7b2cff; }
+#detailsDialog[data-media-theme="series"] { --detail-accent:#ff4fd8; --detail-accent-2:#623cff; }
+#detailsDialog[data-media-theme="anime"] { --detail-accent:#ff477e; --detail-accent-2:#8b2cff; }
+#detailsDialog[data-media-theme="cartoon"] { --detail-accent:#ffb02e; --detail-accent-2:#00bce8; }
+#detailsDialog[data-media-theme="game"] { --detail-accent:#25e6a7; --detail-accent-2:#007cff; }
+#detailsDialog[data-media-theme="book"] { --detail-accent:#ffd166; --detail-accent-2:#ff5c8a; }
+#detailsDialog {
+  border-color:var(--detail-accent) !important;
+  box-shadow:0 0 38px color-mix(in srgb,var(--detail-accent) 42%,transparent),0 30px 90px rgba(0,0,0,.78) !important;
+}
+#detailsDialog .dialog-content {
+  background:
+    radial-gradient(circle at 16% 2%,color-mix(in srgb,var(--detail-accent) 24%,transparent),transparent 35%),
+    linear-gradient(135deg,#080d22,#080b1c 62%,color-mix(in srgb,var(--detail-accent-2) 18%,#08102a)) !important;
+}
+#detailsDialog .fact-card,
+#detailsDialog .links-block,
+#detailsDialog .gkm-v223-description-block {
+  border-color:color-mix(in srgb,var(--detail-accent) 38%,transparent) !important;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--detail-accent) 10%,transparent),color-mix(in srgb,var(--detail-accent-2) 9%,transparent)) !important;
+}
+#detailsDialog .related-card {
+  border-color:color-mix(in srgb,var(--detail-accent) 55%,transparent) !important;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--detail-accent-2) 18%,#090c1e),#090c1e 66%) !important;
+}
+.related-empty {
+  min-height:255px;
+  background:linear-gradient(145deg,#15234a,#49206f 52%,#0b7189) !important;
+  color:#fff !important;
+  text-shadow:0 1px 10px rgba(0,0,0,.75);
+}
