@@ -313,6 +313,7 @@ class OfficialRussianResolver:
 
     def _needs_provider_repair(self, item: dict) -> bool:
         current = self._current_title(item)
+        overview = str(item.get("overview") or item.get("description") or "").strip()
         localization_source = norm(item.get("titleLocalizationSource"))
         bad_sources = (
             "transliteration",
@@ -320,7 +321,18 @@ class OfficialRussianResolver:
             "fallback transliteration",
             "fallback",
         )
-        return (not has_cyr(current)) or any(token in localization_source for token in bad_sources)
+        description_is_weak = (
+            len(overview) < 160
+            or bool(item.get("overviewGeneratedRu"))
+            or bool(item.get("overviewGenerated"))
+            or "описание будет дополнено" in norm(overview)
+            or "из каталога голубь каталог мира" in norm(overview)
+        )
+        return (
+            (not has_cyr(current))
+            or any(token in localization_source for token in bad_sources)
+            or description_is_weak
+        )
 
     def _store(self, item_id: str, payload: dict):
         if not item_id or not payload:
