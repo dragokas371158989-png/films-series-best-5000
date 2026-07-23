@@ -1,0 +1,14 @@
+{
+  "version": "V349",
+  "generatedAt": "2026-07-23T19:38:52.002783+00:00",
+  "status": "success",
+  "stats": {
+    "pages": 23926,
+    "matchedByTmdb": 4780,
+    "matchedByTitle": 11674,
+    "safeFallback": 7472,
+    "updated": 23926,
+    "unresolved": 0
+  },
+  "unresolvedExamples": []
+}

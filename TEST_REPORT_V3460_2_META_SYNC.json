@@ -4,21 +4,21 @@
   "metaPath": "data/fast/meta.json",
   "filmMetaMirrored": true,
   "diagnostics": {
-    "catalogCount": 94757,
-    "primaryChunkCount": 94757,
-    "rawCount": 97416,
-    "dedupeRemoved": 2659,
+    "catalogCount": 102485,
+    "primaryChunkCount": 105063,
+    "rawCount": 105063,
+    "dedupeRemoved": 2578,
     "pageSize": 60,
-    "genres": 120,
-    "years": 131,
+    "genres": 118,
+    "years": 132,
     "buckets": {
-      "movies": 58946,
-      "series": 22406,
-      "anime": 10624,
-      "cartoons": 2781,
+      "movies": 53869,
+      "series": 23519,
+      "anime": 11060,
+      "cartoons": 14037,
       "other": 0
     },
-    "wallSourceTotal": 95746
+    "wallSourceTotal": 102485
   },
   "validation": {
     "tests": {

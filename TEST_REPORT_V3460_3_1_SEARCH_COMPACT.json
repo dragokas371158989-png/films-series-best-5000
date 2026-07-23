@@ -1,35 +1,88 @@
 {
-  "version": "V3460.3.1",
+  "version": "V3460.3.1-patched-v349",
   "status": "success",
   "safetyLimitBytes": 98566144,
-  "full": {
-    "records": 100156,
-    "changedRecords": 100156,
-    "emptyIds": 0,
-    "searchCharsBefore": 24788052,
-    "searchCharsAfter": 15515194,
-    "path": "data/fast/search_index.json",
-    "bytesBefore": 112972833,
-    "bytesAfter": 98196245,
-    "savedBytes": 14776588
-  },
-  "lite": {
-    "records": 15000,
-    "changedRecords": 15000,
-    "emptyIds": 0,
-    "searchCharsBefore": 3854068,
-    "searchCharsAfter": 2880217,
-    "path": "data/fast/search_lite.json",
-    "bytesBefore": 18237111,
-    "bytesAfter": 16631745,
-    "savedBytes": 1605366
+  "searchLiteLimit": 15000,
+  "indexes": {
+    "data/fast": {
+      "full": {
+        "records": 102485,
+        "changedRecords": 102485,
+        "emptyIds": 0,
+        "searchCharsBefore": 25400687,
+        "searchCharsAfter": 7798716,
+        "overviewCharsBefore": 12155378,
+        "overviewCharsAfter": 12155378,
+        "path": "data/fast/search_index.json",
+        "recordsBefore": 102485,
+        "trimmedRecords": 0,
+        "bytesBefore": 118709501,
+        "bytesAfter": 88607754,
+        "savedBytes": 30101747
+      },
+      "lite": {
+        "records": 15000,
+        "changedRecords": 15000,
+        "emptyIds": 0,
+        "searchCharsBefore": 3855813,
+        "searchCharsAfter": 1554644,
+        "overviewCharsBefore": 1771461,
+        "overviewCharsAfter": 1771461,
+        "path": "data/fast/search_lite.json",
+        "recordsBefore": 15000,
+        "trimmedRecords": 0,
+        "bytesBefore": 18723023,
+        "bytesAfter": 14664443,
+        "savedBytes": 4058580
+      }
+    },
+    "film/data/fast": {
+      "full": {
+        "records": 105063,
+        "changedRecords": 143212,
+        "emptyIds": 0,
+        "searchCharsBefore": 11651294,
+        "searchCharsAfter": 8116878,
+        "overviewCharsBefore": 24634895,
+        "overviewCharsAfter": 15924973,
+        "path": "film/data/fast/search_index.json",
+        "recordsBefore": 105063,
+        "trimmedRecords": 0,
+        "bytesBefore": 113159349,
+        "bytesAfter": 91585123,
+        "savedBytes": 21574226
+      },
+      "lite": {
+        "records": 15000,
+        "changedRecords": 15000,
+        "emptyIds": 0,
+        "searchCharsBefore": 2214779,
+        "searchCharsAfter": 1214301,
+        "overviewCharsBefore": 0,
+        "overviewCharsAfter": 0,
+        "path": "film/data/fast/search_lite.json",
+        "recordsBefore": 15000,
+        "trimmedRecords": 0,
+        "bytesBefore": 8523877,
+        "bytesAfter": 7033619,
+        "savedBytes": 1490258
+      }
+    }
   },
   "tests": {
-    "fullIndexValid": true,
-    "liteIndexValid": true,
-    "fullIndexBelowSafetyLimit": true,
-    "liteNotLargerThanFull": true,
-    "fullIdsPresent": true,
-    "searchHelperPresent": true
+    "data/fast:fullIndexValid": true,
+    "data/fast:liteIndexValid": true,
+    "data/fast:fullIndexBelowSafetyLimit": true,
+    "data/fast:liteLimited": true,
+    "data/fast:fullIdsPreserved": true,
+    "data/fast:fullIdsPresent": true,
+    "data/fast:searchHelperPresent": true,
+    "film/data/fast:fullIndexValid": true,
+    "film/data/fast:liteIndexValid": true,
+    "film/data/fast:fullIndexBelowSafetyLimit": true,
+    "film/data/fast:liteLimited": true,
+    "film/data/fast:fullIdsPreserved": true,
+    "film/data/fast:fullIdsPresent": true,
+    "film/data/fast:searchHelperPresent": true
   }
 }

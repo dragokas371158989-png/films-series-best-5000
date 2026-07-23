@@ -1,15 +1,15 @@
 {
   "version": "V3460.1",
   "status": "healthy",
-  "generatedAt": "2026-07-14T10:06:35.412830+00:00",
-  "commit": "87b86444290a7da0570bd4a3691b7528c731c15d",
-  "runUrl": "https://github.com/dragokas371158989-png/films-series-best-5000/actions/runs/29324043675",
+  "generatedAt": "2026-07-23T19:41:13.272939+00:00",
+  "commit": "3c2f10da2701f23c690b05f8f31e7e6ba8002463",
+  "runUrl": "https://github.com/dragokas371158989-png/films-series-best-5000/actions/runs/30038599683",
   "summary": {
-    "catalogRecords": 94757,
-    "searchLiteRecords": 94757,
+    "catalogRecords": 102485,
+    "searchLiteRecords": 15000,
     "animeTopRecords": 100,
     "studioRecords": 12,
-    "posterWallRecords": 93985,
+    "posterWallRecords": 102485,
     "staticPages": 23927,
     "untranslatedTitles": 0,
     "latinGenres": 0,
@@ -23,7 +23,7 @@
       "name": "Файл index.html",
       "ok": true,
       "level": "critical",
-      "details": "15921 байт"
+      "details": "14617 байт"
     },
     {
       "id": "file:style.css",
@@ -37,7 +37,7 @@
       "name": "Файл app.js",
       "ok": true,
       "level": "critical",
-      "details": "132117 байт"
+      "details": "730546 байт"
     },
     {
       "id": "file:features_v344.js",
@@ -58,49 +58,49 @@
       "name": "Файл data/fast/search_index.json",
       "ok": true,
       "level": "critical",
-      "details": "101906785 байт"
+      "details": "88607754 байт"
     },
     {
       "id": "file:data/fast/search_lite.json",
       "name": "Файл data/fast/search_lite.json",
       "ok": true,
       "level": "critical",
-      "details": "43609207 байт"
+      "details": "14664443 байт"
     },
     {
       "id": "file:data/fast/meta.json",
       "name": "Файл data/fast/meta.json",
       "ok": true,
       "level": "critical",
-      "details": "6810 байт"
+      "details": "6775 байт"
     },
     {
       "id": "file:data/fast/poster_wall_v333/manifest.json",
       "name": "Файл data/fast/poster_wall_v333/manifest.json",
       "ok": true,
       "level": "critical",
-      "details": "825 байт"
+      "details": "834 байт"
     },
     {
       "id": "file:data/fast/anime_top_manual.json",
       "name": "Файл data/fast/anime_top_manual.json",
       "ok": true,
       "level": "critical",
-      "details": "104351 байт"
+      "details": "87645 байт"
     },
     {
       "id": "file:data/fast/anime_studios_top.json",
       "name": "Файл data/fast/anime_studios_top.json",
       "ok": true,
       "level": "critical",
-      "details": "4495 байт"
+      "details": "4496 байт"
     },
     {
       "id": "file:data/fast/anime_studios_detail.json",
       "name": "Файл data/fast/anime_studios_detail.json",
       "ok": true,
       "level": "critical",
-      "details": "544207 байт"
+      "details": "456292 байт"
     },
     {
       "id": "js:app.js",
@@ -128,7 +128,7 @@
       "name": "Основной каталог",
       "ok": true,
       "level": "critical",
-      "details": "94757 записей"
+      "details": "102485 записей"
     },
     {
       "id": "search:duplicates",
@@ -163,14 +163,14 @@
       "name": "Облегчённый индекс",
       "ok": true,
       "level": "critical",
-      "details": "94757 записей"
+      "details": "15000 записей"
     },
     {
       "id": "meta:count",
       "name": "Счётчик meta.json",
       "ok": true,
       "level": "warning",
-      "details": "meta=94757, каталог=94757"
+      "details": "meta=102485, каталог=102485"
     },
     {
       "id": "anime:top",
@@ -191,7 +191,7 @@
       "name": "3D-стена",
       "ok": true,
       "level": "critical",
-      "details": "93985 карточек, 22 частей"
+      "details": "102485 карточек, 22 частей"
     },
     {
       "id": "wall:duplicates",
@@ -226,7 +226,7 @@
     "files": {
       "index.html": {
         "exists": true,
-        "size": 15921
+        "size": 14617
       },
       "style.css": {
         "exists": true,
@@ -234,7 +234,7 @@
       },
       "app.js": {
         "exists": true,
-        "size": 132117
+        "size": 730546
       },
       "features_v344.js": {
         "exists": true,
@@ -246,31 +246,31 @@
       },
       "data/fast/search_index.json": {
         "exists": true,
-        "size": 101906785
+        "size": 88607754
       },
       "data/fast/search_lite.json": {
         "exists": true,
-        "size": 43609207
+        "size": 14664443
       },
       "data/fast/meta.json": {
         "exists": true,
-        "size": 6810
+        "size": 6775
       },
       "data/fast/poster_wall_v333/manifest.json": {
         "exists": true,
-        "size": 825
+        "size": 834
       },
       "data/fast/anime_top_manual.json": {
         "exists": true,
-        "size": 104351
+        "size": 87645
       },
       "data/fast/anime_studios_top.json": {
         "exists": true,
-        "size": 4495
+        "size": 4496
       },
       "data/fast/anime_studios_detail.json": {
         "exists": true,
-        "size": 544207
+        "size": 456292
       }
     },
     "javascript": {
@@ -289,7 +289,7 @@
     },
     "search": {
       "ok": true,
-      "count": 94757,
+      "count": 102485,
       "emptyIds": 0,
       "emptyTitles": 0,
       "duplicateIds": 0,
@@ -299,20 +299,19 @@
       "latinGenres": 0,
       "latinGenreExamples": [],
       "types": {
-        "Фильм": 58946,
-        "Сериал": 22406,
-        "Аниме": 10624,
-        "Мультфильм": 1496,
-        "Мультсериал": 1285
+        "Фильм": 53869,
+        "Сериал": 23519,
+        "Мультфильм": 14037,
+        "Аниме": 11060
       }
     },
     "posterWall": {
       "ok": true,
-      "manifestTotal": 93985,
-      "manifestVersion": "v3453.1-full-russian",
-      "sourceTotal": 95746,
+      "manifestTotal": 102485,
+      "manifestVersion": "v344-strict-kind-id-dedupe-poster-wall-2026-07-12",
+      "sourceTotal": 102485,
       "shards": 22,
-      "rows": 93985,
+      "rows": 102485,
       "duplicateIdsInsideKinds": 0,
       "parseErrors": []
     },
@@ -322,11 +321,10 @@
       "examples": []
     },
     "types": {
-      "Фильм": 58946,
-      "Сериал": 22406,
-      "Аниме": 10624,
-      "Мультфильм": 1496,
-      "Мультсериал": 1285
+      "Фильм": 53869,
+      "Сериал": 23519,
+      "Мультфильм": 14037,
+      "Аниме": 11060
     }
   }
 }

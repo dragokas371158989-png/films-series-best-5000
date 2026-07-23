@@ -1,0 +1,291 @@
+{
+  "version": "V349",
+  "generatedAt": "2026-07-23T19:42:14.005261+00:00",
+  "status": "success",
+  "summary": {
+    "tests": 30,
+    "passed": 29,
+    "criticalFailures": 0,
+    "warnings": 1,
+    "primaryRecords": 105063,
+    "searchRecords": 102485
+  },
+  "tests": [
+    {
+      "name": "required-files",
+      "pass": true,
+      "severity": "critical",
+      "details": []
+    },
+    {
+      "name": "javascript-syntax",
+      "pass": true,
+      "severity": "critical",
+      "details": {}
+    },
+    {
+      "name": "no-dynamic-eval",
+      "pass": true,
+      "severity": "critical",
+      "details": null
+    },
+    {
+      "name": "safe-title-rules",
+      "pass": true,
+      "severity": "critical",
+      "details": null
+    },
+    {
+      "name": "recursive-page-sync",
+      "pass": true,
+      "severity": "critical",
+      "details": null
+    },
+    {
+      "name": "no-static-filename-id-fallback",
+      "pass": true,
+      "severity": "critical",
+      "details": null
+    },
+    {
+      "name": "workflow-filenames",
+      "pass": true,
+      "severity": "critical",
+      "details": []
+    },
+    {
+      "name": "single-v344-downstream-listener",
+      "pass": true,
+      "severity": "critical",
+      "details": [
+        "gkm_v3453_1_sync_after_update.yml"
+      ]
+    },
+    {
+      "name": "master-does-not-double-dispatch",
+      "pass": true,
+      "severity": "critical",
+      "details": []
+    },
+    {
+      "name": "primary-catalog-readable",
+      "pass": true,
+      "severity": "critical",
+      "details": 105063
+    },
+    {
+      "name": "search-index-readable",
+      "pass": true,
+      "severity": "critical",
+      "details": 102485
+    },
+    {
+      "name": "search-lite-readable",
+      "pass": true,
+      "severity": "critical",
+      "details": 15000
+    },
+    {
+      "name": "search-ids-valid",
+      "pass": true,
+      "severity": "critical",
+      "details": {
+        "duplicateExamples": [],
+        "emptyIds": 0
+      }
+    },
+    {
+      "name": "meta-count-matches-search",
+      "pass": true,
+      "severity": "critical",
+      "details": {
+        "meta": 102485,
+        "search": 102485
+      }
+    },
+    {
+      "name": "search-lite-limited",
+      "pass": true,
+      "severity": "critical",
+      "details": 15000
+    },
+    {
+      "name": "primary-ids-preserved-after-dedupe",
+      "pass": true,
+      "severity": "critical",
+      "details": {
+        "missingCount": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "russian-display-titles",
+      "pass": true,
+      "severity": "critical",
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "data/fast-search-size",
+      "pass": true,
+      "severity": "critical",
+      "details": 88607754
+    },
+    {
+      "name": "data/fast-lite-limit",
+      "pass": true,
+      "severity": "critical",
+      "details": 15000
+    },
+    {
+      "name": "data/fast-page-index-consistency",
+      "pass": true,
+      "severity": "critical",
+      "details": {
+        "rows": 226395,
+        "mismatches": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "film/data/fast-search-size",
+      "pass": true,
+      "severity": "critical",
+      "details": 88607754
+    },
+    {
+      "name": "film/data/fast-lite-limit",
+      "pass": true,
+      "severity": "critical",
+      "details": 15000
+    },
+    {
+      "name": "film/data/fast-page-index-consistency",
+      "pass": true,
+      "severity": "critical",
+      "details": {
+        "rows": 226395,
+        "mismatches": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "film-mirror-count",
+      "pass": true,
+      "severity": "critical",
+      "details": {
+        "root": 102485,
+        "film": 102485
+      }
+    },
+    {
+      "name": "anime-top-data",
+      "pass": true,
+      "severity": "critical",
+      "details": 100
+    },
+    {
+      "name": "anime-studio-data",
+      "pass": true,
+      "severity": "critical",
+      "details": null
+    },
+    {
+      "name": "poster-wall-data",
+      "pass": true,
+      "severity": "critical",
+      "details": 102485
+    },
+    {
+      "name": "static-pages-have-stable-id",
+      "pass": true,
+      "severity": "critical",
+      "details": {
+        "pages": 23926,
+        "withoutStableId": 0,
+        "invalidJsonLd": 0,
+        "titleQueryMismatches": 1191,
+        "mismatchExamples": [
+          "1012835.html: Даркер Тан Блак: Гэйден (OVA) != Darker Than Black: Gaiden (OVA)",
+          "1015981.html: Джоллй LLB 3 != Jolly LLB 3",
+          "1017204.html: Аниме 2016 года №1017204 != ナルトが火影になった日",
+          "102070.html: Аниме 2011 года №102070 != 劇場版 魔法先生ネギま! Anime Final",
+          "1021679.html: Роза Версаля != The Rose of Versailles",
+          "1023915.html: Фильм 2024 года №1023915 != 2073",
+          "102747.html: Аниме 2010 года №102747 != マジンカイザーSKL Majinkaizā SKL",
+          "1030419.html: Аниме 2022 года №1030419 != 銀河英雄伝説 Die Neue These 策謀 1",
+          "1030587.html: Аниме 2023 года №1030587 != 映画ドラえもん のび太と空の理想郷",
+          "103124.html: Аниме 2003 года №103124 != クレヨンしんちゃん 嵐を呼ぶ 栄光のヤキニクロード",
+          "1031396.html: Аниме 2022 года №1031396 != アニメ『NARUTO -ナルト-』20周年記念・完全新作 PV “ROAD OF NARUTO”",
+          "1031774.html: Триллер 40 != Thriller 40",
+          "1033051.html: Фильм 2019 года №1033051 != リベンジポルノ PAIN OF LOVE",
+          "103368.html: Фильм 2006 года №103368 != 超劇場版 ケロロ軍曹",
+          "1040330.html: Блак Адам: Савиаур ор Дестройер? != Black Adam: Saviour or Destroyer?",
+          "1044343.html: Аниме 2022 года №1044343 != 禅 グローグーとマックロクロスケ",
+          "1047091.html: Аниме 2022 года №1047091 != ゴジラ VS ガイガンレクス",
+          "1051942.html: Ван-Пис != ONE PIECE ルフィ落下! 秘境・海のヘソの大冒険",
+          "105231.html: Фильм 2008 года №105231 != 真救世主伝説 北斗の拳 ZERO ケンシロウ伝",
+          "105444.html: Аниме 1998 года №105444 != 映画ドラえもん のび太の南海大冒険",
+          "1056133.html: Аниме 2023 года №1056133 != 劇場版シティーハンター 天使の涙(エンジェルダスト)",
+          "1058906.html: Аниме 2023 года №1058906 != TVシリーズ特別編集版 名探偵コナン 灰原哀物語 黒鉄のミステリートレイン",
+          "106164.html: Аниме 1996 года №106164 != ドラえもん のび太と銀河超特急",
+          "106754.html: Фильм 1979 года №106754 != 天使のはらわた 赤い教室",
+          "1068607.html: Аниме 2023 года №1068607 != 劇場総集編「SSSS.DYNAZENON」",
+          "109080.html: Аниме 2006 года №109080 != 真救世主伝説 北斗の拳 ラオウ伝 殉愛の章",
+          "109410.html: Фильм 2013 года №109410 != 42",
+          "1094448.html: Аниме 2023 года №1094448 != 映画プリキュアオールスターズＦ",
+          "109715.html: Аниме 1961 года №109715 != 安寿と厨子王丸",
+          "1103432.html: Фильм 2024 года №1103432 != BLOODY ESCAPE -地獄の逃走劇-"
+        ]
+      }
+    },
+    {
+      "name": "static-pages-jsonld",
+      "pass": true,
+      "severity": "critical",
+      "details": 0
+    },
+    {
+      "name": "static-title-query-review",
+      "pass": false,
+      "severity": "warning",
+      "details": {
+        "count": 1191,
+        "examples": [
+          "1012835.html: Даркер Тан Блак: Гэйден (OVA) != Darker Than Black: Gaiden (OVA)",
+          "1015981.html: Джоллй LLB 3 != Jolly LLB 3",
+          "1017204.html: Аниме 2016 года №1017204 != ナルトが火影になった日",
+          "102070.html: Аниме 2011 года №102070 != 劇場版 魔法先生ネギま! Anime Final",
+          "1021679.html: Роза Версаля != The Rose of Versailles",
+          "1023915.html: Фильм 2024 года №1023915 != 2073",
+          "102747.html: Аниме 2010 года №102747 != マジンカイザーSKL Majinkaizā SKL",
+          "1030419.html: Аниме 2022 года №1030419 != 銀河英雄伝説 Die Neue These 策謀 1",
+          "1030587.html: Аниме 2023 года №1030587 != 映画ドラえもん のび太と空の理想郷",
+          "103124.html: Аниме 2003 года №103124 != クレヨンしんちゃん 嵐を呼ぶ 栄光のヤキニクロード",
+          "1031396.html: Аниме 2022 года №1031396 != アニメ『NARUTO -ナルト-』20周年記念・完全新作 PV “ROAD OF NARUTO”",
+          "1031774.html: Триллер 40 != Thriller 40",
+          "1033051.html: Фильм 2019 года №1033051 != リベンジポルノ PAIN OF LOVE",
+          "103368.html: Фильм 2006 года №103368 != 超劇場版 ケロロ軍曹",
+          "1040330.html: Блак Адам: Савиаур ор Дестройер? != Black Adam: Saviour or Destroyer?",
+          "1044343.html: Аниме 2022 года №1044343 != 禅 グローグーとマックロクロスケ",
+          "1047091.html: Аниме 2022 года №1047091 != ゴジラ VS ガイガンレクス",
+          "1051942.html: Ван-Пис != ONE PIECE ルフィ落下! 秘境・海のヘソの大冒険",
+          "105231.html: Фильм 2008 года №105231 != 真救世主伝説 北斗の拳 ZERO ケンシロウ伝",
+          "105444.html: Аниме 1998 года №105444 != 映画ドラえもん のび太の南海大冒険",
+          "1056133.html: Аниме 2023 года №1056133 != 劇場版シティーハンター 天使の涙(エンジェルダスト)",
+          "1058906.html: Аниме 2023 года №1058906 != TVシリーズ特別編集版 名探偵コナン 灰原哀物語 黒鉄のミステリートレイン",
+          "106164.html: Аниме 1996 года №106164 != ドラえもん のび太と銀河超特急",
+          "106754.html: Фильм 1979 года №106754 != 天使のはらわた 赤い教室",
+          "1068607.html: Аниме 2023 года №1068607 != 劇場総集編「SSSS.DYNAZENON」",
+          "109080.html: Аниме 2006 года №109080 != 真救世主伝説 北斗の拳 ラオウ伝 殉愛の章",
+          "109410.html: Фильм 2013 года №109410 != 42",
+          "1094448.html: Аниме 2023 года №1094448 != 映画プリキュアオールスターズＦ",
+          "109715.html: Аниме 1961 года №109715 != 安寿と厨子王丸",
+          "1103432.html: Фильм 2024 года №1103432 != BLOODY ESCAPE -地獄の逃走劇-"
+        ]
+      }
+    }
+  ]
+}
