@@ -1,0 +1,77 @@
+name: GKM V352 Fix Home Collections and Genres
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v352-collections-genres
+  cancel-in-progress: false
+
+jobs:
+  repair-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate V352 repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check app.js
+          python -m py_compile tools/gkm_v352_collections_audit.py
+          grep -F 'app.js?v=352' index.html
+          grep -F 'GKM_DATA_CACHE_VERSION = "352"' app.js
+          grep -F 'gkmV352RenderHome' app.js
+          grep -F 'gkmV352DisplayTitle' app.js
+          grep -F 'gkmV352GetGenres' app.js
+
+      - name: Audit collections and genres
+        run: python tools/gkm_v352_collections_audit.py
+
+      - name: Commit audit report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gkm-v352-repair-bot"
+          git config user.email "gkm-v352-repair-bot@users.noreply.github.com"
+          git add TEST_REPORT_V352_COLLECTIONS.json
+          if git diff --cached --quiet; then
+            echo "No report changes to commit"
+            exit 0
+          fi
+          git commit -m "Audit home collections and genres with V352"
+          git stash push --include-untracked -m "gkm-v352-audit-leftovers" || true
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+
+      - name: Publish summary
+        if: always()
+        shell: bash
+        run: |
+          echo "### GKM V352 — коллекции и жанры" >> "$GITHUB_STEP_SUMMARY"
+          echo "Главная страница теперь использует общий механизм коллекций." >> "$GITHUB_STEP_SUMMARY"
+          echo "Названия сезонов восстановлены, типы удалены из списка жанров." >> "$GITHUB_STEP_SUMMARY"
+          echo "Отчёт: \`TEST_REPORT_V352_COLLECTIONS.json\`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gkm-v352-collections-genres-report
+          retention-days: 30
+          path: TEST_REPORT_V352_COLLECTIONS.json
