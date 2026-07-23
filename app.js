@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "350";
+const GKM_DATA_CACHE_VERSION = "351";
 const HOME_URL = `${FAST_BASE}/home.json`;
 const META_URL = `${FAST_BASE}/meta.json`;
 const SEARCH_URL = `${FAST_BASE}/search_index.json`;
@@ -796,13 +796,25 @@ function recoverPosterImage(img) {
       }
     }
   }
+  if (img.classList && img.classList.contains("gkm-family-poster")) {
+    const card = img.closest(".gkm-family-card");
+    if (card) {
+      card.classList.add("poster-missing");
+      if (!card.querySelector(".gkm-family-empty")) {
+        img.insertAdjacentHTML(
+          "afterend",
+          '<div class="gkm-family-poster gkm-family-empty" role="img" aria-label="Постер недоступен">Постер недоступен</div>'
+        );
+      }
+    }
+  }
   const wrap = img.closest && img.closest(".poster-wrap");
   if (wrap && !wrap.querySelector(".poster-placeholder")) wrap.insertAdjacentHTML("beforeend", posterPlaceholderHtml());
   img.style.display = "none";
 }
 
 function schedulePosterRecovery(root = document) {
-  const imgs = Array.from(root.querySelectorAll ? root.querySelectorAll(".poster-wrap img, .related-poster, #detailPoster") : []);
+  const imgs = Array.from(root.querySelectorAll ? root.querySelectorAll(".poster-wrap img, .related-poster, img.gkm-family-poster, #detailPoster") : []);
   for (const img of imgs) {
     if (img.dataset.posterWatch === "1") continue;
     img.dataset.posterWatch = "1";
@@ -815,6 +827,11 @@ function schedulePosterRecovery(root = document) {
         if (card) {
           card.classList.remove("poster-missing");
           card.querySelector(".related-empty")?.remove();
+        }
+        const familyCard = img.closest && img.closest(".gkm-family-card");
+        if (familyCard) {
+          familyCard.classList.remove("poster-missing");
+          familyCard.querySelector(".gkm-family-empty")?.remove();
         }
         const wrap = img.closest && img.closest(".poster-wrap");
         const ph = wrap && wrap.querySelector(".poster-placeholder");
@@ -10103,34 +10120,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     const old = modal.querySelector("#gkmV223DescriptionBlock");
     if (old) old.remove();
-
-    const body =
-      modal.querySelector(".modal-body") ||
-      modal.querySelector(".details-body") ||
-      modal.querySelector(".modal-content") ||
-      modal;
-
-    const desc = fullDescription(item);
-    const block = document.createElement("section");
-    block.id = "gkmV223DescriptionBlock";
-    block.className = "gkm-v223-description-block";
-    block.innerHTML = `
-      <h3>📖 Подробное описание</h3>
-      <div class="gkm-v223-description-text">${esc(desc).replace(/\n\n/g, "</p><p>").replace(/^/, "<p>").replace(/$/, "</p>")}</div>
-    `;
-
-    const existingOverview =
-      body.querySelector("#detailOverview") ||
-      body.querySelector(".overview") ||
-      body.querySelector(".description") ||
-      body.querySelector(".details-description") ||
-      body.querySelector(".modal-description");
-
-    if (existingOverview && existingOverview.parentNode) {
-      existingOverview.parentNode.insertBefore(block, existingOverview.nextSibling);
-    } else {
-      body.appendChild(block);
-    }
+    // V351: one authoritative synopsis is shown in #detailOverview.
+    // The old block duplicated good plots and appended generic filler to short plots.
   }
 
   function patchOpenDetails(){
@@ -10429,35 +10420,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
   function inject(modal){
     if (!modal) return;
-    const title = modalTitle(modal);
-    if (!title || title === "Проект") return;
-
-    let block = modal.querySelector("#gkmV225FullDescription");
-    if (!block) {
-      block = document.createElement("section");
-      block.id = "gkmV225FullDescription";
-      block.className = "gkm-v225-full-description";
-      const anchor =
-        modal.querySelector(".overview, .description, .details-description, .modal-description, .plot, .summary, [class*='description'], [class*='overview']") ||
-        modal.querySelector(".modal-body, .details-body, .modal-content") ||
-        modal.firstElementChild ||
-        modal;
-      if (anchor && anchor.parentNode && anchor !== modal) anchor.parentNode.insertBefore(block, anchor.nextSibling);
-      else modal.appendChild(block);
-    }
-
-    const lines = buildFullDescription(modal);
-    block.innerHTML = `
-      <h3>📖 Подробное описание</h3>
-      <div>${lines.map(x => `<p>${esc(x)}</p>`).join("")}</div>
-    `;
-
-    // визуально убираем слишком короткий старый кусок, если он выглядит как обрезок
-    Array.from(modal.querySelectorAll(".overview, .description, .details-description, .modal-description, .plot, .summary, [class*='description'], [class*='overview']")).forEach(el => {
-      if (el.id === "gkmV225FullDescription" || el.closest("#gkmV225FullDescription")) return;
-      const t = clean(el.textContent);
-      if (t.length > 20 && t.length < 180) el.classList.add("gkm-v225-short-desc-muted");
+    modal.querySelector("#gkmV225FullDescription")?.remove();
+    modal.querySelectorAll(".gkm-v225-short-desc-muted").forEach(el => {
+      el.classList.remove("gkm-v225-short-desc-muted");
     });
+    // V351: do not fabricate or duplicate a second description block.
   }
   function run(){
     const m = modalRoot();
@@ -13200,7 +13167,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const meta = `${part ? part + " · " : ""}${yearOfV328(item) || "—"} · ★ ${ratingOfV328(item) || "—"}${votesOfV328(item) ? " · " + (typeof formatVotes === "function" ? formatVotes(votesOfV328(item)) : votesOfV328(item)) : ""}`;
     return `
       <button class="gkm-family-card ${sameItem(item, base) ? "active" : ""}" data-gkm-family-id="${esc(id)}" type="button">
-        ${img ? `<img class="gkm-family-poster" src="${esc(img)}" loading="lazy" decoding="async" alt="">` : `<div class="gkm-family-poster"></div>`}
+        ${img ? `<img class="gkm-family-poster" src="${esc(img)}" data-original-src="${esc(typeof posterOriginalSrc === "function" ? posterOriginalSrc(item) : img)}" data-proxy-tried="${typeof shouldProxyFirst === "function" && shouldProxyFirst(typeof posterOriginalSrc === "function" ? posterOriginalSrc(item) : img) ? "1" : "0"}" loading="lazy" decoding="async" alt="">` : `<div class="gkm-family-poster gkm-family-empty" role="img" aria-label="Постер недоступен">Постер недоступен</div>`}
         <div class="gkm-family-info">
           <div class="gkm-family-title">${esc(title)}</div>
           <div class="gkm-family-alt">${esc(alt || part || "")}</div>
@@ -13250,6 +13217,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         ${rows.map(x => cardHtml(x, base)).join("")}
       </div>
     `;
+    if (typeof schedulePosterRecovery === "function") schedulePosterRecovery(block);
 
     block.querySelectorAll("[data-gkm-family-id]").forEach(btn=>{
       btn.onclick = () => {
@@ -14069,7 +14037,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const meta = `${part ? part + " · " : ""}${yearOfV333(item) || "—"} · ★ ${ratingOfV333(item) || "—"}${votes ? " · " + (typeof formatVotes === "function" ? formatVotes(votes) : votes) : ""}`;
     return `
       <button class="gkm-family-card ${itemId(item) === itemId(base) ? "active" : ""}" data-gkm-v333-id="${esc(id)}" type="button">
-        ${img ? `<img class="gkm-family-poster" src="${esc(img)}" loading="lazy" decoding="async" alt="">` : `<div class="gkm-family-poster"></div>`}
+        ${img ? `<img class="gkm-family-poster" src="${esc(img)}" data-original-src="${esc(typeof posterOriginalSrc === "function" ? posterOriginalSrc(item) : img)}" data-proxy-tried="${typeof shouldProxyFirst === "function" && shouldProxyFirst(typeof posterOriginalSrc === "function" ? posterOriginalSrc(item) : img) ? "1" : "0"}" loading="lazy" decoding="async" alt="">` : `<div class="gkm-family-poster gkm-family-empty" role="img" aria-label="Постер недоступен">Постер недоступен</div>`}
         <div class="gkm-family-info">
           <div class="gkm-family-title">${esc(title)}</div>
           <div class="gkm-family-alt">${esc(altRaw || part || "")}</div>
@@ -14100,6 +14068,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         ${rows.map(x=>familyCardHtml(x, collectionItem)).join("")}
       </div>
     `;
+    if (typeof schedulePosterRecovery === "function") schedulePosterRecovery(block);
 
     block.querySelectorAll("[data-gkm-v333-id]").forEach(btn=>{
       btn.onclick = () => {
@@ -16072,3 +16041,141 @@ Endpoint: ${endpoint||"не задан"}`;
   console.log("GKM V344: wall + human AI + live weather merged");
 })();
 /* GKM V344 WALL AI WEATHER MERGE END */
+
+
+/* GKM V351 ALL CARD DETAILS INTEGRITY START */
+(function(){
+  window.GKM_V351_ALL_CARD_DETAILS_VERSION =
+    "v351-all-card-details-integrity-2026-07-23";
+
+  function text(value){
+    return String(value == null ? "" : value).replace(/\s+/g, " ").trim();
+  }
+
+  function isBoilerplate(value){
+    const valueText = text(value);
+    if (!valueText || valueText.length < 80) return true;
+    return [
+      /описание пока не добавлено/i,
+      /описание будет (?:добавлено|дополнено)/i,
+      /карточка (?:представлена|помогает|нужна)/i,
+      /проект из каталога/i,
+      /переходить к просмотру или поиску/i,
+      /подходит ли проект под нужный вайб/i
+    ].some(pattern => pattern.test(valueText));
+  }
+
+  function fieldCandidates(item){
+    return [
+      item && item.overview_ru,
+      item && item.description_ru,
+      item && item.synopsis_ru,
+      item && item.plot_ru,
+      item && item.overview,
+      item && item.description,
+      item && item.synopsis,
+      item && item.plot,
+      item && item.annotation,
+      item && item.summary
+    ].map(text).filter(Boolean);
+  }
+
+  function factualFallback(item){
+    let title = "";
+    let type = "";
+    let year = "";
+    let genres = [];
+    let rating = 0;
+    try { title = text(typeof displayTitle === "function" ? displayTitle(item) : ""); } catch {}
+    try { type = text(typeof getType === "function" ? getType(item) : ""); } catch {}
+    try { year = text(typeof getYear === "function" ? getYear(item) : ""); } catch {}
+    try { genres = typeof getGenres === "function" ? getGenres(item).filter(Boolean).slice(0, 5) : []; } catch {}
+    try { rating = Number(typeof getRating === "function" ? getRating(item) : 0); } catch {}
+    title = title || text(item && (item.ru || item.title || item.name)) || "Проект";
+    type = type || text(item && (item.type || item.category)) || "Материал";
+
+    const first = `«${title}» — ${type.toLowerCase()}${year ? ` ${year} года` : ""}${genres.length ? ` в жанрах ${genres.join(", ")}` : ""}.`;
+    const facts = [];
+    if (rating > 0) facts.push(`рейтинг ${rating.toFixed(1)}`);
+    const episodes = text(item && (item.episodes || item.episodeCount));
+    const studio = text(item && (item.studio || item.studios));
+    const country = text(item && (item.country || item.countries));
+    if (episodes) facts.push(`эпизодов: ${episodes}`);
+    if (studio) facts.push(`студия: ${studio}`);
+    if (country) facts.push(`страна: ${country}`);
+    const second = facts.length
+      ? `Из подтверждённых данных: ${facts.join(", ")}.`
+      : "Полный официальный синопсис ещё не получен; карточка показывает только подтверждённые данные.";
+    return `${first} ${second}`;
+  }
+
+  const previousDisplayOverview =
+    typeof displayOverview === "function" ? displayOverview : null;
+
+  displayOverview = function gkmV351DisplayOverview(item){
+    const candidates = [];
+    try {
+      if (previousDisplayOverview) candidates.push(text(previousDisplayOverview(item)));
+    } catch {}
+    candidates.push(...fieldCandidates(item));
+    const real = candidates.find(value => !isBoilerplate(value));
+    return real || factualFallback(item);
+  };
+
+  function removeDuplicateDescription(){
+    document.querySelectorAll("#gkmV223DescriptionBlock, #gkmV225FullDescription").forEach(node => node.remove());
+    document.querySelectorAll(".gkm-v225-short-desc-muted").forEach(node => {
+      node.classList.remove("gkm-v225-short-desc-muted");
+    });
+  }
+
+  function restoreFamilyCards(){
+    document.querySelectorAll("#gkmFamilyBlock .gkm-family-card").forEach(card => {
+      card.style.opacity = "1";
+      card.style.filter = "none";
+      card.style.mixBlendMode = "normal";
+    });
+    document.querySelectorAll("#gkmFamilyBlock .gkm-family-poster").forEach(img => {
+      if (!(img instanceof HTMLImageElement)) return;
+      img.style.opacity = "1";
+      img.style.filter = "saturate(1.08) contrast(1.04) brightness(1.08)";
+      img.style.mixBlendMode = "normal";
+    });
+    if (typeof schedulePosterRecovery === "function") {
+      const family = document.getElementById("gkmFamilyBlock");
+      if (family) schedulePosterRecovery(family);
+    }
+  }
+
+  function repairOpenedCard(){
+    removeDuplicateDescription();
+    restoreFamilyCards();
+    const overview = document.getElementById("detailOverview");
+    const item = window.selectedItem || window.currentDetailItem || window.detailItem;
+    if (overview && item) overview.textContent = displayOverview(item);
+  }
+
+  const observer = new MutationObserver(() => {
+    removeDuplicateDescription();
+    restoreFamilyCards();
+  });
+
+  function install(){
+    removeDuplicateDescription();
+    restoreFamilyCards();
+    observer.observe(document.documentElement, { childList:true, subtree:true });
+    document.addEventListener("click", () => {
+      setTimeout(repairOpenedCard, 40);
+      setTimeout(repairOpenedCard, 300);
+    }, true);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", install, { once:true });
+  } else {
+    install();
+  }
+
+  console.log("GKM V351: all card descriptions, colours and family posters repaired");
+})();
+/* GKM V351 ALL CARD DETAILS INTEGRITY END */

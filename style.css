@@ -1986,3 +1986,41 @@ body #grid:has(.studio-top-grid){display:block !important;}
   color:#fff !important;
   text-shadow:0 1px 10px rgba(0,0,0,.75);
 }
+
+/* GKM V351 — colour and poster integrity for every family/season card */
+#gkmFamilyBlock,
+#gkmFamilyBlock .gkm-family-row,
+#gkmFamilyBlock .gkm-family-card,
+#gkmFamilyBlock .gkm-family-info,
+#gkmFamilyBlock .gkm-family-title,
+#gkmFamilyBlock .gkm-family-alt,
+#gkmFamilyBlock .gkm-family-meta {
+  opacity:1 !important;
+  filter:none !important;
+  mix-blend-mode:normal !important;
+}
+#gkmFamilyBlock .gkm-family-card {
+  color:#fff !important;
+  border-color:color-mix(in srgb,var(--detail-accent) 48%,transparent) !important;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--detail-accent-2) 20%,#071226),#071226 70%) !important;
+}
+#gkmFamilyBlock .gkm-family-poster {
+  opacity:1 !important;
+  filter:saturate(1.08) contrast(1.04) brightness(1.08) !important;
+  mix-blend-mode:normal !important;
+}
+#gkmFamilyBlock .gkm-family-empty {
+  display:grid !important;
+  place-items:center;
+  min-height:255px;
+  padding:14px;
+  color:#fff;
+  font-weight:900;
+  text-align:center;
+  background:
+    radial-gradient(circle at 30% 20%,color-mix(in srgb,var(--detail-accent) 50%,transparent),transparent 40%),
+    linear-gradient(145deg,#15234a,#49206f 52%,#0b7189) !important;
+}
+#gkmFamilyBlock .poster-missing > img.gkm-family-poster {
+  display:none !important;
+}
