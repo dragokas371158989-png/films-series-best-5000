@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "351";
+const GKM_DATA_CACHE_VERSION = "352";
 const HOME_URL = `${FAST_BASE}/home.json`;
 const META_URL = `${FAST_BASE}/meta.json`;
 const SEARCH_URL = `${FAST_BASE}/search_index.json`;
@@ -16179,3 +16179,290 @@ Endpoint: ${endpoint||"не задан"}`;
   console.log("GKM V351: all card descriptions, colours and family posters repaired");
 })();
 /* GKM V351 ALL CARD DETAILS INTEGRITY END */
+
+
+/* GKM V352 HOME COLLECTIONS, PART TITLES AND GENRES START */
+(function(){
+  if (window.GKM_V352_COLLECTIONS_INSTALLED === "1") return;
+  window.GKM_V352_COLLECTIONS_INSTALLED = "1";
+  window.GKM_V352_COLLECTIONS_VERSION =
+    "v352-home-collections-part-titles-clean-genres-2026-07-24";
+
+  function text(value){
+    return String(value == null ? "" : value).replace(/\s+/g, " ").trim();
+  }
+
+  function norm(value){
+    return text(value)
+      .toLowerCase()
+      .replace(/ё/g, "е")
+      .replace(/[’`]/g, "'")
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function rawTitle(item){
+    return [
+      item && item.ru,
+      item && item.title_ru,
+      item && item.__manualTopTitle,
+      item && item.en,
+      item && item.title,
+      item && item.name,
+      item && item.originalTitle,
+      item && item.original_title,
+      item && item.original_name,
+      item && Array.isArray(item.aliases) ? item.aliases.join(" ") : ""
+    ].filter(Boolean).join(" ");
+  }
+
+  function yearOf(item){
+    try {
+      if (typeof getYear === "function") return text(getYear(item));
+    } catch {}
+    const match = text(item && (item.year || item.release_date || item.first_air_date))
+      .match(/(19\d{2}|20\d{2})/);
+    return match ? match[1] : "";
+  }
+
+  const FAMILY_RULES = [
+    ["Атака титанов", ["атака титанов", "attack on titan", "shingeki no kyojin"]],
+    ["Моя геройская академия", ["моя геройская академия", "my hero academia", "boku no hero academia"]],
+    ["Re:Zero", ["re zero", "rezero", "жизнь с нуля", "re starting life"]],
+    ["Наруто", ["наруто", "naruto", "shippuden", "shippuuden", "boruto"]],
+    ["Блич", ["блич", "bleach", "thousand year blood", "sennen kessen", "tybw"]],
+    ["Ван-Пис", ["ван пис", "ванпис", "one piece"]],
+    ["Стальной алхимик", ["стальной алхимик", "fullmetal alchemist", "hagane no renkinjutsushi"]],
+    ["Токийский гуль", ["токийский гуль", "tokyo ghoul"]],
+    ["Драконий жемчуг", ["драконий жемчуг", "dragon ball"]],
+    ["Охотник x Охотник", ["hunter x hunter", "охотник х охотник", "охотник x охотник"]],
+    ["Истребитель демонов", ["истребитель демонов", "demon slayer", "kimetsu no yaiba"]],
+    ["Магическая битва", ["магическая битва", "jujutsu kaisen"]],
+    ["Код Гиас", ["код гиас", "code geass"]],
+    ["Фрирен", ["фрирен", "frieren"]],
+    ["Сага о Винланде", ["сага о винланде", "vinland saga"]],
+    ["Поднятие уровня в одиночку", ["поднятие уровня в одиночку", "solo leveling"]]
+  ];
+
+  function familyLabel(item){
+    const raw = norm(rawTitle(item));
+    for (const [label, aliases] of FAMILY_RULES) {
+      if (aliases.some(alias => raw.includes(norm(alias)))) return label;
+    }
+    return "";
+  }
+
+  function explicitPart(rawValue){
+    const raw = norm(rawValue);
+    let match = raw.match(/final season part (\d+)/);
+    if (match) return `Финальный сезон · часть ${match[1]}`;
+    match = raw.match(/финальн\w* сезон\w* часть (\d+)/);
+    if (match) return `Финальный сезон · часть ${match[1]}`;
+    if (raw.includes("final season") || raw.includes("финальный сезон")) return "Финальный сезон";
+
+    const season =
+      raw.match(/season (\d+)/) ||
+      raw.match(/(\d+) season/) ||
+      raw.match(/сезон (\d+)/) ||
+      raw.match(/(\d+) сезон/);
+    const part =
+      raw.match(/part (\d+)/) ||
+      raw.match(/част[ьи] (\d+)/);
+    if (season && part) return `Сезон ${season[1]} · часть ${part[1]}`;
+    if (season) return `Сезон ${season[1]}`;
+    if (part) return `Часть ${part[1]}`;
+    if (raw.includes("kanketsu") || raw.includes("финал")) return "Финал";
+    if (/\bova\b|\bona\b|спешл|special/.test(raw)) return "OVA / спецвыпуск";
+    if (/\bmovie\b|\bfilm\b|фильм/.test(raw)) return "Фильм";
+    return "";
+  }
+
+  function knownPartByYear(item, label){
+    const year = yearOf(item);
+    const raw = norm(rawTitle(item));
+    if (label === "Атака титанов" && !/\bmovie\b|фильм/.test(raw)) {
+      if (year === "2013") return "Сезон 1";
+      if (year === "2017") return "Сезон 2";
+      if (year === "2018") return "Сезон 3";
+      if (year === "2019") return "Сезон 3 · часть 2";
+      if (year === "2020" || year === "2021") return "Финальный сезон";
+      if (year === "2022") return "Финальный сезон · часть 2";
+      if (year === "2023") return "Финал";
+    }
+    if (label === "Моя геройская академия") {
+      const map = {
+        "2016":"Сезон 1", "2017":"Сезон 2", "2018":"Сезон 3",
+        "2019":"Сезон 4", "2020":"Сезон 4", "2021":"Сезон 5",
+        "2022":"Сезон 6", "2024":"Сезон 7"
+      };
+      if (map[year]) return map[year];
+    }
+    return "";
+  }
+
+  function partLabel(item){
+    const label = familyLabel(item);
+    if (!label) return "";
+    return explicitPart(rawTitle(item)) || knownPartByYear(item, label);
+  }
+
+  const previousDisplayTitle =
+    typeof displayTitle === "function" ? displayTitle : null;
+
+  displayTitle = function gkmV352DisplayTitle(item){
+    if (item && item.__gkmCollectionCount) {
+      return text(item.__gkmCollectionLabel || item.__manualTopTitle || item.ru) || "Коллекция";
+    }
+
+    let current = "";
+    try {
+      current = text(previousDisplayTitle ? previousDisplayTitle(item) : "");
+    } catch {}
+    current = current || text(item && (item.ru || item.title_ru || item.title || item.name)) || "Без названия";
+
+    const label = familyLabel(item);
+    const part = partLabel(item);
+    if (!label || !part) return current;
+    if (/(?:сезон|часть|финал|ова|ova|спецвыпуск|фильм)\b/i.test(current)) return current;
+    if (norm(current) === norm(label)) return `${label} — ${part}`;
+    return current;
+  };
+
+  const MEDIA_GENRES = new Set([
+    "аниме", "anime", "фильм", "film", "movie", "сериал", "series",
+    "tv", "мультфильм", "мультсериал", "cartoon", "animation",
+    "animated series", "игра", "game", "книга", "book", "манга",
+    "manga", "ранобэ", "light novel", "комикс", "comic"
+  ].map(norm));
+
+  function cleanGenres(values){
+    const list = Array.isArray(values)
+      ? values
+      : text(values).split(/[,|/]+/);
+    const result = [];
+    const seen = new Set();
+    list.forEach(value => {
+      const title = text(value && typeof value === "object" ? (value.name || value.title) : value);
+      const key = norm(title);
+      if (!title || !key || MEDIA_GENRES.has(key) || seen.has(key)) return;
+      seen.add(key);
+      result.push(title);
+    });
+    return result;
+  }
+
+  const previousGetGenres =
+    typeof getGenres === "function" ? getGenres : null;
+
+  getGenres = function gkmV352GetGenres(item){
+    let values = [];
+    try {
+      values = previousGetGenres ? previousGetGenres(item) : (item && item.genres);
+    } catch {
+      values = item && item.genres;
+    }
+    return cleanGenres(values);
+  };
+
+  function collapse(items){
+    const source = Array.isArray(items) ? items.filter(Boolean) : [];
+    if (typeof window.GKM_V329_COLLAPSE_FRANCHISE_LIST !== "function") {
+      return { items:source, removed:0, collections:0 };
+    }
+    try {
+      return window.GKM_V329_COLLAPSE_FRANCHISE_LIST(source);
+    } catch {
+      return { items:source, removed:0, collections:0 };
+    }
+  }
+
+  renderHome = async function gkmV352RenderHome(){
+    currentMode = "home";
+    currentTab = "all";
+    currentPage = 1;
+    currentPages = 1;
+    setActiveTab("all");
+    setStatus("Загружаю главную...");
+    homeData = homeData || await fetchJson(HOME_URL);
+
+    const sections = homeData.sections || {};
+    const homePool = [];
+    const order = [
+      ["popular", "Популярное"],
+      ["top", "Топ"],
+      ["new", "Новинки"],
+      ["movies", "Фильмы"],
+      ["series", "Сериалы"],
+      ["anime", "Аниме"],
+      ["cartoons", "Мультфильмы"]
+    ];
+
+    let collections = 0;
+    let removed = 0;
+    const grid = $("grid");
+    const count = $("countText");
+    const page = $("pageText");
+    const prev = $("prevBtn");
+    const next = $("nextBtn");
+
+    const html = order.map(([key, title]) => {
+      const source = (sections[key] || [])
+        .filter(hasPoster)
+        .filter(item => key === "new" ? getVotes(item) >= 100 : !isLowTrustTopItem(item));
+      const result = collapse(source);
+      const list = (result.items || source).slice(0, 18);
+      collections += Number(result.collections || 0);
+      removed += Number(result.removed || 0);
+      homePool.push(...list);
+      return `
+        <section class="home-section" data-gkm-v352-section="${escapeAttr(key)}">
+          <div class="home-section-head">
+            <h3>${escapeHtml(title)}</h3>
+            <button class="home-more-btn" data-open-tab="${escapeAttr(key)}" type="button">Открыть</button>
+          </div>
+          <div class="home-row">${list.map(cardHtml).join("")}</div>
+        </section>
+      `;
+    }).join("");
+
+    if (grid) {
+      grid.innerHTML = html;
+      schedulePosterRecovery(grid);
+    }
+    if (count) {
+      count.textContent =
+        `Главная · всего ${homeData.total || 0} · коллекции: ${collections} · дублей скрыто: ${removed}`;
+    }
+    if (page) page.textContent = "1 / 1";
+    if (prev) prev.disabled = true;
+    if (next) next.disabled = true;
+
+    const seen = new Set();
+    currentItems = homePool.filter(item => {
+      const key = String(item && (item.id || `${titleOf(item)}|${getYear(item)}`));
+      if (!item || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+    setStatus(`Готово · ${homeData.total || 0} записей`);
+  };
+
+  window.GKM_V352_TEST_API = {
+    cleanGenres,
+    familyLabel,
+    partLabel,
+    collapse
+  };
+
+  function repaintHome(){
+    try {
+      if (currentMode === "home" && typeof renderHome === "function") renderHome();
+    } catch {}
+  }
+
+  setTimeout(repaintHome, 250);
+  setTimeout(repaintHome, 1200);
+  console.log("GKM V352: home collections, season titles and genres repaired");
+})();
+/* GKM V352 HOME COLLECTIONS, PART TITLES AND GENRES END */
