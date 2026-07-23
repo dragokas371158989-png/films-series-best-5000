@@ -1,4 +1,4 @@
-name: Build fast site data V344
+name: DISABLED - Build fast site data V344
 
 on:
   workflow_dispatch:
@@ -12,6 +12,7 @@ concurrency:
 
 jobs:
   build-fast-data:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
 

@@ -210,32 +210,40 @@ jobs:
 
           pipeline_start="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           echo "Master pipeline started at: $pipeline_start"
-          echo "Every stage is explicitly started with workflow_dispatch."
+          echo "Dispatching V344 once; downstream workflow_run events continue the chain."
 
           dispatch_and_wait \
             "1" \
             "V344 — обновление каталога" \
             "gkm_v344_safe_auto_update.yml"
 
-          dispatch_and_wait \
+          wait_for_run \
             "2" \
             "V3453.1 — возврат русификации" \
-            "gkm_v3453_1_sync_after_update.yml"
+            "gkm_v3453_1_sync_after_update.yml" \
+            "workflow_run" \
+            "$LAST_UPDATED_AT"
 
-          dispatch_and_wait \
+          wait_for_run \
             "3" \
             "V3454 — топ аниме и студии" \
-            "gkm_v3454_rebuild_anime_buttons.yml"
+            "gkm_v3454_rebuild_anime_buttons.yml" \
+            "workflow_run" \
+            "$LAST_UPDATED_AT"
 
-          dispatch_and_wait \
+          wait_for_run \
             "4" \
             "V3460.2 — синхронизация meta.json" \
-            "gkm_v3460_sync_meta.yml"
+            "gkm_v3460_sync_meta.yml" \
+            "workflow_run" \
+            "$LAST_UPDATED_AT"
 
-          dispatch_and_wait \
+          wait_for_run \
             "5" \
             "V3460 — финальная проверка здоровья" \
-            "gkm_v3460_health_audit.yml"
+            "gkm_v3460_health_audit.yml" \
+            "workflow_run" \
+            "$LAST_UPDATED_AT"
 
       - name: Refresh repository after final health commit
         shell: bash

@@ -39,6 +39,7 @@ jobs:
           test -f tools/gkm_v339_safe_auto_update.py
           test -f tools/gkm_v344_build_poster_wall.py
           test -f tools/gkm_v344_maintenance.py
+          test -f tools/gkm_v3454_rebuild_anime_buttons.py
           test -f tools/build_fast_site_data.py
           test -n "$KINOPOISK_API_KEY"
           echo "V344 updater files and secret found"
@@ -71,6 +72,9 @@ jobs:
       - name: Keep search indexes below GitHub file limit
         run: python tools/gkm_v3460_compact_search_index.py
 
+      - name: Rebuild anime top and studio databases
+        run: python tools/gkm_v3454_rebuild_anime_buttons.py
+
       - name: Validate generated data and code
         run: |
           python tools/gkm_v339_safe_auto_update.py --validate-only
@@ -85,6 +89,9 @@ jobs:
           search = json.loads(Path('data/fast/search_index.json').read_text(encoding='utf-8'))
           lite = json.loads(Path('data/fast/search_lite.json').read_text(encoding='utf-8'))
           wall = json.loads(Path('data/fast/poster_wall_v333/manifest.json').read_text(encoding='utf-8'))
+          anime_top = json.loads(Path('data/fast/anime_top_manual.json').read_text(encoding='utf-8'))
+          studios_top = json.loads(Path('data/fast/anime_studios_top.json').read_text(encoding='utf-8'))
+          studios_detail = json.loads(Path('data/fast/anime_studios_detail.json').read_text(encoding='utf-8'))
 
           assert isinstance(search, list) and search
           assert isinstance(lite, list) and 1000 <= len(lite) <= len(search)
@@ -92,6 +99,9 @@ jobs:
           assert 0 < int(wall.get('total') or 0) <= len(search)
           assert wall.get('version', '').startswith('v344-')
           assert int(wall.get('sourceTotal') or 0) == len(search)
+          assert len(anime_top.get('items', [])) >= 50
+          assert studios_top.get('studios')
+          assert studios_detail.get('studios')
           full_size = Path('data/fast/search_index.json').stat().st_size
           lite_size = Path('data/fast/search_lite.json').stat().st_size
           assert full_size < 94 * 1024 * 1024, full_size
@@ -153,12 +163,14 @@ jobs:
             tools/gkm_v339_safe_auto_update.py
             tools/gkm_v344_build_poster_wall.py
             tools/gkm_v344_maintenance.py
+            tools/gkm_v3454_rebuild_anime_buttons.py
             tools/gkm_v3460_compact_search_index.py
             .github/workflows/gkm_v344_safe_auto_update.yml
           )
 
           optional=(
             TEST_REPORT_V344_MAINTENANCE.json
+            TEST_REPORT_V3454_ANIME_BUTTONS.json
             TEST_REPORT_V3460_3_1_SEARCH_COMPACT.json
           )
 

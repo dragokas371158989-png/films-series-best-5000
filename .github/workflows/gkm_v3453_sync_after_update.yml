@@ -1,11 +1,6 @@
-name: GKM V3453 Sync Russian Cache After Daily Update
+name: DISABLED - GKM V3453 Sync Russian Cache After Daily Update
 
 on:
-  workflow_run:
-    workflows:
-      - GKM V344 Safe Daily Catalog Update
-    types:
-      - completed
   workflow_dispatch:
 
 permissions:
@@ -17,9 +12,7 @@ concurrency:
 
 jobs:
   sync:
-    if: >
-      github.event_name == 'workflow_dispatch' ||
-      github.event.workflow_run.conclusion == 'success'
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 120
 
