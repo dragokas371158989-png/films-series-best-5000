@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "353";
+const GKM_DATA_CACHE_VERSION = "3531";
 const HOME_URL = `${FAST_BASE}/home.json`;
 const META_URL = `${FAST_BASE}/meta.json`;
 const SEARCH_URL = `${FAST_BASE}/search_index.json`;
@@ -14377,6 +14377,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 (function(){
   window.GKM_V343_SOFT_FISHEYE_VIDEO_WALL_VERSION = "v343-soft-fisheye-video-wall-2026-07-21";
   window.GKM_V353_PROGRESSIVE_POSTER_WALL_VERSION = "v353-progressive-poster-wall-2026-07-24";
+  window.GKM_V353_1_TAIL_SPEED_VERSION = "v353.1-tail-speed-2026-07-24";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
@@ -14420,8 +14421,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let loadCursor = 0;
   let activeLoads = 0;
   let loadedCount = 0;
+  let completedCount = 0;
+  let failedCount = 0;
   let backdropLoaded = 0;
   let itemLoaded = [];
+  let itemSettled = [];
   let shuffleSeed = 0;
   let activeReveals = [];
   let pendingReveals = [];
@@ -14439,12 +14443,17 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let motionFrame = 0;
   let lensDirty = false;
 
-  const FIRST_CONCURRENCY = 44;
-  const REST_CONCURRENCY = 24;
+  const FIRST_CONCURRENCY = 48;
+  const REST_CONCURRENCY = 72;
+  const TAIL_CONCURRENCY = 108;
   const BACKDROP_CONCURRENCY = 14;
-  const TILE_FADE_MS = 240;
-  const MAX_ACTIVE_REVEALS = 96;
-  const REVEALS_PER_FRAME = 24;
+  const TILE_FADE_MS = 170;
+  const MAX_ACTIVE_REVEALS = 144;
+  const REVEALS_PER_FRAME = 36;
+  const PRIMARY_IMAGE_TIMEOUT_MS = 4200;
+  const FALLBACK_IMAGE_TIMEOUT_MS = 3600;
+  const TAIL_PRIMARY_TIMEOUT_MS = 2300;
+  const TAIL_FALLBACK_TIMEOUT_MS = 1900;
   const LENS_SIZE = 330;
   const LENS_RADIUS = LENS_SIZE / 2;
 
@@ -14929,19 +14938,23 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       if(token!==loadToken||index>=wallItems.length){ resolve(); return; }
 
       const item=wallItems[index];
-      const rec=getThumbRecord(item);
-      if(!rec){ resolve(); return; }
-
       const finish=img=>{
-        if(token===loadToken&&img){
-          if(!itemLoaded[index]){
+        if(token===loadToken&&!itemSettled[index]){
+          itemSettled[index]=true;
+          completedCount++;
+          if(img){
             itemLoaded[index]=true;
             loadedCount++;
+            queueTileReveal(index,img);
+          }else{
+            failedCount++;
           }
-          queueTileReveal(index,img);
         }
         resolve();
       };
+
+      const rec=getThumbRecord(item);
+      if(!rec){ finish(null); return; }
 
       if(rec.state==="loaded"&&rec.img){ finish(rec.img); return; }
       if(rec.state==="loading"){ rec.callbacks.push(finish); return; }
@@ -14951,10 +14964,20 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
       const img=new Image();
       img.decoding="async";
-      img.fetchPriority=index<900?"high":"auto";
+      img.fetchPriority=index<900||index>=Math.floor(wallItems.length*.72)?"high":"auto";
       img.referrerPolicy="no-referrer";
 
+      let done=false;
+      let timer=0;
+      let fallbackStarted=false;
+      const isTail=index>=Math.floor(wallItems.length*.78);
+      const primaryTimeout=isTail?TAIL_PRIMARY_TIMEOUT_MS:PRIMARY_IMAGE_TIMEOUT_MS;
+      const fallbackTimeout=isTail?TAIL_FALLBACK_TIMEOUT_MS:FALLBACK_IMAGE_TIMEOUT_MS;
+
       const complete=success=>{
+        if(done) return;
+        done=true;
+        clearTimeout(timer);
         if(success){
           rec.state="loaded";
           rec.img=img;
@@ -14965,21 +14988,33 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         callbacks.forEach(cb=>cb(success?img:null));
       };
 
-      img.onload=()=>complete(true);
-      img.onerror=()=>{
+      const startFallback=()=>{
+        if(done) return;
         const raw=fullPosterUrl(item);
-        if(raw&&img.src!==raw){
+        if(!fallbackStarted&&raw&&raw!==rec.url){
+          fallbackStarted=true;
+          clearTimeout(timer);
           img.onerror=()=>complete(false);
           img.src=raw;
-        }else complete(false);
+          timer=setTimeout(()=>complete(false),fallbackTimeout);
+        }else{
+          complete(false);
+        }
       };
+
+      img.onload=()=>complete(true);
+      img.onerror=startFallback;
       img.src=rec.url;
+      timer=setTimeout(startFallback,primaryTimeout);
     });
   }
 
   function pumpQueue(token){
     if(token!==loadToken||!isOpen) return;
-    const limit=loadCursor<900?FIRST_CONCURRENCY:REST_CONCURRENCY;
+    const progress=wallItems.length?loadCursor/wallItems.length:1;
+    const limit=progress<.22
+      ? FIRST_CONCURRENCY
+      : (progress<.78?REST_CONCURRENCY:TAIL_CONCURRENCY);
 
     while(activeLoads<limit&&loadCursor<wallItems.length){
       const index=loadCursor++;
@@ -14988,10 +15023,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         activeLoads--;
         if(token!==loadToken) return;
 
-        if((loadedCount>0&&loadedCount%120===0)||loadCursor===wallItems.length){
+        if(
+          (completedCount>0&&completedCount%120===0)||
+          completedCount===wallItems.length
+        ){
+          const tail=failedCount
+            ? ` Недоступных ссылок: ${failedCount}; вместо них остаётся крупный фон.`
+            : "";
           setStatus(
             `${labelKind(currentKind)} — ${wallItems.length} постеров`,
-            `Мелкая мозаика ${Math.min(loadedCount,wallItems.length)}/${wallItems.length}. Крупные постеры остаются фоном до полного заполнения.`
+            `Обработано ${Math.min(completedCount,wallItems.length)}/${wallItems.length}; загружено ${Math.min(loadedCount,wallItems.length)}.${tail}`
           );
         }
         pumpQueue(token);
@@ -15007,8 +15048,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     loadCursor=0;
     activeLoads=0;
     loadedCount=0;
+    completedCount=0;
+    failedCount=0;
     backdropLoaded=0;
     itemLoaded=new Array(wallItems.length).fill(false);
+    itemSettled=new Array(wallItems.length).fill(false);
 
     paintSkeleton();
     setStatus(
@@ -15417,8 +15461,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div class="gkmV343Shade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V353</div>
-          <div class="gkmV343Sub">Крупные постеры заполняют экран, затем плавно появляется детальная мозаика.</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V353.1</div>
+          <div class="gkmV343Sub">Быстрый хвост загрузки: крупный фон и ускоренная детальная мозаика.</div>
         </div>
         <div class="gkmV343Actions">
           <button data-kind="all">Все</button>
@@ -15532,7 +15576,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V353_TEST_API={
     balancedLayout,
     rectFor,
-    version:window.GKM_V353_PROGRESSIVE_POSTER_WALL_VERSION
+    version:window.GKM_V353_PROGRESSIVE_POSTER_WALL_VERSION,
+    tailSpeedVersion:window.GKM_V353_1_TAIL_SPEED_VERSION,
+    concurrency:{
+      first:FIRST_CONCURRENCY,
+      rest:REST_CONCURRENCY,
+      tail:TAIL_CONCURRENCY
+    }
   };
 
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",install,{once:true});
@@ -15540,7 +15590,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V353: progressive full-screen poster wall installed");
+  console.log("GKM V353.1: accelerated progressive full-screen poster wall installed");
 })();
 /* GKM V343 SOFT FISHEYE VIDEO WALL END */
 
