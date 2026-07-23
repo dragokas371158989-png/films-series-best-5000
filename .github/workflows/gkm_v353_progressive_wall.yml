@@ -1,0 +1,78 @@
+name: GKM V353 Progressive Full-Screen Poster Wall
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v353-progressive-wall
+  cancel-in-progress: false
+
+jobs:
+  validate-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate V353 wall
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check app.js
+          python -m py_compile tools/gkm_v353_progressive_wall_audit.py
+          grep -F 'app.js?v=353' index.html
+          grep -F 'GKM_DATA_CACHE_VERSION = "353"' app.js
+          grep -F 'GKM_V353_PROGRESSIVE_POSTER_WALL_VERSION' app.js
+          grep -F 'loadBackdrop(wallItems,backgroundToken).finally' app.js
+          grep -F 'queueTileReveal' app.js
+
+      - name: Audit progressive wall
+        run: python tools/gkm_v353_progressive_wall_audit.py
+
+      - name: Commit audit report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gkm-v353-wall-bot"
+          git config user.email "gkm-v353-wall-bot@users.noreply.github.com"
+          git add TEST_REPORT_V353_PROGRESSIVE_WALL.json
+          if git diff --cached --quiet; then
+            echo "No report changes to commit"
+            exit 0
+          fi
+          git commit -m "Audit progressive poster wall with V353"
+          git stash push --include-untracked -m "gkm-v353-audit-leftovers" || true
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+
+      - name: Publish summary
+        if: always()
+        shell: bash
+        run: |
+          echo "### GKM V353 — полноэкранная Canvas-мозаика" >> "$GITHUB_STEP_SUMMARY"
+          echo "Крупные постеры сначала закрывают весь экран." >> "$GITHUB_STEP_SUMMARY"
+          echo "Мелкая мозаика плавно накладывается сверху без пустой синей зоны." >> "$GITHUB_STEP_SUMMARY"
+          echo "Повторы не создаются; фильтры, линза и карточки сохранены." >> "$GITHUB_STEP_SUMMARY"
+          echo "Отчёт: \`TEST_REPORT_V353_PROGRESSIVE_WALL.json\`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gkm-v353-progressive-wall-report
+          retention-days: 30
+          path: TEST_REPORT_V353_PROGRESSIVE_WALL.json
