@@ -1,498 +1,292 @@
-#!/usr/bin/env python3
-"""
-GKM V3460.1 — stable-core health audit.
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ГОЛУБЬ Каталог Мира — фильмы, сериалы, аниме и мультфильмы</title>
 
-Read-only inspection of the repository. It writes only:
-- data/health_v3460.json
-- TEST_REPORT_V3460_HEALTH.json
+  <meta name="description" content="ГОЛУБЬ Каталог Мира — быстрый онлайн-каталог фильмов, сериалов, аниме и мультфильмов с поиском, фильтрами, рейтингами, новинками и избранным.">
+  <meta name="keywords" content="Голубь Каталог Мира, фильмы, сериалы, аниме, мультфильмы, каталог фильмов, топ фильмов, новинки кино, популярные сериалы, лучшее аниме">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="ГОЛУБЬ Каталог Мира">
+  <link rel="canonical" href="https://dragokas371158989-png.github.io/films-series-best-5000/">
 
-Checks:
-- critical files and JSON;
-- JavaScript syntax;
-- full search index counts;
-- Russian titles and genres;
-- duplicate and empty IDs;
-- anime top/studio databases;
-- 3D poster wall;
-- static pages and key workflows.
+  <meta property="og:url" content="https://dragokas371158989-png.github.io/films-series-best-5000/">
+  <meta property="og:title" content="ГОЛУБЬ Каталог Мира">
+  <meta property="og:description" content="Фильмы, сериалы, аниме и мультфильмы с поиском, фильтрами и рейтингами.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="logo-banner.png.png">
+  <meta property="og:locale" content="ru_RU">
 
-The audit does not modify catalog records.
-"""
-from __future__ import annotations
+  <link rel="icon" type="image/png" href="favicon.png.png">
+  <link rel="shortcut icon" type="image/png" href="favicon.png.png">
+  <link rel="apple-touch-icon" href="favicon.png.png">
+  <link rel="stylesheet" href="style.css?v=251">
+  <style>
 
-import argparse
-import json
-import os
-import re
-import subprocess
-from collections import Counter
-from datetime import datetime, timezone
-from pathlib import Path
-from typing import Any
-
-ROOT = Path(__file__).resolve().parents[1]
-HEALTH_PATH = ROOT / "data" / "health_v3460.json"
-REPORT_PATH = ROOT / "TEST_REPORT_V3460_HEALTH.json"
-
-CYR = re.compile(r"[А-Яа-яЁё]")
-LAT = re.compile(r"[A-Za-z]")
-
-CRITICAL_FILES = [
-    "index.html",
-    "style.css",
-    "app.js",
-    "features_v344.js",
-    "ai_search_worker_v344.js",
-    "data/fast/search_index.json",
-    "data/fast/search_lite.json",
-    "data/fast/meta.json",
-    "data/fast/poster_wall_v333/manifest.json",
-    "data/fast/anime_top_manual.json",
-    "data/fast/anime_studios_top.json",
-    "data/fast/anime_studios_detail.json",
-]
-
-JS_FILES = [
-    "app.js",
-    "features_v344.js",
-    "ai_search_worker_v344.js",
-]
-
-WORKFLOW_FILES = [
-    ".github/workflows/gkm_v344_safe_auto_update.yml",
-    ".github/workflows/gkm_v3453_1_full_russian_site.yml",
-    ".github/workflows/gkm_v3453_1_sync_after_update.yml",
-    ".github/workflows/gkm_v3454_rebuild_anime_buttons.yml",
-]
-
-
-def read_json(path: Path, default=None):
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except Exception:
-        return default
-
-
-def text(value: Any) -> str:
-    return str(value or "").strip()
-
-
-def title_of(item: dict) -> str:
-    return text(
-        item.get("ru")
-        or item.get("title_ru")
-        or item.get("nameRu")
-        or item.get("title")
-        or item.get("name")
-        or item.get("en")
-    )
-
-
-def genres_of(item: dict) -> list[str]:
-    value = item.get("genres")
-    if isinstance(value, str):
-        return [part.strip() for part in re.split(r"[|,;/]", value) if part.strip()]
-    if isinstance(value, list):
-        output = []
-        for part in value:
-            if isinstance(part, dict):
-                part = part.get("name") or part.get("title") or ""
-            part = text(part)
-            if part:
-                output.append(part)
-        return output
-    return []
-
-
-def count_payload(value: Any, preferred_keys: tuple[str, ...]) -> int:
-    if isinstance(value, list):
-        return len(value)
-    if isinstance(value, dict):
-        for key in preferred_keys:
-            child = value.get(key)
-            if isinstance(child, list):
-                return len(child)
-            if isinstance(child, dict):
-                return len(child)
-        if isinstance(value.get("count"), (int, float)):
-            return int(value["count"])
-    return 0
-
-
-def run_node_check(relative_path: str) -> dict:
-    path = ROOT / relative_path
-    if not path.exists():
-        return {"ok": False, "message": "Файл отсутствует"}
-    try:
-        completed = subprocess.run(
-            ["node", "--check", str(path)],
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
-            timeout=60,
-        )
-    except FileNotFoundError:
-        return {"ok": False, "message": "Node.js не найден"}
-    except Exception as exc:
-        return {"ok": False, "message": str(exc)}
-    return {
-        "ok": completed.returncode == 0,
-        "message": (completed.stderr or completed.stdout or "OK").strip()[:1000],
+    /* GKM V160 — fixed controls layout: trash button no longer clipped, reset no longer stretches */
+    .controls{
+      display:grid!important;
+      grid-template-columns:minmax(280px,1fr) repeat(5,minmax(135px,170px)) 96px 118px!important;
+      gap:10px!important;
+      align-items:center!important;
     }
-
-
-def inspect_search_index(path: Path) -> dict:
-    rows = read_json(path)
-    if not isinstance(rows, list):
-        return {
-            "ok": False,
-            "count": 0,
-            "error": "search_index.json не является массивом",
-        }
-
-    ids = Counter()
-    empty_ids = 0
-    untranslated_titles = []
-    latin_genres = []
-    empty_titles = 0
-    types = Counter()
-
-    for item in rows:
-        if not isinstance(item, dict):
-            continue
-        iid = text(item.get("id"))
-        if iid:
-            ids[iid] += 1
-        else:
-            empty_ids += 1
-
-        title = title_of(item)
-        if not title:
-            empty_titles += 1
-        elif not CYR.search(title) and not (
-            re.sub(r"[\W_]+", "", title, flags=re.UNICODE).isdigit()
-        ):
-            untranslated_titles.append({"id": iid, "title": title})
-
-        for genre in genres_of(item):
-            if LAT.search(genre):
-                latin_genres.append({"id": iid, "title": title, "genre": genre})
-
-        item_type = text(item.get("type") or item.get("category") or "Не указан")
-        types[item_type] += 1
-
-    duplicate_ids = [iid for iid, count in ids.items() if count > 1]
-
-    return {
-        "ok": True,
-        "count": len(rows),
-        "emptyIds": empty_ids,
-        "emptyTitles": empty_titles,
-        "duplicateIds": len(duplicate_ids),
-        "duplicateIdExamples": duplicate_ids[:30],
-        "untranslatedTitles": len(untranslated_titles),
-        "untranslatedTitleExamples": untranslated_titles[:20],
-        "latinGenres": len(latin_genres),
-        "latinGenreExamples": latin_genres[:20],
-        "types": dict(types.most_common()),
+    .controls input,.controls select{min-width:0!important;width:100%!important;box-sizing:border-box!important;}
+    #cleanTrashBtn.clean-trash-btn{
+      width:96px!important;min-width:96px!important;max-width:96px!important;
+      padding:12px 8px!important;box-sizing:border-box!important;
+      white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;
+      font-size:14px!important;line-height:1.15!important;text-align:center!important;
+      justify-self:stretch!important;grid-column:auto!important;
     }
-
-
-def inspect_poster_wall(base: Path) -> dict:
-    manifest_path = base / "manifest.json"
-    manifest = read_json(manifest_path, {})
-    shards = []
-    for prefix in ("movies", "series", "anime", "cartoons"):
-        shards.extend(sorted(base.glob(f"{prefix}_*.json")))
-
-    total_rows = 0
-    parse_errors = []
-    duplicates = 0
-    seen_by_prefix: dict[str, set[str]] = {
-        "movies": set(),
-        "series": set(),
-        "anime": set(),
-        "cartoons": set(),
+    #resetBtn.reset-btn{
+      width:118px!important;min-width:118px!important;max-width:118px!important;
+      grid-column:auto!important;justify-self:stretch!important;box-sizing:border-box!important;
+      padding-left:12px!important;padding-right:12px!important;
     }
-
-    for path in shards:
-        rows = read_json(path)
-        if not isinstance(rows, list):
-            parse_errors.append(path.name)
-            continue
-        prefix = path.name.split("_", 1)[0]
-        seen = seen_by_prefix.setdefault(prefix, set())
-        for row in rows:
-            if not isinstance(row, list) or not row:
-                continue
-            total_rows += 1
-            iid = text(row[0])
-            if iid:
-                if iid in seen:
-                    duplicates += 1
-                else:
-                    seen.add(iid)
-
-    return {
-        "ok": bool(shards) and not parse_errors and total_rows > 0,
-        "manifestTotal": int(manifest.get("total") or 0) if isinstance(manifest, dict) else 0,
-        "manifestVersion": text(manifest.get("version")) if isinstance(manifest, dict) else "",
-        "sourceTotal": int(manifest.get("sourceTotal") or 0) if isinstance(manifest, dict) else 0,
-        "shards": len(shards),
-        "rows": total_rows,
-        "duplicateIdsInsideKinds": duplicates,
-        "parseErrors": parse_errors,
+    @media (max-width:1250px){
+      .controls{grid-template-columns:minmax(240px,1fr) repeat(3,minmax(130px,1fr)) 96px 118px!important;}
     }
-
-
-def validate_fast_json() -> dict:
-    files = sorted((ROOT / "data" / "fast").glob("*.json"))
-    files += sorted((ROOT / "data" / "fast" / "poster_wall_v333").glob("*.json"))
-
-    errors = []
-    for path in files:
-        try:
-            json.loads(path.read_text(encoding="utf-8"))
-        except Exception as exc:
-            errors.append({
-                "file": str(path.relative_to(ROOT)),
-                "error": str(exc)[:300],
-            })
-
-    return {
-        "checked": len(files),
-        "errors": len(errors),
-        "examples": errors[:20],
+    @media (max-width:760px){
+      .controls{grid-template-columns:1fr 1fr!important;}
+      #searchInput{grid-column:1 / -1!important;}
+      #cleanTrashBtn.clean-trash-btn,#resetBtn.reset-btn{width:100%!important;min-width:0!important;max-width:none!important;}
     }
+    .clean-trash-btn{background:linear-gradient(135deg,#151b32,#263459);border:1px solid #00d5ff;color:#eaf7ff;border-radius:14px;font-weight:800;box-shadow:0 0 14px rgba(0,213,255,.22);cursor:pointer}
+    .clean-trash-btn.active{background:linear-gradient(135deg,#00c8ff,#7b2cff);color:#03101a;box-shadow:0 0 20px rgba(0,213,255,.45)}
+  </style>
+<!-- GKM V60 TESTED RELEASE -->
+<!-- GKM V62 CLEAN ONLY REPLACE ROOT -->
+<!-- GKM V63 NO SCROLL BUTTONS -->
+<!-- GKM V64 HELPER CLOSE FIX -->
+<!-- GKM V65 BALANCED HOME -->
+<!-- GKM V66 RELATED CARDS -->
+<!-- GKM V67 VOTES FIRST -->
+<!-- GKM V68 STRICT DEPARTMENT PAGES -->
+<!-- GKM V69 FAST PAGES NO FREEZE -->
+<!-- GKM V70 STRICT TABS VOTE BUCKETS -->
+<!-- GKM V71 PAGER BUFFER NO SEARCH -->
+<!-- GKM V72 HARD PAGER TABS -->
+<!-- GKM V73 POSTER REPAIR -->
+<!-- GKM V74 REAL POSTERS FIRST -->
+<!-- GKM V75 NO FALLBACK FIRST PAGES -->
+<!-- GKM V76 HIDE NO POSTERS -->
+<!-- GKM V77 DEEP RETESTED -->
+<!-- GKM V78 SAFE SEARCH -->
+<!-- GKM V79 NO POSTER BOTTOM -->
 
+<script>
+/* GKM V232 CSS FAILSAFE */
+(function(){
+  function cssOk(){
+    try {
+      var b = document.body;
+      if (!b) return true;
+      var bg = getComputedStyle(b).backgroundColor;
+      return !(bg === "rgba(0, 0, 0, 0)" || bg === "transparent" || bg === "rgb(255, 255, 255)");
+    } catch(e){ return true; }
+  }
+  function inject(){
+    if (document.getElementById("gkm-v232-css-failsafe")) return;
+    var s = document.createElement("style");
+    s.id = "gkm-v232-css-failsafe";
+    s.textContent = `
+      html,body{background:#050816!important;color:#eef4ff!important;font-family:Inter,Arial,sans-serif!important}
+      header,.hero,.toolbar,.tabs,.subtabs,main{background:transparent!important}
+      button,.tab,select,input{border-radius:14px!important;border:1px solid rgba(0,212,255,.35)!important;background:linear-gradient(135deg,#35156e,#14b8ff)!important;color:#fff!important;font-weight:800!important;padding:10px 14px!important}
+      input,select{background:#071126!important}
+      .card{background:#081225!important;border:1px solid rgba(0,212,255,.25)!important;border-radius:18px!important;overflow:hidden!important;color:#fff!important}
+      .grid{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(180px,1fr))!important;gap:16px!important}
+      .poster-wrap img{width:100%!important;height:270px!important;object-fit:cover!important}
+      #detailsDialog{background:#080d22!important;color:#fff!important;border:1px solid #00d4ff!important;border-radius:18px!important}
+    `;
+    document.head.appendChild(s);
+  }
+  window.addEventListener("load", function(){ setTimeout(function(){ if(!cssOk()) inject(); }, 300); });
+})();
+</script>
 
-def file_status() -> dict:
-    result = {}
-    for relative in CRITICAL_FILES:
-        path = ROOT / relative
-        result[relative] = {
-            "exists": path.exists(),
-            "size": path.stat().st_size if path.exists() else 0,
-        }
-    return result
+</head>
 
+<body>
+  <header class="topbar">
+    <div class="logo-row">
+      <img class="site-logo" src="logo-banner.png.png" alt="ГОЛУБЬ Каталог Мира">
+      <p id="statusText" class="status-text">Загрузка...</p>
+        <button id="gkmAiTopBtn" class="ai-top-btn" type="button">🤖 Помощник</button>
+    </div>
+  </header>
 
-def status_check(checks: list[dict]) -> str:
-    critical_failed = any(
-        check.get("level") == "critical" and not check.get("ok")
-        for check in checks
-    )
-    warning_failed = any(
-        check.get("level") == "warning" and not check.get("ok")
-        for check in checks
-    )
-    if critical_failed:
-        return "critical"
-    if warning_failed:
-        return "warning"
-    return "healthy"
+  <section class="controls" aria-label="Фильтры">
+    <input id="searchInput" type="search" placeholder="Поиск: Матрица, Наруто, Во все тяжкие..." autocomplete="off">
 
+    <select id="typeFilter">
+      <option value="">Все типы</option>
+      <option value="Фильм">Фильмы</option>
+      <option value="Сериал">Сериалы</option>
+      <option value="Аниме">Аниме</option>
+      <option value="Мультфильм">Мультфильмы</option>
+    </select>
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--strict", action="store_true")
-    args = parser.parse_args()
+    <select id="genreFilter">
+      <option value="">Все жанры</option>
+    </select>
 
-    files = file_status()
-    search = inspect_search_index(ROOT / "data" / "fast" / "search_index.json")
-    search_lite = read_json(ROOT / "data" / "fast" / "search_lite.json", [])
-    meta = read_json(ROOT / "data" / "fast" / "meta.json", {})
-    top = read_json(ROOT / "data" / "fast" / "anime_top_manual.json")
-    studios_top = read_json(ROOT / "data" / "fast" / "anime_studios_top.json")
-    studios_detail = read_json(ROOT / "data" / "fast" / "anime_studios_detail.json")
-    wall = inspect_poster_wall(ROOT / "data" / "fast" / "poster_wall_v333")
-    fast_json = validate_fast_json()
-    js = {relative: run_node_check(relative) for relative in JS_FILES}
+    <select id="yearFilter">
+      <option value="">Все годы</option>
+    </select>
 
-    top_count = count_payload(top, ("items", "anime", "top"))
-    studios_count = count_payload(studios_top, ("studios", "items"))
-    studio_details_count = count_payload(studios_detail, ("studios", "items"))
-    static_pages = len(list((ROOT / "film").glob("*.html"))) if (ROOT / "film").exists() else 0
+    <select id="ratingFilter">
+      <option value="0">Любой рейтинг</option>
+      <option value="7">от 7.0</option>
+      <option value="8">от 8.0</option>
+      <option value="9">от 9.0</option>
+    </select>
 
-    checks = []
+    <select id="sortFilter">
+      <option value="smart">Умный топ</option>
+      <option value="rating">По рейтингу</option>
+      <option value="votes">По голосам</option>
+      <option value="year">По году</option>
+      <option value="title">По названию</option>
+    </select>
 
-    for relative, info in files.items():
-        checks.append({
-            "id": f"file:{relative}",
-            "name": f"Файл {relative}",
-            "ok": info["exists"] and info["size"] > 0,
-            "level": "critical",
-            "details": f"{info['size']} байт" if info["exists"] else "Файл отсутствует",
-        })
+    <button id="cleanTrashBtn" class="clean-trash-btn active" type="button">🧹 Чисто</button>
+    <button id="resetBtn" class="reset-btn" type="button">Сброс</button>
+  </section>
 
-    for relative, info in js.items():
-        checks.append({
-            "id": f"js:{relative}",
-            "name": f"JavaScript {relative}",
-            "ok": info["ok"],
-            "level": "critical",
-            "details": info["message"],
-        })
+  <nav class="tabs" aria-label="Разделы">
+    <button class="tab active" data-tab="all" type="button">Все</button>
+    <button class="tab" data-tab="movies" type="button">Фильмы</button>
+    <button class="tab" data-tab="series" type="button">Сериалы</button>
+    <button class="tab" data-tab="cartoons" type="button">Мультфильмы</button>
+    <button class="tab" data-tab="anime" type="button">Аниме</button>
+    <button class="tab" data-tab="anime_top" type="button">Топ аниме 100</button>
+    <button class="tab" data-tab="anime_studios" type="button">Топ студий</button>
+    <button class="tab" data-tab="top" type="button">Топ 250</button>
+    <button class="tab" data-tab="new" type="button">Новинки</button>
+    <button class="tab" data-tab="new_soon" type="button">Скоро выйдет</button>
+    <button class="tab" data-tab="new_released" type="button">Уже вышло</button>
+    <button class="tab" data-tab="new_popular" type="button">Популярное 2026</button>
+    <button class="tab" data-tab="top_current_year" type="button">Топ 2026</button>
+    <button class="tab" data-tab="top_2020s" type="button">Топ 2020-х</button>
+    <button class="tab" data-tab="top_2010s" type="button">Топ 2010-х</button>
+    <button class="tab" data-tab="top_2000s" type="button">Топ 2000-х</button>
+    <button class="tab" data-tab="top_1990s" type="button">Топ 90-х</button>
+    <button class="tab" data-tab="popular" type="button">Популярное</button>
+    <button class="tab" data-tab="fav" type="button">Избранное</button>
+    <button class="tab" data-tab="history" type="button">История</button>
+    <button class="tab" data-tab="random" type="button">Случайное</button>
+  </nav>
 
-    checks.extend([
-        {
-            "id": "search:count",
-            "name": "Основной каталог",
-            "ok": search.get("ok") and int(search.get("count") or 0) >= 1000,
-            "level": "critical",
-            "details": f"{search.get('count', 0)} записей",
-        },
-        {
-            "id": "search:duplicates",
-            "name": "Дубли ID в каталоге",
-            "ok": int(search.get("duplicateIds") or 0) == 0,
-            "level": "critical",
-            "details": str(search.get("duplicateIds", 0)),
-        },
-        {
-            "id": "search:russianTitles",
-            "name": "Русские названия",
-            "ok": int(search.get("untranslatedTitles") or 0) == 0,
-            "level": "critical",
-            "details": f"без русского: {search.get('untranslatedTitles', 0)}",
-        },
-        {
-            "id": "search:russianGenres",
-            "name": "Русские жанры",
-            "ok": int(search.get("latinGenres") or 0) == 0,
-            "level": "critical",
-            "details": f"с латиницей: {search.get('latinGenres', 0)}",
-        },
-        {
-            "id": "search:emptyIds",
-            "name": "Записи без ID",
-            "ok": int(search.get("emptyIds") or 0) == 0,
-            "level": "critical",
-            "details": str(search.get("emptyIds", 0)),
-        },
-        {
-            "id": "search:lite",
-            "name": "Облегчённый индекс",
-            "ok": isinstance(search_lite, list) and len(search_lite) >= 1000,
-            "level": "critical",
-            "details": f"{len(search_lite) if isinstance(search_lite, list) else 0} записей",
-        },
-        {
-            "id": "meta:count",
-            "name": "Счётчик meta.json",
-            "ok": isinstance(meta, dict)
-                  and int(meta.get("count") or 0) == int(search.get("count") or 0),
-            "level": "warning",
-            "details": f"meta={meta.get('count') if isinstance(meta, dict) else 0}, каталог={search.get('count', 0)}",
-        },
-        {
-            "id": "anime:top",
-            "name": "Топ аниме",
-            "ok": top_count >= 50,
-            "level": "critical",
-            "details": f"{top_count} записей",
-        },
-        {
-            "id": "anime:studios",
-            "name": "Топ студий",
-            "ok": studios_count > 0 and studio_details_count > 0,
-            "level": "critical",
-            "details": f"студий: {studios_count}, деталей: {studio_details_count}",
-        },
-        {
-            "id": "wall:rows",
-            "name": "3D-стена",
-            "ok": wall["ok"] and wall["rows"] > 0,
-            "level": "critical",
-            "details": f"{wall['rows']} карточек, {wall['shards']} частей",
-        },
-        {
-            "id": "wall:duplicates",
-            "name": "Дубли внутри 3D-стены",
-            "ok": wall["duplicateIdsInsideKinds"] == 0,
-            "level": "warning",
-            "details": str(wall["duplicateIdsInsideKinds"]),
-        },
-        {
-            "id": "json:fast",
-            "name": "JSON в data/fast",
-            "ok": fast_json["errors"] == 0,
-            "level": "critical",
-            "details": f"проверено: {fast_json['checked']}, ошибок: {fast_json['errors']}",
-        },
-        {
-            "id": "pages:static",
-            "name": "Статические карточки",
-            "ok": static_pages > 0,
-            "level": "warning",
-            "details": f"{static_pages} страниц",
-        },
-        {
-            "id": "workflow:core",
-            "name": "Основные workflows",
-            "ok": all((ROOT / path).exists() for path in WORKFLOW_FILES),
-            "level": "warning",
-            "details": ", ".join(
-                path for path in WORKFLOW_FILES if not (ROOT / path).exists()
-            ) or "Все присутствуют",
-        },
-    ])
+  <section class="seo-text">
+    <h1>Голубь Каталог Мира — каталог фильмов, сериалов, аниме и мультфильмов</h1>
+    <p>
+      Удобный онлайн-каталог с постерами, рейтингами, жанрами и годами выхода.
+      Здесь можно быстро найти фильм, сериал, мультфильм, аниме, новинку или популярный проект.
+    </p>
+  </section>
 
-    status = status_check(checks)
-    now = datetime.now(timezone.utc).isoformat()
+  <main>
+    <div id="countText" class="count"></div>
+    <div id="grid" class="grid"></div>
 
-    snapshot = {
-        "version": "V3460.1",
-        "status": status,
-        "generatedAt": now,
-        "commit": os.environ.get("GITHUB_SHA", ""),
-        "runUrl": (
-            f"{os.environ.get('GITHUB_SERVER_URL', '')}/"
-            f"{os.environ.get('GITHUB_REPOSITORY', '')}/actions/runs/"
-            f"{os.environ.get('GITHUB_RUN_ID', '')}"
-            if os.environ.get("GITHUB_RUN_ID")
-            else ""
-        ),
-        "summary": {
-            "catalogRecords": int(search.get("count") or 0),
-            "searchLiteRecords": len(search_lite) if isinstance(search_lite, list) else 0,
-            "animeTopRecords": top_count,
-            "studioRecords": studios_count,
-            "posterWallRecords": wall["rows"],
-            "staticPages": static_pages,
-            "untranslatedTitles": int(search.get("untranslatedTitles") or 0),
-            "latinGenres": int(search.get("latinGenres") or 0),
-            "duplicateIds": int(search.get("duplicateIds") or 0),
-            "criticalFailures": sum(
-                1 for check in checks
-                if check["level"] == "critical" and not check["ok"]
-            ),
-            "warnings": sum(
-                1 for check in checks
-                if check["level"] == "warning" and not check["ok"]
-            ),
-        },
-        "checks": checks,
-        "details": {
-            "files": files,
-            "javascript": js,
-            "search": search,
-            "posterWall": wall,
-            "fastJson": fast_json,
-            "types": search.get("types", {}),
-        },
-    }
+    <div class="pager">
+      <button id="prevBtn" type="button">Назад</button>
+      <span id="pageText"></span>
+      <button id="nextBtn" type="button">Вперёд</button>
+    </div>
+  </main>
 
-    HEALTH_PATH.parent.mkdir(parents=True, exist_ok=True)
-    rendered = json.dumps(snapshot, ensure_ascii=False, indent=2)
-    HEALTH_PATH.write_text(rendered, encoding="utf-8")
-    REPORT_PATH.write_text(rendered, encoding="utf-8")
+  <dialog id="detailsDialog">
+    <div class="dialog-content">
+      <button id="closeDialog" class="close" type="button" aria-label="Закрыть">×</button>
 
-    print(rendered)
+      <section class="details">
+        <div class="detail-poster-box">
+          <img id="detailPoster" alt="">
+        </div>
 
-    if args.strict and status == "critical":
-        raise SystemExit("V3460.1 strict health gate failed")
+        <div class="detail-info">
+          <h2 id="detailTitle"></h2>
+          <p id="detailMeta"></p>
+          <p id="detailGenres"></p>
+          <p id="detailOverview"></p>
+        </div>
+      </section>
 
+      <section id="detailFacts" class="facts-grid"></section>
 
-if __name__ == "__main__":
-    main()
+      <section id="playerBlock" class="links-block">
+        <h3 class="links-title">Смотреть / искать видео</h3>
+        <div id="playerButtons" class="detail-buttons"></div>
+      </section>
+
+      <section id="animeLinksBlock" class="links-block">
+        <h3 class="links-title">Аниме-сайты</h3>
+        <div class="detail-buttons">
+          <a id="shikimoriLink" target="_blank" rel="noreferrer">Shikimori</a>
+          <a id="malLink" target="_blank" rel="noreferrer">MyAnimeList</a>
+          <a id="anilistLink" target="_blank" rel="noreferrer">AniList</a>
+          <a id="animePlanetLink" target="_blank" rel="noreferrer">Anime-Planet</a>
+          <a id="anidbLink" target="_blank" rel="noreferrer">AniDB</a>
+        </div>
+      </section>
+
+      <section class="links-block">
+        <h3 class="links-title">Найти на сайтах</h3>
+        <div class="detail-buttons">
+          <button id="favBtn" type="button">В избранное</button>
+          <a id="yandexLink" target="_blank" rel="noreferrer">Яндекс</a>
+          <a id="yandexVideoLink" target="_blank" rel="noreferrer">Яндекс Видео</a>
+          <a id="kinopoiskLink" target="_blank" rel="noreferrer">Кинопоиск</a>
+          <a id="youtubeLink" target="_blank" rel="noreferrer">YouTube</a>
+          <a id="vkLink" target="_blank" rel="noreferrer">VK Видео</a>
+          <a id="rutubeLink" target="_blank" rel="noreferrer">Rutube</a>
+          <a id="googleLink" target="_blank" rel="noreferrer">Google</a>
+        </div>
+      </section>
+    </div>
+  </dialog>
+
+<script src="app.js?v=349"></script>
+
+<!-- GKM AI CHAT UI V58 RESTORED -->
+<button id="gkmAiFloatBtn" class="ai-float-btn" type="button" aria-label="Открыть чат">🤖</button>
+
+<dialog id="gkmAiDialog" class="ai-dialog">
+  <div class="ai-box">
+    <div class="ai-head">
+      <div>
+        <div class="ai-title">Голубь помощник</div>
+        <div class="ai-subtitle">Советы по фильмам, аниме и сериалам</div>
+      </div>
+      <button id="gkmAiCloseBtn" class="ai-close" type="button">✕</button>
+    </div>
+
+    <div id="gkmAiMessages" class="ai-messages">
+      <div class="ai-msg ai-bot">
+        Привет. Я помогу подобрать фильм, сериал, аниме или мультфильм. Например: «посоветуй аниме как Наруто» или «что посмотреть вечером?»
+      </div>
+    </div>
+
+    <div class="ai-quick">
+      <button type="button" data-ai-prompt="Посоветуй мне топ аниме с сильным главным героем">Топ аниме</button>
+      <button type="button" data-ai-prompt="Что посмотреть вечером из фильмов?">Фильм вечером</button>
+      <button type="button" data-ai-prompt="Найди что-то похожее на Интерстеллар">Как Интерстеллар</button>
+    </div>
+
+    <form id="gkmAiForm" class="ai-form">
+      <input id="gkmAiInput" autocomplete="off" maxlength="500" placeholder="Напиши вопрос..." />
+      <button id="gkmAiSendBtn" type="submit">Отправить</button>
+    </form>
+
+    <div class="ai-note">
+      Пока это локальный помощник по каталогу. Для настоящих ответов нужен Worker/Vercel с API ключом.
+    </div>
+  </div>
+</dialog>
+<!-- /GKM AI CHAT UI V58 RESTORED -->
+
+</body>
+</html>
