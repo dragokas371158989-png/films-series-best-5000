@@ -1,0 +1,20 @@
+{
+  "version": "V353.1",
+  "goal": "prevent the final 20 percent of posters from slowing down",
+  "checks": {
+    "cache_bumped_to_v3531": true,
+    "tail_speed_runtime_marker": true,
+    "concurrency_no_longer_drops_to_24": true,
+    "adaptive_tail_boost_enabled": true,
+    "tail_requests_have_short_deadline": true,
+    "raw_poster_fallback_preserved": true,
+    "completed_and_failed_are_counted": true,
+    "tail_can_finish_with_broken_urls": true,
+    "reveal_queue_accelerated_but_bounded": true,
+    "v353_fullscreen_background_preserved": true
+  },
+  "tailConcurrency": 108,
+  "previousTailConcurrency": 24,
+  "concurrencyIncrease": 4.5,
+  "estimatedWorstCaseForLast600BrokenUrlsSeconds": 25.2
+}
