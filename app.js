@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "352";
+const GKM_DATA_CACHE_VERSION = "353";
 const HOME_URL = `${FAST_BASE}/home.json`;
 const META_URL = `${FAST_BASE}/meta.json`;
 const SEARCH_URL = `${FAST_BASE}/search_index.json`;
@@ -14376,9 +14376,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 /* GKM V343 SOFT FISHEYE VIDEO WALL START */
 (function(){
   window.GKM_V343_SOFT_FISHEYE_VIDEO_WALL_VERSION = "v343-soft-fisheye-video-wall-2026-07-21";
+  window.GKM_V353_PROGRESSIVE_POSTER_WALL_VERSION = "v353-progressive-poster-wall-2026-07-24";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
+  const COARSE_CACHE = new Map();
 
   const EXPECTED_COUNTS = {
     anime: 4400,
@@ -14392,6 +14394,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let ctx = null;
   let bufferCanvas = null;
   let bufferCtx = null;
+  let backdropCanvas = null;
+  let backdropCtx = null;
+  let fineCanvas = null;
+  let fineCtx = null;
   let lensCanvas = null;
   let lensCtx = null;
 
@@ -14401,12 +14407,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let allItems = [];
   let layoutCount = EXPECTED_COUNTS.anime;
 
-  let cols = 1;
-  let rows = 1;
-  let cellW = 10;
-  let cellH = 15;
-  let ox = 0;
-  let oy = 44;
+  let fineLayout = null;
+  let coarseLayout = null;
 
   let hoverIndex = -1;
   let hoverTimer = 0;
@@ -14414,11 +14416,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let previewKey = "";
 
   let loadToken = 0;
+  let backdropToken = 0;
   let loadCursor = 0;
   let activeLoads = 0;
   let loadedCount = 0;
+  let backdropLoaded = 0;
   let itemLoaded = [];
   let shuffleSeed = 0;
+  let activeReveals = [];
+  let pendingReveals = [];
+  let revealFrame = 0;
 
   let pointerInside = false;
   let pointerTargetX = 0;
@@ -14434,6 +14441,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   const FIRST_CONCURRENCY = 44;
   const REST_CONCURRENCY = 24;
+  const BACKDROP_CONCURRENCY = 14;
+  const TILE_FADE_MS = 240;
+  const MAX_ACTIVE_REVEALS = 96;
+  const REVEALS_PER_FRAME = 24;
   const LENS_SIZE = 330;
   const LENS_RADIUS = LENS_SIZE / 2;
 
@@ -14590,53 +14601,84 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return urls;
   }
 
-  function smallPosterUrl(item){
+  function sizedPosterUrl(item,width,height,quality){
     const raw=originalPosterOf(item)||posterOf(item);
     if(!raw) return "";
     try{
       const url=new URL(raw,location.href);
       if(url.hostname.toLowerCase().includes("images.weserv.nl")){
-        url.searchParams.set("w","48");
-        url.searchParams.set("h","72");
+        url.searchParams.set("w",String(width));
+        url.searchParams.set("h",String(height));
         url.searchParams.set("fit","cover");
         url.searchParams.set("output","webp");
-        url.searchParams.set("q","58");
+        url.searchParams.set("q",String(quality));
         return url.href;
       }
       if(url.hostname===location.hostname) return url.href;
       const clean=url.href.replace(/^https?:\/\//i,"");
-      return "https://images.weserv.nl/?url="+encodeURIComponent(clean)+"&w=48&h=72&fit=cover&output=webp&q=58";
+      return "https://images.weserv.nl/?url="+encodeURIComponent(clean)+
+        `&w=${width}&h=${height}&fit=cover&output=webp&q=${quality}`;
     }catch(e){
       return raw;
     }
   }
+  function smallPosterUrl(item){ return sizedPosterUrl(item,48,72,58); }
+  function coarsePosterUrl(item){ return sizedPosterUrl(item,320,480,72); }
   function fullPosterUrl(item){ return originalPosterOf(item)||posterOf(item); }
 
-  function computeGrid(){
-    const w=window.innerWidth;
-    const h=window.innerHeight;
-    const count=Math.max(layoutCount,wallItems.length,1);
-    const topPad=42;
-    const bottomPad=72;
-    const availableH=Math.max(220,h-topPad-bottomPad);
-
-    let best=null;
-    for(let cw=7;cw<=16;cw++){
-      const ch=Math.max(10,Math.round(cw*1.52));
-      const c=Math.max(30,Math.floor(w/cw));
-      const r=Math.ceil(count/c);
-      const gh=r*ch;
-      const gw=c*cw;
-      const score=Math.abs(availableH-gh)*5+Math.abs(w-gw);
-      if(!best||score<best.score) best={cw,ch,c,r,score};
+  function balancedLayout(count,width,height){
+    const total=Math.max(1,Math.floor(count||1));
+    const w=Math.max(1,width||window.innerWidth);
+    const h=Math.max(1,height||window.innerHeight);
+    const rows=Math.max(
+      1,
+      Math.min(total,Math.round(Math.sqrt((total*h)/(1.5*w))))
+    );
+    const base=Math.floor(total/rows);
+    const extra=total%rows;
+    const rowCounts=[];
+    const rowOffsets=[];
+    const rowByIndex=new Array(total);
+    let offset=0;
+    for(let row=0;row<rows;row++){
+      const inRow=base+(row<extra?1:0);
+      rowCounts.push(inRow);
+      rowOffsets.push(offset);
+      for(let i=0;i<inRow;i++) rowByIndex[offset+i]=row;
+      offset+=inRow;
     }
+    return {
+      count:total,
+      width:w,
+      height:h,
+      rows,
+      rowH:h/rows,
+      rowCounts,
+      rowOffsets,
+      rowByIndex
+    };
+  }
 
-    cellW=best.cw;
-    cellH=best.ch;
-    cols=best.c;
-    rows=best.r;
-    ox=Math.floor((w-cols*cellW)/2);
-    oy=topPad;
+  function rectFor(layout,index){
+    if(!layout||index<0||index>=layout.count) return null;
+    const row=layout.rowByIndex[index];
+    const count=layout.rowCounts[row];
+    const col=index-layout.rowOffsets[row];
+    const width=layout.width/count;
+    return {
+      x:col*width,
+      y:row*layout.rowH,
+      w:width+.45,
+      h:layout.rowH+.45
+    };
+  }
+
+  function computeGrid(){
+    fineLayout=balancedLayout(
+      Math.max(layoutCount,wallItems.length,1),
+      window.innerWidth,
+      window.innerHeight
+    );
   }
 
   function resizeCanvases(){
@@ -14656,28 +14698,34 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     bufferCanvas.width=w;
     bufferCanvas.height=h;
 
+    if(!backdropCanvas){
+      backdropCanvas=document.createElement("canvas");
+      backdropCtx=backdropCanvas.getContext("2d",{alpha:false});
+    }
+    backdropCanvas.width=w;
+    backdropCanvas.height=h;
+
+    if(!fineCanvas){
+      fineCanvas=document.createElement("canvas");
+      fineCtx=fineCanvas.getContext("2d",{alpha:true});
+    }
+    fineCanvas.width=w;
+    fineCanvas.height=h;
+
     computeGrid();
   }
 
-  function placeholderColor(index){
-    const hue=(index*37)%190+175;
-    return `hsl(${hue} 28% ${10+(index%4)}%)`;
-  }
-
   function paintSkeleton(){
+    cancelReveals();
     resizeCanvases();
-    bufferCtx.fillStyle="#020817";
-    bufferCtx.fillRect(0,0,bufferCanvas.width,bufferCanvas.height);
-
-    const count=Math.max(layoutCount,wallItems.length);
-    for(let i=0;i<count;i++){
-      const col=i%cols;
-      const row=Math.floor(i/cols);
-      const x=ox+col*cellW;
-      const y=oy+row*cellH;
-      bufferCtx.fillStyle=placeholderColor(i);
-      bufferCtx.fillRect(x,y,cellW,cellH);
-    }
+    const gradient=backdropCtx.createLinearGradient(0,0,backdropCanvas.width,backdropCanvas.height);
+    gradient.addColorStop(0,"#07142b");
+    gradient.addColorStop(.48,"#081126");
+    gradient.addColorStop(1,"#020817");
+    backdropCtx.fillStyle=gradient;
+    backdropCtx.fillRect(0,0,backdropCanvas.width,backdropCanvas.height);
+    fineCtx.clearRect(0,0,fineCanvas.width,fineCanvas.height);
+    composeBuffer();
     presentBuffer();
     lensDirty=true;
   }
@@ -14699,15 +14747,85 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     targetCtx.drawImage(img,sx,sy,sWidth,sHeight,x,y,w,h);
   }
 
-  function drawTile(index,img){
-    if(!bufferCtx||index<0||index>=wallItems.length||!img) return;
-    const col=index%cols;
-    const row=Math.floor(index/cols);
-    const x=ox+col*cellW;
-    const y=oy+row*cellH;
+  function drawTileTo(targetCtx,index,img,alpha=1){
+    if(!targetCtx||index<0||index>=wallItems.length||!img) return;
+    const rect=rectFor(fineLayout,index);
+    if(!rect) return;
     try{
-      drawCover(bufferCtx,img,x,y,cellW,cellH);
-      if(isOpen&&ctx) drawCover(ctx,img,x,y,cellW,cellH);
+      targetCtx.save();
+      targetCtx.globalAlpha=clamp(alpha,0,1);
+      drawCover(targetCtx,img,rect.x,rect.y,rect.w,rect.h);
+      targetCtx.restore();
+    }catch(e){}
+  }
+
+  function composeBuffer(now=performance.now()){
+    if(!bufferCtx||!backdropCanvas||!fineCanvas) return;
+    bufferCtx.drawImage(backdropCanvas,0,0);
+    bufferCtx.drawImage(fineCanvas,0,0);
+    for(const reveal of activeReveals){
+      const raw=clamp((now-reveal.start)/TILE_FADE_MS,0,1);
+      const eased=1-Math.pow(1-raw,3);
+      drawTileTo(bufferCtx,reveal.index,reveal.img,eased);
+    }
+  }
+
+  function cancelReveals(){
+    if(revealFrame){
+      cancelAnimationFrame(revealFrame);
+      revealFrame=0;
+    }
+    activeReveals=[];
+    pendingReveals=[];
+  }
+
+  function revealLoop(now){
+    revealFrame=0;
+    if(!isOpen||!bufferCtx) return;
+
+    const waiting=[];
+    for(const reveal of activeReveals){
+      if(now-reveal.start>=TILE_FADE_MS){
+        drawTileTo(fineCtx,reveal.index,reveal.img,1);
+      }else{
+        waiting.push(reveal);
+      }
+    }
+    activeReveals=waiting;
+    let promoted=0;
+    while(
+      activeReveals.length<MAX_ACTIVE_REVEALS&&
+      pendingReveals.length&&
+      promoted<REVEALS_PER_FRAME
+    ){
+      const reveal=pendingReveals.shift();
+      reveal.start=now;
+      activeReveals.push(reveal);
+      promoted++;
+    }
+    composeBuffer(now);
+    presentBuffer();
+    lensDirty=true;
+
+    if(activeReveals.length||pendingReveals.length){
+      revealFrame=requestAnimationFrame(revealLoop);
+    }
+  }
+
+  function queueTileReveal(index,img){
+    if(!img||index<0||index>=wallItems.length) return;
+    pendingReveals.push({index,img,start:0});
+    if(!revealFrame) revealFrame=requestAnimationFrame(revealLoop);
+  }
+
+  function paintBackdropTile(index,img){
+    if(!backdropCtx||!coarseLayout||!img) return;
+    const rect=rectFor(coarseLayout,index);
+    if(!rect) return;
+    try{
+      drawCover(backdropCtx,img,rect.x,rect.y,rect.w,rect.h);
+      composeBuffer();
+      presentBuffer();
       lensDirty=true;
     }catch(e){}
   }
@@ -14715,6 +14833,86 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function presentBuffer(){
     if(!isOpen||!ctx||!bufferCanvas) return;
     ctx.drawImage(bufferCanvas,0,0);
+  }
+
+  function getCoarseRecord(item){
+    const url=coarsePosterUrl(item);
+    if(!url) return null;
+    if(COARSE_CACHE.has(url)) return COARSE_CACHE.get(url);
+    const rec={url,state:"idle",img:null,callbacks:[]};
+    COARSE_CACHE.set(url,rec);
+    return rec;
+  }
+
+  function loadCoarseThumb(item,index,token){
+    return new Promise(resolve=>{
+      if(token!==backdropToken||!isOpen){ resolve(); return; }
+      const rec=getCoarseRecord(item);
+      if(!rec){ resolve(); return; }
+
+      const finish=img=>{
+        if(token===backdropToken&&img){
+          backdropLoaded++;
+          paintBackdropTile(index,img);
+          setStatus(
+            `${labelKind(currentKind)} — крупный слой`,
+            `Заполнено ${Math.min(backdropLoaded,coarseLayout.count)}/${coarseLayout.count}. Затем сверху появится детальная мозаика.`
+          );
+        }
+        resolve();
+      };
+
+      if(rec.state==="loaded"&&rec.img){ finish(rec.img); return; }
+      if(rec.state==="loading"){ rec.callbacks.push(finish); return; }
+
+      rec.state="loading";
+      rec.callbacks.push(finish);
+      const img=new Image();
+      img.decoding="async";
+      img.fetchPriority="high";
+      img.referrerPolicy="no-referrer";
+
+      const complete=success=>{
+        rec.state=success?"loaded":"failed";
+        rec.img=success?img:null;
+        const callbacks=rec.callbacks.splice(0);
+        callbacks.forEach(cb=>cb(success?img:null));
+      };
+
+      img.onload=()=>complete(true);
+      img.onerror=()=>{
+        const raw=fullPosterUrl(item);
+        if(raw&&img.src!==raw){
+          img.onerror=()=>complete(false);
+          img.src=raw;
+        }else complete(false);
+      };
+      img.src=rec.url;
+    });
+  }
+
+  async function loadBackdrop(items,token){
+    const source=uniqueList(items||[]);
+    const viewportArea=Math.max(1,window.innerWidth*window.innerHeight);
+    const wanted=clamp(Math.ceil(viewportArea/66000),24,54);
+    const coarseItems=source.slice(0,Math.min(source.length,wanted));
+    coarseLayout=balancedLayout(
+      Math.max(coarseItems.length,1),
+      window.innerWidth,
+      window.innerHeight
+    );
+    backdropLoaded=0;
+
+    let cursor=0;
+    async function worker(){
+      while(token===backdropToken&&cursor<coarseItems.length){
+        const index=cursor++;
+        // eslint-disable-next-line no-await-in-loop
+        await loadCoarseThumb(coarseItems[index],index,token);
+      }
+    }
+    const workerCount=Math.min(BACKDROP_CONCURRENCY,Math.max(1,coarseItems.length));
+    await Promise.all(Array.from({length:workerCount},worker));
   }
 
   function getThumbRecord(item){
@@ -14736,8 +14934,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
       const finish=img=>{
         if(token===loadToken&&img){
-          itemLoaded[index]=true;
-          drawTile(index,img);
+          if(!itemLoaded[index]){
+            itemLoaded[index]=true;
+            loadedCount++;
+          }
+          queueTileReveal(index,img);
         }
         resolve();
       };
@@ -14750,13 +14951,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
       const img=new Image();
       img.decoding="async";
+      img.fetchPriority=index<900?"high":"auto";
       img.referrerPolicy="no-referrer";
 
       const complete=success=>{
         if(success){
           rec.state="loaded";
           rec.img=img;
-          loadedCount++;
         }else{
           rec.state="failed";
         }
@@ -14787,10 +14988,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         activeLoads--;
         if(token!==loadToken) return;
 
-        if(loadedCount%120===0||loadCursor===wallItems.length){
+        if((loadedCount>0&&loadedCount%120===0)||loadCursor===wallItems.length){
           setStatus(
             `${labelKind(currentKind)} — ${wallItems.length} постеров`,
-            `Загружено ${Math.min(loadedCount,wallItems.length)}/${wallItems.length}. Без повторов; линза и карточка работают отдельно от сетки.`
+            `Мелкая мозаика ${Math.min(loadedCount,wallItems.length)}/${wallItems.length}. Крупные постеры остаются фоном до полного заполнения.`
           );
         }
         pumpQueue(token);
@@ -14801,20 +15002,36 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function startImageQueue(){
     loadToken++;
     const token=loadToken;
+    backdropToken++;
+    const backgroundToken=backdropToken;
     loadCursor=0;
     activeLoads=0;
     loadedCount=0;
+    backdropLoaded=0;
     itemLoaded=new Array(wallItems.length).fill(false);
 
     paintSkeleton();
-    pumpQueue(token);
+    setStatus(
+      `${labelKind(currentKind)} — крупный слой`,
+      "Сначала заполняю весь экран крупными постерами."
+    );
+    loadBackdrop(wallItems,backgroundToken).finally(()=>{
+      if(token!==loadToken||backgroundToken!==backdropToken||!isOpen) return;
+      setStatus(
+        `${labelKind(currentKind)} — ${wallItems.length} постеров`,
+        "Крупный слой готов. Накладываю детальную мозаику."
+      );
+      pumpQueue(token);
+    });
   }
 
   function indexAt(clientX,clientY){
-    const col=Math.floor((clientX-ox)/cellW);
-    const row=Math.floor((clientY-oy)/cellH);
-    if(col<0||row<0||col>=cols||row>=rows) return -1;
-    const idx=row*cols+col;
+    if(!fineLayout||clientX<0||clientY<0||clientX>=fineLayout.width||clientY>=fineLayout.height) return -1;
+    const row=clamp(Math.floor(clientY/fineLayout.rowH),0,fineLayout.rows-1);
+    const inRow=fineLayout.rowCounts[row];
+    const width=fineLayout.width/inRow;
+    const col=clamp(Math.floor(clientX/width),0,inRow-1);
+    const idx=fineLayout.rowOffsets[row]+col;
     return idx>=0&&idx<wallItems.length?idx:-1;
   }
 
@@ -15054,8 +15271,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     allItems=uniqueList(localPool().filter(x=>passKind(x,kind)));
     wallItems=allItems.slice();
 
-    // Сразу рисуем плотную сетку ожидаемого размера, поэтому постеры не становятся огромными.
+    // Пока собираются страницы каталога, крупный слой уже закрывает весь экран.
     paintSkeleton();
+    const previewBackdropToken=++backdropToken;
+    loadBackdrop(wallItems,previewBackdropToken).catch(()=>{});
 
     const urls=urlsFor(kind);
     const chunkSize=18;
@@ -15066,7 +15285,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       allItems.push(...chunks.flat().filter(x=>passKind(x,kind)));
       setStatus(
         "Собираю каталог...",
-        `Страницы ${Math.min(i+chunkSize,urls.length)}/${urls.length}. Сетка остаётся плотной и резкой.`
+        `Страницы ${Math.min(i+chunkSize,urls.length)}/${urls.length}. Крупные постеры уже закрывают фон.`
       );
     }
 
@@ -15076,7 +15295,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     setStatus(
       `${labelKind(kind)} — ${wallItems.length} постеров`,
-      "Каталог собран. Постеры загружаются в свои ячейки без повторов."
+      "Каталог собран. Запускаю плавное наложение мелкой мозаики без повторов."
     );
     startImageQueue();
   }
@@ -15198,8 +15417,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div class="gkmV343Shade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V343</div>
-          <div class="gkmV343Sub">Мягкий «рыбий глаз» без видимого круга. Карточка плавно следует за мышью.</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V353</div>
+          <div class="gkmV343Sub">Крупные постеры заполняют экран, затем плавно появляется детальная мозаика.</div>
         </div>
         <div class="gkmV343Actions">
           <button data-kind="all">Все</button>
@@ -15215,7 +15434,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         <div class="gkmV343Pane" data-pane="0"></div>
         <div class="gkmV343Pane" data-pane="1"></div>
       </div>
-      <div id="gkmV343Status"><b>Открываю стенку...</b><div>Готовлю плотную сетку.</div></div>
+      <div id="gkmV343Status"><b>Открываю стенку...</b><div>Заполняю экран крупными постерами.</div></div>
       <div class="gkmV343Hint">движение — мягкий «рыбий глаз»<br>клик — открыть полную карточку</div>
     `;
     document.body.appendChild(overlay);
@@ -15293,6 +15512,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     isOpen=false;
     pointerInside=false;
     loadToken++;
+    backdropToken++;
+    cancelReveals();
 
     if(motionFrame){
       cancelAnimationFrame(motionFrame);
@@ -15308,12 +15529,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     ensureUi();
   }
 
+  window.GKM_V353_TEST_API={
+    balancedLayout,
+    rectFor,
+    version:window.GKM_V353_PROGRESSIVE_POSTER_WALL_VERSION
+  };
+
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",install,{once:true});
   else install();
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V343: soft fisheye video wall installed");
+  console.log("GKM V353: progressive full-screen poster wall installed");
 })();
 /* GKM V343 SOFT FISHEYE VIDEO WALL END */
 
