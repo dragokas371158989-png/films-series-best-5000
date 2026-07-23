@@ -1,0 +1,216 @@
+name: GKM V344 Safe Daily Catalog Update
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v344-safe-daily-update
+  cancel-in-progress: false
+
+jobs:
+  update-catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync main
+        run: git pull --rebase origin main
+
+      - name: Verify updater files and secret
+        env:
+          KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
+        run: |
+          test -f tools/gkm_v339_safe_auto_update.py
+          test -f tools/gkm_v344_build_poster_wall.py
+          test -f tools/gkm_v344_maintenance.py
+          test -f tools/gkm_v3454_rebuild_anime_buttons.py
+          test -f tools/build_fast_site_data.py
+          test -n "$KINOPOISK_API_KEY"
+          echo "V344 updater files and secret found"
+
+      - name: Safe append-only Kinopoisk update
+        env:
+          KINOPOISK_API_KEY: ${{ secrets.KINOPOISK_API_KEY }}
+          GKM_KP_PAGES_PER_TYPE: "2"
+          GKM_KP_LIMIT: "250"
+          GKM_AUTO_UPDATE_CHUNK_SIZE: "500"
+        run: python tools/gkm_v339_safe_auto_update.py
+
+      - name: Build fast site data
+        env:
+          GKM_SEARCH_LITE_LIMIT: "15000"
+        run: python tools/build_fast_site_data.py
+
+      - name: Optional fast-data post-fix
+        run: |
+          if [ -f tools/post_fix_fast_data.py ]; then
+            python tools/post_fix_fast_data.py
+          fi
+
+      - name: Rebuild compact poster wall data
+        run: python tools/gkm_v344_build_poster_wall.py
+
+      - name: Maintain search lite and SEO
+        run: python tools/gkm_v344_maintenance.py --mode fast
+
+      - name: Keep search indexes below GitHub file limit
+        run: python tools/gkm_v3460_compact_search_index.py
+
+      - name: Rebuild anime top and studio databases
+        run: python tools/gkm_v3454_rebuild_anime_buttons.py
+
+      - name: Validate generated data and code
+        run: |
+          python tools/gkm_v339_safe_auto_update.py --validate-only
+          node --check app.js
+          node --check features_v344.js
+          node --check ai_search_worker_v344.js
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          meta = json.loads(Path('data/fast/meta.json').read_text(encoding='utf-8'))
+          search = json.loads(Path('data/fast/search_index.json').read_text(encoding='utf-8'))
+          lite = json.loads(Path('data/fast/search_lite.json').read_text(encoding='utf-8'))
+          wall = json.loads(Path('data/fast/poster_wall_v333/manifest.json').read_text(encoding='utf-8'))
+          anime_top = json.loads(Path('data/fast/anime_top_manual.json').read_text(encoding='utf-8'))
+          studios_top = json.loads(Path('data/fast/anime_studios_top.json').read_text(encoding='utf-8'))
+          studios_detail = json.loads(Path('data/fast/anime_studios_detail.json').read_text(encoding='utf-8'))
+
+          assert isinstance(search, list) and search
+          assert isinstance(lite, list) and 1000 <= len(lite) <= len(search)
+          assert int(meta.get('count') or 0) == len(search)
+          assert 0 < int(wall.get('total') or 0) <= len(search)
+          assert wall.get('version', '').startswith('v344-')
+          assert int(wall.get('sourceTotal') or 0) == len(search)
+          assert len(anime_top.get('items', [])) >= 50
+          assert studios_top.get('studios')
+          assert studios_detail.get('studios')
+          full_size = Path('data/fast/search_index.json').stat().st_size
+          lite_size = Path('data/fast/search_lite.json').stat().st_size
+          assert full_size < 94 * 1024 * 1024, full_size
+          assert lite_size <= full_size, (lite_size, full_size)
+          print('count:', len(search))
+          print('search_lite:', len(lite))
+          print('wall:', wall.get('total'))
+          print('search_index_bytes:', full_size)
+          print('search_lite_bytes:', lite_size)
+          PY
+
+      - name: Commit updated catalog
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "gkm-update-bot"
+          git config user.email "gkm-update-bot@users.noreply.github.com"
+
+          echo "Largest generated files before commit:"
+          python - <<'PY'
+          from pathlib import Path
+
+          limit = 94 * 1024 * 1024
+          files = []
+
+          for path in Path("data").rglob("*"):
+              if not path.is_file():
+                  continue
+              try:
+                  size = path.stat().st_size
+              except OSError:
+                  continue
+              files.append((size, path.as_posix()))
+
+          files.sort(reverse=True)
+
+          for size, path in files[:20]:
+              print(f"{size / 1024 / 1024:.2f} MiB  {path}")
+
+          oversized = [
+              (size, path)
+              for size, path in files
+              if size >= limit
+          ]
+
+          if oversized:
+              print("::error::Generated files exceed the 94 MiB safety limit:")
+              for size, path in oversized:
+                  print(f"{size / 1024 / 1024:.2f} MiB  {path}")
+              raise SystemExit(1)
+
+          print("File-size safety gate: PASS")
+          PY
+
+          paths=(
+            data
+            tools/build_fast_site_data.py
+            tools/gkm_v339_safe_auto_update.py
+            tools/gkm_v344_build_poster_wall.py
+            tools/gkm_v344_maintenance.py
+            tools/gkm_v3454_rebuild_anime_buttons.py
+            tools/gkm_v3460_compact_search_index.py
+            .github/workflows/gkm_v344_safe_auto_update.yml
+          )
+
+          optional=(
+            TEST_REPORT_V344_MAINTENANCE.json
+            TEST_REPORT_V3454_ANIME_BUTTONS.json
+            TEST_REPORT_V3460_3_1_SEARCH_COMPACT.json
+          )
+
+          git add -- "${paths[@]}"
+          for path in "${optional[@]}"; do
+            if [[ -e "$path" ]]; then
+              git add -- "$path"
+            fi
+          done
+
+          if git diff --cached --quiet; then
+            echo "No catalog changes"
+            exit 0
+          fi
+
+          echo "Staged changes:"
+          git status --short
+          git diff --cached --stat
+
+          git commit -m "Auto update catalog V344 safe compact"
+
+          for attempt in 1 2 3 4 5; do
+            echo "Push attempt $attempt/5"
+
+            git fetch origin main
+
+            if ! git rebase origin/main; then
+              echo "::error::Rebase conflict while publishing catalog update"
+              git status --short || true
+              git rebase --abort || true
+              exit 1
+            fi
+
+            if git push origin HEAD:main; then
+              echo "Catalog update published successfully"
+              exit 0
+            fi
+
+            sleep $((attempt * 8))
+          done
+
+          echo "::error::Could not push catalog update after 5 attempts"
+          exit 1

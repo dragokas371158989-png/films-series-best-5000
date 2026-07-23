@@ -1,0 +1,100 @@
+name: ARCHIVED - GKM V3453 Full Russian Site and Dedupe
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v3453-full-russian
+  cancel-in-progress: false
+
+jobs:
+  russianize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Create backup branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          BACKUP="backup-before-v3453-${GITHUB_RUN_ID}"
+          git branch "$BACKUP"
+          git push origin "$BACKUP"
+          echo "BACKUP_BRANCH=$BACKUP" >> "$GITHUB_ENV"
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache Argos translation model
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.local/share/argos-translate
+            ~/.cache/argos-translate
+          key: argos-en-ru-v3453
+
+      - name: Install offline Russian translator
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install argostranslate
+
+      - name: Translate entire site and remove duplicates
+        run: python tools/gkm_v3453_full_russianize_dedupe.py
+
+      - name: Validate JavaScript and JSON
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check app.js
+          node --check features_v344.js
+          node --check ai_search_worker_v344.js
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          report=json.loads(Path("TEST_REPORT_V3453_FULL_RUSSIAN.json").read_text(encoding="utf-8"))
+          stats=report["stats"]
+          assert stats["untranslated_titles_after"] == 0, stats
+          assert stats["untranslated_descriptions_after"] == 0, stats
+          assert stats["english_genres_after"] == 0, stats
+          assert stats["duplicate_ids_after"] == 0, stats
+          assert all(x["pass"] for x in report["controls"].values()), report["controls"]
+
+          for path in Path("data").rglob("*.json"):
+              json.loads(path.read_text(encoding="utf-8"))
+          print("V3453 validation: PASS")
+          PY
+
+      - name: Commit full Russian site
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gkm-v3453-bot"
+          git config user.email "gkm-v3453-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Apply V3453 full Russian localization and dedupe"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          echo "### GKM V3453 Full Russian Site" >> "$GITHUB_STEP_SUMMARY"
+          echo "Backup branch: \`${BACKUP_BRANCH:-not-created}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Report: \`TEST_REPORT_V3453_FULL_RUSSIAN.json\`" >> "$GITHUB_STEP_SUMMARY"
