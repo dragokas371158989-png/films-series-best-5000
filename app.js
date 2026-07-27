@@ -3931,6 +3931,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if (!modals.length) return;
 
     modals.forEach(modal => {
+      // Полная карточка уже получает строго отфильтрованный список похожего.
+      // Старый эвристический фильтр V191 ошибочно принимал контейнер
+      // .related-cards за одну карточку и гасил цвет сразу у всего ряда.
+      if(modal.id==="detailsDialog"){
+        modal.querySelectorAll(".gkm-v191-similar-down,.gkm-v191-soft-trash").forEach(node=>{
+          node.classList.remove("gkm-v191-similar-down","gkm-v191-soft-trash");
+        });
+        return;
+      }
       const modalCards = Array.from(modal.querySelectorAll("article,.card,.movie-card,.item,[class*='card'],[class*='movie'],[class*='item'],div"))
         .filter(isCard);
 
@@ -14527,6 +14536,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V354_FAST_SCREEN_POSTER_WALL_VERSION = "v354-fast-screen-poster-wall-2026-07-27";
   window.GKM_V355_FAST_POSTER_TRANSPORT_VERSION = "v355-fast-poster-transport-2026-07-27";
   window.GKM_V356_MAGNETIC_WAVE_VERSION = "v356-magnetic-wave-2026-07-27";
+  window.GKM_V357_EFFECTS_STUDIO_VERSION = "v357-effects-studio-2026-07-27";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
@@ -14565,6 +14575,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let loadedCount = 0;
   let completedCount = 0;
   let failedCount = 0;
+  let replacementCount = 0;
+  let recoveredCount = 0;
+  let reserveItems = [];
+  let reserveCursor = 0;
+  let usedWallKeys = new Set();
   let backdropLoaded = 0;
   let itemLoaded = [];
   let itemSettled = [];
@@ -14586,6 +14601,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let motionFrame = 0;
   let lensDirty = false;
   let effectMode = "magnet";
+  let pointerVelocityX = 0;
+  let pointerVelocityY = 0;
 
   const FIRST_CONCURRENCY = 36;
   const REST_CONCURRENCY = 48;
@@ -14607,6 +14624,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   const MAGNET_RADIUS = 190;
   const MAGNET_PUSH = 34;
   const MAGNET_SCALE = 1.15;
+  const MAX_REPLACEMENT_ATTEMPTS = 8;
 
   function t(v){ return String(v == null ? "" : v).trim(); }
   function esc(v){
@@ -15121,6 +15139,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
       if(rec.state==="loaded"&&rec.img){ finish(rec.img); return; }
       if(rec.state==="loading"){ rec.callbacks.push(finish); return; }
+      if(rec.state==="failed"){ finish(null); return; }
 
       rec.state="loading";
       rec.callbacks.push(finish);
@@ -15193,22 +15212,47 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return rec;
   }
 
-  function loadThumb(index,token){
+  function takeReserveItem(){
+    while(reserveCursor<reserveItems.length){
+      const item=reserveItems[reserveCursor++];
+      if(!item||!posterOf(item)) continue;
+      const key=keyOf(item);
+      if(usedWallKeys.has(key)) continue;
+      usedWallKeys.add(key);
+      return item;
+    }
+    return null;
+  }
+
+  function loadThumb(index,token,replacementDepth=0){
     return new Promise(resolve=>{
       if(token!==loadToken||index>=wallItems.length){ resolve(); return; }
 
       const item=wallItems[index];
       const finish=img=>{
-        if(token===loadToken&&!itemSettled[index]){
-          itemSettled[index]=true;
-          completedCount++;
-          if(img){
-            itemLoaded[index]=true;
-            loadedCount++;
-            queueTileReveal(index,img);
-          }else{
-            failedCount++;
+        if(token!==loadToken||itemSettled[index]){
+          resolve();
+          return;
+        }
+        if(!img&&replacementDepth<MAX_REPLACEMENT_ATTEMPTS){
+          const replacement=takeReserveItem();
+          if(replacement){
+            wallItems[index]=replacement;
+            replacementCount++;
+            loadThumb(index,token,replacementDepth+1).then(resolve);
+            return;
           }
+        }
+
+        itemSettled[index]=true;
+        completedCount++;
+        if(img){
+          itemLoaded[index]=true;
+          loadedCount++;
+          if(replacementDepth>0) recoveredCount++;
+          queueTileReveal(index,img);
+        }else{
+          failedCount++;
         }
         resolve();
       };
@@ -15218,6 +15262,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
       if(rec.state==="loaded"&&rec.img){ finish(rec.img); return; }
       if(rec.state==="loading"){ rec.callbacks.push(finish); return; }
+      // Битую ссылку в рамках текущей сессии повторно не ждём:
+      // ячейку сразу подхватит следующий уникальный постер из резерва.
+      if(rec.state==="failed"){ finish(null); return; }
 
       rec.state="loading";
       rec.callbacks.push(finish);
@@ -15284,12 +15331,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           (completedCount>0&&completedCount%120===0)||
           completedCount===wallItems.length
         ){
-          const tail=failedCount
-            ? ` Недоступных ссылок: ${failedCount}; вместо них остаётся крупный фон.`
+          const reserve=replacementCount
+            ? ` Резерв: ${recoveredCount} ячеек восстановлено, ${replacementCount} уникальных замен проверено.`
             : "";
+          const tail=failedCount
+            ? ` Не удалось закрыть ${failedCount} ячеек после резерва.`
+            : " Экран заполнен настоящими постерами без повторов.";
           setStatus(
             `${labelKind(currentKind)} — ${wallItems.length} постеров`,
-            `Обработано ${Math.min(completedCount,wallItems.length)}/${wallItems.length}; загружено ${Math.min(loadedCount,wallItems.length)}.${tail}`
+            `Обработано ${Math.min(completedCount,wallItems.length)}/${wallItems.length}; загружено ${Math.min(loadedCount,wallItems.length)}.${reserve}${tail}`
           );
         }
         pumpQueue(token);
@@ -15307,6 +15357,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     loadedCount=0;
     completedCount=0;
     failedCount=0;
+    replacementCount=0;
+    recoveredCount=0;
+    reserveCursor=0;
     backdropLoaded=0;
     itemLoaded=new Array(wallItems.length).fill(false);
     itemSettled=new Array(wallItems.length).fill(false);
@@ -15553,27 +15606,212 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     lensCanvas.style.top=`${rawTop}px`;
   }
 
-  function renderPointerEffect(){
+  function localPatchGeometry(){
+    if(!bufferCanvas) return null;
+    const size=LENS_SIZE;
+    const radius=LENS_RADIUS;
+    const rawLeft=pointerX-radius;
+    const rawTop=pointerY-radius;
+    const sourceLeft=clamp(rawLeft,0,bufferCanvas.width);
+    const sourceTop=clamp(rawTop,0,bufferCanvas.height);
+    const sourceRight=clamp(rawLeft+size,0,bufferCanvas.width);
+    const sourceBottom=clamp(rawTop+size,0,bufferCanvas.height);
+    const sourceW=Math.max(0,sourceRight-sourceLeft);
+    const sourceH=Math.max(0,sourceBottom-sourceTop);
+    return {
+      size,radius,rawLeft,rawTop,sourceLeft,sourceTop,sourceW,sourceH,
+      destinationX:sourceLeft-rawLeft,
+      destinationY:sourceTop-rawTop
+    };
+  }
+
+  function paintLocalPatch(){
+    const patch=localPatchGeometry();
+    if(!patch||!lensCtx||!bufferCanvas) return null;
+    lensCtx.clearRect(0,0,patch.size,patch.size);
+    lensCtx.imageSmoothingEnabled=true;
+    lensCtx.imageSmoothingQuality="high";
+    if(patch.sourceW&&patch.sourceH){
+      lensCtx.drawImage(
+        bufferCanvas,
+        patch.sourceLeft,patch.sourceTop,patch.sourceW,patch.sourceH,
+        patch.destinationX,patch.destinationY,patch.sourceW,patch.sourceH
+      );
+    }
+    lensCanvas.style.left=`${patch.rawLeft}px`;
+    lensCanvas.style.top=`${patch.rawTop}px`;
+    return patch;
+  }
+
+  function clearLocalTilePositions(tiles,patch){
+    if(!patch||!backdropCanvas) return;
+    for(const tile of tiles){
+      const rect=tile.rect;
+      const sx=clamp(rect.x,0,backdropCanvas.width);
+      const sy=clamp(rect.y,0,backdropCanvas.height);
+      const sw=Math.max(0,Math.min(rect.w,backdropCanvas.width-sx));
+      const sh=Math.max(0,Math.min(rect.h,backdropCanvas.height-sy));
+      if(!sw||!sh) continue;
+      lensCtx.drawImage(
+        backdropCanvas,
+        sx,sy,sw,sh,
+        sx-patch.rawLeft,sy-patch.rawTop,sw,sh
+      );
+    }
+  }
+
+  function renderWaterRipple(now){
+    if(!pointerInside||!lensCanvas||!lensCtx||!bufferCanvas) return;
+    const patch=paintLocalPatch();
+    if(!patch) return;
+    const rings=14;
+
+    for(let ring=0;ring<rings;ring++){
+      const outer=patch.radius*(1-ring/rings);
+      const inner=patch.radius*(1-(ring+1)/rings);
+      const mid=(outer+inner)/2;
+      const falloff=Math.pow(1-mid/patch.radius,.72);
+      const wave=Math.sin(now*.007-mid*.075);
+      const strength=1+wave*.058*falloff;
+      const srcRadius=patch.radius/strength;
+
+      lensCtx.save();
+      const path=new Path2D();
+      path.arc(patch.radius,patch.radius,outer,0,Math.PI*2);
+      path.arc(patch.radius,patch.radius,inner,0,Math.PI*2,true);
+      lensCtx.clip(path,"evenodd");
+
+      const sx=clamp(pointerX-srcRadius,0,Math.max(0,bufferCanvas.width-srcRadius*2));
+      const sy=clamp(pointerY-srcRadius,0,Math.max(0,bufferCanvas.height-srcRadius*2));
+      lensCtx.globalAlpha=.9+.1*falloff;
+      lensCtx.drawImage(
+        bufferCanvas,
+        sx,sy,srcRadius*2,srcRadius*2,
+        0,0,patch.size,patch.size
+      );
+      lensCtx.restore();
+    }
+    lensDirty=false;
+  }
+
+  function renderSpotlight(){
+    if(!pointerInside||!lensDirty||!lensCanvas||!lensCtx||!bufferCanvas) return;
+    const patch=paintLocalPatch();
+    if(!patch) return;
+    lensDirty=false;
+
+    const item=wallItems[hoverIndex];
+    const rect=hoverIndex>=0?rectFor(fineLayout,hoverIndex):null;
+    const rec=item?getThumbRecord(item):null;
+    if(rect&&rec&&rec.state==="loaded"&&rec.img){
+      const scale=1.34;
+      const width=rect.w*scale;
+      const height=rect.h*scale;
+      const centerX=rect.x+rect.w/2-patch.rawLeft;
+      const centerY=rect.y+rect.h/2-patch.rawTop;
+      lensCtx.save();
+      lensCtx.translate(centerX,centerY);
+      lensCtx.filter="brightness(1.28) saturate(1.18) contrast(1.04)";
+      lensCtx.shadowColor="rgba(120,225,255,.72)";
+      lensCtx.shadowBlur=26;
+      lensCtx.shadowOffsetY=8;
+      drawCover(lensCtx,rec.img,-width/2,-height/2,width,height);
+      lensCtx.restore();
+      lensCtx.filter="none";
+    }
+
+    const overlay=document.getElementById("gkmV343Overlay");
+    if(overlay){
+      overlay.style.setProperty("--gkm-spot-x",`${pointerX}px`);
+      overlay.style.setProperty("--gkm-spot-y",`${pointerY}px`);
+    }
+  }
+
+  function renderDominoWave(now){
+    if(!pointerInside||!lensCanvas||!lensCtx||!bufferCanvas||!backdropCanvas) return;
+    const patch=paintLocalPatch();
+    if(!patch) return;
+    const tiles=magneticTiles();
+    clearLocalTilePositions(tiles,patch);
+
+    const speed=clamp(Math.hypot(pointerVelocityX,pointerVelocityY)/18,0,1);
+    const direction=Math.atan2(pointerVelocityY||.001,pointerVelocityX||.001);
+    tiles.sort((a,b)=>a.distance-b.distance);
+
+    for(const tile of tiles){
+      const delayAxis=tile.dx*Math.cos(direction)+tile.dy*Math.sin(direction);
+      const phase=delayAxis*.055-now*.018;
+      const angle=Math.sin(phase)*(.06+.16*speed)*tile.influence;
+      const lift=Math.abs(Math.sin(phase))*7*tile.influence;
+      const scale=1+.05*tile.influence;
+      const width=tile.rect.w*scale;
+      const height=tile.rect.h*scale;
+      const centerX=tile.cx-patch.rawLeft;
+      const centerY=tile.cy-patch.rawTop-lift;
+
+      lensCtx.save();
+      lensCtx.translate(centerX,centerY);
+      lensCtx.rotate(angle);
+      lensCtx.shadowColor=`rgba(0,0,0,${(.18+.3*tile.influence).toFixed(3)})`;
+      lensCtx.shadowBlur=4+15*tile.influence;
+      lensCtx.shadowOffsetY=3+10*tile.influence;
+      drawCover(lensCtx,tile.img,-width/2,-height/2,width,height);
+      lensCtx.restore();
+    }
+    lensDirty=false;
+  }
+
+  function renderLivingMosaic(){
+    lensDirty=false;
+  }
+
+  function renderPointerEffect(now=performance.now()){
     if(effectMode==="fisheye") renderSoftFisheye();
+    else if(effectMode==="water") renderWaterRipple(now);
+    else if(effectMode==="spotlight") renderSpotlight();
+    else if(effectMode==="living") renderLivingMosaic();
+    else if(effectMode==="domino") renderDominoWave(now);
     else renderMagneticWave();
   }
 
   function setEffectMode(mode){
-    effectMode=mode==="fisheye"?"fisheye":"magnet";
+    const modes=["magnet","water","spotlight","living","domino","fisheye"];
+    effectMode=modes.includes(mode)?mode:"magnet";
+    const labels={
+      magnet:"Магнитная волна",
+      water:"Водная волна",
+      spotlight:"Кинопрожектор",
+      living:"Живая мозаика",
+      domino:"Домино",
+      fisheye:"Рыбий глаз"
+    };
+    const hints={
+      magnet:"движение — магнитная волна",
+      water:"движение — мягкая водная рябь",
+      spotlight:"движение — кинопрожектор",
+      living:"мозаика — медленное дыхание и глубина",
+      domino:"движение — волна домино",
+      fisheye:"движение — мягкий «рыбий глаз»"
+    };
     const lens=document.getElementById("gkmV343Lens");
     if(lens){
-      lens.classList.toggle("magnet",effectMode==="magnet");
-      lens.classList.toggle("fisheye",effectMode==="fisheye");
+      modes.forEach(name=>lens.classList.toggle(name,effectMode===name));
+    }
+    const overlay=document.getElementById("gkmV343Overlay");
+    if(overlay){
+      modes.forEach(name=>overlay.classList.toggle(`effect-${name}`,effectMode===name));
     }
     document.querySelectorAll("[data-gkm-effect]").forEach(btn=>{
       btn.classList.toggle("active",btn.dataset.gkmEffect===effectMode);
     });
+    const toggle=document.getElementById("gkmV357EffectsToggle");
+    if(toggle) toggle.textContent=`✨ Эффекты: ${labels[effectMode]}`;
     const hint=document.querySelector(".gkmV343Hint");
     if(hint){
-      hint.innerHTML=effectMode==="magnet"
-        ?"движение — магнитная волна<br>клик — открыть полную карточку"
-        :"движение — мягкий «рыбий глаз»<br>клик — открыть полную карточку";
+      hint.innerHTML=`${hints[effectMode]}<br>клик — открыть полную карточку`;
     }
+    pointerVelocityX=0;
+    pointerVelocityY=0;
     lensDirty=true;
     if(pointerInside) startMotionLoop();
   }
@@ -15597,7 +15835,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     previewTargetY=ty;
   }
 
-  function motionLoop(){
+  function motionLoop(now=performance.now()){
     if(!isOpen||!pointerInside){
       motionFrame=0;
       return;
@@ -15610,12 +15848,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     pointerY+=(pointerTargetY-pointerY)*0.18;
     previewX+=(previewTargetX-previewX)*0.14;
     previewY+=(previewTargetY-previewY)*0.14;
+    pointerVelocityX*=.9;
+    pointerVelocityY*=.9;
 
     const moved=Math.abs(pointerX-previousX)+Math.abs(pointerY-previousY);
     if(moved>.15) lensDirty=true;
+    if(effectMode==="water"||effectMode==="domino") lensDirty=true;
 
     if(pointerInside){
-      renderPointerEffect();
+      renderPointerEffect(now);
 
       const preview=document.getElementById("gkmV343Preview");
       if(preview){
@@ -15639,6 +15880,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function onMove(e){
+    const deltaX=e.clientX-pointerTargetX;
+    const deltaY=e.clientY-pointerTargetY;
+    pointerVelocityX=pointerVelocityX*.35+deltaX*.65;
+    pointerVelocityY=pointerVelocityY*.35+deltaY*.65;
     pointerTargetX=e.clientX;
     pointerTargetY=e.clientY;
     updatePreviewTarget();
@@ -15647,6 +15892,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       pointerInside=true;
       pointerX=pointerTargetX;
       pointerY=pointerTargetY;
+      pointerVelocityX=0;
+      pointerVelocityY=0;
       previewX=previewTargetX;
       previewY=previewTargetY;
       lensDirty=true;
@@ -15672,6 +15919,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function pointerLeave(){
     hoverIndex=-1;
     pointerInside=false;
+    pointerVelocityX=0;
+    pointerVelocityY=0;
     if(motionFrame){
       cancelAnimationFrame(motionFrame);
       motionFrame=0;
@@ -15710,9 +15959,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const pool=uniqueList(allItems.filter(x=>passKind(x,kind)));
     const mixed=pool.slice();
     shuffle(mixed);
-    wallItems=mixed.slice(0,Math.min(target,mixed.length));
+    const visible=Math.min(target,mixed.length);
+    wallItems=mixed.slice(0,visible);
+    reserveItems=mixed.slice(visible);
+    reserveCursor=0;
+    usedWallKeys=new Set(wallItems.map(keyOf));
     layoutCount=Math.max(1,wallItems.length);
-    return {target,poolCount:pool.length,visible:wallItems.length};
+    return {
+      target,
+      poolCount:pool.length,
+      visible:wallItems.length,
+      reserve:reserveItems.length
+    };
   }
 
   async function loadWall(kind){
@@ -15752,7 +16010,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     setStatus(
       `${labelKind(kind)} — ${selection.visible} постеров на экране`,
-      `Быстрый набор из ${selection.poolCount} настоящих постеров. Повторов нет.`
+      `Быстрый набор из ${selection.poolCount} настоящих постеров; уникальный резерв ${selection.reserve}. Повторов нет.`
     );
     startImageQueue();
   }
@@ -15782,7 +16040,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       }
       #gkmV343Overlay{position:fixed;inset:0;display:none;z-index:99998;overflow:hidden;color:#fff;background:#020817}
       #gkmV343Overlay.open{display:block}
-      #gkmV343Canvas{position:absolute;inset:0;width:100%;height:100%;display:block;background:#020817}
+      #gkmV343Canvas{
+        position:absolute;inset:0;width:100%;height:100%;display:block;background:#020817;
+        transform-origin:center;will-change:transform
+      }
       #gkmV343Lens{
         position:absolute;z-index:5;width:${LENS_SIZE}px;height:${LENS_SIZE}px;pointer-events:none;
         opacity:0;transform:scale(.9);transition:opacity .14s ease,transform .18s cubic-bezier(.2,.8,.2,1);
@@ -15800,7 +16061,40 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       #gkmV343Lens.fisheye{
         filter:drop-shadow(0 9px 22px rgba(0,0,0,.25))
       }
+      #gkmV343Lens.water,#gkmV343Lens.spotlight,#gkmV343Lens.domino{
+        -webkit-mask-image:radial-gradient(circle,#000 0 68%,rgba(0,0,0,.96) 78%,rgba(0,0,0,.48) 90%,transparent 100%);
+        mask-image:radial-gradient(circle,#000 0 68%,rgba(0,0,0,.96) 78%,rgba(0,0,0,.48) 90%,transparent 100%);
+        filter:none
+      }
+      #gkmV343Lens.living{opacity:0!important;filter:none}
       .gkmV343Shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,.18),transparent 13%,transparent 86%,rgba(0,0,0,.28))}
+      #gkmV357EffectShade{
+        position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;
+        transition:opacity .22s ease;
+        background:radial-gradient(
+          circle 185px at var(--gkm-spot-x,50%) var(--gkm-spot-y,50%),
+          transparent 0 46%,
+          rgba(2,7,20,.12) 66%,
+          rgba(2,7,20,.55) 100%
+        )
+      }
+      #gkmV343Overlay.effect-spotlight #gkmV357EffectShade{opacity:1}
+      @keyframes gkmV357MosaicDrift{
+        0%{transform:scale(1.018) translate3d(-.45%,-.30%,0)}
+        34%{transform:scale(1.026) translate3d(.35%,-.48%,0)}
+        68%{transform:scale(1.021) translate3d(.48%,.34%,0)}
+        100%{transform:scale(1.028) translate3d(-.32%,.46%,0)}
+      }
+      @keyframes gkmV357ShadeDrift{
+        0%{transform:translate3d(-.35%,0,0);filter:hue-rotate(0deg)}
+        100%{transform:translate3d(.35%,-.25%,0);filter:hue-rotate(9deg)}
+      }
+      #gkmV343Overlay.effect-living #gkmV343Canvas{
+        animation:gkmV357MosaicDrift 22s ease-in-out infinite alternate
+      }
+      #gkmV343Overlay.effect-living .gkmV343Shade{
+        animation:gkmV357ShadeDrift 16s ease-in-out infinite alternate
+      }
       .gkmV343Top{position:absolute;left:12px;right:12px;top:10px;z-index:8;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;pointer-events:none}
       .gkmV343Title{font-size:22px;font-weight:950;text-shadow:0 0 12px rgba(0,0,0,.9),0 0 22px rgba(0,180,255,.45)}
       .gkmV343Sub{margin-top:3px;font-size:12px;color:rgba(255,255,255,.86);text-shadow:0 0 8px rgba(0,0,0,.9)}
@@ -15814,6 +16108,34 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         background:linear-gradient(135deg,#00c8ff,#7439ff);
         border-color:rgba(255,255,255,.7);
         box-shadow:0 0 22px rgba(0,210,255,.46)
+      }
+      #gkmV357EffectsPanel{
+        position:absolute;z-index:11;right:14px;top:72px;width:min(390px,calc(100vw - 28px));
+        max-height:calc(100vh - 100px);overflow:auto;display:none;padding:14px;
+        border:1px solid rgba(0,216,255,.42);border-radius:20px;
+        background:linear-gradient(145deg,rgba(5,12,29,.97),rgba(18,13,45,.96));
+        box-shadow:0 24px 60px rgba(0,0,0,.62),0 0 30px rgba(0,190,255,.18);
+        backdrop-filter:blur(14px)
+      }
+      #gkmV357EffectsPanel.open{display:block}
+      .gkmV357EffectsHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+      .gkmV357EffectsHead b{font-size:18px}
+      #gkmV357EffectsClose{
+        border:1px solid rgba(0,216,255,.34);border-radius:11px;background:rgba(255,255,255,.08);
+        color:#fff;padding:7px 10px;font-weight:900;cursor:pointer
+      }
+      .gkmV357EffectsGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+      .gkmV357Effect{
+        min-height:88px;padding:10px!important;text-align:left;border-radius:15px!important;
+        background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.12)!important;
+        color:#fff;cursor:pointer;box-shadow:none!important
+      }
+      .gkmV357Effect b{display:block;font-size:13px;margin-bottom:5px}
+      .gkmV357Effect small{display:block;font-size:10px;line-height:1.3;color:rgba(255,255,255,.68)}
+      .gkmV357Effect.active{
+        background:linear-gradient(135deg,rgba(0,196,255,.35),rgba(114,55,255,.48))!important;
+        border-color:rgba(85,225,255,.72)!important;
+        box-shadow:0 0 18px rgba(0,198,255,.2)!important
       }
       #gkmV343Preview{
         position:absolute;z-index:7;left:0;top:0;width:min(560px,calc(100vw - 42px));height:258px;
@@ -15861,6 +16183,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         .gkmV343Pane{grid-template-columns:92px 1fr;gap:10px;padding:12px}
         .gkmV343PreviewPoster{width:92px;height:136px}.gkmV343PText h2{font-size:18px}.gkmV343Desc{display:none}
         #gkmV343Status{left:10px;bottom:10px;width:calc(100vw - 20px)}.gkmV343Hint{display:none}
+        #gkmV357EffectsPanel{top:102px;right:8px;width:calc(100vw - 16px);max-height:calc(100vh - 116px)}
+        .gkmV357EffectsGrid{grid-template-columns:1fr}
       }
     `;
     document.head.appendChild(css);
@@ -15885,10 +16209,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <canvas id="gkmV343Canvas"></canvas>
       <canvas id="gkmV343Lens" width="${LENS_SIZE}" height="${LENS_SIZE}"></canvas>
       <div class="gkmV343Shade"></div>
+      <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V356</div>
-          <div class="gkmV343Sub">Магнитная волна увеличивает постер и мягко раздвигает соседние плитки без круглого ободка.</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V357</div>
+          <div class="gkmV343Sub">Откройте студию эффектов и переключайте анимацию без перезагрузки мозаики.</div>
         </div>
         <div class="gkmV343Actions">
           <button data-kind="all">Все</button>
@@ -15896,10 +16221,41 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           <button data-kind="series">Сериалы</button>
           <button data-kind="anime">Аниме</button>
           <button data-kind="cartoons">Мульты</button>
-          <button data-gkm-effect="magnet">🧲 Магнит</button>
-          <button data-gkm-effect="fisheye">🐟 Рыбий глаз</button>
+          <button id="gkmV357EffectsToggle">✨ Эффекты: Магнитная волна</button>
           <button id="gkmV343Shuffle">⏭ Другой набор</button>
           <button id="gkmV343Close">✕</button>
+        </div>
+      </div>
+      <div id="gkmV357EffectsPanel" aria-label="Эффекты Canvas">
+        <div class="gkmV357EffectsHead">
+          <b>✨ Студия эффектов</b>
+          <button id="gkmV357EffectsClose" type="button">Закрыть</button>
+        </div>
+        <div class="gkmV357EffectsGrid">
+          <button class="gkmV357Effect" data-gkm-effect="magnet" type="button">
+            <b>🧲 Магнитная волна</b>
+            <small>Основной режим: увеличение и мягкое раздвижение соседних постеров.</small>
+          </button>
+          <button class="gkmV357Effect" data-gkm-effect="water" type="button">
+            <b>💧 Водная волна</b>
+            <small>За курсором проходит плавная рябь без жёсткого круглого края.</small>
+          </button>
+          <button class="gkmV357Effect" data-gkm-effect="spotlight" type="button">
+            <b>🎬 Кинопрожектор</b>
+            <small>Выбранный постер подсвечен, окружающая мозаика мягко затемняется.</small>
+          </button>
+          <button class="gkmV357Effect" data-gkm-effect="living" type="button">
+            <b>🌌 Живая мозаика</b>
+            <small>Вся стена очень медленно дрейфует и «дышит», создавая глубину.</small>
+          </button>
+          <button class="gkmV357Effect" data-gkm-effect="domino" type="button">
+            <b>🁢 Домино</b>
+            <small>Карточки последовательно наклоняются вслед за движением курсора.</small>
+          </button>
+          <button class="gkmV357Effect" data-gkm-effect="fisheye" type="button">
+            <b>🐟 Рыбий глаз</b>
+            <small>Прежнее мягкое увеличение без видимого круглого ободка.</small>
+          </button>
         </div>
       </div>
       <div id="gkmV343Preview">
@@ -15921,8 +16277,17 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       btn.onclick=()=>openWall(btn.dataset.kind);
     });
     overlay.querySelectorAll("[data-gkm-effect]").forEach(btn=>{
-      btn.onclick=()=>setEffectMode(btn.dataset.gkmEffect);
+      btn.onclick=()=>{
+        setEffectMode(btn.dataset.gkmEffect);
+        if(window.innerWidth<700) document.getElementById("gkmV357EffectsPanel")?.classList.remove("open");
+      };
     });
+    document.getElementById("gkmV357EffectsToggle").onclick=()=>{
+      document.getElementById("gkmV357EffectsPanel")?.classList.toggle("open");
+    };
+    document.getElementById("gkmV357EffectsClose").onclick=()=>{
+      document.getElementById("gkmV357EffectsPanel")?.classList.remove("open");
+    };
     document.getElementById("gkmV343Close").onclick=closeWall;
     document.getElementById("gkmV343Shuffle").onclick=()=>{
       shuffleSeed++;
@@ -16000,6 +16365,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       motionFrame=0;
     }
     hidePreview();
+    document.getElementById("gkmV357EffectsPanel")?.classList.remove("open");
     const lens=document.getElementById("gkmV343Lens");
     if(lens) lens.classList.remove("open");
   }
@@ -16019,7 +16385,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     fastScreenVersion:window.GKM_V354_FAST_SCREEN_POSTER_WALL_VERSION,
     posterTransportVersion:window.GKM_V355_FAST_POSTER_TRANSPORT_VERSION,
     magneticWaveVersion:window.GKM_V356_MAGNETIC_WAVE_VERSION,
-    effects:["magnet","fisheye"],
+    effectsStudioVersion:window.GKM_V357_EFFECTS_STUDIO_VERSION,
+    effects:["magnet","water","spotlight","living","domino","fisheye"],
     magnet:{radius:MAGNET_RADIUS,push:MAGNET_PUSH,scale:MAGNET_SCALE},
     concurrency:{
       first:FIRST_CONCURRENCY,
@@ -16033,7 +16400,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V356: magnetic wave and optional fisheye installed");
+  console.log("GKM V357: effects studio with six Canvas modes installed");
 })();
 /* GKM V343 SOFT FISHEYE VIDEO WALL END */
 
@@ -17193,3 +17560,154 @@ Endpoint: ${endpoint||"не задан"}`;
   console.log("GKM V352: home collections, season titles and genres repaired");
 })();
 /* GKM V352 HOME COLLECTIONS, PART TITLES AND GENRES END */
+
+
+/* GKM V357 DETAIL CARD COLOUR RESTORE START */
+(function(){
+  window.GKM_V357_DETAIL_COLOR_VERSION = "v357-detail-colour-restore-2026-07-27";
+
+  function ensureColorCss(){
+    if(document.getElementById("gkmV357DetailColorCss")) return;
+    const style=document.createElement("style");
+    style.id="gkmV357DetailColorCss";
+    style.textContent=`
+      #detailsDialog{
+        --gkm-v357-detail-glow:rgba(0,212,255,.24);
+        --gkm-v357-detail-card:rgba(85,43,190,.24);
+        opacity:1!important;
+        filter:none!important;
+        -webkit-filter:none!important;
+        mix-blend-mode:normal!important
+      }
+      #detailsDialog[data-media-theme="series"]{
+        --gkm-v357-detail-glow:rgba(255,79,216,.24);
+        --gkm-v357-detail-card:rgba(98,60,255,.24)
+      }
+      #detailsDialog[data-media-theme="anime"]{
+        --gkm-v357-detail-glow:rgba(255,71,126,.24);
+        --gkm-v357-detail-card:rgba(139,44,255,.24)
+      }
+      #detailsDialog[data-media-theme="cartoon"]{
+        --gkm-v357-detail-glow:rgba(255,176,46,.25);
+        --gkm-v357-detail-card:rgba(0,188,232,.22)
+      }
+      #detailsDialog[data-media-theme="game"]{
+        --gkm-v357-detail-glow:rgba(37,230,167,.24);
+        --gkm-v357-detail-card:rgba(0,124,255,.23)
+      }
+      #detailsDialog[data-media-theme="book"]{
+        --gkm-v357-detail-glow:rgba(255,209,102,.25);
+        --gkm-v357-detail-card:rgba(255,92,138,.22)
+      }
+      #detailsDialog .dialog-content{
+        opacity:1!important;
+        filter:none!important;
+        -webkit-filter:none!important;
+        mix-blend-mode:normal!important;
+        background:
+          radial-gradient(circle at 16% 2%,var(--gkm-v357-detail-glow),transparent 35%),
+          linear-gradient(135deg,#080d22,#080b1c 62%,#10163a)!important
+      }
+      #detailsDialog .gkm-v191-similar-down,
+      #detailsDialog .gkm-v191-soft-trash,
+      #detailsDialog .related-block,
+      #detailsDialog .related-cards,
+      #detailsDialog #relatedCards,
+      #detailsDialog .related-card,
+      #detailsDialog .related-card *,
+      #detailsDialog #gkmFamilyBlock,
+      #detailsDialog #gkmFamilyBlock *{
+        opacity:1!important;
+        filter:none!important;
+        -webkit-filter:none!important;
+        mix-blend-mode:normal!important
+      }
+      #detailsDialog .related-card{
+        border-color:var(--detail-accent,#00d4ff)!important;
+        background:linear-gradient(160deg,var(--gkm-v357-detail-card),#071226 72%)!important;
+        box-shadow:0 10px 26px rgba(0,0,0,.28)!important
+      }
+      #detailsDialog .related-poster,
+      #detailsDialog #gkmFamilyBlock .gkm-family-poster,
+      #detailsDialog #detailPoster{
+        opacity:1!important;
+        filter:saturate(1.14) contrast(1.06) brightness(1.07)!important;
+        -webkit-filter:saturate(1.14) contrast(1.06) brightness(1.07)!important;
+        mix-blend-mode:normal!important
+      }
+      #detailsDialog .related-title,
+      #detailsDialog .related-meta,
+      #detailsDialog #gkmFamilyBlock .gkm-family-title,
+      #detailsDialog #gkmFamilyBlock .gkm-family-alt,
+      #detailsDialog #gkmFamilyBlock .gkm-family-meta{
+        opacity:1!important;
+        filter:none!important;
+        color:#f7fbff!important;
+        text-shadow:0 1px 9px rgba(0,0,0,.72)!important
+      }
+      #detailsDialog .related-rating{
+        opacity:1!important;
+        filter:none!important;
+        background:linear-gradient(135deg,#15e4d1,#28bdf8)!important;
+        color:#00131b!important
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function restoreDetailColors(){
+    const dialog=document.getElementById("detailsDialog");
+    if(!dialog) return;
+    dialog.querySelectorAll(".gkm-v191-similar-down,.gkm-v191-soft-trash").forEach(node=>{
+      node.classList.remove("gkm-v191-similar-down","gkm-v191-soft-trash");
+    });
+    dialog.querySelectorAll(".related-cards,.related-card,#gkmFamilyBlock,.gkm-family-row").forEach(node=>{
+      if(node.style.opacity&&node.style.opacity!=="1") node.style.removeProperty("opacity");
+      if(node.style.filter&&node.style.filter!=="none") node.style.removeProperty("filter");
+      if(node.style.webkitFilter&&node.style.webkitFilter!=="none") node.style.removeProperty("-webkit-filter");
+      if(node.style.mixBlendMode&&node.style.mixBlendMode!=="normal") node.style.removeProperty("mix-blend-mode");
+    });
+  }
+
+  function installColorGuard(){
+    ensureColorCss();
+    const dialog=document.getElementById("detailsDialog");
+    if(!dialog||dialog.dataset.gkmV357ColorGuard==="1") return;
+    dialog.dataset.gkmV357ColorGuard="1";
+    let frame=0;
+    const schedule=()=>{
+      if(frame) return;
+      frame=requestAnimationFrame(()=>{
+        frame=0;
+        restoreDetailColors();
+      });
+    };
+    new MutationObserver(schedule).observe(dialog,{
+      childList:true,
+      subtree:true,
+      attributes:true,
+      attributeFilter:["open","class","style"]
+    });
+    restoreDetailColors();
+  }
+
+  const previousOpenDetails=typeof openDetails==="function"?openDetails:null;
+  if(previousOpenDetails){
+    openDetails=function gkmV357OpenDetailsWithColour(item){
+      const result=previousOpenDetails.apply(this,arguments);
+      setTimeout(restoreDetailColors,0);
+      setTimeout(restoreDetailColors,120);
+      return result;
+    };
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",installColorGuard,{once:true});
+  }else{
+    installColorGuard();
+  }
+  setTimeout(installColorGuard,500);
+
+  console.log("GKM V357: full detail-card colour restored");
+})();
+/* GKM V357 DETAIL CARD COLOUR RESTORE END */
