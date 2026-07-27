@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "354";
+const GKM_DATA_CACHE_VERSION = "355";
 const HOME_URL = `${FAST_BASE}/home.json`;
 const META_URL = `${FAST_BASE}/meta.json`;
 const SEARCH_URL = `${FAST_BASE}/search_index.json`;
@@ -736,7 +736,7 @@ function posterRawSrc(item) {
   return gkmV256MakeCover(item);
 }
 
-function posterProxySrc(src) {
+function posterProxySrc(src, width = 185) {
   const raw = String(src || "").trim();
   if (!raw) return "";
   try {
@@ -745,29 +745,35 @@ function posterProxySrc(src) {
     if (host.includes("images.weserv.nl")) return "";
     if (host === location.hostname) return "";
     const clean = url.href.replace(/^https?:\/\//i, "");
-    return "https://images.weserv.nl/?url=" + encodeURIComponent(clean) + "&w=342&output=webp";
+    const safeWidth = Math.max(92, Math.min(342, Number(width) || 185));
+    return "https://images.weserv.nl/?url=" + encodeURIComponent(clean) +
+      `&w=${safeWidth}&output=webp&q=72`;
   } catch (_) {
     return "";
   }
 }
 
-function posterCardSizedSrc(src) {
+function posterCardSizedSrc(src, width = 185) {
   const raw = String(src || "").trim();
   if (!raw || /^(?:data:|blob:)/i.test(raw)) return raw;
+  const safeWidth = Math.max(92, Math.min(342, Number(width) || 185));
   try {
     const url = new URL(raw, location.href);
     const host = url.hostname.toLowerCase();
     if (host === "image.tmdb.org" || host === "media.themoviedb.org") {
-      url.pathname = url.pathname.replace(/\/t\/p\/[^/]+\//i, "/t/p/w342/");
+      const tmdbWidth = safeWidth <= 110 ? "w92" : (safeWidth <= 220 ? "w185" : "w342");
+      url.pathname = url.pathname.replace(/\/t\/p\/[^/]+\//i, `/t/p/${tmdbWidth}/`);
       return url.href;
     }
     if (host.includes("avatars.mds.yandex.net")) {
-      url.pathname = url.pathname.replace(/\/\d+x\d+$/i, "/360x540");
+      // Kinopoisk CDN accepts a fixed size set. Arbitrary 240x360/360x540
+      // return 404 and used to hold movie/series cards empty for seconds.
+      url.pathname = url.pathname.replace(/\/\d+x\d+$/i, "/300x450");
       return url.href;
     }
     if (host.includes("images.weserv.nl")) {
-      url.searchParams.set("w", "342");
-      url.searchParams.set("h", "513");
+      url.searchParams.set("w", String(safeWidth));
+      url.searchParams.set("h", String(Math.round(safeWidth * 1.5)));
       url.searchParams.set("fit", "cover");
       url.searchParams.set("output", "webp");
       url.searchParams.set("q", "72");
@@ -784,11 +790,13 @@ function shouldProxyFirst(src) {
   return false;
 }
 
-function posterSrc(item) {
+function posterSrc(item, width = 185) {
   const raw = posterRawSrc(item);
   if (!raw) return "";
-  const sized = posterCardSizedSrc(raw);
-  return shouldProxyFirst(raw) ? (posterProxySrc(sized || raw) || sized || raw) : (sized || raw);
+  const sized = posterCardSizedSrc(raw, width);
+  return shouldProxyFirst(raw)
+    ? (posterProxySrc(sized || raw, width) || sized || raw)
+    : (sized || raw);
 }
 
 function posterOriginalSrc(item) {
@@ -799,10 +807,16 @@ function posterPlaceholderHtml() {
   return "";
 }
 
+function posterTargetWidth(img) {
+  const explicit = Number(img && img.dataset && img.dataset.posterWidth);
+  if (Number.isFinite(explicit) && explicit > 0) return explicit;
+  return img && img.id === "detailPoster" ? 342 : 185;
+}
+
 function recoverPosterImage(img) {
   if (!img || img.dataset.posterDone === "1") return;
   const original = img.dataset.originalSrc || "";
-  const proxy = posterProxySrc(original || img.currentSrc || img.src);
+  const proxy = posterProxySrc(original || img.currentSrc || img.src, posterTargetWidth(img));
   if (img.dataset.proxyTried !== "1" && proxy && img.src !== proxy) {
     img.dataset.proxyTried = "1";
     img.src = proxy;
@@ -840,37 +854,125 @@ function recoverPosterImage(img) {
   img.style.display = "none";
 }
 
+let posterPriorityObserver = null;
+
+function makePosterPriorityObserver() {
+  if (posterPriorityObserver || !("IntersectionObserver" in window)) return posterPriorityObserver;
+  posterPriorityObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      posterPriorityObserver.unobserve(entry.target);
+      prioritizePosterImage(entry.target, false);
+    });
+  }, { rootMargin: "700px 400px" });
+  return posterPriorityObserver;
+}
+
+function racePosterProxy(img) {
+  if (
+    !img ||
+    img.dataset.posterDone === "1" ||
+    img.dataset.posterProxyRace === "1" ||
+    img.dataset.proxyTried === "1"
+  ) return;
+  const original = img.dataset.originalSrc || img.currentSrc || img.src;
+  const proxy = posterProxySrc(original, posterTargetWidth(img));
+  if (!proxy || img.src === proxy) return;
+
+  img.dataset.posterProxyRace = "1";
+  const probe = new Image();
+  img.__gkmPosterProbe = probe;
+  probe.decoding = "async";
+  probe.fetchPriority = "high";
+  probe.referrerPolicy = "no-referrer";
+  probe.onload = () => {
+    if (img.dataset.posterDone === "1") return;
+    img.dataset.proxyTried = "1";
+    img.src = proxy;
+  };
+  probe.onerror = () => {
+    img.dataset.posterProxyRaceFailed = "1";
+  };
+  probe.src = proxy;
+}
+
+function prioritizePosterImage(img, high = false) {
+  if (!img || img.dataset.posterPriority === "1" || img.dataset.posterDone === "1") return;
+  img.dataset.posterPriority = "1";
+  img.loading = "eager";
+  img.decoding = "async";
+  img.fetchPriority = high ? "high" : "auto";
+  img.referrerPolicy = "no-referrer";
+
+  // V355: если прямой TMDB/Яндекс завис, не держим видимую карточку пустой
+  // несколько секунд — быстро переключаемся на уменьшенный WebP-резерв.
+  clearTimeout(img.__gkmPosterFastTimer);
+  img.__gkmPosterFastTimer = setTimeout(() => {
+    if (!img.dataset.posterDone && (!img.complete || img.naturalWidth === 0)) {
+      if (high) racePosterProxy(img);
+      else recoverPosterImage(img);
+    }
+  }, high ? 400 : 850);
+}
+
 function schedulePosterRecovery(root = document) {
   const imgs = Array.from(root.querySelectorAll ? root.querySelectorAll(".poster-wrap img, .related-poster, img.gkm-family-poster, #detailPoster") : []);
+  const observer = makePosterPriorityObserver();
+  let highBudget = 16;
   for (const img of imgs) {
-    if (img.dataset.posterWatch === "1") continue;
-    img.dataset.posterWatch = "1";
-    img.addEventListener("error", () => recoverPosterImage(img));
-    img.addEventListener("load", () => {
-      if (img.naturalWidth > 0) {
-        img.dataset.posterDone = "1";
-        img.style.display = "";
-        const card = img.closest && img.closest(".related-card");
-        if (card) {
-          card.classList.remove("poster-missing");
-          card.querySelector(".related-empty")?.remove();
+    if (img.dataset.posterWatch !== "1") {
+      img.dataset.posterWatch = "1";
+      img.addEventListener("error", () => recoverPosterImage(img));
+      img.addEventListener("load", () => {
+        if (img.naturalWidth > 0) {
+          clearTimeout(img.__gkmPosterFastTimer);
+          if (img.__gkmPosterProbe) {
+            img.__gkmPosterProbe.onload = null;
+            img.__gkmPosterProbe.onerror = null;
+            img.__gkmPosterProbe.src = "";
+            img.__gkmPosterProbe = null;
+          }
+          img.dataset.posterDone = "1";
+          img.style.display = "";
+          const card = img.closest && img.closest(".related-card");
+          if (card) {
+            card.classList.remove("poster-missing");
+            card.querySelector(".related-empty")?.remove();
+          }
+          const familyCard = img.closest && img.closest(".gkm-family-card");
+          if (familyCard) {
+            familyCard.classList.remove("poster-missing");
+            familyCard.querySelector(".gkm-family-empty")?.remove();
+          }
+          const wrap = img.closest && img.closest(".poster-wrap");
+          const ph = wrap && wrap.querySelector(".poster-placeholder");
+          if (ph) ph.remove();
         }
-        const familyCard = img.closest && img.closest(".gkm-family-card");
-        if (familyCard) {
-          familyCard.classList.remove("poster-missing");
-          familyCard.querySelector(".gkm-family-empty")?.remove();
-        }
-        const wrap = img.closest && img.closest(".poster-wrap");
-        const ph = wrap && wrap.querySelector(".poster-placeholder");
-        if (ph) ph.remove();
-      }
-    });
-    setTimeout(() => {
-      if (!img.dataset.posterDone && (!img.complete || img.naturalWidth === 0)) recoverPosterImage(img);
-    }, 2800);
-    setTimeout(() => {
-      if (!img.dataset.posterDone && (!img.complete || img.naturalWidth === 0)) recoverPosterImage(img);
-    }, 6800);
+      });
+      setTimeout(() => {
+        if (!img.dataset.posterDone && (!img.complete || img.naturalWidth === 0)) recoverPosterImage(img);
+      }, 5200);
+      setTimeout(() => {
+        if (!img.dataset.posterDone && (!img.complete || img.naturalWidth === 0)) recoverPosterImage(img);
+      }, 11000);
+    }
+
+    const alwaysFast =
+      img.id === "detailPoster" ||
+      img.classList.contains("related-poster") ||
+      img.classList.contains("gkm-family-poster");
+    const rect = img.getBoundingClientRect();
+    const nearViewport =
+      rect.bottom >= -250 &&
+      rect.top <= window.innerHeight + 550 &&
+      rect.right >= -250 &&
+      rect.left <= window.innerWidth + 350;
+
+    if (alwaysFast || nearViewport) {
+      prioritizePosterImage(img, highBudget-- > 0);
+    } else if (observer) {
+      observer.observe(img);
+    }
   }
 }
 
@@ -901,9 +1003,9 @@ function cardHtml(item) {
   const votes = getVotes(item);
   const fav = loadSet(favKey);
   const id = String(item.id || `${title}|${getYear(item)}`);
-  const img = posterSrc(item);
+  const img = posterSrc(item, 185);
   const poster = img
-    ? `<img src="${escapeAttr(img)}" data-original-src="${escapeAttr(posterOriginalSrc(item))}" data-proxy-tried="${shouldProxyFirst(posterOriginalSrc(item)) ? "1" : "0"}" loading="lazy" decoding="async" alt="">`
+    ? `<img src="${escapeAttr(img)}" data-original-src="${escapeAttr(posterOriginalSrc(item))}" data-poster-width="185" data-proxy-tried="${shouldProxyFirst(posterOriginalSrc(item)) ? "1" : "0"}" loading="lazy" fetchpriority="auto" decoding="async" alt="">`
     : `<div class="poster-placeholder">Нет постера</div>`;
 
   return `
@@ -1764,7 +1866,20 @@ function openDetails(item) {
   const detailGenres = $("detailGenres");
   const overview = $("detailOverview");
   if (dialog) dialog.dataset.mediaTheme = detailTheme(item);
-  if (poster) { poster.dataset.originalSrc = posterOriginalSrc(item) || ""; poster.dataset.proxyTried = shouldProxyFirst(poster.dataset.originalSrc) ? "1" : "0"; poster.src = posterSrc(item) || ""; schedulePosterRecovery(document); }
+  if (poster) {
+    poster.dataset.originalSrc = posterOriginalSrc(item) || "";
+    poster.dataset.posterWidth = "342";
+    poster.dataset.proxyTried = shouldProxyFirst(poster.dataset.originalSrc) ? "1" : "0";
+    poster.dataset.originalTried = "";
+    poster.dataset.posterDone = "";
+    poster.dataset.posterPriority = "";
+    poster.dataset.posterProxyRace = "";
+    poster.dataset.posterProxyRaceFailed = "";
+    poster.loading = "eager";
+    poster.fetchPriority = "high";
+    poster.src = posterSrc(item, 342) || "";
+    schedulePosterRecovery(document);
+  }
   if (title) title.textContent = displayTitle(item);
   if (meta) meta.textContent = `${getType(item)} · ${getYear(item) || "—"} · ${rankLabel(item)} · ${getRating(item) || "—"} · ${getVotes(item)} голосов`;
   if (detailGenres) detailGenres.textContent = getGenres(item).join(" · ");
@@ -1829,10 +1944,10 @@ function franchiseKey(item) {
 }
 
 function relatedCardHtml(item) {
-  const img = posterSrc(item);
+  const img = posterSrc(item, 185);
   return `
     <article class="related-card" data-related-id="${escapeAttr(item.id || `${titleOf(item)}|${getYear(item)}`)}">
-      ${img ? `<img class="related-poster" src="${escapeAttr(img)}" data-original-src="${escapeAttr(posterOriginalSrc(item))}" data-proxy-tried="${shouldProxyFirst(posterOriginalSrc(item)) ? "1" : "0"}" loading="lazy" decoding="async" alt="">` : ""}
+      ${img ? `<img class="related-poster" src="${escapeAttr(img)}" data-original-src="${escapeAttr(posterOriginalSrc(item))}" data-poster-width="185" data-proxy-tried="${shouldProxyFirst(posterOriginalSrc(item)) ? "1" : "0"}" loading="eager" fetchpriority="high" decoding="async" referrerpolicy="no-referrer" alt="">` : ""}
       <div class="related-info">
         <div class="related-title">${escapeHtml(titleOf(item))}</div>
         <div class="related-meta">${escapeHtml(getYear(item) || "—")} · ${escapeHtml(getType(item))}</div>
@@ -1908,6 +2023,7 @@ function renderRelated(base) {
 
   block.style.display = rows.length ? "" : "none";
   box.innerHTML = rows.map(relatedCardHtml).join("");
+  schedulePosterRecovery(box);
 }
 
 function scheduleSearch(delay = 160) {
@@ -14409,6 +14525,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V353_PROGRESSIVE_POSTER_WALL_VERSION = "v353-progressive-poster-wall-2026-07-24";
   window.GKM_V353_1_TAIL_SPEED_VERSION = "v353.1-tail-speed-2026-07-24";
   window.GKM_V354_FAST_SCREEN_POSTER_WALL_VERSION = "v354-fast-screen-poster-wall-2026-07-27";
+  window.GKM_V355_FAST_POSTER_TRANSPORT_VERSION = "v355-fast-poster-transport-2026-07-27";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
@@ -14475,11 +14592,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   const TILE_FADE_MS = 170;
   const MAX_ACTIVE_REVEALS = 96;
   const REVEALS_PER_FRAME = 24;
-  const PRIMARY_IMAGE_TIMEOUT_MS = 2600;
-  const FALLBACK_IMAGE_TIMEOUT_MS = 2100;
-  const TAIL_PRIMARY_TIMEOUT_MS = 1800;
-  const TAIL_FALLBACK_TIMEOUT_MS = 1500;
-  const COARSE_IMAGE_TIMEOUT_MS = 3200;
+  const PRIMARY_IMAGE_TIMEOUT_MS = 850;
+  const FALLBACK_IMAGE_TIMEOUT_MS = 1200;
+  const TAIL_PRIMARY_TIMEOUT_MS = 600;
+  const TAIL_FALLBACK_TIMEOUT_MS = 900;
+  const COARSE_IMAGE_TIMEOUT_MS = 1100;
   const TARGET_CELL_W = 42;
   const TARGET_CELL_H = 63;
   const MAX_SCREEN_TILES = 900;
@@ -14706,7 +14823,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         return url.href;
       }
       if(host.includes("avatars.mds.yandex.net")){
-        url.pathname=url.pathname.replace(/\/\d+x\d+$/i,`/${width}x${height}`);
+        // 48x72 and 300x450 are valid Kinopoisk CDN variants.
+        // Arbitrary coarse sizes such as 320x480/360x540 return 404.
+        const yandexSize=width<=64?"48x72":"300x450";
+        url.pathname=url.pathname.replace(/\/\d+x\d+$/i,`/${yandexSize}`);
         return url.href;
       }
       if(
@@ -15035,13 +15155,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   async function loadBackdrop(items,token){
     const source=uniqueList(items||[]);
-    const viewportArea=Math.max(1,window.innerWidth*window.innerHeight);
+    const bounds=getCanvasBounds();
+    const viewportArea=Math.max(1,bounds.width*bounds.height);
     const wanted=clamp(Math.ceil(viewportArea/85000),18,36);
     const coarseItems=source.slice(0,Math.min(source.length,wanted));
     coarseLayout=balancedLayout(
       Math.max(coarseItems.length,1),
-      window.innerWidth,
-      window.innerHeight
+      bounds.width,
+      bounds.height
     );
     backdropLoaded=0;
 
@@ -15608,8 +15729,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div class="gkmV343Shade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V354</div>
-          <div class="gkmV343Sub">Быстрый экранный набор: крупный фон и детальная мозаика загружаются вместе.</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V355</div>
+          <div class="gkmV343Sub">Видимые постеры загружаются первыми; медленные источники быстро переключаются на резерв.</div>
         </div>
         <div class="gkmV343Actions">
           <button data-kind="all">Все</button>
@@ -15732,6 +15853,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     version:window.GKM_V353_PROGRESSIVE_POSTER_WALL_VERSION,
     tailSpeedVersion:window.GKM_V353_1_TAIL_SPEED_VERSION,
     fastScreenVersion:window.GKM_V354_FAST_SCREEN_POSTER_WALL_VERSION,
+    posterTransportVersion:window.GKM_V355_FAST_POSTER_TRANSPORT_VERSION,
     concurrency:{
       first:FIRST_CONCURRENCY,
       rest:REST_CONCURRENCY,
@@ -15744,7 +15866,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V354: fast screen-sized progressive poster wall installed");
+  console.log("GKM V355: fast visible poster transport and screen-sized wall installed");
 })();
 /* GKM V343 SOFT FISHEYE VIDEO WALL END */
 
