@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "3531";
+const GKM_DATA_CACHE_VERSION = "354";
 const HOME_URL = `${FAST_BASE}/home.json`;
 const META_URL = `${FAST_BASE}/meta.json`;
 const SEARCH_URL = `${FAST_BASE}/search_index.json`;
@@ -751,6 +751,32 @@ function posterProxySrc(src) {
   }
 }
 
+function posterCardSizedSrc(src) {
+  const raw = String(src || "").trim();
+  if (!raw || /^(?:data:|blob:)/i.test(raw)) return raw;
+  try {
+    const url = new URL(raw, location.href);
+    const host = url.hostname.toLowerCase();
+    if (host === "image.tmdb.org" || host === "media.themoviedb.org") {
+      url.pathname = url.pathname.replace(/\/t\/p\/[^/]+\//i, "/t/p/w342/");
+      return url.href;
+    }
+    if (host.includes("avatars.mds.yandex.net")) {
+      url.pathname = url.pathname.replace(/\/\d+x\d+$/i, "/360x540");
+      return url.href;
+    }
+    if (host.includes("images.weserv.nl")) {
+      url.searchParams.set("w", "342");
+      url.searchParams.set("h", "513");
+      url.searchParams.set("fit", "cover");
+      url.searchParams.set("output", "webp");
+      url.searchParams.set("q", "72");
+      return url.href;
+    }
+  } catch {}
+  return raw;
+}
+
 function shouldProxyFirst(src) {
   // V150: для карточек не гоняем TMDB/постеры через images.weserv.nl первым ходом.
   // У тебя была ситуация: в карточке "Нет постера", а в модалке постер есть.
@@ -761,7 +787,8 @@ function shouldProxyFirst(src) {
 function posterSrc(item) {
   const raw = posterRawSrc(item);
   if (!raw) return "";
-  return shouldProxyFirst(raw) ? (posterProxySrc(raw) || raw) : raw;
+  const sized = posterCardSizedSrc(raw);
+  return shouldProxyFirst(raw) ? (posterProxySrc(sized || raw) || sized || raw) : (sized || raw);
 }
 
 function posterOriginalSrc(item) {
@@ -840,10 +867,10 @@ function schedulePosterRecovery(root = document) {
     });
     setTimeout(() => {
       if (!img.dataset.posterDone && (!img.complete || img.naturalWidth === 0)) recoverPosterImage(img);
-    }, 1800);
+    }, 2800);
     setTimeout(() => {
       if (!img.dataset.posterDone && (!img.complete || img.naturalWidth === 0)) recoverPosterImage(img);
-    }, 4200);
+    }, 6800);
   }
 }
 
@@ -14358,6 +14385,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   // Если страница уже была отрисована до патча — перерисуем текущий каталог.
   function repaintCurrentV337(){
     try{
+      // V354: актуальную главную уже рисует V352. Старый V337 раньше
+      // трижды заменял её плоским списком и повторно запускал загрузку постеров.
+      if(currentMode === "home") return;
       if(Array.isArray(currentItems) && currentItems.length && typeof renderList === "function"){
         const txt = document.getElementById("countText")?.textContent || "";
         renderList(currentItems, txt);
@@ -14378,18 +14408,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V343_SOFT_FISHEYE_VIDEO_WALL_VERSION = "v343-soft-fisheye-video-wall-2026-07-21";
   window.GKM_V353_PROGRESSIVE_POSTER_WALL_VERSION = "v353-progressive-poster-wall-2026-07-24";
   window.GKM_V353_1_TAIL_SPEED_VERSION = "v353.1-tail-speed-2026-07-24";
+  window.GKM_V354_FAST_SCREEN_POSTER_WALL_VERSION = "v354-fast-screen-poster-wall-2026-07-27";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
   const COARSE_CACHE = new Map();
-
-  const EXPECTED_COUNTS = {
-    anime: 4400,
-    movies: 5200,
-    series: 3600,
-    cartoons: 2600,
-    all: 9000
-  };
+  const WALL_SEED_URL = "data/fast/poster_wall_v333/seed_all.json?v=354";
 
   let canvas = null;
   let ctx = null;
@@ -14406,7 +14430,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let currentKind = "anime";
   let wallItems = [];
   let allItems = [];
-  let layoutCount = EXPECTED_COUNTS.anime;
+  let layoutCount = 1;
 
   let fineLayout = null;
   let coarseLayout = null;
@@ -14430,6 +14454,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let activeReveals = [];
   let pendingReveals = [];
   let revealFrame = 0;
+  let resizeTimer = 0;
 
   let pointerInside = false;
   let pointerTargetX = 0;
@@ -14443,17 +14468,21 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let motionFrame = 0;
   let lensDirty = false;
 
-  const FIRST_CONCURRENCY = 48;
-  const REST_CONCURRENCY = 72;
-  const TAIL_CONCURRENCY = 108;
-  const BACKDROP_CONCURRENCY = 14;
+  const FIRST_CONCURRENCY = 36;
+  const REST_CONCURRENCY = 48;
+  const TAIL_CONCURRENCY = 64;
+  const BACKDROP_CONCURRENCY = 8;
   const TILE_FADE_MS = 170;
-  const MAX_ACTIVE_REVEALS = 144;
-  const REVEALS_PER_FRAME = 36;
-  const PRIMARY_IMAGE_TIMEOUT_MS = 4200;
-  const FALLBACK_IMAGE_TIMEOUT_MS = 3600;
-  const TAIL_PRIMARY_TIMEOUT_MS = 2300;
-  const TAIL_FALLBACK_TIMEOUT_MS = 1900;
+  const MAX_ACTIVE_REVEALS = 96;
+  const REVEALS_PER_FRAME = 24;
+  const PRIMARY_IMAGE_TIMEOUT_MS = 2600;
+  const FALLBACK_IMAGE_TIMEOUT_MS = 2100;
+  const TAIL_PRIMARY_TIMEOUT_MS = 1800;
+  const TAIL_FALLBACK_TIMEOUT_MS = 1500;
+  const COARSE_IMAGE_TIMEOUT_MS = 3200;
+  const TARGET_CELL_W = 42;
+  const TARGET_CELL_H = 63;
+  const MAX_SCREEN_TILES = 900;
   const LENS_SIZE = 330;
   const LENS_RADIUS = LENS_SIZE / 2;
 
@@ -14530,6 +14559,30 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return {all:"Все",anime:"Аниме",movies:"Фильмы",series:"Сериалы",cartoons:"Мульты"}[kind] || "Каталог";
   }
 
+  function decodeCompactPoster(code){
+    const raw=t(code);
+    if(raw.startsWith("t:")) return `https://image.tmdb.org/t/p/w342/${raw.slice(2)}`;
+    if(raw.startsWith("m:")) return `https://cdn.myanimelist.net/${raw.slice(2)}`;
+    return raw.startsWith("u:")?raw.slice(2):raw;
+  }
+  function compactWallItem(row){
+    if(!Array.isArray(row)) return row;
+    const typeMap=["Фильм","Сериал","Аниме","Мультфильм"];
+    return {
+      id:row[0],
+      ru:row[1]||"",
+      en:row[2]||"",
+      year:row[3]||"",
+      type:typeMap[Number(row[4])]||"Каталог",
+      rating:Number(row[5]||0),
+      votes:Number(row[6]||0),
+      poster:decodeCompactPoster(row[7]),
+      genres:typeof row[8]==="string"?row[8].split("|").filter(Boolean):(row[8]||[]),
+      source:row[9]||"",
+      status:row[10]||"",
+      __gkmV354Compact:true
+    };
+  }
   function parseJson(j){
     const out = [];
     if(!j) return out;
@@ -14543,7 +14596,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         else if(v && Array.isArray(v.items)) out.push(...v.items);
       });
     }
-    return out.filter(x=>x && typeof x === "object");
+    return out
+      .map(compactWallItem)
+      .filter(x=>x && typeof x === "object");
   }
   async function fetchJson(url){
     const versionedUrl=withDataVersion(url);
@@ -14591,28 +14646,28 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       [arr[i],arr[j]]=[arr[j],arr[i]];
     }
   }
-  function urlsFor(kind){
-    const urls=["data/fast/home.json?v=343"];
+  function fallbackUrlsFor(kind,needed){
     const map={
       anime:["anime"],
       movies:["movies"],
       series:["series"],
       cartoons:["cartoons"],
-      all:["anime","movies","series","cartoons"]
+      all:["movies","series","anime","cartoons"]
     };
     const cats=map[kind]||["anime"];
-    const maxPages=kind==="all"?24:(kind==="anime"?72:40);
-    cats.forEach(cat=>{
-      for(let i=1;i<=maxPages;i++){
-        urls.push(`data/fast/pages/${cat}/page_${String(i).padStart(4,"0")}.json?v=343`);
-      }
-    });
+    const pagesPerKind=Math.max(1,Math.ceil(needed/60/cats.length)+1);
+    const urls=[];
+    for(let page=1;page<=pagesPerKind;page++){
+      cats.forEach(cat=>{
+        urls.push(`data/fast/pages/${cat}/page_${String(page).padStart(4,"0")}.json?v=354`);
+      });
+    }
     return urls;
   }
 
-  function sizedPosterUrl(item,width,height,quality){
-    const raw=originalPosterOf(item)||posterOf(item);
+  function proxySizedPosterUrl(raw,width,height,quality){
     if(!raw) return "";
+    if(/^(?:data:|blob:)/i.test(raw)) return raw;
     try{
       const url=new URL(raw,location.href);
       if(url.hostname.toLowerCase().includes("images.weserv.nl")){
@@ -14631,9 +14686,60 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       return raw;
     }
   }
-  function smallPosterUrl(item){ return sizedPosterUrl(item,48,72,58); }
-  function coarsePosterUrl(item){ return sizedPosterUrl(item,320,480,72); }
+  function directSizedPosterUrl(raw,width,height){
+    if(!raw) return "";
+    if(/^(?:data:|blob:)/i.test(raw)) return raw;
+    try{
+      const url=new URL(raw,location.href);
+      const host=url.hostname.toLowerCase();
+      if(host.includes("images.weserv.nl")){
+        url.searchParams.set("w",String(width));
+        url.searchParams.set("h",String(height));
+        url.searchParams.set("fit","cover");
+        url.searchParams.set("output","webp");
+        return url.href;
+      }
+      if(url.hostname===location.hostname) return url.href;
+      if(host==="image.tmdb.org"||host==="media.themoviedb.org"){
+        const tmdbWidth=width<=96?"w92":(width<=185?"w185":"w342");
+        url.pathname=url.pathname.replace(/\/t\/p\/[^/]+\//i,`/t/p/${tmdbWidth}/`);
+        return url.href;
+      }
+      if(host.includes("avatars.mds.yandex.net")){
+        url.pathname=url.pathname.replace(/\/\d+x\d+$/i,`/${width}x${height}`);
+        return url.href;
+      }
+      if(
+        host.includes("cdn.myanimelist.net")||
+        host.includes("kinopoiskapiunofficial.tech")||
+        host.includes("st.kp.yandex.net")
+      ) return url.href;
+    }catch(e){}
+    return "";
+  }
   function fullPosterUrl(item){ return originalPosterOf(item)||posterOf(item); }
+  function posterCandidates(item,width,height,quality){
+    const raw=fullPosterUrl(item);
+    if(!raw) return [];
+    const direct=directSizedPosterUrl(raw,width,height);
+    const proxy=proxySizedPosterUrl(direct||raw,width,height,quality);
+    let directFirst=false;
+    try{
+      const host=new URL(raw,location.href).hostname.toLowerCase();
+      directFirst=(
+        host==="image.tmdb.org"||
+        host==="media.themoviedb.org"||
+        host.includes("avatars.mds.yandex.net")||
+        host.includes("cdn.myanimelist.net")||
+        host.includes("kinopoiskapiunofficial.tech")||
+        host.includes("st.kp.yandex.net")
+      );
+    }catch(e){}
+    const ordered=directFirst?[direct,proxy,raw]:[proxy,direct,raw];
+    return [...new Set(ordered.filter(Boolean))];
+  }
+  function smallPosterUrl(item){ return posterCandidates(item,48,72,58)[0]||""; }
+  function coarsePosterUrl(item){ return posterCandidates(item,320,480,72)[0]||""; }
 
   function balancedLayout(count,width,height){
     const total=Math.max(1,Math.floor(count||1));
@@ -14682,18 +14788,34 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     };
   }
 
+  function getCanvasBounds(){
+    const overlay=canvas&&canvas.closest("#gkmV343Overlay");
+    const rect=overlay&&overlay.getBoundingClientRect();
+    return {
+      width:Math.max(1,Math.round((rect&&rect.width)||overlay?.clientWidth||window.innerWidth||1)),
+      height:Math.max(1,Math.round((rect&&rect.height)||overlay?.clientHeight||window.innerHeight||1))
+    };
+  }
+  function screenTileCount(width,height){
+    const cols=Math.max(1,Math.ceil(width/TARGET_CELL_W));
+    const rows=Math.max(1,Math.ceil(height/TARGET_CELL_H));
+    return Math.min(MAX_SCREEN_TILES,cols*rows);
+  }
+
   function computeGrid(){
+    const bounds=getCanvasBounds();
     fineLayout=balancedLayout(
-      Math.max(layoutCount,wallItems.length,1),
-      window.innerWidth,
-      window.innerHeight
+      Math.max(1,Math.min(layoutCount,wallItems.length||layoutCount)),
+      bounds.width,
+      bounds.height
     );
   }
 
   function resizeCanvases(){
     if(!canvas||!ctx) return;
-    const w=window.innerWidth;
-    const h=window.innerHeight;
+    const bounds=getCanvasBounds();
+    const w=bounds.width;
+    const h=bounds.height;
 
     canvas.width=w;
     canvas.height=h;
@@ -14845,11 +14967,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function getCoarseRecord(item){
-    const url=coarsePosterUrl(item);
-    if(!url) return null;
-    if(COARSE_CACHE.has(url)) return COARSE_CACHE.get(url);
-    const rec={url,state:"idle",img:null,callbacks:[]};
-    COARSE_CACHE.set(url,rec);
+    const candidates=posterCandidates(item,320,480,72);
+    if(!candidates.length) return null;
+    const key=candidates.join("|");
+    if(COARSE_CACHE.has(key)) return COARSE_CACHE.get(key);
+    const rec={key,candidates,state:"idle",img:null,callbacks:[]};
+    COARSE_CACHE.set(key,rec);
     return rec;
   }
 
@@ -14880,8 +15003,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       img.decoding="async";
       img.fetchPriority="high";
       img.referrerPolicy="no-referrer";
+      let candidateIndex=0;
+      let timer=0;
+      let done=false;
 
       const complete=success=>{
+        if(done) return;
+        done=true;
+        clearTimeout(timer);
         rec.state=success?"loaded":"failed";
         rec.img=success?img:null;
         const callbacks=rec.callbacks.splice(0);
@@ -14889,21 +15018,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       };
 
       img.onload=()=>complete(true);
-      img.onerror=()=>{
-        const raw=fullPosterUrl(item);
-        if(raw&&img.src!==raw){
-          img.onerror=()=>complete(false);
-          img.src=raw;
-        }else complete(false);
+      const tryNext=()=>{
+        if(done) return;
+        clearTimeout(timer);
+        if(candidateIndex>=rec.candidates.length){
+          complete(false);
+          return;
+        }
+        img.src=rec.candidates[candidateIndex++];
+        timer=setTimeout(tryNext,COARSE_IMAGE_TIMEOUT_MS);
       };
-      img.src=rec.url;
+      img.onerror=tryNext;
+      tryNext();
     });
   }
 
   async function loadBackdrop(items,token){
     const source=uniqueList(items||[]);
     const viewportArea=Math.max(1,window.innerWidth*window.innerHeight);
-    const wanted=clamp(Math.ceil(viewportArea/66000),24,54);
+    const wanted=clamp(Math.ceil(viewportArea/85000),18,36);
     const coarseItems=source.slice(0,Math.min(source.length,wanted));
     coarseLayout=balancedLayout(
       Math.max(coarseItems.length,1),
@@ -14925,11 +15058,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function getThumbRecord(item){
-    const url=smallPosterUrl(item);
-    if(!url) return null;
-    if(THUMB_CACHE.has(url)) return THUMB_CACHE.get(url);
-    const rec={url,state:"idle",img:null,callbacks:[]};
-    THUMB_CACHE.set(url,rec);
+    const candidates=posterCandidates(item,48,72,58);
+    if(!candidates.length) return null;
+    const key=candidates.join("|");
+    if(THUMB_CACHE.has(key)) return THUMB_CACHE.get(key);
+    const rec={key,candidates,state:"idle",img:null,callbacks:[]};
+    THUMB_CACHE.set(key,rec);
     return rec;
   }
 
@@ -14964,12 +15098,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
       const img=new Image();
       img.decoding="async";
-      img.fetchPriority=index<900||index>=Math.floor(wallItems.length*.72)?"high":"auto";
+      img.fetchPriority=index<160?"high":"auto";
       img.referrerPolicy="no-referrer";
 
       let done=false;
       let timer=0;
-      let fallbackStarted=false;
+      let candidateIndex=0;
       const isTail=index>=Math.floor(wallItems.length*.78);
       const primaryTimeout=isTail?TAIL_PRIMARY_TIMEOUT_MS:PRIMARY_IMAGE_TIMEOUT_MS;
       const fallbackTimeout=isTail?TAIL_FALLBACK_TIMEOUT_MS:FALLBACK_IMAGE_TIMEOUT_MS;
@@ -14988,24 +15122,21 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         callbacks.forEach(cb=>cb(success?img:null));
       };
 
-      const startFallback=()=>{
+      const tryNext=()=>{
         if(done) return;
-        const raw=fullPosterUrl(item);
-        if(!fallbackStarted&&raw&&raw!==rec.url){
-          fallbackStarted=true;
-          clearTimeout(timer);
-          img.onerror=()=>complete(false);
-          img.src=raw;
-          timer=setTimeout(()=>complete(false),fallbackTimeout);
-        }else{
+        clearTimeout(timer);
+        if(candidateIndex>=rec.candidates.length){
           complete(false);
+          return;
         }
+        const timeout=candidateIndex===0?primaryTimeout:fallbackTimeout;
+        img.src=rec.candidates[candidateIndex++];
+        timer=setTimeout(tryNext,timeout);
       };
 
       img.onload=()=>complete(true);
-      img.onerror=startFallback;
-      img.src=rec.url;
-      timer=setTimeout(startFallback,primaryTimeout);
+      img.onerror=tryNext;
+      tryNext();
     });
   }
 
@@ -15057,16 +15188,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     paintSkeleton();
     setStatus(
       `${labelKind(currentKind)} — крупный слой`,
-      "Сначала заполняю весь экран крупными постерами."
+      "Крупный фон и детальная мозаика загружаются параллельно."
     );
-    loadBackdrop(wallItems,backgroundToken).finally(()=>{
-      if(token!==loadToken||backgroundToken!==backdropToken||!isOpen) return;
-      setStatus(
-        `${labelKind(currentKind)} — ${wallItems.length} постеров`,
-        "Крупный слой готов. Накладываю детальную мозаику."
-      );
-      pumpQueue(token);
-    });
+    loadBackdrop(wallItems,backgroundToken).catch(()=>{});
+    pumpQueue(token);
   }
 
   function indexAt(clientX,clientY){
@@ -15207,7 +15332,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function motionLoop(){
-    if(!isOpen){
+    if(!isOpen||!pointerInside){
       motionFrame=0;
       return;
     }
@@ -15281,6 +15406,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function pointerLeave(){
     hoverIndex=-1;
     pointerInside=false;
+    if(motionFrame){
+      cancelAnimationFrame(motionFrame);
+      motionFrame=0;
+    }
     hidePreview();
     const lens=document.getElementById("gkmV343Lens");
     if(lens) lens.classList.remove("open");
@@ -15309,37 +15438,55 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     st.innerHTML=`<b>${esc(title||"Canvas-мозаика")}</b><div>${esc(sub||"")}</div>`;
   }
 
+  function selectScreenItems(kind){
+    const bounds=getCanvasBounds();
+    const target=screenTileCount(bounds.width,bounds.height);
+    const pool=uniqueList(allItems.filter(x=>passKind(x,kind)));
+    const mixed=pool.slice();
+    shuffle(mixed);
+    wallItems=mixed.slice(0,Math.min(target,mixed.length));
+    layoutCount=Math.max(1,wallItems.length);
+    return {target,poolCount:pool.length,visible:wallItems.length};
+  }
+
   async function loadWall(kind){
     currentKind=kind;
-    layoutCount=EXPECTED_COUNTS[kind]||4400;
     allItems=uniqueList(localPool().filter(x=>passKind(x,kind)));
-    wallItems=allItems.slice();
+    const bounds=getCanvasBounds();
+    const target=screenTileCount(bounds.width,bounds.height);
+    wallItems=allItems.slice(0,target);
+    layoutCount=Math.max(1,wallItems.length||target);
 
-    // Пока собираются страницы каталога, крупный слой уже закрывает весь экран.
+    // Быстрый первый кадр из уже загруженного каталога.
     paintSkeleton();
     const previewBackdropToken=++backdropToken;
     loadBackdrop(wallItems,previewBackdropToken).catch(()=>{});
+    setStatus(
+      `Собираю ${labelKind(kind).toLowerCase()}...`,
+      `Нужен только один экран: до ${target} уникальных постеров.`
+    );
 
-    const urls=urlsFor(kind);
-    const chunkSize=18;
-    for(let i=0;i<urls.length;i+=chunkSize){
-      const part=urls.slice(i,i+chunkSize);
-      // eslint-disable-next-line no-await-in-loop
-      const chunks=await Promise.all(part.map(fetchJson));
-      allItems.push(...chunks.flat().filter(x=>passKind(x,kind)));
-      setStatus(
-        "Собираю каталог...",
-        `Страницы ${Math.min(i+chunkSize,urls.length)}/${urls.length}. Крупные постеры уже закрывают фон.`
-      );
+    // Специальный seed содержит по 1500 фильмов, сериалов, аниме и мультфильмов.
+    // Один компактный запрос заменяет десятки страниц, которые раньше блокировали старт.
+    const seed=await fetchJson(WALL_SEED_URL);
+    allItems=uniqueList(allItems.concat(seed.filter(x=>passKind(x,kind))));
+
+    // Резерв на случай отсутствующего/старого seed: грузим только столько страниц,
+    // сколько реально нужно текущему экрану, а не весь многотысячный каталог.
+    if(allItems.length<target){
+      const urls=fallbackUrlsFor(kind,target-allItems.length);
+      const chunkSize=6;
+      for(let i=0;i<urls.length&&allItems.length<target;i+=chunkSize){
+        const chunks=await Promise.all(urls.slice(i,i+chunkSize).map(fetchJson));
+        allItems=uniqueList(allItems.concat(chunks.flat().filter(x=>passKind(x,kind))));
+      }
     }
 
-    wallItems=uniqueList(allItems);
-    if(shuffleSeed) shuffle(wallItems);
-    layoutCount=wallItems.length;
+    const selection=selectScreenItems(kind);
 
     setStatus(
-      `${labelKind(kind)} — ${wallItems.length} постеров`,
-      "Каталог собран. Запускаю плавное наложение мелкой мозаики без повторов."
+      `${labelKind(kind)} — ${selection.visible} постеров на экране`,
+      `Быстрый набор из ${selection.poolCount} настоящих постеров. Повторов нет.`
     );
     startImageQueue();
   }
@@ -15461,8 +15608,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div class="gkmV343Shade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V353.1</div>
-          <div class="gkmV343Sub">Быстрый хвост загрузки: крупный фон и ускоренная детальная мозаика.</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V354</div>
+          <div class="gkmV343Sub">Быстрый экранный набор: крупный фон и детальная мозаика загружаются вместе.</div>
         </div>
         <div class="gkmV343Actions">
           <button data-kind="all">Все</button>
@@ -15494,7 +15641,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     document.getElementById("gkmV343Close").onclick=closeWall;
     document.getElementById("gkmV343Shuffle").onclick=()=>{
       shuffleSeed++;
-      shuffle(wallItems);
+      selectScreenItems(currentKind);
       hoverIndex=-1;
       hidePreview();
       startImageQueue();
@@ -15508,11 +15655,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     });
 
     window.addEventListener("resize",()=>{
-      if(isOpen){
+      if(!isOpen) return;
+      clearTimeout(resizeTimer);
+      resizeTimer=setTimeout(()=>{
+        if(!isOpen) return;
         pointerLeave();
+        selectScreenItems(currentKind);
         startImageQueue();
-      }
-    });
+      },180);
+    },{passive:true});
 
     window.GKM_OPEN_3D_WALL=()=>openWall("anime");
     window.GKM_OPEN_CANVAS_MOSAIC=()=>openWall("anime");
@@ -15534,14 +15685,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     pointerTargetY=pointerY=window.innerHeight/2;
     previewX=previewTargetX=Math.max(10,window.innerWidth/2-280);
     previewY=previewTargetY=Math.max(62,window.innerHeight/2-129);
-    startMotionLoop();
 
     if(kind!==currentKind||!wallItems.length){
       loadToken++;
       allItems=[];
       wallItems=[];
       currentKind=kind;
-      layoutCount=EXPECTED_COUNTS[kind]||4400;
+      const bounds=getCanvasBounds();
+      layoutCount=screenTileCount(bounds.width,bounds.height);
       paintSkeleton();
       await loadWall(kind);
     }else{
@@ -15576,8 +15727,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V353_TEST_API={
     balancedLayout,
     rectFor,
+    screenTileCount,
+    posterCandidates,
     version:window.GKM_V353_PROGRESSIVE_POSTER_WALL_VERSION,
     tailSpeedVersion:window.GKM_V353_1_TAIL_SPEED_VERSION,
+    fastScreenVersion:window.GKM_V354_FAST_SCREEN_POSTER_WALL_VERSION,
     concurrency:{
       first:FIRST_CONCURRENCY,
       rest:REST_CONCURRENCY,
@@ -15590,7 +15744,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V353.1: accelerated progressive full-screen poster wall installed");
+  console.log("GKM V354: fast screen-sized progressive poster wall installed");
 })();
 /* GKM V343 SOFT FISHEYE VIDEO WALL END */
 
@@ -16734,12 +16888,19 @@ Endpoint: ${endpoint||"не задан"}`;
 
   function repaintHome(){
     try {
-      if (currentMode === "home" && typeof renderHome === "function") renderHome();
+      // Boot уже использует переопределённый V352 renderHome. Повторяем
+      // рендер только как аварийный ремонт, если секции действительно не созданы.
+      if (
+        currentMode === "home" &&
+        typeof renderHome === "function" &&
+        !document.querySelector("[data-gkm-v352-section]")
+      ) renderHome();
     } catch {}
   }
 
-  setTimeout(repaintHome, 250);
-  setTimeout(repaintHome, 1200);
+  // V354: renderHome уже переопределён до DOMContentLoaded, поэтому boot()
+  // вызывает именно эту версию. Старые отложенные повторы удалены: они
+  // перезапускали загрузку одних и тех же 126 постеров.
   console.log("GKM V352: home collections, season titles and genres repaired");
 })();
 /* GKM V352 HOME COLLECTIONS, PART TITLES AND GENRES END */
