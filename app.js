@@ -44,6 +44,7 @@ const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
 const GKM_DATA_CACHE_VERSION = "355";
+window.GKM_V359_SHARED_SEARCH_VERSION = "v359-shared-main-ai-full-catalog-search-2026-07-28";
 const HOME_URL = `${FAST_BASE}/home.json`;
 const META_URL = `${FAST_BASE}/meta.json`;
 const SEARCH_URL = `${FAST_BASE}/search_index.json`;
@@ -1207,11 +1208,13 @@ function makeSearchWorker() {
     const SEARCH_LITE_URL = ${JSON.stringify(absoluteSearchLiteUrl)};
     const SEARCH_FULL_URL = ${JSON.stringify(absoluteSearchFullUrl)};
     const SHARD_BASE = ${JSON.stringify(absoluteShardBase)};
+    const DATA_VERSION = ${JSON.stringify(GKM_DATA_CACHE_VERSION)};
     const PAGE_SIZE = ${PAGE_SIZE};
     let indexPromise = null;
     const shardPromises = new Map();
     let rows = [];
     let animeTopCache = null;
+    function withDataVersion(url){const value=String(url||"");if(value.includes("gkmv="+DATA_VERSION))return value;return value+(value.includes("?")?"&":"?")+"gkmv="+DATA_VERSION;}
     function norm(v){return String(v||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
     function hasAliasText(h,a){h=norm(h);a=norm(a);if(!h||!a)return false;if(h===a)return true;if(a.length<=4)return (" "+h+" ").includes(" "+a+" ");return h.includes(a)||a.includes(h);}
     function squeeze(v){return norm(v).replace(/(.)\\1+/g,"$1");}
@@ -1503,9 +1506,28 @@ function makeSearchWorker() {
       return;
     }
     if (!msg.ok) {
-      setStatus(`Ошибка фильтра: ${msg.error || "неизвестно"}`);
+      const c = controls();
+      runSharedCatalogFallback(c, msg.id, msg.error || "неизвестно").then(used => {
+        if (!used && msg.id === searchReq) {
+          setStatus(`Ошибка фильтра: ${msg.error || "неизвестно"}`);
+        }
+      });
       return;
     }
+    if (Number(msg.count || 0) === 0 && norm(controls().q)) {
+      const c = controls();
+      runSharedCatalogFallback(c, msg.id, "основной индекс не дал результатов").then(used => {
+        if (!used && msg.id === searchReq) applyMainSearchResult(msg);
+      });
+      return;
+    }
+    applyMainSearchResult(msg);
+  };
+  return searchWorker;
+}
+
+function applyMainSearchResult(msg) {
+    if (!msg || msg.id !== searchReq) return;
     currentMode = "search";
     currentPage = Number(msg.page || 1);
     currentCount = Number(msg.count || 0);
@@ -1526,8 +1548,28 @@ function makeSearchWorker() {
     const listLabel = tabLabels[currentTab] || `Найдено: ${currentCount} · Страница ${currentPage} из ${currentPages}`;
     renderList(msg.items || [], listLabel);
     setStatus(`Готово · ${currentCount} · ${msg.ms || 0} мс`);
-  };
-  return searchWorker;
+}
+
+async function runSharedCatalogFallback(c, requestId, reason = "") {
+  const shared = window.GKM_V359_SHARED_CATALOG_SEARCH;
+  if (typeof shared !== "function" || !norm(c && c.q)) return false;
+  setStatus("Обычный поиск подключает полный каталог помощника...");
+  try {
+    const result = await shared(c.q, c);
+    if (requestId !== searchReq) return true;
+    const items = Array.isArray(result && result.items) ? result.items : [];
+    if (!items.length) return false;
+    currentMode = "search";
+    currentPage = 1;
+    currentPages = 1;
+    currentCount = Number(result.count || items.length);
+    renderList(items, `Общий поиск с помощником: ${currentCount} · полный каталог`);
+    setStatus(`Готово · общий поиск · проверено ${Number(result.searched || 0).toLocaleString("ru-RU")} записей`);
+    return true;
+  } catch (error) {
+    console.warn("GKM V359 shared search fallback", reason, error);
+    return false;
+  }
 }
 
 let animeTopStaticData = null;
@@ -17106,6 +17148,63 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       return{items:res,intent:it,tokens:tk,searched:Number(result&&result.searched||0),fullCatalog:true,result};
     }catch(error){console.warn("GKM V343 full-catalog search fallback",error);return await fallbackSearch(q);}
   }
+
+  window.GKM_V359_SHARED_CATALOG_SEARCH=async function gkmV359SharedCatalogSearch(query,options={}){
+    const q=T(query);
+    if(!q)return{items:[],count:0,searched:0};
+    const it=detectIntent(q);
+    const bucketByType={
+      "Фильм":"movies",
+      "Сериал":"series",
+      "Аниме":"anime",
+      "Мультфильм":"cartoons"
+    };
+    const bucketByTab={
+      movies:"movies",
+      series:"series",
+      anime:"anime",
+      cartoons:"cartoons"
+    };
+    if(bucketByType[options.type])it.bucket=bucketByType[options.type];
+    else if(bucketByTab[options.tab])it.bucket=bucketByTab[options.tab];
+    if(options.year){
+      const selectedYear=Number(options.year);
+      if(selectedYear){it.yearMin=selectedYear;it.yearMax=selectedYear;}
+    }
+    if(Number(options.minRating||0)>0)it.ratingMin=Number(options.minRating);
+    if(options.sort==="rating"||options.sort==="votes")it.sort="top";
+    else if(options.sort==="year")it.sort="new";
+
+    const tk=tokens(q);
+    const requestedGenre=N(options.genre||"");
+    if(requestedGenre&&!tk.includes(requestedGenre))tk.push(requestedGenre);
+    const result=await workerCall(
+      "SEARCH",
+      {query:q,intent:it,tokens:tk,limit:50},
+      {timeout:60000}
+    );
+    let items=dedupe((result&&result.items)||[]);
+    if(requestedGenre){
+      items=items.filter(item=>N(genres(item).join(" ")).includes(requestedGenre));
+    }
+    if(options.type){
+      items=items.filter(item=>type(item)===options.type);
+    }
+    if(options.year){
+      items=items.filter(item=>String(year(item))===String(options.year));
+    }
+    if(Number(options.minRating||0)>0){
+      items=items.filter(item=>rating(item)>=Number(options.minRating));
+    }
+    return{
+      items:items.slice(0,50),
+      count:items.length,
+      searched:Number(result&&result.searched||0),
+      fullCatalog:true,
+      source:"assistant-worker",
+      manifestTotal:Number(result&&result.manifestTotal||0)
+    };
+  };
 
   function fmtVotes(v){
     v=Number(v||0);
