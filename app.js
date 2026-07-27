@@ -14537,11 +14537,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V355_FAST_POSTER_TRANSPORT_VERSION = "v355-fast-poster-transport-2026-07-27";
   window.GKM_V356_MAGNETIC_WAVE_VERSION = "v356-magnetic-wave-2026-07-27";
   window.GKM_V357_EFFECTS_STUDIO_VERSION = "v357-effects-studio-2026-07-27";
+  window.GKM_V358_POSTER_ATLAS_VERSION = "v358-poster-atlas-diagnostics-2026-07-27";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
   const COARSE_CACHE = new Map();
+  const ATLAS_SHEET_CACHE = new Map();
   const WALL_SEED_URL = "data/fast/poster_wall_v333/seed_all.json?v=354";
+  const ATLAS_BASE_URL = "data/fast/poster_atlas_v358/";
+  const ATLAS_MANIFEST_URL = `${ATLAS_BASE_URL}manifest.json?v=358`;
 
   let canvas = null;
   let ctx = null;
@@ -14580,7 +14584,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let reserveItems = [];
   let reserveCursor = 0;
   let usedWallKeys = new Set();
+  let usedWallPosterKeys = new Set();
   let backdropLoaded = 0;
+  let coarseTargetCount = 0;
   let itemLoaded = [];
   let itemSettled = [];
   let shuffleSeed = 0;
@@ -14603,6 +14609,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let effectMode = "magnet";
   let pointerVelocityX = 0;
   let pointerVelocityY = 0;
+  let atlasManifest = null;
+  let atlasManifestPromise = null;
+  let atlasLookup = new Map();
+  let diagnosticsFrame = 0;
+  let lastMotionTime = 0;
+  let fpsSamples = [];
+  let perfSession = null;
 
   const FIRST_CONCURRENCY = 36;
   const REST_CONCURRENCY = 48;
@@ -14625,6 +14638,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   const MAGNET_PUSH = 34;
   const MAGNET_SCALE = 1.15;
   const MAX_REPLACEMENT_ATTEMPTS = 8;
+  const DIAGNOSTICS_REFRESH_MS = 180;
 
   function t(v){ return String(v == null ? "" : v).trim(); }
   function esc(v){
@@ -14686,6 +14700,24 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function keyOf(item){
     return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOf(item)}|${yearOf(item)}|${posterOf(item)}`);
   }
+  function posterIdentity(item){
+    const raw=t(posterOf(item));
+    if(!raw) return "";
+    try{
+      const url=new URL(raw,location.href);
+      url.search="";
+      url.hash="";
+      url.pathname=url.pathname
+        .replace(/\/t\/p\/[^/]+\//i,"/t/p/_/")
+        .replace(/\/\d+x\d+$/i,"/_");
+      return url.href.toLowerCase();
+    }catch(e){
+      return raw.split(/[?#]/,1)[0].toLowerCase();
+    }
+  }
+  function titleIdentity(item){
+    return `${n(titleOf(item))}|${yearOf(item)}|${familyOf(item)}`;
+  }
   function familyOf(item){
     const s = n(typeOf(item));
     if(s.includes("аниме") || s.includes("anime")) return "anime";
@@ -14697,6 +14729,90 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function passKind(item,kind){ return kind === "all" || familyOf(item) === kind; }
   function labelKind(kind){
     return {all:"Все",anime:"Аниме",movies:"Фильмы",series:"Сериалы",cartoons:"Мульты"}[kind] || "Каталог";
+  }
+
+  function resetPerfSession(){
+    perfSession={
+      started:performance.now(),
+      firstPosterMs:0,
+      first100Ms:0,
+      completeMs:0,
+      atlasHits:0,
+      networkHits:0,
+      atlasSheetsRequested:0,
+      atlasSheetsLoaded:0,
+      atlasFilesUsed:new Set()
+    };
+    fpsSamples=[];
+    lastMotionTime=0;
+    scheduleDiagnosticsUpdate();
+  }
+
+  function recordPosterLoaded(source){
+    if(!perfSession) return;
+    if(source&&source.__gkmV358AtlasTile) perfSession.atlasHits++;
+    else perfSession.networkHits++;
+    const elapsed=performance.now()-perfSession.started;
+    if(!perfSession.firstPosterMs) perfSession.firstPosterMs=elapsed;
+    if(loadedCount>=100&&!perfSession.first100Ms) perfSession.first100Ms=elapsed;
+    scheduleDiagnosticsUpdate();
+  }
+
+  function recordMotionFrame(now){
+    if(lastMotionTime>0){
+      const delta=now-lastMotionTime;
+      if(delta>0&&delta<250){
+        fpsSamples.push(1000/delta);
+        if(fpsSamples.length>90) fpsSamples.shift();
+      }
+    }
+    lastMotionTime=now;
+  }
+
+  function diagnosticsFps(){
+    if(!fpsSamples.length) return 0;
+    return fpsSamples.reduce((sum,value)=>sum+value,0)/fpsSamples.length;
+  }
+
+  function formatMs(value){
+    if(!value) return "—";
+    return value<1000?`${Math.round(value)} мс`:`${(value/1000).toFixed(2)} с`;
+  }
+
+  function scheduleDiagnosticsUpdate(){
+    if(diagnosticsFrame) return;
+    diagnosticsFrame=setTimeout(()=>{
+      diagnosticsFrame=0;
+      updateDiagnostics();
+    },DIAGNOSTICS_REFRESH_MS);
+  }
+
+  function updateDiagnostics(){
+    const box=document.getElementById("gkmV358DiagnosticsContent");
+    if(!box) return;
+    const session=perfSession||{};
+    const elapsed=session.started
+      ? (session.completeMs||performance.now()-session.started)
+      : 0;
+    const fps=diagnosticsFps();
+    const atlasCoverage=loadedCount
+      ? Math.round((Number(session.atlasHits||0)/loadedCount)*100)
+      : 0;
+    box.innerHTML=`
+      <div><span>Раздел</span><b>${esc(labelKind(currentKind))}</b></div>
+      <div><span>Экран</span><b>${loadedCount}/${wallItems.length||0}</b></div>
+      <div><span>Быстрый фон</span><b>${Math.min(backdropLoaded,coarseTargetCount)}/${coarseTargetCount||0}</b></div>
+      <div><span>Первый постер</span><b>${formatMs(session.firstPosterMs)}</b></div>
+      <div><span>Первые 100</span><b>${formatMs(session.first100Ms)}</b></div>
+      <div><span>Полное заполнение</span><b>${formatMs(session.completeMs||elapsed)}</b></div>
+      <div><span>Атлас</span><b>${Number(session.atlasHits||0)} · ${atlasCoverage}%</b></div>
+      <div><span>Обычная сеть</span><b>${Number(session.networkHits||0)}</b></div>
+      <div><span>Файлы атласа</span><b>${session.atlasFilesUsed?session.atlasFilesUsed.size:0}</b></div>
+      <div><span>Уникальные замены</span><b>${replacementCount}</b></div>
+      <div><span>Не закрыто</span><b>${failedCount}</b></div>
+      <div><span>Эффект</span><b>${esc(effectMode)}</b></div>
+      <div><span>Средний FPS</span><b>${fps?fps.toFixed(0):"двигайте мышь"}</b></div>
+    `;
   }
 
   function decodeCompactPoster(code){
@@ -14750,6 +14866,78 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     JSON_CACHE.set(versionedUrl,p);
     return p;
   }
+
+  async function loadAtlasManifest(){
+    if(atlasManifest) return atlasManifest;
+    if(atlasManifestPromise) return atlasManifestPromise;
+    atlasManifestPromise=fetch(ATLAS_MANIFEST_URL,{cache:"force-cache"})
+      .then(response=>response.ok?response.json():null)
+      .then(manifest=>{
+        if(!manifest||String(manifest.version)!=="358"||!manifest.entries){
+          return null;
+        }
+        const lookup=new Map();
+        Object.entries(manifest.entries).forEach(([id,value])=>{
+          if(!Array.isArray(value)||value.length<3) return;
+          lookup.set(String(id),{
+            file:String(value[0]),
+            sx:Number(value[1])||0,
+            sy:Number(value[2])||0,
+            sw:Number(manifest.tileWidth)||48,
+            sh:Number(manifest.tileHeight)||72
+          });
+        });
+        atlasManifest=manifest;
+        atlasLookup=lookup;
+        return manifest;
+      })
+      .catch(()=>null);
+    return atlasManifestPromise;
+  }
+
+  function atlasEntryFor(item){
+    return atlasLookup.get(keyOf(item))||null;
+  }
+
+  function atlasSheetUrl(file){
+    return `${ATLAS_BASE_URL}${encodeURIComponent(String(file||""))}?v=358`;
+  }
+
+  function loadAtlasSheet(file,priority="auto"){
+    const name=String(file||"");
+    if(!name) return Promise.resolve(null);
+    if(perfSession&&perfSession.atlasFilesUsed) perfSession.atlasFilesUsed.add(name);
+    if(ATLAS_SHEET_CACHE.has(name)) return ATLAS_SHEET_CACHE.get(name);
+    if(perfSession) perfSession.atlasSheetsRequested++;
+    const promise=new Promise(resolve=>{
+      const img=new Image();
+      img.decoding="async";
+      img.fetchPriority=priority;
+      img.onload=()=>{
+        if(perfSession) perfSession.atlasSheetsLoaded++;
+        scheduleDiagnosticsUpdate();
+        resolve(img);
+      };
+      img.onerror=()=>resolve(null);
+      img.src=atlasSheetUrl(name);
+    });
+    ATLAS_SHEET_CACHE.set(name,promise);
+    return promise;
+  }
+
+  async function loadAtlasTile(entry,priority){
+    if(!entry) return null;
+    const sheet=await loadAtlasSheet(entry.file,priority);
+    if(!sheet) return null;
+    return {
+      __gkmV358AtlasTile:true,
+      img:sheet,
+      sx:entry.sx,
+      sy:entry.sy,
+      sw:entry.sw,
+      sh:entry.sh
+    };
+  }
   function localPool(){
     const out = [];
     try{ if(Array.isArray(currentItems)) out.push(...currentItems); }catch(e){}
@@ -14765,12 +14953,22 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
   function uniqueList(arr){
     const seen = new Set();
+    const seenPosters = new Set();
+    const seenTitles = new Set();
     const out = [];
     for(const item of arr){
       if(!item || !posterOf(item)) continue;
       const k = keyOf(item);
-      if(seen.has(k)) continue;
+      const posterKey=posterIdentity(item);
+      const titleKey=titleIdentity(item);
+      if(
+        seen.has(k)||
+        (posterKey&&seenPosters.has(posterKey))||
+        (titleKey&&seenTitles.has(titleKey))
+      ) continue;
       seen.add(k);
+      if(posterKey) seenPosters.add(posterKey);
+      if(titleKey) seenTitles.add(titleKey);
       out.push(item);
     }
     return out;
@@ -15005,6 +15203,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function drawCover(targetCtx,img,x,y,w,h){
+    if(img&&img.__gkmV358AtlasTile&&img.img){
+      targetCtx.drawImage(
+        img.img,
+        img.sx,img.sy,img.sw,img.sh,
+        x,y,w,h
+      );
+      return;
+    }
     const sw=img.naturalWidth||img.width;
     const sh=img.naturalHeight||img.height;
     if(!sw||!sh) return;
@@ -15102,6 +15308,19 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       presentBuffer();
       lensDirty=true;
     }catch(e){}
+  }
+
+  function prepareProgressiveBackdrop(){
+    const bounds=getCanvasBounds();
+    const viewportArea=Math.max(1,bounds.width*bounds.height);
+    coarseTargetCount=clamp(Math.ceil(viewportArea/125000),14,24);
+    coarseTargetCount=Math.min(coarseTargetCount,wallItems.length);
+    coarseLayout=balancedLayout(
+      Math.max(coarseTargetCount,1),
+      bounds.width,
+      bounds.height
+    );
+    backdropLoaded=0;
   }
 
   function presentBuffer(){
@@ -15203,11 +15422,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function getThumbRecord(item){
+    const atlas=atlasEntryFor(item);
     const candidates=posterCandidates(item,48,72,58);
-    if(!candidates.length) return null;
-    const key=candidates.join("|");
+    if(!atlas&&!candidates.length) return null;
+    const key=atlas
+      ? `atlas:${keyOf(item)}:${atlas.file}:${atlas.sx}:${atlas.sy}`
+      : candidates.join("|");
     if(THUMB_CACHE.has(key)) return THUMB_CACHE.get(key);
-    const rec={key,candidates,state:"idle",img:null,callbacks:[]};
+    const rec={key,candidates,atlas,state:"idle",img:null,callbacks:[]};
     THUMB_CACHE.set(key,rec);
     return rec;
   }
@@ -15217,8 +15439,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const item=reserveItems[reserveCursor++];
       if(!item||!posterOf(item)) continue;
       const key=keyOf(item);
-      if(usedWallKeys.has(key)) continue;
+      const posterKey=posterIdentity(item);
+      if(usedWallKeys.has(key)||(posterKey&&usedWallPosterKeys.has(posterKey))) continue;
       usedWallKeys.add(key);
+      if(posterKey) usedWallPosterKeys.add(posterKey);
       return item;
     }
     return null;
@@ -15249,7 +15473,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         if(img){
           itemLoaded[index]=true;
           loadedCount++;
+          recordPosterLoaded(img);
           if(replacementDepth>0) recoveredCount++;
+          if(index<coarseTargetCount){
+            backdropLoaded++;
+            paintBackdropTile(index,img);
+          }
           queueTileReveal(index,img);
         }else{
           failedCount++;
@@ -15269,58 +15498,77 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       rec.state="loading";
       rec.callbacks.push(finish);
 
-      const img=new Image();
-      img.decoding="async";
-      img.fetchPriority=index<160?"high":"auto";
-      img.referrerPolicy="no-referrer";
-
       let done=false;
-      let timer=0;
-      let candidateIndex=0;
       const isTail=index>=Math.floor(wallItems.length*.78);
       const primaryTimeout=isTail?TAIL_PRIMARY_TIMEOUT_MS:PRIMARY_IMAGE_TIMEOUT_MS;
       const fallbackTimeout=isTail?TAIL_FALLBACK_TIMEOUT_MS:FALLBACK_IMAGE_TIMEOUT_MS;
 
-      const complete=success=>{
+      const complete=source=>{
         if(done) return;
         done=true;
-        clearTimeout(timer);
-        if(success){
+        if(source){
           rec.state="loaded";
-          rec.img=img;
+          rec.img=source;
         }else{
           rec.state="failed";
         }
         const callbacks=rec.callbacks.splice(0);
-        callbacks.forEach(cb=>cb(success?img:null));
+        callbacks.forEach(cb=>cb(source||null));
       };
 
-      const tryNext=()=>{
-        if(done) return;
-        clearTimeout(timer);
-        if(candidateIndex>=rec.candidates.length){
-          complete(false);
-          return;
-        }
-        const timeout=candidateIndex===0?primaryTimeout:fallbackTimeout;
-        img.src=rec.candidates[candidateIndex++];
-        timer=setTimeout(tryNext,timeout);
+      const loadNetworkCandidates=()=>{
+        if(done){ return; }
+        if(!rec.candidates.length){ complete(null); return; }
+        const img=new Image();
+        img.decoding="async";
+        img.fetchPriority=index<160?"high":"auto";
+        img.referrerPolicy="no-referrer";
+        let timer=0;
+        let candidateIndex=0;
+
+        const tryNext=()=>{
+          if(done) return;
+          clearTimeout(timer);
+          if(candidateIndex>=rec.candidates.length){
+            complete(null);
+            return;
+          }
+          const timeout=candidateIndex===0?primaryTimeout:fallbackTimeout;
+          img.src=rec.candidates[candidateIndex++];
+          timer=setTimeout(tryNext,timeout);
+        };
+
+        img.onload=()=>{
+          clearTimeout(timer);
+          complete(img);
+        };
+        img.onerror=tryNext;
+        tryNext();
       };
 
-      img.onload=()=>complete(true);
-      img.onerror=tryNext;
-      tryNext();
+      if(rec.atlas){
+        loadAtlasTile(rec.atlas,index<160?"high":"auto")
+          .then(source=>{
+            if(source) complete(source);
+            else loadNetworkCandidates();
+          })
+          .catch(loadNetworkCandidates);
+      }else{
+        loadNetworkCandidates();
+      }
     });
   }
 
   function pumpQueue(token){
     if(token!==loadToken||!isOpen) return;
     const progress=wallItems.length?loadCursor/wallItems.length:1;
-    const limit=progress<.22
-      ? FIRST_CONCURRENCY
+    const initialCoverPending=completedCount<coarseTargetCount;
+    const limit=initialCoverPending
+      ? Math.min(FIRST_CONCURRENCY,Math.max(1,coarseTargetCount))
       : (progress<.78?REST_CONCURRENCY:TAIL_CONCURRENCY);
+    const queueCeiling=initialCoverPending?coarseTargetCount:wallItems.length;
 
-    while(activeLoads<limit&&loadCursor<wallItems.length){
+    while(activeLoads<limit&&loadCursor<queueCeiling){
       const index=loadCursor++;
       activeLoads++;
       loadThumb(index,token).finally(()=>{
@@ -15331,15 +15579,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           (completedCount>0&&completedCount%120===0)||
           completedCount===wallItems.length
         ){
+          if(
+            completedCount===wallItems.length&&
+            perfSession&&
+            !perfSession.completeMs
+          ){
+            perfSession.completeMs=performance.now()-perfSession.started;
+          }
           const reserve=replacementCount
             ? ` Резерв: ${recoveredCount} ячеек восстановлено, ${replacementCount} уникальных замен проверено.`
+            : "";
+          const atlas=perfSession&&perfSession.atlasHits
+            ? ` Атлас: ${perfSession.atlasHits} постеров из ${perfSession.atlasFilesUsed.size} файлов.`
             : "";
           const tail=failedCount
             ? ` Не удалось закрыть ${failedCount} ячеек после резерва.`
             : " Экран заполнен настоящими постерами без повторов.";
           setStatus(
             `${labelKind(currentKind)} — ${wallItems.length} постеров`,
-            `Обработано ${Math.min(completedCount,wallItems.length)}/${wallItems.length}; загружено ${Math.min(loadedCount,wallItems.length)}.${reserve}${tail}`
+            `Обработано ${Math.min(completedCount,wallItems.length)}/${wallItems.length}; загружено ${Math.min(loadedCount,wallItems.length)}.${atlas}${reserve}${tail}`
           );
         }
         pumpQueue(token);
@@ -15351,7 +15609,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     loadToken++;
     const token=loadToken;
     backdropToken++;
-    const backgroundToken=backdropToken;
     loadCursor=0;
     activeLoads=0;
     loadedCount=0;
@@ -15363,13 +15620,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     backdropLoaded=0;
     itemLoaded=new Array(wallItems.length).fill(false);
     itemSettled=new Array(wallItems.length).fill(false);
+    resetPerfSession();
 
     paintSkeleton();
+    prepareProgressiveBackdrop();
     setStatus(
-      `${labelKind(currentKind)} — крупный слой`,
-      "Крупный фон и детальная мозаика загружаются параллельно."
+      `${labelKind(currentKind)} — быстрый первый экран`,
+      `Первые ${coarseTargetCount} настоящих постеров сразу закрывают фон; детальная мозаика догружается поверх.`
     );
-    loadBackdrop(wallItems,backgroundToken).catch(()=>{});
     pumpQueue(token);
   }
 
@@ -15813,6 +16071,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     pointerVelocityX=0;
     pointerVelocityY=0;
     lensDirty=true;
+    scheduleDiagnosticsUpdate();
     if(pointerInside) startMotionLoop();
   }
 
@@ -15838,8 +16097,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function motionLoop(now=performance.now()){
     if(!isOpen||!pointerInside){
       motionFrame=0;
+      lastMotionTime=0;
       return;
     }
+    recordMotionFrame(now);
 
     const previousX=pointerX;
     const previousY=pointerY;
@@ -15919,6 +16180,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function pointerLeave(){
     hoverIndex=-1;
     pointerInside=false;
+    lastMotionTime=0;
     pointerVelocityX=0;
     pointerVelocityY=0;
     if(motionFrame){
@@ -15951,25 +16213,55 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const st=document.getElementById("gkmV343Status");
     if(!st) return;
     st.innerHTML=`<b>${esc(title||"Canvas-мозаика")}</b><div>${esc(sub||"")}</div>`;
+    scheduleDiagnosticsUpdate();
   }
 
   function selectScreenItems(kind){
     const bounds=getCanvasBounds();
     const target=screenTileCount(bounds.width,bounds.height);
     const pool=uniqueList(allItems.filter(x=>passKind(x,kind)));
-    const mixed=pool.slice();
-    shuffle(mixed);
+    let preferred=[];
+    let atlasRest=[];
+    const external=[];
+
+    if(kind==="all"&&atlasManifest&&atlasManifest.categories){
+      const selectedFiles=new Set();
+      ["movies","series","anime","cartoons"].forEach((category,index)=>{
+        const sheets=atlasManifest.categories[category]?.sheets||[];
+        if(!sheets.length) return;
+        const sheet=sheets[(shuffleSeed+index)%sheets.length];
+        if(sheet&&sheet.file) selectedFiles.add(String(sheet.file));
+      });
+      pool.forEach(item=>{
+        const entry=atlasEntryFor(item);
+        if(entry&&selectedFiles.has(entry.file)) preferred.push(item);
+        else if(entry) atlasRest.push(item);
+        else external.push(item);
+      });
+    }else{
+      pool.forEach(item=>{
+        if(atlasEntryFor(item)) preferred.push(item);
+        else external.push(item);
+      });
+    }
+
+    shuffle(preferred);
+    shuffle(atlasRest);
+    shuffle(external);
+    const mixed=preferred.concat(atlasRest,external);
     const visible=Math.min(target,mixed.length);
     wallItems=mixed.slice(0,visible);
     reserveItems=mixed.slice(visible);
     reserveCursor=0;
     usedWallKeys=new Set(wallItems.map(keyOf));
+    usedWallPosterKeys=new Set(wallItems.map(posterIdentity).filter(Boolean));
     layoutCount=Math.max(1,wallItems.length);
     return {
       target,
       poolCount:pool.length,
       visible:wallItems.length,
-      reserve:reserveItems.length
+      reserve:reserveItems.length,
+      atlas:wallItems.filter(item=>atlasEntryFor(item)).length
     };
   }
 
@@ -15983,16 +16275,17 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     // Быстрый первый кадр из уже загруженного каталога.
     paintSkeleton();
-    const previewBackdropToken=++backdropToken;
-    loadBackdrop(wallItems,previewBackdropToken).catch(()=>{});
     setStatus(
       `Собираю ${labelKind(kind).toLowerCase()}...`,
-      `Нужен только один экран: до ${target} уникальных постеров.`
+      `Загружаю локальный индекс и атлас; внешние постеры пока не запрашиваются.`
     );
 
     // Специальный seed содержит по 1500 фильмов, сериалов, аниме и мультфильмов.
     // Один компактный запрос заменяет десятки страниц, которые раньше блокировали старт.
-    const seed=await fetchJson(WALL_SEED_URL);
+    const [seed]=await Promise.all([
+      fetchJson(WALL_SEED_URL),
+      loadAtlasManifest()
+    ]);
     allItems=uniqueList(allItems.concat(seed.filter(x=>passKind(x,kind))));
 
     // Резерв на случай отсутствующего/старого seed: грузим только столько страниц,
@@ -16010,7 +16303,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     setStatus(
       `${labelKind(kind)} — ${selection.visible} постеров на экране`,
-      `Быстрый набор из ${selection.poolCount} настоящих постеров; уникальный резерв ${selection.reserve}. Повторов нет.`
+      `Атлас готов для ${selection.atlas}/${selection.visible}; уникальный резерв ${selection.reserve}. Повторов нет.`
     );
     startImageQueue();
   }
@@ -16137,6 +16430,33 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         border-color:rgba(85,225,255,.72)!important;
         box-shadow:0 0 18px rgba(0,198,255,.2)!important
       }
+      #gkmV358DiagnosticsPanel{
+        position:absolute;z-index:11;left:14px;top:72px;width:min(390px,calc(100vw - 28px));
+        display:none;padding:14px;border:1px solid rgba(47,235,187,.48);border-radius:20px;
+        background:linear-gradient(145deg,rgba(4,18,27,.97),rgba(12,12,39,.96));
+        box-shadow:0 24px 60px rgba(0,0,0,.62),0 0 30px rgba(42,220,182,.16);
+        backdrop-filter:blur(14px)
+      }
+      #gkmV358DiagnosticsPanel.open{display:block}
+      .gkmV358DiagnosticsHead{
+        display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px
+      }
+      .gkmV358DiagnosticsHead b{font-size:18px}
+      #gkmV358DiagnosticsClose{
+        border:1px solid rgba(47,235,187,.38);border-radius:11px;background:rgba(255,255,255,.08);
+        color:#fff;padding:7px 10px;font-weight:900;cursor:pointer
+      }
+      #gkmV358DiagnosticsContent{
+        display:grid;grid-template-columns:1fr 1fr;gap:7px
+      }
+      #gkmV358DiagnosticsContent div{
+        min-height:55px;padding:8px 9px;border:1px solid rgba(255,255,255,.09);
+        border-radius:13px;background:rgba(255,255,255,.045)
+      }
+      #gkmV358DiagnosticsContent span{
+        display:block;color:rgba(255,255,255,.58);font-size:10px;margin-bottom:4px
+      }
+      #gkmV358DiagnosticsContent b{display:block;font-size:13px;color:#eafff9}
       #gkmV343Preview{
         position:absolute;z-index:7;left:0;top:0;width:min(560px,calc(100vw - 42px));height:258px;
         transform:perspective(950px) translate3d(var(--gkm-x,20px),var(--gkm-y,80px),0)
@@ -16184,6 +16504,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         .gkmV343PreviewPoster{width:92px;height:136px}.gkmV343PText h2{font-size:18px}.gkmV343Desc{display:none}
         #gkmV343Status{left:10px;bottom:10px;width:calc(100vw - 20px)}.gkmV343Hint{display:none}
         #gkmV357EffectsPanel{top:102px;right:8px;width:calc(100vw - 16px);max-height:calc(100vh - 116px)}
+        #gkmV358DiagnosticsPanel{top:102px;left:8px;width:calc(100vw - 16px);max-height:calc(100vh - 116px);overflow:auto}
         .gkmV357EffectsGrid{grid-template-columns:1fr}
       }
     `;
@@ -16212,8 +16533,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V357</div>
-          <div class="gkmV343Sub">Откройте студию эффектов и переключайте анимацию без перезагрузки мозаики.</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V358</div>
+          <div class="gkmV343Sub">Локальный Poster Atlas быстро заполняет экран; внешняя сеть используется только как уникальный резерв.</div>
         </div>
         <div class="gkmV343Actions">
           <button data-kind="all">Все</button>
@@ -16222,6 +16543,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           <button data-kind="anime">Аниме</button>
           <button data-kind="cartoons">Мульты</button>
           <button id="gkmV357EffectsToggle">✨ Эффекты: Магнитная волна</button>
+          <button id="gkmV358DiagnosticsToggle">📊 Скорость</button>
           <button id="gkmV343Shuffle">⏭ Другой набор</button>
           <button id="gkmV343Close">✕</button>
         </div>
@@ -16258,6 +16580,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           </button>
         </div>
       </div>
+      <div id="gkmV358DiagnosticsPanel" aria-label="Диагностика Canvas">
+        <div class="gkmV358DiagnosticsHead">
+          <b>📊 Диагностика V358</b>
+          <button id="gkmV358DiagnosticsClose" type="button">Закрыть</button>
+        </div>
+        <div id="gkmV358DiagnosticsContent"></div>
+      </div>
       <div id="gkmV343Preview">
         <div class="gkmV343Pane" data-pane="0"></div>
         <div class="gkmV343Pane" data-pane="1"></div>
@@ -16287,6 +16616,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     };
     document.getElementById("gkmV357EffectsClose").onclick=()=>{
       document.getElementById("gkmV357EffectsPanel")?.classList.remove("open");
+    };
+    document.getElementById("gkmV358DiagnosticsToggle").onclick=()=>{
+      const panel=document.getElementById("gkmV358DiagnosticsPanel");
+      panel?.classList.toggle("open");
+      if(panel?.classList.contains("open")) updateDiagnostics();
+    };
+    document.getElementById("gkmV358DiagnosticsClose").onclick=()=>{
+      document.getElementById("gkmV358DiagnosticsPanel")?.classList.remove("open");
     };
     document.getElementById("gkmV343Close").onclick=closeWall;
     document.getElementById("gkmV343Shuffle").onclick=()=>{
@@ -16366,6 +16703,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
     hidePreview();
     document.getElementById("gkmV357EffectsPanel")?.classList.remove("open");
+    document.getElementById("gkmV358DiagnosticsPanel")?.classList.remove("open");
     const lens=document.getElementById("gkmV343Lens");
     if(lens) lens.classList.remove("open");
   }
@@ -16386,6 +16724,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     posterTransportVersion:window.GKM_V355_FAST_POSTER_TRANSPORT_VERSION,
     magneticWaveVersion:window.GKM_V356_MAGNETIC_WAVE_VERSION,
     effectsStudioVersion:window.GKM_V357_EFFECTS_STUDIO_VERSION,
+    posterAtlasVersion:window.GKM_V358_POSTER_ATLAS_VERSION,
+    atlas:{manifest:ATLAS_MANIFEST_URL,maxScreenTiles:MAX_SCREEN_TILES},
     effects:["magnet","water","spotlight","living","domino","fisheye"],
     magnet:{radius:MAGNET_RADIUS,push:MAGNET_PUSH,scale:MAGNET_SCALE},
     concurrency:{
@@ -16400,7 +16740,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V357: effects studio with six Canvas modes installed");
+  console.log("GKM V358: local poster atlas and Canvas performance diagnostics installed");
 })();
 /* GKM V343 SOFT FISHEYE VIDEO WALL END */
 
