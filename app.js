@@ -14526,6 +14526,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V353_1_TAIL_SPEED_VERSION = "v353.1-tail-speed-2026-07-24";
   window.GKM_V354_FAST_SCREEN_POSTER_WALL_VERSION = "v354-fast-screen-poster-wall-2026-07-27";
   window.GKM_V355_FAST_POSTER_TRANSPORT_VERSION = "v355-fast-poster-transport-2026-07-27";
+  window.GKM_V356_MAGNETIC_WAVE_VERSION = "v356-magnetic-wave-2026-07-27";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
@@ -14584,6 +14585,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let previewTargetY = 0;
   let motionFrame = 0;
   let lensDirty = false;
+  let effectMode = "magnet";
 
   const FIRST_CONCURRENCY = 36;
   const REST_CONCURRENCY = 48;
@@ -14600,8 +14602,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   const TARGET_CELL_W = 42;
   const TARGET_CELL_H = 63;
   const MAX_SCREEN_TILES = 900;
-  const LENS_SIZE = 330;
+  const LENS_SIZE = 420;
   const LENS_RADIUS = LENS_SIZE / 2;
+  const MAGNET_RADIUS = 190;
+  const MAGNET_PUSH = 34;
+  const MAGNET_SCALE = 1.15;
 
   function t(v){ return String(v == null ? "" : v).trim(); }
   function esc(v){
@@ -15433,6 +15438,146 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     lensCanvas.style.top=`${pointerY-radius}px`;
   }
 
+  function magneticTiles(){
+    if(!fineLayout||!wallItems.length) return [];
+    const radius=MAGNET_RADIUS;
+    const rowStart=clamp(Math.floor((pointerY-radius)/fineLayout.rowH),0,fineLayout.rows-1);
+    const rowEnd=clamp(Math.floor((pointerY+radius)/fineLayout.rowH),0,fineLayout.rows-1);
+    const out=[];
+
+    for(let row=rowStart;row<=rowEnd;row++){
+      const count=fineLayout.rowCounts[row];
+      const cellW=fineLayout.width/count;
+      const colStart=clamp(Math.floor((pointerX-radius)/cellW),0,count-1);
+      const colEnd=clamp(Math.floor((pointerX+radius)/cellW),0,count-1);
+
+      for(let col=colStart;col<=colEnd;col++){
+        const index=fineLayout.rowOffsets[row]+col;
+        if(index<0||index>=wallItems.length) continue;
+        const rect=rectFor(fineLayout,index);
+        if(!rect) continue;
+        const cx=rect.x+rect.w/2;
+        const cy=rect.y+rect.h/2;
+        const dx=cx-pointerX;
+        const dy=cy-pointerY;
+        const distance=Math.hypot(dx,dy);
+        if(distance>=radius) continue;
+        const raw=1-distance/radius;
+        const influence=raw*raw*(3-2*raw);
+        const rec=getThumbRecord(wallItems[index]);
+        if(!rec||rec.state!=="loaded"||!rec.img) continue;
+        out.push({index,rect,cx,cy,dx,dy,distance,influence,img:rec.img});
+      }
+    }
+    return out;
+  }
+
+  function renderMagneticWave(){
+    if(
+      !pointerInside||
+      !lensCanvas||
+      !lensCtx||
+      !bufferCanvas||
+      !backdropCanvas||
+      !lensDirty
+    ) return;
+    lensDirty=false;
+
+    const size=LENS_SIZE;
+    const radius=LENS_RADIUS;
+    const rawLeft=pointerX-radius;
+    const rawTop=pointerY-radius;
+    const sourceLeft=clamp(rawLeft,0,bufferCanvas.width);
+    const sourceTop=clamp(rawTop,0,bufferCanvas.height);
+    const sourceRight=clamp(rawLeft+size,0,bufferCanvas.width);
+    const sourceBottom=clamp(rawTop+size,0,bufferCanvas.height);
+    const sourceW=Math.max(0,sourceRight-sourceLeft);
+    const sourceH=Math.max(0,sourceBottom-sourceTop);
+    const destinationX=sourceLeft-rawLeft;
+    const destinationY=sourceTop-rawTop;
+
+    lensCtx.clearRect(0,0,size,size);
+    lensCtx.imageSmoothingEnabled=true;
+    lensCtx.imageSmoothingQuality="high";
+    if(sourceW&&sourceH){
+      lensCtx.drawImage(
+        bufferCanvas,
+        sourceLeft,sourceTop,sourceW,sourceH,
+        destinationX,destinationY,sourceW,sourceH
+      );
+    }
+
+    const tiles=magneticTiles();
+
+    // Стираем исходные позиции только локально, раскрывая крупный фон.
+    // Затем рисуем те же уникальные постеры с магнитным смещением.
+    for(const tile of tiles){
+      const rect=tile.rect;
+      const sx=clamp(rect.x,0,backdropCanvas.width);
+      const sy=clamp(rect.y,0,backdropCanvas.height);
+      const sw=Math.max(0,Math.min(rect.w,backdropCanvas.width-sx));
+      const sh=Math.max(0,Math.min(rect.h,backdropCanvas.height-sy));
+      if(sw&&sh){
+        lensCtx.drawImage(
+          backdropCanvas,
+          sx,sy,sw,sh,
+          sx-rawLeft,sy-rawTop,sw,sh
+        );
+      }
+    }
+
+    tiles.sort((a,b)=>a.influence-b.influence);
+    for(const tile of tiles){
+      const directionX=tile.distance>.001?tile.dx/tile.distance:0;
+      const directionY=tile.distance>.001?tile.dy/tile.distance:0;
+      const push=MAGNET_PUSH*Math.pow(tile.influence,1.35);
+      const scale=1+MAGNET_SCALE*Math.pow(tile.influence,2.15);
+      const width=tile.rect.w*scale;
+      const height=tile.rect.h*scale;
+      const centerX=tile.cx-rawLeft+directionX*push;
+      const centerY=tile.cy-rawTop+directionY*push;
+      const pointerLag=clamp((pointerTargetX-pointerX)*.0007,-.035,.035);
+      const angle=clamp(directionX*.055+pointerLag,-.075,.075)*tile.influence;
+
+      lensCtx.save();
+      lensCtx.translate(centerX,centerY);
+      lensCtx.rotate(angle);
+      lensCtx.shadowColor=`rgba(0,210,255,${(.12+.28*tile.influence).toFixed(3)})`;
+      lensCtx.shadowBlur=4+20*tile.influence;
+      lensCtx.shadowOffsetY=2+8*tile.influence;
+      drawCover(lensCtx,tile.img,-width/2,-height/2,width,height);
+      lensCtx.restore();
+    }
+
+    lensCanvas.style.left=`${rawLeft}px`;
+    lensCanvas.style.top=`${rawTop}px`;
+  }
+
+  function renderPointerEffect(){
+    if(effectMode==="fisheye") renderSoftFisheye();
+    else renderMagneticWave();
+  }
+
+  function setEffectMode(mode){
+    effectMode=mode==="fisheye"?"fisheye":"magnet";
+    const lens=document.getElementById("gkmV343Lens");
+    if(lens){
+      lens.classList.toggle("magnet",effectMode==="magnet");
+      lens.classList.toggle("fisheye",effectMode==="fisheye");
+    }
+    document.querySelectorAll("[data-gkm-effect]").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.gkmEffect===effectMode);
+    });
+    const hint=document.querySelector(".gkmV343Hint");
+    if(hint){
+      hint.innerHTML=effectMode==="magnet"
+        ?"движение — магнитная волна<br>клик — открыть полную карточку"
+        :"движение — мягкий «рыбий глаз»<br>клик — открыть полную карточку";
+    }
+    lensDirty=true;
+    if(pointerInside) startMotionLoop();
+  }
+
   function updatePreviewTarget(){
     const preview=document.getElementById("gkmV343Preview");
     if(!preview) return;
@@ -15470,7 +15615,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(moved>.15) lensDirty=true;
 
     if(pointerInside){
-      renderSoftFisheye();
+      renderPointerEffect();
 
       const preview=document.getElementById("gkmV343Preview");
       if(preview){
@@ -15647,6 +15792,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         will-change:left,top,opacity,transform
       }
       #gkmV343Lens.open{opacity:1;transform:scale(1)}
+      #gkmV343Lens.magnet{
+        -webkit-mask-image:radial-gradient(circle,#000 0 67%,rgba(0,0,0,.98) 76%,rgba(0,0,0,.52) 89%,transparent 100%);
+        mask-image:radial-gradient(circle,#000 0 67%,rgba(0,0,0,.98) 76%,rgba(0,0,0,.52) 89%,transparent 100%);
+        filter:none
+      }
+      #gkmV343Lens.fisheye{
+        filter:drop-shadow(0 9px 22px rgba(0,0,0,.25))
+      }
       .gkmV343Shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,.18),transparent 13%,transparent 86%,rgba(0,0,0,.28))}
       .gkmV343Top{position:absolute;left:12px;right:12px;top:10px;z-index:8;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;pointer-events:none}
       .gkmV343Title{font-size:22px;font-weight:950;text-shadow:0 0 12px rgba(0,0,0,.9),0 0 22px rgba(0,180,255,.45)}
@@ -15657,6 +15810,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         color:#fff;border-radius:14px;padding:10px 13px;font-weight:850;cursor:pointer;box-shadow:0 0 16px rgba(0,170,255,.18)
       }
       .gkmV343Actions button:hover{filter:brightness(1.15)}
+      .gkmV343Actions button.active{
+        background:linear-gradient(135deg,#00c8ff,#7439ff);
+        border-color:rgba(255,255,255,.7);
+        box-shadow:0 0 22px rgba(0,210,255,.46)
+      }
       #gkmV343Preview{
         position:absolute;z-index:7;left:0;top:0;width:min(560px,calc(100vw - 42px));height:258px;
         transform:perspective(950px) translate3d(var(--gkm-x,20px),var(--gkm-y,80px),0)
@@ -15729,8 +15887,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div class="gkmV343Shade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V355</div>
-          <div class="gkmV343Sub">Видимые постеры загружаются первыми; медленные источники быстро переключаются на резерв.</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V356</div>
+          <div class="gkmV343Sub">Магнитная волна увеличивает постер и мягко раздвигает соседние плитки без круглого ободка.</div>
         </div>
         <div class="gkmV343Actions">
           <button data-kind="all">Все</button>
@@ -15738,6 +15896,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           <button data-kind="series">Сериалы</button>
           <button data-kind="anime">Аниме</button>
           <button data-kind="cartoons">Мульты</button>
+          <button data-gkm-effect="magnet">🧲 Магнит</button>
+          <button data-gkm-effect="fisheye">🐟 Рыбий глаз</button>
           <button id="gkmV343Shuffle">⏭ Другой набор</button>
           <button id="gkmV343Close">✕</button>
         </div>
@@ -15747,7 +15907,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         <div class="gkmV343Pane" data-pane="1"></div>
       </div>
       <div id="gkmV343Status"><b>Открываю стенку...</b><div>Заполняю экран крупными постерами.</div></div>
-      <div class="gkmV343Hint">движение — мягкий «рыбий глаз»<br>клик — открыть полную карточку</div>
+      <div class="gkmV343Hint">движение — магнитная волна<br>клик — открыть полную карточку</div>
     `;
     document.body.appendChild(overlay);
 
@@ -15755,9 +15915,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     ctx=canvas.getContext("2d",{alpha:false});
     lensCanvas=document.getElementById("gkmV343Lens");
     lensCtx=lensCanvas.getContext("2d",{alpha:true});
+    setEffectMode("magnet");
 
     overlay.querySelectorAll("[data-kind]").forEach(btn=>{
       btn.onclick=()=>openWall(btn.dataset.kind);
+    });
+    overlay.querySelectorAll("[data-gkm-effect]").forEach(btn=>{
+      btn.onclick=()=>setEffectMode(btn.dataset.gkmEffect);
     });
     document.getElementById("gkmV343Close").onclick=closeWall;
     document.getElementById("gkmV343Shuffle").onclick=()=>{
@@ -15854,6 +16018,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     tailSpeedVersion:window.GKM_V353_1_TAIL_SPEED_VERSION,
     fastScreenVersion:window.GKM_V354_FAST_SCREEN_POSTER_WALL_VERSION,
     posterTransportVersion:window.GKM_V355_FAST_POSTER_TRANSPORT_VERSION,
+    magneticWaveVersion:window.GKM_V356_MAGNETIC_WAVE_VERSION,
+    effects:["magnet","fisheye"],
+    magnet:{radius:MAGNET_RADIUS,push:MAGNET_PUSH,scale:MAGNET_SCALE},
     concurrency:{
       first:FIRST_CONCURRENCY,
       rest:REST_CONCURRENCY,
@@ -15866,7 +16033,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V355: fast visible poster transport and screen-sized wall installed");
+  console.log("GKM V356: magnetic wave and optional fisheye installed");
 })();
 /* GKM V343 SOFT FISHEYE VIDEO WALL END */
 
