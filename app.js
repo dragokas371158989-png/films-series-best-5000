@@ -45,6 +45,49 @@ const KINOPOISK_ENABLED = false;
 const FAST_BASE = "data/fast";
 const GKM_DATA_CACHE_VERSION = "355";
 window.GKM_V359_SHARED_SEARCH_VERSION = "v359-shared-main-ai-full-catalog-search-2026-07-28";
+window.GKM_V360_EXACT_FULL_SOURCE_SEARCH_VERSION = "v360-exact-full-source-title-search-2026-07-28";
+const GKM_V360_TITLE_ALIAS_GROUPS = [
+  ["пила", "saw"],
+  ["матрица", "matrix", "the matrix"],
+  ["наруто", "нарута", "naruto"],
+  ["боруто", "boruto"],
+  ["блич", "bleach"],
+  ["ван пис", "ван-пис", "ванпис", "one piece"],
+  ["атака титанов", "атака титана", "attack on titan", "shingeki no kyojin"],
+  ["токийский гуль", "tokyo ghoul"],
+  ["тетрадь смерти", "death note", "death not"],
+  ["стальной алхимик", "fullmetal alchemist"],
+  ["охотник х охотник", "hunter x hunter", "хантер хантер"],
+  ["истребитель демонов", "клинок рассекающий демонов", "demon slayer", "kimetsu no yaiba"],
+  ["магическая битва", "jujutsu kaisen"],
+  ["моя геройская академия", "my hero academia", "boku no hero academia"],
+  ["поднятие уровня в одиночку", "соло левелинг", "solo leveling"],
+  ["ванпанч", "ванпанчмен", "ван панч мен", "one punch man"],
+  ["мстители", "avengers"],
+  ["мстители финал", "avengers endgame"],
+  ["война бесконечности", "infinity war"],
+  ["железный человек", "iron man"],
+  ["капитан америка", "captain america"],
+  ["тор", "thor"],
+  ["человек паук", "человек-паук", "spider man", "spider-man"],
+  ["доктор стрэндж", "доктор страндж", "doctor strange"],
+  ["стражи галактики", "guardians of the galaxy"],
+  ["черная пантера", "чёрная пантера", "black panther"],
+  ["гарри поттер", "гари потер", "гари поттер", "гарри потер", "harry potter"],
+  ["властелин колец", "lord of the rings"],
+  ["хоббит", "hobbit"],
+  ["звездные войны", "звёздные войны", "star wars"],
+  ["форсаж", "fast furious", "fast and furious"],
+  ["терминатор", "terminator"],
+  ["чужой", "alien"],
+  ["хищник", "predator"],
+  ["заклятие", "conjuring"],
+  ["тихое место", "quiet place"],
+  ["пираты карибского моря", "pirates of the caribbean"],
+  ["парк юрского периода", "jurassic park"],
+  ["мир юрского периода", "jurassic world"],
+  ["драконий жемчуг", "dragon ball"]
+];
 const HOME_URL = `${FAST_BASE}/home.json`;
 const META_URL = `${FAST_BASE}/meta.json`;
 const SEARCH_URL = `${FAST_BASE}/search_index.json`;
@@ -89,6 +132,84 @@ function escapeAttr(value) {
 function norm(value) {
   return String(value || "").toLowerCase().replaceAll("ё", "е").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim();
 }
+
+function gkmV360SearchNorm(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replaceAll("ё", "е")
+    .replace(/&/g, " and ")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function gkmV360TitleQueryInfo(value) {
+  const base = gkmV360SearchNorm(value);
+  const variants = new Set(base ? [base] : []);
+  let known = false;
+  for (const group of GKM_V360_TITLE_ALIAS_GROUPS) {
+    const normalized = group.map(gkmV360SearchNorm).filter(Boolean);
+    if (!normalized.includes(base)) continue;
+    known = true;
+    normalized.forEach(alias => variants.add(alias));
+  }
+  return { base, known, variants: [...variants] };
+}
+
+function gkmV360TitleFields(item) {
+  return [
+    item && item.ru,
+    item && item.title_ru,
+    item && item.__manualTopTitle,
+    item && item.title,
+    item && item.name,
+    item && item.en,
+    item && item.original_title,
+    item && item.original_name
+  ].filter(Boolean).map(gkmV360SearchNorm).filter(Boolean);
+}
+
+function gkmV360ExactTitleScore(item, query) {
+  const info = gkmV360TitleQueryInfo(query);
+  if (!info.base) return 0;
+  const fields = gkmV360TitleFields(item);
+  let best = 0;
+  info.variants.forEach((variant, variantIndex) => {
+    fields.forEach(field => {
+      if (field === variant) best = Math.max(best, 5000 - variantIndex);
+      else if (field.startsWith(`${variant} `)) best = Math.max(best, 4000 - variantIndex);
+      else if (!info.known && (` ${field} `).includes(` ${variant} `)) {
+        best = Math.max(best, 2500 - variantIndex);
+      }
+    });
+  });
+  return best;
+}
+
+function gkmV360IsLiteralTitleQuery(value) {
+  const info = gkmV360TitleQueryInfo(value);
+  if (!info.base) return false;
+  if (info.known) return true;
+  if (/^\d{4}$/.test(info.base)) return false;
+  const words = info.base.split(" ").filter(Boolean);
+  if (!words.length || words.length > 6) return false;
+  const genres = new Set([
+    "боевик", "боевики", "комедия", "комедии", "драма", "драмы", "криминал",
+    "фантастика", "фэнтези", "ужасы", "триллер", "триллеры", "детектив",
+    "приключения", "мелодрама", "мелодрамы", "спорт", "военный", "семейный"
+  ]);
+  if (words.every(word => genres.has(word))) return false;
+  const intentWords = new Set([
+    "посоветуй", "подбери", "найди", "покажи", "дай", "лучшие", "лучший", "топ",
+    "похожие", "похожее", "фильмы", "сериалы", "аниме", "мультфильмы", "жанр",
+    "рейтинг", "новинки", "популярное", "после", "до", "года", "вечером"
+  ]);
+  return !words.some(word => intentWords.has(word));
+}
+
+window.GKM_V360_TITLE_QUERY_INFO = gkmV360TitleQueryInfo;
+window.GKM_V360_EXACT_TITLE_SCORE = gkmV360ExactTitleScore;
+window.GKM_V360_IS_LITERAL_TITLE_QUERY = gkmV360IsLiteralTitleQuery;
 
 
 function isAnimeItem(item) {
@@ -1209,6 +1330,7 @@ function makeSearchWorker() {
     const SEARCH_FULL_URL = ${JSON.stringify(absoluteSearchFullUrl)};
     const SHARD_BASE = ${JSON.stringify(absoluteShardBase)};
     const DATA_VERSION = ${JSON.stringify(GKM_DATA_CACHE_VERSION)};
+    const TITLE_ALIAS_GROUPS = ${JSON.stringify(GKM_V360_TITLE_ALIAS_GROUPS)};
     const PAGE_SIZE = ${PAGE_SIZE};
     let indexPromise = null;
     const shardPromises = new Map();
@@ -1259,9 +1381,11 @@ function makeSearchWorker() {
       return true;
     }
     function pass(x,c){if(!tabPass(x,c.tab))return false;const t=type(x);if(c.type&&t!==c.type)return false;if(c.genre&&!genres(x).includes(c.genre))return false;if(c.year&&year(x)!==String(c.year))return false;if(c.minRating&&rating(x)<Number(c.minRating))return false;return true;}
-    function queryList(raw){const base=norm(raw);const out=new Set(base?[base]:[]);const squ=squeeze(base);if(squ&&squ!==base)out.add(squ);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const fixedSqu=squeeze(fixed);if(fixedSqu&&fixedSqu!==fixed)out.add(fixedSqu);const syn={"матрица":["matrix","the matrix"],"шазам":["shazam"],"наруто":["naruto"],"ван пис":["one piece","ванпис"],"ванпис":["one piece","ван пис"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"интерстеллар":["interstellar"]};[...out].forEach(value=>{Object.entries(syn).forEach(([k,a])=>{if(value===k||value.includes(k))a.forEach(x=>out.add(norm(x)));});});return [...out].filter(Boolean);}
+    function queryList(raw){const base=norm(raw);const out=new Set(base?[base]:[]);const squ=squeeze(base);if(squ&&squ!==base)out.add(squ);const fixed=norm(keyfix(base));if(fixed&&fixed!==base)out.add(fixed);const fixedSqu=squeeze(fixed);if(fixedSqu&&fixedSqu!==fixed)out.add(fixedSqu);let known=false;for(const group of TITLE_ALIAS_GROUPS){const aliases=group.map(norm).filter(Boolean);if([...out].some(value=>aliases.includes(value))){known=true;aliases.forEach(alias=>out.add(alias));}}const syn={"шазам":["shazam"],"дэдпул":["deadpool","дедпул"],"дедпул":["deadpool","дэдпул"],"интерстеллар":["interstellar"]};[...out].forEach(value=>{Object.entries(syn).forEach(([k,a])=>{if(value===k)a.forEach(x=>out.add(norm(x)));});});return{queries:[...out].filter(Boolean),known};}
     function hay(x){return x.__hay||(x.__hay=norm([x.search,title(x),x.ru,x.en,(x.genres||[]).join(" ")].join(" ")));}
-    function score(x,queries){if(!queries.length)return 1;const h=hay(x);const wh=" "+h+" ";let best=0;for(const q of queries){if(h===q)best=Math.max(best,10000000);else if(h.startsWith(q+" "))best=Math.max(best,9000000);else if(wh.includes(" "+q+" "))best=Math.max(best,8000000);else if(h.includes(q))best=Math.max(best,7000000);else{const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>h.includes(p)))best=Math.max(best,6000000+parts.length*1000);}}return best?best+poster(x)*5000+Math.min(votes(x),1000000)/10+rating(x)*100:0;}
+    function titleFields(x){return[x&&x.ru,x&&x.title_ru,x&&x.title,x&&x.name,x&&x.en,x&&x.original_title,x&&x.original_name].filter(Boolean).map(norm).filter(Boolean);}
+    function hasWhole(text,phrase){return(" "+norm(text)+" ").includes(" "+norm(phrase)+" ");}
+    function score(x,queries,known){if(!queries.length)return 1;const fields=titleFields(x);const h=hay(x);let best=0;for(const q of queries){for(const field of fields){if(field===q)best=Math.max(best,10000000);else if(field.startsWith(q+" "))best=Math.max(best,9000000);else if(!known&&hasWhole(field,q))best=Math.max(best,8000000);}if(!known&&hasWhole(h,q))best=Math.max(best,6000000);if(!known){const parts=q.split(" ").filter(p=>p.length>1);if(parts.length&&parts.every(p=>hasWhole(h,p)))best=Math.max(best,5500000+parts.length*1000);}}return best?best+poster(x)*5000+Math.min(votes(x),1000000)/10+rating(x)*100:0;}
     function franchiseKey(x){
       let s=norm([title(x),x&&x.ru,x&&x.en].join(" "));
       const pairs=[
@@ -1493,9 +1617,9 @@ function makeSearchWorker() {
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
     async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=withDataVersion(SHARD_BASE+encodeURIComponent(key)+".json");shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
-    function buildRows(index, c, queries){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries);if(!queries.length||s>0)out.push({item,score:s});}return out;}
+    function buildRows(index, c, queries, known){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries,known);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
-    self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page,msg.controls&&msg.controls.tab),ms:0,cached:true});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const queries=queryList(c.q);let index=[];let fallback=false;let cached=false;if(c.tab==="anime_top"&&!queries.length&&animeTopCache){rows=animeTopCache.slice();cached=true;}else{index=await candidateIndex(queries);rows=buildRows(index,c,queries);if(queries.length&&rows.length===0){index=await loadIndex();rows=buildRows(index,c,queries);fallback=true;}sortRows(c.sort||"smart",Boolean(queries.length),c.tab,c.cleanTrash);if(c.tab==="anime_top"){rows=rows.slice(0,100);animeTopCache=rows.slice();}}self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1,c.tab),ms:Date.now()-started,indexTotal:index.length||rows.length,indexPosters:index.length?index.reduce((n,x)=>n+poster(x),0):rows.reduce((n,x)=>n+poster(x.item||x),0),sharded:Boolean(queries.length),fallback,cached});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
+    self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page,msg.controls&&msg.controls.tab),ms:0,cached:true});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const query=queryList(c.q);const queries=query.queries;let index=[];let fallback=false;let cached=false;if(c.tab==="anime_top"&&!queries.length&&animeTopCache){rows=animeTopCache.slice();cached=true;}else{index=await candidateIndex(queries);rows=buildRows(index,c,queries,query.known);if(queries.length&&rows.length===0){index=await loadIndex();rows=buildRows(index,c,queries,query.known);fallback=true;}sortRows(c.sort||"smart",Boolean(queries.length),c.tab,c.cleanTrash);if(c.tab==="anime_top"){rows=rows.slice(0,100);animeTopCache=rows.slice();}}self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1,c.tab),ms:Date.now()-started,indexTotal:index.length||rows.length,indexPosters:index.length?index.reduce((n,x)=>n+poster(x),0):rows.reduce((n,x)=>n+poster(x.item||x),0),sharded:Boolean(queries.length),fallback,cached,exactKnown:query.known});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
   `;
   searchWorker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
   searchWorker.onmessage = event => {
@@ -1507,7 +1631,9 @@ function makeSearchWorker() {
     }
     if (!msg.ok) {
       const c = controls();
-      runSharedCatalogFallback(c, msg.id, msg.error || "неизвестно").then(used => {
+      runSharedCatalogFallback(c, msg.id, msg.error || "неизвестно", {
+        exactTitle: gkmV360IsLiteralTitleQuery(c.q)
+      }).then(used => {
         if (!used && msg.id === searchReq) {
           setStatus(`Ошибка фильтра: ${msg.error || "неизвестно"}`);
         }
@@ -1516,12 +1642,21 @@ function makeSearchWorker() {
     }
     if (Number(msg.count || 0) === 0 && norm(controls().q)) {
       const c = controls();
-      runSharedCatalogFallback(c, msg.id, "основной индекс не дал результатов").then(used => {
+      runSharedCatalogFallback(c, msg.id, "основной индекс не дал результатов", {
+        exactTitle: gkmV360IsLiteralTitleQuery(c.q)
+      }).then(used => {
         if (!used && msg.id === searchReq) applyMainSearchResult(msg);
       });
       return;
     }
     applyMainSearchResult(msg);
+    const c = controls();
+    if (gkmV360IsLiteralTitleQuery(c.q)) {
+      runSharedCatalogFallback(c, msg.id, "фоновая сверка всех источников", {
+        exactTitle: true,
+        keepCurrent: true
+      });
+    }
   };
   return searchWorker;
 }
@@ -1550,24 +1685,35 @@ function applyMainSearchResult(msg) {
     setStatus(`Готово · ${currentCount} · ${msg.ms || 0} мс`);
 }
 
-async function runSharedCatalogFallback(c, requestId, reason = "") {
+async function runSharedCatalogFallback(c, requestId, reason = "", options = {}) {
   const shared = window.GKM_V359_SHARED_CATALOG_SEARCH;
   if (typeof shared !== "function" || !norm(c && c.q)) return false;
-  setStatus("Обычный поиск подключает полный каталог помощника...");
+  const exactTitle = options.exactTitle === true;
+  setStatus(exactTitle
+    ? "Точный поиск сверяет полный каталог..."
+    : "Обычный поиск подключает полный каталог помощника...");
   try {
-    const result = await shared(c.q, c);
+    const result = await shared(c.q, Object.assign({}, c, { exactTitle }));
     if (requestId !== searchReq) return true;
     const items = Array.isArray(result && result.items) ? result.items : [];
-    if (!items.length) return false;
+    if (!items.length) {
+      if (options.keepCurrent) setStatus(`Готово · быстрый точный результат · ${currentCount}`);
+      return false;
+    }
     currentMode = "search";
     currentPage = 1;
-    currentPages = 1;
     currentCount = Number(result.count || items.length);
-    renderList(items, `Общий поиск с помощником: ${currentCount} · полный каталог`);
-    setStatus(`Готово · общий поиск · проверено ${Number(result.searched || 0).toLocaleString("ru-RU")} записей`);
+    currentPages = Math.max(1, Math.ceil(currentCount / PAGE_SIZE));
+    renderList(items, exactTitle
+      ? `Точный поиск: ${currentCount} · проверен полный каталог`
+      : `Общий поиск с помощником: ${currentCount} · полный каталог`);
+    setStatus(`Готово · ${exactTitle ? "точный поиск" : "общий поиск"} · проверено ${Number(result.searched || 0).toLocaleString("ru-RU")} записей`);
     return true;
   } catch (error) {
-    console.warn("GKM V359 shared search fallback", reason, error);
+    if (options.keepCurrent && requestId === searchReq) {
+      setStatus(`Готово · быстрый точный результат · ${currentCount}`);
+    }
+    console.warn("GKM V360 shared search fallback", reason, error);
     return false;
   }
 }
@@ -3868,7 +4014,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     for (const [from, to] of SEARCH_ALIASES) {
       const nf = norm(from);
       if (!nf) continue;
-      if (base === nf || base.includes(nf) || nf.includes(base)) {
+      if (base === nf) {
         String(to).split("|").forEach(v => out.add(norm(v)));
       }
     }
@@ -3894,12 +4040,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const cq = compact(q);
       if (!q || !cq) return;
 
+      const titleWords = ` ${title} `;
+      const textWords = ` ${norm(t)} `;
       if (title === q) s += 100000;
-      else if (title.includes(q)) s += 60000;
-      else if (q.includes(title) && title.length > 3) s += 30000;
-      else if (cTitle.includes(cq)) s += 26000;
-      else if (t.includes(q)) s += 12000;
-      else if (compact(t).includes(cq)) s += 8000;
+      else if (title.startsWith(q + " ")) s += 60000;
+      else if (titleWords.includes(` ${q} `)) s += 30000;
+      else if (cTitle === cq) s += 26000;
+      else if (textWords.includes(` ${q} `)) s += 12000;
     });
 
     return s;
@@ -13073,6 +13220,22 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function familyKey(item){
     const raw = n(rawTitle(item));
     for(const [key, aliases] of GROUP_RULES){
+      if(key === "saw"){
+        const fields = [
+          item && item.ru,
+          item && item.title_ru,
+          item && item.__manualTopTitle,
+          item && item.title,
+          item && item.name,
+          item && item.en,
+          item && item.original_title,
+          item && item.original_name
+        ].filter(Boolean).map(n);
+        if(fields.some(field => ["пила", "saw"].some(alias => field === alias || field.startsWith(alias + " ")))) {
+          return key;
+        }
+        continue;
+      }
       if(aliases.some(a => raw.includes(n(a)))) return key;
     }
 
@@ -13099,6 +13262,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(key === "star-wars") return "Звёздные войны";
     if(key === "john-wick") return "Джон Уик";
     if(key === "fast-furious") return "Форсаж";
+    if(key === "saw") return "Пила";
     return titleOfV328(base);
   }
 
@@ -17057,6 +17221,23 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       searchWorker.postMessage({type,id,...payload});
     });
   }
+  async function exactTitleWorkerSearch(q,it,tk,onProgress){
+    const buckets=it.bucket&&it.bucket!=="all"
+      ? [it.bucket]
+      : ["movies","series","anime","cartoons"];
+    const results=await Promise.all(buckets.map(bucket=>workerCall(
+      "SEARCH",
+      {query:q,intent:Object.assign({},it,{bucket}),tokens:tk,limit:50},
+      {timeout:60000,onProgress}
+    )));
+    return{
+      items:results.flatMap(result=>Array.isArray(result&&result.items)?result.items:[]),
+      searched:results.reduce((sum,result)=>sum+Number(result&&result.searched||0),0),
+      manifestTotal:results.reduce((max,result)=>Math.max(max,Number(result&&result.manifestTotal||0)),0),
+      exactBuckets:buckets,
+      parts:results
+    };
+  }
   async function getWorkerStatus(){try{return await workerCall("STATUS",{}, {timeout:15000});}catch{return workerState;}}
   function warmup(){if(warmStarted)return;warmStarted=true;const run=()=>ensureSearchWorker().catch(error=>console.warn("GKM V343 worker warmup",error));if("requestIdleCallback" in window)requestIdleCallback(run,{timeout:1000});else setTimeout(run,250);}
 
@@ -17130,19 +17311,32 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return [...map.values()];
   }
   async function fallbackSearch(q){
-    const it=detectIntent(q),tk=tokens(q);let data=fallbackPool();
+    const exactTitle=typeof window.GKM_V360_IS_LITERAL_TITLE_QUERY==="function"&&window.GKM_V360_IS_LITERAL_TITLE_QUERY(q);
+    const it=detectIntent(q),tk=exactTitle&&typeof window.GKM_V360_TITLE_QUERY_INFO==="function"?window.GKM_V360_TITLE_QUERY_INFO(q).variants:tokens(q);let data=fallbackPool();
+    if(exactTitle){it.bucket="all";it.mood="";}
     if(!data.length){const arrs=await Promise.all([fetchJson("data/fast/home.json?v=341"),fetchJson("data/fast/pages/movies/page_0001.json?v=341"),fetchJson("data/fast/pages/series/page_0001.json?v=341"),fetchJson("data/fast/pages/anime/page_0001.json?v=341"),fetchJson("data/fast/pages/cartoons/page_0001.json?v=341")]);data=arrs.flat();}
     let arr=data.map(item=>({item,score:score(item,it,tk)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).map(x=>x.item);
+    if(exactTitle&&typeof window.GKM_V360_EXACT_TITLE_SCORE==="function"){
+      arr=arr.map(item=>({item,score:window.GKM_V360_EXACT_TITLE_SCORE(item,q)})).filter(row=>row.score>0).sort((a,b)=>b.score-a.score||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)).map(row=>row.item);
+    }
     if(!arr.length&&it.bucket!=="all")arr=data.filter(item=>clean(item)&&passType(item,it.bucket)).sort((a,b)=>(rating(b)*100000+votes(b))-(rating(a)*100000+votes(a)));
     if(it.random)arr=arr.sort(()=>Math.random()-.5);
     const res=dedupe(arr).slice(0,it.count);lastResults=res;lastQuery=q;remember(it);return{items:res,intent:it,tokens:tk,searched:data.length,fallback:true};
   }
   async function search(q,onProgress){
-    const it=detectIntent(q),tk=tokens(q);
+    const exactTitle=typeof window.GKM_V360_IS_LITERAL_TITLE_QUERY==="function"&&window.GKM_V360_IS_LITERAL_TITLE_QUERY(q);
+    const it=detectIntent(q),tk=exactTitle&&typeof window.GKM_V360_TITLE_QUERY_INFO==="function"?window.GKM_V360_TITLE_QUERY_INFO(q).variants:tokens(q);
+    if(exactTitle){it.bucket="all";it.mood="";}
     if(!["all","movies","series","anime","cartoons"].includes(it.bucket))return await fallbackSearch(q);
     try{
-      const result=await workerCall("SEARCH",{query:q,intent:it,tokens:tk,limit:Math.max(30,it.count*3)},{timeout:60000,onProgress});
-      const res=dedupe((result&&result.items)||[]).slice(0,it.count);
+      const result=exactTitle
+        ? await exactTitleWorkerSearch(q,it,tk,onProgress)
+        : await workerCall("SEARCH",{query:q,intent:it,tokens:tk,limit:Math.max(30,it.count*3)},{timeout:60000,onProgress});
+      let candidates=dedupe((result&&result.items)||[]);
+      if(exactTitle&&typeof window.GKM_V360_EXACT_TITLE_SCORE==="function"){
+        candidates=candidates.map(item=>({item,score:window.GKM_V360_EXACT_TITLE_SCORE(item,q)})).filter(row=>row.score>0).sort((a,b)=>b.score-a.score||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item)).map(row=>row.item);
+      }
+      const res=candidates.slice(0,it.count);
       if(!res.length)return await fallbackSearch(q);
       lastResults=res;lastQuery=q;remember(it);workerState=result||workerState;
       return{items:res,intent:it,tokens:tk,searched:Number(result&&result.searched||0),fullCatalog:true,result};
@@ -17152,6 +17346,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V359_SHARED_CATALOG_SEARCH=async function gkmV359SharedCatalogSearch(query,options={}){
     const q=T(query);
     if(!q)return{items:[],count:0,searched:0};
+    const exactTitle=options.exactTitle===true;
     const it=detectIntent(q);
     const bucketByType={
       "Фильм":"movies",
@@ -17165,6 +17360,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       anime:"anime",
       cartoons:"cartoons"
     };
+    if(exactTitle){it.bucket="all";it.mood="";}
     if(bucketByType[options.type])it.bucket=bucketByType[options.type];
     else if(bucketByTab[options.tab])it.bucket=bucketByTab[options.tab];
     if(options.year){
@@ -17175,15 +17371,26 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(options.sort==="rating"||options.sort==="votes")it.sort="top";
     else if(options.sort==="year")it.sort="new";
 
-    const tk=tokens(q);
+    const tk=exactTitle&&typeof window.GKM_V360_TITLE_QUERY_INFO==="function"
+      ? window.GKM_V360_TITLE_QUERY_INFO(q).variants
+      : tokens(q);
     const requestedGenre=N(options.genre||"");
     if(requestedGenre&&!tk.includes(requestedGenre))tk.push(requestedGenre);
-    const result=await workerCall(
-      "SEARCH",
-      {query:q,intent:it,tokens:tk,limit:50},
-      {timeout:60000}
-    );
+    const result=exactTitle
+      ? await exactTitleWorkerSearch(q,it,tk)
+      : await workerCall(
+          "SEARCH",
+          {query:q,intent:it,tokens:tk,limit:50},
+          {timeout:60000}
+        );
     let items=dedupe((result&&result.items)||[]);
+    if(exactTitle&&typeof window.GKM_V360_EXACT_TITLE_SCORE==="function"){
+      items=items
+        .map(item=>({item,score:window.GKM_V360_EXACT_TITLE_SCORE(item,q)}))
+        .filter(row=>row.score>0)
+        .sort((a,b)=>b.score-a.score||votes(b.item)-votes(a.item)||rating(b.item)-rating(a.item))
+        .map(row=>row.item);
+    }
     if(requestedGenre){
       items=items.filter(item=>N(genres(item).join(" ")).includes(requestedGenre));
     }
@@ -17196,12 +17403,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(Number(options.minRating||0)>0){
       items=items.filter(item=>rating(item)>=Number(options.minRating));
     }
+    const outputItems=items.slice(0,exactTitle?60:50);
     return{
-      items:items.slice(0,50),
-      count:items.length,
+      items:outputItems,
+      count:outputItems.length,
       searched:Number(result&&result.searched||0),
       fullCatalog:true,
-      source:"assistant-worker",
+      source:exactTitle?"assistant-worker-exact-title":"assistant-worker",
       manifestTotal:Number(result&&result.manifestTotal||0)
     };
   };
