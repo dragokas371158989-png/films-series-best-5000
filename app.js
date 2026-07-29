@@ -243,6 +243,481 @@ window.GKM_V361_REPAIR_ITEM = gkmV361RepairItem;
 window.GKM_V361_CONFIRMED_MEDIA_REPAIRS = GKM_V361_CONFIRMED_MEDIA_REPAIRS;
 /* GKM V361 CARD TITLE/POSTER INTEGRITY END */
 
+/* GKM V362 AUTOMATIC CATALOG CONTROL START */
+const GKM_V362_CATALOG_CONTROL_VERSION =
+  "v362-automatic-catalog-control-2026-07-29";
+const GKM_V362_MEDIA_TYPES = new Set([
+  "фильм", "сериал", "аниме", "мультфильм",
+  "movie", "series", "anime", "cartoon", "tv"
+]);
+const GKM_V362_CATALOG_STATS = {
+  scanned: 0,
+  batches: 0,
+  repaired: 0,
+  normalized: 0,
+  quarantined: 0,
+  duplicates: 0,
+  invalidTitles: 0,
+  invalidYears: 0,
+  invalidRatings: 0,
+  invalidVotes: 0,
+  unsafePosters: 0,
+  missingPosters: 0,
+  lastContext: "",
+  startedAt: Date.now()
+};
+const GKM_V362_CATALOG_SAMPLES = [];
+let gkmV362CatalogPanelTimer = 0;
+
+function gkmV362RawTitle(item) {
+  return String(item && (
+    item.ru || item.title_ru || item.name || item.title || item.en ||
+    item.original_title || item.original_name
+  ) || "").trim();
+}
+
+function gkmV362RawType(item) {
+  return norm(item && (item.type || item.category) || "");
+}
+
+function gkmV362IsMediaItem(item) {
+  if (!item || typeof item !== "object") return false;
+  const type = gkmV362RawType(item);
+  if (GKM_V362_MEDIA_TYPES.has(type)) return true;
+  return [...GKM_V362_MEDIA_TYPES].some(value => type === value || type.startsWith(`${value} `));
+}
+
+function gkmV362LegacyKey(item) {
+  return String(item && (item.id || `${gkmV362RawTitle(item)}|${item.year || ""}`) || "");
+}
+
+function gkmV362StableKey(item) {
+  if (!item || typeof item !== "object") return "";
+  if (!gkmV362IsMediaItem(item)) return gkmV362LegacyKey(item);
+  const type = gkmV362RawType(item) || "media";
+  const source = norm(item.source || "catalog") || "catalog";
+  const id = String(item.id || item.tmdbId || item.kinopoiskId || item.mal_id || "").trim();
+  if (id) return `${type}|${source}|${id}`;
+  return `${type}|${norm(gkmV362RawTitle(item))}|${String(item.year || "")}`;
+}
+
+function gkmV362PosterIdentity(item) {
+  let value = String(item && (
+    item.poster || item.poster_url || item.image || item.cover || item.poster_path
+  ) || "").trim();
+  if (!value) return "";
+  try {
+    const parsed = new URL(value, location.href);
+    if (parsed.hostname.toLowerCase().includes("images.weserv.nl")) {
+      const nested = parsed.searchParams.get("url");
+      if (nested) value = decodeURIComponent(nested);
+    } else {
+      value = `${parsed.hostname}${parsed.pathname}`;
+    }
+  } catch {}
+  return value
+    .toLowerCase()
+    .replace(/[?&](?:w|h|q|width|height|quality)=[^&]*/g, "")
+    .replace(/\/(?:w92|w154|w185|w342|w500|original)\//g, "/")
+    .replace(/\s+/g, "");
+}
+
+function gkmV362CatalogQuality(item) {
+  const poster = gkmV362PosterIdentity(item) ? 1 : 0;
+  const title = gkmV362RawTitle(item);
+  const overview = String(item && (
+    item.overview_ru || item.overview || item.description_ru || item.description || item.synopsis
+  ) || "");
+  const votes = Number(item && (item.votes || item.vote_count) || 0);
+  const rating = Number(item && (item.rating || item.vote_average) || 0);
+  return poster * 1e9 +
+    Math.min(Math.max(votes, 0), 1e7) * 10 +
+    Math.min(Math.max(rating, 0), 10) * 10000 +
+    Math.min(overview.length, 4000) * 5 +
+    Math.min(title.length, 200);
+}
+
+function gkmV362SchedulePanelUpdate() {
+  if (gkmV362CatalogPanelTimer) return;
+  gkmV362CatalogPanelTimer = setTimeout(() => {
+    gkmV362CatalogPanelTimer = 0;
+    gkmV362RenderCatalogPanel();
+  }, 120);
+}
+
+function gkmV362RecordIssue(code, item, context, detail = "") {
+  if (GKM_V362_CATALOG_SAMPLES.length < 30) {
+    GKM_V362_CATALOG_SAMPLES.push({
+      code,
+      id: String(item && (item.id || item.tmdbId || item.kinopoiskId || item.mal_id) || "—"),
+      title: gkmV362RawTitle(item) || "Без названия",
+      type: String(item && (item.type || item.category) || "—"),
+      source: String(item && item.source || "—"),
+      context: String(context || "catalog").slice(0, 120),
+      detail: String(detail || "").slice(0, 180)
+    });
+  }
+  gkmV362SchedulePanelUpdate();
+}
+
+function gkmV362CatalogGuardItem(item, context = "catalog") {
+  if (!item || typeof item !== "object") return item;
+  if (item.__gkmV362CatalogChecked === true) return item;
+
+  const isMedia = gkmV362IsMediaItem(item);
+  if (!isMedia) return item;
+
+  GKM_V362_CATALOG_STATS.scanned++;
+  GKM_V362_CATALOG_STATS.lastContext = String(context || "catalog").slice(0, 160);
+
+  const source = String(item.source || "").toLowerCase();
+  const repairRule = source === "tmdb"
+    ? GKM_V361_CONFIRMED_MEDIA_REPAIRS[String(item.id || "")]
+    : null;
+  if (repairRule) GKM_V362_CATALOG_STATS.repaired++;
+  gkmV361RepairItem(item);
+
+  const issues = [];
+  const title = gkmV362RawTitle(item);
+  if (!title || /^(?:без названия|untitled|null|undefined)$/i.test(title)) {
+    issues.push("missing-title");
+    item.__gkmV362Quarantine = "missing-title";
+    GKM_V362_CATALOG_STATS.invalidTitles++;
+    GKM_V362_CATALOG_STATS.quarantined++;
+    gkmV362RecordIssue("missing-title", item, context, "Карточка скрыта: отсутствует название");
+  }
+
+  const yearSource = String(item.year || item.release_date || item.first_air_date || "").trim();
+  const yearMatch = yearSource.match(/(?:^|\D)(18\d{2}|19\d{2}|20\d{2})(?:\D|$)/);
+  if (yearSource && !yearMatch) {
+    item.year = "";
+    GKM_V362_CATALOG_STATS.invalidYears++;
+    GKM_V362_CATALOG_STATS.normalized++;
+    issues.push("invalid-year");
+    gkmV362RecordIssue("invalid-year", item, context, yearSource);
+  } else if (yearMatch) {
+    const year = Number(yearMatch[1]);
+    const maxYear = new Date().getFullYear() + 5;
+    if (year < 1878 || year > maxYear) {
+      item.year = "";
+      GKM_V362_CATALOG_STATS.invalidYears++;
+      GKM_V362_CATALOG_STATS.normalized++;
+      issues.push("invalid-year");
+      gkmV362RecordIssue("invalid-year", item, context, String(year));
+    } else if (String(item.year || "") !== String(year)) {
+      item.year = String(year);
+      GKM_V362_CATALOG_STATS.normalized++;
+    }
+  }
+
+  const ratingFields = ["rating", "vote_average"];
+  ratingFields.forEach(field => {
+    if (!Object.prototype.hasOwnProperty.call(item, field)) return;
+    const raw = item[field];
+    if (raw === "" || raw == null) return;
+    const value = Number(raw);
+    if (!Number.isFinite(value) || value < 0 || value > 10) {
+      item[field] = 0;
+      GKM_V362_CATALOG_STATS.invalidRatings++;
+      GKM_V362_CATALOG_STATS.normalized++;
+      issues.push("invalid-rating");
+      gkmV362RecordIssue("invalid-rating", item, context, `${field}: ${String(raw)}`);
+    }
+  });
+
+  const voteFields = ["votes", "vote_count"];
+  voteFields.forEach(field => {
+    if (!Object.prototype.hasOwnProperty.call(item, field)) return;
+    const raw = item[field];
+    if (raw === "" || raw == null) return;
+    const value = Number(raw);
+    if (!Number.isFinite(value) || value < 0) {
+      item[field] = 0;
+      GKM_V362_CATALOG_STATS.invalidVotes++;
+      GKM_V362_CATALOG_STATS.normalized++;
+      issues.push("invalid-votes");
+      gkmV362RecordIssue("invalid-votes", item, context, `${field}: ${String(raw)}`);
+    }
+  });
+
+  const posterFields = ["poster", "poster_url", "image", "cover"];
+  let hasPosterValue = false;
+  posterFields.forEach(field => {
+    if (!Object.prototype.hasOwnProperty.call(item, field)) return;
+    const raw = String(item[field] || "").trim();
+    if (!raw) return;
+    if (/^(?:javascript|file):/i.test(raw)) {
+      item[field] = "";
+      GKM_V362_CATALOG_STATS.unsafePosters++;
+      GKM_V362_CATALOG_STATS.normalized++;
+      issues.push("unsafe-poster");
+      gkmV362RecordIssue("unsafe-poster", item, context, raw);
+      return;
+    }
+    hasPosterValue = true;
+  });
+  if (!hasPosterValue && !String(item.poster_path || "").trim()) {
+    GKM_V362_CATALOG_STATS.missingPosters++;
+    issues.push("missing-poster");
+  }
+
+  item.__gkmV362StableKey = gkmV362StableKey(item);
+  item.__gkmV362CatalogIssues = issues;
+  item.__gkmV362CatalogChecked = true;
+  gkmV362SchedulePanelUpdate();
+  return item;
+}
+
+function gkmV362CatalogVisible(item) {
+  return Boolean(item && typeof item === "object" && !item.__gkmV362Quarantine);
+}
+
+function gkmV362CatalogDuplicateKeys(item) {
+  if (!gkmV362CatalogVisible(item) || !gkmV362IsMediaItem(item)) return [];
+  const keys = [];
+  const stable = gkmV362StableKey(item);
+  if (stable) keys.push(`id:${stable}`);
+  const poster = gkmV362PosterIdentity(item);
+  const year = String(item.year || "");
+  const type = gkmV362RawType(item);
+  const title = norm(gkmV362RawTitle(item));
+  if (poster && title) keys.push(`poster:${poster}|${year}|${type}|${title}`);
+  return keys;
+}
+
+function gkmV362CatalogGuardList(items, context = "catalog-list") {
+  if (!Array.isArray(items)) return [];
+  if (!items.some(value => value && typeof value === "object")) return items;
+
+  GKM_V362_CATALOG_STATS.batches++;
+  GKM_V362_CATALOG_STATS.lastContext = String(context || "catalog-list").slice(0, 160);
+  const out = [];
+  const keyToIndex = new Map();
+
+  for (const rawItem of items) {
+    const item = gkmV362CatalogGuardItem(rawItem, context);
+    if (!gkmV362CatalogVisible(item)) continue;
+    if (!gkmV362IsMediaItem(item)) {
+      out.push(item);
+      continue;
+    }
+
+    const keys = gkmV362CatalogDuplicateKeys(item);
+    const duplicateKey = keys.find(key => keyToIndex.has(key));
+    if (!duplicateKey) {
+      const index = out.length;
+      out.push(item);
+      keys.forEach(key => keyToIndex.set(key, index));
+      continue;
+    }
+
+    const index = keyToIndex.get(duplicateKey);
+    const previous = out[index];
+    if (gkmV362CatalogQuality(item) > gkmV362CatalogQuality(previous)) {
+      out[index] = item;
+      gkmV362CatalogDuplicateKeys(previous).forEach(key => {
+        if (keyToIndex.get(key) === index) keyToIndex.delete(key);
+      });
+      keys.forEach(key => keyToIndex.set(key, index));
+    }
+    GKM_V362_CATALOG_STATS.duplicates++;
+    gkmV362RecordIssue(
+      "duplicate",
+      item,
+      context,
+      `Совпадение: ${duplicateKey.slice(0, 150)}`
+    );
+  }
+
+  gkmV362SchedulePanelUpdate();
+  return out;
+}
+
+function gkmV362CatalogGuardPayload(value, context = "catalog-payload") {
+  if (Array.isArray(value)) return gkmV362CatalogGuardList(value, context);
+  if (!value || typeof value !== "object") return value;
+
+  gkmV362CatalogGuardItem(value, context);
+  ["items", "data", "results"].forEach(key => {
+    if (Array.isArray(value[key])) {
+      value[key] = gkmV362CatalogGuardList(value[key], `${context}:${key}`);
+    }
+  });
+  if (value.sections && typeof value.sections === "object") {
+    Object.entries(value.sections).forEach(([key, section]) => {
+      if (Array.isArray(section)) {
+        value.sections[key] = gkmV362CatalogGuardList(section, `${context}:section:${key}`);
+      } else if (section && Array.isArray(section.items)) {
+        section.items = gkmV362CatalogGuardList(section.items, `${context}:section:${key}`);
+      }
+    });
+  }
+  return value;
+}
+
+function gkmV362CatalogReport() {
+  return {
+    version: GKM_V362_CATALOG_CONTROL_VERSION,
+    active: true,
+    ...GKM_V362_CATALOG_STATS,
+    samples: GKM_V362_CATALOG_SAMPLES.slice(),
+    confirmedRepairRules: Object.keys(GKM_V361_CONFIRMED_MEDIA_REPAIRS).length
+  };
+}
+
+function gkmV362Esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;"
+  }[char]));
+}
+
+function gkmV362RenderCatalogPanel() {
+  const panel = document.getElementById("gkmV362CatalogPanel");
+  if (!panel) return;
+  const report = gkmV362CatalogReport();
+  const sampleRows = report.samples.slice(-12).reverse();
+  const content = panel.querySelector("#gkmV362CatalogContent");
+  if (!content) return;
+  content.innerHTML = `
+    <div class="gkmV362GuardStatus">
+      <b>Защита включена</b>
+      <span>Проверяются все загружаемые списки до показа карточек.</span>
+    </div>
+    <div class="gkmV362GuardStats">
+      <div><b>${report.scanned.toLocaleString("ru-RU")}</b><span>проверено</span></div>
+      <div><b>${report.repaired.toLocaleString("ru-RU")}</b><span>исправлено</span></div>
+      <div><b>${report.duplicates.toLocaleString("ru-RU")}</b><span>дублей убрано</span></div>
+      <div><b>${report.quarantined.toLocaleString("ru-RU")}</b><span>скрыто</span></div>
+      <div><b>${report.normalized.toLocaleString("ru-RU")}</b><span>полей очищено</span></div>
+      <div><b>${report.missingPosters.toLocaleString("ru-RU")}</b><span>без постера</span></div>
+    </div>
+    <div class="gkmV362GuardRules">
+      <b>Что контролируется</b>
+      <span>названия и ID · подтверждённые коллизии · дубли · годы · рейтинги · голоса · небезопасные ссылки постеров</span>
+    </div>
+    <div class="gkmV362GuardSamples">
+      <b>Последние найденные проблемы</b>
+      ${sampleRows.length ? sampleRows.map(row => `
+        <div class="gkmV362GuardSample">
+          <span>${gkmV362Esc(row.code)}</span>
+          <strong>${gkmV362Esc(row.title)}</strong>
+          <small>${gkmV362Esc([row.type, row.source, row.detail].filter(Boolean).join(" · "))}</small>
+        </div>
+      `).join("") : `<p>Пока ошибок в загруженных данных не найдено.</p>`}
+    </div>
+    <p class="gkmV362GuardNote">
+      Контроль работает без предварительной загрузки всего 100-тысячного индекса, поэтому не замедляет старт сайта.
+      Полный индекс дополнительно проверяется перед выдачей ZIP.
+    </p>
+  `;
+}
+
+function gkmV362InstallCatalogPanel() {
+  if (!document.getElementById("gkmV362CatalogCss")) {
+    const style = document.createElement("style");
+    style.id = "gkmV362CatalogCss";
+    style.textContent = `
+      #gkmV362CatalogGuardBtn{
+        border:1px solid rgba(38,230,167,.58);background:linear-gradient(135deg,#137a63,#126fbb);
+        color:#fff;border-radius:14px;padding:10px 14px;font-weight:900;cursor:pointer;
+        box-shadow:0 0 18px rgba(38,230,167,.2);white-space:nowrap
+      }
+      #gkmV362CatalogGuardBtn:hover{filter:brightness(1.12)}
+      #gkmV362CatalogPanel{
+        width:min(920px,calc(100vw - 24px));max-height:min(820px,calc(100vh - 24px));
+        border:1px solid rgba(38,230,167,.58);border-radius:24px;padding:0;overflow:auto;
+        color:#fff;background:linear-gradient(145deg,#061529,#0a1028 58%,#10133b);
+        box-shadow:0 0 58px rgba(0,220,190,.25),0 28px 90px rgba(0,0,0,.72)
+      }
+      #gkmV362CatalogPanel::backdrop{background:rgba(1,5,15,.78);backdrop-filter:blur(6px)}
+      .gkmV362GuardBox{padding:20px}
+      .gkmV362GuardHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
+      .gkmV362GuardHead h2{margin:0;font-size:25px}.gkmV362GuardHead p{margin:4px 0 0;opacity:.72}
+      #gkmV362CatalogClose{border:1px solid rgba(38,230,167,.48);background:#0b6e85;color:#fff;border-radius:13px;padding:9px 13px;font-weight:900;cursor:pointer}
+      .gkmV362GuardStatus,.gkmV362GuardRules{display:grid;gap:5px;padding:14px;border:1px solid rgba(38,230,167,.28);border-radius:17px;background:rgba(25,173,142,.1);margin-bottom:12px}
+      .gkmV362GuardStatus b{color:#50f0c5;font-size:18px}.gkmV362GuardStatus span,.gkmV362GuardRules span{opacity:.78}
+      .gkmV362GuardStats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}
+      .gkmV362GuardStats div{padding:13px;border:1px solid rgba(0,205,255,.23);border-radius:16px;background:rgba(6,26,55,.78)}
+      .gkmV362GuardStats b{display:block;font-size:23px;color:#67e9ff}.gkmV362GuardStats span{font-size:12px;opacity:.72}
+      .gkmV362GuardSamples{display:grid;gap:8px;margin-top:14px}
+      .gkmV362GuardSample{display:grid;grid-template-columns:105px 1fr;gap:4px 10px;padding:10px;border-radius:13px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09)}
+      .gkmV362GuardSample span{grid-row:1/3;color:#ffcf70;font-size:12px;font-weight:900}.gkmV362GuardSample strong{font-size:14px}.gkmV362GuardSample small{opacity:.65}
+      .gkmV362GuardSamples p,.gkmV362GuardNote{opacity:.68;font-size:13px}
+      @media(max-width:700px){
+        #gkmV362CatalogGuardBtn{padding:9px 10px;font-size:12px}
+        .gkmV362GuardBox{padding:14px}.gkmV362GuardStats{grid-template-columns:repeat(2,1fr)}
+        .gkmV362GuardHead h2{font-size:20px}.gkmV362GuardSample{grid-template-columns:1fr}
+        .gkmV362GuardSample span{grid-row:auto}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  let button = document.getElementById("gkmV362CatalogGuardBtn");
+  if (!button) {
+    button = document.createElement("button");
+    button.id = "gkmV362CatalogGuardBtn";
+    button.type = "button";
+    button.textContent = "🛡 Контроль";
+    document.querySelector(".logo-row")?.appendChild(button);
+  }
+
+  let panel = document.getElementById("gkmV362CatalogPanel");
+  if (!panel) {
+    panel = document.createElement("dialog");
+    panel.id = "gkmV362CatalogPanel";
+    panel.innerHTML = `
+      <div class="gkmV362GuardBox">
+        <div class="gkmV362GuardHead">
+          <div>
+            <h2>🛡 Контроль каталога V362</h2>
+            <p>Автоматическая защита карточек до их появления на экране</p>
+          </div>
+          <button id="gkmV362CatalogClose" type="button">Закрыть</button>
+        </div>
+        <div id="gkmV362CatalogContent"></div>
+      </div>
+    `;
+    document.body.appendChild(panel);
+  }
+
+  button.onclick = () => {
+    gkmV362RenderCatalogPanel();
+    if (typeof panel.showModal === "function") panel.showModal();
+    else panel.setAttribute("open", "open");
+  };
+  panel.querySelector("#gkmV362CatalogClose").onclick = () => {
+    if (typeof panel.close === "function") panel.close();
+    else panel.removeAttribute("open");
+  };
+  panel.addEventListener("click", event => {
+    if (event.target === panel && typeof panel.close === "function") panel.close();
+  });
+  gkmV362RenderCatalogPanel();
+}
+
+window.GKM_V362_CATALOG_CONTROL_VERSION = GKM_V362_CATALOG_CONTROL_VERSION;
+window.GKM_V362_CATALOG_GUARD_ITEM = gkmV362CatalogGuardItem;
+window.GKM_V362_CATALOG_GUARD_LIST = gkmV362CatalogGuardList;
+window.GKM_V362_CATALOG_GUARD = Object.freeze({
+  version: GKM_V362_CATALOG_CONTROL_VERSION,
+  checkItem: gkmV362CatalogGuardItem,
+  filterList: gkmV362CatalogGuardList,
+  guardPayload: gkmV362CatalogGuardPayload,
+  getReport: gkmV362CatalogReport,
+  show() {
+    gkmV362InstallCatalogPanel();
+    document.getElementById("gkmV362CatalogGuardBtn")?.click();
+  }
+});
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", gkmV362InstallCatalogPanel, { once: true });
+} else {
+  gkmV362InstallCatalogPanel();
+}
+/* GKM V362 AUTOMATIC CATALOG CONTROL END */
+
 function gkmV360SearchNorm(value) {
   return String(value || "")
     .toLowerCase()
@@ -267,7 +742,7 @@ function gkmV360TitleQueryInfo(value) {
 }
 
 function gkmV360TitleFields(item) {
-  item = gkmV361RepairItem(item);
+  item = gkmV362CatalogGuardItem(item, "exact-title-fields");
   return [
     item && item.ru,
     item && item.title_ru,
@@ -411,7 +886,7 @@ function withDataVersion(url) {
 async function fetchJson(url, cache = "force-cache") {
   const res = await fetch(withDataVersion(url), { cache });
   if (!res.ok) throw new Error(`${url} ${res.status}`);
-  return gkmV361RepairPayload(await res.json());
+  return gkmV362CatalogGuardPayload(await res.json(), String(url || "fetch"));
 }
 
 function loadSet(key) {
@@ -424,7 +899,7 @@ function saveSet(key, set) {
 }
 
 function titleOf(item) {
-  item = gkmV361RepairItem(item);
+  item = gkmV362CatalogGuardItem(item, "title");
   return String(item && (item.ru || item.title_ru || item.name || item.title || item.en || item.original_title || item.original_name) || "Без названия");
 }
 
@@ -748,7 +1223,7 @@ function animeKey(item) {
 }
 
 function displayTitle(item) {
-  item = gkmV361RepairItem(item);
+  item = gkmV362CatalogGuardItem(item, "display-title");
   if (getType(item) === "Аниме") {
     const exact = specificAnimeTitle(item);
     if (exact) return exact;
@@ -771,7 +1246,7 @@ function getRuTitle(item) {
 }
 
 function displayOverview(item) {
-  item = gkmV361RepairItem(item);
+  item = gkmV362CatalogGuardItem(item, "display-overview");
   if (getType(item) === "Аниме") {
     const exactTitle = specificAnimeTitle(item);
     const candidates = [item && item.__manualTopTitle, item && item.ru, item && item.title_ru, exactTitle, displayTitle(item), animeKey(item)].filter(Boolean).map(norm);
@@ -800,7 +1275,7 @@ function getYear(item) {
 }
 
 function getType(item) {
-  item = gkmV361RepairItem(item);
+  item = gkmV362CatalogGuardItem(item, "type");
   return String(item && (item.type || item.category) || "Фильм");
 }
 
@@ -835,7 +1310,7 @@ function formatVotes(value) {
 }
 
 function getGenres(item) {
-  item = gkmV361RepairItem(item);
+  item = gkmV362CatalogGuardItem(item, "genres");
   const genres = item && item.genres;
   if (Array.isArray(genres)) return genres.filter(Boolean).map(String);
   if (typeof genres === "string") return genres.split(/[,|/]+/).map(x => x.trim()).filter(Boolean);
@@ -1236,24 +1711,28 @@ function typeClass(item) {
 }
 
 function cardHtml(item) {
+  item = gkmV362CatalogGuardItem(item, "card");
+  if (!gkmV362CatalogVisible(item)) return "";
   const title = displayTitle(item);
   const rating = getRating(item);
   const votes = getVotes(item);
   const fav = loadSet(favKey);
-  const id = String(item.id || `${title}|${getYear(item)}`);
+  const id = gkmV362StableKey(item);
+  const legacyId = gkmV362LegacyKey(item);
+  const isFavorite = fav.has(id) || fav.has(legacyId);
   const img = posterSrc(item, 185);
   const poster = img
     ? `<img src="${escapeAttr(img)}" data-original-src="${escapeAttr(posterOriginalSrc(item))}" data-poster-width="185" data-proxy-tried="${shouldProxyFirst(posterOriginalSrc(item)) ? "1" : "0"}" loading="lazy" fetchpriority="auto" decoding="async" alt="">`
     : `<div class="poster-placeholder">Нет постера</div>`;
 
   return `
-    <article class="card" data-id="${escapeAttr(id)}">
+    <article class="card" data-id="${escapeAttr(id)}" data-legacy-id="${escapeAttr(legacyId)}">
       <div class="poster-wrap">
         <div class="card-badges">
           <span class="card-badge badge-${typeClass(item)}">${escapeHtml(getType(item))}</span>
           ${item.__gkmCollectionCount ? `<span class="card-badge gkm-v329-collection-badge">Коллекция · ${escapeHtml(item.__gkmCollectionCount)}</span>` : ""}
         </div>
-        <button class="card-fav-btn ${fav.has(id) ? "active" : ""}" data-fav-id="${escapeAttr(id)}" type="button">${fav.has(id) ? "♥" : "♡"}</button>
+        <button class="card-fav-btn ${isFavorite ? "active" : ""}" data-fav-id="${escapeAttr(id)}" data-fav-legacy-id="${escapeAttr(legacyId)}" type="button">${isFavorite ? "♥" : "♡"}</button>
         ${item.__rank ? `<div class="anime-rank-badge">#${escapeHtml(item.__rank)}</div>` : ""}
         ${poster}
       </div>
@@ -1299,7 +1778,10 @@ function updateCleanTrashButton() {
 }
 
 function renderList(items, label) {
-  const rawItems = (Array.isArray(items) ? items : []);
+  const rawItems = gkmV362CatalogGuardList(
+    Array.isArray(items) ? items : [],
+    `render:${currentMode}:${currentTab}`
+  );
   const collapseResult = window.GKM_V329_COLLAPSE_FRANCHISE_LIST
     ? window.GKM_V329_COLLAPSE_FRANCHISE_LIST(rawItems)
     : { items: rawItems, removed: 0 };
@@ -1394,7 +1876,10 @@ async function renderHome() {
   if (next) next.disabled = true;
   if (grid) {
     grid.innerHTML = order.map(([key, title]) => {
-      const list = (sections[key] || [])
+      const list = gkmV362CatalogGuardList(
+        sections[key] || [],
+        `home:${key}`
+      )
         .filter(hasPoster)
         .filter(item => key === "new" ? getVotes(item) >= 100 : !isLowTrustTopItem(item))
         .slice(0, 18);
@@ -1412,7 +1897,7 @@ async function renderHome() {
   }
   const seen = new Set();
   currentItems = homePool.filter(item => {
-    const key = String(item && (item.id || `${titleOf(item)}|${getYear(item)}`));
+    const key = gkmV362StableKey(item);
     if (!item || seen.has(key)) return false;
     seen.add(key);
     return true;
@@ -1454,7 +1939,7 @@ function makeSearchWorker() {
     let rows = [];
     let animeTopCache = null;
     function withDataVersion(url){const value=String(url||"");if(value.includes("gkmv="+DATA_VERSION))return value;return value+(value.includes("?")?"&":"?")+"gkmv="+DATA_VERSION;}
-    function norm(v){return String(v||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
+    function norm(v){return String(v||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}]+/gu," ").replace(/\\s+/g," ").trim();}
     function repairItem(item){
       if(!item||typeof item!=="object"||item.__gkmV361IntegrityFixed===true)return item;
       const repair=String(item.source||"").toLowerCase()==="tmdb"?CARD_REPAIRS[String(item.id||"")]:null;
@@ -1484,6 +1969,39 @@ function makeSearchWorker() {
       delete item.__hay;
       item.__gkmV361IntegrityFixed=true;
       return item;
+    }
+    function catalogGuardItem(item){
+      item=repairItem(item);
+      if(!item||typeof item!=="object")return null;
+      const ttl=String(item.ru||item.title_ru||item.name||item.title||item.en||item.original_title||item.original_name||"").trim();
+      if(!ttl||/^(?:без названия|untitled|null|undefined)$/i.test(ttl))return null;
+      const yearText=String(item.year||item.release_date||item.first_air_date||"").trim();
+      const yearMatch=yearText.match(/(?:^|\\D)(18\\d{2}|19\\d{2}|20\\d{2})(?:\\D|$)/);
+      if(yearText&&!yearMatch)item.year="";
+      else if(yearMatch){
+        const y=Number(yearMatch[1]),maxYear=new Date().getFullYear()+5;
+        item.year=y>=1878&&y<=maxYear?String(y):"";
+      }
+      for(const field of ["rating","vote_average"]){
+        if(!Object.prototype.hasOwnProperty.call(item,field)||item[field]===""||item[field]==null)continue;
+        const value=Number(item[field]);
+        if(!Number.isFinite(value)||value<0||value>10)item[field]=0;
+      }
+      for(const field of ["votes","vote_count"]){
+        if(!Object.prototype.hasOwnProperty.call(item,field)||item[field]===""||item[field]==null)continue;
+        const value=Number(item[field]);
+        if(!Number.isFinite(value)||value<0)item[field]=0;
+      }
+      for(const field of ["poster","poster_url","image","cover"]){
+        if(Object.prototype.hasOwnProperty.call(item,field)&&/^(?:javascript|file):/i.test(String(item[field]||"").trim()))item[field]="";
+      }
+      return item;
+    }
+    function catalogStableKey(item){
+      const t=norm(item&&item.type||item&&item.category||"media")||"media";
+      const source=norm(item&&item.source||"catalog")||"catalog";
+      const id=String(item&&(item.id||item.tmdbId||item.kinopoiskId||item.mal_id)||"").trim();
+      return id?t+"|"+source+"|"+id:t+"|"+norm(title(item))+"|"+year(item);
     }
     function hasAliasText(h,a){h=norm(h);a=norm(a);if(!h||!a)return false;if(h===a)return true;if(a.length<=4)return (" "+h+" ").includes(" "+a+" ");return h.includes(a)||a.includes(h);}
     function squeeze(v){return norm(v).replace(/(.)\\1+/g,"$1");}
@@ -1763,8 +2281,8 @@ function makeSearchWorker() {
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
     async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=withDataVersion(SHARD_BASE+encodeURIComponent(key)+".json");shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
-    async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
-    function buildRows(index, c, queries, known){const out=[];for(const rawItem of index){const item=repairItem(rawItem);if(!pass(item,c))continue;const s=score(item,queries,known);if(!queries.length||s>0)out.push({item,score:s});}return out;}
+    async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const rawItem of list||[]){const item=catalogGuardItem(rawItem);if(!item)continue;const id=catalogStableKey(item);if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
+    function buildRows(index, c, queries, known){const out=[];const seen=new Set();for(const rawItem of index){const item=catalogGuardItem(rawItem);if(!item)continue;const key=catalogStableKey(item);if(seen.has(key))continue;seen.add(key);if(!pass(item,c))continue;const s=score(item,queries,known);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
     self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page,msg.controls&&msg.controls.tab),ms:0,cached:true});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const query=queryList(c.q);const queries=query.queries;let index=[];let fallback=false;let cached=false;if(c.tab==="anime_top"&&!queries.length&&animeTopCache){rows=animeTopCache.slice();cached=true;}else{index=await candidateIndex(queries);rows=buildRows(index,c,queries,query.known);if(queries.length&&rows.length===0){index=await loadIndex();rows=buildRows(index,c,queries,query.known);fallback=true;}sortRows(c.sort||"smart",Boolean(queries.length),c.tab,c.cleanTrash);if(c.tab==="anime_top"){rows=rows.slice(0,100);animeTopCache=rows.slice();}}self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1,c.tab),ms:Date.now()-started,indexTotal:index.length||rows.length,indexPosters:index.length?index.reduce((n,x)=>n+poster(x),0):rows.reduce((n,x)=>n+poster(x.item||x),0),sharded:Boolean(queries.length),fallback,cached,exactKnown:query.known});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
   `;
@@ -2030,7 +2548,11 @@ function renderFavorites() {
   setActiveTab("fav");
   const fav = loadSet(favKey);
   const pool = collectVisiblePool();
-  const items = pool.filter(item => fav.has(String(item.id || `${titleOf(item)}|${getYear(item)}`)));
+  const items = pool.filter(item => {
+    const stable = gkmV362StableKey(item);
+    const legacy = gkmV362LegacyKey(item);
+    return fav.has(stable) || fav.has(legacy);
+  });
   currentPage = 1;
   currentPages = 1;
   renderList(items, `Избранное: ${items.length}`);
@@ -2058,8 +2580,8 @@ function collectVisiblePool() {
   const out = [...currentItems];
   if (homeData && homeData.sections) Object.values(homeData.sections).forEach(list => out.push(...(list || [])));
   const seen = new Set();
-  return out.filter(item => {
-    const key = String(item.id || `${titleOf(item)}|${getYear(item)}`);
+  return gkmV362CatalogGuardList(out, "visible-pool").filter(item => {
+    const key = gkmV362StableKey(item);
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
@@ -2185,12 +2707,18 @@ function setLink(id, url) {
 }
 
 function openDetails(item) {
+  item = gkmV362CatalogGuardItem(item, "details");
+  if (!gkmV362CatalogVisible(item)) {
+    console.warn("GKM V362: quarantined card was blocked", item && item.__gkmV362Quarantine);
+    return false;
+  }
   selectedItem = item;
-  const id = String(item.id || `${titleOf(item)}|${getYear(item)}`);
+  const id = gkmV362StableKey(item);
+  const legacyId = gkmV362LegacyKey(item);
   const history = (() => {
     try { return JSON.parse(localStorage.getItem(historyKey) || "[]"); }
     catch { return []; }
-  })().filter(x => String(x.id || `${titleOf(x)}|${getYear(x)}`) !== id);
+  })().filter(x => gkmV362StableKey(x) !== id);
   history.unshift(item);
   localStorage.setItem(historyKey, JSON.stringify(history.slice(0, 80)));
 
@@ -2252,11 +2780,16 @@ function openDetails(item) {
   const favBtn = $("favBtn");
   if (favBtn) {
     const fav = loadSet(favKey);
-    favBtn.textContent = fav.has(id) ? "В избранном" : "В избранное";
+    const isFavorite = fav.has(id) || fav.has(legacyId);
+    favBtn.textContent = isFavorite ? "В избранном" : "В избранное";
     favBtn.onclick = () => {
       const next = loadSet(favKey);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
+      if (next.has(id) || next.has(legacyId)) {
+        next.delete(id);
+        next.delete(legacyId);
+      } else {
+        next.add(id);
+      }
       saveSet(favKey, next);
       favBtn.textContent = next.has(id) ? "В избранном" : "В избранное";
     };
@@ -2279,9 +2812,11 @@ function franchiseKey(item) {
 }
 
 function relatedCardHtml(item) {
+  item = gkmV362CatalogGuardItem(item, "related-card");
+  if (!gkmV362CatalogVisible(item)) return "";
   const img = posterSrc(item, 185);
   return `
-    <article class="related-card" data-related-id="${escapeAttr(item.id || `${titleOf(item)}|${getYear(item)}`)}">
+    <article class="related-card" data-related-id="${escapeAttr(gkmV362StableKey(item))}">
       ${img ? `<img class="related-poster" src="${escapeAttr(img)}" data-original-src="${escapeAttr(posterOriginalSrc(item))}" data-poster-width="185" data-proxy-tried="${shouldProxyFirst(posterOriginalSrc(item)) ? "1" : "0"}" loading="eager" fetchpriority="high" decoding="async" referrerpolicy="no-referrer" alt="">` : ""}
       <div class="related-info">
         <div class="related-title">${escapeHtml(titleOf(item))}</div>
@@ -2332,15 +2867,14 @@ function renderRelated(base) {
   const title = block.querySelector(".links-title");
   if (title) title.textContent = `Что посмотреть похожее · ${relatedTypeLabel(baseFamily)}`;
 
-  const pool = collectVisiblePool();
-  const baseId = String(base.id || "");
+  const pool = gkmV362CatalogGuardList(collectVisiblePool(), "related-pool");
   const baseKey = franchiseKey(base);
   const baseGenres = getGenres(base);
 
   const rows = pool
     .filter(item => {
       if (!item) return false;
-      if (String(item.id || "") === baseId) return false;
+      if (gkmV362StableKey(item) === gkmV362StableKey(base)) return false;
       if (!hasPoster(item)) return false;
       return relatedTypeFamily(item) === baseFamily;
     })
@@ -2458,8 +2992,13 @@ function bindEvents() {
       event.stopPropagation();
       const fav = loadSet(favKey);
       const id = favBtn.dataset.favId;
-      if (fav.has(id)) fav.delete(id);
-      else fav.add(id);
+      const legacyId = favBtn.dataset.favLegacyId || "";
+      if (fav.has(id) || (legacyId && fav.has(legacyId))) {
+        fav.delete(id);
+        if (legacyId) fav.delete(legacyId);
+      } else {
+        fav.add(id);
+      }
       saveSet(favKey, fav);
       favBtn.textContent = fav.has(id) ? "♥" : "♡";
       favBtn.classList.toggle("active", fav.has(id));
@@ -2473,7 +3012,7 @@ function bindEvents() {
     }
     const card = event.target.closest(".card");
     if (!card) return;
-    const item = currentItems.find(x => String(x.id || `${titleOf(x)}|${getYear(x)}`) === String(card.dataset.id));
+    const item = currentItems.find(x => gkmV362StableKey(x) === String(card.dataset.id));
     if (item) openDetails(item);
   });
   document.addEventListener("click", event => {
@@ -2486,7 +3025,7 @@ function bindEvents() {
     const related = event.target.closest(".related-card");
     if (related) {
       const pool = collectVisiblePool();
-      const item = pool.find(x => String(x.id || `${titleOf(x)}|${getYear(x)}`) === String(related.dataset.relatedId));
+      const item = pool.find(x => gkmV362StableKey(x) === String(related.dataset.relatedId));
       if (item) openDetails(item);
     }
   });
@@ -2577,9 +3116,15 @@ function gkmHelperNormalizeText(value) {
 function gkmHelperVisiblePool() {
   const pool = [];
   const seen = new Set();
-  function add(item) {
+  function add(rawItem) {
+    const item = typeof window.GKM_V362_CATALOG_GUARD_ITEM === "function"
+      ? window.GKM_V362_CATALOG_GUARD_ITEM(rawItem, "helper-visible-pool")
+      : rawItem;
     if (!item || typeof item !== "object") return;
-    const key = String(item.id || titleOf(item) + "|" + getYear(item));
+    if (item.__gkmV362Quarantine) return;
+    const key = typeof gkmV362StableKey === "function"
+      ? gkmV362StableKey(item)
+      : String(item.id || titleOf(item) + "|" + getYear(item));
     if (seen.has(key)) return;
     seen.add(key);
     pool.push(item);
@@ -13268,6 +13813,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return t(item && (item.poster || item.poster_url || item.posterUrl || item.image || item.img || item.cover || item.cover_url || item.thumbnail || item.backdrop || item.backdrop_path));
   }
   function itemId(item){
+    try {
+      if(typeof gkmV362StableKey === "function") return gkmV362StableKey(item);
+    } catch {}
     return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOfV328(item)}|${yearOfV328(item)}`);
   }
   function sameItem(a,b){
@@ -13434,6 +13982,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const promise = fetch(versionedUrl, {cache:"force-cache"})
       .then(r => r.ok ? r.json() : null)
       .then(parseJson)
+      .then(items => typeof window.GKM_V362_CATALOG_GUARD_LIST === "function"
+        ? window.GKM_V362_CATALOG_GUARD_LIST(items, `franchise:${url}`)
+        : items)
       .catch(()=>[]);
     CACHE.set(versionedUrl, promise);
     return promise;
@@ -13835,6 +14386,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return !!(item && (item.poster || item.poster_url || item.posterUrl || item.image || item.img || item.cover || item.cover_url || item.thumbnail));
   }
   function itemId(item){
+    try {
+      if(typeof gkmV362StableKey === "function") return gkmV362StableKey(item);
+    } catch {}
     return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOfV329(item)}|${yearOfV329(item)}`);
   }
   function familyType(item){
@@ -14153,6 +14707,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return !!posterOfV333(item);
   }
   function itemId(item){
+    try {
+      if(typeof gkmV362StableKey === "function") return gkmV362StableKey(item);
+    } catch {}
     return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOfV333(item)}|${yearOfV333(item)}`);
   }
   function familyType(item){
@@ -15215,6 +15772,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const p = fetch(versionedUrl,{cache:"force-cache"})
       .then(r=>r.ok?r.json():null)
       .then(parseJson)
+      .then(items=>typeof window.GKM_V362_CATALOG_GUARD_LIST==="function"
+        ? window.GKM_V362_CATALOG_GUARD_LIST(items,`canvas:${url}`)
+        : items)
       .catch(()=>[]);
     JSON_CACHE.set(versionedUrl,p);
     return p;
@@ -15309,7 +15869,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const seenPosters = new Set();
     const seenTitles = new Set();
     const out = [];
-    for(const item of arr){
+    for(const rawItem of arr){
+      const item=typeof window.GKM_V362_CATALOG_GUARD_ITEM==="function"
+        ? window.GKM_V362_CATALOG_GUARD_ITEM(rawItem,"canvas:unique")
+        : rawItem;
+      if(item&&item.__gkmV362Quarantine) continue;
       if(!item || !posterOf(item)) continue;
       const k = keyOf(item);
       const posterKey=posterIdentity(item);
@@ -17196,6 +17760,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return [];
   }
   function itemKey(it){
+    try {
+      if(typeof gkmV362StableKey==="function") return gkmV362StableKey(it);
+    } catch {}
     return T(it&&(it.id||it.kinopoiskId||it.tmdbId||it.mal_id||it.slug))||`${N(title(it))}|${year(it)}|${N(type(it))}`;
   }
   function hay(it){ return N([title(it),rawTitle(it),type(it),genres(it).join(" "),it&&it.overview,it&&it.description,it&&it.synopsis,it&&it.source].filter(Boolean).join(" ")); }
@@ -17315,11 +17882,29 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   async function fetchJson(url){
     const versionedUrl=withDataVersion(url);
     if(FALLBACK_CACHE.has(versionedUrl))return FALLBACK_CACHE.get(versionedUrl);
-    try{const res=await fetch(versionedUrl,{cache:"force-cache"});if(!res.ok){FALLBACK_CACHE.set(versionedUrl,[]);return[];}const arr=parseJson(await res.json());FALLBACK_CACHE.set(versionedUrl,arr);return arr;}catch{FALLBACK_CACHE.set(versionedUrl,[]);return[];}
+    try{
+      const res=await fetch(versionedUrl,{cache:"force-cache"});
+      if(!res.ok){FALLBACK_CACHE.set(versionedUrl,[]);return[];}
+      let arr=parseJson(await res.json());
+      if(typeof window.GKM_V362_CATALOG_GUARD_LIST==="function"){
+        arr=window.GKM_V362_CATALOG_GUARD_LIST(arr,`ai-fallback:${url}`);
+      }
+      FALLBACK_CACHE.set(versionedUrl,arr);
+      return arr;
+    }catch{FALLBACK_CACHE.set(versionedUrl,[]);return[];}
   }
   function fallbackPool(){
     const out=[],seen=new Set();
-    function add(item){if(!item||typeof item!=="object")return;const k=itemKey(item);if(!k||seen.has(k))return;seen.add(k);out.push(item);}
+    function add(rawItem){
+      const item=typeof window.GKM_V362_CATALOG_GUARD_ITEM==="function"
+        ? window.GKM_V362_CATALOG_GUARD_ITEM(rawItem,"ai-fallback-pool")
+        : rawItem;
+      if(!item||typeof item!=="object"||item.__gkmV362Quarantine)return;
+      const k=itemKey(item);
+      if(!k||seen.has(k))return;
+      seen.add(k);
+      out.push(item);
+    }
     try{(currentItems||[]).forEach(add);}catch{}
     try{if(homeData&&homeData.sections)Object.values(homeData.sections).forEach(v=>{if(Array.isArray(v))v.forEach(add);else if(v&&Array.isArray(v.items))v.items.forEach(add);});}catch{}
     return out;
@@ -17389,13 +17974,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function warmup(){if(warmStarted)return;warmStarted=true;const run=()=>ensureSearchWorker().catch(error=>console.warn("GKM V343 worker warmup",error));if("requestIdleCallback" in window)requestIdleCallback(run,{timeout:1000});else setTimeout(run,250);}
 
   function repair(item){
-    return typeof window.GKM_V361_REPAIR_ITEM==="function"
-      ? window.GKM_V361_REPAIR_ITEM(item)
-      : item;
+    if(typeof window.GKM_V362_CATALOG_GUARD_ITEM==="function"){
+      return window.GKM_V362_CATALOG_GUARD_ITEM(item,"ai-search");
+    }
+    return typeof window.GKM_V361_REPAIR_ITEM==="function"?window.GKM_V361_REPAIR_ITEM(item):item;
   }
   function clean(item){
     item=repair(item);
-    if(!item) return false;
+    if(!item||item.__gkmV362Quarantine) return false;
     const ttl=N(title(item));
     if(!ttl||ttl==="без названия") return false;
     const y=Number(year(item)||0);
@@ -17459,6 +18045,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const map=new Map();
     for(const rawItem of items){
       const item=repair(rawItem);
+      if(!item||item.__gkmV362Quarantine) continue;
       const k=`${itemBucket(item)}|${N(title(item))}|${year(item)}`;
       const old=map.get(k);
       if(!old||rating(item)*100000+votes(item)>rating(old)*100000+votes(old)) map.set(k,item);
@@ -17612,13 +18199,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
   function resolveOpenItem(compact){
     if(!compact) return compact;
-    const wantedId=T(compact.id||compact.kinopoiskId||compact.tmdbId||compact.mal_id);
+    const wantedKey=typeof gkmV362StableKey==="function"?gkmV362StableKey(compact):"";
     const wantedTitle=N(title(compact));
     const wantedYear=T(year(compact));
     const loaded=collectLoadedItems();
     const match=loaded.find(item=>{
-      const id=T(item&&(item.id||item.kinopoiskId||item.tmdbId||item.mal_id));
-      if(wantedId && id && wantedId===id) return true;
+      if(wantedKey&&typeof gkmV362StableKey==="function"&&gkmV362StableKey(item)===wantedKey)return true;
       return wantedTitle && N(title(item))===wantedTitle && (!wantedYear || !year(item) || T(year(item))===wantedYear);
     });
     return match || compact;
@@ -17755,6 +18341,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(detectType(q)!=="all")return true;
     if(/(?:что посмотреть|посмотреть вечером|по всему каталогу|каталог|кино|тайтл|персонаж|жанр|рейтинг|похожее на|открой \d|сравни \d|марафон)/.test(x))return true;
     if(detectMood(q) && /(?:посоветуй|подбери|подборк|найди|покажи|дай|топ|лучшие)/.test(x))return true;
+    if(/^(?:привет|прив|ку|хай|hi|hello|здарова|здорово|как дела|как ты|кто ты|что ты|что такое|кто |как |почему |зачем |когда |где |объясни |расскажи |напиши |помоги )/.test(x))return false;
+    if(typeof window.GKM_V360_IS_LITERAL_TITLE_QUERY==="function"&&window.GKM_V360_IS_LITERAL_TITLE_QUERY(q))return true;
     return false;
   }
   function generalFallback(q){
