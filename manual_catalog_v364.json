@@ -1,0 +1,39 @@
+{
+  "version": "364",
+  "items": [
+    {
+      "id": "tmdb_movie_604",
+      "tmdbId": 604,
+      "sourceMediaKey": "tmdb:movie:604",
+      "ru": "Матрица: Перезагрузка",
+      "en": "The Matrix Reloaded",
+      "aliases": [
+        "Матрица: Перезагрузка",
+        "The Matrix Reloaded",
+        "Matrix Reloaded"
+      ],
+      "year": "2003",
+      "type": "Фильм",
+      "rating": 0,
+      "votes": 0,
+      "poster": "https://image.tmdb.org/t/p/w342/d0xVNNxIYxId2qHkqpgE39soOvD.jpg",
+      "genres": [
+        "Приключения",
+        "Боевик",
+        "Триллер",
+        "Фантастика"
+      ],
+      "overview": "Борцы за свободу Нео, Тринити и Морфеус продолжают восстание людей против армии машин и защищают Зион — последний город человечества.",
+      "episodes": "",
+      "studio": "",
+      "country": "",
+      "status": "",
+      "ageRating": "",
+      "source": "tmdb_movie",
+      "recScore": 0,
+      "overviewGenerated": false,
+      "mergedDuplicateIds": [],
+      "search": "Матрица Перезагрузка The Matrix Reloaded Matrix Reloaded 2003 Фильм Приключения Боевик Триллер Фантастика tmdb movie"
+    }
+  ]
+}
