@@ -1,0 +1,33 @@
+{
+  "version": "V364",
+  "generatedAt": "2026-07-29T23:27:42Z",
+  "status": "success",
+  "fastData": {
+    "filesChanged": 109,
+    "itemsRepaired": 195,
+    "manualRecovered": 2
+  },
+  "searchShards": {
+    "shards": 66,
+    "shardRows": 188978,
+    "catalogItems": 102470
+  },
+  "health": {
+    "catalogItems": 102470,
+    "missingPosters": 4900,
+    "genericTitles": 16112,
+    "crossMediaIdCollisions": 0
+  },
+  "staticPages": {
+    "updated": 0,
+    "missing": 45,
+    "matrixRecovered": 1
+  },
+  "verification": {
+    "ok": true,
+    "failures": [],
+    "catalogItems": 102470,
+    "repairs": 51,
+    "shards": 66
+  }
+}

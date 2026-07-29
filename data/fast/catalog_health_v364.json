@@ -1,0 +1,523 @@
+{
+  "version": "364",
+  "generatedAt": "2026-07-29T23:27:37Z",
+  "status": "success",
+  "catalogItems": 102470,
+  "confirmedRepairRules": 51,
+  "confirmedRepairsPresent": 51,
+  "manualRecoveries": 1,
+  "missingPosters": 4900,
+  "genericTitles": 16112,
+  "shortDescriptions": 1136,
+  "unsafePosters": 0,
+  "duplicateSourceMediaKeys": 0,
+  "crossMediaIdCollisions": 0,
+  "types": {
+    "Фильм": 53994,
+    "Сериал": 23512,
+    "Мультфильм": 14118,
+    "Аниме": 10846
+  },
+  "topSources": {
+    "tmdb": 75738,
+    "kinopoisk_auto_v339": 16315,
+    "Jikan / MyAnimeList": 5892,
+    "movie_top_rated": 2219,
+    "tv_top_rated": 1628,
+    "tv_popular": 346,
+    "trending_tv_week": 79,
+    "movie_popular": 68,
+    "discover_best_movie_2023": 36,
+    "discover_best_tv_2023": 33,
+    "discover_best_movie_2024": 31,
+    "discover_best_tv_2024": 29,
+    "trending_movie_week": 28,
+    "discover_best_movie_2025": 18,
+    "discover_best_tv_2025": 8,
+    "discover_best_movie_2026": 1,
+    "tmdb_movie": 1
+  },
+  "collisionSamples": [],
+  "issueSamples": [
+    {
+      "code": "generic_title",
+      "id": "68034",
+      "title": "Сериал 2007 года №68034",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "274622",
+      "title": "Аниме 2026 года №274622",
+      "type": "Аниме"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_1430015",
+      "title": "Марово Карвер: Карвингс фром тхе Соломон Исландс",
+      "type": "Фильм"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_4490456",
+      "title": "Страй Кидс",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "95717",
+      "title": "Сериал 2019 года №95717",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "228277",
+      "title": "Сериал 2023 года №228277",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "252649",
+      "title": "Сериал 2024 года №252649",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "38242",
+      "title": "Сериал 2003 года №38242",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "8064709",
+      "title": "Сериал 2006 года №8064709",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "1022102",
+      "title": "Фильм 2022 года №1022102",
+      "type": "Фильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "8225008",
+      "title": "Сериал 2023 года №8225008",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "8628123",
+      "title": "Фильм 2026 года №8628123",
+      "type": "Фильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "215197",
+      "title": "Сериал 2023 года №215197",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "87969",
+      "title": "Сериал 2019 года №87969",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "513813",
+      "title": "Аниме 1994 года №513813",
+      "type": "Аниме"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_4782751",
+      "title": "Кхикн Нуггит",
+      "type": "Мультфильм"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_1331451",
+      "title": "Харрй Стйлес: Адоре Йоу",
+      "type": "Мультфильм"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_4451444",
+      "title": "Йогсквест",
+      "type": "Мультфильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "106251",
+      "title": "Аниме 2020 года №106251",
+      "type": "Аниме"
+    },
+    {
+      "code": "generic_title",
+      "id": "tv_71496",
+      "title": "Сериал 2005 года №tv_71496",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "8080040",
+      "title": "Сериал 2013 года №8080040",
+      "type": "Мультфильм"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_1142601",
+      "title": "Пол О'Грэди: Из любви к собакам",
+      "type": "Сериал"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_1326994",
+      "title": "Хелсреакх",
+      "type": "Мультфильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "765613",
+      "title": "Фильм 2020 года №765613",
+      "type": "Фильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "233452",
+      "title": "Сериал 2023 года №233452",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "8050878",
+      "title": "Сериал 2011 года №8050878",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "86389",
+      "title": "Аниме 1999 года №86389",
+      "type": "Аниме"
+    },
+    {
+      "code": "generic_title",
+      "id": "8259666",
+      "title": "Сериал 2024 года №8259666",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "8299555",
+      "title": "Сериал 2025 года №8299555",
+      "type": "Мультфильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "8106600",
+      "title": "Сериал 2020 года №8106600",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "tv_213762",
+      "title": "Сериал 2022 года №tv_213762",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "tv_46234",
+      "title": "Сериал 2012 года №tv_46234",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "588709",
+      "title": "Фильм 2019 года №588709",
+      "type": "Фильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "8144107",
+      "title": "Фильм 2025 года №8144107",
+      "type": "Мультфильм"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_1290648",
+      "title": "Уне Еспèке à Парт",
+      "type": "Мультфильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "tv_71100",
+      "title": "Сериал 2017 года №tv_71100",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "272512",
+      "title": "Сериал 2024 года №272512",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "231045",
+      "title": "Сериал 2023 года №231045",
+      "type": "Сериал"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_1134605",
+      "title": "Робби Злобный и Лентяево",
+      "type": "Фильм"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_756607",
+      "title": "Америка сегодня",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "6100",
+      "title": "Сериал 1996 года №6100",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "35254",
+      "title": "Сериал 1994 года №35254",
+      "type": "Сериал"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_1433828",
+      "title": "Лимонные девочки",
+      "type": "Аниме"
+    },
+    {
+      "code": "generic_title",
+      "id": "8126308",
+      "title": "Сериал 2024 года №8126308",
+      "type": "Сериал"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_987694",
+      "title": "Пикник на обочине",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "641364",
+      "title": "Фильм 2019 года №641364",
+      "type": "Мультфильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "107347",
+      "title": "Сериал 2016 года №107347",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "236996",
+      "title": "Сериал 2024 года №236996",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "1033051",
+      "title": "Фильм 2019 года №1033051",
+      "type": "Фильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "347183",
+      "title": "Аниме 2015 года №347183",
+      "type": "Аниме"
+    },
+    {
+      "code": "generic_title",
+      "id": "1233620",
+      "title": "Фильм 2025 года №1233620",
+      "type": "Фильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "221869",
+      "title": "Сериал 2023 года №221869",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "202753",
+      "title": "Сериал 2023 года №202753",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "258597",
+      "title": "Сериал 2024 года №258597",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "tv_2282",
+      "title": "Сериал 2003 года №tv_2282",
+      "type": "Сериал"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_414583",
+      "title": "Путь к Софии",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "8013923",
+      "title": "Сериал 1986 года №8013923",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "tv_44440",
+      "title": "Аниме 2000 года №tv_44440",
+      "type": "Аниме"
+    },
+    {
+      "code": "generic_title",
+      "id": "8003425",
+      "title": "Сериал 1966 года №8003425",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "tv_16183",
+      "title": "Сериал 2001 года №tv_16183",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "16069",
+      "title": "Сериал 1991 года №16069",
+      "type": "Сериал"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_1193868",
+      "title": "Карланд Кросс",
+      "type": "Мультфильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "8095601",
+      "title": "Сериал 2019 года №8095601",
+      "type": "Сериал"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_1125990",
+      "title": "Мекард",
+      "type": "Мультфильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "268854",
+      "title": "Фильм 2015 года №268854",
+      "type": "Фильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "tv_55925",
+      "title": "Сериал 2013 года №tv_55925",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "tv_111204",
+      "title": "Аниме 2020 года №tv_111204",
+      "type": "Аниме"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_9271201",
+      "title": "Тхе Виткх'с Кат",
+      "type": "Мультфильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "61516",
+      "title": "Сериал 2014 года №61516",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "114138",
+      "title": "Сериал 2022 года №114138",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "241373",
+      "title": "Сериал 2023 года №241373",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "214454",
+      "title": "Сериал 2022 года №214454",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "214942",
+      "title": "Сериал 2024 года №214942",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "865720",
+      "title": "Фильм 2021 года №865720",
+      "type": "Фильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "645440",
+      "title": "Аниме 2021 года №645440",
+      "type": "Аниме"
+    },
+    {
+      "code": "generic_title",
+      "id": "tv_81133",
+      "title": "Сериал 2018 года №tv_81133",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "1628116",
+      "title": "Фильм 2026 года №1628116",
+      "type": "Фильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "198146",
+      "title": "Сериал 2022 года №198146",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "8118357",
+      "title": "Сериал 2021 года №8118357",
+      "type": "Сериал"
+    },
+    {
+      "code": "generic_title",
+      "id": "31729",
+      "title": "Аниме 2005 года №31729",
+      "type": "Аниме"
+    }
+  ]
+}

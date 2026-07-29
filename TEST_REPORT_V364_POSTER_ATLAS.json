@@ -1,0 +1,34 @@
+{
+  "version": "V364",
+  "generatedAt": "2026-07-29T23:28:19Z",
+  "status": "success",
+  "targetPerCategory": 400,
+  "available": 2052,
+  "categories": {
+    "movies": {
+      "candidates": 852,
+      "attempted": 0,
+      "available": 852,
+      "failed": 0,
+      "reusedLegacy": 1
+    },
+    "series": {
+      "candidates": 1200,
+      "attempted": 400,
+      "available": 400,
+      "failed": 0
+    },
+    "anime": {
+      "candidates": 1200,
+      "attempted": 400,
+      "available": 400,
+      "failed": 0
+    },
+    "cartoons": {
+      "candidates": 1200,
+      "attempted": 400,
+      "available": 400,
+      "failed": 0
+    }
+  }
+}
