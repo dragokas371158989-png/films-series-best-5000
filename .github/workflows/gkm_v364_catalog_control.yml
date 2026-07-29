@@ -1,7 +1,17 @@
-name: GKM V364 Catalog Control
+name: GKM V365 Catalog Installer
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/gkm_v364_catalog_control.yml"
+      - "tools/gkm_v364_integrity_speed.py"
+      - "tools/gkm_v364_build_poster_atlas.py"
+      - "tools/gkm_v349_repair_static_pages.py"
+      - "data/catalog_repairs_v364.json"
+      - "data/manual_catalog_v364.json"
   schedule:
     - cron: "17 3 * * *"
 
@@ -54,7 +64,7 @@ jobs:
           grep -q "GKM_V364_BALANCED_POSTER_ATLAS_VERSION" app.js
           ! grep -qi "cylinderGeometry" app.js
 
-      - name: Commit verified V364 data
+      - name: Commit verified V365 data
         run: |
           git config user.name "gkm-v364-control"
           git config user.email "gkm-v364-control@users.noreply.github.com"
@@ -69,6 +79,6 @@ jobs:
             echo "Catalog is already healthy"
             exit 0
           fi
-          git commit -m "Apply V364 automatic catalog control"
+          git commit -m "Apply V365 automatic catalog data"
           git pull --rebase origin main
           git push origin main
