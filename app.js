@@ -133,6 +133,116 @@ function norm(value) {
   return String(value || "").toLowerCase().replaceAll("ё", "е").replace(/[^\p{L}\p{N}:]+/gu, " ").replace(/\s+/g, " ").trim();
 }
 
+/* GKM V361 CARD TITLE/POSTER INTEGRITY START */
+const GKM_V361_CONFIRMED_MEDIA_REPAIRS = Object.freeze({
+  "101512":["Феликс те Кат","Мультфильм",["Мультфильм","Комедия","Семейный","Детский","Фантастика"]],
+  "105834":["Алекс. Приключения в Римской империи","Мультфильм",["Мультфильм","Приключения"]],
+  "111177":["Годзилла: сингулярность","Аниме",["Мультфильм","Боевик","Фантастика","Детектив"]],
+  "117736":["Легенда о Ханумане","Мультфильм",["Мультфильм","Фэнтези"]],
+  "125760":["Блиппи","Сериал",["Семейный"]],
+  "12609":["Драконий жемчуг","Аниме",["Мультфильм","Боевик","Фантастика"]],
+  "127532":["Поднятие уровня в одиночку","Аниме",["Мультфильм","Боевик","Фантастика"]],
+  "14396":["Те Адвенчерс оф Супер Марио Брос. 3","Мультфильм",["Семейный","Мультфильм","Детский"]],
+  "18021":["Шоу DuPont с Джун Аллисон","Сериал",["Драма"]],
+  "2098":["Бэтмен","Мультфильм",["Боевик","Мультфильм","Драма","Детектив"]],
+  "213375":["Квест Вижна","Сериал",["Фантастика","Боевик","Приключения"]],
+  "219543":["Монстры-коммандос","Мультфильм",["Мультфильм","Фантастика","Боевик"]],
+  "22172":["Те Атом Ант Шоу","Мультфильм",["Мультфильм","Детский","Комедия"]],
+  "2362":["Джетсоны","Мультфильм",["Мультфильм","Комедия","Семейный","Детский"]],
+  "237055":["Тхе Рекклесс Дривер","Мультфильм",["Мультфильм","Короткометражка","Комедия","Семейный"]],
+  "267454":["Цирк","Мультфильм",["Мультфильм","Короткометражка"]],
+  "282144":["Чайки","Сериал",["Драма","Мелодрама"]],
+  "282664":["Минимальная заработная плата","Сериал",["Драма","Мелодрама"]],
+  "308817":["Талис: Кхевалиер ду Темпс","Мультфильм",["Мультфильм"]],
+  "30991":["Ковбой Бибоп","Аниме",["Мультфильм","Боевик","Фантастика","Вестерн"]],
+  "31132":["Обычное Шоу","Мультфильм",["Мультфильм","Комедия","Боевик","Фантастика"]],
+  "31911":["Стальной алхимик: Братство","Аниме",["Мультфильм","Боевик","Фантастика","Драма"]],
+  "33428":["MAD","Мультфильм",["Мультфильм","Комедия"]],
+  "347284":["Hägar the Horrible","Мультфильм",["Мультфильм","Короткометражка","Комедия","Приключения","Семейный"]],
+  "35135":["Холд Анйтхинг","Мультфильм",["Мультфильм","Короткометражка","Мюзикл","Комедия","Семейный"]],
+  "372015":["Le Petit Hérisson partageur","Мультфильм",["Мультфильм","Короткометражка"]],
+  "39373":["Ред вс. Блуе","Мультфильм",["Мультфильм","Комедия","Фантастика"]],
+  "436608":["100 Йеарс","Мультфильм",["Мультфильм","Документальный","Короткометражка"]],
+  "44972":["Гаспар и Лиза","Мультфильм",["Мультфильм","Короткометражка"]],
+  "46260":["Наруто","Аниме",["Мультфильм","Боевик","Фантастика"]],
+  "486113":["Первая поездка","Мультфильм",["Мультфильм","Короткометражка"]],
+  "502502":["Kanón","Мультфильм",["Мультфильм","Короткометражка"]],
+  "530915":["1917","Фильм",["Военный","История","Драма"]],
+  "561396":["Схримп","Фильм",["Фэнтези","Драма","Мелодрама","Комедия"]],
+  "5622":["Хамтаро","Аниме",["Мультфильм","Боевик","Детский"]],
+  "57706":["Ранма ½","Аниме",["Комедия","Боевик","Мультфильм","Фантастика"]],
+  "604":["Юные Титаны","Мультфильм",["Мультфильм","Боевик","Фантастика"]],
+  "61358":["БоОзй' ОС","Мультфильм",["Мультфильм","Боевик","Комедия","Приключения"]],
+  "62715":["Драконий жемчуг Супер","Аниме",["Мультфильм","Боевик","Фантастика"]],
+  "65234":["Моот-Моот","Мультфильм",["Мультфильм","Комедия"]],
+  "657":["Кенгуренок Рокко","Мультфильм",["Мультфильм","Комедия","Детский"]],
+  "65733":["Дораэмон","Мультфильм",["Боевик","Мультфильм","Комедия","Фантастика","Детский","Семейный"]],
+  "70881":["Боруто: Новое поколение Наруто","Аниме",["Мультфильм","Боевик","Комедия"]],
+  "79102":["Голышом","Сериал",["Фантастика","Драма","Комедия","Криминал"]],
+  "80040":["Desafío Champions Sendokai","Мультфильм",["Мультфильм","Комедия","Боевик","Семейный"]],
+  "84368":["Отряд «Дино»","Мультфильм",["Мультфильм"]],
+  "890":["Евангелион","Аниме",["Фантастика","Мультфильм","Драма"]],
+  "91940":["Висспер","Мультфильм",["Мультфильм"]],
+  "938263":["Соул оф а Ман","Фильм",["Короткометражка","Ужасы","Драма"]],
+  "99692":["Команда Дроникс","Мультфильм",["Мультфильм","Боевик","Комедия","Приключения"]],
+  "tv_299555":["Человек-бензопила: Сборник","Аниме",["Мультфильм","Боевик","Фантастика"]]
+});
+
+function gkmV361RepairItem(item) {
+  if (!item || typeof item !== "object" || item.__gkmV361IntegrityFixed === true) return item;
+  const repair = String(item.source || "").toLowerCase() === "tmdb"
+    ? GKM_V361_CONFIRMED_MEDIA_REPAIRS[String(item.id || "")]
+    : null;
+  if (!repair) return item;
+
+  const [title, type, genres] = repair;
+  const year = String(item.year || item.release_date || item.first_air_date || "").match(/(19\d{2}|20\d{2})/)?.[1] || "";
+  const rating = Number(item.rating || item.vote_average || 0);
+  const verifiedGenres = Array.isArray(genres) ? genres.slice() : [];
+
+  item.ru = title;
+  item.title_ru = title;
+  if (Object.prototype.hasOwnProperty.call(item, "title")) item.title = title;
+  if (Object.prototype.hasOwnProperty.call(item, "name")) item.name = title;
+  item.type = type;
+  if (Object.prototype.hasOwnProperty.call(item, "category")) item.category = type;
+  item.genres = verifiedGenres;
+  item.aliases = [title, item.en || item.original_title || item.original_name].filter(Boolean);
+  item.overview = `«${title}» — ${String(type || "проект").toLowerCase()}${year ? ` ${year} года` : ""}${verifiedGenres.length ? ` в жанрах ${verifiedGenres.filter(value => norm(value) !== norm(type)).slice(0, 4).join(", ")}` : ""}.${rating > 0 ? ` Рейтинг: ${rating.toFixed(1)}.` : ""}`;
+  item.overview_ru = item.overview;
+  item.description = item.overview;
+  item.description_ru = item.overview;
+  item.country = "";
+  item.countries = "";
+  item.status = "";
+  item.search = [title, item.en, year, type, verifiedGenres.join(" "), item.source].filter(Boolean).join(" ");
+  delete item.__hay;
+  item.__gkmV361IntegrityFixed = true;
+  return item;
+}
+
+function gkmV361RepairPayload(value) {
+  if (Array.isArray(value)) {
+    value.forEach(gkmV361RepairPayload);
+    return value;
+  }
+  if (!value || typeof value !== "object") return value;
+  gkmV361RepairItem(value);
+  if (Array.isArray(value.items)) gkmV361RepairPayload(value.items);
+  if (Array.isArray(value.data)) gkmV361RepairPayload(value.data);
+  if (Array.isArray(value.results)) gkmV361RepairPayload(value.results);
+  if (value.sections && typeof value.sections === "object") {
+    Object.values(value.sections).forEach(gkmV361RepairPayload);
+  }
+  return value;
+}
+
+window.GKM_V361_CARD_TITLE_POSTER_INTEGRITY_VERSION =
+  "v361-card-title-poster-integrity-2026-07-28";
+window.GKM_V361_REPAIR_ITEM = gkmV361RepairItem;
+window.GKM_V361_CONFIRMED_MEDIA_REPAIRS = GKM_V361_CONFIRMED_MEDIA_REPAIRS;
+/* GKM V361 CARD TITLE/POSTER INTEGRITY END */
+
 function gkmV360SearchNorm(value) {
   return String(value || "")
     .toLowerCase()
@@ -157,6 +267,7 @@ function gkmV360TitleQueryInfo(value) {
 }
 
 function gkmV360TitleFields(item) {
+  item = gkmV361RepairItem(item);
   return [
     item && item.ru,
     item && item.title_ru,
@@ -300,7 +411,7 @@ function withDataVersion(url) {
 async function fetchJson(url, cache = "force-cache") {
   const res = await fetch(withDataVersion(url), { cache });
   if (!res.ok) throw new Error(`${url} ${res.status}`);
-  return res.json();
+  return gkmV361RepairPayload(await res.json());
 }
 
 function loadSet(key) {
@@ -313,6 +424,7 @@ function saveSet(key, set) {
 }
 
 function titleOf(item) {
+  item = gkmV361RepairItem(item);
   return String(item && (item.ru || item.title_ru || item.name || item.title || item.en || item.original_title || item.original_name) || "Без названия");
 }
 
@@ -636,6 +748,7 @@ function animeKey(item) {
 }
 
 function displayTitle(item) {
+  item = gkmV361RepairItem(item);
   if (getType(item) === "Аниме") {
     const exact = specificAnimeTitle(item);
     if (exact) return exact;
@@ -658,6 +771,7 @@ function getRuTitle(item) {
 }
 
 function displayOverview(item) {
+  item = gkmV361RepairItem(item);
   if (getType(item) === "Аниме") {
     const exactTitle = specificAnimeTitle(item);
     const candidates = [item && item.__manualTopTitle, item && item.ru, item && item.title_ru, exactTitle, displayTitle(item), animeKey(item)].filter(Boolean).map(norm);
@@ -686,6 +800,7 @@ function getYear(item) {
 }
 
 function getType(item) {
+  item = gkmV361RepairItem(item);
   return String(item && (item.type || item.category) || "Фильм");
 }
 
@@ -720,6 +835,7 @@ function formatVotes(value) {
 }
 
 function getGenres(item) {
+  item = gkmV361RepairItem(item);
   const genres = item && item.genres;
   if (Array.isArray(genres)) return genres.filter(Boolean).map(String);
   if (typeof genres === "string") return genres.split(/[,|/]+/).map(x => x.trim()).filter(Boolean);
@@ -1331,6 +1447,7 @@ function makeSearchWorker() {
     const SHARD_BASE = ${JSON.stringify(absoluteShardBase)};
     const DATA_VERSION = ${JSON.stringify(GKM_DATA_CACHE_VERSION)};
     const TITLE_ALIAS_GROUPS = ${JSON.stringify(GKM_V360_TITLE_ALIAS_GROUPS)};
+    const CARD_REPAIRS = ${JSON.stringify(GKM_V361_CONFIRMED_MEDIA_REPAIRS)};
     const PAGE_SIZE = ${PAGE_SIZE};
     let indexPromise = null;
     const shardPromises = new Map();
@@ -1338,6 +1455,36 @@ function makeSearchWorker() {
     let animeTopCache = null;
     function withDataVersion(url){const value=String(url||"");if(value.includes("gkmv="+DATA_VERSION))return value;return value+(value.includes("?")?"&":"?")+"gkmv="+DATA_VERSION;}
     function norm(v){return String(v||"").toLowerCase().replaceAll("ё","е").replace(/&/g," and ").replace(/['’\\\`]/g,"").replace(/[^\\p{L}\\p{N}:]+/gu," ").replace(/\\s+/g," ").trim();}
+    function repairItem(item){
+      if(!item||typeof item!=="object"||item.__gkmV361IntegrityFixed===true)return item;
+      const repair=String(item.source||"").toLowerCase()==="tmdb"?CARD_REPAIRS[String(item.id||"")]:null;
+      if(!repair)return item;
+      const title=repair[0],mediaType=repair[1],verifiedGenres=Array.isArray(repair[2])?repair[2].slice():[];
+      const yearText=String(item.year||item.release_date||item.first_air_date||"");
+      const yearMatch=yearText.match(/(19\\d{2}|20\\d{2})/);
+      const cleanYear=yearMatch?yearMatch[1]:"";
+      const ratingValue=Number(item.rating||item.vote_average||0);
+      item.ru=title;
+      item.title_ru=title;
+      if(Object.prototype.hasOwnProperty.call(item,"title"))item.title=title;
+      if(Object.prototype.hasOwnProperty.call(item,"name"))item.name=title;
+      item.type=mediaType;
+      if(Object.prototype.hasOwnProperty.call(item,"category"))item.category=mediaType;
+      item.genres=verifiedGenres;
+      item.aliases=[title,item.en||item.original_title||item.original_name].filter(Boolean);
+      item.overview="«"+title+"» — "+String(mediaType||"проект").toLowerCase()+(cleanYear?" "+cleanYear+" года":"")+"."
+        +(ratingValue>0?" Рейтинг: "+ratingValue.toFixed(1)+".":"");
+      item.overview_ru=item.overview;
+      item.description=item.overview;
+      item.description_ru=item.overview;
+      item.country="";
+      item.countries="";
+      item.status="";
+      item.search=[title,item.en,cleanYear,mediaType,verifiedGenres.join(" "),item.source].filter(Boolean).join(" ");
+      delete item.__hay;
+      item.__gkmV361IntegrityFixed=true;
+      return item;
+    }
     function hasAliasText(h,a){h=norm(h);a=norm(a);if(!h||!a)return false;if(h===a)return true;if(a.length<=4)return (" "+h+" ").includes(" "+a+" ");return h.includes(a)||a.includes(h);}
     function squeeze(v){return norm(v).replace(/(.)\\1+/g,"$1");}
     function keyfix(s){const m={"q":"й","w":"ц","e":"у","r":"к","t":"е","y":"н","u":"г","i":"ш","o":"щ","p":"з","[":"х","]":"ъ","a":"ф","s":"ы","d":"в","f":"а","g":"п","h":"р","j":"о","k":"л","l":"д",";":"ж","'":"э","z":"я","x":"ч","c":"с","v":"м","b":"и","n":"т","m":"ь",",":"б",".":"ю"};return String(s||"").split("").map(ch=>m[ch.toLowerCase()]||ch).join("");}
@@ -1617,7 +1764,7 @@ function makeSearchWorker() {
     function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
     async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=withDataVersion(SHARD_BASE+encodeURIComponent(key)+".json");shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const item of list||[]){const id=String((item&&item.id)||title(item)+"|"+year(item));if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
-    function buildRows(index, c, queries, known){const out=[];for(const item of index){if(!pass(item,c))continue;const s=score(item,queries,known);if(!queries.length||s>0)out.push({item,score:s});}return out;}
+    function buildRows(index, c, queries, known){const out=[];for(const rawItem of index){const item=repairItem(rawItem);if(!pass(item,c))continue;const s=score(item,queries,known);if(!queries.length||s>0)out.push({item,score:s});}return out;}
     function pageItems(page, tab){const p=Math.max(1,Number(page||1));const start=(p-1)*PAGE_SIZE;return rows.slice(start,p*PAGE_SIZE).map((x,i)=>{const item=Object.assign({},x.item); if(tab==="anime_top") item.__rank=start+i+1; return item;});}
     self.onmessage=async e=>{const msg=e.data||{};try{if(msg.mode==="page"){self.postMessage({id:msg.id,ok:true,page:msg.page,count:rows.length,items:pageItems(msg.page,msg.controls&&msg.controls.tab),ms:0,cached:true});return;}const started=Date.now();self.postMessage({id:msg.id,loading:true});const c=msg.controls||{};const query=queryList(c.q);const queries=query.queries;let index=[];let fallback=false;let cached=false;if(c.tab==="anime_top"&&!queries.length&&animeTopCache){rows=animeTopCache.slice();cached=true;}else{index=await candidateIndex(queries);rows=buildRows(index,c,queries,query.known);if(queries.length&&rows.length===0){index=await loadIndex();rows=buildRows(index,c,queries,query.known);fallback=true;}sortRows(c.sort||"smart",Boolean(queries.length),c.tab,c.cleanTrash);if(c.tab==="anime_top"){rows=rows.slice(0,100);animeTopCache=rows.slice();}}self.postMessage({id:msg.id,ok:true,page:1,count:rows.length,items:pageItems(1,c.tab),ms:Date.now()-started,indexTotal:index.length||rows.length,indexPosters:index.length?index.reduce((n,x)=>n+poster(x),0):rows.reduce((n,x)=>n+poster(x.item||x),0),sharded:Boolean(queries.length),fallback,cached,exactKnown:query.known});}catch(err){self.postMessage({id:msg.id,ok:false,error:String(err&&err.message||err)});}};
   `;
@@ -17241,7 +17388,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   async function getWorkerStatus(){try{return await workerCall("STATUS",{}, {timeout:15000});}catch{return workerState;}}
   function warmup(){if(warmStarted)return;warmStarted=true;const run=()=>ensureSearchWorker().catch(error=>console.warn("GKM V343 worker warmup",error));if("requestIdleCallback" in window)requestIdleCallback(run,{timeout:1000});else setTimeout(run,250);}
 
+  function repair(item){
+    return typeof window.GKM_V361_REPAIR_ITEM==="function"
+      ? window.GKM_V361_REPAIR_ITEM(item)
+      : item;
+  }
   function clean(item){
+    item=repair(item);
     if(!item) return false;
     const ttl=N(title(item));
     if(!ttl||ttl==="без названия") return false;
@@ -17271,6 +17424,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return [];
   }
   function score(item,it,tk){
+    item=repair(item);
     if(!clean(item)||!passType(item,it.bucket)) return 0;
     const y=Number(year(item)||0),r=rating(item);
     if(y&&(y<it.yearMin||y>it.yearMax)) return 0;
@@ -17303,7 +17457,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
   function dedupe(items){
     const map=new Map();
-    for(const item of items){
+    for(const rawItem of items){
+      const item=repair(rawItem);
       const k=`${itemBucket(item)}|${N(title(item))}|${year(item)}`;
       const old=map.get(k);
       if(!old||rating(item)*100000+votes(item)>rating(old)*100000+votes(old)) map.set(k,item);
