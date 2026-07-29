@@ -15448,6 +15448,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V356_MAGNETIC_WAVE_VERSION = "v356-magnetic-wave-2026-07-27";
   window.GKM_V357_EFFECTS_STUDIO_VERSION = "v357-effects-studio-2026-07-27";
   window.GKM_V358_POSTER_ATLAS_VERSION = "v358-poster-atlas-diagnostics-2026-07-27";
+  window.GKM_V363_ADAPTIVE_CANVAS_QUALITY_VERSION = "v363-adaptive-canvas-quality-2026-07-29";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
@@ -15526,6 +15527,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let lastMotionTime = 0;
   let fpsSamples = [];
   let perfSession = null;
+  let qualityMode = "auto";
+  let autoQualityLevel = 0;
+  let qualityLastEvaluation = 0;
+  let qualityStableSince = 0;
+  let qualityLastRender = 0;
+  let pageHidden = document.hidden;
 
   const FIRST_CONCURRENCY = 36;
   const REST_CONCURRENCY = 48;
@@ -15684,6 +15691,76 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return fpsSamples.reduce((sum,value)=>sum+value,0)/fpsSamples.length;
   }
 
+  function qualityLabel(mode=qualityMode){
+    return {auto:"Авто",fast:"Быстро",beautiful:"Красиво"}[mode]||"Авто";
+  }
+
+  function effectiveQualityLevel(){
+    if(qualityMode==="fast") return 2;
+    if(qualityMode==="beautiful") return 0;
+    return autoQualityLevel;
+  }
+
+  function updateQualityUi(){
+    const level=effectiveQualityLevel();
+    const detail=qualityMode==="auto"
+      ? ["максимум","баланс","экономия"][level]
+      : qualityLabel();
+    const toggle=document.getElementById("gkmV363QualityToggle");
+    if(toggle) toggle.textContent=`⚙️ Качество: ${qualityLabel()}${qualityMode==="auto"?` · ${detail}`:""}`;
+    document.querySelectorAll("[data-gkm-quality]").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.gkmQuality===qualityMode);
+    });
+    const overlay=document.getElementById("gkmV343Overlay");
+    if(overlay){
+      overlay.dataset.gkmQuality=qualityMode;
+      overlay.dataset.gkmQualityLevel=String(level);
+    }
+  }
+
+  function setCanvasQuality(mode,{persist=true}={}){
+    qualityMode=["auto","fast","beautiful"].includes(mode)?mode:"auto";
+    if(qualityMode!=="auto") qualityStableSince=0;
+    if(persist){
+      try{localStorage.setItem("gkm_v363_canvas_quality",qualityMode);}catch{}
+    }
+    qualityLastRender=0;
+    lensDirty=true;
+    updateQualityUi();
+    scheduleDiagnosticsUpdate();
+    if(isOpen&&pointerInside&&!pageHidden) startMotionLoop();
+  }
+
+  function evaluateAutoQuality(now){
+    if(qualityMode!=="auto"||fpsSamples.length<24||now-qualityLastEvaluation<900) return;
+    qualityLastEvaluation=now;
+    const fps=diagnosticsFps();
+    if(fps<38){
+      autoQualityLevel=2;
+      qualityStableSince=0;
+    }else if(fps<50){
+      autoQualityLevel=Math.max(1,autoQualityLevel);
+      qualityStableSince=0;
+    }else if(fps>=57){
+      if(!qualityStableSince) qualityStableSince=now;
+      if(now-qualityStableSince>4200&&autoQualityLevel>0){
+        autoQualityLevel--;
+        qualityStableSince=now;
+      }
+    }else{
+      qualityStableSince=0;
+    }
+    updateQualityUi();
+  }
+
+  function shouldRenderPointerEffect(now){
+    const level=effectiveQualityLevel();
+    const interval=level===2?34:level===1?22:0;
+    if(interval&&now-qualityLastRender<interval) return false;
+    qualityLastRender=now;
+    return true;
+  }
+
   function formatMs(value){
     if(!value) return "—";
     return value<1000?`${Math.round(value)} мс`:`${(value/1000).toFixed(2)} с`;
@@ -15721,6 +15798,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div><span>Уникальные замены</span><b>${replacementCount}</b></div>
       <div><span>Не закрыто</span><b>${failedCount}</b></div>
       <div><span>Эффект</span><b>${esc(effectMode)}</b></div>
+      <div><span>Качество</span><b>${esc(qualityLabel())}${qualityMode==="auto"?` · ${["максимум","баланс","экономия"][effectiveQualityLevel()]}`:""}</b></div>
       <div><span>Средний FPS</span><b>${fps?fps.toFixed(0):"двигайте мышь"}</b></div>
     `;
   }
@@ -17012,12 +17090,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function motionLoop(now=performance.now()){
+    if(pageHidden||document.hidden){
+      motionFrame=0;
+      lastMotionTime=0;
+      return;
+    }
     if(!isOpen||!pointerInside){
       motionFrame=0;
       lastMotionTime=0;
       return;
     }
     recordMotionFrame(now);
+    evaluateAutoQuality(now);
 
     const previousX=pointerX;
     const previousY=pointerY;
@@ -17034,7 +17118,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(effectMode==="water"||effectMode==="domino") lensDirty=true;
 
     if(pointerInside){
+      const renderEffect=shouldRenderPointerEffect(now);
+      if(renderEffect){
       renderPointerEffect(now);
+      }
 
       const preview=document.getElementById("gkmV343Preview");
       if(preview){
@@ -17054,7 +17141,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function startMotionLoop(){
-    if(!motionFrame) motionFrame=requestAnimationFrame(motionLoop);
+    if(!pageHidden&&!document.hidden&&!motionFrame) motionFrame=requestAnimationFrame(motionLoop);
   }
 
   function onMove(e){
@@ -17347,6 +17434,35 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         border-color:rgba(85,225,255,.72)!important;
         box-shadow:0 0 18px rgba(0,198,255,.2)!important
       }
+      #gkmV363QualityPanel{
+        position:absolute;z-index:12;right:14px;top:72px;width:min(360px,calc(100vw - 28px));
+        display:none;padding:14px;border:1px solid rgba(83,238,194,.46);border-radius:20px;
+        background:linear-gradient(145deg,rgba(4,18,27,.98),rgba(15,13,43,.97));
+        box-shadow:0 24px 60px rgba(0,0,0,.62),0 0 30px rgba(42,220,182,.16);
+        backdrop-filter:blur(14px)
+      }
+      #gkmV363QualityPanel.open{display:block}
+      .gkmV363QualityHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+      .gkmV363QualityHead b{font-size:18px}
+      #gkmV363QualityClose{
+        border:1px solid rgba(83,238,194,.38);border-radius:11px;background:rgba(255,255,255,.08);
+        color:#fff;padding:7px 10px;font-weight:900;cursor:pointer
+      }
+      .gkmV363QualityGrid{display:grid;gap:8px}
+      .gkmV363Quality{
+        padding:11px!important;text-align:left;border-radius:15px!important;
+        background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.12)!important;
+        color:#fff;cursor:pointer;box-shadow:none!important
+      }
+      .gkmV363Quality b{display:block;margin-bottom:4px}
+      .gkmV363Quality small{display:block;color:rgba(255,255,255,.68);line-height:1.35}
+      .gkmV363Quality.active{
+        background:linear-gradient(135deg,rgba(0,196,155,.34),rgba(55,111,255,.46))!important;
+        border-color:rgba(83,238,194,.74)!important
+      }
+      #gkmV343Overlay[data-gkm-quality-level="2"] #gkmV343Lens{filter:none!important}
+      #gkmV343Overlay[data-gkm-quality-level="2"].effect-living #gkmV343Canvas,
+      #gkmV343Overlay[data-gkm-quality-level="2"].effect-living .gkmV343Shade{animation:none!important}
       #gkmV358DiagnosticsPanel{
         position:absolute;z-index:11;left:14px;top:72px;width:min(390px,calc(100vw - 28px));
         display:none;padding:14px;border:1px solid rgba(47,235,187,.48);border-radius:20px;
@@ -17421,6 +17537,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         .gkmV343PreviewPoster{width:92px;height:136px}.gkmV343PText h2{font-size:18px}.gkmV343Desc{display:none}
         #gkmV343Status{left:10px;bottom:10px;width:calc(100vw - 20px)}.gkmV343Hint{display:none}
         #gkmV357EffectsPanel{top:102px;right:8px;width:calc(100vw - 16px);max-height:calc(100vh - 116px)}
+        #gkmV363QualityPanel{top:102px;right:8px;width:calc(100vw - 16px);max-height:calc(100vh - 116px);overflow:auto}
         #gkmV358DiagnosticsPanel{top:102px;left:8px;width:calc(100vw - 16px);max-height:calc(100vh - 116px);overflow:auto}
         .gkmV357EffectsGrid{grid-template-columns:1fr}
       }
@@ -17450,7 +17567,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V358</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V363</div>
           <div class="gkmV343Sub">Локальный Poster Atlas быстро заполняет экран; внешняя сеть используется только как уникальный резерв.</div>
         </div>
         <div class="gkmV343Actions">
@@ -17460,6 +17577,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           <button data-kind="anime">Аниме</button>
           <button data-kind="cartoons">Мульты</button>
           <button id="gkmV357EffectsToggle">✨ Эффекты: Магнитная волна</button>
+          <button id="gkmV363QualityToggle">⚙️ Качество: Авто</button>
           <button id="gkmV358DiagnosticsToggle">📊 Скорость</button>
           <button id="gkmV343Shuffle">⏭ Другой набор</button>
           <button id="gkmV343Close">✕</button>
@@ -17497,6 +17615,26 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           </button>
         </div>
       </div>
+      <div id="gkmV363QualityPanel" aria-label="Качество Canvas">
+        <div class="gkmV363QualityHead">
+          <b>⚙️ Качество Canvas</b>
+          <button id="gkmV363QualityClose" type="button">Закрыть</button>
+        </div>
+        <div class="gkmV363QualityGrid">
+          <button class="gkmV363Quality" data-gkm-quality="auto" type="button">
+            <b>🧠 Авто</b>
+            <small>Следит за FPS, снижает нагрузку при просадке и возвращает качество после стабилизации.</small>
+          </button>
+          <button class="gkmV363Quality" data-gkm-quality="fast" type="button">
+            <b>⚡ Быстро</b>
+            <small>Ограничивает частоту тяжёлой перерисовки примерно до 30 FPS.</small>
+          </button>
+          <button class="gkmV363Quality" data-gkm-quality="beautiful" type="button">
+            <b>✨ Красиво</b>
+            <small>Максимальная плавность и полная частота эффектов на мощном устройстве.</small>
+          </button>
+        </div>
+      </div>
       <div id="gkmV358DiagnosticsPanel" aria-label="Диагностика Canvas">
         <div class="gkmV358DiagnosticsHead">
           <b>📊 Диагностика V358</b>
@@ -17518,6 +17656,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     lensCanvas=document.getElementById("gkmV343Lens");
     lensCtx=lensCanvas.getContext("2d",{alpha:true});
     setEffectMode("magnet");
+    try{qualityMode=localStorage.getItem("gkm_v363_canvas_quality")||"auto";}catch{}
+    setCanvasQuality(qualityMode,{persist:false});
 
     overlay.querySelectorAll("[data-kind]").forEach(btn=>{
       btn.onclick=()=>openWall(btn.dataset.kind);
@@ -17529,10 +17669,24 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       };
     });
     document.getElementById("gkmV357EffectsToggle").onclick=()=>{
+      document.getElementById("gkmV363QualityPanel")?.classList.remove("open");
       document.getElementById("gkmV357EffectsPanel")?.classList.toggle("open");
     };
     document.getElementById("gkmV357EffectsClose").onclick=()=>{
       document.getElementById("gkmV357EffectsPanel")?.classList.remove("open");
+    };
+    overlay.querySelectorAll("[data-gkm-quality]").forEach(btn=>{
+      btn.onclick=()=>{
+        setCanvasQuality(btn.dataset.gkmQuality);
+        if(window.innerWidth<700) document.getElementById("gkmV363QualityPanel")?.classList.remove("open");
+      };
+    });
+    document.getElementById("gkmV363QualityToggle").onclick=()=>{
+      document.getElementById("gkmV357EffectsPanel")?.classList.remove("open");
+      document.getElementById("gkmV363QualityPanel")?.classList.toggle("open");
+    };
+    document.getElementById("gkmV363QualityClose").onclick=()=>{
+      document.getElementById("gkmV363QualityPanel")?.classList.remove("open");
     };
     document.getElementById("gkmV358DiagnosticsToggle").onclick=()=>{
       const panel=document.getElementById("gkmV358DiagnosticsPanel");
@@ -17557,6 +17711,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const item=wallItems[hoverIndex];
       if(item) openItem(item);
     });
+
+    if(overlay.dataset.gkmV363Visibility!=="1"){
+      overlay.dataset.gkmV363Visibility="1";
+      document.addEventListener("visibilitychange",()=>{
+        pageHidden=document.hidden;
+        if(pageHidden){
+          if(motionFrame){
+            cancelAnimationFrame(motionFrame);
+            motionFrame=0;
+          }
+          lastMotionTime=0;
+        }else if(isOpen&&pointerInside){
+          lensDirty=true;
+          qualityLastRender=0;
+          startMotionLoop();
+        }
+        scheduleDiagnosticsUpdate();
+      });
+    }
 
     window.addEventListener("resize",()=>{
       if(!isOpen) return;
@@ -17620,6 +17793,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     }
     hidePreview();
     document.getElementById("gkmV357EffectsPanel")?.classList.remove("open");
+    document.getElementById("gkmV363QualityPanel")?.classList.remove("open");
     document.getElementById("gkmV358DiagnosticsPanel")?.classList.remove("open");
     const lens=document.getElementById("gkmV343Lens");
     if(lens) lens.classList.remove("open");
@@ -17644,6 +17818,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     posterAtlasVersion:window.GKM_V358_POSTER_ATLAS_VERSION,
     atlas:{manifest:ATLAS_MANIFEST_URL,maxScreenTiles:MAX_SCREEN_TILES},
     effects:["magnet","water","spotlight","living","domino","fisheye"],
+    qualityModes:["auto","fast","beautiful"],
+    setQuality:setCanvasQuality,
+    getQuality:()=>({mode:qualityMode,level:effectiveQualityLevel(),fps:diagnosticsFps(),hidden:pageHidden}),
     magnet:{radius:MAGNET_RADIUS,push:MAGNET_PUSH,scale:MAGNET_SCALE},
     concurrency:{
       first:FIRST_CONCURRENCY,
@@ -19101,3 +19278,1010 @@ Endpoint: ${endpoint||"не задан"}`;
   console.log("GKM V357: full detail-card colour restored");
 })();
 /* GKM V357 DETAIL CARD COLOUR RESTORE END */
+
+
+/* GKM V363 MY LIST 2.0, RECOMMENDATIONS, PWA AND TRAILERS START */
+(function(){
+  window.GKM_V363_MY_LIST_PWA_VERSION =
+    "v363-my-list-2-personal-recommendations-pwa-2026-07-29";
+
+  const STORE_KEY = "gkm_v326_local_profiles";
+  const CURRENT_KEY = "gkm_v326_current_profile";
+  const LIST_LIMIT = 1200;
+  const STATUS = Object.freeze({
+    want: "Хочу посмотреть",
+    watching: "Смотрю",
+    completed: "Просмотрено",
+    paused: "Отложено",
+    dropped: "Брошено"
+  });
+  const STATUS_ORDER = ["want","watching","completed","paused","dropped"];
+
+  let activeView = "all";
+  let currentDetailItem = null;
+  let recommendationRequest = 0;
+  let installPrompt = null;
+  let trailerKey = "";
+
+  function text(value){
+    return String(value == null ? "" : value).replace(/\s+/g," ").trim();
+  }
+  function norm(value){
+    return text(value).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function esc(value){
+    return String(value == null ? "" : value).replace(/[&<>"']/g,char=>({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[char]));
+  }
+  function number(value,min=0,max=99999){
+    const parsed=Math.floor(Number(value||0));
+    return Number.isFinite(parsed)?Math.max(min,Math.min(max,parsed)):min;
+  }
+  function titleOfV363(item){
+    try{if(typeof displayTitle==="function")return text(displayTitle(item));}catch{}
+    return text(item&&(item.ru||item.title_ru||item.name||item.title||item.en||item.original_title||item.original_name))||"Без названия";
+  }
+  function typeOfV363(item){
+    try{if(typeof getType==="function")return text(getType(item));}catch{}
+    return text(item&&(item.type||item.category||item.kind))||"Каталог";
+  }
+  function yearOfV363(item){
+    try{if(typeof getYear==="function")return text(getYear(item));}catch{}
+    const match=text(item&&(item.year||item.release_date||item.first_air_date)).match(/(18\d{2}|19\d{2}|20\d{2})/);
+    return match?match[1]:"";
+  }
+  function ratingOfV363(item){
+    try{if(typeof getRating==="function")return Number(getRating(item)||0);}catch{}
+    return Number(item&&(item.rating||item.vote_average||item.score)||0);
+  }
+  function votesOfV363(item){
+    try{if(typeof getVotes==="function")return Number(getVotes(item)||0);}catch{}
+    return Number(item&&(item.votes||item.vote_count||item.scored_by)||0);
+  }
+  function genresOfV363(item){
+    try{
+      if(typeof getGenres==="function"){
+        const result=getGenres(item);
+        if(Array.isArray(result))return result.filter(Boolean).map(String).slice(0,8);
+      }
+    }catch{}
+    const raw=item&&(item.genres||item.genre||item.tags);
+    if(Array.isArray(raw))return raw.filter(Boolean).map(value=>text(value&&value.name||value)).slice(0,8);
+    return typeof raw==="string"?raw.split(/[,|/;]+/).map(text).filter(Boolean).slice(0,8):[];
+  }
+  function posterOfV363(item){
+    try{if(typeof posterSrc==="function")return text(posterSrc(item,342));}catch{}
+    return text(item&&(item.poster||item.poster_url||item.image||item.cover||item.thumbnail));
+  }
+  function overviewOfV363(item){
+    try{if(typeof displayOverview==="function")return text(displayOverview(item)).slice(0,1600);}catch{}
+    return text(item&&(item.overview||item.description||item.synopsis||item.plot)).slice(0,1600);
+  }
+  function stableKey(item){
+    try{
+      if(typeof gkmV362StableKey==="function")return gkmV362StableKey(item);
+    }catch{}
+    const type=norm(typeOfV363(item))||"media";
+    const source=norm(item&&item.source||"catalog")||"catalog";
+    const id=text(item&&(item.id||item.tmdbId||item.kinopoiskId||item.mal_id));
+    return id?`${type}|${source}|${id}`:`${type}|${norm(titleOfV363(item))}|${yearOfV363(item)}`;
+  }
+  function isEpisodic(item){
+    const type=norm(typeOfV363(item));
+    return type.includes("сериал")||type.includes("series")||type.includes("аниме")||type.includes("anime");
+  }
+  function cacheRecent(item){
+    const poster=posterOfV363(item);
+    if(!poster)return;
+    try{
+      navigator.serviceWorker?.controller?.postMessage({
+        type:"GKM_CACHE_RECENT",
+        urls:[poster]
+      });
+    }catch{}
+  }
+  function formatDate(value){
+    if(!value)return"—";
+    try{
+      return new Intl.DateTimeFormat("ru-RU",{day:"2-digit",month:"2-digit",year:"numeric"}).format(new Date(value));
+    }catch{return"—";}
+  }
+
+  function readStore(){
+    try{
+      const store=JSON.parse(localStorage.getItem(STORE_KEY)||"{}");
+      if(!store||typeof store!=="object")return{profiles:{}};
+      if(!store.profiles||typeof store.profiles!=="object")store.profiles={};
+      return store;
+    }catch{return{profiles:{}};}
+  }
+  function writeStore(store){
+    localStorage.setItem(STORE_KEY,JSON.stringify(store));
+  }
+  function currentName(){
+    return text(localStorage.getItem(CURRENT_KEY));
+  }
+  function snapshot(item,previous={}){
+    const guarded=typeof window.GKM_V362_CATALOG_GUARD_ITEM==="function"
+      ? window.GKM_V362_CATALOG_GUARD_ITEM(item,"my-list-v363")
+      : item;
+    return {
+      _gkmV363Snapshot:true,
+      key:stableKey(guarded),
+      id:guarded&&guarded.id,
+      tmdbId:guarded&&guarded.tmdbId,
+      kinopoiskId:guarded&&guarded.kinopoiskId,
+      mal_id:guarded&&guarded.mal_id,
+      ru:titleOfV363(guarded),
+      en:text(guarded&&(guarded.en||guarded.original_title||guarded.original_name)),
+      type:typeOfV363(guarded),
+      year:yearOfV363(guarded),
+      rating:ratingOfV363(guarded),
+      votes:votesOfV363(guarded),
+      poster:posterOfV363(guarded),
+      genres:genresOfV363(guarded),
+      overview:overviewOfV363(guarded),
+      source:text(guarded&&guarded.source),
+      status:STATUS[previous.status]?previous.status:"want",
+      season:number(
+        Object.prototype.hasOwnProperty.call(previous,"season")
+          ? previous.season
+          : (isEpisodic(guarded)?1:0),
+        0,
+        999
+      ),
+      episode:number(previous.episode,0,99999),
+      liked:Boolean(previous.liked),
+      addedAt:Number(previous.addedAt||Date.now()),
+      updatedAt:Number(previous.updatedAt||Date.now()),
+      lastWatchedAt:Number(previous.lastWatchedAt||0)
+    };
+  }
+  function ensureProfile(profile){
+    if(!profile||typeof profile!=="object")return null;
+    if(!Array.isArray(profile.myListV2))profile.myListV2=[];
+    if(!Array.isArray(profile.hiddenRecommendations))profile.hiddenRecommendations=[];
+    if(!profile.gkmV363MigratedAt){
+      const watched=profile.watched&&typeof profile.watched==="object"?profile.watched:{};
+      Object.values(watched).forEach(list=>{
+        if(!Array.isArray(list))return;
+        list.forEach(oldItem=>{
+          const source=oldItem&&oldItem.raw||oldItem;
+          if(!source||typeof source!=="object")return;
+          const oldKey=stableKey(source);
+          if(profile.myListV2.some(entry=>entry.key===oldKey))return;
+          profile.myListV2.push(snapshot(source,{
+            status:"completed",
+            addedAt:oldItem.addedAt||Date.now(),
+            lastWatchedAt:oldItem.addedAt||Date.now()
+          }));
+        });
+      });
+      profile.gkmV363MigratedAt=Date.now();
+    }
+    const dedupe=new Map();
+    profile.myListV2.forEach(raw=>{
+      if(!raw||typeof raw!=="object")return;
+      const entry=snapshot(raw,raw);
+      if(!entry.key)return;
+      const previous=dedupe.get(entry.key);
+      if(!previous||entry.updatedAt>=previous.updatedAt)dedupe.set(entry.key,entry);
+    });
+    profile.myListV2=[...dedupe.values()].slice(0,LIST_LIMIT);
+    profile.hiddenRecommendations=[...new Set(profile.hiddenRecommendations.map(String).filter(Boolean))].slice(0,3000);
+    return profile;
+  }
+  function getProfile(){
+    const name=currentName();
+    if(!name)return null;
+    const store=readStore();
+    const profile=ensureProfile(store.profiles[name]);
+    if(profile){
+      store.profiles[name]=profile;
+      writeStore(store);
+    }
+    return profile;
+  }
+  function saveProfile(profile){
+    if(!profile||!text(profile.name))return;
+    const store=readStore();
+    store.profiles[profile.name]=ensureProfile(profile);
+    writeStore(store);
+    localStorage.setItem(CURRENT_KEY,profile.name);
+    window.dispatchEvent(new CustomEvent("gkm:v363-list-updated",{detail:{profile:profile.name}}));
+  }
+  function entryFor(profile,itemOrKey){
+    const key=typeof itemOrKey==="string"?itemOrKey:stableKey(itemOrKey);
+    return ensureProfile(profile)?.myListV2.find(entry=>entry.key===key)||null;
+  }
+  function setStatus(item,status){
+    const profile=getProfile();
+    if(!profile){
+      openPanel();
+      toast("Сначала создай или открой локальный профиль.");
+      return null;
+    }
+    const key=stableKey(item);
+    const previous=entryFor(profile,key)||{};
+    const entry=snapshot(item,{...previous,status:STATUS[status]?status:"want"});
+    entry.updatedAt=Date.now();
+    if(entry.status==="completed"&&!entry.lastWatchedAt)entry.lastWatchedAt=Date.now();
+    profile.myListV2=profile.myListV2.filter(row=>row.key!==key);
+    profile.myListV2.unshift(entry);
+    saveProfile(profile);
+    cacheRecent(entry);
+    toast(`${STATUS[entry.status]}: ${entry.ru}`);
+    renderDetailControls(item);
+    renderPanel();
+    return entry;
+  }
+  function updateEntry(key,changes){
+    const profile=getProfile();
+    if(!profile)return null;
+    const index=profile.myListV2.findIndex(entry=>entry.key===key);
+    if(index<0)return null;
+    const old=profile.myListV2[index];
+    const next={...old,...changes,updatedAt:Date.now()};
+    next.season=number(next.season,0,999);
+    next.episode=number(next.episode,0,99999);
+    if(changes.episode!=null||changes.season!=null)next.lastWatchedAt=Date.now();
+    profile.myListV2.splice(index,1);
+    profile.myListV2.unshift(next);
+    saveProfile(profile);
+    renderPanel();
+    if(currentDetailItem&&stableKey(currentDetailItem)===key)renderDetailControls(currentDetailItem);
+    return next;
+  }
+  function removeEntry(key){
+    const profile=getProfile();
+    if(!profile)return;
+    profile.myListV2=profile.myListV2.filter(entry=>entry.key!==key);
+    saveProfile(profile);
+    renderPanel();
+    if(currentDetailItem&&stableKey(currentDetailItem)===key)renderDetailControls(currentDetailItem);
+  }
+
+  function ensureCss(){
+    if(document.getElementById("gkmV363Css"))return;
+    const style=document.createElement("style");
+    style.id="gkmV363Css";
+    style.textContent=`
+      #gkmV326ProfileBtn,#gkmV326Panel,#gkmV326WatchBtn{display:none!important}
+      .gkm-v363-collections{position:relative;z-index:50}
+      .gkm-v363-collections>summary{
+        list-style:none;cursor:pointer;border:1px solid rgba(0,212,255,.42);
+        border-radius:14px;padding:10px 15px;font-weight:900;color:#fff;
+        background:linear-gradient(135deg,#421b99,#097fc6);box-shadow:0 0 16px rgba(0,180,255,.2)
+      }
+      .gkm-v363-collections>summary::-webkit-details-marker{display:none}
+      .gkm-v363-collections-grid{
+        position:absolute;left:0;top:calc(100% + 8px);width:min(860px,calc(100vw - 20px));
+        display:grid;grid-template-columns:repeat(4,minmax(130px,1fr));gap:8px;padding:12px;
+        border:1px solid rgba(0,212,255,.35);border-radius:18px;
+        background:linear-gradient(145deg,rgba(5,12,30,.98),rgba(20,12,54,.98));
+        box-shadow:0 24px 70px rgba(0,0,0,.7);backdrop-filter:blur(14px)
+      }
+      .gkm-v363-collections:not([open]) .gkm-v363-collections-grid{display:none}
+      .gkm-v363-collections-grid .tab,
+      .gkm-v363-collections-grid .gkm-v174-main-btn{width:100%;margin:0!important}
+      #gkmV363ListBtn{
+        position:fixed;right:18px;bottom:148px;z-index:99997;border:1px solid rgba(57,236,190,.55);
+        background:linear-gradient(135deg,#2d259e,#00a9d9);color:#fff;border-radius:18px;
+        padding:12px 16px;font-weight:950;cursor:pointer;box-shadow:0 0 24px rgba(0,194,255,.3),0 10px 28px rgba(0,0,0,.34)
+      }
+      #gkmV363Panel{position:fixed;inset:0;z-index:100001;display:none;background:rgba(1,5,16,.78);backdrop-filter:blur(8px);color:#fff}
+      #gkmV363Panel.open{display:block}
+      .gkmV363Box{
+        position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+        width:min(1120px,calc(100vw - 24px));max-height:min(880px,calc(100vh - 24px));overflow:auto;
+        padding:18px;border:1px solid rgba(50,230,190,.38);border-radius:24px;
+        background:radial-gradient(circle at 12% 0,rgba(0,190,255,.16),transparent 34%),linear-gradient(145deg,#061329,#11123a);
+        box-shadow:0 30px 90px rgba(0,0,0,.72),0 0 50px rgba(0,210,190,.16)
+      }
+      .gkmV363Head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+      .gkmV363Head h2{margin:0;font-size:25px}.gkmV363Head p{margin:4px 0 0;opacity:.7;font-size:13px}
+      .gkmV363Close,.gkmV363Button,.gkmV363Tabs button,.gkmV363Item button,.gkmV363Rec button,
+      #gkmV363DetailControls button,#gkmV363TrailerBtn{
+        border:1px solid rgba(0,214,255,.36);background:linear-gradient(135deg,#43229b,#078fcb);
+        color:#fff;border-radius:13px;padding:9px 12px;font-weight:850;cursor:pointer
+      }
+      .gkmV363Stats{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:10px 0}
+      .gkmV363Stat{padding:10px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.045)}
+      .gkmV363Stat b{display:block;font-size:20px}.gkmV363Stat span{font-size:11px;opacity:.68}
+      .gkmV363Tabs,.gkmV363Actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+      .gkmV363Tabs button.active{background:linear-gradient(135deg,#00c8a0,#1b7eff);box-shadow:0 0 19px rgba(0,220,190,.25)}
+      .gkmV363Grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(315px,1fr));gap:10px}
+      .gkmV363Item,.gkmV363Rec{
+        display:grid;grid-template-columns:82px minmax(0,1fr);gap:11px;padding:10px;
+        border:1px solid rgba(0,214,255,.2);border-radius:17px;background:rgba(5,18,40,.75)
+      }
+      .gkmV363Item img,.gkmV363Rec img{width:82px;height:118px;object-fit:cover;border-radius:11px;background:#101728}
+      .gkmV363Item h3,.gkmV363Rec h3{font-size:15px;margin:0 0 5px;line-height:1.18}
+      .gkmV363Meta,.gkmV363Reason,.gkmV363Last{font-size:11px;line-height:1.35;opacity:.7;margin:4px 0}
+      .gkmV363Reason{color:#7ef3d4;opacity:1}
+      .gkmV363Item select,.gkmV363Item input,#gkmV363DetailControls select,#gkmV363DetailControls input,
+      .gkmV363Login input{
+        border:1px solid rgba(0,214,255,.28)!important;background:#071329!important;color:#fff!important;
+        border-radius:10px!important;padding:7px 8px!important;box-sizing:border-box
+      }
+      .gkmV363Progress{display:grid;grid-template-columns:70px 84px auto;gap:6px;margin:7px 0}
+      .gkmV363ItemActions,.gkmV363RecActions{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+      .gkmV363ItemActions button,.gkmV363RecActions button{padding:7px 9px;font-size:11px}
+      .gkmV363Empty{padding:24px;border:1px dashed rgba(0,214,255,.28);border-radius:17px;text-align:center;opacity:.75}
+      .gkmV363Login{display:grid;gap:10px;max-width:480px}.gkmV363Login input{width:100%;padding:12px!important}
+      #gkmV363Toast{
+        position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:100004;display:none;
+        max-width:min(650px,calc(100vw - 24px));padding:11px 15px;border:1px solid rgba(52,235,190,.48);
+        border-radius:14px;background:#07162c;color:#fff;font-weight:850;box-shadow:0 0 28px rgba(0,220,190,.2)
+      }
+      #gkmV363Toast.open{display:block}
+      #gkmV363DetailControls{
+        display:flex;align-items:center;gap:7px;flex-wrap:wrap;width:100%;padding:9px;
+        border:1px solid rgba(53,235,190,.3);border-radius:14px;background:rgba(0,160,130,.08)
+      }
+      #gkmV363DetailControls strong{color:#62f1ce}
+      #gkmV363TrailerPanel{
+        width:100%;margin-top:10px;padding:10px;border:1px solid rgba(0,214,255,.25);
+        border-radius:15px;background:#050b1c
+      }
+      #gkmV363TrailerPanel iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}
+      .gkmV363TrailerLinks{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+      .gkmV363TrailerLinks a{padding:8px 11px;border-radius:11px;background:#116dc0;color:#fff;text-decoration:none;font-weight:850}
+      @media(max-width:760px){
+        .gkm-v363-collections{width:100%}.gkm-v363-collections>summary{text-align:center}
+        .gkm-v363-collections-grid{position:fixed;left:8px;right:8px;top:150px;width:auto;max-height:calc(100vh - 165px);overflow:auto;grid-template-columns:1fr 1fr}
+        #gkmV363ListBtn{right:14px;bottom:136px;padding:11px 13px}
+        .gkmV363Box{width:calc(100vw - 14px);max-height:calc(100vh - 14px);padding:12px}
+        .gkmV363Stats{grid-template-columns:repeat(3,1fr)}.gkmV363Grid{grid-template-columns:1fr}
+        .gkmV363Progress{grid-template-columns:62px 76px auto}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function ensureUi(){
+    ensureCss();
+    let button=document.getElementById("gkmV363ListBtn");
+    if(!button){
+      button=document.createElement("button");
+      button.id="gkmV363ListBtn";
+      button.type="button";
+      button.textContent="👤 Мой список 2.0";
+      button.onclick=openPanel;
+      document.body.appendChild(button);
+    }
+    let panel=document.getElementById("gkmV363Panel");
+    if(!panel){
+      panel=document.createElement("div");
+      panel.id="gkmV363Panel";
+      panel.innerHTML='<div class="gkmV363Box" id="gkmV363Box"></div>';
+      panel.addEventListener("click",event=>{if(event.target===panel)closePanel();});
+      document.body.appendChild(panel);
+    }
+    if(!document.getElementById("gkmV363Toast")){
+      const toastNode=document.createElement("div");
+      toastNode.id="gkmV363Toast";
+      document.body.appendChild(toastNode);
+    }
+    if(!document.getElementById("gkmV363ImportInput")){
+      const input=document.createElement("input");
+      input.id="gkmV363ImportInput";
+      input.type="file";
+      input.accept="application/json,.json";
+      input.hidden=true;
+      input.addEventListener("change",importProfile);
+      document.body.appendChild(input);
+    }
+  }
+  function toast(message){
+    ensureUi();
+    const node=document.getElementById("gkmV363Toast");
+    node.textContent=message;
+    node.classList.add("open");
+    clearTimeout(toast._timer);
+    toast._timer=setTimeout(()=>node.classList.remove("open"),2600);
+  }
+  function openPanel(view){
+    ensureUi();
+    if(typeof view==="string")activeView=view;
+    renderPanel();
+    document.getElementById("gkmV363Panel")?.classList.add("open");
+  }
+  function closePanel(){
+    document.getElementById("gkmV363Panel")?.classList.remove("open");
+    recommendationRequest++;
+  }
+  function login(mode){
+    const name=text(document.getElementById("gkmV363Name")?.value)
+      .replace(/[^\p{L}\p{N}_\- ]/gu,"").slice(0,32);
+    const pin=text(document.getElementById("gkmV363Pin")?.value).slice(0,32);
+    if(!name){toast("Введи имя профиля.");return;}
+    const store=readStore();
+    const existing=store.profiles[name];
+    if(mode==="create"){
+      if(existing){toast("Такой профиль уже существует.");return;}
+      store.profiles[name]=ensureProfile({name,pin,createdAt:Date.now(),watched:{},myListV2:[],hiddenRecommendations:[]});
+      writeStore(store);
+      localStorage.setItem(CURRENT_KEY,name);
+      toast(`Профиль создан: ${name}`);
+      renderPanel();
+      return;
+    }
+    if(!existing){toast("Профиль не найден.");return;}
+    if(text(existing.pin)&&text(existing.pin)!==pin){toast("Неверный PIN.");return;}
+    localStorage.setItem(CURRENT_KEY,name);
+    ensureProfile(existing);
+    store.profiles[name]=existing;
+    writeStore(store);
+    toast(`Открыт профиль: ${name}`);
+    renderPanel();
+  }
+  function logout(){
+    localStorage.removeItem(CURRENT_KEY);
+    activeView="all";
+    renderPanel();
+    renderDetailControls(currentDetailItem);
+  }
+  function deleteProfile(){
+    const profile=getProfile();
+    if(!profile||!confirm(`Удалить профиль «${profile.name}» и весь его список?`))return;
+    const store=readStore();
+    delete store.profiles[profile.name];
+    writeStore(store);
+    localStorage.removeItem(CURRENT_KEY);
+    renderPanel();
+    renderDetailControls(currentDetailItem);
+  }
+
+  function stats(profile){
+    const result={all:profile.myListV2.length,want:0,watching:0,completed:0,paused:0,dropped:0};
+    profile.myListV2.forEach(entry=>{if(result[entry.status]!=null)result[entry.status]++;});
+    return result;
+  }
+  function statusOptions(selected){
+    return STATUS_ORDER.map(key=>`<option value="${key}" ${selected===key?"selected":""}>${esc(STATUS[key])}</option>`).join("");
+  }
+  function renderListItem(entry){
+    const episodic=isEpisodic(entry);
+    return `
+      <article class="gkmV363Item" data-list-key="${esc(entry.key)}">
+        ${entry.poster?`<img src="${esc(entry.poster)}" alt="" loading="lazy" decoding="async">`:`<span style="width:82px;height:118px;border-radius:11px;background:#101728"></span>`}
+        <div>
+          <h3>${esc(entry.ru)}</h3>
+          <div class="gkmV363Meta">${esc(entry.type)}${entry.year?` · ${esc(entry.year)}`:""}${entry.rating?` · ★ ${entry.rating.toFixed(1)}`:""}</div>
+          <select data-list-status="${esc(entry.key)}">${statusOptions(entry.status)}</select>
+          ${episodic?`
+            <div class="gkmV363Progress">
+              <input type="number" min="0" value="${entry.season||0}" title="Сезон" data-list-season="${esc(entry.key)}">
+              <input type="number" min="0" value="${entry.episode||0}" title="Серия" data-list-episode="${esc(entry.key)}">
+              <button type="button" data-list-plus="${esc(entry.key)}">+1 серия</button>
+            </div>
+            <div class="gkmV363Last">Последний просмотр: ${esc(formatDate(entry.lastWatchedAt))}</div>
+          `:""}
+          <div class="gkmV363ItemActions">
+            <button type="button" data-list-open="${esc(entry.key)}">Открыть</button>
+            <button type="button" data-list-like="${esc(entry.key)}">${entry.liked?"❤️ Понравилось":"♡ Нравится"}</button>
+            <button type="button" data-list-remove="${esc(entry.key)}">Удалить</button>
+          </div>
+        </div>
+      </article>
+    `;
+  }
+  function renderPanel(){
+    ensureUi();
+    const box=document.getElementById("gkmV363Box");
+    if(!box)return;
+    const profile=getProfile();
+    if(!profile){
+      box.innerHTML=`
+        <div class="gkmV363Head">
+          <div><h2>👤 Мой список 2.0</h2><p>Отдельные локальные профили, статусы и прогресс просмотра.</p></div>
+          <button class="gkmV363Close" type="button">✕</button>
+        </div>
+        <div class="gkmV363Login">
+          <input id="gkmV363Name" placeholder="Имя профиля" autocomplete="username">
+          <input id="gkmV363Pin" placeholder="PIN необязательно" autocomplete="current-password">
+          <div class="gkmV363Actions">
+            <button class="gkmV363Button" data-profile-create type="button">Создать профиль</button>
+            <button class="gkmV363Button" data-profile-login type="button">Войти</button>
+            <button class="gkmV363Button" data-profile-import type="button">Загрузить профиль</button>
+          </div>
+        </div>
+      `;
+      box.querySelector(".gkmV363Close").onclick=closePanel;
+      box.querySelector("[data-profile-create]").onclick=()=>login("create");
+      box.querySelector("[data-profile-login]").onclick=()=>login("login");
+      box.querySelector("[data-profile-import]").onclick=()=>document.getElementById("gkmV363ImportInput").click();
+      return;
+    }
+
+    const count=stats(profile);
+    const items=activeView==="all"
+      ? profile.myListV2
+      : STATUS[activeView]
+        ? profile.myListV2.filter(entry=>entry.status===activeView)
+        : [];
+    box.innerHTML=`
+      <div class="gkmV363Head">
+        <div><h2>👤 ${esc(profile.name)} · Мой список 2.0</h2><p>Данные хранятся на этом устройстве и доступны офлайн.</p></div>
+        <button class="gkmV363Close" type="button">✕</button>
+      </div>
+      <div class="gkmV363Stats">
+        <div class="gkmV363Stat"><b>${count.all}</b><span>Всего</span></div>
+        ${STATUS_ORDER.map(key=>`<div class="gkmV363Stat"><b>${count[key]}</b><span>${esc(STATUS[key])}</span></div>`).join("")}
+      </div>
+      <div class="gkmV363Tabs">
+        <button type="button" data-list-view="all" class="${activeView==="all"?"active":""}">Все</button>
+        ${STATUS_ORDER.map(key=>`<button type="button" data-list-view="${key}" class="${activeView===key?"active":""}">${esc(STATUS[key])}</button>`).join("")}
+        <button type="button" data-list-view="recommendations" class="${activeView==="recommendations"?"active":""}">✨ Для меня</button>
+      </div>
+      <div class="gkmV363Actions">
+        <button type="button" data-profile-export>Сохранить профиль</button>
+        <button type="button" data-profile-import>Загрузить профиль</button>
+        <button type="button" data-profile-share>Поделиться списком</button>
+        <button type="button" id="gkmV363InstallBtn" ${installPrompt?"":"hidden"}>📲 Установить приложение</button>
+        <button type="button" data-profile-logout>Выйти</button>
+        <button type="button" data-profile-delete>Удалить профиль</button>
+      </div>
+      <div id="gkmV363PanelContent">
+        ${activeView==="recommendations"
+          ? `<div class="gkmV363Empty">Собираю персональные рекомендации для профиля «${esc(profile.name)}»…</div>`
+          : `<div class="gkmV363Grid">${items.length?items.map(renderListItem).join(""):`<div class="gkmV363Empty">В этом разделе пока пусто.</div>`}</div>`
+        }
+      </div>
+    `;
+    bindPanelEvents(profile);
+    if(activeView==="recommendations")loadRecommendations(profile);
+  }
+  function bindPanelEvents(profile){
+    const box=document.getElementById("gkmV363Box");
+    box.querySelector(".gkmV363Close").onclick=closePanel;
+    box.querySelectorAll("[data-list-view]").forEach(button=>{
+      button.onclick=()=>{activeView=button.dataset.listView;renderPanel();};
+    });
+    box.querySelector("[data-profile-export]").onclick=exportProfile;
+    box.querySelector("[data-profile-import]").onclick=()=>document.getElementById("gkmV363ImportInput").click();
+    box.querySelector("[data-profile-share]").onclick=shareProfile;
+    box.querySelector("[data-profile-logout]").onclick=logout;
+    box.querySelector("[data-profile-delete]").onclick=deleteProfile;
+    const installButton=box.querySelector("#gkmV363InstallBtn");
+    if(installButton)installButton.onclick=installPwa;
+    box.querySelectorAll("[data-list-status]").forEach(select=>{
+      select.onchange=()=>updateEntry(select.dataset.listStatus,{status:select.value,lastWatchedAt:select.value==="completed"?Date.now():entryFor(profile,select.dataset.listStatus)?.lastWatchedAt||0});
+    });
+    box.querySelectorAll("[data-list-season]").forEach(input=>{
+      input.onchange=()=>updateEntry(input.dataset.listSeason,{season:number(input.value)});
+    });
+    box.querySelectorAll("[data-list-episode]").forEach(input=>{
+      input.onchange=()=>updateEntry(input.dataset.listEpisode,{episode:number(input.value)});
+    });
+    box.querySelectorAll("[data-list-plus]").forEach(button=>{
+      button.onclick=()=>{
+        const entry=entryFor(getProfile(),button.dataset.listPlus);
+        if(entry)updateEntry(entry.key,{episode:number(entry.episode)+1,status:entry.status==="want"?"watching":entry.status,lastWatchedAt:Date.now()});
+      };
+    });
+    box.querySelectorAll("[data-list-like]").forEach(button=>{
+      button.onclick=()=>{
+        const entry=entryFor(getProfile(),button.dataset.listLike);
+        if(entry)updateEntry(entry.key,{liked:!entry.liked});
+      };
+    });
+    box.querySelectorAll("[data-list-remove]").forEach(button=>{
+      button.onclick=()=>removeEntry(button.dataset.listRemove);
+    });
+    box.querySelectorAll("[data-list-open]").forEach(button=>{
+      button.onclick=()=>{
+        const entry=entryFor(getProfile(),button.dataset.listOpen);
+        if(!entry)return;
+        closePanel();
+        setTimeout(()=>{try{if(typeof openDetails==="function")openDetails(entry);}catch{}},60);
+      };
+    });
+  }
+
+  function loadedCatalogPool(){
+    const pool=[];
+    try{if(typeof collectVisiblePool==="function")pool.push(...collectVisiblePool());}catch{}
+    try{if(Array.isArray(currentItems))pool.push(...currentItems);}catch{}
+    try{
+      if(homeData&&homeData.sections)Object.values(homeData.sections).forEach(section=>{
+        if(Array.isArray(section))pool.push(...section);
+        else if(section&&Array.isArray(section.items))pool.push(...section.items);
+      });
+    }catch{}
+    const map=new Map();
+    pool.forEach(raw=>{
+      const item=typeof window.GKM_V362_CATALOG_GUARD_ITEM==="function"
+        ? window.GKM_V362_CATALOG_GUARD_ITEM(raw,"personal-recommendations")
+        : raw;
+      if(!item||item.__gkmV362Quarantine)return;
+      const key=stableKey(item);
+      if(key&&!map.has(key))map.set(key,item);
+    });
+    return [...map.values()];
+  }
+  function positiveSeeds(profile){
+    return profile.myListV2
+      .filter(entry=>entry.liked||entry.status==="completed"||entry.status==="watching")
+      .sort((a,b)=>Number(b.liked)-Number(a.liked)||(b.lastWatchedAt||b.updatedAt)-(a.lastWatchedAt||a.updatedAt))
+      .slice(0,5);
+  }
+  function candidateScore(item,seeds){
+    const itemGenres=new Set(genresOfV363(item).map(norm));
+    const itemType=norm(typeOfV363(item));
+    let best=null;
+    for(const seed of seeds){
+      const common=(seed.genres||[]).map(norm).filter(genre=>genre&&itemGenres.has(genre)).length;
+      const sameType=itemType===norm(seed.type)?1:0;
+      const score=common*180+sameType*55+ratingOfV363(item)*8+Math.min(65,Math.log10(votesOfV363(item)+1)*11);
+      if(!best||score>best.score)best={score,seed,common,sameType};
+    }
+    return best;
+  }
+  async function loadRecommendations(profile){
+    const request=++recommendationRequest;
+    const seeds=positiveSeeds(profile);
+    const target=document.getElementById("gkmV363PanelContent");
+    if(!seeds.length){
+      if(target)target.innerHTML='<div class="gkmV363Empty">Добавь просмотренные или текущие проекты. После этого здесь появятся отдельные рекомендации для этого профиля.</div>';
+      return;
+    }
+    let pool=loadedCatalogPool();
+    if(typeof window.GKM_V359_SHARED_CATALOG_SEARCH==="function"){
+      const searches=seeds.slice(0,3).map(seed=>{
+        const query=[seed.type,(seed.genres||[]).slice(0,3).join(" "),`похожее на ${seed.ru}`].filter(Boolean).join(" ");
+        return window.GKM_V359_SHARED_CATALOG_SEARCH(query,{exactTitle:false}).catch(()=>({items:[]}));
+      });
+      const results=await Promise.all(searches);
+      results.forEach(result=>{if(Array.isArray(result&&result.items))pool.push(...result.items);});
+    }
+    if(request!==recommendationRequest||activeView!=="recommendations")return;
+    const excluded=new Set(profile.myListV2.map(entry=>entry.key));
+    const hidden=new Set(profile.hiddenRecommendations);
+    const map=new Map();
+    pool.forEach(item=>{
+      const key=stableKey(item);
+      if(!key||excluded.has(key)||hidden.has(key)||map.has(key))return;
+      const match=candidateScore(item,seeds);
+      if(!match||(!match.common&&!match.sameType))return;
+      map.set(key,{item,key,...match});
+    });
+    const rows=[...map.values()].sort((a,b)=>b.score-a.score).slice(0,18);
+    const content=document.getElementById("gkmV363PanelContent");
+    if(!content)return;
+    content.innerHTML=rows.length
+      ? `<div class="gkmV363Grid">${rows.map(row=>renderRecommendation(row)).join("")}</div>`
+      : '<div class="gkmV363Empty">Пока мало данных для точной рекомендации. Добавь ещё несколько просмотренных проектов.</div>';
+    content.querySelectorAll("[data-rec-open]").forEach(button=>{
+      button.onclick=()=>{
+        const row=rows.find(item=>item.key===button.dataset.recOpen);
+        if(!row)return;
+        closePanel();
+        setTimeout(()=>{try{if(typeof openDetails==="function")openDetails(row.item);}catch{}},60);
+      };
+    });
+    content.querySelectorAll("[data-rec-hide]").forEach(button=>{
+      button.onclick=()=>{
+        const fresh=getProfile();
+        if(!fresh)return;
+        fresh.hiddenRecommendations=[...new Set([...fresh.hiddenRecommendations,button.dataset.recHide])];
+        saveProfile(fresh);
+        toast("Больше не будем предлагать эту карточку.");
+        loadRecommendations(fresh);
+      };
+    });
+  }
+  function renderRecommendation(row){
+    const item=row.item;
+    const reason=row.seed.liked
+      ? `Рекомендуем, потому что понравилась «${row.seed.ru}»`
+      : `Рекомендуем, потому что в списке есть «${row.seed.ru}»`;
+    const poster=posterOfV363(item);
+    return `
+      <article class="gkmV363Rec">
+        ${poster?`<img src="${esc(poster)}" alt="" loading="lazy" decoding="async">`:`<span style="width:82px;height:118px;border-radius:11px;background:#101728"></span>`}
+        <div>
+          <h3>${esc(titleOfV363(item))}</h3>
+          <div class="gkmV363Meta">${esc(typeOfV363(item))}${yearOfV363(item)?` · ${esc(yearOfV363(item))}`:""}${ratingOfV363(item)?` · ★ ${ratingOfV363(item).toFixed(1)}`:""}</div>
+          <div class="gkmV363Reason">${esc(reason)}</div>
+          <div class="gkmV363RecActions">
+            <button type="button" data-rec-open="${esc(row.key)}">Открыть</button>
+            <button type="button" data-rec-hide="${esc(row.key)}">Не предлагать это</button>
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  function exportProfile(){
+    const profile=getProfile();
+    if(!profile)return;
+    const safeProfile=JSON.parse(JSON.stringify(profile));
+    safeProfile.pin="";
+    const payload={
+      schema:"gkm-profile-v363",
+      version:363,
+      exportedAt:new Date().toISOString(),
+      profile:safeProfile
+    };
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const link=document.createElement("a");
+    link.href=url;
+    link.download=`golub-profile-${profile.name.replace(/[^\p{L}\p{N}_-]+/gu,"-")||"profile"}.json`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    toast("Профиль сохранён в JSON.");
+  }
+  async function importProfile(event){
+    const file=event.target.files&&event.target.files[0];
+    event.target.value="";
+    if(!file)return;
+    try{
+      const raw=JSON.parse(await file.text());
+      const imported=raw&&raw.profile||raw;
+      if(!imported||typeof imported!=="object"||!text(imported.name))throw new Error("Некорректный профиль");
+      imported.name=text(imported.name).replace(/[^\p{L}\p{N}_\- ]/gu,"").slice(0,32)||"Импорт";
+      imported.pin="";
+      const profile=ensureProfile(imported);
+      const store=readStore();
+      if(store.profiles[profile.name]&&!confirm(`Заменить локальный профиль «${profile.name}»?`))return;
+      store.profiles[profile.name]=profile;
+      writeStore(store);
+      localStorage.setItem(CURRENT_KEY,profile.name);
+      activeView="all";
+      toast(`Профиль загружен: ${profile.name}`);
+      renderPanel();
+    }catch(error){
+      console.warn("GKM V363 profile import",error);
+      toast("Не получилось загрузить профиль: неверный JSON.");
+    }
+  }
+  async function shareProfile(){
+    const profile=getProfile();
+    if(!profile)return;
+    const lines=profile.myListV2.slice(0,80).map(entry=>`• ${entry.ru} — ${STATUS[entry.status]||entry.status}${isEpisodic(entry)&&entry.episode?` (сезон ${entry.season||1}, серия ${entry.episode})`:""}`);
+    const shareText=[`Мой список «${profile.name}» в ГОЛУБЬ Каталог Мира:`,...lines].join("\n");
+    try{
+      if(navigator.share){
+        await navigator.share({title:`Мой список — ${profile.name}`,text:shareText,url:location.href});
+        return;
+      }
+      await navigator.clipboard.writeText(shareText);
+      toast("Список скопирован в буфер обмена.");
+    }catch(error){
+      if(error&&error.name!=="AbortError")toast("Не получилось поделиться списком.");
+    }
+  }
+
+  function renderDetailControls(item){
+    currentDetailItem=item||currentDetailItem;
+    const holder=document.querySelector("#detailsDialog .detail-buttons");
+    if(!holder||!currentDetailItem)return;
+    let controls=document.getElementById("gkmV363DetailControls");
+    if(!controls){
+      controls=document.createElement("div");
+      controls.id="gkmV363DetailControls";
+      holder.insertBefore(controls,holder.firstChild);
+    }
+    const profile=getProfile();
+    const entry=profile?entryFor(profile,currentDetailItem):null;
+    const selected=entry?.status||"want";
+    controls.innerHTML=profile?`
+      <strong>Мой список:</strong>
+      <select id="gkmV363DetailStatus">${statusOptions(selected)}</select>
+      ${isEpisodic(currentDetailItem)?`
+        <input id="gkmV363DetailSeason" type="number" min="0" value="${entry?.season??1}" title="Сезон" placeholder="Сезон">
+        <input id="gkmV363DetailEpisode" type="number" min="0" value="${entry?.episode||0}" title="Серия" placeholder="Серия">
+        <button id="gkmV363DetailPlus" type="button">+1 серия</button>
+      `:""}
+      <button id="gkmV363DetailLike" type="button">${entry?.liked?"❤️ Понравилось":"♡ Нравится"}</button>
+      <small>${entry?`Сохранено · ${formatDate(entry.lastWatchedAt||entry.updatedAt)}`:"Выбери статус — карточка сохранится"}</small>
+    `:`
+      <strong>Мой список 2.0</strong>
+      <button id="gkmV363DetailLogin" type="button">Войти в профиль</button>
+    `;
+    if(!profile){
+      document.getElementById("gkmV363DetailLogin").onclick=()=>openPanel();
+      ensureTrailerButton(currentDetailItem);
+      return;
+    }
+    document.getElementById("gkmV363DetailStatus").onchange=event=>{
+      const saved=setStatus(currentDetailItem,event.target.value);
+      if(saved&&isEpisodic(currentDetailItem)){
+        const season=number(document.getElementById("gkmV363DetailSeason")?.value);
+        const episode=number(document.getElementById("gkmV363DetailEpisode")?.value);
+        updateEntry(saved.key,{season,episode,lastWatchedAt:episode?Date.now():saved.lastWatchedAt});
+      }
+    };
+    const seasonInput=document.getElementById("gkmV363DetailSeason");
+    const episodeInput=document.getElementById("gkmV363DetailEpisode");
+    if(seasonInput)seasonInput.onchange=()=> {
+      const saved=entryFor(getProfile(),currentDetailItem)||setStatus(currentDetailItem,"watching");
+      if(saved)updateEntry(saved.key,{season:number(seasonInput.value),lastWatchedAt:Date.now()});
+    };
+    if(episodeInput)episodeInput.onchange=()=> {
+      const saved=entryFor(getProfile(),currentDetailItem)||setStatus(currentDetailItem,"watching");
+      if(saved)updateEntry(saved.key,{episode:number(episodeInput.value),status:saved.status==="want"?"watching":saved.status,lastWatchedAt:Date.now()});
+    };
+    const plus=document.getElementById("gkmV363DetailPlus");
+    if(plus)plus.onclick=()=>{
+      const saved=entryFor(getProfile(),currentDetailItem)||setStatus(currentDetailItem,"watching");
+      if(saved)updateEntry(saved.key,{episode:number(saved.episode)+1,status:saved.status==="want"?"watching":saved.status,lastWatchedAt:Date.now()});
+    };
+    document.getElementById("gkmV363DetailLike").onclick=()=>{
+      const saved=entryFor(getProfile(),currentDetailItem)||setStatus(currentDetailItem,"want");
+      if(saved)updateEntry(saved.key,{liked:!saved.liked});
+    };
+    ensureTrailerButton(currentDetailItem);
+  }
+
+  function clearTrailer(){
+    trailerKey="";
+    document.getElementById("gkmV363TrailerPanel")?.remove();
+    const button=document.getElementById("gkmV363TrailerBtn");
+    if(button)button.textContent="▶ Трейлер";
+  }
+  function ensureTrailerButton(item){
+    const holder=document.querySelector("#detailsDialog .detail-buttons");
+    if(!holder||!item)return;
+    let button=document.getElementById("gkmV363TrailerBtn");
+    if(!button){
+      button=document.createElement("button");
+      button.id="gkmV363TrailerBtn";
+      button.type="button";
+      button.textContent="▶ Трейлер";
+      holder.appendChild(button);
+    }
+    button.onclick=()=>toggleTrailer(item);
+  }
+  function toggleTrailer(item){
+    const key=stableKey(item);
+    const existing=document.getElementById("gkmV363TrailerPanel");
+    if(existing&&trailerKey===key){
+      clearTrailer();
+      return;
+    }
+    clearTrailer();
+    trailerKey=key;
+    const query=`${titleOfV363(item)} ${yearOfV363(item)} официальный трейлер`.trim();
+    const encoded=encodeURIComponent(query);
+    const panel=document.createElement("div");
+    panel.id="gkmV363TrailerPanel";
+    panel.innerHTML=`
+      <b>▶ Трейлер: ${esc(titleOfV363(item))}</b>
+      <div class="gkmV363TrailerLinks">
+        <a href="https://www.youtube.com/results?search_query=${encoded}" target="_blank" rel="noreferrer">YouTube</a>
+        <a href="https://rutube.ru/search/?query=${encoded}" target="_blank" rel="noreferrer">Rutube</a>
+      </div>
+      <iframe
+        src="https://www.youtube-nocookie.com/embed?listType=search&list=${encoded}"
+        title="Трейлер ${esc(titleOfV363(item))}"
+        loading="eager"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+      <small>Видео загружено только после нажатия. Автовоспроизведение отключено.</small>
+    `;
+    document.querySelector("#detailsDialog .dialog-content")?.appendChild(panel);
+    const button=document.getElementById("gkmV363TrailerBtn");
+    if(button)button.textContent="■ Скрыть трейлер";
+  }
+
+  function patchDetails(){
+    if(window.GKM_V363_DETAILS_PATCHED==="1"||typeof openDetails!=="function")return;
+    const previous=openDetails;
+    openDetails=function gkmV363OpenDetails(item){
+      currentDetailItem=item;
+      cacheRecent(item);
+      clearTrailer();
+      const result=previous.apply(this,arguments);
+      setTimeout(()=>renderDetailControls(item),0);
+      setTimeout(()=>renderDetailControls(item),160);
+      return result;
+    };
+    window.GKM_V363_DETAILS_PATCHED="1";
+    const dialog=document.getElementById("detailsDialog");
+    dialog?.addEventListener("close",clearTrailer);
+    document.getElementById("closeDialog")?.addEventListener("click",clearTrailer);
+  }
+
+  function installCollections(){
+    const collections=document.getElementById("gkmV363Collections");
+    if(!collections)return;
+    const grid=collections.querySelector(".gkm-v363-collections-grid");
+    const nav=collections.closest(".tabs");
+    if(grid&&nav){
+      const mainTabs=new Set(["all","movies","series","cartoons","anime"]);
+      nav.querySelectorAll(".tab").forEach(button=>{
+        if(!mainTabs.has(button.dataset.tab||"")&&!grid.contains(button))grid.appendChild(button);
+      });
+      nav.querySelectorAll(".gkm-v174-main-btn").forEach(button=>{
+        if(!grid.contains(button))grid.appendChild(button);
+      });
+    }
+    collections.querySelectorAll(".tab,.gkm-v174-main-btn").forEach(button=>{
+      if(button.dataset.gkmV363CollectionBound==="1")return;
+      button.dataset.gkmV363CollectionBound="1";
+      button.addEventListener("click",()=>{
+        if(window.innerWidth<900)collections.open=false;
+      });
+    });
+    if(collections.dataset.gkmV363Installed==="1")return;
+    collections.dataset.gkmV363Installed="1";
+    document.addEventListener("click",event=>{
+      if(collections.open&&!collections.contains(event.target))collections.open=false;
+    });
+  }
+
+  async function registerPwa(){
+    if(!("serviceWorker" in navigator)||!/^https?:$/.test(location.protocol))return;
+    if(window.GKM_V363_SW_REGISTERED==="1")return;
+    window.GKM_V363_SW_REGISTERED="1";
+    try{
+      await navigator.serviceWorker.register("sw.js?v=363",{scope:"./"});
+    }catch(error){
+      window.GKM_V363_SW_REGISTERED="0";
+      console.warn("GKM V363 service worker",error);
+    }
+  }
+  async function installPwa(){
+    if(!installPrompt){toast("Установка появится, когда браузер подготовит приложение.");return;}
+    installPrompt.prompt();
+    try{await installPrompt.userChoice;}catch{}
+    installPrompt=null;
+    renderPanel();
+  }
+  function install(){
+    ensureUi();
+    installCollections();
+    patchDetails();
+    renderDetailControls(currentDetailItem);
+    registerPwa();
+  }
+
+  window.addEventListener("beforeinstallprompt",event=>{
+    event.preventDefault();
+    installPrompt=event;
+    const button=document.getElementById("gkmV363InstallBtn");
+    if(button)button.hidden=false;
+  });
+  window.addEventListener("appinstalled",()=>{
+    installPrompt=null;
+    toast("ГОЛУБЬ Каталог Мира установлен.");
+  });
+  window.addEventListener("gkm:v363-list-updated",()=> {
+    const button=document.getElementById("gkmV363ListBtn");
+    const profile=getProfile();
+    if(button)button.textContent=`👤 Мой список 2.0${profile?` · ${profile.myListV2.length}`:""}`;
+  });
+
+  window.GKM_V363_MY_LIST=Object.freeze({
+    version:window.GKM_V363_MY_LIST_PWA_VERSION,
+    statuses:STATUS,
+    getCurrentProfile:getProfile,
+    setStatus,
+    updateEntry,
+    removeEntry,
+    open:openPanel,
+    recommend:()=>{activeView="recommendations";openPanel("recommendations");},
+    installPwa
+  });
+
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});
+  else install();
+  setTimeout(install,700);
+  setTimeout(install,1800);
+  setTimeout(install,3400);
+
+  console.log("GKM V363: My List 2.0, personal recommendations, trailers and PWA installed");
+})();
+/* GKM V363 MY LIST 2.0, RECOMMENDATIONS, PWA AND TRAILERS END */

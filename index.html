@@ -9,7 +9,12 @@
   <meta name="keywords" content="Голубь Каталог Мира, фильмы, сериалы, аниме, мультфильмы, каталог фильмов, топ фильмов, новинки кино, популярные сериалы, лучшее аниме">
   <meta name="robots" content="index, follow">
   <meta name="author" content="ГОЛУБЬ Каталог Мира">
+  <meta name="theme-color" content="#071126">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="canonical" href="https://dragokas371158989-png.github.io/films-series-best-5000/">
+  <link rel="manifest" href="manifest.webmanifest?v=363">
 
   <meta property="og:url" content="https://dragokas371158989-png.github.io/films-series-best-5000/">
   <meta property="og:title" content="ГОЛУБЬ Каталог Мира">
@@ -20,7 +25,7 @@
 
   <link rel="icon" type="image/png" href="favicon.png.png">
   <link rel="shortcut icon" type="image/png" href="favicon.png.png">
-  <link rel="apple-touch-icon" href="favicon.png.png">
+  <link rel="apple-touch-icon" href="pwa-icon-192.png">
   <link rel="preload" as="image" href="logo-banner.webp" type="image/webp" fetchpriority="high">
   <link rel="preconnect" href="https://avatars.mds.yandex.net" crossorigin>
   <link rel="preconnect" href="https://image.tmdb.org" crossorigin>
@@ -169,22 +174,27 @@
     <button class="tab" data-tab="series" type="button">Сериалы</button>
     <button class="tab" data-tab="cartoons" type="button">Мультфильмы</button>
     <button class="tab" data-tab="anime" type="button">Аниме</button>
-    <button class="tab" data-tab="anime_top" type="button">Топ аниме 100</button>
-    <button class="tab" data-tab="anime_studios" type="button">Топ студий</button>
-    <button class="tab" data-tab="top" type="button">Топ 250</button>
-    <button class="tab" data-tab="new" type="button">Новинки</button>
-    <button class="tab" data-tab="new_soon" type="button">Скоро выйдет</button>
-    <button class="tab" data-tab="new_released" type="button">Уже вышло</button>
-    <button class="tab" data-tab="new_popular" type="button">Популярное 2026</button>
-    <button class="tab" data-tab="top_current_year" type="button">Топ 2026</button>
-    <button class="tab" data-tab="top_2020s" type="button">Топ 2020-х</button>
-    <button class="tab" data-tab="top_2010s" type="button">Топ 2010-х</button>
-    <button class="tab" data-tab="top_2000s" type="button">Топ 2000-х</button>
-    <button class="tab" data-tab="top_1990s" type="button">Топ 90-х</button>
-    <button class="tab" data-tab="popular" type="button">Популярное</button>
-    <button class="tab" data-tab="fav" type="button">Избранное</button>
-    <button class="tab" data-tab="history" type="button">История</button>
-    <button class="tab" data-tab="random" type="button">Случайное</button>
+    <details id="gkmV363Collections" class="gkm-v363-collections">
+      <summary>🔥 Подборки</summary>
+      <div class="gkm-v363-collections-grid">
+        <button class="tab" data-tab="anime_top" type="button">Топ аниме 100</button>
+        <button class="tab" data-tab="anime_studios" type="button">Топ студий</button>
+        <button class="tab" data-tab="top" type="button">Топ 250</button>
+        <button class="tab" data-tab="new" type="button">Новинки</button>
+        <button class="tab" data-tab="new_soon" type="button">Скоро выйдет</button>
+        <button class="tab" data-tab="new_released" type="button">Уже вышло</button>
+        <button class="tab" data-tab="new_popular" type="button">Популярное 2026</button>
+        <button class="tab" data-tab="top_current_year" type="button">Топ 2026</button>
+        <button class="tab" data-tab="top_2020s" type="button">Топ 2020-х</button>
+        <button class="tab" data-tab="top_2010s" type="button">Топ 2010-х</button>
+        <button class="tab" data-tab="top_2000s" type="button">Топ 2000-х</button>
+        <button class="tab" data-tab="top_1990s" type="button">Топ 90-х</button>
+        <button class="tab" data-tab="popular" type="button">Популярное</button>
+        <button class="tab" data-tab="fav" type="button">Избранное</button>
+        <button class="tab" data-tab="history" type="button">История</button>
+        <button class="tab" data-tab="random" type="button">Случайное</button>
+      </div>
+    </details>
   </nav>
 
   <section class="seo-text">
@@ -257,7 +267,7 @@
     </div>
   </dialog>
 
-  <script src="app.js?v=362"></script>
+  <script src="app.js?v=363"></script>
 
 <!-- GKM AI CHAT UI V58 RESTORED -->
 <button id="gkmAiFloatBtn" class="ai-float-btn" type="button" aria-label="Открыть чат">🤖</button>
