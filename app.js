@@ -43,7 +43,9 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "355";
+const GKM_DATA_CACHE_VERSION = "364";
+window.GKM_V364_INTEGRITY_SPEED_VERSION =
+  "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V359_SHARED_SEARCH_VERSION = "v359-shared-main-ai-full-catalog-search-2026-07-28";
 window.GKM_V360_EXACT_FULL_SOURCE_SEARCH_VERSION = "v360-exact-full-source-title-search-2026-07-28";
 const GKM_V360_TITLE_ALIAS_GROUPS = [
@@ -245,7 +247,11 @@ window.GKM_V361_CONFIRMED_MEDIA_REPAIRS = GKM_V361_CONFIRMED_MEDIA_REPAIRS;
 
 /* GKM V362 AUTOMATIC CATALOG CONTROL START */
 const GKM_V362_CATALOG_CONTROL_VERSION =
-  "v362-automatic-catalog-control-2026-07-29";
+  "v364-automatic-full-catalog-control-2026-07-29";
+const GKM_V364_CATALOG_HEALTH_URL =
+  "data/fast/catalog_health_v364.json";
+let GKM_V364_FULL_CATALOG_HEALTH = null;
+let GKM_V364_FULL_CATALOG_HEALTH_PROMISE = null;
 const GKM_V362_MEDIA_TYPES = new Set([
   "фильм", "сериал", "аниме", "мультфильм",
   "movie", "series", "anime", "cartoon", "tv"
@@ -571,18 +577,62 @@ function gkmV362Esc(value) {
   }[char]));
 }
 
+function gkmV364LoadFullCatalogHealth() {
+  if (GKM_V364_FULL_CATALOG_HEALTH) {
+    return Promise.resolve(GKM_V364_FULL_CATALOG_HEALTH);
+  }
+  if (GKM_V364_FULL_CATALOG_HEALTH_PROMISE) {
+    return GKM_V364_FULL_CATALOG_HEALTH_PROMISE;
+  }
+  GKM_V364_FULL_CATALOG_HEALTH_PROMISE = fetch(
+    withDataVersion(GKM_V364_CATALOG_HEALTH_URL),
+    { cache: "force-cache" }
+  )
+    .then(response => {
+      if (!response.ok) throw new Error(`catalog health ${response.status}`);
+      return response.json();
+    })
+    .then(report => {
+      GKM_V364_FULL_CATALOG_HEALTH = report;
+      gkmV362RenderCatalogPanel();
+      return report;
+    })
+    .catch(error => {
+      console.warn("GKM V364 catalog health", error);
+      return null;
+    });
+  return GKM_V364_FULL_CATALOG_HEALTH_PROMISE;
+}
+
 function gkmV362RenderCatalogPanel() {
   const panel = document.getElementById("gkmV362CatalogPanel");
   if (!panel) return;
   const report = gkmV362CatalogReport();
+  const full = GKM_V364_FULL_CATALOG_HEALTH;
   const sampleRows = report.samples.slice(-12).reverse();
   const content = panel.querySelector("#gkmV362CatalogContent");
   if (!content) return;
   content.innerHTML = `
     <div class="gkmV362GuardStatus">
       <b>Защита включена</b>
-      <span>Проверяются все загружаемые списки до показа карточек.</span>
+      <span>Проверяются все загружаемые списки до показа карточек; полный индекс сверяется автоматически.</span>
     </div>
+    <div class="gkmV364FullAudit">
+      <b>${full ? "Полная проверка завершена" : "Загружаю полный отчёт…"}</b>
+      <span>${full
+        ? `${Number(full.catalogItems || 0).toLocaleString("ru-RU")} карточек · ${gkmV362Esc(String(full.generatedAt || "").replace("T", " ").replace("Z", " UTC"))}`
+        : "Локальный старт сайта не блокируется: отчёт подгружается только при открытии «Контроля»."}</span>
+    </div>
+    ${full ? `
+      <div class="gkmV362GuardStats gkmV364FullStats">
+        <div><b>${Number(full.catalogItems || 0).toLocaleString("ru-RU")}</b><span>во всём индексе</span></div>
+        <div><b>${Number(full.confirmedRepairsPresent || 0).toLocaleString("ru-RU")}</b><span>коллизий исправлено</span></div>
+        <div><b>${Number(full.crossMediaIdCollisions || 0).toLocaleString("ru-RU")}</b><span>ID смешано</span></div>
+        <div><b>${Number(full.duplicateSourceMediaKeys || 0).toLocaleString("ru-RU")}</b><span>дублей ключей</span></div>
+        <div><b>${Number(full.missingPosters || 0).toLocaleString("ru-RU")}</b><span>без постера</span></div>
+        <div><b>${Number(full.genericTitles || 0).toLocaleString("ru-RU")}</b><span>служебных названий</span></div>
+      </div>
+    ` : ""}
     <div class="gkmV362GuardStats">
       <div><b>${report.scanned.toLocaleString("ru-RU")}</b><span>проверено</span></div>
       <div><b>${report.repaired.toLocaleString("ru-RU")}</b><span>исправлено</span></div>
@@ -606,8 +656,8 @@ function gkmV362RenderCatalogPanel() {
       `).join("") : `<p>Пока ошибок в загруженных данных не найдено.</p>`}
     </div>
     <p class="gkmV362GuardNote">
-      Контроль работает без предварительной загрузки всего 100-тысячного индекса, поэтому не замедляет старт сайта.
-      Полный индекс дополнительно проверяется перед выдачей ZIP.
+      Живая защита работает без загрузки 100-тысячного индекса и не замедляет старт.
+      Полный отчёт V364 создаётся сборкой и ночной проверкой каталога.
     </p>
   `;
 }
@@ -636,6 +686,8 @@ function gkmV362InstallCatalogPanel() {
       #gkmV362CatalogClose{border:1px solid rgba(38,230,167,.48);background:#0b6e85;color:#fff;border-radius:13px;padding:9px 13px;font-weight:900;cursor:pointer}
       .gkmV362GuardStatus,.gkmV362GuardRules{display:grid;gap:5px;padding:14px;border:1px solid rgba(38,230,167,.28);border-radius:17px;background:rgba(25,173,142,.1);margin-bottom:12px}
       .gkmV362GuardStatus b{color:#50f0c5;font-size:18px}.gkmV362GuardStatus span,.gkmV362GuardRules span{opacity:.78}
+      .gkmV364FullAudit{display:grid;gap:4px;padding:13px;border:1px solid rgba(103,233,255,.28);border-radius:16px;background:rgba(9,62,91,.46);margin-bottom:10px}
+      .gkmV364FullAudit b{color:#67e9ff}.gkmV364FullAudit span{font-size:12px;opacity:.76}
       .gkmV362GuardStats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}
       .gkmV362GuardStats div{padding:13px;border:1px solid rgba(0,205,255,.23);border-radius:16px;background:rgba(6,26,55,.78)}
       .gkmV362GuardStats b{display:block;font-size:23px;color:#67e9ff}.gkmV362GuardStats span{font-size:12px;opacity:.72}
@@ -670,8 +722,8 @@ function gkmV362InstallCatalogPanel() {
       <div class="gkmV362GuardBox">
         <div class="gkmV362GuardHead">
           <div>
-            <h2>🛡 Контроль каталога V362</h2>
-            <p>Автоматическая защита карточек до их появления на экране</p>
+            <h2>🛡 Контроль каталога V364</h2>
+            <p>Живая защита и полный автоматический аудит всех карточек</p>
           </div>
           <button id="gkmV362CatalogClose" type="button">Закрыть</button>
         </div>
@@ -683,6 +735,7 @@ function gkmV362InstallCatalogPanel() {
 
   button.onclick = () => {
     gkmV362RenderCatalogPanel();
+    gkmV364LoadFullCatalogHealth();
     if (typeof panel.showModal === "function") panel.showModal();
     else panel.setAttribute("open", "open");
   };
@@ -2251,7 +2304,7 @@ function makeSearchWorker() {
     }
     function sortRows(sort, hasQuery, tab, cleanTrash){
       const pr=(a,b)=>poster(b.item)-poster(a.item);
-      const canClean = cleanTrash !== false && !["new","new_soon","new_released","new_popular","anime_top"].includes(tab);
+      const canClean = cleanTrash !== false && !hasQuery && !["new","new_soon","new_released","new_popular","anime_top"].includes(tab);
       if(canClean){
         rows = rows.filter(x=>!lowTrust(x.item,tab));
       }
@@ -2279,7 +2332,7 @@ function makeSearchWorker() {
       }
     }
     async function loadIndex(){if(!indexPromise)indexPromise=fetch(SEARCH_LITE_URL,{cache:"force-cache"}).then(r=>{if(r.ok)return r.json();return fetch(SEARCH_FULL_URL,{cache:"force-cache"}).then(full=>{if(!full.ok)throw new Error("search_lite "+r.status+" / search_index "+full.status);return full.json();});});return indexPromise;}
-    function shardKey(q){const c=String(q||"").trim()[0]||"";return /^[0-9a-zа-я]$/i.test(c)?c.toLowerCase():"";}
+    function shardKey(q){const key=norm(q).replace(/\\s+/g,"").slice(0,1);return /^[0-9a-zа-я]$/i.test(key)?key:"";}
     async function loadShard(key){if(!key)return [];if(!shardPromises.has(key)){const url=withDataVersion(SHARD_BASE+encodeURIComponent(key)+".json");shardPromises.set(key,fetch(url,{cache:"force-cache"}).then(r=>{if(r.status===404)return [];if(!r.ok)return [];return r.json();}).catch(()=>[]));}return shardPromises.get(key);}
     async function candidateIndex(queries){if(!queries.length)return loadIndex();const keys=[...new Set(queries.map(shardKey).filter(Boolean))];if(!keys.length)return loadIndex();const lists=await Promise.all(keys.map(loadShard));const seen=new Set();const out=[];for(const list of lists){for(const rawItem of list||[]){const item=catalogGuardItem(rawItem);if(!item)continue;const id=catalogStableKey(item);if(seen.has(id))continue;seen.add(id);out.push(item);}}return out;}
     function buildRows(index, c, queries, known){const out=[];const seen=new Set();for(const rawItem of index){const item=catalogGuardItem(rawItem);if(!item)continue;const key=catalogStableKey(item);if(seen.has(key))continue;seen.add(key);if(!pass(item,c))continue;const s=score(item,queries,known);if(!queries.length||s>0)out.push({item,score:s});}return out;}
@@ -15449,14 +15502,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V357_EFFECTS_STUDIO_VERSION = "v357-effects-studio-2026-07-27";
   window.GKM_V358_POSTER_ATLAS_VERSION = "v358-poster-atlas-diagnostics-2026-07-27";
   window.GKM_V363_ADAPTIVE_CANVAS_QUALITY_VERSION = "v363-adaptive-canvas-quality-2026-07-29";
+  window.GKM_V364_BALANCED_POSTER_ATLAS_VERSION = "v364-balanced-poster-atlas-2026-07-29";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
   const COARSE_CACHE = new Map();
   const ATLAS_SHEET_CACHE = new Map();
   const WALL_SEED_URL = "data/fast/poster_wall_v333/seed_all.json?v=354";
-  const ATLAS_BASE_URL = "data/fast/poster_atlas_v358/";
-  const ATLAS_MANIFEST_URL = `${ATLAS_BASE_URL}manifest.json?v=358`;
+  const ATLAS_BASE_URL = "data/fast/poster_atlas_v364/";
+  const ATLAS_MANIFEST_URL = `${ATLAS_BASE_URL}manifest.json?v=364`;
 
   let canvas = null;
   let ctx = null;
@@ -15534,21 +15588,21 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let qualityLastRender = 0;
   let pageHidden = document.hidden;
 
-  const FIRST_CONCURRENCY = 36;
-  const REST_CONCURRENCY = 48;
-  const TAIL_CONCURRENCY = 64;
-  const BACKDROP_CONCURRENCY = 8;
+  const FIRST_CONCURRENCY = 18;
+  const REST_CONCURRENCY = 24;
+  const TAIL_CONCURRENCY = 30;
+  const BACKDROP_CONCURRENCY = 6;
   const TILE_FADE_MS = 170;
   const MAX_ACTIVE_REVEALS = 96;
   const REVEALS_PER_FRAME = 24;
-  const PRIMARY_IMAGE_TIMEOUT_MS = 850;
-  const FALLBACK_IMAGE_TIMEOUT_MS = 1200;
-  const TAIL_PRIMARY_TIMEOUT_MS = 600;
-  const TAIL_FALLBACK_TIMEOUT_MS = 900;
-  const COARSE_IMAGE_TIMEOUT_MS = 1100;
-  const TARGET_CELL_W = 42;
-  const TARGET_CELL_H = 63;
-  const MAX_SCREEN_TILES = 900;
+  const PRIMARY_IMAGE_TIMEOUT_MS = 4200;
+  const FALLBACK_IMAGE_TIMEOUT_MS = 5500;
+  const TAIL_PRIMARY_TIMEOUT_MS = 3200;
+  const TAIL_FALLBACK_TIMEOUT_MS = 4500;
+  const COARSE_IMAGE_TIMEOUT_MS = 6000;
+  const TARGET_CELL_W = 58;
+  const TARGET_CELL_H = 87;
+  const MAX_SCREEN_TILES = 600;
   const LENS_SIZE = 420;
   const LENS_RADIUS = LENS_SIZE / 2;
   const MAGNET_RADIUS = 190;
@@ -15615,7 +15669,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return posterOf(item);
   }
   function keyOf(item){
-    return String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || `${titleOf(item)}|${yearOf(item)}|${posterOf(item)}`);
+    const id=String((item && (item.id || item.kinopoiskId || item.tmdbId || item.mal_id || item.slug)) || "");
+    const source=n(item && (item.source || item.provider) || "catalog") || "catalog";
+    return id
+      ? `${familyOf(item)}|${source}|${id}`
+      : `${familyOf(item)}|${n(titleOf(item))}|${yearOf(item)}|${posterIdentity(item)}`;
   }
   function posterIdentity(item){
     const raw=t(posterOf(item));
@@ -15864,7 +15922,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     atlasManifestPromise=fetch(ATLAS_MANIFEST_URL,{cache:"force-cache"})
       .then(response=>response.ok?response.json():null)
       .then(manifest=>{
-        if(!manifest||String(manifest.version)!=="358"||!manifest.entries){
+        if(!manifest||String(manifest.version)!=="364"||!manifest.entries){
           return null;
         }
         const lookup=new Map();
@@ -15891,7 +15949,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function atlasSheetUrl(file){
-    return `${ATLAS_BASE_URL}${encodeURIComponent(String(file||""))}?v=358`;
+    return `${ATLAS_BASE_URL}${encodeURIComponent(String(file||""))}?v=364`;
   }
 
   function loadAtlasSheet(file,priority="auto"){
@@ -15978,6 +16036,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const j=Math.floor(rnd()*(i+1));
       [arr[i],arr[j]]=[arr[j],arr[i]];
     }
+  }
+  function posterTransportScore(item){
+    const raw=t(posterOf(item));
+    try{
+      const host=new URL(raw,location.href).hostname.toLowerCase();
+      if(host.includes("avatars.mds.yandex.net")) return 90;
+      if(host.includes("cdn.myanimelist.net")) return 85;
+      if(host.includes("st.kp.yandex.net")||host.includes("kinopoiskapiunofficial.tech")) return 80;
+      if(host==="image.tmdb.org"||host==="media.themoviedb.org") return 65;
+      if(host.includes("wsrv.nl")||host.includes("images.weserv.nl")) return 55;
+    }catch(e){}
+    return 40;
   }
   function fallbackUrlsFor(kind,needed){
     const map={
@@ -17252,6 +17322,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     shuffle(preferred);
     shuffle(atlasRest);
     shuffle(external);
+    external.sort((a,b)=>posterTransportScore(b)-posterTransportScore(a));
     const mixed=preferred.concat(atlasRest,external);
     const visible=Math.min(target,mixed.length);
     wallItems=mixed.slice(0,visible);
@@ -17567,8 +17638,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V363</div>
-          <div class="gkmV343Sub">Локальный Poster Atlas быстро заполняет экран; внешняя сеть используется только как уникальный резерв.</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V364</div>
+          <div class="gkmV343Sub">Сбалансированный локальный Poster Atlas мгновенно заполняет фильмы, сериалы, аниме и мультфильмы; внешняя сеть остаётся резервом.</div>
         </div>
         <div class="gkmV343Actions">
           <button data-kind="all">Все</button>
@@ -17637,7 +17708,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       </div>
       <div id="gkmV358DiagnosticsPanel" aria-label="Диагностика Canvas">
         <div class="gkmV358DiagnosticsHead">
-          <b>📊 Диагностика V358</b>
+          <b>📊 Диагностика V364</b>
           <button id="gkmV358DiagnosticsClose" type="button">Закрыть</button>
         </div>
         <div id="gkmV358DiagnosticsContent"></div>
@@ -17815,7 +17886,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     posterTransportVersion:window.GKM_V355_FAST_POSTER_TRANSPORT_VERSION,
     magneticWaveVersion:window.GKM_V356_MAGNETIC_WAVE_VERSION,
     effectsStudioVersion:window.GKM_V357_EFFECTS_STUDIO_VERSION,
-    posterAtlasVersion:window.GKM_V358_POSTER_ATLAS_VERSION,
+    posterAtlasVersion:window.GKM_V364_BALANCED_POSTER_ATLAS_VERSION,
     atlas:{manifest:ATLAS_MANIFEST_URL,maxScreenTiles:MAX_SCREEN_TILES},
     effects:["magnet","water","spotlight","living","domino","fisheye"],
     qualityModes:["auto","fast","beautiful"],
@@ -17834,7 +17905,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   setTimeout(install,500);
   setTimeout(install,1400);
 
-  console.log("GKM V358: local poster atlas and Canvas performance diagnostics installed");
+  console.log("GKM V364: balanced poster atlas, fast search shards and Canvas diagnostics installed");
 })();
 /* GKM V343 SOFT FISHEYE VIDEO WALL END */
 
@@ -20227,7 +20298,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=363",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=364",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);
