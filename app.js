@@ -43,9 +43,11 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "364";
+const GKM_DATA_CACHE_VERSION = "365";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
+window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
+  "v365-mobile-card-aspect-canvas-tap-dock-2026-07-30";
 window.GKM_V359_SHARED_SEARCH_VERSION = "v359-shared-main-ai-full-catalog-search-2026-07-28";
 window.GKM_V360_EXACT_FULL_SOURCE_SEARCH_VERSION = "v360-exact-full-source-title-search-2026-07-28";
 const GKM_V360_TITLE_ALIAS_GROUPS = [
@@ -1579,6 +1581,20 @@ function posterTargetWidth(img) {
   return img && img.id === "detailPoster" ? 342 : 185;
 }
 
+function syncPosterAspect(img) {
+  if (!img || !img.closest || !img.naturalWidth || !img.naturalHeight) return;
+  const wrap = img.closest(".poster-wrap");
+  if (!wrap) return;
+  const ratio = img.naturalWidth / img.naturalHeight;
+  const isLandscape = ratio > 1.08;
+  wrap.classList.toggle("gkm-poster-landscape", isLandscape);
+  if (isLandscape) {
+    wrap.style.setProperty("--gkm-poster-ratio", `${img.naturalWidth} / ${img.naturalHeight}`);
+  } else {
+    wrap.style.removeProperty("--gkm-poster-ratio");
+  }
+}
+
 function recoverPosterImage(img) {
   if (!img || img.dataset.posterDone === "1") return;
   const original = img.dataset.originalSrc || "";
@@ -1711,6 +1727,7 @@ function schedulePosterRecovery(root = document) {
             familyCard.querySelector(".gkm-family-empty")?.remove();
           }
           const wrap = img.closest && img.closest(".poster-wrap");
+          syncPosterAspect(img);
           const ph = wrap && wrap.querySelector(".poster-placeholder");
           if (ph) ph.remove();
         }
@@ -1722,6 +1739,7 @@ function schedulePosterRecovery(root = document) {
         if (!img.dataset.posterDone && (!img.complete || img.naturalWidth === 0)) recoverPosterImage(img);
       }, 11000);
     }
+    if (img.complete && img.naturalWidth > 0) syncPosterAspect(img);
 
     const alwaysFast =
       img.id === "detailPoster" ||
@@ -15503,6 +15521,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   window.GKM_V358_POSTER_ATLAS_VERSION = "v358-poster-atlas-diagnostics-2026-07-27";
   window.GKM_V363_ADAPTIVE_CANVAS_QUALITY_VERSION = "v363-adaptive-canvas-quality-2026-07-29";
   window.GKM_V364_BALANCED_POSTER_ATLAS_VERSION = "v364-balanced-poster-atlas-2026-07-29";
+  window.GKM_V365_CANVAS_TOUCH_OPEN_VERSION = "v365-canvas-touch-open-2026-07-30";
 
   const JSON_CACHE = new Map();
   const THUMB_CACHE = new Map();
@@ -17267,6 +17286,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function tryOpen(item){
+    try{
+      if(typeof openDetails==="function"){ openDetails(item); return true; }
+    }catch(e){}
     const names=["openDetails","openTitleModal","showDetails","showModal","openCard","openMovie","openItemModal"];
     for(const name of names){
       try{
@@ -17599,7 +17621,11 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       #gkmV343Status div{font-size:11px;color:rgba(255,255,255,.72);line-height:1.35}
       .gkmV343Hint{position:absolute;right:18px;bottom:18px;z-index:8;color:rgba(255,255,255,.7);font-size:11px;text-align:right;text-shadow:0 0 8px #000;pointer-events:none}
       @media(max-width:700px){
-        #gkmV343Btn{right:14px!important;bottom:82px!important;padding:12px 14px!important}
+        #gkmV343Btn{
+          right:10px!important;bottom:72px!important;width:56px!important;height:56px!important;
+          padding:0!important;border-radius:17px!important;font-size:0!important;overflow:hidden!important
+        }
+        #gkmV343Btn::before{content:"🖼️";font-size:23px;line-height:1}
         .gkmV343Title{font-size:17px}.gkmV343Sub{font-size:10px}.gkmV343Actions button{padding:8px 9px;font-size:12px}
         .gkmV343Top{left:8px;right:8px;top:8px}
         #gkmV343Lens{display:none}
@@ -17638,7 +17664,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V364</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V365</div>
           <div class="gkmV343Sub">Сбалансированный локальный Poster Atlas мгновенно заполняет фильмы, сериалы, аниме и мультфильмы; внешняя сеть остаётся резервом.</div>
         </div>
         <div class="gkmV343Actions">
@@ -17777,9 +17803,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     };
 
     canvas.addEventListener("pointermove",onMove,{passive:true});
+    canvas.addEventListener("pointerdown",event=>{
+      const index=indexAt(event.clientX,event.clientY);
+      if(index<0) return;
+      hoverIndex=index;
+      pointerTargetX=event.clientX;
+      pointerTargetY=event.clientY;
+      showPreview(wallItems[index]);
+    },{passive:true});
     canvas.addEventListener("pointerleave",pointerLeave);
-    canvas.addEventListener("click",()=>{
-      const item=wallItems[hoverIndex];
+    canvas.addEventListener("click",event=>{
+      const directIndex=indexAt(event.clientX,event.clientY);
+      const item=wallItems[directIndex>=0?directIndex:hoverIndex];
       if(item) openItem(item);
     });
 
@@ -19706,7 +19741,11 @@ Endpoint: ${endpoint||"не задан"}`;
       @media(max-width:760px){
         .gkm-v363-collections{width:100%}.gkm-v363-collections>summary{text-align:center}
         .gkm-v363-collections-grid{position:fixed;left:8px;right:8px;top:150px;width:auto;max-height:calc(100vh - 165px);overflow:auto;grid-template-columns:1fr 1fr}
-        #gkmV363ListBtn{right:14px;bottom:136px;padding:11px 13px}
+        #gkmV363ListBtn{
+          right:10px;bottom:132px;width:56px;height:56px;padding:0;border-radius:17px;
+          font-size:0;overflow:hidden
+        }
+        #gkmV363ListBtn::before{content:"👤";font-size:23px;line-height:1}
         .gkmV363Box{width:calc(100vw - 14px);max-height:calc(100vh - 14px);padding:12px}
         .gkmV363Stats{grid-template-columns:repeat(3,1fr)}.gkmV363Grid{grid-template-columns:1fr}
         .gkmV363Progress{grid-template-columns:62px 76px auto}
@@ -20298,7 +20337,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=364",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=365",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);

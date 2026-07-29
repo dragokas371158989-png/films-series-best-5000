@@ -2024,3 +2024,37 @@ body #grid:has(.studio-top-grid){display:block !important;}
 #gkmFamilyBlock .poster-missing > img.gkm-family-poster {
   display:none !important;
 }
+
+/* GKM V365 — mobile card aspect and compact action dock */
+@media (max-width: 760px) {
+  .grid .poster-wrap,
+  .home-row .poster-wrap {
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 2 / 3 !important;
+  }
+
+  .grid .poster-wrap.gkm-poster-landscape,
+  .home-row .poster-wrap.gkm-poster-landscape {
+    aspect-ratio: var(--gkm-poster-ratio, 16 / 9) !important;
+  }
+
+  .grid .poster-wrap > img,
+  .home-row .poster-wrap > img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    object-fit: cover !important;
+  }
+
+  body .ai-float-btn {
+    right: 10px !important;
+    bottom: 12px !important;
+    width: 54px !important;
+    height: 54px !important;
+    border-radius: 17px !important;
+    font-size: 22px !important;
+  }
+}
