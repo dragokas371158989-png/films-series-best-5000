@@ -558,12 +558,24 @@ def evidence_overlap(a: dict,b: dict) -> bool:
     overlap={n for n in na&nb if len(n)>=4}
     return bool(overlap)
 
+
+def source_media_identity(x: dict) -> str:
+    iid=str(x.get('id') or '').strip()
+    if not iid:return ''
+    source=norm(x.get('source') or x.get('provider') or 'catalog') or 'catalog'
+    typ=norm(x.get('type') or x.get('category'))
+    family='movie' if typ in {'фильм','movie','film'} else 'tv'
+    explicit=norm(x.get('tmdb_media_type') or x.get('media_type') or x.get('sourceMediaType'))
+    if source.startswith('tmdb') and explicit in {'movie','tv'}:family=explicit
+    return f'{source}|{family}|{iid}'
+
+
 def merge_items(items: list[dict], stats: Counter) -> list[dict]:
     # First remove exact ID duplicates across sources/chunks.
     by_id=defaultdict(list); without_id=[]
     for x in items:
-        iid=str(x.get('id') or '').strip()
-        (by_id[iid] if iid else without_id).append(x) if iid else without_id.append(x)
+        identity=source_media_identity(x)
+        (by_id[identity] if identity else without_id).append(x) if identity else without_id.append(x)
     id_clean=[]
     for iid,group in by_id.items():
         if len(group)==1:

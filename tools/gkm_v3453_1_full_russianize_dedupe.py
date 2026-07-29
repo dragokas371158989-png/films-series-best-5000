@@ -292,6 +292,24 @@ def stable_id(item: dict) -> str:
     return str(item.get("id") or "").strip()
 
 
+def source_media_identity(item: dict) -> str:
+    """Never merge equal numeric IDs from different providers or TMDB media types."""
+    iid = stable_id(item)
+    if not iid:
+        return ""
+    source = norm(item.get("source") or item.get("provider") or "catalog") or "catalog"
+    media_type = item_type(item)
+    family = "movie" if norm(media_type) in {"фильм", "movie", "film"} else "tv"
+    explicit = norm(
+        item.get("tmdb_media_type")
+        or item.get("media_type")
+        or item.get("sourceMediaType")
+    )
+    if source.startswith("tmdb") and explicit in {"movie", "tv"}:
+        family = explicit
+    return f"{source}|{family}|{iid}"
+
+
 def merge_items(base: dict, other: dict, stats: Counter) -> dict:
     result = dict(base)
     aliases = list(result.get("aliases") or [])
@@ -350,8 +368,9 @@ def conservative_dedupe(items: list[dict], stats: Counter) -> list[dict]:
 
     for item in items:
         iid = stable_id(item)
-        if iid and iid in by_id:
-            index = by_id[iid]
+        identity = source_media_identity(item)
+        if identity and identity in by_id:
+            index = by_id[identity]
             output[index] = merge_items(output[index], item, stats)
             stats["duplicate_ids_removed"] += 1
             continue
@@ -371,15 +390,15 @@ def conservative_dedupe(items: list[dict], stats: Counter) -> list[dict]:
 
         if index is not None:
             output[index] = merge_items(output[index], item, stats)
-            if iid:
-                by_id[iid] = index
+            if identity:
+                by_id[identity] = index
             stats["semantic_duplicates_removed"] += 1
             continue
 
         index = len(output)
         output.append(dict(item))
-        if iid:
-            by_id[iid] = index
+        if identity:
+            by_id[identity] = index
         if original:
             by_key.setdefault(key, index)
 

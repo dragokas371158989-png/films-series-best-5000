@@ -271,6 +271,15 @@ def update_page(path: Path, payload: dict) -> bool:
     changed = replace_meta(changed, "description", description)
     changed = replace_meta(changed, "og:title", title)
     changed = replace_meta(changed, "og:description", description)
+    if payload["poster"]:
+        changed = replace_meta(changed, "og:image", payload["poster"])
+        changed = re.sub(
+            r'(<section\b[^>]*class=["\'][^"\']*\bhero\b[^"\']*["\'][^>]*>.*?<img\b[^>]*\bsrc=)["\'][^"\']*["\']',
+            lambda match: match.group(1) + f'"{html.escape(payload["poster"], quote=True)}"',
+            changed,
+            count=1,
+            flags=re.I | re.S,
+        )
     changed = re.sub(
         r'(<img\b[^>]*\balt=)["\'][^"\']*["\']',
         lambda match: match.group(1) + f'"{html.escape(title, quote=True)}"',

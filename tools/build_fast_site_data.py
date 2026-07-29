@@ -6,6 +6,8 @@ DATA_DIR = Path("data")
 FAST_DIR = DATA_DIR / "fast"
 FAST_TMP_DIR = DATA_DIR / "fast_tmp_build"
 INDEX_PATH = DATA_DIR / "index.json"
+CATALOG_REPAIRS_PATH = DATA_DIR / "catalog_repairs_v364.json"
+MANUAL_CATALOG_PATH = DATA_DIR / "manual_catalog_v364.json"
 
 PAGE_SIZE = int(os.environ.get("GKM_FAST_PAGE_SIZE", "60"))
 HOME_LIMIT = int(os.environ.get("GKM_FAST_HOME_LIMIT", "18"))
@@ -18,6 +20,9 @@ PRESERVED_FAST_PATHS = (
     "anime_studios_top.json",
     "anime_studios_detail.json",
     "poster_wall_v333",
+    "poster_atlas_v364",
+    "search_shards",
+    "catalog_health_v364.json",
 )
 
 GENRE_MAP = {
@@ -379,6 +384,38 @@ def generated_overview(title, item_type, year, genres):
     tail = f" Жанры: {genre_text}." if genre_text else ""
     return f"«{title}» — {item_type}{year_text} из каталога «ГОЛУБЬ Каталог Мира».{tail} Описание будет дополнено после следующего обновления данных."
 
+
+def load_confirmed_repairs():
+    value = load_json(CATALOG_REPAIRS_PATH)
+    if isinstance(value, dict) and isinstance(value.get("repairs"), dict):
+        return value["repairs"]
+    return {}
+
+
+CONFIRMED_REPAIRS_V364 = load_confirmed_repairs()
+
+
+def apply_confirmed_repair_v364(item):
+    if norm(item.get("source")) != "tmdb":
+        return item
+    repair = CONFIRMED_REPAIRS_V364.get(str(item.get("id") or ""))
+    if not isinstance(repair, list) or len(repair) < 3:
+        return item
+    title, item_type, genres = repair[:3]
+    title = clean_text(title)
+    item_type = clean_text(item_type)
+    genres = [clean_text(value) for value in genres if clean_text(value)]
+    original = clean_text(item.get("en") or item.get("original_title") or item.get("original_name"))
+    item["ru"] = title
+    item["type"] = item_type
+    item["genres"] = genres
+    item["aliases"] = list(dict.fromkeys(value for value in (title, original) if value))
+    item["overview"] = generated_overview(title, item_type, item.get("year"), genres)
+    item["overviewGenerated"] = True
+    endpoint = "movie" if item_type == "Фильм" else "tv"
+    item["sourceMediaKey"] = f"tmdb:{endpoint}:{item.get('id')}"
+    return item
+
 def stable_id(item, i):
     for k in ("id", "uid", "tmdbId", "tmdb_id", "kinopoiskId", "filmId", "mal_id", "malId", "shikimori_id"):
         if item.get(k) not in (None, ""):
@@ -584,6 +621,7 @@ def card_item(raw, i):
     x["studio"] = x.get("studio") or x.get("studios") or ""
     x["country"] = x.get("country") or x.get("countries") or ""
     x["ageRating"] = x.get("ageRating") or x.get("age") or ""
+    apply_confirmed_repair_v364(x)
 
     # Западным мультам не оставляем жанр Аниме
     if x["type"] == "Мультфильм":
@@ -671,6 +709,10 @@ def collect_items():
         items = extract_items(data)
         print(f"{p}: {len(items)}")
         raw.extend(items)
+    manual = extract_items(load_json(MANUAL_CATALOG_PATH))
+    if manual:
+        print(f"{MANUAL_CATALOG_PATH}: {len(manual)}")
+        raw.extend(manual)
     return raw
 
 def merge_deduped_items(winner, loser):
@@ -750,7 +792,8 @@ def page_item(x):
         "player", "playerUrl", "video", "videoUrl", "url", "src", "iframe",
         "rutube", "watchUrl", "watch", "trailer", "trailerUrl", "players",
         "videoLinks", "links", "sources", "tmdbId", "tmdb_id", "kinopoiskId",
-        "filmId", "mal_id", "malId", "shikimori_id", "mergedDuplicateIds"
+        "filmId", "mal_id", "malId", "shikimori_id", "mergedDuplicateIds",
+        "sourceMediaKey"
     )
     out = {}
     for key in keep:
@@ -814,6 +857,7 @@ def search_item(x):
         "status": x.get("status") or "",
         "ageRating": x.get("ageRating") or x.get("age") or "",
         "source": x.get("source"),
+        "sourceMediaKey": x.get("sourceMediaKey") or "",
         "search": search_text,
         "recScore": x.get("recScore"),
         "overviewGenerated": bool(x.get("overviewGenerated")),
@@ -889,8 +933,8 @@ def main():
         "genres": genres_all,
         "years": years,
         "pages": pages,
-        "builderVersion": "v344-light-pages-search-lite-generated-overviews-2026-07-12",
-        "searchIndexVersion": "v344-full-plus-lite-fallback",
+        "builderVersion": "v364-source-media-identity-repairs-2026-07-29",
+        "searchIndexVersion": "v364-full-plus-alphabet-shards",
         "notes": [
             "types are fixed at build time",
             "Scooby and western cartoons are cartoons, not anime",
