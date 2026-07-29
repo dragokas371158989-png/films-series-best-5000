@@ -1,0 +1,74 @@
+name: GKM V364 Catalog Control
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gkm-v364-catalog-control
+  cancel-in-progress: false
+
+jobs:
+  control:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout current catalog
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install atlas dependency
+        run: python -m pip install --disable-pip-version-check pillow==12.0.0
+
+      - name: Bake repairs, search shards and full health report
+        run: python tools/gkm_v364_integrity_speed.py
+
+      - name: Rebuild balanced poster atlas when catalog changed
+        run: python tools/gkm_v364_build_poster_atlas.py --target 400 --workers 12 --timeout 30
+
+      - name: Static release gate
+        run: |
+          node --check app.js
+          node --check ai_search_worker_v343.js
+          node --check ai_search_worker_v344.js
+          node --check sw.js
+          python -m py_compile \
+            tools/build_fast_site_data.py \
+            tools/gkm_v349_repair_static_pages.py \
+            tools/gkm_v364_integrity_speed.py \
+            tools/gkm_v364_build_poster_atlas.py
+          python tools/gkm_v364_integrity_speed.py --check
+          grep -q "GKM_V343_HUMAN_AI_WEATHER" app.js
+          grep -q "GKM_V364_BALANCED_POSTER_ATLAS_VERSION" app.js
+          ! grep -qi "cylinderGeometry" app.js
+
+      - name: Commit verified V364 data
+        run: |
+          git config user.name "gkm-v364-control"
+          git config user.email "gkm-v364-control@users.noreply.github.com"
+          git add \
+            data/catalog_repairs_v364.json \
+            data/manual_catalog_v364.json \
+            data/fast \
+            film/*.html \
+            TEST_REPORT_V364_INTEGRITY_SPEED.json \
+            TEST_REPORT_V364_POSTER_ATLAS.json
+          if git diff --cached --quiet; then
+            echo "Catalog is already healthy"
+            exit 0
+          fi
+          git commit -m "Apply V364 automatic catalog control"
+          git pull --rebase origin main
+          git push origin main
