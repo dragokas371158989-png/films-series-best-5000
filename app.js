@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "367";
+const GKM_DATA_CACHE_VERSION = "368";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
@@ -20394,7 +20394,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=367",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=368",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);
@@ -20566,6 +20566,12 @@ Endpoint: ${endpoint||"не задан"}`;
       return "Наруто: Ураганные хроники 1 — Адепты Тёмного царства";
     }
     if(includesAny(raw,[
+      "konoha no sato no dai undoukai","hidden leaf village grand sports festival",
+      "спортивный фестиваль конохи"
+    ])){
+      return "Наруто: Спортивный фестиваль Конохи";
+    }
+    if(includesAny(raw,[
       "ninja clash in the land of snow","daikatsugeki yuki hime",
       "snow princess book of ninja arts","битва ниндзя в стране снега",
       "снежной принцессы"
@@ -20589,6 +20595,27 @@ Endpoint: ${endpoint||"не задан"}`;
       "пылающий экзамен на тюнина","наруто против конохамару"
     ])){
       return "Наруто: Пылающий экзамен на тюнина! Наруто против Конохамару!";
+    }
+    if(includesAny(raw,[
+      "takigakure no shitou","protect the waterfall village",
+      "битва на хидден фолс","битва на хидден фоллс"
+    ])){
+      return "Наруто: Битва на Хидден-Фолс";
+    }
+    if(includesAny(raw,["the cross roads","cross roads","пересечение дорог"])){
+      return "Наруто: Пересечение дорог";
+    }
+    if(includesAny(raw,[
+      "akaki yotsuba no clover","find the crimson four leaf clover",
+      "красного четырехлистного клевера","красного четырёхлистного клевера"
+    ])){
+      return "Наруто: В поисках красного четырёхлистного клевера";
+    }
+    if(includesAny(raw,[
+      "shippuu konoha gakuen den","konoha high school",
+      "школьные хроники конохи"
+    ])){
+      return "Наруто: Ураганные хроники — Школьные хроники Конохи";
     }
     if(includesAny(raw,["sunny side battle","солнечная сторона битвы"])){
       return "Наруто: Ураганные хроники — Битва на солнечной стороне";
@@ -20833,3 +20860,99 @@ Endpoint: ${endpoint||"не задан"}`;
   console.log("GKM V367: full Russian part titles and collection identity fixed");
 })();
 /* GKM V367 FRANCHISE TITLE AND COLLECTION IDENTITY FIX END */
+
+
+/* GKM V368 FRESH SHELL AND FAMILY TITLE SYNC START */
+(function(){
+  window.GKM_V368_FRESH_SHELL_FAMILY_TITLES_VERSION =
+    "v368-fresh-shell-and-family-title-sync-2026-07-30";
+
+  function text(value){
+    return String(value == null ? "" : value).replace(/\s+/g," ").trim();
+  }
+
+  function rowKey(item){
+    try{
+      if(typeof gkmV362StableKey==="function")return text(gkmV362StableKey(item));
+    }catch{}
+    const source=text(item&&(item.source||item.provider)||"catalog").toLowerCase();
+    const id=text(item&&(item.id||item.tmdbId||item.kinopoiskId||item.mal_id));
+    return id?`${source}|${id}`:"";
+  }
+
+  function familyRows(){
+    const roots=[
+      typeof selectedItem!=="undefined"?selectedItem:null,
+      window.currentDetailItem,
+      window.detailItem
+    ].filter(Boolean);
+    for(const root of roots){
+      if(Array.isArray(root.__gkmCollectionItems))return root.__gkmCollectionItems;
+    }
+    return [];
+  }
+
+  function syncFamilyTitles(){
+    const block=document.getElementById("gkmFamilyBlock");
+    if(!block)return;
+    const rows=familyRows();
+    const byKey=new Map(rows.map(item=>[rowKey(item),item]).filter(entry=>entry[0]));
+
+    block.querySelectorAll(".gkm-family-card").forEach(card=>{
+      const titleNode=card.querySelector(".gkm-family-title");
+      if(!titleNode)return;
+      const key=text(card.dataset.gkmV333Id||card.dataset.gkmFamilyId);
+      let item=byKey.get(key);
+
+      if(!item){
+        const alt=text(card.querySelector(".gkm-family-alt")?.textContent);
+        const year=text(card.querySelector(".gkm-family-meta")?.textContent).match(/(19\d{2}|20\d{2})/)?.[1]||"";
+        item={
+          ru:text(titleNode.textContent),
+          en:alt,
+          year,
+          type:"Аниме",
+          aliases:[alt].filter(Boolean)
+        };
+      }
+
+      let title="";
+      try{title=text(displayTitle(item));}catch{}
+      if(!title&&window.GKM_V367_FRANCHISE_TEST){
+        try{title=text(window.GKM_V367_FRANCHISE_TEST.specificTitle(item));}catch{}
+      }
+      if(title)titleNode.textContent=title;
+    });
+  }
+
+  function install(){
+    if(window.GKM_V368_FAMILY_SYNC_INSTALLED==="1")return;
+    window.GKM_V368_FAMILY_SYNC_INSTALLED="1";
+    const dialog=document.getElementById("detailsDialog");
+    if(dialog){
+      let frame=0;
+      new MutationObserver(()=>{
+        if(frame)return;
+        frame=requestAnimationFrame(()=>{
+          frame=0;
+          syncFamilyTitles();
+        });
+      }).observe(dialog,{childList:true,subtree:true});
+    }
+    document.addEventListener("click",()=>{
+      setTimeout(syncFamilyTitles,60);
+      setTimeout(syncFamilyTitles,350);
+    },true);
+    setTimeout(syncFamilyTitles,0);
+  }
+
+  window.GKM_V368_SYNC_FAMILY_TITLES=syncFamilyTitles;
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",install,{once:true});
+  }else{
+    install();
+  }
+
+  console.log("GKM V368: fresh shell and family title sync installed");
+})();
+/* GKM V368 FRESH SHELL AND FAMILY TITLE SYNC END */

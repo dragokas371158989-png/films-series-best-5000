@@ -1,5 +1,5 @@
-/* GKM V367 PWA: shell + explicitly opened posters only. */
-const VERSION = "v367-2026-07-30";
+/* GKM V368 PWA: fresh critical shell + explicitly opened posters only. */
+const VERSION = "v368-2026-07-30";
 const SHELL_CACHE = `gkm-shell-${VERSION}`;
 const RECENT_CACHE = `gkm-recent-${VERSION}`;
 const CACHE_PREFIX = "gkm-";
@@ -7,9 +7,9 @@ const SHELL_URLS = [
   "./",
   "./index.html",
   "./style.css",
-  "./app.js?v=367",
+  "./app.js?v=368",
   "./ai_search_worker_v343.js",
-  "./manifest.webmanifest?v=367",
+  "./manifest.webmanifest?v=368",
   "./logo-banner.webp",
   "./pwa-icon-192.png",
   "./pwa-icon-512.png"
@@ -58,14 +58,12 @@ async function networkFirstNavigation(request) {
   }
 }
 
-async function shellFirst(request) {
-  const cached = await caches.match(request, {ignoreSearch: true});
+async function currentShellFirst(request) {
+  const cache = await caches.open(SHELL_CACHE);
+  const cached = await cache.match(request);
   if (cached) return cached;
   const response = await fetch(request);
-  if (response && response.ok) {
-    const cache = await caches.open(SHELL_CACHE);
-    await cache.put(request, response.clone());
-  }
+  if (response && response.ok) await cache.put(request, response.clone());
   return response;
 }
 
@@ -91,7 +89,7 @@ self.addEventListener("fetch", event => {
   ]);
   const fileName = url.pathname.split("/").pop();
   if (shellNames.has(fileName) || url.pathname.endsWith("/")) {
-    event.respondWith(shellFirst(request));
+    event.respondWith(currentShellFirst(request));
   }
 });
 
