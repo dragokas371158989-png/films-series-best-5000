@@ -43,13 +43,15 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "366";
+const GKM_DATA_CACHE_VERSION = "367";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
   "v365-mobile-card-aspect-canvas-tap-dock-2026-07-30";
+window.GKM_V367_RUSSIAN_TITLE_CONTROL_VERSION =
+  "v367-source-aware-russian-title-and-collection-control-2026-07-30";
 window.GKM_V366_RUSSIAN_TITLE_CONTROL_VERSION =
-  "v366-source-aware-russian-title-control-2026-07-30";
+  window.GKM_V367_RUSSIAN_TITLE_CONTROL_VERSION;
 window.GKM_V359_SHARED_SEARCH_VERSION = "v359-shared-main-ai-full-catalog-search-2026-07-28";
 window.GKM_V360_EXACT_FULL_SOURCE_SEARCH_VERSION = "v360-exact-full-source-title-search-2026-07-28";
 const GKM_V360_TITLE_ALIAS_GROUPS = [
@@ -251,11 +253,11 @@ window.GKM_V361_CONFIRMED_MEDIA_REPAIRS = GKM_V361_CONFIRMED_MEDIA_REPAIRS;
 
 /* GKM V362 AUTOMATIC CATALOG CONTROL START */
 const GKM_V362_CATALOG_CONTROL_VERSION =
-  "v366-automatic-russian-title-control-2026-07-30";
+  "v367-automatic-russian-title-and-collection-control-2026-07-30";
 const GKM_V364_CATALOG_HEALTH_URL =
   "data/fast/catalog_health_v364.json";
 const GKM_V366_TITLE_HEALTH_URL =
-  "data/fast/title_health_v366.json";
+  "data/fast/title_health_v367.json";
 let GKM_V364_FULL_CATALOG_HEALTH = null;
 let GKM_V364_FULL_CATALOG_HEALTH_PROMISE = null;
 let GKM_V366_TITLE_HEALTH = null;
@@ -709,7 +711,7 @@ function gkmV362RenderCatalogPanel() {
     </div>
     <p class="gkmV362GuardNote">
       Живая защита работает без загрузки 100-тысячного индекса и не замедляет старт.
-      V366 исправляет только подтверждённые совпадения и не выдумывает перевод, если надёжного русского источника пока нет.
+      V367 также сверяет название каждой части с её постером и метаданными коллекции; неподтверждённый перевод не выдумывается.
     </p>
   `;
 }
@@ -778,7 +780,7 @@ function gkmV362InstallCatalogPanel() {
       <div class="gkmV362GuardBox">
         <div class="gkmV362GuardHead">
           <div>
-            <h2>🛡 Контроль каталога V366</h2>
+            <h2>🛡 Контроль каталога V367</h2>
             <p>Автоматический аудит карточек и русских названий</p>
           </div>
           <button id="gkmV362CatalogClose" type="button">Закрыть</button>
@@ -20392,7 +20394,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=365",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=367",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);
@@ -20450,3 +20452,384 @@ Endpoint: ${endpoint||"не задан"}`;
   console.log("GKM V363: My List 2.0, personal recommendations, trailers and PWA installed");
 })();
 /* GKM V363 MY LIST 2.0, RECOMMENDATIONS, PWA AND TRAILERS END */
+
+
+/* GKM V367 FRANCHISE TITLE AND COLLECTION IDENTITY FIX START */
+(function(){
+  window.GKM_V367_FRANCHISE_IDENTITY_VERSION =
+    "v367-full-russian-part-titles-and-consistent-collection-details-2026-07-30";
+
+  function text(value){
+    return String(value == null ? "" : value).replace(/\s+/g," ").trim();
+  }
+
+  function clean(value){
+    return text(value).toLowerCase()
+      .replace(/ё/g,"е")
+      .replace(/[’`]/g,"'")
+      .replace(/[^\p{L}\p{N}]+/gu," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+
+  function yearOfV367(item){
+    const raw=text(item&&(item.year||item.release_date||item.first_air_date));
+    const match=raw.match(/(18\d{2}|19\d{2}|20\d{2})/);
+    return match?match[1]:"";
+  }
+
+  function identityValues(item){
+    if(!item||typeof item!=="object")return [];
+    const aliases=Array.isArray(item.aliases)?item.aliases:[];
+    return [
+      item.en,item.title,item.name,item.originalTitle,item.original_title,
+      item.original_name,item.nameOriginal,item.ru,item.title_ru,...aliases
+    ].map(text).filter(Boolean);
+  }
+
+  function identityText(item){
+    return clean(identityValues(item).join(" "));
+  }
+
+  function coreIdentityText(item){
+    if(!item||typeof item!=="object")return "";
+    return clean([
+      item.en,item.title,item.name,item.originalTitle,item.original_title,
+      item.original_name,item.nameOriginal,item.ru,item.title_ru
+    ].filter(Boolean).join(" "));
+  }
+
+  function russianSourceTitle(item){
+    const generic=new Set([
+      "наруто",
+      "наруто ураганные хроники",
+      "боруто",
+      "боруто наруто фильм"
+    ]);
+    const candidates=[
+      item&&item.ru,item&&item.title_ru,item&&item.nameRu,
+      item&&item.__manualTopTitle
+    ].map(text).filter(value=>/[А-Яа-яЁё]/.test(value));
+    return candidates.find(value=>{
+      const key=clean(value);
+      return key&&!generic.has(key)&&value.length>=8;
+    })||"";
+  }
+
+  function includesAny(raw,values){
+    return values.some(value=>raw.includes(clean(value)));
+  }
+
+  function narutoSpecificTitle(item){
+    const raw=identityText(item);
+    if(!includesAny(raw,[
+      "naruto","наруто","boruto","боруто","shippuden","shippuuden","疾風伝","ナルト"
+    ]))return "";
+
+    const year=yearOfV367(item);
+
+    if(includesAny(raw,["naruto to boruto the live","naruto to boruto live"])){
+      return year==="2019"?"Наруто и Боруто: Живое шоу 2019":"Наруто и Боруто: Живое шоу";
+    }
+    if(includesAny(raw,[
+      "naruto ga hokage ni natta hi","day naruto became hokage",
+      "день когда наруто стал хокаге"
+    ])){
+      return "Боруто: День, когда Наруто стал хокагэ";
+    }
+    if(includesAny(raw,["boruto naruto the movie","boruto the movie","боруто наруто фильм"])){
+      return "Боруто: Наруто. Фильм";
+    }
+    if(includesAny(raw,["the last naruto","naruto the last","последний наруто"])){
+      return "Наруто: Последний фильм";
+    }
+    if(includesAny(raw,["road to ninja","путь ниндзя"])){
+      return "Наруто: Ураганные хроники 6 — Путь ниндзя";
+    }
+    if(includesAny(raw,["blood prison","кровавая тюрьма"])){
+      return "Наруто: Ураганные хроники 5 — Кровавая тюрьма";
+    }
+    if(includesAny(raw,["lost tower","the lost tower","затерянная башня","потерянная башня"])){
+      return "Наруто: Ураганные хроники 4 — Затерянная башня";
+    }
+    if(includesAny(raw,["will of fire","inheritors of the will of fire","наследники воли огня"])){
+      return "Наруто: Ураганные хроники 3 — Наследники воли огня";
+    }
+    if(includesAny(raw,["shippuden movie 2","shippuuden movie 2","bonds","связи","узы"])){
+      return "Наруто: Ураганные хроники 2 — Связи";
+    }
+    if(includesAny(raw,[
+      "shippuden the movie","shippuuden the movie","shippuden movie 1",
+      "shippuuden movie 1","advent of the dark kingdom","адепты темного царства",
+      "адепты тёмного царства"
+    ])&&year==="2007"){
+      return "Наруто: Ураганные хроники 1 — Адепты Тёмного царства";
+    }
+    if(includesAny(raw,[
+      "ninja clash in the land of snow","daikatsugeki yuki hime",
+      "snow princess book of ninja arts","битва ниндзя в стране снега",
+      "снежной принцессы"
+    ])){
+      return "Наруто 1: Книга искусств ниндзя Снежной принцессы";
+    }
+    if(includesAny(raw,[
+      "legend of the stone of gelel","maboroshi no chitei iseki",
+      "камне гелела","камня гелела"
+    ])){
+      return "Наруто 2: Легенда о камне Гелела";
+    }
+    if(includesAny(raw,[
+      "guardians of the crescent moon kingdom","mikazuki jima",
+      "королевства полумесяца"
+    ])){
+      return "Наруто 3: Стражи Королевства Полумесяца";
+    }
+    if(includesAny(raw,[
+      "honoo no chuunin shiken","chunin exam on fire","naruto vs konohamaru",
+      "пылающий экзамен на тюнина","наруто против конохамару"
+    ])){
+      return "Наруто: Пылающий экзамен на тюнина! Наруто против Конохамару!";
+    }
+    if(includesAny(raw,["sunny side battle","солнечная сторона битвы"])){
+      return "Наруто: Ураганные хроники — Битва на солнечной стороне";
+    }
+    if(includesAny(raw,["naruto x ut"])){
+      return "Наруто x UT";
+    }
+    if(includesAny(raw,[
+      "rock lee no seishun full power ninden","rock lee springtime of youth",
+      "весна юности рока ли"
+    ])){
+      return "Наруто: Весна юности Рока Ли";
+    }
+    if(includesAny(raw,["road of naruto","путь наруто"])){
+      return "Путь Наруто";
+    }
+    if(includesAny(raw,[
+      "narutimate hero 3","gekitotsu jounin vs genin","jonin vs genin",
+      "великий турнир без правил"
+    ])){
+      return "Наруто: Джонин против гэнинов — Великий турнир без правил";
+    }
+    if(includesAny(raw,["mobile suit gundam","kidou senshi gundam","мобильный воин гандам"])){
+      return "";
+    }
+
+    const verified=russianSourceTitle(item);
+    if(verified)return verified;
+
+    const isMovie=includesAny(raw,["movie","film","gekijouban","劇場版","фильм"]);
+    const isShippuden=includesAny(raw,[
+      "shippuden","shippuuden","疾風伝","ураганные хроники"
+    ]);
+    if(isMovie&&isShippuden){
+      const byYear={
+        "2007":"Наруто: Ураганные хроники 1 — Адепты Тёмного царства",
+        "2008":"Наруто: Ураганные хроники 2 — Связи",
+        "2009":"Наруто: Ураганные хроники 3 — Наследники воли огня",
+        "2010":"Наруто: Ураганные хроники 4 — Затерянная башня",
+        "2011":"Наруто: Ураганные хроники 5 — Кровавая тюрьма",
+        "2012":"Наруто: Ураганные хроники 6 — Путь ниндзя"
+      };
+      if(byYear[year])return byYear[year];
+      return "Наруто: Ураганные хроники — Фильм";
+    }
+    if(isMovie&&raw.includes("naruto")){
+      const byYear={
+        "2004":"Наруто 1: Книга искусств ниндзя Снежной принцессы",
+        "2005":"Наруто 2: Легенда о камне Гелела",
+        "2006":"Наруто 3: Стражи Королевства Полумесяца"
+      };
+      if(byYear[year])return byYear[year];
+    }
+    if(isShippuden)return "Наруто: Ураганные хроники";
+    if(raw.includes("boruto")||raw.includes("боруто"))return "Боруто";
+    if(raw.includes("naruto")||raw.includes("наруто")||raw.includes("ナルト"))return "Наруто";
+    return "";
+  }
+
+  const previousSpecificAnimeTitle=
+    typeof specificAnimeTitle==="function"?specificAnimeTitle:null;
+  try{
+    specificAnimeTitle=function gkmV367SpecificAnimeTitle(item){
+      const exact=narutoSpecificTitle(item);
+      if(exact)return exact;
+      try{return text(previousSpecificAnimeTitle?previousSpecificAnimeTitle(item):"");}
+      catch{return "";}
+    };
+  }catch{}
+
+  const previousDisplayTitle=
+    typeof displayTitle==="function"?displayTitle:null;
+  displayTitle=function gkmV367DisplayTitle(item){
+    if(item&&item.__gkmCollectionItems){
+      return text(item.__gkmCollectionLabel||item.__manualTopTitle||item.ru)||"Коллекция";
+    }
+    const exact=narutoSpecificTitle(item);
+    if(exact)return exact;
+    try{
+      const current=text(previousDisplayTitle?previousDisplayTitle(item):"");
+      if(current)return current;
+    }catch{}
+    return text(item&&(item.ru||item.title_ru||item.title||item.name||item.en))||"Без названия";
+  };
+
+  function stableIdentity(item){
+    if(!item||typeof item!=="object")return "";
+    const source=clean(item.source||item.provider||"catalog")||"catalog";
+    const id=text(item.id||item.tmdbId||item.kinopoiskId||item.mal_id);
+    if(id)return `${source}|${id}`;
+    return `${coreIdentityText(item)}|${yearOfV367(item)}`;
+  }
+
+  function flattenCollectionRows(rows){
+    const out=[];
+    const seen=new Set();
+    function add(item){
+      if(!item||typeof item!=="object")return;
+      if(Array.isArray(item.__gkmCollectionItems)){
+        item.__gkmCollectionItems.forEach(add);
+        return;
+      }
+      const key=stableIdentity(item);
+      if(key&&seen.has(key))return;
+      if(key)seen.add(key);
+      out.push(item);
+    }
+    (Array.isArray(rows)?rows:[]).forEach(add);
+    return out;
+  }
+
+  function belongsToCollection(item,label){
+    const family=clean(label);
+    const raw=coreIdentityText(item);
+    if(family==="наруто"){
+      if(includesAny(raw,[
+        "mobile suit gundam","kidou senshi gundam","мобильный воин гандам"
+      ]))return false;
+      return includesAny(raw,[
+        "naruto","наруто","boruto","боруто","shippuden","shippuuden","疾風伝","ナルト"
+      ]);
+    }
+    return true;
+  }
+
+  function collectionRows(item){
+    const label=text(item&&item.__gkmCollectionLabel);
+    const rows=flattenCollectionRows(item&&item.__gkmCollectionItems);
+    const filtered=rows.filter(row=>belongsToCollection(row,label));
+    return filtered.length?filtered:rows;
+  }
+
+  function baseScore(item,label){
+    const raw=coreIdentityText(item);
+    const year=Number(yearOfV367(item)||9999);
+    const identities=identityValues(item).map(clean);
+    const family=clean(label);
+    let score=0;
+    const poster=text(item&&(item.poster||item.poster_url||item.image||item.cover||item.poster_path));
+    if(poster)score+=100000;
+    const votes=Number(item&&(item.votes||item.vote_count||item.scored_by)||0);
+    score+=Math.min(votes,5000000)/100;
+
+    const derivative=/\b(?:movie|film|gekijouban|season|part|ova|ona|special|shippuden|shippuuden|boruto)\b|劇場版|疾風伝|фильм|сезон|часть|ураганн/i.test(raw);
+    if(family==="наруто"){
+      const exactBase=identities.some(value=>value==="naruto"||value==="наруто"||value==="ナルト");
+      if(exactBase&&!derivative)score+=100000000;
+      if(exactBase&&year===2002)score+=200000000;
+      if(String(item&&(item.episodes||item.episodeCount)||"")==="220")score+=50000000;
+    }else{
+      const exactBase=identities.some(value=>value===family);
+      if(exactBase&&!derivative)score+=100000000;
+    }
+    if(!derivative)score+=1000000;
+    score+=Math.max(0,10000-year);
+    return score;
+  }
+
+  function chooseCollectionBase(item){
+    const rows=collectionRows(item);
+    const label=text(item&&item.__gkmCollectionLabel);
+    return rows.slice().sort((left,right)=>
+      baseScore(right,label)-baseScore(left,label)
+    )[0]||item;
+  }
+
+  function repairCollection(item){
+    if(!item||!Array.isArray(item.__gkmCollectionItems))return item;
+    const rows=collectionRows(item);
+    const base=chooseCollectionBase({...item,__gkmCollectionItems:rows});
+    const label=text(item.__gkmCollectionLabel||item.ru||displayTitle(base))||"Коллекция";
+    const out=Object.assign({},base);
+    out.__gkmCollectionItems=rows;
+    out.__gkmCollectionCount=rows.length;
+    out.__gkmCollectionKey=item.__gkmCollectionKey;
+    out.__gkmCollectionLabel=label;
+    out.ru=label;
+    out.title_ru=label;
+    out.__manualTopTitle=label;
+    out.__gkmV367RepresentativeKey=stableIdentity(base);
+    return out;
+  }
+
+  const previousCollapse=window.GKM_V329_COLLAPSE_FRANCHISE_LIST;
+  if(typeof previousCollapse==="function"){
+    window.GKM_V329_COLLAPSE_FRANCHISE_LIST=function gkmV367Collapse(items){
+      const result=previousCollapse.apply(this,arguments);
+      if(!result||!Array.isArray(result.items))return result;
+      return {
+        ...result,
+        items:result.items.map(repairCollection)
+      };
+    };
+  }
+
+  function detailCollectionItem(item){
+    const repaired=repairCollection(item);
+    const base=chooseCollectionBase(repaired);
+    const detail=Object.assign({},base);
+    const baseTitle=narutoSpecificTitle(base)||text(
+      base&&(base.ru||base.title_ru||base.title||base.name||base.en)
+    );
+    if(baseTitle){
+      detail.ru=baseTitle;
+      detail.title_ru=baseTitle;
+      detail.__manualTopTitle=baseTitle;
+    }
+    detail.__gkmCollectionItems=repaired.__gkmCollectionItems;
+    detail.__gkmCollectionCount=repaired.__gkmCollectionCount;
+    detail.__gkmCollectionKey=repaired.__gkmCollectionKey;
+    detail.__gkmCollectionLabel=repaired.__gkmCollectionLabel;
+    detail.__gkmV367CollectionDetail=true;
+    return detail;
+  }
+
+  function installDetailsPatch(){
+    if(window.GKM_V367_DETAILS_PATCHED==="1"||typeof openDetails!=="function")return;
+    const previousOpenDetails=openDetails;
+    openDetails=function gkmV367OpenDetails(item){
+      const next=item&&Array.isArray(item.__gkmCollectionItems)
+        ?detailCollectionItem(item)
+        :item;
+      return previousOpenDetails.call(this,next);
+    };
+    window.GKM_V367_DETAILS_PATCHED="1";
+  }
+
+  window.GKM_V367_FRANCHISE_TEST=Object.freeze({
+    specificTitle:narutoSpecificTitle,
+    chooseCollectionBase,
+    repairCollection,
+    detailCollectionItem,
+    belongsToCollection
+  });
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",installDetailsPatch,{once:true});
+  }else{
+    installDetailsPatch();
+  }
+
+  console.log("GKM V367: full Russian part titles and collection identity fixed");
+})();
+/* GKM V367 FRANCHISE TITLE AND COLLECTION IDENTITY FIX END */
