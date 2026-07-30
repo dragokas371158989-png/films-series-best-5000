@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "368";
+const GKM_DATA_CACHE_VERSION = "369";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
@@ -4319,8 +4319,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     badge.className = "gkm-v175-order-badge";
     badge.textContent = "#" + n + " смотреть";
 
-    card.style.position = card.style.position || "relative";
-    card.appendChild(badge);
+    const badgeRail = card.querySelector(".card-badges");
+    if (badgeRail) {
+      badgeRail.appendChild(badge);
+    } else {
+      card.style.position = card.style.position || "relative";
+      card.appendChild(badge);
+    }
     card.title = "Порядок просмотра: " + n + ". " + label;
   }
 
@@ -4386,19 +4391,26 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     style.id = "gkm-v175-style";
     style.textContent = `
       .gkm-v175-order-badge {
-        position:absolute;
-        left:8px;
-        top:42px;
+        position:static!important;
+        flex:0 0 auto;
+        width:max-content;
+        max-width:100%;
         z-index:45;
-        padding:7px 10px;
+        padding:5px 9px;
         border-radius:999px;
         background:linear-gradient(135deg,#ffae00,#b13cff);
         color:#fff;
         font-weight:1000;
-        font-size:13px;
+        font-size:12px;
         line-height:1;
         box-shadow:0 0 14px rgba(255,160,0,.45);
         pointer-events:none;
+      }
+      .card > .gkm-v175-order-badge {
+        position:absolute!important;
+        left:8px;
+        top:auto;
+        bottom:8px;
       }
     `;
     document.head.appendChild(style);
@@ -20394,7 +20406,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=368",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=369",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);
@@ -20956,3 +20968,8 @@ Endpoint: ${endpoint||"не задан"}`;
   console.log("GKM V368: fresh shell and family title sync installed");
 })();
 /* GKM V368 FRESH SHELL AND FAMILY TITLE SYNC END */
+
+/* GKM V369 ORDER BADGE LAYOUT FIX START */
+window.GKM_V369_ORDER_BADGE_LAYOUT_VERSION =
+  "v369-watch-order-badge-inside-card-badge-rail-2026-07-30";
+/* GKM V369 ORDER BADGE LAYOUT FIX END */
