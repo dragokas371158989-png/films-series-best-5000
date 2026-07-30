@@ -1,0 +1,83 @@
+{
+  "version": "V367",
+  "generatedAt": "2026-07-30T10:41:15Z",
+  "status": "success",
+  "stats": {
+    "recordsScanned": 344710,
+    "recordsRepaired": 3,
+    "catalogTitlesRepaired": 1,
+    "reason:same-poster": 3,
+    "context:pages/all": 1,
+    "filesChanged": 2,
+    "context:pages/cartoons": 1
+  },
+  "staticPagesUpdated": 0,
+  "health": {
+    "catalogItems": 102470,
+    "russianTitles": 102447,
+    "latinOnlyTitles": 4,
+    "syntheticTitles": 16289,
+    "collapsedFranchiseTitles": 5,
+    "unresolvedRussianTitles": 16317,
+    "catalogTitlesRepaired": 2,
+    "recordsRepaired": 6
+  },
+  "verification": {
+    "ok": true,
+    "failures": [],
+    "catalogItems": 102470,
+    "controls": {
+      "Jikan / MyAnimeList:mal_16870": {
+        "expected": "Наруто: Последний фильм",
+        "actual": "Наруто: Последний фильм",
+        "pass": true
+      },
+      "tv_top_rated:8070881": {
+        "expected": "Боруто: Новое поколение Наруто",
+        "actual": "Боруто: Новое поколение Наруто",
+        "pass": true
+      },
+      "tmdb:1031396": {
+        "expected": "Путь Наруто",
+        "actual": "Путь Наруто",
+        "pass": true
+      },
+      "movie_top_rated:7347201": {
+        "expected": "Боруто",
+        "actual": "Боруто",
+        "pass": true
+      },
+      "movie_top_rated:7317442": {
+        "expected": "Наруто: Последний фильм",
+        "actual": "Наруто: Последний фильм",
+        "pass": true
+      },
+      "movie_top_rated:7118406": {
+        "expected": "Наруто: Ураганные хроники 6 — Путь ниндзя",
+        "actual": "Наруто: Ураганные хроники 6 — Путь ниндзя",
+        "pass": true
+      },
+      "movie_top_rated:7020982": {
+        "expected": "Наруто: Ураганные хроники 1 — Адепты Тёмного царства",
+        "actual": "Наруто: Ураганные хроники 1 — Адепты Тёмного царства",
+        "pass": true
+      },
+      "movie_top_rated:7036728": {
+        "expected": "Наруто: Ураганные хроники 3 — Наследники воли огня",
+        "actual": "Наруто: Ураганные хроники 3 — Наследники воли огня",
+        "pass": true
+      },
+      "movie_top_rated:7017581": {
+        "expected": "Наруто: Ураганные хроники 2 — Связи",
+        "actual": "Наруто: Ураганные хроники 2 — Связи",
+        "pass": true
+      },
+      "movie_top_rated:7016907": {
+        "expected": "Наруто 1: Книга искусств ниндзя Снежной принцессы",
+        "actual": "Наруто 1: Книга искусств ниндзя Снежной принцессы",
+        "pass": true
+      }
+    },
+    "unresolvedRussianTitles": 16317
+  }
+}
