@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""GKM V366: verify Russian media titles and repair high-confidence collapses.
+"""GKM V367: verify Russian media titles and repair high-confidence collapses.
 
 The catalog contains the same media from several providers.  A provider feed may
 label a specific sequel or special with the short franchise name (for example
@@ -26,8 +26,8 @@ DATA_DIR = ROOT / "data"
 FAST_DIR = DATA_DIR / "fast"
 SEARCH_PATH = FAST_DIR / "search_index.json"
 LITE_PATH = FAST_DIR / "search_lite.json"
-HEALTH_PATH = FAST_DIR / "title_health_v366.json"
-REPORT_PATH = ROOT / "TEST_REPORT_V366_RUSSIAN_TITLES.json"
+HEALTH_PATH = FAST_DIR / "title_health_v367.json"
+REPORT_PATH = ROOT / "TEST_REPORT_V367_RUSSIAN_TITLES.json"
 TITLE_MAP_PATH = DATA_DIR / "ru_titles_map.json"
 
 OFFICIAL_CACHE_PATHS = (
@@ -328,7 +328,7 @@ class TitleResolver:
         for original, ru in self.title_map.items():
             candidate = Candidate(
                 ru=ru,
-                source="ru_titles_map V366",
+                source="ru_titles_map V367",
                 year="",
                 family="tv",
                 aliases=(original,),
@@ -617,7 +617,7 @@ def apply_title(item: dict, title: str, reason: str) -> bool:
         if value and old:
             item[key] = value.replace(f"«{old}»", f"«{title}»", 1)
 
-    item["titleLocalizationSource"] = f"V366 {reason}"
+    item["titleLocalizationSource"] = f"V367 {reason}"
     item["search"] = rebuild_search(item)
     item.pop("__hay", None)
     item.pop("__gkmV362CatalogChecked", None)
@@ -723,7 +723,7 @@ def build_health(
         source_counts[clean(item.get("titleLocalizationSource") or "existing")] += 1
 
     health = {
-        "version": "366",
+        "version": "367",
         "generatedAt": now_iso(),
         "status": "success" if collapsed == 0 and synthetic == 0 else "warning",
         "catalogItems": len(rows),
@@ -801,8 +801,8 @@ def verify() -> dict[str, Any]:
     if not isinstance(rows, list) or len(rows) < 100_000:
         failures.append("search_index has fewer than 100000 records")
         rows = []
-    if health.get("version") != "366":
-        failures.append("V366 title health report is missing")
+    if health.get("version") != "367":
+        failures.append("V367 title health report is missing")
     if int(health.get("catalogItems") or 0) != len(rows):
         failures.append("title health count does not match search index")
 
@@ -849,7 +849,7 @@ def verify() -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--check", action="store_true", help="verify existing V366 output only")
+    parser.add_argument("--check", action="store_true", help="verify existing V367 output only")
     args = parser.parse_args()
     if args.check:
         result = verify()
@@ -912,7 +912,7 @@ def main() -> int:
     health = build_health(rows, resolver, stats, source_sha)
     verification = verify()
     report = {
-        "version": "V366",
+        "version": "V367",
         "generatedAt": now_iso(),
         "status": "success" if verification["ok"] else "failed",
         "stats": dict(stats),
