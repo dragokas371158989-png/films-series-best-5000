@@ -1,15 +1,15 @@
-/* GKM V370 PWA: fresh critical shell + explicitly opened posters only. */
-const VERSION = "v370-2026-07-30";
+/* GKM V371 PWA: fresh mobile shell + explicitly opened posters only. */
+const VERSION = "v371-2026-07-30";
 const SHELL_CACHE = `gkm-shell-${VERSION}`;
 const RECENT_CACHE = `gkm-recent-${VERSION}`;
 const CACHE_PREFIX = "gkm-";
 const SHELL_URLS = [
   "./",
   "./index.html",
-  "./style.css",
-  "./app.js?v=370",
+  "./style.css?v=371",
+  "./app.js?v=371",
   "./ai_search_worker_v343.js",
-  "./manifest.webmanifest?v=370",
+  "./manifest.webmanifest?v=371",
   "./logo-banner.webp",
   "./pwa-icon-192.png",
   "./pwa-icon-512.png"

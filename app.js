@@ -43,11 +43,13 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "370";
+const GKM_DATA_CACHE_VERSION = "371";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
   "v365-mobile-card-aspect-canvas-tap-dock-2026-07-30";
+window.GKM_V371_MOBILE_CARDS_TOUCH_CANVAS_DOCK_VERSION =
+  "v371-two-column-cards-touch-magnetic-wave-collapsible-dock-2026-07-30";
 window.GKM_V367_RUSSIAN_TITLE_CONTROL_VERSION =
   "v367-source-aware-russian-title-and-collection-control-2026-07-30";
 window.GKM_V366_RUSSIAN_TITLE_CONTROL_VERSION =
@@ -17577,7 +17579,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       #gkmV343Overlay.open{display:block}
       #gkmV343Canvas{
         position:absolute;inset:0;width:100%;height:100%;display:block;background:#020817;
-        transform-origin:center;will-change:transform
+        transform-origin:center;will-change:transform;touch-action:none;overscroll-behavior:none;
+        -webkit-user-select:none;user-select:none
       }
       #gkmV343Lens{
         position:absolute;z-index:5;width:${LENS_SIZE}px;height:${LENS_SIZE}px;pointer-events:none;
@@ -17644,6 +17647,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         border-color:rgba(255,255,255,.7);
         box-shadow:0 0 22px rgba(0,210,255,.46)
       }
+      #gkmV371CanvasTools{display:none}
       #gkmV357EffectsPanel{
         position:absolute;z-index:11;right:14px;top:72px;width:min(390px,calc(100vw - 28px));
         max-height:calc(100vh - 100px);overflow:auto;display:none;padding:14px;
@@ -17771,16 +17775,40 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           padding:0!important;border-radius:17px!important;font-size:0!important;overflow:hidden!important
         }
         #gkmV343Btn::before{content:"🖼️";font-size:23px;line-height:1}
-        .gkmV343Title{font-size:17px}.gkmV343Sub{font-size:10px}.gkmV343Actions button{padding:8px 9px;font-size:12px}
-        .gkmV343Top{left:8px;right:8px;top:8px}
-        #gkmV343Lens{display:none}
+        .gkmV343Top{left:6px;right:6px;top:5px;display:block}
+        .gkmV343Top>div:first-child{padding-right:44px}
+        .gkmV343Title{font-size:14px;line-height:1.1}.gkmV343Sub{display:none}
+        .gkmV343Actions{
+          margin-top:5px;display:flex;flex-wrap:nowrap;justify-content:flex-start;gap:5px;
+          max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;
+          pointer-events:auto
+        }
+        .gkmV343Actions::-webkit-scrollbar{display:none}
+        .gkmV343Actions button{
+          flex:0 0 auto;min-height:36px;padding:7px 9px;font-size:11px;border-radius:12px
+        }
+        #gkmV343Close{
+          position:fixed;right:6px;top:5px;z-index:20;width:38px;height:38px;min-height:38px;
+          padding:0!important;font-size:18px!important
+        }
+        #gkmV371CanvasTools{display:inline-flex}
+        #gkmV343Overlay:not(.gkm-v371-tools-open) #gkmV357EffectsToggle,
+        #gkmV343Overlay:not(.gkm-v371-tools-open) #gkmV363QualityToggle,
+        #gkmV343Overlay:not(.gkm-v371-tools-open) #gkmV358DiagnosticsToggle,
+        #gkmV343Overlay:not(.gkm-v371-tools-open) #gkmV343Shuffle{display:none}
+        #gkmV343Overlay.gkm-v371-tools-open [data-kind]{display:none}
+        #gkmV343Lens.open{opacity:1;transform:scale(.68)}
         #gkmV343Preview{width:calc(100vw - 20px);height:164px}
         .gkmV343Pane{grid-template-columns:92px 1fr;gap:10px;padding:12px}
         .gkmV343PreviewPoster{width:92px;height:136px}.gkmV343PText h2{font-size:18px}.gkmV343Desc{display:none}
-        #gkmV343Status{left:10px;bottom:10px;width:calc(100vw - 20px)}.gkmV343Hint{display:none}
-        #gkmV357EffectsPanel{top:102px;right:8px;width:calc(100vw - 16px);max-height:calc(100vh - 116px)}
-        #gkmV363QualityPanel{top:102px;right:8px;width:calc(100vw - 16px);max-height:calc(100vh - 116px);overflow:auto}
-        #gkmV358DiagnosticsPanel{top:102px;left:8px;width:calc(100vw - 16px);max-height:calc(100vh - 116px);overflow:auto}
+        #gkmV343Preview{display:none}
+        #gkmV343Status{left:8px;bottom:8px;width:calc(100vw - 16px);padding:8px 10px;border-radius:14px}
+        #gkmV343Status b{font-size:13px;margin-bottom:2px}
+        #gkmV343Status div{font-size:9px;line-height:1.25;max-height:24px;overflow:hidden}
+        .gkmV343Hint{display:none}
+        #gkmV357EffectsPanel{top:60px;right:6px;width:calc(100vw - 12px);max-height:calc(100vh - 68px)}
+        #gkmV363QualityPanel{top:60px;right:6px;width:calc(100vw - 12px);max-height:calc(100vh - 68px);overflow:auto}
+        #gkmV358DiagnosticsPanel{top:60px;left:6px;width:calc(100vw - 12px);max-height:calc(100vh - 68px);overflow:auto}
         .gkmV357EffectsGrid{grid-template-columns:1fr}
       }
     `;
@@ -17809,7 +17837,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V365</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V371</div>
           <div class="gkmV343Sub">Сбалансированный локальный Poster Atlas мгновенно заполняет фильмы, сериалы, аниме и мультфильмы; внешняя сеть остаётся резервом.</div>
         </div>
         <div class="gkmV343Actions">
@@ -17818,6 +17846,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           <button data-kind="series">Сериалы</button>
           <button data-kind="anime">Аниме</button>
           <button data-kind="cartoons">Мульты</button>
+          <button id="gkmV371CanvasTools" type="button">⚙️ Настройки</button>
           <button id="gkmV357EffectsToggle">✨ Эффекты: Магнитная волна</button>
           <button id="gkmV363QualityToggle">⚙️ Качество: Авто</button>
           <button id="gkmV358DiagnosticsToggle">📊 Скорость</button>
@@ -17938,6 +17967,14 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     document.getElementById("gkmV358DiagnosticsClose").onclick=()=>{
       document.getElementById("gkmV358DiagnosticsPanel")?.classList.remove("open");
     };
+    document.getElementById("gkmV371CanvasTools").onclick=()=>{
+      const opened=overlay.classList.toggle("gkm-v371-tools-open");
+      const button=document.getElementById("gkmV371CanvasTools");
+      if(button) button.textContent=opened?"← Фильтры":"⚙️ Настройки";
+      document.getElementById("gkmV357EffectsPanel")?.classList.remove("open");
+      document.getElementById("gkmV363QualityPanel")?.classList.remove("open");
+      document.getElementById("gkmV358DiagnosticsPanel")?.classList.remove("open");
+    };
     document.getElementById("gkmV343Close").onclick=closeWall;
     document.getElementById("gkmV343Shuffle").onclick=()=>{
       shuffleSeed++;
@@ -17947,17 +17984,55 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       startImageQueue();
     };
 
-    canvas.addEventListener("pointermove",onMove,{passive:true});
+    let activeTouchPointerId=null;
+    let touchStartX=0;
+    let touchStartY=0;
+    let touchMoved=false;
+    let suppressNextClick=false;
+
+    canvas.addEventListener("pointermove",event=>{
+      if(event.pointerType==="touch"&&activeTouchPointerId===event.pointerId){
+        if(Math.hypot(event.clientX-touchStartX,event.clientY-touchStartY)>8) touchMoved=true;
+        event.preventDefault();
+      }
+      onMove(event);
+    },{passive:false});
     canvas.addEventListener("pointerdown",event=>{
+      if(event.pointerType==="touch"){
+        activeTouchPointerId=event.pointerId;
+        touchStartX=event.clientX;
+        touchStartY=event.clientY;
+        touchMoved=false;
+        suppressNextClick=false;
+        try{canvas.setPointerCapture(event.pointerId);}catch{}
+      }
+      onMove(event);
       const index=indexAt(event.clientX,event.clientY);
       if(index<0) return;
       hoverIndex=index;
       pointerTargetX=event.clientX;
       pointerTargetY=event.clientY;
-      showPreview(wallItems[index]);
+      if(event.pointerType!=="touch") showPreview(wallItems[index]);
+    },{passive:false});
+    canvas.addEventListener("pointerup",event=>{
+      if(event.pointerType!=="touch"||activeTouchPointerId!==event.pointerId) return;
+      suppressNextClick=touchMoved;
+      activeTouchPointerId=null;
+      try{canvas.releasePointerCapture(event.pointerId);}catch{}
+      clearTimeout(hoverTimer);
+      hoverTimer=setTimeout(pointerLeave,220);
+    },{passive:true});
+    canvas.addEventListener("pointercancel",event=>{
+      if(activeTouchPointerId===event.pointerId) activeTouchPointerId=null;
+      suppressNextClick=true;
+      pointerLeave();
     },{passive:true});
     canvas.addEventListener("pointerleave",pointerLeave);
     canvas.addEventListener("click",event=>{
+      if(suppressNextClick){
+        suppressNextClick=false;
+        return;
+      }
       const directIndex=indexAt(event.clientX,event.clientY);
       const item=wallItems[directIndex>=0?directIndex:hoverIndex];
       if(item) openItem(item);
@@ -18046,6 +18121,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     document.getElementById("gkmV357EffectsPanel")?.classList.remove("open");
     document.getElementById("gkmV363QualityPanel")?.classList.remove("open");
     document.getElementById("gkmV358DiagnosticsPanel")?.classList.remove("open");
+    overlay?.classList.remove("gkm-v371-tools-open");
+    const toolsButton=document.getElementById("gkmV371CanvasTools");
+    if(toolsButton) toolsButton.textContent="⚙️ Настройки";
     const lens=document.getElementById("gkmV343Lens");
     if(lens) lens.classList.remove("open");
   }
@@ -20482,7 +20560,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=370",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=371",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);
@@ -21054,3 +21132,55 @@ window.GKM_V369_ORDER_BADGE_LAYOUT_VERSION =
 window.GKM_V370_UNIQUE_CATALOG_CONTROL_VERSION =
   "v370-unique-session-counters-and-clear-health-status-2026-07-30";
 /* GKM V370 UNIQUE CATALOG CONTROL COUNTERS END */
+
+/* GKM V371 MOBILE CARDS, TOUCH CANVAS AND COMPACT DOCK START */
+(function(){
+  function setDock(open){
+    if(!document.body)return;
+    document.body.classList.toggle("gkm-v371-mobile-dock-open",Boolean(open));
+    const button=document.getElementById("gkmV371MobileDockToggle");
+    if(button){
+      button.setAttribute("aria-expanded",open?"true":"false");
+      button.textContent=open?"✕":"☰";
+      button.setAttribute("aria-label",open?"Закрыть быстрые кнопки":"Открыть быстрые кнопки");
+    }
+  }
+
+  function install(){
+    if(!document.body||document.getElementById("gkmV371MobileDockToggle"))return;
+    const button=document.createElement("button");
+    button.id="gkmV371MobileDockToggle";
+    button.type="button";
+    button.textContent="☰";
+    button.setAttribute("aria-expanded","false");
+    button.setAttribute("aria-label","Открыть быстрые кнопки");
+    button.addEventListener("click",event=>{
+      event.stopPropagation();
+      setDock(!document.body.classList.contains("gkm-v371-mobile-dock-open"));
+    });
+    document.body.appendChild(button);
+
+    document.addEventListener("click",event=>{
+      if(window.innerWidth>760)return;
+      const target=event.target instanceof Element?event.target:null;
+      if(target?.closest("#gkmV371MobileDockToggle"))return;
+      if(target?.closest("#gkmV363ListBtn,#gkmV343Btn,.ai-float-btn")){
+        setTimeout(()=>setDock(false),0);
+        return;
+      }
+      if(document.body.classList.contains("gkm-v371-mobile-dock-open"))setDock(false);
+    },true);
+
+    window.addEventListener("resize",()=>{
+      if(window.innerWidth>760)setDock(false);
+    },{passive:true});
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",install,{once:true});
+  }else{
+    install();
+  }
+  console.log("GKM V371: compact mobile cards, touch Canvas and collapsible dock installed");
+})();
+/* GKM V371 MOBILE CARDS, TOUCH CANVAS AND COMPACT DOCK END */
