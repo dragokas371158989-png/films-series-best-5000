@@ -1,4 +1,4 @@
-name: GKM V368 Catalog Installer
+name: GKM V369 Catalog Installer
 
 on:
   workflow_dispatch:
@@ -71,9 +71,10 @@ jobs:
           grep -q "GKM_V367_RUSSIAN_TITLE_CONTROL_VERSION" app.js
           grep -q "GKM_V367_FRANCHISE_IDENTITY_VERSION" app.js
           grep -q "GKM_V368_FRESH_SHELL_FAMILY_TITLES_VERSION" app.js
+          grep -q "GKM_V369_ORDER_BADGE_LAYOUT_VERSION" app.js
           ! grep -qi "cylinderGeometry" app.js
 
-      - name: Commit verified V368 data
+      - name: Commit verified V369 data
         run: |
           git config user.name "gkm-v364-control"
           git config user.email "gkm-v364-control@users.noreply.github.com"
@@ -97,6 +98,6 @@ jobs:
             echo "Catalog is already healthy"
             exit 0
           fi
-          git commit -m "Apply V368 fresh shell and full Russian family titles"
+          git commit -m "Apply V369 collection badge overlap fix"
           git pull --rebase --autostash origin main
           git push origin main
