@@ -1,13 +1,13 @@
 {
   "version": "364",
-  "generatedAt": "2026-07-30T06:02:50Z",
+  "generatedAt": "2026-07-30T09:36:05Z",
   "status": "success",
   "catalogItems": 102470,
   "confirmedRepairRules": 51,
   "confirmedRepairsPresent": 51,
   "manualRecoveries": 1,
   "missingPosters": 4900,
-  "genericTitles": 16112,
+  "genericTitles": 16070,
   "shortDescriptions": 1136,
   "unsafePosters": 0,
   "duplicateSourceMediaKeys": 0,
@@ -209,12 +209,6 @@
     },
     {
       "code": "generic_title",
-      "id": "8299555",
-      "title": "Сериал 2025 года №8299555",
-      "type": "Мультфильм"
-    },
-    {
-      "code": "generic_title",
       "id": "8106600",
       "title": "Сериал 2020 года №8106600",
       "type": "Сериал"
@@ -308,12 +302,6 @@
       "id": "kp_987694",
       "title": "Пикник на обочине",
       "type": "Сериал"
-    },
-    {
-      "code": "generic_title",
-      "id": "641364",
-      "title": "Фильм 2019 года №641364",
-      "type": "Мультфильм"
     },
     {
       "code": "generic_title",
@@ -455,12 +443,6 @@
     },
     {
       "code": "generic_title",
-      "id": "114138",
-      "title": "Сериал 2022 года №114138",
-      "type": "Сериал"
-    },
-    {
-      "code": "generic_title",
       "id": "241373",
       "title": "Сериал 2023 года №241373",
       "type": "Сериал"
@@ -518,6 +500,24 @@
       "id": "31729",
       "title": "Аниме 2005 года №31729",
       "type": "Аниме"
+    },
+    {
+      "code": "generic_title",
+      "id": "9152",
+      "title": "Аниме 1975 года №9152",
+      "type": "Аниме"
+    },
+    {
+      "code": "missing_poster",
+      "id": "kp_271738",
+      "title": "Стивен Джеррард: Один год из моей жизни",
+      "type": "Фильм"
+    },
+    {
+      "code": "generic_title",
+      "id": "65958",
+      "title": "Сериал 1978 года №65958",
+      "type": "Сериал"
     }
   ]
 }

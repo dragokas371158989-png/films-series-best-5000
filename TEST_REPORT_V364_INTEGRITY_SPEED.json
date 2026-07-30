@@ -1,21 +1,21 @@
 {
   "version": "V364",
-  "generatedAt": "2026-07-30T06:02:55Z",
+  "generatedAt": "2026-07-30T09:36:11Z",
   "status": "success",
   "fastData": {
-    "filesChanged": 0,
-    "itemsRepaired": 0,
+    "filesChanged": 4,
+    "itemsRepaired": 6,
     "manualRecovered": 2
   },
   "searchShards": {
     "shards": 66,
-    "shardRows": 188978,
+    "shardRows": 189021,
     "catalogItems": 102470
   },
   "health": {
     "catalogItems": 102470,
     "missingPosters": 4900,
-    "genericTitles": 16112,
+    "genericTitles": 16070,
     "crossMediaIdCollisions": 0
   },
   "staticPages": {
