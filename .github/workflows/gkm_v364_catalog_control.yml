@@ -1,4 +1,4 @@
-name: GKM V366 Catalog Installer
+name: GKM V367 Catalog Installer
 
 on:
   workflow_dispatch:
@@ -68,10 +68,11 @@ jobs:
           python tools/gkm_v364_integrity_speed.py --check
           grep -q "GKM_V343_HUMAN_AI_WEATHER" app.js
           grep -q "GKM_V364_BALANCED_POSTER_ATLAS_VERSION" app.js
-          grep -q "GKM_V366_RUSSIAN_TITLE_CONTROL_VERSION" app.js
+          grep -q "GKM_V367_RUSSIAN_TITLE_CONTROL_VERSION" app.js
+          grep -q "GKM_V367_FRANCHISE_IDENTITY_VERSION" app.js
           ! grep -qi "cylinderGeometry" app.js
 
-      - name: Commit verified V366 data
+      - name: Commit verified V367 data
         run: |
           git config user.name "gkm-v364-control"
           git config user.email "gkm-v364-control@users.noreply.github.com"
@@ -90,11 +91,11 @@ jobs:
             film/*.html \
             TEST_REPORT_V364_INTEGRITY_SPEED.json \
             TEST_REPORT_V364_POSTER_ATLAS.json \
-            TEST_REPORT_V366_RUSSIAN_TITLES.json
+            TEST_REPORT_V367_RUSSIAN_TITLES.json
           if git diff --cached --quiet; then
             echo "Catalog is already healthy"
             exit 0
           fi
-          git commit -m "Apply V366 Russian title control data"
-          git pull --rebase origin main
+          git commit -m "Apply V367 Russian title and collection control data"
+          git pull --rebase --autostash origin main
           git push origin main
