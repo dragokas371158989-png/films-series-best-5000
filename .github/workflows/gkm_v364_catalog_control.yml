@@ -1,4 +1,4 @@
-name: GKM V365 Catalog Installer
+name: GKM V366 Catalog Installer
 
 on:
   workflow_dispatch:
@@ -10,6 +10,7 @@ on:
       - "tools/gkm_v364_integrity_speed.py"
       - "tools/gkm_v364_build_poster_atlas.py"
       - "tools/gkm_v349_repair_static_pages.py"
+      - "tools/gkm_v366_russian_title_control.py"
       - "data/catalog_repairs_v364.json"
       - "data/manual_catalog_v364.json"
   schedule:
@@ -42,6 +43,9 @@ jobs:
       - name: Install atlas dependency
         run: python -m pip install --disable-pip-version-check pillow==12.0.0
 
+      - name: Verify and synchronize Russian titles
+        run: python tools/gkm_v366_russian_title_control.py
+
       - name: Bake repairs, search shards and full health report
         run: python tools/gkm_v364_integrity_speed.py
 
@@ -58,30 +62,39 @@ jobs:
             tools/build_fast_site_data.py \
             tools/gkm_v349_repair_static_pages.py \
             tools/gkm_v364_integrity_speed.py \
-            tools/gkm_v364_build_poster_atlas.py
+            tools/gkm_v364_build_poster_atlas.py \
+            tools/gkm_v366_russian_title_control.py
+          python tools/gkm_v366_russian_title_control.py --check
           python tools/gkm_v364_integrity_speed.py --check
           grep -q "GKM_V343_HUMAN_AI_WEATHER" app.js
           grep -q "GKM_V364_BALANCED_POSTER_ATLAS_VERSION" app.js
+          grep -q "GKM_V366_RUSSIAN_TITLE_CONTROL_VERSION" app.js
           ! grep -qi "cylinderGeometry" app.js
 
-      - name: Commit verified V365 data
+      - name: Commit verified V366 data
         run: |
           git config user.name "gkm-v364-control"
           git config user.email "gkm-v364-control@users.noreply.github.com"
           # py_compile is validation only. Restore tracked bytecode so the
           # generated catalog commit remains clean before pull --rebase.
           git restore --worktree -- tools/__pycache__ 2>/dev/null || true
+          python - <<'PY'
+          from pathlib import Path
+          for path in Path("tools/__pycache__").glob("gkm_v366_russian_title_control*.pyc"):
+              path.unlink()
+          PY
           git add \
             data/catalog_repairs_v364.json \
             data/manual_catalog_v364.json \
             data/fast \
             film/*.html \
             TEST_REPORT_V364_INTEGRITY_SPEED.json \
-            TEST_REPORT_V364_POSTER_ATLAS.json
+            TEST_REPORT_V364_POSTER_ATLAS.json \
+            TEST_REPORT_V366_RUSSIAN_TITLES.json
           if git diff --cached --quiet; then
             echo "Catalog is already healthy"
             exit 0
           fi
-          git commit -m "Apply V365 automatic catalog data"
+          git commit -m "Apply V366 Russian title control data"
           git pull --rebase origin main
           git push origin main
