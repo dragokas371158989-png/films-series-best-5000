@@ -1,5 +1,5 @@
-/* GKM V365 PWA: shell + explicitly opened posters only. */
-const VERSION = "v365-2026-07-30";
+/* GKM V366 PWA: shell + explicitly opened posters only. */
+const VERSION = "v366-2026-07-30";
 const SHELL_CACHE = `gkm-shell-${VERSION}`;
 const RECENT_CACHE = `gkm-recent-${VERSION}`;
 const CACHE_PREFIX = "gkm-";
@@ -7,9 +7,9 @@ const SHELL_URLS = [
   "./",
   "./index.html",
   "./style.css",
-  "./app.js?v=365",
+  "./app.js?v=366",
   "./ai_search_worker_v343.js",
-  "./manifest.webmanifest?v=365",
+  "./manifest.webmanifest?v=366",
   "./logo-banner.webp",
   "./pwa-icon-192.png",
   "./pwa-icon-512.png"

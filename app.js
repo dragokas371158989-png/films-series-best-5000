@@ -43,11 +43,13 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "365";
+const GKM_DATA_CACHE_VERSION = "366";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
   "v365-mobile-card-aspect-canvas-tap-dock-2026-07-30";
+window.GKM_V366_RUSSIAN_TITLE_CONTROL_VERSION =
+  "v366-source-aware-russian-title-control-2026-07-30";
 window.GKM_V359_SHARED_SEARCH_VERSION = "v359-shared-main-ai-full-catalog-search-2026-07-28";
 window.GKM_V360_EXACT_FULL_SOURCE_SEARCH_VERSION = "v360-exact-full-source-title-search-2026-07-28";
 const GKM_V360_TITLE_ALIAS_GROUPS = [
@@ -249,11 +251,15 @@ window.GKM_V361_CONFIRMED_MEDIA_REPAIRS = GKM_V361_CONFIRMED_MEDIA_REPAIRS;
 
 /* GKM V362 AUTOMATIC CATALOG CONTROL START */
 const GKM_V362_CATALOG_CONTROL_VERSION =
-  "v364-automatic-full-catalog-control-2026-07-29";
+  "v366-automatic-russian-title-control-2026-07-30";
 const GKM_V364_CATALOG_HEALTH_URL =
   "data/fast/catalog_health_v364.json";
+const GKM_V366_TITLE_HEALTH_URL =
+  "data/fast/title_health_v366.json";
 let GKM_V364_FULL_CATALOG_HEALTH = null;
 let GKM_V364_FULL_CATALOG_HEALTH_PROMISE = null;
+let GKM_V366_TITLE_HEALTH = null;
+let GKM_V366_TITLE_HEALTH_PROMISE = null;
 const GKM_V362_MEDIA_TYPES = new Set([
   "фильм", "сериал", "аниме", "мультфильм",
   "movie", "series", "anime", "cartoon", "tv"
@@ -606,11 +612,39 @@ function gkmV364LoadFullCatalogHealth() {
   return GKM_V364_FULL_CATALOG_HEALTH_PROMISE;
 }
 
+function gkmV366LoadTitleHealth() {
+  if (GKM_V366_TITLE_HEALTH) {
+    return Promise.resolve(GKM_V366_TITLE_HEALTH);
+  }
+  if (GKM_V366_TITLE_HEALTH_PROMISE) {
+    return GKM_V366_TITLE_HEALTH_PROMISE;
+  }
+  GKM_V366_TITLE_HEALTH_PROMISE = fetch(
+    withDataVersion(GKM_V366_TITLE_HEALTH_URL),
+    { cache: "force-cache" }
+  )
+    .then(response => {
+      if (!response.ok) throw new Error(`title health ${response.status}`);
+      return response.json();
+    })
+    .then(report => {
+      GKM_V366_TITLE_HEALTH = report;
+      gkmV362RenderCatalogPanel();
+      return report;
+    })
+    .catch(error => {
+      console.warn("GKM V366 Russian title health", error);
+      return null;
+    });
+  return GKM_V366_TITLE_HEALTH_PROMISE;
+}
+
 function gkmV362RenderCatalogPanel() {
   const panel = document.getElementById("gkmV362CatalogPanel");
   if (!panel) return;
   const report = gkmV362CatalogReport();
   const full = GKM_V364_FULL_CATALOG_HEALTH;
+  const titles = GKM_V366_TITLE_HEALTH;
   const sampleRows = report.samples.slice(-12).reverse();
   const content = panel.querySelector("#gkmV362CatalogContent");
   if (!content) return;
@@ -635,6 +669,22 @@ function gkmV362RenderCatalogPanel() {
         <div><b>${Number(full.genericTitles || 0).toLocaleString("ru-RU")}</b><span>служебных названий</span></div>
       </div>
     ` : ""}
+    <div class="gkmV366TitleAudit">
+      <b>${titles ? "Русские названия проверены" : "Загружаю проверку русских названий…"}</b>
+      <span>${titles
+        ? `Сверены оригиналы, алиасы, источник, год и постер. За всё время автоматически исправлено ${Number(titles.catalogTitlesRepaired || 0).toLocaleString("ru-RU")} названий.`
+        : "Проверка не замедляет открытие сайта и загружается только вместе с окном «Контроль»."}</span>
+    </div>
+    ${titles ? `
+      <div class="gkmV362GuardStats gkmV366TitleStats">
+        <div><b>${Number(titles.russianTitles || 0).toLocaleString("ru-RU")}</b><span>русских названий</span></div>
+        <div><b>${Number(titles.catalogTitlesRepaired || 0).toLocaleString("ru-RU")}</b><span>исправлено в индексе</span></div>
+        <div><b>${Number(titles.recordsRepaired || 0).toLocaleString("ru-RU")}</b><span>копий синхронизировано</span></div>
+        <div><b>${Number(titles.collapsedFranchiseTitles || 0).toLocaleString("ru-RU")}</b><span>коротких имён франшиз</span></div>
+        <div><b>${Number(titles.syntheticTitles || 0).toLocaleString("ru-RU")}</b><span>служебных названий</span></div>
+        <div><b>${Number(titles.unresolvedRussianTitles || 0).toLocaleString("ru-RU")}</b><span>ждут подтверждённый источник</span></div>
+      </div>
+    ` : ""}
     <div class="gkmV362GuardStats">
       <div><b>${report.scanned.toLocaleString("ru-RU")}</b><span>проверено</span></div>
       <div><b>${report.repaired.toLocaleString("ru-RU")}</b><span>исправлено</span></div>
@@ -645,7 +695,7 @@ function gkmV362RenderCatalogPanel() {
     </div>
     <div class="gkmV362GuardRules">
       <b>Что контролируется</b>
-      <span>названия и ID · подтверждённые коллизии · дубли · годы · рейтинги · голоса · небезопасные ссылки постеров</span>
+      <span>русские названия всех частей и сезонов · оригиналы и алиасы · ID источников · дубли · годы · рейтинги · голоса · небезопасные ссылки постеров</span>
     </div>
     <div class="gkmV362GuardSamples">
       <b>Последние найденные проблемы</b>
@@ -659,7 +709,7 @@ function gkmV362RenderCatalogPanel() {
     </div>
     <p class="gkmV362GuardNote">
       Живая защита работает без загрузки 100-тысячного индекса и не замедляет старт.
-      Полный отчёт V364 создаётся сборкой и ночной проверкой каталога.
+      V366 исправляет только подтверждённые совпадения и не выдумывает перевод, если надёжного русского источника пока нет.
     </p>
   `;
 }
@@ -690,6 +740,10 @@ function gkmV362InstallCatalogPanel() {
       .gkmV362GuardStatus b{color:#50f0c5;font-size:18px}.gkmV362GuardStatus span,.gkmV362GuardRules span{opacity:.78}
       .gkmV364FullAudit{display:grid;gap:4px;padding:13px;border:1px solid rgba(103,233,255,.28);border-radius:16px;background:rgba(9,62,91,.46);margin-bottom:10px}
       .gkmV364FullAudit b{color:#67e9ff}.gkmV364FullAudit span{font-size:12px;opacity:.76}
+      .gkmV366TitleAudit{display:grid;gap:5px;padding:13px;border:1px solid rgba(168,119,255,.38);border-radius:16px;background:rgba(76,36,129,.3);margin-bottom:10px}
+      .gkmV366TitleAudit b{color:#d7bbff}.gkmV366TitleAudit span{font-size:12px;opacity:.8}
+      .gkmV366TitleStats div{border-color:rgba(168,119,255,.3)}
+      .gkmV366TitleStats b{color:#d7bbff}
       .gkmV362GuardStats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}
       .gkmV362GuardStats div{padding:13px;border:1px solid rgba(0,205,255,.23);border-radius:16px;background:rgba(6,26,55,.78)}
       .gkmV362GuardStats b{display:block;font-size:23px;color:#67e9ff}.gkmV362GuardStats span{font-size:12px;opacity:.72}
@@ -724,8 +778,8 @@ function gkmV362InstallCatalogPanel() {
       <div class="gkmV362GuardBox">
         <div class="gkmV362GuardHead">
           <div>
-            <h2>🛡 Контроль каталога V364</h2>
-            <p>Живая защита и полный автоматический аудит всех карточек</p>
+            <h2>🛡 Контроль каталога V366</h2>
+            <p>Автоматический аудит карточек и русских названий</p>
           </div>
           <button id="gkmV362CatalogClose" type="button">Закрыть</button>
         </div>
@@ -738,6 +792,7 @@ function gkmV362InstallCatalogPanel() {
   button.onclick = () => {
     gkmV362RenderCatalogPanel();
     gkmV364LoadFullCatalogHealth();
+    gkmV366LoadTitleHealth();
     if (typeof panel.showModal === "function") panel.showModal();
     else panel.setAttribute("open", "open");
   };
