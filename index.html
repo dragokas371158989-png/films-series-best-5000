@@ -14,7 +14,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="canonical" href="https://dragokas371158989-png.github.io/films-series-best-5000/">
-  <link rel="manifest" href="manifest.webmanifest?v=369">
+  <link rel="manifest" href="manifest.webmanifest?v=370">
 
   <meta property="og:url" content="https://dragokas371158989-png.github.io/films-series-best-5000/">
   <meta property="og:title" content="ГОЛУБЬ Каталог Мира">
@@ -34,7 +34,7 @@
   <link rel="prefetch" href="data/fast/poster_wall_v333/seed_all.json?v=355" as="fetch">
   <link rel="prefetch" href="data/fast/search_shards/manifest.json?v=364" as="fetch">
   <link rel="prefetch" href="data/fast/poster_atlas_v364/manifest.json?v=364" as="fetch">
-  <link rel="stylesheet" href="style.css?v=369">
+  <link rel="stylesheet" href="style.css?v=370">
   <style>
 
     /* GKM V160 — fixed controls layout: trash button no longer clipped, reset no longer stretches */
@@ -269,21 +269,21 @@
   </dialog>
 
   <script>
-    (async function gkmV369LoadFreshApp(){
-      window.GKM_V369_FRESH_SHELL_LOADER_VERSION =
-        "v369-delete-old-shell-before-app-2026-07-30";
+    (async function gkmV370LoadFreshApp(){
+      window.GKM_V370_FRESH_SHELL_LOADER_VERSION =
+        "v370-delete-old-shell-before-app-2026-07-30";
       try{
         if("caches" in window){
           const names=await caches.keys();
           await Promise.all(names
-            .filter(name=>/^gkm-shell-/i.test(name)&&!name.includes("v369-"))
+            .filter(name=>/^gkm-shell-/i.test(name)&&!name.includes("v370-"))
             .map(name=>caches.delete(name)));
         }
       }catch(error){
-        console.warn("GKM V369 cache cleanup",error);
+        console.warn("GKM V370 cache cleanup",error);
       }
       const script=document.createElement("script");
-      script.src="app.js?v=369";
+      script.src="app.js?v=370";
       script.async=false;
       document.head.appendChild(script);
     })();

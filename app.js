@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "369";
+const GKM_DATA_CACHE_VERSION = "370";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
@@ -283,6 +283,15 @@ const GKM_V362_CATALOG_STATS = {
   startedAt: Date.now()
 };
 const GKM_V362_CATALOG_SAMPLES = [];
+const GKM_V370_SESSION_CONTROL = {
+  checked: new Set(),
+  repaired: new Set(),
+  normalized: new Set(),
+  quarantined: new Set(),
+  duplicates: new Set(),
+  unsafePosters: new Set(),
+  issues: new Set()
+};
 let gkmV362CatalogPanelTimer = 0;
 
 function gkmV362RawTitle(item) {
@@ -315,6 +324,24 @@ function gkmV362StableKey(item) {
   const id = String(item.id || item.tmdbId || item.kinopoiskId || item.mal_id || "").trim();
   if (id) return `${type}|${source}|${id}`;
   return `${type}|${norm(gkmV362RawTitle(item))}|${String(item.year || "")}`;
+}
+
+function gkmV370SessionKey(item) {
+  const stable = gkmV362StableKey(item);
+  if (stable) return stable;
+  return [
+    gkmV362RawType(item) || "media",
+    norm(gkmV362RawTitle(item)),
+    String(item && item.year || "")
+  ].join("|");
+}
+
+function gkmV370TrackSession(set, item, suffix = "") {
+  const key = gkmV370SessionKey(item);
+  if (!key) return "";
+  const tracked = suffix ? `${key}|${suffix}` : key;
+  set.add(tracked);
+  return tracked;
 }
 
 function gkmV362PosterIdentity(item) {
@@ -362,6 +389,9 @@ function gkmV362SchedulePanelUpdate() {
 }
 
 function gkmV362RecordIssue(code, item, context, detail = "") {
+  const issueKey = `${code}|${gkmV370SessionKey(item)}`;
+  if (GKM_V370_SESSION_CONTROL.issues.has(issueKey)) return;
+  GKM_V370_SESSION_CONTROL.issues.add(issueKey);
   if (GKM_V362_CATALOG_SAMPLES.length < 30) {
     GKM_V362_CATALOG_SAMPLES.push({
       code,
@@ -384,13 +414,17 @@ function gkmV362CatalogGuardItem(item, context = "catalog") {
   if (!isMedia) return item;
 
   GKM_V362_CATALOG_STATS.scanned++;
+  gkmV370TrackSession(GKM_V370_SESSION_CONTROL.checked, item);
   GKM_V362_CATALOG_STATS.lastContext = String(context || "catalog").slice(0, 160);
 
   const source = String(item.source || "").toLowerCase();
   const repairRule = source === "tmdb"
     ? GKM_V361_CONFIRMED_MEDIA_REPAIRS[String(item.id || "")]
     : null;
-  if (repairRule) GKM_V362_CATALOG_STATS.repaired++;
+  if (repairRule) {
+    GKM_V362_CATALOG_STATS.repaired++;
+    gkmV370TrackSession(GKM_V370_SESSION_CONTROL.repaired, item);
+  }
   gkmV361RepairItem(item);
 
   const issues = [];
@@ -400,6 +434,7 @@ function gkmV362CatalogGuardItem(item, context = "catalog") {
     item.__gkmV362Quarantine = "missing-title";
     GKM_V362_CATALOG_STATS.invalidTitles++;
     GKM_V362_CATALOG_STATS.quarantined++;
+    gkmV370TrackSession(GKM_V370_SESSION_CONTROL.quarantined, item);
     gkmV362RecordIssue("missing-title", item, context, "Карточка скрыта: отсутствует название");
   }
 
@@ -466,6 +501,7 @@ function gkmV362CatalogGuardItem(item, context = "catalog") {
       item[field] = "";
       GKM_V362_CATALOG_STATS.unsafePosters++;
       GKM_V362_CATALOG_STATS.normalized++;
+      gkmV370TrackSession(GKM_V370_SESSION_CONTROL.unsafePosters, item);
       issues.push("unsafe-poster");
       gkmV362RecordIssue("unsafe-poster", item, context, raw);
       return;
@@ -475,6 +511,12 @@ function gkmV362CatalogGuardItem(item, context = "catalog") {
   if (!hasPosterValue && !String(item.poster_path || "").trim()) {
     GKM_V362_CATALOG_STATS.missingPosters++;
     issues.push("missing-poster");
+  }
+
+  if (issues.some(code => [
+    "invalid-year", "invalid-rating", "invalid-votes", "unsafe-poster"
+  ].includes(code))) {
+    gkmV370TrackSession(GKM_V370_SESSION_CONTROL.normalized, item);
   }
 
   item.__gkmV362StableKey = gkmV362StableKey(item);
@@ -537,6 +579,7 @@ function gkmV362CatalogGuardList(items, context = "catalog-list") {
       keys.forEach(key => keyToIndex.set(key, index));
     }
     GKM_V362_CATALOG_STATS.duplicates++;
+    GKM_V370_SESSION_CONTROL.duplicates.add(duplicateKey);
     gkmV362RecordIssue(
       "duplicate",
       item,
@@ -577,6 +620,16 @@ function gkmV362CatalogReport() {
     active: true,
     ...GKM_V362_CATALOG_STATS,
     samples: GKM_V362_CATALOG_SAMPLES.slice(),
+    session: {
+      uniqueChecked: GKM_V370_SESSION_CONTROL.checked.size,
+      repaired: GKM_V370_SESSION_CONTROL.repaired.size,
+      normalized: GKM_V370_SESSION_CONTROL.normalized.size,
+      quarantined: GKM_V370_SESSION_CONTROL.quarantined.size,
+      duplicates: GKM_V370_SESSION_CONTROL.duplicates.size,
+      unsafePosters: GKM_V370_SESSION_CONTROL.unsafePosters.size,
+      issues: GKM_V370_SESSION_CONTROL.issues.size,
+      batches: GKM_V362_CATALOG_STATS.batches
+    },
     confirmedRepairRules: Object.keys(GKM_V361_CONFIRMED_MEDIA_REPAIRS).length
   };
 }
@@ -647,29 +700,45 @@ function gkmV362RenderCatalogPanel() {
   const report = gkmV362CatalogReport();
   const full = GKM_V364_FULL_CATALOG_HEALTH;
   const titles = GKM_V366_TITLE_HEALTH;
+  const session = report.session || {};
+  const fullCriticalIssues = full ? (
+    Number(full.crossMediaIdCollisions || 0) +
+    Number(full.duplicateSourceMediaKeys || 0) +
+    Number(full.unsafePosters || 0)
+  ) : 0;
+  const uniqueSessionChecked = full
+    ? Math.min(Number(session.uniqueChecked || 0), Number(full.catalogItems || 0))
+    : Number(session.uniqueChecked || 0);
   const sampleRows = report.samples.slice(-12).reverse();
   const content = panel.querySelector("#gkmV362CatalogContent");
   if (!content) return;
   content.innerHTML = `
     <div class="gkmV362GuardStatus">
-      <b>Защита включена</b>
-      <span>Проверяются все загружаемые списки до показа карточек; полный индекс сверяется автоматически.</span>
+      <b>${full
+        ? (fullCriticalIssues === 0 ? "Каталог исправен" : "Каталог требует внимания")
+        : "Защита включена"}</b>
+      <span>${full
+        ? (fullCriticalIssues === 0
+          ? "Критических ошибок ID, дублей ключей и небезопасных ссылок не найдено."
+          : `Критических проблем: ${fullCriticalIssues.toLocaleString("ru-RU")}. Подробности показаны ниже.`)
+        : "Полный отчёт подгружается только при открытии этого окна и не замедляет сайт."}</span>
     </div>
     <div class="gkmV364FullAudit">
-      <b>${full ? "Полная проверка завершена" : "Загружаю полный отчёт…"}</b>
+      <b>${full ? "Полный каталог проверен" : "Загружаю полный отчёт…"}</b>
       <span>${full
         ? `${Number(full.catalogItems || 0).toLocaleString("ru-RU")} карточек · ${gkmV362Esc(String(full.generatedAt || "").replace("T", " ").replace("Z", " UTC"))}`
         : "Локальный старт сайта не блокируется: отчёт подгружается только при открытии «Контроля»."}</span>
     </div>
     ${full ? `
       <div class="gkmV362GuardStats gkmV364FullStats">
-        <div><b>${Number(full.catalogItems || 0).toLocaleString("ru-RU")}</b><span>во всём индексе</span></div>
-        <div><b>${Number(full.confirmedRepairsPresent || 0).toLocaleString("ru-RU")}</b><span>коллизий исправлено</span></div>
-        <div><b>${Number(full.crossMediaIdCollisions || 0).toLocaleString("ru-RU")}</b><span>ID смешано</span></div>
-        <div><b>${Number(full.duplicateSourceMediaKeys || 0).toLocaleString("ru-RU")}</b><span>дублей ключей</span></div>
-        <div><b>${Number(full.missingPosters || 0).toLocaleString("ru-RU")}</b><span>без постера</span></div>
-        <div><b>${Number(full.genericTitles || 0).toLocaleString("ru-RU")}</b><span>служебных названий</span></div>
+        <div><b>${Number(full.catalogItems || 0).toLocaleString("ru-RU")}</b><span>уникальных карточек</span></div>
+        <div><b>${Number(full.confirmedRepairsPresent || 0).toLocaleString("ru-RU")}</b><span>подтверждённых исправлений</span></div>
+        <div><b>${Number(full.crossMediaIdCollisions || 0).toLocaleString("ru-RU")}</b><span>ошибок ID</span></div>
+        <div><b>${Number(full.duplicateSourceMediaKeys || 0).toLocaleString("ru-RU")}</b><span>дублей в индексе</span></div>
+        <div><b>${Number(full.missingPosters || 0).toLocaleString("ru-RU")}</b><span>без исходного постера</span></div>
+        <div><b>${Number(full.genericTitles || 0).toLocaleString("ru-RU")}</b><span>названий требуют проверки</span></div>
       </div>
+      <p class="gkmV370AuditHint">Карточки без исходного постера не остаются пустыми: сайт показывает для них сгенерированную обложку.</p>
     ` : ""}
     <div class="gkmV366TitleAudit">
       <b>${titles ? "Русские названия проверены" : "Загружаю проверку русских названий…"}</b>
@@ -682,25 +751,28 @@ function gkmV362RenderCatalogPanel() {
         <div><b>${Number(titles.russianTitles || 0).toLocaleString("ru-RU")}</b><span>русских названий</span></div>
         <div><b>${Number(titles.catalogTitlesRepaired || 0).toLocaleString("ru-RU")}</b><span>исправлено в индексе</span></div>
         <div><b>${Number(titles.recordsRepaired || 0).toLocaleString("ru-RU")}</b><span>копий синхронизировано</span></div>
-        <div><b>${Number(titles.collapsedFranchiseTitles || 0).toLocaleString("ru-RU")}</b><span>коротких имён франшиз</span></div>
-        <div><b>${Number(titles.syntheticTitles || 0).toLocaleString("ru-RU")}</b><span>служебных названий</span></div>
         <div><b>${Number(titles.unresolvedRussianTitles || 0).toLocaleString("ru-RU")}</b><span>ждут подтверждённый источник</span></div>
       </div>
+      <p class="gkmV370AuditHint">Служебных названий: ${Number(titles.syntheticTitles || 0).toLocaleString("ru-RU")}. Коротких имён франшиз: ${Number(titles.collapsedFranchiseTitles || 0).toLocaleString("ru-RU")}. Они не переименовываются без надёжного источника.</p>
     ` : ""}
-    <div class="gkmV362GuardStats">
-      <div><b>${report.scanned.toLocaleString("ru-RU")}</b><span>проверено</span></div>
-      <div><b>${report.repaired.toLocaleString("ru-RU")}</b><span>исправлено</span></div>
-      <div><b>${report.duplicates.toLocaleString("ru-RU")}</b><span>дублей убрано</span></div>
-      <div><b>${report.quarantined.toLocaleString("ru-RU")}</b><span>скрыто</span></div>
-      <div><b>${report.normalized.toLocaleString("ru-RU")}</b><span>полей очищено</span></div>
-      <div><b>${report.missingPosters.toLocaleString("ru-RU")}</b><span>без постера</span></div>
+    <div class="gkmV370SessionAudit">
+      <b>Проверено в текущем сеансе</b>
+      <span>Здесь считаются уникальные карточки. Повторный поиск, прокрутка и открытие коллекции больше не увеличивают цифры.</span>
+    </div>
+    <div class="gkmV362GuardStats gkmV370SessionStats">
+      <div><b>${uniqueSessionChecked.toLocaleString("ru-RU")}</b><span>уникальных карточек загружено</span></div>
+      <div><b>${Number(session.repaired || 0).toLocaleString("ru-RU")}</b><span>карточек исправлено</span></div>
+      <div><b>${Number(session.duplicates || 0).toLocaleString("ru-RU")}</b><span>повторов удалено из списков</span></div>
+      <div><b>${Number(session.quarantined || 0).toLocaleString("ru-RU")}</b><span>некорректных карточек скрыто</span></div>
+      <div><b>${Number(session.normalized || 0).toLocaleString("ru-RU")}</b><span>карточек нормализовано</span></div>
+      <div><b>${Number(session.issues || 0).toLocaleString("ru-RU")}</b><span>уникальных предупреждений</span></div>
     </div>
     <div class="gkmV362GuardRules">
       <b>Что контролируется</b>
       <span>русские названия всех частей и сезонов · оригиналы и алиасы · ID источников · дубли · годы · рейтинги · голоса · небезопасные ссылки постеров</span>
     </div>
     <div class="gkmV362GuardSamples">
-      <b>Последние найденные проблемы</b>
+      <b>Последние уникальные предупреждения</b>
       ${sampleRows.length ? sampleRows.map(row => `
         <div class="gkmV362GuardSample">
           <span>${gkmV362Esc(row.code)}</span>
@@ -710,8 +782,8 @@ function gkmV362RenderCatalogPanel() {
       `).join("") : `<p>Пока ошибок в загруженных данных не найдено.</p>`}
     </div>
     <p class="gkmV362GuardNote">
-      Живая защита работает без загрузки 100-тысячного индекса и не замедляет старт.
-      V367 также сверяет название каждой части с её постером и метаданными коллекции; неподтверждённый перевод не выдумывается.
+      Полный отчёт показывает состояние всего индекса, а блок «Текущий сеанс» — только уникальные карточки, которые уже загружались на открытой странице.
+      V370 не считает повторные копии и не выдаёт их за отсутствующие постеры.
     </p>
   `;
 }
@@ -744,8 +816,12 @@ function gkmV362InstallCatalogPanel() {
       .gkmV364FullAudit b{color:#67e9ff}.gkmV364FullAudit span{font-size:12px;opacity:.76}
       .gkmV366TitleAudit{display:grid;gap:5px;padding:13px;border:1px solid rgba(168,119,255,.38);border-radius:16px;background:rgba(76,36,129,.3);margin-bottom:10px}
       .gkmV366TitleAudit b{color:#d7bbff}.gkmV366TitleAudit span{font-size:12px;opacity:.8}
+      .gkmV366TitleStats{grid-template-columns:repeat(4,1fr)}
       .gkmV366TitleStats div{border-color:rgba(168,119,255,.3)}
       .gkmV366TitleStats b{color:#d7bbff}
+      .gkmV370SessionAudit{display:grid;gap:5px;padding:13px;border:1px solid rgba(80,240,197,.3);border-radius:16px;background:rgba(25,173,142,.08);margin-top:12px}
+      .gkmV370SessionAudit b{color:#50f0c5}.gkmV370SessionAudit span,.gkmV370AuditHint{font-size:12px;opacity:.74}
+      .gkmV370AuditHint{margin:7px 3px 12px}
       .gkmV362GuardStats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}
       .gkmV362GuardStats div{padding:13px;border:1px solid rgba(0,205,255,.23);border-radius:16px;background:rgba(6,26,55,.78)}
       .gkmV362GuardStats b{display:block;font-size:23px;color:#67e9ff}.gkmV362GuardStats span{font-size:12px;opacity:.72}
@@ -755,7 +831,7 @@ function gkmV362InstallCatalogPanel() {
       .gkmV362GuardSamples p,.gkmV362GuardNote{opacity:.68;font-size:13px}
       @media(max-width:700px){
         #gkmV362CatalogGuardBtn{padding:9px 10px;font-size:12px}
-        .gkmV362GuardBox{padding:14px}.gkmV362GuardStats{grid-template-columns:repeat(2,1fr)}
+        .gkmV362GuardBox{padding:14px}.gkmV362GuardStats,.gkmV366TitleStats{grid-template-columns:repeat(2,1fr)}
         .gkmV362GuardHead h2{font-size:20px}.gkmV362GuardSample{grid-template-columns:1fr}
         .gkmV362GuardSample span{grid-row:auto}
       }
@@ -780,8 +856,8 @@ function gkmV362InstallCatalogPanel() {
       <div class="gkmV362GuardBox">
         <div class="gkmV362GuardHead">
           <div>
-            <h2>🛡 Контроль каталога V367</h2>
-            <p>Автоматический аудит карточек и русских названий</p>
+            <h2>🛡 Контроль каталога V370</h2>
+            <p>Понятный аудит уникальных карточек и русских названий</p>
           </div>
           <button id="gkmV362CatalogClose" type="button">Закрыть</button>
         </div>
@@ -20406,7 +20482,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=369",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=370",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);
@@ -20973,3 +21049,8 @@ Endpoint: ${endpoint||"не задан"}`;
 window.GKM_V369_ORDER_BADGE_LAYOUT_VERSION =
   "v369-watch-order-badge-inside-card-badge-rail-2026-07-30";
 /* GKM V369 ORDER BADGE LAYOUT FIX END */
+
+/* GKM V370 UNIQUE CATALOG CONTROL COUNTERS START */
+window.GKM_V370_UNIQUE_CATALOG_CONTROL_VERSION =
+  "v370-unique-session-counters-and-clear-health-status-2026-07-30";
+/* GKM V370 UNIQUE CATALOG CONTROL COUNTERS END */
