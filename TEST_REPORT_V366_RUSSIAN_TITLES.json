@@ -1,26 +1,17 @@
 {
   "version": "V366",
-  "generatedAt": "2026-07-30T09:35:49Z",
+  "generatedAt": "2026-07-30T09:57:32Z",
   "status": "success",
   "stats": {
     "recordsScanned": 344610,
-    "recordsRepaired": 200,
-    "catalogTitlesRepaired": 57,
-    "reason:same-poster": 36,
-    "reason:exact-original": 140,
-    "reason:contained-original": 4,
-    "reason:franchise-movie-year": 20,
-    "context:pages/all": 57,
-    "filesChanged": 116,
-    "context:pages/anime": 14,
-    "context:pages/cartoons": 25,
-    "context:pages/movies": 7,
-    "context:pages/new": 5,
-    "context:pages/popular": 6,
-    "context:pages/series": 11,
-    "context:.": 18
+    "recordsRepaired": 3,
+    "catalogTitlesRepaired": 1,
+    "reason:same-poster": 3,
+    "context:pages/all": 1,
+    "filesChanged": 2,
+    "context:pages/cartoons": 1
   },
-  "staticPagesUpdated": 16,
+  "staticPagesUpdated": 0,
   "health": {
     "catalogItems": 102470,
     "russianTitles": 102447,
@@ -28,8 +19,8 @@
     "syntheticTitles": 16289,
     "collapsedFranchiseTitles": 5,
     "unresolvedRussianTitles": 16317,
-    "catalogTitlesRepaired": 57,
-    "recordsRepaired": 200
+    "catalogTitlesRepaired": 58,
+    "recordsRepaired": 203
   },
   "verification": {
     "ok": true,
