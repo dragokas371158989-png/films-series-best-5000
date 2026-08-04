@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "373";
+const GKM_DATA_CACHE_VERSION = "374";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
@@ -54,6 +54,8 @@ window.GKM_V372_TOUCH_POSTER_SELECTION_VERSION =
   "v372-touch-tap-open-and-locked-hover-selection-2026-08-04";
 window.GKM_V373_MOBILE_DISCOVERY_VERSION =
   "v373-unified-list-mobile-navigation-long-press-suggestions-calendar-deep-links-2026-08-04";
+window.GKM_V374_ANIME_LIST_COMMUNITY_VERSION =
+  "v374-six-anime-services-direct-watched-add-public-community-2026-08-04";
 window.GKM_V367_RUSSIAN_TITLE_CONTROL_VERSION =
   "v367-source-aware-russian-title-and-collection-control-2026-07-30";
 window.GKM_V366_RUSSIAN_TITLE_CONTROL_VERSION =
@@ -17860,7 +17862,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V373</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V374</div>
           <div class="gkmV343Sub">Сбалансированный локальный Poster Atlas мгновенно заполняет фильмы, сериалы, аниме и мультфильмы; внешняя сеть остаётся резервом.</div>
         </div>
         <div class="gkmV343Actions">
@@ -20639,7 +20641,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=373",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=374",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);
@@ -21850,8 +21852,8 @@ console.log("GKM V372: touch tap opens a poster and drag locks the exact hovered
     const siteQuery=domain=>`https://yandex.ru/search/?text=${encodeURIComponent(`site:${domain} ${text(query)}`)}`;
     const urls={
       kinopoisk:`https://www.kinopoisk.ru/index.php?kp_query=${q}`,
-      wink:siteQuery("wink.ru"),
-      kion:siteQuery("kion.ru"),
+      wink:"https://wink.ru/collections/anime",
+      kion:"https://kion.ru/video/filter/mainAnime",
       premier:siteQuery("premier.one"),
       ivi:siteQuery("ivi.ru"),
       okko:siteQuery("okko.tv"),
@@ -21863,7 +21865,8 @@ console.log("GKM V372: touch tap opens a poster and drag locks the exact hovered
       mal:`https://myanimelist.net/anime.php?q=${q}`,
       anilist:`https://anilist.co/search/anime?search=${q}`,
       animeplanet:`https://www.anime-planet.com/anime/all?name=${q}`,
-      anidb:`https://anidb.net/anime/?adb.search=${q}`
+      anidb:`https://anidb.net/anime/?adb.search=${q}`,
+      kitsu:`https://kitsu.app/anime?text=${q}`
     };
     return urls[kind]||siteQuery(kind);
   }
@@ -21875,15 +21878,14 @@ console.log("GKM V372: touch tap opens a poster and drag locks the exact hovered
     block.style.display="";
     const query=`${titleOf(item)} ${yearOf(item)}`.trim();
     const local=[
-      ["Кинопоиск","kinopoisk"],["Wink","wink"],["KION","kion"],["PREMIER","premier"],
-      ["Иви","ivi"],["Okko","okko"],["Амедиатека","amediateka"]
+      ["Кинопоиск","kinopoisk"],["Wink","wink"],["KION","kion"],
+      ["Иви","ivi"],["Okko","okko"],["Crunchyroll","crunchyroll"]
     ];
-    const info=[["Shikimori","shikimori"],["MyAnimeList","mal"],["AniList","anilist"],["Anime-Planet","animeplanet"],["AniDB","anidb"]];
+    const info=[["Shikimori","shikimori"],["MyAnimeList","mal"],["AniList","anilist"],["Anime-Planet","animeplanet"],["AniDB","anidb"],["Kitsu","kitsu"]];
     block.innerHTML=`<h3 class="links-title">Где смотреть аниме</h3>
-      <p class="gkm-v373-provider-note">Проверенные действующие сервисы. Наличие конкретного тайтла зависит от лицензии, подписки и региона.</p>
+      <p class="gkm-v373-provider-note">6 действующих сервисов. Wink и KION открывают официальный раздел аниме; остальные кнопки ищут выбранный тайтл. Наличие зависит от лицензии, подписки и региона.</p>
       <div class="detail-buttons gkm-v373-provider-buttons">${local.map(([label,kind])=>`<a href="${esc(providerUrl(kind,query))}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`).join("")}</div>
-      <details class="gkm-v373-global-providers"><summary>Международный сервис</summary><div class="detail-buttons"><a href="${esc(providerUrl("crunchyroll",query))}" target="_blank" rel="noopener noreferrer">Crunchyroll</a></div><small>Может быть недоступен в отдельных регионах; каталог и язык зависят от страны.</small></details>
-      <details class="gkm-v373-anime-info"><summary>Информация и списки</summary><div class="detail-buttons">${info.map(([label,kind])=>`<a href="${esc(providerUrl(kind,titleOf(item)))}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`).join("")}</div></details>`;
+      <details class="gkm-v373-anime-info"><summary>Информация и личные списки · 6 сайтов</summary><div class="detail-buttons">${info.map(([label,kind])=>`<a href="${esc(providerUrl(kind,titleOf(item)))}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`).join("")}</div></details>`;
   }
 
   function ensureFeedback(){
@@ -21952,7 +21954,7 @@ console.log("GKM V372: touch tap opens a poster and drag locks the exact hovered
     if(window.GKM_V373_INSTALLED==="1")return;
     window.GKM_V373_INSTALLED="1";
     ensureMobileNav();ensureQuickSheet();ensureDashboard();ensureFeedback();installLongPress();installSuggestions();installOverviewUpgrade();installAnimeRelated();patchDetails();renderDashboard();
-    document.addEventListener("click",event=>unifyFavoriteWithList(event.target));
+    document.addEventListener("click",event=>unifyFavoriteWithList(event.target),true);
     window.addEventListener("gkm:v363-list-updated",renderDashboard);
     window.addEventListener("storage",renderDashboard);
     document.getElementById("detailsDialog")?.addEventListener("close",clearDeepLink);
@@ -21970,3 +21972,147 @@ console.log("GKM V372: touch tap opens a poster and drag locks the exact hovered
   console.log("GKM V373: favourites and My List unified; mobile navigation, long press, suggestions, calendar, watch order and deep links installed");
 })();
 /* GKM V373 MOBILE DISCOVERY, UNIFIED LIST AND DEEP LINKS END */
+
+/* GKM V374 SIX ANIME SERVICES, DIRECT LIST ADD AND PUBLIC COMMUNITY START */
+(function(){
+  "use strict";
+  if(window.GKM_V374_INSTALLED==="1")return;
+  window.GKM_V374_INSTALLED="1";
+
+  const SEARCH_STATE={query:"",status:"completed",items:[],busy:false};
+  const REPOSITORY="dragokas371158989-png/films-series-best-5000";
+  const COMMUNITY_API=`https://api.github.com/repos/${REPOSITORY}/issues`;
+
+  function value(raw){return String(raw??"").trim();}
+  function html(raw){return value(raw).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));}
+  function title(item){try{return value(typeof getTitleRu==="function"?getTitleRu(item):"")||value(item?.ru||item?.title_ru||item?.name||item?.title||item?.en);}catch{return value(item?.ru||item?.title||item?.name);}}
+  function type(item){try{return value(typeof getType==="function"?getType(item):"")||value(item?.type||item?.category);}catch{return value(item?.type);}}
+  function year(item){try{return value(typeof getYear==="function"?getYear(item):"")||value(item?.year).match(/(?:18|19|20)\d{2}/)?.[0]||"";}catch{return value(item?.year);}}
+  function poster(item){try{return value(typeof posterSrc==="function"?posterSrc(item,185):"")||value(item?.poster||item?.poster_url||item?.image||item?.cover);}catch{return value(item?.poster||item?.image);}}
+  function isAnime(item){return /аниме|anime/i.test(type(item));}
+  function listApi(){return window.GKM_V363_MY_LIST||null;}
+
+  function renderSearchResults(section){
+    const results=section.querySelector("[data-v374-add-results]");
+    if(!results)return;
+    if(SEARCH_STATE.busy){results.innerHTML='<div class="gkm-v374-add-message">Ищу аниме во всём каталоге…</div>';return;}
+    if(!SEARCH_STATE.query){results.innerHTML='<div class="gkm-v374-add-message">Напиши название, например «Наруто» или «Атака титанов».</div>';return;}
+    if(!SEARCH_STATE.items.length){results.innerHTML='<div class="gkm-v374-add-message">Совпадений среди аниме не найдено. Попробуй русское или оригинальное название.</div>';return;}
+    results.innerHTML=SEARCH_STATE.items.map((item,index)=>`<article class="gkm-v374-add-result">
+      ${poster(item)?`<img src="${html(poster(item))}" alt="" loading="lazy" decoding="async">`:'<span class="gkm-v374-add-poster">🎬</span>'}
+      <div><b>${html(title(item))}</b><small>${html(type(item)||"Аниме")}${year(item)?` · ${html(year(item))}`:""}</small></div>
+      <button type="button" data-v374-add-index="${index}">${SEARCH_STATE.status==="completed"?"✓ Добавить просмотренное":"Добавить в список"}</button>
+    </article>`).join("");
+  }
+
+  async function runAnimeSearch(section){
+    const input=section.querySelector("[data-v374-add-query]");
+    const query=value(input?.value);
+    SEARCH_STATE.query=query;
+    SEARCH_STATE.status=value(section.querySelector("[data-v374-add-status]")?.value)||"completed";
+    SEARCH_STATE.items=[];
+    if(!query){renderSearchResults(section);input?.focus();return;}
+    SEARCH_STATE.busy=true;renderSearchResults(section);
+    try{
+      const response=await window.GKM_V359_SHARED_CATALOG_SEARCH?.(query,{type:"Аниме",exactTitle:false,sort:"smart"});
+      const rows=Array.isArray(response?.items)?response.items:[];
+      const seen=new Set();
+      SEARCH_STATE.items=rows.filter(item=>{
+        if(!isAnime(item))return false;
+        let key="";try{key=value(gkmV362StableKey(item));}catch{key=`${title(item)}|${year(item)}`;}
+        if(!key||seen.has(key))return false;seen.add(key);return true;
+      }).slice(0,12);
+    }catch(error){console.warn("GKM V374 anime add search",error);}
+    SEARCH_STATE.busy=false;renderSearchResults(section);
+  }
+
+  function ensureDirectListAdd(){
+    const box=document.getElementById("gkmV363Box");
+    const profile=listApi()?.getCurrentProfile?.();
+    if(!box||!profile||box.querySelector("#gkmV374DirectAdd"))return;
+    const actions=box.querySelector(".gkmV363Actions");
+    if(!actions)return;
+    const section=document.createElement("section");
+    section.id="gkmV374DirectAdd";
+    section.innerHTML=`<details ${SEARCH_STATE.query?"open":""}><summary>➕ Добавить аниме в «Мой список»</summary>
+      <p>Найди тайтл во всём каталоге и сразу отметь его просмотренным или выбери другой статус.</p>
+      <div class="gkm-v374-add-controls"><input data-v374-add-query value="${html(SEARCH_STATE.query)}" placeholder="Название аниме"><select data-v374-add-status>
+        <option value="completed">Просмотрено</option><option value="want">Хочу посмотреть</option><option value="watching">Смотрю</option><option value="paused">Отложено</option><option value="dropped">Брошено</option>
+      </select><button type="button" data-v374-add-search>Найти</button></div><div data-v374-add-results></div>
+    </details>`;
+    actions.insertAdjacentElement("afterend",section);
+    const status=section.querySelector("[data-v374-add-status]");if(status)status.value=SEARCH_STATE.status;
+    renderSearchResults(section);
+    section.addEventListener("click",event=>{
+      if(event.target.closest("[data-v374-add-search]")){runAnimeSearch(section);return;}
+      const button=event.target.closest("[data-v374-add-index]");
+      if(!button)return;
+      const item=SEARCH_STATE.items[Number(button.dataset.v374AddIndex)];
+      if(!item)return;
+      SEARCH_STATE.status=value(section.querySelector("[data-v374-add-status]")?.value)||"completed";
+      listApi()?.setStatus?.(item,SEARCH_STATE.status);
+    });
+    section.querySelector("[data-v374-add-query]")?.addEventListener("keydown",event=>{if(event.key==="Enter"){event.preventDefault();runAnimeSearch(section);}});
+    section.querySelector("[data-v374-add-status]")?.addEventListener("change",event=>{SEARCH_STATE.status=value(event.target.value)||"completed";renderSearchResults(section);});
+  }
+
+  function communityIssueUrl(){
+    const message=value(document.getElementById("gkmV374CommunityText")?.value);
+    const name=value(document.getElementById("gkmV374CommunityName")?.value);
+    if(!message){alert("Сначала напиши сообщение.");return"";}
+    const first=value(message.split(/\n+/)[0]).slice(0,72)||"Сообщение";
+    const body=`${message}${name?`\n\nАвтор на сайте: ${name}`:""}\n\nСтраница: ${location.href}`;
+    return `https://github.com/${REPOSITORY}/issues/new?title=${encodeURIComponent(`[Сообщество] ${first}`)}&body=${encodeURIComponent(body)}`;
+  }
+
+  function communityDate(raw){try{return new Intl.DateTimeFormat("ru-RU",{day:"2-digit",month:"short",year:"numeric"}).format(new Date(raw));}catch{return"";}}
+
+  async function loadCommunity(){
+    const output=document.getElementById("gkmV374CommunityFeed");if(!output)return;
+    output.innerHTML='<div class="gkm-v374-community-state">Загружаю публичные сообщения…</div>';
+    try{
+      const response=await fetch(`${COMMUNITY_API}?state=all&sort=updated&direction=desc&per_page=30`,{headers:{Accept:"application/vnd.github+json"}});
+      if(!response.ok)throw new Error(`GitHub ${response.status}`);
+      const issues=(await response.json()).filter(issue=>!issue.pull_request&&(/^\[сообщество\]/i.test(value(issue.title))||(issue.labels||[]).some(label=>/community|сообщество/i.test(value(label.name))))).slice(0,10);
+      if(!issues.length){output.innerHTML='<div class="gkm-v374-community-state">Пока сообщений нет. Стань первым участником обсуждения.</div>';return;}
+      const comments=await Promise.all(issues.slice(0,5).map(async issue=>{
+        if(!issue.comments)return[];
+        try{const reply=await fetch(`${issue.comments_url}?per_page=20`,{headers:{Accept:"application/vnd.github+json"}});return reply.ok?await reply.json():[];}catch{return[];}
+      }));
+      output.innerHTML=issues.map((issue,index)=>`<article class="gkm-v374-topic"><header><b>${html(value(issue.title).replace(/^\[сообщество\]\s*/i,""))}</b><span>@${html(issue.user?.login)} · ${html(communityDate(issue.updated_at))}</span></header>${issue.body?`<p>${html(value(issue.body).slice(0,1400))}</p>`:""}${(comments[index]||[]).map(comment=>`<div class="gkm-v374-reply"><b>@${html(comment.user?.login)}</b><p>${html(value(comment.body).slice(0,900))}</p></div>`).join("")}<a href="${html(issue.html_url)}" target="_blank" rel="noopener noreferrer">Ответить и открыть на GitHub · ${Number(issue.comments||0)}</a></article>`).join("");
+    }catch(error){
+      output.innerHTML=`<div class="gkm-v374-community-state">Не удалось получить сообщения (${html(error.message)}). Проверь интернет и нажми «Обновить».</div>`;
+    }
+  }
+
+  function openCommunity(){document.getElementById("gkmV374Community")?.classList.add("open");loadCommunity();}
+  function closeCommunity(){document.getElementById("gkmV374Community")?.classList.remove("open");}
+
+  function ensureCommunity(){
+    const old=document.getElementById("gkmV373Feedback");if(old)old.remove();
+    const bar=document.getElementById("gkmV373FeedbackBar");
+    if(bar&&!bar.dataset.v374Community){bar.dataset.v374Community="1";bar.innerHTML='<button type="button">💬 Сообщество</button><span>Идеи, проблемы и ответы видны всем посетителям</span>';bar.querySelector("button").onclick=openCommunity;}
+    if(document.getElementById("gkmV374Community"))return;
+    const dialog=document.createElement("div");dialog.id="gkmV374Community";
+    dialog.innerHTML=`<div class="gkm-v374-community-backdrop" data-v374-community-close></div><section class="gkm-v374-community-box" role="dialog" aria-modal="true" aria-labelledby="gkmV374CommunityTitle"><button class="gkm-v374-community-close" data-v374-community-close type="button">✕</button><h2 id="gkmV374CommunityTitle">💬 Сообщество сайта</h2><p>Сообщения и ответы публичны — их увидят все посетители. Для публикации GitHub попросит войти в аккаунт.</p><div class="gkm-v374-community-compose"><input id="gkmV374CommunityName" maxlength="50" placeholder="Имя или ник — необязательно"><textarea id="gkmV374CommunityText" maxlength="3000" rows="4" placeholder="Напиши идею, вопрос или сообщи о проблеме"></textarea><div><button type="button" data-v374-community-send>Опубликовать</button><button type="button" data-v374-community-refresh>Обновить сообщения</button></div></div><div id="gkmV374CommunityFeed"></div></section>`;
+    document.body.appendChild(dialog);
+    dialog.addEventListener("click",event=>{
+      if(event.target.closest("[data-v374-community-close]")){closeCommunity();return;}
+      if(event.target.closest("[data-v374-community-refresh]")){loadCommunity();return;}
+      if(event.target.closest("[data-v374-community-send]")){const url=communityIssueUrl();if(url)window.open(url,"_blank","noopener,noreferrer");}
+    });
+  }
+
+  function install(){
+    ensureCommunity();ensureDirectListAdd();
+    const box=document.getElementById("gkmV363Box");if(box)new MutationObserver(()=>requestAnimationFrame(ensureDirectListAdd)).observe(box,{childList:true});
+    document.addEventListener("click",event=>{if(event.target.closest("#gkmV363ListBtn,[data-v373-nav='list']"))setTimeout(ensureDirectListAdd,20);});
+    window.addEventListener("gkm:v363-list-updated",()=>setTimeout(ensureDirectListAdd,20));
+  }
+
+  window.GKM_V374_FEATURES=Object.freeze({ensureDirectListAdd,openCommunity,loadCommunity});
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
+  setTimeout(()=>{ensureCommunity();ensureDirectListAdd();},700);
+  console.log("GKM V374: six anime services, direct watched-anime add, fixed favourite sync and public community installed");
+})();
+/* GKM V374 SIX ANIME SERVICES, DIRECT LIST ADD AND PUBLIC COMMUNITY END */
