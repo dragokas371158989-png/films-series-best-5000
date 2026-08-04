@@ -1,4 +1,4 @@
-name: GKM V371 Catalog Installer
+name: GKM V372 Catalog Installer
 
 on:
   workflow_dispatch:
@@ -74,9 +74,10 @@ jobs:
           grep -q "GKM_V369_ORDER_BADGE_LAYOUT_VERSION" app.js
           grep -q "GKM_V370_UNIQUE_CATALOG_CONTROL_VERSION" app.js
           grep -q "GKM_V371_MOBILE_CARDS_TOUCH_CANVAS_DOCK_VERSION" app.js
+          grep -q "GKM_V372_TOUCH_POSTER_SELECTION_VERSION" app.js
           ! grep -qi "cylinderGeometry" app.js
 
-      - name: Commit verified V371 data
+      - name: Commit verified V372 data
         run: |
           git config user.name "gkm-v364-control"
           git config user.email "gkm-v364-control@users.noreply.github.com"
@@ -100,6 +101,6 @@ jobs:
             echo "Catalog is already healthy"
             exit 0
           fi
-          git commit -m "Apply V371 mobile cards touch canvas dock"
+          git commit -m "Apply V372 touch poster selection fix"
           git pull --rebase --autostash origin main
           git push origin main
