@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "372";
+const GKM_DATA_CACHE_VERSION = "373";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
@@ -52,6 +52,8 @@ window.GKM_V371_MOBILE_CARDS_TOUCH_CANVAS_DOCK_VERSION =
   "v371-two-column-cards-touch-magnetic-wave-collapsible-dock-2026-07-30";
 window.GKM_V372_TOUCH_POSTER_SELECTION_VERSION =
   "v372-touch-tap-open-and-locked-hover-selection-2026-08-04";
+window.GKM_V373_MOBILE_DISCOVERY_VERSION =
+  "v373-unified-list-mobile-navigation-long-press-suggestions-calendar-deep-links-2026-08-04";
 window.GKM_V367_RUSSIAN_TITLE_CONTROL_VERSION =
   "v367-source-aware-russian-title-and-collection-control-2026-07-30";
 window.GKM_V366_RUSSIAN_TITLE_CONTROL_VERSION =
@@ -2927,7 +2929,13 @@ function openDetails(item) {
     try { return JSON.parse(localStorage.getItem(historyKey) || "[]"); }
     catch { return []; }
   })().filter(x => gkmV362StableKey(x) !== id);
-  history.unshift(item);
+  // V373: не кладём в синхронный localStorage тяжёлые массивы всей франшизы.
+  // На мобильных это заметно задерживало первый кадр модального окна.
+  const historyItem = { ...item };
+  delete historyItem.__gkmCollectionItems;
+  delete historyItem.__gkmV328FamilyItems;
+  delete historyItem.__gkmV333FamilyItems;
+  history.unshift(historyItem);
   localStorage.setItem(historyKey, JSON.stringify(history.slice(0, 80)));
 
   const dialog = $("detailsDialog");
@@ -2949,7 +2957,7 @@ function openDetails(item) {
     poster.loading = "eager";
     poster.fetchPriority = "high";
     poster.src = posterSrc(item, 342) || "";
-    schedulePosterRecovery(document);
+    schedulePosterRecovery(dialog || poster.parentElement || document);
   }
   if (title) title.textContent = displayTitle(item);
   if (meta) meta.textContent = `${getType(item)} · ${getYear(item) || "—"} · ${rankLabel(item)} · ${getRating(item) || "—"} · ${getVotes(item)} голосов`;
@@ -3003,9 +3011,10 @@ function openDetails(item) {
     };
   }
 
-  renderRelated(item);
   if (dialog && typeof dialog.showModal === "function") dialog.showModal();
   else if (dialog) dialog.setAttribute("open", "open");
+  // Сначала показываем основную карточку, затем строим похожее — тап больше не ждёт эту работу.
+  requestAnimationFrame(() => setTimeout(() => renderRelated(item), 24));
 }
 
 function franchiseKey(item) {
@@ -17851,7 +17860,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V372</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V373</div>
           <div class="gkmV343Sub">Сбалансированный локальный Poster Atlas мгновенно заполняет фильмы, сериалы, аниме и мультфильмы; внешняя сеть остаётся резервом.</div>
         </div>
         <div class="gkmV343Actions">
@@ -20630,7 +20639,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=372",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=373",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);
@@ -21257,3 +21266,707 @@ window.GKM_V370_UNIQUE_CATALOG_CONTROL_VERSION =
 
 /* GKM V372 TOUCH POSTER SELECTION FIX */
 console.log("GKM V372: touch tap opens a poster and drag locks the exact hovered selection");
+
+/* GKM V373 MOBILE DISCOVERY, UNIFIED LIST AND DEEP LINKS START */
+(function(){
+  "use strict";
+
+  const CALENDAR_KEY="gkm_v373_watch_calendar";
+  let currentSharedItem=null;
+  let longPressTimer=0;
+  let longPressCard=null;
+  let longPressPoint=null;
+  let suppressCard=null;
+  let suppressUntil=0;
+  let suggestionIndex=-1;
+  let suggestionRows=[];
+  let animeDetailToken=0;
+  let animeRelatedToken=0;
+  const animeRelatedItems=new Map();
+
+  function text(value){return String(value==null?"":value).replace(/\s+/g," ").trim();}
+  function esc(value){return String(value==null?"":value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]));}
+  function normalized(value){return text(value).toLowerCase().replace(/ё/g,"е").replace(/[^\p{L}\p{N}]+/gu," ").replace(/\s+/g," ").trim();}
+  function titleOf(item){try{return text(displayTitle(item));}catch{return text(item&&(item.ru||item.title_ru||item.title||item.name||item.en))||"Без названия";}}
+  function typeOf(item){try{return text(getType(item));}catch{return text(item&&item.type)||"Каталог";}}
+  function yearOf(item){try{return text(getYear(item));}catch{return text(item&&item.year);}}
+  function posterOf(item){try{return text(posterSrc(item,342));}catch{return text(item&&(item.poster||item.poster_url||item.image));}}
+  function stableKey(item){try{return text(gkmV362StableKey(item));}catch{return text(item&&item.key);}}
+  function listApi(){return window.GKM_V363_MY_LIST||null;}
+  function profile(){try{return listApi()?.getCurrentProfile?.()||null;}catch{return null;}}
+
+  function loadedPool(){
+    const rows=[];
+    try{if(Array.isArray(currentItems))rows.push(...currentItems);}catch{}
+    try{
+      if(homeData&&homeData.sections)Object.values(homeData.sections).forEach(section=>{
+        if(Array.isArray(section))rows.push(...section);
+        else if(section&&Array.isArray(section.items))rows.push(...section.items);
+      });
+    }catch{}
+    const unique=new Map();
+    rows.forEach(item=>{const key=stableKey(item);if(key&&!unique.has(key))unique.set(key,item);});
+    return [...unique.values()];
+  }
+
+  function findItemByKey(key){
+    const wanted=text(key);
+    return loadedPool().find(item=>stableKey(item)===wanted)||null;
+  }
+
+  function itemForCard(card){
+    if(!card)return null;
+    return findItemByKey(card.dataset.id||card.dataset.relatedId||"");
+  }
+
+  function formatDate(value){
+    if(!value)return"Дата не указана";
+    const date=new Date(`${value}T12:00:00`);
+    if(Number.isNaN(date.getTime()))return"Дата не указана";
+    return new Intl.DateTimeFormat("ru-RU",{weekday:"short",day:"2-digit",month:"short"}).format(date);
+  }
+
+  function readCalendar(){
+    try{const value=JSON.parse(localStorage.getItem(CALENDAR_KEY)||"{}");return value&&typeof value==="object"?value:{};}catch{return{};}
+  }
+
+  function calendarForProfile(name){
+    const store=readCalendar();
+    const key=text(name)||"default";
+    if(!store[key]||typeof store[key]!=="object")store[key]={};
+    return{store,key,dates:store[key]};
+  }
+
+  function saveCalendarDate(entryKey,date){
+    const current=profile();
+    if(!current)return;
+    const data=calendarForProfile(current.name);
+    if(date)data.dates[entryKey]=date;
+    else delete data.dates[entryKey];
+    localStorage.setItem(CALENDAR_KEY,JSON.stringify(data.store));
+    renderDashboard();
+  }
+
+  function ensureDashboard(){
+    let node=document.getElementById("gkmV373Dashboard");
+    if(node)return node;
+    const grid=document.getElementById("grid");
+    if(!grid||!grid.parentNode)return null;
+    node=document.createElement("section");
+    node.id="gkmV373Dashboard";
+    node.className="gkm-v373-dashboard";
+    grid.parentNode.insertBefore(node,grid);
+    node.addEventListener("click",event=>{
+      const button=event.target.closest("button");
+      if(!button)return;
+      const key=button.dataset.v373Open||button.dataset.v373Plus||"";
+      const current=profile();
+      const entry=current?.myListV2?.find(row=>row.key===key);
+      if(button.dataset.v373Open&&entry){
+        try{openDetails(findItemByKey(key)||entry);}catch{}
+      }
+      if(button.dataset.v373Plus&&entry){
+        listApi()?.updateEntry?.(entry.key,{episode:Number(entry.episode||0)+1,status:"watching",lastWatchedAt:Date.now()});
+      }
+      if(button.dataset.v373List)listApi()?.open?.("watching");
+    });
+    node.addEventListener("change",event=>{
+      const input=event.target.closest("[data-v373-date]");
+      if(input)saveCalendarDate(input.dataset.v373Date,input.value);
+    });
+    return node;
+  }
+
+  function progressCard(entry){
+    const episodic=/сериал|аниме|series|anime/i.test(typeOf(entry));
+    const progress=episodic?`Сезон ${Number(entry.season||1)} · серия ${Number(entry.episode||0)}`:"Продолжить просмотр";
+    return `<article class="gkm-v373-progress-card">
+      ${posterOf(entry)?`<img src="${esc(posterOf(entry))}" alt="" loading="lazy" decoding="async">`:`<span class="gkm-v373-progress-empty">▶</span>`}
+      <div><b>${esc(titleOf(entry))}</b><small>${esc(progress)}</small><div class="gkm-v373-progress-actions">
+        <button type="button" data-v373-open="${esc(entry.key)}">Открыть</button>
+        ${episodic?`<button type="button" data-v373-plus="${esc(entry.key)}">+1 серия</button>`:""}
+      </div></div>
+    </article>`;
+  }
+
+  function renderDashboard(){
+    const node=ensureDashboard();
+    if(!node)return;
+    let home=true;
+    try{home=currentMode==="home";}catch{}
+    if(!home){node.hidden=true;return;}
+    const current=profile();
+    if(!current){node.hidden=true;return;}
+    node.hidden=false;
+    const watching=(current.myListV2||[]).filter(entry=>entry.status==="watching").slice(0,8);
+    if(!watching.length){
+      node.innerHTML=`<div class="gkm-v373-empty-list"><b>▶ Продолжить просмотр</b><span>Список пуст. Нажми ♡ на карточке — она появится в «Хочу посмотреть». Долгое нажатие откроет выбор статуса.</span><button type="button" data-v373-list="1">Открыть мой список</button></div>`;
+      return;
+    }
+    const calendar=calendarForProfile(current.name).dates;
+    node.innerHTML=`
+      <div class="gkm-v373-section-head"><div><h2>▶ Продолжить просмотр</h2><p>Прогресс профиля «${esc(current.name)}»</p></div><button type="button" data-v373-list="1">Весь список</button></div>
+      <div class="gkm-v373-progress-row">${watching.map(progressCard).join("")}</div>
+      <details class="gkm-v373-calendar"><summary>📅 Календарь просмотра</summary><p>Укажи свою дату следующей серии. Каталог не придумывает неподтверждённое расписание релизов.</p>
+        <div class="gkm-v373-calendar-grid">${watching.map(entry=>`<label><span><b>${esc(titleOf(entry))}</b><small>${esc(calendar[entry.key]?formatDate(calendar[entry.key]):"Дата следующей серии не указана")}</small></span><input type="date" value="${esc(calendar[entry.key]||"")}" data-v373-date="${esc(entry.key)}"></label>`).join("")}</div>
+      </details>`;
+  }
+
+  function unifyFavoriteWithList(target){
+    const button=target.closest("[data-fav-id],#favBtn");
+    if(!button)return;
+    setTimeout(()=>{
+      const detailButton=button.id==="favBtn";
+      const active=detailButton?/в избранном/i.test(text(button.textContent)):button.classList.contains("active");
+      if(!active)return;
+      const item=detailButton?currentSharedItem:findItemByKey(button.dataset.favId);
+      if(!item)return;
+      const current=profile();
+      const existing=current?.myListV2?.some(entry=>entry.key===stableKey(item));
+      if(!existing)listApi()?.setStatus?.(item,"want");
+    },0);
+  }
+
+  function shareItem(item){
+    if(!item)return;
+    const url=new URL(location.href);
+    url.searchParams.set("gkmTitle",titleOf(item));
+    const year=yearOf(item);
+    if(year)url.searchParams.set("gkmYear",year);else url.searchParams.delete("gkmYear");
+    const data={title:titleOf(item),text:`${titleOf(item)} — ГОЛУБЬ Каталог Мира`,url:url.href};
+    if(navigator.share){navigator.share(data).catch(()=>{});return;}
+    navigator.clipboard?.writeText(url.href).then(()=>alert("Ссылка на карточку скопирована.")).catch(()=>prompt("Скопируй ссылку",url.href));
+  }
+
+  function ensureQuickSheet(){
+    let sheet=document.getElementById("gkmV373QuickSheet");
+    if(sheet)return sheet;
+    sheet=document.createElement("div");
+    sheet.id="gkmV373QuickSheet";
+    sheet.innerHTML=`<div class="gkm-v373-sheet-backdrop" data-v373-close></div><section class="gkm-v373-sheet" role="dialog" aria-modal="true"><div class="gkm-v373-sheet-handle"></div><h2 id="gkmV373SheetTitle">Карточка</h2><div class="gkm-v373-sheet-grid">
+      <button type="button" data-v373-action="open">Открыть карточку</button>
+      <button type="button" data-v373-action="want">♡ Хочу посмотреть</button>
+      <button type="button" data-v373-action="watching">▶ Смотрю</button>
+      <button type="button" data-v373-action="plus">+1 серия</button>
+      <button type="button" data-v373-action="completed">✓ Просмотрено</button>
+      <button type="button" data-v373-action="family">Все части / сезоны</button>
+      <button type="button" data-v373-action="share">Поделиться</button>
+      <button type="button" data-v373-close>Закрыть</button>
+    </div></section>`;
+    document.body.appendChild(sheet);
+    sheet.addEventListener("click",event=>{
+      if(event.target.closest("[data-v373-close]")){closeQuickSheet();return;}
+      const action=event.target.closest("[data-v373-action]")?.dataset.v373Action;
+      const item=sheet.__gkmItem;
+      if(!action||!item)return;
+      if(action==="open"){closeQuickSheet();openDetails(item);return;}
+      if(action==="want"||action==="watching"||action==="completed"){listApi()?.setStatus?.(item,action);closeQuickSheet();return;}
+      if(action==="plus"){
+        const current=profile();
+        const entry=current?.myListV2?.find(row=>row.key===stableKey(item));
+        if(entry)listApi()?.updateEntry?.(entry.key,{episode:Number(entry.episode||0)+1,status:"watching",lastWatchedAt:Date.now()});
+        else listApi()?.setStatus?.(item,"watching");
+        closeQuickSheet();return;
+      }
+      if(action==="family"){
+        closeQuickSheet();openDetails(item);setTimeout(()=>document.getElementById("gkmFamilyBlock")?.scrollIntoView({behavior:"smooth",block:"start"}),450);return;
+      }
+      if(action==="share"){shareItem(item);closeQuickSheet();}
+    });
+    return sheet;
+  }
+
+  function openQuickSheet(item){
+    if(!item)return;
+    const sheet=ensureQuickSheet();
+    sheet.__gkmItem=item;
+    const title=document.getElementById("gkmV373SheetTitle");
+    if(title)title.textContent=titleOf(item);
+    sheet.classList.add("open");
+    document.body.classList.add("gkm-v373-sheet-open");
+    try{navigator.vibrate?.(24);}catch{}
+  }
+
+  function closeQuickSheet(){
+    document.getElementById("gkmV373QuickSheet")?.classList.remove("open");
+    document.body.classList.remove("gkm-v373-sheet-open");
+  }
+
+  function clearLongPress(){
+    clearTimeout(longPressTimer);longPressTimer=0;longPressCard=null;longPressPoint=null;
+  }
+
+  function installLongPress(){
+    document.addEventListener("pointerdown",event=>{
+      if(event.pointerType!=="touch"&&event.pointerType!=="pen")return;
+      const card=event.target.closest(".card");
+      if(!card||event.target.closest("button,a,input,select"))return;
+      clearLongPress();
+      longPressCard=card;longPressPoint={x:event.clientX,y:event.clientY};
+      longPressTimer=setTimeout(()=>{
+        const item=itemForCard(card);
+        if(!item)return;
+        suppressCard=card;suppressUntil=Date.now()+900;
+        openQuickSheet(item);
+        clearLongPress();
+      },540);
+    },{passive:true});
+    document.addEventListener("pointermove",event=>{
+      if(!longPressPoint)return;
+      if(Math.hypot(event.clientX-longPressPoint.x,event.clientY-longPressPoint.y)>11)clearLongPress();
+    },{passive:true});
+    document.addEventListener("pointerup",clearLongPress,{passive:true});
+    document.addEventListener("pointercancel",clearLongPress,{passive:true});
+    document.addEventListener("click",event=>{
+      if(Date.now()<suppressUntil&&suppressCard&&event.target.closest(".card")===suppressCard){event.preventDefault();event.stopImmediatePropagation();}
+    },true);
+  }
+
+  function ensureMobileNav(){
+    if(document.getElementById("gkmV373MobileNav"))return;
+    const nav=document.createElement("nav");
+    nav.id="gkmV373MobileNav";
+    nav.setAttribute("aria-label","Мобильная навигация");
+    nav.innerHTML=`<button type="button" data-v373-nav="home"><span>⌂</span>Главная</button><button type="button" data-v373-nav="search"><span>⌕</span>Поиск</button><button type="button" data-v373-nav="list"><span>♡</span>Мой список</button><button type="button" data-v373-nav="mosaic"><span>▦</span>Мозаика</button><button type="button" data-v373-nav="ai"><span>🤖</span>AI</button>`;
+    document.body.appendChild(nav);
+    nav.addEventListener("click",event=>{
+      const action=event.target.closest("[data-v373-nav]")?.dataset.v373Nav;
+      if(action==="home"){
+        document.getElementById("detailsDialog")?.close?.();
+        try{renderHome();}catch{document.querySelector('.tab[data-tab="all"]')?.click();}
+        scrollTo({top:0,behavior:"smooth"});
+      }
+      if(action==="search"){
+        const input=document.getElementById("searchInput");input?.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>input?.focus(),260);
+      }
+      if(action==="list")listApi()?.open?.();
+      if(action==="mosaic")document.getElementById("gkmV343Btn")?.click();
+      if(action==="ai")(document.getElementById("gkmAiFloatBtn")||document.getElementById("gkmAiTopBtn"))?.click();
+    });
+  }
+
+  function suggestionScore(item,query){
+    const title=normalized(titleOf(item));
+    const raw=normalized([item&&item.en,item&&item.original_title,item&&item.original_name].filter(Boolean).join(" "));
+    if(!title)return-1;
+    if(title===query)return1000;
+    if(title.startsWith(query))return800-query.length;
+    if(title.includes(query))return600-title.indexOf(query);
+    if(raw.startsWith(query))return500;
+    const tokens=query.split(" ").filter(Boolean);
+    const hits=tokens.filter(token=>title.includes(token)||raw.includes(token)).length;
+    return hits===tokens.length?300+hits*20:-1;
+  }
+
+  function ensureSuggestions(){
+    let box=document.getElementById("gkmV373Suggestions");
+    if(box)return box;
+    box=document.createElement("div");box.id="gkmV373Suggestions";box.setAttribute("role","listbox");document.body.appendChild(box);
+    box.addEventListener("pointerdown",event=>event.preventDefault());
+    box.addEventListener("click",event=>{
+      const button=event.target.closest("[data-v373-suggestion]");
+      if(!button)return;
+      const item=findItemByKey(button.dataset.v373Suggestion);
+      hideSuggestions();
+      if(item)openDetails(item);
+    });
+    return box;
+  }
+
+  function placeSuggestions(box){
+    const input=document.getElementById("searchInput");if(!input)return;
+    const rect=input.getBoundingClientRect();
+    box.style.left=`${Math.max(6,rect.left)}px`;box.style.top=`${Math.min(innerHeight-80,rect.bottom+6)}px`;box.style.width=`${Math.min(rect.width,innerWidth-12)}px`;
+  }
+
+  function hideSuggestions(){const box=document.getElementById("gkmV373Suggestions");if(box)box.classList.remove("open");suggestionRows=[];suggestionIndex=-1;}
+
+  function renderSuggestions(){
+    const input=document.getElementById("searchInput");
+    const query=normalized(input?.value);
+    if(!input||document.activeElement!==input||query.length<2){hideSuggestions();return;}
+    const map=new Map();
+    loadedPool().forEach(item=>{
+      const key=stableKey(item),score=suggestionScore(item,query);
+      if(key&&score>=0&&(!map.has(key)||map.get(key).score<score))map.set(key,{item,score});
+    });
+    suggestionRows=[...map.values()].sort((a,b)=>b.score-a.score||Number(getVotes(b.item)||0)-Number(getVotes(a.item)||0)).slice(0,7);
+    if(!suggestionRows.length){hideSuggestions();return;}
+    const box=ensureSuggestions();
+    box.innerHTML=suggestionRows.map((row,index)=>`<button type="button" role="option" data-v373-suggestion="${esc(stableKey(row.item))}" class="${index===suggestionIndex?"active":""}"><span>${esc(titleOf(row.item))}</span><small>${esc(typeOf(row.item))}${yearOf(row.item)?` · ${esc(yearOf(row.item))}`:""}</small></button>`).join("");
+    placeSuggestions(box);box.classList.add("open");
+  }
+
+  function installSuggestions(){
+    const input=document.getElementById("searchInput");if(!input)return;
+    let timer=0;
+    const schedule=()=>{clearTimeout(timer);timer=setTimeout(renderSuggestions,110);};
+    input.addEventListener("input",schedule);input.addEventListener("focus",schedule);
+    input.addEventListener("keydown",event=>{
+      if(!suggestionRows.length)return;
+      if(event.key==="ArrowDown"){event.preventDefault();suggestionIndex=(suggestionIndex+1)%suggestionRows.length;renderSuggestions();}
+      if(event.key==="ArrowUp"){event.preventDefault();suggestionIndex=(suggestionIndex-1+suggestionRows.length)%suggestionRows.length;renderSuggestions();}
+      if(event.key==="Enter"&&suggestionIndex>=0){event.preventDefault();const item=suggestionRows[suggestionIndex].item;hideSuggestions();openDetails(item);}
+      if(event.key==="Escape")hideSuggestions();
+    });
+    document.addEventListener("click",event=>{if(!event.target.closest("#searchInput,#gkmV373Suggestions"))hideSuggestions();});
+    window.addEventListener("resize",()=>{const box=document.getElementById("gkmV373Suggestions");if(box?.classList.contains("open"))placeSuggestions(box);},{passive:true});
+    document.getElementById("grid")&&new MutationObserver(()=>{schedule();renderDashboard();}).observe(document.getElementById("grid"),{childList:true,subtree:false});
+  }
+
+  function syncWatchTimeline(){
+    const block=document.getElementById("gkmFamilyBlock");
+    const row=block?.querySelector(".gkm-family-row");
+    if(!block||!row||block.style.display==="none")return;
+    const cards=[...row.querySelectorAll(".gkm-family-card")];
+    if(cards.length<2)return;
+    const signature=cards.map(card=>text(card.querySelector(".gkm-family-title")?.textContent)).join("|");
+    let timeline=block.querySelector(".gkm-v373-watch-timeline");
+    if(timeline?.dataset.signature===signature)return;
+    if(!timeline){timeline=document.createElement("div");timeline.className="gkm-v373-watch-timeline";row.before(timeline);}
+    timeline.dataset.signature=signature;
+    timeline.innerHTML=`<b>Порядок каталога:</b>${cards.map((card,index)=>`<button type="button" data-v373-order="${index}"><span>${index+1}</span>${esc(text(card.querySelector(".gkm-family-title")?.textContent)||`Часть ${index+1}`)}</button>`).join('<i aria-hidden="true">→</i>')}`;
+    timeline.onclick=event=>{const button=event.target.closest("[data-v373-order]");if(button)cards[Number(button.dataset.v373Order)]?.click();};
+  }
+
+  function updateDeepLink(item){
+    if(!item)return;
+    const url=new URL(location.href);url.searchParams.set("gkmTitle",titleOf(item));
+    const year=yearOf(item);if(year)url.searchParams.set("gkmYear",year);else url.searchParams.delete("gkmYear");
+    history.replaceState(history.state,"",url);
+  }
+
+  function clearDeepLink(){
+    const url=new URL(location.href);if(!url.searchParams.has("gkmTitle"))return;
+    url.searchParams.delete("gkmTitle");url.searchParams.delete("gkmYear");history.replaceState(history.state,"",url);
+  }
+
+  function ensureDetailShare(){
+    const holder=document.getElementById("gkmV363DetailControls")||document.getElementById("playerButtons");
+    if(!holder||!currentSharedItem)return;
+    let button=document.getElementById("gkmV373ShareCard");
+    if(!button){button=document.createElement("button");button.id="gkmV373ShareCard";button.type="button";button.textContent="↗ Поделиться карточкой";holder.appendChild(button);}
+    button.onclick=()=>shareItem(currentSharedItem);
+  }
+
+  function isAnime(item){return /аниме|anime/i.test(typeOf(item));}
+
+  function descriptionFields(item){
+    return [
+      item&&item.__gkmV373Overview,
+      item&&item.overview_ru,item&&item.description_ru,item&&item.synopsis_ru,item&&item.plot_ru,item&&item.annotation_ru,
+      item&&item.overview,item&&item.description,item&&item.synopsis,item&&item.plot,item&&item.annotation,item&&item.summary
+    ].map(text).filter(Boolean);
+  }
+
+  function usefulDescription(value){
+    const valueText=text(value);
+    return valueText.length>=90
+      && !/описание пока не добавлено|будет дополнен|из каталога .?голубь|карточка (показывает|помогает|подходит)|полный официальный синопсис ещё не получен/i.test(valueText);
+  }
+
+  function descriptionScore(value){
+    const valueText=text(value);
+    if(!valueText)return 0;
+    const cyrillic=(valueText.match(/[А-Яа-яЁё]/g)||[]).length;
+    const sentences=(valueText.match(/[.!?](?:\s|$)/g)||[]).length;
+    return Math.min(valueText.length,2600)+(cyrillic/valueText.length)*500+Math.min(sentences,8)*22;
+  }
+
+  function bestDescription(items,oldText=""){
+    const rows=[];
+    (Array.isArray(items)?items:[items]).forEach(item=>rows.push(...descriptionFields(item)));
+    if(usefulDescription(oldText))rows.push(text(oldText));
+    const useful=[...new Set(rows)].filter(usefulDescription);
+    const russian=useful.filter(value=>((value.match(/[А-Яа-яЁё]/g)||[]).length/value.length)>.24);
+    return (russian.length?russian:useful).sort((a,b)=>descriptionScore(b)-descriptionScore(a))[0]||"";
+  }
+
+  function animeContextHtml(item){
+    if(!isAnime(item))return"";
+    const genres=(()=>{try{return getGenres(item).filter(Boolean).slice(0,6);}catch{return[];}})();
+    const studio=(()=>{try{return text(detailFactValue(item,"studio"));}catch{return"";}})();
+    const episodes=(()=>{try{return text(detailFactValue(item,"episodes"));}catch{return"";}})();
+    const status=(()=>{try{return text(detailFactValue(item,"status"));}catch{return"";}})();
+    const facts=[
+      genres.length?`Жанры: ${genres.join(", ")}`:"",
+      studio?`Студия: ${studio}`:"",
+      episodes?`Эпизодов: ${episodes}`:"",
+      status?`Статус: ${status}`:""
+    ].filter(Boolean);
+    return facts.length?`<div class="gkm-v373-anime-context"><b>Что важно перед просмотром</b><span>${esc(facts.join(" · "))}</span></div>`:"";
+  }
+
+  function renderAnimeContext(item){
+    document.querySelectorAll(".gkm-v373-anime-context").forEach(node=>node.remove());
+    if(!isAnime(item))return;
+    const overview=document.getElementById("detailOverview");
+    if(overview)overview.insertAdjacentHTML("afterend",animeContextHtml(item));
+  }
+
+  function installOverviewUpgrade(){
+    if(window.GKM_V373_OVERVIEW_PATCHED==="1"||typeof displayOverview!=="function")return;
+    const previous=displayOverview;
+    displayOverview=function gkmV373DisplayOverview(item){
+      let oldText="";
+      try{oldText=text(previous(item));}catch{}
+      return bestDescription(item,oldText)||oldText||"Подробное описание пока не получено из источников каталога.";
+    };
+    window.GKM_V373_OVERVIEW_PATCHED="1";
+  }
+
+  async function enrichAnimeDetail(item){
+    if(!isAnime(item))return;
+    const token=++animeDetailToken;
+    const itemKey=stableKey(item);
+    const oldText=(()=>{try{return text(displayOverview(item));}catch{return"";}})();
+    const title=titleOf(item),year=yearOf(item);
+    let rows=[];
+    try{
+      const result=await window.GKM_V359_SHARED_CATALOG_SEARCH?.(title,{exactTitle:true,year});
+      rows=Array.isArray(result?.items)?result.items:[];
+    }catch(error){console.warn("GKM V373 anime description",error);}
+    if(token!==animeDetailToken||stableKey(currentSharedItem)!==itemKey)return;
+    const best=bestDescription([item,...rows],oldText);
+    if(!best)return;
+    item.__gkmV373Overview=best;
+    const overview=document.getElementById("detailOverview");
+    if(overview&&descriptionScore(best)>=descriptionScore(overview.textContent||"")){
+      const changed=text(overview.textContent)!==best;
+      overview.textContent=best;
+      if(changed){
+        let note=document.getElementById("gkmV373DescriptionNote");
+        if(!note){note=document.createElement("small");note.id="gkmV373DescriptionNote";overview.insertAdjacentElement("afterend",note);}
+        note.textContent="Описание дополнено из полного каталога.";
+      }
+    }
+    renderAnimeContext(item);
+  }
+
+  function normalizedGenres(item){
+    const aliases=new Map([
+      ["экшен","боевик"],["action","боевик"],["adventure","приключения"],["приключение","приключения"],
+      ["sci fi","фантастика"],["science fiction","фантастика"],["fantasy","фэнтези"],["comedy","комедия"],
+      ["drama","драма"],["romance","романтика"],["mystery","детектив"],["thriller","триллер"],
+      ["horror","ужасы"],["supernatural","сверхъестественное"],["psychological","психология"],
+      ["slice of life","повседневность"],["school","школа"],["sports","спорт"]
+    ]);
+    try{return [...new Set(getGenres(item).map(value=>{const key=normalized(value);return aliases.get(key)||key;}).filter(Boolean))];}catch{return[];}
+  }
+
+  const THEME_STOP=new Set("аниме сериал фильм мультфильм сезон часть смотреть история главный герои герой жизнь мир этот эта это который которая года project anime movie series season part the and with from про как его ее их или для что когда где после перед без над под при через один одна они она он все быть становится начинает новый новые своё свой свою очень эпизод эпизоды".split(" "));
+  function themeTokens(item){
+    const raw=[titleOf(item),...descriptionFields(item)].join(" ");
+    return new Set(normalized(raw).split(" ").filter(word=>word.length>=4&&!THEME_STOP.has(word)).slice(0,90));
+  }
+
+  function animeSimilarity(base,item){
+    if(!item||!isAnime(item)||!posterOf(item))return null;
+    const baseStable=stableKey(base),itemStable=stableKey(item);
+    if(!itemStable||itemStable===baseStable)return null;
+    const baseTitle=normalized(titleOf(base)),itemTitle=normalized(titleOf(item));
+    if(!itemTitle||itemTitle===baseTitle&&yearOf(item)===yearOf(base))return null;
+    let sameFamily=false;
+    try{sameFamily=Boolean(franchiseKey(base)&&franchiseKey(base)===franchiseKey(item));}catch{}
+    if(sameFamily)return null;
+    const baseGenres=normalizedGenres(base),itemGenres=normalizedGenres(item);
+    const commonGenres=baseGenres.filter(genre=>itemGenres.includes(genre));
+    const baseThemes=themeTokens(base),itemThemes=themeTokens(item);
+    const commonThemes=[...baseThemes].filter(token=>itemThemes.has(token));
+    const baseStudio=(()=>{try{return normalized(detailFactValue(base,"studio"));}catch{return"";}})();
+    const itemStudio=(()=>{try{return normalized(detailFactValue(item,"studio"));}catch{return"";}})();
+    const sameStudio=Boolean(baseStudio&&itemStudio&&baseStudio===itemStudio&&!/не указан/.test(baseStudio));
+    const meaningful=baseGenres.length
+      ? commonGenres.length>=2||(commonGenres.length>=1&&(commonThemes.length>=2||sameStudio))
+      : commonThemes.length>=3||sameStudio;
+    if(!meaningful)return null;
+    let rating=0,votes=0;
+    try{rating=Number(getRating(item)||0);votes=Number(getVotes(item)||0);}catch{}
+    const yearDistance=Math.abs(Number(yearOf(base)||0)-Number(yearOf(item)||0));
+    const score=commonGenres.length*260+Math.min(commonThemes.length,8)*34+(sameStudio?90:0)+rating*8+Math.log10(votes+1)*9+Math.max(0,35-yearDistance);
+    return{item,score,commonGenres,commonThemes,sameStudio};
+  }
+
+  function strictAnimeRows(base,pool){
+    const dedupe=new Map();
+    (Array.isArray(pool)?pool:[]).forEach(item=>{
+      const row=animeSimilarity(base,item);if(!row)return;
+      const key=`${normalized(titleOf(item))}|${yearOf(item)}`;
+      const previous=dedupe.get(key);
+      if(!previous||row.score>previous.score)dedupe.set(key,row);
+    });
+    return[...dedupe.values()].sort((a,b)=>b.score-a.score).slice(0,10);
+  }
+
+  function renderStrictAnimeRows(base,rows,state="ready"){
+    const block=ensureRelatedBlock(),box=document.getElementById("relatedCards");
+    if(!block||!box)return;
+    const heading=block.querySelector(".links-title");
+    if(heading)heading.textContent="Похожее аниме по жанрам и атмосфере";
+    block.style.display="";
+    animeRelatedItems.clear();
+    rows.forEach(row=>animeRelatedItems.set(stableKey(row.item),row.item));
+    const message=state==="loading"
+      ? "Проверяем полный каталог и отбираем только смысловые совпадения…"
+      : rows.length?`Найдено точных совпадений: ${rows.length}. Части этой же франшизы и дубли исключены.`:"Подходящих вариантов с подтверждённым сходством пока не найдено.";
+    box.innerHTML=`<p class="gkm-v373-related-status">${esc(message)}</p>${rows.map(row=>relatedCardHtml(row.item)).join("")}`;
+    schedulePosterRecovery(box);
+  }
+
+  async function renderAnimeRelated(base){
+    const token=++animeRelatedToken;
+    let rows=strictAnimeRows(base,loadedPool());
+    renderStrictAnimeRows(base,rows,rows.length>=6?"ready":"loading");
+    if(rows.length>=6)return;
+    const genres=normalizedGenres(base).slice(0,3);
+    if(!genres.length){renderStrictAnimeRows(base,rows,"ready");return;}
+    try{
+      const result=await window.GKM_V359_SHARED_CATALOG_SEARCH?.(`${genres.join(" ")} аниме`,{type:"Аниме",minRating:5,sort:"rating"});
+      if(token!==animeRelatedToken||stableKey(currentSharedItem)!==stableKey(base))return;
+      const full=Array.isArray(result?.items)?result.items:[];
+      rows=strictAnimeRows(base,[...loadedPool(),...full]);
+    }catch(error){console.warn("GKM V373 strict anime related",error);}
+    if(token===animeRelatedToken)renderStrictAnimeRows(base,rows,"ready");
+  }
+
+  function installAnimeRelated(){
+    if(window.GKM_V373_RELATED_PATCHED==="1"||typeof renderRelated!=="function")return;
+    const previous=renderRelated;
+    renderRelated=function gkmV373RenderRelated(base){
+      if(isAnime(base)){renderAnimeRelated(base);return;}
+      return previous(base);
+    };
+    document.addEventListener("click",event=>{
+      const card=event.target.closest(".related-card[data-related-id]");
+      const item=card&&animeRelatedItems.get(text(card.dataset.relatedId));
+      if(!item)return;
+      event.preventDefault();event.stopImmediatePropagation();openDetails(item);
+    },true);
+    window.GKM_V373_RELATED_PATCHED="1";
+  }
+
+  function providerUrl(kind,query){
+    const q=encodeURIComponent(text(query));
+    const siteQuery=domain=>`https://yandex.ru/search/?text=${encodeURIComponent(`site:${domain} ${text(query)}`)}`;
+    const urls={
+      kinopoisk:`https://www.kinopoisk.ru/index.php?kp_query=${q}`,
+      wink:siteQuery("wink.ru"),
+      kion:siteQuery("kion.ru"),
+      premier:siteQuery("premier.one"),
+      ivi:siteQuery("ivi.ru"),
+      okko:siteQuery("okko.tv"),
+      amediateka:siteQuery("amediateka.ru"),
+      crunchyroll:`https://www.crunchyroll.com/search?q=${q}`,
+      youtube:`https://www.youtube.com/results?search_query=${q}`,
+      rutube:`https://rutube.ru/search/?query=${q}`,
+      shikimori:`https://shikimori.one/animes?search=${q}`,
+      mal:`https://myanimelist.net/anime.php?q=${q}`,
+      anilist:`https://anilist.co/search/anime?search=${q}`,
+      animeplanet:`https://www.anime-planet.com/anime/all?name=${q}`,
+      anidb:`https://anidb.net/anime/?adb.search=${q}`
+    };
+    return urls[kind]||siteQuery(kind);
+  }
+
+  function renderAnimeProviders(item){
+    const block=document.getElementById("animeLinksBlock");
+    if(!block)return;
+    if(!isAnime(item)){block.style.display="none";return;}
+    block.style.display="";
+    const query=`${titleOf(item)} ${yearOf(item)}`.trim();
+    const local=[
+      ["Кинопоиск","kinopoisk"],["Wink","wink"],["KION","kion"],["PREMIER","premier"],
+      ["Иви","ivi"],["Okko","okko"],["Амедиатека","amediateka"]
+    ];
+    const info=[["Shikimori","shikimori"],["MyAnimeList","mal"],["AniList","anilist"],["Anime-Planet","animeplanet"],["AniDB","anidb"]];
+    block.innerHTML=`<h3 class="links-title">Где смотреть аниме</h3>
+      <p class="gkm-v373-provider-note">Проверенные действующие сервисы. Наличие конкретного тайтла зависит от лицензии, подписки и региона.</p>
+      <div class="detail-buttons gkm-v373-provider-buttons">${local.map(([label,kind])=>`<a href="${esc(providerUrl(kind,query))}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`).join("")}</div>
+      <details class="gkm-v373-global-providers"><summary>Международный сервис</summary><div class="detail-buttons"><a href="${esc(providerUrl("crunchyroll",query))}" target="_blank" rel="noopener noreferrer">Crunchyroll</a></div><small>Может быть недоступен в отдельных регионах; каталог и язык зависят от страны.</small></details>
+      <details class="gkm-v373-anime-info"><summary>Информация и списки</summary><div class="detail-buttons">${info.map(([label,kind])=>`<a href="${esc(providerUrl(kind,titleOf(item)))}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`).join("")}</div></details>`;
+  }
+
+  function ensureFeedback(){
+    if(document.getElementById("gkmV373FeedbackBar"))return;
+    const anchor=document.querySelector(".seo-text")||document.querySelector(".tabs");
+    if(!anchor)return;
+    const bar=document.createElement("div");
+    bar.id="gkmV373FeedbackBar";
+    bar.innerHTML='<button type="button">💡 Идея разработчику</button><span>Предложить функцию или сообщить о проблеме</span>';
+    anchor.insertAdjacentElement("afterend",bar);
+    const dialog=document.createElement("div");
+    dialog.id="gkmV373Feedback";
+    dialog.innerHTML=`<div class="gkm-v373-feedback-backdrop" data-v373-feedback-close></div><section class="gkm-v373-feedback-box" role="dialog" aria-modal="true" aria-labelledby="gkmV373FeedbackTitle"><button class="gkm-v373-feedback-close" data-v373-feedback-close type="button">✕</button><h2 id="gkmV373FeedbackTitle">💡 Написать разработчику</h2><p>Опиши идею или проблему. Личные данные вводить не нужно.</p><input id="gkmV373FeedbackName" maxlength="50" placeholder="Имя или ник — необязательно"><textarea id="gkmV373FeedbackText" maxlength="3000" rows="7" placeholder="Что добавить или исправить?"></textarea><div class="gkm-v373-feedback-actions"><button type="button" data-v373-feedback-send>Открыть обращение в GitHub</button><button type="button" data-v373-feedback-copy>Скопировать текст</button></div><small>GitHub откроется только после нажатия. Сообщение не отправляется автоматически.</small></section>`;
+    document.body.appendChild(dialog);
+    const open=()=>{dialog.classList.add("open");document.getElementById("gkmV373FeedbackText")?.focus();};
+    const close=()=>dialog.classList.remove("open");
+    bar.querySelector("button").onclick=open;
+    dialog.addEventListener("click",event=>{
+      if(event.target.closest("[data-v373-feedback-close]")){close();return;}
+      const body=text(document.getElementById("gkmV373FeedbackText")?.value);
+      const name=text(document.getElementById("gkmV373FeedbackName")?.value);
+      if(event.target.closest("[data-v373-feedback-copy]")){
+        if(!body){alert("Сначала напиши идею.");return;}
+        navigator.clipboard?.writeText(`${body}${name?`\n\nАвтор: ${name}`:""}`).then(()=>alert("Текст скопирован.")).catch(()=>{});
+      }
+      if(event.target.closest("[data-v373-feedback-send]")){
+        if(!body){alert("Сначала напиши идею или опиши проблему.");return;}
+        const title=body.length>80?`${body.slice(0,77)}...`:body;
+        const details=`${body}\n\n${name?`Автор: ${name}\n`:""}Страница: ${location.href}\nУстройство: ${navigator.userAgent}`;
+        const url=`https://github.com/dragokas371158989-png/films-series-best-5000/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(details)}`;
+        window.open(url,"_blank","noopener,noreferrer");
+      }
+    });
+  }
+
+  function patchDetails(){
+    if(window.GKM_V373_DETAILS_PATCHED==="1"||typeof openDetails!=="function")return;
+    const previous=openDetails;
+    openDetails=function gkmV373OpenDetails(item){
+      currentSharedItem=item;
+      const result=previous.apply(this,arguments);
+      updateDeepLink(item);
+      setTimeout(()=>{ensureDetailShare();renderAnimeProviders(item);renderAnimeContext(item);syncWatchTimeline();},60);
+      setTimeout(()=>enrichAnimeDetail(item),100);
+      setTimeout(syncWatchTimeline,500);
+      return result;
+    };
+    window.GKM_V373_DETAILS_PATCHED="1";
+  }
+
+  async function openDeepLink(){
+    const url=new URL(location.href);const title=text(url.searchParams.get("gkmTitle"));if(!title)return;
+    const year=text(url.searchParams.get("gkmYear"));
+    for(let attempt=0;attempt<5;attempt++){
+      try{
+        const result=await window.GKM_V359_SHARED_CATALOG_SEARCH?.(title,{exactTitle:true,year});
+        const rows=Array.isArray(result?.items)?result.items:[];
+        const item=rows.find(row=>!year||yearOf(row)===year)||rows[0];
+        if(item){openDetails(item);return;}
+      }catch(error){console.warn("GKM V373 deep link",error);}
+      await new Promise(resolve=>setTimeout(resolve,500));
+    }
+  }
+
+  function install(){
+    if(window.GKM_V373_INSTALLED==="1")return;
+    window.GKM_V373_INSTALLED="1";
+    ensureMobileNav();ensureQuickSheet();ensureDashboard();ensureFeedback();installLongPress();installSuggestions();installOverviewUpgrade();installAnimeRelated();patchDetails();renderDashboard();
+    document.addEventListener("click",event=>unifyFavoriteWithList(event.target));
+    window.addEventListener("gkm:v363-list-updated",renderDashboard);
+    window.addEventListener("storage",renderDashboard);
+    document.getElementById("detailsDialog")?.addEventListener("close",clearDeepLink);
+    const dialog=document.getElementById("detailsDialog");
+    if(dialog)new MutationObserver(()=>requestAnimationFrame(syncWatchTimeline)).observe(dialog,{childList:true,subtree:true});
+    try{
+      const previousRenderHome=renderHome;
+      renderHome=async function gkmV373RenderHome(){const result=await previousRenderHome.apply(this,arguments);renderDashboard();return result;};
+    }catch{}
+    setTimeout(openDeepLink,900);
+  }
+
+  window.GKM_V373_FEATURES=Object.freeze({renderDashboard,openQuickSheet,shareItem,syncWatchTimeline});
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
+  console.log("GKM V373: favourites and My List unified; mobile navigation, long press, suggestions, calendar, watch order and deep links installed");
+})();
+/* GKM V373 MOBILE DISCOVERY, UNIFIED LIST AND DEEP LINKS END */

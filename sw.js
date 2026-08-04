@@ -1,15 +1,15 @@
-/* GKM V372 PWA: touch poster selection + explicitly opened posters only. */
-const VERSION = "v372-2026-08-04";
+/* GKM V373 PWA: mobile discovery, unified list and explicitly opened posters only. */
+const VERSION = "v373-2026-08-04";
 const SHELL_CACHE = `gkm-shell-${VERSION}`;
 const RECENT_CACHE = `gkm-recent-${VERSION}`;
 const CACHE_PREFIX = "gkm-";
 const SHELL_URLS = [
   "./",
   "./index.html",
-  "./style.css?v=372",
-  "./app.js?v=372",
+  "./style.css?v=373",
+  "./app.js?v=373",
   "./ai_search_worker_v343.js",
-  "./manifest.webmanifest?v=372",
+  "./manifest.webmanifest?v=373",
   "./logo-banner.webp",
   "./pwa-icon-192.png",
   "./pwa-icon-512.png"
