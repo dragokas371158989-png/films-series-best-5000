@@ -43,13 +43,15 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "371";
+const GKM_DATA_CACHE_VERSION = "372";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
   "v365-mobile-card-aspect-canvas-tap-dock-2026-07-30";
 window.GKM_V371_MOBILE_CARDS_TOUCH_CANVAS_DOCK_VERSION =
   "v371-two-column-cards-touch-magnetic-wave-collapsible-dock-2026-07-30";
+window.GKM_V372_TOUCH_POSTER_SELECTION_VERSION =
+  "v372-touch-tap-open-and-locked-hover-selection-2026-08-04";
 window.GKM_V367_RUSSIAN_TITLE_CONTROL_VERSION =
   "v367-source-aware-russian-title-and-collection-control-2026-07-30";
 window.GKM_V366_RUSSIAN_TITLE_CONTROL_VERSION =
@@ -15700,6 +15702,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   let hoverIndex = -1;
   let hoverTimer = 0;
+  let touchReleaseTimer = 0;
   let activePreviewPane = 0;
   let previewKey = "";
 
@@ -17768,6 +17771,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       }
       #gkmV343Status b{display:block;font-size:16px;margin-bottom:4px}
       #gkmV343Status div{font-size:11px;color:rgba(255,255,255,.72);line-height:1.35}
+      #gkmV372TouchSelect{display:none}
       .gkmV343Hint{position:absolute;right:18px;bottom:18px;z-index:8;color:rgba(255,255,255,.7);font-size:11px;text-align:right;text-shadow:0 0 8px #000;pointer-events:none}
       @media(max-width:700px){
         #gkmV343Btn{
@@ -17805,6 +17809,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         #gkmV343Status{left:8px;bottom:8px;width:calc(100vw - 16px);padding:8px 10px;border-radius:14px}
         #gkmV343Status b{font-size:13px;margin-bottom:2px}
         #gkmV343Status div{font-size:9px;line-height:1.25;max-height:24px;overflow:hidden}
+        #gkmV372TouchSelect{
+          position:absolute;left:8px;right:8px;bottom:62px;z-index:10;display:none;
+          min-height:48px;padding:8px 12px;border:1px solid rgba(83,238,194,.72);border-radius:14px;
+          background:linear-gradient(135deg,rgba(39,30,139,.96),rgba(0,166,211,.96));color:#fff;
+          box-shadow:0 0 26px rgba(0,212,255,.38),0 12px 28px rgba(0,0,0,.42);
+          text-align:left;cursor:pointer
+        }
+        #gkmV372TouchSelect.open{display:block}
+        #gkmV372TouchSelect span{display:block;font-size:9px;opacity:.76;margin-bottom:2px}
+        #gkmV372TouchSelect b{display:block;font-size:12px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .gkmV343Hint{display:none}
         #gkmV357EffectsPanel{top:60px;right:6px;width:calc(100vw - 12px);max-height:calc(100vh - 68px)}
         #gkmV363QualityPanel{top:60px;right:6px;width:calc(100vw - 12px);max-height:calc(100vh - 68px);overflow:auto}
@@ -17837,7 +17851,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V371</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V372</div>
           <div class="gkmV343Sub">Сбалансированный локальный Poster Atlas мгновенно заполняет фильмы, сериалы, аниме и мультфильмы; внешняя сеть остаётся резервом.</div>
         </div>
         <div class="gkmV343Actions">
@@ -17917,6 +17931,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         <div class="gkmV343Pane" data-pane="0"></div>
         <div class="gkmV343Pane" data-pane="1"></div>
       </div>
+      <button id="gkmV372TouchSelect" type="button" aria-live="polite"><span>Открыть выбранный постер</span><b></b></button>
       <div id="gkmV343Status"><b>Открываю стенку...</b><div>Заполняю экран крупными постерами.</div></div>
       <div class="gkmV343Hint">движение — магнитная волна<br>клик — открыть полную карточку</div>
     `;
@@ -17981,6 +17996,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       selectScreenItems(currentKind);
       hoverIndex=-1;
       hidePreview();
+      document.getElementById("gkmV372TouchSelect")?.classList.remove("open");
       startImageQueue();
     };
 
@@ -17989,6 +18005,33 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     let touchStartY=0;
     let touchMoved=false;
     let suppressNextClick=false;
+    function hideTouchSelection(){
+      const button=document.getElementById("gkmV372TouchSelect");
+      if(!button) return;
+      button.classList.remove("open");
+      button.removeAttribute("data-index");
+    }
+
+    function showTouchSelection(index){
+      const button=document.getElementById("gkmV372TouchSelect");
+      const item=wallItems[index];
+      if(!button||!item){
+        hideTouchSelection();
+        return;
+      }
+      button.dataset.index=String(index);
+      const title=titleOf(item)||"Открыть карточку";
+      const label=button.querySelector("b");
+      if(label) label.textContent=title;
+      button.classList.add("open");
+    }
+
+    document.getElementById("gkmV372TouchSelect").onclick=()=>{
+      const button=document.getElementById("gkmV372TouchSelect");
+      const index=Number(button?.dataset.index);
+      const item=Number.isInteger(index)?wallItems[index]:null;
+      if(item) openItem(item);
+    };
 
     canvas.addEventListener("pointermove",event=>{
       if(event.pointerType==="touch"&&activeTouchPointerId===event.pointerId){
@@ -17999,6 +18042,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     },{passive:false});
     canvas.addEventListener("pointerdown",event=>{
       if(event.pointerType==="touch"){
+        clearTimeout(touchReleaseTimer);
+        hideTouchSelection();
         activeTouchPointerId=event.pointerId;
         touchStartX=event.clientX;
         touchStartY=event.clientY;
@@ -18016,18 +18061,40 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     },{passive:false});
     canvas.addEventListener("pointerup",event=>{
       if(event.pointerType!=="touch"||activeTouchPointerId!==event.pointerId) return;
-      suppressNextClick=touchMoved;
+      const finalIndex=indexAt(event.clientX,event.clientY);
+      const finalItem=finalIndex>=0?wallItems[finalIndex]:null;
+      suppressNextClick=true;
       activeTouchPointerId=null;
       try{canvas.releasePointerCapture(event.pointerId);}catch{}
       clearTimeout(hoverTimer);
-      hoverTimer=setTimeout(pointerLeave,220);
+      if(!touchMoved&&finalItem){
+        openItem(finalItem);
+        return;
+      }
+      if(touchMoved&&finalItem){
+        hoverIndex=finalIndex;
+        pointerTargetX=event.clientX;
+        pointerTargetY=event.clientY;
+        showTouchSelection(finalIndex);
+        touchReleaseTimer=setTimeout(()=>{
+          hideTouchSelection();
+          pointerLeave();
+        },3200);
+        return;
+      }
+      hideTouchSelection();
+      pointerLeave();
     },{passive:true});
     canvas.addEventListener("pointercancel",event=>{
       if(activeTouchPointerId===event.pointerId) activeTouchPointerId=null;
       suppressNextClick=true;
+      clearTimeout(touchReleaseTimer);
+      hideTouchSelection();
       pointerLeave();
     },{passive:true});
-    canvas.addEventListener("pointerleave",pointerLeave);
+    canvas.addEventListener("pointerleave",event=>{
+      if(event.pointerType!=="touch") pointerLeave();
+    });
     canvas.addEventListener("click",event=>{
       if(suppressNextClick){
         suppressNextClick=false;
@@ -18121,6 +18188,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     document.getElementById("gkmV357EffectsPanel")?.classList.remove("open");
     document.getElementById("gkmV363QualityPanel")?.classList.remove("open");
     document.getElementById("gkmV358DiagnosticsPanel")?.classList.remove("open");
+    document.getElementById("gkmV372TouchSelect")?.classList.remove("open");
+    clearTimeout(touchReleaseTimer);
+    touchReleaseTimer=0;
     overlay?.classList.remove("gkm-v371-tools-open");
     const toolsButton=document.getElementById("gkmV371CanvasTools");
     if(toolsButton) toolsButton.textContent="⚙️ Настройки";
@@ -20560,7 +20630,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=371",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=372",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);
@@ -21184,3 +21254,6 @@ window.GKM_V370_UNIQUE_CATALOG_CONTROL_VERSION =
   console.log("GKM V371: compact mobile cards, touch Canvas and collapsible dock installed");
 })();
 /* GKM V371 MOBILE CARDS, TOUCH CANVAS AND COMPACT DOCK END */
+
+/* GKM V372 TOUCH POSTER SELECTION FIX */
+console.log("GKM V372: touch tap opens a poster and drag locks the exact hovered selection");
