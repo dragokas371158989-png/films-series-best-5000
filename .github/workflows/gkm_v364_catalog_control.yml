@@ -1,4 +1,4 @@
-name: GKM V372 Catalog Installer
+name: GKM V373 Catalog Installer
 
 on:
   workflow_dispatch:
@@ -74,10 +74,10 @@ jobs:
           grep -q "GKM_V369_ORDER_BADGE_LAYOUT_VERSION" app.js
           grep -q "GKM_V370_UNIQUE_CATALOG_CONTROL_VERSION" app.js
           grep -q "GKM_V371_MOBILE_CARDS_TOUCH_CANVAS_DOCK_VERSION" app.js
-          grep -q "GKM_V372_TOUCH_POSTER_SELECTION_VERSION" app.js
+          grep -q "GKM_V373_MOBILE_DISCOVERY_VERSION" app.js
           ! grep -qi "cylinderGeometry" app.js
 
-      - name: Commit verified V372 data
+      - name: Commit verified V373 data
         run: |
           git config user.name "gkm-v364-control"
           git config user.email "gkm-v364-control@users.noreply.github.com"
@@ -86,7 +86,7 @@ jobs:
           git restore --worktree -- tools/__pycache__ 2>/dev/null || true
           python - <<'PY'
           from pathlib import Path
-          for path in Path("tools/__pycache__").glob("gkm_v366_russian_title_control*.pyc"):
+          for path in Path("tools").rglob("*.pyc"):
               path.unlink()
           PY
           git add \
@@ -97,10 +97,13 @@ jobs:
             TEST_REPORT_V364_INTEGRITY_SPEED.json \
             TEST_REPORT_V364_POSTER_ATLAS.json \
             TEST_REPORT_V367_RUSSIAN_TITLES.json
+          # Some control scripts also refresh already tracked catalog files.
+          # Stage those changes too, otherwise pull --rebase refuses a dirty tree.
+          git add -u
           if git diff --cached --quiet; then
             echo "Catalog is already healthy"
             exit 0
           fi
-          git commit -m "Apply V372 touch poster selection fix"
+          git commit -m "Apply V373 mobile discovery and unified list"
           git pull --rebase --autostash origin main
           git push origin main
