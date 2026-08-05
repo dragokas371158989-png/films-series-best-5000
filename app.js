@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "3741";
+const GKM_DATA_CACHE_VERSION = "3742";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
@@ -58,6 +58,8 @@ window.GKM_V374_ANIME_LIST_COMMUNITY_VERSION =
   "v374-six-anime-services-direct-watched-add-public-community-2026-08-04";
 window.GKM_V3741_MOBILE_WEATHER_VERSION =
   "v3741-mobile-direct-weather-geolocation-2026-08-05";
+window.GKM_V3742_RUSSIAN_CITY_WEATHER_VERSION =
+  "v3742-russian-city-case-retry-and-geolocation-fallback-2026-08-05";
 window.GKM_V367_RUSSIAN_TITLE_CONTROL_VERSION =
   "v367-source-aware-russian-title-and-collection-control-2026-07-30";
 window.GKM_V366_RUSSIAN_TITLE_CONTROL_VERSION =
@@ -17864,7 +17866,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V374.1</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V374.2</div>
           <div class="gkmV343Sub">Сбалансированный локальный Poster Atlas мгновенно заполняет фильмы, сериалы, аниме и мультфильмы; внешняя сеть остаётся резервом.</div>
         </div>
         <div class="gkmV343Actions">
@@ -18950,6 +18952,37 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       return await response.json();
     }finally{clearTimeout(timer);}
   }
+  function weatherCityCandidates(value){
+    const city=T(value).replace(/^(?:г\.?|город)\s+/iu,"").replace(/\s+/g," ");
+    const key=N(city);
+    const known={
+      "краснодаре":"Краснодар","москве":"Москва","санкт петербурге":"Санкт-Петербург",
+      "ростове на дону":"Ростов-на-Дону","нижнем новгороде":"Нижний Новгород",
+      "великом новгороде":"Великий Новгород","екатеринбурге":"Екатеринбург",
+      "оренбурге":"Оренбург","казани":"Казань","твери":"Тверь","перми":"Пермь",
+      "астрахани":"Астрахань","рязани":"Рязань","тюмени":"Тюмень"
+    };
+    const variants=[city,known[key]];
+    if(/ве$/iu.test(city))variants.push(city.replace(/ве$/iu,"ва"));
+    if(/(?:бурге|граде|даре|городе)$/iu.test(city))variants.push(city.replace(/е$/iu,""));
+    if(/и$/iu.test(city))variants.push(city.replace(/и$/iu,"ь"));
+    if(/е$/iu.test(city))variants.push(city.replace(/е$/iu,""));
+    if(/у$/iu.test(city))variants.push(city.replace(/у$/iu,""));
+    return variants.filter(Boolean).filter((item,index,array)=>array.findIndex(other=>N(other)===N(item))===index);
+  }
+  async function geocodeWeatherCity(city){
+    for(const candidate of weatherCityCandidates(city)){
+      const geocodeUrl=new URL("https://geocoding-api.open-meteo.com/v1/search");
+      geocodeUrl.searchParams.set("name",candidate);
+      geocodeUrl.searchParams.set("count","1");
+      geocodeUrl.searchParams.set("language","ru");
+      geocodeUrl.searchParams.set("format","json");
+      const geocode=await weatherJson(geocodeUrl.toString());
+      const found=geocode&&Array.isArray(geocode.results)&&geocode.results[0];
+      if(found)return found;
+    }
+    return null;
+  }
   function phoneCoordinates(){
     return new Promise((resolve,reject)=>{
       if(!navigator.geolocation){reject(Object.assign(new Error("geolocation unavailable"),{code:"GEO_UNAVAILABLE"}));return;}
@@ -18992,17 +19025,16 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     let coordinates,place;
     try{
       if(city){
-        const geocodeUrl=new URL("https://geocoding-api.open-meteo.com/v1/search");
-        geocodeUrl.searchParams.set("name",city);
-        geocodeUrl.searchParams.set("count","1");
-        geocodeUrl.searchParams.set("language","ru");
-        geocodeUrl.searchParams.set("format","json");
-        const geocode=await weatherJson(geocodeUrl.toString());
-        const found=geocode&&Array.isArray(geocode.results)&&geocode.results[0];
-        if(!found)return{text:"",error:`Не нашёл город «${city}». Напиши точнее, например: «погода в Краснодаре».`};
-        coordinates={latitude:found.latitude,longitude:found.longitude};
-        place=[found.name,found.admin1,found.country].filter(Boolean).filter((item,index,array)=>array.indexOf(item)===index).join(", ");
-        const memory=mem();memory.city=T(found.name)||city;saveMem(memory);
+        const found=await geocodeWeatherCity(city);
+        if(found){
+          coordinates={latitude:found.latitude,longitude:found.longitude};
+          place=[found.name,found.admin1,found.country].filter(Boolean).filter((item,index,array)=>array.indexOf(item)===index).join(", ");
+          const memory=mem();memory.city=T(found.name)||city;saveMem(memory);
+        }else if(!requestedCity){
+          const memory=mem();delete memory.city;saveMem(memory);
+          coordinates=await phoneCoordinates();
+          place="рядом с вами";
+        }else return{text:"",error:`Не нашёл город «${city}». Напиши точнее, например: «погода в Краснодаре».`};
       }else{
         coordinates=await phoneCoordinates();
         place="рядом с вами";
@@ -19022,7 +19054,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       return{text:"",error:"Не получилось загрузить погоду. Проверь интернет и повтори запрос."};
     }
   }
-  window.GKM_V3741_MOBILE_WEATHER=Object.freeze({fetchWeather:directMobileWeather,extractCity:extractWeatherCity});
+  window.GKM_V3741_MOBILE_WEATHER=Object.freeze({fetchWeather:directMobileWeather,extractCity:extractWeatherCity,cityCandidates:weatherCityCandidates});
   function isCatalogQuery(q){
     const x=N(q);
     if(detectType(q)!=="all")return true;
@@ -19051,7 +19083,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         query: q,
         mode,
         local_answer: localText,
-        site_version: "V374.1",
+        site_version: "V374.2",
         requested_model: window.GKM_V343_AI_MODEL_DEFAULT,
         instruction: mode === "catalog"
           ? "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов."
@@ -20741,7 +20773,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=3741",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=3742",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);
