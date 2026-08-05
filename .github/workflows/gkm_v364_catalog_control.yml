@@ -1,4 +1,4 @@
-name: GKM V374.3 Catalog Installer
+name: GKM V374.4 Catalog Installer
 
 on:
   workflow_dispatch:
@@ -57,6 +57,7 @@ jobs:
           node --check app.js
           node --check ai_search_worker_v343.js
           node --check ai_search_worker_v344.js
+          node --check community_chat_worker_v3744.js
           node --check sw.js
           python -m py_compile \
             tools/build_fast_site_data.py \
@@ -81,9 +82,10 @@ jobs:
           grep -q "GKM_V3743_AFIPSKY_WEATHER_VERSION" app.js
           grep -q "GKM_V3743_MOBILE_CANVAS_SELECTION_VERSION" app.js
           grep -q "GKM_V3743_GENERAL_KNOWLEDGE_VERSION" app.js
+          grep -q "GKM_V3744_COMMUNITY_CHAT_VERSION" app.js
           ! grep -qi "cylinderGeometry" app.js
 
-      - name: Commit verified V374.3 data
+      - name: Commit verified V374.4 data
         run: |
           git config user.name "gkm-v364-control"
           git config user.email "gkm-v364-control@users.noreply.github.com"
@@ -110,6 +112,6 @@ jobs:
             echo "Catalog is already healthy"
             exit 0
           fi
-          git commit -m "Apply V374.3 Afipsky weather and mobile Canvas selection fix"
+          git commit -m "Apply V374.4 direct public community chat"
           git pull --rebase --autostash origin main
           git push origin main
