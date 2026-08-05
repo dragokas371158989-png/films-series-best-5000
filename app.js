@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "3742";
+const GKM_DATA_CACHE_VERSION = "3743";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
@@ -60,6 +60,12 @@ window.GKM_V3741_MOBILE_WEATHER_VERSION =
   "v3741-mobile-direct-weather-geolocation-2026-08-05";
 window.GKM_V3742_RUSSIAN_CITY_WEATHER_VERSION =
   "v3742-russian-city-case-retry-and-geolocation-fallback-2026-08-05";
+window.GKM_V3743_AFIPSKY_WEATHER_VERSION =
+  "v3743-afipsky-exact-weather-location-and-typo-aliases-2026-08-05";
+window.GKM_V3743_MOBILE_CANVAS_SELECTION_VERSION =
+  "v3743-mobile-canvas-preview-second-tap-and-thumb-shuffle-2026-08-05";
+window.GKM_V3743_GENERAL_KNOWLEDGE_VERSION =
+  "v3743-general-knowledge-worker-wikipedia-fallback-2026-08-05";
 window.GKM_V367_RUSSIAN_TITLE_CONTROL_VERSION =
   "v367-source-aware-russian-title-and-collection-control-2026-07-30";
 window.GKM_V366_RUSSIAN_TITLE_CONTROL_VERSION =
@@ -17787,6 +17793,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       #gkmV343Status b{display:block;font-size:16px;margin-bottom:4px}
       #gkmV343Status div{font-size:11px;color:rgba(255,255,255,.72);line-height:1.35}
       #gkmV372TouchSelect{display:none}
+      #gkmV3743ShuffleFloat{display:none}
       .gkmV343Hint{position:absolute;right:18px;bottom:18px;z-index:8;color:rgba(255,255,255,.7);font-size:11px;text-align:right;text-shadow:0 0 8px #000;pointer-events:none}
       @media(max-width:700px){
         #gkmV343Btn{
@@ -17813,15 +17820,19 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         #gkmV371CanvasTools{display:inline-flex}
         #gkmV343Overlay:not(.gkm-v371-tools-open) #gkmV357EffectsToggle,
         #gkmV343Overlay:not(.gkm-v371-tools-open) #gkmV363QualityToggle,
-        #gkmV343Overlay:not(.gkm-v371-tools-open) #gkmV358DiagnosticsToggle,
-        #gkmV343Overlay:not(.gkm-v371-tools-open) #gkmV343Shuffle{display:none}
+        #gkmV343Overlay:not(.gkm-v371-tools-open) #gkmV358DiagnosticsToggle{display:none}
+        #gkmV343Shuffle{display:none!important}
         #gkmV343Overlay.gkm-v371-tools-open [data-kind]{display:none}
         #gkmV343Lens.open{opacity:1;transform:scale(.68)}
-        #gkmV343Preview{width:calc(100vw - 20px);height:164px}
+        #gkmV343Preview{
+          display:block!important;position:fixed;left:8px;right:8px;top:auto;bottom:118px;
+          width:auto;height:158px;z-index:9;
+          transform:perspective(950px) translate3d(0,0,0) rotateX(0) rotateY(0) scale(.985)!important
+        }
         .gkmV343Pane{grid-template-columns:92px 1fr;gap:10px;padding:12px}
         .gkmV343PreviewPoster{width:92px;height:136px}.gkmV343PText h2{font-size:18px}.gkmV343Desc{display:none}
-        #gkmV343Preview{display:none}
-        #gkmV343Status{left:8px;bottom:8px;width:calc(100vw - 16px);padding:8px 10px;border-radius:14px}
+        #gkmV343Status{left:8px;bottom:8px;width:calc(100vw - 16px);padding:8px 10px;border-radius:14px;transition:opacity .16s ease}
+        #gkmV343Preview.open~#gkmV343Status{opacity:0}
         #gkmV343Status b{font-size:13px;margin-bottom:2px}
         #gkmV343Status div{font-size:9px;line-height:1.25;max-height:24px;overflow:hidden}
         #gkmV372TouchSelect{
@@ -17834,6 +17845,13 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         #gkmV372TouchSelect.open{display:block}
         #gkmV372TouchSelect span{display:block;font-size:9px;opacity:.76;margin-bottom:2px}
         #gkmV372TouchSelect b{display:block;font-size:12px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        #gkmV3743ShuffleFloat{
+          position:fixed;right:8px;bottom:68px;z-index:11;display:flex;align-items:center;gap:6px;
+          min-height:42px;padding:8px 12px;border:1px solid rgba(0,220,255,.6);border-radius:14px;
+          background:linear-gradient(135deg,rgba(70,36,178,.97),rgba(0,165,224,.96));color:#fff;
+          font-size:11px;font-weight:900;box-shadow:0 0 24px rgba(0,190,255,.34),0 10px 26px rgba(0,0,0,.38)
+        }
+        #gkmV372TouchSelect.open~#gkmV3743ShuffleFloat{display:none}
         .gkmV343Hint{display:none}
         #gkmV357EffectsPanel{top:60px;right:6px;width:calc(100vw - 12px);max-height:calc(100vh - 68px)}
         #gkmV363QualityPanel{top:60px;right:6px;width:calc(100vw - 12px);max-height:calc(100vh - 68px);overflow:auto}
@@ -17866,7 +17884,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V374.2</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V374.3</div>
           <div class="gkmV343Sub">Сбалансированный локальный Poster Atlas мгновенно заполняет фильмы, сериалы, аниме и мультфильмы; внешняя сеть остаётся резервом.</div>
         </div>
         <div class="gkmV343Actions">
@@ -17947,6 +17965,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         <div class="gkmV343Pane" data-pane="1"></div>
       </div>
       <button id="gkmV372TouchSelect" type="button" aria-live="polite"><span>Открыть выбранный постер</span><b></b></button>
+      <button id="gkmV3743ShuffleFloat" type="button" aria-label="Показать другой набор постеров">🔀 <span>Другой набор</span></button>
       <div id="gkmV343Status"><b>Открываю стенку...</b><div>Заполняю экран крупными постерами.</div></div>
       <div class="gkmV343Hint">движение — магнитная волна<br>клик — открыть полную карточку</div>
     `;
@@ -18006,25 +18025,32 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       document.getElementById("gkmV358DiagnosticsPanel")?.classList.remove("open");
     };
     document.getElementById("gkmV343Close").onclick=closeWall;
-    document.getElementById("gkmV343Shuffle").onclick=()=>{
+    let selectedTouchIndex=-1;
+    function shuffleWall(){
       shuffleSeed++;
       selectScreenItems(currentKind);
       hoverIndex=-1;
+      selectedTouchIndex=-1;
       hidePreview();
-      document.getElementById("gkmV372TouchSelect")?.classList.remove("open");
+      const touchButton=document.getElementById("gkmV372TouchSelect");
+      touchButton?.classList.remove("open");
+      touchButton?.removeAttribute("data-index");
       startImageQueue();
-    };
+    }
+    document.getElementById("gkmV343Shuffle").onclick=shuffleWall;
+    document.getElementById("gkmV3743ShuffleFloat").onclick=shuffleWall;
 
     let activeTouchPointerId=null;
     let touchStartX=0;
     let touchStartY=0;
     let touchMoved=false;
     let suppressNextClick=false;
-    function hideTouchSelection(){
+    function hideTouchSelection(resetSelection=true){
       const button=document.getElementById("gkmV372TouchSelect");
       if(!button) return;
       button.classList.remove("open");
       button.removeAttribute("data-index");
+      if(resetSelection) selectedTouchIndex=-1;
     }
 
     function showTouchSelection(index){
@@ -18035,9 +18061,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         return;
       }
       button.dataset.index=String(index);
+      selectedTouchIndex=index;
       const title=titleOf(item)||"Открыть карточку";
       const label=button.querySelector("b");
       if(label) label.textContent=title;
+      const hint=button.querySelector("span");
+      if(hint) hint.textContent="Коснись постера ещё раз или нажми сюда";
       button.classList.add("open");
     }
 
@@ -18058,7 +18087,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     canvas.addEventListener("pointerdown",event=>{
       if(event.pointerType==="touch"){
         clearTimeout(touchReleaseTimer);
-        hideTouchSelection();
         activeTouchPointerId=event.pointerId;
         touchStartX=event.clientX;
         touchStartY=event.clientY;
@@ -18083,18 +18111,25 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       try{canvas.releasePointerCapture(event.pointerId);}catch{}
       clearTimeout(hoverTimer);
       if(!touchMoved&&finalItem){
-        openItem(finalItem);
+        if(selectedTouchIndex===finalIndex&&document.getElementById("gkmV372TouchSelect")?.classList.contains("open")){
+          openItem(finalItem);
+          return;
+        }
+        hoverIndex=finalIndex;
+        pointerTargetX=event.clientX;
+        pointerTargetY=event.clientY;
+        updatePreviewTarget();
+        showPreview(finalItem);
+        showTouchSelection(finalIndex);
         return;
       }
       if(touchMoved&&finalItem){
         hoverIndex=finalIndex;
         pointerTargetX=event.clientX;
         pointerTargetY=event.clientY;
+        updatePreviewTarget();
+        showPreview(finalItem);
         showTouchSelection(finalIndex);
-        touchReleaseTimer=setTimeout(()=>{
-          hideTouchSelection();
-          pointerLeave();
-        },3200);
         return;
       }
       hideTouchSelection();
@@ -18970,7 +19005,17 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(/у$/iu.test(city))variants.push(city.replace(/у$/iu,""));
     return variants.filter(Boolean).filter((item,index,array)=>array.findIndex(other=>N(other)===N(item))===index);
   }
+  function knownWeatherLocation(value){
+    const ignored=new Set(["пгт","поселок","поселка","поселке","именно","сейчас","сегодня","пожалуйста"]);
+    const key=N(value).split(" ").filter(word=>word&&!ignored.has(word)).join(" ");
+    if(/^(?:афипск(?:ий|ом|ого|ому|ом|е)?|афпск(?:ий|ом|ого|ому|е)?|афипс)$/u.test(key)){
+      return {name:"Афипский",admin1:"Краснодарский край",country:"Россия",latitude:44.903348,longitude:38.841132};
+    }
+    return null;
+  }
   async function geocodeWeatherCity(city){
+    const exact=knownWeatherLocation(city);
+    if(exact)return exact;
     for(const candidate of weatherCityCandidates(city)){
       const geocodeUrl=new URL("https://geocoding-api.open-meteo.com/v1/search");
       geocodeUrl.searchParams.set("name",candidate);
@@ -19054,7 +19099,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       return{text:"",error:"Не получилось загрузить погоду. Проверь интернет и повтори запрос."};
     }
   }
-  window.GKM_V3741_MOBILE_WEATHER=Object.freeze({fetchWeather:directMobileWeather,extractCity:extractWeatherCity,cityCandidates:weatherCityCandidates});
+  window.GKM_V3741_MOBILE_WEATHER=Object.freeze({fetchWeather:directMobileWeather,extractCity:extractWeatherCity,cityCandidates:weatherCityCandidates,knownLocation:knownWeatherLocation});
   function isCatalogQuery(q){
     const x=N(q);
     if(detectType(q)!=="all")return true;
@@ -19071,6 +19116,47 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(/кто ты|что ты/.test(x))return"Я ГОЛУБЬ AI V343: могу общаться на обычные темы, отвечать на вопросы, показывать живую погоду и искать по всему каталогу.";
     return"Я понял вопрос, но сейчас не смог получить ответ от Groq. Попробуй ещё раз через несколько секунд.";
   }
+  function localGeneralKnowledge(q){
+    const x=N(q);
+    if(/(?:кто|какая сторона).*(?:выиграл|победил|одержал победу).*(?:втор(?:ую|ой) миров|2 миров)/u.test(x)||/(?:втор(?:ую|ой) миров|2 миров).*(?:кто|победил|выиграл)/u.test(x)){
+      return "Во Второй мировой войне победили страны антигитлеровской коалиции — прежде всего СССР, США, Великобритания, Китай и их союзники. В Европе решающий вклад в разгром нацистской Германии внёс Советский Союз. Германия капитулировала в мае 1945 года, а Япония — в сентябре 1945 года.";
+    }
+    if(/(?:кто|какая сторона).*(?:выиграл|победил).*(?:велик(?:ую|ой) отечествен)/u.test(x)){
+      return "В Великой Отечественной войне победил Советский Союз, разгромив нацистскую Германию вместе с союзниками по антигитлеровской коалиции. День Победы отмечается 9 мая.";
+    }
+    return "";
+  }
+  async function tryWikipediaAnswer(q){
+    const x=N(q);
+    if(!x||x.length<5||/^(?:привет|прив|ку|хай|hi|hello|здарова|здорово|как дела|как ты|спасибо|пока)/u.test(x))return"";
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),8500);
+    try{
+      const url=new URL("https://ru.wikipedia.org/w/api.php");
+      url.searchParams.set("action","query");
+      url.searchParams.set("generator","search");
+      url.searchParams.set("gsrsearch",T(q));
+      url.searchParams.set("gsrnamespace","0");
+      url.searchParams.set("gsrlimit","3");
+      url.searchParams.set("prop","extracts|info");
+      url.searchParams.set("exintro","1");
+      url.searchParams.set("explaintext","1");
+      url.searchParams.set("exsentences","5");
+      url.searchParams.set("inprop","url");
+      url.searchParams.set("redirects","1");
+      url.searchParams.set("format","json");
+      url.searchParams.set("origin","*");
+      const response=await fetch(url.toString(),{signal:controller.signal,headers:{Accept:"application/json"}});
+      if(!response.ok)return"";
+      const data=await response.json();
+      const pages=Object.values(data&&data.query&&data.query.pages||{}).sort((a,b)=>(a.index||999)-(b.index||999));
+      const page=pages.find(item=>T(item&&item.extract));
+      if(!page)return"";
+      const extract=T(page.extract).replace(/\s+/g," ").slice(0,1300);
+      return `**${T(page.title)||"Справка"}**\n${extract}\n\nИсточник: Википедия.`;
+    }catch{return"";}
+    finally{clearTimeout(timer);}
+  }
 
   async function tryRemoteAI(q, localText, mode="catalog"){
 
@@ -19083,7 +19169,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         query: q,
         mode,
         local_answer: localText,
-        site_version: "V374.2",
+        site_version: "V374.3",
         requested_model: window.GKM_V343_AI_MODEL_DEFAULT,
         instruction: mode === "catalog"
           ? "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов."
@@ -19140,6 +19226,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 Режим общения: ${endpoint?"Cloudflare Worker + Groq":"Groq не подключён"}
 Модель Worker: ${window.GKM_V343_AI_MODEL_DEFAULT}
 Обычный диалог: включён
+Общие знания: ${endpoint?"полный AI + энциклопедический резерв":"энциклопедический резерв"}
 Живая погода: включена, склонения городов поддерживаются
 Поиск: полный каталог через Web Worker
 Кликабельные карточки: включены
@@ -19168,7 +19255,11 @@ Endpoint: ${endpoint||"не задан"}`;
 
     if(!isCatalogQuery(q)){
       const generalText=await tryRemoteAI(q,"","general");
-      return generalText||generalFallback(q);
+      if(generalText)return generalText;
+      const knownText=localGeneralKnowledge(q);
+      if(knownText)return knownText;
+      const encyclopediaText=await tryWikipediaAnswer(q);
+      return encyclopediaText||generalFallback(q);
     }
 
     const res=await search(q,onProgress);
@@ -20773,7 +20864,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=3742",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=3743",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);

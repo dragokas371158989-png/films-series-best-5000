@@ -1,15 +1,15 @@
-/* GKM V374.2 PWA: Russian city cases and saved-city geolocation fallback. */
-const VERSION = "v3742-2026-08-05";
+/* GKM V374.3 PWA: exact Afipsky weather location and typo aliases. */
+const VERSION = "v3743-2026-08-05";
 const SHELL_CACHE = `gkm-shell-${VERSION}`;
 const RECENT_CACHE = `gkm-recent-${VERSION}`;
 const CACHE_PREFIX = "gkm-";
 const SHELL_URLS = [
   "./",
   "./index.html",
-  "./style.css?v=3742",
-  "./app.js?v=3742",
+  "./style.css?v=3743",
+  "./app.js?v=3743",
   "./ai_search_worker_v343.js",
-  "./manifest.webmanifest?v=3742",
+  "./manifest.webmanifest?v=3743",
   "./logo-banner.webp",
   "./pwa-icon-192.png",
   "./pwa-icon-512.png"
