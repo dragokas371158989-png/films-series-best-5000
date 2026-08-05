@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "374";
+const GKM_DATA_CACHE_VERSION = "3741";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
@@ -56,6 +56,8 @@ window.GKM_V373_MOBILE_DISCOVERY_VERSION =
   "v373-unified-list-mobile-navigation-long-press-suggestions-calendar-deep-links-2026-08-04";
 window.GKM_V374_ANIME_LIST_COMMUNITY_VERSION =
   "v374-six-anime-services-direct-watched-add-public-community-2026-08-04";
+window.GKM_V3741_MOBILE_WEATHER_VERSION =
+  "v3741-mobile-direct-weather-geolocation-2026-08-05";
 window.GKM_V367_RUSSIAN_TITLE_CONTROL_VERSION =
   "v367-source-aware-russian-title-and-collection-control-2026-07-30";
 window.GKM_V366_RUSSIAN_TITLE_CONTROL_VERSION =
@@ -17862,7 +17864,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V374</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V374.1</div>
           <div class="gkmV343Sub">Сбалансированный локальный Poster Atlas мгновенно заполняет фильмы, сериалы, аниме и мультфильмы; внешняя сеть остаётся резервом.</div>
         </div>
         <div class="gkmV343Actions">
@@ -18923,6 +18925,104 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(!m)m=raw.match(/^город\s*:\s*([\p{L} .'-]{2,60})$/iu);
     return m?T(m[1]).replace(/\s+(?:сегодня|завтра|сейчас)$/iu,"").trim():"";
   }
+  function weatherDescription(code){
+    const value=Number(code);
+    if(value===0)return"ясно";
+    if(value===1)return"преимущественно ясно";
+    if(value===2)return"переменная облачность";
+    if(value===3)return"пасмурно";
+    if(value===45||value===48)return"туман";
+    if(value>=51&&value<=57)return"морось";
+    if(value>=61&&value<=67)return"дождь";
+    if(value>=71&&value<=77)return"снег";
+    if(value>=80&&value<=82)return"ливневый дождь";
+    if(value===85||value===86)return"снегопад";
+    if(value===95)return"гроза";
+    if(value===96||value===99)return"гроза с градом";
+    return"погодные данные получены";
+  }
+  async function weatherJson(url,timeout=10000){
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),timeout);
+    try{
+      const response=await fetch(url,{signal:controller.signal,headers:{Accept:"application/json"}});
+      if(!response.ok)throw new Error(`HTTP ${response.status}`);
+      return await response.json();
+    }finally{clearTimeout(timer);}
+  }
+  function phoneCoordinates(){
+    return new Promise((resolve,reject)=>{
+      if(!navigator.geolocation){reject(Object.assign(new Error("geolocation unavailable"),{code:"GEO_UNAVAILABLE"}));return;}
+      navigator.geolocation.getCurrentPosition(
+        position=>resolve({latitude:position.coords.latitude,longitude:position.coords.longitude}),
+        error=>reject(Object.assign(new Error(error&&error.message||"geolocation denied"),{code:"GEO_DENIED"})),
+        {enableHighAccuracy:false,timeout:9000,maximumAge:10*60*1000}
+      );
+    });
+  }
+  function weatherDayLabel(date){
+    try{return new Intl.DateTimeFormat("ru-RU",{weekday:"short",day:"numeric",month:"short"}).format(new Date(`${date}T12:00:00`));}
+    catch{return T(date);}
+  }
+  function weatherNumber(value,suffix="°"){
+    const number=Number(value);
+    return Number.isFinite(number)?`${Math.round(number)}${suffix}`:"—";
+  }
+  function formatDirectWeather(data,place){
+    const current=data&&data.current||{};
+    const daily=data&&data.daily||{};
+    const nowTemp=weatherNumber(current.temperature_2m);
+    const feels=weatherNumber(current.apparent_temperature);
+    const wind=weatherNumber(current.wind_speed_10m," км/ч");
+    const humidity=weatherNumber(current.relative_humidity_2m,"%");
+    const precipitation=Number.isFinite(Number(current.precipitation))?`${Number(current.precipitation).toLocaleString("ru-RU")} мм`:"—";
+    const days=(daily.time||[]).slice(0,3).map((date,index)=>{
+      const minimum=weatherNumber(daily.temperature_2m_min?.[index]);
+      const maximum=weatherNumber(daily.temperature_2m_max?.[index]);
+      const chance=weatherNumber(daily.precipitation_probability_max?.[index],"%");
+      return `${weatherDayLabel(date)}: ${minimum}…${maximum}, ${weatherDescription(daily.weather_code?.[index])}, осадки ${chance}`;
+    });
+    return `Погода — ${place}\nСейчас: ${nowTemp}, ощущается как ${feels}; ${weatherDescription(current.weather_code)}.\nВлажность: ${humidity} · ветер: ${wind} · осадки: ${precipitation}.${days.length?`\n\nПрогноз:\n${days.join("\n")}`:""}\n\nИсточник: Open-Meteo.`;
+  }
+  async function directMobileWeather(q){
+    const requestedCity=extractWeatherCity(q);
+    const savedCity=T(mem().city);
+    const wantsNearby=/(?:рядом|поблизости|по геолокации|моя геолокация)/i.test(T(q));
+    const city=requestedCity||(!wantsNearby?savedCity:"");
+    let coordinates,place;
+    try{
+      if(city){
+        const geocodeUrl=new URL("https://geocoding-api.open-meteo.com/v1/search");
+        geocodeUrl.searchParams.set("name",city);
+        geocodeUrl.searchParams.set("count","1");
+        geocodeUrl.searchParams.set("language","ru");
+        geocodeUrl.searchParams.set("format","json");
+        const geocode=await weatherJson(geocodeUrl.toString());
+        const found=geocode&&Array.isArray(geocode.results)&&geocode.results[0];
+        if(!found)return{text:"",error:`Не нашёл город «${city}». Напиши точнее, например: «погода в Краснодаре».`};
+        coordinates={latitude:found.latitude,longitude:found.longitude};
+        place=[found.name,found.admin1,found.country].filter(Boolean).filter((item,index,array)=>array.indexOf(item)===index).join(", ");
+        const memory=mem();memory.city=T(found.name)||city;saveMem(memory);
+      }else{
+        coordinates=await phoneCoordinates();
+        place="рядом с вами";
+      }
+      const forecastUrl=new URL("https://api.open-meteo.com/v1/forecast");
+      forecastUrl.searchParams.set("latitude",coordinates.latitude);
+      forecastUrl.searchParams.set("longitude",coordinates.longitude);
+      forecastUrl.searchParams.set("current","temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m");
+      forecastUrl.searchParams.set("daily","temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code");
+      forecastUrl.searchParams.set("timezone","auto");
+      forecastUrl.searchParams.set("forecast_days","3");
+      const forecast=await weatherJson(forecastUrl.toString());
+      return{text:formatDirectWeather(forecast,place),error:""};
+    }catch(error){
+      if(error&&error.code==="GEO_DENIED")return{text:"",error:"Чтобы показать погоду рядом, разреши сайту доступ к местоположению. Или напиши город: «погода в Краснодаре»."};
+      if(error&&error.code==="GEO_UNAVAILABLE")return{text:"",error:"Геолокация недоступна в этом браузере. Напиши город, например: «погода в Краснодаре»."};
+      return{text:"",error:"Не получилось загрузить погоду. Проверь интернет и повтори запрос."};
+    }
+  }
+  window.GKM_V3741_MOBILE_WEATHER=Object.freeze({fetchWeather:directMobileWeather,extractCity:extractWeatherCity});
   function isCatalogQuery(q){
     const x=N(q);
     if(detectType(q)!=="all")return true;
@@ -18951,7 +19051,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         query: q,
         mode,
         local_answer: localText,
-        site_version: "V344",
+        site_version: "V374.1",
         requested_model: window.GKM_V343_AI_MODEL_DEFAULT,
         instruction: mode === "catalog"
           ? "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов."
@@ -19028,10 +19128,10 @@ Endpoint: ${endpoint||"не задан"}`;
     if(x.includes("еще")||x.includes("ещё"))return lastQuery?(await answer(lastQuery,onProgress)):"Сначала сделай поиск.";
 
     if(isWeatherQuery(q)){
-      const foundCity=extractWeatherCity(q);
-      if(foundCity){const m=mem();m.city=foundCity;saveMem(m);}
+      const direct=await directMobileWeather(q);
+      if(direct.text)return direct.text;
       const weatherText=await tryRemoteAI(q,"","weather");
-      return weatherText||"Не получилось получить погоду. Напиши город точнее, например: «погода в Краснодаре».";
+      return weatherText||direct.error||"Не получилось получить погоду. Напиши город точнее, например: «погода в Краснодаре».";
     }
 
     if(!isCatalogQuery(q)){
@@ -20641,7 +20741,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=374",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=3741",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);

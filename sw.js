@@ -1,15 +1,15 @@
-/* GKM V374 PWA: anime services, fixed My List and public community. */
-const VERSION = "v374-2026-08-04";
+/* GKM V374.1 PWA: reliable mobile weather without a saved Worker endpoint. */
+const VERSION = "v3741-2026-08-05";
 const SHELL_CACHE = `gkm-shell-${VERSION}`;
 const RECENT_CACHE = `gkm-recent-${VERSION}`;
 const CACHE_PREFIX = "gkm-";
 const SHELL_URLS = [
   "./",
   "./index.html",
-  "./style.css?v=374",
-  "./app.js?v=374",
+  "./style.css?v=3741",
+  "./app.js?v=3741",
   "./ai_search_worker_v343.js",
-  "./manifest.webmanifest?v=374",
+  "./manifest.webmanifest?v=3741",
   "./logo-banner.webp",
   "./pwa-icon-192.png",
   "./pwa-icon-512.png"
