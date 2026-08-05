@@ -1,6 +1,6 @@
 {
   "version": "V367",
-  "generatedAt": "2026-08-05T09:17:59Z",
+  "generatedAt": "2026-08-05T12:24:07Z",
   "status": "success",
   "stats": {
     "recordsScanned": 344710,
@@ -19,8 +19,8 @@
     "syntheticTitles": 16289,
     "collapsedFranchiseTitles": 5,
     "unresolvedRussianTitles": 16317,
-    "catalogTitlesRepaired": 17,
-    "recordsRepaired": 51
+    "catalogTitlesRepaired": 18,
+    "recordsRepaired": 54
   },
   "verification": {
     "ok": true,
