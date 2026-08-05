@@ -1,4 +1,4 @@
-name: GKM V373 Catalog Installer
+name: GKM V374.1 Catalog Installer
 
 on:
   workflow_dispatch:
@@ -76,9 +76,10 @@ jobs:
           grep -q "GKM_V371_MOBILE_CARDS_TOUCH_CANVAS_DOCK_VERSION" app.js
           grep -q "GKM_V373_MOBILE_DISCOVERY_VERSION" app.js
           grep -q "GKM_V374_ANIME_LIST_COMMUNITY_VERSION" app.js
+          grep -q "GKM_V3741_MOBILE_WEATHER_VERSION" app.js
           ! grep -qi "cylinderGeometry" app.js
 
-      - name: Commit verified V374 data
+      - name: Commit verified V374.1 data
         run: |
           git config user.name "gkm-v364-control"
           git config user.email "gkm-v364-control@users.noreply.github.com"
@@ -105,6 +106,6 @@ jobs:
             echo "Catalog is already healthy"
             exit 0
           fi
-          git commit -m "Apply V374 anime services, My List and community fix"
+          git commit -m "Apply V374.1 mobile AI weather fix"
           git pull --rebase --autostash origin main
           git push origin main
