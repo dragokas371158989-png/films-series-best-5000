@@ -43,7 +43,7 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "3743";
+const GKM_DATA_CACHE_VERSION = "3744";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
@@ -66,6 +66,8 @@ window.GKM_V3743_MOBILE_CANVAS_SELECTION_VERSION =
   "v3743-mobile-canvas-preview-second-tap-and-thumb-shuffle-2026-08-05";
 window.GKM_V3743_GENERAL_KNOWLEDGE_VERSION =
   "v3743-general-knowledge-worker-wikipedia-fallback-2026-08-05";
+window.GKM_V3744_COMMUNITY_CHAT_VERSION =
+  "v3744-direct-public-community-chat-without-github-login-2026-08-05";
 window.GKM_V367_RUSSIAN_TITLE_CONTROL_VERSION =
   "v367-source-aware-russian-title-and-collection-control-2026-07-30";
 window.GKM_V366_RUSSIAN_TITLE_CONTROL_VERSION =
@@ -17884,7 +17886,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V374.3</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V374.4</div>
           <div class="gkmV343Sub">Сбалансированный локальный Poster Atlas мгновенно заполняет фильмы, сериалы, аниме и мультфильмы; внешняя сеть остаётся резервом.</div>
         </div>
         <div class="gkmV343Actions">
@@ -19169,7 +19171,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         query: q,
         mode,
         local_answer: localText,
-        site_version: "V374.3",
+        site_version: "V374.4",
         requested_model: window.GKM_V343_AI_MODEL_DEFAULT,
         instruction: mode === "catalog"
           ? "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов."
@@ -20864,7 +20866,7 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=3743",{scope:"./"});
+      await navigator.serviceWorker.register("sw.js?v=3744",{scope:"./"});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);
@@ -22203,8 +22205,10 @@ console.log("GKM V372: touch tap opens a poster and drag locks the exact hovered
   window.GKM_V374_INSTALLED="1";
 
   const SEARCH_STATE={query:"",status:"completed",items:[],busy:false};
-  const REPOSITORY="dragokas371158989-png/films-series-best-5000";
-  const COMMUNITY_API=`https://api.github.com/repos/${REPOSITORY}/issues`;
+  const COMMUNITY_ENDPOINT_KEY="GKM_COMMUNITY_CHAT_ENDPOINT";
+  const COMMUNITY_NAME_KEY="GKM_COMMUNITY_CHAT_NAME";
+  const COMMUNITY_CLIENT_KEY="GKM_COMMUNITY_CHAT_CLIENT";
+  let communityRefreshTimer=0;
 
   function value(raw){return String(raw??"").trim();}
   function html(raw){return value(raw).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));}
@@ -22279,51 +22283,136 @@ console.log("GKM V372: touch tap opens a poster and drag locks the exact hovered
     section.querySelector("[data-v374-add-status]")?.addEventListener("change",event=>{SEARCH_STATE.status=value(event.target.value)||"completed";renderSearchResults(section);});
   }
 
-  function communityIssueUrl(){
-    const message=value(document.getElementById("gkmV374CommunityText")?.value);
-    const name=value(document.getElementById("gkmV374CommunityName")?.value);
-    if(!message){alert("Сначала напиши сообщение.");return"";}
-    const first=value(message.split(/\n+/)[0]).slice(0,72)||"Сообщение";
-    const body=`${message}${name?`\n\nАвтор на сайте: ${name}`:""}\n\nСтраница: ${location.href}`;
-    return `https://github.com/${REPOSITORY}/issues/new?title=${encodeURIComponent(`[Сообщество] ${first}`)}&body=${encodeURIComponent(body)}`;
+  function communityEndpoint(){
+    let stored="";try{stored=localStorage.getItem(COMMUNITY_ENDPOINT_KEY)||"";}catch{}
+    const configured=value(window.GKM_COMMUNITY_CHAT_ENDPOINT||document.querySelector('meta[name="gkm-community-endpoint"]')?.content||stored);
+    return configured.replace(/\/+$/,"");
   }
 
-  function communityDate(raw){try{return new Intl.DateTimeFormat("ru-RU",{day:"2-digit",month:"short",year:"numeric"}).format(new Date(raw));}catch{return"";}}
+  function communityClientId(){
+    let id="";try{id=value(localStorage.getItem(COMMUNITY_CLIENT_KEY));}catch{}
+    if(id)return id;
+    id=typeof crypto?.randomUUID==="function"?crypto.randomUUID():`gkm-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    try{localStorage.setItem(COMMUNITY_CLIENT_KEY,id);}catch{}
+    return id;
+  }
 
-  async function loadCommunity(){
-    const output=document.getElementById("gkmV374CommunityFeed");if(!output)return;
-    output.innerHTML='<div class="gkm-v374-community-state">Загружаю публичные сообщения…</div>';
+  function communitySavedName(){try{return value(localStorage.getItem(COMMUNITY_NAME_KEY));}catch{return"";}}
+  function saveCommunityName(name){try{if(name)localStorage.setItem(COMMUNITY_NAME_KEY,name);}catch{}}
+  function communityDate(raw){try{return new Intl.DateTimeFormat("ru-RU",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}).format(new Date(raw));}catch{return"";}}
+
+  function setCommunityConnection(message,tone=""){
+    const node=document.getElementById("gkmV3744CommunityConnection");if(!node)return;
+    node.textContent=message||"";node.dataset.tone=tone;
+  }
+
+  async function communityRequest(path,options={}){
+    const endpoint=communityEndpoint();
+    if(!endpoint)throw new Error("Сервер чата ещё не подключён.");
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),12000);
     try{
-      const response=await fetch(`${COMMUNITY_API}?state=all&sort=updated&direction=desc&per_page=30`,{headers:{Accept:"application/vnd.github+json"}});
-      if(!response.ok)throw new Error(`GitHub ${response.status}`);
-      const issues=(await response.json()).filter(issue=>!issue.pull_request&&(/^\[сообщество\]/i.test(value(issue.title))||(issue.labels||[]).some(label=>/community|сообщество/i.test(value(label.name))))).slice(0,10);
-      if(!issues.length){output.innerHTML='<div class="gkm-v374-community-state">Пока сообщений нет. Стань первым участником обсуждения.</div>';return;}
-      const comments=await Promise.all(issues.slice(0,5).map(async issue=>{
-        if(!issue.comments)return[];
-        try{const reply=await fetch(`${issue.comments_url}?per_page=20`,{headers:{Accept:"application/vnd.github+json"}});return reply.ok?await reply.json():[];}catch{return[];}
-      }));
-      output.innerHTML=issues.map((issue,index)=>`<article class="gkm-v374-topic"><header><b>${html(value(issue.title).replace(/^\[сообщество\]\s*/i,""))}</b><span>@${html(issue.user?.login)} · ${html(communityDate(issue.updated_at))}</span></header>${issue.body?`<p>${html(value(issue.body).slice(0,1400))}</p>`:""}${(comments[index]||[]).map(comment=>`<div class="gkm-v374-reply"><b>@${html(comment.user?.login)}</b><p>${html(value(comment.body).slice(0,900))}</p></div>`).join("")}<a href="${html(issue.html_url)}" target="_blank" rel="noopener noreferrer">Ответить и открыть на GitHub · ${Number(issue.comments||0)}</a></article>`).join("");
+      const response=await fetch(`${endpoint}${path}`,{cache:"no-store",...options,signal:controller.signal});
+      const data=await response.json().catch(()=>({}));
+      if(!response.ok||data.ok===false)throw new Error(value(data.error)||`Ошибка сервера ${response.status}`);
+      return data;
     }catch(error){
-      output.innerHTML=`<div class="gkm-v374-community-state">Не удалось получить сообщения (${html(error.message)}). Проверь интернет и нажми «Обновить».</div>`;
+      if(error?.name==="AbortError")throw new Error("Сервер чата долго не отвечает.");
+      throw error;
+    }finally{clearTimeout(timer);}
+  }
+
+  function renderCommunity(messages){
+    const output=document.getElementById("gkmV374CommunityFeed");if(!output)return;
+    if(!messages.length){output.innerHTML='<div class="gkm-v374-community-state">Пока сообщений нет. Напиши первое сообщение прямо здесь.</div>';return;}
+    output.innerHTML=messages.map(topic=>{
+      const replies=Array.isArray(topic.replies)?topic.replies:[];
+      return `<article class="gkm-v374-topic" data-v3744-topic="${html(topic.id)}">
+        <header><b>${html(topic.name||"Гость")}</b><span>${html(communityDate(topic.created_at))}</span></header>
+        <p>${html(value(topic.body).slice(0,1500))}</p>
+        <div class="gkm-v374-replies">${replies.map(reply=>`<div class="gkm-v374-reply"><header><b>${html(reply.name||"Гость")}</b><span>${html(communityDate(reply.created_at))}</span></header><p>${html(value(reply.body).slice(0,1500))}</p></div>`).join("")}</div>
+        <div class="gkm-v374-topic-actions"><button type="button" data-v3744-reply="${html(topic.id)}">↩ Ответить</button><span>${replies.length?`${replies.length} ${replies.length===1?"ответ":"ответов"}`:"Без ответов"}</span></div>
+      </article>`;
+    }).join("");
+  }
+
+  async function loadCommunity(options={}){
+    const output=document.getElementById("gkmV374CommunityFeed");if(!output)return;
+    if(!communityEndpoint()){
+      setCommunityConnection("Сервер сообщений не подключён","offline");
+      output.innerHTML='<div class="gkm-v374-community-state"><b>Чат подготовлен, осталось подключить сервер.</b><br>Разработчику нужно один раз указать адрес Community Worker V374.4.</div>';
+      return;
+    }
+    if(!options.silent)output.innerHTML='<div class="gkm-v374-community-state">Загружаю сообщения…</div>';
+    setCommunityConnection("Обновляю…","busy");
+    try{
+      const data=await communityRequest("/api/messages");
+      renderCommunity(Array.isArray(data.messages)?data.messages:[]);
+      setCommunityConnection("Чат работает · обновление каждые 20 секунд","online");
+    }catch(error){
+      setCommunityConnection("Нет связи с чатом","offline");
+      if(!options.silent)output.innerHTML=`<div class="gkm-v374-community-state">${html(error.message)} Проверь интернет и нажми «Обновить».</div>`;
     }
   }
 
-  function openCommunity(){document.getElementById("gkmV374Community")?.classList.add("open");loadCommunity();}
-  function closeCommunity(){document.getElementById("gkmV374Community")?.classList.remove("open");}
+  async function sendCommunity(parentId="",form=null){
+    const nameInput=form?.querySelector("[data-v3744-reply-name]")||document.getElementById("gkmV374CommunityName");
+    const textInput=form?.querySelector("[data-v3744-reply-text]")||document.getElementById("gkmV374CommunityText");
+    const website=document.getElementById("gkmV374CommunityWebsite");
+    const name=value(nameInput?.value).slice(0,40);
+    const message=value(textInput?.value).slice(0,1500);
+    if(!message){textInput?.focus();setCommunityConnection("Сначала напиши сообщение","offline");return;}
+    if(!communityEndpoint()){await loadCommunity();return;}
+    const button=form?.querySelector("[data-v3744-reply-send]")||document.querySelector("[data-v374-community-send]");
+    if(button){button.disabled=true;button.textContent="Отправляю…";}
+    setCommunityConnection("Публикую сообщение…","busy");
+    try{
+      await communityRequest("/api/messages",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name,message,parent_id:parentId||null,client_id:communityClientId(),website:value(website?.value)})});
+      saveCommunityName(name);
+      if(textInput)textInput.value="";
+      form?.remove();
+      setCommunityConnection("Сообщение опубликовано","online");
+      await loadCommunity({silent:true});
+    }catch(error){
+      setCommunityConnection(error.message||"Не удалось отправить","offline");
+    }finally{
+      if(button){button.disabled=false;button.textContent=parentId?"Ответить":"Опубликовать";}
+    }
+  }
+
+  function openReply(topicId){
+    const topic=document.querySelector(`[data-v3744-topic="${CSS.escape(topicId)}"]`);if(!topic)return;
+    document.querySelectorAll("[data-v3744-reply-form]").forEach(node=>node.remove());
+    const form=document.createElement("div");form.className="gkm-v374-reply-compose";form.dataset.v3744ReplyForm=topicId;
+    form.innerHTML=`<input data-v3744-reply-name maxlength="40" value="${html(communitySavedName())}" placeholder="Имя или ник — необязательно"><textarea data-v3744-reply-text maxlength="1500" rows="3" placeholder="Напиши ответ"></textarea><div><button type="button" data-v3744-reply-send>Ответить</button><button type="button" data-v3744-reply-cancel>Отмена</button></div>`;
+    topic.appendChild(form);form.querySelector("textarea")?.focus();
+  }
+
+  function openCommunity(){
+    const dialog=document.getElementById("gkmV374Community");dialog?.classList.add("open");
+    loadCommunity();clearInterval(communityRefreshTimer);
+    communityRefreshTimer=setInterval(()=>{if(dialog?.classList.contains("open")&&!document.hidden)loadCommunity({silent:true});},20000);
+  }
+  function closeCommunity(){document.getElementById("gkmV374Community")?.classList.remove("open");clearInterval(communityRefreshTimer);communityRefreshTimer=0;}
 
   function ensureCommunity(){
     const old=document.getElementById("gkmV373Feedback");if(old)old.remove();
     const bar=document.getElementById("gkmV373FeedbackBar");
-    if(bar&&!bar.dataset.v374Community){bar.dataset.v374Community="1";bar.innerHTML='<button type="button">💬 Сообщество</button><span>Идеи, проблемы и ответы видны всем посетителям</span>';bar.querySelector("button").onclick=openCommunity;}
+    if(bar&&!bar.dataset.v374Community){bar.dataset.v374Community="1";bar.innerHTML='<button type="button">💬 Открытый чат</button><span>Общение, идеи и ответы прямо на сайте</span>';bar.querySelector("button").onclick=openCommunity;}
     if(document.getElementById("gkmV374Community"))return;
     const dialog=document.createElement("div");dialog.id="gkmV374Community";
-    dialog.innerHTML=`<div class="gkm-v374-community-backdrop" data-v374-community-close></div><section class="gkm-v374-community-box" role="dialog" aria-modal="true" aria-labelledby="gkmV374CommunityTitle"><button class="gkm-v374-community-close" data-v374-community-close type="button">✕</button><h2 id="gkmV374CommunityTitle">💬 Сообщество сайта</h2><p>Сообщения и ответы публичны — их увидят все посетители. Для публикации GitHub попросит войти в аккаунт.</p><div class="gkm-v374-community-compose"><input id="gkmV374CommunityName" maxlength="50" placeholder="Имя или ник — необязательно"><textarea id="gkmV374CommunityText" maxlength="3000" rows="4" placeholder="Напиши идею, вопрос или сообщи о проблеме"></textarea><div><button type="button" data-v374-community-send>Опубликовать</button><button type="button" data-v374-community-refresh>Обновить сообщения</button></div></div><div id="gkmV374CommunityFeed"></div></section>`;
+    dialog.innerHTML=`<div class="gkm-v374-community-backdrop" data-v374-community-close></div><section class="gkm-v374-community-box" role="dialog" aria-modal="true" aria-labelledby="gkmV374CommunityTitle"><button class="gkm-v374-community-close" data-v374-community-close type="button">✕</button><h2 id="gkmV374CommunityTitle">💬 Открытый чат сайта</h2><p>Сообщения и ответы видят все посетители. Регистрация не нужна.</p><div id="gkmV3744CommunityConnection" class="gkm-v374-community-connection" aria-live="polite">Подключаю чат…</div><div class="gkm-v374-community-compose"><input id="gkmV374CommunityName" maxlength="40" value="${html(communitySavedName())}" placeholder="Имя или ник — необязательно"><input id="gkmV374CommunityWebsite" class="gkm-v374-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true"><textarea id="gkmV374CommunityText" maxlength="1500" rows="4" placeholder="Напиши сообщение, идею или вопрос"></textarea><div><button type="button" data-v374-community-send>Опубликовать</button><button type="button" data-v374-community-refresh>Обновить</button></div></div><div id="gkmV374CommunityFeed" aria-live="polite"></div></section>`;
     document.body.appendChild(dialog);
     dialog.addEventListener("click",event=>{
       if(event.target.closest("[data-v374-community-close]")){closeCommunity();return;}
       if(event.target.closest("[data-v374-community-refresh]")){loadCommunity();return;}
-      if(event.target.closest("[data-v374-community-send]")){const url=communityIssueUrl();if(url)window.open(url,"_blank","noopener,noreferrer");}
+      if(event.target.closest("[data-v374-community-send]")){sendCommunity();return;}
+      const reply=event.target.closest("[data-v3744-reply]");if(reply){openReply(value(reply.dataset.v3744Reply));return;}
+      const replyForm=event.target.closest("[data-v3744-reply-form]");
+      if(event.target.closest("[data-v3744-reply-cancel]")){replyForm?.remove();return;}
+      if(event.target.closest("[data-v3744-reply-send]")){sendCommunity(value(replyForm?.dataset.v3744ReplyForm),replyForm);}
     });
+    dialog.addEventListener("keydown",event=>{if(event.key==="Escape")closeCommunity();if(event.key==="Enter"&&(event.ctrlKey||event.metaKey)){event.preventDefault();const replyForm=event.target.closest("[data-v3744-reply-form]");sendCommunity(value(replyForm?.dataset.v3744ReplyForm),replyForm);}});
   }
 
   function install(){
@@ -22333,9 +22422,9 @@ console.log("GKM V372: touch tap opens a poster and drag locks the exact hovered
     window.addEventListener("gkm:v363-list-updated",()=>setTimeout(ensureDirectListAdd,20));
   }
 
-  window.GKM_V374_FEATURES=Object.freeze({ensureDirectListAdd,openCommunity,loadCommunity});
+  window.GKM_V374_FEATURES=Object.freeze({ensureDirectListAdd,openCommunity,loadCommunity,communityEndpoint});
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",install,{once:true});else install();
   setTimeout(()=>{ensureCommunity();ensureDirectListAdd();},700);
-  console.log("GKM V374: six anime services, direct watched-anime add, fixed favourite sync and public community installed");
+  console.log("GKM V374.4: direct public community chat without GitHub login installed");
 })();
 /* GKM V374 SIX ANIME SERVICES, DIRECT LIST ADD AND PUBLIC COMMUNITY END */

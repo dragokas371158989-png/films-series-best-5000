@@ -1,15 +1,15 @@
-/* GKM V374.3 PWA: exact Afipsky weather location and typo aliases. */
-const VERSION = "v3743-2026-08-05";
+/* GKM V374.4 PWA: connected direct public community chat without GitHub login. */
+const VERSION = "v3744-community-connected-2026-08-05";
 const SHELL_CACHE = `gkm-shell-${VERSION}`;
 const RECENT_CACHE = `gkm-recent-${VERSION}`;
 const CACHE_PREFIX = "gkm-";
 const SHELL_URLS = [
   "./",
   "./index.html",
-  "./style.css?v=3743",
-  "./app.js?v=3743",
+  "./style.css?v=3744",
+  "./app.js?v=3744",
   "./ai_search_worker_v343.js",
-  "./manifest.webmanifest?v=3743",
+  "./manifest.webmanifest?v=3744",
   "./logo-banner.webp",
   "./pwa-icon-192.png",
   "./pwa-icon-512.png"

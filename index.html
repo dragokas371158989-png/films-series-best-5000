@@ -14,7 +14,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="canonical" href="https://dragokas371158989-png.github.io/films-series-best-5000/">
-  <link rel="manifest" href="manifest.webmanifest?v=3743">
+  <!-- После публикации Community Worker вставь его адрес в content. -->
+  <meta name="gkm-community-endpoint" content="https://gkm-community-chatdoatzgolubworkersdev.doatzgolub.workers.dev">
+  <link rel="manifest" href="manifest.webmanifest?v=3744">
 
   <meta property="og:url" content="https://dragokas371158989-png.github.io/films-series-best-5000/">
   <meta property="og:title" content="ГОЛУБЬ Каталог Мира">
@@ -34,7 +36,7 @@
   <link rel="prefetch" href="data/fast/poster_wall_v333/seed_all.json?v=355" as="fetch">
   <link rel="prefetch" href="data/fast/search_shards/manifest.json?v=364" as="fetch">
   <link rel="prefetch" href="data/fast/poster_atlas_v364/manifest.json?v=364" as="fetch">
-  <link rel="stylesheet" href="style.css?v=3743">
+  <link rel="stylesheet" href="style.css?v=3744">
   <style>
 
     /* GKM V160 — fixed controls layout: trash button no longer clipped, reset no longer stretches */
@@ -276,21 +278,21 @@
   </dialog>
 
   <script>
-    (async function gkmV3743LoadFreshApp(){
-      window.GKM_V3743_FRESH_SHELL_LOADER_VERSION =
-        "v3743-afipsky-exact-weather-location-and-typo-aliases-2026-08-05";
+    (async function gkmV3744LoadFreshApp(){
+      window.GKM_V3744_FRESH_SHELL_LOADER_VERSION =
+        "v3744-connected-public-community-chat-without-github-login-2026-08-05";
       try{
         if("caches" in window){
           const names=await caches.keys();
           await Promise.all(names
-            .filter(name=>/^gkm-shell-/i.test(name)&&!name.includes("v3743-"))
+            .filter(name=>/^gkm-shell-/i.test(name)&&!name.includes("v3744-"))
             .map(name=>caches.delete(name)));
         }
       }catch(error){
-        console.warn("GKM V374.3 cache cleanup",error);
+        console.warn("GKM V374.4 cache cleanup",error);
       }
       const script=document.createElement("script");
-      script.src="app.js?v=3743";
+      script.src="app.js?v=3744";
       script.async=false;
       document.head.appendChild(script);
     })();
