@@ -43,7 +43,9 @@ const TMDB_ENABLED = false;
 const KINOPOISK_ENABLED = false;
 
 const FAST_BASE = "data/fast";
-const GKM_DATA_CACHE_VERSION = "3744";
+const GKM_DATA_CACHE_VERSION = "375";
+window.GKM_V375_STABLE_MOBILE_AI_VERSION =
+  "v375-stable-mobile-ai-canvas-performance-2026-08-06";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
@@ -17864,9 +17866,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     document.head.appendChild(css);
   }
 
-  function ensureUi(){
+  function ensureLauncher(){
     removeOldUi();
-
     if(!document.getElementById("gkmV343Btn")){
       const btn=document.createElement("button");
       btn.id="gkmV343Btn";
@@ -17875,6 +17876,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       btn.onclick=()=>openWall("anime");
       document.body.appendChild(btn);
     }
+  }
+
+  function ensureUi(){
+    ensureLauncher();
     if(document.getElementById("gkmV343Overlay")) return;
 
     const overlay=document.createElement("div");
@@ -17886,8 +17891,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V374.4</div>
-          <div class="gkmV343Sub">Сбалансированный локальный Poster Atlas мгновенно заполняет фильмы, сериалы, аниме и мультфильмы; внешняя сеть остаётся резервом.</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V375</div>
+          <div class="gkmV343Sub">Коснись постера — открыть карточку. Веди пальцем — управлять магнитной волной.</div>
         </div>
         <div class="gkmV343Actions">
           <button data-kind="all">Все</button>
@@ -18081,7 +18086,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     canvas.addEventListener("pointermove",event=>{
       if(event.pointerType==="touch"&&activeTouchPointerId===event.pointerId){
-        if(Math.hypot(event.clientX-touchStartX,event.clientY-touchStartY)>8) touchMoved=true;
+        if(Math.hypot(event.clientX-touchStartX,event.clientY-touchStartY)>12) touchMoved=true;
         event.preventDefault();
       }
       onMove(event);
@@ -18113,16 +18118,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       try{canvas.releasePointerCapture(event.pointerId);}catch{}
       clearTimeout(hoverTimer);
       if(!touchMoved&&finalItem){
-        if(selectedTouchIndex===finalIndex&&document.getElementById("gkmV372TouchSelect")?.classList.contains("open")){
-          openItem(finalItem);
-          return;
-        }
-        hoverIndex=finalIndex;
-        pointerTargetX=event.clientX;
-        pointerTargetY=event.clientY;
-        updatePreviewTarget();
-        showPreview(finalItem);
-        showTouchSelection(finalIndex);
+        hideTouchSelection();
+        openItem(finalItem);
         return;
       }
       if(touchMoved&&finalItem){
@@ -18251,8 +18248,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   function install(){
-    ensureCss();
-    ensureUi();
+    ensureLauncher();
+    window.GKM_OPEN_3D_WALL=()=>openWall("anime");
+    window.GKM_OPEN_CANVAS_MOSAIC=()=>openWall("anime");
   }
 
   window.GKM_V353_TEST_API={
@@ -18299,7 +18297,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   const MEM_KEY = "gkm_v342_ai_memory";
   const HISTORY_KEY = "gkm_v342_ai_history";
   const WALL_BASE = "data/fast/poster_wall_v333";
-  const SEARCH_WORKER_URL = "ai_search_worker_v343.js?v=3491";
+  const SEARCH_WORKER_URL = "ai_search_worker_v343.js?v=375";
   const FALLBACK_CACHE = new Map();
   let lastResults = [];
   let lastQuery = "";
@@ -19115,11 +19113,15 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const x=N(q);
     if(/^(привет|прив|ку|хай|hi|hello|здарова|здорово)/.test(x))return"Привет! Рад тебя видеть. Можем просто пообщаться или подобрать что-нибудь из каталога.";
     if(/как дела|как ты/.test(x))return"Всё отлично, на связи и готов помочь. Как у тебя дела?";
-    if(/кто ты|что ты/.test(x))return"Я ГОЛУБЬ AI V343: могу общаться на обычные темы, отвечать на вопросы, показывать живую погоду и искать по всему каталогу.";
+    if(/кто ты|что ты/.test(x))return"Я ГОЛУБЬ AI V375: могу общаться на обычные темы, отвечать на вопросы, показывать живую погоду и искать по всему каталогу.";
     return"Я понял вопрос, но сейчас не смог получить ответ от Groq. Попробуй ещё раз через несколько секунд.";
   }
   function localGeneralKnowledge(q){
-    const x=N(q);
+    const x=N(q)
+      .replace(/\bвыйграл\b/g,"выиграл")
+      .replace(/\bвыигрол\b/g,"выиграл")
+      .replace(/\bпобедил[аио]?\b/g,"победил")
+      .replace(/\bмировув\b/g,"мировую");
     if(/(?:кто|какая сторона).*(?:выиграл|победил|одержал победу).*(?:втор(?:ую|ой) миров|2 миров)/u.test(x)||/(?:втор(?:ую|ой) миров|2 миров).*(?:кто|победил|выиграл)/u.test(x)){
       return "Во Второй мировой войне победили страны антигитлеровской коалиции — прежде всего СССР, США, Великобритания, Китай и их союзники. В Европе решающий вклад в разгром нацистской Германии внёс Советский Союз. Германия капитулировала в мае 1945 года, а Япония — в сентябре 1945 года.";
     }
@@ -19160,18 +19162,27 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     finally{clearTimeout(timer);}
   }
 
-  async function tryRemoteAI(q, localText, mode="catalog"){
+  function aiEndpointCandidates(){
+    let saved="";
+    try{saved=localStorage.getItem("GKM_AI_ENDPOINT")||"";}catch{}
+    const meta=T(document.querySelector('meta[name="gkm-ai-endpoint"]')?.content);
+    return [...new Set([T(window.GKM_AI_ENDPOINT),T(saved),meta]
+      .filter(value=>/^https:\/\//i.test(value)))];
+  }
 
-    const endpoint = window.GKM_AI_ENDPOINT || localStorage.getItem("GKM_AI_ENDPOINT") || "";
-    if(!endpoint) return "";
-    try{
-      const controller = new AbortController();
-      const timer = setTimeout(()=>controller.abort(), 15000);
-      const payload = {
+  function isContaminatedGeneralAnswer(value){
+    const answer=N(value);
+    return /(?:нет вариантов для ответа|можно нажать открыть 1|last results|last_results|номер результата)/.test(answer);
+  }
+
+  async function tryRemoteAI(q, localText, mode="catalog"){
+    const endpoints=aiEndpointCandidates();
+    if(!endpoints.length)return"";
+    const payload = {
         query: q,
         mode,
         local_answer: localText,
-        site_version: "V374.4",
+        site_version: "V375",
         requested_model: window.GKM_V343_AI_MODEL_DEFAULT,
         instruction: mode === "catalog"
           ? "Ты Голубь AI — умный помощник каталога. Отвечай по-русски, живо и конкретно. Не выдумывай тайтлы вне last_results. Не смешивай разделы. Объясняй выбор простыми словами. Сохраняй номера результатов."
@@ -19193,20 +19204,33 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
           genres:genres(x)
         })) : []
       };
-      const res = await fetch(endpoint, {
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify(payload),
-        signal:controller.signal
-      });
-      clearTimeout(timer);
-      if(!res.ok) return "";
-      const data = await res.json();
-      if(data && data.resolvedCity){const m=mem();m.city=T(data.resolvedCity);saveMem(m);}
-      return T(data && (data.answer || data.text || data.message));
-    }catch{
-      return "";
+    for(const endpoint of endpoints){
+      const controller=new AbortController();
+      const timer=setTimeout(()=>controller.abort(),12000);
+      try{
+        const res=await fetch(endpoint,{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify(payload),
+          signal:controller.signal
+        });
+        if(!res.ok)throw new Error(`HTTP ${res.status}`);
+        const data=await res.json();
+        if(data&&data.resolvedCity){const m=mem();m.city=T(data.resolvedCity);saveMem(m);}
+        const answer=T(data&&(data.answer||data.text||data.message));
+        if(!answer)throw new Error("Пустой ответ Worker");
+        if(mode!=="catalog"&&isContaminatedGeneralAnswer(answer))throw new Error("Worker смешал общий режим с каталогом");
+        window.GKM_AI_LAST_ERROR=null;
+        return answer;
+      }catch(error){
+        window.GKM_AI_LAST_ERROR={
+          message:T(error&&error.message)||"Ошибка соединения",
+          endpoint:(()=>{try{return new URL(endpoint).host;}catch{return endpoint;}})(),
+          at:Date.now()
+        };
+      }finally{clearTimeout(timer);}
     }
+    return"";
   }
 
   async function answer(q,onProgress){
@@ -19222,9 +19246,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(cityCmd){ const m=mem();m.city=T(cityCmd[1]);saveMem(m);return`Город сохранён: ${m.city}. Теперь можно просто спросить: «какая погода?»`; }
 
     if(/статус ai|статус помощника|какой ai/.test(x)){
-      const endpoint=window.GKM_AI_ENDPOINT||localStorage.getItem("GKM_AI_ENDPOINT")||"";
+      const endpoint=aiEndpointCandidates()[0]||"";
+      const lastError=window.GKM_AI_LAST_ERROR;
       const st=await getWorkerStatus();const counts=st&&st.counts||{},loaded=st&&st.loadedCounts||{};
-      return `ГОЛУБЬ AI V343
+      return `ГОЛУБЬ AI V375
 Режим общения: ${endpoint?"Cloudflare Worker + Groq":"Groq не подключён"}
 Модель Worker: ${window.GKM_V343_AI_MODEL_DEFAULT}
 Обычный диалог: включён
@@ -19237,7 +19262,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 Сейчас в памяти потока: ${JSON.stringify(loaded)}
 Кеш браузера: ${st&&st.indexedDb?"IndexedDB включён":"недоступен"}
 Сохранённый город: ${mem().city||"не задан"}
-Endpoint: ${endpoint||"не задан"}`;
+Endpoint: ${endpoint||"не задан"}
+Последний сбой: ${lastError?`${lastError.message} · ${lastError.endpoint}`:"нет"}`;
     }
 
     if(x.includes("помощ")||x.includes("что умеешь")||x.includes("как искать"))return help()+"\n\nТакже можешь просто поздороваться, задать обычный вопрос или спросить погоду. Для погоды: «погода в Краснодаре» либо сначала «город: Краснодар».";
@@ -19256,10 +19282,10 @@ Endpoint: ${endpoint||"не задан"}`;
     }
 
     if(!isCatalogQuery(q)){
-      const generalText=await tryRemoteAI(q,"","general");
-      if(generalText)return generalText;
       const knownText=localGeneralKnowledge(q);
       if(knownText)return knownText;
+      const generalText=await tryRemoteAI(q,"","general");
+      if(generalText)return generalText;
       const encyclopediaText=await tryWikipediaAnswer(q);
       return encyclopediaText||generalFallback(q);
     }
@@ -19299,7 +19325,7 @@ Endpoint: ${endpoint||"не задан"}`;
       e.preventDefault();if(e.stopPropagation)e.stopPropagation();
       const q=input.value.trim();if(!q)return;input.value="";
       const seq=++requestSeq;
-      addMsg("user",q);pushHistory("user",q);addMsg("bot","ГОЛУБЬ AI V343 думает…");
+      addMsg("user",q);pushHistory("user",q);addMsg("bot","ГОЛУБЬ AI думает…");
       try{
         const onProgress=progress=>{if(seq===requestSeq)replaceLastBot(progressText(progress),true);};
         const out=await answer(q,onProgress);
@@ -20866,7 +20892,8 @@ Endpoint: ${endpoint||"не задан"}`;
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      await navigator.serviceWorker.register("sw.js?v=3744",{scope:"./"});
+      const registration=await navigator.serviceWorker.register("sw.js?v=375",{scope:"./"});
+      registration.update?.().catch(()=>{});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
       console.warn("GKM V363 service worker",error);

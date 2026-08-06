@@ -1,15 +1,15 @@
-/* GKM V374.4 PWA: connected direct public community chat without GitHub login. */
-const VERSION = "v3744-community-connected-2026-08-05";
+/* GKM V375 PWA: stable mobile shell, fresh AI and Canvas touch controls. */
+const VERSION = "v375-stable-mobile-ai-2026-08-06";
 const SHELL_CACHE = `gkm-shell-${VERSION}`;
 const RECENT_CACHE = `gkm-recent-${VERSION}`;
 const CACHE_PREFIX = "gkm-";
 const SHELL_URLS = [
   "./",
   "./index.html",
-  "./style.css?v=3744",
-  "./app.js?v=3744",
-  "./ai_search_worker_v343.js",
-  "./manifest.webmanifest?v=3744",
+  "./style.css?v=375",
+  "./app.js?v=375",
+  "./ai_search_worker_v343.js?v=375",
+  "./manifest.webmanifest?v=375",
   "./logo-banner.webp",
   "./pwa-icon-192.png",
   "./pwa-icon-512.png"
