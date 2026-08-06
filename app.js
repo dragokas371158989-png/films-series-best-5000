@@ -46,6 +46,8 @@ const FAST_BASE = "data/fast";
 const GKM_DATA_CACHE_VERSION = "375";
 window.GKM_V375_STABLE_MOBILE_AI_VERSION =
   "v375-stable-mobile-ai-canvas-performance-2026-08-06";
+window.GKM_V3751_CANVAS_PREVIEW_POSTER_VERSION =
+  "v3751-canvas-preview-poster-touch-copy-2026-08-06";
 window.GKM_V364_INTEGRITY_SPEED_VERSION =
   "v364-source-media-search-atlas-control-2026-07-29";
 window.GKM_V365_MOBILE_CARDS_CANVAS_TAP_VERSION =
@@ -15701,6 +15703,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   const THUMB_CACHE = new Map();
   const COARSE_CACHE = new Map();
   const ATLAS_SHEET_CACHE = new Map();
+  const PREVIEW_POSTER_CACHE = new Map();
   const WALL_SEED_URL = "data/fast/poster_wall_v333/seed_all.json?v=354";
   const ATLAS_BASE_URL = "data/fast/poster_atlas_v364/";
   const ATLAS_MANIFEST_URL = `${ATLAS_BASE_URL}manifest.json?v=364`;
@@ -16341,6 +16344,69 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function smallPosterUrl(item){ return posterCandidates(item,48,72,58)[0]||""; }
   function coarsePosterUrl(item){ return posterCandidates(item,320,480,72)[0]||""; }
 
+  function previewPosterUrl(item){
+    const key=keyOf(item);
+    if(PREVIEW_POSTER_CACHE.has(key)) return PREVIEW_POSTER_CACHE.get(key)||"";
+
+    let result="";
+    const rec=getThumbRecord(item);
+    const source=rec&&rec.state==="loaded"?rec.img:null;
+    try{
+      if(source&&source.__gkmV358AtlasTile&&source.img){
+        const previewCanvas=document.createElement("canvas");
+        previewCanvas.width=144;
+        previewCanvas.height=216;
+        const previewCtx=previewCanvas.getContext("2d",{alpha:false});
+        previewCtx.imageSmoothingEnabled=true;
+        previewCtx.imageSmoothingQuality="high";
+        previewCtx.drawImage(
+          source.img,
+          source.sx,source.sy,source.sw,source.sh,
+          0,0,previewCanvas.width,previewCanvas.height
+        );
+        result=previewCanvas.toDataURL("image/jpeg",.82);
+      }else if(source&&(source.currentSrc||source.src)){
+        result=source.currentSrc||source.src;
+      }
+    }catch(e){}
+
+    if(!result) result=posterCandidates(item,185,278,76)[0]||smallPosterUrl(item)||posterOf(item)||"";
+    PREVIEW_POSTER_CACHE.set(key,result);
+    return result;
+  }
+
+  function previewOpenLabel(){
+    try{
+      return window.matchMedia("(pointer: coarse)").matches?"Коснись":"Клик";
+    }catch(e){
+      return "Клик";
+    }
+  }
+
+  function previewPlaceholderUrl(item){
+    try{
+      const placeholder=document.createElement("canvas");
+      placeholder.width=144;
+      placeholder.height=216;
+      const placeholderCtx=placeholder.getContext("2d",{alpha:false});
+      const gradient=placeholderCtx.createLinearGradient(0,0,144,216);
+      gradient.addColorStop(0,"#251368");
+      gradient.addColorStop(1,"#07172b");
+      placeholderCtx.fillStyle=gradient;
+      placeholderCtx.fillRect(0,0,144,216);
+      placeholderCtx.textAlign="center";
+      placeholderCtx.fillStyle="#55e7ff";
+      placeholderCtx.font="700 18px system-ui,sans-serif";
+      placeholderCtx.fillText("ГОЛУБЬ",72,92);
+      placeholderCtx.fillStyle="#ffffff";
+      placeholderCtx.font="600 13px system-ui,sans-serif";
+      placeholderCtx.fillText(typeOf(item)||"Каталог",72,120);
+      return placeholder.toDataURL("image/png");
+    }catch(e){
+      return "";
+    }
+  }
+
   function balancedLayout(count,width,height){
     const total=Math.max(1,Math.floor(count||1));
     const w=Math.max(1,width||window.innerWidth);
@@ -16903,17 +16969,46 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function previewPaneHtml(item){
     const r=ratingOf(item);
     const genres=genresOf(item).slice(0,5);
-    const thumb=smallPosterUrl(item);
     return `
-      <img class="gkmV343PreviewPoster" src="${esc(thumb||posterOf(item))}" data-full="${esc(fullPosterUrl(item))}" alt="">
+      <img class="gkmV343PreviewPoster" data-full="${esc(fullPosterUrl(item))}" alt="Постер: ${esc(titleOf(item))}">
       <div class="gkmV343PText">
         <h2>${esc(titleOf(item))}</h2>
         <div class="gkmV343Meta">${esc(typeOf(item))}${yearOf(item)?" · "+esc(yearOf(item)):""}${r?" · ★ "+Number(r).toFixed(1):""}</div>
         <div class="gkmV343Genres">${genres.map(g=>`<span>${esc(g)}</span>`).join("")}</div>
         <div class="gkmV343Desc">${esc(overviewOf(item))}</div>
-        <div class="gkmV343OpenHint">Клик — открыть полную карточку</div>
+        <div class="gkmV343OpenHint">${previewOpenLabel()} — открыть полную карточку</div>
       </div>
     `;
+  }
+
+  function wirePreviewPoster(pane,item){
+    const img=pane&&pane.querySelector(".gkmV343PreviewPoster");
+    if(!img) return;
+    const candidates=[
+      previewPosterUrl(item),
+      ...posterCandidates(item,185,278,76),
+      fullPosterUrl(item),
+      posterOf(item)
+    ].filter(Boolean);
+    const unique=[...new Set(candidates)];
+    let cursor=0;
+    const tryNext=()=>{
+      while(cursor<unique.length){
+        const next=unique[cursor++];
+        if(next&&next!==img.src){
+          img.src=next;
+          return;
+        }
+      }
+      img.onerror=null;
+      img.classList.add("gkmV3751PosterUnavailable");
+      const placeholder=previewPlaceholderUrl(item);
+      if(placeholder) img.src=placeholder;
+      else img.removeAttribute("src");
+    };
+    img.onerror=tryNext;
+    img.onload=()=>img.classList.remove("gkmV3751PosterUnavailable");
+    tryNext();
   }
 
   function upgradePreviewPoster(pane){
@@ -16949,6 +17044,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const nextPane=preview.querySelector(`[data-pane="${nextPaneIndex}"]`);
 
     nextPane.innerHTML=previewPaneHtml(item);
+    wirePreviewPoster(nextPane,item);
     nextPane.classList.remove("active");
     preview.classList.add("open");
 
@@ -17325,7 +17421,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(toggle) toggle.textContent=`✨ Эффекты: ${labels[effectMode]}`;
     const hint=document.querySelector(".gkmV343Hint");
     if(hint){
-      hint.innerHTML=`${hints[effectMode]}<br>клик — открыть полную карточку`;
+      hint.innerHTML=`${hints[effectMode]}<br>${previewOpenLabel().toLowerCase()} — открыть полную карточку`;
     }
     pointerVelocityX=0;
     pointerVelocityY=0;
@@ -17891,7 +17987,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <div id="gkmV357EffectShade"></div>
       <div class="gkmV343Top">
         <div>
-          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V375</div>
+          <div class="gkmV343Title">🖼️ Canvas-мозаика постеров V375.1</div>
           <div class="gkmV343Sub">Коснись постера — открыть карточку. Веди пальцем — управлять магнитной волной.</div>
         </div>
         <div class="gkmV343Actions">
@@ -17974,7 +18070,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       <button id="gkmV372TouchSelect" type="button" aria-live="polite"><span>Открыть выбранный постер</span><b></b></button>
       <button id="gkmV3743ShuffleFloat" type="button" aria-label="Показать другой набор постеров">🔀 <span>Другой набор</span></button>
       <div id="gkmV343Status"><b>Открываю стенку...</b><div>Заполняю экран крупными постерами.</div></div>
-      <div class="gkmV343Hint">движение — магнитная волна<br>клик — открыть полную карточку</div>
+      <div class="gkmV343Hint">движение — магнитная волна<br>${previewOpenLabel().toLowerCase()} — открыть полную карточку</div>
     `;
     document.body.appendChild(overlay);
 
