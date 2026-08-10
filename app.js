@@ -15724,6 +15724,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   let wallItems = [];
   let allItems = [];
   let layoutCount = 1;
+  let layoutStages = [1];
+  let layoutStageIndex = 0;
 
   let fineLayout = null;
   let coarseLayout = null;
@@ -15801,6 +15803,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   const TARGET_CELL_W = 58;
   const TARGET_CELL_H = 87;
   const MAX_SCREEN_TILES = 600;
+  const MIN_FINAL_SCREEN_TILES = 1500;
+  const MAX_FINAL_SCREEN_TILES = 2000;
   const LENS_SIZE = 420;
   const LENS_RADIUS = LENS_SIZE / 2;
   const MAGNET_RADIUS = 190;
@@ -16476,6 +16480,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return Math.min(MAX_SCREEN_TILES,cols*rows);
   }
 
+  function finalScreenTileCount(width,height){
+    const area=Math.max(1,Number(width||0)*Number(height||0));
+    return clamp(Math.round(area/950),MIN_FINAL_SCREEN_TILES,MAX_FINAL_SCREEN_TILES);
+  }
+
+  function progressiveLayoutStages(width,height,available){
+    const finalCount=Math.max(1,Math.min(finalScreenTileCount(width,height),available||1));
+    const large=Math.max(1,Math.min(screenTileCount(width,height),finalCount));
+    const medium=Math.max(large,Math.min(finalCount,Math.round((large+finalCount)*.46)));
+    return [...new Set([large,medium,finalCount])];
+  }
+
   function computeGrid(){
     const bounds=getCanvasBounds();
     fineLayout=balancedLayout(
@@ -16908,6 +16924,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         activeLoads--;
         if(token!==loadToken) return;
 
+        maybeAdvanceProgressiveLayout();
+
         if(
           (completedCount>0&&completedCount%120===0)||
           completedCount===wallItems.length
@@ -16936,6 +16954,39 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
         pumpQueue(token);
       });
     }
+  }
+
+  function redrawLoadedProgressiveTiles(){
+    if(!fineCtx||!fineCanvas) return;
+    computeGrid();
+    fineCtx.clearRect(0,0,fineCanvas.width,fineCanvas.height);
+    const limit=Math.min(layoutCount,wallItems.length);
+    for(let index=0;index<limit;index++){
+      if(!itemLoaded[index]) continue;
+      const rec=getThumbRecord(wallItems[index]);
+      if(rec&&rec.state==="loaded"&&rec.img) drawTileTo(fineCtx,index,rec.img,1);
+    }
+    composeBuffer();
+    presentBuffer();
+    lensDirty=true;
+  }
+
+  function maybeAdvanceProgressiveLayout(){
+    if(layoutStageIndex>=layoutStages.length-1) return;
+    const current=layoutStages[layoutStageIndex];
+    const threshold=Math.max(24,Math.round(current*.72));
+    if(completedCount<threshold) return;
+    layoutStageIndex++;
+    layoutCount=layoutStages[layoutStageIndex];
+    cancelReveals();
+    redrawLoadedProgressiveTiles();
+    const finalStage=layoutStageIndex===layoutStages.length-1;
+    setStatus(
+      `${labelKind(currentKind)} — ${layoutCount} постеров`,
+      finalStage
+        ? `Финальная мелкая сетка: до ${layoutCount} уникальных карточек на одном экране.`
+        : `Карточки стали меньше; следующий этап — ещё плотнее.`
+    );
   }
 
   function startImageQueue(){
@@ -17593,7 +17644,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
   function selectScreenItems(kind){
     const bounds=getCanvasBounds();
-    const target=screenTileCount(bounds.width,bounds.height);
+    const target=finalScreenTileCount(bounds.width,bounds.height);
     const pool=uniqueList(allItems.filter(x=>passKind(x,kind)));
     let preferred=[];
     let atlasRest=[];
@@ -17631,7 +17682,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     reserveCursor=0;
     usedWallKeys=new Set(wallItems.map(keyOf));
     usedWallPosterKeys=new Set(wallItems.map(posterIdentity).filter(Boolean));
-    layoutCount=Math.max(1,wallItems.length);
+    layoutStages=progressiveLayoutStages(bounds.width,bounds.height,wallItems.length);
+    layoutStageIndex=0;
+    layoutCount=layoutStages[0]||Math.max(1,wallItems.length);
     return {
       target,
       poolCount:pool.length,
@@ -17645,7 +17698,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     currentKind=kind;
     allItems=uniqueList(localPool().filter(x=>passKind(x,kind)));
     const bounds=getCanvasBounds();
-    const target=screenTileCount(bounds.width,bounds.height);
+    const target=finalScreenTileCount(bounds.width,bounds.height);
     wallItems=allItems.slice(0,target);
     layoutCount=Math.max(1,wallItems.length||target);
 
