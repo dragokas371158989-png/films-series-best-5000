@@ -21049,7 +21049,7 @@ Endpoint: ${endpoint||"не задан"}
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      const registration=await navigator.serviceWorker.register("sw.js?v=375",{scope:"./"});
+      const registration=await navigator.serviceWorker.register("sw.js?v=3752",{scope:"./"});
       registration.update?.().catch(()=>{});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
