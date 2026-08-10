@@ -1,5 +1,5 @@
 /* GKM V375.1 PWA: reliable Canvas preview posters on mobile. */
-const VERSION = "v3751-canvas-preview-poster-2026-08-06";
+const VERSION = "v3752-progressive-canvas-2026-08-10";
 const SHELL_CACHE = `gkm-shell-${VERSION}`;
 const RECENT_CACHE = `gkm-recent-${VERSION}`;
 const CACHE_PREFIX = "gkm-";
@@ -7,9 +7,9 @@ const SHELL_URLS = [
   "./",
   "./index.html",
   "./style.css?v=3751",
-  "./app.js?v=3751",
+  "./app.js?v=3752",
   "./ai_search_worker_v343.js?v=3751",
-  "./manifest.webmanifest?v=3751",
+  "./manifest.webmanifest?v=3752",
   "./logo-banner.webp",
   "./pwa-icon-192.png",
   "./pwa-icon-512.png"
