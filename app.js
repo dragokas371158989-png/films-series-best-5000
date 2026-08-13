@@ -18652,6 +18652,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return [...out];
   }
 
+  function isRecommendationQuery(q){
+    return /(?:посоветуй|подскажи|подбери|найди|покажи|дай|топ(?:ов\p{L}*)?|лучш\p{L}*|популяр\p{L}*|что посмотреть)/u.test(N(q));
+  }
+
   function parseJson(j){
     const out=[];
     if(!j)return out;
@@ -18836,7 +18840,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return [...map.values()];
   }
   async function fallbackSearch(q){
-    const exactTitle=typeof window.GKM_V360_IS_LITERAL_TITLE_QUERY==="function"&&window.GKM_V360_IS_LITERAL_TITLE_QUERY(q);
+    const exactTitle=!isRecommendationQuery(q)&&typeof window.GKM_V360_IS_LITERAL_TITLE_QUERY==="function"&&window.GKM_V360_IS_LITERAL_TITLE_QUERY(q);
     const it=detectIntent(q),tk=exactTitle&&typeof window.GKM_V360_TITLE_QUERY_INFO==="function"?window.GKM_V360_TITLE_QUERY_INFO(q).variants:tokens(q);let data=fallbackPool();
     if(exactTitle){it.bucket="all";it.mood="";}
     if(!data.length){const arrs=await Promise.all([fetchJson("data/fast/home.json?v=341"),fetchJson("data/fast/pages/movies/page_0001.json?v=341"),fetchJson("data/fast/pages/series/page_0001.json?v=341"),fetchJson("data/fast/pages/anime/page_0001.json?v=341"),fetchJson("data/fast/pages/cartoons/page_0001.json?v=341")]);data=arrs.flat();}
@@ -18849,7 +18853,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     const res=dedupe(arr).slice(0,it.count);lastResults=res;lastQuery=q;remember(it);return{items:res,intent:it,tokens:tk,searched:data.length,fallback:true};
   }
   async function search(q,onProgress){
-    const exactTitle=typeof window.GKM_V360_IS_LITERAL_TITLE_QUERY==="function"&&window.GKM_V360_IS_LITERAL_TITLE_QUERY(q);
+    const exactTitle=!isRecommendationQuery(q)&&typeof window.GKM_V360_IS_LITERAL_TITLE_QUERY==="function"&&window.GKM_V360_IS_LITERAL_TITLE_QUERY(q);
     const it=detectIntent(q),tk=exactTitle&&typeof window.GKM_V360_TITLE_QUERY_INFO==="function"?window.GKM_V360_TITLE_QUERY_INFO(q).variants:tokens(q);
     if(exactTitle){it.bucket="all";it.mood="";}
     if(!["all","movies","series","anime","cartoons"].includes(it.bucket))return await fallbackSearch(q);
@@ -19263,7 +19267,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     if(/(?:что посмотреть|посмотреть вечером|по всему каталогу|каталог|кино|тайтл|персонаж|жанр|рейтинг|похожее на|открой \d|сравни \d|марафон)/.test(x))return true;
     if(detectMood(q) && /(?:посоветуй|подбери|подборк|найди|покажи|дай|топ|лучшие)/.test(x))return true;
     if(/^(?:привет|прив|ку|хай|hi|hello|здарова|здорово|как дела|как ты|кто ты|что ты|что такое|кто |как |почему |зачем |когда |где |объясни |расскажи |напиши |помоги )/.test(x))return false;
-    if(typeof window.GKM_V360_IS_LITERAL_TITLE_QUERY==="function"&&window.GKM_V360_IS_LITERAL_TITLE_QUERY(q))return true;
+    if(!isRecommendationQuery(q)&&typeof window.GKM_V360_IS_LITERAL_TITLE_QUERY==="function"&&window.GKM_V360_IS_LITERAL_TITLE_QUERY(q))return true;
     return false;
   }
   function generalFallback(q){
@@ -21049,7 +21053,7 @@ Endpoint: ${endpoint||"не задан"}
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      const registration=await navigator.serviceWorker.register("sw.js?v=3752",{scope:"./"});
+      const registration=await navigator.serviceWorker.register("sw.js?v=3753",{scope:"./"});
       registration.update?.().catch(()=>{});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
