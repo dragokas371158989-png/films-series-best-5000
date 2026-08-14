@@ -1,4 +1,4 @@
-/* GKM V376-V380 v2 — integrated into existing "Мои списки 2.0", no extra floating button. */
+/* GKM V376-V380 v2 — integrated into existing "Мои списки 2.0", no extra floating button. */ /*v3803*/
 (() => {
 'use strict';
 if (window.GKM_V376_V380_V2_LOADED) return;
