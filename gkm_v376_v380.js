@@ -1,4 +1,4 @@
-/* GKM V376-V380 v3 — integrated into existing "Мои списки 2.0", no extra floating button. */
+/* GKM V376-V380 v4 — integrated into existing "Мои списки 2.0", no extra floating button. */
 (() => {
 'use strict';
 if (window.GKM_V376_V380_V2_LOADED) return;
@@ -25,7 +25,7 @@ function cardItem(card){const t=card.querySelector('.card-title,.title,h2,h3,[da
 
 function addStatuses(card,i){if(card.querySelector('.gkm-v379-status'))return;const bar=document.createElement('div');bar.className='gkm-v379-status';const d=load(),k=keyOf(i),active=d[k]?.status;STATUSES.forEach(([icon,name])=>{const b=document.createElement('button');b.type='button';b.textContent=icon;b.title=name;b.style.opacity=active===name?'1':'.62';b.onclick=e=>{e.preventDefault();e.stopPropagation();const x=load();x[k]={...i,status:name,updatedAt:Date.now()};save(x);bar.querySelectorAll('button').forEach(q=>q.style.opacity='.62');b.style.opacity='1';renderIntegrated()};bar.appendChild(b)});card.appendChild(bar)}
 
-function findHost(){const trigger=[...document.querySelectorAll('button,a,[role="button"]')].find(x=>/(?:мой\s+список|мои\s+списки)/i.test((x.textContent||'').trim()));if(!trigger)return null;const open=[...document.querySelectorAll('dialog,[role="dialog"],.modal,.dialog,.panel')].find(x=>{const c=getComputedStyle(x);return /(?:мой\s+список|мои\s+списки|хочу\s+посмотреть|продолжить\s+просмотр)/i.test(x.textContent||'')&&c.display!=='none'});return open||trigger.parentElement||trigger}
+function findHost(){const preferred=document.querySelector('#gkmV363Panel.open');if(preferred&&preferred.getClientRects().length)return preferred;const trigger=[...document.querySelectorAll('button,a,[role="button"]')].find(x=>/(?:мой\s+список|мои\s+списки)/i.test((x.textContent||'').trim()));if(!trigger)return null;const open=[...document.querySelectorAll('dialog,[role="dialog"],.modal,.dialog,.panel')].find(x=>{const c=getComputedStyle(x);return /(?:мой\s+список|мои\s+списки|хочу\s+посмотреть|продолжить\s+просмотр)/i.test(x.textContent||'')&&c.display!=='none'&&x.getClientRects().length});return open||trigger.parentElement||trigger}
 
 function runAi(q){document.querySelector('#gkmAiFloatBtn')?.click();let n=0;const timer=setInterval(()=>{n++;const root=document.querySelector('#gkmAiDialog'),input=root?.querySelector('textarea,input[type="text"],input:not([type])');if(input){input.value=q;input.dispatchEvent(new Event('input',{bubbles:true}));[...root.querySelectorAll('button')].find(b=>/отправ|спрос|найти|➤|➜/i.test((b.textContent||'').trim()))?.click();clearInterval(timer)}if(n>25)clearInterval(timer)},120)}
 
