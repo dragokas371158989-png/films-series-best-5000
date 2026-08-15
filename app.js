@@ -1134,7 +1134,9 @@ const ANIME_EXACT_TITLE_RULES = [
   {re:/memories\s*of\s*nobody/iu, ru:"Блич: Воспоминания ни о ком"},
   {re:/diamonddust|diamond\s*dust|алмазн/iu, ru:"Блич: Восстание Алмазной Пыли"},
   {re:/fade\s*to\s*black|уходя\s*в\s*темнот/iu, ru:"Блич: Уходя в темноту"},
-  {re:/hell\s*verse|адск/iu, ru:"Блич: Адская глава"},
+  // Hell Verse belongs to Bleach. Never match the generic Russian root "адск":
+  // it corrupts unrelated titles such as "Адский рай" (Jigokuraku).
+  {re:/hell\s*verse|блич[^\n]{0,80}адск/iu, ru:"Блич: Адская глава"},
   {re:/sennen\s*kessen|thousand\s*year\s*blood|тысячелетн/iu, ru:"Блич: Тысячелетняя кровавая война"},
   {re:/sacred\s*star\s*of\s*milos|milos|милос/iu, ru:"Стальной алхимик: Священная звезда Милоса"},
   {re:/conqueror\s*of\s*shamballa|shamballa|шамбал/iu, ru:"Стальной алхимик: Завоеватель Шамбалы"},
@@ -2893,7 +2895,8 @@ const ANIME_DETAIL_FACTS = new Map(Object.entries({
   "монолог фармацевта": {studio:"Toho Animation Studio / OLM", country:"Япония", age:"16+", status:"Онгоинг", episodes:"24+"},
   "паразит": {studio:"Madhouse", country:"Япония", age:"18+", status:"Завершён", episodes:"24"},
   "триган": {studio:"Madhouse", country:"Япония", age:"16+", status:"Завершён", episodes:"26"},
-  "хеллсинг ultimate": {studio:"Satelight / Madhouse / Graphinica", country:"Япония", age:"18+", status:"Завершён", episodes:"10"}
+  "хеллсинг ultimate": {studio:"Satelight / Madhouse / Graphinica", country:"Япония", age:"18+", status:"Завершён", episodes:"10"},
+  "адский рай": {studio:"MAPPA", country:"Япония", age:"18+", status:"Завершён", episodes:"13"}
 }));
 
 function animeFactsKey(item) {
@@ -4466,9 +4469,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       return a.idx - b.idx;
     });
 
-    const frag = document.createDocumentFragment();
-    rows.forEach(r => frag.appendChild(r.card));
-    found.grid.appendChild(frag);
+    const orderChanged = rows.some((row, index) => found.cards[index] !== row.card);
+    if (orderChanged) {
+      const frag = document.createDocumentFragment();
+      rows.forEach(r => frag.appendChild(r.card));
+      found.grid.appendChild(frag);
+    }
 
     rows.forEach(r => {
       clearOldBadges(r.card);
@@ -4533,10 +4539,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     document.addEventListener("input", schedule, true);
     document.addEventListener("change", schedule, true);
-    document.addEventListener("click", schedule, true);
-
-    const observer = new MutationObserver(schedule);
-    observer.observe(document.body, { childList: true, subtree: true });
+    // V381: this legacy sorter used to scan and move the whole card grid after
+    // every click and after its own DOM mutations. Search changes are enough;
+    // the current catalog core already sorts every freshly rendered result set.
 
     setTimeout(schedule, 500);
     setTimeout(schedule, 1200);
@@ -4922,9 +4927,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     rows.sort((a,b) => (b.score - a.score) || (a.idx - b.idx));
 
-    const frag = document.createDocumentFragment();
-    rows.forEach(r => frag.appendChild(r.card));
-    found.grid.appendChild(frag);
+    const orderChanged = rows.some((row, index) => found.cards[index] !== row.card);
+    if (orderChanged) {
+      const frag = document.createDocumentFragment();
+      rows.forEach(r => frag.appendChild(r.card));
+      found.grid.appendChild(frag);
+    }
 
     rows.forEach(r => {
       const isTrash = trashPenalty(r.card) >= 700;
@@ -5014,9 +5022,12 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     rows.sort((a,b) => (b.score - a.score) || (a.idx - b.idx));
 
-    const frag = document.createDocumentFragment();
-    rows.forEach(r => frag.appendChild(r.card));
-    found.grid.appendChild(frag);
+    const orderChanged = rows.some((row, index) => found.cards[index] !== row.card);
+    if (orderChanged) {
+      const frag = document.createDocumentFragment();
+      rows.forEach(r => frag.appendChild(r.card));
+      found.grid.appendChild(frag);
+    }
 
     rows.forEach((r, i) => {
       r.card.classList.toggle("gkm-v191-soft-trash", trashPenalty(r.card) >= 700);
@@ -5188,10 +5199,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
     document.addEventListener("input", schedule, true);
     document.addEventListener("change", schedule, true);
-    document.addEventListener("click", schedule, true);
-
-    const obs = new MutationObserver(schedule);
-    obs.observe(document.body, { childList:true, subtree:true });
+    // V381: do not rescan/reappend up to 5000 cards after every site click or
+    // after mutations made by this sorter itself. The search worker owns order.
 
     setTimeout(schedule, 700);
     setTimeout(schedule, 1700);
@@ -5356,16 +5365,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       window.__gkmV194Change = setTimeout(tick, 700);
     }, true);
 
-    document.addEventListener("click", function () {
-      clearTimeout(window.__gkmV194Click);
-      window.__gkmV194Click = setTimeout(tick, 250);
-    }, true);
-
-    const obs = new MutationObserver(function () {
-      clearTimeout(window.__gkmV194Obs);
-      window.__gkmV194Obs = setTimeout(tick, 250);
-    });
-    obs.observe(document.body, {childList:true, subtree:true});
+    // V381: a click/mutation watcher here repeatedly scanned the complete body
+    // and could call the legacy V191 sorter. Input/change already cover rescue.
 
     setTimeout(tick, 200);
     setTimeout(tick, 700);
@@ -11172,7 +11173,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function(){ run(); setTimeout(run, 500); setTimeout(run, 1500); });
   } else { run(); setTimeout(run, 500); setTimeout(run, 1500); }
-  document.addEventListener("click", function(){ setTimeout(run, 120); });
+  document.addEventListener("click", function(event){
+    if(event.target.closest?.('.gkm-book-card,.tab[data-tab="books"],[data-gkm-book-kind],[data-gkm-book-collection]')) setTimeout(run,120);
+  });
 })();
  /* GKM V214 REAL BOOK MANGA COMICS COVERS END */
 
@@ -11234,7 +11237,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function run(){inject(); boostVisibleBookImages();}
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function(){run(); setTimeout(run,600);});
   else {run(); setTimeout(run,600);}
-  document.addEventListener("click", function(){setTimeout(run,120);});
+  document.addEventListener("click", function(event){
+    if(event.target.closest?.('.gkm-book-card,.tab[data-tab="books"],[data-gkm-book-kind],[data-gkm-book-collection]')) setTimeout(run,120);
+  });
 })();
  /* GKM V216 MAX BOOK BASE + FAST LOAD END */
 
@@ -11743,11 +11748,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     document.head.appendChild(s);
   }
   style();
-  const obs = new MutationObserver(function(){ setTimeout(run, 60); });
-  obs.observe(document.documentElement, {childList:true, subtree:true, attributes:true, attributeFilter:["class","style","open"]});
-  document.addEventListener("click", function(){ setTimeout(run, 120); setTimeout(run, 420); }, true);
-  document.addEventListener("DOMContentLoaded", function(){ style(); setTimeout(run, 300); });
-  setInterval(run, 1200);
+  // V381: V351 owns detail descriptions now. The old global observer, click
+  // watcher and 1.2 s interval only ran a no-op modal repair across the site.
+  document.addEventListener("DOMContentLoaded", style, {once:true});
 })();
  /* GKM V225 MODAL FULL DESCRIPTION FIX END */
 
@@ -12808,17 +12811,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     } catch {}
   }
 
-  document.addEventListener("click", () => {
-    setTimeout(fixRelatedImages, 50);
-    setTimeout(fixRelatedImages, 300);
-    setTimeout(forceOverviewText, 50);
-    setTimeout(forceOverviewText, 300);
-  }, true);
-
-  new MutationObserver(() => {
-    fixRelatedImages();
-    forceOverviewText();
-  }).observe(document.documentElement, { childList:true, subtree:true });
+  // V381: CSS and the openDetails wrapper above cover this repair. Removing
+  // the document-wide click/mutation scans avoids work on every interaction.
 
   console.log("GKM V259: descriptions restored and related cards color fixed");
 })();
@@ -13031,11 +13025,6 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       return res;
     };
   }
-
-  document.addEventListener("click", () => {
-    setTimeout(forceDesc, 80);
-    setTimeout(forceDesc, 250);
-  }, true);
 
   const st = document.createElement("style");
   st.textContent = `
@@ -17628,11 +17617,18 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     return false;
   }
 
+  let openItemBusy=false;
   function openItem(item){
+    if(!item||openItemBusy) return;
+    openItemBusy=true;
     closeWall();
-    setTimeout(()=>{
-      if(!tryOpen(item)) alert(titleOf(item));
-    },80);
+    requestAnimationFrame(()=>{
+      try{
+        if(!tryOpen(item)) alert(titleOf(item));
+      }finally{
+        setTimeout(()=>{openItemBusy=false;},320);
+      }
+    });
   }
 
   function setStatus(title,sub){
@@ -19639,11 +19635,8 @@ Endpoint: ${endpoint||"не задан"}
   function install(){
     removeDuplicateDescription();
     restoreFamilyCards();
-    observer.observe(document.documentElement, { childList:true, subtree:true });
-    document.addEventListener("click", () => {
-      setTimeout(repairOpenedCard, 40);
-      setTimeout(repairOpenedCard, 300);
-    }, true);
+    const dialog=document.getElementById("detailsDialog");
+    if(dialog) observer.observe(dialog, { childList:true, subtree:true });
   }
 
   if (document.readyState === "loading") {
@@ -21028,6 +21021,7 @@ Endpoint: ${endpoint||"не задан"}
     if(grid&&nav){
       const mainTabs=new Set(["all","movies","series","cartoons","anime"]);
       nav.querySelectorAll(".tab").forEach(button=>{
+        if(button.id==="gkmCanvasTopBtn")return;
         if(!mainTabs.has(button.dataset.tab||"")&&!grid.contains(button))grid.appendChild(button);
       });
       nav.querySelectorAll(".gkm-v174-main-btn").forEach(button=>{
@@ -21964,7 +21958,7 @@ console.log("GKM V372: touch tap opens a poster and drag locks the exact hovered
     const title=normalized(titleOf(item));
     const raw=normalized([item&&item.en,item&&item.original_title,item&&item.original_name].filter(Boolean).join(" "));
     if(!title)return-1;
-    if(title===query)return1000;
+    if(title===query)return 1000;
     if(title.startsWith(query))return800-query.length;
     if(title.includes(query))return600-title.indexOf(query);
     if(raw.startsWith(query))return500;
