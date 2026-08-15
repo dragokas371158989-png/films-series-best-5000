@@ -1,11 +1,12 @@
-/* GKM V376-V380 PWA shell + quality layer injection. */
-const VERSION = "v376-v380-quality-layer-2026-08-13";
+/* GKM V382 PWA shell + feature center. */
+const VERSION = "v382-feature-center-2026-08-15";
 const SHELL_CACHE = `gkm-shell-${VERSION}`;
 const RECENT_CACHE = `gkm-recent-${VERSION}`;
 const CACHE_PREFIX = "gkm-";
 const SHELL_URLS = [
-  "./","./index.html","./style.css?v=3751","./app.js?v=3753",
-  "./gkm_v376_v380.js?v=3760","./ai_search_worker_v343.js?v=3751",
+  "./","./index.html","./style.css?v=3751","./app.js?v=3810",
+  "./gkm_v376_v380.js?v=3810","./gkm_v382_feature_center.js?v=3820",
+  "./ai_search_worker_v343.js?v=3751",
   "./manifest.webmanifest?v=3753","./logo-banner.webp","./pwa-icon-192.png","./pwa-icon-512.png"
 ];
 const HEAVY_CATALOG_PATTERN=/(?:search_index|search_shards|poster_wall|poster_atlas|catalog|full[_-]?data|all[_-]?(?:movies|series|anime|cartoons))|\/data\/.*(?:page|chunk|shard)/i;
@@ -17,9 +18,9 @@ async function trimCache(name,max){const cache=await caches.open(name),keys=awai
 async function injectLayer(response){
   const type=response.headers.get("content-type")||"";
   if(!response.ok||!type.includes("text/html"))return response;
-  const html=await response.text();
-  if(html.includes("gkm_v376_v380.js"))return new Response(html,{status:response.status,statusText:response.statusText,headers:response.headers});
-  const patched=html.replace(/<\/body>/i,'<script src="gkm_v376_v380.js?v=3760" defer></script></body>');
+  let patched=await response.text();
+  if(!patched.includes("gkm_v376_v380.js"))patched=patched.replace(/<\/body>/i,'<script src="gkm_v376_v380.js?v=3810" defer></script></body>');
+  if(!patched.includes("gkm_v382_feature_center.js"))patched=patched.replace(/<\/body>/i,'<script src="gkm_v382_feature_center.js?v=3820" defer></script></body>');
   const headers=new Headers(response.headers);headers.delete("content-length");
   return new Response(patched,{status:response.status,statusText:response.statusText,headers});
 }
@@ -35,7 +36,7 @@ self.addEventListener("fetch",event=>{
   if(HEAVY_CATALOG_PATTERN.test(url.pathname+url.search))return;
   if(request.mode==="navigate"){event.respondWith(navigation(request));return;}
   if(url.origin!==self.location.origin)return;
-  const names=new Set(["index.html","style.css","app.js","gkm_v376_v380.js","ai_search_worker_v343.js","manifest.webmanifest","logo-banner.webp","pwa-icon-192.png","pwa-icon-512.png"]);
+  const names=new Set(["index.html","style.css","app.js","gkm_v376_v380.js","gkm_v382_feature_center.js","ai_search_worker_v343.js","manifest.webmanifest","logo-banner.webp","pwa-icon-192.png","pwa-icon-512.png"]);
   const file=url.pathname.split("/").pop();if(names.has(file)||url.pathname.endsWith("/"))event.respondWith(shellFirst(request));
 });
 self.addEventListener("message",event=>{
