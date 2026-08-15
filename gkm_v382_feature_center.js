@@ -5,7 +5,7 @@
 
   if (window.GKM_V382_FEATURE_CENTER) return;
 
-  const VERSION = "v382-feature-center-2026-08-15";
+  const VERSION = "v3821-feature-center-visible-detail-actions-2026-08-15";
   const PROFILE_STORE = "gkm_v326_local_profiles";
   const PROFILE_CURRENT = "gkm_v326_current_profile";
   const MY_GOLUB_STORE = "gkm_my_golub_v379";
@@ -755,9 +755,10 @@
 
   function injectDetailActions(item) {
     const dialog = document.getElementById("detailsDialog"); if (!dialog || !dialog.hasAttribute("open")) return;
-    const host = document.getElementById("gkmV363DetailControls") || dialog.querySelector(".detail-buttons"); if (!host) return;
+    const anchor = document.getElementById("detailFacts") || dialog.querySelector(".details"); if (!anchor) return;
     let actions = document.getElementById("gkmV382DetailActions");
-    if (!actions) { actions = document.createElement("div"); actions.id = "gkmV382DetailActions"; host.appendChild(actions); }
+    if (!actions) { actions = document.createElement("div"); actions.id = "gkmV382DetailActions"; }
+    if (actions.previousElementSibling !== anchor) anchor.insertAdjacentElement("afterend", actions);
     actions.innerHTML = `<button type="button" data-v382-detail-compare>⚖️ Сравнить</button><button type="button" data-v382-detail-route>🧭 Порядок</button><button type="button" data-v382-detail-report>🛠 Ошибка</button>`;
     actions.querySelector("[data-v382-detail-compare]").onclick = () => addCompare(item);
     actions.querySelector("[data-v382-detail-route]").onclick = () => { state.lastItem = item; dialog.close?.(); openCenter("route"); };
@@ -780,7 +781,7 @@
   }
   function registerSw() {
     if (!("serviceWorker" in navigator) || !/^https?:$/.test(location.protocol)) return;
-    navigator.serviceWorker.register("sw.js?v=3820", {scope: "./"}).catch(error => console.warn("GKM V382 service worker", error));
+    navigator.serviceWorker.register("sw.js?v=3821", {scope: "./"}).catch(error => console.warn("GKM V382 service worker", error));
   }
   function install() {
     ensureUi(); patchDetails(); registerSw(); checkDueReminders();
