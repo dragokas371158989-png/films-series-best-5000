@@ -1,11 +1,11 @@
-/* GKM V382.1 PWA shell + visible detail actions. */
-const VERSION = "v3821-visible-detail-actions-2026-08-15";
+/* GKM V383 PWA shell + automatic repair and working compare. */
+const VERSION = "v383-auto-repair-compare-2026-08-16";
 const SHELL_CACHE = `gkm-shell-${VERSION}`;
 const RECENT_CACHE = `gkm-recent-${VERSION}`;
 const CACHE_PREFIX = "gkm-";
 const SHELL_URLS = [
   "./","./index.html","./style.css?v=3751","./app.js?v=3810",
-  "./gkm_v376_v380.js?v=3810","./gkm_v382_feature_center.js?v=3821",
+  "./gkm_v376_v380.js?v=3810","./gkm_v382_feature_center.js?v=3830",
   "./ai_search_worker_v343.js?v=3751",
   "./manifest.webmanifest?v=3753","./logo-banner.webp","./pwa-icon-192.png","./pwa-icon-512.png"
 ];
@@ -20,7 +20,7 @@ async function injectLayer(response){
   if(!response.ok||!type.includes("text/html"))return response;
   let patched=await response.text();
   if(!patched.includes("gkm_v376_v380.js"))patched=patched.replace(/<\/body>/i,'<script src="gkm_v376_v380.js?v=3810" defer></script></body>');
-  if(!patched.includes("gkm_v382_feature_center.js"))patched=patched.replace(/<\/body>/i,'<script src="gkm_v382_feature_center.js?v=3821" defer></script></body>');
+  if(!patched.includes("gkm_v382_feature_center.js"))patched=patched.replace(/<\/body>/i,'<script src="gkm_v382_feature_center.js?v=3830" defer></script></body>');
   const headers=new Headers(response.headers);headers.delete("content-length");
   return new Response(patched,{status:response.status,statusText:response.statusText,headers});
 }
