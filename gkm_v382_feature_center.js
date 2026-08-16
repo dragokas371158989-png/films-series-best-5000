@@ -5,7 +5,7 @@
 
   if (window.GKM_V382_FEATURE_CENTER) return;
 
-  const VERSION = "v383-auto-repair-and-working-compare-2026-08-16";
+  const VERSION = "v3831-fast-auto-repair-and-working-compare-2026-08-16";
   const PROFILE_STORE = "gkm_v326_local_profiles";
   const PROFILE_CURRENT = "gkm_v326_current_profile";
   const MY_GOLUB_STORE = "gkm_my_golub_v379";
@@ -339,7 +339,7 @@
   async function findTrustedCandidate(item) {
     const query = text(item && (item.en || item.original_title || item.original_name || rawTitleOf(item)));
     if (!query) return null;
-    const rows = (await smartSearch(query)).slice(0, 80);
+    const rows = (await smartSearch(query)).slice(0, 40);
     const candidates = rows.filter(candidate => candidate && candidate !== item && identityStrength(item, candidate) >= 4);
     candidates.sort((a, b) => repairQuality(b) - repairQuality(a));
     return candidates[0] || null;
@@ -412,7 +412,13 @@
     const issues = new Set(local.issues);
     let patch = {...local.patch};
     let candidate = null;
-    if (deep) {
+    const needsTrustedCandidate = deep && (
+      (isGenericTitle(before.title) && !patch.title) ||
+      (!before.poster && !Object.prototype.hasOwnProperty.call(patch, "poster")) ||
+      (before.overview.length < 35 && !patch.overview) ||
+      issues.has("invalid-year") || issues.has("missing-type")
+    );
+    if (needsTrustedCandidate) {
       try { candidate = await findTrustedCandidate(item); patch = mergeCandidatePatch(item, candidate, patch, issues); }
       catch (error) { console.warn("GKM V383 trusted repair search", error); }
     }
@@ -1154,7 +1160,7 @@
   }
   function registerSw() {
     if (!("serviceWorker" in navigator) || !/^https?:$/.test(location.protocol)) return;
-    navigator.serviceWorker.register("sw.js?v=3830", {scope: "./"}).catch(error => console.warn("GKM V383 service worker", error));
+    navigator.serviceWorker.register("sw.js?v=3831", {scope: "./"}).catch(error => console.warn("GKM V383 service worker", error));
   }
   function install() {
     patchAutoRepairAccessors(); ensureUi(); patchDetails(); registerSw(); checkDueReminders();
