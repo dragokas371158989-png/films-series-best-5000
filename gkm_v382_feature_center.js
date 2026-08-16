@@ -1,11 +1,11 @@
-/* GKM V382 — lightweight feature center: calendar, taste, sync, routes, roulette,
-   compare, statistics, reports, AI collections and shared watch rooms. */
+/* GKM V383 — lightweight feature center: calendar, taste, sync, routes, roulette,
+   compare, statistics, automatic repairs, AI collections and shared watch rooms. */
 (() => {
   "use strict";
 
   if (window.GKM_V382_FEATURE_CENTER) return;
 
-  const VERSION = "v3821-feature-center-visible-detail-actions-2026-08-15";
+  const VERSION = "v383-auto-repair-and-working-compare-2026-08-16";
   const PROFILE_STORE = "gkm_v326_local_profiles";
   const PROFILE_CURRENT = "gkm_v326_current_profile";
   const MY_GOLUB_STORE = "gkm_my_golub_v379";
@@ -15,6 +15,9 @@
   const COLLECTIONS_STORE = "gkm_v382_ai_collections";
   const CLIENT_STORE = "gkm_v382_client";
   const LOCAL_ROOMS_STORE = "gkm_v382_local_rooms";
+  const AUTO_REPAIRS_STORE = "gkm_v383_auto_repairs";
+  const REPAIR_QUEUE_STORE = "gkm_v383_repair_queue";
+  const REPAIR_HISTORY_STORE = "gkm_v383_repair_history";
   const MAX_COMPARE = 4;
   const reminderTimers = new Map();
   const STATUS_LABELS = Object.freeze({
@@ -33,7 +36,7 @@
     ["roulette", "🎲 Рулетка"],
     ["compare", "⚖️ Сравнение"],
     ["stats", "📊 Статистика"],
-    ["report", "🛠 Ошибка"],
+    ["report", "🛠 Автоисправление"],
     ["ai", "✨ AI-подборки"],
     ["room", "👥 Комната"]
   ]);
@@ -53,10 +56,15 @@
     roomTimer: 0,
     syncCode: "",
     syncMessage: "",
-    reportMessage: "",
-    reportUrl: "",
+    repairBusy: false,
+    repairResult: null,
+    repairAutoKey: "",
+    repairProgress: "",
     calendarMode: "month"
   };
+  let originalDisplayTitle = null;
+  let originalDisplayOverview = null;
+  let autoRepairCache = null;
   if (!Array.isArray(state.compare)) state.compare = [];
 
   function text(value) {
@@ -86,28 +94,119 @@
   function writeJson(key, value) {
     try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
   }
+  function rawTitleOf(item) {
+    return text(item && (item.ru || item.title_ru || item.__manualTopTitle || item.name || item.title || item.en || item.original_title || item.original_name));
+  }
+  function repairIdentity(item) {
+    if (!item || typeof item !== "object") return "";
+    const source = norm(item.source || item.provider || "catalog") || "catalog";
+    const ids = [
+      ["mal", item.mal_id || item.malId],
+      ["tmdb", item.tmdbId || item.tmdb_id],
+      ["kp", item.kinopoiskId || item.kinopoisk_id || item.kp_id],
+      [source, item.id]
+    ];
+    const found = ids.find(([, value]) => text(value));
+    if (found) return `${found[0]}:${text(found[1])}`;
+    const original = norm(item.en || item.original_title || item.original_name || item.title || item.name || rawTitleOf(item));
+    const year = text(item.year || item.release_date || item.first_air_date).match(/(18\d{2}|19\d{2}|20\d{2})/)?.[1] || "";
+    const type = norm(item.type || item.category || item.kind);
+    return original ? `title:${original}|${year}|${type}` : "";
+  }
+  function autoRepairStore() {
+    if (autoRepairCache) return autoRepairCache;
+    const value = readJson(AUTO_REPAIRS_STORE, {});
+    autoRepairCache = value && typeof value === "object" && !Array.isArray(value) ? value : {};
+    return autoRepairCache;
+  }
+  function applyRepairPatch(item, patch, persist = false) {
+    if (!item || typeof item !== "object" || !patch || typeof patch !== "object") return [];
+    const identity = repairIdentity(item);
+    const changed = [];
+    const oldTitle = rawTitleOf(item);
+    const set = (field, value) => {
+      if (value == null || (Array.isArray(value) && !value.length)) return;
+      const before = Array.isArray(item[field]) ? JSON.stringify(item[field]) : text(item[field]);
+      const after = Array.isArray(value) ? JSON.stringify(value) : text(value);
+      if (before === after) return;
+      item[field] = Array.isArray(value) ? value.slice() : value;
+      changed.push(field);
+    };
+    if (patch.title) {
+      set("ru", patch.title);
+      set("title_ru", patch.title);
+      ["name", "title", "__manualTopTitle"].forEach(field => {
+        if (!text(item[field]) || norm(item[field]) === norm(oldTitle)) set(field, patch.title);
+      });
+      const aliases = Array.isArray(item.aliases) ? item.aliases.slice() : [];
+      [patch.title, oldTitle, item.en, item.original_title, item.original_name].map(text).filter(Boolean).forEach(value => {
+        if (!aliases.some(alias => norm(alias) === norm(value))) aliases.push(value);
+      });
+      set("aliases", aliases.slice(0, 24));
+    }
+    if (patch.type) {
+      set("type", patch.type);
+      if (Object.prototype.hasOwnProperty.call(item, "category")) set("category", patch.type);
+    }
+    if (Object.prototype.hasOwnProperty.call(patch, "year")) set("year", patch.year);
+    if (Object.prototype.hasOwnProperty.call(patch, "rating")) set("rating", patch.rating);
+    if (Object.prototype.hasOwnProperty.call(patch, "votes")) set("votes", patch.votes);
+    if (Object.prototype.hasOwnProperty.call(patch, "poster")) set("poster", patch.poster);
+    if (patch.genres) set("genres", patch.genres);
+    if (patch.overview) {
+      set("overview", patch.overview); set("overview_ru", patch.overview);
+      set("description", patch.overview); set("description_ru", patch.overview);
+    }
+    if (Object.prototype.hasOwnProperty.call(patch, "episodes")) set("episodes", patch.episodes);
+    if (patch.studio) set("studio", patch.studio);
+    if (patch.status) set("status", patch.status);
+    if (changed.length) {
+      delete item.__hay;
+      item.__gkmV383AutoRepaired = true;
+      if (persist && identity) {
+        const store = autoRepairStore();
+        store[identity] = {...(store[identity] || {}), ...patch, savedAt: Date.now()};
+        writeJson(AUTO_REPAIRS_STORE, store);
+      }
+    }
+    return changed;
+  }
+  function applyStoredRepair(item) {
+    if (!item || typeof item !== "object") return item;
+    const identity = repairIdentity(item);
+    if (!identity) return item;
+    const patch = autoRepairStore()[identity];
+    if (patch) applyRepairPatch(item, patch, false);
+    return item;
+  }
   function titleOf(item) {
+    applyStoredRepair(item);
     try { if (typeof displayTitle === "function") return text(displayTitle(item)); } catch {}
     return text(item && (item.ru || item.title_ru || item.name || item.title || item.en || item.original_title)) || "Без названия";
   }
   function typeOf(item) {
+    applyStoredRepair(item);
     try { if (typeof getType === "function") return text(getType(item)); } catch {}
     return text(item && (item.type || item.category || item.kind)) || "Каталог";
   }
   function yearOf(item) {
+    applyStoredRepair(item);
     try { if (typeof getYear === "function") return text(getYear(item)); } catch {}
     const match = text(item && (item.year || item.release_date || item.first_air_date)).match(/(18\d{2}|19\d{2}|20\d{2})/);
     return match ? match[1] : "";
   }
   function ratingOf(item) {
+    applyStoredRepair(item);
     try { if (typeof getRating === "function") return number(getRating(item)); } catch {}
     return number(item && (item.rating || item.vote_average || item.score));
   }
   function votesOf(item) {
+    applyStoredRepair(item);
     try { if (typeof getVotes === "function") return number(getVotes(item)); } catch {}
     return number(item && (item.votes || item.vote_count || item.scored_by));
   }
   function genresOf(item) {
+    applyStoredRepair(item);
     try {
       if (typeof getGenres === "function") {
         const result = getGenres(item);
@@ -119,6 +218,7 @@
     return typeof raw === "string" ? raw.split(/[,|/;]+/).map(text).filter(Boolean).slice(0, 10) : [];
   }
   function posterOf(item) {
+    applyStoredRepair(item);
     try { if (typeof posterSrc === "function") return text(posterSrc(item, 342)); } catch {}
     return text(item && (item.poster || item.poster_url || item.image || item.cover || item.thumbnail));
   }
@@ -140,7 +240,204 @@
       status: text(item && item.status)
     };
   }
+  function repairSnapshot(item) {
+    applyStoredRepair(item);
+    return {
+      title: rawTitleOf(item), displayTitle: titleOf(item), type: typeOf(item), year: yearOf(item),
+      rating: ratingOf(item), votes: votesOf(item), genres: genresOf(item), poster: posterOf(item),
+      overview: text(item && (item.overview_ru || item.description_ru || item.overview || item.description)),
+      episodes: number(item && (item.episodes || item.episode_count || item.number_of_episodes)),
+      studio: text(item && (item.studio || item.studios)), status: text(item && item.status)
+    };
+  }
+  function canonicalDisplayTitle(item) {
+    try {
+      const value = originalDisplayTitle ? originalDisplayTitle(item) : (typeof displayTitle === "function" ? displayTitle(item) : "");
+      return text(value);
+    } catch { return rawTitleOf(item); }
+  }
+  function canonicalOverview(item) {
+    try {
+      const value = originalDisplayOverview ? originalDisplayOverview(item) : (typeof displayOverview === "function" ? displayOverview(item) : "");
+      return text(value);
+    } catch { return ""; }
+  }
+  function isGenericTitle(value) {
+    return !text(value) || /^(?:без названия|untitled|null|undefined|аниме|фильм|сериал|мультфильм)(?:\s+\d+)?$/iu.test(text(value));
+  }
+  function sourceTrust(item) {
+    const source = norm(item && item.source);
+    if (/manual|official|shikimori/.test(source)) return 8;
+    if (/jikan|myanimelist|kinopoisk/.test(source)) return 7;
+    if (/tmdb/.test(source)) return 6;
+    return source ? 4 : 2;
+  }
+  function originalNames(item) {
+    return [item && item.en, item && item.original_title, item && item.original_name, item && item.title, item && item.name]
+      .map(norm).filter(value => value && value !== norm(rawTitleOf(item)));
+  }
+  function identityStrength(a, b) {
+    if (!a || !b) return 0;
+    const pairs = [
+      [a.mal_id || a.malId, b.mal_id || b.malId],
+      [a.tmdbId || a.tmdb_id, b.tmdbId || b.tmdb_id],
+      [a.kinopoiskId || a.kinopoisk_id || a.kp_id, b.kinopoiskId || b.kinopoisk_id || b.kp_id]
+    ];
+    if (pairs.some(([left, right]) => text(left) && text(left) === text(right))) return 5;
+    if (norm(a.source) && norm(a.source) === norm(b.source) && text(a.id) && text(a.id) === text(b.id)) return 5;
+    const leftNames = originalNames(a), rightNames = originalNames(b);
+    if (leftNames.some(left => rightNames.includes(left))) {
+      const sameYear = !yearOf(a) || !yearOf(b) || yearOf(a) === yearOf(b);
+      return sameYear ? 4 : 2;
+    }
+    return 0;
+  }
+  function repairQuality(item) {
+    const snapshot = repairSnapshot(item);
+    return sourceTrust(item) * 100 + (snapshot.poster ? 30 : 0) + (snapshot.overview.length > 80 ? 20 : 0) +
+      (snapshot.year ? 10 : 0) + (snapshot.genres.length ? 10 : 0) + Math.min(20, Math.log10(snapshot.votes + 1) * 4);
+  }
+  function localRepairPatch(item) {
+    const patch = {};
+    const issues = new Set(Array.isArray(item && item.__gkmV362CatalogIssues) ? item.__gkmV362CatalogIssues : []);
+    const before = repairSnapshot(item);
+    const canonicalTitle = canonicalDisplayTitle(item);
+    if (canonicalTitle && !isGenericTitle(canonicalTitle) && norm(canonicalTitle) !== norm(before.title)) {
+      patch.title = canonicalTitle;
+      issues.add("title-mismatch");
+    }
+    const rawYear = text(item && (item.year || item.release_date || item.first_air_date));
+    const yearMatch = rawYear.match(/(?:^|\D)(18\d{2}|19\d{2}|20\d{2})(?:\D|$)/);
+    if (rawYear && (!yearMatch || number(yearMatch[1]) > new Date().getFullYear() + 5)) {
+      patch.year = "";
+      issues.add("invalid-year");
+    }
+    const rawRating = item && (item.rating ?? item.vote_average ?? item.score);
+    if (rawRating !== "" && rawRating != null && (!Number.isFinite(Number(rawRating)) || Number(rawRating) < 0 || Number(rawRating) > 10)) {
+      patch.rating = 0;
+      issues.add("invalid-rating");
+    }
+    const rawVotes = item && (item.votes ?? item.vote_count ?? item.scored_by);
+    if (rawVotes !== "" && rawVotes != null && (!Number.isFinite(Number(rawVotes)) || Number(rawVotes) < 0)) {
+      patch.votes = 0;
+      issues.add("invalid-votes");
+    }
+    const rawPoster = text(item && (item.poster || item.poster_url || item.image || item.cover));
+    if (/^(?:javascript|file):/i.test(rawPoster)) {
+      patch.poster = "";
+      issues.add("unsafe-poster");
+    }
+    const overview = canonicalOverview(item);
+    if (before.overview.length < 35 && overview.length >= 60) {
+      patch.overview = overview;
+      issues.add("missing-description");
+    }
+    if (isGenericTitle(before.title)) issues.add("missing-title");
+    if (!before.poster) issues.add("missing-poster");
+    return {patch, issues: [...issues]};
+  }
+  async function findTrustedCandidate(item) {
+    const query = text(item && (item.en || item.original_title || item.original_name || rawTitleOf(item)));
+    if (!query) return null;
+    const rows = (await smartSearch(query)).slice(0, 80);
+    const candidates = rows.filter(candidate => candidate && candidate !== item && identityStrength(item, candidate) >= 4);
+    candidates.sort((a, b) => repairQuality(b) - repairQuality(a));
+    return candidates[0] || null;
+  }
+  function mergeCandidatePatch(item, candidate, patch, issues) {
+    if (!candidate || identityStrength(item, candidate) < 4) return patch;
+    const before = repairSnapshot(item), trusted = repairSnapshot(candidate);
+    const betterSource = sourceTrust(candidate) >= sourceTrust(item);
+    if (trusted.displayTitle && !isGenericTitle(trusted.displayTitle) && norm(trusted.displayTitle) !== norm(before.title) && betterSource) {
+      patch.title = trusted.displayTitle; issues.add("trusted-title-match");
+    }
+    if (!before.year && trusted.year) { patch.year = trusted.year; issues.add("missing-year"); }
+    if ((!before.type || norm(before.type) === "каталог") && trusted.type) { patch.type = trusted.type; issues.add("missing-type"); }
+    if (!before.poster && trusted.poster) { patch.poster = trusted.poster; issues.add("missing-poster"); }
+    if (!before.genres.length && trusted.genres.length) { patch.genres = trusted.genres; issues.add("missing-genres"); }
+    if (before.overview.length < 35 && trusted.overview.length >= 60) { patch.overview = trusted.overview; issues.add("missing-description"); }
+    if (!before.episodes && trusted.episodes) { patch.episodes = trusted.episodes; issues.add("missing-episodes"); }
+    if (!before.studio && trusted.studio) { patch.studio = trusted.studio; issues.add("missing-studio"); }
+    if (!before.status && trusted.status) { patch.status = trusted.status; issues.add("missing-status"); }
+    return patch;
+  }
+  function rememberRepair(result) {
+    const rows = readJson(REPAIR_HISTORY_STORE, []);
+    const history = Array.isArray(rows) ? rows : [];
+    history.unshift({...result, at: Date.now()});
+    writeJson(REPAIR_HISTORY_STORE, history.slice(0, 80));
+  }
+  function queuedRepairs() {
+    const rows = readJson(REPAIR_QUEUE_STORE, []);
+    return Array.isArray(rows) ? rows : [];
+  }
+  function queueUnresolvedRepair(item, result) {
+    const identity = repairIdentity(item) || `unknown:${Date.now()}`;
+    const rows = queuedRepairs().filter(row => row.identity !== identity);
+    const entry = {
+      identity, title: titleOf(item), kind: "Автопроверка: сложный случай",
+      details: `Карточка помечена пользователем. Автопроверка не нашла безопасную замену. Диагностика: ${(result.issues || []).join(", ") || "явных технических ошибок нет"}.`,
+      item: itemSnapshot(item), client_id: clientId(), createdAt: Date.now(), attempts: 0
+    };
+    rows.unshift(entry);
+    writeJson(REPAIR_QUEUE_STORE, rows.slice(0, 100));
+    return entry;
+  }
+  async function flushRepairQueue() {
+    if (!endpoint()) return 0;
+    const rows = queuedRepairs();
+    if (!rows.length) return 0;
+    const pending = rows.slice();
+    let sent = 0;
+    for (const entry of rows.slice(0, 3)) {
+      try {
+        await api("/api/reports", {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify(entry)}, 4500);
+        const index = pending.findIndex(row => row.identity === entry.identity);
+        if (index >= 0) pending.splice(index, 1);
+        sent++;
+      } catch {
+        entry.attempts = number(entry.attempts) + 1;
+        break;
+      }
+    }
+    writeJson(REPAIR_QUEUE_STORE, pending);
+    return sent;
+  }
+  async function autoRepairItem(item, {deep = true, flagged = false, saveHistory = true} = {}) {
+    if (!item) return {status: "empty", changes: [], issues: [], titleBefore: "", titleAfter: ""};
+    applyStoredRepair(item);
+    const before = repairSnapshot(item);
+    try { window.GKM_V362_CATALOG_GUARD_ITEM?.(item, "feature-center-v383-auto-repair"); } catch {}
+    const local = localRepairPatch(item);
+    const issues = new Set(local.issues);
+    let patch = {...local.patch};
+    let candidate = null;
+    if (deep) {
+      try { candidate = await findTrustedCandidate(item); patch = mergeCandidatePatch(item, candidate, patch, issues); }
+      catch (error) { console.warn("GKM V383 trusted repair search", error); }
+    }
+    const changedFields = applyRepairPatch(item, patch, true);
+    const after = repairSnapshot(item);
+    const changes = [];
+    if (norm(before.title) !== norm(after.title)) changes.push(`Название: «${before.title || "—"}» → «${after.title}»`);
+    if (before.type !== after.type) changes.push(`Тип: ${before.type || "—"} → ${after.type || "—"}`);
+    if (before.year !== after.year) changes.push(`Год: ${before.year || "—"} → ${after.year || "—"}`);
+    if (before.poster !== after.poster) changes.push(after.poster ? "Постер восстановлен" : "Опасная ссылка постера удалена");
+    if (before.overview !== after.overview && after.overview) changes.push("Описание восстановлено");
+    if (!before.genres.length && after.genres.length) changes.push("Жанры восстановлены");
+    if (!before.episodes && after.episodes) changes.push(`Эпизоды: ${after.episodes}`);
+    if (!before.studio && after.studio) changes.push(`Студия: ${after.studio}`);
+    const result = {
+      status: changes.length || changedFields.length ? "fixed" : flagged ? "queued" : "clean",
+      identity: repairIdentity(item), titleBefore: before.title, titleAfter: after.title,
+      changes, issues: [...issues], candidate: candidate ? titleOf(candidate) : ""
+    };
+    if (result.status === "queued") queueUnresolvedRepair(item, result);
+    if (saveHistory) rememberRepair(result);
+    return result;
+  }
   function registerItem(item) {
+    applyStoredRepair(item);
     const key = keyOf(item);
     if (key) state.itemMap.set(key, item);
     return key;
@@ -235,10 +532,10 @@
     }
     return id;
   }
-  async function api(path, options = {}) {
+  async function api(path, options = {}, timeoutMs = 12000) {
     if (!endpoint()) throw new Error("Сервер ещё не подключён.");
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 12000);
+    const timer = setTimeout(() => controller.abort(), Math.max(1000, number(timeoutMs, 12000)));
     try {
       const response = await fetch(`${endpoint()}${path}`, {cache: "no-store", ...options, signal: controller.signal});
       const data = await response.json().catch(() => ({}));
@@ -301,13 +598,14 @@
       .gkm382-toolbar,.gkm382-actions,.gkm382-chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.gkm382-toolbar input,.gkm382-toolbar select,.gkm382-form input,.gkm382-form select,.gkm382-form textarea,.gkm382-code{border:1px solid rgba(0,214,255,.3)!important;border-radius:12px!important;background:#06132b!important;color:#fff!important;padding:10px!important;box-sizing:border-box}.gkm382-toolbar input{min-width:240px;flex:1}.gkm382-form{display:grid;gap:9px;max-width:760px}.gkm382-form textarea,.gkm382-code{width:100%;min-height:100px;resize:vertical}
       .gkm382-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:10px}.gkm382-card{display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px;padding:10px;border:1px solid rgba(0,214,255,.2);border-radius:16px;background:rgba(4,18,41,.8)}.gkm382-card img,.gkm382-poster{width:76px;height:110px;object-fit:cover;border-radius:10px;background:#151b31}.gkm382-card h3{font-size:15px;margin:0 0 5px;line-height:1.2}.gkm382-card p,.gkm382-card small{display:block;margin:3px 0;font-size:12px;opacity:.72}.gkm382-card-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.gkm382-card-actions button{padding:6px 8px!important;font-size:11px!important}
       .gkm382-section{padding:14px;border:1px solid rgba(255,255,255,.1);border-radius:17px;background:rgba(255,255,255,.035);margin:10px 0}.gkm382-section h3{margin:0 0 10px}.gkm382-empty{padding:24px;text-align:center;border:1px dashed rgba(0,214,255,.28);border-radius:16px;opacity:.72}.gkm382-note{font-size:12px;opacity:.68}.gkm382-good{color:#75f3ca}.gkm382-warn{color:#ffc56a}
+      .gkm383-repair-card{display:grid;grid-template-columns:88px minmax(0,1fr);gap:13px;align-items:start}.gkm383-repair-card img{width:88px;height:128px;object-fit:cover;border-radius:12px;background:#121a31}.gkm383-repair-card h3{margin:0 0 6px}.gkm383-repair-status{padding:13px;border-radius:14px;border:1px solid rgba(82,240,197,.34);background:rgba(11,104,92,.18)}.gkm383-repair-status.warn{border-color:rgba(255,190,82,.42);background:rgba(121,75,8,.18)}.gkm383-repair-list{display:grid;gap:6px;margin:9px 0 0;padding-left:20px}.gkm383-repair-meter{height:9px;border-radius:99px;background:#111b36;overflow:hidden}.gkm383-repair-meter span{display:block;height:100%;background:linear-gradient(90deg,#7a2cff,#00d4ff);transition:width .2s}
       .gkm382-bars{display:grid;gap:8px}.gkm382-bar{display:grid;grid-template-columns:minmax(110px,180px) 1fr 45px;gap:8px;align-items:center}.gkm382-bar-track{height:12px;border-radius:99px;background:#111b36;overflow:hidden}.gkm382-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#7a2cff,#00d4ff)}
       .gkm382-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px}.gkm382-stat{padding:14px;border:1px solid rgba(0,214,255,.18);border-radius:15px;background:rgba(0,120,180,.08)}.gkm382-stat b{display:block;font-size:24px}.gkm382-stat span{font-size:12px;opacity:.68}
       .gkm382-compare{width:100%;border-collapse:separate;border-spacing:6px}.gkm382-compare th,.gkm382-compare td{min-width:145px;padding:10px;border-radius:11px;background:rgba(255,255,255,.045);text-align:left;vertical-align:top}.gkm382-compare th{color:#77f1d2}.gkm382-compare img{width:80px;height:116px;object-fit:cover;border-radius:10px}.gkm382-table-wrap{overflow:auto}
       .gkm382-chip.active{outline:2px solid #55f0cb}.gkm382-chip.avoid{outline:2px solid #ff648f}.gkm382-calendar-row{display:grid;grid-template-columns:150px 1fr auto;gap:10px;align-items:center;padding:10px;border-bottom:1px solid rgba(255,255,255,.08)}
       #gkmV382Toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:100030;display:none;max-width:min(700px,calc(100vw - 20px));padding:11px 15px;border:1px solid rgba(60,238,196,.5);border-radius:14px;background:#06162d;color:#fff;font-weight:850;box-shadow:0 0 30px rgba(0,220,190,.22)}#gkmV382Toast.open{display:block}
       #gkmV382DetailActions{display:flex;gap:6px;flex-wrap:wrap;width:100%}#gkmV382DetailActions button{padding:8px 10px!important}
-      @media(max-width:700px){.gkm382-box{inset:4px;padding:10px}.gkm382-head{top:-10px}.gkm382-head h2{font-size:20px}.gkm382-content{min-height:400px}.gkm382-grid{grid-template-columns:1fr}.gkm382-calendar-row{grid-template-columns:1fr}.gkm382-compare th,.gkm382-compare td{min-width:125px}.gkm382-bar{grid-template-columns:105px 1fr 38px}}
+      @media(max-width:700px){.gkm382-box{inset:4px;padding:10px}.gkm382-head{top:-10px}.gkm382-head h2{font-size:20px}.gkm382-content{min-height:400px}.gkm382-grid{grid-template-columns:1fr}.gkm382-calendar-row{grid-template-columns:1fr}.gkm382-compare th,.gkm382-compare td{min-width:125px}.gkm382-bar{grid-template-columns:105px 1fr 38px}.gkm383-repair-card{grid-template-columns:70px minmax(0,1fr)}.gkm383-repair-card img{width:70px;height:102px}}
     `;
     document.head.appendChild(style);
   }
@@ -319,7 +617,7 @@
       root = document.createElement("div");
       root.id = "gkmV382Center";
       root.innerHTML = `<section class="gkm382-box" role="dialog" aria-modal="true" aria-labelledby="gkmV382Title">
-        <header class="gkm382-head"><div><h2 id="gkmV382Title">🚀 Центр возможностей V382</h2><p>Все дополнительные функции каталога в одном месте</p></div><button class="gkm382-close" type="button" aria-label="Закрыть">✕</button></header>
+        <header class="gkm382-head"><div><h2 id="gkmV382Title">🚀 Центр возможностей V383</h2><p>Все дополнительные функции каталога в одном месте</p></div><button class="gkm382-close" type="button" aria-label="Закрыть">✕</button></header>
         <nav class="gkm382-nav">${VIEWS.map(([id, label]) => `<button type="button" data-v382-view="${id}">${label}</button>`).join("")}</nav>
         <div id="gkmV382Content" class="gkm382-content"></div>
       </section>`;
@@ -382,7 +680,7 @@
       calendar: "Премьеры, будущие релизы и личные напоминания.", taste: "Любимые жанры и рекомендации с объяснениями.",
       sync: "Перенос профиля между телефоном и компьютером.", route: "Сезоны, фильмы и спешлы по порядку.",
       roulette: "Случайный выбор с фильтрами и исключениями.", compare: "Сравнение до четырёх карточек.",
-      stats: "Просмотры, жанры, часы и активность.", report: "Сообщить о названии, постере или дубле.",
+      stats: "Просмотры, жанры, часы и активность.", report: "Сам проверяет и исправляет карточки без ручного описания.",
       ai: "Подборки по обычному текстовому запросу.", room: "Совместное голосование за просмотр."
     };
     content().innerHTML = `<div class="gkm382-tiles">${VIEWS.filter(([id]) => id !== "home").map(([id, label]) => `<button class="gkm382-tile" type="button" data-v382-view="${id}"><b>${label}</b><span>${descriptions[id]}</span></button>`).join("")}</div>
@@ -656,17 +954,75 @@
       <section class="gkm382-section"><h3>Статусы</h3>${barRows(statusRows, 8)}</section><section class="gkm382-section"><h3>Любимые жанры</h3>${barRows([...genres].sort((a, b) => b[1] - a[1]), 10)}</section><section class="gkm382-section"><h3>Типы</h3>${barRows([...types].sort((a, b) => b[1] - a[1]), 8)}</section><p class="gkm382-note">Время приблизительное: фильмы считаются по средней длительности, сериалы и аниме — по отмеченным сериям.</p>`;
   }
 
+  function idleTurn() {
+    return new Promise(resolve => {
+      if ("requestIdleCallback" in window) requestIdleCallback(() => resolve(), {timeout: 120});
+      else setTimeout(resolve, 0);
+    });
+  }
+  async function runSelectedAutoRepair(item) {
+    if (!item || state.repairBusy) return;
+    state.repairBusy = true; state.repairResult = null; state.repairProgress = "Анализирую название, источник, год, постер, описание и дубли…"; renderReport();
+    const result = await autoRepairItem(item, {deep: true, flagged: true});
+    state.repairBusy = false; state.repairResult = result; state.repairProgress = ""; renderReport();
+    if (result.status === "queued") setTimeout(() => flushRepairQueue().catch(() => {}), 80);
+  }
+  async function scanLoadedCatalog() {
+    if (state.repairBusy) return;
+    const map = new Map();
+    collectPool().forEach(item => { const identity = repairIdentity(item) || keyOf(item); if (identity && !map.has(identity)) map.set(identity, item); });
+    const rows = [...map.values()].slice(0, 2000);
+    state.repairBusy = true; state.repairResult = null;
+    let fixed = 0, problems = 0;
+    for (let start = 0; start < rows.length; start += 80) {
+      const chunk = rows.slice(start, start + 80);
+      for (const item of chunk) {
+        const result = await autoRepairItem(item, {deep: false, flagged: false, saveHistory: false});
+        if (result.status === "fixed") fixed++;
+        if (result.issues.length) problems++;
+      }
+      state.repairProgress = `Проверено ${Math.min(start + chunk.length, rows.length).toLocaleString("ru-RU")} из ${rows.length.toLocaleString("ru-RU")} · исправлено ${fixed}`;
+      renderReport();
+      await idleTurn();
+    }
+    state.repairBusy = false; state.repairProgress = "";
+    state.repairResult = {
+      status: fixed ? "fixed" : "clean", titleBefore: "Загруженный каталог", titleAfter: "Загруженный каталог",
+      issues: problems ? [`Карточек с предупреждениями: ${problems}`] : [],
+      changes: fixed ? [`Автоматически исправлено карточек: ${fixed}`, `Проверено без перезагрузки: ${rows.length}`] : [`Проверено карточек: ${rows.length}`, "Новых безопасных исправлений не потребовалось"]
+    };
+    rememberRepair(state.repairResult); renderReport();
+  }
+  function repairResultHtml(result) {
+    if (!result) return "";
+    const fixed = result.status === "fixed", queued = result.status === "queued";
+    const title = fixed ? "✅ Исправлено автоматически" : queued ? "🧠 Передано автоматике" : "✅ Явных ошибок не найдено";
+    const note = fixed
+      ? "Исправление уже применено и сохранено в этом браузере."
+      : queued
+        ? "Безопасную замену нельзя угадать. Карточка сохранена в очередь и будет отправлена автоматически — ничего заполнять не нужно."
+        : "Карточка прошла доступные проверки названия, источника, года, типа, постера и числовых полей.";
+    const rows = [...(result.changes || []), ...(result.issues || []).map(value => `Проверка: ${value}`)];
+    return `<div class="gkm383-repair-status ${queued ? "warn" : ""}"><b>${title}</b><p>${esc(note)}</p>${rows.length ? `<ul class="gkm383-repair-list">${rows.map(value => `<li>${esc(value)}</li>`).join("")}</ul>` : ""}</div>`;
+  }
   function renderReport() {
     const item = state.lastItem || state.compare[0] || null;
-    content().innerHTML = `<section class="gkm382-section"><h3>🛠 Сообщить об ошибке</h3><div class="gkm382-form"><input id="gkm382ReportTitle" value="${esc(item ? titleOf(item) : "")}" placeholder="Название карточки"><select id="gkm382ReportKind"><option>Неправильное название</option><option>Неправильный постер</option><option>Неверный год или тип</option><option>Дубликат</option><option>Ошибка описания</option><option>Другое</option></select><textarea id="gkm382ReportText" maxlength="2500" placeholder="Что именно нужно исправить?"></textarea><button type="button" id="gkm382ReportSend">Отправить разработчику</button></div><p class="${state.reportMessage ? "gkm382-warn" : "gkm382-note"}">${esc(state.reportMessage || "Жалоба не содержит личных данных. Если сервер недоступен, подготовится форма GitHub.")}</p>${state.reportUrl ? `<a href="${esc(state.reportUrl)}" target="_blank" rel="noreferrer">Открыть подготовленную форму GitHub</a>` : ""}</section>`;
-    document.getElementById("gkm382ReportSend").onclick = async () => {
-      const title = text(document.getElementById("gkm382ReportTitle").value), kind = text(document.getElementById("gkm382ReportKind").value), details = text(document.getElementById("gkm382ReportText").value);
-      if (!title || details.length < 3) { toast("Укажи карточку и описание ошибки."); return; }
-      const payload = {title, kind, details, item: item ? itemSnapshot(item) : null, client_id: clientId()}; state.reportMessage = "Отправляю…"; renderReport();
-      try { await api("/api/reports", {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify(payload)}); state.reportMessage = "Сообщение принято. Спасибо."; state.reportUrl = ""; }
-      catch (error) { const body = `### Карточка\n${title}\n\n### Тип ошибки\n${kind}\n\n### Что исправить\n${details}\n\nВерсия: ${VERSION}`; state.reportUrl = `https://github.com/dragokas371158989-png/films-series-best-5000/issues/new?title=${encodeURIComponent(`[Каталог] ${kind}: ${title}`)}&body=${encodeURIComponent(body)}`; state.reportMessage = `${error.message} Подготовлена форма GitHub — отправка произойдёт только после твоего подтверждения там.`; }
-      renderReport();
-    };
+    const queueCount = queuedRepairs().length;
+    const poster = item ? posterOf(item) : "";
+    content().innerHTML = `<section class="gkm382-section"><h3>🛠 Автоматическое исправление</h3>
+      <p class="gkm382-good"><b>Тебе не нужно заполнять форму.</b> Открой подозрительную карточку и нажми «🛠 Ошибка» — система сама проверит и исправит всё, что можно подтвердить безопасно.</p>
+      ${item ? `<div class="gkm383-repair-card">${poster ? `<img src="${esc(poster)}" alt="" loading="lazy" decoding="async">` : `<span class="gkm382-poster"></span>`}<div><h3>${esc(titleOf(item))}</h3><p>${esc([typeOf(item), yearOf(item), ratingOf(item) ? `★ ${ratingOf(item).toFixed(1)}` : "", text(item.source)].filter(Boolean).join(" · "))}</p><div class="gkm382-actions"><button type="button" id="gkm383RepairNow" ${state.repairBusy ? "disabled" : ""}>${state.repairBusy ? "Проверяю…" : "Проверить и исправить заново"}</button></div></div></div>` : `<div class="gkm382-empty">Открой карточку и нажми «🛠 Ошибка». Для уже загруженных карточек можно запустить общую проверку ниже.</div>`}
+      ${state.repairProgress ? `<p class="gkm382-note">${esc(state.repairProgress)}</p><div class="gkm383-repair-meter"><span style="width:${state.repairBusy ? "65" : "100"}%"></span></div>` : ""}
+      ${repairResultHtml(state.repairResult)}</section>
+      <section class="gkm382-section"><h3>Проверка текущего набора</h3><p class="gkm382-note">Обрабатывает порциями до 2000 уже загруженных карточек, поэтому интерфейс не зависает.</p><button type="button" id="gkm383ScanLoaded" ${state.repairBusy ? "disabled" : ""}>🔍 Проверить загруженные карточки</button></section>
+      <section class="gkm382-section"><b>Автоматическая очередь: ${queueCount}</b><p class="gkm382-note">Сложные случаи сохраняются без GitHub-форм и повторно отправляются серверу автоматически.</p></section>`;
+    document.getElementById("gkm383RepairNow")?.addEventListener("click", () => runSelectedAutoRepair(item));
+    document.getElementById("gkm383ScanLoaded").onclick = scanLoadedCatalog;
+    const identity = item ? repairIdentity(item) : "";
+    if (item && identity && state.repairAutoKey !== identity && !state.repairBusy && !state.repairResult) {
+      state.repairAutoKey = identity;
+      setTimeout(() => runSelectedAutoRepair(item), 20);
+    }
   }
 
   function savedCollections() {
@@ -755,14 +1111,30 @@
 
   function injectDetailActions(item) {
     const dialog = document.getElementById("detailsDialog"); if (!dialog || !dialog.hasAttribute("open")) return;
+    applyStoredRepair(item);
     const anchor = document.getElementById("detailFacts") || dialog.querySelector(".details"); if (!anchor) return;
     let actions = document.getElementById("gkmV382DetailActions");
     if (!actions) { actions = document.createElement("div"); actions.id = "gkmV382DetailActions"; }
     if (actions.previousElementSibling !== anchor) anchor.insertAdjacentElement("afterend", actions);
-    actions.innerHTML = `<button type="button" data-v382-detail-compare>⚖️ Сравнить</button><button type="button" data-v382-detail-route>🧭 Порядок</button><button type="button" data-v382-detail-report>🛠 Ошибка</button>`;
-    actions.querySelector("[data-v382-detail-compare]").onclick = () => addCompare(item);
+    actions.innerHTML = `<button type="button" data-v382-detail-compare>⚖️ Сравнить</button><button type="button" data-v382-detail-route>🧭 Порядок</button><button type="button" data-v382-detail-report>🛠 Автоисправить</button>`;
+    actions.querySelector("[data-v382-detail-compare]").onclick = () => { addCompare(item); dialog.close?.(); openCenter("compare"); };
     actions.querySelector("[data-v382-detail-route]").onclick = () => { state.lastItem = item; dialog.close?.(); openCenter("route"); };
-    actions.querySelector("[data-v382-detail-report]").onclick = () => { state.lastItem = item; dialog.close?.(); openCenter("report"); };
+    actions.querySelector("[data-v382-detail-report]").onclick = () => { state.lastItem = item; state.repairResult = null; state.repairAutoKey = ""; dialog.close?.(); openCenter("report"); };
+  }
+  function patchAutoRepairAccessors() {
+    if (window.GKM_V383_AUTO_REPAIR_PATCHED === "1") return;
+    try {
+      if (typeof displayTitle === "function") {
+        originalDisplayTitle = displayTitle;
+        displayTitle = function gkmV383DisplayTitle(item) { applyStoredRepair(item); return originalDisplayTitle.apply(this, arguments); };
+      }
+      if (typeof displayOverview === "function") {
+        originalDisplayOverview = displayOverview;
+        displayOverview = function gkmV383DisplayOverview(item) { applyStoredRepair(item); return originalDisplayOverview.apply(this, arguments); };
+      }
+      try { if (Array.isArray(currentItems)) currentItems.forEach(applyStoredRepair); } catch {}
+      window.GKM_V383_AUTO_REPAIR_PATCHED = "1";
+    } catch (error) { console.warn("GKM V383 repair accessors", error); }
   }
   function patchDetails() {
     if (window.GKM_V382_DETAILS_PATCHED === "1") return;
@@ -770,6 +1142,7 @@
       if (typeof openDetails !== "function") return;
       const previous = openDetails;
       openDetails = function gkmV382OpenDetails(item) {
+        applyStoredRepair(item);
         state.lastItem = item;
         const result = previous.apply(this, arguments);
         requestAnimationFrame(() => injectDetailActions(item));
@@ -781,16 +1154,18 @@
   }
   function registerSw() {
     if (!("serviceWorker" in navigator) || !/^https?:$/.test(location.protocol)) return;
-    navigator.serviceWorker.register("sw.js?v=3821", {scope: "./"}).catch(error => console.warn("GKM V382 service worker", error));
+    navigator.serviceWorker.register("sw.js?v=3830", {scope: "./"}).catch(error => console.warn("GKM V383 service worker", error));
   }
   function install() {
-    ensureUi(); patchDetails(); registerSw(); checkDueReminders();
+    patchAutoRepairAccessors(); ensureUi(); patchDetails(); registerSw(); checkDueReminders();
     document.addEventListener("click", event => {
       if (event.target.closest("#gkmV363ListBtn,[data-v373-nav='list']")) setTimeout(ensureListLink, 80);
     }, {passive: true});
     window.addEventListener("gkm:v363-list-updated", () => setTimeout(ensureListLink, 40));
-    window.GKM_V382_FEATURE_CENTER = Object.freeze({version: VERSION, open: openCenter, close: closeCenter, addCompare, getCompare: () => [...state.compare], syncPayload, runAiPrompt});
-    console.log("GKM V382: feature center installed");
+    window.GKM_V382_FEATURE_CENTER = Object.freeze({version: VERSION, open: openCenter, close: closeCenter, addCompare, getCompare: () => [...state.compare], syncPayload, runAiPrompt, autoRepair: item => autoRepairItem(item, {deep: true, flagged: false}), scanLoaded: scanLoadedCatalog, getRepairQueue: queuedRepairs});
+    window.GKM_V383_AUTO_REPAIR = window.GKM_V382_FEATURE_CENTER;
+    if (queuedRepairs().length) setTimeout(() => flushRepairQueue().catch(() => {}), 2200);
+    console.log("GKM V383: automatic repair and working compare installed");
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, {once: true});
