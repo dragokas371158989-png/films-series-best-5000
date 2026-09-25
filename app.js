@@ -1940,13 +1940,12 @@ function typeClass(item) {
   return "movie";
 }
 
-function cardHtml(item) {
+function cardHtml(item, fav = loadSet(favKey)) {
   item = gkmV362CatalogGuardItem(item, "card");
   if (!gkmV362CatalogVisible(item)) return "";
   const title = displayTitle(item);
   const rating = getRating(item);
   const votes = getVotes(item);
-  const fav = loadSet(favKey);
   const id = gkmV362StableKey(item);
   const legacyId = gkmV362LegacyKey(item);
   const isFavorite = fav.has(id) || fav.has(legacyId);
@@ -2026,7 +2025,11 @@ function renderList(items, label) {
   const prev = $("prevBtn");
   const next = $("nextBtn");
   if (count) count.textContent = label || "";
-  if (grid) { grid.innerHTML = safeItems.map(cardHtml).join(""); schedulePosterRecovery(grid); }
+  if (grid) {
+    const fav = loadSet(favKey);
+    grid.innerHTML = safeItems.map(item => cardHtml(item, fav)).join("");
+    schedulePosterRecovery(grid);
+  }
   if (page) page.textContent = `${currentPage} / ${currentPages}`;
   if (prev) prev.disabled = currentPage <= 1;
   if (next) next.disabled = currentPage >= currentPages;
@@ -2105,6 +2108,7 @@ async function renderHome() {
   if (prev) prev.disabled = true;
   if (next) next.disabled = true;
   if (grid) {
+    const fav = loadSet(favKey);
     grid.innerHTML = order.map(([key, title]) => {
       const list = gkmV362CatalogGuardList(
         sections[key] || [],
@@ -2120,7 +2124,7 @@ async function renderHome() {
             <h3>${escapeHtml(title)}</h3>
             <button class="home-more-btn" data-open-tab="${escapeAttr(key)}" type="button">Открыть</button>
           </div>
-          <div class="home-row">${list.map(cardHtml).join("")}</div>
+          <div class="home-row">${list.map(item => cardHtml(item, fav)).join("")}</div>
         </section>
       `;
     }).join("");
