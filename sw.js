@@ -1,12 +1,12 @@
 /* GKM V383.1 PWA shell + fast automatic repair and working compare. */
-const VERSION = "v3831-fast-auto-repair-compare-2026-08-16";
+const VERSION = "v3832-wall-worker-2026-09-25";
 const SHELL_CACHE = `gkm-shell-${VERSION}`;
 const RECENT_CACHE = `gkm-recent-${VERSION}`;
 const CACHE_PREFIX = "gkm-";
 const SHELL_URLS = [
-  "./","./index.html","./style.css?v=3751","./app.js?v=3810",
-  "./gkm_v376_v380.js?v=3810","./gkm_v382_feature_center.js?v=3831",
-  "./ai_search_worker_v343.js?v=3751",
+  "./","./index.html","./style.css?v=3751","./app.js?v=3812",
+  "./gkm_v376_v380.js?v=3812","./gkm_v382_feature_center.js?v=3831",
+  "./ai_search_worker_v343.js?v=3751","./wall_seed_worker.js?v=1",
   "./manifest.webmanifest?v=3753","./logo-banner.webp","./pwa-icon-192.png","./pwa-icon-512.png"
 ];
 const HEAVY_CATALOG_PATTERN=/(?:search_index|search_shards|poster_wall|poster_atlas|catalog|full[_-]?data|all[_-]?(?:movies|series|anime|cartoons))|\/data\/.*(?:page|chunk|shard)/i;
@@ -19,7 +19,7 @@ async function injectLayer(response){
   const type=response.headers.get("content-type")||"";
   if(!response.ok||!type.includes("text/html"))return response;
   let patched=await response.text();
-  if(!patched.includes("gkm_v376_v380.js"))patched=patched.replace(/<\/body>/i,'<script src="gkm_v376_v380.js?v=3810" defer></script></body>');
+  if(!patched.includes("gkm_v376_v380.js"))patched=patched.replace(/<\/body>/i,'<script src="gkm_v376_v380.js?v=3812" defer></script></body>');
   if(!patched.includes("gkm_v382_feature_center.js"))patched=patched.replace(/<\/body>/i,'<script src="gkm_v382_feature_center.js?v=3831" defer></script></body>');
   const headers=new Headers(response.headers);headers.delete("content-length");
   return new Response(patched,{status:response.status,statusText:response.statusText,headers});
@@ -36,7 +36,7 @@ self.addEventListener("fetch",event=>{
   if(HEAVY_CATALOG_PATTERN.test(url.pathname+url.search))return;
   if(request.mode==="navigate"){event.respondWith(navigation(request));return;}
   if(url.origin!==self.location.origin)return;
-  const names=new Set(["index.html","style.css","app.js","gkm_v376_v380.js","gkm_v382_feature_center.js","ai_search_worker_v343.js","manifest.webmanifest","logo-banner.webp","pwa-icon-192.png","pwa-icon-512.png"]);
+  const names=new Set(["index.html","style.css","app.js","gkm_v376_v380.js","gkm_v382_feature_center.js","ai_search_worker_v343.js","wall_seed_worker.js","manifest.webmanifest","logo-banner.webp","pwa-icon-192.png","pwa-icon-512.png"]);
   const file=url.pathname.split("/").pop();if(names.has(file)||url.pathname.endsWith("/"))event.respondWith(shellFirst(request));
 });
 self.addEventListener("message",event=>{

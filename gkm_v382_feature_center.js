@@ -1160,7 +1160,7 @@
   }
   function registerSw() {
     if (!("serviceWorker" in navigator) || !/^https?:$/.test(location.protocol)) return;
-    navigator.serviceWorker.register("sw.js?v=3831", {scope: "./"}).catch(error => console.warn("GKM V383 service worker", error));
+    navigator.serviceWorker.register("sw.js?v=3832", {scope: "./"}).catch(error => console.warn("GKM V383 service worker", error));
   }
   function install() {
     patchAutoRepairAccessors(); ensureUi(); patchDetails(); registerSw(); checkDueReminders();

@@ -15648,7 +15648,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
 
       if (count) count.textContent = nextLabel;
       if (grid) {
-        grid.innerHTML = safeItems.map(cardHtml).join("");
+        const fav = loadSet(favKey);
+        grid.innerHTML = safeItems.map(item => cardHtml(item, fav)).join("");
         schedulePosterRecovery(grid);
       }
       if (page) page.textContent = `${currentPage} / ${currentPages}`;
@@ -15698,6 +15699,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   const ATLAS_SHEET_CACHE = new Map();
   const PREVIEW_POSTER_CACHE = new Map();
   const WALL_SEED_URL = "data/fast/poster_wall_v333/seed_all.json?v=354";
+  const WALL_SEED_WORKER_URL = "wall_seed_worker.js?v=1";
+  const WALL_SEED_CACHE = new Map();
   const ATLAS_BASE_URL = "data/fast/poster_atlas_v364/";
   const ATLAS_MANIFEST_URL = `${ATLAS_BASE_URL}manifest.json?v=364`;
 
@@ -16109,6 +16112,44 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       .catch(()=>[]);
     JSON_CACHE.set(versionedUrl,p);
     return p;
+  }
+
+  function fetchWallSeed(kind){
+    if(WALL_SEED_CACHE.has(kind)) return WALL_SEED_CACHE.get(kind);
+    if(typeof Worker !== "function") return fetchJson(WALL_SEED_URL);
+    const promise=new Promise(resolve=>{
+      let worker;
+      let settled=false;
+      let fallbackStarted=false;
+      const finish=rows=>{
+        if(settled) return;
+        settled=true;
+        clearTimeout(timeout);
+        worker?.terminate();
+        resolve(rows);
+      };
+      const fallback=()=>{
+        if(fallbackStarted||settled) return;
+        fallbackStarted=true;
+        fetchJson(WALL_SEED_URL).then(finish);
+      };
+      const timeout=setTimeout(fallback,10000);
+      try{
+        worker=new Worker(WALL_SEED_WORKER_URL);
+        worker.onmessage=event=>{
+          const message=event.data||{};
+          if(!message.ok){fallback();return;}
+          const items=message.rows.map(compactWallItem);
+          finish(typeof window.GKM_V362_CATALOG_GUARD_LIST==="function"
+            ? window.GKM_V362_CATALOG_GUARD_LIST(items,`canvas:${WALL_SEED_URL}`)
+            : items);
+        };
+        worker.onerror=fallback;
+        worker.postMessage({url:new URL(withDataVersion(WALL_SEED_URL),location.href).href,kind});
+      }catch(error){fallback();}
+    });
+    WALL_SEED_CACHE.set(kind,promise);
+    return promise;
   }
 
   async function loadAtlasManifest(){
@@ -17645,7 +17686,9 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   function selectScreenItems(kind){
     const bounds=getCanvasBounds();
     const target=finalScreenTileCount(bounds.width,bounds.height);
-    const pool=uniqueList(allItems.filter(x=>passKind(x,kind)));
+    // allItems was already deduplicated while loading; shuffling should not
+    // repeat title/poster normalization across thousands of items.
+    const pool=allItems.filter(x=>passKind(x,kind));
     let preferred=[];
     let atlasRest=[];
     const external=[];
@@ -17674,7 +17717,8 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     shuffle(preferred);
     shuffle(atlasRest);
     shuffle(external);
-    external.sort((a,b)=>posterTransportScore(b)-posterTransportScore(a));
+    const transportScores=new Map(external.map(item=>[item,posterTransportScore(item)]));
+    external.sort((a,b)=>transportScores.get(b)-transportScores.get(a));
     const mixed=preferred.concat(atlasRest,external);
     const visible=Math.min(target,mixed.length);
     wallItems=mixed.slice(0,visible);
@@ -17695,6 +17739,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
   }
 
   async function loadWall(kind){
+    const requestToken=loadToken;
     currentKind=kind;
     allItems=uniqueList(localPool().filter(x=>passKind(x,kind)));
     const bounds=getCanvasBounds();
@@ -17712,9 +17757,10 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
     // Специальный seed содержит по 1500 фильмов, сериалов, аниме и мультфильмов.
     // Один компактный запрос заменяет десятки страниц, которые раньше блокировали старт.
     const [seed]=await Promise.all([
-      fetchJson(WALL_SEED_URL),
+      fetchWallSeed(kind),
       loadAtlasManifest()
     ]);
+    if(!isOpen||requestToken!==loadToken) return;
     allItems=uniqueList(allItems.concat(seed.filter(x=>passKind(x,kind))));
 
     // Резерв на случай отсутствующего/старого seed: грузим только столько страниц,
@@ -17724,6 +17770,7 @@ console.log("GKM:", window.GKM_V141_HELPER_GREETING_FIX_VERSION);
       const chunkSize=6;
       for(let i=0;i<urls.length&&allItems.length<target;i+=chunkSize){
         const chunks=await Promise.all(urls.slice(i,i+chunkSize).map(fetchJson));
+        if(!isOpen||requestToken!==loadToken) return;
         allItems=uniqueList(allItems.concat(chunks.flat().filter(x=>passKind(x,kind))));
       }
     }
@@ -19879,6 +19926,7 @@ Endpoint: ${endpoint||"не задан"}
     const prev = $("prevBtn");
     const next = $("nextBtn");
 
+    const fav = loadSet(favKey);
     const html = order.map(([key, title]) => {
       const source = (sections[key] || [])
         .filter(hasPoster)
@@ -19894,7 +19942,7 @@ Endpoint: ${endpoint||"не задан"}
             <h3>${escapeHtml(title)}</h3>
             <button class="home-more-btn" data-open-tab="${escapeAttr(key)}" type="button">Открыть</button>
           </div>
-          <div class="home-row">${list.map(cardHtml).join("")}</div>
+          <div class="home-row">${list.map(item => cardHtml(item, fav)).join("")}</div>
         </section>
       `;
     }).join("");
@@ -21051,7 +21099,7 @@ Endpoint: ${endpoint||"не задан"}
     if(window.GKM_V363_SW_REGISTERED==="1")return;
     window.GKM_V363_SW_REGISTERED="1";
     try{
-      const registration=await navigator.serviceWorker.register("sw.js?v=3753",{scope:"./"});
+      const registration=await navigator.serviceWorker.register("sw.js?v=3832",{scope:"./"});
       registration.update?.().catch(()=>{});
     }catch(error){
       window.GKM_V363_SW_REGISTERED="0";
